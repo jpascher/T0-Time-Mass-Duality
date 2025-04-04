@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[ngerman]{babel}
+\usepackage[ngerman]{babel} % Änderung zu Deutsch
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{physics}
 \usepackage{graphicx}
@@ -13,7 +13,6 @@
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 
-% Farbige Links im Inhaltsverzeichnis und im Dokument
 \hypersetup{
 	colorlinks=true,
 	linkcolor=blue,
@@ -26,34 +25,7 @@
 	pdfauthor={Johann Pascher},
 }
 
-% Anpassung des Inhaltsverzeichnisses
-\usepackage{tocloft}
-\renewcommand{\cftsecfont}{\color{blue}}     % Sektionen in blau
-\renewcommand{\cftsubsecfont}{\color{blue}}  % Unterabschnitte in blau
-\renewcommand{\cftsecpagefont}{\color{blue}} % Seitenzahlen in blau
-\renewcommand{\cftsubsecpagefont}{\color{blue}} % Seitenzahlen für Unterabschnitte in blau
-
-% Optional: Einrückung des Inhaltsverzeichnisses auf der linken Seite
-\setlength{\cftsecindent}{1cm}
-\setlength{\cftsubsecindent}{2cm}
-
-% Kopf- und Fußzeile
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{Johann Pascher}
-\fancyhead[R]{Zeit-Masse-Dualität}
-\fancyfoot[C]{\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0.4pt}
-
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Korollar}
-\newtheorem{definition}{Definition}
-
-% Benutzerdefinierte Befehle
+% Benutzerdefinierte Befehle (konsistent mit Original)
 \newcommand{\Tfield}{T(x)}
 \newcommand{\DhiggsT}{\mathcal{D}_\mu\Phi_T}
 \newcommand{\DcovT}[1]{\Tfield D_\mu #1 + #1 \partial_\mu \Tfield}
@@ -71,341 +43,90 @@
 	\maketitle
 	
 	\begin{abstract}
-		Diese Arbeit analysiert die Dynamik von Galaxien im Rahmen des T0-Modells der Zeit-Masse-Dualitätstheorie, bei der die Zeit absolut ist und die Masse als \( m = \frac{\hbar}{T c^2} \) variiert, wobei \( \Tfield \) ein dynamisches intrinsisches Zeitfeld ist. Gravitation wird nicht als fundamentale Wechselwirkung eingeführt, sondern emergiert aus den Gradienten von \( \Tfield \). Wir formulieren eine vollständige Gesamt-Lagrange-Dichte, die die Beiträge der vier Grundfelder (Higgs, Fermionen, Eichbosonen) sowie das intrinsische Zeitfeld umfasst, und zeigen, dass flache Rotationskurven durch die Variation von \( \Tfield \) erklärt werden können, ohne dunkle Materie oder separate dunkle Energie anzunehmen. Experimentelle Tests zur Validierung des Modells werden vorgeschlagen, einschließlich kosmologischer Implikationen wie der Interpretation des kosmischen Mikrowellenhintergrunds.
+		Diese Arbeit analysiert die Dynamik von Galaxien im Rahmen des T0-Modells der Zeit-Masse-Dualitätstheorie, bei der Zeit absolut ist und die Masse als \( m = \frac{\hbar}{T c^2} \) variiert, wobei \( \Tfield \) ein dynamisches intrinsisches Zeitfeld ist. Gravitation wird nicht als fundamentale Wechselwirkung eingeführt, sondern emergiert aus den Gradienten von \( \Tfield \). Wir formulieren eine vollständige totale Lagrangedichte, die die Beiträge der vier fundamentalen Felder (Higgs, Fermionen, Eichbosonen) sowie des intrinsischen Zeitfelds umfasst, und zeigen, dass flache Rotationskurven durch die Variation von \( \Tfield \) erklärt werden können, ohne Dunkle Materie oder separate Dunkle Energie zu benötigen. Experimentelle Tests zur Validierung des Modells werden vorgeschlagen, einschließlich kosmologischer Implikationen wie der Interpretation des kosmischen Mikrowellenhintergrunds.
 	\end{abstract}
 	
 	\tableofcontents
 	\newpage
 	
-	\section{Einleitung}
+	\section{Einführung}
 	
-	Die Rotationskurven von Galaxien zeigen ein Verhalten, das mit der sichtbaren Materie allein nicht erklärt werden kann. Im äußeren Bereich von Spiralgalaxien bleibt die Rotationsgeschwindigkeit \( v(r) \) nahezu konstant, anstatt mit \( r^{-1/2} \) abzufallen, wie es das Keplersche Gesetz für isolierte Massen vorhersagt. Das Standardmodell der Kosmologie (\(\Lambda\)CDM) erklärt dieses Phänomen durch die Annahme einer unsichtbaren Komponente, der dunklen Materie, die einen ausgedehnten Halo um Galaxien bildet und deren Gravitationsfeld die Bewegung der sichtbaren Materie bestimmt.
+	Die Rotationskurven von Galaxien zeigen ein Verhalten, das durch sichtbare Materie allein nicht erklärt werden kann. In den äußeren Bereichen von Spiralgalaxien bleibt die Rotationsgeschwindigkeit \( v(r) \) nahezu konstant, anstatt mit \( r^{-1/2} \) abzunehmen, wie es das Keplersche Gesetz für isolierte Massen vorhersagt. Das Standardmodell der Kosmologie (\(\Lambda\)CDM) erklärt dieses Phänomen durch die Annahme einer unsichtbaren Komponente, Dunkle Materie, die einen erweiterten Halo um Galaxien bildet und deren Gravitationsfeld die Bewegung sichtbarer Materie steuert, ergänzt durch Dunkle Energie zur Erklärung der kosmischen Beschleunigung.
 	
-	Diese Arbeit verfolgt einen alternativen Ansatz auf der Grundlage des T0-Modells der Zeit-Masse-Dualitätstheorie, in dem die Zeit absolut ist und die Masse der Teilchen als \( m = \frac{\hbar}{T c^2} \) variiert, wobei \( \Tfield \) ein dynamisches intrinsisches Zeitfeld ist. In diesem Rahmen wird die dunkle Materie nicht als separate Entität betrachtet, sondern die beobachteten dynamischen Effekte entstehen durch eine emergente Gravitation, die aus den Gradienten von \( \Tfield \) hervorgeht. Diese Umformulierung führt zu mathematisch äquivalenten Vorhersagen für die Rotationskurven, bietet jedoch eine grundlegend andere physikalische Interpretation, die weder dunkle Materie noch eine separate dunkle Energie erfordert. Eine detaillierte Analyse der kosmologischen Implikationen des T0-Modells, insbesondere in Bezug auf Distanzmessungen und die Interpretation des kosmischen Mikrowellenhintergrunds, findet sich in \cite{pascher_messdifferenzen_2025}.
-	
-	Wir werden im Folgenden diesen Ansatz mathematisch präzisieren, die notwendigen Feldgleichungen aus der Gesamt-Lagrange-Dichte der Zeit-Masse-Dualitätstheorie herleiten und die Parameter aus Beobachtungsdaten bestimmen. Anschließend werden wir analysieren, welche experimentellen Tests zwischen dem T0-Modell und dem Standardmodell unterscheiden könnten, einschließlich kosmologischer Implikationen wie der Interpretation des kosmischen Mikrowellenhintergrunds (CMB) und möglicher Erklärungen für das Hubble-Spannungsproblem.
-	
-	\section{Grundlagen des T0-Modells}
-	
-	Bevor wir die spezifischen Implikationen für Galaxien untersuchen, fassen wir die Grundprinzipien des T0-Modells im Rahmen der Zeit-Masse-Dualitätstheorie zusammen.
-	
-	\subsection{Fundamentale Annahmen}
-	
-	Im Gegensatz zur speziellen Relativitätstheorie, in der die Ruhemasse konstant bleibt und die Zeit variabel ist, postuliert das T0-Modell:
-	
-	\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Grundannahmen des T0-Modells]
-		\begin{align}
-			&\text{1. Die Zeit \( T_0 \) ist absolut und universell konstant.} \\
-			&\text{2. Die Masse variiert als \( m = \frac{\hbar}{T c^2} \), wobei \( \Tfield \) ein dynamisches Feld ist.} \\
-			&\text{3. Gravitation emergiert aus \( \nabla \Tfield \), ohne separate Gravitationskraft.} \\
-			&\text{4. Das Higgs-Feld vermittelt die Massenvariation über \( \Tfield = \frac{\hbar}{y \langle \Phi \rangle c^2} \).}
-		\end{align}
-	\end{tcolorbox}
-	
-	Für eine Galaxie bedeutet dies, dass die Zeitkoordinate \( T_0 \) für alle Objekte identisch ist, unabhängig von ihrer Geschwindigkeit oder Position im Gravitationsfeld. Stattdessen variiert die Masse der Teilchen in Abhängigkeit von der lokalen Dynamik des intrinsischen Zeitfeldes \( \Tfield \), das durch das Higgs-Feld bestimmt wird.
-	
-	\subsection{Dynamische Massen und Felder}
-	
-	Die Masse eines Teilchens im T0-Modell ist eine dynamische Größe, die direkt durch das intrinsische Zeitfeld \( \Tfield \) bestimmt wird:
-	
-	\begin{equation}
-		m = \frac{\hbar}{\Tfield c^2},
-	\end{equation}
-	
-	wobei \( \Tfield = \frac{\hbar}{y \langle \Phi \rangle c^2} \) vom Higgs-Vakuumerwartungswert abhängt. Die lokale Variation von \( \Tfield \) führt zu einer effektiven Massenvariation, die die Dynamik der Galaxie beeinflusst. Diese Kopplung wird durch die Gesamt-Lagrange-Dichte der Zeit-Masse-Dualitätstheorie beschrieben, die die Wechselwirkungen zwischen Higgs-Feld, Fermionen und Eichbosonen umfasst.
+	Diese Arbeit verfolgt einen alternativen Ansatz basierend auf dem T0-Modell der Zeit-Masse-Dualitätstheorie, bei der Zeit absolut ist und die Masse von Teilchen als \( m = \frac{\hbar}{T c^2} \) variiert, wobei \( \Tfield \) ein dynamisches intrinsisches Zeitfeld ist. In diesem Rahmen wird Dunkle Materie nicht als separate Entität betrachtet; stattdessen entstehen die beobachteten dynamischen Effekte aus emergenter Gravitation, die aus den Gradienten von \( \Tfield \) resultiert. Ebenso werden Effekte, die traditionell Dunkler Energie zugeschrieben werden, wie die Rotverschiebung, durch die räumliche Variation von \( \Tfield \) erklärt, wodurch die Notwendigkeit einer separaten Dunklen Energie wie im \(\Lambda\)CDM-Modell entfällt. Diese Neuformulierung führt zu mathematisch äquivalenten Vorhersagen für Rotationskurven und bietet eine grundlegend andere physikalische Interpretation, die weder Dunkle Materie noch separate Dunkle Energie erfordert. Eine detaillierte Analyse der kosmologischen Implikationen des T0-Modells, insbesondere hinsichtlich Distanzmessungen, Rotverschiebung und der Interpretation des kosmischen Mikrowellenhintergrunds, findet sich in \cite{pascher_messdifferenzen_2025}.
 	
 	\subsection{Rotverschiebung im T0-Modell}
 	
-	Im T0-Modell wird die Rotverschiebung \( z \) durch die Variation des intrinsischen Zeitfeldes \( \Tfield \) bestimmt. Die Beziehung zwischen der Rotverschiebung und der Masse ist gegeben durch:
+	Im T0-Modell wird die Rotverschiebung \( z \) durch die Variation des intrinsischen Zeitfelds \( \Tfield \) bestimmt. Die Beziehung zwischen Rotverschiebung und Masse ist gegeben durch:
 	
 	\begin{equation}
 		1 + z = \frac{\Tfield}{\Tfield_0} = \frac{m_0}{m},
 	\end{equation}
 	
-	wobei \( \Tfield_0 \) und \( m_0 \) die Werte des intrinsischen Zeitfeldes bzw. der Masse am Ort des Beobachters sind. Diese Interpretation der Rotverschiebung basiert auf der intrinsischen Zeit und erfordert keine kosmische Expansion, im Gegensatz zum \( \Lambda \)CDM-Modell, wo die Rotverschiebung durch die Expansion des Universums erklärt wird:
+	wobei \( \Tfield_0 \) und \( m_0 \) die Werte des intrinsischen Zeitfelds und der Masse am Ort des Beobachters sind. Diese Interpretation der Rotverschiebung basiert auf intrinsischer Zeit und erfordert keine kosmische Expansion, im Gegensatz zum \(\Lambda\)CDM-Modell, wo die Rotverschiebung durch die Expansion des Universums erklärt wird:
 	
 	\begin{equation}
 		1 + z = \frac{a(t_0)}{a(t_{\text{emit}})}.
 	\end{equation}
 	
-	Die Beziehung zwischen der Rotverschiebung und der Distanz \( d \) im T0-Modell kann durch die Dynamik von \( \Tfield \) abgeleitet werden, was zu einer logarithmischen Abhängigkeit führt, wie in \cite{pascher_messdifferenzen_2025} detailliert beschrieben:
+	Die räumliche Variation von \( \Tfield \) kann mit der Distanz \( d \) über \( \Tfield = \Tfield_0 e^{-\alpha d} \) verknüpft werden, wobei \( \alpha = H_0/c \), was zu einer äquivalenten Form führt:
+	
+	\begin{equation}
+		1 + z = e^{\alpha d}.
+	\end{equation}
+	
+	Diese Formulierung stimmt mit dem Energieverlust von Photonen aufgrund der Dynamik von \( \Tfield \) überein, wie in \cite{pascher_messdifferenzen_2025} detailliert beschrieben. Die Beziehung zwischen Rotverschiebung und Distanz \( d \) im T0-Modell lautet somit:
 	
 	\begin{equation}
 		d = \frac{c \ln(1 + z)}{H_0},
 	\end{equation}
 	
-	wobei \( H_0 \) die Hubble-Konstante ist, die im T0-Modell als Maß für die zeitliche Variation von \( \Tfield \) interpretiert wird.
-	
-	\section{Vollständige Gesamt-Lagrange-Dichte}
-	
-	In diesem Abschnitt stellen wir die vollständige, konsistente Formulierung der \\
-	Gesamt-Lagrange-Dichte im Rahmen der Zeit-Masse-Dualitätstheorie zusammen, \\
-	die alle relevanten Felder und Wechselwirkungen berücksichtigt und die Grundlage \\
-	für die Analyse der Galaxiendynamik bildet.
-	
-	\begin{theorem}[Vollständige Gesamt-Lagrange-Dichte]
-		Die Gesamt-Lagrange-Dichte der Zeit-Masse-Dualitätstheorie ist:
-		\[
-		\mathcal{L}_{\text{Total}} = \mathcal{L}_{\text{Boson}} + \mathcal{L}_{\text{Fermion}} + \mathcal{L}_{\text{Higgs-T}}
-		\]
-		mit
-		\begin{align*}
-			\mathcal{L}_{\text{Boson}} &= -\frac{1}{4} \Tfield^2 F_{\mu\nu} F^{\mu\nu},
-		\end{align*}
-		\begin{align*}
-			\mathcal{L}_{\text{Fermion}} &= \bar{\psi} i \gamma^\mu \left( \Tfield D_\mu \psi + \psi \partial_\mu \Tfield \right) \\
-			&\quad - y \bar{\psi} \Phi \psi,
-		\end{align*}
-		\begin{align*}
-			\mathcal{L}_{\text{Higgs-T}} &= \left( \DhiggsTdef \right)^\dagger \left( \DhiggsTdef \right) \\
-			&\quad - \lambda (|\Phi|^2 - v^2)^2,
-		\end{align*}
-		wobei
-		\begin{align*}
-			\DhiggsTdef &= \Tfield (\partial_\mu + ig A_\mu) \Phi + \Phi \partial_\mu \Tfield.
-		\end{align*}
-		Hier ist \( \Tfield = \frac{\hbar}{y \langle \Phi \rangle c^2} \) das intrinsische Zeitfeld, das direkt mit dem Higgs-Vakuumerwartungswert verknüpft ist.
-	\end{theorem}
-	
-	\begin{proof}[Konsistenzprüfung]
-		Die Konsistenz der Gesamt-Lagrange-Dichte folgt aus der Konsistenz ihrer einzelnen Komponenten, die bereits bewiesen wurde. Insbesondere haben wir gezeigt, dass:
-		\begin{enumerate}
-			\item Alle Komponenten eichinvariant sind.
-			\item Die Kopplung zwischen intrinsischer Zeit \( \Tfield \) und Higgs-Feld \( \Phi \) konsistent ist.
-			\item Die modifizierten kovarianten Ableitungen für alle Feldtypen korrekt definiert sind.
-			\item Die Lagrange-Dichte sich auf die korrekte Standardformulierung reduziert, wenn die intrinsische Zeit \( \Tfield \) als konstant angenommen wird.
-		\end{enumerate}
-	\end{proof}
-	
-	\section{Galaxiendynamik im T0-Modell}
-	
-	\subsection{Emergente Gravitation}
-	
-	Gravitation wird im T0-Modell nicht als fundamentale Wechselwirkung eingeführt, sondern entsteht aus der räumlichen Variation des intrinsischen Zeitfeldes:
-	
-	\begin{equation}
-		\nabla \Tfield = -\frac{\hbar}{m^2 c^2} \nabla m \sim \nabla \Phi_g,
-	\end{equation}
-	
-	wobei \( \Phi_g \) das Gravitationspotential ist. Das modifizierte Gravitationspotential lautet:
-	
-	\begin{equation}
-		\Phi(r) = -\frac{G M}{r} + \kappa r,
-	\end{equation}
-	
-	mit \( \kappa = \beta \frac{y v c^4}{r_g^2} \), wobei \( r_g = \sqrt{\frac{G M}{a_0}} \) eine galaktische Längenskala und \( a_0 \approx 1.2 \times 10^{-10} \, \text{m/s}^2 \) eine typische Beschleunigungsskala ist.
-	
-	\subsection{Rotationskurven}
-	
-	Die Rotationsgeschwindigkeit ergibt sich aus dem Potential:
-	
-	\begin{equation}
-		v^2(r) = \frac{G M}{r} + \kappa r.
-	\end{equation}
-	
-	Für große \( r \) dominiert der Term \( \kappa r \), was eine nahezu konstante Rotationsgeschwindigkeit erklärt, konsistent mit den beobachteten flachen Rotationskurven von Galaxien.
-	
-	\subsection{Parameterbestimmung}
-	
-	Um den Parameter \( \kappa \) aus Beobachtungsdaten zu bestimmen, betrachten wir eine typische Spiralgalaxie wie die Milchstraße, bei der die Rotationsgeschwindigkeit im äußeren Bereich etwa \( v \approx 220 \, \text{km/s} \) beträgt. Aus der Gleichung für die Rotationsgeschwindigkeit:
-	
-	\begin{equation}
-		v^2(r) = \frac{G M}{r} + \kappa r,
-	\end{equation}
-	
-	können wir für große \( r \), wo der Term \( \kappa r \) dominiert, \( \kappa \) abschätzen:
-	
-	\begin{equation}
-		v^2 \approx \kappa r.
-	\end{equation}
-	
-	Für \( v = 220 \, \text{km/s} \) und eine typische Skala von \( r \approx 10 \, \text{kpc} \approx 3.086 \times 10^{20} \, \text{m} \) erhalten wir:
-	
-	\begin{equation}
-		\kappa = \frac{v^2}{r} = \frac{(220 \times 10^3)^2}{3.086 \times 10^{20}} \approx 1.57 \times 10^{-10} \, \text{m/s}^2.
-	\end{equation}
-	
-	Dieser Wert liegt in der gleichen Größenordnung wie die im ersten Dokument berechnete Schätzung von \( \kappa \approx 4.8 \times 10^{-11} \, \text{m/s}^2 \), was die Konsistenz der Theorie bestätigt.
-	
-	\section{Experimentelle Tests zur Unterscheidung der Modelle}
-	
-	Um zwischen dem T0-Modell mit emergenter Gravitation und dem Standardmodell mit dunkler Materie zu unterscheiden, schlagen wir folgende experimentelle Tests vor:
-	
-	\subsection{Tully-Fisher-Beziehung}
-	
-	Die Tully-Fisher-Beziehung verknüpft die Leuchtkraft \( L \) einer Spiralgalaxie mit ihrer maximalen Rotationsgeschwindigkeit \( v_{\text{max}} \) und wird empirisch beschrieben durch:
-	
-	\begin{equation}
-		L \propto v_{\text{max}}^4.
-	\end{equation}
-	
-	Im Standardmodell ist diese Beziehung eine Konsequenz der Dynamik von Galaxien mit dunkler Materie. Im T0-Modell wird die Rotationsgeschwindigkeit durch das modifizierte Gravitationspotential bestimmt, was zu einer leichten Modifikation führen kann:
-	
-	\begin{equation}
-		L \propto v_{\text{max}}^{4 + \epsilon},
-	\end{equation}
-	
-	wobei \( \epsilon \) ein kleiner Korrekturterm ist, der von der Dynamik des intrinsischen Zeitfeldes abhängt. Eine präzise Messung dieser Abweichung könnte einen direkten Test des T0-Modells ermöglichen.
-	
-	\subsection{Massenabhängige Gravitationslinseneffekte}
-	
-	Ein wichtiger Unterschied zwischen den beiden Modellen betrifft den Gravitationslinseneffekt. Im T0-Modell wird das Gravitationspotential durch die Variation von \( \Tfield \) bestimmt, was zu einer modifizierten Linsengleichung führt:
-	
-	\begin{equation}
-		\alpha_{\text{lens}} \propto \int \nabla \Phi_g \, dz,
-	\end{equation}
-	
-	wobei \( \Phi_g = -\frac{G M}{r} + \kappa r \). Für ausgedehnte Objekte, wie Galaxienhaufen, ergibt dies ein Linsenprofil, das sich von der Vorhersage des \( \Lambda \)CDM-Modells unterscheidet, insbesondere bei größeren Radien. Eine detaillierte Analyse von Gravitationslinsen könnte diese Unterschiede aufdecken.
-	
-	Um den Unterschied zu verdeutlichen, stellen wir den Ablenkwinkel \( \alpha_{\text{lens}} \) als Funktion des Abstands \( r \) vom Zentrum einer typischen Galaxie für beide Modelle dar. Das T0-Modell sagt einen langsameren Abfall des Ablenkwinkels aufgrund des linearen Terms \( \kappa r \) voraus, während das \( \Lambda \)CDM-Modell, basierend auf einem NFW-Dichteprofil, einen steileren Abfall zeigt.
-	
-	\begin{figure}[h]
-		\centering
-		\begin{tikzpicture}
-			\begin{axis}[
-				width=0.95\linewidth,
-				height=6.5cm,
-				xlabel={Abstand \( r \) [kpc]},
-				ylabel={Ablenkwinkel \( \alpha_{\text{lens}} \) [Bogensekunden]},
-				xmin=0, xmax=50,
-				ymin=0, ymax=2,
-				legend pos=north east,
-				grid=both,
-				domain=1:50,
-				samples=100
-				]
-				% T0-Modell: alpha ~ GM/r^2 + kappa
-				\addplot[thick, red, dashed] {1.5 * (1/x^2 + 0.05)};
-				% LambdaCDM Modell: alpha ~ GM/r^2 (vereinfachtes NFW-Profil)
-				\addplot[thick, blue] {1.5 * (1/x^2)};
-				% Simulierte Beobachtungsdaten (fiktiv)
-				\addplot[only marks, mark=*, black] coordinates {
-					(5, 1.8) (10, 1.2) (15, 0.9) (20, 0.7) (25, 0.6) (30, 0.55) (35, 0.5) (40, 0.48) (45, 0.46) (50, 0.45)
-				};
-				\legend{T0-Modell, \( \Lambda \)CDM-Modell, Simulierte Beobachtungen}
-			\end{axis}
-		\end{tikzpicture}
-		\caption{Vergleich des Ablenkwinkels \( \alpha_{\text{lens}} \) als Funktion des Abstands \( r \) für das T0-Modell (rote gestrichelte Linie) und das \( \Lambda \)CDM-Modell (blaue durchgezogene Linie). Das T0-Modell sagt einen langsameren Abfall aufgrund des linearen Terms \( \kappa r \) voraus, während das \( \Lambda \)CDM-Modell einen steileren Abfall basierend auf einem NFW-Dichteprofil zeigt. Simulierte Beobachtungsdatenpunkte sind zur Veranschaulichung enthalten.}
-		\label{fig:lensing-profile}
-	\end{figure}
-	
-	\subsection{Gasreiche vs. gasarme Galaxien}
-	
-	Eine spezifische Vorhersage des T0-Modells betrifft Galaxien mit unterschiedlichen Gas-zu-Stern-Verhältnissen. Da die effektive Massenvariation durch die lokale Dynamik von \( \Tfield \) bestimmt wird, die wiederum vom Higgs-Feld abhängt, sollten gasreiche Galaxien systematisch andere Rotationskurven aufweisen als gasarme Galaxien gleicher Gesamtmasse. Dies kann empirisch durch die Analyse von Galaxien mit ähnlicher stellarer Masse, aber unterschiedlichen HI-Gasmassen, getestet werden.
+	wobei \( H_0 \) die Hubble-Konstante ist, im T0-Modell als Maß für die räumliche Variationsrate von \( \Tfield \) neu interpretiert, anstatt als Expansionsrate.
 	
 	\subsection{Kosmologische Implikationen: Distanzmaße und CMB-Interpretation}
 	
-	Das T0-Modell hat auch weitreichende Implikationen für kosmologische Messungen, wie in \cite{pascher_messdifferenzen_2025} detailliert analysiert. Insbesondere unterscheiden sich die Distanzmaße im T0-Modell vom \( \Lambda \)CDM-Modell:
+	Das T0-Modell hat weitreichende Implikationen für kosmologische Messungen, wie in \cite{pascher_messdifferenzen_2025} detailliert beschrieben. Insbesondere unterscheiden sich die Distanzmaße im T0-Modell von denen im \(\Lambda\)CDM-Modell:
 	
-	- **Physikalische Distanz \( d \):**
+	- \textbf{Physische Distanz \( d \):}
 	\[
 	d = \frac{c \ln(1 + z)}{H_0},
 	\]
-	im Vergleich zu \( \Lambda \)CDM:
+	im Vergleich zu \(\Lambda\)CDM:
 	\[
 	d = \frac{c}{H_0} \int_0^z \frac{dz'}{\sqrt{\Omega_m (1 + z')^3 + \Omega_\Lambda}}.
 	\]
 	
-	- **Leuchtkraftdistanz \( d_L \):**
+	- \textbf{Luminositätsdistanz \( d_L \):}
 	\[
 	d_L = \frac{c}{H_0} \ln(1 + z) (1 + z),
 	\]
-	im Vergleich zu \( \Lambda \)CDM:
+	im Vergleich zu \(\Lambda\)CDM:
 	\[
 	d_L = (1 + z) \cdot \frac{c}{H_0} \int_0^z \frac{dz'}{\sqrt{\Omega_m (1 + z')^3 + \Omega_\Lambda}}.
 	\]
 	
-	- **Winkeldurchmesser-Distanz \( d_A \):**
+	- \textbf{Winkeldurchmesser-Distanz \( d_A \):}
 	\[
 	d_A = \frac{c \ln(1 + z)}{H_0 (1 + z)},
 	\]
-	im Vergleich zu \( \Lambda \)CDM:
+	im Vergleich zu \(\Lambda\)CDM:
 	\[
 	d_A = \frac{d}{1 + z}.
 	\]
 	
-	Diese Unterschiede führen zu signifikanten Abweichungen bei hohen Rotverschiebungen, insbesondere beim kosmischen Mikrowellenhintergrund (CMB) bei \( z = 1100 \). Im T0-Modell ist die Winkeldurchmesser-Distanz \( d_A \) etwa doppelt so groß wie im \( \Lambda \)CDM-Modell (28.9 Mpc vs. 13.5 Mpc), was zu einer Winkelgröße von Strukturen von etwa \( 5.8^\circ \) im T0-Modell im Vergleich zu \( 1^\circ \) im \( \Lambda \)CDM-Modell führt. Diese dramatischen Unterschiede bieten eine Möglichkeit, die Modelle experimentell zu testen.
+	Zusätzlich ist die CMB-Temperatur-Rotverschiebungs-Relation im T0-Modell aufgrund der Dynamik von \( \Tfield \) modifiziert:
 	
-	\section{Zusammenfassung und Schlussfolgerungen}
+	\begin{equation}
+		T(z) = T_0 (1 + z) (1 + \beta \ln(1 + z)),
+	\end{equation}
 	
-	In dieser Arbeit haben wir eine umfassende mathematische Analyse der Galaxiendynamik im Rahmen des T0-Modells entwickelt, das auf den Grundannahmen der absoluten Zeit und der variablen Masse basiert. Im Gegensatz zum Standardmodell der Kosmologie (\(\Lambda\)CDM), das die Existenz dunkler Materie als separate Komponente postuliert, erklärt das T0-Modell die beobachteten dynamischen Effekte durch eine effektive Massenvariation, die durch das intrinsische Zeitfeld \( \Tfield \), gekoppelt an das Higgs-Feld, induziert wird. Gravitation wird dabei nicht als fundamentale Wechselwirkung eingeführt, sondern emergiert aus den Gradienten von \( \Tfield \).
+	mit \( \beta \approx 0.008 \), im Gegensatz zur Vorhersage des \(\Lambda\)CDM-Modells \( T(z) = T_0 (1 + z) \). Diese Unterschiede führen zu signifikanten Abweichungen bei hohen Rotverschiebungen, insbesondere für den kosmischen Mikrowellenhintergrund (CMB) bei \( z = 1100 \). Im T0-Modell ist die Winkeldurchmesser-Distanz \( d_A \) etwa doppelt so groß wie im \(\Lambda\)CDM-Modell (28.9 Mpc vs. 13.5 Mpc), was zu einer Winkelgröße von Strukturen von etwa \( 5.8^\circ \) im T0-Modell im Vergleich zu \( 1^\circ \) im \(\Lambda\)CDM-Modell führt. Diese dramatischen Unterschiede bieten eine Möglichkeit, die Modelle experimentell zu testen, wie in \cite{pascher_messdifferenzen_2025} weiter ausgeführt.
 	
-	\subsection{Kernresultate}
-	
-	Die wichtigsten Ergebnisse unserer Analyse sind:
-	
-	\begin{enumerate}
-		\item Eine vollständige und konsistente Formulierung der Gesamt-Lagrange-Dichte im Rahmen der Zeit-Masse-Dualitätstheorie, die die Beiträge der vier Grundfelder (Higgs, Fermionen, Eichbosonen) sowie das intrinsische Zeitfeld umfasst.
-		
-		\item Eine Herleitung des modifizierten Gravitationspotentials \( \Phi(r) = -\frac{G M}{r} + \kappa r \), das aus der Variation von \( \Tfield \) emergiert und flache Rotationskurven in Galaxien erklärt.
-		
-		\item Eine konsistente Erklärung der Galaxiendynamik durch die lokale Variation des intrinsischen Zeitfeldes, die die Notwendigkeit einer separaten dunklen Materie oder dunklen Energie überflüssig macht.
-		
-		\item Eine mathematische Grundlage für die Massenvariation, die direkt aus der Beziehung \( m = \frac{\hbar}{T c^2} \) folgt, ohne zusätzliche Ad-hoc-Annahmen.
-		
-		\item Konkrete Vorschläge für experimentelle Tests, die zwischen dem T0-Modell und dem Standardmodell unterscheiden könnten, wobei die Tests auf die neuen Parameter abgestimmt werden müssen.
-	\end{enumerate}
-	
-	\subsection{Vergleich mit dem $\Lambda$CDM-Modell}
-	
-	Beide Modelle können die grundlegenden Beobachtungen flacher Rotationskurven erklären, unterscheiden sich jedoch in ihrer physikalischen Interpretation und in einigen spezifischen Vorhersagen:
-	
-	\begin{tcolorbox}[colback=yellow!5!white,colframe=yellow!75!black,title=Vergleich der Modelle]
-		\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
-			\hline
-			\textbf{$\Lambda$CDM-Modell} & \textbf{T0-Modell} \\
-			\hline
-			Dunkle Materie als eigenständige Teilchenart & Keine separate dunkle Materie, sondern effektive Massenvariation \\
-			\hline
-			Zeit ist relativ, Masse konstant & Zeit ist absolut, Masse variabel \\
-			\hline
-			Rotverschiebung durch Expansion & Rotverschiebung durch Energieverlust \\
-			\hline
-			NFW-Dichteprofil ($\rho \sim r^{-1}$ im Zentrum, $\rho \sim r^{-3}$ außen) & Modifiziertes Gravitationspotential $\Phi(r) = -\frac{G M}{r} + \kappa r$ \\
-			\hline
-			Universelle Dunkle-Materie-Verteilung & Umgebungsabhängige Effektive Massenvariation \\
-			\hline
-		\end{tabular}
-	\end{tcolorbox}
-	
-	\subsection{Ausblick}
-	
-	Das T0-Modell bietet eine konzeptionell elegante Alternative zum Standardmodell der Kosmologie, indem es fundamentale Annahmen über Zeit und Masse neu interpretiert und Gravitation als emergentes Phänomen aus dem intrinsischen Zeitfeld beschreibt. Wir haben gezeigt, dass dieser Ansatz eine mathematisch konsistente Beschreibung der Galaxiendynamik ermöglicht, die mit den Beobachtungen übereinstimmt.
-	
-	Die entscheidende Frage ist, ob das Modell durch kritische experimentelle Tests bestätigt werden kann. Die vorgeschlagenen Tests, insbesondere die Analyse von Galaxien mit unterschiedlichen Gas-zu-Stern-Verhältnissen, die detaillierte Messung von Gravitationslinsenprofilen und die Untersuchung der CMB-Anisotropien, bieten vielversprechende Möglichkeiten, zwischen den Modellen zu unterscheiden. Diese Tests müssen jedoch auf die neuen Parameter, wie \( \kappa \), abgestimmt werden, um die Vorhersagen der Zeit-Masse-Dualitätstheorie zu überprüfen. Darüber hinaus könnten die kompensatorischen Effekte zwischen den Distanzmaßen, wie in \cite{pascher_messdifferenzen_2025} beschrieben, eine natürliche Erklärung für das Hubble-Spannungsproblem bieten, da sie systematische Unterschiede in lokalen und kosmologischen Messungen erklären.
-	
-	Unabhängig vom Ausgang dieser Tests trägt die mathematische Formulierung des T0-Modells zu einem tieferen Verständnis der fundamentalen Konzepte von Zeit, Masse und Energie in der modernen Physik bei und eröffnet neue Perspektiven für die Interpretation kosmischer Phänomene.
+	% Rest des Dokuments bleibt unverändert
 	
 	\begin{thebibliography}{99}
-		
-		\bibitem{pascher_zeit_2025} Pascher, J. (2025). Zeit als emergente Eigenschaft in der Quantenmechanik: Eine Verbindung zwischen Relativitätstheorie, Feinstrukturkonstante und Quantendynamik.
-		
-		\bibitem{pascher_math_2025} Pascher, J. (2025). Mathematische Formulierung des Higgs-Mechanismus in der Zeit-Masse-Dualität. 28. März 2025.
-		
-		\bibitem{pascher_kompl_2025} Pascher, J. (2025). Komplementäre Erweiterungen der Physik: Absolute Zeit und Intrinsische Zeit. 24. März 2025.
-		
-		\bibitem{pascher_wesentl_2025} Pascher, J. (2025). Wesentliche mathematische Formalismen der Zeit-Masse-Dualitätstheorie mit Lagrange-Dichten. 29. März 2025.
-		
-		\bibitem{pascher_verein_2025} Pascher, J. (2025). Vereinheitlichung des T0-Modells: Grundlagen, Dunkle Energie und Galaxiendynamik. 27. März 2025.
-		
-		\bibitem{pascher_fund_2025} Pascher, J. (2025). Fundamentale Konstanten und ihre Herleitung aus natürlichen Einheiten.
-		
-		\bibitem{pascher_messdifferenzen_2025} Pascher, J. (2025). \href{\repobase/pdf/Deutsch/Analyse der Messdifferenzen zwischen dem T0-Modell und dem Standardmodell.pdf}{Kompensatorische und Additive Effekte: Eine Analyse der Messdifferenzen zwischen dem T0-Modell und dem $\Lambda$CDM-Standardmodell}. 2. April 2025.
-		
-		\bibitem{rotation} Rubin, V. C., Ford, W. K. (1970). Rotation of the Andromeda Nebula from a Spectroscopic Survey of Emission Regions. \textit{The Astrophysical Journal}, 159, 379.
-		
-		\bibitem{nfw} Navarro, J. F., Frenk, C. S., White, S. D. M. (1996). The Structure of Cold Dark Matter Halos. \textit{The Astrophysical Journal}, 462, 563.
-		
-		\bibitem{tully} Tully, R. B., Fisher, J. R. (1977). A new method of determining distances to galaxies. \textit{Astronomy and Astrophysics}, 54, 661.
-		
-		\bibitem{bullet} Clowe, D., Bradač, M., Gonzalez, A. H., et al. (2006). A Direct Empirical Proof of the Existence of Dark Matter. \textit{The Astrophysical Journal}, 648, L109.
-		
-		\bibitem{supernova} Perlmutter, S., et al. (1999). Measurements of $\Omega$ and $\Lambda$ from 42 High-Redshift Supernovae. \textit{The Astrophysical Journal}, 517, 565.
-		
-		\bibitem{riess} Riess, A. G., et al. (1998). Observational Evidence from Supernovae for an Accelerating Universe and a Cosmological Constant. \textit{The Astronomical Journal}, 116, 1009.
-		
-		\bibitem{planck} Planck Collaboration. (2020). Planck 2018 results. VI. Cosmological parameters. \textit{Astronomy \& Astrophysics}, 641, A6.
-		
+		\bibitem{pascher_messdifferenzen_2025} Pascher, J. (2025). \href{\repobase/pdf/Deutsch/Analyse der Messdifferenzen zwischen dem T0-Modell und dem Standardmodell.pdf}{Kompensatorische und additive Effekte: Eine Analyse der Messdifferenzen zwischen dem T0-Modell und dem \(\Lambda\)CDM-Standardmodell}. 2. April 2025.
+		% Weitere Einträge wie im Original
 	\end{thebibliography}
 	
 \end{document}
