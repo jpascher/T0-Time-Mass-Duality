@@ -1,8 +1,8 @@
 \documentclass[a4paper,12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[ngerman]{babel}
 \usepackage{lmodern}
+\usepackage[ngerman]{babel}
 \usepackage{csquotes}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -18,6 +18,8 @@
 \usepackage{tabularx}
 \usepackage{braket}
 \usepackage{siunitx}
+\DeclareSIUnit{\year}{yr}
+\DeclareSIUnit{\parsec}{pc}
 \usepackage{amsthm}
 \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
 \usepackage{cleveref}
@@ -31,6 +33,15 @@
 	pdfcreator={LaTeX}
 }
 
+% Kopf- und Fußzeilen
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Johann Pascher}
+\fancyhead[R]{Zeit-Masse-Dualität}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
 \renewcommand{\cftsecfont}{\color{blue}}
 \renewcommand{\cftsubsecfont}{\color{blue}}
 \renewcommand{\cftsecpagefont}{\color{blue}}
@@ -38,11 +49,24 @@
 \setlength{\cftsecindent}{1cm}
 \setlength{\cftsubsecindent}{2cm}
 
-\newcommand{\DhiggsT}{\partial_\mu \Phi + \Phi \partial_\mu \Tfield}
+% Custom commands
 \newcommand{\Tfield}{T(x)}
+\newcommand{\DcovT}[1]{\Tfield D_\mu #1 + #1 \partial_\mu \Tfield}
+\newcommand{\DhiggsT}{\Tfield (\partial_\mu + ig A_\mu) \Phi + \Phi \partial_\mu \Tfield}
+\newcommand{\betaT}{\beta_{\text{T}}}
+\newcommand{\alphaEM}{\alpha_{\text{EM}}}
+\newcommand{\Mpl}{M_{\text{Pl}}}
+\newcommand{\Tzerot}{T_0(\Tfield)}
+\newcommand{\Tzero}{T_0}
+\newcommand{\vecx}{\vec{x}}
+\newcommand{\gammaf}{\gamma_{\text{Lorentz}}}
 
 \newtheorem{theorem}{Satz}[section]
 \newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[theorem]
+\theoremstyle{remark}
+\newtheorem{remark}{Bemerkung}
 
 \title{Feldtheorie und Quantenkorrelationen: \\Eine neue Perspektive auf Instantaneität}
 \author{Johann Pascher}
@@ -53,151 +77,97 @@
 	\maketitle
 	
 	\begin{abstract}
-		Diese Arbeit entwickelt eine neue Perspektive auf das Phänomen der Quantenkorrelationen und deren scheinbare Instantaneität. Durch Einführung eines fundamentalen Feldansatzes im T0-Modell wird gezeigt, wie die nichtlokalen Eigenschaften der Quantenmechanik als natürliche Folge einer zugrundeliegenden Feldstruktur verstanden werden können. Besondere Aufmerksamkeit wird der Rolle des Quantenhintergrunds und der Interpretation moderner Bell-Experimente gewidmet. Diese Perspektive ergänzt die Zeit-Masse-Dualitätstheorie und bietet einen konsistenten Rahmen zur Erklärung quantenmechanischer Phänomene innerhalb eines umfassenden Feldkonzepts.
+		Diese Arbeit entwickelt eine neue Perspektive auf Quantenkorrelationen und deren scheinbare Instantaneität im Rahmen des T0-Modells. Durch einen einheitlichen Feldansatz wird gezeigt, wie die nichtlokalen Eigenschaften der Quantenmechanik als natürliche Folge einer zugrundeliegenden Feldstruktur verstanden werden können. Besonderes Augenmerk liegt auf der Rolle des Quantenhintergrunds und der Interpretation moderner Bell-Experimente. Diese Sichtweise ergänzt die Zeit-Masse-Dualitätstheorie und bietet einen kohärenten Rahmen, um quantenmechanische Phänomene ohne die Annahme von „spukhafter Fernwirkung“ zu erklären.
 	\end{abstract}
 	
 	\tableofcontents
 	\newpage
 	
 	\section{Einführung}
-	Die moderne Quantenphysik steht vor einer grundlegenden Herausforderung: Die scheinbare Instantaneität von Quantenkorrelationen scheint unseren klassischen Vorstellungen von Lokalität und Kausalität zu widersprechen. Seit den bahnbrechenden Bell-Experimenten, insbesondere den lückenlosen Tests seit 2015 \cite{Hensen2015}, wissen wir mit Sicherheit, dass die Quantenwelt nichtlokale Eigenschaften aufweist. Doch die Frage nach der \textit{Natur} dieser Nichtlokalität und ihrer Vereinbarkeit mit der Relativitätstheorie bleibt offen.
 	
-	\subsection{Ein neuer Ansatz}
-	Diese Arbeit entwickelt eine alternative Perspektive auf das Problem der Quantenkorrelationen, indem sie einen fundamentalen Feldansatz im T0-Modell vorschlägt. Statt separater Quantenfelder wird ein einheitliches fundamentales Feld postuliert, in dem Teilchen als Feldknoten und Quantenkorrelationen als Feldeigenschaften erscheinen \cite{Wilczek2008}. Dieser Blickwinkel ermöglicht es, die scheinbare „spukhafte Fernwirkung“ als natürliche Folge der Feldstruktur zu verstehen.
+	Die Quantenmechanik stellt uns seit jeher vor Rätsel, insbesondere wenn es um die Natur von Quantenkorrelationen geht. Die Vorstellung, dass zwei weit voneinander entfernte Teilchen augenblicklich miteinander verbunden sein könnten, hat Wissenschaftler seit Einsteins berühmter Kritik an der „spukhaften Fernwirkung“ beschäftigt. Moderne Experimente, wie die lückenlosen Bell-Tests ab 2015, haben gezeigt, dass diese Korrelationen real sind und die klassischen Vorstellungen von Lokalität und Kausalität übertreffen. Doch wie können wir dieses Phänomen verstehen, ohne die Grundpfeiler der Physik aufzugeben?
 	
-	\subsection{Theoretische Grundlagen}
-	\begin{theorem}[Feldkonzept]
-		Der vorgeschlagene Ansatz basiert auf drei Kernkonzepten:
-		\begin{itemize}
-			\item Das Vakuum als aktiver Quantenhintergrund mit definierten Eigenschaften (\(\varepsilon_0\), \(\mu_0\)).
-			\item Teilchen als stabile Knoten oder Anregungsmuster im fundamentalen Feld.
-			\item Quantenkorrelationen als inhärente Eigenschaften der Feldkohärenz.
-		\end{itemize}
-	\end{theorem}
-	Diese Konzepte sind direkt mit der Zeit-Masse-Dualitätstheorie verknüpft \cite{Pascher2024}, wobei das intrinsische Zeitfeld \( \Tfield = \frac{\hbar}{\max(m c^2, \omega)} \) als fundamentale Größe betrachtet wird. Die Eigenschaften des Quantenhintergrunds bestimmen sowohl die Zeitenentwicklung des Systems als auch die Struktur der als Materie wahrgenommenen Feldknoten.
+	In dieser Arbeit schlage ich vor, die Nichtlokalität der Quantenwelt nicht als mysteriöse Instantaneität zu betrachten, sondern als natürliche Eigenschaft eines einheitlichen Quantenfelds, das im Rahmen des T0-Modells entwickelt wurde. Dieses Modell, das auf der Zeit-Masse-Dualität basiert und die Zeit als absolute Größe mit variabler Masse behandelt, bietet eine frische Perspektive. Anstatt Teilchen als isolierte Objekte zu sehen, interpretiere ich sie als Knoten oder Anregungen eines fundamentalen Feldes, dessen Kohärenz die beobachteten Korrelationen erklärt. Diese Sichtweise knüpft an die Arbeiten zur Zeit-Masse-Dualität an, die in „Zeit-Masse-Dualitätstheorie: Herleitung der Parameter“ \cite{pascher_params_2025} ausführlich beschrieben sind, und erweitert sie um eine feldtheoretische Grundlage. Ein zentrales Element ist das intrinsische Zeitfeld \(\Tfield = \frac{\hbar}{\max(m c^2, \omega)}\), das die Zeitskala der Feldknoten bestimmt und eine Brücke zwischen Quantenmechanik und Kosmologie schlägt.
 	
-	\subsection{Experimentelle Beweise}
-	Die Theorie wird durch moderne Experimente gestützt, insbesondere:
-	\begin{itemize}
-		\item Die Wiener Experimente von 2015, die alle klassischen Lücken schlossen \cite{Giustina2015}.
-		\item Der „Big Bell Test“ von 2018 mit seiner einzigartigen Methodik \cite{BigBellTest2018}.
-		\item Verschiedene Analogien zu klassischen Feldphänomenen.
-	\end{itemize}
-	
-	\subsection{Mathematischer Rahmen}
-	Die fundamentale Feldgleichung kann geschrieben werden als:
-	\begin{equation}
-		\Box \Psi + V(\Psi) = 0
-	\end{equation}
-	wobei \( \Box = \frac{\partial^2}{\partial t^2} - c^2 \nabla^2 \) der d’Alembert-Operator ist und \( V(\Psi) \) ein Potentialterm, der die Stabilität der Feldknoten sicherstellt. In Verbindung mit der Zeit-Masse-Dualität wird diese Gleichung reformuliert:
-	\begin{equation}
-		i\hbar \Tfield \frac{\partial}{\partial t} \Psi + i\hbar \Psi \frac{\partial \Tfield}{\partial t} = \hat{H} \Psi
-	\end{equation}
+	Mein Ansatz beginnt mit der Idee, dass das Vakuum kein leerer Raum ist, sondern ein aktiver Quantenhintergrund mit definierten Eigenschaften, wie sie durch die elektrischen und magnetischen Feldkonstanten \(\varepsilon_0\) und \(\mu_0\) zum Ausdruck kommen. Teilchen sind keine eigenständigen Entitäten, sondern stabile Muster dieses Feldes, während Quantenkorrelationen die inhärente Kohärenz des Feldzustands widerspiegeln. Moderne Experimente, wie die Wiener Tests von 2015 \cite{Giustina2015} oder der „Big Bell Test“ von 2018 \cite{BigBellTest2018}, unterstützen diese Interpretation, indem sie die Nichtlokalität als Faktum bestätigen, ohne dass eine instantane Kommunikation zwischen Teilchen erforderlich ist. Um diese Perspektive mathematisch zu untermauern, führe ich eine fundamentale Feldgleichung ein, die die Dynamik dieses einheitlichen Feldes beschreibt, und verbinde sie mit der modifizierten Quantenmechanik des T0-Modells, wie sie in „Die Notwendigkeit der Erweiterung der Standard-Quantenmechanik“ \cite{pascher_quantum_2025} entwickelt wurde. Diese Arbeit zielt darauf ab, eine kohärente Erzählung zu schaffen, die sowohl die experimentellen Befunde als auch die theoretischen Grundlagen des T0-Modells vereint.
 	
 	\section{Das Vakuum als Quantenhintergrund}
-	Das Vakuum ist nicht bloß „nichts“, sondern ein aktiver Quantenhintergrund mit definierten physikalischen Eigenschaften \cite{Milonni1994}.
 	
-	\subsection{Fundamentale Vakuumkonstanten}
-	Die elektrische Feldkonstante (\(\varepsilon_0\)) und die magnetische Feldkonstante (\(\mu_0\)) charakterisieren die fundamentalen Eigenschaften des Vakuums als Quantenhintergrund. Sie bestimmen Wechselwirkungen im elektromagnetischen Feld und sind direkt mit der Lichtgeschwindigkeit verknüpft:
+	Das Vakuum, wie wir es in der modernen Physik verstehen, ist weit mehr als ein leerer Raum. Es ist ein dynamisches Medium, das durch fundamentale physikalische Eigenschaften wie die elektrische Feldkonstante \(\varepsilon_0\) und die magnetische Feldkonstante \(\mu_0\) charakterisiert wird. Diese Konstanten sind nicht bloß mathematische Hilfsmittel, sondern Ausdruck einer tiefen Struktur, die die Lichtgeschwindigkeit definiert und die Wechselwirkungen aller Felder im Universum ermöglicht. Im T0-Modell wird dieses Vakuum als aktiver Quantenhintergrund betrachtet, der die Grundlage für alle physikalischen Phänomene bildet, einschließlich der Quantenkorrelationen. Eine zentrale Beziehung, die diese Rolle unterstreicht, ist:
+	
 	\begin{equation}
 		c = \frac{1}{\sqrt{\varepsilon_0 \mu_0}}
 	\end{equation}
-	Diese Konstanten sind nicht nur mathematische Größen, sondern Ausdruck der physikalischen Struktur des Quantenhintergrunds \cite{Aitchison2004}. Im T0-Modell beeinflussen sie direkt das intrinsische Zeitfeld \( \Tfield \) und damit die Energieskala der Feldknoten \cite{Pascher2024}.
 	
-	\subsection{Das Vakuum als Feldträger}
-	Der Quantenhintergrund dient als Trägermedium für das elektromagnetische Feld und alle anderen fundamentalen Felder. Diese Perspektive ermöglicht:
-	\begin{itemize}
-		\item Die Erklärung der Wellenausbreitung im „leeren“ Raum.
-		\item Das Verständnis nichtlokaler Korrelationen als inhärente Feldeigenschaften.
-		\item Die Überwindung der Grenzen klassischer Teilchenkonzepte.
-	\end{itemize}
-	Die Homogenität des Vakuums und seine Eigenschaften (\(\varepsilon_0\), \(\mu_0\)) sind entscheidend für die Konstanz der Lichtgeschwindigkeit und damit die Gültigkeit der speziellen Relativitätstheorie \cite{Weinberg1995}.
+	Dieser Hintergrund ist kein passiver Schauplatz, sondern ein Trägermedium, das elektromagnetische Wellen und andere fundamentale Felder ermöglicht. Seine Homogenität sorgt dafür, dass die Lichtgeschwindigkeit konstant bleibt, wie es die spezielle Relativitätstheorie fordert. Doch im T0-Modell geht die Bedeutung des Vakuums weiter: Es beeinflusst direkt das intrinsische Zeitfeld \(\Tfield\), das die Zeitskala jedes Teilchens bestimmt, wie in „Zeit-Masse-Dualitätstheorie“ \cite{pascher_params_2025} gezeigt wird. Das Vakuum wird somit zum Schlüssel, um die nichtlokalen Eigenschaften der Quantenwelt zu verstehen, indem es als kohärentes Medium fungiert, das Korrelationen über weite Distanzen hinweg aufrechterhält.
 	
 	\section{Quantenkorrelationen im Feldmodell}
-	\subsection{Polarisation und Verschränkung}
-	Die Polarisation eines Photons kann als Superposition horizontaler (H) und vertikaler (V) Polarisation beschrieben werden \cite{Fox2006}:
-	\begin{equation}
-		|\psi\rangle = \alpha |H\rangle + \beta e^{i\phi} |V\rangle
-	\end{equation}
-	Für verschränkte Photonenpaare entsteht ein gemeinsamer Zustand wie:
+	
+	Wenn wir von verschränkten Teilchen sprechen, denken wir oft an Photonen, deren Polarisation in einem gemeinsamen Zustand beschrieben wird. Ein typischer verschränkter Zustand lautet:
+	
 	\begin{equation}
 		|\psi\rangle = \frac{1}{\sqrt{2}} (|H\rangle_A |H\rangle_B + |V\rangle_A |V\rangle_B)
 	\end{equation}
-	Im Feldmodell werden diese Zustände nicht als isolierte Teilcheneigenschaften betrachtet, sondern als kohärente Feldmuster, die sich über den Raum erstrecken \cite{Zeilinger2010}. Die Korrelation zwischen Messungen an Teilchen A und B ist eine inhärente Eigenschaft dieses Feldmusters, nicht das Ergebnis einer instantanen „Kommunikation“ zwischen den Teilchen.
 	
-	\subsection{Bell-Ungleichungen und lokaler Realismus}
-	Bell-Ungleichungen zeigen die Grenzen lokaler realistischer Theorien \cite{Bell1964}:
+	In der traditionellen Sichtweise erscheinen diese Teilchen als separate Objekte, deren Zustände instantan miteinander korrelieren, sobald eine Messung erfolgt. Doch im Feldmodell des T0-Systems ändert sich diese Sichtweise grundlegend. Verschränkte Zustände sind keine Eigenschaften isolierter Teilchen, sondern kohärente Muster eines einheitlichen Quantenfelds, das den Raum durchdringt, wie in „Dynamische Masse von Photonen“ \cite{pascher_photons_2025} beschrieben.
+	
+	Die Bell-Ungleichungen, die John Bell 1964 formulierte, zeigen klar, dass lokale realistische Theorien die beobachteten Korrelationen nicht erklären können. Mathematisch ausgedrückt lautet eine solche Ungleichung:
+	
 	\begin{equation}
 		|E(a,b) - E(a,c)| \leq 1 + E(b,c)
 	\end{equation}
-	Die experimentell beobachtete Verletzung dieser Ungleichung (für bestimmte Winkel \( a \), \( b \), \( c \)) zeigt, dass die Quantenwelt nicht durch lokale verborgene Variablen beschrieben werden kann \cite{Aspect1982}. Das Feldmodell bietet eine natürliche Erklärung: Das fundamentale Feld ist inhärent nichtlokal, da es den gesamten Raum umspannt.
 	
-	\subsection{Das Wiener Experiment von 2015}
-	Das Experiment der Gruppe von Anton Zeilinger in Wien im Jahr 2015 war einer der ersten wirklich lückenlosen Tests des Bell-Theorems \cite{Giustina2015}. Es kombinierte:
-	\begin{itemize}
-		\item Sehr hohe Detektionseffizienz (>97\% mit SNSPDs).
-		\item Ausreichende räumliche Trennung der Messungen.
-		\item Schnelle, unabhängige Quantenzufallszahlengeneratoren.
-	\end{itemize}
-	Die beobachtete Verletzung der Bell-Ungleichung mit einer statistischen Signifikanz von 11,5 Standardabweichungen bestätigt die Nichtlokalität der Quantenwelt. Im Feldmodell ist diese Nichtlokalität eine natürliche Eigenschaft des fundamentalen Feldes und seiner kohärenten Struktur \cite{Zeilinger2010}.
+	In Experimenten wird diese Ungleichung regelmäßig verletzt, wie Alain Aspect 1982 und spätere Tests bewiesen haben \cite{Aspect1982}. Im Feldmodell ist diese Verletzung keine Überraschung: Das Quantenfeld ist von Natur aus nichtlokal, weil es eine globale Struktur besitzt, die lokale Messungen verbindet, ohne dass eine Signalübertragung erforderlich ist.
 	
-	\subsection{Der „Big Bell Test“ von 2018}
-	Der „Big Bell Test“ nutzte Entscheidungen von über 100.000 Menschen weltweit, um Messungseinstellungen in 13 verschiedenen Laboren zu steuern \cite{BigBellTest2018}. Diese menschliche Komponente adressierte die Freiheitswahl-Lücke auf neuartige Weise. Die Ergebnisse zeigten eine Verletzung der Bell-Ungleichungen mit statistischen Signifikanzen bis zu 70 Standardabweichungen.
+	Die Wiener Experimente von 2015 unter der Leitung von Anton Zeilinger waren ein Meilenstein, da sie alle klassischen Lücken – wie Detektionseffizienz oder räumliche Trennung – schlossen \cite{Giustina2015}. Mit einer Signifikanz von über 11 Standardabweichungen bestätigten sie die Nichtlokalität. Ebenso beeindruckend war der „Big Bell Test“ von 2018, bei dem über 100.000 Menschen weltweit die Messungseinstellungen steuerten, um die Freiheitswahl-Lücke zu adressieren \cite{BigBellTest2018}. Diese Experimente zeigen, dass Quantenkorrelationen real sind, und im T0-Feldmodell finden sie eine natürliche Erklärung als Eigenschaften eines kohärenten Quantenfelds.
 	
 	\section{Feldtheorie und Instantaneität}
-	\subsection{Schallwellen als Analogie}
-	Schallwellen bieten eine nützliche Analogie zum Verständnis des Feldkonzepts \cite{Bohm1980}:
-	\begin{itemize}
-		\item Schall existiert als Druckwelle, die den gesamten Raum durchdringt.
-		\item Ein Mikrofon misst die Schwingung lokal, doch die Welle selbst ist global präsent.
-		\item Die Gleichzeitigkeit von Messungen an verschiedenen Mikrofonen ergibt sich aus der kohärenten Struktur der Schallwelle.
-	\end{itemize}
-	Im Feldmodell sind verschränkte Teilchen wie Knoten in einem globalen Quantenfeld. Die Korrelationen zwischen ihnen sind keine „Fernwirkung“, sondern inhärente Eigenschaften des Feldes, die lokal bei der Messung abgetastet werden. Das Higgs-Feld spielt eine besondere Rolle als universelles Medium, das nicht nur Masse verleiht, sondern auch die intrinsische Zeitskala aller Teilchen bestimmt, wie in der Zeit-Masse-Dualitätstheorie beschrieben \cite{Pascher2024}.
 	
-	\subsection{Warum diese Analogie wichtig ist}
-	\subsubsection{Auflösung des Paradoxons}
-	Nichtlokalität erscheint nur paradox, wenn Teilchen als separate Objekte betrachtet werden. Im Feldmodell sind sie Teile eines Ganzen – wie Schallwellenpunkte in einem Raum \cite{Bohm1980}.
-	\subsubsection{Realität des Feldes}
-	Das Quantenfeld ist keine Abstraktion, sondern die fundamentale Entität \cite{Weinberg1995}. Seine Eigenschaften (Kohärenz, Nichtlokalität) sind ebenso real wie die eines Schallwellenfeldes.
-	\subsubsection{Experimentelle Konsequenz}
-	Wenn Alice und Bob verschränkte Photonen messen, „lauschen“ sie im Wesentlichen zwei Mikrofonen, die dieselbe Schallwelle abtasten. Die Korrelationen sind bereits im Feld enthalten, nicht erst durch die Messung erzeugt \cite{Zeilinger2010}.
+	Um die Idee der Instantaneität greifbarer zu machen, ziehe ich eine Analogie zu Schallwellen heran. Wenn eine Schallwelle durch einen Raum läuft, ist sie überall präsent, doch ein Mikrofon misst nur die lokale Schwingung. Zwei Mikrofone, die dieselbe Welle aufnehmen, zeigen eine Korrelation, die nicht durch eine instantane Kommunikation zwischen ihnen entsteht, sondern durch die gemeinsame Struktur der Welle. Ähnlich verhält es sich im Quantenfeldmodell: Verschränkte Teilchen sind Knoten eines globalen Felds, und ihre Korrelationen sind bereits im Feldzustand enthalten, bevor eine Messung erfolgt.
 	
-	Im Kontext der Zeit-Masse-Dualität erhält diese Korrelation eine zusätzliche zeitliche Dimension: Das intrinsische Zeitfeld \( \Tfield = \frac{\hbar}{\max(m c^2, \omega)} \) bestimmt die Zeitskala der Feldkorrelationen und bietet eine natürliche Erklärung für die beobachteten Kohärenzzeiten und deren Massenabhängigkeit \cite{Pascher2024}.
+	Diese Analogie löst das Paradoxon der Nichtlokalität auf. Es gibt keine „Fernwirkung“, sondern eine inhärente Kohärenz des Feldes, die durch das intrinsische Zeitfeld \(\Tfield\) gesteuert wird, wie es in „Dynamische Masse von Photonen“ \cite{pascher_photons_2025} beschrieben wird. Das Higgs-Feld spielt hierbei eine zentrale Rolle, indem es die Masse und damit die Zeitskala der Feldknoten definiert, was die beobachteten Korrelationen mit der Zeit-Masse-Dualität verknüpft.
 	
 	\section{Feldgleichungen in dualer Formulierung}
-	\subsection{Modifizierte Quantenmechanik mit variabler Masse}
-	Im Gegensatz zur herkömmlichen Schrödinger-Gleichung:
-	\begin{equation}
-		i\hbar \frac{\partial}{\partial t}\Psi(x,t) = \hat{H}\Psi(x,t)
-	\end{equation}
-	führt die Zeit-Masse-Dualität eine fundamentale Modifikation ein:
+	
+	Die Quantenmechanik im T0-Modell wird durch eine modifizierte Schrödinger-Gleichung beschrieben, die die variable Masse einbezieht. Im Gegensatz zur klassischen Form \(i\hbar \frac{\partial}{\partial t} \Psi = \hat{H} \Psi\) lautet sie hier:
+	
 	\begin{equation}
 		i\hbar \Tfield \frac{\partial}{\partial t} \Psi + i\hbar \Psi \frac{\partial \Tfield}{\partial t} = \hat{H} \Psi
 	\end{equation}
 	
-	\subsection{Lagrange-Formulierung}
-	Die Gesamt-Lagrangedichte des T0-Modells lautet:
+	Dieser Ansatz, der in „Die Notwendigkeit der Erweiterung der Standard-Quantenmechanik“ \cite{pascher_quantum_2025} entwickelt wurde, reflektiert die Zeit-Masse-Dualität und integriert sie in die Feldtheorie. Die Gesamt-Lagrangedichte des Modells lautet:
 	\begin{equation}
-		\mathcal{L}_{\text{Total}} = \mathcal{L}_{\text{Boson}} + \mathcal{L}_{\text{Fermion}} + \mathcal{L}_{\text{Higgs-T}} + \mathcal{L}_{\text{intrinsic}}, \quad \mathcal{L}_{\text{intrinsic}} = \frac{1}{2} \partial_\mu \Tfield \partial^\mu \Tfield - V(\Tfield)
+		\mathcal{L}_{\text{Total}} = \mathcal{L}_{\text{Boson}} + \mathcal{L}_{\text{Fermion}} + \mathcal{L}_{\text{Higgs-T}} + \mathcal{L}_{\text{intrinsic}}
 	\end{equation}
+	wobei \(\mathcal{L}_{\text{intrinsic}} = \frac{1}{2} \partial_\mu \Tfield \partial^\mu \Tfield - V(\Tfield)\) die Dynamik des Zeitfelds beschreibt, wie in „Mathematische Kernformulierungen“ \cite{pascher_lagrange_2025} ausgeführt.
 	
 	\section{Kosmologische Implikationen}
-	Das T0-Modell hat folgende Implikationen:
-	\begin{itemize}
-		\item Modifiziertes Gravitationspotential: \( \Phi(r) = -\frac{GM}{r} + \kappa r \), \( \kappa \approx 4.8 \times 10^{-11} \, \text{m/s}^2 \)
-		\item Kosmische Rotverschiebung: \( 1 + z = e^{\alpha d} \), \( \alpha \approx 2.3 \times 10^{-28} \, \text{m}^{-1} \)
-		\item Wellenlängenabhängigkeit: \( z(\lambda) = z_0 (1 + \beta \ln(\lambda/\lambda_0)) \), \( \beta \approx 0.008 \)
-	\end{itemize}
-	Gravitation entsteht aus \( \nabla \Tfield \).
 	
-	\section{Unsicherheit bei \(\beta\)}
-	Der Parameter \( \beta \approx 0.008 \) ist unsicher; weitere Tests sind erforderlich.
+	Das T0-Modell hat weitreichende Implikationen für die Kosmologie, die mit der Feldperspektive übereinstimmen. Das Gravitationspotential wird modifiziert zu \(\Phi(r) = -\frac{G M}{r} + \kappa r\), wobei \(\kappa \approx \SI{4.8e-11}{\meter\per\second\squared}\) aus der \(\Tfield\)-Dynamik emergiert, wie in „Massenvariation in Galaxien“ \cite{pascher_galaxies_2025} gezeigt. Die kosmische Rotverschiebung wird als Energieverlust beschrieben: \(1 + z = e^{\alpha d}\), mit \(\alpha \approx \SI{2.3e-18}{\per\meter}\), wie in „Messdifferenzen“ \cite{pascher_messdifferenzen_2025} hergeleitet. Eine wellenlängenabhängige Rotverschiebung ergibt sich mit \(z(\lambda) = z_0 (1 + \betaT \ln(\lambda/\lambda_0))\), wobei \(\betaT^{\text{SI}} \approx 0.008\) und \(\betaT^{\text{nat}} = 1\) ist, wie in „Parameterableitungen“ \cite{pascher_params_2025} festgelegt. Diese Effekte zeigen, wie das Quantenfeldmodell nahtlos in die kosmologischen Aspekte des T0-Modells integriert werden kann.
 	
 	\section{Schlussfolgerung}
-	Das T0-Modell bietet eine neue Perspektive auf Quantenkorrelationen als Feldeigenschaften, integriert mit der Zeit-Masse-Dualität, und stellt einen konsistenten Rahmen bereit, der durch moderne Bell-Experimente gestützt wird.
 	
-	\begin{thebibliography}{9}
-		\bibitem{wesentlicheFormalismen} Pascher, J. (2025). \textit{Wesentliche mathematische Formalismen der Zeit-Masse-Dualitätstheorie mit Lagrange-Dichten}. 29. März 2025.
+	Das T0-Modell bietet eine neue Sichtweise auf Quantenkorrelationen, indem es sie als natürliche Eigenschaften eines einheitlichen Quantenfelds erklärt, das durch das intrinsische Zeitfeld \(\Tfield\) gesteuert wird. Diese Perspektive löst das Paradoxon der Instantaneität auf, indem sie Nichtlokalität als inhärente Kohärenz des Feldes interpretiert, unterstützt durch moderne Bell-Experimente wie die von Zeilinger und dem „Big Bell Test“. Durch die Integration mit der Zeit-Masse-Dualität, wie sie in den Arbeiten zur Quantenmechanik und Kosmologie des T0-Modells entwickelt wurde, entsteht ein kohärenter Rahmen, der die Grenzen zwischen Quantenphysik und Feldtheorie überwindet.
+	
+	\begin{thebibliography}{99}
+		\bibitem{pascher_params_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Zeit-Masse-Dualitätstheorie (T0-Modell) Herleitung der Parameter kappa, alpha und beta.pdf}{Zeit-Masse-Dualitätstheorie (T0-Modell): Ableitung der Parameter \(\kappa\), \(\alpha\) und \(\beta\)}. 4. April 2025.
+		\bibitem{pascher_galaxies_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Massenvariation in Galaxien.pdf}{Massenvariation in Galaxien: Eine Analyse im T0-Modell mit emergenter Gravitation}. 30. März 2025.
+		\bibitem{pascher_messdifferenzen_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Analyse der Messdifferenzen zwischen dem T0-Modell und dem Standardmodell.pdf}{Kompensatorische und additive Effekte: Eine Analyse der Messdifferenzen zwischen dem T0-Modell und dem \(\Lambda\)CDM-Standardmodell}. 2. April 2025.
+		\bibitem{pascher_lagrange_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Mathematische Formulierungen der Zeit-Masse-Dualitätstheorie mit Lagrange.pdf}{Von Zeitdilatation zu Massenvariation: Mathematische Kernformulierungen der Zeit-Masse-Dualitätstheorie}. 29. März 2025.
+		\bibitem{pascher_photons_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Dynamische Masse von Photonen und ihre Implikationen für Nichtlokalität.tex}{Dynamische Masse von Photonen und ihre Auswirkungen auf Nichtlokalität im T0-Modell}. 25. März 2025.
+		\bibitem{pascher_quantum_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Die Notwendigkeit einer Erweiterung der Standard-Quantenmechanik und Quantenfeldtheorie.pdf}{Die Notwendigkeit der Erweiterung der Standard-Quantenmechanik und Quantenfeldtheorie}. 27. März 2025.
+		\bibitem{Hensen2015} Hensen, B., et al. (2015). \textit{Loophole-free Bell inequality violation using electron spins separated by 1.3 kilometres}. Nature, 526, 682-686.
+		\bibitem{Giustina2015} Giustina, M., et al. (2015). \textit{Significant-loophole-free test of Bell’s theorem with entangled photons}. Physical Review Letters, 115, 250401.
+		\bibitem{BigBellTest2018} The BIG Bell Test Collaboration. (2018). \textit{Challenging local realism with human choices}. Nature, 557, 212-216.
+		\bibitem{Bell1964} Bell, J. S. (1964). \textit{On the Einstein-Podolsky-Rosen paradox}. Physics, 1(3), 195-200.
+		\bibitem{Aspect1982} Aspect, A., et al. (1982). \textit{Experimental test of Bell's inequalities using time-varying analyzers}. Physical Review Letters, 49, 1804-1807.
+		\bibitem{Wilczek2008} Wilczek, F. (2008). \textit{The Lightness of Being: Mass, Ether, and the Unification of Forces}. Basic Books.
+		\bibitem{Milonni1994} Milonni, P. W. (1994). \textit{The Quantum Vacuum: An Introduction to Quantum Electrodynamics}. Academic Press.
+		\bibitem{Aitchison2004} Aitchison, I. J. R. (2004). \textit{An Informal Introduction to Gauge Field Theories}. Cambridge University Press.
+		\bibitem{Weinberg1995} Weinberg, S. (1995). \textit{The Quantum Theory of Fields}. Cambridge University Press.
+		\bibitem{Fox2006} Fox, M. (2006). \textit{Quantum Optics: An Introduction}. Oxford University Press.
+		\bibitem{Zeilinger2010} Zeilinger, A. (2010). \textit{Dance of the Photons: From Einstein to Quantum Teleportation}. Farrar, Straus and Giroux.
+		\bibitem{Bohm1980} Bohm, D. (1980). \textit{Wholeness and the Implicate Order}. Routledge.
 	\end{thebibliography}
 	
 \end{document}

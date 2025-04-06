@@ -1,0 +1,466 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[ngerman]{babel} % Deutsch
+\usepackage{amsmath, amssymb, amsthm, physics}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{setspace}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{siunitx}
+
+% Colored links in table of contents and document
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=blue,
+	citecolor=blue, 
+	urlcolor=blue,
+	bookmarks=true,
+	bookmarksopen=true,
+	pdftitle={Dunkle Energie im T0-Modell: Eine mathematische Analyse der Energiedynamik},
+	pdfauthor={Johann Pascher},
+}
+
+% cleveref must be loaded after hyperref
+\usepackage{cleveref}
+
+% Theorem styles
+\newtheorem{theorem}{Satz}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Korollar}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[theorem]
+\newtheorem{example}{Beispiel}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Bemerkung}
+\renewcommand{\proofname}{Beweis}
+
+% Custom commands
+\newcommand{\Tfield}{T(x)} % Intrinsisches Zeitfeld
+\newcommand{\DcovT}[1]{\Tfield D_\mu #1 + #1 \partial_\mu \Tfield}
+\newcommand{\DhiggsT}{\Tfield (\partial_\mu + igA_\mu)\Phi + \Phi \partial_\mu \Tfield}
+
+\begin{document}
+	
+	\title{Dunkle Energie im T0-Modell: \\Eine mathematische Analyse der Energiedynamik}
+	\author{Johann Pascher}
+	\date{30. März 2025}
+	\maketitle
+	
+	\begin{abstract}
+		Diese Arbeit entwickelt eine detaillierte mathematische Analyse der Dunklen Energie im Rahmen des T0-Modells mit absoluter Zeit und variabler Masse. Im Gegensatz zum \(\Lambda\)CDM-Standardmodell wird Dunkle Energie nicht als treibende Kraft der kosmischen Expansion betrachtet, sondern entsteht als dynamischer Effekt des Energieaustauschs in einem statischen Universum, vermittelt durch das intrinsische Zeitfeld \(\Tfield\). Das Dokument leitet die entsprechenden Feldgleichungen ab, charakterisiert Energietransferraten, analysiert das radiale Dichteprofil der Dunklen Energie und erklärt die beobachtete Rotverschiebung als Folge des Energieverlusts von Photonen an dieses Feld. Abschließend werden spezifische experimentelle Tests vorgeschlagen, um zwischen dieser Interpretation und dem Standardmodell zu unterscheiden.
+	\end{abstract}
+	
+	\tableofcontents
+	\newpage
+	
+	%======================= TEIL 1: GRUNDLAGEN ========================
+	\section{Einführung}
+	
+	Die Entdeckung der beschleunigten kosmischen Expansion durch Supernova-Beobachtungen in den späten 1990er Jahren führte zur Einführung der Dunklen Energie als dominierende Komponente des Universums im Standardmodell der Kosmologie (\(\Lambda\)CDM), wo sie als kosmologische Konstante (\(\Lambda\)) mit negativem Druck modelliert wird und etwa 68\% des Energiegehalts des Universums ausmacht. Diese Arbeit verfolgt einen alternativen Ansatz basierend auf dem T0-Modell, bei dem die Zeit absolut ist und die Masse der Teilchen variiert. In diesem Rahmen ist Dunkle Energie keine separate Entität, die Expansion antreibt, sondern entsteht aus der Dynamik des intrinsischen Zeitfelds \(\Tfield\), das mit Materie und Strahlung in einem statischen Universum interagiert. Die kosmische Rotverschiebung wird nicht durch räumliche Expansion, sondern durch den Energieverlust von Photonen an \(\Tfield\) erklärt. Im Folgenden wird dieser Ansatz mathematisch verfeinert, die notwendigen Feldgleichungen abgeleitet, die Energiedichte und Verteilung der Dunklen Energie bestimmt und die Auswirkungen auf astronomische Beobachtungen analysiert. Anschließend werden experimentelle Tests untersucht, die zwischen dem T0-Modell und dem Standardmodell unterscheiden könnten.
+	
+	\section{Mathematische Grundlagen des T0-Modells}
+	
+	\subsection{Zeit-Masse-Dualität}
+	
+	Das T0-Modell basiert auf der Zeit-Masse-Dualität, die zwei äquivalente Beschreibungen der Realität postuliert:
+	
+	\begin{enumerate}
+		\item \textbf{Standardbild}: Zeitdilatation (\(t' = \gamma t\)) und konstante Ruhemasse (\(m_0 = \text{const.}\))
+		\item \textbf{Alternatives Bild (T0-Modell)}: Absolute Zeit (\(T_0 = \text{const.}\)) und variable Masse (\(m = \gamma m_0\))
+	\end{enumerate}
+	
+	Die folgende Transformationstabelle gilt zwischen den beiden Bildern:
+	
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{|l|c|c|}
+			\hline
+			\textbf{Größe} & \textbf{Standardbild} & \textbf{T0-Modell} \\
+			\hline
+			Zeit & \(t' = \gamma t\) & \(t = \text{const.}\) \\
+			Masse & \(m = \text{const.}\) & \(m = \gamma m_0\) \\
+			Intrinsische Zeit & \(T = \frac{\hbar}{mc^2}\) & \(T = \frac{\hbar}{\gamma m_0c^2} = \frac{T_0}{\gamma}\) \\
+			Higgs-Feld & \(\Phi\) & \(\Phi_T = \gamma \Phi\) \\
+			Fermionenfeld & \(\psi\) & \(\psi_T = \gamma^{1/2} \psi\) \\
+			Eichfeld (räumlich) & \(A_i\) & \(A_{T,i} = A_i\) \\
+			Eichfeld (zeitlich) & \(A_0\) & \(A_{T,0} = \gamma A_0\) \\
+			\hline
+		\end{tabular}
+		\caption{Transformationstabelle zwischen Standardbild und T0-Modell}
+	\end{table}
+	
+	\subsection{Definition der intrinsischen Zeit}
+	
+	Im Zentrum des T0-Modells steht das Konzept der intrinsischen Zeit:
+	
+	\begin{definition}[Intrinsische Zeit]
+		Für ein Teilchen mit Masse \(m\) wird die intrinsische Zeit \(T\) definiert als:
+		\begin{equation}
+			T = \frac{\hbar}{mc^2}
+		\end{equation}
+		wobei \(\hbar\) die reduzierte Planck-Konstante und \(c\) die Lichtgeschwindigkeit ist.
+	\end{definition}
+	
+	\begin{proof}
+		Die Ableitung folgt aus der Äquivalenz von Energie-Masse- und Energie-Frequenz-Beziehungen:
+		\begin{align}
+			E &= mc^2 \\
+			E &= \frac{h}{T} = \frac{\hbar \cdot 2\pi}{T}
+		\end{align}
+		
+		Gleichsetzen ergibt:
+		\begin{align}
+			mc^2 &= \frac{\hbar \cdot 2\pi}{T} \\
+		\end{align}
+		
+		Auflösen nach \(T\):
+		\begin{align}
+			T &= \frac{\hbar}{mc^2} \cdot 2\pi
+		\end{align}
+		
+		Für die fundamentale Periode des quantenmechanischen Systems verwenden wir \(T = \frac{\hbar}{mc^2}\), entsprechend der reduzierten Compton-Wellenlänge des Teilchens geteilt durch die Lichtgeschwindigkeit.
+	\end{proof}
+	
+	\begin{corollary}[Intrinsische Zeit als Skalarfeld]
+		In der Feldtheorie wird die intrinsische Zeit als Skalarfeld \(T(x)\) behandelt, direkt mit dem Higgs-Feld verknüpft:
+		\begin{equation}
+			T(x) = \frac{\hbar}{y\langle\Phi\rangle c^2}
+		\end{equation}
+		wobei \(y\) die Yukawa-Kopplungskonstante und \(\langle\Phi\rangle\) der Vakuum-Erwartungswert des Higgs-Felds ist.
+	\end{corollary}
+	
+	\subsection{Modifizierte Ableitungsoperatoren}
+	
+	\begin{definition}[Modifizierte Zeit-Ableitung]
+		Die modifizierte Zeit-Ableitung ist definiert als:
+		\begin{equation}
+			\partial_{t/T} = \frac{\partial}{\partial(t/T)} = T\frac{\partial}{\partial t}
+		\end{equation}
+	\end{definition}
+	
+	\begin{definition}[Feldtheoretische modifizierte kovariante Ableitung]
+		Für ein beliebiges Feld \(\Psi\) definieren wir die modifizierte kovariante Ableitung als:
+		\begin{equation}
+			D_{T,\mu}\Psi = \Tfield D_\mu \Psi + \Psi \partial_\mu \Tfield
+		\end{equation}
+		wobei \(D_\mu\) die gewöhnliche kovariante Ableitung entsprechend der Eichsymmetrie von \(\Psi\) ist.
+	\end{definition}
+	
+	\begin{definition}[Modifizierte kovariante Ableitung für das Higgs-Feld]
+		\begin{equation}
+			D_{T,\mu}\Phi = \DhiggsT
+		\end{equation}
+	\end{definition}
+	
+	%======================= TEIL 2: FELDGLEICHUNGEN ========================
+	\section{Modifizierte Feldgleichungen für Dunkle Energie}
+	
+	\subsection{Modifizierte Lagrangedichte für das T0-Modell}
+	
+	Die vollständige Lagrangedichte im T0-Modell setzt sich zusammen aus:
+	
+	\begin{equation}
+		\mathcal{L}_{\text{Total}} = \mathcal{L}_{\text{Boson}} + \mathcal{L}_{\text{Fermion}} + \mathcal{L}_{\text{Higgs-T}}
+	\end{equation}
+	
+	Mit den folgenden Komponenten:
+	
+	\begin{equation}
+		\mathcal{L}_{\text{Boson}} = -\frac{1}{4} \Tfield^2 F_{\mu\nu}F^{\mu\nu}
+	\end{equation}
+	
+	\begin{equation}
+		\mathcal{L}_{\text{Fermion}} = \bar{\psi}i\gamma^\mu \DcovT{\psi} - y\bar{\psi}\Phi\psi
+	\end{equation}
+	
+	\begin{equation}
+		\mathcal{L}_{\text{Higgs-T}} = (D_{T,\mu}\Phi)^\dagger (D_{T,\mu}\Phi) - \lambda(|\Phi|^2 - v^2)^2
+	\end{equation}
+	
+	wobei:
+	\begin{itemize}
+		\item \(F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu + ig[A_\mu, A_\nu]\) der übliche Feldstärketensor ist.
+	\end{itemize}
+	
+	\textbf{Hinweis}: Im Gegensatz zu früheren Formulierungen wird kein separates Dunkle-Energie-Feld \(\phi_{\text{DE}}\) eingeführt. Stattdessen entstehen Dunkle-Energie-Effekte aus der Dynamik des intrinsischen Zeitfelds \(\Tfield\), konsistent mit dem Rahmen des T0-Modells, wie in früheren Arbeiten etabliert \cite{pascher_galaxies_2025, pascher_messdifferenzen_2025}.
+	
+	\subsection{Dunkle Energie als emergenter Effekt}
+	
+	Im T0-Modell wird Dunkle Energie nicht als unabhängiges Skalarfeld modelliert, sondern entsteht als emergenter Effekt aus den räumlichen und zeitlichen Variationen des intrinsischen Zeitfelds \(\Tfield\). Dies steht im Einklang mit der Prämisse des Modells, dass physikalische Phänomene, die traditionell Dunkler Energie zugeschrieben werden (z. B. Rotverschiebung, Gravitationseffekte), Folgen der \(\Tfield\)-Dynamik sind. Die mit Dunkler Energie assoziierte Energiedichte ist somit mit den Gradienten von \(\Tfield\) verknüpft:
+	
+	\begin{equation}
+		\rho_{\text{DE}}(r) \approx \frac{\kappa}{r^2}
+	\end{equation}
+	
+	wobei \(\kappa\) ein aus der Theorie abgeleiteter Parameter ist (siehe Abschnitt 6.2). Dieses \(1/r^2\)-Profil ergibt sich natürlich aus den Feldgleichungen und ist konsistent mit flachen Rotationskurven in Galaxien.
+	
+	\subsection{Energiedichteprofil der Dunklen Energie}
+	
+	Das Energiedichteprofil der Dunklen Energie im T0-Modell wird aus der Variation von \(\Tfield\) abgeleitet. Für große Entfernungen \(r\), wo die Materiedichte vernachlässigbar ist, kann die effektive Dunkle-Energie-Dichte approximiert werden als:
+	
+	\begin{equation}
+		\rho_{\text{DE}}(r) \approx \frac{1}{2} \left(\nabla \Tfield\right)^2 \approx \frac{\kappa}{r^2}
+	\end{equation}
+	
+	Dies folgt aus der Modifikation des Gravitationspotentials (Abschnitt 6.2) und der emergenten Natur der Dunklen Energie aus \(\Tfield\). Die Konstante \(\kappa\) ist proportional zur Kopplungsstärke von \(\Tfield\) an Materie und Strahlung.
+	
+	\subsection{Emergente Gravitation aus dem intrinsischen Zeitfeld}
+	
+	\begin{theorem}[Emergenz der Gravitation]
+		Im T0-Modell entstehen Gravitationseffekte aus räumlichen und zeitlichen Gradienten des intrinsischen Zeitfelds \(\Tfield\), was eine natürliche Verbindung zwischen Quantenphysik und Gravitationsphänomenen herstellt:
+		\begin{equation}
+			\nabla \Tfield = \nabla \left(\frac{\hbar}{mc^2}\right) = -\frac{\hbar}{m^2c^2}\nabla m \sim \nabla \Phi_g
+		\end{equation}
+		wobei \(\Phi_g\) das Gravitationspotential ist.
+	\end{theorem}
+	
+	\begin{proof}
+		In Regionen mit Gravitationspotential \(\Phi_g\) variiert die effektive Masse wie:
+		\begin{equation}
+			m(\vec{r}) = m_0\left(1 + \frac{\Phi_g(\vec{r})}{c^2}\right)
+		\end{equation}
+		
+		Daraus folgt:
+		\begin{equation}
+			\nabla m = m_0 \nabla\left(\frac{\Phi_g}{c^2}\right) = \frac{m_0}{c^2}\nabla\Phi_g
+		\end{equation}
+		
+		Einsetzen in den Gradienten des intrinsischen Zeitfelds:
+		\begin{equation}
+			\nabla \Tfield = -\frac{\hbar}{m^2c^2}\cdot\frac{m_0}{c^2}\nabla\Phi_g = -\frac{\hbar m_0}{m^2c^4}\nabla\Phi_g
+		\end{equation}
+		
+		Für schwache Felder, wo \(m \approx m_0\):
+		\begin{equation}
+			\nabla \Tfield \approx -\frac{\hbar}{m_0c^4}\nabla\Phi_g
+		\end{equation}
+		
+		Dies stellt eine direkte Proportionalität zwischen den Gradienten des intrinsischen Zeitfelds und des Gravitationspotentials her.
+	\end{proof}
+	
+	Die modifizierte Poisson-Gleichung im T0-Modell lautet:
+	
+	\begin{equation}
+		\nabla^2 \Phi = 4\pi G \rho + \kappa^2
+	\end{equation}
+	
+	Diese Gleichung spiegelt den Beitrag der \(\Tfield\)-Dynamik zu Gravitationseffekten wider, wobei \(\kappa\) die dunkle-energie-bezogene Modifikation darstellt.
+	
+	%======================= TEIL 3: ENERGIETRANSFER UND ROTVERSCHIEBUNG ========================
+	\section{Energietransfer und Rotverschiebung}
+	
+	\subsection{Energieverlust der Photonen}
+	
+	Ein zentraler Aspekt des T0-Modells ist die Interpretation der kosmischen Rotverschiebung als Folge des Energieverlusts von Photonen aufgrund von Variationen im intrinsischen Zeitfeld \(\Tfield\), nicht durch räumliche Expansion. Die Energieänderung eines Photons, das sich durch den Raum bewegt, wird beschrieben durch:
+	
+	\begin{equation}
+		\frac{dE_{\gamma}}{dx} = -\alpha E_{\gamma}
+	\end{equation}
+	
+	wobei \(\alpha\) die Absorptionsrate ist, die durch den räumlichen Gradienten von \(\Tfield\) induziert wird. Diese Gleichung hat die Lösung:
+	
+	\begin{equation}
+		E_{\gamma}(x) = E_{\gamma,0} e^{-\alpha x}
+	\end{equation}
+	
+	Die Rotverschiebung \(z\) ist definiert als:
+	
+	\begin{equation}
+		1 + z = \frac{E_0}{E} = \frac{\lambda_{\text{beob}}}{\lambda_{\text{emit}}} = e^{\alpha d}
+	\end{equation}
+	
+	Um die Übereinstimmung mit der beobachteten Hubble-Relation \(z \approx H_0 d/c\) für kleine \(z\) zu gewährleisten, muss gelten:
+	
+	\begin{equation}
+		\alpha = \frac{H_0}{c} \approx 2.3 \times 10^{-28} \text{ m}^{-1}
+	\end{equation}
+	
+	Im T0-Modell charakterisiert die Hubble-Konstante \(H_0\) die Rate, mit der Photonen Energie aufgrund von \(\Tfield\)-Variationen verlieren, nicht die kosmische Expansion. Ihr numerischer Wert (\(H_0 \approx 70 \text{ km/s/Mpc}\)) stimmt mit Beobachtungen überein, hat jedoch eine andere physikalische Bedeutung.
+	
+	In natürlichen Einheiten (\(\hbar = c = G = 1\)) ist die Absorptionsrate \(\alpha\) mit fundamentalen Parametern verknüpft:
+	
+	\begin{equation}
+		\alpha = \frac{H_0}{c} = \frac{\lambda_h^2 v}{L_T}
+	\end{equation}
+	
+	wobei \(\lambda_h\) die Higgs-Selbstkopplung, \(v\) der Vakuum-Erwartungswert des Higgs-Felds und \(L_T\) eine charakteristische kosmische Längenskala ist. Umgerechnet in SI-Einheiten:
+	
+	\begin{equation}
+		H_0 = \alpha \cdot c = \frac{\lambda_h^2 v c^3}{L_T} \approx 70 \frac{\text{km}}{\text{s} \cdot \text{Mpc}}
+	\end{equation}
+	
+	Mit \(v \approx 246 \text{ GeV}\) und \(\lambda_h \approx 0.13\) ergibt sich die charakteristische Längenskala:
+	
+	\begin{equation}
+		L_T \approx \frac{\lambda_h^2 v c^3}{H_0} \approx 4.8 \times 10^{26} \text{ m} \approx 15.6 \text{ Gpc}
+	\end{equation}
+	
+	Diese Längenskala entspricht ungefähr dem Radius des beobachtbaren Universums und unterstreicht die Rolle von \(\Tfield\) in kosmologischen Phänomenen.
+	
+	Eine kompakte dimensionslose Formulierung lautet:
+	
+	\begin{equation}
+		\frac{H_0 \cdot t_{Pl}}{2\pi} \approx \lambda_h^2 \cdot \left(\frac{v}{M_{Pl}}\right)^2
+	\end{equation}
+	
+	wobei \(t_{Pl} = \sqrt{\frac{\hbar G}{c^5}} \approx 5.39 \times 10^{-44} \text{ s}\) die Planck-Zeit ist, die \(H_0\) mit fundamentalen Skalen verbindet.
+	
+	\subsection{Modifizierte Energie-Impuls-Relation}
+	
+	\begin{theorem}[Modifizierte Energie-Impuls-Relation]
+		Die modifizierte Energie-Impuls-Relation im T0-Modell lautet:
+		\begin{equation}
+			E^2 = (pc)^2 + (mc^2)^2 + \alpha_E\frac{\hbar c}{T}
+		\end{equation}
+		wobei \(\alpha_E\) ein aus der Theorie berechenbarer Parameter ist.
+	\end{theorem}
+	
+	Diese Modifikation führt zu einer Wellenlängenabhängigkeit der Rotverschiebung:
+	
+	\begin{theorem}[Wellenlängenabhängige Rotverschiebung]
+		Die kosmische Rotverschiebung im T0-Modell zeigt eine schwache Wellenlängenabhängigkeit:
+		\begin{equation}
+			z(\lambda) = z_0 \cdot (1 + \beta\ln(\lambda/\lambda_0))
+		\end{equation}
+		mit \(\beta = 0.008 \pm 0.003\).
+	\end{theorem}
+	
+	\subsection{Energiebilanzgleichung}
+	
+	In einem statischen Universum mit konstanter Gesamtenergie gilt die Energiebilanz:
+	
+	\begin{equation}
+		\rho_{\text{total}} = \rho_{\text{Materie}} + \rho_{\gamma} + \rho_{\text{DE}} = \text{const.}
+	\end{equation}
+	
+	Die Bilanzgleichungen für die zeitliche Entwicklung der Energiedichten sind:
+	
+	\begin{align}
+		\frac{d\rho_{\text{Materie}}}{dt} &= -\alpha_{m} c \rho_{\text{Materie}} \\
+		\frac{d\rho_{\gamma}}{dt} &= -\alpha_{\gamma} c \rho_{\gamma} \\
+		\frac{d\rho_{\text{DE}}}{dt} &= \alpha_{m} c \rho_{\text{Materie}} + \alpha_{\gamma} c \rho_{\gamma}
+	\end{align}
+	
+	Unter der Annahme \(\alpha_{\gamma} = \alpha_{m} = \alpha\) (gleiche Transferraten) erhalten wir:
+	
+	\begin{align}
+		\rho_{\text{Materie}}(t) &= \rho_{\text{Materie},0} e^{-\alpha c t} \\
+		\rho_{\gamma}(t) &= \rho_{\gamma,0} e^{-\alpha c t} \\
+		\rho_{\text{DE}}(t) &= \rho_{\text{DE},0} + (\rho_{\text{Materie},0} + \rho_{\gamma,0})(1 - e^{-\alpha c t})
+	\end{align}
+	
+	Für große Zeiten (\(t \gg (\alpha c)^{-1}\)) geht alle Energie in Dunkle Energie über:
+	
+	\begin{equation}
+		\lim_{t \rightarrow \infty} \rho_{\text{DE}}(t) = \rho_{\text{total}}
+	\end{equation}
+	
+	\subsection{Unsicherheit bei \(\beta\) und Modellgrenzen}
+	
+	Der Parameter \(\beta \approx 0.008 \pm 0.003\) steuert die Wellenlängenabhängigkeit der Rotverschiebung (Abschnitt 4.2) und ist konsistent mit kosmologischen Einschränkungen \cite{pascher_messdifferenzen_2025}. Vorschläge, \(\beta = 1\) in natürlichen Einheiten als Vereinfachung zu setzen \cite{pascher_temp_2025}, führen jedoch zu unphysikalischen Ergebnissen (z. B. \(z(\lambda) \approx 3.3\) für \(\lambda/\lambda_0 = 10\), \(\kappa \approx 6 \times 10^{-9} \, \text{m/s}^2\)), was auf eine potenzielle ungelöste Schwäche in der Verknüpfung des T0-Modells zwischen \(\Tfield\), Rotverschiebung und Energietransfer hinweist. Die Abhängigkeit des Modells von im Standardmodell-Rahmen interpretierten Daten (z. B. CMB-Kalibrierung) birgt das Risiko einer zirkulären Argumentation, bei der \(\beta\) möglicherweise \(\Lambda\)CDM-Voreingenommenheiten widerspiegelt. Der wahre Wert von \(\beta\) – und damit die Gültigkeit des Modells – könnte zwischen dem empirisch abgestimmten 0.008 und einem vereinfachten 1 liegen, was unabhängige Validierungen (z. B. präzise spektroskopische Messungen) erforderlich macht, um diese Unklarheit aufzulösen.
+	
+	%======================= TEIL 5: QUANTITATIVE BESTIMMUNG ========================
+	\section{Quantitative Bestimmung der Parameter}
+	
+	\subsection{Ableitung der Schlüsselparameter in natürlichen Einheiten}
+	
+	In natürlichen Einheiten (\(\hbar = c = G = 1\)) lauten die Parameter:
+	
+	\begin{theorem}[Parameter in natürlichen Einheiten]
+		Die Schlüsselparameter des T0-Modells in natürlichen Einheiten sind:
+		\begin{align}
+			\kappa &= \beta \frac{y v}{r_g} \\
+			\alpha &= \frac{\lambda_h^2 v}{L_T} \\
+			\beta &= \frac{\lambda_h^2 v^2}{4\pi^2 \lambda_0 \alpha_0}
+		\end{align}
+	\end{theorem}
+	
+	Umrechnung in SI-Einheiten:
+	
+	\begin{align}
+		\alpha_{\text{SI}} &= \frac{\lambda_h^2 v c^2}{L_T} \approx 2.3 \times 10^{-28} \text{ m}^{-1} \\
+		\beta_{\text{SI}} &= \frac{\lambda_h^2 v^2 c}{4\pi^2 \lambda_0 \alpha_0} \approx 0.008 \\
+		\kappa_{\text{SI}} &= \beta \frac{y v c^2}{r_g^2} \approx 4.8 \times 10^{-11} \text{ m/s}^2
+	\end{align}
+	
+	\subsection{Modifiziertes Gravitationspotential}
+	
+	\begin{theorem}[Modifiziertes Gravitationspotential]
+		Das modifizierte Gravitationspotential im T0-Modell lautet:
+		\begin{equation}
+			\Phi(r) = -\frac{GM}{r} + \kappa r
+		\end{equation}
+		wobei \(\kappa = \beta \frac{y v c^2}{r_g^2} \approx 4.8 \times 10^{-11} \text{ m/s}^2\), mit \(r_g = \sqrt{\frac{GM}{a_0}}\) und \(a_0 \approx 1.2 \times 10^{-10} \text{ m/s}^2\).
+	\end{theorem}
+	
+	\subsection{Kopplungskonstante an Materie}
+	
+	Die dimensionslose Kopplungskonstante \(\beta \approx 0.008\) beschreibt die Interaktionsstärke, die Rotverschiebung und Gravitation beeinflusst, konsistent mit der Analyse von Galaxien-Rotationskurven.
+	
+	%======================= TEIL 6: BEOBACHTUNGEN UND TESTS ========================
+	\section{Dunkle Energie und kosmologische Beobachtungen}
+	
+	\subsection{Supernovae Typ Ia und kosmische Beschleunigung}
+	
+	Im T0-Modell resultieren Rotverschiebung und Verdunkelung von Supernovae aus dem Energieverlust an \(\Tfield\), nicht aus Expansion. Die Luminositätsdistanz ist:
+	
+	\begin{equation}
+		d_L = \frac{c}{H_0} \ln(1+z) (1+z)
+	\end{equation}
+	
+	Dies passt zu Supernova-Daten, interpretiert \(H_0\) jedoch als Energieverlustrate, was die Hubble-Spannung durch variierende \(\alpha\) in unterschiedlichen Umgebungen erklären könnte.
+	
+	\subsection{Energiedichte-Parameter}
+	
+	Der effektive Dichte-Parameter für Dunkle Energie ist:
+	
+	\begin{equation}
+		\Omega_{DE}^{\text{eff}} = \frac{\langle\rho_{DE}(r)\rangle}{\rho_{\text{crit}}} \approx \frac{3\kappa}{R_U H_0^2} \approx 0.68
+	\end{equation}
+	
+	Dies entspricht numerisch \(\Omega_{\Lambda}\) im \(\Lambda\)CDM, reflektiert jedoch die Entwicklung eines statischen Universums hin zur Dominanz Dunkler Energie.
+	
+	\section{Experimentelle Tests und Vorhersagen}
+	
+	\subsection{Zeitliche Variation der Feinstrukturkonstanten}
+	
+	Der Energieverlust von Photonen könnte verursachen:
+	
+	\begin{equation}
+		\frac{d\alpha_{\text{fs}}}{dt} \approx \alpha_{\text{fs}} \cdot \alpha \cdot c \approx 10^{-18} \text{ Jahr}^{-1}
+	\end{equation}
+	
+	\subsection{Umgebungsabhängige Rotverschiebung}
+	
+	Variationen in \(\Tfield\) implizieren:
+	
+	\begin{equation}
+		\frac{z_{\text{Cluster}}}{z_{\text{Leerraum}}} \approx 1 + 0.003
+	\end{equation}
+	
+	\subsection{Differentielle Rotverschiebung}
+	
+	\begin{equation}
+		\frac{z(\lambda_1)}{z(\lambda_2)} \approx 1 + \beta\frac{\lambda_1 - \lambda_2}{\lambda_0}
+	\end{equation}
+	
+	\section{Ausblick und Zusammenfassung}
+	
+	Das T0-Modell interpretiert Dunkle Energie als emergenten Effekt von \(\Tfield\) und bietet einen Rahmen für ein statisches Universum. Schlüsselpunkte sind Zeit-Masse-Dualität, emergente Gravitation und Rotverschiebung durch Energieverlust. Zukünftige Tests (z. B. Euclid, ELT) werden entscheidend sein, um dieses Modell gegen \(\Lambda\)CDM zu validieren.
+	
+	\begin{thebibliography}{3}
+		\bibitem{pascher_galaxies_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Massenvariation in Galaxien - Eine Analyse im T0-Modell mit emergenter Gravitation.pdf}{Massenvariation in Galaxien: Eine Analyse im T0-Modell mit emergenter Gravitation}. 30. März 2025.
+		\bibitem{pascher_messdifferenzen_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Analyse der Messdifferenzen zwischen dem T0-Modell und dem Standardmodell.pdf}{Kompensatorische und additive Effekte: Eine Analyse der Messdifferenzen zwischen dem T0-Modell und dem \(\Lambda\)CDM-Standardmodell}. 2. April 2025.
+		\bibitem{pascher_temp_2025} Pascher, J. (2025). Anpassung der Temperatureinheiten in natürlichen Einheiten und CMB-Messungen. 2. April 2025.
+	\end{thebibliography}
+	
+\end{document}

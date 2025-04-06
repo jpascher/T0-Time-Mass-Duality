@@ -1,42 +1,61 @@
-\documentclass{article}
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=2cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[ngerman]{babel}
 \usepackage{lmodern}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{physics}
-\usepackage{graphicx}
-\usepackage{xcolor}
-\usepackage{tocloft}
-\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb,physics,graphicx,xcolor,amsthm}
 \usepackage{hyperref}
-\usepackage{cleveref}
-\usepackage[margin=2cm]{geometry}
+\usepackage{booktabs}
 \usepackage{siunitx}
+\usepackage{cleveref}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{tikz}
+\usetikzlibrary{intersections}
+\usepgfplotslibrary{fillbetween}
+\usepackage{fancyhdr} % Hinzugefügt für Kopf- und Fußzeilen
 
-\renewcommand{\cftsecfont}{\color{blue}}
-\renewcommand{\cftsubsecfont}{\color{blue}}
-\renewcommand{\cftsecpagefont}{\color{blue}}
-\renewcommand{\cftsubsecpagefont}{\color{blue}}
-\setlength{\cftsecindent}{1cm}
-\setlength{\cftsubsecindent}{2cm}
+% Custom commands
+\newcommand{\Tfield}{T(x)}
+\newcommand{\betaT}{\beta_{\text{T}}}
+\newcommand{\alphaEM}{\alpha_{\text{EM}}}
+\newcommand{\Tzero}{T_0}
+\newcommand{\DcovT}[1]{\partial_\mu #1 + #1 \partial_\mu \Tfield}
+\newcommand{\DhiggsT}{\Tfield (\partial_\mu + ig A_\mu) \Phi + \Phi \partial_\mu \Tfield}
+\newcommand{\gammaf}{\gamma_{\text{Lorentz}}}
 
+% Theorem styles
+\newtheorem{theorem}{Satz}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Korollar}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Beispiel}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Bemerkung}
+
+% Hyperref configuration
 \hypersetup{
 	colorlinks=true,
 	linkcolor=blue,
 	urlcolor=blue,
-	citecolor=red,
+	citecolor=blue,
 	pdftitle={Von Zeitdilatation zu Massenvariation: Mathematische Kernformulierungen der Zeit-Masse-Dualitätstheorie},
-	pdfauthor={Johann Pascher}
+	pdfauthor={Johann Pascher},
+	pdfsubject={Theoretische Physik},
+	pdfkeywords={T0-Modell, Zeit-Masse-Dualität, emergente Gravitation}
 }
 
-\newcommand{\Tfield}{T(x)}
-\newcommand{\DhiggsT}{\partial_\mu \Phi + \Phi \partial_\mu \Tfield}
-\newcommand{\gammaf}{\gamma_{\text{Lorentz}}}
-
-\newtheorem{theorem}{Satz}[section]
-\newtheorem{proposition}[theorem]{Proposition}
+% Kopf- und Fußzeilen-Konfiguration
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Johann Pascher}
+\fancyhead[R]{Von Zeitdilatation zu Massenvariation} % Angepasst an den Titel
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
 
 \title{Von Zeitdilatation zu Massenvariation: \\ Mathematische Kernformulierungen der Zeit-Masse-Dualitätstheorie}
 \author{Johann Pascher}
@@ -57,7 +76,7 @@
 	Die Zeit-Masse-Dualitätstheorie schlägt einen alternativen Rahmen vor:
 	\begin{enumerate}
 		\item Standard-Sicht: \( t' = \gammaf t \), \( m_0 = \text{konst.} \)
-		\item T0-Modell: \( T_0 = \text{konst.} \), \( m = \gammaf m_0 \)
+		\item T0-Modell: \( \Tzero = \text{konst.} \), \( m = \gammaf m_0 \)
 	\end{enumerate}
 	
 	\subsection{Beziehung zum Standardmodell}
@@ -73,7 +92,7 @@
 	\begin{theorem}[Gravitationsentstehung]
 		Gravitation entsteht aus Gradienten des intrinsischen Zeitfelds:
 		\begin{equation}
-			\nabla \Tfield = -\frac{\hbar}{m^2 c^2} \nabla m \sim \nabla \Phi_g
+			\nabla \Tfield = -\frac{\hbar}{m^2 c^2} \nabla m
 		\end{equation}
 		mit dem modifizierten Potential:
 		\begin{equation}
@@ -103,6 +122,14 @@
 		\end{equation}
 	\end{theorem}
 	
+	\section{Modifizierte Ableitungsoperatoren}
+	\begin{definition}[Modifizierte Ableitung]
+		Die modifizierte kovariante Ableitung im T0-Modell lautet:
+		\begin{equation}
+			\DcovT{\Psi} = \partial_\mu \Psi + \Psi \partial_\mu \Tfield
+		\end{equation}
+	\end{definition}
+	
 	\section{Modifizierte Feldgleichungen}
 	\begin{theorem}[Modifizierte Schrödinger-Gleichung]
 		\begin{equation}
@@ -110,28 +137,66 @@
 		\end{equation}
 	\end{theorem}
 	
-	\section{Lagrange-Formulierung}
-	Die vollständige Gesamt-Lagrangedichte lautet:
-	\begin{equation}
-		\mathcal{L}_{\text{Total}} = \mathcal{L}_{\text{Boson}} + \mathcal{L}_{\text{Fermion}} + \mathcal{L}_{\text{Higgs-T}} + \mathcal{L}_{\text{intrinsic}}, \quad \mathcal{L}_{\text{intrinsic}} = \frac{1}{2} \partial_\mu \Tfield \partial^\mu \Tfield - V(\Tfield)
-	\end{equation}
+	\section{Modifizierte Lagrangedichte für das Higgs-Feld}
+	\begin{theorem}[Higgs-Lagrangedichte]
+		Die Lagrangedichte des Higgs-Felds mit Kopplung an \(\Tfield\) lautet:
+		\begin{multline}
+			\mathcal{L}_{\text{Higgs-T}} = |\DhiggsT|^2 + \frac{1}{2} \partial_\mu \Tfield \partial^\mu \Tfield - V(\Tfield, \Phi), \quad \\
+			\DhiggsT = \Tfield (\partial_\mu + ig A_\mu) \Phi + \Phi \partial_\mu \Tfield
+		\end{multline}
+	\end{theorem}
+	
+	\section{Modifizierte Lagrangedichte für Fermionen}
+	\begin{theorem}[Fermionen-Lagrangedichte]
+		\begin{equation}
+			\mathcal{L}_{\text{Fermion}} = \bar{\psi} i \gamma^\mu (\partial_\mu \psi + \psi \partial_\mu \Tfield) - y \bar{\psi} \Phi \psi
+		\end{equation}
+	\end{theorem}
+	
+	\section{Modifizierte Lagrangedichte für Eichbosonen}
+	\begin{theorem}[Eichbosonen-Lagrangedichte]
+		\begin{equation}
+			\mathcal{L}_{\text{Boson}} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} + \frac{1}{2} \partial_\mu \Tfield \partial^\mu \Tfield
+		\end{equation}
+	\end{theorem}
+	
+	\section{Vollständige Gesamt-Lagrangedichte}
+	\begin{theorem}[Gesamt-Lagrangedichte]
+		\begin{equation}
+			\mathcal{L}_{\text{Total}} = \mathcal{L}_{\text{Boson}} + \mathcal{L}_{\text{Fermion}} + \mathcal{L}_{\text{Higgs-T}} + \mathcal{L}_{\text{intrinsic}}, \quad \mathcal{L}_{\text{intrinsic}} = \frac{1}{2} \partial_\mu \Tfield \partial^\mu \Tfield - V(\Tfield)
+		\end{equation}
+	\end{theorem}
 	
 	\section{Kosmologische Implikationen}
 	Das T0-Modell hat folgende Implikationen:
 	\begin{itemize}
 		\item Modifiziertes Gravitationspotential: \( \Phi(r) = -\frac{GM}{r} + \kappa r \), \( \kappa \approx 4.8 \times 10^{-11} \, \text{m/s}^2 \)
 		\item Kosmische Rotverschiebung: \( 1 + z = e^{\alpha d} \), \( \alpha \approx 2.3 \times 10^{-28} \, \text{m}^{-1} \)
-		\item Wellenlängenabhängigkeit: \( z(\lambda) = z_0 (1 + \beta \ln(\lambda/\lambda_0)) \), \( \beta \approx 0.008 \)
+		\item Wellenlängenabhängigkeit: \( z(\lambda) = z_0 (1 + \betaT \ln(\lambda/\lambda_0)) \), \( \betaT \approx 0.008 \) (SI-Einheiten)
 	\end{itemize}
 	
-	\section{Unsicherheit bei \(\beta\)}
-	Der Parameter \( \beta \approx 0.008 \) ist unsicher; weitere Tests sind erforderlich, um ihn einzugrenzen.
+	\section{Herleitung von \(\betaT\) im T0-Modell}
+	Der Parameter \(\betaT\) beschreibt die Kopplung des intrinsischen Zeitfelds \(\Tfield\) an physikalische Phänomene wie die wellenlängenabhängige Rotverschiebung. Im T0-Modell wird \(\betaT\) präzise hergeleitet als:
+	\begin{equation}
+		\betaT = \frac{\lambda_h^2 v^2}{16\pi^3} \cdot \frac{1}{m_h^2} \cdot \frac{1}{\xi}
+	\end{equation}
+	wobei \(\lambda_h\) die Higgs-Selbstkopplung, \(v\) der Higgs-Vakuumerwartungswert, \(m_h\) die Higgs-Masse und \(\xi \approx 1.33 \times 10^{-4}\) ein dimensionsloser Parameter ist, der die charakteristische Längenskala \(r_0 = \xi \cdot l_P\) definiert (\(l_P\): Planck-Länge). In natürlichen Einheiten gilt \(\betaT = 1\), was eine exakte theoretische Vorhersage darstellt, da sie direkt aus den Modellparametern folgt, wie in \cite{pascher_alphabeta_2025} detailliert beschrieben. Eine ausführliche Herleitung und Diskussion dieses Parameters findet sich in \cite{pascher_alphabeta_2025}.
 	
-	\section{Schlussfolgerung}
-	Diese Arbeit dient als präziser mathematischer Bezugsrahmen für die Zeit-Masse-Dualitätstheorie im T0-Modell, indem sie die grundlegenden Gleichungen und deren physikalische Interpretationen bereitstellt.
-	
-	\begin{thebibliography}{9}
-		\bibitem{wesentlicheFormalismen} Pascher, J. (2025). \textit{Wesentliche mathematische Formalismen der Zeit-Masse-Dualitätstheorie mit Lagrange-Dichten}. 29. März 2025.
+	\begin{thebibliography}{99}
+		\bibitem{pascher_zeit_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Zeit\%20als\%20emergente\%20Eigenschaft\%20in\%20der\%20Quantenmechanik.pdf}{Zeit als emergente Eigenschaft in der Quantenmechanik: Eine Verbindung zwischen Relativität, Feinstrukturkonstante und Quantendynamik}. 23. März 2025.
+		\bibitem{pascher_lagrange_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Mathematische\%20Formulierungen\%20der\%20Zeit-Masse-Dualitätstheorie\%20mit\%20Lagrange.pdf}{Von Zeitdilatation zu Massenvariation: Mathematische Kernformulierungen der Zeit-Masse-Dualitätstheorie}. 29. März 2025.
+		\bibitem{pascher_photon_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Dynamische\%20Masse\%20von\%20Photonen\%20und\%20ihre\%20Implikationen\%20für\%20Nichtlokalität.pdf}{Dynamische Masse von Photonen und ihre Auswirkungen auf Nichtlokalität im T0-Modell}.
+		\bibitem{pascher_erweiterung_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Die\%20Notwendigkeit\%20einer\%20Erweiterung\%20der\%20Standard-Quantenmechanik\%20und\%20Quantenfeldtheorie.pdf}{Die Notwendigkeit der Erweiterung der Standard-Quantenmechanik und Quantenfeldtheorie}. 27. März 2025.
+		\bibitem{pascher_massenvariation_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Massenvariation\%20in\%20Galaxien.pdf}{Massenvariation in Galaxien: Eine Analyse im T0-Modell mit emergenter Gravitation}. 30. März 2025.
+		\bibitem{pascher_higgs_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Mathematische\%20Formulierung\%20des\%20Higgs-Mechanismus\%20in\%20der\%20Zeit-Masse-Dualität.pdf}{Mathematische Formulierung des Higgs-Mechanismus in der Zeit-Masse-Dualität}. 28. März 2025.
+		\bibitem{pascher_feldtheorie_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Feldtheorie\%20und\%20Quantenkorrelationen.pdf}{Feldtheorie und Quantenkorrelationen: Eine neue Perspektive auf Instantaneität}. 28. März 2025.
+		\bibitem{pascher_messdifferenzen_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Analyse\%20der\%20Messdifferenzen\%20zwischen\%20dem\%20T0-Modell\%20und\%20dem\%20Standardmodell.pdf}{Kompensatorische und additive Effekte: Eine Analyse der Messdifferenzen zwischen dem T0-Modell und dem \(\Lambda\)CDM-Standardmodell}. 2. April 2025.
+		\bibitem{pascher_planck_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Jenseits\%20der\%20Planck-Skala.pdf}{Reale Konsequenzen der Umformulierung von Zeit und Masse in der Physik: Jenseits der Planck-Skala}. 24. März 2025.
+		\bibitem{pascher_alpha_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Natürliche\%20Einheiten\%20mit\%20Feinstrukturkonstante\%20alpha\%20=\%201.pdf}{Energie als fundamentale Einheit: Natürliche Einheiten mit \(\alphaEM = 1\) im T0-Modell}. 26. März 2025.
+		\bibitem{pascher_alphabeta_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Die\%20Konsistenz\%20von\%20alpha\%20=\%201\%20und\%20beta\%20=\%201.pdf}{Vereinheitlichtes Einheitensystem im T0-Modell: Die Konsistenz von \(\alpha = 1\) und \(\beta = 1\)}. 5. April 2025.
+		\bibitem{pascher_temp_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Anpassung\%20von\%20Temperatureinheiten\%20in\%20natürlichen\%20Einheiten\%20und\%20CMB-Messungen.pdf}{Anpassung der Temperatureinheiten in natürlichen Einheiten und CMB-Messungen}. 2. April 2025.
+		\bibitem{pascher_params_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Zeit-Masse-Dualitätstheorie\%20(T0-Modell)\%20Herleitung\%20der\%20Parameter\%20kappa,\%20alpha\%20und\%20beta.pdf}{Zeit-Masse-Dualitätstheorie (T0-Modell): Herleitung der Parameter \(\kappa\), \(\alpha\) und \(\beta\)}. 4. April 2025.
+		\bibitem{pascher_emergente_gravitation_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Deutsch/Emergente\%20Gravitation\%20im\%20T0-Modell\%20Eine\%20formale\%20Herleitung.pdf}{Emergente Gravitation im T0-Modell: Eine umfassende Herleitung}. 1. April 2025.
 	\end{thebibliography}
 	
 \end{document}
