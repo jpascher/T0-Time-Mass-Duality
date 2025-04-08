@@ -24,7 +24,6 @@
 % Theoreme und Referenzen
 \usepackage{thmtools}
 
-
 % Boxen und spezielle Formatierungen
 \usepackage{tcolorbox}
 \tcbuselibrary{theorems, breakable}
@@ -313,32 +312,36 @@
 		\item \(\betaT^{\text{SI}}\): Wellenlängenabhängige Rotverschiebung, testbar mit JWST
 	\end{itemize}
 	
-	\begin{figure}[h]
-		\centering
-		\begin{tikzpicture}
-			\begin{axis}[
-				xlabel={Radius [kpc]},
-				ylabel={Rotationsgeschwindigkeit [km/s]},
-				xlabel style={font=\large},
-				ylabel style={font=\large},
-				tick label style={font=\normalsize},
-				xmin=0, xmax=30,
-				ymin=0, ymax=300,
-				legend pos=south east,
-				legend style={font=\large},
-				grid=both,
-				minor tick num=4,
-				major grid style={line width=0.8pt, gray!50},
-				minor grid style={line width=0.4pt, gray!20}
-				]
-				\addplot[blue, ultra thick, domain=0.1:30, samples=100] {220*sqrt(10/x)};
-				\addplot[red, dashed, ultra thick, domain=0.1:30, samples=100] {sqrt(220^2*10/x + 4.8*x^2)};
-				\legend{Newtonsche Vorhersage, T0-Modell}
-			\end{axis}
-		\end{tikzpicture}
-		\caption{Rotationskurven mit \(\kappa_{\text{SI}}\).}
-	\end{figure}
-	
+\begin{figure}[ht]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+			xlabel={Redshift $z$},
+			ylabel={Distance Modulus $\mu = m-M$},
+			xmin=0,
+			xmax=2,
+			ymin=30,
+			ymax=50,
+			legend pos=north west,
+			grid=both,
+			width=\textwidth,
+			height=6cm,
+			samples=100
+			]
+			\addplot[blue, thick, domain=0.01:2] {5*log10(3e8/70e3*ln(1+x)*(1+x)*0.1) + 25}; % T0, steiler bei hohen z
+			\addplot[red, dashed, domain=0.01:2] {5*log10(3e8/70e3*(1+x)*(2-(1/(1+x)))*1) + 25}; % LCDM, flacher bei hohen z
+			\legend{T0 Model, $\Lambda$CDM ($\Omega_m=0.3$, $\Omega_{\Lambda}=0.7$)}
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Distance modulus vs. redshift
+		comparing the T0 model prediction (solid blue)
+		with the $\Lambda$CDM prediction (dashed red)
+		for $H_0 = 70$ km/s/Mpc.
+		The models show a distinctive pattern: initially far apart at low redshifts,
+		they gradually converge at higher redshifts,
+		providing a clear observational test.}
+	\label{fig:distance_modulus}
+\end{figure}
 	\section{Konsequenzen der Setzung \(\beta = 1\)}
 	
 	\subsection{Theoretische Eleganz}
