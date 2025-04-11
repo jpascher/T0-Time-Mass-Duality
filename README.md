@@ -112,7 +112,7 @@ Below are the 25 publications included in this repository, organized by category
 ## Website
 
 The repository includes a website presenting all 25 publications in both German and English. Access it here:
-
+https://htmlpreview.github.io/?https://raw.githubusercontent.com/jpascher/T0-Time-Mass-Duality/main/2/website.html
 
 ## Future Research Directions
 

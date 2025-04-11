@@ -117,7 +117,7 @@ Das Repository enthält eine Website, die alle 25 Publikationen sowohl auf Deuts
 
 Das Repository enthält eine Website, die alle Publikationen auf Deutsch und Englisch präsentiert. Sie kann direkt über folgenden Link aufgerufen werden:
 
-```
+
 https://htmlpreview.github.io/?https://raw.githubusercontent.com/jpascher/T0-Time-Mass-Duality/main/2/website.html
 
 
