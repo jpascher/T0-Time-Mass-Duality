@@ -75,8 +75,9 @@ Nachfolgend sind die 25 Publikationen in diesem Repository aufgeführt, organisi
   Untersucht die Anpassung von Temperatureinheiten für kosmische Hintergrundstrahlung (CMB).
 - **[Vereinfachte Beschreibung der vier Grundkräfte mit Zeit-Masse-Dualität](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/VierKraefteZeitMasse.pdf)**  
   Beschreibt die vier fundamentalen Kräfte durch die Zeit-Masse-Dualität.
- - **[Konsistenz von Alpha=1 und Beta=1 in der Zeit-Masse-Dualität](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/NatEinheitenSystematik.pdf")**  
+ - **[Zusammenstellung natürlicher Einheiten mit Energie als grundlegender Einheit](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/NatEinheitenSystematik.pdf)**  
   Zusammenstellung natürlicher Einheiten mit Energie als grundlegender Einheit.
+  Eine Zusammenstellung aller physikalischen Zusammenhänge, die sich aus Energie als primärer natürlicher Einheit ableiten lassen.
 - **[Konsistenz von Alpha=1 und Beta=1 in der Zeit-Masse-Dualität](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/Alpha1Beta1Konsistenz.pdf)**  
   Untersucht die Auswirkungen der Setzung fundamentaler Konstanten auf Eins in der Theorie.
 - **[Emergenz der Gravitation im T₀-Modell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/EmergentGravT0.pdf)**  

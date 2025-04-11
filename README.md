@@ -75,7 +75,7 @@ Below are the 25 publications included in this repository, organized by category
   Examines temperature unit adjustments in natural units for cosmic microwave background (CMB) measurements.
 - **[Simplified Description of the Four Fundamental Forces with Time-Mass Duality](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/VierKraefteZeitMasseEn.pdf)**  
   Describes the four fundamental forces through the lens of Time-Mass Duality. 
-- **[Consistency of Alpha=1 and Beta=1 in Time-Mass Duality](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/NatEinheitenSystematikEn.pdf")**  
+- **[Compilation of Natural Units with Energy as the Fundamental Unit](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/NatEinheitenSystematikEn.pdf)**  
   A compilation of all physical relationships derivable from energy as the primary natural unit.
 - **[Consistency of Alpha=1 and Beta=1 in Time-Mass Duality](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/Alpha1Beta1KonsistenzEn.pdf)**  
   Investigates the implications of setting fundamental constants to unity within the theory.
