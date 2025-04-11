@@ -127,9 +127,6 @@ https://htmlpreview.github.io/?https://raw.githubusercontent.com/jpascher/T0-Tim
 Das laufende Forschungsprogramm konzentriert sich auf:
 1. Entwicklung detaillierter experimenteller Protokolle zur Überprüfung der massenabhängigen Zeitentwicklung.
 2. Verfeinerung der mathematischen Formulierung, insbesondere in Bezug auf Quantengravitation.
-3. Fortgeschrittene numerische Simulationen zur Überprüfung modifizierter Galaxien-Dynamiken.
-4. Einbeziehung zusätzlicher fundamentaler Teilchen und Wechselwirkungen in den theoretischen Rahmen.
-5. Anwendung der Theorie auf grundlegende Probleme in der Quanteninformation und im Quantencomputing.
 
 ## Kontakt
 

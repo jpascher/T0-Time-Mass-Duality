@@ -120,9 +120,7 @@ The ongoing research program focuses on:
 
 1. Development of detailed experimental protocols to verify mass-dependent time evolution.
 2. Refinement of the mathematical formulation, particularly regarding quantum gravity.
-3. Advanced numerical simulations to verify modified galaxy dynamics.
-4. Inclusion of additional fundamental particles and interactions in the theoretical framework.
-5. Application of the theory to fundamental problems in quantum information and quantum computing.
+
 
 ## Contact
 
