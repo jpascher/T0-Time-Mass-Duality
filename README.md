@@ -8,12 +8,11 @@ Welcome to the repository of the Time-Mass Duality research program by Johann Pa
 
 At the center of this research is the concept of time-mass duality, which proposes a fundamental reformulation of the relationship between time and mass. This approach offers not only a possible path toward unifying quantum mechanics, quantum field theory, and general relativity, but also provides new perspectives on fundamental phenomena such as nonlocality, dark matter, and dark energy.
 
-The publications found here form a coherent research program that ranges from theoretical foundations to concrete applications and experimentally verifiable predictions.
+The publications found here form a coherent research program that ranges from theoretical foundations to concrete applications and experimentally verifiable predictions. New documents on measurement differences and temperature adjustments further expand the program.
 
 ## Repository Structure
 
 The publications are organized into the following structure:
-
 ```
 T0-Time-Mass-Duality/
 ├── 2/
@@ -36,49 +35,68 @@ T0-Time-Mass-Duality/
 
 ### Starting Point: Field Theory as the Initial Idea
 
-- **[Field Theory and Quantum Correlations](https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/English/Feldtheorie%20und%20Quantenkorrelationen_en.pdf)**  
+- **[Field Theory and Quantum Correlations](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/FeldtheorieQuantenEn.pdf)**  
   The starting point, questioning instant particle connections (nonlocality) and proposing a new field structure.
 
 ### Conceptual Foundations and Motivation
 
-- **[The Necessity of Extending Standard Quantum Mechanics and Quantum Field Theory](https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/English/Die%20Notwendigkeit%20einer%20Erweiterung%20der%20Standard-Quantenmechanik%20und%20Quantenfeldtheorie_en.pdf)**  
+- **[The Necessity of Extending Standard Quantum Mechanics and Quantum Field Theory](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/NotwendigkeitQMErweiterungEn.pdf)**  
   Highlights limitations of current theories and introduces time-mass duality.
-- **[A New Perspective on Time and Space: Johann Pascher’s Revolutionary Ideas](https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/English/Eine%20neue%20Perspektive%20auf%20Zeit%20und%20Raum%20Johann%20Paschers%20revolutionäre%20Ideen_en.pdf)**  
+- **[Summary - Complementary Dualism in Physics](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/KurzKomplementDualPhysikEn.pdf)**  
+  A simple explanation of time-mass duality as a complement to wave-particle duality.
+- **[A New Perspective on Time and Space: Johann Pascher's Revolutionary Ideas](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/ZeitRaumPascherEn.pdf)**  
   Accessible to all, introducing the T₀ model with fixed time and variable mass.
 
 ### Mathematical Formalization
 
-- **[Essential Mathematical Formalisms of Time-Mass Duality Theory with Lagrange Densities](https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/English/Wesentliche%20mathematische%20Formalismen%20der%20Zeit-Masse-Dualitätstheorie%20mit%20Lagrange-Dichten_en.pdf)**  
+- **[Essential Mathematical Formalisms of Time-Mass Duality Theory with Lagrange Densities](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MathZeitMasseLagrangeDichtEn.pdf)**  
   Begins precise development using simple rules and Lagrange methods.
-- **[Mathematical Formulations of Time-Mass Duality Theory with Lagrange](https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/English/Mathematische%20Formulierungen%20der%20Zeit-Masse-Dualitätstheorie%20mit%20Lagrange_en.pdf)**  
+- **[Mathematical Formulations of Time-Mass Duality Theory with Lagrange](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MathZeitMasseLagrangeEn.pdf)**  
   Deepens models for particles like the Higgs field.
-- **[Mathematical Formulation of the Higgs Mechanism in Time-Mass Duality](https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/English/Mathematische%20Formulierung%20des%20Higgs-Mechanismus%20in%20der%20Zeit-Masse-Dualität_en.pdf)**  
+- **[Mathematical Formulation of the Higgs Mechanism in Time-Mass Duality](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MathHiggsZeitMasseEn.pdf)**  
   Explains how the Higgs mechanism fits into the theory.
 
 ### Applications and Extensions
 
-- **[Dynamic Mass of Photons and Its Implications for Nonlocality](https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/English/Dynamische%20Masse%20von%20Photonen%20und%20ihre%20Implikationen%20für%20Nichtlokalität_en.pdf)**  
+- **[Dynamic Mass of Photons and Its Implications for Nonlocality](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/DynMassePhotonenNichtlokalEn.pdf)**  
   Explores variable photon mass and its role in particle connections.
-- **[A Mathematical Analysis of Energy Dynamics](https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/English/Eine%20mathematische%20Analyse%20der%20Energiedynamik_en.pdf)**  
+- **[A Mathematical Analysis of Energy Dynamics](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MathEnergiedynamikEn.pdf)**  
   Applies the theory to the universe, reinterpreting dark energy.
+- **[Compensatory and Additive Effects: An Analysis of Measurement Differences between the T0 Model and the Standard Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MessdifferenzenT0StandardEn.pdf)** *(New)*  
+  Compares cosmological measurements between the T0 and standard models, analyzing compensatory/additive effects.
+- **[Adjustment of Temperature Units in Natural Units and CMB Measurements](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/TempEinheitenCMBEn.pdf)** *(New)*  
+  Examines temperature unit adjustments in natural units applied to CMB measurements.
+- **[Simplified Description of the Four Fundamental Forces with Time-Mass Duality](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/VierKraefteZeitMasseEn.pdf)** *(New)*  
+  Offers a simplified explanation of the four fundamental forces through time-mass duality.
+
+### Quantum Mechanics and Relativity
+
+- **[Bridging Quantum Mechanics and Relativity through Time-Mass Duality Part I: Theoretical Foundations](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/QMRelTimeMassPart1En.pdf)** *(New)*  
+  The first part of a comprehensive work demonstrating how time-mass duality can bridge the gap between quantum mechanics and relativity theory.
+- **[Bridging Quantum Mechanics and Relativity through Time-Mass Duality Part II: Cosmological Implications](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/QMRelTimeMassPart2CosmoEn.pdf)** *(New)*  
+  The second part focusing on cosmological implications and experimental validation.
 
 ### Cosmological and Frontier Areas
 
-- **[Beyond the Planck Scale](https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/English/Jenseits%20der%20Planck-Skala_en.pdf)**  
-  Investigates the theory’s implications for the smallest and largest scales.
+- **[Beyond the Planck Scale](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/JenseitsPlanckEn.pdf)**  
+  Investigates the theory's implications for the smallest and largest scales.
 
 ### Additional Relevant Documents
 
-- **[Mass Variation in Galaxies](https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/English/Massenvariation%20in%20Galaxien_en.pdf)**  
+- **[Mass Variation in Galaxies](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MassVarGalaxienEn.pdf)**  
   Shows how variable mass explains galaxy dynamics without dark matter.
-- **[Unification of the T0 Model: Foundations - Dark Energy and Galaxy Dynamics](https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/English/Vereinheitlichung%20des%20T0-Modells%20Grundlagen%20-%20Dunkle%20Energie%20und%20Galaxiendynamik_en.pdf)**  
+- **[Unification of the T0 Model: Foundations - Dark Energy and Galaxy Dynamics](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/T0VereinheitlichungDEGalEn.pdf)**  
   A comprehensive application to cosmology and galaxies.
-- **[Natural Units with Fine-Structure Constant alpha = 1](https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/English/Natürliche%20Einheiten%20mit%20Feinstrukturkonstante%20alpha%20=%201_en.pdf)**  
+- **[Natural Units with Fine-Structure Constant alpha = 1](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/NatEinheitenAlpha1En.pdf)**  
   Proposes a simplified system setting the fine-structure constant to 1.
 
 ## Website
 
-The repository includes a website presenting all publications in both German and English. You can access it by opening the `index.html` file in the `website` folder.
+The repository includes a website presenting all publications in both German and English. You can access it directly through:
+
+```
+https://htmlpreview.github.io/?https://raw.githubusercontent.com/jpascher/T0-Time-Mass-Duality/main/2/website.html
+```
 
 ## Future Research Directions
 
