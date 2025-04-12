@@ -81,7 +81,7 @@ Below are the 27 publications included in this repository, organized by category
   Investigates the implications of setting fundamental constants to unity within the theory.
 - **[Emergent Gravity in the T₀ Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/EmergentGravT0En.pdf)**  
   Explores how gravity could emerge from the T₀ model's time-mass interactions.
-- **[Biological Anomalies within the Quantization of Length Scales in the T0 Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/BiologischeSystemeEn.pdf)**  
+- **[Biological Anomalies within the Quantization of Length Scales in the T0 Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/biologischeSystemeEn.pdf)**  
   Examines the special position of biological structures in the quantized length scale hierarchy and their ability to form stable structures in "forbidden zones".
 - **[Systematic Compilation of Natural Units with Energy as Base Unit](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/NatEinheitenSystematikEn.pdf)**  
   Presents a comprehensive reference work with detailed tables of all physical quantities and their derivations in an energy-based unit system, revealing fundamental patterns like the quantization of length scales.

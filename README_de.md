@@ -81,7 +81,7 @@ Nachfolgend sind die 27 Publikationen in diesem Repository aufgeführt, organisi
   Untersucht die Auswirkungen der Setzung fundamentaler Konstanten auf Eins in der Theorie.
 - **[Emergenz der Gravitation im T₀-Modell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/EmergentGravT0.pdf)**  
   Erforscht, wie Gravitation aus den Zeit-Masse-Wechselwirkungen des T₀-Modells entstehen könnte.
-- **[Biologische Anomalien innerhalb der Quantisierung der Längenskalen im T0-Modell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/BiologischeSysteme.pdf)**  
+- **[Biologische Anomalien innerhalb der Quantisierung der Längenskalen im T0-Modell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/biologischeSysteme.pdf)**  
   Untersucht die besondere Stellung biologischer Strukturen in der quantisierten Längenskala-Hierarchie und ihre Fähigkeit, stabile Strukturen in "verbotenen Zonen" zu bilden.
 - **[Systematische Zusammenstellung natürlicher Einheiten mit Energie als Basiseinheit](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/NatEinheitenSystematik.pdf)**  
   Präsentiert ein umfassendes Nachschlagewerk mit detaillierten Tabellen aller physikalischen Größen und deren Ableitungen in einem energiebasierten Einheitensystem, wodurch fundamentale Muster wie die Quantisierung der Längenskalen offenbart werden.
