@@ -34,7 +34,7 @@ T0-Time-Mass-Duality/
 
 ## Publications
 
-Below are the 25 publications included in this repository, organized by category. Links point to the English versions, with corresponding German versions available in the `Deutsch/` directory.
+Below are the 27 publications included in this repository, organized by category. Links point to the English versions, with corresponding German versions available in the `Deutsch/` directory.
 
 ### Starting Point: Field Theory as the Initial Idea
 
@@ -76,11 +76,15 @@ Below are the 25 publications included in this repository, organized by category
 - **[Simplified Description of the Four Fundamental Forces with Time-Mass Duality](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/VierKraefteZeitMasseEn.pdf)**  
   Describes the four fundamental forces through the lens of Time-Mass Duality. 
 - **[Compilation of Natural Units with Energy as the Fundamental Unit](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/NatEinheitenSystematikEn.pdf)**  
-  A compilation of all physical relationships derivable from energy as the primary natural unit.
+  A comprehensive reference work with extensive tables of all physical relationships and units systematically derived from energy as the base unit.
 - **[Consistency of Alpha=1 and Beta=1 in Time-Mass Duality](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/Alpha1Beta1KonsistenzEn.pdf)**  
   Investigates the implications of setting fundamental constants to unity within the theory.
 - **[Emergent Gravity in the T₀ Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/EmergentGravT0En.pdf)**  
-  Explores how gravity could emerge from the T₀ model’s time-mass interactions.
+  Explores how gravity could emerge from the T₀ model's time-mass interactions.
+- **[Biological Anomalies within the Quantization of Length Scales in the T0 Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/BiologischeSystemeEn.pdf)**  
+  Examines the special position of biological structures in the quantized length scale hierarchy and their ability to form stable structures in "forbidden zones".
+- **[Systematic Compilation of Natural Units with Energy as Base Unit](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/NatEinheitenSystematikEn.pdf)**  
+  Presents a comprehensive reference work with detailed tables of all physical quantities and their derivations in an energy-based unit system, revealing fundamental patterns like the quantization of length scales.
 
 ### Quantum Mechanics and Relativity
 
@@ -96,7 +100,7 @@ Below are the 25 publications included in this repository, organized by category
 ### Cosmological and Frontier Areas
 
 - **[Beyond the Planck Scale](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/JenseitsPlanckEn.pdf)**  
-  Investigates Time-Mass Duality’s implications for physics at and beyond the Planck scale.
+  Investigates Time-Mass Duality's implications for physics at and beyond the Planck scale.
 - **[Mass Variation in Galaxies](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MassVarGalaxienEn.pdf)**  
   Explains galaxy dynamics through variable mass, potentially eliminating the need for dark matter.
 - **[Unification of the T₀ Model: Dark Energy and Galaxy Dynamics](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/T0VereinheitlichungDEGalEn.pdf)**  
@@ -111,7 +115,7 @@ Below are the 25 publications included in this repository, organized by category
 
 ## Website
 
-The repository includes a website presenting all 25 publications in both German and English. Access it here:
+The repository includes a website presenting all 27 publications in both German and English. Access it here:
 https://htmlpreview.github.io/?https://raw.githubusercontent.com/jpascher/T0-Time-Mass-Duality/main/2/website.html
 
 ## Future Research Directions
@@ -120,7 +124,8 @@ The ongoing research program focuses on:
 
 1. Development of detailed experimental protocols to verify mass-dependent time evolution.
 2. Refinement of the mathematical formulation, particularly regarding quantum gravity.
-
+3. Further investigation of biological structures' anomalous stability in "forbidden zones" of the length scale hierarchy.
+4. Exploration of technological applications based on the principles of time field modification.
 
 ## Contact
 

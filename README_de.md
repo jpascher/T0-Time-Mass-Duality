@@ -34,7 +34,7 @@ T0-Time-Mass-Duality/
 
 ## Publikationen
 
-Nachfolgend sind die 25 Publikationen in diesem Repository aufgeführt, organisiert nach Kategorien mit Links zu den deutschen Versionen.
+Nachfolgend sind die 27 Publikationen in diesem Repository aufgeführt, organisiert nach Kategorien mit Links zu den deutschen Versionen.
 
 ### Ausgangspunkt: Feldtheorie als Initialidee
 
@@ -75,13 +75,16 @@ Nachfolgend sind die 25 Publikationen in diesem Repository aufgeführt, organisi
   Untersucht die Anpassung von Temperatureinheiten für kosmische Hintergrundstrahlung (CMB).
 - **[Vereinfachte Beschreibung der vier Grundkräfte mit Zeit-Masse-Dualität](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/VierKraefteZeitMasse.pdf)**  
   Beschreibt die vier fundamentalen Kräfte durch die Zeit-Masse-Dualität.
- - **[Zusammenstellung natürlicher Einheiten mit Energie als grundlegender Einheit](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/NatEinheitenSystematik.pdf)**  
-  Zusammenstellung natürlicher Einheiten mit Energie als grundlegender Einheit.
-  Eine Zusammenstellung aller physikalischen Zusammenhänge, die sich aus Energie als primärer natürlicher Einheit ableiten lassen.
+- **[Zusammenstellung natürlicher Einheiten mit Energie als grundlegender Einheit](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/NatEinheitenSystematik.pdf)**  
+  Ein umfassendes Nachschlagewerk mit ausführlichen Tabellen aller physikalischen Zusammenhänge und Einheiten, die systematisch aus Energie als Basiseinheit abgeleitet werden.
 - **[Konsistenz von Alpha=1 und Beta=1 in der Zeit-Masse-Dualität](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/Alpha1Beta1Konsistenz.pdf)**  
   Untersucht die Auswirkungen der Setzung fundamentaler Konstanten auf Eins in der Theorie.
 - **[Emergenz der Gravitation im T₀-Modell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/EmergentGravT0.pdf)**  
   Erforscht, wie Gravitation aus den Zeit-Masse-Wechselwirkungen des T₀-Modells entstehen könnte.
+- **[Biologische Anomalien innerhalb der Quantisierung der Längenskalen im T0-Modell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/BiologischeSysteme.pdf)**  
+  Untersucht die besondere Stellung biologischer Strukturen in der quantisierten Längenskala-Hierarchie und ihre Fähigkeit, stabile Strukturen in "verbotenen Zonen" zu bilden.
+- **[Systematische Zusammenstellung natürlicher Einheiten mit Energie als Basiseinheit](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/NatEinheitenSystematik.pdf)**  
+  Präsentiert ein umfassendes Nachschlagewerk mit detaillierten Tabellen aller physikalischen Größen und deren Ableitungen in einem energiebasierten Einheitensystem, wodurch fundamentale Muster wie die Quantisierung der Längenskalen offenbart werden.
 
 ### Quantenmechanik und Relativität
 
@@ -112,21 +115,16 @@ Nachfolgend sind die 25 Publikationen in diesem Repository aufgeführt, organisi
 
 ## Website
 
-Das Repository enthält eine Website, die alle 25 Publikationen sowohl auf Deutsch als auch auf Englisch präsentiert. Zugriff hier:
-## Website
-
-Das Repository enthält eine Website, die alle Publikationen auf Deutsch und Englisch präsentiert. Sie kann direkt über folgenden Link aufgerufen werden:
-
-
+Das Repository enthält eine Website, die alle 27 Publikationen sowohl auf Deutsch als auch auf Englisch präsentiert. Zugriff hier:
 https://htmlpreview.github.io/?https://raw.githubusercontent.com/jpascher/T0-Time-Mass-Duality/main/2/website.html
-
-
 
 ## Zukünftige Forschungsrichtungen
 
 Das laufende Forschungsprogramm konzentriert sich auf:
 1. Entwicklung detaillierter experimenteller Protokolle zur Überprüfung der massenabhängigen Zeitentwicklung.
 2. Verfeinerung der mathematischen Formulierung, insbesondere in Bezug auf Quantengravitation.
+3. Weitere Untersuchung der anomalen Stabilität biologischer Strukturen in "verbotenen Zonen" der Längenskala-Hierarchie.
+4. Erforschung technologischer Anwendungen basierend auf den Prinzipien der Zeitfeld-Modifikation.
 
 ## Kontakt
 
