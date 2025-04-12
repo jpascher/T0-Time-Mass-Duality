@@ -122,4 +122,5 @@
 - **Abstandsabhängigkeit:** Wechselwirkungen mit der Umgebung (z.B. Messung) nehmen mit 1/r² ab, die Korrelation bleibt jedoch erhalten.
 - **Visualisierung:** Verschränkte Photonen sind wie zwei Wellen von einem Punkt im $T(x)$-Gewebe, die sich in verschiedene Richtungen ausbreiten, aber verbunden bleiben.
 
+
 **Fazit:** Verschränkung ist ein Wellenphänomen, koordiniert durch $T(x)$, das die Korrelation durch den gemeinsamen Ursprung erklärt, ohne mystische Effekte.
