@@ -41,6 +41,66 @@ Das modifizierte Gravitationspotential im T0-Modell:
 
 steht in direktem Zusammenhang mit der Krümmung der Raumzeit, die in der Einstein-Hilbert-Wirkung durch den Ricci-Skalar R erfasst wird. Der lineare Term κr, der im T0-Modell zur Newton'schen Gravitation hinzukommt, entspricht einer modifizierten Raumzeit-Geometrie und manifestiert sich in der Einstein-Hilbert-Wirkung durch einen zusätzlichen Beitrag zum Ricci-Skalar.
 
+### Dimensionsanalyse und Ableitung der Einstein-Hilbert-Wirkung im T0-Modell
+
+#### 1. Ursprüngliche Form in SI-Einheiten
+
+In der allgemeinen Relativitätstheorie lautet die Einstein-Hilbert-Wirkung in SI-Einheiten:
+
+SEH = (c⁴/16πG) ∫ R √(-g) d⁴x
+
+wobei:
+- c die Lichtgeschwindigkeit ist
+- G die Gravitationskonstante
+- R der Ricci-Skalar mit Dimension [L⁻²] (Krümmung)
+- √(-g) d⁴x das Raumzeit-Volumenelement mit Dimension [L⁴]
+- c⁴/(16πG) der Vorfaktor mit Dimension [L⁻¹ M]
+
+Die Dimension der gesamten Wirkung ist:
+[L⁻²] · [L⁴] · [L⁻¹ M] = [L M]
+
+was der Dimension Energie × Zeit entspricht und in SI-Einheiten korrekt ist.
+
+#### 2. Übergang zum T0-Modell mit natürlichen Einheiten
+
+Im T0-Modell gelten die fundamentalen Annahmen:
+- ℏ = 1 → Wirkung ist dimensionslos
+- c = 1 → Länge und Zeit haben die gleiche Dimension (L = T)
+- G = 1 → Masse und Energie sind äquivalent (M = E)
+
+Mit Energie [E] als Grundeinheit ergeben sich die Dimensionen:
+- Länge: [L] = [E⁻¹]
+- Zeit: [T] = [E⁻¹]
+- Masse: [M] = [E]
+
+Damit erhält der Ricci-Skalar R die Dimension [L⁻²] = [E²]
+Das Volumenelement √(-g) d⁴x hat die Dimension [L⁴] = [E⁻⁴]
+Das Integrand R√(-g) d⁴x hat somit die Dimension [E²] · [E⁻⁴] = [E⁻²]
+
+#### 3. Der Vorfaktor 1/(16π)
+
+Im T0-Modell wird der Vorfaktor c⁴/(16πG) dimensionsanalytisch zu:
+- c⁴ = 1 (dimensionslos in natürlichen Einheiten)
+- G = 1 (dimensionslos in natürlichen Einheiten)
+- c⁴/(16πG) = 1/(16π) (rein numerischer Faktor)
+
+Die Wirkung nimmt somit die elegante Form an:
+SEH = (1/16π) ∫ R √(-g) d⁴x
+
+Die Dimension der gesamten Wirkung ist:
+[1] · [E⁻²] · [E²] = [1]
+
+Dies ist konsistent, da die Wirkung im T0-Modell dimensionslos sein muss.
+
+#### 4. Feldgleichungen im T0-Modell
+
+Die Variation der Einstein-Hilbert-Wirkung führt zu den Feldgleichungen:
+Rμν - (1/2)Rgμν = 8πTμν
+
+wobei der Faktor 8π direkt aus dem Vorfaktor 1/(16π) der Wirkung resultiert. Der Energie-Impuls-Tensor Tμν hat im T0-Modell die Dimension [E²] (Energie pro Volumen).
+
+Im T0-Modell erscheint die Gravitationskonstante G nicht explizit in den Feldgleichungen, da G = 1 bereits in die fundamentale Normierung eingebaut ist. Dies vereinfacht nicht nur die Darstellung, sondern verdeutlicht auch die fundamentale Einheit von Raum, Zeit und Energie.
+
 ### Ableitung der Gravitation im natürlichen System des T0-Modells
 
 Im T0-Modell wird die Gravitation nicht als fundamentale Eigenschaft postuliert, sondern direkt aus dem intrinsischen Zeitfeld T(x) abgeleitet:
