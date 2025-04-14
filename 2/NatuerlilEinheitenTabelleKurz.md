@@ -45,6 +45,14 @@ Das modifizierte Gravitationspotential im T0-Modell:
 
 steht in direktem Zusammenhang mit der Krümmung der Raumzeit, die in der Einstein-Hilbert-Wirkung durch den Ricci-Skalar R erfasst wird. Der lineare Term κr, der im T0-Modell zur Newton'schen Gravitation hinzukommt, entspricht einer modifizierten Raumzeit-Geometrie und manifestiert sich in der Einstein-Hilbert-Wirkung durch modifizierte Feldgleichungen.
 
+- **Äquivalenz zwischen Einstein-Hilbert-Wirkung und Zeitfeld-Ableitung**
+  - **Komplementarität**: Das T0-Modell bietet zwei komplementäre Gravitationsbeschreibungen:
+    - **Geometrische Formulierung**: S_EH = 1/(16 * π) * Integral((R - 2 * κ) * sqrt(-g) d^4x).
+    - **Zeitfeld-Ableitung**: Φ(x) = -ln(T(x)/T_0).
+  - **Äquivalenz**: Beide führen zum identischen Gravitationspotential Φ(r) = -M/r + κ * r.
+  - **Schwaches Feldlimit**: Die Zeitfeld-Gleichung ∇²T ≈ -ρ/T² ist äquivalent zu den Einstein-Gleichungen mit κ-Term.
+  - **Bedeutung**: Im T0-Modell ist die Raumzeit-Krümmung keine reale physikalische Eigenschaft, sondern nur eine mathematische Beschreibung, die der fundamentalen Zeitfeld-Dynamik entspricht.
+
 ### Dimensionsanalyse und Ableitung der Einstein-Hilbert-Wirkung im T0-Modell
 
 #### 1. Ursprüngliche Form in SI-Einheiten

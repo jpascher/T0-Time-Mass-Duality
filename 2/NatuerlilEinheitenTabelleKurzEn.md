@@ -188,7 +188,13 @@ In the T0 model, gravitation is not postulated as a fundamental property but is 
    - Prefactor 1/16π: dimensionless
 
 The uniqueness of the T0 model lies in the fact that the Einstein-Hilbert action and general relativity appear as effective descriptions of gravitation, while the more fundamental description is through the intrinsic time field. This enables a unified treatment of gravitation with other interactions and explains observed anomalies in galaxy dynamics without resorting to dark matter.
-
+- **Equivalence between Einstein-Hilbert action and time field derivation**
+  - **Complementarity**: The T0-model offers two complementary descriptions of gravitation:
+    - **Geometric formulation**: S_EH = 1/(16 * π) * Integral((R - 2 * κ) * sqrt(-g) d^4x).
+    - **Time field derivation**: Φ(x) = -ln(T(x)/T_0).
+  - **Equivalence**: Both lead to the identical gravitational potential Φ(r) = -M/r + κ * r.
+  - **Weak field limit**: The time field equation ∇²T ≈ -ρ/T² is equivalent to the Einstein equations with κ-term.
+  - **Significance**: In the T0-model, spacetime curvature is not a real physical property, but merely a mathematical description corresponding to the fundamental time field dynamics.
 ## Level 3: Derived Constants with Simple Values
 
 In the T0 model with natural units, many derived constants take remarkably simple values:
