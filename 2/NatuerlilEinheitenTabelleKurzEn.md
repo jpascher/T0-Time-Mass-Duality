@@ -14,7 +14,7 @@
 - **T0 Parameter** (βT = 1)
   - *Corresponds to the SI value βT,SI ≈ 0.008*
 
-## Level 2.5: Derived Electromagnetic Constants
+## Level 2.5: Derived Electromagnetic and Gravitational Constants
 
 With the normalization αEM = 1, the following relationships for electromagnetic constants emerge:
 - **Vacuum Permeability** (μ0 = 1)
@@ -359,7 +359,9 @@ The apparent "deviations" between measurements in the SI system and the theoreti
 | Astronomical Scale | ~10⁻³ to 10⁻² | Good agreement (0.1% - 1%) |
 | Cosmological Scale | ~10⁻² to 10⁻¹ | Larger deviations (1% - 10%) |
 
-The larger deviations at cosmological dimensions are not due to shortcomings of the T0 model but to fundamental challenges in cosmological measurement techniques and the interpretation of observational data in the context of the conventional cosmological standard model.
+It is important to note that while the T0 model describes cosmological observations with deviations of 1-10% compared to the standard model, these are not actual measurement errors. Rather, they result from fundamentally different interpretations of the same observational data. The standard ΛCDM cosmological model interprets redshift data as evidence of an expanding universe, requiring dark energy and dark matter. In contrast, the T0 model interprets the same redshift phenomena through its modified gravitational potential Φ(r) = -GM/r + κr and the intrinsic time field, without requiring universal expansion.
+
+What appears as "deviation" is actually a paradigm difference: observations traditionally interpreted as cosmic expansion are instead explained in the T0 model through modified spacetime geometry emerging from the time field. The T0 model's redshift formula T(z) = T₀(1+z)(1+ln(1+z)) accounts for observed astronomical data without expansion, offering an alternative framework that preserves consistency with measurements while fundamentally reinterpreting their meaning.
 
 The T0 model with its system of natural units not only offers a mathematically more elegant and physically more fundamental framework but also enables new insights into the structure of the universe that remain hidden in the SI system. The quantized structure of length scales, the special role of biological systems, and the unified treatment of all interactions are aspects that only reveal their full significance in the T0 model.
 

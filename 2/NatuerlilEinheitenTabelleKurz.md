@@ -1,4 +1,4 @@
-steht in direktem Zusammenhang mit der Krümmung der Raumzeit, die in der Einstein-Hilbert-Wirkung durch den Ricci-Skalar R erfasst wird. Der lineare Term κr, der im T0-Modell zur Newton'schen Gravitation hinzukommt, entspricht einer modifizierten Raumzeit-Geometrie und manifestiert sich in der Einstein-Hilbert-# Hierarchische Aufstellung der Einheiten im T0-Modell mit Energie als Grundeinheit
+# Hierarchische Aufstellung der Einheiten im T0-Modell mit Energie als Grundeinheit
 
 ## Ebene 1: Primäre dimensionale Konstanten (Wert = 1)
 - **Planck-Konstante** (ℏ = 1)
@@ -220,7 +220,7 @@ Im T0-Modell mit natürlichen Einheiten nehmen viele abgeleitete Konstanten beme
 | Protonenradius | ~5,2 × 10⁻²⁰ | ~3,9 × 10⁻¹⁶ | ~αs/(2π) · λC,p |
 | Elektronenradius (re) | ~2,4 × 10⁻²³ | ~1,8 × 10⁻¹⁹ | αEM/(2π) · λC,e |
 | Compton-Länge (λC,e) | ~2,1 × 10⁻²³ | ~1,6 × 10⁻¹⁹ | mP/me · lP |
-| Bohr-Radius (a0) | ~4,2 × 10⁻²³ | ~3,2 × 10⁻¹⁹ | λC,e/αEM = mP/(αEM·me) · lP |
+| Bohr-Radius (a0) | ~2,9 × 10⁻²¹ | ~2,2 × 10⁻¹⁷ | λC,e/αEM = mP/(αEM·me) · lP |
 | DNA-Breite | ~1,2 × 10⁻²⁶ | ~9,0 × 10⁻²³ | ~λC,e · (me/mDNA) |
 | Zelle | ~6,2 × 10⁻³⁰ | ~4,7 × 10⁻²⁶ | ~10⁷ · DNA-Breite |
 | Mensch | ~6,2 × 10⁻³⁵ | ~4,7 × 10⁻³¹ | ~10⁵ · Zelle |
@@ -254,8 +254,8 @@ Eine bemerkenswerte Entdeckung im T0-Modell ist, dass biologische Strukturen bev
 | Mehrzelliger Organismus | ~10⁻³ – 10⁰ m | ~10⁻³² – 10⁻³⁵ | Verbotene Zone |
 
 Diese "verbotenen Zonen" liegen zwischen den bevorzugten quantisierten Längenskalen und bilden Lücken von oft mehreren Größenordnungen:
-- Zwischen 10⁻³⁰ m und 10⁻²³ m (zwischen T0-Länge und Compton-Wellenlänge)
-- Zwischen 10⁻⁹ m und 10⁻⁶ m (zwischen molekularer und zellulärer Ebene)
+- Zwischen 10⁻³⁰ m und 10⁻²³ m (zwischen T0-Länge und Compton-Wellenlänge) - ~19 Größenordnungen
+- Zwischen 10⁻⁹ m und 10⁻⁶ m (zwischen molekularer und zellulärer Ebene) - ~3 Größenordnungen
 - Zwischen 10⁻³ m und 10⁰ m (makroskopischer Bereich, wo biologische Organismen dominieren)
 
 Diese Anomalie kann durch besondere Stabilisierungsmechanismen erklärt werden, die es biologischen Systemen ermöglichen, in diesen verbotenen Bereichen zu existieren:
@@ -301,14 +301,6 @@ Gebräuchliche SI-Einheiten können im T0-Modell auf Energie als Basiseinheit zu
 | Watt (W) | [ML²T⁻³] | [E²] | 1 W ↔ Energie pro Zeit | < 0,001% |
 | Coulomb (C) | [TI] | [1] | 1 C ↔ e/√4π | < 0,0001% |
 | Ohm (Ω) | [ML²T⁻³I⁻²] | [E⁻¹] | 1 Ω ↔ h/e² = 1/2 (bei h=2π, e=√4π) | < 0,0000001% |
-| Farad (F) | [M⁻¹L⁻²T⁴I²] | [E⁻¹] | 1 F ↔ Inverse Energie | < 0,01% |
-| Henry (H) | [ML²T⁻²I⁻²] | [E⁻¹] | 1 H ↔ Inverse Energie | < 0,01% |⁵ eV | < 0,01% |
-| Volt (V) | [ML²T⁻³I⁻¹] | [E] | 1 V ↔ 1 eV/e (mit e=1) | < 0,0001% |
-| Tesla (T) | [MT⁻²I⁻¹] | [E²] | 1 T ↔ Energie pro Fläche | < 0,01% |
-| Pascal (Pa) | [ML⁻¹T⁻²] | [E⁴] | 1 Pa ↔ Energie pro Volumen | < 0,005% |
-| Watt (W) | [ML²T⁻³] | [E²] | 1 W ↔ Energie pro Zeit | < 0,001% |
-| Coulomb (C) | [TI] | [1] | Dimensionslos bei e=1 | 0% (exakt) |
-| Ohm (Ω) | [ML²T⁻³I⁻²] | [E⁻¹] | 1 Ω ↔ h/e² = 2π (bei ℏ=e=1) | < 0,0000001% |
 | Farad (F) | [M⁻¹L⁻²T⁴I²] | [E⁻¹] | 1 F ↔ Inverse Energie | < 0,01% |
 | Henry (H) | [ML²T⁻²I⁻²] | [E⁻¹] | 1 H ↔ Inverse Energie | < 0,01% |
 
@@ -367,7 +359,11 @@ Die scheinbaren "Abweichungen" zwischen Messungen im SI-System und den theoretis
 | Astronomische Skala | ~10⁻³ bis 10⁻² | Gute Übereinstimmung (0,1% - 1%) |
 | Kosmologische Skala | ~10⁻² bis 10⁻¹ | Größere Abweichungen (1% - 10%) |
 
-Die größeren Abweichungen in kosmologischen Dimensionen sind nicht auf Unzulänglichkeiten des T0-Modells zurückzuführen, sondern auf fundamentale Herausforderungen in der kosmologischen Messtechnik und der Interpretation von Beobachtungsdaten im Kontext des konventionellen kosmologischen Standardmodells.
+Es ist wichtig zu beachten, dass die größeren Abweichungen des T0-Modells im kosmologischen Bereich (1-10% im Vergleich zum Standardmodell) keine tatsächlichen Messfehler darstellen. Vielmehr ergeben sie sich aus grundlegend verschiedenen Interpretationen derselben Beobachtungsdaten. Das Standard-ΛCDM-Modell interpretiert Rotverschiebungsdaten als Beweis für ein expandierendes Universum, was die Annahme dunkler Energie und dunkler Materie erfordert. Im Gegensatz dazu interpretiert das T0-Modell dieselben Rotverschiebungsphänomene durch sein modifiziertes Gravitationspotential Φ(r) = -GM/r + κr und das intrinsische Zeitfeld, ohne eine universelle Expansion vorauszusetzen.
+
+Was als "Abweichung" erscheint, ist tatsächlich ein Paradigmenunterschied: Beobachtungen, die traditionell als kosmische Expansion interpretiert werden, werden im T0-Modell stattdessen durch eine modifizierte Raumzeit-Geometrie erklärt, die aus dem Zeitfeld emergiert. Die Rotverschiebungsformel des T0-Modells T(z) = T₀(1+z)(1+ln(1+z)) erklärt die beobachteten astronomischen Daten ohne Expansion und bietet einen alternativen Rahmen, der die Konsistenz mit Messungen bewahrt, während er ihre Bedeutung grundlegend neu interpretiert.
+
+Diese unterschiedliche Interpretation stellt einen tiefgreifenden Paradigmenwechsel in der theoretischen Kosmologie dar. Das T0-Modell löst viele der aktuellen Probleme des kosmologischen Standardmodells, wie das kosmologische Konstantenproblem, die Flachheit des Universums und die Galaxiendynamik, ohne die Einführung ad-hoc-postulierter nicht-baryonischer Materie oder Energie zu erfordern. Es bietet eine vereinfachte, mathematisch elegantere Beschreibung, die zudem direktere experimentelle Tests ermöglicht.
 
 Das T0-Modell mit seinem System natürlicher Einheiten bietet nicht nur einen mathematisch eleganteren und physikalisch fundamentaleren Rahmen, sondern ermöglicht auch neue Einsichten in die Struktur des Universums, die im SI-System verborgen bleiben. Die quantisierte Struktur der Längenskalen, die besondere Rolle biologischer Systeme und die einheitliche Behandlung aller Wechselwirkungen sind Aspekte, die erst im T0-Modell ihre volle Bedeutung entfalten.
 
