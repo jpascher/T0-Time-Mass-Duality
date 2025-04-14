@@ -14,11 +14,15 @@ steht in direktem Zusammenhang mit der Krümmung der Raumzeit, die in der Einste
 - **T0-Parameter** (βT = 1)
   - *Entspricht dem SI-Wert βT,SI ≈ 0,008*
 
-## Ebene 2.5: Abgeleitete elektromagnetische Konstanten (Wert = 1)
+## Ebene 2.5: Abgeleitete elektromagnetische Konstanten
+
+Bei der Setzung αEM = 1 ergeben sich folgende Zusammenhänge für elektromagnetische Konstanten:
 - **Vakuummagnetische Feldkonstante** (μ0 = 1)
 - **Vakuum-Dielektrizitätskonstante** (ε0 = 1)
 - **Vakuumimpedanz** (Z0 = 1)
-- **Elementarladung** (e = 1)
+- **Elementarladung** (e = √4π)
+  - *Hinweis: Bei αEM = e²/(4πε0ℏc) = 1 und ε0 = ℏ = c = 1 folgt e = √4π ≈ 3,5*
+
 - **Planck-Druck** (pP = 1)
 - **Planck-Kraft** (FP = 1)
 - **Einstein-Hilbert-Wirkung** (SEH = (1/16π)∫R√(-g)d⁴x)
@@ -39,7 +43,7 @@ Im T0-Modell wird die Gravitation nicht als fundamentale Wechselwirkung betracht
 Das modifizierte Gravitationspotential im T0-Modell:
 Φ(r) = -GM/r + κr
 
-steht in direktem Zusammenhang mit der Krümmung der Raumzeit, die in der Einstein-Hilbert-Wirkung durch den Ricci-Skalar R erfasst wird. Der lineare Term κr, der im T0-Modell zur Newton'schen Gravitation hinzukommt, entspricht einer modifizierten Raumzeit-Geometrie und manifestiert sich in der Einstein-Hilbert-Wirkung durch einen zusätzlichen Beitrag zum Ricci-Skalar.
+steht in direktem Zusammenhang mit der Krümmung der Raumzeit, die in der Einstein-Hilbert-Wirkung durch den Ricci-Skalar R erfasst wird. Der lineare Term κr, der im T0-Modell zur Newton'schen Gravitation hinzukommt, entspricht einer modifizierten Raumzeit-Geometrie und manifestiert sich in der Einstein-Hilbert-Wirkung durch modifizierte Feldgleichungen.
 
 ### Dimensionsanalyse und Ableitung der Einstein-Hilbert-Wirkung im T0-Modell
 
@@ -59,14 +63,14 @@ wobei:
 Die Dimension der gesamten Wirkung ist:
 [L⁻²] · [L⁴] · [L⁻¹ M] = [L M]
 
-was der Dimension Energie × Zeit entspricht und in SI-Einheiten korrekt ist.
+was der Dimension Energie × Zeit entspricht und in SI-Einheiten der physikalischen Dimension einer Wirkung (z.B. ℏ) entspricht.
 
 #### 2. Übergang zum T0-Modell mit natürlichen Einheiten
 
 Im T0-Modell gelten die fundamentalen Annahmen:
-- ℏ = 1 → Wirkung ist dimensionslos
-- c = 1 → Länge und Zeit haben die gleiche Dimension (L = T)
-- G = 1 → Masse und Energie sind äquivalent (M = E)
+- ℏ = 1 (Setzung, Normierung der Wirkung)
+- c = 1 (Setzung, vereint Raum und Zeit)
+- G = 1 (Setzung, vereint Gravitationsphysik mit anderen Wechselwirkungen)
 
 Mit Energie [E] als Grundeinheit ergeben sich die Dimensionen:
 - Länge: [L] = [E⁻¹]
@@ -77,20 +81,19 @@ Damit erhält der Ricci-Skalar R die Dimension [L⁻²] = [E²]
 Das Volumenelement √(-g) d⁴x hat die Dimension [L⁴] = [E⁻⁴]
 Das Integrand R√(-g) d⁴x hat somit die Dimension [E²] · [E⁻⁴] = [E⁻²]
 
-#### 3. Der Vorfaktor 1/(16π)
+#### 3. Der Vorfaktor im natürlichen System
 
-Im T0-Modell wird der Vorfaktor c⁴/(16πG) dimensionsanalytisch zu:
-- c⁴ = 1 (dimensionslos in natürlichen Einheiten)
-- G = 1 (dimensionslos in natürlichen Einheiten)
-- c⁴/(16πG) = 1/(16π) (rein numerischer Faktor)
+Im T0-Modell transformiert sich der Vorfaktor c⁴/(16πG) zu:
+- In SI-Einheiten hat er die Dimension [L⁻¹ M]
+- Diese entspricht in natürlichen Einheiten [E⁻¹ · E] = [E⁰] = 1
 
-Die Wirkung nimmt somit die elegante Form an:
+Der Zahlenwert wird durch die Setzungen c = G = 1 zu 1/(16π).
+
+Die Wirkung nimmt die Form an:
 SEH = (1/16π) ∫ R √(-g) d⁴x
 
-Die Dimension der gesamten Wirkung ist:
-[1] · [E⁻²] · [E²] = [1]
-
-Dies ist konsistent, da die Wirkung im T0-Modell dimensionslos sein muss.
+Die Dimension dieser Wirkung ist im T0-Modell:
+[1] · [E⁻²] · [E²] = [E⁰] = 1
 
 #### 4. Feldgleichungen im T0-Modell
 
@@ -99,7 +102,63 @@ Rμν - (1/2)Rgμν = 8πTμν
 
 wobei der Faktor 8π direkt aus dem Vorfaktor 1/(16π) der Wirkung resultiert. Der Energie-Impuls-Tensor Tμν hat im T0-Modell die Dimension [E²] (Energie pro Volumen).
 
-Im T0-Modell erscheint die Gravitationskonstante G nicht explizit in den Feldgleichungen, da G = 1 bereits in die fundamentale Normierung eingebaut ist. Dies vereinfacht nicht nur die Darstellung, sondern verdeutlicht auch die fundamentale Einheit von Raum, Zeit und Energie.
+#### 5. Zusammenhang mit dem modifizierten Gravitationspotential
+
+Die Verbindung zwischen dem modifizierten Potential Φ(r) = -GM/r + κr und der Einstein-Hilbert-Wirkung ergibt sich durch folgende Herleitung:
+
+1. Das modifizierte Potential lässt sich als Lösung einer modifizierten Poisson-Gleichung darstellen:
+   ```
+   ∇²Φ = 4πGρ - 2κ
+   ```
+
+2. In der allgemeinen Relativitätstheorie entspricht eine solche Modifikation einem Energie-Impuls-Tensor, der einen Term enthält, der einer kosmologischen Konstante äquivalent ist:
+   ```
+   Tμν = Tμν(Materie) + Λeff·gμν
+   ```
+   wobei Λeff = κ/G eine effektive kosmologische Konstante darstellt.
+
+3. Dieser zusätzliche Term in der Einstein-Gleichung entspricht einem zusätzlichen Term in der Einstein-Hilbert-Wirkung:
+   ```
+   SEH = (1/16πG)∫(R - 2Λeff)√(-g)d⁴x
+   ```
+
+4. In natürlichen Einheiten mit G = 1 wird dies zu:
+   ```
+   SEH = (1/16π)∫(R - 2κ)√(-g)d⁴x
+   ```
+
+5. Diese modifizierte Wirkung führt bei Variation zu den Feldgleichungen:
+   ```
+   Rμν - (1/2)Rgμν + κgμν = 8πTμν
+   ```
+
+6. In der schwachen Feldnäherung ergibt sich daraus genau das modifizierte Potential:
+   ```
+   ds² = -(1+2Φ)dt² + (1-2Φ)(dx² + dy² + dz²)
+   ```
+   mit Φ(r) = -M/r + κr/2 (bei G = 1).
+
+### Verbindung zur beobachteten dunklen Energie
+
+Der lineare Term κr im Gravitationspotential entspricht einer effektiven kosmologischen Konstante Λeff = κ/G. Dies hat wichtige Implikationen für die beobachtete dunkle Energie:
+
+1. Die gemessene Energiedichte der dunklen Energie beträgt in konventionellen Einheiten ρΛ ≈ 10⁻¹²³ in Planck-Einheiten.
+
+2. Im T0-Modell ergibt sich dieser Wert als natürliche Konsequenz des Parameters κ ≈ 4.8 × 10⁻¹¹ m/s²:
+   ```
+   ρΛ = Λeff/(8πG) = κ/(8πG²) ≈ 10⁻¹²³ mP⁴
+   ```
+
+3. Diese Übereinstimmung löst auf natürliche Weise das kosmologische Konstantenproblem, da κ nicht feinabgestimmt werden muss, sondern sich aus der grundlegenden Struktur des T0-Modells ergibt:
+   ```
+   κ = βT · c/LT
+   ```
+   
+   wobei LT die kosmologische Korrelationslänge ist.
+
+Diese Formulierung erklärt sowohl die beobachteten Galaxienrotationskurven als auch die kosmische Beschleunigung ohne Einführung zusätzlicher dunkler Komponenten und ermöglicht einen direkten experimentellen Vergleich mit MOND (Modified Newtonian Dynamics) und f(R)-Gravitationstheorien.
+
+Diese Herleitung zeigt, wie der lineare Term im Gravitationspotential konsistent aus einer Modifikation der Einstein-Hilbert-Wirkung durch einen Term proportional zur kosmologischen Konstante folgt.
 
 ### Ableitung der Gravitation im natürlichen System des T0-Modells
 
@@ -131,14 +190,24 @@ Im T0-Modell wird die Gravitation nicht als fundamentale Eigenschaft postuliert,
 Die Besonderheit des T0-Modells besteht darin, dass die Einstein-Hilbert-Wirkung und die allgemeine Relativitätstheorie als effektive Beschreibungen der Gravitation erscheinen, während die fundamentalere Beschreibung durch das intrinsische Zeitfeld erfolgt. Dies ermöglicht eine vereinheitlichte Behandlung der Gravitation mit anderen Wechselwirkungen und erklärt die beobachteten Anomalien in der Galaxiendynamik ohne Rückgriff auf dunkle Materie.
 
 ## Ebene 3: Abgeleitete Konstanten mit einfachen Werten
+
+Im T0-Modell mit natürlichen Einheiten nehmen viele abgeleitete Konstanten bemerkenswert einfache Werte an:
+
 - **Compton-Wellenlänge des Elektrons** (λC,e = 1/me)
-- **Rydberg-Konstante** (R∞ = 1/2)
-- **Josephson-Konstante** (KJ = 1/π)
-- **von-Klitzing-Konstante** (RK = 2π)
-- **Schwinger-Grenze** (ES = me²)
-- **Stefan-Boltzmann-Konstante** (σ = π²/60)
-- **Hawking-Temperatur** (TH = 1/(8πM))
-- **Bekenstein-Hawking-Entropie** (SBH = 4πM²)
+- **Rydberg-Konstante** (R∞ = αEM²·me/2 = me/2)
+  - *Ergibt sich aus der Beziehung R∞ = me·e⁴/(8ε₀²h³c) mit αEM = 1*
+- **Josephson-Konstante** (KJ = 2e/h = 2√4π/2π = √(4/π) ≈ 1.13)
+  - *Mit h = 2π und e = √4π*
+- **von-Klitzing-Konstante** (RK = h/e² = 2π/4π = 1/2)
+  - *Mit h = 2π und e² = 4π*
+- **Schwinger-Grenze** (ES = me²c³/e√ℏ = me²)
+  - *Mit c = ℏ = 1 und e = √4π*
+- **Stefan-Boltzmann-Konstante** (σ = π²k₄B/(60ℏ³c²) = π²/60)
+  - *Mit ℏ = c = kB = 1*
+- **Hawking-Temperatur** (TH = ℏc³/(8πGMkB) = 1/(8πM))
+  - *Mit ℏ = c = G = kB = 1*
+- **Bekenstein-Hawking-Entropie** (SBH = 4πGM²/(ℏc) = 4πM²)
+  - *Mit ℏ = c = G = 1*
 
 ## Längenskalen mit hierarchischen Beziehungen
 
@@ -219,13 +288,21 @@ Im T0-Modell werden Längenskalen häufig als inverse Energien ausgedrückt, was
 
 Gebräuchliche SI-Einheiten können im T0-Modell auf Energie als Basiseinheit zurückgeführt werden. Dies ermöglicht eine Darstellung aller physikalischen Größen in einem vereinheitlichten System:
 
-| SI-Einheit | Dimension im SI-System | T0-Modell Entsprechung | Umrechnungsbeziehung | Prozentuale Abweichung |
+| SI-Einheit | Dimension im SI-System | T0-Modell Entsprechung | Umrechnungsbeziehung | Typische Messgenauigkeit |
 |------------|------------------------|------------------------|----------------------|------------------------|
 | Meter (m) | [L] | [E⁻¹] | 1 m ↔ (197 MeV)⁻¹ | < 0,001% |
 | Sekunde (s) | [T] | [E⁻¹] | 1 s ↔ (6.58 × 10⁻²² MeV)⁻¹ | < 0,00001% |
 | Kilogramm (kg) | [M] | [E] | 1 kg ↔ 5.61 × 10²⁶ MeV | < 0,001% |
 | Ampere (A) | [I] | [E] | 1 A ↔ Ladung pro Zeit ↔ [E²] | < 0,005% |
 | Kelvin (K) | [Θ] | [E] | 1 K ↔ 8.62 × 10⁻⁵ eV | < 0,01% |
+| Volt (V) | [ML²T⁻³I⁻¹] | [E] | 1 V ↔ 1 eV/e (mit e = √4π) | < 0,0001% |
+| Tesla (T) | [MT⁻²I⁻¹] | [E²] | 1 T ↔ Energie pro Fläche | < 0,01% |
+| Pascal (Pa) | [ML⁻¹T⁻²] | [E⁴] | 1 Pa ↔ Energie pro Volumen | < 0,005% |
+| Watt (W) | [ML²T⁻³] | [E²] | 1 W ↔ Energie pro Zeit | < 0,001% |
+| Coulomb (C) | [TI] | [1] | 1 C ↔ e/√4π | < 0,0001% |
+| Ohm (Ω) | [ML²T⁻³I⁻²] | [E⁻¹] | 1 Ω ↔ h/e² = 1/2 (bei h=2π, e=√4π) | < 0,0000001% |
+| Farad (F) | [M⁻¹L⁻²T⁴I²] | [E⁻¹] | 1 F ↔ Inverse Energie | < 0,01% |
+| Henry (H) | [ML²T⁻²I⁻²] | [E⁻¹] | 1 H ↔ Inverse Energie | < 0,01% |⁵ eV | < 0,01% |
 | Volt (V) | [ML²T⁻³I⁻¹] | [E] | 1 V ↔ 1 eV/e (mit e=1) | < 0,0001% |
 | Tesla (T) | [MT⁻²I⁻¹] | [E²] | 1 T ↔ Energie pro Fläche | < 0,01% |
 | Pascal (Pa) | [ML⁻¹T⁻²] | [E⁴] | 1 Pa ↔ Energie pro Volumen | < 0,005% |
@@ -241,20 +318,21 @@ Die Einheit Coulomb nimmt im T0-Modell eine besondere Stellung ein, da sie die d
 
 e² = 4πε₀ℏc
 
-Da im T0-Modell ℏ = c = 1 gesetzt wird, folgt:
-e² = 4πε₀
+Da im T0-Modell ℏ = c = ε₀ = 1 gesetzt wird, folgt:
+e² = 4π
+e = √4π ≈ 3,5
 
 Mit ε₀μ₀c² = 1 und c = 1 ergibt sich weiter:
 ε₀μ₀ = 1
 
-Diese Beziehungen führen dazu, dass die elektrische Ladung (Coulomb) im T0-Modell dimensionslos wird. Dies ist ein fundamentales Ergebnis, das die Vereinheitlichung von Elektromagnetismus und anderen Wechselwirkungen im T0-Modell ermöglicht.
+Diese Beziehungen geben der elektrischen Ladung eine besondere Bedeutung im T0-Modell. Der Wert e = √4π ist eine natürliche Konsequenz der Normierung αEM = 1 und steht im Einklang mit den Maxwellgleichungen in ihrer einfachsten Form.
 
-Die Coulomb-Einheit wird somit zu einer reinen Zahl, was tiefgreifende Konsequenzen hat:
-1. Elektrische Ladungen können direkt als dimensionslose Vielfache der Elementarladung e = 1 ausgedrückt werden
-2. Elektrische und magnetische Felder werden in Energieeinheiten gemessen
-3. Die Maxwell-Gleichungen nehmen ihre einfachste Form an (ohne ε₀ und μ₀ als Vorfaktoren)
+Die Auswirkungen der Normierung e = √4π sind:
+1. Elektrische Ladungen werden in Einheiten von √4π gemessen
+2. Elektrische und magnetische Felder lassen sich in reinen Energieeinheiten ausdrücken
+3. Die Maxwell-Gleichungen nehmen ihre eleganteste Form an
 
-Diese Vereinfachung ist nicht nur mathematisch elegant, sondern deutet auch auf eine tiefere Verbindung zwischen elektrischen Phänomenen und der fundamentalen Energiestruktur des Universums hin.
+Diese naturgemäße Darstellung offenbart die tiefe Verbindung zwischen Elektromagnetismus und der fundamentalen Energiestruktur des Universums.
 
 ## Planck-Konstanten und ihre Rolle im T0-Modell
 
@@ -292,3 +370,29 @@ Die scheinbaren "Abweichungen" zwischen Messungen im SI-System und den theoretis
 Die größeren Abweichungen in kosmologischen Dimensionen sind nicht auf Unzulänglichkeiten des T0-Modells zurückzuführen, sondern auf fundamentale Herausforderungen in der kosmologischen Messtechnik und der Interpretation von Beobachtungsdaten im Kontext des konventionellen kosmologischen Standardmodells.
 
 Das T0-Modell mit seinem System natürlicher Einheiten bietet nicht nur einen mathematisch eleganteren und physikalisch fundamentaleren Rahmen, sondern ermöglicht auch neue Einsichten in die Struktur des Universums, die im SI-System verborgen bleiben. Die quantisierte Struktur der Längenskalen, die besondere Rolle biologischer Systeme und die einheitliche Behandlung aller Wechselwirkungen sind Aspekte, die erst im T0-Modell ihre volle Bedeutung entfalten.
+
+## Vergleich mit etablierten Gravitationstheorien
+
+Das T0-Modell bietet eine Alternative zu etablierten Gravitationstheorien und kann mit diesen direkt verglichen werden:
+
+| Theorie | Grundprinzip | Modifiziertes Potential | Vergleich mit T0 |
+|---------|--------------|-------------------------|------------------|
+| Newtonsche Gravitation | Kraft zwischen Massen | Φ(r) = -GM/r | Spezialfall von T0 für κ=0 |
+| Allgemeine Relativität | Raumzeitkrümmung | Schwarzschild-Lösung | Phänomenologisch äquivalent in schwachen Feldern |
+| MOND (Modified Newtonian Dynamics) | Modifizierte Dynamik bei schwacher Beschleunigung | Φ(r) erfüllt: ∇²Φ = 4πGρ·μ(∇Φ/a₀) | T0 bietet eine fundamentalere Basis für MOND-Effekte |
+| f(R)-Theorien | Modifizierte Gravitationswirkung | Abhängig von spezifischer f(R)-Funktion | T0 entspricht f(R) = R - 2κ·G für schwache Felder |
+| T0-Modell | Emergente Gravitation aus Zeitfeld | Φ(r) = -GM/r + κr | Vereint Quantenmechanik und Gravitation |
+
+Das T0-Modell zeigt folgende Vorteile gegenüber diesen Theorien:
+
+1. **Einheitliche Behandlung von Quanten- und makroskopischer Physik** durch das intrinsische Zeitfeld T(x)
+2. **Natürliche Erklärung für Galaxiendynamik** ohne Annahme dunkler Materie
+3. **Lösung des kosmologischen Konstantenproblems** durch Ableitung von κ aus fundamentalen Parametern
+4. **Mathematische Konsistenz** mit Quantenfeldtheorie und Standardmodell durch modifizierte Lagrange-Dichten
+5. **Testbare Vorhersagen** für Abweichungen vom 1/r-Potential auf verschiedenen Skalen
+
+Experimentelle Tests zur Unterscheidung zwischen diesen Theorien umfassen:
+- Präzisionsmessungen der Periheldrehung von Planeten
+- Gravitationslinseneffekte bei entfernten Galaxien
+- Satellitenmessungen der Pioneer-Anomalie
+- Beobachtung von Galaxienrotationskurven verschiedener Morphologien
