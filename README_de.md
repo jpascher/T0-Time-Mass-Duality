@@ -16,17 +16,18 @@ Die Publikationen und zusätzlichen Dokumente sind wie folgt organisiert:
               
 ```
 T0-Time-Mass-Duality/
-├── 1/
-│   ├── 2/
-│   │   ├── pdf/
-│   │   │   ├── Deutsch/              # Deutsche Publikationen
-│   │   │   └── English/              # Englische Publikationen
-│   │   ├── tex/                      # LaTeX-Quelldateien
-│   │   ├── NatuerlilEinheitenTabelleKurz.md        # Kurze Tabelle natürlicher Einheiten (Deutsch)
-│   │   ├── NatuerlilEinheitenTabelleKurzEn.md      # Kurze Tabelle natürlicher Einheiten (Englisch)
-│   │   ├── esotherik.md                           # Diskussion über Skalenwechselwirkungen und physikalische Grenzen
-│   │   └── website.html                           # Website-Dateien
+├── 2/
+│   ├── pdf/
+│   │   ├── Deutsch/              # Deutsche Publikationen
+│   │   └── English/              # Englische Publikationen
+│   ├── tex/                      # LaTeX-Quelldateien
+│   ├── NatuerlilEinheitenTabelleKurz.md        # Kurze Tabelle natürlicher Einheiten (Deutsch)
+│   ├── NatuerlilEinheitenTabelleKurzEn.md      # Kurze Tabelle natürlicher Einheiten (Englisch)
+│   ├── esotherik.md                           # Diskussion über Skalenwechselwirkungen und physikalische Grenzen
+│   └── website.html                           # Website-Dateien
 └── README_de.md                     # Diese Datei
+
+
 ```
 
 ## Schlüsselkonzepte
@@ -50,7 +51,7 @@ Nachfolgend sind die 28 Publikationen in diesem Repository aufgelistet, organisi
 
 - **[Die Notwendigkeit der Erweiterung der Quantenmechanik und Quantenfeldtheorie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/NotwendigkeitQMErweiterungEn.pdf)**  
   Hebt Schwächen konventioneller Theorien hervor und stellt die Zeit-Masse-Dualität als Lösung vor.
-- **[Zusammenfassung - Komplementärer Dualismus in der Physik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/KurzKomplementDualPhysikEn.pdf)**  
+- **[Zusammenfassung – Komplementärer Dualismus in der Physik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/KurzKomplementDualPhysikEn.pdf)**  
   Erklärt die Zeit-Masse-Dualität einfach als Ergänzung zur Welle-Teilchen-Dualität.
 - **[Eine neue Perspektive auf Zeit und Raum: Johann Paschers revolutionäre Ideen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/ZeitRaumPascherEn.pdf)**  
   Für alle zugänglich, führt das T₀-Modell mit fester Zeit und variabler Masse ein.
@@ -150,5 +151,3 @@ Für Anfragen zu diesem Forschungsprogramm nutzen Sie bitte die Kontaktinformati
 ## Copyright
 
 © 2025 Johann Pascher | Alle Rechte vorbehalten
-# Dokumente im Verzeichnis pdf\Deutsch
-
