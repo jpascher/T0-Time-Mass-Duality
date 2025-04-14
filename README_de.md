@@ -44,79 +44,79 @@ Nachfolgend sind die 28 Publikationen in diesem Repository aufgelistet, organisi
 
 ### Ausgangspunkt: Feldtheorie als Initialidee
 
-- **[Feldtheorie und Quantenkorrelationen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/FeldtheorieQuant.pdf)**  
+- **[Feldtheorie und Quantenkorrelationen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/FeldtheorieQuant.pdf)**  
   Der Ausgangspunkt, der sofortige Teilchenverbindungen (Nichtlokalität) hinterfragt und eine neue Feldstruktur vorschlägt.
 
 ### Konzeptionelle Grundlagen und Motivation
 
-- **[Die Notwendigkeit der Erweiterung der Quantenmechanik und Quantenfeldtheorie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/NotwendigkeitQMErweiterung.pdf)**  
+- **[Die Notwendigkeit der Erweiterung der Quantenmechanik und Quantenfeldtheorie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/NotwendigkeitQMErweiterung.pdf)**  
   Hebt Schwächen konventioneller Theorien hervor und stellt die Zeit-Masse-Dualität als Lösung vor.
-- **[Zusammenfassung – Komplementärer Dualismus in der Physik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/KurzKomplementDualPhysik.pdf)**  
+- **[Zusammenfassung – Komplementärer Dualismus in der Physik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/KurzKomplementDualPhysik.pdf)**  
   Erklärt die Zeit-Masse-Dualität einfach als Ergänzung zur Welle-Teilchen-Dualität.
-- **[Eine neue Perspektive auf Zeit und Raum: Johann Paschers revolutionäre Ideen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/ZeitRaumPascher.pdf)**  
+- **[Eine neue Perspektive auf Zeit und Raum: Johann Paschers revolutionäre Ideen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/ZeitRaumPascher.pdf)**  
   Für alle zugänglich, führt das T₀-Modell mit fester Zeit und variabler Masse ein.
-- **[Zeit-Masse-Dualität: Eine neue Perspektive](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/ZeitMasseNeuerBlick.pdf)**  
+- **[Zeit-Masse-Dualität: Eine neue Perspektive](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/ZeitMasseNeuerBlick.pdf)**  
   Bietet einen einführenden Überblick über das Konzept der Zeit-Masse-Dualität und ihr Potenzial, die Physik zu revolutionieren.
 
 ### Mathematische Formalisierung
 
-- **[Maßgebliche mathematische Formalismen der Zeit-Masse-Dualitätstheorie mit Lagrangedichten](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MathZeitMasseLagrangeDicht.pdf)**  
+- **[Maßgebliche mathematische Formalismen der Zeit-Masse-Dualitätstheorie mit Lagrangedichten](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/MathZeitMasseLagrangeDicht.pdf)**  
   Entwickelt die Theorie mathematisch mit einfachen Regeln und Lagrangedichte-Methoden.
-- **[Mathematische Formulierungen der Zeit-Masse-Dualitätstheorie mit Lagrange](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MathZeitMasseLagrange.pdf)**  
+- **[Mathematische Formulierungen der Zeit-Masse-Dualitätstheorie mit Lagrange](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/MathZeitMasseLagrange.pdf)**  
   Vertieft mathematische Modelle für Teilchen wie das Higgs-Feld in der Zeit-Masse-Dualität.
-- **[Mathematische Formulierung des Higgs-Mechanismus in der Zeit-Masse-Dualität](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MathHiggsZeitMasse.pdf)**  
+- **[Mathematische Formulierung des Higgs-Mechanismus in der Zeit-Masse-Dualität](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/MathHiggsZeitMasse.pdf)**  
   Erläutert, wie der Higgs-Mechanismus in die Zeit-Masse-Dualität integriert wird, um die Teilchenmasse zu erklären.
-- **[Zeit-Masse-Dualität: Parameter des T₀-Modells](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/ZeitMasseT0Params.pdf)**  
+- **[Zeit-Masse-Dualität: Parameter des T₀-Modells](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/ZeitMasseT0Params.pdf)**  
   Beschreibt detailliert die Parameter, die das T₀-Modell im Rahmen der Zeit-Masse-Dualität definieren.
-- **[Konsistenz von Alpha=1 und Beta=1 in der Zeit-Masse-Dualität](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/Alpha1Beta1Konsistenz.pdf)**  
+- **[Konsistenz von Alpha=1 und Beta=1 in der Zeit-Masse-Dualität](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/Alpha1Beta1Konsistenz.pdf)**  
   Untersucht die Implikationen der Setzung fundamentaler Konstanten auf Eins innerhalb der Theorie.
 
 ### Anwendungen und Erweiterungen
 
-- **[Dynamische Masse von Photonen und ihre Implikationen für Nichtlokalität](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/DynMassePhotonenNichtlokal.pdf)**  
+- **[Dynamische Masse von Photonen und ihre Implikationen für Nichtlokalität](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/DynMassePhotonenNichtlokal.pdf)**  
   Untersucht variable Photonenmasse und deren Rolle bei der Erklärung nichtlokaler Teilcheninteraktionen.
-- **[Eine mathematische Analyse der Energiedynamik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MathEnergiedynamik.pdf)**  
+- **[Eine mathematische Analyse der Energiedynamik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/MathEnergiedynamik.pdf)**  
   Wendet die Zeit-Masse-Dualität auf die Kosmologie an und interpretiert Dunkle Energie als Energiedistributionsmechanismus.
-- **[Kompensatorische und additive Effekte: Messdifferenzen zwischen T₀- und Standardmodell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MessdifferenzenT0Standard.pdf)**  
+- **[Kompensatorische und additive Effekte: Messdifferenzen zwischen T₀- und Standardmodell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/MessdifferenzenT0Standard.pdf)**  
   Vergleicht kosmologische Messungen und löst möglicherweise Diskrepanzen wie die Hubble-Spannung.
-- **[Anpassung von Temperatureinheiten in natürlichen Einheiten und CMB-Messungen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/TempEinheitenCMB.pdf)**  
+- **[Anpassung von Temperatureinheiten in natürlichen Einheiten und CMB-Messungen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/TempEinheitenCMB.pdf)**  
   Untersucht Anpassungen von Temperatureinheiten in natürlichen Einheiten für Messungen der kosmischen Hintergrundstrahlung.
-- **[Vereinfachte Beschreibung der vier fundamentalen Kräfte mit Zeit-Masse-Dualität](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/VierKraefteZeitMasse.pdf)**  
+- **[Vereinfachte Beschreibung der vier fundamentalen Kräfte mit Zeit-Masse-Dualität](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/VierKraefteZeitMasse.pdf)**  
   Beschreibt die vier fundamentalen Kräfte aus der Perspektive der Zeit-Masse-Dualität.
-- **[Systematische Zusammenstellung natürlicher Einheiten mit Energie als Basiseinheit](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/NatEinheitenSystematik.pdf)**  
+- **[Systematische Zusammenstellung natürlicher Einheiten mit Energie als Basiseinheit](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/NatEinheitenSystematik.pdf)**  
   Ein umfassendes Nachschlagewerk mit detaillierten Tabellen aller physikalischer Größen und ihrer Ableitungen in einem energiebezogenen Einheitensystem, das fundamentale Muster wie die Quantisierung von Längenskalen offenlegt.
-- **[Emergente Gravitation im T₀-Modell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/EmergentGravT0.pdf)**  
+- **[Emergente Gravitation im T₀-Modell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/EmergentGravT0.pdf)**  
   Untersucht, wie Gravitation aus den Zeit-Masse-Interaktionen des T₀-Modells emergieren könnte.
-- **[Biologische Anomalien in der Quantisierung von Längenskalen im T0-Modell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/biologischeSysteme.pdf)**  
+- **[Biologische Anomalien in der Quantisierung von Längenskalen im T0-Modell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/biologischeSysteme.pdf)**  
   Untersucht die besondere Stellung biologischer Strukturen in der quantisierten Längenskalenhierarchie und ihre Fähigkeit, stabile Strukturen in „verbotenen Zonen“ zu bilden.
-- **[Kurze Tabelle natürlicher Einheiten](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/NatuerlilEinheitenTabelleKurz.pdf)**  
+- **[Kurze Tabelle natürlicher Einheiten](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/NatuerlilEinheitenTabelleKurz.pdf)**  
   Eine kompakte Tabelle, die die natürlichen Einheiten im T0-Modell zusammenfasst, ergänzend zu den detaillierten Herleitungen in `NatEinheitenSystematik.tex`.
 
 ### Quantenmechanik und Relativität
 
-- **[Verbindung von Quantenmechanik und Relativität durch Zeit-Masse-Dualität Teil I: Theoretische Grundlagen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/QMRelTimeMassPart1.pdf)**  
+- **[Verbindung von Quantenmechanik und Relativität durch Zeit-Masse-Dualität Teil I: Theoretische Grundlagen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/QMRelTimeMassPart1.pdf)**  
   Skizziert theoretische Grundlagen zur Vereinigung von Quantenmechanik und Relativität durch Zeit-Masse-Dualität.
-- **[Verbindung von Quantenmechanik und Relativität durch Zeit-Masse-Dualität Teil II: Kosmologische Implikationen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/QMRelTimeMassPart2.pdf)**  
+- **[Verbindung von Quantenmechanik und Relativität durch Zeit-Masse-Dualität Teil II: Kosmologische Implikationen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/QMRelTimeMassPart2.pdf)**  
   Fokussiert auf kosmologische Implikationen und experimentelle Validierung des vereinheitlichten Rahmens.
-- **[Emergente Zeit in der Quantenmechanik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/ZeitEmergentQM.pdf)**  
+- **[Emergente Zeit in der Quantenmechanik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/ZeitEmergentQM.pdf)**  
   Untersucht Zeit als emergente Eigenschaft in der Quantenmechanik unter Zeit-Masse-Dualität.
-- **[Intrinsische Zeit in der Quantenfeldtheorie: T₀-Modell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/QFTIntrinsischesZeitT0.pdf)**  
+- **[Intrinsische Zeit in der Quantenfeldtheorie: T₀-Modell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/QFTIntrinsischesZeitT0.pdf)**  
   Erforscht das Konzept der intrinsischen Zeit in der Quantenfeldtheorie mit dem T₀-Modell.
 
 ### Kosmologische und Grenzbereiche
 
-- **[Jenseits der Planck-Skala](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/JenseitsPlanck.pdf)**  
+- **[Jenseits der Planck-Skala](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/JenseitsPlanck.pdf)**  
   Untersucht die Implikationen der Zeit-Masse-Dualität für Physik an und jenseits der Planck-Skala.
-- **[Massen Variation in Galaxien](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MassVarGalaxi.pdf)**  
+- **[Massen Variation in Galaxien](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/MassVarGalaxi.pdf)**  
   Erklärt Galaxiendynamiken durch variable Masse, ohne Dunkle Materie zu benötigen.
-- **[Vereinheitlichung des T₀-Modells: Dunkle Energie und Galaxiendynamik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/T0VereinheitlichungDEGal.pdf)**  
+- **[Vereinheitlichung des T₀-Modells: Dunkle Energie und Galaxiendynamik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/T0VereinheitlichungDEGal.pdf)**  
   Wendet die Zeit-Masse-Dualität an, um Dunkle Energie und Galaxiendynamiken in der Kosmologie zu vereinheitlichen.
 
 ### Zusätzliche theoretische Einsichten
 
-- **[Natürliche Einheiten mit Feinstrukturkonstante Alpha=1](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/NatEinheitenAlpha1.pdf)**  
+- **[Natürliche Einheiten mit Feinstrukturkonstante Alpha=1](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/NatEinheitenAlpha1.pdf)**  
   Schlägt ein vereinfachtes Einheitensystem vor, das die Feinstrukturkonstante auf 1 setzt.
-- **[Zusammenfassung physikalischer Konstanten](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/ZusammenfassungKonstant.pdf)**  
+- **[Zusammenfassung physikalischer Konstanten](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/ZusammenfassungKonstant.pdf)**  
   Fasst die Rolle physikalischer Konstanten im Rahmen der Zeit-Masse-Dualität zusammen.
 
 ### Zusätzliche Dokumente
