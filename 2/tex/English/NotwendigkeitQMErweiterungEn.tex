@@ -1,25 +1,22 @@
 \documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[ngerman]{babel}
+\usepackage[english]{babel}
 \usepackage{lmodern}
-\usepackage{csquotes}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{physics}
-\usepackage{geometry}
-\usepackage{tocloft}
-\usepackage{xcolor}
-\usepackage{graphicx,tikz,pgfplots}
-\pgfplotsset{compat=1.18}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
 \usepackage{booktabs}
-\usepackage{siunitx}
-\usepackage{amsthm}
-\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
-\usepackage{cleveref}
+\usepackage{enumitem}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{graphicx}
+\usepackage{float}
 \usepackage{fancyhdr}
-
-\geometry{a4paper, margin=2cm}
 
 % Headers and Footers
 \pagestyle{fancy}
@@ -30,19 +27,11 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
-% Table of Contents Styling
-\renewcommand{\cftsecfont}{\color{blue}}
-\renewcommand{\cftsubsecfont}{\color{blue}}
-\renewcommand{\cftsecpagefont}{\color{blue}}
-\renewcommand{\cftsubsecpagefont}{\color{blue}}
-\setlength{\cftsecindent}{1cm}
-\setlength{\cftsubsecindent}{2cm}
-
-% Custom commands (consistent with other documents)
+% Custom Commands
 \newcommand{\Tfield}{T(x)}
-\newcommand{\betaT}{\beta_{\text{T}}}
 \newcommand{\alphaEM}{\alpha_{\text{EM}}}
 \newcommand{\alphaW}{\alpha_{\text{W}}}
+\newcommand{\betaT}{\beta_{\text{T}}}
 \newcommand{\Mpl}{M_{\text{Pl}}}
 \newcommand{\Tzerot}{T_0(\Tfield)}
 \newcommand{\Tzero}{T_0}
@@ -50,8 +39,16 @@
 \newcommand{\gammaf}{\gamma_{\text{Lorentz}}}
 \newcommand{\DhiggsT}{\Tfield (\partial_\mu + ig A_\mu) \Phi + \Phi \partial_\mu \Tfield}
 
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{proposition}[theorem]{Proposition}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	citecolor=blue,
+	urlcolor=blue,
+	pdftitle={The Necessity of Extending Standard Quantum Mechanics and Quantum Field Theory},
+	pdfauthor={Johann Pascher},
+	pdfsubject={Theoretical Physics},
+	pdfkeywords={T0 Model, Natural Units, Fine-Structure Constant, Unified Unit System, Time-Mass Duality}
+}
 
 \title{The Necessity of Extending Standard Quantum Mechanics and Quantum Field Theory}
 \author{Johann Pascher}
@@ -62,136 +59,528 @@
 	\maketitle
 	
 	\begin{abstract}
-		This work examines the conceptual limitations of standard quantum mechanics (QM) and quantum field theory (QFT) and proposes the time-mass duality with an intrinsic time field as an extension. By introducing \(\Tfield = \frac{\hbar}{\max(m c^2, \omega)}\), a connection between time and mass is established, overcoming the QM-QFT duality and providing a deterministic framework. The theory is supported by experimental predictions and cosmological implications.
+		This paper examines fundamental limitations of standard quantum mechanics (QM) and quantum field theory (QFT), arguing for necessary extensions that address issues of time, causality, and measurement. We introduce a model with intrinsic time $\Tfield = \frac{\hbar}{mc^2}$ as a physical field rather than an external parameter, leading to modified versions of the Schrödinger equation and Lagrangian formulation. This approach resolves problems such as the observer-dependent wavefunction collapse and the compatibility of quantum effects with relativity. The proposed framework demonstrates how quantum mechanics can emerge from a deterministic system when measurement is understood as an intrinsic physical process. Experimental predictions, including mass-dependent decoherence rates and modified entanglement dynamics, are proposed as testable consequences of the model.
 	\end{abstract}
 	
 	\tableofcontents
 	\newpage
 	
-	\section{Introduction: Conceptual Limits of Established Theories}
-	Standard quantum mechanics (QM) and quantum field theory (QFT) face limitations in integrating with General Relativity (GR) and in understanding time and mass. The T0 model offers a new perspective, as described in \textit{From Time Dilation to Mass Variation: Mathematical Core Formulations of Time-Mass Duality Theory} \cite{pascher_lagrange_2025}.
+	\section{Introduction}
+	\label{sec:introduction}
 	
-	\subsection{Inherent Duality Between QM and QFT}
+	Standard quantum mechanics, a theory developed in the early 20th century through the work of Schrödinger \cite{Schrodinger1926}, Heisenberg \cite{Heisenberg1925}, Born \cite{Born1926}, and others, has achieved unprecedented success in predicting microscopic phenomena with extraordinary precision. Similarly, quantum field theory, developed through efforts by Dirac \cite{Dirac1927}, Feynman \cite{Feynman1949}, Schwinger \cite{Schwinger1948}, Tomonaga \cite{Tomonaga1946}, and Dyson \cite{Dyson1949}, provides our most accurate description of particle interactions. 
+	
+	Despite these successes, these frameworks contain persistent conceptual issues that suggest they may be incomplete:
+	
+	\begin{enumerate}
+		\item \textbf{The Measurement Problem}: The unexplained transition from a deterministic wave evolution to a probabilistic outcome upon measurement \cite{vonNeumann1932, Wheeler1983}.
+		
+		\item \textbf{Time as a Parameter}: Time's treatment as an external parameter rather than an observable, creating asymmetry between space and time \cite{Pauli1980, Peres1980}.
+		
+		\item \textbf{Nonlocality and Causality}: The apparent tension between quantum entanglement and relativistic causality \cite{Bell1964, EPR1935, Aspect1982}.
+		
+		\item \textbf{Quantum-Classical Boundary}: The unclear delineation between quantum and classical regimes \cite{Joos1985, Zurek2003, Leggett2002}.
+		
+		\item \textbf{Quantum Gravity}: The challenge of integrating quantum principles with gravity \cite{Rovelli2004, Kiefer2007, Oriti2009}.
+	\end{enumerate}
+	
+	This paper proposes that these issues are not merely philosophical concerns but symptoms of required theoretical extensions to quantum mechanics, similar to those recognized by the early quantum pioneers, including Einstein, Bohr, and Heisenberg. We argue that introducing an intrinsic time field $\Tfield = \frac{\hbar}{mc^2}$ forms the basis for a comprehensive extension addressing these challenges while maintaining the empirical success of standard quantum theory \cite{pascher_zeit_2025}.
+	
+	In particular, this paper demonstrates how a modified framework leads to:
 	\begin{itemize}
-		\item QM: Particle perspective \cite{schrodinger}.
-		\item QFT: Field-based view.
+		\item A mass-dependent intrinsic time causing measurable variations in quantum behavior.
+		\item A resolution of wavefunction collapse as a physical, deterministic process.
+		\item A reinterpretation of nonlocality that maintains consistency with relativistic principles.
+		\item A natural emergence of classical behavior from quantum foundations.
+		\item A pathway toward quantum gravity through the intrinsic time field.
 	\end{itemize}
 	
-	\subsection{Overinterpretation Due to Incomplete Theoretical Foundations}
-	\begin{itemize}
-		\item Measurement problem \cite{einstein2}.
-		\item Nonlocality \cite{bell}.
-	\end{itemize}
+	Through this analysis, we aim to show that, like previous major theoretical transitions in physics, quantum mechanics and quantum field theory may be due for a significant extension—one that both clarifies their foundations and expands their predictive scope \cite{pascher_higgs_2025, pascher_photons_2025}.
 	
-	\section{Asymmetric Treatment of Time and Space}
-	\subsection{Time as a Parameter vs. Space as an Operator}
-	In standard quantum mechanics, time is treated as a parameter:
-	\begin{equation}
-		i\hbar \frac{\partial}{\partial t}\Psi(x,t) = \hat{H}\Psi(x,t)
-	\end{equation}
-	Spatial coordinates, however, are described by operators, resulting in an asymmetric treatment of time and space.
+	\section{Limitations of Standard QM}
+	\label{sec:limitations}
 	
-	\section{Static Treatment of Mass}
-	\subsection{Mass as an Invariable Parameter}
-	In the standard formulation, mass remains constant:
+	\subsection{The External Time Parameter}
+	\label{subsec:time_parameter}
+	
+	Standard quantum mechanics treats time differently from space, with the Schrödinger equation \cite{Schrodinger1926}:
+	
 	\begin{equation}
-		\hat{H} = \frac{\hat{p}^2}{2m} + V(\hat{x})
+		i\hbar \frac{\partial}{\partial t} \Psi = \hat{H} \Psi,
+		\label{eq:schrodinger}
 	\end{equation}
-	This static treatment of mass limits the theory’s flexibility and prevents a dynamic integration of mass and time.
+	
+	Time appears as an external parameter, not an observable with a corresponding operator. This asymmetry creates several problems:
+	
+	\begin{enumerate}
+		\item \textbf{No Time Operator}: While position has an operator $\hat{x}$ with eigenstates, no time operator $\hat{t}$ with comparable properties exists \cite{Pauli1980}.
+		
+		\item \textbf{Universal Clock Assumption}: The theory implicitly assumes all systems share a universal external clock, regardless of their state or interaction history \cite{Page1983}.
+		
+		\item \textbf{Quantum-Relativistic Inconsistency}: Time's treatment conflicts with relativity's treatment of time as a coordinate, not a parameter \cite{Busch1994, Peres1980}.
+	\end{enumerate}
+	
+	This asymmetry between space and time has deep consequences. While spatial dynamics are quantized and state-dependent, temporal evolution is imposed externally and uniformly, creating a conceptual tension that becomes particularly apparent when attempting to reconcile quantum mechanics with relativity.
+	
+	\subsection{Observer Dependence and Measurement}
+	\label{subsec:observer_dependence}
+	
+	The measurement problem, first formally described by von Neumann \cite{vonNeumann1932}, encompasses the unexplained transition from deterministic wave evolution to probabilistic outcomes:
+	
+	\begin{equation}
+		\Psi = \sum_n c_n \psi_n \xrightarrow{\text{measurement}} \psi_m \text{ with probability } |c_m|^2,
+		\label{eq:collapse}
+	\end{equation}
+	
+	This creates conceptual issues:
+	
+	\begin{enumerate}
+		\item \textbf{Observer Dependence}: The standard formulation requires an undefined "observer" outside the system \cite{Wheeler1983, Wigner1967}.
+		
+		\item \textbf{Measurement Apparatus Paradox}: The measuring device, being made of particles following quantum rules, should itself be in superposition \cite{vonNeumann1932, Wigner1963}.
+		
+		\item \textbf{Arbitrary Division}: The quantum/classical boundary is arbitrarily placed \cite{deBroglie1930, Bohm1952, Bell1987}.
+	\end{enumerate}
+	
+	The observer-dependence in quantum measurement has been highlighted through various thought experiments, most notably Wigner's friend \cite{Wigner1967}, which illustrates how different observers may assign different quantum states to the same system, raising questions about the objectivity of quantum states.
+	
+	\subsection{Nonlocality and Causality Tensions}
+	\label{subsec:nonlocality}
+	
+	Quantum entanglement and the experimental violations of Bell's inequalities \cite{Bell1964, Aspect1982, Hensen2015} demonstrate nonlocal correlations that challenge our understanding of causality. The wavefunction of an entangled state:
+	
+	\begin{equation}
+		|\Psi\rangle = \frac{1}{\sqrt{2}}(|0\rangle_A |1\rangle_B - |1\rangle_A |0\rangle_B),
+		\label{eq:entangled_state}
+	\end{equation}
+	
+	leads to correlations that appear to require faster-than-light influences or retrospective determination of properties \cite{EPR1935}.
+	
+	This creates tension with relativistic principles:
+	
+	\begin{enumerate}
+		\item \textbf{Apparent Action at a Distance}: Measurement on one particle seems to instantaneously affect another arbitrarily distant particle.
+		
+		\item \textbf{No-Communication Theorem}: Despite these correlations, no information can be transmitted faster than light \cite{Eberhard1978, Ghirardi1980}.
+		
+		\item \textbf{Reference Frame Dependence}: The simultaneity of measurements depends on the reference frame in relativity, but quantum collapse appears instantaneous in all frames \cite{Aharonov1980, Aharonov1981}.
+	\end{enumerate}
+	
+	These issues suggest that standard quantum mechanics may require an extension that better integrates with relativistic principles and provides a more comprehensive account of spatiotemporal relationships in quantum systems.
 	
 	\section{The Concept of Intrinsic Time}
-	\begin{theorem}[Intrinsic Time]
-		The intrinsic time is defined as:
+	\label{sec:intrinsic_time}
+	
+	\subsection{Definition and Physical Basis}
+	\label{subsec:intrinsic_definition}
+	
+	The concept of intrinsic time proposes that time is not merely an external parameter but a physical property of systems, varying with mass and energy, defined as:
+	
+	\begin{equation}
+		\Tfield = \frac{\hbar}{mc^2},
+		\label{eq:intrinsic_time}
+	\end{equation}
+	
+	For massive particles, this defines the characteristic time scale of the system's quantum evolution. For massless entities like photons, this generalizes to:
+	
+	\begin{equation}
+		\Tfield = \frac{\hbar}{\max(mc^2, \omega)},
+		\label{eq:intrinsic_time_general}
+	\end{equation}
+	
+	where $\omega$ is the photon energy/frequency.
+	
+	The physical basis for this formulation includes:
+	
+	\begin{enumerate}
+		\item \textbf{Energy-Time Relationship}: From Heisenberg's uncertainty principle \cite{Heisenberg1927, Mandelstam1945}, $\Delta E \Delta t \geq \frac{\hbar}{2}$, suggesting an energy-dependent time scale.
+		
+		\item \textbf{Compton Time}: The Compton time $T_C = \frac{\hbar}{mc^2}$ represents the time for light to cross the Compton wavelength of a particle, a natural quantum timescale \cite{MacGibbon1987, Caldirola1953}.
+		
+		\item \textbf{Zitterbewegung}: The intrinsic trembling motion predicted by the Dirac equation, with frequency $\omega_Z = \frac{2mc^2}{\hbar}$, corresponding to a period $T_Z = \frac{\pi\hbar}{mc^2}$ \cite{Dirac1928, Schrodinger1930, Hestenes1990}.
+	\end{enumerate}
+	
+	This intrinsic time provides a natural scale for quantum processes, suggesting that heavier particles experience faster internal time evolution than lighter ones, a concept that has implications for decoherence, measurement, and the quantum-classical transition.
+	
+	\subsection{Relationship to de Broglie's Clock}
+	\label{subsec:debroglie_clock}
+	
+	The concept of intrinsic time is closely related to de Broglie's idea of a "periodic phenomenon" or internal clock associated with particles \cite{deBroglie1923, deBroglie1924}. De Broglie proposed that every particle has an associated wave with frequency:
+	
+	\begin{equation}
+		\nu = \frac{mc^2}{h},
+		\label{eq:debroglie_frequency}
+	\end{equation}
+	
+	From which the period, or characteristic time, is:
+	
+	\begin{equation}
+		T = \frac{1}{\nu} = \frac{h}{mc^2} = \frac{2\pi\hbar}{mc^2} = 2\pi \Tfield,
+		\label{eq:debroglie_period}
+	\end{equation}
+	
+	Thus, our intrinsic time $\Tfield$ is directly related to de Broglie's internal clock period by a factor of $2\pi$. This connection links our approach to early foundations of quantum theory and provides a physical interpretation of the intrinsic time as the period of the fundamental oscillation associated with a particle's rest energy.
+	
+	De Broglie's attempt to develop a causal interpretation of quantum mechanics \cite{deBroglie1927, deBroglie1930} encountered obstacles in the Copenhagen interpretation era, but the concept of intrinsic time may revitalize aspects of his program within a modern theoretical framework that is both causal and compatible with relativity.
+	
+	\subsection{Geometric Interpretation in Spacetime}
+	\label{subsec:geometric_interpretation}
+	
+	The intrinsic time field $\Tfield$ can be interpreted geometrically within a spacetime framework. Unlike standard approaches where time is an external coordinate, the intrinsic time field creates a mass-dependent proper time scale that varies throughout spacetime based on the distribution of matter and energy.
+	
+	In this interpretation:
+	
+	\begin{enumerate}
+		\item \textbf{Spacetime Metric}: The standard spacetime interval $ds^2 = c^2dt^2 - dx^2 - dy^2 - dz^2$ is modified to incorporate the intrinsic time field, becoming effectively mass-dependent.
+		
+		\item \textbf{Local Time Dilation}: Rather than coordinate-based time dilation in relativity, the intrinsic time field creates a local, mass-dependent "flow of time" for quantum processes.
+		
+		\item \textbf{Curved Configuration Space}: The presence of the intrinsic time field effectively curves the configuration space of quantum systems, influencing their evolution in a manner analogous to how mass curves spacetime in general relativity.
+	\end{enumerate}
+	
+	This geometric perspective reveals how the intrinsic time approach creates a bridge between quantum mechanics and relativistic principles, with quantum evolution determined by a field that varies throughout space and is influenced by mass-energy distribution.
+	
+	\section{Extension of Quantum Mechanics}
+	\label{sec:qm_extension}
+	
+	\subsection{Modified Schrödinger Equation}
+	\label{subsec:modified_schrodinger}
+	
+	The central extension of quantum mechanics involves modifying the Schrödinger equation to incorporate the intrinsic time field $\Tfield$:
+	
+	\begin{equation}
+		i\hbar \Tfield \frac{\partial}{\partial t} \Psi + i\hbar \Psi \frac{\partial \Tfield}{\partial t} = \hat{H} \Psi,
+		\label{eq:modified_schrodinger}
+	\end{equation}
+	
+	This extension has several important features:
+	
+	\begin{enumerate}
+		\item \textbf{Mass-Dependent Evolution}: Systems with different masses evolve at different rates based on their intrinsic time value, $\Tfield = \frac{\hbar}{mc^2}$.
+		
+		\item \textbf{Coupling Term}: The second term, $i\hbar \Psi \frac{\partial \Tfield}{\partial t}$, couples the wavefunction to changes in the intrinsic time field, creating a feedback mechanism.
+		
+		\item \textbf{Conservation Form}: The equation maintains proper conservation of probability while introducing mass-dependence to the evolution.
+	\end{enumerate}
+	
+	For a time-independent Hamiltonian and static intrinsic time field, the solutions take the form:
+	
+	\begin{equation}
+		\Psi(x,t) = \sum_n c_n \psi_n(x) e^{-iE_n t / \hbar \Tfield},
+		\label{eq:modified_solution}
+	\end{equation}
+	
+	showing that the time evolution is scaled by $\Tfield$, with heavier systems (smaller $\Tfield$) evolving more rapidly in absolute time.
+	
+	For multiple particles, each with its own intrinsic time value, the evolution becomes:
+	
+	\begin{equation}
+		\Psi(x_1,...x_N,t) = \sum_n c_n \psi_n(x_1,...x_N) \exp\left(-i\frac{E_n t}{\hbar \sum_i \frac{1}{T_i}}\right),
+		\label{eq:multi_particle}
+	\end{equation}
+	
+	with the effective time scale determined by a combination of the individual intrinsic times.
+	
+	\subsection{Quantum Measurement as a Physical Process}
+	\label{subsec:quantum_measurement}
+	
+	Within this extended framework, quantum measurement is reinterpreted as a physical process involving the interaction between systems with different intrinsic time scales. The key features of this approach include:
+	
+	\begin{enumerate}
+		\item \textbf{Intrinsic Time Disparity}: When a quantum system interacts with a measurement apparatus with much greater mass, their intrinsic times differ significantly: $\Tfield_{\text{system}} \gg \Tfield_{\text{apparatus}}$.
+		
+		\item \textbf{Decoherence Mechanism}: This time scale mismatch naturally leads to rapid decoherence of coherent superpositions, with a rate proportional to the mass ratio:
+		
 		\begin{equation}
-			\Tfield = \frac{\hbar}{\max(m c^2, \omega)}
+			\Gamma_{\text{decoherence}} \approx \Gamma_0 \frac{m_{\text{apparatus}}}{m_{\text{system}}},
+			\label{eq:decoherence_rate}
 		\end{equation}
-	\end{theorem}
-	This definition unifies the treatment of massive particles and photons. The modified Schrödinger equation is:
-	\begin{equation}
-		i\hbar \Tfield \frac{\partial}{\partial t} \Psi + i\hbar \Psi \frac{\partial \Tfield}{\partial t} = \hat{H} \Psi
-	\end{equation}
-	This makes time evolution mass-dependent, enabling a more dynamic description.
+		
+		where $\Gamma_0$ is a coupling constant.
+		
+		\item \textbf{Emergent Collapse}: What appears as wavefunction collapse is actually a rapid decoherence process that becomes effectively instantaneous for macroscopic measuring devices.
+	\end{enumerate}
 	
-	\section{Time-Mass Duality: A New Theoretical Framework}
-	\subsection{Complementary Models}
-	\begin{itemize}
-		\item Standard Model: Constant mass, variable time.
-		\item T0 Model: Absolute time, variable mass.
-	\end{itemize}
-	Time-mass duality offers an alternative perspective that transcends the limitations of traditional approaches.
+	This approach resembles decoherence theory \cite{Joos1985, Zurek2003} but provides a specific physical mechanism through intrinsic time disparity, quantitatively predicting the decoherence rate based on mass ratios.
 	
-	\section{Lagrangian Formulation}
-	The total Lagrangian density of the T0 model is:
-	\begin{equation}
-		\mathcal{L}_{\text{Total}} = \mathcal{L}_{\text{Boson}} + \mathcal{L}_{\text{Fermion}} + \mathcal{L}_{\text{Higgs-T}} + \mathcal{L}_{\text{intrinsic}}, \quad \mathcal{L}_{\text{intrinsic}} = \frac{1}{2} \partial_\mu \Tfield \partial^\mu \Tfield - V(\Tfield)
-	\end{equation}
-	This approach integrates the dynamics of the intrinsic time field into existing field theories.
+	The key difference from standard decoherence approaches is that here, the mechanism is intrinsic to the systems involved, not dependent on environmental degrees of freedom or arbitrary cutoffs. The collapse-like behavior emerges naturally from the mass-dependent time evolution.
 	
-	\section{Implications for Fundamental Phenomena}
-	\subsection{Quantum Coherence and Decoherence}
-	The decoherence rate becomes mass-dependent:
+	\subsection{Resolution of Nonlocality Paradoxes}
+	\label{subsec:nonlocality_resolution}
+	
+	The intrinsic time framework offers a novel perspective on quantum nonlocality that potentially resolves the tension with relativistic causality. For entangled particles:
+	
 	\begin{equation}
-		\Gamma_{\text{dec}} = \Gamma_0 \cdot \frac{m c^2}{\hbar}
-	\end{equation}
-	Gravitation emerges as a property from gradients of the intrinsic time field:
-	\begin{equation}
-		\nabla \Tfield = -\frac{\hbar}{m^2 c^2} \nabla m
-	\end{equation}
-	with the modified gravitational potential:
-	\begin{equation}
-		\Phi(r) = -\frac{G M}{r} + \kappa r, \quad \kappa \approx \SI{4.8e-11}{\meter\per\second\squared}
+		|\Psi\rangle = \frac{1}{\sqrt{2}}(|0\rangle_A |1\rangle_B - |1\rangle_A |0\rangle_B),
+		\label{eq:entangled_state_resolution}
 	\end{equation}
 	
-	\begin{figure}[h]
-		\centering
-		\begin{tikzpicture}
-			\begin{axis}[
-				xlabel={Mass [eV]},
-				ylabel={Coherence Time [eV\(^{-1}\)]},
-				xlabel style={font=\large},
-				ylabel style={font=\large},
-				tick label style={font=\normalsize},
-				xmin=0, xmax=1000,
-				ymin=0, ymax=0.01,
-				legend pos=north east,
-				legend style={font=\large},
-				grid=both,
-				minor tick num=1
-				]
-				\addplot[blue, ultra thick, domain=1:1000, samples=100] {1/x};
-				\legend{\(\tau \propto 1/m\)}
-			\end{axis}
-		\end{tikzpicture}
-		\caption{Mass-dependent coherence time in the T0 model.}
-	\end{figure}
+	Traditional accounts suggest instantaneous collapse upon measurement of one particle. In the intrinsic time framework:
 	
-	\section{Variable Mass as a Hidden Variable}
-	\subsection{Modified Quantum Dynamics}
-	Time evolution can also be described by a variable mass:
+	\begin{enumerate}
+		\item \textbf{Intrinsic Time Linkage}: Entangled particles share an effective intrinsic time that determines their evolution, regardless of spatial separation.
+		
+		\item \textbf{No Actual Transmission}: Measurement outcomes are manifestations of pre-existing conditions encoded in the shared intrinsic time structure, not signals transmitted between particles.
+		
+		\item \textbf{Frame-Invariant Correlation}: The intrinsic time field provides a reference frame-independent mechanism for correlations that appears nonlocal in spacetime but is local in an extended configuration space.
+	\end{enumerate}
+	
+	Mathematically, an entangled state evolves according to its combined intrinsic time structure:
+	
 	\begin{equation}
-		i\hbar \frac{\partial}{\partial t}\Psi(x,t) = \hat{H}(m(t))\Psi(x,t)
+		|\Psi(t)\rangle = \frac{1}{\sqrt{2}} \Big( |0(t/T_A)\rangle_A |1(t/T_B)\rangle_B - |1(t/T_A)\rangle_A |0(t/T_B)\rangle_B \Big),
+		\label{eq:time_entangled_evolution}
 	\end{equation}
-	This suggests that mass could act as a hidden variable explaining the apparent indeterminacy of quantum mechanics.
 	
-	\section{Cosmological Implications}
-	The T0 model has far-reaching cosmological implications:
-	\begin{itemize}
-		\item Redshift: \( 1 + z = e^{\alpha d} \), \(\alpha \approx \SI{2.3e-18}{\per\meter}\) \cite{pascher_lagrange_2025}.
-		\item Gravitational Potential: \(\Phi(r) = -\frac{G M}{r} + \kappa r\), \(\kappa \approx \SI{4.8e-11}{\meter\per\second\squared}\) \cite{pascher_lagrange_2025}.
-		\item Wavelength Dependence: \( z(\lambda) = z_0 (1 + \betaT \ln(\lambda/\lambda_0)) \), where \(\betaT^{\text{SI}} \approx 0.008\) in SI units and \(\betaT^{\text{nat}} = 1\) in natural units \cite{pascher_params_2025}.
-	\end{itemize}
+	where $T_A = \frac{\hbar}{m_A c^2}$ and $T_B = \frac{\hbar}{m_B c^2}$ are the respective intrinsic times of the particles.
 	
-	\section{Conclusion}
-	The T0 model extends standard quantum mechanics and quantum field theory by introducing time-mass duality and the intrinsic time field. It provides a deterministic framework that overcomes the traditional QM-QFT duality and is supported by experimental predictions such as mass-dependent coherence times and cosmological effects. This extension could represent a significant step toward a more unified theory of physics, integrating quantum mechanics and gravitation.
+	This approach does not contradict Bell's theorem \cite{Bell1964, Bell1987} but reinterprets its implications: the correlations are maintained through the intrinsic time structure shared by entangled particles, not through signals propagating through spacetime.
+	
+	\section{Extension of Quantum Field Theory}
+	\label{sec:qft_extension}
+	
+	\subsection{Intrinsic Time Field in Lagrangian Formulation}
+	\label{subsec:intrinsic_lagrangian}
+	
+	Extending quantum field theory requires incorporating the intrinsic time field $\Tfield$ into the Lagrangian formulation. The modified scalar field Lagrangian density becomes:
+	
+	\begin{equation}
+		\mathcal{L}_{\text{scalar}} = \frac{1}{2} \Tfield^2 \partial_\mu\phi \partial^\mu\phi - \frac{1}{2}m^2\Tfield^2\phi^2 + \frac{1}{2}\partial_\mu\Tfield\partial^\mu\Tfield - V(\Tfield),
+		\label{eq:scalar_lagrangian}
+	\end{equation}
+	
+	where the potential term $V(\Tfield)$ represents the self-interaction of the intrinsic time field. For fermions, the modified Dirac Lagrangian is:
+	
+	\begin{equation}
+		\mathcal{L}_{\text{fermion}} = \bar{\psi} i \gamma^\mu \Tfield \partial_\mu \psi + \bar{\psi} i \gamma^\mu \psi \partial_\mu \Tfield - m\Tfield\bar{\psi}\psi,
+		\label{eq:fermion_lagrangian}
+	\end{equation}
+	
+	The intrinsic time field itself has a Lagrangian:
+	
+	\begin{equation}
+		\mathcal{L}_{\text{intrinsic}} = \frac{1}{2} \partial_\mu \Tfield \partial^\mu \Tfield - \frac{1}{2}\Tfield^2 - \frac{\rho}{\Tfield},
+		\label{eq:intrinsic_lagrangian}
+	\end{equation}
+	
+	where $\rho$ represents the mass-energy density that serves as the source for the intrinsic time field.
+	
+	These modifications lead to field equations that couple the standard fields to the intrinsic time field, creating a unified framework where the progression of quantum processes depends on the mass-energy distribution.
+	
+	\subsection{Field Quantization with Variable Intrinsic Time}
+	\label{subsec:field_quantization}
+	
+	Quantizing fields in the presence of a variable intrinsic time field requires careful consideration of the modified canonical commutation relations. The extended quantization procedure includes:
+	
+	\begin{enumerate}
+		\item \textbf{Modified Canonical Momenta}: For a scalar field, the canonical momentum becomes:
+		
+		\begin{equation}
+			\pi_\phi = \frac{\partial \mathcal{L}}{\partial(\partial_0 \phi)} = \Tfield^2 \partial_0 \phi,
+			\label{eq:modified_momentum}
+		\end{equation}
+		
+		leading to position-dependent commutation relations.
+		
+		\item \textbf{Rescaled Field Operators}: Field operators are rescaled by factors of the intrinsic time field to maintain proper commutation relations:
+		
+		\begin{equation}
+			[\phi(x), \pi_\phi(y)] = i\hbar \delta^3(x-y) \Rightarrow [\phi(x), \Tfield^2(y)\partial_0 \phi(y)] = i\hbar \delta^3(x-y),
+			\label{eq:rescaled_commutators}
+		\end{equation}
+		
+		\item \textbf{Modified Propagators}: Green's functions and propagators incorporate the intrinsic time field, modifying their spacetime dependence:
+		
+		\begin{equation}
+			G(x,y) \sim \int \frac{d^4k}{(2\pi)^4} \frac{e^{-ik(x-y)}}{k^2 - m^2 + i\epsilon} \rightarrow \int \frac{d^4k}{(2\pi)^4} \frac{e^{-ik(x-y)}}{k_\mu \Tfield^2(x) k^\mu - m^2 + i\epsilon},
+			\label{eq:modified_propagator}
+		\end{equation}
+	\end{enumerate}
+	
+	These modifications create a quantum field theory where propagation and interaction properties are influenced by the intrinsic time field, potentially resolving issues in renormalization and high-energy behavior of standard QFT.
+	
+	\subsection{Higgs Mechanism and Intrinsic Time}
+	\label{subsec:higgs_intrinsic}
+	
+	The intrinsic time field has a special relationship with the Higgs mechanism, which generates particle masses in the Standard Model. In the extended framework:
+	
+	\begin{enumerate}
+		\item \textbf{Time-Higgs Coupling}: The intrinsic time field couples to the Higgs field through the relation $\Tfield = \frac{\hbar}{mc^2} = \frac{\hbar}{y v c^2}$, where $y$ is the Yukawa coupling and $v$ is the Higgs vacuum expectation value.
+		
+		\item \textbf{Modified Higgs Lagrangian}: The Higgs Lagrangian is extended to include direct coupling to the intrinsic time field:
+		
+		\begin{equation}
+			\mathcal{L}_{\text{Higgs-T}} = |\DhiggsT|^2 - \lambda(\Phi^* \Phi - v^2)^2 + \frac{1}{2}\partial_\mu \Tfield \partial^\mu \Tfield - V(\Tfield, \Phi),
+			\label{eq:higgs_lagrangian}
+		\end{equation}
+		
+		where $\DhiggsT = \Tfield (\partial_\mu + ig A_\mu) \Phi + \Phi \partial_\mu \Tfield$ is the modified covariant derivative.
+		
+		\item \textbf{Symmetry Breaking}: The spontaneous symmetry breaking in the Higgs sector influences the intrinsic time field, creating a coupled evolution where the Higgs field's behavior determines the structure of the intrinsic time field.
+	\end{enumerate}
+	
+	This coupling between the Higgs mechanism and the intrinsic time field provides a natural explanation for mass generation and the associated quantum time scales, bridging the Standard Model with our extended quantum framework.
+	
+	\section{Experimental Predictions and Tests}
+	\label{sec:experimental}
+	
+	\subsection{Mass-Dependent Decoherence Rates}
+	\label{subsec:mass_dependent_decoherence}
+	
+	A key prediction of the intrinsic time framework is that decoherence rates should depend directly on particle masses:
+	
+	\begin{equation}
+		\Gamma_{\text{decoherence}} \propto \frac{m c^2}{\hbar},
+		\label{eq:decoherence_mass}
+	\end{equation}
+	
+	This leads to testable predictions:
+	
+	\begin{enumerate}
+		\item \textbf{Isotope Effect}: Different isotopes of the same element should show measurably different decoherence rates in quantum interference experiments:
+		
+		\begin{equation}
+			\frac{\Gamma_{\text{isotope 1}}}{\Gamma_{\text{isotope 2}}} = \frac{m_1}{m_2},
+			\label{eq:isotope_ratio}
+		\end{equation}
+		
+		\item \textbf{Scaling Law}: Quantum coherence time should scale inversely with mass across different particle species and molecules:
+		
+		\begin{equation}
+			\tau_{\text{coherence}} \propto \frac{1}{m},
+			\label{eq:coherence_scaling}
+		\end{equation}
+		
+		\item \textbf{Temperature Independence}: Unlike environment-induced decoherence, this intrinsic mechanism should persist even at extremely low temperatures, providing a way to distinguish it from thermal effects.
+	\end{enumerate}
+	
+	Experiments with matter interferometers using different mass particles \cite{Arndt1999, Hornberger2012, Fein2019} or precision measurements of coherence times in quantum systems of varying mass could test these predictions.
+	
+	\subsection{Modified Entanglement Dynamics}
+	\label{subsec:entanglement_dynamics}
+	
+	The intrinsic time framework predicts modified dynamics for entangled systems:
+	
+	\begin{enumerate}
+		\item \textbf{Mass-Dependent Entanglement Decay}: Entanglement between particles of different masses should decay at a rate determined by their mass ratio:
+		
+		\begin{equation}
+			\frac{dC(t)}{dt} \propto \left|\frac{m_1 - m_2}{m_1 + m_2}\right|,
+			\label{eq:entanglement_decay}
+		\end{equation}
+		
+		where $C(t)$ is a measure of entanglement like concurrence.
+		
+		\item \textbf{Frequency-Dependent Photon Correlations}: For entangled photons of different frequencies, correlation measurements should show slight frequency-dependent delays not predicted by standard quantum mechanics:
+		
+		\begin{equation}
+			\Delta t_{\text{correlation}} \propto \left|\frac{1}{\omega_1} - \frac{1}{\omega_2}\right|,
+			\label{eq:frequency_delay}
+		\end{equation}
+		
+		\item \textbf{Hybrid System Asymmetry}: Hybrid entangled systems (e.g., atom-photon entanglement) should show asymmetric behavior reflecting their different intrinsic time scales.
+	\end{enumerate}
+	
+	These predictions could be tested in quantum optics experiments with frequency-diverse entangled photons or in hybrid quantum systems where particles of different masses are entangled.
+	
+	\subsection{Gravitational Implications}
+	\label{subsec:gravitational_implications}
+	
+	The intrinsic time framework provides a potential bridge to quantum gravity:
+	
+	\begin{enumerate}
+		\item \textbf{Modified Gravitational Potential}: The framework predicts a modified gravitational potential:
+		
+		\begin{equation}
+			\Phi(r) = -\frac{G M}{r} + \kappa r,
+			\label{eq:modified_potential}
+		\end{equation}
+		
+		where the additional term $\kappa r$ represents a small correction linked to intrinsic time gradients.
+		
+		\item \textbf{Emergent Gravitational Effects}: Quantum interference experiments in strong gravitational gradients should show effects beyond those predicted by standard quantum mechanics coupled to Newtonian gravity.
+		
+		\item \textbf{Gravitational Decoherence}: A specific prediction for gravitationally induced decoherence emerges:
+		
+		\begin{equation}
+			\Gamma_{\text{grav}} \propto G \frac{M m}{\hbar r}
+			\label{eq:grav_decoherence}
+		\end{equation}
+	\end{enumerate}
+	
+	Tests of quantum coherence in strong gravitational fields or precision measurements of gravitational effects on quantum systems could potentially detect these signatures.
+	
+	\section{Conclusions}
+	\label{sec:conclusions}
+	
+	This paper has presented a framework for extending standard quantum mechanics and quantum field theory through the introduction of an intrinsic time field $\Tfield = \frac{\hbar}{mc^2}$. This extension addresses several fundamental limitations of the conventional frameworks:
+	
+	\begin{enumerate}
+		\item The modified Schrödinger equation incorporates a mass-dependent time evolution, removing the privileged status of time as an external parameter.
+		
+		\item Quantum measurement is reinterpreted as a physical process arising from the interaction of systems with different intrinsic time scales, providing a deterministic account of apparent wavefunction collapse.
+		
+		\item The nonlocality paradox is addressed through a framework where quantum correlations emerge from shared intrinsic time structures rather than faster-than-light influences.
+		
+		\item The quantum field theory extension provides a unified treatment of fields, particles, and their interaction with the intrinsic time field, with potential implications for renormalization and high-energy behavior.
+	\end{enumerate}
+	
+	The intrinsic time approach makes specific experimental predictions, including mass-dependent decoherence rates, modified entanglement dynamics, and emergent gravitational effects. These predictions offer concrete ways to test the framework and distinguish it from standard quantum mechanics.
+	
+	If validated, this extension could represent a significant advancement in our understanding of quantum phenomena, potentially resolving longstanding conceptual issues while maintaining the empirical success of the standard framework. The intrinsic time field provides a natural bridge between quantum mechanics and relativity, offering a pathway toward a more unified description of nature at all scales.
+	
+	Future work will focus on developing more detailed quantitative predictions for specific experimental scenarios, refining the mathematical formalism, and further exploring the implications for cosmology and the foundations of physics.
 	
 	\begin{thebibliography}{99}
-		\bibitem{pascher_lagrange_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/English/MathZeitMasseLagrange.pdf}{From Time Dilation to Mass Variation: Mathematical Core Formulations of Time-Mass Duality Theory}. March 29, 2025.
-		\bibitem{pascher_params_2025} Pascher, J. (2025). \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/English/ZeitMasseT0ParamsEn.pdf}{Time-Mass Duality Theory (T0 Model): Derivation of Parameters \(\kappa\), \(\alpha\), and \(\beta\)}. April 4, 2025.
-		\bibitem{einstein} Einstein, A. (1905). \textit{Does the Inertia of a Body Depend Upon Its Energy Content?}. \textit{Annalen der Physik}, 323(13), 639-641.
-		\bibitem{planck} Planck, M. (1901). \textit{On the Law of Energy Distribution in the Normal Spectrum}. \textit{Annalen der Physik}, 309(3), 553-563.
-		\bibitem{schrodinger} Schrödinger, E. (1926). \textit{An Undulatory Theory of the Mechanics of Atoms and Molecules}. \textit{Physical Review}, 28(6), 1049-1070.
-		\bibitem{bell} Bell, J. S. (1964). \textit{On the Einstein-Podolsky-Rosen Paradox}. \textit{Physics}, 1(3), 195-200.
-		\bibitem{einstein2} Einstein, A., Podolsky, B., Rosen, N. (1935). \textit{Can Quantum-Mechanical Description of Physical Reality Be Considered Complete?}. \textit{Physical Review}, 47(10), 777-780.
+		\bibitem{Schrodinger1926} E. Schrödinger, An Undulatory Theory of the Mechanics of Atoms and Molecules, Physical Review \textbf{28}, 1049 (1926).
+		\bibitem{Heisenberg1925} W. Heisenberg, Quantum-Theoretical Re-interpretation of Kinematic and Mechanical Relations, Zeitschrift für Physik \textbf{33}, 879 (1925).
+		\bibitem{Born1926} M. Born, Zur Quantenmechanik der Stoßvorgänge, Zeitschrift für Physik \textbf{37}, 863 (1926).
+		\bibitem{Dirac1927} P. A. M. Dirac, The Quantum Theory of the Emission and Absorption of Radiation, Proceedings of the Royal Society A \textbf{114}, 243 (1927).
+		\bibitem{Feynman1949} R. P. Feynman, Space-Time Approach to Quantum Electrodynamics, Physical Review \textbf{76}, 769 (1949).
+		\bibitem{Schwinger1948} J. Schwinger, Quantum Electrodynamics. I. A Covariant Formulation, Physical Review \textbf{74}, 1439 (1948).
+		\bibitem{Tomonaga1946} S. Tomonaga, On a Relativistically Invariant Formulation of the Quantum Theory of Wave Fields, Progress of Theoretical Physics \textbf{1}, 27 (1946).
+		\bibitem{Dyson1949} F. J. Dyson, The Radiation Theories of Tomonaga, Schwinger, and Feynman, Physical Review \textbf{75}, 486 (1949).
+		\bibitem{vonNeumann1932} J. von Neumann, \textit{Mathematical Foundations of Quantum Mechanics} (Princeton University Press, 1955), originally published in German in 1932.
+		\bibitem{Wheeler1983} J. A. Wheeler and W. H. Zurek, eds., \textit{Quantum Theory and Measurement} (Princeton University Press, 1983).
+		\bibitem{Pauli1980} W. Pauli, \textit{General Principles of Quantum Mechanics} (Springer, 1980).
+		\bibitem{Peres1980} A. Peres, Measurement of Time by Quantum Clocks, American Journal of Physics \textbf{48}, 552 (1980).
+		\bibitem{Bell1964} J. S. Bell, On the Einstein Podolsky Rosen Paradox, Physics \textbf{1}, 195 (1964).
+		\bibitem{EPR1935} A. Einstein, B. Podolsky, and N. Rosen, Can Quantum-Mechanical Description of Physical Reality Be Considered Complete?, Physical Review \textbf{47}, 777 (1935).
+		\bibitem{Aspect1982} A. Aspect, P. Grangier, and G. Roger, Experimental Realization of Einstein-Podolsky-Rosen-Bohm Gedankenexperiment: A New Violation of Bell's Inequalities, Physical Review Letters \textbf{49}, 91 (1982).
+		\bibitem{Joos1985} E. Joos and H. D. Zeh, The Emergence of Classical Properties Through Interaction with the Environment, Zeitschrift für Physik B \textbf{59}, 223 (1985).
+		\bibitem{Zurek2003} W. H. Zurek, Decoherence, Einselection, and the Quantum Origins of the Classical, Reviews of Modern Physics \textbf{75}, 715 (2003).
+		\bibitem{Leggett2002} A. J. Leggett, Testing the Limits of Quantum Mechanics: Motivation, State of Play, Prospects, Journal of Physics: Condensed Matter \textbf{14}, R415 (2002).
+		\bibitem{Rovelli2004} C. Rovelli, \textit{Quantum Gravity} (Cambridge University Press, 2004).
+		\bibitem{Kiefer2007} C. Kiefer, \textit{Quantum Gravity}, 2nd ed. (Oxford University Press, 2007).
+		\bibitem{Oriti2009} D. Oriti, ed., \textit{Approaches to Quantum Gravity: Toward a New Understanding of Space, Time and Matter} (Cambridge University Press, 2009).
+		\bibitem{pascher_zeit_2025} J. Pascher, Time as an Emergent Property in Quantum Mechanics: A Connection Between Relativity, Fine-Structure Constant, and Quantum Dynamics, (2025).
+		\bibitem{pascher_higgs_2025} J. Pascher, Mathematical Formulation of the Higgs Mechanism in Time-Mass Duality, (2025).
+		\bibitem{pascher_photons_2025} J. Pascher, Dynamic Mass of Photons and Its Implications for Nonlocality in the T0 Model, (2025).
+		\bibitem{Page1983} D. N. Page and W. K. Wootters, Evolution Without Evolution: Dynamics Described by Stationary Observables, Physical Review D \textbf{27}, 2885 (1983).
+		\bibitem{Busch1994} P. Busch, M. Grabowski, and P. J. Lahti, Time Observables in Quantum Theory, Physics Letters A \textbf{191}, 357 (1994).
+		\bibitem{Wigner1967} E. P. Wigner, Remarks on the Mind-Body Question, in \textit{Symmetries and Reflections} (Indiana University Press, 1967), pp. 171-184.
+		\bibitem{Wigner1963} E. P. Wigner, The Problem of Measurement, American Journal of Physics \textbf{31}, 6 (1963).
+		\bibitem{deBroglie1930} L. de Broglie, \textit{An Introduction to the Study of Wave Mechanics} (E. P. Dutton and Company, 1930).
+		\bibitem{Bohm1952} D. Bohm, A Suggested Interpretation of the Quantum Theory in Terms of "Hidden" Variables. I, Physical Review \textbf{85}, 166 (1952).
+		\bibitem{Bell1987} J. S. Bell, \textit{Speakable and Unspeakable in Quantum Mechanics} (Cambridge University Press, 1987).
+		\bibitem{Hensen2015} B. Hensen et al., Loophole-free Bell Inequality Violation Using Electron Spins Separated by 1.3 Kilometres, Nature \textbf{526}, 682 (2015).
+		\bibitem{Eberhard1978} P. H. Eberhard, Bell's Theorem and the Different Concepts of Locality, Il Nuovo Cimento B \textbf{46}, 392 (1978).
+		\bibitem{Ghirardi1980} G. C. Ghirardi, A. Rimini, and T. Weber, A General Argument Against Superluminal Transmission Through the Quantum Mechanical Measurement Process, Lettere al Nuovo Cimento \textbf{27}, 293 (1980).
+		\bibitem{Aharonov1980} Y. Aharonov and D. Z. Albert, States and Observables in Relativistic Quantum Field Theories, Physical Review D \textbf{21}, 3316 (1980).
+		\bibitem{Aharonov1981} Y. Aharonov and D. Z. Albert, Can We Make Sense Out of the Measurement Process in Relativistic Quantum Mechanics?, Physical Review D \textbf{24}, 359 (1981).
+		\bibitem{Heisenberg1927} W. Heisenberg, Über den anschaulichen Inhalt der quantentheoretischen Kinematik und Mechanik, Zeitschrift für Physik \textbf{43}, 172 (1927).
+		\bibitem{Mandelstam1945} L. Mandelstam and I. Tamm, The Uncertainty Relation Between Energy and Time in Non-relativistic Quantum Mechanics, Journal of Physics (USSR) \textbf{9}, 249 (1945).
+		\bibitem{MacGibbon1987} J. H. MacGibbon, Can Planck-Mass Relics of Evaporating Black Holes Close the Universe?, Nature \textbf{329}, 308 (1987).
+		\bibitem{Caldirola1953} P. Caldirola, Forze Non Conservative Nella Meccanica Quantistica, Il Nuovo Cimento \textbf{10}, 1747 (1953).
+		\bibitem{Dirac1928} P. A. M. Dirac, The Quantum Theory of the Electron, Proceedings of the Royal Society A \textbf{117}, 610 (1928).
+		\bibitem{Schrodinger1930} E. Schrödinger, Über die kräftefreie Bewegung in der relativistischen Quantenmechanik, Sitzungsberichte der Preussischen Akademie der Wissenschaften, Physikalisch-Mathematische Klasse \textbf{24}, 418 (1930).
+		\bibitem{Hestenes1990} D. Hestenes, The Zitterbewegung Interpretation of Quantum Mechanics, Foundations of Physics \textbf{20}, 1213 (1990).
+		\bibitem{deBroglie1923} L. de Broglie, Waves and Quanta, Nature \textbf{112}, 540 (1923).
+		\bibitem{deBroglie1924} L. de Broglie, Recherches sur la Théorie des Quanta, Ph.D. thesis, Paris (1924).
+		\bibitem{deBroglie1927} L. de Broglie, La Mécanique Ondulatoire et la Structure Atomique de la Matière et du Rayonnement, Journal de Physique et le Radium \textbf{8}, 225 (1927).
+		\bibitem{Arndt1999} M. Arndt et al., Wave-Particle Duality of C60 Molecules, Nature \textbf{401}, 680 (1999).
+		\bibitem{Hornberger2012} K. Hornberger, S. Gerlich, P. Haslinger, S. Nimmrichter, and M. Arndt, Colloquium: Quantum Interference of Clusters and Molecules, Reviews of Modern Physics \textbf{84}, 157 (2012).
+		\bibitem{Fein2019} Y. Y. Fein et al., Quantum Superposition of Molecules Beyond 25 kDa, Nature Physics \textbf{15}, 1242 (2019).
 	\end{thebibliography}
 	
 \end{document}
