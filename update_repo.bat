@@ -1,12 +1,36 @@
 @echo off
 cd /d %~dp0
+
+:: Überprüfe, ob .gitignore existiert, und erstelle eine, falls nicht vorhanden
+if not exist .gitignore (
+    echo *.aux > .gitignore
+    echo *.log >> .gitignore
+    echo *.out >> .gitignore
+    echo *.synctex.gz >> .gitignore
+    echo .gitignore erstellt mit Standard-LaTeX-Ausschlüssen.
+)
+
+:: Überprüfe Git-Status
 git status
+
+:: Stage alle Änderungen
 git add .
+
+:: Prüfe, ob es gestagte Änderungen gibt
 git diff --cached --quiet
 if %errorlevel%==1 (
-    git commit -m "Neue Dateien hinzugefügt und Änderungen übernommen"
-    git push
+    :: Commit mit detaillierter Nachricht
+    git commit -m "Automatischer Commit: Änderungen vom %date% %time%"
+    :: Push mit Fehlerbehandlung
+    git push origin main
+    if %errorlevel% neq 0 (
+        echo Fehler beim Pushen zum Repository.
+        pause
+        exit /b %errorlevel%
+    )
+    echo Änderungen erfolgreich committet und gepusht.
 ) else (
     echo Keine Änderungen zum Commit vorhanden.
 )
+
 pause
