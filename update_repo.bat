@@ -22,11 +22,10 @@ if %errorlevel%==1 (
     :: Commit mit detaillierter Nachricht
     git commit -m "Automatischer Commit: Änderungen vom %date% %time%"
     :: Push mit Fehlerbehandlung
-    git push origin main
-    if %errorlevel% neq 0 (
+    git push origin main || (
         echo Fehler beim Pushen zum Repository.
         pause
-        exit /b %errorlevel%
+        exit /b 1
     )
     echo Änderungen erfolgreich committet und gepusht.
 ) else (
