@@ -87,11 +87,11 @@ $$i\hbar T(x) \frac{\partial}{\partial t} \Psi + i\hbar \Psi \frac{\partial T(x)
 **QFT-Lagrange-Dichte:**
 
 Standardmodell:
-$$\mathcal{L}_{\text{SM}} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu} + i\bar{\psi}\gamma^\mu D_\mu\psi + |D_\mu\Phi|^2 - V(\Phi)$$
+L_SM = -¼F_μν F^μν + iψ̄γ^μD_μψ + |D_μΦ|² - V(Φ)
 
 T0-Modell:
 L_T0 = -¼T(x)²F_μν F^μν + iψ̄γ^μ(T(x)∂_μψ + ψ∂_μT(x)) + |T(x)(∂_μ + igA_μ)Φ + Φ∂_μT(x)|² - V(Φ,T) + ½∂_μT(x)∂^μT(x) - ½T(x)²
-**4.3 Energie als fundamentale Basis**
+
 ### 4.3 Energie als fundamentale Basis
 
 Im T0-Modell leiten sich alle physikalischen Größen von der Energie als einziger fundamentaler Dimension ab:
