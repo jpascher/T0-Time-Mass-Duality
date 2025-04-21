@@ -90,8 +90,9 @@ Standardmodell:
 $$\mathcal{L}_{\text{SM}} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu} + i\bar{\psi}\gamma^\mu D_\mu\psi + |D_\mu\Phi|^2 - V(\Phi)$$
 
 T0-Modell:
-$$\mathcal{L}_{\text{T0}} = -\frac{1}{4}T(x)^2F_{\mu\nu}F^{\mu\nu} + i\bar{\psi}\gamma^\mu\DcovT{\psi} + |\DhiggsT|^2 - V(\Phi,T) + \frac{1}{2}\partial_\mu T(x)\partial^\mu T(x) - \frac{1}{2}T(x)^2$$
+$$\mathcal{L}_{\text{T0}} = -\frac{1}{4}T(x)^2F_{\mu\nu}F^{\mu\nu} + i\bar{\psi}\gamma^\mu (T(x)D_\mu\psi + \psi\partial_\mu T(x)) + |T(x)(D_\mu\Phi) + \Phi\partial_\mu T(x)|^2 - V(\Phi,T) + \frac{1}{2}\partial_\mu T(x)\partial^\mu T(x) - \frac{1}{2}T(x)^2$$
 
+**4.3 Energie als fundamentale Basis**
 ### 4.3 Energie als fundamentale Basis
 
 Im T0-Modell leiten sich alle physikalischen Größen von der Energie als einziger fundamentaler Dimension ab:
