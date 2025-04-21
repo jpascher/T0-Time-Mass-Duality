@@ -132,7 +132,7 @@ This section includes supplementary Markdown documents that complement the LaTeX
   A concise table summarizing the key natural units in the T0 model, with energy as the base unit, focusing on fundamental constants, length scales, and biological anomalies without detailed derivations (in English).
 - **[Scale Interactions in the T0 Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/esotherik.md)**  
   A theoretical discussion exploring how systems across different scales (subatomic, biological, cosmological) interact via the intrinsic time field \( T(x) \). It emphasizes a hierarchical, wave-based structure, the role of Lagrangian Density in unifying interactions, and a rigorous physical approach that explicitly rejects esoteric interpretations.
-- **[Ontological Equivalence in Physical Theories](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/OntologicalEquivalence.md)**  
+- **[Ontological Equivalence in Physical Theories](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/OntologischeAequivalenzEn.md)**  
   Explores how different theoretical frameworks can represent the same physical reality through seven ontological truths that yield identical predictions, demonstrating the equivalence of seemingly different approaches within the T0 model.
 
 ## Website
