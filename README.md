@@ -10,6 +10,8 @@ At the center of this research is the concept of time-mass duality, which propos
 
 The publications found here form a coherent research program that ranges from theoretical foundations to concrete applications and experimentally verifiable predictions. New documents on measurement differences, temperature adjustments, natural units, and scale interactions further expand the program.
 
+**Important Update (April 2025)**: A new document has been added that explores the ontological equivalence of different perspectives within the T0 model. This work demonstrates how seven fundamental ontological truths can be approached from complementary viewpoints, all leading to identical predictions. This further validates the comprehensiveness of the T0 model by showing that seemingly different theoretical formulations are in fact equivalent representations of the same underlying reality.
+
 ## Repository Structure
 
 The publications and additional documents are organized into the following structure:
@@ -23,6 +25,7 @@ T0-Time-Mass-Duality/
 │   ├── NatuerlilEinheitenTabelleKurz.md        # Short table of natural units (German)
 │   ├── NatuerlilEinheitenTabelleKurzEn.md      # Short table of natural units (English)
 │   ├── esotherik.md                           # Discussion on scale interactions and physical boundaries
+│   ├── OntologicalEquivalence.md              # Analysis of seven equivalent ontological perspectives
 │   └── website.html                           # Website files
 └── README.md                     # This file
 ```
@@ -34,10 +37,11 @@ T0-Time-Mass-Duality/
 - **Dynamic Mass**: Extension of the concept to massless particles like photons.
 - **Modified Gravitational Model**: Explaining galactic rotation curves without dark matter.
 - **Unified Framework**: Integration of quantum mechanics, quantum field theory, and general relativity.
+- **Ontological Equivalence**: Multiple valid perspectives leading to identical physical predictions.
 
 ## Publications
 
-Below are the 28 publications included in this repository, organized by category. Links point to the English versions, with corresponding German versions available in the `Deutsch/` directory.
+Below are the 29 publications included in this repository, organized by category. Links point to the English versions, with corresponding German versions available in the `Deutsch/` directory.
 
 ### Starting Point: Field Theory as the Initial Idea
 
@@ -54,6 +58,8 @@ Below are the 28 publications included in this repository, organized by category
   Accessible to all, introducing the T₀ model with fixed time and variable mass.
 - **[Time-Mass Duality: A New Perspective](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/ZeitMasseNeuerBlickEn.pdf)**  
   Provides an introductory overview of the Time-Mass Duality concept and its potential to reshape physics.
+- **[Ontological Equivalence in the T0 Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/OntologicalEquivalenceEn.pdf)**  
+  Demonstrates how seven fundamental ontological truths can be approached from different yet equivalent theoretical perspectives, all producing identical physical predictions.
 
 ### Mathematical Formalization
 
@@ -126,11 +132,13 @@ This section includes supplementary Markdown documents that complement the LaTeX
   A concise table summarizing the key natural units in the T0 model, with energy as the base unit, focusing on fundamental constants, length scales, and biological anomalies without detailed derivations (in English).
 - **[Scale Interactions in the T0 Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/esotherik.md)**  
   A theoretical discussion exploring how systems across different scales (subatomic, biological, cosmological) interact via the intrinsic time field \( T(x) \). It emphasizes a hierarchical, wave-based structure, the role of Lagrangian Density in unifying interactions, and a rigorous physical approach that explicitly rejects esoteric interpretations.
+- **[Ontological Equivalence in Physical Theories](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/OntologicalEquivalence.md)**  
+  Explores how different theoretical frameworks can represent the same physical reality through seven ontological truths that yield identical predictions, demonstrating the equivalence of seemingly different approaches within the T0 model.
 
 ## Website
 
 The repository includes a website presenting all publications in both German and English. Access it here:
-https://htmlpreview.github.io/?https://raw.githubusercontent.com/jpascher/T0-Time-Mass-Duality/main/2/website.html
+https://jpascher.github.io/T0-Time-Mass-Duality/2/website.html
 
 ## Future Research Directions
 
@@ -140,6 +148,7 @@ The ongoing research program focuses on:
 2. Refinement of the mathematical formulation, particularly regarding quantum gravity.
 3. Further investigation of biological structures' anomalous stability in "forbidden zones" of the length scale hierarchy.
 4. Exploration of technological applications based on the principles of time field modification.
+5. Further elaboration of the ontological equivalence of different theoretical perspectives within the T0 model.
 
 ## Contact
 
