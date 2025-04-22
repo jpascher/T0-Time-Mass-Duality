@@ -88,11 +88,11 @@ $$i\hbar T(x) \frac{\partial}{\partial t} \Psi + i\hbar \Psi \frac{\partial T(x)
 
 **QFT Lagrangian Density:**
 
-Standard Model:
-$$\mathcal{L}_{\text{SM}} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu} + i\bar{\psi}\gamma^\mu D_\mu\psi + |D_\mu\Phi|^2 - V(\Phi)$$
+Standardmodell:
+L_SM = -¼F_μν F^μν + iψ̄γ^μD_μψ + |D_μΦ|² - V(Φ)
 
-T0 Model:
-$$\mathcal{L}_{\text{T0}} = -\frac{1}{4}T(x)^2F_{\mu\nu}F^{\mu\nu} + i\bar{\psi}\gamma^\mu\DcovT{\psi} + |\DhiggsT|^2 - V(\Phi,T) + \frac{1}{2}\partial_\mu T(x)\partial^\mu T(x) - \frac{1}{2}T(x)^2$$
+T0-Modell:
+L_T0 = -¼T(x)²F_μν F^μν + iψ̄γ^μ(T(x)∂_μψ + ψ∂_μT(x)) + |T(x)(∂_μ + igA_μ)Φ + Φ∂_μT(x)|² - V(Φ,T) + ½∂_μT(x)∂^μT(x) - ½T(x)²
 
 ### 4.3 Energy as the Fundamental Basis
 
