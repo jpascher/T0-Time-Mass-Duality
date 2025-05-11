@@ -10,7 +10,14 @@ At the center of this research is the concept of time-mass duality, which propos
 
 The publications found here form a coherent research program that ranges from theoretical foundations to concrete applications and experimentally verifiable predictions. New documents on measurement differences, temperature adjustments, natural units, and scale interactions further expand the program.
 
-**Important Update (April 2025)**: A new document has been added that explores the ontological equivalence of different perspectives within the T0 model. This work demonstrates how seven fundamental ontological truths can be approached from complementary viewpoints, all leading to identical predictions. This further validates the comprehensiveness of the T0 model by showing that seemingly different theoretical formulations are in fact equivalent representations of the same underlying reality.
+**Important Update (May 2025)**: Five significant new documents have been added that deepen the theoretical foundations of the T0 model:
+1. **The Dynamic Extension of the Intrinsic Time Field** - A comprehensive treatment of the time field as a fully dynamic entity varying with both space and time
+2. **The T0 Model as a More Complete Theory** - Positioning the T0 model as a fundamental framework where other gravitational theories serve as mathematical approximations
+3. **Conceptual Comparison of T0 Model and Extended Standard Model** - An analysis of the conceptual advantages of the T0 model's field-theoretic approach
+4. **Pragmatic Application of the T0 Model** - Guidelines for applying the T0 model directly rather than translating relativistic formalisms
+5. **The Emerging Unified Framework** - An exploration of the relationships between fundamental fields in the T0 model
+
+**Earlier Update (April 2025)**: A new document has been added that explores the ontological equivalence of different perspectives within the T0 model. This work demonstrates how seven fundamental ontological truths can be approached from complementary viewpoints, all leading to identical predictions. This further validates the comprehensiveness of the T0 model by showing that seemingly different theoretical formulations are in fact equivalent representations of the same underlying reality.
 
 ## Repository Structure
 
@@ -41,7 +48,7 @@ T0-Time-Mass-Duality/
 
 ## Publications
 
-Below are the 29 publications included in this repository, organized by category. Links point to the English versions, with corresponding German versions available in the `Deutsch/` directory.
+Below are the 34 publications included in this repository, organized by category. Links point to the English versions, with corresponding German versions available in the `Deutsch/` directory.
 
 ### Starting Point: Field Theory as the Initial Idea
 
@@ -60,6 +67,8 @@ Below are the 29 publications included in this repository, organized by category
   Provides an introductory overview of the Time-Mass Duality concept and its potential to reshape physics.
 - **[Ontological Equivalence in the T0 Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/OntologicalEquivalenceEn.pdf)**  
   Demonstrates how seven fundamental ontological truths can be approached from different yet equivalent theoretical perspectives, all producing identical physical predictions.
+- **[The T0 Model as a More Complete Theory](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/T0-ModelAsCompleteTheory_En.pdf)**  
+  Positions the T0 model as a fundamental theory where other approaches to quantum gravity (String Theory, Loop Quantum Gravity, etc.) serve as mathematical approximations valid in specific domains.
 
 ### Mathematical Formalization
 
@@ -73,6 +82,8 @@ Below are the 29 publications included in this repository, organized by category
   Details the parameters defining the T₀ model within the Time-Mass Duality framework.
 - **[Consistency of Alpha=1 and Beta=1 in Time-Mass Duality](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/Alpha1Beta1KonsistenzEn.pdf)**  
   Investigates the implications of setting fundamental constants to unity within the theory.
+- **[Dynamic Extension of the Intrinsic Time Field](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/DynamicTF-SchrodingerExtensions_En.pdf)**  
+  Extends the T0 model by developing the fully dynamic nature of the intrinsic time field as a space-time dependent field T(x,t), with implications for quantum evolution and field theory.
 
 ### Applications and Extensions
 
@@ -94,6 +105,8 @@ Below are the 29 publications included in this repository, organized by category
   Examines the special position of biological structures in the quantized length scale hierarchy and their ability to form stable structures in "forbidden zones".
 - **[Short Table of Natural Units](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/NatuerlilEinheitenTabelleKurzEn.pdf)**  
   A concise table summarizing natural units in the T0 model, complementing the detailed derivations in `NatEinheitenSystematikEn.pdf`.
+- **[Pragmatic Application of the T0 Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/PragmaticApproachT0-ModelEn.pdf)**  
+  Explains why direct translation of relativistic tensor formalisms to the T0 model should be avoided and instead proposes developing direct T0 equations for specific physical phenomena.
 
 ### Quantum Mechanics and Relativity
 
@@ -105,6 +118,8 @@ Below are the 29 publications included in this repository, organized by category
   Examines time as an emergent property in quantum mechanics under Time-Mass Duality.
 - **[Intrinsic Time in Quantum Field Theory: T₀ Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/QFTIntrinsischesZeitT0En.pdf)**  
   Explores the concept of intrinsic time within quantum field theory using the T₀ model.
+- **[Conceptual Comparison of T0 Model and Extended Standard Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/T0vsESM_ConceptualAnalysis_En.pdf)**  
+  Provides a detailed analysis of the conceptual differences between the field-theoretic approach of the T0 model and the dimensional approach of the Extended Standard Model.
 
 ### Cosmological and Frontier Areas
 
@@ -114,6 +129,8 @@ Below are the 29 publications included in this repository, organized by category
   Explains galaxy dynamics through variable mass, potentially eliminating the need for dark matter.
 - **[Unification of the T₀ Model: Dark Energy and Galaxy Dynamics](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/T0VereinheitlichungDEGalEn.pdf)**  
   Applies Time-Mass Duality to unify dark energy and galaxy dynamics in cosmology.
+- **[The Emerging Unified Framework](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/ausblicke_En.pdf)**  
+  Explores the relationships between fundamental fields in the T0 model, particularly how the Higgs field, vacuum constants, and intrinsic time field may be different manifestations of the same underlying reality.
 
 ### Additional Theoretical Insights
 
@@ -121,6 +138,8 @@ Below are the 29 publications included in this repository, organized by category
   Proposes a simplified unit system setting the fine-structure constant to 1.
 - **[Summary of Constants in Time-Mass Duality](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/ZusammenfassungKonstantenEn.pdf)**  
   Summarizes the role of physical constants in the Time-Mass Duality framework.
+- **[Completing the Standard Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/StandardModKruemmungRotvEn.pdf)**  
+  Presents an extension to the Standard Model that is compatible with the T0 model's approach to time-mass duality.
 
 ### Additional Documents
 
@@ -149,6 +168,8 @@ The ongoing research program focuses on:
 3. Further investigation of biological structures' anomalous stability in "forbidden zones" of the length scale hierarchy.
 4. Exploration of technological applications based on the principles of time field modification.
 5. Further elaboration of the ontological equivalence of different theoretical perspectives within the T0 model.
+6. Development of the dynamic time field theory and its implications for quantum evolution and field theory.
+7. Exploration of the relationships between the T0 model and other approaches to quantum gravity.
 
 ## Contact
 

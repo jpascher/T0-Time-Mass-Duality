@@ -10,7 +10,14 @@ Im Zentrum dieses Forschungsprogramms steht das Konzept der Zeit-Masse-Dualität
 
 Die hier enthaltenen Publikationen bilden ein kohärentes Forschungsprogramm, das von theoretischen Grundlagen bis hin zu konkreten Anwendungen und experimentell überprüfbaren Vorhersagen reicht. Neue Dokumente zu Messdifferenzen, Temperaturanpassungen, natürlichen Einheiten und Skalenwechselwirkungen erweitern das Programm weiter.
 
-**Wichtiges Update (April 2025)**: Ein neues Dokument wurde hinzugefügt, das die ontologische Äquivalenz verschiedener Perspektiven innerhalb des T0-Modells untersucht. Diese Arbeit zeigt, wie sieben fundamentale ontologische Wahrheiten aus komplementären Blickwinkeln betrachtet werden können, die alle zu identischen Vorhersagen führen. Dies bestätigt weiter die Vollständigkeit des T0-Modells, indem gezeigt wird, dass scheinbar unterschiedliche theoretische Formulierungen tatsächlich äquivalente Darstellungen derselben zugrundeliegenden Realität sind.
+**Wichtiges Update (Mai 2025)**: Fünf bedeutende neue Dokumente wurden hinzugefügt, die die theoretischen Grundlagen des T0-Modells vertiefen (nur in englischer Sprache verfügbar):
+1. **Die dynamische Erweiterung des intrinsischen Zeitfeldes** - Eine umfassende Behandlung des Zeitfeldes als vollständig dynamische Entität, die sich sowohl mit Raum als auch mit Zeit verändert
+2. **Das T0-Modell als vollständigere Theorie** - Positionierung des T0-Modells als fundamentaler Rahmen, in dem andere Gravitationstheorien als mathematische Näherungen dienen
+3. **Konzeptioneller Vergleich von T0-Modell und erweitertem Standardmodell** - Eine Analyse der konzeptionellen Vorteile des feldtheoretischen Ansatzes des T0-Modells
+4. **Pragmatische Anwendung des T0-Modells** - Richtlinien zur direkten Anwendung des T0-Modells anstelle der Übersetzung relativistischer Formalismen
+5. **Das entstehende vereinheitlichte Rahmenwerk** - Eine Untersuchung der Beziehungen zwischen fundamentalen Feldern im T0-Modell
+
+**Früheres Update (April 2025)**: Ein neues Dokument wurde hinzugefügt, das die ontologische Äquivalenz verschiedener Perspektiven innerhalb des T0-Modells untersucht. Diese Arbeit zeigt, wie sieben fundamentale ontologische Wahrheiten aus komplementären Blickwinkeln betrachtet werden können, die alle zu identischen Vorhersagen führen. Dies bestätigt weiter die Vollständigkeit des T0-Modells, indem gezeigt wird, dass scheinbar unterschiedliche theoretische Formulierungen tatsächlich äquivalente Darstellungen derselben zugrundeliegenden Realität sind.
 
 ## Repository-Struktur
 
@@ -29,8 +36,6 @@ T0-Time-Mass-Duality/
 │   ├── OntologischeAequivalenz.md             # Analyse von sieben äquivalenten ontologischen Perspektiven
 │   └── website.html                           # Website-Dateien
 └── README_de.md                     # Diese Datei
-
-
 ```
 
 ## Schlüsselkonzepte
@@ -44,7 +49,7 @@ T0-Time-Mass-Duality/
 
 ## Publikationen
 
-Nachfolgend sind die 29 Publikationen in diesem Repository aufgelistet, organisiert nach Kategorien. Links verweisen auf die englischen Versionen, entsprechende deutsche Versionen sind im Verzeichnis `Deutsch/` verfügbar.
+Nachfolgend sind die 34 Publikationen in diesem Repository aufgelistet, organisiert nach Kategorien. Links zu den neuesten fünf Dokumenten verweisen auf die englischen Versionen, da diese aktuell nur in Englisch verfügbar sind. Für die übrigen Publikationen sind entsprechende deutsche Versionen im Verzeichnis `Deutsch/` verfügbar.
 
 ### Ausgangspunkt: Feldtheorie als Initialidee
 
@@ -63,6 +68,8 @@ Nachfolgend sind die 29 Publikationen in diesem Repository aufgelistet, organisi
   Bietet einen einführenden Überblick über das Konzept der Zeit-Masse-Dualität und ihr Potenzial, die Physik zu revolutionieren.
 - **[Ontologische Äquivalenz im T0-Modell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/OntologischeAequivalenz.pdf)**  
   Zeigt, wie sieben fundamentale ontologische Wahrheiten aus verschiedenen, aber äquivalenten theoretischen Perspektiven betrachtet werden können, die alle zu identischen physikalischen Vorhersagen führen.
+- **[Das T0-Modell als vollständigere Theorie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/T0-ModelAsCompleteTheory_En.pdf)** (nur Englisch)  
+  Positioniert das T0-Modell als fundamentale Theorie, bei der andere Ansätze zur Quantengravitation (Stringtheorie, Schleifenquantengravitation usw.) als mathematische Näherungen dienen, die in bestimmten Bereichen gültig sind.
 
 ### Mathematische Formalisierung
 
@@ -76,6 +83,8 @@ Nachfolgend sind die 29 Publikationen in diesem Repository aufgelistet, organisi
   Beschreibt detailliert die Parameter, die das T₀-Modell im Rahmen der Zeit-Masse-Dualität definieren.
 - **[Konsistenz von Alpha=1 und Beta=1 in der Zeit-Masse-Dualität](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/Alpha1Beta1Konsistenz.pdf)**  
   Untersucht die Implikationen der Setzung fundamentaler Konstanten auf Eins innerhalb der Theorie.
+- **[Dynamische Erweiterung des intrinsischen Zeitfeldes](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/DynamicTF-SchrodingerExtensions_En.pdf)** (nur Englisch)  
+  Erweitert das T0-Modell durch die Entwicklung der vollständig dynamischen Natur des intrinsischen Zeitfeldes als raum-zeitabhängiges Feld T(x,t), mit Auswirkungen auf die Quantenevolution und Feldtheorie.
 
 ### Anwendungen und Erweiterungen
 
@@ -97,6 +106,8 @@ Nachfolgend sind die 29 Publikationen in diesem Repository aufgelistet, organisi
   Untersucht die besondere Stellung biologischer Strukturen in der quantisierten Längenskalenhierarchie und ihre Fähigkeit, stabile Strukturen in „verbotenen Zonen" zu bilden.
 - **[Kurze Tabelle natürlicher Einheiten](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/NatuerlilEinheitenTabelleKurz.pdf)**  
   Eine kompakte Tabelle, die die natürlichen Einheiten im T0-Modell zusammenfasst, ergänzend zu den detaillierten Herleitungen in `NatEinheitenSystematik.tex`.
+- **[Pragmatische Anwendung des T0-Modells](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/PragmaticApproachT0-ModelEn.pdf)** (nur Englisch)  
+  Erklärt, warum eine direkte Übersetzung relativistischer Tensorformalismen in das T0-Modell vermieden werden sollte, und schlägt stattdessen die Entwicklung direkter T0-Gleichungen für spezifische physikalische Phänomene vor.
 
 ### Quantenmechanik und Relativität
 
@@ -108,6 +119,8 @@ Nachfolgend sind die 29 Publikationen in diesem Repository aufgelistet, organisi
   Untersucht Zeit als emergente Eigenschaft in der Quantenmechanik unter Zeit-Masse-Dualität.
 - **[Intrinsische Zeit in der Quantenfeldtheorie: T₀-Modell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/QFTIntrinsischesZeitT0.pdf)**  
   Erforscht das Konzept der intrinsischen Zeit in der Quantenfeldtheorie mit dem T₀-Modell.
+- **[Konzeptioneller Vergleich von T0-Modell und erweitertem Standardmodell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/T0vsESM_ConceptualAnalysis_En.pdf)** (nur Englisch)  
+  Bietet eine detaillierte Analyse der konzeptionellen Unterschiede zwischen dem feldtheoretischen Ansatz des T0-Modells und dem dimensionalen Ansatz des erweiterten Standardmodells.
 
 ### Kosmologische und Grenzbereiche
 
@@ -117,6 +130,8 @@ Nachfolgend sind die 29 Publikationen in diesem Repository aufgelistet, organisi
   Erklärt Galaxiendynamiken durch variable Masse, ohne Dunkle Materie zu benötigen.
 - **[Vereinheitlichung des T₀-Modells: Dunkle Energie und Galaxiendynamik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/T0VereinheitlichungDEGal.pdf)**  
   Wendet die Zeit-Masse-Dualität an, um Dunkle Energie und Galaxiendynamiken in der Kosmologie zu vereinheitlichen.
+- **[Das entstehende vereinheitlichte Rahmenwerk](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/ausblicke_En.pdf)** (nur Englisch)  
+  Untersucht die Beziehungen zwischen fundamentalen Feldern im T0-Modell, insbesondere wie das Higgs-Feld, Vakuumkonstanten und das intrinsische Zeitfeld verschiedene Manifestationen derselben zugrundeliegenden Realität sein könnten.
 
 ### Zusätzliche theoretische Einsichten
 
@@ -124,6 +139,8 @@ Nachfolgend sind die 29 Publikationen in diesem Repository aufgelistet, organisi
   Schlägt ein vereinfachtes Einheitensystem vor, das die Feinstrukturkonstante auf 1 setzt.
 - **[Zusammenfassung physikalischer Konstanten](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Deutsch/ZusammenfassungKonstant.pdf)**  
   Fasst die Rolle physikalischer Konstanten im Rahmen der Zeit-Masse-Dualität zusammen.
+- **[Vervollständigung des Standardmodells](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/StandardModKruemmungRotvEn.pdf)** (nur Englisch)  
+  Stellt eine Erweiterung des Standardmodells vor, die mit dem Zeit-Masse-Dualitätsansatz des T0-Modells kompatibel ist.
 
 ### Zusätzliche Dokumente
 
@@ -152,6 +169,8 @@ Das laufende Forschungsprogramm konzentriert sich auf:
 3. Weitere Untersuchung der anomalen Stabilität biologischer Strukturen in „verbotenen Zonen" der Längenskalenhierarchie.
 4. Erforschung technologischer Anwendungen basierend auf den Prinzipien der Zeitfeldmodifikation.
 5. Weitere Ausarbeitung der ontologischen Äquivalenz verschiedener theoretischer Perspektiven innerhalb des T0-Modells.
+6. Entwicklung der dynamischen Zeitfeldtheorie und ihrer Implikationen für Quantenevolution und Feldtheorie.
+7. Erforschung der Beziehungen zwischen dem T0-Modell und anderen Ansätzen zur Quantengravitation.
 
 ## Kontakt
 
