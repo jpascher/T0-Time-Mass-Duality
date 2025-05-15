@@ -13,14 +13,17 @@ if not exist .gitignore (
 :: Überprüfe Git-Status
 git status
 
-:: Stage alle Änderungen
+:: Stage alle Änderungen im gesamten Repository
 git add .
+
+:: Stelle sicher, dass das Unterverzeichnis explizit geaddet wird (inklusive neuer Dateien)
+git add 2/html/
 
 :: Prüfe, ob es gestagte Änderungen gibt
 git diff --cached --quiet
 if %errorlevel%==1 (
     :: Commit mit detaillierter Nachricht
-    git commit -m "Automatischer Commit: Änderungen vom %date% %time%"
+    git commit -m "Automatischer Commit: Änderungen im gesamten Repository und explizites Update für 2/html/ vom %date% %time%"
     :: Push mit Fehlerbehandlung
     git push origin main || (
         echo Fehler beim Pushen zum Repository.
