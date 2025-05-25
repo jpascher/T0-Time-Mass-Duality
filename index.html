@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time-Mass Duality | Zeit-Masse-Dualität</title>
+	<script>
+    function changePage(pageId) {
+        const loader = document.getElementById('loader');
+        loader.classList.add('active');
+        
+        setTimeout(function() {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(function(page) {
+                page.classList.remove('active');
+                page.classList.add('inactive');
+            });
+            
+            // Show the requested page
+            const newPage = document.getElementById(pageId);
+            if (newPage) {
+                newPage.classList.remove('inactive');
+                newPage.classList.add('active');
+                window.scrollTo(0, 0);
+            }
+            
+            loader.classList.remove('active');
+        }, 300);
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize all pages except home as inactive
+        document.querySelectorAll('.page').forEach(function(page) {
+            if (page.id !== 'home-page') {
+                page.classList.add('inactive');
+                page.classList.remove('active');
+            }
+        });
+    });
+<script
+    type="module"
+    src="https://agent.d-id.com/v1/index.js"
+    data-name="did-agent"
+    data-mode="fabio"
+    data-client-key="YXV0aDB8NjgxNzQyMDcyODRmNDQ0MzIyZDgwNjgwOkVWVktZRlpDLXM3S045eVVkajhzNQ=="
+    data-agent-id="agt_cmoRdqOZ"
+    data-monitor="true">
+</script>
+</script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            margin-top: 40px;
+        }
+        h3 {
+            color: #2980b9;
+            margin-top: 30px;
+        }
+        .abstract {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        .publication-links {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+        .publication-box {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            width: 45%;
+            margin: 10px;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        .publication-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .publication-box h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .publication-box p {
+            margin-bottom: 15px;
+        }
+        .publication {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 20px 0;
+            transition: transform 0.2s ease;
+        }
+        .publication:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .publication-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .publication-meta {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        .publication-description {
+            margin: 10px 0;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .repository-link {
+            margin: 30px 0;
+            text-align: center;
+        }
+        .author-info {
+            font-style: italic;
+            text-align: center;
+            margin: 20px 0;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .navigation {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .nav-btns {
+            display: flex;
+            justify-content: space-between;
+        }
+        .page-container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+        }
+        .page {
+            position: absolute;
+            width: 100%;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            background-color: #f9f9f9;
+            top: 0;
+            left: 0;
+        }
+        .page.inactive {
+            transform: translateX(100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .page.active {
+            transform: translateX(0);
+            opacity: 1;
+            z-index: 10;
+        }
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .loader.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time-Mass Duality | Zeit-Masse-Dualität</title>
+    <style>
+        /* Your existing styles here */
+        /* I'm keeping the style section empty as it was not provided in the shared content */
+    </style>
+</head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time-Mass Duality | Zeit-Masse-Dualität</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-top: 20px;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 30px;
+        }
+        
+        header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        header p {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .author-info {
+            font-style: italic;
+            margin-top: 10px;
+            color: #7f8c8d;
+        }
+        
+        section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 10px;
+        }
+        
+        section h3 {
+            color: #34495e;
+            margin: 20px 0 10px;
+        }
+        
+        section p {
+            margin-bottom: 15px;
+        }
+        
+        .publication-links {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .publication-box {
+            width: 48%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .publication-box {
+                width: 100%;
+            }
+        }
+        
+        .publication-box h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .repository-link {
+            text-align: center;
+            margin: 40px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .repository-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .format-links {
+            text-align: center;
+            margin: 20px 0 40px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .format-links h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .format-links .btn {
+            margin: 0 10px;
+            background-color: #27ae60;
+        }
+        
+        .format-links .btn:hover {
+            background-color: #219653;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+        
+        footer a {
+            color: #3498db;
+        }
+        
+        .navigation {
+            margin: 20px 0;
+        }
+        
+        .nav-btns {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 600px) {
+            .nav-btns {
+                flex-direction: column;
+            }
+            
+            .nav-btns .btn {
+                margin-bottom: 10px;
+            }
+        }
+        
+        .abstract {
+            font-style: italic;
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .publication {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #e1e4e8;
+        }
+        
+        .publication:last-child {
+            border-bottom: none;
+        }
+        
+        .publication-title {
+            margin-bottom: 10px;
+        }
+        
+        .publication-title a {
+            font-weight: bold;
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .publication-title a:hover {
+            text-decoration: underline;
+        }
+        
+        .publication-description {
+            padding-left: 15px;
+            border-left: 3px solid #e1e4e8;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader" class="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="page-container">
+        <!-- Home Page -->
+        <div id="home-page" class="page active">
+            <header>
+                <h1>T0-Time-Mass-Duality Framework</h1>
+                <p>A Unified Theory for Quantum Mechanics and Relativity</p>
+                <p>Ein einheitlicher Rahmen für Quantenmechanik und Relativität</p>
+                <div class="author-info">
+                    <p>Johann Pascher, 2025</p>
+                </div>
+            </header>
+
+            <section>
+                <p>Welcome to the T0-Time-Mass-Duality research framework. This unified approach revolutionizes fundamental physics through the intrinsic time field T(x,t) = 1/max(m(x,t), ω), operating in natural units where ℏ = c = α_EM = β_T = 1.</p>
+                <p>Willkommen zum T0-Zeit-Masse-Dualitäts-Forschungsrahmen. Dieser vereinheitlichte Ansatz revolutioniert die Fundamentalphysik durch das intrinsische Zeitfeld T(x,t) = 1/max(m(x,t), ω) in natürlichen Einheiten mit ℏ = c = α_EM = β_T = 1.</p>
+            </section>
+
+            <div class="publication-links">
+                <div class="publication-box">
+                    <h3>Current English Publications (2025)</h3>
+                    <p>Complete collection of 17 up-to-date T0 model documents</p>
+                    <a href="#" onclick="changePage('english-page'); return false;" class="btn">View Current Framework</a>
+                </div>
+                
+                <div class="publication-box">
+                    <h3>Archived German Publications</h3>
+                    <p>Historical German versions for reference (archived)</p>
+                    <a href="#" onclick="changePage('german-page'); return false;" class="btn">Archivierte deutsche Versionen</a>
+                </div>
+            </div>
+
+            <div class="repository-link">
+                <h2>GitHub Repository</h2>
+                <p>All current publications are available in the main repository directory:</p>
+                <p>Alle aktuellen Publikationen sind im Hauptverzeichnis des Repositories verfügbar:</p>
+                <div class="repository-buttons">
+                    <a href="https://github.com/jpascher/T0-Time-Mass-Duality" class="btn" target="_blank">T0-Time-Mass-Duality Repository</a>
+                </div>
+                <p><em>Note: Previous HTML and SVG versions have been discontinued. Current documents are in PDF format only.</em></p>
+                <p><em>Hinweis: Frühere HTML- und SVG-Versionen wurden eingestellt. Aktuelle Dokumente sind nur im PDF-Format verfügbar.</em></p>
+            </div>
+
+            <footer>
+                <p>© 2025 Johann Pascher | T0-Time-Mass-Duality Framework</p>
+            </footer>
+        </div>
+
+        <!-- English Page -->
+        <div id="english-page" class="page inactive">
+            <div class="navigation">
+                <div class="nav-btns">
+                    <a href="#" onclick="changePage('home-page'); return false;" class="btn">← Back to Main Page</a>
+                    <a href="#" onclick="changePage('german-page'); return false;" class="btn">Archived German Versions →</a>
+                </div>
+            </div>
+            
+            <header>
+                <h1>T0-Time-Mass-Duality Framework (2025)</h1>
+                <p>Complete Collection of Current Documents</p>
+            </header>
+
+            <div class="abstract">
+                <p>The T0 model represents a revolutionary approach to fundamental physics through time-mass duality, where the intrinsic time field T(x,t) = 1/max(m(x,t), ω) provides a unified treatment of quantum mechanics and relativity. Operating in natural units where ℏ = c = α_EM = β_T = 1, the framework reduces all physical quantities to powers of energy and eliminates free parameters through field-theoretic derivations.</p>
+            </div>
+
+            <section>
+                <h2>Core Theoretical Framework</h2>
+                <div class="publication">
+                    <div class="publication-title">
+                        <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/pdf/DerivationVonBetaEn.pdf" target="_blank">
+                            Field-Theoretic Derivation of the β Parameter
+                        </a>
+                    </div>
+                    <div class="publication-description">
+                        <p>Complete geometric derivation of the fundamental β = 2Gm/r parameter from field equations, establishing the mathematical foundation with three field geometries and cosmic screening effects.</p>
+                    </div>
+                </div>
+
+                <div class="publication">
+                    <div class="publication-title">
+                        <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/pdf/DerivationVonBetaEnR.pdf" target="_blank">
+                            Field-Theoretic Derivation with Complete References
+                        </a>
+                    </div>
+                    <div class="publication-description">
+                        <p>Extended version with comprehensive literature references, providing historical context and connections to established physics literature.</p>
+                    </div>
+                </div>
+
+                <div class="publication">
+                    <div class="publication-title">
+                        <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/pdf/MathZeitMasseLagrangeEn.pdf" target="_blank">
+                            Mathematical Core Formulations of Time-Mass Duality Theory
+                        </a>
+                    </div>
+                    <div class="publication-description">
+                        <p>Essential mathematical formulations including complete Lagrangian densities with strict dimensional consistency, incorporating all T0 parameters and three fundamental field geometries.</p>
+                    </div>
+                </div>
+
+                <div class="publication">
+                    <div class="publication-title">
+                        <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/pdf/QMRelTimeMassPart1ZEn.pdf" target="_blank">
+                            Bridging Quantum Mechanics and Relativity - Part I
+                        </a>
+                    </div>
+                    <div class="publication-description">
+                        <p>Updated theoretical foundations with complete geometric framework, natural units system (ℏ = c = α_EM = β_T = 1), and connections to Higgs physics.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Natural Units and Fundamental Constants</h2>
+                <div class="publication">
+                    <div class="publication-title">
+                        <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/pdf/NatEinheitenSystematikEn.pdf" target="_blank">
+                            Natural Unit Systems: Universal Energy Conversion
+                        </a>
+                    </div>
+                    <div class="publication-description">
+                        <p>Comprehensive framework establishing energy as the fundamental dimension, with complete conversion tables and length scale hierarchy from sub-Planckian to cosmological scales.</p>
+                    </div>
+                </div>
+
+                <div class="publication">
+                    <div class="publication-title">
+                        <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/pdf/ParameterSystemdipendentEn.pdf" target="_blank">
+                            Parameter System-Dependency: SI vs. Natural Units
+                        </a>
+                    </div>
+                    <div class="publication-description">
+                        <p>Systematic analysis revealing that parameters like ξ, α_EM, β_T have dramatically different values across unit systems, resolving apparent inconsistencies through proper transformation protocols.</p>
+                    </div>
+                </div>
+
+                <div class="publication">
+                    <div class="publication-title">
+                        <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/pdf/ResolvingTheConstantsAlfaEn.pdf" target="_blank">
+                            Mathematical Proof: α = 1 in Natural Units
+                        </a>
+                    </div>
+                    <div class="publication-description">
+                        <p>Rigorous proof that the fine structure constant equals unity in natural units through electromagnetic duality, resolving the "mystery" of 1/137 as a unit system artifact.</p>
+                    </div>
+                </div>
+
+                <div class="publication">
+                    <div class="publication-title">
+                        <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/pdf/FeinstrukturkonstanteEn.pdf" target="_blank">
+                            The Fine Structure Constant: Various Representations
+                        </a>
+                    </div>
+                    <div class="publication-description">
+                        <p>Complete analysis of different representations of α_EM, from fundamental physics to natural units, including the electromagnetic duality derivation.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Quantum Field Theory Integration</h2>
+                <div class="publication">
+                    <div class="publication-title">
+                        <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/pdf/diracEn.pdf" target="_blank">
+                            Integration of the Dirac Equation in the T0 Model
+                        </a>
+                    </div>
+                    <div class="publication-description">
+                        <p>Natural units framework showing how the Dirac equation emerges from T0 time-mass duality, with geometric derivation of 4×4 matrix structure and precision QED calculations.</p>
+                    </div>
+                </div>
+
+                <div class="publication">
+                    <div class="publication-title">
+                        <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/pdf/CompleteMuon_g-2_AnalysisEn.pdf" target="_blank">
+                            Complete Muon g-2 Analysis in Unified Natural Units
+                        </a>
+                    </div>
+                    <div class="publication-description">
+                        <p>Calculation of the muon's anomalous magnetic moment using the universal Higgs-derived scale parameter ξ ≈ 1.33 × 10⁻⁴, achieving remarkable agreement with experimental data.</p>
+                    </div>
+                </div>
+
+                <div class="publication">
+                    <div class="publication-title">
+                        <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/pdf/DynMassePhotonenNichtlokalEn.pdf" target="_blank">
+                            Dynamic Mass of Photons and Nonlocality
+                        </a>
+                    </div>
+                    <div class="publication-description">
+                        <p>Analysis of frequency-dependent effective photon mass m_γ = ω, introducing energy-dependent nonlocality effects and modified Bell inequalities for quantum correlations.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Cosmological Applications</h2>
+                <div class="publication">
+                    <div class="publication-title">
+                        <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/pdf/TempEinheitenCMBEn.pdf" target="_blank">
+                            Temperature Units in Natural Units: CMB Analysis
+                        </a>
+                    </div>
+                    <div class="publication-description">
+                        <p>Comprehensive analysis integrating cosmic screening effects and regime-dependent parameters, showing CMB temperature evolution T(z) = T₀(1+z)(1 + β_T ln(1+z)) with Wien constant rescaling.</p>
+                    </div>
+                </div>
+
+                <div class="publication">
+                    <div class="publication-title">
+                        <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/pdf/T0vsESM_ConceptualAnalysis_En.pdf" target="_blank">
+                            T0 vs ESM: Conceptual Analysis
+                        </a>
+                    </div>
+                    <div class="publication-description">
+                        <p>Detailed comparison between the T0 model (absolute time, variable mass) and Extended Standard Model (relative time, constant mass), demonstrating mathematical equivalence through logarithmic transformation.</p>
+                    </div>
+                </div>
+
+                <div class="publication">
+                    <div class="publication-title">
+                        <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/pdf/PragmaticApproachT0-ModelEn.pdf" target="_blank">
+                            Pragmatic Approach to T0-Model Applications
+                        </a>
+                    </div>
+                    <div class="publication-description">
+                        <p>Guidelines for direct application of T0 model principles rather than translating from relativistic formalisms, emphasizing field-theoretic approach over dimensional analysis.</p>
+                    </div>
+                </div>
+
+                <div class="publication">
+                    <div class="publication-title">
+                        <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/pdf/ausblicke_En.pdf" target="_blank">
+                            The Emerging Unified Framework
+                        </a>
+                    </div>
+                    <div class="publication-description">
+                        <p>Exploration of fundamental field relationships in the T0 model, examining how Higgs field, vacuum constants, and intrinsic time field may be manifestations of underlying unity.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Additional Technical Documents</h2>
+                <div class="publication">
+                    <div class="publication-title">
+                        <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/pdf/ParameterSystemdipendentEn1.pdf" target="_blank">
+                            Parameter System Dependencies (Version 1)
+                        </a>
+                    </div>
+                    <div class="publication-description">
+                        <p>Alternative analysis of unit system dependencies and parameter transformations.</p>
+                    </div>
+                </div>
+
+                <div class="publication">
+                    <div class="publication-title">
+                        <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/pdf/EliminationOfMass.pdf" target="_blank">
+                            Elimination of Mass
+                        </a>
+                    </div>
+                    <div class="publication-description">
+                        <p>Investigation of mass elimination procedures in the T0 framework.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Key Innovations</h2>
+                <div class="innovation-highlights">
+                    <h3>Fundamental Principles</h3>
+                    <ul>
+                        <li><strong>Time-Mass Duality:</strong> T(x,t) = 1/max(m(x,t), ω) with dimension [E⁻¹]</li>
+                        <li><strong>Three Field Geometries:</strong> Localized spherical, localized non-spherical, infinite homogeneous</li>
+                        <li><strong>Natural Units:</strong> ℏ = c = α_EM = β_T = 1 through deep theoretical connections</li>
+                        <li><strong>Parameter-Free Theory:</strong> All constants derived from field theory without adjustable parameters</li>
+                    </ul>
+
+                    <h3>Mathematical Framework</h3>
+                    <ul>
+                        <li><strong>Universal Scale Parameter:</strong> ξ ≈ 1.33 × 10⁻⁴ from Higgs physics</li>
+                        <li><strong>Cosmic Screening:</strong> ξ_eff = ξ/2 for infinite fields with Λ_T = -4πGρ₀</li>
+                        <li><strong>Energy Loss Redshift:</strong> z(λ) = z₀(1 + ln(λ/λ₀)) - distinctive T0 signature</li>
+                        <li><strong>Modified Quantum Evolution:</strong> Energy-dependent effects through time field coupling</li>
+                    </ul>
+
+                    <h3>Experimental Predictions</h3>
+                    <ul>
+                        <li><strong>Wavelength-Dependent Redshift:</strong> Logarithmic λ-dependence testable in multi-wavelength astronomy</li>
+                        <li><strong>Energy-Dependent Quantum Correlations:</strong> Modified Bell inequalities for entangled photons</li>
+                        <li><strong>Muon g-2 Resolution:</strong> Precise agreement with experimental discrepancy using universal ξ parameter</li>
+                        <li><strong>Modified Gravitational Dynamics:</strong> Linear Φ(r) = -GM/r + κr term observable in large-scale systems</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>Theoretical Significance</h2>
+                <p>The T0 model represents a fundamental paradigm shift from the Standard Model approach:</p>
+                <ul>
+                    <li><strong>No Spatial Expansion:</strong> Cosmological redshift through energy loss to time field gradients</li>
+                    <li><strong>Emergent Gravitation:</strong> Gravitational effects from time field gradients rather than spacetime curvature</li>
+                    <li><strong>Unified Coupling:</strong> α_EM = β_T = 1 reveals fundamental unity of electromagnetic and time field interactions</li>
+                    <li><strong>Complete Self-Consistency:</strong> All parameters interconnected through field-theoretic relationships</li>
+                    <li><strong>Cross-Scale Unification:</strong> Same framework applies from sub-Planckian to cosmological scales</li>
+                </ul>
+            </section>
+
+            <div class="navigation">
+                <div class="nav-btns">
+                    <a href="#" onclick="changePage('home-page'); return false;" class="btn">← Back to Main Page</a>
+                    <a href="#" onclick="changePage('german-page'); return false;" class="btn">Archived German Versions →</a>
+                </div>
+            </div>
+
+            <footer>
+                <p>© 2025 Johann Pascher | T0-Time-Mass-Duality Framework</p>
+                <p><a href="https://github.com/jpascher/T0-Time-Mass-Duality" target="_blank">GitHub Repository</a></p>
+            </footer>
+        </div>
+
+        <!-- German Page (Archived) -->
+        <div id="german-page" class="page inactive">
+            <div class="navigation">
+                <div class="nav-btns">
+                    <a href="#" onclick="changePage('home-page'); return false;" class="btn">← Zurück zur Hauptseite</a>
+                    <a href="#" onclick="changePage('english-page'); return false;" class="btn">Current English Framework →</a>
+                </div>
+            </div>
+            
+            <header>
+                <h1>Archivierte Deutsche Publikationen</h1>
+                <p>Historische Versionen zur Referenz</p>
+            </header>
+
+            <div class="abstract">
+                <p><strong>Hinweis:</strong> Diese deutschen Versionen sind archiviert und werden nicht mehr aktualisiert. Die aktuellen Dokumente sind nur in englischer Sprache im Hauptverzeichnis verfügbar. Diese Sammlung dient als historische Referenz für die Entwicklung des T0-Modells.</p>
+            </div>
+
+            <section>
+                <h2>Status der deutschen Publikationen</h2>
+                <div class="archive-notice">
+                    <h3>🔒 Archivierter Inhalt</h3>
+                    <p>Die deutschen Versionen der T0-Modell-Publikationen wurden archiviert. Alle aktuellen Entwicklungen und Updates finden sich ausschließlich in den englischen Versionen unter:</p>
+                    <ul>
+                        <li><code>/pdf/</code> - Aktuelle PDF-Dokumente (englisch)</li>
+                        <li><code>/tex/</code> - LaTeX-Quelldateien (englisch)</li>
+                    </ul>
+                    
+                    <h3>📋 Grund für die Archivierung</h3>
+                    <p>Um die Wartung und Konsistenz der Dokumentation zu gewährleisten, wurde die Entwicklung auf eine einsprachige (englische) Version konzentriert. Dies ermöglicht:</p>
+                    <ul>
+                        <li>Schnellere Updates und Korrekturen</li>
+                        <li>Konsistente mathematische Notation</li>
+                        <li>Bessere internationale Zugänglichkeit</li>
+                        <li>Vermeidung von Synchronisationsproblemen zwischen Sprachversionen</li>
+                    </ul>
+
+                    <h3>🔄 Zugang zu aktuellen Inhalten</h3>
+                    <p>Für die neuesten theoretischen Entwicklungen, mathematischen Ableitungen und experimentellen Vorhersagen besuchen Sie bitte die englische Dokumentation:</p>
+                    <a href="#" onclick="changePage('english-page'); return false;" class="btn">Aktuelle englische Dokumentation →</a>
+                </div>
+            </section>
+
+            <section>
+                <h2>Verfügbare historische deutsche Dokumente</h2>
+                <p><em>Diese Liste zeigt die zuletzt verfügbaren deutschen Versionen zum Zeitpunkt der Archivierung:</em></p>
+                
+                <div class="archived-publication">
+                    <h4>Grundlagen und Einführungen</h4>
+                    <ul>
+                        <li>Komplementärer Dualismus in der Physik</li>
+                        <li>Eine neue Perspektive auf Zeit und Raum</li>
+                        <li>Ontologische Äquivalenz im T0-Modell</li>
+                    </ul>
+                </div>
+
+                <div class="archived-publication">
+                    <h4>Mathematische Formalisierung</h4>
+                    <ul>
+                        <li>Mathematische Kernformulierungen der Zeit-Masse-Dualitätstheorie</li>
+                        <li>Higgs-Mechanismus in der Zeit-Masse-Dualität</li>
+                        <li>Parameter κ, α und β im T₀-Modell</li>
+                    </ul>
+                </div>
+
+                <div class="archived-publication">
+                    <h4>Anwendungen und Erweiterungen</h4>
+                    <ul>
+                        <li>Dynamische Masse von Photonen und Nichtlokalität</li>
+                        <li>Dunkle Energie im T0-Modell</li>
+                        <li>Natürliche Einheiten und Längenskalen</li>
+                        <li>Biologische Anomalien in quantisierten Längenskalen</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>Migration zur englischen Dokumentation</h2>
+                <p>Die aktuellen englischen Dokumente enthalten alle theoretischen Entwicklungen und Verbesserungen, die seit der Archivierung der deutschen Versionen entstanden sind:</p>
+                
+                <div class="migration-info">
+                    <h3>Neue Entwicklungen (nur englisch verfügbar):</h3>
+                    <ul>
+                        <li><strong>17 vollständig aktualisierte Dokumente</strong> mit konsistenter mathematischer Notation</li>
+                        <li><strong>Einheitliches natürliches Einheitensystem</strong> mit ℏ = c = α_EM = β_T = 1</li>
+                        <li><strong>Vollständige dimensionale Konsistenz</strong> in allen Ableitungen</li>
+                        <li><strong>Erweiterte Anwendungen</strong> auf Kosmologie und Teilchenphysik</li>
+                        <li><strong>Experimentelle Vorhersagen</strong> mit präzisen numerischen Werten</li>
+                    </ul>
+                </div>
+            </section>
+
+            <div class="navigation">
+                <div class="nav-btns">
+                    <a href="#" onclick="changePage('home-page'); return false;" class="btn">← Zurück zur Hauptseite</a>
+                    <a href="#" onclick="changePage('english-page'); return false;" class="btn">Current English Framework →</a>
+                </div>
+            </div>
+
+            <footer>
+                <p>© 2025 Johann Pascher | T0-Zeit-Masse-Dualitäts-Framework</p>
+                <p><a href="https://github.com/jpascher/T0-Time-Mass-Duality" target="_blank">GitHub-Repository</a></p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Your existing JavaScript here
+        function changePage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                if (page.id === pageId) {
+                    page.classList.remove('inactive');
+                    page.classList.add('active');
+                } else {
+                    page.classList.remove('active');
+                    page.classList.add('inactive');
+                }
+            });
+            window.scrollTo(0, 0);
+        }
+
+        window.onload = function() {
+            document.getElementById('loader').style.display = 'none';
+        };
+    </script>
+</body>
+</html>
