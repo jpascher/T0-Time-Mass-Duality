@@ -1,180 +1,176 @@
-# Time-Mass Duality
+# T0-Time-Mass-Duality: A Unified Framework for Quantum Mechanics and Relativity
 
-## A Theoretical Framework for Extending Modern Physics
+## Project Overview
 
-Welcome to the repository of the Time-Mass Duality research program by Johann Pascher. This repository contains a coherent collection of works that develop a new theoretical framework for extending modern physics.
-
-## Overview
-
-At the center of this research is the concept of time-mass duality, which proposes a fundamental reformulation of the relationship between time and mass. This approach offers not only a possible path toward unifying quantum mechanics, quantum field theory, and general relativity, but also provides new perspectives on fundamental phenomena such as nonlocality, dark matter, and dark energy.
-
-The publications found here form a coherent research program that ranges from theoretical foundations to concrete applications and experimentally verifiable predictions. New documents on measurement differences, temperature adjustments, natural units, and scale interactions further expand the program.
-
-**Important Update (May 2025)**: Five significant new documents have been added that deepen the theoretical foundations of the T0 model:
-1. **The Dynamic Extension of the Intrinsic Time Field** - A comprehensive treatment of the time field as a fully dynamic entity varying with both space and time
-2. **The T0 Model as a More Complete Theory** - Positioning the T0 model as a fundamental framework where other gravitational theories serve as mathematical approximations
-3. **Conceptual Comparison of T0 Model and Extended Standard Model** - An analysis of the conceptual advantages of the T0 model's field-theoretic approach
-4. **Pragmatic Application of the T0 Model** - Guidelines for applying the T0 model directly rather than translating relativistic formalisms
-5. **The Emerging Unified Framework** - An exploration of the relationships between fundamental fields in the T0 model
-
-**Earlier Update (April 2025)**: A new document has been added that explores the ontological equivalence of different perspectives within the T0 model. This work demonstrates how seven fundamental ontological truths can be approached from complementary viewpoints, all leading to identical predictions. This further validates the comprehensiveness of the T0 model by showing that seemingly different theoretical formulations are in fact equivalent representations of the same underlying reality.
+The T0 model presents a revolutionary approach to fundamental physics through **time-mass duality**, where the intrinsic time field T(x,t) = 1/max(m(x,t), ω) provides a unified treatment of quantum mechanics and relativity. This framework operates in natural units where ℏ = c = α_EM = β_T = 1, reducing all physical quantities to powers of energy.
 
 ## Repository Structure
 
-The publications and additional documents are organized into the following structure:
 ```
 T0-Time-Mass-Duality/
-├── 2/
-│   ├── pdf/
-│   │   ├── Deutsch/              # German publications
-│   │   └── English/              # English publications
-│   ├── tex/                      # LaTeX source files
-│   ├── NatuerlilEinheitenTabelleKurz.md        # Short table of natural units (German)
-│   ├── NatuerlilEinheitenTabelleKurzEn.md      # Short table of natural units (English)
-│   ├── esotherik.md                           # Discussion on scale interactions and physical boundaries
-│   ├── OntologicalEquivalence.md              # Analysis of seven equivalent ontological perspectives
-│   └── website.html                           # Website files
+├── pdf/                          # English PDF documents
+├── tex/                          # LaTeX source files  
+├── Deutsch/                      # German versions (archived)
+├── English/                      # English versions (archived)
 └── README.md                     # This file
 ```
 
-## Key Concepts
+**Note**: Previous German/English subdirectories and all referenced websites/SVG files have been removed. Only the current English versions in the main `pdf/` and `tex/` directories are actively maintained.
 
-- **Intrinsic Time**: The concept of intrinsic time \( T = \hbar/mc^2 \) as a fundamental property of matter.
-- **Complementary Models**: The standard model (constant mass, variable time) and the T₀ model (absolute time, variable mass).
-- **Dynamic Mass**: Extension of the concept to massless particles like photons.
-- **Modified Gravitational Model**: Explaining galactic rotation curves without dark matter.
-- **Unified Framework**: Integration of quantum mechanics, quantum field theory, and general relativity.
-- **Ontological Equivalence**: Multiple valid perspectives leading to identical physical predictions.
+## Current Document Collection (2025)
 
-## Publications
+The following 17 documents represent the complete, up-to-date T0 model framework:
 
-Below are the 34 publications included in this repository, organized by category. Links point to the English versions, with corresponding German versions available in the `Deutsch/` directory.
+### Core Theoretical Framework
 
-### Starting Point: Field Theory as the Initial Idea
+**[Field-Theoretic Derivation of the β Parameter](pdf/DerivationVonBetaEn.pdf)**  
+*Complete geometric derivation of the fundamental β = 2Gm/r parameter from field equations, establishing the mathematical foundation of the T0 model with three field geometries and cosmic screening effects.*
 
-- **[Field Theory and Quantum Correlations](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/FeldtheorieQuantenEn.pdf)**  
-  The starting point, questioning instant particle connections (nonlocality) and proposing a new field structure.
+**[Field-Theoretic Derivation with Complete References](pdf/DerivationVonBetaEnR.pdf)**  
+*Extended version with comprehensive literature references, providing historical context and connections to established physics literature.*
 
-### Conceptual Foundations and Motivation
+**[Mathematical Core Formulations of Time-Mass Duality Theory](pdf/MathZeitMasseLagrangeEn.pdf)**  
+*Essential mathematical formulations including complete Lagrangian densities with strict dimensional consistency, incorporating all T0 parameters and the three fundamental field geometries.*
 
-- **[The Necessity of Extending Standard Quantum Mechanics and Quantum Field Theory](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/NotwendigkeitQMErweiterungEn.pdf)**  
-  Highlights weaknesses in conventional theories and introduces Time-Mass Duality as a solution.
-- **[Summary - Complementary Dualism in Physics](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/KurzKomplementDualPhysikEn.pdf)**  
-  Simply explains Time-Mass Duality as a complement to wave-particle duality.
-- **[A New Perspective on Time and Space: Johann Pascher's Revolutionary Ideas](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/ZeitRaumPascherEn.pdf)**  
-  Accessible to all, introducing the T₀ model with fixed time and variable mass.
-- **[Time-Mass Duality: A New Perspective](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/ZeitMasseNeuerBlickEn.pdf)**  
-  Provides an introductory overview of the Time-Mass Duality concept and its potential to reshape physics.
-- **[Ontological Equivalence in the T0 Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/OntologicalEquivalenceEn.pdf)**  
-  Demonstrates how seven fundamental ontological truths can be approached from different yet equivalent theoretical perspectives, all producing identical physical predictions.
-- **[The T0 Model as a More Complete Theory](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/T0-ModelAsCompleteTheory_En.pdf)**  
-  Positions the T0 model as a fundamental theory where other approaches to quantum gravity (String Theory, Loop Quantum Gravity, etc.) serve as mathematical approximations valid in specific domains.
+**[Bridging Quantum Mechanics and Relativity - Part I](pdf/QMRelTimeMassPart1ZEn.pdf)**  
+*Updated theoretical foundations with complete geometric framework, natural units system (ℏ = c = α_EM = β_T = 1), and connections to Higgs physics.*
 
-### Mathematical Formalization
+### Natural Units and Fundamental Constants
 
-- **[Essential Mathematical Formalisms of Time-Mass Duality Theory with Lagrange Densities](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MathZeitMasseLagrangeDichtEn.pdf)**  
-  Develops the theory mathematically using simple rules and Lagrange Density methods.
-- **[Mathematical Formulations of Time-Mass Duality Theory with Lagrange](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MathZeitMasseLagrangeEn.pdf)**  
-  Deepens mathematical models for particles like the Higgs field within Time-Mass Duality.
-- **[Mathematical Formulation of the Higgs Mechanism in Time-Mass Duality](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MathHiggsZeitMasseEn.pdf)**  
-  Explains how the Higgs mechanism integrates with Time-Mass Duality to account for particle mass.
-- **[Time-Mass Duality: T₀ Model Parameters](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/ZeitMasseT0ParamsEn.pdf)**  
-  Details the parameters defining the T₀ model within the Time-Mass Duality framework.
-- **[Consistency of Alpha=1 and Beta=1 in Time-Mass Duality](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/Alpha1Beta1KonsistenzEn.pdf)**  
-  Investigates the implications of setting fundamental constants to unity within the theory.
-- **[Dynamic Extension of the Intrinsic Time Field](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/DynamicTF-SchrodingerExtensions_En.pdf)**  
-  Extends the T0 model by developing the fully dynamic nature of the intrinsic time field as a space-time dependent field T(x,t), with implications for quantum evolution and field theory.
+**[Natural Unit Systems: Universal Energy Conversion](pdf/NatEinheitenSystematikEn.pdf)**  
+*Comprehensive framework establishing energy as the fundamental dimension, with complete conversion tables and length scale hierarchy from sub-Planckian to cosmological scales.*
 
-### Applications and Extensions
+**[Parameter System-Dependency: SI vs. Natural Units](pdf/ParameterSystemdipendentEn.pdf)**  
+*Systematic analysis revealing that parameters like ξ, α_EM, β_T have dramatically different values across unit systems, resolving apparent inconsistencies through proper transformation protocols.*
 
-- **[Dynamic Mass of Photons and Its Implications for Nonlocality](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/DynMassePhotonenNichtlokalEn.pdf)**  
-  Explores variable photon mass and its role in explaining nonlocal particle interactions.
-- **[A Mathematical Analysis of Energy Dynamics](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MathEnergiedynamikEn.pdf)**  
-  Applies Time-Mass Duality to cosmology, interpreting dark energy as an energy distribution mechanism.
-- **[Compensatory and Additive Effects: Measurement Differences between T₀ and Standard Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MessdifferenzenT0StandardEn.pdf)**  
-  Compares cosmological measurements, potentially resolving discrepancies like the Hubble tension.
-- **[Adjustment of Temperature Units in Natural Units and CMB Measurements](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/TempEinheitenCMBEn.pdf)**  
-  Examines temperature unit adjustments in natural units for cosmic microwave background (CMB) measurements.
-- **[Simplified Description of the Four Fundamental Forces with Time-Mass Duality](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/VierKraefteZeitMasseEn.pdf)**  
-  Describes the four fundamental forces through the lens of Time-Mass Duality.
-- **[Systematic Compilation of Natural Units with Energy as Base Unit](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/NatEinheitenSystematikEn.pdf)**  
-  A comprehensive reference work with detailed tables of all physical quantities and their derivations in an energy-based unit system, revealing fundamental patterns like the quantization of length scales.
-- **[Emergent Gravity in the T₀ Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/EmergentGravT0En.pdf)**  
-  Explores how gravity could emerge from the T₀ model's time-mass interactions.
-- **[Biological Anomalies within the Quantization of Length Scales in the T0 Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/biologischeSystemeEn.pdf)**  
-  Examines the special position of biological structures in the quantized length scale hierarchy and their ability to form stable structures in "forbidden zones".
-- **[Short Table of Natural Units](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/NatuerlilEinheitenTabelleKurzEn.pdf)**  
-  A concise table summarizing natural units in the T0 model, complementing the detailed derivations in `NatEinheitenSystematikEn.pdf`.
-- **[Pragmatic Application of the T0 Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/PragmaticApproachT0-ModelEn.pdf)**  
-  Explains why direct translation of relativistic tensor formalisms to the T0 model should be avoided and instead proposes developing direct T0 equations for specific physical phenomena.
+**[Mathematical Proof: α = 1 in Natural Units](pdf/ResolvingTheConstantsAlfaEn.pdf)**  
+*Rigorous proof that the fine structure constant equals unity in natural units through electromagnetic duality, resolving the "mystery" of 1/137 as a unit system artifact.*
 
-### Quantum Mechanics and Relativity
+**[The Fine Structure Constant: Various Representations](pdf/FeinstrukturkonstanteEn.pdf)**  
+*Complete analysis of different representations of α_EM, from fundamental physics to natural units, including the electromagnetic duality derivation.*
 
-- **[Bridging Quantum Mechanics and Relativity through Time-Mass Duality Part I: Theoretical Foundations](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/QMRelTimeMassPart1En.pdf)**  
-  Outlines theoretical foundations for unifying quantum mechanics and relativity via Time-Mass Duality.
-- **[Bridging Quantum Mechanics and Relativity through Time-Mass Duality Part II: Cosmological Implications](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/QMRelTimeMassPart2En.pdf)**  
-  Focuses on cosmological implications and experimental validation of the unified framework.
-- **[Emergent Time in Quantum Mechanics](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/ZeitEmergentQMEn.pdf)**  
-  Examines time as an emergent property in quantum mechanics under Time-Mass Duality.
-- **[Intrinsic Time in Quantum Field Theory: T₀ Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/QFTIntrinsischesZeitT0En.pdf)**  
-  Explores the concept of intrinsic time within quantum field theory using the T₀ model.
-- **[Conceptual Comparison of T0 Model and Extended Standard Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/T0vsESM_ConceptualAnalysis_En.pdf)**  
-  Provides a detailed analysis of the conceptual differences between the field-theoretic approach of the T0 model and the dimensional approach of the Extended Standard Model.
+### Quantum Field Theory Integration
 
-### Cosmological and Frontier Areas
+**[Integration of the Dirac Equation in the T0 Model](pdf/diracEn.pdf)**  
+*Natural units framework showing how the Dirac equation emerges from T0 time-mass duality, with geometric derivation of 4×4 matrix structure and precision QED calculations.*
 
-- **[Beyond the Planck Scale](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/JenseitsPlanckEn.pdf)**  
-  Investigates Time-Mass Duality's implications for physics at and beyond the Planck scale.
-- **[Mass Variation in Galaxies](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/MassVarGalaxienEn.pdf)**  
-  Explains galaxy dynamics through variable mass, potentially eliminating the need for dark matter.
-- **[Unification of the T₀ Model: Dark Energy and Galaxy Dynamics](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/T0VereinheitlichungDEGalEn.pdf)**  
-  Applies Time-Mass Duality to unify dark energy and galaxy dynamics in cosmology.
-- **[The Emerging Unified Framework](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/ausblicke_En.pdf)**  
-  Explores the relationships between fundamental fields in the T0 model, particularly how the Higgs field, vacuum constants, and intrinsic time field may be different manifestations of the same underlying reality.
+**[Complete Muon g-2 Analysis in Unified Natural Units](pdf/CompleteMuon_g-2_AnalysisEn.pdf)**  
+*Calculation of the muon's anomalous magnetic moment using the universal Higgs-derived scale parameter ξ ≈ 1.33 × 10⁻⁴, achieving remarkable agreement with experimental data.*
 
-### Additional Theoretical Insights
+**[Dynamic Mass of Photons and Nonlocality](pdf/DynMassePhotonenNichtlokalEn.pdf)**  
+*Analysis of frequency-dependent effective photon mass m_γ = ω, introducing energy-dependent nonlocality effects and modified Bell inequalities for quantum correlations.*
 
-- **[Natural Units with Fine-Structure Constant Alpha=1](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/NatEinheitenAlpha1En.pdf)**  
-  Proposes a simplified unit system setting the fine-structure constant to 1.
-- **[Summary of Constants in Time-Mass Duality](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/ZusammenfassungKonstantenEn.pdf)**  
-  Summarizes the role of physical constants in the Time-Mass Duality framework.
-- **[Completing the Standard Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/English/StandardModKruemmungRotvEn.pdf)**  
-  Presents an extension to the Standard Model that is compatible with the T0 model's approach to time-mass duality.
+### Cosmological Applications
 
-### Additional Documents
+**[Temperature Units in Natural Units: CMB Analysis](pdf/TempEinheitenCMBEn.pdf)**  
+*Comprehensive analysis integrating cosmic screening effects and regime-dependent parameters, showing CMB temperature evolution T(z) = T₀(1+z)(1 + β_T ln(1+z)) with Wien constant rescaling.*
 
-This section includes supplementary Markdown documents that complement the LaTeX publications. These documents provide concise tabular summaries or theoretical discussions related to the Time-Mass Duality framework.
+**[T0 vs ESM: Conceptual Analysis](pdf/T0vsESM_ConceptualAnalysis_En.pdf)**  
+*Detailed comparison between the T0 model (absolute time, variable mass) and Extended Standard Model (relative time, constant mass), demonstrating mathematical equivalence through logarithmic transformation.*
 
-- **[Short Table of Natural Units (German)](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/NatuerlilEinheitenTabelleKurz.md)**  
-  A concise table summarizing the key natural units in the T0 model, with energy as the base unit, focusing on fundamental constants, length scales, and biological anomalies without detailed derivations (in German).
-- **[Short Table of Natural Units (English)](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/NatuerlilEinheitenTabelleKurzEn.md)**  
-  A concise table summarizing the key natural units in the T0 model, with energy as the base unit, focusing on fundamental constants, length scales, and biological anomalies without detailed derivations (in English).
-- **[Scale Interactions in the T0 Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/esotherik.md)**  
-  A theoretical discussion exploring how systems across different scales (subatomic, biological, cosmological) interact via the intrinsic time field \( T(x) \). It emphasizes a hierarchical, wave-based structure, the role of Lagrangian Density in unifying interactions, and a rigorous physical approach that explicitly rejects esoteric interpretations.
-- **[Ontological Equivalence in Physical Theories](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/OntologischeAequivalenzEn.md)**  
-  Explores how different theoretical frameworks can represent the same physical reality through seven ontological truths that yield identical predictions, demonstrating the equivalence of seemingly different approaches within the T0 model.
+**[Pragmatic Approach to T0-Model Applications](pdf/PragmaticApproachT0-ModelEn.pdf)**  
+*Guidelines for direct application of T0 model principles rather than translating from relativistic formalisms, emphasizing field-theoretic approach over dimensional analysis.*
+
+**[The Emerging Unified Framework](pdf/ausblicke_En.pdf)**  
+*Exploration of fundamental field relationships in the T0 model, examining how Higgs field, vacuum constants, and intrinsic time field may be manifestations of underlying unity.*
+
+### Additional Technical Documents
+
+**[Parameter System Dependencies (Version 1)](pdf/ParameterSystemdipendentEn1.pdf)**  
+*Alternative analysis of unit system dependencies and parameter transformations.*
+
+**[Elimination of Mass](pdf/EliminationOfMass.pdf)**  
+*Investigation of mass elimination procedures in the T0 framework.*
+
+## Key Innovations
+
+### Fundamental Principles
+- **Time-Mass Duality**: T(x,t) = 1/max(m(x,t), ω) with dimension [E⁻¹]
+- **Three Field Geometries**: Localized spherical, localized non-spherical, infinite homogeneous
+- **Natural Units**: ℏ = c = α_EM = β_T = 1 through deep theoretical connections
+- **Parameter-Free Theory**: All constants derived from field theory without adjustable parameters
+
+### Mathematical Framework
+- **Universal Scale Parameter**: ξ ≈ 1.33 × 10⁻⁴ from Higgs physics
+- **Cosmic Screening**: ξ_eff = ξ/2 for infinite fields with Λ_T = -4πGρ₀
+- **Energy Loss Redshift**: z(λ) = z₀(1 + ln(λ/λ₀)) - distinctive T0 signature
+- **Modified Quantum Evolution**: Energy-dependent effects through time field coupling
+
+### Experimental Predictions
+- **Wavelength-Dependent Redshift**: Logarithmic λ-dependence testable in multi-wavelength astronomy
+- **Energy-Dependent Quantum Correlations**: Modified Bell inequalities for entangled photons
+- **Muon g-2 Resolution**: Precise agreement with experimental discrepancy using universal ξ parameter
+- **Modified Gravitational Dynamics**: Linear Φ(r) = -GM/r + κr term observable in large-scale systems
+
+## Theoretical Significance
+
+The T0 model represents a fundamental paradigm shift:
+
+1. **No Spatial Expansion**: Cosmological redshift through energy loss to time field gradients
+2. **Emergent Gravitation**: Gravitational effects from time field gradients rather than spacetime curvature  
+3. **Unified Coupling**: α_EM = β_T = 1 reveals fundamental unity of electromagnetic and time field interactions
+4. **Complete Self-Consistency**: All parameters interconnected through field-theoretic relationships
+5. **Cross-Scale Unification**: Same framework applies from sub-Planckian to cosmological scales
+
+## Mathematical Completeness
+
+All equations maintain strict dimensional consistency in natural units:
+- Field equation: ∇²m = 4πGρm (localized) or ∇²m = 4πGρm + Λ_T m (infinite)
+- Characteristic lengths: r₀ = 2Gm (localized), r₀,eff = Gm (cosmic screening)
+- Energy loss rate: dE/dr = -g_T ω² 2G/r² with complete dimensional verification
+- Quantum evolution: Modified Schrödinger equation with time field coupling
+
+## Distinctive Features
+
+**Versus Standard Model:**
+- Zero free parameters vs. >20 adjustable constants
+- Static universe vs. spatial expansion paradigm  
+- Natural dark energy (Λ_T term) vs. mysterious cosmological constant
+- Unified electromagnetic-gravitational coupling vs. separate force treatments
+
+**Versus Alternative Theories:**
+- Complete field-theoretic foundation vs. phenomenological modifications
+- Cross-scale consistency vs. limited applicability ranges
+- Parameter-free predictions vs. fine-tuning requirements
+- Mathematical equivalence proofs vs. approximate fits
+
+## Future Directions
+
+### Theoretical Development
+- Higher-order quantum corrections to time field dynamics
+- Non-Abelian gauge field extensions within T0 framework
+- Cosmological structure formation in static universe paradigm
+- Integration with quantum gravity approaches
+
+### Experimental Validation
+- Multi-wavelength redshift surveys for λ-dependent effects
+- High-precision quantum optics tests of energy-dependent correlations
+- Gravitational wave astronomy for modified dynamics signatures
+- Atomic clock networks for time field gradient detection
+
+### Computational Implementation
+- Numerical solutions of T0 field equations across geometries
+- Statistical analysis frameworks for model comparison
+- Monte Carlo simulations of T0 cosmological structure formation
+- Precision calculation tools for experimental predictions
 
 ## Website
 
-The repository includes a website presenting all publications in both German and English. Access it here:
-https://jpascher.github.io/T0-Time-Mass-Duality/2/website.html
+The repository includes a comprehensive website presenting the complete T0 model framework:
 
-## Future Research Directions
-
-The ongoing research program focuses on:
-
-1. Development of detailed experimental protocols to verify mass-dependent time evolution.
-2. Refinement of the mathematical formulation, particularly regarding quantum gravity.
-3. Further investigation of biological structures' anomalous stability in "forbidden zones" of the length scale hierarchy.
-4. Exploration of technological applications based on the principles of time field modification.
-5. Further elaboration of the ontological equivalence of different theoretical perspectives within the T0 model.
-6. Development of the dynamic time field theory and its implications for quantum evolution and field theory.
-7. Exploration of the relationships between the T0 model and other approaches to quantum gravity.
+**🌐 [T0-Time-Mass-Duality Website](https://jpascher.github.io/T0-Time-Mass-Duality/2/website.html)**
 
 ## Contact
 
-For inquiries about this research program, please use the contact information provided on the website or create an issue in this repository.
+For inquiries about this research program, please create an issue in this repository.
 
-## Copyright
+**Author**: Johann Pascher  
+**Institution**: Department of Communications Engineering, Höhere Technische Bundeslehranstalt (HTL), Leonding, Austria
 
-© 2025 Johann Pascher | All rights reserved
+## License
+
+© 2025 Johann Pascher. All rights reserved.
+
+---
+
+*This repository contains the complete documentation of the T0-Time-Mass-Duality model, representing a unified framework for fundamental physics through the principle of time-mass duality and the intrinsic time field T(x,t).*
