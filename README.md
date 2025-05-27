@@ -9,34 +9,46 @@ The T0 model presents a revolutionary approach to fundamental physics through **
 ```
 T0-Time-Mass-Duality/
 ├── pdf/                          # ✅ CURRENT documents (18 PDFs)
-├── tex/                          # ✅ CURRENT LaTeX source files  
-├── Deutsch/                      # ❌ OUTDATED predecessor versions
-├── English/                      # ❌ OUTDATED predecessor versions
+│   ├── Deutsch/                  # ❌ OUTDATED predecessor versions
+│   └── English/                  # ❌ OUTDATED predecessor versions
+├── tex/                          # ✅ CURRENT LaTeX source files
+│   ├── Deutsch/                  # ❌ OUTDATED LaTeX sources
+│   └── English/                  # ❌ OUTDATED LaTeX sources
 └── README.md                     # This file
 ```
 
 ## Current Document Collection (2025)
 
-**⚠️ IMPORTANT NOTE**: Only the documents in the main `pdf/` directory are current and complete. The `Deutsch/` and `English/` folders contain outdated predecessor versions and should not be used.
+**⚠️ IMPORTANT NOTE**: Only the documents in the main `pdf/` directory are current and complete. The subdirectories `pdf/Deutsch/` and `pdf/English/` as well as `tex/Deutsch/` and `tex/English/` contain outdated predecessor versions and should not be used.
 
 The following 18 documents represent the complete, up-to-date T0 model framework:
 
-### Core Theoretical Framework
-
-**[Field-Theoretic Derivation of the β Parameter](pdf/DerivationVonBetaEn.pdf)**  
-*Complete geometric derivation of the fundamental β = 2Gm/r parameter from field equations, establishing the mathematical foundation with universal T0 methodology showing all practical calculations use localized parameters ξ = 2√G·m regardless of geometry.*
-
-**[Field-Theoretic Derivation with Complete References](pdf/DerivationVonBetaEnR.pdf)**  
-*Extended version with comprehensive literature references (100+ citations), providing historical context and connections to established physics literature from Planck to modern quantum field theory.*
-
-**[Mathematical Core Formulations of Time-Mass Duality Theory](pdf/MathZeitMasseLagrangeEn.pdf)**  
-*Essential mathematical formulations including complete Lagrangian densities with strict dimensional consistency, incorporating the universal T0 parameter ξ ≈ 1.33 × 10⁻⁴ from Higgs physics.*
+### Energy-Based Core Formulations (Fundamental Basis)
 
 **[Pure Energy Formulation: Mass-Free Dirac Equation and Lagrangian](pdf/Elimination_Of_Mass_Dirac_Lag.pdf)**  
-*Revolutionary approach eliminating mass entirely from physics, expressing everything through energy relationships with the principle E = m in natural units. True parameter-free physics requiring zero experimental input.*
+*The ultimate simplification step: Complete elimination of mass from physics, expressing everything through energy relationships with E = m in natural units. True parameter-free physics requiring zero experimental input.*
 
 **[T0 Model Calculation Verification Table](pdf/Elimination_Of_Mass_Dirac_Tabelle.pdf)**  
-*Comprehensive verification comparing T0 predictions with CODATA values, showing 99.85% average agreement across all calculations with 14 new testable predictions.*
+*Complete verification of energy-based formulation: 99.85% average agreement with CODATA values across all calculations, 14 new testable predictions. Proof that pure energy formulation works.*
+
+**[Mathematical Core Formulations of Time-Mass Duality Theory](pdf/MathZeitMasseLagrangeEn.pdf)**  
+*Essential mathematical formulations of energy-based theory with complete Lagrangian densities and universal T0 parameter ξ ≈ 1.33 × 10⁻⁴ from Higgs physics.*
+
+### Quantum Mechanics and Quantum Computing (Applications of Energy Formulation)
+
+**[Deterministic Quantum Mechanics via T0-Energy Field Formulation](pdf/QM-Detrmistic.pdf)**  
+*Revolutionary application of energy-based formulation: Complete alternative to probability-based quantum mechanics through deterministic energy fields T(x,t) = 1/max(E(x,t), ω), eliminating all QM interpretation problems.*
+
+**[Integration of the Dirac Equation in the T0 Model](pdf/diracEn.pdf)**  
+*How the Dirac equation naturally emerges from T0 time-mass duality and energy formulation, with geometric derivation of 4×4 matrix structure.*
+
+### Theoretical Foundations (For Understanding)
+
+**[Field-Theoretic Derivation of the β Parameter](pdf/DerivationVonBetaEn.pdf)**  
+*Geometric derivation of fundamental β = 2Gm/r parameter from field equations, showing universal T0 methodology with localized parameters ξ = 2√G·m.*
+
+**[Field-Theoretic Derivation with Complete References](pdf/DerivationVonBetaEnR.pdf)**  
+*Extended version with 100+ literature references, historical context from Planck to modern quantum field theory.*
 
 ### Natural Units and Fundamental Constants
 
@@ -54,17 +66,11 @@ The following 18 documents represent the complete, up-to-date T0 model framework
 
 ### Quantum Field Theory Integration
 
-**[Integration of the Dirac Equation in the T0 Model](pdf/diracEn.pdf)**  
-*Natural units framework showing how the Dirac equation emerges from T0 time-mass duality, with geometric derivation of 4×4 matrix structure.*
-
-**[Deterministic Quantum Mechanics via T0-Energy Field Formulation](pdf/QM-Detrmistic.pdf)**  
-*Revolutionary alternative to probability-based quantum mechanics through deterministic energy fields T(x,t) = 1/max(E(x,t), ω), eliminating all QM interpretation problems and enabling precise single-measurement predictions.*
-
 **[Complete Muon g-2 Analysis](pdf/CompleteMuon_g-2_AnalysisEn.pdf)**  
-*Universal lepton correction a_ℓ^(T0) = 2.31 × 10⁻¹⁰ explaining 9.2% of the muon g-2 anomaly using the Higgs-derived scale parameter.*
+*Application of energy-based formulation: Universal lepton correction a_ℓ^(T0) = 2.31 × 10⁻¹⁰ explaining 9.2% of the muon g-2 anomaly.*
 
 **[Dynamic Mass of Photons and Nonlocality](pdf/DynMassePhotonenNichtlokalEn.pdf)**  
-*Energy-dependent photon mass m_γ = ω introducing frequency-dependent nonlocality effects and modified Bell inequalities.*
+*Energy-dependent photon mass m_γ = ω from energy formulation, introducing frequency-dependent nonlocality effects and modified Bell inequalities.*
 
 ### Cosmological Applications
 
@@ -205,7 +211,7 @@ The following 18 documents represent the complete, up-to-date T0 model framework
 **🔗 LaTeX Sources**: [tex/](tex/)  
 **🌐 Project Website**: [T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/)
 
-⚠️ **The `Deutsch/` and `English/` folders contain only outdated predecessor versions!**
+⚠️ **The subdirectories `pdf/Deutsch/`, `pdf/English/`, `tex/Deutsch/` and `tex/English/` contain only outdated predecessor versions!**
 
 ## Contact
 
