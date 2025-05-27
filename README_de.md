@@ -86,9 +86,6 @@ Die folgenden 18 Dokumente repräsentieren das vollständige, aktuelle T0-Modell
 **[Kosmologische Rotverschiebungskorrektur](pdf/Rotverschiebung_korrektur.pdf)**  
 *Korrigierte wellenlängenabhängige Rotverschiebungsformel z(λ) = z₀(1 - ln(λ/λ₀)) mit ordnungsgemäßer Vorzeichenableitung und physikalischer Verifikation.*
 
-**[Kosmologische Rotverschiebungskorrektur](pdf/Rotverschiebung_korrektur.pdf)**  
-*Korrigierte wellenlängenabhängige Rotverschiebungsformel z(λ) = z₀(1 - ln(λ/λ₀)) mit ordnungsgemäßer Vorzeichenableitung und physikalischer Verifikation.*
-
 ### Theoretische Grundlagen
 
 **[T0 vs ESM: Konzeptuelle Analyse](pdf/T0vsESM_ConceptualAnalysis_En.pdf)**  

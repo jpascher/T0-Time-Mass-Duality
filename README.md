@@ -86,9 +86,6 @@ The following 18 documents represent the complete, up-to-date T0 model framework
 **[Cosmological Redshift Correction](pdf/Rotverschiebung_korrektur.pdf)**  
 *Corrected wavelength-dependent redshift formula z(λ) = z₀(1 - ln(λ/λ₀)) with proper sign derivation and physical verification.*
 
-**[Cosmological Redshift Correction](pdf/Rotverschiebung_korrektur.pdf)**  
-*Corrected wavelength-dependent redshift formula z(λ) = z₀(1 - ln(λ/λ₀)) with proper sign derivation and physical verification.*
-
 ### Theoretical Foundations
 
 **[T0 vs ESM: Conceptual Analysis](pdf/T0vsESM_ConceptualAnalysis_En.pdf)**  
