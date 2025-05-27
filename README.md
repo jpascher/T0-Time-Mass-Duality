@@ -8,84 +8,90 @@ The T0 model presents a revolutionary approach to fundamental physics through **
 
 ```
 T0-Time-Mass-Duality/
-├── pdf/                          # English PDF documents
-├── tex/                          # LaTeX source files  
-├── Deutsch/                      # German versions (archived)
-├── English/                      # English versions (archived)
+├── pdf/                          # ✅ CURRENT documents (18 PDFs)
+├── tex/                          # ✅ CURRENT LaTeX source files  
+├── Deutsch/                      # ❌ OUTDATED predecessor versions
+├── English/                      # ❌ OUTDATED predecessor versions
 └── README.md                     # This file
 ```
+
 ## Current Document Collection (2025)
 
-The following documents represent the complete, up-to-date T0 model framework:
+**⚠️ IMPORTANT NOTE**: Only the documents in the main `pdf/` directory are current and complete. The `Deutsch/` and `English/` folders contain outdated predecessor versions and should not be used.
+
+The following 18 documents represent the complete, up-to-date T0 model framework:
 
 ### Core Theoretical Framework
 
-**[Field-Theoretic Derivation of the β Parameter](2/pdf/DerivationVonBetaEn.pdf)**  
+**[Field-Theoretic Derivation of the β Parameter](pdf/DerivationVonBetaEn.pdf)**  
 *Complete geometric derivation of the fundamental β = 2Gm/r parameter from field equations, establishing the mathematical foundation with universal T0 methodology showing all practical calculations use localized parameters ξ = 2√G·m regardless of geometry.*
 
-**[Field-Theoretic Derivation with Complete References](2/pdf/DerivationVonBetaEnR.pdf)**  
+**[Field-Theoretic Derivation with Complete References](pdf/DerivationVonBetaEnR.pdf)**  
 *Extended version with comprehensive literature references (100+ citations), providing historical context and connections to established physics literature from Planck to modern quantum field theory.*
 
-**[Mathematical Core Formulations of Time-Mass Duality Theory](2/pdf/MathZeitMasseLagrangeEn.pdf)**  
+**[Mathematical Core Formulations of Time-Mass Duality Theory](pdf/MathZeitMasseLagrangeEn.pdf)**  
 *Essential mathematical formulations including complete Lagrangian densities with strict dimensional consistency, incorporating the universal T0 parameter ξ ≈ 1.33 × 10⁻⁴ from Higgs physics.*
 
-**[Pure Energy Formulation: Mass-Free Dirac Equation and Lagrangian](2/pdf/Elimination_Of_Mass_Dirac_Lag.pdf)**  
+**[Pure Energy Formulation: Mass-Free Dirac Equation and Lagrangian](pdf/Elimination_Of_Mass_Dirac_Lag.pdf)**  
 *Revolutionary approach eliminating mass entirely from physics, expressing everything through energy relationships with the principle E = m in natural units. True parameter-free physics requiring zero experimental input.*
 
-**[T0 Model Calculation Verification Table](2/pdf/Elimination_Of_Mass_Dirac_Tabelle.pdf)**  
+**[T0 Model Calculation Verification Table](pdf/Elimination_Of_Mass_Dirac_Tabelle.pdf)**  
 *Comprehensive verification comparing T0 predictions with CODATA values, showing 99.85% average agreement across all calculations with 14 new testable predictions.*
 
 ### Natural Units and Fundamental Constants
 
-**[Natural Unit Systems: Universal Energy Conversion](2/pdf/NatEinheitenSystematikEn.pdf)**  
+**[Natural Unit Systems: Universal Energy Conversion](pdf/NatEinheitenSystematikEn.pdf)**  
 *Comprehensive framework establishing energy as the fundamental dimension, with complete conversion tables and length scale hierarchy spanning 61 orders of magnitude.*
 
-**[Parameter System-Dependency: SI vs. Natural Units](2/pdf/ParameterSystemdipendentEn.pdf)**  
+**[Parameter System-Dependency: SI vs. Natural Units](pdf/ParameterSystemdipendentEn.pdf)**  
 *Systematic analysis revealing dramatic parameter value differences across unit systems, with transformation protocols resolving apparent inconsistencies.*
 
-**[Mathematical Proof: α = 1 in Natural Units](2/pdf/ResolvingTheConstantsAlfaEn.pdf)**  
+**[Mathematical Proof: α = 1 in Natural Units](pdf/ResolvingTheConstantsAlfaEn.pdf)**  
 *Rigorous proof that the fine structure constant equals unity in natural units, resolving the "mystery" of 1/137 as a unit system artifact.*
 
-**[The Fine Structure Constant: Various Representations](2/pdf/FeinstrukturkonstanteEn.pdf)**  
+**[The Fine Structure Constant: Various Representations](pdf/FeinstrukturkonstanteEn.pdf)**  
 *Complete analysis including Sommerfeld's historical harmonic assignment methodology and its implications for fundamental constants interpretation.*
 
 ### Quantum Field Theory Integration
 
-**[Integration of the Dirac Equation in the T0 Model](2/pdf/diracEn.pdf)**  
+**[Integration of the Dirac Equation in the T0 Model](pdf/diracEn.pdf)**  
 *Natural units framework showing how the Dirac equation emerges from T0 time-mass duality, with geometric derivation of 4×4 matrix structure.*
 
-**[Complete Muon g-2 Analysis](2/pdf/CompleteMuon_g-2_AnalysisEn.pdf)**  
+**[Deterministic Quantum Mechanics via T0-Energy Field Formulation](pdf/QM-Detrmistic.pdf)**  
+*Revolutionary alternative to probability-based quantum mechanics through deterministic energy fields T(x,t) = 1/max(E(x,t), ω), eliminating all QM interpretation problems and enabling precise single-measurement predictions.*
+
+**[Complete Muon g-2 Analysis](pdf/CompleteMuon_g-2_AnalysisEn.pdf)**  
 *Universal lepton correction a_ℓ^(T0) = 2.31 × 10⁻¹⁰ explaining 9.2% of the muon g-2 anomaly using the Higgs-derived scale parameter.*
 
-**[Dynamic Mass of Photons and Nonlocality](2/pdf/DynMassePhotonenNichtlokalEn.pdf)**  
+**[Dynamic Mass of Photons and Nonlocality](pdf/DynMassePhotonenNichtlokalEn.pdf)**  
 *Energy-dependent photon mass m_γ = ω introducing frequency-dependent nonlocality effects and modified Bell inequalities.*
 
 ### Cosmological Applications
 
-**[H₀ and κ Parameter Analysis](2/pdf/Ho_En.pdf)**  
+**[H₀ and κ Parameter Analysis](pdf/Ho_En.pdf)**  
 *Derivation showing H₀ emerges from field theory as transition scale between local and cosmic regimes, with κ = H₀ in infinite geometry limit.*
 
-**[Pure Energy Formulation of H₀ and κ Parameters](2/pdf/Ho_EnergieEn.pdf)**  
+**[Pure Energy Formulation of H₀ and κ Parameters](pdf/Ho_EnergieEn.pdf)**  
 *Revolutionary H₀ = 68.0 km/s/Mpc prediction from pure theory (H₀ = ξ¹⁶ × E_P), resolving Hubble tension with 99.1% agreement to Planck measurements.*
 
-**[Temperature Units and CMB Analysis](2/pdf/TempEinheitenCMBEn.pdf)**  
+**[Temperature Units and CMB Analysis](pdf/TempEinheitenCMBEn.pdf)**  
 *CMB temperature evolution T(z) = T₀(1+z)(1 + β_T ln(1+z)) with β_T = 1, predicting T(z=1100) ≈ 24,000 K in universal T0 methodology.*
 
-**[Cosmological Redshift Correction](2/pdf/Rotverschiebung_korrektur.pdf)**  
+**[Cosmological Redshift Correction](pdf/Rotverschiebung_korrektur.pdf)**  
 *Corrected wavelength-dependent redshift formula z(λ) = z₀(1 - ln(λ/λ₀)) with proper sign derivation and physical verification.*
 
 ### Theoretical Foundations
 
-**[T0 vs ESM: Conceptual Analysis](2/pdf/T0vsESM_ConceptualAnalysis_En.pdf)**  
+**[T0 vs ESM: Conceptual Analysis](pdf/T0vsESM_ConceptualAnalysis_En.pdf)**  
 *Mathematical equivalence between T0 model (absolute time, variable mass) and Extended Standard Model through logarithmic transformation.*
 
-**[Pragmatic Approach to T0-Model Applications](2/pdf/PragmaticApproachT0-ModelEn.pdf)**  
+**[Pragmatic Approach to T0-Model Applications](pdf/PragmaticApproachT0-ModelEn.pdf)**  
 *Direct application guidelines emphasizing field-theoretic approach over dimensional analysis translations.*
 
-**[The Emerging Unified Framework](2/pdf/ausblicke_En.pdf)**  
+**[The Emerging Unified Framework](pdf/ausblicke_En.pdf)**  
 *Exploration of fundamental field relationships examining potential unity of Higgs field, vacuum constants, and intrinsic time field.*
 
-**[Elimination of Mass (General)](2/pdf/EliminationOfMass.pdf)**  
+**[Elimination of Mass (General)](pdf/EliminationOfMass.pdf)**  
 *General investigation of mass elimination procedures in the T0 framework.*
 
 ## Key Innovations
@@ -107,6 +113,11 @@ The following documents represent the complete, up-to-date T0 model framework:
 - 99.1% agreement with Planck CMB measurements
 - Resolves Hubble tension through field-theoretic emergence
 
+**4. Deterministic Quantum Mechanics**
+- Complete elimination of probability interpretation
+- Precise single-measurement predictions instead of statistics only
+- Resolution of all QM interpretation problems (collapse, many-worlds, etc.)
+
 ### Fundamental Principles
 - **Time-Mass Duality**: T(x,t) = 1/max(m(x,t), ω) with dimension [E⁻¹]
 - **Energy Identity**: E = m in natural units (not conversion, but identity)
@@ -125,6 +136,7 @@ The following documents represent the complete, up-to-date T0 model framework:
 - **Universal Lepton g-2**: a_e^(T0) = a_μ^(T0) = 2.31 × 10⁻¹⁰ (exact universality)
 - **Energy-Independent QED**: ΔΓ^μ/Γ^μ = 1.74 × 10⁻⁸ (all energy scales)
 - **Muon g-2 Fraction**: T0 explains 9.2% of observed anomaly
+- **Deterministic Quantum Mechanics**: Eliminates all QM interpretation problems through energy fields
 
 ### Cosmological Effects
 - **Wavelength-Dependent Redshift**: 40.5% spectral variation across visible light
@@ -137,6 +149,7 @@ The following documents represent the complete, up-to-date T0 model framework:
 - **Red light reduced redshift**: z_red = 0.82 z₀ (-18% effect)
 - **Energy-dependent quantum delays**: Scale with 1/E differences
 - **Gravitational modifications**: Observable in galaxy rotation curves
+- **Deterministic quantum transitions**: Predictable single measurements without probabilities
 
 ## Theoretical Significance
 
@@ -145,12 +158,14 @@ The following documents represent the complete, up-to-date T0 model framework:
 2. **Parameter-Free Universe**: All constants emerge from single scale ratio
 3. **Unified Field Theory**: Same framework spans quantum to cosmological scales
 4. **True Fundamental Physics**: Mass eliminated as dimensional placeholder
+5. **Deterministic Microphysics**: Quantum mechanics without probability mysticism
 
 ### Versus Standard Physics
 - **T0**: 0 free parameters | **Standard**: >20 adjustable constants
 - **T0**: Static universe | **Standard**: Expanding spacetime
 - **T0**: Natural dark energy | **Standard**: Mysterious Λ constant
 - **T0**: Unified couplings | **Standard**: Separate force treatments
+- **T0**: Deterministic QM | **Standard**: Probabilistic QM with interpretation problems
 
 ## Mathematical Completeness
 
@@ -170,11 +185,14 @@ The following documents represent the complete, up-to-date T0 model framework:
 - **Muon g-2 analysis**: Search for T0 signature in existing Fermilab data
 - **Multi-wavelength quasar spectroscopy**: Test for 40.5% redshift variation
 - **QED vertex measurements**: Energy-independent correction verification
+- **Deterministic QM tests**: Precise single-measurement predictions vs. statistical QM
 
 ### Medium-term Validation (2026-2030)
 - **Gravitational wave astronomy**: Modified dynamics signatures
 - **Atomic clock networks**: Time field gradient detection
 - **Galaxy rotation curves**: Linear potential term identification
+- **Time field detectors**: Direct measurement of T(x,t) fields
+- **Deterministic quantum computers**: Algorithms without probability superposition
 
 ### Long-term Development
 - **Quantum gravity integration**: Higher-order time field corrections
@@ -183,9 +201,11 @@ The following documents represent the complete, up-to-date T0 model framework:
 
 ## Repository Access
 
-**📁 Main Documents**: [2/pdf/](2/pdf/)  
-**🔗 LaTeX Sources**: [2/tex/](2/tex/)  
+**📁 Main Documents**: [pdf/](pdf/) - **Only these 18 PDFs are current!**  
+**🔗 LaTeX Sources**: [tex/](tex/)  
 **🌐 Project Website**: [T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/)
+
+⚠️ **The `Deutsch/` and `English/` folders contain only outdated predecessor versions!**
 
 ## Contact
 
@@ -201,4 +221,4 @@ For research inquiries, please create an issue in this repository.
 
 ---
 
-*The T0-Time-Mass-Duality model represents the first truly parameter-free theory of fundamental physics, where all physical constants emerge from a single scale ratio derived from Higgs sector physics. This revolutionary framework unifies quantum mechanics and relativity through the principle of time-mass duality.*
+*The T0-Time-Mass-Duality model represents the first truly parameter-free theory of fundamental physics, where all physical constants emerge from a single scale ratio derived from Higgs sector physics. This revolutionary framework unifies quantum mechanics and relativity through the principle of time-mass duality, while providing a deterministic alternative to probability-based quantum mechanics.*
