@@ -32,7 +32,7 @@ The following 18 documents represent the complete, up-to-date T0 model framework
 *Complete verification of energy-based formulation: 99.85% average agreement with CODATA values across all calculations, 14 new testable predictions. Proof that pure energy formulation works.*
 
 **[Mathematical Core Formulations of Time-Mass Duality Theory](pdf/MathZeitMasseLagrangeEn.pdf)**  
-*Essential mathematical formulations of energy-based theory with complete Lagrangian densities and universal T0 parameter ξ ≈ 1.33 × 10⁻⁴ from Higgs physics.*
+*Essential mathematical formulations of energy-based theory with complete Lagrangian densities and universal T0 scale ratio ξ from Higgs physics.*
 
 ### Quantum Mechanics and Quantum Computing (Applications of Energy Formulation)
 
@@ -106,7 +106,7 @@ The following 18 documents represent the complete, up-to-date T0 model framework
 
 **1. True Parameter-Free Physics**
 - First theory requiring zero experimental input parameters
-- All physics emerges from universal scale ratio ξ ≈ 1.32 × 10⁻⁴ derived from Higgs sector
+- All physics emerges from universal scale ratio ξ derived from Higgs sector
 - Even electron mass becomes optional: E_ξ = ξ × E_P as fundamental T0 energy scale
 
 **2. Universal T0 Methodology**
@@ -131,7 +131,7 @@ The following 18 documents represent the complete, up-to-date T0 model framework
 - **Cosmic Screening**: ξ_eff = ξ/2 for infinite fields with Λ_T = -4πGρ₀
 
 ### Mathematical Framework
-- **Universal Scale Parameter**: ξ = λₕ²v²/(16π³Eₕ²) ≈ 1.32 × 10⁻⁴ from Higgs physics
+- **Universal Scale Parameter**: ξ = λₕ²v²/(16π³Eₕ²) - universal scale ratio from Higgs physics
 - **Energy Loss Redshift**: z(λ) = z₀(1 - ln(λ/λ₀)) - distinctive T0 signature
 - **Modified Gravitational Potential**: Φ(r) = -GM/r + κr with κ = H₀ cosmologically
 - **Complete Verification**: 99.85% average agreement across all T0 calculations

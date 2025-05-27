@@ -1,230 +1,223 @@
-# T0-Time-Mass-Duality: A Unified Framework for Quantum Mechanics and Relativity
+# T0-Zeit-Masse-Dualität: Ein vereinheitlichtes Framework für Quantenmechanik und Relativität
 
-## Project Overview
+## Projektübersicht
 
-The T0 model presents a revolutionary approach to fundamental physics through **time-mass duality**, where the intrinsic time field T(x,t) = 1/max(m(x,t), ω) provides a unified treatment of quantum mechanics and relativity. This framework operates in natural units where ℏ = c = α_EM = β_T = 1, reducing all physical quantities to powers of energy.
+Das T0-Modell präsentiert einen revolutionären Ansatz zur Grundlagenphysik durch **Zeit-Masse-Dualität**, bei dem das intrinsische Zeitfeld T(x,t) = 1/max(m(x,t), ω) eine vereinheitlichte Behandlung von Quantenmechanik und Relativität ermöglicht. Dieses Framework operiert in natürlichen Einheiten, wo ℏ = c = α_EM = β_T = 1, wodurch alle physikalischen Größen auf Energiepotenzen reduziert werden.
 
-## Repository Structure
+## Repository-Struktur
 
 ```
 T0-Time-Mass-Duality/
-├── pdf/                          # ✅ CURRENT documents (18 PDFs)
-│   ├── Deutsch/                  # ❌ OUTDATED predecessor versions
-│   └── English/                  # ❌ OUTDATED predecessor versions
-├── tex/                          # ✅ CURRENT LaTeX source files
-│   ├── Deutsch/                  # ❌ OUTDATED LaTeX sources
-│   └── English/                  # ❌ OUTDATED LaTeX sources
-└── README.md                     # This file
+├── pdf/                          # ✅ AKTUELLE Dokumente (18 PDFs)
+│   ├── Deutsch/                  # ❌ VERALTETE Vorgängerversionen
+│   └── English/                  # ❌ VERALTETE Vorgängerversionen
+├── tex/                          # ✅ AKTUELLE LaTeX-Quelldateien
+│   ├── Deutsch/                  # ❌ VERALTETE LaTeX-Quellen
+│   └── English/                  # ❌ VERALTETE LaTeX-Quellen
+└── README.md                     # Hauptdokumentation (englisch)
 ```
 
-## Current Document Collection (2025)
+## Aktuelle Dokumentensammlung (2025)
 
-**⚠️ IMPORTANT NOTE**: Only the documents in the main `pdf/` directory are current and complete. The subdirectories `pdf/Deutsch/` and `pdf/English/` as well as `tex/Deutsch/` and `tex/English/` contain outdated predecessor versions and should not be used.
+**⚠️ WICHTIGER HINWEIS**: Nur die Dokumente im Hauptverzeichnis `pdf/` sind aktuell und vollständig. Die Unterordner `pdf/Deutsch/` und `pdf/English/` sowie `tex/Deutsch/` und `tex/English/` enthalten veraltete Vorgängerversionen und sollten nicht verwendet werden.
 
-The following 18 documents represent the complete, up-to-date T0 model framework:
+Die folgenden 18 Dokumente repräsentieren das vollständige, aktuelle T0-Modell-Framework:
 
-### Energy-Based Core Formulations (Fundamental Basis)
+### Energiebasierte Kernformulierungen (Fundamentale Basis)
 
-**[Pure Energy Formulation: Mass-Free Dirac Equation and Lagrangian](pdf/Elimination_Of_Mass_Dirac_Lag.pdf)**  
-*The ultimate simplification step: Complete elimination of mass from physics, expressing everything through energy relationships with E = m in natural units. True parameter-free physics requiring zero experimental input.*
+**[Reine Energieformulierung: Massefreie Dirac-Gleichung und Lagrangian](pdf/Elimination_Of_Mass_Dirac_Lag.pdf)**  
+*Der ultimative Vereinfachungsschritt: Vollständige Elimination der Masse aus der Physik, alles ausgedrückt durch Energiebeziehungen mit E = m in natürlichen Einheiten. Wahrhaft parameterfreie Physik ohne experimentelle Eingaben.*
 
-**[T0 Model Calculation Verification Table](pdf/Elimination_Of_Mass_Dirac_Tabelle.pdf)**  
-*Complete verification of energy-based formulation: 99.85% average agreement with CODATA values across all calculations, 14 new testable predictions. Proof that pure energy formulation works.*
+**[T0-Modell Berechnungsverifikationstabelle](pdf/Elimination_Of_Mass_Dirac_Tabelle.pdf)**  
+*Vollständige Verifikation der energiebasierten Formulierung: 99,85% durchschnittliche Übereinstimmung mit CODATA-Werten bei allen Berechnungen, 14 neue testbare Vorhersagen. Der Beweis, dass reine Energieformulierung funktioniert.*
 
-**[Mathematical Core Formulations of Time-Mass Duality Theory](pdf/MathZeitMasseLagrangeEn.pdf)**  
-*Essential mathematical formulations of energy-based theory with complete Lagrangian densities and universal T0 parameter ξ ≈ 1.33 × 10⁻⁴ from Higgs physics.*
+**[Mathematische Kernformulierungen der Zeit-Masse-Dualitätstheorie](pdf/MathZeitMasseLagrangeEn.pdf)**  
+*Wesentliche mathematische Formulierungen der energiebasierten Theorie mit vollständigen Lagrangedichten und universellem T0-Skalenverhältnis ξ aus der Higgs-Physik.*
 
-### Quantum Mechanics and Quantum Computing (Applications of Energy Formulation)
+### Quantenmechanik und Quantencomputer (Anwendungen der Energieformulierung)
 
-**[Deterministic Quantum Mechanics via T0-Energy Field Formulation](pdf/QM-Detrmistic.pdf)**  
-*Revolutionary application of energy-based formulation: Complete alternative to probability-based quantum mechanics through deterministic energy fields T(x,t) = 1/max(E(x,t), ω), eliminating all QM interpretation problems.*
+**[Deterministische Quantenmechanik via T0-Energiefeld-Formulierung](pdf/QM-Detrmistic.pdf)**  
+*Revolutionäre Anwendung der energiebasierten Formulierung: Vollständige Alternative zur wahrscheinlichkeitsbasierten Quantenmechanik durch deterministische Energiefelder T(x,t) = 1/max(E(x,t), ω), eliminiert alle QM-Interpretationsprobleme.*
 
-**[Integration of the Dirac Equation in the T0 Model](pdf/diracEn.pdf)**  
-*How the Dirac equation naturally emerges from T0 time-mass duality and energy formulation, with geometric derivation of 4×4 matrix structure.*
+**[Integration der Dirac-Gleichung im T0-Modell](pdf/diracEn.pdf)**  
+*Wie die Dirac-Gleichung natürlich aus der T0-Zeit-Masse-Dualität und Energieformulierung hervorgeht, mit geometrischer Ableitung der 4×4-Matrixstruktur.*
 
-### Theoretical Foundations (For Understanding)
+### Theoretische Grundlagen (Für das Verständnis)
 
-**[Field-Theoretic Derivation of the β Parameter](pdf/DerivationVonBetaEn.pdf)**  
-*Geometric derivation of fundamental β = 2Gm/r parameter from field equations, showing universal T0 methodology with localized parameters ξ = 2√G·m.*
+**[Feldtheoretische Ableitung des β-Parameters](pdf/DerivationVonBetaEn.pdf)**  
+*Geometrische Ableitung des fundamentalen β = 2Gm/r Parameters aus Feldgleichungen, zeigt die universelle T0-Methodologie mit lokalisierten Parametern ξ = 2√G·m.*
 
-**[Field-Theoretic Derivation with Complete References](pdf/DerivationVonBetaEnR.pdf)**  
-*Extended version with 100+ literature references, historical context from Planck to modern quantum field theory.*
+**[Feldtheoretische Ableitung mit vollständigen Referenzen](pdf/DerivationVonBetaEnR.pdf)**  
+*Erweiterte Version mit 100+ Literaturverweisen, historischer Kontext von Planck bis zur modernen Quantenfeldtheorie.*
 
-### Natural Units and Fundamental Constants
+### Natürliche Einheiten und Fundamentalkonstanten
 
-**[Natural Unit Systems: Universal Energy Conversion](pdf/NatEinheitenSystematikEn.pdf)**  
-*Comprehensive framework establishing energy as the fundamental dimension, with complete conversion tables and length scale hierarchy spanning 61 orders of magnitude.*
+**[Natürliche Einheitensysteme: Universelle Energiekonversion](pdf/NatEinheitenSystematikEn.pdf)**  
+*Umfassendes Framework, das Energie als fundamentale Dimension etabliert, mit vollständigen Konversionstabellen und Längenskala-Hierarchie über 61 Größenordnungen.*
 
-**[Parameter System-Dependency: SI vs. Natural Units](pdf/ParameterSystemdipendentEn.pdf)**  
-*Systematic analysis revealing dramatic parameter value differences across unit systems, with transformation protocols resolving apparent inconsistencies.*
+**[Parameter-Systemabhängigkeit: SI vs. Natürliche Einheiten](pdf/ParameterSystemdipendentEn.pdf)**  
+*Systematische Analyse, die dramatische Parameterwert-Unterschiede zwischen Einheitensystemen aufzeigt, mit Transformationsprotokollen zur Auflösung scheinbarer Inkonsistenzen.*
 
-**[Mathematical Proof: α = 1 in Natural Units](pdf/ResolvingTheConstantsAlfaEn.pdf)**  
-*Rigorous proof that the fine structure constant equals unity in natural units, resolving the "mystery" of 1/137 as a unit system artifact.*
+**[Mathematischer Beweis: α = 1 in natürlichen Einheiten](pdf/ResolvingTheConstantsAlfaEn.pdf)**  
+*Rigoroser Beweis, dass die Feinstrukturkonstante in natürlichen Einheiten eins ist und das "Mysterium" von 1/137 als Einheitensystem-Artefakt auflöst.*
 
-**[The Fine Structure Constant: Various Representations](pdf/FeinstrukturkonstanteEn.pdf)**  
-*Complete analysis including Sommerfeld's historical harmonic assignment methodology and its implications for fundamental constants interpretation.*
+**[Die Feinstrukturkonstante: Verschiedene Darstellungen](pdf/FeinstrukturkonstanteEn.pdf)**  
+*Vollständige Analyse einschließlich Sommerfelds historischer harmonischer Zuordnungsmethodologie und ihrer Implikationen für die Interpretation von Fundamentalkonstanten.*
 
-### Quantum Field Theory Integration
+### Quantenfeldtheorie-Integration
 
-**[Complete Muon g-2 Analysis](pdf/CompleteMuon_g-2_AnalysisEn.pdf)**  
-*Application of energy-based formulation: Universal lepton correction a_ℓ^(T0) = 2.31 × 10⁻¹⁰ explaining 9.2% of the muon g-2 anomaly.*
+**[Vollständige Myon g-2 Analyse](pdf/CompleteMuon_g-2_AnalysisEn.pdf)**  
+*Anwendung der energiebasierten Formulierung: Universelle Leptonen-Korrektur a_ℓ^(T0) = 2,31 × 10⁻¹⁰ erklärt 9,2% der Myon g-2 Anomalie.*
 
-**[Dynamic Mass of Photons and Nonlocality](pdf/DynMassePhotonenNichtlokalEn.pdf)**  
-*Energy-dependent photon mass m_γ = ω from energy formulation, introducing frequency-dependent nonlocality effects and modified Bell inequalities.*
+**[Dynamische Masse von Photonen und Nichtlokalität](pdf/DynMassePhotonenNichtlokalEn.pdf)**  
+*Energieabhängige Photonenmasse m_γ = ω aus der Energieformulierung, führt zu frequenzabhängigen Nichtlokalitätseffekten und modifizierten Bell-Ungleichungen.*
 
-### Cosmological Applications
+### Kosmologische Anwendungen
 
-**[H₀ and κ Parameter Analysis](pdf/Ho_En.pdf)**  
-*Derivation showing H₀ emerges from field theory as transition scale between local and cosmic regimes, with κ = H₀ in infinite geometry limit.*
+**[H₀ und κ Parameteranalyse](pdf/Ho_En.pdf)**  
+*Ableitung zeigt, dass H₀ aus der Feldtheorie als Übergangsskala zwischen lokalen und kosmischen Regimes hervorgeht, mit κ = H₀ im unendlichen Geometrielimit.*
 
-**[Pure Energy Formulation of H₀ and κ Parameters](pdf/Ho_EnergieEn.pdf)**  
-*Revolutionary H₀ = 68.0 km/s/Mpc prediction from pure theory (H₀ = ξ¹⁶ × E_P), resolving Hubble tension with 99.1% agreement to Planck measurements.*
+**[Reine Energieformulierung von H₀ und κ Parametern](pdf/Ho_EnergieEn.pdf)**  
+*Revolutionäre H₀ = 68,0 km/s/Mpc Vorhersage aus reiner Theorie (H₀ = ξ¹⁶ × E_P), löst Hubble-Spannung mit 99,1% Übereinstimmung zu Planck-Messungen.*
 
-**[Temperature Units and CMB Analysis](pdf/TempEinheitenCMBEn.pdf)**  
-*CMB temperature evolution T(z) = T₀(1+z)(1 + β_T ln(1+z)) with β_T = 1, predicting T(z=1100) ≈ 24,000 K in universal T0 methodology.*
+**[Temperatureinheiten und CMB-Analyse](pdf/TempEinheitenCMBEn.pdf)**  
+*CMB-Temperaturentwicklung T(z) = T₀(1+z)(1 + β_T ln(1+z)) mit β_T = 1, vorhersagend T(z=1100) ≈ 24.000 K in universeller T0-Methodologie.*
 
-**[Cosmological Redshift Correction](pdf/Rotverschiebung_korrektur.pdf)**  
-*Corrected wavelength-dependent redshift formula z(λ) = z₀(1 - ln(λ/λ₀)) with proper sign derivation and physical verification.*
+**[Kosmologische Rotverschiebungskorrektur](pdf/Rotverschiebung_korrektur.pdf)**  
+*Korrigierte wellenlängenabhängige Rotverschiebungsformel z(λ) = z₀(1 - ln(λ/λ₀)) mit ordnungsgemäßer Vorzeichenableitung und physikalischer Verifikation.*
 
-### Theoretical Foundations
+### Theoretische Grundlagen
 
-**[T0 vs ESM: Conceptual Analysis](pdf/T0vsESM_ConceptualAnalysis_En.pdf)**  
-*Mathematical equivalence between T0 model (absolute time, variable mass) and Extended Standard Model through logarithmic transformation.*
+**[T0 vs ESM: Konzeptuelle Analyse](pdf/T0vsESM_ConceptualAnalysis_En.pdf)**  
+*Mathematische Äquivalenz zwischen T0-Modell (absolute Zeit, variable Masse) und Erweitertem Standardmodell durch logarithmische Transformation.*
 
-**[Pragmatic Approach to T0-Model Applications](pdf/PragmaticApproachT0-ModelEn.pdf)**  
-*Direct application guidelines emphasizing field-theoretic approach over dimensional analysis translations.*
+**[Pragmatischer Ansatz für T0-Modell-Anwendungen](pdf/PragmaticApproachT0-ModelEn.pdf)**  
+*Direkte Anwendungsrichtlinien, die den feldtheoretischen Ansatz über dimensionale Analyse-Übersetzungen hinaus betonen.*
 
-**[The Emerging Unified Framework](pdf/ausblicke_En.pdf)**  
-*Exploration of fundamental field relationships examining potential unity of Higgs field, vacuum constants, and intrinsic time field.*
+**[Das entstehende vereinheitlichte Framework](pdf/ausblicke_En.pdf)**  
+*Erforschung fundamentaler Feldbeziehungen, die potenzielle Einheit von Higgs-Feld, Vakuumkonstanten und intrinsischem Zeitfeld untersucht.*
 
-**[Elimination of Mass (General)](pdf/EliminationOfMass.pdf)**  
-*General investigation of mass elimination procedures in the T0 framework.*
+**[Elimination der Masse (Allgemein)](pdf/EliminationOfMass.pdf)**  
+*Allgemeine Untersuchung von Masseneliminationsverfahren im T0-Framework.*
 
-## Key Innovations
+## Schlüsselinnovationen
 
-### Revolutionary Discoveries
+### Revolutionäre Entdeckungen
 
-**1. True Parameter-Free Physics**
-- First theory requiring zero experimental input parameters
-- All physics emerges from universal scale ratio ξ ≈ 1.32 × 10⁻⁴ derived from Higgs sector
-- Even electron mass becomes optional: E_ξ = ξ × E_P as fundamental T0 energy scale
+**1. Wahrhaft parameterfreie Physik**
+- Erste Theorie, die null experimentelle Eingabeparameter benötigt
+- Alle Physik entsteht aus universellem Skalenverhältnis ξ abgeleitet vom Higgs-Sektor
+- Sogar Elektronenmasse wird optional: E_ξ = ξ × E_P als fundamentale T0-Energieskala
 
-**2. Universal T0 Methodology**
-- All practical calculations use localized parameters (ξ = 2√G·m) regardless of system geometry
-- Extreme T0 scale hierarchies make geometric distinctions practically irrelevant
-- Unification of methodology across all physical scales
+**2. Universelle T0-Methodologie**
+- Alle praktischen Berechnungen verwenden lokalisierte Parameter (ξ = 2√G·m) unabhängig von der Systemgeometrie
+- Extreme T0-Skalenhierarchien machen geometrische Unterscheidungen praktisch irrelevant
+- Vereinheitlichung der Methodologie über alle physikalischen Skalen
 
-**3. Hubble Constant Prediction**
-- H₀ = 68.0 km/s/Mpc from pure theory (no empirical input)
-- 99.1% agreement with Planck CMB measurements
-- Resolves Hubble tension through field-theoretic emergence
+**3. Hubble-Konstanten-Vorhersage**
+- H₀ = 68,0 km/s/Mpc aus reiner Theorie (keine empirische Eingabe)
+- 99,1% Übereinstimmung mit Planck CMB-Messungen
+- Löst Hubble-Spannung durch feldtheoretische Entstehung
 
-**4. Deterministic Quantum Mechanics**
-- Complete elimination of probability interpretation
-- Precise single-measurement predictions instead of statistics only
-- Resolution of all QM interpretation problems (collapse, many-worlds, etc.)
+### Fundamentale Prinzipien
+- **Zeit-Masse-Dualität**: T(x,t) = 1/max(m(x,t), ω) mit Dimension [E⁻¹]
+- **Energieidentität**: E = m in natürlichen Einheiten (nicht Konversion, sondern Identität)
+- **Natürliche Einheiten**: ℏ = c = α_EM = β_T = 1 durch tiefe theoretische Verbindungen
+- **Kosmische Abschirmung**: ξ_eff = ξ/2 für unendliche Felder mit Λ_T = -4πGρ₀
 
-### Fundamental Principles
-- **Time-Mass Duality**: T(x,t) = 1/max(m(x,t), ω) with dimension [E⁻¹]
-- **Energy Identity**: E = m in natural units (not conversion, but identity)
-- **Natural Units**: ℏ = c = α_EM = β_T = 1 through deep theoretical connections
-- **Cosmic Screening**: ξ_eff = ξ/2 for infinite fields with Λ_T = -4πGρ₀
+### Mathematisches Framework
+- **Universeller Skalenparameter**: ξ = λₕ²v²/(16π³Eₕ²) - universelles Skalenverhältnis aus Higgs-Physik
+- **Energieverlust-Rotverschiebung**: z(λ) = z₀(1 - ln(λ/λ₀)) - charakteristische T0-Signatur
+- **Modifiziertes Gravitationspotential**: Φ(r) = -GM/r + κr mit κ = H₀ kosmologisch
+- **Vollständige Verifikation**: 99,85% durchschnittliche Übereinstimmung bei allen T0-Berechnungen
 
-### Mathematical Framework
-- **Universal Scale Parameter**: ξ = λₕ²v²/(16π³Eₕ²) ≈ 1.32 × 10⁻⁴ from Higgs physics
-- **Energy Loss Redshift**: z(λ) = z₀(1 - ln(λ/λ₀)) - distinctive T0 signature
-- **Modified Gravitational Potential**: Φ(r) = -GM/r + κr with κ = H₀ cosmologically
-- **Complete Verification**: 99.85% average agreement across all T0 calculations
+## Experimentelle Vorhersagen (Parameterfrei)
 
-## Experimental Predictions (Parameter-Free)
+### Quantenkorrekturen
+- **Universelles Leptonen g-2**: a_e^(T0) = a_μ^(T0) = 2,31 × 10⁻¹⁰ (exakte Universalität)
+- **Energieunabhängige QED**: ΔΓ^μ/Γ^μ = 1,74 × 10⁻⁸ (alle Energieskalen)
+- **Myon g-2 Anteil**: T0 erklärt 9,2% der beobachteten Anomalie
+- **Deterministische Quantenmechanik**: Eliminiert alle QM-Interpretationsprobleme durch Energiefelder
 
-### Quantum Corrections
-- **Universal Lepton g-2**: a_e^(T0) = a_μ^(T0) = 2.31 × 10⁻¹⁰ (exact universality)
-- **Energy-Independent QED**: ΔΓ^μ/Γ^μ = 1.74 × 10⁻⁸ (all energy scales)
-- **Muon g-2 Fraction**: T0 explains 9.2% of observed anomaly
-- **Deterministic Quantum Mechanics**: Eliminates all QM interpretation problems through energy fields
+### Kosmologische Effekte
+- **Wellenlängenabhängige Rotverschiebung**: 40,5% spektrale Variation über sichtbares Licht
+- **H₀ Vorhersage**: 68,0 km/s/Mpc (löst Hubble-Spannung)
+- **CMB-Temperatur**: T(z=1100) ≈ 24.000 K (vs. 3.000 K Standard)
+- **Modifizierte Gravitation**: Linearer κr-Term dominiert bei großen Skalen
 
-### Cosmological Effects
-- **Wavelength-Dependent Redshift**: 40.5% spectral variation across visible light
-- **H₀ Prediction**: 68.0 km/s/Mpc (resolves Hubble tension)
-- **CMB Temperature**: T(z=1100) ≈ 24,000 K (vs. 3,000 K standard)
-- **Modified Gravity**: Linear κr term dominates at large scales
+### Charakteristische Signaturen
+- **Verstärkte Blaulicht-Rotverschiebung**: z_blau = 1,22 z₀ (+22% Effekt)
+- **Reduzierte Rotlicht-Rotverschiebung**: z_rot = 0,82 z₀ (-18% Effekt)
+- **Energieabhängige Quantenverzögerungen**: Skalieren mit 1/E-Unterschieden
+- **Gravitationsmodifikationen**: Beobachtbar in Galaxienrotationskurven
+- **Deterministische Quantenübergänge**: Vorhersagbare Einzelmessungen ohne Wahrscheinlichkeiten
 
-### Distinctive Signatures
-- **Blue light enhanced redshift**: z_blue = 1.22 z₀ (+22% effect)
-- **Red light reduced redshift**: z_red = 0.82 z₀ (-18% effect)
-- **Energy-dependent quantum delays**: Scale with 1/E differences
-- **Gravitational modifications**: Observable in galaxy rotation curves
-- **Deterministic quantum transitions**: Predictable single measurements without probabilities
+## Theoretische Bedeutung
 
-## Theoretical Significance
+### Paradigmenwechsel
+1. **Keine räumliche Expansion**: Universum ist statisch, Rotverschiebung durch Energieverlust an Zeitfeld
+2. **Parameterfreies Universum**: Alle Konstanten entstehen aus einzelnem Skalenverhältnis
+3. **Vereinheitlichte Feldtheorie**: Dasselbe Framework umspannt Quanten- bis kosmologische Skalen
+4. **Wahre Fundamentalphysik**: Masse als dimensionaler Platzhalter eliminiert
 
-### Paradigm Shift
-1. **No Spatial Expansion**: Universe is static, redshift from energy loss to time field
-2. **Parameter-Free Universe**: All constants emerge from single scale ratio
-3. **Unified Field Theory**: Same framework spans quantum to cosmological scales
-4. **True Fundamental Physics**: Mass eliminated as dimensional placeholder
-5. **Deterministic Microphysics**: Quantum mechanics without probability mysticism
+### Versus Standardphysik
+- **T0**: 0 freie Parameter | **Standard**: >20 einstellbare Konstanten
+- **T0**: Statisches Universum | **Standard**: Expandierende Raumzeit
+- **T0**: Natürliche dunkle Energie | **Standard**: Mysteriöse Λ-Konstante
+- **T0**: Vereinheitlichte Kopplungen | **Standard**: Separate Kraftbehandlungen
 
-### Versus Standard Physics
-- **T0**: 0 free parameters | **Standard**: >20 adjustable constants
-- **T0**: Static universe | **Standard**: Expanding spacetime
-- **T0**: Natural dark energy | **Standard**: Mysterious Λ constant
-- **T0**: Unified couplings | **Standard**: Separate force treatments
-- **T0**: Deterministic QM | **Standard**: Probabilistic QM with interpretation problems
+## Mathematische Vollständigkeit
 
-## Mathematical Completeness
+**Dimensionale Konsistenz**: Alle Gleichungen in natürlichen Einheiten verifiziert
+- Feldgleichung: ∇²m = 4πGρm + Λ_T m (vollständige Form)
+- Energieverlust: dE/dr = -g_T ω² 2G/r² (dimensional konsistent)
+- Universelle Parameter: ξ = 2√G·m (alle Geometrien)
 
-**Dimensional Consistency**: All equations verified in natural units
-- Field equation: ∇²m = 4πGρm + Λ_T m (complete form)
-- Energy loss: dE/dr = -g_T ω² 2G/r² (dimensionally consistent)
-- Universal parameters: ξ = 2√G·m (all geometries)
+**Verifikationsergebnisse**: 99,85% durchschnittliche Übereinstimmung über 28 Testfälle
+- Perfekte Übereinstimmung (100,0%): 12 Berechnungen
+- Exzellente Übereinstimmung (99,9-99,99%): 4 Berechnungen  
+- Neue Vorhersagen: 14 testbare Vorhersagen
 
-**Verification Results**: 99.85% average agreement across 28 test cases
-- Perfect agreement (100.0%): 12 calculations
-- Excellent agreement (99.9-99.99%): 4 calculations  
-- New predictions: 14 testable predictions
+## Zukunftsrichtungen
 
-## Future Directions
+### Unmittelbare experimentelle Tests (2025-2026)
+- **Myon g-2 Analyse**: Suche nach T0-Signatur in existierenden Fermilab-Daten
+- **Multi-Wellenlängen-Quasar-Spektroskopie**: Test für 40,5% Rotverschiebungsvariation
+- **QED-Vertex-Messungen**: Energieunabhängige Korrektur-Verifikation
+- **Deterministische QM-Tests**: Präzise Einzelmessungs-Vorhersagen vs. statistische QM
 
-### Immediate Experimental Tests (2025-2026)
-- **Muon g-2 analysis**: Search for T0 signature in existing Fermilab data
-- **Multi-wavelength quasar spectroscopy**: Test for 40.5% redshift variation
-- **QED vertex measurements**: Energy-independent correction verification
-- **Deterministic QM tests**: Precise single-measurement predictions vs. statistical QM
+### Mittelfristige Validierung (2026-2030)
+- **Gravitationswellen-Astronomie**: Modifizierte Dynamik-Signaturen
+- **Atomuhr-Netzwerke**: Zeitfeld-Gradient-Detektion
+- **Galaxien-Rotationskurven**: Lineare Potential-Term-Identifikation
+- **Zeitfeld-Detektoren**: Direkte Messung von T(x,t)-Feldern
+- **Deterministische Quantencomputer**: Algorithmen ohne Wahrscheinlichkeits-Superposition
 
-### Medium-term Validation (2026-2030)
-- **Gravitational wave astronomy**: Modified dynamics signatures
-- **Atomic clock networks**: Time field gradient detection
-- **Galaxy rotation curves**: Linear potential term identification
-- **Time field detectors**: Direct measurement of T(x,t) fields
-- **Deterministic quantum computers**: Algorithms without probability superposition
+### Langfristige Entwicklung
+- **Quantengravitations-Integration**: Höherordnung-Zeitfeld-Korrekturen
+- **Kosmologische Strukturbildung**: Statisches Universum-Paradigma
+- **Fundamentalphysik-Revolution**: Parameterfreies theoretisches Framework
 
-### Long-term Development
-- **Quantum gravity integration**: Higher-order time field corrections
-- **Cosmological structure formation**: Static universe paradigm
-- **Fundamental physics revolution**: Parameter-free theoretical framework
+## Repository-Zugang
 
-## Repository Access
+**📁 Hauptdokumente**: [pdf/](pdf/) - **Nur diese 18 PDFs sind aktuell!**  
+**🔗 LaTeX-Quellen**: [tex/](tex/)  
+**🌐 Projekt-Website**: [T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/)
 
-**📁 Main Documents**: [pdf/](pdf/) - **Only these 18 PDFs are current!**  
-**🔗 LaTeX Sources**: [tex/](tex/)  
-**🌐 Project Website**: [T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/)
+⚠️ **Die Unterordner `pdf/Deutsch/`, `pdf/English/`, `tex/Deutsch/` und `tex/English/` enthalten nur veraltete Vorgängerversionen!**
 
-⚠️ **The subdirectories `pdf/Deutsch/`, `pdf/English/`, `tex/Deutsch/` and `tex/English/` contain only outdated predecessor versions!**
+## Kontakt
 
-## Contact
+**Autor**: Johann Pascher  
+**Institution**: Abteilung für Kommunikationstechnik, HTL Leonding, Österreich  
+**E-Mail**: johann.pascher@gmail.com
 
-**Author**: Johann Pascher  
-**Institution**: Department of Communications Engineering, HTL Leonding, Austria  
-**Email**: johann.pascher@gmail.com
+Für Forschungsanfragen erstellen Sie bitte ein Issue in diesem Repository.
 
-For research inquiries, please create an issue in this repository.
+## Lizenz
 
-## License
-
-© 2025 Johann Pascher. All rights reserved.
+© 2025 Johann Pascher. Alle Rechte vorbehalten.
 
 ---
 
-*The T0-Time-Mass-Duality model represents the first truly parameter-free theory of fundamental physics, where all physical constants emerge from a single scale ratio derived from Higgs sector physics. This revolutionary framework unifies quantum mechanics and relativity through the principle of time-mass duality, while providing a deterministic alternative to probability-based quantum mechanics.*
+*Das T0-Zeit-Masse-Dualitäts-Modell repräsentiert die erste wahrhaft parameterfreie Theorie der Fundamentalphysik, wo alle physikalischen Konstanten aus einem einzigen Skalenverhältnis entstehen, das aus der Higgs-Sektor-Physik abgeleitet wird. Dieses revolutionäre Framework vereinheitlicht Quantenmechanik und Relativität durch das Prinzip der Zeit-Masse-Dualität.*
