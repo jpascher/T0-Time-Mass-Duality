@@ -178,26 +178,6 @@ Die folgenden 18 Dokumente repräsentieren das vollständige, aktuelle T0-Modell
 - Exzellente Übereinstimmung (99,9-99,99%): 4 Berechnungen  
 - Neue Vorhersagen: 14 testbare Vorhersagen
 
-## Zukunftsrichtungen
-
-### Unmittelbare experimentelle Tests (2025-2026)
-- **Myon g-2 Analyse**: Suche nach T0-Signatur in existierenden Fermilab-Daten
-- **Multi-Wellenlängen-Quasar-Spektroskopie**: Test für 40,5% Rotverschiebungsvariation
-- **QED-Vertex-Messungen**: Energieunabhängige Korrektur-Verifikation
-- **Deterministische QM-Tests**: Präzise Einzelmessungs-Vorhersagen vs. statistische QM
-
-### Mittelfristige Validierung (2026-2030)
-- **Gravitationswellen-Astronomie**: Modifizierte Dynamik-Signaturen
-- **Atomuhr-Netzwerke**: Zeitfeld-Gradient-Detektion
-- **Galaxien-Rotationskurven**: Lineare Potential-Term-Identifikation
-- **Zeitfeld-Detektoren**: Direkte Messung von T(x,t)-Feldern
-- **Deterministische Quantencomputer**: Algorithmen ohne Wahrscheinlichkeits-Superposition
-
-### Langfristige Entwicklung
-- **Quantengravitations-Integration**: Höherordnung-Zeitfeld-Korrekturen
-- **Kosmologische Strukturbildung**: Statisches Universum-Paradigma
-- **Fundamentalphysik-Revolution**: Parameterfreies theoretisches Framework
-
 ## Repository-Zugang
 
 **📁 Hauptdokumente**: [pdf/](pdf/) - **Nur diese 18 PDFs sind aktuell!**  

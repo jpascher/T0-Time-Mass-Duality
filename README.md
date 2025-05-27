@@ -185,26 +185,6 @@ The following 18 documents represent the complete, up-to-date T0 model framework
 - Excellent agreement (99.9-99.99%): 4 calculations  
 - New predictions: 14 testable predictions
 
-## Future Directions
-
-### Immediate Experimental Tests (2025-2026)
-- **Muon g-2 analysis**: Search for T0 signature in existing Fermilab data
-- **Multi-wavelength quasar spectroscopy**: Test for 40.5% redshift variation
-- **QED vertex measurements**: Energy-independent correction verification
-- **Deterministic QM tests**: Precise single-measurement predictions vs. statistical QM
-
-### Medium-term Validation (2026-2030)
-- **Gravitational wave astronomy**: Modified dynamics signatures
-- **Atomic clock networks**: Time field gradient detection
-- **Galaxy rotation curves**: Linear potential term identification
-- **Time field detectors**: Direct measurement of T(x,t) fields
-- **Deterministic quantum computers**: Algorithms without probability superposition
-
-### Long-term Development
-- **Quantum gravity integration**: Higher-order time field corrections
-- **Cosmological structure formation**: Static universe paradigm
-- **Fundamental physics revolution**: Parameter-free theoretical framework
-
 ## Repository Access
 
 **📁 Main Documents**: [pdf/](pdf/) - **Only these 18 PDFs are current!**  
