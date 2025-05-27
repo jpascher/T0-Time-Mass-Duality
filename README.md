@@ -8,18 +8,19 @@ The T0 model presents a revolutionary approach to fundamental physics through **
 
 ```
 T0-Time-Mass-Duality/
-├── pdf/                          # ✅ CURRENT documents (18 PDFs)
-│   ├── Deutsch/                  # ❌ OUTDATED predecessor versions
-│   └── English/                  # ❌ OUTDATED predecessor versions
-├── tex/                          # ✅ CURRENT LaTeX source files
-│   ├── Deutsch/                  # ❌ OUTDATED LaTeX sources
-│   └── English/                  # ❌ OUTDATED LaTeX sources
+├── 2/
+│   ├── pdf/                      # ✅ CURRENT documents (17 PDFs)
+│   │   ├── Deutsch/              # ❌ OUTDATED predecessor versions
+│   │   └── English/              # ❌ OUTDATED predecessor versions
+│   └── tex/                      # ✅ CURRENT LaTeX source files
+│       ├── Deutsch/              # ❌ OUTDATED LaTeX sources
+│       └── English/              # ❌ OUTDATED LaTeX sources
 └── README.md                     # This file
 ```
 
 ## Current Document Collection (2025)
 
-**⚠️ IMPORTANT NOTE**: Only the documents in the main `pdf/` directory are current and complete. The subdirectories `pdf/Deutsch/` and `pdf/English/` as well as `tex/Deutsch/` and `tex/English/` contain outdated predecessor versions and should not be used.
+**⚠️ IMPORTANT NOTE**: Only the documents in the main `2/pdf/` directory are current and complete. The subdirectories `2/pdf/Deutsch/` and `2/pdf/English/` as well as `2/tex/Deutsch/` and `2/tex/English/` contain outdated predecessor versions and should not be used.
 
 The following 18 documents represent the complete, up-to-date T0 model framework:
 
@@ -184,11 +185,11 @@ The following 18 documents represent the complete, up-to-date T0 model framework
 
 ## Repository Access
 
-**📁 Main Documents**: [pdf/](pdf/) - **Only these 18 PDFs are current!**  
-**🔗 LaTeX Sources**: [tex/](tex/)  
+**📁 Main Documents**: [2/pdf/](2/pdf/) - **Only these 17 PDFs are current!**  
+**🔗 LaTeX Sources**: [2/tex/](2/tex/)  
 **🌐 Project Website**: [T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/)
 
-⚠️ **The subdirectories `pdf/Deutsch/`, `pdf/English/`, `tex/Deutsch/` and `tex/English/` contain only outdated predecessor versions!**
+⚠️ **The subdirectories `2/pdf/Deutsch/`, `2/pdf/English/`, `2/tex/Deutsch/` and `2/tex/English/` contain only outdated predecessor versions!**
 
 ## Contact
 
