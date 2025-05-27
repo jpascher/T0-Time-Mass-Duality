@@ -26,76 +26,76 @@ Die folgenden 18 Dokumente repräsentieren das vollständige, aktuelle T0-Modell
 
 ### Energiebasierte Kernformulierungen (Fundamentale Basis)
 
-**[Reine Energieformulierung: Massefreie Dirac-Gleichung und Lagrangian](pdf/Elimination_Of_Mass_Dirac_Lag.pdf)**  
+**[Reine Energieformulierung: Massefreie Dirac-Gleichung und Lagrangian](2/pdf/Elimination_Of_Mass_Dirac_Lag.pdf)**  
 *Der ultimative Vereinfachungsschritt: Vollständige Elimination der Masse aus der Physik, alles ausgedrückt durch Energiebeziehungen mit E = m in natürlichen Einheiten. Wahrhaft parameterfreie Physik ohne experimentelle Eingaben.*
 
-**[T0-Modell Berechnungsverifikationstabelle](pdf/Elimination_Of_Mass_Dirac_Tabelle.pdf)**  
+**[T0-Modell Berechnungsverifikationstabelle](2/pdf/Elimination_Of_Mass_Dirac_Tabelle.pdf)**  
 *Vollständige Verifikation der energiebasierten Formulierung: 99,85% durchschnittliche Übereinstimmung mit CODATA-Werten bei allen Berechnungen, 14 neue testbare Vorhersagen. Der Beweis, dass reine Energieformulierung funktioniert.*
 
-**[Mathematische Kernformulierungen der Zeit-Masse-Dualitätstheorie](pdf/MathZeitMasseLagrangeEn.pdf)**  
+**[Mathematische Kernformulierungen der Zeit-Masse-Dualitätstheorie](2/pdf/MathZeitMasseLagrangeEn.pdf)**  
 *Wesentliche mathematische Formulierungen der energiebasierten Theorie mit vollständigen Lagrangedichten und universellem T0-Skalenverhältnis ξ aus der Higgs-Physik.*
 
 ### Quantenmechanik und Quantencomputer (Anwendungen der Energieformulierung)
 
-**[Deterministische Quantenmechanik via T0-Energiefeld-Formulierung](pdf/QM-Detrmistic.pdf)**  
+**[Deterministische Quantenmechanik via T0-Energiefeld-Formulierung](2/pdf/QM-Detrmistic.pdf)**  
 *Revolutionäre Anwendung der energiebasierten Formulierung: Vollständige Alternative zur wahrscheinlichkeitsbasierten Quantenmechanik durch deterministische Energiefelder T(x,t) = 1/max(E(x,t), ω), eliminiert alle QM-Interpretationsprobleme.*
 
-**[Integration der Dirac-Gleichung im T0-Modell](pdf/diracEn.pdf)**  
+**[Integration der Dirac-Gleichung im T0-Modell](2/pdf/diracEn.pdf)**  
 *Wie die Dirac-Gleichung natürlich aus der T0-Zeit-Masse-Dualität und Energieformulierung hervorgeht, mit geometrischer Ableitung der 4×4-Matrixstruktur.*
 
 ### Theoretische Grundlagen (Für das Verständnis)
 
-**[Feldtheoretische Ableitung des β-Parameters](pdf/DerivationVonBetaEn.pdf)**  
+**[Feldtheoretische Ableitung des β-Parameters](2/pdf/DerivationVonBetaEn.pdf)**  
 *Geometrische Ableitung des fundamentalen β = 2Gm/r Parameters aus Feldgleichungen, zeigt die universelle T0-Methodologie mit lokalisierten Parametern ξ = 2√G·m.*
 
-**[Feldtheoretische Ableitung mit vollständigen Referenzen](pdf/DerivationVonBetaEnR.pdf)**  
+**[Feldtheoretische Ableitung mit vollständigen Referenzen](2/pdf/DerivationVonBetaEnR.pdf)**  
 *Erweiterte Version mit 100+ Literaturverweisen, historischer Kontext von Planck bis zur modernen Quantenfeldtheorie.*
 
 ### Natürliche Einheiten und Fundamentalkonstanten
 
-**[Natürliche Einheitensysteme: Universelle Energiekonversion](pdf/NatEinheitenSystematikEn.pdf)**  
+**[Natürliche Einheitensysteme: Universelle Energiekonversion](2/pdf/NatEinheitenSystematikEn.pdf)**  
 *Umfassendes Framework, das Energie als fundamentale Dimension etabliert, mit vollständigen Konversionstabellen und Längenskala-Hierarchie über 61 Größenordnungen.*
 
-**[Parameter-Systemabhängigkeit: SI vs. Natürliche Einheiten](pdf/ParameterSystemdipendentEn.pdf)**  
+**[Parameter-Systemabhängigkeit: SI vs. Natürliche Einheiten](2/pdf/ParameterSystemdipendentEn.pdf)**  
 *Systematische Analyse, die dramatische Parameterwert-Unterschiede zwischen Einheitensystemen aufzeigt, mit Transformationsprotokollen zur Auflösung scheinbarer Inkonsistenzen.*
 
-**[Mathematischer Beweis: α = 1 in natürlichen Einheiten](pdf/ResolvingTheConstantsAlfaEn.pdf)**  
+**[Mathematischer Beweis: α = 1 in natürlichen Einheiten](2/pdf/ResolvingTheConstantsAlfaEn.pdf)**  
 *Rigoroser Beweis, dass die Feinstrukturkonstante in natürlichen Einheiten eins ist und das "Mysterium" von 1/137 als Einheitensystem-Artefakt auflöst.*
 
-**[Die Feinstrukturkonstante: Verschiedene Darstellungen](pdf/FeinstrukturkonstanteEn.pdf)**  
+**[Die Feinstrukturkonstante: Verschiedene Darstellungen](2/pdf/FeinstrukturkonstanteEn.pdf)**  
 *Vollständige Analyse einschließlich Sommerfelds historischer harmonischer Zuordnungsmethodologie und ihrer Implikationen für die Interpretation von Fundamentalkonstanten.*
 
 ### Quantenfeldtheorie-Integration
 
-**[Vollständige Myon g-2 Analyse](pdf/CompleteMuon_g-2_AnalysisEn.pdf)**  
+**[Vollständige Myon g-2 Analyse](2/pdf/CompleteMuon_g-2_AnalysisEn.pdf)**  
 *Anwendung der energiebasierten Formulierung: Universelle Leptonen-Korrektur a_ℓ^(T0) = 2,31 × 10⁻¹⁰ erklärt 9,2% der Myon g-2 Anomalie.*
 
-**[Dynamische Masse von Photonen und Nichtlokalität](pdf/DynMassePhotonenNichtlokalEn.pdf)**  
+**[Dynamische Masse von Photonen und Nichtlokalität](2/pdf/DynMassePhotonenNichtlokalEn.pdf)**  
 *Energieabhängige Photonenmasse m_γ = ω aus der Energieformulierung, führt zu frequenzabhängigen Nichtlokalitätseffekten und modifizierten Bell-Ungleichungen.*
 
 ### Kosmologische Anwendungen
 
-**[H₀ und κ Parameteranalyse](pdf/Ho_En.pdf)**  
+**[H₀ und κ Parameteranalyse](2/pdf/Ho_En.pdf)**  
 *Ableitung zeigt, dass H₀ aus der Feldtheorie als Übergangsskala zwischen lokalen und kosmischen Regimes hervorgeht, mit κ = H₀ im unendlichen Geometrielimit.*
 
-**[Reine Energieformulierung von H₀ und κ Parametern](pdf/Ho_EnergieEn.pdf)**  
+**[Reine Energieformulierung von H₀ und κ Parametern](2/pdf/Ho_EnergieEn.pdf)**  
 *Revolutionäre H₀ = 68,0 km/s/Mpc Vorhersage aus reiner Theorie (H₀ = ξ¹⁶ × E_P), löst Hubble-Spannung mit 99,1% Übereinstimmung zu Planck-Messungen.*
 
-**[Temperatureinheiten und CMB-Analyse](pdf/TempEinheitenCMBEn.pdf)**  
+**[Temperatureinheiten und CMB-Analyse](2/pdf/TempEinheitenCMBEn.pdf)**  
 *CMB-Temperaturentwicklung T(z) = T₀(1+z)(1 + β_T ln(1+z)) mit β_T = 1, vorhersagend T(z=1100) ≈ 24.000 K in universeller T0-Methodologie.*
 
-**[Kosmologische Rotverschiebungskorrektur](pdf/Rotverschiebung_korrektur.pdf)**  
+**[Kosmologische Rotverschiebungskorrektur](2/pdf/Rotverschiebung_korrektur.pdf)**  
 *Korrigierte wellenlängenabhängige Rotverschiebungsformel z(λ) = z₀(1 - ln(λ/λ₀)) mit ordnungsgemäßer Vorzeichenableitung und physikalischer Verifikation.*
 
 ### Theoretische Grundlagen
 
-**[T0 vs ESM: Konzeptuelle Analyse](pdf/T0vsESM_ConceptualAnalysis_En.pdf)**  
+**[T0 vs ESM: Konzeptuelle Analyse](2/pdf/T0vsESM_ConceptualAnalysis_En.pdf)**  
 *Mathematische Äquivalenz zwischen T0-Modell (absolute Zeit, variable Masse) und Erweitertem Standardmodell durch logarithmische Transformation.*
 
-**[Das entstehende vereinheitlichte Framework](pdf/ausblicke_En.pdf)**  
+**[Das entstehende vereinheitlichte Framework](2/pdf/ausblicke_En.pdf)**  
 *Erforschung fundamentaler Feldbeziehungen, die potenzielle Einheit von Higgs-Feld, Vakuumkonstanten und intrinsischem Zeitfeld untersucht.*
 
-**[Elimination der Masse (Allgemein)](pdf/EliminationOfMass.pdf)**  
+**[Elimination der Masse (Allgemein)](2/pdf/EliminationOfMass.pdf)**  
 *Allgemeine Untersuchung von Masseneliminationsverfahren im T0-Framework.*
 
 ## Schlüsselinnovationen

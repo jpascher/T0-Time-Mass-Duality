@@ -26,76 +26,76 @@ The following 18 documents represent the complete, up-to-date T0 model framework
 
 ### Energy-Based Core Formulations (Fundamental Basis)
 
-**[Pure Energy Formulation: Mass-Free Dirac Equation and Lagrangian](pdf/Elimination_Of_Mass_Dirac_Lag.pdf)**  
+**[Pure Energy Formulation: Mass-Free Dirac Equation and Lagrangian](2/pdf/Elimination_Of_Mass_Dirac_Lag.pdf)**  
 *The ultimate simplification step: Complete elimination of mass from physics, expressing everything through energy relationships with E = m in natural units. True parameter-free physics requiring zero experimental input.*
 
-**[T0 Model Calculation Verification Table](pdf/Elimination_Of_Mass_Dirac_Tabelle.pdf)**  
+**[T0 Model Calculation Verification Table](2/pdf/Elimination_Of_Mass_Dirac_Tabelle.pdf)**  
 *Complete verification of energy-based formulation: 99.85% average agreement with CODATA values across all calculations, 14 new testable predictions. Proof that pure energy formulation works.*
 
-**[Mathematical Core Formulations of Time-Mass Duality Theory](pdf/MathZeitMasseLagrangeEn.pdf)**  
+**[Mathematical Core Formulations of Time-Mass Duality Theory](2/pdf/MathZeitMasseLagrangeEn.pdf)**  
 *Essential mathematical formulations of energy-based theory with complete Lagrangian densities and universal T0 scale ratio ξ from Higgs physics.*
 
 ### Quantum Mechanics and Quantum Computing (Applications of Energy Formulation)
 
-**[Deterministic Quantum Mechanics via T0-Energy Field Formulation](pdf/QM-Detrmistic.pdf)**  
+**[Deterministic Quantum Mechanics via T0-Energy Field Formulation](2/pdf/QM-Detrmistic.pdf)**  
 *Revolutionary application of energy-based formulation: Complete alternative to probability-based quantum mechanics through deterministic energy fields T(x,t) = 1/max(E(x,t), ω), eliminating all QM interpretation problems.*
 
-**[Integration of the Dirac Equation in the T0 Model](pdf/diracEn.pdf)**  
+**[Integration of the Dirac Equation in the T0 Model](2/pdf/diracEn.pdf)**  
 *How the Dirac equation naturally emerges from T0 time-mass duality and energy formulation, with geometric derivation of 4×4 matrix structure.*
 
 ### Theoretical Foundations (For Understanding)
 
-**[Field-Theoretic Derivation of the β Parameter](pdf/DerivationVonBetaEn.pdf)**  
+**[Field-Theoretic Derivation of the β Parameter](2/pdf/DerivationVonBetaEn.pdf)**  
 *Geometric derivation of fundamental β = 2Gm/r parameter from field equations, showing universal T0 methodology with localized parameters ξ = 2√G·m.*
 
-**[Field-Theoretic Derivation with Complete References](pdf/DerivationVonBetaEnR.pdf)**  
+**[Field-Theoretic Derivation with Complete References](2/pdf/DerivationVonBetaEnR.pdf)**  
 *Extended version with 100+ literature references, historical context from Planck to modern quantum field theory.*
 
 ### Natural Units and Fundamental Constants
 
-**[Natural Unit Systems: Universal Energy Conversion](pdf/NatEinheitenSystematikEn.pdf)**  
+**[Natural Unit Systems: Universal Energy Conversion](2/pdf/NatEinheitenSystematikEn.pdf)**  
 *Comprehensive framework establishing energy as the fundamental dimension, with complete conversion tables and length scale hierarchy spanning 61 orders of magnitude.*
 
-**[Parameter System-Dependency: SI vs. Natural Units](pdf/ParameterSystemdipendentEn.pdf)**  
+**[Parameter System-Dependency: SI vs. Natural Units](2/pdf/ParameterSystemdipendentEn.pdf)**  
 *Systematic analysis revealing dramatic parameter value differences across unit systems, with transformation protocols resolving apparent inconsistencies.*
 
-**[Mathematical Proof: α = 1 in Natural Units](pdf/ResolvingTheConstantsAlfaEn.pdf)**  
+**[Mathematical Proof: α = 1 in Natural Units](2/pdf/ResolvingTheConstantsAlfaEn.pdf)**  
 *Rigorous proof that the fine structure constant equals unity in natural units, resolving the "mystery" of 1/137 as a unit system artifact.*
 
-**[The Fine Structure Constant: Various Representations](pdf/FeinstrukturkonstanteEn.pdf)**  
+**[The Fine Structure Constant: Various Representations](2/pdf/FeinstrukturkonstanteEn.pdf)**  
 *Complete analysis including Sommerfeld's historical harmonic assignment methodology and its implications for fundamental constants interpretation.*
 
 ### Quantum Field Theory Integration
 
-**[Complete Muon g-2 Analysis](pdf/CompleteMuon_g-2_AnalysisEn.pdf)**  
+**[Complete Muon g-2 Analysis](2/pdf/CompleteMuon_g-2_AnalysisEn.pdf)**  
 *Application of energy-based formulation: Universal lepton correction a_ℓ^(T0) = 2.31 × 10⁻¹⁰ explaining 9.2% of the muon g-2 anomaly.*
 
-**[Dynamic Mass of Photons and Nonlocality](pdf/DynMassePhotonenNichtlokalEn.pdf)**  
+**[Dynamic Mass of Photons and Nonlocality](2/pdf/DynMassePhotonenNichtlokalEn.pdf)**  
 *Energy-dependent photon mass m_γ = ω from energy formulation, introducing frequency-dependent nonlocality effects and modified Bell inequalities.*
 
 ### Cosmological Applications
 
-**[H₀ and κ Parameter Analysis](pdf/Ho_En.pdf)**  
+**[H₀ and κ Parameter Analysis](2/pdf/Ho_En.pdf)**  
 *Derivation showing H₀ emerges from field theory as transition scale between local and cosmic regimes, with κ = H₀ in infinite geometry limit.*
 
-**[Pure Energy Formulation of H₀ and κ Parameters](pdf/Ho_EnergieEn.pdf)**  
+**[Pure Energy Formulation of H₀ and κ Parameters](2/pdf/Ho_EnergieEn.pdf)**  
 *Revolutionary H₀ = 68.0 km/s/Mpc prediction from pure theory (H₀ = ξ¹⁶ × E_P), resolving Hubble tension with 99.1% agreement to Planck measurements.*
 
-**[Temperature Units and CMB Analysis](pdf/TempEinheitenCMBEn.pdf)**  
+**[Temperature Units and CMB Analysis](2/pdf/TempEinheitenCMBEn.pdf)**  
 *CMB temperature evolution T(z) = T₀(1+z)(1 + β_T ln(1+z)) with β_T = 1, predicting T(z=1100) ≈ 24,000 K in universal T0 methodology.*
 
-**[Cosmological Redshift Correction](pdf/Rotverschiebung_korrektur.pdf)**  
+**[Cosmological Redshift Correction](2/pdf/Rotverschiebung_korrektur.pdf)**  
 *Corrected wavelength-dependent redshift formula z(λ) = z₀(1 - ln(λ/λ₀)) with proper sign derivation and physical verification.*
 
 ### Theoretical Foundations
 
-**[T0 vs ESM: Conceptual Analysis](pdf/T0vsESM_ConceptualAnalysis_En.pdf)**  
+**[T0 vs ESM: Conceptual Analysis](2/pdf/T0vsESM_ConceptualAnalysis_En.pdf)**  
 *Mathematical equivalence between T0 model (absolute time, variable mass) and Extended Standard Model through logarithmic transformation.*
 
-**[The Emerging Unified Framework](pdf/ausblicke_En.pdf)**  
+**[The Emerging Unified Framework](2/pdf/ausblicke_En.pdf)**  
 *Exploration of fundamental field relationships examining potential unity of Higgs field, vacuum constants, and intrinsic time field.*
 
-**[Elimination of Mass (General)](pdf/EliminationOfMass.pdf)**  
+**[Elimination of Mass (General)](2/pdf/EliminationOfMass.pdf)**  
 *General investigation of mass elimination procedures in the T0 framework.*
 
 ## Key Innovations
