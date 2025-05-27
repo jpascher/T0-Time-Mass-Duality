@@ -94,9 +94,6 @@ Die folgenden 18 Dokumente repräsentieren das vollständige, aktuelle T0-Modell
 **[T0 vs ESM: Konzeptuelle Analyse](pdf/T0vsESM_ConceptualAnalysis_En.pdf)**  
 *Mathematische Äquivalenz zwischen T0-Modell (absolute Zeit, variable Masse) und Erweitertem Standardmodell durch logarithmische Transformation.*
 
-**[Pragmatischer Ansatz für T0-Modell-Anwendungen](pdf/PragmaticApproachT0-ModelEn.pdf)**  
-*Direkte Anwendungsrichtlinien, die den feldtheoretischen Ansatz über dimensionale Analyse-Übersetzungen hinaus betonen.*
-
 **[Das entstehende vereinheitlichte Framework](pdf/ausblicke_En.pdf)**  
 *Erforschung fundamentaler Feldbeziehungen, die potenzielle Einheit von Higgs-Feld, Vakuumkonstanten und intrinsischem Zeitfeld untersucht.*
 
