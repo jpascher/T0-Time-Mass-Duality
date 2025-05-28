@@ -1,0 +1,488 @@
+import React, { useState, useEffect } from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Slider } from '@/components/ui/slider';
+import { Button } from '@/components/ui/button';
+import { AlertCircle, Zap, Calculator, Eye, BookOpen } from 'lucide-react';
+
+const T0ModelExplorer = () => {
+  const [energyScale, setEnergyScale] = useState([0.511]); // MeV
+  const [selectedPrediction, setSelectedPrediction] = useState('g2');
+  const [showMathDetails, setShowMathDetails] = useState(false);
+
+  // T0 model constants
+  const XI_HIGGS = 1.316e-4; // Universal scale parameter from Higgs physics
+  const XI_GEOMETRIC = 8.37e-23; // Geometric scale ratio
+  const PLANCK_ENERGY = 1.22e19; // GeV
+  const ALPHA_EM = 1/137;
+
+  // Calculate T0 predictions
+  const calculateT0Predictions = (energy) => {
+    const xi = XI_HIGGS;
+    
+    // Anomalous magnetic moment (universal for all leptons)
+    const g2_correction = (ALPHA_EM / (2 * Math.PI)) * (xi * xi) * (1/12);
+    
+    // QED vertex correction (energy independent)
+    const qed_vertex = xi * xi;
+    
+    // Time field value
+    const time_field = 1 / Math.max(energy, 1); // T(x,t) = 1/max(E, ω)
+    
+    // Energy field coupling
+    const xi_energy = 2 * Math.sqrt(6.67e-11) * energy * 1e6 * 1.6e-19; // Rough conversion
+    
+    return {
+      g2_correction: g2_correction,
+      qed_vertex: qed_vertex,
+      time_field: time_field,
+      xi_energy: xi_energy,
+      energy_mass_identity: energy, // E = m in natural units
+    };
+  };
+
+  const predictions = calculateT0Predictions(energyScale[0]);
+
+  const keyInsights = [
+    {
+      title: "E = m Identity",
+      description: "In natural units, mass and energy are identical - not convertible, but the same quantity",
+      formula: "E = m (not E = mc²)",
+      revolutionary: true
+    },
+    {
+      title: "Parameter-Free Physics",
+      description: "Only one universal scale ratio ξ needed, derived from Higgs physics",
+      formula: "ξ = λₕ²v²/(16π³E�h²) ≈ 1.32×10⁻⁴",
+      revolutionary: true
+    },
+    {
+      title: "Deterministic Quantum Mechanics",
+      description: "No probability amplitudes - deterministic energy fields T(x,t) = 1/max(E,ω)",
+      formula: "State = {T(x,t), E(x,t)}",
+      revolutionary: true
+    },
+    {
+      title: "Universal Time Field",
+      description: "Intrinsic time field couples to all physics at all scales",
+      formula: "T(x,t) = 1/max(E(x,t), ω)",
+      revolutionary: false
+    }
+  ];
+
+  const experimentalPredictions = {
+    g2: {
+      name: "Anomalous Magnetic Moments",
+      value: predictions.g2_correction,
+      unit: "(dimensionless)",
+      description: "Universal correction for all leptons (electron, muon, tau)",
+      testable: "Current precision: ~10⁻¹¹, T0 effect: ~10⁻¹⁰",
+      status: "Within experimental reach"
+    },
+    qed: {
+      name: "QED Vertex Corrections", 
+      value: predictions.qed_vertex,
+      unit: "(relative correction)",
+      description: "Energy-independent corrections to all QED processes",
+      testable: "High-energy vs low-energy measurements",
+      status: "Distinguishes from Standard Model"
+    },
+    redshift: {
+      name: "Wavelength-Dependent Redshift",
+      value: 0.405,
+      unit: "(40.5% spectral variation)",
+      description: "Blue light shows enhanced redshift vs red light",
+      testable: "Multi-wavelength astronomical observations",
+      status: "New cosmological signature"
+    },
+    gravity: {
+      name: "Modified Gravitational Potential",
+      value: 1.5e9,
+      unit: "(ratio T0/Newton at 1 AU)",
+      description: "Linear κr term dominates at astronomical scales",
+      testable: "Solar system orbital dynamics",
+      status: "Explains dark matter effects"
+    }
+  };
+
+  return (
+    <div className="w-full max-w-6xl mx-auto p-6 bg-gradient-to-br from-blue-50 to-purple-50">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold text-gray-800 mb-2">
+          T0 Model: Revolutionary Parameter-Free Physics
+        </h1>
+        <p className="text-lg text-gray-600">
+          Interactive Explorer for the Pure Energy Formulation of Fundamental Physics
+        </p>
+        <div className="mt-4 p-4 bg-red-100 border-l-4 border-red-500 rounded">
+          <div className="flex items-center">
+            <AlertCircle className="h-5 w-5 text-red-500 mr-2" />
+            <p className="text-red-700 font-semibold">
+              Revolutionary Insight: Mass was always energy - E = m (not E = mc²)
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <Tabs defaultValue="overview" className="w-full">
+        <TabsList className="grid w-full grid-cols-5">
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="calculator">Calculator</TabsTrigger>
+          <TabsTrigger value="predictions">Predictions</TabsTrigger>
+          <TabsTrigger value="comparison">vs Standard Model</TabsTrigger>
+          <TabsTrigger value="verification">Verification</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="overview" className="space-y-6">
+          <div className="grid md:grid-cols-2 gap-6">
+            {keyInsights.map((insight, index) => (
+              <Card key={index} className={`${insight.revolutionary ? 'border-red-500 bg-red-50' : 'border-blue-500 bg-blue-50'}`}>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    {insight.revolutionary ? <Zap className="h-5 w-5 text-red-500" /> : <BookOpen className="h-5 w-5 text-blue-500" />}
+                    {insight.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-700 mb-3">{insight.description}</p>
+                  <div className="bg-gray-100 p-3 rounded font-mono text-sm">
+                    {insight.formula}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <Card className="bg-green-50 border-green-500">
+            <CardHeader>
+              <CardTitle className="text-green-700">What Makes T0 Revolutionary?</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <p><strong>1. True Parameter-Free Theory:</strong> Only ξ ≈ 1.32×10⁻⁴ from Higgs physics - no measured constants needed</p>
+              <p><strong>2. Mass Elimination:</strong> All "masses" are energy concentrations - simplifies all physics</p>
+              <p><strong>3. Deterministic Quantum Mechanics:</strong> No probability mysticism - energy fields evolve deterministically</p>
+              <p><strong>4. Universal Scale Unification:</strong> Same ξ parameter describes quantum and gravitational phenomena</p>
+              <p><strong>5. Testable Predictions:</strong> 14+ specific predictions distinguishable from Standard Model</p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="calculator" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Calculator className="h-5 w-5" />
+                T0 Energy Field Calculator
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  Energy Scale: {energyScale[0].toFixed(3)} MeV
+                </label>
+                <Slider
+                  value={energyScale}
+                  onValueChange={setEnergyScale}
+                  max={1000}
+                  min={0.001}
+                  step={0.001}
+                  className="w-full"
+                />
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>0.001 MeV (thermal)</span>
+                  <span>0.511 MeV (electron)</span>
+                  <span>1000 MeV (nuclear)</span>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-3">
+                  <h3 className="font-semibold">T0 Field Values</h3>
+                  <div className="bg-gray-100 p-3 rounded space-y-2">
+                    <p><strong>Time Field:</strong> T(x,t) = {predictions.time_field.toExponential(3)} MeV⁻¹</p>
+                    <p><strong>Energy = Mass:</strong> E = m = {energyScale[0].toFixed(3)} MeV</p>
+                    <p><strong>ξ Parameter:</strong> {XI_HIGGS.toExponential(3)} (universal)</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <h3 className="font-semibold">Physical Consequences</h3>
+                  <div className="bg-blue-100 p-3 rounded space-y-2">
+                    <p><strong>g-2 Correction:</strong> {predictions.g2_correction.toExponential(3)}</p>
+                    <p><strong>QED Vertex:</strong> {predictions.qed_vertex.toExponential(3)}</p>
+                    <p><strong>Status:</strong> Energy-independent corrections</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 p-4 bg-yellow-100 border-l-4 border-yellow-500">
+                <p className="text-yellow-800">
+                  <strong>Key Insight:</strong> Notice how T0 corrections are independent of the specific energy scale - 
+                  this universal behavior distinguishes T0 from Standard Model predictions.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="predictions" className="space-y-6">
+          <div className="flex gap-2 mb-4">
+            {Object.keys(experimentalPredictions).map((key) => (
+              <Button
+                key={key}
+                variant={selectedPrediction === key ? "default" : "outline"}
+                onClick={() => setSelectedPrediction(key)}
+              >
+                {experimentalPredictions[key].name.split(' ')[0]}
+              </Button>
+            ))}
+          </div>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Eye className="h-5 w-5" />
+                {experimentalPredictions[selectedPrediction].name}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="font-semibold mb-2">T0 Prediction</h3>
+                  <div className="bg-green-100 p-4 rounded">
+                    <p className="text-2xl font-bold text-green-700">
+                      {typeof experimentalPredictions[selectedPrediction].value === 'number' 
+                        ? experimentalPredictions[selectedPrediction].value.toExponential(3)
+                        : experimentalPredictions[selectedPrediction].value}
+                    </p>
+                    <p className="text-sm text-green-600">
+                      {experimentalPredictions[selectedPrediction].unit}
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold mb-2">Experimental Status</h3>
+                  <div className="bg-blue-100 p-4 rounded">
+                    <p className="font-medium text-blue-700">
+                      {experimentalPredictions[selectedPrediction].status}
+                    </p>
+                    <p className="text-sm text-blue-600 mt-2">
+                      {experimentalPredictions[selectedPrediction].testable}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <h3 className="font-semibold mb-2">Physical Description</h3>
+                <p className="text-gray-700">
+                  {experimentalPredictions[selectedPrediction].description}
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-purple-50 border-purple-500">
+            <CardHeader>
+              <CardTitle className="text-purple-700">All T0 Predictions Summary</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <h4 className="font-semibold mb-2">Quantum Scale Predictions:</h4>
+                  <ul className="space-y-1 text-sm">
+                    <li>• Universal lepton g-2: 2.31×10⁻¹⁰ (electron = muon)</li>
+                    <li>• Energy-independent QED: 1.74×10⁻⁸ (all scales)</li>
+                    <li>• Deterministic quantum transitions</li>
+                    <li>• Modified Bell inequalities</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Cosmological Predictions:</h4>
+                  <ul className="space-y-1 text-sm">
+                    <li>• Hubble constant: H₀ = 69.9 km/s/Mpc</li>
+                    <li>• Wavelength-dependent redshift: 40.5% variation</li>
+                    <li>• Modified gravity: κr linear terms</li>
+                    <li>• No dark matter/energy needed</li>
+                  </ul>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="comparison" className="space-y-6">
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card className="border-red-500">
+              <CardHeader>
+                <CardTitle className="text-red-700">Standard Model Issues</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <p><strong>Parameter Problem:</strong> 20+ measured constants needed</p>
+                <p><strong>Mass Mystery:</strong> Why do particles have specific masses?</p>
+                <p><strong>QM Interpretation:</strong> Probability amplitudes, wave function collapse</p>
+                <p><strong>Dark Sector:</strong> 95% of universe is "dark" matter/energy</p>
+                <p><strong>Fine-Tuning:</strong> Cosmological constant problem</p>
+                <p><strong>Hierarchy Problem:</strong> Why is gravity so weak?</p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-green-500">
+              <CardHeader>
+                <CardTitle className="text-green-700">T0 Model Solutions</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <p><strong>Parameter-Free:</strong> Only ξ from Higgs physics</p>
+                <p><strong>Mass = Energy:</strong> E = m in natural units (no mystery)</p>
+                <p><strong>Deterministic QM:</strong> Energy fields T(x,t), E(x,t)</p>
+                <p><strong>No Dark Sector:</strong> Modified gravity explains observations</p>
+                <p><strong>Natural Scales:</strong> All from Planck scale ratios</p>
+                <p><strong>Unified Description:</strong> Same ξ for quantum + gravity</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Key Conceptual Differences</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse border border-gray-300">
+                  <thead>
+                    <tr className="bg-gray-100">
+                      <th className="border border-gray-300 p-2 text-left">Aspect</th>
+                      <th className="border border-gray-300 p-2 text-left">Standard Model</th>
+                      <th className="border border-gray-300 p-2 text-left">T0 Model</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="border border-gray-300 p-2 font-medium">Foundation</td>
+                      <td className="border border-gray-300 p-2">Quantum fields + GR</td>
+                      <td className="border border-gray-300 p-2">Energy fields only</td>
+                    </tr>
+                    <tr>
+                      <td className="border border-gray-300 p-2 font-medium">Mass</td>
+                      <td className="border border-gray-300 p-2">Fundamental property</td>
+                      <td className="border border-gray-300 p-2">Energy concentration</td>
+                    </tr>
+                    <tr>
+                      <td className="border border-gray-300 p-2 font-medium">Parameters</td>
+                      <td className="border border-gray-300 p-2">20+ measured constants</td>
+                      <td className="border border-gray-300 p-2">1 scale ratio (ξ)</td>
+                    </tr>
+                    <tr>
+                      <td className="border border-gray-300 p-2 font-medium">Quantum Mechanics</td>
+                      <td className="border border-gray-300 p-2">Probabilistic</td>
+                      <td className="border border-gray-300 p-2">Deterministic</td>
+                    </tr>
+                    <tr>
+                      <td className="border border-gray-300 p-2 font-medium">Gravity</td>
+                      <td className="border border-gray-300 p-2">Separate from quantum</td>
+                      <td className="border border-gray-300 p-2">Unified via ξ parameter</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="verification" className="space-y-6">
+          <Card className="bg-green-50 border-green-500">
+            <CardHeader>
+              <CardTitle className="text-green-700">Verification Results Summary</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-3 gap-4 mb-4">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-green-700">99.85%</div>
+                  <div className="text-sm text-gray-600">Average Agreement</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-blue-700">28</div>
+                  <div className="text-sm text-gray-600">Items Verified</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-purple-700">14+</div>
+                  <div className="text-sm text-gray-600">New Predictions</div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <p><strong>Perfect Agreement (100.0%):</strong> Fundamental fields, thermodynamic quantities</p>
+                <p><strong>Excellent Agreement (99.9-99.99%):</strong> Derived constants, scale ratios</p>
+                <p><strong>Good Agreement (99.7%):</strong> Higgs-derived ξ parameter</p>
+                <p><strong>New Territory:</strong> 14 testable predictions with specific numerical values</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Key Verification Categories</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-semibold mb-2">1. Fundamental Constants (99.99% agreement)</h4>
+                  <p className="text-sm text-gray-700">Electron energy, Planck length, Compton wavelength - all derived from ξ</p>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold mb-2">2. Scale Ratios (100.0% agreement)</h4>
+                  <p className="text-sm text-gray-700">Natural units equivalences: E = m = 1/L = 1/T = Temperature</p>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold mb-2">3. Cosmological Parameters (95-104% agreement)</h4>
+                  <p className="text-sm text-gray-700">H₀ = 69.9 km/s/Mpc fits between Planck (67.4) and Cepheid (74.0) measurements</p>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold mb-2">4. New Predictions (Testable)</h4>
+                  <p className="text-sm text-gray-700">Universal g-2 corrections, energy-independent QED, wavelength-dependent redshift</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-blue-50 border-blue-500">
+            <CardHeader>
+              <CardTitle className="text-blue-700">Mathematical Accuracy Breakthrough</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="mb-3">
+                <strong>Revolutionary Discovery:</strong> T0 model is more numerically accurate than traditional physics!
+              </p>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <h4 className="font-semibold text-red-700">Traditional Method</h4>
+                  <p className="text-sm">Complex formulas: √(ℏG/c⁵)</p>
+                  <p className="text-sm">Result: 99.98-100.04% (rounding errors)</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-green-700">T0 Method</h4>
+                  <p className="text-sm">Direct identities: E = m</p>
+                  <p className="text-sm">Result: 100.000% (mathematically exact)</p>
+                </div>
+              </div>
+              <p className="mt-3 text-sm text-blue-700">
+                <strong>Implication:</strong> Simplicity leads to higher accuracy, proving energy is the fundamental quantity.
+              </p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+
+      <div className="mt-8 p-4 bg-gray-100 rounded text-center text-sm text-gray-600">
+        <p>Based on Johann Pascher's T0 Model papers • Interactive visualization for educational purposes</p>
+        <p className="mt-1">Key insight: E = m is an identity in natural units, not a conversion formula</p>
+      </div>
+    </div>
+  );
+};
+
+export default T0ModelExplorer;
