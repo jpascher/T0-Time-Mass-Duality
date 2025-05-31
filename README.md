@@ -27,25 +27,25 @@ The following documents represent the complete, up-to-date T0 model framework:
 
 ### Interactive HTML Explorations
 
-**[T0 Theory Interactive Explorer](2/html/t0_theory_explorer_.html)** | **[Deutsche Version](2/html/t0_theory_explorer_de_.html)**  
+**[T0 Theory Interactive Explorer](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_theory_explorer_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_theory_explorer_de_.html)**  
 *Comprehensive interactive overview of all T0 principles: From revolutionary time-mass duality to deterministic quantum mechanics.*
 
-**[The Units Revolution: From E=mc² to E=m](2/html/einheiten_revolution_.html)** | **[Deutsche Version](2/html/einheiten_revolution_de_.html)**  
+**[The Units Revolution: From E=mc² to E=m](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/einheiten_revolution_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/einheiten_revolution_de_.html)**  
 *Mathematical proof of the identity between E=mc² and E=m - same physics, different unit systems!*
 
-**[Complete Particle Spectrum: Standard Model vs T0](2/html/complete_particle_spectrum_t0_.html)** | **[Deutsche Version](2/html/complete_particle_spectrum_de_.html)** | **[English Version](2/html/complete_particle_spectrum_en_.html)**  
+**[Complete Particle Spectrum: Standard Model vs T0](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_t0_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_de_.html)** | **[English Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_en_.html)**  
 *Spectacular comparison: 61+ Standard Model particles vs. 1 universal T0 field with infinite ε-excitations.*
 
-**[Neutrinos in the Universal T0 Field](2/html/t0_neutrinos_explorer_.html)** | **[Deutsche Version](2/html/t0_neutrinos_explorer_de_.html)** | **[English Version](2/html/t0_neutrinos_explorer_en_.html)**  
+**[Neutrinos in the Universal T0 Field](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_neutrinos_explorer_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_neutrinos_explorer_de_.html)** | **[English Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_neutrinos_explorer_en_.html)**  
 *Elegant solution to the neutrino puzzle: All "ghost particles" as limiting-case nodes δm(x,t) → 0 of the universal field.*
 
-**[T0 Cryptography Analysis: RSA Algorithm](2/html/rsa_cracking_t0_analysis_.html)** | **[Deutsche Version](2/html/rsa_analyse_t0_de_.html)** | **[English Version](2/html/rsa_analysis_t0_en_.html)**  
+**[T0 Cryptography Analysis: RSA Algorithm](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/rsa_cracking_t0_analysis_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/rsa_analyse_t0_de_.html)** | **[English Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/rsa_analysis_t0_en_.html)**  
 *Theoretical analysis: How T0 simulations could influence the efficiency of factorization algorithms through deterministic quantum mechanics.*
 
-**[T0 Impact on Entanglement-Based Cryptography](2/html/t0_innsbruck_entanglement_analysis_.html)** | **[Deutsche Version](2/html/t0_verschraenkung_analyse_de_.html)** | **[English Version](2/html/t0_entanglement_analysis_en_.html)**  
+**[T0 Impact on Entanglement-Based Cryptography](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_innsbruck_entanglement_analysis_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_verschraenkung_analyse_de_.html)** | **[English Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_entanglement_analysis_en_.html)**  
 *Dramatic threat to quantum cryptography: How T0 determinism could undermine Bell-based security.*
 
-**[T0 Deterministic Quantum Computing](2/html/t0_quantum_computing_analysis_.html)** | **[Deutsche Version](2/html/t0_quantum_computing_de_.html)** | **[English Version](2/html/t0_quantum_computing_en_.html)**  
+**[T0 Deterministic Quantum Computing](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_computing_analysis_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_computing_de_.html)** | **[English Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_computing_en_.html)**  
 *Revolution in quantum informatics: From probabilistic algorithms to deterministic energy field evolutions.*
 
 ### Energy-Based Core Formulations (Fundamental Basis)
@@ -238,7 +238,7 @@ The following documents represent the complete, up-to-date T0 model framework:
 
 ## Repository Access
 
-**🌐 Interactive Explorations**: [2/html/](2/html/) - **Interactive HTML visualizations and simulations**  
+**🌐 Interactive Explorations**: [GitHub Pages HTML](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/) - **Interactive HTML visualizations and simulations**  
 **📁 Main Documents**: [2/pdf/](2/pdf/) - **40+ current PDFs (German/English versions)**  
 **🔗 LaTeX Sources**: [2/tex/](2/tex/)  
 **🌐 Project Website**: [T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/)
