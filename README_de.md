@@ -27,25 +27,25 @@ Die folgenden Dokumente repräsentieren das vollständige, aktuelle T0-Modell-Fr
 
 ### Interaktive HTML-Explorationen
 
-**[T0 Theory Interaktiver Explorer](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_theory_explorer_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_theory_explorer_de_.html)**  
+**[T0 Theory Interaktiver Explorer](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_theory_explorer_en_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_theory_explorer_de_.html)**  
 *Umfassende interaktive Übersicht über alle T0-Prinzipien: Von der revolutionären Zeit-Masse-Dualität bis zur deterministischen Quantenmechanik.*
 
-**[Die Einheiten-Revolution: Von E=mc² zu E=m](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/einheiten_revolution_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/einheiten_revolution_de_.html)**  
+**[Die Einheiten-Revolution: Von E=mc² zu E=m](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/units_revolution_en_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/einheiten_revolution_de_.html)**  
 *Mathematischer Beweis der Identität zwischen E=mc² und E=m - dieselbe Physik, verschiedene Einheitensysteme!*
 
-**[Vollständiges Teilchenspektrum: Standard Model vs T0](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_t0_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_de_.html)** | **[Englische Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_en_.html)**  
+**[Vollständiges Teilchenspektrum: Standard Model vs T0](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_en_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_de_.html)**  
 *Spektakulärer Vergleich: 61+ Standard Model Teilchen vs. 1 universelles T0-Feld mit unendlichen ε-Anregungen.*
 
-**[Neutrinos im universellen T0-Feld](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_neutrinos_explorer_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_neutrinos_explorer_de_.html)** | **[Englische Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_neutrinos_explorer_en_.html)**  
+**[Neutrinos im universellen T0-Feld](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_neutrinos_explorer_en_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_neutrinos_explorer_de_.html)**  
 *Elegante Lösung des Neutrino-Rätsels: Alle "Geister-Teilchen" als Grenzfall-Knoten δm(x,t) → 0 des universellen Feldes.*
 
-**[T0-Kryptografieanalyse: RSA-Algorithmus](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/rsa_cracking_t0_analysis_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/rsa_analyse_t0_de_.html)** | **[Englische Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/rsa_analysis_t0_en_.html)**  
+**[T0-Kryptografieanalyse: RSA-Algorithmus](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/rsa_analysis_t0_en_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/rsa_analyse_t0_de_.html)**  
 *Theoretische Analyse: Wie T0-Simulationen die Effizienz von Faktorisierungsalgorithmen durch deterministische Quantenmechanik beeinflussen könnten.*
 
-**[T0-Auswirkungen auf Verschränkungsbasierte Kryptografie](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_innsbruck_entanglement_analysis_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_verschraenkung_analyse_de_.html)** | **[Englische Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_entanglement_analysis_en_.html)**  
+**[T0-Auswirkungen auf Verschränkungsbasierte Kryptografie](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_entanglement_analysis_en_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_verschraenkung_analyse_de_.html)**  
 *Dramatische Bedrohung für Quantenkryptografie: Wie T0-Determinismus die Bell-basierte Sicherheit untergraben könnte.*
 
-**[T0 Deterministisches Quantencomputing](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_computing_analysis_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_computing_de_.html)** | **[Englische Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_computing_en_.html)**  
+**[T0 Deterministisches Quantencomputing](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_computing_en_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_computing_de_.html)**  
 *Revolution der Quanteninformatik: Von probabilistischen Algorithmen zu deterministischen Energiefeld-Evolutionen.*
 
 ### Energiebasierte Kernformulierungen (Fundamentale Basis)
