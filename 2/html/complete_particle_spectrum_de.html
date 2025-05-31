@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vollständiges Teilchenspektrum: Standard Model vs T0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .back-to-main {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #4ecdc4, #45b7b8);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+        }
+        
+        .back-to-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            margin-top: 60px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #00ffff, #ff6b9d, #4ecdc4, #ffeb3b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        
+        .model-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .model-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 2px solid;
+        }
+        
+        .standard-model {
+            border-color: #ff6b9d;
+        }
+        
+        .t0-model {
+            border-color: #4ecdc4;
+        }
+        
+        .particle-category {
+            margin: 25px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+        }
+        
+        .particle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .particle-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            border: 2px solid;
+            transition: all 0.3s ease;
+            position: relative;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .particle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .lepton {
+            border-color: #ff6b9d;
+        }
+        
+        .quark {
+            border-color: #4ecdc4;
+        }
+        
+        .boson {
+            border-color: #ffeb3b;
+        }
+        
+        .higgs {
+            border-color: #ff9500;
+        }
+        
+        .particle-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+        
+        .particle-symbol {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2em;
+            color: #00ffff;
+        }
+        
+        .particle-mass {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        
+        .particle-charge {
+            position: absolute;
+            top: 5px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+        }
+        
+        .t0-spectrum {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(78, 205, 196, 0.1));
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .epsilon-scale {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .epsilon-point {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .epsilon-value {
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .particle-node {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 5px 0;
+            position: relative;
+            animation: particleGlow 3s infinite ease-in-out;
+        }
+        
+        .photon-node {
+            background: linear-gradient(45deg, #ffeb3b, #ffc107);
+            animation: photonRay 2s infinite;
+        }
+        
+        .electron-node {
+            background: linear-gradient(45deg, #ff6b9d, #ff8a95);
+        }
+        
+        .muon-node {
+            background: linear-gradient(45deg, #4ecdc4, #45b7b8);
+        }
+        
+        .tau-node {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+        }
+        
+        .neutrino-node {
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.6), rgba(78, 205, 196, 0.6));
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+        }
+        
+        .quark-node {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            border: 3px solid #f39c12;
+        }
+        
+        .boson-node {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            border: 2px solid #ffeb3b;
+            animation: bosonSpin 4s infinite linear;
+        }
+        
+        .higgs-node {
+            background: linear-gradient(45deg, #ff9500, #ff6b00);
+            border: 3px solid #fff;
+            box-shadow: 0 0 20px rgba(255, 149, 0, 0.5);
+        }
+        
+        @keyframes particleGlow {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        @keyframes photonRay {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes bosonSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        
+        .comparison-table {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 30px 0;
+        }
+        
+        .table-header {
+            background: rgba(0, 255, 255, 0.2);
+            padding: 15px;
+            font-weight: bold;
+            text-align: center;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .table-row {
+            padding: 10px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .table-row:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .revolutionary-insight {
+            background: linear-gradient(45deg, rgba(255, 235, 59, 0.1), rgba(255, 107, 157, 0.1));
+            border: 2px solid rgba(255, 235, 59, 0.5);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .equation-highlight {
+            font-size: 2em;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #00ffff;
+        }
+        
+        .generation-structure {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .generation {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .generation h4 {
+            margin-bottom: 15px;
+            color: #ffeb3b;
+        }
+        
+        @media (max-width: 1200px) {
+            .model-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .generation-structure {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .epsilon-scale {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .table-header, .table-row {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .particle-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-to-main">← Zurück zur Hauptseite</a>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Vollständiges Teilchenspektrum</h1>
+            <p>Alle bekannten Teilchen: Standard Model vs. T0-Theorie</p>
+        </div>
+        
+        <div class="model-comparison">
+            <div class="model-section standard-model">
+                <h2 style="color: #ff6b9d;">Standard Model: 61+ Teilchen</h2>
+                
+                <div class="particle-category">
+                    <h3>Leptonen (6 Teilchen)</h3>
+                    <div class="particle-grid">
+                        <div class="particle-card lepton">
+                            <div class="particle-charge">-1</div>
+                            <div class="particle-name">Elektron</div>
+                            <div class="particle-symbol">e⁻</div>
+                            <div class="particle-mass">0.511 MeV</div>
+                        </div>
+                        <div class="particle-card lepton">
+                            <div class="particle-charge">0</div>
+                            <div class="particle-name">e-Neutrino</div>
+                            <div class="particle-symbol">νₑ</div>
+                            <div class="particle-mass">< 2 eV</div>
+                        </div>
+                        <div class="particle-card lepton">
+                            <div class="particle-charge">-1</div>
+                            <div class="particle-name">Myon</div>
+                            <div class="particle-symbol">μ⁻</div>
+                            <div class="particle-mass">105.7 MeV</div>
+                        </div>
+                        <div class="particle-card lepton">
+                            <div class="particle-charge">0</div>
+                            <div class="particle-name">μ-Neutrino</div>
+                            <div class="particle-symbol">νμ</div>
+                            <div class="particle-mass">< 0.19 MeV</div>
+                        </div>
+                        <div class="particle-card lepton">
+                            <div class="particle-charge">-1</div>
+                            <div class="particle-name">Tau</div>
+                            <div class="particle-symbol">τ⁻</div>
+                            <div class="particle-mass">1777 MeV</div>
+                        </div>
+                        <div class="particle-card lepton">
+                            <div class="particle-charge">0</div>
+                            <div class="particle-name">τ-Neutrino</div>
+                            <div class="particle-symbol">ντ</div>
+                            <div class="particle-mass">< 18.2 MeV</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="particle-category">
+                    <h3>Quarks (6 Teilchen)</h3>
+                    <div class="particle-grid">
+                        <div class="particle-card quark">
+                            <div class="particle-charge">+⅔</div>
+                            <div class="particle-name">Up</div>
+                            <div class="particle-symbol">u</div>
+                            <div class="particle-mass">2.2 MeV</div>
+                        </div>
+                        <div class="particle-card quark">
+                            <div class="particle-charge">-⅓</div>
+                            <div class="particle-name">Down</div>
+                            <div class="particle-symbol">d</div>
+                            <div class="particle-mass">4.7 MeV</div>
+                        </div>
+                        <div class="particle-card quark">
+                            <div class="particle-charge">+⅔</div>
+                            <div class="particle-name">Charm</div>
+                            <div class="particle-symbol">c</div>
+                            <div class="particle-mass">1.3 GeV</div>
+                        </div>
+                        <div class="particle-card quark">
+                            <div class="particle-charge">-⅓</div>
+                            <div class="particle-name">Strange</div>
+                            <div class="particle-symbol">s</div>
+                            <div class="particle-mass">95 MeV</div>
+                        </div>
+                        <div class="particle-card quark">
+                            <div class="particle-charge">+⅔</div>
+                            <div class="particle-name">Top</div>
+                            <div class="particle-symbol">t</div>
+                            <div class="particle-mass">173 GeV</div>
+                        </div>
+                        <div class="particle-card quark">
+                            <div class="particle-charge">-⅓</div>
+                            <div class="particle-name">Bottom</div>
+                            <div class="particle-symbol">b</div>
+                            <div class="particle-mass">4.2 GeV</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="particle-category">
+                    <h3>Eichbosonen (4 Teilchen)</h3>
+                    <div class="particle-grid">
+                        <div class="particle-card boson">
+                            <div class="particle-charge">0</div>
+                            <div class="particle-name">Photon</div>
+                            <div class="particle-symbol">γ</div>
+                            <div class="particle-mass">0</div>
+                        </div>
+                        <div class="particle-card boson">
+                            <div class="particle-charge">±1</div>
+                            <div class="particle-name">W-Boson</div>
+                            <div class="particle-symbol">W±</div>
+                            <div class="particle-mass">80.4 GeV</div>
+                        </div>
+                        <div class="particle-card boson">
+                            <div class="particle-charge">0</div>
+                            <div class="particle-name">Z-Boson</div>
+                            <div class="particle-symbol">Z⁰</div>
+                            <div class="particle-mass">91.2 GeV</div>
+                        </div>
+                        <div class="particle-card boson">
+                            <div class="particle-charge">0</div>
+                            <div class="particle-name">Gluon</div>
+                            <div class="particle-symbol">g</div>
+                            <div class="particle-mass">0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="particle-category">
+                    <h3>Higgs-Boson (1 Teilchen)</h3>
+                    <div class="particle-grid">
+                        <div class="particle-card higgs">
+                            <div class="particle-charge">0</div>
+                            <div class="particle-name">Higgs</div>
+                            <div class="particle-symbol">H⁰</div>
+                            <div class="particle-mass">125 GeV</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: rgba(255, 107, 157, 0.1); border-radius: 10px;">
+                    <strong>Plus Antiteilchen:</strong> 17 Antiteilchen → <strong>Total: 34+ Fundamentalteilchen</strong><br>
+                    <strong>Plus zusammengesetzte Teilchen:</strong> Hadronen, Mesonen, Baryonen → <strong>Hunderte von Teilchen</strong>
+                </div>
+            </div>
+            
+            <div class="model-section t0-model">
+                <h2 style="color: #4ecdc4;">T0-Theorie: 1 Feld, ∞ Anregungen</h2>
+                
+                <div class="t0-spectrum">
+                    <h3>Kontinuierliches ε-Spektrum</h3>
+                    <div class="epsilon-scale">
+                        <div class="epsilon-point">
+                            <div class="epsilon-value">ε → 0</div>
+                            <div class="particle-node photon-node"></div>
+                            <div style="font-size: 0.9em;">Photon</div>
+                        </div>
+                        <div class="epsilon-point">
+                            <div class="epsilon-value">10⁻¹²</div>
+                            <div class="particle-node neutrino-node"></div>
+                            <div style="font-size: 0.9em;">Neutrinos</div>
+                        </div>
+                        <div class="epsilon-point">
+                            <div class="epsilon-value">10⁻⁸</div>
+                            <div class="particle-node electron-node"></div>
+                            <div style="font-size: 0.9em;">Elektron</div>
+                        </div>
+                        <div class="epsilon-point">
+                            <div class="epsilon-value">10⁻³</div>
+                            <div class="particle-node muon-node"></div>
+                            <div style="font-size: 0.9em;">Myon</div>
+                        </div>
+                        <div class="epsilon-point">
+                            <div class="epsilon-value">10⁻¹</div>
+                            <div class="particle-node tau-node"></div>
+                            <div style="font-size: 0.9em;">Tau</div>
+                        </div>
+                        <div class="epsilon-point">
+                            <div class="epsilon-value">1-10</div>
+                            <div class="particle-node quark-node"></div>
+                            <div style="font-size: 0.9em;">Quarks</div>
+                        </div>
+                        <div class="epsilon-point">
+                            <div class="epsilon-value">10²</div>
+                            <div class="particle-node boson-node"></div>
+                            <div style="font-size: 0.9em;">W/Z</div>
+                        </div>
+                        <div class="epsilon-point">
+                            <div class="epsilon-value">ξ⁻¹</div>
+                            <div class="particle-node higgs-node"></div>
+                            <div style="font-size: 0.9em;">Higgs</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: rgba(78, 205, 196, 0.1); border-radius: 10px;">
+                    <strong>Ein universelles Feld:</strong> δm(x,t)<br>
+                    <strong>Ein Parameter:</strong> ξ = 1.33×10⁻⁴<br>
+                    <strong>Eine Gleichung:</strong> ℒ = ε·(∂δm)²<br>
+                    <strong>Antiteilchen:</strong> Automatisch als -δm
+                </div>
+            </div>
+        </div>
+        
+        <div class="revolutionary-insight">
+            <h2>🌟 Die revolutionäre T0-Erkenntnis</h2>
+            <div class="equation-highlight">Alle "Teilchen" = Verschiedene ε-Anregungen in δm(x,t)</div>
+            <p style="font-size: 1.2em; margin: 20px 0;">
+                Was das Standard Model als 17 fundamentale Teilchen + 17 Antiteilchen + zusammengesetzte Teilchen behandelt,
+                ist in Wahrheit ein <strong>kontinuierliches Spektrum von Feldanregungsstärken</strong> in einem einzigen Feld!
+            </p>
+        </div>
+        
+        <div class="comparison-table">
+            <div class="table-header">
+                <div>Teilchen/Kategorie</div>
+                <div>Standard Model</div>
+                <div>T0-Theorie</div>
+                <div>ε-Wert</div>
+            </div>
+            <div class="table-row">
+                <div>Photon (γ)</div>
+                <div>Masseloses Eichboson</div>
+                <div>Grenzfall ε → 0</div>
+                <div>≈ 0</div>
+            </div>
+            <div class="table-row">
+                <div>Neutrinos (νₑ,νμ,ντ)</div>
+                <div>3 separate Felder</div>
+                <div>Minimale Anregungen</div>
+                <div>10⁻¹² - 10⁻⁷</div>
+            </div>
+            <div class="table-row">
+                <div>Elektron (e⁻)</div>
+                <div>Geladenes Lepton</div>
+                <div>Schwache Anregung</div>
+                <div>≈ 3×10⁻⁸</div>
+            </div>
+            <div class="table-row">
+                <div>Myon (μ⁻)</div>
+                <div>Schweres Lepton</div>
+                <div>Mittlere Anregung</div>
+                <div>≈ 1.5×10⁻³</div>
+            </div>
+            <div class="table-row">
+                <div>Tau (τ⁻)</div>
+                <div>Schwerstes Lepton</div>
+                <div>Starke Anregung</div>
+                <div>≈ 0.42</div>
+            </div>
+            <div class="table-row">
+                <div>Quarks (u,d,c,s,t,b)</div>
+                <div>6 separate Felder</div>
+                <div>Starke Anregungen</div>
+                <div>1 - 10</div>
+            </div>
+            <div class="table-row">
+                <div>W/Z Bosonen</div>
+                <div>Schwache Kraftträger</div>
+                <div>Sehr starke Anregungen</div>
+                <div>≈ 100</div>
+            </div>
+            <div class="table-row">
+                <div>Higgs Boson</div>
+                <div>Separates Feld</div>
+                <div>Strukturelle Grundlage</div>
+                <div>ξ⁻¹ ≈ 7500</div>
+            </div>
+            <div class="table-row">
+                <div>Gluonen</div>
+                <div>8 Farbladungen</div>
+                <div>Kopplung zwischen Quarks</div>
+                <div>Dynamisch</div>
+            </div>
+        </div>
+        
+        <div class="generation-structure">
+            <div class="generation">
+                <h4>1. Generation</h4>
+                <div style="margin: 10px 0;">
+                    <strong>Leptonen:</strong><br>
+                    e⁻, νₑ<br>
+                    <strong>Quarks:</strong><br>
+                    u, d
+                </div>
+                <div style="color: #4ecdc4;">
+                    T0: Schwächste ε-Werte<br>
+                    (stabile Materie)
+                </div>
+            </div>
+            <div class="generation">
+                <h4>2. Generation</h4>
+                <div style="margin: 10px 0;">
+                    <strong>Leptonen:</strong><br>
+                    μ⁻, νμ<br>
+                    <strong>Quarks:</strong><br>
+                    c, s
+                </div>
+                <div style="color: #4ecdc4;">
+                    T0: Mittlere ε-Werte<br>
+                    (instabile Anregungen)
+                </div>
+            </div>
+            <div class="generation">
+                <h4>3. Generation</h4>
+                <div style="margin: 10px 0;">
+                    <strong>Leptonen:</strong><br>
+                    τ⁻, ντ<br>
+                    <strong>Quarks:</strong><br>
+                    t, b
+                </div>
+                <div style="color: #4ecdc4;">
+                    T0: Stärkste ε-Werte<br>
+                    (sehr instabil)
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: linear-gradient(45deg, rgba(255, 235, 59, 0.1), rgba(78, 205, 196, 0.1)); border-radius: 15px; padding: 25px; margin: 30px 0;">
+            <h3>🎯 Zusätzliche Teilchen & T0-Vorhersagen</h3>
+            <ul style="list-style: none; margin: 15px 0;">
+                <li style="padding: 5px 0;"><strong>Graviton:</strong> Hypothetisches Spin-2 Teilchen → T0: Emergent aus T·m=1</li>
+                <li style="padding: 5px 0;"><strong>Axionen:</strong> Dunkle Materie Kandidaten → T0: ε ≈ 10⁻¹⁵ Anregungen</li>
+                <li style="padding: 5px 0;"><strong>Sterile Neutrinos:</strong> 4. Neutrino-Art → T0: Noch kleinere ε-Werte</li>
+                <li style="padding: 5px 0;"><strong>SUSY-Teilchen:</strong> Supersymmetrische Partner → T0: Nicht nötig</li>
+                <li style="padding: 5px 0;"><strong>Dunkle Materie:</strong> Unbekannte Teilchen → T0: ε ≪ 10⁻¹² Anregungen</li>
+                <li style="padding: 5px 0;"><strong>Magnetic Monopole:</strong> Magnetische Ladungen → T0: Spezielle Knotenmuster</li>
+            </ul>
+        </div>
+        
+        <div style="text-align: center; margin: 40px 0; padding: 30px; background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(255, 107, 157, 0.1)); border-radius: 15px;">
+            <h2 style="color: #00ffff;">Die ultimative Teilchen-Vereinheitlichung</h2>
+            <div class="equation-highlight">1 Feld · ∞ Anregungen = Alle Teilchen</div>
+            <p style="font-size: 1.2em; margin: 20px 0;">
+                Das Standard Model katalogisiert Hunderte von "verschiedenen" Teilchen.<br>
+                Die T0-Theorie zeigt: Es gibt nur <strong>ein Feld</strong> mit <strong>einem Parameter</strong>.<br>
+                Alle scheinbar verschiedenen Teilchen sind nur verschiedene Tanzschritte<br>
+                desselben fundamentalen Feldes δm(x,t).
+            </p>
+            <div style="font-size: 1.5em; color: #4ecdc4; font-weight: bold; margin-top: 20px;">
+                🌌 Ein Feld, unendliche Möglichkeiten! 🌌
+            </div>
+        </div>
+    </div>
+</body>
+</html>
