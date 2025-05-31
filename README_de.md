@@ -9,7 +9,8 @@ Das T0-Modell präsentiert einen revolutionären Ansatz zur Grundlagenphysik dur
 ```
 T0-Time-Mass-Duality/
 ├── 2/
-│   ├── pdf/                      # ✅ AKTUELLE Dokumente (25+ PDFs)
+│   ├── html/                     # ✅ Interaktive HTML-Explorationen
+│   ├── pdf/                      # ✅ AKTUELLE Dokumente (40+ PDFs)
 │   │   ├── Deutsch/              # ❌ VERALTETE Vorgängerversionen
 │   │   └── English/              # ❌ VERALTETE Vorgängerversionen
 │   └── tex/                      # ✅ AKTUELLE LaTeX-Quelldateien
@@ -24,102 +25,114 @@ T0-Time-Mass-Duality/
 
 Die folgenden Dokumente repräsentieren das vollständige, aktuelle T0-Modell-Framework:
 
+### Interaktive HTML-Explorationen
+
+**[T0 Theory Interaktiver Explorer](2/html/t0_theory_explorer_.html)** | **[Deutsche Version](2/html/t0_theory_explorer_de_.html)**  
+*Umfassende interaktive Übersicht über alle T0-Prinzipien: Von der revolutionären Zeit-Masse-Dualität bis zur deterministischen Quantenmechanik.*
+
+**[Die Einheiten-Revolution: Von E=mc² zu E=m](2/html/einheiten_revolution_.html)** | **[Deutsche Version](2/html/einheiten_revolution_de_.html)**  
+*Mathematischer Beweis der Identität zwischen E=mc² und E=m - dieselbe Physik, verschiedene Einheitensysteme!*
+
+**[Vollständiges Teilchenspektrum: Standard Model vs T0](2/html/complete_particle_spectrum_t0_.html)** | **[Deutsche Version](2/html/complete_particle_spectrum_de_.html)** | **[Englische Version](2/html/complete_particle_spectrum_en_.html)**  
+*Spektakulärer Vergleich: 61+ Standard Model Teilchen vs. 1 universelles T0-Feld mit unendlichen ε-Anregungen.*
+
+**[Neutrinos im universellen T0-Feld](2/html/t0_neutrinos_explorer_.html)** | **[Deutsche Version](2/html/t0_neutrinos_explorer_de_.html)** | **[Englische Version](2/html/t0_neutrinos_explorer_en_.html)**  
+*Elegante Lösung des Neutrino-Rätsels: Alle "Geister-Teilchen" als Grenzfall-Knoten δm(x,t) → 0 des universellen Feldes.*
+
+**[T0-Kryptografieanalyse: RSA-Algorithmus](2/html/rsa_cracking_t0_analysis_.html)** | **[Deutsche Version](2/html/rsa_analyse_t0_de_.html)** | **[Englische Version](2/html/rsa_analysis_t0_en_.html)**  
+*Theoretische Analyse: Wie T0-Simulationen die Effizienz von Faktorisierungsalgorithmen durch deterministische Quantenmechanik beeinflussen könnten.*
+
+**[T0-Auswirkungen auf Verschränkungsbasierte Kryptografie](2/html/t0_innsbruck_entanglement_analysis_.html)** | **[Deutsche Version](2/html/t0_verschraenkung_analyse_de_.html)** | **[Englische Version](2/html/t0_entanglement_analysis_en_.html)**  
+*Dramatische Bedrohung für Quantenkryptografie: Wie T0-Determinismus die Bell-basierte Sicherheit untergraben könnte.*
+
+**[T0 Deterministisches Quantencomputing](2/html/t0_quantum_computing_analysis_.html)** | **[Deutsche Version](2/html/t0_quantum_computing_de_.html)** | **[Englische Version](2/html/t0_quantum_computing_en_.html)**  
+*Revolution der Quanteninformatik: Von probabilistischen Algorithmen zu deterministischen Energiefeld-Evolutionen.*
+
 ### Energiebasierte Kernformulierungen (Fundamentale Basis)
 
-**[Reine Energie T0-Theorie: Die Verhältnis-basierte Revolution](2/pdf/Elimination_Of_Mass_Dirac_Lag.pdf)**  
-*Die ultimative Vereinfachung: Vollständige Elimination der Masse aus der Physik durch E = m Identität in natürlichen Einheiten. Revolutionäre Entdeckung, dass einfache Energierelationen 100,000% Genauigkeit erreichen, während komplexe Formeln nur 99,98% schaffen. Wahrhaft parameterfreie Physik ohne experimentelle Eingaben.*
+**[Reine Energie T0-Theorie: Die Verhältnis-basierte Revolution](2/pdf/Elimination_Of_Mass_Dirac_LagEn.pdf)** | **[Deutsche Version](2/pdf/Elimination_Of_Mass_Dirac_LagDe.pdf)**  
+*Die ultimative Vereinfachung: Vollständige Elimination der Masse durch E = m Identität in natürlichen Einheiten. Revolutionäre Entdeckung, dass einfache Energierelationen 100,000% Genauigkeit erreichen, während komplexe Formeln nur 99,98% schaffen. Wahrhaft parameterfreie Physik ohne experimentelle Eingaben.*
 
-**[T0-Modell Berechnungsverifikation: Skalenverhältnisse vs. CODATA-Werte](2/pdf/Elimination_Of_Mass_Dirac_Tabelle.pdf)**  
+**[T0-Modell Berechnungsverifikation: Skalenverhältnisse vs. CODATA-Werte](2/pdf/Elimination_Of_Mass_Dirac_TabelleEn.pdf)** | **[Deutsche Version](2/pdf/Elimination_Of_Mass_Dirac_TabelleDe.pdf)**  
 *Vollständige Verifikation der verhältnisbasierten Formulierung: 99,85% durchschnittliche Übereinstimmung mit CODATA-Werten bei allen Berechnungen, 14 neue testbare Vorhersagen. Mathematischer Beweis, dass reine Energieformulierung funktioniert und Einfachheit genauer ist als Komplexität.*
 
-**[Mathematische Kernformulierungen der Zeit-Masse-Dualitätstheorie](2/pdf/MathZeitMasseLagrangeEn.pdf)**  
+**[Mathematische Kernformulierungen der Zeit-Masse-Dualitätstheorie](2/pdf/MathZeitMasseLagrangeEn.pdf)** | **[Deutsche Version](2/pdf/MathZeitMasseLagrangeDe.pdf)**  
 *Wesentliche mathematische Formulierungen der energiebasierten Theorie mit vollständigen Lagrangedichten und universellem T0-Skalenverhältnis ξ aus der Higgs-Physik.*
+
+**[Elimination der Masse (Allgemeines Framework)](2/pdf/EliminationOfMassEn.pdf)** | **[Deutsche Version](2/pdf/EliminationOfMassDe.pdf)**  
+*Umfassende Untersuchung von Masseneliminationsverfahren im T0-Framework, etabliert Energie als fundamentale Dimension.*
+
+**[Vollständige Systemanalyse: E=mc² Identität](2/pdf/systemEn.pdf)** | **[Deutsche Version](2/pdf/systemDe.pdf)**  
+*Systematische Analyse der E=mc² Identität in verschiedenen Einheitensystemen, demonstriert die konzeptuelle Revolution der energiebasierten Physik.*
+
+**[E=mc² Revolutionäre Interpretation](2/pdf/E-mc2_En.pdf)** | **[Deutsche Version](2/pdf/E-mc2_De.pdf)**  
+*Revolutionäre Neuinterpretation von Einsteins berühmtester Gleichung als Identität in natürlichen Einheiten statt als Umrechnungsformel.*
 
 ### Revolutionäre Vereinfachungen (Lagrange, Dirac, Schrödinger)
 
-**[Vereinfachte Dirac-Gleichung in der T0-Theorie: Von 4×4-Matrizen zu Feldknoten](2/pdf/diracVereinfachtEn.pdf)**  
+**[Vereinfachte Dirac-Gleichung in der T0-Theorie: Von 4×4-Matrizen zu Feldknoten](2/pdf/diracVereinfachtEn.pdf)** | **[Deutsche Version](2/pdf/diracVereinfachtDe.pdf)**  
 *Revolutionäre Vereinfachung: Komplexe 4×4-Dirac-Gleichung → Einfache Felddynamik ∂²δm = 0. Zeigt, wie sich Spinor-Mystizismus auf Energieanregungsmuster reduziert, eliminiert Gamma-Matrizen und macht Dirac-Physik auf Bachelor-Niveau zugänglich.*
 
-**[Einfache Lagrange-Revolution: Von Standardmodell-Komplexität zur T0-Eleganz](2/pdf/LagrandianVergleichEn.pdf)**  
+**[Einfache Lagrange-Revolution: Von Standardmodell-Komplexität zur T0-Eleganz](2/pdf/LagrandianVergleichEn.pdf)** | **[Deutsche Version](2/pdf/LagrandianVergleichDe.pdf)**  
 *Paradigmenwechsel: Eine Gleichung ℒ = ε·(∂δm)² ersetzt 20+ Standardmodell-Felder. Zeigt, wie alle Physik aus universeller Energiefeld-Dynamik entsteht, eliminiert Antiteilchen-Duplizierung und reduziert maximale Komplexität zur ultimativen Einfachheit.*
 
-**[Einfacher Lagrange (Deutsche Kompaktversion)](2/pdf/lagrandian-einfach.pdf)**  
-*Kompakte deutsche Darstellung des universellen Lagrange-Durchbruchs.*
+**[Einfacher Lagrange (Kompaktversion)](2/pdf/lagrandian-einfachEn.pdf)** | **[Deutsche Version](2/pdf/lagrandian-einfachDe.pdf)**  
+*Kompakte Darstellung des universellen Lagrange-Durchbruchs, zeigt wie eine einzige Gleichung die Standardmodell-Komplexität ersetzt.*
 
-**[Einfacher Lagrange (Englisch)](2/pdf/lagrandian-einfachEn.pdf)**  
-*Englische Version, die zeigt, wie eine einzige Gleichung die Standardmodell-Komplexität ersetzt.*
-
-**[Integration der Dirac-Gleichung im T0-Modell](2/pdf/diracEn.pdf)**  
+**[Integration der Dirac-Gleichung im T0-Modell](2/pdf/diracEn.pdf)** | **[Deutsche Version](2/pdf/diracDe.pdf)**  
 *Technische Integration, die zeigt, wie die Dirac-Gleichung natürlich aus der T0-Zeit-Masse-Dualität hervorgeht mit geometrischer Ableitung der 4×4-Matrixstruktur aus Feldknoten-Rotationen.*
 
 ### Quantenmechanik-Revolution (Schrödinger zu deterministischen Feldern)
 
-**[Deterministische Quantenmechanik via T0-Energiefeld-Formulierung](2/pdf/QM-Detrmistic.pdf)**  
+**[Deterministische Quantenmechanik via T0-Energiefeld-Formulierung](2/pdf/QM-DetrmisticEn.pdf)** | **[Deutsche Version](2/pdf/QM-DetrmisticDe.pdf)**  
 *Vollständiger Ersatz der wahrscheinlichkeitsbasierten Quantenmechanik: Schrödingers Wahrscheinlichkeitswellen → Deterministische Energiefelder T(x,t) = 1/max(E(x,t), ω). Eliminiert alle QM-Interpretationsprobleme (Kollaps, Viele-Welten, Messproblem) durch eine einzige deterministische Realität.*
 
-**[QM-Relativität-Zeit-Masse-Theorie Teil 1](2/pdf/QMRelTimeMassPart1ZEn.pdf)**  
-*Erweiterte theoretische Grundlagen, die die Quantenmechanik-Revolution mit Relativität und Zeit-Masse-Dualitätsprinzipien verbinden.*
+**[Vollständige Myon g-2 Analyse im T0-Framework](2/pdf/CompleteMuon_g-2_AnalysisEn.pdf)** | **[Deutsche Version](2/pdf/CompleteMuon_g-2_AnalysisDe.pdf)**  
+*Anwendung der vereinfachten Energieformulierung: Universelle Leptonen-Korrektur a_ℓ^(T0) = 2,31 × 10⁻¹⁰ erklärt 9,2% der Myon g-2 Anomalie. Revolutionäre Vorhersage, dass alle Leptonen identische Quantenkorrekturen erhalten.*
+
+**[Dynamische Masse von Photonen und Nichtlokalität](2/pdf/DynMassePhotonenNichtlokalEn.pdf)** | **[Deutsche Version](2/pdf/DynMassePhotonenNichtlokalDe.pdf)**  
+*Energieabhängige Photonenmasse m_γ = ω aus der Energieformulierung, führt zu frequenzabhängigen Nichtlokalitätseffekten und modifizierten Bell-Ungleichungen.*
 
 ### Theoretische Grundlagen (Für das Verständnis)
 
-**[Feldtheoretische Ableitung des β-Parameters](2/pdf/DerivationVonBetaEn.pdf)**  
+**[Feldtheoretische Ableitung des β-Parameters](2/pdf/DerivationVonBetaEn.pdf)** | **[Deutsche Version](2/pdf/DerivationVonBetaDe.pdf)**  
 *Geometrische Ableitung des fundamentalen β = 2Gm/r Parameters aus Feldgleichungen, zeigt universelle T0-Methodologie mit lokalisierten Parametern ξ = 2√G·m.*
 
-**[Feldtheoretische Ableitung mit vollständigen Referenzen](2/pdf/DerivationVonBetaEnR.pdf)**  
-*Erweiterte Version mit 100+ Literaturverweisen, historischer Kontext von Planck zur modernen Quantenfeldtheorie.*
+**[Feldtheoretische Ableitung mit vollständigen Referenzen](2/pdf/DerivationVonBetaEnREn.pdf)** | **[Deutsche Version](2/pdf/DerivationVonBetaEnRDe.pdf)**  
+*Erweiterte Version mit 100+ Literaturverweisen, historischer Kontext von Planck zur modernen Quantenfeldtheorie. Enthält umfangreiche Quellenverweise, ist aber weniger vollständig als die Hauptversion.*
 
 ### Natürliche Einheiten und Fundamentalkonstanten
 
-**[Natürliche Einheitensysteme: Universelle Energiekonversion](2/pdf/NatEinheitenSystematikEn.pdf)**  
+**[Natürliche Einheitensysteme: Universelle Energiekonversion](2/pdf/NatEinheitenSystematikEn.pdf)** | **[Deutsche Version](2/pdf/NatEinheitenSystematikDe.pdf)**  
 *Umfassendes Framework, das Energie als fundamentale Dimension etabliert, mit vollständigen Konversionstabellen und Längenskala-Hierarchie über 61 Größenordnungen.*
 
-**[Parameter-Systemabhängigkeit: SI vs. Natürliche Einheiten](2/pdf/ParameterSystemdipendentEn.pdf)**  
+**[Parameter-Systemabhängigkeit: SI vs. Natürliche Einheiten](2/pdf/ParameterSystemdipendentEn.pdf)** | **[Deutsche Version](2/pdf/ParameterSystemdipendentDe.pdf)**  
 *Systematische Analyse, die dramatische Parameterwert-Unterschiede zwischen Einheitensystemen aufzeigt, mit Transformationsprotokollen zur Auflösung scheinbarer Inkonsistenzen.*
 
-**[Mathematischer Beweis: α = 1 in natürlichen Einheiten](2/pdf/ResolvingTheConstantsAlfaEn.pdf)**  
+**[Mathematischer Beweis: α = 1 in natürlichen Einheiten](2/pdf/ResolvingTheConstantsAlfaEn.pdf)** | **[Deutsche Version](2/pdf/ResolvingTheConstantsAlfaDe.pdf)**  
 *Rigoroser Beweis, dass die Feinstrukturkonstante in natürlichen Einheiten eins ist, löst das "Mysterium" von 1/137 als Einheitensystem-Artefakt auf.*
 
-**[Die Feinstrukturkonstante: Verschiedene Darstellungen](2/pdf/FeinstrukturkonstanteEn.pdf)**  
+**[Die Feinstrukturkonstante: Verschiedene Darstellungen](2/pdf/FeinstrukturkonstanteEn.pdf)** | **[Deutsche Version](2/pdf/FeinstrukturkonstanteDe.pdf)**  
 *Vollständige Analyse einschließlich Sommerfelds historischer harmonischer Zuordnungsmethodologie und ihrer Implikationen für die Interpretation von Fundamentalkonstanten.*
 
-**[Universelle Energierelationen für Mol- und Candela-Einheiten](2/pdf/Moll_CandelaEn.pdf)**  
+**[Universelle Energierelationen für Mol- und Candela-Einheiten](2/pdf/Moll_CandelaEn.pdf)** | **[Deutsche Version](2/pdf/Moll_CandelaDe.pdf)**  
 *Erweiterung des energiebasierten Frameworks zur vollständigen SI-Einheiten-Abdeckung, zeigt wie sogar Mol- und Candela-Einheiten aus Energieskalierungsprinzipien entstehen.*
-
-### Quantenfeldtheorie-Integration
-
-**[Vollständige Myon g-2 Analyse im T0-Framework](2/pdf/CompleteMuon_g-2_AnalysisEn.pdf)**  
-*Anwendung der vereinfachten Energieformulierung: Universelle Leptonen-Korrektur a_ℓ^(T0) = 2,31 × 10⁻¹⁰ erklärt 9,2% der Myon g-2 Anomalie. Revolutionäre Vorhersage, dass alle Leptonen identische Quantenkorrekturen erhalten.*
-
-**[Dynamische Masse von Photonen und Nichtlokalität](2/pdf/DynMassePhotonenNichtlokalEn.pdf)**  
-*Energieabhängige Photonenmasse m_γ = ω aus der Energieformulierung, führt zu frequenzabhängigen Nichtlokalitätseffekten und modifizierten Bell-Ungleichungen.*
 
 ### Kosmologische Anwendungen
 
-**[H₀-Parameter-Entstehung aus der Feldtheorie](2/pdf/Ho_En.pdf)**  
+**[H₀-Parameter-Entstehung aus der Feldtheorie](2/pdf/Ho_En.pdf)** | **[Deutsche Version](2/pdf/Ho_De.pdf)**  
 *Ableitung zeigt, dass H₀ aus der Feldtheorie als Übergangsskala zwischen lokalen und kosmischen Regimes hervorgeht, mit κ = H₀ im unendlichen Geometrielimit.*
 
-**[Reine Energieformulierung von H₀ und κ Parametern](2/pdf/Ho_EnergieEn.pdf)**  
+**[Reine Energieformulierung von H₀ und κ Parametern](2/pdf/Ho_EnergieEn.pdf)** | **[Deutsche Version](2/pdf/Ho_EnergieDe.pdf)**  
 *Revolutionäre H₀ = 68,0 km/s/Mpc Vorhersage aus reiner Theorie (H₀ = ξ¹⁶ × E_P), löst Hubble-Spannung mit 99,1% Übereinstimmung zu Planck-Messungen.*
 
-**[Temperatureinheiten und CMB-Analyse](2/pdf/TempEinheitenCMBEn.pdf)**  
+**[Temperatureinheiten und CMB-Analyse](2/pdf/TempEinheitenCMBEn.pdf)** | **[Deutsche Version](2/pdf/TempEinheitenCMBDe.pdf)**  
 *CMB-Temperaturentwicklung T(z) = T₀(1+z)(1 + β_T ln(1+z)) mit β_T = 1, vorhersagend T(z=1100) ≈ 24.000 K in universeller T0-Methodologie.*
-
-**[Kosmologische Rotverschiebungskorrektur](2/pdf/Rotverschiebung_korrektur.pdf)**  
-*Korrigierte wellenlängenabhängige Rotverschiebungsformel z(λ) = z₀(1 - ln(λ/λ₀)) mit ordnungsgemäßer Vorzeichenableitung und physikalischer Verifikation.*
 
 ### Fortgeschrittene theoretische Entwicklungen
 
-**[T0 vs ESM: Mathematische Äquivalenz-Analyse](2/pdf/T0vsESM_ConceptualAnalysis_En.pdf)**  
+**[T0 vs ESM: Mathematische Äquivalenz-Analyse](2/pdf/T0vsESM_ConceptualAnalysis_En.pdf)** | **[Deutsche Version](2/pdf/T0vsESM_ConceptualAnalysis_De.pdf)**  
 *Mathematische Äquivalenz zwischen T0-Modell (absolute Zeit, variable Masse) und Erweitertem Standardmodell durch logarithmische Transformation.*
-
-**[Pragmatischer Ansatz zur T0-Modell-Implementierung](2/pdf/PragmaticApproachT0-ModelEn.pdf)**  
-*Praktische Implementierungsstrategien zur Anwendung der T0-Methodologie auf reale Physikprobleme.*
-
-**[Das entstehende vereinheitlichte Framework](2/pdf/ausblicke_En.pdf)**  
-*Erforschung fundamentaler Feldbeziehungen, die potenzielle Einheit von Higgs-Feld, Vakuumkonstanten und intrinsischem Zeitfeld untersucht.*
-
-**[Elimination der Masse (Allgemein)](2/pdf/EliminationOfMass.pdf)**  
-*Allgemeine Untersuchung von Masseneliminationsverfahren im T0-Framework.*
 
 ## Schlüsselinnovationen
 
@@ -225,7 +238,8 @@ Die folgenden Dokumente repräsentieren das vollständige, aktuelle T0-Modell-Fr
 
 ## Repository-Zugang
 
-**📁 Hauptdokumente**: [2/pdf/](2/pdf/) - **Nur diese 25+ PDFs sind aktuell!**  
+**🌐 Interaktive Explorationen**: [2/html/](2/html/) - **Interaktive HTML-Visualisierungen und Simulationen**  
+**📁 Hauptdokumente**: [2/pdf/](2/pdf/) - **40+ aktuelle PDFs (deutsche/englische Versionen)**  
 **🔗 LaTeX-Quellen**: [2/tex/](2/tex/)  
 **🌐 Projekt-Website**: [T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/)
 
