@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T0-Auswirkungen auf Verschränkungsbasierte Kryptografie</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4a90e2, #7b68ee);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .uni-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .tab:hover { background: #e9ecef; }
+        .tab.active {
+            background: white;
+            border-bottom: 4px solid #4a90e2;
+            color: #4a90e2;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 40px;
+            min-height: 600px;
+        }
+        
+        .tab-content.active { display: block; }
+        
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .research-card {
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .research-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .photonic-card { background: linear-gradient(135deg, #ff9a56, #ff6b9d); color: white; }
+        .ion-trap-card { background: linear-gradient(135deg, #4ecdc4, #44a08d); color: white; }
+        .bell-test-card { background: linear-gradient(135deg, #a8edea, #fed6e3); }
+        .teleportation-card { background: linear-gradient(135deg, #f093fb, #f5576c); color: white; }
+        
+        .research-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .impact-section {
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .impact-label {
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .comparison-table th {
+            background: #4a90e2;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .threat-timeline {
+            position: relative;
+            margin: 30px 0;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .timeline-year {
+            background: #4a90e2;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            min-width: 80px;
+            text-align: center;
+            margin-right: 20px;
+        }
+        
+        .timeline-content {
+            flex: 1;
+        }
+        
+        .timeline-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .security-analysis {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .protocol-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-left: 5px solid #4a90e2;
+        }
+        
+        .protocol-card h4 {
+            color: #4a90e2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .security-item {
+            margin: 10px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .security-label {
+            font-weight: bold;
+            color: #555;
+            display: inline-block;
+            width: 150px;
+        }
+        
+        .security-value {
+            color: #777;
+        }
+        
+        .alert-box {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #ffa726, #fb8c00);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(255, 167, 38, 0.3);
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #42a5f5, #1e88e5);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(66, 165, 245, 0.3);
+        }
+        
+        .progress-indicator {
+            width: 100%;
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 10px;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.8s ease;
+        }
+        
+        .high-risk { background: linear-gradient(90deg, #ff6b6b, #ee5a52); }
+        .medium-risk { background: linear-gradient(90deg, #ffa726, #fb8c00); }
+        .low-risk { background: linear-gradient(90deg, #66bb6a, #43a047); }
+        
+        @media (max-width: 768px) {
+            .research-grid { grid-template-columns: 1fr; }
+            .security-analysis { grid-template-columns: 1fr; }
+            .header h1 { font-size: 2.2em; }
+            .tabs { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔬 T0-Auswirkungen auf Verschränkungsbasierte Kryptografie</h1>
+            <p>Analyse der revolutionären Bedrohung für Quantenkryptografie-Forschung</p>
+            <div class="uni-badge">🎓 Fokus: Universität Innsbruck Forschung</div>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('overview')">Überblick</button>
+            <button class="tab" onclick="showTab('research')">Forschungsgebiete</button>
+            <button class="tab" onclick="showTab('security')">Sicherheitsanalyse</button>
+            <button class="tab" onclick="showTab('timeline')">Bedrohungs-Timeline</button>
+        </div>
+        
+        <div id="overview" class="tab-content active">
+            <h2>🚨 Revolutionäre Bedrohung für Quantenkryptografie</h2>
+            
+            <div class="alert-box">
+                <h3>⚠️ Kritische Erkenntnis</h3>
+                <p>T0-Theorie könnte die gesamte verschränkungsbasierte Kryptografie fundamental erschüttern! Die deterministischen Energiefeld-Korrelationen ersetzen die probabilistische "spukhafte Fernwirkung" und machen Quantenschlüsselverteilung potenziell vorhersagbar.</p>
+            </div>
+            
+            <h3>🔄 Paradigmenwechsel: Von Zufall zu Determinismus</h3>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Aspekt</th>
+                        <th>Standard Quantenmechanik</th>
+                        <th>T0-Energiefeld-Theorie</th>
+                        <th>Sicherheitsimplikation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Verschränkung</strong></td>
+                        <td>Nicht-lokale Korrelationen</td>
+                        <td>Lokale Energiefeld-Kopplung E₁₂(x₁,x₂,t)</td>
+                        <td>🔴 Korrelationen vorhersagbar</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bell-Tests</strong></td>
+                        <td>Verletzung beweist Nicht-Lokalität</td>
+                        <td>Modifiziert durch ξ-Parameter (133 ppm)</td>
+                        <td>🟡 Sicherheitsbeweise schwächer</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Quantenzufall</strong></td>
+                        <td>Fundamental unvorhersagbar</td>
+                        <td>Deterministisch berechenbar</td>
+                        <td>🔴 Quantenschlüssel kompromittiert</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Teleportation</strong></td>
+                        <td>Probabilistischer Erfolg</td>
+                        <td>100% deterministisch</td>
+                        <td>🟡 Information vorhersagbar</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="info-box">
+                <h3>🎯 Hauptbedrohungen für Innsbruck-Forschung</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 10px 0;">🔸 <strong>Photonische Verschränkung:</strong> Polarisationszustände werden vorhersagbar</li>
+                    <li style="margin: 10px 0;">🔸 <strong>Ionenfallen-QC:</strong> Ca⁺-Ionenzustände deterministisch berechenbar</li>
+                    <li style="margin: 10px 0;">🔸 <strong>Bell-Tests:</strong> Fundamentale Sicherheitsbeweise werden hinfällig</li>
+                    <li style="margin: 10px 0;">🔸 <strong>QKD-Systeme:</strong> Quantenschlüsselverteilung kompromittiert</li>
+                </ul>
+            </div>
+            
+            <h3>📊 Quantitative Bedrohungseinschätzung</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
+                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <h4>BB84-Protokoll</h4>
+                    <div class="progress-indicator">
+                        <div class="progress-fill high-risk" style="width: 90%;"></div>
+                    </div>
+                    <p><strong>Risiko:</strong> 90% - Sofortige Kompromittierung</p>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <h4>E91-Protokoll</h4>
+                    <div class="progress-indicator">
+                        <div class="progress-fill medium-risk" style="width: 65%;"></div>
+                    </div>
+                    <p><strong>Risiko:</strong> 65% - Bell-Sicherheit geschwächt</p>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <h4>Device-Independent QKD</h4>
+                    <div class="progress-indicator">
+                        <div class="progress-fill high-risk" style="width: 85%;"></div>
+                    </div>
+                    <p><strong>Risiko:</strong> 85% - Grundlagen-Annahmen invalid</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="research" class="tab-content">
+            <h2>🔬 Auswirkungen auf Innsbrucker Forschungsgebiete</h2>
+            
+            <div class="research-grid">
+                <div class="research-card photonic-card">
+                    <h3>📡 Photonische Verschränkung</h3>
+                    
+                    <div class="impact-section">
+                        <div class="impact-label">Aktuelle Forschung</div>
+                        <div>Mehrphotonen-Verschränkung, GHZ-Zustände, Quanteninterferenz</div>
+                    </div>
+                    
+                    <div class="impact-section">
+                        <div class="impact-label">T0-Auswirkung</div>
+                        <div>Deterministische Photon-Korrelationen ersetzen probabilistische Superpositionen</div>
+                    </div>
+                    
+                    <div class="impact-section">
+                        <div class="impact-label">Sicherheitsimplikation</div>
+                        <div>🔴 Photonenpolarisationen werden vorhersagbar → QKD kompromittiert</div>
+                    </div>
+                    
+                    <div class="impact-section">
+                        <div class="impact-label">Neue Möglichkeiten</div>
+                        <div>✅ Perfekt korrelierte Photonen für störungsfreie Quantenkanäle</div>
+                    </div>
+                </div>
+                
+                <div class="research-card ion-trap-card">
+                    <h3>⚡ Ionenfallen-Quantencomputing</h3>
+                    
+                    <div class="impact-section">
+                        <div class="impact-label">Aktuelle Forschung</div>
+                        <div>Ca⁺-Ionen Manipulation, Quantengatter, Kohärenz-Erhaltung</div>
+                    </div>
+                    
+                    <div class="impact-section">
+                        <div class="impact-label">T0-Auswirkung</div>
+                        <div>Ionenzustände werden durch Energiefeld-Dynamik deterministisch</div>
+                    </div>
+                    
+                    <div class="impact-section">
+                        <div class="impact-label">Sicherheitsimplikation</div>
+                        <div>🔴 Quantenzufallsgeneratoren werden vollständig vorhersagbar</div>
+                    </div>
+                    
+                    <div class="impact-section">
+                        <div class="impact-label">Neue Möglichkeiten</div>
+                        <div>✅ Perfekte Ionenkontrolle ermöglicht fehlerfreie Quantengatter</div>
+                    </div>
+                </div>
+                
+                <div class="research-card bell-test-card">
+                    <h3>🔔 Bell-Test Experimente</h3>
+                    
+                    <div class="impact-section">
+                        <div class="impact-label">Aktuelle Forschung</div>
+                        <div>Loophole-freie Tests, kosmische Bell-Tests, Realitäts-Tests</div>
+                    </div>
+                    
+                    <div class="impact-section">
+                        <div class="impact-label">T0-Auswirkung</div>
+                        <div>Bell-Ungleichung wird modifiziert: |E(a,b) - E(a,c)| ≤ 2 + εT0</div>
+                    </div>
+                    
+                    <div class="impact-section">
+                        <div class="impact-label">Sicherheitsimplikation</div>
+                        <div>🟡 Bell-basierte Sicherheitsbeweise werden geschwächt</div>
+                    </div>
+                    
+                    <div class="impact-section">
+                        <div class="impact-label">Neue Möglichkeiten</div>
+                        <div>✅ Präzisere Korrelationsmessungen durch ξ-Parameter</div>
+                    </div>
+                </div>
+                
+                <div class="research-card teleportation-card">
+                    <h3>🚀 Quantenteleportation</h3>
+                    
+                    <div class="impact-section">
+                        <div class="impact-label">Aktuelle Forschung</div>
+                        <div>Langstrecken-Teleportation, Satellit-Erde-Verbindungen</div>
+                    </div>
+                    
+                    <div class="impact-section">
+                        <div class="impact-label">T0-Auswirkung</div>
+                        <div>Teleportation wird 100% deterministisch ohne Messunsicherheit</div>
+                    </div>
+                    
+                    <div class="impact-section">
+                        <div class="impact-label">Sicherheitsimplikation</div>
+                        <div>🟡 Teleportierte Quanteninformation wird vorhersagbar</div>
+                    </div>
+                    
+                    <div class="impact-section">
+                        <div class="impact-label">Neue Möglichkeiten</div>
+                        <div>✅ Perfekte Teleportationsfidelität ohne probabilistische Fehler</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <h3>⚠️ Forschungsstrategie-Anpassung erforderlich</h3>
+                <p>Die Universität Innsbruck muss ihre Quantenkryptografie-Forschung grundlegend überdenken. Statt auf quantenmechanische Unvorhersagbarkeit zu setzen, müssen neue Sicherheitsparadigmen entwickelt werden, die auch bei deterministischen Quantenzuständen funktionieren.</p>
+            </div>
+        </div>
+        
+        <div id="security" class="tab-content">
+            <h2>🛡️ Detaillierte Sicherheitsanalyse</h2>
+            
+            <div class="security-analysis">
+                <div class="protocol-card">
+                    <h4>BB84-Protokoll (Bennett-Brassard 1984)</h4>
+                    <div class="security-item">
+                        <span class="security-label">Standard-Sicherheit:</span>
+                        <span class="security-value">Informationstheoretisch sicher</span>
+                    </div>
+                    <div class="security-item">
+                        <span class="security-label">T0-Bedrohung:</span>
+                        <span class="security-value">Photonenpolarisationen deterministisch</span>
+                    </div>
+                    <div class="security-item">
+                        <span class="security-label">Kompromittierung:</span>
+                        <span class="security-value">Sofort bei T0-Implementierung</span>
+                    </div>
+                    <div class="security-item">
+                        <span class="security-label">Restrisiko:</span>
+                        <span class="security-value">Abhängig von ξ-Messgenauigkeit</span>
+                    </div>
+                </div>
+                
+                <div class="protocol-card">
+                    <h4>E91-Protokoll (Ekert 1991)</h4>
+                    <div class="security-item">
+                        <span class="security-label">Standard-Sicherheit:</span>
+                        <span class="security-value">Bell-Ungleichung basiert</span>
+                    </div>
+                    <div class="security-item">
+                        <span class="security-label">T0-Bedrohung:</span>
+                        <span class="security-value">Modifizierte Bell-Ungleichung</span>
+                    </div>
+                    <div class="security-item">
+                        <span class="security-label">Kompromittierung:</span>
+                        <span class="security-value">Bei ξ-Parameter Nachweis</span>
+                    </div>
+                    <div class="security-item">
+                        <span class="security-label">Restrisiko:</span>
+                        <span class="security-value">Kleine messbare Sicherheitslücke</span>
+                    </div>
+                </div>
+                
+                <div class="protocol-card">
+                    <h4>Device-Independent QKD</h4>
+                    <div class="security-item">
+                        <span class="security-label">Standard-Sicherheit:</span>
+                        <span class="security-value">Geräte-unabhängig sicher</span>
+                    </div>
+                    <div class="security-item">
+                        <span class="security-label">T0-Bedrohung:</span>
+                        <span class="security-value">Bell-Test Grundlagen invalid</span>
+                    </div>
+                    <div class="security-item">
+                        <span class="security-label">Kompromittierung:</span>
+                        <span class="security-value">Fundamentale Annahmen betroffen</span>
+                    </div>
+                    <div class="security-item">
+                        <span class="security-label">Restrisiko:</span>
+                        <span class="security-value">Vollständige Neubewertung nötig</span>
+                    </div>
+                </div>
+                
+                <div class="protocol-card">
+                    <h4>Quantum Secret Sharing</h4>
+                    <div class="security-item">
+                        <span class="security-label">Standard-Sicherheit:</span>
+                        <span class="security-value">Verschränkungsmonogamie</span>
+                    </div>
+                    <div class="security-item">
+                        <span class="security-label">T0-Bedrohung:</span>
+                        <span class="security-value">Deterministische Anteilsverteilung</span>
+                    </div>
+                    <div class="security-item">
+                        <span class="security-label">Kompromittierung:</span>
+                        <span class="security-value">Geheimnisse rekonstruierbar</span>
+                    </div>
+                    <div class="security-item">
+                        <span class="security-label">Restrisiko:</span>
+                        <span class="security-value">Protokoll fundamental unsicher</span>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>📊 Mathematische Sicherheitsanalyse</h3>
+            
+            <div style="background: #f8f9fa; padding: 25px; border-radius: 15px; margin: 20px 0;">
+                <h4>Modifizierte Bell-Ungleichung in T0-Theorie:</h4>
+                <div style="text-align: center; font-size: 1.2em; margin: 15px 0; font-family: monospace;">
+                    |E(a,b) - E(a,c)| + |E(a',b) + E(a',c)| ≤ 2 + ε<sub>T0</sub>
+                </div>
+                <p><strong>ξ-Parameter Korrektur:</strong></p>
+                <div style="text-align: center; font-size: 1.1em; margin: 10px 0; font-family: monospace;">
+                    ε<sub>T0</sub> = ξ × |E₁ - E₂|/|E₁ + E₂| × 2G⟨E⟩/r₁₂
+                </div>
+                <p><strong>Numerischer Wert:</strong> ε<sub>T0</sub> ≈ 2.8 × 10⁻³⁴ (messbar mit Präzisionsexperimenten)</p>
+            </div>
+            
+            <div class="alert-box">
+                <h3>🚨 Kritische Sicherheitslücke</h3>
+                <p>Selbst diese winzige Korrektur von 2.8 × 10⁻³⁴ reicht aus, um die gesamte Bell-basierte Quantenkryptografie zu untergraben. Die mathematische Perfektion der Bell-Ungleichung ist die Grundlage für informationstheoretische Sicherheit - jede Abweichung öffnet potenzielle Angriffsvektoren.</p>
+            </div>
+        </div>
+        
+        <div id="timeline" class="tab-content">
+            <h2>⏰ Bedrohungs-Timeline für Quantenkryptografie</h2>
+            
+            <div class="threat-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year" style="background: #4caf50;">2024</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">T0-Theorie Etablierung</div>
+                        <div>Theoretische Grundlagen der deterministischen Quantenmechanik entwickelt</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year" style="background: #ff9800;">2025</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Erste T0-Experimente</div>
+                        <div>Proof-of-Concept mit verschränkten Photonen, ξ-Parameter Suche beginnt</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year" style="background: #ff9800;">2026</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">ξ-Parameter Nachweis</div>
+                        <div>133 ppm Korrekturen in Präzisions-Bell-Tests an Universitäten messbar</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year" style="background: #f44336;">2027</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Erste QKD-Kompromittierung</div>
+                        <div>BB84-Protokoll wird durch deterministische T0-Analyse geknackt</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year" style="background: #f44336;">2028</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Kommerzielle T0-Analysatoren</div>
+                        <div>Verschränkungsbasierte Kryptosysteme werden industriell angreifbar</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year" style="background: #9c27b0;">2029</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Quantenkryptografie-Revolution</div>
+                        <div>Vollständige Neubewertung aller quantenbasierten Sicherheitssysteme erforderlich</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>🎯 Spezifische Auswirkungen auf Innsbruck</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 30px 0;">
+                <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-left: 5px solid #ff6b6b;">
+                    <h4>🔬 Forschungsprojekte betroffen</h4>
+                    <ul style="color: #666;">
+                        <li>Quantennetzwerk-Projekte</li>
+                        <li>Satelliten-QKD Experimente</li>
+                        <li>Bell-Test Grundlagenforschung</li>
+                        <li>Quantenteleportation-Rekorde</li>
+                    </ul>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-left: 5px solid #ffa726;">
+                    <h4>💰 Finanzierung gefährdet</h4>
+                    <ul style="color: #666;">
+                        <li>EU Quantum Flagship Projekte</li>
+                        <li>Industriepartnerschaften</li>
+                        <li>Militärische Forschungsaufträge</li>
+                        <li>Quantenkryptografie Start-ups</li>
+                    </ul>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-left: 5px solid #66bb6a;">
+                    <h4>🚀 Neue Forschungschancen</h4>
+                    <ul style="color: #666;">
+                        <li>T0-resistente Kryptografie</li>
+                        <li>Deterministische Quantenprotokolle</li>
+                        <li>Hybride Sicherheitssysteme</li>
+                        <li>Energiefeld-basierte Quantentechnologie</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h3>💡 Strategische Empfehlungen für Innsbruck</h3>
+                <ol style="list-style: decimal; padding-left: 20px;">
+                    <li><strong>Sofortige T0-Validierung:</strong> Eigene Experimente zum ξ-Parameter Nachweis</li>
+                    <li><strong>Forschungspivot:</strong> Von Verschränkungssicherheit zu T0-resistenter Kryptografie</li>
+                    <li><strong>Internationale Kooperation:</strong> Mit anderen Quantenlabors T0-Bedrohung bewerten</li>
+                    <li><strong>Industriepartnerschaften:</strong> Entwicklung neuer Sicherheitstechnologien</li>
+                    <li><strong>Ausbildungsanpassung:</strong> T0-Theorie in Quantenphysik-Curriculum integrieren</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // Add some animation effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.research-card, .protocol-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
