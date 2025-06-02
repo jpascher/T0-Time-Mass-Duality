@@ -729,36 +729,93 @@
         </div>
     </div>
 
+    <!-- Facebook Browser Detection -->
+    <div id="facebook-notice" style="display: none; position: fixed; top: 0; left: 0; right: 0; background: #ff6b6b; color: white; padding: 10px; text-align: center; z-index: 9999; font-size: 0.9rem;">
+        📱 Für beste Erfahrung: Tippen Sie auf "..." → "Im Browser öffnen" | 
+        📱 For best experience: Tap "..." → "Open in Browser"
+        <button onclick="document.getElementById('facebook-notice').style.display='none'" style="background: white; color: #ff6b6b; border: none; padding: 5px 10px; border-radius: 15px; margin-left: 10px; cursor: pointer;">×</button>
+    </div>
+
     <script>
+        // Facebook Browser Detection
+        function detectFacebookBrowser() {
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Facebook") > -1);
+        }
+
+        // Show notice for Facebook users
+        if (detectFacebookBrowser()) {
+            document.getElementById('facebook-notice').style.display = 'block';
+        }
+
         function switchLang(lang) {
-            // Update buttons
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.querySelector(`[onclick="switchLang('${lang}')"]`).classList.add('active');
-            
-            // Show/hide content
-            document.getElementById('content-de').classList.toggle('hidden', lang !== 'de');
-            document.getElementById('content-en').classList.toggle('hidden', lang !== 'en');
+            try {
+                // Update buttons
+                const buttons = document.querySelectorAll('.lang-btn');
+                buttons.forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                const activeBtn = document.querySelector(`[onclick="switchLang('${lang}')"]`);
+                if (activeBtn) {
+                    activeBtn.classList.add('active');
+                }
+                
+                // Show/hide content - Simple approach for Facebook browser
+                const deContent = document.getElementById('content-de');
+                const enContent = document.getElementById('content-en');
+                
+                if (lang === 'de') {
+                    deContent.style.display = 'block';
+                    enContent.style.display = 'none';
+                } else {
+                    deContent.style.display = 'none';
+                    enContent.style.display = 'block';
+                }
+            } catch (e) {
+                console.log('Language switch error:', e);
+            }
         }
 
         // Optimize for mobile performance
         document.addEventListener('DOMContentLoaded', function() {
-            // Smooth scrolling for iOS
-            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-                document.body.style.webkitOverflowScrolling = 'touch';
+            try {
+                // Smooth scrolling for iOS
+                if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+                    document.body.style.webkitOverflowScrolling = 'touch';
+                }
+
+                // Initial language setup
+                switchLang('de');
+            } catch (e) {
+                console.log('Setup error:', e);
             }
         });
 
         // Prevent zoom on double tap for better mobile experience
         let lastTouchEnd = 0;
         document.addEventListener('touchend', function (event) {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
+            try {
+                const now = (new Date()).getTime();
+                if (now - lastTouchEnd <= 300) {
+                    event.preventDefault();
+                }
+                lastTouchEnd = now;
+            } catch (e) {
+                // Ignore errors
             }
-            lastTouchEnd = now;
         }, false);
+
+        // Enhanced link handling for Facebook browser
+        document.addEventListener('click', function(event) {
+            const link = event.target.closest('a');
+            if (link && link.href && detectFacebookBrowser()) {
+                // Add slight delay to help Facebook browser
+                setTimeout(function() {
+                    window.open(link.href, '_blank');
+                }, 100);
+            }
+        });
     </script>
 </body>
 </html>
