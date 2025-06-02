@@ -729,70 +729,152 @@
         </div>
     </div>
 
-    <!-- Facebook Browser Detection -->
-    <div id="facebook-notice" style="display: none; position: fixed; top: 0; left: 0; right: 0; background: #ff6b6b; color: white; padding: 10px; text-align: center; z-index: 9999; font-size: 0.9rem;">
-        📱 Für beste Erfahrung: Tippen Sie auf "..." → "Im Browser öffnen" | 
-        📱 For best experience: Tap "..." → "Open in Browser"
-        <button onclick="document.getElementById('facebook-notice').style.display='none'" style="background: white; color: #ff6b6b; border: none; padding: 5px 10px; border-radius: 15px; margin-left: 10px; cursor: pointer;">×</button>
+    <!-- Facebook Browser Detection & Instructions -->
+    <div id="facebook-notice" style="display: none; position: fixed; top: 0; left: 0; right: 0; background: linear-gradient(45deg, #ff6b6b, #4ecdc4); color: white; padding: 15px; text-align: center; z-index: 9999; font-size: 0.9rem; box-shadow: 0 2px 10px rgba(0,0,0,0.3);">
+        <div style="font-weight: bold; margin-bottom: 8px;">🚨 FACEBOOK BROWSER PROBLEM 🚨</div>
+        <div style="margin-bottom: 8px;">
+            <strong>DEUTSCH:</strong> Tippen Sie UNTEN auf "Im Browser öffnen" ✅<br>
+            <strong>ENGLISH:</strong> Tap "Open in Browser" at the BOTTOM ✅
+        </div>
+        <div style="font-size: 0.8rem; margin-bottom: 8px;">
+            📱 Ignorieren Sie "Facebook erneut öffnen" - Wählen Sie "Browser" oder "Chrome/Safari"
+        </div>
+        <button onclick="hideFacebookNotice()" style="background: white; color: #ff6b6b; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-weight: bold;">Verstanden / Got it ✓</button>
+    </div>
+
+    <!-- Fallback Notice for All Users -->
+    <div id="mobile-notice" style="background: rgba(78, 205, 196, 0.2); color: white; padding: 10px; text-align: center; font-size: 0.85rem; border-bottom: 1px solid rgba(78, 205, 196, 0.3);">
+        📱 <strong>Beste Erfahrung:</strong> Links öffnen im Standard-Browser (Chrome/Safari) | 
+        <strong>Best experience:</strong> Open links in default browser
+        <button onclick="document.getElementById('mobile-notice').style.display='none'" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid white; padding: 4px 8px; border-radius: 10px; margin-left: 10px; cursor: pointer; font-size: 0.8rem;">×</button>
     </div>
 
     <script>
-        // Facebook Browser Detection
+        // Enhanced Facebook Browser Detection
         function detectFacebookBrowser() {
             const ua = navigator.userAgent || navigator.vendor || window.opera;
-            return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Facebook") > -1);
+            // More comprehensive Facebook detection
+            return (
+                ua.indexOf("FBAN") > -1 || 
+                ua.indexOf("FBAV") > -1 || 
+                ua.indexOf("Facebook") > -1 ||
+                ua.indexOf("FB_IAB") > -1 ||
+                ua.indexOf("FB4A") > -1
+            );
         }
 
-        // Show notice for Facebook users
-        if (detectFacebookBrowser()) {
-            document.getElementById('facebook-notice').style.display = 'block';
+        // Enhanced In-App Browser Detection
+        function detectInAppBrowser() {
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            return (
+                detectFacebookBrowser() ||
+                ua.indexOf("Instagram") > -1 ||
+                ua.indexOf("Twitter") > -1 ||
+                ua.indexOf("LinkedIn") > -1 ||
+                ua.indexOf("WhatsApp") > -1
+            );
         }
+
+        function hideFacebookNotice() {
+            document.getElementById('facebook-notice').style.display = 'none';
+            // Remember user dismissed notice
+            try {
+                localStorage.setItem('facebook-notice-dismissed', 'true');
+            } catch (e) {
+                // Ignore storage errors
+            }
+        }
+
+        // Show appropriate notices
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                const isDismissed = localStorage.getItem('facebook-notice-dismissed') === 'true';
+                
+                if (detectFacebookBrowser() && !isDismissed) {
+                    document.getElementById('facebook-notice').style.display = 'block';
+                    // Hide mobile notice if Facebook notice is shown
+                    document.getElementById('mobile-notice').style.display = 'none';
+                } else if (detectInAppBrowser()) {
+                    // Show general mobile notice for other in-app browsers
+                    document.getElementById('mobile-notice').style.display = 'block';
+                }
+            } catch (e) {
+                console.log('Notice setup error:', e);
+            }
+        });
 
         function switchLang(lang) {
             try {
-                // Update buttons
+                // Update buttons with more robust selection
                 const buttons = document.querySelectorAll('.lang-btn');
                 buttons.forEach(btn => {
                     btn.classList.remove('active');
                 });
                 
-                const activeBtn = document.querySelector(`[onclick="switchLang('${lang}')"]`);
-                if (activeBtn) {
-                    activeBtn.classList.add('active');
-                }
+                // Find button more reliably
+                const allButtons = document.querySelectorAll('.lang-btn');
+                allButtons.forEach(btn => {
+                    if (btn.textContent.trim() === (lang === 'de' ? 'DE' : 'EN')) {
+                        btn.classList.add('active');
+                    }
+                });
                 
-                // Show/hide content - Simple approach for Facebook browser
+                // Show/hide content - Ultra-simple approach for Facebook browser
                 const deContent = document.getElementById('content-de');
                 const enContent = document.getElementById('content-en');
                 
-                if (lang === 'de') {
-                    deContent.style.display = 'block';
-                    enContent.style.display = 'none';
-                } else {
-                    deContent.style.display = 'none';
-                    enContent.style.display = 'block';
+                if (deContent && enContent) {
+                    if (lang === 'de') {
+                        deContent.style.display = 'block';
+                        enContent.style.display = 'none';
+                        deContent.classList.remove('hidden');
+                        enContent.classList.add('hidden');
+                    } else {
+                        deContent.style.display = 'none';
+                        enContent.style.display = 'block';
+                        deContent.classList.add('hidden');
+                        enContent.classList.remove('hidden');
+                    }
                 }
             } catch (e) {
                 console.log('Language switch error:', e);
+                // Fallback: reload page with language parameter
+                try {
+                    window.location.hash = lang;
+                } catch (e2) {
+                    // Final fallback: do nothing
+                }
             }
         }
 
-        // Optimize for mobile performance
+        // Enhanced mobile optimizations
         document.addEventListener('DOMContentLoaded', function() {
             try {
                 // Smooth scrolling for iOS
                 if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
                     document.body.style.webkitOverflowScrolling = 'touch';
+                    document.body.style.overflowScrolling = 'touch';
                 }
 
                 // Initial language setup
-                switchLang('de');
+                const hash = window.location.hash.replace('#', '');
+                const initialLang = (hash === 'en') ? 'en' : 'de';
+                switchLang(initialLang);
+
+                // Handle language from URL hash
+                window.addEventListener('hashchange', function() {
+                    const newHash = window.location.hash.replace('#', '');
+                    if (newHash === 'en' || newHash === 'de') {
+                        switchLang(newHash);
+                    }
+                });
+
             } catch (e) {
                 console.log('Setup error:', e);
             }
         });
 
-        // Prevent zoom on double tap for better mobile experience
+        // Prevent zoom on double tap - enhanced for Facebook
         let lastTouchEnd = 0;
         document.addEventListener('touchend', function (event) {
             try {
@@ -802,20 +884,43 @@
                 }
                 lastTouchEnd = now;
             } catch (e) {
+                // Ignore errors in Facebook browser
+            }
+        }, { passive: false });
+
+        // Enhanced link handling for In-App browsers
+        document.addEventListener('click', function(event) {
+            try {
+                const link = event.target.closest('a');
+                if (link && link.href && detectInAppBrowser()) {
+                    // For external links, add target="_blank" if not present
+                    if (link.href.startsWith('http') && !link.target) {
+                        link.target = '_blank';
+                        link.rel = 'noopener noreferrer';
+                    }
+                }
+            } catch (e) {
                 // Ignore errors
             }
-        }, false);
-
-        // Enhanced link handling for Facebook browser
-        document.addEventListener('click', function(event) {
-            const link = event.target.closest('a');
-            if (link && link.href && detectFacebookBrowser()) {
-                // Add slight delay to help Facebook browser
-                setTimeout(function() {
-                    window.open(link.href, '_blank');
-                }, 100);
-            }
         });
+
+        // Facebook-specific fixes
+        if (detectFacebookBrowser()) {
+            // Disable some animations that cause problems in Facebook browser
+            document.addEventListener('DOMContentLoaded', function() {
+                try {
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        .card:hover { transform: none !important; }
+                        .card-link:active { transform: scale(0.98) !important; }
+                        * { transition-duration: 0.1s !important; }
+                    `;
+                    document.head.appendChild(style);
+                } catch (e) {
+                    // Ignore
+                }
+            });
+        }
     </script>
 </body>
 </html>
