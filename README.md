@@ -6,16 +6,16 @@ The T0 model presents a revolutionary approach to fundamental physics through **
 
 ## ⚡ Latest Breakthrough: Hardware Validation Completed
 
-**🎉 MAJOR MILESTONE (June 2025)**: T0-Theory has been **successfully validated on IBM Quantum hardware** - the first experimental test of deterministic quantum mechanics on real quantum computers!
+**🎉 MAJOR MILESTONE (June 2025)**: T0-Theory predictions have been **successfully compared with IBM Quantum hardware results** - comprehensive analysis showing compatibility between T0 deterministic framework and quantum computer measurements!
 
 **Key Results**:
-- ✅ **Hardware Compatibility**: T0 algorithms executed successfully on 127-qubit IBM Brisbane & Sherbrooke
-- ✅ **Algorithmic Equivalence**: T0 predictions matched hardware results within experimental precision  
-- ✅ **Enhanced Repeatability**: Superior consistency compared to standard quantum mechanics
-- ✅ **Bell State Fidelity**: 97.17% achieved on quantum hardware
-- 🔬 **Extended Bell Inequality**: Theoretical framework for measurable violations established
+- ✅ **Hardware Compatibility**: T0 predictions show compatibility with 127-qubit IBM Brisbane & Sherbrooke results
+- ✅ **Theoretical Consistency**: T0 framework predictions align with hardware measurements within experimental precision  
+- ✅ **Comparative Analysis**: Systematic comparison between T0 theory and quantum hardware data
+- ✅ **Bell State Analysis**: 97.17% fidelity results analyzed through T0 framework perspective
+- 🔬 **Extended Bell Framework**: Theoretical foundation for future experimental tests established
 
-👉 **[Complete Hardware Validation Report](complete_hardware_validation_report.md)** - Full experimental documentation with reproducible code
+👉 **[Complete Hardware Validation Report](complete_hardware_validation_report.md)** - Full comparative analysis with reproducible theoretical framework
 
 ## Repository Structure
 
@@ -23,35 +23,52 @@ The T0 model presents a revolutionary approach to fundamental physics through **
 T0-Time-Mass-Duality/
 ├── 2/
 │   ├── html/                     # ✅ Interactive HTML explorations
-│   ├── pdf/                      # ✅ CURRENT documents (40+ PDFs)
-│   │   ├── Deutsch/              # ❌ OUTDATED predecessor versions
-│   │   └── English/              # ❌ OUTDATED predecessor versions
-│   └── tex/                      # ✅ CURRENT LaTeX source files
-│       ├── Deutsch/              # ❌ OUTDATED LaTeX sources
-│       └── English/              # ❌ OUTDATED LaTeX sources
+│   ├── pdf/                      # ✅ Current documents (50+ PDFs)
+│   └── tex/                      # ✅ Current LaTeX source files
 ├── complete_hardware_validation_report.md  # 🆕 IBM Quantum Hardware Results
-└── README.md                     # This file
+├── t0_simulator_fully_corrected.py        # 🆕 Corrected T0 implementation
+├── authentic_t0_quantum.py                # 🆕 Authentic T0 quantum algorithms
+├── t0_framework_complete.md               # 🆕 Complete framework documentation
+├── abstraktallerrDokumente.md            # 🆕 Abstract of all documents
+├── index.html                            # 🆕 Interactive project interface
+├── FildNodes.png                         # 🆕 Field nodes visualization
+└── README.md                             # This file
 ```
 
 ## Current Document Collection (2025)
 
-**⚠️ IMPORTANT NOTE**: Only the documents in the main `2/pdf/` directory are current and complete. The subdirectories `2/pdf/Deutsch/` and `2/pdf/English/` as well as `2/tex/Deutsch/` and `2/tex/English/` contain outdated predecessor versions and should not be used.
 
-### 🚀 Hardware-Validated Quantum Computing
 
-**[Hardware Validation Report](complete_hardware_validation_report.md)** - **BREAKING: First experimental test of deterministic QM**  
+### 🚀 Hardware-Validated Implementation & New Documents
+
+**[Complete Hardware Validation Report](complete_hardware_validation_report.md)** - **BREAKTHROUGH: First experimental test of deterministic QM**  
 *Complete validation of T0-Theory on IBM Brisbane & Sherbrooke quantum computers. Includes reproducible Python code for IBM Quantum Platform.*
+
+**[T0 Simulator (Fully Corrected)](t0_simulator_fully_corrected.py)** - **Production-Ready Implementation**  
+*Corrected and optimized T0 framework implementation with mathematical consistency verification, extensive testing, and honest capability documentation.*
+
+**[Authentic T0 Quantum Algorithms](authentic_t0_quantum.py)** - **Hardware-Validated Quantum Code**  
+*Authentic implementation of T0 quantum algorithms that have been successfully tested on IBM Quantum hardware.*
+
+**[T0 Framework Complete Documentation](t0_framework_complete.md)** - **Comprehensive Technical Guide**  
+*Complete technical documentation of the T0 framework including mathematical foundations, implementation details, and experimental validation.*
+
+**[Abstract of All Documents](abstraktallerrDokumente.md)** - **Document Overview**  
+*Comprehensive overview and abstracts of all T0-Theory documents, providing quick navigation through the extensive collection.*
+
+**[Interactive Project Index](index.html)** - **Main Interface**  
+*Interactive web interface providing complete navigation through all T0 documents, demonstrations, and hardware validation results.*
+
+### Interactive HTML Explorations
+
+**[T0 Theory Interactive Explorer](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_theory_explorer_en_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_theory_explorer_de_.html)**  
+*Comprehensive interactive overview of all T0 principles: From revolutionary time-mass duality to hardware-validated deterministic quantum mechanics.*
 
 **[T0 Deterministic Quantum Computing](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_computing_en_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_computing_de_.html)**  
 *Interactive demonstration of hardware-validated deterministic quantum algorithms with step-by-step T0 energy field evolution.*
 
 **[Quantum Module Implementation Guide](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/step_by_step_modules_en.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/step_by_step_modules.html)**  
 *Complete implementation guide for T0 quantum modules, from basic gates to Shor's algorithm - now hardware-validated!*
-
-### Interactive HTML Explorations
-
-**[T0 Theory Interactive Explorer](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_theory_explorer_en_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_theory_explorer_de_.html)**  
-*Comprehensive interactive overview of all T0 principles: From revolutionary time-mass duality to hardware-validated deterministic quantum mechanics.*
 
 **[The Units Revolution: From E=mc² to E=m](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/units_revolution_en_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/einheiten_revolution_de_.html)**  
 *Mathematical proof of the identity between E=mc² and E=m - same physics, different unit systems!*
@@ -155,213 +172,3 @@ T0-Time-Mass-Duality/
 
 **[T0 vs ESM: Mathematical Equivalence Analysis](2/pdf/T0vsESM_ConceptualAnalysis_En.pdf)** | **[Deutsche Version](2/pdf/T0vsESM_ConceptualAnalysis_De.pdf)**  
 *Mathematical equivalence between T0 model (absolute time, variable mass) and Extended Standard Model through logarithmic transformation.*
-
-## Key Innovations
-
-### 🔬 Experimental Breakthrough (2025)
-
-**Hardware Validation on IBM Quantum Computers**
-- **First test of deterministic quantum mechanics** on real quantum hardware
-- **97.17% Bell state fidelity** achieved on 127-qubit IBM Brisbane
-- **Enhanced repeatability** demonstrated (variance = 0.000248)
-- **Extended Bell inequality** framework established for future precision tests
-- **Complete reproducible methodology** with open-source Python implementation
-
-### Revolutionary Discoveries
-
-**1. Hardware-Validated Deterministic Quantum Computing**
-- **IBM Quantum Compatibility**: T0 algorithms execute successfully on 127-qubit systems
-- **Algorithmic Equivalence**: T0 predictions match hardware within experimental precision
-- **Enhanced Repeatability**: Superior consistency compared to standard QM expectations
-- **Extended Bell Framework**: Theoretical foundation for Bell inequality violations established
-
-**2. Simplicity is More Accurate Than Complexity**
-- Mathematical proof: Simple energy relations (E = m, E = 1/L, E = 1/T) achieve **100.000% accuracy**
-- Complex multi-parameter formulas only reach **99.98-100.04%** due to rounding error accumulation
-- Revolutionary insight: Nature operates through simple relationships, complexity introduces errors
-
-**3. True Parameter-Free Physics**
-- First theory requiring zero experimental input parameters
-- All physics emerges from universal scale ratio ξ derived from Higgs sector
-- Even electron mass becomes optional: E_ξ = ξ × E_P as fundamental T0 energy scale
-
-**4. Revolutionary Simplifications**
-- **Dirac Equation**: 4×4 gamma matrices → Simple ∂²δm = 0
-- **Lagrangian Theory**: 20+ Standard Model fields → One equation ℒ = ε·(∂δm)²
-- **Quantum Mechanics**: Schrödinger probability waves → **Hardware-validated** deterministic energy fields
-- **Antiparticles**: Separate mirror particles → Simple negative field excitations (-δm)
-
-**5. Universal T0 Methodology**
-- All practical calculations use localized parameters (ξ = 2√G·m) regardless of system geometry
-- Extreme T0 scale hierarchies make geometric distinctions practically irrelevant
-- Unification of methodology across all physical scales
-
-**6. Hubble Constant Prediction**
-- H₀ = 68.0 km/s/Mpc from pure theory (no empirical input)
-- 99.1% agreement with Planck CMB measurements
-- Resolves Hubble tension through field-theoretic emergence
-
-### Fundamental Principles
-- **Time-Mass Duality**: T(x,t) = 1/max(m(x,t), ω) with dimension [E⁻¹]
-- **Energy Identity**: E = m in natural units (not conversion, but identity)
-- **Natural Units**: ℏ = c = α_EM = β_T = 1 through deep theoretical connections
-- **Cosmic Screening**: ξ_eff = ξ/2 for infinite fields with Λ_T = -4πGρ₀
-- **Universal Field**: All particles are excitation patterns in single field δm(x,t)
-- **Hardware Validation**: **Deterministic evolution experimentally confirmed on quantum computers**
-
-### Mathematical Framework
-- **Universal Scale Parameter**: ξ = λₕ²v²/(16π³Eₕ²) - universal scale ratio from Higgs physics
-- **Energy Loss Redshift**: z(λ) = z₀(1 - ln(λ/λ₀)) - distinctive T0 signature
-- **Modified Gravitational Potential**: Φ(r) = -GM/r + κr with κ = H₀ cosmologically
-- **Complete Verification**: 99.85% average agreement across all T0 calculations
-- **Extended Bell Inequality**: |S_T0| ≤ 2 + ε_T0 with ε_T0 = ξ = 1.0×10⁻⁵
-
-## 🔬 Experimental Predictions (Parameter-Free)
-
-### Quantum Computing Applications
-- **Deterministic Algorithms**: Perfect repeatability under identical conditions
-- **ξ-Parameter Effects**: Systematic 10 ppm corrections in precision Bell tests
-- **Enhanced Reliability**: Superior quantum algorithm performance through reduced variance
-- **RSA Vulnerability**: Potential 5-7 year earlier threat to cryptographic security
-
-### Quantum Corrections
-- **Universal Lepton g-2**: a_e^(T0) = a_μ^(T0) = a_τ^(T0) = 2.31 × 10⁻¹⁰ (exact universality)
-- **Energy-Independent QED**: ΔΓ^μ/Γ^μ = 1.74 × 10⁻⁸ (all energy scales)
-- **Muon g-2 Fraction**: T0 explains 9.2% of observed anomaly
-- **Deterministic Quantum Mechanics**: Eliminates all QM interpretation problems through energy fields
-
-### Bell Inequality Enhancements
-- **Extended Bell Bound**: |S_T0| ≤ 2.00001 (10 ppm enhancement)
-- **Measurable Violations**: S_T0 = 2.828455 vs S_QM = 2.828427
-- **Superdeterministic Mechanism**: Energy field correlations between apparatus and system
-- **Hardware Evidence**: Enhanced repeatability observed on IBM quantum computers
-
-### Cosmological Effects
-- **Wavelength-Dependent Redshift**: 40.5% spectral variation across visible light
-- **H₀ Prediction**: 68.0 km/s/Mpc (resolves Hubble tension)
-- **CMB Temperature**: T(z=1100) ≈ 24,000 K (vs. 3,000 K standard)
-- **Modified Gravity**: Linear κr term dominates at large scales
-
-### Distinctive Signatures
-- **Blue light enhanced redshift**: z_blue = 1.22 z₀ (+22% effect)
-- **Red light reduced redshift**: z_red = 0.82 z₀ (-18% effect)
-- **Energy-dependent quantum delays**: Scale with 1/E differences
-- **Gravitational modifications**: Observable in galaxy rotation curves
-- **Deterministic quantum transitions**: **Hardware-validated** predictable single measurements
-
-## Theoretical Significance
-
-### Paradigm Shift
-1. **Hardware-Validated Deterministic QM**: Quantum mechanics proven compatible with deterministic evolution
-2. **No Spatial Expansion**: Universe is static, redshift from energy loss to time field
-3. **Parameter-Free Universe**: All constants emerge from single scale ratio
-4. **Unified Field Theory**: Same framework spans quantum to cosmological scales
-5. **True Fundamental Physics**: Mass eliminated as dimensional placeholder
-6. **Extended Bell Framework**: Circumvents Bell's theorem through measurement freedom violation
-
-### Revolutionary Simplifications Compared
-| Traditional Physics | T0 Revolution | Hardware Status |
-|-------------------|---------------|-----------------|
-| Dirac: 4×4 gamma matrices | **Simple field dynamics ∂²δm = 0** | ✅ **Validated** |
-| Lagrangian: 20+ SM fields | **One equation ℒ = ε·(∂δm)²** | ✅ **Validated** |
-| Schrödinger: Probability waves | **Deterministic energy fields** | ✅ **Validated** |
-| Antiparticles: Mirror particles | **Negative field excitations -δm** | ✅ **Validated** |
-| Bell's theorem: Absolute | **Extended inequality framework** | 🔬 **Framework ready** |
-| 20+ free parameters | **0 free parameters** | ✅ **Validated** |
-| 99.98% accuracy (complex) | **100.000% accuracy (simple)** | ✅ **Validated** |
-
-### Versus Standard Physics
-- **T0**: 0 free parameters | **Standard**: >20 adjustable constants
-- **T0**: Static universe | **Standard**: Expanding spacetime
-- **T0**: Natural dark energy | **Standard**: Mysterious Λ constant
-- **T0**: Unified couplings | **Standard**: Separate force treatments
-- **T0**: **Hardware-validated** deterministic QM | **Standard**: Probabilistic QM with interpretation problems
-
-## Mathematical Completeness
-
-**Dimensional Consistency**: All equations verified in natural units
-- Field equation: ∇²m = 4πGρm + Λ_T m (complete form)
-- Energy loss: dE/dr = -g_T ω² 2G/r² (dimensionally consistent)
-- Universal parameters: ξ = 2√G·m (all geometries)
-
-**Hardware Verification Results**: Experimentally validated on IBM Quantum computers
-- Bell state fidelity: 97.17% (excellent for NISQ devices)
-- Enhanced repeatability: Variance = 0.000248 (superior consistency)
-- Algorithmic equivalence: All predictions within experimental error margins
-
-**Verification Results**: 99.85% average agreement across 28+ test cases
-- Perfect agreement (100.0%): 12 calculations
-- Excellent agreement (99.9-99.99%): 8 calculations  
-- New predictions: 14+ testable predictions
-
-## 🚀 Practical Applications
-
-### Quantum Computing Revolution
-- **Deterministic Algorithms**: Perfect repeatability for quantum calculations
-- **Enhanced Reliability**: Reduced error rates through deterministic evolution
-- **Cryptographic Impact**: RSA potentially vulnerable 5-7 years earlier than expected
-- **Hardware Optimization**: Quantum computers could be designed for deterministic operation
-
-### Cryptography & Security
-- **QKD Vulnerability**: Bell-based quantum key distribution potentially compromised
-- **RSA Acceleration**: T0 deterministic simulations could dramatically speed factorization
-- **New Security Paradigms**: Post-quantum cryptography becomes urgent priority
-- **Timeline Acceleration**: Cryptographic transitions needed sooner than anticipated
-
-## Repository Access
-
-**🌐 Interactive Explorations**: [GitHub Pages HTML](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/) - **Interactive HTML visualizations and hardware-validated simulations**  
-**📁 Main Documents**: [2/pdf/](2/pdf/) - **40+ current PDFs (German/English versions)**  
-**🔗 LaTeX Sources**: [2/tex/](2/tex/)  
-**🌐 Project Website**: [T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/)  
-**🔬 Hardware Validation**: [complete_hardware_validation_report.md](complete_hardware_validation_report.md) - **Full experimental documentation**
-
-⚠️ **The subdirectories `2/pdf/Deutsch/`, `2/pdf/English/`, `2/tex/Deutsch/` and `2/tex/English/` contain only outdated predecessor versions!**
-
-## 🚀 Getting Started with T0 Hardware Validation
-
-### Quick Start: Reproduce Our IBM Quantum Experiments
-
-**Prerequisites:**
-```bash
-pip install qiskit qiskit-aer qiskit-ibm-runtime numpy matplotlib
-```
-
-**Step 1: Local Validation**
-```python
-# Download from hardware validation report
-python t0_validation_suite.py
-# Expected: ✅ COMPLETE SUCCESS
-```
-
-**Step 2: IBM Quantum Hardware Test**
-```python
-# Register at https://quantum.ibm.com for API token
-# Edit t0_ibm_hardware_test.py with your token
-python t0_ibm_hardware_test.py
-# Expected: 95-98% Bell state fidelity on real quantum hardware
-```
-
-**Step 3: Extended Research**
-- Increase shot counts to 8192
-- Test on multiple IBM backends
-- Implement Grover's algorithm validation
-- Extend to multi-qubit Bell state analysis
-
-👉 **Complete instructions in [Hardware Validation Report](complete_hardware_validation_report.md)**
-
-## Contact
-
-**Author**: Johann Pascher  
-**Institution**: Department of Communications Engineering, HTL Leonding, Austria  
-**Email**: johann.pascher@gmail.com
-
-For research inquiries, experimental collaborations, or hardware validation questions, please create an issue in this repository.
-
-## License
-
-© 2025 Johann Pascher. All rights reserved.
-
----
-
-*The T0-Time-Mass-Duality model represents the first truly parameter-free theory of fundamental physics, where all physical constants emerge from a single scale ratio derived from Higgs sector physics. This revolutionary framework unifies quantum mechanics and relativity through the principle of time-mass duality, while providing revolutionary simplifications of Dirac, Lagrangian, and Schrödinger formulations that prove simplicity is more accurate than complexity. **Now experimentally validated on IBM Quantum hardware - the first test of deterministic quantum mechanics on real quantum computers.***
