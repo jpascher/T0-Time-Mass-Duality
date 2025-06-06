@@ -1,3 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T0-Theory: Complete Interactive Index | Deterministic Quantum Mechanics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 30%, #2d1b69 70%, #4a0080 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .title {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, #00ffff, #ff6b6b, #4ecdc4, #ffd93d);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: brightness(1) drop-shadow(0 0 20px rgba(0, 255, 255, 0.3)); }
+            to { filter: brightness(1.3) drop-shadow(0 0 40px rgba(0, 255, 255, 0.6)); }
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: #cccccc;
+            margin-bottom: 1rem;
+        }
+
+        .breakthrough-badge {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            display: inline-block;
+            animation: pulse 2s infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 107, 107, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(78, 205, 196, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 107, 107, 0.4); }
+        }
+
+        .language-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid #00ffff;
+            color: #ffffff;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: #00ffff;
+            color: #000000;
+            transform: scale(1.05);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .section-description {
+            text-align: center;
+            color: #cccccc;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: #00ffff;
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .card-description {
+            color: #cccccc;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .card-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            color: #4ecdc4;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 8px;
+            background: rgba(78, 205, 196, 0.1);
+        }
+
+        .card-link:hover {
+            color: #ffffff;
+            background: rgba(78, 205, 196, 0.3);
+            transform: translateX(5px);
+        }
+
+        .card-link::before {
+            content: '→';
+            margin-right: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card-link:hover::before {
+            transform: translateX(3px);
+        }
+
+        .special-highlight {
+            border: 3px solid #ff6b6b;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
+            position: relative;
+        }
+
+        .special-highlight::after {
+            content: '🚀 FEATURED';
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: #ff6b6b;
+            color: #ffffff;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .new-highlight {
+            border: 3px solid #ffd93d;
+            background: linear-gradient(135deg, rgba(255, 217, 61, 0.1), rgba(78, 205, 196, 0.1));
+            position: relative;
+        }
+
+        .new-highlight::after {
+            content: '✨ NEW';
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: #ffd93d;
+            color: #000000;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .analysis-highlight {
+            border: 3px solid #4ecdc4;
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(64, 224, 208, 0.1));
+            position: relative;
+        }
+
+        .analysis-highlight::after {
+            content: '🎓 ANALYSIS';
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: #4ecdc4;
+            color: #000000;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .crypto-highlight {
+            border: 3px solid #ff9500;
+            background: linear-gradient(135deg, rgba(255, 149, 0, 0.1), rgba(255, 107, 107, 0.1));
+            position: relative;
+        }
+
+        .crypto-highlight::after {
+            content: '🔐 CRYPTO';
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: #ff9500;
+            color: #ffffff;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .home-link {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 107, 107, 0.2);
+            border: 2px solid #ff6b6b;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .home-link:hover {
+            background: #ff6b6b;
+            color: #000000;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .grid { grid-template-columns: 1fr; }
+            .card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Home Link for navigation -->
+    <a href="/T0-Time-Mass-Duality/" class="home-link">🏠 Home</a>
+
+    <div class="language-switch">
+        <button class="lang-btn active" onclick="switchLanguage('en')">English</button>
+        <button class="lang-btn" onclick="switchLanguage('de')">Deutsch</button>
+    </div>
+
+    <!-- English Content -->
+    <div id="content-en">
+        <div class="header">
+            <div class="breakthrough-badge">🚀 T0-Framework: Development-Aware Analysis Collection</div>
+            <h1 class="title">T0-Theory Complete Index</h1>
+            <p class="subtitle">Interactive Demonstrations & Comprehensive Analysis Collection</p>
+            <p style="color: #4ecdc4; font-size: 1.1rem; margin-top: 1rem;">
+                <strong>Balanced Assessment:</strong> Current Implementation • Development Potential • Scientific Evaluation
+            </p>
+        </div>
+
+        <div class="container">
+            <!-- Statistics -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">PDF Documents</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">18+</div>
+                    <div class="stat-label">Interactive HTML Demos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Full T0 Simulators</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">32-64bit</div>
+                    <div class="stat-label">Current Practical Range</div>
+                </div>
+            </div>
+
             <!-- Interactive T0 Simulators -->
             <div class="section">
                 <h2 class="section-title">🎮 Interactive T0 Simulators (2025)</h2>
@@ -39,6 +420,62 @@
                 </div>
             </div>
 
+            <!-- Scientific & Institutional Analysis Section -->
+            <div class="section">
+                <h2 class="section-title">🎓 Scientific & Institutional Analysis</h2>
+                <p class="section-description">
+                    Evidence-based assessment of T0-Framework capabilities and implications for research institutions
+                </p>
+                <div class="grid">
+                    <div class="card analysis-highlight">
+                        <div class="card-header">
+                            <div class="card-icon">📚</div>
+                            <div class="card-title">Complete T0-Theory PDF Collection</div>
+                        </div>
+                        <div class="card-description">
+                            Comprehensive collection of 50+ theoretical documents covering all aspects of T0-Theory - from fundamental equations and Lagrangian simplifications 
+                            to experimental predictions and quantum mechanics reformulation. Complete mathematical foundations and detailed derivations.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Elimination_Of_Mass_Dirac_LagEn.pdf" class="card-link">Core Theory (EN/DE)</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/lagrandian-einfachEn.pdf" class="card-link">Simple Lagrangian (EN/DE)</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/QM-DetrmisticEn.pdf" class="card-link">Deterministic QM (EN/DE)</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/CompleteMuon_g-2_AnalysisEn.pdf" class="card-link">Muon g-2 Analysis (EN/DE)</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/systemEn.pdf" class="card-link">Complete System Analysis (EN/DE)</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/E-mc2_En.pdf" class="card-link">Browse All 50+ Documents</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🔍</div>
+                            <div class="card-title">Realistic T0-Assessment for University of Innsbruck</div>
+                        </div>
+                        <div class="card-description">
+                            Development-aware analysis of T0-Framework implications for quantum research institutions. 
+                            Balanced evaluation of current limitations vs. future development potential, with strategic recommendations for academic planning.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/realistic_t0_innsbruck_analysis.html" class="card-link">Comprehensive Institutional Analysis (EN/DE)</a>
+                        </div>
+                    </div>
+
+                    <div class="card crypto-highlight">
+                        <div class="card-header">
+                            <div class="card-icon">🔐</div>
+                            <div class="card-title">Responsible Cryptography Education</div>
+                        </div>
+                        <div class="card-description">
+                            Evidence-based analysis of cryptographic security with realistic T0-Framework assessment. 
+                            Educational approach showing actual capabilities without misleading claims about modern encryption.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/responsible_crypto_education.html" class="card-link">Educational Crypto Analysis (DE/EN)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- T0-Framework Implementation -->
             <div class="section">
                 <h2 class="section-title">🚀 T0-Framework Implementation (2025)</h2>
@@ -62,3 +499,584 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Educational Introduction Section -->
+            <div class="section">
+                <h2 class="section-title">🎓 Educational Introduction</h2>
+                <p class="section-description">
+                    Clear explanations of algorithmic concepts with honest assessment of capabilities and limitations
+                </p>
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🎓</div>
+                            <div class="card-title">T0 Computing Simply Explained</div>
+                        </div>
+                        <div class="card-description">
+                            Beginner-friendly introduction to deterministic computing methods with realistic scope assessment. 
+                            From basic algorithms to current limitations - explained with practical examples and honest evaluation.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_simple.html" class="card-link">Bilingual Version (DE/EN)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive HTML Demonstrations -->
+            <div class="section">
+                <h2 class="section-title">🎯 Interactive Demonstrations</h2>
+                <p class="section-description">
+                    Educational explorations of T0-Framework principles with realistic performance demonstrations
+                </p>
+                <div class="grid">
+                    <div class="card special-highlight">
+                        <div class="card-header">
+                            <div class="card-icon">🎮</div>
+                            <div class="card-title">T0 Quantum Computing Simulator</div>
+                        </div>
+                        <div class="card-description">
+                            Comprehensive bilingual interactive demonstration with full algorithm simulation. 
+                            Features real-time energy field visualization, step-by-step algorithm execution, 
+                            and comparative analysis between standard QM and T0 approaches.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/qm_bilingual_version.html" class="card-link">Interactive Bilingual Simulator (DE/EN)</a>
+                        </div>
+                    </div>
+
+                    <div class="card new-highlight">
+                        <div class="card-header">
+                            <div class="card-icon">⚡</div>
+                            <div class="card-title">T0 Deterministic Computing</div>
+                        </div>
+                        <div class="card-description">
+                            Interactive demonstration showing realistic capabilities of current T0-Framework implementation. 
+                            Honest assessment of practical ranges and development potential.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_computing_en_.html" class="card-link">English Version</a>
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_computing_de_.html" class="card-link">Deutsche Version</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🧮</div>
+                            <div class="card-title">Algorithm Implementation Guide</div>
+                        </div>
+                        <div class="card-description">
+                            Implementation guide for current T0-Framework algorithms with realistic performance expectations. 
+                            Features honest capability assessment and development roadmap discussion.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/step_by_step_modules_bilingual.html" class="card-link">Bilingual Guide (EN/DE)</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🔄</div>
+                            <div class="card-title">The Units Revolution: From E=mc² to E=m</div>
+                        </div>
+                        <div class="card-description">
+                            Mathematical exploration of energy-mass relationships with educational perspective. 
+                            Same physics, different mathematical formulations - educational insight into unit systems.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/units_revolution_en_.html" class="card-link">English Version</a>
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/einheiten_revolution_de_.html" class="card-link">Deutsche Version</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🔬</div>
+                            <div class="card-title">Complete Particle Spectrum: Educational Comparison</div>
+                        </div>
+                        <div class="card-description">
+                            Educational comparison of different theoretical approaches to particle physics. 
+                            Explores various mathematical formulations and their educational implications.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_en_.html" class="card-link">English Version</a>
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_de_.html" class="card-link">Deutsche Version</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">👻</div>
+                            <div class="card-title">Neutrinos in Theoretical Field Models</div>
+                        </div>
+                        <div class="card-description">
+                            Educational exploration of neutrino physics and theoretical field approaches. 
+                            Interactive tools for understanding different particle physics formulations.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_neutrinos_explorer_en_.html" class="card-link">English Version</a>
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_neutrinos_explorer_de_.html" class="card-link">Deutsche Version</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Mathematical Documents -->
+            <div class="section">
+                <h2 class="section-title">📚 Core Mathematical Documents</h2>
+                <p class="section-description">
+                    Fundamental theoretical foundations and mathematical formulations with educational perspective
+                </p>
+                <div class="grid">
+                    <div class="card special-highlight">
+                        <div class="card-header">
+                            <div class="card-icon">⚡</div>
+                            <div class="card-title">Mathematical T0 Theory: Educational Exploration</div>
+                        </div>
+                        <div class="card-description">
+                            Mathematical exploration of ratio-based formulations and their relationship to established physics. 
+                            Educational analysis of different mathematical approaches and their implications.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Elimination_Of_Mass_Dirac_LagEn.pdf" class="card-link">English PDF</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Elimination_Of_Mass_Dirac_LagDe.pdf" class="card-link">Deutsche PDF</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">📊</div>
+                            <div class="card-title">T0 Model Calculation Studies</div>
+                        </div>
+                        <div class="card-description">
+                            Detailed mathematical calculations and comparisons with established values. Educational exploration 
+                            of different mathematical formulations and their practical implications.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Elimination_Of_Mass_Dirac_TabelleEn.pdf" class="card-link">English PDF</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Elimination_Of_Mass_Dirac_TabelleDe.pdf" class="card-link">Deutsche PDF</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🧮</div>
+                            <div class="card-title">Additional Mathematical Studies</div>
+                        </div>
+                        <div class="card-description">
+                            Collection of mathematical explorations including energy formulations, 
+                            unit system analysis, and theoretical physics calculations.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/E-mc2_En.pdf" class="card-link">E=mc² Analysis (EN)</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/E-mc2_De.pdf" class="card-link">E=mc² Analysis (DE)</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/systemEn.pdf" class="card-link">System Analysis (EN)</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/systemDe.pdf" class="card-link">System Analysis (DE)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="section">
+                <h2 class="section-title">📞 Contact & Information</h2>
+                <div style="text-align: center; background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 15px;">
+                    <p style="font-size: 1.2rem; margin-bottom: 1rem;"><strong>Author:</strong> Johann Pascher</p>
+                    <p style="margin-bottom: 1rem;"><strong>Institution:</strong> Department of Communications Engineering, HTL Leonding, Austria</p>
+                    <p style="margin-bottom: 2rem;"><strong>Email:</strong> johann.pascher@gmail.com</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 2rem;">
+                        <div style="background: rgba(0,255,255,0.1); padding: 1rem; border-radius: 10px;">
+                            <h4 style="color: #00ffff;">GitHub Repository</h4>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality" class="card-link">T0-Time-Mass-Duality</a>
+                        </div>
+                        <div style="background: rgba(78,205,196,0.1); padding: 1rem; border-radius: 10px;">
+                            <h4 style="color: #4ecdc4;">GitHub Pages</h4>
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/" class="card-link">Project Website</a>
+                        </div>
+                        <div style="background: rgba(255,107,107,0.1); padding: 1rem; border-radius: 10px;">
+                            <h4 style="color: #ff6b6b;">Framework Documentation</h4>
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_framework_documentation.html" class="card-link">Complete Documentation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- German Content -->
+    <div id="content-de" class="hidden">
+        <div class="header">
+            <div class="breakthrough-badge">🚀 T0-Framework: Entwicklungsbewusste Analyse-Sammlung</div>
+            <h1 class="title">T0-Theorie Vollständiger Index</h1>
+            <p class="subtitle">Interaktive Demonstrationen & Umfassende Analyse-Sammlung</p>
+            <p style="color: #4ecdc4; font-size: 1.1rem; margin-top: 1rem;">
+                <strong>Ausgewogene Bewertung:</strong> Aktuelle Implementation • Entwicklungspotential • Wissenschaftliche Evaluation
+            </p>
+        </div>
+
+        <div class="container">
+            <!-- Statistiken -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">PDF-Dokumente</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">18+</div>
+                    <div class="stat-label">Interaktive HTML Demos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Vollständige T0 Simulatoren</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">32-64bit</div>
+                    <div class="stat-label">Aktueller Praktischer Bereich</div>
+                </div>
+            </div>
+
+            <!-- Interaktive T0 Simulatoren -->
+            <div class="section">
+                <h2 class="section-title">🎮 Interaktive T0 Simulatoren (2025)</h2>
+                <p class="section-description">
+                    Vollständige Quantencomputer-Simulatoren mit deterministischer T0-Framework-Implementation
+                </p>
+                <div class="grid">
+                    <div class="card special-highlight">
+                        <div class="card-header">
+                            <div class="card-icon">⚛️</div>
+                            <div class="card-title">Quantum Computing Simulator - Deterministisches T0 Framework</div>
+                        </div>
+                        <div class="card-description">
+                            <strong>DURCHBRUCH: Vollständiger Quantencomputer-Simulator</strong><br>
+                            Voll funktionsfähiger deterministischer Quantencomputer mit T0-Framework. Enthält Qubit-Kontrolle, 
+                            Quantengatter, Shor-Algorithmus und Bell-Zustandsgenerierung mit mehrsprachiger Unterstützung (Deutsch/Englisch).
+                        </div>
+                        <div class="card-links">
+                            <a href="quantum_simulator_deterministic.html" class="card-link">Vollständiger Quantensimulator</a>
+                            <a href="quantum_help_guide.html" class="card-link">📚 Hilfe-Leitfaden</a>
+                        </div>
+                    </div>
+
+                    <div class="card new-highlight">
+                        <div class="card-header">
+                            <div class="card-icon">🧮</div>
+                            <div class="card-title">T0 Quantensimulator Interface</div>
+                        </div>
+                        <div class="card-description">
+                            <strong>Praktische T0-Physik-Implementation</strong><br>
+                            Spezialisierter Simulator für T0-Faktorisierung und Energiefeld-Lösung. Bietet vollständige RSA-Faktorisierung, 
+                            ξ-Parameter-Optimierung, Grenztests und Benchmark-Serien mit zweisprachigem Interface.
+                        </div>
+                        <div class="card-links">
+                            <a href="t0_Shore_simulator.html" class="card-link">T0 Faktorisierungs-Simulator</a>
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/index.html" class="card-link">🏠 Projekt-Startseite</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wissenschaftliche & Institutionelle Analyse -->
+            <div class="section">
+                <h2 class="section-title">🎓 Wissenschaftliche & Institutionelle Analyse</h2>
+                <p class="section-description">
+                    Evidenzbasierte Bewertung der T0-Framework-Fähigkeiten und Implikationen für Forschungsinstitutionen
+                </p>
+                <div class="grid">
+                    <div class="card analysis-highlight">
+                        <div class="card-header">
+                            <div class="card-icon">📚</div>
+                            <div class="card-title">Vollständige T0-Theorie PDF-Sammlung</div>
+                        </div>
+                        <div class="card-description">
+                            Umfassende Sammlung von 50+ theoretischen Dokumenten, die alle Aspekte der T0-Theorie abdecken - von fundamentalen Gleichungen und Lagrangian-Vereinfachungen 
+                            bis zu experimentellen Vorhersagen und Quantenmechanik-Reformulierung. Vollständige mathematische Grundlagen und detaillierte Ableitungen.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Elimination_Of_Mass_Dirac_LagDe.pdf" class="card-link">Kerntheorie (DE/EN)</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/lagrandian-einfachDe.pdf" class="card-link">Einfacher Lagrangian (DE/EN)</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/QM-DetrmisticDe.pdf" class="card-link">Deterministische QM (DE/EN)</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/CompleteMuon_g-2_AnalysisDe.pdf" class="card-link">Myon g-2 Analyse (DE/EN)</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/systemDe.pdf" class="card-link">Vollständige Systemanalyse (DE/EN)</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/E-mc2_De.pdf" class="card-link">Alle 50+ Dokumente durchsuchen</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🔍</div>
+                            <div class="card-title">Realistische T0-Bewertung für Universität Innsbruck</div>
+                        </div>
+                        <div class="card-description">
+                            Entwicklungsbewusste Analyse der T0-Framework-Auswirkungen für Quantenforschungsinstitutionen. 
+                            Ausgewogene Evaluation aktueller Limitierungen vs. zukünftiges Entwicklungspotential mit strategischen Empfehlungen.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/realistic_t0_innsbruck_analysis.html" class="card-link">Umfassende Institutionelle Analyse (EN/DE)</a>
+                        </div>
+                    </div>
+
+                    <div class="card crypto-highlight">
+                        <div class="card-header">
+                            <div class="card-icon">🔐</div>
+                            <div class="card-title">Verantwortliche Kryptographie-Bildung</div>
+                        </div>
+                        <div class="card-description">
+                            Evidenzbasierte Analyse kryptographischer Sicherheit mit realistischer T0-Framework-Bewertung. 
+                            Bildungsansatz mit tatsächlichen Fähigkeiten ohne irreführende Behauptungen über moderne Verschlüsselung.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/responsible_crypto_education.html" class="card-link">Bildungsbasierte Krypto-Analyse (DE/EN)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- T0-Framework Implementation -->
+            <div class="section">
+                <h2 class="section-title">🚀 T0-Framework Implementation (2025)</h2>
+                <p class="section-description">
+                    Erste Generation deterministischer algorithmischer Ansatz mit dokumentierten Fähigkeiten und Entwicklungsfahrplan
+                </p>
+                <div class="grid">
+                    <div class="card new-highlight">
+                        <div class="card-header">
+                            <div class="card-icon">💻</div>
+                            <div class="card-title">T0-Framework Implementation: Code & Theorie</div>
+                        </div>
+                        <div class="card-description">
+                            Erste Generation Implementation mit korrigierter Logik und realistischer Performance-Bewertung. 
+                            Enthält mathematische Konsistenz-Verifikation, umfangreiche Tests und ehrliche Fähigkeits-Dokumentation.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_framework_documentation.html" class="card-link">Vollständige Dokumentation</a>
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/t0_simulator_fully_corrected.py" class="card-link">Python-Implementation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bildungseinführung -->
+            <div class="section">
+                <h2 class="section-title">🎓 Bildungseinführung</h2>
+                <p class="section-description">
+                    Klare Erklärungen algorithmischer Konzepte mit ehrlicher Bewertung von Fähigkeiten und Limitierungen
+                </p>
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🎓</div>
+                            <div class="card-title">T0 Computing Einfach Erklärt</div>
+                        </div>
+                        <div class="card-description">
+                            Anfängerfreundliche Einführung in deterministische Computing-Methoden mit realistischer Umfangsbewertung. 
+                            Von Grundalgorithmen bis zu aktuellen Limitierungen - erklärt mit praktischen Beispielen und ehrlicher Evaluation.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_simple.html" class="card-link">Zweisprachige Version (DE/EN)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interaktive Demonstrationen -->
+            <div class="section">
+                <h2 class="section-title">🎯 Interaktive Demonstrationen</h2>
+                <p class="section-description">
+                    Bildungserkundungen der T0-Framework-Prinzipien mit realistischen Performance-Demonstrationen
+                </p>
+                <div class="grid">
+                    <div class="card special-highlight">
+                        <div class="card-header">
+                            <div class="card-icon">🎮</div>
+                            <div class="card-title">T0 Quantencomputing Simulator</div>
+                        </div>
+                        <div class="card-description">
+                            Umfassende zweisprachige interaktive Demonstration mit vollständiger Algorithmus-Simulation. 
+                            Features Echtzeit-Energiefeld-Visualisierung, schrittweise Algorithmus-Ausführung, 
+                            und Vergleichsanalyse zwischen Standard-QM und T0-Ansätzen.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/qm_bilingual_version.html" class="card-link">Interaktiver Zweisprachiger Simulator (DE/EN)</a>
+                        </div>
+                    </div>
+
+                    <div class="card new-highlight">
+                        <div class="card-header">
+                            <div class="card-icon">⚡</div>
+                            <div class="card-title">T0 Deterministisches Computing</div>
+                        </div>
+                        <div class="card-description">
+                            Interaktive Demonstration der realistischen Fähigkeiten der aktuellen T0-Framework-Implementation. 
+                            Ehrliche Bewertung praktischer Bereiche und Entwicklungspotential.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_computing_en_.html" class="card-link">English Version</a>
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_computing_de_.html" class="card-link">Deutsche Version</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🧮</div>
+                            <div class="card-title">Algorithmus-Implementierungsleitfaden</div>
+                        </div>
+                        <div class="card-description">
+                            Implementierungsleitfaden für aktuelle T0-Framework-Algorithmen mit realistischen Performance-Erwartungen. 
+                            Features ehrliche Fähigkeitsbewertung und Entwicklungsfahrplan-Diskussion.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/step_by_step_modules_bilingual.html" class="card-link">Zweisprachiger Leitfaden (EN/DE)</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🔄</div>
+                            <div class="card-title">Die Einheiten-Revolution: Von E=mc² zu E=m</div>
+                        </div>
+                        <div class="card-description">
+                            Mathematische Exploration von Energie-Masse-Beziehungen mit Bildungsperspektive. 
+                            Gleiche Physik, verschiedene mathematische Formulierungen - Bildungseinblick in Einheitensysteme.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/units_revolution_en_.html" class="card-link">English Version</a>
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/einheiten_revolution_de_.html" class="card-link">Deutsche Version</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🔬</div>
+                            <div class="card-title">Vollständiges Teilchenspektrum: Bildungsvergleich</div>
+                        </div>
+                        <div class="card-description">
+                            Bildungsvergleich verschiedener theoretischer Ansätze zur Teilchenphysik. 
+                            Erforscht verschiedene mathematische Formulierungen und ihre Bildungsimplikationen.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_en_.html" class="card-link">English Version</a>
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_de_.html" class="card-link">Deutsche Version</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">👻</div>
+                            <div class="card-title">Neutrinos in Theoretischen Feldmodellen</div>
+                        </div>
+                        <div class="card-description">
+                            Bildungserkundung der Neutrino-Physik und theoretischer Feldansätze. 
+                            Interaktive Tools zum Verständnis verschiedener Teilchenphysik-Formulierungen.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_neutrinos_explorer_en_.html" class="card-link">English Version</a>
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_neutrinos_explorer_de_.html" class="card-link">Deutsche Version</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kern-Mathematische Dokumente -->
+            <div class="section">
+                <h2 class="section-title">📚 Kern-Mathematische Dokumente</h2>
+                <p class="section-description">
+                    Fundamentale theoretische Grundlagen und mathematische Formulierungen mit Bildungsperspektive
+                </p>
+                <div class="grid">
+                    <div class="card special-highlight">
+                        <div class="card-header">
+                            <div class="card-icon">⚡</div>
+                            <div class="card-title">Mathematische T0-Theorie: Bildungserkundung</div>
+                        </div>
+                        <div class="card-description">
+                            Mathematische Exploration ratio-basierter Formulierungen und ihrer Beziehung zur etablierten Physik. 
+                            Bildungsanalyse verschiedener mathematischer Ansätze und ihrer Implikationen.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Elimination_Of_Mass_Dirac_LagEn.pdf" class="card-link">English PDF</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Elimination_Of_Mass_Dirac_LagDe.pdf" class="card-link">Deutsche PDF</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">📊</div>
+                            <div class="card-title">T0-Modell Berechnungsstudien</div>
+                        </div>
+                        <div class="card-description">
+                            Detaillierte mathematische Berechnungen und Vergleiche mit etablierten Werten. Bildungserkundung 
+                            verschiedener mathematischer Formulierungen und ihrer praktischen Implikationen.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Elimination_Of_Mass_Dirac_TabelleEn.pdf" class="card-link">English PDF</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/Elimination_Of_Mass_Dirac_TabelleDe.pdf" class="card-link">Deutsche PDF</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🧮</div>
+                            <div class="card-title">Zusätzliche Mathematische Studien</div>
+                        </div>
+                        <div class="card-description">
+                            Sammlung mathematischer Erkundungen einschließlich Energieformulierungen, 
+                            Einheitssystem-Analyse und theoretische Physik-Berechnungen.
+                        </div>
+                        <div class="card-links">
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/E-mc2_En.pdf" class="card-link">E=mc² Analyse (EN)</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/E-mc2_De.pdf" class="card-link">E=mc² Analyse (DE)</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/systemEn.pdf" class="card-link">System-Analyse (EN)</a>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/systemDe.pdf" class="card-link">System-Analyse (DE)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kontakt Sektion -->
+            <div class="section">
+                <h2 class="section-title">📞 Kontakt & Information</h2>
+                <div style="text-align: center; background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 15px;">
+                    <p style="font-size: 1.2rem; margin-bottom: 1rem;"><strong>Autor:</strong> Johann Pascher</p>
+                    <p style="margin-bottom: 1rem;"><strong>Institution:</strong> Abteilung für Nachrichtentechnik, HTL Leonding, Österreich</p>
+                    <p style="margin-bottom: 2rem;"><strong>Email:</strong> johann.pascher@gmail.com</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 2rem;">
+                        <div style="background: rgba(0,255,255,0.1); padding: 1rem; border-radius: 10px;">
+                            <h4 style="color: #00ffff;">GitHub Repository</h4>
+                            <a href="https://github.com/jpascher/T0-Time-Mass-Duality" class="card-link">T0-Time-Mass-Duality</a>
+                        </div>
+                        <div style="background: rgba(78,205,196,0.1); padding: 1rem; border-radius: 10px;">
+                            <h4 style="color: #4ecdc4;">GitHub Pages</h4>
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/" class="card-link">Projekt-Website</a>
+                        </div>
+                        <div style="background: rgba(255,107,107,0.1); padding: 1rem; border-radius: 10px;">
+                            <h4 style="color: #ff6b6b;">Framework-Dokumentation</h4>
+                            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_framework_documentation.html" class="card-link">Vollständige Dokumentation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLanguage = 'en';
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update button states
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[onclick="switchLanguage('${lang}')"]`).classList.add('active');
+            
+            // Show/hide content
+            document.getElementById('content-en').classList.toggle('hidden', lang !== 'en');
+            document.getElementById('content-de').classList.toggle('hidden', lang !== 'de');
+        }
+    </script>
+</body>
+</html>
