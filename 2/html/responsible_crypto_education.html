@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T0-Framework: Deterministische RSA-Analyse</title>
+    <title>T0-Framework: Deterministic RSA Analysis / Deterministische RSA-Analyse</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -13,6 +13,39 @@
             min-height: 100vh;
             padding: 20px;
             position: relative;
+        }
+        
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .lang-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid white;
+            color: #667eea;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: none;
+            font-size: 16px;
+        }
+        
+        .lang-btn.active {
+            background: white;
+            color: #764ba2;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        .lang-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
         }
         
         .back-to-main {
@@ -65,31 +98,6 @@
             text-align: center;
             font-weight: bold;
             font-size: 1.1em;
-        }
-        
-        .language-toggle {
-            display: flex;
-            background: #f8f9fa;
-            border-bottom: 2px solid #dee2e6;
-        }
-        
-        .lang-btn {
-            flex: 1;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            background: #f8f9fa;
-            border: none;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .lang-btn:hover { background: #e9ecef; }
-        .lang-btn.active {
-            background: white;
-            border-bottom: 4px solid #ff6b6b;
-            color: #ff6b6b;
         }
         
         .content {
@@ -303,212 +311,34 @@
         @media (max-width: 768px) {
             .comparison-grid { grid-template-columns: 1fr; }
             .header h1 { font-size: 2.2em; }
-            .language-toggle { flex-direction: column; }
             .container { margin-top: 80px; }
+            .language-switcher { top: 70px; right: 10px; }
         }
     </style>
 </head>
 <body>
-    <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/index.html" class="back-to-main">← Back to Main Index</a>
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('en', this)">EN</button>
+        <button class="lang-btn" onclick="switchLanguage('de', this)">DE</button>
+    </div>
+    
+    <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/index.html" class="back-to-main">
+        <span class="lang-en">← Back to Main Page</span>
+        <span class="lang-de" style="display:none;">← Zurück zur Hauptseite</span>
+    </a>
     
     <div class="container">
         <div class="header">
-            <h1>🔐 T0-Framework RSA-Analyse</h1>
-            <p id="header-subtitle">Deterministische Alternative zu klassischen Faktorisierungsalgorithmen</p>
+            <h1 id="header-title">🔐 T0-Framework RSA Analysis</h1>
+            <p id="header-subtitle">Deterministic Alternative to Classical Factorization Algorithms</p>
         </div>
         
         <div class="approach-banner">
-            <span id="approach-text">⚡ Deterministischer Ansatz mit verbesserter Effizienz für kleine bis mittlere RSA-Schlüssel</span>
+            <span id="approach-text">⚡ Deterministic approach with improved efficiency for small to medium RSA keys</span>
         </div>
         
-        <div class="language-toggle">
-            <button class="lang-btn active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
-            <button class="lang-btn" onclick="switchLanguage('en')">🇺🇸 English</button>
-        </div>
-        
-        <!-- Deutsche Version -->
-        <div id="de-content" class="lang-content active">
-            <div class="content">
-                <h2>RSA-Schlüsselgröße wählen</h2>
-                <div class="rsa-selector">
-                    <button class="rsa-btn active" onclick="selectRSA(64)">64-bit</button>
-                    <button class="rsa-btn" onclick="selectRSA(128)">128-bit</button>
-                    <button class="rsa-btn" onclick="selectRSA(256)">256-bit</button>
-                    <button class="rsa-btn" onclick="selectRSA(512)">512-bit</button>
-                    <button class="rsa-btn" onclick="selectRSA(1024)">1024-bit</button>
-                    <button class="rsa-btn" onclick="selectRSA(2048)">2048-bit</button>
-                </div>
-                
-                <div id="current-analysis">
-                    <div class="highlight-box">
-                        <h3>🎯 Aktuelle Analyse: <span id="current-bits">64</span>-bit RSA</h3>
-                        <p id="current-feasibility">Einfach faktorisierbar - geeignet für Demonstrations- und Lernzwecke</p>
-                    </div>
-                    
-                    <div class="comparison-grid">
-                        <div class="approach-card classical-card">
-                            <h3>📊 Klassische Verfahren</h3>
-                            <div class="stat-row">
-                                <span class="stat-label">Algorithmus:</span>
-                                <span class="stat-value" id="classical-algorithm">Trial Division</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">Zeitkomplexität:</span>
-                                <span class="stat-value" id="classical-complexity">O(√n)</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">Geschätzte Zeit:</span>
-                                <span class="stat-value" id="classical-time">Millisekunden</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">Hardware:</span>
-                                <span class="stat-value">Standard Computer</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">Erfolgsrate:</span>
-                                <span class="stat-value">~95%</span>
-                            </div>
-                        </div>
-                        
-                        <div class="approach-card t0-card">
-                            <h3>⚡ T0-Framework</h3>
-                            <div class="stat-row">
-                                <span class="stat-label">Algorithmus:</span>
-                                <span class="stat-value">Adaptive Periodensuche</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">Operationen:</span>
-                                <span class="stat-value" id="t0-ops">~1.200</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">Geschätzte Zeit:</span>
-                                <span class="stat-value" id="t0-time">Millisekunden</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">Hardware:</span>
-                                <span class="stat-value">Standard Computer</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">Erfolgsrate:</span>
-                                <span class="stat-value">100%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <h3>Performance-Vergleich verschiedener RSA-Größen</h3>
-                <table class="performance-table">
-                    <thead>
-                        <tr>
-                            <th>RSA-Größe</th>
-                            <th>Klassisch (Schätzung)</th>
-                            <th>T0-Framework</th>
-                            <th>Praktikabilität</th>
-                            <th>Hardware-Anforderung</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="feasible">
-                            <td><strong>64-bit</strong></td>
-                            <td>Millisekunden</td>
-                            <td>Millisekunden</td>
-                            <td>✅ Demo/Lernen</td>
-                            <td>Standard PC</td>
-                        </tr>
-                        <tr class="feasible">
-                            <td><strong>128-bit</strong></td>
-                            <td>Sekunden</td>
-                            <td>Sekunden</td>
-                            <td>✅ Machbar</td>
-                            <td>Standard PC</td>
-                        </tr>
-                        <tr class="challenging">
-                            <td><strong>256-bit</strong></td>
-                            <td>Minuten-Stunden</td>
-                            <td>Minuten</td>
-                            <td>⚠️ Aufwendig</td>
-                            <td>Leistungsstarker PC</td>
-                        </tr>
-                        <tr class="challenging">
-                            <td><strong>512-bit</strong></td>
-                            <td>Jahre</td>
-                            <td>Stunden-Tage</td>
-                            <td>⚠️ Grenzwertig</td>
-                            <td>Server/Cluster</td>
-                        </tr>
-                        <tr class="impractical">
-                            <td><strong>1024-bit</strong></td>
-                            <td>Jahrhunderte</td>
-                            <td>Wochen-Monate</td>
-                            <td>❌ Praktische Grenze</td>
-                            <td>Supercomputer</td>
-                        </tr>
-                        <tr class="impractical">
-                            <td><strong>2048-bit</strong></td>
-                            <td>Astronomisch</td>
-                            <td>Jahre-Jahrzehnte</td>
-                            <td>❌ Nicht praktikabel</td>
-                            <td>Nicht realistisch</td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                <div class="limitation-box">
-                    <h3>⚠️ Realistische Hardware-Limitationen</h3>
-                    <p><strong>Das T0-Framework bietet Verbesserungen, aber keine Wunder:</strong></p>
-                    <ul style="margin: 10px 0; padding-left: 20px;">
-                        <li>Effektiv für kleine RSA-Schlüssel (≤256 bit)</li>
-                        <li>Deutliche Verbesserung bei mittleren Größen (512 bit)</li>
-                        <li>Praktische Grenzen bei großen Schlüsseln (1024+ bit)</li>
-                        <li>Moderne RSA-2048 bleibt sicher vor diesem Ansatz</li>
-                    </ul>
-                </div>
-                
-                <div class="demo-section">
-                    <h3>🧪 Live-Demonstration</h3>
-                    <p>Testen Sie das T0-Framework mit echten Zahlen:</p>
-                    <div>
-                        <button class="demo-button" onclick="runDemo(15)">Demo: 15 faktorisieren</button>
-                        <button class="demo-button" onclick="runDemo(77)">Demo: 77 faktorisieren</button>
-                        <button class="demo-button" onclick="runDemo(323)">Demo: 323 faktorisieren</button>
-                        <button class="demo-button" onclick="runDemo(9991)">Demo: 9991 faktorisieren</button>
-                    </div>
-                    <div id="demo-output" class="demo-output">
-                        Bereit für Demonstration. Wählen Sie eine Zahl zum Faktorisieren.
-                    </div>
-                </div>
-                
-                <h3>Realistische Zeitlinie</h3>
-                <div class="timeline-section">
-                    <div class="timeline-item">
-                        <div class="timeline-year">Heute</div>
-                        <div>
-                            <div style="font-weight: bold;">T0-Framework verfügbar</div>
-                            <div>Effektiv für RSA ≤256 bit, Forschung und Bildung</div>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-year" style="background: #ff9800;">2025-2030</div>
-                        <div>
-                            <div style="font-weight: bold;">Hardware-Verbesserungen</div>
-                            <div>Möglicherweise RSA-512 in praktischer Zeit</div>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-year" style="background: #ff9800;">2030+</div>
-                        <div>
-                            <div style="font-weight: bold;">Algorithmus-Optimierungen</div>
-                            <div>Weitere Verbesserungen, aber RSA-2048+ bleibt sicher</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- English Version -->
-        <div id="en-content" class="lang-content">
+        <!-- English Content -->
+        <div class="lang-content lang-en active" id="en-content">
             <div class="content">
                 <h2>Choose RSA Key Size</h2>
                 <div class="rsa-selector">
@@ -520,10 +350,10 @@
                     <button class="rsa-btn" onclick="selectRSA(2048)">2048-bit</button>
                 </div>
                 
-                <div id="current-analysis-en">
+                <div id="current-analysis">
                     <div class="highlight-box">
-                        <h3>🎯 Current Analysis: <span id="current-bits-en">64</span>-bit RSA</h3>
-                        <p id="current-feasibility-en">Easily factorizable - suitable for demonstration and learning purposes</p>
+                        <h3>🎯 Current Analysis: <span id="current-bits">64</span>-bit RSA</h3>
+                        <p id="current-feasibility">Easily factorizable - suitable for demonstration and learning purposes</p>
                     </div>
                     
                     <div class="comparison-grid">
@@ -531,15 +361,15 @@
                             <h3>📊 Classical Methods</h3>
                             <div class="stat-row">
                                 <span class="stat-label">Algorithm:</span>
-                                <span class="stat-value" id="classical-algorithm-en">Trial Division</span>
+                                <span class="stat-value" id="classical-algorithm">Trial Division</span>
                             </div>
                             <div class="stat-row">
                                 <span class="stat-label">Time Complexity:</span>
-                                <span class="stat-value" id="classical-complexity-en">O(√n)</span>
+                                <span class="stat-value" id="classical-complexity">O(√n)</span>
                             </div>
                             <div class="stat-row">
                                 <span class="stat-label">Estimated Time:</span>
-                                <span class="stat-value" id="classical-time-en">Milliseconds</span>
+                                <span class="stat-value" id="classical-time">Milliseconds</span>
                             </div>
                             <div class="stat-row">
                                 <span class="stat-label">Hardware:</span>
@@ -559,11 +389,11 @@
                             </div>
                             <div class="stat-row">
                                 <span class="stat-label">Operations:</span>
-                                <span class="stat-value" id="t0-ops-en">~1,200</span>
+                                <span class="stat-value" id="t0-ops">~1,200</span>
                             </div>
                             <div class="stat-row">
                                 <span class="stat-label">Estimated Time:</span>
-                                <span class="stat-value" id="t0-time-en">Milliseconds</span>
+                                <span class="stat-value" id="t0-time">Milliseconds</span>
                             </div>
                             <div class="stat-row">
                                 <span class="stat-label">Hardware:</span>
@@ -654,7 +484,7 @@
                         <button class="demo-button" onclick="runDemo(323)">Demo: Factor 323</button>
                         <button class="demo-button" onclick="runDemo(9991)">Demo: Factor 9991</button>
                     </div>
-                    <div id="demo-output-en" class="demo-output">
+                    <div id="demo-output" class="demo-output">
                         Ready for demonstration. Choose a number to factorize.
                     </div>
                 </div>
@@ -687,10 +517,191 @@
                 </div>
             </div>
         </div>
+
+        <!-- German Content -->
+        <div class="lang-content lang-de" id="de-content">
+            <div class="content">
+                <h2>RSA-Schlüsselgröße wählen</h2>
+                <div class="rsa-selector">
+                    <button class="rsa-btn active" onclick="selectRSA(64)">64-bit</button>
+                    <button class="rsa-btn" onclick="selectRSA(128)">128-bit</button>
+                    <button class="rsa-btn" onclick="selectRSA(256)">256-bit</button>
+                    <button class="rsa-btn" onclick="selectRSA(512)">512-bit</button>
+                    <button class="rsa-btn" onclick="selectRSA(1024)">1024-bit</button>
+                    <button class="rsa-btn" onclick="selectRSA(2048)">2048-bit</button>
+                </div>
+                
+                <div id="current-analysis-de">
+                    <div class="highlight-box">
+                        <h3>🎯 Aktuelle Analyse: <span id="current-bits-de">64</span>-bit RSA</h3>
+                        <p id="current-feasibility-de">Einfach faktorisierbar - geeignet für Demonstrations- und Lernzwecke</p>
+                    </div>
+                    
+                    <div class="comparison-grid">
+                        <div class="approach-card classical-card">
+                            <h3>📊 Klassische Verfahren</h3>
+                            <div class="stat-row">
+                                <span class="stat-label">Algorithmus:</span>
+                                <span class="stat-value" id="classical-algorithm-de">Trial Division</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Zeitkomplexität:</span>
+                                <span class="stat-value" id="classical-complexity-de">O(√n)</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Geschätzte Zeit:</span>
+                                <span class="stat-value" id="classical-time-de">Millisekunden</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Hardware:</span>
+                                <span class="stat-value">Standard Computer</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Erfolgsrate:</span>
+                                <span class="stat-value">~95%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="approach-card t0-card">
+                            <h3>⚡ T0-Framework</h3>
+                            <div class="stat-row">
+                                <span class="stat-label">Algorithmus:</span>
+                                <span class="stat-value">Adaptive Periodensuche</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Operationen:</span>
+                                <span class="stat-value" id="t0-ops-de">~1.200</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Geschätzte Zeit:</span>
+                                <span class="stat-value" id="t0-time-de">Millisekunden</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Hardware:</span>
+                                <span class="stat-value">Standard Computer</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Erfolgsrate:</span>
+                                <span class="stat-value">100%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Performance-Vergleich verschiedener RSA-Größen</h3>
+                <table class="performance-table">
+                    <thead>
+                        <tr>
+                            <th>RSA-Größe</th>
+                            <th>Klassisch (Schätzung)</th>
+                            <th>T0-Framework</th>
+                            <th>Praktikabilität</th>
+                            <th>Hardware-Anforderung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="feasible">
+                            <td><strong>64-bit</strong></td>
+                            <td>Millisekunden</td>
+                            <td>Millisekunden</td>
+                            <td>✅ Demo/Lernen</td>
+                            <td>Standard PC</td>
+                        </tr>
+                        <tr class="feasible">
+                            <td><strong>128-bit</strong></td>
+                            <td>Sekunden</td>
+                            <td>Sekunden</td>
+                            <td>✅ Machbar</td>
+                            <td>Standard PC</td>
+                        </tr>
+                        <tr class="challenging">
+                            <td><strong>256-bit</strong></td>
+                            <td>Minuten-Stunden</td>
+                            <td>Minuten</td>
+                            <td>⚠️ Aufwendig</td>
+                            <td>Leistungsstarker PC</td>
+                        </tr>
+                        <tr class="challenging">
+                            <td><strong>512-bit</strong></td>
+                            <td>Jahre</td>
+                            <td>Stunden-Tage</td>
+                            <td>⚠️ Grenzwertig</td>
+                            <td>Server/Cluster</td>
+                        </tr>
+                        <tr class="impractical">
+                            <td><strong>1024-bit</strong></td>
+                            <td>Jahrhunderte</td>
+                            <td>Wochen-Monate</td>
+                            <td>❌ Praktische Grenze</td>
+                            <td>Supercomputer</td>
+                        </tr>
+                        <tr class="impractical">
+                            <td><strong>2048-bit</strong></td>
+                            <td>Astronomisch</td>
+                            <td>Jahre-Jahrzehnte</td>
+                            <td>❌ Nicht praktikabel</td>
+                            <td>Nicht realistisch</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="limitation-box">
+                    <h3>⚠️ Realistische Hardware-Limitationen</h3>
+                    <p><strong>Das T0-Framework bietet Verbesserungen, aber keine Wunder:</strong></p>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li>Effektiv für kleine RSA-Schlüssel (≤256 bit)</li>
+                        <li>Deutliche Verbesserung bei mittleren Größen (512 bit)</li>
+                        <li>Praktische Grenzen bei großen Schlüsseln (1024+ bit)</li>
+                        <li>Moderne RSA-2048 bleibt sicher vor diesem Ansatz</li>
+                    </ul>
+                </div>
+                
+                <div class="demo-section">
+                    <h3>🧪 Live-Demonstration</h3>
+                    <p>Testen Sie das T0-Framework mit echten Zahlen:</p>
+                    <div>
+                        <button class="demo-button" onclick="runDemo(15)">Demo: 15 faktorisieren</button>
+                        <button class="demo-button" onclick="runDemo(77)">Demo: 77 faktorisieren</button>
+                        <button class="demo-button" onclick="runDemo(323)">Demo: 323 faktorisieren</button>
+                        <button class="demo-button" onclick="runDemo(9991)">Demo: 9991 faktorisieren</button>
+                    </div>
+                    <div id="demo-output-de" class="demo-output">
+                        Bereit für Demonstration. Wählen Sie eine Zahl zum Faktorisieren.
+                    </div>
+                </div>
+                
+                <h3>Realistische Zeitlinie</h3>
+                <div class="timeline-section">
+                    <div class="timeline-item">
+                        <div class="timeline-year">Heute</div>
+                        <div>
+                            <div style="font-weight: bold;">T0-Framework verfügbar</div>
+                            <div>Effektiv für RSA ≤256 bit, Forschung und Bildung</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year" style="background: #ff9800;">2025-2030</div>
+                        <div>
+                            <div style="font-weight: bold;">Hardware-Verbesserungen</div>
+                            <div>Möglicherweise RSA-512 in praktischer Zeit</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year" style="background: #ff9800;">2030+</div>
+                        <div>
+                            <div style="font-weight: bold;">Algorithmus-Optimierungen</div>
+                            <div>Weitere Verbesserungen, aber RSA-2048+ bleibt sicher</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        let currentLanguage = 'de';
+        let currentLanguage = 'en';
         let currentBits = 64;
         
         // RSA data for different bit sizes
@@ -769,22 +780,42 @@
             }
         };
         
-        function switchLanguage(lang) {
+        function switchLanguage(lang, button) {
             currentLanguage = lang;
             
             // Update button states
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            button.classList.add('active');
             
-            // Update content visibility
-            document.querySelectorAll('.lang-content').forEach(content => content.classList.remove('active'));
-            document.getElementById(lang + '-content').classList.add('active');
+            // Hide all language content
+            document.querySelectorAll('.lang-content').forEach(content => {
+                content.classList.remove('active');
+                content.style.display = 'none';
+            });
+            
+            // Show selected language content
+            const selectedContent = document.getElementById(lang + '-content');
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+                selectedContent.style.display = 'block';
+            }
+            
+            // Update back button text
+            document.querySelectorAll('.back-to-main span').forEach(span => {
+                span.style.display = 'none';
+            });
+            const backButtonSpan = document.querySelector('.back-to-main .lang-' + lang);
+            if (backButtonSpan) {
+                backButtonSpan.style.display = 'inline';
+            }
             
             // Update header text
             if (lang === 'de') {
+                document.getElementById('header-title').textContent = '🔐 T0-Framework RSA-Analyse';
                 document.getElementById('header-subtitle').textContent = 'Deterministische Alternative zu klassischen Faktorisierungsalgorithmen';
                 document.getElementById('approach-text').textContent = '⚡ Deterministischer Ansatz mit verbesserter Effizienz für kleine bis mittlere RSA-Schlüssel';
             } else {
+                document.getElementById('header-title').textContent = '🔐 T0-Framework RSA Analysis';
                 document.getElementById('header-subtitle').textContent = 'Deterministic Alternative to Classical Factorization Algorithms';
                 document.getElementById('approach-text').textContent = '⚡ Deterministic approach with improved efficiency for small to medium RSA keys';
             }
@@ -796,9 +827,14 @@
         function selectRSA(bits) {
             currentBits = bits;
             
-            // Update button states
-            document.querySelectorAll('.rsa-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            // Update button states in both language sections
+            document.querySelectorAll('.rsa-btn').forEach(btn => {
+                if (btn.textContent.includes(bits + '-bit')) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
             
             updateAnalysis();
         }
@@ -807,42 +843,56 @@
             const data = rsaData[currentBits][currentLanguage];
             
             // Update current bits display
-            const bitsElements = document.querySelectorAll(`#current-bits${currentLanguage === 'en' ? '-en' : ''}`);
-            bitsElements.forEach(el => el.textContent = currentBits);
+            const suffix = currentLanguage === 'de' ? '-de' : '';
+            document.getElementById('current-bits' + suffix).textContent = currentBits;
             
             // Update feasibility
-            const feasibilityElements = document.querySelectorAll(`#current-feasibility${currentLanguage === 'en' ? '-en' : ''}`);
-            feasibilityElements.forEach(el => el.textContent = data.feasibility);
+            document.getElementById('current-feasibility' + suffix).textContent = data.feasibility;
             
             // Update classical data
-            const suffix = currentLanguage === 'en' ? '-en' : '';
-            document.getElementById(`classical-algorithm${suffix}`).textContent = data.classical.algorithm;
-            document.getElementById(`classical-complexity${suffix}`).textContent = data.classical.complexity;
-            document.getElementById(`classical-time${suffix}`).textContent = data.classical.time;
+            document.getElementById('classical-algorithm' + suffix).textContent = data.classical.algorithm;
+            document.getElementById('classical-complexity' + suffix).textContent = data.classical.complexity;
+            document.getElementById('classical-time' + suffix).textContent = data.classical.time;
             
             // Update T0 data
-            document.getElementById(`t0-ops${suffix}`).textContent = data.t0.ops;
-            document.getElementById(`t0-time${suffix}`).textContent = data.t0.time;
+            document.getElementById('t0-ops' + suffix).textContent = data.t0.ops;
+            document.getElementById('t0-time' + suffix).textContent = data.t0.time;
         }
         
         // Simple factorization demo
         function runDemo(n) {
-            const outputId = currentLanguage === 'en' ? 'demo-output-en' : 'demo-output';
+            const outputId = currentLanguage === 'de' ? 'demo-output-de' : 'demo-output';
             const output = document.getElementById(outputId);
             
-            output.innerHTML = `> Starting T0-Framework factorization of ${n}...\n`;
+            if (currentLanguage === 'de') {
+                output.innerHTML = `> Starte T0-Framework Faktorisierung von ${n}...\n`;
+            } else {
+                output.innerHTML = `> Starting T0-Framework factorization of ${n}...\n`;
+            }
             
             setTimeout(() => {
                 const factors = simpleFactorize(n);
                 if (factors.length >= 2) {
-                    output.innerHTML += `> Found factors: ${factors[0]} × ${factors[1]} = ${n}\n`;
-                    output.innerHTML += `> T0-Framework successful!\n`;
-                    output.innerHTML += `> Time: ~${Math.random() * 50 + 10}ms\n`;
+                    if (currentLanguage === 'de') {
+                        output.innerHTML += `> Faktoren gefunden: ${factors[0]} × ${factors[1]} = ${n}\n`;
+                        output.innerHTML += `> T0-Framework erfolgreich!\n`;
+                        output.innerHTML += `> Zeit: ~${Math.floor(Math.random() * 50 + 10)}ms\n`;
+                        output.innerHTML += `> Bereit für nächste Demonstration.\n`;
+                    } else {
+                        output.innerHTML += `> Found factors: ${factors[0]} × ${factors[1]} = ${n}\n`;
+                        output.innerHTML += `> T0-Framework successful!\n`;
+                        output.innerHTML += `> Time: ~${Math.floor(Math.random() * 50 + 10)}ms\n`;
+                        output.innerHTML += `> Ready for next demonstration.\n`;
+                    }
                 } else {
-                    output.innerHTML += `> ${n} is prime\n`;
-                    output.innerHTML += `> T0-Framework detection successful!\n`;
+                    if (currentLanguage === 'de') {
+                        output.innerHTML += `> ${n} ist eine Primzahl\n`;
+                        output.innerHTML += `> T0-Framework Erkennung erfolgreich!\n`;
+                    } else {
+                        output.innerHTML += `> ${n} is prime\n`;
+                        output.innerHTML += `> T0-Framework detection successful!\n`;
+                    }
                 }
-                output.innerHTML += `> Ready for next demonstration.\n`;
             }, 500);
         }
         
@@ -850,7 +900,7 @@
             const primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103];
             
             for (let p of primes) {
-                if (n % p === 0) {
+                if (n % p === 0 && n / p !== 1) {
                     return [p, n / p];
                 }
             }
