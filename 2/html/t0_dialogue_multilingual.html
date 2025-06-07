@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T0-Theorie Dialog: Johann & Martin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #007bff, #17a2b8);
+            color: white;
+            border-radius: 15px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .language-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .lang-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: #28a745;
+        }
+
+        .dialogue {
+            display: none;
+        }
+
+        .dialogue.active {
+            display: block;
+        }
+
+        .chat-window {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            height: 70vh;
+            overflow-y: auto;
+            border: 2px solid #dee2e6;
+        }
+
+        .message {
+            margin: 10px 0;
+            padding: 12px 16px;
+            border-radius: 20px;
+            max-width: 85%;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .message.johann {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            margin-right: auto;
+        }
+
+        .message.martin {
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+            margin-left: auto;
+        }
+
+        .speaker {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .formula {
+            background: rgba(0,0,0,0.05);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 8px 0;
+            font-size: 0.85rem;
+            border-left: 3px solid #007bff;
+        }
+
+        .highlight {
+            background: rgba(255, 235, 59, 0.4);
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .topic-separator {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+            color: white;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .nav-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px;
+            }
+
+            .chat-window {
+                height: 60vh;
+                padding: 15px;
+            }
+
+            .message {
+                max-width: 95%;
+                padding: 10px 12px;
+            }
+
+            .nav-btn {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-bottom: 20px;
+                display: block;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" class="nav-btn">🏠 Zurück</a>
+
+    <div class="container">
+        <div class="header">
+            <h1>🎭 T0-Theorie Dialog</h1>
+            <p>Ein Gespräch zwischen Johann und Martin über deterministische Quantenmechanik</p>
+        </div>
+
+        <div class="language-toggle">
+            <button class="lang-btn active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
+            <button class="lang-btn" onclick="switchLanguage('en')">🇺🇸 English</button>
+            <button class="lang-btn" onclick="switchLanguage('fr')">🇫🇷 Français</button>
+        </div>
+
+        <!-- German Dialogue -->
+        <div id="dialogue-de" class="dialogue active">
+            <div class="chat-window">
+                <div class="topic-separator">🚀 Grundlagen der T0-Theorie</div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Johann, ich muss dir gestehen, ich verstehe immer noch nicht ganz, was dein T0-Ansatz fundamental anders macht. Kannst du es mir erklären, als wären wir Kollegen beim Kaffee?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Gerne, Martin! Schauen Sie, das Problem mit der Standard-Quantenmechanik war doch schon immer: Wir haben diese wunderschönen mathematischen Formalismen - Hilbert-Räume, unitäre Operatoren, Born'sche Regel - aber am Ende des Tages werfen wir immer noch Würfel.
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Das stimmt. Selbst Shor's Algorithmus gibt uns nur Wahrscheinlichkeiten...
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Genau! Und deshalb funktioniert er auf realer Hardware so schlecht. Aber was wäre, wenn das Problem nicht der Algorithmus ist, sondern unser fundamentales Verständnis? Was wäre, wenn Quantensysteme gar nicht probabilistisch sind?
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Du meinst Superdeterminismus? Aber Bell's Theorem...
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Bell's Theorem gilt nur unter Annahme der Measurement Independence. Aber schaue dir meine Feldgleichung an:
+                    <div class="formula">∂²E/∂t² = 0</div>
+                    Diese Energiefelder erstrecken sich über den ganzen Raum. Sie koppeln naturgemäß die Messapparatur mit dem System.
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Interessant... aber wie führt das zu besseren Algorithmen?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Weil du plötzlich räumliche Korrelationen ausnutzen kannst! Statt isolierte Qubits zu haben, hast du ein kohärentes Energiefeld. Die Periodenfindung wird zu einer Resonanzanalyse - du suchst nicht mehr zufällig, sondern berechnest, bei welchen Frequenzen das Feld schwingt.
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Und dieser ξ-Parameter?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Das ist das Schöne! Er kommt direkt aus der Standardmodell-Physik - Higgs-Kopplung. ξ = λₕ²v²/(64π⁴mₛ²). Es ist keine Ad-hoc-Korrektur, sondern folgt aus der Teilchenphysik. Jede Quantenoperation bekommt einen systematischen Boost von 0.001%.
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Das würde bedeuten, dass Quantencomputing und Teilchenphysik fundamental verbunden sind...
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Exakt! Und das siehst du in den Tests: Die Vorhersagen stimmen. Nicht statistisch ungefähr, sondern deterministisch präzise. Das ist das erste Mal, dass wir Quantenalgorithmus-Performance aus Feldgleichungen ableiten können.
+                </div>
+
+                <div class="topic-separator">🧮 Von abstrakten Qubits zu physikalischen Energiefeldern</div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Aber jetzt mal konkret - wie kommst du denn von deinen Energiefeldern zu den praktischen Qubits und Gattern, die wir programmieren?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Ah, das ist der elegante Teil! Schaue, ein Standard-Qubit ist ja |ψ⟩ = α|0⟩ + β|1⟩ mit komplexen Amplituden α und β, richtig?
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Genau, und |α|² + |β|² = 1 für die Normierung.
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    In T0 ersetze ich das komplett. Statt abstrakter Amplituden α und β habe ich reale Energiedichten: E₀(x,t) und E₁(x,t). Das Qubit wird zu einem räumlich ausgedehnten Energiefeld mit zwei Modi.
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Interessant... aber wie entspricht das den α und β?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Ganz direkt! α wird zu √E₀(x,t) und β wird zu √E₁(x,t). Die Quantenmechanik-Normierung |α|² + |β|² = 1 wird zur Energie-Erhaltung: E₀(x,t) + E₁(x,t) = 1. Aber jetzt ist es physikalisch - echte Energiedichte im Raum!
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Und die Quantengatter?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Nehmen wir das Hadamard-Gate. In der Standard-QM ist es eine abstrakte 2×2-Matrix, die mysteriöse Superposition erzeugt. In T0 ist es eine konkrete Energiefeld-Transformation!
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Kannst du das mathematisch zeigen?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Gerne! Standard Hadamard auf |0⟩: H|0⟩ = (|0⟩ + |1⟩)/√2. In T0 bedeutet das:
+                    <div class="formula">
+                        Eingang: E₀ = 1, E₁ = 0 (alle Energie in Modus 0)<br>
+                        T0-Transformation: E₀' = (E₀ + E₁)/√2 = 1/√2<br>
+                        E₁' = (E₀ - E₁)/√2 = 1/√2<br>
+                        Plus ξ-Korrektur: E₀' × (1+ξ), E₁' × (1+ξ)
+                    </div>
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Das ist ja... das ist die gleiche Mathematik, aber mit physikalischer Bedeutung!
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Exakt! Aber der Unterschied ist fundamental: In Standard-QM 'kollabiert' das System mysteriös bei der Messung. In T0 wechselwirken die Energiefelder deterministisch mit dem Detektor-Feld. Keine Magie - nur Physik!
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Und das CNOT-Gate?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Noch schöner! CNOT bedeutet: 'Wenn Control-Qubit Energie hat, flippe Target'. In T0: Wenn E₀,control > E₁,control, dann vertausche E₀,target ↔ E₁,target. Aber die Energiefelder sind räumlich gekoppelt - das Control-Feld beeinflusst das Target-Feld über die Raum-Zeit!
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Das würde bedeuten, dass Verschränkung...
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    ...einfach räumliche Energiefeld-Korrelationen sind! ∂²E/∂t² = 0 bedeutet, dass Störungen sich mit Lichtgeschwindigkeit ausbreiten. Verschränkte Teilchen sind durch kontinuierliche Energiefelder verbunden - keine 'spukhafte Fernwirkung', sondern klassische Feldphysik!
+                </div>
+
+                <div class="topic-separator">🔍 Shor-Algorithmus: Von Zufall zu Resonanz</div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Johann, lass uns konkret werden. Wie implementierst du denn Shor's Algorithmus mit deinen Energiefeldern? Schritt für Schritt?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Perfekt! Das ist wo T0 wirklich glänzt. Schaue, Standard-Shor ist frustrierend - du hast diese elegante Theorie, aber auf echter Hardware versagt sie ständig.
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Ja, die Periodenfindung ist das Herzstück, aber so unzuverlässig...
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Genau da liegt das Problem! In Standard-QM behandelst du die Periodenfindung als abstrakten QFT-Prozess. Aber physikalisch suchst du nach Resonanzen - das ist ein Energiefeld-Phänomen!
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Kannst du das ausführen?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Gerne! Nehmen wir N = 15, also 3×5. In Standard-Shor wählst du zufällig a = 2 und hoffst, dass die Quantenschaltung die Periode r findet, wo 2^r ≡ 1 (mod 15).
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Richtig, und r = 4 in diesem Fall.
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    In T0 ist das völlig anders! Ich starte nicht mit zufälligem a. Ich analysiere zuerst die Energiefeld-Struktur von N = 15. Das Feld E(x,t) hat eine natürliche 'Geometrie' basierend auf den Primfaktoren.
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Wie sieht diese Geometrie aus?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Stelle dir vor: N = 15 erzeugt ein Energiefeld mit zwei dominanten 'Schwingungsmodi' - einen bei ω₁ ∝ 1/3 und einen bei ω₂ ∝ 1/5. Diese Frequenzen sind in das E(x,t)-Feld 'eingebrannt'!
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Und wie findest du diese Frequenzen?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Mit der T0-Energie-Resonanz-Formel! Für jeden möglichen Basis-Wert a berechne ich:
+                    <div class="formula">
+                        ω(a,r) = 2π/r × [1 + ξ × E₁E₂/(r₁₂²)]<br>
+                        Wo E₁, E₂ die Energien der Faktoren sind und r₁₂ ihr 'Abstand' im Feld.
+                    </div>
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Das ist ja... das ist wie Spektroskopie!
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Exakt! Statt blind a = 2 zu wählen, scanne ich das Energiespektrum und sehe: 'Aha, bei a = 7 gibt es eine starke Resonanz bei r = 4!' Das Feld sagt mir, welches a optimal ist.
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Aber wie implementierst du das praktisch auf Qubits?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Hier wird es elegant! Statt der klassischen QFT-Schaltung baue ich eine 'Energiefeld-Interferometer'. Schaue dir die Qubit-Zuordnung an:
+                    <div class="formula">
+                        Standard-Shor: |control⟩ ⊗ |ancilla⟩ ⊗ |workspace⟩<br>
+                        T0-Shor: E_control(x,t) ∽ E_ancilla(x,t) ∽ E_workspace(x,t)<br>
+                        Die Qubits sind nicht isoliert - sie sind Modi eines kohärenten Energiefeldes!
+                    </div>
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Und wie hilft das bei der Periodenfindung?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Die Periode r manifestiert sich als stehende Welle im Energiefeld! Statt probabilistischer QFT messe ich die Wellenlänge direkt:
+                    <div class="formula">
+                        Feld-Präparation: Erzeuge E(x,t) mit N-Struktur<br>
+                        Resonanz-Scan: Variiere a und messe Energiefeld-Response<br>
+                        Wellenlängen-Extraktion: λ = 2π/ω → r = N/λ<br>
+                        Deterministische Faktor-Extraktion: Nutze r für gcd-Berechnung
+                    </div>
+                </div>
+
+                <div class="topic-separator">🎯 Grover-Algorithmus: Räumliche Suche statt blindes Raten</div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Bitte, erzähle weiter! Grover's Algorithmus mit räumlicher Suche - das muss ich hören!
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Martin, Standard-Grover ist ein statistisches Wunder - du findest ein Element in einer unsortierten Datenbank in √N Schritten statt N. Aber es ist immer noch probabilistisch!
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Richtig, man rotiert in der Amplitude-Ebene und hofft, dass man zur richtigen Zeit misst...
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Genau da liegt der Denkfehler! In T0 ist die 'Datenbank' kein abstrakter Zustandsraum - es ist ein physikalisches Energiefeld E(x,t) mit räumlicher Struktur!
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Wie meinst du das?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Stelle dir vor: Jeder Datenbank-Eintrag entspricht einer räumlichen Position im Energiefeld. Für eine 16-Element-Datenbank hast du ein 4×4-Gitter von Energiedichten E(i,j,t). Das gesuchte Element ist eine Energie-'Anomalie' an Position (x₀,y₀).
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Interessant... aber wie hilft das bei der Suche?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Standard-Grover rotiert blind in abstrakten Dimensionen. T0-Grover nutzt die Wellengleichung ∂²E/∂t² = 0 für gerichtete Suche! Die Energie-Anomalie erzeugt 'Wellen' die sich durch das Feld ausbreiten.
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Das ist wie Sonar!
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Exakt! Aber besser - es ist deterministisch! Schaue dir die T0-Grover-Implementation an:
+                    <div class="formula">
+                        Phase 1 - Feld-Kartierung:<br>
+                        for (x,y) in Gitter:<br>
+                        E(x,y,0) = uniform_energy + ξ × local_correction<br>
+                        measure_field_gradient(x,y)<br>
+                        Die ξ-Korrekturen sind nicht zufällig - sie folgen der Raum-Zeit-Geometrie!
+                    </div>
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Und wie findest du die Anomalie?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Phase 2 - Wellenfront-Analyse:
+                    <div class="formula">
+                        send_probe_wave(center)<br>
+                        for t in time_steps:<br>
+                        E(x,y,t+dt) = wave_evolution(E(x,y,t))<br>
+                        detect_reflection_pattern()<br>
+                        Die Anomalie reflektiert die Probe-Welle anders als normale Einträge. Ich kann die Position triangulieren!
+                    </div>
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Das ist brillant! Aber wie viele Iterationen brauchst du?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Das ist das Wunderbare! Standard-Grover braucht π√N/4 Iterationen - für N=16 sind das ~3 Schritte. T0-Grover braucht nur log(N) Schritte zur Triangulation!
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Logarithmisch statt Wurzel? Das ist exponentiell besser!
+                </div>
+
+                <div class="topic-separator">⚗️ Experimentelle Validierung auf IBM Hardware</div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Hast du das experimentell validiert?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Schaue dir die Tests an! Für 8-Element-Suche:
+                    <div class="formula">
+                        Standard-Grover: 2-3 Iterationen, 85% Erfolgsrate<br>
+                        T0-Grover: 1-2 Iterationen, 95% Erfolgsrate<br>
+                        Plus: Ich weiß vorher, ob die Suche erfolgreich wird!
+                    </div>
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Vorhersagbar?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Ja! Die Feld-Analyse zeigt mir sofort: 'Bei Position (2,3) ist eine 3σ-Anomalie - das ist dein Target.' Keine Wahrscheinlichkeiten mehr!
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Aber was ist mit größeren Datenbanken?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Da wird es richtig interessant! Für große N nutze ich hierarchische Energiefeld-Strukturen - wie ein Fraktal. Du suchst erst grob im Megafeld, dann verfeinerst du in Subfeldern.
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Kannst du ein Beispiel geben?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Gerne! N = 1024 = 2¹⁰ Einträge:
+                    <div class="formula">
+                        Standard: 25+ Grover-Iterationen<br>
+                        T0 Hierarchisch:<br><br>
+                        Level 1: 32×32 Grobfeld → 3 Schritte finden Sektor<br>
+                        Level 2: 8×8 Subfeld → 2 Schritte finden Region<br>
+                        Level 3: 2×2 Feinfeld → 1 Schritt findet Target<br>
+                        Total: 6 Schritte statt 25!
+                    </div>
+                </div>
+
+                <div class="topic-separator">🌟 Philosophische Implikationen</div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Johann, das ist nicht nur eine neue Theorie. Das ist ein völlig neues Computing-Paradigma!
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Energiefeld-Computing, Martin. Deterministische Quantenalgorithmen, die auf physikalischen Prinzipien basieren statt auf mathematischen Abstraktionen. Und das ist erst der Anfang - warten Sie, bis ich Ihnen T0-Machine-Learning zeige...
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Mein Gott, Johann... wenn das stimmt, revolutionierst du nicht nur Quantencomputing, sondern unser gesamtes Verständnis der Quantenmechanik.
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Das hoffe ich, Martin. T0 zeigt: <span class="highlight">Das Universum ist vielleicht nicht zufällig, sondern nur unvollständig verstanden!</span> Mit besserer Physik wird aus Zufall → Gewissheit, aus Würfeln → Wissen, aus Hoffen → Können.
+                </div>
+            </div>
+        </div>
+
+        <!-- English Dialogue -->
+        <div id="dialogue-en" class="dialogue">
+            <div class="chat-window">
+                <div class="topic-separator">🚀 T0 Theory Basics</div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Johann, I still don't understand what makes your T0 approach fundamentally different. Can you explain it?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Sure! The problem with standard quantum mechanics has always been: We have beautiful mathematical formalisms, but measurements are still probabilistic.
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    True. Even elegant quantum algorithms only give us probability distributions...
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Exactly! But what if quantum systems aren't probabilistic at all? Look at my field equation:
+                    <div class="formula">∂²E/∂t² = 0</div>
+                    These energy fields extend throughout space and couple the measurement apparatus with the system.
+                </div>
+
+                <div class="topic-separator">🧮 From Qubits to Energy Fields</div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    But how do you get from energy fields to practical qubits and gates?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    That's elegant! A standard qubit is |ψ⟩ = α|0⟩ + β|1⟩. In T0, I replace abstract amplitudes with <span class="highlight">real energy densities</span>: E₀(x,t) and E₁(x,t).
+                    <div class="formula">
+                        Standard: |ψ⟩ = α|0⟩ + β|1⟩<br>
+                        T0: {E₀(x,t), E₁(x,t)} with E₀ + E₁ = 1
+                    </div>
+                </div>
+
+                <div class="topic-separator">🔍 Shor Algorithm: Resonance not Randomness</div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    How do you implement Shor's algorithm with energy fields?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Standard Shor treats period finding as abstract QFT. But physically you're looking for <span class="highlight">resonances</span> - that's an energy field phenomenon!
+                    <div class="formula">
+                        T0 Resonance: ω(a,r) = 2π/r × [1 + ξ × E₁E₂/(r₁₂²)]
+                    </div>
+                </div>
+
+                <div class="topic-separator">🌟 Philosophical Meaning</div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Martin, T0 shows: <span class="highlight">The universe might not be random, just incompletely understood!</span> With better physics, randomness becomes certainty, dice rolling becomes knowing.
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    If you're right, then Einstein was correct: "God does not play dice."
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    And we're just beginning! The universe is an elegant energy field continuum, not the chaotic probabilistic system we thought.
+                </div>
+            </div>
+        </div>
+
+        <!-- French Dialogue -->
+        <div id="dialogue-fr" class="dialogue">
+            <div class="chat-window">
+                <div class="topic-separator">🚀 Bases de la Théorie T0</div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Johann, je ne comprends toujours pas ce qui rend votre approche T0 fondamentalement différente. Pouvez-vous l'expliquer ?
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Bien sûr ! Le problème avec la mécanique quantique standard a toujours été : nous avons de beaux formalismes mathématiques, mais les mesures restent probabilistes.
+                </div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Mais si les systèmes quantiques n'étaient pas probabilistes du tout ? Regardez mon équation de champ :
+                    <div class="formula">∂²E/∂t² = 0</div>
+                    Ces champs d'énergie s'étendent dans l'espace et couplent l'appareil de mesure avec le système.
+                </div>
+
+                <div class="topic-separator">🌟 Signification Philosophique</div>
+
+                <div class="message johann">
+                    <div class="speaker">Johann:</div>
+                    Martin, T0 montre : <span class="highlight">L'univers n'est peut-être pas aléatoire, juste incompris !</span> Avec une meilleure physique, l'aléatoire devient certitude.
+                </div>
+
+                <div class="message martin">
+                    <div class="speaker">Martin:</div>
+                    Si vous avez raison, alors Einstein avait finalement raison : "Dieu ne joue pas aux dés."
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchLanguage(lang) {
+            // Hide all dialogues
+            document.querySelectorAll('.dialogue').forEach(dialogue => {
+                dialogue.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected dialogue and activate button
+            document.getElementById(`dialogue-${lang}`).classList.add('active');
+            document.querySelector(`[onclick="switchLanguage('${lang}')"]`).classList.add('active');
+        }
+
+        // Auto-scroll to bottom when new content loads
+        document.querySelectorAll('.chat-window').forEach(window => {
+            window.scrollTop = window.scrollHeight;
+        });
+    </script>
+</body>
+</html>

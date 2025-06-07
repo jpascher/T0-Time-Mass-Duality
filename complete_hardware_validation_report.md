@@ -13,10 +13,9 @@
 
 ## Executive Summary
 
-**Research Summary**: This report documents experimental validation of T0-Theory (deterministic quantum mechanics) on IBM Quantum hardware. The experiments demonstrate that deterministic quantum computing reproduces standard quantum mechanical results with enhanced repeatability.
+
 
 **Key Results**:
-- **Hardware Compatibility**: T0-Theory executed successfully on 127-qubit IBM quantum computers
 - **Algorithmic Equivalence**: T0 predictions matched hardware results within experimental precision
 - **Enhanced Repeatability**: Improved consistency compared to standard QM expectations
 - **Bell State Fidelity**: 97.17% achieved on quantum hardware
