@@ -15,34 +15,29 @@ T0-Time-Mass-Duality/
 ├── 2/
 │   ├── html/                     # Interaktive HTML-Explorationen (zweisprachig)
 │   └── pdf/                      # Technische Dokumente
-├── quantum_simulator_deterministic.html   # Quantencomputer-Simulator
-├── step_by_step_modules_bilingual.html    # Implementierungsanleitung
-├── t0_dialogue_multilingual.html          # Erklärungs-Dialog
-├── t0_quantum_simple.html                 # Allgemeine Einführung
-├── t0_hardware_validation_presentation.html # Hardware-Vergleichsstudie
-├── index.html                             # Projekt-Interface
-└── README_de.md                           # Diese Datei
+├── README.md                     # Englische Version
+└── README_de.md                  # Diese Datei
 ```
 
 ## Dokumentation und Tools
 
 ### Simulations- und Implementierungstools
 
-**[Deterministischer Quantencomputer-Simulator](https://jpascher.github.io/T0-Time-Mass-Duality/quantum_simulator_deterministic.html)**  
+**[Deterministischer Quantencomputer-Simulator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/quantum_simulator_deterministic.html)**  
 *Quantencomputer-Simulator mit T0-Framework-Implementierung. Enthält Qubit-Operationen, Quantengatter und Algorithmus-Implementierungen. Vergleichsstudie mit IBM-Hardware-Daten eingeschlossen.*
 
-**[T0-Quantenmodule: Implementierungsanleitung](https://jpascher.github.io/T0-Time-Mass-Duality/step_by_step_modules_bilingual.html)**  
+**[T0-Quantenmodule: Implementierungsanleitung](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/step_by_step_modules_bilingual.html)**  
 *Technische Anleitung für T0-basierte Quantenalgorithmen mit drei Implementierungsstufen: Kern-Simulator, Algorithmus-Bibliothek und Analyse-Tools.*
 
-**[Hardware-Vergleichsstudie](https://jpascher.github.io/T0-Time-Mass-Duality/t0_hardware_validation_presentation.html)**  
+**[Hardware-Vergleichsstudie](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_hardware_validation_presentation.html)**  
 *Vergleichende Analyse zwischen T0-Simulator-Vorhersagen und veröffentlichten IBM-Quantenhardware-Ergebnissen. Untersucht Konsistenz zwischen theoretischen Vorhersagen und experimentellen Daten.*
 
 ### Bildungsressourcen
 
-**[T0-Theorie-Dialog](https://jpascher.github.io/T0-Time-Mass-Duality/t0_dialogue_multilingual.html)**  
+**[T0-Theorie-Dialog](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_dialogue_multilingual.html)**  
 *Präsentation im Diskussionsformat zwischen Entwickler und Wissenschaftler über deterministische Quantenmechanik. Verfügbar in Deutsch, Englisch und Französisch.*
 
-**[T0-Quantencomputing Einführung](https://jpascher.github.io/T0-Time-Mass-Duality/t0_quantum_simple.html)**  
+**[T0-Quantencomputing Einführung](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_simple.html)**  
 *Verständliche Einführung in T0-Quantencomputing-Konzepte für allgemeines Publikum.*
 
 ### Interaktive HTML-Explorationen (Zweisprachig 🇩🇪/🇬🇧)
@@ -81,97 +76,97 @@ T0-Time-Mass-Duality/
 ### Technische Arbeiten
 
 #### Kerntheorie-Dokumente
-**[Reine Energie T0-Theorie: Die Verhältnis-basierte Revolution](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Elimination_Of_Mass_Dirac_LagDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Elimination_Of_Mass_Dirac_LagEn.pdf)**  
+**[Reine Energie T0-Theorie: Die Verhältnis-basierte Revolution](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Elimination_Of_Mass_Dirac_LagDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Elimination_Of_Mass_Dirac_LagEn.pdf)**  
 *Mathematische Formulierung mit Energie als fundamentaler Größe in natürlichen Einheiten.*
 
-**[T0-Modell Berechnungsverifikation: Skalenverhältnisse vs. CODATA-Werte](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Elimination_Of_Mass_Dirac_TabelleDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Elimination_Of_Mass_Dirac_TabelleEn.pdf)**  
+**[T0-Modell Berechnungsverifikation: Skalenverhältnisse vs. CODATA-Werte](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Elimination_Of_Mass_Dirac_TabelleDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Elimination_Of_Mass_Dirac_TabelleEn.pdf)**  
 *Vergleich von T0-Vorhersagen mit CODATA-Werten.*
 
-**[Elimination der Masse](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/EliminationOfMassDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/EliminationOfMassEn.pdf)**  
+**[Elimination der Masse](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/EliminationOfMassDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/EliminationOfMassEn.pdf)**  
 *Vollständiges Framework zur Massen-Elimination in der Grundlagenphysik.*
 
-**[E=mc² Analyse](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/E-mc2_De.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/E-mc2_En.pdf)**  
+**[E=mc² Analyse](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/E-mc2_De.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/E-mc2_En.pdf)**  
 *Neuinterpretation der Einstein-Gleichung im T0-Framework.*
 
 #### Mathematische Grundlagen
-**[Dirac-Gleichung in T0](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/diracDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/diracEn.pdf)**  
+**[Dirac-Gleichung in T0](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/diracDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/diracEn.pdf)**  
 *T0-Formulierung der Dirac-Gleichung.*
 
-**[Vereinfachte Dirac-Formulierung](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/diracVereinfachtDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/diracVereinfachtEn.pdf)**  
+**[Vereinfachte Dirac-Formulierung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/diracVereinfachtDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/diracVereinfachtEn.pdf)**  
 *Vereinfachter Ansatz zur Dirac-Physik in T0.*
 
-**[Herleitung von Beta](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/DerivationVonBetaDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/DerivationVonBetaEn.pdf)**  
+**[Herleitung von Beta](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/DerivationVonBetaDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/DerivationVonBetaEn.pdf)**  
 *Mathematische Herleitung des β_T Parameters.*
 
-**[Erweiterte Beta-Herleitung](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/DerivationVonBetaEnRDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/DerivationVonBetaEnREn.pdf)**  
+**[Erweiterte Beta-Herleitung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/DerivationVonBetaEnRDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/DerivationVonBetaEnREn.pdf)**  
 *Umfassende Herleitung mit zusätzlichen Beweisen.*
 
-**[Lagrange-Formulierung](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/lagrandian-einfachDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/lagrandian-einfachEn.pdf)**  
+**[Lagrange-Formulierung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/lagrandian-einfachDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/lagrandian-einfachEn.pdf)**  
 *Einfacher Lagrange-Ansatz in der T0-Theorie.*
 
-**[Lagrange-Vergleich](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/LagrandianVergleichDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/LagrandianVergleichEn.pdf)**  
+**[Lagrange-Vergleich](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/LagrandianVergleichDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/LagrandianVergleichEn.pdf)**  
 *Vergleich von T0- und Standard-Lagrange-Formulierungen.*
 
-**[Mathematische Zeit-Masse-Lagrange](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/MathZeitMasseLagrangeDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/MathZeitMasseLagrangeEn.pdf)**  
+**[Mathematische Zeit-Masse-Lagrange](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/MathZeitMasseLagrangeDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/MathZeitMasseLagrangeEn.pdf)**  
 *Mathematische Behandlung der Zeit-Masse-Dualität in der Lagrange-Mechanik.*
 
 #### Natürliche Einheiten und Konstanten
-**[Natürliche Einheiten Systematik](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/NatEinheitenSystematikDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/NatEinheitenSystematikEn.pdf)**  
+**[Natürliche Einheiten Systematik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/NatEinheitenSystematikDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/NatEinheitenSystematikEn.pdf)**  
 *Systematische Herleitung natürlicher Einheiten.*
 
-**[Feinstrukturkonstante](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/FeinstrukturkonstanteDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/FeinstrukturkonstanteEn.pdf)**  
+**[Feinstrukturkonstante](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/FeinstrukturkonstanteDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/FeinstrukturkonstanteEn.pdf)**  
 *T0-Interpretation der Feinstrukturkonstante.*
 
-**[Auflösung der Konstanten Alpha](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/ResolvingTheConstantsAlfaDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/ResolvingTheConstantsAlfaEn.pdf)**  
+**[Auflösung der Konstanten Alpha](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/ResolvingTheConstantsAlfaDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/ResolvingTheConstantsAlfaEn.pdf)**  
 *Auflösung fundamentaler Konstanten in T0.*
 
-**[Parameter-Systemunabhängigkeit](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/ParameterSystemdipendentDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/ParameterSystemdipendentEn.pdf)**  
+**[Parameter-Systemunabhängigkeit](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/ParameterSystemdipendentDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/ParameterSystemdipendentEn.pdf)**  
 *Systemunabhängige Formulierung physikalischer Parameter.*
 
-**[Relokatives Zahlensystem](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/RelokativesZahlensystemDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/RelokativesZahlensystemEn.pdf)**  
+**[Relokatives Zahlensystem](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/RelokativesZahlensystemDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/RelokativesZahlensystemEn.pdf)**  
 *Neuartiges Zahlensystem für T0-Berechnungen.*
 
 #### Teilchenphysik und Feldtheorie
-**[Vollständige Myon g-2 Analyse](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/CompleteMuon_g-2_AnalysisDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/CompleteMuon_g-2_AnalysisEn.pdf)**  
+**[Vollständige Myon g-2 Analyse](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/CompleteMuon_g-2_AnalysisDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/CompleteMuon_g-2_AnalysisEn.pdf)**  
 *Umfassende Analyse des anomalen magnetischen Moments des Myons.*
 
-**[Dynamische Masse und Nichtlokale Photonen](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/DynMassePhotonenNichtlokalDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/DynMassePhotonenNichtlokalEn.pdf)**  
+**[Dynamische Masse und Nichtlokale Photonen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/DynMassePhotonenNichtlokalDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/DynMassePhotonenNichtlokalEn.pdf)**  
 *Nichtlokale Photonendynamik in der T0-Theorie.*
 
-**[H-Dokument](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/HdokumentDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/HdokumentEn.pdf)**  
+**[H-Dokument](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/HdokumentDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/HdokumentEn.pdf)**  
 *Higgs-Mechanismus im T0-Framework.*
 
-**[H₀-Analyse](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Ho_De.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Ho_En.pdf)**  
+**[H₀-Analyse](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Ho_De.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Ho_En.pdf)**  
 *Fundamentale H₀-Parameter-Analyse.*
 
-**[H₀-Energie](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Ho_EnergieDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Ho_EnergieEn.pdf)**  
+**[H₀-Energie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Ho_EnergieDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Ho_EnergieEn.pdf)**  
 *Energiebetrachtungen für H₀-Parameter.*
 
 #### Experimentelle und Angewandte Physik
-**[Temperatureinheiten und CMB](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/TempEinheitenCMBDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/TempEinheitenCMBEn.pdf)**  
+**[Temperatureinheiten und CMB](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/TempEinheitenCMBDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/TempEinheitenCMBEn.pdf)**  
 *Temperatureinheiten und kosmische Hintergrundstrahlung.*
 
-**[Mol und Candela](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Moll_CandelaDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Moll_CandelaEn.pdf)**  
+**[Mol und Candela](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Moll_CandelaDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Moll_CandelaEn.pdf)**  
 *T0-Behandlung von Mol- und Candela-Einheiten.*
 
-**[Systemanalyse](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/systemDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/systemEn.pdf)**  
+**[Systemanalyse](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/systemDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/systemEn.pdf)**  
 *Vollständige Systemanalyse in T0.*
 
 #### Quantenmechanik und Computing
-**[QM Deterministisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/QM-DetrmisticDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/QM-DetrmisticEn.pdf)**  
+**[QM Deterministisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-DetrmisticDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-DetrmisticEn.pdf)**  
 *Deterministische Quantenmechanik via T0-Energiefeld-Formulierung.*
 
-**[QM-Tests](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/QM-testenDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/QM-testenEn.pdf)**  
+**[QM-Tests](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-testenDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-testenEn.pdf)**  
 *Vollständige Analyse von Quantenalgorithmen im T0-Framework.*
 
-**[RSA-Analyse](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/RSA_De.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/RSA_En.pdf)**  
+**[RSA-Analyse](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/RSA_De.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/RSA_En.pdf)**  
 *Auswirkungen des deterministischen T0-Quantencomputings auf RSA-Kryptografie.*
 
 #### Vergleichsstudien
-**[T0 vs. Erweitertes Standardmodell](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/T0vsESM_ConceptualAnalysis_De.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/T0vsESM_ConceptualAnalysis_En.pdf)**  
+**[T0 vs. Erweitertes Standardmodell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0vsESM_ConceptualAnalysis_De.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0vsESM_ConceptualAnalysis_En.pdf)**  
 *Konzeptioneller Vergleich zwischen T0 und Erweitertem Standardmodell.*
 
-**[No-Go-Theoreme](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/NoGoDe.pdf)** | **[Englisch](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/NoGoEn.pdf)**  
+**[No-Go-Theoreme](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/NoGoDe.pdf)** | **[Englisch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/NoGoEn.pdf)**  
 *Wie deterministische T0-Energiefelder No-Go-Theoreme umgehen.*
 
 ## Theoretisches Framework
