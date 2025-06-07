@@ -1,232 +1,221 @@
 # T0-Time-Mass-Duality: A Unified Framework for Quantum Mechanics and Relativity
 
-## Project Overview
+## Overview
 
-The T0 model presents a revolutionary approach to fundamental physics through **time-mass duality**, where the intrinsic time field T(x,t) = 1/max(m(x,t), ω) provides a unified treatment of quantum mechanics and relativity. This framework operates in natural units where ℏ = c = α_EM = β_T = 1, reducing all physical quantities to powers of energy.
+The T0 model proposes an approach to fundamental physics through time-mass duality, where the intrinsic time field T(x,t) = 1/max(m(x,t), ω) provides a unified treatment of quantum mechanics and relativity. This framework operates in natural units where ℏ = c = α_EM = β_T = 1.
 
-## ⚡ Latest Breakthrough: Hardware-Validated Production-Ready Tools
+## Current Status (June 2025)
 
-**🎉 MAJOR MILESTONE (June 2025)**: The T0 project has achieved complete hardware validation on IBM Quantum hardware and now offers production-ready interactive tools!
-
-**New Main Components**:
-- ✅ **Hardware-validated T0 implementation**: IBM Brisbane/Sherbrooke tests (127 qubits)
-- ✅ **Complete deterministic quantum computer**: With authentic T0 physics
-- ✅ **Interactive factorization tools**: Real T0 Shor implementation
-- ✅ **Multilingual dialogue systems**: Complex explanations in chat format
-- ✅ **Step-by-step implementation guides**: Complete code modules
-- ✅ **Hardware validation reports**: 97.17% Bell state fidelity confirmed
-- 🔬 **Practical applications**: From RSA factorization to deterministic quantum algorithms
-
-👉 **[Complete Interactive Interface](index.html)** - Central navigation through all T0 components
+The project includes theoretical developments and comparative studies with quantum hardware data. Interactive tools and documentation are available for exploration of the concepts.
 
 ## Repository Structure
 
 ```
 T0-Time-Mass-Duality/
 ├── 2/
-│   ├── html/                     # ✅ Interactive HTML explorations (18+ files)
-│   └── pdf/                      # ✅ Current documents (50+ PDFs)
-├── quantum_simulator_deterministic.html   # 🆕 Hardware-validated quantum computer
-├── step_by_step_modules_bilingual.html    # 🆕 Complete implementation guide
-├── t0_dialogue_multilingual.html          # 🆕 Multilingual explanation dialogue
-├── t0_quantum_simple.html                 # 🆕 Simple explanation for general public
-├── t0_hardware_validation_presentation.html # 🆕 Hardware test results
-├── index.html                             # 🆕 Interactive project interface
+│   ├── html/                     # Interactive HTML explorations (bilingual)
+│   └── pdf/                      # Technical documents
+├── quantum_simulator_deterministic.html   # Quantum computer simulator
+├── step_by_step_modules_bilingual.html    # Implementation guide
+├── t0_dialogue_multilingual.html          # Explanation dialogue
+├── t0_quantum_simple.html                 # General introduction
+├── t0_hardware_validation_presentation.html # Hardware comparison study
+├── index.html                             # Project interface
 └── README.md                              # This file
 ```
 
-## New Main Documents and Tools (2025)
+## Documentation and Tools
 
-### 🚀 Hardware-Validated Production Tools
+### Simulation and Implementation Tools
 
-**[Deterministic Quantum Computer Simulator](quantum_simulator_deterministic.html)** - **BREAKTHROUGH: Hardware-validated quantum computer**  
-*Fully functional deterministic quantum computer with T0 framework. Includes qubit control, quantum gates, authentic Shor algorithm, and Bell state generation with multilingual support. Hardware-validated on IBM Brisbane/Sherbrooke (127 qubits).*
+**[Deterministic Quantum Computer Simulator](https://jpascher.github.io/T0-Time-Mass-Duality/quantum_simulator_deterministic.html)**  
+*Quantum computer simulator implementing T0 framework. Includes qubit operations, quantum gates, and algorithm implementations. Comparative study with IBM hardware data included.*
 
-**[T0 Quantum Modules: Step-by-Step Implementation](step_by_step_modules_bilingual.html)** - **Complete development guide**  
-*Complete guide for T0-enhanced quantum algorithms with three implementation stages: core simulator, algorithm library, and analysis tools. Contains complete production-ready code with live testing.*
+**[T0 Quantum Modules: Implementation Guide](https://jpascher.github.io/T0-Time-Mass-Duality/step_by_step_modules_bilingual.html)**  
+*Technical guide for T0-based quantum algorithms with three implementation stages: core simulator, algorithm library, and analysis tools.*
 
-**[Hardware Validation Presentation](t0_hardware_validation_presentation.html)** - **IBM Quantum test results**  
-*Complete presentation of hardware validation on IBM Brisbane & Sherbrooke. Shows 97.17% Bell state fidelity, improved repeatability, and algorithmic equivalence.*
+**[Hardware Comparison Study](https://jpascher.github.io/T0-Time-Mass-Duality/t0_hardware_validation_presentation.html)**  
+*Comparative analysis between T0 simulator predictions and published IBM quantum hardware results. Examines consistency between theoretical predictions and experimental data.*
 
-### 📚 Interactive Explanation Tools
+### Educational Resources
 
-**[T0 Theory Dialogue: Johann & Martin](t0_dialogue_multilingual.html)** - **Multilingual explanation dialogue**  
-*Innovative chat interface between Johann (T0 developer) and Martin (scientist) about deterministic quantum mechanics. Available in German, English, and French with detailed explanations from fundamentals to hardware validation.*
+**[T0 Theory Dialogue](https://jpascher.github.io/T0-Time-Mass-Duality/t0_dialogue_multilingual.html)**  
+*Discussion format presentation between developer and scientist about deterministic quantum mechanics. Available in German, English, and French.*
 
-**[T0 Quantum Computing Simply Explained](t0_quantum_simple.html)** - **General public explanation**  
-*Accessible introduction to T0 quantum computing for non-physicists. Explains the energy ocean model, ξ-parameter, natural units, and why T0 quantum computers are deterministic instead of probabilistic.*
+**[T0 Quantum Computing Introduction](https://jpascher.github.io/T0-Time-Mass-Duality/t0_quantum_simple.html)**  
+*Accessible introduction to T0 quantum computing concepts for general audiences.*
 
-### Existing Interactive HTML Explorations
+### Interactive HTML Explorations (Bilingual 🇩🇪/🇬🇧)
 
-**[T0 Theory Interactive Explorer](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_theory_explorer_en_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_theory_explorer_de_.html)**  
-*Comprehensive interactive overview of all T0 principles: From revolutionary time-mass duality to hardware-validated deterministic quantum mechanics.*
+**[Project Interface and Navigation](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/index.html)**  
+*Central navigation hub for all T0 components with interactive interface.*
 
-**[T0 Deterministic Quantum Computing](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_computing_en_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_computing_de_.html)**  
-*Interactive demonstration of hardware-validated deterministic quantum algorithms with step-by-step T0 energy field evolution.*
+**[T0 Theory Interactive Explorer](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_theory_explorer_de_.html)**  
+*Comprehensive interactive overview of all T0 principles: From time-mass duality to deterministic quantum mechanics. Bilingual interface with language switcher.*
 
-**[The Units Revolution: From E=mc² to E=m](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/units_revolution_en_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/einheiten_revolution_de_.html)**  
-*Mathematical proof of the identity between E=mc² and E=m - same physics, different unit systems!*
+**[Complete Particle Spectrum: Standard Model vs T0](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_de_.html)**  
+*Comparison: 61+ Standard Model particles vs. 1 universal T0 field with infinite ε-excitations. Bilingual interface.*
 
-**[Complete Particle Spectrum: Standard Model vs T0](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_en_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_de_.html)**  
-*Spectacular comparison: 61+ Standard Model particles vs. 1 universal T0 field with infinite ε-excitations.*
+**[The Units Revolution: From E=mc² to E=m](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/einheiten_revolution_de_.html)**  
+*Mathematical proof of the identity between E=mc² and E=m - same physics, different unit systems. Bilingual interface.*
 
-**[Neutrinos in the Universal T0 Field](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_neutrinos_explorer_en_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_neutrinos_explorer_de_.html)**  
-*Elegant solution to the neutrino puzzle: All "ghost particles" as limiting-case nodes δm(x,t) → 0 of the universal field.*
+**[Neutrinos in the Universal T0 Field](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_neutrinos_explorer_de_.html)**  
+*Solution to the neutrino puzzle: All particles as limiting-case nodes δm(x,t) → 0 of the universal field. Bilingual interface.*
 
 ### 🔐 Cryptography & Security Analysis
 
-**[T0 Cryptography Analysis: RSA Algorithm](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/rsa_analysis_t0_en_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/rsa_analyse_t0_de_.html)**  
-*Revolutionary analysis: How T0 deterministic quantum simulations could dramatically accelerate factorization algorithms, potentially threatening RSA 5-7 years earlier than expected.*
+**[Responsible Crypto Education](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/responsible_crypto_education.html)**  
+*Educational resource on cryptography and T0 implications. Bilingual interface.*
 
-**[T0 Impact on Entanglement-Based Cryptography](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_entanglement_analysis_en_.html)** | **[Deutsche Version](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_verschraenkung_analyse_de_.html)**  
-*Critical threat assessment: How T0 determinism could fundamentally undermine Bell-based quantum cryptography and QKD security.*
+### 🧪 Advanced Simulators and Analysis Tools
 
-### Energy-Based Core Formulations (Fundamental Basis)
+**[T0 Shor Simulator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_Shore_simulator.html)**  
+*Advanced implementation of Shor's algorithm with T0 deterministic framework.*
 
-**[Pure Energy T0 Theory: The Ratio-Based Revolution](2/pdf/Elimination_Of_Mass_Dirac_LagEn.pdf)** | **[Deutsche Version](2/pdf/Elimination_Of_Mass_Dirac_LagDe.pdf)**  
-*The ultimate simplification: Complete elimination of mass through E = m identity in natural units. Revolutionary discovery that simple energy relations achieve 100.000% accuracy while complex formulas only reach 99.98%.*
+**[Realistic T0 Innsbruck Analysis](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/realistic_t0_innsbruck_analysis.html)**  
+*Analysis based on Innsbruck quantum computer experiments and T0 predictions.*
 
-**[T0 Model Calculation Verification: Scale Ratios vs CODATA Values](2/pdf/Elimination_Of_Mass_Dirac_TabelleEn.pdf)** | **[Deutsche Version](2/pdf/Elimination_Of_Mass_Dirac_TabelleDe.pdf)**  
-*Complete verification of ratio-based formulation: 99.85% average agreement with CODATA values across all calculations, 14 new testable predictions.*
+**[Quantum Help Guide](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/quantum_help_guide.html)**  
+*Comprehensive guide for quantum computing concepts and T0 applications.*
 
-## Key Innovations
+### Technical Papers
 
-### 🔬 Hardware Validation (2025)
+#### Core Theory Documents
+**[Pure Energy T0 Theory: The Ratio-Based Revolution](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Elimination_Of_Mass_Dirac_LagEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Elimination_Of_Mass_Dirac_LagDe.pdf)**  
+*Mathematical formulation using energy as the fundamental quantity in natural units.*
 
-**IBM Quantum Hardware Tests**
-- **Hardware**: IBM Brisbane & Sherbrooke (127 qubits)
-- **Bell State Fidelity**: 97.17%
-- **Repeatability Variance**: 0.000248 (significantly below standard QM)
-- **Algorithm Success Rate**: 100%
-- **Status**: ✅ Hardware compatibility confirmed
+**[T0 Model Calculation Verification: Scale Ratios vs CODATA Values](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Elimination_Of_Mass_Dirac_TabelleEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Elimination_Of_Mass_Dirac_TabelleDe.pdf)**  
+*Comparison of T0 predictions with CODATA values.*
 
-**Validated T0 Predictions**
-- **Deterministic Quantum Algorithms**: Functional on real hardware
-- **ξ-Parameter Effects**: Systematic 10 ppm corrections detected
-- **Enhanced Repeatability**: Superior performance through reduced variance
-- **Energy Field Coupling**: Apparatus-system correlations observed
+**[Elimination of Mass](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/EliminationOfMassEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/EliminationOfMassDe.pdf)**  
+*Complete framework for mass elimination in fundamental physics.*
 
-### Revolutionary Discoveries
+**[E=mc² Analysis](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/E-mc2_En.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/E-mc2_De.pdf)**  
+*Reinterpretation of Einstein's equation in the T0 framework.*
 
-**1. Hardware-validated deterministic quantum mechanics**
-- **First Implementation**: Deterministic quantum computers functional
-- **Bell States**: 97.17% fidelity without probabilistic collapse
-- **Quantum Gates**: H, X, Y, Z, S, T, CNOT with T0 corrections
-- **Algorithms**: Shor, Grover, Deutsch with deterministic execution
+#### Mathematical Foundations
+**[Dirac Equation in T0](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/diracEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/diracDe.pdf)**  
+*T0 formulation of the Dirac equation.*
 
-**2. Production-ready tools**
-- **Complete Simulator**: 3-10 qubits with T0 framework
-- **Code Modules**: Three implementation stages with live testing
-- **Multilingual Support**: German/English synchronized
-- **Hardware Integration**: IBM Brisbane/Sherbrooke compatible
+**[Simplified Dirac Formulation](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/diracVereinfachtEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/diracVereinfachtDe.pdf)**  
+*Simplified approach to Dirac physics in T0.*
 
-**3. Simplicity exceeds complexity**
-- **Mathematical proof**: Simple energy relations (E = m, E = 1/L, E = 1/T) achieve **100.000% accuracy**
-- **Complex formulas**: Only **99.98-100.04%** due to rounding errors
-- **Revolutionary insight**: Nature operates through simple relationships, complexity introduces errors
+**[Derivation of Beta](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/DerivationVonBetaEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/DerivationVonBetaDe.pdf)**  
+*Mathematical derivation of the β_T parameter.*
 
-**4. Truly parameter-free physics**
-- **No free parameters**: First theory without experimental inputs
-- **Universal scale ratio**: ξ = 1.0×10⁻⁵ derived from Higgs physics
-- **Self-consistency**: All constants from single ratio
+**[Extended Beta Derivation](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/DerivationVonBetaEnREn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/DerivationVonBetaEnRDe.pdf)**  
+*Comprehensive derivation with additional proofs.*
 
-### Fundamental Principles
+**[Lagrangian Formulation](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/lagrandian-einfachEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/lagrandian-einfachDe.pdf)**  
+*Simple Lagrangian approach in T0 theory.*
+
+**[Lagrangian Comparison](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/LagrandianVergleichEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/LagrandianVergleichDe.pdf)**  
+*Comparison of T0 and standard Lagrangian formulations.*
+
+**[Mathematical Time-Mass Lagrange](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/MathZeitMasseLagrangeEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/MathZeitMasseLagrangeDe.pdf)**  
+*Mathematical treatment of time-mass duality in Lagrangian mechanics.*
+
+#### Natural Units and Constants
+**[Natural Units Systematics](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/NatEinheitenSystematikEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/NatEinheitenSystematikDe.pdf)**  
+*Systematic derivation of natural units.*
+
+**[Fine Structure Constant](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/FeinstrukturkonstanteEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/FeinstrukturkonstanteDe.pdf)**  
+*T0 interpretation of the fine structure constant.*
+
+**[Resolving Constants Alpha](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/ResolvingTheConstantsAlfaEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/ResolvingTheConstantsAlfaDe.pdf)**  
+*Resolution of fundamental constants in T0.*
+
+**[Parameter System Independence](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/ParameterSystemdipendentEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/ParameterSystemdipendentDe.pdf)**  
+*System-independent formulation of physical parameters.*
+
+**[Relocative Number System](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/RelokativesZahlensystemEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/RelokativesZahlensystemDe.pdf)**  
+*Novel number system for T0 calculations.*
+
+#### Particle Physics and Field Theory
+**[Complete Muon g-2 Analysis](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/CompleteMuon_g-2_AnalysisEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/CompleteMuon_g-2_AnalysisDe.pdf)**  
+*Comprehensive analysis of muon anomalous magnetic moment.*
+
+**[Dynamic Mass and Non-local Photons](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/DynMassePhotonenNichtlokalEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/DynMassePhotonenNichtlokalDe.pdf)**  
+*Non-local photon dynamics in T0 theory.*
+
+**[H-Document](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/HdokumentEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/HdokumentDe.pdf)**  
+*Higgs mechanism in T0 framework.*
+
+**[H₀ Analysis](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Ho_En.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Ho_De.pdf)**  
+*Fundamental H₀ parameter analysis.*
+
+**[H₀ Energy](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Ho_EnergieEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Ho_EnergieDe.pdf)**  
+*Energy considerations for H₀ parameter.*
+
+#### Experimental and Applied Physics
+**[Temperature Units and CMB](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/TempEinheitenCMBEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/TempEinheitenCMBDe.pdf)**  
+*Temperature units and cosmic microwave background.*
+
+**[Mole and Candela](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Moll_CandelaEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/Moll_CandelaDe.pdf)**  
+*T0 treatment of mole and candela units.*
+
+**[System Analysis](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/systemEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/systemDe.pdf)**  
+*Complete system analysis in T0.*
+
+#### Quantum Mechanics and Computing
+**[QM Deterministic](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/QM-DetrmisticEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/QM-DetrmisticDe.pdf)**  
+*Deterministic quantum mechanics via T0-energy field formulation.*
+
+**[QM Testing](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/QM-testenEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/QM-testenDe.pdf)**  
+*Complete analysis of quantum algorithms in T0 framework.*
+
+**[RSA Analysis](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/RSA_En.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/RSA_De.pdf)**  
+*Impact of T0 deterministic quantum computing on RSA cryptography.*
+
+#### Comparative Studies
+**[T0 vs Extended Standard Model](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/T0vsESM_ConceptualAnalysis_En.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/T0vsESM_ConceptualAnalysis_De.pdf)**  
+*Conceptual comparison between T0 and Extended Standard Model.*
+
+**[No-Go Theorems](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/NoGoEn.pdf)** | **[German](https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/NoGoDe.pdf)**  
+*How T0 deterministic energy fields circumvent no-go theorems.*
+
+## Theoretical Framework
+
+### Core Concepts
 - **Time-Mass Duality**: T(x,t) = 1/max(m(x,t), ω) with dimension [E⁻¹]
-- **Energy Identity**: E = m in natural units (not conversion, but identity)
-- **Natural Units**: ℏ = c = α_EM = β_T = 1 through deep theoretical connections
-- **Universal Field**: All particles are excitation patterns in the single field δm(x,t)
-- **Hardware Validation**: **Deterministic evolution confirmed on IBM Quantum hardware**
+- **Natural Units**: ℏ = c = α_EM = β_T = 1
+- **Universal Field**: Particles as excitation patterns in field δm(x,t)
+- **Deterministic Framework**: Alternative to probabilistic quantum mechanics
 
-## 🔬 Experimental Predictions and Validations
+### Research Areas
 
-### Hardware-validated Quantum Computing Applications
-- **Deterministic Algorithms**: 100% repeatability under identical conditions
-- **ξ-Parameter Effects**: Systematic 10 ppm corrections in precision tests
-- **Enhanced Reliability**: 97.17% Bell fidelity on IBM hardware
-- **Energy Field Coupling**: Apparatus-system correlations measured
+**Quantum Computing Applications**
+- Deterministic algorithm implementations
+- ξ-parameter corrections (≈10⁻⁵)
+- Comparative studies with quantum hardware
 
-### Quantum Corrections (Hardware-confirmed)
-- **Universal Lepton g-2**: a_e^(T0) = a_μ^(T0) = a_τ^(T0) = 2.31 × 10⁻¹⁰
-- **Energy-Independent QED**: ΔΓ^μ/Γ^μ = 1.74 × 10⁻⁸ (all energy scales)
-- **Muon g-2 Contribution**: T0 explains 9.2% of observed anomaly
-- **Deterministic Quantum Mechanics**: Eliminates all QM interpretation problems
+**Theoretical Predictions**
+- Universal lepton corrections
+- Modified Bell inequalities
+- Energy field correlations
 
-### Bell Inequality Improvements (Hardware-tested)
-- **Extended Bell Bound**: |S_T0| ≤ 2.828455 vs S_QM = 2.828427 (10 ppm improvement)
-- **Superdeterministic Mechanism**: Energy field correlations between apparatus and system
-- **Hardware Evidence**: Enhanced repeatability and apparatus-system correlations observed
+## Technical Implementation
 
-## 🚀 Getting Started with T0 Hardware-Validated Tools
+### Getting Started
 
-### Quick Start: Test hardware-validated implementation
+1. **Explore the simulator**: Open `quantum_simulator_deterministic.html`
+2. **Review implementation**: See `step_by_step_modules_bilingual.html`
+3. **Study theory**: Access interactive explorations in `2/html/`
+4. **Read technical papers**: Available in `2/pdf/`
 
-**Step 1: Launch deterministic quantum computer**
-```bash
-# Open quantum_simulator_deterministic.html
-# Hardware-validated T0 implementation (IBM Brisbane/Sherbrooke)
-# Features: Deterministic quantum algorithms, authentic Shor
-```
+### Repository Access
 
-**Step 2: Follow implementation guide**
-```bash
-# Open step_by_step_modules_bilingual.html
-# Complete three-stage implementation:
-# Stage 1: T0 core simulator, Stage 2: Algorithms, Stage 3: Analysis
-```
+- **Interactive Tools**: Available as HTML files in repository
+- **Technical Documentation**: [GitHub Pages](https://jpascher.github.io/T0-Time-Mass-Duality/)
+- **Source Code**: Implementation examples in HTML files
 
-**Step 3: Explore interactive explanations**
-```bash
-# Open t0_dialogue_multilingual.html
-# Expected: Complete T0 theory explanation in dialogue format
-# Or t0_quantum_simple.html for accessible explanation
-```
-
-**Step 4: View hardware validation**
-```bash
-# Open t0_hardware_validation_presentation.html
-# Expected: Complete IBM Quantum test results and analysis
-```
-
-## Theoretical Significance
-
-### Paradigm Shift
-1. **Hardware-validated deterministic QM**: Quantum mechanics as deterministic confirmed on IBM Quantum hardware
-2. **Production-ready tools**: Complete implementation from theory to application
-3. **Parameter-free universe**: All constants emerge from single Higgs-derived ratio
-4. **Unified field theory**: Same framework spans quantum to cosmological scales
-5. **True fundamental physics**: Mass eliminated as dimensional placeholder
-6. **Extended Bell framework**: Circumvents Bell's Theorem through superdeterministic correlations
-
-### Hardware-Validated Simplifications Comparison
-| Traditional Physics | T0 Revolution | Hardware Status |
-|---------------------|---------------|------------------|
-| Dirac: 4×4 Gamma Matrices | **Simple Field Dynamics ∂²δm = 0** | ✅ **Implemented** |
-| Lagrangian: 20+ SM Fields | **One Equation ℒ = ε·(∂δm)²** | ✅ **Validated** |
-| Schrödinger: Probability Waves | **Deterministic Energy Fields** | ✅ **Hardware-confirmed** |
-| Antiparticles: Mirror Particles | **Negative Field Excitations -δm** | ✅ **Tested** |
-| Bell's Theorem: Absolute | **Extended Inequality Framework** | ✅ **Hardware Evidence** |
-| 20+ Free Parameters | **0 Free Parameters** | ✅ **Verified** |
-| 99.98% Accuracy (Complex) | **100.000% Accuracy (Simple)** | ✅ **Proven** |
-| Probabilistic QM | **Deterministic QM** | ✅ **IBM Hardware confirmed** |
-
-## Repository Access
-
-**🎮 Deterministic Quantum Computer**: [quantum_simulator_deterministic.html](quantum_simulator_deterministic.html) - **Hardware-validated quantum computer**  
-**🔧 Complete Implementation**: [step_by_step_modules_bilingual.html](step_by_step_modules_bilingual.html) - **Three-stage development guide**  
-**🎭 Interactive Dialogue**: [t0_dialogue_multilingual.html](t0_dialogue_multilingual.html) - **Multilingual explanations**  
-**📚 Simple Explanation**: [t0_quantum_simple.html](t0_quantum_simple.html) - **Accessible for everyone**  
-**📊 Hardware Validation**: [t0_hardware_validation_presentation.html](t0_hardware_validation_presentation.html) - **IBM Quantum test results**  
-**🌐 Interactive Explorations**: [GitHub Pages HTML](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/) - **18+ interactive demonstrations**  
-**📁 PDF Collection**: [2/pdf/](2/pdf/) - **50+ technical documents**  
-**🌐 Project Website**: [T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/)
-
-## Contact
+## Contact Information
 
 **Author**: Johann Pascher  
 **Institution**: Department of Communications Engineering, HTL Leonding, Austria  
 **Email**: johann.pascher@gmail.com
 
-For research inquiries, experimental collaborations, or questions about hardware-validated tools, please create an issue in this repository.
+For research inquiries or technical questions, please create an issue in this repository.
 
 ## License
 
@@ -234,4 +223,4 @@ For research inquiries, experimental collaborations, or questions about hardware
 
 ---
 
-*The T0-Time-Mass-Duality Model represents the first truly parameter-free theory of fundamental physics with **hardware-validated deterministic quantum mechanics** on IBM Quantum computers. This revolutionary framework offers production-ready tools proving that simplicity is more accurate than complexity. **Now with complete hardware tests, deterministic quantum computers, and production-ready implementations - the future of physics is here.***
+*The T0-Time-Mass-Duality Model represents a theoretical framework for unifying quantum mechanics and relativity through deterministic field dynamics. All claims and predictions require further experimental verification.*
