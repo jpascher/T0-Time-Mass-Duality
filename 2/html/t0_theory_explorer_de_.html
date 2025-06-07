@@ -754,15 +754,15 @@
             </div>
             
             <div class="tabs">
-                <div class="tab active" onclick="showTab('overview')">Übersicht</div>
-                <div class="tab" onclick="showTab('lagrangian')">Einfacher Lagrangian</div>
-                <div class="tab" onclick="showTab('dirac')">Vereinfachter Dirac</div>
-                <div class="tab" onclick="showTab('predictions')">Vorhersagen</div>
-                <div class="tab" onclick="showTab('quantum')">Deterministische QM</div>
-                <div class="tab" onclick="showTab('ratios')">Verhältnis-Physik</div>
+                <div class="tab active" onclick="showTab('overview-de')">Übersicht</div>
+                <div class="tab" onclick="showTab('lagrangian-de')">Einfacher Lagrangian</div>
+                <div class="tab" onclick="showTab('dirac-de')">Vereinfachter Dirac</div>
+                <div class="tab" onclick="showTab('predictions-de')">Vorhersagen</div>
+                <div class="tab" onclick="showTab('quantum-de')">Deterministische QM</div>
+                <div class="tab" onclick="showTab('ratios-de')">Verhältnis-Physik</div>
             </div>
             
-            <div id="overview" class="content">
+            <div id="overview-de" class="content">
                 <h2>Die T0-Revolution: Vier-Stufen-Transformation</h2>
                 
                 <div class="fundamental-law">
@@ -811,7 +811,7 @@
                 </div>
             </div>
             
-            <div id="lagrangian" class="content" style="display: none;">
+            <div id="lagrangian-de" class="content" style="display: none;">
                 <h2>Einfacher Lagrangian Revolution</h2>
                 
                 <div class="comparison-grid">
@@ -892,7 +892,7 @@
                 </div>
             </div>
             
-            <div id="dirac" class="content" style="display: none;">
+            <div id="dirac-de" class="content" style="display: none;">
                 <h2>Vereinfachte Dirac-Gleichung</h2>
                 
                 <div class="comparison-grid">
@@ -945,7 +945,7 @@
                 </div>
             </div>
             
-            <div id="predictions" class="content" style="display: none;">
+            <div id="predictions-de" class="content" style="display: none;">
                 <h2>Experimentelle Vorhersagen und Verifikation</h2>
                 
                 <div class="predictions-grid">
@@ -1005,7 +1005,7 @@
                 </div>
             </div>
             
-            <div id="quantum" class="content" style="display: none;">
+            <div id="quantum-de" class="content" style="display: none;">
                 <h2>Deterministische Quantenmechanik</h2>
                 
                 <div class="quantum-visualization">
@@ -1066,7 +1066,7 @@
                 </div>
             </div>
             
-            <div id="ratios" class="content" style="display: none;">
+            <div id="ratios-de" class="content" style="display: none;">
                 <h2>Reine Verhältnis-basierte Physik</h2>
                 
                 <div class="comparison-grid">
@@ -1164,28 +1164,42 @@
             // Update page language attribute
             document.documentElement.lang = lang;
             
-            // Reset to overview tab
-            showTab('overview');
+            // Reset to overview tab with language suffix
+            const suffix = lang === 'de' ? '-de' : '';
+            showTab('overview' + suffix);
         }
         
         function showTab(tabName) {
-            // Hide all content
-            const contents = document.querySelectorAll('.content');
-            contents.forEach(content => {
-                content.style.display = 'none';
-            });
+            // Determine current language
+            const currentLang = document.documentElement.lang || 'en';
+            const suffix = currentLang === 'de' ? '-de' : '';
             
-            // Remove active class from all tabs
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(tab => {
-                tab.classList.remove('active');
-            });
+            // Hide all content divs within active language content
+            const activeContent = document.querySelector('.lang-content.active');
+            if (activeContent) {
+                activeContent.querySelectorAll('.content').forEach(content => {
+                    content.style.display = 'none';
+                });
+            }
+            
+            // Remove active class from all tabs in current language
+            const activeTabs = document.querySelector('.lang-content.active .tabs');
+            if (activeTabs) {
+                activeTabs.querySelectorAll('.tab').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+            }
             
             // Show selected content
-            document.getElementById(tabName).style.display = 'block';
+            const selectedContent = document.getElementById(tabName);
+            if (selectedContent) {
+                selectedContent.style.display = 'block';
+            }
             
             // Add active class to clicked tab
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
         }
         
         // Add some dynamic effects
