@@ -30,7 +30,7 @@ T0-Time-Mass-Duality/
 **[RSA Factorization Demo](https://jpascher.github.io/T0-Time-Mass-Duality/rsa/t0_factorization_demo.html)**  
 *Advanced web-based demonstration of T0-Framework applied to RSA number factorization. Features real-time algorithm comparison, ξ-strategy optimization, and cryptographic security analysis.*
 
-**[Complete T0 Documentation with Rational Arithmetic](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/final_complete_t0_documentationEn.md)**  
+**[Complete T0 Documentation with Rational Arithmetic](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/rsa/final_complete_t0_documentationEn.md)**  
 *Comprehensive technical documentation achieving 83.8% success rate with pure rational arithmetic. Covers T0 period finding, musical harmonic connections, Euler's mathematical foundations, and complete test results.*
 
 ### Simulation and Implementation Tools
