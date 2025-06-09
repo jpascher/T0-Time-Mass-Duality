@@ -30,6 +30,9 @@ T0-Time-Mass-Duality/
 **[RSA Factorization Demo](https://jpascher.github.io/T0-Time-Mass-Duality/rsa/t0_factorization_demo.html)**  
 *Advanced web-based demonstration of T0-Framework applied to RSA number factorization. Features real-time algorithm comparison, ξ-strategy optimization, and cryptographic security analysis.*
 
+**[Complete T0 Documentation with Rational Arithmetic](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/final_complete_t0_documentationEn.md)**  
+*Comprehensive technical documentation achieving 83.8% success rate with pure rational arithmetic. Covers T0 period finding, musical harmonic connections, Euler's mathematical foundations, and complete test results.*
+
 ### Simulation and Implementation Tools
 
 **[Deterministic Quantum Computer Simulator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/quantum_simulator_deterministic.html)**  
@@ -170,6 +173,9 @@ T0-Time-Mass-Duality/
 
 **[RSA Analysis](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/RSA_En.pdf)** | **[German](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/RSA_De.pdf)**  
 *Impact of T0 deterministic quantum computing on RSA cryptography.*
+
+**[RSA Test - Empirical Factorization Methods](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/RSAtest_En.pdf)** | **[German](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/RSAtest_De.pdf)**  
+*Systematic evaluation of 37 test cases using Trial Division, Fermat's Method, Pollard Rho, Pollard p-1, and T0-Framework with empirical results and deterministic period finding analysis.*
 
 #### Comparative Studies
 **[T0 vs Extended Standard Model](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0vsESM_ConceptualAnalysis_En.pdf)** | **[German](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0vsESM_ConceptualAnalysis_De.pdf)**  
