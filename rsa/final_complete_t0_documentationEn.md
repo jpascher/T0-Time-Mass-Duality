@@ -57,7 +57,7 @@ R(r) = exp(-((ω-π)²)/(4|ξ|))
 
 Rational implementation:
 ```python
-def _calculate_period_evaluation(self, r, N):
+def _calculate_period_evaluation_rational(self, r, N):
     # ω = 2π/r as ratio
     omega = Fraction(2, 1) * self.pi_ratio / Fraction(r, 1)
     
@@ -369,25 +369,32 @@ def crystal_analogy(p, q):
 # In T0: Harmonic period = high evaluation
 ```
 
-### Universal Constants
+### Natural Ratios in Fundamental Structures
 
-**Fundamental ratios in nature:**
+**Ratios in nature - without SI units:**
 ```python
-physical_ratios = {
-    'Fine_structure_constant': 1/137,      # α ≈ 0.007297
-    'Proton_electron_mass': 1836,         # mₚ/mₑ  
-    'Planck_ratios': 'ℏc/Gc²',           # Dimensionless combinations
-    'Golden_ratio_nature': 1.618,         # φ in spiral galaxies, DNA, etc.
+# All "constants" are actually pure ratios:
+natural_ratios = {
+    'Proton_to_electron_mass': 1836,        # mₚ/mₑ (pure ratio!)
+    'Electron_radius_to_Compton': 2.8,      # rₑ/λc (geometric ratio)
+    'Planck_energy_ratio': 'E_planck/mc²',  # Dimensionless combination
+    'Golden_ratio_nature': 1.618,           # φ in spiral galaxies, DNA, etc.
 }
 
 # T0 recognizes the same ratio patterns:
 t0_ratios = {
-    'xi_universal': Fraction(1, 100),      # Optimal universal ratio
-    'pi_approximation': Fraction(355, 113), # Harmonic π approximation
-    'twin_prime_gap': 2,                   # Smallest possible prime gap
-    'golden_ratio': 1.618,                # Optimal factor ratios
+    'xi_universal': Fraction(1, 100),        # Optimal universal ratio
+    'pi_approximation': Fraction(355, 113),  # Harmonic π approximation
+    'twin_prime_gap': 2,                     # Smallest possible prime gap
+    'golden_ratio': 1.618,                  # Optimal factor ratios
 }
 ```
+
+**Why no "constants":**
+- In natural units: c = ℏ = 1 (pure ratios)
+- Mass becomes energy ratio: m = E (in natural units)
+- Time becomes length ratio: t = x (speed of light = 1)
+- All physical "constants" become dimensionless ratios
 
 ### Fractals and Self-Similarity
 
@@ -428,9 +435,9 @@ def universal_law_of_order():
 
 **Numbers are not abstract** - they are **physical realities** that follow the same harmonic laws as:
 - Vibrating strings
+- Rotating planets  
 - Vibrating atoms
 - Resonant systems
-- Quantum states
 
 **T0 doesn't just discover mathematical patterns** - it **listens to the harmonic structures** that organize the universe at all levels.
 
@@ -499,7 +506,7 @@ self.xi_profiles = {
     'special_cases': Fraction(1, 42)
 }
 
-def _calculate_period_evaluation(self, r, N):
+def _calculate_resonance_rational(self, r, N):
     omega = Fraction(2, 1) * self.pi_ratio / Fraction(r, 1)  # ω = 2π/r
     diff = omega - self.pi_ratio                             # ω - π  
     diff_squared = diff * diff                               # (ω - π)²
@@ -735,7 +742,7 @@ q_ratio = Fraction(223, 47053)   # q/N
 ### The Critical Period Evaluation Calculation:
 
 ```python
-def _calculate_period_evaluation(self, r, N):
+def _calculate_period_evaluation_rational(self, r, N):
     # ω = 2π/r as EXACT ratio
     omega = Fraction(2, 1) * self.pi_ratio / Fraction(r, 1)
     
@@ -942,7 +949,7 @@ class RelativeT0:
         
         for r in range(2, max_period):
             if pow(a, r, N) == 1:
-                evaluation = self._calculate_period_evaluation(r, N, xi_value)
+                evaluation = self._calculate_period_evaluation_rational(r, N, xi_value)
                 
                 if evaluation > best_evaluation:
                     best_evaluation = evaluation
@@ -953,7 +960,7 @@ class RelativeT0:
                     
         return best_period
         
-    def _calculate_period_evaluation(self, r, N, xi_value):
+    def _calculate_period_evaluation_rational(self, r, N, xi_value):
         omega = Fraction(2, 1) * self.pi_ratio / Fraction(r, 1)
         diff = omega - self.pi_ratio
         diff_squared = diff * diff

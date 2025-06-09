@@ -369,25 +369,32 @@ def kristall_analogie(p, q):
 # In T0: Harmonische Periode = hohe Bewertung
 ```
 
-### Die Universalkonstanten
+### Natürliche Verhältnisse in fundamentalen Strukturen
 
-**Fundamentale Verhältnisse in der Natur:**
+**Verhältnisse in der Natur - ohne SI-Einheiten:**
 ```python
-physikalische_verhaeltnisse = {
-    'Feinstrukturkonstante': 1/137,      # α ≈ 0.007297
-    'Proton-Elektron-Masse': 1836,      # mₚ/mₑ  
-    'Planck-Verhältnisse': 'ℏc/Gc²',    # Dimensionslose Kombinationen
-    'Goldener_Schnitt_Natur': 1.618,    # φ in Spiralgalaxien, DNA, etc.
+# Alle "Konstanten" sind in Wahrheit reine Verhältnisse:
+natuerliche_verhaeltnisse = {
+    'Proton_zu_Elektron_Masse': 1836,      # mₚ/mₑ (reines Verhältnis!)
+    'Elektronenradius_zu_Compton': 2.8,    # rₑ/λc (geometrisches Verhältnis)
+    'Planck_Energieverhältnis': 'E_planck/mc²', # Dimensionslose Kombination
+    'Goldener_Schnitt_Natur': 1.618,       # φ in Spiralgalaxien, DNA, etc.
 }
 
 # T0 erkennt dieselben Verhältnismuster:
 t0_verhaeltnisse = {
-    'xi_universal': Fraction(1, 100),    # Optimales universelles Verhältnis
+    'xi_universal': Fraction(1, 100),       # Optimales universelles Verhältnis
     'pi_approximation': Fraction(355, 113), # Harmonische π-Näherung
-    'twin_prime_gap': 2,                 # Kleinstmöglicher Primabstand
-    'goldener_schnitt': 1.618,          # Optimale Faktorverhältnisse
+    'twin_prime_gap': 2,                    # Kleinstmöglicher Primabstand
+    'goldener_schnitt': 1.618,             # Optimale Faktorverhältnisse
 }
 ```
+
+**Warum keine "Konstanten":**
+- In natürlichen Einheiten: c = ℏ = 1 (reine Verhältnisse)
+- Masse wird zum Energie-Verhältnis: m = E (in natürlichen Einheiten)
+- Zeit wird zur Längen-Verhältnis: t = x (Lichtgeschwindigkeit = 1)
+- Alle physikalischen "Konstanten" werden zu dimensionslosen Verhältnissen
 
 ### Fraktale und Selbstähnlichkeit
 
