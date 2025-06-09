@@ -30,9 +30,6 @@ T0-Time-Mass-Duality/
 **[RSA-Faktorisierungs-Demo](https://jpascher.github.io/T0-Time-Mass-Duality/rsa/t0_factorization_demo.html)**  
 *Fortgeschrittene webbasierte Demonstration des T0-Frameworks angewendet auf RSA-Zahlenfaktorisierung. Features umfassen Echtzeit-Algorithmus-Vergleich, ξ-Strategie-Optimierung und kryptographische Sicherheitsanalyse.*
 
-**[RSA-Sicherheitsanalyse](https://jpascher.github.io/T0-Time-Mass-Duality/rsa/rsa_security_analysis.html)**  
-*Umfassende vergleichende Analyse zwischen T0-Framework und traditionellen Faktorisierungsmethoden für RSA-Sicherheitsbewertung.*
-
 ### Simulations- und Implementierungstools
 
 **[Deterministischer Quantencomputer-Simulator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/quantum_simulator_deterministic.html)**  
