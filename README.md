@@ -27,10 +27,10 @@ T0-Time-Mass-Duality/
 **[RSA Factorization Python Implementation](https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/rsa)**  
 *Complete Python implementation of T0-Framework factorization algorithms with RSA cryptographic analysis. Includes practical demonstrations of deterministic period finding and comparative studies with classical methods.*
 
-**[Interactive RSA Factorization Demo](https://jpascher.github.io/T0-Time-Mass-Duality/rsa/rsa_factorization_demo.html)**  
+**[RSA Factorization Demo](https://jpascher.github.io/T0-Time-Mass-Duality/rsa/t0_factorization_demo.html)**  
 *Advanced web-based demonstration of T0-Framework applied to RSA number factorization. Features real-time algorithm comparison, ξ-strategy optimization, and cryptographic security analysis.*
 
-**[T0 vs Classical Methods Analysis](https://jpascher.github.io/T0-Time-Mass-Duality/rsa/t0_vs_classical_analysis.html)**  
+**[RSA Security Analysis](https://jpascher.github.io/T0-Time-Mass-Duality/rsa/rsa_security_analysis.html)**  
 *Comprehensive comparative analysis between T0-Framework and traditional factorization methods for RSA security evaluation.*
 
 ### Simulation and Implementation Tools
