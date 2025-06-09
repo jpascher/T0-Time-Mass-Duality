@@ -325,7 +325,6 @@ def physikalische_resonanz_analogie(grundfrequenz, n):
 ```
 
 **Quantenmechanik und Energieniveaus:**
-- Wasserstoffatom: Energieniveaus folgen E₍ₙ₎ = -13.6/n² eV
 - Harmonischer Oszillator: E₍ₙ₎ = ℏω(n + 1/2)
 - **Alle quantisierten Systeme zeigen ganzzahlige Verhältnisse!**
 
@@ -352,7 +351,6 @@ def kristall_analogie(p, q):
 ### Elektromagnetismus und Frequenzen
 
 **Elektromagnetisches Spektrum:**
-- Sichtbares Licht: 380-700 nm (fast Oktave: 700/380 ≈ 1.84 ≈ 2:1)
 - Radiowellen: Harmonische Frequenzen für beste Übertragung
 - **Alle stabilen EM-Phänomene folgen harmonischen Gesetzen**
 

@@ -325,7 +325,6 @@ def physical_resonance_analogy(fundamental_frequency, n):
 ```
 
 **Quantum Mechanics and Energy Levels:**
-- Hydrogen atom: Energy levels follow E₍ₙ₎ = -13.6/n² eV
 - Harmonic oscillator: E₍ₙ₎ = ℏω(n + 1/2)
 - **All quantized systems show integer ratios!**
 
@@ -352,7 +351,6 @@ def crystal_analogy(p, q):
 ### Electromagnetism and Frequencies
 
 **Electromagnetic Spectrum:**
-- Visible light: 380-700 nm (almost octave: 700/380 ≈ 1.84 ≈ 2:1)
 - Radio waves: Harmonic frequencies for optimal transmission
 - **All stable EM phenomena follow harmonic laws**
 
