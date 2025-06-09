@@ -15,11 +15,23 @@ T0-Time-Mass-Duality/
 ├── 2/
 │   ├── html/                     # Interaktive HTML-Explorationen (zweisprachig)
 │   └── pdf/                      # Technische Dokumente
+├── rsa/                          # RSA-Faktorisierungs-Demos und Python-Implementierungen
 ├── README.md                     # Englische Version
 └── README_de.md                  # Diese Datei
 ```
 
 ## Dokumentation und Tools
+
+### RSA-Faktorisierung & Kryptographische Analyse
+
+**[RSA-Faktorisierung Python-Implementierung](https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/rsa)**  
+*Vollständige Python-Implementierung der T0-Framework-Faktorisierungsalgorithmen mit RSA-kryptographischer Analyse. Enthält praktische Demonstrationen der deterministischen Periodenfindung und Vergleichsstudien mit klassischen Methoden.*
+
+**[Interaktive RSA-Faktorisierungs-Demo](https://jpascher.github.io/T0-Time-Mass-Duality/rsa/rsa_factorization_demo.html)**  
+*Fortgeschrittene webbasierte Demonstration des T0-Frameworks angewendet auf RSA-Zahlenfaktorisierung. Features umfassen Echtzeit-Algorithmus-Vergleich, ξ-Strategie-Optimierung und kryptographische Sicherheitsanalyse.*
+
+**[T0 vs Klassische Methoden Analyse](https://jpascher.github.io/T0-Time-Mass-Duality/rsa/t0_vs_classical_analysis.html)**  
+*Umfassende vergleichende Analyse zwischen T0-Framework und traditionellen Faktorisierungsmethoden für RSA-Sicherheitsbewertung.*
 
 ### Simulations- und Implementierungstools
 
@@ -179,6 +191,12 @@ T0-Time-Mass-Duality/
 
 ### Forschungsbereiche
 
+**RSA-Kryptographische Anwendungen**
+- Deterministische Faktorisierungsalgorithmen
+- T0-Framework vs klassische Methoden
+- Sicherheitsimplikationen und Analyse
+- Praktische Implementierung in Python
+
 **Quantencomputing-Anwendungen**
 - Deterministische Algorithmus-Implementierungen
 - ξ-Parameter-Korrekturen (≈10⁻⁵)
@@ -193,16 +211,19 @@ T0-Time-Mass-Duality/
 
 ### Erste Schritte
 
-1. **Simulator erkunden**: Öffnen Sie `quantum_simulator_deterministic.html`
-2. **Implementierung prüfen**: Siehe `step_by_step_modules_bilingual.html`
-3. **Theorie studieren**: Zugriff auf interaktive Explorationen in `2/html/`
-4. **Technische Arbeiten lesen**: Verfügbar in `2/pdf/`
+1. **RSA-Faktorisierung erkunden**: Prüfen Sie das `/rsa/`-Verzeichnis für Python-Implementierungen
+2. **Faktorisierungs-Demos testen**: Zugriff auf interaktive RSA-Analyse-Tools
+3. **Simulator erkunden**: Öffnen Sie `quantum_simulator_deterministic.html`
+4. **Implementierung prüfen**: Siehe `step_by_step_modules_bilingual.html`
+5. **Theorie studieren**: Zugriff auf interaktive Explorationen in `2/html/`
+6. **Technische Arbeiten lesen**: Verfügbar in `2/pdf/`
 
 ### Repository-Zugriff
 
 - **Interaktive Tools**: Als HTML-Dateien im Repository verfügbar
+- **Python-Implementierungen**: RSA-Faktorisierungscode im `/rsa/`-Verzeichnis
 - **Technische Dokumentation**: [GitHub Pages](https://jpascher.github.io/T0-Time-Mass-Duality/)
-- **Quellcode**: Implementierungsbeispiele in HTML-Dateien
+- **Quellcode**: Implementierungsbeispiele in HTML-Dateien und Python-Modulen
 
 ## Kontaktinformationen
 
