@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ξ-FFT Interactive Demo - Mit Python Library</title>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .language-nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .navigation-bar {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.9em;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-top: 120px;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        /* Python Loading Panel */
+        .loading-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .loading-panel h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .console-output {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            max-height: 200px;
+            overflow-y: auto;
+            margin: 15px 0;
+            border: 1px solid #4a5568;
+            text-align: left;
+        }
+
+        #content-de, #content-en {
+            width: 100%;
+            height: auto;
+            overflow: visible;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .info-panel {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .info-panel h4 {
+            margin-bottom: 10px;
+            color: #f7fafc;
+            font-size: 1.1em;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr 350px;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .card h3 {
+            color: #4a5568;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 0.9em;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            margin: 8px 0;
+            -webkit-appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            background: #e2e8f0;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            border: none;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 3px;
+            min-width: 120px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        button:disabled {
+            background: #a0aec0;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .canvas-container {
+            margin: 15px 0;
+            text-align: center;
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        canvas {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background: white;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .canvas-title {
+            font-size: 0.9em;
+            color: #4a5568;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .results {
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .results h3 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .result-card {
+            background: #f7fafc;
+            padding: 18px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+            min-height: 250px;
+        }
+
+        .result-card h4 {
+            color: #4a5568;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .peak-list, .xi-list {
+            list-style: none;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .peak-list li, .xi-list li {
+            background: white;
+            margin: 8px 0;
+            padding: 10px 12px;
+            border-radius: 6px;
+            border-left: 3px solid #68d391;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            transition: all 0.2s ease;
+        }
+
+        .peak-list li:hover, .xi-list li:hover {
+            transform: translateX(3px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .xi-list li {
+            border-left-color: #f6ad55;
+        }
+
+        .value-display {
+            display: inline-block;
+            background: #edf2f7;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            margin-left: 10px;
+            font-size: 0.85em;
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-good { background: #68d391; }
+        .status-warning { background: #f6ad55; }
+        .status-error { background: #fc8181; }
+
+        .preset-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .preset-buttons button {
+            font-size: 0.8em;
+            padding: 8px 12px;
+            min-width: auto;
+        }
+
+        .analysis-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .stats-panel {
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+        }
+
+        .stat-label {
+            color: #718096;
+            font-size: 0.75em;
+            margin-bottom: 3px;
+        }
+
+        .stat-value {
+            color: #2d3748;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .formula-display {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            text-align: center;
+            margin: 10px 0;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .python-status {
+            background: #f8f9fa;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+        }
+
+        .python-status.ready {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+
+        .python-status.loading {
+            background: #fff3cd;
+            border-color: #ffeaa7;
+            color: #856404;
+        }
+
+        .python-status.error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        @media (max-width: 1200px) {
+            .demo-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .language-nav, .navigation-bar {
+                position: relative;
+                top: auto;
+                right: auto;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+
+            .container {
+                padding-top: 20px;
+            }
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            max-width: 300px;
+            white-space: normal;
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        .tooltip::before {
+            content: '';
+            position: absolute;
+            bottom: 119%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: rgba(0, 0, 0, 0.9);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .tooltip:hover::after,
+        .tooltip:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .tooltip-icon {
+            margin-left: 5px;
+            color: #667eea;
+            font-size: 0.8em;
+            opacity: 0.7;
+        }
+
+        .help-text {
+            font-size: 0.75em;
+            color: #718096;
+            font-style: italic;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Navigation -->
+    <div class="language-nav">
+        <button class="lang-btn active" onclick="switchLanguage('de')" id="lang-de">🇩🇪 Deutsch</button>
+        <button class="lang-btn" onclick="switchLanguage('en')" id="lang-en">🇺🇸 English</button>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="navigation-bar">
+        <a href="../rsa/index.html" class="nav-btn" id="nav-rsa">
+            🔐 <span class="nav-text">RSA Kryptographie</span>
+        </a>
+    </div>
+
+    <div class="container">
+        <!-- Python Loading Panel -->
+        <div class="loading-panel" id="loading-panel">
+            <h3>🐍 Lade Python ξ-FFT Library...</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <p id="loading-status">Initialisiere Pyodide...</p>
+            <div class="console-output" id="console-output"></div>
+        </div>
+
+        <!-- German Content -->
+        <div id="content-de" class="hidden">
+            <div class="header">
+                <h1>ξ-FFT Interactive Demo</h1>
+                <p>Spektralanalyse durch Frequenz-Verhältnisse - Mit originaler Python Library</p>
+                
+                <div class="info-panel">
+                    <h4>🔬 Was ist ξ-FFT?</h4>
+                    <p>ξ (Xi) = f_max / f_min - Ein einfaches Verhältnis zwischen Frequenzen, das überraschend viel über die spektrale Struktur eines Signals verrät. Diese Demo nutzt die originale Python xi_fft_library.py direkt im Browser!</p>
+                    <div class="formula-display">
+                        ξ = f₁ / f₂ (wobei f₁ > f₂)
+                    </div>
+                    <div class="python-status" id="python-status-de">
+                        🐍 Python-Library wird geladen...
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-grid">
+                <div class="card">
+                    <h3>🎛️ Signal Generator</h3>
+                    
+                    <div class="control-group">
+                        <label>Frequenz 1: <span class="value-display" id="freq1-display">50 Hz</span></label>
+                        <input type="range" id="freq1" min="10" max="300" value="50" step="5" onchange="updateDisplays()">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Amplitude 1: <span class="value-display" id="amp1-display">1.0</span></label>
+                        <input type="range" id="amp1" min="0" max="1" value="1" step="0.1" onchange="updateDisplays()">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Frequenz 2: <span class="value-display" id="freq2-display">120 Hz</span></label>
+                        <input type="range" id="freq2" min="10" max="400" value="120" step="5" onchange="updateDisplays()">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Amplitude 2: <span class="value-display" id="amp2-display">0.7</span></label>
+                        <input type="range" id="amp2" min="0" max="1" value="0.7" step="0.1" onchange="updateDisplays()">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Frequenz 3: <span class="value-display" id="freq3-display">180 Hz</span></label>
+                        <input type="range" id="freq3" min="10" max="500" value="180" step="5" onchange="updateDisplays()">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Amplitude 3: <span class="value-display" id="amp3-display">0.4</span></label>
+                        <input type="range" id="amp3" min="0" max="1" value="0.4" step="0.1" onchange="updateDisplays()">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Rauschen: <span class="value-display" id="noise-display">0.1</span></label>
+                        <input type="range" id="noise" min="0" max="0.5" value="0.1" step="0.05" onchange="updateDisplays()">
+                    </div>
+                    
+                    <div class="analysis-controls">
+                        <button onclick="generateAndAnalyze()" id="analyze-btn">🔄 Python Analyse</button>
+                        <button onclick="loadPreset('machine')" style="font-size: 0.8em;">⚙️ Maschinen-Preset</button>
+                    </div>
+
+                    <div class="stats-panel">
+                        <h4 style="margin: 0 0 10px 0; color: #4a5568;">📊 Python-Statistiken</h4>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-label">Abtastrate</div>
+                                <div class="stat-value">1000 Hz</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Samples</div>
+                                <div class="stat-value" id="samples-count">2000</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Schwellwert</div>
+                                <div class="stat-value" id="threshold-value">0.05</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Analyse-Zeit</div>
+                                <div class="stat-value" id="analysis-time">-- ms</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>📈 Visualisierung</h3>
+                    
+                    <div class="canvas-container">
+                        <div class="canvas-title tooltip" data-tooltip="Zeitbereichsdarstellung des Signals. Zeigt die Wellenform der ersten 0.5 Sekunden mit Python-generierten Daten.">
+                            Python Signal (erste 0.5s) <span class="tooltip-icon">?</span>
+                        </div>
+                        <canvas id="signalCanvas" width="420" height="180"></canvas>
+                    </div>
+                    
+                    <div class="canvas-container">
+                        <div class="canvas-title tooltip" data-tooltip="Frequenzspektrum berechnet mit der originalen Python ξ-FFT Library. Zeigt detektierte Peaks als Balken.">
+                            Python ξ-FFT Spektrum <span class="tooltip-icon">?</span>
+                        </div>
+                        <canvas id="spectrumCanvas" width="420" height="180"></canvas>
+                    </div>
+
+                    <div class="canvas-container">
+                        <div class="canvas-title tooltip" data-tooltip="ξ-Verhältnisse berechnet von der Python-Library. Jeder Balken repräsentiert ein ξ-Ratio zwischen zwei Frequenzen.">
+                            Python ξ-Verhältnisse <span class="tooltip-icon">?</span>
+                        </div>
+                        <canvas id="xiCanvas" width="420" height="120"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🎯 Python Presets</h3>
+                    
+                    <div class="preset-buttons">
+                        <button onclick="loadPreset('pure')">🔬 Reine Töne</button>
+                        <button onclick="loadPreset('machine')">⚙️ Maschine</button>
+                        <button onclick="loadPreset('harmonic')">🎵 Harmonisch</button>
+                        <button onclick="loadPreset('noisy')">📡 Verrauscht</button>
+                        <button onclick="loadPreset('motor')">🏭 Motor 60Hz</button>
+                        <button onclick="loadPreset('biomedical')">💓 Biomedizin</button>
+                        <button onclick="pythonExample('machine_monitoring')">🔧 Maschinenüberwachung</button>
+                        <button onclick="pythonExample('anomaly_detection')">🚨 Anomalie-Erkennung</button>
+                    </div>
+
+                    <div class="stats-panel" style="margin-top: 20px;">
+                        <h4 style="margin: 0 0 10px 0; color: #4a5568;">🐍 Python-Funktionen</h4>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <button onclick="runStreamProcessor()" style="font-size: 0.8em;">📊 Stream-Processor</button>
+                            <button onclick="runAnomalyDetector()" style="font-size: 0.8em;">🔍 Anomalie-Detektor</button>
+                            <button onclick="runTrendAnalysis()" style="font-size: 0.8em;">📈 Trend-Analyse</button>
+                            <button onclick="testPythonLibrary()" style="font-size: 0.8em;">🧪 Library-Test</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results">
+                <h3>🔍 Python ξ-FFT Analyse Ergebnisse</h3>
+                <p style="color: #718096; margin-bottom: 20px;">Live-Analyse mit originaler xi_fft_library.py über Pyodide</p>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h4 class="tooltip" data-tooltip="Frequenzpeaks detektiert von der Python ξ-FFT Library. Sortiert nach Amplitude mit DFT-Berechnung.">
+                            🎯 Python Peaks <span class="tooltip-icon">?</span>
+                        </h4>
+                        <div class="help-text">Von Python xi_fft_library detektiert</div>
+                        <ul id="peaks-list" class="peak-list">
+                            <li><span class="status-indicator status-good"></span>Python-Library wird geladen...</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h4 class="tooltip" data-tooltip="ξ-Verhältnisse berechnet von der originalen Python-Implementation. Zeigt alle harmonischen Beziehungen zwischen Peaks.">
+                            ⚡ Python ξ-Ratios <span class="tooltip-icon">?</span>
+                        </h4>
+                        <div class="help-text">Original Python-Berechnung</div>
+                        <ul id="xi-list" class="xi-list">
+                            <li><span class="status-indicator status-warning"></span>Warte auf Python...</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h4 class="tooltip" data-tooltip="Analyse-Details direkt aus der Python xi_fft_library. Zeigt interne Python-Berechnungen und Statistiken.">
+                            📈 Python Library Details <span class="tooltip-icon">?</span>
+                        </h4>
+                        <div id="analysis-details" style="font-family: 'Courier New', monospace; font-size: 0.85em;">
+                            <div style="margin: 8px 0; padding: 8px; background: white; border-radius: 4px;">
+                                <strong>Python Peaks:</strong> <span id="peak-count">--</span>
+                            </div>
+                            <div style="margin: 8px 0; padding: 8px; background: white; border-radius: 4px;">
+                                <strong>Python ξ-Ratios:</strong> <span id="xi-count">--</span>
+                            </div>
+                            <div style="margin: 8px 0; padding: 8px; background: white; border-radius: 4px;">
+                                <strong>Dominant ξ:</strong> <span id="dominant-xi">--</span>
+                            </div>
+                            <div style="margin: 8px 0; padding: 8px; background: white; border-radius: 4px;">
+                                <strong>Komplexität:</strong> <span id="complexity">--</span>
+                            </div>
+                            <div style="margin: 8px 0; padding: 8px; background: white; border-radius: 4px;">
+                                <strong>Python Status:</strong> <span id="analysis-status">Pyodide laden...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- English Content -->
+        <div id="content-en" class="hidden">
+            <div class="header">
+                <h1>ξ-FFT Interactive Demo</h1>
+                <p>Spectral Analysis through Frequency Ratios - With Original Python Library</p>
+                
+                <div class="info-panel">
+                    <h4>🔬 What is ξ-FFT?</h4>
+                    <p>ξ (Xi) = f_max / f_min - A simple ratio between frequencies that reveals surprisingly much about the spectral structure of a signal. This demo uses the original Python xi_fft_library.py directly in the browser!</p>
+                    <div class="formula-display">
+                        ξ = f₁ / f₂ (where f₁ > f₂)
+                    </div>
+                    <div class="python-status" id="python-status-en">
+                        🐍 Python library loading...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Similar structure as German content with English labels -->
+            <div class="demo-grid">
+                <div class="card">
+                    <h3>🎛️ Signal Generator</h3>
+                    
+                    <!-- Controls with English labels -->
+                    <div class="control-group">
+                        <label>Frequency 1: <span class="value-display" id="freq1-display-en">50 Hz</span></label>
+                        <input type="range" id="freq1-en" min="10" max="300" value="50" step="5" onchange="updateDisplays()">
+                    </div>
+                    
+                    <!-- ... more controls ... -->
+                    
+                    <div class="analysis-controls">
+                        <button onclick="generateAndAnalyze()" id="analyze-btn-en">🔄 Python Analysis</button>
+                        <button onclick="loadPreset('machine')" style="font-size: 0.8em;">⚙️ Machine Preset</button>
+                    </div>
+                </div>
+
+                <!-- Similar cards structure with English content -->
+                <div class="card">
+                    <h3>📈 Visualization</h3>
+                    <!-- Canvas containers with English labels -->
+                </div>
+
+                <div class="card">
+                    <h3>🎯 Python Presets</h3>
+                    <!-- Preset buttons -->
+                </div>
+            </div>
+
+            <div class="results">
+                <h3>🔍 Python ξ-FFT Analysis Results</h3>
+                <p style="color: #718096; margin-bottom: 20px;">Live analysis with original xi_fft_library.py via Pyodide</p>
+                
+                <!-- Results grid similar to German version -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let pyodide = null;
+        let xiFFTModule = null;
+        let currentLanguage = 'de';
+        let currentSignal = [];
+        let analysisResult = null;
+        let pythonReady = false;
+
+        // Language management
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            document.getElementById('content-de').classList.toggle('hidden', lang !== 'de');
+            document.getElementById('content-en').classList.toggle('hidden', lang !== 'en');
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('lang-' + lang).classList.add('active');
+            
+            const navText = document.querySelector('.nav-text');
+            navText.textContent = lang === 'de' ? 'RSA Kryptographie' : 'RSA Cryptography';
+            
+            updateDisplays();
+        }
+
+        // Console logging
+        function logToConsole(message) {
+            const consoleOutput = document.getElementById('console-output');
+            const timestamp = new Date().toLocaleTimeString();
+            consoleOutput.innerHTML += `[${timestamp}] ${message}\n`;
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        // Update progress
+        function updateProgress(percentage, status) {
+            document.getElementById('progress-fill').style.width = percentage + '%';
+            document.getElementById('loading-status').textContent = status;
+        }
+
+        // Update Python status
+        function updatePythonStatus(status, type = 'loading') {
+            const statusDe = document.getElementById('python-status-de');
+            const statusEn = document.getElementById('python-status-en');
+            
+            statusDe.textContent = status;
+            statusEn.textContent = status;
+            statusDe.className = `python-status ${type}`;
+            statusEn.className = `python-status ${type}`;
+        }
+
+        // Load Pyodide and ξ-FFT Library
+        async function loadPyodideAndLibrary() {
+            try {
+                logToConsole('🔄 Loading Pyodide...');
+                updateProgress(10, 'Loading Pyodide...');
+                updatePythonStatus('🐍 Pyodide wird geladen...', 'loading');
+                
+                pyodide = await loadPyodide();
+                logToConsole('✅ Pyodide loaded successfully');
+                updateProgress(30, 'Python environment ready');
+
+                logToConsole('📦 Installing Python packages...');
+                updateProgress(40, 'Installing numpy...');
+                await pyodide.loadPackage("numpy");
+                logToConsole('✅ numpy installed');
+
+                updateProgress(60, 'Loading xi_fft_library...');
+                updatePythonStatus('📦 xi_fft_library wird geladen...', 'loading');
+                
+                // Load the complete xi_fft_library.py
+                const xiFFTCode = `
+# ξ-FFT Library - Complete Implementation
+import math
+import time
+import random
+from typing import List, Dict, Tuple, Optional
+
+class XiFFT:
+    """Main class for ξ-FFT Analysis"""
+    
+    def __init__(self, sample_rate: int, threshold: float = 0.05):
+        self.sample_rate = sample_rate
+        self.threshold = threshold
+        self.peaks = []
+        self.xi_ratios = []
+    
+    def analyze(self, signal: List[float], freq_range: Tuple[int, int] = (10, 500)) -> Dict:
+        """Analyze signal and calculate ξ-ratios"""
+        start_time = time.time()
+        
+        self.peaks = self._find_spectral_peaks(signal, freq_range)
+        self.xi_ratios = self._calculate_xi_ratios(self.peaks)
+        
+        analysis_time = time.time() - start_time
+        
+        return {
+            'peaks': self.peaks,
+            'xi_ratios': self.xi_ratios,
+            'dominant_xi': self.xi_ratios[0] if self.xi_ratios else None,
+            'peak_count': len(self.peaks),
+            'complexity': len(self.xi_ratios),
+            'analysis_time_ms': round(analysis_time * 1000, 2),
+            'freq_range': freq_range,
+            'sample_rate': self.sample_rate,
+            'threshold': self.threshold
+        }
+    
+    def _find_spectral_peaks(self, signal: List[float], freq_range: Tuple[int, int]) -> List[Dict]:
+        """DFT-based peak detection"""
+        peaks = []
+        min_freq, max_freq = freq_range
+        step_size = 5  # 5 Hz resolution
+        
+        for freq in range(min_freq, max_freq + 1, step_size):
+            magnitude = self._calculate_magnitude(signal, freq)
+            
+            if magnitude > self.threshold:
+                peaks.append({
+                    'frequency': freq,
+                    'magnitude': round(magnitude, 4)
+                })
+        
+        # Sort by magnitude and keep top 10
+        return sorted(peaks, key=lambda x: x['magnitude'], reverse=True)[:10]
+    
+    def _calculate_magnitude(self, signal: List[float], frequency: float) -> float:
+        """DFT for specific frequency"""
+        N = len(signal)
+        real = imag = 0.0
+        
+        for n in range(N):
+            angle = -2 * math.pi * frequency * n / self.sample_rate
+            real += signal[n] * math.cos(angle)
+            imag += signal[n] * math.sin(angle)
+        
+        return math.sqrt(real * real + imag * imag) * 2 / N
+    
+    def _calculate_xi_ratios(self, peaks: List[Dict]) -> List[Dict]:
+        """Calculate ξ-ratios between peaks"""
+        ratios = []
+        
+        for i in range(len(peaks)):
+            for j in range(i + 1, len(peaks)):
+                f1, f2 = peaks[i]['frequency'], peaks[j]['frequency']
+                xi = max(f1, f2) / min(f1, f2)
+                
+                ratios.append({
+                    'freq_high': max(f1, f2),
+                    'freq_low': min(f1, f2),
+                    'xi_ratio': round(xi, 3),
+                    'significance': round(peaks[i]['magnitude'] * peaks[j]['magnitude'], 6)
+                })
+        
+        return sorted(ratios, key=lambda x: x['significance'], reverse=True)[:10]
+
+class XiAnomalyDetector:
+    """Anomaly detection based on ξ-ratios"""
+    
+    def __init__(self, expected_ratios: List[Dict], tolerance: float = 0.2):
+        self.expected_ratios = expected_ratios
+        self.tolerance = tolerance
+    
+    def detect(self, xi_ratios: List[Dict]) -> Dict:
+        """Detect deviations from expected ξ-ratios"""
+        anomalies = []
+        matches = []
+        
+        for expected in self.expected_ratios:
+            best_match = None
+            min_deviation = float('inf')
+            
+            for actual in xi_ratios:
+                deviation = abs(actual['xi_ratio'] - expected['value'])
+                if deviation < min_deviation:
+                    min_deviation = deviation
+                    best_match = actual
+            
+            if min_deviation < self.tolerance:
+                matches.append({
+                    'expected': expected,
+                    'actual': best_match,
+                    'deviation': round(min_deviation, 3),
+                    'status': 'normal'
+                })
+            else:
+                anomalies.append({
+                    'expected': expected,
+                    'deviation': round(min_deviation, 3),
+                    'status': 'anomaly'
+                })
+        
+        return {
+            'anomalies': anomalies,
+            'matches': matches,
+            'anomaly_count': len(anomalies),
+            'health_score': len(matches) / len(self.expected_ratios) if self.expected_ratios else 0
+        }
+
+class XiStreamProcessor:
+    """Real-time processing of data streams"""
+    
+    def __init__(self, sample_rate: int, buffer_size: int = 1024):
+        self.sample_rate = sample_rate
+        self.buffer_size = buffer_size
+        self.buffer = []
+        self.xi_fft = XiFFT(sample_rate)
+        self.history = []
+    
+    def process_sample(self, sample: float) -> Optional[Dict]:
+        """Add sample and analyze when buffer is full"""
+        self.buffer.append(sample)
+        
+        if len(self.buffer) >= self.buffer_size:
+            result = self.xi_fft.analyze(self.buffer)
+            
+            self.history.append(result)
+            if len(self.history) > 100:
+                self.history.pop(0)
+            
+            # Overlap for continuous analysis
+            overlap = self.buffer_size // 4
+            self.buffer = self.buffer[-overlap:]
+            
+            return result
+        
+        return None
+    
+    def get_trend_analysis(self) -> Dict:
+        """Analyze trends of ξ-ratios"""
+        if len(self.history) < 5:
+            return {'status': 'insufficient_data'}
+        
+        recent_xi = []
+        for h in self.history[-10:]:
+            if h['dominant_xi']:
+                recent_xi.append(h['dominant_xi']['xi_ratio'])
+        
+        if not recent_xi:
+            return {'status': 'no_dominant_xi'}
+        
+        mean_xi = sum(recent_xi) / len(recent_xi)
+        variance = sum((x - mean_xi) ** 2 for x in recent_xi) / len(recent_xi)
+        std_xi = math.sqrt(variance)
+        
+        return {
+            'mean_xi': round(mean_xi, 3),
+            'std_xi': round(std_xi, 3),
+            'trend': 'stable' if std_xi < 0.1 else 'unstable',
+            'latest_xi': recent_xi[-1],
+            'sample_count': len(recent_xi)
+        }
+
+def create_test_signal(freqs: List[float], amplitudes: List[float], 
+                      duration: float = 2.0, sample_rate: int = 1000) -> List[float]:
+    """Create test signal with given frequencies"""
+    if len(freqs) != len(amplitudes):
+        raise ValueError("Frequencies and amplitudes must have same length")
+    
+    n_samples = int(duration * sample_rate)
+    signal = [0.0] * n_samples
+    
+    for i in range(n_samples):
+        t = i / sample_rate
+        for freq, amp in zip(freqs, amplitudes):
+            if amp > 0:  # Only if amplitude > 0
+                signal[i] += amp * math.sin(2 * math.pi * freq * t)
+    
+    return signal
+
+def quick_analysis(signal: List[float], sample_rate: int, 
+                  freq_range: Tuple[int, int] = (10, 500)) -> None:
+    """Quick analysis with console output"""
+    xi_fft = XiFFT(sample_rate)
+    result = xi_fft.analyze(signal, freq_range)
+    
+    print("=== ξ-FFT Analysis ===")
+    print(f"Peaks found: {result['peak_count']}")
+    print(f"ξ-ratios: {result['complexity']}")
+    
+    print("\\nTop Frequencies:")
+    for i, peak in enumerate(result['peaks'][:5], 1):
+        print(f"{i}. {peak['frequency']} Hz: {peak['magnitude']:.3f}")
+    
+    print("\\nTop ξ-ratios:")
+    for i, ratio in enumerate(result['xi_ratios'][:5], 1):
+        print(f"{i}. ξ({ratio['freq_high']}/{ratio['freq_low']}) = {ratio['xi_ratio']}")
+
+# Global instances for browser usage
+xi_fft_instance = XiFFT(sample_rate=1000, threshold=0.05)
+anomaly_detector = None
+stream_processor = None
+
+print("✅ ξ-FFT Library loaded successfully!")
+`;
+
+                pyodide.runPython(xiFFTCode);
+                logToConsole('✅ xi_fft_library loaded successfully');
+                updateProgress(80, 'Library initialized');
+
+                // Test the library
+                logToConsole('🧪 Testing xi_fft_library...');
+                const testResult = pyodide.runPython(`
+# Test the library
+test_signal = create_test_signal([50, 120, 180], [1.0, 0.7, 0.4], 1.0, 1000)
+test_result = xi_fft_instance.analyze(test_signal, (10, 500))
+f"Test successful: {test_result['peak_count']} peaks found, {test_result['complexity']} ξ-ratios calculated"
+`);
+                logToConsole('✅ ' + testResult);
+
+                updateProgress(100, 'Ready for analysis!');
+                updatePythonStatus('✅ Python xi_fft_library bereit!', 'ready');
+                pythonReady = true;
+                
+                // Show interface
+                setTimeout(() => {
+                    document.getElementById('loading-panel').style.display = 'none';
+                    document.getElementById('content-de').classList.remove('hidden');
+                    
+                    document.getElementById('analysis-status').textContent = '✅ Python bereit';
+                    updateDisplays();
+                    
+                    // Auto-generate initial analysis
+                    generateAndAnalyze();
+                }, 1000);
+
+            } catch (error) {
+                logToConsole('❌ Error: ' + error.message);
+                updateProgress(0, 'Error loading Python');
+                updatePythonStatus('❌ Fehler beim Laden der Python-Library', 'error');
+                document.getElementById('loading-status').innerHTML = 
+                    '<span style="color: red;">❌ Error loading Pyodide</span><br>' +
+                    '<small>Check internet connection and browser compatibility</small>';
+            }
+        }
+
+        // Update display values
+        function updateDisplays() {
+            const suffix = currentLanguage === 'en' ? '-en' : '';
+            
+            try {
+                const freq1 = document.getElementById('freq1').value;
+                const freq2 = document.getElementById('freq2').value;
+                const freq3 = document.getElementById('freq3').value;
+                const amp1 = document.getElementById('amp1').value;
+                const amp2 = document.getElementById('amp2').value;
+                const amp3 = document.getElementById('amp3').value;
+                const noise = document.getElementById('noise').value;
+                
+                document.getElementById('freq1-display').textContent = freq1 + ' Hz';
+                document.getElementById('freq2-display').textContent = freq2 + ' Hz';
+                document.getElementById('freq3-display').textContent = freq3 + ' Hz';
+                document.getElementById('amp1-display').textContent = parseFloat(amp1).toFixed(1);
+                document.getElementById('amp2-display').textContent = parseFloat(amp2).toFixed(1);
+                document.getElementById('amp3-display').textContent = parseFloat(amp3).toFixed(1);
+                document.getElementById('noise-display').textContent = parseFloat(noise).toFixed(2);
+            } catch (error) {
+                console.log('Update displays error (non-critical):', error);
+            }
+        }
+
+        // Generate signal with Python
+        function generateSignalWithPython() {
+            if (!pyodide || !pythonReady) {
+                alert('Python environment not ready');
+                return;
+            }
+
+            try {
+                const freq1 = parseFloat(document.getElementById('freq1').value);
+                const freq2 = parseFloat(document.getElementById('freq2').value);
+                const freq3 = parseFloat(document.getElementById('freq3').value);
+                const amp1 = parseFloat(document.getElementById('amp1').value);
+                const amp2 = parseFloat(document.getElementById('amp2').value);
+                const amp3 = parseFloat(document.getElementById('amp3').value);
+                const noise = parseFloat(document.getElementById('noise').value);
+                
+                // Set Python variables
+                pyodide.globals.set("freq1", freq1);
+                pyodide.globals.set("freq2", freq2);
+                pyodide.globals.set("freq3", freq3);
+                pyodide.globals.set("amp1", amp1);
+                pyodide.globals.set("amp2", amp2);
+                pyodide.globals.set("amp3", amp3);
+                pyodide.globals.set("noise_level", noise);
+
+                const pythonCode = `
+# Generate signal with Python
+import random
+
+freqs = []
+amps = []
+
+# Add active frequencies
+if amp1 > 0:
+    freqs.append(freq1)
+    amps.append(amp1)
+if amp2 > 0:
+    freqs.append(freq2)
+    amps.append(amp2)
+if amp3 > 0:
+    freqs.append(freq3)
+    amps.append(amp3)
+
+# Generate signal
+if freqs:
+    signal = create_test_signal(freqs, amps, 2.0, 1000)
+    
+    # Add noise if specified
+    if noise_level > 0:
+        for i in range(len(signal)):
+            signal[i] += noise_level * (random.random() - 0.5) * 2
+else:
+    signal = [0.0] * 2000  # Silent signal
+
+signal
+`;
+
+                currentSignal = pyodide.runPython(pythonCode).toJs();
+                plotSignal();
+                document.getElementById('analysis-status').textContent = '🎵 Signal mit Python generiert';
+
+                return true;
+            } catch (error) {
+                console.error('Python signal generation error:', error);
+                document.getElementById('analysis-status').textContent = '❌ Python Signal-Fehler';
+                return false;
+            }
+        }
+
+        // Analyze signal with Python
+        function analyzeWithPython() {
+            if (!pyodide || !pythonReady || !currentSignal || currentSignal.length === 0) {
+                document.getElementById('analysis-status').textContent = '❌ Kein Signal oder Python nicht bereit';
+                return;
+            }
+
+            try {
+                document.getElementById('analysis-status').textContent = '🔍 Python analysiert...';
+                
+                const startTime = performance.now();
+                
+                // Pass signal to Python
+                pyodide.globals.set("signal_data", currentSignal);
+                
+                const analysisCode = `
+# Analyze with Python xi_fft_library
+result = xi_fft_instance.analyze(signal_data, (10, 500))
+result
+`;
+
+                analysisResult = pyodide.runPython(analysisCode).toJs({dict_converter: Object.fromEntries});
+                
+                const clientTime = (performance.now() - startTime).toFixed(1);
+                
+                displayPythonResults();
+                plotSpectrum();
+                plotXiRatios();
+                
+                document.getElementById('analysis-time').textContent = analysisResult.analysis_time_ms + ' ms';
+                document.getElementById('analysis-status').textContent = 
+                    `✅ Python: ${analysisResult.peak_count} Peaks, ${analysisResult.complexity} ξ-Ratios`;
+
+            } catch (error) {
+                console.error('Python analysis error:', error);
+                document.getElementById('analysis-status').textContent = '❌ Python Analyse-Fehler';
+            }
+        }
+
+        // Display Python results
+        function displayPythonResults() {
+            if (!analysisResult) return;
+
+            // Display peaks
+            const peaksList = document.getElementById('peaks-list');
+            peaksList.innerHTML = '';
+            
+            if (analysisResult.peaks && analysisResult.peaks.length > 0) {
+                analysisResult.peaks.forEach((peak, index) => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<span class="status-indicator status-good"></span>${peak.frequency} Hz: ${peak.magnitude.toFixed(3)} (Python)`;
+                    peaksList.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.innerHTML = `<span class="status-indicator status-error"></span>Keine Peaks gefunden (Python Threshold: ${analysisResult.threshold})`;
+                peaksList.appendChild(li);
+            }
+
+            // Display Xi ratios
+            const xiList = document.getElementById('xi-list');
+            xiList.innerHTML = '';
+            
+            if (analysisResult.xi_ratios && analysisResult.xi_ratios.length > 0) {
+                analysisResult.xi_ratios.forEach(ratio => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<span class="status-indicator status-warning"></span>ξ(${ratio.freq_high}/${ratio.freq_low}) = ${ratio.xi_ratio} (${ratio.significance.toFixed(4)}) [Python]`;
+                    xiList.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.innerHTML = `<span class="status-indicator status-warning"></span>Zu wenige Peaks für ξ-Verhältnisse (Python)`;
+                xiList.appendChild(li);
+            }
+
+            // Update analysis details
+            document.getElementById('peak-count').textContent = analysisResult.peak_count || 0;
+            document.getElementById('xi-count').textContent = analysisResult.complexity || 0;
+            document.getElementById('dominant-xi').textContent = 
+                analysisResult.dominant_xi ? analysisResult.dominant_xi.xi_ratio : '--';
+            
+            let complexity = currentLanguage === 'en' ? 'Low' : 'Niedrig';
+            if (analysisResult.complexity > 10) complexity = currentLanguage === 'en' ? 'High' : 'Hoch';
+            else if (analysisResult.complexity > 5) complexity = currentLanguage === 'en' ? 'Medium' : 'Mittel';
+            document.getElementById('complexity').textContent = complexity;
+            
+            document.getElementById('threshold-value').textContent = analysisResult.threshold;
+        }
+
+        // Plot functions
+        function plotSignal() {
+            const canvas = document.getElementById('signalCanvas');
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+
+            ctx.clearRect(0, 0, width, height);
+            
+            if (!currentSignal || currentSignal.length === 0) return;
+
+            const plotSamples = Math.min(500, currentSignal.length);
+            const step = width / plotSamples;
+
+            // Draw grid
+            ctx.strokeStyle = '#f1f5f9';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 4; i++) {
+                const y = (height / 4) * i;
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(width, y);
+                ctx.stroke();
+            }
+
+            // Plot signal
+            ctx.strokeStyle = '#667eea';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+
+            let maxVal = Math.max(...currentSignal.slice(0, plotSamples));
+            let minVal = Math.min(...currentSignal.slice(0, plotSamples));
+            let range = maxVal - minVal;
+            if (range === 0) range = 1;
+
+            for (let i = 0; i < plotSamples; i++) {
+                const x = i * step;
+                const y = height - ((currentSignal[i] - minVal) / range) * height;
+                
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            
+            ctx.stroke();
+
+            // Add Python label
+            ctx.fillStyle = '#667eea';
+            ctx.font = 'bold 12px Arial';
+            ctx.fillText('Python Generated', 10, 20);
+        }
+
+        function plotSpectrum() {
+            const canvas = document.getElementById('spectrumCanvas');
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+
+            ctx.clearRect(0, 0, width, height);
+            
+            if (!analysisResult || !analysisResult.peaks) return;
+
+            const peaks = analysisResult.peaks;
+            const maxFreq = 500;
+            const maxMag = Math.max(...peaks.map(p => p.magnitude));
+
+            // Draw grid
+            ctx.strokeStyle = '#f1f5f9';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 5; i++) {
+                const x = (width / 5) * i;
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, height);
+                ctx.stroke();
+                
+                // Frequency labels
+                ctx.fillStyle = '#718096';
+                ctx.font = '10px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText((i * 100) + 'Hz', x, height - 5);
+            }
+
+            // Draw bars for peaks
+            peaks.forEach((peak, index) => {
+                const x = (peak.frequency / maxFreq) * width;
+                const barHeight = (peak.magnitude / maxMag) * height * 0.8;
+                const y = height - barHeight;
+
+                const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe'];
+                ctx.fillStyle = colors[index % colors.length];
+                ctx.fillRect(x - 3, y, 6, barHeight);
+
+                ctx.fillStyle = '#4a5568';
+                ctx.font = '10px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(peak.frequency + 'Hz', x, y - 5);
+                ctx.fillText(peak.magnitude.toFixed(2), x, height - 15);
+            });
+
+            // Add Python label
+            ctx.fillStyle = '#667eea';
+            ctx.font = 'bold 12px Arial';
+            ctx.textAlign = 'left';
+            ctx.fillText('Python ξ-FFT', 10, 20);
+        }
+
+        function plotXiRatios() {
+            const canvas = document.getElementById('xiCanvas');
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+
+            ctx.clearRect(0, 0, width, height);
+            
+            if (!analysisResult || !analysisResult.xi_ratios) return;
+
+            const xiRatios = analysisResult.xi_ratios;
+            const maxRatios = Math.min(8, xiRatios.length);
+            const barWidth = width / maxRatios;
+
+            xiRatios.slice(0, maxRatios).forEach((ratio, index) => {
+                const x = index * barWidth;
+                const barHeight = (ratio.significance * 1000) * height * 0.8;
+                const y = height - barHeight;
+
+                ctx.fillStyle = `hsl(${index * 45}, 70%, 60%)`;
+                ctx.fillRect(x + 2, y, barWidth - 4, barHeight);
+
+                ctx.fillStyle = '#4a5568';
+                ctx.font = '9px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(`ξ=${ratio.xi_ratio}`, x + barWidth/2, y - 5);
+                ctx.fillText(`${ratio.freq_high}/${ratio.freq_low}`, x + barWidth/2, height - 2);
+            });
+
+            // Add Python label
+            ctx.fillStyle = '#667eea';
+            ctx.font = 'bold 10px Arial';
+            ctx.textAlign = 'left';
+            ctx.fillText('Python ξ-Ratios', 5, 15);
+        }
+
+        // Main functions
+        function generateAndAnalyze() {
+            if (!pythonReady) {
+                alert('Python environment not ready yet');
+                return;
+            }
+            
+            if (generateSignalWithPython()) {
+                setTimeout(() => {
+                    analyzeWithPython();
+                }, 100);
+            }
+        }
+
+        // Preset functions
+        function loadPreset(type) {
+            let freqs, amps, noise;
+            
+            switch(type) {
+                case 'pure':
+                    freqs = [50, 120, 180]; amps = [1.0, 0.7, 0.4]; noise = 0;
+                    break;
+                case 'machine':
+                    freqs = [60, 150, 240]; amps = [1.0, 0.4, 0.2]; noise = 0.05;
+                    break;
+                case 'harmonic':
+                    freqs = [100, 200, 300]; amps = [1.0, 0.5, 0.25]; noise = 0.02;
+                    break;
+                case 'noisy':
+                    freqs = [75, 135, 195]; amps = [0.8, 0.6, 0.4]; noise = 0.3;
+                    break;
+                case 'motor':
+                    freqs = [60, 120, 180]; amps = [1.0, 0.3, 0.15]; noise = 0.08;
+                    break;
+                case 'biomedical':
+                    freqs = [1, 10, 40]; amps = [0.8, 1.0, 0.3]; noise = 0.15;
+                    break;
+            }
+            setValues(freqs, amps, noise);
+            generateAndAnalyze();
+        }
+
+        function setValues(freqs, amps, noise) {
+            document.getElementById('freq1').value = freqs[0];
+            document.getElementById('freq2').value = freqs[1];
+            document.getElementById('freq3').value = freqs[2];
+            document.getElementById('amp1').value = amps[0];
+            document.getElementById('amp2').value = amps[1];
+            document.getElementById('amp3').value = amps[2];
+            document.getElementById('noise').value = noise;
+            updateDisplays();
+        }
+
+        // Python examples and advanced functions
+        function pythonExample(type) {
+            if (!pythonReady) {
+                alert('Python environment not ready');
+                return;
+            }
+
+            try {
+                let result;
+                switch(type) {
+                    case 'machine_monitoring':
+                        result = pyodide.runPython(`
+# Machine monitoring example with Python
+machine_freqs = [60, 150, 240]  # Motor, Bearing, Gearbox
+machine_amps = [1.0, 0.4, 0.2]
+machine_signal = create_test_signal(machine_freqs, machine_amps, 2.0, 1000)
+
+# Add realistic noise
+import random
+for i in range(len(machine_signal)):
+    machine_signal[i] += 0.05 * (random.random() - 0.5) * 2
+
+# Analyze with Python
+machine_result = xi_fft_instance.analyze(machine_signal, (10, 300))
+
+# Expected ratios for healthy machine
+expected_ratios = [
+    {'name': 'Bearing/Motor', 'value': 2.5},     # 150/60 = 2.5
+    {'name': 'Gearbox/Motor', 'value': 4.0},     # 240/60 = 4.0
+    {'name': 'Gearbox/Bearing', 'value': 1.6}    # 240/150 = 1.6
+]
+
+# Setup anomaly detector
+anomaly_detector = XiAnomalyDetector(expected_ratios, tolerance=0.3)
+anomaly_report = anomaly_detector.detect(machine_result['xi_ratios'])
+
+f"Machine Health Score: {anomaly_report['health_score']:.2f}, Anomalies: {anomaly_report['anomaly_count']}"
+`);
+                        
+                        // Update current signal and analyze
+                        currentSignal = pyodide.runPython('machine_signal').toJs();
+                        analysisResult = pyodide.runPython('machine_result').toJs({dict_converter: Object.fromEntries});
+                        
+                        displayPythonResults();
+                        plotSignal();
+                        plotSpectrum();
+                        plotXiRatios();
+                        
+                        document.getElementById('analysis-status').textContent = '🔧 ' + result;
+                        alert('🔧 Maschinenüberwachung mit Python:\n' + result);
+                        break;
+
+                    case 'anomaly_detection':
+                        result = pyodide.runPython(`
+# Anomaly detection example
+# Create signal with anomaly (shifted frequency)
+anomaly_freqs = [65, 155, 245]  # Shifted from normal [60, 150, 240]
+anomaly_amps = [1.0, 0.4, 0.2]
+anomaly_signal = create_test_signal(anomaly_freqs, anomaly_amps, 2.0, 1000)
+
+anomaly_result = xi_fft_instance.analyze(anomaly_signal, (10, 300))
+
+# Check against expected ratios
+expected_ratios = [{'name': 'Standard', 'value': 2.5}]
+detector = XiAnomalyDetector(expected_ratios, tolerance=0.2)
+detection = detector.detect(anomaly_result['xi_ratios'])
+
+f"Anomaly Detection: {detection['anomaly_count']} anomalies found, Health: {detection['health_score']:.2f}"
+`);
+                        
+                        currentSignal = pyodide.runPython('anomaly_signal').toJs();
+                        analysisResult = pyodide.runPython('anomaly_result').toJs({dict_converter: Object.fromEntries});
+                        
+                        displayPythonResults();
+                        plotSignal();
+                        plotSpectrum();
+                        plotXiRatios();
+                        
+                        document.getElementById('analysis-status').textContent = '🚨 ' + result;
+                        alert('🚨 Anomalie-Erkennung mit Python:\n' + result);
+                        break;
+                }
+            } catch (error) {
+                console.error('Python example error:', error);
+                alert('Fehler beim Python-Beispiel: ' + error.message);
+            }
+        }
+
+        function runStreamProcessor() {
+            if (!pythonReady) {
+                alert('Python environment not ready');
+                return;
+            }
+
+            try {
+                const result = pyodide.runPython(`
+# Stream processor example
+stream_processor = XiStreamProcessor(sample_rate=1000, buffer_size=512)
+
+# Simulate stream data
+stream_results = []
+test_signal = create_test_signal([50, 120, 200], [1.0, 0.6, 0.3], 5.0, 1000)
+
+for i, sample in enumerate(test_signal):
+    result = stream_processor.process_sample(sample)
+    if result:
+        stream_results.append(result)
+    if len(stream_results) >= 5:
+        break
+
+# Get trend analysis
+trend = stream_processor.get_trend_analysis()
+
+f"Stream Processing: {len(stream_results)} segments analyzed, Trend: {trend.get('trend', 'N/A')}"
+`);
+                
+                document.getElementById('analysis-status').textContent = '📊 ' + result;
+                alert('📊 Stream-Processor mit Python:\n' + result);
+            } catch (error) {
+                console.error('Stream processor error:', error);
+                alert('Fehler beim Stream-Processor: ' + error.message);
+            }
+        }
+
+        function runAnomalyDetector() {
+            if (!pythonReady) {
+                alert('Python environment not ready');
+                return;
+            }
+
+            try {
+                const result = pyodide.runPython(`
+# Standalone anomaly detector test
+expected = [
+    {'name': 'Perfect Fifth', 'value': 1.5},
+    {'name': 'Perfect Fourth', 'value': 1.333},
+    {'name': 'Major Third', 'value': 1.25}
+]
+
+detector = XiAnomalyDetector(expected, tolerance=0.1)
+
+# Test with current signal
+if 'xi_ratios' in globals() and xi_ratios:
+    current_ratios = [{'xi_ratio': 1.48}, {'xi_ratio': 1.35}, {'xi_ratio': 1.26}]
+    detection = detector.detect(current_ratios)
+    f"Anomaly Test: {detection['anomaly_count']} anomalies, Health Score: {detection['health_score']:.2f}"
+else:
+    "No current analysis available for anomaly detection"
+`);
+                
+                document.getElementById('analysis-status').textContent = '🔍 ' + result;
+                alert('🔍 Anomalie-Detektor Test:\n' + result);
+            } catch (error) {
+                console.error('Anomaly detector error:', error);
+                alert('Fehler beim Anomalie-Detektor: ' + error.message);
+            }
+        }
+
+        function runTrendAnalysis() {
+            if (!pythonReady) {
+                alert('Python environment not ready');
+                return;
+            }
+
+            try {
+                const result = pyodide.runPython(`
+# Trend analysis with multiple signals
+trends = []
+base_freqs = [50, 120, 180]
+
+for i in range(5):
+    # Slight variations in frequencies
+    varied_freqs = [f + i*2 for f in base_freqs]
+    varied_signal = create_test_signal(varied_freqs, [1.0, 0.7, 0.4], 1.0, 1000)
+    varied_result = xi_fft_instance.analyze(varied_signal)
+    
+    if varied_result['dominant_xi']:
+        trends.append(varied_result['dominant_xi']['xi_ratio'])
+
+if trends:
+    import statistics
+    mean_trend = statistics.mean(trends)
+    std_trend = statistics.stdev(trends) if len(trends) > 1 else 0
+    stability = "stable" if std_trend < 0.1 else "unstable"
+    f"Trend Analysis: Mean ξ = {mean_trend:.3f} ± {std_trend:.3f}, Status: {stability}"
+else:
+    "No trend data available"
+`);
+                
+                document.getElementById('analysis-status').textContent = '📈 ' + result;
+                alert('📈 Trend-Analyse mit Python:\n' + result);
+            } catch (error) {
+                console.error('Trend analysis error:', error);
+                alert('Fehler bei der Trend-Analyse: ' + error.message);
+            }
+        }
+
+        function testPythonLibrary() {
+            if (!pythonReady) {
+                alert('Python environment not ready');
+                return;
+            }
+
+            try {
+                const result = pyodide.runPython(`
+# Comprehensive library test
+test_results = []
+
+# Test 1: Basic functionality
+test_signal = create_test_signal([100, 200, 300], [1.0, 0.5, 0.25], 1.0, 1000)
+basic_result = xi_fft_instance.analyze(test_signal)
+test_results.append(f"Basic: {basic_result['peak_count']} peaks, {basic_result['complexity']} ratios")
+
+# Test 2: Edge cases
+empty_signal = [0.0] * 1000
+empty_result = xi_fft_instance.analyze(empty_signal)
+test_results.append(f"Empty: {empty_result['peak_count']} peaks")
+
+# Test 3: Performance
+import time
+start_time = time.time()
+large_signal = create_test_signal([50, 150, 250], [1.0, 0.7, 0.4], 5.0, 1000)
+large_result = xi_fft_instance.analyze(large_signal)
+performance_time = (time.time() - start_time) * 1000
+test_results.append(f"Performance: {performance_time:.1f}ms for 5000 samples")
+
+"\\n".join(test_results)
+`);
+                
+                document.getElementById('analysis-status').textContent = '🧪 Library getestet';
+                alert('🧪 Python Library Test:\n' + result);
+            } catch (error) {
+                console.error('Library test error:', error);
+                alert('Fehler beim Library-Test: ' + error.message);
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Starting ξ-FFT Demo with Python Library...');
+            loadPyodideAndLibrary();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ξ-FFT Interactive Demo - Lokale Bibliothek</title>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .language-nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .lang-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-top: 120px;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        #content-de, #content-en {
+            width: 100%;
+            height: auto;
+            overflow: visible;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .info-panel {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .info-panel h4 {
+            margin-bottom: 10px;
+            color: #f7fafc;
+            font-size: 1.1em;
+        }
+
+        .loading-panel {
+            background: #fef5e7;
+            border: 2px solid #ed8936;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr 350px;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .card h3 {
+            color: #4a5568;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 0.9em;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            margin: 8px 0;
+            -webkit-appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            background: #e2e8f0;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+            background: white;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 3px;
+            min-width: 120px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        button:disabled {
+            background: #a0aec0;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .canvas-container {
+            margin: 15px 0;
+            text-align: center;
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        canvas {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background: white;
+            display: block;
+            margin: 0 auto;
+            cursor: grab;
+        }
+
+        .canvas-title {
+            font-size: 0.9em;
+            color: #4a5568;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .results {
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .results h3 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .result-card {
+            background: #f7fafc;
+            padding: 18px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+            min-height: 250px;
+        }
+
+        .result-card h4 {
+            color: #4a5568;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .peak-list, .xi-list {
+            list-style: none;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .peak-list li, .xi-list li {
+            background: white;
+            margin: 8px 0;
+            padding: 10px 12px;
+            border-radius: 6px;
+            border-left: 3px solid #68d391;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            transition: all 0.2s ease;
+        }
+
+        .peak-list li:hover, .xi-list li:hover {
+            transform: translateX(3px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .xi-list li {
+            border-left-color: #f6ad55;
+        }
+
+        .value-display {
+            display: inline-block;
+            background: #edf2f7;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            margin-left: 10px;
+            font-size: 0.85em;
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-good { background: #68d391; }
+        .status-warning { background: #f6ad55; }
+        .status-error { background: #fc8181; }
+
+        .analysis-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .stats-panel {
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+        }
+
+        .stat-label {
+            color: #718096;
+            font-size: 0.75em;
+            margin-bottom: 3px;
+        }
+
+        .stat-value {
+            color: #2d3748;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .formula-display {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            text-align: center;
+            margin: 10px 0;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .console-output {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            max-height: 200px;
+            overflow-y: auto;
+            margin: 10px 0;
+            border: 1px solid #4a5568;
+        }
+
+        @media (max-width: 1200px) {
+            .demo-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .language-nav {
+                position: relative;
+                top: auto;
+                right: auto;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+
+            .container {
+                padding-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Navigation -->
+    <div class="language-nav">
+        <button class="lang-btn active" onclick="switchLanguage('de')" id="lang-de">🇩🇪 Deutsch</button>
+        <button class="lang-btn" onclick="switchLanguage('en')" id="lang-en">🇺🇸 English</button>
+    </div>
+
+    <div class="container">
+        <!-- German Content -->
+        <div id="content-de">
+            <div class="header">
+                <h1>ξ-FFT Interactive Demo</h1>
+                <p>Spektralanalyse durch Frequenz-Verhältnisse - Mit lokaler Python-Bibliothek</p>
+                
+                <div class="info-panel">
+                    <h4>🔬 Was ist ξ-FFT?</h4>
+                    <p>ξ (Xi) = f_max / f_min - Ein einfaches Verhältnis zwischen Frequenzen, das überraschend viel über die spektrale Struktur eines Signals verrät. Diese Version nutzt die lokale Python-Bibliothek direkt im Browser mit Pyodide!</p>
+                    <div class="formula-display">
+                        ξ = f₁ / f₂ (wobei f₁ > f₂, fokussiert auf 80-800 Hz)
+                    </div>
+                </div>
+
+                <div class="loading-panel" id="loading-panel">
+                    <h3>🔄 Lade Python-Environment...</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <p id="loading-status">Initialisiere Pyodide...</p>
+                    <div class="console-output" id="console-output"></div>
+                </div>
+            </div>
+
+            <div class="demo-grid" id="demo-interface" style="display: none;">
+                <div class="card">
+                    <h3>🎵 Schwebungs-Generator</h3>
+                    
+                    <div class="control-group">
+                        <label>Grundton: <span class="value-display" id="base-note-display">A4 (440 Hz)</span></label>
+                        <select id="base-note" onchange="updateDisplays()">
+                            <option value="C">C</option>
+                            <option value="C#">C#/Db</option>
+                            <option value="D">D</option>
+                            <option value="D#">D#/Eb</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="F#">F#/Gb</option>
+                            <option value="G">G</option>
+                            <option value="G#">G#/Ab</option>
+                            <option value="A" selected>A</option>
+                            <option value="A#">A#/Bb</option>
+                            <option value="B">B</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Oktave: <span class="value-display" id="octave-display">4</span></label>
+                        <input type="range" id="octave" min="2" max="6" value="4" step="1" onchange="updateDisplays()">
+                        <small>Begrenzt auf mittleren Oktavbereich (2-6)</small>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Schwebungs-Typ: <span class="value-display" id="beat-type-display">Symmetrisch</span></label>
+                        <select id="beat-type" onchange="updateDisplays()">
+                            <option value="symmetric">Symmetrisch (±Δf)</option>
+                            <option value="asymmetric">Asymmetrisch</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Schwebungs-Rate: <span class="value-display" id="beat-rate-display">2.0 Hz</span></label>
+                        <input type="range" id="beat-rate" min="0.1" max="10" value="2" step="0.1" onchange="updateDisplays()">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>f₀ (oben) Amplitude: <span class="value-display" id="fo-amp-display">0.0</span></label>
+                        <input type="range" id="fo-amp" min="0" max="1" value="0" step="0.1" onchange="updateDisplays()">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>f₀ (mitte) Amplitude: <span class="value-display" id="f0-amp-display">0.5</span></label>
+                        <input type="range" id="f0-amp" min="0" max="1" value="0.5" step="0.1" onchange="updateDisplays()">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>fᵤ (unten) Amplitude: <span class="value-display" id="fu-amp-display">1.0</span></label>
+                        <input type="range" id="fu-amp" min="0" max="1" value="1" step="0.1" onchange="updateDisplays()">
+                    </div>
+                    
+                    <div class="analysis-controls">
+                        <button onclick="generateAndAnalyze()" id="generate-btn" class="highlight">🎵 Schwebung Generieren</button>
+                        <button onclick="analyzeOnly()" id="analyze-btn">🔍 Nur Analysieren</button>
+                    </div>
+
+                    <div class="stats-panel">
+                        <h4 style="margin: 0 0 10px 0; color: #4a5568;">🎼 Frequenz-Info</h4>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-label">fᵤ (unten)</div>
+                                <div class="stat-value" id="fu-freq">--</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">f₀ (mitte)</div>
+                                <div class="stat-value" id="f0-freq">--</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">f₀ (oben)</div>
+                                <div class="stat-value" id="fo-freq">--</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Schwebung</div>
+                                <div class="stat-value" id="beat-freq">--</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>📈 Visualisierung</h3>
+                    
+                    <div class="canvas-container">
+                        <div class="canvas-title">Schwebungs-Signal (2 Sekunden)</div>
+                        <canvas id="signalCanvas" width="420" height="180"></canvas>
+                    </div>
+                    
+                    <div class="canvas-container">
+                        <div class="canvas-title">Frequenzspektrum mit Schwebung (80-800 Hz Fokus)</div>
+                        <div style="margin-bottom: 10px; text-align: center;">
+                            <button onclick="resetSpectrumZoom()" style="font-size: 0.8em; padding: 4px 8px; margin: 2px;">🔍 Vollansicht</button>
+                            <button onclick="zoomToBeats()" style="font-size: 0.8em; padding: 4px 8px; margin: 2px;">🎵 Haupttöne</button>
+                            <br>
+                            <button onclick="zoomIn()" style="font-size: 0.8em; padding: 4px 8px; margin: 2px;">➕ Zoom In</button>
+                            <button onclick="zoomOut()" style="font-size: 0.8em; padding: 4px 8px; margin: 2px;">➖ Zoom Out</button>
+                            <button onclick="autoFitSpectrum()" style="font-size: 0.8em; padding: 4px 8px; margin: 2px;">📐 Optimal</button>
+                            <span id="zoom-info" style="font-size: 0.8em; margin-left: 10px; color: #718096;">Zoom: 100%</span>
+                        </div>
+                        <canvas id="spectrumCanvas" width="420" height="180" style="cursor: grab;"></canvas>
+                    </div>
+
+                    <div class="canvas-container">
+                        <div class="canvas-title">Schwebungs-Analyse</div>
+                        <canvas id="beatCanvas" width="420" height="120"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results" id="results-section" style="display: none;">
+                <h3>🔍 ξ-FFT Analyse Ergebnisse (Python-basiert)</h3>
+                <p style="color: #718096; margin-bottom: 20px;">Live-Analyse mit lokaler xi_fft_library.py über Pyodide im Browser</p>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h4>🎯 Detektierte Töne (80-800 Hz)</h4>
+                        <div style="font-size: 0.8em; color: #718096; margin-bottom: 10px;">
+                            Python-Analyse der Schwebungs-Komponenten
+                        </div>
+                        <ul id="peaks-list" class="peak-list">
+                            <li><span class="status-indicator status-good"></span>Python-Bibliothek wird geladen...</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h4>⚡ Cent-Intervalle</h4>
+                        <div style="font-size: 0.8em; color: #718096; margin-bottom: 10px;">
+                            Frequenz-Abstände in Cent (1/100 Halbton)
+                        </div>
+                        <ul id="xi-list" class="xi-list">
+                            <li><span class="status-indicator status-warning"></span>Warte auf Python-Analyse...</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h4>📈 Schwebungs-Details</h4>
+                        <div id="analysis-details" style="font-family: 'Courier New', monospace; font-size: 0.85em;">
+                            <div style="margin: 8px 0; padding: 8px; background: white; border-radius: 4px;">
+                                <strong>Ton-Anzahl:</strong> <span id="peak-count">--</span>
+                            </div>
+                            <div style="margin: 8px 0; padding: 8px; background: white; border-radius: 4px;">
+                                <strong>Intervalle:</strong> <span id="xi-count">--</span>
+                            </div>
+                            <div style="margin: 8px 0; padding: 8px; background: white; border-radius: 4px;">
+                                <strong>Schwebung:</strong> <span id="dominant-xi">--</span>
+                            </div>
+                            <div style="margin: 8px 0; padding: 8px; background: white; border-radius: 4px;">
+                                <strong>Frequenzbereich:</strong> <span id="freq-range-actual">80-800 Hz</span>
+                            </div>
+                            <div style="margin: 8px 0; padding: 8px; background: white; border-radius: 4px;">
+                                <strong>Status:</strong> <span id="analysis-status">Python laden...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- English Content -->
+        <div id="content-en" class="hidden">
+            <div class="header">
+                <h1>ξ-FFT Interactive Demo</h1>
+                <p>Spectral Analysis through Frequency Ratios - With Local Python Library</p>
+                
+                <div class="info-panel">
+                    <h4>🔬 What is ξ-FFT?</h4>
+                    <p>ξ (Xi) = f_max / f_min - A simple ratio between frequencies that reveals surprisingly much about the spectral structure of a signal. This version uses the local Python library directly in the browser with Pyodide!</p>
+                    <div class="formula-display">
+                        ξ = f₁ / f₂ (where f₁ > f₂, focused on 80-800 Hz)
+                    </div>
+                </div>
+
+                <div class="loading-panel" id="loading-panel-en">
+                    <h3>🔄 Loading Python Environment...</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill-en"></div>
+                    </div>
+                    <p id="loading-status-en">Initializing Pyodide...</p>
+                    <div class="console-output" id="console-output-en"></div>
+                </div>
+            </div>
+
+            <div class="demo-grid" id="demo-interface-en" style="display: none;">
+                <div class="card">
+                    <h3>🎵 Beat Generator</h3>
+                    
+                    <div class="control-group">
+                        <label>Base Note: <span class="value-display" id="base-note-display-en">A4 (440 Hz)</span></label>
+                        <select id="base-note-en" onchange="updateDisplays()">
+                            <option value="C">C</option>
+                            <option value="C#">C#/Db</option>
+                            <option value="D">D</option>
+                            <option value="D#">D#/Eb</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="F#">F#/Gb</option>
+                            <option value="G">G</option>
+                            <option value="G#">G#/Ab</option>
+                            <option value="A" selected>A</option>
+                            <option value="A#">A#/Bb</option>
+                            <option value="B">B</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Octave: <span class="value-display" id="octave-display-en">4</span></label>
+                        <input type="range" id="octave-en" min="2" max="6" value="4" step="1" onchange="updateDisplays()">
+                        <small>Limited to middle octave range (2-6)</small>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Beat Type: <span class="value-display" id="beat-type-display-en">Symmetric</span></label>
+                        <select id="beat-type-en" onchange="updateDisplays()">
+                            <option value="symmetric">Symmetric (±Δf)</option>
+                            <option value="asymmetric">Asymmetric</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Beat Rate: <span class="value-display" id="beat-rate-display-en">2.0 Hz</span></label>
+                        <input type="range" id="beat-rate-en" min="0.1" max="10" value="2" step="0.1" onchange="updateDisplays()">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>f₀ (upper) Amplitude: <span class="value-display" id="fo-amp-display-en">0.0</span></label>
+                        <input type="range" id="fo-amp-en" min="0" max="1" value="0" step="0.1" onchange="updateDisplays()">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>f₀ (center) Amplitude: <span class="value-display" id="f0-amp-display-en">0.5</span></label>
+                        <input type="range" id="f0-amp-en" min="0" max="1" value="0.5" step="0.1" onchange="updateDisplays()">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>fᵤ (lower) Amplitude: <span class="value-display" id="fu-amp-display-en">1.0</span></label>
+                        <input type="range" id="fu-amp-en" min="0" max="1" value="1" step="0.1" onchange="updateDisplays()">
+                    </div>
+                    
+                    <div class="analysis-controls">
+                        <button onclick="generateAndAnalyze()" id="generate-btn-en" class="highlight">🎵 Generate Beat</button>
+                        <button onclick="analyzeOnly()" id="analyze-btn-en">🔍 Analyze Only</button>
+                    </div>
+
+                    <div class="stats-panel">
+                        <h4 style="margin: 0 0 10px 0; color: #4a5568;">🎼 Frequency Info</h4>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-label">fᵤ (lower)</div>
+                                <div class="stat-value" id="fu-freq-en">--</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">f₀ (center)</div>
+                                <div class="stat-value" id="f0-freq-en">--</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">f₀ (upper)</div>
+                                <div class="stat-value" id="fo-freq-en">--</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Beat Rate</div>
+                                <div class="stat-value" id="beat-freq-en">--</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>📈 Visualization</h3>
+                    
+                    <div class="canvas-container">
+                        <div class="canvas-title">Beat Signal (2 seconds)</div>
+                        <canvas id="signalCanvas-en" width="420" height="180"></canvas>
+                    </div>
+                    
+                    <div class="canvas-container">
+                        <div class="canvas-title">Frequency Spectrum with Beats (80-800 Hz Focus)</div>
+                        <div style="margin-bottom: 10px; text-align: center;">
+                            <button onclick="resetSpectrumZoom()" style="font-size: 0.8em; padding: 4px 8px; margin: 2px;">🔍 Full View</button>
+                            <button onclick="zoomToBeats()" style="font-size: 0.8em; padding: 4px 8px; margin: 2px;">🎵 Main Tones</button>
+                            <br>
+                            <button onclick="zoomIn()" style="font-size: 0.8em; padding: 4px 8px; margin: 2px;">➕ Zoom In</button>
+                            <button onclick="zoomOut()" style="font-size: 0.8em; padding: 4px 8px; margin: 2px;">➖ Zoom Out</button>
+                            <button onclick="autoFitSpectrum()" style="font-size: 0.8em; padding: 4px 8px; margin: 2px;">📐 Optimal</button>
+                            <span id="zoom-info-en" style="font-size: 0.8em; margin-left: 10px; color: #718096;">Zoom: 100%</span>
+                        </div>
+                        <canvas id="spectrumCanvas-en" width="420" height="180" style="cursor: grab;"></canvas>
+                    </div>
+
+                    <div class="canvas-container">
+                        <div class="canvas-title">Beat Analysis</div>
+                        <canvas id="beatCanvas-en" width="420" height="120"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results" id="results-section-en" style="display: none;">
+                <h3>🔍 ξ-FFT Analysis Results (Python-based)</h3>
+                <p style="color: #718096; margin-bottom: 20px;">Live analysis with local xi_fft_library.py via Pyodide in browser</p>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h4>🎯 Detected Tones (80-800 Hz)</h4>
+                        <div style="font-size: 0.8em; color: #718096; margin-bottom: 10px;">
+                            Python analysis of beat components
+                        </div>
+                        <ul id="peaks-list-en" class="peak-list">
+                            <li><span class="status-indicator status-good"></span>Loading Python library...</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h4>⚡ Cent Intervals</h4>
+                        <div style="font-size: 0.8em; color: #718096; margin-bottom: 10px;">
+                            Frequency distances in cents (1/100 semitone)
+                        </div>
+                        <ul id="xi-list-en" class="xi-list">
+                            <li><span class="status-indicator status-warning"></span>Waiting for Python analysis...</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h4>📈 Beat Details</h4>
+                        <div id="analysis-details-en" style="font-family: 'Courier New', monospace; font-size: 0.85em;">
+                            <div style="margin: 8px 0; padding: 8px; background: white; border-radius: 4px;">
+                                <strong>Tone Count:</strong> <span id="peak-count-en">--</span>
+                            </div>
+                            <div style="margin: 8px 0; padding: 8px; background: white; border-radius: 4px;">
+                                <strong>Intervals:</strong> <span id="xi-count-en">--</span>
+                            </div>
+                            <div style="margin: 8px 0; padding: 8px; background: white; border-radius: 4px;">
+                                <strong>Beat Rate:</strong> <span id="dominant-xi-en">--</span>
+                            </div>
+                            <div style="margin: 8px 0; padding: 8px; background: white; border-radius: 4px;">
+                                <strong>Frequency Range:</strong> <span id="freq-range-actual-en">80-800 Hz</span>
+                            </div>
+                            <div style="margin: 8px 0; padding: 8px; background: white; border-radius: 4px;">
+                                <strong>Status:</strong> <span id="analysis-status-en">Loading Python...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Globale Variablen
+        let currentLanguage = 'de';
+        let pyodide = null;
+        let currentSignal = [];
+        let currentBeatParams = null;
+        let analysisResult = null;
+
+        // Spektrum-Zoom und Pan
+        let spectrumView = {
+            minFreq: 80,
+            maxFreq: 800,
+            zoomLevel: 1.0,
+            isDragging: false,
+            lastMouseX: 0
+        };
+
+        // Musikalische Notizen-Frequenzen
+        const noteFrequencies = {
+            'C': 261.63, 'C#': 277.18, 'D': 293.66, 'D#': 311.13,
+            'E': 329.63, 'F': 349.23, 'F#': 369.99, 'G': 392.00,
+            'G#': 415.30, 'A': 440.00, 'A#': 466.16, 'B': 493.88
+        };
+
+        function logToConsole(message) {
+            const suffix = currentLanguage === 'en' ? '-en' : '';
+            const consoleOutput = document.getElementById('console-output' + suffix);
+            if (consoleOutput) {
+                consoleOutput.innerHTML += message + '\n';
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+            }
+        }
+
+        function updateProgress(percentage, status) {
+            const suffix = currentLanguage === 'en' ? '-en' : '';
+            const progressFill = document.getElementById('progress-fill' + suffix);
+            const loadingStatus = document.getElementById('loading-status' + suffix);
+            if (progressFill) progressFill.style.width = percentage + '%';
+            if (loadingStatus) loadingStatus.textContent = status;
+        }
+
+        async function loadPyodideAndLibrary() {
+            try {
+                logToConsole('🔄 Lade Pyodide...');
+                updateProgress(10, 'Pyodide wird geladen...');
+                
+                // Lade Pyodide
+                pyodide = await loadPyodide();
+                logToConsole('✅ Pyodide geladen');
+                updateProgress(30, 'Python-Environment bereit');
+
+                // Installiere erforderliche Packages
+                logToConsole('📦 Installiere Python-Packages...');
+                updateProgress(40, 'Installiere numpy...');
+                await pyodide.loadPackage("numpy");
+                logToConsole('✅ numpy installiert');
+
+                updateProgress(60, 'Lade xi_fft_library...');
+                
+                // Lade die lokale xi_fft_library direkt in Pyodide (optimiert für mittleren Oktavbereich)
+                const xiFFTCode = `
+# ξ-FFT Bibliothek für Schwebungs-Analyse - fokussiert auf 80-800 Hz
+import math
+from typing import List, Dict, Tuple, Optional
+
+class XiFFT:
+    """ξ-FFT Klasse optimiert für Schwebungs-Analyse im mittleren Oktavbereich"""
+    
+    def __init__(self, sample_rate: int, threshold: float = 0.03):
+        self.sample_rate = sample_rate
+        self.threshold = threshold
+        self.peaks = []
+        self.xi_ratios = []
+    
+    def analyze(self, signal: List[float], freq_range: Tuple[int, int] = (80, 800)) -> Dict:
+        """Analysiere Signal - fokussiert auf mittleren Oktavbereich für Schwebungen"""
+        self.peaks = self._find_spectral_peaks(signal, freq_range)
+        self.xi_ratios = self._calculate_xi_ratios(self.peaks)
+        
+        return {
+            'peaks': self.peaks,
+            'xi_ratios': self.xi_ratios,
+            'dominant_xi': self.xi_ratios[0] if self.xi_ratios else None,
+            'peak_count': len(self.peaks),
+            'complexity': len(self.xi_ratios),
+            'freq_range': freq_range,
+            'sample_rate': self.sample_rate,
+            'threshold': self.threshold
+        }
+    
+    def _find_spectral_peaks(self, signal: List[float], freq_range: Tuple[int, int]) -> List[Dict]:
+        """DFT-basierte Peak-Erkennung optimiert für Schwebungs-Frequenzen"""
+        peaks = []
+        min_freq, max_freq = freq_range
+        # Höhere Auflösung für bessere Schwebungs-Erkennung
+        step_size = 0.5  # 0.5 Hz Auflösung
+        
+        freq = min_freq
+        while freq <= max_freq:
+            magnitude = self._calculate_magnitude(signal, freq)
+            
+            if magnitude > self.threshold:
+                peaks.append({
+                    'frequency': round(freq, 1),
+                    'magnitude': round(magnitude, 4)
+                })
+            
+            freq += step_size
+        
+        # Sortiere nach Magnitude und nimm die stärksten Peaks
+        return sorted(peaks, key=lambda x: x['magnitude'], reverse=True)[:12]
+    
+    def _calculate_magnitude(self, signal: List[float], frequency: float) -> float:
+        """DFT für spezifische Frequenz - optimiert für Schwebungs-Detektion"""
+        N = len(signal)
+        real = imag = 0.0
+        
+        for n in range(N):
+            angle = -2 * math.pi * frequency * n / self.sample_rate
+            real += signal[n] * math.cos(angle)
+            imag += signal[n] * math.sin(angle)
+        
+        return math.sqrt(real * real + imag * imag) * 2 / N
+    
+    def _calculate_xi_ratios(self, peaks: List[Dict]) -> List[Dict]:
+        """Berechne ξ-Verhältnisse optimiert für Schwebungs-Analyse"""
+        ratios = []
+        
+        for i in range(len(peaks)):
+            for j in range(i + 1, len(peaks)):
+                f1, f2 = peaks[i]['frequency'], peaks[j]['frequency']
+                xi = max(f1, f2) / min(f1, f2)
+                
+                # Berechne Cent-Intervall für musikalische Analyse
+                cents = 1200 * math.log2(xi)
+                
+                ratios.append({
+                    'freq_high': max(f1, f2),
+                    'freq_low': min(f1, f2),
+                    'xi_ratio': round(xi, 3),
+                    'cents': round(cents, 1),
+                    'significance': round(peaks[i]['magnitude'] * peaks[j]['magnitude'], 6)
+                })
+        
+        return sorted(ratios, key=lambda x: x['significance'], reverse=True)[:8]
+
+def create_test_signal(freqs: List[float], amplitudes: List[float], 
+                      duration: float = 2.0, sample_rate: int = 1000) -> List[float]:
+    """Erstelle Schwebungs-Signal für gegebene Frequenzen"""
+    n_samples = int(duration * sample_rate)
+    signal = [0.0] * n_samples
+    
+    for i in range(n_samples):
+        t = i / sample_rate
+        for freq, amp in zip(freqs, amplitudes):
+            if amp > 0:  # Nur wenn Amplitude > 0
+                signal[i] += amp * math.sin(2 * math.pi * freq * t)
+    
+    return signal
+
+# Globale Instanz optimiert für Schwebungs-Analyse
+xi_fft_instance = XiFFT(sample_rate=1000, threshold=0.03)
+`;
+
+                pyodide.runPython(xiFFTCode);
+                logToConsole('✅ xi_fft_library geladen (Schwebungs-optimiert)');
+                updateProgress(80, 'Bibliothek initialisiert');
+
+                // Teste die Bibliothek mit Schwebungs-Signal
+                logToConsole('🧪 Teste xi_fft_library mit Schwebungs-Signal...');
+                const testResult = pyodide.runPython(`
+# Test mit typischem Schwebungs-Signal
+test_signal = create_test_signal([440, 442, 444], [1.0, 0.8, 0.6], 1.0, 1000)
+test_result = xi_fft_instance.analyze(test_signal, (80, 800))
+f"Test erfolgreich: {test_result['peak_count']} Peaks in 80-800 Hz gefunden"
+`);
+                logToConsole('✅ ' + testResult);
+
+                updateProgress(100, 'Bereit für Schwebungs-Analyse!');
+                
+                // Interface anzeigen
+                setTimeout(() => {
+                    const suffix = currentLanguage === 'en' ? '-en' : '';
+                    document.getElementById('loading-panel' + suffix).style.display = 'none';
+                    document.getElementById('demo-interface' + suffix).style.display = 'grid';
+                    document.getElementById('results-section' + suffix).style.display = 'block';
+                    
+                    document.getElementById('analysis-status' + suffix).textContent = '✅ Python bereit';
+                    updateDisplays();
+                }, 1000);
+
+            } catch (error) {
+                logToConsole('❌ Fehler: ' + error.message);
+                updateProgress(0, 'Fehler beim Laden');
+                const suffix = currentLanguage === 'en' ? '-en' : '';
+                const loadingStatus = document.getElementById('loading-status' + suffix);
+                if (loadingStatus) {
+                    loadingStatus.innerHTML = 
+                        '<span style="color: red;">❌ Fehler beim Laden von Pyodide</span><br>' +
+                        '<small>Prüfe Internetverbindung und Browser-Kompatibilität</small>';
+                }
+            }
+        }
+
+        function getNoteFrequency(note, octave) {
+            const baseFreq = noteFrequencies[note];
+            return baseFreq * Math.pow(2, octave - 4);
+        }
+
+        function updateDisplays() {
+            const suffix = currentLanguage === 'en' ? '-en' : '';
+            const note = document.getElementById('base-note' + suffix).value;
+            const octave = parseInt(document.getElementById('octave' + suffix).value);
+            const beatType = document.getElementById('beat-type' + suffix).value;
+            const beatRate = parseFloat(document.getElementById('beat-rate' + suffix).value);
+            const f0Amp = parseFloat(document.getElementById('f0-amp' + suffix).value);
+            const fuAmp = parseFloat(document.getElementById('fu-amp' + suffix).value);
+            const foAmp = parseFloat(document.getElementById('fo-amp' + suffix).value);
+            
+            const baseFreq = getNoteFrequency(note, octave);
+            
+            // Anzeigen aktualisieren
+            document.getElementById('base-note-display' + suffix).textContent = `${note}${octave} (${baseFreq.toFixed(1)} Hz)`;
+            document.getElementById('octave-display' + suffix).textContent = octave;
+            document.getElementById('beat-type-display' + suffix).textContent = currentLanguage === 'en' ? 
+                (beatType === 'symmetric' ? 'Symmetric' : 'Asymmetric') :
+                (beatType === 'symmetric' ? 'Symmetrisch' : 'Asymmetrisch');
+            document.getElementById('beat-rate-display' + suffix).textContent = beatRate.toFixed(1) + ' Hz';
+            document.getElementById('f0-amp-display' + suffix).textContent = f0Amp.toFixed(1);
+            document.getElementById('fu-amp-display' + suffix).textContent = fuAmp.toFixed(1);
+            document.getElementById('fo-amp-display' + suffix).textContent = foAmp.toFixed(1);
+        }
+
+        function generateSignal() {
+            if (!pyodide) {
+                alert('Python-Environment noch nicht bereit');
+                return;
+            }
+
+            try {
+                const suffix = currentLanguage === 'en' ? '-en' : '';
+                const note = document.getElementById('base-note' + suffix).value;
+                const octave = parseInt(document.getElementById('octave' + suffix).value);
+                const beatType = document.getElementById('beat-type' + suffix).value;
+                const beatRate = parseFloat(document.getElementById('beat-rate' + suffix).value);
+                const f0Amp = parseFloat(document.getElementById('f0-amp' + suffix).value);
+                const fuAmp = parseFloat(document.getElementById('fu-amp' + suffix).value);
+                const foAmp = parseFloat(document.getElementById('fo-amp' + suffix).value);
+                
+                const baseFreq = getNoteFrequency(note, octave);
+                
+                // Berechne Schwebungs-Frequenzen
+                let fu, fo;
+                if (beatType === 'symmetric') {
+                    const deltaF = beatRate / 2;
+                    fu = baseFreq - deltaF;
+                    fo = baseFreq + deltaF;
+                } else {
+                    fu = baseFreq - beatRate;
+                    fo = baseFreq + beatRate * 1.5;
+                }
+
+                // Update frequency displays
+                document.getElementById('fu-freq' + suffix).textContent = fu.toFixed(2) + ' Hz';
+                document.getElementById('f0-freq' + suffix).textContent = baseFreq.toFixed(2) + ' Hz';
+                document.getElementById('fo-freq' + suffix).textContent = fo.toFixed(2) + ' Hz';
+                document.getElementById('beat-freq' + suffix).textContent = beatRate.toFixed(1) + ' Hz';
+                
+                // Python-Code für Signal-Generierung
+                pyodide.globals.set("fu", fu);
+                pyodide.globals.set("f0", baseFreq);
+                pyodide.globals.set("fo", fo);
+                pyodide.globals.set("fu_amp", fuAmp);
+                pyodide.globals.set("f0_amp", f0Amp);
+                pyodide.globals.set("fo_amp", foAmp);
+
+                const pythonCode = `
+# Berechne Schwebungs-Frequenzen
+freqs = []
+amps = []
+
+# Drei-Ton Schwebung
+if fu_amp > 0:
+    freqs.append(fu)
+    amps.append(fu_amp)
+if f0_amp > 0:
+    freqs.append(f0)
+    amps.append(f0_amp)
+if fo_amp > 0:
+    freqs.append(fo)
+    amps.append(fo_amp)
+
+# Generiere Schwebungs-Signal
+if freqs:
+    signal = create_test_signal(freqs, amps, 2.0, 1000)
+else:
+    signal = [0.0] * 2000  # Stilles Signal
+
+signal
+`;
+
+                currentSignal = pyodide.runPython(pythonCode).toJs();
+                
+                // Speichere Beat-Parameter
+                currentBeatParams = {
+                    fu: fu,
+                    f0: baseFreq,
+                    fo: fo,
+                    beatRate: beatRate,
+                    beatType: beatType,
+                    note: note,
+                    octave: octave
+                };
+
+                plotSignal();
+                document.getElementById('analysis-status' + suffix).textContent = '🎵 Schwebungs-Signal generiert';
+
+            } catch (error) {
+                console.error('Signal-Generierung Fehler:', error);
+                const suffix = currentLanguage === 'en' ? '-en' : '';
+                document.getElementById('analysis-status' + suffix).textContent = '❌ Signal-Fehler';
+            }
+        }
+
+        function analyzeSignal() {
+            if (!pyodide || !currentSignal || currentSignal.length === 0) {
+                const suffix = currentLanguage === 'en' ? '-en' : '';
+                document.getElementById('analysis-status' + suffix).textContent = '❌ Kein Signal';
+                return;
+            }
+
+            try {
+                const suffix = currentLanguage === 'en' ? '-en' : '';
+                document.getElementById('analysis-status' + suffix).textContent = '🔍 Analysiere Schwebung...';
+                
+                const startTime = performance.now();
+                
+                // Signal an Python übergeben und analysieren mit fokussiertem Bereich
+                pyodide.globals.set("signal_data", currentSignal);
+                
+                const analysisCode = `
+# Analysiere mit fokussiertem Frequenzbereich für Schwebungen
+result = xi_fft_instance.analyze(signal_data, (80, 800))
+result
+`;
+
+                analysisResult = pyodide.runPython(analysisCode).toJs({dict_converter: Object.fromEntries});
+                
+                const analysisTime = (performance.now() - startTime).toFixed(1);
+                
+                displayResults();
+                plotSpectrum();
+                plotBeatAnalysis();
+                
+                document.getElementById('analysis-status' + suffix).textContent = 
+                    `✅ ${analysisResult.peak_count} Peaks, ${analysisResult.complexity} ξ-Verhältnisse (${analysisTime}ms)`;
+
+            } catch (error) {
+                console.error('Analyse Fehler:', error);
+                const suffix = currentLanguage === 'en' ? '-en' : '';
+                document.getElementById('analysis-status' + suffix).textContent = '❌ Analyse-Fehler';
+            }
+        }
+
+        function displayResults() {
+            if (!analysisResult) return;
+
+            const suffix = currentLanguage === 'en' ? '-en' : '';
+
+            // Peaks anzeigen
+            const peaksList = document.getElementById('peaks-list' + suffix);
+            peaksList.innerHTML = '';
+            
+            if (analysisResult.peaks && analysisResult.peaks.length > 0) {
+                analysisResult.peaks.forEach((peak, index) => {
+                    const li = document.createElement('li');
+                    const note = frequencyToNote(peak.frequency);
+                    const noteText = note ? ` (${note})` : '';
+                    
+                    // Farb-Kodierung für erwartete Schwebungs-Frequenzen
+                    let status = 'status-good';
+                    let label = '';
+                    if (currentBeatParams) {
+                        const tolerance = 2; // 2 Hz Toleranz
+                        if (Math.abs(peak.frequency - currentBeatParams.fu) < tolerance) {
+                            status = 'status-error';
+                            label = ' (fᵤ)';
+                        } else if (Math.abs(peak.frequency - currentBeatParams.f0) < tolerance) {
+                            status = 'status-warning';
+                            label = ' (f₀)';
+                        } else if (Math.abs(peak.frequency - currentBeatParams.fo) < tolerance) {
+                            status = 'status-good';
+                            label = ' (f₀)';
+                        }
+                    }
+                    
+                    li.innerHTML = `<span class="status-indicator ${status}"></span>${peak.frequency} Hz: ${peak.magnitude.toFixed(3)}${noteText}${label}`;
+                    peaksList.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.innerHTML = `<span class="status-indicator status-error"></span>Keine Peaks im Bereich 80-800 Hz`;
+                peaksList.appendChild(li);
+            }
+
+            // ξ-Verhältnisse mit Cent-Intervallen anzeigen
+            const xiList = document.getElementById('xi-list' + suffix);
+            xiList.innerHTML = '';
+            
+            if (analysisResult.xi_ratios && analysisResult.xi_ratios.length > 0) {
+                analysisResult.xi_ratios.forEach(ratio => {
+                    const li = document.createElement('li');
+                    const isSmallInterval = Math.abs(ratio.cents) < 100;
+                    const status = isSmallInterval ? 'status-good' : 'status-warning';
+                    
+                    li.innerHTML = `<span class="status-indicator ${status}"></span>ξ(${ratio.freq_high}/${ratio.freq_low}) = ${ratio.xi_ratio} (${ratio.cents}¢)`;
+                    xiList.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.innerHTML = `<span class="status-indicator status-warning"></span>Zu wenige Peaks für ξ-Verhältnisse`;
+                xiList.appendChild(li);
+            }
+
+            // Statistiken aktualisieren
+            document.getElementById('peak-count' + suffix).textContent = analysisResult.peak_count || 0;
+            document.getElementById('xi-count' + suffix).textContent = analysisResult.complexity || 0;
+            document.getElementById('dominant-xi' + suffix).textContent = 
+                analysisResult.dominant_xi ? analysisResult.dominant_xi.xi_ratio : '--';
+        }
+
+        function plotSignal() {
+            const suffix = currentLanguage === 'en' ? '-en' : '';
+            const canvas = document.getElementById('signalCanvas' + suffix);
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+
+            ctx.clearRect(0, 0, width, height);
+            
+            if (!currentSignal || currentSignal.length === 0) return;
+
+            // Zeichne Gitter
+            ctx.strokeStyle = '#f1f5f9';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 4; i++) {
+                const x = (width / 4) * i;
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, height);
+                ctx.stroke();
+            }
+
+            // Zeichne Signal
+            ctx.strokeStyle = '#667eea';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+
+            const plotSamples = Math.min(2000, currentSignal.length);
+            const maxVal = Math.max(...currentSignal.slice(0, plotSamples));
+            const minVal = Math.min(...currentSignal.slice(0, plotSamples));
+            const range = maxVal - minVal || 1;
+
+            for (let i = 0; i < plotSamples; i++) {
+                const x = (i / plotSamples) * width;
+                const y = height - ((currentSignal[i] - minVal) / range) * height;
+                
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            
+            ctx.stroke();
+
+            // Schwebungs-Hüllkurve
+            if (currentBeatParams && currentBeatParams.beatRate > 0) {
+                ctx.strokeStyle = '#fc8181';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([3, 3]);
+                ctx.beginPath();
+                
+                for (let i = 0; i < plotSamples; i++) {
+                    const t = (i / plotSamples) * 2; // 2 Sekunden
+                    const envelope = Math.abs(Math.cos(Math.PI * currentBeatParams.beatRate * t));
+                    const x = (i / plotSamples) * width;
+                    const y = height * (1 - envelope * 0.8);
+                    
+                    if (i === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+        }
+
+        function plotSpectrum() {
+            const suffix = currentLanguage === 'en' ? '-en' : '';
+            const canvas = document.getElementById('spectrumCanvas' + suffix);
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+
+            ctx.clearRect(0, 0, width, height);
+            
+            if (!analysisResult || !analysisResult.peaks) return;
+
+            const minFreq = spectrumView.minFreq;
+            const maxFreq = spectrumView.maxFreq;
+            const peaks = analysisResult.peaks;
+            const maxMag = Math.max(...peaks.map(p => p.magnitude));
+
+            // Frequenz-Gitter
+            ctx.strokeStyle = '#f1f5f9';
+            ctx.lineWidth = 1;
+            
+            const gridStep = (maxFreq - minFreq) > 400 ? 100 : 50;
+            for (let freq = Math.ceil(minFreq / gridStep) * gridStep; freq <= maxFreq; freq += gridStep) {
+                const x = (freq - minFreq) / (maxFreq - minFreq) * width;
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, height);
+                ctx.stroke();
+                
+                // Frequenz-Labels
+                ctx.fillStyle = '#718096';
+                ctx.font = '10px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(freq + 'Hz', x, height - 5);
+            }
+
+            // Spektrum-Balken für Schwebungs-Peaks
+            const visiblePeaks = peaks.filter(peak => 
+                peak.frequency >= minFreq && peak.frequency <= maxFreq
+            );
+
+            visiblePeaks.forEach((peak, index) => {
+                const x = (peak.frequency - minFreq) / (maxFreq - minFreq) * width;
+                const barHeight = (peak.magnitude / maxMag) * height * 0.8;
+                const y = height - barHeight;
+
+                // Farb-Kodierung für erwartete Schwebungs-Frequenzen
+                let color = '#cccccc';
+                let label = '';
+                if (currentBeatParams) {
+                    const tolerance = 3; // 3 Hz Toleranz
+                    if (Math.abs(peak.frequency - currentBeatParams.fu) < tolerance) {
+                        color = '#ff6b6b'; // fᵤ rot
+                        label = 'fᵤ';
+                    } else if (Math.abs(peak.frequency - currentBeatParams.f0) < tolerance) {
+                        color = '#4ecdc4'; // f₀ cyan
+                        label = 'f₀';
+                    } else if (Math.abs(peak.frequency - currentBeatParams.fo) < tolerance) {
+                        color = '#45b7d1'; // f₀ blau
+                        label = 'f₀';
+                    }
+                }
+                
+                ctx.fillStyle = color;
+                const barWidth = Math.max(3, width / (visiblePeaks.length * 2));
+                ctx.fillRect(x - barWidth/2, y, barWidth, barHeight);
+
+                // Labels für starke Peaks
+                if (peak.magnitude > maxMag * 0.2) {
+                    ctx.fillStyle = '#4a5568';
+                    ctx.font = '9px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(peak.frequency.toFixed(1), x, y - 15);
+                    ctx.fillText(peak.magnitude.toFixed(3), x, y - 5);
+                    
+                    if (label) {
+                        ctx.fillStyle = color;
+                        ctx.font = 'bold 10px Arial';
+                        ctx.fillText(label, x, y - 25);
+                    }
+                }
+            });
+
+            // Markiere erwartete Schwebungs-Frequenzen mit vertikalen Linien
+            if (currentBeatParams) {
+                [
+                    {freq: currentBeatParams.fu, label: 'fᵤ', color: '#ff6b6b'},
+                    {freq: currentBeatParams.f0, label: 'f₀', color: '#4ecdc4'},
+                    {freq: currentBeatParams.fo, label: 'f₀', color: '#45b7d1'}
+                ].forEach(marker => {
+                    if (marker.freq >= minFreq && marker.freq <= maxFreq) {
+                        const x = (marker.freq - minFreq) / (maxFreq - minFreq) * width;
+                        ctx.strokeStyle = marker.color;
+                        ctx.lineWidth = 2;
+                        ctx.setLineDash([3, 3]);
+                        ctx.beginPath();
+                        ctx.moveTo(x, 0);
+                        ctx.lineTo(x, height);
+                        ctx.stroke();
+                        ctx.setLineDash([]);
+                        
+                        // Label oben
+                        ctx.fillStyle = marker.color;
+                        ctx.font = 'bold 12px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(marker.label, x, 15);
+                        ctx.font = '9px Arial';
+                        ctx.fillText(marker.freq.toFixed(1) + 'Hz', x, 28);
+                    }
+                });
+            }
+        }
+
+        function plotBeatAnalysis() {
+            const suffix = currentLanguage === 'en' ? '-en' : '';
+            const canvas = document.getElementById('beatCanvas' + suffix);
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+
+            ctx.clearRect(0, 0, width, height);
+            
+            if (!currentBeatParams) return;
+
+            // Schwebungs-Analyse Informationen
+            ctx.fillStyle = '#4a5568';
+            ctx.font = '12px Arial';
+            
+            const info = [
+                `${currentBeatParams.note}${currentBeatParams.octave} - ${currentBeatParams.beatType}`,
+                `fᵤ: ${currentBeatParams.fu.toFixed(2)} Hz`,
+                `f₀: ${currentBeatParams.f0.toFixed(2)} Hz`, 
+                `f₀: ${currentBeatParams.fo.toFixed(2)} Hz`,
+                `Beat: ${currentBeatParams.beatRate.toFixed(1)} Hz`
+            ];
+
+            info.forEach((line, index) => {
+                const x = 10;
+                const y = 20 + index * 14;
+                ctx.fillText(line, x, y);
+            });
+
+            // Visuelle Darstellung der Schwebungs-Hüllkurve
+            const beatWidth = width - 200;
+            const beatHeight = 40;
+            const beatX = 180;
+            const beatY = height - 50;
+
+            ctx.strokeStyle = '#667eea';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            
+            for (let i = 0; i <= beatWidth; i++) {
+                const t = (i / beatWidth) * 2; // 2 Sekunden
+                const envelope = Math.abs(Math.cos(Math.PI * currentBeatParams.beatRate * t));
+                const x = beatX + i;
+                const y = beatY + beatHeight/2 - envelope * beatHeight/2;
+                
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            
+            ctx.stroke();
+
+            // Label für Schwebungs-Hüllkurve
+            ctx.fillStyle = '#667eea';
+            ctx.font = '10px Arial';
+            ctx.fillText('Schwebungs-Hüllkurve', beatX, beatY - 5);
+        }
+
+        // Spektrum-Zoom Funktionen
+        function resetSpectrumZoom() {
+            spectrumView.minFreq = 80;
+            spectrumView.maxFreq = 800;
+            spectrumView.zoomLevel = 1.0;
+            updateZoomInfo();
+            
+            if (analysisResult && analysisResult.peaks) {
+                plotSpectrum();
+            }
+        }
+
+        function zoomToBeats() {
+            if (!currentBeatParams) return;
+            
+            const frequencies = [currentBeatParams.fu, currentBeatParams.f0, currentBeatParams.fo];
+            const minFreq = Math.min(...frequencies);
+            const maxFreq = Math.max(...frequencies);
+            
+            const freqRange = maxFreq - minFreq;
+            const padding = Math.max(20, freqRange * 0.2);
+            
+            spectrumView.minFreq = Math.max(80, minFreq - padding);
+            spectrumView.maxFreq = Math.min(800, maxFreq + padding);
+            spectrumView.zoomLevel = 720 / (spectrumView.maxFreq - spectrumView.minFreq);
+            updateZoomInfo();
+            
+            if (analysisResult && analysisResult.peaks) {
+                plotSpectrum();
+            }
+        }
+
+        function zoomIn() {
+            const currentRange = spectrumView.maxFreq - spectrumView.minFreq;
+            const centerFreq = (spectrumView.minFreq + spectrumView.maxFreq) / 2;
+            const newRange = currentRange / 1.5;
+            
+            if (newRange < 10) return;
+            
+            spectrumView.minFreq = Math.max(80, centerFreq - newRange / 2);
+            spectrumView.maxFreq = Math.min(800, centerFreq + newRange / 2);
+            spectrumView.zoomLevel = 720 / (spectrumView.maxFreq - spectrumView.minFreq);
+            updateZoomInfo();
+            
+            if (analysisResult && analysisResult.peaks) {
+                plotSpectrum();
+            }
+        }
+
+        function zoomOut() {
+            const currentRange = spectrumView.maxFreq - spectrumView.minFreq;
+            const centerFreq = (spectrumView.minFreq + spectrumView.maxFreq) / 2;
+            const newRange = currentRange * 1.5;
+            
+            if (newRange >= 720) {
+                resetSpectrumZoom();
+                return;
+            }
+            
+            spectrumView.minFreq = Math.max(80, centerFreq - newRange / 2);
+            spectrumView.maxFreq = Math.min(800, centerFreq + newRange / 2);
+            spectrumView.zoomLevel = 720 / (spectrumView.maxFreq - spectrumView.minFreq);
+            updateZoomInfo();
+            
+            if (analysisResult && analysisResult.peaks) {
+                plotSpectrum();
+            }
+        }
+
+        function autoFitSpectrum() {
+            if (!currentBeatParams) {
+                resetSpectrumZoom();
+                return;
+            }
+            
+            const frequencies = [currentBeatParams.fu, currentBeatParams.f0, currentBeatParams.fo];
+            const minFreq = Math.min(...frequencies);
+            const maxFreq = Math.max(...frequencies);
+            
+            const freqRange = maxFreq - minFreq;
+            const padding = Math.max(30, freqRange * 0.3);
+            
+            spectrumView.minFreq = Math.max(80, minFreq - padding);
+            spectrumView.maxFreq = Math.min(800, maxFreq + padding);
+            spectrumView.zoomLevel = 720 / (spectrumView.maxFreq - spectrumView.minFreq);
+            updateZoomInfo();
+            
+            if (analysisResult && analysisResult.peaks) {
+                plotSpectrum();
+            }
+        }
+
+        function updateZoomInfo() {
+            const suffix = currentLanguage === 'en' ? '-en' : '';
+            const zoomInfo = document.getElementById('zoom-info' + suffix);
+            if (zoomInfo) {
+                zoomInfo.textContent = `Zoom: ${spectrumView.zoomLevel.toFixed(1)}x | ${spectrumView.minFreq.toFixed(0)}-${spectrumView.maxFreq.toFixed(0)} Hz`;
+            }
+        }
+
+        // Hilfsfunktionen
+        function frequencyToNote(frequency) {
+            const A4 = 440;
+            const C0 = A4 * Math.pow(2, -4.75);
+            
+            if (frequency <= 0) return null;
+            
+            const h = Math.round(12 * Math.log2(frequency / C0));
+            const octave = Math.floor(h / 12);
+            const n = h % 12;
+            
+            const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+            
+            if (octave >= 0 && octave <= 9) {
+                return noteNames[n] + octave;
+            }
+            return null;
+        }
+
+        // Haupt-Funktionen
+        function generateAndAnalyze() {
+            generateSignal();
+            setTimeout(() => {
+                if (currentSignal && currentSignal.length > 0) {
+                    analyzeSignal();
+                }
+            }, 100);
+        }
+
+        function analyzeOnly() {
+            if (currentSignal && currentSignal.length > 0) {
+                analyzeSignal();
+            } else {
+                const suffix = currentLanguage === 'en' ? '-en' : '';
+                document.getElementById('analysis-status' + suffix).textContent = '❌ Kein Signal - erst generieren';
+            }
+        }
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Hide all content first
+            const deContent = document.getElementById('content-de');
+            const enContent = document.getElementById('content-en');
+            
+            deContent.classList.add('hidden');
+            enContent.classList.add('hidden');
+            
+            // Show selected content
+            if (lang === 'de') {
+                deContent.classList.remove('hidden');
+            } else {
+                enContent.classList.remove('hidden');
+            }
+            
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById('lang-' + lang).classList.add('active');
+            
+            // Update displays
+            updateDisplays();
+            
+            // Re-run analysis if signal exists
+            if (currentSignal && currentSignal.length > 0) {
+                setTimeout(() => {
+                    analyzeSignal();
+                }, 100);
+            }
+        }
+
+        // Event-Handler
+        function setupEventListeners() {
+            // Deutsche Schwebungs-Steuerung
+            const germanControls = ['base-note', 'octave', 'beat-type', 'beat-rate', 'f0-amp', 'fu-amp', 'fo-amp'];
+            germanControls.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', updateDisplays);
+                    element.addEventListener('change', () => {
+                        setTimeout(generateAndAnalyze, 50);
+                    });
+                }
+            });
+            
+            // Englische Schwebungs-Steuerung
+            const englishControls = ['base-note-en', 'octave-en', 'beat-type-en', 'beat-rate-en', 'f0-amp-en', 'fu-amp-en', 'fo-amp-en'];
+            englishControls.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', updateDisplays);
+                    element.addEventListener('change', () => {
+                        setTimeout(generateAndAnalyze, 50);
+                    });
+                }
+            });
+        }
+
+        // Initialisierung beim Laden der Seite
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Starte ξ-FFT Demo mit Pyodide und lokaler Python-Bibliothek...');
+            updateDisplays();
+            setupEventListeners();
+            loadPyodideAndLibrary();
+        });
+    </script>
+</body>
+</html>
