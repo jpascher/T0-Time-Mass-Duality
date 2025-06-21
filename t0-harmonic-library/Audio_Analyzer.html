@@ -2526,8 +2526,7 @@
                 const spectralCentroid = this.calculateSpectralCentroid(freqData, sampleRate);
                 const fundamental = this.findFundamental(peaks);
                 
-                return {
-                    method: 'Raw Buffer T0 Method',
+                return {method: analysisEngine.currentMethod === 't0' ? 'T0-Akkord-Analyse' : 'Standard FFT',
                     timestamp: Date.now(),
                     bufferTimestamp: buffer.timestamp,
                     bufferSize: buffer.bufferSize,
@@ -2654,6 +2653,9 @@
         
         // Update functions
         function updateAnalysisDisplay(results) {
+    // FÜGE DIESE ZEILE HINZU:
+    document.getElementById('currentMethod').textContent = 
+        analysisEngine.currentMethod === 't0' ? 'T0-Akkord-Analyse (Aktiv)' : 'Standard FFT';
             const displayTime = new Date().toLocaleTimeString();
             const bufferTime = results.bufferTimestamp ? new Date(results.bufferTimestamp).toLocaleTimeString() : 'UNKNOWN';
             
