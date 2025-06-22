@@ -2652,152 +2652,163 @@
         let analysisMethod = 't0';
         
         // Update functions
-        function updateAnalysisDisplay(results) {
-    // FÜGE DIESE ZEILE HINZU:
+function updateAnalysisDisplay(results) {
+    // Update current method display
     document.getElementById('currentMethod').textContent = 
         analysisEngine.currentMethod === 't0' ? 'T0-Akkord-Analyse (Aktiv)' : 'Standard FFT';
-            const displayTime = new Date().toLocaleTimeString();
-            const bufferTime = results.bufferTimestamp ? new Date(results.bufferTimestamp).toLocaleTimeString() : 'UNKNOWN';
+    
+    const displayTime = new Date().toLocaleTimeString();
+    const bufferTime = results.bufferTimestamp ? new Date(results.bufferTimestamp).toLocaleTimeString() : 'UNKNOWN';
+    
+    logMessage(`🖥️ DISPLAY UPDATE: Buffer ${bufferTime} → Display ${displayTime}`, 'info');
+    
+    // Update standard analysis fields FIRST (always)
+    document.getElementById('peakCount').textContent = results.peaks ? results.peaks.length : '0';
+    document.getElementById('fundamentalFreq').textContent = results.fundamental ? 
+        results.fundamental.frequency.toFixed(1) + ' Hz' : '-';
+    document.getElementById('spectralCentroid').textContent = results.spectralCentroid ? 
+        results.spectralCentroid.toFixed(1) + ' Hz' : '-';
+    document.getElementById('energyLevel').textContent = results.totalEnergy ? 
+        results.totalEnergy.toFixed(1) : '-';
+    document.getElementById('bufferSize').textContent = results.bufferSize ? 
+        results.bufferSize.toString() : '-';
+    
+    // Update visualizer with analysis results
+    if (visualizer) {
+        visualizer.analysisResults = null;
+        visualizer.updateAnalysisResults(results);
+        
+        if (visualizer.frozen && visualizer.frozenData && results.bufferTimestamp) {
+            const frozenTime = visualizer.frozenData.timestamp;
+            const resultsTime = results.bufferTimestamp;
             
-            logMessage(`🖥️ DISPLAY UPDATE: Buffer ${bufferTime} → Display ${displayTime}`, 'info');
-            
-            // Update visualizer with analysis results
-            if (visualizer) {
-                visualizer.analysisResults = null;
-                visualizer.updateAnalysisResults(results);
-                
-                if (visualizer.frozen && visualizer.frozenData && results.bufferTimestamp) {
-                    const frozenTime = visualizer.frozenData.timestamp;
-                    const resultsTime = results.bufferTimestamp;
-                    
-                    if (frozenTime === resultsTime) {
-                        visualizer.drawSpectrum(visualizer.frozenData);
-                        logMessage(`✅ SPEKTRUM UPDATED: Timestamps stimmen überein (${new Date(frozenTime).toLocaleTimeString()})`, 'success');
-                    } else {
-                        const frozenTimeStr = frozenTime ? new Date(frozenTime).toLocaleTimeString() : 'UNKNOWN';
-                        const resultsTimeStr = resultsTime ? new Date(resultsTime).toLocaleTimeString() : 'UNKNOWN';
-                        logMessage(`⚠️ TIMING MISMATCH: Frozen=${frozenTimeStr}, Results=${resultsTimeStr}`, 'warning');
-                        visualizer.drawSpectrum(visualizer.frozenData);
-                    }
-                } else if (visualizer.frozen && visualizer.frozenData) {
-                    visualizer.drawSpectrum(visualizer.frozenData);
-                    logMessage(`🔄 SPEKTRUM UPDATED (ohne Timestamp-Check)`, 'info');
-                }
-            }
-            
-            // T0-Analysis Display Update MIT SCHWEBUNGS-PRIORITÄT
-            if (results.t0Analysis && results.t0Analysis.success) {
-                const t0 = results.t0Analysis;
-                
-                // SCHWEBUNGS-PRIORITÄT: Zeige Schwebung als Hauptergebnis wenn erkannt
-                if (t0.beatPattern && t0.beatPattern.detected) {
-                    if (t0.beatPattern.type === 'symmetric_beating_pairs' && t0.beatPattern.beatPairs && t0.beatPattern.beatPairs.length > 0) {
-                        const bestPair = t0.beatPattern.bestPair || t0.beatPattern.beatPairs[0];
-                        document.getElementById('t0DetectedChord').textContent = 
-                            `SCHWEBUNGS-PAAR (${bestPair.beatFrequency.toFixed(2)}Hz)`;
-                        document.getElementById('t0Quality').textContent = 
-                            `${bestPair.quality.toUpperCase()} (${bestPair.beatType})`;
-                        document.getElementById('t0Fundamental').textContent = 
-                            `${bestPair.lower.toFixed(1)} - ${bestPair.center.toFixed(1)} - ${bestPair.upper.toFixed(1)}Hz`;
-                        document.getElementById('t0CompliantIntervals').textContent = 
-                            `${t0.beatPattern.totalPairs} Schwebungs-Paare`;
-                    } else if (t0.beatPattern.type === 'single_tone') {
-                        document.getElementById('t0DetectedChord').textContent = 
-                            `EINZELTON (${t0.beatPattern.frequency.toFixed(1)}Hz)`;
-                        document.getElementById('t0Quality').textContent = 
-                            `Keine Schwebung`;
-                        document.getElementById('t0Fundamental').textContent = 
-                            `${t0.fundamental.frequency.toFixed(1)}Hz (${t0.fundamental.method})`;
-                        document.getElementById('t0CompliantIntervals').textContent = 
-                            `${t0.intervalStatistics.t0Compliant}/${t0.intervalStatistics.total}`;
-                    } else {
-                        document.getElementById('t0DetectedChord').textContent = 
-                            `SCHWEBUNG ERKANNT`;
-                        document.getElementById('t0Quality').textContent = 
-                            `${t0.beatPattern.analysis}`;
-                        document.getElementById('t0Fundamental').textContent = 
-                            `${t0.fundamental.frequency.toFixed(1)}Hz (${t0.fundamental.method})`;
-                        document.getElementById('t0CompliantIntervals').textContent = 
-                            `${t0.intervalStatistics.t0Compliant}/${t0.intervalStatistics.total}`;
-                    }
-                } else {
-                    // Standard T0-Akkord-Erkennung (keine Schwebung)
-                    document.getElementById('t0DetectedChord').textContent = 
-                        t0.recognizedChord?.name || 'Unbekannt';
-                    document.getElementById('t0Quality').textContent = 
-                        `${t0.quality.grade} (${t0.quality.score.toFixed(1)}%)`;
-                    document.getElementById('t0Fundamental').textContent = 
-                        `${t0.fundamental.frequency.toFixed(1)}Hz (${t0.fundamental.method})`;
-                    document.getElementById('t0CompliantIntervals').textContent = 
-                        `${t0.intervalStatistics.t0Compliant}/${t0.intervalStatistics.total}`;
-                }
-                
-                // Diese Werte sind immer gleich
-                document.getElementById('avgEulerGradus').textContent = 
-                    t0.quality.statistics.averageEulerGradus.toFixed(1) + '°';
-                document.getElementById('avgXiDeviation').textContent = 
-                    t0.quality.statistics.averageXiDeviation.toFixed(1) + '¢';
-                
-                // Update T0 chord confidence in main grade if available
-                if (t0.recognizedChord) {
-                    const t0Confidence = t0.recognizedChord.confidence;
-                    const combinedScore = (results.totalEnergy * 0.3 + t0Confidence * 0.7) * 100;
-                    document.getElementById('analysisScore').textContent = 
-                        `${combinedScore.toFixed(1)}% (mit T0-Akkord)`;
-                }
-                
-                // Enhanced peak display with T0 intervals UND SCHWEBUNGS-INFO
-                updateT0PeakDisplay(t0);
-                
+            if (frozenTime === resultsTime) {
+                visualizer.drawSpectrum(visualizer.frozenData);
+                logMessage(`✅ SPEKTRUM UPDATED: Timestamps stimmen überein (${new Date(frozenTime).toLocaleTimeString()})`, 'success');
             } else {
-                // Reset T0 fields if no T0 analysis
-                document.getElementById('t0DetectedChord').textContent = '-';
-                document.getElementById('t0Quality').textContent = '-';
-                document.getElementById('t0Fundamental').textContent = '-';
-                document.getElementById('t0CompliantIntervals').textContent = '-';
-                document.getElementById('avgEulerGradus').textContent = '-';
-                document.getElementById('avgXiDeviation').textContent = '-';
+                const frozenTimeStr = frozenTime ? new Date(frozenTime).toLocaleTimeString() : 'UNKNOWN';
+                const resultsTimeStr = resultsTime ? new Date(resultsTime).toLocaleTimeString() : 'UNKNOWN';
+                logMessage(`⚠️ TIMING MISMATCH: Frozen=${frozenTimeStr}, Results=${resultsTimeStr}`, 'warning');
+                visualizer.drawSpectrum(visualizer.frozenData);
             }
-            
-            // Calculate grade
-            const score = Math.min(1, results.peakCount / 10) * 0.5 + 
-                         Math.min(1, results.totalEnergy / 100) * 0.5;
-            const grade = score > 0.8 ? 'A' : score > 0.6 ? 'B' : score > 0.4 ? 'C' : 'D';
-            
-            document.getElementById('analysisGrade').textContent = grade;
-            if (!results.t0Analysis) {
-                document.getElementById('analysisScore').textContent = `${(score * 100).toFixed(1)}% (${results.method})`;
-            }
-            
-            // Color coding
-            const gradeElement = document.getElementById('analysisGrade');
-            gradeElement.className = '';
-            if (score > 0.7) {
-                gradeElement.classList.add('grade-a');
-            } else if (score > 0.5) {
-                gradeElement.classList.add('grade-b');
+        } else if (visualizer.frozen && visualizer.frozenData) {
+            visualizer.drawSpectrum(visualizer.frozenData);
+            logMessage(`🔄 SPEKTRUM UPDATED (ohne Timestamp-Check)`, 'info');
+        }
+    }
+    
+    // T0-Analysis Display Update MIT SCHWEBUNGS-PRIORITÄT
+    if (results.t0Analysis && results.t0Analysis.success) {
+        const t0 = results.t0Analysis;
+        
+        // SCHWEBUNGS-PRIORITÄT: Zeige Schwebung als Hauptergebnis wenn erkannt
+        if (t0.beatPattern && t0.beatPattern.detected) {
+            if (t0.beatPattern.type === 'symmetric_beating_pairs' && t0.beatPattern.beatPairs && t0.beatPattern.beatPairs.length > 0) {
+                const bestPair = t0.beatPattern.bestPair || t0.beatPattern.beatPairs[0];
+                document.getElementById('t0DetectedChord').textContent = 
+                    `SCHWEBUNGS-PAAR (${bestPair.beatFrequency.toFixed(2)}Hz)`;
+                document.getElementById('t0Quality').textContent = 
+                    `${bestPair.quality.toUpperCase()} (${bestPair.beatType})`;
+                document.getElementById('t0Fundamental').textContent = 
+                    `${bestPair.lower.toFixed(1)} - ${bestPair.center.toFixed(1)} - ${bestPair.upper.toFixed(1)}Hz`;
+                document.getElementById('t0CompliantIntervals').textContent = 
+                    `${t0.beatPattern.totalPairs} Schwebungs-Paare`;
+            } else if (t0.beatPattern.type === 'single_tone') {
+                document.getElementById('t0DetectedChord').textContent = 
+                    `EINZELTON (${t0.beatPattern.frequency.toFixed(1)}Hz)`;
+                document.getElementById('t0Quality').textContent = 
+                    `Keine Schwebung`;
+                document.getElementById('t0Fundamental').textContent = 
+                    `${t0.fundamental.frequency.toFixed(1)}Hz (${t0.fundamental.method})`;
+                document.getElementById('t0CompliantIntervals').textContent = 
+                    `${t0.intervalStatistics.t0Compliant}/${t0.intervalStatistics.total}`;
             } else {
-                gradeElement.classList.add('grade-c');
+                document.getElementById('t0DetectedChord').textContent = 
+                    `SCHWEBUNG ERKANNT`;
+                document.getElementById('t0Quality').textContent = 
+                    `${t0.beatPattern.analysis}`;
+                document.getElementById('t0Fundamental').textContent = 
+                    `${t0.fundamental.frequency.toFixed(1)}Hz (${t0.fundamental.method})`;
+                document.getElementById('t0CompliantIntervals').textContent = 
+                    `${t0.intervalStatistics.t0Compliant}/${t0.intervalStatistics.total}`;
             }
-            
-            document.getElementById('analysisRecommendation').textContent = 
-                score > 0.8 ? '🎯 Exzellente Analyse!' :
-                score > 0.6 ? '✅ Gute Ergebnisse' :
-                score > 0.4 ? '⚠️ Mittelgradige Qualität' : '❌ Niedrige Qualität';
-            
-            // Update detected peaks display (standard if no T0)
-            if (!results.t0Analysis || !results.t0Analysis.success) {
-                updateStandardPeakDisplay(results);
-            }
-            
-            // OKTAVREDUKTION Info anzeigen
-            if (results.octaveReduced && results.originalPeaks) {
-                document.getElementById('analysisRecommendation').innerHTML = 
-                    `🎵 Oktavreduktion aktiv: ${results.originalPeaks.length} → ${results.peaks.length} Grundfrequenzen<br>
-                    <small>Alle Frequenzen auf C4-C5 Oktave reduziert</small>`;
-            }
+        } else {
+            // Standard T0-Akkord-Erkennung (keine Schwebung)
+            document.getElementById('t0DetectedChord').textContent = 
+                t0.recognizedChord?.name || 'Unbekannt';
+            document.getElementById('t0Quality').textContent = 
+                `${t0.quality.grade} (${t0.quality.score.toFixed(1)}%)`;
+            document.getElementById('t0Fundamental').textContent = 
+                `${t0.fundamental.frequency.toFixed(1)}Hz (${t0.fundamental.method})`;
+            document.getElementById('t0CompliantIntervals').textContent = 
+                `${t0.intervalStatistics.t0Compliant}/${t0.intervalStatistics.total}`;
         }
         
+        // Diese Werte sind immer gleich
+        document.getElementById('avgEulerGradus').textContent = 
+            t0.quality.statistics.averageEulerGradus.toFixed(1) + '°';
+        document.getElementById('avgXiDeviation').textContent = 
+            t0.quality.statistics.averageXiDeviation.toFixed(1) + '¢';
+        
+        // Update T0 chord confidence in main grade if available
+        if (t0.recognizedChord) {
+            const t0Confidence = t0.recognizedChord.confidence;
+            const combinedScore = (results.totalEnergy * 0.3 + t0Confidence * 0.7) * 100;
+            document.getElementById('analysisScore').textContent = 
+                `${combinedScore.toFixed(1)}% (mit T0-Akkord)`;
+        }
+        
+        // Enhanced peak display with T0 intervals UND SCHWEBUNGS-INFO
+        updateT0PeakDisplay(t0);
+        
+    } else {
+        // Reset T0 fields if no T0 analysis
+        document.getElementById('t0DetectedChord').textContent = '-';
+        document.getElementById('t0Quality').textContent = '-';
+        document.getElementById('t0Fundamental').textContent = '-';
+        document.getElementById('t0CompliantIntervals').textContent = '-';
+        document.getElementById('avgEulerGradus').textContent = '-';
+        document.getElementById('avgXiDeviation').textContent = '-';
+    }
+    
+    // Calculate grade
+    const score = Math.min(1, results.peakCount / 10) * 0.5 + 
+                 Math.min(1, results.totalEnergy / 100) * 0.5;
+    const grade = score > 0.8 ? 'A' : score > 0.6 ? 'B' : score > 0.4 ? 'C' : 'D';
+    
+    document.getElementById('analysisGrade').textContent = grade;
+    if (!results.t0Analysis) {
+        document.getElementById('analysisScore').textContent = `${(score * 100).toFixed(1)}% (${results.method})`;
+    }
+    
+    // Color coding
+    const gradeElement = document.getElementById('analysisGrade');
+    gradeElement.className = '';
+    if (score > 0.7) {
+        gradeElement.classList.add('grade-a');
+    } else if (score > 0.5) {
+        gradeElement.classList.add('grade-b');
+    } else {
+        gradeElement.classList.add('grade-c');
+    }
+    
+    document.getElementById('analysisRecommendation').textContent = 
+        score > 0.8 ? '🎯 Exzellente Analyse!' :
+        score > 0.6 ? '✅ Gute Ergebnisse' :
+        score > 0.4 ? '⚠️ Mittelgradige Qualität' : '❌ Niedrige Qualität';
+    
+    // Update detected peaks display (standard if no T0)
+    if (!results.t0Analysis || !results.t0Analysis.success) {
+        updateStandardPeakDisplay(results);
+    }
+    
+    // OKTAVREDUKTION Info anzeigen
+    if (results.octaveReduced && results.originalPeaks) {
+        document.getElementById('analysisRecommendation').innerHTML = 
+            `🎵 Oktavreduktion aktiv: ${results.originalPeaks.length} → ${results.peaks.length} Grundfrequenzen<br>
+            <small>Alle Frequenzen auf C4-C5 Oktave reduziert</small>`;
+    }
+}
         function updateT0PeakDisplay(t0Analysis) {
             const peakDisplay = document.getElementById('detectedPeaks');
             
