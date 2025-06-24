@@ -1,0 +1,2821 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎵 Audio Analyzer - Verbesserte Berechnungen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .test-badge {
+            display: inline-block;
+            background: linear-gradient(145deg, #27ae60, #229954);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(39, 174, 96, 0.3);
+            margin: 5px;
+        }
+
+        .audio-generator {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .chord-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .chord-buttons label {
+            font-size: 0.9em;
+            font-weight: bold;
+            color: #f1c40f;
+            margin-right: 10px;
+        }
+
+        button {
+            background: linear-gradient(145deg, #3498db, #2980b9);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            font-size: 0.85em;
+            white-space: nowrap;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        button.active {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            box-shadow: 0 0 15px rgba(231, 76, 60, 0.5);
+        }
+
+        .chord-btn {
+            min-width: 50px;
+            background: linear-gradient(145deg, #f39c12, #e67e22);
+        }
+
+        .chord-btn.active {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            box-shadow: 0 0 15px rgba(231, 76, 60, 0.6);
+        }
+
+        .sliders {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .slider-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 200px;
+        }
+
+        .slider-group label {
+            font-size: 0.85em;
+            font-weight: 600;
+            white-space: nowrap;
+            min-width: 60px;
+        }
+
+        .beat-controls {
+            background: rgba(241, 196, 15, 0.1);
+            border: 2px solid rgba(241, 196, 15, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .beat-controls h4 {
+            color: #f1c40f;
+            margin-bottom: 12px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .beat-control-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .beat-slider-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 180px;
+            background: rgba(0,0,0,0.2);
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+
+        .beat-slider-group label {
+            font-size: 0.8em;
+            font-weight: 600;
+            min-width: 70px;
+            color: #f1c40f;
+        }
+
+        .beat-balance-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0,0,0,0.2);
+            padding: 8px 12px;
+            border-radius: 8px;
+            min-width: 250px;
+        }
+
+        .beat-balance-control label {
+            font-size: 0.8em;
+            font-weight: 600;
+            color: #e67e22;
+            min-width: 60px;
+        }
+
+        .beat-visualization {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 0.85em;
+            text-align: center;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.3);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #f1c40f;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            border: 2px solid #fff;
+        }
+
+        .slider-value {
+            font-family: monospace;
+            font-size: 0.8em;
+            color: #f1c40f;
+            min-width: 80px;
+            text-align: right;
+        }
+
+        .canvas-container {
+            background: rgba(0,0,0,0.4);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+        }
+
+        #spectrum-canvas {
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+            background: #000;
+            border: 2px solid rgba(255,255,255,0.1);
+            cursor: crosshair;
+        }
+.frequency-tooltip {
+    position: fixed;
+    background: rgba(0,0,0,0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.8em;
+    font-family: monospace;
+    pointer-events: none;
+    z-index: 1000;
+    border: 1px solid #f1c40f;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    display: none;
+    max-width: 200px;
+    transform: translate(-50%, -100%);
+}
+
+        .info-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .info-card {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .info-card h4 {
+            color: #f1c40f;
+            margin-bottom: 12px;
+            font-size: 1em;
+            text-align: center;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            padding: 3px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85em;
+        }
+
+        .metric:last-child {
+            border-bottom: none;
+        }
+
+        .metric-value {
+            font-family: monospace;
+            color: #f1c40f;
+        }
+
+        .grade-a { color: #2ecc71 !important; }
+        .grade-b { color: #f39c12 !important; }
+        .grade-c { color: #e74c3c !important; }
+
+        .log-panel {
+            background: rgba(0,0,0,0.4);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8em;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .log-entry {
+            margin-bottom: 3px;
+            padding: 1px 0;
+        }
+
+        .log-success { color: #2ecc71; }
+        .log-warning { color: #f39c12; }
+        .log-error { color: #e74c3c; }
+        .log-info { color: #3498db; }
+
+        .snapshot-list {
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(0,0,0,0.2);
+            border-radius: 6px;
+            padding: 8px;
+        }
+
+        .snapshot-item {
+            background: rgba(255,255,255,0.1);
+            margin-bottom: 6px;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid #3498db;
+            font-size: 0.8em;
+        }
+
+        .snapshot-item:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .snapshot-item.selected {
+            border-left-color: #f1c40f;
+            background: rgba(241, 196, 15, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎵 Audio Analyzer</h1>
+            <div class="subtitle">Verbesserte Berechnungen + Enhanced Beat Control + Mikrofon + T0-Akkord-Erkennung</div>
+            <div class="test-badge">🎼 ENHANCED BEATS</div>
+            <div class="test-badge">🎤 MIKROFON</div>
+            <div class="test-badge">🔍 T0-ANALYSE</div>
+            <div class="test-badge">📊 VERBESSERTE BERECHNUNGEN</div>
+        </div>
+
+        <!-- Audio Generator Panel -->
+        <div class="audio-generator">
+            <h3 style="color: #f1c40f; margin-bottom: 15px;">🎼 Audio Generator (Enhanced Beat Control)</h3>
+            
+            <!-- Akkord Controls -->
+            <div class="controls">
+                <div class="chord-buttons">
+                    <label>🎼 Akkorde:</label>
+                    <button class="chord-btn" data-chord="single_tone" title="Einzelton">🎯 Einzelton</button>
+                    <button class="chord-btn" data-chord="major" title="C-Dur Dreiklang">Dur</button>
+                    <button class="chord-btn" data-chord="minor" title="C-Moll Dreiklang">Moll</button>
+                    <button class="chord-btn" data-chord="dom7" title="C7 Dominantseptakkord">C7</button>
+                    <button class="chord-btn" data-chord="maj7" title="Cmaj7 Major-Septakkord">Maj7</button>
+                    <button class="chord-btn" data-chord="min7" title="Cm7 Minor-Septakkord">m7</button>
+                    <button class="chord-btn" data-chord="sus2" title="Csus2 Suspended 2nd">Sus2</button>
+                    <button class="chord-btn" data-chord="sus4" title="Csus4 Suspended 4th">Sus4</button>
+                    <button class="chord-btn" data-chord="aug" title="C+ Übermäßiger Dreiklang">Aug</button>
+                    <button class="chord-btn" data-chord="dim" title="C° Verminderter Dreiklang">Dim</button>
+                </div>
+                
+                <div style="border-left: 2px solid rgba(255,255,255,0.2); padding-left: 15px; margin-left: 10px;">
+                    <button id="micBtn" title="Mikrofon ein/aus" style="background: linear-gradient(145deg, rgb(46, 204, 113), rgb(39, 174, 96));">🎤 Mikrofon</button>
+                    <button id="captureBtn" title="Raw-Buffer manuell erfassen">📊 Capture</button>
+                </div>
+            </div>
+
+            <!-- Enhanced Beat Controls -->
+            <div class="beat-controls">
+                <h4>🌊 Enhanced Beat Control System</h4>
+                
+                <div class="beat-control-row">
+                    <div class="beat-slider-group">
+                        <label for="beatFreqSlider">🎵 Basis-Beat:</label>
+                        <input type="range" id="beatFreqSlider" min="0" max="10" step="0.1" value="0">
+                        <div class="slider-value" id="beatFreqDisplay">0.0 Hz</div>
+                    </div>
+                    
+                    <div class="beat-slider-group">
+                        <label for="upperBeatSlider">⬆️ Ober-Beat:</label>
+                        <input type="range" id="upperBeatSlider" min="0" max="15" step="0.1" value="0">
+                        <div class="slider-value" id="upperBeatDisplay">0.0 Hz</div>
+                    </div>
+                    
+                    <div class="beat-slider-group">
+                        <label for="lowerBeatSlider">⬇️ Unter-Beat:</label>
+                        <input type="range" id="lowerBeatSlider" min="0" max="15" step="0.1" value="0">
+                        <div class="slider-value" id="lowerBeatDisplay">0.0 Hz</div>
+                    </div>
+                    
+                    <div class="beat-slider-group">
+                        <label for="complexBeatSlider">🌀 Komplex-Beat:</label>
+                        <input type="range" id="complexBeatSlider" min="0" max="20" step="0.1" value="0">
+                        <div class="slider-value" id="complexBeatDisplay">0.0 Hz</div>
+                    </div>
+                </div>
+                
+                <div class="beat-control-row">
+                    <div class="beat-balance-control">
+                        <label for="beatBalanceSlider">⚖️ Balance:</label>
+                        <span style="font-size: 0.7em; color: #3498db;">Unter</span>
+                        <input type="range" id="beatBalanceSlider" min="-100" max="100" step="1" value="0">
+                        <span style="font-size: 0.7em; color: #e74c3c;">Ober</span>
+                        <div class="slider-value" id="beatBalanceDisplay">0%</div>
+                    </div>
+                    
+                    <button id="beatResetBtn" title="Alle Beat-Werte zurücksetzen" style="background: linear-gradient(145deg, #95a5a6, #7f8c8d);">🔄 Reset Beats</button>
+                    <button id="beatPresetBtn" title="Beat-Presets durchschalten" style="background: linear-gradient(145deg, #9b59b6, #8e44ad);">🎨 Preset</button>
+                </div>
+                
+                <div class="beat-visualization" id="beatVisualization">
+                    🔇 Keine Schwebung aktiv
+                </div>
+            </div>
+
+            <!-- Standard Slider Controls -->
+            <div class="sliders">
+                <div class="slider-group">
+                    <label for="rootFreqSlider">🎵 Grundton:</label>
+                    <input type="range" id="rootFreqSlider" min="100" max="800" value="442" step="0.1">
+                    <div class="slider-value" id="rootFreqDisplay">442.0 Hz</div>
+                </div>
+                
+                <div class="slider-group">
+                    <label for="volumeSlider">🔊 Lautstärke:</label>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="50">
+                    <div class="slider-value" id="volumeDisplay">50%</div>
+                </div>
+                
+                <div class="slider-group">
+                    <label for="micGainSlider">🎤 Mic-Verstärkung:</label>
+                    <input type="range" id="micGainSlider" min="1" max="100" step="1" value="10">
+                    <div class="slider-value" id="micGainDisplay">10x</div>
+                </div>
+                
+                <button id="tuningBtn" title="Zwischen reiner und temperierter Stimmung umschalten" class="active" style="background: linear-gradient(145deg, rgb(231, 76, 60), rgb(192, 57, 43));">🎼 Reine Stimmung</button>
+                <button id="waveformBtn" title="Wellenform ändern">🔻 Dreieck</button>
+                <button id="autoCaptureBtn" title="Auto-Capture bei 50% Level" style="background: linear-gradient(145deg, rgb(243, 156, 18), rgb(230, 126, 34));">🎯 Auto-Capture</button> </div>
+        </div>
+
+        <!-- Analyzer Controls -->
+        <div class="controls">
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                <label style="font-size: 0.9em; font-weight: bold; color: #3498db; margin-right: 10px;">📊 Anzeige:</label>
+                <button id="scaleBtn" title="Frequenz-Skalierung umschalten" style="background: linear-gradient(145deg, rgb(52, 152, 219), rgb(41, 128, 185));">📐 Linear</button>
+                <button id="zoomBtn" title="Frequenz-Bereich ändern">🔍 Full</button>
+                <button id="methodBtn" title="Analysemethode umschalten" style="background: linear-gradient(145deg, rgb(155, 89, 182), rgb(142, 68, 173));">🎼 T0-Akkord-Analyse</button>
+                <button id="octaveBtn" title="Oktavreduktion umschalten" style="background: linear-gradient(145deg, rgb(52, 152, 219), rgb(41, 128, 185));">🎵 Vollspektrum</button>
+                <button id="intervalBtn" title="Intervall-Linien ein/ausblenden" class="active" style="background: linear-gradient(145deg, rgb(243, 156, 18), rgb(230, 126, 34));">🎼 Intervalle</button>
+                <button id="resetBtn" title="Darstellung zurücksetzen">🔄 Reset</button>
+                <button id="saveBtn" title="Raw-Buffer als Datei speichern">💾 Save</button>
+                <button id="loadBtn" title="Raw-Buffer aus Datei laden">📁 Load</button>
+            </div>
+        </div>
+
+        <!-- Spectrum Canvas -->
+        <div class="canvas-container">
+            <canvas id="spectrum-canvas" width="1368" height="400"></canvas>
+            <div id="frequency-tooltip" class="frequency-tooltip">
+                <strong>Frequency Info</strong><br>
+                Frequency: -<br>
+                Amplitude: -<br>
+                dB: -
+            </div>
+        </div>
+
+        <!-- Info Panels -->
+        <div class="info-panel">
+            <!-- Analysis Results -->
+            <div class="info-card">
+                <h4>🔍 Audio-Analyse (Verbessert)</h4>
+                
+                <div style="text-align: center; margin-bottom: 12px;">
+                    <div id="analysisGrade" style="font-size: 1.8em; font-weight: bold; color: #f1c40f;" class="grade-b">-</div>
+                    <div id="analysisScore" style="font-size: 0.8em; color: rgba(255,255,255,0.8);">Spiele Akkord oder aktiviere Mikrofon</div>
+                </div>
+                
+                <div class="metric">
+                    <span>Analysemethode:</span>
+                    <span class="metric-value" id="currentMethod">T0-Akkord-Analyse</span>
+                </div>
+                <div class="metric">
+                    <span>Erkannte Peaks:</span>
+                    <span class="metric-value" id="peakCount">0</span>
+                </div>
+                <div class="metric">
+                    <span>Grundfrequenz:</span>
+                    <span class="metric-value" id="fundamentalFreq">-</span>
+                </div>
+                <div class="metric">
+                    <span>Spektral-Zentroid:</span>
+                    <span class="metric-value" id="spectralCentroid">-</span>
+                </div>
+                <div class="metric">
+                    <span>Energie-Level:</span>
+                    <span class="metric-value" id="energyLevel">-</span>
+                </div>
+                <div class="metric">
+                    <span>Buffer-Größe:</span>
+                    <span class="metric-value" id="bufferSize">-</span>
+                </div>
+            </div>
+
+            <!-- T0-Chord-Info Panel -->
+            <div class="info-card">
+                <h4>🎼 T0-Akkord-Erkennung</h4>
+                <div class="metric">
+                    <span>Erkannter Akkord:</span>
+                    <span class="metric-value" id="t0DetectedChord">-</span>
+                </div>
+                <div class="metric">
+                    <span>T0-Qualität:</span>
+                    <span class="metric-value" id="t0Quality">-</span>
+                </div>
+                <div class="metric">
+                    <span>Grundton (T0):</span>
+                    <span class="metric-value" id="t0Fundamental">-</span>
+                </div>
+                <div class="metric">
+                    <span>T0-konforme Intervalle:</span>
+                    <span class="metric-value" id="t0CompliantIntervals">-</span>
+                </div>
+                <div class="metric">
+                    <span>Durchschnitt Euler°:</span>
+                    <span class="metric-value" id="avgEulerGradus">-</span>
+                </div>
+                <div class="metric">
+                    <span>Durchschnitt ξ-Abw.:</span>
+                    <span class="metric-value" id="avgXiDeviation">-</span>
+                </div>
+            </div>
+
+            <!-- Detected Frequencies -->
+            <div class="info-card">
+                <h4 id="peaksTitle">🎼 T0-Intervalle</h4>
+                <div id="detectedPeaks" style="font-family: monospace; font-size: 0.75em; background: rgba(0,0,0,0.2); border-radius: 4px; padding: 8px; min-height: 100px;">
+                    <div style="color: rgba(255,255,255,0.6); text-align: center; padding: 20px;">
+                        Kein Signal analysiert<br>
+                        <small>Spiele Akkord oder aktiviere Mikrofon</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generator Status -->
+            <div class="info-card">
+                <h4>🎼 Generator Status</h4>
+                <div class="metric">
+                    <span>Aktuell gespielt:</span>
+                    <span class="metric-value" id="generatorChord">Keiner</span>
+                </div>
+                <div class="metric">
+                    <span>Grundton:</span>
+                    <span class="metric-value" id="generatorRoot">442.0 Hz</span>
+                </div>
+                <div class="metric">
+                    <span>Beat-Konfiguration:</span>
+                    <span class="metric-value" id="generatorBeats">Keine Schwebung</span>
+                </div>
+                <div class="metric">
+                    <span>Stimmung:</span>
+                    <span class="metric-value" id="generatorTuning">Rein (Just)</span>
+                </div>
+                <div class="metric">
+                    <span>Wellenform:</span>
+                    <span class="metric-value" id="generatorWave">Triangle</span>
+                </div>
+                <div class="metric">
+                    <span>Signal-Status:</span>
+                    <span class="metric-value" id="signalStatus">Bereit</span>
+                </div>
+
+                <!-- Mikrofon Level-Anzeige -->
+                <div id="micLevelContainer" style="margin-top: 10px;">
+                    <div style="font-size: 0.8em; margin-bottom: 5px; color: #f1c40f;">🎤 Mikrofon-Level:</div>
+                    <div style="background: rgba(0,0,0,0.3); border-radius: 10px; padding: 3px; height: 20px; position: relative;">
+                        <div id="micLevelBar" style="width: 0%; height: 100%; background: rgb(52, 152, 219); border-radius: 7px; transition: width 0.1s;"></div>
+                        <div id="micLevelText" style="
+                            position: absolute; 
+                            top: 50%; 
+                            left: 50%; 
+                            transform: translate(-50%, -50%); 
+                            font-size: 0.7em; 
+                            font-weight: bold; 
+                            color: white; 
+                            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+                        ">0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buffer Management -->
+            <div class="info-card">
+                <h4>📊 Raw-Buffer (<span id="bufferCount">0</span>)</h4>
+                <div id="bufferList" class="snapshot-list">
+                    <div style="text-align: center; color: rgba(255,255,255,0.6); padding: 15px;">
+                        Keine Raw-Buffer<br>
+                        <small>Werden automatisch bei Akkord-Generierung erstellt</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Log Panel -->
+        <div class="log-panel" id="logPanel">
+            <div class="log-entry log-success">[Loading] 🎵 Audio Analyzer mit verbesserten Berechnungen bereit!</div>
+        </div>
+        
+        <input type="file" id="fileInput" accept=".json" style="display: none;">
+    </div>
+
+    <script>
+        // Globale Variablen
+        let audioContext = null;
+        let audioEngine = null;
+        let audioAnalyzer = null;
+        let bufferManager = null;
+        let isRunning = false;
+        let animationId = null;
+
+        // Beat Presets
+        const beatPresets = [
+            { name: "🔇 Aus", base: 0, upper: 0, lower: 0, complex: 0, balance: 0 },
+            { name: "🌊 Sanft", base: 2, upper: 1, lower: 1, complex: 0, balance: 0 },
+            { name: "🎵 Klassisch", base: 5, upper: 3, lower: 2, complex: 0, balance: 20 },
+            { name: "🌀 Komplex", base: 4, upper: 7, lower: 6, complex: 3, balance: -30 },
+            { name: "🎭 Dramatisch", base: 8, upper: 12, lower: 5, complex: 8, balance: 60 },
+            { name: "🔥 Intensiv", base: 10, upper: 15, lower: 8, complex: 12, balance: -50 }
+        ];
+        let currentPresetIndex = 0;
+
+        // === ENHANCED AUDIO ENGINE ===
+        class AudioEngine {
+            constructor() {
+                this.audioContext = null;
+                this.oscillators = [];
+                this.gainNode = null;
+                this.analyser = null;
+                this.isActive = false;
+                this.currentChord = null;
+                this.rootFrequency = 442;
+                this.volume = 0.5;
+                this.tuningSystem = 'just';
+                this.waveform = 'triangle';
+                
+                // Enhanced Beat Controls
+                this.baseBeatFrequency = 0;
+                this.upperBeatFrequency = 0;
+                this.lowerBeatFrequency = 0;
+                this.complexBeatFrequency = 0;
+                this.beatBalance = 0;
+                
+                // Mikrofon
+                this.micStream = null;
+                this.micGainNode = null;
+                this.micAnalyser = null;
+                this.micActive = false;
+                this.micGain = 10;
+                this.micLevelInterval = null;
+                this.micAutoCapture = true;
+                this.micCaptureThreshold = 0.5;
+                
+                this.chordRatios = {
+                    major: { 
+                        tempered: [1.0, 1.2599, 1.4983],
+                        just: [1.0, 1.25, 1.5],
+                        name: 'Dur-Dreiklang'
+                    },
+                    minor: { 
+                        tempered: [1.0, 1.1892, 1.4983],
+                        just: [1.0, 1.2, 1.5],
+                        name: 'Moll-Dreiklang'
+                    },
+                    dom7: { 
+                        tempered: [1.0, 1.2599, 1.4983, 1.7818],
+                        just: [1.0, 1.25, 1.5, 1.7778],
+                        name: 'Dominant-Septakkord (C7)'
+                    },
+                    maj7: { 
+                        tempered: [1.0, 1.2599, 1.4983, 1.8877],
+                        just: [1.0, 1.25, 1.5, 1.875],
+                        name: 'Major-Septakkord (Cmaj7)'
+                    },
+                    min7: { 
+                        tempered: [1.0, 1.1892, 1.4983, 1.7818],
+                        just: [1.0, 1.2, 1.5, 1.7778],
+                        name: 'Minor-Septakkord (Cm7)'
+                    },
+                    sus2: { 
+                        tempered: [1.0, 1.1225, 1.4983],
+                        just: [1.0, 1.125, 1.5],
+                        name: 'Suspended 2nd (Csus2)'
+                    },
+                    sus4: { 
+                        tempered: [1.0, 1.3348, 1.4983],
+                        just: [1.0, 1.3333, 1.5],
+                        name: 'Suspended 4th (Csus4)'
+                    },
+                    aug: { 
+                        tempered: [1.0, 1.2599, 1.5874],
+                        just: [1.0, 1.25, 1.6],
+                        name: 'Übermäßiger Dreiklang (C+)'
+                    },
+                    dim: { 
+                        tempered: [1.0, 1.1892, 1.4142],
+                        just: [1.0, 1.2, 1.44],
+                        name: 'Verminderter Dreiklang (C°)'
+                    },
+                    single_tone: { 
+                        tempered: [1.0], 
+                        just: [1.0], 
+                        name: 'Einzelton'
+                    }
+                };
+            }
+            
+async initialize() {
+        try {
+            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            this.gainNode = this.audioContext.createGain();
+            this.gainNode.gain.value = this.volume;
+            
+            this.analyser = this.audioContext.createAnalyser();
+            this.analyser.fftSize = 32768;
+            this.analyser.smoothingTimeConstant = 0.8;
+            
+            this.gainNode.connect(this.analyser);
+            this.gainNode.connect(this.audioContext.destination);
+                    
+                    logMessage('🎵 Audio Engine bereit: ' + this.audioContext.sampleRate + 'Hz', 'success');
+                    return true;
+                } catch (error) {
+                    logMessage('❌ Audio Engine Fehler: ' + error.message, 'error');
+                    return false;
+                }
+            }
+            
+            async startMicrophone() {
+                try {
+                    if (this.micActive) {
+                        this.stopMicrophone();
+                    }
+                    if (!this.audioContext) {
+                await this.initialize();
+            }
+            
+            // DEBUG: AudioContext-Status prüfen
+            console.log("AudioContext state:", this.audioContext.state);
+            if (this.audioContext.state === 'suspended') {
+                await this.audioContext.resume();
+                console.log("AudioContext resumed, new state:", this.audioContext.state);
+            }
+                    if (!this.audioContext) {
+                        await this.initialize();
+                    }
+                    
+                    const constraints = {
+                        audio: {
+                            echoCancellation: false,
+                            noiseSuppression: false,
+                            autoGainControl: false,
+                            sampleRate: this.audioContext.sampleRate,
+                            channelCount: 1
+                        }
+                    };
+                    
+                    this.micStream = await navigator.mediaDevices.getUserMedia(constraints);
+                    
+                    const micSource = this.audioContext.createMediaStreamSource(this.micStream);
+                    this.micGainNode = this.audioContext.createGain();
+                    this.micGainNode.gain.value = this.micGain;
+                    
+                    this.micAnalyser = this.audioContext.createAnalyser();
+                    this.micAnalyser.fftSize = 32768;
+                    this.micAnalyser.smoothingTimeConstant = 0.1;
+                    this.micAnalyser.minDecibels = -90;
+                    this.micAnalyser.maxDecibels = -10;
+                    
+                    micSource.connect(this.micGainNode);
+                    this.micGainNode.connect(this.micAnalyser);
+                    
+                    this.micActive = true;
+                    this.startLevelMonitoring();
+                    
+                    logMessage('🎤 Mikrofon aktiviert', 'success');
+                    updateMicrophoneStatus();
+                    return true;
+                    
+                } catch (error) {
+                    logMessage('❌ Mikrofon Fehler: ' + error.message, 'error');
+                    return false;
+                }
+            }
+            
+            stopMicrophone() {
+                if (this.micStream) {
+                    this.micStream.getTracks().forEach(track => track.stop());
+                    this.micStream = null;
+                }
+                
+                if (this.micLevelInterval) {
+                    clearInterval(this.micLevelInterval);
+                    this.micLevelInterval = null;
+                }
+                
+                this.micActive = false;
+                logMessage('🎤 Mikrofon deaktiviert', 'info');
+                updateMicrophoneStatus();
+                updateMicLevel(0);
+            }
+            
+            startLevelMonitoring() {
+                if (this.micLevelInterval) return;
+                 // DEBUG: Prüfe ob micAnalyser existiert
+        if (!this.micAnalyser) {
+            console.error("micAnalyser ist null!");
+            return;
+        }
+        
+        console.log("Level monitoring gestartet, micAnalyser:", this.micAnalyser);
+                let lastCaptureTime = 0;
+                const captureDelay = 2000;
+                
+                this.micLevelInterval = setInterval(() => {
+                    if (this.micAnalyser && this.micActive) {
+                        const freqArray = new Uint8Array(this.micAnalyser.frequencyBinCount);
+                        const timeArray = new Uint8Array(this.micAnalyser.frequencyBinCount);
+                        
+                        this.micAnalyser.getByteFrequencyData(freqArray);
+                        this.micAnalyser.getByteTimeDomainData(timeArray);
+                        
+                        let freqSum = 0;
+                        for (let i = 0; i < freqArray.length; i++) {
+                            freqSum += freqArray[i] * freqArray[i];
+                        }
+                        const freqRms = Math.sqrt(freqSum / freqArray.length);
+                        
+                        let timeSum = 0;
+                        for (let i = 0; i < timeArray.length; i++) {
+                            const normalized = (timeArray[i] - 128) / 128;
+                            timeSum += normalized * normalized;
+                        }
+                        const timeRms = Math.sqrt(timeSum / timeArray.length);
+                        
+                        const freqLevel = freqRms / 255;
+                        const timeLevel = timeRms;
+                        const combinedLevel = Math.max(freqLevel, timeLevel * 2);
+                        
+                        updateMicLevel(combinedLevel);
+                        
+                        // Auto-Capture
+                        const currentTime = Date.now();
+                        if (this.micAutoCapture && 
+                            combinedLevel >= this.micCaptureThreshold && 
+                            currentTime - lastCaptureTime > captureDelay) {
+                            
+                            lastCaptureTime = currentTime;
+                            logMessage(`🎤 Auto-Capture ausgelöst bei ${(combinedLevel * 100).toFixed(0)}% Level`, 'success');
+                            
+                            setTimeout(() => {
+                                captureAndAnalyze();
+                            }, 200);
+                        }
+                    }
+                }, 50);
+            }
+            
+            // Enhanced Beat Generation
+            generateBeatFrequencies(baseFrequency) {
+                const frequencies = [];
+                
+                // Calculate effective beat values based on balance
+                const balanceFactor = this.beatBalance / 100; // -1 to 1
+                const upperWeight = (1 + balanceFactor) / 2; // 0 to 1
+                const lowerWeight = (1 - balanceFactor) / 2; // 1 to 0
+                
+                // Base frequency (always present)
+                frequencies.push({
+                    freq: baseFrequency,
+                    amplitude: 0.4,
+                    label: 'base'
+                });
+                
+                // Add base beat if specified
+                if (this.baseBeatFrequency > 0) {
+                    frequencies.push({
+                        freq: baseFrequency - this.baseBeatFrequency,
+                        amplitude: 0.3,
+                        label: 'base-lower'
+                    });
+                    frequencies.push({
+                        freq: baseFrequency + this.baseBeatFrequency,
+                        amplitude: 0.3,
+                        label: 'base-upper'
+                    });
+                }
+                
+                // Add upper beat
+                if (this.upperBeatFrequency > 0) {
+                    const upperAmp = 0.2 * upperWeight;
+                    if (upperAmp > 0.05) {
+                        frequencies.push({
+                            freq: baseFrequency + this.upperBeatFrequency,
+                            amplitude: upperAmp,
+                            label: 'upper'
+                        });
+                        frequencies.push({
+                            freq: baseFrequency + this.upperBeatFrequency * 0.7,
+                            amplitude: upperAmp * 0.7,
+                            label: 'upper-harmonic'
+                        });
+                    }
+                }
+                
+                // Add lower beat
+                if (this.lowerBeatFrequency > 0) {
+                    const lowerAmp = 0.2 * lowerWeight;
+                    if (lowerAmp > 0.05) {
+                        frequencies.push({
+                            freq: baseFrequency - this.lowerBeatFrequency,
+                            amplitude: lowerAmp,
+                            label: 'lower'
+                        });
+                        frequencies.push({
+                            freq: baseFrequency - this.lowerBeatFrequency * 0.7,
+                            amplitude: lowerAmp * 0.7,
+                            label: 'lower-harmonic'
+                        });
+                    }
+                }
+                
+                // Add complex beat (new)
+                if (this.complexBeatFrequency > 0) {
+                    const complexAmp = 0.15;
+                    frequencies.push({
+                        freq: baseFrequency + this.complexBeatFrequency,
+                        amplitude: complexAmp,
+                        label: 'complex-upper'
+                    });
+                    frequencies.push({
+                        freq: baseFrequency - this.complexBeatFrequency * 0.8,
+                        amplitude: complexAmp * 0.8,
+                        label: 'complex-lower'
+                    });
+                    frequencies.push({
+                        freq: baseFrequency + this.complexBeatFrequency * 1.3,
+                        amplitude: complexAmp * 0.6,
+                        label: 'complex-harmonic'
+                    });
+                }
+                
+                return frequencies;
+            }
+            
+            playChordTimed(chordType) {
+                this.stopChord();
+                
+                if (!this.chordRatios[chordType]) return;
+                
+                const chord = this.chordRatios[chordType];
+                const ratios = chord[this.tuningSystem];
+                this.currentChord = chordType;
+                
+                ratios.forEach(ratio => {
+                    const baseFrequency = this.rootFrequency * ratio;
+                    const frequencies = this.generateBeatFrequencies(baseFrequency);
+                    
+                    frequencies.forEach(freqObj => {
+                        const osc = this.audioContext.createOscillator();
+                        const oscGain = this.audioContext.createGain();
+                        
+                        osc.frequency.value = freqObj.freq;
+                        osc.type = this.waveform;
+                        
+                        const amplitude = this.volume * freqObj.amplitude / ratios.length;
+                        oscGain.gain.value = amplitude;
+                        
+                        osc.connect(oscGain);
+                        oscGain.connect(this.gainNode);
+                        
+                        osc.start();
+                        this.oscillators.push(osc);
+                    });
+                });
+                
+                this.isActive = true;
+                
+                // Live FFT während der Wiedergabe starten
+                if (!isRunning) {
+                    startAnalysis();
+                }
+                
+                // Nach der Wiedergabe: Capture, Analyze und Display
+                setTimeout(() => {
+                    this.stopChord();
+                    setTimeout(() => {
+                        const audioData = this.getAudioData();
+                        if (audioData) {
+                            const buffer = {
+                                id: `buffer_${Date.now()}`,
+                                timestamp: Date.now(),
+                                timeData: Array.from(audioData.timeData),
+                                freqData: Array.from(audioData.freqData),
+                                sampleRate: audioData.sampleRate,
+                                bufferSize: audioData.bufferSize,
+                                source: audioData.source
+                            };
+                            
+                            bufferManager.addBuffer(buffer);
+                            
+                            const results = audioAnalyzer.analyzeSignal(buffer);
+                            audioAnalyzer.displayResults(results, buffer);
+                            
+                            logMessage('📊 Analyse nach Tonwiedergabe: Spektrum mit T0-Details angezeigt', 'success');
+                        }
+                    }, 300);
+                }, 2000);
+                
+                const beatInfo = this.getBeatDescription();
+                const tuningInfo = this.tuningSystem === 'just' ? ' [REINE STIMMUNG]' : ' [TEMPERIERTE STIMMUNG]';
+                logMessage(`🎼 Generator: ${chord.name} @ ${this.rootFrequency.toFixed(1)}Hz${beatInfo}${tuningInfo}`, 'success');
+                logMessage(`🔴 Live FFT aktiv während der Wiedergabe`, 'info');
+                
+                updateGeneratorStatus();
+            }
+            
+            getBeatDescription() {
+                if (this.baseBeatFrequency === 0 && this.upperBeatFrequency === 0 && 
+                    this.lowerBeatFrequency === 0 && this.complexBeatFrequency === 0) {
+                    return '';
+                }
+                
+                const parts = [];
+                if (this.baseBeatFrequency > 0) parts.push(`Basis: ±${this.baseBeatFrequency.toFixed(1)}Hz`);
+                if (this.upperBeatFrequency > 0) parts.push(`Ober: +${this.upperBeatFrequency.toFixed(1)}Hz`);
+                if (this.lowerBeatFrequency > 0) parts.push(`Unter: -${this.lowerBeatFrequency.toFixed(1)}Hz`);
+                if (this.complexBeatFrequency > 0) parts.push(`Komplex: ±${this.complexBeatFrequency.toFixed(1)}Hz`);
+                
+                let description = ` (${parts.join(', ')})`;
+                if (this.beatBalance !== 0) {
+                    const balanceDesc = this.beatBalance > 0 ? `+${this.beatBalance}%` : `${this.beatBalance}%`;
+                    description += ` [Balance: ${balanceDesc}]`;
+                }
+                
+                return description;
+            }
+            
+            stopChord() {
+                this.oscillators.forEach(osc => {
+                    try {
+                        osc.stop();
+                        osc.disconnect();
+                    } catch (e) {}
+                });
+                this.oscillators = [];
+                this.isActive = false;
+                this.currentChord = null;
+                updateGeneratorStatus();
+            }
+            
+getAudioData() {
+        if (this.micActive && this.micAnalyser) {
+            const timeData = new Float32Array(32768);
+            const freqData = new Uint8Array(this.micAnalyser.frequencyBinCount);
+            
+            this.micAnalyser.getFloatTimeDomainData(timeData);
+            this.micAnalyser.getByteFrequencyData(freqData);
+            
+            return {
+                timeData: timeData,
+                freqData: freqData,
+                sampleRate: this.audioContext.sampleRate,
+                bufferSize: 32768,
+                timestamp: Date.now(),
+                source: 'microphone'
+            };
+        }
+        
+        if (!this.analyser) return null;
+                
+                const timeData = new Float32Array(32768);
+                const freqData = new Uint8Array(this.analyser.frequencyBinCount);
+                
+                this.analyser.getFloatTimeDomainData(timeData);
+                this.analyser.getByteFrequencyData(freqData);
+                
+                return {
+                    timeData: timeData,
+                    freqData: freqData,
+                    sampleRate: this.audioContext.sampleRate,
+                    bufferSize: 32768,
+                    timestamp: Date.now(),
+                    source: this.isActive ? 'generator' : 'silence'
+                };
+            }
+        }
+
+        // === BUFFER MANAGER ===
+        class BufferManager {
+            constructor() {
+                this.buffers = [];
+                this.selectedBuffer = null;
+            }
+            
+            addBuffer(buffer) {
+                this.buffers.push(buffer);
+                this.updateBufferList();
+                logMessage(`📊 Raw-Buffer gespeichert: ${buffer.bufferSize} Samples`, 'success');
+                
+                document.getElementById('saveBtn').disabled = this.buffers.length === 0;
+                return buffer;
+            }
+            
+            selectBuffer(buffer) {
+                this.selectedBuffer = buffer;
+                this.updateBufferList();
+                
+                const results = audioAnalyzer.analyzeSignal(buffer);
+                audioAnalyzer.displayResults(results, buffer);
+                
+                logMessage(`📋 Buffer ausgewählt: Analysiertes Spektrum wird angezeigt`, 'info');
+            }
+            
+            updateBufferList() {
+                const list = document.getElementById('bufferList');
+                const count = this.buffers.length;
+                
+                document.getElementById('bufferCount').textContent = count.toString();
+                document.getElementById('saveBtn').disabled = count === 0;
+                
+                if (count === 0) {
+                    list.innerHTML = `
+                        <div style="text-align: center; color: rgba(255,255,255,0.6); padding: 15px;">
+                            Keine Raw-Buffer<br>
+                            <small>Werden automatisch bei Akkord-Generierung erstellt</small>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                list.innerHTML = '';
+                
+                this.buffers.slice(-10).reverse().forEach((buffer, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'snapshot-item';
+                    
+                    if (this.selectedBuffer === buffer) {
+                        item.classList.add('selected');
+                    }
+                    
+                    const time = new Date(buffer.timestamp).toLocaleTimeString();
+                    const sampleCount = buffer.timeData ? buffer.timeData.length : buffer.bufferSize;
+                    const durationMs = buffer.sampleRate ? (sampleCount / buffer.sampleRate * 1000).toFixed(0) : '?';
+                    const source = buffer.source || 'generator';
+                    
+                    item.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <strong>📊 Buffer #${count - index}</strong><br>
+                                <small style="color: rgba(255,255,255,0.7);">${time} | ${sampleCount} Samples | ${durationMs}ms | ${source}</small>
+                            </div>
+                        </div>
+                    `;
+                    
+                    item.addEventListener('click', () => {
+                        this.selectBuffer(buffer);
+                    });
+                    
+                    list.appendChild(item);
+                });
+            }
+            
+            saveBuffers() {
+                if (this.buffers.length === 0) {
+                    logMessage('❌ Keine Raw-Buffer zum Speichern', 'warning');
+                    return;
+                }
+                
+                const data = {
+                    version: '1.0',
+                    type: 'raw_audio_buffers',
+                    created: new Date().toISOString(),
+                    count: this.buffers.length,
+                    buffers: this.buffers.map(buffer => ({
+                        id: buffer.id,
+                        timestamp: buffer.timestamp,
+                        timeData: Array.from(buffer.timeData || []),
+                        freqData: Array.from(buffer.freqData || []),
+                        sampleRate: buffer.sampleRate,
+                        bufferSize: buffer.bufferSize,
+                        source: buffer.source || 'unknown'
+                    }))
+                };
+                
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `raw_buffers_${new Date().toISOString().slice(0, 19).replace(/:/g, '-')}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                logMessage(`💾 ${this.buffers.length} Raw-Buffer gespeichert`, 'success');
+            }
+            
+            loadBuffers(file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        
+                        if (data.buffers && Array.isArray(data.buffers)) {
+                            this.buffers = data.buffers.map(buffer => ({
+                                id: buffer.id || `buffer_${Date.now()}_${Math.random()}`,
+                                timestamp: buffer.timestamp || Date.now(),
+                                timeData: new Float32Array(buffer.timeData || []),
+                                freqData: new Uint8Array(buffer.freqData || []),
+                                sampleRate: buffer.sampleRate || 44100,
+                                bufferSize: buffer.bufferSize || 32768,
+                                source: buffer.source || 'loaded'
+                            }));
+                            
+                            this.selectedBuffer = null;
+                            this.updateBufferList();
+                            logMessage(`📁 ${this.buffers.length} Raw-Buffer geladen`, 'success');
+                        } else {
+                            throw new Error('Ungültiges Raw-Buffer-Format');
+                        }
+                    } catch (error) {
+                        logMessage(`❌ Ladefehler: ${error.message}`, 'error');
+                    }
+                };
+                
+                reader.readAsText(file);
+            }
+        }
+
+        // === AUDIO ANALYZER ===
+        class AudioAnalyzer {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.scale = 'linear';
+                this.zoomMode = 'full';
+                this.analysisMethod = 't0';
+                this.octaveReduction = false;
+                this.lastSignal = null;
+                this.lastResults = null;
+                this.showIntervalLines = true;
+                
+                this.zoomPresets = {
+                    full: { min: 50, max: 22000, center: null, name: 'Full Spectrum' },
+                    fundamental: { min: null, max: null, center: 'octave', span: 200, name: 'Fundamental Focus' },
+                    harmonics: { min: null, max: null, center: 'octave', span: 1600, name: 'Harmonic Series' },
+                    chord: { min: null, max: null, center: 'chord', span: 1200, name: 'Chord Focus' },
+                    bass: { min: 50, max: 300, center: null, name: 'Bass Range' },
+                    mid: { min: 200, max: 2000, center: null, name: 'Mid Range' },
+                    high: { min: 1000, max: 8000, center: null, name: 'High Range' }
+                };
+                
+                this.intervalRatios = {
+                    'Do': { ratio: 1.0, cents: 0 },
+                    'Re♭': { ratio: 16/15, cents: 112 },
+                    'Re': { ratio: 9/8, cents: 204 },
+                    'Mi♭': { ratio: 6/5, cents: 316 },
+                    'Mi': { ratio: 5/4, cents: 386 },
+                    'Fa': { ratio: 4/3, cents: 498 },
+                    'Fi#': { ratio: 45/32, cents: 590 },
+                    'Sol': { ratio: 3/2, cents: 702 },
+                    'La♭': { ratio: 8/5, cents: 814 },
+                    'La': { ratio: 5/3, cents: 884 },
+                    'Ti♭': { ratio: 16/9, cents: 996 },
+                    'Ti': { ratio: 15/8, cents: 1088 },
+                    'Do\'': { ratio: 2/1, cents: 1200 }
+                };
+                
+                this.setupCanvas();
+                this.setupTooltips();
+                logMessage('🎼 Audio Analyzer mit verbesserten Berechnungen bereit', 'success');
+            }
+            
+            setupCanvas() {
+                const rect = this.canvas.getBoundingClientRect();
+                this.canvas.width = rect.width;
+                this.canvas.height = rect.height;
+            }
+            
+            setupTooltips() {
+                const tooltip = document.getElementById('frequency-tooltip');
+                
+                this.canvas.addEventListener('mousemove', (e) => {
+                    const rect = this.canvas.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const frequency = this.getFrequencyFromX(x);
+                    
+                    if (frequency >= 50 && frequency <= 22000) {
+                        let amplitude = 0;
+                        let amplitudeDb = -Infinity;
+                        let peakInfo = '';
+                        let intervalInfo = '';
+                        
+                        const currentData = this.lastSignal || audioEngine.getAudioData();
+                        if (currentData && currentData.freqData) {
+                            const bin = Math.round(frequency / (currentData.sampleRate / (2 * currentData.freqData.length)));
+                            if (bin >= 0 && bin < currentData.freqData.length) {
+                                amplitude = currentData.freqData[bin] / 255;
+                                amplitudeDb = amplitude > 0 ? 20 * Math.log10(amplitude) : -Infinity;
+                            }
+                        }
+                        
+                        // Check if this frequency matches any detected peaks
+                        if (this.lastResults && this.lastResults.peaks) {
+                            const nearbyPeak = this.lastResults.peaks.find(peak => 
+                                Math.abs(peak.frequency - frequency) < 20
+                            );
+                            if (nearbyPeak) {
+                                const relativeAmp = nearbyPeak.relativeAmplitude ? ` (${(nearbyPeak.relativeAmplitude * 100).toFixed(1)}% rel.)` : '';
+                                peakInfo = `<br><strong>🎯 Peak: ${nearbyPeak.frequency.toFixed(1)}Hz</strong>${relativeAmp}`;
+                            }
+                        }
+                        
+                        // Check if this frequency matches T0 intervals
+                        if (this.lastResults && this.lastResults.t0Analysis && this.lastResults.t0Analysis.success) {
+                            const nearbyInterval = this.lastResults.t0Analysis.intervals.find(interval => 
+                                Math.abs(interval.frequency - frequency) < 20
+                            );
+                            if (nearbyInterval) {
+                                const rationalStr = nearbyInterval.reducedRational.numerator + '/' + nearbyInterval.reducedRational.denominator;
+                                const complianceIcon = nearbyInterval.isT0Compliant ? '✅' : '❌';
+                                intervalInfo = `<br><strong>🎼 T0-Intervall ${complianceIcon}</strong><br>` +
+                                             `Rational: ${rationalStr}<br>` +
+                                             `Euler°: ${nearbyInterval.eulerGradus} | ξ: ${nearbyInterval.xiDeviation.toFixed(1)}¢`;
+                            }
+                        }
+                        
+                        // Check Do-Re-Mi interval lines
+                        if (this.analysisMethod === 't0' && this.showIntervalLines) {
+                            const fundamentalFreq = audioEngine.rootFrequency || 442;
+                            const nearbyInterval = Object.entries(this.intervalRatios).find(([name, intervalData]) => {
+                                const intervalFreq = fundamentalFreq * intervalData.ratio;
+                                return Math.abs(intervalFreq - frequency) < 15;
+                            });
+                            
+                            if (nearbyInterval) {
+                                const [name, intervalData] = nearbyInterval;
+                                const rationalStr = this.formatRational(intervalData.ratio);
+                                intervalInfo = `<br><strong>🎵 ${name}</strong><br>Ratio: ${rationalStr} (${(fundamentalFreq * intervalData.ratio).toFixed(1)}Hz)<br>Cents: ${intervalData.cents}¢`;
+                            }
+                        }
+                        
+                        // Calculate musical note
+                        const note = this.frequencyToNote(frequency);
+                        
+                        tooltip.innerHTML = `
+                            <strong>Frequency Info</strong><br>
+                            Frequency: ${frequency.toFixed(1)} Hz<br>
+                            Note: ${note}<br>
+                            Amplitude: ${(amplitude * 100).toFixed(1)}%<br>
+                            dB: ${amplitudeDb !== -Infinity ? amplitudeDb.toFixed(1) : '-∞'} dB
+                            ${peakInfo}
+                            ${intervalInfo}
+                        `;
+                        
+tooltip.style.left = (e.clientX - 5) + 'px';
+tooltip.style.top = (e.clientY - 30) + 'px';
+                        tooltip.style.display = 'block';
+                    } else {
+                        tooltip.style.display = 'none';
+                    }
+                });
+                
+                this.canvas.addEventListener('mouseleave', () => {
+                    tooltip.style.display = 'none';
+                });
+            }
+            
+            frequencyToNote(frequency) {
+                const A4 = 440;
+                const C0 = A4 * Math.pow(2, -4.75);
+                
+                if (frequency <= 0) return '-';
+                
+                const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+                const h = Math.round(12 * Math.log2(frequency / C0));
+                const octave = Math.floor(h / 12);
+                const n = h % 12;
+                
+                return noteNames[n] + octave;
+            }
+            
+            analyzeSignal(signalData) {
+                this.lastSignal = signalData;
+                
+                logMessage('📊 Analysiere Signal mit verbesserten Algorithmen: ' + signalData.bufferSize + ' Samples', 'info');
+                
+                const peaks = this.extractPeaksFromSignal(signalData);
+                const results = {
+                    method: this.analysisMethod === 't0' ? 'T0-Akkord-Analyse (Verbessert)' : 'Standard FFT (Verbessert)',
+                    timestamp: Date.now(),
+                    bufferSize: signalData.bufferSize,
+                    sampleRate: signalData.sampleRate,
+                    peaks: peaks,
+                    totalEnergy: this.calculateTotalEnergy(signalData),
+                    peakCount: peaks.length,
+                    octaveReduced: this.octaveReduction,
+                    spectralCentroid: this.calculateSpectralCentroid(signalData),
+                    fundamental: peaks.length > 0 ? peaks[0] : null
+                };
+                
+                if (this.analysisMethod === 't0') {
+                    results.t0Analysis = this.simulateT0Analysis(peaks);
+                }
+                
+                this.lastResults = results;
+                this.displayResults(results, signalData);
+                
+                logMessage('✅ Verbesserte Analyse abgeschlossen: ' + peaks.length + ' Peaks erkannt', 'success');
+                return results;
+            }
+            
+            extractPeaksFromSignal(signalData) {
+                const peaks = [];
+                const freqData = signalData.freqData;
+                const sampleRate = signalData.sampleRate;
+                const binSize = sampleRate / (2 * freqData.length);
+                
+                // Verbesserte Amplitude-Berechnung
+                const maxAmplitude = Math.max(...freqData) / 255;
+                const baseThreshold = Math.max(0.02, maxAmplitude * 0.08);
+                
+                for (let i = 2; i < freqData.length - 2; i++) {
+                    const amplitude = freqData[i] / 255;
+                    
+                    if (amplitude > baseThreshold && 
+                        this.isSignificantPeak(freqData, i, 2) && 
+                        amplitude > freqData[i-2]/255 && 
+                        amplitude > freqData[i+2]/255) {
+                        
+                        let frequency = i * binSize;
+                        let originalFreq = frequency;
+                        
+                        if (this.octaveReduction) {
+                            const fundamentalFreq = audioEngine.rootFrequency || 442;
+                            const baseOctaveMin = fundamentalFreq / 2;
+                            const baseOctaveMax = fundamentalFreq * 2;
+                            
+                            while (frequency > baseOctaveMax) {
+                                frequency /= 2;
+                            }
+                            while (frequency < baseOctaveMin) {
+                                frequency *= 2;
+                            }
+                        }
+                        
+                        if (frequency >= 50 && frequency <= 4000) {
+                            if (this.octaveReduction) {
+                                const existingPeak = peaks.find(p => Math.abs(p.frequency - frequency) < 3);
+                                if (existingPeak) {
+                                    existingPeak.amplitude = Math.min(1.0, existingPeak.amplitude + amplitude * 0.5);
+                                    existingPeak.originalFrequencies = existingPeak.originalFrequencies || [existingPeak.originalFreq];
+                                    existingPeak.originalFrequencies.push(originalFreq);
+                                } else {
+                                    peaks.push({
+                                        frequency: frequency,
+                                        amplitude: amplitude,
+                                        bin: i,
+                                        originalFreq: originalFreq,
+                                        isOctaveReduced: frequency !== originalFreq,
+                                        originalFrequencies: frequency !== originalFreq ? [originalFreq] : undefined,
+                                        relativeAmplitude: amplitude / maxAmplitude
+                                    });
+                                }
+                            } else {
+                                peaks.push({
+                                    frequency: frequency,
+                                    amplitude: amplitude,
+                                    bin: i,
+                                    originalFreq: originalFreq,
+                                    isOctaveReduced: false,
+                                    relativeAmplitude: amplitude / maxAmplitude
+                                });
+                            }
+                        }
+                    }
+                }
+                
+                peaks.sort((a, b) => b.amplitude - a.amplitude);
+                return peaks.slice(0, 10);
+            }
+            
+            isSignificantPeak(freqData, index, windowSize = 2) {
+                const centerAmp = freqData[index];
+                
+                for (let i = -windowSize; i <= windowSize; i++) {
+                    if (i === 0) continue;
+                    const checkIndex = index + i;
+                    if (checkIndex >= 0 && checkIndex < freqData.length) {
+                        if (freqData[checkIndex] >= centerAmp) {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+            
+            calculateSpectralCentroid(signalData) {
+                const freqData = signalData.freqData;
+                const sampleRate = signalData.sampleRate;
+                const binSize = sampleRate / (2 * freqData.length);
+                
+                let weightedSum = 0;
+                let magnitudeSum = 0;
+                
+                for (let i = 1; i < freqData.length; i++) {
+                    const magnitude = freqData[i] / 255;
+                    const frequency = i * binSize;
+                    
+                    weightedSum += frequency * magnitude;
+                    magnitudeSum += magnitude;
+                }
+                
+                return magnitudeSum > 0 ? weightedSum / magnitudeSum : 0;
+            }
+            
+            calculateTotalEnergy(signalData) {
+                let energy = 0;
+                for (let i = 0; i < signalData.freqData.length; i++) {
+                    const val = signalData.freqData[i] / 255;
+                    energy += val * val;
+                }
+                return energy;
+            }
+            
+            simulateT0Analysis(peaks) {
+                if (peaks.length < 2) {
+                    return {
+                        success: false,
+                        error: 'Zu wenige Peaks für T0-Analyse'
+                    };
+                }
+                
+                const fundamental = peaks[0];
+                const intervals = [];
+                let chordName = 'Unbekannt';
+                let confidence = 0.5;
+                
+                for (const peak of peaks) {
+                    const ratio = peak.frequency / fundamental.frequency;
+                    intervals.push({
+                        frequency: peak.frequency,
+                        amplitude: peak.amplitude,
+                        relativeAmplitude: peak.relativeAmplitude || 0,
+                        ratio: ratio,
+                        reducedRational: this.approximateRational(ratio),
+                        eulerGradus: this.calculateEulerGradus(ratio),
+                        xiDeviation: this.calculateXiDeviation(ratio),
+                        isT0Compliant: this.isRatioT0Compliant(ratio),
+                        cents: 1200 * Math.log2(ratio)
+                    });
+                }
+                
+                if (peaks.length >= 3) {
+                    const ratios = peaks.slice(0, 3).map(p => p.frequency / fundamental.frequency).sort();
+                    
+                    if (this.isCloseToRatio(ratios[1], 5/4) && this.isCloseToRatio(ratios[2], 3/2)) {
+                        chordName = 'Dur-Dreiklang';
+                        confidence = 0.9;
+                    } else if (this.isCloseToRatio(ratios[1], 6/5) && this.isCloseToRatio(ratios[2], 3/2)) {
+                        chordName = 'Moll-Dreiklang';
+                        confidence = 0.85;
+                    }
+                }
+                
+                return {
+                    success: true,
+                    fundamental: {
+                        frequency: fundamental.frequency,
+                        confidence: 0.8,
+                        method: 'highest_amplitude_improved'
+                    },
+                    intervals: intervals,
+                    intervalStatistics: {
+                        total: intervals.length,
+                        t0Compliant: intervals.filter(i => i.isT0Compliant).length
+                    },
+                    recognizedChord: {
+                        name: chordName,
+                        confidence: confidence,
+                        type: chordName.toLowerCase().replace('-', '_')
+                    },
+                    quality: {
+                        grade: confidence > 0.8 ? 'A' : confidence > 0.6 ? 'B' : 'C',
+                        score: confidence * 100,
+                        statistics: {
+                            averageEulerGradus: intervals.reduce((sum, i) => sum + i.eulerGradus, 0) / intervals.length,
+                            averageXiDeviation: intervals.reduce((sum, i) => sum + i.xiDeviation, 0) / intervals.length
+                        }
+                    }
+                };
+            }
+            
+            approximateRational(decimal) {
+                const commonRatios = [
+                    {decimal: 1, num: 1, den: 1},
+                    {decimal: 9/8, num: 9, den: 8},
+                    {decimal: 6/5, num: 6, den: 5},
+                    {decimal: 5/4, num: 5, den: 4},
+                    {decimal: 4/3, num: 4, den: 3},
+                    {decimal: 3/2, num: 3, den: 2},
+                    {decimal: 8/5, num: 8, den: 5},
+                    {decimal: 5/3, num: 5, den: 3},
+                    {decimal: 9/5, num: 9, den: 5},
+                    {decimal: 15/8, num: 15, den: 8}
+                ];
+                
+                let closest = commonRatios[0];
+                let minDiff = Math.abs(decimal - closest.decimal);
+                
+                for (const ratio of commonRatios) {
+                    const diff = Math.abs(decimal - ratio.decimal);
+                    if (diff < minDiff) {
+                        minDiff = diff;
+                        closest = ratio;
+                    }
+                }
+                
+                return {numerator: closest.num, denominator: closest.den};
+            }
+            
+            calculateEulerGradus(ratio) {
+                const rational = this.approximateRational(ratio);
+                return Math.abs(rational.numerator) + Math.abs(rational.denominator) - 1;
+            }
+            
+            calculateXiDeviation(ratio) {
+                const perfectRatios = [1, 16/15, 9/8, 6/5, 5/4, 4/3, 3/2, 8/5, 5/3, 15/8];
+                let minDeviation = Infinity;
+                
+                for (const perfect of perfectRatios) {
+                    const deviation = Math.abs(1200 * Math.log2(ratio / perfect));
+                    minDeviation = Math.min(minDeviation, deviation);
+                }
+                
+                return minDeviation;
+            }
+            
+            isRatioT0Compliant(ratio) {
+                const perfectRatios = [1, 5/4, 4/3, 3/2, 5/3, 15/8, 9/8, 6/5];
+                return perfectRatios.some(perfect => Math.abs(1200 * Math.log2(ratio / perfect)) < 25);
+            }
+            
+            isCloseToRatio(actual, target, tolerance = 0.05) {
+                return Math.abs(actual - target) < tolerance;
+            }
+            
+            displayResults(results, signalData) {
+                this.lastResults = results;
+                this.lastSignal = signalData;
+                updateAnalysisDisplay(results);
+                
+                this.drawSpectrum(signalData, results);
+                
+                if (results.t0Analysis && results.t0Analysis.success) {
+                    const t0 = results.t0Analysis;
+                    logMessage(`🎼 T0-Analyse (Verbessert): ${t0.recognizedChord.name} (${t0.quality.grade}-Qualität)`, 'success');
+                }
+            }
+            
+            drawSpectrum(signalData, results) {
+                this.ctx.fillStyle = '#000000';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                const freqData = signalData.freqData;
+                const sampleRate = signalData.sampleRate;
+                const binWidth = sampleRate / (2 * freqData.length);
+                
+                const maxAmplitude = Math.max(...freqData) / 255;
+                const normalizationFactor = maxAmplitude > 0.1 ? 0.9 / maxAmplitude : 9.0;
+                
+                // Zeichne Spektrum-Balken
+                for (let i = 1; i < freqData.length; i++) {
+                    const frequency = i * binWidth;
+                    const rawAmplitude = freqData[i] / 255;
+                    const amplitude = rawAmplitude * normalizationFactor;
+                    
+                    const preset = this.zoomPresets[this.zoomMode];
+                    const range = this.getZoomRange(preset);
+                    
+                    if (amplitude > 0.01 && frequency >= range.min && frequency <= range.max) {
+                        const x = this.getFrequencyX(frequency);
+                        const barHeight = Math.min(amplitude, 1.0) * this.canvas.height * 0.85;
+                        
+                        if (x >= 0 && x < this.canvas.width && barHeight > 1) {
+                            const hue = (Math.log2(frequency / 440) % 1 + 1) % 1 * 360;
+                            const saturation = 65 + amplitude * 25;
+                            const lightness = 30 + amplitude * 50;
+                            const alpha = Math.min(1, amplitude * 1.1 + 0.2);
+                            const color = `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`;
+                            
+                            this.ctx.fillStyle = color;
+                            this.ctx.fillRect(x, this.canvas.height - barHeight, 2, barHeight);
+                        }
+                    }
+                }
+                
+                // Zeichne Do-Re-Mi Intervall-Linien
+                if (this.analysisMethod === 't0' && this.showIntervalLines) {
+                    this.drawIntervalLines();
+                }
+                
+                // Zeichne erkannte Peaks mit korrigierter Farbcodierung
+                if (results && results.peaks) {
+                    results.peaks.forEach(peak => {
+                        const x = this.getFrequencyX(peak.frequency);
+                        const color = peak.isOctaveReduced ? '#e67e22' : '#3498db';
+                        const amplitudeHeight = (peak.amplitude || 0) * 30;
+                        this.drawFrequencyLine(x, peak.frequency, color, amplitudeHeight);
+                    });
+                }
+
+                // Zeichne T0-Intervalle mit korrigierter Grundton-Markierung
+                if (results && results.t0Analysis && results.t0Analysis.success) {
+                    const t0 = results.t0Analysis;
+                    
+                    // Zeichne T0-Intervalle mit T0-Konformitäts-Farbcodierung
+                    t0.intervals.forEach((interval) => {
+                        const x = this.getFrequencyX(interval.frequency);
+                        const color = interval.isT0Compliant ? '#2ecc71' : '#e74c3c';
+                        //const noteName = this.getNoteName(interval.frequency, t0.fundamental.frequency);
+                        const noteName = this.getNoteName(interval.frequency, audioEngine.rootFrequency || 442);
+                        this.drawFrequencyLine(x, interval.frequency, color, interval.amplitude * 30, noteName);
+                    });
+                    
+                    // Zeichne Grundton-Linie mit spezieller Markierung
+                    const fundamentalX = this.getFrequencyX(t0.fundamental.frequency);
+                    this.drawFundamentalLine(fundamentalX, t0.fundamental.frequency);
+                }
+                
+                this.drawGrid();
+                this.drawLabels();
+            }
+
+            // Grundton-Notennamen-Funktion - KORRIGIERT für Solmisation
+            getNoteName(frequency, fundamental) {
+                const ratio = frequency / fundamental;
+                const cents = 1200 * Math.log2(ratio);
+                
+                // Reduziere auf Oktave (0-1200 Cents)
+                const octaveCents = ((cents % 1200) + 1200) % 1200;
+                const octave = Math.floor(cents / 1200);
+                
+                // Solmisation-Zuordnung basierend auf Cents
+                const solmisationMap = [
+                    { cents: 0, name: 'Do' },
+                    { cents: 112, name: 'Re♭' },
+                    { cents: 204, name: 'Re' },
+                    { cents: 316, name: 'Mi♭' },
+                    { cents: 386, name: 'Mi' },
+                    { cents: 498, name: 'Fa' },
+                    { cents: 590, name: 'Fi#' },
+                    { cents: 702, name: 'Sol' },
+                    { cents: 814, name: 'La♭' },
+                    { cents: 884, name: 'La' },
+                    { cents: 996, name: 'Ti♭' },
+                    { cents: 1088, name: 'Ti' }
+                ];
+                
+                // Finde nächste Solmisation
+                let closestSolmisation = solmisationMap[0];
+                let minDiff = Math.abs(octaveCents - 0);
+                
+                for (const sol of solmisationMap) {
+                    const diff = Math.abs(octaveCents - sol.cents);
+                    if (diff < minDiff) {
+                        minDiff = diff;
+                        closestSolmisation = sol;
+                    }
+                }
+                
+                // Oktav-Anzeige
+                let octaveIndicator = '';
+                if (octave > 0) {
+                    octaveIndicator = `+${octave}`;
+                } else if (octave < 0) {
+                    octaveIndicator = `${octave}`;
+                }
+                
+                return closestSolmisation.name + octaveIndicator;
+            }
+
+            // Grundton-Linie zeichnen
+            drawFundamentalLine(x, frequency) {
+                // Grundton-Linie
+                this.ctx.strokeStyle = '#f1c40f';
+                this.ctx.lineWidth = 3;
+                this.ctx.setLineDash([10, 5]);
+                this.ctx.globalAlpha = 0.9;
+                
+                this.ctx.beginPath();
+                this.ctx.moveTo(x, 0);
+                this.ctx.lineTo(x, this.canvas.height - 20);
+                this.ctx.stroke();
+                
+                // Grundton-Label
+                this.ctx.setLineDash([]);
+                this.ctx.fillStyle = '#f1c40f';
+                this.ctx.font = 'bold 12px Arial';
+                this.ctx.textAlign = 'center';
+                this.ctx.fillText('♪ ' + frequency.toFixed(1) + 'Hz', x, 50);
+                this.ctx.fillText('GRUNDTON', x, 65);
+                
+                this.ctx.globalAlpha = 1.0;
+            }
+            
+            // Hilfsfunktion für Rational-Formatierung
+            formatRational(decimal) {
+                const commonRatios = [
+                    {decimal: 1, num: 1, den: 1},
+                    {decimal: 16/15, num: 16, den: 15},
+                    {decimal: 9/8, num: 9, den: 8},
+                    {decimal: 6/5, num: 6, den: 5},
+                    {decimal: 5/4, num: 5, den: 4},
+                    {decimal: 4/3, num: 4, den: 3},
+                    {decimal: 45/32, num: 45, den: 32},
+                    {decimal: 3/2, num: 3, den: 2},
+                    {decimal: 8/5, num: 8, den: 5},
+                    {decimal: 5/3, num: 5, den: 3},
+                    {decimal: 16/9, num: 16, den: 9},
+                    {decimal: 15/8, num: 15, den: 8},
+                    {decimal: 2, num: 2, den: 1}
+                ];
+                
+                const closest = commonRatios.find(r => Math.abs(r.decimal - decimal) < 0.001);
+                return closest ? `${closest.num}/${closest.den}` : decimal.toFixed(3);
+            }
+            
+            drawIntervalLines() {
+                const fundamentalFreq = audioEngine.rootFrequency || 442;
+                
+                this.ctx.strokeStyle = 'rgba(241, 196, 15, 0.4)';
+                this.ctx.lineWidth = 1;
+                this.ctx.setLineDash([3, 3]);
+                this.ctx.font = 'bold 11px Arial';
+                this.ctx.textAlign = 'center';
+                
+                Object.entries(this.intervalRatios).forEach(([name, intervalData]) => {
+                    const frequency = fundamentalFreq * intervalData.ratio;
+                    
+                    if (frequency >= 50 && frequency <= 22000) {
+                        const x = this.getFrequencyX(frequency);
+                        
+                        if (x >= 20 && x <= this.canvas.width - 20) {
+                            this.ctx.beginPath();
+                            this.ctx.moveTo(x, 0);
+                            this.ctx.lineTo(x, this.canvas.height - 30);
+                            this.ctx.stroke();
+                            
+                            // Solmisation-Name (Do, Re, Mi...)
+                            this.ctx.fillStyle = 'rgba(241, 196, 15, 0.9)';
+                            this.ctx.fillText(name, x, this.canvas.height - 15);
+                            
+                            // Frequenz darunter
+                            this.ctx.fillStyle = 'rgba(241, 196, 15, 0.7)';
+                            this.ctx.font = '9px Arial';
+                            this.ctx.fillText(frequency.toFixed(0) + 'Hz', x, this.canvas.height - 3);
+                            this.ctx.font = 'bold 11px Arial';
+                        }
+                    }
+                });
+                
+                this.ctx.setLineDash([]);
+            }
+            
+            drawFrequencyLine(x, frequency, color, amplitudeHeight = 0, noteLabel = null) {
+                // Vertikale Linie
+                this.ctx.strokeStyle = color;
+                this.ctx.lineWidth = 2;
+                this.ctx.setLineDash([5, 5]);
+                this.ctx.globalAlpha = 0.8;
+                
+                this.ctx.beginPath();
+                this.ctx.moveTo(x, 0);
+                this.ctx.lineTo(x, this.canvas.height - 20);
+                this.ctx.stroke();
+                
+                // Frequenz-Label
+                this.ctx.setLineDash([]);
+                this.ctx.globalAlpha = 1.0;
+                this.ctx.fillStyle = color;
+                this.ctx.font = 'bold 10px Arial';
+                this.ctx.textAlign = 'center';
+                this.ctx.fillText(frequency.toFixed(0) + 'Hz', x, 15);
+                
+                // Noten-Label
+                if (noteLabel) {
+                    this.ctx.fillStyle = '#f1c40f';
+                    this.ctx.font = 'bold 12px Arial';
+                    this.ctx.fillText(noteLabel, x, 30);
+                }
+                
+                // Amplituden-Indikator
+                if (amplitudeHeight > 0) {
+                    const barHeight = Math.min(amplitudeHeight, 40);
+                    this.ctx.fillStyle = color;
+                    this.ctx.globalAlpha = 0.7;
+                    this.ctx.fillRect(x - 3, this.canvas.height - 20, 6, -barHeight);
+                    
+                    if (barHeight > 15) {
+                        this.ctx.globalAlpha = 1.0;
+                        this.ctx.fillStyle = '#ffffff';
+                        this.ctx.font = 'bold 8px Arial';
+                        this.ctx.fillText(Math.round(amplitudeHeight) + '%', x, this.canvas.height - 25);
+                    }
+                }
+                
+                this.ctx.globalAlpha = 1.0;
+            }
+            
+            // Dynamische Zoom-Bereichs-Berechnung
+            getZoomRange(preset) {
+                if (preset.center === null) {
+                    // Statische Bereiche (wie vorher)
+                    return { min: preset.min, max: preset.max };
+                }
+                
+                let centerFreq = audioEngine.rootFrequency || 442;
+                
+                if (preset.center === 'chord') {
+                    // Zentrum basierend auf aktuell gespieltem Akkord
+                    if (audioEngine.currentChord && audioEngine.chordRatios[audioEngine.currentChord]) {
+                        const chord = audioEngine.chordRatios[audioEngine.currentChord];
+                        const ratios = chord[audioEngine.tuningSystem];
+                        // Mittlere Frequenz des Akkords als Zentrum
+                        const frequencies = ratios.map(r => centerFreq * r);
+                        centerFreq = frequencies.reduce((sum, f) => sum + f, 0) / frequencies.length;
+                    }
+                } else if (preset.center === 'root') {
+                    // Grundton als Zentrum
+                    centerFreq = audioEngine.rootFrequency || 442;
+                }
+                
+                const halfSpan = preset.span / 2;
+                return {
+                    min: Math.max(50, centerFreq - halfSpan),
+                    max: Math.min(22000, centerFreq + halfSpan)
+                };
+            }
+            
+            getFrequencyFromX(x) {
+                const preset = this.zoomPresets[this.zoomMode];
+                const range = this.getZoomRange(preset);
+                
+                if (this.scale === 'log') {
+                    const logMin = Math.log10(range.min);
+                    const logMax = Math.log10(range.max);
+                    const logFreq = logMin + (x / this.canvas.width) * (logMax - logMin);
+                    return Math.pow(10, logFreq);
+                } else {
+                    return range.min + (x / this.canvas.width) * (range.max - range.min);
+                }
+            }
+            
+            getFrequencyX(frequency) {
+                const preset = this.zoomPresets[this.zoomMode];
+                const range = this.getZoomRange(preset);
+                
+                if (this.scale === 'log') {
+                    const logMin = Math.log10(range.min);
+                    const logMax = Math.log10(range.max);
+                    const logFreq = Math.log10(frequency);
+                    return ((logFreq - logMin) / (logMax - logMin)) * this.canvas.width;
+                } else {
+                    return ((frequency - range.min) / (range.max - range.min)) * this.canvas.width;
+                }
+            }
+            
+            drawGrid() {
+                this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+                this.ctx.lineWidth = 1;
+                
+                for (let i = 1; i < 4; i++) {
+                    const y = (this.canvas.height * i) / 4;
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(0, y);
+                    this.ctx.lineTo(this.canvas.width, y);
+                    this.ctx.stroke();
+                }
+            }
+            
+            drawLabels() {
+                this.ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+                this.ctx.font = '10px Arial';
+                this.ctx.textAlign = 'center';
+                
+                const frequencies = [100, 200, 500, 1000, 2000, 5000, 10000, 20000].map(freq => ({
+                    freq: freq,
+                    label: freq >= 1000 ? (freq/1000) + 'k' : freq.toString()
+                }));
+                
+                frequencies.forEach(({freq, label}) => {
+                    const x = this.getFrequencyX(freq);
+                    if (x > 20 && x < this.canvas.width - 20) {
+                        this.ctx.fillText(label, x, this.canvas.height - 5);
+                    }
+                });
+            }
+            
+            drawLiveSpectrum(audioData) {
+                if (!audioData) return;
+                
+                const preset = this.zoomPresets[this.zoomMode];
+                const range = this.getZoomRange(preset);
+                
+                this.ctx.fillStyle = '#000000';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                const freqData = audioData.freqData;
+                const sampleRate = audioData.sampleRate;
+                const binWidth = sampleRate / (2 * freqData.length);
+                
+                const maxAmplitude = Math.max(...freqData) / 255;
+                const normalizationFactor = maxAmplitude > 0.1 ? 0.9 / maxAmplitude : 9.0;
+                
+                for (let i = 1; i < freqData.length; i++) {
+                    const frequency = i * binWidth;
+                    const rawAmplitude = freqData[i] / 255;
+                    const amplitude = rawAmplitude * normalizationFactor;
+                    
+                    if (amplitude > 0.01 && frequency >= range.min && frequency <= range.max) {
+                        const x = this.getFrequencyX(frequency);
+                        const barHeight = Math.min(amplitude, 1.0) * this.canvas.height * 0.85;
+                        
+                        if (x >= 0 && x < this.canvas.width && barHeight > 1) {
+                            const hue = (Math.log2(frequency / 440) % 1 + 1) % 1 * 360;
+                            const saturation = 65 + amplitude * 25;
+                            const lightness = 30 + amplitude * 50;
+                            const alpha = Math.min(1, amplitude * 1.1 + 0.2);
+                            const color = `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`;
+                            
+                            this.ctx.fillStyle = color;
+                            this.ctx.fillRect(x, this.canvas.height - barHeight, 2, barHeight);
+                        }
+                    }
+                }
+                
+                if (this.analysisMethod === 't0' && this.showIntervalLines) {
+                    this.drawIntervalLines();
+                }
+                
+                this.drawGrid();
+                this.drawLabels();
+            }
+        }
+
+        // === DISPLAY UPDATE FUNCTIONS ===
+        function updateBeatVisualization() {
+            const viz = document.getElementById('beatVisualization');
+            
+            if (audioEngine.baseBeatFrequency === 0 && 
+                audioEngine.upperBeatFrequency === 0 && 
+                audioEngine.lowerBeatFrequency === 0 &&
+                audioEngine.complexBeatFrequency === 0) {
+                viz.innerHTML = '🔇 Keine Schwebung aktiv';
+                viz.style.color = 'rgba(255,255,255,0.6)';
+                return;
+            }
+            
+            let description = '';
+            const parts = [];
+            
+            if (audioEngine.baseBeatFrequency > 0) {
+                parts.push(`🌊 Basis: ±${audioEngine.baseBeatFrequency.toFixed(1)}Hz`);
+            }
+            
+            if (audioEngine.upperBeatFrequency > 0) {
+                const balanceFactor = audioEngine.beatBalance / 100;
+                const upperWeight = (1 + balanceFactor) / 2;
+                const effectiveUpper = audioEngine.upperBeatFrequency * upperWeight;
+                parts.push(`⬆️ Ober: +${effectiveUpper.toFixed(1)}Hz (${(upperWeight * 100).toFixed(0)}%)`);
+            }
+            
+            if (audioEngine.lowerBeatFrequency > 0) {
+                const balanceFactor = audioEngine.beatBalance / 100;
+                const lowerWeight = (1 - balanceFactor) / 2;
+                const effectiveLower = audioEngine.lowerBeatFrequency * lowerWeight;
+                parts.push(`⬇️ Unter: -${effectiveLower.toFixed(1)}Hz (${(lowerWeight * 100).toFixed(0)}%)`);
+            }
+            
+            if (audioEngine.complexBeatFrequency > 0) {
+                parts.push(`🌀 Komplex: ±${audioEngine.complexBeatFrequency.toFixed(1)}Hz (Multi-Harmonisch)`);
+            }
+            
+            description = parts.join('<br>');
+            
+            if (audioEngine.beatBalance !== 0) {
+                const balanceDesc = audioEngine.beatBalance > 0 ? 
+                    `⚖️ Balance: +${audioEngine.beatBalance}% (Ober-lastig)` : 
+                    `⚖️ Balance: ${audioEngine.beatBalance}% (Unter-lastig)`;
+                description += `<br><span style="color: #e67e22;">${balanceDesc}</span>`;
+            }
+            
+            viz.innerHTML = description;
+            viz.style.color = '#f1c40f';
+        }
+        
+        function updateAnalysisDisplay(results) {
+            document.getElementById('currentMethod').textContent = results.method || 'T0-Akkord-Analyse (Verbessert)';
+            document.getElementById('peakCount').textContent = results.peaks ? results.peaks.length : '0';
+            document.getElementById('fundamentalFreq').textContent = results.fundamental ? 
+                results.fundamental.frequency.toFixed(1) + ' Hz' : '-';
+            document.getElementById('spectralCentroid').textContent = results.spectralCentroid ? 
+                results.spectralCentroid.toFixed(1) + ' Hz' : '-';
+            document.getElementById('energyLevel').textContent = results.totalEnergy ? results.totalEnergy.toFixed(1) : '-';
+            document.getElementById('bufferSize').textContent = results.bufferSize ? results.bufferSize.toString() : '-';
+            
+            if (results.t0Analysis && results.t0Analysis.success) {
+                const t0 = results.t0Analysis;
+                
+                document.getElementById('t0DetectedChord').textContent = t0.recognizedChord.name;
+                document.getElementById('t0Quality').textContent = t0.quality.grade + ' (' + t0.quality.score.toFixed(1) + '%)';
+                document.getElementById('t0Fundamental').textContent = 
+                    (t0.fundamental && t0.fundamental.frequency ? t0.fundamental.frequency.toFixed(1) : '?') + 'Hz';
+                document.getElementById('t0CompliantIntervals').textContent = 
+                    t0.intervalStatistics.t0Compliant + '/' + t0.intervalStatistics.total;
+                document.getElementById('avgEulerGradus').textContent = 
+                    t0.quality.statistics.averageEulerGradus.toFixed(1) + '°';
+                document.getElementById('avgXiDeviation').textContent = 
+                    t0.quality.statistics.averageXiDeviation.toFixed(1) + '¢';
+                
+            updateT0PeakDisplay(t0);
+            } else {
+                document.getElementById('t0DetectedChord').textContent = '-';
+                document.getElementById('t0Quality').textContent = '-';
+                document.getElementById('t0Fundamental').textContent = '-';
+                document.getElementById('t0CompliantIntervals').textContent = '-';
+                document.getElementById('avgEulerGradus').textContent = '-';
+                document.getElementById('avgXiDeviation').textContent = '-';
+                
+                // Show appropriate display based on analysis method
+                if (this.analysisMethod === 't0') {
+                    updateT0PeakDisplay(null); // Show "Keine T0-Intervalle erkannt"
+                } else {
+                    updateStandardPeakDisplay(results.peaks);
+                }
+            }
+//----
+            
+            const score = Math.min(1, results.peakCount / 10) * 0.5 + 
+                         Math.min(1, results.totalEnergy / 100) * 0.5;
+            const grade = score > 0.8 ? 'A' : score > 0.6 ? 'B' : score > 0.4 ? 'C' : 'D';
+            
+            document.getElementById('analysisGrade').textContent = grade;
+            document.getElementById('analysisScore').textContent = (score * 100).toFixed(1) + '% (' + results.method + ')';
+            
+            const gradeElement = document.getElementById('analysisGrade');
+            gradeElement.className = '';
+            if (score > 0.7) gradeElement.classList.add('grade-a');
+            else if (score > 0.5) gradeElement.classList.add('grade-b');
+            else gradeElement.classList.add('grade-c');
+        }
+//---        
+function updateT0PeakDisplay(t0Analysis) {
+            const peakDisplay = document.getElementById('detectedPeaks');
+            
+            if (t0Analysis && t0Analysis.intervals && t0Analysis.intervals.length > 0) {
+                let peakText = '';
+                
+                peakText += '<div style="margin-top: 12px; font-weight: bold; color: #f1c40f; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 8px;">🎼 T0-INTERVALLE (Verbessert)</div>';
+                
+                t0Analysis.intervals.forEach((interval, index) => {
+                    const rationalStr = interval.reducedRational.numerator + '/' + interval.reducedRational.denominator;
+                    const t0Status = interval.isT0Compliant ? '✅' : '❌';
+                    const relativeAmplitude = interval.relativeAmplitude ? ` (${(interval.relativeAmplitude * 100).toFixed(1)}% rel.)` : '';
+                    
+                    peakText += '<div style="margin-bottom: 6px; padding: 4px; background: rgba(0,0,0,0.3); border-radius: 3px;">' +
+                        '<div style="display: flex; justify-content: space-between;">' +
+                            '<strong>' + interval.frequency.toFixed(1) + ' Hz</strong>' +
+                            '<span>' + t0Status + '</span>' +
+                        '</div>' +
+                        '<div style="font-size: 0.7em; color: rgba(255,255,255,0.8);">' +
+                            'Rational: ' + rationalStr + ' | Euler°: ' + interval.eulerGradus + ' | ξ: ' + interval.xiDeviation.toFixed(1) + '¢' +
+                        '</div>' +
+                        '<div style="font-size: 0.7em; color: rgba(255,255,255,0.6);">' +
+                            'Amplitude: ' + (interval.amplitude * 100).toFixed(1) + '%' + relativeAmplitude + ' | Cents: ' + interval.cents.toFixed(0) + '¢' +
+                        '</div></div>';
+                });
+                
+                peakDisplay.innerHTML = peakText;
+            } else {
+                peakDisplay.innerHTML = '<div style="text-align: center; padding: 20px; color: rgba(255,255,255,0.6);">Keine T0-Intervalle erkannt</div>';
+            }
+        }
+        
+        function updateStandardPeakDisplay(peaks) {
+            const peakDisplay = document.getElementById('detectedPeaks');
+            
+            if (peaks && peaks.length > 0) {
+                let peakText = '';
+                
+                peakText += '<div style="margin-top: 12px; font-weight: bold; color: #3498db; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 8px;">🎯 ERKANNTE PEAKS (Standard FFT)</div>';
+                
+                peaks.forEach((peak, index) => {
+                    const note = audioAnalyzer.frequencyToNote(peak.frequency);
+                    const relativeAmplitude = peak.relativeAmplitude ? ` (${(peak.relativeAmplitude * 100).toFixed(1)}% rel.)` : '';
+                    const octaveInfo = peak.isOctaveReduced ? ' [Oktav-reduziert]' : '';
+                    
+                    peakText += '<div style="margin-bottom: 6px; padding: 4px; background: rgba(0,0,0,0.3); border-radius: 3px;">' +
+                        '<div style="display: flex; justify-content: space-between;">' +
+                            '<strong>' + peak.frequency.toFixed(1) + ' Hz</strong>' +
+                            '<span style="color: #f1c40f;">' + note + '</span>' +
+                        '</div>' +
+                        '<div style="font-size: 0.7em; color: rgba(255,255,255,0.8);">' +
+                            'Amplitude: ' + (peak.amplitude * 100).toFixed(1) + '%' + relativeAmplitude + octaveInfo +
+                        '</div>';
+                    
+                    if (peak.originalFrequencies && peak.originalFrequencies.length > 1) {
+                        peakText += '<div style="font-size: 0.65em; color: rgba(255,255,255,0.5);">' +
+                            'Original: ' + peak.originalFrequencies.map(f => f.toFixed(0) + 'Hz').join(', ') +
+                        '</div>';
+                    }
+                    
+                    peakText += '</div>';
+                });
+                
+                peakDisplay.innerHTML = peakText;
+            } else {
+                peakDisplay.innerHTML = '<div style="text-align: center; padding: 20px; color: rgba(255,255,255,0.6);">Keine Peaks erkannt</div>';
+            }
+        }
+        function updateGeneratorStatus() {
+            document.getElementById('generatorChord').textContent = 
+                audioEngine.currentChord ? audioEngine.chordRatios[audioEngine.currentChord].name : 'Keiner';
+            document.getElementById('generatorRoot').textContent = audioEngine.rootFrequency.toFixed(1) + ' Hz';
+            
+            const beatDescription = audioEngine.getBeatDescription();
+            document.getElementById('generatorBeats').textContent = 
+                beatDescription ? beatDescription.substring(2, beatDescription.length - 1) : 'Keine Schwebung';
+            
+            const tuningText = audioEngine.tuningSystem === 'tempered' ? 'Temperiert (12-TET)' : 'Rein (Just)';
+            document.getElementById('generatorTuning').textContent = tuningText;
+            
+            document.getElementById('generatorWave').textContent = 
+                audioEngine.waveform.charAt(0).toUpperCase() + audioEngine.waveform.slice(1);
+            document.getElementById('signalStatus').textContent = 
+                audioEngine.isActive ? 'Aktiv' : 'Bereit';
+        }
+        
+        function updateMicrophoneStatus() {
+            const micBtn = document.getElementById('micBtn');
+            const autoCaptureBtn = document.getElementById('autoCaptureBtn');
+            
+            if (audioEngine.micActive) {
+                micBtn.style.background = 'linear-gradient(145deg, #e74c3c, #c0392b)';
+                micBtn.textContent = '🎤 Stop';
+            } else {
+                micBtn.style.background = 'linear-gradient(145deg, #2ecc71, #27ae60)';
+                micBtn.textContent = '🎤 Mikrofon';
+            }
+            
+            if (audioEngine.micAutoCapture) {
+                autoCaptureBtn.style.background = 'linear-gradient(145deg, #f39c12, #e67e22)';
+                autoCaptureBtn.textContent = '🎯 Auto-Capture';
+            } else {
+                autoCaptureBtn.style.background = 'linear-gradient(145deg, #95a5a6, #7f8c8d)';
+                autoCaptureBtn.textContent = '🎯 Manuell';
+            }
+        }
+        
+        function updateMicLevel(level) {
+            const levelPercent = Math.min(100, level * 100);
+            const levelBar = document.getElementById('micLevelBar');
+            const levelText = document.getElementById('micLevelText');
+            
+            if (levelBar && levelText) {
+                levelBar.style.width = levelPercent + '%';
+                levelText.textContent = levelPercent.toFixed(0) + '%';
+                
+                if (levelPercent >= 50) {
+                    levelBar.style.background = '#f39c12';
+                    if (levelPercent > 80) {
+                        levelBar.style.background = '#e74c3c';
+                    }
+                } else if (levelPercent > 20) {
+                    levelBar.style.background = '#2ecc71';
+                } else {
+                    levelBar.style.background = '#3498db';
+                }
+            }
+        }
+
+        // === GLOBAL FUNCTIONS ===
+        function captureAndAnalyze() {
+            const audioData = audioEngine.getAudioData();
+            if (audioData) {
+                const buffer = {
+                    id: `buffer_${Date.now()}`,
+                    timestamp: Date.now(),
+                    timeData: Array.from(audioData.timeData),
+                    freqData: Array.from(audioData.freqData),
+                    sampleRate: audioData.sampleRate,
+                    bufferSize: audioData.bufferSize,
+                    source: audioData.source
+                };
+                
+                bufferManager.addBuffer(buffer);
+                
+                const results = audioAnalyzer.analyzeSignal(buffer);
+                audioAnalyzer.displayResults(results, buffer);
+                
+                logMessage('📊 Manueller Capture mit verbesserten Berechnungen: Analysiertes Spektrum wird angezeigt', 'success');
+            }
+        }
+        
+        function analysisLoop() {
+            if (!isRunning) return;
+            
+            if (!audioAnalyzer.lastResults || !audioAnalyzer.lastSignal) {
+                const audioData = audioEngine.getAudioData();
+                if (audioData) {
+                    audioAnalyzer.drawLiveSpectrum(audioData);
+                }
+            }
+            
+            animationId = requestAnimationFrame(analysisLoop);
+        }
+        
+        function startAnalysis() {
+            if (isRunning) return;
+            isRunning = true;
+            analysisLoop();
+        }
+        
+        function stopAnalysis() {
+            if (!isRunning) return;
+            isRunning = false;
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+        }
+        
+        function logMessage(message, type = 'info') {
+            const log = document.getElementById('logPanel');
+            const timestamp = new Date().toLocaleTimeString();
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${type}`;
+            entry.textContent = `[${timestamp}] ${message}`;
+            
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+            
+            while (log.children.length > 15) {
+                log.removeChild(log.firstChild);
+            }
+        }
+
+        // === EVENT HANDLERS ===
+        function setupEventHandlers() {
+            // Audio Generator Controls
+            document.querySelectorAll('.chord-btn').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    audioAnalyzer.lastResults = null;
+                    audioAnalyzer.lastSignal = null;
+                    audioAnalyzer.ctx.fillStyle = '#000000';
+                    audioAnalyzer.ctx.fillRect(0, 0, audioAnalyzer.canvas.width, audioAnalyzer.canvas.height);
+                    
+                    logMessage('🔄 Spektrum zurückgesetzt für Live FFT mit verbesserten Berechnungen', 'info');
+                    
+                    if (!audioEngine.audioContext) {
+                        const success = await audioEngine.initialize();
+                        if (!success) return;
+                    }
+                    
+                    document.querySelectorAll('.chord-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    audioEngine.playChordTimed(btn.dataset.chord);
+                    
+                    setTimeout(() => {
+                        btn.classList.remove('active');
+                    }, 2100);
+                });
+            });
+            
+            // Enhanced Beat Controls
+            document.getElementById('beatFreqSlider').addEventListener('input', (e) => {
+                const freq = parseFloat(e.target.value);
+                audioEngine.baseBeatFrequency = freq;
+                document.getElementById('beatFreqDisplay').textContent = freq.toFixed(1) + ' Hz';
+                updateBeatVisualization();
+                updateGeneratorStatus();
+            });
+            
+            document.getElementById('upperBeatSlider').addEventListener('input', (e) => {
+                const freq = parseFloat(e.target.value);
+                audioEngine.upperBeatFrequency = freq;
+                document.getElementById('upperBeatDisplay').textContent = freq.toFixed(1) + ' Hz';
+                updateBeatVisualization();
+                updateGeneratorStatus();
+            });
+            
+            document.getElementById('lowerBeatSlider').addEventListener('input', (e) => {
+                const freq = parseFloat(e.target.value);
+                audioEngine.lowerBeatFrequency = freq;
+                document.getElementById('lowerBeatDisplay').textContent = freq.toFixed(1) + ' Hz';
+                updateBeatVisualization();
+                updateGeneratorStatus();
+            });
+            
+            document.getElementById('complexBeatSlider').addEventListener('input', (e) => {
+                const freq = parseFloat(e.target.value);
+                audioEngine.complexBeatFrequency = freq;
+                document.getElementById('complexBeatDisplay').textContent = freq.toFixed(1) + ' Hz';
+                updateBeatVisualization();
+                updateGeneratorStatus();
+            });
+            
+            document.getElementById('beatBalanceSlider').addEventListener('input', (e) => {
+                const balance = parseInt(e.target.value);
+                audioEngine.beatBalance = balance;
+                document.getElementById('beatBalanceDisplay').textContent = balance + '%';
+                updateBeatVisualization();
+                updateGeneratorStatus();
+            });
+            
+            // Beat Control Buttons
+            document.getElementById('beatResetBtn').addEventListener('click', () => {
+                audioEngine.baseBeatFrequency = 0;
+                audioEngine.upperBeatFrequency = 0;
+                audioEngine.lowerBeatFrequency = 0;
+                audioEngine.complexBeatFrequency = 0;
+                audioEngine.beatBalance = 0;
+                
+                document.getElementById('beatFreqSlider').value = 0;
+                document.getElementById('upperBeatSlider').value = 0;
+                document.getElementById('lowerBeatSlider').value = 0;
+                document.getElementById('complexBeatSlider').value = 0;
+                document.getElementById('beatBalanceSlider').value = 0;
+                
+                document.getElementById('beatFreqDisplay').textContent = '0.0 Hz';
+                document.getElementById('upperBeatDisplay').textContent = '0.0 Hz';
+                document.getElementById('lowerBeatDisplay').textContent = '0.0 Hz';
+                document.getElementById('complexBeatDisplay').textContent = '0.0 Hz';
+                document.getElementById('beatBalanceDisplay').textContent = '0%';
+                
+                updateBeatVisualization();
+                updateGeneratorStatus();
+                logMessage('🔄 Alle Beat-Parameter zurückgesetzt', 'info');
+            });
+            
+            document.getElementById('beatPresetBtn').addEventListener('click', () => {
+                currentPresetIndex = (currentPresetIndex + 1) % beatPresets.length;
+                const preset = beatPresets[currentPresetIndex];
+                
+                audioEngine.baseBeatFrequency = preset.base;
+                audioEngine.upperBeatFrequency = preset.upper;
+                audioEngine.lowerBeatFrequency = preset.lower;
+                audioEngine.complexBeatFrequency = preset.complex;
+                audioEngine.beatBalance = preset.balance;
+                
+                document.getElementById('beatFreqSlider').value = preset.base;
+                document.getElementById('upperBeatSlider').value = preset.upper;
+                document.getElementById('lowerBeatSlider').value = preset.lower;
+                document.getElementById('complexBeatSlider').value = preset.complex;
+                document.getElementById('beatBalanceSlider').value = preset.balance;
+                
+                document.getElementById('beatFreqDisplay').textContent = preset.base.toFixed(1) + ' Hz';
+                document.getElementById('upperBeatDisplay').textContent = preset.upper.toFixed(1) + ' Hz';
+                document.getElementById('lowerBeatDisplay').textContent = preset.lower.toFixed(1) + ' Hz';
+                document.getElementById('complexBeatDisplay').textContent = preset.complex.toFixed(1) + ' Hz';
+                document.getElementById('beatBalanceDisplay').textContent = preset.balance + '%';
+                
+                updateBeatVisualization();
+                updateGeneratorStatus();
+                
+                document.getElementById('beatPresetBtn').textContent = preset.name;
+                setTimeout(() => {
+                    document.getElementById('beatPresetBtn').textContent = '🎨 Preset';
+                }, 2000);
+                
+                logMessage(`🎨 Beat-Preset angewendet: ${preset.name}`, 'success');
+            });
+            
+            // Standard Audio Generator Sliders
+            document.getElementById('rootFreqSlider').addEventListener('input', (e) => {
+                const freq = parseFloat(e.target.value);
+                audioEngine.rootFrequency = freq;
+                document.getElementById('rootFreqDisplay').textContent = freq.toFixed(1) + ' Hz';
+                updateGeneratorStatus();
+            });
+            
+            document.getElementById('volumeSlider').addEventListener('input', (e) => {
+                const volume = parseInt(e.target.value) / 100;
+                audioEngine.volume = volume;
+                document.getElementById('volumeDisplay').textContent = parseInt(e.target.value) + '%';
+                if (audioEngine.gainNode) audioEngine.gainNode.gain.value = volume;
+            });
+            
+            document.getElementById('micGainSlider').addEventListener('input', (e) => {
+                const gain = parseInt(e.target.value);
+                audioEngine.micGain = gain;
+                document.getElementById('micGainDisplay').textContent = gain + 'x';
+                if (audioEngine.micGainNode) audioEngine.micGainNode.gain.value = gain;
+            });
+            
+            // Audio Generator Buttons
+            document.getElementById('tuningBtn').addEventListener('click', () => {
+                audioEngine.tuningSystem = audioEngine.tuningSystem === 'tempered' ? 'just' : 'tempered';
+                
+                const btn = document.getElementById('tuningBtn');
+                if (audioEngine.tuningSystem === 'just') {
+                    btn.textContent = '🎼 Reine Stimmung';
+                    btn.style.background = 'linear-gradient(145deg, #e74c3c, #c0392b)';
+                    btn.classList.add('active');
+                    logMessage('🎵 Umgeschaltet auf REINE STIMMUNG (Just Intonation)', 'success');
+                } else {
+                    btn.textContent = '🎼 Temperierte Stimmung';
+                    btn.style.background = 'linear-gradient(145deg, #3498db, #2980b9)';
+                    btn.classList.remove('active');
+                    logMessage('🎵 Umgeschaltet auf TEMPERIERTE STIMMUNG (12-TET)', 'success');
+                }
+                
+                updateGeneratorStatus();
+            });
+            
+            document.getElementById('waveformBtn').addEventListener('click', () => {
+                const waveforms = ['sine', 'sawtooth', 'square', 'triangle'];
+                const currentIndex = waveforms.indexOf(audioEngine.waveform);
+                audioEngine.waveform = waveforms[(currentIndex + 1) % waveforms.length];
+                
+                const icons = { sine: '🌊', sawtooth: '🔺', square: '⬜', triangle: '🔻' };
+                const names = { sine: 'Sinus', sawtooth: 'Sägezahn', square: 'Rechteck', triangle: 'Dreieck' };
+                document.getElementById('waveformBtn').textContent = 
+                    `${icons[audioEngine.waveform]} ${names[audioEngine.waveform]}`;
+                updateGeneratorStatus();
+            });
+            
+            document.getElementById('micBtn').addEventListener('click', async () => {
+                if (audioEngine.micActive) {
+                    audioEngine.stopMicrophone();
+                } else {
+                    await audioEngine.startMicrophone();
+                }
+                updateMicrophoneStatus();
+            });
+            
+            document.getElementById('autoCaptureBtn').addEventListener('click', () => {
+                audioEngine.micAutoCapture = !audioEngine.micAutoCapture;
+                updateMicrophoneStatus();
+            });
+            
+            document.getElementById('captureBtn').addEventListener('click', () => {
+                captureAndAnalyze();
+            });
+            
+            // Analyzer Controls
+            document.getElementById('scaleBtn').addEventListener('click', () => {
+                if (audioAnalyzer.scale === 'log') {
+                    audioAnalyzer.scale = 'linear';
+                } else {
+                    audioAnalyzer.scale = 'log';
+                }
+                
+                const icons = { log: '📏', linear: '📐' };
+                const names = { log: 'Log', linear: 'Linear' };
+                document.getElementById('scaleBtn').textContent = icons[audioAnalyzer.scale] + ' ' + names[audioAnalyzer.scale];
+                
+                if (audioAnalyzer.lastResults && audioAnalyzer.lastSignal) {
+                    audioAnalyzer.drawSpectrum(audioAnalyzer.lastSignal, audioAnalyzer.lastResults);
+                }
+                
+                logMessage(`📊 Skalierung: ${names[audioAnalyzer.scale]}`, 'info');
+            });
+            
+            document.getElementById('zoomBtn').addEventListener('click', () => {
+                const modes = ['full', 'fundamental', 'harmonics', 'chord', 'bass', 'mid', 'high'];
+                const currentIndex = modes.indexOf(audioAnalyzer.zoomMode);
+                const nextMode = modes[(currentIndex + 1) % modes.length];
+                audioAnalyzer.zoomMode = nextMode;
+                
+                const preset = audioAnalyzer.zoomPresets[nextMode];
+                document.getElementById('zoomBtn').textContent = '🔍 ' + preset.name.split(' ')[0];
+                
+                if (audioAnalyzer.lastResults && audioAnalyzer.lastSignal) {
+                    audioAnalyzer.drawSpectrum(audioAnalyzer.lastSignal, audioAnalyzer.lastResults);
+                }
+                
+                // Dynamische Bereichs-Info
+                const range = audioAnalyzer.getZoomRange(preset);
+                const centerInfo = preset.center ? ` (zentriert auf ${preset.center === 'root' ? 'Grundton' : 'Akkord'})` : '';
+                logMessage(`🔍 Zoom: ${preset.name} (${range.min.toFixed(0)}-${range.max.toFixed(0)}Hz)${centerInfo}`, 'info');
+            });
+            
+            document.getElementById('methodBtn').addEventListener('click', () => {
+                audioAnalyzer.analysisMethod = audioAnalyzer.analysisMethod === 't0' ? 'standard' : 't0';
+                
+                const btn = document.getElementById('methodBtn');
+                const titleElement = document.getElementById('peaksTitle');
+                
+                if (audioAnalyzer.analysisMethod === 't0') {
+                    btn.textContent = '🎼 T0-Akkord-Analyse';
+                    btn.style.background = 'linear-gradient(145deg, #9b59b6, #8e44ad)';
+                    titleElement.textContent = '🎼 T0-Intervalle';
+                    logMessage('🎼 T0-Akkord-Analyse mit verbesserten Berechnungen aktiviert', 'success');
+                } else {
+                    btn.textContent = '🔬 Standard FFT';
+                    btn.style.background = 'linear-gradient(145deg, #3498db, #2980b9)';
+                    titleElement.textContent = '🎯 Erkannte Peaks';
+                    logMessage('🔬 Standard FFT-Analyse mit verbesserten Berechnungen aktiviert', 'info');
+                }
+                
+                if (audioAnalyzer.lastSignal) {
+                    const results = audioAnalyzer.analyzeSignal(audioAnalyzer.lastSignal);
+                    audioAnalyzer.displayResults(results, audioAnalyzer.lastSignal);
+                    logMessage('🔄 Analyse mit neuer Methode und verbesserten Berechnungen aktualisiert', 'success');
+                }
+            });
+            
+            document.getElementById('octaveBtn').addEventListener('click', () => {
+                audioAnalyzer.octaveReduction = !audioAnalyzer.octaveReduction;
+                
+                const btn = document.getElementById('octaveBtn');
+                if (audioAnalyzer.octaveReduction) {
+                    btn.textContent = '🎵 Oktavreduziert';
+                    btn.style.background = 'linear-gradient(145deg, #e67e22, #d35400)';
+                    btn.classList.add('active');
+                    logMessage('🎵 Oktav-Reduktion aktiviert', 'success');
+                } else {
+                    btn.textContent = '🎵 Vollspektrum';
+                    btn.style.background = 'linear-gradient(145deg, #3498db, #2980b9)';
+                    btn.classList.remove('active');
+                    logMessage('🎵 Vollspektrum: Zeige alle Oktaven bis 22kHz', 'info');
+                }
+                
+                if (audioAnalyzer.lastSignal) {
+                    const results = audioAnalyzer.analyzeSignal(audioAnalyzer.lastSignal);
+                    audioAnalyzer.displayResults(results, audioAnalyzer.lastSignal);
+                }
+            });
+            
+            document.getElementById('intervalBtn').addEventListener('click', () => {
+                audioAnalyzer.showIntervalLines = !audioAnalyzer.showIntervalLines;
+                
+                const btn = document.getElementById('intervalBtn');
+                if (audioAnalyzer.showIntervalLines) {
+                    btn.textContent = '🎼 Intervalle';
+                    btn.style.background = 'linear-gradient(145deg, #f39c12, #e67e22)';
+                    btn.classList.add('active');
+                    logMessage('🎼 Do-Re-Mi Intervall-Linien aktiviert', 'info');
+                } else {
+                    btn.textContent = '🎼 Aus';
+                    btn.style.background = 'linear-gradient(145deg, #95a5a6, #7f8c8d)';
+                    btn.classList.remove('active');
+                    logMessage('🎼 Intervall-Linien deaktiviert', 'info');
+                }
+                
+                if (audioAnalyzer.lastResults && audioAnalyzer.lastSignal) {
+                    audioAnalyzer.drawSpectrum(audioAnalyzer.lastSignal, audioAnalyzer.lastResults);
+                } else {
+                    const audioData = audioEngine.getAudioData();
+                    if (audioData) {
+                        audioAnalyzer.drawLiveSpectrum(audioData);
+                    }
+                }
+            });
+            
+            document.getElementById('resetBtn').addEventListener('click', () => {
+                audioAnalyzer.ctx.fillStyle = '#000000';
+                audioAnalyzer.ctx.fillRect(0, 0, audioAnalyzer.canvas.width, audioAnalyzer.canvas.height);
+                
+                audioAnalyzer.lastResults = null;
+                audioAnalyzer.lastSignal = null;
+                
+                // Reset display
+                document.getElementById('t0DetectedChord').textContent = '-';
+                document.getElementById('t0Quality').textContent = '-';
+                document.getElementById('t0Fundamental').textContent = '-';
+                document.getElementById('t0CompliantIntervals').textContent = '-';
+                document.getElementById('avgEulerGradus').textContent = '-';
+                document.getElementById('avgXiDeviation').textContent = '-';
+                document.getElementById('analysisGrade').textContent = '-';
+                document.getElementById('analysisScore').textContent = 'Spiele Akkord oder aktiviere Mikrofon';
+                document.getElementById('peakCount').textContent = '0';
+                document.getElementById('fundamentalFreq').textContent = '-';
+                document.getElementById('spectralCentroid').textContent = '-';
+                document.getElementById('energyLevel').textContent = '-';
+                document.getElementById('bufferSize').textContent = '-';
+                document.getElementById('detectedPeaks').innerHTML = 
+                    '<div style="color: rgba(255,255,255,0.6); text-align: center; padding: 20px;">' +
+                        'Kein Signal analysiert<br>' +
+                        '<small>Spiele Akkord oder aktiviere Mikrofon</small>' +
+                    '</div>';
+                
+                logMessage('🔄 Darstellung zurückgesetzt für verbesserte Berechnungen', 'info');
+            });
+            
+            // File operations
+            document.getElementById('saveBtn').addEventListener('click', () => {
+                bufferManager.saveBuffers();
+            });
+            
+            document.getElementById('loadBtn').addEventListener('click', () => {
+                document.getElementById('fileInput').click();
+            });
+            
+            document.getElementById('fileInput').addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    bufferManager.loadBuffers(file);
+                }
+            });
+            
+            window.addEventListener('resize', () => {
+                if (audioAnalyzer) {
+                    audioAnalyzer.setupCanvas();
+                    if (audioAnalyzer.lastResults && audioAnalyzer.lastSignal) {
+                        audioAnalyzer.drawSpectrum(audioAnalyzer.lastSignal, audioAnalyzer.lastResults);
+                    }
+                }
+            });
+        }
+
+        // === INITIALIZATION ===
+        document.addEventListener('DOMContentLoaded', async () => {
+            const canvas = document.getElementById('spectrum-canvas');
+            audioAnalyzer = new AudioAnalyzer(canvas);
+            audioEngine = new AudioEngine();
+            bufferManager = new BufferManager();
+            
+            setupEventHandlers();
+            
+            // Initialize audio engine
+            await audioEngine.initialize();
+            
+            // Set initial states
+            document.getElementById('methodBtn').style.background = 'linear-gradient(145deg, #9b59b6, #8e44ad)';
+            document.getElementById('peaksTitle').textContent = '🎼 T0-Intervalle';
+            
+            // Set interval button to active initially
+            const intervalBtn = document.getElementById('intervalBtn');
+            intervalBtn.style.background = 'linear-gradient(145deg, #f39c12, #e67e22)';
+            intervalBtn.classList.add('active');
+            
+            // Set tuning button to active (just intonation)
+            const tuningBtn = document.getElementById('tuningBtn');
+            tuningBtn.style.background = 'linear-gradient(145deg, #e74c3c, #c0392b)';
+            tuningBtn.classList.add('active');
+            
+            // Initialize beat visualization
+            updateBeatVisualization();
+            updateGeneratorStatus();
+            updateMicrophoneStatus();
+            
+            // Start analysis loop
+            startAnalysis();
+            
+            logMessage('🎵 Enhanced Audio Analyzer mit verbesserten Berechnungen bereit!', 'success');
+            logMessage('📊 WIEDERHERGESTELLTE VERSION: Korrigierte T0-Anzeige und Grundton-Markierung', 'success');
+            logMessage('🌊 Enhanced Beat Control: Basis + Ober + Unter + Komplex + Balance', 'success');
+            logMessage('🎼 Do-Re-Mi Intervall-Linien: Schaltbar über Intervalle-Button', 'success');
+            logMessage('🖱️ Tooltips: Erweiterte Informationen mit relativen Amplituden und T0-Details', 'info');
+            logMessage('🎵 T0-Akkord-Erkennung mit korrigierter Grundton-Anzeige aktiv', 'success');
+        });
+    </script>
+
+</body>
+</html>
