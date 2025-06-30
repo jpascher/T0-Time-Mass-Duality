@@ -1,0 +1,65 @@
+﻿import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import babel from '@rollup/plugin-babel';
+import terser from '@rollup/plugin-terser';
+
+const isProduction = process.env.NODE_ENV === 'production';
+
+const banner = \/**
+ * T0 Harmonic Library v2.0.0
+ * Advanced difference tone-based chord analysis
+ * Author: Johann Pascher
+ * Part of T0-Time-Mass-Duality Research
+ * Repository: https://github.com/jpascher/T0-Time-Mass-Duality
+ * License: MIT
+ */\;
+
+const plugins = [
+  resolve({ browser: true }),
+  commonjs(),
+  babel({
+    babelHelpers: 'bundled',
+    exclude: 'node_modules/**'
+  })
+];
+
+if (isProduction) {
+  plugins.push(terser());
+}
+
+export default [
+  // UMD build for browsers
+  {
+    input: 'src/index.js',
+    output: {
+      name: 'T0AudioSystem',
+      file: 'dist/t0-audio-system.umd.js',
+      format: 'umd',
+      banner,
+      sourcemap: !isProduction
+    },
+    plugins
+  },
+  // ES Module build
+  {
+    input: 'src/index.js',
+    output: {
+      file: 'dist/t0-audio-system.esm.js',
+      format: 'es',
+      banner,
+      sourcemap: !isProduction
+    },
+    plugins
+  },
+  // CommonJS build
+  {
+    input: 'src/index.js',
+    output: {
+      file: 'dist/t0-audio-system.cjs.js',
+      format: 'cjs',
+      banner,
+      sourcemap: !isProduction
+    },
+    plugins
+  }
+];

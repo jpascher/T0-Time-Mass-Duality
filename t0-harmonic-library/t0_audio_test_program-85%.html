@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎵 T0 Audio-Test: Original vs. Rekonstruktion</title>
+    <style>
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f23, #1a1a3a);
+            color: #e0e6ed;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(0,255,150,0.1), rgba(0,255,150,0.05));
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,255,150,0.3);
+        }
+        
+        .test-section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 1px solid rgba(255,255,255,0.2);
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .chord-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .chord-button {
+            background: linear-gradient(135deg, #333, #555);
+            color: #00ff66;
+            border: 2px solid #00ff66;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 10px;
+            font-family: inherit;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .chord-button:hover {
+            background: linear-gradient(135deg, #555, #777);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,255,102,0.4);
+        }
+        
+        .chord-button.selected {
+            background: linear-gradient(135deg, #00ff66, #00cc52);
+            color: #000;
+            border-color: #fff;
+        }
+        
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .play-button {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255,107,53,0.3);
+        }
+        
+        .play-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255,107,53,0.5);
+        }
+        
+        .play-button:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .analysis-display {
+            background: rgba(0,0,0,0.4);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .frequency-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .frequency-tag {
+            background: rgba(0,255,102,0.2);
+            border: 1px solid rgba(0,255,102,0.5);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .difference-tag {
+            background: rgba(255,170,0,0.2);
+            border: 1px solid rgba(255,170,0,0.5);
+        }
+        
+        .reconstructed-tag {
+            background: rgba(68,136,255,0.2);
+            border: 1px solid rgba(68,136,255,0.5);
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .comparison-box {
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-ready { background: #00ff66; }
+        .status-playing { background: #ff6b35; animation: pulse 1s infinite; }
+        .status-processing { background: #ffaa00; animation: pulse 0.5s infinite; }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .volume-control {
+            margin: 15px 0;
+        }
+        
+        .volume-slider {
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .results-summary {
+            background: linear-gradient(135deg, rgba(68,136,255,0.15), rgba(68,136,255,0.05));
+            border: 1px solid rgba(68,136,255,0.3);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎵 T0 AUDIO-TEST PROGRAMM</h1>
+            <p>Höre den Unterschied: Original-Akkord vs. T0-Rekonstruktion</p>
+            <p style="font-size: 14px; opacity: 0.8;">
+                Test: Spiele Akkord → Berechne Differenztöne → Rekonstruiere Akkord → Vergleiche Klang
+            </p>
+        </div>
+
+                    <div class="test-section">
+                <h3>📈 Erkennungs-Statistiken</h3>
+                <div id="recognitionStats">
+                    <p>Teste verschiedene Akkorde um Statistiken zu sehen...</p>
+                </div>
+                <button class="play-button" id="runFullTest" style="margin: 10px 0;">
+                    🧪 Vollständiger Erkennungstest
+                </button>
+            </div>
+            <h3>🎹 Akkord-Auswahl</h3>
+            <div class="chord-selector" id="chordSelector">
+                <!-- Wird dynamisch gefüllt -->
+            </div>
+            
+            <div class="volume-control">
+                <label>Lautstärke: <span id="volumeDisplay">50%</span></label>
+                <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="50">
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>🎧 Audio-Kontrollen</h3>
+            <div class="audio-controls">
+                <button class="play-button" id="playOriginal" disabled>
+                    <span class="status-indicator status-ready" id="statusOriginal"></span>
+                    Original Akkord
+                </button>
+                <button class="play-button" id="playDifferences" disabled>
+                    <span class="status-indicator status-ready" id="statusDifferences"></span>
+                    Nur Differenztöne
+                </button>
+                <button class="play-button" id="playReconstructed" disabled>
+                    <span class="status-indicator status-ready" id="statusReconstructed"></span>
+                    Rekonstruierter Akkord
+                </button>
+                <button class="play-button" id="playComparison" disabled>
+                    <span class="status-indicator status-ready" id="statusComparison"></span>
+                    A/B Vergleich
+                </button>
+            </div>
+        </div>
+
+        <div class="comparison-grid">
+            <div class="comparison-box">
+                <h4>📊 Original-Akkord</h4>
+                <div id="originalAnalysis">
+                    <p>Wähle einen Akkord aus...</p>
+                </div>
+            </div>
+            <div class="comparison-box">
+                <h4>🔄 T0-Rekonstruktion</h4>
+                <div id="reconstructionAnalysis">
+                    <p>Warte auf Berechnung...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="analysis-display">
+            <h4>🧮 T0-Berechnungs-Details</h4>
+            <div id="calculationDetails">
+                <p>Berechnungsdetails werden hier angezeigt...</p>
+            </div>
+        </div>
+
+        <div class="results-summary">
+            <h4>🎯 Test-Ergebnisse</h4>
+            <div id="testResults">
+                <p>Führe Tests durch um Ergebnisse zu sehen...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Audio-Kontext und Variablen
+        let audioContext;
+        let currentChord = null;
+        let originalFrequencies = [];
+        let differenceFrequencies = [];
+        let reconstructedFrequencies = [];
+        let volume = 0.5;
+
+        // Akkord-Definitionen - ERWEITERT
+        const chordDefinitions = {
+            // Grundakkorde
+            'C-Dur': [261.63, 329.63, 392.00],
+            'C-Moll': [261.63, 311.13, 392.00],
+            'C-Dim': [261.63, 311.13, 369.99],
+            'C-Aug': [261.63, 329.63, 415.30],
+            'C-Sus2': [261.63, 293.66, 392.00],
+            'C-Sus4': [261.63, 349.23, 392.00],
+            
+            // Septakkorde
+            'C-Dom7': [261.63, 329.63, 392.00, 466.16],
+            'C-Maj7': [261.63, 329.63, 392.00, 493.88],
+            'C-m7': [261.63, 311.13, 392.00, 466.16],
+            'C-Dim7': [261.63, 311.13, 369.99, 440.00],
+            
+            // Umkehrungen
+            'C-Dur (1. Umk.)': [329.63, 392.00, 523.25],
+            'C-Dur (2. Umk.)': [392.00, 523.25, 659.25],
+            'C-Moll (1. Umk.)': [311.13, 392.00, 523.25],
+            'C-Dom7 (1. Umk.)': [329.63, 392.00, 466.16, 523.25],
+            
+            // Transponierte Akkorde
+            'F-Dur': [349.23, 440.00, 523.25],
+            'F-Moll': [349.23, 415.30, 523.25],
+            'G-Dur': [392.00, 493.88, 587.33],
+            'G-Moll': [392.00, 466.16, 587.33],
+            
+            // Komplexe Akkorde
+            'C-Add9': [261.63, 329.63, 392.00, 587.33],
+            'C-6': [261.63, 329.63, 392.00, 440.00]
+        };
+
+        // VOLLSTÄNDIGE T0-MATHEMATIK - ERWEITERTE IMPLEMENTIERUNG
+        class T0AudioProcessor {
+            constructor() {
+                this.maxHarmonic = 3;
+                this.tolerance = 5; // Hz Toleranz
+                this.generateCompleteSignatureDatabase();
+            }
+
+            generateCompleteSignatureDatabase() {
+                // Vollständige Akkord-Bibliothek mit allen Umkehrungen
+                const baseChords = {
+                    'Major': [0, 4, 7],
+                    'Minor': [0, 3, 7],
+                    'Diminished': [0, 3, 6],
+                    'Augmented': [0, 4, 8],
+                    'Sus2': [0, 2, 7],
+                    'Sus4': [0, 5, 7],
+                    'Dominant7': [0, 4, 7, 10],
+                    'Major7': [0, 4, 7, 11],
+                    'Minor7': [0, 3, 7, 10],
+                    'Diminished7': [0, 3, 6, 9]
+                };
+
+                this.signatureDatabase = new Map();
+
+                Object.entries(baseChords).forEach(([chordType, intervals]) => {
+                    // Grundstellung
+                    const fundamentals = intervals.map(i => 261.63 * Math.pow(2, i/12));
+                    const signature = this.computeT0Signature(fundamentals);
+                    
+                    this.signatureDatabase.set(signature.hash, {
+                        chordType: chordType,
+                        inversion: 0,
+                        fundamentals: fundamentals,
+                        signature: signature
+                    });
+
+                    // Umkehrungen
+                    for (let inv = 1; inv < intervals.length && inv <= 3; inv++) {
+                        const inverted = this.generateInversion(intervals, inv);
+                        const invertedFunds = inverted.map(i => 261.63 * Math.pow(2, i/12));
+                        const invSignature = this.computeT0Signature(invertedFunds);
+                        
+                        this.signatureDatabase.set(invSignature.hash, {
+                            chordType: chordType,
+                            inversion: inv,
+                            fundamentals: invertedFunds,
+                            signature: invSignature
+                        });
+                    }
+
+                    // Transponierte Versionen (F-Dur, G-Dur)
+                    [5, 7].forEach(transpose => {
+                        const transposed = intervals.map(i => i + transpose);
+                        const transposedFunds = transposed.map(i => 261.63 * Math.pow(2, i/12));
+                        const transSignature = this.computeT0Signature(transposedFunds);
+                        
+                        this.signatureDatabase.set(transSignature.hash, {
+                            chordType: chordType,
+                            inversion: 0,
+                            fundamentals: transposedFunds,
+                            signature: transSignature,
+                            transposition: transpose
+                        });
+                    });
+                });
+
+                console.log(`T0 Signatur-Datenbank: ${this.signatureDatabase.size} Einträge`);
+            }
+
+            generateInversion(intervals, inversionNumber) {
+                const inverted = [...intervals];
+                for (let i = 0; i < inversionNumber; i++) {
+                    const lowest = inverted.shift();
+                    inverted.push(lowest + 12);
+                }
+                return inverted;
+            }
+
+            calculateDifferenceTones(fundamentals) {
+                // Erweitere um Obertöne
+                const spectrum = [...fundamentals];
+                fundamentals.forEach(freq => {
+                    for (let h = 2; h <= this.maxHarmonic; h++) {
+                        spectrum.push(freq * h);
+                    }
+                });
+
+                // Berechne alle Differenztöne
+                const differences = [];
+                for (let i = 0; i < spectrum.length; i++) {
+                    for (let j = i + 1; j < spectrum.length; j++) {
+                        const diff = Math.abs(spectrum[j] - spectrum[i]);
+                        if (diff >= 20 && diff <= 500) {
+                            differences.push(diff);
+                        }
+                    }
+                }
+
+                return [...new Set(differences.map(d => Math.round(d)))].sort((a, b) => a - b);
+            }
+
+            computeT0Signature(fundamentals) {
+                const differences = this.calculateDifferenceTones(fundamentals);
+                const primary = differences.filter(d => d >= 20 && d <= 200).slice(0, 6);
+                
+                return {
+                    allDifferences: differences,
+                    primaryDifferences: primary,
+                    hash: primary.join(':'),
+                    fundamentals: fundamentals.map(f => Math.round(f * 10) / 10)
+                };
+            }
+
+            reconstructFromDifferences(differences) {
+                const inputSignature = this.computeSignatureFromDifferences(differences);
+                
+                // 1. Direkte Hash-Suche
+                if (this.signatureDatabase.has(inputSignature.hash)) {
+                    const match = this.signatureDatabase.get(inputSignature.hash);
+                    console.log(`Direkte Erkennung: ${match.chordType} (${match.inversion === 0 ? 'Grundstellung' : match.inversion + '. Umkehrung'})`);
+                    return match.fundamentals;
+                }
+
+                // 2. Fuzzy-Matching mit Toleranz
+                let bestMatch = null;
+                let bestScore = 0;
+
+                for (const [hash, chordData] of this.signatureDatabase) {
+                    const score = this.calculateSimilarity(
+                        inputSignature.primaryDifferences, 
+                        chordData.signature.primaryDifferences
+                    );
+                    
+                    if (score > bestScore && score > 0.6) {
+                        bestScore = score;
+                        bestMatch = chordData;
+                    }
+                }
+
+                if (bestMatch) {
+                    console.log(`Fuzzy-Match: ${bestMatch.chordType} (${bestMatch.inversion === 0 ? 'Grundstellung' : bestMatch.inversion + '. Umkehrung'}) - ${(bestScore * 100).toFixed(1)}%`);
+                    return bestMatch.fundamentals;
+                }
+
+                // 3. Adaptive Rekonstruktion als Fallback
+                return this.adaptiveReconstruction(differences);
+            }
+
+            computeSignatureFromDifferences(differences) {
+                const sorted = differences.sort((a, b) => a - b);
+                const primary = sorted.filter(d => d >= 20 && d <= 200).slice(0, 6);
+                
+                return {
+                    allDifferences: sorted,
+                    primaryDifferences: primary,
+                    hash: primary.join(':')
+                };
+            }
+
+            calculateSimilarity(set1, set2) {
+                let matches = 0;
+                const maxLength = Math.max(set1.length, set2.length);
+                
+                set1.forEach(freq1 => {
+                    if (set2.some(freq2 => Math.abs(freq1 - freq2) <= this.tolerance)) {
+                        matches++;
+                    }
+                });
+                
+                return matches / maxLength;
+            }
+
+            adaptiveReconstruction(differences) {
+                console.log("Adaptive Rekonstruktion aktiviert");
+                
+                // Analysiere charakteristische Muster
+                const sorted = differences.sort((a, b) => a - b);
+                const base = 261.63;
+                
+                // Teste auf charakteristische Akkord-Eigenschaften
+                const hasQuinte = sorted.some(d => Math.abs(d - 130) <= this.tolerance);
+                const hasLowDiff = sorted.some(d => d <= 60);
+                const hasHighDiff = sorted.some(d => d >= 150);
+                
+                if (hasQuinte) {
+                    if (sorted.some(d => Math.abs(d - 68) <= this.tolerance)) {
+                        return [base, base * Math.pow(2, 4/12), base * Math.pow(2, 7/12)]; // Dur-ähnlich
+                    } else if (sorted.some(d => Math.abs(d - 50) <= this.tolerance)) {
+                        return [base, base * Math.pow(2, 3/12), base * Math.pow(2, 7/12)]; // Moll-ähnlich
+                    }
+                }
+                
+                // Fallback: Baue aus den stärksten Differenztönen
+                if (sorted.length >= 2) {
+                    return [base, base + sorted[0], base + sorted[1]];
+                }
+                
+                return [base];
+            }
+
+            // Analysiere Rekonstruktions-Qualität
+            analyzeReconstruction(original, reconstructed) {
+                const accuracy = this.calculateFrequencyAccuracy(original, reconstructed);
+                const chordMatch = this.analyzeChordMatch(original, reconstructed);
+                
+                return {
+                    accuracy: accuracy,
+                    chordMatch: chordMatch,
+                    quality: accuracy > 90 ? 'Perfekt' : accuracy > 70 ? 'Sehr gut' : accuracy > 50 ? 'Gut' : 'Mangelhaft',
+                    isIdentical: accuracy > 95
+                };
+            }
+
+            calculateFrequencyAccuracy(original, reconstructed) {
+                if (original.length === 0) return 0;
+                
+                let matches = 0;
+                original.forEach(origFreq => {
+                    if (reconstructed.some(reconFreq => 
+                        Math.abs(origFreq - reconFreq) <= this.tolerance)) {
+                        matches++;
+                    }
+                });
+                
+                return (matches / original.length) * 100;
+            }
+
+            analyzeChordMatch(original, reconstructed) {
+                return {
+                    sameNoteCount: original.length === reconstructed.length,
+                    majorityMatch: this.calculateFrequencyAccuracy(original, reconstructed) > 66,
+                    perfectMatch: this.calculateFrequencyAccuracy(original, reconstructed) > 95
+                };
+            }
+        }
+
+        const t0Processor = new T0AudioProcessor();
+
+        // Audio-Funktionen
+        async function initAudio() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioContext.state === 'suspended') {
+                    await audioContext.resume();
+                }
+            }
+        }
+
+        function createOscillator(frequency, duration = 2.0, fadeTime = 0.1) {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            oscillator.type = 'sine';
+            
+            // Envelope für sanfteres Ein/Ausblenden
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(volume * 0.1, audioContext.currentTime + fadeTime);
+            gainNode.gain.setValueAtTime(volume * 0.1, audioContext.currentTime + duration - fadeTime);
+            gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + duration);
+            
+            return { oscillator, gainNode };
+        }
+
+        async function playFrequencies(frequencies, duration = 2.0, label = "") {
+            await initAudio();
+            
+            console.log(`Playing ${label}:`, frequencies.map(f => f.toFixed(1)));
+            
+            const oscillators = frequencies.map(freq => createOscillator(freq, duration));
+            
+            oscillators.forEach(({ oscillator }) => {
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + duration);
+            });
+            
+            return new Promise(resolve => {
+                setTimeout(resolve, duration * 1000 + 100);
+            });
+        }
+
+        async function playComparison() {
+            updateStatus('statusComparison', 'playing');
+            
+            // Spiele Original
+            await playFrequencies(originalFrequencies, 1.5, "Original");
+            
+            // Kurze Pause
+            await new Promise(resolve => setTimeout(resolve, 300));
+            
+            // Spiele Rekonstruktion
+            await playFrequencies(reconstructedFrequencies, 1.5, "Rekonstruiert");
+            
+            updateStatus('statusComparison', 'ready');
+        }
+
+        // UI-Funktionen
+        function initUI() {
+            // Akkord-Buttons erstellen
+            const selectorEl = document.getElementById('chordSelector');
+            Object.keys(chordDefinitions).forEach(chordName => {
+                const button = document.createElement('button');
+                button.className = 'chord-button';
+                button.textContent = chordName;
+                button.onclick = () => selectChord(chordName);
+                selectorEl.appendChild(button);
+            });
+
+            // Event-Listener
+            document.getElementById('volumeSlider').addEventListener('input', (e) => {
+                volume = e.target.value / 100;
+                document.getElementById('volumeDisplay').textContent = e.target.value + '%';
+            });
+
+            document.getElementById('playOriginal').onclick = () => {
+                updateStatus('statusOriginal', 'playing');
+                playFrequencies(originalFrequencies, 2.0, "Original").then(() => {
+                    updateStatus('statusOriginal', 'ready');
+                });
+            };
+
+            document.getElementById('playDifferences').onclick = () => {
+                updateStatus('statusDifferences', 'playing');
+                playFrequencies(differenceFrequencies, 2.0, "Differenztöne").then(() => {
+                    updateStatus('statusDifferences', 'ready');
+                });
+            };
+
+            document.getElementById('playReconstructed').onclick = () => {
+                updateStatus('statusReconstructed', 'playing');
+                playFrequencies(reconstructedFrequencies, 2.0, "Rekonstruiert").then(() => {
+                    updateStatus('statusReconstructed', 'ready');
+                });
+            };
+
+            document.getElementById('playComparison').onclick = playComparison;
+
+            // Vollständiger Test
+            document.getElementById('runFullTest').onclick = runFullRecognitionTest;
+        }
+
+        function selectChord(chordName) {
+            // UI Update
+            document.querySelectorAll('.chord-button').forEach(btn => {
+                btn.classList.remove('selected');
+                if (btn.textContent === chordName) btn.classList.add('selected');
+            });
+
+            currentChord = chordName;
+            originalFrequencies = chordDefinitions[chordName];
+
+            // T0-Berechnung
+            updateStatus('statusOriginal', 'processing');
+            updateStatus('statusDifferences', 'processing');
+            updateStatus('statusReconstructed', 'processing');
+
+            setTimeout(() => {
+                // Berechne Differenztöne
+                differenceFrequencies = t0Processor.calculateDifferenceTones(originalFrequencies);
+                
+                // Rekonstruiere Akkord
+                reconstructedFrequencies = t0Processor.reconstructFromDifferences(differenceFrequencies);
+
+                // Aktiviere Buttons
+                enableAllButtons();
+                
+                // Update UI
+                updateAnalysisDisplay();
+                updateCalculationDetails();
+                updateTestResults();
+
+                updateStatus('statusOriginal', 'ready');
+                updateStatus('statusDifferences', 'ready');
+                updateStatus('statusReconstructed', 'ready');
+                updateStatus('statusComparison', 'ready');
+            }, 500);
+        }
+
+        function updateStatus(elementId, status) {
+            const el = document.getElementById(elementId);
+            el.className = `status-indicator status-${status}`;
+        }
+
+        function enableAllButtons() {
+            document.querySelectorAll('.play-button').forEach(btn => {
+                btn.disabled = false;
+            });
+        }
+
+        function updateAnalysisDisplay() {
+            // Original
+            document.getElementById('originalAnalysis').innerHTML = `
+                <div class="frequency-list">
+                    ${originalFrequencies.map(f => 
+                        `<span class="frequency-tag">${f.toFixed(1)} Hz</span>`
+                    ).join('')}
+                </div>
+                <p><strong>Akkord:</strong> ${currentChord}</p>
+                <p><strong>Töne:</strong> ${originalFrequencies.length}</p>
+            `;
+
+            // Rekonstruktion
+            const accuracy = calculateAccuracy();
+            document.getElementById('reconstructionAnalysis').innerHTML = `
+                <div class="frequency-list">
+                    ${reconstructedFrequencies.map(f => 
+                        `<span class="frequency-tag reconstructed-tag">${f.toFixed(1)} Hz</span>`
+                    ).join('')}
+                </div>
+                <p><strong>Rekonstruiert:</strong> ${reconstructedFrequencies.length} Töne</p>
+                <p><strong>Genauigkeit:</strong> ${accuracy.toFixed(1)}%</p>
+            `;
+        }
+
+        function updateCalculationDetails() {
+            document.getElementById('calculationDetails').innerHTML = `
+                <h5>🔢 Berechnung:</h5>
+                <p><strong>1. Original-Frequenzen:</strong></p>
+                <div class="frequency-list">
+                    ${originalFrequencies.map(f => 
+                        `<span class="frequency-tag">${f.toFixed(1)} Hz</span>`
+                    ).join('')}
+                </div>
+                
+                <p><strong>2. Berechnete Differenztöne:</strong></p>
+                <div class="frequency-list">
+                    ${differenceFrequencies.map(f => 
+                        `<span class="frequency-tag difference-tag">${f} Hz</span>`
+                    ).join('')}
+                </div>
+                
+                <p><strong>3. Rekonstruierte Frequenzen:</strong></p>
+                <div class="frequency-list">
+                    ${reconstructedFrequencies.map(f => 
+                        `<span class="frequency-tag reconstructed-tag">${f.toFixed(1)} Hz</span>`
+                    ).join('')}
+                </div>
+            `;
+        }
+
+        function updateTestResults() {
+            const analysis = t0Processor.analyzeReconstruction(originalFrequencies, reconstructedFrequencies);
+            const frequencyMatch = analysis.chordMatch.perfectMatch;
+            
+            // Detaillierte Analyse der Rekonstruktion
+            const originalSig = t0Processor.computeT0Signature(originalFrequencies);
+            const reconstructedSig = t0Processor.computeT0Signature(reconstructedFrequencies);
+            
+            document.getElementById('testResults').innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <h5>📊 Quantitative Analyse:</h5>
+                        <p>• <strong>Frequenz-Genauigkeit:</strong> ${analysis.accuracy.toFixed(1)}%</p>
+                        <p>• <strong>Qualität:</strong> ${analysis.quality}</p>
+                        <p>• <strong>Ton-Anzahl:</strong> ${originalFrequencies.length} → ${reconstructedFrequencies.length}</p>
+                        <p>• <strong>Differenztöne:</strong> ${differenceFrequencies.length} berechnet</p>
+                        <p>• <strong>Pattern-Match:</strong> ${frequencyMatch ? '✅ Perfekt' : analysis.chordMatch.majorityMatch ? '⚠️ Teilweise' : '❌ Fehlerhaft'}</p>
+                        <p>• <strong>Identisch:</strong> ${analysis.isIdentical ? '✅ Ja' : '❌ Nein'}</p>
+                    </div>
+                    <div>
+                        <h5>🎧 Audio-Test Fragen:</h5>
+                        <p>• Klingen beide Akkorde gleich?</p>
+                        <p>• Ist die Harmonie erkennbar?</p>
+                        <p>• Unterschiede in Klangfarbe?</p>
+                        <p>• Unterschiede in Lautstärke?</p>
+                        <p>• <strong>Erwartung:</strong> ${analysis.isIdentical ? 'Identisch' : 'Unterschiedlich'}</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 15px;">
+                    <h5>🔍 Erweiterte Signatur-Analyse:</h5>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div style="background: rgba(0,255,102,0.1); padding: 10px; border-radius: 8px;">
+                            <strong>Original-Signatur:</strong><br>
+                            Hash: ${originalSig.hash}<br>
+                            Primäre: [${originalSig.primaryDifferences.join(', ')}]
+                        </div>
+                        <div style="background: rgba(68,136,255,0.1); padding: 10px; border-radius: 8px;">
+                            <strong>Rekonstruierte Signatur:</strong><br>
+                            Hash: ${reconstructedSig.hash}<br>
+                            Primäre: [${reconstructedSig.primaryDifferences.join(', ')}]
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 15px; padding: 10px; background: rgba(${analysis.isIdentical ? '0,255,102' : analysis.accuracy > 70 ? '255,170,0' : '255,0,0'},0.1); border-radius: 8px;">
+                    <strong>🎯 Test-Ergebnis:</strong> 
+                    ${analysis.isIdentical 
+                        ? 'PERFEKTE REKONSTRUKTION - Original und T0-Rekonstruktion sollten klanglich identisch sein!'
+                        : analysis.accuracy > 70
+                        ? 'GUTE REKONSTRUKTION - Ähnliche Harmonie, möglicherweise kleine Unterschiede hörbar.'
+                        : 'FEHLERHAFTE REKONSTRUKTION - Deutliche klangliche Unterschiede zu erwarten.'
+                    }
+                </div>
+                
+                <div style="margin-top: 10px; font-size: 12px; opacity: 0.8;">
+                    <strong>Datenbank-Status:</strong> ${t0Processor.signatureDatabase.size} Akkord-Signaturen verfügbar
+                </div>
+            `;
+        }
+
+        async function runFullRecognitionTest() {
+            console.log("🧪 Starte vollständigen T0-Erkennungstest...");
+            
+            const results = [];
+            let totalTests = 0;
+            let perfectMatches = 0;
+            let goodMatches = 0;
+            
+            for (const [chordName, frequencies] of Object.entries(chordDefinitions)) {
+                const originalSig = t0Processor.computeT0Signature(frequencies);
+                const reconstructed = t0Processor.reconstructFromDifferences(originalSig.allDifferences);
+                const analysis = t0Processor.analyzeReconstruction(frequencies, reconstructed);
+                
+                results.push({
+                    chord: chordName,
+                    accuracy: analysis.accuracy,
+                    quality: analysis.quality,
+                    isIdentical: analysis.isIdentical,
+                    originalCount: frequencies.length,
+                    reconstructedCount: reconstructed.length
+                });
+                
+                totalTests++;
+                if (analysis.isIdentical) perfectMatches++;
+                else if (analysis.accuracy > 70) goodMatches++;
+                
+                console.log(`${chordName}: ${analysis.quality} (${analysis.accuracy.toFixed(1)}%)`);
+            }
+            
+            // Erstelle Statistik-Anzeige
+            const perfectRate = (perfectMatches / totalTests * 100).toFixed(1);
+            const goodRate = ((perfectMatches + goodMatches) / totalTests * 100).toFixed(1);
+            
+            document.getElementById('recognitionStats').innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                    <div style="background: rgba(0,255,102,0.2); padding: 15px; border-radius: 10px; text-align: center;">
+                        <h4>✅ Perfekte Erkennungen</h4>
+                        <div style="font-size: 24px; font-weight: bold;">${perfectMatches}/${totalTests}</div>
+                        <div style="font-size: 18px;">${perfectRate}%</div>
+                    </div>
+                    <div style="background: rgba(255,170,0,0.2); padding: 15px; border-radius: 10px; text-align: center;">
+                        <h4>⚠️ Gute Erkennungen</h4>
+                        <div style="font-size: 24px; font-weight: bold;">${goodMatches}</div>
+                        <div style="font-size: 18px;">${goodRate}% gesamt</div>
+                    </div>
+                    <div style="background: rgba(255,0,0,0.2); padding: 15px; border-radius: 10px; text-align: center;">
+                        <h4>❌ Fehlerhafte</h4>
+                        <div style="font-size: 24px; font-weight: bold;">${totalTests - perfectMatches - goodMatches}</div>
+                        <div style="font-size: 18px;">${(100 - parseFloat(goodRate)).toFixed(1)}%</div>
+                    </div>
+                </div>
+                
+                <div style="max-height: 300px; overflow-y: auto; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px;">
+                    <h5>📊 Detaillierte Ergebnisse:</h5>
+                    ${results.map(result => `
+                        <div style="display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <span>${result.chord}</span>
+                            <span style="color: ${result.isIdentical ? '#00ff66' : result.accuracy > 70 ? '#ffaa00' : '#ff6666'}">
+                                ${result.quality} (${result.accuracy.toFixed(1)}%)
+                            </span>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div style="margin-top: 15px; padding: 15px; background: rgba(68,136,255,0.1); border-radius: 10px;">
+                    <h5>🎯 Test-Zusammenfassung:</h5>
+                    <p><strong>Gesamte Erkennungsrate:</strong> ${goodRate}% (${perfectMatches + goodMatches}/${totalTests})</p>
+                    <p><strong>Perfekte Rekonstruktionen:</strong> ${perfectRate}% - Diese sollten klanglich identisch sein</p>
+                    <p><strong>Algorithmus-Verbesserung:</strong> ${
+                        perfectRate > 80 ? 'Ausgezeichnet - T0-System funktioniert sehr gut' :
+                        perfectRate > 60 ? 'Gut - Weitere Optimierung der Signatur-Datenbank empfohlen' :
+                        'Verbesserungsbedürftig - Erweiterte Pattern-Matching-Regeln nötig'
+                    }</p>
+                </div>
+            `;
+            
+            console.log(`🎯 Test abgeschlossen: ${perfectRate}% perfekte Erkennungen`);
+        }
+
+        function calculateAccuracy() {
+            const analysis = t0Processor.analyzeReconstruction(originalFrequencies, reconstructedFrequencies);
+            return analysis.accuracy;
+        }
+
+        function compareFrequencyContent() {
+            const analysis = t0Processor.analyzeReconstruction(originalFrequencies, reconstructedFrequencies);
+            return analysis.chordMatch.perfectMatch;
+        }
+
+        // Initialisierung
+        document.addEventListener('DOMContentLoaded', initUI);
+    </script>
+</body>
+</html>

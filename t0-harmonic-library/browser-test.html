@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>T0 Harmonic Library - Browser Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        #output { background: #f0f0f0; padding: 15px; border-radius: 5px; min-height: 200px; }
+        button { background: #007acc; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>🎵 T0 Harmonic Library - Browser Test</h1>
+    <button onclick="runTest()">🧪 Test Library</button>
+    <button onclick="clearOutput()">🗑️ Clear</button>
+    
+    <h2>📊 Test Results:</h2>
+    <div id="output">Klicken Sie auf "Test Library" um zu beginnen...</div>
+    
+    <!-- Lade die UMD-Version -->
+    <script src="dist/t0-audio-system.umd.js"></script>
+    <script>
+        function log(message, isError = false) {
+            const output = document.getElementById('output');
+            const className = isError ? 'error' : 'success';
+            output.innerHTML += '<div class="' + className + '">' + message + '</div>';
+        }
+        
+        function clearOutput() {
+            document.getElementById('output').innerHTML = '';
+        }
+        
+        function runTest() {
+            clearOutput();
+            log('🚀 Starting T0 Harmonic Library Test...');
+            
+            try {
+                // 1. Teste ob T0AudioSystem verfügbar ist
+                if (typeof T0AudioSystem !== 'undefined') {
+                    log('✅ T0AudioSystem global object available');
+                    
+                    // 2. Teste ob die Klasse verfügbar ist
+                    if (T0AudioSystem.T0AudioSystemComplete) {
+                        log('✅ T0AudioSystemComplete class found');
+                        
+                        // 3. Erstelle eine Instanz
+                        const t0 = new T0AudioSystem.T0AudioSystemComplete({
+                            debugMode: true
+                        });
+                        
+                        log('✅ T0 System instance created');
+                        
+                        // 4. Teste System-Info
+                        const info = t0.getSystemInfo();
+                        log('📊 Version: ' + info.version);
+                        log('👨‍💻 Author: ' + info.author);
+                        log('🔬 Project: ' + info.project);
+                        log('🔧 Initialized: ' + (info.isInitialized ? 'Yes' : 'No'));
+                        
+                        // 5. Teste verfügbare Komponenten
+                        const components = t0.getExistingComponents();
+                        log('📦 Available Components:');
+                        Object.entries(components).forEach(([key, value]) => {
+                            log('   • ' + key + ': ' + value);
+                        });
+                        
+                        // 6. Teste Akkord-Analyse
+                        log('🎵 Testing chord analysis...');
+                        t0.analyzeChord('C-Major').then(result => {
+                            log('✅ Chord analysis successful:');
+                            log('   • Chord: ' + result.chord);
+                            log('   • Success: ' + result.success);
+                            log('   • Frequencies: ' + result.frequencies.join(', ') + ' Hz');
+                            log('   • Timestamp: ' + result.timestamp);
+                            
+                            log('🎉 All tests passed successfully!');
+                        }).catch(error => {
+                            log('❌ Chord analysis failed: ' + error.message, true);
+                        });
+                        
+                    } else {
+                        log('❌ T0AudioSystemComplete class not found', true);
+                    }
+                } else {
+                    log('❌ T0AudioSystem not available', true);
+                    log('💡 Make sure dist/t0-audio-system.umd.js is loaded correctly', true);
+                }
+                
+            } catch (error) {
+                log('❌ Test failed: ' + error.message, true);
+                console.error('Full error:', error);
+            }
+        }
+        
+        // Auto-test beim Laden der Seite
+        window.addEventListener('load', () => {
+            log('🌐 Page loaded, library ready for testing');
+        });
+    </script>
+</body>
+</html>
