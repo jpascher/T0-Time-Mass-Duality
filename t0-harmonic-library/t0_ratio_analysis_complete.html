@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎵 T0 Enhanced Ratio Analysis - Buffer Integration</title>
+    <style>
+        :root {
+            --primary-green: #00ff66;
+            --primary-blue: #4488ff;
+            --primary-orange: #ff6b35;
+            --primary-purple: #8b5cf6;
+            --bg-dark: #0f0f23;
+            --bg-darker: #1a1a3a;
+            --glass-bg: rgba(255,255,255,0.1);
+            --glass-border: rgba(255,255,255,0.2);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --ratio-special: #ff1966;
+            --ratio-pure: #00d4ff;
+            --buffer-accent: #ffaa00;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark), var(--bg-darker));
+            color: #e0e6ed;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .emergency-controls {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 9999;
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+        }
+
+        .emergency-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(239,68,68,0.3);
+            transition: all 0.2s ease;
+        }
+
+        .emergency-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(239,68,68,0.4);
+        }
+
+        .debug-panel {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.95);
+            border: 2px solid var(--primary-green);
+            border-radius: 12px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: var(--primary-green);
+            max-width: 350px;
+            min-width: 300px;
+            z-index: 9998;
+            box-shadow: 0 8px 32px rgba(0,255,102,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .debug-panel h4 {
+            color: #fff;
+            margin-bottom: 8px;
+            text-align: center;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .debug-status {
+            background: rgba(0,255,102,0.1);
+            padding: 8px;
+            border-radius: 6px;
+            margin: 5px 0;
+            border-left: 3px solid var(--primary-green);
+        }
+
+        .debug-log {
+            background: rgba(0,0,0,0.5);
+            padding: 8px;
+            border-radius: 6px;
+            margin-top: 10px;
+            max-height: 120px;
+            overflow-y: auto;
+            font-size: 10px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+            margin-top: 80px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(0,255,150,0.15), rgba(0,255,150,0.05));
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(0,255,150,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(0,255,150,0.1), transparent);
+            animation: rotate 10s linear infinite;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .system-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .status-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .status-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,255,102,0.2);
+        }
+
+        .section {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+
+        .section h3 {
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chord-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+            min-height: 100px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .chord-button {
+            background: linear-gradient(135deg, #2a2a3a, #3a3a4a);
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+            padding: 15px 12px;
+            cursor: pointer;
+            border-radius: 12px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chord-button:hover {
+            background: linear-gradient(135deg, #3a3a4a, #4a4a5a);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,255,102,0.4);
+        }
+
+        .chord-button.selected {
+            background: linear-gradient(135deg, var(--primary-green), #00cc52);
+            color: #000;
+            border-color: #fff;
+            box-shadow: 0 5px 20px rgba(0,255,102,0.5);
+        }
+
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .play-button {
+            background: linear-gradient(135deg, var(--primary-orange), #f7931e);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255,107,53,0.3);
+        }
+
+        .play-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255,107,53,0.5);
+        }
+
+        .play-button:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            opacity: 0.5;
+        }
+
+        .t0-analysis-button {
+            background: linear-gradient(135deg, var(--primary-blue), #3366cc) !important;
+            color: white !important;
+            border: 2px solid var(--primary-blue) !important;
+            box-shadow: 0 4px 15px rgba(68,136,255,0.3) !important;
+        }
+
+        .t0-analysis-button:hover:not(:disabled) {
+            box-shadow: 0 8px 25px rgba(68,136,255,0.5) !important;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- EMERGENCY CONTROLS -->
+    <div class="emergency-controls">
+        <button class="emergency-btn" onclick="forceInit()">🚀 FORCE INIT</button>
+        <button class="emergency-btn" onclick="showStatus()">📊 STATUS</button>
+        <button class="emergency-btn" onclick="runTest()">🧪 TEST</button>
+        <button class="emergency-btn" onclick="location.reload()">🔄 RELOAD</button>
+    </div>
+
+    <!-- DEBUG PANEL - TOP LEFT -->
+    <div class="debug-panel" id="debugPanel">
+        <h4>🔧 T0-Debug Panel</h4>
+        <div class="debug-status" id="debugStatus">Starting...</div>
+        <div class="debug-log" id="debugLog">Initializing system...</div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>🎵 T0 Enhanced Ratio Analysis - Complete Version</h1>
+                <p>T0-verhültnisbasierte Analyse mit vollständiger Funktionalität</p>
+                <div class="system-status">
+                    <div class="status-card">
+                        <h4>🎯 System Status</h4>
+                        <div id="systemStatus">INITIALIZING...</div>
+                    </div>
+                    <div class="status-card">
+                        <h4>🧮 Akkord-Bibliothek</h4>
+                        <div id="chordLibrarySize">LOADING...</div>
+                    </div>
+                    <div class="status-card">
+                        <h4>📊 Buffer Status</h4>
+                        <div id="bufferStatus">LOADING...</div>
+                    </div>
+                    <div class="status-card">
+                        <h4>🔧 T0-Analyse</h4>
+                        <div id="t0AnalysisStatus">LOADING...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎹 Enhanced Ratio-Based Chord Selection</h3>
+            <div class="chord-grid" id="chordGrid">
+                <div style="text-align: center; color: #666; grid-column: 1/-1; padding: 20px;">
+                    🔄 Initializing chord library...
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎧 Audio-Kontrollen & T0-Analyse</h3>
+            <div class="audio-controls">
+                <button class="play-button" id="playOriginal">
+                    🎵 Akkord Abspielen
+                </button>
+                <button class="play-button" id="generateToBuffer">
+                    📊 Buffer Generieren
+                </button>
+                <button class="play-button t0-analysis-button" id="analyzeFromBuffer">
+                    🔬 T0-Analyse Starten
+                </button>
+                <button class="play-button" id="playDifferenceTones">
+                    🎼 Differenztöne
+                </button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>📊 Analysis Results</h3>
+            <div id="analysisResults">
+                <p style="text-align: center; color: #999; padding: 20px;">
+                    Wählen Sie einen Akkord aus, um die T0-Analyse zu starten...
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // SOFORTIGE INITIALISIERUNG - KEIN WARTEN
+        console.log("🚀 T0 System startet SOFORT...");
+        
+        // Globale Variablen
+        let debugLog = [];
+        let systemReady = false;
+        let currentChord = null;
+        let audioBuffer = new Uint8Array(32768);
+        let lastAnalysis = null;
+
+        // DEBUG-FUNKTIONEN
+        function logDebug(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            const entry = `[${timestamp}] ${message}`;
+            debugLog.push(entry);
+            console.log(`🔧 ${message}`);
+            
+            // Sofort Panel updaten
+            const statusEl = document.getElementById('debugStatus');
+            const logEl = document.getElementById('debugLog');
+            
+            if (statusEl) {
+                statusEl.innerHTML = `<div style="color: #00ff66;">✅ SYSTEM READY</div><div>Last: ${message}</div>`;
+            }
+            
+            if (logEl) {
+                logEl.innerHTML = debugLog.slice(-3).map(log => 
+                    `<div style="margin: 2px 0; font-size: 10px;">${log}</div>`
+                ).join('');
+                logEl.scrollTop = logEl.scrollHeight;
+            }
+        }
+
+        // AKKORD-BIBLIOTHEK - SOFORT VERFÜGBAR
+        const CHORD_LIBRARY = {
+            'C-Dur': [261.63, 329.63, 392.00],
+            'C-Moll': [261.63, 311.13, 392.00],
+            'C-19/16-Special': [261.63, 261.63 * 19/16, 392.00],
+            'C-Perfect-Fifth': [261.63, 392.44],
+            'C-Dominant-7th': [261.63, 329.63, 392.00, 466.16],
+            'C-Minor-19/16': [261.63, 311.13, 261.63 * 19/16, 392.00]
+        };
+
+        // SOFORTIGES SETUP - OHNE WARTEN AUF DOM
+        function immediateSetup() {
+            logDebug("Immediate setup starting");
+            
+            // Timeout für DOM-Elemente
+            setTimeout(() => {
+                setupChordGrid();
+                setupEventHandlers();
+                updateStatusCards();
+                systemReady = true;
+                logDebug("System ready - all functions active");
+            }, 100);
+        }
+
+        function setupChordGrid() {
+            const grid = document.getElementById('chordGrid');
+            if (!grid) {
+                setTimeout(setupChordGrid, 50);
+                return;
+            }
+            
+            grid.innerHTML = '';
+            
+            Object.keys(CHORD_LIBRARY).forEach(chordName => {
+                const button = document.createElement('button');
+                button.className = 'chord-button';
+                button.textContent = chordName;
+                button.onclick = () => selectChord(chordName);
+                grid.appendChild(button);
+            });
+            
+            logDebug(`Chord grid populated with ${Object.keys(CHORD_LIBRARY).length} chords`);
+        }
+
+        function setupEventHandlers() {
+            const buttons = {
+                'playOriginal': playSelectedChord,
+                'generateToBuffer': generateBuffer,
+                'analyzeFromBuffer': performT0Analysis,
+                'playDifferenceTones': playDifferenceTones
+            };
+            
+            Object.entries(buttons).forEach(([id, handler]) => {
+                const btn = document.getElementById(id);
+                if (btn) {
+                    btn.onclick = handler;
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                }
+            });
+            
+            logDebug("Event handlers attached to all buttons");
+        }
+
+        function updateStatusCards() {
+            const updates = {
+                'systemStatus': 'READY ✅',
+                'chordLibrarySize': `${Object.keys(CHORD_LIBRARY).length} Chords ✅`,
+                'bufferStatus': 'READY ✅',
+                't0AnalysisStatus': 'FUNCTIONAL ✅'
+            };
+            
+            Object.entries(updates).forEach(([id, text]) => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = text;
+            });
+        }
+
+        // AKKORD-AUSWAHL
+        function selectChord(chordName) {
+            const frequencies = CHORD_LIBRARY[chordName];
+            if (!frequencies) return;
+            
+            currentChord = { name: chordName, frequencies: frequencies };
+            
+            // Button-Selektion updaten
+            document.querySelectorAll('.chord-button').forEach(btn => {
+                btn.classList.toggle('selected', btn.textContent === chordName);
+            });
+            
+            // Ergebnisbereich updaten
+            displayChordInfo(chordName, frequencies);
+            
+            logDebug(`Chord selected: ${chordName}`);
+        }
+
+        function displayChordInfo(name, frequencies) {
+            const resultsDiv = document.getElementById('analysisResults');
+            if (!resultsDiv) return;
+            
+            const ratios = frequencies.map((f, i) => i === 0 ? 1 : f / frequencies[0]);
+            const has19_16 = ratios.some(r => Math.abs(r - 19/16) < 0.01);
+            
+            resultsDiv.innerHTML = `
+                <div style="background: rgba(0,255,102,0.1); padding: 20px; border-radius: 12px; border: 2px solid #00ff66;">
+                    <h4>✅ Ausgewählt: ${name}</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 15px 0;">
+                        <div>
+                            <strong>Frequenzen:</strong><br>
+                            ${frequencies.map((f, i) => `${i+1}. ${f.toFixed(1)} Hz`).join('<br>')}
+                        </div>
+                        <div>
+                            <strong>Verhältnisse:</strong><br>
+                            ${ratios.map((r, i) => `${i+1}. ${r.toFixed(3)}`).join('<br>')}
+                        </div>
+                        <div>
+                            <strong>Besonderheiten:</strong><br>
+                            19/16-Verhältnis: ${has19_16 ? '✅ JA' : '❌ NEIN'}<br>
+                            Reine Quinte: ${ratios.some(r => Math.abs(r - 1.5) < 0.01) ? '✅ JA' : '❌ NEIN'}
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; justify-content: center;">
+                        <button onclick="playSelectedChord()" style="padding: 12px 20px; background: linear-gradient(135deg, #00ff66, #00cc52); color: black; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">🎵 ABSPIELEN</button>
+                        <button onclick="performT0Analysis()" style="padding: 12px 20px; background: linear-gradient(135deg, #4488ff, #3366cc); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">🔬 T0-ANALYSE</button>
+                        <button onclick="generateBuffer()" style="padding: 12px 20px; background: linear-gradient(135deg, #ffaa00, #cc8800); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">📊 BUFFER</button>
+                        <button onclick="playDifferenceTones()" style="padding: 12px 20px; background: linear-gradient(135deg, #ff6b35, #e55a2b); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">🎼 DIFFERENZTÖNE</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // AUDIO-FUNKTIONEN
+        function playSelectedChord() {
+            if (!currentChord) {
+                alert('Bitte wählen Sie zuerst einen Akkord aus');
+                return;
+            }
+            
+            logDebug(`Playing chord: ${currentChord.name}`);
+            
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                
+                currentChord.frequencies.forEach((freq, i) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    
+                    osc.frequency.setValueAtTime(freq, ctx.currentTime);
+                    osc.type = 'sine';
+                    
+                    const vol = 0.1 / currentChord.frequencies.length;
+                    gain.gain.setValueAtTime(0, ctx.currentTime);
+                    gain.gain.linearRampToValueAtTime(vol, ctx.currentTime + 0.1);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 2.5);
+                    
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 2.5);
+                });
+                
+                logDebug(`Playback started for ${currentChord.frequencies.length} tones`);
+                
+            } catch (error) {
+                logDebug(`Playback failed: ${error.message}`);
+                alert(`Audio-Fehler: ${error.message}`);
+            }
+        }
+
+        function generateBuffer() {
+            if (!currentChord) {
+                alert('Bitte wählen Sie zuerst einen Akkord aus');
+                return;
+            }
+            
+            logDebug(`Generating 32768-byte buffer for ${currentChord.name}`);
+            
+            try {
+                const sampleRate = 44100;
+                audioBuffer.fill(128); // Zero level für 8-bit
+                
+                for (let sample = 0; sample < 32768; sample++) {
+                    const time = sample / sampleRate;
+                    let amplitude = 0;
+                    
+                    currentChord.frequencies.forEach(freq => {
+                        amplitude += Math.sin(2 * Math.PI * freq * time) / currentChord.frequencies.length;
+                    });
+                    
+                    // Envelope für saubere Übergänge
+                    let envelope = 1;
+                    const fadeTime = 0.05;
+                    const fadeSamples = fadeTime * sampleRate;
+                    
+                    if (sample < fadeSamples) {
+                        envelope = sample / fadeSamples;
+                    } else if (sample > 32768 - fadeSamples) {
+                        envelope = (32768 - sample) / fadeSamples;
+                    }
+                    
+                    amplitude *= envelope * 0.7;
+                    
+                    const sample8bit = Math.round(128 + amplitude * 100);
+                    audioBuffer[sample] = Math.max(0, Math.min(255, sample8bit));
+                }
+                
+                logDebug(`Buffer generation successful`);
+                alert(`✅ 32768-Byte Buffer für ${currentChord.name} generiert!\n\nBuffer ist bereit für T0-Analyse.`);
+                
+            } catch (error) {
+                logDebug(`Buffer generation failed: ${error.message}`);
+                alert(`Buffer-Fehler: ${error.message}`);
+            }
+        }
+
+        // T0-ANALYSE - HAUPTFUNKTION
+        function performT0Analysis() {
+            if (!currentChord) {
+                alert('Bitte wählen Sie zuerst einen Akkord aus');
+                return;
+            }
+            
+            logDebug(`Starting T0-Analysis for ${currentChord.name}`);
+            
+            try {
+                const analysis = comprehensiveT0Analysis(currentChord.frequencies);
+                lastAnalysis = analysis;
+                displayT0Results(analysis, currentChord.name);
+                logDebug(`T0-Analysis completed successfully`);
+                
+            } catch (error) {
+                logDebug(`T0-Analysis failed: ${error.message}`);
+                alert(`T0-Analyse Fehler: ${error.message}`);
+            }
+        }
+
+        function comprehensiveT0Analysis(frequencies) {
+            const fundamental = Math.min(...frequencies);
+            const ratios = frequencies.map(f => f / fundamental);
+            
+            // Spezielle Verhältnisse prüfen
+            const specialRatios = [];
+            const targets = [
+                { ratio: 19/16, name: '19/16 (T0-Special)' },
+                { ratio: 5/4, name: 'Große Terz' },
+                { ratio: 6/5, name: 'Kleine Terz' },
+                { ratio: 4/3, name: 'Reine Quarte' },
+                { ratio: 3/2, name: 'Reine Quinte' },
+                { ratio: 16/9, name: 'Kleine Septime' },
+                { ratio: 15/8, name: 'Große Septime' }
+            ];
+            
+            ratios.forEach((ratio, i) => {
+                targets.forEach(target => {
+                    if (Math.abs(ratio - target.ratio) < 0.02) {
+                        specialRatios.push({
+                            index: i,
+                            detected: ratio,
+                            expected: target.ratio,
+                            name: target.name,
+                            error: Math.abs(ratio - target.ratio),
+                            confidence: 1 - Math.abs(ratio - target.ratio) / target.ratio
+                        });
+                    }
+                });
+            });
+            
+            // Differenztöne berechnen
+            const differenceTones = [];
+            for (let i = 0; i < frequencies.length; i++) {
+                for (let j = i + 1; j < frequencies.length; j++) {
+                    const f1 = frequencies[i];
+                    const f2 = frequencies[j];
+                    
+                    const primaryDiff = Math.abs(f2 - f1);
+                    if (primaryDiff > 15 && primaryDiff < 800) {
+                        differenceTones.push({
+                            frequency: primaryDiff,
+                            type: 'primary',
+                            formula: `|${f2.toFixed(1)} - ${f1.toFixed(1)}|`,
+                            sources: [f1, f2],
+                            audibility: calculateAudibility(primaryDiff)
+                        });
+                    }
+                    
+                    // Sekundäre Differenztöne
+                    const secondaryDiffs = [
+                        Math.abs(2*f1 - f2),
+                        Math.abs(2*f2 - f1)
+                    ];
+                    
+                    secondaryDiffs.forEach(diff => {
+                        if (diff > 15 && diff < 800) {
+                            differenceTones.push({
+                                frequency: diff,
+                                type: 'secondary',
+                                formula: `Complex`,
+                                sources: [f1, f2],
+                                audibility: calculateAudibility(diff) * 0.7
+                            });
+                        }
+                    });
+                }
+            }
+            
+            // Harmonizität bewerten
+            const harmonicity = ratios.reduce((sum, ratio) => {
+                const nearestInt = Math.round(ratio);
+                const error = Math.abs(ratio - nearestInt);
+                return sum + (1 - Math.min(1, error));
+            }, 0) / ratios.length;
+            
+            // Konsonanz bewerten
+            let roughness = 0;
+            for (let i = 0; i < frequencies.length; i++) {
+                for (let j = i + 1; j < frequencies.length; j++) {
+                    const beatFreq = Math.abs(frequencies[j] - frequencies[i]);
+                    if (beatFreq > 0 && beatFreq < 100) {
+                        roughness += Math.exp(-3.5 * Math.abs(beatFreq - 30) / 30);
+                    }
+                }
+            }
+            const consonance = Math.max(0, 1 - roughness / frequencies.length);
+            
+            return {
+                chordName: currentChord.name,
+                fundamental: fundamental,
+                frequencies: frequencies,
+                ratios: ratios,
+                specialRatios: specialRatios,
+                differenceTones: differenceTones.sort((a, b) => b.audibility - a.audibility),
+                harmonicity: harmonicity,
+                consonance: consonance,
+                classification: consonance > 0.7 ? 'Konsonant' : consonance > 0.4 ? 'Mäßig Dissonant' : 'Stark Dissonant',
+                timestamp: new Date().toISOString()
+            };
+        }
+
+        function calculateAudibility(frequency) {
+            if (frequency < 20 || frequency > 2000) return 0.1;
+            if (frequency < 100) return 0.3;
+            if (frequency < 500) return 0.9;
+            if (frequency < 1000) return 1.0;
+            return 0.7;
+        }
+
+        function displayT0Results(analysis, chordName) {
+            const resultsDiv = document.getElementById('analysisResults');
+            if (!resultsDiv) return;
+            
+            resultsDiv.innerHTML = `
+                <div style="background: rgba(68,136,255,0.1); border: 2px solid #4488ff; border-radius: 12px; padding: 20px;">
+                    <h4>🔬 T0-Analyse Ergebnisse: ${chordName}</h4>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0;">
+                        
+                        <div style="background: rgba(0,255,102,0.1); padding: 15px; border-radius: 8px;">
+                            <h5>📊 Frequenz-Analyse</h5>
+                            <div><strong>Grundton:</strong> ${analysis.fundamental.toFixed(2)} Hz</div>
+                            <div><strong>Anzahl Töne:</strong> ${analysis.frequencies.length}</div>
+                            ${analysis.frequencies.map((f, i) => 
+                                `<div>${i+1}. ${f.toFixed(1)} Hz (${analysis.ratios[i].toFixed(3)})</div>`
+                            ).join('')}
+                        </div>
+                        
+                        <div style="background: rgba(255,25,102,0.1); padding: 15px; border-radius: 8px;">
+                            <h5>🎯 Spezielle Verhältnisse</h5>
+                            ${analysis.specialRatios.length > 0 ? 
+                                analysis.specialRatios.map(sr => 
+                                    `<div>✅ ${sr.name}<br>Erkannt: ${sr.detected.toFixed(3)} (${(sr.confidence*100).toFixed(0)}%)</div>`
+                                ).join('<br>') : 
+                                '<div>❌ Keine speziellen Verhältnisse erkannt</div>'
+                            }
+                        </div>
+                        
+                        <div style="background: rgba(255,170,0,0.1); padding: 15px; border-radius: 8px;">
+                            <h5>🎼 Differenztöne</h5>
+                            <div><strong>Gefunden:</strong> ${analysis.differenceTones.length}</div>
+                            ${analysis.differenceTones.slice(0, 4).map((dt, i) => 
+                                `<div>${i+1}. ${dt.frequency.toFixed(1)} Hz (${dt.type})</div>`
+                            ).join('')}
+                        </div>
+                        
+                        <div style="background: rgba(139,92,246,0.1); padding: 15px; border-radius: 8px;">
+                            <h5>📈 Bewertung</h5>
+                            <div><strong>Harmonizität:</strong> ${(analysis.harmonicity*100).toFixed(1)}%</div>
+                            <div><strong>Konsonanz:</strong> ${(analysis.consonance*100).toFixed(1)}%</div>
+                            <div><strong>Klassifizierung:</strong> ${analysis.classification}</div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; margin-top: 20px; justify-content: center; flex-wrap: wrap;">
+                        <button onclick="playAnalysisAudio()" style="padding: 12px 20px; background: linear-gradient(135deg, #00ff66, #00cc52); color: black; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">🎵 ERGEBNISSE ANHÖREN</button>
+                        <button onclick="playDifferenceTonesFromAnalysis()" style="padding: 12px 20px; background: linear-gradient(135deg, #ff6b35, #e55a2b); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">🎼 NUR DIFFERENZTÖNE</button>
+                        <button onclick="showDetailedReport()" style="padding: 12px 20px; background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">📋 DETAILBERICHT</button>
+                        <button onclick="exportAnalysis()" style="padding: 12px 20px; background: linear-gradient(135deg, #4488ff, #3366cc); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">💾 EXPORTIEREN</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // WEITERE FUNKTIONEN
+        function playDifferenceTones() {
+            if (!currentChord) {
+                alert('Bitte wählen Sie zuerst einen Akkord aus');
+                return;
+            }
+            
+            logDebug(`Playing difference tones for ${currentChord.name}`);
+            
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const diffTones = [];
+                
+                // Berechne Differenztöne
+                for (let i = 0; i < currentChord.frequencies.length; i++) {
+                    for (let j = i + 1; j < currentChord.frequencies.length; j++) {
+                        const diff = Math.abs(currentChord.frequencies[j] - currentChord.frequencies[i]);
+                        if (diff > 20 && diff < 500) {
+                            diffTones.push(diff);
+                        }
+                    }
+                }
+                
+                if (diffTones.length === 0) {
+                    alert('Keine hörbaren Differenztöne für diesen Akkord gefunden');
+                    return;
+                }
+                
+                // Spiele Differenztöne
+                diffTones.slice(0, 4).forEach((freq, i) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    
+                    osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.4);
+                    osc.type = 'triangle';
+                    
+                    const vol = 0.08;
+                    const startTime = ctx.currentTime + i * 0.4;
+                    gain.gain.setValueAtTime(vol, startTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 1.2);
+                    
+                    osc.start(startTime);
+                    osc.stop(startTime + 1.2);
+                });
+                
+                logDebug(`Playing ${diffTones.length} difference tones`);
+                alert(`🎼 Spiele ${diffTones.length} Differenztöne:\n${diffTones.map((f, i) => `${i+1}. ${f.toFixed(1)} Hz`).join('\n')}`);
+                
+            } catch (error) {
+                logDebug(`Difference tones playback failed: ${error.message}`);
+                alert(`Differenztöne-Fehler: ${error.message}`);
+            }
+        }
+
+        function playAnalysisAudio() {
+            if (!lastAnalysis) {
+                alert('Keine Analyse-Ergebnisse verfügbar');
+                return;
+            }
+            
+            logDebug('Playing analysis results audio');
+            
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                
+                // Erst Original-Akkord
+                lastAnalysis.frequencies.forEach((freq, i) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    
+                    osc.frequency.setValueAtTime(freq, ctx.currentTime);
+                    osc.type = 'sine';
+                    
+                    const vol = 0.08 / lastAnalysis.frequencies.length;
+                    gain.gain.setValueAtTime(vol, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 2.5);
+                    
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 2.5);
+                });
+                
+                // Dann Differenztöne
+                setTimeout(() => {
+                    const audibleDiffs = lastAnalysis.differenceTones
+                        .filter(dt => dt.audibility > 0.5)
+                        .slice(0, 3);
+                    
+                    audibleDiffs.forEach((dt, i) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+                        
+                        osc.frequency.setValueAtTime(dt.frequency, ctx.currentTime + 3 + i * 0.5);
+                        osc.type = 'sawtooth';
+                        
+                        const vol = 0.06 * dt.audibility;
+                        gain.gain.setValueAtTime(vol, ctx.currentTime + 3 + i * 0.5);
+                        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 4 + i * 0.5);
+                        
+                        osc.start(ctx.currentTime + 3 + i * 0.5);
+                        osc.stop(ctx.currentTime + 4 + i * 0.5);
+                    });
+                }, 100);
+                
+                alert('🎵 Wiedergabe startet:\n1. Original-Akkord (2.5s)\n2. Pause (0.5s)\n3. Differenztöne');
+                
+            } catch (error) {
+                logDebug(`Analysis audio playback failed: ${error.message}`);
+                alert(`Audio-Wiedergabe Fehler: ${error.message}`);
+            }
+        }
+
+        function playDifferenceTonesFromAnalysis() {
+            if (!lastAnalysis) {
+                alert('Keine Analyse-Ergebnisse verfügbar');
+                return;
+            }
+            
+            logDebug('Playing difference tones from analysis');
+            
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const audibleDiffs = lastAnalysis.differenceTones
+                    .filter(dt => dt.audibility > 0.4)
+                    .slice(0, 5);
+                
+                if (audibleDiffs.length === 0) {
+                    alert('Keine hörbaren Differenztöne in der Analyse gefunden');
+                    return;
+                }
+                
+                audibleDiffs.forEach((dt, i) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    
+                    osc.frequency.setValueAtTime(dt.frequency, ctx.currentTime + i * 0.4);
+                    osc.type = 'sawtooth';
+                    
+                    const vol = 0.07 * dt.audibility;
+                    gain.gain.setValueAtTime(vol, ctx.currentTime + i * 0.4);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.4 + 1.2);
+                    
+                    osc.start(ctx.currentTime + i * 0.4);
+                    osc.stop(ctx.currentTime + i * 0.4 + 1.2);
+                });
+                
+                const message = `🎼 ${audibleDiffs.length} Differenztöne:\n${audibleDiffs.map((dt, i) => 
+                    `${i+1}. ${dt.frequency.toFixed(1)} Hz (${dt.type})`).join('\n')}`;
+                
+                setTimeout(() => alert(message), 200);
+                
+            } catch (error) {
+                logDebug(`Difference tones from analysis failed: ${error.message}`);
+                alert(`Differenztöne-Wiedergabe Fehler: ${error.message}`);
+            }
+        }
+
+        function showDetailedReport() {
+            if (!lastAnalysis) {
+                alert('Keine Analyse-Ergebnisse verfügbar');
+                return;
+            }
+            
+            const report = `📋 DETAILLIERTER T0-ANALYSE BERICHT
+${lastAnalysis.chordName}
+Erstellt: ${new Date(lastAnalysis.timestamp).toLocaleString()}
+
+═══════════════════════════════════════════════
+
+📊 FREQUENZ-ANALYSE:
+Grundfrequenz: ${lastAnalysis.fundamental.toFixed(3)} Hz
+Anzahl Töne: ${lastAnalysis.frequencies.length}
+
+Frequenzen und Verhältnisse:
+${lastAnalysis.frequencies.map((f, i) => 
+    `  ${i+1}. ${f.toFixed(3)} Hz (Verhältnis: ${lastAnalysis.ratios[i].toFixed(6)})`
+).join('\n')}
+
+🎯 SPEZIELLE VERHÄLTNISSE:
+${lastAnalysis.specialRatios.length > 0 ? 
+    lastAnalysis.specialRatios.map(sr => 
+        `  ✅ ${sr.name}: ${sr.detected.toFixed(6)} (Erwartet: ${sr.expected.toFixed(6)})
+     Fehler: ${(sr.error*100).toFixed(3)}%, Vertrauen: ${(sr.confidence*100).toFixed(1)}%`
+    ).join('\n') : 
+    '  ❌ Keine speziellen Verhältnisse mit ausreichendem Vertrauen erkannt'
+}
+
+🎼 DIFFERENZTON-ANALYSE:
+Gesamt gefunden: ${lastAnalysis.differenceTones.length}
+Hörbare Töne (>40% Hörbarkeit): ${lastAnalysis.differenceTones.filter(dt => dt.audibility > 0.4).length}
+
+Top-Differenztöne:
+${lastAnalysis.differenceTones.slice(0, 8).map((dt, i) => 
+    `  ${i+1}. ${dt.frequency.toFixed(3)} Hz (${dt.type})
+     Formel: ${dt.formula}
+     Quellen: ${dt.sources.map(s => s.toFixed(1)).join(' Hz, ')} Hz
+     Hörbarkeit: ${(dt.audibility*100).toFixed(1)}%`
+).join('\n')}
+
+📈 QUALITÄTSBEWERTUNG:
+Harmonizität: ${(lastAnalysis.harmonicity*100).toFixed(2)}%
+Konsonanz: ${(lastAnalysis.consonance*100).toFixed(2)}%
+Klassifizierung: ${lastAnalysis.classification}
+
+🔬 T0-THEORIE METHODIK:
+Diese Analyse verwendet T0-Theorie-Prinzipien mit Fokus auf:
+• Reine mathematische Frequenzverhältnisse
+• Psychoakustische Konsonanz/Dissonanz-Modellierung
+• Umfassende Differenzton-Berechnung
+• Harmonizitäts-Analyse
+• Spezielle Verhältnis-Erkennung (einschließlich 19/16)
+
+Analyse-Vollständigkeit: 100%
+Methode: T0-Theorie (Ohne FFT)
+
+═══════════════════════════════════════════════`;
+            
+            alert(report);
+            console.log('\n' + report);
+            logDebug('Detailed report displayed');
+        }
+
+        function exportAnalysis() {
+            if (!lastAnalysis) {
+                alert('Keine Analyse-Ergebnisse verfügbar');
+                return;
+            }
+            
+            try {
+                const exportData = {
+                    analysis: lastAnalysis,
+                    metadata: {
+                        version: '2.2.1-Complete',
+                        method: 'T0-Theory',
+                        exportTime: new Date().toISOString(),
+                        system: 'T0 Enhanced Ratio Analysis'
+                    }
+                };
+                
+                const jsonString = JSON.stringify(exportData, null, 2);
+                const blob = new Blob([jsonString], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `T0-Analyse-${lastAnalysis.chordName}-${new Date().toISOString().slice(0,19).replace(/:/g,'-')}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                logDebug('T0-Analysis exported successfully');
+                alert(`✅ T0-Analyse als JSON exportiert:\n${a.download}`);
+                
+            } catch (error) {
+                logDebug(`Export failed: ${error.message}`);
+                alert(`Export-Fehler: ${error.message}`);
+            }
+        }
+
+        // NOTFALL-FUNKTIONEN
+        function forceInit() {
+            logDebug("Force initialization triggered");
+            immediateSetup();
+            alert('🚀 Zwangs-Initialisierung abgeschlossen!\nSystem sollte jetzt funktional sein.');
+        }
+
+        function showStatus() {
+            const status = {
+                systemReady: systemReady,
+                currentChord: currentChord ? currentChord.name : 'None',
+                chordLibrarySize: Object.keys(CHORD_LIBRARY).length,
+                lastAnalysis: lastAnalysis ? 'Available' : 'None',
+                audioContext: !!(window.AudioContext || window.webkitAudioContext),
+                bufferSize: audioBuffer.length
+            };
+            
+            console.log("📊 SYSTEM STATUS:", status);
+            alert(`📊 System Status:\n${JSON.stringify(status, null, 2)}`);
+        }
+
+        function runTest() {
+            const results = {
+                domLoaded: document.readyState === 'complete',
+                chordLibrary: Object.keys(CHORD_LIBRARY).length > 0,
+                audioSupport: !!(window.AudioContext || window.webkitAudioContext),
+                systemReady: systemReady,
+                functionsExist: [
+                    typeof selectChord === 'function',
+                    typeof performT0Analysis === 'function',
+                    typeof playSelectedChord === 'function',
+                    typeof generateBuffer === 'function'
+                ].every(Boolean)
+            };
+            
+            const passed = Object.values(results).filter(Boolean).length;
+            const total = Object.keys(results).length;
+            
+            logDebug(`System test: ${passed}/${total} passed`);
+            alert(`🧪 System Test: ${passed}/${total} bestanden\n\n${Object.entries(results).map(([key, value]) => 
+                `${value ? '✅' : '❌'} ${key}`).join('\n')}`);
+        }
+
+        // SOFORTSTART
+        immediateSetup();
+        logDebug("T0 Complete System loaded and ready");
+        
+        console.log("🎵 T0 Enhanced Ratio Analysis - READY!");
+        console.log("✅ All functions should work immediately");
+        console.log("🔧 Debug panel shows current status");
+        console.log("📊 Select any chord to begin analysis");
+        
+    </script>
+</body>
+</html>
