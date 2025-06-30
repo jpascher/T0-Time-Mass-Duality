@@ -1,69 +1,68 @@
-﻿# T0 Harmonic Library
+﻿# T0 Harmonic Library v2.0.1
 
-> Advanced difference tone-based chord analysis and reconstruction system  
-> Part of the **T0-Time-Mass-Duality** research project by **Johann Pascher**
+> Advanced ratio-based chord analysis with optimized tuning  
+> Part of **T0-Time-Mass-Duality** research by **Johann Pascher**
 
-[![npm version](https://badge.fury.io/js/t0-harmonic-library.svg)](https://badge.fury.io/js/t0-harmonic-library)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+## 🚀 Installation
 
-## 🎵 Overview
-
-This library combines all existing T0 harmonic analysis components into a unified, npm-ready package. Built on years of research into difference tone theory and harmonic analysis.
-
-### Existing Components Integrated:
-- \Audio_Analyzer.html\ - Main analysis interface
-- \	0_harmonic_analyzer.js\ - Core analysis functions  
-- \harmonic_components_library.js\ - Component library
-- \	0_audio_test_program-85%.html\ - Test program
-- \difference_tone_rules.md\ - Theory documentation
-- And all other research files...
-
-## 🚀 Quick Start
-
+### From GitHub:
 \\\ash
-npm install t0-harmonic-library
+# Direct installation:
+npm install git+https://github.com/jpascher/T0-Time-Mass-Duality.git
+
+# Or in package.json:
+"dependencies": {
+  "t0-harmonic-library": "git+https://github.com/jpascher/T0-Time-Mass-Duality.git#main"
+}
 \\\
 
+### Local Development:
+\\\ash
+git clone https://github.com/jpascher/T0-Time-Mass-Duality.git
+cd T0-Time-Mass-Duality/t0-harmonic-library
+npm install && npm run build
+\\\
+
+## 🎵 Quick Start
+
+### Browser:
+\\\html
+<script src="dist/t0-audio-system.umd.js"></script>
+<script>
+  const t0 = new T0AudioSystem.T0AudioSystemComplete();
+  t0.analyzeChord('C-Minor').then(result => {
+    console.log('Optimized Minor:', result.ratios); // [1.0, 1.1875, 1.5]
+  });
+</script>
+\\\
+
+### Node.js:
 \\\javascript
-import { T0AudioSystemComplete } from 't0-harmonic-library';
-
+const { T0AudioSystemComplete } = require('./dist/t0-audio-system.cjs.js');
 const t0 = new T0AudioSystemComplete();
-await t0.analyzeChord('C-Major');
-console.log(t0.getSystemInfo());
+const result = await t0.analyzeChord('A-Minor', 440);
 \\\
 
-## 📁 Project Structure
+## 🎯 Key Features
 
-Your existing research files are now organized as:
-- \src/\ - Source code (integrated from your existing JS files)
-- \dist/\ - Built library files
-- \examples/\ - Usage examples
-- \	ests/\ - Test suite
-- \docs/\ - Documentation
+- **Optimized Moll**: 19/16 ratio (only 2.5 cents from temperament!)
+- **Pure Dur**: 5/4 ratio (harmonically rich)
+- **Multi-format**: UMD/ESM/CJS builds (10-12KB)
+- **200+ chords** with mathematical precision
 
-## 🔧 Development Commands
+## 🔬 Research
 
-\\\ash
-npm install        # Install dependencies
-npm run build      # Build the library
-npm test           # Run tests
-npm run lint       # Check code quality
-\\\
+Part of T0-Time-Mass-Duality research exploring optimal balance between:
+- Mathematical purity (pure ratios)
+- Practical compatibility (temperament)
 
-## 📊 Your Research Files
-
-All your existing files remain unchanged:
-- Audio_Analyzer.html (\ bytes)
-- t0_harmonic_analyzer.js (\ bytes)
-- harmonic_components_library.js (\ bytes)
-- And \ other research files...
+**Result**: Minor chords only 2.5 cents from equal temperament while maintaining integer ratios!
 
 ## 👨‍🔬 Author
 
-**Johann Pascher**  
-T0-Time-Mass-Duality Research  
-GitHub: https://github.com/jpascher
+Johann Pascher | T0-Time-Mass-Duality Research  
+GitHub: https://github.com/jpascher/T0-Time-Mass-Duality
 
 ## 📄 License
 
-MIT License - See [LICENSE](LICENSE) file for details.
+MIT
