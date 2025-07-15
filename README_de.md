@@ -4,9 +4,15 @@
 
 Das T0-Modell schlägt einen Ansatz für die Grundlagenphysik durch Zeit-Masse-Dualität vor, wobei das intrinsische Zeitfeld T(x,t) = 1/max(m(x,t), ω) eine vereinheitlichte Behandlung von Quantenmechanik und Relativität ermöglicht. Dieses Framework arbeitet in natürlichen Einheiten, wo ℏ = c = α_EM = β_T = 1.
 
-## Aktueller Status (Juli 2025)
+## Neueste Ergänzungen (Juli 2025)
 
-Das Projekt umfasst theoretische Entwicklungen und vergleichende Studien mit Quantenhardware-Daten. Interaktive Tools und Dokumentation stehen für die Erforschung der Konzepte zur Verfügung.
+Das Projekt wurde mit drei neuen umfangreichen theoretischen Dokumenten aktualisiert:
+
+1. **[T0 Energie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-Energie_De.pdf)** (15.07.2025) - Das umfassendste Dokument (1,3 MB) mit vollständiger energiebasierter Formulierung
+2. **[T0 Masse](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Masse_De.pdf)** (15.07.2025) - Revolutionärer Ansatz zur Masse (819 KB) mit Hypothese zu masselosen Feldmustern
+3. **[T0 Quantenmechanik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0QM_De.pdf)** (15.07.2025) - Neueste Quanteninterpretation (458 KB) mit vereinheitlichten Feldgleichungen
+
+Alle Dokumente sind sowohl in deutscher als auch in englischer Version verfügbar.
 
 ## Repository-Struktur
 
@@ -75,11 +81,11 @@ T0-Zeit-Masse-Dualität/
 **[E=mc² Analyse](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/E-mc2_En.pdf)** | **[Deutsch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/E-mc2_De.pdf)**  
 *Neuinterpretation von Einsteins Gleichung im T0-Framework.*
 
-**[T0 Energie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-Energie_En.pdf)** | **[Deutsch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-Energie_De.pdf)**  
-*Umfassende Analyse der Energie als fundamentale Größe im T0-Framework. Neueste theoretische Entwicklung mit verhältnisbasierten Berechnungen.*
+**[T0 Energie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-Energie_En.pdf)** | **[Deutsch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-Energie_De.pdf)**  🆕 **NEU (15.07.2025)**  
+*Umfassende Analyse der Energie als fundamentale Größe im T0-Framework. Neueste theoretische Entwicklung mit verhältnisbasierten Berechnungen. Das umfangreichste Dokument mit vollständiger Theoriedarstellung.*
 
-**[T0 Masse](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Masse_En.pdf)** | **[Deutsch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Masse_De.pdf)**  
-*Analyse der Masse als abgeleitetes Konzept im T0-Framework mit vollständigen mathematischen Ableitungen.*
+**[T0 Masse](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Masse_En.pdf)** | **[Deutsch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Masse_De.pdf)**  🆕 **NEU (15.07.2025)**  
+*Analyse der Masse als abgeleitetes Konzept im T0-Framework mit vollständigen mathematischen Ableitungen. Zweitlängstes Dokument mit revolutionärer Hypothese zu Hadronen als masselose Zeitfeldmuster.*
 
 #### Mathematische Grundlagen
 **[Dirac-Gleichung in T0](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/diracEn.pdf)** | **[Deutsch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/diracDe.pdf)**  
@@ -88,8 +94,8 @@ T0-Zeit-Masse-Dualität/
 **[Vereinfachte Dirac-Formulierung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/diracVereinfachtEn.pdf)** | **[Deutsch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/diracVereinfachtDe.pdf)**  
 *Vereinfachter Ansatz zur Dirac-Physik in T0.*
 
-**[T0 Quantenmechanik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0QM_En.pdf)** | **[Deutsch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0QM_De.pdf)**  
-*Vollständiger quantenmechanischer Rahmen im T0-Modell mit systematischen Ableitungen in natürlichen Einheiten. Neueste Entwicklung in der Quanteninterpretation von T0.*
+**[T0 Quantenmechanik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0QM_En.pdf)** | **[Deutsch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0QM_De.pdf)**  🆕 **NEU (15.07.2025)**  
+*Vollständiger quantenmechanischer Rahmen im T0-Modell mit systematischen Ableitungen in natürlichen Einheiten. Neueste Entwicklung in der Quanteninterpretation von T0 mit bahnbrechenden Feldgleichungen.*
 
 **[xi-Parameter und Teilchen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/xi_parmater_partikel_En.pdf)** | **[Deutsch](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/xi_parmater_partikel_De.pdf)**  
 *Detaillierte Analyse des fundamentalen xi-Parameters und seiner Beziehung zu Teilcheneigenschaften im T0-Modell.*
