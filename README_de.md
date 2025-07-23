@@ -2,7 +2,7 @@
 
 ## Überblick
 
-Das T0-Modell schlägt einen Ansatz für die Grundlagenphysik durch Zeit-Masse-Dualität vor, wobei das intrinsische Zeitfeld T(x,t) = 1/max(m(x,t), ω) eine vereinheitlichte Behandlung von Quantenmechanik und Relativität ermöglicht. Dieses Framework arbeitet in natürlichen Einheiten, wo ℏ = c = α_EM = β_T = 1.
+Das T0-Modell schlägt einen Ansatz für die Grundlagenphysik durch Zeit-Energie-Dualität vor, wobei das intrinsische Zeitfeld T(x,t) eine vereinheitlichte Behandlung von Quantenmechanik und Relativität ermöglicht. Dieses Framework arbeitet mit dem universellen geometrischen Parameter ξ = (4/3) × 10⁻⁴, der aus der dreidimensionalen Raumgeometrie abgeleitet ist und die fundamentale Beziehung T_Feld · E_Feld = 1 etabliert.
 
 ## Neueste Ergänzungen (Juli 2025)
 
@@ -164,10 +164,10 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 ## Theoretischer Rahmen
 
 ### Kernkonzepte
-- **Zeit-Masse-Dualität**: T(x,t) = 1/max(m(x,t), ω) mit Dimension [E⁻¹]
-- **Natürliche Einheiten**: ℏ = c = α_EM = β_T = 1
-- **Universelles Feld**: Teilchen als Anregungsmuster im Feld δm(x,t)
-- **Parameterfreie Theorie**: ξ = 4/30000, eine Konstante definiert alle Physik
+- **Zeit-Energie-Dualität**: T_Feld · E_Feld = 1 mit fundamentaler Beziehung
+- **Universeller geometrischer Parameter**: ξ = (4/3) × 10⁻⁴ aus 3D-Raumgeometrie
+- **Universelles Feld**: Teilchen als Anregungsmuster im Energiefeld
+- **Parameterfreie Theorie**: Eine geometrische Konstante definiert alle Physik
 - **Deterministischer Rahmen**: Alternative zur probabilistischen Quantenmechanik
 
 ### Revolutionäre Ergebnisse
@@ -180,13 +180,13 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 
 ### Erste Schritte
 
-1. **🎵 Audio-Einführung**: [T0 Dialog Professor](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/T0_Dialog_Professor.mp3)
-2. **🌟 Interaktive Demo**: [Teilchenmassen-Rechner](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/simple_mass_formula.html)
-3. **🔬 RSA erkunden**: `/rsa/`-Verzeichnis für kryptographische Anwendungen prüfen
-4. **🧮 Python testen**: Implementierungen wie `authentic_t0_quantum.py` ausprobieren
-5. **📊 Papers lesen**: Technische Dokumente in `2/pdf/` (60 Dateien)
-6. **🔊 Signalanalyse**: Audio-Verarbeitungsanwendungen in `/sig/`
-7. **🎼 Harmonische Verbindungen**: Musikalische Anwendungen der T0-Physik
+1. **🎬 Video-Erklärungen ansehen**: [T0 YouTube-Kanal](https://www.youtube.com/@Time-MassDuality)
+2. **🎧 Audio-Einführungen hören**: [T0 Spotify-Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)
+3. **🌟 Interaktive Demo**: [Teilchenmassen-Rechner](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/simple_mass_formula.html)
+4. **🔬 RSA erkunden**: `/rsa/`-Verzeichnis für kryptographische Anwendungen prüfen
+5. **🧮 Python testen**: Implementierungen wie `authentic_t0_quantum.py` ausprobieren
+6. **📊 Papers lesen**: Technische Dokumente in `2/pdf/` (60 Dateien)
+7. **🔊 Signalanalyse**: Audio-Verarbeitungsanwendungen in `/sig/`
 
 ## Repository-Zugang & Medien
 
