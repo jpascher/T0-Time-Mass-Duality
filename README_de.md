@@ -139,11 +139,8 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 
 ### 🎵 Audio-Lernressourcen
 
-**[Vollständige Dialog-Serie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/T0_Dialog_Professor.mp3)**  
-*🆕 **NEU (Juli 2025)**: 50+ MB umfassende Audio-Diskussionen zu allen Aspekten der T0-Theorie. Perfekt für auditive Lerntypen und tiefgreifendes Verständnis.*
-
-**[Zweisprachige Audio-Einführungen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/T0_kurz_verbal_De.mp3)**  
-*Prägnante deutsche und englische Audio-Erklärungen der T0-Grundlagen.*
+**[🎧 Vollständige T0-Audio-Bibliothek auf Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)**  
+*🆕 **NEU (Juli 2025)**: Alle T0-Audio-Inhalte jetzt als Podcast-Episoden verfügbar! Umfasst umfassende Dialog-Serien, kompakte Einführungen und spezielle Diskussionen zu Quantenmechanik, Teilchenphysik, Kosmologie und mehr. Perfekt für auditive Lerntypen - streamen Sie überall und jederzeit.*
 
 ### 🔬 Erweiterte Analyse-Tools
 
@@ -191,14 +188,22 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 6. **🔊 Signalanalyse**: Audio-Verarbeitungsanwendungen in `/sig/`
 7. **🎼 Harmonische Verbindungen**: Musikalische Anwendungen der T0-Physik
 
-### Repository-Zugang
+## Repository-Zugang & Medien
+
+### 🌐 **Offizielle T0-Plattformen**
+- **[📱 Interaktive T0-Website](https://jpascher.github.io/T0-Time-Mass-Duality/)**  
+*Vollständige interaktive Erkundung der T0-Theorie mit allen Tools und Simulatoren*
+
+- **[🎬 T0 YouTube-Kanal](https://www.youtube.com/@Time-MassDuality)**  
+*Video-Erklärungen, Demonstrationen und visuelle Präsentationen der T0-Konzepte*
+
+- **[🎧 T0-Audio-Bibliothek auf Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)**  
+*Vollständige Podcast-Serie mit umfassenden Diskussionen und Einführungen*
 
 - **📄 Fachpublikationen**: 60 Dokumente (25MB) in `2/pdf/`
 - **🌐 Interaktive Tools**: 16 HTML-Anwendungen in `2/html/`
-- **🎵 Audio-Ressourcen**: 50+ MB gesprochene Erklärungen
 - **🐍 Python-Code**: 5 direkte Implementierungen
 - **🔊 Signalverarbeitung**: 3 Audio-Analyse-Tools
-- **🔗 Web-Schnittstelle**: GitHub Pages Deployment
 - **💬 Dreisprachiger Support**: Deutsche, englische, französische Inhalte
 
 ## Neueste Fachpublikationen (Juli 2025)

@@ -139,11 +139,8 @@ All documents available in German and English versions:
 
 ### 🎵 Audio Learning Resources
 
-**[Complete Dialog Series](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/T0_Dialog_Professor.mp3)**  
-*🆕 **NEW (July 2025)**: 50+ MB of comprehensive audio discussions covering all aspects of T0 theory. Perfect for auditory learners and in-depth understanding.*
-
-**[Bilingual Audio Introductions](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/T0_kurz_verbal_En.mp3)**  
-*Concise German and English audio explanations of T0 fundamentals.*
+**[🎧 Complete T0 Audio Library on Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)**  
+*🆕 **NEW (July 2025)**: All T0 audio content now available as podcast episodes! Includes comprehensive dialog series, compact introductions, and specialized discussions on quantum mechanics, particle physics, cosmology, and more. Perfect for auditory learners - stream anywhere, anytime.*
 
 ### 🔬 Advanced Analysis Tools
 
@@ -191,14 +188,22 @@ All documents available in German and English versions:
 6. **🔊 Signal Analysis**: Audio processing applications in `/sig/`
 7. **🎼 Harmonic Connections**: Musical applications of T0 physics
 
-### Repository Access
+## Repository Access & Media
 
-- **📄 Technical Papers**: 60 documents (25MB) in `2/pdf/`
+### 🌐 **Official T0 Platforms**
+- **[📱 Interactive T0 Website](https://jpascher.github.io/T0-Time-Mass-Duality/)**  
+*Complete interactive exploration of T0 theory with all tools and simulators*
+
+- **[🎬 T0 YouTube Channel](https://www.youtube.com/@Time-MassDuality)**  
+*Video explanations, demonstrations, and visual presentations of T0 concepts*
+
+- **[🎧 T0 Audio Library on Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)**  
+*Complete podcast series with comprehensive discussions and introductions*
+
+- **[📄 Technical Papers**: 60 documents (25MB) in `2/pdf/`
 - **🌐 Interactive Tools**: 16 HTML applications in `2/html/`
-- **🎵 Audio Resources**: 50+ MB spoken explanations
 - **🐍 Python Code**: 5 direct implementations
 - **🔊 Signal Processing**: 3 audio analysis tools
-- **🔗 Web Interface**: GitHub Pages deployment
 - **💬 Trilingual Support**: German, English, French content
 
 ## Latest Technical Papers (July 2025)
