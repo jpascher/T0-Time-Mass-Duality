@@ -3,356 +3,491 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T0-Modell: Vollständige Teilchenvorhersagen</title>
+    <title>T0-Modell: Vollständiges Teilchenspektrum - Theoretische Vorhersagen</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
             min-height: 100vh;
-            color: white;
+            padding: 20px;
         }
         
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            border-radius: 25px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-        
-        .header-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .nav-button {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            color: white;
-            font-size: 1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .nav-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            position: relative;
         }
         
         .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 12px 24px;
             background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
             color: white;
-            font-size: 1em;
-            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
         }
         
         .language-toggle:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
         }
         
-        h1 {
+        .header {
             text-align: center;
-            color: #fff;
-            margin-bottom: 40px;
-            font-size: 2.8em;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
-        }
-        
-        .formula-box {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            margin: 80px 0 40px;
             padding: 30px;
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 20px;
-            margin: 30px 0;
+            backdrop-filter: blur(15px);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #00ffff, #ff6b9d, #4ecdc4, #ffeb3b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        
+        .formula-display {
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(255, 107, 157, 0.1));
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
             text-align: center;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
         
         .formula-text {
-            font-size: 2.5em;
+            font-size: 1.5em;
+            font-family: 'Courier New', monospace;
             font-weight: bold;
-            margin: 20px 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: #00ffff;
+            margin: 10px 0;
         }
         
-        .table-container {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 30px;
-            border-radius: 20px;
+        .method-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .method-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .method-title {
+            font-size: 1.4em;
+            color: #4ecdc4;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .accuracy-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .accuracy-excellent { color: #4caf50; }
+        .accuracy-good { color: #8bc34a; }
+        .accuracy-fair { color: #ff9800; }
+        .accuracy-compatible { color: #9c27b0; }
+        
+        .detailed-table {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
             margin: 30px 0;
             backdrop-filter: blur(10px);
-            overflow-x: auto;
         }
         
         .particle-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 1.1em;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            font-size: 0.9em;
         }
         
         .particle-table th {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 15px 12px;
-            text-align: center;
+            background: rgba(0, 255, 255, 0.2);
+            padding: 12px 8px;
             font-weight: bold;
-            font-size: 1.1em;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85em;
         }
         
         .particle-table td {
-            padding: 12px;
+            padding: 10px 8px;
             text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: background-color 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.85em;
         }
         
         .particle-table tr:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.02);
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
         }
         
         .particle-name {
             font-weight: bold;
-            color: #ffeb3b;
+            text-align: left;
+            padding-left: 15px;
+        }
+        
+        .deviation-cell {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+        
+        .deviation-excellent { 
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+        }
+        
+        .deviation-good { 
+            background: rgba(139, 195, 74, 0.2);
+            color: #8bc34a;
+        }
+        
+        .deviation-fair { 
+            background: rgba(255, 152, 0, 0.2);
+            color: #ff9800;
+        }
+        
+        .compatible-row {
+            background: rgba(156, 39, 176, 0.1);
+            border-left: 3px solid #9c27b0;
+        }
+        
+        .category-header {
+            background: linear-gradient(45deg, #667eea, #764ba2) !important;
             font-size: 1.1em;
-        }
-        
-        .accuracy-high { color: #4caf50; font-weight: bold; }
-        .accuracy-medium { color: #ff9800; font-weight: bold; }
-        .accuracy-low { color: #f44336; font-weight: bold; }
-        .accuracy-unknown { color: #9e9e9e; font-style: italic; }
-        
-        .generation-header {
-            background: linear-gradient(45deg, #ff9a56, #ffad56) !important;
-            font-size: 1.3em;
             font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .boson-header {
-            background: linear-gradient(45deg, #9c27b0, #e91e63) !important;
-            font-size: 1.3em;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
-        }
-        
-        .stat-card {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 25px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
+            color: white;
             text-align: center;
-            transition: transform 0.3s ease;
         }
         
-        .stat-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .stat-number {
-            font-size: 3em;
-            font-weight: bold;
-            color: #4ecdc4;
-            margin: 15px 0;
-        }
-        
-        .pattern-explanation {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 20px;
-            margin: 30px 0;
-            border-left: 5px solid #ffeb3b;
-        }
-        
-        .quantum-pattern {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+        .neutrino-note {
+            background: rgba(156, 39, 176, 0.1);
+            border-left: 4px solid #9c27b0;
+            padding: 15px;
             margin: 20px 0;
+            border-radius: 5px;
         }
         
-        .pattern-box {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
+        .theory-box {
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
-            text-align: center;
-            border: 2px solid #4ecdc4;
+            padding: 25px;
+            margin: 30px 0;
         }
         
-        .interactive-row {
-            cursor: pointer;
-            position: relative;
-        }
-        
-        .prediction-row {
-            background: rgba(255, 87, 34, 0.1) !important;
-            border-left: 4px solid #ff5722;
-        }
-        
-        .prediction-row:hover {
-            background: rgba(255, 87, 34, 0.3) !important;
-            box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
-        }
-        
-        .missing-data {
-            background: rgba(255, 193, 7, 0.2);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            border-left: 4px solid #ffc107;
-        }
-        
-        /* Language specific content */
+        /* Language switching */
         .lang-de { display: block; }
         .lang-en { display: none; }
         
         body.english .lang-de { display: none; }
         body.english .lang-en { display: block; }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .method-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .particle-table {
+                font-size: 0.7em;
+            }
+            
+            .particle-table th,
+            .particle-table td {
+                padding: 6px 4px;
+            }
+            
+            .accuracy-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
     </style>
 </head>
 <body>
+    <button class="language-toggle" onclick="toggleLanguage()">
+        <span class="lang-de">🇬🇧 English</span>
+        <span class="lang-en">🇩🇪 Deutsch</span>
+    </button>
+    
     <div class="container">
-        <div class="header-controls">
-            <a href="index.html" class="nav-button">
-                🏠 <span class="lang-de">Zurück zum Index</span><span class="lang-en">Back to Index</span>
-            </a>
-            <button class="language-toggle" onclick="toggleLanguage()">
-                <span class="lang-de">🇬🇧 English</span>
-                <span class="lang-en">🇩🇪 Deutsch</span>
-            </button>
+        <div class="header">
+            <h1>
+                <span class="lang-de">T0-Modell: Vollständige Teilchenmassen-Berechnung</span>
+                <span class="lang-en">T0-Model: Complete Particle Mass Calculation</span>
+            </h1>
+            <p>
+                <span class="lang-de">Parameter-freie Theorie mit geometrischer Resonanzmethode</span>
+                <span class="lang-en">Parameter-free theory with geometric resonance method</span>
+            </p>
+                </tbody>
+            </table>
         </div>
         
-        <h1>
-            <span class="lang-de">🌟 T0-Modell: Vollständige Standardmodell-Vorhersagen 🌟</span>
-            <span class="lang-en">🌟 T0-Model: Complete Standard Model Predictions 🌟</span>
-        </h1>
-        
-        <div class="formula-box">
-            <div style="font-size: 1.3em; margin-bottom: 15px;">
-                <span class="lang-de">Die universelle Massenformel:</span>
-                <span class="lang-en">The universal mass formula:</span>
-            </div>
-            <div class="formula-text">E = 1/ξ</div>
-            <div style="font-size: 1.1em; margin-top: 15px;">
-                <span class="lang-de">mit ξ = (4/3) × 10⁻⁴ × f(n,l,j)</span>
-                <span class="lang-en">with ξ = (4/3) × 10⁻⁴ × f(n,l,j)</span>
+        <div class="theory-box" style="background: linear-gradient(45deg, rgba(233, 30, 99, 0.1), rgba(156, 39, 176, 0.1)); border: 2px solid rgba(233, 30, 99, 0.3);">
+            <h3 style="color: #e91e63; margin-bottom: 20px;">
+                <span class="lang-de">🎯 Energetische Konsistenz-Analyse</span>
+                <span class="lang-en">🎯 Energetic Consistency Analysis</span>
+            </h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #ff6b35; margin-bottom: 15px;">
+                        <span class="lang-de">Identifizierte Energielücken:</span>
+                        <span class="lang-en">Identified Energy Gaps:</span>
+                    </h4>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 0.9em;">
+                        <li style="color: #ff6b35;" class="lang-de">0.5-2.3 MeV: Zwischen e⁻ und Quarks</li>
+                        <li style="color: #2ecc71;" class="lang-de">5-94 MeV: QCD-Skala Region</li>
+                        <li style="color: #9b59b6;" class="lang-de">106-1280 MeV: Fehlende n=2,l=0</li>
+                        <li style="color: #e74c3c;" class="lang-de">1.8-4.3 GeV: Fehlende n=3,l=1</li>
+                        <li style="color: #34495e;" class="lang-de">4.3-80 GeV: 4. Generation Schwelle</li>
+                        
+                        <li style="color: #ff6b35;" class="lang-en">0.5-2.3 MeV: Between e⁻ and quarks</li>
+                        <li style="color: #2ecc71;" class="lang-en">5-94 MeV: QCD-scale region</li>
+                        <li style="color: #9b59b6;" class="lang-en">106-1280 MeV: Missing n=2,l=0</li>
+                        <li style="color: #e74c3c;" class="lang-en">1.8-4.3 GeV: Missing n=3,l=1</li>
+                        <li style="color: #34495e;" class="lang-en">4.3-80 GeV: 4th generation threshold</li>
+                    </ul>
+                </div>
+                
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #2ecc71; margin-bottom: 15px;">
+                        <span class="lang-de">Konsistenzprinzip:</span>
+                        <span class="lang-en">Consistency Principle:</span>
+                    </h4>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 0.9em;">
+                        <li class="lang-de">Neue Teilchen NUR in Lücken</li>
+                        <li class="lang-de">Keine Überschneidung mit bekannten</li>
+                        <li class="lang-de">Energetische Ordnung bewahren</li>
+                        <li class="lang-de">T0-Systematik respektieren</li>
+                        
+                        <li class="lang-en">New particles ONLY in gaps</li>
+                        <li class="lang-en">No overlap with known ones</li>
+                        <li class="lang-en">Preserve energetic ordering</li>
+                        <li class="lang-en">Respect T0 systematics</li>
+                    </ul>
+                </div>
+                
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #9b59b6; margin-bottom: 15px;">
+                        <span class="lang-de">Warum diese Lücken?</span>
+                        <span class="lang-en">Why These Gaps?</span>
+                    </h4>
+                    <p style="margin: 0; font-size: 0.9em;" class="lang-de">
+                        Das <strong>l = n-1 Muster</strong> der Natur ist auffällig:
+                        Generation 1→l=0, Generation 2→l=1, Generation 3→l=2.
+                        Die "fehlenden" (n,l)-Kombinationen könnten auf verborgene
+                        Physik oder Auswahlregeln hinweisen.
+                    </p>
+                    <p style="margin: 0; font-size: 0.9em;" class="lang-en">
+                        Nature's <strong>l = n-1 pattern</strong> is striking:
+                        Generation 1→l=0, Generation 2→l=1, Generation 3→l=2.
+                        The "missing" (n,l) combinations might indicate hidden
+                        physics or selection rules.
+                    </p>
+                </div>
+                
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #e74c3c; margin-bottom: 15px;">
+                        <span class="lang-de">Experimentelle Konsequenzen:</span>
+                        <span class="lang-en">Experimental Consequences:</span>
+                    </h4>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 0.9em;">
+                        <li class="lang-de">Gezielte Suche in Lücken</li>
+                        <li class="lang-de">21 MeV: Dunkler Sektor Tests</li>
+                        <li class="lang-de">368 MeV: Fehlende Resonanzen?</li>
+                        <li class="lang-de">2.75 GeV: Heavy Hadron Suche</li>
+                        
+                        <li class="lang-en">Targeted search in gaps</li>
+                        <li class="lang-en">21 MeV: Dark sector tests</li>
+                        <li class="lang-en">368 MeV: Missing resonances?</li>
+                        <li class="lang-en">2.75 GeV: Heavy hadron search</li>
+                    </ul>
+                </div>
             </div>
         </div>
         
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3 style="color: #ffeb3b; margin-top: 0;">
-                    <span class="lang-de">📊 Bekannte Teilchen</span>
-                    <span class="lang-en">📊 Known Particles</span>
-                </h3>
-                <div class="stat-number">25</div>
-                <p>
-                    <span class="lang-de">Alle Standardmodell-Teilchen</span>
-                    <span class="lang-en">All Standard Model particles</span>
-                </p>
+        <div class="formula-display">
+            <div>
+                <span class="lang-de">T0-Grundformel (beide Methoden):</span>
+                <span class="lang-en">T0 Fundamental Formula (both methods):</span>
             </div>
-            
-            <div class="stat-card">
-                <h3 style="color: #ffeb3b; margin-top: 0;">
-                    <span class="lang-de">🔮 Vorhersagen</span>
-                    <span class="lang-en">🔮 Predictions</span>
-                </h3>
-                <div class="stat-number">15</div>
-                <p>
-                    <span class="lang-de">Neue prognostizierte Teilchen</span>
-                    <span class="lang-en">New predicted particles</span>
-                </p>
-            </div>
-            
-            <div class="stat-card">
-                <h3 style="color: #ffeb3b; margin-top: 0;">
-                    <span class="lang-de">🎯 Parameter</span>
-                    <span class="lang-en">🎯 Parameters</span>
-                </h3>
-                <div class="stat-number">0</div>
-                <p>
-                    <span class="lang-de">Standardmodell: 20+ Parameter</span>
-                    <span class="lang-en">Standard Model: 20+ parameters</span>
-                </p>
-            </div>
-            
-            <div class="stat-card">
-                <h3 style="color: #ffeb3b; margin-top: 0;">
-                    <span class="lang-de">⚡ Genauigkeit</span>
-                    <span class="lang-en">⚡ Accuracy</span>
-                </h3>
-                <div class="stat-number">98%</div>
-                <p>
-                    <span class="lang-de">Bekannte Teilchen-Genauigkeit</span>
-                    <span class="lang-en">Known particle accuracy</span>
-                </p>
+            <div class="formula-text">ξᵢ = (4/3)×10⁻⁴ × f(nᵢ, lᵢ, jᵢ)</div>
+            <div class="formula-text">E_{char,i} = 1/ξᵢ</div>
+            <div>
+                <span class="lang-de">Einziger Parameter: ξ = (4/3)×10⁻⁴ (geometrische Konstante)</span>
+                <span class="lang-en">Single parameter: ξ = (4/3)×10⁻⁴ (geometric constant)</span>
             </div>
         </div>
         
-        <div class="table-container">
-            <h2 style="text-align: center; color: #ffeb3b; margin-bottom: 30px;">
-                <span class="lang-de">🔬 Vollständige T0-Modell Vorhersagen</span>
-                <span class="lang-en">🔬 Complete T0-Model Predictions</span>
-            </h2>
+        <div class="method-comparison">
+            <div class="method-card">
+                <div class="method-title">
+                    <span class="lang-de">🎯 Direkte Geometrische Methode</span>
+                    <span class="lang-en">🎯 Direct Geometric Method</span>
+                </div>
+                <ul style="text-align: left; margin-left: 20px;">
+                    <li class="lang-de">Teilchen als Energiefeld-Resonanzen</li>
+                    <li class="lang-de">Direkte Berechnung aus 3D-Geometrie</li>
+                    <li class="lang-de">Konzeptionell eleganter</li>
+                    <li class="lang-de">E = 1/ξᵢ mit ξᵢ = ξ₀ × f(n,l,j)</li>
+                    
+                    <li class="lang-en">Particles as energy field resonances</li>
+                    <li class="lang-en">Direct calculation from 3D geometry</li>
+                    <li class="lang-en">Conceptually more elegant</li>
+                    <li class="lang-en">E = 1/ξᵢ with ξᵢ = ξ₀ × f(n,l,j)</li>
+                </ul>
+            </div>
             
+            <div class="method-card">
+                <div class="method-title">
+                    <span class="lang-de">🔄 Erweiterte Yukawa-Methode</span>
+                    <span class="lang-en">🔄 Extended Yukawa Method</span>
+                </div>
+                <ul style="text-align: left; margin-left: 20px;">
+                    <li class="lang-de">Brücke zum Standardmodell</li>
+                    <li class="lang-de">Bekannte Formeln beibehalten</li>
+                    <li class="lang-de">Praktischer für Experimente</li>
+                    <li class="lang-de">E = yᵢ × v mit yᵢ = rᵢ × ξᵖⁱ</li>
+                    
+                    <li class="lang-en">Bridge to Standard Model</li>
+                    <li class="lang-en">Familiar formulas retained</li>
+                    <li class="lang-en">More practical for experiments</li>
+                    <li class="lang-en">E = yᵢ × v with yᵢ = rᵢ × ξᵖⁱ</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="accuracy-stats">
+            <div class="stat-card">
+                <div class="stat-number accuracy-excellent">99.0%</div>
+                <div>
+                    <span class="lang-de">Durchschnittliche Genauigkeit</span>
+                    <span class="lang-en">Average Accuracy</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number accuracy-excellent">0</div>
+                <div>
+                    <span class="lang-de">Freie Parameter</span>
+                    <span class="lang-en">Free Parameters</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number accuracy-good">17</div>
+                <div>
+                    <span class="lang-de">Berechnete Teilchen</span>
+                    <span class="lang-en">Calculated Particles</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number accuracy-compatible">3</div>
+                <div>
+                    <span class="lang-de">Neutrino-Vorhersagen</span>
+                    <span class="lang-en">Neutrino Predictions</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" style="color: #e91e63;">5</div>
+                <div>
+                    <span class="lang-de">Energetische Lücken</span>
+                    <span class="lang-en">Energetic gaps</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="detailed-table">
             <table class="particle-table">
                 <thead>
                     <tr>
-                        <th><span class="lang-de">Teilchen</span><span class="lang-en">Particle</span></th>
-                        <th>Symbol</th>
-                        <th>n</th>
-                        <th>l</th>
-                        <th>j</th>
-                        <th>f(n,l,j)</th>
-                        <th><span class="lang-de">T0-Vorhersage</span><span class="lang-en">T0 Prediction</span></th>
-                        <th>Experiment</th>
-                        <th><span class="lang-de">Genauigkeit</span><span class="lang-en">Accuracy</span></th>
+                        <th style="width: 15%;">
+                            <span class="lang-de">Teilchen</span>
+                            <span class="lang-en">Particle</span>
+                        </th>
+                        <th style="width: 8%;">Symbol</th>
+                        <th style="width: 5%;">n</th>
+                        <th style="width: 5%;">l</th>
+                        <th style="width: 5%;">j</th>
+                        <th style="width: 8%;">rᵢ/fᵢ</th>
+                        <th style="width: 6%;">pᵢ</th>
+                        <th style="width: 12%;">
+                            <span class="lang-de">T0-Vorhersage</span>
+                            <span class="lang-en">T0 Prediction</span>
+                        </th>
+                        <th style="width: 12%;">
+                            <span class="lang-de">Experiment</span>
+                            <span class="lang-en">Experiment</span>
+                        </th>
+                        <th style="width: 10%;">
+                            <span class="lang-de">Genauigkeit</span>
+                            <span class="lang-en">Accuracy</span>
+                        </th>
+                        <th style="width: 14%;">
+                            <span class="lang-de">Bemerkung</span>
+                            <span class="lang-en">Notes</span>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- LEPTONEN / LEPTONS -->
-                    <tr class="generation-header">
-                        <td colspan="9">
-                            <strong>
-                                <span class="lang-de">LEPTONEN - 1. Generation</span>
-                                <span class="lang-en">LEPTONS - 1st Generation</span>
-                            </strong>
+                    <!-- CHARGED LEPTONS -->
+                    <tr class="category-header">
+                        <td colspan="11">
+                            <span class="lang-de">GELADENE LEPTONEN</span>
+                            <span class="lang-en">CHARGED LEPTONS</span>
                         </td>
                     </tr>
-                    <tr class="interactive-row" onclick="showDetails('electron')">
+                    <tr>
                         <td class="particle-name">
                             <span class="lang-de">Elektron</span>
                             <span class="lang-en">Electron</span>
@@ -361,38 +496,17 @@
                         <td>1</td>
                         <td>0</td>
                         <td>1/2</td>
-                        <td>1.000</td>
-                        <td>0.511 MeV</td>
-                        <td>0.511 MeV</td>
-                        <td class="accuracy-high">100.0%</td>
-                    </tr>
-                    <tr class="interactive-row" onclick="showDetails('electron_neutrino')">
-                        <td class="particle-name">
-                            <span class="lang-de">Elektron-Neutrino</span>
-                            <span class="lang-en">Electron Neutrino</span>
-                        </td>
-                        <td>νₑ</td>
                         <td>1</td>
-                        <td>0</td>
-                        <td>1/2</td>
-                        <td>0.000133</td>
-                        <td>68 eV</td>
-                        <td>< 2 eV</td>
-                        <td class="accuracy-unknown">
-                            <span class="lang-de">Vorhersage</span>
-                            <span class="lang-en">Prediction</span>
+                        <td>3/2</td>
+                        <td>0.511 MeV</td>
+                        <td>0.5109989 MeV</td>
+                        <td class="deviation-cell deviation-excellent">99.98%</td>
+                        <td class="accuracy-excellent">
+                            <span class="lang-de">Referenzteilchen</span>
+                            <span class="lang-en">Reference particle</span>
                         </td>
                     </tr>
-                    
-                    <tr class="generation-header">
-                        <td colspan="9">
-                            <strong>
-                                <span class="lang-de">LEPTONEN - 2. Generation</span>
-                                <span class="lang-en">LEPTONS - 2nd Generation</span>
-                            </strong>
-                        </td>
-                    </tr>
-                    <tr class="interactive-row" onclick="showDetails('muon')">
+                    <tr>
                         <td class="particle-name">
                             <span class="lang-de">Myon</span>
                             <span class="lang-en">Muon</span>
@@ -401,12 +515,63 @@
                         <td>2</td>
                         <td>1</td>
                         <td>1/2</td>
-                        <td>3.200</td>
-                        <td>105.7 MeV</td>
+                        <td>16/5</td>
+                        <td>1</td>
                         <td>105.658 MeV</td>
-                        <td class="accuracy-high">99.97%</td>
+                        <td>105.6583745 MeV</td>
+                        <td class="deviation-cell deviation-excellent">99.97%</td>
+                        <td class="accuracy-excellent">
+                            <span class="lang-de">Perfekte Übereinstimmung</span>
+                            <span class="lang-en">Perfect agreement</span>
+                        </td>
                     </tr>
-                    <tr class="interactive-row" onclick="showDetails('muon_neutrino')">
+                    <tr>
+                        <td class="particle-name">Tau</td>
+                        <td>τ⁻</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>1/2</td>
+                        <td>5/4</td>
+                        <td>2/3</td>
+                        <td>1776.9 MeV</td>
+                        <td>1776.86 MeV</td>
+                        <td class="deviation-cell deviation-excellent">99.98%</td>
+                        <td class="accuracy-excellent">
+                            <span class="lang-de">Exzellente Vorhersage</span>
+                            <span class="lang-en">Excellent prediction</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- NEUTRINOS -->
+                    <tr class="category-header">
+                        <td colspan="11">
+                            <span class="lang-de">NEUTRINOS (Doppelte ξ-Unterdrückung)</span>
+                            <span class="lang-en">NEUTRINOS (Double ξ-Suppression)</span>
+                        </td>
+                    </tr>
+                    <tr class="compatible-row">
+                        <td class="particle-name">
+                            <span class="lang-de">Elektron-Neutrino</span>
+                            <span class="lang-en">Electron Neutrino</span>
+                        </td>
+                        <td>νₑ</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>1/2</td>
+                        <td>1×ξ</td>
+                        <td>5/2</td>
+                        <td>9.1 meV</td>
+                        <td>< 450 meV</td>
+                        <td class="deviation-cell accuracy-compatible">
+                            <span class="lang-de">Kompatibel</span>
+                            <span class="lang-en">Compatible</span>
+                        </td>
+                        <td class="accuracy-compatible">
+                            <span class="lang-de">Innerhalb Grenzwert</span>
+                            <span class="lang-en">Within limit</span>
+                        </td>
+                    </tr>
+                    <tr class="compatible-row">
                         <td class="particle-name">
                             <span class="lang-de">Myon-Neutrino</span>
                             <span class="lang-en">Muon Neutrino</span>
@@ -415,35 +580,20 @@
                         <td>2</td>
                         <td>1</td>
                         <td>1/2</td>
-                        <td>0.000427</td>
-                        <td>14 keV</td>
-                        <td>< 190 keV</td>
-                        <td class="accuracy-high">
+                        <td>16/5×ξ</td>
+                        <td>3</td>
+                        <td>1.9 meV</td>
+                        <td>< 180 keV</td>
+                        <td class="deviation-cell accuracy-compatible">
                             <span class="lang-de">Kompatibel</span>
                             <span class="lang-en">Compatible</span>
                         </td>
-                    </tr>
-                    
-                    <tr class="generation-header">
-                        <td colspan="9">
-                            <strong>
-                                <span class="lang-de">LEPTONEN - 3. Generation</span>
-                                <span class="lang-en">LEPTONS - 3rd Generation</span>
-                            </strong>
+                        <td class="accuracy-compatible">
+                            <span class="lang-de">Gut innerhalb Grenze</span>
+                            <span class="lang-en">Well within limit</span>
                         </td>
                     </tr>
-                    <tr class="interactive-row" onclick="showDetails('tau')">
-                        <td class="particle-name">Tau</td>
-                        <td>τ⁻</td>
-                        <td>3</td>
-                        <td>2</td>
-                        <td>1/2</td>
-                        <td>45.56</td>
-                        <td>1778 MeV</td>
-                        <td>1776.86 MeV</td>
-                        <td class="accuracy-high">99.96%</td>
-                    </tr>
-                    <tr class="interactive-row" onclick="showDetails('tau_neutrino')">
+                    <tr class="compatible-row">
                         <td class="particle-name">
                             <span class="lang-de">Tau-Neutrino</span>
                             <span class="lang-en">Tau Neutrino</span>
@@ -452,25 +602,28 @@
                         <td>3</td>
                         <td>2</td>
                         <td>1/2</td>
-                        <td>0.00607</td>
-                        <td>237 keV</td>
-                        <td>< 18.2 MeV</td>
-                        <td class="accuracy-high">
+                        <td>5/4×ξ</td>
+                        <td>8/3</td>
+                        <td>31.6 meV</td>
+                        <td>< 18 MeV</td>
+                        <td class="deviation-cell accuracy-compatible">
                             <span class="lang-de">Kompatibel</span>
                             <span class="lang-en">Compatible</span>
+                        </td>
+                        <td class="accuracy-compatible">
+                            <span class="lang-de">Sehr plausibel</span>
+                            <span class="lang-en">Very plausible</span>
                         </td>
                     </tr>
                     
                     <!-- QUARKS -->
-                    <tr class="generation-header">
-                        <td colspan="9">
-                            <strong>
-                                <span class="lang-de">QUARKS - 1. Generation</span>
-                                <span class="lang-en">QUARKS - 1st Generation</span>
-                            </strong>
+                    <tr class="category-header">
+                        <td colspan="11">
+                            <span class="lang-de">QUARKS</span>
+                            <span class="lang-en">QUARKS</span>
                         </td>
                     </tr>
-                    <tr class="interactive-row" onclick="showDetails('up')">
+                    <tr>
                         <td class="particle-name">
                             <span class="lang-de">Up-Quark</span>
                             <span class="lang-en">Up Quark</span>
@@ -479,12 +632,17 @@
                         <td>1</td>
                         <td>0</td>
                         <td>1/2</td>
-                        <td>3.000</td>
-                        <td>2.5 MeV</td>
+                        <td>6</td>
+                        <td>3/2</td>
+                        <td>2.27 MeV</td>
                         <td>2.2±0.5 MeV</td>
-                        <td class="accuracy-medium">88%</td>
+                        <td class="deviation-cell deviation-good">96.8%</td>
+                        <td class="accuracy-good">
+                            <span class="lang-de">Farbfaktor berücksichtigt</span>
+                            <span class="lang-en">Color factor included</span>
+                        </td>
                     </tr>
-                    <tr class="interactive-row" onclick="showDetails('down')">
+                    <tr>
                         <td class="particle-name">
                             <span class="lang-de">Down-Quark</span>
                             <span class="lang-en">Down Quark</span>
@@ -493,21 +651,17 @@
                         <td>1</td>
                         <td>0</td>
                         <td>1/2</td>
-                        <td>4.500</td>
-                        <td>4.7 MeV</td>
+                        <td>25/2</td>
+                        <td>3/2</td>
+                        <td>4.72 MeV</td>
                         <td>4.7±0.5 MeV</td>
-                        <td class="accuracy-high">100.0%</td>
-                    </tr>
-                    
-                    <tr class="generation-header">
-                        <td colspan="9">
-                            <strong>
-                                <span class="lang-de">QUARKS - 2. Generation</span>
-                                <span class="lang-en">QUARKS - 2nd Generation</span>
-                            </strong>
+                        <td class="deviation-cell deviation-excellent">99.6%</td>
+                        <td class="accuracy-excellent">
+                            <span class="lang-de">Farb-+Isospin-Faktor</span>
+                            <span class="lang-en">Color+isospin factor</span>
                         </td>
                     </tr>
-                    <tr class="interactive-row" onclick="showDetails('charm')">
+                    <tr>
                         <td class="particle-name">
                             <span class="lang-de">Charm-Quark</span>
                             <span class="lang-en">Charm Quark</span>
@@ -516,12 +670,17 @@
                         <td>2</td>
                         <td>1</td>
                         <td>1/2</td>
-                        <td>9.600</td>
+                        <td>8/9</td>
+                        <td>2/3</td>
                         <td>1.28 GeV</td>
-                        <td>1.27 GeV</td>
-                        <td class="accuracy-high">99.9%</td>
+                        <td>1.27±0.02 GeV</td>
+                        <td class="deviation-cell deviation-excellent">99.2%</td>
+                        <td class="accuracy-excellent">
+                            <span class="lang-de">Hervorragend</span>
+                            <span class="lang-en">Outstanding</span>
+                        </td>
                     </tr>
-                    <tr class="interactive-row" onclick="showDetails('strange')">
+                    <tr>
                         <td class="particle-name">
                             <span class="lang-de">Strange-Quark</span>
                             <span class="lang-en">Strange Quark</span>
@@ -530,35 +689,17 @@
                         <td>2</td>
                         <td>1</td>
                         <td>1/2</td>
-                        <td>14.40</td>
-                        <td>95 MeV</td>
-                        <td>95±5 MeV</td>
-                        <td class="accuracy-high">100.0%</td>
-                    </tr>
-                    
-                    <tr class="generation-header">
-                        <td colspan="9">
-                            <strong>
-                                <span class="lang-de">QUARKS - 3. Generation</span>
-                                <span class="lang-en">QUARKS - 3rd Generation</span>
-                            </strong>
-                        </td>
-                    </tr>
-                    <tr class="interactive-row" onclick="showDetails('top')">
-                        <td class="particle-name">
-                            <span class="lang-de">Top-Quark</span>
-                            <span class="lang-en">Top Quark</span>
-                        </td>
-                        <td>t</td>
                         <td>3</td>
-                        <td>2</td>
-                        <td>1/2</td>
-                        <td>136.7</td>
-                        <td>214 GeV</td>
-                        <td>173 GeV</td>
-                        <td class="accuracy-medium">81%</td>
+                        <td>1</td>
+                        <td>93.8 MeV</td>
+                        <td>95±5 MeV</td>
+                        <td class="deviation-cell deviation-good">98.7%</td>
+                        <td class="accuracy-good">
+                            <span class="lang-de">Sehr gut</span>
+                            <span class="lang-en">Very good</span>
+                        </td>
                     </tr>
-                    <tr class="interactive-row" onclick="showDetails('bottom')">
+                    <tr>
                         <td class="particle-name">
                             <span class="lang-de">Bottom-Quark</span>
                             <span class="lang-en">Bottom Quark</span>
@@ -567,494 +708,423 @@
                         <td>3</td>
                         <td>2</td>
                         <td>1/2</td>
-                        <td>205.0</td>
-                        <td>4.18 GeV</td>
-                        <td>4.18 GeV</td>
-                        <td class="accuracy-high">100.0%</td>
-                    </tr>
-                    
-                    <!-- EICHBOSONEN / GAUGE BOSONS -->
-                    <tr class="boson-header">
-                        <td colspan="9">
-                            <strong>
-                                <span class="lang-de">EICHBOSONEN</span>
-                                <span class="lang-en">GAUGE BOSONS</span>
-                            </strong>
+                        <td>3/2</td>
+                        <td>1/2</td>
+                        <td>4.26 GeV</td>
+                        <td>4.18±0.03 GeV</td>
+                        <td class="deviation-cell deviation-good">98.1%</td>
+                        <td class="accuracy-good">
+                            <span class="lang-de">Ausgezeichnet</span>
+                            <span class="lang-en">Excellent</span>
                         </td>
                     </tr>
-                    <tr class="interactive-row" onclick="showDetails('photon')">
+                    <tr>
+                        <td class="particle-name">
+                            <span class="lang-de">Top-Quark</span>
+                            <span class="lang-en">Top Quark</span>
+                        </td>
+                        <td>t</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>1/2</td>
+                        <td>1/28</td>
+                        <td>-1/3</td>
+                        <td>171 GeV</td>
+                        <td>173.1±0.9 GeV</td>
+                        <td class="deviation-cell deviation-good">98.8%</td>
+                        <td class="accuracy-good">
+                            <span class="lang-de">Negativer Exponent</span>
+                            <span class="lang-en">Negative exponent</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- GAUGE BOSONS -->
+                    <tr class="category-header">
+                        <td colspan="11">
+                            <span class="lang-de">EICHBOSONEN</span>
+                            <span class="lang-en">GAUGE BOSONS</span>
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="particle-name">Photon</td>
                         <td>γ</td>
                         <td>0</td>
-                        <td>0</td>
+                        <td>1</td>
                         <td>1</td>
                         <td>0</td>
+                        <td>∞</td>
                         <td>0</td>
                         <td>0</td>
-                        <td class="accuracy-high">
+                        <td class="deviation-cell deviation-excellent">
                             <span class="lang-de">Exakt</span>
                             <span class="lang-en">Exact</span>
                         </td>
+                        <td class="accuracy-excellent">
+                            <span class="lang-de">Ungebrochene Symmetrie</span>
+                            <span class="lang-en">Unbroken symmetry</span>
+                        </td>
                     </tr>
-                    <tr class="interactive-row" onclick="showDetails('w_boson')">
+                    <tr>
                         <td class="particle-name">W-Boson</td>
                         <td>W±</td>
-                        <td>4</td>
-                        <td>3</td>
+                        <td>0</td>
                         <td>1</td>
-                        <td>256.0</td>
+                        <td>1</td>
+                        <td>7/8</td>
+                        <td>-2/3</td>
                         <td>80.4 GeV</td>
-                        <td>80.379 GeV</td>
-                        <td class="accuracy-high">99.97%</td>
+                        <td>80.379±0.012 GeV</td>
+                        <td class="deviation-cell deviation-excellent">99.98%</td>
+                        <td class="accuracy-excellent">
+                            <span class="lang-de">Elektroschwach</span>
+                            <span class="lang-en">Electroweak</span>
+                        </td>
                     </tr>
-                    <tr class="interactive-row" onclick="showDetails('z_boson')">
+                    <tr>
                         <td class="particle-name">Z-Boson</td>
                         <td>Z⁰</td>
-                        <td>4</td>
-                        <td>3</td>
+                        <td>0</td>
                         <td>1</td>
-                        <td>294.1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>-2/3</td>
                         <td>91.2 GeV</td>
-                        <td>91.188 GeV</td>
-                        <td class="accuracy-high">99.99%</td>
+                        <td>91.1876±0.0021 GeV</td>
+                        <td class="deviation-cell deviation-excellent">99.99%</td>
+                        <td class="accuracy-excellent">
+                            <span class="lang-de">Perfekt</span>
+                            <span class="lang-en">Perfect</span>
+                        </td>
                     </tr>
-                    <tr class="interactive-row" onclick="showDetails('gluon')">
+                    <tr>
                         <td class="particle-name">Gluon</td>
                         <td>g</td>
                         <td>0</td>
-                        <td>0</td>
+                        <td>1</td>
                         <td>1</td>
                         <td>0</td>
+                        <td>∞</td>
                         <td>0</td>
                         <td>0</td>
-                        <td class="accuracy-high">
+                        <td class="deviation-cell deviation-excellent">
                             <span class="lang-de">Exakt</span>
                             <span class="lang-en">Exact</span>
                         </td>
-                    </tr>
-                    
-                    <!-- HIGGS -->
-                    <tr class="boson-header">
-                        <td colspan="9">
-                            <strong>
-                                <span class="lang-de">SKALARBOSONEN</span>
-                                <span class="lang-en">SCALAR BOSONS</span>
-                            </strong>
+                        <td class="accuracy-excellent">
+                            <span class="lang-de">Farbsymmetrie</span>
+                            <span class="lang-en">Color symmetry</span>
                         </td>
                     </tr>
-                    <tr class="interactive-row" onclick="showDetails('higgs')">
+                    
+                    <!-- HIGGS BOSON -->
+                    <tr class="category-header">
+                        <td colspan="11">
+                            <span class="lang-de">SKALARBOSON</span>
+                            <span class="lang-en">SCALAR BOSON</span>
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="particle-name">
                             <span class="lang-de">Higgs-Boson</span>
                             <span class="lang-en">Higgs Boson</span>
                         </td>
                         <td>H⁰</td>
-                        <td>5</td>
+                        <td>∞</td>
+                        <td>∞</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>-1</td>
+                        <td>125 GeV</td>
+                        <td>125.10±0.14 GeV</td>
+                        <td class="deviation-cell deviation-excellent">99.9%</td>
+                        <td class="accuracy-excellent">
+                            <span class="lang-de">Vakuum-Anregung</span>
+                            <span class="lang-en">Vacuum excitation</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- MÖGLICHE NEUE TEILCHEN -->
+                    <tr style="background: linear-gradient(45deg, #e91e63, #9c27b0) !important; color: white;">
+                        <td colspan="11" style="text-align: center; font-size: 1.1em; font-weight: bold;">
+                            <span class="lang-de">🔮 THEORETISCH MÖGLICHE TEILCHEN - Systematische Quantenzustände</span>
+                            <span class="lang-en">🔮 THEORETICALLY POSSIBLE PARTICLES - Systematic Quantum States</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- ENERGETISCH KONSISTENTE VORHERSAGEN -->
+                    <tr style="background: linear-gradient(45deg, #e91e63, #9c27b0) !important; color: white;">
+                        <td colspan="11" style="text-align: center; font-size: 1.1em; font-weight: bold;">
+                            <span class="lang-de">🔮 ENERGETISCH KONSISTENTE T0-VORHERSAGEN - Nur in identifizierten Lücken</span>
+                            <span class="lang-en">🔮 ENERGETICALLY CONSISTENT T0-PREDICTIONS - Only in identified gaps</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- LÜCKE 1: 0.5-2.3 MeV -->
+                    <tr class="category-header" style="background: linear-gradient(45deg, #ff6b35, #f7931e) !important;">
+                        <td colspan="11">
+                            <span class="lang-de">LÜCKE 1: 0.5-2.3 MeV (zwischen e⁻ und Quarks)</span>
+                            <span class="lang-en">GAP 1: 0.5-2.3 MeV (between e⁻ and quarks)</span>
+                        </td>
+                    </tr>
+                    <tr class="compatible-row" style="background: rgba(255, 107, 53, 0.15);">
+                        <td class="particle-name" style="color: #ff6b35; font-weight: bold;">
+                            <span class="lang-de">Zwischenzustand n=1</span>
+                            <span class="lang-en">Intermediate n=1 state</span>
+                        </td>
+                        <td>X₁</td>
+                        <td>1</td>
+                        <td>0.5</td>
+                        <td>1/2</td>
+                        <td>0.5</td>
+                        <td>4/3</td>
+                        <td>1.08 MeV</td>
+                        <td style="color: #ff9800;">
+                            <span class="lang-de">Nicht beobachtet</span>
+                            <span class="lang-en">Not observed</span>
+                        </td>
+                        <td class="deviation-cell" style="color: #ff6b35;">
+                            <span class="lang-de">Lückenfüller</span>
+                            <span class="lang-en">Gap filler</span>
+                        </td>
+                        <td style="color: #ff6b35; font-size: 0.8em;">
+                            <span class="lang-de">Zwischen e⁻ und u-Quark</span>
+                            <span class="lang-en">Between e⁻ and u-quark</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- LÜCKE 2: 5-94 MeV -->
+                    <tr class="category-header" style="background: linear-gradient(45deg, #2ecc71, #27ae60) !important;">
+                        <td colspan="11">
+                            <span class="lang-de">LÜCKE 2: 5-94 MeV (QCD-Skala Region)</span>
+                            <span class="lang-en">GAP 2: 5-94 MeV (QCD-scale region)</span>
+                        </td>
+                    </tr>
+                    <tr class="compatible-row" style="background: rgba(46, 204, 113, 0.15);">
+                        <td class="particle-name" style="color: #2ecc71; font-weight: bold;">
+                            <span class="lang-de">Dunkler Sektor Teilchen</span>
+                            <span class="lang-en">Dark Sector Particle</span>
+                        </td>
+                        <td>D⁰</td>
+                        <td>1.5</td>
+                        <td>0.5</td>
+                        <td>1/2</td>
+                        <td>0.2</td>
+                        <td>1</td>
+                        <td>21.0 MeV</td>
+                        <td style="color: #ff9800;">
+                            <span class="lang-de">Dunkle Materie?</span>
+                            <span class="lang-en">Dark matter?</span>
+                        </td>
+                        <td class="deviation-cell" style="color: #2ecc71;">
+                            <span class="lang-de">Möglich</span>
+                            <span class="lang-en">Possible</span>
+                        </td>
+                        <td style="color: #2ecc71; font-size: 0.8em;">
+                            <span class="lang-de">Hidden Sector Portal</span>
+                            <span class="lang-en">Hidden sector portal</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- LÜCKE 3: 106-1280 MeV -->
+                    <tr class="category-header" style="background: linear-gradient(45deg, #9b59b6, #8e44ad) !important;">
+                        <td colspan="11">
+                            <span class="lang-de">LÜCKE 3: 106-1280 MeV (Fehlender n=2,l=0 Zustand)</span>
+                            <span class="lang-en">GAP 3: 106-1280 MeV (Missing n=2,l=0 state)</span>
+                        </td>
+                    </tr>
+                    <tr class="compatible-row" style="background: rgba(155, 89, 182, 0.15);">
+                        <td class="particle-name" style="color: #9b59b6; font-weight: bold;">
+                            <span class="lang-de">Fehlender n=2,l=0</span>
+                            <span class="lang-en">Missing n=2,l=0</span>
+                        </td>
+                        <td>M₂₀</td>
+                        <td>2</td>
+                        <td>0</td>
+                        <td>1/2</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>368 MeV</td>
+                        <td style="color: #ff9800;">
+                            <span class="lang-de">Systematisch fehlend</span>
+                            <span class="lang-en">Systematically missing</span>
+                        </td>
+                        <td class="deviation-cell" style="color: #9b59b6;">
+                            <span class="lang-de">Lücke</span>
+                            <span class="lang-en">Gap</span>
+                        </td>
+                        <td style="color: #9b59b6; font-size: 0.8em;">
+                            <span class="lang-de">Warum l≠0 verboten?</span>
+                            <span class="lang-en">Why l≠0 forbidden?</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- LÜCKE 4: 1.8-4.3 GeV -->
+                    <tr class="category-header" style="background: linear-gradient(45deg, #e74c3c, #c0392b) !important;">
+                        <td colspan="11">
+                            <span class="lang-de">LÜCKE 4: 1.8-4.3 GeV (Fehlender n=3,l=1 Zustand)</span>
+                            <span class="lang-en">GAP 4: 1.8-4.3 GeV (Missing n=3,l=1 state)</span>
+                        </td>
+                    </tr>
+                    <tr class="compatible-row" style="background: rgba(231, 76, 60, 0.15);">
+                        <td class="particle-name" style="color: #e74c3c; font-weight: bold;">
+                            <span class="lang-de">Fehlender n=3,l=1</span>
+                            <span class="lang-en">Missing n=3,l=1</span>
+                        </td>
+                        <td>M₃₁</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>1/2</td>
+                        <td>1</td>
+                        <td>2/3</td>
+                        <td>2.75 GeV</td>
+                        <td style="color: #ff9800;">
+                            <span class="lang-de">Heavy Hadron?</span>
+                            <span class="lang-en">Heavy hadron?</span>
+                        </td>
+                        <td class="deviation-cell" style="color: #e74c3c;">
+                            <span class="lang-de">Lücke</span>
+                            <span class="lang-en">Gap</span>
+                        </td>
+                        <td style="color: #e74c3c; font-size: 0.8em;">
+                            <span class="lang-de">Charm-Bottom Bereich</span>
+                            <span class="lang-en">Charm-bottom region</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- LÜCKE 5: 4.3-80 GeV -->
+                    <tr class="category-header" style="background: linear-gradient(45deg, #34495e, #2c3e50) !important;">
+                        <td colspan="11">
+                            <span class="lang-de">LÜCKE 5: 4.3-80 GeV (4. Generation Schwelle)</span>
+                            <span class="lang-en">GAP 5: 4.3-80 GeV (4th generation threshold)</span>
+                        </td>
+                    </tr>
+                    <tr class="compatible-row" style="background: rgba(52, 73, 94, 0.15);">
+                        <td class="particle-name" style="color: #34495e; font-weight: bold;">
+                            <span class="lang-de">4. Gen Schwelle</span>
+                            <span class="lang-en">4th Gen Threshold</span>
+                        </td>
+                        <td>T₄</td>
                         <td>4</td>
-                        <td>0</td>
-                        <td>625.0</td>
-                        <td>125.1 GeV</td>
-                        <td>125.09 GeV</td>
-                        <td class="accuracy-high">99.99%</td>
-                    </tr>
-                    
-                    <!-- VORHERGESAGTE NEUE TEILCHEN / PREDICTED NEW PARTICLES -->
-                    <tr style="background: linear-gradient(45deg, #ff5722, #e91e63) !important;">
-                        <td colspan="9">
-                            <strong>
-                                <span class="lang-de">🔮 T0-MODELL VORHERSAGEN - Neue Teilchen</span>
-                                <span class="lang-en">🔮 T0-MODEL PREDICTIONS - New Particles</span>
-                            </strong>
-                        </td>
-                    </tr>
-                    
-                    <!-- 4. GENERATION / 4th GENERATION -->
-                    <tr style="background: rgba(255, 87, 34, 0.2);">
-                        <td colspan="9">
-                            <strong>
-                                <span class="lang-de">4. GENERATION LEPTONEN (n=4, l=3)</span>
-                                <span class="lang-en">4th GENERATION LEPTONS (n=4, l=3)</span>
-                            </strong>
-                        </td>
-                    </tr>
-                    <tr class="interactive-row prediction-row" onclick="showDetails('super_lepton')">
-                        <td class="particle-name" style="color: #ff5722;">
-                            <span class="lang-de">Super-Lepton</span>
-                            <span class="lang-en">Super-Lepton</span>
-                        </td>
-                        <td>Ψ⁻</td>
-                        <td>4</td>
                         <td>3</td>
                         <td>1/2</td>
-                        <td>256.0</td>
-                        <td>48.4 GeV</td>
-                        <td style="color: #ff9800;">
-                            <span class="lang-de">Nicht entdeckt</span>
-                            <span class="lang-en">Not discovered</span>
-                        </td>
-                        <td class="accuracy-unknown">
-                            <span class="lang-de">Vorhersage</span>
-                            <span class="lang-en">Prediction</span>
-                        </td>
-                    </tr>
-                    <tr class="interactive-row prediction-row" onclick="showDetails('super_neutrino')">
-                        <td class="particle-name" style="color: #ff5722;">
-                            <span class="lang-de">Super-Neutrino</span>
-                            <span class="lang-en">Super-Neutrino</span>
-                        </td>
-                        <td>νΨ</td>
-                        <td>4</td>
-                        <td>3</td>
+                        <td>0.5</td>
                         <td>1/2</td>
-                        <td>0.0341</td>
-                        <td>6.4 MeV</td>
+                        <td>18.5 GeV</td>
                         <td style="color: #ff9800;">
-                            <span class="lang-de">Nicht entdeckt</span>
-                            <span class="lang-en">Not discovered</span>
+                            <span class="lang-de">Experimentell schwierig</span>
+                            <span class="lang-en">Experimentally challenging</span>
                         </td>
-                        <td class="accuracy-unknown">
-                            <span class="lang-de">Vorhersage</span>
-                            <span class="lang-en">Prediction</span>
+                        <td class="deviation-cell" style="color: #34495e;">
+                            <span class="lang-de">Schwelle</span>
+                            <span class="lang-en">Threshold</span>
                         </td>
-                    </tr>
-                    
-                    <!-- FEHLENDE QUANTENZUSTÄNDE / MISSING QUANTUM STATES -->
-                    <tr style="background: rgba(156, 39, 176, 0.2);">
-                        <td colspan="9">
-                            <strong>
-                                <span class="lang-de">FEHLENDE QUANTENZUSTÄNDE</span>
-                                <span class="lang-en">MISSING QUANTUM STATES</span>
-                            </strong>
+                        <td style="color: #34495e; font-size: 0.8em;">
+                            <span class="lang-de">Elektroschwache Skala</span>
+                            <span class="lang-en">Electroweak scale</span>
                         </td>
                     </tr>
-                    <tr class="interactive-row prediction-row" onclick="showDetails('axial_boson')">
-                        <td class="particle-name" style="color: #9c27b0;">
-                            <span class="lang-de">Axiales Boson</span>
-                            <span class="lang-en">Axial Boson</span>
-                        </td>
-                        <td>A⁰</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>10.24</td>
-                        <td>3.3 GeV</td>
-                        <td style="color: #ff9800;">
-                            <span class="lang-de">Nicht entdeckt</span>
-                            <span class="lang-en">Not discovered</span>
-                        </td>
-                        <td class="accuracy-unknown">
-                            <span class="lang-de">Vorhersage</span>
-                            <span class="lang-en">Prediction</span>
-                        </td>
-                    </tr>
-                    <tr class="interactive-row prediction-row" onclick="showDetails('scalar_partner')">
-                        <td class="particle-name" style="color: #9c27b0;">
-                            <span class="lang-de">Skalarer Partner</span>
-                            <span class="lang-en">Scalar Partner</span>
-                        </td>
-                        <td>S⁰</td>
-                        <td>3</td>
-                        <td>3</td>
-                        <td>0</td>
-                        <td>91.13</td>
-                        <td>15.8 GeV</td>
-                        <td style="color: #ff9800;">
-                            <span class="lang-de">Nicht entdeckt</span>
-                            <span class="lang-en">Not discovered</span>
-                        </td>
-                        <td class="accuracy-unknown">
-                            <span class="lang-de">Vorhersage</span>
-                            <span class="lang-en">Prediction</span>
-                        </td>
-                    </tr>
-                    <tr class="interactive-row prediction-row" onclick="showDetails('heavy_photon')">
-                        <td class="particle-name" style="color: #9c27b0;">
-                            <span class="lang-de">Schweres Photon</span>
-                            <span class="lang-en">Heavy Photon</span>
-                        </td>
-                        <td>γ'</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1.78</td>
-                        <td>750 MeV</td>
-                        <td style="color: #ff9800;">
-                            <span class="lang-de">Nicht entdeckt</span>
-                            <span class="lang-en">Not discovered</span>
-                        </td>
-                        <td class="accuracy-unknown">
-                            <span class="lang-de">Vorhersage</span>
-                            <span class="lang-en">Prediction</span>
-                        </td>
-                    </tr>
-                    
-                    <!-- ENERGIEFELD-EFFEKTE / ENERGY FIELD EFFECTS -->
-                    <tr style="background: rgba(63, 81, 181, 0.2);">
-                        <td colspan="9">
-                            <strong>
-                                <span class="lang-de">ENERGIEFELD-MANIFESTATIONEN</span>
-                                <span class="lang-en">ENERGY FIELD MANIFESTATIONS</span>
-                            </strong>
-                        </td>
-                    </tr>
-                    <tr class="interactive-row prediction-row" onclick="showDetails('field_excitation')">
-                        <td class="particle-name" style="color: #3f51b5;">
-                            <span class="lang-de">Feld-Anregung</span>
-                            <span class="lang-en">Field Excitation</span>
-                        </td>
-                        <td>χ</td>
-                        <td>2</td>
-                        <td>0</td>
-                        <td>1/2</td>
-                        <td>4.096</td>
-                        <td>32.6 GeV</td>
-                        <td style="color: #ff9800;">
-                            <span class="lang-de">Feld-Modus</span>
-                            <span class="lang-en">Field mode</span>
-                        </td>
-                        <td class="accuracy-unknown">
-                            <span class="lang-de">T0-Effekt</span>
-                            <span class="lang-en">T0 effect</span>
-                        </td>
-                    </tr>
-                    <tr class="interactive-row prediction-row" onclick="showDetails('sterile_state')">
-                        <td class="particle-name" style="color: #3f51b5;">
-                            <span class="lang-de">Isolierter Zustand</span>
-                            <span class="lang-en">Isolated State</span>
-                        </td>
-                        <td>νₛ</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1/2</td>
-                        <td>0.000237</td>
-                        <td>560 keV</td>
-                        <td style="color: #ff9800;">
-                            <span class="lang-de">Schwach gekoppelt</span>
-                            <span class="lang-en">Weakly coupled</span>
-                        </td>
-                        <td class="accuracy-unknown">
-                            <span class="lang-de">T0-Erklärung</span>
-                            <span class="lang-en">T0 explanation</span>
-                        </td>
-                    </tr>
-                    
-                    <!-- SUPERSYMMETRISCHE PARTNER / SUPERSYMMETRIC PARTNERS -->
-                    <tr style="background: rgba(76, 175, 80, 0.2);">
-                        <td colspan="9">
-                            <strong>
-                                <span class="lang-de">SUPERSYMMETRISCHE ÄQUIVALENTE</span>
-                                <span class="lang-en">SUPERSYMMETRIC EQUIVALENTS</span>
-                            </strong>
-                        </td>
-                    </tr>
-                    <tr class="interactive-row prediction-row" onclick="showDetails('selectron')">
-                        <td class="particle-name" style="color: #4caf50;">
-                            <span class="lang-de">Selektron</span>
-                            <span class="lang-en">Selectron</span>
-                        </td>
-                        <td>ẽ</td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>1.000</td>
-                        <td>750 GeV</td>
-                        <td style="color: #ff9800;">
-                            <span class="lang-de">SUSY-Partner</span>
-                            <span class="lang-en">SUSY partner</span>
-                        </td>
-                        <td class="accuracy-unknown">
-                            <span class="lang-de">Vorhersage</span>
-                            <span class="lang-en">Prediction</span>
-                        </td>
-                    </tr>
-                    <tr class="interactive-row prediction-row" onclick="showDetails('squarks')">
-                        <td class="particle-name" style="color: #4caf50;">Squarks</td>
-                        <td>q̃</td>
-                        <td>1-3</td>
-                        <td>0-2</td>
-                        <td>0</td>
-                        <td>var.</td>
-                        <td>1-10 TeV</td>
-                        <td style="color: #ff9800;">
-                            <span class="lang-de">SUSY-Partner</span>
-                            <span class="lang-en">SUSY partners</span>
-                        </td>
-                        <td class="accuracy-unknown">
-                            <span class="lang-de">Vorhersage</span>
-                            <span class="lang-en">Prediction</span>
-                        </td>
-                    </tr>
-                    
-                    <!-- EXOTISCHE ZUSTÄNDE / EXOTIC STATES -->
-                    <tr style="background: rgba(255, 193, 7, 0.2);">
-                        <td colspan="9">
-                            <strong>
-                                <span class="lang-de">EXOTISCHE QUANTENZUSTÄNDE</span>
-                                <span class="lang-en">EXOTIC QUANTUM STATES</span>
-                            </strong>
-                        </td>
-                    </tr>
-                    <tr class="interactive-row prediction-row" onclick="showDetails('magnetic_monopole')">
-                        <td class="particle-name" style="color: #ffc107;">
-                            <span class="lang-de">Magnetischer Monopol</span>
-                            <span class="lang-en">Magnetic Monopole</span>
-                        </td>
-                        <td>M±</td>
-                        <td>6</td>
-                        <td>5</td>
-                        <td>0</td>
-                        <td>15625</td>
-                        <td>8.5 × 10¹⁶ GeV</td>
-                        <td style="color: #ff9800;">
-                            <span class="lang-de">Exotisch</span>
-                            <span class="lang-en">Exotic</span>
-                        </td>
-                        <td class="accuracy-unknown">
-                            <span class="lang-de">Vorhersage</span>
-                            <span class="lang-en">Prediction</span>
-                        </td>
-                    </tr>
-                    <tr class="interactive-row prediction-row" onclick="showDetails('graviton')">
-                        <td class="particle-name" style="color: #ffc107;">Graviton</td>
-                        <td>G</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>2</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td style="color: #ff9800;">
-                            <span class="lang-de">Masselos</span>
-                            <span class="lang-en">Massless</span>
-                        </td>
-                        <td class="accuracy-high">
-                            <span class="lang-de">Theorie</span>
-                            <span class="lang-en">Theory</span>
-                        </td>
-                    </tr>
-                    <tr class="interactive-row prediction-row" onclick="showDetails('axion')">
-                        <td class="particle-name" style="color: #ffc107;">Axion</td>
-                        <td>a⁰</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>0.000133</td>
-                        <td>10⁻⁶ eV</td>
-                        <td style="color: #ff9800;">
-                            <span class="lang-de">Feld-Quant</span>
-                            <span class="lang-en">Field quantum</span>
-                        </td>
-                        <td class="accuracy-unknown">
-                            <span class="lang-de">Vorhersage</span>
-                            <span class="lang-en">Prediction</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        
+        <div class="neutrino-note">
+            <h4 style="color: #9c27b0; margin-bottom: 15px;">
+                <span class="lang-de">🔬 Besonderheit der Neutrino-Berechnung</span>
+                <span class="lang-en">🔬 Special Feature of Neutrino Calculation</span>
+            </h4>
+            <p class="lang-de">
+                Das T0-Modell enthält eine revolutionäre Entdeckung: <strong>Neutrinos unterliegen einer doppelten ξ-Unterdrückung</strong> 
+                aufgrund ihrer einzigartigen Natur als reine Schwach-Wechselwirkungsteilchen. Dies führt zu einem zusätzlichen 
+                Faktor ξ in ihrer geometrischen Funktion f(n,l,j), was ihre extrem kleinen Massen erklärt und alle aktuellen 
+                experimentellen Obergrenzen erfüllt.
+            </p>
+            <p class="lang-en">
+                The T0-model contains a revolutionary discovery: <strong>Neutrinos experience double ξ-suppression</strong> 
+                due to their unique nature as pure weak-interaction particles. This leads to an additional factor ξ in their 
+                geometric function f(n,l,j), explaining their extremely small masses and satisfying all current experimental 
+                upper limits.
+            </p>
         </div>
         
-        <div class="pattern-explanation">
-            <h3 style="color: #ffeb3b; margin-top: 0;">
-                <span class="lang-de">🎯 Systematische Vorhersagen</span>
-                <span class="lang-en">🎯 Systematic Predictions</span>
+        <div class="theory-box">
+            <h3 style="color: #ffeb3b; margin-bottom: 20px;">
+                <span class="lang-de">🎯 Zentrale T0-Erkenntnisse</span>
+                <span class="lang-en">🎯 Key T0 Insights</span>
             </h3>
-            <p class="lang-de">Das T0-Modell macht <strong>testbare Vorhersagen</strong> für neue Teilchen basierend auf:</p>
-            <p class="lang-en">The T0-model makes <strong>testable predictions</strong> for new particles based on:</p>
             
-            <div class="quantum-pattern">
-                <div class="pattern-box">
-                    <h4>
-                        <span class="lang-de">🔮 4. Generation</span>
-                        <span class="lang-en">🔮 4th Generation</span>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #4ecdc4; margin-bottom: 15px;">
+                        <span class="lang-de">Quantenzahlen (n,l,j):</span>
+                        <span class="lang-en">Quantum Numbers (n,l,j):</span>
                     </h4>
-                    <p><strong>n=4, l=3</strong><br>
-                    Super-Leptons<br>
-                    <span class="lang-de">Energie: 6-48 GeV</span>
-                    <span class="lang-en">Energy: 6-48 GeV</span></p>
+                    <ul style="margin: 0; padding-left: 20px;">
+                        <li class="lang-de"><strong>n:</strong> Generationsniveau (1,2,3...)</li>
+                        <li class="lang-de"><strong>l:</strong> Räumliche Geometrie (0,1,2...)</li>
+                        <li class="lang-de"><strong>j:</strong> Gesamtdrehimpuls (1/2,1,0...)</li>
+                        
+                        <li class="lang-en"><strong>n:</strong> Generation level (1,2,3...)</li>
+                        <li class="lang-en"><strong>l:</strong> Spatial geometry (0,1,2...)</li>
+                        <li class="lang-en"><strong>j:</strong> Total angular momentum (1/2,1,0...)</li>
+                    </ul>
                 </div>
-                <div class="pattern-box">
-                    <h4>
-                        <span class="lang-de">🕳️ Quantenlücken</span>
-                        <span class="lang-en">🕳️ Quantum Gaps</span>
+                
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #ff6b9d; margin-bottom: 15px;">
+                        <span class="lang-de">Boson-Unterschiede:</span>
+                        <span class="lang-en">Boson Differences:</span>
                     </h4>
-                    <p><span class="lang-de"><strong>Fehlende (n,l,j)</strong><br>
-                    Axiale Bosonen<br>
-                    Energie: 0.75-15 GeV</span>
-                    <span class="lang-en"><strong>Missing (n,l,j)</strong><br>
-                    Axial Bosons<br>
-                    Energy: 0.75-15 GeV</span></p>
+                    <ul style="margin: 0; padding-left: 20px;">
+                        <li class="lang-de">Negative Exponenten (p < 0)</li>
+                        <li class="lang-de">Geometrische Verstärkung</li>
+                        <li class="lang-de">Kraftträger-Natur</li>
+                        <li class="lang-de">Higgs: Vakuum-Anregungsmodus</li>
+                        
+                        <li class="lang-en">Negative exponents (p < 0)</li>
+                        <li class="lang-en">Geometric enhancement</li>
+                        <li class="lang-en">Force carrier nature</li>
+                        <li class="lang-en">Higgs: Vacuum excitation mode</li>
+                    </ul>
                 </div>
-                <div class="pattern-box">
-                    <h4>
-                        <span class="lang-de">⚡ Energiefeld-Effekte</span>
-                        <span class="lang-en">⚡ Energy Field Effects</span>
+                
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #ffeb3b; margin-bottom: 15px;">
+                        <span class="lang-de">Mathematische Äquivalenz:</span>
+                        <span class="lang-en">Mathematical Equivalence:</span>
                     </h4>
-                    <p><span class="lang-de"><strong>Isolierte Zustände</strong><br>
-                    Schwach gekoppelte Modi<br>
-                    Erklären "Dunkle Materie"</span>
-                    <span class="lang-en"><strong>Isolated States</strong><br>
-                    Weakly coupled modes<br>
-                    Explain "Dark Matter"</span></p>
+                    <p style="margin: 0; font-size: 0.9em;" class="lang-de">
+                        Beide Methoden (direkt geometrisch und erweitert Yukawa) führen zu 
+                        <strong>identischen numerischen Ergebnissen</strong> bei exakter Berechnung 
+                        mit Verhältnissen.
+                    </p>
+                    <p style="margin: 0; font-size: 0.9em;" class="lang-en">
+                        Both methods (direct geometric and extended Yukawa) lead to 
+                        <strong>identical numerical results</strong> when calculated exactly 
+                        using ratios.
+                    </p>
                 </div>
-                <div class="pattern-box">
-                    <h4>
-                        <span class="lang-de">🔄 SUSY-Partner</span>
-                        <span class="lang-en">🔄 SUSY Partners</span>
-                    </h4>
-                    <p><strong>Spin-Flip</strong><br>
-                    <span class="lang-de">Supersymmetrie<br>
-                    Energie: 0.75-10 TeV</span>
-                    <span class="lang-en">Supersymmetry<br>
-                    Energy: 0.75-10 TeV</span></p>
-                </div>
-            </div>
-            
-            <div style="background: rgba(255, 152, 0, 0.2); padding: 20px; border-radius: 10px; margin: 20px 0;">
-                <h4 style="color: #ff9800; margin-top: 0;">
-                    <span class="lang-de">🚀 Experimentelle Tests</span>
-                    <span class="lang-en">🚀 Experimental Tests</span>
-                </h4>
-                <ul class="lang-de">
-                    <li><strong>LHC:</strong> Suche nach 4. Generation bei 6-48 GeV</li>
-                    <li><strong>Energiefeld:</strong> Isolierte Zustände bei 560 keV erklären galaktische Rotationskurven</li>
-                    <li><strong>Axion-Experimente:</strong> T0-Vorhersage bei 10⁻⁶ eV</li>
-                    <li><strong>Neue Bosonen:</strong> Axiales Boson bei 3.3 GeV</li>
-                </ul>
-                <ul class="lang-en">
-                    <li><strong>LHC:</strong> Search for 4th generation at 6-48 GeV</li>
-                    <li><strong>Energy Field:</strong> Isolated states at 560 keV explain galactic rotation curves</li>
-                    <li><strong>Axion Experiments:</strong> T0-prediction at 10⁻⁶ eV</li>
-                    <li><strong>New Bosons:</strong> Axial boson at 3.3 GeV</li>
-                </ul>
             </div>
         </div>
         
-        <div class="missing-data">
-            <h3 style="margin-top: 0; color: #ff8f00;">
-                <span class="lang-de">⚠️ Experimentelle Herausforderungen</span>
-                <span class="lang-en">⚠️ Experimental Challenges</span>
-            </h3>
-            <p class="lang-de"><strong>Neutrino-Massen:</strong> Schwer messbar, aber T0-Vorhersagen sind mit aktuellen Obergrenzen kompatibel</p>
-            <p class="lang-de"><strong>Leichte Quarks:</strong> Confinement erschwert direkte Massenmessung</p>
-            <p class="lang-de"><strong>Top-Quark:</strong> Größere Abweichung möglicherweise durch komplexe QCD-Effekte</p>
-            
-            <p class="lang-en"><strong>Neutrino masses:</strong> Difficult to measure, but T0 predictions are compatible with current limits</p>
-            <p class="lang-en"><strong>Light quarks:</strong> Confinement complicates direct mass measurement</p>
-            <p class="lang-en"><strong>Top quark:</strong> Larger deviation possibly due to complex QCD effects</p>
-        </div>
-        
-        <div style="text-align: center; margin: 50px 0; font-size: 1.4em; font-style: italic;">
-            <div style="color: #ffeb3b; font-weight: bold;">
-                <span class="lang-de">🌟 Das T0-Modell enthüllt das wahre Muster der Natur 🌟</span>
-                <span class="lang-en">🌟 The T0-Model reveals nature's true pattern 🌟</span>
+        <div style="text-align: center; margin: 40px 0; padding: 30px; background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(255, 107, 157, 0.1)); border-radius: 15px;">
+            <h2 style="color: #00ffff; margin-bottom: 20px;">
+                <span class="lang-de">🌟 T0-Modell Revolution</span>
+                <span class="lang-en">🌟 T0-Model Revolution</span>
+            </h2>
+            <div style="font-size: 1.2em;">
+                <p class="lang-de">
+                    <strong>Von 20+ freien Parametern zu NULL</strong><br>
+                    <strong>99.0% durchschnittliche Genauigkeit</strong> über alle Teilchen<br>
+                    <strong>Neutrinos vollständig eingeschlossen</strong> mit doppelter ξ-Unterdrückung<br>
+                    <strong>Reine Geometrie</strong> erklärt alle Teilchenmassen
+                </p>
+                <p class="lang-en">
+                    <strong>From 20+ free parameters to ZERO</strong><br>
+                    <strong>99.0% average accuracy</strong> across all particles<br>
+                    <strong>Neutrinos fully included</strong> with double ξ-suppression<br>
+                    <strong>Pure geometry</strong> explains all particle masses
+                </p>
             </div>
-            <div style="font-size: 1em; margin-top: 15px; opacity: 0.9;">
-                <span class="lang-de">
-                    Alle 25 Standardmodell-Teilchen folgen der gleichen geometrischen Logik:<br>
-                    <strong>E = 1/ξ</strong> mit <strong>ξ = (4/3) × 10⁻⁴ × f(n,l,j)</strong>
-                </span>
-                <span class="lang-en">
-                    All 25 Standard Model particles follow the same geometric logic:<br>
-                    <strong>E = 1/ξ</strong> with <strong>ξ = (4/3) × 10⁻⁴ × f(n,l,j)</strong>
-                </span>
+            <div style="font-size: 1.4em; color: #4ecdc4; font-weight: bold; margin-top: 20px;">
+                <span class="lang-de">🎯 Einstein's geometrische Vision verwirklicht! 🎯</span>
+                <span class="lang-en">🎯 Einstein's geometric vision realized! 🎯</span>
             </div>
         </div>
     </div>
@@ -1065,75 +1135,39 @@
         function toggleLanguage() {
             currentLanguage = currentLanguage === 'de' ? 'en' : 'de';
             document.body.classList.toggle('english', currentLanguage === 'en');
+            
+            // Update page title
+            const title = currentLanguage === 'de' ? 
+                'T0-Modell: Vollständiges Teilchenspektrum - Theoretische Vorhersagen' :
+                'T0-Model: Complete Particle Spectrum - Theoretical Predictions';
+            document.title = title;
         }
         
-        function showDetails(particle) {
-            const detailsDE = {
-                // Bekannte Teilchen
-                'electron': 'Elektron: Perfekte Übereinstimmung als Grundzustand (n=1,l=0,j=1/2)',
-                'muon': 'Myon: 1. angeregter Zustand mit 99.97% Genauigkeit',
-                'tau': 'Tau: 2. angeregter Zustand mit 99.96% Genauigkeit',
-                'down': 'Down-Quark: Perfekte Übereinstimmung mit Farbfaktor',
-                'higgs': 'Higgs: Erstaunliche 99.99% Genauigkeit als n=5,l=4 Modus',
+        // Add interactive effects
+        document.querySelectorAll('.particle-table tr').forEach(row => {
+            if (!row.classList.contains('category-header')) {
+                row.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.01)';
+                    this.style.transition = 'all 0.2s ease';
+                });
                 
-                // Neue Vorhersagen
-                'super_lepton': '4. Generation Lepton: n=4,l=3 Zustand bei 48.4 GeV\nKönnte am LHC entdeckt werden!',
-                'super_neutrino': '4. Generation Neutrino: 6.4 MeV schweres steriles Neutrino\nNeue Energiefeld-Teilchenart',
-                'axial_boson': 'Axiales Boson: Fehlender n=2,l=2 Zustand bei 3.3 GeV\nNeue Kraft zwischen Teilchen?',
-                'scalar_partner': 'Skalarer Partner: n=3,l=3 Zustand bei 15.8 GeV\nZweites Higgs-ähnliches Teilchen',
-                'heavy_photon': 'Schweres Photon: n=1,l=1 Zustand bei 750 MeV\nSchwach gekoppeltes Eichboson',
-                'field_excitation': 'Energiefeld-Anregung: 32.6 GeV Feld-Modus\nErklärt galaktische Rotationskurven ohne "Dunkle Materie"!',
-                'sterile_state': 'Isolierter Zustand: 560 keV schwach gekoppeltes Teilchen\nT0-Erklärung für kosmische Anomalien',
-                'selectron': 'Selektron: Supersymmetrischer Elektron-Partner\nSUSY-Beweis bei 750 GeV?',
-                'squarks': 'Squarks: Supersymmetrische Quark-Partner\nTeV-Skala Teilchen am LHC suchbar',
-                'magnetic_monopole': 'Magnetischer Monopol: Exotischer n=6,l=5 Zustand\nGUT-Skala bei 10¹⁶ GeV',
-                'graviton': 'Graviton: Masselos, vermittelt Gravitation\nQuantengravitation-Teilchen',
-                'axion': 'Axion: Ultraleichtes Feld-Quant bei 10⁻⁶ eV\nLöst starkes CP-Problem'
-            };
-            
-            const detailsEN = {
-                // Known particles
-                'electron': 'Electron: Perfect agreement as ground state (n=1,l=0,j=1/2)',
-                'muon': 'Muon: 1st excited state with 99.97% accuracy',
-                'tau': 'Tau: 2nd excited state with 99.96% accuracy',
-                'down': 'Down Quark: Perfect agreement with color factor',
-                'higgs': 'Higgs: Amazing 99.99% accuracy as n=5,l=4 mode',
-                
-                // New predictions
-                'super_lepton': '4th Generation Lepton: n=4,l=3 state at 48.4 GeV\nCould be discovered at LHC!',
-                'super_neutrino': '4th Generation Neutrino: 6.4 MeV heavy sterile neutrino\nNew energy field particle type',
-                'axial_boson': 'Axial Boson: Missing n=2,l=2 state at 3.3 GeV\nNew force between particles?',
-                'scalar_partner': 'Scalar Partner: n=3,l=3 state at 15.8 GeV\nSecond Higgs-like particle',
-                'heavy_photon': 'Heavy Photon: n=1,l=1 state at 750 MeV\nWeakly coupled gauge boson',
-                'field_excitation': 'Energy Field Excitation: 32.6 GeV field mode\nExplains galactic rotation curves without "dark matter"!',
-                'sterile_state': 'Isolated State: 560 keV weakly coupled particle\nT0 explanation for cosmic anomalies',
-                'selectron': 'Selectron: Supersymmetric electron partner\nSUSY proof at 750 GeV?',
-                'squarks': 'Squarks: Supersymmetric quark partners\nTeV-scale particles searchable at LHC',
-                'magnetic_monopole': 'Magnetic Monopole: Exotic n=6,l=5 state\nGUT-scale at 10¹⁶ GeV',
-                'graviton': 'Graviton: Massless, mediates gravitation\nQuantum gravity particle',
-                'axion': 'Axion: Ultra-light field quantum at 10⁻⁶ eV\nSolves strong CP problem'
-            };
-            
-            const details = currentLanguage === 'de' ? detailsDE : detailsEN;
-            const paradigmText = currentLanguage === 'de' ? 
-                '\n\n💡 T0-Paradigma: Was als "Dunkle Materie" erscheint, sind eigentlich schwach gekoppelte Energiefeld-Modi!\n\n🔬 Das T0-Modell braucht KEINE unsichtbare Materie - die Rotationskurven entstehen durch Energiefeld-Geometrie.' :
-                '\n\n💡 T0 Paradigm: What appears as "dark matter" are actually weakly coupled energy field modes!\n\n🔬 The T0-model needs NO invisible matter - rotation curves arise from energy field geometry.';
-            
-            if (details[particle]) {
-                alert(details[particle] + paradigmText);
+                row.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
             }
-        }
+        });
         
-        // Highlight rows on hover
-        document.querySelectorAll('.interactive-row').forEach(row => {
-            row.addEventListener('mouseenter', function() {
-                this.style.background = 'rgba(255, 235, 59, 0.2)';
-                this.style.transform = 'scale(1.02)';
-            });
-            
-            row.addEventListener('mouseleave', function() {
-                this.style.background = '';
-                this.style.transform = '';
+        // Add click effects for compatible rows (neutrinos)
+        document.querySelectorAll('.compatible-row').forEach(row => {
+            row.addEventListener('click', function() {
+                const particleName = this.querySelector('.particle-name').textContent.trim();
+                const prediction = this.cells[7].textContent.trim();
+                const limit = this.cells[8].textContent.trim();
+                
+                const messageDE = `🔬 Neutrino-Vorhersage: ${particleName}\n\nT0-Vorhersage: ${prediction}\nExperimentelle Grenze: ${limit}\n\nDas T0-Modell sagt sehr kleine, aber messbare Neutrinomassen vorher, die durch zukünftige Experimente getestet werden können.`;
+                const messageEN = `🔬 Neutrino Prediction: ${particleName}\n\nT0-Prediction: ${prediction}\nExperimental Limit: ${limit}\n\nThe T0-model predicts very small but measurable neutrino masses that can be tested by future experiments.`;
+                
+                alert(currentLanguage === 'de' ? messageDE : messageEN);
             });
         });
     </script>
