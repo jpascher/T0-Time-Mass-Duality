@@ -10,11 +10,11 @@ Das Projekt wurde mit umfangreichen neuen theoretischen Dokumenten und Audio-Mat
 
 ### Hauptdokumente (Juli 2025)
 1. **[T0 Energie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-Energie_De.pdf)** (23.07.2025) - Das umfassendste Dokument (769KB) mit vollständiger energiebasierter Formulierung
-2. **[Teilchenmassen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Teilchenmassen_De.pdf)** (23.07.2025) - Revolutionäre parameterfreie Massenberechnung (369KB)
+2. **[Teilchenmassen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Teilchenmassen_De.pdf)** (24.07.2025) - Revolutionäre parameterfreie Massenberechnung (413KB)
 3. **[Deterministische vs. Probabilistische QM](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-Detrmistic_p_De.pdf)** (23.07.2025) - Erweiterte Ansatzvergleiche (783KB)
 
 ### Neue Audio-Dokumentation (Juli 2025)
-4. **[T0 Dialog-Serie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/T0_Dialog_Professor.mp3)** - Umfassende Audio-Diskussionen zu Quantenmechanik, Teilchenphysik, CMB, Gravitation und mehr (40+ MB gesamt)
+4. **[T0 Dialog-Serie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/T0_Dialog_Professor.mp3)** - Umfassende Audio-Diskussionen zu Quantenmechanik, Teilchenphysik, CMB, Gravitation und mehr (50+ MB gesamt)
 5. **[Kurze verbale Einführungen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/T0_kurz_verbal_De.mp3)** - Prägnante Audio-Erklärungen auf Deutsch und Englisch
 
 ## Repository-Struktur
@@ -31,12 +31,9 @@ T0-Zeit-Masse-Dualität/
 │   └── index.html & website.html # Lokale Web-Schnittstellen
 ├── rsa/                          # RSA-Faktorisierungs-Demos und Implementierungen
 ├── sig/                          # Audio-Signalanalyse (3 Dateien)
-│   ├── xi_harmonic_analysis_demo.html
-│   ├── xi_harmonic_documentation.md
-│   └── xi_oscilloscope_spectrum-basis.html
-├── Audio-Dokumentation/          # Dialog-Serie und gesprochene Erklärungen (50+ MB)
+├── Audio-Dialog-Serie/           # Vollständige Dialog-Sammlung (50+ MB)
 ├── Python-Module/                # Direkte Implementierungen (5 Dateien)
-├── Technische Berichte/          # Umfassende Analysen (4 Dateien)
+├── Technische Berichte/          # Umfassende Analysen
 └── README.md / README_de.md     # Dokumentation
 ```
 
@@ -47,7 +44,7 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 
 #### Kerntheorie (18 Dokumente)
 - **T0-Energie** (769KB) - Umfassendste energiebasierte Formulierung
-- **Teilchenmassen** (369KB) - Parameterfreie Teilchenmassen-Berechnungen
+- **Teilchenmassen** (413KB) - Parameterfreie Teilchenmassen-Berechnungen  
 - **QM-Detrmistic_p** (783KB) - Deterministische vs. probabilistische Quantenmechanik
 - **Elimination of Mass** Serie - Mathematischer Massen-Eliminationsrahmen
 - **E=mc² Analyse** - Neuinterpretation im T0-Framework
@@ -56,30 +53,30 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 
 #### Teilchenphysik & Kosmologie (12 Dokumente)
 - **Complete Muon g-2 Analysis** (428KB) - Anomales magnetisches Moment
-- **H-Dokument** - Higgs-Mechanismus in T0
-- **Cosmic** (285KB) - Kosmologische Anwendungen
-- **Rotverschiebung und Lichtablenkung** (305KB) - Astrophysikalische Phänomene
+- **H-Dokument** (314KB) - Higgs-Mechanismus in T0
+- **Cosmic** (486KB) - Kosmologische Anwendungen
+- **Rotverschiebung und Lichtablenkung** (331KB) - Astrophysikalische Phänomene
 - **Dynamische Masse und Nichtlokale Photonen** - Erweiterte Felddynamik
 
 #### Quantencomputing & Kryptographie (8 Dokumente)
 - **RSA-Analyse & Tests** - Kryptographische Implikationen
 - **QM-Tests** - Quantenalgorithmus-Analyse
 - **T0-Netzwerke** (372KB) - Netzwerk-Theorie-Adaptation
-- **Parameter-Systemabhängigkeit** - Systemunabhängige Formulierungen
+- **Parameter-Systemabhängigkeit** (440KB) - Systemunabhängige Formulierungen
 
 #### Mathematische Grundlagen (10 Dokumente)
-- **Beta-Ableitung** (468KB) - Fundamentale Parameter-Ableitung
-- **Feinstrukturkonstante** - T0-Interpretation
+- **Beta-Ableitung** (622KB) - Fundamentale Parameter-Ableitung
+- **Feinstrukturkonstante** (387KB) - T0-Interpretation
 - **Natürliche Einheiten-Systematik** (369KB) - Einheitensystem-Analyse
 - **Relokatives Zahlensystem** (555KB) - Neuartige Berechnungsmethoden
 - **xi-Parameter und Teilchen** (373KB) - Fundamentale Konstanten-Analyse
 
 #### Experimentell & Angewandt (12 Dokumente)
-- **Temperatureinheiten und CMB** - Kosmische Hintergrundstrahlung
-- **Mol und Candela** - Einheiten-Neudefinitionen
-- **Systemanalyse** - Vollständige T0-Systemübersicht
-- **No-Go-Theoreme** - Umgehung fundamentaler Limitationen
-- **T0 vs. Erweitertes Standardmodell** - Vergleichende Analyse
+- **Temperatureinheiten und CMB** (379KB) - Kosmische Hintergrundstrahlung
+- **Mol und Candela** (462KB) - Einheiten-Neudefinitionen
+- **Systemanalyse** (395KB) - Vollständige T0-Systemübersicht
+- **No-Go-Theoreme** (311KB) - Umgehung fundamentaler Limitationen
+- **T0 vs. Erweitertes Standardmodell** (473KB) - Vergleichende Analyse
 
 ### 🎵 **Audio-Dokumentation (50+ MB gesamt)**
 - **T0_Dialog_Professor.mp3** (9,8MB) - Umfassende professorale Erklärung
@@ -87,17 +84,25 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 - **T0_Dialog_Teilchenphysik.mp3** (5,8MB) - Teilchenphysik-Analyse
 - **T0_Dialog_CMB.mp3** (7,6MB) - Kosmische Hintergrundstrahlung
 - **T0_Dialog_Gravitation.mp3** (3,0MB) - Gravitationseffekte
-- **T0_kurz_verbal_De/En.mp3** (2,8/2,6MB) - Prägnante zweisprachige Einführungen
-- **Plus 4 weitere Dialog-Teile** zu verschiedenen Aspekten
+- **T0_Dialog_Teil1.mp3** (3,5MB) - Grundlagen Teil 1
+- **T0_Dialog_Teil2.mp3** (5,7MB) - Grundlagen Teil 2
+- **T0_Dialog_Teil3.mp3** (5,9MB) - Grundlagen Teil 3
+- **T0_Dialog_verhältnisse.mp3** (3,6MB) - Verhältnisse und Relationen
+- **T0_Dialog_Zwei_Wege.mp3** (2,6MB) - Zwei Ansätze der Physik
+- **T0_kurz_verbal_De.mp3** (2,8MB) - Kompakte deutsche Einführung
+- **T0_kurz_verbal_En.mp3** (2,6MB) - Kompakte englische Einführung
 
 ### 🌐 **Interaktive HTML-Tools (16 Dateien)**
-- **simple_mass_formula.html** (53KB) - 🆕 **NEU** Parameterfreier Massenrechner
-- **quantum_simulator_deterministic.html** (76KB) - Quantencomputer-Simulator
+- **simple_mass_formula.html** (56KB) - 🆕 **NEU** Parameterfreier Massenrechner
+- **quantum_simulator_deterministic.html** (77KB) - Quantencomputer-Simulator
 - **t0_Shore_simulator.html** (104KB) - Shor-Algorithmus-Implementierung
-- **complete_particle_spectrum_de_.html** (51KB) - Teilchen-Vergleichstool
+- **complete_particle_spectrum_de_.html** (46KB) - Teilchen-Vergleichstool
 - **t0_dialogue_multilingual.html** (61KB) - Dreisprachige wissenschaftliche Diskussion
 - **t0_theory_explorer_de_.html** (54KB) - Interaktiver Theorie-Explorer
-- **Plus 10 weitere Tools** für Bildung, Validierung und Analyse
+- **t0_hardware_validation_presentation.html** (33KB) - Hardware-Validierung
+- **t0_neutrinos_explorer_de_.html** (32KB) - Neutrino-Explorer
+- **einheiten_revolution_de_.html** (20KB) - Einheiten-Revolution
+- **Plus 7 weitere spezialisierte Tools** für Bildung, Validierung und Analyse
 
 ### 🐍 **Python-Implementierungen (5 Dateien)**
 - **authentic_t0_quantum.py** (25KB) - Vollständige T0-Quantenimplementierung
@@ -110,6 +115,14 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 - **xi_harmonic_analysis_demo.html** (60KB) - Harmonische Analyse-Demo
 - **xi_oscilloscope_spectrum-basis.html** (178KB) - Spektrum-Analyse-Tool
 - **xi_harmonic_documentation.md** (23KB) - Technische Dokumentation
+
+### 📝 **Zusätzliche Dokumentation**
+- **abstraktallerrDokumente.md** (24KB) - Abstrakt aller Dokumente
+- **complete_hardware_validation_report.md** (45KB) - Hardware-Validierungsbericht
+- **kofler_overview_document.md** (26KB) - Kofler-Übersichtsdokument
+- **t0_framework_complete.md** (39KB) - Vollständiges Framework
+- **technical_report.md** (46KB) - Technischer Bericht
+- **Professor_De.txt** (24KB) - Professor-Dialog-Transkript
 
 ## Dokumentation und Werkzeuge
 
@@ -187,6 +200,7 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 5. **🧮 Python testen**: Implementierungen wie `authentic_t0_quantum.py` ausprobieren
 6. **📊 Papers lesen**: Technische Dokumente in `2/pdf/` (60 Dateien)
 7. **🔊 Signalanalyse**: Audio-Verarbeitungsanwendungen in `/sig/`
+8. **🎵 Audio hören**: Vollständige Dialog-Serie für tiefere Einblicke
 
 ## Repository-Zugang & Medien
 
@@ -204,26 +218,55 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 - **🌐 Interaktive Tools**: 16 HTML-Anwendungen in `2/html/`
 - **🐍 Python-Code**: 5 direkte Implementierungen
 - **🔊 Signalverarbeitung**: 3 Audio-Analyse-Tools
+- **🎵 Dialog-Serie**: 12 Audio-Dateien (50+ MB)
 - **💬 Dreisprachiger Support**: Deutsche, englische, französische Inhalte
 
 ## Neueste Fachpublikationen (Juli 2025)
 
 ### Kerntheorie
 - **[T0 Energie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-Energie_De.pdf)** (769KB) - Vollständige energiebasierte Formulierung
-- **[Teilchenmassen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Teilchenmassen_De.pdf)** (369KB) - Parameterfreie Massenberechnung
+- **[Teilchenmassen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Teilchenmassen_De.pdf)** (413KB) - Parameterfreie Massenberechnung
 - **[Deterministische QM](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-Detrmistic_p_De.pdf)** (783KB) - Umfassende Quantenanalyse
 
 ### Teilchenphysik
 - **[Complete Myon g-2 Analyse](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/CompleteMuon_g-2_AnalysisDe.pdf)** (428KB)
-- **[Kosmische Anwendungen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/cosmic_De.pdf)** (285KB)
-- **[Rotverschiebung und Lichtablenkung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/redshift_deflection_De.pdf)** (305KB)
+- **[Kosmische Anwendungen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/cosmic_De.pdf)** (486KB)
+- **[Rotverschiebung und Lichtablenkung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/redshift_deflection_De.pdf)** (331KB)
 
 ### Mathematische Grundlagen
-- **[Beta-Ableitung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/DerivationVonBetaDe.pdf)** (468KB)
+- **[Beta-Ableitung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/DerivationVonBetaDe.pdf)** (622KB)
 - **[Relokatives Zahlensystem](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/RelokativesZahlensystemDe.pdf)** (555KB)
 - **[Natürliche Einheiten-Systematik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/NatEinheitenSystematikDe.pdf)** (369KB)
 
+### Kosmologie & Astrophysik
+- **[Temperatureinheiten und CMB](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/TempEinheitenCMBDe.pdf)** (379KB)
+- **[H-Dokument](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/HdokumentDe.pdf)** (314KB) - Higgs-Mechanismus
+
 Alle Dokumente in deutscher und englischer Version verfügbar.
+
+## Audio-Dialog-Serie: Vollständige Übersicht
+
+Die umfangreiche Audio-Dokumentation bietet über 50MB an gesprochenen Erklärungen:
+
+### Hauptdialoge
+- **Professor-Dialog** (9,8MB) - Umfassende akademische Diskussion
+- **Quantenmechanik** (6,2MB) - Tiefe QM-Analyse
+- **Teilchenphysik** (5,8MB) - Partikel-Theorie erklärt
+- **CMB-Dialog** (7,6MB) - Kosmische Hintergrundstrahlung
+
+### Spezialthemen
+- **Gravitation** (3,0MB) - Gravitationsphysik in T0
+- **Verhältnisse** (3,6MB) - Mathematische Relationen
+- **Zwei Wege** (2,6MB) - Vergleich der Ansätze
+
+### Grundlagen-Serie
+- **Teil 1** (3,5MB) - Einführung in T0
+- **Teil 2** (5,7MB) - Vertiefung der Konzepte  
+- **Teil 3** (5,9MB) - Erweiterte Anwendungen
+
+### Kompakte Einführungen
+- **Deutsch** (2,8MB) - Prägnante deutsche Erklärung
+- **English** (2,6MB) - Concise English introduction
 
 ## Kontaktinformationen
 
