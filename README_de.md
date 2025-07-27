@@ -134,9 +134,6 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 **[Teilchenspektrum-Vergleich](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_de_.html)**  
 *Interaktiver Vergleich: Standardmodell (61+ Teilchen) vs. T0 (1 Feld).*
 
-**[Hardware-Validierungspräsentation](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_hardware_validation_presentation.html)**  
-*Vergleichende Analyse zwischen T0-Vorhersagen und Quantenhardware-Ergebnissen.*
-
 **[Dreisprachiger wissenschaftlicher Dialog](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_dialogue_multilingual.html)**  
 *Faszinierende Diskussion zwischen T0-Entwickler und Physiker (DE/EN/FR).*
 
