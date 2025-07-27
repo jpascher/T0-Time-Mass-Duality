@@ -12,10 +12,11 @@ The project has been updated with extensive new theoretical documents and audio 
 1. **[T0 Energy](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-Energie_En.pdf)** (23.07.2025) - The most comprehensive document (772KB) with complete energy-based formulation
 2. **[Particle Masses](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Teilchenmassen_En.pdf)** (23.07.2025) - Revolutionary parameter-free mass calculation (401KB)
 3. **[Deterministic vs. Probabilistic QM](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-Detrmistic_p_En.pdf)** (23.07.2025) - Extended comparison of approaches (631KB)
+4. **[T0 Model: Time-Energy Duality and CMB](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/TempEinheitenCMBEn.pdf)** (26.07.2025) - Comprehensive analysis of the cosmic microwave background (CMB) in a static ξ-universe with time-energy duality (382KB)
 
 ### New Audio Documentation (July 2025)
-4. **[T0 Dialog Series](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/T0_Dialog_Professor.mp3)** - Comprehensive audio discussions covering quantum mechanics, particle physics, CMB, gravitation and more (50+ MB total)
-5. **[Short Verbal Introductions](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/T0_kurz_verbal_En.mp3)** - Concise audio explanations in German and English
+5. **[T0 Dialog Series](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/T0_Dialog_Professor.mp3)** - Comprehensive audio discussions covering quantum mechanics, particle physics, CMB, gravitation and more (50+ MB total)
+6. **[Short Verbal Introductions](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/T0_kurz_verbal_En.mp3)** - Concise audio explanations in German and English
 
 ## Repository Structure
 
@@ -42,7 +43,7 @@ T0-Time-Mass-Duality/
 
 ## Current File Inventory (July 2025)
 
-### 📄 **PDF Documents (62 files, ~25MB total)**
+### 📄 **PDF Documents (64 files, ~25.8MB total)**
 All documents available in German and English versions:
 
 #### Core Theory (20 documents)
@@ -54,13 +55,14 @@ All documents available in German and English versions:
 - **Dirac equations** - T0 formulation and simplifications
 - **Lagrangian formulations** - Mathematical foundations
 
-#### Particle Physics & Cosmology (14 documents)
+#### Particle Physics & Cosmology (16 documents)
 - **Complete Muon g-2 Analysis** (289-428KB) - Anomalous magnetic moment
 - **H-Document** - Higgs mechanism in T0
 - **Cosmic** (463-486KB) - Cosmological applications
 - **Redshift and Light Deflection** (326-331KB) - Astrophysical phenomena
 - **Dynamic Mass and Non-Local Photons** - Advanced field dynamics
-- **Temperature Units and CMB** - Cosmic microwave background analysis
+- **Temperature Units and CMB** (379-382KB) - Cosmic microwave background analysis in a static ξ-universe
+- **T0 Model: Time-Energy Duality and CMB** (379-382KB) - Comprehensive CMB analysis with time-energy duality and geometric rest mass
 
 #### Quantum Computing & Cryptography (8 documents)
 - **RSA Analysis & Testing** - Cryptographic implications
@@ -90,14 +92,14 @@ All documents available in German and English versions:
 - **T0_kurz_verbal_De/En.mp3** (2.8/2.6MB) - Concise bilingual introductions
 - **Plus 4 additional dialog parts** covering specialized topics
 
-### 🌐 **Interactive HTML Tools (17 files)**
+### 🌐 **Interactive HTML Tools (12 files)**
 - **simple_mass_formula.html** (56KB) - 🆕 **NEW** Parameter-free mass calculator
 - **quantum_simulator_deterministic.html** (77KB) - Quantum computer simulator
 - **t0_Shore_simulator.html** (104KB) - Shor algorithm implementation
 - **complete_particle_spectrum_de/en_.html** (46/46KB) - Particle comparison tools
 - **t0_dialogue_multilingual.html** (61KB) - Trilingual scientific discussion
 - **t0_theory_explorer_de_.html** (54KB) - Interactive theory explorer
-- **Plus 11 additional tools** for education, validation, and analysis
+- **Plus 6 additional tools** for education, validation, and analysis
 
 ### 🐍 **Python Implementations (5 files)**
 - **authentic_t0_quantum.py** (25KB) - Complete T0 quantum implementation
@@ -114,17 +116,14 @@ All documents available in German and English versions:
 ## Documentation and Tools
 
 ### Revolutionary Particle Mass Calculator 🆕
-
 **[Parameter-Free Particle Mass Calculator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/simple_mass_formula.html)**  
 *🌟 **NEW (July 2025)**: Interactive demonstration showing how the single formula E = 1/ξ calculates ALL particle masses with 98% accuracy using ZERO free parameters. Bilingual interface with complete particle predictions.*
 
 ### RSA Factorization & Cryptographic Analysis
-
 **[RSA Factorization Demo](https://jpascher.github.io/T0-Time-Mass-Duality/rsa/t0_factorization_demo.html)**  
 *Advanced web-based demonstration of T0-Framework applied to RSA number factorization. Features real-time algorithm comparison, ξ-strategy optimization, and cryptographic security analysis.*
 
 ### Simulation and Implementation Tools
-
 **[Deterministic Quantum Computer Simulator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/quantum_simulator_deterministic.html)**  
 *Complete quantum computer simulator implementing T0 framework with hardware validation.*
 
@@ -132,12 +131,10 @@ All documents available in German and English versions:
 *Advanced implementation of Shor's algorithm with T0 deterministic framework.*
 
 ### 🎵 Audio Learning Resources
-
 **[🎧 Complete T0 Audio Library on Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)**  
 *🆕 **NEW (July 2025)**: All T0 audio content now available as podcast episodes! Includes comprehensive dialog series, compact introductions, and specialized discussions on quantum mechanics, particle physics, cosmology, and more. Perfect for auditory learners - stream anywhere, anytime.*
 
 ### 🔬 Advanced Analysis Tools
-
 **[Particle Spectrum Comparison](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_de_.html)**  
 *Interactive comparison: Standard Model (61+ particles) vs. T0 (1 field).*
 
@@ -148,7 +145,6 @@ All documents available in German and English versions:
 *Fascinating discussion between T0 developer and physicist (DE/EN/FR).*
 
 ### 🔊 Signal Analysis & Harmonics
-
 **[Xi Harmonic Analysis](https://jpascher.github.io/T0-Time-Mass-Duality/sig/xi_harmonic_analysis_demo.html)**  
 *Interactive demonstration of T0 framework applied to audio signal analysis.*
 
@@ -173,13 +169,12 @@ All documents available in German and English versions:
 ## Technical Implementation
 
 ### Getting Started
-
 1. **🎬 Watch Video Explanations**: [T0 YouTube Channel](https://www.youtube.com/@Time-MassDuality)
 2. **🎧 Listen to Audio Introductions**: [T0 Spotify Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)
 3. **🌟 Interactive Demo**: [Particle Mass Calculator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/simple_mass_formula.html)
 4. **🔬 Explore RSA**: Check `/rsa/` directory for cryptographic applications
 5. **🧮 Test Python**: Try implementations like `authentic_t0_quantum.py`
-6. **📊 Read Papers**: Technical documents in `2/pdf/` (62 files)
+6. **📊 Read Papers**: Technical documents in `2/pdf/` (64 files)
 7. **🔊 Signal Analysis**: Audio processing applications in `/sig/`
 
 ## Repository Access & Media
@@ -194,8 +189,8 @@ All documents available in German and English versions:
 - **[🎧 T0 Audio Library on Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)**  
 *Complete podcast series with comprehensive discussions and introductions*
 
-- **[📄 Technical Papers**: 62 documents (25MB) in `2/pdf/`
-- **🌐 Interactive Tools**: 17 HTML applications in `2/html/`
+- **[📄 Technical Papers**: 64 documents (25.8MB) in `2/pdf/`
+- **🌐 Interactive Tools**: 12 HTML applications in `2/html/`
 - **🐍 Python Code**: 5 direct implementations
 - **🔊 Signal Processing**: 3 audio analysis tools
 - **💬 Trilingual Support**: German, English, French content
@@ -211,6 +206,7 @@ All documents available in German and English versions:
 - **[Complete Muon g-2 Analysis](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/CompleteMuon_g-2_AnalysisEn.pdf)** (290KB)
 - **[Cosmic Applications](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/cosmic_En.pdf)** (464KB)
 - **[Redshift and Light Deflection](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/redshift_deflection_En.pdf)** (326KB)
+- **[T0 Model: Time-Energy Duality and CMB](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/TempEinheitenCMBEn.pdf)** (382KB) - CMB analysis in a static ξ-universe
 
 ### Mathematical Foundations
 - **[Beta Derivation](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/DerivationVonBetaEn.pdf)** (282KB)
