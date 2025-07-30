@@ -39,11 +39,11 @@ T0-Zeit-Masse-Dualität/
 
 ## Aktueller Dateibestand (Juli 2025)
 
-### 📄 **PDF-Dokumente (64 Dateien, ~25,8 MB insgesamt)**
+### 📄 **PDF-Dokumente (64 Dateien, ~25.8MB insgesamt)**
 Alle Dokumente in deutscher und englischer Version verfügbar:
 
 #### Kerntheorie (20 Dokumente)
-- **T0-Energie** (768KB) - Umfassendste energiebasierte Formulierung
+- **T0-Energie** (772KB) - Umfassendste energiebasierte Formulierung
 - **Teilchenmassen** (413KB) - Parameterfreie Teilchenmassenberechnungen
 - **QM-Detrmistic_p** (783KB) - Deterministische vs. probabilistische Quantenmechanik
 - **Elimination of Mass** Serie - Mathematischer Rahmen zur Massenelimination
@@ -53,11 +53,11 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 
 #### Teilchenphysik & Kosmologie (16 Dokumente)
 - **Vollständige Muon g-2 Analyse** (289-428KB) - Anomaler magnetischer Moment
-- **H-Dokument** - Higgs-Mechanismus im T0-Modell
-- **Cosmic** (463-486KB) - Kosmologische Anwendungen
+- **H-Dokument** - Higgs-Mechanismus in T0
+- **Kosmisch** (463-486KB) - Kosmologische Anwendungen
 - **Rotverschiebung und Lichtablenkung** (326-331KB) - Astrophysikalische Phänomene
-- **Dynamische Masse und nichtlokale Photonen** - Fortgeschrittene Felddynamik
-- **Temperatureinheiten und CMB** (379-382KB) - Analyse der kosmischen Hintergrundstrahlung
+- **Dynamische Masse und nicht-lokale Photonen** - Fortgeschrittene Felddynamik
+- **Temperatureinheiten und CMB** (379-382KB) - Analyse der kosmischen Hintergrundstrahlung in einem statischen ξ-Universum
 - **T0-Modell: Zeit-Energie-Dualität und CMB** (379-382KB) - Umfassende CMB-Analyse mit Zeit-Energie-Dualität und geometrischer Ruhemasse
 
 #### Quantencomputing & Kryptographie (8 Dokumente)
@@ -69,30 +69,30 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 #### Mathematische Grundlagen (12 Dokumente)
 - **Beta-Ableitung** (282-622KB) - Ableitung fundamentaler Parameter
 - **Feinstrukturkonstante** - T0-Interpretation
-- **Natürliche Einheiten Systematik** (361-369KB) - Analyse des Einheitensystems
-- **Relokatives Zahlensystem** (539-555KB) - Neue Berechnungsmethoden
-- **xi-Parameter und Teilchen** (355-373KB) - Analyse fundamentaler Konstanten
+- **Systematik natürlicher Einheiten** (361-369KB) - Analyse des Einheitensystems
+- **Relatives Zahlensystem** (539-555KB) - Neue Berechnungsmethoden
+- **xi-Parameter und Teilchen** (355-373KB) - Analyse der fundamentalen Konstante
 
 #### Experimentell & Angewandt (8 Dokumente)
 - **Mol und Candela** - Neudefinition von Einheiten
 - **Systemanalyse** - Vollständige Übersicht des T0-Systems
-- **No-Go-Theoreme** - Umgehung fundamentaler Einschränkungen
-- **T0 vs Erweitertes Standardmodell** - Vergleichende Analyse
+- **No-Go-Theoreme** - Umgehung fundamentaler Beschränkungen
+- **T0 vs. Erweitertes Standardmodell** - Vergleichende Analyse
 
-### 🎵 **Audio-Dokumentation (50+ MB insgesamt)**
-- **T0_Dialog_Professor.mp3** (9,8MB) - Umfassende professoralische Erklärung
-- **T0_Dialog_Quantenmechanik.mp3** (6,2MB) - Diskussion über Quantenmechanik
-- **T0_Dialog_Teilchenphysik.mp3** (5,8MB) - Analyse der Teilchenphysik
-- **T0_Dialog_CMB.mp3** (7,6MB) - Kosmische Hintergrundstrahlung
-- **T0_Dialog_Gravitation.mp3** (3,0MB) - Gravitationseffekte
-- **T0_kurz_verbal_De/En.mp3** (2,8/2,6MB) - Prägnante zweisprachige Einführungen
+### 🎵 **Audiodokumentation (50+ MB insgesamt)**
+- **T0_Dialog_Professor.mp3** (9.8MB) - Umfassende professoralische Erklärung
+- **T0_Dialog_Quantenmechanik.mp3** (6.2MB) - Diskussion zur Quantenmechanik
+- **T0_Dialog_Teilchenphysik.mp3** (5.8MB) - Analyse der Teilchenphysik
+- **T0_Dialog_CMB.mp3** (7.6MB) - Kosmische Hintergrundstrahlung
+- **T0_Dialog_Gravitation.mp3** (3.0MB) - Gravitationseffekte
+- **T0_kurz_verbal_De/En.mp3** (2.8/2.6MB) - Prägnante zweisprachige Einführungen
 - **Plus 4 zusätzliche Dialogteile** zu spezialisierten Themen
 
 ### 🌐 **Interaktive HTML-Tools (12 Dateien)**
 - **simple_mass_formula.html** (56KB) - 🆕 **NEU** Parameterfreier Massenrechner
 - **quantum_simulator_deterministic.html** (77KB) - Quantencomputersimulator
-- **t0_Shore_simulator.html** (104KB) - Implementierung des Shor-Algorithmus
-- **complete_particle_spectrum_de/en_.html** (46/46KB) - Werkzeuge zum Teilchenvergleich
+- **t0_Shore_simulator.html** (104KB) - Shor-Algorithmus-Implementierung
+- **complete_particle_spectrum_de/en_.html** (46/46KB) - Teilchenvergleichstools
 - **t0_dialogue_multilingual.html** (61KB) - Dreisprachige wissenschaftliche Diskussion
 - **t0_theory_explorer_de_.html** (54KB) - Interaktiver Theorie-Explorer
 - **Plus 6 zusätzliche Tools** für Bildung, Validierung und Analyse
@@ -113,22 +113,22 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 
 ### Revolutionärer Teilchenmassenrechner 🆕
 **[Parameterfreier Teilchenmassenrechner](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/simple_mass_formula.html)**  
-*🌟 **NEU (Juli 2025)**: Interaktive Demonstration, die zeigt, wie die einzige Formel E = 1/ξ ALLE Teilchenmassen mit 98% Genauigkeit ohne freie Parameter berechnet. Zweisprachige Benutzeroberfläche mit vollständigen Teilchenvorhersagen.*
+*🌟 **NEU (Juli 2025)**: Interaktive Demonstration, die zeigt, wie die einzige Formel E = 1/ξ ALLE Teilchenmassen mit 98% Genauigkeit ohne freie Parameter berechnet. Zweisprachige Schnittstelle mit vollständigen Teilchenvorhersagen.*
 
 ### RSA-Faktorisierung & Kryptographische Analyse
 **[RSA-Faktorisierungsdemo](https://jpascher.github.io/T0-Time-Mass-Duality/rsa/t0_factorization_demo.html)**  
-*Fortgeschrittene webbasierte Demonstration des T0-Rahmens angewendet auf die RSA-Zahlenfaktorisierung. Bietet Echtzeit-Algorithmusvergleich, ξ-Strategie-Optimierung und Analyse der kryptographischen Sicherheit.*
+*Fortgeschrittene webbasierte Demonstration des T0-Rahmens angewandt auf die RSA-Zahlenfaktorisierung. Bietet Echtzeit-Algorithmusvergleich, ξ-Strategie-Optimierung und Analyse der kryptographischen Sicherheit.*
 
 ### Simulations- und Implementierungstools
 **[Deterministischer Quantencomputersimulator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/quantum_simulator_deterministic.html)**  
-*Vollständiger Quantencomputersimulator, der den T0-Rahmen mit Hardware-Validierung implementiert.*
+*Vollständiger Quantencomputersimulator, der den T0-Rahmen mit Hardwarevalidierung implementiert.*
 
 **[T0 Shor-Algorithmus-Simulator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_Shore_simulator.html)**  
 *Fortgeschrittene Implementierung des Shor-Algorithmus mit deterministischem T0-Rahmen.*
 
 ### 🎵 Audio-Lernressourcen
-**[🎧 Vollständige T0-Audio-Bibliothek auf Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)**  
-*🆕 **NEU (Juli 2025)**: Alle T0-Audioinhalte jetzt als Podcast-Episoden verfügbar! Beinhaltet umfassende Dialogserien, kompakte Einführungen und spezialisierte Diskussionen zu Quantenmechanik, Teilchenphysik, Kosmologie und mehr. Perfekt für auditive Lernende - überall und jederzeit streambar.*
+**[🎧 Vollständige T0-Audiobibliothek auf Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)**  
+*🆕 **NEU (Juli 2025)**: Alle T0-Audioinhalte jetzt als Podcast-Episoden verfügbar! Umfasst umfassende Dialogserien, kompakte Einführungen und spezialisierte Diskussionen zu Quantenmechanik, Teilchenphysik, Kosmologie und mehr. Perfekt für auditive Lernende - überall und jederzeit streamen.*
 
 ### 🔬 Fortgeschrittene Analysetools
 **[Teilchenspektrum-Vergleich](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_de_.html)**  
@@ -139,7 +139,7 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 
 ### 🔊 Signalanalyse & Harmonische
 **[Xi-Harmonische Analyse](https://jpascher.github.io/T0-Time-Mass-Duality/sig/xi_harmonic_analysis_demo.html)**  
-*Interaktive Demonstration des T0-Rahmens angewendet auf die Audiosignalanalyse.*
+*Interaktive Demonstration des T0-Rahmens angewandt auf die Audiosignalanalyse.*
 
 **[Spektrumanalysetool](https://jpascher.github.io/T0-Time-Mass-Duality/sig/xi_oscilloscope_spectrum-basis.html)**  
 *Fortgeschrittenes Oszilloskop-ähnliches Spektrumanalysetool mit T0-Prinzipien.*
@@ -148,50 +148,50 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 
 ### Kernkonzepte
 - **Zeit-Energie-Dualität**: T_field · E_field = 1 mit fundamentaler Beziehung
-- **Universeller geometrischer Parameter**: ξ = (4/3) × 10⁻⁴ aus der 3D-Raumgeometrie
+- **Universeller geometrischer Parameter**: ξ = (4/3) × 10⁻⁴ aus der Geometrie des 3D-Raums
 - **Universelles Feld**: Teilchen als Anregungsmuster im Energiefeld
-- **Parameterfreie Theorie**: Eine einzige geometrische Konstante definiert die gesamte Physik
+- **Parameterfreie Theorie**: Einzelne geometrische Konstante definiert die gesamte Physik
 - **Deterministischer Rahmen**: Alternative zur probabilistischen Quantenmechanik
 
 ### Revolutionäre Ergebnisse
-- **Keine freien Parameter**: 20+ Parameter des Standardmodells → 0 Parameter
-- **98% durchschnittliche Genauigkeit**: Alle Teilchenmassen aus der Formel E = 1/ξ
-- **Einheitliche Feldtheorie**: Ein Energiefeld erklärt alle 61+ bekannten Teilchen
-- **Deterministisches Quantencomputing**: Funktionale Algorithmen ohne Zufälligkeit
+- **Null freie Parameter**: 20+ Parameter des Standardmodells → 0 Parameter
+- **98% durchschnittliche Genauigkeit**: Alle Teilchenmassen aus der einzigen Formel E = 1/ξ
+- **Vereinheitlichte Feldtheorie**: Ein Energiefeld erklärt alle 61+ bekannten Teilchen
+- **Deterministisches Quantencomputing**: Funktionierende Algorithmen ohne Zufall
 
 ## Technische Implementierung
 
 ### Erste Schritte
 1. **🎬 Videoerklärungen ansehen**: [T0 YouTube-Kanal](https://www.youtube.com/@Time-MassDuality)
-2. **🎧 Audioeinführungen hören**: [T0 Spotify-Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)
+2. **🎧 Audioeinführungen anhören**: [T0 Spotify Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)
 3. **🌟 Interaktive Demo**: [Teilchenmassenrechner](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/simple_mass_formula.html)
-4. **🔬 RSA erkunden**: Siehe `/rsa/` Verzeichnis für kryptographische Anwendungen
-5. **🧮 Python testen**: Implementierungen wie `authentic_t0_quantum.py` ausprobieren
+4. **🔬 RSA erkunden**: Überprüfen Sie das Verzeichnis `/rsa/` für kryptographische Anwendungen
+5. **🧮 Python testen**: Probieren Sie Implementierungen wie `authentic_t0_quantum.py` aus
 6. **📊 Papiere lesen**: Technische Dokumente in `2/pdf/` (64 Dateien)
 7. **🔊 Signalanalyse**: Audioverarbeitungsanwendungen in `/sig/`
 
-## Repository-Zugang & Medien
+## Repository-Zugriff & Medien
 
 ### 🌐 **Offizielle T0-Plattformen**
 - **[📱 Interaktive T0-Website](https://jpascher.github.io/T0-Time-Mass-Duality/)**  
 *Vollständige interaktive Erkundung der T0-Theorie mit allen Tools und Simulatoren*
 
 - **[🎬 T0 YouTube-Kanal](https://www.youtube.com/@Time-MassDuality)**  
-*Videoerklärungen, Demonstrationen und visuelle Präsentationen der T0-Konzepte*
+*Videoerklärungen, Demonstrationen und visuelle Präsentationen von T0-Konzepten*
 
-- **[🎧 T0-Audio-Bibliothek auf Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)**  
+- **[🎧 T0-Audiobibliothek auf Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)**  
 *Vollständige Podcast-Serie mit umfassenden Diskussionen und Einführungen*
 
-- **[📄 Technische Papiere**: 64 Dokumente (25,8MB) in `2/pdf/`
+- **[📄 Technische Papiere**: 64 Dokumente (25.8MB) in `2/pdf/`
 - **🌐 Interaktive Tools**: 12 HTML-Anwendungen in `2/html/`
 - **🐍 Python-Code**: 5 direkte Implementierungen
-- **🔊 Signalverarbeitung**: 3 Audiosignalanalyse-Tools
-- **💬 Dreisprachige Unterstützung**: Deutsch, Englisch, Französisch
+- **🔊 Signalverarbeitung**: 3 Audioanalysetools
+- **💬 Dreisprachige Unterstützung**: Deutsch, Englisch, FranzZhouösisch
 
 ## Neueste technische Papiere (Juli 2025)
 
 ### Kerntheorie
-- **[T0-Energie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-Energie_De.pdf)** (768KB) - Vollständige energiebasierte Formulierung
+- **[T0 Energie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-Energie_De.pdf)** (772KB) - Vollständige energiebasierte Formulierung
 - **[Teilchenmassen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Teilchenmassen_De.pdf)** (413KB) - Parameterfreie Massenberechnung
 - **[Deterministische QM](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-Detrmistic_p_De.pdf)** (783KB) - Umfassende Quantenanalyse
 
@@ -199,17 +199,19 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 - **[Vollständige Muon g-2 Analyse](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/CompleteMuon_g-2_AnalysisDe.pdf)** (428KB)
 - **[Kosmische Anwendungen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/cosmic_De.pdf)** (486KB)
 - **[Rotverschiebung und Lichtablenkung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/redshift_deflection_De.pdf)** (331KB)
-- **[T0-Modell: Zeit-Energie-Dualität und CMB](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/TempEinheitenCMBDe.pdf)** (379KB) - CMB-Analyse in einem statischen ξ-Universum
+- **[T0-Modell: Zeit-Energie-Dualität und CMB](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/TempEinheitenCMBDe.pdf)** (398KB) - CMB-Analyse in einem statischen ξ-Universum
 
 ### Mathematische Grundlagen
 - **[Beta-Ableitung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/DerivationVonBetaDe.pdf)** (622KB)
-- **[Relokatives Zahlensystem](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/RelokativesZahlensystemDe.pdf)** (555KB)
-- **[Natürliche Einheiten Systematik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/NatEinheitenSystematikDe.pdf)** (369KB)
+- **[Relatives Zahlensystem](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/RelokativesZahlensystemDe.pdf)** (555KB)
+- **[Systematik natürlicher Einheiten](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/NatEinheitenSystematikDe.pdf)** (369KB)
+
+Alle Dokumente in deutscher und englischer Version verfügbar.
 
 ## Kontaktinformationen
 
 **Autor**: Johann Pascher  
-**Institution**: Fachbereich Kommunikationstechnik, HTL Leonding, Österreich  
+**Institution**: Abteilung für Kommunikationstechnik, HTL Leonding, Österreich  
 **E-Mail**: johann.pascher@gmail.com
 
 Für Forschungsanfragen oder technische Fragen erstellen Sie bitte ein Issue in diesem Repository.
@@ -220,4 +222,4 @@ Für Forschungsanfragen oder technische Fragen erstellen Sie bitte ein Issue in 
 
 ---
 
-*Das T0-Zeit-Masse-Dualitätsmodell stellt einen theoretischen Rahmen dar, um Quantenmechanik und Relativität durch deterministische Felddynamik zu vereinen. Alle Behauptungen und Vorhersagen erfordern weitere experimentelle Überprüfung.*
+*Das T0-Zeit-Masse-Dualitätsmodell stellt einen theoretischen Rahmen dar, um Quantenmechanik und Relativität durch deterministische Felddynamik zu vereinheitlichen. Alle Behauptungen und Vorhersagen erfordern weitere experimentelle Überprüfung.*
