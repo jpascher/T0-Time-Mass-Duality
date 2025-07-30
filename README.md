@@ -224,6 +224,7 @@ For research inquiries or technical questions, please create an issue in this re
 
 © 2025 Johann Pascher. All rights reserved.
 
+
 ---
 
 *The T0-Time-Mass-Duality Model represents a theoretical framework for unifying quantum mechanics and relativity through deterministic field dynamics. All claims and predictions require further experimental verification.*
