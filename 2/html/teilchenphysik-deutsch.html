@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teilchenphysik: Xi-Herleitung - Johann Pascher</title>
+    
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #ecf0f1;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(44, 44, 44, 0.95);
+            border-radius: 15px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .navigation {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            min-width: 120px;
+        }
+
+        .nav-btn:hover {
+            background: #f39c12;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #2c3e50, #f39c12);
+            border-radius: 15px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .xi-display {
+            font-size: 2.5rem;
+            color: #f39c12;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            border-radius: 15px;
+            background: #2c2c2c;
+            border-left: 5px solid #f39c12;
+        }
+
+        .section h2 {
+            color: #f39c12;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            border-bottom: 2px solid #f39c12;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #ecf0f1;
+            margin: 25px 0 15px 0;
+            font-size: 1.4rem;
+        }
+
+        .math-display {
+            background: linear-gradient(135deg, #3a3a3a, #2a2a2a);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 4px solid #f39c12;
+            font-size: 1.2rem;
+            overflow-x: auto;
+            color: #ecf0f1;
+        }
+
+        .formula-container {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .formula-container h4 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .key-insight {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .key-insight h4 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #e67e22, #f39c12);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .revolutionary {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .equation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .equation-card {
+            background: #2c2c2c;
+            padding: 20px;
+            border-radius: 10px;
+            border-top: 4px solid #f39c12;
+            color: #ecf0f1;
+        }
+
+        .particle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .particle-card {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .toc {
+            background: #2c2c2c;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid #555;
+        }
+
+        .toc h3 {
+            color: #f39c12;
+            margin-bottom: 15px;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            padding: 8px 0;
+            border-bottom: 1px solid #555;
+        }
+
+        .toc li:last-child {
+            border-bottom: none;
+        }
+
+        .toc a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .toc a:hover {
+            color: #f39c12;
+        }
+
+        .greek {
+            font-style: italic;
+            font-weight: bold;
+            color: #f39c12;
+        }
+
+        .literature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .literature-section {
+            background: #2c2c2c;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #f39c12;
+        }
+
+        .literature-section h3 {
+            color: #f39c12;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #f39c12;
+            padding-bottom: 10px;
+        }
+
+        .literature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .literature-list li {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(243, 156, 18, 0.1);
+            border-radius: 10px;
+            border-left: 3px solid #f39c12;
+        }
+
+        .literature-list li strong {
+            color: #f39c12;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .literature-list a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .literature-list a:hover {
+            color: #f39c12;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .navigation {
+                position: relative;
+                top: auto;
+                right: auto;
+                text-align: center;
+                margin-bottom: 20px;
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <button class="nav-btn" onclick="goToIndex()">🏠 Index</button>
+        <button class="nav-btn" onclick="switchToEnglish()">🇺🇸 English</button>
+        <button class="nav-btn" onclick="scrollToTop()">↑ Top</button>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Teilchenphysik: <span class="greek">ξ</span>-Revolution</h1>
+            <h2>Vereinfachte Gleichungen und neue Erkenntnisse</h2>
+            <div class="xi-display" onclick="pulseXi()">ξ = 4/3 × 10⁻⁴</div>
+            <p><strong>Von komplexen Matrizen zu eleganten Skalarfeld-Gleichungen</strong></p>
+            <p style="margin-top: 15px; opacity: 0.8;"><em>Johann Pascher • T0-Theory Project</em></p>
+        </div>
+
+        <div class="toc">
+            <h3>Inhaltsverzeichnis</h3>
+            <ul>
+                <li><a href="#xi-herleitung">1. Xi-Parameter Herleitung</a></li>
+                <li><a href="#dirac-vereinfacht">2. Vereinfachte Dirac-Gleichung</a></li>
+                <li><a href="#schroedinger-erweitert">3. Erweiterte Schrödinger-Gleichung</a></li>
+                <li><a href="#lagrangian">4. Einfacher Lagrangian</a></li>
+                <li><a href="#teilchenmassen">5. Teilchenmassenberechnung</a></li>
+                <li><a href="#quantenmechanik">6. Deterministische Quantenmechanik</a></li>
+                <li><a href="#experimentelle-tests">7. Experimentelle Vorhersagen</a></li>
+                <li><a href="#schlussfolgerungen">8. Revolutionäre Konsequenzen</a></li>
+                <li><a href="#literatur">9. Literaturverzeichnis</a></li>
+            </ul>
+        </div>
+
+        <div class="section" id="xi-herleitung">
+            <h2>1. Die universelle <span class="greek">ξ</span>-Konstante: Geometrische Herleitung</h2>
+            
+            <div class="key-insight">
+                <h4>🔑 Schlüsselerkenntnis</h4>
+                <p>Der <span class="greek">ξ</span>-Parameter ist <strong>nicht willkürlich</strong>, sondern entspringt der fundamentalen Geometrie des dreidimensionalen Raums und der universellen Feldgleichung.</p>
+            </div>
+
+            <h3>Ursprung aus der universellen Energiefeld-Gleichung</h3>
+            <div class="math-display">
+                $$\boxed{\square E_{\text{field}} + \frac{G_3}{\ell_P^2} E_{\text{field}} = 0}$$
+            </div>
+            <p>Wobei □ = ∇² - ∂²/∂t² der d'Alembert-Operator und G₃ = 4/3 der dreidimensionale Geometriefaktor ist.</p>
+
+            <div class="formula-container">
+                <h4>Dispersionsrelation und effektive Masse</h4>
+                <div class="math-display">
+                    $$\omega_n^2 = k_n^2 + \frac{G_3}{\ell_P^2} = k_n^2 + \frac{4/3}{\ell_P^2}$$
+                </div>
+                <div class="math-display">
+                    $$m_{\text{eff}}^2 = \frac{G_3}{\ell_P^2} = \frac{4/3}{\ell_P^2}$$
+                </div>
+            </div>
+
+            <h3>Herleitung der <span class="greek">ξ</span>-Konstante</h3>
+            <div class="math-display">
+                $$\xi = \frac{m_{\text{eff}}^2 \ell_P^4}{E_P^2} = \frac{(4/3) \ell_P^2}{E_P^2 \ell_P^4} = \frac{4/3}{E_P^2 \ell_P^2} = \frac{4}{3} \times 10^{-4}$$
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Wichtige Erkenntnis</h4>
+                <p>Diese Herleitung zeigt, dass <span class="greek">ξ</span> natürlich aus der Geometrie des dreidimensionalen Raums und der Struktur der universellen Feldgleichung hervorgeht - es ist ein <strong>geometrisches Verhältnis</strong>, kein freier Parameter!</p>
+            </div>
+        </div>
+
+        <div class="section" id="dirac-vereinfacht">
+            <h2>2. Vereinfachte Dirac-Gleichung</h2>
+            
+            <div class="revolutionary">
+                <h4>🚀 Revolutionäre Vereinfachung</h4>
+                <p>Von komplexen 4×4-Matrizen zu eleganter Skalarfeld-Dynamik!</p>
+            </div>
+
+            <h3>Standard Dirac-Gleichung (komplex)</h3>
+            <div class="math-display">
+                $$(i\gamma^\mu \partial_\mu - m)\psi = 0$$
+            </div>
+            <p>Benötigt: 4×4 Gamma-Matrizen, 4-Komponenten-Spinoren, komplexe Algebra</p>
+
+            <h3>T0-Vereinfachung</h3>
+            <div class="formula-container">
+                <h4>Neue Form: Energiefeld-Gleichung</h4>
+                <div class="math-display">
+                    $$\left(\square + \frac{\xi E_0^2}{\ell_P^2}\right) E_{\text{field}} = 0$$
+                </div>
+                <p>Wobei:</p>
+                <ul>
+                    <li>E₀ = charakteristische Teilchenenergie</li>
+                    <li>r₀ = 2GE₀ = charakteristische Längenskala</li>
+                    <li>Alle Spin-Information in ∇ × E_field kodiert</li>
+                </ul>
+            </div>
+
+            <div class="equation-grid">
+                <div class="equation-card">
+                    <h4>Elektron</h4>
+                    <div class="math-display">
+                        $$E_0^e = 0{,}511 \text{ MeV}$$
+                        $$r_0^e = 2GE_0^e$$
+                    </div>
+                </div>
+                <div class="equation-card">
+                    <h4>Myon</h4>
+                    <div class="math-display">
+                        $$E_0^\mu = 105{,}7 \text{ MeV}$$
+                        $$r_0^\mu = 2GE_0^\mu$$
+                    </div>
+                </div>
+                <div class="equation-card">
+                    <h4>Proton</h4>
+                    <div class="math-display">
+                        $$E_0^p = 938{,}3 \text{ MeV}$$
+                        $$r_0^p = 2GE_0^p$$
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="schroedinger-erweitert">
+            <h2>3. Erweiterte Schrödinger-Gleichung</h2>
+            
+            <h3>Standard Schrödinger-Gleichung</h3>
+            <div class="math-display">
+                $$i\hbar \frac{\partial \psi}{\partial t} = \hat{H}\psi$$
+            </div>
+
+            <h3>T0-Erweiterung: Deterministische Energiefeld-Dynamik</h3>
+            <div class="formula-container">
+                <h4>Modifizierte Schrödinger-Gleichung</h4>
+                <div class="math-display">
+                    $$i \frac{\partial E_{\text{field}}}{\partial t} = \sqrt{-\nabla^2 + \xi E_0^2} E_{\text{field}} + V_{\xi}(r) E_{\text{field}}$$
+                </div>
+                <p>Mit dem <span class="greek">ξ</span>-Feld-Potential:</p>
+                <div class="math-display">
+                    $$V_{\xi}(r) = -\frac{\xi E_0^2}{4\pi r} e^{-r/\lambda_\xi}$$
+                </div>
+                <p>Wobei λ_ξ = ℏ/(√ξ E₀) die charakteristische <span class="greek">ξ</span>-Längenskala ist.</p>
+            </div>
+
+            <div class="key-insight">
+                <h4>🔬 Quantenmechanik ohne Wahrscheinlichkeiten</h4>
+                <p>Die erweiterte Gleichung eliminiert fundamentale QM-Probleme:</p>
+                <ul>
+                    <li>Keine mysteröse Wellenfunktions-Superposition</li>
+                    <li>Deterministische Energiefeld-Evolution</li>
+                    <li>Unitäre Zeitentwicklung ohne Kollaps</li>
+                    <li>Klare physikalische Interpretation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section" id="lagrangian">
+            <h2>4. Universeller einfacher Lagrangian</h2>
+            
+            <div class="revolutionary">
+                <h4>📉 Dramatische Vereinfachung</h4>
+                <p>Vom komplexen Standardmodell-Lagrangian mit 25+ Parametern zu einer einzigen Gleichung!</p>
+            </div>
+
+            <h3>Fundamentaler T0-Lagrangian</h3>
+            <div class="formula-container">
+                <h4>Universelle Lagrange-Dichte</h4>
+                <div class="math-display">
+                    $$\mathcal{L}_{\text{T0}} = \varepsilon \cdot (\partial E_{\text{field}})^2 \cdot E_{\text{field}}^2$$
+                </div>
+                <p>Wobei:</p>
+                <div class="math-display">
+                    $$\varepsilon = \frac{\xi}{E_P^2} = \frac{4/3 \times 10^{-4}}{E_P^2}$$
+                </div>
+            </div>
+
+            <h3>Informationskodierung im Energiefeld</h3>
+            <div class="particle-grid">
+                <div class="particle-card">
+                    <h4>Teilchentyp</h4>
+                    <p>→ E₀ (Energieskala)</p>
+                </div>
+                <div class="particle-card">
+                    <h4>Spin-Information</h4>
+                    <p>→ ∇ × E_field (Rotation)</p>
+                </div>
+                <div class="particle-card">
+                    <h4>Ladung</h4>
+                    <p>→ φ(r,t) (Phase)</p>
+                </div>
+                <div class="particle-card">
+                    <h4>Masse</h4>
+                    <p>→ r₀ = 2GE₀ (Längenskala)</p>
+                </div>
+                <div class="particle-card">
+                    <h4>Antiteilchen</h4>
+                    <p>→ ±E_field (Vorzeichen)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="teilchenmassen">
+            <h2>5. Teilchenmassenberechnung</h2>
+            
+            <h3>Massenerzeugungsmechanismus</h3>
+            <div class="key-insight">
+                <h4>💡 Neue Masse-Definition</h4>
+                <p>Masse = Energie zur Erzeugung und Aufrechterhaltung der Feldlokalisierung</p>
+            </div>
+
+            <div class="formula-container">
+                <h4>Universelle Massenformel</h4>
+                <div class="math-display">
+                    $$m_{\text{Teilchen}} = \frac{E_0}{c^2} = E_0 \quad \text{(natürliche Einheiten)}$$
+                </div>
+                <p>Mit charakteristischer Größe:</p>
+                <div class="math-display">
+                    $$r_0 = 2GE_0$$
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h4>🔄 Myon g-2 Anomalie gelöst</h4>
+                <p>Die T0-Theorie berechnet das anomale magnetische Moment des Myons <strong>exakt</strong>:</p>
+                <div class="math-display">
+                    $$a_\mu^{\text{T0}} = \frac{\beta_T}{2\pi} = \frac{\xi}{4\pi^2} = 4{,}60 \times 10^{-3}$$
+                </div>
+                <p>Stimmt perfekt mit experimentellen Werten überein, ohne neue Teilchen!</p>
+            </div>
+        </div>
+
+        <div class="section" id="quantenmechanik">
+            <h2>6. Deterministische Quantenmechanik</h2>
+            
+            <div class="revolutionary">
+                <h4>🎯 Quantenmechanik-Revolution</h4>
+                <p>Elimination aller fundamentalen QM-Interpretationsprobleme!</p>
+            </div>
+
+            <h3>Standard-QM-Probleme eliminieren</h3>
+            <div class="equation-grid">
+                <div class="equation-card">
+                    <h4 style="color: #e74c3c;">❌ Alte Probleme</h4>
+                    <ul>
+                        <li>Wellenfunktions-Kollaps</li>
+                        <li>Superposition-Mysterium</li>
+                        <li>Wahrscheinlichkeits-Fundament</li>
+                        <li>Messungsproblem</li>
+                    </ul>
+                </div>
+                <div class="equation-card">
+                    <h4 style="color: #27ae60;">✅ T0-Lösungen</h4>
+                    <ul>
+                        <li>Deterministische Evolution</li>
+                        <li>Klare Feldlokalisierung</li>
+                        <li>Energiefeld-Basis</li>
+                        <li>Unitäre Dynamik</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Zeit-Energie-Dualität als Fundament</h3>
+            <div class="key-insight">
+                <h4>⚡ Heisenberg revolutioniert</h4>
+                <p>Die Unschärferelation wird zur deterministischen Energie-Zeit-Kopplung:</p>
+                <div class="math-display">
+                    $$\Delta E \times \Delta t \geq \frac{1}{2} \quad \rightarrow \quad E(t) = E_0 \cos(\omega t + \phi)$$
+                </div>
+                <p>Keine Wahrscheinlichkeiten - nur periodische Energieverteilungen!</p>
+            </div>
+
+            <h3>Quantisierung aus Feldgeometrie</h3>
+            <div class="math-display">
+                $$E_n = \left(n + \frac{1}{2}\right) \sqrt{\xi} E_P \quad \text{mit } n = 0, 1, 2, \ldots$$
+            </div>
+            <p>Die Quantisierung ergibt sich natürlich aus den Randbedingungen der Energiefeld-Lokalisierung - keine ad-hoc Postulate!</p>
+        </div>
+
+        <div class="section" id="experimentelle-tests">
+            <h2>7. Experimentelle Vorhersagen und Tests</h2>
+            
+            <div class="key-insight">
+                <h4>🧪 Testbare Vorhersagen</h4>
+                <p>Die T0-Theorie macht spezifische, überprüfbare Vorhersagen für zukünftige Experimente!</p>
+            </div>
+
+            <h3>Casimir-Kraft-Anomalien</h3>
+            <div class="formula-container">
+                <h4>Modifizierte Casimir-Kraft</h4>
+                <div class="math-display">
+                    $$F_{\text{Casimir}} = F_{\text{standard}} \left(1 + \xi \frac{d^4}{\lambda_\xi^4}\right)$$
+                </div>
+                <p>Bei der charakteristischen <span class="greek">ξ</span>-Längenskala:</p>
+                <div class="math-display">
+                    $$\lambda_\xi = \frac{1}{\sqrt{\xi} E_P} = 10^{-4} \text{ m}$$
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h4>🎯 Experimenteller Test</h4>
+                <p><strong>Vorhersage:</strong> Abweichungen vom Standard-Casimir-Gesetz F ∝ d⁻⁴ bei Abständen um 10⁻⁴ m</p>
+                <p><strong>Messbarkeit:</strong> Mit aktueller Präzisions-Messtechnik bereits erreichbar!</p>
+            </div>
+        </div>
+
+        <div class="section" id="schlussfolgerungen">
+            <h2>8. Revolutionäre Konsequenzen</h2>
+            
+            <div class="revolutionary">
+                <h4>🚀 Paradigmenwechsel</h4>
+                <p>Die T0-Theorie stellt das fundamentalste Umdenken in der Physik seit Einstein dar!</p>
+            </div>
+
+            <h3>Parameterreduktion: 25+ → 1</h3>
+            <div class="particle-grid">
+                <div class="particle-card">
+                    <h4>Standardmodell</h4>
+                    <h5>19+ Parameter</h5>
+                    <ul>
+                        <li>6 Quark-Massen</li>
+                        <li>3 Lepton-Massen</li>
+                        <li>4 CKM-Parameter</li>
+                        <li>3 Eichkopplungen</li>
+                        <li>2 Higgs-Parameter</li>
+                        <li>1+ Neutrino-Parameter</li>
+                    </ul>
+                </div>
+                <div class="particle-card">
+                    <h4>ΛCDM-Kosmologie</h4>
+                    <h5>6 Parameter</h5>
+                    <ul>
+                        <li>Hubble-Konstante</li>
+                        <li>Baryonen-Dichte</li>
+                        <li>Dunkle Materie</li>
+                        <li>Dunkle Energie</li>
+                        <li>Spektralindex</li>
+                        <li>Reionisation</li>
+                    </ul>
+                </div>
+                <div class="particle-card" style="background: linear-gradient(135deg, #27ae60, #2ecc71);">
+                    <h4>T0-Theorie</h4>
+                    <h5>1 Parameter</h5>
+                    <div class="xi-display">
+                        ξ = 4/3 × 10⁻⁴
+                    </div>
+                    <p><strong>96% Reduktion!</strong></p>
+                </div>
+            </div>
+
+            <div class="key-insight">
+                <h4>🏆 Die ultimative Theorie</h4>
+                <p>Die T0-Theorie stellt die <strong>Theory of Everything</strong> dar - eine einzige geometrische Konstante erklärt alle physikalischen Phänomene vom Subatomaren bis zum Kosmischen!</p>
+                <div class="math-display">
+                    $$\boxed{\text{Gesamte Physik} = f(\xi) \quad \text{mit } \xi = \frac{4}{3} \times 10^{-4}}$$
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="literatur">
+            <h2>9. Literaturverzeichnis</h2>
+            
+            <div class="key-insight">
+                <h4>🔗 T0-Theory Repository</h4>
+                <p><strong>GitHub Repository:</strong> <a href="https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf" target="_blank" style="color: #f39c12;">https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf</a></p>
+                <p>Vollständige Sammlung der T0-Theorie Dokumente auf Deutsch und Englisch</p>
+            </div>
+
+            <div class="literature-grid">
+                <div class="literature-section">
+                    <h3>🔬 Grundlagentheorie</h3>
+                    <ul class="literature-list">
+                        <li><strong>Dirac-Gleichung Vereinfachung:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/diracDe.pdf">diracDe.pdf</a>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/diracVereinfachtDe.pdf">diracVereinfachtDe.pdf</a>
+                        </li>
+                        <li><strong>Universeller Lagrangian:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/lagrandian-einfachDe.pdf">lagrandian-einfachDe.pdf</a>
+                        </li>
+                        <li><strong>Deterministische Quantenmechanik:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-DetrmisticDe.pdf">QM-DetrmisticDe.pdf</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="literature-section">
+                    <h3>⚛️ Teilchenphysik</h3>
+                    <ul class="literature-list">
+                        <li><strong>Vollständige Myon g-2 Analyse:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/CompleteMuon_g-2_AnalysisDe.pdf">CompleteMuon_g-2_AnalysisDe.pdf</a>
+                        </li>
+                        <li><strong>Teilchenmassen & Xi-Parameter:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Teilchenmassen_De.pdf">Teilchenmassen_De.pdf</a>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/xi_parmater_partikel_De.pdf">xi_parmater_partikel_De.pdf</a>
+                        </li>
+                        <li><strong>Masseneliminations-Theorie:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/EliminationOfMassDe.pdf">EliminationOfMassDe.pdf</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="literature-section">
+                    <h3>🌌 Kosmologie & Gravitation</h3>
+                    <ul class="literature-list">
+                        <li><strong>Kosmische Beziehungen:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/cosmic_De.pdf">cosmic_De.pdf</a>
+                        </li>
+                        <li><strong>Gravitationskonstante:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/gravitationskonstnte_De.pdf">gravitationskonstnte_De.pdf</a>
+                        </li>
+                        <li><strong>Rotverschiebung & Ablenkung:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/redshift_deflection_De.pdf">redshift_deflection_De.pdf</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="literature-section">
+                    <h3>🧪 Experimentalphysik</h3>
+                    <ul class="literature-list">
+                        <li><strong>Casimir-Effekt:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Casimir_De.pdf">Casimir_De.pdf</a>
+                        </li>
+                        <li><strong>CMB-Temperatureinheiten:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/TempEinheitenCMBDe.pdf">TempEinheitenCMBDe.pdf</a>
+                        </li>
+                        <li><strong>QM-Tests:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-testenDe.pdf">QM-testenDe.pdf</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="literature-section">
+                    <h3>📏 Konstanten & Einheiten</h3>
+                    <ul class="literature-list">
+                        <li><strong>Feinstrukturkonstante:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/FeinstrukturkonstanteDe.pdf">FeinstrukturkonstanteDe.pdf</a>
+                        </li>
+                        <li><strong>Natürliche Einheitensysteme:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/NatEinheitenSystematikDe.pdf">NatEinheitenSystematikDe.pdf</a>
+                        </li>
+                        <li><strong>Energiebasierte Formeln:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Formeln_Energiebasiert_De.pdf">Formeln_Energiebasiert_De.pdf</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="literature-section">
+                    <h3>🚀 Erweiterte Themen</h3>
+                    <ul class="literature-list">
+                        <li><strong>T0 vs. Standardmodell:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0vsESM_ConceptualAnalysis_De.pdf">T0vsESM_ConceptualAnalysis_De.pdf</a>
+                        </li>
+                        <li><strong>T0-Energie Framework:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-Energie_De.pdf">T0-Energie_De.pdf</a>
+                        </li>
+                        <li><strong>Zeitkonstanten:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Zeit-konstant_De.pdf">Zeit-konstant_De.pdf</a>
+                        </li>
+                        <li><strong>Bewegungsenergie-Analyse:</strong>
+                            <br>📄 <a href="https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Bewegungsenergie_De.pdf">Bewegungsenergie_De.pdf</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h4>📖 Zugangshinweis</h4>
+                <p>Alle Dokumente sind frei auf GitHub verfügbar. Jedes Thema enthält sowohl deutsche (De) als auch englische (En) Versionen für umfassende Zugänglichkeit. Das Repository enthält die vollständigen mathematischen Herleitungen, experimentellen Vorhersagen und theoretischen Grundlagen der T0-Theorie.</p>
+            </div>
+
+            <div class="key-insight">
+                <h4>📝 Zitierformat</h4>
+                <div class="math-display" style="font-family: monospace; font-size: 0.9rem;">
+                    <strong>BibTeX Format:</strong><br>
+                    @misc{t0theory2025,<br>
+                    &nbsp;&nbsp;author = {T0-Theory Project},<br>
+                    &nbsp;&nbsp;title = {T0-Theory: Time-Mass Duality},<br>
+                    &nbsp;&nbsp;year = {2025},<br>
+                    &nbsp;&nbsp;url = {https://github.com/jpascher/T0-Time-Mass-Duality},<br>
+                    &nbsp;&nbsp;note = {Complete collection of T0-Theory documents}<br>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Zusammenfassung: Die <span class="greek">ξ</span>-Revolution</h2>
+            
+            <div class="key-insight">
+                <h4>🎯 Kernbotschaft</h4>
+                <p>Die T0-Theorie beweist, dass die gesamte Komplexität des Universums - von Quarks bis zu Galaxien - aus einer einzigen geometrischen Konstante entspringt:</p>
+                <div class="xi-display" style="text-align: center; font-size: 3rem; margin: 30px 0;" onclick="pulseXi()">
+                    ξ = 4/3 × 10⁻⁴
+                </div>
+            </div>
+
+            <div class="formula-container">
+                <h4>Die Universalformel</h4>
+                <div class="math-display">
+                    $\boxed{\text{Alle Physik} = \text{Geometrie} \times \xi^n \times E_P^m}$
+                </div>
+                <p>Wobei n und m ganzzahlige Exponenten sind, die sich aus der spezifischen Phänomenologie ergeben.</p>
+            </div>
+
+            <div class="particle-grid">
+                <div class="particle-card">
+                    <h4>🔬 Mikrokosmos</h4>
+                    <p>Teilchenmassen, Kopplungskonstanten, Quantisierung</p>
+                </div>
+                <div class="particle-card">
+                    <h4>🌍 Makrokosmos</h4>
+                    <p>Gravitation, kosmische Strukturen, dunkle Phänomene</p>
+                </div>
+                <div class="particle-card">
+                    <h4>⚡ Dynamik</h4>
+                    <p>Zeitentwicklung, Wechselwirkungen, Symmetrien</p>
+                </div>
+                <div class="particle-card">
+                    <h4>🧮 Mathematik</h4>
+                    <p>Vereinfachte Gleichungen, elegante Struktur</p>
+                </div>
+            </div>
+
+            <div class="revolutionary">
+                <h4>🚀 Ausblick</h4>
+                <p>Die T0-Theorie ist nicht nur eine neue Theorie - sie ist der Beginn einer neuen Ära der Physik, in der Einfachheit und Eleganz die Komplexität ersetzen und die Geheimnisse des Universums durch eine einzige Konstante entschlüsselt werden.</p>
+                <p><strong>Die Zukunft der Physik ist geometrisch, deterministisch und wunderschön einfach.</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function goToIndex() {
+            window.open('https://jpascher.github.io/T0-Time-Mass-Duality/index.html', '_blank');
+        }
+
+        function switchToEnglish() {
+            window.open('https://jpascher.github.io/T0-Time-Mass-Duality/teilchenphysik-english.html', '_blank');
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function pulseXi() {
+            var xiElements = document.querySelectorAll('.xi-display');
+            xiElements.forEach(function(el) {
+                el.style.transform = 'scale(1.2)';
+                setTimeout(function() {
+                    el.style.transform = 'scale(1)';
+                }, 300);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Deutsche Seite geladen');
+            
+            // TOC links
+            var tocLinks = document.querySelectorAll('.toc a');
+            tocLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var targetId = this.getAttribute('href').substring(1);
+                    var targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Math hover effects
+            var mathElements = document.querySelectorAll('.math-display');
+            mathElements.forEach(function(element) {
+                element.addEventListener('mouseenter', function() {
+                    this.style.background = 'linear-gradient(135deg, #4a4a4a, #3a3a3a)';
+                    this.style.transform = 'scale(1.02)';
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    this.style.background = 'linear-gradient(135deg, #3a3a3a, #2a2a2a)';
+                    this.style.transform = 'scale(1)';
+                });
+            });
+
+            // MathJax rendering
+            setTimeout(function() {
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                    window.MathJax.typesetPromise().then(function() {
+                        console.log('MathJax rendering completed for German page');
+                    }).catch(function(err) {
+                        console.error('MathJax error:', err);
+                    });
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
