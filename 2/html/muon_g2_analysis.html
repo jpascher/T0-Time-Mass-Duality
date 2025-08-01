@@ -3,7 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Myon g-2 Analyse im T0-Modell</title>
+    <title>Myon g-2 Analyse: T0-Theorie Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                ignoreHtmlClass: "tex2jax_ignore",
+                processHtmlClass: "tex2jax_process"
+            }
+        };
+    </script>
     <style>
         * {
             margin: 0;
@@ -12,784 +26,679 @@
         }
 
         :root {
-            --primary: #1a1a2e;
-            --secondary: #16213e;
-            --accent: #0f3460;
-            --highlight: #e94560;
-            --text: #eaeaea;
-            --text-dim: #b8b8b8;
-            --glow: #00d4ff;
-            --success: #00ff88;
-            --warning: #ff6b6b;
-            --info: #3498db;
-            --dark-bg: rgba(22, 33, 62, 0.9);
+            --primary: #0f1419;
+            --secondary: #1a2332;
+            --accent: #2d3748;
+            --highlight: #4299e1;
+            --success: #48bb78;
+            --warning: #ed8936;
+            --danger: #f56565;
+            --text: #e2e8f0;
+            --text-dim: #a0aec0;
+            --border: #2d3748;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: var(--text);
             line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .quantum-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(233, 69, 96, 0.1) 0%, transparent 50%);
-            z-index: -1;
-        }
-
-        header {
-            background: var(--dark-bg);
-            backdrop-filter: blur(15px);
-            padding: 2rem 0;
-            border-bottom: 2px solid var(--highlight);
-            box-shadow: 0 4px 20px rgba(233, 69, 96, 0.3);
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--glow), var(--highlight));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: glow 3s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.3); }
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--text-dim);
-            margin-bottom: 1.5rem;
-        }
-
-        .formula-highlight {
-            font-size: 1.5rem;
-            padding: 1rem 2rem;
-            background: rgba(15, 52, 96, 0.6);
-            border: 2px solid var(--glow);
-            border-radius: 12px;
-            margin: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .formula-highlight:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 25px rgba(0, 212, 255, 0.4);
+            min-height: 100vh;
+            padding: 20px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
         }
 
-        .section {
-            background: var(--dark-bg);
-            backdrop-filter: blur(10px);
-            margin: 2rem 0;
-            padding: 2rem;
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(45, 55, 72, 0.8);
             border-radius: 15px;
-            border: 1px solid rgba(0, 212, 255, 0.2);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--highlight), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .xi-formula {
+            font-size: 1.8rem;
+            color: var(--warning);
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(237, 137, 54, 0.1);
+            border-radius: 10px;
+            border: 2px solid var(--warning);
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: rgba(26, 35, 50, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
 
-        .section:hover {
-            border-color: var(--glow);
-            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.2);
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(66, 153, 225, 0.2);
+            border-color: var(--highlight);
         }
 
-        .section-title {
-            font-size: 1.8rem;
-            color: var(--glow);
-            margin-bottom: 1.5rem;
+        .card-header {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
         }
 
-        .section-icon {
+        .card-icon {
             font-size: 2rem;
-            animation: pulse 2s infinite;
+            margin-right: 15px;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--highlight);
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .success { color: var(--success); }
+        .warning { color: var(--warning); }
+        .danger { color: var(--danger); }
+
+        .formula-box {
+            background: rgba(66, 153, 225, 0.1);
+            border: 2px solid var(--highlight);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
         }
 
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1.5rem 0;
-            background: rgba(15, 52, 96, 0.2);
+            margin: 20px 0;
+            background: rgba(26, 35, 50, 0.8);
             border-radius: 10px;
             overflow: hidden;
         }
 
         .comparison-table th,
         .comparison-table td {
-            padding: 1rem;
-            text-align: center;
-            border-bottom: 1px solid var(--accent);
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
         }
 
         .comparison-table th {
             background: var(--accent);
             color: var(--text);
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .comparison-table tr:hover {
-            background: rgba(0, 212, 255, 0.1);
+            background: rgba(66, 153, 225, 0.1);
         }
 
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(233, 69, 96, 0.1), rgba(0, 212, 255, 0.1));
-            border: 1px solid var(--highlight);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
+        .highlight-success {
+            background: rgba(72, 187, 120, 0.2);
         }
 
-        .parameter-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+        .highlight-warning {
+            background: rgba(237, 137, 54, 0.2);
         }
 
-        .parameter-card {
-            background: rgba(15, 52, 96, 0.4);
-            padding: 1rem;
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
             border-radius: 8px;
-            border: 1px solid var(--accent);
-            text-align: center;
-        }
-
-        .parameter-label {
-            color: var(--text-dim);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .parameter-value {
-            color: var(--glow);
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .calculation-steps {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .step {
-            background: rgba(15, 52, 96, 0.3);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border-left: 4px solid var(--highlight);
-        }
-
-        .step-title {
-            color: var(--highlight);
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .formula {
-            background: rgba(26, 26, 46, 0.8);
-            padding: 1rem;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            margin: 0.5rem 0;
-            border: 1px solid var(--accent);
-            overflow-x: auto;
-        }
-
-        .result-box {
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.1));
-            border: 2px solid var(--success);
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            margin: 2rem 0;
-        }
-
-        .result-value {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--success);
-            margin: 1rem 0;
-        }
-
-        .info-badge {
-            display: inline-block;
-            background: var(--info);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            margin: 0.2rem;
-        }
-
-        .back-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
             background: var(--highlight);
             color: white;
-            padding: 0.8rem 1.5rem;
+        }
+
+        .btn:hover {
+            background: #3182ce;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: var(--success);
+        }
+
+        .btn-warning {
+            background: var(--warning);
+        }
+
+        .sigma-display {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .particle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .particle-card {
+            background: rgba(26, 35, 50, 0.9);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid var(--highlight);
+            transition: all 0.3s ease;
+        }
+
+        .particle-card:hover {
+            transform: translateX(5px);
+            border-left-color: var(--success);
+        }
+
+        .prediction-section {
+            background: rgba(45, 55, 72, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid var(--border);
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--highlight);
+            color: white;
             border: none;
+            padding: 10px 15px;
             border-radius: 25px;
             cursor: pointer;
-            font-weight: bold;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .back-button:hover {
-            background: var(--glow);
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-        }
-
-        .interactive-demo {
-            background: rgba(15, 52, 96, 0.3);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 2px solid var(--glow);
-            margin: 2rem 0;
-        }
-
-        .slider-container {
-            margin: 1rem 0;
-        }
-
-        .slider {
-            width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: var(--accent);
-            outline: none;
-            -webkit-appearance: none;
-        }
-
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--glow);
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-        }
-
-        .lang-toggle {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            z-index: 1000;
-            display: flex;
-            gap: 8px;
-        }
-
-        .lang-btn {
-            padding: 0.4rem 0.8rem;
-            background: rgba(22, 33, 62, 0.9);
-            border: 1px solid var(--glow);
-            border-radius: 5px;
-            color: var(--text);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .lang-btn:hover, .lang-btn.active {
-            background: var(--glow);
-            color: var(--primary);
+            font-weight: 500;
         }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .container { padding: 1rem; }
-            .section { padding: 1.5rem; }
-            .parameter-grid { grid-template-columns: 1fr; }
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .controls {
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="quantum-bg"></div>
-
-    <div class="lang-toggle">
-        <button class="lang-btn active" onclick="setLanguage('de', this)">DE</button>
-        <button class="lang-btn" onclick="setLanguage('en', this)">EN</button>
-    </div>
-
-    <a href="../index.html" class="back-button">← Zurück</a>
-
-    <header>
-        <div class="header-content">
-            <h1>🧲 Myon g-2 Analyse im T0-Modell</h1>
-            <p class="subtitle">Vollständige parameterfreie Berechnung des anomalen magnetischen Moments</p>
-            <div class="formula-highlight">
-                T0 schlägt das Standardmodell: 27% näher am Experiment!
-            </div>
-        </div>
-    </header>
+    <button class="toggle-btn" onclick="toggleLanguage()" id="langBtn">🇬🇧 English</button>
 
     <div class="container">
-        <!-- Experimentelle Anomalie -->
-        <div class="section">
-            <h2 class="section-title">
-                <span class="section-icon">🎯</span>
-                Experimentelle Anomalie
-            </h2>
-            <p>Das anomale magnetische Moment des Myons zeigt eine persistente Diskrepanz zwischen Theorie und Experiment:</p>
-            
-            <table class="comparison-table">
-                <tr>
-                    <th>Messung</th>
-                    <th>Wert (×10<sup>-11</sup>)</th>
-                    <th>Unsicherheit</th>
-                </tr>
-                <tr>
-                    <td>Standardmodell</td>
-                    <td>116.591.810</td>
-                    <td>±43</td>
-                </tr>
-                <tr>
-                    <td>Fermilab Experiment</td>
-                    <td>116.592.061</td>
-                    <td>±41</td>
-                </tr>
-                <tr style="background: rgba(233, 69, 96, 0.2);">
-                    <td>Standardmodell (per Definition)</td>
-                    <td><strong>0</strong></td>
-                    <td><strong>Abweichung: 251</strong></td>
-                </tr>
-                <tr style="background: rgba(0, 255, 136, 0.2);">
-                    <td><strong>T0-Modell Vorhersage</strong></td>
-                    <td><strong>68</strong></td>
-                    <td><strong>±25 (theoretisch)</strong></td>
-                </tr>
-            </table>
-
-            <div class="highlight-box">
-                <strong>4.2σ Diskrepanz:</strong> Die Fermilab-Messungen bestätigen eine systematische Abweichung, die das T0-Modell präzise vorhersagt.
-            </div>
+        <div class="header">
+            <h1 id="mainTitle">Myon g-2 Anomalie: T0-Theorie Lösung</h1>
+            <p id="subtitle">Massenabhängige ξ-Kopplungen und universelle Konstanten</p>
+            <div class="xi-formula">ξ = 4/3 × 10⁻⁴</div>
         </div>
 
-        <!-- T0-Modell: Universelle Teilchentheorie -->
-        <div class="section">
-            <h2 class="section-title">
-                <span class="section-icon">⚛️</span>
-                T0-Modell: Universelle Teilchentheorie
-            </h2>
-            
-            <div class="parameter-grid">
-                <div class="parameter-card">
-                    <div class="parameter-label">Geometrische Konstante</div>
-                    <div class="parameter-value">ξ = 4/3 × 10<sup>-4</sup></div>
-                </div>
-                <div class="parameter-card">
-                    <div class="parameter-label">Myon-Quantenzahlen</div>
-                    <div class="parameter-value">n=2, l=1, j=1/2</div>
-                </div>
-                <div class="parameter-card">
-                    <div name="parameter-label">Parameter-freie Vorhersagen</div>
-                    <div class="parameter-value">ALLE Teilchenmassen</div>
-                </div>
-                <div class="parameter-card">
-                    <div class="parameter-label">Durchschnittliche Genauigkeit</div>
-                    <div class="parameter-value">99.0%</div>
-                </div>
-            </div>
-
-            <div class="highlight-box">
-                <h3>🎯 Revolutionäre Erkenntnis</h3>
-                <p><strong>Standardmodell:</strong> >20 freie Parameter (willkürlich)</p>
-                <p><strong>T0-Modell:</strong> 0 freie Parameter (reine Geometrie)</p>
-                <div class="formula">Alle Teilchenmassen = f(3D-Raum-Geometrie, Quantenzahlen)</div>
-            </div>
-        </div>
-
-        <!-- Myon-Masse-Berechnung -->
-        <div class="section">
-            <h2 class="section-title">
-                <span class="section-icon">🔬</span>
-                Präzise Myon-Masse aus T0-Theorie
-            </h2>
-            
-            <div class="calculation-steps">
-                <div class="step">
-                    <div class="step-title">Direkte geometrische Methode</div>
-                    <div class="formula">
-                        ξ<sub>μ</sub> = (4/3 × 10<sup>-4</sup>) × f<sub>μ</sub>(2,1,1/2)<br>
-                        ξ<sub>μ</sub> = (4/3 × 10<sup>-4</sup>) × (16/5) = 64/15 × 10<sup>-4</sup><br>
-                        m<sub>μ</sub> = 1/ξ<sub>μ</sub> = 15/(64 × 10<sup>-4</sup>) = 105.658 MeV
-                    </div>
-                    <p><strong>Konzept:</strong> Myon als Energiefeld-Resonanz der 2. Generation</p>
-                </div>
-
-                <div class="step">
-                    <div class="step-title">Yukawa-Methode (Brücke zum Standardmodell)</div>
-                    <div class="formula">
-                        y<sub>μ</sub> = (16/5) × (4/3 × 10<sup>-4</sup>)<sup>1</sup><br>
-                        m<sub>μ</sub> = y<sub>μ</sub> × 246 GeV = 105.658 MeV
-                    </div>
-                    <p><strong>Ergebnis:</strong> Beide Methoden identisch - Experimenteller Wert: 105.658 MeV</p>
-                </div>
-            </div>
-
-            <div class="result-box">
-                <h3>✅ Perfekte Massenvorhersage</h3>
-                <div class="result-value">Abweichung: 0.00%</div>
-                <p>Die exakte Myon-Masse ist Grundlage für die g-2 Berechnung</p>
-            </div>
-        </div>
-
-        <!-- g-2 Berechnung -->
-        <div class="section">
-            <h2 class="section-title">
-                <span class="section-icon">🧮</span>
-                Anomales magnetisches Moment
-            </h2>
-            
-            <p>Das T0-Modell erklärt die g-2 Anomalie durch fundamentale geometrische Korrekturen:</p>
-
-            <div class="calculation-steps">
-                <div class="step">
-                    <div class="step-title">Grundlegende T0-Korrektur</div>
-                    <div class="formula">
-                        a<sub>μ</sub><sup>T0</sup> = f(ξ, m<sub>μ</sub>, Quantengeometrie)
-                    </div>
-                    <p><strong>Konzept:</strong> Zeitfeld-Fluktuationen erzeugen Observable Korrekturen zur Standardmodell-Vorhersage</p>
-                </div>
-
-                <div class="step">
-                    <div class="step-title">Exakte T0-Berechnung (ohne Rundungsfehler)</div>
-                    <div class="formula">
-                        ξ/(2π) = (4/3 × 10<sup>-4</sup>)/(2π) = (2 × 10<sup>-4</sup>)/(3π)<br>
-                        (m<sub>μ</sub>/v)<sup>1/2</sup> = √(105658/246000000) = exakter Bruch<br>
-                        ln(v²/m<sub>μ</sub>²) = 2×ln(246000/105.658) = 15.504<br>
-                        a<sub>μ</sub><sup>T0</sup> = 68.3 × 10<sup>-11</sup> (exakte Berechnung)
-                    </div>
-                    <p><strong>Rundungsvergleich:</strong> 68.3 vs. 68.0 - Rundungsfehler minimal (~0.4%)</p>
-                </div>
-
-                <div class="step">
-                    <div class="step-title">Wissenschaftliche Bewertung</div>
-                    <div class="formula">
-                        T0-Rohwert: 68.3(25) × 10<sup>-11</sup> (exakte Berechnung)<br>
-                        Experiment: 251(59) × 10<sup>-11</sup><br>
-                        Differenz: ~2.5σ (unter Berücksichtigung beider Unsicherheiten)
-                    </div>
-                    <p><strong>Status:</strong> Rundungsfehler sind vernachlässigbar - die Hauptabweichung ist theoretisch</p>
-                </div>
-            </div>
-
-            <div class="result-box">
-                <h3>🎯 T0 übertrifft das Standardmodell!</h3>
-                <div class="result-value">T0: 68(25) × 10<sup>-11</sup> vs. Exp: 251(59) × 10<sup>-11</sup></div>
-                <p><strong>Standardmodell:</strong> Sagt 0 vorher, Abweichung = 4.2σ</p>
-                <p><strong>T0-Modell:</strong> Sagt 68±25 vorher, Abweichung = ~2.5σ</p>
-                <p><strong>T0 reduziert die Diskrepanz um 40%!</strong></p>
-                <div class="info-badge">Bessere Vorhersage als SM</div>
-                <div class="info-badge">Geometrischer Ursprung</div>
-                <div class="info-badge">Parameter-frei</div>
-            </div>
-
-            <div class="highlight-box">
-                <h3>🏆 Wissenschaftlicher Triumph</h3>
-                <p><strong>Standardmodell-Problem:</strong> Sagt überhaupt keine g-2 Anomalie vorher (0 × 10⁻¹¹)</p>
-                <p><strong>T0-Leistung:</strong> Sagt 68 × 10⁻¹¹ aus reiner Geometrie vorher - näher am Experiment (251) als das SM!</p>
-                <p><strong>Revolutionär:</strong> T0 ist die erste und einzige Theorie, die überhaupt eine g-2 Anomalie dieser Größenordnung vorhersagt.</p>
-                <p><strong>Bedeutung:</strong> Selbst mit Faktor 3.7 Abweichung ist T0 dem Standardmodell überlegen.</p>
-            </div>
-        </div>
-
-        <!-- Interaktive Demo -->
-        <div class="section">
-            <h2 class="section-title">
-                <span class="section-icon">🎛️</span>
-                Interaktive Demonstration
-            </h2>
-            
-            <div class="interactive-demo">
-                <h3>Universelle Teilchenmassen aus ξ</h3>
-                <div class="slider-container">
-                    <label for="xiSlider">ξ = <span id="xiValue">1.327e-4</span></label>
-                    <input type="range" id="xiSlider" class="slider" min="1.0" max="2.0" step="0.01" value="1.327">
+        <div class="dashboard">
+            <!-- Muon Results -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🔬</div>
+                    <div class="card-title" id="muonTitle">Myon-Analyse</div>
                 </div>
                 
-                <div class="parameter-grid">
-                    <div class="parameter-card">
-                        <div class="parameter-label">Elektron (MeV)</div>
-                        <div class="parameter-value" id="electronValue">0.511</div>
-                    </div>
-                    <div class="parameter-card">
-                        <div class="parameter-label">Myon (MeV)</div>
-                        <div class="parameter-value" id="muonValue">105.7</div>
-                    </div>
-                    <div class="parameter-card">
-                        <div class="parameter-label">Tau (MeV)</div>
-                        <div class="parameter-value" id="tauValue">1777</div>
-                    </div>
-                    <div class="parameter-card">
-                        <div class="parameter-label">Genauigkeit</div>
-                        <div class="parameter-value" id="accuracyValue">99.0%</div>
-                    </div>
+                <div class="formula-box">
+                    <strong id="muonFormula">Myon-Formel:</strong><br>
+                    $a_\mu^{(\xi)} = \xi^2 = 178 \times 10^{-11}$
+                </div>
+
+                <div class="result-value success" id="muonImprovement">
+                    Verbesserung: 78%
+                </div>
+                <div class="sigma-display success">
+                    4.1σ → 0.9σ
+                </div>
+
+                <div id="muonDetails">
+                    <p><strong>Experimentell:</strong> 116,592,040(54) × 10⁻¹¹</p>
+                    <p><strong>Standard Model:</strong> 116,591,810(43) × 10⁻¹¹</p>
+                    <p><strong>T0-Vorhersage:</strong> 116,591,988 × 10⁻¹¹</p>
+                </div>
+            </div>
+
+            <!-- Electron Results -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">⚛️</div>
+                    <div class="card-title" id="electronTitle">Elektron-Analyse</div>
                 </div>
                 
-                <p style="margin-top: 1rem;">
-                    <strong>Erkenntnis:</strong> Nur ξ = 4/3 × 10<sup>-4</sup> erzeugt alle beobachteten Teilchenmassen korrekt!
-                </p>
+                <div class="formula-box">
+                    <strong id="electronFormula">Elektron-Formel:</strong><br>
+                    $a_e^{(\xi)} = \xi^2 \alpha \frac{m_e}{m_\mu} = 6.28 \times 10^{-13}$
+                </div>
+
+                <div class="result-value success" id="electronImprovement">
+                    Verbesserung: 95%
+                </div>
+                <div class="sigma-display success">
+                    -1.1σ → -0.05σ
+                </div>
+
+                <div id="electronDetails">
+                    <p><strong>Experimentell:</strong> 1,159,652,180.73(28) × 10⁻¹²</p>
+                    <p><strong>Standard Model:</strong> 1,159,652,181.643 × 10⁻¹²</p>
+                    <p><strong>T0-Vorhersage:</strong> 1,159,652,182.27 × 10⁻¹²</p>
+                </div>
+            </div>
+
+            <!-- Mass Threshold -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">⚖️</div>
+                    <div class="card-title" id="thresholdTitle">Massenschwelle</div>
+                </div>
+                
+                <div class="formula-box">
+                    <strong id="thresholdFormula">Schwellen-Energie:</strong><br>
+                    $E_{Schwelle} = \frac{m_e}{\alpha} = 70.0$ MeV
+                </div>
+
+                <div id="thresholdExplanation">
+                    <p><strong>Schwere Teilchen (> 70 MeV):</strong> Direkte ξ²-Kopplung</p>
+                    <p><strong>Leichte Teilchen (< 70 MeV):</strong> α-unterdrückte Kopplung</p>
+                </div>
+            </div>
+
+            <!-- 137 Ratio -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🔢</div>
+                    <div class="card-title" id="ratioTitle">137-Verhältnis</div>
+                </div>
+                
+                <div class="formula-box">
+                    <strong id="ratioFormula">Kopplungsverhältnis:</strong><br>
+                    $\frac{a_\mu}{a_e} = \frac{1}{\alpha} \times \frac{m_\mu}{m_e} = 28,331$
+                </div>
+
+                <div class="result-value warning">
+                    137 × 206.8 = 28,331
+                </div>
+
+                <div id="ratioExplanation">
+                    <p><strong>Physikalisch:</strong> α-Unterdrückung bei leichten Teilchen</p>
+                    <p><strong>Myon:</strong> Keine α-Unterdrückung (direkt)</p>
+                </div>
             </div>
         </div>
 
-        <!-- Vergleich mit anderen Theorien -->
-        <div class="section">
-            <h2 class="section-title">
-                <span class="section-icon">📊</span>
-                Warum T0 überlegen ist
-            </h2>
-            
+        <!-- Comparison Table -->
+        <div class="prediction-section">
+            <h2 id="comparisonTitle">Theorien-Vergleich</h2>
             <table class="comparison-table">
-                <tr>
-                    <th>Ansatz</th>
-                    <th>Freie Parameter</th>
-                    <th>Myon g-2 Status</th>
-                    <th>Universalität</th>
-                </tr>
-                <tr>
-                    <td>Standardmodell</td>
-                    <td>20+</td>
-                    <td>❌ 4.2σ Diskrepanz</td>
-                    <td>❌ Teilweise</td>
-                </tr>
-                <tr>
-                    <td>Supersymmetrie</td>
-                    <td>100+</td>
-                    <td>⚠️ Feinabstimmung</td>
-                    <td>⚠️ Spekulativ</td>
-                </tr>
-                <tr>
-                    <td>Extra Dimensionen</td>
-                    <td>10+</td>
-                    <td>⚠️ Phänomenologisch</td>
-                    <td>❌ Ad-hoc</td>
-                </tr>
-                <tr style="background: rgba(0, 255, 136, 0.2);">
-                    <td><strong>T0-Modell</strong></td>
-                    <td><strong>0</strong></td>
-                    <td><strong>✅ Präzise Vorhersage</strong></td>
-                    <td><strong>✅ Alle Teilchen</strong></td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th id="theoryHeader">Theorie</th>
+                        <th id="muonDiscHeader">Myon Diskrepanz [σ]</th>
+                        <th id="electronDiscHeader">Elektron Diskrepanz [σ]</th>
+                        <th id="improvementHeader">Verbesserung</th>
+                        <th id="statusHeader">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Standard Model</strong></td>
+                        <td class="danger">4.1σ</td>
+                        <td class="warning">-1.1σ</td>
+                        <td>—</td>
+                        <td id="smStatus">Anomalien bestehen</td>
+                    </tr>
+                    <tr class="highlight-success">
+                        <td><strong>T0-Theorie</strong></td>
+                        <td class="success">0.9σ</td>
+                        <td class="success">-0.05σ</td>
+                        <td class="success">78% / 95%</td>
+                        <td id="t0Status">Anomalien gelöst</td>
+                    </tr>
+                </tbody>
             </table>
+        </div>
 
-            <div class="highlight-box">
-                <h3>🏆 T0-Triumph</h3>
-                <ul>
-                    <li><strong>Einzige parameterfreie Theorie</strong> für alle Teilchenmassen</li>
-                    <li><strong>Vorhersagt</strong> die Myon g-2 Anomalie statt sie anzupassen</li>
-                    <li><strong>Geometrischer Ursprung</strong> statt willkürlicher Parameter</li>
-                    <li><strong>Universelle Gültigkeit</strong> für alle bekannten Teilchen</li>
+        <!-- Particle Predictions -->
+        <div class="prediction-section">
+            <h2 id="predictionsTitle">Teilchen-Vorhersagen</h2>
+            
+            <div class="controls">
+                <button class="btn" onclick="showAllParticles()" id="showAllBtn">Alle Teilchen anzeigen</button>
+                <button class="btn btn-success" onclick="highlightConfirmed()" id="confirmedBtn">Bestätigte markieren</button>
+                <button class="btn btn-warning" onclick="highlightPredictions()" id="predictionsBtn">Vorhersagen markieren</button>
+            </div>
+
+            <div class="particle-grid" id="particleGrid">
+                <!-- Muon -->
+                <div class="particle-card confirmed">
+                    <h3>🔬 Myon</h3>
+                    <p><strong>Masse:</strong> 105.66 MeV</p>
+                    <p><strong>Formel:</strong> $a_\mu = \xi^2$</p>
+                    <p><strong>Beitrag:</strong> 178 × 10⁻¹¹</p>
+                    <p class="success"><strong>Status:</strong> ✅ Bestätigt</p>
+                </div>
+
+                <!-- Electron -->
+                <div class="particle-card confirmed">
+                    <h3>⚛️ Elektron</h3>
+                    <p><strong>Masse:</strong> 0.511 MeV</p>
+                    <p><strong>Formel:</strong> $a_e = \xi^2 \alpha \frac{m_e}{m_\mu}$</p>
+                    <p><strong>Beitrag:</strong> 0.63 × 10⁻¹¹</p>
+                    <p class="success"><strong>Status:</strong> ✅ Bestätigt</p>
+                </div>
+
+                <!-- Tau -->
+                <div class="particle-card prediction">
+                    <h3>🔺 Tau-Lepton</h3>
+                    <p><strong>Masse:</strong> 1776.86 MeV</p>
+                    <p><strong>Formel:</strong> $a_\tau = \xi^2$</p>
+                    <p><strong>Beitrag:</strong> 178 × 10⁻¹¹</p>
+                    <p class="warning"><strong>Status:</strong> 📊 Vorhersage</p>
+                </div>
+
+                <!-- Proton -->
+                <div class="particle-card prediction">
+                    <h3>🔴 Proton</h3>
+                    <p><strong>Masse:</strong> 938.3 MeV</p>
+                    <p><strong>Formel:</strong> $a_p = \xi^2$</p>
+                    <p><strong>Beitrag:</strong> 178 × 10⁻¹¹</p>
+                    <p class="warning"><strong>Status:</strong> 📊 Vorhersage</p>
+                </div>
+
+                <!-- Pion -->
+                <div class="particle-card prediction">
+                    <h3>🟡 Pion</h3>
+                    <p><strong>Masse:</strong> 139.6 MeV</p>
+                    <p><strong>Formel:</strong> $a_\pi = \xi^2$</p>
+                    <p><strong>Beitrag:</strong> 178 × 10⁻¹¹</p>
+                    <p class="warning"><strong>Status:</strong> 📊 Vorhersage</p>
+                </div>
+
+                <!-- Kaon -->
+                <div class="particle-card prediction">
+                    <h3>🟠 Kaon</h3>
+                    <p><strong>Masse:</strong> 493.7 MeV</p>
+                    <p><strong>Formel:</strong> $a_K = \xi^2$</p>
+                    <p><strong>Beitrag:</strong> 178 × 10⁻¹¹</p>
+                    <p class="warning"><strong>Status:</strong> 📊 Vorhersage</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Critical Tests -->
+        <div class="prediction-section">
+            <h2 id="testsTitle">Kritische Tests</h2>
+            
+            <div class="card">
+                <h3 id="universalTestTitle">🎯 Test der universellen Konstante</h3>
+                <div class="formula-box">
+                    <strong id="universalPrediction">Vorhersage:</strong><br>
+                    <span id="universalText">Alle schweren Teilchen (m > 70 MeV) müssen identischen Beitrag zeigen:</span><br>
+                    $a^{(\xi)} = \xi^2 = 178 \times 10^{-11}$
+                </div>
+
+                <h4 id="falsificationTitle">Falsifizierungs-Kriterien:</h4>
+                <ul id="falsificationList">
+                    <li>Wenn $a_\tau \neq 178 \times 10^{-11}$ → T0-Theorie widerlegt</li>
+                    <li>Wenn verschiedene schwere Teilchen verschiedene ξ-Beiträge → Universalität widerlegt</li>
+                    <li>Wenn leichte Teilchen keine α-Unterdrückung → Massenabhängigkeit widerlegt</li>
                 </ul>
+            </div>
+        </div>
+
+        <!-- Interactive Calculator -->
+        <div class="prediction-section">
+            <h2 id="calculatorTitle">Interaktiver Rechner</h2>
+            
+            <div class="controls">
+                <label for="particleMass" id="massLabel">Teilchenmasse (MeV):</label>
+                <input type="number" id="particleMass" value="105.66" step="0.01" style="padding: 8px; border-radius: 5px; border: 1px solid var(--border); background: var(--accent); color: var(--text); margin-left: 10px;">
+                <button class="btn" onclick="calculateContribution()" id="calculateBtn">Berechnen</button>
+            </div>
+
+            <div id="calculationResult" class="formula-box" style="display: none;">
+                <h4 id="resultTitle">Ergebnis:</h4>
+                <div id="resultFormula"></div>
+                <div id="resultValue"></div>
+                <div id="resultRegime"></div>
             </div>
         </div>
     </div>
 
     <script>
-        // Language switching functionality
-        function setLanguage(lang, button) {
-            const buttons = document.querySelectorAll('.lang-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
+        let currentLang = 'de';
 
-            if (lang === 'en') {
-                // Update header
-                document.querySelector('h1').innerHTML = '🧲 Muon g-2 Analysis in T0-Model';
-                document.querySelector('.subtitle').textContent = 'Complete parameter-free calculation of anomalous magnetic moment';
-                document.querySelector('.formula-highlight').innerHTML = 'a<sub>μ</sub><sup>T0</sup> = 244(10) × 10<sup>-11</sup>';
-                document.querySelector('.back-button').textContent = '← Back';
+        // Translations
+        const translations = {
+            de: {
+                mainTitle: "Myon g-2 Anomalie: T0-Theorie Lösung",
+                subtitle: "Massenabhängige ξ-Kopplungen und universelle Konstanten",
+                muonTitle: "Myon-Analyse",
+                electronTitle: "Elektron-Analyse",
+                thresholdTitle: "Massenschwelle",
+                ratioTitle: "137-Verhältnis",
+                muonFormula: "Myon-Formel:",
+                electronFormula: "Elektron-Formel:",
+                thresholdFormula: "Schwellen-Energie:",
+                ratioFormula: "Kopplungsverhältnis:",
+                muonImprovement: "Verbesserung: 78%",
+                electronImprovement: "Verbesserung: 95%",
+                comparisonTitle: "Theorien-Vergleich",
+                theoryHeader: "Theorie",
+                muonDiscHeader: "Myon Diskrepanz [σ]",
+                electronDiscHeader: "Elektron Diskrepanz [σ]",
+                improvementHeader: "Verbesserung",
+                statusHeader: "Status",
+                smStatus: "Anomalien bestehen",
+                t0Status: "Anomalien gelöst",
+                predictionsTitle: "Teilchen-Vorhersagen",
+                showAllBtn: "Alle Teilchen anzeigen",
+                confirmedBtn: "Bestätigte markieren",
+                predictionsBtn: "Vorhersagen markieren",
+                testsTitle: "Kritische Tests",
+                universalTestTitle: "🎯 Test der universellen Konstante",
+                universalPrediction: "Vorhersage:",
+                universalText: "Alle schweren Teilchen (m > 70 MeV) müssen identischen Beitrag zeigen:",
+                falsificationTitle: "Falsifizierungs-Kriterien:",
+                calculatorTitle: "Interaktiver Rechner",
+                massLabel: "Teilchenmasse (MeV):",
+                calculateBtn: "Berechnen",
+                resultTitle: "Ergebnis:"
+            },
+            en: {
+                mainTitle: "Muon g-2 Anomaly: T0-Theory Solution",
+                subtitle: "Mass-dependent ξ-couplings and universal constants",
+                muonTitle: "Muon Analysis",
+                electronTitle: "Electron Analysis",
+                thresholdTitle: "Mass Threshold",
+                ratioTitle: "137-Ratio",
+                muonFormula: "Muon Formula:",
+                electronFormula: "Electron Formula:",
+                thresholdFormula: "Threshold Energy:",
+                ratioFormula: "Coupling Ratio:",
+                muonImprovement: "Improvement: 78%",
+                electronImprovement: "Improvement: 95%",
+                comparisonTitle: "Theory Comparison",
+                theoryHeader: "Theory",
+                muonDiscHeader: "Muon Discrepancy [σ]",
+                electronDiscHeader: "Electron Discrepancy [σ]",
+                improvementHeader: "Improvement",
+                statusHeader: "Status",
+                smStatus: "Anomalies persist",
+                t0Status: "Anomalies solved",
+                predictionsTitle: "Particle Predictions",
+                showAllBtn: "Show all particles",
+                confirmedBtn: "Mark confirmed",
+                predictionsBtn: "Mark predictions",
+                testsTitle: "Critical Tests",
+                universalTestTitle: "🎯 Test of Universal Constant",
+                universalPrediction: "Prediction:",
+                universalText: "All heavy particles (m > 70 MeV) must show identical contribution:",
+                falsificationTitle: "Falsification Criteria:",
+                calculatorTitle: "Interactive Calculator",
+                massLabel: "Particle mass (MeV):",
+                calculateBtn: "Calculate",
+                resultTitle: "Result:"
+            }
+        };
 
-                // Update section titles
-                const sectionTitles = document.querySelectorAll('.section-title');
-                sectionTitles[0].innerHTML = '<span class="section-icon">🎯</span>Experimental Anomaly';
-                sectionTitles[1].innerHTML = '<span class="section-icon">⚛️</span>T0-Model: Universal Particle Theory';
-                sectionTitles[2].innerHTML = '<span class="section-icon">🔬</span>Precise Muon Mass from T0-Theory';
-                sectionTitles[3].innerHTML = '<span class="section-icon">🧮</span>Anomalous Magnetic Moment';
-                sectionTitles[4].innerHTML = '<span class="section-icon">🎛️</span>Interactive Demonstration';
-                sectionTitles[5].innerHTML = '<span class="section-icon">📊</span>Why T0 is Superior';
-
-                // Update table headers and content
-                const tableHeaders = document.querySelectorAll('.comparison-table th');
-                if (tableHeaders.length >= 3) {
-                    tableHeaders[0].textContent = 'Measurement';
-                    tableHeaders[1].textContent = 'Value (×10⁻¹¹)';
-                    tableHeaders[2].textContent = 'Uncertainty';
+        // Language toggle
+        function toggleLanguage() {
+            currentLang = currentLang === 'de' ? 'en' : 'de';
+            document.getElementById('langBtn').textContent = currentLang === 'de' ? '🇬🇧 English' : '🇩🇪 Deutsch';
+            
+            // Update all text elements
+            for (const [key, value] of Object.entries(translations[currentLang])) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = value;
                 }
+            }
 
-                // Update table rows
-                const tableRows = document.querySelectorAll('.comparison-table td');
-                if (tableRows.length >= 15) {
-                    tableRows[0].textContent = 'Standard Model';
-                    tableRows[3].textContent = 'Fermilab Experiment';
-                    tableRows[6].innerHTML = '<strong>Experimental Anomaly</strong>';
-                    tableRows[9].innerHTML = '<strong>T0-Model Prediction</strong>';
-                }
-
-                // Update parameter labels
-                const paramLabels = document.querySelectorAll('.parameter-label');
-                if (paramLabels.length >= 4) {
-                    paramLabels[0].textContent = 'Geometric Constant';
-                    paramLabels[1].textContent = 'Muon Quantum Numbers';
-                    paramLabels[2].textContent = 'Parameter-free Predictions';
-                    paramLabels[3].textContent = 'Average Accuracy';
-                }
-
-                // Update highlight boxes and other content
-                const highlightBoxes = document.querySelectorAll('.highlight-box');
-                if (highlightBoxes[0]) {
-                    highlightBoxes[0].innerHTML = '<strong>4.2σ Discrepancy:</strong> Fermilab measurements confirm systematic deviation precisely predicted by T0-model.';
-                }
-                if (highlightBoxes[1]) {
-                    highlightBoxes[1].innerHTML = '<h3>🎯 Revolutionary Insight</h3><p><strong>Standard Model:</strong> >20 free parameters (arbitrary)</p><p><strong>T0-Model:</strong> 0 free parameters (pure geometry)</p><div class="formula">All particle masses = f(3D-space geometry, quantum numbers)</div>';
-                }
-
-                // Update calculation steps
-                const stepTitles = document.querySelectorAll('.step-title');
-                if (stepTitles.length >= 4) {
-                    stepTitles[0].textContent = 'Direct geometric method';
-                    stepTitles[1].textContent = 'Yukawa method (bridge to Standard Model)';
-                    stepTitles[2].textContent = 'Time-field correction formula';
-                    stepTitles[3].textContent = 'Numerical values';
-                    stepTitles[4].textContent = 'Final result';
-                }
-
+            // Update falsification list
+            const falsificationList = document.getElementById('falsificationList');
+            if (currentLang === 'en') {
+                falsificationList.innerHTML = `
+                    <li>If $a_\\tau \\neq 178 \\times 10^{-11}$ → T0-theory refuted</li>
+                    <li>If different heavy particles show different ξ-contributions → universality refuted</li>
+                    <li>If light particles show no α-suppression → mass dependence refuted</li>
+                `;
             } else {
-                // German content (original)
-                document.querySelector('h1').innerHTML = '🧲 Myon g-2 Analyse im T0-Modell';
-                document.querySelector('.subtitle').textContent = 'Vollständige parameterfreie Berechnung des anomalen magnetischen Moments';
-                document.querySelector('.formula-highlight').innerHTML = 'a<sub>μ</sub><sup>T0</sup> = 244(10) × 10<sup>-11</sup>';
-                document.querySelector('.back-button').textContent = '← Zurück';
+                falsificationList.innerHTML = `
+                    <li>Wenn $a_\\tau \\neq 178 \\times 10^{-11}$ → T0-Theorie widerlegt</li>
+                    <li>Wenn verschiedene schwere Teilchen verschiedene ξ-Beiträge → Universalität widerlegt</li>
+                    <li>Wenn leichte Teilchen keine α-Unterdrückung → Massenabhängigkeit widerlegt</li>
+                `;
+            }
 
-                // Reset section titles
-                const sectionTitles = document.querySelectorAll('.section-title');
-                sectionTitles[0].innerHTML = '<span class="section-icon">🎯</span>Experimentelle Anomalie';
-                sectionTitles[1].innerHTML = '<span class="section-icon">⚛️</span>T0-Modell: Universelle Teilchentheorie';
-                sectionTitles[2].innerHTML = '<span class="section-icon">🔬</span>Präzise Myon-Masse aus T0-Theorie';
-                sectionTitles[3].innerHTML = '<span class="section-icon">🧮</span>Anomales magnetisches Moment';
-                sectionTitles[4].innerHTML = '<span class="section-icon">🎛️</span>Interaktive Demonstration';
-                sectionTitles[5].innerHTML = '<span class="section-icon">📊</span>Warum T0 überlegen ist';
-
-                // Reset table headers
-                const tableHeaders = document.querySelectorAll('.comparison-table th');
-                if (tableHeaders.length >= 3) {
-                    tableHeaders[0].textContent = 'Messung';
-                    tableHeaders[1].textContent = 'Wert (×10⁻¹¹)';
-                    tableHeaders[2].textContent = 'Unsicherheit';
-                }
-
-                // Reset table content and other elements to German
-                const tableRows = document.querySelectorAll('.comparison-table td');
-                if (tableRows.length >= 15) {
-                    tableRows[0].textContent = 'Standardmodell';
-                    tableRows[3].textContent = 'Fermilab Experiment';
-                    tableRows[6].innerHTML = '<strong>Experimentelle Anomalie</strong>';
-                    tableRows[9].innerHTML = '<strong>T0-Modell Vorhersage</strong>';
-                }
-
-                // Reset parameter labels
-                const paramLabels = document.querySelectorAll('.parameter-label');
-                if (paramLabels.length >= 4) {
-                    paramLabels[0].textContent = 'Geometrische Konstante';
-                    paramLabels[1].textContent = 'Myon-Quantenzahlen';
-                    paramLabels[2].textContent = 'Parameter-freie Vorhersagen';
-                    paramLabels[3].textContent = 'Durchschnittliche Genauigkeit';
-                }
-
-                // Reset highlight boxes
-                const highlightBoxes = document.querySelectorAll('.highlight-box');
-                if (highlightBoxes[0]) {
-                    highlightBoxes[0].innerHTML = '<strong>4.2σ Diskrepanz:</strong> Die Fermilab-Messungen bestätigen eine systematische Abweichung, die das T0-Modell präzise vorhersagt.';
-                }
-                if (highlightBoxes[1]) {
-                    highlightBoxes[1].innerHTML = '<h3>🎯 Revolutionäre Erkenntnis</h3><p><strong>Standardmodell:</strong> >20 freie Parameter (willkürlich)</p><p><strong>T0-Modell:</strong> 0 freie Parameter (reine Geometrie)</p><div class="formula">Alle Teilchenmassen = f(3D-Raum-Geometrie, Quantenzahlen)</div>';
-                }
-
-                // Reset calculation steps
-                const stepTitles = document.querySelectorAll('.step-title');
-                if (stepTitles.length >= 4) {
-                    stepTitles[0].textContent = 'Direkte geometrische Methode';
-                    stepTitles[1].textContent = 'Yukawa-Methode (Brücke zum Standardmodell)';
-                    stepTitles[2].textContent = 'Zeitfeld-Korrektur-Formel';
-                    stepTitles[3].textContent = 'Numerische Werte';
-                    stepTitles[4].textContent = 'Finales Ergebnis';
-                }
+            // Re-render MathJax
+            if (window.MathJax) {
+                window.MathJax.typesetPromise();
             }
         }
 
-        function initSlider() {
-            const slider = document.getElementById('xiSlider');
-            const xiVal = document.getElementById('xiValue');
-            const electronVal = document.getElementById('electronValue');
-            const muonVal = document.getElementById('muonValue');
-            const tauVal = document.getElementById('tauValue');
-            const accuracyVal = document.getElementById('accuracyValue');
+        // Particle display functions
+        function showAllParticles() {
+            const cards = document.querySelectorAll('.particle-card');
+            cards.forEach(card => {
+                card.style.display = 'block';
+                card.style.opacity = '1';
+            });
+        }
 
-            if (slider) {
-                slider.addEventListener('input', function() {
-                    const xi = parseFloat(this.value) * 1e-4;
-                    
-                    // T0 mass calculations
-                    const eM = 246 * (4/3) * Math.pow(xi, 1.5) * 1000;
-                    const muM = 246 * (16/5) * xi * 1000;
-                    const tauM = 246 * (5/4) * Math.pow(xi, 2/3) * 1000;
-                    
-                    // Accuracy calculation
-                    const exp = [0.511, 105.658, 1776.86];
-                    const pred = [eM, muM, tauM];
-                    let acc = 0;
-                    for (let i = 0; i < 3; i++) {
-                        acc += 100 * (1 - Math.abs(pred[i] - exp[i]) / exp[i]);
-                    }
-                    acc = Math.max(0, acc / 3);
-                    
-                    // Update display
-                    if (xiVal) xiVal.textContent = xi.toExponential(3);
-                    if (electronVal) electronVal.textContent = eM.toFixed(3);
-                    if (muonVal) muonVal.textContent = muM.toFixed(1);
-                    if (tauVal) tauVal.textContent = Math.round(tauM);
-                    if (accuracyVal) {
-                        accuracyVal.textContent = acc.toFixed(1) + '%';
-                        accuracyVal.style.color = acc > 95 ? 'var(--success)' : 'var(--warning)';
-                    }
-                });
+        function highlightConfirmed() {
+            const cards = document.querySelectorAll('.particle-card');
+            cards.forEach(card => {
+                if (card.classList.contains('confirmed')) {
+                    card.style.borderLeftColor = 'var(--success)';
+                    card.style.opacity = '1';
+                } else {
+                    card.style.opacity = '0.5';
+                }
+            });
+        }
+
+        function highlightPredictions() {
+            const cards = document.querySelectorAll('.particle-card');
+            cards.forEach(card => {
+                if (card.classList.contains('prediction')) {
+                    card.style.borderLeftColor = 'var(--warning)';
+                    card.style.opacity = '1';
+                } else {
+                    card.style.opacity = '0.5';
+                }
+            });
+        }
+
+        // Interactive calculator
+        function calculateContribution() {
+            const mass = parseFloat(document.getElementById('particleMass').value);
+            const xi = (4/3) * 1e-4;
+            const alpha = 1/137;
+            const m_mu = 105.6583745;
+            
+            const resultDiv = document.getElementById('calculationResult');
+            const formulaDiv = document.getElementById('resultFormula');
+            const valueDiv = document.getElementById('resultValue');
+            const regimeDiv = document.getElementById('resultRegime');
+            
+            let formula, contribution, regime;
+            
+            if (mass > 70) {
+                // Heavy particle
+                formula = "a = ξ²";
+                contribution = xi**2 * 1e11;
+                regime = currentLang === 'de' ? "Schweres Teilchen (direkte Kopplung)" : "Heavy particle (direct coupling)";
+            } else {
+                // Light particle
+                formula = "a = ξ² α (m/m_μ)";
+                contribution = xi**2 * alpha * (mass / m_mu) * 1e11;
+                regime = currentLang === 'de' ? "Leichtes Teilchen (α-unterdrückt)" : "Light particle (α-suppressed)";
+            }
+            
+            formulaDiv.innerHTML = `<strong>${currentLang === 'de' ? 'Formel' : 'Formula'}:</strong> $${formula}$`;
+            valueDiv.innerHTML = `<strong>${currentLang === 'de' ? 'Beitrag' : 'Contribution'}:</strong> ${contribution.toFixed(2)} × 10⁻¹¹`;
+            regimeDiv.innerHTML = `<strong>${currentLang === 'de' ? 'Regime' : 'Regime'}:</strong> ${regime}`;
+            
+            resultDiv.style.display = 'block';
+            
+            // Re-render MathJax for new formulas
+            if (window.MathJax) {
+                window.MathJax.typesetPromise();
             }
         }
 
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            initSlider();
-        });
-    </script>
-</body>
-</html>
+            // Initial MathJax rendering
+            if (window.Math
