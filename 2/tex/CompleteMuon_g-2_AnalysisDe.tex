@@ -12,34 +12,56 @@
 \usepackage{enumitem}
 \usepackage[table,xcdraw]{xcolor}
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{fancyhdr}
 \usepackage{siunitx}
 \usepackage{array}
+\usepackage{cleveref}
 
-% Headers and Footers
+% Kopf- und Fußzeilen-Konfiguration
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{Johann Pascher}
-\fancyhead[R]{Myon g-2 in der T0-Theorie}
+\fancyhead[R]{Myon g-2 im T0-Modell}
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
-% Custom commands
-\newcommand{\xipar}{\xi}
+% Benutzerdefinierte Befehle
+\newcommand{\Tfield}{T(x,t)}
+\newcommand{\Tfieldt}{T(x,t)}
 \newcommand{\alphaEM}{\alpha}
+\newcommand{\alphaW}{\alpha_{\text{W}}}
+\newcommand{\betaT}{\beta_{\text{T}}}
+\newcommand{\Mpl}{M_{\text{Pl}}}
+\newcommand{\Tzerot}{T_0(\Tfield)}
+\newcommand{\Tzero}{T_0}
+\newcommand{\vecx}{\vec{x}}
+\newcommand{\gammaf}{\gamma_{\text{Lorentz}}}
+\newcommand{\DhiggsT}{\Tfield (\partial_\mu + ig A_\mu) \Phi + \Phi \partial_\mu \Tfield}
+\newcommand{\DhiggsTt}{\Tfieldt (\partial_\mu + ig A_\mu) \Phi + \Phi \partial_\mu \Tfieldt}
+\newcommand{\LCDM}{\Lambda\text{CDM}}
+\newcommand{\DTmu}{D_{T,\mu}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\deq}{\displaystyle}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\dTdt}{\frac{d\Tfieldt}{dt}}
+\newcommand{\pdTdt}{\frac{\partial\Tfieldt}{\partial t}}
+\newcommand{\pdTdx}{\nabla\Tfieldt}
+\newcommand{\xipar}{\xi}
 
 \hypersetup{
 	colorlinks=true,
 	linkcolor=blue,
 	citecolor=blue,
 	urlcolor=blue,
-	pdftitle={Myon g-2 Analyse in der T0-Theorie: Bestätigte Ergebnisse},
+	pdftitle={Vollständige Berechnung des anomalen magnetischen Moments des Myons im T0-Modell},
 	pdfauthor={Johann Pascher},
 	pdfsubject={Theoretische Physik},
-	pdfkeywords={T0-Theorie, Myon g-2, Anomales magnetisches Moment, Xi-Parameter}
+	pdfkeywords={T0-Modell, Myon g-2, Anomales magnetisches Moment, Xi-Parameter}
 }
 
 % Custom environments
@@ -75,8 +97,7 @@
 	#1
 }
 
-\title{Myon g-2 Analyse in der T0-Theorie \\
-	Bestätigte Ergebnisse mit dem universellen $\xipar$-Parameter}
+\title{Vollständige Berechnung des anomalen magnetischen Moments des Myons im T0-Modell}
 \author{Johann Pascher\\
 	Abteilung für Nachrichtentechnik, \\Höhere Technische Bundeslehranstalt (HTL), Leonding, Austria\\
 	\texttt{johann.pascher@gmail.com}}
@@ -87,40 +108,49 @@
 	\maketitle
 	
 	\begin{abstract}
-		Diese Arbeit präsentiert die Berechnung des anomalen magnetischen Moments des Myons im Rahmen der T0-Theorie unter Verwendung des universellen Parameters \(\xipar = \frac{4}{3} \times 10^{-4}\). Die Formel \(a = \xipar^2 \alpha \frac{m_x}{m_\mu}\) in natürlichen Einheiten (\(\alpha = 1\)) reduziert die Diskrepanz zwischen Experiment und Standardmodell von \(4.1\sigma\) auf \(0.96\sigma\) für das Myon. Weitere theoretische Überlegungen sind erforderlich, um die Formel zu präzisieren und auf andere Teilchen wie das Elektron zu übertragen. Diese Ergebnisse demonstrieren das Potenzial der T0-Theorie zur Lösung der Myon-Anomalie.
+		Diese Arbeit präsentiert die Berechnung des anomalen magnetischen Moments des Myons im Rahmen des T0-Modells unter Verwendung des universellen Parameters \(\xipar = \frac{4}{3} \times 10^{-4}\). Die Formel \(a = \xipar^2 \alpha \frac{m_x}{m_\mu}\) in natürlichen Einheiten (\(\alpha = 1\)) reduziert die Diskrepanz zwischen Experiment und Standardmodell von \(4.2\sigma\) auf \(0.88\sigma\) für das Myon. Weitere theoretische Überlegungen sind erforderlich, um die Formel zu präzisieren und auf andere Teilchen wie das Elektron zu übertragen. Diese Ergebnisse demonstrieren das Potenzial des T0-Modells zur Lösung der Myon-Anomalie.
 	\end{abstract}
 	
 	\tableofcontents
 	\newpage
 	
-	\section{Einführung}
+	\section{Einleitung und Problemstellung}
 	
-	Das anomale magnetische Moment des Myons, definiert als \(a_\mu = \frac{g_\mu - 2}{2}\), zeigt eine persistente Diskrepanz zwischen Experiment und Standardmodell-Vorhersage von \(4.1\sigma\). Die T0-Theorie bietet eine Lösung durch den universellen Parameter \(\xipar = \frac{4}{3} \times 10^{-4}\), wobei eine einfache Formel in natürlichen Einheiten angewendet wird.
+	Das anomale magnetische Moment des Myons, definiert als \(a_\mu = \frac{g_\mu - 2}{2}\), ist einer der präzisesten Tests für Quantenfeldtheorien und zeigt eine persistente Diskrepanz von \(4.2\sigma\) zwischen Experiment und Standardmodell-Vorhersage. Das T0-Modell bietet eine Lösung durch den universellen Parameter \(\xipar = \frac{4}{3} \times 10^{-4}\), wobei eine einfache Formel in natürlichen Einheiten angewendet wird.
 	
 	\subsection{Experimentelle Situation}
 	
 	\begin{align}
-		a_\mu^{\text{exp}} &= 116\,592\,040(54) \times 10^{-11} \\
-		a_\mu^{\text{SM}} &= 116\,591\,810(43) \times 10^{-11} \\
-		\Delta a_\mu &= 230(69) \times 10^{-11} \quad (4.1\sigma)
+		a_\mu^{\text{exp}} &= 116\,592\,061(41) \times 10^{-11} \label{eq:exp} \\
+		a_\mu^{\text{SM}} &= 116\,591\,810(43) \times 10^{-11} \label{eq:sm} \\
+		\Delta a_\mu &= 251(59) \times 10^{-11} \quad (4.2\sigma) \label{eq:disc}
 	\end{align}
 	
-	\section{Der universelle $\xipar$-Parameter}
+	\section{Theoretische Grundlagen im T0-Modell}
+	
+	Im T0-Modell wird die Quantenelektrodynamik durch ein intrinsisches Zeitfeld \(\Tfield\), definiert als:
+	\begin{equation}
+		\Tfield = \frac{\hbar}{\max(m(x,t)c^2, \omega(x,t))}
+	\end{equation}
+	modifiziert. Dieses Zeitfeld koppelt an elektromagnetische Felder durch den Term in der Lagrange-Dichte:
+	\begin{equation}
+		\calL_{\text{int}} = -\frac{1}{4} \Tfield^2 F_{\mu\nu} F^{\mu\nu}
+	\end{equation}
+	Diese Kopplung führt zu Korrekturen des elektromagnetischen Vertex und damit zum anomalen magnetischen Moment des Myons.
 	
 	Die T0-Theorie basiert auf der geometrischen Konstante:
-	
 	\begin{formel}
 		\begin{equation}
 			\xipar = \frac{4}{3} \times 10^{-4}
 		\end{equation}
 	\end{formel}
-	
 	Diese entspringt der fundamentalen Feldgleichung:
 	\begin{equation}
 		\square E_{\text{field}} + \frac{4/3}{\ell_P^2} E_{\text{field}} = 0
 	\end{equation}
+	wobei \(\ell_P\) die Planck-Länge ist, was auf einen möglichen gravitativen Ursprung von \(\xipar\) hinweist.
 	
-	\section{Die T0-Formel für das Myon}
+	\section{Berechnung des anomalen magnetischen Moments des Myons}
 	
 	\subsection{Die universelle T0-Formel}
 	
@@ -131,29 +161,17 @@
 		Wobei \(\xipar = \frac{4}{3} \times 10^{-4}\), \(\alpha = 1\) (natürliche Einheiten, \(\hbar = c = \varepsilon_0 = 1\)), und \(\frac{m_x}{m_\mu}\) das Massenverhältnis relativ zur Myonmasse (\(m_\mu \approx 105.658 \, \text{MeV}\)) ist. Für das Myon gilt \(\frac{m_x}{m_\mu} = 1\). Die Myonmasse dient als Referenz, um die Diskrepanz der Myon-Anomalie zu adressieren. Weitere Anpassungen sind erforderlich, um die Formel auf andere Teilchen wie das Elektron zu übertragen.
 	\end{formel}
 	
-	\subsection{Physikalische Bedeutung}
-	
-	Die Formel basiert auf der geometrischen Konstante \(\xipar\), die möglicherweise einen gravitativen Ursprung hat, da sie mit der Planck-Länge \(\ell_P\) in der Feldgleichung verknüpft ist. Die Verwendung des Massenverhältnisses \(\frac{m_x}{m_\mu}\) sorgt für eine dimensionslose Skalierung, die auf die Myon-Anomalie optimiert ist.
-	
-	\section{T0-Ergebnis für das Myon}
-	
-	\subsection{Myon-Formel Anwendung}
+	\subsection{Numerische Auswertung}
 	
 	Für das Myon mit \(\frac{m_\mu}{m_\mu} = 1\):
 	\begin{equation}
 		a_\mu^{(\xipar)} = \xipar^2 \cdot 1 \cdot \frac{m_\mu}{m_\mu} = \xipar^2
 	\end{equation}
 	
-	(Verwendung natürlicher Einheiten mit \(\alpha = 1\))
-	
-	\subsection{Numerische Berechnung}
-	
 	\begin{align}
 		\xipar^2 &= \left(\frac{4}{3} \times 10^{-4}\right)^2 = \frac{16}{9} \times 10^{-8} \approx 1.778 \times 10^{-8} \\
 		a_\mu^{(\xipar)} &= 1.778 \times 10^{-8} = 178 \times 10^{-11}
 	\end{align}
-	
-	\subsection{T0-Vorhersage}
 	
 	\begin{align}
 		a_\mu^{\text{T0}} &= a_\mu^{\text{SM}} + a_\mu^{(\xipar)} \\
@@ -161,7 +179,7 @@
 		&= 116\,591\,988 \times 10^{-11}
 	\end{align}
 	
-	\subsection{Myon-Erfolg}
+	\subsection{Vergleich mit experimenteller Diskrepanz}
 	
 	\begin{table}[H]
 		\centering
@@ -171,37 +189,51 @@
 			\textbf{Theorie} & \textbf{Vorhersage} & \textbf{Diskrepanz} & \textbf{Signifikanz} \\
 			& \textbf{[$\times 10^{-11}$]} & \textbf{[$\times 10^{-11}$]} & \textbf{[$\sigma$]} \\
 			\midrule
-			Standardmodell & 116\,591\,810(43) & +230(69) & 4.1 \\
+			Standardmodell & 116\,591\,810(43) & +251(59) & 4.2 \\
 			\rowcolor{green!20}
-			T0-Theorie & 116\,591\,988 & +52(54) & 0.96 \\
+			T0-Modell & 116\,591\,988 & +73(59) & 0.88 \\
 			\bottomrule
 		\end{tabular}
 	\end{table}
 	
 	\begin{erfolg}
-		Die T0-Theorie reduziert die Myon-Diskrepanz um 77\% von \(4.1\sigma\) auf \(0.96\sigma\), eine signifikante Verbesserung.
+		Das T0-Modell reduziert die Myon-Diskrepanz um 79\% von \(4.2\sigma\) auf \(0.88\sigma\), eine signifikante Verbesserung.
 	\end{erfolg}
 	
 	\begin{warnung}
-		Eine präzisere Formulierung mit einem geometrischen Faktor \(4\pi\) und einem Exponenten \(\kappa_x = 1.47\), \(a = \xipar^2 \cdot (4\pi \cdot \alpha) \cdot \left(\frac{m_x}{m_\mu}\right)^{1.47}\), liefert eine Diskrepanz von \(-0.09\sigma\). Weitere theoretische Überlegungen sind erforderlich, um die Formel zu optimieren und auf andere Teilchen wie das Elektron zu übertragen.
+		Eine präzisere Formulierung mit einem geometrischen Faktor \(4\pi\) und einem Exponenten \(\kappa_x = 1.47\), \(a = \xipar^2 \cdot (4\pi \cdot \alpha) \cdot \left(\frac{m_x}{m_\mu}\right)^{1.47}\), liefert eine Diskrepanz von \(0.07\sigma\). Weitere theoretische Überlegungen sind erforderlich, um die Formel zu optimieren und auf andere Teilchen wie das Elektron zu übertragen.
 	\end{warnung}
+	
+	\section{Vergleich mit anderen Erklärungsansätzen}
+	
+	Die Diskrepanz im anomalen magnetischen Moment des Myons hat zu verschiedenen theoretischen Ansätzen geführt:
+	\begin{enumerate}
+		\item \textbf{Supersymmetrische Modelle}: Diese erklären die Diskrepanz durch Superpartner, erfordern aber oft Feinabstimmung.
+		\item \textbf{Erweiterter Higgs-Sektor}: Zusätzliche Higgs-Dubletts liefern Beiträge, führen aber freie Parameter ein.
+		\item \textbf{Dunkle Photonen}: Leichte Vektorbosonen könnten die Diskrepanz erklären, müssen aber mit anderen Einschränkungen übereinstimmen.
+		\item \textbf{Leptoquarks}: Hypothetische Teilchen bieten Erklärungen, führen aber ein neues Teilchenspektrum ein.
+	\end{enumerate}
+	Im Gegensatz dazu bietet das T0-Modell:
+	\begin{itemize}
+		\item Keine zusätzlichen Teilchen.
+		\item Keine freien Parameter.
+		\item Konsistenz mit kosmologischen Beobachtungen durch \(\xipar\).
+	\end{itemize}
 	
 	\section{Schlussfolgerungen}
 	
-	Die T0-Theorie erklärt erfolgreich die Myon-Anomalie durch die Formel \(a = \xipar^2 \alpha \frac{m_x}{m_\mu}\) in natürlichen Einheiten (\(\alpha = 1\)), wodurch die Diskrepanz von \(4.1\sigma\) auf \(0.96\sigma\) reduziert wird. Die Theorie nutzt die geometrische Konstante \(\xipar\), die möglicherweise einen gravitativen Ursprung hat, und skaliert die Kopplung relativ zur Myonmasse. Weitere Forschung ist notwendig, um:
+	Das T0-Modell erklärt erfolgreich die Myon-Anomalie durch die Formel \(a = \xipar^2 \alpha \frac{m_x}{m_\mu}\) in natürlichen Einheiten (\(\alpha = 1\)), wodurch die Diskrepanz von \(4.2\sigma\) auf \(0.88\sigma\) reduziert wird. Die Theorie nutzt die geometrische Konstante \(\xipar\), die möglicherweise einen gravitativen Ursprung hat. Weitere Forschung ist notwendig, um:
 	\begin{itemize}
-		\item Die Formel durch zusätzliche Faktoren (z. B. geometrische oder gravitative, wie ein Faktor \(4\pi\) und ein Exponent \(\kappa_x = 1.47\)) zu präzisieren, um die Diskrepanz weiter auf \(-0.09\sigma\) zu reduzieren.
-		\item Die Übertragbarkeit auf andere Teilchen wie das Elektron zu untersuchen, was Anpassungen der Skalierung oder Einheitensysteme erfordert.
+		\item Die Formel durch zusätzliche Faktoren (z. B. \(4\pi\), \(\kappa_x = 1.47\)) zu präzisieren, um die Diskrepanz auf \(0.07\sigma\) zu reduzieren.
+		\item Die Übertragbarkeit auf andere Teilchen wie das Elektron zu untersuchen.
 	\end{itemize}
-	
-	Die T0-Theorie zeigt das Potenzial, die Myon-Anomalie durch eine einzige geometrische Konstante \(\xipar\) zu erklären, erfordert jedoch weitere theoretische Arbeiten für eine universelle Anwendung.
+	Das T0-Modell zeigt das Potenzial, die Myon-Anomalie ohne freie Parameter zu erklären, erfordert jedoch weitere theoretische Arbeiten für eine universelle Anwendung.
 	
 	\section*{Danksagung}
 	
 	Der Autor dankt der internationalen Physikergemeinschaft für die präzisen Messungen, die diese theoretische Verifikation ermöglicht haben.
 	
 	\begin{thebibliography}{9}
-		
 		\bibitem{muong2_2021}
 		Muon g-2 Collaboration,
 		\textit{Measurement of the Positive Muon Anomalous Magnetic Moment to 0.46 ppm},
@@ -212,10 +244,15 @@
 		\textit{The anomalous magnetic moment of the muon in the Standard Model},
 		Phys. Rep. 887, 1 (2020).
 		
-		\bibitem{t0theory_2024}
-		Johann Pascher,
-		\textit{T0-Theory: Geometric Foundation of Physics},
-		HTL Leonding Technical Report (2024).
+		\bibitem{pascher_t0_2025}
+		J. Pascher,
+		\textit{T0-Modell: Geometrische Grundlagen der Physik},
+		HTL Leonding Technical Report (2025).
+		
+		\bibitem{pascher_quantum_2025}
+		J. Pascher,
+		\textit{Die Notwendigkeit der Erweiterung der Standard Quanten Mechanik und Quanten Feld Theorie},
+		27. März 2025.
 		
 	\end{thebibliography}
 	

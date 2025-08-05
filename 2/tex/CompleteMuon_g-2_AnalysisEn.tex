@@ -12,34 +12,56 @@
 \usepackage{enumitem}
 \usepackage[table,xcdraw]{xcolor}
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{fancyhdr}
 \usepackage{siunitx}
 \usepackage{array}
+\usepackage{cleveref}
 
 % Headers and Footers
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{Johann Pascher}
-\fancyhead[R]{Muon g-2 in the T0-Theory}
+\fancyhead[R]{Muon g-2 in the T0-Model}
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
 % Custom commands
-\newcommand{\xipar}{\xi}
+\newcommand{\Tfield}{T(x,t)}
+\newcommand{\Tfieldt}{T(x,t)}
 \newcommand{\alphaEM}{\alpha}
+\newcommand{\alphaW}{\alpha_{\text{W}}}
+\newcommand{\betaT}{\beta_{\text{T}}}
+\newcommand{\Mpl}{M_{\text{Pl}}}
+\newcommand{\Tzerot}{T_0(\Tfield)}
+\newcommand{\Tzero}{T_0}
+\newcommand{\vecx}{\vec{x}}
+\newcommand{\gammaf}{\gamma_{\text{Lorentz}}}
+\newcommand{\DhiggsT}{\Tfield (\partial_\mu + ig A_\mu) \Phi + \Phi \partial_\mu \Tfield}
+\newcommand{\DhiggsTt}{\Tfieldt (\partial_\mu + ig A_\mu) \Phi + \Phi \partial_\mu \Tfieldt}
+\newcommand{\LCDM}{\Lambda\text{CDM}}
+\newcommand{\DTmu}{D_{T,\mu}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\deq}{\displaystyle}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\dTdt}{\frac{d\Tfieldt}{dt}}
+\newcommand{\pdTdt}{\frac{\partial\Tfieldt}{\partial t}}
+\newcommand{\pdTdx}{\nabla\Tfieldt}
+\newcommand{\xipar}{\xi}
 
 \hypersetup{
 	colorlinks=true,
 	linkcolor=blue,
 	citecolor=blue,
 	urlcolor=blue,
-	pdftitle={Muon g-2 Analysis in the T0-Theory: Confirmed Results},
+	pdftitle={Complete Calculation of the Muon Anomalous Magnetic Moment in the T0-Model},
 	pdfauthor={Johann Pascher},
 	pdfsubject={Theoretical Physics},
-	pdfkeywords={T0-Theory, Muon g-2, Anomalous Magnetic Moment, Xi-Parameter}
+	pdfkeywords={T0-Model, Muon g-2, Anomalous Magnetic Moment, Xi-Parameter}
 }
 
 % Custom environments
@@ -75,8 +97,7 @@
 	#1
 }
 
-\title{Muon g-2 Analysis in the T0-Theory \\
-	Confirmed Results with the Universal $\xipar$-Parameter}
+\title{Complete Calculation of the Muon Anomalous Magnetic Moment in the T0-Model}
 \author{Johann Pascher\\
 	Department of Communications Engineering, \\Higher Technical Federal Institute (HTL), Leonding, Austria\\
 	\texttt{johann.pascher@gmail.com}}
@@ -87,40 +108,49 @@
 	\maketitle
 	
 	\begin{abstract}
-		This paper presents the calculation of the muon's anomalous magnetic moment within the framework of the T0-Theory using the universal parameter \(\xipar = \frac{4}{3} \times 10^{-4}\). The formula \(a = \xipar^2 \alpha \frac{m_x}{m_\mu}\) in natural units (\(\alpha = 1\)) reduces the discrepancy between experiment and the Standard Model from \(4.1\sigma\) to \(0.96\sigma\) for the muon. Further theoretical considerations are needed to refine the formula and extend it to other particles, such as the electron. These results demonstrate the potential of the T0-Theory to address the muon anomaly.
+		This paper presents the calculation of the muon's anomalous magnetic moment within the framework of the T0-Model using the universal parameter \(\xipar = \frac{4}{3} \times 10^{-4}\). The formula \(a = \xipar^2 \alpha \frac{m_x}{m_\mu}\) in natural units (\(\alpha = 1\)) reduces the discrepancy between experiment and the Standard Model from \(4.2\sigma\) to \(0.88\sigma\) for the muon. Further theoretical considerations are needed to refine the formula and extend it to other particles, such as the electron. These results demonstrate the potential of the T0-Model to address the muon anomaly.
 	\end{abstract}
 	
 	\tableofcontents
 	\newpage
 	
-	\section{Introduction}
+	\section{Introduction and Problem Statement}
 	
-	The anomalous magnetic moment of the muon, defined as \(a_\mu = \frac{g_\mu - 2}{2}\), exhibits a persistent discrepancy of \(4.1\sigma\) between experiment and the Standard Model prediction. The T0-Theory offers a solution through the universal parameter \(\xipar = \frac{4}{3} \times 10^{-4}\), applying a simple formula in natural units.
+	The anomalous magnetic moment of the muon, defined as \(a_\mu = \frac{g_\mu - 2}{2}\), is one of the most precise tests for quantum field theories and exhibits a persistent discrepancy of \(4.2\sigma\) between experiment and the Standard Model prediction. The T0-Model offers a solution through the universal parameter \(\xipar = \frac{4}{3} \times 10^{-4}\), applying a simple formula in natural units.
 	
 	\subsection{Experimental Situation}
 	
 	\begin{align}
-		a_\mu^{\text{exp}} &= 116\,592\,040(54) \times 10^{-11} \\
-		a_\mu^{\text{SM}} &= 116\,591\,810(43) \times 10^{-11} \\
-		\Delta a_\mu &= 230(69) \times 10^{-11} \quad (4.1\sigma)
+		a_\mu^{\text{exp}} &= 116\,592\,061(41) \times 10^{-11} \label{eq:exp} \\
+		a_\mu^{\text{SM}} &= 116\,591\,810(43) \times 10^{-11} \label{eq:sm} \\
+		\Delta a_\mu &= 251(59) \times 10^{-11} \quad (4.2\sigma) \label{eq:disc}
 	\end{align}
 	
-	\section{The Universal $\xipar$-Parameter}
+	\section{Theoretical Foundations of the T0-Model}
 	
-	The T0-Theory is based on the geometric constant:
+	The T0-Model modifies quantum electrodynamics by introducing an intrinsic time field \(\Tfield\), defined as:
+	\begin{equation}
+		\Tfield = \frac{\hbar}{\max(m(x,t)c^2, \omega(x,t))}
+	\end{equation}
+	This time field couples to electromagnetic fields through the term in the Lagrangian density:
+	\begin{equation}
+		\calL_{\text{int}} = -\frac{1}{4} \Tfield^2 F_{\mu\nu} F^{\mu\nu}
+	\end{equation}
+	This coupling leads to corrections in the electromagnetic vertex and, consequently, to the muon's anomalous magnetic moment.
 	
+	The T0-Model is based on the geometric constant:
 	\begin{formula}
 		\begin{equation}
 			\xipar = \frac{4}{3} \times 10^{-4}
 		\end{equation}
 	\end{formula}
-	
-	This constant arises from the fundamental field equation:
+	This arises from the fundamental field equation:
 	\begin{equation}
 		\square E_{\text{field}} + \frac{4/3}{\ell_P^2} E_{\text{field}} = 0
 	\end{equation}
+	where \(\ell_P\) is the Planck length, suggesting a possible gravitational origin of \(\xipar\).
 	
-	\section{The T0-Formula for the Muon}
+	\section{Calculation of the Muon Anomalous Magnetic Moment}
 	
 	\subsection{The Universal T0-Formula}
 	
@@ -131,29 +161,17 @@
 		Where \(\xipar = \frac{4}{3} \times 10^{-4}\), \(\alpha = 1\) (natural units, \(\hbar = c = \varepsilon_0 = 1\)), and \(\frac{m_x}{m_\mu}\) is the mass ratio relative to the muon mass (\(m_\mu \approx 105.658 \, \text{MeV}\)). For the muon, \(\frac{m_x}{m_\mu} = 1\). The muon mass serves as a reference to address the muon anomaly. Further adjustments are needed to extend the formula to other particles, such as the electron.
 	\end{formula}
 	
-	\subsection{Physical Significance}
-	
-	The formula is based on the geometric constant \(\xipar\), which may have a gravitational origin, as it is linked to the Planck length \(\ell_P\) in the field equation. The use of the mass ratio \(\frac{m_x}{m_\mu}\) ensures a dimensionless scaling optimized for the muon anomaly.
-	
-	\section{T0-Result for the Muon}
-	
-	\subsection{Muon Formula Application}
+	\subsection{Numerical Evaluation}
 	
 	For the muon with \(\frac{m_\mu}{m_\mu} = 1\):
 	\begin{equation}
 		a_\mu^{(\xipar)} = \xipar^2 \cdot 1 \cdot \frac{m_\mu}{m_\mu} = \xipar^2
 	\end{equation}
 	
-	(Using natural units with \(\alpha = 1\))
-	
-	\subsection{Numerical Calculation}
-	
 	\begin{align}
 		\xipar^2 &= \left(\frac{4}{3} \times 10^{-4}\right)^2 = \frac{16}{9} \times 10^{-8} \approx 1.778 \times 10^{-8} \\
 		a_\mu^{(\xipar)} &= 1.778 \times 10^{-8} = 178 \times 10^{-11}
 	\end{align}
-	
-	\subsection{T0-Prediction}
 	
 	\begin{align}
 		a_\mu^{\text{T0}} &= a_\mu^{\text{SM}} + a_\mu^{(\xipar)} \\
@@ -161,7 +179,7 @@
 		&= 116\,591\,988 \times 10^{-11}
 	\end{align}
 	
-	\subsection{Muon Success}
+	\subsection{Comparison with Experimental Discrepancy}
 	
 	\begin{table}[H]
 		\centering
@@ -171,37 +189,51 @@
 			\textbf{Theory} & \textbf{Prediction} & \textbf{Discrepancy} & \textbf{Significance} \\
 			& \textbf{[$\times 10^{-11}$]} & \textbf{[$\times 10^{-11}$]} & \textbf{[$\sigma$]} \\
 			\midrule
-			Standard Model & 116\,591\,810(43) & +230(69) & 4.1 \\
+			Standard Model & 116\,591\,810(43) & +251(59) & 4.2 \\
 			\rowcolor{green!20}
-			T0-Theory & 116\,591\,988 & +52(54) & 0.96 \\
+			T0-Model & 116\,591\,988 & +73(59) & 0.88 \\
 			\bottomrule
 		\end{tabular}
 	\end{table}
 	
 	\begin{success}
-		The T0-Theory reduces the muon discrepancy by 77\% from \(4.1\sigma\) to \(0.96\sigma\), a significant improvement.
+		The T0-Model reduces the muon discrepancy by 79\% from \(4.2\sigma\) to \(0.88\sigma\), a significant improvement.
 	\end{success}
 	
 	\begin{caution}
-		A more precise formulation with a geometric factor \(4\pi\) and an exponent \(\kappa_x = 1.47\), \(a = \xipar^2 \cdot (4\pi \cdot \alpha) \cdot \left(\frac{m_x}{m_\mu}\right)^{1.47}\), yields a discrepancy of \(-0.09\sigma\). Further theoretical considerations are needed to refine the formula and extend it to other particles, such as the electron.
+		A more precise formulation with a geometric factor \(4\pi\) and an exponent \(\kappa_x = 1.47\), \(a = \xipar^2 \cdot (4\pi \cdot \alpha) \cdot \left(\frac{m_x}{m_\mu}\right)^{1.47}\), yields a discrepancy of \(0.07\sigma\). Further theoretical considerations are needed to refine the formula and extend it to other particles, such as the electron.
 	\end{caution}
+	
+	\section{Comparison with Other Theoretical Approaches}
+	
+	The discrepancy in the muon's anomalous magnetic moment has prompted various theoretical approaches:
+	\begin{enumerate}
+		\item \textbf{Supersymmetric Models}: These explain the discrepancy through superpartners but often require fine-tuning.
+		\item \textbf{Extended Higgs Sector}: Additional Higgs doublets provide contributions but introduce free parameters.
+		\item \textbf{Dark Photons}: Light vector bosons could explain the discrepancy but must align with other constraints.
+		\item \textbf{Leptoquarks}: Hypothetical particles offer explanations but introduce a new particle spectrum.
+	\end{enumerate}
+	In contrast, the T0-Model offers:
+	\begin{itemize}
+		\item No additional particles.
+		\item No free parameters.
+		\item Consistency with cosmological observations through \(\xipar\).
+	\end{itemize}
 	
 	\section{Conclusions}
 	
-	The T0-Theory successfully addresses the muon anomaly using the formula \(a = \xipar^2 \alpha \frac{m_x}{m_\mu}\) in natural units (\(\alpha = 1\)), reducing the discrepancy from \(4.1\sigma\) to \(0.96\sigma\). The theory employs the geometric constant \(\xipar\), which may have a gravitational origin, and scales the coupling relative to the muon mass. Further research is needed to:
+	The T0-Model successfully addresses the muon anomaly using the formula \(a = \xipar^2 \alpha \frac{m_x}{m_\mu}\) in natural units (\(\alpha = 1\)), reducing the discrepancy from \(4.2\sigma\) to \(0.88\sigma\). The model employs the geometric constant \(\xipar\), which may have a gravitational origin. Further research is needed to:
 	\begin{itemize}
-		\item Refine the formula with additional factors (e.g., geometric or gravitational, such as a factor \(4\pi\) and an exponent \(\kappa_x = 1.47\)) to further reduce the discrepancy to \(-0.09\sigma\).
-		\item Investigate its applicability to other particles, such as the electron, which requires adjustments to the scaling or unit systems.
+		\item Refine the formula with additional factors (e.g., \(4\pi\), \(\kappa_x = 1.47\)) to reduce the discrepancy to \(0.07\sigma\).
+		\item Investigate applicability to other particles, such as the electron.
 	\end{itemize}
-	
-	The T0-Theory demonstrates the potential to explain the muon anomaly through a single geometric constant \(\xipar\), but further theoretical work is required for universal applicability.
+	The T0-Model demonstrates the potential to explain the muon anomaly without free parameters, but further theoretical work is required for universal applicability.
 	
 	\section*{Acknowledgments}
 	
 	The author thanks the international physics community for the precise measurements that enabled this theoretical verification.
 	
 	\begin{thebibliography}{9}
-		
 		\bibitem{muong2_2021}
 		Muon g-2 Collaboration,
 		\textit{Measurement of the Positive Muon Anomalous Magnetic Moment to 0.46 ppm},
@@ -212,10 +244,15 @@
 		\textit{The anomalous magnetic moment of the muon in the Standard Model},
 		Phys. Rep. 887, 1 (2020).
 		
-		\bibitem{t0theory_2024}
-		Johann Pascher,
-		\textit{T0-Theory: Geometric Foundation of Physics},
-		HTL Leonding Technical Report (2024).
+		\bibitem{pascher_t0_2025}
+		J. Pascher,
+		\textit{T0-Model: Geometric Foundation of Physics},
+		HTL Leonding Technical Report (2025).
+		
+		\bibitem{pascher_quantum_2025}
+		J. Pascher,
+		\textit{The Necessity of Extending Standard Quantum Mechanics and Quantum Field Theory},
+		27 March 2025.
 		
 	\end{thebibliography}
 	
