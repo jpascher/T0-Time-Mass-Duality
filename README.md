@@ -13,7 +13,7 @@ The T0 model proposes an approach to fundamental physics through time-energy dua
 - Both conventions (α = 1 and α = 1/137) are correct
 - T0 explains WHY this number exists
 
-**[🎯 Interactive Fractal-α Visualization](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal_137.html)**  
+**[🎯 Interactive Fractal-α Visualization](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal-137.html)**  
 *Explore how fractal spacetime structure generates the famous number 137*
 
 ## Latest Additions (January 2025)
@@ -29,7 +29,7 @@ The project has been extensively updated with new theoretical documents, interac
 6. **[Fine Structure Constant - Extended](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/FeinstrukturkonstanteEn.pdf)** - Why α = 1 AND α = 1/137 are both correct
 
 ### New Interactive HTML Tools (January 2025)
-7. **[Fractal Fine Structure Visualization](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal_137.html)** - Interactive exploration of α emergence
+7. **[Fractal Fine Structure Visualization](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal-137.html)** - Interactive exploration of α emergence
 8. **[Muon g-2 Analysis Tool](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/muon_g2_analysis.html)** - Simplified anomaly visualization
 
 ### Core Documents (July 2025 Foundation)
@@ -121,7 +121,7 @@ All documents available in German and English versions:
 - **Plus 4 additional dialog parts** covering specialized topics
 
 ### 🌐 **Interactive HTML Tools (18 files)**
-- **fraktal_137.html** (🆕 NEW) - Fractal fine structure visualization
+- **fraktal-137.html** (🆕 NEW) - Fractal fine structure visualization
 - **muon_g2_analysis.html** (🆕 NEW) - Simplified g-2 anomaly tool
 - **simple_mass_formula.html** (56KB) - Parameter-free mass calculator
 - **quantum_simulator_deterministic.html** (77KB) - Quantum computer simulator
@@ -146,7 +146,7 @@ All documents available in German and English versions:
 ## Documentation and Tools
 
 ### 🌟 Revolutionary Fine Structure Constant Explorer 🆕
-**[Fractal α Visualization](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal_137.html)**  
+**[Fractal α Visualization](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal-137.html)**  
 *🆕 **NEW (January 2025)**: Interactive demonstration showing how the famous number 137 emerges from fractal spacetime geometry. Explains why both α = 1 (natural units) and α = 1/137 (SI units) are correct perspectives. Bilingual interface with stunning animations.*
 
 ### Revolutionary Particle Mass Calculator
@@ -223,7 +223,7 @@ All documents available in German and English versions:
 ## Technical Implementation
 
 ### Getting Started
-1. **🌟 Explore Fine Structure**: [Fractal α Visualization](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal_137.html)
+1. **🌟 Explore Fine Structure**: [Fractal α Visualization](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal-137.html)
 2. **🎬 Watch Videos**: [T0 YouTube Channel](https://www.youtube.com/@Time-MassDuality)
 3. **🎧 Listen to Podcasts**: [T0 Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)
 4. **🧮 Test Mass Formula**: [Particle Calculator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/simple_mass_formula.html)
