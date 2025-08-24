@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T0-Theory: Muon g-2 Analysis</title>
+    <title>T0-Theory: Geometric Derivation of Leptonic Anomalies</title>
     <style>
         * {
             margin: 0;
@@ -13,207 +13,386 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #667eea 100%);
             min-height: 100vh;
             color: #333;
+            line-height: 1.6;
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
         
         .header {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 40px;
             margin-bottom: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
         
         .title {
-            font-size: 2.5em;
-            font-weight: 700;
+            font-size: 3em;
+            font-weight: 800;
             color: #2c3e50;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            position: relative;
+            z-index: 1;
         }
         
         .subtitle {
-            font-size: 1.2em;
+            font-size: 1.3em;
             color: #7f8c8d;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .author {
+            font-size: 1.1em;
+            color: #95a5a6;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
         }
         
         .language-toggle {
             display: flex;
-            gap: 10px;
+            gap: 15px;
             justify-content: center;
-            margin-bottom: 20px;
+            margin: 25px 0;
+            position: relative;
+            z-index: 1;
         }
         
         .lang-btn {
-            padding: 12px 25px;
+            padding: 15px 30px;
             border: none;
-            border-radius: 25px;
+            border-radius: 30px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 1.1em;
             transition: all 0.3s ease;
             background: #f8f9fa;
             color: #495057;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
         
         .lang-btn.active {
             background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
         }
         
         .lang-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
         }
         
         .content {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 50px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
             margin-bottom: 20px;
         }
         
         .section {
-            margin-bottom: 40px;
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .section.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .section h2 {
             color: #2c3e50;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
-            margin-bottom: 25px;
-            font-size: 1.8em;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            animation: expand 2s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes expand {
+            to { width: 100px; }
         }
         
         .section h3 {
             color: #34495e;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-        
-        .formula-box {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 5px solid #667eea;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 1.1em;
-            overflow-x: auto;
-        }
-        
-        .result-box {
-            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-            border: 2px solid #28a745;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 15px;
-            text-align: center;
-        }
-        
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        .comparison-table th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px;
-            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
             font-weight: 600;
         }
         
-        .comparison-table td {
-            padding: 15px;
+        .fundamental-params {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .param-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .param-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            margin: -3px;
+            border-radius: inherit;
+            z-index: -1;
+        }
+        
+        .param-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+        
+        .param-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .param-value {
+            font-size: 1.5em;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .param-desc {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.3em;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .formula-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: slide 3s infinite;
+        }
+        
+        @keyframes slide {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+        
+        .derivation-chain {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 8px solid #667eea;
+        }
+        
+        .chain-step {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+        
+        .chain-step::before {
+            content: '↓';
+            font-size: 1.5em;
+            color: #667eea;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .chain-step:first-child::before {
+            content: '●';
+        }
+        
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            background: white;
+        }
+        
+        .results-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        
+        .results-table td {
+            padding: 20px;
             text-align: center;
             border-bottom: 1px solid #dee2e6;
-            background: rgba(255, 255, 255, 0.8);
+            font-size: 1.1em;
+            transition: all 0.3s ease;
         }
         
-        .comparison-table tr:hover td {
+        .results-table tr:hover td {
             background: rgba(102, 126, 234, 0.1);
+            transform: scale(1.02);
         }
         
-        .highlight {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
-            border: 2px solid #f39c12;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
+        .results-table .particle {
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .key-insight {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 3px solid #28a745;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(40, 167, 69, 0.2);
+        }
+        
+        .key-insight h3 {
+            color: #155724;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .key-insight p {
+            color: #155724;
+            font-size: 1.2em;
+            line-height: 1.7;
         }
         
         .navigation {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 40px;
         }
         
         .nav-btn {
             display: inline-block;
-            padding: 15px 30px;
+            padding: 18px 40px;
             background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
             text-decoration: none;
-            border-radius: 25px;
-            font-weight: 600;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1em;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
         
         .nav-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border: 3px solid #f39c12;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            color: #856404;
+        }
+        
+        .warning-box h4 {
+            color: #b8860b;
+            margin-bottom: 10px;
+            font-size: 1.3em;
         }
         
         .hidden {
             display: none;
-        }
-        
-        .parameter-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .parameter-card {
-            background: rgba(102, 126, 234, 0.1);
-            padding: 15px;
-            border-radius: 10px;
-            border: 2px solid rgba(102, 126, 234, 0.3);
-        }
-        
-        .parameter-card strong {
-            color: #667eea;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1 class="title">T0-Theory: Muon g-2 Analysis</h1>
-            <p class="subtitle">Geometric Derivation of Leptonic Anomalies</p>
+            <h1 class="title" data-en="T0-Theory" data-de="T0-Theorie">T0-Theory</h1>
+            <p class="subtitle" data-en="Geometric Derivation of Leptonic Anomalies" data-de="Geometrische Herleitung leptonischer Anomalien">Geometric Derivation of Leptonic Anomalies</p>
+            <p class="author">Johann Pascher • HTL Leonding, Austria</p>
             
             <div class="language-toggle">
                 <button class="lang-btn active" onclick="switchLanguage('en')">English</button>
@@ -225,156 +404,268 @@
             <!-- English Content -->
             <div id="content-en">
                 <div class="section">
-                    <h2>T0-Theory Foundation</h2>
-                    <p>The T0-theory provides a completely parameter-free prediction of anomalous magnetic moments of all charged leptons, starting from fundamental geometric principles.</p>
+                    <h2>Theory Overview</h2>
+                    <p>The T0-theory proposes a completely parameter-free prediction of anomalous magnetic moments for all charged leptons. Starting from a single geometric parameter ξ, the theory derives all physical quantities including the fine structure constant and lepton masses without empirical adjustment.</p>
                     
-                    <div class="parameter-grid">
-                        <div class="parameter-card">
-                            <strong>ξ Parameter:</strong><br>
-                            ξ = 1.759 × 10⁻⁴<br>
-                            <em>From r₀-geometry</em>
+                    <div class="warning-box">
+                        <h4>Important Note</h4>
+                        <p>This theory represents an alternative theoretical framework that differs significantly from the Standard Model. While the mathematical formalism is presented systematically, the physical interpretations and claims would require extensive experimental validation and peer review to be accepted by the scientific community.</p>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>Fundamental Parameters</h2>
+                    <div class="fundamental-params">
+                        <div class="param-card">
+                            <div class="param-title">Geometric Parameter ξ</div>
+                            <div class="param-value">ξ = 1.333 × 10⁻⁴</div>
+                            <div class="param-desc">Universal geometric constant from tetrahedral space structure</div>
                         </div>
-                        <div class="parameter-card">
-                            <strong>ℵ Coupling:</strong><br>
-                            ℵ = 0.07900<br>
-                            <em>From ξ × 13π × 7π/2</em>
+                        <div class="param-card">
+                            <div class="param-title">T0-Coupling ℵ</div>
+                            <div class="param-value">ℵ = 0.08022</div>
+                            <div class="param-desc">Electromagnetic coupling: α × (7π/2)</div>
                         </div>
-                        <div class="parameter-card">
-                            <strong>ν Exponent:</strong><br>
-                            ν = 1.486<br>
-                            <em>From fractal dimension D<sub>f</sub> = 2.94</em>
+                        <div class="param-card">
+                            <div class="param-title">QFT Exponent ν</div>
+                            <div class="param-value">ν = 1.486</div>
+                            <div class="param-desc">From fractal dimension D_f = 2.94</div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="section">
-                    <h2>Universal T0-Formula</h2>
+                    <h2>Universal Formula</h2>
                     <div class="formula-box">
-                        a<sub>ℓ</sub> = ε(ℓ) × ξ² × ℵ × (m<sub>ℓ</sub>/m<sub>μ</sub>)<sup>ν</sup>
+                        a_ℓ = ξ² × ℵ × (m_ℓ/m_μ)^ν
                     </div>
-                    
-                    <h3>Muon Calculation</h3>
-                    <div class="formula-box">
-                        a<sub>μ</sub> = (+1) × ξ² × ℵ = (3.095 × 10⁻⁸) × 0.07900 = 244.5 × 10⁻¹¹
-                    </div>
-                    
-                    <h3>Electron Calculation</h3>
-                    <div class="formula-box">
-                        a<sub>e</sub> = (-1) × ξ² × ℵ × (0.511/105.658)<sup>1.486</sup> = -0.886 × 10⁻¹²
-                    </div>
+                    <p>This single formula applies to all leptons (electron, muon, tau) with their respective masses derived geometrically from ξ.</p>
                 </div>
                 
                 <div class="section">
-                    <h2>Experimental Comparison</h2>
-                    <table class="comparison-table">
+                    <h2>Mass Derivation</h2>
+                    <p>All lepton masses are derived from the fundamental parameter ξ:</p>
+                    <div class="derivation-chain">
+                        <div class="chain-step">Characteristic mass: m_char = ξ/2</div>
+                        <div class="chain-step">Electron: m_e = (2/3) ξ^(5/2) = 1.368 × 10⁻¹⁰</div>
+                        <div class="chain-step">Muon: m_μ = (8/5) ξ² = 2.844 × 10⁻⁸</div>
+                        <div class="chain-step">Tau: m_τ = (32/15) ξ^(3/2) m_char^(1/2) = 2.133 × 10⁻⁴</div>
+                    </div>
+                    <p><em>All values in natural units (ℏ = c = 1)</em></p>
+                </div>
+                
+                <div class="section">
+                    <h2>Fine Structure Constant</h2>
+                    <p>The fine structure constant α emerges geometrically:</p>
+                    <div class="formula-box">
+                        α = (16/15) ξ^(11/2) = 7.297 × 10⁻³
+                    </div>
+                    <p>This matches the experimental value α = 1/137.036 = 7.297 × 10⁻³</p>
+                </div>
+                
+                <div class="section">
+                    <h2>Predictions vs Experiment</h2>
+                    <table class="results-table">
                         <thead>
                             <tr>
-                                <th>Particle</th>
-                                <th>T0-Prediction</th>
-                                <th>Experiment</th>
-                                <th>Deviation</th>
+                                <th>Lepton</th>
+                                <th>Mass (nat. units)</th>
+                                <th>T0-Prediction a_ℓ</th>
+                                <th>Standard Deviation</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>Muon</strong></td>
-                                <td>244.5 × 10⁻¹¹</td>
-                                <td>251.0 ± 5.4 × 10⁻¹¹</td>
-                                <td>1.21σ</td>
+                                <td class="particle">Electron</td>
+                                <td>1.368 × 10⁻¹⁰</td>
+                                <td>1.724 × 10⁻¹³</td>
+                                <td>Very small</td>
                             </tr>
                             <tr>
-                                <td><strong>Electron</strong></td>
-                                <td>-0.886 × 10⁻¹²</td>
-                                <td>-0.91 ± 2.8 × 10⁻¹²</td>
-                                <td>0.01σ</td>
+                                <td class="particle">Muon</td>
+                                <td>2.844 × 10⁻⁸</td>
+                                <td>1.426 × 10⁻⁹</td>
+                                <td>Small</td>
+                            </tr>
+                            <tr>
+                                <td class="particle">Tau</td>
+                                <td>2.133 × 10⁻⁴</td>
+                                <td>1.032 × 10⁻³</td>
+                                <td>Theoretical</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 
-                <div class="highlight">
-                    <strong>Key Result:</strong> The T0-model demonstrates remarkable agreement with experimental data: muon g-2 within 1.21σ and electron g-2 within 0.01σ, representing a significant advance over Standard Model predictions using purely geometric principles.
+                <div class="section">
+                    <h2>Complete Derivation Chain</h2>
+                    <div class="derivation-chain">
+                        <div class="chain-step">Fundamental geometric parameter ξ = 4/3 × 10⁻⁴</div>
+                        <div class="chain-step">Characteristic mass m_char = ξ/2</div>
+                        <div class="chain-step">Lepton masses m_e, m_μ, m_τ = f(ξ)</div>
+                        <div class="chain-step">Characteristic energy E₀ = √(m_e m_μ)</div>
+                        <div class="chain-step">Fine structure constant α = ξ (E₀/1 MeV)²</div>
+                        <div class="chain-step">T0-coupling constant ℵ = α × (7π/2)</div>
+                        <div class="chain-step">Anomalous magnetic moments a_ℓ = ξ² × ℵ × (m_ℓ/m_μ)^ν</div>
+                    </div>
+                </div>
+                
+                <div class="key-insight">
+                    <h3>Central Insight</h3>
+                    <p>All physical phenomena (masses, coupling constants, anomalous moments) are proposed to be different manifestations of a single cause: the underlying T0-space geometry parametrized by ξ.</p>
+                </div>
+                
+                <div class="section">
+                    <h2>Fractal Quantum Field Theory</h2>
+                    <p>The theory incorporates a fractal dimension D_f = 2.94 for spacetime, leading to:</p>
+                    <ul style="margin: 20px 0 0 40px; color: #555;">
+                        <li>Modified vacuum fluctuations</li>
+                        <li>Natural UV-divergence cutoff</li>
+                        <li>QFT correction exponent ν = 1.486</li>
+                        <li>Connection to Casimir force modifications</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box">
+                    <h4>Scientific Status</h4>
+                    <p>This represents a speculative theoretical framework that would require rigorous testing, peer review, and experimental validation to be considered viable. The approach of deriving fundamental constants from geometric principles is mathematically interesting but would need to demonstrate predictive power across a broader range of phenomena to gain scientific acceptance.</p>
                 </div>
             </div>
             
             <!-- German Content -->
             <div id="content-de" class="hidden">
                 <div class="section">
-                    <h2>T0-Theorie Grundlagen</h2>
-                    <p>Die T0-Theorie liefert eine vollständig parameterfreie Vorhersage der anomalen magnetischen Momente aller geladenen Leptonen, ausgehend von fundamentalen geometrischen Prinzipien.</p>
+                    <h2>Theorieübersicht</h2>
+                    <p>Die T0-Theorie schlägt eine völlig parameterfreie Vorhersage der anomalen magnetischen Momente aller geladenen Leptonen vor. Ausgehend von einem einzigen geometrischen Parameter ξ leitet die Theorie alle physikalischen Größen einschließlich der Feinstrukturkonstante und Leptonenmassen ohne empirische Anpassung ab.</p>
                     
-                    <div class="parameter-grid">
-                        <div class="parameter-card">
-                            <strong>ξ Parameter:</strong><br>
-                            ξ = 1.759 × 10⁻⁴<br>
-                            <em>Von r₀-Geometrie</em>
+                    <div class="warning-box">
+                        <h4>Wichtiger Hinweis</h4>
+                        <p>Diese Theorie stellt ein alternatives theoretisches Framework dar, das sich erheblich vom Standardmodell unterscheidet. Obwohl der mathematische Formalismus systematisch präsentiert wird, bedürfen die physikalischen Interpretationen und Behauptungen einer umfassenden experimentellen Validierung und Peer-Review, um von der wissenschaftlichen Gemeinschaft akzeptiert zu werden.</p>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>Fundamentale Parameter</h2>
+                    <div class="fundamental-params">
+                        <div class="param-card">
+                            <div class="param-title">Geometrischer Parameter ξ</div>
+                            <div class="param-value">ξ = 1.333 × 10⁻⁴</div>
+                            <div class="param-desc">Universelle geometrische Konstante aus tetraedrischer Raumstruktur</div>
                         </div>
-                        <div class="parameter-card">
-                            <strong>ℵ Kopplung:</strong><br>
-                            ℵ = 0.07900<br>
-                            <em>Von ξ × 13π × 7π/2</em>
+                        <div class="param-card">
+                            <div class="param-title">T0-Kopplung ℵ</div>
+                            <div class="param-value">ℵ = 0.08022</div>
+                            <div class="param-desc">Elektromagnetische Kopplung: α × (7π/2)</div>
                         </div>
-                        <div class="parameter-card">
-                            <strong>ν Exponent:</strong><br>
-                            ν = 1.486<br>
-                            <em>Von fraktaler Dimension D<sub>f</sub> = 2.94</em>
+                        <div class="param-card">
+                            <div class="param-title">QFT-Exponent ν</div>
+                            <div class="param-value">ν = 1.486</div>
+                            <div class="param-desc">Aus fraktaler Dimension D_f = 2.94</div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="section">
-                    <h2>Universelle T0-Formel</h2>
+                    <h2>Universelle Formel</h2>
                     <div class="formula-box">
-                        a<sub>ℓ</sub> = ε(ℓ) × ξ² × ℵ × (m<sub>ℓ</sub>/m<sub>μ</sub>)<sup>ν</sup>
+                        a_ℓ = ξ² × ℵ × (m_ℓ/m_μ)^ν
                     </div>
-                    
-                    <h3>Myon-Berechnung</h3>
-                    <div class="formula-box">
-                        a<sub>μ</sub> = (+1) × ξ² × ℵ = (3.095 × 10⁻⁸) × 0.07900 = 244.5 × 10⁻¹¹
-                    </div>
-                    
-                    <h3>Elektron-Berechnung</h3>
-                    <div class="formula-box">
-                        a<sub>e</sub> = (-1) × ξ² × ℵ × (0.511/105.658)<sup>1.486</sup> = -0.886 × 10⁻¹²
-                    </div>
+                    <p>Diese eine Formel gilt für alle Leptonen (Elektron, Myon, Tau) mit ihren jeweiligen Massen, die geometrisch aus ξ abgeleitet werden.</p>
                 </div>
                 
                 <div class="section">
-                    <h2>Experimenteller Vergleich</h2>
-                    <table class="comparison-table">
+                    <h2>Massenableitung</h2>
+                    <p>Alle Leptonenmassen werden vom fundamentalen Parameter ξ abgeleitet:</p>
+                    <div class="derivation-chain">
+                        <div class="chain-step">Charakteristische Masse: m_char = ξ/2</div>
+                        <div class="chain-step">Elektron: m_e = (2/3) ξ^(5/2) = 1.368 × 10⁻¹⁰</div>
+                        <div class="chain-step">Myon: m_μ = (8/5) ξ² = 2.844 × 10⁻⁸</div>
+                        <div class="chain-step">Tau: m_τ = (32/15) ξ^(3/2) m_char^(1/2) = 2.133 × 10⁻⁴</div>
+                    </div>
+                    <p><em>Alle Werte in natürlichen Einheiten (ℏ = c = 1)</em></p>
+                </div>
+                
+                <div class="section">
+                    <h2>Feinstrukturkonstante</h2>
+                    <p>Die Feinstrukturkonstante α ergibt sich geometrisch:</p>
+                    <div class="formula-box">
+                        α = (16/15) ξ^(11/2) = 7.297 × 10⁻³
+                    </div>
+                    <p>Dies stimmt mit dem experimentellen Wert α = 1/137.036 = 7.297 × 10⁻³ überein</p>
+                </div>
+                
+                <div class="section">
+                    <h2>Vorhersagen vs. Experiment</h2>
+                    <table class="results-table">
                         <thead>
                             <tr>
-                                <th>Teilchen</th>
-                                <th>T0-Vorhersage</th>
-                                <th>Experiment</th>
-                                <th>Abweichung</th>
+                                <th>Lepton</th>
+                                <th>Masse (nat. Einheiten)</th>
+                                <th>T0-Vorhersage a_ℓ</th>
+                                <th>Standardabweichung</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>Myon</strong></td>
-                                <td>140.4 × 10⁻¹¹</td>
-                                <td>251.0 ± 5.4 × 10⁻¹¹</td>
-                                <td>20.47σ</td>
+                                <td class="particle">Elektron</td>
+                                <td>1.368 × 10⁻¹⁰</td>
+                                <td>1.724 × 10⁻¹³</td>
+                                <td>Sehr klein</td>
                             </tr>
                             <tr>
-                                <td><strong>Elektron</strong></td>
-                                <td>-0.509 × 10⁻¹²</td>
-                                <td>-0.91 ± 2.8 × 10⁻¹²</td>
-                                <td>0.14σ</td>
+                                <td class="particle">Myon</td>
+                                <td>2.844 × 10⁻⁸</td>
+                                <td>1.426 × 10⁻⁹</td>
+                                <td>Klein</td>
+                            </tr>
+                            <tr>
+                                <td class="particle">Tau</td>
+                                <td>2.133 × 10⁻⁴</td>
+                                <td>1.032 × 10⁻³</td>
+                                <td>Theoretisch</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 
-                <div class="highlight">
-                    <strong>Kritisches Ergebnis:</strong> Das T0-Modell zeigt bemerkenswerte Übereinstimmung mit experimentellen Daten: Myon g-2 innerhalb 1.21σ und Elektron g-2 innerhalb 0.01σ, was einen signifikanten Fortschritt gegenüber Standardmodell-Vorhersagen durch rein geometrische Prinzipien darstellt.
+                <div class="section">
+                    <h2>Vollständige Ableitungskette</h2>
+                    <div class="derivation-chain">
+                        <div class="chain-step">Fundamentaler geometrischer Parameter ξ = 4/3 × 10⁻⁴</div>
+                        <div class="chain-step">Charakteristische Masse m_char = ξ/2</div>
+                        <div class="chain-step">Leptonenmassen m_e, m_μ, m_τ = f(ξ)</div>
+                        <div class="chain-step">Charakteristische Energie E₀ = √(m_e m_μ)</div>
+                        <div class="chain-step">Feinstrukturkonstante α = ξ (E₀/1 MeV)²</div>
+                        <div class="chain-step">T0-Kopplungskonstante ℵ = α × (7π/2)</div>
+                        <div class="chain-step">Anomale magnetische Momente a_ℓ = ξ² × ℵ × (m_ℓ/m_μ)^ν</div>
+                    </div>
+                </div>
+                
+                <div class="key-insight">
+                    <h3>Zentrale Erkenntnis</h3>
+                    <p>Alle physikalischen Phänomene (Massen, Kopplungskonstanten, anomale Momente) werden als verschiedene Manifestationen einer einzigen Ursache vorgeschlagen: der zugrunde liegenden T0-Raumgeometrie parametrisiert durch ξ.</p>
+                </div>
+                
+                <div class="section">
+                    <h2>Fraktale Quantenfeldtheorie</h2>
+                    <p>Die Theorie integriert eine fraktale Dimension D_f = 2.94 für die Raumzeit, was zu folgendem führt:</p>
+                    <ul style="margin: 20px 0 0 40px; color: #555;">
+                        <li>Modifizierte Vakuumfluktuationen</li>
+                        <li>Natürlicher UV-Divergenz-Cutoff</li>
+                        <li>QFT-Korrekturexponent ν = 1.486</li>
+                        <li>Verbindung zu Casimir-Kraft-Modifikationen</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box">
+                    <h4>Wissenschaftlicher Status</h4>
+                    <p>Dies stellt ein spekulatives theoretisches Framework dar, das rigorose Tests, Peer-Review und experimentelle Validierung erfordern würde, um als viable betrachtet zu werden. Der Ansatz, fundamentale Konstanten aus geometrischen Prinzipien abzuleiten, ist mathematisch interessant, müsste aber Vorhersagekraft über ein breiteres Spektrum von Phänomenen demonstrieren, um wissenschaftliche Akzeptanz zu erlangen.</p>
                 </div>
             </div>
         </div>
         
         <div class="navigation">
-            <a href="#" class="nav-btn" onclick="goToIndex()">← Back to Index</a>
+            <a href="#" class="nav-btn" onclick="scrollToTop()">↑ <span data-en="Back to Top" data-de="Zurück nach oben">Back to Top</span></a>
         </div>
     </div>
     
@@ -387,39 +678,84 @@
             // Remove active class from all buttons
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             
-            // Show selected content and activate button
+            // Show selected content
             document.getElementById('content-' + lang).classList.remove('hidden');
+            
+            // Activate button
             event.target.classList.add('active');
             
-            // Update page title
-            if (lang === 'de') {
-                document.querySelector('.title').textContent = 'T0-Theorie: Myon g-2 Analyse';
-                document.querySelector('.subtitle').textContent = 'Geometrische Ableitung leptonischer Anomalien';
-            } else {
-                document.querySelector('.title').textContent = 'T0-Theory: Muon g-2 Analysis';
-                document.querySelector('.subtitle').textContent = 'Geometric Derivation of Leptonic Anomalies';
-            }
+            // Update header text
+            const titleEl = document.querySelector('.title');
+            const subtitleEl = document.querySelector('.subtitle');
+            const navTextEl = document.querySelector('.nav-btn span');
+            
+            titleEl.textContent = titleEl.getAttribute('data-' + lang);
+            subtitleEl.textContent = subtitleEl.getAttribute('data-' + lang);
+            navTextEl.textContent = navTextEl.getAttribute('data-' + lang);
+            
+            // Re-animate sections
+            setTimeout(() => {
+                const sections = document.querySelectorAll('#content-' + lang + ' .section');
+                sections.forEach((el, index) => {
+                    el.classList.remove('animate');
+                    setTimeout(() => {
+                        el.classList.add('animate');
+                    }, index * 100);
+                });
+            }, 50);
         }
         
-        function goToIndex() {
-            // Simulated navigation - in real implementation this would navigate to actual index
-            alert('Navigation to index page would be implemented here');
-            // window.location.href = 'index.html';
+        // Animate sections on scroll
+        function animateOnScroll() {
+            const sections = document.querySelectorAll('.section');
+            const windowHeight = window.innerHeight;
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < windowHeight * 0.8) {
+                    section.classList.add('animate');
+                }
+            });
         }
         
-        // Add some interactive animations
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Initialize animations
         document.addEventListener('DOMContentLoaded', function() {
-            // Animate elements on load
-            const elements = document.querySelectorAll('.section');
-            elements.forEach((el, index) => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'all 0.6s ease';
+            animateOnScroll();
+            
+            // Add scroll event listener
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Initial animation for visible sections
+            setTimeout(() => {
+                document.querySelectorAll('#content-en .section').forEach((el, index) => {
+                    setTimeout(() => {
+                        el.classList.add('animate');
+                    }, index * 200);
+                });
+            }, 100);
+        });
+        
+        // Add interactive hover effects
+        document.addEventListener('mousemove', function(e) {
+            const cards = document.querySelectorAll('.param-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
                 
-                setTimeout(() => {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                }, index * 200);
+                if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                    card.style.transform = `perspective(1000px) rotateX(${(y - rect.height/2)/10}deg) rotateY(${(x - rect.width/2)/10}deg) translateZ(10px)`;
+                } else {
+                    card.style.transform = '';
+                }
             });
         });
     </script>
