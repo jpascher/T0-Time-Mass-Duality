@@ -22,7 +22,7 @@ The T0 model proposes an approach to fundamental physics through time-energy dua
 T0-Time-Mass-Duality/
 ├── 2/
 │   ├── html/                     # Interactive HTML explorations (18 files)
-│   ├── pdf/                      # Technical documents (78 files, August 2025)
+│   ├── pdf/                      # Technical documents (82 files, August 2025)
 │   ├── tex/                      # LaTeX source files
 │   ├── esotherik.md             # Esoteric considerations
 │   ├── OntologischeAequivalenz.md # Ontological equivalence (DE/EN)
@@ -38,14 +38,14 @@ T0-Time-Mass-Duality/
 └── README.md / README_de.md     # Documentation
 ```
 
-## Complete PDF Documentation (78 Files, ~30MB total)
+## Complete PDF Documentation (82 Files, ~32MB total)
 
 All documents available in German and English versions:
 
 ### Core Theory Documents (16 files)
-- **[T0-Energie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-Energie_En.pdf)** (772KB) - Most comprehensive energy-based formulation
+- **[T0-Energie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-Energie_En.pdf)** (751KB) - Most comprehensive energy-based formulation
 - **[MathZeitMasseLagrange](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/MathZeitMasseLagrangeEn.pdf)** - Mathematical foundations of time-mass duality
-- **[Teilchenmassen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Teilchenmassen_En.pdf)** (401KB) - Parameter-free particle mass calculations
+- **[Teilchenmassen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Teilchenmassen_En.pdf)** (414KB) - Parameter-free particle mass calculations
 - **[QM-Detrmistic_p](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-Detrmistic_p_En.pdf)** (631KB) - Deterministic vs probabilistic quantum mechanics
 - **[HdokumentEn](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/HdokumentEn.pdf)** - Complete T0 framework master document
 - **[systemEn](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/systemEn.pdf)** - Complete T0 system analysis
@@ -64,10 +64,12 @@ All documents available in German and English versions:
 - **[musical-spiral-137](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/musical-spiral-137-En.pdf)** - Musical spiral and 137
 - **[Feinstrukturkonstante](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/FeinstrukturkonstanteEn.pdf)** - Extended fine structure constant analysis
 
-### Particle Physics & Experimental Results (6 files)
+### Particle Physics & Experimental Results (8 files)
 - **[CompleteMuon_g-2_Analysis](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/CompleteMuon_g-2_AnalysisEn.pdf)** - 0.05σ agreement with experiment
+- **[CompleteMuon_g-2_fraktal](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/CompleteMuon_g-2_fraktal_En.pdf)** - Fractal approach to muon g-2 (NEW)
 - **[Ho](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Ho_En.pdf)** - Hydrogen energy analysis
 - **[DynMassePhotonenNichtlokal](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/DynMassePhotonenNichtlokalEn.pdf)** - Dynamic mass and non-local photons
+- **[detailierte_formel_leptonen_anemal](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/detailierte_formel_leptonen_anemal_En.pdf)** - Detailed lepton anomaly formulas (NEW)
 
 ### Cosmology & Astrophysics (8 files)
 - **[cosmic](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/cosmic_En.pdf)** - Cosmological applications
@@ -75,7 +77,7 @@ All documents available in German and English versions:
 - **[redshift_deflection](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/redshift_deflection_En.pdf)** - Wavelength-dependent redshift and deflection
 - **[gravitationskonstnte](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/gravitationskonstnte_En.pdf)** - Geometric determination of gravitational constant
 
-### Mathematical Foundations (14 files)
+### Mathematical Foundations (16 files)
 - **[DerivationVonBeta](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/DerivationVonBetaEn.pdf)** - Beta parameter derivation from field theory
 - **[parameterherleitung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/parameterherleitung_En.pdf)** - Parameter derivation methods
 - **[ResolvingTheConstantsAlfa](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/ResolvingTheConstantsAlfaEn.pdf)** - Resolving constants α=1
@@ -83,12 +85,19 @@ All documents available in German and English versions:
 - **[NatEinheitenSystematik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/NatEinheitenSystematikEn.pdf)** - Natural units systematics
 - **[ParameterSystemdipendent](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/ParameterSystemdipendentEn.pdf)** - Parameter system dependencies
 - **[xi_parmater_partikel](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/xi_parmater_partikel_En.pdf)** - Xi parameter and particles
+- **[Notwendigkeit_zwei_lagrange](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Notwendigkeit_zwei_lagrange_En.pdf)** - Necessity of two Lagrangians (NEW)
 
 ### Quantum Computing & Cryptography (6 files)
 - **[RSA](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/RSA_En.pdf)** - RSA analysis in T0 framework
 - **[RSAtest](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/RSAtest_En.pdf)** - RSA testing procedures
 - **[QM-Detrmistic](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-DetrmisticEn.pdf)** - Deterministic quantum mechanics
 - **[QM-testen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-testenEn.pdf)** - Quantum mechanics testing
+
+### Quantum Field Theory Integration (4 files) (NEW Section)
+- **[QFT](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QFT_En.pdf)** - Quantum field theory in T0 framework
+- **[hirachie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/hirachie_En.pdf)** - Hierarchy problem solutions
+- **[bell-myon](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/bell-myon.pdf)** - Bell tests and muon anomaly connection
+- **[myon-2726-zeilen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/myon-2726-zeilen.pdf)** - Detailed 2726-line muon calculation
 
 ### Energy & Motion Analysis (6 files)
 - **[Bewegungsenergie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Bewegungsenergie_En.pdf)** - Kinetic energy in T0 framework
@@ -182,6 +191,7 @@ All documents available in German and English versions:
 - **Fine Structure Constant**: Explains WHY α ≈ 1/137 from fractal geometry
 - **Muon g-2 Anomaly**: 0.05σ agreement (best theory worldwide!)
 - **Simplified Physics**: Dirac equation reduced from 4x4 matrices to field nodes
+- **Bell Test Connection**: Quantum correlations and lepton anomalies from same source (NEW)
 
 ## Key Insights August 2025
 
@@ -208,7 +218,7 @@ All documents available in German and English versions:
 3. **Listen to Podcasts**: [T0 Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)
 4. **Test Mass Formula**: [Particle Calculator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/simple_mass_formula.html)
 5. **Explore RSA**: Check `/rsa/` directory
-6. **Read Papers**: Technical documents in `2/pdf/` (78 files)
+6. **Read Papers**: Technical documents in `2/pdf/` (82 files)
 7. **Run Python**: Try `authentic_t0_quantum.py`
 
 ## Repository Access & Media
@@ -223,7 +233,7 @@ All documents available in German and English versions:
 - **[T0 Audio Library on Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)**  
 *Complete podcast series with comprehensive discussions*
 
-- **Technical Papers**: 78 documents (30MB) in `2/pdf/`
+- **Technical Papers**: 82 documents (32MB) in `2/pdf/`
 - **Interactive Tools**: 18 HTML applications in `2/html/`
 - **Python Code**: 5 direct implementations
 - **Signal Processing**: 3 audio analysis tools
