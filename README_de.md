@@ -76,7 +76,7 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 ### Teilchenphysik & Experimentelle Ergebnisse (12 Dateien)
 - **[CompleteMuon_g-2_Analysis](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/CompleteMuon_g-2_AnalysisDe.pdf)** - 0.05σ Übereinstimmung mit Experiment
 - **[CompleteMuon_g-2_fraktal](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/CompleteMuon_g-2_fraktal_De.pdf)** - Fraktaler Ansatz zu Muon g-2
-- **[Ho](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Ho_De.pdf)** - Wasserstoff-Energieanalyse
+- **[Ho](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Ho_De.pdf)** - Hubble-Konstanten-Analyse
 - **[DynMassePhotonenNichtlokal](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/DynMassePhotonenNichtlokalDe.pdf)** - Dynamische Masse und nicht-lokale Photonen
 - **[detailierte_formel_leptonen_anemal](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/detailierte_formel_leptonen_anemal_De.pdf)** - Detaillierte Leptonen-Anomalie-Formeln
 - **[neutrino-Formel](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/neutrino-Formel_De.pdf)** - Neutrino-Formel-Entwicklungen
