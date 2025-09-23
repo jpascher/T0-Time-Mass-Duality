@@ -107,11 +107,10 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 - **[QM-Detrmistic_p](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-Detrmistic_p_De.pdf)** - Deterministische vs. probabilistische Quantenmechanik
 - **[QM-testen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-testenDe.pdf)** - Quantenmechanik-Tests
 
-### Quantenfeldtheorie-Integration (4 Dateien)
+### Quantenfeldtheorie-Integration (3 Dateien)
 - **[QFT](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QFT_De.pdf)** - Quantenfeldtheorie im T0-Rahmen
 - **[hirachie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/hirachie_De.pdf)** - Hierarchie-Problem-Lösungen
 - **[bell-myon](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/bell-myon.pdf)** - Bell-Tests und Muon-Anomalie-Verbindung
-- **[myon-2726-zeilen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/myon-2726-zeilen.pdf)** - Detaillierte 2726-zeilige Muon-Berechnung
 
 ### Energie & Bewegungsanalyse (8 Dateien)
 - **[Bewegungsenergie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Bewegungsenergie_De.pdf)** - Kinetische Energie im T0-Rahmen
