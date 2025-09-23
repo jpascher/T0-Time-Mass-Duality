@@ -22,7 +22,7 @@ Das T0-Modell schlägt einen Ansatz für die fundamentale Physik durch Zeit-Ener
 T0-Zeit-Masse-Dualität/
 ├── 2/
 │   ├── html/                     # Interaktive HTML-Explorationen (18 Dateien)
-│   ├── pdf/                      # Technische Dokumente (82 Dateien, August 2025)
+│   ├── pdf/                      # Technische Dokumente (125 Dateien, September 2025)
 │   ├── tex/                      # LaTeX-Quelldateien
 │   ├── esotherik.md             # Esoterische Betrachtungen
 │   ├── OntologischeAequivalenz.md # Ontologische Äquivalenz (DE/EN)
@@ -38,19 +38,29 @@ T0-Zeit-Masse-Dualität/
 └── README.md / README_de.md     # Dokumentation
 ```
 
-## Vollständige PDF-Dokumentation (82 Dateien, ~32MB insgesamt)
+## Vollständige PDF-Dokumentation (125 Dateien, ~45MB insgesamt)
 
 Alle Dokumente in deutscher und englischer Version verfügbar:
 
+### Aktuelle Umfassende Zusammenfassungsserie (16 Dateien)
+- **[T0_Grundlagen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Grundlagen_De.pdf)** - Fundamentale T0-Rahmenwerk-Grundlagen (erstes Dokument der aktuellen Zusammenfassung)
+- **[T0_Feinstruktur](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Feinstruktur_De.pdf)** - Mathematische Herleitung der Feinstrukturkonstante
+- **[T0_Gravitationskonstante](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Gravitationskonstante_De.pdf)** - Detaillierte Berechnung der Gravitation
+- **[T0_Teilchenmassen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Teilchenmassen_De.pdf)** - Systematische Massenberechnung aller Fermionen
+- **[T0_Neutrinos](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Neutrinos_De.pdf)** - Spezialbehandlung der Neutrino-Physik
+- **[T0_Anomale_Magnetische_Momente](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Anomale_Magnetische_Momente_De.pdf)** - Lösung der Myon g-2 Anomalie
+- **[T0_Kosmologie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Kosmologie_De.pdf)** - Kosmologische Anwendungen der T0-Theorie
+- **[T0_QM-QFT-RT](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_QM-QFT-RT_De.pdf)** - Vollständige Quantenfeldtheorie im T0-Framework mit Quantenmechanik und Quantencomputer-Anwendungen
+
 ### Kerntheorie-Dokumente (16 Dateien)
-- **[T0-Energie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-Energie_De.pdf)** (748KB) - Umfassendste energiebasierte Formulierung
+- **[T0-Energie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-Energie_De.pdf)** (771KB) - Umfassendste energiebasierte Formulierung
 - **[MathZeitMasseLagrange](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/MathZeitMasseLagrangeDe.pdf)** - Mathematische Grundlagen der Zeit-Masse-Dualität
-- **[Teilchenmassen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Teilchenmassen_De.pdf)** (443KB) - Parameterfreie Teilchenmassenberechnungen
-- **[QM-Detrmistic_p](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-Detrmistic_p_De.pdf)** (783KB) - Deterministische vs. probabilistische Quantenmechanik
 - **[HdokumentDe](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/HdokumentDe.pdf)** - Vollständiges T0-Rahmenwerk Master-Dokument
 - **[systemDe](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/systemDe.pdf)** - Vollständige T0-Systemanalyse
 - **[EliminationOfMass](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/EliminationOfMassDe.pdf)** - Mathematischer Rahmen zur Massenelimination
 - **[dirac](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/diracDe.pdf)** - Dirac-Gleichung im T0-Rahmen
+- **[Mathematische_struktur](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Mathematische_struktur_De.pdf)** - Mathematische Strukturanalyse
+- **[Zusammenfassung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Zusammenfassung_De.pdf)** - Umfassendes Zusammenfassungsdokument
 
 ### Revolutionäre Vereinfachungen (8 Dateien)
 - **[diracVereinfacht](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/diracVereinfachtDe.pdf)** - Vereinfachte Dirac von Matrizen zu Feldern
@@ -60,24 +70,26 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 
 ### Feinstrukturkonstanten-Analyse (8 Dateien)
 - **[137](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/137_De.pdf)** - Umfassende 137-Analyse
-- **[fractal-137](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/fractal-137_De.pdf)** - Fraktale Struktur von 137
+- **[FeinstrukturkonstanteDe](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/FeinstrukturkonstanteDe.pdf)** - Erweiterte Feinstrukturkonstanten-Analyse
 - **[musical-spiral-137](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/musical-spiral-137-De.pdf)** - Musikalische Spirale und 137
-- **[Feinstrukturkonstante](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/FeinstrukturkonstanteDe.pdf)** - Erweiterte Feinstrukturkonstanten-Analyse
 
-### Teilchenphysik & Experimentelle Ergebnisse (8 Dateien)
+### Teilchenphysik & Experimentelle Ergebnisse (12 Dateien)
 - **[CompleteMuon_g-2_Analysis](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/CompleteMuon_g-2_AnalysisDe.pdf)** - 0.05σ Übereinstimmung mit Experiment
-- **[CompleteMuon_g-2_fraktal](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/CompleteMuon_g-2_fraktal_De.pdf)** - Fraktaler Ansatz zu Muon g-2 (NEU)
+- **[CompleteMuon_g-2_fraktal](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/CompleteMuon_g-2_fraktal_De.pdf)** - Fraktaler Ansatz zu Muon g-2
 - **[Ho](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Ho_De.pdf)** - Wasserstoff-Energieanalyse
 - **[DynMassePhotonenNichtlokal](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/DynMassePhotonenNichtlokalDe.pdf)** - Dynamische Masse und nicht-lokale Photonen
-- **[detailierte_formel_leptonen_anemal](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/detailierte_formel_leptonen_anemal_De.pdf)** - Detaillierte Leptonen-Anomalie-Formeln (NEU)
+- **[detailierte_formel_leptonen_anemal](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/detailierte_formel_leptonen_anemal_De.pdf)** - Detaillierte Leptonen-Anomalie-Formeln
+- **[neutrino-Formel](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/neutrino-Formel_De.pdf)** - Neutrino-Formel-Entwicklungen
+- **[teilchenmmassen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/teilchenmmassen_De.pdf)** - Umfassende Teilchenmassenberechnungen
 
-### Kosmologie & Astrophysik (8 Dateien)
+### Kosmologie & Astrophysik (10 Dateien)
 - **[cosmic](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/cosmic_De.pdf)** - Kosmologische Anwendungen
 - **[TempEinheitenCMB](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/TempEinheitenCMBDe.pdf)** - CMB im statischen ξ-Universum
 - **[redshift_deflection](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/redshift_deflection_De.pdf)** - Wellenlängenabhängige Rotverschiebung und Ablenkung
-- **[gravitationskonstnte](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/gravitationskonstnte_De.pdf)** - Geometrische Bestimmung der Gravitationskonstante
+- **[gravitationskonstante](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/gravitationskonstante_De.pdf)** - Geometrische Bestimmung der Gravitationskonstante
+- **[scheinbar_instantan](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/scheinbar_instantan_De.pdf)** - Scheinbar instantane Effekte
 
-### Mathematische Grundlagen (16 Dateien)
+### Mathematische Grundlagen (18 Dateien)
 - **[DerivationVonBeta](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/DerivationVonBetaDe.pdf)** - Beta-Parameter-Ableitung aus Feldtheorie
 - **[parameterherleitung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/parameterherleitung_De.pdf)** - Parameter-Ableitungsmethoden
 - **[ResolvingTheConstantsAlfa](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/ResolvingTheConstantsAlfaDe.pdf)** - Auflösung der Konstanten α=1
@@ -85,26 +97,29 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 - **[NatEinheitenSystematik](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/NatEinheitenSystematikDe.pdf)** - Systematik natürlicher Einheiten
 - **[ParameterSystemdipendent](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/ParameterSystemdipendentDe.pdf)** - Parameter-System-Abhängigkeiten
 - **[xi_parmater_partikel](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/xi_parmater_partikel_De.pdf)** - Xi-Parameter und Teilchen
-- **[Notwendigkeit_zwei_lagrange](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Notwendigkeit_zwei_lagrange_De.pdf)** - Notwendigkeit zweier Lagrange-Funktionen (NEU)
+- **[Notwendigkeit_zwei_lagrange](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Notwendigkeit_zwei_lagrange_De.pdf)** - Notwendigkeit zweier Lagrange-Funktionen
+- **[Zeit](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Zeit_De.pdf)** - Zeitanalyse im T0-Rahmen
 
-### Quantencomputing & Kryptographie (6 Dateien)
+### Quantencomputing & Kryptographie (8 Dateien)
 - **[RSA](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/RSA_De.pdf)** - RSA-Analyse im T0-Rahmen
 - **[RSAtest](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/RSAtest_De.pdf)** - RSA-Testverfahren
 - **[QM-Detrmistic](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-DetrmisticDe.pdf)** - Deterministische Quantenmechanik
+- **[QM-Detrmistic_p](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-Detrmistic_p_De.pdf)** - Deterministische vs. probabilistische Quantenmechanik
 - **[QM-testen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM-testenDe.pdf)** - Quantenmechanik-Tests
 
-### Quantenfeldtheorie-Integration (4 Dateien) (NEUE Sektion)
+### Quantenfeldtheorie-Integration (4 Dateien)
 - **[QFT](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QFT_De.pdf)** - Quantenfeldtheorie im T0-Rahmen
 - **[hirachie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/hirachie_De.pdf)** - Hierarchie-Problem-Lösungen
 - **[bell-myon](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/bell-myon.pdf)** - Bell-Tests und Muon-Anomalie-Verbindung
 - **[myon-2726-zeilen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/myon-2726-zeilen.pdf)** - Detaillierte 2726-zeilige Muon-Berechnung
 
-### Energie & Bewegungsanalyse (6 Dateien)
+### Energie & Bewegungsanalyse (8 Dateien)
 - **[Bewegungsenergie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Bewegungsenergie_De.pdf)** - Kinetische Energie im T0-Rahmen
 - **[Zeit-konstant](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Zeit-konstant_De.pdf)** - Zeitkonstanten-Analyse
 - **[E-mc2](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/E-mc2_De.pdf)** - E=mc² Neuinterpretation
+- **[Amper_Low](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Amper_Low_De.pdf)** - Niedrigenergie-Ampere-Analyse
 
-### Spezialeffekte & Fortgeschrittene Themen (8 Dateien)
+### Spezialeffekte & Fortgeschrittene Themen (10 Dateien)
 - **[Casimir](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Casimir_De.pdf)** - Casimir-Effekt in T0
 - **[T0vsESM_ConceptualAnalysis](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0vsESM_ConceptualAnalysis_De.pdf)** - T0 vs Erweitertes Standardmodell
 - **[T0_netze](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_netze_De.pdf)** - T0-Netzwerktheorie
@@ -183,7 +198,7 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 - **Parameterfreie Theorie**: Einzelne geometrische Konstante definiert die gesamte Physik
 - **Deterministischer Rahmen**: Alternative zur probabilistischen Quantenmechanik
 
-### Revolutionäre Ergebnisse (Aktualisiert August 2025)
+### Revolutionäre Ergebnisse (Aktualisiert September 2025)
 - **Null freie Parameter**: 20+ Parameter des Standardmodells → 0 Parameter
 - **98% durchschnittliche Genauigkeit**: Alle Teilchenmassen aus der einzigen Formel E = 1/ξ
 - **Vereinheitlichte Feldtheorie**: Ein Energiefeld erklärt alle 61+ bekannten Teilchen
@@ -191,9 +206,9 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 - **Feinstrukturkonstante**: Erklärt WARUM α ≈ 1/137 aus fraktaler Geometrie
 - **Muon g-2 Anomalie**: 0.05σ Übereinstimmung (beste Theorie weltweit!)
 - **Vereinfachte Physik**: Dirac-Gleichung reduziert von 4x4-Matrizen zu Feldknoten
-- **Bell-Test-Verbindung**: Quantenkorrelationen und Leptonen-Anomalien aus derselben Quelle (NEU)
+- **Bell-Test-Verbindung**: Quantenkorrelationen und Leptonen-Anomalien aus derselben Quelle
 
-## Wichtigste Erkenntnisse August 2025
+## Wichtigste Erkenntnisse September 2025
 
 ### Die Feinstruktur-Doppelwahrheit
 1. **Man KANN α = 1 setzen** (natürliche Einheiten)
@@ -218,7 +233,7 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 3. **Podcasts hören**: [T0 Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)
 4. **Massenformel testen**: [Teilchenrechner](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/simple_mass_formula.html)
 5. **RSA erkunden**: Verzeichnis `/rsa/` prüfen
-6. **Papiere lesen**: Technische Dokumente in `2/pdf/` (82 Dateien)
+6. **Papiere lesen**: Technische Dokumente in `2/pdf/` (125 Dateien)
 7. **Python ausführen**: `authentic_t0_quantum.py` ausprobieren
 
 ## Repository-Zugriff & Medien
@@ -233,7 +248,7 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 - **[T0-Audiobibliothek auf Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)**  
 *Vollständige Podcast-Serie mit umfassenden Diskussionen*
 
-- **Technische Papiere**: 82 Dokumente (32MB) in `2/pdf/`
+- **Technische Papiere**: 125 Dokumente (45MB) in `2/pdf/`
 - **Interaktive Tools**: 18 HTML-Anwendungen in `2/html/`
 - **Python-Code**: 5 direkte Implementierungen
 - **Signalverarbeitung**: 3 Audioanalysetools
