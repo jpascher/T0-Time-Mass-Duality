@@ -1,5 +1,5 @@
 # T0-Time-Mass-Duality: A Unified Framework for Quantum Mechanics and Relativity
-
+[<image-card alt="DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.17390358.svg" ></image-card>](https://doi.org/10.5281/zenodo.17390358)
 ## Overview
 
 The T0 model proposes an approach to fundamental physics through time-energy duality, where the intrinsic time field T(x,t) provides a unified treatment of quantum mechanics and relativity. This framework operates with the universal geometric parameter ξ = (4/3) × 10⁻⁴ derived from three-dimensional space geometry, establishing the fundamental relationship T_field · E_field = 1.
