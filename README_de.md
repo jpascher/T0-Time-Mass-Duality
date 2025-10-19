@@ -1,5 +1,11 @@
 # T0-Zeit-Masse-Dualität: Ein einheitlicher Rahmen für Quantenmechanik und Relativität
+## Releases & Citations
+
+Die T0-Serie ist archiviert! Zitiere sie mit:
+
 [<image-card alt="DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.17390358.svg" ></image-card>](https://doi.org/10.5281/zenodo.17390358)
+
+Vollständige Bibliographie: [v1.2 Release](https://github.com/jpascher/T0-Time-Mass-Duality/releases/tag/v1.2)
 ## Überblick
 
 Das T0-Modell schlägt einen Ansatz für die fundamentale Physik durch Zeit-Energie-Dualität vor, bei dem das intrinsische Zeitfeld T(x,t) eine einheitliche Behandlung von Quantenmechanik und Relativität ermöglicht. Dieser Rahmen arbeitet mit dem universellen geometrischen Parameter ξ = (4/3) × 10⁻⁴, der aus der Geometrie des dreidimensionalen Raums abgeleitet ist, und etabliert die fundamentale Beziehung T_field · E_field = 1.
