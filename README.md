@@ -330,3 +330,25 @@ For research inquiries or technical questions, please create an issue in this re
 *The T0-Time-Mass-Duality Model represents a theoretical framework for unifying quantum mechanics and relativity through deterministic field dynamics. All claims and predictions require further experimental verification.*
 
 *"From ξ alone flows all of physics - one parameter, infinite beauty."*
+---
+title: T0-Assistent: Geometrischer Physik-Helper
+emoji: 🔬
+colorFrom: blue
+colorTo: green
+sdk: gradio
+sdk_version: 4.44.0
+python_version: 3.12
+app_file: app.py
+
+hf_oauth: true
+# Expiration: 8 Stunden default (max 30 Tage)
+hf_oauth_expiration_minutes: 480
+# Scopes: Profil + E-Mail (erweitere bei Bedarf)
+hf_oauth_scopes:
+  - openid
+  - profile
+  - email
+# Optional: Nur für Orgs (z. B. Physik-Gruppe)
+# hf_oauth_authorized_org:
+#   - physics-group
+---
