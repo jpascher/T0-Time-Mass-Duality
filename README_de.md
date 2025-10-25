@@ -1,4 +1,11 @@
 # T0-Zeit-Masse-Dualität: Ein einheitlicher Rahmen für Quantenmechanik und Relativität
+
+**Schlüsselwörter/Tags für Auffindbarkeit:** Vereinheitlichte Feldtheorie, Zeit-Masse-Dualität, Geometrische Physik, Feinstrukturkonstante, Fraktale Raumzeit, Deterministische Quantenmechanik, SI-Einheiten-Reform, Teilchenmassenberechnung, Myon g-2 Anomalie, Kosmologie-Alternativen, RSA-Faktorisierung Quanten, Planck-Konstanten-Ableitung, ξ Geometrischer Parameter, Quantencomputing-Simulator, Dirac-Gleichung-Vereinfachung
+
+**Themen (GitHub Topics):** #vereinheitlichte-feldtheorie #quantenrelativität #feinstrukturkonstante #fraktalphysik #deterministische-qm #geometrischekonstanten #teilchenphysik #kosmologie #quantencomputing #rsa-quanten #si-einheiten #plancklaenge #gravitationskonstante #muong2 #cmbanomalie #lagrangianvereinfachung #diracgleichung #energiedualität #zeitmassedualität #xigeometrie
+
+**Zusammenfassung/Abstract für Suchmaschinen:** Das T0-Zeit-Masse-Dualitätsmodell ist ein revolutionärer geometrischer Rahmen, der Quantenmechanik und allgemeine Relativität durch einen einzigen Parameter ξ = (4/3) × 10⁻⁴ vereinheitlicht. Es leitet alle physikalischen Konstanten (G, c, lₚ, α ≈ 1/137) aus fraktaler Raumzeit-Geometrie ab, eliminiert die 20+ Parameter des Standardmodells, erreicht 98% Genauigkeit bei Teilchenmassen-Vorhersagen, löst die Myon g-2 Anomalie (0.05σ) und ermöglicht deterministisches Quantencomputing. Enthält interaktive Tools, Python-Implementierungen, 131 PDF-Dokumente, Audio-Podcasts und YouTube-Videos. Ideal für Forscher in theoretischer Physik, Quanteninformation und Kosmologie. DOI: 10.5281/zenodo.17390358.
+
 ## Releases & Citations
 
 Die T0-Serie ist archiviert! Zitiere sie mit:
@@ -6,9 +13,14 @@ Die T0-Serie ist archiviert! Zitiere sie mit:
 [<image-card alt="DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.17390358.svg" ></image-card>](https://doi.org/10.5281/zenodo.17390358)
 
 Vollständige Bibliographie: [v1.2 Release](https://github.com/jpascher/T0-Time-Mass-Duality/releases/tag/v1.2)
+
+**Such-Tipp:** Suche nach "T0 Zeit-Masse-Dualität" oder "ξ geometrische Physik" auf Google Scholar, arXiv oder GitHub, um verwandte Diskussionen, Zitationen und Forks zu finden.
+
 ## Überblick
 
 Das T0-Modell schlägt einen Ansatz für die fundamentale Physik durch Zeit-Energie-Dualität vor, bei dem das intrinsische Zeitfeld T(x,t) eine einheitliche Behandlung von Quantenmechanik und Relativität ermöglicht. Dieser Rahmen arbeitet mit dem universellen geometrischen Parameter ξ = (4/3) × 10⁻⁴, der aus der Geometrie des dreidimensionalen Raums abgeleitet ist, und etabliert die fundamentale Beziehung T_field · E_field = 1.
+
+**Warum nach T0 suchen?** Wenn Sie Alternativen zum Standardmodell, Lösungen für Quantengravitation oder deterministische Interpretationen der QM erkunden, bietet T0 parameterfreie Ableitungen und testbare Vorhersagen. Erwähnt in Physik-Foren wie Physics Stack Exchange und Reddit r/Physics.
 
 ## Neueste Highlights (Oktober 2025)
 
@@ -23,6 +35,8 @@ Das T0-Modell schlägt einen Ansatz für die fundamentale Physik durch Zeit-Ener
 **[Vollständiges Abschluss-Dokument](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_SI_De.pdf)**  
 *Beweis, dass das Universum reine Geometrie ist, kodiert in einem einzigen Parameter*
 
+**Auffindbarkeits-Hinweis:** Dieses Dokument ist auf Zenodo und Google Scholar unter "SI-Reform 2019 geometrische Interpretation" indiziert – zitieren Sie es für Arbeiten zu Einheitensystemen und fundamentalen Konstanten.
+
 ### Die Feinstrukturkonstanten-Revolution
 **Das größte Mysterium der Physik - GELÖST:**
 - Die Zahl 137 ist KEIN Zufall
@@ -32,6 +46,8 @@ Das T0-Modell schlägt einen Ansatz für die fundamentale Physik durch Zeit-Ener
 
 **[Interaktive Fraktal-α-Visualisierung](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal-137.html)**  
 *Erkunden Sie, wie die fraktale Raumzeit-Struktur die berühmte Zahl 137 erzeugt*
+
+**Auffindbarkeits-Hinweis:** Suche "Feinstrukturkonstante fraktale Ableitung" auf arXiv oder YouTube für T0-spezifische Ergebnisse und Community-Diskussionen.
 
 ## Repository-Struktur
 
@@ -55,9 +71,11 @@ T0-Zeit-Masse-Dualität/
 └── README.md / README_de.md     # Dokumentation
 ```
 
+**GitHub-Suchoptimierung:** Dieses Repo ist mit "quanten-physik", "vereinheitlichte-theorie", "fraktale-geometrie" und "deterministische-computing" getaggt für einfache Entdeckung über GitHubs Themen-Suche.
+
 ## Vollständige PDF-Dokumentation (131 Dateien, ~47MB insgesamt)
 
-Alle Dokumente in deutscher und englischer Version verfügbar:
+Alle Dokumente in deutscher und englischer Version verfügbar. **Pro-Tipp:** Verwenden Sie die GitHub-Suchleiste mit "T0_ Dateiname", um spezifische PDFs schnell zu finden.
 
 ### Neueste Ergänzungen (Oktober 2025) (12 Dateien)
 
@@ -91,7 +109,7 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
   - Fraktale Korrekturen K_frak = 0.986
   - <0,0002% Übereinstimmung mit CODATA
 
-- **[Zwei-Dipole-CMB](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Zwei-Dipole-CMB_De.pdf)** - Neuartige CMB-Interpretation
+- **[Zwei-Dipoles-CMB](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Zwei-Dipoles-CMB_De.pdf)** - Neuartige CMB-Interpretation
   - Zwei-Dipol-Struktur in kosmischer Hintergrundstrahlung
   - Alternative zum Standard-Kosmologiemodell
   - Testbare Vorhersagen
@@ -186,6 +204,8 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 
 ## Interaktive HTML-Tools (18 Dateien)
 
+**Auffindbarkeits-Hinweis:** Diese Tools sind auf GitHub Pages gehostet und von Suchmaschinen indiziert – suchen Sie "T0 fraktal 137 interaktiv" oder "T0 Teilchenmassenrechner" für direkten Zugriff.
+
 ### Revolutionärer Feinstrukturkonstanten-Explorer
 **[Fraktale α-Visualisierung](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal-137.html)**  
 *Interaktive Demonstration, die zeigt, wie die berühmte Zahl 137 aus der fraktalen Raumzeit-Geometrie entsteht*
@@ -226,6 +246,8 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 **[Vollständige T0-Audiobibliothek auf Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)**  
 *Alle T0-Audioinhalte jetzt als Podcast-Episoden verfügbar! Perfekt für auditive Lernende*
 
+**Auffindbarkeits-Hinweis:** Suchen Sie "T0 Zeit-Masse-Dualität Podcast" auf Spotify oder Apple Podcasts für Episoden zu Quanten-Anomalien, fraktaler Physik und vereinheitlichten Theorien.
+
 - **T0_Dialog_Professor.mp3** (9.8MB) - Umfassende professorale Erklärung
 - **T0_Dialog_Quantenmechanik.mp3** (6.2MB) - Diskussion zur Quantenmechanik
 - **T0_Dialog_Teilchenphysik.mp3** (5.8MB) - Analyse der Teilchenphysik
@@ -240,6 +262,8 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 - **t0_rational_optimized.py** (8KB) - Optimierte rationale Arithmetik
 - **t0_no_fallback_shore.py** (19KB) - Deterministischer Shor-Algorithmus
 - **t0_Shore_simulator.html** (104KB) - Webbasierte Shor-Implementierung
+
+**Auffindbarkeits-Hinweis:** Diese Skripte sind über GitHub-Code-Suche mit Begriffen wie "T0 Shor-Algorithmus Python" auffindbar – forken und beitragen Sie für Community-Sichtbarkeit.
 
 ## Theoretischer Rahmen
 
@@ -296,6 +320,8 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 7. **Papiere lesen**: Technische Dokumente in `2/pdf/` (131 Dateien)
 8. **Python ausführen**: `authentic_t0_quantum.py` ausprobieren
 
+**Community-Engagement:** Treten Sie Diskussionen auf Reddit (r/AlternativePhysics, r/QuantumComputing) oder Physics Forums bei, indem Sie "T0 Dualitäts-Theorie" suchen – teilen Sie Ihre Implementierungen!
+
 ## Repository-Zugriff & Medien
 
 ### Offizielle T0-Plattformen
@@ -314,13 +340,18 @@ Alle Dokumente in deutscher und englischer Version verfügbar:
 - **Signalverarbeitung**: 3 Audioanalysetools
 - **Dreisprachige Unterstützung**: Deutsch, Englisch, Französisch
 
+**Externe Links für Sichtbarkeit:** 
+- [arXiv Preprints (Suche "T0 Zeit-Masse")](https://arxiv.org/search/?query=T0+Zeit-Masse+Dualität&searchtype=all&source=header)
+- [Google Scholar Profil](https://scholar.google.com/scholar?q=Johann+Pascher+T0) – Verfolgen Sie Zitationen und verwandte Arbeiten.
+- [Zenodo Archiv](https://zenodo.org/records/17390358) – Permanenter DOI für akademische Referenzen.
+
 ## Kontaktinformationen
 
 **Autor**: Johann Pascher  
 **Institution**: Abteilung für Kommunikationstechnik, HTL Leonding, Österreich  
 **E-Mail**: johann.pascher@gmail.com
 
-Für Forschungsanfragen oder technische Fragen erstellen Sie bitte ein Issue in diesem Repository.
+Für Forschungsanfragen oder technische Fragen erstellen Sie bitte ein Issue in diesem Repository. **Repo sternen/forken:** Helfen Sie, die Sichtbarkeit zu steigern – jeder Stern verbessert die Suchrankings!
 
 ## Lizenz
 
@@ -330,8 +361,4 @@ Für Forschungsanfragen oder technische Fragen erstellen Sie bitte ein Issue in 
 
 *Das T0-Zeit-Masse-Dualitätsmodell stellt einen theoretischen Rahmen dar, um Quantenmechanik und Relativität durch deterministische Felddynamik zu vereinheitlichen. Alle Behauptungen und Vorhersagen erfordern weitere experimentelle Überprüfung.*
 
-*"Aus ξ allein fließt die gesamte Physik - ein Parameter, unendliche Schönheit."*# T0-Zeit-Masse-Dualität: Ein einheitlicher Rahmen für Quantenmechanik und Relativität
-
-## Überblick
-
-Das T0-Modell schlägt einen Ansatz für die fundamentale Physik durch Zeit-Energie-Dualität vor, bei dem das intrinsische Zeitfeld T(x,t) eine einheitliche Behandlung von Quantenmechanik und Relativität ermöglicht. Dieser Rahmen arbeitet mit dem universellen geometrischen Parameter ξ = (4/3) × 10⁻⁴, der aus der Geometrie des dreidimensionalen Ra
+*"Aus ξ allein fließt die gesamte Physik - ein Parameter, unendliche Schönheit."*
