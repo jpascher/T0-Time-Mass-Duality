@@ -1,4 +1,5 @@
 @echo off
+chcp 65001
 cd /d %~dp0
 
 :: Überprüfe, ob .gitignore existiert, und erstelle eine, falls nicht vorhanden
