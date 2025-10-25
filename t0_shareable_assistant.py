@@ -1,15 +1,10 @@
 import gradio as gr
-from transformers import pipeline
-import torch
+from transformers import pipeline  # Optional für LLM-Erweiterung
 
-# Optional: Lade GPT-2 für smarte Generierung (erster Run lädt ~500 MB)
-try:
-    generator = pipeline('text-generation', model='gpt2', device=-1)  # CPU-only
-except Exception as e:
-    print(f"Modell-Load-Fehler: {e} – Fallback zu Rule-Based.")
-    generator = None
+# Optional: Lade GPT-2 für smarte Generierung (erster Run lädt Modell)
+generator = pipeline('text-generation', model='gpt2', device=-1) if 'generator' not in globals() else generator
 
-# T0-Wissensbasis (aus deinen Docs – erweitere bei Bedarf)
+# T0-Wissensbasis (aus deinen Docs – erweitere hier)
 t0_knowledge = {
     "dualität": "Zeit-Masse-Dualität: T · m = 1 (c=ℏ=1). Masse m = 1/T = ω. Hohe Masse → dilatierte Zeit (Krümmung als m-Variation).",
     "xi": "ξ ≈ 4/3 × 10^{-4}: Universeller Fraktionsfaktor für tetraedrische Packungen (D_f ≈ 2.94). Supprimiert Divergenzen.",
@@ -30,13 +25,9 @@ def t0_response(message):
             found = True
     if not found:
         # Fallback: Generiere mit GPT-2 (smarter Touch)
-        if generator:
-            full_prompt = "T0-Theorie Erklärung: " + message + " (kurz, geometrisch)."
-            gen = generator(full_prompt, max_new_tokens=80, temperature=0.5, do_sample=True, truncation=True)
-            response += gen[0]['generated_text'].strip() + "\n"
-        else:
-            response += "Keine direkte Übereinstimmung. Frag nach 'Dualität', 'ξ', 'Cutoff', 'Vorhersagen', 'Testbar', 'Universum', 'Präsentation'.\n"
-    response += "Voll-Docs: https://github.com/jpascher/T0-Time-Mass-Duality."
+        full_prompt = "T0-Theorie Erklärung: " + message + " (kurz, geometrisch)."
+        gen = generator(full_prompt, max_new_tokens=50, temperature=0.5, do_sample=True, truncation=True)
+        response += gen[0]['generated_text'].strip() + "\nVoll-Docs: https://github.com/jpascher/T0-Time-Mass-Duality."
     return response
 
 # Web-App mit Gradio (öffentlich teilerbar)
@@ -50,4 +41,4 @@ demo = gr.Interface(
 )
 
 if __name__ == "__main__":
-    demo.launch(share=True)  # Erzeugt öffentlichen Link (falls Internet ok)
+    demo.launch(share=True)  # Erzeugt öffentlichen Link!
