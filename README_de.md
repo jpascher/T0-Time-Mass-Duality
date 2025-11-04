@@ -7,11 +7,13 @@
 **Zusammenfassung/Abstract für Suchmaschinen:** Das T0-Zeit-Masse-Dualitätsmodell ist ein revolutionärer geometrischer Rahmen, der Quantenmechanik und allgemeine Relativität durch einen einzigen Parameter ξ = (4/3) × 10⁻⁴ vereinheitlicht. Es leitet alle physikalischen Konstanten (G, c, lₚ, α ≈ 1/137) aus fraktaler Raumzeit-Geometrie ab, eliminiert die 20+ Parameter des Standardmodells, erreicht 98% Genauigkeit bei Teilchenmassen-Vorhersagen, löst die Myon g-2 Anomalie (0.05σ) und ermöglicht deterministisches Quantencomputing. Enthält interaktive Tools, Python-Implementierungen, 172 PDF-Dokumente, Audio-Podcasts und YouTube-Videos. Ideal für Forscher in theoretischer Physik, Quanteninformation und Kosmologie. DOI: 10.5281/zenodo.17390358.
 
 ## Releases & Citations
+## Releases & Citations
+The T0-series is archived! Cite the latest version with:
 
-Die T0-Serie ist archiviert! Zitiere sie mit:
-[<image-card alt="DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.17390358.svg" ></image-card>](https://doi.org/10.5281/zenodo.17390358)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17522475.svg)](https://doi.org/10.5281/zenodo.17522475)
 
-Vollständige Bibliographie: [v1.2 Release](https://github.com/jpascher/T0-Time-Mass-Duality/releases/tag/v1.9)
+Full bibliography: [v3.0 Release (Koide Formula Derivation)](https://github.com/jpascher/T0-Time-Mass-Duality/releases/tag/v3.0) | [v1.2 Release](https://github.com/jpascher/T0-Time-Mass-Duality/releases/tag/v1.2)
+
 
 **Such-Tipp:** Suche nach "T0 Zeit-Masse-Dualität" oder "ξ geometrische Physik" auf Google Scholar, arXiv oder GitHub, um verwandte Diskussionen, Zitationen und Forks zu finden.
 
