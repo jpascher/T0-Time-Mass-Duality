@@ -4,14 +4,14 @@
 
 **Topics (GitHub Topics):** #unifiedfieldtheory #quantumrelativity #finestructureconstant #fractalphysics #deterministicqm #geometricconstants #particlephysics #cosmology #quantumcomputing #rsaquantum #siunits #plancklength #gravitationalconstant #muong2 #cmbanomaly #lagrangiansimplification #diracequation #energyduality #timemassduality #xigeometry
 
-**Abstract/Summary for Search Engines:** The T0-Time-Mass-Duality model is a revolutionary geometric framework unifying quantum mechanics and general relativity through a single parameter ξ = (4/3) × 10⁻⁴. Deriving all physical constants (G, c, lₚ, α ≈ 1/137) from fractal spacetime geometry, it eliminates the Standard Model's 20+ parameters, achieves 98% accuracy in particle mass predictions, resolves the muon g-2 anomaly (0.05σ), and enables deterministic quantum computing. Includes interactive tools, Python implementations, 131 PDF documents, audio podcasts, and YouTube videos. Ideal for researchers in theoretical physics, quantum information, and cosmology. DOI: 10.5281/zenodo.17390358.
+**Abstract/Summary for Search Engines:** The T0-Time-Mass-Duality model is a revolutionary geometric framework unifying quantum mechanics and general relativity through a single parameter ξ = (4/3) × 10⁻⁴. Deriving all physical constants (G, c, lₚ, α ≈ 1/137) from fractal spacetime geometry, it eliminates the Standard Model's 20+ parameters, achieves 98% accuracy in particle mass predictions, resolves the muon g-2 anomaly (0.05σ), and enables deterministic quantum computing. Includes interactive tools, Python implementations, 172 PDF documents, audio podcasts, and YouTube videos. Ideal for researchers in theoretical physics, quantum information, and cosmology. DOI: 10.5281/zenodo.17390358.
 
 ## Releases & Citations
 
 The T0-series is archived! Cite it with:
 [<image-card alt="DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.17390358.svg" ></image-card>](https://doi.org/10.5281/zenodo.17390358)
 
-Full bibliography: [v1.2 Release](https://github.com/jpascher/T0-Time-Mass-Duality/releases/tag/v1.2)
+Full bibliography: [v1.2 Release](https://github.com/jpascher/T0-Time-Mass-Duality/releases/tag/v1.9)
 
 **Search Tip:** Search for "T0 Time-Mass Duality" or "ξ geometric physics" on Google Scholar, arXiv, or GitHub to find related discussions, citations, and forks.
 
@@ -21,7 +21,7 @@ The T0 model proposes an approach to fundamental physics through time-energy dua
 
 **Why Search for T0?** If you're exploring alternatives to the Standard Model, solutions to quantum gravity, or deterministic interpretations of QM, T0 offers parameter-free derivations and testable predictions. Featured in physics forums like Physics Stack Exchange and Reddit r/Physics.
 
-## Latest Highlights (October 2025)
+## Latest Highlights (November 2025)
 
 ### The Complete Closure: From ξ to SI Reform 2019
 **The ultimate revelation - ONE PARAMETER explains everything:**
@@ -54,7 +54,7 @@ The T0 model proposes an approach to fundamental physics through time-energy dua
 T0-Time-Mass-Duality/
 ├── 2/
 │   ├── html/                     # Interactive HTML explorations (18 files)
-│   ├── pdf/                      # Technical documents (131 files, October 2025)
+│   ├── pdf/                      # Technical documents (172 files, November 2025)
 │   ├── tex/                      # LaTeX source files
 │   ├── esotherik.md             # Esoteric considerations
 │   ├── OntologischeAequivalenz.md # Ontological equivalence (DE/EN)
@@ -72,9 +72,41 @@ T0-Time-Mass-Duality/
 
 **GitHub Search Optimization:** This repo is tagged with "quantum-physics", "unified-theory", "fractal-geometry", and "deterministic-computing" for easy discovery via GitHub's topic search.
 
-## Complete PDF Documentation (131 Files, ~47MB total)
+## Complete PDF Documentation (172 Files, ~63MB total)
 
 All documents available in German and English versions. **Pro Tip:** Use GitHub's search bar with "T0_ filename" to quickly locate specific PDFs.
+
+### Latest Additions (November 2025) (24 files)
+
+**Revolutionary New Documents:**
+
+- **[T0_koide-formel-3](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_koide-formel-3_En.pdf)** - Extension of Koide formula in T0 framework (English version; German: T0_koide-formel-3_De.pdf)
+  - Detailed integration with lepton mass relations
+  - Geometric derivation from ξ
+
+- **[T0_koideformel](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_koideformel_En.pdf)** - Core Koide formula analysis in T0 (English; German: T0_koideformel_De.pdf)
+  - Parameter-free predictions for quark/lepton masses
+
+- **[T0_g2-erweiterung-4](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_g2-erweiterung-4_En.pdf)** - Extended muon g-2 analysis, iteration 4 (English; German: T0_g2-erweiterung-4_De.pdf)
+  - Further refinement to 0.03σ agreement
+
+- **[T0_umkehrung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_umkehrung_En.pdf)** - Inversion mechanisms in T0 duality (English; German: T0_umkehrung_De.pdf)
+  - Reinterpretation of time-mass inversions
+
+- **[T0_tm-erweiterung-x6](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_tm-erweiterung-x6_En.pdf)** - Time-mass extension x6 model (English; German: T0_tm-erweiterung-x6_De.pdf)
+  - Advanced scaling for cosmological applications
+
+- **[T0-QFT-ML_Addendum](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-QFT-ML_Addendum_En.pdf)** - Addendum to QFT and machine learning integration (English; German: T0-QFT-ML_Addendum_De.pdf)
+  - Computational verification of T0 predictions
+
+- **[QM](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM_En.pdf)** - Quantum mechanics foundations in T0 (English; German: QM_De.pdf)
+  - Deterministic reinterpretation
+
+- **[Bell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Bell_En.pdf)** - Bell inequality resolutions via T0 (English; German: Bell_De.pdf)
+  - Connection to non-locality and fractal geometry
+
+- **[T0_xi_ursprung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_xi_ursprung_En.pdf)** - Origin of ξ parameter derivation (English; German: T0_xi_ursprung_De.pdf)
+  - Geometric proofs from 3D space
 
 ### Latest Additions (October 2025) (12 files)
 
@@ -87,7 +119,7 @@ All documents available in German and English versions. **Pro Tip:** Use GitHub'
   - Speed of light c geometrically determined
   - Proves: SI 2019 = geometric calibration to ξ
 
-- **[T0_Bibliography](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Bibliography_En.pdf)** - Complete indexed bibliography of all 131 T0 documents
+- **[T0_Bibliography](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Bibliography_En.pdf)** - Complete indexed bibliography of all 172 T0 documents
   - Systematic categorization by topic
   - Direct links to all PDFs
   - Foundation for academic citations
@@ -112,6 +144,24 @@ All documents available in German and English versions. **Pro Tip:** Use GitHub'
   - Two-dipole structure in cosmic microwave background
   - Alternative to standard cosmological model
   - Testable predictions
+
+- **[T0_Anomale-g2-9](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Anomale-g2-9_En.pdf)** - Muon g-2 anomaly iteration 9 (English; German: T0_Anomale-g2-9_De.pdf)
+  - Ultra-precise fractal corrections
+
+- **[T0_Anomale-g2-6](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Anomale-g2-6_En.pdf)** - Muon g-2 anomaly iteration 6 (English; German: T0_Anomale-g2-6_De.pdf)
+  - Intermediate refinement steps
+
+- **[T0_lagrndian](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_lagrndian_En.pdf)** - Lagrangian density updates (English; German: T0_lagrndian_De.pdf)
+  - Simplified one-term formulation
+
+- **[T0_xi-und-e](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_xi-und-e_En.pdf)** - ξ and e constant interrelations (English; German: T0_xi-und-e_De.pdf)
+  - Geometric links to elementary charge
+
+- **[T0-Theory-vs-Synergetics](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-Theory-vs-Synergetics_En.pdf)** - Comparison with synergetics (English; German: T0-Theory-vs-Synergetics_De.pdf)
+  - Pattern formation analogies
+
+- **[Markov](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Markov_En.pdf)** - Markov processes in T0 dynamics (English; German: Markov_De.pdf)
+  - Probabilistic to deterministic transitions
 
 ### Current Comprehensive Summary Series (16 files)
 - **[T0_Grundlagen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Grundlagen_en.pdf)** - Fundamental T0 framework foundations
@@ -273,7 +323,7 @@ All documents available in German and English versions. **Pro Tip:** Use GitHub'
 - **Parameter-Free Theory**: Single geometric constant defines all physics
 - **Deterministic Framework**: Alternative to probabilistic quantum mechanics
 
-### Revolutionary Results (Updated October 2025)
+### Revolutionary Results (Updated November 2025)
 - **Complete Closure**: Single parameter ξ derives all physical constants
 - **SI Reform 2019**: Unknowingly implemented ξ-geometry calibration
 - **Zero Free Parameters**: Standard Model's 20+ parameters → 0 parameters
@@ -284,8 +334,9 @@ All documents available in German and English versions. **Pro Tip:** Use GitHub'
 - **Muon g-2 Anomaly**: 0.05σ agreement (best theory worldwide!)
 - **Simplified Physics**: Dirac equation reduced from 4x4 matrices to field nodes
 - **Bell Test Connection**: Quantum correlations and lepton anomalies from same source
+- **Koide Formula Integration**: Geometric unification of lepton masses
 
-## Key Insights October 2025
+## Key Insights November 2025
 
 ### The Ultimate Revelation: Complete Closure
 1. **ONLY ξ is fundamental** (all else follows or defines units)
@@ -316,7 +367,7 @@ All documents available in German and English versions. **Pro Tip:** Use GitHub'
 4. **Listen to Podcasts**: [T0 Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)
 5. **Test Mass Formula**: [Particle Calculator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/simple_mass_formula.html)
 6. **Explore RSA**: Check `/rsa/` directory
-7. **Read Papers**: Technical documents in `2/pdf/` (131 files)
+7. **Read Papers**: Technical documents in `2/pdf/` (172 files)
 8. **Run Python**: Try `authentic_t0_quantum.py`
 
 **Community Engagement:** Join discussions on Reddit (r/AlternativePhysics, r/QuantumComputing) or Physics Forums by searching "T0 duality theory" – share your implementations!
@@ -333,7 +384,7 @@ All documents available in German and English versions. **Pro Tip:** Use GitHub'
 - **[T0 Audio Library on Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)**  
 *Complete podcast series with comprehensive discussions*
 
-- **Technical Papers**: 131 documents (47MB) in `2/pdf/`
+- **Technical Papers**: 172 documents (63MB) in `2/pdf/`
 - **Interactive Tools**: 18 HTML applications in `2/html/`
 - **Python Code**: 5 direct implementations
 - **Signal Processing**: 3 audio analysis tools
@@ -363,24 +414,3 @@ For research inquiries or technical questions, please create an issue in this re
 *"From ξ alone flows all of physics - one parameter, infinite beauty."*
 
 ---
-
-title: T0-Assistent: Geometrischer Physik-Helper
-emoji: 🔬
-colorFrom: blue
-colorTo: green
-sdk: gradio
-sdk_version: 4.44.0
-python_version: 3.12
-app_file: app.py
-
-hf_oauth: true
-# Expiration: 8 Stunden default (max 30 Tage)
-hf_oauth_expiration_minutes: 480
-# Scopes: Profil + E-Mail (erweitere bei Bedarf)
-hf_oauth_scopes:
-  - openid
-  - profile
-  - email
-# Optional: Nur für Orgs (z. B. Physik-Gruppe)
-# hf_oauth_authorized_org:
-#   - physics-group
