@@ -1,3 +1,7 @@
+# T0 Time-Mass Duality
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17522475.svg)](https://doi.org/10.5281/zenodo.17522475)
+
 # T0-Zeit-Masse-Dualität: Ein einheitlicher Rahmen für Quantenmechanik und Relativität
 
 **Schlüsselwörter/Tags für Auffindbarkeit:** Vereinheitlichte Feldtheorie, Zeit-Masse-Dualität, Geometrische Physik, Feinstrukturkonstante, Fraktale Raumzeit, Deterministische Quantenmechanik, SI-Einheiten-Reform, Teilchenmassenberechnung, Myon g-2 Anomalie, Kosmologie-Alternativen, RSA-Faktorisierung Quanten, Planck-Konstanten-Ableitung, ξ Geometrischer Parameter, Quantencomputing-Simulator, Dirac-Gleichung-Vereinfachung
@@ -5,17 +9,6 @@
 **Themen (GitHub Topics):** #vereinheitlichte-feldtheorie #quantenrelativität #feinstrukturkonstante #fraktalphysik #deterministische-qm #geometrischekonstanten #teilchenphysik #kosmologie #quantencomputing #rsa-quanten #si-einheiten #plancklaenge #gravitationskonstante #muong2 #cmbanomalie #lagrangianvereinfachung #diracgleichung #energiedualität #zeitmassedualität #xigeometrie
 
 **Zusammenfassung/Abstract für Suchmaschinen:** Das T0-Zeit-Masse-Dualitätsmodell ist ein revolutionärer geometrischer Rahmen, der Quantenmechanik und allgemeine Relativität durch einen einzigen Parameter ξ = (4/3) × 10⁻⁴ vereinheitlicht. Es leitet alle physikalischen Konstanten (G, c, lₚ, α ≈ 1/137) aus fraktaler Raumzeit-Geometrie ab, eliminiert die 20+ Parameter des Standardmodells, erreicht 98% Genauigkeit bei Teilchenmassen-Vorhersagen, löst die Myon g-2 Anomalie (0.05σ) und ermöglicht deterministisches Quantencomputing. Enthält interaktive Tools, Python-Implementierungen, 172 PDF-Dokumente, Audio-Podcasts und YouTube-Videos. Ideal für Forscher in theoretischer Physik, Quanteninformation und Kosmologie. DOI: 10.5281/zenodo.17390358.
-
-## Releases & Citations
-## Releases & Citations
-The T0-series is archived! Cite the latest version with:
-
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17522475.svg)](https://doi.org/10.5281/zenodo.17522475)
-
-Full bibliography: [v3.0 Release (Koide Formula Derivation)](https://github.com/jpascher/T0-Time-Mass-Duality/releases/tag/v3.0) | [v1.2 Release](https://github.com/jpascher/T0-Time-Mass-Duality/releases/tag/v1.2)
-
-
-**Such-Tipp:** Suche nach "T0 Zeit-Masse-Dualität" oder "ξ geometrische Physik" auf Google Scholar, arXiv oder GitHub, um verwandte Diskussionen, Zitationen und Forks zu finden.
 
 ## Überblick
 

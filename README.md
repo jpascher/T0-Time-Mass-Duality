@@ -1,3 +1,8 @@
+# T0 Time-Mass Duality
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17522475.svg)](https://doi.org/10.5281/zenodo.17522475)
+
+
 # T0-Time-Mass-Duality: A Unified Framework for Quantum Mechanics and Relativity
 
 **Keywords/Tags for Discoverability:** Unified Field Theory, Time-Mass Duality, Geometric Physics, Fine Structure Constant, Fractal Spacetime, Deterministic Quantum Mechanics, SI Units Reform, Particle Masses Calculation, Muon g-2 Anomaly, Cosmology Alternatives, RSA Factorization Quantum, Planck Constants Derivation, ξ Geometric Parameter, Quantum Computing Simulator, Dirac Equation Simplification
@@ -5,15 +10,6 @@
 **Topics (GitHub Topics):** #unifiedfieldtheory #quantumrelativity #finestructureconstant #fractalphysics #deterministicqm #geometricconstants #particlephysics #cosmology #quantumcomputing #rsaquantum #siunits #plancklength #gravitationalconstant #muong2 #cmbanomaly #lagrangiansimplification #diracequation #energyduality #timemassduality #xigeometry
 
 **Abstract/Summary for Search Engines:** The T0-Time-Mass-Duality model is a revolutionary geometric framework unifying quantum mechanics and general relativity through a single parameter ξ = (4/3) × 10⁻⁴. Deriving all physical constants (G, c, lₚ, α ≈ 1/137) from fractal spacetime geometry, it eliminates the Standard Model's 20+ parameters, achieves 98% accuracy in particle mass predictions, resolves the muon g-2 anomaly (0.05σ), and enables deterministic quantum computing. Includes interactive tools, Python implementations, 172 PDF documents, audio podcasts, and YouTube videos. Ideal for researchers in theoretical physics, quantum information, and cosmology. DOI: 10.5281/zenodo.17390358.
-
-## Releases & Citations
-## Releases & Citations
-The T0-series is archived! Cite the latest version with:
-
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17522475.svg)](https://doi.org/10.5281/zenodo.17522475)
-
-Full bibliography: [v3.0 Release (Koide Formula Derivation)](https://github.com/jpascher/T0-Time-Mass-Duality/releases/tag/v3.0) | [v1.2 Release](https://github.com/jpascher/T0-Time-Mass-Duality/releases/tag/v1.2)
-**Search Tip:** Search for "T0 Time-Mass Duality" or "ξ geometric physics" on Google Scholar, arXiv, or GitHub to find related discussions, citations, and forks.
 
 ## Overview
 
