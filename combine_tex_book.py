@@ -95,7 +95,8 @@ def main():
         return
     
     english_files = [f for f in os.listdir(tex_dir) if f.endswith('_En.tex')]
-    english_files.sort()  # Sortiere alphabetisch
+    # Systematische Sortierung: T0-Dateien zuerst (neuere), dann andere (ältere als Quellen)
+    english_files.sort(key=lambda x: (0 if x.startswith('T0') else 1, x))
     
     with open(output_file, 'w', encoding='utf-8') as out:
         out.write(book_header)
