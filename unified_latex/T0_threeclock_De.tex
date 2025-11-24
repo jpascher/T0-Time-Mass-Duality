@@ -35,7 +35,7 @@
 \usepackage{enumitem}
 \usepackage{newunicodechar}
 
-% Additional packages (cleaned up - removed duplicates)
+% Additional packages
 \usepackage{adjustbox}
 \usepackage{algorithm}
 \usepackage{algorithmic}
@@ -66,7 +66,7 @@
 \usepackage{upgreek}
 \usepackage{url}
 
-% Color definitions (FIXED: removed extra \definecolor commands)
+% Color definitions
 \definecolor{blue}{rgb}{0,0,1}
 \definecolor{boxgray}{RGB}{240,240,240}
 \definecolor{deepblue}{RGB}{0,0,127}
@@ -79,58 +79,32 @@
 \definecolor{t0red}{RGB}{204,0,0}
 \definecolor{t0yellow}{RGB}{255,204,0}
 
-% TikZ libraries
-\usetikzlibrary{arrows,shapes,positioning,calc,patterns,decorations.pathmorphing,decorations.markings}
-
-% PGFPlots setup
+% Geometry and settings
 \pgfplotsset{compat=1.18}
-
-% Hyperref setup
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,
-    urlcolor=cyan,
-    citecolor=green,
-    pdftitle={T0 Theory Document},
-    pdfauthor={Johann Pascher},
-    pdfsubject={T0 Theory},
-    pdfkeywords={T0, physics, theory}
-}
-
-% Header and footer
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\leftmark}
-\fancyhead[LO]{\rightmark}
-\fancyfoot[C]{T0 Theory - Johann Pascher}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc}
 
 % Theorem environments
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
-\theoremstyle{remark}
-\newtheorem{remark}{Remark}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
 \newtheorem{example}{Example}[section]
 
-% Custom commands (common across T0 documents)
-\newcommand{\T}[1]{\text{#1}}
-\newcommand{\mat}[1]{\mathbf{#1}}
-\newcommand{\E}{\mathrm{e}}
-\newcommand{\I}{\mathrm{i}}
-\newcommand{\diff}{\mathrm{d}}
-\newcommand{\Real}{\mathrm{Re}}
-\newcommand{\Imag}{\mathrm{Im}}
+% Custom commands
+\newcommand{\kB}{k_{\text{B}}}
+\newcommand{\degree}{^\circ}
 
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{T0 Theory}
+\fancyfoot[C]{\thepage}
 
 \begin{document}
 
 \maketitle
-\tableofcontents
 
 \begin{abstract}
 Das Scientific-Reports-Paper „A single-clock approach to fundamental metrology“
@@ -156,20 +130,21 @@ Zusammenfassung, nicht als Primärquelle, ein.
 \tableofcontents
 \newpage
 
-\chapter{Einleitung}
+\section{Einleitung}
 
-Der Artikel \textit{A single-clock approach to fundamental metrology}
+Der Artikel \emph{A single-clock approach to fundamental metrology}
 \cite{terrell_single_clock_nature_2024} verfolgt das Ziel, die Grundlagen der
 Metrologie so zu reformulieren, dass ein einzelner Zeitstandard ausreicht, um
 alle anderen physikalischen Größen zu definieren. Die Autoren betrachten
 insbesondere:
-
-  - die Definition und Realisierung von Zeitintervallen mit Hilfe eines
+\begin{itemize}
+  \item die Definition und Realisierung von Zeitintervallen mit Hilfe eines
         einzigen, hochstabilen Zeitstandards (einer „Uhr“),
-  - die Ableitung von Längenmessungen aus rein zeitlichen
+  \item die Ableitung von Längenmessungen aus rein zeitlichen
         Beobachtungsdaten in einem relativistischen Rahmen,
-  - die Rückführung von Massen auf Frequenzen bzw.\ Zeitintervalle mittels
+  \item die Rückführung von Massen auf Frequenzen bzw.\ Zeitintervalle mittels
         etablierter quantenmechanischer und metrologischer Relationen.
+\end{itemize}
 
 Eine populärwissenschaftliche Darstellung dieser Arbeit findet sich in einem
 Video von Hossenfelder \cite{hossenfelder_single_clock_video}. Für die
@@ -185,22 +160,18 @@ Zeit-Masse-Dualität analysiert und die interne Struktur der Massenhierarchie
 aus $\xi$ abgeleitet. Ziel dieses Dokuments ist es, diese T0-Resultate mit den
 Schlussfolgerungen des Scientific-Reports-Artikels systematisch zu vergleichen.
 
-\chapter{Zeitstandard und Grundannahmen des Artikels}
+\section{Zeitstandard und Grundannahmen des Artikels}
 
-\section{Ein einzelner Zeitstandard}
+\subsection{Ein einzelner Zeitstandard}
 
 Im Scientific-Reports-Artikel wird als Ausgangspunkt ein einzelner,
 hochpräziser Zeitstandard angenommen. Operational bedeutet dies, dass eine
 Referenzfrequenz $\nu_0$ spezifiziert wird, deren Periodendauer $T_0 = 1/\nu_0$
 die elementare Zeiteinheit bestimmt. Alle weiteren Zeitintervalle werden als
 Vielfache von $T_0$ angegeben:
-
-```math-equation
-
+\begin{equation}
   \Delta t = n \, T_0 \, , \qquad n \in \mathbb{Z} \, .
-
-```
-
+\end{equation}
 Die konkrete physikalische Realisierung (z.\,B.\ Cäsium-Atomuhr oder
 optische Gitteruhr) bleibt dabei offen; entscheidend ist die Existenz eines
 stabilen Referenzprozesses.
@@ -212,71 +183,61 @@ determinierte charakteristische Skalen eingeführt werden
 sie die zugrundeliegende Zeitstruktur selbst aus $\xi$ herleitet, während der
 Artikel nur von der Existenz eines Zeitstandards ausgeht.
 
-\section{Relativistischer Rahmen}
+\subsection{Relativistischer Rahmen}
 
 Der Artikel bettet die Messprozeduren in die Spezielle Relativitätstheorie ein.
 Die zentrale Rolle spielen:
-
-  - Eigenzeiten bewegter Uhren entlang vorgegebener Weltlinien,
-  - Relationen zwischen Eigenzeit, Koordinatenzeit und räumlicher Distanz
+\begin{itemize}
+  \item Eigenzeiten bewegter Uhren entlang vorgegebener Weltlinien,
+  \item Relationen zwischen Eigenzeit, Koordinatenzeit und räumlicher Distanz
         gemäß der Minkowski-Metrik,
-  - die Invarianz des Lichtkegels, welche die Struktur von
+  \item die Invarianz des Lichtkegels, welche die Struktur von
         Raum-Zeit-Relationen festlegt.
+\end{itemize}
 
 Formal lässt sich die Eigenzeit $d\tau$ eines idealisierten Punktteilchens mit
 Vierergeschwindigkeit $u^\mu$ in einer flachen Raumzeit durch
-
-```math-equation
-
+\begin{equation}
   d\tau^2 = dt^2 - \frac{1}{c^2} \, d\vec{x}^{\,2}
-
-```
-
+\end{equation}
 darstellen (mit geeigneter Wahl der Einheiten). Die konkreten Messprotokolle im
 Artikels nutzen diese Struktur, um aus gemessenen Eigenzeiten Aussagen über
 räumliche Abstände zu gewinnen.
 
-\chapter{Längenmessung aus Zeit: Drei-Uhren-Konstruktion}
+\section{Längenmessung aus Zeit: Drei-Uhren-Konstruktion}
 
-\section{Prinzip des Verfahrens}
+\subsection{Prinzip des Verfahrens}
 
 Im Nature-Artikel wird ein Experimentstyp analysiert, der konzeptionell dem von
 Hossenfelder als „Drei‑Uhren‑Experiment“ beschriebenen Aufbau entspricht. Die
 Kernidee ist:
-
-  - Zwei räumlich getrennte Ereignispunkte (Enden eines starren Stabs) sind
+\begin{itemize}
+  \item Zwei räumlich getrennte Ereignispunkte (Enden eines starren Stabs) sind
         durch eine unbekannte Distanz $L$ getrennt.
-  - Bewegte Uhren werden entlang bekannter Weltlinien zwischen diesen
+  \item Bewegte Uhren werden entlang bekannter Weltlinien zwischen diesen
         Punkten transportiert.
-  - Die dabei gemessenen Eigenzeiten werden am Ende an einem Ort
+  \item Die dabei gemessenen Eigenzeiten werden am Ende an einem Ort
         verglichen.
+\end{itemize}
 
 Die Autoren zeigen, dass sich aus den Eigenzeiten der transportierten Uhren und
 dem bekannten Bewegungszustand (z.\,B.\ konstanter Geschwindigkeitsbetrag)
 eine Gleichung der Form
-
-```math-equation
-
+\begin{equation}
   L = F\left(\{\Delta \tau_i\}\right)
-
-```
-
+\end{equation}
 ergeben kann, wobei $\{\Delta \tau_i\}$ eine endliche Menge gemessener
 Eigenzeitdifferenzen bezeichnet und $F$ eine durch die Relativitätstheorie
 bestimmte Funktion ist. Entscheidend ist, dass die Funktion $F$ keine
 unabhängig gemessene Längeneinheit voraussetzt.
 
-\section{Operationale Interpretation}
+\subsection{Operationale Interpretation}
 
 Operativ bedeutet dies, dass eine räumliche Distanz $L$ im Prinzip vollständig
 durch Zeiten bestimmt ist:
-
-```math-equation
-
+\begin{equation}
   L = n_L \, T_0 \, c_{\text{eff}} \, .
-
-```
-
+\end{equation}
 Hier ist $T_0$ der elementare Zeitstandard, $n_L$ eine dimensionslose Zahl, die
 aus den Eigenzeitmessungen und der Kenntnis der Dynamik folgt, und
 $c_{\text{eff}}$ ein effektiver Geschwindigkeitsparameter, der zwar formal der
@@ -291,50 +252,34 @@ $c$ seinerseits durch $\xi$ und Planck-Skalen bestimmt ist. In T0 ist die
 Längeneinheit somit bereits vor dem metrologischen Aufbau auf die Zeitstruktur
 zurückgeführt.
 
-\chapter{Massenbestimmung aus Frequenzen und Zeit}
+\section{Massenbestimmung aus Frequenzen und Zeit}
 \label{sec:massenbestimmung}
 
-\section{Elementarteilchen: Compton-Beziehung}
+\subsection{Elementarteilchen: Compton-Beziehung}
 
 Für elementare Teilchen verwendet der Artikel die bekannte
 Compton-Beziehung,
-
-```math-equation
-
+\begin{equation}
   \lambda_{\mathrm{C}} = \frac{\hbar}{m c} \, ,
-
-```
-
+\end{equation}
 und die zugehörige Compton-Frequenz
-
-```math-equation
-
+\begin{equation}
   \omega_{\mathrm{C}} = \frac{m c^2}{\hbar} \, .
-
-```
-
+\end{equation}
 Wenn Längen bereits durch Zeitmessungen definiert sind (wie im vorangehenden
 Abschnitt diskutiert), folgt, dass auch die Compton-Wellenlängen und damit die
 Massen durch den Zeitstandard festgelegt sind. In natürlichen Einheiten
 ($\hbar = c = 1$) reduziert sich dies auf
-
-```math-equation
-
+\begin{equation}
   \lambda_{\mathrm{C}} = \frac{1}{m} \, , \qquad \omega_{\mathrm{C}} = m \, .
-
-```
-
+\end{equation}
 Damit ist die Masse eine Frequenzgröße, d.\,h. eine inverse Zeit.
 
 In der T0-Theorie wird diese Beobachtung in \texttt{T0\_xi-und-e\_De} explizit
 in der Form
-
-```math-equation
-
+\begin{equation}
   T \cdot m = 1
-
-```
-
+\end{equation}
 dargestellt. Dort wird gezeigt, dass die charakteristischen Zeitskalen
 instabiler Leptonen mit ihren Massen konsistent sind, wenn $T$ als
 charakteristische Zeitdauer und $m$ als Masse in natürlichen Einheiten
@@ -342,26 +287,23 @@ interpretiert werden. Die Argumentation des Nature-Artikels bezüglich der
 Massenmessung über Frequenzen findet somit in T0 eine bereits vorbereitete
 formale Ausarbeitung.
 
-\section{Makroskopische Massen: Kibble-Balance}
+\subsection{Makroskopische Massen: Kibble-Balance}
 
 Für makroskopische Massen verweist der Nature-Artikel auf die
 Kibble-Balance. Diese arbeitet im Wesentlichen mit zwei Betriebsarten:
-
-  - einer statischen Modus, in dem die Gewichtskraft $m g$ durch eine
+\begin{itemize}
+  \item einer statischen Modus, in dem die Gewichtskraft $m g$ durch eine
         elektromagnetische Kraft im Gleichgewicht gehalten wird,
-  - einem dynamischen Modus, in dem Bewegungsspannungen und Ströme über
+  \item einem dynamischen Modus, in dem Bewegungsspannungen und Ströme über
         quantisierte elektrische Effekte mit Frequenzen verknüpft werden.
+\end{itemize}
 
 Durch den Einsatz quantisierter Effekte (Josephson-Spannungsnormale,
 Quanten-Hall-Widerstände) entsteht eine Kette
-
-```math-equation
-
+\begin{equation}
   m \longrightarrow F_{\text{Gewicht}} \longrightarrow
   U, I \longrightarrow \text{Frequenzen, Zählprozesse} \longrightarrow T_0 \, .
-
-```
-
+\end{equation}
 Formal wird die Masse $m$ damit auf eine Funktion von Frequenzen (Zeitstandards)
 und diskreten Ladungszahlen reduziert. Auch hier treten keine neuen
 kontinuierlichen Basisgrößen auf; elektrische und thermische Konstanten sind
@@ -372,34 +314,31 @@ $k_B$ und weitere Konstanten aus $\xi$ hergeleitet, so dass die Kibble-Balance
 als experimentelle Realisierung eines bereits geometrisch fixierten
 Konstanten-Netzwerks verstanden werden kann.
 
-\chapter{Zusammenhang mit den T0-Dokumenten}
+\section{Zusammenhang mit den T0-Dokumenten}
 \label{sec:t0_zusammenhang}
 
-\section{T0\_SI\_De: Von $\xi$ zu SI-Konstanten}
+\subsection{T0\_SI\_De: Von $\xi$ zu SI-Konstanten}
 
 In \texttt{T0\_SI\_De} wird ausführlich dargelegt, wie aus dem einzelnen
 Parameter $\xi$ nach und nach die Gravitationskonstante $G$, die Planck-Länge
 $l_P$, die Planck-Zeit $t_P$ und schließlich der SI-Wert der
 Lichtgeschwindigkeit $c$ folgen. Die zentrale Gleichung
-
-```math-equation
-
+\begin{equation}
   \xi = 2\sqrt{G \, m_{\text{char}}}
-
-```
-
+\end{equation}
 und ihre Varianten sichern die Konsistenz mit CODATA-Werten und der SI-Reform
 2019 ab.
 
 Die Ein-Uhr-Metrologie des Scientific-Reports-Artikels kann vor diesem
 Hintergrund wie folgt eingeordnet werden:
-
-  - Die Forderung, dass ein Zeitstandard genügt, ist konsistent mit der
+\begin{itemize}
+  \item Die Forderung, dass ein Zeitstandard genügt, ist konsistent mit der
         T0-Aussage, dass $\xi$ als einziger fundamentaler Parameter genügt.
-  - Die Reduktion der SI-Einheiten auf Zeit- und Zähleinheiten spiegelt die
+  \item Die Reduktion der SI-Einheiten auf Zeit- und Zähleinheiten spiegelt die
         in T0 beschriebene Reduktion der Konstanten auf $\xi$ wider.
+\end{itemize}
 
-\section{T0\_xi\_ursprung\_De: Massenskalierung und $\xi$}
+\subsection{T0\_xi\_ursprung\_De: Massenskalierung und $\xi$}
 
 \texttt{T0\_xi\_ursprung\_De} behandelt die Frage, wie die konkrete numerische
 Wahl $\xi = 4/30000$ aus der Struktur des e-p-$\mu$-Systems, fraktaler
@@ -414,7 +353,7 @@ in der Massenverhältnisse als Konsequenz von $\xi$ verstanden werden. Die
 metrologische Aussage des Artikels wird dadurch gestützt und zugleich in einen
 breiteren theoretischen Rahmen eingeordnet.
 
-\section{T0\_xi-und-e\_De: Zeit-Masse-Dualität}
+\subsection{T0\_xi-und-e\_De: Zeit-Masse-Dualität}
 
 In \texttt{T0\_xi-und-e\_De} wird die Beziehung $T\cdot m = 1$ als Ausdruck
 einer fundamentalen Zeit-Masse-Dualität hervorgehoben. Der Artikel verwendet
@@ -422,15 +361,16 @@ diese Dualität in Form etablierter Relationen (Compton-Wellenlänge,
 Frequenz-Massen-Beziehung), ohne sie explizit als Dualität zu formulieren.
 
 Der Vergleich zeigt:
-
-  - Der Scientific-Reports-Artikel nutzt die Dualität operativ, um zu
+\begin{itemize}
+  \item Der Scientific-Reports-Artikel nutzt die Dualität operativ, um zu
         argumentieren, dass Massen mit einem Zeitstandard bestimmt werden
         können.
-  - Die T0-Theorie formuliert diese Dualität explizit und verankert sie in
+  \item Die T0-Theorie formuliert diese Dualität explizit und verankert sie in
         der geometrischen Struktur (Parameter $\xi$) und in der Massenhierarchie
         der Teilchen.
+\end{itemize}
 
-\chapter{Quantengravitation und Gültigkeitsbereich}
+\section{Quantengravitation und Gültigkeitsbereich}
 \label{sec:qg_gueltigkeit}
 
 Der Nature-Artikel formuliert seine Aussagen im Rahmen der etablierten Physik,
@@ -450,16 +390,17 @@ sinnvoll sind.
 
 In diesem Sinne lässt sich der Gültigkeitsbereich des
 Ein-Uhr-Metrologie-Arguments wie folgt charakterisieren:
-
-  - Innerhalb des von T0 beschriebenen Bereichs (oberhalb von $L_0$ und
+\begin{itemize}
+  \item Innerhalb des von T0 beschriebenen Bereichs (oberhalb von $L_0$ und
         $t_P$) ist die Reduktion auf einen Zeitstandard konsistent mit der
         geometrischen Struktur.
-  - Unterhalb dieser Skalen ist mit einer Modifikation des
+  \item Unterhalb dieser Skalen ist mit einer Modifikation des
         Messkonzepts zu rechnen; die Ein-Uhr-Metrologie liefert hier keine
         vollständige Antwort, und T0 macht konkrete Vorschläge zur Struktur
         dieser Sub-Planck-Skalen.
+\end{itemize}
 
-\chapter{Schlussbemerkungen}
+\section{Schlussbemerkungen}
 
 Der Scientific-Reports-Artikel zur Ein-Uhr-Metrologie zeigt, dass eine
 konsequente Anwendung der Speziellen Relativität, der Quantenmechanik und der
@@ -477,5 +418,40 @@ Masse erscheint als inverse Zeit, und alle SI-Konstanten werden aus $\xi$
 abgeleitet oder als Konventionen interpretiert. Die Ein-Uhr-Metrologie des
 Artikels lässt sich daher als metrologische Bestätigung der in T0 postulierten
 Zeit-Masse-Dualität und Ein-Parameter-Struktur verstehen.
+
+\begin{thebibliography}{9}
+
+\bibitem{terrell_single_clock_nature_2024}
+Autorenliste siehe Originalpublikation,
+\textit{A single-clock approach to fundamental metrology},
+Scientific Reports \textbf{14}, 2024,
+DOI: 10.1038/s41598-024-71907-0,
+\url{https://www.nature.com/articles/s41598-024-71907-0}.
+
+\bibitem{hossenfelder_single_clock_video}
+S.~Hossenfelder,
+\textit{Do we really need 7 base units in physics?},
+YouTube, 2024,
+\url{https://www.youtube.com/watch?v=-bArT2o9rEE}.
+
+\bibitem{pascher_T0_SI_2024}
+J.~Pascher,
+\textit{T0-Theorie: Vollständiger Abschluss der T0-Theorie – Von $\xi$ zur SI-Reform 2019},
+HTL Leonding, 2024,
+\url{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/T0_SI_De.pdf}.
+
+\bibitem{pascher_xi_ursprung_2025}
+J.~Pascher,
+\textit{Der Massenskalierungsexponent $\kappa$ und die fundamentale Begründung für $\xi = 4/30000$},
+HTL Leonding, 2025,
+\url{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/T0_xi_origin_De.pdf}.
+
+\bibitem{pascher_xi_und_e_2025}
+J.~Pascher,
+\textit{T0-Theorie: $\xi$ und $e$ – Die fundamentale Verbindung},
+HTL Leonding, 2025,
+\url{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/pdf/T0_xi-and-e_De.pdf}.
+
+\end{thebibliography}
 
 \end{document}

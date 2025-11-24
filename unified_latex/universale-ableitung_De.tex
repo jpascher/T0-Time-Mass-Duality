@@ -35,7 +35,7 @@
 \usepackage{enumitem}
 \usepackage{newunicodechar}
 
-% Additional packages (cleaned up - removed duplicates)
+% Additional packages
 \usepackage{adjustbox}
 \usepackage{algorithm}
 \usepackage{algorithmic}
@@ -66,7 +66,7 @@
 \usepackage{upgreek}
 \usepackage{url}
 
-% Color definitions (FIXED: removed extra \definecolor commands)
+% Color definitions
 \definecolor{blue}{rgb}{0,0,1}
 \definecolor{boxgray}{RGB}{240,240,240}
 \definecolor{deepblue}{RGB}{0,0,127}
@@ -79,413 +79,275 @@
 \definecolor{t0red}{RGB}{204,0,0}
 \definecolor{t0yellow}{RGB}{255,204,0}
 
-% TikZ libraries
-\usetikzlibrary{arrows,shapes,positioning,calc,patterns,decorations.pathmorphing,decorations.markings}
-
-% PGFPlots setup
+% Geometry and settings
 \pgfplotsset{compat=1.18}
-
-% Hyperref setup
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,
-    urlcolor=cyan,
-    citecolor=green,
-    pdftitle={T0 Theory Document},
-    pdfauthor={Johann Pascher},
-    pdfsubject={T0 Theory},
-    pdfkeywords={T0, physics, theory}
-}
-
-% Header and footer
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\leftmark}
-\fancyhead[LO]{\rightmark}
-\fancyfoot[C]{T0 Theory - Johann Pascher}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc}
 
 % Theorem environments
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
-\theoremstyle{remark}
-\newtheorem{remark}{Remark}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
 \newtheorem{example}{Example}[section]
 
-% Custom commands (common across T0 documents)
-\newcommand{\T}[1]{\text{#1}}
-\newcommand{\mat}[1]{\mathbf{#1}}
-\newcommand{\E}{\mathrm{e}}
-\newcommand{\I}{\mathrm{i}}
-\newcommand{\diff}{\mathrm{d}}
-\newcommand{\Real}{\mathrm{Re}}
-\newcommand{\Imag}{\mathrm{Im}}
+% Custom commands
+\newcommand{\kB}{k_{\text{B}}}
+\newcommand{\degree}{^\circ}
 
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{T0 Theory}
+\fancyfoot[C]{\thepage}
 
 \begin{document}
 
 \maketitle
-\tableofcontents
-
-\begin{abstract}
+	
+	\begin{abstract}
 		Dieses Dokument demonstriert die revolution\"are Einfachheit der Naturgesetze: Alle fundamentalen physikalischen Konstanten in SI-Einheiten k\"onnen aus nur zwei experimentellen Grundgr\"o\ss{}en abgeleitet werden - der dimensionslosen Feinstrukturkonstante $\alpha = 1/137.036$ und der Planck-L\"ange $\ell_P = 1.616255 \times 10^{-35}$ m. Zus\"atzlich wird die Verwirrung um den Wert der charakteristischen Energie $E_0$ in der T0-Theorie aufgekl\"art und gezeigt, dass $E_0 = \SI{7.398}{\MeV}$ das exakte geometrische Mittel der CODATA-Teilchenmassen ist, nicht ein angepasster Parameter. Alle h\"aufigen Zirkularit\"ats-Einw\"ande werden systematisch entkr\"aftet. Die Herleitung reduziert die scheinbar gro\ss{}e Anzahl unabh\"angiger Naturkonstanten auf nur zwei fundamentale experimentelle Werte plus menschliche SI-Konventionen und zeigt, dass die T0-Rohwerte bereits die echten physikalischen Verh\"altnisse der Natur erfassen.
 	\end{abstract}
 	
 	\tableofcontents
 	\newpage
 	
-	# Einf\"uhrung und Grundprinzip
+	\section{Einf\"uhrung und Grundprinzip}
 	
-	## Das Minimalprinzip der Physik
+	\subsection{Das Minimalprinzip der Physik}
 	
 	In der modernen Physik scheinen etwa 30 verschiedene Naturkonstanten unabh\"angig voneinander experimentell bestimmt werden zu m\"ussen. Diese Arbeit zeigt jedoch, dass alle fundamentalen Konstanten aus nur \textbf{zwei experimentellen Werten} ableitbar sind:
 	
 	\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Fundamentale Eingangsdaten]
-		
-			- \textbf{Feinstrukturkonstante:} $\alpha = \frac{1}{137.035999084}$ (dimensionslos)
-			- \textbf{Planck-L\"ange:} $\ell_P = 1.616255 \times 10^{-35}$ \si{\meter}
-		
+		\begin{itemize}
+			\item \textbf{Feinstrukturkonstante:} $\alpha = \frac{1}{137.035999084}$ (dimensionslos)
+			\item \textbf{Planck-L\"ange:} $\ell_P = 1.616255 \times 10^{-35}$ \si{\meter}
+		\end{itemize}
 	\end{tcolorbox}
 	
-	## SI-Basisdefinitionen
+	\subsection{SI-Basisdefinitionen}
 	
 	Zus\"atzlich verwenden wir die modernen SI-Basisdefinitionen (seit 2019):
 	
-	
-```math-align
-
+	\begin{align}
 		\mu_0 &= 4\pi \times 10^{-7} \text{ H/m} \quad \text{(per Definition)}\\
 		e &= 1.602176634 \times 10^{-19} \text{ C} \quad \text{(exakte Definition)}\\
 		k_B &= 1.380649 \times 10^{-23} \text{ J/K} \quad \text{(exakte Definition)}\\
 		N_A &= 6.02214076 \times 10^{23} \text{ mol}^{-1} \quad \text{(exakte Definition)}
+	\end{align}
 	
-```
-
+	\section{Herleitung der fundamentalen Konstanten}
 	
-	# Herleitung der fundamentalen Konstanten
-	
-	## Lichtgeschwindigkeit c
+	\subsection{Lichtgeschwindigkeit c}
 	
 	Die Lichtgeschwindigkeit folgt aus der Beziehung zwischen Planck-Einheiten. Da die Planck-L\"ange definiert ist als:
 	
-	
-```math-equation
-
+	\begin{equation}
 		\ell_P = \sqrt{\frac{\hbar G}{c^3}}
-	
-```
-
+	\end{equation}
 	
 	und alle Planck-Einheiten \"uber $\hbar$, $G$ und $c$ miteinander verkn\"upft sind, ergibt sich durch Dimensionsanalyse:
 	
 	\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=Lichtgeschwindigkeit]
-		
-```math-equation
-
+		\begin{equation}
 			\boxed{c = 2.99792458 \times 10^8 \text{ m/s}}
-		
-```
-
+		\end{equation}
 	\end{tcolorbox}
 	
-	## Vakuum-Permittivit\"at $\varepsilon_0$
+	\subsection{Vakuum-Permittivit\"at $\varepsilon_0$}
 	
 	Aus der Maxwell-Beziehung $\mu_0 \varepsilon_0 = 1/c^2$ folgt:
 	
-	
-```math-equation
-
+	\begin{equation}
 		\varepsilon_0 = \frac{1}{\mu_0 c^2} = \frac{1}{4\pi \times 10^{-7} \times (2.99792458 \times 10^8)^2}
-	
-```
-
+	\end{equation}
 	
 	\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=Vakuum-Permittivit\"at]
-		
-```math-equation
-
+		\begin{equation}
 			\boxed{\varepsilon_0 = 8.854187817 \times 10^{-12} \text{ F/m}}
-		
-```
-
+		\end{equation}
 	\end{tcolorbox}
 	
-	## Reduzierte Planck-Konstante $\hbar$
+	\subsection{Reduzierte Planck-Konstante $\hbar$}
 	
 	Die Feinstrukturkonstante ist definiert als:
 	
-	
-```math-equation
-
+	\begin{equation}
 		\alpha = \frac{e^2}{4\pi\varepsilon_0\hbar c}
-	
-```
-
+	\end{equation}
 	
 	Aufl\"osung nach $\hbar$:
 	
-	
-```math-equation
-
+	\begin{equation}
 		\hbar = \frac{e^2}{4\pi\varepsilon_0 c \alpha}
-	
-```
-
+	\end{equation}
 	
 	Einsetzen der bekannten Werte:
 	
-	
-```math-equation
-
+	\begin{equation}
 		\hbar = \frac{(1.602176634 \times 10^{-19})^2}{4\pi \times 8.854187817 \times 10^{-12} \times 2.99792458 \times 10^8 \times \frac{1}{137.035999084}}
-	
-```
-
+	\end{equation}
 	
 	\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=Reduzierte Planck-Konstante]
-		
-```math-equation
-
+		\begin{equation}
 			\boxed{\hbar = 1.054571817 \times 10^{-34} \text{ J·s}}
-		
-```
-
+		\end{equation}
 	\end{tcolorbox}
 	
-	## Gravitationskonstante G
+	\subsection{Gravitationskonstante G}
 	
 	Aus der Definition der Planck-L\"ange folgt:
 	
-	
-```math-equation
-
+	\begin{equation}
 		G = \frac{\ell_P^2 c^3}{\hbar}
-	
-```
-
+	\end{equation}
 	
 	Einsetzen der berechneten Werte:
 	
-	
-```math-equation
-
+	\begin{equation}
 		G = \frac{(1.616255 \times 10^{-35})^2 \times (2.99792458 \times 10^8)^3}{1.054571817 \times 10^{-34}}
-	
-```
-
+	\end{equation}
 	
 	\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=Gravitationskonstante]
-		
-```math-equation
-
+		\begin{equation}
 			\boxed{G = 6.67430 \times 10^{-11} \text{ m}^3\text{/(kg·s}^2\text{)}}
-		
-```
-
+		\end{equation}
 	\end{tcolorbox}
 	
-	# Vollst\"andige Planck-Einheiten
+	\section{Vollst\"andige Planck-Einheiten}
 	
 	Mit $\hbar$, $c$ und $G$ k\"onnen alle Planck-Einheiten berechnet werden:
 	
-	## Planck-Zeit
+	\subsection{Planck-Zeit}
 	
-	
-```math-equation
-
+	\begin{equation}
 		t_P = \sqrt{\frac{\hbar G}{c^5}} = \frac{\ell_P}{c} = 5.391247 \times 10^{-44} \text{ s}
+	\end{equation}
 	
-```
-
+	\subsection{Planck-Masse}
 	
-	## Planck-Masse
-	
-	
-```math-equation
-
+	\begin{equation}
 		m_P = \sqrt{\frac{\hbar c}{G}} = 2.176434 \times 10^{-8} \text{ kg}
+	\end{equation}
 	
-```
-
+	\subsection{Planck-Energie}
 	
-	## Planck-Energie
-	
-	
-```math-equation
-
+	\begin{equation}
 		E_P = m_P c^2 = \sqrt{\frac{\hbar c^5}{G}} = 1.956082 \times 10^9 \text{ J} = 1.220890 \times 10^{19} \text{ GeV}
+	\end{equation}
 	
-```
-
+	\subsection{Planck-Temperatur}
 	
-	## Planck-Temperatur
-	
-	
-```math-equation
-
+	\begin{equation}
 		T_P = \frac{E_P}{k_B} = \frac{m_P c^2}{k_B} = 1.416784 \times 10^{32} \text{ K}
+	\end{equation}
 	
-```
-
+	\section{Atomare und molekulare Konstanten}
 	
-	# Atomare und molekulare Konstanten
-	
-	## Klassischer Elektronenradius
+	\subsection{Klassischer Elektronenradius}
 	
 	Mit der Elektronenmasse $m_e = 9.1093837015 \times 10^{-31}$ kg:
 	
-	
-```math-equation
-
+	\begin{equation}
 		r_e = \frac{e^2}{4\pi\varepsilon_0 m_e c^2} = \frac{\alpha \hbar}{m_e c} = 2.817940 \times 10^{-15} \text{ m}
+	\end{equation}
 	
-```
-
+	\subsection{Compton-Wellenl\"ange des Elektrons}
 	
-	## Compton-Wellenl\"ange des Elektrons
-	
-	
-```math-equation
-
+	\begin{equation}
 		\lambda_{C,e} = \frac{h}{m_e c} = \frac{2\pi\hbar}{m_e c} = 2.426310 \times 10^{-12} \text{ m}
+	\end{equation}
 	
-```
-
+	\subsection{Bohr-Radius}
 	
-	## Bohr-Radius
-	
-	
-```math-equation
-
+	\begin{equation}
 		a_0 = \frac{4\pi\varepsilon_0\hbar^2}{m_e e^2} = \frac{\hbar}{m_e c \alpha} = 5.291772 \times 10^{-11} \text{ m}
+	\end{equation}
 	
-```
-
+	\subsection{Rydberg-Konstante}
 	
-	## Rydberg-Konstante
-	
-	
-```math-equation
-
+	\begin{equation}
 		R_\infty = \frac{\alpha^2 m_e c}{2h} = \frac{\alpha^2 m_e c}{4\pi\hbar} = 1.097373 \times 10^7 \text{ m}^{-1}
+	\end{equation}
 	
-```
-
+	\section{Thermodynamische Konstanten}
 	
-	# Thermodynamische Konstanten
+	\subsection{Stefan-Boltzmann-Konstante}
 	
-	## Stefan-Boltzmann-Konstante
-	
-	
-```math-equation
-
+	\begin{equation}
 		\sigma = \frac{2\pi^5 k_B^4}{15 h^3 c^2} = \frac{2\pi^5 k_B^4}{15 (2\pi\hbar)^3 c^2} = 5.670374419 \times 10^{-8} \text{ W/(m}^2\text{·K}^4\text{)}
+	\end{equation}
 	
-```
-
+	\subsection{Wien-Verschiebungsgesetz-Konstante}
 	
-	## Wien-Verschiebungsgesetz-Konstante
-	
-	
-```math-equation
-
+	\begin{equation}
 		b = \frac{hc}{k_B} \times \frac{1}{4.965114231} = 2.897771955 \times 10^{-3} \text{ m·K}
+	\end{equation}
 	
-```
-
+	\section{Dimensionsanalyse und Verifikation}
 	
-	# Dimensionsanalyse und Verifikation
+	\subsection{Konsistenzpr\"ufung der Feinstrukturkonstante}
 	
-	## Konsistenzpr\"ufung der Feinstrukturkonstante
-	
-	
-```math-align
-
+	\begin{align}
 		[\alpha] &= \frac{[e^2]}{[\varepsilon_0][\hbar][c]}\\
 		&= \frac{[\text{C}^2]}{[\text{F/m}][\text{J·s}][\text{m/s}]}\\
 		&= \frac{[\text{C}^2]}{[\text{C}^2\text{·s}^2/(\text{kg·m}^3)][\text{J·s}][\text{m/s}]}\\
 		&= \frac{[\text{C}^2]}{[\text{C}^2/(\text{kg·m}^2\text{/s}^2)]}\\
 		&= [1] \quad \checkmark
+	\end{align}
 	
-```
-
+	\subsection{Konsistenzpr\"ufung der Gravitationskonstante}
 	
-	## Konsistenzpr\"ufung der Gravitationskonstante
-	
-	
-```math-align
-
+	\begin{align}
 		[G] &= \frac{[\ell_P^2][c^3]}{[\hbar]}\\
 		&= \frac{[\text{m}^2][\text{m}^3/\text{s}^3]}{[\text{J·s}]}\\
 		&= \frac{[\text{m}^5/\text{s}^3]}{[\text{kg·m}^2/\text{s}^2\text{·s}]}\\
 		&= \frac{[\text{m}^5/\text{s}^3]}{[\text{kg·m}^2/\text{s}^3]}\\
 		&= [\text{m}^3/(\text{kg·s}^2)] \quad \checkmark
+	\end{align}
 	
-```
-
+	\subsection{Konsistenzpr\"ufung von $\hbar$}
 	
-	## Konsistenzpr\"ufung von $\hbar$
-	
-	
-```math-align
-
+	\begin{align}
 		[\hbar] &= \frac{[e^2]}{[\varepsilon_0][c][\alpha]}\\
 		&= \frac{[\text{C}^2]}{[\text{F/m}][\text{m/s}][1]}\\
 		&= \frac{[\text{C}^2]}{[\text{C}^2\text{·s}/(\text{kg·m}^3)][\text{m/s}]}\\
 		&= \frac{[\text{C}^2\text{·kg·m}^3]}{[\text{C}^2\text{·s·m}]}\\
 		&= [\text{kg·m}^2/\text{s}] = [\text{J·s}] \quad \checkmark
+	\end{align}
 	
-```
-
+	\section{Die charakteristische Energie E\_0 und T0-Theorie}
 	
-	# Die charakteristische Energie E\_0 und T0-Theorie
-	
-	## Definition der charakteristischen Energie
+	\subsection{Definition der charakteristischen Energie}
 	
 	\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Grunddefinition]
 		Die fundamentale Definition der charakteristischen Energie ist:
-		
-```math-equation
-
+		\begin{equation}
 			\boxed{E_0 = \sqrt{m_e \cdot m_\mu}}
-		
-```
-
+		\end{equation}
 		Dies ist \textbf{keine Herleitung} und \textbf{kein Fit} -- es ist die mathematische Definition des geometrischen Mittels zweier Massen.
 	\end{tcolorbox}
 	
-	## Numerische Auswertung mit verschiedenen Pr\"azisionsstufen
+	\subsection{Numerische Auswertung mit verschiedenen Pr\"azisionsstufen}
 	
-	### Stufe 1: Gerundete Standardwerte
+	\subsubsection{Stufe 1: Gerundete Standardwerte}
 	Mit den oft zitierten gerundeten Massen:
-	
-```math-align
-
+	\begin{align}
 		m_e &= \SI{0.511}{\MeV} \\
 		m_\mu &= \SI{105.658}{\MeV} \\
 		E_0^{(1)} &= \sqrt{0.511 \times 105.658} = \sqrt{53.99} = \SI{7.348}{\MeV}
+	\end{align}
 	
-```
-
-	
-	### Stufe 2: CODATA 2018 Pr\"azisionswerte
+	\subsubsection{Stufe 2: CODATA 2018 Pr\"azisionswerte}
 	Mit den exakten experimentellen Massen:
-	
-```math-align
-
+	\begin{align}
 		m_e &= \SI{0.5109989461}{\MeV} \\
 		m_\mu &= \SI{105.6583745}{\MeV} \\
 		E_0^{(2)} &= \sqrt{0.5109989461 \times 105.6583745} = \SI{7.348566}{\MeV}
+	\end{align}
 	
-```
-
-	
-	### Stufe 3: Der optimierte Wert E\_0 = \SI{7.398{\MeV}}
+	\subsubsection{Stufe 3: Der optimierte Wert E\_0 = \SI{7.398}{\MeV}}
 	
 	\begin{tcolorbox}[colback=yellow!10!white,colframe=orange!75!black,title=Kritische Frage]
 		\textbf{Ist $E_0 = \SI{7.398}{\MeV}$ ein angepasster Parameter?}
@@ -495,25 +357,21 @@
 		$E_0 = \SI{7.398}{\MeV}$ ist das exakte geometrische Mittel von verfeinerten CODATA-Werten, die alle experimentellen Korrekturen einschlie\ss{}en.
 	\end{tcolorbox}
 	
-	## Pr\"azise Feinstrukturkonstanten-Berechnung
+	\subsection{Pr\"azise Feinstrukturkonstanten-Berechnung}
 	
 	Die dimensionslos korrekte Formel:
 	
-	
-```math-equation
-
+	\begin{equation}
 		\alpha = \xi \cdot \frac{E_0^2}{( \SI{1}{\MeV} )^2}
-	
-```
-
+	\end{equation}
 	
 	wobei:
+	\begin{itemize}
+		\item $\xi = \frac{4}{3} \times 10^{-4} = 1.333\overline{3} \times 10^{-4}$ (exakt)
+		\item $( \SI{1}{\MeV} )^2$ ist die Normierungsenergie f\"ur Dimensionslosigkeit
+	\end{itemize}
 	
-		- $\xi = \frac{4}{3} \times 10^{-4} = 1.333\overline{3} \times 10^{-4}$ (exakt)
-		- $( \SI{1}{\MeV} )^2$ ist die Normierungsenergie f\"ur Dimensionslosigkeit
-	
-	
-	## Vergleich der Berechnungsgenauigkeit
+	\subsection{Vergleich der Berechnungsgenauigkeit}
 	
 	\begin{table}[h]
 		\centering
@@ -531,19 +389,15 @@
 		\caption{Vergleich der Berechnungsgenauigkeit f\"ur verschiedene E\_0-Werte}
 	\end{table}
 	
-	## Detaillierte Berechnung mit E\_0 = \SI{7.398{\MeV}}
+	\subsection{Detaillierte Berechnung mit E\_0 = \SI{7.398}{\MeV}}
 	
-	
-```math-align
-
+	\begin{align}
 		E_0^2 &= (7.398)^2 = \SI{54.7303}{\MeV\squared} \\
 		\frac{E_0^2}{( \SI{1}{\MeV} )^2} &= 54.7303 \\
 		\alpha &= 1.333\overline{3} \times 10^{-4} \times 54.7303 \\
 		&= 7.297 \times 10^{-3} \\
 		\alpha^{-1} &= 137.038
-	
-```
-
+	\end{align}
 	
 	\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=Hervorragende \"Ubereinstimmung]
 		\textbf{T0-Vorhersage:} $\alpha^{-1} = 137.038$
@@ -553,108 +407,88 @@
 		\textbf{Relative Abweichung:} $\frac{|137.038 - 137.036|}{137.036} = 0.0014\%$
 	\end{tcolorbox}
 	
-	# Erkl\"arung der optimalen Pr\"azision
+	\section{Erkl\"arung der optimalen Pr\"azision}
 	
-	## Warum E\_0 = \SI{7.398{\MeV} optimal funktioniert}
+	\subsection{Warum E\_0 = \SI{7.398}{\MeV} optimal funktioniert}
 	
 	Der Wert $E_0 = \SI{7.398}{\MeV}$ ist \textbf{nicht willk\"urlich}, sondern entsteht durch:
 	
+	\begin{enumerate}
+		\item \textbf{Ber\"ucksichtigung aller QED-Korrekturen} in den Teilchenmassen
+		\item \textbf{Einbeziehung schwacher Wechselwirkungseffekte}
+		\item \textbf{Geometrische Mittelwertbildung} mit vollst\"andiger Pr\"azision
+		\item \textbf{Konsistenz} mit der T0-Geometrie $\xi = \frac{4}{3} \times 10^{-4}$
+	\end{enumerate}
 	
-		- \textbf{Ber\"ucksichtigung aller QED-Korrekturen} in den Teilchenmassen
-		- \textbf{Einbeziehung schwacher Wechselwirkungseffekte}
-		- \textbf{Geometrische Mittelwertbildung} mit vollst\"andiger Pr\"azision
-		- \textbf{Konsistenz} mit der T0-Geometrie $\xi = \frac{4}{3} \times 10^{-4}$
-	
-	
-	## Die mathematische Begr\"undung
+	\subsection{Die mathematische Begr\"undung}
 	
 	\begin{tcolorbox}[colback=blue!10!white,colframe=blue!75!black,title=Geometrische Interpretation]
 		Das geometrische Mittel $E_0 = \sqrt{m_e \cdot m_\mu}$ ist die nat\"urliche Energieskala zwischen Elektron und Myon. 
 		
 		Auf logarithmischer Skala liegt $E_0$ exakt in der Mitte:
-		
-```math-equation
-
+		\begin{equation}
 			\log(E_0) = \frac{\log(m_e) + \log(m_\mu)}{2}
-		
-```
-
+		\end{equation}
 		
 		Dies ist die \textbf{charakteristische Energie} der ersten beiden Leptonengenerationen.
 	\end{tcolorbox}
 	
-	# Vergleich mit alternativen Ans\"atzen
+	\section{Vergleich mit alternativen Ans\"atzen}
 	
-	## Sch\"atzung mit T0-berechneten Massen
+	\subsection{Sch\"atzung mit T0-berechneten Massen}
 	
 	Falls die Teilchenmassen selbst aus der T0-Theorie berechnet w\"urden:
-	
-```math-align
-
+	\begin{align}
 		m_e^{\text{T0}} &= \SI{0.511000}{\MeV} \quad \text{(theoretisch)} \\
 		m_\mu^{\text{T0}} &= \SI{105.658000}{\MeV} \quad \text{(theoretisch)} \\
 		E_0^{\text{T0}} &= \sqrt{0.511000 \times 105.658000} = \SI{72.868}{\MeV}
-	
-```
-
+	\end{align}
 	
 	\textbf{Problem:} Diese Rechnung ist offensichtlich fehlerhaft ($E_0 = \SI{72.868}{\MeV}$ ist viel zu gro\ss{}).
 	
-	## Korrekte Interpretation
+	\subsection{Korrekte Interpretation}
 	
 	Der korrekte Ansatz ist:
+	\begin{enumerate}
+		\item \textbf{Experimentelle Massen} als Input verwenden
+		\item \textbf{Geometrisches Mittel} exakt berechnen  
+		\item \textbf{T0-Geometrie} $\xi$ als theoretischen Parameter
+		\item \textbf{Feinstrukturkonstante} als Output pr\"ufen
+	\end{enumerate}
 	
-		- \textbf{Experimentelle Massen} als Input verwenden
-		- \textbf{Geometrisches Mittel} exakt berechnen  
-		- \textbf{T0-Geometrie} $\xi$ als theoretischen Parameter
-		- \textbf{Feinstrukturkonstante} als Output pr\"ufen
+	\section{Dimensionale Konsistenz der E\_0-Formel}
 	
-	
-	# Dimensionale Konsistenz der E\_0-Formel
-	
-	## Korrekte dimensionslose Formulierung
+	\subsection{Korrekte dimensionslose Formulierung}
 	
 	Die Formel:
-	
-```math-equation
-
+	\begin{equation}
 		\alpha = \xi \cdot \frac{E_0^2}{( \SI{1}{\MeV} )^2}
-	
-```
-
+	\end{equation}
 	
 	ist dimensionslos konsistent:
-	
-```math-align
-
+	\begin{align}
 		[\alpha] &= [\xi] \cdot \frac{[E_0^2]}{[( \SI{1}{\MeV} )^2]} \\
 		&= [1] \cdot \frac{[\text{Energie}^2]}{[\text{Energie}^2]} \\
 		&= [1] \quad \checkmark
+	\end{align}
 	
-```
-
-	
-	## Alternative Schreibweise
+	\subsection{Alternative Schreibweise}
 	
 	Equivalent kann geschrieben werden:
-	
-```math-equation
-
+	\begin{equation}
 		\frac{1}{\alpha} = \frac{( \SI{1}{\MeV} )^2}{\xi \cdot E_0^2} = \frac{1}{\xi \cdot 54.73} = \frac{1}{1.333 \times 10^{-4} \times 54.73} = 137.038
+	\end{equation}
 	
-```
-
-	
-	# Fazit der E\_0-Klarstellung
+	\section{Fazit der E\_0-Klarstellung}
 	
 	\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Zusammenfassung E\_0-Analyse]
-		
-			- $E_0 = \SI{7.398}{\MeV}$ ist \textbf{KEIN} angepasster Parameter
-			- Es ist das \textbf{exakte geometrische Mittel} verfeinerter CODATA-Massen
-			- Die hervorragende \"Ubereinstimmung mit $\alpha$ best\"atigt die \textbf{T0-Geometrie}
-			- Der geometrische Parameter $\xi = \frac{4}{3} \times 10^{-4}$ ist die \textbf{wahre Fundamentalkonstante}
-			- Die Formel $\alpha = \xi \cdot \frac{E_0^2}{( \SI{1}{\MeV} )^2}$ ist \textbf{dimensional korrekt}
-		
+		\begin{enumerate}
+			\item $E_0 = \SI{7.398}{\MeV}$ ist \textbf{KEIN} angepasster Parameter
+			\item Es ist das \textbf{exakte geometrische Mittel} verfeinerter CODATA-Massen
+			\item Die hervorragende \"Ubereinstimmung mit $\alpha$ best\"atigt die \textbf{T0-Geometrie}
+			\item Der geometrische Parameter $\xi = \frac{4}{3} \times 10^{-4}$ ist die \textbf{wahre Fundamentalkonstante}
+			\item Die Formel $\alpha = \xi \cdot \frac{E_0^2}{( \SI{1}{\MeV} )^2}$ ist \textbf{dimensional korrekt}
+		\end{enumerate}
 	\end{tcolorbox}
 	
 	\begin{tcolorbox}[colback=green!10!white,colframe=green!75!black,title=Die Revolution\"are E\_0-Erkenntnis]
@@ -663,23 +497,19 @@
 		Dies ist kein Zufall -- es offenbart die fundamentale geometrische Struktur der Natur!
 	\end{tcolorbox}
 	
-	## Das Kernprinzip der Verh\"altnisse
+	\subsection{Das Kernprinzip der Verh\"altnisse}
 	
 	\begin{tcolorbox}[colback=blue!10!white,colframe=blue!75!black,title=Fraktale Korrekturen k\"urzen sich in Verh\"altnissen]
 		Die wichtigste Erkenntnis der T0-Theorie ist, dass die fraktale Korrektur $K_{\text{frak}}$ sich bei \textbf{Verh\"altnissen} vollst\"andig herausk\"urzt:
 		
-		
-```math-equation
-
+		\begin{equation}
 			\frac{m_\mu}{m_e} = \frac{K_{\text{frak}} \times m_\mu^{\text{bare}}}{K_{\text{frak}} \times m_e^{\text{bare}}} = \frac{m_\mu^{\text{bare}}}{m_e^{\text{bare}}}
-		
-```
-
+		\end{equation}
 		
 		Das bedeutet: \textbf{Verh\"altnisse ben\"otigen keine Korrektur!}
 	\end{tcolorbox}
 	
-	## Was KEINE Korrektur ben\"otigt
+	\subsection{Was KEINE Korrektur ben\"otigt}
 	
 	\begin{table}[h]
 		\centering
@@ -697,27 +527,23 @@
 	
 	\textbf{Abweichung beim Massenverh\"altnis}: Nur 0.5\% ohne jede Korrektur!
 	
-	## Was Korrektur ben\"otigt
+	\subsection{Was Korrektur ben\"otigt}
 	
+	\begin{itemize}
+		\item \textbf{Absolute Einzelmassen}: $m_e$, $m_\mu$ (einzeln gemessen)
+		\item \textbf{Feinstrukturkonstante}: $\alpha$ als absolute dimensionslose Gr\"o\ss{}e
+		\item \textbf{Absolute Energieskalen}: Einzelne Energiewerte
+	\end{itemize}
 	
-		- \textbf{Absolute Einzelmassen}: $m_e$, $m_\mu$ (einzeln gemessen)
-		- \textbf{Feinstrukturkonstante}: $\alpha$ als absolute dimensionslose Gr\"o\ss{}e
-		- \textbf{Absolute Energieskalen}: Einzelne Energiewerte
-	
-	
-	## Die mathematische Begr\"undung
+	\subsection{Die mathematische Begr\"undung}
 	
 	Aus der T0-Theorie folgt das Massenverh\"altnis:
-	
-```math-align
-
+	\begin{align}
 		\frac{m_\mu}{m_e} &= \frac{8/5}{2/3} \times \xi^{-1/2} \\
 		&= \frac{12}{5} \times \xi^{-1/2} \\
 		&= 2.4 \times \left(\frac{4}{3} \times 10^{-4}\right)^{-1/2} \\
 		&= 2.4 \times 86.6 = 207.84
-	
-```
-
+	\end{align}
 	
 	\textbf{Experimentell}: 206.768 \quad \textbf{Abweichung}: 0.5\%
 	
@@ -729,99 +555,75 @@
 		Nur die absolute Skalierung ben\"otigt Anpassung, nicht die fundamentalen Beziehungen.
 	\end{tcolorbox}
 	
-	# Entkr\"aftung der Zirkularit\"ats-Einw\"ande
+	\section{Entkr\"aftung der Zirkularit\"ats-Einw\"ande}
 	
-	## Die scheinbaren Zirkularit\"ats-Einw\"ande
+	\subsection{Die scheinbaren Zirkularit\"ats-Einw\"ande}
 	
 	\begin{tcolorbox}[colback=red!10!white,colframe=red!75!black,title=H\"aufige Kritikpunkte]
 		\textbf{Einwand 1:} Die Planck-L\"ange $\ell_P$ ist bereits \"uber die Gravitationskonstante $G$ definiert:
-		
-```math-equation
-
+		\begin{equation}
 			\ell_P = \sqrt{\frac{\hbar G}{c^3}}
-		
-```
-
+		\end{equation}
 		Daher ist es zirkul\"ar, $G$ aus $\ell_P$ abzuleiten!
 		
 		\textbf{Einwand 2:} Die Lichtgeschwindigkeit $c$ wird aus $\mu_0$ und $\varepsilon_0$ berechnet:
-		
-```math-equation
-
+		\begin{equation}
 			c = \frac{1}{\sqrt{\mu_0 \varepsilon_0}}
-		
-```
-
+		\end{equation}
 		Aber $\varepsilon_0$ wird aus $c$ berechnet - das ist zirkul\"ar!
 	\end{tcolorbox}
 	
-	## Aufl\"osung der scheinbaren Zirkularit\"at
+	\subsection{Aufl\"osung der scheinbaren Zirkularit\"at}
 	
-	### Die wahre Struktur der SI-Definitionen (seit 2019)
+	\subsubsection{Die wahre Struktur der SI-Definitionen (seit 2019)}
 	
 	\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=Moderne SI-Basis]
 		Seit der SI-Reform 2019 sind folgende Gr\"o\ss{}en \textbf{exakt definiert}:
-		
-```math-align
-
+		\begin{align}
 			c &= 299792458 \text{ m/s} \quad \text{(exakte Definition)}\\
 			e &= 1.602176634 \times 10^{-19} \text{ C} \quad \text{(exakte Definition)}\\
 			\hbar &= 1.054571817 \times 10^{-34} \text{ J·s} \quad \text{(exakte Definition)}\\
 			k_B &= 1.380649 \times 10^{-23} \text{ J/K} \quad \text{(exakte Definition)}
-		
-```
-
+		\end{align}
 		
 		Nur $\mu_0$ wird noch berechnet: $\mu_0 = \frac{4\pi \times 10^{-7}}{\text{definiert}}$
 	\end{tcolorbox}
 	
-	### Korrigierte Hierarchie mit modernem SI
+	\subsubsection{Korrigierte Hierarchie mit modernem SI}
 	
 	Die tats\"achliche Ableitung ist daher:
 	
-	
-```math-align
-
+	\begin{align}
 		\text{\textbf{Gegeben (experimentell):}} &\quad \alpha, \ell_P\\
 		\text{\textbf{Definiert (SI 2019):}} &\quad c, e, \hbar, k_B\\
 		\text{\textbf{Berechnet:}} &\quad \varepsilon_0 = \frac{e^2}{4\pi\hbar c \alpha}\\
 		&\quad \mu_0 = \frac{1}{\varepsilon_0 c^2}\\
 		&\quad G = \frac{\ell_P^2 c^3}{\hbar}
-	
-```
-
+	\end{align}
 	
 	\textbf{Ergebnis:} Keine Zirkularit\"at, da $c$ und $\hbar$ direkt definiert sind!
 	
-	### $\ell_P$ ist nur EINE m\"ogliche L\"angenskala
+	\subsubsection{$\ell_P$ ist nur EINE m\"ogliche L\"angenskala}
 	
 	Die Planck-L\"ange ist nicht die einzige fundamentale L\"angenskala. Man k\"onnte genausogut verwenden:
 	
-	
-```math-align
-
+	\begin{align}
 		L_1 &= 2.5 \times 10^{-35} \text{ m} \quad \text{(willk\"urlich gew\"ahlt)}\\
 		L_2 &= 1.0 \times 10^{-35} \text{ m} \quad \text{(runde Zahl)}\\
 		L_3 &= \pi \times 10^{-35} \text{ m} \quad \text{(mit } \pi \text{)}\\
 		L_4 &= e \times 10^{-35} \text{ m} \quad \text{(mit } e \text{)}
+	\end{align}
 	
-```
-
-	
-	### Die Mathematik funktioniert mit JEDER L\"angenskala
+	\subsubsection{Die Mathematik funktioniert mit JEDER L\"angenskala}
 	
 	Die allgemeine Formel lautet:
-	
-```math-equation
-
+	\begin{equation}
 		G = \frac{L^2 \times c^3}{\hbar}
-	
-```
-
+	\end{equation}
 	
 	\textbf{Entscheidend:} Nur mit der spezifischen L\"ange $\ell_P = 1.616255 \times 10^{-35}$ m erh\"alt man den korrekten experimentellen Wert von $G$.
 	
-	### Der SI-Bezug ist das Entscheidende
+	\subsubsection{Der SI-Bezug ist das Entscheidende}
 	
 	\begin{table}[h]
 		\centering
@@ -838,124 +640,112 @@
 		\caption{G-Werte f\"ur verschiedene L\"angenskalen}
 	\end{table}
 	
-	## Die wahre Hierarchie
+	\subsection{Die wahre Hierarchie}
 	
 	\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=Korrekte Interpretation]
 		$\ell_P$ ist nicht \"uber $G$ definiert - sondern beide sind Manifestationen derselben fundamentalen Geometrie!
 		
 		\textbf{Die wahre Reihenfolge:}
-		
-			- Fundamentale 3D-Raumgeometrie $\rightarrow$ $\xi = \frac{4}{3} \times 10^{-4}$
-			- Daraus folgt $\ell_P$ als nat\"urliche Skala
-			- Daraus folgt $G$ als emergente Eigenschaft  
-			- SI-Einheiten geben den Bezug zu menschlichen Ma\ss{}st\"aben
-		
+		\begin{enumerate}
+			\item Fundamentale 3D-Raumgeometrie $\rightarrow$ $\xi = \frac{4}{3} \times 10^{-4}$
+			\item Daraus folgt $\ell_P$ als nat\"urliche Skala
+			\item Daraus folgt $G$ als emergente Eigenschaft  
+			\item SI-Einheiten geben den Bezug zu menschlichen Ma\ss{}st\"aben
+		\end{enumerate}
 	\end{tcolorbox}
 	
-	## Experimentelle Best\"atigung der Nicht-Zirkularit\"at
+	\subsection{Experimentelle Best\"atigung der Nicht-Zirkularit\"at}
 	
-	### Unabh\"angige Messung von $\ell_P$
+	\subsubsection{Unabh\"angige Messung von $\ell_P$}
 	
 	Die Planck-L\"ange kann prinzipiell unabh\"angig von $G$ gemessen werden durch:
 	
+	\begin{enumerate}
+		\item \textbf{Quantengravitations-Experimente:} Direkte Messung der minimalen L\"angenskala
+		\item \textbf{Schwarze-Loch-Hawking-Strahlung:} $\ell_P$ bestimmt die Verdampfungsrate
+		\item \textbf{Kosmologische Beobachtungen:} $\ell_P$ beeinflusst Quantenfluktuationen der Inflation
+		\item \textbf{Hochenergie-Streuexperimente:} Bei Planck-Energien wird $\ell_P$ direkt zug\"anglich
+	\end{enumerate}
 	
-		- \textbf{Quantengravitations-Experimente:} Direkte Messung der minimalen L\"angenskala
-		- \textbf{Schwarze-Loch-Hawking-Strahlung:} $\ell_P$ bestimmt die Verdampfungsrate
-		- \textbf{Kosmologische Beobachtungen:} $\ell_P$ beeinflusst Quantenfluktuationen der Inflation
-		- \textbf{Hochenergie-Streuexperimente:} Bei Planck-Energien wird $\ell_P$ direkt zug\"anglich
-	
-	
-	### Unabh\"angige Messung von $\alpha$
+	\subsubsection{Unabh\"angige Messung von $\alpha$}
 	
 	Die Feinstrukturkonstante wird gemessen durch:
 	
-	
-		- \textbf{Quantenhalleffekt:} $\alpha = \frac{e^2}{h} \times \frac{R_K}{Z_0}$
-		- \textbf{Anomales magnetisches Moment:} $\alpha$ aus QED-Korrekturen
-		- \textbf{Atominterferometrie:} $\alpha$ aus R\"ucksto\ss{}-Messungen
-		- \textbf{Spektroskopie:} $\alpha$ aus Wasserstoff-Spektrum
-	
+	\begin{enumerate}
+		\item \textbf{Quantenhalleffekt:} $\alpha = \frac{e^2}{h} \times \frac{R_K}{Z_0}$
+		\item \textbf{Anomales magnetisches Moment:} $\alpha$ aus QED-Korrekturen
+		\item \textbf{Atominterferometrie:} $\alpha$ aus R\"ucksto\ss{}-Messungen
+		\item \textbf{Spektroskopie:} $\alpha$ aus Wasserstoff-Spektrum
+	\end{enumerate}
 	
 	Keine dieser Methoden verwendet $G$ oder $\ell_P$!
 	
-	## Mathematischer Nachweis der Nicht-Zirkularit\"at
+	\subsection{Mathematischer Nachweis der Nicht-Zirkularit\"at}
 	
-	### Definitionshierarchie
+	\subsubsection{Definitionshierarchie}
 	
-	
-```math-align
-
+	\begin{align}
 		\text{\textbf{Gegeben:}} &\quad \alpha \text{ (experimentell)}, \quad \ell_P \text{ (experimentell)}\\
 		\text{\textbf{Definiert:}} &\quad \mu_0 \text{ (SI-Konvention)}, \quad e \text{ (SI-Konvention)}\\
 		\text{\textbf{Berechnet:}} &\quad c = f_1(\mu_0), \quad \varepsilon_0 = f_2(\mu_0, c)\\
 		&\quad \hbar = f_3(e, \varepsilon_0, c, \alpha)\\
 		&\quad G = f_4(\ell_P, c, \hbar)
-	
-```
-
+	\end{align}
 	
 	\textbf{Jede Gr\"o\ss{}e h\"angt nur von vorher definierten Gr\"o\ss{}en ab!}
 	
-	### Zirkularit\"atstest
+	\subsubsection{Zirkularit\"atstest}
 	
 	Ein zirkul\"ares Argument liegt vor, wenn:
-	
-```math-equation
-
+	\begin{equation}
 		A \xrightarrow{\text{definiert}} B \xrightarrow{\text{definiert}} C \xrightarrow{\text{definiert}} A
-	
-```
-
+	\end{equation}
 	
 	In unserem Fall:
-	
-```math-equation
-
+	\begin{equation}
 		\alpha, \ell_P \xrightarrow{\text{berechnet}} \hbar \xrightarrow{\text{berechnet}} G \not\rightarrow \alpha, \ell_P
-	
-```
-
+	\end{equation}
 	
 	\textbf{Ergebnis:} Keine Zirkularit\"at vorhanden!
 	
-	## Das philosophische Argument
+	\subsection{Das philosophische Argument}
 	
-	### Referenzskalen sind notwendig
+	\subsubsection{Referenzskalen sind notwendig}
 	
 	\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Fundamentale Erkenntnis]
 		\textbf{Jede Physik ben\"otigt Referenzskalen!}
 		
 		Die Natur ist dimensional strukturiert. Um von dimensionslosen Beziehungen zu messbaren Gr\"o\ss{}en zu gelangen, brauchen wir:
-		
-			- Eine \textbf{Energieskala} (aus $\alpha$)
-			- Eine \textbf{L\"angenskala} (aus $\ell_P$) 
-			- \textbf{SI-Konventionen} (menschliche Ma\ss{}st\"abe)
-		
+		\begin{itemize}
+			\item Eine \textbf{Energieskala} (aus $\alpha$)
+			\item Eine \textbf{L\"angenskala} (aus $\ell_P$) 
+			\item \textbf{SI-Konventionen} (menschliche Ma\ss{}st\"abe)
+		\end{itemize}
 		
 		Dies ist keine Schw\"ache der Theorie, sondern eine Notwendigkeit jeder dimensionalen Physik!
 	\end{tcolorbox}
 	
-	## Zusammenfassung: Warum der Zirkularit\"ats-Einwand nicht zutrifft
+	\subsection{Zusammenfassung: Warum der Zirkularit\"ats-Einwand nicht zutrifft}
 	
 	\begin{tcolorbox}[colback=yellow!10!white,colframe=orange!75!black,title=Endg\"ultige Widerlegung]
 		\textbf{Der Zirkularit\"ats-Einwand ist unbegr\"undet, weil:}
 		
-		
-			- $\ell_P$ ist nur eine von vielen m\"oglichen L\"angenskalen
-			- Nur die spezifische Planck-L\"ange liefert den korrekten G-Wert  
-			- $\ell_P$ und $G$ sind beide Manifestationen derselben Geometrie
-			- $\ell_P$ dient als SI-Referenz, nicht als G-Definition
-			- Ohne SI-Bezug ginge die Verbindung zu messbaren Gr\"o\ss{}en verloren
-			- Alle etablierten Theorien verwenden fundamentale Skalen als Input
-			- Die mathematische Hierarchie ist nicht-zirkul\"ar
-		
+		\begin{enumerate}
+			\item $\ell_P$ ist nur eine von vielen m\"oglichen L\"angenskalen
+			\item Nur die spezifische Planck-L\"ange liefert den korrekten G-Wert  
+			\item $\ell_P$ und $G$ sind beide Manifestationen derselben Geometrie
+			\item $\ell_P$ dient als SI-Referenz, nicht als G-Definition
+			\item Ohne SI-Bezug ginge die Verbindung zu messbaren Gr\"o\ss{}en verloren
+			\item Alle etablierten Theorien verwenden fundamentale Skalen als Input
+			\item Die mathematische Hierarchie ist nicht-zirkul\"ar
+		\end{enumerate}
 		
 		\textbf{Fazit:} $\ell_P$ ist die nat\"urliche Br\"ucke zwischen fundamentaler Geometrie und menschlichen Ma\ss{}st\"aben - keine zirkul\"are Definition!
 	\end{tcolorbox}
 	
-	# Zusammenfassung und Ergebnisse
+	\section{Zusammenfassung und Ergebnisse}
 	
-	## Die fundamentale Hierarchie
+	\subsection{Die fundamentale Hierarchie}
 	
 	\begin{table}[h]
 		\centering
@@ -974,73 +764,69 @@
 		\caption{Hierarchie der physikalischen Konstanten}
 	\end{table}
 	
-	## Kernerkenntnisse
+	\subsection{Kernerkenntnisse}
 	
 	\begin{tcolorbox}[colback=yellow!10!white,colframe=orange!75!black,title=Revolution\"are Einfachheit]
-		
-			- \textbf{Nur 2 experimentelle Konstanten} ($\alpha$ und $\ell_P$) gen\"ugen f\"ur die gesamte Physik
-			- \textbf{Alle anderen Konstanten} sind mathematische Konsequenzen
-			- \textbf{SI-Definitionen} sind menschliche Konventionen, keine Naturgesetze
-			- \textbf{Die Natur ist fundamental einfach}, nicht kompliziert
-			- \textbf{T0-Rohwerte} liefern bereits echte physikalische Verh\"altnisse
-			- \textbf{Fraktale Korrekturen} sind nur f\"ur absolute Werte n\"otig
-		
+		\begin{enumerate}
+			\item \textbf{Nur 2 experimentelle Konstanten} ($\alpha$ und $\ell_P$) gen\"ugen f\"ur die gesamte Physik
+			\item \textbf{Alle anderen Konstanten} sind mathematische Konsequenzen
+			\item \textbf{SI-Definitionen} sind menschliche Konventionen, keine Naturgesetze
+			\item \textbf{Die Natur ist fundamental einfach}, nicht kompliziert
+			\item \textbf{T0-Rohwerte} liefern bereits echte physikalische Verh\"altnisse
+			\item \textbf{Fraktale Korrekturen} sind nur f\"ur absolute Werte n\"otig
+		\end{enumerate}
 	\end{tcolorbox}
 	
-	## Praktische Bedeutung
+	\subsection{Praktische Bedeutung}
 	
 	Diese Herleitung zeigt, dass:
 	
+	\begin{itemize}
+		\item Die Physik viel einfacher ist als traditionell dargestellt
+		\item Nur wenige fundamentale Prinzipien die gesamte Natur bestimmen
+		\item Alle anderen Konstanten emergente Eigenschaften sind
+		\item Eine Weltformel m\"oglicherweise nur zwei Parameter ben\"otigt
+		\item Die charakteristische Energie $E_0$ kein angepasster Parameter ist
+		\item Zirkularit\"ats-Einw\"ande wissenschaftlich haltlos sind
+	\end{itemize}
 	
-		- Die Physik viel einfacher ist als traditionell dargestellt
-		- Nur wenige fundamentale Prinzipien die gesamte Natur bestimmen
-		- Alle anderen Konstanten emergente Eigenschaften sind
-		- Eine Weltformel m\"oglicherweise nur zwei Parameter ben\"otigt
-		- Die charakteristische Energie $E_0$ kein angepasster Parameter ist
-		- Zirkularit\"ats-Einw\"ande wissenschaftlich haltlos sind
+	\section{Weiterf\"uhrende \"Uberlegungen}
 	
-	
-	# Weiterf\"uhrende \"Uberlegungen
-	
-	## Verbindung zum T0-Modell
+	\subsection{Verbindung zum T0-Modell}
 	
 	Im Rahmen des T0-Modells k\"onnen sogar $\alpha$ und $\ell_P$ aus noch fundamentaleren geometrischen Prinzipien abgeleitet werden:
 	
-	
-```math-align
-
+	\begin{align}
 		\xi &= \frac{4}{3} \times 10^{-4} \quad \text{(3D-Raumgeometrie)}\\
 		\alpha &= \xi \times E_0^2 \quad \text{mit } E_0 = \sqrt{m_e \times m_\mu}\\
 		\ell_P &= \xi \times \ell_{fundamental}
-	
-```
-
+	\end{align}
 	
 	Dies w\"urde die Anzahl der fundamentalen Parameter auf nur noch \textbf{einen} reduzieren: den geometrischen Parameter $\xi$.
 	
-	## Ausblick
+	\subsection{Ausblick}
 	
 	Die Erkenntnis, dass alle physikalischen Konstanten aus nur zwei experimentellen Werten ableitbar sind, \"offnet neue Perspektiven f\"ur:
 	
+	\begin{itemize}
+		\item Eine vereinheitlichte Teorie aller Naturkr\"afte
+		\item Das Verst\"andnis der fundamentalen Einfachheit der Natur
+		\item Neue experimentelle Tests der Grundlagen der Physik
+		\item Die Suche nach der ultimativen Weltformel
+	\end{itemize}
 	
-		- Eine vereinheitlichte Teorie aller Naturkr\"afte
-		- Das Verst\"andnis der fundamentalen Einfachheit der Natur
-		- Neue experimentelle Tests der Grundlagen der Physik
-		- Die Suche nach der ultimativen Weltformel
-	
-	
-	# Gesamtfazit: Vollst\"andige Integration
+	\section{Gesamtfazit: Vollst\"andige Integration}
 	
 	\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Vollst\"andige Zusammenfassung]
-		
-			- $E_0 = \SI{7.398}{\MeV}$ ist \textbf{KEIN} angepasster Parameter
-			- Es ist das \textbf{exakte geometrische Mittel} verfeinerter CODATA-Massen
-			- \textbf{Rohwerte ohne Korrektur} liefern bereits echte Verh\"altnisse
-			- Die fraktale Korrektur k\"urzt sich in Verh\"altnissen heraus
-			- Der geometrische Parameter $\xi = \frac{4}{3} \times 10^{-4}$ ist die \textbf{wahre Fundamentalkonstante}
-			- Die Formel $\alpha = \xi \cdot \frac{E_0^2}{( \SI{1}{\MeV} )^2}$ ist \textbf{dimensional korrekt}
-			- Alle Zirkularit\"ats-Einw\"ande sind \textbf{wissenschaftlich unbegr\"undet}
-		
+		\begin{enumerate}
+			\item $E_0 = \SI{7.398}{\MeV}$ ist \textbf{KEIN} angepasster Parameter
+			\item Es ist das \textbf{exakte geometrische Mittel} verfeinerter CODATA-Massen
+			\item \textbf{Rohwerte ohne Korrektur} liefern bereits echte Verh\"altnisse
+			\item Die fraktale Korrektur k\"urzt sich in Verh\"altnissen heraus
+			\item Der geometrische Parameter $\xi = \frac{4}{3} \times 10^{-4}$ ist die \textbf{wahre Fundamentalkonstante}
+			\item Die Formel $\alpha = \xi \cdot \frac{E_0^2}{( \SI{1}{\MeV} )^2}$ ist \textbf{dimensional korrekt}
+			\item Alle Zirkularit\"ats-Einw\"ande sind \textbf{wissenschaftlich unbegr\"undet}
+		\end{enumerate}
 	\end{tcolorbox}
 	
 	\vspace{1cm}
@@ -1048,13 +834,13 @@
 	\begin{tcolorbox}[colback=green!10!white,colframe=green!75!black,title=Die ultimative Revolution\"are Erkenntnis]
 		Die T0-Theorie zeigt: Nur \textbf{eine einzige geometrische Konstante} $\xi = \frac{4}{3} \times 10^{-4}$ gen\"ugt, um:
 		
-		
-			- Die \textbf{wahren Proportionen} der Leptonmassen vorherzusagen
-			- Die charakteristische Energie $E_0$ zu bestimmen  
-			- Die Feinstrukturkonstante mit beispielloser Pr\"azision zu berechnen
-			- Alle physikalischen Konstanten aus nur $\alpha$ und $\ell_P$ abzuleiten
-			- Zirkularit\"ats-Einw\"ande wissenschaftlich zu entkr\"aften
-		
+		\begin{itemize}
+			\item Die \textbf{wahren Proportionen} der Leptonmassen vorherzusagen
+			\item Die charakteristische Energie $E_0$ zu bestimmen  
+			\item Die Feinstrukturkonstante mit beispielloser Pr\"azision zu berechnen
+			\item Alle physikalischen Konstanten aus nur $\alpha$ und $\ell_P$ abzuleiten
+			\item Zirkularit\"ats-Einw\"ande wissenschaftlich zu entkr\"aften
+		\end{itemize}
 		
 		\textbf{Die Rohwerte sind bereits physikalisch korrekt} - dies offenbart die fundamentale geometrische Einfachheit der Natur!
 		

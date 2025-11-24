@@ -35,7 +35,7 @@
 \usepackage{enumitem}
 \usepackage{newunicodechar}
 
-% Additional packages (cleaned up - removed duplicates)
+% Additional packages
 \usepackage{adjustbox}
 \usepackage{algorithm}
 \usepackage{algorithmic}
@@ -66,7 +66,7 @@
 \usepackage{upgreek}
 \usepackage{url}
 
-% Color definitions (FIXED: removed extra \definecolor commands)
+% Color definitions
 \definecolor{blue}{rgb}{0,0,1}
 \definecolor{boxgray}{RGB}{240,240,240}
 \definecolor{deepblue}{RGB}{0,0,127}
@@ -79,91 +79,65 @@
 \definecolor{t0red}{RGB}{204,0,0}
 \definecolor{t0yellow}{RGB}{255,204,0}
 
-% TikZ libraries
-\usetikzlibrary{arrows,shapes,positioning,calc,patterns,decorations.pathmorphing,decorations.markings}
-
-% PGFPlots setup
+% Geometry and settings
 \pgfplotsset{compat=1.18}
-
-% Hyperref setup
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,
-    urlcolor=cyan,
-    citecolor=green,
-    pdftitle={T0 Theory Document},
-    pdfauthor={Johann Pascher},
-    pdfsubject={T0 Theory},
-    pdfkeywords={T0, physics, theory}
-}
-
-% Header and footer
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\leftmark}
-\fancyhead[LO]{\rightmark}
-\fancyfoot[C]{T0 Theory - Johann Pascher}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc}
 
 % Theorem environments
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
-\theoremstyle{remark}
-\newtheorem{remark}{Remark}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
 \newtheorem{example}{Example}[section]
 
-% Custom commands (common across T0 documents)
-\newcommand{\T}[1]{\text{#1}}
-\newcommand{\mat}[1]{\mathbf{#1}}
-\newcommand{\E}{\mathrm{e}}
-\newcommand{\I}{\mathrm{i}}
-\newcommand{\diff}{\mathrm{d}}
-\newcommand{\Real}{\mathrm{Re}}
-\newcommand{\Imag}{\mathrm{Im}}
+% Custom commands
+\newcommand{\kB}{k_{\text{B}}}
+\newcommand{\degree}{^\circ}
 
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{T0 Theory}
+\fancyfoot[C]{\thepage}
 
 \begin{document}
 
 \maketitle
-\tableofcontents
-
-\begin{abstract}
-		The implementation of photonic components on wafers (e.g., TFLN or Si photonics) enables scalable, low-latency systems for 6G networks. \textbf{The global strategy focuses in 2025 on the industrialization of thin-film lithium niobate (TFLN) through specialized foundries \cite{tfln_foundry} and the development of scalable photonic quantum computers (LNOI/PhoQuant) \cite{phoquant}.} This introduction is based on current literature (2024–2025) and highlights fabrication processes (ion slicing, wafer bonding), preferred techniques (MZI integration), and relevance for signal processing. Practical: Table of methods, outlook on hybrid PICs. Sources: Nature, ScienceDirect, arXiv. \textbf{A new optoelectronic chip that integrates terahertz and optical signals is key to millimeter-precise distance measurement and high-performance 6G mobile communications \cite{thz_epfl}.}
+	
+	\begin{abstract}
+		The implementation of photonic components on wafers (e.g., TFLN or Si photonics) enables scalable, low-latency systems for 6G networks. **The global strategy focuses in 2025 on the industrialization of thin-film lithium niobate (TFLN) through specialized foundries \cite{tfln_foundry} and the development of scalable photonic quantum computers (LNOI/PhoQuant) \cite{phoquant}.** This introduction is based on current literature (2024–2025) and highlights fabrication processes (ion slicing, wafer bonding), preferred techniques (MZI integration), and relevance for signal processing. Practical: Table of methods, outlook on hybrid PICs. Sources: Nature, ScienceDirect, arXiv. **A new optoelectronic chip that integrates terahertz and optical signals is key to millimeter-precise distance measurement and high-performance 6G mobile communications \cite{thz_epfl}.**
 	\end{abstract}
 	
 	\tableofcontents
 	\newpage
 	
-	# Basics: Why Wafer Integration in Communication Engineering?
+	\section{Basics: Why Wafer Integration in Communication Engineering?}
 	
-	The fabrication of photonic components on wafers (e.g., thin-film lithium niobate, TFLN) revolutionizes communication engineering: Scalable production of integrated circuits (PICs) for RF signal processing, 6G MIMO, and AI-assisted routing. \textbf{The transition to high-volume manufacturing is accelerated by specialized TFLN foundries, such as the QCi Foundry, which will accept the first commercial pilot orders in 2025 \cite{tfln_foundry}. Globally, 2025 (International Year of Quantum Science and Technology) highlights the strategic importance of photonics for competitiveness \cite{quantenjahr25}.} Wafer-based processes (e.g., ion slicing + bonding) enable monolithic integration of $>\SI{1000}{components}/\text{wafer}$, with losses $<\SI{1}{dB}$ and bandwidths $>\SI{100}{GHz}$.
+	The fabrication of photonic components on wafers (e.g., thin-film lithium niobate, TFLN) revolutionizes communication engineering: Scalable production of integrated circuits (PICs) for RF signal processing, 6G MIMO, and AI-assisted routing. **The transition to high-volume manufacturing is accelerated by specialized TFLN foundries, such as the QCi Foundry, which will accept the first commercial pilot orders in 2025 \cite{tfln_foundry}. Globally, 2025 (International Year of Quantum Science and Technology) highlights the strategic importance of photonics for competitiveness \cite{quantenjahr25}.** Wafer-based processes (e.g., ion slicing + bonding) enable monolithic integration of $>\SI{1000}{components}/\text{wafer}$, with losses $<\SI{1}{dB}$ and bandwidths $>\SI{100}{GHz}$.
 	\begin{important}
 		Important Note: The technology is hybrid-analog: Optical waveguides for continuous processing, combined with electronic control. This reduces latency ($\SI{}{\pico\second}$ range) and energy ($\SI{}{\pico\joule}/\text{bit}$), essential for real-time 6G applications.
 	\end{important}
 	
 	Current trends (2025): Transition to $\SI{300}{mm}$ wafers for industrial scaling, focused on flexible, cost-effective processes \cite{flexible_wafer}.
-	# Realization: Key Processes for Component Integration
+	\section{Realization: Key Processes for Component Integration}
 	
 	The implementation occurs in multi-stage processes, strongly aligned with semiconductor fabrication (e.g., CMOS-compatible). Core steps:
 	
-	
-		- \textbf{Ion Slicing and Wafer Bonding}: For thin films (e.g., LiTaO$_3$ on Si); enables high density without substrate losses \cite{lithium_tantalate}.
-		- \textbf{Etching and Lithography}: Mask-CMP for waveguide microstructures; precise structures ($<\SI{100}{nm}$) for MZI arrays \cite{on_chip_lithium}.
-		- \textbf{Monolithic Integration}: Co-packaging of electronics/photonics; reduces latency in hybrid systems \cite{integration_microelectronic}.
-		- \textbf{Flexible Wafer Scaling}: Mechanically flexible $\SI{300}{mm}$ platforms for cost-effective production \cite{flexible_wafer}.
-	
+	\begin{itemize}
+		\item \textbf{Ion Slicing and Wafer Bonding}: For thin films (e.g., LiTaO$_3$ on Si); enables high density without substrate losses \cite{lithium_tantalate}.
+		\item \textbf{Etching and Lithography}: Mask-CMP for waveguide microstructures; precise structures ($<\SI{100}{nm}$) for MZI arrays \cite{on_chip_lithium}.
+		\item \textbf{Monolithic Integration}: Co-packaging of electronics/photonics; reduces latency in hybrid systems \cite{integration_microelectronic}.
+		\item \textbf{Flexible Wafer Scaling}: Mechanically flexible $\SI{300}{mm}$ platforms for cost-effective production \cite{flexible_wafer}.
+	\end{itemize}
 	\begin{formula}
 		Example: Wafer bonding for LNOI (Lithium Niobate on Insulator): Thickness $t = \SI{525}{\micro\meter}$, implantation dose $D = 5 \times 10^{16}\,$cm$^{-2}$, resulting layer thickness $h \approx \SI{400}{nm}$.
 	\end{formula}
 	
-	# Preferred Components and Operations on Wafers
+	\section{Preferred Components and Operations on Wafers}
 	
-	Photonic wafers are suited for linear, frequency-dependent components; analog integration prioritizes interference-based operations for 6G signals. \textbf{In addition to TFLN, the silicon nitride (SiN) platform is being promoted to offer PICs for biosciences and sensing \cite{hhi_6g}.}
+	Photonic wafers are suited for linear, frequency-dependent components; analog integration prioritizes interference-based operations for 6G signals. **In addition to TFLN, the silicon nitride (SiN) platform is being promoted to offer PICs for biosciences and sensing \cite{hhi_6g}.**
 	\begin{table}[htbp]
 		\centering
 		\begin{tabular}{l p{5cm} p{4cm}}
@@ -185,24 +159,37 @@
 	
 	Preferred: Linear operations (e.g., matrix-vector multiplication via MZI meshes) for AI-assisted routing; non-linear (e.g., logic gates) requires hybrids.
 	
-	# Literature Review: Latest Documents (2024–2025)
+	\section{Literature Review: Latest Documents (2024–2025)}
 	
 	Selected sources on wafer implementation (focused on photonic components; links to PDFs/abstracts):
 	
-	
-		- \textbf{TFLN Foundries and Industrialization:} The \textbf{QCi Foundry} (specialized in TFLN) will accept the first pilot orders for commercial production of photonic chips in 2025, marking the industrialization of the platform \cite{tfln_foundry}.
-		- \textbf{Mechanically-flexible wafer-scale integrated-photonics fabrication (2024)}: First $\SI{300}{mm}$ platform for flexible PICs; process: bonding + etching. Relevance: Scalable RF chips for mobile networks. \cite{flexible_wafer}
-		- \textbf{Lithium tantalate photonic integrated circuits for volume manufacturing (2024)}: Ion slicing + bonding for LiTaO$_3$ wafers; density $>\SI{1000}{components}/\text{wafer}$. Relevance: Low losses for 6G transceivers. \cite{lithium_tantalate}
-		- \textbf{LNOI for Quantum Computers (PhoQuant):} Fraunhofer IOF is developing a photonic quantum computer based on \textbf{LNOI}, where fabrication methods stem from semiconductor manufacturing and are immediately scalable. This demonstrates the deployability of the LNOI platform for highly complex quantum architectures \cite{phoquant}.
-		- \textbf{Fabrication of heterogeneous LNOI photonics wafers (2023/2024 Update)}: Room-temperature bonding for LNOI; precise waveguides. Relevance: Hybrid opto-electronics for signal processing. \cite{fabrication_heterogeneous}
-		- \textbf{Fabrication of on-chip single-crystal lithium niobate waveguide (2025)}: Mask-CMP etching for TFLN microstructures. Relevance: Real-time filters for broadband communication. \cite{on_chip_lithium}
-		- \textbf{The integration of microelectronic and photonic circuits on a single wafer (2024)}: Monolithic co-integration; applications in optical networks. Relevance: Latency reduction in 6G. \cite{integration_microelectronic}
-	
+	\begin{itemize}
+		\item \textbf{TFLN Foundries and Industrialization:} The **QCi Foundry** (specialized in TFLN) will accept the first pilot orders for commercial production of photonic chips in 2025, marking the industrialization of the platform \cite{tfln_foundry}.
+		\item \textbf{Mechanically-flexible wafer-scale integrated-photonics fabrication (2024)}: First $\SI{300}{mm}$ platform for flexible PICs; process: bonding + etching. Relevance: Scalable RF chips for mobile networks. \cite{flexible_wafer}
+		\item \textbf{Lithium tantalate photonic integrated circuits for volume manufacturing (2024)}: Ion slicing + bonding for LiTaO$_3$ wafers; density $>\SI{1000}{components}/\text{wafer}$. Relevance: Low losses for 6G transceivers. \cite{lithium_tantalate}
+		\item \textbf{LNOI for Quantum Computers (PhoQuant):} Fraunhofer IOF is developing a photonic quantum computer based on **LNOI**, where fabrication methods stem from semiconductor manufacturing and are immediately scalable. This demonstrates the deployability of the LNOI platform for highly complex quantum architectures \cite{phoquant}.
+		\item \textbf{Fabrication of heterogeneous LNOI photonics wafers (2023/2024 Update)}: Room-temperature bonding for LNOI; precise waveguides. Relevance: Hybrid opto-electronics for signal processing. \cite{fabrication_heterogeneous}
+		\item \textbf{Fabrication of on-chip single-crystal lithium niobate waveguide (2025)}: Mask-CMP etching for TFLN microstructures. Relevance: Real-time filters for broadband communication. \cite{on_chip_lithium}
+		\item \textbf{The integration of microelectronic and photonic circuits on a single wafer (2024)}: Monolithic co-integration; applications in optical networks. Relevance: Latency reduction in 6G. \cite{integration_microelectronic}
+	\end{itemize}
 	
 	These documents show: Transition to high-volume manufacturing ($\SI{12000}{wafers}/\text{year}$), with a focus on analog precision for communication engineering.
 	
-	# Outlook: Photonic Wafers in 6G Networks
+	\section{Outlook: Photonic Wafers in 6G Networks}
 	
-	Wafer integration enables cost-effective PICs for base stations: E.g., optical MIMO with $<\SI{1}{dB}$ loss. Challenges: Increase yield (currently $<80\%$). Future: AI-assisted fab (e.g., for dynamic routing chips). \textbf{The THz chip from EPFL/Harvard demonstrates the enormous potential of optoelectronic integration to process high-frequency radio signals with millimeter precision, opening new application fields in robotics and autonomous vehicles \cite{thz_epfl}.}
+	Wafer integration enables cost-effective PICs for base stations: E.g., optical MIMO with $<\SI{1}{dB}$ loss. Challenges: Increase yield (currently $<80\%$). Future: AI-assisted fab (e.g., for dynamic routing chips). **The THz chip from EPFL/Harvard demonstrates the enormous potential of optoelectronic integration to process high-frequency radio signals with millimeter precision, opening new application fields in robotics and autonomous vehicles \cite{thz_epfl}.**
+	
+	\begin{thebibliography}{9}
+		\bibitem{flexible_wafer} Mechanically-flexible wafer-scale integrated-photonics fabrication. Nature Scientific Reports, 2024. \href{https://www.nature.com/articles/s41598-024-61055-w}{Link}.
+		\bibitem{lithium_tantalate} Lithium tantalate photonic integrated circuits for volume manufacturing. Nature, 2024. \href{https://www.nature.com/articles/s41586-024-07369-1}{Link}.
+		\bibitem{fabrication_heterogeneous} Fabrication of heterogeneous LNOI photonics wafers. ScienceDirect, 2023. \href{https://www.sciencedirect.com/science/article/abs/pii/S0169433223003422}{Link}.
+		\bibitem{on_chip_lithium} Fabrication of on-chip single-crystal lithium niobate waveguide. ScienceDirect, 2025. \href{https://www.sciencedirect.com/science/article/abs/pii/S0030399224016062}{Link}.
+		\bibitem{integration_microelectronic} The integration of microelectronic and photonic circuits on a single wafer. ScienceDirect, 2024. \href{https://www.sciencedirect.com/science/article/pii/S2589965124000540}{Link}.
+		\bibitem{quantenjahr25} Leichsenring, H. (2025). Is Quantum Technology at a Turning Point in 2025. The Bank Blog; DPG (2025). 2025 – The Year of Quantum Technologies. LP.PRO - Laser Photonics Technology Forum.
+		\bibitem{tfln_foundry} TraderFox (2024). Quantum Computing 2025: The Revolution is Imminent. Markets.
+		\bibitem{phoquant} Fraunhofer IOF (2025). Quantum Computer with Photons (PhoQuant). PRESS RELEASE.
+		\bibitem{thz_epfl} Benea-Chelmus, C. et al. (2025). 6G Mobile Communications Are Getting Closer – Revolutionary Chip Enables Optical and Electronic Data Processing. Leadersnet; Nature Communications (Publication).
+		\bibitem{hhi_6g} Fraunhofer HHI (2025). Berlin 6G Conference 2025; Fraunhofer HHI (2025). Photonics West 2025.
+	\end{thebibliography}
 
 \end{document}

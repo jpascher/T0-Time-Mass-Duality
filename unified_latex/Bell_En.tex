@@ -35,7 +35,7 @@
 \usepackage{enumitem}
 \usepackage{newunicodechar}
 
-% Additional packages (cleaned up - removed duplicates)
+% Additional packages
 \usepackage{adjustbox}
 \usepackage{algorithm}
 \usepackage{algorithmic}
@@ -66,7 +66,7 @@
 \usepackage{upgreek}
 \usepackage{url}
 
-% Color definitions (FIXED: removed extra \definecolor commands)
+% Color definitions
 \definecolor{blue}{rgb}{0,0,1}
 \definecolor{boxgray}{RGB}{240,240,240}
 \definecolor{deepblue}{RGB}{0,0,127}
@@ -79,67 +79,41 @@
 \definecolor{t0red}{RGB}{204,0,0}
 \definecolor{t0yellow}{RGB}{255,204,0}
 
-% TikZ libraries
-\usetikzlibrary{arrows,shapes,positioning,calc,patterns,decorations.pathmorphing,decorations.markings}
-
-% PGFPlots setup
+% Geometry and settings
 \pgfplotsset{compat=1.18}
-
-% Hyperref setup
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,
-    urlcolor=cyan,
-    citecolor=green,
-    pdftitle={T0 Theory Document},
-    pdfauthor={Johann Pascher},
-    pdfsubject={T0 Theory},
-    pdfkeywords={T0, physics, theory}
-}
-
-% Header and footer
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\leftmark}
-\fancyhead[LO]{\rightmark}
-\fancyfoot[C]{T0 Theory - Johann Pascher}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc}
 
 % Theorem environments
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
-\theoremstyle{remark}
-\newtheorem{remark}{Remark}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
 \newtheorem{example}{Example}[section]
 
-% Custom commands (common across T0 documents)
-\newcommand{\T}[1]{\text{#1}}
-\newcommand{\mat}[1]{\mathbf{#1}}
-\newcommand{\E}{\mathrm{e}}
-\newcommand{\I}{\mathrm{i}}
-\newcommand{\diff}{\mathrm{d}}
-\newcommand{\Real}{\mathrm{Re}}
-\newcommand{\Imag}{\mathrm{Im}}
+% Custom commands
+\newcommand{\kB}{k_{\text{B}}}
+\newcommand{\degree}{^\circ}
 
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{T0 Theory}
+\fancyfoot[C]{\thepage}
 
 \begin{document}
 
 \maketitle
-\tableofcontents
-
-\begin{abstract}
+	
+	\begin{abstract}
 		This extension of the T0 series applies insights from previous ML tests (hydrogen levels) to Bell tests, modeling quantum entanglement within the T0 framework. Based on time-mass duality and $\xi = 4/30000$, correlations $E(a,b) = -\cos(a-b) \cdot (1 - \xi \cdot f(n,l,j))$ are modified, where $f(n,l,j)$ originates from T0 quantum numbers. A PyTorch neural network (1→32→16→1, 200 epochs) simulates CHSH violations with T0 damping, resulting in a reduction from 2.828 to 2.827 (0.04\% $\Delta$), restoring locality at the $\xi$-scale. New insights: ML reveals subtle non-local effects as emergent time field fluctuations; divergence at high angles indicates fractal path interference. This resolves the EPR paradox harmonically without violating Bell's inequality – testable via 2025 loophole-free experiments (e.g., 73-qubit Lie Detector). Minimal advantages from ML: The harmonic T0 calculation ($\phi$-scaling) already provides exact predictions; ML only calibrates ($\sim$0.1\% accuracy gain).
 	\end{abstract}
 	
 	\tableofcontents
 	\newpage
 	
-	# Introduction: Bell Tests in the T0 Context
+	\section{Introduction: Bell Tests in the T0 Context}
 	\label{sec:intro_bell}
 	
 	Bell tests examine quantum entanglement vs. local reality: Standard QM violates Bell's inequality (CHSH >2), implying non-locality (EPR paradox). T0 resolves this through $\xi$-modified correlations: time field fluctuations locally dampen entanglement, preserving realism. Based on ML tests from the QM document (divergence at high $n$), we simulate CHSH with T0 corrections here.
@@ -148,26 +122,22 @@
 	
 	Parameters: $\xi=4/30000$, $\phi \approx 1.618$; quantum numbers for photon pairs: $(n=1,l=0,j=1)$ (photons as generation-1).
 	
-	# T0 Modification of Bell Correlations
+	\section{T0 Modification of Bell Correlations}
 	\label{sec:mod}
 	
 	Standard: $E(a,b) = -\cos(a-b)$ for singlet state; CHSH = $E(a,b) - E(a,b') + E(a',b) + E(a',b') \approx 2\sqrt{2} \approx 2.828 >2$.
 	
 	T0: Time field damping: $E^{\mathrm{T0}}(a,b) = -\cos(a-b) \cdot (1 - \xi \cdot f(n,l,j))$, with $f(n,l,j) = (n/\phi)^l \cdot [1 + \xi j / \pi] \approx 1$ (for photons). This reduces CHSH to $\approx 2.828 \cdot (1 - \xi) \approx 2.827$, just above 2 – locality at $\xi$-precision.
 	
-	
-```math-equation
-
+	\begin{equation}
 		\mathrm{CHSH}^{\mathrm{T0}} = 2\sqrt{2} \cdot K_{\mathrm{frak}}^{D_f} \cdot (1 - \xi \cdot \Delta \theta / \pi),
 		\label{eq:chsh_t0}
-	
-```
-
+	\end{equation}
 	where $\Delta \theta = |a-b|$ (angle difference), $D_f=3-\xi$.
 	
 	\textbf{Physical Interpretation:} $\xi$-damping as fractal path interference (from path integrals document); measurable in IYQ 2025 tests (e.g., loophole-free with variable angles)\cite{wiki_bell} ($\Delta \mathrm{CHSH} \sim 10^{-4}$).
 	
-	# ML Simulation of Bell Tests
+	\section{ML Simulation of Bell Tests}
 	\label{sec:ml_bell}
 	
 	Extension of previous ML tests: NN learns T0 correlations from angle differences ($\Delta \theta$) and extrapolates to high angles (e.g., $\Delta \theta = 3\pi/4$). Setup: MSE-loss on $E^{\mathrm{T0}}(\Delta \theta)$; 200 epochs.
@@ -193,7 +163,7 @@
 	
 	\textbf{CHSH Calculation:} Standard: 2.828; T0: 2.827; ML-pred: 2.828 ($\Delta=0.04\%$); with extended test ($\Delta \theta > \pi$): ML-CHSH=2.812 ($\Delta=0.54\%$).
 	
-	# Non-linear Effects: Self-derived Insights
+	\section{Non-linear Effects: Self-derived Insights}
 	\label{sec:nonlin}
 	
 	From ML divergence (12 \% at $5\pi/4$): Linear $\xi$-damping fails; derived: Extended formula $E^{\mathrm{T0,ext}}(\Delta \theta) = -\cos(\Delta \theta) \cdot \exp(-\xi \cdot (\Delta \theta / \pi)^2 \cdot D_f^{-1})$, reduces $\Delta$ to $<0.1\%$ (simulated).
@@ -211,7 +181,7 @@
 	\end{warning}
 	
 	
-	# Outlook: Integration into T0 Series
+	\section{Outlook: Integration into T0 Series}
 	
 	This Bell extension connects with the QFT document (T0\_QM-QFT-RT): Modified field operators locally dampen entanglement. Next: Simulate EPR with neutrino suppression ($\xi^2$).
 	
@@ -228,5 +198,15 @@
 		\vspace{0.3cm}
 		\textit{Version 2.2 -- \today}
 	\end{center}
+	
+	\begin{thebibliography}{9}
+		\bibitem{iyq2025} International Year of Quantum (2025). \emph{About IYQ}. \url{https://quantum2025.org/about/}.
+		\bibitem{nobel2025} Reuters (2025). \emph{Trio win Nobel for quantum physics in action}. October 7.
+		\bibitem{decision2025} The Quantum Insider (2025). \emph{New Research on QM Decision-Making}. October 25.
+		\bibitem{keysight2025} Keysight (2025). \emph{Joy of Quantum: IYQ Principles}. September 22.
+		\bibitem{sciencedaily2025} ScienceDaily (2025). \emph{Physicists just built a quantum lie detector}. October 7.
+		\bibitem{wiki_bell} Wikipedia (2025). \emph{Bell's Theorem}. \url{https://en.wikipedia.org/wiki/Bell%27s_theorem}.
+		\bibitem{pascher_t0} Pascher, J. (2025). \emph{T0 Series: Masses, Neutrinos, g-2}. GitHub.
+	\end{thebibliography}
 
 \end{document}

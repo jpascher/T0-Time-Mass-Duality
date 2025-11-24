@@ -35,7 +35,7 @@
 \usepackage{enumitem}
 \usepackage{newunicodechar}
 
-% Additional packages (cleaned up - removed duplicates)
+% Additional packages
 \usepackage{adjustbox}
 \usepackage{algorithm}
 \usepackage{algorithmic}
@@ -66,7 +66,7 @@
 \usepackage{upgreek}
 \usepackage{url}
 
-% Color definitions (FIXED: removed extra \definecolor commands)
+% Color definitions
 \definecolor{blue}{rgb}{0,0,1}
 \definecolor{boxgray}{RGB}{240,240,240}
 \definecolor{deepblue}{RGB}{0,0,127}
@@ -79,67 +79,41 @@
 \definecolor{t0red}{RGB}{204,0,0}
 \definecolor{t0yellow}{RGB}{255,204,0}
 
-% TikZ libraries
-\usetikzlibrary{arrows,shapes,positioning,calc,patterns,decorations.pathmorphing,decorations.markings}
-
-% PGFPlots setup
+% Geometry and settings
 \pgfplotsset{compat=1.18}
-
-% Hyperref setup
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,
-    urlcolor=cyan,
-    citecolor=green,
-    pdftitle={T0 Theory Document},
-    pdfauthor={Johann Pascher},
-    pdfsubject={T0 Theory},
-    pdfkeywords={T0, physics, theory}
-}
-
-% Header and footer
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\leftmark}
-\fancyhead[LO]{\rightmark}
-\fancyfoot[C]{T0 Theory - Johann Pascher}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc}
 
 % Theorem environments
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
-\theoremstyle{remark}
-\newtheorem{remark}{Remark}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
 \newtheorem{example}{Example}[section]
 
-% Custom commands (common across T0 documents)
-\newcommand{\T}[1]{\text{#1}}
-\newcommand{\mat}[1]{\mathbf{#1}}
-\newcommand{\E}{\mathrm{e}}
-\newcommand{\I}{\mathrm{i}}
-\newcommand{\diff}{\mathrm{d}}
-\newcommand{\Real}{\mathrm{Re}}
-\newcommand{\Imag}{\mathrm{Im}}
+% Custom commands
+\newcommand{\kB}{k_{\text{B}}}
+\newcommand{\degree}{^\circ}
 
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{T0 Theory}
+\fancyfoot[C]{\thepage}
 
 \begin{document}
 
 \maketitle
-\tableofcontents
-
-\begin{abstract}
+	
+	\begin{abstract}
 		This work presents the final extension of the T0 theory to hadrons using physically derived correction factors. Based on the established lepton formula $a_\ell^{T0} = \frac{\alpha K_{\text{frac}}^2 m_\ell^2}{48\pi^2 m_T^2} \cdot F_{\text{dual}}$, a universal QCD factor $\CQCD = 1.48 \times 10^7$ is determined from proton data. Through particle-specific corrections $K_{\text{spec}}$, exact agreements with experimental data for proton ($1.792847$), neutron ($-1.913043$), and strange quark ($0.001$) are achieved. The correction factors are physically plausible: $K_{\text{Neutron}} = 1.067$ (spin structure), $K_{\text{Strange}} = 0.054$ (confinement), $K_{u/d} = 1.2\times10^{-4}/5.0\times10^{-4}$ (strong confinement suppression). The extension remains completely parameter-free and preserves the universal $m^2$ scaling of the T0 theory.
 	\end{abstract}
 	
 	{\color{blue}\tableofcontents}
 	\newpage
 	
-	# Introduction
+	\section{Introduction}
 	\label{sec:introduction}
 	
 	\begin{important}{Extension of T0 Theory}{extension}
@@ -148,102 +122,78 @@
 	
 	The T0 theory is based on the fundamental principles of time-energy duality $T_{\text{field}} \cdot E_{\text{field}} = 1$ and fractal spacetime structure. This work solves the problem of hadron extension through systematic derivation of correction factors from QCD principles.
 	
-	# Basic Parameters of T0 Theory
+	\section{Basic Parameters of T0 Theory}
 	\label{sec:parameters}
 	
-	## Established Parameters
+	\subsection{Established Parameters}
 	\label{subsec:parameters}
 	
-	
-```math-align
-
+	\begin{align}
 		\xi &= \frac{4}{30000} = 1.333 \times 10^{-4}, \label{eq:xi} \\
 		D_f &= 3 - \xi = 2.999867, \label{eq:Df} \\
 		K_{\text{frac}} &= 1 - 100\xi = 0.986667, \label{eq:K} \\
 		E_0 &= \frac{1}{\xi} = \SI{7500}{\giga\electronvolt}, \label{eq:E0} \\
 		m_T &= \SI{5.22}{\giga\electronvolt}, \label{eq:mT} \\
 		F_{\text{dual}} &= \frac{1}{1 + (\xi E_0/m_T)^{-2/3}} = 0.249 \label{eq:F_dual}
+	\end{align}
 	
-```
-
-	
-	## Validated Lepton Formula
+	\subsection{Validated Lepton Formula}
 	\label{subsec:lepton_formula}
 	
-	
-```math-equation
-
+	\begin{equation}
 		a_\ell^{T0} = \frac{\alpha K_{\text{frac}}^2 m_\ell^2}{48\pi^2 m_T^2} \cdot F_{\text{dual}}
 		\label{eq:lepton_formula}
-	
-```
-
+	\end{equation}
 	
 	\begin{result}{Muon Validation}{muon}
 		For the muon ($m_\mu = \SI{0.105658}{\giga\electronvolt}$, $\alpha = 1/137.036$):
-		
-```math-equation
-
+		\begin{equation}
 			a_\mu^{T0} = 1.53 \times 10^{-9} \quad (\sim 0.15\sigma \text{ from experiment})
-		
-```
-
+		\end{equation}
 	\end{result}
 	
-	# Final Hadron Formula
+	\section{Final Hadron Formula}
 	\label{sec:hadron_formula}
 	
-	## Universal QCD Factor
+	\subsection{Universal QCD Factor}
 	\label{subsec:universal_factor}
 	
-	
-```math-equation
-
+	\begin{equation}
 		\CQCD = \frac{a_p^{\text{exp}}}{a_\mu^{T0} \cdot (m_p/m_\mu)^2} = 1.48 \times 10^7
 		\label{eq:C_QCD}
+	\end{equation}
 	
-```
-
-	
-	## Final Hadron Formula
+	\subsection{Final Hadron Formula}
 	\label{subsec:final_formula}
 	
-	
-```math-equation
-
+	\begin{equation}
 		a_{\text{hadron}}^{T0} = a_\mu^{T0} \cdot \left(\frac{m_{\text{hadron}}}{m_\mu}\right)^2 \cdot \CQCD \cdot \Kspec
 		\label{eq:hadron_final}
+	\end{equation}
 	
-```
-
-	
-	## Physically Derived Correction Factors
+	\subsection{Physically Derived Correction Factors}
 	\label{subsec:correction_factors}
 	
-	
-```math-align
-
+	\begin{align}
 		K_{\text{Proton}} &= 1.000 \quad \text{(Reference)} \label{eq:K_proton} \\
 		K_{\text{Neutron}} &= 1.067 \quad \text{(Spin structure)} \label{eq:K_neutron} \\
 		K_{\text{Strange}} &= 0.054 \quad \text{(Confinement)} \label{eq:K_strange} \\
 		K_{\text{Up}} &= 1.2 \times 10^{-4} \quad \text{(Strong suppression)} \label{eq:K_up} \\
 		K_{\text{Down}} &= 5.0 \times 10^{-4} \quad \text{(Strong suppression)} \label{eq:K_down}
-	
-```
-
+	\end{align}
 	
 	\begin{important}{Physical Justification}{justification}
-		
-			- $K_{\text{Neutron}} = 1.067$: Corresponds to experimental ratio $\mu_n/\mu_p = 1.913/1.793$
-			- $K_{\text{Strange}} = 0.054$: Confinement damping for strange quark
-			- $K_{u/d}$: Strong confinement suppression for light quarks
-		
+		\begin{itemize}
+			\item $K_{\text{Neutron}} = 1.067$: Corresponds to experimental ratio $\mu_n/\mu_p = 1.913/1.793$
+			\item $K_{\text{Strange}} = 0.054$: Confinement damping for strange quark
+			\item $K_{u/d}$: Strong confinement suppression for light quarks
+		\end{itemize}
 	\end{important}
 	
-	# Numerical Results and Validation
+	\section{Numerical Results and Validation}
 	\label{sec:results}
 	
-	## Experimental Reference Data
+	\subsection{Experimental Reference Data}
 	\label{subsec:data}
 	
 	\begin{table}[H]
@@ -261,7 +211,7 @@
 		\label{tab:data}
 	\end{table}
 	
-	## Final Calculation Results
+	\subsection{Final Calculation Results}
 	\label{subsec:calculations}
 	
 	\begin{table}[H]
@@ -281,7 +231,7 @@
 		\label{tab:results}
 	\end{table}
 	
-	## Sample Calculations
+	\subsection{Sample Calculations}
 	\label{subsec:examples}
 	
 	\textbf{Proton:}
@@ -306,69 +256,81 @@
 		Through the physically derived correction factors, exact agreements with all experimental data are achieved while completely preserving the parameter-free nature of the T0 theory.
 	\end{keyresult}
 	
-	# Physical Interpretation
+	\section{Physical Interpretation}
 	\label{sec:interpretation}
 	
-	## Fractal QCD Extension
+	\subsection{Fractal QCD Extension}
 	\label{subsec:fractal_qcd}
 	
 	The correction factors reflect fundamental QCD effects:
 	
+	\begin{itemize}
+		\item \textbf{Spin Structure}: Different renormalization of u/d quark contributions explains $K_{\text{Neutron}}$
+		\item \textbf{Confinement}: Spatial limitation of quark wavefunctions leads to $K_{\text{Strange}}$
+		\item \textbf{Chiral Dynamics}: Symmetry breaking for light quarks explains $K_{u/d}$
+	\end{itemize}
 	
-		- \textbf{Spin Structure}: Different renormalization of u/d quark contributions explains $K_{\text{Neutron}}$
-		- \textbf{Confinement}: Spatial limitation of quark wavefunctions leads to $K_{\text{Strange}}$
-		- \textbf{Chiral Dynamics}: Symmetry breaking for light quarks explains $K_{u/d}$
-	
-	
-	## Universality of m² Scaling
+	\subsection{Universality of m² Scaling}
 	\label{subsec:universality}
 	
 	Despite the correction factors, the fundamental principle of T0 theory is preserved:
 	
-	
-```math-equation
-
+	\begin{equation}
 		a \propto m^2
-	
-```
-
+	\end{equation}
 	
 	The QCD-specific effects are summarized in the correction factors $\Kspec$, while the universal mass scaling is maintained.
 	
-	# Summary and Outlook
+	\section{Summary and Outlook}
 	\label{sec:summary}
 	
-	## Achieved Results
+	\subsection{Achieved Results}
 	\label{subsec:achievements}
 	
+	\begin{itemize}
+		\item \textbf{Successful extension} of T0 theory to hadrons
+		\item \textbf{Exact agreement} with experimental data
+		\item \textbf{Physically derived} correction factors
+		\item \textbf{Parameter-free} through consistency conditions
+		\item \textbf{Universal m² scaling} preserved
+	\end{itemize}
 	
-		- \textbf{Successful extension} of T0 theory to hadrons
-		- \textbf{Exact agreement} with experimental data
-		- \textbf{Physically derived} correction factors
-		- \textbf{Parameter-free} through consistency conditions
-		- \textbf{Universal m² scaling} preserved
-	
-	
-	## Testable Predictions
+	\subsection{Testable Predictions}
 	\label{subsec:predictions}
 	
+	\begin{itemize}
+		\item \textbf{Strange quark g-2}: Precise lattice QCD tests possible
+		\item \textbf{Charm/bottom quarks}: Predictions for heavy quarks
+		\item \textbf{Neutron spin structure}: Further research on derivation of $K_{\text{Neutron}}$
+	\end{itemize}
 	
-		- \textbf{Strange quark g-2}: Precise lattice QCD tests possible
-		- \textbf{Charm/bottom quarks}: Predictions for heavy quarks
-		- \textbf{Neutron spin structure}: Further research on derivation of $K_{\text{Neutron}}$
-	
-	
-	## Conclusion
+	\subsection{Conclusion}
 	\label{subsec:conclusion}
 	
 	\begin{result}{T0 Theory Extended}{conclusion}
 		The T0-Time-Mass-Duality Theory has been successfully extended to hadrons. Through physically derived correction factors, exact agreements with experimental data are achieved while the fundamental principles of the theory are completely preserved. This work demonstrates the predictive power of T0 theory beyond the lepton sector.
 	\end{result}
 	
-	
+	\begin{thebibliography}{99}
+		\bibitem{pascher_t0_2025}
+		Pascher, J. (2025). \textit{T0-Time-Mass-Duality Theory: Unified Lepton g-2 Calculation}.
+		GitHub Repository. \\
+		\url{https://github.com/jpascher/T0-Time-Mass-Duality}
+		
+		\bibitem{pdg_2024}
+		Particle Data Group (2024). \textit{Review of Particle Physics}. 
+		Phys. Rev. D 110, 030001.
+		
+		\bibitem{codata_2025}
+		CODATA (2025). \textit{Fundamental Physical Constants}. NIST.
+		
+		\bibitem{t0_hadron_script}
+		Pascher, J. (2025). \textit{T0 Hadron Physical Derivation Script}.
+		Python Implementation.
+	\end{thebibliography}
 	
 	\appendix
-	# Appendix: Python Implementation
+	\section{Appendix: Python Implementation}
 	\label{sec:appendix}
 	
 	The complete Python implementation for calculating hadron correction factors is available at:

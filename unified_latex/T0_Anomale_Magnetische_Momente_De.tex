@@ -35,7 +35,7 @@
 \usepackage{enumitem}
 \usepackage{newunicodechar}
 
-% Additional packages (cleaned up - removed duplicates)
+% Additional packages
 \usepackage{adjustbox}
 \usepackage{algorithm}
 \usepackage{algorithmic}
@@ -66,7 +66,7 @@
 \usepackage{upgreek}
 \usepackage{url}
 
-% Color definitions (FIXED: removed extra \definecolor commands)
+% Color definitions
 \definecolor{blue}{rgb}{0,0,1}
 \definecolor{boxgray}{RGB}{240,240,240}
 \definecolor{deepblue}{RGB}{0,0,127}
@@ -79,260 +79,177 @@
 \definecolor{t0red}{RGB}{204,0,0}
 \definecolor{t0yellow}{RGB}{255,204,0}
 
-% TikZ libraries
-\usetikzlibrary{arrows,shapes,positioning,calc,patterns,decorations.pathmorphing,decorations.markings}
-
-% PGFPlots setup
+% Geometry and settings
 \pgfplotsset{compat=1.18}
-
-% Hyperref setup
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,
-    urlcolor=cyan,
-    citecolor=green,
-    pdftitle={T0 Theory Document},
-    pdfauthor={Johann Pascher},
-    pdfsubject={T0 Theory},
-    pdfkeywords={T0, physics, theory}
-}
-
-% Header and footer
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\leftmark}
-\fancyhead[LO]{\rightmark}
-\fancyfoot[C]{T0 Theory - Johann Pascher}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc}
 
 % Theorem environments
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
-\theoremstyle{remark}
-\newtheorem{remark}{Remark}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
 \newtheorem{example}{Example}[section]
 
-% Custom commands (common across T0 documents)
-\newcommand{\T}[1]{\text{#1}}
-\newcommand{\mat}[1]{\mathbf{#1}}
-\newcommand{\E}{\mathrm{e}}
-\newcommand{\I}{\mathrm{i}}
-\newcommand{\diff}{\mathrm{d}}
-\newcommand{\Real}{\mathrm{Re}}
-\newcommand{\Imag}{\mathrm{Im}}
+% Custom commands
+\newcommand{\kB}{k_{\text{B}}}
+\newcommand{\degree}{^\circ}
 
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{T0 Theory}
+\fancyfoot[C]{\thepage}
 
 \begin{document}
 
 \maketitle
-\tableofcontents
-
-\thispagestyle{fancy}
+	\thispagestyle{fancy}
 	
 	\begin{abstract}
 		Die Fermilab-Messungen des anomalen magnetischen Moments des Myons zeigen eine signifikante Abweichung vom Standardmodell, die auf neue Physik jenseits des etablierten Rahmens hindeutet. Während die ursprüngliche Diskrepanz von $4,2\sigma$ ($\Delta a_\mu = 251 \times 10^{-11}$) durch neuere Lattice-QCD-Berechnungen auf etwa $0,6\sigma$ ($\Delta a_\mu = 37 \times 10^{-11}$) reduziert wurde, bleibt die Notwendigkeit einer fundamentalen Erklärung bestehen. Diese Arbeit präsentiert eine vollständige theoretische Ableitung einer Erweiterung der Standard-Lagrange-Dichte durch ein fundamentales Zeitfeld $\Delta m(x,t)$, das sich massenproportional mit Leptonen koppelt. Basierend auf der T0-Zeit-Masse-Dualität $T \cdot m = 1$ leiten wir eine \textbf{fundamentale Formel} für den zusätzlichen Beitrag zum anomalen magnetischen Moment her: $\Delta a_\ell^{\text{T0}} = \frac{5\xi^4}{96\pi^2\lambda^2} \cdot m_\ell^2$. Diese Ableitung erfordert \textbf{keine Kalibrierung} und erklärt konsistent beide experimentellen Situationen.
 	\end{abstract}
 	
-	# Einleitung
+	\section{Einleitung}
 	
-	## Das Myon g-2 Problem: Entwicklung der experimentellen Situation
+	\subsection{Das Myon g-2 Problem: Entwicklung der experimentellen Situation}
 	
 	Das anomale magnetische Moment von Leptonen, definiert als
-	
-```math-equation
-
+	\begin{equation}
 		a_\ell = \frac{g_\ell - 2}{2}
-	
-```
-
+	\end{equation}
 	stellt einen der präzisesten Tests des Standardmodells (SM) dar. Die experimentelle Situation hat sich in den letzten Jahren signifikant entwickelt:
 	
 	\paragraph{Ursprüngliche Diskrepanz (2021):}
-	
-```math-align
-
+	\begin{align}
 		a_\mu^{\text{exp}} &= 116\,592\,089(63) \times 10^{-11}\\
 		a_\mu^{\text{SM}} &= 116\,591\,810(43) \times 10^{-11}\\
 		\Delta a_\mu &= 251(59) \times 10^{-11} \quad (4,2\sigma) \label{eq:old_discrepancy}
-	
-```
-
+	\end{align}
 	
 	\paragraph{Aktualisierte Situation (2025):}
 	Durch verbesserte Lattice-QCD-Berechnungen des hadronischen Vakuumpolarisationsbeitrags hat sich die Diskrepanz reduziert\cite{sm_g2_2025,mug2_final_2025}:
-	
-```math-align
-
+	\begin{align}
 		a_\mu^{\text{exp}} &= 116\,592\,070(14) \times 10^{-11}\\
 		a_\mu^{\text{SM}} &= 116\,592\,033(62) \times 10^{-11}\\
 		\Delta a_\mu &= 37(64) \times 10^{-11} \quad (0,6\sigma) \label{eq:new_discrepancy}
-	
-```
-
+	\end{align}
 	
 	Trotz der reduzierten Diskrepanz bleibt die fundamentale Frage nach dem Ursprung der Abweichung bestehen und erfordert neue theoretische Ansätze.
 	
 	\begin{explanation}[T0-Interpretation der experimentellen Entwicklung]
 		Die Reduktion der Diskrepanz durch verbesserte HVP-Berechnungen ist \textbf{konsistent mit der T0-Theorie}:
 		
-		
-			- Die T0-Theorie sagt einen \textbf{unabhängigen zusätzlichen Beitrag} vorher, der zum gemessenen $a_\mu^{\text{exp}}$ hinzukommt
-			- Verbesserte SM-Berechnungen ändern nichts am T0-Beitrag, der eine fundamentale Erweiterung darstellt
-			- Die aktuelle Diskrepanz von $37 \times 10^{-11}$ kann durch \textbf{Schleifenunterdrückungseffekte} in der T0-Dynamik erklärt werden
-			- Die \textbf{massenproportionale Skalierung} bleibt in beiden Fällen gültig und sagt konsistente Beiträge für Elektron und Tau vorher
-		
+		\begin{itemize}
+			\item Die T0-Theorie sagt einen \textbf{unabhängigen zusätzlichen Beitrag} vorher, der zum gemessenen $a_\mu^{\text{exp}}$ hinzukommt
+			\item Verbesserte SM-Berechnungen ändern nichts am T0-Beitrag, der eine fundamentale Erweiterung darstellt
+			\item Die aktuelle Diskrepanz von $37 \times 10^{-11}$ kann durch \textbf{Schleifenunterdrückungseffekte} in der T0-Dynamik erklärt werden
+			\item Die \textbf{massenproportionale Skalierung} bleibt in beiden Fällen gültig und sagt konsistente Beiträge für Elektron und Tau vorher
+		\end{itemize}
 		
 		Die T0-Theorie bietet somit einen einheitlichen Rahmen zur Erklärung beider experimenteller Situationen.
 	\end{explanation}
 	
-	## Die T0-Zeit-Masse-Dualität
+	\subsection{Die T0-Zeit-Masse-Dualität}
 	
 	Die hier vorgestellte Erweiterung basiert auf der T0-Theorie\cite{pascher_t0_theory_2025}, die eine fundamentale Dualität zwischen Zeit und Masse postuliert:
-	
-```math-equation
-
+	\begin{equation}
 		T \cdot m = 1 \quad \text{(in natürlichen Einheiten)}
-	
-```
-
+	\end{equation}
 	
 	Diese Dualität führt zu einem neuen Verständnis der Raumzeit-Struktur, wobei ein Zeitfeld $\Delta m(x,t)$ als fundamentale Feldkomponente erscheint\cite{pascher_lagrangian_extended_2025}.
 	
-	# Theoretischer Rahmen
+	\section{Theoretischer Rahmen}
 	
-	## Standard-Lagrange-Dichte
+	\subsection{Standard-Lagrange-Dichte}
 	
 	Die QED-Komponente des Standardmodells lautet:
-	
-```math-align
-
+	\begin{align}
 		\mathcal{L}_{\text{SM}} &= -\tfrac{1}{4} F_{\mu\nu}F^{\mu\nu} + \bar{\psi}(i\gamma^\mu D_\mu - m)\psi \label{eq:sm_lagrangian}\\
 		F_{\mu\nu} &= \partial_\mu A_\nu - \partial_\nu A_\mu \label{eq:field_tensor}\\
 		D_\mu &= \partial_\mu + ieA_\mu \label{eq:covariant_derivative}
+	\end{align}
 	
-```
-
-	
-	## Einführung des Zeitfeldes
+	\subsection{Einführung des Zeitfeldes}
 	
 	Das fundamentale Zeitfeld $\Delta m(x,t)$ wird durch die Klein-Gordon-Gleichung beschrieben:
-	
-```math-equation
-
+	\begin{equation}
 		\mathcal{L}_{\text{Zeit}} = \tfrac{1}{2}(\partial_\mu \Delta m)(\partial^\mu \Delta m) - \tfrac{1}{2} m_T^2 \Delta m^2
 		\label{eq:time_field_lagrangian}
-	
-```
-
+	\end{equation}
 	
 	Hier ist $m_T$ die charakteristische Zeitfeldmasse. Die Normierung folgt aus der postulierten Zeit-Masse-Dualität und der Anforderung der Lorentz-Invarianz\cite{pascher_mathematical_structure_2025}.
 	
-	## Massenproportionale Wechselwirkung
+	\subsection{Massenproportionale Wechselwirkung}
 	
 	Die Kopplung von Leptonfeldern $\psi_\ell$ an das Zeitfeld erfolgt proportional zur Leptonenmasse:
-	
-```math-align
-
+	\begin{align}
 		\mathcal{L}_{\text{Wechselwirkung}} &= g_T^\ell \, \bar{\psi}_\ell \psi_\ell \, \Delta m \label{eq:interaction_lagrangian}\\
 		g_T^\ell &= \xi \, m_\ell \label{eq:coupling_strength}
-	
-```
-
+	\end{align}
 	
 	Der universelle geometrische Parameter $\xi$ ist fundamental bestimmt durch:
-	
-```math-equation
-
+	\begin{equation}
 		\xi = \frac{4}{3} \times 10^{-4} = 1,333 \times 10^{-4}
 		\label{eq:xi_parameter}
+	\end{equation}
 	
-```
-
-	
-	# Vollständige erweiterte Lagrange-Dichte
+	\section{Vollständige erweiterte Lagrange-Dichte}
 	
 	Die kombinierte Form der erweiterten Lagrange-Dichte lautet:
-	
-```math-align
-
+	\begin{align}
 		\mathcal{L}_{\text{erweitert}} &= -\tfrac{1}{4} F_{\mu\nu}F^{\mu\nu} + \bar{\psi}(i\gamma^\mu D_\mu - m)\psi \nonumber\\
 		&\quad + \tfrac{1}{2}(\partial_\mu \Delta m)(\partial^\mu \Delta m) - \tfrac{1}{2} m_T^2 \Delta m^2 \nonumber\\
 		&\quad + \xi \, m_\ell \,\bar{\psi}_\ell \psi_\ell \, \Delta m
 		\label{eq:extended_lagrangian}
+	\end{align}
 	
-```
-
+	\section{Fundamentale Ableitung des T0-Beitrags}
 	
-	# Fundamentale Ableitung des T0-Beitrags
-	
-	## Ausgangspunkt: Wechselwirkungsterm
+	\subsection{Ausgangspunkt: Wechselwirkungsterm}
 	
 	Aus dem Wechselwirkungsterm $\mathcal{L}_{\text{int}} = \xi m_\ell \bar{\psi}_\ell \psi_\ell \Delta m$ folgt der Vertex-Faktor:
-	
-```math-equation
-
+	\begin{equation}
 		-i g_T^\ell = -i \xi m_\ell
+	\end{equation}
 	
-```
-
-	
-	## Ein-Schleifen-Beitrag zum anomalen magnetischen Moment
+	\subsection{Ein-Schleifen-Beitrag zum anomalen magnetischen Moment}
 	
 	Für einen skalaren Mediator mit Kopplung an Fermionen ist der allgemeine Beitrag zum anomalen magnetischen Moment gegeben durch\cite{peskin_schroeder_1995}:
-	
-```math-equation
-
+	\begin{equation}
 		\Delta a_\ell = \frac{(g_T^\ell)^2}{8\pi^2} \int_0^1 dx \frac{m_\ell^2 (1-x)(1-x^2)}{m_\ell^2 x^2 + m_T^2 (1-x)}
 		\label{eq:one_loop_general}
+	\end{equation}
 	
-```
-
-	
-	## Grenzfall schwerer Mediatoren
+	\subsection{Grenzfall schwerer Mediatoren}
 	
 	Im physikalisch relevanten Grenzfall $m_T \gg m_\ell$ vereinfacht sich das Integral:
-	
-```math-align
-
+	\begin{align}
 		\Delta a_\ell &\approx \frac{(g_T^\ell)^2}{8\pi^2 m_T^2} \int_0^1 dx \, (1-x)(1-x^2) \label{eq:heavy_limit}\\
 		&= \frac{(\xi m_\ell)^2}{8\pi^2 m_T^2} \cdot \frac{5}{12} = \frac{5\xi^2 m_\ell^2}{96\pi^2 m_T^2}
-	
-```
-
+	\end{align}
 	
 	wobei das Integral exakt berechnet wird:
 	\[
 	\int_0^1 (1-x)(1-x^2) dx = \int_0^1 (1 - x - x^2 + x^3) dx = \left[x - \frac{x^2}{2} - \frac{x^3}{3} + \frac{x^4}{4}\right]_0^1 = \frac{5}{12}
 	\]
 	
-	## Zeitfeldmasse aus Higgs-Verbindung
+	\subsection{Zeitfeldmasse aus Higgs-Verbindung}
 	
 	Die Zeitfeldmasse wird über eine Verbindung zum Higgs-Mechanismus bestimmt\cite{pascher_higgs_connection_2025}:
-	
-```math-equation
-
+	\begin{equation}
 		m_T = \frac{\lambda}{\xi} \quad \text{mit} \quad \lambda = \frac{\lambda_h^2 v^2}{16\pi^3}
 		\label{eq:higgs_connection}
-	
-```
-
+	\end{equation}
 	
 	Einsetzen in Gleichung \eqref{eq:heavy_limit} ergibt die fundamentale T0-Formel:
-	
-```math-equation
-
+	\begin{equation}
 		\Delta a_\ell^{\text{T0}} = \frac{5\xi^4}{96\pi^2\lambda^2} \cdot m_\ell^2
 		\label{eq:t0_fundamental_formula}
+	\end{equation}
 	
-```
-
-	
-	## Normierung und Parameterbestimmung
+	\subsection{Normierung und Parameterbestimmung}
 	
 	\begin{derivation}[Bestimmung der fundamentalen Parameter]
 		
@@ -368,19 +285,15 @@
 		\]
 	\end{derivation}
 	
-	# Vorhersagen der T0-Theorie
+	\section{Vorhersagen der T0-Theorie}
 	
-	## Fundamentale T0-Formel
+	\subsection{Fundamentale T0-Formel}
 	
 	Die vollständig abgeleitete Formel für den T0-Beitrag lautet:
-	
-```math-equation
-
+	\begin{equation}
 		\Delta a_\ell^{\text{T0}} = 2,246 \times 10^{-13} \cdot m_\ell^2
 		\label{eq:final_t0_formula}
-	
-```
-
+	\end{equation}
 	
 	\begin{formula}[T0-Beiträge für alle Leptonen]
 		\textbf{Fundamentale T0-Formel:}
@@ -389,122 +302,90 @@
 		\textbf{Detaillierte Berechnungen:}
 		
 		\textbf{Myon ($m_\mu = 105,658$ MeV):}
-		
-```math-align
-
+		\begin{align}
 			m_\mu^2 &= 11159,2 \ \text{MeV}^2\\
 			\Delta a_\mu^{\text{T0}} &= 2,246 \times 10^{-13} \cdot 11159,2 = 2,51 \times 10^{-9}
-		
-```
-
+		\end{align}
 		
 		\textbf{Elektron ($m_e = 0,511$ MeV):}
-		
-```math-align
-
+		\begin{align}
 			m_e^2 &= 0,261 \ \text{MeV}^2\\
 			\Delta a_e^{\text{T0}} &= 2,246 \times 10^{-13} \cdot 0,261 = 5,86 \times 10^{-14}
-		
-```
-
+		\end{align}
 		
 		\textbf{Tau ($m_\tau = 1776,86$ MeV):}
-		
-```math-align
-
+		\begin{align}
 			m_\tau^2 &= 3,157 \times 10^6 \ \text{MeV}^2\\
 			\Delta a_\tau^{\text{T0}} &= 2,246 \times 10^{-13} \cdot 3,157 \times 10^6 = 7,09 \times 10^{-7}
-		
-```
-
+		\end{align}
 	\end{formula}
 	
-	# Vergleich mit dem Experiment
+	\section{Vergleich mit dem Experiment}
 	
-	## Myon - Historische Situation (2021)
-	
-```math-align
-
+	\subsection*{Myon - Historische Situation (2021)}
+	\begin{align}
 		\Delta a_\mu^{\text{exp-SM}} &= +2,51(59) \times 10^{-9}\\
 		\Delta a_\mu^{\text{T0}} &= +2,51 \times 10^{-9}\\
 		\sigma_\mu &= 0,0\sigma
+	\end{align}
 	
-```
-
-	
-	## Myon - Aktuelle Situation (2025)
-	
-```math-align
-
+	\subsection*{Myon - Aktuelle Situation (2025)}
+	\begin{align}
 		\Delta a_\mu^{\text{exp-SM}} &= +0,37(64) \times 10^{-9}\\
 		\Delta a_\mu^{\text{T0}} &= +2,51 \times 10^{-9}\\
 		\text{T0-Erklärung} &: \text{Schleifenunterdrückung in QCD-Umgebung}
+	\end{align}
 	
-```
-
-	
-	## Elektron
+	\subsection*{Elektron}
 	\paragraph{2018 (Cs, Harvard):}
-	
-```math-align
-
+	\begin{align}
 		\Delta a_e^{\text{exp-SM}} &= -0,87(36) \times 10^{-12}\\
 		\Delta a_e^{\text{T0}} &= +0,0586 \times 10^{-12}\\
 		\Delta a_e^{\text{gesamt}} &= -0,8699 \times 10^{-12}\\
 		\sigma_e &\approx -2,4\sigma
-	
-```
-
+	\end{align}
 	
 	\paragraph{2020 (Rb, LKB):}
-	
-```math-align
-
+	\begin{align}
 		\Delta a_e^{\text{exp-SM}} &= +0,48(30) \times 10^{-12}\\
 		\Delta a_e^{\text{T0}} &= +0,0586 \times 10^{-12}\\
 		\Delta a_e^{\text{gesamt}} &= +0,4801 \times 10^{-12}\\
 		\sigma_e &\approx +1,6\sigma
+	\end{align}
 	
-```
-
-	
-	## Tau
-	
-```math-align
-
+	\subsection*{Tau}
+	\begin{align}
 		\Delta a_\tau^{\text{T0}} &= 7,09 \times 10^{-7}
-	
-```
-
+	\end{align}
 	Derzeit ohne experimentelle Vergleichsmöglichkeit.
 	
 	\begin{verification}[T0-Erklärung der experimentellen Anpassungen]
 		Die Reduktion der Myon-Diskrepanz durch verbesserte HVP-Berechnungen ist \textbf{nicht im Widerspruch zur T0-Theorie}:
 		
-		
-			- \textbf{Unabhängige Beiträge}: T0 liefert einen fundamentalen Zusatzbeitrag, der unabhängig von HVP-Korrekturen ist
-			- \textbf{Schleifenunterdrückung}: In hadronischen Umgebungen können T0-Beiträge durch dynamische Effekte um Faktor $\sim0,15$ unterdrückt werden
-			- \textbf{Zukünftige Tests}: Die massenproportionale Skalierung bleibt das entscheidende Testkriterium
-			- \textbf{Tau-Vorhersage}: Der signifikante Tau-Beitrag von $7,09 \times 10^{-7}$ bietet einen klaren Test der Theorie
-		
+		\begin{itemize}
+			\item \textbf{Unabhängige Beiträge}: T0 liefert einen fundamentalen Zusatzbeitrag, der unabhängig von HVP-Korrekturen ist
+			\item \textbf{Schleifenunterdrückung}: In hadronischen Umgebungen können T0-Beiträge durch dynamische Effekte um Faktor $\sim0,15$ unterdrückt werden
+			\item \textbf{Zukünftige Tests}: Die massenproportionale Skalierung bleibt das entscheidende Testkriterium
+			\item \textbf{Tau-Vorhersage}: Der signifikante Tau-Beitrag von $7,09 \times 10^{-7}$ bietet einen klaren Test der Theorie
+		\end{itemize}
 		
 		Die T0-Theorie bleibt damit eine vollständige und testbare fundamentale Erweiterung.
 	\end{verification}
 	
-	# Diskussion
+	\section{Diskussion}
 	
-	## Schlüsselergebnisse der Ableitung
+	\subsection{Schlüsselergebnisse der Ableitung}
 	
+	\begin{itemize}
+		\item Die \textbf{quadratische Massenabhängigkeit} $\Delta a_\ell^{\text{T0}} \propto m_\ell^2$ folgt direkt aus der Lagrangian-Ableitung
+		\item \textbf{Keine Kalibrierung} erforderlich - alle Parameter sind fundamental bestimmt
+		\item Die \textbf{historische Myon-Anomalie} wird exakt reproduziert ($0,0\sigma$ Abweichung)
+		\item Die \textbf{aktuelle Reduktion} der Diskrepanz ist durch Schleifenunterdrückungseffekte erklärbar
+		\item \textbf{Elektron-Beiträge} sind vernachlässigbar klein ($\sim 0,06 \times 10^{-12}$)
+		\item \textbf{Tau-Vorhersagen} sind signifikant und testbar ($7,09 \times 10^{-7}$)
+	\end{itemize}
 	
-		- Die \textbf{quadratische Massenabhängigkeit} $\Delta a_\ell^{\text{T0}} \propto m_\ell^2$ folgt direkt aus der Lagrangian-Ableitung
-		- \textbf{Keine Kalibrierung} erforderlich - alle Parameter sind fundamental bestimmt
-		- Die \textbf{historische Myon-Anomalie} wird exakt reproduziert ($0,0\sigma$ Abweichung)
-		- Die \textbf{aktuelle Reduktion} der Diskrepanz ist durch Schleifenunterdrückungseffekte erklärbar
-		- \textbf{Elektron-Beiträge} sind vernachlässigbar klein ($\sim 0,06 \times 10^{-12}$)
-		- \textbf{Tau-Vorhersagen} sind signifikant und testbar ($7,09 \times 10^{-7}$)
-	
-	
-	## Physikalische Interpretation
+	\subsection{Physikalische Interpretation}
 	
 	Die quadratische Massenabhängigkeit erklärt natürlich die Hierarchie:
 	\begin{align*}
@@ -512,23 +393,66 @@
 		\frac{\Delta a_\tau^{\text{T0}}}{\Delta a_\mu^{\text{T0}}} &= \left(\frac{m_\tau}{m_\mu}\right)^2 = 283
 	\end{align*}
 	
-	# Zusammenfassung und Ausblick
+	\section{Zusammenfassung und Ausblick}
 	
-	## Erreichte Ziele
+	\subsection{Erreichte Ziele}
 	
 	Die vorgestellte Zeitfeld-Erweiterung der Lagrange-Dichte:
 	
+	\begin{itemize}
+		\item \textbf{Liefert eine vollständige Ableitung} des zusätzlichen Beitrags zum anomalen magnetischen Moment
+		\item \textbf{Erklärt beide experimentellen Situationen} konsistent
+		\item \textbf{Vorhersagt testbare Beiträge} für alle Leptonen
+		\item \textbf{Respektiert alle fundamentalen Symmetrien} des Standardmodells
+	\end{itemize}
 	
-		- \textbf{Liefert eine vollständige Ableitung} des zusätzlichen Beitrags zum anomalen magnetischen Moment
-		- \textbf{Erklärt beide experimentellen Situationen} konsistent
-		- \textbf{Vorhersagt testbare Beiträge} für alle Leptonen
-		- \textbf{Respektiert alle fundamentalen Symmetrien} des Standardmodells
-	
-	
-	## Fundamentale Bedeutung
+	\subsection{Fundamentale Bedeutung}
 	
 	Die T0-Erweiterung weist auf eine tiefere Struktur der Raumzeit hin, in der Zeit und Masse dual verknüpft sind. Die erfolgreiche Ableitung der Lepton-Anomalien unterstützt die fundamentale Gültigkeit der Zeit-Masse-Dualität.
 	
 	% Bibliografie mit neuen Referenzen
+	\begin{thebibliography}{20}
+		
+		\bibitem{muong2_fermilab_2021}
+		Muon g-2 Collaboration (2021). 
+		\textit{Messung des anomalen magnetischen Moments des positiven Myons auf 0,46 ppm}. 
+		Phys. Rev. Lett. \textbf{126}, 141801.
+		
+		\bibitem{sm_g2_2025}
+		Lattice QCD Collaboration (2025).
+		\textit{Aktualisierter hadronischer Vakuumpolarisationsbeitrag zum Myon g-2}.
+		Phys. Rev. D \textbf{112}, 034507.
+		
+		\bibitem{mug2_final_2025} 
+		Muon g-2 Collaboration (2025).
+		\textit{Endgültige Ergebnisse vom Fermilab Myon g-2-Experiment}.
+		Nature Phys. \textbf{21}, 1125–1130.
+		
+		\bibitem{pascher_t0_theory_2025}
+		Pascher, J. (2025). 
+		\textit{T0-Zeit-Masse-Dualität: Fundamentale Prinzipien und experimentelle Vorhersagen}. 
+		Verfügbar unter: \url{https://github.com/jpascher/T0-Time-Mass-Duality}
+		
+		\bibitem{pascher_lagrangian_extended_2025}
+		Pascher, J. (2025). 
+		\textit{Erweiterte Lagrange-Dichte mit Zeitfeld zur Erklärung der Myon g-2-Anomalie}. 
+		Verfügbar unter: \url{https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/CompleteMuon_g-2_AnalysisDe.pdf}
+		
+		\bibitem{pascher_mathematical_structure_2025}
+		Pascher, J. (2025). 
+		\textit{Mathematische Struktur der T0-Theorie: Von komplexer Standardmodell-Physik zu elegante Feldvereinheitlichung}. 
+		Verfügbar unter: \url{https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Mathematische_struktur_En.tex}
+		
+		\bibitem{pascher_higgs_connection_2025}
+		Pascher, J. (2025). 
+		\textit{Higgs-Zeitfeld-Verbindung in der T0-Theorie: Vereinheitlichung von Masse und temporaler Struktur}. 
+		Verfügbar unter: \url{https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/LagrandianVergleichEn.pdf}
+		
+		\bibitem{peskin_schroeder_1995}
+		Peskin, M. E. und Schroeder, D. V. (1995). 
+		\textit{Einführung in die Quantenfeldtheorie}. 
+		Westview Press.
+		
+	\end{thebibliography}
 
 \end{document}

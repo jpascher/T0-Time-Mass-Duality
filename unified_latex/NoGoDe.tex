@@ -35,7 +35,7 @@
 \usepackage{enumitem}
 \usepackage{newunicodechar}
 
-% Additional packages (cleaned up - removed duplicates)
+% Additional packages
 \usepackage{adjustbox}
 \usepackage{algorithm}
 \usepackage{algorithmic}
@@ -66,7 +66,7 @@
 \usepackage{upgreek}
 \usepackage{url}
 
-% Color definitions (FIXED: removed extra \definecolor commands)
+% Color definitions
 \definecolor{blue}{rgb}{0,0,1}
 \definecolor{boxgray}{RGB}{240,240,240}
 \definecolor{deepblue}{RGB}{0,0,127}
@@ -79,90 +79,64 @@
 \definecolor{t0red}{RGB}{204,0,0}
 \definecolor{t0yellow}{RGB}{255,204,0}
 
-% TikZ libraries
-\usetikzlibrary{arrows,shapes,positioning,calc,patterns,decorations.pathmorphing,decorations.markings}
-
-% PGFPlots setup
+% Geometry and settings
 \pgfplotsset{compat=1.18}
-
-% Hyperref setup
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,
-    urlcolor=cyan,
-    citecolor=green,
-    pdftitle={T0 Theory Document},
-    pdfauthor={Johann Pascher},
-    pdfsubject={T0 Theory},
-    pdfkeywords={T0, physics, theory}
-}
-
-% Header and footer
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\leftmark}
-\fancyhead[LO]{\rightmark}
-\fancyfoot[C]{T0 Theory - Johann Pascher}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc}
 
 % Theorem environments
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
-\theoremstyle{remark}
-\newtheorem{remark}{Remark}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
 \newtheorem{example}{Example}[section]
 
-% Custom commands (common across T0 documents)
-\newcommand{\T}[1]{\text{#1}}
-\newcommand{\mat}[1]{\mathbf{#1}}
-\newcommand{\E}{\mathrm{e}}
-\newcommand{\I}{\mathrm{i}}
-\newcommand{\diff}{\mathrm{d}}
-\newcommand{\Real}{\mathrm{Re}}
-\newcommand{\Imag}{\mathrm{Im}}
+% Custom commands
+\newcommand{\kB}{k_{\text{B}}}
+\newcommand{\degree}{^\circ}
 
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{T0 Theory}
+\fancyfoot[C]{\thepage}
 
 \begin{document}
 
 \maketitle
-\tableofcontents
-
-\begin{abstract}
+	
+	\begin{abstract}
 		Dieses Dokument präsentiert eine umfassende theoretische Analyse, wie die \\T0-Energiefeld-Formulierung fundamentale No-Go-Theoreme der Quantenmechanik konfrontiert und möglicherweise umgeht, insbesondere das Bellsche Theorem und das Kochen-Specker-Theorem. Wir zeigen, dass die T0-Theorie eine ausgeklügelte Strategie basierend auf Superdeterminismus und der Verletzung von Messfreiheits-Annahmen verwendet, um quantenmechanische Korrelationen zu reproduzieren, während der lokale Realismus beibehalten wird. Durch detaillierte mathematische Analyse zeigen wir, dass T0 die Bellschen Ungleichungen durch räumlich ausgedehnte Energiefeld-Korrelationen verletzen kann, die Messapparatur-Orientierungen mit Quantensystem-Eigenschaften koppeln. Obwohl dieser Ansatz mathematisch konsistent ist und testbare Vorhersagen bietet, hat er philosophische Kosten durch die Einschränkung der Messfreiheit und die Einführung kontroverseller superdeterministischer Elemente. Die Analyse enthüllt sowohl die theoretische Eleganz als auch die konzeptionellen Herausforderungen beim Versuch, deterministischen lokalen Realismus in der Quantenmechanik wiederherzustellen.
 	\end{abstract}
 	
 	\tableofcontents
 	\newpage
 	
-	# Einführung: Die fundamentale Herausforderung
+	\section{Einführung: Die fundamentale Herausforderung}
 	
-	## Die Landschaft der No-Go-Theoreme
+	\subsection{Die Landschaft der No-Go-Theoreme}
 	
 	Die Quantenmechanik sieht sich mehreren fundamentalen No-Go-Theoremen gegenüber, die mögliche Interpretationen einschränken:
 	
+	\begin{enumerate}
+		\item \textbf{Bellsches Theorem (1964)}: Keine lokal realistische Theorie kann alle quantenmechanischen Vorhersagen reproduzieren
+		\item \textbf{Kochen-Specker-Theorem (1967)}: Quantenbeobachtungen können keine simultanen definiten Werte haben
+		\item \textbf{PBR-Theorem (2012)}: Quantenzustände sind ontologisch, nicht nur epistemologisch
+		\item \textbf{Hardys Theorem (1993)}: Quantennichtlokalität ohne Ungleichungen
+	\end{enumerate}
 	
-		- \textbf{Bellsches Theorem (1964)}: Keine lokal realistische Theorie kann alle quantenmechanischen Vorhersagen reproduzieren
-		- \textbf{Kochen-Specker-Theorem (1967)}: Quantenbeobachtungen können keine simultanen definiten Werte haben
-		- \textbf{PBR-Theorem (2012)}: Quantenzustände sind ontologisch, nicht nur epistemologisch
-		- \textbf{Hardys Theorem (1993)}: Quantennichtlokalität ohne Ungleichungen
-	
-	
-	## Die T0-Herausforderung
+	\subsection{Die T0-Herausforderung}
 	
 	Die T0-Energiefeld-Formulierung macht scheinbar widersprüchliche Behauptungen:
 	
 	\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=T0-Behauptungen vs No-Go-Theoreme]
 		\textbf{T0-Behauptungen}:
-		
-			- Lokale deterministische Dynamik: $\partial^2 \Efield = 0$
-			- Realistische Energiefelder: $\Efield(x,t)$ existieren unabhängig
-			- Perfekte QM-Reproduktion: Identische Vorhersagen für alle Experimente
-		
+		\begin{itemize}
+			\item Lokale deterministische Dynamik: $\partial^2 \Efield = 0$
+			\item Realistische Energiefelder: $\Efield(x,t)$ existieren unabhängig
+			\item Perfekte QM-Reproduktion: Identische Vorhersagen für alle Experimente
+		\end{itemize}
 		
 		\textbf{No-Go-Theoreme}: Eine solche Theorie ist unmöglich!
 		
@@ -171,171 +145,119 @@
 	
 	Dieses Dokument bietet eine umfassende Analyse von T0s Strategie zur Bewältigung von No-Go-Theoremen und bewertet ihre theoretische Durchführbarkeit.
 	
-	# Bellsches Theorem: Mathematische Grundlagen
+	\section{Bellsches Theorem: Mathematische Grundlagen}
 	
-	## CHSH-Ungleichung
+	\subsection{CHSH-Ungleichung}
 	
 	Die Clauser-Horne-Shimony-Holt (CHSH) Form der Bellschen Ungleichung bietet den allgemeinsten Test:
 	
-	
-```math-equation
-
+	\begin{equation}
 		S = E(a,b) - E(a,b') + E(a',b) + E(a',b') \leq 2
 		\label{eq:chsh_inequality}
-	
-```
-
+	\end{equation}
 	
 	wobei $E(a,b)$ die Korrelation zwischen Messungen in Richtungen $a$ und $b$ darstellt.
 	
-	## Annahmen des Bellschen Theorems
+	\subsection{Annahmen des Bellschen Theorems}
 	
 	Bells Beweis beruht auf drei Schlüsselannahmen:
 	
-	
-		- \textbf{Lokalität}: Keine überlichtschnellen Einflüsse
-		- \textbf{Realismus}: Eigenschaften existieren vor der Messung
-		- \textbf{Messfreiheit}: Freie Wahl der Messeinstellungen
-	
+	\begin{enumerate}
+		\item \textbf{Lokalität}: Keine überlichtschnellen Einflüsse
+		\item \textbf{Realismus}: Eigenschaften existieren vor der Messung
+		\item \textbf{Messfreiheit}: Freie Wahl der Messeinstellungen
+	\end{enumerate}
 	
 	\textbf{Bells Schlussfolgerung}: Jede Theorie, die alle drei Annahmen erfüllt, muss $|S| \leq 2$ erfüllen.
 	
-	## Quantenmechanische Verletzung
+	\subsection{Quantenmechanische Verletzung}
 	
 	Für den Bell-Zustand $|\Psi^-\rangle = \frac{1}{\sqrt{2}}(|\uparrow\downarrow\rangle - |\downarrow\uparrow\rangle)$:
 	
-	
-```math-equation
-
+	\begin{equation}
 		E_{QM}(a,b) = -\cos(\theta_{ab})
-	
-```
-
+	\end{equation}
 	
 	wobei $\theta_{ab}$ der Winkel zwischen Messrichtungen ist.
 	
 	\textbf{Optimale Messwinkel}: $a = 0°$, $a' = 45°$, $b = 22,5°$, $b' = 67,5°$
 	
-	
-```math-align
-
+	\begin{align}
 		E(a,b) &= -\cos(22,5°) = -0,9239 \\
 		E(a,b') &= -\cos(67,5°) = -0,3827 \\
 		E(a',b) &= -\cos(22,5°) = -0,9239 \\
 		E(a',b') &= -\cos(22,5°) = -0,9239
+	\end{align}
 	
-```
-
-	
-	
-```math-equation
-
+	\begin{equation}
 		S_{QM} = -0,9239 - (-0,3827) + (-0,9239) + (-0,9239) = -2,389
-	
-```
-
+	\end{equation}
 	
 	\textbf{Bell-Verletzung}: $|S_{QM}| = 2,389 > 2$
 	
-	# T0-Antwort auf Bells Theorem
+	\section{T0-Antwort auf Bells Theorem}
 	
-	## T0-Bell-Zustand-Darstellung
+	\subsection{T0-Bell-Zustand-Darstellung}
 	
 	In der T0-Formulierung wird der Bell-Zustand zu:
 	
-	
-```math-equation
-
+	\begin{equation}
 		\text{Standard: } |\Psi^-\rangle = \frac{1}{\sqrt{2}}(|\uparrow\downarrow\rangle - |\downarrow\uparrow\rangle)
+	\end{equation}
 	
-```
-
-	
-	
-```math-equation
-
+	\begin{equation}
 		\text{T0: } \{\Efield_{\uparrow\downarrow} = 0,5, \Efield_{\downarrow\uparrow} = -0,5, \Efield_{\uparrow\uparrow} = 0, \Efield_{\downarrow\downarrow} = 0\}
+	\end{equation}
 	
-```
-
-	
-	## T0-Korrelationsformel
+	\subsection{T0-Korrelationsformel}
 	
 	T0-Korrelationen entstehen aus Energiefeld-Wechselwirkungen:
 	
-	
-```math-equation
-
+	\begin{equation}
 		E_{T0}(a,b) = \frac{\langle \Efield_1(a) \cdot \Efield_2(b) \rangle}{\langle |\Efield_1| \rangle \langle |\Efield_2| \rangle}
-	
-```
-
+	\end{equation}
 	
 	Mit $\xipar$-Parameter-Korrekturen:
 	
-	
-```math-equation
-
+	\begin{equation}
 		E_{T0}(a,b) = E_{QM}(a,b) \times (1 + \xipar \cdot f_{corr}(a,b))
-	
-```
-
+	\end{equation}
 	
 	wobei $\xipar = 1,33 \times 10^{-4}$ und $f_{corr}$ die Korrelationsstruktur darstellt.
 	
-	## T0-Erweiterte Bell-Ungleichung
+	\subsection{T0-Erweiterte Bell-Ungleichung}
 	
 	Die ursprünglichen T0-Dokumente schlagen eine modifizierte Bell-Ungleichung vor:
 	
-	
-```math-equation
-
+	\begin{equation}
 		|E(a,b) - E(a,c)| + |E(a',b) + E(a',c)| \leq 2 + \varepsilon_{T0}
-	
-```
-
+	\end{equation}
 	
 	wobei der T0-Korrekturterm ist:
 	
-	
-```math-equation
-
+	\begin{equation}
 		\varepsilon_{T0} = \xipar \cdot \left|\frac{E_1 - E_2}{E_1 + E_2}\right| \cdot \frac{2G\langle E \rangle}{r_{12}}
-	
-```
-
+	\end{equation}
 	
 	\textbf{Numerische Auswertung}: Für typische atomare Systeme mit $r_{12} \sim 1$ m, $\langle E \rangle \sim 1$ eV:
 	
-	
-```math-equation
-
+	\begin{equation}
 		\varepsilon_{T0} \approx 1,33 \times 10^{-4} \times 1 \times \frac{2 \times 6,7 \times 10^{-11} \times 1,6 \times 10^{-19}}{1} \approx 2,8 \times 10^{-34}
-	
-```
-
+	\end{equation}
 	
 	\textbf{Problem}: Diese Korrektur ist experimentell unmessbar!
 	
 	\textbf{Alternative Interpretation}: Direkte $\xipar$-Korrekturen ohne Gravitationsunterdrückung:
 	
-	
-```math-equation
-
+	\begin{equation}
 		\varepsilon_{T0,direkt} = \xipar = 1,33 \times 10^{-4}
-	
-```
-
+	\end{equation}
 	
 	Dies wäre in Präzisions-Bell-Tests messbar und sagt vorher:
 	
-	
-```math-equation
-
+	\begin{equation}
 		|S_{T0}| = 2,389 + 1,33 \times 10^{-4} = 2,389133
-	
-```
-
+	\end{equation}
 	
 	\textbf{Testbare T0-Vorhersage}: Bell-Verletzung überschreitet die quantenmechanische Grenze um 133 ppm!
 	
@@ -345,48 +267,40 @@
 		Dieser scheinbare Widerspruch erfordert eine sorgfältige Analyse der Annahmen von Bells Theorem.
 	\end{tcolorbox}
 	
-	# T0s Umgehungsstrategie: Verletzung der Messfreiheit
+	\section{T0s Umgehungsstrategie: Verletzung der Messfreiheit}
 	
-	## Die Schlüsseleinsicht: Räumlich ausgedehnte Energiefelder
+	\subsection{Die Schlüsseleinsicht: Räumlich ausgedehnte Energiefelder}
 	
 	T0s Lösung beruht auf einer subtilen Verletzung von Bells Messfreiheits-Annahme:
 	
-	
-```math-equation
-
+	\begin{equation}
 		\Efield(x,t) = \Efield_{intrinsisch}(x,t) + \Efield_{Apparatur}(x,t)
-	
-```
-
+	\end{equation}
 	
 	\textbf{Physikalisches Bild}:
+	\begin{itemize}
+		\item Energiefelder $\Efield(x,t)$ sind räumlich ausgedehnt
+		\item Messapparatur an Ort A beeinflusst $\Efield(x,t)$ im gesamten Raum
+		\item Dies schafft Korrelationen zwischen Apparatur-Einstellungen und entfernten Messungen
+		\item Die Korrelation ist lokal in der Felddynamik, erscheint aber nichtlokal in den Ergebnissen
+	\end{itemize}
 	
-		- Energiefelder $\Efield(x,t)$ sind räumlich ausgedehnt
-		- Messapparatur an Ort A beeinflusst $\Efield(x,t)$ im gesamten Raum
-		- Dies schafft Korrelationen zwischen Apparatur-Einstellungen und entfernten Messungen
-		- Die Korrelation ist lokal in der Felddynamik, erscheint aber nichtlokal in den Ergebnissen
-	
-	
-	## Mathematische Formulierung
+	\subsection{Mathematische Formulierung}
 	
 	Die T0-Korrelation schließt apparatur-abhängige Terme ein:
 	
-	
-```math-equation
-
+	\begin{equation}
 		E_{T0}(a,b) = E_{intrinsisch}(a,b) + E_{Apparatur}(a,b) + E_{Kreuz}(a,b)
-	
-```
-
+	\end{equation}
 	
 	wobei:
+	\begin{itemize}
+		\item $E_{intrinsisch}$: Direkte Teilchen-Teilchen-Korrelation
+		\item $E_{Apparatur}$: Apparatur-Teilchen-Korrelationen
+		\item $E_{Kreuz}$: Kreuzkorrelationen zwischen Apparatur und Teilchen
+	\end{itemize}
 	
-		- $E_{intrinsisch}$: Direkte Teilchen-Teilchen-Korrelation
-		- $E_{Apparatur}$: Apparatur-Teilchen-Korrelationen
-		- $E_{Kreuz}$: Kreuzkorrelationen zwischen Apparatur und Teilchen
-	
-	
-	## Superdeterminismus
+	\subsection{Superdeterminismus}
 	
 	T0 implementiert eine Form des Superdeterminismus:
 	
@@ -394,138 +308,126 @@
 		\textbf{Definition}: Die Wahl der Messeinstellungen $a$ und $b$ ist nicht wirklich frei, sondern mit den Anfangsbedingungen des Quantensystems durch Energiefeld-Dynamik korreliert.
 		
 		\textbf{Mechanismus}: Räumlich ausgedehnte Energiefelder schaffen subtile Korrelationen zwischen:
-		
-			- Experimentators Wahl der Messrichtung
-			- Quantensystem-Eigenschaften
-			- Messapparatur-Konfiguration
-		
+		\begin{itemize}
+			\item Experimentators Wahl der Messrichtung
+			\item Quantensystem-Eigenschaften
+			\item Messapparatur-Konfiguration
+		\end{itemize}
 		
 		\textbf{Ergebnis}: Bells Messfreiheits-Annahme wird verletzt
 	\end{tcolorbox}
 	
-	## Experimentelle Konsequenzen
+	\subsection{Experimentelle Konsequenzen}
 	
 	T0-Superdeterminismus macht spezifische Vorhersagen:
 	
+	\begin{enumerate}
+		\item \textbf{Messrichtungs-Korrelationen}: Statistische Verzerrung in zufälligen Messwahlen
+		\item \textbf{Räumliche Energiestruktur}: Ausgedehnte Feldmuster um Messapparatur
+		\item \textbf{$\xipar$-Korrekturen}: $133$ ppm systematische Abweichungen in Korrelationen
+		\item \textbf{Apparatur-abhängige Effekte}: Messergebnisse hängen von Apparatur-Geschichte ab
+	\end{enumerate}
 	
-		- \textbf{Messrichtungs-Korrelationen}: Statistische Verzerrung in zufälligen Messwahlen
-		- \textbf{Räumliche Energiestruktur}: Ausgedehnte Feldmuster um Messapparatur
-		- \textbf{$\xipar$-Korrekturen}: $133$ ppm systematische Abweichungen in Korrelationen
-		- \textbf{Apparatur-abhängige Effekte}: Messergebnisse hängen von Apparatur-Geschichte ab
+	\section{Kochen-Specker-Theorem}
 	
-	
-	# Kochen-Specker-Theorem
-	
-	## Das Kontextualitätsproblem
+	\subsection{Das Kontextualitätsproblem}
 	
 	Das Kochen-Specker-Theorem besagt, dass Quantenbeobachtungen keine simultanen definiten Werte unabhängig vom Messkontext haben können.
 	
 	\textbf{Klassisches Beispiel}: Spin-Messungen in orthogonalen Richtungen
-	
-```math-align
-
+	\begin{align}
 		\sigma_x^2 + \sigma_y^2 + \sigma_z^2 &= 3 \quad \text{(wenn alle simultan definit)} \\
 		\langle\sigma_x^2\rangle + \langle\sigma_y^2\rangle + \langle\sigma_z^2\rangle &= 3 \quad \text{(Quantenvorhersage)} \\
 		\text{Aber individuelle Werte sind kontextabhängig!}
+	\end{align}
 	
-```
-
-	
-	## T0-Antwort: Energiefeld-Kontextualität
+	\subsection{T0-Antwort: Energiefeld-Kontextualität}
 	
 	T0 behandelt Kontextualität durch messinduzierte Feldmodifikationen:
 	
-	
-```math-equation
-
+	\begin{equation}
 		\Efield_{gemessen,x} = \Efield_{intrinsisch,x} + \Delta\Efield_x(\text{Apparatur-Zustand})
-	
-```
-
+	\end{equation}
 	
 	\textbf{Schlüsseleinsicht}: 
+	\begin{itemize}
+		\item Alle Energiefeld-Komponenten $\Efield_x$, $\Efield_y$, $\Efield_z$ existieren simultan
+		\item Messung in Richtung $x$ modifiziert $\Efield_y$ und $\Efield_z$ durch Apparatur-Wechselwirkung
+		\item Kontextabhängigkeit entsteht aus Mess-Apparatur-Feld-Kopplung
+		\item Verborgene Variablen sind die vollständige Energiefeld-Konfiguration $\{\Efield(x,t)\}$
+	\end{itemize}
 	
-		- Alle Energiefeld-Komponenten $\Efield_x$, $\Efield_y$, $\Efield_z$ existieren simultan
-		- Messung in Richtung $x$ modifiziert $\Efield_y$ und $\Efield_z$ durch Apparatur-Wechselwirkung
-		- Kontextabhängigkeit entsteht aus Mess-Apparatur-Feld-Kopplung
-		- Verborgene Variablen sind die vollständige Energiefeld-Konfiguration $\{\Efield(x,t)\}$
+	\subsection{Mathematisches Rahmenwerk}
 	
-	
-	## Mathematisches Rahmenwerk
-	
-	
-```math-equation
-
+	\begin{equation}
 		\frac{\partial \Efield_i}{\partial t} = f_i(\{\Efield_j\}, \{\text{Apparatur}_k\})
-	
-```
-
+	\end{equation}
 	
 	Die Evolution jeder Feldkomponente hängt ab von:
+	\begin{itemize}
+		\item Allen anderen Feldkomponenten (Quantenkorrelationen)
+		\item Allen Messapparatur-Konfigurationen (Kontextualität)
+		\item Räumlicher Feldstruktur (nichtlokale Korrelationen)
+	\end{itemize}
 	
-		- Allen anderen Feldkomponenten (Quantenkorrelationen)
-		- Allen Messapparatur-Konfigurationen (Kontextualität)
-		- Räumlicher Feldstruktur (nichtlokale Korrelationen)
+	\section{Andere No-Go-Theoreme}
 	
-	
-	# Andere No-Go-Theoreme
-	
-	## PBR-Theorem (Pusey-Barrett-Rudolph)
+	\subsection{PBR-Theorem (Pusey-Barrett-Rudolph)}
 	
 	\textbf{PBR-Behauptung}: Quantenzustände müssen ontologisch real sein, nicht nur epistemologisch.
 	
 	\textbf{T0-Antwort}: Perfekte Kompatibilität
+	\begin{itemize}
+		\item Energiefelder $\Efield(x,t)$ sind ontologisch real
+		\item Quantenzustände entsprechen Energiefeld-Konfigurationen
+		\item Keine epistemologische Interpretation nötig
+	\end{itemize}
 	
-		- Energiefelder $\Efield(x,t)$ sind ontologisch real
-		- Quantenzustände entsprechen Energiefeld-Konfigurationen
-		- Keine epistemologische Interpretation nötig
-	
-	
-	## Hardys Theorem
+	\subsection{Hardys Theorem}
 	
 	\textbf{Hardys Behauptung}: Quantennichtlokalität kann ohne Ungleichungen demonstriert werden.
 	
 	\textbf{T0-Antwort}: Energiefeld-Korrelationen können Hardys paradoxe Situationen durch räumlich ausgedehnte Felddynamik reproduzieren.
 	
-	## GHZ-Theorem
+	\subsection{GHZ-Theorem}
 	
 	\textbf{GHZ-Behauptung}: Drei-Teilchen-Korrelationen bieten perfekte Demonstration der Quantennichtlokalität.
 	
 	\textbf{T0-Antwort}: Drei-Teilchen-Energiefeld-Konfigurationen mit ausgedehnten Korrelationsstrukturen.
 	
-	# Kritische Bewertung
+	\section{Kritische Bewertung}
 	
-	## Stärken des T0-Ansatzes
+	\subsection{Stärken des T0-Ansatzes}
 	
+	\begin{enumerate}
+		\item \textbf{Unterscheidbare Vorhersagen}: Macht **unterschiedliche** testbare Vorhersagen von Standard-QM
+		\item \textbf{Konkrete Mechanismen}: Bietet spezifische Energiefeld-Dynamik
+		\item \textbf{Mehrere testbare Signaturen}: 
+		\begin{itemize}
+			\item Verstärkte Bell-Verletzung (133 ppm Überschuss)
+			\item Perfekte Quantenalgorithmus-Wiederholbarkeit  
+			\item Räumliche Energiefeld-Struktur
+			\item Deterministische Einzelmessungs-Vorhersagen
+		\end{itemize}
+		\item \textbf{Theoretische Eleganz}: Vereinheitlichtes Rahmenwerk für alle Quantenphänomene
+		\item \textbf{Interpretative Klarheit}: Eliminiert Messproblem und Wellenfunktions-Kollaps
+		\item \textbf{Quantencomputing-Vorteile}: Deterministische Algorithmen mit perfekter Vorhersagbarkeit
+		\item \textbf{Falsifizierbarkeit}: Klare experimentelle Kriterien für Widerlegung
+	\end{enumerate}
 	
-		- \textbf{Unterscheidbare Vorhersagen}: Macht \textbf{unterschiedliche} testbare Vorhersagen von Standard-QM
-		- \textbf{Konkrete Mechanismen}: Bietet spezifische Energiefeld-Dynamik
-		- \textbf{Mehrere testbare Signaturen}: 
-		
-			- Verstärkte Bell-Verletzung (133 ppm Überschuss)
-			- Perfekte Quantenalgorithmus-Wiederholbarkeit  
-			- Räumliche Energiefeld-Struktur
-			- Deterministische Einzelmessungs-Vorhersagen
-		
-		- \textbf{Theoretische Eleganz}: Vereinheitlichtes Rahmenwerk für alle Quantenphänomene
-		- \textbf{Interpretative Klarheit}: Eliminiert Messproblem und Wellenfunktions-Kollaps
-		- \textbf{Quantencomputing-Vorteile}: Deterministische Algorithmen mit perfekter Vorhersagbarkeit
-		- \textbf{Falsifizierbarkeit}: Klare experimentelle Kriterien für Widerlegung
+	\subsection{Schwächen und Kritik}
 	
+	\begin{enumerate}
+		\item \textbf{Superdeterminismus-Kontroverse}: Von den meisten Physikern als unplausibel betrachtet
+		\item \textbf{Messfreiheits-Verletzung}: Stellt fundamentale experimentelle Methodik in Frage
+		\item \textbf{Mathematische Entwicklung}: Energiefeld-Dynamik nicht vollständig entwickelt
+		\item \textbf{Relativistische Kompatibilität}: Unklar, wie T0 sich mit spezieller Relativitätstheorie integriert
+		\item \textbf{Hohe Präzisionsanforderungen}: 133 ppm Messungen technisch herausfordernd
+		\item \textbf{Falsifikationsrisiko}: **T0-Vorhersagen könnten experimentell widerlegt werden**
+		\item \textbf{Philosophische Kosten}: Eliminiert Messfreiheit und wahre Zufälligkeit
+	\end{enumerate}
 	
-	## Schwächen und Kritik
-	
-	
-		- \textbf{Superdeterminismus-Kontroverse}: Von den meisten Physikern als unplausibel betrachtet
-		- \textbf{Messfreiheits-Verletzung}: Stellt fundamentale experimentelle Methodik in Frage
-		- \textbf{Mathematische Entwicklung}: Energiefeld-Dynamik nicht vollständig entwickelt
-		- \textbf{Relativistische Kompatibilität}: Unklar, wie T0 sich mit spezieller Relativitätstheorie integriert
-		- \textbf{Hohe Präzisionsanforderungen}: 133 ppm Messungen technisch herausfordernd
-		- \textbf{Falsifikationsrisiko}: \textbf{T0-Vorhersagen könnten experimentell widerlegt werden}
-		- \textbf{Philosophische Kosten}: Eliminiert Messfreiheit und wahre Zufälligkeit
-	
-	
-	## Experimentelle Tests
+	\subsection{Experimentelle Tests}
 	
 	\begin{table}[htbp]
 		\centering
@@ -547,109 +449,109 @@
 		\caption{Experimentelle Unterscheidung zwischen Standard-QM und T0}
 	\end{table}
 	
-	# Philosophische Implikationen
+	\section{Philosophische Implikationen}
 	
-	## Der Preis des lokalen Realismus
+	\subsection{Der Preis des lokalen Realismus}
 	
 	T0s Wiederherstellung des lokalen Realismus kommt mit erheblichen philosophischen Kosten:
 	
 	\begin{tcolorbox}[colback=purple!5!white,colframe=purple!75!black,title=Philosophische Abwägungen]
 		\textbf{Gewonnen}:
-		
-			- Lokaler Realismus wiederhergestellt
-			- Deterministische Physik
-			- Klare Ontologie (Energiefelder)
-			- Kein Messproblem
-		
+		\begin{itemize}
+			\item Lokaler Realismus wiederhergestellt
+			\item Deterministische Physik
+			\item Klare Ontologie (Energiefelder)
+			\item Kein Messproblem
+		\end{itemize}
 		
 		\textbf{Verloren}:
-		
-			- Traditionelle Messinterpretation
-			- Scheinbare fundamentale Zufälligkeit
-			- Einfache nicht-kontextuelle Lokalität
-			- Einige aktuelle experimentelle Methodiken
-		
+		\begin{itemize}
+			\item Traditionelle Messinterpretation
+			\item Scheinbare fundamentale Zufälligkeit
+			\item Einfache nicht-kontextuelle Lokalität
+			\item Einige aktuelle experimentelle Methodiken
+		\end{itemize}
 	\end{tcolorbox}
 	
-	## Superdeterminismus und freier Wille
+	\subsection{Superdeterminismus und freier Wille}
 	
 	T0s Superdeterminismus hat bedeutende Implikationen:
 	
+	\begin{itemize}
+		\item Experimentelle Wahlentscheidungen zeigen subtile Korrelationen mit Quantensystemen
+		\item Anfangsbedingungen des Universums beeinflussen alle Messergebnisse
+		\item Zufallszahlengeneratoren zeigen systematische Muster
+		\item Bell-Test-Schlupflöcher werden zu fundamentalen Eigenschaften anstatt Fehlern
+	\end{itemize}
 	
-		- Experimentelle Wahlentscheidungen zeigen subtile Korrelationen mit Quantensystemen
-		- Anfangsbedingungen des Universums beeinflussen alle Messergebnisse
-		- Zufallszahlengeneratoren zeigen systematische Muster
-		- Bell-Test-Schlupflöcher werden zu fundamentalen Eigenschaften anstatt Fehlern
+	\section{Schlussfolgerung: Eine tragfähige Alternative?}
 	
+	\subsection{Zusammenfassung der Analyse}
 	
-	# Schlussfolgerung: Eine tragfähige Alternative?
+	Diese umfassende Analyse zeigt, dass die T0-Theorie eine ausgeklügelte Strategie zur Umgehung von No-Go-Theoremen bietet, während sie **unterscheidbare, testbare Vorhersagen** macht, die sich von der Standard-Quantenmechanik unterscheiden:
 	
-	## Zusammenfassung der Analyse
+	\begin{enumerate}
+		\item \textbf{Bellsches Theorem}: Umgangen durch Verletzung der Messfreiheit via räumlich ausgedehnter Energiefeld-Korrelationen, mit **messbarer verstärkter Bell-Verletzung**
+		\item \textbf{Kochen-Specker}: Behandelt durch Mess-Apparatur-Feld-Kopplung, die Kontextualität schafft
+		\item \textbf{Andere Theoreme}: Allgemein kompatibel mit T0s ontologischem Energiefeld-Rahmenwerk
+		\item \textbf{Quantencomputing}: **Perfekte algorithmische Äquivalenz** mit deterministischen Vorteilen (Deutsch, Bell-Zustände, Grover, Shor)
+	\end{enumerate}
 	
-	Diese umfassende Analyse zeigt, dass die T0-Theorie eine ausgeklügelte Strategie zur Umgehung von No-Go-Theoremen bietet, während sie \textbf{unterscheidbare, testbare Vorhersagen} macht, die sich von der Standard-Quantenmechanik unterscheiden:
+	\subsection{Theoretische Durchführbarkeit}
 	
-	
-		- \textbf{Bellsches Theorem}: Umgangen durch Verletzung der Messfreiheit via räumlich ausgedehnter Energiefeld-Korrelationen, mit \textbf{messbarer verstärkter Bell-Verletzung}
-		- \textbf{Kochen-Specker}: Behandelt durch Mess-Apparatur-Feld-Kopplung, die Kontextualität schafft
-		- \textbf{Andere Theoreme}: Allgemein kompatibel mit T0s ontologischem Energiefeld-Rahmenwerk
-		- \textbf{Quantencomputing}: \textbf{Perfekte algorithmische Äquivalenz} mit deterministischen Vorteilen (Deutsch, Bell-Zustände, Grover, Shor)
-	
-	
-	## Theoretische Durchführbarkeit
-	
-	\textbf{T0 ist theoretisch durchführbar} als \textbf{echte Alternative} (nicht Neuinterpretation) zur Standard-Quantenmechanik und bietet:
+	\textbf{T0 ist theoretisch durchführbar} als **echte Alternative** (nicht Neuinterpretation) zur Standard-Quantenmechanik und bietet:
 	
 	\textbf{Vorteile}:
-	
-		- \textbf{Unterscheidbare testbare Vorhersagen} die sich von QM unterscheiden
-		- \textbf{Deterministisches Quantencomputing} mit perfekter algorithmischer Äquivalenz
-		- \textbf{Verstärkte Bell-Verletzung} die Quantengrenzen um 133 ppm überschreitet
-		- \textbf{Perfekte Wiederholbarkeit} in Quantenmessungen
-		- \textbf{Räumliche Energiefeld-Struktur} die über Punktteilchen hinausreicht
-		- \textbf{Einzelmessungs-Vorhersagbarkeit} für Quantenalgorithmen
-	
+	\begin{itemize}
+		\item **Unterscheidbare testbare Vorhersagen** die sich von QM unterscheiden
+		\item **Deterministisches Quantencomputing** mit perfekter algorithmischer Äquivalenz
+		\item **Verstärkte Bell-Verletzung** die Quantengrenzen um 133 ppm überschreitet
+		\item **Perfekte Wiederholbarkeit** in Quantenmessungen
+		\item **Räumliche Energiefeld-Struktur** die über Punktteilchen hinausreicht
+		\item **Einzelmessungs-Vorhersagbarkeit** für Quantenalgorithmen
+	\end{itemize}
 	
 	\textbf{Anforderungen}:
+	\begin{itemize}
+		\item Akzeptanz von Superdeterminismus
+		\item Verletzung der Messfreiheit
+		\item Komplexe Energiefeld-Dynamik
+		\item **Falsifikationsrisiko**: negative Präzisionstests würden T0 widerlegen
+	\end{itemize}
 	
-		- Akzeptanz von Superdeterminismus
-		- Verletzung der Messfreiheit
-		- Komplexe Energiefeld-Dynamik
-		- \textbf{Falsifikationsrisiko}: negative Präzisionstests würden T0 widerlegen
+	\subsection{Experimentelle Auflösung}
 	
+	Der ultimative Test von T0 vs Standard-QM liegt in **Präzisionsexperimenten** mit **klaren Unterscheidungskriterien**:
 	
-	## Experimentelle Auflösung
+\begin{enumerate}
+	\item \textbf{Verstärkte Bell-Verletzungs-Tests}: Suche nach $|S| > 2,389$ (QM-Grenze)
+	\begin{itemize}
+		\item Ziel-Präzision: 133 ppm oder besser
+		\item T0-Vorhersage: $|S| = 2,389133 \pm \text{Messfehler}$
+		\item Entscheidender Test: Jede Überschuss-Verletzung unterstützt T0
+	\end{itemize}
 	
-	Der ultimative Test von T0 vs Standard-QM liegt in \textbf{Präzisionsexperimenten} mit \textbf{klaren Unterscheidungskriterien}:
+	\item \textbf{Quantenalgorithmus-Wiederholbarkeit}: 1000$\times$ identische Algorithmus-Ausführung
+	\begin{itemize}
+		\item QM-Erwartung: Statistische Variation innerhalb Fehlergrenzen
+		\item T0-Vorhersage: Perfekte Wiederholbarkeit (Null-Varianz)
+		\item Algorithmen: Deutsch, Grover, Bell-Zustände, Shor
+	\end{itemize}
 	
-
-	- \textbf{Verstärkte Bell-Verletzungs-Tests}: Suche nach $|S| > 2,389$ (QM-Grenze)
+	\item \textbf{Räumliche Energiefeld-Kartierung}: Erkennung ausgedehnter Feldstrukturen
+	\begin{itemize}
+		\item QM-Erwartung: Punktartige Messereignisse
+		\item T0-Vorhersage: Räumlich ausgedehnte Energiemuster $E(x,t)$
+		\item Technologie: Hochauflösende Quanteninterferometrie
+	\end{itemize}
 	
-		- Ziel-Präzision: 133 ppm oder besser
-		- T0-Vorhersage: $|S| = 2,389133 \pm \text{Messfehler}$
-		- Entscheidender Test: Jede Überschuss-Verletzung unterstützt T0
-	
-	
-	- \textbf{Quantenalgorithmus-Wiederholbarkeit}: 1000$\times$ identische Algorithmus-Ausführung
-	
-		- QM-Erwartung: Statistische Variation innerhalb Fehlergrenzen
-		- T0-Vorhersage: Perfekte Wiederholbarkeit (Null-Varianz)
-		- Algorithmen: Deutsch, Grover, Bell-Zustände, Shor
-	
-	
-	- \textbf{Räumliche Energiefeld-Kartierung}: Erkennung ausgedehnter Feldstrukturen
-	
-		- QM-Erwartung: Punktartige Messereignisse
-		- T0-Vorhersage: Räumlich ausgedehnte Energiemuster $E(x,t)$
-		- Technologie: Hochauflösende Quanteninterferometrie
-	
-	
-	- \textbf{Superdeterminismus-Signaturen}: Suche nach Messwahl-Korrelationen
-	
-		- QM-Erwartung: Wahre Zufälligkeit in Messeinstellungen
-		- T0-Vorhersage: Subtile statistische Verzerrungen in zufälligen Wahlentscheidungen
-		- Herausforderung: Erfordert sorgfältige statistische Analyse
-	
-
+	\item \textbf{Superdeterminismus-Signaturen}: Suche nach Messwahl-Korrelationen
+	\begin{itemize}
+		\item QM-Erwartung: Wahre Zufälligkeit in Messeinstellungen
+		\item T0-Vorhersage: Subtile statistische Verzerrungen in zufälligen Wahlentscheidungen
+		\item Herausforderung: Erfordert sorgfältige statistische Analyse
+	\end{itemize}
+\end{enumerate}
 			
 			\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=Abschließende Bewertung]
 				\textbf{Die T0-Theorie bietet eine mathematisch konsistente, experimentell testbare Alternative zur Standard-Quantenmechanik, die No-Go-Theoreme durch ausgeklügelte superdeterministische Mechanismen umgeht.} 
@@ -662,5 +564,49 @@
 			\end{tcolorbox}
 			
 			Der T0-Ansatz zeigt, dass lokal realistische Alternativen zur Quantenmechanik theoretisch möglich und experimentell unterscheidbar sind. Obwohl kontroverse superdeterministische Annahmen erforderlich sind, bietet T0 konkrete Vorhersagen, die die Debatte zwischen deterministischer und probabilistischer Quantenmechanik definitiv lösen können.
+			
+			\begin{thebibliography}{99}
+				\bibitem{bell1964}
+				Bell, J. S. (1964). On the Einstein Podolsky Rosen paradox. \textit{Physics Physique Fizika}, 1(3), 195--200.
+				
+				\bibitem{kochen_specker1967}
+				Kochen, S. and Specker, E. P. (1967). The problem of hidden variables in quantum mechanics. \textit{Journal of Mathematics and Mechanics}, 17(1), 59--87.
+				
+				\bibitem{clauser_horne1974}
+				Clauser, J. F. and Horne, M. A. (1974). Experimental consequences of objective local theories. \textit{Physical Review D}, 10(2), 526--535.
+				
+				\bibitem{aspect1982}
+				Aspect, A., Dalibard, J., and Roger, G. (1982). Experimental test of Bell's inequalities using time-varying analyzers. \textit{Physical Review Letters}, 49(25), 1804--1807.
+				
+				\bibitem{pusey_barrett_rudolph2012}
+				Pusey, M. F., Barrett, J., and Rudolph, T. (2012). On the reality of the quantum state. \textit{Nature Physics}, 8(6), 475--478.
+				
+				\bibitem{hardy1993}
+				Hardy, L. (1993). Nonlocality for two particles without inequalities for almost all entangled states. \textit{Physical Review Letters}, 71(11), 1665--1668.
+				
+				\bibitem{greenberger_horne_zeilinger1989}
+				Greenberger, D. M., Horne, M. A., and Zeilinger, A. (1989). Going beyond Bell's theorem. \textit{Bell's Theorem, Quantum Theory and Conceptions of the Universe}, 69--72.
+				
+				\bibitem{superdeterminismus_review}
+				Brans, C. H. (1988). Bell's theorem does not eliminate fully causal hidden variables. \textit{International Journal of Theoretical Physics}, 27(2), 219--226.
+				
+				\bibitem{t_hooft_deterministic}
+				't Hooft, G. (2016). \textit{The Cellular Automaton Interpretation of Quantum Mechanics}. Springer.
+				
+				\bibitem{palmer_superdeterminism}
+				Palmer, T. N. (2020). The invariant set postulate: A new geometric framework for the foundations of quantum theory and the role played by gravity. \textit{Proceedings of the Royal Society A}, 476(2243), 20200319.
+				
+				\bibitem{t0_deterministic_qm}
+				T0 Theory Documentation. \textit{Deterministic Quantum Mechanics via T0-Energy Field Formulation}.
+				
+				\bibitem{t0_lagrangian}
+				T0 Theory Documentation. \textit{Simple Lagrangian Revolution: From Standard Model Complexity to T0 Elegance}.
+				
+				\bibitem{bell_test_loopholes}
+				Larsson, J. Å. (2014). Loopholes in Bell inequality tests of local realism. \textit{Journal of Physics A: Mathematical and Theoretical}, 47(42), 424003.
+				
+				\bibitem{freedom_of_choice}
+				Scheidl, T. et al. (2010). Violation of local realism with freedom of choice. \textit{Proceedings of the National Academy of Sciences}, 107(46), 19708--19713.
+			\end{thebibliography}
 
 \end{document}
