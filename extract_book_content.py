@@ -36,7 +36,57 @@ def extract_preamble_and_body(tex_file):
     preamble = content[:begin_match.start()]
     body = content[begin_match.end():end_match.start()]
     
+    # Clean body from any remaining preamble-like commands
+    body = clean_body_content(body)
+    
     return preamble, body, content
+
+def clean_body_content(body):
+    """Remove any preamble commands that might remain in body."""
+    # Remove \documentclass
+    body = re.sub(r'\\documentclass(\[[^\]]*\])?\{[^}]+\}', '', body)
+    
+    # Remove \usepackage
+    body = re.sub(r'\\usepackage(\[[^\]]*\])?\{[^}]+\}', '', body)
+    
+    # Remove \newcommand, \renewcommand, \def
+    body = re.sub(r'\\newcommand\{[^}]+\}(\[[^\]]*\])?\{[^}]*\}', '', body, flags=re.DOTALL)
+    body = re.sub(r'\\renewcommand\{[^}]+\}(\[[^\]]*\])?\{[^}]*\}', '', body, flags=re.DOTALL)
+    body = re.sub(r'\\def\\[^{]+\{[^}]*\}', '', body, flags=re.DOTALL)
+    
+    # Remove \definecolor
+    body = re.sub(r'\\definecolor\{[^}]+\}\{[^}]+\}\{[^}]+\}', '', body)
+    
+    # Remove \newtheorem
+    body = re.sub(r'\\newtheorem(\*)?(\[[^\]]*\])?\{[^}]+\}(\[[^\]]*\])?\{[^}]+\}', '', body)
+    
+    # Remove \DeclareMathOperator
+    body = re.sub(r'\\DeclareMathOperator(\*)?(\[[^\]]*\])?\{[^}]+\}\{[^}]+\}', '', body)
+    
+    # Remove various setup commands
+    body = re.sub(r'\\sisetup\{[^}]*\}', '', body, flags=re.DOTALL)
+    body = re.sub(r'\\pgfplotsset\{[^}]*\}', '', body, flags=re.DOTALL)
+    body = re.sub(r'\\hypersetup\{[^}]*\}', '', body, flags=re.DOTALL)
+    body = re.sub(r'\\geometry\{[^}]*\}', '', body, flags=re.DOTALL)
+    body = re.sub(r'\\usetikzlibrary\{[^}]*\}', '', body, flags=re.DOTALL)
+    body = re.sub(r'\\newunicodechar\{[^}]+\}\{[^}]+\}', '', body)
+    
+    # Remove \pagestyle and \fancyhf
+    body = re.sub(r'\\pagestyle\{[^}]+\}', '', body)
+    body = re.sub(r'\\fancyhf\[[^\]]*\]\{[^}]*\}', '', body, flags=re.DOTALL)
+    body = re.sub(r'\\fancyhead\[[^\]]*\]\{[^}]*\}', '', body, flags=re.DOTALL)
+    body = re.sub(r'\\fancyfoot\[[^\]]*\]\{[^}]*\}', '', body, flags=re.DOTALL)
+    
+    # Remove \author, \title, \date (but keep \maketitle)
+    body = re.sub(r'\\author\{[^}]*\}', '', body, flags=re.DOTALL)
+    body = re.sub(r'\\title\{[^}]*\}', '', body, flags=re.DOTALL)
+    body = re.sub(r'\\date\{[^}]*\}', '', body, flags=re.DOTALL)
+    
+    # Clean up excessive whitespace
+    body = re.sub(r'\n\n\n+', '\n\n', body)
+    body = body.strip()
+    
+    return body
 
 def extract_packages(preamble):
     r"""Extract all \usepackage commands from preamble."""
