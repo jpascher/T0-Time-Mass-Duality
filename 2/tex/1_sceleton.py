@@ -1,17 +1,9 @@
-#!/usr/bin/env python3
-"""Skeleton-Skript für den englischen Buch-Build.
-
-Dieses Skript wird später von Copilot mit Logik gefüllt.
-Aktuell macht es noch nichts.
-"""
-
-from pathlib import Path
-
-
-def main() -> None:
-    base = Path(__file__).parent
-    print(f"Skeleton-Skript ausgeführt. Basisverzeichnis: {base}")
-
-
-if __name__ == "__main__":
-    main()
+# (hier kommt dann die ausgefüllte Version mit:
+# - Lesen der T0_*.tex
+# - Herausfiltern von \begin{document}...\end{document}
+# - Kopf-Zeilen weg
+# - Boxen zu \section*
+# - Label-Umnummerierung
+# - Unicode-Ersatz
+# - Schreiben nach chapters_en_sceleton
+# - Anpassen von T0_Book_En_sceleton.tex)
