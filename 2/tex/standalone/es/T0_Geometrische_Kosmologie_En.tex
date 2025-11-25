@@ -162,111 +162,88 @@
 		
 	\end{thebibliography}
 	
-	\newpage
-	\section*{Appendix: Python Code for the Simulation}
-	
-	\begin{lstlisting}[language=Python, caption={Conceptual Python code for the FEM simulation of geometric redshift.}, label={lst:fem_code}]
-		import numpy as np
-		import heapq
-		
-		# --- 1. Global T0 Parameters ---
-		XI = 1.340e-4  # Calibrated T0 parameter
-		C_SPEED = 299792.458  # km/s
-		GEOMETRIC_FACTOR_C = 0.76 # Grid factor derived from simulation
-		
-		def simulate_t0_field(grid_size):
-		"""Simulates a static T0 vacuum field with fluctuations."""
-		# Simplified simulation: Normally distributed fluctuations scaled by XI.
-		# A real simulation would numerically solve the T0 field equation
-		# (e.g., using FEniCS).
-		np.random.seed(42)
-		base_field = np.ones((grid_size, grid_size, grid_size))
-		fluctuations = np.random.normal(0, XI, (grid_size, grid_size, grid_size))
-		return base_field + fluctuations
-		
-		def calculate_path_cost(field_value):
-		"""The "cost" (effective distance) to traverse a grid node."""
-		# The path through a point with higher field energy is "longer".
-		return 1.0 * field_value
-		
-		def find_geodesic_path(t0_field, start_node, end_node):
-		"""Finds the shortest path (geodesic) using Dijkstra's algorithm."""
-		grid_size = t0_field.shape[0]
-		distances = np.full((grid_size, grid_size, grid_size), np.inf)
-		distances[start_node] = 0
-		pq = [(0, start_node)] # Priority queue (distance, node)
-		
-		while pq:
-		dist, current_node = heapq.heappop(pq)
-		
-		if dist > distances[current_node]:
-		continue
-		if current_node == end_node:
-		break
-		
-		x, y, z = current_node
-		# Iterate over all 26 neighbors in the 3D grid
-		for dx in [-1, 0, 1]:
-		for dy in [-1, 0, 1]:
-		for dz in [-1, 0, 1]:
-		if dx == 0 and dy == 0 and dz == 0:
-		continue
-		
-		nx, ny, nz = x + dx, y + dy, z + dz
-		
-		if 0 <= nx < grid_size and 0 <= ny < grid_size and 0 <= nz < grid_size:
-		neighbor_node = (nx, ny, nz)
-		# Euclidean distance to neighbor
-		move_dist = np.sqrt(dx**2 + dy**2 + dz**2)
-		# Cost based on the neighbor's T0 field value
-		cost = calculate_path_cost(t0_field[neighbor_node])
-		new_dist = dist + move_dist * cost
-		
-		if new_dist < distances[neighbor_node]:
-		distances[neighbor_node] = new_dist
-		heapq.heappush(pq, (new_dist, neighbor_node))
-		
-		return distances[end_node]
-		
-		# --- 2. Run Simulation ---
-		GRID_SIZE = 100 # Grid size for the simulation
-		START_NODE = (0, 50, 50)
-		END_NODE = (99, 50, 50)
-		
-		print("1. Simulating T0 vacuum field...")
-		t0_vacuum = simulate_t0_field(GRID_SIZE)
-		
-		print("2. Calculating geodesic path through the field...")
-		effective_path_length = find_geodesic_path(t0_vacuum, START_NODE, END_NODE)
-		
-		# Euclidean distance for reference
-		euclidean_distance = np.sqrt((END_NODE[0] - START_NODE[0])**2)
-		
-		# --- 3. Calculate and Print Results ---
-		print(f"\n--- Results ---")
-		print(f"Euclidean Distance (d): {euclidean_distance:.4f} units")
-		print(f"Effective Path Length (Leff): {effective_path_length:.4f} units")
-		
-		# Geometric redshift z
-		redshift_z = (effective_path_length - euclidean_distance) / euclidean_distance
-		print(f"Geometric Redshift (z): {redshift_z:.6f}")
-		
-		# Derivation of the Hubble Constant
-		# z = d * C * xi => H0 = c * C * xi
-		# For our simulation, we normalize d to 1 Mpc
-		dist_Mpc = 1.0 # Assumed distance of 1 Mpc
-		z_per_Mpc = redshift_z / euclidean_distance * (3.26e6 * GRID_SIZE) # Scale to Mpc
-		H0_simulated = C_SPEED * z_per_Mpc
-		
-		# Direct calculation from the T0 formula
-		H0_formula = C_SPEED * GEOMETRIC_FACTOR_C * XI * 3.26e6 / (1e3) # in km/s/Mpc
-		
-		print("\n--- Cosmological Prediction ---")
-		print(f"Simulated Hubble Constant (H0): {H0_simulated:.2f} km/s/Mpc")
-		print(f"Formula-based Hubble Constant (H0): {H0_formula:.2f} km/s/Mpc")
-		print("\nResult: The simulation confirms that redshift as a geometric")
-		print("effect in the T0 vacuum correctly reproduces the Hubble constant.")
-		
-	\end{lstlisting}
-	
+\newpage
+\section*{Appendix: Python Code for the Simulation}
+
+\begin{lstlisting}[language=Python, caption={Conceptual Python code for the FEM simulation of geometric redshift.}, label={lst:fem_code}, basicstyle=\ttfamily\scriptsize, breaklines=true]
+import numpy as np
+import heapq
+
+# --- 1. Global T0 Parameters ---
+XI = 1.340e-4  # Calibrated T0 parameter
+C_SPEED = 299792.458  # km/s
+GEOMETRIC_FACTOR_C = 0.76 # Grid factor derived from simulation
+
+def simulate_t0_field(grid_size):
+    """Simulates a static T0 vacuum field with fluctuations."""
+    np.random.seed(42)
+    base_field = np.ones((grid_size, grid_size, grid_size))
+    fluctuations = np.random.normal(0, XI, (grid_size, grid_size, grid_size))
+    return base_field + fluctuations
+
+def calculate_path_cost(field_value):
+    """The cost (effective distance) to traverse a grid node."""
+    return 1.0 * field_value
+
+def find_geodesic_path(t0_field, start_node, end_node):
+    """Finds the shortest path (geodesic) using Dijkstra's algorithm."""
+    grid_size = t0_field.shape[0]
+    distances = np.full((grid_size, grid_size, grid_size), np.inf)
+    distances[start_node] = 0
+    pq = [(0, start_node)]
+    
+    while pq:
+        dist, current_node = heapq.heappop(pq)
+        if dist > distances[current_node]:
+            continue
+        if current_node == end_node:
+            break
+        x, y, z = current_node
+        for dx in [-1, 0, 1]:
+            for dy in [-1, 0, 1]:
+                for dz in [-1, 0, 1]:
+                    if dx == 0 and dy == 0 and dz == 0:
+                        continue
+                    nx, ny, nz = x + dx, y + dy, z + dz
+                    if 0 <= nx < grid_size and 0 <= ny < grid_size and 0 <= nz < grid_size:
+                        neighbor_node = (nx, ny, nz)
+                        move_dist = np.sqrt(dx**2 + dy**2 + dz**2)
+                        cost = calculate_path_cost(t0_field[neighbor_node])
+                        new_dist = dist + move_dist * cost
+                        if new_dist < distances[neighbor_node]:
+                            distances[neighbor_node] = new_dist
+                            heapq.heappush(pq, (new_dist, neighbor_node))
+    return distances[end_node]
+
+# --- 2. Run Simulation ---
+GRID_SIZE = 100
+START_NODE = (0, 50, 50)
+END_NODE = (99, 50, 50)
+
+print("1. Simulating T0 vacuum field...")
+t0_vacuum = simulate_t0_field(GRID_SIZE)
+
+print("2. Calculating geodesic path through the field...")
+effective_path_length = find_geodesic_path(t0_vacuum, START_NODE, END_NODE)
+euclidean_distance = np.sqrt((END_NODE[0] - START_NODE[0])**2)
+
+# --- 3. Calculate and Print Results ---
+print(f"\n--- Results ---")
+print(f"Euclidean Distance (d): {euclidean_distance:.4f} units")
+print(f"Effective Path Length (Leff): {effective_path_length:.4f} units")
+
+redshift_z = (effective_path_length - euclidean_distance) / euclidean_distance
+print(f"Geometric Redshift (z): {redshift_z:.6f}")
+
+# Derivation of the Hubble Constant
+dist_Mpc = 1.0
+z_per_Mpc = redshift_z / euclidean_distance * (3.26e6 * GRID_SIZE)
+H0_simulated = C_SPEED * z_per_Mpc
+H0_formula = C_SPEED * GEOMETRIC_FACTOR_C * XI * 3.26e6 / (1e3)
+
+print("\n--- Cosmological Prediction ---")
+print(f"Simulated Hubble Constant (H0): {H0_simulated:.2f} km/s/Mpc")
+print(f"Formula-based Hubble Constant (H0): {H0_formula:.2f} km/s/Mpc")
+\end{lstlisting}
+
 \end{document}
