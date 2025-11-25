@@ -1,14 +1,15 @@
 #!/bin/bash
 #
 # Compile T0 Book LaTeX files to PDF
-# Usage: ./compile_books.sh [book1|book2|book3|all]
+# Usage: ./compile_books.sh [book1|book2|book3|book4|all]
 #
 # Examples:
-#   ./compile_books.sh          # Compile all three books
+#   ./compile_books.sh          # Compile all four books
 #   ./compile_books.sh book1    # Compile T0_Book1_En.tex only
 #   ./compile_books.sh book2    # Compile T0_Book_En.tex only  
 #   ./compile_books.sh book3    # Compile T0_Book3_En.tex only
-#   ./compile_books.sh all      # Compile all three books
+#   ./compile_books.sh book4    # Compile T0_Book4_En.tex only (complete collection)
+#   ./compile_books.sh all      # Compile all four books
 #
 
 set -e
@@ -27,6 +28,7 @@ declare -A BOOKS
 BOOKS["book1"]="T0_Book1_En.tex"
 BOOKS["book2"]="T0_Book_En.tex"
 BOOKS["book3"]="T0_Book3_En.tex"
+BOOKS["book4"]="T0_Book4_En.tex"
 
 compile_book() {
     local book_file="$1"
@@ -79,13 +81,15 @@ show_help() {
     echo "  book1       Compile T0_Book1_En.tex (comprehensive, ~580 pages)"
     echo "  book2       Compile T0_Book_En.tex (original, ~88 pages)"
     echo "  book3       Compile T0_Book3_En.tex (no boxes, ~526 pages)"
-    echo "  all         Compile all three books (default)"
+    echo "  book4       Compile T0_Book4_En.tex (complete collection, all chapters)"
+    echo "  all         Compile all four books (default)"
     echo "  clean       Remove auxiliary files (.aux, .log, .out, .toc, etc.)"
     echo "  help        Show this help message"
     echo ""
     echo "Examples:"
     echo "  $0              # Compile all books"
     echo "  $0 book1        # Compile comprehensive book only"
+    echo "  $0 book4        # Compile complete collection"
     echo "  $0 clean        # Clean up auxiliary files"
 }
 
@@ -100,6 +104,9 @@ case "${1:-all}" in
     book3)
         compile_book "${BOOKS[book3]}"
         ;;
+    book4)
+        compile_book "${BOOKS[book4]}"
+        ;;
     all)
         echo "Compiling all T0 Books..."
         echo ""
@@ -108,6 +115,8 @@ case "${1:-all}" in
         compile_book "${BOOKS[book2]}"
         echo ""
         compile_book "${BOOKS[book3]}"
+        echo ""
+        compile_book "${BOOKS[book4]}"
         echo ""
         echo -e "${GREEN}All books compiled successfully!${NC}"
         ;;

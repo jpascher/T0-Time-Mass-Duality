@@ -1,12 +1,13 @@
 @echo off
 REM Compile T0 Book LaTeX files to PDF
-REM Usage: compile_books.bat [book1|book2|book3|all|clean|help]
+REM Usage: compile_books.bat [book1|book2|book3|book4|all|clean|help]
 REM
 REM Examples:
-REM   compile_books.bat          - Compile all three books
+REM   compile_books.bat          - Compile all four books
 REM   compile_books.bat book1    - Compile T0_Book1_En.tex only
 REM   compile_books.bat book2    - Compile T0_Book_En.tex only
 REM   compile_books.bat book3    - Compile T0_Book3_En.tex only
+REM   compile_books.bat book4    - Compile T0_Book4_En.tex only (complete collection)
 REM   compile_books.bat clean    - Remove auxiliary files
 
 setlocal enabledelayedexpansion
@@ -18,12 +19,14 @@ REM Book file definitions
 set "BOOK1=T0_Book1_En.tex"
 set "BOOK2=T0_Book_En.tex"
 set "BOOK3=T0_Book3_En.tex"
+set "BOOK4=T0_Book4_En.tex"
 
 if "%1"=="" goto all
 if "%1"=="all" goto all
 if "%1"=="book1" goto book1
 if "%1"=="book2" goto book2
 if "%1"=="book3" goto book3
+if "%1"=="book4" goto book4
 if "%1"=="clean" goto clean
 if "%1"=="help" goto help
 if "%1"=="--help" goto help
@@ -44,6 +47,10 @@ goto end
 call :compile_book %BOOK3%
 goto end
 
+:book4
+call :compile_book %BOOK4%
+goto end
+
 :all
 echo Compiling all T0 Books...
 echo.
@@ -52,6 +59,8 @@ echo.
 call :compile_book %BOOK2%
 echo.
 call :compile_book %BOOK3%
+echo.
+call :compile_book %BOOK4%
 echo.
 echo All books compiled successfully!
 goto end
@@ -71,13 +80,15 @@ echo Options:
 echo   book1       Compile T0_Book1_En.tex (comprehensive, ~580 pages)
 echo   book2       Compile T0_Book_En.tex (original, ~88 pages)
 echo   book3       Compile T0_Book3_En.tex (no boxes, ~526 pages)
-echo   all         Compile all three books (default)
+echo   book4       Compile T0_Book4_En.tex (complete collection, all chapters)
+echo   all         Compile all four books (default)
 echo   clean       Remove auxiliary files (.aux, .log, .out, .toc, etc.)
 echo   help        Show this help message
 echo.
 echo Examples:
 echo   %~nx0              - Compile all books
 echo   %~nx0 book1        - Compile comprehensive book only
+echo   %~nx0 book4        - Compile complete collection
 echo   %~nx0 clean        - Clean up auxiliary files
 goto end
 
