@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 from pathlib import Path
 import re
+
 BASE = Path(__file__).parent
 CHAPTER_DIR = BASE / "chapters_en"
+
 EXCLUDE_SOURCES = {
     "T0_Book_En.tex",
     "T0_Book2_En.tex",
@@ -11,7 +13,9 @@ EXCLUDE_SOURCES = {
     "generate_book_chapters1_en.py",
     "1.py",
 }
+
 GLOBAL_BIBITEMS: list[str] = []
+
 # Nur diese Kapitel werden aktuell verarbeitet
 ENABLED_CHAPTERS = [
     "T0_Introduction_En.tex",
@@ -21,86 +25,11 @@ ENABLED_CHAPTERS = [
     "T0_Teilchenmassen_En.tex",
     "T0_Neutrinos_En.tex",
     "T0_xi-und-e_En.tex",
-    "T0_xi_ursprung_En.tex",
-    "xi_parmater_partikel_En.tex",
-    "T0_Energie_En.tex",
-    "T0_Feinstruktur_En.tex",
-    "T0_Gravitationskonstante_En.tex",
-    "T0_SI_En.tex",
-    "T0_nat-si_En.tex",
-    "NatEinheitenSystematikEn.tex",
-    "T0_Vollstaendige_Berchnungen_En.tex",
-    "T0_Anomale_Magnetische_Momente_En.tex",
-    "T0_Anomale-g2-9_En.tex",
-    "T0_QM-QFT-RT_En.tex",
-    "T0_QAT_En.tex",
-    "T0_QFT-ML_Addendum_En.tex",
-    "Bell_En.tex",
-    "T0_netze_En.tex",
-    "T0_Kosmologie_En.tex",
-    "T0_Geometrische_Kosmologie_En.tex",
-    "T0_Analyse_MNRAS_Widerlegung_En.tex",
-    "T0_7-fragen-3_En.tex",
-    "T0_threeclock_En.tex",
-    "T0_penrose_En.tex",
-    "T0_g2-erweiterung-4_En.tex",
-    "T0_umkehrung_En.tex",
-    "T0_Theorie-vs-Synergetics_En.tex",
-    "T0_QM-optimierung_En.tex",
-    "QM_En.tex",
-    "T0_peratt_En.tex",
-    "Hannah_En.tex",
-    "Markov_En.tex",
-    "T0_lagrndian_En.tex",
-    "LagrandianVergleichEn.tex",
-    "diracVereinfachtEn.tex",
-    "diracEn.tex",
-    "Zwei-Dipoles-CMB_En.tex",
-    "universale-ableitung_En.tex",
-    "neutrino-Formel_En.tex",
-    "T0_Dokumentenübersicht_En.tex",
-    "TempEinheitenCMBEn.tex",
-    "ParameterSystemdipendentEn.tex",
-    "MathZeitMasseLagrangeEn.tex",
-    "Ho_En.tex",
-    "HdokumentEn.tex",
-    "Zeit-konstant_En.tex",
-    "Teilchenmassen_En.tex",
-    "Mathematische_struktur_En.tex",
-    "redshift_deflection_En.tex",
-    "cosmic_En.tex",
-    "gravitationskonstante_En.tex",
-    "parameterherleitung_En.tex",
-    "Zeit_En.tex",
-    "Formeln_Energiebasiert_En.tex",
-    "detailierte_formel_leptonen_anemal_En.tex",
-    "FeinstrukturkonstanteEn.tex",
-    "musical-spiral-137-En.tex",
-    "Bewegungsenergie_En.tex",
-    "T0vsESM_ConceptualAnalysis_En.tex",
-    "systemEn.tex",
-    "RSAtest_En.tex",
-    "RSA_En.tex",
-    "ResolvingTheConstantsAlfaEn.tex",
-    "RelokativesZahlensystemEn.tex",
-    "QM-testenEn.tex",
-    "NoGoEn.tex",
-    "Moll_CandelaEn.tex",
-    "EliminationOfMassEn.tex",
-    "E-mc2_En.tex",
-    "DynMassePhotonenNichtlokalEn.tex",
-    "Elimination_Of_Mass_Dirac_TabelleEn.tex",
-    "Elimination_Of_Mass_Dirac_LagEn.tex",
-    "QM-DetrmisticEn.tex",
-    "QM-Detrmistic_p_En.tex",
-    "Zusammenfassung_En.tex",
-    "T0_Bibliography_En.tex",
-    "T0_photonenchip-china_En.tex",
-    "T0_photonenchip-umsetzung_En.tex",
-    "T0_photonenchip-einführung_En.tex",
 ]
+
 CHAPTER_ORDER = ENABLED_CHAPTERS[:]
 CHAPTER_ORDER_INDEX = {name: i for i, name in enumerate(CHAPTER_ORDER)}
+
 # Unicode-/Sonderzeichen-Mapping
 UNICODE_MAP = {
     # griechisch klein
@@ -110,12 +39,14 @@ UNICODE_MAP = {
     "ν": r"\nu ", "ξ": r"\xi ", "ο": r"o", "π": r"\pi ", "ρ": r"\rho ",
     "σ": r"\sigma ", "τ": r"\tau ", "υ": r"\upsilon ", "φ": r"\phi ",
     "χ": r"\chi ", "ψ": r"\psi ", "ω": r"\omega ",
+
     # griechisch groß
     "Α": r"A", "Β": r"B", "Γ": r"\Gamma ", "Δ": r"\Delta ", "Ε": r"E",
     "Ζ": r"Z", "Η": r"H", "Θ": r"\Theta ", "Ι": r"I", "Κ": r"K",
     "Λ": r"\Lambda ", "Μ": r"M", "Ν": r"N", "Ξ": r"\Xi ", "Ο": r"O",
     "Π": r"\Pi ", "Ρ": r"P", "Σ": r"\Sigma ", "Τ": r"T", "Υ": r"\Upsilon ",
     "Φ": r"\Phi ", "Χ": r"X", "Ψ": r"\Psi ", "Ω": r"\Omega ",
+
     # Mathe-Symbole / Operatoren
     "∞": r"\infty ", "∂": r"\partial ", "∇": r"\nabla ", "√": r"\sqrt{}",
     "≈": r"\approx ", "≠": r"\neq ", "≤": r"\leq ", "≥": r"\geq ",
@@ -123,9 +54,11 @@ UNICODE_MAP = {
     "⇔": r"\Leftrightarrow ", "∈": r"\in ", "∉": r"\notin ",
     "∩": r"\cap ", "∪": r"\cup ", "∅": r"\emptyset ",
     "∑": r"\sum ", "∏": r"\prod ", "∫": r"\int ", "∝": r"\propto ",
+
     # Sonstige
     "★": r"\star ", "✓": r"\checkmark ", "ħ": r"\hbar ",
 }
+
 BOX_TO_SECTION = {
     "foundation": "Foundation",
     "alternative": "Alternative",
@@ -191,6 +124,8 @@ BOX_TO_SECTION = {
     "beweis": "Beweis",
     "folgerung": "Folgerung",
 }
+
+
 def is_english_source(path: Path) -> bool:
     name = path.name
     if not name.endswith(".tex"):
@@ -200,17 +135,23 @@ def is_english_source(path: Path) -> bool:
     if name not in ENABLED_CHAPTERS:
         return False
     return True
+
+
 def make_title_from_filename(stem: str) -> str:
     s = re.sub(r'[_\-](En|EN|en)$', "", stem)
     s = re.sub(r"[_\-]+", " ", s)
     words = s.split()
     words = [w.capitalize() for w in words]
     return " ".join(words)
+
+
 def replace_unicode(line: str) -> str:
     for ch, macro in UNICODE_MAP.items():
         if ch in line:
             line = line.replace(ch, macro)
     return line
+
+
 def convert_boxes_to_sections(line: str) -> str:
     stripped = line.strip()
     m = re.match(r"^\\begin\{([a-zA-Z_]+)\}", stripped)
@@ -223,6 +164,8 @@ def convert_boxes_to_sections(line: str) -> str:
     if m2 and m2.group(1) in BOX_TO_SECTION:
         return "% end box " + m2.group(1) + "\n"
     return line
+
+
 def sanitize_heading_math(line: str) -> str:
     stripped = line.lstrip()
     if not stripped.startswith(("\\chapter", "\\section", "\\subsection", "\\subsubsection")):
@@ -243,6 +186,8 @@ def sanitize_heading_math(line: str) -> str:
     inner = re.sub(r"\s+", " ", inner).strip()
     content = "{" + inner + "}"
     return line[: m.start(1)] + content + line[m.end(1) :]
+
+
 def normalize_headings_in_body(line: str) -> str:
     stripped = line.strip()
     if stripped.startswith(r"\chapter*{"):
@@ -256,6 +201,8 @@ def normalize_headings_in_body(line: str) -> str:
     if m2:
         return f"\\section*{{{m2.group(1).strip()}}}\n"
     return line
+
+
 def extract_main_title_from_line(line: str) -> str | None:
     stripped = line.strip()
     m = re.match(r"^\\title\{(.*)\}\s*$", stripped)
@@ -274,10 +221,13 @@ def extract_main_title_from_line(line: str) -> str | None:
             first = parts[0].strip() if parts else ""
             return re.sub(r"\s+", " ", first) or None
     return None
+
+
 def renumber_labels_and_refs(line: str, label_map: dict[str, str], doc_id: str, counter_ref: list[int]) -> str:
     def next_label():
         counter_ref[0] += 1
         return f"L-{doc_id}-{counter_ref[0]:04d}"
+
     def repl_label(m):
         old = m.group(1)
         if old in label_map:
@@ -286,33 +236,47 @@ def renumber_labels_and_refs(line: str, label_map: dict[str, str], doc_id: str, 
             new = next_label()
             label_map[old] = new
         return r"\label{" + new + "}"
+
     line = re.sub(r"\\label\{([^}]+)\}", repl_label, line)
+
     def repl_ref(m):
         cmd = m.group(1)
         old = m.group(2)
         new = label_map.get(old, old)
         return "\\" + cmd + "{" + new + "}"
+
     line = re.sub(r"\\(ref|eqref|autoref|cref|Cref)\{([^}]+)\}", repl_ref, line)
     return line
+
+
 def sort_key(path: Path):
     name = path.name
     if name in CHAPTER_ORDER_INDEX:
         return (0, CHAPTER_ORDER_INDEX[name])
     return (1, name.lower())
+
+
 def main():
     global GLOBAL_BIBITEMS
+
     CHAPTER_DIR.mkdir(exist_ok=True)
+
     sources = sorted([p for p in BASE.glob("*.tex") if is_english_source(p)], key=sort_key)
     if not sources:
         return
+
     chapter_files: list[Path] = []
+
     for src in sources:
         stem = src.stem
         chapter_path = CHAPTER_DIR / (stem + "_ch.tex")
+
         default_title = make_title_from_filename(stem)
         main_title: str | None = None
+
         with src.open("r", encoding="utf-8", errors="ignore") as fin:
             raw_lines = fin.readlines()
+
         # Nur Inhalt zwischen \begin{document} und \end{document}
         start_idx = 0
         end_idx = len(raw_lines)
@@ -325,22 +289,28 @@ def main():
                 end_idx = i
                 break
         core_lines = raw_lines[start_idx:end_idx]
+
         # Titel aus Präambel extrahieren (vor begin{document})
         for ln in raw_lines[:start_idx]:
             t = extract_main_title_from_line(ln)
             if t:
                 main_title = t
                 break
+
         # Jetzt core_lines filtern/transformieren
         content_started = False
         body_lines: list[str] = []
+
         # Label-Renumbering
         doc_id = re.sub(r'[_\-](En|EN|en)$', "", stem)
         label_map: dict[str, str] = {}
-        label_counter = [0] # mutable
+        label_counter = [0]  # mutable
+
         inside_bib = False
+
         for line in core_lines:
             stripped = line.strip()
+
             # Bibliographie-Blöcke global sammeln
             if stripped.startswith(r"\begin{thebibliography}"):
                 inside_bib = True
@@ -351,10 +321,12 @@ def main():
                     continue
                 GLOBAL_BIBITEMS.append(line.rstrip("\n"))
                 continue
+
             if not content_started:
                 # Kommentare/Leerzeilen im inneren Kopf weg
                 if not stripped or stripped.startswith('%'):
                     continue
+
                 # Kopf-/Layout-Kommandos verwerfen
                 if (
                     stripped.startswith(r"\chapter") or
@@ -374,6 +346,7 @@ def main():
                     stripped in {"}", "}%"}
                 ):
                     continue
+
                 # ab Abstract starten (wenn vorhanden)
                 # wenn du statt dessen ab erster normalen Zeile starten willst,
                 # kannst du diese Bedingung abschwächen
@@ -383,22 +356,28 @@ def main():
                 else:
                     # solange bis zum Abstract alles weg
                     continue
+
             # ab hier: Inhalt
             line = sanitize_heading_math(line)
             line = normalize_headings_in_body(line)
             line = replace_unicode(line)
             line = convert_boxes_to_sections(line)
             line = renumber_labels_and_refs(line, label_map, doc_id, label_counter)
+
             body_lines.append(line)
+
         title_core = main_title if main_title else default_title
         file_label = re.sub(r'[_\-](En|EN|en)$', "", stem)
         full_title_display = f"{title_core.replace('_', ' ')} ({file_label.replace('_', ' ')})"
         short_title = full_title_display
+
         with chapter_path.open("w", encoding="utf-8") as fout:
             fout.write(f"\\chapter[{short_title}]{{{full_title_display}}}\n\n")
             for bl in body_lines:
                 fout.write(bl)
+
         chapter_files.append(chapter_path)
+
     # Buch-TeX erzeugen
     book_path = BASE / "T0_Book_En.tex"
     with book_path.open("w", encoding="utf-8") as f:
@@ -409,6 +388,7 @@ def main():
 \usepackage[english]{babel}
 \usepackage{lmodern}
 \renewcommand{\familydefault}{\sfdefault}
+
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
 \usepackage[unicode,pdfencoding=auto]{hyperref}
@@ -422,8 +402,10 @@ def main():
 \usepackage{enumitem}
 \usepackage{adjustbox}
 \usepackage{xcolor}
+
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt}
+
 \hypersetup{
   colorlinks=true,
   linkcolor=blue,
@@ -431,12 +413,16 @@ def main():
   urlcolor=blue
 }
 \pagestyle{fancy}
+
 \newcommand{\checkmarkx}{\checkmark}
 \newcommand{\warningx}{\textbf{!}}
+
 \title{T0 Time--Mass Duality\\Unified English Book}
 \author{J. Pascher}
 \date{\today}
+
 \begin{document}
+
 \maketitle
 \tableofcontents
 """
@@ -445,6 +431,7 @@ def main():
         for ch in chapter_files:
             rel = ch.relative_to(BASE).as_posix().replace(".tex", "")
             f.write(f"\n%%------------------------------\n\\input{{{rel}}}\n")
+
         if GLOBAL_BIBITEMS:
             f.write("\n%%==============================\n% Globales Literaturverzeichnis\n")
             f.write("\\chapter*{References}\n")
@@ -453,6 +440,9 @@ def main():
             for item in GLOBAL_BIBITEMS:
                 f.write(item + "\n")
             f.write("\\end{thebibliography}\n")
+
         f.write("\n\\end{document}\n")
+
+
 if __name__ == "__main__":
     main()

@@ -1,0 +1,305 @@
+\documentclass[11pt,a4paper,openany]{book}
+
+% Essential packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{lmodern}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Math and physics packages
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{siunitx}
+\sisetup{locale=DE, group-separator={.}, per-mode=symbol}
+\AtBeginDocument{\RenewCommandCopy\qty\SI} % Fix siunitx/physics conflict
+% Removed: \usepackage{fixltx2e} (obsolete)
+
+% Graphics and tables
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,decorations.pathmorphing,patterns,shapes.arrows,intersections}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{adjustbox}
+
+% Document formatting
+\usepackage{fancyhdr}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\headheight}{15pt}
+\usepackage{tocloft}
+\usepackage{hyperref}
+\usepackage{bookmark} % Improved PDF bookmarks
+\usepackage{cleveref}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{ragged2e}
+\usepackage{multicol}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{mdframed}
+\usepackage{pdflscape}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{braket}
+\usepackage{cancel}
+\usepackage{caption}
+\usepackage{csquotes}
+\usepackage{doi}
+\usepackage{forest}
+\usepackage{gensymb}
+\usepackage{hyphenat}
+\usepackage{textcomp}
+\usepackage{textgreek}
+\usepackage{upgreek}
+\usepackage{url}
+\usepackage{slashed}
+\usepackage{bm}
+
+% Add these after \usepackage{tabularx}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+% Unicode and custom chars
+\usepackage{newunicodechar}
+
+% Abstract environment definition
+\newenvironment{abstract}
+{\trivlist
+	\item[\hskip\labelsep{\bfseries\itshape Abstract}]}
+{\endtrivlist}
+
+% Custom commands for fractal symbols
+\newcommand{\Kfrak}{K_{\text{frak}}}
+\newcommand{\Dfrak}{D_{\text{frak}}}
+
+% Additional custom commands for parameters
+\newcommand{\betapar}{\beta_T}
+\newcommand{\alphapar}{\alpha}
+
+% T0-specific commands (added \phiT for Golden Ratio)
+\newcommand{\phiT}{\phi_T}
+
+% Theorem environments (consolidated)
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{warning}[theorem]{Warning}
+\newtheorem{axiom}{Axiom}
+\newtheorem{principle}{Principle}
+\newtheorem{insight}{Insight}
+\newtheorem{discovery}{Discovery}
+\newtheorem{proof_step}{Proof Step}
+\newtheorem{category}{Category-Theoretic Basis}
+
+% Colors (defined early)
+\definecolor{blue}{rgb}{0,0,1}
+\definecolor{boxgray}{RGB}{240,240,240}
+\definecolor{deepblue}{RGB}{0,0,127}
+\definecolor{deepgreen}{RGB}{0,127,0}
+\definecolor{deepred}{RGB}{191,0,0}
+\definecolor{t0blue}{RGB}{33,150,243}
+\definecolor{t0green}{RGB}{76,175,80}
+\definecolor{t0orange}{RGB}{255,152,0}
+\definecolor{t0purple}{RGB}{156,39,176}
+\definecolor{t0red}{RGB}{244,67,54}
+\definecolor{t0yellow}{RGB}{255,204,0}
+
+% hypersetup (set hidelinks=true to suppress colored links and warning)
+\hypersetup{
+	colorlinks=true,
+	linkcolor=t0blue,
+	citecolor=t0blue,
+	urlcolor=t0blue,
+	breaklinks=true,
+	bookmarksnumbered=true,
+	pdfstartview=FitH,
+	pdftitle={T0 Time--Mass Duality: Unified English Book},
+	hidelinks=true  % Changed to true to avoid warning and hide colors if desired
+}
+
+% Custom commands (consolidated, complete set)
+\newcommand{\Tfield}{T(x,t)}
+\newcommand{\Efield}{E(x,t)}
+\newcommand{\mfield}{m(x,t)}
+\newcommand{\Lag}{\mathcal{L}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\alphaem}{\alpha}
+\newcommand{\betaT}{\beta_T}
+\newcommand{\xiT}{\xi}
+\newcommand{\xipar}{\xi}
+\newcommand{\Ezero}{E_0}
+\newcommand{\EPlanck}{E_{\text{Pl}}}
+\newcommand{\Mpl}{M_{\text{Pl}}}
+\newcommand{\lP}{\ell_{\text{P}}}
+\newcommand{\tP}{t_{\text{P}}}
+\newcommand{\LPlanck}{\ell_{\text{Pl}}}
+\newcommand{\TPlanck}{t_{\text{Pl}}}
+\newcommand{\Gnat}{G_{\text{nat}}}
+\newcommand{\alphaEM}{\alpha_{\text{EM}}}
+\newcommand{\alphaSI}{\alpha_{\text{SI}}}
+\newcommand{\Hubble}{H_0}
+\newcommand{\LCDM}{\Lambda\text{CDM}}
+\newcommand{\natunits}{(nat. units)}
+\newcommand{\checked}{\checkmark}
+\newcommand{\warningx}{\textbf{!}}
+
+% Fixes for undefined commands
+\newcommand{\mytimes}{\times}
+\newcommand{\myapprox}{\approx}
+\newcommand{\mypi}{\pi}
+\newcommand{\myrightarrow}{\mapsto}
+\newcommand{\mysim}{\sim}
+\newcommand{\mypropto}{\propto}
+\newcommand{\lambdah}{\lambda_{\text{h}}}
+\newcommand{\deltafield}{\delta \phi}
+\newcommand{\deltam}{\delta m}
+\newcommand{\deltaE}{\delta E}
+\newcommand{\Exi}{E_{\xi}}
+\newcommand{\Lxi}{\ell_{\xi}}
+\newcommand{\rhoCMB}{\rho_{\text{CMB}}}
+\newcommand{\rhoCasimir}{\rho_{\text{Casimir}}}
+\newcommand{\Leff}{L_{\text{eff}}}
+\newcommand{\CQCD}{C_{\mathrm{QCD}}}
+\newcommand{\Kspec}{K_{\mathrm{spec}}}
+
+% Fixes for T0_peratt_En_ch.tex
+\newcommand{\Lorentz}{\Lambda} % Lorentz transformation/boost
+\newcommand{\Riem}{\mathcal{R}} % Riemann tensor
+\newcommand{\Weyl}{\mathcal{W}} % Weyl tensor
+\newcommand{\ZPinch}{Z\text{-pinch}} % Z-pinch
+\newcommand{\SynchPower}{P_{\mathrm{synch}}} % Synchrotron power
+
+% Text companions for math symbols (fixes table errors)
+\DeclareRobustCommand{\texttimes}{\ensuremath{\times}}
+\DeclareRobustCommand{\textdegree}{\si{\degree}}
+
+% T0 Model Custom Parameters
+\newcommand{\xigeom}{\xi_{\mathrm{geom}}}
+\newcommand{\rzero}{r_{0}}
+\newcommand{\xirat}{\xi_{\mathrm{rat}}}
+\newcommand{\tzero}{t_{0}}
+\newcommand{\Lambdat}{\Lambda_{\mathrm{t}}}
+\newcommand{\EP}{E_{\mathrm{P}}}
+\newcommand{\Emu}{E_{\mu}}
+\newcommand{\Ee}{E_{e}}
+\newcommand{\Etau}{E_{\tau}}
+\newcommand{\alphafine}{\alpha_{\mathrm{fine}}}
+\newcommand{\alphal}{\alpha_{\ell}}
+
+% Math fixes
+\DeclareMathAlphabet{\mathSFSymbols}{OT1}{lmss}{\sfdefault}{m}
+\SetMathAlphabet{\mathSFSymbols}{bold}{OT1}{lmss}{\bfdefault}{m}
+\DeclareMathOperator{\Fourier}{\mathcal{F}}
+
+% Unicode chars
+\newunicodechar{ħ}{$\hbar$}
+\newunicodechar{↔}{$\leftrightarrow$}
+\newunicodechar{⇐}{$\Leftarrow$}
+\newunicodechar{⇒}{$\Rightarrow$}
+\newunicodechar{⇔}{$\Leftrightarrow$}
+\newunicodechar{∂}{$\partial$}
+\newunicodechar{∅}{$\emptyset$}
+\newunicodechar{∇}{$\nabla$}
+\newunicodechar{∈}{$\in$}
+\newunicodechar{∉}{$\notin$}
+\newunicodechar{∏}{$\prod$}
+\newunicodechar{∑}{$\sum$}
+\newunicodechar{√}{$\sqrt$}
+\newunicodechar{∝}{$\propto$}
+\newunicodechar{∞}{$\infty$}
+\newunicodechar{∩}{$\cap$}
+\newunicodechar{∪}{$\cup$}
+\newunicodechar{∫}{$\int$}
+\newunicodechar{≈}{$\approx$}
+\newunicodechar{≠}{$\neq$}
+\newunicodechar{≤}{$\leq$}
+\newunicodechar{≥}{$\geq$}
+
+% tcolorbox styles
+\tcbset{
+	keyresult/.style={
+		colback=blue!5!white,
+		colframe=blue!75!black,
+		title=Key Result,
+		fonttitle=\bfseries
+	},
+	foundation/.style={
+		colback=green!5!white,
+		colframe=green!75!black,
+		title=Foundation,
+		fonttitle=\bfseries
+	},
+	alternative/.style={
+		colback=orange!5!white,
+		colframe=orange!75!black,
+		title=Alternative,
+		fonttitle=\bfseries
+	},
+	warning/.style={
+		colback=red!5!white,
+		colframe=red!75!black,
+		title=Warning,
+		fonttitle=\bfseries
+	}
+}
+\newtcolorbox{keyresultbox}[1][]{keyresult, #1}
+\newtcolorbox{foundationbox}[1][]{foundation, #1}
+\newtcolorbox{alternativebox}[1][]{alternative, #1}
+\newtcolorbox{warningbox}[1][]{warning, #1}
+
+% Layout relax (enhanced)
+\sloppy
+\hfuzz=15pt  % Increased from 10pt
+\vfuzz=15pt
+\tolerance=14000  % Increased
+\emergencystretch=5em  % Increased for bad boxes
+\raggedbottom  % Helps vbox underfulls
+
+% Improved label uniquifier (section+page to avoid duplicates)
+\makeatletter
+\let\oldlabel\label
+\renewcommand{\label}[1]{%
+	\edef\@currentlabelname{#1}%
+	\oldlabel{#1-\thesection-\thepage}%
+}
+\AtBeginDocument{%
+	\renewcommand*{\theHsection}{\thesection-\thepage}
+	\renewcommand*{\theHsubsection}{\thesubsection-\thepage}
+	\renewcommand*{\theHsubsubsection}{\thesubsubsection-\thepage}
+	\providecommand*{\theHappendix}{\Alph{chapter}-\thepage}
+}
+\makeatother
+
+% Bib/footnote fixes
+\AtBeginDocument{%
+	\emergencystretch=4em  % Relax bib lines
+	\let\oldqty\qty
+	\renewcommand{\qty}[2][]{\oldqty[#1]{#2}}
+}
+
+% TOC formatting (blue colors only where defined)
+\renewcommand{\cftchapfont}{\large\bfseries\color{blue}}
+\renewcommand{\cftchappagefont}{\large\bfseries\color{blue}}
+\renewcommand{\cftsecfont}{\large\bfseries\color{blue}}
+\renewcommand{\cftsecpagefont}{\large\bfseries\color{blue}}
+\renewcommand{\cftsubsecfont}{\color{blue}}
+\renewcommand{\cftsubsecpagefont}{\color{blue}}
+\renewcommand{\cftsubsubsecfont}{\color{blue}}
+\renewcommand{\cftsubsubsecpagefont}{\color{blue}}
+\renewcommand{\cfttoctitlefont}{\huge\bfseries\color{blue}}

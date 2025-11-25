@@ -45,10 +45,10 @@ pdflatex -interaction=nonstopmode "%TEXFILE%" >>"%LOGFILE%" 2>&1
 findstr /R /C:"^!" /C:"^LaTeX Warning" /C:"^Package .* Warning" "%LOGFILE%"
 
 rem ==== 3) BibTeX ====
-rem bibtex "%BASENAME%" >>"%LOGFILE%" 2>&1
+bibtex "%BASENAME%" >>"%LOGFILE%" 2>&1
 
 rem ==== 4) LaTeX 2 ====
-rem pdflatex -interaction=nonstopmode "%TEXFILE%" >>"%LOGFILE%" 2>&1
+pdflatex -interaction=nonstopmode "%TEXFILE%" >>"%LOGFILE%" 2>&1
 rem findstr /R /C:"^!" /C:"^LaTeX Warning" /C:"^Package .* Warning" "%LOGFILE%"
 
 rem ==== 5) LaTeX 3 ====
