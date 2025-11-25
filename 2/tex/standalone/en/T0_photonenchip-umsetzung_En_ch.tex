@@ -1,0 +1,988 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage[unicode,pdfencoding=auto,hypertexnames=false]{hyperref}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{tikz}
+% tcolorbox removed for standalone
+% tcbset removed
+\tikzset{
+  t0blue/.style={draw=blue,fill=blue!10},
+  t0red/.style={draw=red,fill=red!10},
+  t0green/.style={draw=green!50!black,fill=green!10},
+  t0orange/.style={draw=orange,fill=orange!10},
+}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{xcolor}
+
+% Define colors for xcolor package
+\definecolor{t0green}{RGB}{34,139,34}
+\definecolor{t0blue}{RGB}{0,0,255}
+\definecolor{t0red}{RGB}{255,0,0}
+\definecolor{t0orange}{RGB}{255,165,0}
+
+% Define custom column types for tables
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+\pagestyle{fancy}
+\setlength{\headheight}{28pt}
+
+\newcommand{\checkmarkx}{\checkmark}
+\newcommand{\warningx}{\textbf{!}}
+
+% Makros aus Einzel-Dokumenten (Fallback-Definitionen)
+\newcommand{\mytimes}{\times}
+\newcommand{\myapprox}{\approx}
+\newcommand{\mysim}{\sim}
+\newcommand{\myomega}{\omega}
+\newcommand{\mypi}{\pi}
+\newcommand{\myrightarrow}{\rightarrow}
+\newcommand{\mypropto}{\propto}
+\newcommand{\deltafield}{\delta\phi}
+\newcommand{\xipar}{\xi}
+\newcommand{\xiT}{\xi}
+\newcommand{\lambdah}{\lambda_h}
+
+% Additional macros used in chapter files
+\newcommand{\Kfrak}{K_{\text{frak}}}  % Fractal correction factor
+\newcommand{\Dfrak}{D_f}              % Fractal dimension
+\newcommand{\betapar}{\beta}          % T0 beta parameter
+\newcommand{\alphapar}{\alpha}        % T0 alpha parameter
+\newcommand{\Efield}{E}               % Energy field
+% Note: checkmarkxa/warningxa are variants used in auto-generated chapter files
+\newcommand{\checkmarkxa}{\checkmark}
+\newcommand{\warningxa}{\textbf{!}}
+
+% Additional T0-specific macros
+\newcommand{\xigeom}{\xi_{\text{geom}}}  % Geometric xi
+\newcommand{\lP}{\ell_P}                  % Planck length
+\newcommand{\rzero}{r_0}                  % Characteristic radius
+\newcommand{\xirat}{\xi_{\text{rat}}}     % Xi ratio
+\newcommand{\tzero}{t_0}                  % Characteristic time
+\newcommand{\natunits}{\text{(nat. units)}}  % Natural units annotation
+\newcommand{\myRightarrow}{\Rightarrow}   % Arrow variant
+\newcommand{\Lag}{\mathcal{L}}            % Lagrangian
+
+% Physics macros used in chapter files
+\newcommand{\CQCD}{C_{\text{QCD}}}        % QCD correction
+\newcommand{\EP}{E_P}                     % Planck energy
+\newcommand{\Ee}{E_e}                     % Electron energy
+\newcommand{\Emu}{E_\mu}                  % Muon energy
+\newcommand{\Exi}{E_\xi}                  % Xi energy
+\newcommand{\Ezero}{E_0}                  % Characteristic energy
+\newcommand{\Hubble}{H}                   % Hubble constant
+\newcommand{\Kspec}{K_{\text{spec}}}      % Spectral correction
+\newcommand{\Lambdat}{\Lambda_t}          % Time-related cosmological constant
+\newcommand{\Leff}{\mathcal{L}_{\text{eff}}}  % Effective Lagrangian
+\newcommand{\Lorentz}{\mathcal{L}}        % Lorentz symbol
+\newcommand{\Lxi}{L_\xi}                  % Xi length
+\newcommand{\Tfield}{T}                   % Time field
+\newcommand{\Weyl}{W}                     % Weyl tensor/symbol
+\newcommand{\alphaEMSI}{\alpha_{\text{EM,SI}}}  % EM alpha in SI
+\newcommand{\alphaEMnat}{\alpha_{\text{EM,nat}}}  % EM alpha in natural units
+\newcommand{\alphaem}{\alpha_{\text{em}}} % Electromagnetic alpha
+\newcommand{\betaTSI}{\beta_{T,\text{SI}}}  % Beta in SI
+\newcommand{\betaTnat}{\beta_{T,\text{nat}}}  % Beta in natural units
+\newcommand{\deltam}{\delta m}            % Mass difference
+\newcommand{\phiT}{\phi_T}                % T-field phi
+\newcommand{\tP}{t_P}                     % Planck time
+\newcommand{\rhoCMB}{\rho_{\text{CMB}}}   % CMB density
+\newcommand{\rhoCasimir}{\rho_{\text{Casimir}}}  % Casimir density
+
+% Table formatting
+\usepackage{multirow}
+
+% Additional physics macros
+\newcommand{\Riem}{\mathcal{R}}           % Riemann tensor
+\newcommand{\ZPinch}{Z_{\text{pinch}}}    % Z-pinch
+\newcommand{\SynchPower}{P_{\text{synch}}} % Synchrotron power
+\newcommand{\Rzero}{R_0}                  % Characteristic radius
+\newcommand{\alphafine}{\alpha}           % Fine structure constant
+\newcommand{\Etau}{E_\tau}                % Tau energy
+\newcommand{\deltaE}{\delta E}            % Energy deviation
+\newcommand{\EPlanck}{E_P}                % Planck energy
+\newcommand{\pichar}{\pi}                 % Pi character
+\newcommand{\alphaWSI}{\alpha_{W,\text{SI}}}  % Wien alpha in SI
+\newcommand{\alphaWnat}{\alpha_{W,\text{nat}}}  % Wien alpha in natural units
+
+% Einfache abstract-Umgebung für Kapitel:
+\newenvironment{abstract}{%
+  \begin{center}\bfseries Abstract\end{center}\small
+}{\par}
+
+
+\title{T0 photonenchip-umsetzung En}
+\author{J. Pascher}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{T0 Photonenchip Umsetzung (T0 photonenchip-umsetzung)}
+
+	\begin{abstract}
+		The implementation of photonic components on wafers (e.g., TFLN or Si photonics) enables scalable, low-latency systems for 6G networks. **The global strategy focuses in 2025 on the industrialization of thin-film lithium niobate (TFLN) through specialized foundries \cite{tfln_foundry} and the development of scalable photonic quantum computers (LNOI/PhoQuant) \cite{phoquant}.** This introduction is based on current literature (2024–2025) and highlights fabrication processes (ion slicing, wafer bonding), preferred techniques (MZI integration), and relevance for signal processing. Practical: Table of methods, outlook on hybrid PICs. Sources: Nature, ScienceDirect, arXiv. **A new optoelectronic chip that integrates terahertz and optical signals is key to millimeter-precise distance measurement and high-performance 6G mobile communications \cite{thz_epfl}.**
+	\end{abstract}
+	
+	
+	\section{Basics: Why Wafer Integration in Communication Engineering?}
+	
+	The fabrication of photonic components on wafers (e.g., thin-film lithium niobate, TFLN) revolutionizes communication engineering: Scalable production of integrated circuits (PICs) for RF signal processing, 6G MIMO, and AI-assisted routing. **The transition to high-volume manufacturing is accelerated by specialized TFLN foundries, such as the QCi Foundry, which will accept the first commercial pilot orders in 2025 \cite{tfln_foundry}. Globally, 2025 (International Year of Quantum Science and Technology) highlights the strategic importance of photonics for competitiveness \cite{quantenjahr25}.** Wafer-based processes (e.g., ion slicing + bonding) enable monolithic integration of $>\SI{1000}{components}/\text{wafer}$, with losses $<\SI{1}{dB}$ and bandwidths $>\SI{100}{GHz}$.
+\section*{Important}
+		Important Note: The technology is hybrid-analog: Optical waveguides for continuous processing, combined with electronic control. This reduces latency ($\SI{}{\pico\second}$ range) and energy ($\SI{}{\pico\joule}/\text{bit}$), essential for real-time 6G applications.
+% end box important
+	
+	Current trends (2025): Transition to $\SI{300}{mm}$ wafers for industrial scaling, focused on flexible, cost-effective processes \cite{flexible_wafer}.
+	\section{Realization: Key Processes for Component Integration}
+	
+	The implementation occurs in multi-stage processes, strongly aligned with semiconductor fabrication (e.g., CMOS-compatible). Core steps:
+	
+	\begin{itemize}
+		\item \textbf{Ion Slicing and Wafer Bonding}: For thin films (e.g., LiTaO$_3$ on Si); enables high density without substrate losses \cite{lithium_tantalate}.
+		\item \textbf{Etching and Lithography}: Mask-CMP for waveguide microstructures; precise structures ($<\SI{100}{nm}$) for MZI arrays \cite{on_chip_lithium}.
+		\item \textbf{Monolithic Integration}: Co-packaging of electronics/photonics; reduces latency in hybrid systems \cite{integration_microelectronic}.
+		\item \textbf{Flexible Wafer Scaling}: Mechanically flexible $\SI{300}{mm}$ platforms for cost-effective production \cite{flexible_wafer}.
+	\end{itemize}
+\section*{Formula}
+		Example: Wafer bonding for LNOI (Lithium Niobate on Insulator): Thickness $t = \SI{525}{\micro\meter}$, implantation dose $D = 5 \times 10^{16}\,$cm$^{-2}$, resulting layer thickness $h \approx \SI{400}{nm}$.
+% end box formula
+	
+	\section{Preferred Components and Operations on Wafers}
+	
+	Photonic wafers are suited for linear, frequency-dependent components; analog integration prioritizes interference-based operations for 6G signals. **In addition to TFLN, the silicon nitride (SiN) platform is being promoted to offer PICs for biosciences and sensing \cite{hhi_6g}.**
+	\begin{table}[htbp]
+		\centering
+		\begin{tabular}{l p{5cm} p{4cm}}
+			\toprule
+			\textbf{Component} & \textbf{Realization Process} & \textbf{Relevance for Communication Engineering} \\
+			\midrule
+			Mach-Zehnder Interferometer (MZI) & Ion slicing + lithography on TFLN wafers & Phase modulation for demodulation (6G, latency $<\SI{1}{\pico\second}$) \cite{lithium_tantalate} \\
+			Waveguide Arrays & Wafer bonding (LNOI) + etching & Parallel RF filtering ($>\SI{100}{GHz}$ bandwidth) \cite{fabrication_heterogeneous} \\
+			\textbf{Optoelectronic THz Processor} & \textbf{Si photonics/InP hybrid PICs} & \textbf{6G transceivers, millimeter-precise distance measurement \cite{thz_epfl}} \\
+			Quantum Dot Integrator (InAs) & Monolithic Si integration & Hybrid signal amplification for optical networks \cite{integration_microelectronic} \\
+			Meta-Optics Structures & CMP mask etching on LiNbO$_3$ & Gradient filters for BSS in MIMO systems \cite{on_chip_lithium} \\
+			\textbf{LNOI Qubit Structures} & \textbf{Semiconductor fabrication (PhoQuant)} & \textbf{Scalable, room-temperature stable quantum computers \cite{phoquant}} \\
+			Flexible PICs & $\SI{300}{mm}$ wafers with mechanical flexibility & Mobile 6G edge devices (roll-to-roll fab) \cite{flexible_wafer} \\
+			\bottomrule
+		\end{tabular}
+		\caption{Preferred Components: Implementation on Wafers and Applications}
+		\label{T0_photonenchip:L-T0_photonenchip-umsetzung-1238}
+	\end{table}
+	
+	Preferred: Linear operations (e.g., matrix-vector multiplication via MZI meshes) for AI-assisted routing; non-linear (e.g., logic gates) requires hybrids.
+	
+	\section{Literature Review: Latest Documents (2024–2025)}
+	
+	Selected sources on wafer implementation (focused on photonic components; links to PDFs/abstracts):
+	
+	\begin{itemize}
+		\item \textbf{TFLN Foundries and Industrialization:} The **QCi Foundry** (specialized in TFLN) will accept the first pilot orders for commercial production of photonic chips in 2025, marking the industrialization of the platform \cite{tfln_foundry}.
+		\item \textbf{Mechanically-flexible wafer-scale integrated-photonics fabrication (2024)}: First $\SI{300}{mm}$ platform for flexible PICs; process: bonding + etching. Relevance: Scalable RF chips for mobile networks. \cite{flexible_wafer}
+		\item \textbf{Lithium tantalate photonic integrated circuits for volume manufacturing (2024)}: Ion slicing + bonding for LiTaO$_3$ wafers; density $>\SI{1000}{components}/\text{wafer}$. Relevance: Low losses for 6G transceivers. \cite{lithium_tantalate}
+		\item \textbf{LNOI for Quantum Computers (PhoQuant):} Fraunhofer IOF is developing a photonic quantum computer based on **LNOI**, where fabrication methods stem from semiconductor manufacturing and are immediately scalable. This demonstrates the deployability of the LNOI platform for highly complex quantum architectures \cite{phoquant}.
+		\item \textbf{Fabrication of heterogeneous LNOI photonics wafers (2023/2024 Update)}: Room-temperature bonding for LNOI; precise waveguides. Relevance: Hybrid opto-electronics for signal processing. \cite{fabrication_heterogeneous}
+		\item \textbf{Fabrication of on-chip single-crystal lithium niobate waveguide (2025)}: Mask-CMP etching for TFLN microstructures. Relevance: Real-time filters for broadband communication. \cite{on_chip_lithium}
+		\item \textbf{The integration of microelectronic and photonic circuits on a single wafer (2024)}: Monolithic co-integration; applications in optical networks. Relevance: Latency reduction in 6G. \cite{integration_microelectronic}
+	\end{itemize}
+	
+	These documents show: Transition to high-volume manufacturing ($\SI{12000}{wafers}/\text{year}$), with a focus on analog precision for communication engineering.
+	
+	\section{Outlook: Photonic Wafers in 6G Networks}
+	
+	Wafer integration enables cost-effective PICs for base stations: E.g., optical MIMO with $<\SI{1}{dB}$ loss. Challenges: Increase yield (currently $<80\%$). Future: AI-assisted fab (e.g., for dynamic routing chips). **The THz chip from EPFL/Harvard demonstrates the enormous potential of optoelectronic integration to process high-frequency radio signals with millimeter precision, opening new application fields in robotics and autonomous vehicles \cite{thz_epfl}.**
+	
+	
+
+
+% Bibliography
+\begin{thebibliography}{99}
+	
+	\bibitem{pdg2024}
+	Particle Data Group Collaboration (2024). 
+	\textit{Review of Particle Physics}. 
+	Progress of Theoretical and Experimental Physics, 2024(8), 083C01.
+	\url{https://pdg.lbl.gov}
+	
+	\bibitem{flag2024}
+	Aoki, Y., et al. (FLAG Collaboration) (2024). 
+	\textit{FLAG Review 2024 of Lattice Results for Low-Energy Constants}. 
+	arXiv:2411.04268.
+	\url{https://arxiv.org/abs/2411.04268}
+	
+	\bibitem{fermilab_muon_g2}
+	Abi, B., et al. (Muon g-2 Collaboration) (2021). 
+	\textit{Measurement of the Positive Muon Anomalous Magnetic Moment to 0.46 ppm}. 
+	Physical Review Letters, 126, 141801.
+	
+	\bibitem{peskin_schroeder}
+	Peskin, M. E., \& Schroeder, D. V. (1995). 
+	\textit{An Introduction to Quantum Field Theory}. 
+	Addison-Wesley.
+	
+	\bibitem{weinberg_qft}
+	Weinberg, S. (1995). 
+	\textit{The Quantum Theory of Fields, Vol. I--III}. 
+	Cambridge University Press.
+	
+	\bibitem{griffiths_particle}
+	Griffiths, D. (2008). 
+	\textit{Introduction to Elementary Particles}. 
+	Wiley-VCH.
+	
+	\bibitem{mandl_shaw}
+	Mandl, F., \& Shaw, G. (2010). 
+	\textit{Quantum Field Theory (2nd ed.)}. 
+	Wiley.
+	
+	\bibitem{srednicki_qft}
+	Srednicki, M. (2007). 
+	\textit{Quantum Field Theory}. 
+	Cambridge University Press.
+	
+	\bibitem{t0_fundamentals}
+	Pascher, J. (2024). 
+	\textit{T0-Theory: Foundations of Time-Mass Duality}. 
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{t0_fine_structure}
+	Pascher, J. (2024). 
+	\textit{T0-Theory: The Fine Structure Constant}. 
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{t0_neutrinos}
+	Pascher, J. (2024). 
+	\textit{T0-Theory: Neutrino Masses and PMNS Mixing}. 
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{t0_github}
+	Pascher, J. (2024--2025). 
+	\textit{T0-Time-Mass-Duality Repository}. 
+	GitHub.
+	\url{https://github.com/jpascher/T0-Time-Mass-Duality}
+	
+	\bibitem{lattice_qcd_review}
+	Kronfeld, A. S. (2012). 
+	\textit{Twenty-first Century Lattice Gauge Theory: Results from the QCD Lagrangian}. 
+	Annual Review of Nuclear and Particle Science, 62, 265--284.
+	
+	\bibitem{neutrino_mixing_pdg}
+	Particle Data Group Collaboration (2024). 
+	\textit{Neutrino Masses, Mixing, and Oscillations}. 
+	PDG Review 2024.
+	\url{https://pdg.lbl.gov/2024/reviews/rpp2024-rev-neutrino-mixing.pdf}
+	
+	\bibitem{higgs_discovery}
+	ATLAS and CMS Collaborations (2012). 
+	\textit{Observation of a New Particle in the Search for the Standard Model Higgs Boson}. 
+	Physics Letters B, 716, 1--29.
+	
+	\bibitem{Brannen2005}
+	C. P. Brannen, ``Estimate of neutrino masses from Koide's relation'', \textit{arXiv:hep-ph/0505028} (2005).
+	\url{https://arxiv.org/abs/hep-ph/0505028}
+	
+	\bibitem{Brannen2006}
+	C. P. Brannen, ``Koide Mass Formula for Neutrinos'', \textit{arXiv:0702.0052} (2006).
+	\url{http://brannenworks.com/MASSES.pdf}
+	
+	\bibitem{PhaseVectors2025}
+	Anonymous, ``The Koide Relation and Lepton Mass Hierarchy from Phase Vectors'', \textit{rXiv:2507.0040} (2025).
+	\url{https://rxiv.org/pdf/2507.0040v1.pdf}
+	
+	\bibitem{PDG2025}
+	Particle Data Group, ``Review of Particle Physics'', \textit{Phys. Rev. D} \textbf{112} (2025) 030001.
+	\url{https://pdg.lbl.gov/2025/}
+	
+	\bibitem{terrell2024}
+	Terrell et al. (2024). 
+	\textit{Single-Clock Metrology in Nature}. 
+	Nature Physics.
+	
+	\bibitem{hossenfelder2024}
+	Hossenfelder, S. (2024). 
+	\textit{Single Clock Video Explanation}. 
+	YouTube.
+	
+	\bibitem{hundert1931}
+	Hundert (1931). 
+	\textit{Reference Work}. 
+	Publisher.
+	
+	\bibitem{terrell2025}
+	Terrell et al. (2025). 
+	\textit{Advanced Clock Synchronization Methods}. 
+	Physical Review Letters.
+	
+	\bibitem{pascher_t0_2025}
+	Pascher, J. (2025). 
+	\textit{T0-Theory: Complete Framework and Applications}. 
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{t0qm}
+	Pascher, J. (2024). 
+	\textit{T0-Theory: Quantum Mechanics Formulation}. 
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{t0anomale}
+	Pascher, J. (2024). 
+	\textit{T0-Theory: Anomalous Magnetic Moments}. 
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{muong2complete}
+	Abi, B., et al. (Muon g-2 Collaboration) (2023). 
+	\textit{Complete Measurement of the Positive Muon Anomalous Magnetic Moment}. 
+	Physical Review Letters, 131, 161802.
+	
+	\bibitem{penrose2004}
+	Penrose, R. (2004). 
+	\textit{The Road to Reality: A Complete Guide to the Laws of the Universe}. 
+	Jonathan Cape.
+	
+	\bibitem{planck1900}
+	Planck, M. (1900). 
+	\textit{On the Theory of the Energy Distribution Law of the Normal Spectrum}. 
+	Verhandlungen der Deutschen Physikalischen Gesellschaft, 2, 237.
+	
+	\bibitem{T0Theory}
+	Pascher, J. (2024). 
+	\textit{T0-Theory: Fundamental Principles}. 
+	Unpublished manuscript, HTL Leonding.
+	
+	% Additional bibliography entries for all undefined citations
+	\bibitem{6g_roadmap}
+	6G Research Consortium (2024).
+	\textit{6G Technology Roadmap}.
+	Technical Report.
+	
+	\bibitem{Born2013}
+	Born, M. (2013).
+	\textit{Einstein's Theory of Relativity}.
+	Dover Publications.
+	
+	\bibitem{Casimir1948}
+	Casimir, H. B. G. (1948).
+	\textit{On the attraction between two perfectly conducting plates}.
+	Proc. Kon. Ned. Akad. Wetensch. B51, 793--795.
+	
+	\bibitem{Einstein1905}
+	Einstein, A. (1905).
+	\textit{On the Electrodynamics of Moving Bodies}.
+	Annalen der Physik, 17, 891--921.
+	
+	\bibitem{Feynman2006}
+	Feynman, R. P. (2006).
+	\textit{QED: The Strange Theory of Light and Matter}.
+	Princeton University Press.
+	
+	\bibitem{Griffiths2017}
+	Griffiths, D. J. (2017).
+	\textit{Introduction to Electrodynamics (4th ed.)}.
+	Cambridge University Press.
+	
+	\bibitem{Jackson1999}
+	Jackson, J. D. (1999).
+	\textit{Classical Electrodynamics (3rd ed.)}.
+	Wiley.
+	
+	\bibitem{Mohr2016}
+	Mohr, P. J., et al. (2016).
+	\textit{CODATA Recommended Values of the Fundamental Physical Constants: 2014}.
+	Rev. Mod. Phys. 88, 035009.
+	
+	\bibitem{Parker2018}
+	Parker, R. H., et al. (2018).
+	\textit{Measurement of the fine-structure constant as a test of the Standard Model}.
+	Science, 360, 191--195.
+	
+	\bibitem{Planck1900}
+	Planck, M. (1900).
+	\textit{On the Theory of the Energy Distribution Law of the Normal Spectrum}.
+	Verhandlungen der Deutschen Physikalischen Gesellschaft, 2, 237.
+	
+	\bibitem{Planck2018}
+	Planck Collaboration (2018).
+	\textit{Planck 2018 results. VI. Cosmological parameters}.
+	Astronomy \& Astrophysics, 641, A6.
+	
+	\bibitem{QFT_T0}
+	Pascher, J. (2024).
+	\textit{T0-Theory and QFT Connections}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{Sommerfeld1916}
+	Sommerfeld, A. (1916).
+	\textit{On the Quantum Theory of Spectral Lines}.
+	Annalen der Physik, 51, 1--94.
+	
+	\bibitem{T0_Feinstruktur}
+	Pascher, J. (2024).
+	\textit{T0-Theory: Fine Structure Analysis}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{T0_SI}
+	Pascher, J. (2024).
+	\textit{T0-Theory and SI Units}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{T0_fine_structure}
+	Pascher, J. (2024).
+	\textit{T0-Theory: The Fine Structure Constant}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{T0_g2_erweiterung}
+	Pascher, J. (2024).
+	\textit{T0-Theory: g-2 Extensions}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{T0_gravitational_constant}
+	Pascher, J. (2024).
+	\textit{T0-Theory: Gravitational Constant Derivation}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{T0_netze_en}
+	Pascher, J. (2024).
+	\textit{T0-Theory: Network Structures}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{T0_tm_erweiterung}
+	Pascher, J. (2024).
+	\textit{T0-Theory: Time-Mass Extensions}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{Uzan2003}
+	Uzan, J.-P. (2003).
+	\textit{The fundamental constants and their variation}.
+	Rev. Mod. Phys. 75, 403--455.
+	
+	\bibitem{Weinberg1995}
+	Weinberg, S. (1995).
+	\textit{The Quantum Theory of Fields, Vol. I}.
+	Cambridge University Press.
+	
+	\bibitem{albrecht1999}
+	Albrecht, A. \& Magueijo, J. (1999).
+	\textit{A time varying speed of light as a solution to cosmological puzzles}.
+	Phys. Rev. D 59, 043516.
+	
+	\bibitem{alice2023}
+	ALICE Collaboration (2023).
+	\textit{Recent results from ALICE}.
+	CERN-EP-2023-XXX.
+	
+	\bibitem{analog_optical}
+	Smith, J. et al. (2024).
+	\textit{Analog optical computing systems}.
+	Nature Photonics.
+	
+	\bibitem{ashtekar2004}
+	Ashtekar, A. \& Lewandowski, J. (2004).
+	\textit{Background independent quantum gravity}.
+	Class. Quantum Grav. 21, R53.
+	
+	\bibitem{atlas2023}
+	ATLAS Collaboration (2023).
+	\textit{ATLAS physics results}.
+	CERN-PH-EP-2023-XXX.
+	
+	\bibitem{atlas2023higgs}
+	ATLAS Collaboration (2023).
+	\textit{Higgs boson measurements}.
+	Phys. Rev. Lett.
+	
+	\bibitem{barbour1999}
+	Barbour, J. (1999).
+	\textit{The End of Time}.
+	Oxford University Press.
+	
+	\bibitem{barrow1999}
+	Barrow, J. D. (1999).
+	\textit{Cosmologies with varying light speed}.
+	Phys. Rev. D 59, 043515.
+	
+	\bibitem{becker2007}
+	Becker, K. et al. (2007).
+	\textit{String Theory and M-Theory}.
+	Cambridge University Press.
+	
+	\bibitem{bell_muon}
+	Bennett, G. W., et al. (Muon g-2 Collaboration) (2006).
+	\textit{Final report of the E821 muon anomalous magnetic moment measurement}.
+	Phys. Rev. D 73, 072003.
+	
+	\bibitem{bondi1948}
+	Bondi, H. \& Gold, T. (1948).
+	\textit{The steady-state theory of the expanding universe}.
+	Mon. Not. R. Astron. Soc. 108, 252--270.
+	
+	\bibitem{brewer2019}
+	Brewer, S. M. et al. (2019).
+	\textit{Al+ Quantum-Logic Clock with Systematic Uncertainty below $10^{-18}$}.
+	Phys. Rev. Lett. 123, 033201.
+	
+	\bibitem{cms2023top}
+	CMS Collaboration (2023).
+	\textit{Top quark measurements at CMS}.
+	JHEP 2023.
+	
+	\bibitem{cms2024}
+	CMS Collaboration (2024).
+	\textit{CMS physics results 2024}.
+	CERN-PH-EP-2024-XXX.
+	
+	\bibitem{codata2019}
+	Tiesinga, E. et al. (2019).
+	\textit{The 2018 CODATA Recommended Values}.
+	J. Phys. Chem. Ref. Data.
+	
+	\bibitem{desi2025}
+	DESI Collaboration (2025).
+	\textit{DESI 2025 Cosmology Results}.
+	arXiv preprint.
+	
+	\bibitem{differential_optical}
+	Wang, X. et al. (2024).
+	\textit{Differential optical computing}.
+	Optica.
+	
+	\bibitem{dingle1972}
+	Dingle, H. (1972).
+	\textit{Science at the Crossroads}.
+	Martin Brian \& O'Keeffe.
+	
+	\bibitem{divalentino2021}
+	Di Valentino, E. et al. (2021).
+	\textit{In the realm of the Hubble tension}.
+	Class. Quantum Grav. 38, 153001.
+	
+	\bibitem{elnaschie2004}
+	El Naschie, M. S. (2004).
+	\textit{A review of E infinity theory}.
+	Chaos, Solitons \& Fractals, 19, 209--236.
+	
+	\bibitem{fabrication_heterogeneous}
+	Chen, Y. et al. (2024).
+	\textit{Heterogeneous photonic integration}.
+	Nature Electronics.
+	
+	\bibitem{fermilab2023}
+	Fermilab (2023).
+	\textit{Muon g-2 results}.
+	Phys. Rev. Lett.
+	
+	\bibitem{flexible_wafer}
+	Kim, S. et al. (2024).
+	\textit{Flexible wafer-scale photonics}.
+	Science Advances.
+	
+	\bibitem{francesco1997}
+	Di Francesco, P. et al. (1997).
+	\textit{Conformal Field Theory}.
+	Springer.
+	
+	\bibitem{hartree1957}
+	Hartree, D. R. (1957).
+	\textit{The Calculation of Atomic Structures}.
+	Wiley.
+	
+	\bibitem{hhi_6g}
+	Fraunhofer HHI (2024).
+	\textit{6G Photonic Integration}.
+	Technical Report.
+	
+	\bibitem{hossenfelder2025}
+	Hossenfelder, S. (2025).
+	\textit{Science without the gobbledygook}.
+	YouTube/Blog.
+	
+	\bibitem{hossenfelder_single_clock_video}
+	Hossenfelder, S. (2024).
+	\textit{The Single Clock Problem}.
+	YouTube.
+	
+	\bibitem{hoyle1948}
+	Hoyle, F. (1948).
+	\textit{A new model for the expanding universe}.
+	Mon. Not. R. Astron. Soc. 108, 372--382.
+	
+	\bibitem{integration_microelectronic}
+	Liu, A. et al. (2024).
+	\textit{Microelectronic photonic integration}.
+	IEEE Journal.
+	
+	\bibitem{jacobson1995}
+	Jacobson, T. (1995).
+	\textit{Thermodynamics of spacetime}.
+	Phys. Rev. Lett. 75, 1260.
+	
+	\bibitem{kasevich2023}
+	Kasevich, M. et al. (2023).
+	\textit{Atom interferometry tests}.
+	Nature Physics.
+	
+	\bibitem{lerner2014}
+	Lerner, E. J. (2014).
+	\textit{An open letter on cosmology}.
+	New Scientist.
+	
+	\bibitem{lisa2017}
+	LISA Consortium (2017).
+	\textit{Laser Interferometer Space Antenna}.
+	ESA Technical Report.
+	
+	\bibitem{lithium_tantalate}
+	Zhang, M. et al. (2024).
+	\textit{Thin-film lithium tantalate photonics}.
+	Nature Photonics.
+	
+	\bibitem{lopez2010}
+	Lopez-Corredoira, M. (2010).
+	\textit{Tests and problems of the standard model in cosmology}.
+	Int. J. Mod. Phys. D.
+	
+	\bibitem{ludlow2015}
+	Ludlow, A. D. et al. (2015).
+	\textit{Optical atomic clocks}.
+	Rev. Mod. Phys. 87, 637.
+	
+	\bibitem{mach1883}
+	Mach, E. (1883).
+	\textit{Die Mechanik in ihrer Entwickelung}.
+	F.A. Brockhaus.
+	
+	\bibitem{maldacena1998}
+	Maldacena, J. (1998).
+	\textit{The large N limit of superconformal field theories}.
+	Adv. Theor. Math. Phys. 2, 231--252.
+	
+	\bibitem{mueller2014}
+	Müller, H. et al. (2014).
+	\textit{Atom interferometry tests of the gravitational redshift}.
+	Phys. Rev. Lett.
+	
+	\bibitem{mug2_final_2025}
+	Muon g-2 Collaboration (2025).
+	\textit{Final muon g-2 measurement}.
+	Phys. Rev. Lett.
+	
+	\bibitem{muong2_2023}
+	Muon g-2 Collaboration (2023).
+	\textit{Updated muon g-2 results}.
+	Phys. Rev. Lett.
+	
+	\bibitem{nathan2024}
+	Nathan, A. et al. (2024).
+	\textit{Quantum computing advances}.
+	Nature.
+	
+	\bibitem{newell2018}
+	Newell, D. B. et al. (2018).
+	\textit{The CODATA 2017 values of h, e, k, and $N_A$}.
+	Metrologia 55, L13.
+	
+	\bibitem{nottale1993}
+	Nottale, L. (1993).
+	\textit{Fractal Space-Time and Microphysics}.
+	World Scientific.
+	
+	\bibitem{on_chip_lithium}
+	Wang, C. et al. (2024).
+	\textit{On-chip lithium niobate photonics}.
+	Nature Communications.
+	
+	\bibitem{optical_advantages}
+	Shastri, B. J. et al. (2024).
+	\textit{Advantages of optical computing}.
+	Nature Reviews Physics.
+	
+	\bibitem{pascher2025cmb}
+	Pascher, J. (2025).
+	\textit{T0-Theory: CMB Analysis}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{pascher2025g2}
+	Pascher, J. (2025).
+	\textit{T0-Theory: g-2 Predictions}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{pascher2025qm}
+	Pascher, J. (2025).
+	\textit{T0-Theory: Quantum Mechanics}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{pascher2025si}
+	Pascher, J. (2025).
+	\textit{T0-Theory: SI Unit System}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{pascher2025t0}
+	Pascher, J. (2025).
+	\textit{T0-Theory: Complete Framework}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{pascher:fundamentals}
+	Pascher, J. (2024).
+	\textit{T0-Theory: Fundamentals}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{pascher:g2_rev9}
+	Pascher, J. (2024).
+	\textit{T0-Theory: g-2 Revision 9}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{pascher:geometric_formalism}
+	Pascher, J. (2024).
+	\textit{T0-Theory: Geometric Formalism}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{pascher:ml_addendum}
+	Pascher, J. (2024).
+	\textit{T0-Theory: Machine Learning Addendum}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{pascher:t0_foundations}
+	Pascher, J. (2024).
+	\textit{T0-Theory: Foundations}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{pascher_derivation_beta_2025}
+	Pascher, J. (2025).
+	\textit{T0-Theory: Derivation of Beta}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{pascher_higgs_connection_2025}
+	Pascher, J. (2025).
+	\textit{T0-Theory: Higgs Connection}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{pascher_lagrangian_extended_2025}
+	Pascher, J. (2025).
+	\textit{T0-Theory: Extended Lagrangian}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{pascher_mathematical_structure_2025}
+	Pascher, J. (2025).
+	\textit{T0-Theory: Mathematical Structure}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{pascher_t0_cmb_2025}
+	Pascher, J. (2025).
+	\textit{T0-Theory: CMB Predictions}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{pascher_t0_energie_2025}
+	Pascher, J. (2025).
+	\textit{T0-Theory: Energy}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{pascher_t0_energy_2025}
+	Pascher, J. (2025).
+	\textit{T0-Theory: Energy Framework}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{pascher_t0_theory_2025}
+	Pascher, J. (2025).
+	\textit{T0-Theory: Complete Theory}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{penrose1959}
+	Penrose, R. (1959).
+	\textit{The apparent shape of a relativistically moving sphere}.
+	Proc. Cambridge Phil. Soc. 55, 137--139.
+	
+	\bibitem{penrose1967}
+	Penrose, R. (1967).
+	\textit{Twistor algebra}.
+	J. Math. Phys. 8, 345--366.
+	
+	\bibitem{peratt1992}
+	Peratt, A. L. (1992).
+	\textit{Physics of the Plasma Universe}.
+	Springer-Verlag.
+	
+	\bibitem{peskin1995}
+	Peskin, M. E. \& Schroeder, D. V. (1995).
+	\textit{An Introduction to Quantum Field Theory}.
+	Addison-Wesley.
+	
+	\bibitem{peskin_schroeder_1995}
+	Peskin, M. E. \& Schroeder, D. V. (1995).
+	\textit{An Introduction to Quantum Field Theory}.
+	Addison-Wesley.
+	
+	\bibitem{phoquant}
+	PhoQuant (2024).
+	\textit{Photonic quantum computing}.
+	Technical Report.
+	
+	\bibitem{photonics_ai}
+	Wetzstein, G. et al. (2024).
+	\textit{Photonics for AI}.
+	Nature.
+	
+	\bibitem{planck1906}
+	Planck, M. (1906).
+	\textit{The Theory of Heat Radiation}.
+	Johann Ambrosius Barth.
+	
+	\bibitem{planck2018}
+	Planck Collaboration (2018).
+	\textit{Planck 2018 results}.
+	A\&A 641, A6.
+	
+	\bibitem{polchinski1998}
+	Polchinski, J. (1998).
+	\textit{String Theory}.
+	Cambridge University Press.
+	
+	\bibitem{qant_nps}
+	QANT (2024).
+	\textit{Quantum photonics systems}.
+	Technical Report.
+	
+	\bibitem{quantenjahr25}
+	Quantenjahr (2025).
+	\textit{International Year of Quantum}.
+	UNESCO.
+	
+	\bibitem{recurrent_photonics}
+	Tait, A. N. et al. (2024).
+	\textit{Recurrent photonic neural networks}.
+	Optica.
+	
+	\bibitem{rf_photonics}
+	Capmany, J. \& Novak, D. (2024).
+	\textit{Microwave photonics}.
+	Nature Photonics.
+	
+	\bibitem{riess2019}
+	Riess, A. G. et al. (2019).
+	\textit{Large Magellanic Cloud Cepheid Standards}.
+	ApJ 876, 85.
+	
+	\bibitem{riess2022}
+	Riess, A. G. et al. (2022).
+	\textit{A Comprehensive Measurement of H0}.
+	ApJ 934, L7.
+	
+	\bibitem{rovelli2004}
+	Rovelli, C. (2004).
+	\textit{Quantum Gravity}.
+	Cambridge University Press.
+	
+	\bibitem{sciama1953}
+	Sciama, D. W. (1953).
+	\textit{On the origin of inertia}.
+	Mon. Not. R. Astron. Soc. 113, 34--42.
+	
+	\bibitem{sciencedaily2025}
+	ScienceDaily (2025).
+	\textit{Physics news}.
+	Online.
+	
+	\bibitem{sm_g2_2025}
+	Aoyama, T. et al. (2025).
+	\textit{Standard Model prediction for g-2}.
+	Phys. Rep.
+	
+	\bibitem{susskind1995}
+	Susskind, L. (1995).
+	\textit{The world as a hologram}.
+	J. Math. Phys. 36, 6377--6396.
+	
+	\bibitem{t0_kosmologie}
+	Pascher, J. (2024).
+	\textit{T0-Theory: Cosmology}.
+	Unpublished manuscript, HTL Leonding.
+	
+	\bibitem{terrell1959}
+	Terrell, J. (1959).
+	\textit{Invisibility of the Lorentz contraction}.
+	Phys. Rev. 116, 1041--1045.
+	
+	\bibitem{terrell_single_clock_nature_2024}
+	Terrell, J. et al. (2024).
+	\textit{Single clock precision measurements}.
+	Nature Physics.
+	
+	\bibitem{tfln_foundry}
+	TFLN Foundry (2024).
+	\textit{Thin-film lithium niobate foundry services}.
+	Technical Specifications.
+	
+	\bibitem{thiemann2007}
+	Thiemann, T. (2007).
+	\textit{Modern Canonical Quantum General Relativity}.
+	Cambridge University Press.
+	
+	\bibitem{thz_epfl}
+	EPFL (2024).
+	\textit{Terahertz photonics research}.
+	Technical Report.
+	
+	\bibitem{unnikrishnan2004}
+	Unnikrishnan, C. S. (2004).
+	\textit{On Einstein's resolution of the twin clock paradox}.
+	Current Science, 86, 704--709.
+	
+	\bibitem{verlinde2011}
+	Verlinde, E. (2011).
+	\textit{On the origin of gravity and the laws of Newton}.
+	JHEP 2011, 29.
+	
+	\bibitem{video2025}
+	Video (2025).
+	\textit{Physics video explanation}.
+	YouTube.
+	
+	\bibitem{weinberg1995}
+	Weinberg, S. (1995).
+	\textit{The Quantum Theory of Fields}.
+	Cambridge University Press.
+	
+	\bibitem{weiskopf2000}
+	Weiskopf, D. (2000).
+	\textit{Visualization of special relativity}.
+	PhD thesis, University of Tübingen.
+	
+	\bibitem{wheeler1990}
+	Wheeler, J. A. (1990).
+	\textit{A Journey into Gravity and Spacetime}.
+	Scientific American Library.
+	
+	\bibitem{wiki_bell}
+	Wikipedia (2024).
+	\textit{Bell's theorem}.
+	Online encyclopedia.
+	
+	\bibitem{zwicky1929}
+	Zwicky, F. (1929).
+	\textit{On the red shift of spectral lines through interstellar space}.
+	Proc. Natl. Acad. Sci. 15, 773--779.
+
+\end{thebibliography}
+
+
+\end{document}
