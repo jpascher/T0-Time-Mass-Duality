@@ -19,8 +19,14 @@
 \usepackage{fancyhdr}
 \usepackage{float}
 \usepackage{tikz}
-\usepackage[most]{tcolorbox}
-\tcbset{colback=white,colframe=black,arc=2pt,boxrule=0.5pt}
+\usepackage[most,skins,hooks]{tcolorbox}
+\tcbset{colback=white,colframe=black,arc=2pt,boxrule=0.5pt,before upper={\parindent0pt}}
+% Allow floats inside tcolorbox using minipage trick
+\newtcolorbox{tcboxfloat}[1][]{%
+  enhanced,
+  before upper=\parindent0pt,
+  #1
+}
 \tikzset{
   t0blue/.style={draw=blue,fill=blue!10},
   t0red/.style={draw=red,fill=red!10},
@@ -175,6 +181,17 @@
 }{\par}
 
 % Tcolorbox environments used in German documents (T0-Theory-vs-Synergetics etc.)
-\newtcolorbox{vergleich}{colback=blue!5!white, colframe=blue!75!black, title={Comparison}}
-\newtcolorbox{vorteil}{colback=green!5!white, colframe=green!75!black, title={T0 Advantage}}
-\newtcolorbox{gemeinsam}{colback=orange!5!white, colframe=orange!75!black, title={Common Ground}}
+% Using 'breakable' to allow floats and page breaks
+\newtcolorbox{vergleich}{enhanced,breakable,colback=blue!5!white, colframe=blue!75!black, title={Comparison}}
+\newtcolorbox{vorteil}{enhanced,breakable,colback=green!5!white, colframe=green!75!black, title={T0 Advantage}}
+\newtcolorbox{gemeinsam}{enhanced,breakable,colback=orange!5!white, colframe=orange!75!black, title={Common Ground}}
+
+% Additional tcolorbox environment that can contain floats
+% Using minipage workaround for figure/table inside boxes
+\newenvironment{floatbox}[1][]{%
+  \begin{tcolorbox}[enhanced,breakable,#1]%
+  \begin{minipage}{\linewidth}%
+}{%
+  \end{minipage}%
+  \end{tcolorbox}%
+}
