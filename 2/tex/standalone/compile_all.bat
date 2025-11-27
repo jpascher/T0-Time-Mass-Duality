@@ -11,7 +11,7 @@ setlocal enabledelayedexpansion
 set "SCRIPT_DIR=%~dp0"
 
 if "%1"=="" (
-    set "LANGUAGES=en de fr es"
+    set "LANGUAGES=en de fr es it"
 ) else (
     set "LANGUAGES=%1"
 )

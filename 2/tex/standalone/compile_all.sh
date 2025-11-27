@@ -9,7 +9,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-LANGUAGES="${1:-en de fr es}"
+LANGUAGES="${1:-en de fr es it}"
 
 compile_language() {
     local lang=$1
