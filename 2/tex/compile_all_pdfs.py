@@ -53,9 +53,10 @@ def compile_latex(tex_file: Path, output_dir: Path, max_runs: int = 2) -> tuple:
                 ['pdflatex', '-interaction=nonstopmode', '-halt-on-error', 
                  f'-output-directory={work_dir}', str(tex_file)],
                 capture_output=True,
-                text=True,
                 timeout=120,
-                cwd=work_dir
+                cwd=work_dir,
+                encoding='latin-1',
+                errors='replace'
             )
         
         # Check if PDF was created
