@@ -1,7 +1,22 @@
 \documentclass[12pt,a4paper]{article}
 
+% Required packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+
 % Standardized preamble - EliminationOfMassDe.tex
-\input{T0_preamble_De}
+%\input{T0_preamble_De} % Commented out since we're defining everything here
+
+% Custom commands for T0 model
+\newcommand{\tP}{t_{\text{P}}} % Planck time
+\newcommand{\lP}{\ell_{\text{P}}} % Planck length
+\newcommand{\EP}{E_{\text{P}}} % Planck energy
+\newcommand{\Tfield}{\mathcal{T}} % Time field
+\newcommand{\Tfieldt}{\mathcal{T}(\vec{x},t)} % Time field with arguments
+\newcommand{\xipar}{\xi} % Xi parameter
+\newcommand{\Tzero}{T_0} % Characteristic time scale
 
 \begin{document}
 	
@@ -56,7 +71,7 @@
 	Das intrinsische Zeitfeld wird traditionell definiert als:
 	
 	\begin{equation}
-		\Tfieldt = \frac{1}{\max(m(\vecx,t), \omega)}
+		\Tfieldt = \frac{1}{\max(m(\vec{x},t), \omega)}
 		\label{eq:time_field_original}
 	\end{equation}
 	
@@ -73,14 +88,14 @@
 	Die fundamentale Einsicht ist, dass nur das **Verhältnis** zwischen charakteristischer Energie und Frequenz physikalisch relevant ist. Wir formulieren um als:
 	
 	\begin{equation}
-		\boxed{\Tfieldt = \tP \cdot g(E_{\text{norm}}(\vecx,t), \omega_{\text{norm}})}
+		\boxed{\Tfieldt = \tP \cdot g(E_{\text{norm}}(\vec{x},t), \omega_{\text{norm}})}
 		\label{eq:time_field_mass_free}
 	\end{equation}
 	
 	wobei:
 	\begin{align}
 		\tP &= \sqrt{\frac{\hbar G}{c^5}} \quad \text{(Planck-Zeit)} \\
-		E_{\text{norm}} &= \frac{E(\vecx,t)}{\EP} \quad \text{(normierte Energie)} \\
+		E_{\text{norm}} &= \frac{E(\vec{x},t)}{\EP} \quad \text{(normierte Energie)} \\
 		\omega_{\text{norm}} &= \frac{\omega}{\EP} \quad \text{(normierte Frequenz)} \\
 		g(E_{\text{norm}}, \omega_{\text{norm}}) &= \frac{1}{\max(E_{\text{norm}}, \omega_{\text{norm}})}
 	\end{align}
@@ -93,25 +108,25 @@
 	\subsubsection{Ursprüngliche Feldgleichung}
 	
 	\begin{equation}
-		\nabla^2 \Tfield = -4\pi G \rho(\vecx) \Tfield^2
+		\nabla^2 \Tfield = -4\pi G \rho(\vec{x}) \Tfield^2
 		\label{eq:field_equation_original}
 	\end{equation}
 	
-	mit Massendichte $\rho(\vecx) = m \cdot \delta^3(\vecx)$ für eine Punktquelle.
+	mit Massendichte $\rho(\vec{x}) = m \cdot \delta^3(\vec{x})$ für eine Punktquelle.
 	
 	\subsubsection{Energiebasierte Formulierung}
 	
 	Ersetzung der Massendichte durch Energiedichte:
 	
 	\begin{equation}
-		\boxed{\nabla^2 \Tfield = -4\pi G \frac{E(\vecx)}{\EP} \delta^3(\vecx) \frac{\Tfield^2}{\tP^2}}
+		\boxed{\nabla^2 \Tfield = -4\pi G \frac{E(\vec{x})}{\EP} \delta^3(\vec{x}) \frac{\Tfield^2}{\tP^2}}
 		\label{eq:field_equation_mass_free}
 	\end{equation}
 	
 	\textbf{Dimensionale Verifikation:}
 	\begin{align}
 		[\nabla^2 \Tfield] &= [E^{-1} \cdot E^2] = [E] \\
-		[4\pi G E_{\text{norm}} \delta^3(\vecx) \Tfield^2/\tP^2] &= [E^{-2}][1][E^6][E^{-2}]/[E^{-2}] = [E] \quad \checkmark
+		[4\pi G E_{\text{norm}} \delta^3(\vec{x}) \Tfield^2/\tP^2] &= [E^{-2}][1][E^6][E^{-2}]/[E^{-2}] = [E] \quad \checkmark
 	\end{align}
 	
 	\subsection{Punktquellen-Lösung: Parametertrennung}
@@ -202,8 +217,8 @@
 	
 	\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Massenfreies T0-Modell]
 		\begin{align}
-			\text{Zeitfeld:} \quad &\Tfieldt = \tP \cdot f(E_{\text{norm}}(\vecx,t), \omega_{\text{norm}}) \\
-			\text{Feldgleichung:} \quad &\nabla^2 \Tfield = -4\pi G \frac{E_{\text{norm}}}{\lP^2} \delta^3(\vecx) \Tfield^2 \\
+			\text{Zeitfeld:} \quad &\Tfieldt = \tP \cdot f(E_{\text{norm}}(\vec{x},t), \omega_{\text{norm}}) \\
+			\text{Feldgleichung:} \quad &\nabla^2 \Tfield = -4\pi G \frac{E_{\text{norm}}}{\lP^2} \delta^3(\vec{x}) \Tfield^2 \\
 			\text{Punktquellen:} \quad &\Tfield(r) = \Tzero\left(1 - \frac{L_0}{r}\right) \\
 			\text{Kopplungsparameter:} \quad &\xipar = 2\sqrt{\frac{E}{\EP}}
 		\end{align}
@@ -384,7 +399,7 @@
 	
 	\subsubsection{Masse als effektiver Parameter}
 	
-	In der massenfreien Formulierung entsteht das, was wir traditionell Masse nennen, als:
+	In der massenfreie Formulierung entsteht das, was wir traditionell Masse nennen, als:
 	
 	\begin{equation}
 		m_{\text{effektiv}} = E_{\text{charakteristisch}} \cdot f(\text{Geometrie}, \text{Kopplungen})
@@ -565,4 +580,4 @@
 		Weinberg, S. (1989). \textit{The cosmological constant problem}. Reviews of Modern Physics, 61(1), 1-23.
 	\end{thebibliography}
 	
-	\end{document}
+\end{document}
