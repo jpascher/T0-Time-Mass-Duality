@@ -30,6 +30,17 @@ def detect_language(content: str, filename: str) -> str:
     """
     Detect the document language based on babel package or filename.
     
+    Detection order:
+    1. Filename patterns: '_De.tex', 'De.tex', '_En.tex', 'En.tex'
+    2. Babel package: \\usepackage[ngerman]{babel}, \\usepackage[german]{babel},
+       \\usepackage[english]{babel}
+    3. Fallback: 'En' for English
+    
+    Examples:
+        'Zeit_De.tex' -> 'De' (German, by filename)
+        'Bell_En.tex' -> 'En' (English, by filename)
+        'document.tex' with \\usepackage[ngerman]{babel} -> 'De' (German, by babel)
+    
     Args:
         content: The LaTeX file content
         filename: The filename
@@ -96,19 +107,22 @@ def extract_title_author_date(content: str) -> Tuple[Optional[str], Optional[str
         preamble = content[:begin_doc]
     
     # Extract title (may span multiple lines)
+    # Note: Using group(0) intentionally to get the full \title{...} command
     title_match = re.search(r'\\title\{(.*?)\}(?=\s*(?:\\author|\\date|\\begin|$))', preamble, re.DOTALL)
     if title_match:
-        title = title_match.group(0)
+        title = title_match.group(0)  # Full command including \title{...}
     
     # Extract author
+    # Note: Using group(0) intentionally to get the full \author{...} command
     author_match = re.search(r'\\author\{(.*?)\}(?=\s*(?:\\date|\\title|\\begin|$))', preamble, re.DOTALL)
     if author_match:
-        author = author_match.group(0)
+        author = author_match.group(0)  # Full command including \author{...}
     
     # Extract date
+    # Note: Using group(0) intentionally to get the full \date{...} command
     date_match = re.search(r'\\date\{(.*?)\}', preamble, re.DOTALL)
     if date_match:
-        date = date_match.group(0)
+        date = date_match.group(0)  # Full command including \date{...}
     
     return title, author, date
 
@@ -240,7 +254,7 @@ def process_file(filepath: Path, preamble_path: str, dry_run: bool = False, back
     notes = []
     
     try:
-        with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
+        with open(filepath, 'r', encoding='utf-8', errors='replace') as f:
             content = f.read()
     except Exception as e:
         notes.append(f"Error reading file: {e}")
