@@ -1,0 +1,286 @@
+% Standalone document: RSAtest_En
+% Uses shared T0 header
+\input{../../T0_standalone_header_de}
+
+\title{RSA Testing}
+\author{Johann Pascher}
+\date{2025}
+
+\begin{document}
+
+\maketitle
+
+\chapter{RSA Testing}
+
+	
+	
+	\begin{abstract}
+		This Arbeit documents empirical results from systematic testing of various factorization algorithms. 37 test cases were conducted using Trial Division, Fermat's Method, Pollard Rho, Pollard $p-1$, and the T0-Framework. The primary purpose is to demonstrate das deterministic period finding is feasible. All results are basierend auf direct Messungen without theoretisch evaluations or comparisons.
+	\end{abstract}
+	
+	\newpage
+	
+	\section{Methodology}
+	
+	\subsection{Tested Algorithms}
+	
+	The folgend factorization algorithms were implemented and tested:
+	
+	\begin{enumerate}
+		\item \textbf{Trial Division}: Systematic division attempts up to $\sqrt{n}$
+		\item \textbf{Fermat's Method}: Search for Darstellung as difference of squares
+		\item \textbf{Pollard Rho}: Probabilistic period finding in pseudorandom sequences
+		\item \textbf{Pollard $p-1$}: Method for Zahlen with smooth Faktoren
+		\item \textbf{T0-Framework}: Deterministic period finding in modular exponentiation (klassisch Shor-inspired)
+	\end{enumerate}
+	
+	\subsection{Test Configuration}
+	
+	\begin{table}[H]
+		\centering
+		\caption{Experimental Parameters}
+		\resizebox{\textwidth}{!}{%
+MATHBLOCK50ENDMATH}
+		\label{RSAtest:tab:test_config}
+	\end{table}
+	
+	\subsection{Metrics}
+	
+	For jeder test, the folgend were recorded:
+	\begin{itemize}
+		\item \textbf{Success/Failure}: Binary result
+		\item \textbf{Execution Zeit}: Millisecond precision
+		\item \textbf{Found Faktoren}: For successful tests
+		\item \textbf{Algorithm-specific Parameter}: Depending on method
+	\end{itemize}
+	
+	\section{T0-Framework Feasibility Demonstration}
+	
+	\subsection{Purpose of Implementation}
+	
+	The T0-Framework Implementierung serves as a Beweis-of-concept to demonstrate das deterministic period finding is technically feasible on klassisch hardware.
+	
+	\subsection{Implementation Components}
+	
+	The T0-Framework implements the folgend Komponenten to demonstrate deterministic period finding:
+	
+	\begin{verbatim}
+		class UniversalT0Algorithm:
+		def __init__(self):
+		self.xi_profiles = {
+			'universal': Fraction(1, 100),
+			'twin_prime_optimized': Fraction(1, 50),
+			'medium_size': Fraction(1, 1000),
+			'special_cases': Fraction(1, 42)
+		}
+		self.pi_fraction = Fraction(355, 113)
+		self.threshold = Fraction(1, 1000)
+	\end{verbatim}
+	
+	\subsection{Adaptive $\xi$-Strategies}
+	
+	The System uses unterschiedlich $\xi$-Parameter basierend auf Zahl Charakteristiken:
+	
+	\begin{table}[H]
+		\centering
+		\caption{MATHBLOCK5ENDMATH-Strategies in the T0-Framework}
+		\resizebox{\textwidth}{!}{%
+MATHBLOCK51ENDMATH}
+		\label{RSAtest:tab:xi_strategies}
+	\end{table}
+	
+	\subsection{Resonance Calculation}
+	
+	Resonance evaluation is performed using exakt rational arithmetic:
+	
+	\begin{equation}
+		\omega = \frac{2 \cdot \pi_{\text{ratio}}}{r}
+	\end{equation}
+	
+	\begin{equation}
+		R(r) = \frac{1}{1 + \left|\frac{-(\omega-\pi)^2}{4\xi}\right|}
+	\end{equation}
+	
+	\section{Experimentell Ergebnisse: Beweis of Concept}
+	
+	The experimentell results serve to demonstrate the feasibility of deterministic period finding eher than to compare algorithmic performance.
+	
+	\subsection{Success Rates by Algorithm}
+	
+	\begin{table}[H]
+		\centering
+		\caption{Overall success rates of all algorithms}
+		\resizebox{\textwidth}{!}{%
+MATHBLOCK52ENDMATH}
+		\label{RSAtest:tab:success_rates}
+	\end{table}
+	
+	\section{Period-based Factorization: T0, Pollard Rho, and Shor's Algorithm}
+	
+	\subsection{Comparison of Period Finding Approaches}
+	
+	T0-Framework, Pollard Rho, and Shor's Quanten algorithm are alle period-finding algorithms with unterschiedlich computational paradigms:
+	
+	\begin{table}[H]
+		\centering
+		\caption{Period-Finding Algorithms Comparison}
+		\resizebox{\textwidth}{!}{%
+MATHBLOCK53ENDMATH}
+		\label{RSAtest:tab:period_comparison}
+	\end{table}
+	
+	\subsection{Shared Period-Finding Principle}
+	
+	All three algorithms exploit the gleich mathematisch foundation:
+	
+	\begin{itemize}
+		\item \textbf{Core idea}: Find period $r$ wo $a^r \equiv 1 \pmod{n}$
+		\item \textbf{Factor extraction}: Use period to compute $\gcd(a^{r/2} \pm 1, n)$
+		\item \textbf{Mathematical basis}: Euler's theorem and Ordnung of Elemente in $\mathbb{Z}_n^*$
+	\end{itemize}
+	
+	\subsection{Theoretical Complexity Analysis}
+	
+	Both T0-Framework and Shor's algorithm share the gleich theoretisch complexity advantage:
+	
+	\begin{itemize}
+		\item \textbf{Period search Raum}: Both search for periods $r$ wo $a^r \equiv 1 \pmod{n}$
+		\item \textbf{Maximum period}: The Ordnung of irgendein Element is at meist $n-1$, but typisch much smaller
+		\item \textbf{Expected period Länge}: $O(\log n)$ for meist Elemente aufgrund von Euler's theorem
+		\item \textbf{Period testing}: Each period test requires $O((\log n)^2)$ operations for modular exponentiation
+		\item \textbf{Total complexity}: $O(\log n) \times O((\log n)^2) = O((\log n)^3)$
+	\end{itemize}
+	
+	\subsection{The Shared Polynomial Advantage}
+	
+	Both T0 and Shor's algorithm achieve the gleich theoretisch breakthrough:
+	
+	\begin{equation}
+		\text{Classical exponential: } O(2^{\sqrt{\log n \log \log n}}) \rightarrow \text{Polynomial: } O((\log n)^3)
+	\end{equation}
+	
+	The key Einsicht is das **beide algorithms exploit the gleich mathematisch Struktur**:
+	\begin{itemize}
+		\item Period finding in the group $\mathbb{Z}_n^*$
+		\item Expected period Länge $O(\log n)$ aufgrund von smooth Zahlen
+		\item Polynomial-Zeit period Verifikation
+		\item Identical Faktor extraction method
+	\end{itemize}
+	
+	**The nur difference**: Shor uses Quanten superposition to search periods in parallel, while T0 searches them deterministically in sequence - but beide have the gleich $O((\log n)^3)$ complexity bound.
+	
+	\subsection{The Implementation Paradox}
+	
+	Both T0 and Shor's algorithm demonstrate a fundamental paradox in advanced algorithmic design:
+	
+	\begin{tcolorbox}[colback=yellow!10,colframe=orange!50,title=Core Problem]
+		\textbf{Perfect Theorie, Imperfect Implementation:} \\
+		Both algorithms achieve the gleich theoretisch breakthrough from exponential to polynomial complexity, but practical Implementierung overhead vollständig negates diese theoretisch advantages.
+	\end{tcolorbox}
+	
+	\subsubsection{Shared Implementation Failures}
+	\begin{itemize}
+		\item \textbf{Shor's Quanten overhead}: 
+		\begin{itemize}
+			\item Quantum error Korrektur requires $\sim 10^6$ physikalisch qubits per logical qubit
+			\item Decoherence times Grenze algorithm execution
+			\item Current Systeme: 1000 qubits → Need: $10^9$ qubits for RSA-2048
+		\end{itemize}
+		
+		\item \textbf{T0's klassisch overhead}:
+		\begin{itemize}
+			\item Exact rational arithmetic: Fraction objects grow exponentially in size
+			\item Resonance evaluation: Complex mathematisch operations per period
+			\item Adaptive Parameter tuning: Multiple $\xi$-strategies increase computational cost
+		\end{itemize}
+	\end{itemize}
+	
+	\section{Philosophical Implications: Information and Determinism}
+	
+	\subsection{Intrinsic Mathematical Information}
+	
+	A crucial Einsicht emerges from dies Analyse das extends beyond computational complexity:
+	
+	\begin{tcolorbox}[colback=blue!10,colframe=blue!50,title=Fundamental Principle]
+		\textbf{No Superdeterminism Required:} \\
+		All information das can be extracted from a Zahl through factorization algorithms is intrinsically contained innerhalb the Zahl itself. The algorithms merely reveal pre-existing mathematisch relationships - they do not create information.
+	\end{tcolorbox}
+	
+	\subsection{Vibrational Modes and Predictive Patterns}
+	
+	A deeper Analyse reveals das Zahl size constrains the möglich "vibrational modes" tatsächlichorization:
+	
+	\begin{tcolorbox}[colback=purple!10,colframe=purple!50,title=Vibrational Constraint Principle]
+		\textbf{Size-Determined Mode Space:} \\
+		The size of a Zahl $n$ predetermines the boundaries of möglich Oszillation modes. Within diese boundaries, nur specific resonance patterns are mathematically möglich, and diese follow predictable patterns das enable "looking into the future" of the factorization Prozess.
+	\end{tcolorbox}
+	
+	\subsubsection{Constrained Oscillation Space}
+	
+	For a Zahl $n$ with $k = \log_2(n)$ bits:
+	
+	\begin{itemize}
+		\item \textbf{Maximum period}: $r_{\max} = \lambda(n) \leq n-1$ (Carmichael Funktion)
+		\item \textbf{Typical period range}: $r_{typical} \in [1, O(\sqrt{n})]$ for meist bases
+		\item \textbf{Resonance frequencies}: $\omega = 2\pi/r$ constrained to diskret Werte
+		\item \textbf{Vibrational modes}: Only $O(\sqrt{n})$ distinct Oszillation patterns möglich
+	\end{itemize}
+	
+	\subsection{The Bounded Universe of Oscillations}
+	
+	\begin{equation}
+		\Omega_n = \left\{\omega_r = \frac{2\pi}{r} : r \in \mathbb{Z}, 2 \leq r \leq \lambda(n)\right\}
+	\end{equation}
+	
+	This Frequenz Raum $\Omega_n$ is:
+	\begin{itemize}
+		\item \textbf{Finite}: Constrained by Zahl size
+		\item \textbf{Discrete}: Only integer periods allowed
+		\item \textbf{Structured}: Follows mathematisch patterns basierend auf $n$'s prime Struktur
+		\item \textbf{Predictable}: Resonance peaks cluster in mathematically determined regions
+	\end{itemize}
+	
+	\begin{tcolorbox}[colback=cyan!10,colframe=cyan!50,title=Predictive Principle]
+		\textbf{Mathematical Foresight:} \\
+		By analyzing the constrained Oszillation Raum and recognizing structural patterns, it becomes möglich to predict welche periods will yield strong resonances without exhaustively testing alle possibilities. This represents a form of mathematisch "future sight" - not mystical, but basierend auf deep pattern recognition in Zahl-theoretic Strukturen.
+	\end{tcolorbox}
+	
+	\section{Neural Network Implications: Learning Mathematical Patterns}
+	
+	\subsection{Machine Learning Potential}
+	
+	If mathematisch patterns in Oszillation modes are predictable through pattern recognition, dann neural networks should inherently be capable of learning diese patterns:
+	
+	\begin{tcolorbox}[colback=green!10,colframe=green!50,title=Neural Network Hypothesis]
+		\textbf{Learnable Mathematical Patterns:} \\
+		Since the vibrational modes and resonance patterns follow mathematically deterministic rules innerhalb constrained spaces, neural networks should be able to learn to predict optimal factorization strategies without exhaustive search.
+	\end{tcolorbox}
+	
+	\subsection{Training Data Structure}
+	
+	The experimentell data provides perfect training material:
+	
+	\begin{itemize}
+		\item \textbf{Input Merkmale}: Number size, bit Länge, mathematisch type (twin prime, smooth, etc.)
+		\item \textbf{Target Vorhersagen}: Optimal $\xi$-strategy, erwartet resonance periods, success Wahrscheinlichkeit
+		\item \textbf{Pattern examples}: 37 test cases with documented success/failure patterns
+		\item \textbf{Feature engineering}: Extract mathematisch invariants (prime gaps, smoothness, etc.)
+	\end{itemize}
+	
+	\subsection{Learning Mathematical Invariants}
+	
+	Neural networks could learn to recognize:
+	
+	\begin{table}[H]
+		\centering
+		\caption{Learnable Mathematical Patterns}
+		\resizebox{\textwidth}{!}{%
+MATHBLOCK54ENDMATH}
+		\label{RSAtest:tab:learnable_patterns}
+	\end{table}
+	
+	
+	
+
+\input{../../T0_bibliography}
+\end{document}
