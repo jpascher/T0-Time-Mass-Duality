@@ -34,13 +34,16 @@ def get_chapter_title(filepath):
         match = re.search(r'\\title\{([^}]+)\}', content)
         if match:
             title = match.group(1)
+            # Remove \\[...] vertical spacing commands like \\[0.5em]
+            title = re.sub(r'\\\\\[[^\]]*\]', ' ', title)
             title = re.sub(r'\\\\', ' ', title)
             title = re.sub(r'\\[a-zA-Z]+\{([^}]*)\}', r'\1', title)
             title = re.sub(r'\\[a-zA-Z]+', '', title)
+            title = re.sub(r'\[[^\]]*\]', '', title)  # Remove remaining [...] 
             title = re.sub(r'[{}]', '', title)
             title = re.sub(r'\s+', ' ', title).strip()
-            if len(title) > 80:
-                title = title[:77] + "..."
+            if len(title) > 70:
+                title = title[:67] + "..."
             return title
         
         basename = os.path.basename(filepath)
