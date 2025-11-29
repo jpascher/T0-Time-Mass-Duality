@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
 Build complete book by extracting content from standalone documents.
+Preserves abstract sections with proper document titles.
 """
 import os
 import re
 import sys
 
-def extract_body_content(filepath):
+def extract_body_content(filepath, chapter_num=0):
     """Extract content between \\begin{document} and \\end{document}."""
     try:
         with open(filepath, 'r', encoding='utf-8', errors='replace') as f:
@@ -22,9 +23,18 @@ def extract_body_content(filepath):
             body = re.sub(r'\\title\{[^}]*\}\s*', '', body)
             body = re.sub(r'\\author\{[^}]*\}\s*', '', body)
             body = re.sub(r'\\date\{[^}]*\}\s*', '', body)
-            # Fix common issues
-            body = re.sub(r'\\section\*?\{', r'\\section{', body)
-            body = re.sub(r'\\subsection\*?\{', r'\\subsection{', body)
+            
+            # Remove tableofcontents from chapters (only main TOC should exist)
+            body = re.sub(r'\\tableofcontents\s*', '', body)
+            
+            # Make labels unique by adding chapter prefix to avoid duplicate warnings
+            prefix = f"ch{chapter_num:02d}"
+            body = re.sub(r'\\label\{([^}]+)\}', rf'\\label{{{prefix}:\1}}', body)
+            body = re.sub(r'\\ref\{([^}]+)\}', rf'\\ref{{{prefix}:\1}}', body)
+            body = re.sub(r'\\eqref\{([^}]+)\}', rf'\\eqref{{{prefix}:\1}}', body)
+            body = re.sub(r'\\pageref\{([^}]+)\}', rf'\\pageref{{{prefix}:\1}}', body)
+            body = re.sub(r'\\cite\{([^}]+)\}', rf'\\cite{{{prefix}:\1}}', body)
+            
             return body
         return None
     except Exception as e:
@@ -42,12 +52,11 @@ def get_chapter_title(filepath):
         if match:
             title = match.group(1)
             # Clean up title - remove LaTeX formatting
-            title = re.sub(r'\\\\', ' ', title)  # Replace \\ with space
-            title = re.sub(r'\\[a-zA-Z]+\{([^}]*)\}', r'\1', title)  # Remove commands like \textbf{...}
-            title = re.sub(r'\\[a-zA-Z]+', '', title)  # Remove standalone commands
-            title = re.sub(r'[{}]', '', title)  # Remove remaining braces
-            title = re.sub(r'\s+', ' ', title).strip()  # Normalize whitespace
-            # Limit length
+            title = re.sub(r'\\\\', ' ', title)
+            title = re.sub(r'\\[a-zA-Z]+\{([^}]*)\}', r'\1', title)
+            title = re.sub(r'\\[a-zA-Z]+', '', title)
+            title = re.sub(r'[{}]', '', title)
+            title = re.sub(r'\s+', ' ', title).strip()
             if len(title) > 100:
                 title = title[:97] + "..."
             return title
@@ -55,7 +64,6 @@ def get_chapter_title(filepath):
         # Fallback to filename
         basename = os.path.basename(filepath)
         name = os.path.splitext(basename)[0]
-        # Clean up name
         name = name.replace('_De', '').replace('_En', '')
         name = name.replace('_', ' ').replace('-', ' ')
         return name
@@ -161,119 +169,16 @@ CHAPTERS_DE = [
     "completed/T0_Bibliography_De.tex",
 ]
 
-# English chapters
-CHAPTERS_EN = [
-    "completed/T0_Introduction_En.tex",
-    "completed/reise_En.tex",
-    "completed/T0_Grundlagen_En.tex",
-    "completed/T0_Modell_Uebersicht_En.tex",
-    "completed/T0_7-fragen-3_En.tex",
-    "completed/Hannah_En.tex",
-    "completed/Markov_En.tex",
-    "completed/T0-Theory-vs-Synergetics_En.tex",
-    "completed/T0_threeclock_En.tex",
-    "completed/T0_penrose_En.tex",
-    "completed/T0_peratt_En.tex",
-    "completed/T0_Analyse_MNRAS_Widerlegung_En.tex",
-    "completed/T0vsESM_ConceptualAnalysis_En.tex",
-    "completed/T0_Teilchenmassen_En.tex",
-    "completed/Teilchenmassen_En.tex",
-    "completed/T0_tm-erweiterung-x6_En.tex",
-    "completed/T0_Neutrinos_En.tex",
-    "completed/detailierte_formel_leptonen_anemal_En.tex",
-    "completed/neutrino-Formel_En.tex",
-    "completed/T0_koide-formel-3_En.tex",
-    "completed/T0_xi-und-e_En.tex",
-    "completed/T0_xi_ursprung_En.tex",
-    "completed/xi_parmater_partikel_En.tex",
-    "completed/T0_SI_En.tex",
-    "completed/T0_nat-si_En.tex",
-    "completed/NatEinheitenSystematikEn.tex",
-    "completed/parameterherleitung_En.tex",
-    "completed/T0_Vollstaendige_Berchnungen_En.tex",
-    "completed/T0_verhaeltnis-absolut_En.tex",
-    "completed/RelokativesZahlensystemEn.tex",
-    "completed/E-mc2_En.tex",
-    "completed/T0_Energie_En.tex",
-    "completed/Formeln_Energiebasiert_En.tex",
-    "completed/Bewegungsenergie_En.tex",
-    "completed/T0_Feinstruktur_En.tex",
-    "completed/FeinstrukturkonstanteEn.tex",
-    "completed/137_En.tex",
-    "completed/musical-spiral-137-En.tex",
-    "completed/ResolvingTheConstantsAlfaEn.tex",
-    "completed/T0_Gravitationskonstante_En.tex",
-    "completed/gravitationskonstante_En.tex",
-    "completed/gravitationskonstnte_En.tex",
-    "completed/TempEinheitenCMBEn.tex",
-    "completed/T0_Kosmologie_En.tex",
-    "completed/cosmic_En.tex",
-    "completed/T0_Geometrische_Kosmologie_En.tex",
-    "completed/redshift_deflection_En.tex",
-    "completed/Casimir_En.tex",
-    "completed/Zwei-Dipole-CMB_En.tex",
-    "completed/Ho_En.tex",
-    "completed/T0_Anomale_Magnetische_Momente_En.tex",
-    "completed/T0_Anomale-g2-6_En.tex",
-    "completed/T0_Anomale-g2-9_En.tex",
-    "completed/T0_lagrndian_En.tex",
-    "completed/LagrandianVergleichEn.tex",
-    "completed/lagrandian-einfachEn.tex",
-    "completed/Notwendigkeit_zwei_lagrange_En.tex",
-    "completed/diracEn.tex",
-    "completed/diracVereinfachtEn.tex",
-    "completed/T0_QM-QFT-RT_En.tex",
-    "completed/QM-testenEn.tex",
-    "completed/Bell_En.tex",
-    "completed/QM-DetrmisticEn.tex",
-    "completed/NoGoEn.tex",
-    "completed/Mathematische_struktur_En.tex",
-    "completed/systemEn.tex",
-    "completed/QM_En.tex",
-    "completed/QFT_En.tex",
-    "completed/T0-QFT-ML_Addendum_En.tex",
-    "completed/scheinbar_instantan_En.tex",
-    "completed/T0_QAT_En.tex",
-    "completed/T0_QM-optimierung_En.tex",
-    "completed/Unit Charge_En.tex",
-    "completed/MathZeitMasseLagrangeEn.tex",
-    "completed/T0_g2-erweiterung-4_En.tex",
-    "completed/Amper_Low_En.tex",
-    "completed/DerivationVonBetaEn.tex",
-    "completed/T0_freqeunz_En.tex",
-    "completed/universale-ableitung_En.tex",
-    "completed/T0_umkehrung_En.tex",
-    "completed/DynMassePhotonenNichtlokalEn.tex",
-    "completed/Zeit_En.tex",
-    "completed/Zeit-konstant_En.tex",
-    "completed/RSA_En.tex",
-    "completed/RSAtest_En.tex",
-    "completed/EliminationOfMassEn.tex",
-    "completed/Elimination_Of_Mass_Dirac_LagEn.tex",
-    "completed/Elimination_Of_Mass_Dirac_TabelleEn.tex",
-    "completed/HdokumentEn.tex",
-    "completed/Moll_CandelaEn.tex",
-    "completed/T0_netze_En.tex",
-    "completed/ParameterSystemdipendentEn.tex",
-    "completed/Zusammenfassung_En.tex",
-    "completed/T0_Dokumentenübersicht_En.tex",
-    "completed/T0_Bibliography_En.tex",
-]
+CHAPTERS_EN = [ch.replace('_De.tex', '_En.tex').replace('De.tex', 'En.tex') for ch in CHAPTERS_DE]
 
-def build_book(lang='De'):
-    """Build complete book for given language."""
-    chapters = CHAPTERS_DE if lang == 'De' else CHAPTERS_EN
-    cover_image = f"T0_deckblatt_{lang}.png"
-    
-    # Book header
-    if lang == 'De':
-        book_content = r"""\documentclass[a4paper,11pt]{book}
+def write_book_header_de():
+    return r'''\documentclass[a4paper,11pt]{book}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb,amsthm}
-\usepackage{hyperref}
+\usepackage[pdfusetitle,hidelinks]{hyperref}
 \usepackage{geometry}
 \usepackage{fancyhdr}
 \usepackage{tcolorbox}
@@ -287,8 +192,18 @@ def build_book(lang='De'):
 \usepackage{float}
 \usepackage{enumitem}
 \usepackage{tikz}
+\usepackage{url}
 
 \setlength{\headheight}{14pt}
+
+% Suppress hyperref warnings in PDF strings
+\pdfstringdefDisableCommands{%
+  \def\\{ }%
+  \def\texttt#1{#1}%
+  \def\textsf#1{#1}%
+  \def\textbf#1{#1}%
+  \def\textit#1{#1}%
+}
 
 % T0 specific commands
 \newcommand{\Tzero}{T_0}
@@ -307,6 +222,10 @@ def build_book(lang='De'):
 % Colors
 \definecolor{theoremcolor}{RGB}{0,100,150}
 \definecolor{definitioncolor}{RGB}{0,100,50}
+\definecolor{t0blue}{RGB}{0,102,204}
+\definecolor{boxgray}{RGB}{128,128,128}
+\definecolor{gold}{RGB}{255,215,0}
+\definecolor{tocblue}{RGB}{0,51,102}
 
 % Theorem environments
 \theoremstyle{plain}
@@ -324,15 +243,24 @@ def build_book(lang='De'):
 \newtcolorbox{important}[1][Wichtig]{colback=red!5,colframe=red!75!black,title=#1,breakable}
 \newtcolorbox{note}[1][Hinweis]{colback=yellow!5,colframe=yellow!75!black,title=#1,breakable}
 \newtcolorbox{summary}[1][Zusammenfassung]{colback=green!5,colframe=green!75!black,title=#1,breakable}
+\newtcolorbox{foundation}[1][Grundlage]{colback=gray!5,colframe=gray!75!black,title=#1,breakable}
+\newtcolorbox{alternative}[1][Alternative]{colback=orange!5,colframe=orange!75!black,title=#1,breakable}
+\newtcolorbox{interpretation}[1][Interpretation]{colback=purple!5,colframe=purple!75!black,title=#1,breakable}
+\newtcolorbox{explanation}[1][Erklärung]{colback=cyan!5,colframe=cyan!75!black,title=#1,breakable}
+\newtcolorbox{category}[1][Kategorie]{colback=brown!5,colframe=brown!75!black,title=#1,breakable}
+\newtcolorbox{key}[1][Schlüssel]{colback=blue!5,colframe=blue!75!black,title=#1,breakable}
+\newtcolorbox{technical}[1][Technisch]{colback=gray!5,colframe=gray!75!black,title=#1,breakable}
+\newtcolorbox{proof_step}[1][Beweisschritt]{colback=yellow!5,colframe=yellow!75!black,title=#1,breakable}
+\newtcolorbox{experimental}[1][Experimentell]{colback=green!5,colframe=green!75!black,title=#1,breakable}
 
 \geometry{margin=2.5cm}
 \pagestyle{fancy}
 \fancyhead{}
 \fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\leftmark}
-\fancyhead[LO]{\rightmark}
+\fancyhead[RE]{\nouppercase{\leftmark}}
+\fancyhead[LO]{\nouppercase{\rightmark}}
 
-\title{\Huge\textbf{T0-Theorie}\\[0.5cm]\Large Zeit-Masse-Dualität\\[0.3cm]\normalsize Alle Naturkonstanten aus einer Zahl: $\alpha \approx 1/137$}
+\title{\Huge\textbf{T0-Theorie}\\[0.5cm]\Large Zeit-Masse-Dualität\\[0.3cm]\normalsize Alle Naturkonstanten aus einer Zahl}
 \author{Johann Pascher}
 \date{2024}
 
@@ -341,24 +269,56 @@ def build_book(lang='De'):
 % Cover page with image
 \begin{titlepage}
 \centering
-"""
-        book_content += f"\\includegraphics[width=\\textwidth,height=\\textheight,keepaspectratio]{{{cover_image}}}\n"
-        book_content += r"""\end{titlepage}
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{T0_deckblatt_De.png}
+\end{titlepage}
 
 \frontmatter
-\tableofcontents
+
+% ABSTRAKT
+\chapter*{Abstrakt}
+\addcontentsline{toc}{chapter}{Abstrakt}
+
+Die T0-Theorie (Zeit-Masse-Dualität) stellt einen fundamentalen Paradigmenwechsel in der theoretischen Physik dar. Das zentrale Ergebnis dieser Arbeit ist die Erkenntnis, dass \textbf{alle natürlichen Konstanten und physikalischen Parameter aus einer einzigen dimensionslosen Zahl abgeleitet werden können}: der universellen geometrischen Konstante
+\[
+\xi = \frac{4}{3} \times 10^{-4}.
+\]
+
+\begin{keyresult}[Zentrales Theorem der T0-Theorie]
+Alle physikalischen Konstanten -- Gravitationskonstante $G$, Planck-Konstante $\hbar$, Lichtgeschwindigkeit $c$, Elementarladung $e$ sowie alle Teilchenmassen und Kopplungskonstanten -- können mathematisch aus der universellen geometrischen Konstante $\xi$ abgeleitet werden.
+
+Aus $\xi$ folgt die Feinstrukturkonstante:
+\[
+\alpha = f_\alpha(\xi) \approx \frac{1}{137.035999084}
+\]
+\end{keyresult}
+
+Diese Sammlung von über 200 wissenschaftlichen Dokumenten entwickelt systematisch eine vollständige physikalische Theorie, die Quantenmechanik, Relativität und Kosmologie vereinheitlicht -- basierend auf dem Prinzip der absoluten Zeit $T_0$ und der intrinsischen Zeit-Feld-Masse-Beziehung.
+
+\vspace{1em}
+\begin{center}
+\textit{``Die Natur verwendet nur die längsten Fäden, um ihre Muster zu weben, sodass jedes kleine Stück ihres Gewebes die Organisation des gesamten Wandteppichs offenbart.''} -- Richard Feynman
+\end{center}
+
+% INHALTSVERZEICHNIS mit blauem Rahmen
+\clearpage
+\begin{tcolorbox}[colback=tocblue!5,colframe=tocblue,title={\Large\textbf{Inhaltsverzeichnis}},breakable]
+\makeatletter
+\@starttoc{toc}
+\makeatother
+\end{tcolorbox}
 
 \mainmatter
 
-"""
-    else:
-        book_content = r"""\documentclass[a4paper,11pt]{book}
+'''
+
+def write_book_header_en():
+    return r'''\documentclass[a4paper,11pt]{book}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb,amsthm}
-\usepackage{hyperref}
+\usepackage[pdfusetitle,hidelinks]{hyperref}
 \usepackage{geometry}
 \usepackage{fancyhdr}
 \usepackage{tcolorbox}
@@ -372,8 +332,18 @@ def build_book(lang='De'):
 \usepackage{float}
 \usepackage{enumitem}
 \usepackage{tikz}
+\usepackage{url}
 
 \setlength{\headheight}{14pt}
+
+% Suppress hyperref warnings in PDF strings
+\pdfstringdefDisableCommands{%
+  \def\\{ }%
+  \def\texttt#1{#1}%
+  \def\textsf#1{#1}%
+  \def\textbf#1{#1}%
+  \def\textit#1{#1}%
+}
 
 % T0 specific commands
 \newcommand{\Tzero}{T_0}
@@ -392,6 +362,10 @@ def build_book(lang='De'):
 % Colors
 \definecolor{theoremcolor}{RGB}{0,100,150}
 \definecolor{definitioncolor}{RGB}{0,100,50}
+\definecolor{t0blue}{RGB}{0,102,204}
+\definecolor{boxgray}{RGB}{128,128,128}
+\definecolor{gold}{RGB}{255,215,0}
+\definecolor{tocblue}{RGB}{0,51,102}
 
 % Theorem environments
 \theoremstyle{plain}
@@ -409,15 +383,24 @@ def build_book(lang='De'):
 \newtcolorbox{important}[1][Important]{colback=red!5,colframe=red!75!black,title=#1,breakable}
 \newtcolorbox{note}[1][Note]{colback=yellow!5,colframe=yellow!75!black,title=#1,breakable}
 \newtcolorbox{summary}[1][Summary]{colback=green!5,colframe=green!75!black,title=#1,breakable}
+\newtcolorbox{foundation}[1][Foundation]{colback=gray!5,colframe=gray!75!black,title=#1,breakable}
+\newtcolorbox{alternative}[1][Alternative]{colback=orange!5,colframe=orange!75!black,title=#1,breakable}
+\newtcolorbox{interpretation}[1][Interpretation]{colback=purple!5,colframe=purple!75!black,title=#1,breakable}
+\newtcolorbox{explanation}[1][Explanation]{colback=cyan!5,colframe=cyan!75!black,title=#1,breakable}
+\newtcolorbox{category}[1][Category]{colback=brown!5,colframe=brown!75!black,title=#1,breakable}
+\newtcolorbox{key}[1][Key]{colback=blue!5,colframe=blue!75!black,title=#1,breakable}
+\newtcolorbox{technical}[1][Technical]{colback=gray!5,colframe=gray!75!black,title=#1,breakable}
+\newtcolorbox{proof_step}[1][Proof Step]{colback=yellow!5,colframe=yellow!75!black,title=#1,breakable}
+\newtcolorbox{experimental}[1][Experimental]{colback=green!5,colframe=green!75!black,title=#1,breakable}
 
 \geometry{margin=2.5cm}
 \pagestyle{fancy}
 \fancyhead{}
 \fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\leftmark}
-\fancyhead[LO]{\rightmark}
+\fancyhead[RE]{\nouppercase{\leftmark}}
+\fancyhead[LO]{\nouppercase{\rightmark}}
 
-\title{\Huge\textbf{T0-Theory}\\[0.5cm]\Large Time-Mass-Duality\\[0.3cm]\normalsize All Natural Constants from One Number: $\alpha \approx 1/137$}
+\title{\Huge\textbf{T0-Theory}\\[0.5cm]\Large Time-Mass Duality\\[0.3cm]\normalsize All Natural Constants from One Number}
 \author{Johann Pascher}
 \date{2024}
 
@@ -426,50 +409,99 @@ def build_book(lang='De'):
 % Cover page with image
 \begin{titlepage}
 \centering
-"""
-        book_content += f"\\includegraphics[width=\\textwidth,height=\\textheight,keepaspectratio]{{{cover_image}}}\n"
-        book_content += r"""\end{titlepage}
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{T0_deckblatt_En.png}
+\end{titlepage}
 
 \frontmatter
-\tableofcontents
+
+% ABSTRACT
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+The T0-Theory (Time-Mass Duality) represents a fundamental paradigm shift in theoretical physics. The central result of this work is the recognition that \textbf{all natural constants and physical parameters can be derived from a single dimensionless number}: the universal geometric constant
+\[
+\xi = \frac{4}{3} \times 10^{-4}.
+\]
+
+\begin{keyresult}[Central Theorem of T0-Theory]
+All physical constants -- gravitational constant $G$, Planck constant $\hbar$, speed of light $c$, elementary charge $e$ as well as all particle masses and coupling constants -- can be mathematically derived from the universal geometric constant $\xi$.
+
+From $\xi$ follows the fine structure constant:
+\[
+\alpha = f_\alpha(\xi) \approx \frac{1}{137.035999084}
+\]
+\end{keyresult}
+
+This collection of over 200 scientific documents systematically develops a complete physical theory that unifies quantum mechanics, relativity and cosmology -- based on the principle of absolute time $T_0$ and the intrinsic time-field-mass relationship.
+
+\vspace{1em}
+\begin{center}
+\textit{``Nature uses only the longest threads to weave her patterns, so that each small piece of her fabric reveals the organization of the entire tapestry.''} -- Richard Feynman
+\end{center}
+
+% TABLE OF CONTENTS with blue frame
+\clearpage
+\begin{tcolorbox}[colback=tocblue!5,colframe=tocblue,title={\Large\textbf{Table of Contents}},breakable]
+\makeatletter
+\@starttoc{toc}
+\makeatother
+\end{tcolorbox}
 
 \mainmatter
 
-"""
+'''
+
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: python3 build_complete_book.py [De|En]")
+        sys.exit(1)
     
-    # Add chapters
+    lang = sys.argv[1]
+    
+    if lang == "De":
+        chapters = CHAPTERS_DE
+        header = write_book_header_de()
+        output_file = "T0_Complete_Book_Full_De.tex"
+    elif lang == "En":
+        chapters = CHAPTERS_EN
+        header = write_book_header_en()
+        output_file = "T0_Complete_Book_Full_En.tex"
+    else:
+        print(f"Unknown language: {lang}")
+        sys.exit(1)
+    
+    # Start building the book
+    book_content = header
+    
     chapter_num = 0
     for chapter_path in chapters:
-        if os.path.exists(chapter_path):
-            chapter_num += 1
-            title = get_chapter_title(chapter_path)
-            body = extract_body_content(chapter_path)
-            
-            if body:
-                book_content += f"\n\\chapter{{{title}}}\n\\label{{ch:{chapter_num}}}\n\n"
-                book_content += body + "\n\n\\clearpage\n"
-                print(f"  Added chapter {chapter_num}: {title}")
-            else:
-                print(f"  Skipped (no body): {chapter_path}")
+        if not os.path.exists(chapter_path):
+            print(f"  Skipping (not found): {chapter_path}")
+            continue
+        
+        chapter_num += 1
+        title = get_chapter_title(chapter_path)
+        body = extract_body_content(chapter_path, chapter_num)
+        
+        if body:
+            # Add chapter with title
+            book_content += f"\n\\chapter{{{title}}}\n"
+            book_content += f"\\label{{ch:{chapter_num}}}\n\n"
+            book_content += body
+            book_content += "\n\\clearpage\n"
+            print(f"  Added chapter {chapter_num}: {title[:80]}...")
         else:
-            print(f"  Not found: {chapter_path}")
+            print(f"  Warning: Could not extract content from {chapter_path}")
     
-    # Book footer
-    book_content += r"""
-\backmatter
-
-\end{document}
-"""
+    # End document
+    book_content += "\n\\end{document}\n"
     
-    # Write book file
-    output_file = f"T0_Complete_Book_Full_{lang}.tex"
+    # Write output
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(book_content)
     
     print(f"\nBook written to: {output_file}")
     print(f"Total chapters: {chapter_num}")
-    return output_file
 
 if __name__ == "__main__":
-    lang = sys.argv[1] if len(sys.argv) > 1 else 'De'
-    build_book(lang)
+    main()
