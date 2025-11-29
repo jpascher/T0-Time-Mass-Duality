@@ -258,11 +258,31 @@ def write_book_header_de():
 \newtcolorbox{experimental}[1][Experimentell]{colback=green!5,colframe=green!75!black,title=#1,breakable}
 
 \geometry{margin=2.5cm}
+
+% Unified chapter and header formatting
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{-30pt}{40pt}
+
+% Fixed header/footer with short marks
 \pagestyle{fancy}
-\fancyhead{}
+\fancyhf{}
 \fancyhead[LE,RO]{\thepage}
 \fancyhead[RE]{\nouppercase{\leftmark}}
 \fancyhead[LO]{\nouppercase{\rightmark}}
+\fancyfoot[C]{\small T0-Theorie -- Johann Pascher}
+
+% Prevent header conflicts on chapter pages
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+% Limit header text length
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
 
 \title{\Huge\textbf{T0-Theorie}\\[0.5cm]\Large Zeit-Masse-Dualität\\[0.3cm]\normalsize Alle Naturkonstanten aus einer Zahl}
 \author{Johann Pascher}
@@ -397,11 +417,31 @@ def write_book_header_en():
 \newtcolorbox{experimental}[1][Experimental]{colback=green!5,colframe=green!75!black,title=#1,breakable}
 
 \geometry{margin=2.5cm}
+
+% Unified chapter and header formatting
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{-30pt}{40pt}
+
+% Fixed header/footer with short marks
 \pagestyle{fancy}
-\fancyhead{}
+\fancyhf{}
 \fancyhead[LE,RO]{\thepage}
 \fancyhead[RE]{\nouppercase{\leftmark}}
 \fancyhead[LO]{\nouppercase{\rightmark}}
+\fancyfoot[C]{\small T0-Theory -- Johann Pascher}
+
+% Prevent header conflicts on chapter pages
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+% Limit header text length
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
 
 \title{\Huge\textbf{T0-Theory}\\[0.5cm]\Large Time-Mass Duality\\[0.3cm]\normalsize All Natural Constants from One Number}
 \author{Johann Pascher}
