@@ -27,8 +27,9 @@ def extract_body_content(filepath, chapter_num=0):
             # Remove tableofcontents from chapters (only main TOC should exist)
             body = re.sub(r'\\tableofcontents\s*', '', body)
             
-            # DO NOT prefix labels/refs - keep original references working within documents
+            # DO NOT modify labels - bibliography interlinks must remain functional
             # The "multiply defined labels" warning is acceptable for a book compilation
+            # as long as the internal references within each chapter work correctly
             
             return body
         return None
