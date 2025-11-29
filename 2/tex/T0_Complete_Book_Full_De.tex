@@ -20,6 +20,8 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,shapes.geometric,decorations.pathmorphing,patterns,shapes.arrows}
 \usepackage{url}
+\usepackage{truncate}
+\usepackage{calc}
 
 \setlength{\headheight}{14pt}
 
@@ -30,13 +32,27 @@
 \exhyphenpenalty=50
 \sloppy
 
-% Suppress hyperref warnings in PDF strings
+% Suppress hyperref warnings in PDF strings - include Greek letters
 \pdfstringdefDisableCommands{%
   \def\\{ }%
   \def\texttt#1{#1}%
   \def\textsf#1{#1}%
   \def\textbf#1{#1}%
   \def\textit#1{#1}%
+  \def\xi{xi}%
+  \def\alpha{alpha}%
+  \def\beta{beta}%
+  \def\gamma{gamma}%
+  \def\kappa{kappa}%
+  \def\lambda{lambda}%
+  \def\mu{mu}%
+  \def\nu{nu}%
+  \def\pi{pi}%
+  \def\sigma{sigma}%
+  \def\tau{tau}%
+  \def\phi{phi}%
+  \def\psi{psi}%
+  \def\omega{omega}%
 }
 
 % T0 specific commands
@@ -92,19 +108,32 @@
 
 \geometry{margin=2.5cm}
 
-% Unified chapter and header formatting
+% Unified chapter and header formatting - HALF SIZE titles
 \usepackage{titlesec}
 \titleformat{\chapter}[display]
-  {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
-\titlespacing*{\chapter}{0pt}{-30pt}{40pt}
+  {\normalfont\Large\bfseries}{\chaptertitlename\ \thechapter}{10pt}{\large}
+\titlespacing*{\chapter}{0pt}{-20pt}{20pt}
 
-% Fixed header/footer with short marks
+% Section titles also smaller
+\titleformat{\section}{\normalfont\normalsize\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\small\bfseries}{\thesubsection}{1em}{}
+
+% Fixed header/footer with short marks - LIMITED TO 40 CHARS
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\nouppercase{\leftmark}}
-\fancyhead[LO]{\nouppercase{\rightmark}}
-\fancyfoot[C]{\small T0-Theorie -- Johann Pascher}
+\fancyhead[RE]{\footnotesize\nouppercase{\truncmark{\leftmark}{40}}}
+\fancyhead[LO]{\footnotesize\nouppercase{\truncmark{\rightmark}{40}}}
+\fancyfoot[C]{\footnotesize T0-Theorie -- J. Pascher}
+
+% Command to truncate text to N characters
+\newcommand{\truncmark}[2]{%
+  \ifdim\dimexpr\widthof{#1}\relax>40em
+    \truncate{40em}{#1}%
+  \else
+    #1%
+  \fi
+}
 
 % Prevent header conflicts on chapter pages
 \fancypagestyle{plain}{%
@@ -113,11 +142,15 @@
   \renewcommand{\headrulewidth}{0pt}%
 }
 
-% Limit header text length
-\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+% Limit header text length to ~40 chars
+\renewcommand{\chaptermark}[1]{%
+  \markboth{\thechapter.\ \truncate{35em}{#1}}{}%
+}
+\renewcommand{\sectionmark}[1]{%
+  \markright{\thesection.\ \truncate{30em}{#1}}%
+}
 
-\title{\Huge\textbf{T0-Theorie}\\[0.5cm]\Large Zeit-Masse-Dualität\\[0.3cm]\normalsize Alle Naturkonstanten aus einer Zahl}
+\title{\Large\textbf{T0-Theorie}\\[0.3cm]\normalsize Zeit-Masse-Dualität\\[0.2cm]\small Alle Naturkonstanten aus einer Zahl}
 \author{Johann Pascher}
 \date{2024}
 
