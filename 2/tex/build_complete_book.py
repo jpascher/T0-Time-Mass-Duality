@@ -257,6 +257,9 @@ def write_book_header_de():
 \newtcolorbox{technical}[1][Technisch]{colback=gray!5,colframe=gray!75!black,title=#1,breakable}
 \newtcolorbox{proof_step}[1][Beweisschritt]{colback=yellow!5,colframe=yellow!75!black,title=#1,breakable}
 \newtcolorbox{experimental}[1][Experimentell]{colback=green!5,colframe=green!75!black,title=#1,breakable}
+\newtcolorbox{achievement}[1][Errungenschaft]{colback=green!5,colframe=green!75!black,title=#1,breakable}
+\newtcolorbox{overview}[1][Übersicht]{colback=blue!5,colframe=blue!75!black,title=#1,breakable}
+\renewenvironment{abstract}{\begin{tcolorbox}[colback=gray!5,colframe=gray!75!black,title=Abstrakt,breakable]}{\end{tcolorbox}}
 
 \geometry{margin=2.5cm}
 
@@ -416,6 +419,9 @@ def write_book_header_en():
 \newtcolorbox{technical}[1][Technical]{colback=gray!5,colframe=gray!75!black,title=#1,breakable}
 \newtcolorbox{proof_step}[1][Proof Step]{colback=yellow!5,colframe=yellow!75!black,title=#1,breakable}
 \newtcolorbox{experimental}[1][Experimental]{colback=green!5,colframe=green!75!black,title=#1,breakable}
+\newtcolorbox{achievement}[1][Achievement]{colback=green!5,colframe=green!75!black,title=#1,breakable}
+\newtcolorbox{overview}[1][Overview]{colback=blue!5,colframe=blue!75!black,title=#1,breakable}
+\renewenvironment{abstract}{\begin{tcolorbox}[colback=gray!5,colframe=gray!75!black,title=Abstract,breakable]}{\end{tcolorbox}}
 
 \geometry{margin=2.5cm}
 
