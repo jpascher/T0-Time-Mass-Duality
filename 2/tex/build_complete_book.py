@@ -27,8 +27,9 @@ def extract_body_content(filepath, chapter_num=0):
             # Remove tableofcontents from chapters (only main TOC should exist)
             body = re.sub(r'\\tableofcontents\s*', '', body)
             
-            # DO NOT prefix labels/refs - keep original references working within documents
+            # DO NOT modify labels - bibliography interlinks must remain functional
             # The "multiply defined labels" warning is acceptable for a book compilation
+            # as long as the internal references within each chapter work correctly
             
             return body
         return None
@@ -190,8 +191,8 @@ def write_book_header_de():
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,shapes.geometric,decorations.pathmorphing,patterns,shapes.arrows}
 \usepackage{url}
-\usepackage{siunitx}
-\usepackage{adjustbox}
+\usepackage{truncate}
+\usepackage{calc}
 
 \setlength{\headheight}{14pt}
 
@@ -202,13 +203,27 @@ def write_book_header_de():
 \exhyphenpenalty=50
 \sloppy
 
-% Suppress hyperref warnings in PDF strings
+% Suppress hyperref warnings in PDF strings - include Greek letters
 \pdfstringdefDisableCommands{%
   \def\\{ }%
   \def\texttt#1{#1}%
   \def\textsf#1{#1}%
   \def\textbf#1{#1}%
   \def\textit#1{#1}%
+  \def\xi{xi}%
+  \def\alpha{alpha}%
+  \def\beta{beta}%
+  \def\gamma{gamma}%
+  \def\kappa{kappa}%
+  \def\lambda{lambda}%
+  \def\mu{mu}%
+  \def\nu{nu}%
+  \def\pi{pi}%
+  \def\sigma{sigma}%
+  \def\tau{tau}%
+  \def\phi{phi}%
+  \def\psi{psi}%
+  \def\omega{omega}%
 }
 
 % T0 specific commands
@@ -224,55 +239,6 @@ def write_book_header_de():
 \providecommand{\Ep}{E_P}
 \providecommand{\hbar}{\hslash}
 \providecommand{\kB}{k_B}
-\providecommand{\Dfrak}{D_f}
-\providecommand{\Kfrak}{K_f}
-\providecommand{\Efield}{E}
-\providecommand{\xiT}{\xi_T}
-\providecommand{\Lorentz}{\mathcal{L}}
-\providecommand{\Weyl}{W}
-\providecommand{\Tfieldt}{T}
-\providecommand{\lP}{l_P}
-\providecommand{\xigeom}{\xi_{\text{geom}}}
-\providecommand{\mytimes}{\times}
-\providecommand{\myrightarrow}{\rightarrow}
-\providecommand{\Ezero}{E_0}
-\providecommand{\deltam}{\delta m}
-\providecommand{\Lzero}{L_0}
-\providecommand{\primrel}{\sim}
-\providecommand{\Lag}{\mathcal{L}}
-\providecommand{\rzero}{r_0}
-\providecommand{\Exi}{E_\xi}
-\providecommand{\deltafield}{\delta}
-\providecommand{\xiconst}{\xi}
-\providecommand{\rowcolor}[1]{}
-\providecommand{\Cconv}{C}
-\providecommand{\vect}[1]{\vec{#1}}
-\providecommand{\alphaem}{\alpha_{\text{em}}}
-\providecommand{\Phiphoton}{\Phi}
-\providecommand{\Lxi}{L_\xi}
-\providecommand{\Evis}{E_{\text{vis}}}
-\providecommand{\Echar}{E_{\text{char}}}
-\providecommand{\xirat}{\xi_{\text{rat}}}
-\providecommand{\xikonst}{\xi}
-\providecommand{\tzero}{t_0}
-\providecommand{\rhoE}{\rho_E}
-\providecommand{\mysim}{\sim}
-\providecommand{\etavis}{\eta_{\text{vis}}}
-\providecommand{\checked}{\checkmark}
-\providecommand{\alphaEMnat}{\alpha_{\text{EM,nat}}}
-\providecommand{\Lambdat}{\Lambda_t}
-\providecommand{\Hubble}{H}
-\providecommand{\EP}{E_P}
-\providecommand{\tP}{t_P}
-\providecommand{\slashed}[1]{\not{#1}}
-\providecommand{\phiT}{\phi_T}
-\providecommand{\natunits}{}
-\providecommand{\lambdah}{\lambda_h}
-\providecommand{\kfrac}{k}
-\providecommand{\betaTSI}{\beta_{T,\text{SI}}}
-\providecommand{\alphaEMSI}{\alpha_{\text{EM,SI}}}
-\providecommand{\Leff}{L_{\text{eff}}}
-\providecommand{\Kspec}{K}
 
 % Colors
 \definecolor{theoremcolor}{RGB}{0,100,150}
@@ -281,9 +247,6 @@ def write_book_header_de():
 \definecolor{boxgray}{RGB}{240,240,240}
 \definecolor{gold}{RGB}{255,215,0}
 \definecolor{tocblue}{RGB}{0,51,102}
-\definecolor{t0green}{RGB}{0,128,0}
-\definecolor{t0red}{RGB}{204,0,0}
-\definecolor{t0yellow}{RGB}{255,204,0}
 
 % Theorem environments
 \theoremstyle{plain}
@@ -310,40 +273,38 @@ def write_book_header_de():
 \newtcolorbox{technical}[1][Technisch]{colback=gray!5,colframe=gray!75!black,title=#1,breakable}
 \newtcolorbox{proof_step}[1][Beweisschritt]{colback=yellow!5,colframe=yellow!75!black,title=#1,breakable}
 \newtcolorbox{experimental}[1][Experimentell]{colback=green!5,colframe=green!75!black,title=#1,breakable}
-\newtcolorbox{warning}[1][Warnung]{colback=red!5,colframe=red!75!black,title=#1,breakable}
 \newtcolorbox{achievement}[1][Errungenschaft]{colback=green!5,colframe=green!75!black,title=#1,breakable}
 \newtcolorbox{overview}[1][Übersicht]{colback=blue!5,colframe=blue!75!black,title=#1,breakable}
-\newtcolorbox{gemeinsam}[1][Gemeinsam]{colback=purple!5,colframe=purple!75!black,title=#1,breakable}
-\newtcolorbox{vergleich}[1][Vergleich]{colback=orange!5,colframe=orange!75!black,title=#1,breakable}
-\newtcolorbox{vorteil}[1][Vorteil]{colback=green!5,colframe=green!75!black,title=#1,breakable}
-\newtcolorbox{nachteil}[1][Nachteil]{colback=red!5,colframe=red!75!black,title=#1,breakable}
-\newtcolorbox{formula}[1][Formel]{colback=blue!5,colframe=blue!75!black,title=#1,breakable}
-\newtcolorbox{revolutionary}[1][Revolution]{colback=red!5,colframe=red!75!black,title=#1,breakable}
-\newtcolorbox{derivation}[1][Herleitung]{colback=yellow!5,colframe=yellow!75!black,title=#1,breakable}
-\newtcolorbox{result}[1][Ergebnis]{colback=green!5,colframe=green!75!black,title=#1,breakable}
-\newtcolorbox{experiment}[1][Experiment]{colback=cyan!5,colframe=cyan!75!black,title=#1,breakable}
-\newtcolorbox{verification}[1][Verifikation]{colback=gray!5,colframe=gray!75!black,title=#1,breakable}
-\newtcolorbox{formel}[1][Formel]{colback=blue!5,colframe=blue!75!black,title=#1,breakable}
-\newtcolorbox{erkenntnis}[1][Erkenntnis]{colback=yellow!5,colframe=yellow!75!black,title=#1,breakable}
-\newtcolorbox{documentbox}[1][Dokument]{colback=gray!5,colframe=gray!75!black,title=#1,breakable}
-\newenvironment{abstract}{\begin{tcolorbox}[colback=gray!5,colframe=gray!75!black,title=Abstrakt,breakable]}{\end{tcolorbox}}
-%REMOVED_EXPERIMENTAL_DE{colback=green!5,colframe=green!75!black,title=#1,breakable}
+\renewenvironment{abstract}{\begin{tcolorbox}[colback=gray!5,colframe=gray!75!black,title=Abstrakt,breakable]}{\end{tcolorbox}}
 
 \geometry{margin=2.5cm}
 
-% Unified chapter and header formatting
+% Unified chapter and header formatting - HALF SIZE titles
 \usepackage{titlesec}
 \titleformat{\chapter}[display]
-  {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
-\titlespacing*{\chapter}{0pt}{-30pt}{40pt}
+  {\normalfont\Large\bfseries}{\chaptertitlename\ \thechapter}{10pt}{\large}
+\titlespacing*{\chapter}{0pt}{-20pt}{20pt}
 
-% Fixed header/footer with short marks
+% Section titles also smaller
+\titleformat{\section}{\normalfont\normalsize\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\small\bfseries}{\thesubsection}{1em}{}
+
+% Fixed header/footer with short marks - LIMITED TO 40 CHARS
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\nouppercase{\leftmark}}
-\fancyhead[LO]{\nouppercase{\rightmark}}
-\fancyfoot[C]{\small T0-Theorie -- Johann Pascher}
+\fancyhead[RE]{\footnotesize\nouppercase{\truncmark{\leftmark}{40}}}
+\fancyhead[LO]{\footnotesize\nouppercase{\truncmark{\rightmark}{40}}}
+\fancyfoot[C]{\footnotesize T0-Theorie -- J. Pascher}
+
+% Command to truncate text to N characters
+\newcommand{\truncmark}[2]{%
+  \ifdim\dimexpr\widthof{#1}\relax>40em
+    \truncate{40em}{#1}%
+  \else
+    #1%
+  \fi
+}
 
 % Prevent header conflicts on chapter pages
 \fancypagestyle{plain}{%
@@ -352,11 +313,15 @@ def write_book_header_de():
   \renewcommand{\headrulewidth}{0pt}%
 }
 
-% Limit header text length
-\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+% Limit header text length to ~40 chars
+\renewcommand{\chaptermark}[1]{%
+  \markboth{\thechapter.\ \truncate{35em}{#1}}{}%
+}
+\renewcommand{\sectionmark}[1]{%
+  \markright{\thesection.\ \truncate{30em}{#1}}%
+}
 
-\title{\Huge\textbf{T0-Theorie}\\[0.5cm]\Large Zeit-Masse-Dualität\\[0.3cm]\normalsize Alle Naturkonstanten aus einer Zahl}
+\title{\Large\textbf{T0-Theorie}\\[0.3cm]\normalsize Zeit-Masse-Dualität\\[0.2cm]\small Alle Naturkonstanten aus einer Zahl}
 \author{Johann Pascher}
 \date{2024}
 
@@ -428,18 +393,32 @@ def write_book_header_en():
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,shapes.geometric,decorations.pathmorphing,patterns,shapes.arrows}
 \usepackage{url}
-\usepackage{siunitx}
-\usepackage{adjustbox}
+\usepackage{truncate}
+\usepackage{calc}
 
 \setlength{\headheight}{14pt}
 
-% Suppress hyperref warnings in PDF strings
+% Suppress hyperref warnings in PDF strings - include Greek letters
 \pdfstringdefDisableCommands{%
   \def\\{ }%
   \def\texttt#1{#1}%
   \def\textsf#1{#1}%
   \def\textbf#1{#1}%
   \def\textit#1{#1}%
+  \def\xi{xi}%
+  \def\alpha{alpha}%
+  \def\beta{beta}%
+  \def\gamma{gamma}%
+  \def\kappa{kappa}%
+  \def\lambda{lambda}%
+  \def\mu{mu}%
+  \def\nu{nu}%
+  \def\pi{pi}%
+  \def\sigma{sigma}%
+  \def\tau{tau}%
+  \def\phi{phi}%
+  \def\psi{psi}%
+  \def\omega{omega}%
 }
 
 % T0 specific commands
@@ -455,55 +434,6 @@ def write_book_header_en():
 \providecommand{\Ep}{E_P}
 \providecommand{\hbar}{\hslash}
 \providecommand{\kB}{k_B}
-\providecommand{\Dfrak}{D_f}
-\providecommand{\Kfrak}{K_f}
-\providecommand{\Efield}{E}
-\providecommand{\xiT}{\xi_T}
-\providecommand{\Lorentz}{\mathcal{L}}
-\providecommand{\Weyl}{W}
-\providecommand{\Tfieldt}{T}
-\providecommand{\lP}{l_P}
-\providecommand{\xigeom}{\xi_{\text{geom}}}
-\providecommand{\mytimes}{\times}
-\providecommand{\myrightarrow}{\rightarrow}
-\providecommand{\Ezero}{E_0}
-\providecommand{\deltam}{\delta m}
-\providecommand{\Lzero}{L_0}
-\providecommand{\primrel}{\sim}
-\providecommand{\Lag}{\mathcal{L}}
-\providecommand{\rzero}{r_0}
-\providecommand{\Exi}{E_\xi}
-\providecommand{\deltafield}{\delta}
-\providecommand{\xiconst}{\xi}
-\providecommand{\rowcolor}[1]{}
-\providecommand{\Cconv}{C}
-\providecommand{\vect}[1]{\vec{#1}}
-\providecommand{\alphaem}{\alpha_{\text{em}}}
-\providecommand{\Phiphoton}{\Phi}
-\providecommand{\Lxi}{L_\xi}
-\providecommand{\Evis}{E_{\text{vis}}}
-\providecommand{\Echar}{E_{\text{char}}}
-\providecommand{\xirat}{\xi_{\text{rat}}}
-\providecommand{\xikonst}{\xi}
-\providecommand{\tzero}{t_0}
-\providecommand{\rhoE}{\rho_E}
-\providecommand{\mysim}{\sim}
-\providecommand{\etavis}{\eta_{\text{vis}}}
-\providecommand{\checked}{\checkmark}
-\providecommand{\alphaEMnat}{\alpha_{\text{EM,nat}}}
-\providecommand{\Lambdat}{\Lambda_t}
-\providecommand{\Hubble}{H}
-\providecommand{\EP}{E_P}
-\providecommand{\tP}{t_P}
-\providecommand{\slashed}[1]{\not{#1}}
-\providecommand{\phiT}{\phi_T}
-\providecommand{\natunits}{}
-\providecommand{\lambdah}{\lambda_h}
-\providecommand{\kfrac}{k}
-\providecommand{\betaTSI}{\beta_{T,\text{SI}}}
-\providecommand{\alphaEMSI}{\alpha_{\text{EM,SI}}}
-\providecommand{\Leff}{L_{\text{eff}}}
-\providecommand{\Kspec}{K}
 
 % Colors
 \definecolor{theoremcolor}{RGB}{0,100,150}
@@ -512,9 +442,6 @@ def write_book_header_en():
 \definecolor{boxgray}{RGB}{240,240,240}
 \definecolor{gold}{RGB}{255,215,0}
 \definecolor{tocblue}{RGB}{0,51,102}
-\definecolor{t0green}{RGB}{0,128,0}
-\definecolor{t0red}{RGB}{204,0,0}
-\definecolor{t0yellow}{RGB}{255,204,0}
 
 % Theorem environments
 \theoremstyle{plain}
@@ -541,40 +468,38 @@ def write_book_header_en():
 \newtcolorbox{technical}[1][Technical]{colback=gray!5,colframe=gray!75!black,title=#1,breakable}
 \newtcolorbox{proof_step}[1][Proof Step]{colback=yellow!5,colframe=yellow!75!black,title=#1,breakable}
 \newtcolorbox{experimental}[1][Experimental]{colback=green!5,colframe=green!75!black,title=#1,breakable}
-\newtcolorbox{warning}[1][Warning]{colback=red!5,colframe=red!75!black,title=#1,breakable}
 \newtcolorbox{achievement}[1][Achievement]{colback=green!5,colframe=green!75!black,title=#1,breakable}
 \newtcolorbox{overview}[1][Overview]{colback=blue!5,colframe=blue!75!black,title=#1,breakable}
-\newtcolorbox{gemeinsam}[1][Common]{colback=purple!5,colframe=purple!75!black,title=#1,breakable}
-\newtcolorbox{vergleich}[1][Comparison]{colback=orange!5,colframe=orange!75!black,title=#1,breakable}
-\newtcolorbox{vorteil}[1][Advantage]{colback=green!5,colframe=green!75!black,title=#1,breakable}
-\newtcolorbox{nachteil}[1][Disadvantage]{colback=red!5,colframe=red!75!black,title=#1,breakable}
-\newtcolorbox{formula}[1][Formula]{colback=blue!5,colframe=blue!75!black,title=#1,breakable}
-\newtcolorbox{revolutionary}[1][Revolutionary]{colback=red!5,colframe=red!75!black,title=#1,breakable}
-\newtcolorbox{derivation}[1][Derivation]{colback=yellow!5,colframe=yellow!75!black,title=#1,breakable}
-\newtcolorbox{result}[1][Result]{colback=green!5,colframe=green!75!black,title=#1,breakable}
-\newtcolorbox{experiment}[1][Experiment]{colback=cyan!5,colframe=cyan!75!black,title=#1,breakable}
-\newtcolorbox{verification}[1][Verification]{colback=gray!5,colframe=gray!75!black,title=#1,breakable}
-\newtcolorbox{formel}[1][Formula]{colback=blue!5,colframe=blue!75!black,title=#1,breakable}
-\newtcolorbox{erkenntnis}[1][Insight]{colback=yellow!5,colframe=yellow!75!black,title=#1,breakable}
-\newtcolorbox{documentbox}[1][Document]{colback=gray!5,colframe=gray!75!black,title=#1,breakable}
-\newenvironment{abstract}{\begin{tcolorbox}[colback=gray!5,colframe=gray!75!black,title=Abstract,breakable]}{\end{tcolorbox}}
-%REMOVED_EXPERIMENTAL_EN{colback=green!5,colframe=green!75!black,title=#1,breakable}
+\renewenvironment{abstract}{\begin{tcolorbox}[colback=gray!5,colframe=gray!75!black,title=Abstract,breakable]}{\end{tcolorbox}}
 
 \geometry{margin=2.5cm}
 
-% Unified chapter and header formatting
+% Unified chapter and header formatting - HALF SIZE titles
 \usepackage{titlesec}
 \titleformat{\chapter}[display]
-  {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
-\titlespacing*{\chapter}{0pt}{-30pt}{40pt}
+  {\normalfont\Large\bfseries}{\chaptertitlename\ \thechapter}{10pt}{\large}
+\titlespacing*{\chapter}{0pt}{-20pt}{20pt}
 
-% Fixed header/footer with short marks
+% Section titles also smaller
+\titleformat{\section}{\normalfont\normalsize\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\small\bfseries}{\thesubsection}{1em}{}
+
+% Fixed header/footer with short marks - LIMITED TO 40 CHARS
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\nouppercase{\leftmark}}
-\fancyhead[LO]{\nouppercase{\rightmark}}
-\fancyfoot[C]{\small T0-Theory -- Johann Pascher}
+\fancyhead[RE]{\footnotesize\nouppercase{\truncmark{\leftmark}{40}}}
+\fancyhead[LO]{\footnotesize\nouppercase{\truncmark{\rightmark}{40}}}
+\fancyfoot[C]{\footnotesize T0-Theory -- J. Pascher}
+
+% Command to truncate text to N characters
+\newcommand{\truncmark}[2]{%
+  \ifdim\dimexpr\widthof{#1}\relax>40em
+    \truncate{40em}{#1}%
+  \else
+    #1%
+  \fi
+}
 
 % Prevent header conflicts on chapter pages
 \fancypagestyle{plain}{%
@@ -583,11 +508,15 @@ def write_book_header_en():
   \renewcommand{\headrulewidth}{0pt}%
 }
 
-% Limit header text length
-\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+% Limit header text length to ~40 chars
+\renewcommand{\chaptermark}[1]{%
+  \markboth{\thechapter.\ \truncate{35em}{#1}}{}%
+}
+\renewcommand{\sectionmark}[1]{%
+  \markright{\thesection.\ \truncate{30em}{#1}}%
+}
 
-\title{\Huge\textbf{T0-Theory}\\[0.5cm]\Large Time-Mass Duality\\[0.3cm]\normalsize All Natural Constants from One Number}
+\title{\Large\textbf{T0-Theory}\\[0.3cm]\normalsize Time-Mass Duality\\[0.2cm]\small All Natural Constants from One Number}
 \author{Johann Pascher}
 \date{2024}
 
