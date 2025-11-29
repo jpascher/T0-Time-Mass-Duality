@@ -8,7 +8,14 @@ import re
 import sys
 
 def extract_body_content(filepath, chapter_num=0):
-    """Extract content between \\begin{document} and \\end{document}."""
+    """Extract content between \\begin{document} and \\end{document}.
+    
+    IMPORTANT: Preserves all formatting including:
+    - resizebox, adjustbox, scalebox commands
+    - lstlisting and verbatim environments for code
+    - Tables with their full formatting
+    - All LaTeX spacing commands
+    """
     try:
         with open(filepath, 'r', encoding='utf-8', errors='replace') as f:
             content = f.read()
@@ -30,6 +37,14 @@ def extract_body_content(filepath, chapter_num=0):
             # DO NOT modify labels - bibliography interlinks must remain functional
             # The "multiply defined labels" warning is acceptable for a book compilation
             # as long as the internal references within each chapter work correctly
+            
+            # DO NOT remove any formatting commands like:
+            # - \resizebox
+            # - \adjustbox
+            # - \scalebox
+            # - \lstlisting
+            # - \verbatim
+            # - Table formatting
             
             return body
         return None
@@ -183,6 +198,9 @@ def write_book_header_de():
 \usepackage{xcolor}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{adjustbox}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\small,breaklines=true,breakatwhitespace=true}
 \usepackage{array}
 \usepackage{multirow}
 \usepackage{caption}
@@ -275,36 +293,27 @@ def write_book_header_de():
 \newtcolorbox{experimental}[1][Experimentell]{colback=green!5,colframe=green!75!black,title=#1,breakable}
 \newtcolorbox{achievement}[1][Errungenschaft]{colback=green!5,colframe=green!75!black,title=#1,breakable}
 \newtcolorbox{overview}[1][Übersicht]{colback=blue!5,colframe=blue!75!black,title=#1,breakable}
-\renewenvironment{abstract}{\begin{tcolorbox}[colback=gray!5,colframe=gray!75!black,title=Abstrakt,breakable]}{\end{tcolorbox}}
+\newenvironment{abstract}{\begin{tcolorbox}[colback=gray!5,colframe=gray!75!black,title=Abstrakt,breakable]}{\end{tcolorbox}}
 
 \geometry{margin=2.5cm}
 
-% Unified chapter and header formatting - HALF SIZE titles
+% Unified chapter and header formatting - slightly larger
 \usepackage{titlesec}
 \titleformat{\chapter}[display]
-  {\normalfont\Large\bfseries}{\chaptertitlename\ \thechapter}{10pt}{\large}
+  {\normalfont\LARGE\bfseries}{\chaptertitlename\ \thechapter}{10pt}{\Large}
 \titlespacing*{\chapter}{0pt}{-20pt}{20pt}
 
-% Section titles also smaller
-\titleformat{\section}{\normalfont\normalsize\bfseries}{\thesection}{1em}{}
-\titleformat{\subsection}{\normalfont\small\bfseries}{\thesubsection}{1em}{}
+% Section titles
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
 
-% Fixed header/footer with short marks - LIMITED TO 40 CHARS
+% Fixed header/footer - SIMPLE AND SHORT (max 20 chars)
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\footnotesize\nouppercase{\truncmark{\leftmark}{40}}}
-\fancyhead[LO]{\footnotesize\nouppercase{\truncmark{\rightmark}{40}}}
-\fancyfoot[C]{\footnotesize T0-Theorie -- J. Pascher}
-
-% Command to truncate text to N characters
-\newcommand{\truncmark}[2]{%
-  \ifdim\dimexpr\widthof{#1}\relax>40em
-    \truncate{40em}{#1}%
-  \else
-    #1%
-  \fi
-}
+\fancyhead[RE]{\scriptsize\nouppercase{\leftmark}}
+\fancyhead[LO]{\scriptsize\nouppercase{\rightmark}}
+\fancyfoot[C]{\scriptsize T0-Theorie}
 
 % Prevent header conflicts on chapter pages
 \fancypagestyle{plain}{%
@@ -313,12 +322,14 @@ def write_book_header_de():
   \renewcommand{\headrulewidth}{0pt}%
 }
 
-% Limit header text length to ~40 chars
+% Short chapter and section marks (max 20 chars)
 \renewcommand{\chaptermark}[1]{%
-  \markboth{\thechapter.\ \truncate{35em}{#1}}{}%
+  \def\tmpmark{#1}%
+  \markboth{\thechapter.\ \ifnum\pdfstrcmp{\tmpmark}{}=0 \else\truncate{10em}{\tmpmark}\fi}{}%
 }
 \renewcommand{\sectionmark}[1]{%
-  \markright{\thesection.\ \truncate{30em}{#1}}%
+  \def\tmpmark{#1}%
+  \markright{\thesection.\ \ifnum\pdfstrcmp{\tmpmark}{}=0 \else\truncate{8em}{\tmpmark}\fi}%
 }
 
 \title{\Large\textbf{T0-Theorie}\\[0.3cm]\normalsize Zeit-Masse-Dualität\\[0.2cm]\small Alle Naturkonstanten aus einer Zahl}
@@ -385,6 +396,9 @@ def write_book_header_en():
 \usepackage{xcolor}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{adjustbox}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\small,breaklines=true,breakatwhitespace=true}
 \usepackage{array}
 \usepackage{multirow}
 \usepackage{caption}
@@ -470,36 +484,27 @@ def write_book_header_en():
 \newtcolorbox{experimental}[1][Experimental]{colback=green!5,colframe=green!75!black,title=#1,breakable}
 \newtcolorbox{achievement}[1][Achievement]{colback=green!5,colframe=green!75!black,title=#1,breakable}
 \newtcolorbox{overview}[1][Overview]{colback=blue!5,colframe=blue!75!black,title=#1,breakable}
-\renewenvironment{abstract}{\begin{tcolorbox}[colback=gray!5,colframe=gray!75!black,title=Abstract,breakable]}{\end{tcolorbox}}
+\newenvironment{abstract}{\begin{tcolorbox}[colback=gray!5,colframe=gray!75!black,title=Abstract,breakable]}{\end{tcolorbox}}
 
 \geometry{margin=2.5cm}
 
-% Unified chapter and header formatting - HALF SIZE titles
+% Unified chapter and header formatting - slightly larger
 \usepackage{titlesec}
 \titleformat{\chapter}[display]
-  {\normalfont\Large\bfseries}{\chaptertitlename\ \thechapter}{10pt}{\large}
+  {\normalfont\LARGE\bfseries}{\chaptertitlename\ \thechapter}{10pt}{\Large}
 \titlespacing*{\chapter}{0pt}{-20pt}{20pt}
 
-% Section titles also smaller
-\titleformat{\section}{\normalfont\normalsize\bfseries}{\thesection}{1em}{}
-\titleformat{\subsection}{\normalfont\small\bfseries}{\thesubsection}{1em}{}
+% Section titles
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
 
-% Fixed header/footer with short marks - LIMITED TO 40 CHARS
+% Fixed header/footer - SIMPLE AND SHORT (max 20 chars)
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\footnotesize\nouppercase{\truncmark{\leftmark}{40}}}
-\fancyhead[LO]{\footnotesize\nouppercase{\truncmark{\rightmark}{40}}}
-\fancyfoot[C]{\footnotesize T0-Theory -- J. Pascher}
-
-% Command to truncate text to N characters
-\newcommand{\truncmark}[2]{%
-  \ifdim\dimexpr\widthof{#1}\relax>40em
-    \truncate{40em}{#1}%
-  \else
-    #1%
-  \fi
-}
+\fancyhead[RE]{\scriptsize\nouppercase{\leftmark}}
+\fancyhead[LO]{\scriptsize\nouppercase{\rightmark}}
+\fancyfoot[C]{\scriptsize T0-Theory}
 
 % Prevent header conflicts on chapter pages
 \fancypagestyle{plain}{%
@@ -508,12 +513,14 @@ def write_book_header_en():
   \renewcommand{\headrulewidth}{0pt}%
 }
 
-% Limit header text length to ~40 chars
+% Short chapter and section marks (max 20 chars)
 \renewcommand{\chaptermark}[1]{%
-  \markboth{\thechapter.\ \truncate{35em}{#1}}{}%
+  \def\tmpmark{#1}%
+  \markboth{\thechapter.\ \ifnum\pdfstrcmp{\tmpmark}{}=0 \else\truncate{10em}{\tmpmark}\fi}{}%
 }
 \renewcommand{\sectionmark}[1]{%
-  \markright{\thesection.\ \truncate{30em}{#1}}%
+  \def\tmpmark{#1}%
+  \markright{\thesection.\ \ifnum\pdfstrcmp{\tmpmark}{}=0 \else\truncate{8em}{\tmpmark}\fi}%
 }
 
 \title{\Large\textbf{T0-Theory}\\[0.3cm]\normalsize Time-Mass Duality\\[0.2cm]\small All Natural Constants from One Number}
