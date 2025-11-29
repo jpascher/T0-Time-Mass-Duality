@@ -27,13 +27,8 @@ def extract_body_content(filepath, chapter_num=0):
             # Remove tableofcontents from chapters (only main TOC should exist)
             body = re.sub(r'\\tableofcontents\s*', '', body)
             
-            # Make labels unique by adding chapter prefix to avoid duplicate warnings
-            prefix = f"ch{chapter_num:02d}"
-            body = re.sub(r'\\label\{([^}]+)\}', rf'\\label{{{prefix}:\1}}', body)
-            body = re.sub(r'\\ref\{([^}]+)\}', rf'\\ref{{{prefix}:\1}}', body)
-            body = re.sub(r'\\eqref\{([^}]+)\}', rf'\\eqref{{{prefix}:\1}}', body)
-            body = re.sub(r'\\pageref\{([^}]+)\}', rf'\\pageref{{{prefix}:\1}}', body)
-            body = re.sub(r'\\cite\{([^}]+)\}', rf'\\cite{{{prefix}:\1}}', body)
+            # DO NOT prefix labels/refs - keep original references working within documents
+            # The "multiply defined labels" warning is acceptable for a book compilation
             
             return body
         return None
@@ -70,8 +65,9 @@ def get_chapter_title(filepath):
     except:
         return os.path.basename(filepath)
 
-# German chapters in order
+# German chapters in order - Abstract first
 CHAPTERS_DE = [
+    "completed/T0_Book_Abstract_De.tex",
     "completed/T0_Introduction_De.tex",
     "completed/reise_De.tex",
     "completed/T0_Grundlagen_De.tex",
@@ -195,6 +191,13 @@ def write_book_header_de():
 \usepackage{url}
 
 \setlength{\headheight}{14pt}
+
+% German hyphenation settings for long words
+\tolerance=1000
+\emergencystretch=3em
+\hyphenpenalty=50
+\exhyphenpenalty=50
+\sloppy
 
 % Suppress hyperref warnings in PDF strings
 \pdfstringdefDisableCommands{%
