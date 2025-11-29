@@ -178,7 +178,7 @@ def write_book_header_de():
 \usepackage[ngerman]{babel}
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb,amsthm}
-\usepackage[pdfusetitle,hidelinks]{hyperref}
+\usepackage[pdfusetitle,colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
 \usepackage{geometry}
 \usepackage{fancyhdr}
 \usepackage{tcolorbox}
@@ -299,13 +299,11 @@ Diese Sammlung von über 200 wissenschaftlichen Dokumenten entwickelt systematis
 \textit{``Die Natur verwendet nur die längsten Fäden, um ihre Muster zu weben, sodass jedes kleine Stück ihres Gewebes die Organisation des gesamten Wandteppichs offenbart.''} -- Richard Feynman
 \end{center}
 
-% INHALTSVERZEICHNIS mit blauem Rahmen
+% INHALTSVERZEICHNIS mit blauem Text
 \clearpage
-\begin{tcolorbox}[colback=tocblue!5,colframe=tocblue,title={\Large\textbf{Inhaltsverzeichnis}},breakable]
-\makeatletter
-\@starttoc{toc}
-\makeatother
-\end{tcolorbox}
+{\color{tocblue}
+\tableofcontents
+}
 
 \mainmatter
 
@@ -318,7 +316,7 @@ def write_book_header_en():
 \usepackage[english]{babel}
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb,amsthm}
-\usepackage[pdfusetitle,hidelinks]{hyperref}
+\usepackage[pdfusetitle,colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
 \usepackage{geometry}
 \usepackage{fancyhdr}
 \usepackage{tcolorbox}
@@ -439,13 +437,11 @@ This collection of over 200 scientific documents systematically develops a compl
 \textit{``Nature uses only the longest threads to weave her patterns, so that each small piece of her fabric reveals the organization of the entire tapestry.''} -- Richard Feynman
 \end{center}
 
-% TABLE OF CONTENTS with blue frame
+% TABLE OF CONTENTS with blue text
 \clearpage
-\begin{tcolorbox}[colback=tocblue!5,colframe=tocblue,title={\Large\textbf{Table of Contents}},breakable]
-\makeatletter
-\@starttoc{toc}
-\makeatother
-\end{tcolorbox}
+{\color{tocblue}
+\tableofcontents
+}
 
 \mainmatter
 
