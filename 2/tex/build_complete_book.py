@@ -188,6 +188,7 @@ def write_book_header_de():
 \usepackage{float}
 \usepackage{enumitem}
 \usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,decorations.pathmorphing,patterns,shapes.arrows}
 \usepackage{url}
 
 \setlength{\headheight}{14pt}
@@ -226,7 +227,7 @@ def write_book_header_de():
 \definecolor{theoremcolor}{RGB}{0,100,150}
 \definecolor{definitioncolor}{RGB}{0,100,50}
 \definecolor{t0blue}{RGB}{0,102,204}
-\definecolor{boxgray}{RGB}{128,128,128}
+\definecolor{boxgray}{RGB}{240,240,240}
 \definecolor{gold}{RGB}{255,215,0}
 \definecolor{tocblue}{RGB}{0,51,102}
 
@@ -333,6 +334,7 @@ def write_book_header_en():
 \usepackage{float}
 \usepackage{enumitem}
 \usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,decorations.pathmorphing,patterns,shapes.arrows}
 \usepackage{url}
 
 \setlength{\headheight}{14pt}
@@ -364,7 +366,7 @@ def write_book_header_en():
 \definecolor{theoremcolor}{RGB}{0,100,150}
 \definecolor{definitioncolor}{RGB}{0,100,50}
 \definecolor{t0blue}{RGB}{0,102,204}
-\definecolor{boxgray}{RGB}{128,128,128}
+\definecolor{boxgray}{RGB}{240,240,240}
 \definecolor{gold}{RGB}{255,215,0}
 \definecolor{tocblue}{RGB}{0,51,102}
 
