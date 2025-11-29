@@ -1,36 +1,24 @@
 #!/usr/bin/env python3
 """
-Build complete book by extracting content from standalone documents.
-Preserves abstract sections with proper document titles.
+Build complete book - minimal changes: remove documentclass, begin/end document.
+Uses T0_preamble for all definitions.
 """
 import os
 import re
 import sys
 
-def extract_body_content(filepath, chapter_num=0):
-    """Extract content between \\begin{document} and \\end{document}."""
+def extract_body_content(filepath):
+    """Extract content between \begin{document} and \end{document}."""
     try:
         with open(filepath, 'r', encoding='utf-8', errors='replace') as f:
             content = f.read()
         
-        # Find document body
         match = re.search(r'\\begin\{document\}(.*?)\\end\{document\}', content, re.DOTALL)
         if match:
             body = match.group(1).strip()
-            # Remove \maketitle if present
+            # Remove only maketitle and tableofcontents
             body = re.sub(r'\\maketitle\s*', '', body)
-            # Remove title commands that might break chapter
-            body = re.sub(r'\\title\{[^}]*\}\s*', '', body)
-            body = re.sub(r'\\author\{[^}]*\}\s*', '', body)
-            body = re.sub(r'\\date\{[^}]*\}\s*', '', body)
-            
-            # Remove tableofcontents from chapters (only main TOC should exist)
             body = re.sub(r'\\tableofcontents\s*', '', body)
-            
-            # DO NOT modify labels - bibliography interlinks must remain functional
-            # The "multiply defined labels" warning is acceptable for a book compilation
-            # as long as the internal references within each chapter work correctly
-            
             return body
         return None
     except Exception as e:
@@ -43,30 +31,23 @@ def get_chapter_title(filepath):
         with open(filepath, 'r', encoding='utf-8', errors='replace') as f:
             content = f.read()
         
-        # Try to find title
         match = re.search(r'\\title\{([^}]+)\}', content)
         if match:
             title = match.group(1)
-            # Clean up title - remove LaTeX formatting
             title = re.sub(r'\\\\', ' ', title)
             title = re.sub(r'\\[a-zA-Z]+\{([^}]*)\}', r'\1', title)
             title = re.sub(r'\\[a-zA-Z]+', '', title)
             title = re.sub(r'[{}]', '', title)
             title = re.sub(r'\s+', ' ', title).strip()
-            if len(title) > 100:
-                title = title[:97] + "..."
+            if len(title) > 80:
+                title = title[:77] + "..."
             return title
         
-        # Fallback to filename
         basename = os.path.basename(filepath)
-        name = os.path.splitext(basename)[0]
-        name = name.replace('_De', '').replace('_En', '')
-        name = name.replace('_', ' ').replace('-', ' ')
-        return name
+        return basename.replace('.tex', '').replace('_', ' ')
     except:
-        return os.path.basename(filepath)
+        return os.path.basename(filepath).replace('.tex', '')
 
-# German chapters in order - Abstract first
 CHAPTERS_DE = [
     "completed/T0_Book_Abstract_De.tex",
     "completed/T0_Introduction_De.tex",
@@ -152,11 +133,12 @@ CHAPTERS_DE = [
     "completed/DynMassePhotonenNichtlokalDe.tex",
     "completed/Zeit_De.tex",
     "completed/Zeit-konstant_De.tex",
-    "completed/RSA_De.tex",
-    "completed/RSAtest_De.tex",
     "completed/EliminationOfMassDe.tex",
     "completed/Elimination_Of_Mass_Dirac_LagDe.tex",
     "completed/Elimination_Of_Mass_Dirac_TabelleDe.tex",
+    "completed/RSA_De.tex",
+    "completed/RSAtest_De.tex",
+    "completed/QM-Detrmistic_p_De.tex",
     "completed/HdokumentDe.tex",
     "completed/Moll_CandelaDe.tex",
     "completed/T0_netze_De.tex",
@@ -166,456 +148,74 @@ CHAPTERS_DE = [
     "completed/T0_Bibliography_De.tex",
 ]
 
-CHAPTERS_EN = [ch.replace('_De.tex', '_En.tex').replace('De.tex', 'En.tex') for ch in CHAPTERS_DE]
+def write_book(lang='De'):
+    chapters = CHAPTERS_DE if lang == 'De' else [ch.replace('_De.tex', '_En.tex').replace('De.tex', 'En.tex') for ch in CHAPTERS_DE]
+    preamble = 'completed/T0_preamble_De' if lang == 'De' else 'completed/T0_preamble_En'
+    cover = 'T0_deckblatt_De.png' if lang == 'De' else 'T0_deckblatt_En.png'
+    toc_title = 'Inhaltsverzeichnis' if lang == 'De' else 'Table of Contents'
+    
+    output = f"T0_Complete_Book_Full_{lang}.tex"
+    
+    with open(output, 'w', encoding='utf-8') as f:
+        # Minimal book preamble - use existing T0_preamble
+        f.write(r'''\documentclass[a4paper,11pt]{book}
+\input{''' + preamble + r'''}
 
-def write_book_header_de():
-    return r'''\documentclass[a4paper,11pt]{book}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[ngerman]{babel}
-\usepackage{graphicx}
-\usepackage{amsmath,amssymb,amsthm}
-\usepackage[pdfusetitle,colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
-\usepackage{geometry}
-\usepackage{fancyhdr}
-\usepackage{tcolorbox}
-\tcbuselibrary{breakable,skins}
-\usepackage{xcolor}
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{array}
-\usepackage{multirow}
-\usepackage{caption}
-\usepackage{float}
-\usepackage{enumitem}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning,shapes.geometric,decorations.pathmorphing,patterns,shapes.arrows}
-\usepackage{url}
-\usepackage{truncate}
-\usepackage{calc}
+% Define abstract for book class (not defined in book)
+\newenvironment{abstract}{\begin{quote}\small}{\end{quote}}
 
-\setlength{\headheight}{14pt}
-
-% German hyphenation settings for long words
-\tolerance=1000
-\emergencystretch=3em
-\hyphenpenalty=50
-\exhyphenpenalty=50
-\sloppy
-
-% Suppress hyperref warnings in PDF strings - include Greek letters
-\pdfstringdefDisableCommands{%
-  \def\\{ }%
-  \def\texttt#1{#1}%
-  \def\textsf#1{#1}%
-  \def\textbf#1{#1}%
-  \def\textit#1{#1}%
-  \def\xi{xi}%
-  \def\alpha{alpha}%
-  \def\beta{beta}%
-  \def\gamma{gamma}%
-  \def\kappa{kappa}%
-  \def\lambda{lambda}%
-  \def\mu{mu}%
-  \def\nu{nu}%
-  \def\pi{pi}%
-  \def\sigma{sigma}%
-  \def\tau{tau}%
-  \def\phi{phi}%
-  \def\psi{psi}%
-  \def\omega{omega}%
-}
-
-% T0 specific commands
-\newcommand{\Tzero}{T_0}
-\newcommand{\betaT}{\beta_T}
-\newcommand{\xipar}{\xi}
-\newcommand{\alphaEM}{\alpha_{\text{EM}}}
-\providecommand{\meff}{m_{\text{eff}}}
-\providecommand{\Tfield}{T}
-\providecommand{\Lp}{L_P}
-\providecommand{\Tp}{T_P}
-\providecommand{\Mp}{M_P}
-\providecommand{\Ep}{E_P}
-\providecommand{\hbar}{\hslash}
-\providecommand{\kB}{k_B}
-
-% Colors
-\definecolor{theoremcolor}{RGB}{0,100,150}
-\definecolor{definitioncolor}{RGB}{0,100,50}
-\definecolor{t0blue}{RGB}{0,102,204}
-\definecolor{boxgray}{RGB}{240,240,240}
-\definecolor{gold}{RGB}{255,215,0}
-\definecolor{tocblue}{RGB}{0,51,102}
-
-% Theorem environments
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[chapter]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Beispiel}
-\theoremstyle{remark}
-\newtheorem{remark}[theorem]{Bemerkung}
-
-% tcolorbox environments
-\newtcolorbox{keyresult}[1][Schlüsselergebnis]{colback=blue!5,colframe=blue!75!black,title=#1,breakable}
-\newtcolorbox{important}[1][Wichtig]{colback=red!5,colframe=red!75!black,title=#1,breakable}
-\newtcolorbox{note}[1][Hinweis]{colback=yellow!5,colframe=yellow!75!black,title=#1,breakable}
-\newtcolorbox{summary}[1][Zusammenfassung]{colback=green!5,colframe=green!75!black,title=#1,breakable}
-\newtcolorbox{foundation}[1][Grundlage]{colback=gray!5,colframe=gray!75!black,title=#1,breakable}
-\newtcolorbox{alternative}[1][Alternative]{colback=orange!5,colframe=orange!75!black,title=#1,breakable}
-\newtcolorbox{interpretation}[1][Interpretation]{colback=purple!5,colframe=purple!75!black,title=#1,breakable}
-\newtcolorbox{explanation}[1][Erklärung]{colback=cyan!5,colframe=cyan!75!black,title=#1,breakable}
-\newtcolorbox{category}[1][Kategorie]{colback=brown!5,colframe=brown!75!black,title=#1,breakable}
-\newtcolorbox{key}[1][Schlüssel]{colback=blue!5,colframe=blue!75!black,title=#1,breakable}
-\newtcolorbox{technical}[1][Technisch]{colback=gray!5,colframe=gray!75!black,title=#1,breakable}
-\newtcolorbox{proof_step}[1][Beweisschritt]{colback=yellow!5,colframe=yellow!75!black,title=#1,breakable}
-\newtcolorbox{experimental}[1][Experimentell]{colback=green!5,colframe=green!75!black,title=#1,breakable}
-\newtcolorbox{achievement}[1][Errungenschaft]{colback=green!5,colframe=green!75!black,title=#1,breakable}
-\newtcolorbox{overview}[1][Übersicht]{colback=blue!5,colframe=blue!75!black,title=#1,breakable}
-\renewenvironment{abstract}{\begin{tcolorbox}[colback=gray!5,colframe=gray!75!black,title=Abstrakt,breakable]}{\end{tcolorbox}}
-
-\geometry{margin=2.5cm}
-
-% Unified chapter and header formatting - HALF SIZE titles
-\usepackage{titlesec}
-\titleformat{\chapter}[display]
-  {\normalfont\Large\bfseries}{\chaptertitlename\ \thechapter}{10pt}{\large}
-\titlespacing*{\chapter}{0pt}{-20pt}{20pt}
-
-% Section titles also smaller
-\titleformat{\section}{\normalfont\normalsize\bfseries}{\thesection}{1em}{}
-\titleformat{\subsection}{\normalfont\small\bfseries}{\thesubsection}{1em}{}
-
-% Fixed header/footer with short marks - LIMITED TO 40 CHARS
+% Short headers for book
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\footnotesize\nouppercase{\truncmark{\leftmark}{40}}}
-\fancyhead[LO]{\footnotesize\nouppercase{\truncmark{\rightmark}{40}}}
-\fancyfoot[C]{\footnotesize T0-Theorie -- J. Pascher}
+\fancyhead[RE]{\scriptsize\nouppercase{\leftmark}}
+\fancyhead[LO]{\scriptsize\nouppercase{\rightmark}}
+\fancyfoot[C]{\scriptsize T0-Theorie}
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
 
-% Command to truncate text to N characters
-\newcommand{\truncmark}[2]{%
-  \ifdim\dimexpr\widthof{#1}\relax>40em
-    \truncate{40em}{#1}%
-  \else
-    #1%
-  \fi
-}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\thepage}\renewcommand{\headrulewidth}{0pt}}
 
-% Prevent header conflicts on chapter pages
-\fancypagestyle{plain}{%
-  \fancyhf{}%
-  \fancyfoot[C]{\thepage}%
-  \renewcommand{\headrulewidth}{0pt}%
-}
-
-% Limit header text length to ~40 chars
-\renewcommand{\chaptermark}[1]{%
-  \markboth{\thechapter.\ \truncate{35em}{#1}}{}%
-}
-\renewcommand{\sectionmark}[1]{%
-  \markright{\thesection.\ \truncate{30em}{#1}}%
-}
-
-\title{\Large\textbf{T0-Theorie}\\[0.3cm]\normalsize Zeit-Masse-Dualität\\[0.2cm]\small Alle Naturkonstanten aus einer Zahl}
+\title{T0-Theorie}
 \author{Johann Pascher}
 \date{2024}
 
 \begin{document}
 
-% Cover page with image
-\begin{titlepage}
-\centering
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{T0_deckblatt_De.png}
-\end{titlepage}
-
-\frontmatter
-
-% ABSTRAKT
-\chapter*{Abstrakt}
-\addcontentsline{toc}{chapter}{Abstrakt}
-
-Die T0-Theorie (Zeit-Masse-Dualität) stellt einen fundamentalen Paradigmenwechsel in der theoretischen Physik dar. Das zentrale Ergebnis dieser Arbeit ist die Erkenntnis, dass \textbf{alle natürlichen Konstanten und physikalischen Parameter aus einer einzigen dimensionslosen Zahl abgeleitet werden können}: der universellen geometrischen Konstante
-\[
-\xi = \frac{4}{3} \times 10^{-4}.
-\]
-
-\begin{keyresult}[Zentrales Theorem der T0-Theorie]
-Alle physikalischen Konstanten -- Gravitationskonstante $G$, Planck-Konstante $\hbar$, Lichtgeschwindigkeit $c$, Elementarladung $e$ sowie alle Teilchenmassen und Kopplungskonstanten -- können mathematisch aus der universellen geometrischen Konstante $\xi$ abgeleitet werden.
-
-Aus $\xi$ folgt die Feinstrukturkonstante:
-\[
-\alpha = f_\alpha(\xi) \approx \frac{1}{137.035999084}
-\]
-\end{keyresult}
-
-Diese Sammlung von über 200 wissenschaftlichen Dokumenten entwickelt systematisch eine vollständige physikalische Theorie, die Quantenmechanik, Relativität und Kosmologie vereinheitlicht -- basierend auf dem Prinzip der absoluten Zeit $T_0$ und der intrinsischen Zeit-Feld-Masse-Beziehung.
-
-\vspace{1em}
+% Cover
+\thispagestyle{empty}
 \begin{center}
-\textit{``Die Natur verwendet nur die längsten Fäden, um ihre Muster zu weben, sodass jedes kleine Stück ihres Gewebes die Organisation des gesamten Wandteppichs offenbart.''} -- Richard Feynman
+\vspace*{2cm}
+\includegraphics[width=0.9\textwidth]{''' + cover + r'''}
 \end{center}
-
-% INHALTSVERZEICHNIS mit blauem Text
 \clearpage
-{\color{tocblue}
+
+% TOC
 \tableofcontents
-}
-
-\mainmatter
-
-'''
-
-def write_book_header_en():
-    return r'''\documentclass[a4paper,11pt]{book}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[english]{babel}
-\usepackage{graphicx}
-\usepackage{amsmath,amssymb,amsthm}
-\usepackage[pdfusetitle,colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
-\usepackage{geometry}
-\usepackage{fancyhdr}
-\usepackage{tcolorbox}
-\tcbuselibrary{breakable,skins}
-\usepackage{xcolor}
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{array}
-\usepackage{multirow}
-\usepackage{caption}
-\usepackage{float}
-\usepackage{enumitem}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning,shapes.geometric,decorations.pathmorphing,patterns,shapes.arrows}
-\usepackage{url}
-\usepackage{truncate}
-\usepackage{calc}
-
-\setlength{\headheight}{14pt}
-
-% Suppress hyperref warnings in PDF strings - include Greek letters
-\pdfstringdefDisableCommands{%
-  \def\\{ }%
-  \def\texttt#1{#1}%
-  \def\textsf#1{#1}%
-  \def\textbf#1{#1}%
-  \def\textit#1{#1}%
-  \def\xi{xi}%
-  \def\alpha{alpha}%
-  \def\beta{beta}%
-  \def\gamma{gamma}%
-  \def\kappa{kappa}%
-  \def\lambda{lambda}%
-  \def\mu{mu}%
-  \def\nu{nu}%
-  \def\pi{pi}%
-  \def\sigma{sigma}%
-  \def\tau{tau}%
-  \def\phi{phi}%
-  \def\psi{psi}%
-  \def\omega{omega}%
-}
-
-% T0 specific commands
-\newcommand{\Tzero}{T_0}
-\newcommand{\betaT}{\beta_T}
-\newcommand{\xipar}{\xi}
-\newcommand{\alphaEM}{\alpha_{\text{EM}}}
-\providecommand{\meff}{m_{\text{eff}}}
-\providecommand{\Tfield}{T}
-\providecommand{\Lp}{L_P}
-\providecommand{\Tp}{T_P}
-\providecommand{\Mp}{M_P}
-\providecommand{\Ep}{E_P}
-\providecommand{\hbar}{\hslash}
-\providecommand{\kB}{k_B}
-
-% Colors
-\definecolor{theoremcolor}{RGB}{0,100,150}
-\definecolor{definitioncolor}{RGB}{0,100,50}
-\definecolor{t0blue}{RGB}{0,102,204}
-\definecolor{boxgray}{RGB}{240,240,240}
-\definecolor{gold}{RGB}{255,215,0}
-\definecolor{tocblue}{RGB}{0,51,102}
-
-% Theorem environments
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[chapter]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-\theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
-
-% tcolorbox environments
-\newtcolorbox{keyresult}[1][Key Result]{colback=blue!5,colframe=blue!75!black,title=#1,breakable}
-\newtcolorbox{important}[1][Important]{colback=red!5,colframe=red!75!black,title=#1,breakable}
-\newtcolorbox{note}[1][Note]{colback=yellow!5,colframe=yellow!75!black,title=#1,breakable}
-\newtcolorbox{summary}[1][Summary]{colback=green!5,colframe=green!75!black,title=#1,breakable}
-\newtcolorbox{foundation}[1][Foundation]{colback=gray!5,colframe=gray!75!black,title=#1,breakable}
-\newtcolorbox{alternative}[1][Alternative]{colback=orange!5,colframe=orange!75!black,title=#1,breakable}
-\newtcolorbox{interpretation}[1][Interpretation]{colback=purple!5,colframe=purple!75!black,title=#1,breakable}
-\newtcolorbox{explanation}[1][Explanation]{colback=cyan!5,colframe=cyan!75!black,title=#1,breakable}
-\newtcolorbox{category}[1][Category]{colback=brown!5,colframe=brown!75!black,title=#1,breakable}
-\newtcolorbox{key}[1][Key]{colback=blue!5,colframe=blue!75!black,title=#1,breakable}
-\newtcolorbox{technical}[1][Technical]{colback=gray!5,colframe=gray!75!black,title=#1,breakable}
-\newtcolorbox{proof_step}[1][Proof Step]{colback=yellow!5,colframe=yellow!75!black,title=#1,breakable}
-\newtcolorbox{experimental}[1][Experimental]{colback=green!5,colframe=green!75!black,title=#1,breakable}
-\newtcolorbox{achievement}[1][Achievement]{colback=green!5,colframe=green!75!black,title=#1,breakable}
-\newtcolorbox{overview}[1][Overview]{colback=blue!5,colframe=blue!75!black,title=#1,breakable}
-\renewenvironment{abstract}{\begin{tcolorbox}[colback=gray!5,colframe=gray!75!black,title=Abstract,breakable]}{\end{tcolorbox}}
-
-\geometry{margin=2.5cm}
-
-% Unified chapter and header formatting - HALF SIZE titles
-\usepackage{titlesec}
-\titleformat{\chapter}[display]
-  {\normalfont\Large\bfseries}{\chaptertitlename\ \thechapter}{10pt}{\large}
-\titlespacing*{\chapter}{0pt}{-20pt}{20pt}
-
-% Section titles also smaller
-\titleformat{\section}{\normalfont\normalsize\bfseries}{\thesection}{1em}{}
-\titleformat{\subsection}{\normalfont\small\bfseries}{\thesubsection}{1em}{}
-
-% Fixed header/footer with short marks - LIMITED TO 40 CHARS
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\footnotesize\nouppercase{\truncmark{\leftmark}{40}}}
-\fancyhead[LO]{\footnotesize\nouppercase{\truncmark{\rightmark}{40}}}
-\fancyfoot[C]{\footnotesize T0-Theory -- J. Pascher}
-
-% Command to truncate text to N characters
-\newcommand{\truncmark}[2]{%
-  \ifdim\dimexpr\widthof{#1}\relax>40em
-    \truncate{40em}{#1}%
-  \else
-    #1%
-  \fi
-}
-
-% Prevent header conflicts on chapter pages
-\fancypagestyle{plain}{%
-  \fancyhf{}%
-  \fancyfoot[C]{\thepage}%
-  \renewcommand{\headrulewidth}{0pt}%
-}
-
-% Limit header text length to ~40 chars
-\renewcommand{\chaptermark}[1]{%
-  \markboth{\thechapter.\ \truncate{35em}{#1}}{}%
-}
-\renewcommand{\sectionmark}[1]{%
-  \markright{\thesection.\ \truncate{30em}{#1}}%
-}
-
-\title{\Large\textbf{T0-Theory}\\[0.3cm]\normalsize Time-Mass Duality\\[0.2cm]\small All Natural Constants from One Number}
-\author{Johann Pascher}
-\date{2024}
-
-\begin{document}
-
-% Cover page with image
-\begin{titlepage}
-\centering
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{T0_deckblatt_En.png}
-\end{titlepage}
-
-\frontmatter
-
-% ABSTRACT
-\chapter*{Abstract}
-\addcontentsline{toc}{chapter}{Abstract}
-
-The T0-Theory (Time-Mass Duality) represents a fundamental paradigm shift in theoretical physics. The central result of this work is the recognition that \textbf{all natural constants and physical parameters can be derived from a single dimensionless number}: the universal geometric constant
-\[
-\xi = \frac{4}{3} \times 10^{-4}.
-\]
-
-\begin{keyresult}[Central Theorem of T0-Theory]
-All physical constants -- gravitational constant $G$, Planck constant $\hbar$, speed of light $c$, elementary charge $e$ as well as all particle masses and coupling constants -- can be mathematically derived from the universal geometric constant $\xi$.
-
-From $\xi$ follows the fine structure constant:
-\[
-\alpha = f_\alpha(\xi) \approx \frac{1}{137.035999084}
-\]
-\end{keyresult}
-
-This collection of over 200 scientific documents systematically develops a complete physical theory that unifies quantum mechanics, relativity and cosmology -- based on the principle of absolute time $T_0$ and the intrinsic time-field-mass relationship.
-
-\vspace{1em}
-\begin{center}
-\textit{``Nature uses only the longest threads to weave her patterns, so that each small piece of her fabric reveals the organization of the entire tapestry.''} -- Richard Feynman
-\end{center}
-
-% TABLE OF CONTENTS with blue text
 \clearpage
-{\color{tocblue}
-\tableofcontents
-}
 
-\mainmatter
-
-'''
-
-def main():
-    if len(sys.argv) < 2:
-        print("Usage: python3 build_complete_book.py [De|En]")
-        sys.exit(1)
-    
-    lang = sys.argv[1]
-    
-    if lang == "De":
-        chapters = CHAPTERS_DE
-        header = write_book_header_de()
-        output_file = "T0_Complete_Book_Full_De.tex"
-    elif lang == "En":
-        chapters = CHAPTERS_EN
-        header = write_book_header_en()
-        output_file = "T0_Complete_Book_Full_En.tex"
-    else:
-        print(f"Unknown language: {lang}")
-        sys.exit(1)
-    
-    # Start building the book
-    book_content = header
-    
-    chapter_num = 0
-    for chapter_path in chapters:
-        if not os.path.exists(chapter_path):
-            print(f"  Skipping (not found): {chapter_path}")
-            continue
+''')
         
-        chapter_num += 1
-        title = get_chapter_title(chapter_path)
-        body = extract_body_content(chapter_path, chapter_num)
+        chapter_num = 0
+        for chap_file in chapters:
+            if not os.path.exists(chap_file):
+                print(f"  Skipping (not found): {chap_file}")
+                continue
+            
+            body = extract_body_content(chap_file)
+            if body:
+                title = get_chapter_title(chap_file)
+                chapter_num += 1
+                f.write(f"\n\\chapter{{{title}}}\n")
+                f.write(body)
+                f.write("\n\\clearpage\n")
+                print(f"  Added chapter {chapter_num}: {title[:70]}...")
         
-        if body:
-            # Add chapter with title
-            book_content += f"\n\\chapter{{{title}}}\n"
-            book_content += f"\\label{{ch:{chapter_num}}}\n\n"
-            book_content += body
-            book_content += "\n\\clearpage\n"
-            print(f"  Added chapter {chapter_num}: {title[:80]}...")
-        else:
-            print(f"  Warning: Could not extract content from {chapter_path}")
+        f.write("\n\\end{document}\n")
     
-    # End document
-    book_content += "\n\\end{document}\n"
-    
-    # Write output
-    with open(output_file, 'w', encoding='utf-8') as f:
-        f.write(book_content)
-    
-    print(f"\nBook written to: {output_file}")
+    print(f"\nBook written to: {output}")
     print(f"Total chapters: {chapter_num}")
 
 if __name__ == "__main__":
-    main()
+    lang = sys.argv[1] if len(sys.argv) > 1 else 'De'
+    write_book(lang)
