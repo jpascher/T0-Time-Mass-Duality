@@ -223,8 +223,8 @@ def write_book(lang='De'):
 
 ''')
         
-        # GitHub base URL for original documents
-        github_base = "https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/tex/"
+        # GitHub base URL for original PDF documents
+        github_base = "https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/"
         
         chapter_num = 0
         for chap_file in chapters:
@@ -237,12 +237,13 @@ def write_book(lang='De'):
                 title = get_chapter_title(chap_file)
                 chapter_num += 1
                 
-                # Get original filename (without completed/ prefix)
+                # Get original filename and convert to PDF (without completed/ prefix)
                 orig_filename = os.path.basename(chap_file)
-                github_url = github_base + orig_filename
+                pdf_filename = orig_filename.replace('.tex', '.pdf')
+                github_url = github_base + pdf_filename
                 
                 f.write(f"\n\\chapter{{{title}}}\n")
-                # Add link to original document on GitHub
+                # Add link to original PDF document on GitHub
                 f.write(f"\\noindent\\small\\textit{{Original: }}\\url{{{github_url}}}\n\n")
                 f.write(body)
                 f.write("\n\\clearpage\n")
