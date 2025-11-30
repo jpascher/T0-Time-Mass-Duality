@@ -58,16 +58,25 @@ def get_chapter_title(filepath):
         match = re.search(r'\\title\{([^}]+)\}', content)
         if match:
             title = match.group(1)
+            # Replace common Greek letters with text
+            title = re.sub(r'\$\\xi\$', 'xi', title)
+            title = re.sub(r'\$\\alpha\$', 'alpha', title)
+            title = re.sub(r'\$\\beta\$', 'beta', title)
+            title = re.sub(r'\$e\$', 'e', title)
             # Remove \\[...] vertical spacing commands like \\[0.5em]
             title = re.sub(r'\\\\\[[^\]]*\]', ' ', title)
             title = re.sub(r'\\\\', ' ', title)
             title = re.sub(r'\\[a-zA-Z]+\{([^}]*)\}', r'\1', title)
             title = re.sub(r'\\[a-zA-Z]+', '', title)
             title = re.sub(r'\[[^\]]*\]', '', title)  # Remove remaining [...] 
+            title = re.sub(r'\$[^$]*\$', '', title)  # Remove remaining math mode
             title = re.sub(r'[{}]', '', title)
             title = re.sub(r'\s+', ' ', title).strip()
-            if len(title) > 70:
-                title = title[:67] + "..."
+            # Remove date/percentage info like "(November 2025, <3%)"
+            title = re.sub(r'\s*\([^)]*20\d\d[^)]*\)', '', title)
+            title = re.sub(r'\s*\([^)]*%[^)]*\)', '', title)
+            if len(title) > 60:
+                title = title[:57] + "..."
             return title
         
         basename = os.path.basename(filepath)
