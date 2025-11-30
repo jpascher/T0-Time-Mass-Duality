@@ -2,6 +2,30 @@
 """
 Build complete book - minimal changes: remove documentclass, begin/end document.
 Uses T0_preamble for all definitions.
+
+WICHTIG / IMPORTANT:
+--------------------
+Dieses Skript verarbeitet ALLE LaTeX-Dokumente aus dem Verzeichnis completed/
+und erzeugt T0_Complete_Book_Full_De.tex bzw. T0_Complete_Book_Full_En.tex.
+
+Die Kapitelauswahl für kürzere Buchversionen erfolgt NICHT in diesem Skript,
+sondern direkt in den entsprechenden .tex-Dateien:
+  - T0_Complete_Book_De.tex  (50 Kapitel - manuell erstellt)
+  - T0_Complete_Book_En.tex  (49 Kapitel - manuell erstellt)
+
+Um die Kapitelauswahl zu ändern, bearbeiten Sie die .tex-Datei direkt.
+Das Skript bleibt für die Full-Versionen unverändert.
+
+This script processes ALL LaTeX documents from the completed/ directory
+and generates T0_Complete_Book_Full_De.tex or T0_Complete_Book_Full_En.tex.
+
+Chapter selection for shorter book versions is NOT done in this script,
+but directly in the corresponding .tex files:
+  - T0_Complete_Book_De.tex  (50 chapters - manually created)
+  - T0_Complete_Book_En.tex  (49 chapters - manually created)
+
+To change chapter selection, edit the .tex file directly.
+The script remains unchanged for Full versions.
 """
 import os
 import re
@@ -199,6 +223,9 @@ def write_book(lang='De'):
 
 ''')
         
+        # GitHub base URL for original documents
+        github_base = "https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/tex/"
+        
         chapter_num = 0
         for chap_file in chapters:
             if not os.path.exists(chap_file):
@@ -209,7 +236,14 @@ def write_book(lang='De'):
             if body:
                 title = get_chapter_title(chap_file)
                 chapter_num += 1
+                
+                # Get original filename (without completed/ prefix)
+                orig_filename = os.path.basename(chap_file)
+                github_url = github_base + orig_filename
+                
                 f.write(f"\n\\chapter{{{title}}}\n")
+                # Add link to original document on GitHub
+                f.write(f"\\noindent\\small\\textit{{Original: }}\\url{{{github_url}}}\n\n")
                 f.write(body)
                 f.write("\n\\clearpage\n")
                 print(f"  Added chapter {chapter_num}: {title[:70]}...")
