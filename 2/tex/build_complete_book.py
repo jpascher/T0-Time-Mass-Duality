@@ -72,9 +72,12 @@ def get_chapter_title(filepath):
             title = re.sub(r'\$[^$]*\$', '', title)  # Remove remaining math mode
             title = re.sub(r'[{}]', '', title)
             title = re.sub(r'\s+', ' ', title).strip()
-            # Remove date/percentage info like "(November 2025, <3%)"
+            # Remove date/percentage info like "(November 2025, <3%)" or similar
             title = re.sub(r'\s*\([^)]*20\d\d[^)]*\)', '', title)
             title = re.sub(r'\s*\([^)]*%[^)]*\)', '', title)
+            title = re.sub(r'\s*\([^)]*Delta[^)]*\)', '', title)
+            # Remove leading/trailing whitespace and multiple spaces
+            title = re.sub(r'\s+', ' ', title).strip()
             if len(title) > 60:
                 title = title[:57] + "..."
             return title
