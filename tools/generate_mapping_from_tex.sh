@@ -1,15 +1,20 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 set -euo pipefail
 REPO_OWNER="jpascher"
 REPO_NAME="T0-Time-Mass-Duality"
 REF="ce78d7b93bd940a3b3f12a2c3afd0d1c34d35a41"
 TEX_FILES=(
-  "T0_abstract_De.tex"
-  "T0_Introduction_De.tex"
-  "reise_De.tex"
-  "T0_Grundlagen_De.tex"
-  "T0_Modell_Uebersicht_De.tex"
-  "T0_7-fragen-3_De.tex"
+  "2/tex/T0_7-fragen-3_De.tex"
+  "2/tex/T0_7-fragen-3_En.tex"
+  "2/tex/T0_Grundlagen_De.tex"
+  "2/tex/T0_Grundlagen_en.tex"
+  "2/tex/T0_Introduction_En.tex"
+  "2/tex/T0_Modell_Uebersicht_De.tex"
+  "2/tex/T0_Modell_Uebersicht_En.tex"
+  "2/tex/chapters_en/T0_7-fragen-3_En_ch.tex"
+  "2/tex/chapters_en/T0_Grundlagen_En_ch.tex"
+  "2/tex/chapters_en/T0_Introduction_En_ch.tex"
+  "2/tex/chapters_en/T0_Modell_Uebersicht_En_ch.tex"
 )
 OUT_BASE="book1/Book1_T0_erklaert_de"
 CHAPTERS_DIR="${OUT_BASE}/chapters"
@@ -23,11 +28,10 @@ mkdir -p "${CHAPTERS_DIR}" "${ORIGINALS_DIR}" "${MAPPINGS_DIR}"
 echo "REF = ${REF}"
 echo "Dry run mode: ${DRY_RUN}"
 for tex in "${TEX_FILES[@]}"; do
-  PATH_FOUND=$(git ls-files | grep -F "/${tex}$" || true)
-  if [ -z "$PATH_FOUND" ]; then
-    PATH_FOUND=$(git ls-files | grep -F "${tex}$" || true)
-  fi
-  if [ -z "$PATH_FOUND" ]; then
+  # Check if this exact path exists in git
+  if git ls-files --error-unmatch "${tex}" >/dev/null 2>&1; then
+    PATH_FOUND="${tex}"
+  else
     echo "WARN: Could not find ${tex} in the git index. Skipping."
     continue
   fi

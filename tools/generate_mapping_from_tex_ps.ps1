@@ -7,7 +7,7 @@
       book1/Book1_T0_erklaert_de/chapters/01_<basename>.md
       book1/Book1_T0_erklaert_de/originals/<basename>.tex.raw
       book1/Book1_T0_erklaert_de/mappings/mapping_<basename>.yaml
-  - Use the current HEAD commit SHA to build blob URLs.
+  - Use the specified REF or HEAD commit SHA to build blob URLs.
   - Safe default: dry-run mode. Use -Apply to write files.
 .PARAMETER Apply
   If present, actually write files. Otherwise only show preview.
@@ -27,22 +27,26 @@ if (-not (Test-Path ".git")) {
   exit 1
 }
 
-# get current commit sha (HEAD)
-$sha = (& git rev-parse --verify HEAD) -replace '\s+',''
-if (-not $sha) { Write-Warning "Could not determine HEAD SHA"; $sha = "HEAD" }
+# Use fixed REF as specified in the issue
+$sha = "ce78d7b93bd940a3b3f12a2c3afd0d1c34d35a41"
 
 Write-Host "Using commit/ref: $sha"
 Write-Host "Dry-run mode: $([bool](-not $Apply))"
 Write-Host ""
 
-# Candidate basenames for Band 1 (case-insensitive substring)
-$candidates = @(
-  "T0_abstract",
-  "T0_Introduction",
-  "reise",
-  "T0_Grundlagen",
-  "T0_Modell_Uebersicht",
-  "T0_7-fragen-3"
+# Explicit list of TEX files to process
+$texFiles = @(
+  "2/tex/T0_7-fragen-3_De.tex",
+  "2/tex/T0_7-fragen-3_En.tex",
+  "2/tex/T0_Grundlagen_De.tex",
+  "2/tex/T0_Grundlagen_en.tex",
+  "2/tex/T0_Introduction_En.tex",
+  "2/tex/T0_Modell_Uebersicht_De.tex",
+  "2/tex/T0_Modell_Uebersicht_En.tex",
+  "2/tex/chapters_en/T0_7-fragen-3_En_ch.tex",
+  "2/tex/chapters_en/T0_Grundlagen_En_ch.tex",
+  "2/tex/chapters_en/T0_Introduction_En_ch.tex",
+  "2/tex/chapters_en/T0_Modell_Uebersicht_En_ch.tex"
 )
 
 $outBase = "book1/Book1_T0_erklaert_de"
@@ -56,35 +60,19 @@ if ($Apply) {
   New-Item -ItemType Directory -Path $mappingsDir -Force | Out-Null
 }
 
-# find tracked tex files via git (safer than filesystem only)
-$texPathsRaw = & git ls-files '*.tex' 2>$null
-if (-not $texPathsRaw) {
-  Write-Error "No .tex files tracked by git were found."
-  exit 1
-}
-$texList = $texPathsRaw -split "`n" | ForEach-Object { $_.Trim() } | Where-Object { $_ -ne "" }
-
-# select which to process
+# Filter files that exist in git
 $toProcess = @()
-if ($All) {
-  $toProcess = $texList
-} else {
-  foreach ($p in $texList) {
-    $base = [System.IO.Path]::GetFileNameWithoutExtension($p)
-    foreach ($cand in $candidates) {
-      if ($base -match [regex]::Escape($cand) -or $base.ToLower().Contains($cand.ToLower())) {
-        $toProcess += $p
-        break
-      }
-    }
+foreach ($p in $texFiles) {
+  $exists = & git ls-files --error-unmatch $p 2>$null
+  if ($LASTEXITCODE -eq 0) {
+    $toProcess += $p
+  } else {
+    Write-Warning "Could not find $p in git index. Skipping."
   }
 }
 
 if ($toProcess.Count -eq 0) {
-  Write-Host "No Band‑1 candidate .tex files matched. To process all run with -All."
-  Write-Host ""
-  Write-Host "Found .tex files (first 100):"
-  $texList | Select-Object -First 100 | ForEach-Object { Write-Host " - $_" }
+  Write-Host "No .tex files matched."
   exit 0
 }
 
