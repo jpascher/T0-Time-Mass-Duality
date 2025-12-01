@@ -5,40 +5,31 @@ REPO_OWNER="jpascher"
 REPO_NAME="T0-Time-Mass-Duality"
 DEFAULT_REF="ce78d7b93bd940a3b3f12a2c3afd0d1c34d35a41"
 
-# Parse optional --ref parameter
+# Parse optional --ref parameter and --apply flag
 REF="${DEFAULT_REF}"
 DRY_RUN=1
-for arg in "$@"; do
-  case "$arg" in
-    --ref=*)
-      REF="${arg#--ref=}"
-      ;;
-    --ref)
-      shift
-      REF="${1:-$DEFAULT_REF}"
-      ;;
-    --apply)
-      DRY_RUN=0
-      ;;
-  esac
-done
 
-# Handle --ref as separate argument
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --ref)
-      REF="${2:-$DEFAULT_REF}"
-      shift 2 || break
-      ;;
     --ref=*)
       REF="${1#--ref=}"
       shift
+      ;;
+    --ref)
+      if [[ $# -ge 2 && ! "$2" =~ ^-- ]]; then
+        REF="$2"
+        shift 2
+      else
+        echo "Error: --ref requires a value"
+        exit 1
+      fi
       ;;
     --apply)
       DRY_RUN=0
       shift
       ;;
     *)
+      echo "Unknown option: $1"
       shift
       ;;
   esac

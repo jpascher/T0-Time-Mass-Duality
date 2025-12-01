@@ -105,8 +105,8 @@ mapping: $mapOut
 Die Original-LaTeX-Datei wird als Appendix angehängt. Siehe mapping: $mapOut)
 "@
 
-    $mdHeader | Out-File -FilePath $mdOut -Encoding UTF8 -NoNewline
-    Add-Content -Path $mdOut -Value "" -NoNewline
+    # Write markdown file without trailing newline manipulation
+    $mdHeader | Out-File -FilePath $mdOut -Encoding UTF8
 
     # write original snapshot: use git show to preserve tracked content at sha
     & git show $gitArg | Out-File -FilePath $origOut -Encoding UTF8
