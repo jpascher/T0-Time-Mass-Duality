@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 set -euo pipefail
 REPO_OWNER="jpascher"
 REPO_NAME="T0-Time-Mass-Duality"
