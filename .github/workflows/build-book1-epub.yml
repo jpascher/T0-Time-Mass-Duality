@@ -1,0 +1,37 @@
+name: Build Book1 EPUB
+
+on:
+  push:
+    branches: [ "book1-popularscience" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build_epub:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y pandoc librsvg2-bin imagemagick zip
+
+    - name: Build EPUB (run build script)
+      working-directory: ./book1/T0_erklaert_Band1_de
+      run: |
+        chmod +x build_epub.sh
+        ./build_epub.sh
+
+    - name: List generated files
+      run: |
+        ls -la ./book1/T0_erklaert_Band1_de
+
+    - name: Upload artifacts (EPUB + cover)
+      uses: actions/upload-artifact@v4
+      with:
+        name: book1-artifacts
+        path: |
+          book1/T0_erklaert_Band1_de/cover.png
+          book1/T0_erklaert_Band1_de/T0_erklaert_Band1_de.epub
