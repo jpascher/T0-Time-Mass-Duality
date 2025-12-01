@@ -2,7 +2,8 @@
 set -euo pipefail
 REPO_OWNER="jpascher"
 REPO_NAME="T0-Time-Mass-Duality"
-REF="ce78d7b93bd940a3b3f12a2c3afd0d1c34d35a41"
+# Default REF - can be overridden with --ref <sha>
+REF="${REF:-ce78d7b93bd940a3b3f12a2c3afd0d1c34d35a41}"
 TEX_FILES=(
   "2/tex/T0_7-fragen-3_De.tex"
   "2/tex/T0_7-fragen-3_En.tex"
@@ -21,9 +22,25 @@ CHAPTERS_DIR="${OUT_BASE}/chapters"
 ORIGINALS_DIR="${OUT_BASE}/originals"
 MAPPINGS_DIR="${OUT_BASE}/mappings"
 DRY_RUN=1
-if [ "${1-}" = "--apply" ]; then
-  DRY_RUN=0
-fi
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --apply)
+      DRY_RUN=0
+      shift
+      ;;
+    --ref)
+      REF="$2"
+      shift 2
+      ;;
+    *)
+      echo "Usage: $0 [--apply] [--ref <commit_sha>]"
+      exit 1
+      ;;
+  esac
+done
+
 mkdir -p "${CHAPTERS_DIR}" "${ORIGINALS_DIR}" "${MAPPINGS_DIR}"
 echo "REF = ${REF}"
 echo "Dry run mode: ${DRY_RUN}"

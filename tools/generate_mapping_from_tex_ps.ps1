@@ -17,7 +17,8 @@
 
 param(
   [switch]$Apply,
-  [switch]$All
+  [switch]$All,
+  [string]$Ref = "ce78d7b93bd940a3b3f12a2c3afd0d1c34d35a41"
 )
 
 # Ensure running in repo root (should contain .git)
@@ -27,8 +28,8 @@ if (-not (Test-Path ".git")) {
   exit 1
 }
 
-# Use fixed REF as specified in the issue
-$sha = "ce78d7b93bd940a3b3f12a2c3afd0d1c34d35a41"
+# Use provided REF parameter or default
+$sha = $Ref
 
 Write-Host "Using commit/ref: $sha"
 Write-Host "Dry-run mode: $([bool](-not $Apply))"
