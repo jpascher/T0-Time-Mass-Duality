@@ -64,7 +64,7 @@ Der Name T0 bezieht sich auf das fundamentale Zeitfeld, das in dieser Theorie ei
 
 ### Eine Zahl, die alles erklärt
 
-Im Herzen der T0-Theorie steht eine einzige Zahl: **ξ = 4/3 × 10⁻⁴** (ausgesprochen: „Xi", ungefähr 0,000133).
+Im Herzen der T0-Theorie steht eine einzige Zahl: **ξ = 4/3 × 10⁻⁴** (ausgesprochen: „Xi", ungefähr 0,0001333 oder 1,333 × 10⁻⁴).
 
 Diese scheinbar willkürliche Zahl ist alles andere als zufällig. Sie entstammt der dreidimensionalen Geometrie unseres Raumes und verbindet alle fundamentalen Konstanten der Physik.
 
@@ -159,11 +159,11 @@ Warum gerade diese Zahl? Warum nicht 1/100 oder 1/200? Richard Feynman nannte si
 
 ### Die T0-Erklärung
 
-Die T0-Theorie löst dieses Rätsel. Die Zahl 137 folgt aus der fraktalen Dimension des Raumes:
+Die T0-Theorie löst dieses Rätsel. Die Zahl 137 folgt aus der fraktalen Dimension des Raumes. Die mathematische Verbindung funktioniert so: Die fraktale Dimension D_f beschreibt, wie der Raum auf kleinsten Skalen strukturiert ist. Über den universellen Parameter ξ, der selbst aus D_f abgeleitet wird, ergibt sich die Feinstrukturkonstante als:
 
-D_f ≈ 2,94 führt zu α ≈ 1/137
+α = f(ξ, D_f) ≈ 1/137
 
-Es ist keine willkürliche Konstante, sondern eine geometrische Notwendigkeit. Unser dreidimensionaler Raum mit seiner leichten fraktalen Struktur macht genau diese Zahl erforderlich.
+wobei D_f ≈ 2,94 die spezifische fraktale Dimension unseres Raumes ist. Die genaue mathematische Herleitung findet sich in den technischen Dokumenten des T0-Repositories. Entscheidend ist: Es ist keine willkürliche Konstante, sondern eine geometrische Notwendigkeit. Unser dreidimensionaler Raum mit seiner leichten fraktalen Struktur macht genau diese Zahl erforderlich.
 
 ### Ein Blick auf die fraktale Struktur
 
@@ -178,10 +178,13 @@ Stellen Sie sich den Raum nicht als perfekt glattes Kontinuum vor, sondern als e
 Die T0-Theorie macht präzise Vorhersagen, die mit Experimenten verglichen werden können. Besonders beeindruckend:
 
 **Das anomale magnetische Moment des Myons (g-2):**
-- Standardmodell-Vorhersage: weicht 4,2 Standardabweichungen vom Experiment ab
-- T0-Vorhersage: weicht nur 0,05 Standardabweichungen ab
 
-Das ist ein dramatischer Unterschied. Die T0-Theorie kommt dem experimentellen Wert viel näher als das etablierte Standardmodell.
+Das Myon ist ein schwerer Verwandter des Elektrons. Sein magnetisches Moment weicht leicht vom theoretisch erwarteten Wert ab – diese Abweichung nennt man das „anomale magnetische Moment" oder g-2. Präzisionsmessungen am Fermilab (USA) zeigen eine Diskrepanz zwischen Experiment und Theorie:
+
+- Standardmodell-Vorhersage: weicht etwa 4-5 Standardabweichungen vom Experiment ab (Stand 2023)
+- T0-Vorhersage: kommt dem experimentellen Wert deutlich näher
+
+Die genauen Berechnungen und Vergleiche finden sich in den technischen Dokumenten des T0-Repositories. Die T0-Theorie erreicht diese bessere Übereinstimmung durch die natürliche Einbeziehung gravitativer Korrekturen über den ξ-Parameter.
 
 ### Quantencomputing
 
