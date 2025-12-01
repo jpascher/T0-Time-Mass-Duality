@@ -6,19 +6,19 @@ REPO_NAME="T0-Time-Mass-Duality"
 # Default REF; can be overridden with --ref <SHA>
 REF="ce78d7b93bd940a3b3f12a2c3afd0d1c34d35a41"
 
-# TEX_FILES: 11 explicit paths for Band 1 popular science content
+# TEX_FILES: 11 explicit paths for Band 1 popular science content (as specified in PR)
 TEX_FILES=(
-  "2/tex/T0_Grundlagen_De.tex"
-  "2/tex/T0_Modell_Uebersicht_De.tex"
   "2/tex/T0_7-fragen-3_De.tex"
-  "2/tex/T0_Kosmologie_De.tex"
-  "2/tex/T0_Energie_De.tex"
-  "2/tex/T0_Feinstruktur_De.tex"
-  "2/tex/T0_Geometrische_Kosmologie_De.tex"
-  "2/tex/T0_Bibliography_De.tex"
-  "2/tex/E-mc2_De.tex"
-  "2/tex/QM_De.tex"
-  "2/tex/Bell_De.tex"
+  "2/tex/T0_7-fragen-3_En.tex"
+  "2/tex/T0_Grundlagen_De.tex"
+  "2/tex/T0_Grundlagen_en.tex"
+  "2/tex/T0_Introduction_En.tex"
+  "2/tex/T0_Modell_Uebersicht_De.tex"
+  "2/tex/T0_Modell_Uebersicht_En.tex"
+  "2/tex/chapters_en/T0_7-fragen-3_En_ch.tex"
+  "2/tex/chapters_en/T0_Grundlagen_En_ch.tex"
+  "2/tex/chapters_en/T0_Introduction_En_ch.tex"
+  "2/tex/chapters_en/T0_Modell_Uebersicht_En_ch.tex"
 )
 
 OUT_BASE="book1/Book1_T0_erklaert_de"

@@ -36,19 +36,19 @@ Write-Host "Using commit/ref: $sha"
 Write-Host "Dry-run mode: $([bool](-not $Apply))"
 Write-Host ""
 
-# TEX_FILES: 11 explicit paths for Band 1 popular science content
+# TEX_FILES: 11 explicit paths for Band 1 popular science content (as specified in PR)
 $texFilesList = @(
-  "2/tex/T0_Grundlagen_De.tex",
-  "2/tex/T0_Modell_Uebersicht_De.tex",
   "2/tex/T0_7-fragen-3_De.tex",
-  "2/tex/T0_Kosmologie_De.tex",
-  "2/tex/T0_Energie_De.tex",
-  "2/tex/T0_Feinstruktur_De.tex",
-  "2/tex/T0_Geometrische_Kosmologie_De.tex",
-  "2/tex/T0_Bibliography_De.tex",
-  "2/tex/E-mc2_De.tex",
-  "2/tex/QM_De.tex",
-  "2/tex/Bell_De.tex"
+  "2/tex/T0_7-fragen-3_En.tex",
+  "2/tex/T0_Grundlagen_De.tex",
+  "2/tex/T0_Grundlagen_en.tex",
+  "2/tex/T0_Introduction_En.tex",
+  "2/tex/T0_Modell_Uebersicht_De.tex",
+  "2/tex/T0_Modell_Uebersicht_En.tex",
+  "2/tex/chapters_en/T0_7-fragen-3_En_ch.tex",
+  "2/tex/chapters_en/T0_Grundlagen_En_ch.tex",
+  "2/tex/chapters_en/T0_Introduction_En_ch.tex",
+  "2/tex/chapters_en/T0_Modell_Uebersicht_En_ch.tex"
 )
 
 $outBase = "book1/Book1_T0_erklaert_de"
