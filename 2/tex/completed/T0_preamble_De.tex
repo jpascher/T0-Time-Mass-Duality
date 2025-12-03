@@ -1,7 +1,7 @@
 % ==============================================================================
 % T0-Theorie: Standardisierte Deutsche Präambel
-% Version: 1.0
-% Autor: Johann Pascher
+% Version: 1.1 (angepasst für Bundsteg/Druck: inner=1.6cm, outer=0.7cm)
+% Autor: Johann Pascher (angepasst von Grok)
 % ==============================================================================
 % Diese Datei enthält alle notwendigen Pakete und Definitionen für deutsche
 % T0-Theorie Dokumente. Verwenden Sie \input{T0_preamble_De} nach \documentclass.
@@ -13,9 +13,17 @@
 \usepackage[ngerman]{babel}
 \usepackage{lmodern}
 
-% --- Seitengeometrie ---
-\usepackage[a4paper, margin=2.5cm]{geometry}
-\setlength{\headheight}{15pt}
+% --- Seitengeometrie (angepasst für Bundsteg: 355 Seiten) ---
+\usepackage[%
+a4paper,
+twoside,                % Für Buch-Layout: inner/outer-Ränder
+inner=2cm,            % Bundsteg: >=15,875 mm (Puffer für Bindung)
+outer=1cm,            % Äußerer Rand: >=6,35 mm
+top=2.5cm, bottom=3cm,  % Oben/unten beibehalten
+bindingoffset=2mm,      % Extra für Bindungsdicke (~0,5 mm/100 Seiten)
+headheight=15pt,        % Kopfhöhe beibehalten
+headsep=10pt            % Abstand Kopf zu Text (vermeidet Warnungen)
+]{geometry}
 
 % --- Mathematik und Physik ---
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
@@ -23,10 +31,10 @@
 \usepackage{physics}
 \usepackage{siunitx}
 \sisetup{
-    locale=DE,
-    group-separator={.},
-    output-decimal-marker={,},
-    per-mode=symbol
+	locale=DE,
+	group-separator={.},
+	output-decimal-marker={,},
+	per-mode=symbol
 }
 
 % --- Grafiken und Tabellen ---
@@ -137,15 +145,16 @@
 \definecolor{t0red}{RGB}{244,67,54}
 \definecolor{t0yellow}{RGB}{255,204,0}
 
-% --- Hyperref-Einstellungen ---
+% --- Hyperref-Einstellungen (druckoptimiert) ---
 \hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    citecolor=blue,
-    urlcolor=blue,
-    breaklinks=true,
-    bookmarksnumbered=true,
-    pdfstartview=FitH
+	colorlinks=true,
+	linkcolor=blue,
+	citecolor=blue,
+	urlcolor=blue,
+	breaklinks=true,
+	bookmarksnumbered=true,
+	pdfstartview=FitH,
+	pdfborder={0 0 0}      % Unsichtbare Rahmen für Druck
 }
 
 % --- Theorem-Umgebungen (Deutsch) ---
@@ -232,6 +241,12 @@
 \newcommand{\Leff}{L_{\text{eff}}}
 \newcommand{\CQCD}{C_{\mathrm{QCD}}}
 \newcommand{\Kspec}{K_{\mathrm{spec}}}
+% Additional commands to fix compilation issues
+\newcommand{\titel}{\title}
+%\newcommand{\Lorentz}[2]{\Lambda_{#1}^{#2}}
+\newcommand{\Weyl}{W}
+\newcommand{\ZPinch}{2 n k (T_e + T_i) = \frac{\mu_0 I^2}{8\pi r}}
+\newcommand{\SynchPower}{P_{\text{synch}}}
 
 % Fehlende Befehle aus Dokumenten
 \providecommand{\xiconst}{\xi_{\text{const}}}
@@ -299,30 +314,30 @@
 
 % --- tcolorbox Stile ---
 \tcbset{
-    keyresult/.style={
-        colback=blue!5!white,
-        colframe=blue!75!black,
-        title=Kernaussage,
-        fonttitle=\bfseries
-    },
-    foundation/.style={
-        colback=green!5!white,
-        colframe=green!75!black,
-        title=Grundlage,
-        fonttitle=\bfseries
-    },
-    alternative/.style={
-        colback=orange!5!white,
-        colframe=orange!75!black,
-        title=Alternative,
-        fonttitle=\bfseries
-    },
-    warningbox/.style={
-        colback=red!5!white,
-        colframe=red!75!black,
-        title=Warnung,
-        fonttitle=\bfseries
-    }
+	keyresult/.style={
+		colback=blue!5!white,
+		colframe=blue!75!black,
+		title=Kernaussage,
+		fonttitle=\bfseries
+	},
+	foundation/.style={
+		colback=green!5!white,
+		colframe=green!75!black,
+		title=Grundlage,
+		fonttitle=\bfseries
+	},
+	alternative/.style={
+		colback=orange!5!white,
+		colframe=orange!75!black,
+		title=Alternative,
+		fonttitle=\bfseries
+	},
+	warningbox/.style={
+		colback=red!5!white,
+		colframe=red!75!black,
+		title=Warnung,
+		fonttitle=\bfseries
+	}
 }
 
 \newtcolorbox{keyresultbox}[1][]{colback=blue!5!white,colframe=blue!75!black,fonttitle=\bfseries,title={#1},breakable}
@@ -334,76 +349,76 @@
 
 % Benutzerdefinierte Boxen für Formeln
 \newtcolorbox{fundamental}[1][]{
-    colback=boxgray,
-    colframe=t0blue,
-    fonttitle=\bfseries,
-    title=#1,
-    sharp corners,
-    boxrule=2pt
+	colback=boxgray,
+	colframe=t0blue,
+	fonttitle=\bfseries,
+	title=#1,
+	sharp corners,
+	boxrule=2pt
 }
 
 \newtcolorbox{neueperspektive}[1][]{
-    colback=red!5!white,
-    colframe=t0red,
-    fonttitle=\bfseries,
-    title=#1,
-    sharp corners,
-    boxrule=2pt
+	colback=red!5!white,
+	colframe=t0red,
+	fonttitle=\bfseries,
+	title=#1,
+	sharp corners,
+	boxrule=2pt
 }
 
 \newtcolorbox{formula}[1][]{
-    colback=blue!5!white,
-    colframe=blue!75!black,
-    fonttitle=\bfseries,
-    title=#1
+	colback=blue!5!white,
+	colframe=blue!75!black,
+	fonttitle=\bfseries,
+	title=#1
 }
 
 \newtcolorbox{result}[1][]{
-    colback=green!5!white,
-    colframe=green!75!black,
-    fonttitle=\bfseries,
-    title=#1
+	colback=green!5!white,
+	colframe=green!75!black,
+	fonttitle=\bfseries,
+	title=#1
 }
 
 % Zusätzliche tcolorbox-Umgebungen (aus T0_standalone_header_de.tex)
 \newtcolorbox{derivation}[1][]{
-    colback=green!5!white,
-    colframe=green!75!black,
-    title=#1,
-    fonttitle=\bfseries,
-    breakable
+	colback=green!5!white,
+	colframe=green!75!black,
+	title=#1,
+	fonttitle=\bfseries,
+	breakable
 }
 
 \newtcolorbox{summary}[1][]{
-    colback=gray!10!white,
-    colframe=gray!75!black,
-    title=#1,
-    fonttitle=\bfseries,
-    breakable
+	colback=gray!10!white,
+	colframe=gray!75!black,
+	title=#1,
+	fonttitle=\bfseries,
+	breakable
 }
 
 \newtcolorbox{comparison}[1][]{
-    colback=purple!5!white,
-    colframe=purple!75!black,
-    title=#1,
-    fonttitle=\bfseries,
-    breakable
+	colback=purple!5!white,
+	colframe=purple!75!black,
+	title=#1,
+	fonttitle=\bfseries,
+	breakable
 }
 
 \newtcolorbox{relation}[1][]{
-    colback=cyan!5!white,
-    colframe=cyan!75!black,
-    title=#1,
-    fonttitle=\bfseries,
-    breakable
+	colback=cyan!5!white,
+	colframe=cyan!75!black,
+	title=#1,
+	fonttitle=\bfseries,
+	breakable
 }
 
 \newtcolorbox{principleBox}[1][]{
-    colback=yellow!5!white,
-    colframe=yellow!75!black,
-    title=#1,
-    fonttitle=\bfseries,
-    breakable
+	colback=yellow!5!white,
+	colframe=yellow!75!black,
+	title=#1,
+	fonttitle=\bfseries,
+	breakable
 }
 
 % Hinweis: insight und discovery sind als Theorem-Umgebungen definiert
@@ -527,7 +542,7 @@
 \renewcommand{\cftsecpagefont}{\color{blue}}
 \renewcommand{\cftsubsecpagefont}{\color{blue}}
 \renewcommand{\cfttoctitlefont}{\huge\bfseries\color{blue}}
-
+\pagestyle{empty}  % Entfernt Seitennummern für das gesamte Dokument
 
 % ==============================================================================
 % Ende der Präambel
