@@ -10,7 +10,6 @@
 # Options:
 #   -d, --dir DIR       Starting directory (default: current directory)
 #   -o, --output DIR    Output directory for PDFs (default: same as source)
-#   -j, --jobs N        Number of parallel jobs (default: 4)
 #   -c, --clean         Clean auxiliary files after compilation
 #   -v, --verbose       Verbose output
 #   -h, --help          Show this help message
@@ -19,12 +18,13 @@
 # Date: 2025
 # ==============================================================================
 
-set -e
+# Note: We don't use 'set -e' here because we want the script to continue
+# processing all files even if some compilations fail. Errors are tracked
+# and reported in the final summary.
 
 # Default values
 START_DIR="."
 OUTPUT_DIR=""
-JOBS=4
 CLEAN=false
 VERBOSE=false
 MAX_RUNS=2
@@ -50,7 +50,6 @@ usage() {
     echo "Options:"
     echo "  -d, --dir DIR       Starting directory (default: current directory)"
     echo "  -o, --output DIR    Output directory for PDFs (default: same as source)"
-    echo "  -j, --jobs N        Number of parallel jobs (default: 4)"
     echo "  -c, --clean         Clean auxiliary files after compilation"
     echo "  -v, --verbose       Verbose output"
     echo "  -h, --help          Show this help message"
@@ -71,10 +70,6 @@ while [[ $# -gt 0 ]]; do
             ;;
         -o|--output)
             OUTPUT_DIR="$2"
-            shift 2
-            ;;
-        -j|--jobs)
-            JOBS="$2"
             shift 2
             ;;
         -c|--clean)
@@ -120,7 +115,6 @@ if [[ -n "$OUTPUT_DIR" ]]; then
 else
     echo "Output directory: Same as source"
 fi
-echo "Parallel jobs: $JOBS"
 echo "Clean auxiliary: $CLEAN"
 echo "============================================================"
 echo ""
@@ -222,11 +216,6 @@ clean_aux() {
     done
 }
 
-# Export functions for parallel execution
-export -f compile_tex should_skip
-export VERBOSE MAX_RUNS OUTPUT_DIR
-export RED GREEN YELLOW BLUE NC
-
 # Find all .tex files and compile them
 echo "Finding .tex files..."
 TEX_FILES=$(find "$START_DIR" -name "*.tex" -type f | sort)
@@ -234,26 +223,19 @@ TOTAL=$(echo "$TEX_FILES" | wc -l)
 echo "Found $TOTAL .tex files"
 echo ""
 
-# Process files
-if command -v parallel &> /dev/null && [[ $JOBS -gt 1 ]]; then
-    # Use GNU parallel if available
-    echo "Using GNU parallel with $JOBS jobs..."
-    echo "$TEX_FILES" | parallel -j "$JOBS" compile_tex {}
-else
-    # Sequential processing
-    echo "Processing files sequentially..."
-    while IFS= read -r tex_file; do
-        if [[ -n "$tex_file" ]]; then
-            compile_tex "$tex_file"
-            result=$?
-            case $result in
-                0) ((SUCCESS++)) ;;
-                1) ((FAILED++)) ;;
-                2) ((SKIPPED++)) ;;
-            esac
-        fi
-    done <<< "$TEX_FILES"
-fi
+# Process files sequentially
+echo "Processing files..."
+while IFS= read -r tex_file; do
+    if [[ -n "$tex_file" ]]; then
+        compile_tex "$tex_file"
+        result=$?
+        case $result in
+            0) ((SUCCESS++)) ;;
+            1) ((FAILED++)) ;;
+            2) ((SKIPPED++)) ;;
+        esac
+    fi
+done <<< "$TEX_FILES"
 
 # Clean auxiliary files if requested
 if $CLEAN; then
