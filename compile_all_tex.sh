@@ -133,7 +133,7 @@ should_skip() {
         return 0
     fi
     
-    # Skip pri*.tex files (unless it starts with principle)
+    # Skip pri*.tex files (preamble fragment files) - unless it starts with principle
     if [[ "$filename" == pri*.tex ]] && [[ "$filename" != principle*.tex ]]; then
         return 0
     fi
@@ -195,11 +195,19 @@ compile_tex() {
         echo -e "${GREEN}[OK]${NC}   $filename"
         return 0
     else
-        # Try to extract error from log
+        # Try to extract error from log (first error line, truncated intelligently)
         local log_file="$dir/$basename.log"
-        local error_msg=""
+        local error_msg="PDF not created"
         if [[ -f "$log_file" ]]; then
-            error_msg=$(grep -m1 "^!" "$log_file" 2>/dev/null | head -c 80 || echo "Unknown error")
+            # Extract first error line and truncate at word boundary
+            local raw_error=$(grep -m1 "^!" "$log_file" 2>/dev/null || echo "")
+            if [[ -n "$raw_error" ]]; then
+                if [[ ${#raw_error} -gt 100 ]]; then
+                    error_msg="${raw_error:0:100}..."
+                else
+                    error_msg="$raw_error"
+                fi
+            fi
         fi
         echo -e "${RED}[FAIL]${NC} $filename: $error_msg"
         return 1
