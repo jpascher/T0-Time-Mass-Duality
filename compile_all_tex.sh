@@ -133,7 +133,8 @@ should_skip() {
         return 0
     fi
     
-    # Skip pri*.tex files (preamble fragment files) - unless it starts with principle
+    # Skip pri*.tex files (preamble fragment files) but NOT principle*.tex (full documents)
+    # This allows principle*.tex documents to compile while excluding preamble files like prim*.tex
     if [[ "$filename" == pri*.tex ]] && [[ "$filename" != principle*.tex ]]; then
         return 0
     fi
