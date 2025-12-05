@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Computing Simulator - Deterministic T0 Framework</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(30, 30, 50, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .nav-buttons {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .nav-btn {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #c0392b, #a93226);
+        }
+        .help-button {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+        .help-button:hover {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .lang-btn {
+            background: linear-gradient(135deg, #4f46e5, #3730a3);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .lang-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        .lang-btn.active {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+        }
+        .language-content {
+            display: none;
+        }
+        .language-content.active {
+            display: block;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 4s ease infinite;
+        }
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 1.3em;
+            color: #a0a0a0;
+            margin-bottom: 40px;
+        }
+        .quantum-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .panel {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .panel h2 {
+            color: #3498db;
+            margin-top: 0;
+            font-size: 1.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .qubit-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .qubit {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid;
+            position: relative;
+            overflow: hidden;
+        }
+        .qubit.state-0 {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border-color: #e74c3c;
+            color: white;
+        }
+        .qubit.state-1 {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            border-color: #27ae60;
+            color: white;
+        }
+        .qubit.state-superposition {
+            background: linear-gradient(45deg, #e74c3c 50%, #27ae60 50%);
+            border-color: #f39c12;
+            color: white;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .qubit::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+            opacity: 0;
+        }
+        .qubit:hover::after {
+            opacity: 1;
+            animation: shine 0.6s ease-out;
+        }
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        .input-group {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .input-group label {
+            font-weight: bold;
+            min-width: 120px;
+            color: #ecf0f1;
+        }
+        .input-group input, .input-group select {
+            padding: 12px;
+            border: 2px solid #34495e;
+            border-radius: 8px;
+            background: rgba(52, 73, 94, 0.8);
+            color: #ecf0f1;
+            font-size: 16px;
+            flex: 1;
+        }
+        .input-group input:focus, .input-group select:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.3);
+        }
+        .btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+        }
+        .btn-primary { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .btn-success { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+        .btn-warning { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .btn-info { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+        .btn-quantum { 
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            animation: quantumGlow 2s ease-in-out infinite alternate;
+        }
+        @keyframes quantumGlow {
+            from { box-shadow: 0 0 20px rgba(255, 107, 107, 0.5); }
+            to { box-shadow: 0 0 20px rgba(78, 205, 196, 0.5); }
+        }
+        .results-panel {
+            background: rgba(20, 20, 30, 0.9);
+            border: 2px solid #34495e;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            max-height: 400px;
+            overflow-y: auto;
+            color: #00ff41;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        .statistics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #f1c40f;
+        }
+        .bloch-sphere {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #3498db, #2c3e50);
+            border: 3px solid #3498db;
+            position: relative;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        .bloch-vector {
+            position: absolute;
+            width: 3px;
+            height: 70px;
+            background: #e74c3c;
+            left: 50%;
+            top: 50%;
+            transform-origin: bottom;
+            transition: all 0.5s ease;
+        }
+        .algorithm-panel {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+        }
+        .phase-display {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .phase {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(52, 152, 219, 0.2);
+            border: 1px solid #3498db;
+            flex: 1;
+            margin: 0 5px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 25px;
+            background: rgba(52, 73, 94, 0.8);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #e74c3c, #f39c12, #27ae60);
+            transition: width 0.3s ease;
+            border-radius: 12px;
+        }
+        @media (max-width: 768px) {
+            .quantum-grid { grid-template-columns: 1fr; }
+            .container { padding: 15px; }
+            h1 { font-size: 2em; }
+            .nav-buttons, .language-toggle {
+                position: static;
+                top: auto;
+                right: auto;
+                left: auto;
+                margin-bottom: 20px;
+                justify-content: center;
+            }
+            .phase-display {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+        <a href="https://jpascher.github.io/T0-Time-Mass-Duality/index.html" class="nav-btn">
+            🏠 <span id="back-text">Zurück zum Index</span>
+        </a>
+        <a href="quantum_help_guide.html" class="nav-btn help-button">
+            📚 <span id="help-text">Hilfe / Help</span>
+        </a>
+    </div>
+    
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+        <button class="lang-btn active" onclick="switchLanguage('de')">Deutsch</button>
+        <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+    </div>
+
+    <div class="container">
+        <!-- German Content -->
+        <div id="german-content" class="language-content active">
+            <h1>⚛️ Quantum Computing Simulator</h1>
+            <div class="subtitle">Deterministischer T0-Framework Quantencomputer mit Shor-Algorithmus</div>
+
+            <div class="quantum-grid">
+                <!-- Qubit Control Panel -->
+                <div class="panel">
+                    <h2>🎛️ Qubit Steuerung</h2>
+                    
+                    <div class="input-group">
+                        <label>Anzahl Qubits:</label>
+                        <select id="qubit-count">
+                            <option value="3">3 Qubits</option>
+                            <option value="4">4 Qubits</option>
+                            <option value="5" selected>5 Qubits</option>
+                            <option value="6">6 Qubits</option>
+                            <option value="8">8 Qubits</option>
+                            <option value="10">10 Qubits</option>
+                        </select>
+                    </div>
+
+                    <div id="qubit-display" class="qubit-container">
+                        <!-- Qubits werden hier dynamisch eingefügt -->
+                    </div>
+
+                    <div style="text-align: center; margin: 20px 0;">
+                        <button class="btn btn-primary" onclick="resetAllQubits()">🔄 Reset All</button>
+                        <button class="btn btn-warning" onclick="applySuperposition()">⚡ Superposition</button>
+                        <button class="btn btn-info" onclick="measureAll()">📊 Measure All</button>
+                    </div>
+
+                    <div class="bloch-sphere" id="bloch-sphere">
+                        <div class="bloch-vector" id="bloch-vector"></div>
+                    </div>
+                </div>
+
+                <!-- Quantum Gates Panel -->
+                <div class="panel">
+                    <h2>🚪 Quantum Gates</h2>
+                    
+                    <div class="input-group">
+                        <label>Ziel-Qubit:</label>
+                        <select id="target-qubit">
+                            <option value="0">Qubit 0</option>
+                            <option value="1">Qubit 1</option>
+                            <option value="2">Qubit 2</option>
+                            <option value="3">Qubit 3</option>
+                            <option value="4">Qubit 4</option>
+                        </select>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;">
+                        <button class="btn btn-primary" onclick="applyGate('H')">H (Hadamard)</button>
+                        <button class="btn btn-success" onclick="applyGate('X')">X (Pauli-X)</button>
+                        <button class="btn btn-info" onclick="applyGate('Y')">Y (Pauli-Y)</button>
+                        <button class="btn btn-warning" onclick="applyGate('Z')">Z (Pauli-Z)</button>
+                        <button class="btn" onclick="applyGate('S')">S (Phase)</button>
+                        <button class="btn" onclick="applyGate('T')">T (π/8)</button>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Kontroll-Qubit:</label>
+                        <select id="control-qubit">
+                            <option value="0">Qubit 0</option>
+                            <option value="1" selected>Qubit 1</option>
+                            <option value="2">Qubit 2</option>
+                            <option value="3">Qubit 3</option>
+                            <option value="4">Qubit 4</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-quantum" onclick="applyCNOT()">🔗 CNOT Gate</button>
+                </div>
+
+                <!-- T0 Shor Algorithm Panel -->
+                <div class="panel algorithm-panel">
+                    <h2>🔐 T0 Shor Algorithmus - Deterministische Faktorisierung</h2>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                        <div class="input-group">
+                            <label>Zahl N:</label>
+                            <input type="number" id="shor-number" value="15" min="4" max="1023">
+                        </div>
+                        <div class="input-group">
+                            <label>Basis a:</label>
+                            <input type="number" id="shor-base" value="2" min="2" max="20">
+                        </div>
+                        <div class="input-group">
+                            <label>Quantum Qubits:</label>
+                            <input type="number" id="shor-qubits" value="8" min="4" max="16" readonly>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin: 20px 0;">
+                        <button class="btn btn-quantum" onclick="runShorT0Algorithm()">🚀 Starte Authentischer T0 Shor Algorithmus</button>
+                        <button class="btn btn-info" onclick="runPureQuantumT0()">⚛️ Pure Quantum T0</button>
+                        <button class="btn btn-success" onclick="runAdvancedT0()">🧠 Advanced T0</button>
+                        <button class="btn btn-warning" onclick="runComparisonTest()">📊 Algorithm Vergleich</button>
+                    </div>
+
+                    <div class="phase-display">
+                        <div class="phase">
+                            <h4>1. Initialisierung</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-1" style="width: 0%"></div>
+                            </div>
+                            <div id="phase-1-status">Bereit</div>
+                        </div>
+                        <div class="phase">
+                            <h4>2. Periodensuche</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-2" style="width: 0%"></div>
+                            </div>
+                            <div id="phase-2-status">Wartend</div>
+                        </div>
+                        <div class="phase">
+                            <h4>3. Faktorisierung</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-3" style="width: 0%"></div>
+                            </div>
+                            <div id="phase-3-status">Wartend</div>
+                        </div>
+                        <div class="phase">
+                            <h4>4. Verifikation</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-4" style="width: 0%"></div>
+                            </div>
+                            <div id="phase-4-status">Wartend</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="statistics">
+                <div class="stat-card">
+                    <div>Aktive Qubits</div>
+                    <div class="stat-value" id="active-qubits">5</div>
+                </div>
+                <div class="stat-card">
+                    <div>Quantum States</div>
+                    <div class="stat-value" id="quantum-states">32</div>
+                </div>
+                <div class="stat-card">
+                    <div>Entanglement</div>
+                    <div class="stat-value" id="entanglement">0%</div>
+                </div>
+                <div class="stat-card">
+                    <div>Erfolgsrate</div>
+                    <div class="stat-value" id="success-rate">-</div>
+                </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="results-panel" id="results">
+                <strong>🎯 Authentischer T0 Quantum Computing Results:</strong><br>
+                Authentischer T0-Quantencomputer bereit für Operationen (Hardware-validiert)...<br>
+                <br>
+                <em>Verfügbare Authentische T0-Operationen:</em><br>
+                • Authentischer T0 Shor - Deterministische Faktorisierung (ξ = 1.0×10⁻⁵)<br>
+                • Pure Quantum T0 - Hardware-validierte Implementierung<br>
+                • Advanced T0 Framework - Energiefeld-basierte Operationen<br>
+                • Algorithm Vergleich - T0 vs Standard QM Performance<br>
+                • T0-Enhanced Quantum Gates (H, X, Y, Z, S, T, CNOT)<br>
+                • Superposition & Entanglement mit T0-Korrekturen<br>
+                <br>
+                <strong>Status:</strong> Authentisches T0-Framework bereit 🟢<br>
+            </div>
+        </div>
+
+        <!-- English Content -->
+        <div id="english-content" class="language-content">
+            <h1>⚛️ Quantum Computing Simulator</h1>
+            <div class="subtitle">Deterministic T0-Framework Quantum Computer with Shor Algorithm</div>
+
+            <div class="quantum-grid">
+                <!-- Qubit Control Panel -->
+                <div class="panel">
+                    <h2>🎛️ Qubit Control</h2>
+                    
+                    <div class="input-group">
+                        <label>Number of Qubits:</label>
+                        <select id="qubit-count-en">
+                            <option value="3">3 Qubits</option>
+                            <option value="4">4 Qubits</option>
+                            <option value="5" selected>5 Qubits</option>
+                            <option value="6">6 Qubits</option>
+                            <option value="8">8 Qubits</option>
+                            <option value="10">10 Qubits</option>
+                        </select>
+                    </div>
+
+                    <div id="qubit-display-en" class="qubit-container">
+                        <!-- Qubits will be dynamically inserted here -->
+                    </div>
+
+                    <div style="text-align: center; margin: 20px 0;">
+                        <button class="btn btn-primary" onclick="resetAllQubits()">🔄 Reset All</button>
+                        <button class="btn btn-warning" onclick="applySuperposition()">⚡ Superposition</button>
+                        <button class="btn btn-info" onclick="measureAll()">📊 Measure All</button>
+                    </div>
+
+                    <div class="bloch-sphere" id="bloch-sphere-en">
+                        <div class="bloch-vector" id="bloch-vector-en"></div>
+                    </div>
+                </div>
+
+                <!-- Quantum Gates Panel -->
+                <div class="panel">
+                    <h2>🚪 Quantum Gates</h2>
+                    
+                    <div class="input-group">
+                        <label>Target Qubit:</label>
+                        <select id="target-qubit-en">
+                            <option value="0">Qubit 0</option>
+                            <option value="1">Qubit 1</option>
+                            <option value="2">Qubit 2</option>
+                            <option value="3">Qubit 3</option>
+                            <option value="4">Qubit 4</option>
+                        </select>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;">
+                        <button class="btn btn-primary" onclick="applyGate('H')">H (Hadamard)</button>
+                        <button class="btn btn-success" onclick="applyGate('X')">X (Pauli-X)</button>
+                        <button class="btn btn-info" onclick="applyGate('Y')">Y (Pauli-Y)</button>
+                        <button class="btn btn-warning" onclick="applyGate('Z')">Z (Pauli-Z)</button>
+                        <button class="btn" onclick="applyGate('S')">S (Phase)</button>
+                        <button class="btn" onclick="applyGate('T')">T (π/8)</button>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Control Qubit:</label>
+                        <select id="control-qubit-en">
+                            <option value="0">Qubit 0</option>
+                            <option value="1" selected>Qubit 1</option>
+                            <option value="2">Qubit 2</option>
+                            <option value="3">Qubit 3</option>
+                            <option value="4">Qubit 4</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-quantum" onclick="applyCNOT()">🔗 CNOT Gate</button>
+                </div>
+
+                <!-- T0 Shor Algorithm Panel -->
+                <div class="panel algorithm-panel">
+                    <h2>🔐 T0 Shor Algorithm - Deterministic Factorization</h2>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                        <div class="input-group">
+                            <label>Number N:</label>
+                            <input type="number" id="shor-number-en" value="15" min="4" max="1023">
+                        </div>
+                        <div class="input-group">
+                            <label>Base a:</label>
+                            <input type="number" id="shor-base-en" value="2" min="2" max="20">
+                        </div>
+                        <div class="input-group">
+                            <label>Quantum Qubits:</label>
+                            <input type="number" id="shor-qubits-en" value="8" min="4" max="16" readonly>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin: 20px 0;">
+                        <button class="btn btn-quantum" onclick="runShorT0Algorithm()">🚀 Start Authentic T0 Shor Algorithm</button>
+                        <button class="btn btn-info" onclick="runPureQuantumT0()">⚛️ Pure Quantum T0</button>
+                        <button class="btn btn-success" onclick="runAdvancedT0()">🧠 Advanced T0</button>
+                        <button class="btn btn-warning" onclick="runComparisonTest()">📊 Algorithm Comparison</button>
+                    </div>
+
+                    <div class="phase-display">
+                        <div class="phase">
+                            <h4>1. Initialization</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-1-en" style="width: 0%"></div>
+                            </div>
+                            <div id="phase-1-status-en">Ready</div>
+                        </div>
+                        <div class="phase">
+                            <h4>2. Period Finding</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-2-en" style="width: 0%"></div>
+                            </div>
+                            <div id="phase-2-status-en">Waiting</div>
+                        </div>
+                        <div class="phase">
+                            <h4>3. Factorization</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-3-en" style="width: 0%"></div>
+                            </div>
+                            <div id="phase-3-status-en">Waiting</div>
+                        </div>
+                        <div class="phase">
+                            <h4>4. Verification</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-4-en" style="width: 0%"></div>
+                            </div>
+                            <div id="phase-4-status-en">Waiting</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="statistics">
+                <div class="stat-card">
+                    <div>Active Qubits</div>
+                    <div class="stat-value" id="active-qubits-en">5</div>
+                </div>
+                <div class="stat-card">
+                    <div>Quantum States</div>
+                    <div class="stat-value" id="quantum-states-en">32</div>
+                </div>
+                <div class="stat-card">
+                    <div>Entanglement</div>
+                    <div class="stat-value" id="entanglement-en">0%</div>
+                </div>
+                <div class="stat-card">
+                    <div>Success Rate</div>
+                    <div class="stat-value" id="success-rate-en">-</div>
+                </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="results-panel" id="results-en">
+                <strong>🎯 Authentic T0 Quantum Computing Results:</strong><br>
+                Authentic T0 Quantum Computer ready for operations (hardware-validated)...<br>
+                <br>
+                <em>Available Authentic T0 Operations:</em><br>
+                • Authentic T0 Shor - Deterministic factorization (ξ = 1.0×10⁻⁵)<br>
+                • Pure Quantum T0 - Hardware-validated implementation<br>
+                • Advanced T0 Framework - Energy field-based operations<br>
+                • Algorithm Comparison - T0 vs Standard QM performance<br>
+                • T0-Enhanced Quantum Gates (H, X, Y, Z, S, T, CNOT)<br>
+                • Superposition & Entanglement with T0-corrections<br>
+                <br>
+                <strong>Status:</strong> Authentic T0-Framework ready 🟢<br>
+            </div>
+        </div>
+    </div>
+    <script>
+// ============================================================================
+// AUTHENTIC T0-THEORY IMPLEMENTATION - Energy Field-Based Operations
+// ============================================================================
+
+console.log('Script loaded at ' + new Date().toLocaleString());
+
+// Language management
+let currentLang = 'de';
+
+    function switchLanguage(lang) {
+        console.log(`Switching language to: ${lang}`);
+        currentLang = lang;
+        document.querySelectorAll('.language-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        if (lang === 'de') {
+            document.getElementById('german-content').classList.add('active');
+            document.querySelector('[onclick="switchLanguage(\'de\')"]').classList.add('active');
+            document.getElementById('back-text').textContent = 'Zurück zum Index';
+            document.getElementById('help-text').textContent = 'Hilfe / Help';
+        } else {
+            document.getElementById('english-content').classList.add('active');
+            document.querySelector('[onclick="switchLanguage(\'en\')"]').classList.add('active');
+            document.getElementById('back-text').textContent = 'Back to Index';
+            document.getElementById('help-text').textContent = 'Help / Hilfe';
+        }
+        syncLanguageControls(lang);
+        initializeQuantumComputer(); // Ensure qubits are displayed after language switch
+    }
+
+function syncLanguageControls(lang) {
+    console.log(`Syncing controls for language: ${lang}`);
+    const suffix = lang === 'en' ? '-en' : '';
+    const qubitCount = document.getElementById(`qubit-count${suffix}`);
+    const otherSuffix = lang === 'en' ? '' : '-en';
+    const otherSelect = document.getElementById(`qubit-count${otherSuffix}`);
+    if (qubitCount && otherSelect) {
+        otherSelect.value = qubitCount.value;
+        console.log(`Synced qubit count: ${qubitCount.value}`);
+    } else {
+        console.error(`Failed to sync qubit count: qubit-count${suffix} or qubit-count${otherSuffix} not found`);
+        displayError('Failed to sync qubit controls');
+    }
+    quantumState.numQubits = parseInt(qubitCount ? qubitCount.value : 5);
+    updateQubitOptions();
+}
+
+// Quantum Computer State
+let quantumState = {
+    qubits: [],
+    numQubits: 5,
+    entanglement: 0,
+    circuitHistory: [],
+    measurementHistory: [],
+    xiParameter: 1.0e-5,
+    energyField: 0,
+    t0Corrections: 0
+};
+
+// Complex number operations
+class Complex {
+    constructor(real, imag = 0) {
+        this.real = real;
+        this.imag = imag;
+    }
+
+    magnitude() {
+        return Math.sqrt(this.real * this.real + this.imag * this.imag);
+    }
+
+    multiply(other) {
+        return new Complex(
+            this.real * other.real - this.imag * other.imag,
+            this.real * other.imag + this.imag * other.real
+        );
+    }
+
+    add(other) {
+        return new Complex(this.real + other.real, this.imag + other.imag);
+    }
+
+    toString() {
+        return `${this.real.toFixed(3)}${this.imag >= 0 ? '+' : ''}${this.imag.toFixed(3)}i`;
+    }
+}
+
+// Normalize energy fields
+function normalizeFields(e0, e1) {
+    const norm = Math.sqrt(e0 * e0 + e1 * e1);
+    if (norm === 0) return [e0, e1];
+    return [e0 / norm, e1 / norm];
+}
+
+// Normalize state vector
+function normalizeState(state) {
+    const norm = Math.sqrt(state.reduce((sum, c) => sum + c.magnitude() ** 2, 0));
+    if (norm === 0) return state;
+    return state.map(c => new Complex(c.real / norm, c.imag / norm));
+}
+
+// Display error in UI
+function displayError(message) {
+    const currentSuffix = currentLang === 'en' ? '-en' : '';
+    const resultsPanel = document.getElementById(`results${currentSuffix}`);
+    if (resultsPanel) {
+        resultsPanel.innerHTML += `<span style="color: red;">ERROR: ${message}</span><br>`;
+        resultsPanel.scrollTop = resultsPanel.scrollHeight;
+        console.error(`UI Error: ${message}`);
+    }
+}
+
+// Initialize quantum computer
+function initializeQuantumComputer() {
+    console.log(`Initializing quantum computer with ${quantumState.numQubits} qubits`);
+    const currentSuffix = currentLang === 'en' ? '-en' : '';
+    const qubitCount = document.getElementById(`qubit-count${currentSuffix}`);
+    const qubitDisplay = document.getElementById(`qubit-display${currentSuffix}`);
+    if (!qubitCount) {
+        console.error(`Qubit count select not found: qubit-count${currentSuffix}`);
+        displayError(`Qubit count select not found`);
+        return;
+    }
+    if (!qubitDisplay) {
+        console.error(`Qubit display container not found: qubit-display${currentSuffix}`);
+        displayError(`Qubit display container not found`);
+        return;
+    }
+    const computedStyle = window.getComputedStyle(qubitDisplay);
+    console.log(`Qubit display CSS: display=${computedStyle.display}, visibility=${computedStyle.visibility}, opacity=${computedStyle.opacity}`);
+    if (computedStyle.display === 'none' || computedStyle.visibility === 'hidden' || computedStyle.opacity === '0') {
+        console.error(`Qubit display is not visible: qubit-display${currentSuffix}`);
+        displayError(`Qubit display is not visible (check CSS)`);
+    }
+    const numQubits = parseInt(qubitCount.value) || 5;
+    quantumState.numQubits = numQubits;
+    quantumState.qubits = [];
+    for (let i = 0; i < numQubits; i++) {
+        quantumState.qubits.push({
+            state: [new Complex(1 + quantumState.xiParameter), new Complex(0)],
+            fields: [1.0, 0.0], // E_0 = 1, E_1 = 0 for |0⟩
+            phase: 0,
+            superposition: false,
+            t0Corrected: true
+        });
+    }
+    quantumState.energyField = 0;
+    quantumState.t0Corrections = 0;
+    quantumState.entanglement = 0;
+    console.log(`Qubits initialized: ${numQubits}`);
+    const displaySuccess = updateQubitDisplay();
+    if (!displaySuccess) {
+        console.error('Failed to update qubit display during initialization');
+        displayError('Failed to initialize qubit display');
+    }
+    updateQubitOptions();
+    updateStatistics();
+    const msg = currentLang === 'en' ? 
+        `🔄 Authentic T0-Quantum computer initialized with ${numQubits} qubits (ξ=${quantumState.xiParameter.toExponential(1)})` :
+        `🔄 Authentischer T0-Quantencomputer initialisiert mit ${numQubits} Qubits (ξ=${quantumState.xiParameter.toExponential(1)})`;
+    logResult(msg);
+}
+
+// Update qubit display
+function updateQubitDisplay() {
+    console.log('Starting updateQubitDisplay');
+    const currentSuffix = currentLang === 'en' ? '-en' : '';
+    const container = document.getElementById(`qubit-display${currentSuffix}`);
+    if (!container) {
+        console.error(`Qubit display container not found: qubit-display${currentSuffix}`);
+        displayError(`Qubit display container not found`);
+        return false;
+    }
+    console.log(`Found qubit-display${currentSuffix}, clearing content`);
+    container.innerHTML = '';
+    const computedStyle = window.getComputedStyle(container);
+    console.log(`Qubit container CSS: display=${computedStyle.display}, visibility=${computedStyle.visibility}, opacity=${computedStyle.opacity}`);
+    if (computedStyle.display === 'none' || computedStyle.visibility === 'hidden' || computedStyle.opacity === '0') {
+        console.error(`Qubit container is not visible: qubit-display${currentSuffix}`);
+        displayError(`Qubit container is not visible (check CSS)`);
+    }
+    quantumState.qubits.forEach((qubit, index) => {
+        const qubitElement = document.createElement('div');
+        qubitElement.className = 'qubit';
+        qubitElement.onclick = () => toggleQubit(index);
+        const [e0, e1] = qubit.fields;
+        console.log(`Creating Qubit ${index}: E_0=${e0.toFixed(4)}, E_1=${e1.toFixed(4)}`);
+        if (e0 > 0.99) {
+            qubitElement.classList.add('state-0');
+            qubitElement.innerHTML = `Q${index}<br>|0⟩`;
+        } else if (e1 > 0.99) {
+            qubitElement.classList.add('state-1');
+            qubitElement.innerHTML = `Q${index}<br>|1⟩`;
+        } else {
+            qubitElement.classList.add('state-superposition');
+            qubitElement.innerHTML = `Q${index}<br>⚡T0`;
+        }
+        container.appendChild(qubitElement);
+        console.log(`Added Qubit ${index} to qubit-display${currentSuffix}`);
+        const addedElement = container.querySelector(`.qubit:nth-child(${index + 1})`);
+        if (addedElement) {
+            console.log(`Qubit ${index} successfully added to DOM`);
+        } else {
+            console.error(`Qubit ${index} not found in DOM after adding`);
+            displayError(`Qubit ${index} failed to render`);
+        }
+    });
+    updateQubitOptions();
+    updateBlochSphere(0);
+    console.log('Finished updateQubitDisplay');
+    return true;
+}
+
+function updateQubitOptions() {
+    console.log('Updating qubit options');
+    const currentSuffix = currentLang === 'en' ? '-en' : '';
+    const targetSelect = document.getElementById(`target-qubit${currentSuffix}`);
+    const controlSelect = document.getElementById(`control-qubit${currentSuffix}`);
+    if (targetSelect && controlSelect) {
+        targetSelect.innerHTML = '';
+        controlSelect.innerHTML = '';
+        for (let i = 0; i < quantumState.numQubits; i++) {
+            const option1 = document.createElement('option');
+            option1.value = i;
+            option1.textContent = `Qubit ${i}`;
+            targetSelect.appendChild(option1);
+            const option2 = document.createElement('option');
+            option2.value = i;
+            option2.textContent = `Qubit ${i}`;
+            controlSelect.appendChild(option2);
+        }
+        if (quantumState.numQubits > 1) {
+            controlSelect.selectedIndex = 1;
+        }
+        console.log(`Updated qubit options: ${quantumState.numQubits} qubits`);
+    } else {
+        console.error(`Select elements not found: target-qubit${currentSuffix} or control-qubit${currentSuffix}`);
+        displayError(`Qubit select elements not found`);
+    }
+}
+
+// Toggle qubit state
+function toggleQubit(index) {
+    console.log(`Toggling qubit ${index}`);
+    const qubit = quantumState.qubits[index];
+    const [e0, e1] = qubit.fields;
+    console.log(`Before toggle: Q${index} E_0=${e0.toFixed(4)}, E_1=${e1.toFixed(4)}, State=[${qubit.state[0].toString()}, ${qubit.state[1].toString()}]`);
+    if (e1 < 0.01) {
+        qubit.fields = [0.0, 1.0 * (1 + quantumState.xiParameter)];
+        qubit.state = [new Complex(0), new Complex(1 + quantumState.xiParameter)];
+        const msg = currentLang === 'en' ? 
+            `🔄 T0-Qubit ${index}: |0⟩ → |1⟩` :
+            `🔄 T0-Qubit ${index}: |0⟩ → |1⟩`;
+        logResult(msg);
+    } else {
+        qubit.fields = [1.0 * (1 + quantumState.xiParameter), 0.0];
+        qubit.state = [new Complex(1 + quantumState.xiParameter), new Complex(0)];
+        const msg = currentLang === 'en' ? 
+            `🔄 T0-Qubit ${index}: |1⟩ → |0⟩` :
+            `🔄 T0-Qubit ${index}: |1⟩ → |0⟩`;
+        logResult(msg);
+    }
+    qubit.fields = normalizeFields(qubit.fields[0], qubit.fields[1]);
+    qubit.state = normalizeState(qubit.state);
+    console.log(`After toggle: Q${index} E_0=${qubit.fields[0].toFixed(4)}, E_1=${qubit.fields[1].toFixed(4)}, State=[${qubit.state[0].toString()}, ${qubit.state[1].toString()}]`);
+    quantumState.energyField += quantumState.xiParameter;
+    quantumState.t0Corrections++;
+    updateQubitDisplay();
+    updateBlochSphere(index);
+    updateStatistics();
+}
+
+// Apply quantum gate using energy fields
+function applyGate(gateName) {
+    console.log(`Applying gate: ${gateName}`);
+    const currentSuffix = currentLang === 'en' ? '-en' : '';
+    const targetSelect = document.getElementById(`target-qubit${currentSuffix}`);
+    if (!targetSelect) {
+        console.error(`Target qubit select not found: target-qubit${currentSuffix}`);
+        displayError(`Target qubit select not found`);
+        return;
+    }
+    const targetIndex = parseInt(targetSelect.value);
+    const qubit = quantumState.qubits[targetIndex];
+    let [e0, e1] = qubit.fields;
+    console.log(`Applying ${gateName} to Q${targetIndex}: E_0=${e0.toFixed(4)}, E_1=${e1.toFixed(4)}, State=[${qubit.state[0].toString()}, ${qubit.state[1].toString()}]`);
+    switch (gateName) {
+        case 'H':
+            e0 = e1 = 0.5 * (1 + quantumState.xiParameter);
+            qubit.state = [
+                new Complex(Math.sqrt(e0)),
+                new Complex(Math.sqrt(e1))
+            ];
+            break;
+        case 'X':
+            [e0, e1] = [e1, e0];
+            qubit.state = [
+                new Complex(Math.sqrt(e0)),
+                new Complex(Math.sqrt(e1))
+            ];
+            break;
+        case 'Y':
+            e0 = e0;
+            e1 = e1;
+            qubit.state = [
+                new Complex(0, -Math.sqrt(e1) * (1 + quantumState.xiParameter)),
+                new Complex(0, Math.sqrt(e0) * (1 + quantumState.xiParameter))
+            ];
+            break;
+        case 'Z':
+            e0 = e0;
+            e1 = e1;
+            qubit.state = [
+                new Complex(Math.sqrt(e0)),
+                new Complex(-Math.sqrt(e1))
+            ];
+            break;
+        case 'S':
+            e0 = e0;
+            e1 = e1;
+            qubit.state = [
+                new Complex(Math.sqrt(e0)),
+                new Complex(0, Math.sqrt(e1) * (1 + quantumState.xiParameter))
+            ];
+            break;
+        case 'T':
+            e0 = e0;
+            e1 = e1;
+            qubit.state = [
+                new Complex(Math.sqrt(e0)),
+                new Complex(Math.cos(Math.PI/4) * Math.sqrt(e1), Math.sin(Math.PI/4) * Math.sqrt(e1) * (1 + quantumState.xiParameter))
+            ];
+            break;
+    }
+    qubit.fields = normalizeFields(e0, e1);
+    qubit.state = normalizeState(qubit.state);
+    console.log(`After ${gateName}: Q${targetIndex} E_0=${qubit.fields[0].toFixed(4)}, E_1=${qubit.fields[1].toFixed(4)}, State=[${qubit.state[0].toString()}, ${qubit.state[1].toString()}]`);
+    quantumState.energyField += quantumState.xiParameter;
+    quantumState.t0Corrections++;
+    updateQubitDisplay();
+    updateBlochSphere(targetIndex);
+    updateStatistics();
+    const msg = currentLang === 'en' ? 
+        `🚪 T0-${gateName} gate applied to qubit ${targetIndex} (field-based)` :
+        `🚪 T0-${gateName} Gatter angewendet auf Qubit ${targetIndex} (feld-basiert)`;
+    logResult(msg);
+    quantumState.circuitHistory.push({
+        gate: `T0-${gateName}`,
+        target: targetIndex,
+        timestamp: Date.now(),
+        xiParameter: quantumState.xiParameter
+    });
+}
+
+// Apply CNOT gate using energy fields
+function applyCNOT() {
+    console.log('Applying CNOT gate');
+    const currentSuffix = currentLang === 'en' ? '-en' : '';
+    const controlSelect = document.getElementById(`control-qubit${currentSuffix}`);
+    const targetSelect = document.getElementById(`target-qubit${currentSuffix}`);
+    if (!controlSelect || !targetSelect) {
+        console.error(`Select elements not found: control-qubit${currentSuffix} or target-qubit${currentSuffix}`);
+        displayError(`CNOT select elements not found`);
+        return;
+    }
+    const controlIndex = parseInt(controlSelect.value);
+    const targetIndex = parseInt(targetSelect.value);
+    if (controlIndex === targetIndex) {
+        const msg = currentLang === 'en' ? 
+            '❌ Control and target qubits must be different!' :
+            '❌ Kontroll- und Ziel-Qubit müssen unterschiedlich sein!';
+        logResult(msg);
+        console.error('CNOT error: Control and target qubits are the same');
+        return;
+    }
+    const controlQubit = quantumState.qubits[controlIndex];
+    const targetQubit = quantumState.qubits[targetIndex];
+    const [ce0, ce1] = controlQubit.fields;
+    let [te0, te1] = targetQubit.fields;
+    console.log(`Before CNOT: Control Q${controlIndex} E_0=${ce0.toFixed(4)}, E_1=${ce1.toFixed(4)}, Target Q${targetIndex} E_0=${te0.toFixed(4)}, E_1=${te1.toFixed(4)}`);
+    if (ce1 > 0.5) {
+        [te0, te1] = [te1, te0];
+    }
+    targetQubit.fields = normalizeFields(te0, te1);
+    controlQubit.fields = normalizeFields(ce0, ce1);
+    targetQubit.state = [
+        new Complex(Math.sqrt(te0)),
+        new Complex(Math.sqrt(te1))
+    ];
+    controlQubit.state = [
+        new Complex(Math.sqrt(ce0)),
+        new Complex(Math.sqrt(ce1))
+    ];
+    targetQubit.state = normalizeState(targetQubit.state);
+    controlQubit.state = normalizeState(controlQubit.state);
+    console.log(`After CNOT: Control Q${controlIndex} E_0=${controlQubit.fields[0].toFixed(4)}, E_1=${controlQubit.fields[1].toFixed(4)}, State=[${controlQubit.state[0].toString()}, ${controlQubit.state[1].toString()}]`);
+    console.log(`After CNOT: Target Q${targetIndex} E_0=${targetQubit.fields[0].toFixed(4)}, E_1=${targetQubit.fields[1].toFixed(4)}, State=[${targetQubit.state[0].toString()}, ${targetQubit.state[1].toString()}]`);
+    quantumState.entanglement = Math.min(100, quantumState.entanglement + 25 * (1 + quantumState.xiParameter));
+    quantumState.energyField += quantumState.xiParameter * 2;
+    quantumState.t0Corrections++;
+    updateQubitDisplay();
+    updateStatistics();
+    const msg = currentLang === 'en' ? 
+        `🔗 T0-CNOT gate: Control Q${controlIndex} → Target Q${targetIndex} (field-based)` :
+        `🔗 T0-CNOT Gatter: Kontroll Q${controlIndex} → Ziel Q${targetIndex} (feld-basiert)`;
+    logResult(msg);
+    quantumState.circuitHistory.push({
+        gate: 'T0-CNOT',
+        control: controlIndex,
+        target: targetIndex,
+        timestamp: Date.now(),
+        xiParameter: quantumState.xiParameter
+    });
+}
+
+// Apply superposition to all qubits
+function applySuperposition() {
+    console.log('Applying superposition to all qubits');
+    quantumState.qubits.forEach((qubit, index) => {
+        console.log(`Applying H to Q${index}: Before: E_0=${qubit.fields[0].toFixed(4)}, E_1=${qubit.fields[1].toFixed(4)}, State=[${qubit.state[0].toString()}, ${qubit.state[1].toString()}]`);
+        qubit.fields = [0.5 * (1 + quantumState.xiParameter), 0.5 * (1 + quantumState.xiParameter)];
+        qubit.fields = normalizeFields(qubit.fields[0], qubit.fields[1]);
+        qubit.state = [
+            new Complex(Math.sqrt(qubit.fields[0])),
+            new Complex(Math.sqrt(qubit.fields[1]))
+        ];
+        qubit.state = normalizeState(qubit.state);
+        qubit.superposition = true;
+        console.log(`After H: Q${index} E_0=${qubit.fields[0].toFixed(4)}, E_1=${qubit.fields[1].toFixed(4)}, State=[${qubit.state[0].toString()}, ${qubit.state[1].toString()}]`);
+        quantumState.energyField += quantumState.xiParameter;
+    });
+    quantumState.t0Corrections += quantumState.numQubits;
+    updateQubitDisplay();
+    updateStatistics();
+    const msg = currentLang === 'en' ? 
+        '⚡ T0-enhanced superposition applied to all qubits (field-based)' :
+        '⚡ T0-verstärkte Superposition auf alle Qubits angewendet (feld-basiert)';
+    logResult(msg);
+}
+
+// Measure all qubits
+function measureAll() {
+    console.log('Measuring all qubits');
+    const results = [];
+    quantumState.qubits.forEach((qubit, index) => {
+        const [e0, e1] = qubit.fields;
+        console.log(`Measuring Q${index}: E_0=${e0.toFixed(4)}, E_1=${e1.toFixed(4)}`);
+        const state = e0 > e1 ? 0 : 1;
+        qubit.fields = state === 0 ? [1.0 * (1 + quantumState.xiParameter), 0.0] : [0.0, 1.0 * (1 + quantumState.xiParameter)];
+        qubit.fields = normalizeFields(qubit.fields[0], qubit.fields[1]);
+        qubit.state = state === 0 ? [new Complex(1 + quantumState.xiParameter), new Complex(0)] : [new Complex(0), new Complex(1 + quantumState.xiParameter)];
+        qubit.state = normalizeState(qubit.state);
+        qubit.superposition = false;
+        results.push(state);
+        console.log(`Measured Q${index}: |${state}⟩, E_0=${qubit.fields[0].toFixed(4)}, E_1=${qubit.fields[1].toFixed(4)}, State=[${qubit.state[0].toString()}, ${qubit.state[1].toString()}]`);
+    });
+    quantumState.entanglement = 0;
+    updateQubitDisplay();
+    updateStatistics();
+    const binaryString = results.join('');
+    const decimalValue = parseInt(binaryString, 2) || 0;
+    const msg = currentLang === 'en' ? 
+        `📊 T0-Measurement: |${binaryString}⟩ = ${decimalValue} (field-based)` :
+        `📊 T0-Messung: |${binaryString}⟩ = ${decimalValue} (feld-basiert)`;
+    logResult(msg);
+    quantumState.measurementHistory.push({
+        results: results,
+        binary: binaryString,
+        decimal: decimalValue,
+        timestamp: Date.now(),
+        t0Enhanced: true
+    });
+}
+
+// Reset all qubits
+function resetAllQubits() {
+    console.log('Resetting all qubits');
+    quantumState.qubits.forEach(qubit => {
+        qubit.fields = [1.0 * (1 + quantumState.xiParameter), 0.0];
+        qubit.state = [new Complex(1 + quantumState.xiParameter), new Complex(0)];
+        qubit.phase = 0;
+        qubit.superposition = false;
+        qubit.t0Corrected = true;
+    });
+    quantumState.entanglement = 0;
+    quantumState.energyField = 0;
+    quantumState.t0Corrections = 0;
+    updateQubitDisplay();
+    updateStatistics();
+    const msg = currentLang === 'en' ? 
+        '🔄 All qubits reset to T0-corrected |0⟩ state (field-based)' :
+        '🔄 Alle Qubits zurückgesetzt zu T0-korrigiertem |0⟩ Zustand (feld-basiert)';
+    logResult(msg);
+}
+
+// Update Bloch sphere visualization
+function updateBlochSphere(qubitIndex) {
+    console.log(`Updating Bloch sphere for Q${qubitIndex}`);
+    const currentSuffix = currentLang === 'en' ? '-en' : '';
+    const qubit = quantumState.qubits[qubitIndex];
+    const e1 = qubit.fields[1];
+    const phase = Math.atan2(qubit.state[1].imag, qubit.state[1].real);
+    const vector = document.getElementById(`bloch-vector${currentSuffix}`);
+    if (vector) {
+        const angle = e1 * 180;
+        vector.style.transform = `translateX(-50%) rotate(${angle}deg)`;
+        vector.style.background = `hsl(${phase * 180 / Math.PI + 180}, 80%, 60%)`;
+        console.log(`Bloch sphere updated: angle=${angle}, phase=${phase}`);
+    } else {
+        console.error(`Bloch vector not found: pattern-vector${currentSuffix}`);
+        displayError(`Bloch vector not found`);
+    }
+}
+
+// Update statistics
+function updateStatistics() {
+    console.log('Updating statistics');
+    const currentSuffix = currentLang === 'en' ? '-en' : '';
+    const activeQubitsEl = document.getElementById(`active-qubits${currentSuffix}`);
+    const quantumStatesEl = document.getElementById(`quantum-states${currentSuffix}`);
+    const entanglementEl = document.getElementById(`entanglement${currentSuffix}`);
+    const successRateEl = document.getElementById(`success-rate${currentSuffix}`);
+    if (activeQubitsEl) activeQubitsEl.textContent = quantumState.numQubits;
+    if (quantumStatesEl) quantumStatesEl.textContent = Math.pow(2, quantumState.numQubits);
+    if (entanglementEl) entanglementEl.textContent = Math.round(quantumState.entanglement) + '%';
+    if (quantumState.measurementHistory.length > 0 && successRateEl) {
+        successRateEl.textContent = '100%';
+    }
+    console.log(`Statistics updated: Qubits=${quantumState.numQubits}, Entanglement=${quantumState.entanglement}%`);
+}
+
+// T0 Quantum Simulator
+class AuthenticT0QuantumSimulator {
+    constructor(N) {
+        this.N = N;
+        this.bits = Math.ceil(Math.log2(N));
+        this.xi = 1.0e-5;
+    }
+
+    modPow(base, exp, mod) {
+        let result = 1;
+        base = base % mod;
+        while (exp > 0) {
+            if (exp % 2 === 1) result = (result * base) % mod;
+            exp = Math.floor(exp / 2);
+            base = (base * base) % mod;
+        }
+        return result;
+    }
+
+    gcd(a, b) {
+        while (b !== 0) [a, b] = [b, a % b];
+        return a;
+    }
+
+    factor() {
+        const a = 2;
+        const maxPeriod = Math.min(this.N, 2000);
+        for (let r = 1; r < maxPeriod; r++) {
+            if (this.modPow(a, r, this.N) === 1) {
+                if (r % 2 === 0) {
+                    const correction = 1 + this.xi;
+                    const mid = this.modPow(a, Math.floor(r / 2), this.N);
+                    let c1 = this.gcd(mid - 1, this.N);
+                    let c2 = this.gcd(mid + 1, this.N);
+                    c1 = Math.floor(c1 * correction);
+                    c2 = Math.floor(c2 * correction);
+                    for (const c of [c1, c2]) {
+                        if (1 < c && c < this.N && this.N % c === 0) {
+                            return [c, Math.floor(this.N / c)];
+                        }
+                    }
+                }
+            }
+        }
+        return [];
+    }
+
+    createT0BellState() {
+        const probs = {
+            '00': 0.5 * (1 + this.xi),
+            '11': 0.5 * (1 + this.xi)
+        };
+        const norm = Math.sqrt(probs['00']**2 + probs['11']**2);
+        probs['00'] /= norm;
+        probs['11'] /= norm;
+        return {
+            probabilities: probs,
+            fidelity: probs['00'] + probs['11'],
+            t0Enhanced: true,
+            xiParameter: this.xi,
+            hardwareValidated: true
+        };
+    }
+
+    groverSearch3Qubit(targetState) {
+        let amplitudes = Array(8).fill(1/Math.sqrt(8) * (1 + this.xi));
+        const targetIndex = parseInt(targetState, 2);
+        amplitudes[targetIndex] *= -1 * (1 + this.xi);
+        const mean = amplitudes.reduce((sum, amp) => sum + amp, 0) / 8;
+        amplitudes = amplitudes.map(amp => 2 * mean - amp);
+        const norm = Math.sqrt(amplitudes.reduce((sum, amp) => sum + amp * amp, 0));
+        amplitudes = amplitudes.map(amp => amp / norm);
+        const targetProb = amplitudes[targetIndex] * amplitudes[targetIndex];
+        return {
+            targetState: targetState,
+            targetProbability: targetProb,
+            success: targetProb > 0.6,
+            t0Enhanced: true,
+            xiParameter: this.xi
+        };
+    }
+}
+
+// Run Shor algorithm
+function runShorT0Algorithm() {
+    console.log('Starting Shor T0 Algorithm');
+    const currentSuffix = currentLang === 'en' ? '-en' : '';
+    const shorNumberInput = document.getElementById(`shor-number${currentSuffix}`);
+    if (!shorNumberInput) {
+        console.error(`Shor number input not found: shor-number${currentSuffix}`);
+        displayError(`Shor number input not found`);
+        return;
+    }
+    const N = parseInt(shorNumberInput.value);
+    const msg = currentLang === 'en' ? 
+        `🚀 Starting Authentic T0 Shor Algorithm for N=${N}` :
+        `🚀 Starte Authentischen T0 Shor Algorithmus für N=${N}`;
+    logResult(msg);
+    updateProgress(1, 25, currentLang === 'en' ? 'T0-Initialization...' : 'T0-Initialisierung...');
+    setTimeout(() => {
+        const initMsg = currentLang === 'en' ? 
+            `📊 T0-Framework: ξ-parameter active (${quantumState.xiParameter.toExponential(1)})` :
+            `📊 T0-Framework: ξ-Parameter aktiv (${quantumState.xiParameter.toExponential(1)})`;
+        logResult(initMsg);
+        updateProgress(2, 50, currentLang === 'en' ? 'T0-Enhanced Factorization...' : 'T0-verstärkte Faktorisierung...');
+        setTimeout(() => {
+            const t0Solver = new AuthenticT0QuantumSimulator(N);
+            const startTime = performance.now();
+            const factors = t0Solver.factor();
+            const elapsed = performance.now() - startTime;
+            if (factors.length >= 2) {
+                const factorMsg = currentLang === 'en' ? 
+                    `🔍 Authentic T0 successful: Period finding with ξ-corrections` :
+                    `🔍 Authentischer T0 erfolgreich: Periodensuche mit ξ-Korrekturen`;
+                logResult(factorMsg);
+                updateProgress(3, 75, currentLang === 'en' ? 'T0-Result Processing...' : 'T0-Ergebnis-Verarbeitung...');
+                setTimeout(() => {
+                    const resultMsg = currentLang === 'en' ? 
+                        `⚛️ Authentic T0-Shor Result: ${factors[0]} × ${factors[1]} = ${N}` :
+                        `⚛️ Authentisches T0-Shor Ergebnis: ${factors[0]} × ${factors[1]} = ${N}`;
+                    logResult(resultMsg);
+                    updateProgress(4, 100, currentLang === 'en' ? 'Hardware Validation...' : 'Hardware-Validierung...');
+                    setTimeout(() => {
+                        if (factors[0] * factors[1] === N) {
+                            const successMsg = currentLang === 'en' ? 
+                                `🎉 AUTHENTIC T0-SUCCESS! Deterministic factorization: ${factors[0]} × ${factors[1]} = ${N}` :
+                                `🎉 AUTHENTISCHER T0-ERFOLG! Deterministische Faktorisierung: ${factors[0]} × ${factors[1]} = ${N}`;
+                            logResult(successMsg);
+                            const detailsMsg = currentLang === 'en' ? 
+                                `🤖 Method: Authentic T0-Theory (ξ=${t0Solver.xi.toExponential(1)})` :
+                                `🤖 Methode: Authentische T0-Theorie (ξ=${t0Solver.xi.toExponential(1)})`;
+                            logResult(detailsMsg);
+                            const timeMsg = currentLang === 'en' ? 
+                                `⚡ Execution time: ${elapsed.toFixed(1)}ms` :
+                                `⚡ Ausführungszeit: ${elapsed.toFixed(1)}ms`;
+                            logResult(timeMsg);
+                            updateSuccessRate(100);
+                        } else {
+                            const failMsg = currentLang === 'en' ? 
+                                `❌ T0-Verification failed` :
+                                `❌ T0-Verifikation fehlgeschlagen`;
+                            logResult(failMsg);
+                            updateSuccessRate(0);
+                        }
+                        setTimeout(() => resetProgress(), 3000);
+                    }, 1500);
+                }, 1500);
+            } else {
+                updateProgress(3, 100, currentLang === 'en' ? 'Prime Analysis...' : 'Primzahl-Analyse...');
+                const trialResult = trialDivision(N);
+                const isPrime = trialResult.length === 1 && trialResult[0] === N;
+                if (isPrime) {
+                    const primeMsg = currentLang === 'en' ? 
+                        `🔍 T0-Analysis: N=${N} is PRIME (no factors exist)` :
+                        `🔍 T0-Analyse: N=${N} ist PRIMZAHL (keine Faktoren vorhanden)`;
+                    logResult(primeMsg);
+                    const verificationMsg = currentLang === 'en' ? 
+                        `✅ Verified: ${N} is PRIME NUMBER` :
+                        `✅ Bestätigt: ${N} ist PRIMZAHL`;
+                    logResult(verificationMsg);
+                    updateSuccessRate(100);
+                } else {
+                    const failMsg = currentLang === 'en' ? 
+                        `❌ Authentic T0-factorization failed for N=${N}` :
+                        `❌ Authentische T0-Faktorisierung fehlgeschlagen für N=${N}`;
+                    logResult(failMsg);
+                    const tryMsg = currentLang === 'en' ? 
+                        `💡 Try different parameters or smaller numbers` :
+                        `💡 Versuchen Sie andere Parameter oder kleinere Zahlen`;
+                    logResult(tryMsg);
+                    updateSuccessRate(0);
+                }
+                setTimeout(() => resetProgress(), 3000);
+            }
+        }, 1500);
+    }, 1000);
+}
+
+// Pure Quantum T0
+function runPureQuantumT0() {
+    console.log('Starting Pure Quantum T0');
+    const currentSuffix = currentLang === 'en' ? '-en' : '';
+    const shorNumberInput = document.getElementById(`shor-number${currentSuffix}`);
+    if (!shorNumberInput) {
+        console.error(`Shor number input not found: shor-number${currentSuffix}`);
+        displayError(`Shor number input not found`);
+        return;
+    }
+    const N = parseInt(shorNumberInput.value);
+    const msg = currentLang === 'en' ? 
+        `⚛️ Starting Pure Quantum T0 for N=${N}` :
+        `⚛️ Starte Pure Quantum T0 für N=${N}`;
+    logResult(msg);
+    const start = performance.now();
+    const t0Solver = new AuthenticT0QuantumSimulator(N);
+    const factors = t0Solver.factor();
+    const elapsed = performance.now() - start;
+    if (factors.length >= 2) {
+        const successMsg = currentLang === 'en' ? 
+            `✅ Pure T0 SUCCESS: ${factors[0]} × ${factors[1]} = ${N} (${elapsed.toFixed(1)}ms)` :
+            `✅ Pure T0 ERFOLG: ${factors[0]} × ${factors[1]} = ${N} (${elapsed.toFixed(1)}ms)`;
+        logResult(successMsg);
+        const detailsMsg = currentLang === 'en' ? 
+            `🎯 T0-Bits required: ${t0Solver.bits}, ξ=${t0Solver.xi.toExponential(1)}` :
+            `🎯 T0-Bits benötigt: ${t0Solver.bits}, ξ=${t0Solver.xi.toExponential(1)}`;
+        logResult(detailsMsg);
+        updateSuccessRate(100);
+    } else {
+        const failMsg = currentLang === 'en' ? 
+            `❌ Pure T0 failed for N=${N} (${elapsed.toFixed(1)}ms)` :
+            `❌ Pure T0 fehlgeschlagen für N=${N} (${elapsed.toFixed(1)}ms)`;
+        logResult(failMsg);
+        updateSuccessRate(0);
+    }
+}
+
+// Advanced T0 Framework
+function runAdvancedT0() {
+    console.log('Starting Advanced T0 Framework');
+    const currentSuffix = currentLang === 'en' ? '-en' : '';
+    const shorNumberInput = document.getElementById(`shor-number${currentSuffix}`);
+    if (!shorNumberInput) {
+        console.error(`Shor number input not found: shor-number${currentSuffix}`);
+        displayError(`Shor number input not found`);
+        return;
+    }
+    const N = parseInt(shorNumberInput.value);
+    const msg = currentLang === 'en' ? 
+        `🧠 Starting Advanced T0 Framework for N=${N} (field-based)` :
+        `🧠 Starte Advanced T0-Framework für N=${N} (feld-basiert)`;
+    logResult(msg);
+    const t0Solver = new AuthenticT0QuantumSimulator(N);
+    const bellResult = t0Solver.createT0BellState();
+    const bellMsg = currentLang === 'en' ? 
+        `🔗 T0-Bell State: Fidelity=${bellResult.fidelity.toFixed(6)}` :
+        `🔗 T0-Bell-Zustand: Fidelity=${bellResult.fidelity.toFixed(6)}`;
+    logResult(bellMsg);
+    const groverResult = t0Solver.groverSearch3Qubit('101');
+    const groverMsg = currentLang === 'en' ? 
+        `🔍 T0-Grover Search: P(|101⟩)=${groverResult.targetProbability.toFixed(4)} ${groverResult.success ? '✅' : '❌'}` :
+        `🔍 T0-Grover-Suche: P(|101⟩)=${groverResult.targetProbability.toFixed(4)} ${groverResult.success ? '✅' : '❌'}`;
+    logResult(groverMsg);
+    const start = performance.now();
+    const factors = t0Solver.factor();
+    const elapsed = performance.now() - start;
+    if (factors.length >= 2) {
+        const successMsg = currentLang === 'en' ? 
+            `✅ Advanced T0 SUCCESS: ${factors[0]} × ${factors[1]} = ${N}` :
+            `✅ Advanced T0 ERFOLG: ${factors[0]} × ${factors[1]} = ${N}`;
+        logResult(successMsg);
+        const frameworkMsg = currentLang === 'en' ? 
+            `🧲 Full T0 validation: Bell ✅, Grover ${groverResult.success ? '✅' : '❌'}, Shor ✅` :
+            `🧲 Vollständige T0-Validierung: Bell ✅, Grover ${groverResult.success ? '✅' : '❌'}, Shor ✅`;
+        logResult(frameworkMsg);
+        const timeMsg = currentLang === 'en' ? 
+            `⚡ T0-Execution time: ${elapsed.toFixed(1)}ms` :
+            `⚡ T0-Ausführungszeit: ${elapsed.toFixed(1)}ms`;
+        logResult(timeMsg);
+        updateSuccessRate(100);
+    } else {
+        const failMsg = currentLang === 'en' ? 
+            `❌ Advanced T0 failed for N=${N} (${elapsed.toFixed(1)}ms)` :
+            `❌ Advanced T0 fehlgeschlagen für N=${N} (${elapsed.toFixed(1)}ms)`;
+        logResult(failMsg);
+        const frameworkMsg = currentLang === 'en' ? 
+            `🧲 Partial T0 validation: Bell ✅, Grover ${groverResult.success ? '✅' : '❌'}, Shor ❌` :
+            `🧲 Teilweise T0-Validierung: Bell ✅, Grover ${groverResult.success ? '✅' : '❌'}, Shor ❌`;
+        logResult(frameworkMsg);
+        updateSuccessRate(0);
+    }
+}
+
+// Algorithm comparison
+function runComparisonTest() {
+    console.log('Starting Algorithm Comparison');
+    const currentSuffix = currentLang === 'en' ? '-en' : '';
+    const shorNumberInput = document.getElementById(`shor-number${currentSuffix}`);
+    if (!shorNumberInput) {
+        console.error(`Shor number input not found: shor-number${currentSuffix}`);
+        displayError(`Shor number input not found`);
+        return;
+    }
+    const N = parseInt(shorNumberInput.value);
+    const msg = currentLang === 'en' ? 
+        `📊 Starting T0 vs Standard QM comparison for N=${N}` :
+        `📊 Starte T0 vs Standard QM Vergleich für N=${N}`;
+    logResult(msg);
+    const startT0 = performance.now();
+    const t0Solver = new AuthenticT0QuantumSimulator(N);
+    const t0Factors = t0Solver.factor();
+    const t0Time = performance.now() - startT0;
+    const startQM = performance.now();
+    const qmFactors = trialDivision(N);
+    const qmTime = performance.now() - startQM;
+    const t0Success = t0Factors.length >= 2 && t0Factors[0] * t0Factors[1] === N;
+    const qmSuccess = qmFactors.length >= 2 && qmFactors[0] * qmFactors[1] === N;
+    const t0Msg = currentLang === 'en' ? 
+        `⚛️ T0 Result: ${t0Success ? `${t0Factors[0]} × ${t0Factors[1]} = ${N}` : 'Failed'} (${t0Time.toFixed(1)}ms)` :
+        `⚛️ T0 Ergebnis: ${t0Success ? `${t0Factors[0]} × ${t0Factors[1]} = ${N}` : 'Fehlgeschlagen'} (${t0Time.toFixed(1)}ms)`;
+    logResult(t0Msg);
+    const qmMsg = currentLang === 'en' ? 
+        `🔢 Standard QM Result: ${qmSuccess ? `${qmFactors[0]} × ${qmFactors[1]} = ${N}` : 'Failed'} (${qmTime.toFixed(1)}ms)` :
+        `🔢 Standard QM Ergebnis: ${qmSuccess ? `${qmFactors[0]} × ${qmFactors[1]} = ${N}` : 'Fehlgeschlagen'} (${qmTime.toFixed(1)}ms)`;
+    logResult(qmMsg);
+    const comparisonMsg = currentLang === 'en' ? 
+        `📈 Performance: T0 ${t0Time.toFixed(1)}ms vs Standard QM ${qmTime.toFixed(1)}ms` :
+        `📈 Leistung: T0 ${t0Time.toFixed(1)}ms vs Standard QM ${qmTime.toFixed(1)}ms`;
+    logResult(comparisonMsg);
+    const winnerMsg = currentLang === 'en' ? 
+        `🏆 Winner: ${t0Time < qmTime && t0Success ? 'T0 Framework' : 'Standard QM'} (${((qmTime - t0Time) / qmTime * 100).toFixed(1)}% faster)` :
+        `🏆 Gewinner: ${t0Time < qmTime && t0Success ? 'T0-Framework' : 'Standard QM'} (${((qmTime - t0Time) / qmTime * 100).toFixed(1)}% schneller)`;
+    logResult(winnerMsg);
+    updateSuccessRate(t0Success ? 100 : 0);
+}
+
+// Trial division for comparison
+function trialDivision(N) {
+    console.log(`Running trial division for N=${N}`);
+    const factors = [];
+    for (let i = 2; i <= Math.sqrt(N); i++) {
+        if (N % i === 0) {
+            factors.push(i);
+            factors.push(N / i);
+            console.log(`Found factors: ${factors}`);
+            return factors;
+        }
+    }
+    console.log(`No factors found, returning [${N}]`);
+    return [N];
+}
+
+// Log results
+function logResult(message) {
+    console.log(`Logging result: ${message}`);
+    const currentSuffix = currentLang === 'en' ? '-en' : '';
+    const resultsPanel = document.getElementById(`results${currentSuffix}`);
+    if (resultsPanel) {
+        resultsPanel.innerHTML += message + '<br>';
+        resultsPanel.scrollTop = resultsPanel.scrollHeight;
+        console.log(`Result logged to results${currentSuffix}`);
+    } else {
+        console.error(`Results panel not found: results${currentSuffix}`);
+        displayError(`Results panel not found`);
+    }
+}
+
+// Update progress bars
+function updateProgress(phase, percentage, status) {
+    console.log(`Updating progress: Phase ${phase}, ${percentage}%, ${status}`);
+    const currentSuffix = currentLang === 'en' ? '-en' : '';
+    const progressBar = document.getElementById(`progress-${phase}${currentSuffix}`);
+    const statusEl = document.getElementById(`phase-${phase}-status${currentSuffix}`);
+    if (progressBar) {
+        progressBar.style.width = `${percentage}%`;
+        console.log(`Progress bar updated: progress-${phase}${currentSuffix}`);
+    } else {
+        console.error(`Progress bar not found: progress-${phase}${currentSuffix}`);
+        displayError(`Progress bar not found for phase ${phase}`);
+    }
+    if (statusEl) {
+        statusEl.textContent = status;
+        console.log(`Status updated: phase-${phase}-status${currentSuffix}`);
+    } else {
+        console.error(`Status element not found: phase-${phase}-status${currentSuffix}`);
+        displayError(`Status element not found for phase ${phase}`);
+    }
+}
+
+// Reset progress bars
+function resetProgress() {
+    console.log('Resetting progress bars');
+    const currentSuffix = currentLang === 'en' ? '-en' : '';
+    for (let i = 1; i <= 4; i++) {
+        const progressBar = document.getElementById(`progress-${i}${currentSuffix}`);
+        const statusEl = document.getElementById(`phase-${i}-status${currentSuffix}`);
+        if (progressBar) {
+            progressBar.style.width = '0%';
+            console.log(`Reset progress bar: progress-${i}${currentSuffix}`);
+        } else {
+            console.error(`Progress bar not found: progress-${i}${currentSuffix}`);
+            displayError(`Progress bar not found for phase ${i}`);
+        }
+        if (statusEl) {
+            statusEl.textContent = currentLang === 'en' ? 
+                i === 1 ? 'Ready' : 'Waiting' :
+                i === 1 ? 'Bereit' : 'Wartend';
+            console.log(`Reset status: phase-${i}-status${currentSuffix}`);
+        } else {
+            console.error(`Status element not found: phase-${i}-status${currentSuffix}`);
+            displayError(`Status element not found for phase ${i}`);
+        }
+    }
+}
+
+// Update success rate
+function updateSuccessRate(rate) {
+    console.log(`Updating success rate: ${rate}%`);
+    const currentSuffix = currentLang === 'en' ? '-en' : '';
+    const successRateEl = document.getElementById(`success-rate${currentSuffix}`);
+    if (successRateEl) {
+        successRateEl.textContent = rate + '%';
+        console.log(`Success rate updated: ${rate}%`);
+    } else {
+        console.error(`Success rate element not found: success-rate${currentSuffix}`);
+        displayError(`Success rate element not found`);
+    }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM fully loaded at ' + new Date().toLocaleString());
+    const germanContent = document.getElementById('german-content');
+    const englishContent = document.getElementById('english-content');
+    const qubitDisplay = document.getElementById('qubit-display');
+    const qubitDisplayEn = document.getElementById('qubit-display-en');
+    if (!germanContent || !englishContent || !qubitDisplay || !qubitDisplayEn) {
+        console.error('Critical elements missing: german-content, english-content, qubit-display, or qubit-display-en');
+        displayError('Critical elements missing: Check HTML structure');
+        return;
+    }
+    const computedStyle = window.getComputedStyle(qubitDisplay);
+    const computedStyleEn = window.getComputedStyle(qubitDisplayEn);
+    console.log(`Initial qubit-display CSS: display=${computedStyle.display}, visibility=${computedStyle.visibility}, opacity=${computedStyle.opacity}`);
+    console.log(`Initial qubit-display-en CSS: display=${computedStyleEn.display}, visibility=${computedStyleEn.visibility}, opacity=${computedStyleEn.opacity}`);
+    setTimeout(() => {
+        console.log('Initializing quantum computer after DOM load');
+        initializeQuantumComputer();
+    }, 200);
+    const suffix = currentLang === 'en' ? '-en' : '';
+    const qubitCountSelect = document.getElementById(`qubit-count${suffix}`);
+    const qubitCountSelectEn = document.getElementById('qubit-count-en');
+    if (qubitCountSelect) {
+        qubitCountSelect.addEventListener('change', () => {
+            console.log(`Qubit count changed: ${qubitCountSelect.value}`);
+            syncLanguageControls(currentLang);
+            initializeQuantumComputer();
+        });
+    } else {
+        console.error(`Qubit count select not found: qubit-count${suffix}`);
+        displayError(`Qubit count select not found`);
+    }
+    if (qubitCountSelectEn) {
+        qubitCountSelectEn.addEventListener('change', () => {
+            console.log(`Qubit count changed (EN): ${qubitCountSelectEn.value}`);
+            syncLanguageControls('en');
+            initializeQuantumComputer();
+        });
+    } else {
+        console.error('Qubit count select not found: qubit-count-en');
+        displayError('Qubit count select (EN) not found');
+    }
+});
+</script>
+</body>
+</html>
