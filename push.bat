@@ -16,7 +16,7 @@ echo.
 
 REM Commit-Nachricht abfragen (interaktiv)
 set /p commit_msg="Commit-Nachricht eingeben: "
-if "%commit_msg%"=="" set commit_msg=Standardized LaTeX documents (keine Nachricht angegeben)
+if "%commit_msg%"=="" set commit_msg=Standardized LaTeX documents (local einge latex hinzugefügt)
 
 REM Commit ausfuehren
 echo --- Commit wird erstellt ---
@@ -25,7 +25,7 @@ echo.
 
 REM Push zum Remote-Branch
 echo --- Push zu origin/copilot/standardize-latex-documents ---
-git push origin copilot/standardize-latex-documents
+git push origin copilot/standardize-latex-documents-another-one
 echo.
 
 echo ========================================
