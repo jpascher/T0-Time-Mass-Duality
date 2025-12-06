@@ -93,7 +93,7 @@
 	
 	\section*{Anhang: Python-Code der Simulation}
 	
-	\begin{lstlisting}[language=Python, caption={Konzeptioneller Python-Code für die FEM-Simulation der geometrischen Rotverschiebung.}, label={lst:fem_code}]
+	\begin{lstlisting}[language=Python, caption={Konzeptioneller Python-Code fuer die FEM-Simulation der geometrischen Rotverschiebung.}, label={lst:fem_code}]
 		import numpy as np
 		import heapq
 		
@@ -105,8 +105,8 @@
 		def simulate_t0_field(grid_size):
 		"""Simuliert ein statisches T0-Vakuumfeld mit Fluktuationen."""
 		# Vereinfachte Simulation: Normalverteilte Fluktuationen, deren
-		# Amplitude durch XI skaliert wird. Eine echte Simulation würde die
-		# T0-Feldgleichung numerisch lösen (z.B. mit FEniCS).
+		# Amplitude durch XI skaliert wird. Eine echte Simulation wuerde die
+		# T0-Feldgleichung numerisch loesen (z.B. mit FEniCS).
 		np.random.seed(42)
 		base_field = np.ones((grid_size, grid_size, grid_size))
 		fluctuations = np.random.normal(0, XI, (grid_size, grid_size, grid_size))
@@ -114,15 +114,15 @@
 		
 		def calculate_path_cost(field_value):
 		"""Die "Kosten" (effektive Distanz), um einen Gitterpunkt zu durchqueren."""
-		# Der Weg durch einen Punkt mit höherer Feldenergie ist "länger".
+		# Der Weg durch einen Punkt mit hoeherer Feldenergie ist "laenger".
 		return 1.0 * field_value
 		
 		def find_geodesic_path(t0_field, start_node, end_node):
-		"""Findet den kürzesten Pfad (Geodäte) mittels Dijkstra-Algorithmus."""
+		"""Findet den kuerzesten Pfad (Geodaete) mittels Dijkstra-Algorithmus."""
 		grid_size = t0_field.shape[0]
 		distances = np.full((grid_size, grid_size, grid_size), np.inf)
 		distances[start_node] = 0
-		pq = [(0, start_node)] # Prioritätswarteschlange (Distanz, Knoten)
+		pq = [(0, start_node)] # Prioritaetswarteschlange (Distanz, Knoten)
 		
 		while pq:
 		dist, current_node = heapq.heappop(pq)
@@ -133,7 +133,7 @@
 		break
 		
 		x, y, z = current_node
-		# Iteriere über alle 26 Nachbarn im 3D-Gitter
+		# Iteriere ueber alle 26 Nachbarn im 3D-Gitter
 		for dx in [-1, 0, 1]:
 		for dy in [-1, 0, 1]:
 		for dz in [-1, 0, 1]:
@@ -156,15 +156,15 @@
 		
 		return distances[end_node]
 		
-		# --- 2. Simulation durchführen ---
-		GRID_SIZE = 100 # Gittergröße für die Simulation
+		# --- 2. Simulation durchfuehren ---
+		GRID_SIZE = 100 # Gittergroesse fuer die Simulation
 		START_NODE = (0, 50, 50)
 		END_NODE = (99, 50, 50)
 		
 		print("1. Simuliere T0-Vakuumfeld...")
 		t0_vacuum = simulate_t0_field(GRID_SIZE)
 		
-		print("2. Berechne geodätischen Pfad durch das Feld...")
+		print("2. Berechne geodaetischen Pfad durch das Feld...")
 		effective_path_length = find_geodesic_path(t0_vacuum, START_NODE, END_NODE)
 		
 		# Euklidische Distanz als Referenz
@@ -173,7 +173,7 @@
 		# --- 3. Ergebnisse berechnen und ausgeben ---
 		print(f"\n--- Ergebnisse ---")
 		print(f"Euklidische Distanz (d): {euclidean_distance:.4f} Einheiten")
-		print(f"Effektive Pfadlänge (Leff): {effective_path_length:.4f} Einheiten")
+		print(f"Effektive Pfadlaenge (Leff): {effective_path_length:.4f} Einheiten")
 		
 		# Geometrische Rotverschiebung z
 		redshift_z = (effective_path_length - euclidean_distance) / euclidean_distance
@@ -181,7 +181,7 @@
 		
 		# Herleitung der Hubble-Konstante
 		# z = d * C * xi => H0 = c * C * xi
-		# Für unsere Simulation normalisieren wir d auf 1 Mpc
+		# Fuer unsere Simulation normalisieren wir d auf 1 Mpc
 		dist_Mpc = 1.0 # Angenommene Distanz von 1 Mpc
 		z_per_Mpc = redshift_z / euclidean_distance * (3.26e6 * GRID_SIZE) # Skalierung auf Mpc
 		H0_simulated = C_SPEED * z_per_Mpc
@@ -192,7 +192,7 @@
 		print("\n--- Kosmologische Vorhersage ---")
 		print(f"Simulierte Hubble-Konstante (H0): {H0_simulated:.2f} km/s/Mpc")
 		print(f"Formel-basierte Hubble-Konstante (H0): {H0_formula:.2f} km/s/Mpc")
-		print("\nErgebnis: Die Simulation bestätigt, dass die Rotverschiebung als")
+		print("\nErgebnis: Die Simulation bestaetigt, dass die Rotverschiebung als")
 		print("geometrischer Effekt im T0-Vakuum die Hubble-Konstante korrekt reproduziert.")
 		
 	\end{lstlisting}
