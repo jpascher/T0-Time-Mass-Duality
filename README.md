@@ -68,8 +68,13 @@ The T0 model proposes an approach to fundamental physics through time-energy dua
 T0-Time-Mass-Duality/
 ├── 2/
 │   ├── html/                     # Interactive HTML explorations
-│   ├── pdf/                      # Technical documents (172+ files)
+│   ├── pdf/                      # Technical documents (205+ files)
 │   ├── tex/                      # LaTeX source files
+│   │   ├── de_standalone/        # 103 German standalone documents
+│   │   ├── en_standalone/        # 102 English standalone documents
+│   │   ├── de_chapters_new/      # Chapter versions for books
+│   │   ├── en_chapters_new/      # Chapter versions for books
+│   │   └── completed/            # 6 compiled books (Deutsch/ & Englisch/)
 │   ├── esotherik.md              # Esoteric considerations
 │   ├── OntologischeAequivalenz.md # Ontological equivalence (DE/EN)
 │   └── index.html & website.html # Local web interfaces
@@ -86,10 +91,22 @@ T0-Time-Mass-Duality/
 
 **GitHub Search Optimization:** This repo is tagged with "quantum-physics", "unified-theory", "fractal-geometry", and "deterministic-computing" for easy discovery via GitHub's topic search.
 
-## Complete PDF Documentation (172+ Files, ~63MB total)
+## Complete PDF Documentation (205+ Files, ~75MB total)
 
 All documents are available in German and English versions where applicable.  
 **Pro Tip:** Use GitHub's search bar with `T0_ filename` to quickly locate specific PDFs.
+
+### LaTeX Source Files and Compiled Books
+
+The `2/tex/` directory contains complete LaTeX source files:
+- **103 German standalone documents** (`de_standalone/`)
+- **102 English standalone documents** (`en_standalone/`)
+- **6 compiled books** in `completed/Deutsch/` and `completed/Englisch/`:
+  - Teil1 (Part 1): Core documents
+  - Teil2 (Part 2): Mathematical foundations
+  - Teil3 (Part 3): Quantum mechanics & applications
+
+**Note:** The standalone LaTeX files are cosmetically adapted copies of the original PDF documents. Content remains unchanged; only formatting adjustments were made for book compilation (shared preambles, consistent styling, table sizing).
 
 ### Latest Additions (November 2025) (updated)
 

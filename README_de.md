@@ -67,8 +67,13 @@ Das T0-Modell schlägt einen Ansatz für die fundamentale Physik durch Zeit-Ener
 T0-Zeit-Masse-Dualität/
 ├── 2/
 │   ├── html/                     # Interaktive HTML-Explorationen
-│   ├── pdf/                      # Technische Dokumente (172+ Dateien, November 2025)
+│   ├── pdf/                      # Technische Dokumente (205+ Dateien)
 │   ├── tex/                      # LaTeX-Quelldateien
+│   │   ├── de_standalone/        # 103 deutsche Standalone-Dokumente
+│   │   ├── en_standalone/        # 102 englische Standalone-Dokumente
+│   │   ├── de_chapters_new/      # Kapitelversionen für Bücher
+│   │   ├── en_chapters_new/      # Kapitelversionen für Bücher
+│   │   └── completed/            # 6 kompilierte Bücher (Deutsch/ & Englisch/)
 │   ├── esotherik.md              # Esoterische Betrachtungen
 │   ├── OntologischeAequivalenz.md # Ontologische Äquivalenz (DE/EN)
 │   └── index.html & website.html # Lokale Web-Schnittstellen
@@ -85,10 +90,22 @@ T0-Zeit-Masse-Dualität/
 
 **GitHub-Suchoptimierung:** Dieses Repo ist mit „quanten-physik“, „vereinheitlichte-theorie“, „fraktale-geometrie“ und „deterministische-computing“ getaggt für einfache Entdeckung über GitHub-Themensuche.
 
-## Vollständige PDF-Dokumentation (172+ Dateien, ~63MB insgesamt)
+## Vollständige PDF-Dokumentation (205+ Dateien, ~75MB insgesamt)
 
 Alle Dokumente in deutscher und englischer Version verfügbar, soweit vorhanden.  
 **Pro-Tipp:** Verwenden Sie die GitHub-Suchleiste mit `T0_ Dateiname`, um spezifische PDFs schnell zu finden.
+
+### LaTeX-Quelldateien und kompilierte Bücher
+
+Das Verzeichnis `2/tex/` enthält vollständige LaTeX-Quelldateien:
+- **103 deutsche Standalone-Dokumente** (`de_standalone/`)
+- **102 englische Standalone-Dokumente** (`en_standalone/`)
+- **6 kompilierte Bücher** in `completed/Deutsch/` und `completed/Englisch/`:
+  - Teil1: Kerndokumente
+  - Teil2: Mathematische Grundlagen
+  - Teil3: Quantenmechanik & Anwendungen
+
+**Hinweis:** Die Standalone-LaTeX-Dateien sind kosmetisch angepasste Kopien der Original-PDF-Dokumente. Der Inhalt bleibt unverändert; nur Formatierungsanpassungen wurden für die Buchkompilierung vorgenommen (gemeinsame Präambeln, konsistentes Styling, Tabellengrößenanpassung).
 
 ### Neueste Ergänzungen (November 2025)
 
