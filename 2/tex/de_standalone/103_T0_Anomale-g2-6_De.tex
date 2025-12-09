@@ -3,6 +3,15 @@
 % Standardized preamble - 103_T0_Anomale-g2-6_De.tex
 \input{../../../T0_preamble_shared_De}
 
+% Zusätzliche Pakete für Tabellen
+\usepackage{adjustbox}
+\usepackage{rotating}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{makecell}
+\usepackage{multirow}
+
 \title{\textbf{Vereinheitlichte Berechnung des anomalen magnetischen Moments in der T0-Theorie (Rev. 6)}\\[0.5cm]
 	\large Vollständiger Beitrag von $\xi$ mit Torsion-Erweiterung -- Parameterfreie geometrische Lösung\\[0.3cm]
 	\normalsize Erweiterte Ableitung mit SymPy-verifizierten Schleifenintegralen, Lagrangedichte und GitHub-Validierung (November 2025)}
@@ -10,7 +19,7 @@
 \date{}
 
 \begin{document}
-
+	
 	
 	\maketitle
 	\thispagestyle{fancy}
@@ -25,23 +34,28 @@
 	
 	\section*{Symboleverzeichnis}
 	
-	\begin{tabular}{ll}
-		$\xi$ & Universeller geometrischer Parameter, $\xi = \frac{4}{30000} \approx 1.33333 \times 10^{-4}$ \\
-		$a_\ell$ & Totales anomalen Moment, $a_\ell = (g_\ell - 2)/2$ (reine T0) \\
-		$E_0$ & Universelle Energiekonstante, $E_0 = 1/\xi \approx \SI{7500}{\giga\electronvolt}$ \\
-		$K_{\text{frak}}$ & Fraktale Korrektur, $K_{\text{frak}} = 1 - 100 \xi \approx 0.9867$ \\
-		$\alpha(\xi)$ & Feinstrukturkonstante aus $\xi$, $\alpha \approx 7.297 \times 10^{-3}$ \\
-		$N_{\text{loop}}$ & Schleifennormalisierung, $N_{\text{loop}} \approx 173.21$ \\
-		$m_\ell$ & Leptonenmasse (CODATA 2025) \\
-		$T_{\text{field}}$ & Intrinsisches Zeitfeld \\
-		$E_{\text{field}}$ & Energiefeld, mit $T \cdot E = 1$ \\
-		$\Lambda_{T0}$ & Geometrische Grenzskala, $\Lambda_{T0} = \sqrt{1/\xi} \approx \SI{86.6025}{\giga\electronvolt}$ \\
-		$g_{T0}$ & Massenunabhängige T0-Kopplung, $g_{T0} = \sqrt{\alpha K_{\text{frak}}} \approx 0.0849$ \\
-		$\phi_T$ & Phasenfaktor des Zeitfelds, $\phi_T = \pi \xi \approx 4.189 \times 10^{-4}$ rad \\
-		$D_f$ & Fraktale Dimension, $D_f = 3 - \xi \approx 2.999867$ \\
-		$m_T$ & Torsionsmediator-Masse, $m_T \approx \SI{5.81}{\giga\electronvolt}$ (geometrisch) \\
-		$R_f(D_f)$ & Fraktaler Resonanzfaktor, $R_f \approx 4.40 \times 0.9999$ \\
-	\end{tabular}
+	\begin{table}[htbp]
+		\centering
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{p{5cm} p{10cm}}
+				$\xi$ & Universeller geometrischer Parameter, $\xi = \frac{4}{30000} \approx 1.33333 \times 10^{-4}$ \\
+				$a_\ell$ & Totales anomalen Moment, $a_\ell = (g_\ell - 2)/2$ (reine T0) \\
+				$E_0$ & Universelle Energiekonstante, $E_0 = 1/\xi \approx \SI{7500}{\giga\electronvolt}$ \\
+				$K_{\text{frak}}$ & Fraktale Korrektur, $K_{\text{frak}} = 1 - 100 \xi \approx 0.9867$ \\
+				$\alpha(\xi)$ & Feinstrukturkonstante aus $\xi$, $\alpha \approx 7.297 \times 10^{-3}$ \\
+				$N_{\text{loop}}$ & Schleifennormalisierung, $N_{\text{loop}} \approx 173.21$ \\
+				$m_\ell$ & Leptonenmasse (CODATA 2025) \\
+				$T_{\text{field}}$ & Intrinsisches Zeitfeld \\
+				$E_{\text{field}}$ & Energiefeld, mit $T \cdot E = 1$ \\
+				$\Lambda_{T0}$ & Geometrische Grenzskala, $\Lambda_{T0} = \sqrt{1/\xi} \approx \SI{86.6025}{\giga\electronvolt}$ \\
+				$g_{T0}$ & Massenunabhängige T0-Kopplung, $g_{T0} = \sqrt{\alpha K_{\text{frak}}} \approx 0.0849$ \\
+				$\phi_T$ & Phasenfaktor des Zeitfelds, $\phi_T = \pi \xi \approx 4.189 \times 10^{-4}$ rad \\
+				$D_f$ & Fraktale Dimension, $D_f = 3 - \xi \approx 2.999867$ \\
+				$m_T$ & Torsionsmediator-Masse, $m_T \approx \SI{5.81}{\giga\electronvolt}$ (geometrisch) \\
+				$R_f(D_f)$ & Fraktaler Resonanzfaktor, $R_f \approx 4.40 \times 0.9999$ \\
+			\end{tabular}%
+		}
+	\end{table}
 	
 	\section{Einführung und Klärung der Konsistenz}
 	In der reinen T0-Theorie \cite{T0_SI} ist der T0-Effekt der vollständige Beitrag: Das SM approximiert die Geometrie (QED-Schleifen als Dualitätseffekte), sodass $a_\ell^{T0} = a_\ell$. Passt zu post-2025-Daten bei $\sim 0\sigma$ (Gitter-HVP löst Spannung). Hybrid-Ansicht optional für Kompatibilität.
@@ -179,17 +193,19 @@
 	
 	\section{Ergebnisse für alle Leptonen}
 	
-	\begin{table}[ht]
+	\begin{table}[htbp]
 		\centering
-		\begin{tabular}{@{}lcccc@{}}
-			\toprule
-			Lepton & $m_\ell / m_\mu$ & $(m_\ell / m_\mu)^2$ & $a_\ell$ aus $\xi$ ($\times 10^{n}$) & Experiment ($\times 10^{n}$) \\
-			\midrule
-			Elektron ($n=-12$) & 0.00484 & $2.34 \times 10^{-5}$ & 0.0589 & 1159652180.46(18) \\
-			Myon ($n=-11$) & 1 & 1 & 251.6 & 116592070(148) \\
-			Tau ($n=-7$) & 16.82 & 282.8 & 7.11 & $< 9.5 \times 10^{3}$ \\
-			\bottomrule
-		\end{tabular}
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{p{2cm} p{2.5cm} p{2.5cm} p{3.5cm} p{4cm}}
+				\toprule
+				Lepton & $m_\ell / m_\mu$ & $(m_\ell / m_\mu)^2$ & $a_\ell$ aus $\xi$ ($\times 10^{n}$) & Experiment ($\times 10^{n}$) \\
+				\midrule
+				Elektron ($n=-12$) & 0.00484 & $2.34 \times 10^{-5}$ & 0.0589 & 1159652180.46(18) \\
+				Myon ($n=-11$) & 1 & 1 & 251.6 & 116592070(148) \\
+				Tau ($n=-7$) & 16.82 & 282.8 & 7.11 & $< 9.5 \times 10^{3}$ \\
+				\bottomrule
+			\end{tabular}%
+		}
 		\caption{Vereinheitlichte T0-Berechnung aus $\xi$ (2025-Werte). Vollständig geometrisch.}
 		\label{tab:results}
 	\end{table}
@@ -213,27 +229,29 @@
 	
 	\subsection{Vergleich: T0-Theorie vs. String-Theorie}
 	
-	\begin{table}[ht]
+	\begin{table}[htbp]
 		\centering
-		\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
-			\hline
-			\textbf{Aspekt} & \textbf{T0-Theorie (Zeit-Masse-Dualität)} & \textbf{String-Theorie (z.\,B. M-Theorie)} \\
-			\hline
-			\textbf{Kernidee} & Dualität $T \cdot m = 1$; fraktale Raumzeit ($D_f = 3 - \xi$); Zeitfeld $\Delta m(x,t)$ erweitert Lagrangedichte. & Punkte als schwingende Strings in 10/11 Dim.; extra Dim. kompaktifiziert (Calabi-Yau). \\
-			\hline
-			\textbf{Vereinheitlichung} & Bettet SM ein (QED/HVP aus $\xi$, Dualität); erklärt Massenhierarchie via $m_\ell^2$-Skalierung. & Vereinheitlicht alle Kräfte via String-Schwingungen; Gravitation emergent. \\
-			\hline
-			\textbf{g-2-Anomalie} & Kern $\Delta a_\mu^{\text{T0}} = 251.6 \times 10^{-11}$ aus Ein-Schleife + Einbettung; passt pre/post-2025 ($\sim 0 \sigma$). & Strings prognostizieren BSM-Beiträge (z.\,B. via KK-Moden), aber unspezifisch ($\pm 10\%$ Unsicherheit). \\
-			\hline
-			\textbf{Fraktal/Quanten-Schaum} & Fraktale Dämpfung $K_{\text{frak}} = 1 - 100\xi$; approximiert QCD/HVP. & Quantenschaum aus String-Interaktionen; fraktal-ähnlich in Loop-Quantum-Gravity-Hybriden. \\
-			\hline
-			\textbf{Testbarkeit} & Prognosen: Tau g-2 ($7.11 \times 10^{-7}$); Elektron-Konsistenz via Einbettung. Keine LHC-Signale, aber Resonanz bei 5.81 GeV. & Hohe Energien (Planck-Skala); indirekt (z.\,B. Schwarzes-Loch-Entropie). Wenige niedrigenergetische Tests. \\
-			\hline
-			\textbf{Schwächen} & Noch jung (2025); Einbettung neu (November); mehr QCD-Details benötigt. & Moduli-Stabilisierung ungelöst; keine vereinheitlichte Theorie; Landschaftsproblem. \\
-			\hline
-			\textbf{Ähnlichkeiten} & Beide: Geometrie als Basis (fraktal vs. extra Dim.); BSM für Anomalien; Dualitäten (T-m vs. T-/S-Dualität). & Potenzial: T0 als ``4D-String-Approx.''? Hybride könnten g-2 verbinden. \\
-			\hline
-		\end{tabular}
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{p{4cm} p{5cm} p{5cm}}
+				\hline
+				\textbf{Aspekt} & \textbf{T0-Theorie (Zeit-Masse-Dualität)} & \textbf{String-Theorie (z.\,B. M-Theorie)} \\
+				\hline
+				\textbf{Kernidee} & Dualität $T \cdot m = 1$; fraktale Raumzeit ($D_f = 3 - \xi$); Zeitfeld $\Delta m(x,t)$ erweitert Lagrangedichte. & Punkte als schwingende Strings in 10/11 Dim.; extra Dim. kompaktifiziert (Calabi-Yau). \\
+				\hline
+				\textbf{Vereinheitlichung} & Bettet SM ein (QED/HVP aus $\xi$, Dualität); erklärt Massenhierarchie via $m_\ell^2$-Skalierung. & Vereinheitlicht alle Kräfte via String-Schwingungen; Gravitation emergent. \\
+				\hline
+				\textbf{g-2-Anomalie} & Kern $\Delta a_\mu^{\text{T0}} = 251.6 \times 10^{-11}$ aus Ein-Schleife + Einbettung; passt pre/post-2025 ($\sim 0 \sigma$). & Strings prognostizieren BSM-Beiträge (z.\,B. via KK-Moden), aber unspezifisch ($\pm 10\%$ Unsicherheit). \\
+				\hline
+				\textbf{Fraktal/Quanten-Schaum} & Fraktale Dämpfung $K_{\text{frak}} = 1 - 100\xi$; approximiert QCD/HVP. & Quantenschaum aus String-Interaktionen; fraktal-ähnlich in Loop-Quantum-Gravity-Hybriden. \\
+				\hline
+				\textbf{Testbarkeit} & Prognosen: Tau g-2 ($7.11 \times 10^{-7}$); Elektron-Konsistenz via Einbettung. Keine LHC-Signale, aber Resonanz bei 5.81 GeV. & Hohe Energien (Planck-Skala); indirekt (z.\,B. Schwarzes-Loch-Entropie). Wenige niedrigenergetische Tests. \\
+				\hline
+				\textbf{Schwächen} & Noch jung (2025); Einbettung neu (November); mehr QCD-Details benötigt. & Moduli-Stabilisierung ungelöst; keine vereinheitlichte Theorie; Landschaftsproblem. \\
+				\hline
+				\textbf{Ähnlichkeiten} & Beide: Geometrie als Basis (fraktal vs. extra Dim.); BSM für Anomalien; Dualitäten (T-m vs. T-/S-Dualität). & Potenzial: T0 als ``4D-String-Approx.''? Hybride könnten g-2 verbinden. \\
+				\hline
+			\end{tabular}%
+		}
 		\caption{Vergleich zwischen T0-Theorie und String-Theorie (aktualisiert 2025)}
 		\label{tab:string_comparison}
 	\end{table}
@@ -282,25 +300,26 @@
 	
 	Basiert auf CODATA 2025/Fermilab/Belle II. T0 skaliert quadratisch: $a_\ell^\text{T0} = 251.6 \times 10^{-11} \times (m_\ell / m_\mu)^2$.
 	
-	\begin{table}[ht!]
+	\begin{table}[htbp]
 		\centering
 		\footnotesize
-		\setlength{\tabcolsep}{4pt}
-		\begin{tabular}{@{}lcccccc@{}}
-			\toprule
-			\textbf{Lepton} & \textbf{Perspektive} & \textbf{T0-Wert} & \textbf{SM-Wert} & \textbf{Total/Exp.-Wert} & \textbf{Abweichung} & \textbf{Erklärung} \\
-			& & ($ \times 10^{-11}$) & ($ \times 10^{-11}$) & ($ \times 10^{-11}$) & ($\sigma$) & \\
-			\midrule
-			Elektron (e) & Hybrid (Pre-2025) & 0.0589 & 115965218.046(18) & 115965218.046 & 0 $\sigma$ & T0 vernachlässigbar; SM + T0 = Exp. \\
-			Elektron (e) & Reine T0 (Post-2025) & 0.0589 & Eingebettet & 0.0589 & 0 $\sigma$ & T0-Kern; QED als Dualitätsapprox. \\
-			\midrule
-			Myon ($\mu$) & Hybrid (Pre-2025) & 251.6 & 116591810(43) & 116592061 & 0.02 $\sigma$ & T0 füllt Diskrepanz (249) \\
-			Myon ($\mu$) & Reine T0 (Post-2025) & 251.6 & Eingebettet & 251.6 & $\sim 0 \sigma$ & Einbettet HVP (fraktal gedämpft) \\
-			\midrule
-			Tau ($\tau$) & Hybrid (Pre-2025) & 71100 & $<$ $9.5 \times 10^{8}$ & $<$ $9.5 \times 10^{8}$ & Konsistent & T0 als BSM-Prognose \\
-			Tau ($\tau$) & Reine T0 (Post-2025) & 71100 & Eingebettet & 71100 & 0 $\sigma$ & Prognose testbar bei Belle II 2026 \\
-			\bottomrule
-		\end{tabular}
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{p{1.5cm} p{3cm} p{1.5cm} p{2.5cm} p{2.5cm} p{1.5cm} p{4cm}}
+				\toprule
+				\textbf{Lepton} & \textbf{Perspektive} & \textbf{T0-Wert} & \textbf{SM-Wert} & \textbf{Total/Exp.-Wert} & \textbf{Abweichung} & \textbf{Erklärung} \\
+				& & ($ \times 10^{-11}$) & ($ \times 10^{-11}$) & ($ \times 10^{-11}$) & ($\sigma$) & \\
+				\midrule
+				Elektron (e) & Hybrid (Pre-2025) & 0.0589 & 115965218.046(18) & 115965218.046 & 0 $\sigma$ & T0 vernachlässigbar; SM + T0 = Exp. \\
+				Elektron (e) & Reine T0 (Post-2025) & 0.0589 & Eingebettet & 0.0589 & 0 $\sigma$ & T0-Kern; QED als Dualitätsapprox. \\
+				\midrule
+				Myon ($\mu$) & Hybrid (Pre-2025) & 251.6 & 116591810(43) & 116592061 & 0.02 $\sigma$ & T0 füllt Diskrepanz (249) \\
+				Myon ($\mu$) & Reine T0 (Post-2025) & 251.6 & Eingebettet & 251.6 & $\sim 0 \sigma$ & Einbettet HVP (fraktal gedämpft) \\
+				\midrule
+				Tau ($\tau$) & Hybrid (Pre-2025) & 71100 & $<$ $9.5 \times 10^{8}$ & $<$ $9.5 \times 10^{8}$ & Konsistent & T0 als BSM-Prognose \\
+				Tau ($\tau$) & Reine T0 (Post-2025) & 71100 & Eingebettet & 71100 & 0 $\sigma$ & Prognose testbar bei Belle II 2026 \\
+				\bottomrule
+			\end{tabular}%
+		}
 		\caption{Erweiterte Tabelle: T0-Formel in Hybrid- und Reinen Perspektiven (2025-Update)}
 		\label{tab:extended_comparison}
 	\end{table}
@@ -312,108 +331,113 @@
 	
 	Pre-2025: Myon $\sim$4.2$\sigma$ Spannung; Elektron perfekt; Tau-Grenze.
 	
-	\begin{table}[ht!]
+	\begin{table}[htbp]
 		\centering
 		\footnotesize
-		\setlength{\tabcolsep}{4pt}
-		\begin{tabular}{@{}lcccccr@{}}
-			\toprule
-			\textbf{Lepton} & \textbf{Exp.-Wert (pre-2025)} & \textbf{SM-Wert (pre-2025)} & \textbf{Diskrepanz} & \textbf{Unsicherheit} & \textbf{Quelle} & \textbf{Bemerkung} \\
-			& ($ \times 10^{-11}$) & ($ \times 10^{-11}$) & ($\sigma$) & (Exp.) & & \\
-			\midrule
-			Elektron (e) & 1159652180.73(28) & 1159652180.73(28) & 0 $\sigma$ & $\pm$0.24 ppb & Hanneke et al. 2008 & Keine Diskrepanz \\
-			Myon ($\mu$) & 116592059(22) & 116591810(43) & 4.2 $\sigma$ & $\pm$0.20 ppm & Fermilab 2023 & Starke Spannung \\
-			Tau ($\tau$) & $|a_\tau| < 9.5 \times 10^{8}$ & $\sim$1--10 & Konsistent & N/A & DELPHI 2004 & Nur Grenze \\
-			\bottomrule
-		\end{tabular}
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{p{1.5cm} p{3cm} p{3cm} p{1.5cm} p{1.5cm} p{2cm} p{2cm}}
+				\toprule
+				\textbf{Lepton} & \textbf{Exp.-Wert (pre-2025)} & \textbf{SM-Wert (pre-2025)} & \textbf{Diskrepanz} & \textbf{Unsicherheit} & \textbf{Quelle} & \textbf{Bemerkung} \\
+				& ($ \times 10^{-11}$) & ($ \times 10^{-11}$) & ($\sigma$) & (Exp.) & & \\
+				\midrule
+				Elektron (e) & 1159652180.73(28) & 1159652180.73(28) & 0 $\sigma$ & $\pm$0.24 ppb & Hanneke et al. 2008 & Keine Diskrepanz \\
+				Myon ($\mu$) & 116592059(22) & 116591810(43) & 4.2 $\sigma$ & $\pm$0.20 ppm & Fermilab 2023 & Starke Spannung \\
+				Tau ($\tau$) & $|a_\tau| < 9.5 \times 10^{8}$ & $\sim$1--10 & Konsistent & N/A & DELPHI 2004 & Nur Grenze \\
+				\bottomrule
+			\end{tabular}%
+		}
 		\caption{Pre-2025 g-2-Daten: Exp. vs. SM (Tau skaliert)}
 		\label{tab:pre2025}
 	\end{table}
 	
 	\subsection{Vergleich: SM + T0 (Hybrid) vs. Reine T0 (mit Pre-2025-Daten)}
 	
-	\begin{table}[ht!]
+	\begin{table}[htbp]
 		\centering
 		\footnotesize
-		\setlength{\tabcolsep}{3pt}
-		\begin{tabular}{@{}lcccccc@{}}
-			\toprule
-			\textbf{Lepton} & \textbf{Perspektive} & \textbf{T0-Wert} & \textbf{SM pre-2025} & \textbf{Total / Exp.} & \textbf{Abweichung} & \textbf{Erklärung (pre-2025)} \\
-			& & ($ \times 10^{-11}$) & ($ \times 10^{-11}$) & ($ \times 10^{-11}$) & ($\sigma$) zu Exp. & \\
-			\midrule
-			Elektron (e) & SM + T0 (Hybrid) & 0.0589 & 115965218.073(28) & 115965218.073 & 0 $\sigma$ & T0 vernachlässigbar \\
-			Elektron (e) & Reine T0 & 0.0589 & Eingebettet & 0.0589 & 0 $\sigma$ & QED aus Dualität \\
-			\midrule
-			Myon ($\mu$) & SM + T0 (Hybrid) & 251.6 & 116591810(43) & 116592061 & 0.02 $\sigma$ & Löst 4.2$\sigma$ Spannung \\
-			Myon ($\mu$) & Reine T0 & 251.6 & Eingebettet & 251.6 & N/A & Prognostiziert HVP-Fix \\
-			\midrule
-			Tau ($\tau$) & SM + T0 (Hybrid) & 71100 & $\sim$10 & $<$ 9.5$\times10^{8}$ & Konsistent & T0 als BSM-additiv \\
-			Tau ($\tau$) & Reine T0 & 71100 & Eingebettet & 71100 & 0 $\sigma$ & Prognose testbar \\
-			\bottomrule
-		\end{tabular}
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{p{1.5cm} p{2cm} p{1.5cm} p{2.5cm} p{2.5cm} p{1.5cm} p{3.5cm}}
+				\toprule
+				\textbf{Lepton} & \textbf{Perspektive} & \textbf{T0-Wert} & \textbf{SM pre-2025} & \textbf{Total / Exp.} & \textbf{Abweichung} & \textbf{Erklärung (pre-2025)} \\
+				& & ($ \times 10^{-11}$) & ($ \times 10^{-11}$) & ($ \times 10^{-11}$) & ($\sigma$) zu Exp. & \\
+				\midrule
+				Elektron (e) & SM + T0 (Hybrid) & 0.0589 & 115965218.073(28) & 115965218.073 & 0 $\sigma$ & T0 vernachlässigbar \\
+				Elektron (e) & Reine T0 & 0.0589 & Eingebettet & 0.0589 & 0 $\sigma$ & QED aus Dualität \\
+				\midrule
+				Myon ($\mu$) & SM + T0 (Hybrid) & 251.6 & 116591810(43) & 116592061 & 0.02 $\sigma$ & Löst 4.2$\sigma$ Spannung \\
+				Myon ($\mu$) & Reine T0 & 251.6 & Eingebettet & 251.6 & N/A & Prognostiziert HVP-Fix \\
+				\midrule
+				Tau ($\tau$) & SM + T0 (Hybrid) & 71100 & $\sim$10 & $<$ 9.5$\times10^{8}$ & Konsistent & T0 als BSM-additiv \\
+				Tau ($\tau$) & Reine T0 & 71100 & Eingebettet & 71100 & 0 $\sigma$ & Prognose testbar \\
+				\bottomrule
+			\end{tabular}%
+		}
 		\caption{Hybrid vs. Reine T0: Pre-2025-Daten}
 		\label{tab:hybrid_pure}
 	\end{table}
 	
 	\subsection{Unsicherheiten: Warum SM Bereiche hat, T0 exakt?}
 	
-	\begin{table}[ht!]
+	\begin{table}[htbp]
 		\centering
 		\footnotesize
-		\setlength{\tabcolsep}{4pt}
-		\begin{tabular}{@{}lccc@{}}
-			\toprule
-			\textbf{Aspekt} & \textbf{SM (Theorie)} & \textbf{T0 (Berechnung)} & \textbf{Unterschied / Warum?} \\
-			\midrule
-			Typischer Wert & $116591810 \times 10^{-11}$ & $251.6 \times 10^{-11}$ & SM: total; T0: geometrischer Beitrag \\
-			Unsicherheit & $\pm 43 \times 10^{-11}$ (1$\sigma$) & $\pm 0$ (exakt) & SM: modell-unsicher; T0: parameterfrei \\
-			Bereich (95\% CL) & $116591810 \pm 86 \times 10^{-11}$ & 251.6 (kein Bereich) & SM: breit aus QCD; T0: deterministisch \\
-			Ursache & HVP $\pm 41 \times 10^{-11}$ & $\xi$-fest (Geometrie) & SM: iterativ; T0: statisch \\
-			Abweichung zu Exp. & $249 \pm 48.2 \times 10^{-11}$ (4.2$\sigma$) & Passt Diskrepanz & SM: hohe Unsicherheit; T0: präzise \\
-			\bottomrule
-		\end{tabular}
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{p{2.5cm} p{3cm} p{3cm} p{5cm}}
+				\toprule
+				\textbf{Aspekt} & \textbf{SM (Theorie)} & \textbf{T0 (Berechnung)} & \textbf{Unterschied / Warum?} \\
+				\midrule
+				Typischer Wert & $116591810 \times 10^{-11}$ & $251.6 \times 10^{-11}$ & SM: total; T0: geometrischer Beitrag \\
+				Unsicherheit & $\pm 43 \times 10^{-11}$ (1$\sigma$) & $\pm 0$ (exakt) & SM: modell-unsicher; T0: parameterfrei \\
+				Bereich (95\% CL) & $116591810 \pm 86 \times 10^{-11}$ & 251.6 (kein Bereich) & SM: breit aus QCD; T0: deterministisch \\
+				Ursache & HVP $\pm 41 \times 10^{-11}$ & $\xi$-fest (Geometrie) & SM: iterativ; T0: statisch \\
+				Abweichung zu Exp. & $249 \pm 48.2 \times 10^{-11}$ (4.2$\sigma$) & Passt Diskrepanz & SM: hohe Unsicherheit; T0: präzise \\
+				\bottomrule
+			\end{tabular}%
+		}
 		\caption{Unsicherheitsvergleich (Myon-Fokus)}
 		\label{tab:uncertainties}
 	\end{table}
 	
 	\subsection{Warum Hybrid Pre-2025 für Myon funktionierte, aber Reine für Elektron inkonsistent schien?}
 	
-	\begin{table}[ht!]
+	\begin{table}[htbp]
 		\centering
 		\footnotesize
-		\setlength{\tabcolsep}{3pt}
-		\begin{tabular}{@{}lcccccc@{}}
-			\toprule
-			\textbf{Lepton} & \textbf{Ansatz} & \textbf{T0-Kern} & \textbf{Voller Wert} & \textbf{Pre-2025 Exp.} & \textbf{\% Abweichung} & \textbf{Erklärung} \\
-			& & ($ \times 10^{-11}$) & ($ \times 10^{-11}$) & ($ \times 10^{-11}$) & (zu Ref.) & \\
-			\midrule
-			Myon ($\mu$) & Hybrid (SM + T0) & 251.6 & 116592061.6 & 116592059 & $2.2 \times 10^{-6}$\% & Passt exakte Diskrepanz \\
-			Myon ($\mu$) & Reine T0 & 251.6 & $\sim$116592061.6 & 116592059 & $2.2 \times 10^{-6}$\% & Einbettet SM \\
-			\midrule
-			Elektron (e) & Hybrid (SM + T0) & 0.0589 & 115965218.132 & 115965218.073 & $5.1 \times 10^{-11}$\% & T0 vernachlässigbar \\
-			Elektron (e) & Reine T0 & 0.0589 & $\sim$115965218.132 & 115965218.073 & $5.1 \times 10^{-11}$\% & QED aus Dualität \\
-			\bottomrule
-		\end{tabular}
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{p{1.5cm} p{1.5cm} p{1.5cm} p{2.5cm} p{2.5cm} p{2cm} p{3cm}}
+				\toprule
+				\textbf{Lepton} & \textbf{Ansatz} & \textbf{T0-Kern} & \textbf{Voller Wert} & \textbf{Pre-2025 Exp.} & \textbf{\% Abweichung} & \textbf{Erklärung} \\
+				& & ($ \times 10^{-11}$) & ($ \times 10^{-11}$) & ($ \times 10^{-11}$) & (zu Ref.) & \\
+				\midrule
+				Myon ($\mu$) & Hybrid (SM + T0) & 251.6 & 116592061.6 & 116592059 & $2.2 \times 10^{-6}$\% & Passt exakte Diskrepanz \\
+				Myon ($\mu$) & Reine T0 & 251.6 & $\sim$116592061.6 & 116592059 & $2.2 \times 10^{-6}$\% & Einbettet SM \\
+				\midrule
+				Elektron (e) & Hybrid (SM + T0) & 0.0589 & 115965218.132 & 115965218.073 & $5.1 \times 10^{-11}$\% & T0 vernachlässigbar \\
+				Elektron (e) & Reine T0 & 0.0589 & $\sim$115965218.132 & 115965218.073 & $5.1 \times 10^{-11}$\% & QED aus Dualität \\
+				\bottomrule
+			\end{tabular}%
+		}
 		\caption{Hybrid vs. Rein: Pre-2025 (Myon \& Elektron)}
 		\label{tab:hybrid_inconsistency}
 	\end{table}
 	
 	\subsection{Einbettungsmechanismus: Auflösung der Elektron-Inkonsistenz}
 	
-	\begin{table}[ht!]
+	\begin{table}[htbp]
 		\centering
 		\footnotesize
-		\setlength{\tabcolsep}{4pt}
-		\begin{tabular}{@{}llcl@{}}
-			\toprule
-			\textbf{Aspekt} & \textbf{Alte Version (Sept. 2025)} & \textbf{Aktuelle Einbettung} & \textbf{Auflösung} \\
-			\midrule
-			T0-Kern $a_e$ & $5.86 \times 10^{-14}$ (inkonsistent) & $0.0589 \times 10^{-12}$ & Kern subdom.; Einbettung skaliert \\
-			QED-Einbettung & Nicht detailliert & $\frac{\alpha(\xi)}{2\pi} \cdot \frac{E_0}{m_e} \cdot \xi$ & QED aus Dualität \\
-			Volles $a_e$ & Nicht erklärt & Kern + QED-embed $\approx$ Exp. & Vollständig; Checks erfüllt \\
-			\% Abweichung & $\sim$100\% & $<$10$^{-11}$\% & Geometrie approx. SM perfekt \\
-			\bottomrule
-		\end{tabular}
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{p{3cm} p{4cm} p{3cm} p{3cm}}
+				\toprule
+				\textbf{Aspekt} & \textbf{Alte Version (Sept. 2025)} & \textbf{Aktuelle Einbettung} & \textbf{Auflösung} \\
+				\midrule
+				T0-Kern $a_e$ & $5.86 \times 10^{-14}$ (inkonsistent) & $0.0589 \times 10^{-12}$ & Kern subdom.; Einbettung skaliert \\
+				QED-Einbettung & Nicht detailliert & $\frac{\alpha(\xi)}{2\pi} \cdot \frac{E_0}{m_e} \cdot \xi$ & QED aus Dualität \\
+				Volles $a_e$ & Nicht erklärt & Kern + QED-embed $\approx$ Exp. & Vollständig; Checks erfüllt \\
+				\% Abweichung & $\sim$100\% & $<$10$^{-11}$\% & Geometrie approx. SM perfekt \\
+				\bottomrule
+			\end{tabular}%
+		}
 		\caption{Einbettung vs. Alte Version (Elektron)}
 		\label{tab:embedding_electron}
 	\end{table}
@@ -427,23 +451,24 @@
 	
 	\subsection{Prototyp-Vergleich: Sept. 2025 vs. Aktuell}
 	
-	\begin{table}[ht!]
+	\begin{table}[htbp]
 		\centering
 		\footnotesize
-		\setlength{\tabcolsep}{3pt}
-		\begin{tabular}{@{}llcl@{}}
-			\toprule
-			\textbf{Element} & \textbf{Sept. 2025} & \textbf{Nov. 2025} & \textbf{Konsistenz} \\
-			\midrule
-			$\xi$-Param. & $4/3 \times 10^{-4}$ & Identisch ($4/30000$) & Konsistent \\
-			Formel & $\frac{5\xi^4}{96\pi^2 \lambda^2} \cdot m_\ell^2$ ($\lambda$ kalib.) & $\frac{\alpha}{2\pi} K_\text{frak} \xi \frac{m_\ell^2}{m_e E_0} \frac{11.28}{N_\text{loop}}$ & Detaillierter \\
-			Myon-Wert & $251 \times 10^{-11}$ & $251.6 \times 10^{-11}$ & Konsistent \\
-			Elektron-Wert & $5.86 \times 10^{-14}$ & $0.0589 \times 10^{-12}$ & Konsistent \\
-			Tau-Wert & $7.09 \times 10^{-7}$ & $7.11 \times 10^{-7}$ & Konsistent \\
-			Lagrangedichte & $\mathcal{L}_\text{int} = \xi m_\ell \bar{\psi} \psi \Delta m$ & $\xi T_\text{field} (\partial E_\text{field})^2 + g_{T0} \gamma^\mu V_\mu$ & Dualität + Torsion \\
-			Parameterfrei? & $\lambda$ kalibriert & Rein aus $\xi$ (keine Kalib.) & Voll geometrisch \\
-			\bottomrule
-		\end{tabular}
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{p{2.5cm} p{4cm} p{3cm} p{3cm}}
+				\toprule
+				\textbf{Element} & \textbf{Sept. 2025} & \textbf{Nov. 2025} & \textbf{Konsistenz} \\
+				\midrule
+				$\xi$-Param. & $4/3 \times 10^{-4}$ & Identisch ($4/30000$) & Konsistent \\
+				Formel & $\frac{5\xi^4}{96\pi^2 \lambda^2} \cdot m_\ell^2$ ($\lambda$ kalib.) & $\frac{\alpha}{2\pi} K_\text{frak} \xi \frac{m_\ell^2}{m_e E_0} \frac{11.28}{N_\text{loop}}$ & Detaillierter \\
+				Myon-Wert & $251 \times 10^{-11}$ & $251.6 \times 10^{-11}$ & Konsistent \\
+				Elektron-Wert & $5.86 \times 10^{-14}$ & $0.0589 \times 10^{-12}$ & Konsistent \\
+				Tau-Wert & $7.09 \times 10^{-7}$ & $7.11 \times 10^{-7}$ & Konsistent \\
+				Lagrangedichte & $\mathcal{L}_\text{int} = \xi m_\ell \bar{\psi} \psi \Delta m$ & $\xi T_\text{field} (\partial E_\text{field})^2 + g_{T0} \gamma^\mu V_\mu$ & Dualität + Torsion \\
+				Parameterfrei? & $\lambda$ kalibriert & Rein aus $\xi$ (keine Kalib.) & Voll geometrisch \\
+				\bottomrule
+			\end{tabular}%
+		}
 		\caption{Sept. 2025-Prototyp vs. Aktuell (Nov. 2025)}
 		\label{tab:prototype_comparison}
 	\end{table}
@@ -455,12 +480,12 @@
 		&\approx \frac{1}{6} \left( \frac{m_\ell}{m_T} \right)^2 - \frac{1}{4} \left( \frac{m_\ell}{m_T} \right)^4 + \mathcal{O}\left( \left( \frac{m_\ell}{m_T} \right)^6 \right)
 	\end{align*}
 	Für Myon: $I \approx 5.51 \times 10^{-5}$; $F_2^{T0}(0) \approx 2.516 \times 10^{-9}$ (Match zu 251.6 $\times 10^{-11}$).
-
+	
 	\subsection{Zusammenfassung und Ausblick}
 	
 	Dieser Anhang integriert alle Anfragen: Tabellen lösen Vergleiche/Unsicherheiten; Einbettung fixxt Elektron; Prototyp evolviert zu vereinheitlichter T0. Tau-Tests (Belle II 2026) ausstehend. T0: Brücke pre/post-2025, einbettet SM geometrisch.
 	
-
+	
 	\bibliographystyle{plain}
 	\begin{thebibliography}{99}
 		\bibitem[T0-SI(2025)]{T0_SI} J. Pascher, \textit{T0\_SI - DER VOLLSTÄNDIGE SCHLUSS: Warum die SI-Reform 2019 unwissentlich $\xi$-Geometrie implementierte}, T0-Serie v1.2, 2025. \\
