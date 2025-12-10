@@ -6,8 +6,9 @@ This script combines all chapter generation steps:
 1. Extract content from standalone documents
 2. Remove \maketitle and \tableofcontents
 3. Convert abstract environments to sections
-4. Fix unclosed chapter commands
-5. Preserve ALL content exactly (especially resizebox and tables)
+4. Remove \appendix commands (prevents counter overflow in books)
+5. Fix unclosed chapter commands
+6. Preserve ALL content exactly (especially resizebox and tables)
 
 Usage:
     python generate_chapters_complete.py De 018 041 054 103
@@ -16,7 +17,7 @@ Usage:
     
 Author: GitHub Copilot
 Created: 2024-12-09
-Version: 1.0
+Version: 1.1 - Added \appendix command removal
 """
 
 import os
@@ -115,6 +116,27 @@ def fix_chapter_command(content: str) -> str:
     return content
 
 
+def remove_appendix_commands(content: str) -> str:
+    """
+    Remove appendix commands from chapter files.
+    
+    The appendix command is used in standalone documents to switch to appendix
+    mode, but it causes counter overflow errors when multiple chapters in a book
+    each try to start their own appendix. In chapter files, we simply remove the
+    appendix command and keep the sections as regular sections within the chapter.
+    
+    Args:
+        content: Chapter file content
+        
+    Returns:
+        Content with appendix commands removed
+    """
+    # Remove appendix command (with optional surrounding whitespace and tabs)
+    content = re.sub(r'^[ \t]*\\appendix[ \t]*$', '', content, flags=re.MULTILINE)
+    
+    return content
+
+
 def generate_chapter_file(
     standalone_file: Path,
     output_dir: Path,
@@ -127,8 +149,9 @@ def generate_chapter_file(
     1. Extracts content between \begin{document} and \end{document}
     2. Removes \maketitle and \tableofcontents
     3. Converts abstract environment to section
-    4. Fixes unclosed chapter commands
-    5. Preserves ALL other content exactly
+    4. Removes \appendix commands (prevents counter overflow)
+    5. Fixes unclosed chapter commands
+    6. Preserves ALL other content exactly
     
     Args:
         standalone_file: Path to standalone .tex file
@@ -167,6 +190,9 @@ def generate_chapter_file(
         
         # 3. Convert abstract environment to section
         body = fix_abstract_environment(body, language)
+        
+        # 4. Remove \appendix commands (causes counter overflow in books)
+        body = remove_appendix_commands(body)
         
         # Create chapter file name
         base_name = standalone_file.stem  # e.g., 018_T0_Anomale-g2-9_De
@@ -333,8 +359,9 @@ def main():
     print("  1. Extract content from standalone")
     print("  2. Remove \\maketitle and \\tableofcontents")
     print("  3. Convert abstract environment to section")
-    print("  4. Fix unclosed chapter commands")
-    print("  5. Verify generated file")
+    print("  4. Remove \\appendix commands")
+    print("  5. Fix unclosed chapter commands")
+    print("  6. Verify generated file")
     print("=" * 70)
     print()
     
