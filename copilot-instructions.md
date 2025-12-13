@@ -7,6 +7,22 @@
 ## Systematic Recursive Workflow
 
 ### 1. Environment Setup
+
+**CRITICAL: Always verify LaTeX installation BEFORE any compilation**
+
+```bash
+# Check if pdflatex is installed
+if ! command -v pdflatex &> /dev/null; then
+    echo "Installing LaTeX environment..."
+    sudo apt-get update
+    sudo apt-get install -y texlive-latex-base texlive-latex-extra \
+                           texlive-fonts-recommended texlive-science \
+                           texlive-lang-german
+else
+    echo "LaTeX already installed: $(pdflatex --version | head -1)"
+fi
+```
+
 - **LaTeX Installation**: Use `sudo apt-get install` for minimal configuration
 - **Required Packages**:
   - `texlive-latex-base`
@@ -15,14 +31,40 @@
   - `texlive-science` (physics package)
   - `texlive-lang-german` (ngerman support)
 - **Compilation Tool**: `pdflatex` (3 passes per document)
+- **Installation Verification**: MUST verify pdflatex is available before first compilation
 
 ### 2. Phase 1: Standalone Documents
 **Fix ALL standalone documents FIRST before touching chapter files or books**
 
+**RECURSIVE & ITERATIVE COMPILATION MANDATORY:**
+- Compile each document
+- Check for Overfull/Underfull warnings and errors
+- Fix identified issues
+- **RECOMPILE until ZERO warnings and ZERO errors**
+- Only then move to next document
+
+**Compilation Loop:**
+```bash
+while true; do
+    pdflatex -interaction=nonstopmode document.tex 2>&1 | tee compile.log
+    WARNINGS=$(grep -c "Overfull\|Underfull" compile.log)
+    ERRORS=$(grep -c "^!" compile.log)
+    
+    if [ $WARNINGS -eq 0 ] && [ $ERRORS -eq 0 ]; then
+        echo "✓ Clean compilation - proceeding to next"
+        break
+    else
+        echo "⚠ Found $WARNINGS warnings, $ERRORS errors - fixing..."
+        # Apply fixes
+        # Continue loop
+    fi
+done
+```
+
 1. Compile each standalone individually: `pdflatex standalone.tex`
 2. Capture and analyze Overfull \hbox warnings
 3. Fix tables that overflow (convert to list format if >10pt overfull)
-4. Recompile to verify fix
+4. **Recompile iteratively until compilation is clean (0 warnings, 0 errors)**
 5. Move to next standalone
 6. **Do not proceed to Phase 2 until ALL standalone warnings are eliminated**
 
@@ -45,14 +87,45 @@
 ### 4. Phase 3: Compile Books Iteratively
 **Recursive process for each book**
 
+**RECURSIVE & ITERATIVE COMPILATION MANDATORY:**
+
+```bash
+BOOK="BookName.tex"
+MAX_ITERATIONS=10
+iteration=0
+
+while [ $iteration -lt $MAX_ITERATIONS ]; do
+    echo "=== Iteration $((iteration+1)) for $BOOK ==="
+    
+    # Compile 3 passes
+    for pass in 1 2 3; do
+        pdflatex -interaction=nonstopmode "$BOOK" > /tmp/compile_pass${pass}.log 2>&1
+    done
+    
+    # Check for warnings and errors
+    WARNINGS=$(grep -c "Overfull\|Underfull" /tmp/compile_pass3.log)
+    ERRORS=$(grep -c "^!" /tmp/compile_pass3.log)
+    
+    if [ $WARNINGS -eq 0 ] && [ $ERRORS -eq 0 ]; then
+        echo "✓ $BOOK: Clean compilation achieved!"
+        break
+    else
+        echo "⚠ $BOOK: $WARNINGS warnings, $ERRORS errors found"
+        # Identify and fix problematic chapter
+        # Continue loop
+        iteration=$((iteration+1))
+    fi
+done
+```
+
 1. Compile book: `pdflatex BookName.tex` (3 passes)
-2. Analyze Overfull \hbox warnings
-3. If warnings exist:
+2. Analyze Overfull \hbox warnings and errors
+3. If warnings/errors exist:
    - Identify problematic chapter
    - Fix in chapter file (NOT standalone - standalone is already clean)
-   - Recompile book
-   - Repeat until zero warnings
-4. Move to next book
+   - **Recompile book iteratively**
+   - **Repeat until ZERO warnings and ZERO errors**
+4. Only move to next book when current book is completely clean
 
 **Book Compilation Order:**
 1. Teil1_De.tex
@@ -149,11 +222,17 @@ Details:
 
 ## Success Criteria
 
-1. ✅ ALL standalone documents compile with ZERO Overfull warnings
-2. ✅ ALL chapter files generated from clean standalones
-3. ✅ ALL 8 books compile with ZERO Overfull warnings
-4. ✅ Books maintain KDP compliance (fonts ≥7pt, no overflow)
-5. ✅ Expected page increase: +5-10% per book (acceptable)
+1. ✅ LaTeX environment verified/installed BEFORE any compilation
+2. ✅ ALL standalone documents compile with ZERO Overfull warnings and ZERO errors (recursive/iterative)
+3. ✅ ALL chapter files generated from clean standalones
+4. ✅ ALL 8 books compile with ZERO Overfull warnings and ZERO errors (recursive/iterative)
+5. ✅ Books maintain KDP compliance (fonts ≥7pt, no overflow)
+6. ✅ Expected page increase: +5-10% per book (acceptable)
+
+**CRITICAL: Recursive and iterative compilation is MANDATORY**
+- Each document MUST be recompiled until clean (0 warnings, 0 errors)
+- NO proceeding to next phase/document while warnings/errors exist
+- Maximum iterations per document: 10 (if not clean after 10, escalate)
 
 ---
 
