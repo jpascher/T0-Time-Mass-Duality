@@ -68,9 +68,9 @@ The T0 model proposes an approach to fundamental physics through time-energy dua
 T0-Time-Mass-Duality/
 ├── 2/
 │   ├── html/                     # Interactive HTML explorations
-│   ├── pdf/                      # Technical documents (205+ files)
+│   ├── pdf/                      # Technical documents (204+ files)
 │   ├── tex/                      # LaTeX source files
-│   │   ├── de_standalone/        # 103 German standalone documents
+│   │   ├── de_standalone/        # 100 German standalone documents
 │   │   ├── en_standalone/        # 102 English standalone documents
 │   │   ├── de_chapters_new/      # Chapter versions for books
 │   │   ├── en_chapters_new/      # Chapter versions for books
@@ -91,10 +91,12 @@ T0-Time-Mass-Duality/
 
 **GitHub Search Optimization:** This repo is tagged with "quantum-physics", "unified-theory", "fractal-geometry", and "deterministic-computing" for easy discovery via GitHub's topic search.
 
-## Complete PDF Documentation (205+ Files, ~75MB total)
+## Complete PDF Documentation (204+ Files, ~75MB total)
 
 All documents are available in German and English versions where applicable.  
-**Pro Tip:** Use GitHub's search bar with `T0_ filename` to quickly locate specific PDFs.
+**Pro Tip:** Use GitHub's search bar with `T0_ filename` or `Matsas` to quickly locate specific PDFs.
+
+**December 2025 Update:** Added comprehensive Matsas et al. (2024) comparative analysis documents (104, 105) showing convergence of independent research on single-parameter physics. Removed redundant preliminary Matsas documents (100-102) as they are superseded by comprehensive versions 104-105.
 
 ### LaTeX Source Files and Compiled Books
 

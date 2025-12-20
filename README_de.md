@@ -67,9 +67,9 @@ Das T0-Modell schlägt einen Ansatz für die fundamentale Physik durch Zeit-Ener
 T0-Zeit-Masse-Dualität/
 ├── 2/
 │   ├── html/                     # Interaktive HTML-Explorationen
-│   ├── pdf/                      # Technische Dokumente (205+ Dateien)
+│   ├── pdf/                      # Technische Dokumente (204+ Dateien)
 │   ├── tex/                      # LaTeX-Quelldateien
-│   │   ├── de_standalone/        # 103 deutsche Standalone-Dokumente
+│   │   ├── de_standalone/        # 100 deutsche Standalone-Dokumente
 │   │   ├── en_standalone/        # 102 englische Standalone-Dokumente
 │   │   ├── de_chapters_new/      # Kapitelversionen für Bücher
 │   │   ├── en_chapters_new/      # Kapitelversionen für Bücher
@@ -90,10 +90,12 @@ T0-Zeit-Masse-Dualität/
 
 **GitHub-Suchoptimierung:** Dieses Repo ist mit „quanten-physik“, „vereinheitlichte-theorie“, „fraktale-geometrie“ und „deterministische-computing“ getaggt für einfache Entdeckung über GitHub-Themensuche.
 
-## Vollständige PDF-Dokumentation (205+ Dateien, ~75MB insgesamt)
+## Vollständige PDF-Dokumentation (204+ Dateien, ~75MB insgesamt)
 
 Alle Dokumente in deutscher und englischer Version verfügbar, soweit vorhanden.  
-**Pro-Tipp:** Verwenden Sie die GitHub-Suchleiste mit `T0_ Dateiname`, um spezifische PDFs schnell zu finden.
+**Pro-Tipp:** Verwenden Sie die GitHub-Suchleiste mit `T0_ Dateiname` oder `Matsas`, um spezifische PDFs schnell zu finden.
+
+**Update Dezember 2025:** Umfassende Matsas et al. (2024) Vergleichsanalyse-Dokumente (104, 105) hinzugefügt, die Konvergenz unabhängiger Forschung zur Ein-Parameter-Physik zeigen. Redundante vorläufige Matsas-Dokumente (100-102) entfernt, da sie durch umfassende Versionen 104-105 ersetzt werden.
 
 ### LaTeX-Quelldateien und kompilierte Bücher
 
