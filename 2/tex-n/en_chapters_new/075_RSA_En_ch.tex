@@ -234,397 +234,44 @@ Theoretical Framework and Computational Complexity \\
 	
 	Different substrate materials provide different T0-field characteristics:
 	
-	\begin{table}[htbp]
-		\centering
-		\resizebox{\textwidth}{!}{
-\begin{tabular}{lccccc}
-			\toprule
-			\textbf{Material} & $\boldsymbol{\epsilon_r}$ & $\boldsymbol{\mu_r}$ & $\boldsymbol{c_{T0}/c}$ & $\boldsymbol{\xi_{eff}/\xi_0}$ & \textbf{Applications} \\
-			\midrule
-			Vacuum & 1.0 & 1.0 & 1.0 & 1.0 & Reference \\
-			Silicon & 11.9 & 1.0 & 0.29 & 0.84 & Electronics \\
-			Sapphire & 9.4 & 1.0 & 0.33 & 0.87 & High-Q resonators \\
-			GaAs & 12.9 & 1.0 & 0.28 & 0.83 & High-speed devices \\
-			Superconductor & $\infty$ & 0 & 0 & $\Delta/(k_B T_c)$ & Lossless cavities \\
-			Metamaterial & $< 0$ & $< 0$ & $> 1$ & Tunable & Engineered properties \\
-			\bottomrule
-		\end{tabular}
-}
-		\caption{Material properties for T0-field propagation}
-		\label{tab:materials}
-	\end{table}
 	
-	\subsection{Geometric Optimization}
-	
-	\textbf{Cavity shape optimization} for maximum period resolution:
-	
-	For period $r$ detection, the optimal cavity dimensions follow:
-	\begin{align}
-		\text{Length: } L &= (2n+1) \frac{c_{T0} r}{4 f_0} \quad \text{(quarter-wave resonator)} \\
-		\text{Width: } W &= \frac{c_{T0}}{2 f_0} \sqrt{1 - (f_0/f_{cutoff})^2} \\
-		\text{Height: } H &= \frac{c_{T0}}{2 f_0} \sqrt{1 - (f_0/f_{cutoff})^2}
-	\end{align}
-	
-	\textbf{Coupling aperture design}:
-	\begin{equation}
-		A_{aperture} = \frac{\lambda_{T0}^2}{4\pi} \cdot \frac{Q_{external}}{Q_{internal}} \cdot \sin^2\left(\frac{\pi a}{\lambda_{T0}}\right)
-	\end{equation}
-	
-	where $a$ is the aperture dimension.
-	
-	\subsection{Temperature and Pressure Dependencies}
-	
-	Environmental conditions affect T0-field propagation:
-	
-	\textbf{Temperature dependence}:
-	\begin{equation}
-		c_{T0}(T) = c_{T0}(T_0) \sqrt{\frac{T}{T_0}} \left(1 + \alpha_T \Delta T + \beta_T (\Delta T)^2\right)
-	\end{equation}
-	
-	\textbf{Pressure dependence}:
-	\begin{equation}
-		\xi(p) = \xi_0 \left(1 + \kappa \frac{\Delta p}{p_0}\right)
-	\end{equation}
-	
-	where $\kappa$ is the pressure coefficient.
-	
-	\textbf{Thermal noise limitations}:
-	\begin{equation}
-		S_{thermal}(f) = \frac{4 k_B T R}{(1 + (2\pi f \tau)^2)} \quad \text{with } \tau = \frac{Q}{2\pi f_0}
-	\end{equation}
-	
-	\subsection{Interface Effects and Surface Roughness}
-	
-	Surface conditions critically affect T0-field behavior:
-	
-	\textbf{Surface roughness scattering}:
-	\begin{equation}
-		\tau_{surface} = \frac{4\pi^2}{\lambda_{T0}^2} \langle h^2 \rangle \ell_c
-	\end{equation}
-	
-	where $\langle h^2 \rangle$ is mean-square roughness and $\ell_c$ is correlation length.
-	
-	\textbf{Interface reflection coefficient}:
-	\begin{equation}
-		R = \left|\frac{Z_1 \cos\theta_1 - Z_2 \cos\theta_2}{Z_1 \cos\theta_1 + Z_2 \cos\theta_2}\right|^2
-	\end{equation}
-	
-	for oblique incidence at angle $\theta_1$.
-	
-	\subsection{Scaling Laws for Cavity Arrays}
-	
-	For enhanced period detection using cavity arrays:
-	
-	\textbf{Coherent detection in N-cavity array}:
-	\begin{equation}
-		SNR_{array} = \sqrt{N} \cdot SNR_{single} \cdot \eta_{coupling}
-	\end{equation}
-	
-	where $\eta_{coupling}$ accounts for inter-cavity coupling efficiency.
-	
-	\textbf{Optimal spacing between cavities}:
-	\begin{equation}
-		d_{optimal} = \frac{\lambda_{T0}}{2} \sqrt{1 + (Q/\pi)^2}
-	\end{equation}
-	
-	\textbf{Phase coherence length}:
-	\begin{equation}
-		L_{coherence} = c_{T0} \tau_{coherence} = \frac{c_{T0} Q}{2\pi f_0}
-	\end{equation}
-	
-	\subsection{Resource Requirements}
-	
-	\begin{table}[htbp]
-		\centering
-		\begin{tabular}{lcc}
-			\toprule
-			\textbf{Resource} & \textbf{Standard Shor} & \textbf{T0-Shor} \\
-			\midrule
-			Quantum bits & $2n + O(\log n)$ & 0 \\
-			Energy fields & 0 & $2n$ \\
-			Field operations & $O(n^3)$ & $O(n^{2.5})$ \\
-			Memory (bits) & $O(n)$ & $O(n)$ \\
-			Success probability & $\approx 0.5$ & 1.0 (theoretical) \\
-			\bottomrule
-		\end{tabular}
-		\caption{Theoretical resource comparison for $n$-bit integer factorization}
-		\label{tab:complexity}
-	\end{table}
-	
-	\subsection{Efficiency Factor Analysis}
-	
-	The theoretical efficiency gain depends on the optimization of the mass field:
-	
-	\begin{equation}
-		F(m) = \frac{\left(\int_0^N \sqrt{P(r|N)} \, dr\right)^2}{\int_0^N P(r|N) \, dr}
-	\end{equation}
-	
-	For uniform distribution: $F(m) = N$
-	
-	For optimal Gaussian distribution with standard deviation $\sigma$:
-	\begin{equation}
-		F(m) = \sqrt{\frac{\pi}{2}} \cdot \frac{\sigma}{\sqrt{\sigma^2 + \sigma_P^2}}
-	\end{equation}
-	
-	where $\sigma_P$ is the natural width of the period distribution.
-	
-	\section{The Role of the $\xi$ Parameter}
-	
-	\subsection{Higgs-Derived Coupling}
-	
-	The theoretical derivation of $\xi$ from Higgs field interactions provides a physical foundation:
-	
-	\begin{equation}
-		\xi(E) = \xi_0 \cdot \left(\frac{E}{E_0}\right)^{\gamma}
-	\end{equation}
-	
-	where the scaling exponent $\gamma$ depends on the energy regime:
-	\begin{align}
-		\gamma &\approx 0 \quad \text{for } E < \Lambda_{QCD} \\
-		\gamma &\approx 1/2 \quad \text{for } \Lambda_{QCD} < E < \Lambda_{EW} \\
-		\gamma &\approx -1/4 \quad \text{for } E > \Lambda_{EW}
-	\end{align}
-	
-	\subsection{Material Dependence}
-	
-	For electronic systems (typical energy scale $\sim 1$ eV):
-	\begin{equation}
-		\xi_{electronic} = \xi_0 \cdot \left(\frac{1 \text{ eV}}{246 \text{ GeV}}\right)^{1/2} \approx 10^{-6} \cdot \xi_0
-	\end{equation}
-	
-	Different materials exhibit different effective $\xi$ values:
-	\begin{align}
-		\xi_{metal} &= \xi_0 / \sqrt{N(E_F)} \\
-		\xi_{SC} &= \xi_0 \cdot \Delta/(k_B T_c) \\
-		\xi_{semi} &= \xi_0 / \sqrt{m_{eff}/m_e}
-	\end{align}
-	
-	\section{Mathematical Consistency Checks}
-	
-	\subsection{Conservation Laws}
-	
-	The T0 framework preserves several important conservation laws:
-	
-	\textbf{Energy conservation in weighted form}:
-	\begin{equation}
-		\int |E(x,t)|^2 m(x) \, dx = \text{constant}
-	\end{equation}
-	
-	\textbf{Modified momentum conservation}:
-	\begin{equation}
-		P = \int E^*(x) \frac{\nabla E(x)}{im(x)} \, dx = \text{constant}
-	\end{equation}
-	
-	\subsection{Scaling Properties}
-	
-	Under spatial scaling $x \rightarrow \lambda x$:
-	\begin{align}
-		m(x) &\rightarrow \lambda^{-d} m(x/\lambda) \\
-		T(x) &\rightarrow \lambda^d T(x/\lambda) \\
-		E(x) &\rightarrow \lambda^{d/2} E(x/\lambda)
-	\end{align}
-	
-	where $d$ is the spatial dimension.
-	
-	\section{Stability Analysis}
-	
-	\subsection{Linear Stability}
-	
-	Consider perturbations around equilibrium solution $m_0(r)$:
-	\begin{equation}
-		m(r,t) = m_0(r) + \epsilon \delta m(r) e^{\lambda t}
-	\end{equation}
-	
-	Stability requires $\text{Re}(\lambda) < 0$ for all eigenmodes.
-	
-	The stability matrix for small perturbations is:
-	\begin{equation}
-		\mathcal{L}[\delta m] = -\frac{\partial^2}{\partial r^2} + V_{eff}(r)
-	\end{equation}
-	
-	where $V_{eff}(r)$ is an effective potential derived from the field equations.
-	
-	\subsection{Numerical Stability Conditions}
-	
-	For numerical implementation, stability requires:
-	
-	\textbf{CFL condition}:
-	\begin{equation}
-		\Delta t < \frac{\Delta r^2}{\max(1/m(r))}
-	\end{equation}
-	
-	\textbf{Mass gradient constraint}:
-	\begin{equation}
-		\left|\frac{\nabla m}{m}\right| < \frac{1}{\Delta r}
-	\end{equation}
-	
-	\section{Theoretical Limitations}
-	
-	\subsection{Information-Theoretic Bounds}
-	
-	The fundamental search time is bounded by Shannon's entropy:
-	\begin{equation}
-		T_{min} \geq \frac{H[P(r|N)]}{\log_2(N)}
-	\end{equation}
-	
-	where $H[P]$ is the Shannon entropy of the period distribution.
-	
-	\subsection{Uncertainty Relations in T0 Framework}
-	
-	The T0 framework introduces its own uncertainty relation:
-	\begin{equation}
-		\Delta T \cdot \Delta m \geq \frac{\hbar}{2}
-	\end{equation}
-	
-	This limits simultaneous localization in time and mass parameters.
-	
-	\subsection{Dependence on A Priori Knowledge}
-	
-	The efficiency of the T0-Shor algorithm fundamentally depends on the quality of the a priori distribution $P(r|N)$. Without proper knowledge of this distribution, the algorithm reduces to:
-	
-	\textbf{Worst-case scenario}: Uniform distribution
-	\begin{equation}
-		F(m)_{uniform} = 1 \quad \text{(no advantage)}
-	\end{equation}
-	
-	\textbf{Best-case scenario}: Perfect prior knowledge
-	\begin{equation}
-		F(m)_{perfect} = N \quad \text{(maximum advantage)}
-	\end{equation}
-	
-	\section{Comparison with Classical Methods}
-	
-	\subsection{Theoretical Operation Counts}
-	
-	\begin{table}[htbp]
-		\centering
-		\resizebox{\textwidth}{!}{
-\begin{tabular}{lccc}
-			\toprule
-			\textbf{Method} & \textbf{Operations} & \textbf{Memory} & \textbf{Success Rate} \\
-			\midrule
-			Trial Division & $O(\sqrt{N})$ & $O(1)$ & 1.0 \\
-			Pollard's $\rho$ & $O(N^{1/4})$ & $O(1)$ & High \\
-			Quadratic Sieve & $O(\exp(\sqrt{\log N \log \log N}))$ & $O(\sqrt{N})$ & High \\
-			General Number Field Sieve & $O(\exp((\log N)^{1/3}(\log \log N)^{2/3}))$ & $O(\exp(\sqrt{\log N}))$ & High \\
-			Standard Shor & $O((\log N)^3)$ & $O(\log N)$ & $\approx 0.5$ \\
-			T0-Shor (theoretical) & $O((\log N)^{2.5} / F(m))$ & $O(\log N)$ & 1.0 \\
-			\bottomrule
-		\end{tabular}
-}
-		\caption{Theoretical complexity comparison for factoring $N$-bit integers}
-		\label{tab:method_comparison}
-	\end{table}
-	
-	\section{Mathematical Rigor Assessment}
-	
-	\subsection{Well-Posed Problem Analysis}
-	
-	The T0 field equations constitute a well-posed problem if:
-	
-	\begin{enumerate}
-		\item \textbf{Existence}: Solutions exist for given boundary conditions
-		\item \textbf{Uniqueness}: Solutions are unique
-		\item \textbf{Continuous dependence}: Small changes in data produce small changes in solution
-	\end{enumerate}
-	
-	For the field equation (\ref{eq:field}), existence and uniqueness follow from standard PDE theory for elliptic equations with appropriate boundary conditions.
-	
-	\subsection{Dimensional Analysis Verification}
-	
-	Checking dimensional consistency of the field equation:
-	
-	\textbf{Left side}: $[\nabla^2 T] = [L^{-2} \cdot T]$
-	
-	\textbf{Right side}: $[\rho/T^2] = [M L^{-3} \cdot T^{-2}]$
-	
-	For dimensional consistency, we require:
-	\begin{equation}
-		[L^{-2} \cdot T] = [M L^{-3} \cdot T^{-2}]
-	\end{equation}
-	
-	This implies the need for a dimensional constant with units $[M^{-1} L T^3]$, which can be related to gravitational coupling.
-	
-	\section{Conclusion}
-	
-	\subsection{Summary of Mathematical Analysis}
-	
-	The T0-Shor algorithm presents a mathematically consistent framework based on:
-	
-	\begin{enumerate}
-		\item Hyperbolic geometry in time-mass duality space
-		\item Field equations derived from variational principles
-		\item Coupling parameter $\xi$ with theoretical foundation in Higgs physics
-		\item Computational complexity that scales as $O(n^{2.5}/F(m))$
-	\end{enumerate}
-	
-	\subsection{Critical Dependencies}
-	
-	The algorithm's theoretical advantages depend on:
-	
-	\begin{itemize}
-		\item Quality of a priori knowledge about period distribution
-		\item Validity of the time-mass duality assumption
-		\item Stability of numerical implementations
-		\item Physical realizability of adaptive mass fields
-	\end{itemize}
-	
-	\subsection{Open Mathematical Questions}
-	
-	Several mathematical aspects require further investigation:
-	
-	\begin{enumerate}
-		\item Rigorous proof of convergence for the field evolution equations
-		\item Analysis of non-spherically symmetric configurations
-		\item Study of chaotic dynamics in the mass field evolution
-		\item Connection between $\xi$ parameter and experimentally measurable quantities
-	\end{enumerate}
-	
-	The T0-Shor algorithm represents an interesting theoretical construction that connects concepts from differential geometry, field theory, and computational complexity. However, its practical advantages over existing methods remain contingent on several unproven assumptions about the physical realizability of the underlying mathematical framework.
-	
-	\begin{thebibliography}{99}
-		\bibitem{shor1994}
-		Shor, P. W. (1994). Algorithms for quantum computation: discrete logarithms and factoring. \textit{Proceedings 35th Annual Symposium on Foundations of Computer Science}, 124--134.
-		
-		\bibitem{higgs1964}
-		Higgs, P. W. (1964). Broken symmetries and the masses of gauge bosons. \textit{Physical Review Letters}, 13(16), 508--509.
-		
-		\bibitem{weinberg1967}
-		Weinberg, S. (1967). A model of leptons. \textit{Physical Review Letters}, 19(21), 1264--1266.
-		
-		\bibitem{gelfand1963}
-		Gelfand, I. M., \& Fomin, S. V. (1963). \textit{Calculus of variations}. Prentice-Hall.
-		
-		\bibitem{arnold1989}
-		Arnold, V. I. (1989). \textit{Mathematical methods of classical mechanics}. Springer-Verlag.
-		
-		\bibitem{evans2010}
-		Evans, L. C. (2010). \textit{Partial differential equations}. American Mathematical Society.
-		
-		\bibitem{shannon1948}
-		Shannon, C. E. (1948). A mathematical theory of communication. \textit{Bell System Technical Journal}, 27(3), 379--423.
-		
-		\bibitem{pollard1975}
-		Pollard, J. M. (1975). A Monte Carlo method for factorization. \textit{BIT Numerical Mathematics}, 15(3), 331--334.
-		
-		\bibitem{lenstra1993}
-		Lenstra, A. K., \& Lenstra Jr, H. W. (Eds.). (1993). \textit{The development of the number field sieve}. Springer-Verlag.
-		
-		\bibitem{nielsen_chuang2010}
-		Nielsen, M. A., \& Chuang, I. L. (2010). \textit{Quantum computation and quantum information}. Cambridge University Press.
-		
-		\bibitem{riemannian_geometry}
-		Lee, J. M. (2018). \textit{Introduction to Riemannian manifolds}. Springer.
-		
-		\bibitem{variational_calculus}
-		Kot, M. (2014). \textit{A first course in the calculus of variations}. American Mathematical Society.
-		
-		\bibitem{pde_stability}
-		Strikwerda, J. C. (2004). \textit{Finite difference schemes and partial differential equations}. SIAM.
-		
-		\bibitem{computational_complexity}
-		Sipser, M. (2012). \textit{Introduction to the theory of computation}. Cengage Learning.
-		
-		\bibitem{information_theory}
-		Cover, T. M., \& Thomas, J. A. (2012). \textit{Elements of information theory}. John Wiley \& Sons.
-	\end{thebibliography}
+% TABLE CONVERTED TO LIST FORMAT FOR KDP COMPLIANCE
+% Original table was too complex (many columns/rows)
+
+\begin{itemize}
+    \item Vacuum -- 1.0 -- 1.0 -- 1.0 -- 1.0 -- Reference
+    \item Silicon -- 11.9 -- 1.0 -- 0.29 -- 0.84 -- Electronics
+    \item Sapphire -- 9.4 -- 1.0 -- 0.33 -- 0.87 -- High-Q resonators
+    \item GaAs -- 12.9 -- 1.0 -- 0.28 -- 0.83 -- High-speed devices
+    \item Superconductor -- $\infty$ -- 0 -- 0 -- $\Delta/(k_B T_c)$ -- Lossless cavities
+    \item Metamaterial -- $< 0$ -- $< 0$ -- $> 1$ -- Tunable -- Engineered properties
+    \item \text{Length: } L -- = (2n+1) \frac{c_{T0} r}{4 f_0} \quad \text{(quarter-wave resonator)}
+    \item \text{Width: } W -- = \frac{c_{T0}}{2 f_0} \sqrt{1 - (f_0/f_{cutoff})^2}
+    \item \text{Height: } H -- = \frac{c_{T0}}{2 f_0} \sqrt{1 - (f_0/f_{cutoff})^2}
+    \item \textbf{Resource} -- \textbf{Standard Shor} -- \textbf{T0-Shor}
+    \item Quantum bits -- $2n + O(\log n)$ -- 0
+    \item Energy fields -- 0 -- $2n$
+    \item Field operations -- $O(n^3)$ -- $O(n^{2.5})$
+    \item Memory (bits) -- $O(n)$ -- $O(n)$
+    \item Success probability -- $\approx 0.5$ -- 1.0 (theoretical)
+    \item \gamma -- \approx 0 \quad \text{for } E < \Lambda_{QCD}
+    \item \gamma -- \approx 1/2 \quad \text{for } \Lambda_{QCD} < E < \Lambda_{EW}
+    \item \gamma -- \approx -1/4 \quad \text{for } E > \Lambda_{EW}
+    \item \xi_{metal} -- = \xi_0 / \sqrt{N(E_F)}
+    \item \xi_{SC} -- = \xi_0 \cdot \Delta/(k_B T_c)
+    \item \xi_{semi} -- = \xi_0 / \sqrt{m_{eff}/m_e}
+    \item m(x) -- \rightarrow \lambda^{-d} m(x/\lambda)
+    \item T(x) -- \rightarrow \lambda^d T(x/\lambda)
+    \item E(x) -- \rightarrow \lambda^{d/2} E(x/\lambda)
+    \item \textbf{Method} -- \textbf{Operations} -- \textbf{Memory} -- \textbf{Success Rate}
+    \item Trial Division -- $O(\sqrt{N})$ -- $O(1)$ -- 1.0
+    \item Pollard's $\rho$ -- $O(N^{1/4})$ -- $O(1)$ -- High
+    \item Quadratic Sieve -- $O(\exp(\sqrt{\log N \log \log N}))$ -- $O(\sqrt{N})$ -- High
+    \item General Number Field Sieve -- $O(\exp((\log N)^{1/3}(\log \log N)^{2/3}))$ -- $O(\exp(\sqrt{\log N}))$ -- High
+    \item Standard Shor -- $O((\log N)^3)$ -- $O(\log N)$ -- $\approx 0.5$
+    \item T0-Shor (theoretical) -- $O((\log N)^{2.5} / F(m))$ -- $O(\log N)$ -- 1.0
+    \item Gelfand, I. M., \& Fomin, S. V. (1963). \textit{Calculus of variations}. Prentice-Hall.
+    \item Lenstra, A. K., \& Lenstra Jr, H. W. (Eds.). (1993). \textit{The development of the number field sieve}. Springer-Verlag.
+    \item Nielsen, M. A., \& Chuang, I. L. (2010). \textit{Quantum computation and quantum information}. Cambridge University Press.
+    \item Cover, T. M., \& Thomas, J. A. (2012). \textit{Elements of information theory}. John Wiley \& Sons.
+\end{itemize}

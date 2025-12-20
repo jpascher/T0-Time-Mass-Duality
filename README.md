@@ -35,9 +35,36 @@ The T0 model proposes an approach to fundamental physics through time-energy dua
 - [T0_threeclock_De.pdf](2/pdf/T0_threeclock_De.pdf) / [T0_threeclock_En.pdf](2/pdf/T0_threeclock_En.pdf)  
   New: Single-clock metrology and three-clock experiment; detailed analysis of the Scientific Reports paper “A single-clock approach to fundamental metrology” (DOI: 10.1038/s41598-024-71907-0) and its consistency with T0 (time–mass duality and ξ-based SI derivations).
 
-## Latest Highlights (November 2025)
+## Latest Highlights
 
-### The Complete Closure: From ξ to SI Reform 2019
+### December 2025: Matsas et al. (2024) Integration - Theory Validation
+
+**Major theoretical convergence discovered:**  
+Independent research from two completely different perspectives arrives at the same conclusion - **ONE parameter describes all of physics**:
+
+- **Matsas et al. (2024):** Show that in relativistic spacetimes, ONE time unit (operationally defined) suffices to express all observables
+- **T0 Theory:** Shows that ONE geometric parameter ξ = 4/3 × 10⁻⁴ suffices to derive all constants (c, G, ℏ, α)
+- **Perfect Complementarity:** Operational framework (Matsas) + Geometric implementation (T0)
+
+**[Comprehensive Comparative Analysis](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/105_Matsas_T0_Vergleich_En.pdf)** (105_Matsas_T0_Vergleich_En.pdf, 25 pages)
+
+**Key Features:**
+- Complete mathematical derivations showing how c, G, ℏ, α all derive from ξ
+- **Dynamic Perspective:** Clarifies T0 offers complete geometrodynamic description - not just static geometry, but how spacetime evolves, oscillates, and interacts
+- **GitHub-Linked References:** All T0 source documents directly linked for easy navigation
+- Casimir-CMB vacuum unification explaining dark energy framework
+- Extended Bell inequality with fractal damping
+- Already-solved aspects: Extended Lagrangian, Dirac simplification, neutrino masses, etc.
+
+**Significance:** Proof that independent research paths converge on single-parameter physics - validates T0 theory through external confirmation.
+
+**Original Paper:** Matsas, G.E.A., Pleitez, V., Saa, A., Vanzella, D.A.T. "The number of fundamental constants from a spacetime-based perspective", *Scientific Reports* 14, 19645 (2024). DOI: [10.1038/s41598-024-71907-0](https://doi.org/10.1038/s41598-024-71907-0)
+
+---
+
+### November 2025: The Complete Closure
+
+#### From ξ to SI Reform 2019
 **The ultimate revelation - ONE PARAMETER explains everything:**
 - Only ξ = 4/3 × 10⁻⁴ is fundamental
 - All physical constants derive from ξ or define measurement units
@@ -68,9 +95,9 @@ The T0 model proposes an approach to fundamental physics through time-energy dua
 T0-Time-Mass-Duality/
 ├── 2/
 │   ├── html/                     # Interactive HTML explorations
-│   ├── pdf/                      # Technical documents (205+ files)
+│   ├── pdf/                      # Technical documents (204+ files)
 │   ├── tex/                      # LaTeX source files
-│   │   ├── de_standalone/        # 103 German standalone documents
+│   │   ├── de_standalone/        # 100 German standalone documents
 │   │   ├── en_standalone/        # 102 English standalone documents
 │   │   ├── de_chapters_new/      # Chapter versions for books
 │   │   ├── en_chapters_new/      # Chapter versions for books
@@ -91,10 +118,12 @@ T0-Time-Mass-Duality/
 
 **GitHub Search Optimization:** This repo is tagged with "quantum-physics", "unified-theory", "fractal-geometry", and "deterministic-computing" for easy discovery via GitHub's topic search.
 
-## Complete PDF Documentation (205+ Files, ~75MB total)
+## Complete PDF Documentation (204+ Files, ~75MB total)
 
 All documents are available in German and English versions where applicable.  
-**Pro Tip:** Use GitHub's search bar with `T0_ filename` to quickly locate specific PDFs.
+**Pro Tip:** Use GitHub's search bar with `T0_ filename` or `Matsas` to quickly locate specific PDFs.
+
+**December 2025 Update:** Added comprehensive Matsas et al. (2024) comparative analysis (105_Matsas_T0_Vergleich_De/En) with dynamic perspective clarification and GitHub-linked references. See December 2025 Highlights section above for details.
 
 ### LaTeX Source Files and Compiled Books
 
