@@ -5,24 +5,24 @@ color 0A
 
 :MENU
 cls
-echo ═══════════════════════════════════════════════════════════════
+echo ===============================================================
 echo   T0 Time-Mass-Duality Repository - Git Workflow Manager
-echo ═══════════════════════════════════════════════════════════════
+echo ===============================================================
 echo.
 echo Current Branch: copilot/add-latex-build-workflow
 echo.
-echo ┌─────────────────────────────────────────────────────────────┐
-echo │  1. Pull latest changes from remote                        │
-echo │  2. Hard reset to remote (DISCARD local changes!)          │
-echo │  3. Stage all changes (git add .)                          │
-echo │  4. Commit changes (with custom message)                   │
-echo │  5. Push to current branch                                 │
-echo │  6. Full workflow: Add + Commit + Push                     │
-echo │  7. Merge to main (preserves current branch)               │
-echo │  8. Show git status                                        │
-echo │  9. Show git log (last 5 commits)                          │
-echo │  0. Exit                                                    │
-echo └─────────────────────────────────────────────────────────────┘
+echo +-------------------------------------------------------------+
+echo ^|  1. Pull latest changes from remote                        ^|
+echo ^|  2. Hard reset to remote (DISCARD local changes!)          ^|
+echo ^|  3. Stage all changes (git add .)                          ^|
+echo ^|  4. Commit changes (with custom message)                   ^|
+echo ^|  5. Push to current branch                                 ^|
+echo ^|  6. Full workflow: Add + Commit + Push                     ^|
+echo ^|  7. Merge to main (preserves current branch)               ^|
+echo ^|  8. Show git status                                        ^|
+echo ^|  9. Show git log (last 5 commits)                          ^|
+echo ^|  0. Exit                                                    ^|
+echo +-------------------------------------------------------------+
 echo.
 set /p choice="Select option (0-9): "
 
@@ -55,9 +55,9 @@ goto MENU
 
 :HARD_RESET
 echo.
-echo ╔═══════════════════════════════════════════════════════════╗
-echo ║  WARNING: This will DISCARD all local changes!           ║
-echo ╚═══════════════════════════════════════════════════════════╝
+echo +===========================================================+
+echo ^|  WARNING: This will DISCARD all local changes!           ^|
+echo +===========================================================+
 echo.
 set /p confirm="Are you sure? Type YES to confirm: "
 if /i not "%confirm%"=="YES" (
@@ -143,9 +143,9 @@ goto MENU
 
 :FULL_WORKFLOW
 echo.
-echo ═════════════════════════════════════════════════════════════
+echo ===============================================================
 echo Full Workflow: Add + Commit + Push
-echo ═════════════════════════════════════════════════════════════
+echo ===============================================================
 echo.
 set /p commit_msg="Enter commit message: "
 if "%commit_msg%"=="" (
@@ -181,17 +181,17 @@ if %ERRORLEVEL% NEQ 0 (
 )
 echo ✓ Push successful
 echo.
-echo ═════════════════════════════════════════════════════════════
-echo ✓✓✓ Full workflow completed successfully! ✓✓✓
-echo ═════════════════════════════════════════════════════════════
+echo ===============================================================
+echo SUCCESS: Full workflow completed successfully!
+echo ===============================================================
 pause
 goto MENU
 
 :MERGE_TO_MAIN
 echo.
-echo ═════════════════════════════════════════════════════════════
+echo ===============================================================
 echo Merge copilot/add-latex-build-workflow to main
-echo ═════════════════════════════════════════════════════════════
+echo ===============================================================
 echo.
 echo This will:
 echo   1. Switch to main branch
@@ -276,9 +276,9 @@ if %ERRORLEVEL% NEQ 0 (
 )
 echo ✓ Back on copilot/add-latex-build-workflow
 echo.
-echo ═════════════════════════════════════════════════════════════
-echo ✓✓✓ Merge to main completed successfully! ✓✓✓
-echo ═════════════════════════════════════════════════════════════
+echo ===============================================================
+echo SUCCESS: Merge to main completed successfully!
+echo ===============================================================
 echo.
 echo Your working branch is preserved and ready for continued work.
 pause
