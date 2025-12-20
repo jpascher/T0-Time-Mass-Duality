@@ -25,22 +25,17 @@ goto menu
 
 :merge
 echo.
-echo [1/5] Switching to main...
-git checkout main
+echo Executing merge workflow...
 echo.
-echo [2/5] Pulling latest main...
-git pull origin main
+git checkout main && git pull origin main && git merge --no-ff copilot/add-latex-build-workflow && git push origin main && git checkout copilot/add-latex-build-workflow
 echo.
-echo [3/5] Merging working branch...
-git merge --no-ff copilot/add-latex-build-workflow
-echo.
-echo [4/5] Pushing to main...
-git push origin main
-echo.
-echo [5/5] Returning to working branch...
-git checkout copilot/add-latex-build-workflow
-echo.
-echo [DONE] Merge complete
+if errorlevel 1 (
+    echo [ERROR] Merge failed - you may need to resolve conflicts
+    echo Current branch:
+    git branch --show-current
+) else (
+    echo [DONE] Merge complete - returned to working branch
+)
 pause
 goto menu
 
