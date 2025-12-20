@@ -36,6 +36,29 @@ Das T0-Modell schlägt einen Ansatz für die fundamentale Physik durch Zeit-Ener
 
 ## Neueste Highlights
 
+### Dezember 2025: Bewusstsein und Quanten-Agentität - Geometrische Auflösung
+
+**NEU: Bewusstsein als fraktale Emergenz aus T0-Geometrie**
+
+**[T0-Theorie und Bewusstsein: Agentität, freier Wille und fraktale Emergenz](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/100_Consciousness_De.pdf)** (100_Consciousness_De.pdf, 22 Seiten)
+
+**Haupterrungenschaft:** Auflösung des Quanten-Agentitätsproblems durch T0s geometrischen Rahmen - demonstriert, dass Bewusstsein, Agentität und freier Wille aus **fraktaler Inkohärenz** statt perfekter Quantenkohärenz hervorgehen.
+
+**Zentrale These:**
+- **Adlam et al. (2025):** Beweisen, dass Agentität in rein kohärenten Quantensystemen nicht entstehen kann
+- **T0-Auflösung:** Agentität entsteht aus fraktaler, rekursiver Abweichung von perfekter Kohärenz
+- **Bewusstsein = Persistente rekursive Kopplung** zwischen internen Modellen und Umgebung
+- **Freier Wille = Strukturierte Indeterminiertheit** aus ξ-Geometrie
+
+**Warum aktuelle KI nicht bewusst sein kann:**
+- Fehlt Verkörperung (sensomotorische Kopplung an externe Geometrie)
+- Fehlende hierarchische Architektur (keine skalen-rekursive Struktur)
+- Keine geometrische Grundlage (operiert im abstrakten Symbolraum)
+
+**Referenz:** E.C. Adlam, K.J. McQueen, M. Waegell, „Agency cannot be a purely quantum phenomenon", arXiv:2510.13247 (2025)
+
+---
+
 ### Dezember 2025: Matsas et al. (2024) Integration - Theorievalidierung
 
 **Bedeutende theoretische Konvergenz entdeckt:**  
@@ -50,7 +73,7 @@ Unabhängige Forschung aus zwei völlig unterschiedlichen Perspektiven kommt zur
 **Hauptmerkmale:**
 - Vollständige mathematische Ableitungen, die zeigen, wie c, G, ℏ, α alle aus ξ folgen
 - **Dynamische Perspektive:** Klärt, dass T0 vollständige geometrodynamische Beschreibung bietet - nicht nur statische Geometrie, sondern wie Raumzeit sich entwickelt, schwingt und interagiert
-- **GitHub-Verknüpfte Referenzen:** Alle T0-Quelldokumente direkt verlinkt für einfache Navigation
+- **GitHub-Verknüpfte PDF-Referenzen:** Alle T0-Quelldokumente direkt verlinkt für einfache Navigation
 - Casimir-CMB-Vakuum-Vereinheitlichung zur Erklärung des Dunkle-Energie-Rahmens
 - Erweiterte Bell-Ungleichung mit fraktaler Dämpfung
 - Bereits gelöste Aspekte: Erweiterte Lagrange-Dichte, Dirac-Vereinfachung, Neutrinomassen, usw.
@@ -94,10 +117,10 @@ Unabhängige Forschung aus zwei völlig unterschiedlichen Perspektiven kommt zur
 T0-Zeit-Masse-Dualität/
 ├── 2/
 │   ├── html/                     # Interaktive HTML-Explorationen
-│   ├── pdf/                      # Technische Dokumente (204+ Dateien)
+│   ├── pdf/                      # Technische Dokumente (213+ Dateien)
 │   ├── tex/                      # LaTeX-Quelldateien
-│   │   ├── de_standalone/        # 100 deutsche Standalone-Dokumente
-│   │   ├── en_standalone/        # 102 englische Standalone-Dokumente
+│   │   ├── de_standalone/        # 108 deutsche Standalone-Dokumente
+│   │   ├── en_standalone/        # 105 englische Standalone-Dokumente
 │   │   ├── de_chapters_new/      # Kapitelversionen für Bücher
 │   │   ├── en_chapters_new/      # Kapitelversionen für Bücher
 │   │   └── completed/            # 6 kompilierte Bücher (Deutsch/ & Englisch/)
@@ -117,18 +140,18 @@ T0-Zeit-Masse-Dualität/
 
 **GitHub-Suchoptimierung:** Dieses Repo ist mit „quanten-physik“, „vereinheitlichte-theorie“, „fraktale-geometrie“ und „deterministische-computing“ getaggt für einfache Entdeckung über GitHub-Themensuche.
 
-## Vollständige PDF-Dokumentation (204+ Dateien, ~75MB insgesamt)
+## Vollständige PDF-Dokumentation (213+ Dateien, ~75MB insgesamt)
 
 Alle Dokumente in deutscher und englischer Version verfügbar, soweit vorhanden.  
-**Pro-Tipp:** Verwenden Sie die GitHub-Suchleiste mit `T0_ Dateiname` oder `Matsas`, um spezifische PDFs schnell zu finden.
+**Pro-Tipp:** Verwenden Sie die GitHub-Suchleiste mit `T0_ Dateiname` oder `Matsas` oder `Consciousness`, um spezifische PDFs schnell zu finden.
 
-**Update Dezember 2025:** Umfassende Matsas et al. (2024) Vergleichsanalyse (105_Matsas_T0_Vergleich_De/En) mit Klarstellung der dynamischen Perspektive und GitHub-verlinkten Referenzen hinzugefügt. Siehe Dezember 2025 Highlights-Abschnitt oben für Details.
+**Update Dezember 2025:** Umfassende Matsas et al. (2024) Vergleichsanalyse (105_Matsas_T0_Vergleich_De/En) mit dynamischer Perspektive und GitHub-PDF-Links hinzugefügt, plus bahnbrechende Bewusstseins-Dokumente (100_Consciousness_De/En), die das Quanten-Agentitätsproblem lösen. Siehe Dezember 2025 Highlights oben für Details.
 
 ### LaTeX-Quelldateien und kompilierte Bücher
 
 Das Verzeichnis `2/tex/` enthält vollständige LaTeX-Quelldateien:
-- **103 deutsche Standalone-Dokumente** (`de_standalone/`)
-- **102 englische Standalone-Dokumente** (`en_standalone/`)
+- **108 deutsche Standalone-Dokumente** (`de_standalone/`)
+- **105 englische Standalone-Dokumente** (`en_standalone/`)
 - **6 kompilierte Bücher** in `completed/Deutsch/` und `completed/Englisch/`:
   - Teil1: Kerndokumente
   - Teil2: Mathematische Grundlagen

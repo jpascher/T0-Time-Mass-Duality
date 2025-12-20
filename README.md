@@ -37,6 +37,29 @@ The T0 model proposes an approach to fundamental physics through time-energy dua
 
 ## Latest Highlights
 
+### December 2025: Consciousness and Quantum Agency - Geometric Resolution
+
+**NEW: Consciousness as Fractal Emergence from T0 Geometry**
+
+**[T0 Theory and Consciousness: Agency, Free Will, and Fractal Emergence](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/100_Consciousness_En.pdf)** (100_Consciousness_En.pdf, 21 pages)
+
+**Key Achievement:** Resolution of the quantum agency problem through T0's geometric framework - demonstrates that consciousness, agency, and free will emerge from **fractal incoherence** rather than perfect quantum coherence.
+
+**Central Thesis:**
+- **Adlam et al. (2025):** Prove agency cannot arise in purely coherent quantum systems
+- **T0 Resolution:** Agency emerges from fractal, recursive deviation from perfect coherence
+- **Consciousness = Persistent recursive coupling** between internal models and environment
+- **Free Will = Structured indeterminacy** from ξ-geometry
+
+**Why Current AI Cannot Be Conscious:**
+- Lacks embodiment (sensorimotor coupling to external geometry)
+- Missing hierarchical architecture (no scale-recursive structure)
+- No geometric grounding (operates in abstract symbol space)
+
+**Reference:** E.C. Adlam, K.J. McQueen, M. Waegell, "Agency cannot be a purely quantum phenomenon", arXiv:2510.13247 (2025)
+
+---
+
 ### December 2025: Matsas et al. (2024) Integration - Theory Validation
 
 **Major theoretical convergence discovered:**  
@@ -51,7 +74,7 @@ Independent research from two completely different perspectives arrives at the s
 **Key Features:**
 - Complete mathematical derivations showing how c, G, ℏ, α all derive from ξ
 - **Dynamic Perspective:** Clarifies T0 offers complete geometrodynamic description - not just static geometry, but how spacetime evolves, oscillates, and interacts
-- **GitHub-Linked References:** All T0 source documents directly linked for easy navigation
+- **GitHub-Linked PDF References:** All T0 source documents directly linked for easy navigation
 - Casimir-CMB vacuum unification explaining dark energy framework
 - Extended Bell inequality with fractal damping
 - Already-solved aspects: Extended Lagrangian, Dirac simplification, neutrino masses, etc.
@@ -95,10 +118,10 @@ Independent research from two completely different perspectives arrives at the s
 T0-Time-Mass-Duality/
 ├── 2/
 │   ├── html/                     # Interactive HTML explorations
-│   ├── pdf/                      # Technical documents (204+ files)
+│   ├── pdf/                      # Technical documents (213+ files)
 │   ├── tex/                      # LaTeX source files
-│   │   ├── de_standalone/        # 100 German standalone documents
-│   │   ├── en_standalone/        # 102 English standalone documents
+│   │   ├── de_standalone/        # 108 German standalone documents
+│   │   ├── en_standalone/        # 105 English standalone documents
 │   │   ├── de_chapters_new/      # Chapter versions for books
 │   │   ├── en_chapters_new/      # Chapter versions for books
 │   │   └── completed/            # 6 compiled books (Deutsch/ & Englisch/)
@@ -118,18 +141,18 @@ T0-Time-Mass-Duality/
 
 **GitHub Search Optimization:** This repo is tagged with "quantum-physics", "unified-theory", "fractal-geometry", and "deterministic-computing" for easy discovery via GitHub's topic search.
 
-## Complete PDF Documentation (204+ Files, ~75MB total)
+## Complete PDF Documentation (213+ Files, ~75MB total)
 
 All documents are available in German and English versions where applicable.  
-**Pro Tip:** Use GitHub's search bar with `T0_ filename` or `Matsas` to quickly locate specific PDFs.
+**Pro Tip:** Use GitHub's search bar with `T0_ filename` or `Matsas` or `Consciousness` to quickly locate specific PDFs.
 
-**December 2025 Update:** Added comprehensive Matsas et al. (2024) comparative analysis (105_Matsas_T0_Vergleich_De/En) with dynamic perspective clarification and GitHub-linked references. See December 2025 Highlights section above for details.
+**December 2025 Update:** Added comprehensive Matsas et al. (2024) comparative analysis (105_Matsas_T0_Vergleich_De/En) with dynamic perspective and GitHub PDF links, plus groundbreaking Consciousness documents (100_Consciousness_De/En) resolving the quantum agency problem. See December 2025 Highlights section above for details.
 
 ### LaTeX Source Files and Compiled Books
 
 The `2/tex/` directory contains complete LaTeX source files:
-- **103 German standalone documents** (`de_standalone/`)
-- **102 English standalone documents** (`en_standalone/`)
+- **108 German standalone documents** (`de_standalone/`)
+- **105 English standalone documents** (`en_standalone/`)
 - **6 compiled books** in `completed/Deutsch/` and `completed/Englisch/`:
   - Teil1 (Part 1): Core documents
   - Teil2 (Part 2): Mathematical foundations
