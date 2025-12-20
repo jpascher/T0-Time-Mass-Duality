@@ -1,6 +1,5 @@
 @echo off
 setlocal enabledelayedexpansion
-chcp 65001 >nul
 color 0A
 
 :MENU
@@ -11,18 +10,18 @@ echo ===============================================================
 echo.
 echo Current Branch: copilot/add-latex-build-workflow
 echo.
-echo +-------------------------------------------------------------+
-echo ^|  1. Pull latest changes from remote                        ^|
-echo ^|  2. Hard reset to remote (DISCARD local changes!)          ^|
-echo ^|  3. Stage all changes (git add .)                          ^|
-echo ^|  4. Commit changes (with custom message)                   ^|
-echo ^|  5. Push to current branch                                 ^|
-echo ^|  6. Full workflow: Add + Commit + Push                     ^|
-echo ^|  7. Merge to main (preserves current branch)               ^|
-echo ^|  8. Show git status                                        ^|
-echo ^|  9. Show git log (last 5 commits)                          ^|
-echo ^|  0. Exit                                                    ^|
-echo +-------------------------------------------------------------+
+echo ---------------------------------------------------------------
+echo   1. Pull latest changes from remote
+echo   2. Hard reset to remote (DISCARD local changes!)
+echo   3. Stage all changes (git add .)
+echo   4. Commit changes (with custom message)
+echo   5. Push to current branch
+echo   6. Full workflow: Add + Commit + Push
+echo   7. Merge to main (preserves current branch)
+echo   8. Show git status
+echo   9. Show git log (last 5 commits)
+echo   0. Exit
+echo ---------------------------------------------------------------
 echo.
 set /p choice="Select option (0-9): "
 
@@ -40,24 +39,24 @@ goto MENU
 
 :PULL
 echo.
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 echo Pulling latest changes from remote...
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 git pull origin copilot/add-latex-build-workflow
 echo.
 if %ERRORLEVEL% EQU 0 (
-    echo ✓ Pull successful!
+    echo [OK] Pull successful!
 ) else (
-    echo ✗ Pull failed! Error code: %ERRORLEVEL%
+    echo [FAIL] Pull failed! Error code: %ERRORLEVEL%
 )
 pause
 goto MENU
 
 :HARD_RESET
 echo.
-echo +===========================================================+
-echo ^|  WARNING: This will DISCARD all local changes!           ^|
-echo +===========================================================+
+echo ===============================================================
+echo   WARNING: This will DISCARD all local changes!
+echo ===============================================================
 echo.
 set /p confirm="Are you sure? Type YES to confirm: "
 if /i not "%confirm%"=="YES" (
@@ -66,51 +65,51 @@ if /i not "%confirm%"=="YES" (
     goto MENU
 )
 echo.
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 echo Fetching from remote...
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 git fetch origin copilot/add-latex-build-workflow
 echo.
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 echo Resetting to remote state...
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 git reset --hard origin/copilot/add-latex-build-workflow
 echo.
 if %ERRORLEVEL% EQU 0 (
-    echo ✓ Hard reset successful! Repository is now in sync with remote.
+    echo [OK] Hard reset successful! Repository is now in sync with remote.
 ) else (
-    echo ✗ Hard reset failed! Error code: %ERRORLEVEL%
+    echo [FAIL] Hard reset failed! Error code: %ERRORLEVEL%
 )
 pause
 goto MENU
 
 :ADD
 echo.
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 echo Staging all changes (git add .)...
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 git add .
 echo.
 if %ERRORLEVEL% EQU 0 (
-    echo ✓ All changes staged!
+    echo [OK] All changes staged!
     echo.
     echo Files staged:
     git diff --cached --name-status
 ) else (
-    echo ✗ Git add failed! Error code: %ERRORLEVEL%
+    echo [FAIL] Git add failed! Error code: %ERRORLEVEL%
 )
 pause
 goto MENU
 
 :COMMIT
 echo.
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 echo Committing changes
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 echo.
 set /p commit_msg="Enter commit message: "
 if "%commit_msg%"=="" (
-    echo ✗ Commit message cannot be empty!
+    echo [FAIL] Commit message cannot be empty!
     pause
     goto MENU
 )
@@ -118,9 +117,9 @@ echo.
 git commit -m "%commit_msg%"
 echo.
 if %ERRORLEVEL% EQU 0 (
-    echo ✓ Commit successful!
+    echo [OK] Commit successful!
 ) else (
-    echo ✗ Commit failed! Error code: %ERRORLEVEL%
+    echo [FAIL] Commit failed! Error code: %ERRORLEVEL%
     echo Note: If nothing to commit, this is normal.
 )
 pause
@@ -128,15 +127,15 @@ goto MENU
 
 :PUSH
 echo.
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 echo Pushing to copilot/add-latex-build-workflow...
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 git push origin copilot/add-latex-build-workflow
 echo.
 if %ERRORLEVEL% EQU 0 (
-    echo ✓ Push successful!
+    echo [OK] Push successful!
 ) else (
-    echo ✗ Push failed! Error code: %ERRORLEVEL%
+    echo [FAIL] Push failed! Error code: %ERRORLEVEL%
 )
 pause
 goto MENU
@@ -149,7 +148,7 @@ echo ===============================================================
 echo.
 set /p commit_msg="Enter commit message: "
 if "%commit_msg%"=="" (
-    echo ✗ Commit message cannot be empty!
+    echo [FAIL] Commit message cannot be empty!
     pause
     goto MENU
 )
@@ -157,29 +156,29 @@ echo.
 echo [1/3] Staging all changes...
 git add .
 if %ERRORLEVEL% NEQ 0 (
-    echo ✗ Git add failed!
+    echo [FAIL] Git add failed!
     pause
     goto MENU
 )
-echo ✓ Changes staged
+echo [OK] Changes staged
 echo.
 echo [2/3] Committing changes...
 git commit -m "%commit_msg%"
 if %ERRORLEVEL% NEQ 0 (
-    echo ✗ Commit failed!
+    echo [FAIL] Commit failed!
     pause
     goto MENU
 )
-echo ✓ Commit successful
+echo [OK] Commit successful
 echo.
 echo [3/3] Pushing to remote...
 git push origin copilot/add-latex-build-workflow
 if %ERRORLEVEL% NEQ 0 (
-    echo ✗ Push failed!
+    echo [FAIL] Push failed!
     pause
     goto MENU
 )
-echo ✓ Push successful
+echo [OK] Push successful
 echo.
 echo ===============================================================
 echo SUCCESS: Full workflow completed successfully!
@@ -209,36 +208,36 @@ if /i not "%confirm%"=="YES" (
     goto MENU
 )
 echo.
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 echo [1/5] Switching to main branch...
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 git checkout main
 if %ERRORLEVEL% NEQ 0 (
-    echo ✗ Failed to checkout main branch!
+    echo [FAIL] Failed to checkout main branch!
     pause
     goto MENU
 )
-echo ✓ On main branch
+echo [OK] On main branch
 echo.
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 echo [2/5] Pulling latest main changes...
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 git pull origin main
 if %ERRORLEVEL% NEQ 0 (
-    echo ✗ Failed to pull main!
+    echo [FAIL] Failed to pull main!
     echo Attempting to switch back to working branch...
     git checkout copilot/add-latex-build-workflow
     pause
     goto MENU
 )
-echo ✓ Main updated
+echo [OK] Main updated
 echo.
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 echo [3/5] Merging copilot/add-latex-build-workflow into main...
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 git merge --no-ff copilot/add-latex-build-workflow -m "Merge: T0 theory updates (Consciousness documents, Matsas integration, bibliography standardization)"
 if %ERRORLEVEL% NEQ 0 (
-    echo ✗ Merge failed! You may have conflicts to resolve.
+    echo [FAIL] Merge failed! You may have conflicts to resolve.
     echo Please resolve conflicts manually, then:
     echo   git commit
     echo   git push origin main
@@ -246,14 +245,14 @@ if %ERRORLEVEL% NEQ 0 (
     pause
     goto MENU
 )
-echo ✓ Merge successful
+echo [OK] Merge successful
 echo.
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 echo [4/5] Pushing main to remote...
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 git push origin main
 if %ERRORLEVEL% NEQ 0 (
-    echo ✗ Push to main failed!
+    echo [FAIL] Push to main failed!
     echo You may need to push manually:
     echo   git push origin main
     echo.
@@ -262,19 +261,19 @@ if %ERRORLEVEL% NEQ 0 (
     pause
     goto MENU
 )
-echo ✓ Main pushed successfully
+echo [OK] Main pushed successfully
 echo.
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 echo [5/5] Switching back to copilot/add-latex-build-workflow...
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 git checkout copilot/add-latex-build-workflow
 if %ERRORLEVEL% NEQ 0 (
-    echo ✗ Failed to switch back! You're still on main.
+    echo [FAIL] Failed to switch back! You're still on main.
     echo Use: git checkout copilot/add-latex-build-workflow
     pause
     goto MENU
 )
-echo ✓ Back on copilot/add-latex-build-workflow
+echo [OK] Back on copilot/add-latex-build-workflow
 echo.
 echo ===============================================================
 echo SUCCESS: Merge to main completed successfully!
@@ -286,9 +285,9 @@ goto MENU
 
 :STATUS
 echo.
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 echo Git Status
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 git status
 echo.
 pause
@@ -296,14 +295,14 @@ goto MENU
 
 :LOG
 echo.
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 echo Last 5 Commits
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 git log --oneline -5
 echo.
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 echo Detailed view of last commit:
-echo ─────────────────────────────────────────────────────────────
+echo ---------------------------------------------------------------
 git log -1 --stat
 echo.
 pause
