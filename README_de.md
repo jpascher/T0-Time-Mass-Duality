@@ -95,7 +95,7 @@ T0-Zeit-Masse-Dualität/
 Alle Dokumente in deutscher und englischer Version verfügbar, soweit vorhanden.  
 **Pro-Tipp:** Verwenden Sie die GitHub-Suchleiste mit `T0_ Dateiname` oder `Matsas`, um spezifische PDFs schnell zu finden.
 
-**Update Dezember 2025:** Umfassende Matsas et al. (2024) Vergleichsanalyse-Dokumente (104, 105) hinzugefügt, die Konvergenz unabhängiger Forschung zur Ein-Parameter-Physik zeigen. Redundante vorläufige Matsas-Dokumente (100-102) entfernt, da sie durch umfassende Versionen 104-105 ersetzt werden.
+**Update Dezember 2025:** Umfassende Matsas et al. (2024) Vergleichsanalyse-Dokument (105) hinzugefügt, das Konvergenz unabhängiger Forschung zur Ein-Parameter-Physik zeigt. Redundante vorläufige Matsas-Dokumente (100-104) entfernt, da sie durch umfassende Version 105 ersetzt werden.
 
 ### LaTeX-Quelldateien und kompilierte Bücher
 

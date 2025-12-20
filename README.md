@@ -96,7 +96,7 @@ T0-Time-Mass-Duality/
 All documents are available in German and English versions where applicable.  
 **Pro Tip:** Use GitHub's search bar with `T0_ filename` or `Matsas` to quickly locate specific PDFs.
 
-**December 2025 Update:** Added comprehensive Matsas et al. (2024) comparative analysis documents (104, 105) showing convergence of independent research on single-parameter physics. Removed redundant preliminary Matsas documents (100-102) as they are superseded by comprehensive versions 104-105.
+**December 2025 Update:** Added comprehensive Matsas et al. (2024) comparative analysis document (105) showing convergence of independent research on single-parameter physics. Removed redundant preliminary Matsas documents (100-104) as they are superseded by comprehensive version 105.
 
 ### LaTeX Source Files and Compiled Books
 
