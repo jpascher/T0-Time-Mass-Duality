@@ -53,18 +53,26 @@ goto menu
 
 :push
 echo.
-echo Staging all changes...
+echo [1/4] Switching to working branch...
+git checkout copilot/add-latex-build-workflow
+echo.
+echo [2/4] Staging all changes...
 git add .
 echo.
-echo Committing with timestamp...
+echo [3/4] Committing with timestamp...
 for /f "tokens=1-3 delims=/ " %%a in ('date /t') do set mydate=%%c-%%a-%%b
 for /f "tokens=1-2 delims=: " %%a in ('time /t') do set mytime=%%a:%%b
 git commit -m "Auto-commit %mydate% %mytime%"
 echo.
-echo Pushing to branch...
+echo [4/4] Pushing to copilot/add-latex-build-workflow...
 git push origin copilot/add-latex-build-workflow
 echo.
-echo [DONE] Push complete
+if errorlevel 1 (
+    echo [ERROR] Push failed
+    git branch --show-current
+) else (
+    echo [DONE] Push complete
+)
 pause
 goto menu
 
