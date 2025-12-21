@@ -60,6 +60,35 @@ The T0 model proposes an approach to fundamental physics through time-energy dua
 
 ---
 
+### December 2025: Circularity of Constants Resolution
+
+**NEW: Resolution of the Fundamental Constants Debate**
+
+**[Circularity of Constants: The T0 Solution](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/101_zirkularitaet-Konstanten_En.pdf)** (101_zirkularitaet-Konstanten_En.pdf)
+
+**Key Achievement:** Resolves the centuries-old circularity debate - demonstrates that only ONE geometric parameter ξ is truly fundamental, while all other "constants" are either derived, conventional, or measurement data.
+
+**The Correct Derivation Chain:**
+1. **ξ = 4/3 × 10⁻⁴** (geometric packing deficit) - THE fundamental parameter
+2. **D_f = 3 - ξ** (fractal dimension) - **Uniquely determined, not freely choosable**
+3. **E₀** - Emerges from mass ratios (electron/muon), see document 006_T0_Teilchenmassen
+4. **α** - Derives from E₀ and D_f, see document 011_T0_Feinstruktur
+5. **All other constants** follow from this chain: ℏ, c, G, e, mass ratios
+
+**Why This Matters:**
+- Resolves the philosophical problem of "arbitrary" fundamental constants
+- Shows that α can be set to 1 OR 1/137 - both conventions are geometrically valid
+- Establishes lower bound of validity at sub-Planck limit L₀ = ξ·ℓₚ ≈ 5.39 × 10⁻³⁹ m
+- Proves all dimensional constants are ultimately unit conventions or measurement results
+
+**Referenced T0 Documents:**
+- 006_T0_Teilchenmassen (particle masses, E₀ derivation)
+- 008_T0_xi-und-e (ξ and elementary charge)
+- 009_T0_xi_ursprung (ξ origin, D_f determination)
+- 011_T0_Feinstruktur (fine-structure constant derivation)
+
+---
+
 ### December 2025: Matsas et al. (2024) Integration - Theory Validation
 
 **Major theoretical convergence discovered:**  

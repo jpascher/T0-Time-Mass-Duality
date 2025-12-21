@@ -59,6 +59,35 @@ Das T0-Modell schlägt einen Ansatz für die fundamentale Physik durch Zeit-Ener
 
 ---
 
+### Dezember 2025: Auflösung der Zirkularität der Konstanten
+
+**NEU: Auflösung der fundamentalen Konstantendebatte**
+
+**[Zirkularität der Konstanten: Die T0-Lösung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/101_zirkularitaet-Konstanten_De.pdf)** (101_zirkularitaet-Konstanten_De.pdf)
+
+**Haupterrungenschaft:** Löst die jahrhundertealte Zirkularitätsdebatte - demonstriert, dass nur EIN geometrischer Parameter ξ wirklich fundamental ist, während alle anderen "Konstanten" entweder abgeleitet, konventionell oder Messdaten sind.
+
+**Die korrekte Ableitungskette:**
+1. **ξ = 4/3 × 10⁻⁴** (geometrisches Packungsdefizit) - DER fundamentale Parameter
+2. **D_f = 3 - ξ** (fraktale Dimension) - **Eindeutig bestimmt, nicht frei wählbar**
+3. **E₀** - Ergibt sich aus Massenverhältnissen (Elektron/Myon), siehe Dokument 006_T0_Teilchenmassen
+4. **α** - Folgt aus E₀ und D_f, siehe Dokument 011_T0_Feinstruktur
+5. **Alle anderen Konstanten** folgen aus dieser Kette: ℏ, c, G, e, Massenverhältnisse
+
+**Warum das wichtig ist:**
+- Löst das philosophische Problem "willkürlicher" Fundamentalkonstanten
+- Zeigt, dass α auf 1 ODER 1/137 gesetzt werden kann - beide Konventionen sind geometrisch gültig
+- Etabliert untere Gültigkeitsgrenze bei sub-Planck-Limit L₀ = ξ·ℓₚ ≈ 5,39 × 10⁻³⁹ m
+- Beweist, dass alle dimensionsbehafteten Konstanten letztlich Einheitenkonventionen oder Messergebnisse sind
+
+**Referenzierte T0-Dokumente:**
+- 006_T0_Teilchenmassen (Teilchenmassen, E₀-Ableitung)
+- 008_T0_xi-und-e (ξ und Elementarladung)
+- 009_T0_xi_ursprung (ξ-Ursprung, D_f-Bestimmung)
+- 011_T0_Feinstruktur (Feinstrukturkonstanten-Ableitung)
+
+---
+
 ### Dezember 2025: Matsas et al. (2024) Integration - Theorievalidierung
 
 **Bedeutende theoretische Konvergenz entdeckt:**  
