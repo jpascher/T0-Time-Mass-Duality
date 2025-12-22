@@ -86,6 +86,44 @@ The T0 model proposes an approach to fundamental physics through time-energy dua
 - 008_T0_xi-und-e (ξ and elementary charge)
 - 009_T0_xi_ursprung (ξ origin, D_f determination)
 - 011_T0_Feinstruktur (fine-structure constant derivation)
+- 133_Fraktale_Korrektur_Herleitung (fractal correction K_frak derivation proof)
+
+---
+
+### December 22, 2025: Fractal Correction K_frak - Complete Mathematical Proof
+
+**NEW: Rigorous Derivation of the Fractal Correction Factor**
+
+**[The Fractal Correction K_frak: Complete Derivation](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/133_Fraktale_Korrektur_Herleitung_En.pdf)** (133_Fraktale_Korrektur_Herleitung_En.pdf, 14 pages)
+
+**Key Achievement:** Provides the complete mathematical proof that the fractal dimension D_f is uniquely determined, resolving fundamental questions about parameter freedom in T0 theory.
+
+**Central Proof:**
+- **Two Independent Paths** for electron/muon mass ratio must give identical results
+- **Path 1:** Fractal integration with D_f-dependent coefficients
+- **Path 2:** Direct geometric calculation from tetrahedral symmetry
+- **Consistency Requirement:** Uniquely fixes D_f = 2.9998667 ≈ 2.94
+- **Result:** K_frak = 1 - 100ξ ≈ 0.9867 is NOT adjustable but mathematically necessary
+
+**When K_frak Is Needed:**
+- ✅ **NOT needed:** Mass ratios, energy ratios (K_frak cancels out)
+- ✅ **NEEDED:** Absolute masses, fine-structure constant α
+
+**Rounding Error Analysis:**
+- **Physical component** (~1.3%): Fractal dimension effect (K_frak)
+- **Numerical component** (~0.01%-0.1%): Rounding from truncation
+- Clarifies: Most deviation is PHYSICS, not numerics
+
+**Connections to Fundamental Constants:**
+- **Euler's Number e:** Mass hierarchy m_n = m_0·e^(ξ·n·κ), logarithmic distribution (see Document 008)
+- **Golden Ratio φ:** Tetrahedral packing and Fibonacci patterns, ξ ~ 1/φ^n (see Document 009)
+- **Mathematical Harmony:** T0 unites π, e, and φ through ξ = f(π, e, φ) ≈ 4/(3·φ^12·e²)
+
+**Technical Excellence:**
+- Complete table of contents (tocdepth=3) with all hierarchical levels
+- Multiple mathematical perspectives: exact, linearized, renormalized
+- Cross-references to Documents 006, 008, 009, 011
+- Numerical verification tables and best practices for precision
 
 ---
 

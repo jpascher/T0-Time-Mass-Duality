@@ -85,6 +85,44 @@ Das T0-Modell schlägt einen Ansatz für die fundamentale Physik durch Zeit-Ener
 - 008_T0_xi-und-e (ξ und Elementarladung)
 - 009_T0_xi_ursprung (ξ-Ursprung, D_f-Bestimmung)
 - 011_T0_Feinstruktur (Feinstrukturkonstanten-Ableitung)
+- 133_Fraktale_Korrektur_Herleitung (Fraktale Korrektur K_frak - Herleitungsbeweis)
+
+---
+
+### 22. Dezember 2025: Fraktale Korrektur K_frak - Vollständiger mathematischer Beweis
+
+**NEU: Rigorose Herleitung des fraktalen Korrekturfaktors**
+
+**[Die fraktale Korrektur K_frak: Vollständige Herleitung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/133_Fraktale_Korrektur_Herleitung_De.pdf)** (133_Fraktale_Korrektur_Herleitung_De.pdf, 14 Seiten)
+
+**Haupterrungenschaft:** Liefert den vollständigen mathematischen Beweis, dass die fraktale Dimension D_f eindeutig bestimmt ist, und löst fundamentale Fragen über Parameterfreiheit in der T0-Theorie.
+
+**Zentraler Beweis:**
+- **Zwei unabhängige Wege** für Elektron/Myon-Massenverhältnis müssen identische Ergebnisse liefern
+- **Weg 1:** Fraktale Integration mit D_f-abhängigen Koeffizienten
+- **Weg 2:** Direkte geometrische Berechnung aus tetraedrischer Symmetrie
+- **Konsistenzanforderung:** Fixiert D_f = 2.9998667 ≈ 2,94 eindeutig
+- **Ergebnis:** K_frak = 1 - 100ξ ≈ 0,9867 ist NICHT einstellbar, sondern mathematisch notwendig
+
+**Wann K_frak benötigt wird:**
+- ✅ **NICHT benötigt:** Massenverhältnisse, Energieverhältnisse (K_frak kürzt sich weg)
+- ✅ **BENÖTIGT:** Absolute Massen, Feinstrukturkonstante α
+
+**Rundungsfehler-Analyse:**
+- **Physikalische Komponente** (~1,3%): Fraktale Dimensionseffekt (K_frak)
+- **Numerische Komponente** (~0,01%-0,1%): Rundung durch Kürzung
+- Klarstellung: Die meiste Abweichung ist PHYSIK, nicht Numerik
+
+**Verbindungen zu fundamentalen Konstanten:**
+- **Euler'sche Zahl e:** Massenhierarchie m_n = m_0·e^(ξ·n·κ), logarithmische Verteilung (siehe Dokument 008)
+- **Goldener Schnitt φ:** Tetraedrische Packung und Fibonacci-Muster, ξ ~ 1/φ^n (siehe Dokument 009)
+- **Mathematische Harmonie:** T0 vereinigt π, e und φ durch ξ = f(π, e, φ) ≈ 4/(3·φ^12·e²)
+
+**Technische Exzellenz:**
+- Vollständiges Inhaltsverzeichnis (tocdepth=3) mit allen hierarchischen Ebenen
+- Multiple mathematische Perspektiven: exakt, linearisiert, renormiert
+- Querverweise zu Dokumenten 006, 008, 009, 011
+- Numerische Verifikationstabellen und Best Practices für Präzision
 
 ---
 
