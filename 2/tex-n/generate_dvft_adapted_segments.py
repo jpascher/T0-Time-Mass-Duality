@@ -79,35 +79,37 @@ def convert_math_to_latex(text: str) -> str:
     
     # Greek letters (standard Unicode)
     replacements = {
-        'Φ': r'\Phi',
-        'φ': r'\phi',
-        'ρ': r'\rho',
-        'θ': r'\theta',
-        'μ': r'\mu',
-        '∇': r'\nabla',
-        '∂': r'\partial',
-        '≈': r'\approx',
-        '≥': r'\geq',
-        '≤': r'\leq',
-        '→': r'\rightarrow',
-        '×': r'\times',
-        '±': r'\pm',
-        '∓': r'\mp',
-        '∞': r'\infty',
-        'α': r'\alpha',
-        'β': r'\beta',
-        'γ': r'\gamma',
-        'δ': r'\delta',
-        'ε': r'\epsilon',
-        'λ': r'\lambda',
-        'π': r'\pi',
-        'σ': r'\sigma',
-        'τ': r'\tau',
-        'ω': r'\omega',
-        'Ω': r'\Omega',
-        'Δ': r'\Delta',
-        'Λ': r'\Lambda',
-        'Σ': r'\Sigma',
+        'Φ': r'$\Phi$',
+        'φ': r'$\phi$',
+        'ρ': r'$\rho$',
+        'θ': r'$\theta$',
+        'μ': r'$\mu$',
+        '●': r'$\bullet$',
+        '•': r'',  # Already handled as bullet point marker
+        '∇': r'$\nabla$',
+        '∂': r'$\partial$',
+        '≈': r'$\approx$',
+        '≥': r'$\geq$',
+        '≤': r'$\leq$',
+        '→': r'$\rightarrow$',
+        '×': r'$\times$',
+        '±': r'$\pm$',
+        '∓': r'$\mp$',
+        '∞': r'$\infty$',
+        'α': r'$\alpha$',
+        'β': r'$\beta$',
+        'γ': r'$\gamma$',
+        'δ': r'$\delta$',
+        'ε': r'$\epsilon$',
+        'λ': r'$\lambda$',
+        'π': r'$\pi$',
+        'σ': r'$\sigma$',
+        'τ': r'$\tau$',
+        'ω': r'$\omega$',
+        'Ω': r'$\Omega$',
+        'Δ': r'$\Delta$',
+        'Λ': r'$\Lambda$',
+        'Σ': r'$\Sigma$',
     }
     
     for old, new in replacements.items():
@@ -125,8 +127,14 @@ def convert_math_to_latex(text: str) -> str:
     
     # Fix exponential notation: e followed by superscript or i*something
     # Pattern: e^{...} or e^i*theta
-    text = re.sub(r'e\s*\^?\s*\{?\s*i\s*\\theta\s*\}?', r'e^{i\\theta}', text)
-    text = re.sub(r'e\s*-?\s*i\s*\\mu\s*t', r'e^{-i\\mu t}', text)
+    text = re.sub(r'e\s*\^?\s*\{?\s*i\s*\\theta\s*\}?', r'e^{i$\\theta$}', text)
+    text = re.sub(r'e\s*-?\s*i\s*\\mu\s*t', r'e^{-i$\\mu$ t}', text)
+    
+    # Fix \mut to \mu t (space issue)
+    text = re.sub(r'\\mut\b', r'$\\mu$ t', text)
+    
+    # Clean up double $ signs
+    text = re.sub(r'\$\$+', r'$', text)
     
     # Detect and wrap standalone equations
     stripped = text.strip()
@@ -148,27 +156,15 @@ def convert_math_to_latex(text: str) -> str:
 
 def wrap_inline_math(text: str) -> str:
     """Wrap inline math expressions in $ delimiters"""
-    # Wrap Greek letters and math symbols that aren't already in math mode
-    # Pattern: backslash command not already in $ or \[ \]
+    # Since we now wrap Greek letters in convert_math_to_latex,
+    # this function just cleans up any remaining issues
     
-    # Split by existing math delimiters to avoid double-wrapping
-    parts = re.split(r'(\$[^$]+\$|\\\[[^\]]+\\\])', text)
+    # Clean up double dollars
+    text = re.sub(r'\$\$+', r'$', text)
+    # Remove empty math
+    text = re.sub(r'\$\s*\$', r'', text)
     
-    result = []
-    for i, part in enumerate(parts):
-        # Skip parts that are already math
-        if part.startswith('$') or part.startswith('\\['):
-            result.append(part)
-        else:
-            # Wrap individual LaTeX commands with $
-            part = re.sub(r'(\\(?:phi|rho|theta|mu|Phi|nabla|partial|alpha|beta|gamma|delta|epsilon|lambda|pi|sigma|tau|omega|Omega|Delta|Lambda|Sigma|times|approx|geq|leq|rightarrow|infty)(?:_\{?\w+\}?)?)', r'$\1$', part)
-            # Clean up double dollars
-            part = re.sub(r'\$\$+', r'$', part)
-            # Remove empty math
-            part = re.sub(r'\$\s*\$', r'', part)
-            result.append(part)
-    
-    return ''.join(result)
+    return text
 
 def convert_text_formatting(text: str) -> str:
     """Convert text formatting to LaTeX"""
