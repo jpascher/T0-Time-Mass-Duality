@@ -1,70 +1,57 @@
-import re
 import os
+import re
 
-# Pfad zur Eingabedatei
-input_file = 'DVFT.txt'
+INPUT_FILE = 'DVFT.txt'
+OUTPUT_DIR = '2/md_chapters_dvft'
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# Ausgabeverzeichnis
-output_dir = 'DVFT_Kapitel'
-os.makedirs(output_dir, exist_ok=True)
+if not os.path.exists(INPUT_FILE):
+    print(f"Fehler: {INPUT_FILE} nicht gefunden!")
+    exit()
 
-# Gesamten Text einlesen
-with open(input_file, 'r', encoding='utf-8') as f:
-    text = f.read()
+with open(INPUT_FILE, 'r', encoding='utf-8') as f:
+    full_text = f.read()
 
-# Alles vor dem ersten CHAPTER als Intro speichern
-first_chapter_pos = text.find('CHAPTER 1:')
-if first_chapter_pos != -1:
-    intro_text = text[:first_chapter_pos].strip()
-    intro_path = os.path.join(output_dir, '00_intro.txt')
-    with open(intro_path, 'w', encoding='utf-8') as f:
-        f.write(intro_text)
-    print(f"Gespeichert: {intro_path}")
+# Robuster Regex: "CHAPTER" (groß/klein), Leerzeichen, Zahl, optional Leerzeichen, Doppelpunkt, optional Leerzeichen
+# Splittet und behält den Marker
+parts = re.split(r'(CHAPTER\s*\d+\s*:)', full_text, flags=re.IGNORECASE)
 
-# Schlüsselwörter pro Kapitel (kurz, nur ein Wort)
-key_words = [
-    "vacuum", "dynamic", "equations", "curvature", "problems", "emc2",
-    "relativity", "chapter8", "chapter9", "chapter10", "chapter11", "chapter12",
-    "chapter13", "chapter14", "chapter15", "chapter16", "chapter17", "chapter18",
-    "chapter19", "chapter20", "chapter21", "chapter22", "chapter23", "chapter24",
-    "chapter25", "chapter26", "chapter27", "chapter28", "chapter29", "chapter30",
-    "chapter31", "chapter32", "chapter33", "chapter34", "chapter35", "chapter36",
-    "chapter37", "chapter38", "singularity", "entropy", "alternative",
-    "properties", "planck", "axioms"
-]
+chapters = []
+current_content = parts[0].strip()  # Vorspann/Einleitung
 
-# Regex für Kapitel erfassen
-pattern = r'(CHAPTER\s+(\d+):[^\n]*\n(?:.|[\n\r])*?)(?=CHAPTER\s+\d+:|REFERENCES|$)'
-matches = re.finditer(pattern, text, re.MULTILINE | re.DOTALL)
+if current_content:
+    chapters.append(("00_Vorspann", current_content))
 
-chapter_count = 0
-for match in matches:
-    chapter_count += 1
-    chapter_text = match.group(1).strip()
+for i in range(1, len(parts), 2):
+    if i + 1 < len(parts):
+        title_line = parts[i].strip()  # z. B. "CHAPTER 1:" oder "Chapter 5 :"
+        content = parts[i + 1]  # Inhalt bis zum nächsten Marker (nicht strip, um Zeilen zu erhalten)
+        
+        # Kapitel-Nummer extrahieren
+        match = re.search(r'\d+', title_line)
+        if match:
+            num = match.group(0).zfill(2)
+        else:
+            num = f"{len(chapters):02d}"
+        
+        title = f"Kapitel_{num}"
+        
+        # Inhalt bereinigen (leading/trailing Whitespace entfernen, aber innere Zeilen behalten)
+        content_clean = content.strip()
+        
+        chapters.append((title, content_clean))
+
+# Separate .md-Dateien erstellen
+for idx, (title, content) in enumerate(chapters):
+    filename = f"{title}.md"
+    output_path = os.path.join(OUTPUT_DIR, filename)
     
-    # Schlüsselwort wählen
-    idx = chapter_count - 1
-    if idx < len(key_words):
-        keyword = key_words[idx]
-    else:
-        keyword = f"chapter{chapter_count}"
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.write(f"# {title.replace('_', ' ')}\n\n")
+        f.write(content + "\n")
     
-    # Dateiname: nur nummer_wort.txt (klein, keine Sonderzeichen)
-    filename = f"{chapter_count:02d}_{keyword.lower()}.txt"
-    filepath = os.path.join(output_dir, filename)
-    
-    with open(filepath, 'w', encoding='utf-8') as f:
-        f.write(chapter_text)
-    
-    print(f"Gespeichert: {filepath}")
+    lines = len(content.splitlines())
+    print(f"Erstellt: {output_path} ({lines} Zeilen, vollständiger Inhalt)")
 
-# References separat speichern
-ref_pos = text.find('REFERENCES')
-if ref_pos != -1:
-    references_text = text[ref_pos:].strip()
-    ref_path = os.path.join(output_dir, 'references.txt')
-    with open(ref_path, 'w', encoding='utf-8') as f:
-        f.write(references_text)
-    print(f"Gespeichert: {ref_path}")
-
-print(f"\nFertig! Intro + {chapter_count} Kapitel + References in '{output_dir}' gespeichert.")
+print(f"\nFertig! {len(chapters)} Kapitel als separate .md-Dateien in {OUTPUT_DIR}/ (aus deinen Dokumenten in DVFT.txt unter 2/-Struktur).")
+print("Beispiel-Dateien: Kapitel_01.md bis Kapitel_43.md")
