@@ -35,9 +35,126 @@ The T0 model proposes an approach to fundamental physics through time-energy dua
 - [T0_threeclock_De.pdf](2/pdf/T0_threeclock_De.pdf) / [T0_threeclock_En.pdf](2/pdf/T0_threeclock_En.pdf)  
   New: Single-clock metrology and three-clock experiment; detailed analysis of the Scientific Reports paper “A single-clock approach to fundamental metrology” (DOI: 10.1038/s41598-024-71907-0) and its consistency with T0 (time–mass duality and ξ-based SI derivations).
 
-## Latest Highlights (November 2025)
+## Latest Highlights
 
-### The Complete Closure: From ξ to SI Reform 2019
+### December 2025: Consciousness and Quantum Agency - Geometric Resolution
+
+**NEW: Consciousness as Fractal Emergence from T0 Geometry**
+
+**[T0 Theory and Consciousness: Agency, Free Will, and Fractal Emergence](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/100_Consciousness_En.pdf)** (100_Consciousness_En.pdf, 21 pages)
+
+**Key Achievement:** Resolution of the quantum agency problem through T0's geometric framework - demonstrates that consciousness, agency, and free will emerge from **fractal incoherence** rather than perfect quantum coherence.
+
+**Central Thesis:**
+- **Adlam et al. (2025):** Prove agency cannot arise in purely coherent quantum systems
+- **T0 Resolution:** Agency emerges from fractal, recursive deviation from perfect coherence
+- **Consciousness = Persistent recursive coupling** between internal models and environment
+- **Free Will = Structured indeterminacy** from ξ-geometry
+
+**Why Current AI Cannot Be Conscious:**
+- Lacks embodiment (sensorimotor coupling to external geometry)
+- Missing hierarchical architecture (no scale-recursive structure)
+- No geometric grounding (operates in abstract symbol space)
+
+**Reference:** E.C. Adlam, K.J. McQueen, M. Waegell, "Agency cannot be a purely quantum phenomenon", arXiv:2510.13247 (2025)
+
+---
+
+### December 2025: Circularity of Constants Resolution
+
+**NEW: Resolution of the Fundamental Constants Debate**
+
+**[Circularity of Constants: The T0 Solution](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/101_zirkularitaet-Konstanten_En.pdf)** (101_zirkularitaet-Konstanten_En.pdf)
+
+**Key Achievement:** Resolves the centuries-old circularity debate - demonstrates that only ONE geometric parameter ξ is truly fundamental, while all other "constants" are either derived, conventional, or measurement data.
+
+**The Correct Derivation Chain:**
+1. **ξ = 4/3 × 10⁻⁴** (geometric packing deficit) - THE fundamental parameter
+2. **D_f = 3 - ξ** (fractal dimension) - **Uniquely determined, not freely choosable**
+3. **E₀** - Emerges from mass ratios (electron/muon), see document 006_T0_Teilchenmassen
+4. **α** - Derives from E₀ and D_f, see document 011_T0_Feinstruktur
+5. **All other constants** follow from this chain: ℏ, c, G, e, mass ratios
+
+**Why This Matters:**
+- Resolves the philosophical problem of "arbitrary" fundamental constants
+- Shows that α can be set to 1 OR 1/137 - both conventions are geometrically valid
+- Establishes lower bound of validity at sub-Planck limit L₀ = ξ·ℓₚ ≈ 5.39 × 10⁻³⁹ m
+- Proves all dimensional constants are ultimately unit conventions or measurement results
+
+**Referenced T0 Documents:**
+- 006_T0_Teilchenmassen (particle masses, E₀ derivation)
+- 008_T0_xi-und-e (ξ and elementary charge)
+- 009_T0_xi_ursprung (ξ origin, D_f determination)
+- 011_T0_Feinstruktur (fine-structure constant derivation)
+- 133_Fraktale_Korrektur_Herleitung (fractal correction K_frak derivation proof)
+
+---
+
+### December 22, 2025: Fractal Correction K_frak - Complete Mathematical Proof
+
+**NEW: Rigorous Derivation of the Fractal Correction Factor**
+
+**[The Fractal Correction K_frak: Complete Derivation](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/133_Fraktale_Korrektur_Herleitung_En.pdf)** (133_Fraktale_Korrektur_Herleitung_En.pdf, 14 pages)
+
+**Key Achievement:** Provides the complete mathematical proof that the fractal dimension D_f is uniquely determined, resolving fundamental questions about parameter freedom in T0 theory.
+
+**Central Proof:**
+- **Two Independent Paths** for electron/muon mass ratio must give identical results
+- **Path 1:** Fractal integration with D_f-dependent coefficients
+- **Path 2:** Direct geometric calculation from tetrahedral symmetry
+- **Consistency Requirement:** Uniquely fixes D_f = 2.9998667 ≈ 2.94
+- **Result:** K_frak = 1 - 100ξ ≈ 0.9867 is NOT adjustable but mathematically necessary
+
+**When K_frak Is Needed:**
+- ✅ **NOT needed:** Mass ratios, energy ratios (K_frak cancels out)
+- ✅ **NEEDED:** Absolute masses, fine-structure constant α
+
+**Rounding Error Analysis:**
+- **Physical component** (~1.3%): Fractal dimension effect (K_frak)
+- **Numerical component** (~0.01%-0.1%): Rounding from truncation
+- Clarifies: Most deviation is PHYSICS, not numerics
+
+**Connections to Fundamental Constants:**
+- **Euler's Number e:** Mass hierarchy m_n = m_0·e^(ξ·n·κ), logarithmic distribution (see Document 008)
+- **Golden Ratio φ:** Tetrahedral packing and Fibonacci patterns, ξ ~ 1/φ^n (see Document 009)
+- **Mathematical Harmony:** T0 unites π, e, and φ through ξ = f(π, e, φ) ≈ 4/(3·φ^12·e²)
+
+**Technical Excellence:**
+- Complete table of contents (tocdepth=3) with all hierarchical levels
+- Multiple mathematical perspectives: exact, linearized, renormalized
+- Cross-references to Documents 006, 008, 009, 011
+- Numerical verification tables and best practices for precision
+
+---
+
+### December 2025: Matsas et al. (2024) Integration - Theory Validation
+
+**Major theoretical convergence discovered:**  
+Independent research from two completely different perspectives arrives at the same conclusion - **ONE parameter describes all of physics**:
+
+- **Matsas et al. (2024):** Show that in relativistic spacetimes, ONE time unit (operationally defined) suffices to express all observables
+- **T0 Theory:** Shows that ONE geometric parameter ξ = 4/3 × 10⁻⁴ suffices to derive all constants (c, G, ℏ, α)
+- **Perfect Complementarity:** Operational framework (Matsas) + Geometric implementation (T0)
+
+**[Comprehensive Comparative Analysis](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/105_Matsas_T0_Vergleich_En.pdf)** (105_Matsas_T0_Vergleich_En.pdf, 25 pages)
+
+**Key Features:**
+- Complete mathematical derivations showing how c, G, ℏ, α all derive from ξ
+- **Dynamic Perspective:** Clarifies T0 offers complete geometrodynamic description - not just static geometry, but how spacetime evolves, oscillates, and interacts
+- **GitHub-Linked PDF References:** All T0 source documents directly linked for easy navigation
+- Casimir-CMB vacuum unification explaining dark energy framework
+- Extended Bell inequality with fractal damping
+- Already-solved aspects: Extended Lagrangian, Dirac simplification, neutrino masses, etc.
+
+**Significance:** Proof that independent research paths converge on single-parameter physics - validates T0 theory through external confirmation.
+
+**Original Paper:** Matsas, G.E.A., Pleitez, V., Saa, A., Vanzella, D.A.T. "The number of fundamental constants from a spacetime-based perspective", *Scientific Reports* 14, 19645 (2024). DOI: [10.1038/s41598-024-71907-0](https://doi.org/10.1038/s41598-024-71907-0)
+
+---
+
+### November 2025: The Complete Closure
+
+#### From ξ to SI Reform 2019
 **The ultimate revelation - ONE PARAMETER explains everything:**
 - Only ξ = 4/3 × 10⁻⁴ is fundamental
 - All physical constants derive from ξ or define measurement units
@@ -68,8 +185,13 @@ The T0 model proposes an approach to fundamental physics through time-energy dua
 T0-Time-Mass-Duality/
 ├── 2/
 │   ├── html/                     # Interactive HTML explorations
-│   ├── pdf/                      # Technical documents (172+ files)
+│   ├── pdf/                      # Technical documents (213+ files)
 │   ├── tex/                      # LaTeX source files
+│   │   ├── de_standalone/        # 108 German standalone documents
+│   │   ├── en_standalone/        # 105 English standalone documents
+│   │   ├── de_chapters_new/      # Chapter versions for books
+│   │   ├── en_chapters_new/      # Chapter versions for books
+│   │   └── completed/            # 6 compiled books (Deutsch/ & Englisch/)
 │   ├── esotherik.md              # Esoteric considerations
 │   ├── OntologischeAequivalenz.md # Ontological equivalence (DE/EN)
 │   └── index.html & website.html # Local web interfaces
@@ -86,10 +208,24 @@ T0-Time-Mass-Duality/
 
 **GitHub Search Optimization:** This repo is tagged with "quantum-physics", "unified-theory", "fractal-geometry", and "deterministic-computing" for easy discovery via GitHub's topic search.
 
-## Complete PDF Documentation (172+ Files, ~63MB total)
+## Complete PDF Documentation (213+ Files, ~75MB total)
 
 All documents are available in German and English versions where applicable.  
-**Pro Tip:** Use GitHub's search bar with `T0_ filename` to quickly locate specific PDFs.
+**Pro Tip:** Use GitHub's search bar with `T0_ filename` or `Matsas` or `Consciousness` to quickly locate specific PDFs.
+
+**December 2025 Update:** Added comprehensive Matsas et al. (2024) comparative analysis (105_Matsas_T0_Vergleich_De/En) with dynamic perspective and GitHub PDF links, plus groundbreaking Consciousness documents (100_Consciousness_De/En) resolving the quantum agency problem. See December 2025 Highlights section above for details.
+
+### LaTeX Source Files and Compiled Books
+
+The `2/tex/` directory contains complete LaTeX source files:
+- **108 German standalone documents** (`de_standalone/`)
+- **105 English standalone documents** (`en_standalone/`)
+- **6 compiled books** in `completed/Deutsch/` and `completed/Englisch/`:
+  - Teil1 (Part 1): Core documents
+  - Teil2 (Part 2): Mathematical foundations
+  - Teil3 (Part 3): Quantum mechanics & applications
+
+**Note:** The standalone LaTeX files are cosmetically adapted copies of the original PDF documents. Content remains unchanged; only formatting adjustments were made for book compilation (shared preambles, consistent styling, table sizing).
 
 ### Latest Additions (November 2025) (updated)
 
