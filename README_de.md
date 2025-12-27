@@ -34,9 +34,126 @@ Das T0-Modell schlägt einen Ansatz für die fundamentale Physik durch Zeit-Ener
 - [T0_threeclock_De.pdf](2/pdf/T0_threeclock_De.pdf) / [T0_threeclock_En.pdf](2/pdf/T0_threeclock_En.pdf)  
   NEU: Ein-Uhr-Metrologie und Drei-Uhren-Experiment; detaillierte Analyse des Scientific-Reports-Artikels „A single-clock approach to fundamental metrology“ (DOI: 10.1038/s41598-024-71907-0) und seine Konsistenz mit T0 (Zeit-Masse-Dualität und ξ-basierte SI-Ableitungen).
 
-## Neueste Highlights (November 2025)
+## Neueste Highlights
 
-### Der vollständige Abschluss: Von ξ zur SI-Reform 2019
+### Dezember 2025: Bewusstsein und Quanten-Agentität - Geometrische Auflösung
+
+**NEU: Bewusstsein als fraktale Emergenz aus T0-Geometrie**
+
+**[T0-Theorie und Bewusstsein: Agentität, freier Wille und fraktale Emergenz](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/100_Consciousness_De.pdf)** (100_Consciousness_De.pdf, 22 Seiten)
+
+**Haupterrungenschaft:** Auflösung des Quanten-Agentitätsproblems durch T0s geometrischen Rahmen - demonstriert, dass Bewusstsein, Agentität und freier Wille aus **fraktaler Inkohärenz** statt perfekter Quantenkohärenz hervorgehen.
+
+**Zentrale These:**
+- **Adlam et al. (2025):** Beweisen, dass Agentität in rein kohärenten Quantensystemen nicht entstehen kann
+- **T0-Auflösung:** Agentität entsteht aus fraktaler, rekursiver Abweichung von perfekter Kohärenz
+- **Bewusstsein = Persistente rekursive Kopplung** zwischen internen Modellen und Umgebung
+- **Freier Wille = Strukturierte Indeterminiertheit** aus ξ-Geometrie
+
+**Warum aktuelle KI nicht bewusst sein kann:**
+- Fehlt Verkörperung (sensomotorische Kopplung an externe Geometrie)
+- Fehlende hierarchische Architektur (keine skalen-rekursive Struktur)
+- Keine geometrische Grundlage (operiert im abstrakten Symbolraum)
+
+**Referenz:** E.C. Adlam, K.J. McQueen, M. Waegell, „Agency cannot be a purely quantum phenomenon", arXiv:2510.13247 (2025)
+
+---
+
+### Dezember 2025: Auflösung der Zirkularität der Konstanten
+
+**NEU: Auflösung der fundamentalen Konstantendebatte**
+
+**[Zirkularität der Konstanten: Die T0-Lösung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/101_zirkularitaet-Konstanten_De.pdf)** (101_zirkularitaet-Konstanten_De.pdf)
+
+**Haupterrungenschaft:** Löst die jahrhundertealte Zirkularitätsdebatte - demonstriert, dass nur EIN geometrischer Parameter ξ wirklich fundamental ist, während alle anderen "Konstanten" entweder abgeleitet, konventionell oder Messdaten sind.
+
+**Die korrekte Ableitungskette:**
+1. **ξ = 4/3 × 10⁻⁴** (geometrisches Packungsdefizit) - DER fundamentale Parameter
+2. **D_f = 3 - ξ** (fraktale Dimension) - **Eindeutig bestimmt, nicht frei wählbar**
+3. **E₀** - Ergibt sich aus Massenverhältnissen (Elektron/Myon), siehe Dokument 006_T0_Teilchenmassen
+4. **α** - Folgt aus E₀ und D_f, siehe Dokument 011_T0_Feinstruktur
+5. **Alle anderen Konstanten** folgen aus dieser Kette: ℏ, c, G, e, Massenverhältnisse
+
+**Warum das wichtig ist:**
+- Löst das philosophische Problem "willkürlicher" Fundamentalkonstanten
+- Zeigt, dass α auf 1 ODER 1/137 gesetzt werden kann - beide Konventionen sind geometrisch gültig
+- Etabliert untere Gültigkeitsgrenze bei sub-Planck-Limit L₀ = ξ·ℓₚ ≈ 5,39 × 10⁻³⁹ m
+- Beweist, dass alle dimensionsbehafteten Konstanten letztlich Einheitenkonventionen oder Messergebnisse sind
+
+**Referenzierte T0-Dokumente:**
+- 006_T0_Teilchenmassen (Teilchenmassen, E₀-Ableitung)
+- 008_T0_xi-und-e (ξ und Elementarladung)
+- 009_T0_xi_ursprung (ξ-Ursprung, D_f-Bestimmung)
+- 011_T0_Feinstruktur (Feinstrukturkonstanten-Ableitung)
+- 133_Fraktale_Korrektur_Herleitung (Fraktale Korrektur K_frak - Herleitungsbeweis)
+
+---
+
+### 22. Dezember 2025: Fraktale Korrektur K_frak - Vollständiger mathematischer Beweis
+
+**NEU: Rigorose Herleitung des fraktalen Korrekturfaktors**
+
+**[Die fraktale Korrektur K_frak: Vollständige Herleitung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/133_Fraktale_Korrektur_Herleitung_De.pdf)** (133_Fraktale_Korrektur_Herleitung_De.pdf, 14 Seiten)
+
+**Haupterrungenschaft:** Liefert den vollständigen mathematischen Beweis, dass die fraktale Dimension D_f eindeutig bestimmt ist, und löst fundamentale Fragen über Parameterfreiheit in der T0-Theorie.
+
+**Zentraler Beweis:**
+- **Zwei unabhängige Wege** für Elektron/Myon-Massenverhältnis müssen identische Ergebnisse liefern
+- **Weg 1:** Fraktale Integration mit D_f-abhängigen Koeffizienten
+- **Weg 2:** Direkte geometrische Berechnung aus tetraedrischer Symmetrie
+- **Konsistenzanforderung:** Fixiert D_f = 2.9998667 ≈ 2,94 eindeutig
+- **Ergebnis:** K_frak = 1 - 100ξ ≈ 0,9867 ist NICHT einstellbar, sondern mathematisch notwendig
+
+**Wann K_frak benötigt wird:**
+- ✅ **NICHT benötigt:** Massenverhältnisse, Energieverhältnisse (K_frak kürzt sich weg)
+- ✅ **BENÖTIGT:** Absolute Massen, Feinstrukturkonstante α
+
+**Rundungsfehler-Analyse:**
+- **Physikalische Komponente** (~1,3%): Fraktale Dimensionseffekt (K_frak)
+- **Numerische Komponente** (~0,01%-0,1%): Rundung durch Kürzung
+- Klarstellung: Die meiste Abweichung ist PHYSIK, nicht Numerik
+
+**Verbindungen zu fundamentalen Konstanten:**
+- **Euler'sche Zahl e:** Massenhierarchie m_n = m_0·e^(ξ·n·κ), logarithmische Verteilung (siehe Dokument 008)
+- **Goldener Schnitt φ:** Tetraedrische Packung und Fibonacci-Muster, ξ ~ 1/φ^n (siehe Dokument 009)
+- **Mathematische Harmonie:** T0 vereinigt π, e und φ durch ξ = f(π, e, φ) ≈ 4/(3·φ^12·e²)
+
+**Technische Exzellenz:**
+- Vollständiges Inhaltsverzeichnis (tocdepth=3) mit allen hierarchischen Ebenen
+- Multiple mathematische Perspektiven: exakt, linearisiert, renormiert
+- Querverweise zu Dokumenten 006, 008, 009, 011
+- Numerische Verifikationstabellen und Best Practices für Präzision
+
+---
+
+### Dezember 2025: Matsas et al. (2024) Integration - Theorievalidierung
+
+**Bedeutende theoretische Konvergenz entdeckt:**  
+Unabhängige Forschung aus zwei völlig unterschiedlichen Perspektiven kommt zur gleichen Schlussfolgerung - **EIN Parameter beschreibt die gesamte Physik**:
+
+- **Matsas et al. (2024):** Zeigen, dass in relativistischen Raumzeiten EINE Zeiteinheit (operational definiert) genügt, um alle Observablen auszudrücken
+- **T0-Theorie:** Zeigt, dass EIN geometrischer Parameter ξ = 4/3 × 10⁻⁴ genügt, um alle Konstanten (c, G, ℏ, α) abzuleiten
+- **Perfekte Komplementarität:** Operationaler Rahmen (Matsas) + Geometrische Implementierung (T0)
+
+**[Umfassende Vergleichsanalyse](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/105_Matsas_T0_Vergleich_De.pdf)** (105_Matsas_T0_Vergleich_De.pdf, 15 Seiten)
+
+**Hauptmerkmale:**
+- Vollständige mathematische Ableitungen, die zeigen, wie c, G, ℏ, α alle aus ξ folgen
+- **Dynamische Perspektive:** Klärt, dass T0 vollständige geometrodynamische Beschreibung bietet - nicht nur statische Geometrie, sondern wie Raumzeit sich entwickelt, schwingt und interagiert
+- **GitHub-Verknüpfte PDF-Referenzen:** Alle T0-Quelldokumente direkt verlinkt für einfache Navigation
+- Casimir-CMB-Vakuum-Vereinheitlichung zur Erklärung des Dunkle-Energie-Rahmens
+- Erweiterte Bell-Ungleichung mit fraktaler Dämpfung
+- Bereits gelöste Aspekte: Erweiterte Lagrange-Dichte, Dirac-Vereinfachung, Neutrinomassen, usw.
+
+**Bedeutung:** Beweis, dass unabhängige Forschungswege zur Ein-Parameter-Physik konvergieren - validiert T0-Theorie durch externe Bestätigung.
+
+**Original-Paper:** Matsas, G.E.A., Pleitez, V., Saa, A., Vanzella, D.A.T. „The number of fundamental constants from a spacetime-based perspective", *Scientific Reports* 14, 19645 (2024). DOI: [10.1038/s41598-024-71907-0](https://doi.org/10.1038/s41598-024-71907-0)
+
+---
+
+### November 2025: Der vollständige Abschluss
+
+#### Von ξ zur SI-Reform 2019
 **Die ultimative Offenbarung – EIN PARAMETER erklärt alles:**
 - Nur ξ = 4/3 × 10⁻⁴ ist fundamental
 - Alle physikalischen Konstanten leiten sich von ξ ab oder definieren Messeinheiten
@@ -67,8 +184,13 @@ Das T0-Modell schlägt einen Ansatz für die fundamentale Physik durch Zeit-Ener
 T0-Zeit-Masse-Dualität/
 ├── 2/
 │   ├── html/                     # Interaktive HTML-Explorationen
-│   ├── pdf/                      # Technische Dokumente (172+ Dateien, November 2025)
+│   ├── pdf/                      # Technische Dokumente (213+ Dateien)
 │   ├── tex/                      # LaTeX-Quelldateien
+│   │   ├── de_standalone/        # 108 deutsche Standalone-Dokumente
+│   │   ├── en_standalone/        # 105 englische Standalone-Dokumente
+│   │   ├── de_chapters_new/      # Kapitelversionen für Bücher
+│   │   ├── en_chapters_new/      # Kapitelversionen für Bücher
+│   │   └── completed/            # 6 kompilierte Bücher (Deutsch/ & Englisch/)
 │   ├── esotherik.md              # Esoterische Betrachtungen
 │   ├── OntologischeAequivalenz.md # Ontologische Äquivalenz (DE/EN)
 │   └── index.html & website.html # Lokale Web-Schnittstellen
@@ -85,10 +207,24 @@ T0-Zeit-Masse-Dualität/
 
 **GitHub-Suchoptimierung:** Dieses Repo ist mit „quanten-physik“, „vereinheitlichte-theorie“, „fraktale-geometrie“ und „deterministische-computing“ getaggt für einfache Entdeckung über GitHub-Themensuche.
 
-## Vollständige PDF-Dokumentation (172+ Dateien, ~63MB insgesamt)
+## Vollständige PDF-Dokumentation (213+ Dateien, ~75MB insgesamt)
 
 Alle Dokumente in deutscher und englischer Version verfügbar, soweit vorhanden.  
-**Pro-Tipp:** Verwenden Sie die GitHub-Suchleiste mit `T0_ Dateiname`, um spezifische PDFs schnell zu finden.
+**Pro-Tipp:** Verwenden Sie die GitHub-Suchleiste mit `T0_ Dateiname` oder `Matsas` oder `Consciousness`, um spezifische PDFs schnell zu finden.
+
+**Update Dezember 2025:** Umfassende Matsas et al. (2024) Vergleichsanalyse (105_Matsas_T0_Vergleich_De/En) mit dynamischer Perspektive und GitHub-PDF-Links hinzugefügt, plus bahnbrechende Bewusstseins-Dokumente (100_Consciousness_De/En), die das Quanten-Agentitätsproblem lösen. Siehe Dezember 2025 Highlights oben für Details.
+
+### LaTeX-Quelldateien und kompilierte Bücher
+
+Das Verzeichnis `2/tex/` enthält vollständige LaTeX-Quelldateien:
+- **108 deutsche Standalone-Dokumente** (`de_standalone/`)
+- **105 englische Standalone-Dokumente** (`en_standalone/`)
+- **6 kompilierte Bücher** in `completed/Deutsch/` und `completed/Englisch/`:
+  - Teil1: Kerndokumente
+  - Teil2: Mathematische Grundlagen
+  - Teil3: Quantenmechanik & Anwendungen
+
+**Hinweis:** Die Standalone-LaTeX-Dateien sind kosmetisch angepasste Kopien der Original-PDF-Dokumente. Der Inhalt bleibt unverändert; nur Formatierungsanpassungen wurden für die Buchkompilierung vorgenommen (gemeinsame Präambeln, konsistentes Styling, Tabellengrößenanpassung).
 
 ### Neueste Ergänzungen (November 2025)
 

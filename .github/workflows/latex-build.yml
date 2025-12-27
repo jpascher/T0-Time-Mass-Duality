@@ -1,0 +1,148 @@
+# =============================================================================
+# GitHub Actions Workflow: LaTeX Document Build
+# =============================================================================
+# This workflow automatically compiles all LaTeX main documents under 2/tex/
+# when pushing or creating a pull request to the 'bucherstellung' branch.
+#
+# Build strategy:
+# - If compile_all_tex.sh exists in repo root, it is executed (project-specific)
+# - Otherwise, all .tex files containing \documentclass are compiled with latexmk
+#
+# Note: latexmk is preferred over plain pdflatex because it automatically
+# handles multiple compilation passes (for references, bibliography, etc.)
+# =============================================================================
+
+name: LaTeX Build
+
+on:
+  push:
+    branches:
+      - bucherstellung
+  pull_request:
+    branches:
+      - bucherstellung
+
+jobs:
+  build-latex:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      # ---------------------------------------------------------------------
+      # Step 1: Checkout repository
+      # ---------------------------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ---------------------------------------------------------------------
+      # Step 2: Install TeX Live and latexmk
+      # Note: We use apt-get with sudo on Ubuntu runners.
+      # latexmk is preferred because it automatically handles multiple
+      # compilation passes needed for cross-references and bibliographies.
+      # ---------------------------------------------------------------------
+      - name: Install TeX Live and latexmk
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-fonts-extra \
+            texlive-science \
+            texlive-lang-german \
+            texlive-lang-english \
+            texlive-bibtex-extra \
+            texlive-pictures \
+            latexmk
+
+      # ---------------------------------------------------------------------
+      # Step 3: Build LaTeX documents
+      # If compile_all_tex.sh exists and is executable, use it.
+      # Otherwise, find all root documents (containing \documentclass)
+      # under 2/tex/ and compile them with latexmk.
+      # ---------------------------------------------------------------------
+      - name: Build LaTeX documents
+        run: |
+          set -e
+
+          # Check if compile_all_tex.sh exists in repo root
+          if [ -f "./compile_all_tex.sh" ]; then
+            echo "Found compile_all_tex.sh - using project-specific build script"
+            chmod +x ./compile_all_tex.sh
+            ./compile_all_tex.sh -d 2/tex -c
+          else
+            echo "No compile_all_tex.sh found - using default latexmk build"
+            
+            # Find all .tex files containing \documentclass (root documents)
+            # Using xargs for better handling of filenames with spaces
+            ROOT_FILES=$(find 2/tex -name "*.tex" -type f -print0 | xargs -0 grep -l '\\documentclass' 2>/dev/null || true)
+            
+            if [ -z "$ROOT_FILES" ]; then
+              echo "No root LaTeX documents found (files with \\documentclass)"
+              echo "Build completed successfully (nothing to compile)"
+              exit 0
+            fi
+            
+            echo "Found root LaTeX documents:"
+            echo "$ROOT_FILES"
+            echo ""
+            
+            FAILED=0
+            SUCCESS=0
+            
+            for tex_file in $ROOT_FILES; do
+              echo "=========================================="
+              echo "Compiling: $tex_file"
+              echo "=========================================="
+              
+              # Get directory and filename
+              DIR=$(dirname "$tex_file")
+              FILENAME=$(basename "$tex_file")
+              
+              # Change to the document's directory for relative paths
+              cd "$DIR"
+              
+              # Compile with latexmk
+              # -pdf: Generate PDF output
+              # -interaction=nonstopmode: Don't stop on errors, continue processing
+              # -halt-on-error: Stop if there's a fatal error
+              if latexmk -pdf -interaction=nonstopmode -halt-on-error "$FILENAME"; then
+                echo "SUCCESS: $tex_file"
+                SUCCESS=$((SUCCESS + 1))
+              else
+                echo "FAILED: $tex_file"
+                FAILED=$((FAILED + 1))
+              fi
+              
+              # Return to repo root
+              cd "$GITHUB_WORKSPACE"
+            done
+            
+            echo ""
+            echo "=========================================="
+            echo "Build Summary:"
+            echo "  Successful: $SUCCESS"
+            echo "  Failed: $FAILED"
+            echo "=========================================="
+            
+            if [ $FAILED -gt 0 ]; then
+              echo "Some documents failed to compile"
+              exit 1
+            fi
+          fi
+
+      # ---------------------------------------------------------------------
+      # Step 4: Upload generated PDFs as artifacts
+      # Only runs if the build step succeeded
+      # ---------------------------------------------------------------------
+      - name: Upload PDF artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: latex-pdfs
+          path: |
+            2/tex/**/*.pdf
+            *.pdf
+          if-no-files-found: warn
+          retention-days: 30
