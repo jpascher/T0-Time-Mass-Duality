@@ -105,7 +105,7 @@ detect_error_type() {
     fi
     
     # Missing \begin{document}
-    if grep -q "Missing \\\\begin{document}" "$log_file"; then
+    if grep -q "Missing \\begin{document}" "$log_file"; then
         echo "missing_document"
         return
     fi
@@ -131,7 +131,7 @@ extract_undefined_command() {
     local log_file="$1"
     grep -A1 "! Undefined control sequence" "$log_file" | \
         grep -v "^--$" | tail -1 | \
-        sed 's/.*\(\\[a-zA-Z]\+\).*/\1/' | head -1
+        sed -E 's/.*(\\[a-zA-Z]+).*/\1/' | head -1
 }
 
 # Helper function to add a package to a LaTeX file's preamble
@@ -145,10 +145,13 @@ add_package_to_preamble() {
     fi
     
     # Find the line with \documentclass or last \usepackage
-    local insert_line=$(grep -n "\\\\documentclass\|\\\\usepackage" "$tex_file" | tail -1 | cut -d: -f1)
+    local insert_line=$(grep -n "\\documentclass\|\\usepackage" "$tex_file" | tail -1 | cut -d: -f1)
     if [ -n "$insert_line" ]; then
         insert_line=$((insert_line + 1))
-        sed -i "${insert_line}i\\\\usepackage{$package}" "$tex_file"
+        # Use awk for reliable insertion with backslash
+        awk -v line="$insert_line" -v pkg="$package" \
+            'NR==line {print "\\usepackage{" pkg "}"} {print}' \
+            "$tex_file" > "$tex_file.tmp" && mv "$tex_file.tmp" "$tex_file"
         return 0
     fi
     
