@@ -360,6 +360,26 @@ Alle T0-Audioinhalte als Podcast-Episoden verfügbar.
 4. **Vereinigter Bericht**: [T0_vereinigter_bericht.pdf](2/pdf/T0_vereinigter_bericht.pdf) öffnen  
 5. **Python-Code**: `authentic_t0_quantum.py` ausprobieren  
 
+## Repository-Verwaltung
+
+### Branch-Verwaltung / Branches Schließen
+
+Müssen Sie Branches schließen oder löschen? Sehen Sie unsere umfassenden Anleitungen:
+
+- **[Branch-Verwaltungsanleitung (Deutsch)](BRANCH_MANAGEMENT_DE.md)** - Vollständige Anleitung zum Schließen und Löschen von Branches
+- **[Branch Management Guide (English)](BRANCH_MANAGEMENT_EN.md)** - Complete guide for closing and deleting branches
+
+**Schnell-Skripte:**
+- **Windows**: Führen Sie `close_branches.bat` aus für interaktive Branch-Verwaltung
+- **Linux/Mac**: Führen Sie `./close_branches.sh` aus für interaktive Branch-Verwaltung
+
+Beide Skripte bieten sichere, geführte Oberflächen für:
+- Auflisten aller Branches
+- Löschen spezifischer Branches (lokal oder remote)
+- Massen-Löschung mit Sicherheitsbestätigungen
+- Aufräumen veralteter Referenzen
+- Überprüfung des Merge-Status
+
 ## Kontaktinformationen
 
 **Autor**: Johann Pascher  

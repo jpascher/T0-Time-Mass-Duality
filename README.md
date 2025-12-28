@@ -428,6 +428,26 @@ The `2/tex/` directory contains complete LaTeX source files:
 - [T0 YouTube Channel](https://www.youtube.com/@Time-MassDuality)  
 - [T0 Audio Library on Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)  
 
+## Repository Management
+
+### Branch Management / Branches Schließen
+
+Need to close or delete branches? See our comprehensive guides:
+
+- **[Branch Management Guide (German)](BRANCH_MANAGEMENT_DE.md)** - Vollständige Anleitung zum Schließen und Löschen von Branches
+- **[Branch Management Guide (English)](BRANCH_MANAGEMENT_EN.md)** - Complete guide for closing and deleting branches
+
+**Quick Scripts:**
+- **Windows**: Run `close_branches.bat` for interactive branch management
+- **Linux/Mac**: Run `./close_branches.sh` for interactive branch management
+
+Both scripts provide safe, guided interfaces for:
+- Listing all branches
+- Deleting specific branches (local or remote)
+- Bulk deletion with safety confirmations
+- Cleaning up stale references
+- Checking merge status
+
 ## Contact
 
 **Author**: Johann Pascher  
