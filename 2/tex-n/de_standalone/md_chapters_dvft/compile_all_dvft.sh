@@ -122,8 +122,8 @@ detect_error_type() {
 # Function to extract missing package name
 extract_package_name() {
     local log_file="$1"
-    grep "! LaTeX Error: File.*\.sty' not found" "$log_file" | \
-        sed "s/.*File \`\(.*\)\.sty' not found.*/\1/" | head -1
+    grep "! LaTeX Error: File.*\.sty.* not found" "$log_file" | \
+        sed -E "s/.*File [\`'\"](.*)\.sty[\`'\"].* not found.*/\1/" | head -1
 }
 
 # Function to extract undefined command
@@ -139,8 +139,8 @@ add_package_to_preamble() {
     local tex_file="$1"
     local package="$2"
     
-    # Check if package is already present
-    if grep -q "\\usepackage.*{$package}" "$tex_file"; then
+    # Check if package is already present (handle optional parameters)
+    if grep -q "\\usepackage\\(\\[[^]]*\\]\\)\\?{$package}" "$tex_file"; then
         return 0
     fi
     
