@@ -105,7 +105,7 @@ detect_error_type() {
     fi
     
     # Missing \begin{document}
-    if grep -q "! LaTeX Error: Missing \\\\begin{document}" "$log_file"; then
+    if grep -q "Missing \\\\begin{document}" "$log_file"; then
         echo "missing_document"
         return
     fi
@@ -131,7 +131,28 @@ extract_undefined_command() {
     local log_file="$1"
     grep -A1 "! Undefined control sequence" "$log_file" | \
         grep -v "^--$" | tail -1 | \
-        sed 's/.*\(\\\[a-zA-Z]*\).*/\1/' | head -1
+        sed 's/.*\(\\[a-zA-Z]\+\).*/\1/' | head -1
+}
+
+# Helper function to add a package to a LaTeX file's preamble
+add_package_to_preamble() {
+    local tex_file="$1"
+    local package="$2"
+    
+    # Check if package is already present
+    if grep -q "\\usepackage.*{$package}" "$tex_file"; then
+        return 0
+    fi
+    
+    # Find the line with \documentclass or last \usepackage
+    local insert_line=$(grep -n "\\\\documentclass\|\\\\usepackage" "$tex_file" | tail -1 | cut -d: -f1)
+    if [ -n "$insert_line" ]; then
+        insert_line=$((insert_line + 1))
+        sed -i "${insert_line}i\\\\usepackage{$package}" "$tex_file"
+        return 0
+    fi
+    
+    return 1
 }
 
 # Function to fix missing package
@@ -147,16 +168,10 @@ fix_missing_package() {
         return 0
     else
         # Try adding \usepackage to the file if not already present
-        if ! grep -q "\\usepackage.*{$package}" "$tex_file"; then
-            echo -e "${YELLOW}  → Adding \\usepackage{$package} to file${NC}"
-            # Find the line with \documentclass or first \usepackage
-            local insert_line=$(grep -n "\\\\documentclass\|\\\\usepackage" "$tex_file" | tail -1 | cut -d: -f1)
-            if [ -n "$insert_line" ]; then
-                insert_line=$((insert_line + 1))
-                sed -i "${insert_line}i\\\\usepackage{$package}" "$tex_file"
-                echo -e "${GREEN}  ✓ Added \\usepackage{$package}${NC}"
-                return 0
-            fi
+        echo -e "${YELLOW}  → Adding \\usepackage{$package} to file${NC}"
+        if add_package_to_preamble "$tex_file" "$package"; then
+            echo -e "${GREEN}  ✓ Added \\usepackage{$package}${NC}"
+            return 0
         fi
     fi
     
@@ -175,10 +190,7 @@ fix_undefined_command() {
         "\\bra"|"\\ket"|"\\braket")
             if ! grep -q "\\usepackage.*{physics}" "$tex_file"; then
                 echo -e "${YELLOW}  → Adding physics package for $command${NC}"
-                local insert_line=$(grep -n "\\\\documentclass\|\\\\usepackage" "$tex_file" | tail -1 | cut -d: -f1)
-                if [ -n "$insert_line" ]; then
-                    insert_line=$((insert_line + 1))
-                    sed -i "${insert_line}i\\\\usepackage{physics}" "$tex_file"
+                if add_package_to_preamble "$tex_file" "physics"; then
                     echo -e "${GREEN}  ✓ Added physics package${NC}"
                     return 0
                 fi
@@ -187,15 +199,17 @@ fix_undefined_command() {
         "\\mathbb"|"\\mathcal"|"\\mathfrak")
             if ! grep -q "\\usepackage.*{amssymb}" "$tex_file"; then
                 echo -e "${YELLOW}  → Adding amssymb package${NC}"
-                fix_missing_package "$tex_file" "amssymb"
-                return 0
+                if fix_missing_package "$tex_file" "amssymb"; then
+                    return 0
+                fi
             fi
             ;;
         "\\includegraphics")
             if ! grep -q "\\usepackage.*{graphicx}" "$tex_file"; then
                 echo -e "${YELLOW}  → Adding graphicx package${NC}"
-                fix_missing_package "$tex_file" "graphicx"
-                return 0
+                if fix_missing_package "$tex_file" "graphicx"; then
+                    return 0
+                fi
             fi
             ;;
     esac
@@ -217,11 +231,8 @@ ensure_physics_package() {
         return 0
     fi
     
-    # Add physics package after documentclass or last usepackage
-    local insert_line=$(grep -n "\\\\documentclass\|\\\\usepackage" "$tex_file" | tail -1 | cut -d: -f1)
-    if [ -n "$insert_line" ]; then
-        insert_line=$((insert_line + 1))
-        sed -i "${insert_line}i\\\\usepackage{physics}" "$tex_file"
+    # Add physics package using helper function
+    if add_package_to_preamble "$tex_file" "physics"; then
         echo -e "${GREEN}  ✓ Added physics package to preamble${NC}"
         return 0
     fi
