@@ -32,18 +32,31 @@ UNICODE_TO_LATEX = {
     '𝜇': r'\mu',
     'ξ': r'\xi',
     'α': r'\alpha',
+    '𝛼': r'\alpha',  # Mathematical italic alpha
     'β': r'\beta',
+    '𝛽': r'\beta',  # Mathematical italic beta
     'γ': r'\gamma',
+    '𝛾': r'\gamma',  # Mathematical italic gamma
     'δ': r'\delta',
+    '𝛿': r'\delta',  # Mathematical italic delta
     'ε': r'\varepsilon',
+    '𝜀': r'\varepsilon',  # Mathematical italic epsilon
     'ζ': r'\zeta',
+    '𝜁': r'\zeta',  # Mathematical italic zeta
     'η': r'\eta',
+    '𝜂': r'\eta',  # Mathematical italic eta
     'λ': r'\lambda',
+    '𝜆': r'\lambda',  # Mathematical italic lambda
     'ν': r'\nu',
+    '𝜈': r'\nu',  # Mathematical italic nu
     'π': r'\pi',
+    '𝜋': r'\pi',  # Mathematical italic pi
     'σ': r'\sigma',
+    '𝜎': r'\sigma',  # Mathematical italic sigma
     'τ': r'\tau',
+    '𝜏': r'\tau',  # Mathematical italic tau
     'ω': r'\omega',
+    '𝜔': r'\omega',  # Mathematical italic omega
     'Ω': r'\Omega',
     '∇': r'\nabla',
     '∂': r'\partial',
@@ -85,13 +98,81 @@ UNICODE_TO_LATEX = {
     '°': r'^\circ',
     '·': r'\cdot',
     '▫': r'\Box',
-    # Mathematical italic characters
+    # Mathematical italic characters (Unicode Mathematical Alphanumeric Symbols)
+    '𝐴': r'A',
+    '𝐵': r'B',
+    '𝐶': r'C',
+    '𝐷': r'D',
+    '𝐸': r'E',
+    '𝐹': r'F',
+    '𝐺': r'G',
+    '𝐻': r'H',
+    '𝐼': r'I',
+    '𝐽': r'J',
+    '𝐾': r'K',
+    '𝐿': r'L',
+    '𝑀': r'M',
+    '𝑁': r'N',
+    '𝑂': r'O',
+    '𝑃': r'P',
+    '𝑄': r'Q',
+    '𝑅': r'R',
+    '𝑆': r'S',
+    '𝑇': r'T',
+    '𝑈': r'U',
+    '𝑉': r'V',
+    '𝑊': r'W',
+    '𝑋': r'X',
+    '𝑌': r'Y',
+    '𝑍': r'Z',
+    '𝑎': r'a',
+    '𝑏': r'b',
+    '𝑐': r'c',
+    '𝑑': r'd',
+    '𝑒': r'e',
+    '𝑓': r'f',
+    '𝑔': r'g',
+    '𝘩': r'h',
+    '𝑖': r'i',
+    '𝑗': r'j',
+    '𝑘': r'k',
+    '𝑙': r'l',
+    '𝑚': r'm',
+    '𝑛': r'n',
+    '𝑜': r'o',
+    '𝑝': r'p',
+    '𝑞': r'q',
+    '𝑟': r'r',
+    '𝑠': r's',
+    '𝑡': r't',
+    '𝑢': r'u',
+    '𝑣': r'v',
+    '𝑤': r'w',
     '𝑥': r'x',
     '𝑦': r'y',
     '𝑧': r'z',
-    '𝑡': r't',
-    '𝑖': r'i',
-    '𝑒': r'e',
+    # Subscripts
+    '₀': r'_0',
+    '₁': r'_1',
+    '₂': r'_2',
+    '₃': r'_3',
+    '₄': r'_4',
+    '₅': r'_5',
+    '₆': r'_6',
+    '₇': r'_7',
+    '₈': r'_8',
+    '₉': r'_9',
+    # Superscripts
+    '⁰': r'^0',
+    '¹': r'^1',
+    '²': r'^2',
+    '³': r'^3',
+    '⁴': r'^4',
+    '⁵': r'^5',
+    '⁶': r'^6',
+    '⁷': r'^7',
+    '⁸': r'^8',
+    '⁹': r'^9',
 }
 
 
@@ -167,23 +248,10 @@ def escape_latex_special_chars(text):
 def process_math_expressions(text):
     """Process mathematical expressions and ensure they're properly formatted."""
     # Handle inline equations (text with = signs that look like equations)
-    # This is a heuristic approach
+    # This is a heuristic approach - we'll be more conservative now
     
-    # Common patterns like "a = b" or "x² = y" should be in math mode
-    # Pattern: word/symbol = word/symbol
-    text = re.sub(
-        r'\b([a-zA-Z0-9]+)\s*=\s*([a-zA-Z0-9]+)\b',
-        r'$\1 = \2$',
-        text
-    )
-    
-    # Handle superscripts (e.g., "²", "³")
-    text = text.replace('²', r'$^2$')
-    text = text.replace('³', r'$^3$')
-    text = text.replace('₀', r'$_0$')
-    text = text.replace('₁', r'$_1$')
-    text = text.replace('₂', r'$_2$')
-    text = text.replace('₃', r'$_3$')
+    # Handle superscripts (but only the standalone ones that weren't already converted)
+    # The subscripts and superscripts in UNICODE_TO_LATEX will already be handled
     
     return text
 
