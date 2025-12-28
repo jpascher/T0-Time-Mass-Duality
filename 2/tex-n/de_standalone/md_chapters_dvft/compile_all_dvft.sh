@@ -118,6 +118,17 @@ fi
 
 # Initialize log file
 LOG_PATH="$SCRIPT_DIR/$LOG_FILE"
+# Try to create log file, warn if it fails but continue
+if ! touch "$LOG_PATH" 2>/dev/null; then
+    echo -e "${YELLOW}Warning: Cannot write to log file: $LOG_PATH${NC}"
+    LOG_PATH="/tmp/dvft_compilation_errors.log"
+    echo -e "Using temporary log file: ${CYAN}$LOG_PATH${NC}"
+    touch "$LOG_PATH" 2>/dev/null || {
+        echo -e "${RED}Error: Cannot create log file. Check permissions.${NC}"
+        exit 1
+    }
+fi
+
 echo "============================================================" > "$LOG_PATH"
 echo "DVFT LaTeX Compilation Log" >> "$LOG_PATH"
 echo "Date: $(date)" >> "$LOG_PATH"
@@ -159,8 +170,16 @@ install_package() {
     fi
     
     # Try apt-get for Debian/Ubuntu systems
+    # Map common package names to apt package names
     if command -v apt-get &> /dev/null; then
-        apt-get install -y "texlive-latex-extra" >> "$LOG_PATH" 2>&1
+        case "$package" in
+            physics|siunitx|geometry|hyperref|amsmath|graphicx)
+                apt-get install -y "texlive-latex-extra" >> "$LOG_PATH" 2>&1
+                ;;
+            *)
+                apt-get install -y "texlive-full" >> "$LOG_PATH" 2>&1
+                ;;
+        esac
         return $?
     fi
     
@@ -234,7 +253,7 @@ analyze_and_fix_errors() {
     fi
     
     # Fix 4: Missing amsmath commands
-    if echo "$errors" | grep -q "align\|equation\|split" && ! grep -q "\\usepackage{amsmath}" "$tex_file"; then
+    if echo "$errors" | grep -q "Undefined control sequence.*\\\\align\|Undefined control sequence.*\\\\equation" && ! grep -q "\\usepackage{amsmath}" "$tex_file"; then
         echo -e "${YELLOW}Fixing: Adding amsmath package${NC}"
         if [ "$DRY_RUN" = false ]; then
             sed -i '/\\documentclass/a \\usepackage{amsmath}' "$tex_file"
@@ -243,7 +262,7 @@ analyze_and_fix_errors() {
     fi
     
     # Fix 5: Missing graphicx
-    if echo "$errors" | grep -q "includegraphics" && ! grep -q "\\usepackage{graphicx}" "$tex_file"; then
+    if echo "$errors" | grep -q "Undefined control sequence.*\\\\includegraphics" && ! grep -q "\\usepackage{graphicx}" "$tex_file"; then
         echo -e "${YELLOW}Fixing: Adding graphicx package${NC}"
         if [ "$DRY_RUN" = false ]; then
             sed -i '/\\documentclass/a \\usepackage{graphicx}' "$tex_file"
@@ -341,16 +360,17 @@ compile_tex_file() {
             break
         fi
         
-        # Try to fix errors if on first pass
+        # Try to fix errors if on first pass and haven't exceeded fix attempts
         if [ $pass -eq 1 ] && [ $attempts -lt $max_fix_attempts ]; then
             if analyze_and_fix_errors "$tex_file" "$log_file"; then
                 ((attempts++))
                 ((FIXED++))
-                # Retry compilation after fixing
+                # Retry compilation after fixing, but don't increment pass yet
                 continue
             fi
         fi
         
+        # Increment pass counter if we didn't fix anything or exhausted fix attempts
         ((pass++))
     done
     
