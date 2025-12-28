@@ -25,7 +25,8 @@
 # Date: 2025
 # ==============================================================================
 
-set -e  # Exit on error (we'll handle errors explicitly)
+# Note: We don't use 'set -e' here because we want to handle errors explicitly
+# and continue processing files even if some compilations fail.
 
 # Script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -178,8 +179,16 @@ check_missing_packages() {
     fi
     
     # Check for specific packages mentioned in errors
-    if grep -q "physics" "$log_file" && ! tlmgr info physics &>/dev/null; then
-        packages_to_install+=("physics")
+    if grep -q "physics" "$log_file"; then
+        # Check if tlmgr is available and package is not installed
+        if command -v tlmgr &>/dev/null; then
+            if ! tlmgr info physics &>/dev/null; then
+                packages_to_install+=("physics")
+            fi
+        else
+            # If tlmgr is not available, add to list anyway
+            packages_to_install+=("physics")
+        fi
     fi
     
     # Install missing packages
@@ -198,22 +207,20 @@ check_missing_packages() {
     return 1  # No packages installed
 }
 
-# Function to fix common LaTeX errors in source
-fix_common_errors() {
+# Function to detect common LaTeX errors that might be fixable
+detect_fixable_errors() {
     local tex_file="$1"
     local log_file="$2"
-    local fixed=false
     
     # Check for undefined control sequences
     if grep -q "Undefined control sequence" "$log_file"; then
         log_message "WARNING" "Undefined control sequences detected in $tex_file"
         
-        # Common fixes - add physics package if missing physics commands
+        # Check if physics commands are used but package is not included
         if grep -q "\\qty\\|\\dd\\|\\dv\\|\\pdv" "$tex_file" 2>/dev/null; then
             if ! grep -q "\\usepackage.*physics" "$tex_file" 2>/dev/null; then
-                log_message "INFO" "Adding physics package to $tex_file"
-                # This is a placeholder - actual implementation would need careful editing
-                fixed=true
+                log_message "INFO" "Physics commands detected but package not included in $tex_file"
+                log_message "INFO" "Consider adding \\usepackage{physics} to the preamble"
             fi
         fi
     fi
@@ -223,7 +230,8 @@ fix_common_errors() {
         log_message "INFO" "Undefined references found - will resolve with multiple passes"
     fi
     
-    return $([ "$fixed" = true ] && echo 0 || echo 1)
+    # Return 1 since we're not actually fixing anything, just detecting
+    return 1
 }
 
 # Function to compile a single LaTeX file
@@ -251,7 +259,6 @@ compile_latex_file() {
     # Compilation loop with multiple passes
     local pass=1
     local success=false
-    local retry_after_fix=false
     
     while [ $pass -le $MAX_PASSES ]; do
         log_message "INFO" "Pass $pass for $basename"
@@ -286,21 +293,17 @@ compile_latex_file() {
             # Compilation failed
             log_message "ERROR" "Pass $pass failed for $basename (exit code: $exit_code)"
             
-            # Try to fix common errors
+            # Try to fix common errors only on first pass
             if [ $pass -eq 1 ]; then
-                # Check for missing packages
+                # Check for missing packages and install them
                 if check_missing_packages "$file_log"; then
                     log_message "INFO" "Packages installed, retrying compilation"
-                    retry_after_fix=true
+                    # Continue to next iteration without incrementing pass
                     continue
                 fi
                 
-                # Try to fix source code errors
-                if fix_common_errors "$tex_file" "$file_log"; then
-                    log_message "INFO" "Source fixes applied, retrying compilation"
-                    retry_after_fix=true
-                    continue
-                fi
+                # Detect fixable errors (informational only)
+                detect_fixable_errors "$tex_file" "$file_log"
             fi
         fi
         
@@ -336,12 +339,15 @@ clean_auxiliary_files() {
     log_message "INFO" "Cleaning auxiliary files"
     echo "Cleaning auxiliary files..."
     
-    local patterns="*.aux *.log *.out *.toc *.lof *.lot *.fls *.fdb_latexmk"
-    patterns="$patterns *.synctex.gz *.bbl *.blg *.nav *.snm *.vrb"
-    patterns="$patterns *.bcf *.run.xml *.idx *.ilg *.ind"
+    local patterns=(
+        "*.aux" "*.log" "*.out" "*.toc" "*.lof" "*.lot" 
+        "*.fls" "*.fdb_latexmk" "*.synctex.gz" "*.bbl" "*.blg"
+        "*.nav" "*.snm" "*.vrb" "*.bcf" "*.run.xml"
+        "*.idx" "*.ilg" "*.ind"
+    )
     
     cd "$SCRIPT_DIR"
-    for pattern in $patterns; do
+    for pattern in "${patterns[@]}"; do
         rm -f $pattern 2>/dev/null || true
     done
     
