@@ -183,6 +183,23 @@ echo ""
 
 echo "=== Compiling LaTeX files recursively ==="
 echo ""
+echo "NOTE: The LaTeX files have been generated, but may contain formatting issues"
+echo "that require manual correction for successful compilation."
+echo ""
+echo "Common issues to fix:"
+echo "  - Math expressions need proper $ delimiters"
+echo "  - Complex equations may need \\[ \\] or equation environments"
+echo "  - Tables may need special formatting"
+echo ""
+echo "To attempt compilation manually:"
+echo "  cd $(pwd)"
+echo "  pdflatex -interaction=nonstopmode main.tex"
+echo ""
+echo "For iterative fixing:"
+echo "  1. Run pdflatex and check main.log for errors"
+echo "  2. Fix the errors in the kapitel_XX.tex files"
+echo "  3. Re-run pdflatex"
+echo ""
 
 # Function to compile with error handling
 compile_latex() {
@@ -192,15 +209,15 @@ compile_latex() {
     while [ $attempt -le $max_attempts ]; do
         echo "Compilation attempt $attempt of $max_attempts..."
         
-        # Run pdflatex
-        sudo pdflatex -interaction=nonstopmode -halt-on-error main.tex > compile.log 2>&1
+        # Run pdflatex without sudo
+        pdflatex -interaction=nonstopmode -halt-on-error main.tex > compile.log 2>&1
         
         if [ $? -eq 0 ]; then
             echo "✓ Compilation successful!"
             
             # Run again for references and TOC
             echo "Running second pass for references..."
-            sudo pdflatex -interaction=nonstopmode -halt-on-error main.tex > compile2.log 2>&1
+            pdflatex -interaction=nonstopmode -halt-on-error main.tex > compile2.log 2>&1
             
             if [ -f "main.pdf" ]; then
                 echo "✓ PDF generated successfully: main.pdf"
@@ -218,29 +235,35 @@ compile_latex() {
                 
                 if [ -n "$missing_packages" ]; then
                     echo "Found missing packages: $missing_packages"
-                    echo "Attempting to install missing packages..."
-                    
-                    # Try to install common LaTeX packages
-                    sudo apt-get install -y texlive-latex-extra texlive-science texlive-fonts-extra > /dev/null 2>&1 || true
+                    echo "To install, run:"
+                    echo "  sudo apt-get install -y texlive-latex-extra texlive-science texlive-fonts-extra"
                 fi
             fi
             
             # Show error details
             echo ""
-            echo "Error details from compile.log:"
-            grep -A 5 "^!" compile.log | head -20 || echo "No specific errors found in log"
+            echo "Error details from compile.log (first 10 errors):"
+            grep -A 3 "^!" compile.log | head -40 || echo "No specific errors found in log"
+            echo ""
+            echo "Full log available in: compile.log"
         fi
         
         attempt=$((attempt + 1))
     done
     
     echo "✗ Compilation failed after $max_attempts attempts"
+    echo "The .tex files have been generated. Manual editing may be required."
     echo "Please check compile.log for details"
     return 1
 }
 
-# Compile the main document
-compile_latex
+# Optionally attempt compilation (disabled by default due to expected errors)
+if [ "$1" == "--compile" ]; then
+    compile_latex
+else
+    echo "Skipping automatic compilation. To attempt it, run:"
+    echo "  $0 --compile"
+fi
 
 echo ""
 echo "=== Conversion Complete ==="
