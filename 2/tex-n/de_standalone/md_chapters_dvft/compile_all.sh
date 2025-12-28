@@ -350,8 +350,9 @@ clean_auxiliary_files() {
     
     cd "$SCRIPT_DIR"
     for pattern in "${patterns[@]}"; do
-        # Quote the pattern to prevent shell expansion
-        rm -f "$pattern" 2>/dev/null || true
+        # Allow shell expansion for glob patterns
+        # shellcheck disable=SC2086
+        rm -f $pattern 2>/dev/null || true
     done
     
     log_message "INFO" "Cleanup complete"
@@ -464,5 +465,5 @@ main() {
 }
 
 # Run main function
-main
+main "$@"
 
