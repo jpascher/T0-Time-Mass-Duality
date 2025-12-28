@@ -48,10 +48,11 @@ The script automatically:
 
 1. **Multiple Passes**: Runs pdflatex up to 3 times to resolve cross-references and citations
 2. **Error Detection**: Detects and reports compilation errors
-3. **Package Management**: Attempts to install missing LaTeX packages automatically
+3. **Package Management**: Attempts to install missing LaTeX packages automatically (with retry limits)
 4. **Physics Package**: Includes support for the physics package and its commands
 5. **Logging**: Creates detailed logs in `compile_logs/` directory
 6. **Summary Report**: Provides compilation summary with success/failure counts
+7. **Security**: Runs without shell-escape for improved security
 
 ## Requirements
 

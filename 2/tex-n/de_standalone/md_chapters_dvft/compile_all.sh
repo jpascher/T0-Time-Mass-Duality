@@ -182,7 +182,7 @@ check_missing_packages() {
     if grep -q "physics" "$log_file"; then
         # Check if tlmgr is available and package is not installed
         if command -v tlmgr &>/dev/null; then
-            if ! tlmgr info physics &>/dev/null; then
+            if ! tlmgr list --only-installed physics 2>/dev/null | grep -q "physics"; then
                 packages_to_install+=("physics")
             fi
         else
@@ -259,14 +259,15 @@ compile_latex_file() {
     # Compilation loop with multiple passes
     local pass=1
     local success=false
+    local package_retry_count=0
+    local max_package_retries=2
     
     while [ $pass -le $MAX_PASSES ]; do
         log_message "INFO" "Pass $pass for $basename"
         
-        # Run pdflatex
+        # Run pdflatex without shell-escape for security
         cd "$SCRIPT_DIR"
         $PDFLATEX_CMD -interaction=nonstopmode \
-            -shell-escape \
             -output-directory="$SCRIPT_DIR" \
             "$tex_file" > "$file_log" 2>&1
         
@@ -293,11 +294,12 @@ compile_latex_file() {
             # Compilation failed
             log_message "ERROR" "Pass $pass failed for $basename (exit code: $exit_code)"
             
-            # Try to fix common errors only on first pass
-            if [ $pass -eq 1 ]; then
+            # Try to fix common errors only on first pass with limited retries
+            if [ $pass -eq 1 ] && [ $package_retry_count -lt $max_package_retries ]; then
                 # Check for missing packages and install them
                 if check_missing_packages "$file_log"; then
-                    log_message "INFO" "Packages installed, retrying compilation"
+                    log_message "INFO" "Packages installed, retrying compilation (attempt $((package_retry_count + 1)))"
+                    ((package_retry_count++))
                     # Continue to next iteration without incrementing pass
                     continue
                 fi
@@ -348,7 +350,8 @@ clean_auxiliary_files() {
     
     cd "$SCRIPT_DIR"
     for pattern in "${patterns[@]}"; do
-        rm -f $pattern 2>/dev/null || true
+        # Quote the pattern to prevent shell expansion
+        rm -f "$pattern" 2>/dev/null || true
     done
     
     log_message "INFO" "Cleanup complete"
