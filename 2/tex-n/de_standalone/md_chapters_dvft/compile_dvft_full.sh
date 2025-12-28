@@ -9,6 +9,19 @@
 # 4. Fixes common errors iteratively until successful
 # 5. Logs all output and errors
 #
+# Requirements:
+#   - texlive-latex-base
+#   - texlive-latex-extra
+#   - texlive-fonts-recommended
+#   - texlive-lang-german
+#   - texlive-science (for physics package)
+#   - texlive-pictures (for tikz and other graphics)
+#
+# Install on Ubuntu/Debian:
+#   sudo apt-get install texlive-latex-base texlive-latex-extra \
+#                        texlive-fonts-recommended texlive-lang-german \
+#                        texlive-science texlive-pictures
+#
 # Author: Johann Pascher / GitHub Copilot
 # Date: 2025-12-28
 # ==============================================================================
@@ -28,7 +41,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOG_FILE="$SCRIPT_DIR/compilation.log"
 ERROR_LOG="$SCRIPT_DIR/errors.log"
 MAX_RETRIES=5
-PREAMBLE_PATH="../../../T0_preamble_shared_De.tex"
+PREAMBLE_PATH="../../../../T0_preamble_shared_De"
 
 # Counters
 TOTAL_FILES=0
@@ -319,14 +332,9 @@ compile_tex() {
     local success=0
     
     while [[ $retry_count -lt $MAX_RETRIES ]]; do
-        # Run pdflatex
-        if command -v sudo >/dev/null 2>&1 && [[ $EUID -ne 0 ]]; then
-            sudo pdflatex -interaction=nonstopmode -halt-on-error "$basename.tex" >> "$LOG_FILE" 2>&1
-            local exit_code=$?
-        else
-            pdflatex -interaction=nonstopmode -halt-on-error "$basename.tex" >> "$LOG_FILE" 2>&1
-            local exit_code=$?
-        fi
+        # Run pdflatex (no sudo needed)
+        pdflatex -interaction=nonstopmode -halt-on-error "$basename.tex" >> "$LOG_FILE" 2>&1
+        local exit_code=$?
         
         if [[ $exit_code -eq 0 ]]; then
             success=1
