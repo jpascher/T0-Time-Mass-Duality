@@ -253,8 +253,8 @@ def main():
     
     results = []
     
-    # Process chapters 12-43
-    for chapter_num in range(12, 44):
+    # Process chapters 1-44
+    for chapter_num in range(1, 45):
         result = create_combined_chapter(chapter_num, individual_dir, merged_dir, output_dir)
         
         if result:
