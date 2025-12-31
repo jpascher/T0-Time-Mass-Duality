@@ -57,18 +57,46 @@ jobs:
           latexmk_shell_escape: false
         continue-on-error: true
       
-      - name: Check compilation result
+      - name: Check compilation result and analyze errors
         if: always()
         run: |
           if [ -f "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_De.pdf" ]; then
             echo "✅ Chapter ${{ matrix.chapter }} compiled successfully"
+            PDF_SIZE=$(du -h "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_De.pdf" | cut -f1)
+            echo "📄 PDF size: $PDF_SIZE"
             echo "CHAPTER_${{ matrix.chapter }}_STATUS=success" >> $GITHUB_ENV
           else
             echo "❌ Chapter ${{ matrix.chapter }} failed to compile"
             echo "CHAPTER_${{ matrix.chapter }}_STATUS=failed" >> $GITHUB_ENV
             if [ -f "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_De.log" ]; then
-              echo "=== Last 50 lines of log file ==="
-              tail -n 50 "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_De.log"
+              echo ""
+              echo "=== Error Analysis ==="
+              echo "Searching for common LaTeX errors..."
+              
+              # Check for specific error patterns
+              if grep -q "Undefined control sequence" "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_De.log"; then
+                echo "⚠️  Found: Undefined control sequence (missing command or package)"
+                grep -A 2 "Undefined control sequence" "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_De.log" | head -10
+              fi
+              
+              if grep -q "Package.*not found" "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_De.log"; then
+                echo "⚠️  Found: Missing LaTeX package"
+                grep "Package.*not found" "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_De.log"
+              fi
+              
+              if grep -q "File.*not found" "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_De.log"; then
+                echo "⚠️  Found: Missing file"
+                grep "File.*not found" "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_De.log"
+              fi
+              
+              if grep -q "LaTeX Error" "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_De.log"; then
+                echo "⚠️  Found: LaTeX Error"
+                grep -A 3 "LaTeX Error" "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_De.log" | head -15
+              fi
+              
+              echo ""
+              echo "=== Last 100 lines of log file ==="
+              tail -n 100 "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_De.log"
             fi
           fi
       
@@ -184,16 +212,39 @@ jobs:
           latexmk_shell_escape: false
         continue-on-error: true
       
-      - name: Check compilation result
+      - name: Check compilation result and analyze errors
         if: steps.check-file.outputs.exists == 'true' && always()
         run: |
           if [ -f "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_En.pdf" ]; then
             echo "✅ English Chapter ${{ matrix.chapter }} compiled successfully"
+            PDF_SIZE=$(du -h "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_En.pdf" | cut -f1)
+            echo "📄 PDF size: $PDF_SIZE"
           else
             echo "❌ English Chapter ${{ matrix.chapter }} failed to compile"
             if [ -f "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_En.log" ]; then
-              echo "=== Last 50 lines of log file ==="
-              tail -n 50 "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_En.log"
+              echo ""
+              echo "=== Error Analysis ==="
+              echo "Searching for common LaTeX errors..."
+              
+              # Check for specific error patterns
+              if grep -q "Undefined control sequence" "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_En.log"; then
+                echo "⚠️  Found: Undefined control sequence"
+                grep -A 2 "Undefined control sequence" "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_En.log" | head -10
+              fi
+              
+              if grep -q "Package.*not found" "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_En.log"; then
+                echo "⚠️  Found: Missing LaTeX package"
+                grep "Package.*not found" "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_En.log"
+              fi
+              
+              if grep -q "LaTeX Error" "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_En.log"; then
+                echo "⚠️  Found: LaTeX Error"
+                grep -A 3 "LaTeX Error" "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_En.log" | head -15
+              fi
+              
+              echo ""
+              echo "=== Last 100 lines of log file ==="
+              tail -n 100 "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_En.log"
             fi
           fi
       
