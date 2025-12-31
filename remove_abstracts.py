@@ -12,7 +12,7 @@ def remove_abstract(content):
     return content
 
 # Process German section files
-de_dir = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/de_DVFT/tex_kapitel'
+de_dir = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/de_FFGFT/tex_kapitel'
 
 print("Removing abstract environments from German section files...")
 for filename in os.listdir(de_dir):
@@ -30,7 +30,7 @@ for filename in os.listdir(de_dir):
             print(f"  ✓ Fixed: {filename}")
 
 # Process English section files
-en_dir = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/en_DVFT/tex_kapitel'
+en_dir = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/en_FFGFT/tex_kapitel'
 
 print("\nRemoving abstract environments from English section files...")
 for filename in os.listdir(en_dir):
