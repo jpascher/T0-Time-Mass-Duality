@@ -22,7 +22,7 @@ def fix_german_quotes(content):
     return content
 
 # Process all German tex files
-de_dir = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/de_DVFT/tex_kapitel'
+de_dir = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/de_FFGFT/tex_kapitel'
 
 files_to_fix = []
 for filename in os.listdir(de_dir):

@@ -28,7 +28,7 @@ def convert_abstract_to_section_en(content):
     return content
 
 # Process German chapter files (original files, not section files)
-de_dir = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/de_DVFT/tex_kapitel'
+de_dir = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/de_FFGFT/tex_kapitel'
 
 print("Converting abstract to section in German chapter files...")
 for filename in os.listdir(de_dir):
@@ -47,7 +47,7 @@ for filename in os.listdir(de_dir):
             print(f"  ✓ Converted: {filename}")
 
 # Process English chapter files
-en_dir = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/en_DVFT/tex_kapitel'
+en_dir = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/en_FFGFT/tex_kapitel'
 
 print("\nConverting abstract to section in English chapter files...")
 for filename in os.listdir(en_dir):

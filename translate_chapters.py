@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Script to translate German LaTeX DVFT chapters to English.
+Script to translate German LaTeX FFGFT chapters to English.
 This script processes chapters systematically, replacing German text with English
 while preserving all LaTeX structures, equations, and formatting.
 """
@@ -66,8 +66,8 @@ def translate_file(input_path, output_path):
 def main():
     """Main translation function."""
     base_dir = Path(__file__).parent
-    de_dir = base_dir / '2/tex-n/de_DVFT/tex_kapitel'
-    en_dir = base_dir / '2/tex-n/en_DVFT/tex_kapitel'
+    de_dir = base_dir / '2/tex-n/de_FFGFT/tex_kapitel'
+    en_dir = base_dir / '2/tex-n/en_FFGFT/tex_kapitel'
     
     # Ensure output directory exists
     en_dir.mkdir(parents=True, exist_ok=True)
