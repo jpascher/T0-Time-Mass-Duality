@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-T0 Theory: DVFT Chapter Converter with T0 Integration
+T0 Theory: FFGFT Chapter Converter with T0 Integration
 ======================================================
 
-This script converts DVFT chapters to LaTeX format with T0 theory integration,
-cross-references to T0 documents, and alignment with the DVFT_alles_De.tex framework.
+This script converts FFGFT chapters to LaTeX format with T0 theory integration,
+cross-references to T0 documents, and alignment with the FFGFT_alles_De.tex framework.
 
 Usage:
-    python3 convert_dvft_chapters.py [--source DVFT.txt] [--output-dir DIR]
+    python3 convert_ffgft_chapters.py [--source FFGFT.txt] [--output-dir DIR]
 
 Author: Johann Pascher / Copilot
 Date: 2025
@@ -44,20 +44,20 @@ T0_REFERENCE_MAP = {
 }
 
 
-class DVFTChapterConverter:
-    """Converts DVFT text chapters to LaTeX with T0 integration."""
+class FFGFTChapterConverter:
+    """Converts FFGFT text chapters to LaTeX with T0 integration."""
     
     def __init__(self, preamble_path="../T0_preamble_shared_De.tex"):
         self.preamble_path = preamble_path
         self.chapter_number = 0
     
-    def extract_chapters(self, dvft_text):
-        """Extract individual chapters from the full DVFT text."""
+    def extract_chapters(self, ffgft_text):
+        """Extract individual chapters from the full FFGFT text."""
         chapters = []
         
         # Split by CHAPTER markers
         chapter_pattern = r'CHAPTER\s+(\d+):\s*([^\n]+)'
-        parts = re.split(chapter_pattern, dvft_text)
+        parts = re.split(chapter_pattern, ffgft_text)
         
         # First part is introduction/abstract
         if parts[0].strip():
@@ -108,13 +108,13 @@ class DVFTChapterConverter:
         return modified_content
     
     def adapt_to_t0_terminology(self, content):
-        """Adapt DVFT terminology to T0 theory framework."""
+        """Adapt FFGFT terminology to T0 theory framework."""
         adaptations = {
             r'vacuum field\s+𝜙\(𝑥\)': r'T0-Vakuumfeld $\\Phi(x)$ (abgeleitet aus $\\Delta m(x,t)$)',
             r'vacuum amplitude\s+𝜌\(𝑥\)': r'Vakuumamplitude $\\rho(x)$ ($\\propto m(x,t) = 1/T(x,t)$)',
             r'vacuum phase\s+θ\(𝑥\)': r'Vakuumphase $\\theta(x)$ (aus T0-Knoten-Rotation)',
             r'𝜙\(𝑥\)\s*=\s*𝜌\(𝑥\)𝑒\s*𝑖𝜃\(𝑥\)': r'$\\Phi(x) = \\rho(x)e^{i\\theta(x)}$ (T0-abgeleitet)',
-            r'DVFT postulates': r'DVFT (als effektive phänomenologische Schicht von T0) postuliert',
+            r'FFGFT postulates': r'FFGFT (als effektive phänomenologische Schicht von T0) postuliert',
             r'(?<!T0-)vacuum': r'T0-Vakuum',
         }
         
@@ -227,7 +227,7 @@ class DVFTChapterConverter:
         chapter_id = f"{chapter_num:02d}"
         safe_title = re.sub(r'[^\w\s-]', '', chapter_title)
         safe_title = re.sub(r'[-\s]+', '_', safe_title)
-        filename = f"201_{chapter_id}_DVFT_{safe_title}_De.tex"
+        filename = f"201_{chapter_id}_FFGFT_{safe_title}_De.tex"
         output_path = os.path.join(output_dir, filename)
         
         # Create t0box summary if this is introduction
@@ -235,7 +235,7 @@ class DVFTChapterConverter:
         if chapter_num == 0:
             t0_note = '''
 \\begin{t0box}[T0-Anpassung]
-Dieses Dokument präsentiert die Dynamische Vakuum-Feldtheorie (DVFT), vollständig angepasst und integriert in die T0 Zeit-Masse-Dualitätstheorie. Alle DVFT-Konzepte werden aus T0-Prinzipien abgeleitet:
+Dieses Dokument präsentiert die Dynamische Vakuum-Feldtheorie (FFGFT), vollständig angepasst und integriert in die T0 Zeit-Masse-Dualitätstheorie. Alle FFGFT-Konzepte werden aus T0-Prinzipien abgeleitet:
 \\begin{itemize}
 \\item Vakuumfeld $\\Phi(x)$ $\\rightarrow$ abgeleitet aus T0-Massenschwankungsfeld $\\Delta m(x,t)$
 \\item Vakuumamplitude $\\rho(x)$ $\\rightarrow$ entspricht $m(x,t) = 1/T(x,t)$ (T0-Dualität)
@@ -251,7 +251,7 @@ Querverweise zu relevanten T0-Dokumenten sind als Fußnoten enthalten.
 
 \\input{{{self.preamble_path}}}
 
-\\title{{DVFT Kapitel {chapter_num}: {chapter_title}\\\\
+\\title{{FFGFT Kapitel {chapter_num}: {chapter_title}\\\\
 \\large Angepasst an T0 Zeit-Masse-Dualitätstheorie}}
 
 \\author{{Originalkonzept: Satish B. Thorwe\\\\
@@ -278,7 +278,7 @@ Dieses Kapitel steht in Zusammenhang mit folgenden T0-Dokumenten im Repository \
   \\item \\texttt{{002\\_T0\\_Grundlagen\\_De.pdf}} -- T0 Zeit-Masse-Dualität Grundlagen
   \\item \\texttt{{004\\_T0\\_Energie\\_De.pdf}} -- T0 Energiefeld-Theorie
   \\item \\texttt{{009\\_T0\\_xi\\_ursprung\\_De.pdf}} -- Ursprung des geometrischen Parameters $\\xi$
-  \\item \\texttt{{201\\_DVFT-alles\\_De.pdf}} -- Vollständiges DVFT-Dokument (Rahmenwerk)
+  \\item \\texttt{{201\\_FFGFT-alles\\_De.pdf}} -- Vollständiges FFGFT-Dokument (Rahmenwerk)
 \\end{{itemize}}
 
 \\end{{document}}
@@ -295,12 +295,12 @@ Dieses Kapitel steht in Zusammenhang mit folgenden T0-Dokumenten im Repository \
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Convert DVFT chapters to LaTeX with T0 integration'
+        description='Convert FFGFT chapters to LaTeX with T0 integration'
     )
     parser.add_argument(
         '--source',
-        default='2/tex-n/DVFT.txt',
-        help='Source DVFT text file (default: 2/tex-n/DVFT.txt)'
+        default='2/tex-n/FFGFT.txt',
+        help='Source FFGFT text file (default: 2/tex-n/FFGFT.txt)'
     )
     parser.add_argument(
         '--output-dir',
@@ -314,7 +314,7 @@ def main():
     print(f"Reading source file: {args.source}")
     try:
         with open(args.source, 'r', encoding='utf-8') as f:
-            dvft_text = f.read()
+            ffgft_text = f.read()
     except FileNotFoundError:
         print(f"Error: Source file not found: {args.source}")
         return 1
@@ -323,11 +323,11 @@ def main():
         return 1
     
     # Initialize converter
-    converter = DVFTChapterConverter()
+    converter = FFGFTChapterConverter()
     
     # Extract chapters
     print("Extracting chapters...")
-    chapters = converter.extract_chapters(dvft_text)
+    chapters = converter.extract_chapters(ffgft_text)
     print(f"Found {len(chapters)} chapters")
     
     # Convert each chapter

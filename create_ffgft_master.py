@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Create master DVFT document that includes all chapters
+Create master FFGFT document that includes all chapters
 """
 
 import os
@@ -106,7 +106,7 @@ def create_content_files(chapters_dir, output_dir):
     """Create content-only versions of all chapters"""
     os.makedirs(output_dir, exist_ok=True)
     
-    chapter_files = sorted([f for f in os.listdir(chapters_dir) if f.startswith('201_') and '_DVFT_' in f and f.endswith('.tex')])
+    chapter_files = sorted([f for f in os.listdir(chapters_dir) if f.startswith('201_') and '_FFGFT_' in f and f.endswith('.tex')])
     
     for chapter_file in chapter_files:
         input_path = os.path.join(chapters_dir, chapter_file)
@@ -126,14 +126,14 @@ def create_content_files(chapters_dir, output_dir):
 def create_master_document(chapters_dir, content_dir, output_file):
     """Create master document that includes all chapters"""
     
-    chapter_files = sorted([f for f in os.listdir(chapters_dir) if f.startswith('201_') and 'DVFT_' in f and f.endswith('.tex')])
+    chapter_files = sorted([f for f in os.listdir(chapters_dir) if f.startswith('201_') and 'FFGFT_' in f and f.endswith('.tex')])
     
     # Create master document
     master_content = r'''\documentclass[12pt,a4paper]{book}
 
 \input{../T0_preamble_shared_De.tex}
 
-\title{Angepasste Dynamische Vakuum-Feldtheorie (DVFT)\\
+\title{Angepasste Dynamische Vakuum-Feldtheorie (FFGFT)\\
 \large Vollständige Kapitelsammlung\\
 Integriert in die T0 Zeit-Masse-Dualitätstheorie}
 
@@ -151,9 +151,9 @@ Vollständig Angepasst und Integriert: Johann Pascher}
 \newpage
 
 \begin{t0box}[Über dieses Dokument]
-Dieses Dokument vereint alle 44 Kapitel der angepassten Dynamischen Vakuum-Feldtheorie (DVFT), vollständig integriert in die T0 Zeit-Masse-Dualitätstheorie. 
+Dieses Dokument vereint alle 44 Kapitel der angepassten Dynamischen Vakuum-Feldtheorie (FFGFT), vollständig integriert in die T0 Zeit-Masse-Dualitätstheorie. 
 
-Alle DVFT-Konzepte werden aus T0-Prinzipien abgeleitet:
+Alle FFGFT-Konzepte werden aus T0-Prinzipien abgeleitet:
 \begin{itemize}
 \item Vakuumfeld $\Phi(x)$ aus T0-Massenschwankungsfeld $\Delta m(x,t)$
 \item Vakuumamplitude $\rho(x)$ entspricht $m(x,t) = 1/T(x,t)$
@@ -263,10 +263,10 @@ def main():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     chapters_dir = os.path.join(base_dir, '2/tex-n/de_standalone')
     content_dir = os.path.join(chapters_dir, 'content_only')
-    master_file = os.path.join(chapters_dir, 'DVFT_Complete_Master_De.tex')
+    master_file = os.path.join(chapters_dir, 'FFGFT_Complete_Master_De.tex')
     
     print("="*70)
-    print(" " * 15 + "DVFT Master Document Creation & Compilation")
+    print(" " * 15 + "FFGFT Master Document Creation & Compilation")
     print("="*70)
     
     # Step 1: Create content-only files
@@ -292,7 +292,7 @@ def main():
         pdf_file = master_file.replace('.tex', '.pdf')
         print("✓✓✓ SUCCESS ✓✓✓")
         print(f"\nMaster PDF created: {os.path.relpath(pdf_file, base_dir)}")
-        print("\nAll 44 DVFT chapters have been compiled into a single document!")
+        print("\nAll 44 FFGFT chapters have been compiled into a single document!")
     else:
         print("✗✗✗ COMPILATION FAILED ✗✗✗")
         print("\nThe master document was created but PDF compilation had errors.")

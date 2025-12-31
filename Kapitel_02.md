@@ -2,7 +2,7 @@
 
 ## Why Vacuum is a Dynamic Field (Enhanced for T0 Theory)
 
-In T0 Theory, the Dynamic Vacuum Field Theory (DVFT) is extended by incorporating the time-mass duality principle:
+In T0 Theory, the Fundamental Fractal-Geometric Field Theory (FFGFT) is extended by incorporating the time-mass duality principle:
 \[
 T(x,t) \cdot m(x,t) = 1
 \]

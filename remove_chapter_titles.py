@@ -14,7 +14,7 @@ def clean_section_title(content):
     return content
 
 # Process German section files
-de_dir = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/de_DVFT/tex_kapitel'
+de_dir = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/de_FFGFT/tex_kapitel'
 
 print("Removing chapter titles from German section files...")
 count = 0
@@ -37,7 +37,7 @@ for filename in os.listdir(de_dir):
 print(f"\nCleaned {count} German section files")
 
 # Process English section files
-en_dir = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/en_DVFT/tex_kapitel'
+en_dir = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/en_FFGFT/tex_kapitel'
 
 print("\nRemoving chapter titles from English section files...")
 count = 0

@@ -30,7 +30,7 @@ def create_section_file(source_file, output_file):
     return False
 
 # Process German files
-de_dir = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/de_DVFT/tex_kapitel'
+de_dir = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/de_FFGFT/tex_kapitel'
 de_files = [
     '202a_1-11_De.tex',
 ] + [f'kapitel_{i}a_De.tex' for i in range(12, 45)]
@@ -48,7 +48,7 @@ for filename in de_files:
         print(f"  ⚠ Not found: {filename}")
 
 # Process English files
-en_dir = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/en_DVFT/tex_kapitel'
+en_dir = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/en_FFGFT/tex_kapitel'
 en_files = [
     '202a_1-11_En.tex',
 ] + [f'kapitel_{i}a_En.tex' for i in range(12, 45)]
