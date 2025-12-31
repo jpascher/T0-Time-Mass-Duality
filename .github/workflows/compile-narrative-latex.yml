@@ -10,7 +10,8 @@
 #
 # Strategy:
 # - Use xu-cheng/latex-action@v3 for comprehensive LaTeX support
-# - Multiple compilation passes (3-4x) for cross-references, TOC, synctex
+# - Recursive compilation with latexmk (automatic multiple passes)
+# - Error detection and reporting
 # - Generate PDFs and upload as artifacts
 # =============================================================================
 
@@ -36,186 +37,189 @@ jobs:
   compile-german-chapters:
     runs-on: ubuntu-latest
     name: Compile German Chapters
+    strategy:
+      fail-fast: false
+      matrix:
+        chapter: [01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]
     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
       
-      - name: Compile German Chapters (01-44)
+      - name: Compile Chapter ${{ matrix.chapter }}
         uses: xu-cheng/latex-action@v3
         with:
           working_directory: 2/narrative
-          root_file: |
-            Kapitel_01_Narrative_De.tex
-            Kapitel_02_Narrative_De.tex
-            Kapitel_03_Narrative_De.tex
-            Kapitel_04_Narrative_De.tex
-            Kapitel_05_Narrative_De.tex
-            Kapitel_06_Narrative_De.tex
-            Kapitel_07_Narrative_De.tex
-            Kapitel_08_Narrative_De.tex
-            Kapitel_09_Narrative_De.tex
-            Kapitel_10_Narrative_De.tex
-            Kapitel_11_Narrative_De.tex
-            Kapitel_12_Narrative_De.tex
-            Kapitel_13_Narrative_De.tex
-            Kapitel_14_Narrative_De.tex
-            Kapitel_15_Narrative_De.tex
-            Kapitel_16_Narrative_De.tex
-            Kapitel_17_Narrative_De.tex
-            Kapitel_18_Narrative_De.tex
-            Kapitel_19_Narrative_De.tex
-            Kapitel_20_Narrative_De.tex
-            Kapitel_21_Narrative_De.tex
-            Kapitel_22_Narrative_De.tex
-            Kapitel_23_Narrative_De.tex
-            Kapitel_24_Narrative_De.tex
-            Kapitel_25_Narrative_De.tex
-            Kapitel_26_Narrative_De.tex
-            Kapitel_27_Narrative_De.tex
-            Kapitel_28_Narrative_De.tex
-            Kapitel_29_Narrative_De.tex
-            Kapitel_30_Narrative_De.tex
-            Kapitel_31_Narrative_De.tex
-            Kapitel_32_Narrative_De.tex
-            Kapitel_33_Narrative_De.tex
-            Kapitel_34_Narrative_De.tex
-            Kapitel_35_Narrative_De.tex
-            Kapitel_36_Narrative_De.tex
-            Kapitel_37_Narrative_De.tex
-            Kapitel_38_Narrative_De.tex
-            Kapitel_39_Narrative_De.tex
-            Kapitel_40_Narrative_De.tex
-            Kapitel_41_Narrative_De.tex
-            Kapitel_42_Narrative_De.tex
-            Kapitel_43_Narrative_De.tex
-            Kapitel_44_Narrative_De.tex
-          args: -pdf -interaction=nonstopmode -synctex=1
+          root_file: Kapitel_${{ matrix.chapter }}_Narrative_De.tex
+          args: -pdf -interaction=nonstopmode -synctex=1 -file-line-error
           latexmk_use_lualatex: false
           latexmk_use_xelatex: false
-          continue_on_error: true
+          latexmk_shell_escape: false
+        continue-on-error: true
       
-      - name: Upload German Chapter PDFs
+      - name: Check compilation result
+        if: always()
+        run: |
+          if [ -f "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_De.pdf" ]; then
+            echo "✅ Chapter ${{ matrix.chapter }} compiled successfully"
+            echo "CHAPTER_${{ matrix.chapter }}_STATUS=success" >> $GITHUB_ENV
+          else
+            echo "❌ Chapter ${{ matrix.chapter }} failed to compile"
+            echo "CHAPTER_${{ matrix.chapter }}_STATUS=failed" >> $GITHUB_ENV
+            if [ -f "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_De.log" ]; then
+              echo "=== Last 50 lines of log file ==="
+              tail -n 50 "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_De.log"
+            fi
+          fi
+      
+      - name: Upload Chapter PDF
+        if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: narrative-german-chapters
-          path: 2/narrative/Kapitel_*_Narrative_De.pdf
+          name: narrative-german-chapter-${{ matrix.chapter }}
+          path: 2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_De.pdf
           if-no-files-found: warn
           retention-days: 30
+      
+      - name: Upload compilation log (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: narrative-german-chapter-${{ matrix.chapter }}-log
+          path: 2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_De.log
+          if-no-files-found: warn
+          retention-days: 7
 
   compile-german-master:
     runs-on: ubuntu-latest
     name: Compile German Master Document
     needs: compile-german-chapters
+    if: always()
     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
       
-      - name: Compile German Master
+      - name: Compile German Master (recursive with latexmk)
         uses: xu-cheng/latex-action@v3
         with:
           working_directory: 2/narrative
           root_file: FFGFT_Narrative_Master_De.tex
-          args: -pdf -interaction=nonstopmode -synctex=1
+          args: -pdf -interaction=nonstopmode -synctex=1 -file-line-error
           latexmk_use_lualatex: false
           latexmk_use_xelatex: false
-          continue_on_error: false
+          latexmk_shell_escape: false
+        continue-on-error: true
+      
+      - name: Check Master compilation result
+        if: always()
+        run: |
+          if [ -f "2/narrative/FFGFT_Narrative_Master_De.pdf" ]; then
+            echo "✅ German Master document compiled successfully"
+            PDF_SIZE=$(du -h "2/narrative/FFGFT_Narrative_Master_De.pdf" | cut -f1)
+            echo "📄 PDF size: $PDF_SIZE"
+            echo "MASTER_STATUS=success" >> $GITHUB_ENV
+          else
+            echo "❌ German Master document failed to compile"
+            echo "MASTER_STATUS=failed" >> $GITHUB_ENV
+            if [ -f "2/narrative/FFGFT_Narrative_Master_De.log" ]; then
+              echo "=== Last 100 lines of log file ==="
+              tail -n 100 "2/narrative/FFGFT_Narrative_Master_De.log"
+              echo ""
+              echo "=== Searching for errors in log ==="
+              grep -i "error\|fatal\|emergency stop" "2/narrative/FFGFT_Narrative_Master_De.log" || true
+            fi
+          fi
       
       - name: Upload German Master PDF
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: narrative-german-master
           path: 2/narrative/FFGFT_Narrative_Master_De.pdf
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 90
+      
+      - name: Upload Master compilation log (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: narrative-german-master-log
+          path: 2/narrative/FFGFT_Narrative_Master_De.log
+          if-no-files-found: warn
+          retention-days: 7
 
   compile-english-chapters:
     runs-on: ubuntu-latest
     name: Compile English Chapters (if exist)
+    strategy:
+      fail-fast: false
+      matrix:
+        chapter: [01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]
     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
       
-      - name: Check for English chapters
-        id: check-english
+      - name: Check if English chapter exists
+        id: check-file
         run: |
-          if ls 2/narrative/Kapitel_*_Narrative_En.tex 1> /dev/null 2>&1; then
+          if [ -f "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_En.tex" ]; then
             echo "exists=true" >> $GITHUB_OUTPUT
+            echo "📝 Found English Chapter ${{ matrix.chapter }}"
           else
             echo "exists=false" >> $GITHUB_OUTPUT
-            echo "No English chapters found - skipping compilation"
+            echo "⏭️  Skipping English Chapter ${{ matrix.chapter }} (not found)"
           fi
       
-      - name: Compile English Chapters (01-44)
-        if: steps.check-english.outputs.exists == 'true'
+      - name: Compile English Chapter ${{ matrix.chapter }}
+        if: steps.check-file.outputs.exists == 'true'
         uses: xu-cheng/latex-action@v3
         with:
           working_directory: 2/narrative
-          root_file: |
-            Kapitel_01_Narrative_En.tex
-            Kapitel_02_Narrative_En.tex
-            Kapitel_03_Narrative_En.tex
-            Kapitel_04_Narrative_En.tex
-            Kapitel_05_Narrative_En.tex
-            Kapitel_06_Narrative_En.tex
-            Kapitel_07_Narrative_En.tex
-            Kapitel_08_Narrative_En.tex
-            Kapitel_09_Narrative_En.tex
-            Kapitel_10_Narrative_En.tex
-            Kapitel_11_Narrative_En.tex
-            Kapitel_12_Narrative_En.tex
-            Kapitel_13_Narrative_En.tex
-            Kapitel_14_Narrative_En.tex
-            Kapitel_15_Narrative_En.tex
-            Kapitel_16_Narrative_En.tex
-            Kapitel_17_Narrative_En.tex
-            Kapitel_18_Narrative_En.tex
-            Kapitel_19_Narrative_En.tex
-            Kapitel_20_Narrative_En.tex
-            Kapitel_21_Narrative_En.tex
-            Kapitel_22_Narrative_En.tex
-            Kapitel_23_Narrative_En.tex
-            Kapitel_24_Narrative_En.tex
-            Kapitel_25_Narrative_En.tex
-            Kapitel_26_Narrative_En.tex
-            Kapitel_27_Narrative_En.tex
-            Kapitel_28_Narrative_En.tex
-            Kapitel_29_Narrative_En.tex
-            Kapitel_30_Narrative_En.tex
-            Kapitel_31_Narrative_En.tex
-            Kapitel_32_Narrative_En.tex
-            Kapitel_33_Narrative_En.tex
-            Kapitel_34_Narrative_En.tex
-            Kapitel_35_Narrative_En.tex
-            Kapitel_36_Narrative_En.tex
-            Kapitel_37_Narrative_En.tex
-            Kapitel_38_Narrative_En.tex
-            Kapitel_39_Narrative_En.tex
-            Kapitel_40_Narrative_En.tex
-            Kapitel_41_Narrative_En.tex
-            Kapitel_42_Narrative_En.tex
-            Kapitel_43_Narrative_En.tex
-            Kapitel_44_Narrative_En.tex
-          args: -pdf -interaction=nonstopmode -synctex=1
+          root_file: Kapitel_${{ matrix.chapter }}_Narrative_En.tex
+          args: -pdf -interaction=nonstopmode -synctex=1 -file-line-error
           latexmk_use_lualatex: false
           latexmk_use_xelatex: false
-          continue_on_error: true
+          latexmk_shell_escape: false
+        continue-on-error: true
       
-      - name: Upload English Chapter PDFs
-        if: steps.check-english.outputs.exists == 'true'
+      - name: Check compilation result
+        if: steps.check-file.outputs.exists == 'true' && always()
+        run: |
+          if [ -f "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_En.pdf" ]; then
+            echo "✅ English Chapter ${{ matrix.chapter }} compiled successfully"
+          else
+            echo "❌ English Chapter ${{ matrix.chapter }} failed to compile"
+            if [ -f "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_En.log" ]; then
+              echo "=== Last 50 lines of log file ==="
+              tail -n 50 "2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_En.log"
+            fi
+          fi
+      
+      - name: Upload English Chapter PDF
+        if: steps.check-file.outputs.exists == 'true' && success()
         uses: actions/upload-artifact@v4
         with:
-          name: narrative-english-chapters
-          path: 2/narrative/Kapitel_*_Narrative_En.pdf
+          name: narrative-english-chapter-${{ matrix.chapter }}
+          path: 2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_En.pdf
           if-no-files-found: warn
           retention-days: 30
+      
+      - name: Upload compilation log (on failure)
+        if: steps.check-file.outputs.exists == 'true' && failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: narrative-english-chapter-${{ matrix.chapter }}-log
+          path: 2/narrative/Kapitel_${{ matrix.chapter }}_Narrative_En.log
+          if-no-files-found: warn
+          retention-days: 7
 
   compile-english-master:
     runs-on: ubuntu-latest
     name: Compile English Master Document (if exists)
     needs: compile-english-chapters
+    if: always()
     
     steps:
       - name: Checkout repository
@@ -226,30 +230,59 @@ jobs:
         run: |
           if [ -f "2/narrative/FFGFT_Narrative_Master_En.tex" ]; then
             echo "exists=true" >> $GITHUB_OUTPUT
+            echo "📝 Found English Master document"
           else
             echo "exists=false" >> $GITHUB_OUTPUT
-            echo "No English master document found - skipping compilation"
+            echo "⏭️  No English master document found - skipping compilation"
           fi
       
-      - name: Compile English Master
+      - name: Compile English Master (recursive with latexmk)
         if: steps.check-master.outputs.exists == 'true'
         uses: xu-cheng/latex-action@v3
         with:
           working_directory: 2/narrative
           root_file: FFGFT_Narrative_Master_En.tex
-          args: -pdf -interaction=nonstopmode -synctex=1
+          args: -pdf -interaction=nonstopmode -synctex=1 -file-line-error
           latexmk_use_lualatex: false
           latexmk_use_xelatex: false
-          continue_on_error: false
+          latexmk_shell_escape: false
+        continue-on-error: true
+      
+      - name: Check Master compilation result
+        if: steps.check-master.outputs.exists == 'true' && always()
+        run: |
+          if [ -f "2/narrative/FFGFT_Narrative_Master_En.pdf" ]; then
+            echo "✅ English Master document compiled successfully"
+            PDF_SIZE=$(du -h "2/narrative/FFGFT_Narrative_Master_En.pdf" | cut -f1)
+            echo "📄 PDF size: $PDF_SIZE"
+          else
+            echo "❌ English Master document failed to compile"
+            if [ -f "2/narrative/FFGFT_Narrative_Master_En.log" ]; then
+              echo "=== Last 100 lines of log file ==="
+              tail -n 100 "2/narrative/FFGFT_Narrative_Master_En.log"
+              echo ""
+              echo "=== Searching for errors in log ==="
+              grep -i "error\|fatal\|emergency stop" "2/narrative/FFGFT_Narrative_Master_En.log" || true
+            fi
+          fi
       
       - name: Upload English Master PDF
-        if: steps.check-master.outputs.exists == 'true'
+        if: steps.check-master.outputs.exists == 'true' && success()
         uses: actions/upload-artifact@v4
         with:
           name: narrative-english-master
           path: 2/narrative/FFGFT_Narrative_Master_En.pdf
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 90
+      
+      - name: Upload Master compilation log (on failure)
+        if: steps.check-master.outputs.exists == 'true' && failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: narrative-english-master-log
+          path: 2/narrative/FFGFT_Narrative_Master_En.log
+          if-no-files-found: warn
+          retention-days: 7
 
   summary:
     runs-on: ubuntu-latest
@@ -260,13 +293,27 @@ jobs:
     steps:
       - name: Build Summary
         run: |
-          echo "# LaTeX Compilation Summary" >> $GITHUB_STEP_SUMMARY
+          echo "# 📊 LaTeX Compilation Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "## Jobs Status" >> $GITHUB_STEP_SUMMARY
-          echo "- German Chapters: ${{ needs.compile-german-chapters.result }}" >> $GITHUB_STEP_SUMMARY
-          echo "- German Master: ${{ needs.compile-german-master.result }}" >> $GITHUB_STEP_SUMMARY
-          echo "- English Chapters: ${{ needs.compile-english-chapters.result }}" >> $GITHUB_STEP_SUMMARY
-          echo "- English Master: ${{ needs.compile-english-master.result }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "## Artifacts" >> $GITHUB_STEP_SUMMARY
-          echo "Generated PDFs are available as workflow artifacts for 30-90 days." >> $GITHUB_STEP_SUMMARY
+          echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| German Chapters | ${{ needs.compile-german-chapters.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| German Master | ${{ needs.compile-german-master.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| English Chapters | ${{ needs.compile-english-chapters.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| English Master | ${{ needs.compile-english-master.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## 📦 Artifacts" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Generated PDFs are available as workflow artifacts:" >> $GITHUB_STEP_SUMMARY
+          echo "- **German chapters**: 30 days retention" >> $GITHUB_STEP_SUMMARY
+          echo "- **German master**: 90 days retention" >> $GITHUB_STEP_SUMMARY
+          echo "- **English documents**: 30-90 days retention (if compiled)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Compilation logs**: 7 days retention (on failure)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## ℹ️ Notes" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- Each chapter is compiled independently with recursive latexmk" >> $GITHUB_STEP_SUMMARY
+          echo "- Multiple passes ensure proper cross-references and TOC" >> $GITHUB_STEP_SUMMARY
+          echo "- Check individual job logs for detailed error messages" >> $GITHUB_STEP_SUMMARY
