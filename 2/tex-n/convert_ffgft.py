@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-DVFT Document Converter
-Converts DVFT.txt to LaTeX format (English) and generates German translation
+FFGFT Document Converter
+Converts FFGFT.txt to LaTeX format (English) and generates German translation
 """
 
 import re
 import sys
 import os
 
-def read_dvft_source(filename):
-    """Read the DVFT.txt source file"""
+def read_ffgft_source(filename):
+    """Read the FFGFT.txt source file"""
     with open(filename, 'r', encoding='utf-8') as f:
         return f.readlines()
 
@@ -77,10 +77,10 @@ def generate_latex_preamble():
 \geometry{margin=1in}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[C]{Dynamic Vacuum Field Theory}
+\fancyhead[C]{Fundamental Fractal-Geometric Field Theory}
 \fancyfoot[C]{\thepage}
 
-\title{Dynamic Vacuum Field Theory}
+\title{Fundamental Fractal-Geometric Field Theory}
 \author{Satish B. Thorwe, MSc\\Robert Gordon University, Aberdeen UK}
 \date{}
 
@@ -89,7 +89,7 @@ def generate_latex_preamble():
 \maketitle
 
 \begin{abstract}
-This paper presents a unified theoretical model in which spacetime curvature arises from distortions in a dynamic vacuum field described by a complex scalar $\phi(x)=\rho(x)e^{i\theta(x)}$ where $\phi(x)$ is dynamic vacuum field, $\rho(x)$ is vacuum amplitude and $\theta(x)$ is vacuum phase. The vacuum possesses an intrinsic field with its phase evolves linearly with time and matter locally perturbs it. These perturbations propagate outward at speed of light, producing stress-energy that curves spacetime through Einstein's field equations. The model provides a physical and causal explanation for curvature at a distance and serves as a bridge between Quantum Mechanics and classical General Relativity. Complete mathematical framework for Dynamic Vacuum Field Theory (DVFT) is presented with its applications in cosmology and quantum mechanics.
+This paper presents a unified theoretical model in which spacetime curvature arises from distortions in a dynamic vacuum field described by a complex scalar $\phi(x)=\rho(x)e^{i\theta(x)}$ where $\phi(x)$ is dynamic vacuum field, $\rho(x)$ is vacuum amplitude and $\theta(x)$ is vacuum phase. The vacuum possesses an intrinsic field with its phase evolves linearly with time and matter locally perturbs it. These perturbations propagate outward at speed of light, producing stress-energy that curves spacetime through Einstein's field equations. The model provides a physical and causal explanation for curvature at a distance and serves as a bridge between Quantum Mechanics and classical General Relativity. Complete mathematical framework for Fundamental Fractal-Geometric Field Theory (FFGFT) is presented with its applications in cosmology and quantum mechanics.
 \end{abstract}
 
 \tableofcontents
@@ -180,7 +180,7 @@ def generate_german_translation_header():
 \maketitle
 
 \begin{abstract}
-Diese Arbeit präsentiert ein einheitliches theoretisches Modell, in dem die Raumzeit-Krümmung aus Verzerrungen in einem dynamischen Vakuumfeld entsteht, das durch ein komplexes Skalarfeld $\phi(x)=\rho(x)e^{i\theta(x)}$ beschrieben wird, wobei $\phi(x)$ das dynamische Vakuumfeld, $\rho(x)$ die Vakuumamplitude und $\theta(x)$ die Vakuumphase ist. Das Vakuum besitzt ein intrinsisches Feld, dessen Phase sich linear mit der Zeit entwickelt, und Materie stört es lokal. Diese Störungen breiten sich mit Lichtgeschwindigkeit aus und erzeugen Stress-Energie, die die Raumzeit durch Einsteins Feldgleichungen krümmt. Das Modell liefert eine physikalische und kausale Erklärung für Krümmung über Distanz und dient als Brücke zwischen Quantenmechanik und klassischer Allgemeiner Relativitätstheorie. Ein vollständiges mathematisches Rahmenwerk für die Dynamische Vakuumfeldtheorie (DVFT) wird mit ihren Anwendungen in Kosmologie und Quantenmechanik präsentiert.
+Diese Arbeit präsentiert ein einheitliches theoretisches Modell, in dem die Raumzeit-Krümmung aus Verzerrungen in einem dynamischen Vakuumfeld entsteht, das durch ein komplexes Skalarfeld $\phi(x)=\rho(x)e^{i\theta(x)}$ beschrieben wird, wobei $\phi(x)$ das dynamische Vakuumfeld, $\rho(x)$ die Vakuumamplitude und $\theta(x)$ die Vakuumphase ist. Das Vakuum besitzt ein intrinsisches Feld, dessen Phase sich linear mit der Zeit entwickelt, und Materie stört es lokal. Diese Störungen breiten sich mit Lichtgeschwindigkeit aus und erzeugen Stress-Energie, die die Raumzeit durch Einsteins Feldgleichungen krümmt. Das Modell liefert eine physikalische und kausale Erklärung für Krümmung über Distanz und dient als Brücke zwischen Quantenmechanik und klassischer Allgemeiner Relativitätstheorie. Ein vollständiges mathematisches Rahmenwerk für die Dynamische Vakuumfeldtheorie (FFGFT) wird mit ihren Anwendungen in Kosmologie und Quantenmechanik präsentiert.
 \end{abstract}
 
 \tableofcontents
@@ -190,11 +190,11 @@ Diese Arbeit präsentiert ein einheitliches theoretisches Modell, in dem die Rau
 
 def main():
     """Main conversion function"""
-    print("Starting DVFT conversion...")
+    print("Starting FFGFT conversion...")
     
     # Read source
-    source_file = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/DVFT.txt'
-    lines = read_dvft_source(source_file)
+    source_file = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/FFGFT.txt'
+    lines = read_ffgft_source(source_file)
     print(f"Read {len(lines)} lines from source")
     
     # Parse chapters
@@ -211,7 +211,7 @@ def main():
     latex_en += generate_latex_footer()
     
     # Write English version
-    output_en = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/DVFT_En.tex'
+    output_en = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/FFGFT_En.tex'
     with open(output_en, 'w', encoding='utf-8') as f:
         f.write(latex_en)
     print(f"✓ English LaTeX written to {output_en} ({len(latex_en)} bytes)")
@@ -220,10 +220,10 @@ def main():
     print("Generating German version structure...")
     latex_de = generate_german_translation_header()
     latex_de += "\\section{Hinweis}\nDie vollständige deutsche Übersetzung wird maschinell erstellt und muss manuell überprüft werden.\n\n"
-    latex_de += "\\section{Einleitung}\nDVFT-Dokument - Automatische Konvertierung in Arbeit.\n\n"
+    latex_de += "\\section{Einleitung}\nFFGFT-Dokument - Automatische Konvertierung in Arbeit.\n\n"
     latex_de += generate_latex_footer()
     
-    output_de = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/DVFT_De.tex'
+    output_de = '/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality/2/tex-n/FFGFT_De.tex'
     with open(output_de, 'w', encoding='utf-8') as f:
         f.write(latex_de)
     print(f"✓ German LaTeX template written to {output_de}")

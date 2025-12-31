@@ -9,11 +9,11 @@ The origin of the universe is the deepest question in physics. Standard cosmolog
 Bang but does not explain why the universe started in a low-entropy, coherent state. Quantum Field Theory
 assumes vacuum structure but does not explain why the vacuum exists or why fields take the values they
 do. General Relativity describes geometry but cannot describe what spacetime physically is.
-Dynamic Vacuum Field Theory (DVFT) provides a coherent physical ontology explaining what the
+Fundamental Fractal-Geometric Field Theory (FFGFT) provides a coherent physical ontology explaining what the
 universe was before the Big Bang, why it began in a perfectly coherent state, and how vacuum amplitude,
 mass, forces, and time emerged. This chapter presents this explanation step by step.
-2. DVFT Foundations: Amplitude ρ and Phase θ
-DVFT states that the vacuum is a real physical medium with two intrinsic degrees of freedom:
+2. FFGFT Foundations: Amplitude ρ and Phase θ
+FFGFT states that the vacuum is a real physical medium with two intrinsic degrees of freedom:
 • ρ(x,t) — vacuum amplitude (controls inertia, curvature, mass)
 • θ(x,t) — vacuum phase (controls light propagation, coherence, quantum behavior)
 The relationship between amplitude and phase defines the universe’s dynamics. Time emerges from phase
@@ -54,7 +54,7 @@ IJFMR250664112 Volume 7, Issue 6, November-December 2025 32
 A pure-phase vacuum is therefore forced into perfect coherence. It is not a choice—it is the only
 mathematically and physically consistent state that can exist without amplitude.
 5. What Triggered the Emergence of Vacuum Amplitude ρ?
-DVFT proposes that amplitude emerged because the pure-phase vacuum became unstable. This instability
+FFGFT proposes that amplitude emerged because the pure-phase vacuum became unstable. This instability
 could arise from any or all of the following mechanisms:
 Mechanism A — Phase-Fluctuation Instability
 If the initial vacuum phase experienced even an infinitesimal disturbance (δθ ≠ 0), the vacuum would be
@@ -66,7 +66,7 @@ U(ρ) = λ(ρ² − ρ★²)²,
 then ρ = 0 is unstable and spontaneously rolls to ρ = ρ★. This resembles the Higgs mechanism but now
 arises from vacuum necessity, not arbitrary symmetry breaking.
 Mechanism C — Requirement for Time Evolution
-Time in DVFT is vacuum phase evolution. But without amplitude, c² = K₀/ρ₀ = undefined. Therefore, in
+Time in FFGFT is vacuum phase evolution. But without amplitude, c² = K₀/ρ₀ = undefined. Therefore, in
 order for time to exist, the vacuum must generate amplitude so that phase can propagate.
 Thus, amplitude appears because phase evolution requires a medium with stiffness and inertia.
 6. Time Begins: Birth of c = √(K₀/ρ₀)
@@ -99,7 +99,7 @@ IJFMR250664112 Volume 7, Issue 6, November-December 2025 33
 • massive bosons = amplitude-modulated phase.
 Thus, matter emerges naturally from vacuum structure.
 9. Why the Universe Started in a Low-Entropy State
-In DVFT, entropy corresponds to vacuum phase disorder. A pure-phase vacuum has:
+In FFGFT, entropy corresponds to vacuum phase disorder. A pure-phase vacuum has:
 • no gradients,
 • no decoherence,
 • no thermalization,
@@ -108,8 +108,8 @@ In DVFT, entropy corresponds to vacuum phase disorder. A pure-phase vacuum has:
 Therefore, the universe did not "begin" in a low-entropy state—it began in the only possible state: perfect
 coherence.
 Entropy increases only after amplitude appears and interactions begin.
-10. Summary: The DVFT Origin of the Universe
-The DVFT offers a complete physical explanation of the universe's beginning:
+10. Summary: The FFGFT Origin of the Universe
+The FFGFT offers a complete physical explanation of the universe's beginning:
 • The universe began as pure phase with ρ = 0 and θ = constant.
 • Perfect coherence was mandatory because no amplitude meant no dynamics.
 • Instability triggered amplitude emergence.

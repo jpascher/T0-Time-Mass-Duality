@@ -3,8 +3,8 @@
 NEUTRON LIFETIME DISCREPANCY RESOLVED
 1. Introduction
 This document presents a rigorous explanation of the neutron lifetime discrepancy using the Dynamic
-Vacuum Field Theory(DVFT). The discrepancy—≈879.5 s in bottle experiments vs ≈888.0 s in beam
-experiments—has persisted for more than a decade, resisting Standard Mode interpretation. DVFT
+Vacuum Field Theory(FFGFT). The discrepancy—≈879.5 s in bottle experiments vs ≈888.0 s in beam
+experiments—has persisted for more than a decade, resisting Standard Mode interpretation. FFGFT
 resolves the discrepancy by treating neutron decay as a vacuum–amplitude relaxation process sensitive to
 environmental vacuum configuration.
 2. The Neutron Lifetime Discrepancy
@@ -14,8 +14,8 @@ Two experimental techniques yield different lifetimes:
 Difference: ≈9 seconds (≈1%).
 Standard Model predicts a universal decay constant, so such a difference should not exist. The anomaly
 prompted speculative explanations (e.g., dark decay channels), none of which have empirical support.
-3. DVFT Foundations Relevant to Neutron Decay
-DVFT defines the vacuum field:
+3. FFGFT Foundations Relevant to Neutron Decay
+FFGFT defines the vacuum field:
 Φ(x,t) = ρ(x,t) e^{iθ(x,t)},
 where:
 • ρ = vacuum amplitude (curvature, mass-energy density),
@@ -27,8 +27,8 @@ Decay:
 n → p + e− + ν̄_e
 is not merely particle emission—it is a vacuum reconfiguration from a high-amplitude knot (neutron) to
 three smaller excitations.
-4. Why the Neutron Lifetime Depends on Environment in DVFT
-In DVFT, neutron decay rate depends on local vacuum amplitude ρ and stiffness K₀.
+4. Why the Neutron Lifetime Depends on Environment in FFGFT
+In FFGFT, neutron decay rate depends on local vacuum amplitude ρ and stiffness K₀.
 Bottle experiments confine neutrons in a finite region with:
 • magnetic/matter boundaries,
 • strong ∇θ suppression,
@@ -54,7 +54,7 @@ and the decay potential barrier is slightly higher.
 This yields:
 τ_beam > τ_bottle,
 which matches observations (≈888 s).
-6. Quantitative DVFT Estimate
+6. Quantitative FFGFT Estimate
 Decay rate Γ satisfies:
 Γ ∝ exp[-ΔU / E₀],
 where ΔU is the effective energy barrier.
@@ -63,11 +63,11 @@ Since:
 a small Δρ induces:
 ΔΓ/Γ ≈ 1%.
 For |Δρ|/ρ₀ ≈ 10⁻⁹ (typical inside traps),
-DVFT predicts:
+FFGFT predicts:
 Δτ ≈ 9 s,
 which matches the beam–bottle discrepancy precisely.
-7. DVFT Experimental Predictions
-DVFT predicts neutron lifetime should depend on:
+7. FFGFT Experimental Predictions
+FFGFT predicts neutron lifetime should depend on:
 1. Magnetic trap geometry.
 2. Trap material reflectivity.
 3. Local vacuum purity (residual gas modifies ρ).
@@ -84,15 +84,15 @@ None are observed.
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 54
-DVFT explains the discrepancy without new particles. The difference arises entirely from
+FFGFT explains the discrepancy without new particles. The difference arises entirely from
 vacuum-configuration dependence of decay.
 Conclusion
-DVFT resolves the neutron lifetime discrepancy by recognizing neutron decay as a vacuum–amplitude
+FFGFT resolves the neutron lifetime discrepancy by recognizing neutron decay as a vacuum–amplitude
 relaxation process sensitive to environmental vacuum conditions. Bottle confinement modifies the vacuum
 amplitude slightly, lowering the decay barrier, while beam conditions restore the natural decay rate. The
-1% difference follows directly from the amplitude–phase dynamics of the DVFT vacuum field.
+1% difference follows directly from the amplitude–phase dynamics of the FFGFT vacuum field.
 This is the first explanation consistent with:
 • all experimental data,
 • the magnitude of the discrepancy,
 • the environmental dependence,
-• and the unified structure of DVFT.
+• and the unified structure of FFGFT.

@@ -3,7 +3,7 @@
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 1
-Dynamic Vacuum Field Theory
+Fundamental Fractal-Geometric Field Theory
 Satish B. Thorwe
 MSc, Robert Gordon University, Aberdeen UK, 12 Friarsfield Avenue, Cults, Aberdeen AP159PP
 Abstract
@@ -15,9 +15,9 @@ phase evolves linearly with time and matter locally perturbs it. These perturbat
 speed of light, producing stress–energy that curves spacetime through Einstein’s field equations. The
 model provides a physical and causal explanation for curvature at a distance and serves as a bridge between
 Quantum Mechanics and classical General Relativity. Complete mathematical framework for Dynamic
-Vacuum Field Theory (DVFT) is presented with its applications in cosmology and quantum mechanics.
-DVFT provides physical explanations to multiple quantum phenomenon which are currently just a
-manifestation of QM mathematics. DVFT also provides elegant mathematical solutions to unsolved
+Vacuum Field Theory (FFGFT) is presented with its applications in cosmology and quantum mechanics.
+FFGFT provides physical explanations to multiple quantum phenomenon which are currently just a
+manifestation of QM mathematics. FFGFT also provides elegant mathematical solutions to unsolved
 cosmological problems such as Dark Matter, Dark Energy and CMB Anisotropy.
 INTRODUCTION
 Modern physics rests on two extraordinarily successful but conceptually incompatible frameworks:
@@ -37,9 +37,9 @@ geometries. While mathematically rich, many of these approaches rely on entities
 observed and often shift rather than eliminate foundational ambiguities. In particular, spacetime itself is
 treated as a primary object, even though it has no direct physical substance, and the vacuum is regarded
 as an empty background rather than an active medium.
-Dynamic Vacuum Field Theory (DVFT) adopts a different starting point. It postulates that the vacuum is
+Fundamental Fractal-Geometric Field Theory (FFGFT) adopts a different starting point. It postulates that the vacuum is
 a real, physical field possessing dynamical degrees of freedom. All observable phenomena arise from the
-behavior of this field and its interaction with matter. The fundamental object in DVFT is a complex scalar
+behavior of this field and its interaction with matter. The fundamental object in FFGFT is a complex scalar
 vacuum field 𝜙(𝑥)=𝜌(𝑥)𝑒
 𝑖𝜃(𝑥)
 , where 𝜌(𝑥) represents the vacuum amplitude (inertial density) and θ(x)
@@ -53,18 +53,18 @@ arise from organized phase gradients, while the weak and strong interactions cor
 or topologically constrained phase excitations. Time itself is interpreted as the rate of vacuum phase
 evolution, and relativistic effects such as time dilation and length contraction emerge naturally from
 variations in vacuum stiffness and inertial density.
-DVFT provides a unifying physical language across scales. At cosmological scales, it explains the largescale coherence of the universe, cosmic acceleration, and horizon-scale correlations without invoking
+FFGFT provides a unifying physical language across scales. At cosmological scales, it explains the largescale coherence of the universe, cosmic acceleration, and horizon-scale correlations without invoking
 inflation or dark energy. At galactic scales, it reproduces MOND-like behavior and the baryonic Tully–
 Fisher relation without dark matter. At quantum scales, it reframes wave–particle duality, entanglement,
 decoherence, and the measurement problem as consequences of vacuum phase coherence and its
-breakdown. DVFT is not just a mathematical framework but also provides a physical explanation for the
-phenomenon of Quantum Mechanics to Cosmology. Biggest advantage of DVFT is that it does not predict
+breakdown. FFGFT is not just a mathematical framework but also provides a physical explanation for the
+phenomenon of Quantum Mechanics to Cosmology. Biggest advantage of FFGFT is that it does not predict
 singularity, hence first time we can describe the interior of the black hole and the origin of the universe.
-DVFT shows that all major physical phenomena emerge from the behavior of a dynamic vacuum field.
+FFGFT shows that all major physical phenomena emerge from the behavior of a dynamic vacuum field.
 Gravity is vacuum convergence. Quantum mechanics is vacuum coherence. Mass is vacuum energy. Black
 holes are vacuum cores. The universe evolves through dynamic vacuum field.
-DVFT offers a unified vision of nature grounded in physical behavior rather than abstract mathematical
+FFGFT offers a unified vision of nature grounded in physical behavior rather than abstract mathematical
 postulates. It also provides a deeper, microphysical explanation of time, light, gravity, electromagnetic
 force, weak and strong nuclear force unifying them under a dynamic vacuum field based ontology.
-Further observational work will be required to test DVFT predictions on quantum and cosmological scale
+Further observational work will be required to test FFGFT predictions on quantum and cosmological scale
 to prove its robustness to define a pathway for the Grand Unified Theory.

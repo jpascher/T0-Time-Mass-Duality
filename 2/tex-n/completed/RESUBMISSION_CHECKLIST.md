@@ -1,5 +1,5 @@
 # Amazon KDP Re-Submission Checklist
-## T0-Theorie: "Was verbirgt sich hinter den sieben Rätseln der Physik?"
+## Fundamentale Fraktalgeometrische Feldtheorie (FFGFT, früher T0-Theorie): "Was verbirgt sich hinter den sieben Rätseln der Physik?"
 
 **Date**: December 12, 2025  
 **Status**: ✅ **READY FOR RE-SUBMISSION**

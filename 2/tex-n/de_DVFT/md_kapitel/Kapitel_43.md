@@ -1,7 +1,7 @@
 # Kapitel 43
 
 FUNDAMENTAL AXIOMS AND CONSTANTS
-1. Core Axioms of the Dynamic Vacuum Field Theory (DVFT)
+1. Core Axioms of the Fundamental Fractal-Geometric Field Theory (FFGFT)
 Axiom 1 — The Vacuum Is a Physical Medium
 The vacuum is not empty. It is a structured, dynamic vacuum field Φ continuum with an amplitude ρ and
 phase θ undergoes intrinsic Dynamic vacuum field, and matter acts as a local perturbation that modifies
@@ -22,7 +22,7 @@ require Φ excitation; photons do not.
 Axiom 7 — Vacuum Constants K₀ and ρ₀ Are Fundamental
 Electromagnetic constants ε₀ and μ₀ are not fundamental. They appear as effective parameters describing
 how EM probes vacuum properties. The true constants are K₀ and ρ₀, which determine c.
-2. Fundamental Constants of DVFT
+2. Fundamental Constants of FFGFT
 • K₀ — Vacuum Stiffness Constant
 - Resistance of vacuum phase to spatial distortion.
 - Fundamental.
@@ -55,16 +55,16 @@ G relates Φ₀-driven energy density to curvature.
 4. Mass Generation:
 m ∝ coupling × Φ₀
 These show how classical constants emerge from deeper vacuum properties.
-Conclusion: DVFT as a First-Principles Framework
-DVFT redefines physics from the ground up by treating the vacuum itself as the foundational physical
-entity. Rather than postulating constants like c, ε₀, and μ₀, DVFT derives them from intrinsic vacuum
+Conclusion: FFGFT as a First-Principles Framework
+FFGFT redefines physics from the ground up by treating the vacuum itself as the foundational physical
+entity. Rather than postulating constants like c, ε₀, and μ₀, FFGFT derives them from intrinsic vacuum
 constants K₀ and ρ₀.
 This achieves:
 • A physical origin for the speed of light,
 • A unified vacuum origin for all forces,
 • A mechanism for mass, curvature, and gauge symmetry breaking,
 • A coherent interpretation connecting microphysics and cosmology.
-DVFT proposes a universe where everything—energy, fields, particles, geometry—arises from a single
+FFGFT proposes a universe where everything—energy, fields, particles, geometry—arises from a single
 structured dynamic vacuum field.
 REFERENCES
 1. Einstein, A. (1915). Die Feldgleichungen der Gravitation. Sitzungsberichte der Preußischen Akademie
@@ -231,7 +231,7 @@ https://doi.org/10.1126/sciadv.abg2879
 021014. https://doi.org/10.1103/PhysRevX.10.021014
 73. Dobkowski, O., Trok, B., Skakunenko, P., et al. (2025). Observation of the quantum equivalence
 principle for matter-waves. arXiv:2502.14535.
-74. This paper positions Dynamic Vacuum Field Theory (DVFT) as a transformative approach to unifying
+74. This paper positions Fundamental Fractal-Geometric Field Theory (FFGFT) as a transformative approach to unifying
 general relativity, quantum mechanics, and cosmology by reimagining space as a dynamic vacuum
 field that has amplitude and phase. This intrinsic dynamic vacuum field behavior open a new
 theoretical and observational possibilities for understanding the universe’s structure and force

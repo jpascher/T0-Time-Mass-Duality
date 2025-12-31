@@ -1,13 +1,13 @@
 # Kapitel 02
 
 WHY VACUUM IS A DYNAMIC FIELD
-A core postulate of DVFT is the origin of the vacuum's dynamism: Why does the phase θ evolve as θ(t) =
+A core postulate of FFGFT is the origin of the vacuum's dynamism: Why does the phase θ evolve as θ(t) =
 μt in the unperturbed state, rather than remaining static? This chapter demonstrates that the dynamic nature
 emerges naturally from the vacuum's symmetry structure, potential, and adherence to fundamental
 physical principles. No external trigger is required; the dynamism is an intrinsic property of the vacuum
 field.
 1. Introduction
-The DVFT framework models spacetime as arising from a complex scalar vacuum field Φ(x) = ρ(x)
+The FFGFT framework models spacetime as arising from a complex scalar vacuum field Φ(x) = ρ(x)
 e^{iθ(x)}. The phase θ evolves with an intrinsic frequency μ, leading to curvature through its gradients.
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
@@ -15,7 +15,7 @@ IJFMR250664112 Volume 7, Issue 6, November-December 2025 4
 This raises the query: What causes this evolution? The answer lies in established physics of symmetry
 breaking, wave equations, vacuum stability and Lorentz invariance without invoking metaphysics.
 2. The Vacuum Field Structure
-In DVFT, the vacuum is modeled as a complex scalar field:
+In FFGFT, the vacuum is modeled as a complex scalar field:
 Φ(x) = ρ(x) e^{iθ(x)}
 with two degrees of freedom:
 • ρ(x): Amplitude, related to energy density.
@@ -80,15 +80,15 @@ A static vacuum would select a preferred rest frame, violating special relativit
 remains invariant under Lorentz transformations. Each inertial observer measures the same vacuum state
 in their local frame, as μ scales with time dilation. Thus, dynamism is essential for relativistic consistency.
 8. Dynamic vacuum field Prevents Singularities
-DVFT imposes a fundamental bound on the vacuum phase gradient:
+FFGFT imposes a fundamental bound on the vacuum phase gradient:
 |∂θ| ≤ θ_max
 This prevents curvature from diverging and eliminates singularities. A static vacuum cannot produce this
 stabilizing effect. But a vacuum with intrinsic oscillation has built-in restoring forces, similar to a vibrating
 string or superfluid. Dynamic vacuum field creates vacuum 'stiffness' that resists infinite compression.
 Thus, Dynamic vacuum field guarantees finite curvature everywhere. This is one of the important
-advantage of the DVFT to avoid singularities.
+advantage of the FFGFT to avoid singularities.
 9. Dynamic vacuum field from the Big Bang Vacuum Phase Transition
-In DVFT cosmology, the early universe began with:
+In FFGFT cosmology, the early universe began with:
 ρ ≈ 0, θ undefined
 This was an unstable vacuum state. During the Big Bang, the vacuum transitioned into its stable state:
 Φ = ρ₀ e^{iμt}
@@ -102,7 +102,7 @@ Similar intrinsic properties exist in physics:
 • The Higgs field has a fixed amplitude
 • Superfluids have inherent phase coherence
 • Quantum fields have zero-point fluctuations
-For DVFT, dynamic vacuum field is an intrinsic property of Φ, not the result of an external force or prime
+For FFGFT, dynamic vacuum field is an intrinsic property of Φ, not the result of an external force or prime
 mover.
 11. Unified Answer
 The vacuum pulsates because:
@@ -121,7 +121,7 @@ IJFMR250664112 Volume 7, Issue 6, November-December 2025 6
 There is no need for an external trigger. Dynamic vacuum field is the natural, unavoidable behavior of the
 vacuum field that underlies spacetime.
 Conclusion
-DVFT does not require a metaphysical prime mover. The Dynamic vacuum field emerges from the internal
+FFGFT does not require a metaphysical prime mover. The Dynamic vacuum field emerges from the internal
 structure and symmetries of the field Φ. This Dynamic vacuum field preserves relativity, prevents
 singularities, and drives cosmic evolution. Dynamic vacuum field is not triggered; it is built into the fabric
 of reality itself.

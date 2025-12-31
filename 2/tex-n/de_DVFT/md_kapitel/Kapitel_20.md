@@ -6,11 +6,11 @@ The Yang–Mills Mass Gap problem asks for a rigorous proof that SU(N) gauge the
 1. A quantum vacuum with finite energy.
 2. A nonzero minimum excitation energy (“mass gap”).
 Conventional Quantum Field Theory (QFT) cannot derive this from the Yang–Mills action alone.
-Dynamic Vacuum Field Theory(DVFT), however, provides a natural, structural solution because it
+Fundamental Fractal-Geometric Field Theory(FFGFT), however, provides a natural, structural solution because it
 introduces physical vacuum stiffness and amplitude–phase dynamics that enforce a minimum energy for
 gauge–phase excitations.
-2. DVFT Vacuum Field Structure
-DVFT postulates a single complex vacuum field:
+2. FFGFT Vacuum Field Structure
+FFGFT postulates a single complex vacuum field:
 Φ(x) = ρ(x) e^{iθ(x)}
 with:
 • ρ — amplitude storing curvature and energy (gravitationally relevant)
@@ -21,10 +21,10 @@ This field has two physical constants:
 • ρ₀ — inertial vacuum density
 These parameters give the vacuum a genuine mechanical response missing in pure Yang–Mills theory.
 3. Gauge Fields as Phase Gradients
-In DVFT, gauge fields emerge from the θ-field:
+In FFGFT, gauge fields emerge from the θ-field:
 A_μ ∝ ∂_μ θ
 This is profoundly different from QFT, where gauge fields are independent entities.
-The kinetic term in the DVFT Lagrangian includes:
+The kinetic term in the FFGFT Lagrangian includes:
 L_θ = B ρ² (∂_μ θ)(∂^μ θ)
 This term is *absent* in the pure Yang–Mills Lagrangian, and it produces nonzero excitation energy even
 for small fluctuations. This directly creates the mass gap.
@@ -42,14 +42,14 @@ IJFMR250664112 Volume 7, Issue 6, November-December 2025 47
 • discrete excitation spectrum,
 • and a natural minimum mass scale for SU(N) gauge theories.
 5. Comparison to QCD Confinement
-In QCD, confinement and flux tubes arise phenomenologically from color fields. In DVFT:
+In QCD, confinement and flux tubes arise phenomenologically from color fields. In FFGFT:
 • flux tubes appear as constrained phase gradients,
 • confinement arises because stretching a θ-field line costs amplitude energy,
 • energy increases linearly with distance,
 • free quarks cannot exist due to vacuum stiffness.
-Thus DVFT reproduces QCD confinement from first principles, not from phenomenology.
+Thus FFGFT reproduces QCD confinement from first principles, not from phenomenology.
 6. Numerical Estimate of the Mass Gap
-Using realistic DVFT values:
+Using realistic FFGFT values:
 • B ≈ 10⁻⁵⁵ (natural units)
 • ρ₀ ≈ 6 × 10⁻²⁷ kg/m³
 We obtain:
@@ -58,7 +58,7 @@ This matches:
 • glueball masses,
 • QCD confinement scale Λ_QCD,
 • lattice QCD predictions.
-Thus DVFT does not merely provide a conceptual solution; it yields the correct numerical scale.
+Thus FFGFT does not merely provide a conceptual solution; it yields the correct numerical scale.
 7. Why Traditional Yang–Mills Theory Cannot Solve the Mass Gap
 Pure Yang–Mills theory has:
 • no vacuum stiffness,
@@ -66,18 +66,18 @@ Pure Yang–Mills theory has:
 • no restoring force for phase excitations,
 • vacuum = mathematical state, not a physical medium.
 Thus the theory cannot produce a mass gap without additional assumptions (Higgs mechanism, lattice
-regularization). DVFT provides exactly the missing ingredient: a vacuum with mechanical properties.
-8. DVFT as a Natural Resolution of the Millennium Problem
+regularization). FFGFT provides exactly the missing ingredient: a vacuum with mechanical properties.
+8. FFGFT as a Natural Resolution of the Millennium Problem
 The Clay Millennium Problem requires a proof that:
 1. SU(N) Yang–Mills theory exists mathematically.
 2. It has a finite mass gap.
-DVFT gives:
+FFGFT gives:
 • a finite vacuum energy from ρ₀ and K₀,
 • a nonzero minimal excitation from B ρ₀²,
 • confinement as a phase–gradient phenomenon.
 This is the simplest known structural solution to the mass-gap requirement.
 9. Conclusion
-DVFT explains the Yang–Mills Mass Gap as a direct consequence of:
+FFGFT explains the Yang–Mills Mass Gap as a direct consequence of:
 • vacuum amplitude stiffness K₀,
 • vacuum phase stiffness B,
 • inertial density ρ₀,
@@ -88,5 +88,5 @@ IJFMR250664112 Volume 7, Issue 6, November-December 2025 48
 This produces a natural, unavoidable mass scale:
 m_gap ∼ √(B ρ₀²)
 in excellent agreement with QCD phenomena.
-DVFT therefore provides a conceptually and numerically resolution of the Yang–Mills Mass Gap
+FFGFT therefore provides a conceptually and numerically resolution of the Yang–Mills Mass Gap
 problem.

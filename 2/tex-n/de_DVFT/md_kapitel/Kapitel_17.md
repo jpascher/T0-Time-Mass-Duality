@@ -3,7 +3,7 @@
 ALTERNATIVE TO GR + ΛCDM
 1. Introduction
 This document explains, in a rigorous and logically complete manner, why the Dynamic Vacuum Field
-Theory(DVFT) eliminates the need for the cosmological constant, invalidates inflation, removes the
+Theory(FFGFT) eliminates the need for the cosmological constant, invalidates inflation, removes the
 foundations of ΛCDM, and supersedes all geometric or metric-based cosmological frameworks derived
 from General Relativity (GR).
 2. The Cosmological Constant as the Central Failure of Modern Cosmology
@@ -45,8 +45,8 @@ These failures arise because all frameworks assume either:
 • ❌ geometry is fundamental (GR),
 • ❌ quantum fields sit on geometry (QFT).
 Both assumptions are incorrect if the vacuum is physical.
-4. DVFT Replaces the Cosmological Constant with Vacuum Amplitude Dynamics
-DVFT defines the vacuum as a physical field:
+4. FFGFT Replaces the Cosmological Constant with Vacuum Amplitude Dynamics
+FFGFT defines the vacuum as a physical field:
 Φ = ρ e^{iθ},
 with a vacuum potential:
 U(ρ) = (1/2) σ (ρ - ρ₀)².
@@ -56,10 +56,10 @@ Thus:
 • Λ is not constant,
 • Λ is an artifact of misinterpreting U(ρ) geometrically.
 This removes the cosmological constant problem completely.
-DVFT does not solve Λ — it replaces the concept entirely.
-5. DVFT Explains CMB Uniformity Without Inflation
+FFGFT does not solve Λ — it replaces the concept entirely.
+5. FFGFT Explains CMB Uniformity Without Inflation
 GR cannot explain CMB temperature uniformity; inflation was invented to repair this.
-DVFT predicts:
+FFGFT predicts:
 • an initially coherent vacuum phase θ,
 • uniform amplitude ρ across all space,
 • no distinct “regions” before expansion.
@@ -67,39 +67,39 @@ Therefore:
 • the entire early universe shared a single vacuum state,
 • temperature uniformity was intrinsic,
 • no horizon problem exists.
-CMB uniformity is direct empirical support for DVFT's vacuum ontology.
-6. DVFT Explains Galaxy Rotation Without Dark Matter
-DVFT deep-field equation:
+CMB uniformity is direct empirical support for FFGFT's vacuum ontology.
+6. FFGFT Explains Galaxy Rotation Without Dark Matter
+FFGFT deep-field equation:
 g² = a₀ g_N
 naturally reproduces flat rotation curves and the baryonic Tully–Fisher relation:
 v_c⁴ = G M_b a₀.
 No dark matter halos are required.
-Dark matter appears only when the vacuum is incorrectly modeled using GR's geometry instead of DVFT's
+Dark matter appears only when the vacuum is incorrectly modeled using GR's geometry instead of FFGFT's
 amplitude-phase structure.
-7. DVFT Predicts Cosmic Acceleration Without Λ
+7. FFGFT Predicts Cosmic Acceleration Without Λ
 Since expansion is driven by U(ρ), not Λ:
 • acceleration is dynamical, not constant,
 • de Sitter space is not fundamental,
-• observed late-time acceleration matches DVFT predictions,
+• observed late-time acceleration matches FFGFT predictions,
 • no fine-tuned cosmological constant is required.
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 42
-8. DVFT Provides Yang–Mills Mass Gap Automatically
+8. FFGFT Provides Yang–Mills Mass Gap Automatically
 The Yang–Mills Mass Gap emerges from vacuum phase stiffness B:
 m_gap² ∼ B ρ₀².
 No other theory provides a natural physical origin for the mass gap.
-This is strong evidence for DVFT’s vacuum-field structure.
-9. DVFT Eliminates Big Bang and Black Hole Singularities
+This is strong evidence for FFGFT’s vacuum-field structure.
+9. FFGFT Eliminates Big Bang and Black Hole Singularities
 Because ρ saturates at a maximum value, singularities cannot occur.
 Instead:
 • Big Bang = release of stored amplitude energy,
 • Black hole core = finite-density vacuum-amplitude saturation,
 • no divergences in curvature,
 • no undefined geometry.
-This is impossible in GR but automatic in DVFT.
-10. DVFT Unifies All Interactions
-DVFT unifies:
+This is impossible in GR but automatic in FFGFT.
+10. FFGFT Unifies All Interactions
+FFGFT unifies:
 • gravity (∇ρ),
 • electromagnetism (∇θ),
 • weak and strong interactions (phase topology),
@@ -108,7 +108,7 @@ DVFT unifies:
 from the single vacuum field Φ = ρ e^{iθ}.
 This replaces both GR and QFT as fundamental theories.
 Conclusion
-DVFT provides:
+FFGFT provides:
 • physical vacuum ontology,
 • automatic solutions to cosmological inconsistencies,
 • removal of Λ,
@@ -120,6 +120,6 @@ DVFT provides:
 Therefore:
 The cosmological constant problem, inflation problem, dark matter hypothesis, and GR-based cosmology
 collectively point to a single conclusion:
-DVFT is the only cosmological theory that remains consistent with all observations and solves all
-foundational problems simultaneously. Thus DVFT stands not as an alternative, but as the fundamental
+FFGFT is the only cosmological theory that remains consistent with all observations and solves all
+foundational problems simultaneously. Thus FFGFT stands not as an alternative, but as the fundamental
 cosmological theory.

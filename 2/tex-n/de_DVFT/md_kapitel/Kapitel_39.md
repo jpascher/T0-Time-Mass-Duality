@@ -5,14 +5,14 @@ ENTROPY
 The Second Law of Thermodynamics is one of the most revered and mysterious principles in physics. It
 states that entropy never decreases in an isolated system. But mainstream physics never explains why this
 law exists—it simply treats it as a statistical tendency or a mathematical result of counting microstates.
-Dynamic Vacuum Field Theory (DVFT) offers a deeper explanation. In this framework, entropy is not a
+Fundamental Fractal-Geometric Field Theory (FFGFT) offers a deeper explanation. In this framework, entropy is not a
 fundamental law but an emergent property arising from the one-way evolution of the vacuum's internal
 phase field θ(x,t). Time itself is defined as vacuum phase accumulation. Because this vacuum phase can
 never reverse, entropy can never decrease.
-This document presents the DVFT interpretation of entropy, irreversibility, and the Second Law of
+This document presents the FFGFT interpretation of entropy, irreversibility, and the Second Law of
 Thermodynamics.
 2. Time as Vacuum Phase Evolution
-In DVFT, the vacuum is a physical medium with two continuous fields:
+In FFGFT, the vacuum is a physical medium with two continuous fields:
 • ρ(x,t) — vacuum amplitude
 • θ(x,t) — vacuum phase
 Time is not a coordinate: it is the physical progression of vacuum phase. Proper time τ is proportional to
@@ -25,7 +25,7 @@ E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 87
 This means vacuum phase evolves monotonically forward. All physical processes—oscillations, clocks,
 interactions—are tied to θ. Therefore, the direction of time is the direction of vacuum phase evolution.
-3. Why Entropy Increases in DVFT
+3. Why Entropy Increases in FFGFT
 Entropy increases because physical systems lose phase coherence as vacuum phase evolves. Every
 interaction—thermal, electromagnetic, gravitational, or quantum—spreads vacuum phase information
 outward. This causes:
@@ -35,12 +35,12 @@ uniform distributions.
 • Irreversible phase dispersion: Since θ evolves only forward, coherence cannot be reconstructed.
 • No mechanism for phase reversal: Reversing θ would require reversing every physical process
 in the universe, which is impossible.
-In DVFT, entropy increase is not a statistical accident. It is the inevitable result of forward vacuum phase
+In FFGFT, entropy increase is not a statistical accident. It is the inevitable result of forward vacuum phase
 evolution.
 4. Entropy and the Arrow of Time
 In classical physics, time is a coordinate. In thermodynamics, the arrow of time is assigned to entropy
 increase. In quantum mechanics, time is a parameter outside the formalism.
-DVFT unifies these by stating:
+FFGFT unifies these by stating:
 Arrow of time = direction of vacuum phase evolution.
 Entropy does not cause time's arrow; entropy is a symptom of vacuum phase moving forward.
 Because θ cannot reverse, entropy cannot reverse.
@@ -50,7 +50,7 @@ To decrease entropy, a system must:
 • reverse decoherence,
 • undo interactions,
 • reconstruct past microstates.
-But in DVFT, this requires reversing vacuum phase evolution—a physical impossibility because:
+But in FFGFT, this requires reversing vacuum phase evolution—a physical impossibility because:
 • The vacuum phase field θ is globally single-valued.
 • θₜ > 0 everywhere due to positive vacuum inertial density.
 • Energy positivity forbids θ reversal.
@@ -58,7 +58,7 @@ But in DVFT, this requires reversing vacuum phase evolution—a physical impossi
 Thus, the Second Law of Thermodynamics is a direct consequence of vacuum physics: Entropy cannot
 decrease because phase cannot un-evolve.
 6. Thermalization as Phase Scrambling
-In DVFT, heating corresponds to vacuum phase scrambling. Temperature reflects how rapidly phase
+In FFGFT, heating corresponds to vacuum phase scrambling. Temperature reflects how rapidly phase
 gradients fluctuate. When systems interact, their phase gradients mix, driving them toward equilibrium.
 Thus:
 • Heat flow = flow of phase disorder
@@ -70,22 +70,22 @@ E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 88
 Quantum decoherence is a phase process: loss of relative phase information between amplitude
 components. Once decoherence occurs, phase cannot be reconstructed, so entropy increases.
-Thus DVFT explains:
+Thus FFGFT explains:
 • Why measurement increases entropy
 • Why superpositions collapse into classical outcomes
 • Why quantum information cannot be fully recovered once dispersed
-8. Cosmological Entropy in DVFT
-DVFT provides a natural explanation for cosmological entropy:
+8. Cosmological Entropy in FFGFT
+FFGFT provides a natural explanation for cosmological entropy:
 • As the universe expands, vacuum amplitude relaxes, causing large-scale phase dispersion.
 • This dispersion increases entropy on cosmic scales.
 • Black holes represent regions of extreme amplitude, freezing phase and maximizing entropy.
 The universe’s thermodynamic arrow is just the global vacuum phase arrow.
 Conclusion
-DVFT transforms the Second Law of Thermodynamics from a statistical rule into a physical inevitability:
+FFGFT transforms the Second Law of Thermodynamics from a statistical rule into a physical inevitability:
 • Time = vacuum phase evolution.
 • Phase evolves only forward.
 • Entropy increases because phase coherence irreversibly spreads and cannot be undone.
 • Irreversibility is not probabilistic—it's built into vacuum structure.
-Thus entropy is not fundamental; it is emergent. DVFT provides the first physical explanation for the
+Thus entropy is not fundamental; it is emergent. FFGFT provides the first physical explanation for the
 Second Law and the arrow of time, resolving conceptual gaps in thermodynamics, quantum mechanics,
 and cosmology.

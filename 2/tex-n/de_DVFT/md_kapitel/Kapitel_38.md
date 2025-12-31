@@ -2,20 +2,20 @@
 
 BLACK HOLE AND QUANTUM SINGULARITIES
 1. Introduction
-This document presents a full, rigorous DVFT (Dynamic vacuum field Curvature Theory) explanation of
+This document presents a full, rigorous FFGFT (Dynamic vacuum field Curvature Theory) explanation of
 why *both* classical gravitational singularities (black holes) and quantum singularities (point particles,
 infinite self-energy) cannot exist.
-In DVFT, spacetime curvature and inertia emerge from the vacuum amplitude field:
+In FFGFT, spacetime curvature and inertia emerge from the vacuum amplitude field:
 Φ(x,t) = ρ(x,t) e^{iθ(x,t)},
 with:
 • ρ(x,t) – vacuum amplitude (determines inertia and gravitational potential),
 • θ(x,t) – phase field (determines quantum coherence and wave-like behavior).
 Gravity emerges from amplitude gradients:
 g = −∇ρ.
-Singularities require ρ → ∞ or ∇ρ → ∞. DVFT forbids both because the vacuum has finite stiffness and
+Singularities require ρ → ∞ or ∇ρ → ∞. FFGFT forbids both because the vacuum has finite stiffness and
 inertial density, encoded in the potential U(ρ).
-2. Why Singularities Cannot Exist in DVFT: The Vacuum Potential U(ρ)
-DVFT postulates the vacuum has a microphysical potential:
+2. Why Singularities Cannot Exist in FFGFT: The Vacuum Potential U(ρ)
+FFGFT postulates the vacuum has a microphysical potential:
 U(ρ) = Λ₀ + (κ/2)(ρ − ρ₀)² + (λ/4)(ρ − ρ₀)⁴ + …
 where:
 • ρ₀ is the equilibrium vacuum amplitude,
@@ -31,13 +31,13 @@ Therefore:
 • ρ cannot diverge,
 • ∇ρ cannot diverge,
 • gravitational curvature cannot diverge.
-This single microphysical fact eliminates *all* singularities in DVFT.
+This single microphysical fact eliminates *all* singularities in FFGFT.
 3. Removal of Quantum Singularities (Electron, Proton, Point Particles)
 Quantum field theory treats electrons and quarks as point particles, leading to:
 • infinite self-energy,
 • divergent Coulomb self-field,
 • undefined gravitational field at r = 0.
-DVFT replaces a point mass with a finite vacuum amplitude deformation:
+FFGFT replaces a point mass with a finite vacuum amplitude deformation:
 δρ(x) = G m ∫ d³x' |ψ(x')|² / |x − x'|.
 This deformation is always finite because:
 • |ψ(x)|² is normalizable,
@@ -57,11 +57,11 @@ This ensures:
 • gravity is fully compatible with Heisenberg uncertainty,
 • gravitational fields have finite width,
 • no r → 0 divergence occurs.
-DVFT therefore produces the first consistent microscopic definition of gravity for a single quantum
+FFGFT therefore produces the first consistent microscopic definition of gravity for a single quantum
 particle.
 5. Removal of Black Hole Singularities
 In classical GR, gravitational collapse leads to infinite curvature at r = 0.
-In DVFT, as matter compresses and raises ρ(x), the vacuum potential U(ρ) rapidly increases. At
+In FFGFT, as matter compresses and raises ρ(x), the vacuum potential U(ρ) rapidly increases. At
 sufficiently high density, a phase transition in the vacuum occurs:
 • ρ stops increasing (vacuum stiffness prevents divergence),
 • θ becomes phase-locked (coherence inside horizon),
@@ -76,8 +76,8 @@ Thus the black hole interior is NOT a singularity. It is a region of:
 • finite energy density,
 • vacuum-phase condensate.
 The event horizon may still exist, but the spacetime interior remains regular.
-6. DVFT Black Hole Interior Structure
-DVFT predicts that inside a black hole:
+6. FFGFT Black Hole Interior Structure
+FFGFT predicts that inside a black hole:
 • ρ(r) rises toward a maximum allowed value ρ_max,
 • U(ρ) prevents further growth beyond ρ_max,
 • curvature saturates,
@@ -88,9 +88,9 @@ This resembles:
 • gravastar-like interiors,
 • vacuum condensate cores,
 • nonsingular loop quantum gravity solutions,
-• but derived *entirely from DVFT microphysics*.
-7. The Deep Reason DVFT Removes Both Types of Singularities
-DVFT eliminates singularities because spacetime curvature is not fundamental. It is an *emergent
+• but derived *entirely from FFGFT microphysics*.
+7. The Deep Reason FFGFT Removes Both Types of Singularities
+FFGFT eliminates singularities because spacetime curvature is not fundamental. It is an *emergent
 property* of the vacuum amplitude field ρ. If ρ cannot diverge, then curvature cannot diverge. The
 vacuum’s elastic potential and finite inertial density are the mechanisms that prevent runaways.
 Thus:
@@ -110,7 +110,7 @@ Quantum Field Theory:
 • produces infinite point-particle self-energies,
 • resolves them only through renormalization,
 • does not address gravitational singularity.
-DVFT:
+FFGFT:
 • retains continuum spacetime,
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
@@ -121,18 +121,18 @@ IJFMR250664112 Volume 7, Issue 6, November-December 2025 86
 • without renormalization,
 • without quantizing spacetime,
 • without modifying quantum mechanics.
-DVFT is the simplest and most physically grounded solution among all three.
+FFGFT is the simplest and most physically grounded solution among all three.
 9. Final Summary
-DVFT eliminates singularities through vacuum amplitude dynamics:
+FFGFT eliminates singularities through vacuum amplitude dynamics:
 1. The vacuum field Φ = ρ e^{iθ} has finite stiffness and inertial density.
 2. U(ρ) prevents ρ from diverging under collapse.
 3. Quantum particles generate finite vacuum amplitude deformations from |ψ|².
 4. Gravity emerges as ∇ρ, which can never diverge.
 5. Black holes contain vacuum-phase condensates, not singularities.
 6. No infinite self-energy, no point divergences, no r → 0 explosion exists.
-DVFT therefore provides the first unified, microphysically consistent elimination of:
+FFGFT therefore provides the first unified, microphysically consistent elimination of:
 • black hole singularities,
 • quantum point singularities,
 • gravitational field singularities.
-This positions DVFT as a fundamentally complete framework bridging general relativity and quantum
+This positions FFGFT as a fundamentally complete framework bridging general relativity and quantum
 mechanics.

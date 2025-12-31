@@ -1,7 +1,7 @@
 # Kapitel 03
 
 FIELD EQUATIONS
-This chapter derives the mathematical framework of DVFT, unifying the quantum vacuum structure with
+This chapter derives the mathematical framework of FFGFT, unifying the quantum vacuum structure with
 gravitational curvature. We start from the action principle and obtain field equations through variation,
 emphasizing the physical mechanism: Curvature emerges from propagating distortions in the dynamic
 vacuum field.
@@ -10,8 +10,8 @@ General Relativity (GR) presents gravitation as curvature of spacetime induced b
 Yet GR is not a microphysical theory: it does not specify the underlying physical medium that curves.
 Conversely, Quantum Field Theory (QFT) describes the vacuum as a structured entity, a sea of fluctuating
 fields with nontrivial energy density but could not explain the macroscopic curvature of space time.
-The Dynamic Vacuum Field Theory (DVFT) attempts to bridge these two frameworks by proposing that
-curvature is a macroscopic manifestation of the dynamic vacuum field. In the DVFT, spacetime is not
+The Fundamental Fractal-Geometric Field Theory (FFGFT) attempts to bridge these two frameworks by proposing that
+curvature is a macroscopic manifestation of the dynamic vacuum field. In the FFGFT, spacetime is not
 empty but contains a complex scalar field Φ(x), whose amplitude ρ and phase θ encode the internal state
 of the vacuum. The phase evolves with intrinsic frequency μ, giving rise to a continuous dynamic vacuum
 field:
@@ -201,7 +201,7 @@ with cosmic time, leading to:
 • large-scale phase structures influencing galaxy formation.
 In certain regimes, ρ and θ fluctuations can act as dark-matter analogs or dark radiation.
 14. Observational Tests and Predictions
-The DVFT predicts:
+The FFGFT predicts:
 • scalar gravitational waves,
 • modified post-Newtonian parameters,
 • frequency-dependent GW dispersion,
@@ -210,7 +210,7 @@ The DVFT predicts:
 • cosmological signatures from vacuum-phase evolution.
 These predictions are testable, making the theory falsifiable.
 15. Dynamic vacuum field and Gravity
-In DVFT, θ(t) evolves over time:
+In FFGFT, θ(t) evolves over time:
 θ(t) = μ t
 Gravity arises from spatial gradients of this phase:
 International Journal for Multidisciplinary Research (IJFMR)
@@ -221,7 +221,7 @@ So:
 • ρ stores vacuum energy
 • θ stores vacuum geometry
 • ∂θ creates spacetime curvature
-DVFT does not assume dynamic vacuum field arbitrarily, it derives from spontaneous symmetry breaking
+FFGFT does not assume dynamic vacuum field arbitrarily, it derives from spontaneous symmetry breaking
 vacuum stability. Thus, the dynamic vacuum field is the vacuum’s way of occupying the ground state of
 its potential with minimum action. The vacuum behaves like a coherent dynamic field, even if the
 underlying Planck regime is chaotic.
@@ -231,14 +231,14 @@ cannot sit motionless. Therefore, spacetime naturally becomes dynamic vacuum fie
 Dynamic vacuum field is a physical necessity that transforms the vacuum into a dynamic medium capable
 of generating curvature, supporting waves, avoiding singularities, and mediating cosmological evolution.
 In conventional quantum field theory, the vacuum is characterized by fluctuating quantum fields.
-However, such fluctuations are typically treated statistically. The DVFT instead emphasizes coherent,
+However, such fluctuations are typically treated statistically. The FFGFT instead emphasizes coherent,
 macroscopic vacuum oscillation represented by the temporal evolution of θ(x). This Dynamic vacuum
 field is not an externally imposed motion but arises spontaneously from the form of the vacuum potential.
 This potential selects a nonzero amplitude ρ(x) and thereby induces spontaneous symmetry breaking
 vacuum stability. The phase θ(x) in such a broken symmetry is capable of transmitting information at c.
 The vacuum's ability to support waves propagating at c links directly to the causal structure of spacetime.
 In GR, gravitational influences propagate at c, as encoded by the hyperbolic nature of the Einstein
-equations. DVFT reproduces this naturally identical in form to the wave equation for massless particles.
+equations. FFGFT reproduces this naturally identical in form to the wave equation for massless particles.
 Thus, the propagation of curvature information is unified with the propagation of vacuum-phase waves.
 This provides a tangible mechanism replacing Einstein’s geometric axiom with physical field dynamics.
 Spacetime curvature is the macroscopic manifestation of distortions in the dynamic vacuum field 𝜙 with
@@ -256,15 +256,15 @@ dxν
 This ensures that every observer measures the same local Dynamic vacuum field frequency. No external
 time or preferred frame exists. Rotation of theta is analogous to the phase of a quantum wavefunction or
 Higgs field expectation value. No external frame is needed for this rotation.
-DVFT does not require a deeper background spacetime or physical ether. Dynamic vacuum field is not
+FFGFT does not require a deeper background spacetime or physical ether. Dynamic vacuum field is not
 motion through space but evolution of the vacuum's internal state. Dynamic vacuum field occurs relative
-to the vacuum's own internal structure and proper time. DVFT thus provides a fully consistent explanation
+to the vacuum's own internal structure and proper time. FFGFT thus provides a fully consistent explanation
 for Dynamic vacuum field without requiring an external reference frame.
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 11
 Conclusion
-The Dynamic Vacuum Field Theory provides a full microphysical explanation for gravitational curvature.
+The Fundamental Fractal-Geometric Field Theory provides a full microphysical explanation for gravitational curvature.
 Spacetime curvature emerges from propagating vacuum distortions generated by matter. The theory is
 consistent with general relativistic phenomenology while offering new insights into vacuum structure,
 quantum gravity, and cosmology.

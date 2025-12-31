@@ -3,9 +3,9 @@
 PROBLEMS IN GENERAL RELATIVITY
 General Relativity (GR) is a mathematically beautiful theory, but it lacks a physical substrate and fails in
 extreme regimes—producing singularities, requiring unobserved matter, and offering no mechanism for
-cosmic inflation or dark energy. The Dynamic Vacuum Field Theory (DVFT) replaces these gaps by
+cosmic inflation or dark energy. The Fundamental Fractal-Geometric Field Theory (FFGFT) replaces these gaps by
 modeling spacetime as a dynamic vacuum field. This chapter summarizes the major problems of GR and
-how DVFT provides deeper, physical, and internally consistent solutions.
+how FFGFT provides deeper, physical, and internally consistent solutions.
 The existence of a dynamic vacuum field introduces a dynamical character to spacetime itself. Though
 𝜙vac breaks global time-translation symmetry at the solution level, the underlying Lagrangian remains
 Lorentz invariant. Every observer perceives 𝜙vac as the same dynamic vacuum field state in their frame
@@ -13,7 +13,7 @@ of reference.
 1. Origin of the Curvature
 The vacuum field carries energy–momentum. Its stress–energy tensor directly enters Einstein's equation.
 Thus, curvature is caused by the vacuum’s internal dynamics. Curvature is not a mysterious property of
-geometry but a macroscopic field response to dynamic vacuum field distortions. DVFT derives curvature
+geometry but a macroscopic field response to dynamic vacuum field distortions. FFGFT derives curvature
 from dynamics. Distorted dynamic vacuum field carries stress–energy:
 Tμν(𝜙) = ∂μ𝜙* ∂ν𝜙 + ∂μ𝜙 ∂ν𝜙* − gμν(…)
 Phase gradients δθ propagate at light speed, modifying Tμν(𝜙). Einstein's GR equation then becomes:
@@ -24,47 +24,47 @@ their energy–momentum curves spacetime. This explains why curvature forms at a
 manner and why gravitational changes propagate at c.
 2. Curvature Without Physical Cause
 GR states that curvature is determined by the Einstein equation G_{μν} = 8πGT_{μν}, but it does not
-explain what actually curves. DVFT explains curvature as the stress–energy of the dynamic vacuum field,
+explain what actually curves. FFGFT explains curvature as the stress–energy of the dynamic vacuum field,
 where phase gradients ∂θ create gravitational curvature. Dynamics provides a physical mechanism for
 gravity.
 3. Black Hole Singularity Resolution
 Classical GR predicts singularities where curvature diverges to infinity. Such infinities signal a breakdown
-of the theory. In DVFT, the vacuum field 𝜙 cannot support infinite phase gradients due to nonlinear
+of the theory. In FFGFT, the vacuum field 𝜙 cannot support infinite phase gradients due to nonlinear
 saturation in its potential V(|𝜙|²). As a collapsing object approaches the classical singularity, the vacuum
 amplitude ρ decreases while the phase gradient ∂θ increases but never diverges. The phase reaches a
 saturation limit determined by vacuum stiffness, preventing infinite curvature:
 |∂θ| < θmax
 The center of a black hole becomes a phase defect of 𝜙 rather than a point of infinite density. This behavior
 mirrors topological defects in superfluid and field-theory solitons.
-Thus, DVFT naturally resolves singularities by replacing them with finite-energy vacuum-phase defects,
+Thus, FFGFT naturally resolves singularities by replacing them with finite-energy vacuum-phase defects,
 maintaining causality and finiteness of curvature.
-DVFT introduces field dynamics that restrict infinitely large gradients by physical vacuum stiffness.
+FFGFT introduces field dynamics that restrict infinitely large gradients by physical vacuum stiffness.
 4. Big Bang Singularity Resolution
-GR cannot describe the origin of the universe because the Big Bang is a singularity. DVFT replaces it with
+GR cannot describe the origin of the universe because the Big Bang is a singularity. FFGFT replaces it with
 a vacuum phase transition from ρ ≈ 0 to ρ₀, producing inflation, reheating, and the origin of space and time
 without infinities.
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 14
 5. No Explanation for Inflation
-GR needs an ad-hoc inflation field. DVFT naturally generates inflation from the vacuum potential V(ρ)
+GR needs an ad-hoc inflation field. FFGFT naturally generates inflation from the vacuum potential V(ρ)
 and the intrinsic phase θ(t). Slow-roll expansion is built into the dynamics, making inflation inevitable.
 6. Dark Matter Problem
-GR requires unseen matter to explain galaxy rotation curves, lensing, and cluster masses. DVFT explains
+GR requires unseen matter to explain galaxy rotation curves, lensing, and cluster masses. FFGFT explains
 these effects through long-range vacuum-phase distortions which create additional curvature, producing
 dark-matter-like behavior without introducing new particles.
 7. Dark Energy
-GR’s cosmological constant problem arises from a mismatch of 120 orders of magnitude. DVFT attributes
+GR’s cosmological constant problem arises from a mismatch of 120 orders of magnitude. FFGFT attributes
 dark energy to residual dynamic vacuum field energy, ε_vac = ρ₀²θ̇² + V(ρ₀), providing a natural physical
 source of accelerated expansion.
 8. No Mechanism for Expansion of Space
-GR describes expansion mathematically but does not explain why it occurs. DVFT explains expansion
+GR describes expansion mathematically but does not explain why it occurs. FFGFT explains expansion
 through vacuum amplitude growth ρ(t) controls the scale factor a(t). Space expands because the vacuum
 evolves.
 9. Why Gravity is Always Attractive
-GR postulates attraction but does not explain it. DVFT explains attraction through vacuum phase tension:
+GR postulates attraction but does not explain it. FFGFT explains attraction through vacuum phase tension:
 mass distorts phase gradients, and objects move along paths minimizing vacuum energy.
 Conclusion
-DVFT resolves every major theoretical limitation of General Relativity by introducing a dynamic vacuum
+FFGFT resolves every major theoretical limitation of General Relativity by introducing a dynamic vacuum
 field whose amplitude and phase structure create curvature, remove singularities and explain cosmic
 expansion.

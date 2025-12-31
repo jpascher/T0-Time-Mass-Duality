@@ -2,17 +2,17 @@
 
 BLACK HOLE INTERIOR PREDICTION
 This chapter presents a complete description of black hole interiors in the Dynamic Vacuum Field
-Theory(DVFT). DVFT replaces the classical singularity of General Relativity (GR) with a finite-density
+Theory(FFGFT). FFGFT replaces the classical singularity of General Relativity (GR) with a finite-density
 quantum vacuum core, using a nonlinear phase field θ. Both the mathematical structure and the physical
 interpretation are provided.
-1. DVFT Overview
-DVFT treats spacetime as a quantum vacuum medium described by a complex order parameter:
+1. FFGFT Overview
+FFGFT treats spacetime as a quantum vacuum medium described by a complex order parameter:
 Φ = ρ e^{iθ}
 Gravity arises from dynamic vacuum field with amplitude ρ and phase θ. The Lagrangian contains
 nonlinear kinetic terms:
 L_θ = -Λ_v + (ρ_0/2)X - (η/(3 a_0^2)) X^{3/2}
 with X = -g^{μν} ∂_μθ ∂_νθ.
-At large accelerations (g >> a_0), DVFT reduces to GR. At small accelerations (g << a_0), nonlinearities
+At large accelerations (g >> a_0), FFGFT reduces to GR. At small accelerations (g << a_0), nonlinearities
 appear.
 2. Black Hole Metric and Field Ansatz
 We use the standard static spherically symmetric metric:
@@ -50,19 +50,19 @@ ds²_core ≈ -[1 - (Λ_eff r²)/3] dt² + dr²/[1 - (Λ_eff r²)/3] + r² dΩ²
 with Λ_eff = 8πG ρ_core.
 There is no singularity; curvature remains finite.
 6. Matching to Exterior Geometry
-For r > r_c (core radius), X << X_0 and nonlinear effects vanish. DVFT reduces to GR:
+For r > r_c (core radius), X << X_0 and nonlinear effects vanish. FFGFT reduces to GR:
 ds² ≈ Schwarzschild metric.
 Matching conditions ensure:
 g_{tt}(core) = g_{tt}(ext),
 g_{rr}(core) = g_{rr}(ext).
-Thus, DVFT describes a black hole with a GR exterior and a finite-density vacuum core interior.
+Thus, FFGFT describes a black hole with a GR exterior and a finite-density vacuum core interior.
 7. Physical Interpretation (Non-Mathematical)
-• GR predicts infinite collapse. DVFT prevents this by saturating the vacuum phase.
+• GR predicts infinite collapse. FFGFT prevents this by saturating the vacuum phase.
 • The black hole interior becomes a finite-size 'quantum core.'
 • As mass falls in, both the horizon and the core radius increase.
 • No singularity exists. Space cannot compress indefinitely.
 • The final object is a quantum vacuum condensate, not a point of infinite density.
-8. Final Fate of a Black Hole in DVFT
+8. Final Fate of a Black Hole in FFGFT
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 28
@@ -72,7 +72,7 @@ Depending on parameters (ρ_0, η, a_0):
 3. Complete evaporation: horizon vanishes; core dissolves smoothly.
 In all cases, there is no singularity and no information loss.
 Conclusion
-DVFT gives the first consistent picture of a black hole interior using a single phase field. It provides:
+FFGFT gives the first consistent picture of a black hole interior using a single phase field. It provides:
 • GR-like exterior geometry,
 • A finite-density quantum core replacing the singularity,
 • A mechanism for black hole growth and evolution,

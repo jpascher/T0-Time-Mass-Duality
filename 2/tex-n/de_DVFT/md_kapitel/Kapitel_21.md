@@ -10,8 +10,8 @@ This scaling differs from the usual T² dependence observed in standard light-pu
 and it arises only when the full quantum evolution of the wave packet, including its spatial trajectory, is
 taken into account. The experiment provides a unique bridge between gravity and quantum phase
 evolution.
-The Dynamic Vacuum Field Theory(DVFT) offers a natural and physically motivated explanation for why
-the phase should scale as T³ — because, under DVFT, gravitational acceleration is not a geometric
+The Fundamental Fractal-Geometric Field Theory(FFGFT) offers a natural and physically motivated explanation for why
+the phase should scale as T³ — because, under FFGFT, gravitational acceleration is not a geometric
 construct but is directly encoded in the vacuum-phase field θ(x).
 2. Summary of the T³ Experiment
 2.1 Standard Atom-Interferometry Expectation
@@ -27,23 +27,23 @@ This results in:
 Δφ_T3 ∝ g T³
 This scaling indicates that the gravitational potential contributes to phase in a way that integrates
 displacement, velocity, and acceleration — a deeper coupling to gravitational structure than the T² case.
-3. DVFT Interpretation: Gravity as Vacuum-Phase Curvature
+3. FFGFT Interpretation: Gravity as Vacuum-Phase Curvature
 3.1 Vacuum Field Structure
-DVFT postulates a complex vacuum field:
+FFGFT postulates a complex vacuum field:
 Φ = ρ e^{iθ}
 where:
 • ρ(x) is the vacuum amplitude (stiffness)
 • θ(x) is the vacuum phase (curvature potential)
-In DVFT, the gravitational field is not geometric curvature but the spatial gradient of the vacuum phase:
+In FFGFT, the gravitational field is not geometric curvature but the spatial gradient of the vacuum phase:
 g = |∇θ|.
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 49
 Thus any quantum system whose wavefunction contains a phase term e^{iS/ħ} interacts directly with θ.
-3.2 Why T³ Scaling Is Natural in DVFT
+3.2 Why T³ Scaling Is Natural in FFGFT
 The quantum phase accumulated by a wave packet is:
 Δφ = (1/ħ) ∫ L dt.
-For a particle in DVFT's gravitational field, the Lagrangian includes the θ-field coupling:
+For a particle in FFGFT's gravitational field, the Lagrangian includes the θ-field coupling:
 L ⊃ m ∇θ · ẋ.
 Since ∇θ = g is constant near Earth's surface,
 but ẋ(t) and x(t) both grow with T during wave packet separation, the integral naturally yields:
@@ -56,9 +56,9 @@ Multiplying these yields a cubic dependence:
 1×1×1 → T³.
 This is not an artifact of interferometer geometry; it is a structural prediction of a vacuum-phase gravity
 theory.
-4. DVFT Mathematical Derivation of T³ Scaling
+4. FFGFT Mathematical Derivation of T³ Scaling
 4.1 Phase Accumulation Formula
-Consider two paths x₁(t) and x₂(t). DVFT predicts the phase difference:
+Consider two paths x₁(t) and x₂(t). FFGFT predicts the phase difference:
 Δφ = (m/ħ) ∫ [∇θ · (ẋ₁ - ẋ₂)] dt.
 Let ∇θ = g ẑ (constant). Then:
 Δφ = (mg/ħ) ∫ (ż₁ - ż₂) dt.
@@ -85,20 +85,20 @@ phase evolution. QFT treats phase evolution quantum mechanically but keeps gravi
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 50
-framework identifies gravity with a *physical phase field* as DVFT does. Thus T³ is not a coincidence
+framework identifies gravity with a *physical phase field* as FFGFT does. Thus T³ is not a coincidence
 but a direct measurement of vacuum-phase evolution.
-6. Experimental Predictions Unique to DVFT
+6. Experimental Predictions Unique to FFGFT
 6.1 Higher-Order Corrections
-DVFT predicts that if F(X) deviates from linearity, then higher-order corrections appear:
+FFGFT predicts that if F(X) deviates from linearity, then higher-order corrections appear:
 Δφ = a T³ + b T⁴ + c T⁵ + …
 These terms do not arise in standard QM and thus provide falsifiable tests.
 6.2 Sensitivity to Vacuum Nonlinearity
-The experiment could directly probe the nonlinear F_X term in DVFT:
+The experiment could directly probe the nonlinear F_X term in FFGFT:
 ∇ · (F_X ∇θ) = ρ_m.
 This opens the possibility of **laboratory tests for dark-matter-like vacuum behavior.**
 Conclusion
 Folman’s T³ scaling experiment is one of the cleanest demonstrations of gravitational influence on
-quantum phase. DVFT provides a direct physical mechanism for this phenomenon, identifying gravity
+quantum phase. FFGFT provides a direct physical mechanism for this phenomenon, identifying gravity
 with the gradient of the vacuum-phase field.
-The result strengthens the DVFT framework and suggests that precision quantum interferometry may be
-the first experimental window into vacuum-phase curvature — the fundamental origin of gravity in DVFT.
+The result strengthens the FFGFT framework and suggests that precision quantum interferometry may be
+the first experimental window into vacuum-phase curvature — the fundamental origin of gravity in FFGFT.

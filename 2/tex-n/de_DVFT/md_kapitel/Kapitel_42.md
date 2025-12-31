@@ -2,7 +2,7 @@
 
 PLANCK UNITS AND UNIVERSAL CONSTANTS
 1. Introduction
-This document explains how Dynamic Vacuum Field Theory(DVFT) derives the Planck time, length, and
+This document explains how Fundamental Fractal-Geometric Field Theory(FFGFT) derives the Planck time, length, and
 mass, as well as other 'universal constants', from the fundamental vacuum parameters:
 • B – vacuum phase stiffness
 • ρ₀ – inertial vacuum density
@@ -13,9 +13,9 @@ mass, as well as other 'universal constants', from the fundamental vacuum parame
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 94
-DVFT shows that Planck units are *not fundamental constants* but emergent mechanical properties of
+FFGFT shows that Planck units are *not fundamental constants* but emergent mechanical properties of
 the vacuum field Φ = ρ e^{iθ}.
-2. DVFT Vacuum Parameters
+2. FFGFT Vacuum Parameters
 The key numerical vacuum parameters are:
 • Phase stiffness: B ≈ 8.7 × 10⁻⁵⁵
 • Inertial vacuum density: ρ₀ ≈ 6 × 10⁻²⁷ kg/m³
@@ -25,17 +25,17 @@ The key numerical vacuum parameters are:
 • Newton’s G (derived): G = λₘ / (4π K₀)
 • Fine-structure constant (derived): α = (B / ħ c)(∂θ/∂x)²
 These constants collectively define the mechanical, gravitational, and quantum architecture of the vacuum.
-3. DVFT Substitutes into Planck Units
+3. FFGFT Substitutes into Planck Units
 Textbook definitions of Planck units are:
 • t_P = √(ħ G / c⁵)
 • ℓ_P = √(ħ G / c³)
 • m_P = √(ħ c / G)
-But in DVFT, none of ħ, c, or G are fundamental:
+But in FFGFT, none of ħ, c, or G are fundamental:
 • c = √(K₀ / ρ₀)
 • G = λₘ / (4π K₀)
 • ħ arises from θ-winding quantization
-Substituting these relations gives the Planck units as explicit composites of DVFT vacuum parameters.
-4. Planck Time from DVFT
+Substituting these relations gives the Planck units as explicit composites of FFGFT vacuum parameters.
+4. Planck Time from FFGFT
 Starting with:
 t_P = √(ħ G / c⁵)
 Insert:
@@ -45,12 +45,12 @@ Compute:
 t_P = √{ (ħ λₘ / (4π K₀)) / (K₀/ρ₀)^{5/2} }
 Simplify:
 t_P = √{ ħ λₘ ρ₀^{5/2} / (4π K₀^{7/2}) }.
-This is the DVFT expression for Planck time.
+This is the FFGFT expression for Planck time.
 Interpretation:
 Planck time is the minimum time scale at which vacuum amplitude curvature can sustain a stable
 oscillation.
 It is not a fundamental limit of nature, but a material property of the vacuum.
-5. Planck Length from DVFT
+5. Planck Length from FFGFT
 Textbook definition:
 ℓ_P = √(ħ G / c³)
 Substitute:
@@ -64,7 +64,7 @@ Result:
 Interpretation:
 Planck length is the smallest stable spatial scale of vacuum amplitude curvature — the 'acoustic
 wavelength' of the vacuum medium.
-6. Planck Mass from DVFT
+6. Planck Mass from FFGFT
 Textbook definition:
 m_P = √(ħ c / G)
 Insert:
@@ -77,14 +77,14 @@ m_P = √{ 4π ħ K₀^{3/2} / (λₘ ρ₀^{1/2}) }.
 Interpretation:
 Planck mass is the amplitude deformation that matches one quantum of phase curvature.
 7. Physical Meaning: Planck Units Are Emergent Vacuum Properties
-In DVFT:
+In FFGFT:
 • Planck time → minimum oscillation time of vacuum amplitude
 • Planck length → minimum spatial curvature scale of vacuum amplitude
 • Planck mass → amplitude curvature equivalent to one phase quantum
 This new interpretation replaces the vague 'quantum gravity scale' with clear mechanical meaning.
 Planck units describe **acoustic-like resonance properties** of the vacuum medium.
-8. Other Constants Derived from DVFT
-DVFT reduces many universal constants to derivatives of vacuum parameters:
+8. Other Constants Derived from FFGFT
+FFGFT reduces many universal constants to derivatives of vacuum parameters:
 1. Speed of light:
 c = √(K₀/ρ₀)
 2. Gravitational constant:
@@ -106,17 +106,17 @@ International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 96
 9. Consequences for Physics
-Because all universal constants are derived from the vacuum parameters, DVFT provides:
+Because all universal constants are derived from the vacuum parameters, FFGFT provides:
 • A complete unification of gravity, quantum mechanics, and electromagnetism
 • A physical explanation for Planck units
 • A mechanism for dark energy
 • The origin of α, e, c, G, ħ
 • Predictive power across scales from the proton to cosmology
 • A new foundation for quantum technologies (phase-based computing)
-DVFT reinterprets the universe as a material medium with definable mechanical constants B, K₀, ρ₀, from
+FFGFT reinterprets the universe as a material medium with definable mechanical constants B, K₀, ρ₀, from
 which all physical scales emerge.
 Conclusion
-DVFT transforms the Planck constants from unexplained numerology into physically meaningful
+FFGFT transforms the Planck constants from unexplained numerology into physically meaningful
 emergent properties of the vacuum’s amplitude–phase structure. This resolves long-standing conceptual
-gaps between quantum mechanics, relativity, and cosmology, and positions DVFT as a unified framework
+gaps between quantum mechanics, relativity, and cosmology, and positions FFGFT as a unified framework
 where the numerical structure of the universe is derived from the underlying nature of the vacuum.

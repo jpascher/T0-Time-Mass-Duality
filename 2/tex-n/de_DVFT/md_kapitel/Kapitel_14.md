@@ -2,17 +2,17 @@
 
 SPACE-CREATION SPEED AND THE COSMIC BOUNDARY
 1. Introduction
-In Dynamic vacuum field–Curvature Theory (DVFT), physical space exists only where the vacuum
+In Dynamic vacuum field–Curvature Theory (FFGFT), physical space exists only where the vacuum
 amplitude ρ(x,t) is nonzero. Regions with ρ ≈ 0 correspond to the primordial pure-phase (pre-space), which
 has no geometry, no time, and no light-speed. When the universe ignited, ρ transitioned from 0 → ρ₀,
 creating the domain in which spacetime, matter, and physics could exist.
 The radius of this activated domain is the true ‘cosmic boundary,’ and its growth defines the ‘speed of
 space creation,’ given by the amplitude-front velocity:
 v_b(t) = dR(t)/dt.
-This appendix derives v_b(t) from DVFT field equations and shows how it yields observational scales
+This appendix derives v_b(t) from FFGFT field equations and shows how it yields observational scales
 such as the ≈46.5 Gly cosmic horizon.
-2. Fundamental DVFT Amplitude Equation
-The DVFT vacuum field is:
+2. Fundamental FFGFT Amplitude Equation
+The FFGFT vacuum field is:
 Φ(x,t) = ρ(x,t) e^{iθ(x,t)}.
 The amplitude ρ satisfies the Lagrangian:
 𝓛_ρ = ½ A (∂ₜρ)² − ½ B (∇ρ)² − U(ρ),
@@ -22,10 +22,10 @@ International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 34
 This is a local, second-order, hyperbolic partial differential equation. Therefore, all disturbances or fronts
-in ρ propagate with finite characteristic speed. This is the fundamental reason DVFT forbids infinite
+in ρ propagate with finite characteristic speed. This is the fundamental reason FFGFT forbids infinite
 ‘space-creation speed.’
 3. Definition of the Space–Nonspace Boundary
-In DVFT:
+In FFGFT:
 • Space exists where ρ(x,t) > 0.
 • Pre-space (non-space) exists where ρ(x,t) = 0.
 The boundary R(t) is defined implicitly by:
@@ -47,7 +47,7 @@ Since U(f) ≥ 0, a nontrivial front requires:
 A v_b² − B < 0,
 or:
 v_b < sqrt(B/A) ≡ c_ρ.
-Thus **DVFT predicts a finite upper bound on space-creation speed**:
+Thus **FFGFT predicts a finite upper bound on space-creation speed**:
 v_b(t) ≤ c_ρ,
 where c_ρ = √(B/A) is the amplitude signal speed.
 5. Spherical Boundary in an Expanding Universe
@@ -67,11 +67,11 @@ International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 35
 The amplitude-front speed is finite because:
-1. DVFT uses a local field equation; local PDEs forbid instantaneous global change.
+1. FFGFT uses a local field equation; local PDEs forbid instantaneous global change.
 2. The driving potential gradient |U'(ρ)| is finite.
 3. Energy conservation limits how fast ρ can rise from 0 → ρ₀.
 4. The characteristic vacuum signal speed is c_ρ = √(B/A), bounding v_b.
-Thus DVFT naturally rejects infinite expansion speeds without invoking relativity. Relativity (and light
+Thus FFGFT naturally rejects infinite expansion speeds without invoking relativity. Relativity (and light
 speed c) only applies *inside* the ρ > 0 activated domain.
 7. Relation to Observational Horizon Size
 The comoving radius of the observable universe is:
@@ -79,22 +79,22 @@ R_obs ≈ 46.5 Gly.
 A naive ratio gives:
 R_obs / (c t_age) ≈ 46.5 / 13.8 ≈ 3.36.
 This does **not** mean the boundary moved at 3.36 c.
-Rather, DVFT predicts:
+Rather, FFGFT predicts:
 • The front moves at v_b(t) ≤ c_ρ ~ c.
 • The interior region expands with scale factor a(t).
 The observed comoving radius is:
 R_com(t₀) = a(t₀) ∫₀^{t₀} [v_b(t) / a(t)] dt.
 Metric expansion stretches distances so that the final comoving radius corresponds to an ‘effective average
 speed’ greater than c *without violating relativity*, since no signals propagate faster than c within space.
-8. DVFT Prediction and Observational Fit
-DVFT predicts:
+8. FFGFT Prediction and Observational Fit
+FFGFT predicts:
 • A finite space-creation speed v_b(t), controlled by vacuum micro-constants A, B and potential
 shape U(ρ).
 • The cosmic horizon size (~46.5 Gly) arises from the combined effect of v_b(t) ≤ c_ρ and
 cosmological scale-factor stretching.
 Thus the theory *can be fitted to observational results* by constraining:
 ΔU/σ, B/A, and the shape of U(ρ).
-This makes DVFT testable against horizon scale, CMB structure, and early-universe expansion histories.
+This makes FFGFT testable against horizon scale, CMB structure, and early-universe expansion histories.
 Conclusion
 • Space creation corresponds to the outward propagation of the vacuum amplitude ρ.
 • The boundary speed v_b(t) is finite because the amplitude field obeys a hyperbolic PDE.
@@ -102,5 +102,5 @@ Conclusion
 • Cosmological expansion amplifies R(t) → ~46.5 Gly today.
 • The observed effective 3.36c ratio is not a physical propagation speed but a cumulative result of
 front evolution + metric expansion.
-DVFT therefore provides a complete, physically grounded mechanism for the finite but super-horizon
+FFGFT therefore provides a complete, physically grounded mechanism for the finite but super-horizon
 expansion of space.

@@ -2,28 +2,28 @@
 
 HEISENBERG’S UNCERTAINTY PRINCIPLE
 This chapter explains how the Heisenberg Uncertainty Principle (HUP) strengthens, supports, and
-naturally aligns with the Dynamic Vacuum Field Theory (DVFT). DVFT proposes that the vacuum is a
+naturally aligns with the Fundamental Fractal-Geometric Field Theory (FFGFT). FFGFT proposes that the vacuum is a
 physical field Φ = ρ e^{iθ}, whose amplitude (ρ) and phase (θ) govern curvature, gravity, cosmology, and
 quantum behavior. HUP implies that the vacuum cannot be static, cannot have fixed energy, and must
-maintain phase and energy fluctuations. DVFT directly interprets these requirements as dynamic vacuum
+maintain phase and energy fluctuations. FFGFT directly interprets these requirements as dynamic vacuum
 field, thus connecting quantum uncertainty with gravitational dynamics and spacetime structure.
 1. Introduction
 The Heisenberg Uncertainty Principle is foundational to quantum mechanics. It states that certain pairs of
-physical quantities cannot be simultaneously known to arbitrary precision. DVFT posits that spacetime
+physical quantities cannot be simultaneously known to arbitrary precision. FFGFT posits that spacetime
 itself is a dynamic vacuum field with complex structure Φ. This chapter argues that HUP not only supports
-DVFT but makes dynamic vacuum field nearly unavoidable.
+FFGFT but makes dynamic vacuum field nearly unavoidable.
 2. HUP Implies Vacuum Cannot Be Static
 The uncertainty relation for energy and time is:
 ΔE · Δt ≥ ħ/2
 If the vacuum were perfectly static (ΔE = 0), then Δt → ∞ is impossible. This means the vacuum cannot
 have zero uncertainty in energy.
-DVFT states that the dynamically pulsates as:
+FFGFT states that the dynamically pulsates as:
 Φ = ρ e^{iμt}
 where μ is the intrinsic vacuum frequency. This provides a natural mechanism to maintain the nonzero
 energy fluctuations required by HUP.
 3. HUP and Vacuum Fluctuations
 In quantum field theory, vacuum fluctuations are an unavoidable consequence of HUP. The vacuum is not
-empty; it exhibits constant zero-point energy. DVFT interprets these fluctuations not merely as random
+empty; it exhibits constant zero-point energy. FFGFT interprets these fluctuations not merely as random
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 45
@@ -38,22 +38,22 @@ If θ were constant (Δθ = 0), then ΔE would diverge, which contradicts physic
 steadily evolving phase:
 θ(t) = μt
 A dynamic vacuum field satisfies the uncertainty relation in the most stable way.
-5. Wave–Particle Duality Explained via DVFT
-Wave–particle duality is a direct consequence of HUP, but DVFT provides a physical mechanism:
+5. Wave–Particle Duality Explained via FFGFT
+Wave–particle duality is a direct consequence of HUP, but FFGFT provides a physical mechanism:
 • Wave behavior arises from smooth phase coherence (constant θ gradients)
 • Particle behavior arises from phase decoherence (scrambled θ)
 Interference requires phase coherence. Measurement destroys this coherence, making θ discontinuous or
 undefined locally. This explains collapse in a physical not mysterious way.
-6. HUP Stabilizes the Vacuum; DVFT Provides the Mechanism
-HUP prevents total collapse of quantum systems by enforcing zero-point motion. In DVFT, dynamic
+6. HUP Stabilizes the Vacuum; FFGFT Provides the Mechanism
+HUP prevents total collapse of quantum systems by enforcing zero-point motion. In FFGFT, dynamic
 vacuum field plays the same role for spacetime:
 • It prevents singularities (θ̇ cannot diverge)
 • It stabilizes the vacuum energy
 • It provides internal pressure in black holes
 • It regulates curvature
-This connection anchors DVFT deeply within quantum principles.
-7. HUP Seeds Gravity in DVFT
-DVFT states that curvature arises from phase gradients:
+This connection anchors FFGFT deeply within quantum principles.
+7. HUP Seeds Gravity in FFGFT
+FFGFT states that curvature arises from phase gradients:
 curvature ∼ (∂μ θ)(∂ν θ)
 HUP guarantees that θ cannot be constant or arbitrarily precise, ensuring persistent fluctuations. These
 fluctuations act as seeds for:
@@ -63,18 +63,18 @@ fluctuations act as seeds for:
 The uncertainty in vacuum phase becomes a contributor to spacetime curvature itself.
 8. Unified Interpretation
 HUP → vacuum cannot be static
-DVFT → vacuum must pulsate
+FFGFT → vacuum must pulsate
 HUP → phase and energy are conjugate
-DVFT → phase evolves consistently as θ = μt
+FFGFT → phase evolves consistently as θ = μt
 HUP → zero-point fluctuations exist
-DVFT → these fluctuations manifest as coherent dynamic vacuum field
+FFGFT → these fluctuations manifest as coherent dynamic vacuum field
 The two frameworks reinforce each other: quantum uncertainty is the microscopic rule; dynamic vacuum
 field is the macroscopic consequence.
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 46
 Conclusion
-Heisenberg’s Uncertainty Principle not only aligns with DVFT, but it also provides theoretical justification
+Heisenberg’s Uncertainty Principle not only aligns with FFGFT, but it also provides theoretical justification
 for it. The vacuum must possess nonzero, fluctuating energy and a dynamically evolving phase, both of
-which are central to DVFT. This connection forms one of the strongest conceptual bridges between DVFT,
+which are central to FFGFT. This connection forms one of the strongest conceptual bridges between FFGFT,
 quantum mechanics, and the structure of spacetime itself.

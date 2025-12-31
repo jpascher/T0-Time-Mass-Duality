@@ -2,24 +2,24 @@
 
 INTRINSIC PROPERTIES OF THE VACUUM FIELD
 1. Introduction
-This document compiles the intrinsic numerical parameters of the vacuum field in DVFT (Dynamic
+This document compiles the intrinsic numerical parameters of the vacuum field in FFGFT (Dynamic
 vacuum field Curvature Theory). Unlike conventional physics, where vacuum constants such as α, ε₀, ħ,
-c, and even cosmological density appear as disconnected inputs, DVFT unifies them under the dynamics
+c, and even cosmological density appear as disconnected inputs, FFGFT unifies them under the dynamics
 of a single complex vacuum field:
 Φ(x,t) = ρ(x,t) e^{iθ(x,t)}
 Here:
 • ρ(x,t) is the vacuum amplitude (inertial density, gravitational stiffness).
 • θ(x,t) is the vacuum phase (quantum coherence, charge, CP violation).
 The constants governing ρ and θ define the mechanical, electromagnetic, and quantum structure of spacetime itself. This document consolidates their values and shows how they relate to observable physics.
-2. Fundamental DVFT Vacuum Parameters
-DVFT introduces the following intrinsic vacuum parameters:
+2. Fundamental FFGFT Vacuum Parameters
+FFGFT introduces the following intrinsic vacuum parameters:
 1. B – Vacuum phase stiffness
 2. ρ₀ – Inertial vacuum density
 3. K₀ – Amplitude stiffness of the vacuum
 4. (∂θ/∂x) – Fundamental phase gradient corresponding to one unit of electric charge
 These determine all quantum, electromagnetic, and gravitational behavior emerging from Φ.
 3. Phase Stiffness B (Calibrated from α)
-The fine-structure constant α is expressed in DVFT as:
+The fine-structure constant α is expressed in FFGFT as:
 α = (B / ħ c) (∂θ/∂x)²
 Choosing the phase gradient associated with one unit charge as:
 |∂θ/∂x| ≈ 2π / λ_C, λ_C = ħ / (m_e c) ≈ 3.86 × 10⁻¹³ m,
@@ -37,7 +37,7 @@ coherence.
 This represents the intrinsic inertial content of the vacuum amplitude ρ, which couples directly to
 gravitational behavior.
 5. Amplitude Stiffness K₀ (via c = √(K₀/ρ₀))
-DVFT identifies the speed of light with the ratio of amplitude stiffness to inertial density:
+FFGFT identifies the speed of light with the ratio of amplitude stiffness to inertial density:
 c² = K₀ / ρ₀ → K₀ = ρ₀ c².
 Substituting ρ₀ ≈ 6×10⁻²⁷ kg/m³ and c ≈ 3×10⁸ m/s gives:
 K₀ ≈ 5.4 × 10⁻¹⁰ J/m³.
@@ -54,8 +54,8 @@ Thus:
 |∂θ/∂x|_e ≈ 2π / λ_C ≈ 1.63 × 10¹³ m⁻¹.
 This gradient defines the microscopic "twist" of the vacuum phase corresponding to one unit of electric
 charge.
-7. Derived DVFT Quantities
-Once B, ρ₀, K₀, and |∂θ/∂x| are set, DVFT determines a wide range of vacuum properties:
+7. Derived FFGFT Quantities
+Once B, ρ₀, K₀, and |∂θ/∂x| are set, FFGFT determines a wide range of vacuum properties:
 • Speed of Light:
 c = √(K₀/ρ₀) ≈ 3 × 10⁸ m/s.
 • Fine-Structure Constant:
@@ -74,12 +74,12 @@ U(ρ₀) ≈ K₀ ∼ 10⁻¹⁰ J/m³,
 matching observed vacuum energy density.
 8. Why Using a Single B Everywhere Is Consistent
 B must be universal because:
-• θ is a universal phase field in DVFT.
+• θ is a universal phase field in FFGFT.
 • All quantum phenomena (charge, CP violation, coherence, neutrino masses, photon propagation,
 baryogenesis) arise from the same θ-dynamics.
 • A single stiffness constant ensures unification, just as ħ and c apply universally in conventional
 physics.
-This allows DVFT to coherently explain:
+This allows FFGFT to coherently explain:
 • Quantum mechanics
 • Electromagnetism
 • Neutrino behavior
@@ -91,7 +91,7 @@ International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 93
 9. Summary of Intrinsic Vacuum Parameters
-DVFT Vacuum Parameter Sheet:
+FFGFT Vacuum Parameter Sheet:
 • Phase stiffness:
 B ≈ 8.7 × 10⁻⁵⁵
 • Inertial vacuum density:
@@ -107,9 +107,9 @@ a₀ ≈ 10⁻¹⁰ m/s²
 • Speed of light:
 c = √(K₀/ρ₀)
 Together, these define the intrinsic mechanical, electromagnetic, quantum, and gravitational structure of
-the DVFT vacuum.
+the FFGFT vacuum.
 Conclusion
-The numerical vacuum parameters in DVFT are consistent with known electromagnetic, quantum, and
+The numerical vacuum parameters in FFGFT are consistent with known electromagnetic, quantum, and
 cosmological observations. By fixing B from α and anchoring ρ₀ and K₀ in cosmology, the entire quantum
 and gravitational framework emerges from a single unified vacuum field Φ = ρ e^{iθ}.
 These parameters provide the first coherent numerical foundation for a theory that unifies:

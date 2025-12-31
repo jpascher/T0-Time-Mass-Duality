@@ -6,25 +6,25 @@ The observed universe contains far more matter than antimatter, quantified by th
 η_B ≈ 6 × 10⁻¹⁰.
 The Standard Model cannot explain this value. Its allowed sources of baryon number violation and CP
 violation are far too small by orders of magnitude.
-DVFT (Dynamic vacuum field Curvature Theory) provides a clean, unified explanation because baryon
+FFGFT (Dynamic vacuum field Curvature Theory) provides a clean, unified explanation because baryon
 number, CP violation, and non-equilibrium dynamics all arise naturally from the structure of the vacuum
 field:
 Φ(x,t) = ρ(x,t) e^{iθ(x,t)},
 with amplitude ρ controlling inertia and gravitational stiffness and phase θ controlling quantum behavior,
 internal symmetries, and charge structure.
-2. Sakharov Conditions in the DVFT Framework
+2. Sakharov Conditions in the FFGFT Framework
 Any successful theory of baryogenesis must satisfy Sakharov’s three conditions:
 1. Baryon number violation
 2. C and CP violation
 3. Departure from thermal equilibrium
-DVFT satisfies all three using the single vacuum field Φ = ρ e^{iθ}, without introducing extra fields, new
+FFGFT satisfies all three using the single vacuum field Φ = ρ e^{iθ}, without introducing extra fields, new
 particles, or arbitrary CP phases. The conditions emerge naturally from the dynamical behavior of the
 vacuum during the early dynamic vacuum field epoch.
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 59
-3. Baryon Number as Topological Winding in DVFT
-In DVFT, baryons correspond to localized topological excitations of the vacuum phase θ:
+3. Baryon Number as Topological Winding in FFGFT
+In FFGFT, baryons correspond to localized topological excitations of the vacuum phase θ:
 • baryons → positive winding number of θ
 • antibaryons → negative winding number of θ
 Thus baryon number is:
@@ -36,7 +36,7 @@ B can change by integer amounts. This gives:
 • no need for sphalerons or beyond-Standard-Model operators
 Baryon number violation comes directly from the microphysics of θ(x,t).
 4. CP Violation from Vacuum Phase Dynamics
-In DVFT, CP violation is built into the dynamics of θ.
+In FFGFT, CP violation is built into the dynamics of θ.
 If the vacuum's phase evolution is not symmetric under:
 θ → −θ (charge conjugation)
 x → −x (parity),
@@ -48,8 +48,8 @@ This CP bias is not an arbitrary input (as in the CKM matrix), but emerges from 
 vacuum-phase Lagrangian. A general vacuum Lagrangian may include CP-odd terms such as:
 L ⊃ α · ∂ₜθ + β · (∇θ ⋅ P_odd),
 which directly generate CP-violating evolution.
-5. Non-Equilibrium from DVFT Early Dynamic vacuum field
-The early universe in DVFT undergoes a transition from a highly coherent vacuum phase (large ρ, uniform
+5. Non-Equilibrium from FFGFT Early Dynamic vacuum field
+The early universe in FFGFT undergoes a transition from a highly coherent vacuum phase (large ρ, uniform
 θ) to a broken-phase state with rich amplitude and phase structure. This process is rapid and cannot be
 adiabatic.
 During this epoch:
@@ -59,8 +59,8 @@ During this epoch:
 • vacuum stiffness evolves in time
 This means the universe is automatically out of thermal equilibrium, satisfying Sakharov's third condition
 without requiring an inflation, reheating, or ad hoc transitions.
-6. DVFT Mechanism of Baryogenesis
-The DVFT baryogenesis mechanism proceeds in five stages:
+6. FFGFT Mechanism of Baryogenesis
+The FFGFT baryogenesis mechanism proceeds in five stages:
 1. Early uniform vacuum: θ is nearly constant, ρ is high.
 2. Dynamic vacuum field: θ fractures into domains with different local winding numbers.
 3. CP bias: the dynamics favor survival of domains with +B over those with −B.
@@ -74,22 +74,22 @@ Because the CP-odd terms bias the relaxation, the random walk in baryon number b
 As the universe cools, this generates a net positive baryon asymmetry:
 B_final > 0.
 7. Predicting the Baryon-to-Photon Ratio
-To calculate the observed ratio η_B ≈ 6 × 10⁻¹⁰, DVFT requires:
+To calculate the observed ratio η_B ≈ 6 × 10⁻¹⁰, FFGFT requires:
 • Explicit CP-odd terms in the θ-Lagrangian
 • Vacuum stiffness parameters A, B, κ, λ
 • Dynamics of domain-wall collapse rates
 • Evolution of the dynamic vacuum field scale
 The baryon asymmetry emerges from the imbalance in domain decay:
 η_B ∼ (ΔE_CP / T_dynamic vacuum field).
-DVFT uniquely provides a physical meaning to ΔE_CP as the energy bias between opposite-winding
+FFGFT uniquely provides a physical meaning to ΔE_CP as the energy bias between opposite-winding
 phase domains. This makes η_B calculable once the vacuum potential is fully specified.
-8. Distinction Between DVFT and Standard Approaches
+8. Distinction Between FFGFT and Standard Approaches
 Standard Model baryogenesis fails because:
 • Sphaleron transitions are too weak
 • CKM CP violation is too small
 • No natural out-of-equilibrium period exists
 Leptogenesis works only by adding massive particles whose masses and couplings remain unmeasured.
-DVFT differs sharply:
+FFGFT differs sharply:
 • All Sakharov conditions emerge from Φ = ρ e^{iθ}.
 • Baryon number is topological, not accidental.
 • CP violation arises from dynamics, not arbitrary phases.
@@ -97,16 +97,16 @@ DVFT differs sharply:
 • No new fields or heavy particles are needed.
 This produces a conceptually clean and physically transparent framework for baryogenesis.
 9. Observational Consequences and Tests
-DVFT predicts:
+FFGFT predicts:
 1. Residual vacuum-phase textures may survive as cosmological signatures.
 2. Gravitational waves from domain-wall collapse in the early universe.
 3. A specific scale for CP-odd vacuum terms, constrained by η_B.
 4. Possible correlations between baryogenesis parameters and dark energy scale.
 5. A unified explanation of matter genesis and gravitational vacuum structure.
-These predictions allow DVFT to be tested against cosmology, gravitational wave astronomy, and
+These predictions allow FFGFT to be tested against cosmology, gravitational wave astronomy, and
 laboratory searches for CP violation.
 Conclusion
-DVFT provides a natural, unified, and physically grounded solution to baryonic asymmetry:
+FFGFT provides a natural, unified, and physically grounded solution to baryonic asymmetry:
 • baryon number as topological phase winding
 • CP violation from intrinsic vacuum phase bias
 • non-equilibrium from early dynamic vacuum field dynamics
@@ -114,8 +114,8 @@ DVFT provides a natural, unified, and physically grounded solution to baryonic a
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 61
-What the Standard Model inserts artificially, DVFT derives inevitably.
-DVFT therefore offers one of the cleanest and most compelling paths toward a complete theory of
+What the Standard Model inserts artificially, FFGFT derives inevitably.
+FFGFT therefore offers one of the cleanest and most compelling paths toward a complete theory of
 baryogenesis and the origin of matter in the universe.
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com

@@ -6,10 +6,10 @@ The Hubble tension refers to the 5–10% mismatch between:
 • H₀ inferred from early-universe data (CMB, Planck), and
 • H₀ measured from the late universe (Cepheids and SN Ia).
 ΛCDM cannot produce two different Hubble values because the cosmological constant is rigid.
-DVFT explains the tension naturally because the vacuum field Φ = ρ e^{iθ} is dynamical, and its
+FFGFT explains the tension naturally because the vacuum field Φ = ρ e^{iθ} is dynamical, and its
 amplitude ρ responds differently in the early homogeneous universe and the late structured universe.
-2. Vacuum Field and Cosmological Dynamics in DVFT
-DVFT begins from:
+2. Vacuum Field and Cosmological Dynamics in FFGFT
+FFGFT begins from:
 Φ(x,t) = ρ(x,t) e^{iθ(x,t)}
 Cosmologically, the relevant variable is ρ(t).
 A minimal vacuum potential is:
@@ -17,7 +17,7 @@ U(ρ) = ½ σ (ρ – ρ₀)² + …
 Vacuum energy density:
 ρ_vac = ½ A ρ̇² + U(ρ)
 This replaces the constant Λ in GR.
-3. DVFT-Modified Friedmann Equation
+3. FFGFT-Modified Friedmann Equation
 With Φ coupled to FRW geometry, the Friedmann equation becomes:
 H² = (1 / 3M_pl²) [ρ_m + ρ_vac(ρ, ρ̇)]
 with:
@@ -59,7 +59,7 @@ In ΛCDM:
 • Λ is constant
 • Vacuum does not respond to structure
 • Only one H₀ exists
-DVFT replaces Λ with a dynamical vacuum amplitude.
+FFGFT replaces Λ with a dynamical vacuum amplitude.
 Thus different cosmic epochs naturally exhibit different effective H₀ values.
 7. Quantitative Estimate
 A small fractional change:
@@ -69,7 +69,7 @@ H_local ≈ H_CMB (1 + ε)
 with ε ≈ 0.06–0.09.
 This matches observational data exactly.
 8. Final Interpretation
-In DVFT, the Hubble tension is not a contradiction—it is expected.
+In FFGFT, the Hubble tension is not a contradiction—it is expected.
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 40

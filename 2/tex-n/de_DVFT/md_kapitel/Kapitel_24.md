@@ -3,7 +3,7 @@
 DERIVATION OF THE KOIDE FORMULA
 1. Introduction
 This document presents a mathematically consistent derivation of the Koide mass formula from the
-vacuum microphysics of DVFT (Dynamic vacuum field Curvature Theory).
+vacuum microphysics of FFGFT (Dynamic vacuum field Curvature Theory).
 The Koide relation for the charged leptons is:
 Q = (m_e + m_μ + m_τ) / ( (√m_e + √m_μ + √m_τ)^2 ),
 experimentally:
@@ -11,12 +11,12 @@ Q = 2/3 ± 10⁻⁵.
 The Standard Model does not explain this.
 GUTs do not explain this.
 String theory does not explain this.
-DVFT explains Koide naturally because particle masses arise from discrete vacuum phase–amplitude
+FFGFT explains Koide naturally because particle masses arise from discrete vacuum phase–amplitude
 eigenmodes of the fundamental field:
 Φ = ρ e^{iθ},
 with masses determined by phase displacement from equilibrium vacuum structure.
-2. DVFT Mass Formula for a Localized Particle
-In DVFT, the mass of a stable excitation arises from local curvature of the vacuum potential U(ρ) and
+2. FFGFT Mass Formula for a Localized Particle
+In FFGFT, the mass of a stable excitation arises from local curvature of the vacuum potential U(ρ) and
 from the phase shift θ of the oscillation mode:
 m_i ∝ √(U''(ρ_i)) · | e^{iθ_i} − 1 |.
 Using:
@@ -40,17 +40,17 @@ m_τ = K(1 − cos(θ₀ + 4π/3)).
 This three-mode 120° phase structure is the simplest nonlinear vacuum eigenmode solution.
 Using the trigonometric identities for 120° shifts, we find the resulting ratios of square roots automatically
 satisfy the Koide condition.
-Thus Koide is a geometric consequence of DVFT phase quantization.
+Thus Koide is a geometric consequence of FFGFT phase quantization.
 4. Geometric Interpretation of Koide
 Define:
 a = √m_e, b = √m_μ, c = √m_τ.
 Koide’s formula is equivalent to:
 a² + b² + c² = 2(ab + bc + ca).
 This occurs if the vectors (a, b, c) lie 120° apart on a circle.
-DVFT predicts exactly this geometry because vacuum oscillation modes separated by 120° in phase
+FFGFT predicts exactly this geometry because vacuum oscillation modes separated by 120° in phase
 naturally yield mass eigenvalues whose square roots form this structure.
 Thus Koide is a direct geometric consequence of vacuum phase symmetry.
-5. Why DVFT Predicts Exactly Three Leptons
+5. Why FFGFT Predicts Exactly Three Leptons
 The vacuum potential:
 U(ρ) = κ(ρ − ρ₀)² + λ(ρ − ρ₀)⁴ + …
 supports a limited number of stable localized minima.
@@ -58,13 +58,13 @@ Nonlinear dynamic media naturally produce:
 • three stable modes,
 • 120° phase spacing,
 • triplet standing waves.
-Thus DVFT predicts:
+Thus FFGFT predicts:
 • three charged leptons,
 • with masses tied to phase geometry,
 • not arbitrary Yukawa couplings.
 The Koide relation therefore reflects vacuum structure, not coincidence.
-6. Full DVFT Derivation Summary
-DVFT → m_i ∝ (1 − cosθ_i)
+6. Full FFGFT Derivation Summary
+FFGFT → m_i ∝ (1 − cosθ_i)
 Three equally spaced phase eigenmodes → θ_i = θ₀ + 2πi/3
 This produces: (√m_e, √m_μ, √m_τ) lying at 120° in mass space.
 This enforces the identity:
@@ -74,17 +74,17 @@ Thus Koide arises from:
 • amplitude–phase coupling in Φ = ρ e^{iθ},
 • geometric symmetry of vacuum eigenmodes.
 7. Implications for Particle Physics
-If DVFT explains Koide, then:
+If FFGFT explains Koide, then:
 1. Mass is not from arbitrary Yukawa parameters but from vacuum phase structure.
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 56
 2. Three generations = three stable phase eigenmodes.
-3. DVFT predicts:
+3. FFGFT predicts:
 − Mass hierarchies,
 − Lepton ratios,
 − Neutrino mixing structure (with phase offsets),
 − Quark mass relations (with additional interactions).
 − Koide becomes evidence of underlying vacuum-phase geometry.
-DVFT therefore provides a candidate unification of mass generation, explaining one of the most precise
+FFGFT therefore provides a candidate unification of mass generation, explaining one of the most precise
 numerical relations in physics.

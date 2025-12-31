@@ -44,7 +44,7 @@ Der Titel spricht die Leserschaft direkt an und weckt Neugier durch die Frage na
 
 ### Alleinstellungsmerkmale
 - Verbindet sieben fundamentale Fragen der Physik
-- Präsentiert innovative T0-Theorie (Zeit-Masse-Dualität)
+- Präsentiert innovative Fundamentale Fraktalgeometrische Feldtheorie (FFGFT, früher T0-Theorie) (Zeit-Masse-Dualität)
 - Zugängliche Darstellung komplexer Themen
 - Einheitlicher theoretischer Rahmen für diverse Phänomene
 
@@ -56,7 +56,7 @@ Der Titel spricht die Leserschaft direkt an und weckt Neugier durch die Frage na
 - Wissenschaft populär
 - Universum Geheimnisse
 - Moderne Physik
-- T0-Theorie
+- Fundamentale Fraktalgeometrische Feldtheorie (FFGFT, früher T0-Theorie)
 
 ## Buchbeschreibung (Klappentext-Vorschlag)
 
@@ -66,7 +66,7 @@ Warum hat die Zeit eine Richtung? Wie entsteht Masse? Was ist die wahre Natur de
 
 Dieses Buch nimmt Sie mit auf eine faszinierende Reise zu den tiefsten Geheimnissen der Physik – und zeigt, wie eine revolutionäre neue Theorie einen einheitlichen Rahmen bietet, um diese scheinbar unverbundenen Rätsel miteinander zu verknüpfen.
 
-Die T0-Theorie der Zeit-Masse-Dualität geht von einer kühnen Annahme aus: Zeit und Masse sind zwei Seiten derselben Medaille. Aus dieser einfachen, aber tiefgreifenden Einsicht entspringen Antworten auf Fragen, die Physiker seit Jahrzehnten beschäftigen.
+Die Fundamentale Fraktalgeometrische Feldtheorie (FFGFT, früher T0-Theorie) der Zeit-Masse-Dualität geht von einer kühnen Annahme aus: Zeit und Masse sind zwei Seiten derselben Medaille. Aus dieser einfachen, aber tiefgreifenden Einsicht entspringen Antworten auf Fragen, die Physiker seit Jahrzehnten beschäftigen.
 
 **In diesem Buch entdecken Sie:**
 - Wie ein Gedankenexperiment mit drei Uhren unser Zeitverständnis revolutioniert

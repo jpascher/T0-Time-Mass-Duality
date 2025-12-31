@@ -2,9 +2,9 @@
 
 SOLUTION TO THE STRONG CP PROBLEM
 1. Introduction
-DVFT (Dynamic vacuum field Curvature Theory) provides a natural and structurally unavoidable solution
+FFGFT (Dynamic vacuum field Curvature Theory) provides a natural and structurally unavoidable solution
 to the Strong CP Problem, without requiring axions, Peccei–Quinn symmetry, or fine-tuning. This
-document explains rigorously why DVFT forces the QCD θ-angle to zero as a consequence of the vacuum
+document explains rigorously why FFGFT forces the QCD θ-angle to zero as a consequence of the vacuum
 field structure.
 2. Statement of the Strong CP Problem
 Quantum Chromodynamics permits a CP-violating term:
@@ -13,8 +13,8 @@ Experimentally, neutron EDM measurements require:
 θ < 10⁻¹⁰
 But the natural value in QCD is θ ≈ 1. The Standard Model provides no mechanism to set θ ≈ 0. This
 discrepancy is the Strong CP Problem.
-3. Core DVFT Insight: Only One Physical Phase Field
-In DVFT, all forces—including QCD—emerge from the single vacuum field:
+3. Core FFGFT Insight: Only One Physical Phase Field
+In FFGFT, all forces—including QCD—emerge from the single vacuum field:
 Φ(x,t) = ρ(x,t) e^{iθ(x,t)}
 Here θ(x,t) is the unique global vacuum phase. QCD cannot introduce an independent θ parameter. No
 separate strong-sector phase exists; therefore a CP-violating θ-term has no place in the fundamental
@@ -22,10 +22,10 @@ Lagrangian.
 Thus:
 θ_QCD ≡ 0
 by structural necessity, not tuning.
-4. Why Independent QCD θ Cannot Exist in DVFT
-The QCD θ-term arises from instanton topology. DVFT reinterprets instantons as localized amplitude
+4. Why Independent QCD θ Cannot Exist in FFGFT
+The QCD θ-term arises from instanton topology. FFGFT reinterprets instantons as localized amplitude
 knots in ρ(x), not as separate phase sectors.
-DVFT enforces:
+FFGFT enforces:
 • Continuous global θ(x,t)
 • No multi-sector vacuum structure
 • No misalignment between QCD and vacuum phases
@@ -34,7 +34,7 @@ International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 77
 5. Neutron Electric Dipole Moment Prediction
-DVFT predicts the neutron EDM is approximately zero because the vacuum amplitude around neutrons
+FFGFT predicts the neutron EDM is approximately zero because the vacuum amplitude around neutrons
 is CP-symmetric and the global phase θ(x) cannot induce sector-specific asymmetry. Thus:
 d_n ≈ 0
 in perfect agreement with experiment, without axions or symmetry breaking.
@@ -42,19 +42,19 @@ in perfect agreement with experiment, without axions or symmetry breaking.
 Standard Model: Offers no explanation; θ must be tuned < 10⁻¹⁰.
 Axion/PQ symmetry: Adds particles + symmetry; no experimental detection.
 String theory: Introduces many vacua; not predictive.
-DVFT: Eliminates θ as an independent variable. Simple, natural, enforced.
+FFGFT: Eliminates θ as an independent variable. Simple, natural, enforced.
 7. Deeper Reason: Correct Ontology
 The Strong CP Problem exists only because QCD—incorrectly—treats the vacuum as empty. If the
-vacuum is physical (as in DVFT), then its phase structure is unique, global, and non-duplicable. The
+vacuum is physical (as in FFGFT), then its phase structure is unique, global, and non-duplicable. The
 freedom to choose θ is eliminated.
 Thus:
 θ_QCD = 0
 is not fine-tuned; it is the only mathematically allowable value.
 Conclusion
-DVFT resolves the Strong CP Problem cleanly and uniquely:
+FFGFT resolves the Strong CP Problem cleanly and uniquely:
 • No axions.
 • No fine-tuning.
 • No new symmetries.
 • Complete alignment with experiment.
 • Directly derived from the single vacuum phase field.
-This constitutes one of the strongest conceptual triumphs of DVFT.
+This constitutes one of the strongest conceptual triumphs of FFGFT.

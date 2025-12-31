@@ -1,7 +1,7 @@
 # Kapitel 01
 
 THE VACUUM AS A DYNAMIC FIELD
-In Dynamic Vacuum Field Theory (DVFT), spacetime is conceptualized not as an empty geometric
+In Fundamental Fractal-Geometric Field Theory (FFGFT), spacetime is conceptualized not as an empty geometric
 construct but as a physical medium characterized by internal dynamical degrees of freedom. This medium
 is modeled by a complex scalar field Φ(x), which serves as the fundamental entity underlying both
 gravitational and quantum phenomena. The field is expressed in polar form as:
@@ -51,10 +51,10 @@ This representation is the standard mathematical description for oscillatory or 
 physics. It decouples the amplitude (which controls energy scale) from the phase (which controls timing
 and interference). Analogous forms appear in quantum wave functions, electromagnetic fields, and
 superfluid order parameters.
-In DVFT, Φ = ρ e^{iθ} implies that the vacuum possesses both a strength ρ and a rhythm θ, enabling it to
+In FFGFT, Φ = ρ e^{iθ} implies that the vacuum possesses both a strength ρ and a rhythm θ, enabling it to
 mediate forces and curvature through its internal dynamics.
 Conclusion
-DVFT posits that the vacuum is a complex scalar field Φ(x) = ρ(x) e^{iθ(x)}, with matter inducing
+FFGFT posits that the vacuum is a complex scalar field Φ(x) = ρ(x) e^{iθ(x)}, with matter inducing
 perturbations in ρ and θ. These perturbations propagate at the speed of light, generating stress-energy that
 curves spacetime. This framework provides a physical mechanism for gravitational effects at a distance,
 bridging gap between quantum mechanics and classical relativity.

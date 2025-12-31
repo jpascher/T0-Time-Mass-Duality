@@ -1,8 +1,8 @@
 import os
 import re
 
-INPUT_FILE = 'DVFT.txt'
-OUTPUT_DIR = '2/md_chapters_dvft'
+INPUT_FILE = 'FFGFT.txt'
+OUTPUT_DIR = '2/md_chapters_ffgft'
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 if not os.path.exists(INPUT_FILE):
@@ -53,5 +53,5 @@ for idx, (title, content) in enumerate(chapters):
     lines = len(content.splitlines())
     print(f"Erstellt: {output_path} ({lines} Zeilen, vollständiger Inhalt)")
 
-print(f"\nFertig! {len(chapters)} Kapitel als separate .md-Dateien in {OUTPUT_DIR}/ (aus deinen Dokumenten in DVFT.txt unter 2/-Struktur).")
+print(f"\nFertig! {len(chapters)} Kapitel als separate .md-Dateien in {OUTPUT_DIR}/ (aus deinen Dokumenten in FFGFT.txt unter 2/-Struktur).")
 print("Beispiel-Dateien: Kapitel_01.md bis Kapitel_43.md")

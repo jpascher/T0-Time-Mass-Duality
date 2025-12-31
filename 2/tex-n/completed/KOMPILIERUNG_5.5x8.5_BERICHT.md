@@ -34,15 +34,15 @@
 
 Das Buch enthält **8 Kapitel**:
 
-1. **Einleitung**: T0-Theorie in der Anwendung
-2. **7 Fragen** (028) - Fundamentale Fragen zur T0-Theorie
+1. **Einleitung**: Fundamentale Fraktalgeometrische Feldtheorie (FFGFT, früher T0-Theorie) in der Anwendung
+2. **7 Fragen** (028) - Fundamentale Fragen zur Fundamentale Fraktalgeometrische Feldtheorie (FFGFT, früher T0-Theorie)
 3. **Drei Uhren** (029) - Gedankenexperiment zur absoluten Zeit
 4. **Penrose** (030) - Verbindung zur Twistor-Theorie
 5. **Peratt** (036) - Plasmakosmologische Perspektiven
 6. **Hannah** (037) - Statistische Analysemethoden
 7. **Markov** (038) - Stochastische Prozesse
 8. **CMB Dipol** (039) - Zwei Dipole in der CMB-Strahlung
-9. **Fraktale Dualität** (132) - Erweiterung der T0-Theorie
+9. **Fraktale Dualität** (132) - Erweiterung der Fundamentale Fraktalgeometrische Feldtheorie (FFGFT, früher T0-Theorie)
 
 ## Anpassungen für Kindle-Format
 
@@ -63,7 +63,7 @@ Das Buch enthält **8 Kapitel**:
 
 ### Zusätzliches Kapitel
 **Kapitel 132: Fraktale Dualität** wurde hinzugefügt:
-- Erweitert die T0-Theorie auf fraktale Konzepte
+- Erweitert die Fundamentale Fraktalgeometrische Feldtheorie (FFGFT, früher T0-Theorie) auf fraktale Konzepte
 - Zeigt nicht-konstante Zeitskalen
 - Passt thematisch perfekt zu "Anwendungen und Herausforderungen"
 - Bringt ~6 zusätzliche Seiten (69 → 76 Seiten)

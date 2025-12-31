@@ -2,7 +2,7 @@
 
 STRONG, WEAK, AND DEEP FIELD PHYSICS
 1. Introduction
-Dynamic Vacuum Field Theory (DVFT) predicts distinct regimes of gravitational behavior determined by
+Fundamental Fractal-Geometric Field Theory (FFGFT) predicts distinct regimes of gravitational behavior determined by
 the magnitude of the vacuum phase gradient
 X = -g^{μν} ∂μθ ∂νθ.
 These regimes—strong field, weak field, deep field, and an ultra-deep cosmological regime—correspond
@@ -20,7 +20,7 @@ International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 22
 L_θ = (ρ₀/2) X - (η/(3 a₀²)) X^{3/2} - Λ_v,
-become negligible compared to the linear X term. In this limit DVFT reduces to the predictions of General
+become negligible compared to the linear X term. In this limit FFGFT reduces to the predictions of General
 Relativity with an effective cosmological constant Λ_eff set by the residual vacuum term. Curvature is
 dominated by the quasi-linear response of θ, and conventional GR tests are satisfied.
 3. Weak Field Regime (X ~ a₀²)
@@ -50,7 +50,7 @@ produces:
 • flat rotation curves,
 • the baryonic Tully–Fisher relation v_c⁴ = G M_b a₀,
 • no requirement for dark matter halos.
-Thus the deep field regime is responsible for MOND-like behavior emerging naturally from DVFT
+Thus the deep field regime is responsible for MOND-like behavior emerging naturally from FFGFT
 vacuum microphysics.
 5. Ultra-Deep Cosmological Regime (g << a₀, Dark Energy Scale)
 On scales comparable to or larger than the Hubble radius, typical gravitational accelerations become far
@@ -67,7 +67,7 @@ IJFMR250664112 Volume 7, Issue 6, November-December 2025 23
 where V(ρ) is the vacuum potential. For parameter choices where V(ρ_∞) dominates over the kinetic term,
 one obtains:
 p_vac ≈ -ε_vac,
-which corresponds to an equation of state parameter w ≈ -1. This is the dark-energy-like regime of DVFT:
+which corresponds to an equation of state parameter w ≈ -1. This is the dark-energy-like regime of FFGFT:
 the universe is driven by residual dynamic vacuum field energy and the nearly constant vacuum potential.
 In this ultra-deep regime:
 • X → 0,
@@ -89,7 +89,7 @@ The governing equation
 determines how the phase field adjusts across these regimes. Small, local systems never probe the ultradeep vacuum; galaxies probe the deep-field regime; the universe as a whole samples the full vacuum
 potential and residual dynamic vacuum field energy.
 7. Implications for Cosmology and Structure Formation
-Because the same Lagrangian L_θ governs all regimes, DVFT ties together:
+Because the same Lagrangian L_θ governs all regimes, FFGFT ties together:
 • galactic rotation curves,
 • cluster dynamics,
 • cosmic acceleration,
@@ -98,10 +98,10 @@ Because the same Lagrangian L_θ governs all regimes, DVFT ties together:
 • early universe: kinetic and potential terms of Φ drive inflation-like expansion,
 • intermediate epochs: matter dominates and deep-field corrections shape halo dynamics,
 • late universe: ultra-deep regime emerges, and dark-energy-like behavior dominates.
-In contrast to ΛCDM, where dark matter and dark energy are independent components, DVFT describes
+In contrast to ΛCDM, where dark matter and dark energy are independent components, FFGFT describes
 both as manifestations of one vacuum field, viewed in different acceleration regimes.
 8. Summary
-DVFT organizes gravitational behavior into four coherent regimes:
+FFGFT organizes gravitational behavior into four coherent regimes:
 • Strong field: GR limit, X >> a₀², linear response, compact objects.
 • Weak field: transitional, X ~ a₀², small nonlinear corrections.
 • Deep field: galactic scale, X << a₀² but gradients still relevant, g² = a₀ g_N, no dark matter.
@@ -111,5 +111,5 @@ IJFMR250664112 Volume 7, Issue 6, November-December 2025 24
 • Ultra-deep cosmological field: g << a₀ on horizon scales, residual vacuum energy acts as dark energy (w
 ≈ -1).
 This regime structure is not an artificial phenomenology; it is the natural consequence of a single dynamic
-vacuum field Lagrangian. As a result, DVFT provides a unified physical explanation for local gravity tests,
+vacuum field Lagrangian. As a result, FFGFT provides a unified physical explanation for local gravity tests,
 galaxy dynamics, and late-time cosmic acceleration within one coherent framework.

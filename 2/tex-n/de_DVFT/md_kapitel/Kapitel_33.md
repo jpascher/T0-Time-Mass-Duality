@@ -3,29 +3,29 @@
 DERIVING PAULI’S EXCLUSION PRINCIPLE
 1. Introduction
 This document derives Pauli’s Exclusion Principle from the foundational structure of Dynamic vacuum
-field–Curvature Theory (DVFT).
-In DVFT, the vacuum field is expressed as:
+field–Curvature Theory (FFGFT).
+In FFGFT, the vacuum field is expressed as:
 Φ(x) = ρ(x) e^{iθ(x)},
 where ρ is the vacuum amplitude and θ is the vacuum phase. Gravity, geometry, and particle behavior
 arise from structured excitations in these fields. To explain Pauli exclusion, we extend Φ into a multicomponent vacuum field whose excitations—topological defects—represent particles. The exclusion
 principle then emerges naturally from the topology and energetics of the vacuum configuration space, not
 as an added rule.
-2. Multi-Component DVFT Field and Particle Species
-To model fermions and bosons, DVFT is extended to an N-component vacuum field:
+2. Multi-Component FFGFT Field and Particle Species
+To model fermions and bosons, FFGFT is extended to an N-component vacuum field:
 Φ_A(x) = ρ_A(x) e^{iθ_A(x)}, A = 1,2,...,N.
 Particles correspond to localized topological excitations (defects) of Φ_A(x).
 Different particle types correspond to different topological classes of vacuum excitations. This step is
 analogous to how solitons, vortices, and monopoles emerge in non-linear field theories—except here the
 excitations live inside the amplitude–phase structure of the vacuum.
 3. Configuration Space and Particle Exchange
-Consider two identical DVFT excitations located at positions x₁ and x₂.
+Consider two identical FFGFT excitations located at positions x₁ and x₂.
 Their combined configuration is a point in the configuration space:
 C₂ = (R³ × R³ − {x₁ = x₂}) / exchange.
 Exchanging the two particles corresponds to a continuous loop in configuration space.
 International Journal for Multidisciplinary Research (IJFMR)
 E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 75
-In DVFT, exchanging defects also induces a continuous deformation of the vacuum fields:
+In FFGFT, exchanging defects also induces a continuous deformation of the vacuum fields:
 Φ_A(x) → Φ'_A(x),
 which may return to the same local configuration but with a global phase holonomy. This holonomy
 determines whether the species behaves as a boson or fermion.
@@ -36,7 +36,7 @@ factor:
 Repeating the exchange twice corresponds to a 2π rotation of the configuration, which must return to the
 same state:
 (e^{iα})² = 1 → e^{iα} = ±1.
-Thus DVFT allows two topological classes:
+Thus FFGFT allows two topological classes:
 • e^{iα} = +1 → symmetric state → bosons
 • e^{iα} = –1 → antisymmetric state → fermions
 This is not assumed; it follows from the topology of vacuum phase evolution under exchange loops.
@@ -48,23 +48,23 @@ Evaluate this at coincidence arguments x_i = x_j:
 Therefore:
 Ψ(..., x, ..., x, ...) = 0.
 This is Pauli’s Exclusion Principle: the probability amplitude for two identical fermions occupying the
-same quantum state vanishes exactly. DVFT thus derives exclusion from a topological phase holonomy
+same quantum state vanishes exactly. FFGFT thus derives exclusion from a topological phase holonomy
 of the vacuum—not from Grassmann variables or postulated anticommutation relations.
 6. Topological Interpretation of Spin
-In DVFT, spin arises from the internal structure of the vacuum excitation itself:
+In FFGFT, spin arises from the internal structure of the vacuum excitation itself:
 • Bosonic excitations correspond to integer-winding vacuum defects.
 • Fermionic excitations correspond to half-winding or twist defects.
 A 2π rotation of a half-winding defect results in a sign change of the underlying phase configuration: Ψ
 → –Ψ.
 Thus spin-½ behavior is a geometric property of the vacuum excitation, not an axiomatic quantum rule.
 Spin and statistics are unified as consequences of vacuum topology.
-7. Energetic Origin of Pauli Exclusion in DVFT
-Beyond wavefunction antisymmetry, DVFT also provides an energetic justification.
+7. Energetic Origin of Pauli Exclusion in FFGFT
+Beyond wavefunction antisymmetry, FFGFT also provides an energetic justification.
 When two identical fermionic defects attempt to overlap spatially, the associated amplitude and phase
 fields must deform in a way violating the allowed topological class:
 • The vacuum amplitude ρ develops extreme gradients (large |∇ρ|² term).
 • The vacuum phase θ becomes singular or multi-valued (large ρ²|∇θ|² term).
-The DVFT energy functional:
+The FFGFT energy functional:
 E = ∫ [ (A/2)|∇ρ|² + (A/2)ρ²|∇θ|² + U(ρ) ] d³x
 diverges for overlapping fermionic defects.
 Thus Pauli exclusion is not only a topological rule but an energy-prohibition:
@@ -73,13 +73,13 @@ E-ISSN: 2582-2160 ● Website: www.ijfmr.com ● Email: editor@ijfmr.com
 IJFMR250664112 Volume 7, Issue 6, November-December 2025 76
 certain vacuum configurations simply cannot exist.
 8. Summary of Derivation
-DVFT explains Pauli exclusion through:
+FFGFT explains Pauli exclusion through:
 1. Vacuum phase topology:
-• Exchange of identical DVFT excitations produces a phase factor e^{iα}.
+• Exchange of identical FFGFT excitations produces a phase factor e^{iα}.
 • Only α = 0 or π are allowed → bosons or fermions.
 2. Fermionic antisymmetry:
 α = π → Ψ is antisymmetric → Ψ(x,x) = 0 → exclusion.
 3. Energetics of vacuum defects:
 Overlapping fermionic defects produce forbidden gradient and phase singularities → infinite energy cost.
 Thus Pauli’s Exclusion Principle is not arbitrary:
-It is a direct consequence of the topological and energetic structure of the DVFT vacuum field.
+It is a direct consequence of the topological and energetic structure of the FFGFT vacuum field.
