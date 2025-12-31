@@ -1,0 +1,272 @@
+# =============================================================================
+# GitHub Actions Workflow: Compile Narrative FFGFT LaTeX Documents
+# =============================================================================
+# This workflow compiles all narrative LaTeX documents in /2/narrative/
+# (both German and English versions) using full TeXLive distribution.
+#
+# Compiles:
+# - 44 individual chapters (Kapitel_01-44_Narrative_De.tex and _En.tex)
+# - Master documents (FFGFT_Narrative_Master_De.tex and _En.tex)
+#
+# Strategy:
+# - Use xu-cheng/latex-action@v3 for comprehensive LaTeX support
+# - Multiple compilation passes (3-4x) for cross-references, TOC, synctex
+# - Generate PDFs and upload as artifacts
+# =============================================================================
+
+name: Compile Narrative LaTeX
+
+on:
+  push:
+    branches:
+      - main
+      - copilot/create-narrative-ffgft-publication
+    paths:
+      - '2/narrative/**/*.tex'
+      - '.github/workflows/compile-narrative-latex.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '2/narrative/**/*.tex'
+      - '.github/workflows/compile-narrative-latex.yml'
+  workflow_dispatch:
+
+jobs:
+  compile-german-chapters:
+    runs-on: ubuntu-latest
+    name: Compile German Chapters
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Compile German Chapters (01-44)
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: 2/narrative
+          root_file: |
+            Kapitel_01_Narrative_De.tex
+            Kapitel_02_Narrative_De.tex
+            Kapitel_03_Narrative_De.tex
+            Kapitel_04_Narrative_De.tex
+            Kapitel_05_Narrative_De.tex
+            Kapitel_06_Narrative_De.tex
+            Kapitel_07_Narrative_De.tex
+            Kapitel_08_Narrative_De.tex
+            Kapitel_09_Narrative_De.tex
+            Kapitel_10_Narrative_De.tex
+            Kapitel_11_Narrative_De.tex
+            Kapitel_12_Narrative_De.tex
+            Kapitel_13_Narrative_De.tex
+            Kapitel_14_Narrative_De.tex
+            Kapitel_15_Narrative_De.tex
+            Kapitel_16_Narrative_De.tex
+            Kapitel_17_Narrative_De.tex
+            Kapitel_18_Narrative_De.tex
+            Kapitel_19_Narrative_De.tex
+            Kapitel_20_Narrative_De.tex
+            Kapitel_21_Narrative_De.tex
+            Kapitel_22_Narrative_De.tex
+            Kapitel_23_Narrative_De.tex
+            Kapitel_24_Narrative_De.tex
+            Kapitel_25_Narrative_De.tex
+            Kapitel_26_Narrative_De.tex
+            Kapitel_27_Narrative_De.tex
+            Kapitel_28_Narrative_De.tex
+            Kapitel_29_Narrative_De.tex
+            Kapitel_30_Narrative_De.tex
+            Kapitel_31_Narrative_De.tex
+            Kapitel_32_Narrative_De.tex
+            Kapitel_33_Narrative_De.tex
+            Kapitel_34_Narrative_De.tex
+            Kapitel_35_Narrative_De.tex
+            Kapitel_36_Narrative_De.tex
+            Kapitel_37_Narrative_De.tex
+            Kapitel_38_Narrative_De.tex
+            Kapitel_39_Narrative_De.tex
+            Kapitel_40_Narrative_De.tex
+            Kapitel_41_Narrative_De.tex
+            Kapitel_42_Narrative_De.tex
+            Kapitel_43_Narrative_De.tex
+            Kapitel_44_Narrative_De.tex
+          args: -pdf -interaction=nonstopmode -synctex=1
+          latexmk_use_lualatex: false
+          latexmk_use_xelatex: false
+          continue_on_error: true
+      
+      - name: Upload German Chapter PDFs
+        uses: actions/upload-artifact@v4
+        with:
+          name: narrative-german-chapters
+          path: 2/narrative/Kapitel_*_Narrative_De.pdf
+          if-no-files-found: warn
+          retention-days: 30
+
+  compile-german-master:
+    runs-on: ubuntu-latest
+    name: Compile German Master Document
+    needs: compile-german-chapters
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Compile German Master
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: 2/narrative
+          root_file: FFGFT_Narrative_Master_De.tex
+          args: -pdf -interaction=nonstopmode -synctex=1
+          latexmk_use_lualatex: false
+          latexmk_use_xelatex: false
+          continue_on_error: false
+      
+      - name: Upload German Master PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: narrative-german-master
+          path: 2/narrative/FFGFT_Narrative_Master_De.pdf
+          if-no-files-found: error
+          retention-days: 90
+
+  compile-english-chapters:
+    runs-on: ubuntu-latest
+    name: Compile English Chapters (if exist)
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Check for English chapters
+        id: check-english
+        run: |
+          if ls 2/narrative/Kapitel_*_Narrative_En.tex 1> /dev/null 2>&1; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "No English chapters found - skipping compilation"
+          fi
+      
+      - name: Compile English Chapters (01-44)
+        if: steps.check-english.outputs.exists == 'true'
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: 2/narrative
+          root_file: |
+            Kapitel_01_Narrative_En.tex
+            Kapitel_02_Narrative_En.tex
+            Kapitel_03_Narrative_En.tex
+            Kapitel_04_Narrative_En.tex
+            Kapitel_05_Narrative_En.tex
+            Kapitel_06_Narrative_En.tex
+            Kapitel_07_Narrative_En.tex
+            Kapitel_08_Narrative_En.tex
+            Kapitel_09_Narrative_En.tex
+            Kapitel_10_Narrative_En.tex
+            Kapitel_11_Narrative_En.tex
+            Kapitel_12_Narrative_En.tex
+            Kapitel_13_Narrative_En.tex
+            Kapitel_14_Narrative_En.tex
+            Kapitel_15_Narrative_En.tex
+            Kapitel_16_Narrative_En.tex
+            Kapitel_17_Narrative_En.tex
+            Kapitel_18_Narrative_En.tex
+            Kapitel_19_Narrative_En.tex
+            Kapitel_20_Narrative_En.tex
+            Kapitel_21_Narrative_En.tex
+            Kapitel_22_Narrative_En.tex
+            Kapitel_23_Narrative_En.tex
+            Kapitel_24_Narrative_En.tex
+            Kapitel_25_Narrative_En.tex
+            Kapitel_26_Narrative_En.tex
+            Kapitel_27_Narrative_En.tex
+            Kapitel_28_Narrative_En.tex
+            Kapitel_29_Narrative_En.tex
+            Kapitel_30_Narrative_En.tex
+            Kapitel_31_Narrative_En.tex
+            Kapitel_32_Narrative_En.tex
+            Kapitel_33_Narrative_En.tex
+            Kapitel_34_Narrative_En.tex
+            Kapitel_35_Narrative_En.tex
+            Kapitel_36_Narrative_En.tex
+            Kapitel_37_Narrative_En.tex
+            Kapitel_38_Narrative_En.tex
+            Kapitel_39_Narrative_En.tex
+            Kapitel_40_Narrative_En.tex
+            Kapitel_41_Narrative_En.tex
+            Kapitel_42_Narrative_En.tex
+            Kapitel_43_Narrative_En.tex
+            Kapitel_44_Narrative_En.tex
+          args: -pdf -interaction=nonstopmode -synctex=1
+          latexmk_use_lualatex: false
+          latexmk_use_xelatex: false
+          continue_on_error: true
+      
+      - name: Upload English Chapter PDFs
+        if: steps.check-english.outputs.exists == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: narrative-english-chapters
+          path: 2/narrative/Kapitel_*_Narrative_En.pdf
+          if-no-files-found: warn
+          retention-days: 30
+
+  compile-english-master:
+    runs-on: ubuntu-latest
+    name: Compile English Master Document (if exists)
+    needs: compile-english-chapters
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Check for English master
+        id: check-master
+        run: |
+          if [ -f "2/narrative/FFGFT_Narrative_Master_En.tex" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "No English master document found - skipping compilation"
+          fi
+      
+      - name: Compile English Master
+        if: steps.check-master.outputs.exists == 'true'
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: 2/narrative
+          root_file: FFGFT_Narrative_Master_En.tex
+          args: -pdf -interaction=nonstopmode -synctex=1
+          latexmk_use_lualatex: false
+          latexmk_use_xelatex: false
+          continue_on_error: false
+      
+      - name: Upload English Master PDF
+        if: steps.check-master.outputs.exists == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: narrative-english-master
+          path: 2/narrative/FFGFT_Narrative_Master_En.pdf
+          if-no-files-found: error
+          retention-days: 90
+
+  summary:
+    runs-on: ubuntu-latest
+    name: Build Summary
+    needs: [compile-german-chapters, compile-german-master, compile-english-chapters, compile-english-master]
+    if: always()
+    
+    steps:
+      - name: Build Summary
+        run: |
+          echo "# LaTeX Compilation Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Jobs Status" >> $GITHUB_STEP_SUMMARY
+          echo "- German Chapters: ${{ needs.compile-german-chapters.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- German Master: ${{ needs.compile-german-master.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- English Chapters: ${{ needs.compile-english-chapters.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- English Master: ${{ needs.compile-english-master.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Artifacts" >> $GITHUB_STEP_SUMMARY
+          echo "Generated PDFs are available as workflow artifacts for 30-90 days." >> $GITHUB_STEP_SUMMARY
