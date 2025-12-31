@@ -8,7 +8,100 @@ with expanded content using the brain metaphor
 import os
 import sys
 
-def create_narrative_intro_de(chapter_num, chapter_title):
+def create_narrative_intro_en(chapter_num, chapter_title):
+    """Create an English narrative introduction with brain metaphor"""
+    intros = {
+        14: """
+    \\subsection*{Narrative Introduction: The Awakening Cosmic Brain}
+    
+    Imagine observing the development of a brain in time-lapse – not the growth of a biological organ, but the emergence of the universe itself. What we commonly refer to as the "Big Bang" and "expansion of space" is actually a much more subtle and fascinating process: the awakening of a cosmic consciousness from a state of pure potentiality.
+    
+    In this chapter, we explore how physical space does not exist as a pre-given stage, but is created by a fractal amplitude front – comparable to neural activation that propagates wave-like through brain regions, thereby first creating the prerequisite for consciousness. The "expansion" of the universe is actually this activation front, which travels through the fractal vacuum at a speed slightly above the speed of light.
+    
+    Just as a developing brain does not simply grow larger, but forms more complex folds and connections, this front does not simply create "more space," but structures the vacuum in a way that enables increasingly complex physical phenomena. The entire process is determined by a single geometric parameter: $\\xi = \\frac{4}{3} \\times 10^{-4}$ – the fractal packing density of the cosmic brain.
+    
+    \\subsection*{The Mathematical Foundation}
+    """
+    }
+    
+    # Default intro for other chapters
+    default_intro = f"""
+    \\subsection*{{Narrative Introduction: The Cosmic Brain in Detail}}
+    
+    We continue our journey through the cosmic brain. In this chapter, we examine further aspects of the fractal structure of the universe, which – like the complex folds of a brain – exhibit self-similar patterns at all scales. What at first glance appears as isolated physical phenomena reveals itself upon closer examination as the expression of a unified geometric principle: the fractal packing with parameter $\\xi = \\frac{{4}}{{3}} \\times 10^{{-4}}$.
+    
+    Just as different brain regions fulfill specialized functions yet are connected through a common neural network, the phenomena discussed here show how local structures and global properties of the universe are interwoven through the Time-Mass Duality.
+    
+    \\subsection*{{The Mathematical Foundation}}
+    """
+    
+    return intros.get(chapter_num, default_intro)
+
+def create_narrative_conclusion_en(chapter_num):
+    """Create an English narrative conclusion connecting to brain metaphor"""
+    return """
+    
+    \\subsection*{Narrative Summary: Understanding the Brain}
+    
+    What we have seen in this chapter is more than a collection of mathematical formulas – it is a window into the functioning of the cosmic brain. Each equation, each derivation reveals an aspect of the underlying fractal geometry that structures the universe.
+    
+    Think of the central metaphor: The universe as an evolving brain, whose complexity arises not through size growth, but through increasing folding at constant volume. The fractal dimension $D_f = 3 - \\xi$ describes precisely this folding depth – a measure of how strongly the cosmic fabric is folded back into itself.
+    
+    The results presented here are not isolated facts, but puzzle pieces of a larger picture: a reality in which time and mass are dual to each other, in which space is not fundamental but emerges from the activity of a fractal vacuum, and in which all observable phenomena follow from a single geometric parameter $\\xi$.
+    
+    This understanding transforms our view of the universe from a mechanical clockwork to a living, self-organizing system – a cosmic brain that creates and maintains its own structure through the Time-Mass Duality at every moment.
+    """
+
+def process_chapter_en(chapter_num, source_dir, target_dir):
+    """Process a single English chapter"""
+    source_file = os.path.join(source_dir, f"kapitel_{chapter_num}a_En.tex")
+    target_file = os.path.join(target_dir, f"Kapitel_{chapter_num:02d}_Narrative_En.tex")
+    
+    if not os.path.exists(source_file):
+        print(f"Warning: Source file {source_file} not found")
+        return False
+    
+    try:
+        # Read source file
+        with open(source_file, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        # Find the section title
+        import re
+        section_match = re.search(r'\\section\{([^}]+)\}', content)
+        if section_match:
+            chapter_title = section_match.group(1)
+        else:
+            chapter_title = f"Chapter {chapter_num}"
+        
+        # Insert narrative intro after the section header
+        section_pattern = r'(\\section\{[^}]+\}[\s\n]*)'
+        narrative_intro = create_narrative_intro_en(chapter_num, chapter_title)
+        content = re.sub(section_pattern, lambda m: m.group(1) + narrative_intro + '\n\t', content, count=1)
+        
+        # Add narrative conclusion before \end{document}
+        narrative_conclusion = create_narrative_conclusion_en(chapter_num)
+        content = content.replace('\\end{document}', narrative_conclusion + '\n\t\n\\end{document}')
+        
+        # Update headheight in preamble if present
+        content = re.sub(r'\\setlength\{\\headheight\}\{[^}]+\}', 
+                        r'\\setlength{\\headheight}{30pt}', content)
+        
+        # If geometry doesn't set headheight, add it
+        if 'headheight' not in content and '\\usepackage{geometry}' in content:
+            content = re.sub(r'(\\usepackage\{geometry\})',
+                           r'\1\n\\setlength{\\headheight}{30pt}', content)
+        
+        # Write target file
+        with open(target_file, 'w', encoding='utf-8') as f:
+            f.write(content)
+        
+        print(f"Created: {target_file}")
+        return True
+        
+    except Exception as e:
+        print(f"Error processing chapter {chapter_num}: {e}")
+        return False
     """Create a German narrative introduction with brain metaphor"""
     intros = {
         14: """
@@ -106,21 +199,33 @@ def process_chapter_de(chapter_num, source_dir, target_dir):
 def main():
     """Main function to create all narrative chapters"""
     repo_root = "/home/runner/work/T0-Time-Mass-Duality/T0-Time-Mass-Duality"
-    source_dir = os.path.join(repo_root, "2/tex-n/de_FFGFT/tex_kapitel")
+    source_dir_de = os.path.join(repo_root, "2/tex-n/de_FFGFT/tex_kapitel")
+    source_dir_en = os.path.join(repo_root, "2/tex-n/en_FFGFT/tex_kapitel")
     target_dir = os.path.join(repo_root, "2/narrative")
     
     # Ensure target directory exists
     os.makedirs(target_dir, exist_ok=True)
     
-    # Process chapters 14-44
-    success_count = 0
+    # Process German chapters 14-44
+    print("Creating German narrative chapters...")
+    success_count_de = 0
     for chapter_num in range(14, 45):
-        if process_chapter_de(chapter_num, source_dir, target_dir):
-            success_count += 1
+        if process_chapter_de(chapter_num, source_dir_de, target_dir):
+            success_count_de += 1
     
-    print(f"\nCompleted: {success_count}/31 chapters created successfully")
+    print(f"\nGerman chapters completed: {success_count_de}/31")
     
-    return 0 if success_count == 31 else 1
+    # Process English chapters 14-44
+    print("\nCreating English narrative chapters...")
+    success_count_en = 0
+    for chapter_num in range(14, 45):
+        if process_chapter_en(chapter_num, source_dir_en, target_dir):
+            success_count_en += 1
+    
+    print(f"\nEnglish chapters completed: {success_count_en}/31")
+    print(f"\nTotal: {success_count_de + success_count_en}/62 chapters created successfully")
+    
+    return 0 if (success_count_de == 31 and success_count_en == 31) else 1
 
 if __name__ == "__main__":
     sys.exit(main())
