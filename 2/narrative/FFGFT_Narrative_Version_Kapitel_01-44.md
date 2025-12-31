@@ -25,6 +25,36 @@ $$D_f = 3 - \xi \approx 2,999867$$
 
 In unserem Alltag erleben wir die Raumzeit als dreidimensional – links-rechts, vorne-hinten, oben-unten. Aber auf den allerkleinsten Skalen, in der Nähe der sogenannten Planck-Länge (etwa $10^{-35}$ Meter, eine unvorstellbar winzige Distanz), weicht die Dimensionalität geringfügig von der Zahl 3 ab. Sie beträgt etwa 2,999867. Dieser winzige Unterschied – nur 0,000133 – mag vernachlässigbar erscheinen, doch er hat dramatische Konsequenzen: Er reguliert die ansonsten unendlichen Divergenzen der Quantenfeldtheorie, verhindert Singularitäten in Schwarzen Löchern und erklärt Phänomene, die wir bisher der Dunklen Materie zugeschrieben haben – alles ohne zusätzliche, mysteriöse Komponenten.
 
+## Grundlegende Begriffe: Die Sprache der Geometrie
+
+Bevor wir tiefer in die mathematische Beschreibung der FFGFT einsteigen, müssen wir einige grundlegende Begriffe klären, die uns immer wieder begegnen werden. Diese Konzepte sind die Bausteine, mit denen Physiker die Geometrie der Raumzeit beschreiben.
+
+### Was ist ein Tensor?
+
+Das Wort "Tensor" klingt zunächst abstrakt und einschüchternd, aber im Kern ist ein Tensor nichts anderes als eine mathematische Größe, die beschreibt, wie sich physikalische Eigenschaften in verschiedenen Richtungen verhalten. 
+
+Stellen Sie sich vor, Sie drücken auf einen weichen Schwamm. Der Schwamm verformt sich – aber nicht überall gleich. In manche Richtungen gibt er mehr nach, in andere weniger. Ein Tensor ist gewissermaßen die mathematische Sprache, um solche richtungsabhängigen Eigenschaften präzise zu beschreiben.
+
+In der Physik der Raumzeit begegnen uns verschiedene Arten von Tensoren:
+
+- Ein **Skalar** ist die einfachste Form: eine einzelne Zahl, die überall gleich ist (z.B. die Temperatur an einem Punkt).
+
+- Ein **Vektor** ist eine gerichtete Größe mit einer bestimmten Länge und Richtung (z.B. die Geschwindigkeit eines Autos: 50 km/h nach Norden).
+
+- Ein **Tensor höherer Stufe** kann man sich als eine Tabelle oder Matrix von Zahlen vorstellen, die beschreiben, wie sich etwas in mehreren Richtungen gleichzeitig verhält. 
+
+Der **metrische Tensor** $g_{\mu\nu}$ (wir werden ihm gleich begegnen) ist so ein Tensor. Er ist die fundamentale Größe, die uns sagt, wie die Geometrie der Raumzeit beschaffen ist – wie Abstände gemessen werden, wie die Zeit vergeht, und wie Raum und Zeit miteinander verwoben sind. Man kann ihn sich wie eine lokale "Landkarte" vorstellen, die an jedem Punkt des Universums festlegt: "So funktionieren hier Abstand und Zeit."
+
+In flachem Raum (also ohne Gravitation) ist diese Landkarte überall gleich – der metrische Tensor hat überall dieselben Werte. Aber in der Nähe einer Masse, etwa eines Sterns oder eines Schwarzen Lochs, verzerrt sich die Landkarte: Abstände werden anders gemessen, die Zeit vergeht langsamer. Genau das beschreibt der metrische Tensor.
+
+### Der Energie-Impuls-Tensor
+
+Ein weiterer wichtiger Tensor ist der **Energie-Impuls-Tensor** $T_{\mu\nu}$. Er beschreibt, wie Energie und Impuls im Raum verteilt sind. Stellen Sie sich ein Staubkorn vor, das durchs All schwebt. Der Energie-Impuls-Tensor sagt uns: "Hier, an diesem Punkt, ist soundso viel Energie (Masse), und sie bewegt sich mit dieser Geschwindigkeit in jene Richtung."
+
+In der Einsteinschen Gravitationstheorie ist der Energie-Impuls-Tensor die Quelle der Raumzeitkrümmung. Wo Materie ist, dort krümmt sich die Raumzeit. In der FFGFT kommt eine neue Komponente hinzu: die fraktale Struktur selbst trägt ebenfalls Energie und Impuls und wird durch einen eigenen Energie-Impuls-Tensor beschrieben.
+
+Mit diesen Grundbegriffen im Gepäck können wir nun verstehen, wie die FFGFT die Dynamik des Universums beschreibt.
+
 ## Die Wirkung: Das Herzstück der Theorie
 
 In der Physik beschreiben wir die Dynamik von Feldern und Teilchen durch etwas, das wir "Wirkung" nennen. Die Wirkung ist ein mathematisches Konstrukt, das alle physikalischen Gesetze in sich vereint. Wenn Sie die Wirkung kennen, können Sie durch ein Variationsprinzip – das Prinzip der kleinsten Wirkung – alle Bewegungsgleichungen ableiten. Einstein tat dies mit seiner berühmten Einstein-Hilbert-Wirkung, aus der die Gleichungen der Allgemeinen Relativitätstheorie folgen.
@@ -43,25 +73,25 @@ Lassen Sie uns diese Gleichung Stück für Stück verstehen, denn sie ist der Sc
 
 - **$\xi \cdot \mathcal{L}_{\text{fractal}}$** ist der neue, revolutionäre Term. $\mathcal{L}_{\text{fractal}}$ ist die fraktale Lagrangedichte (mit der Einheit Energie pro Volumen, also J/m³), und ξ ist unser geometrischer Parameter. Dieser Term beschreibt die Korrektur, die durch die fraktale Struktur der Raumzeit entsteht. Er ist verantwortlich für die Selbstähnlichkeit des Vakuums und reguliert alle Divergenzen auf Planck-Skalen.
 
-- **$\sqrt{-g} \, d^4x$** ist das Volumenelement der gekrümmten Raumzeit. $g$ ist die Determinante des metrischen Tensors (ein Maß dafür, wie stark Raum und Zeit lokal verzerrt sind), und $d^4x$ bedeutet, dass wir über alle vier Dimensionen (drei Raum-, eine Zeitdimension) integrieren.
+- **$\sqrt{-g} \, d^4x$** ist das Volumenelement der gekrümmten Raumzeit. $g$ ist die Determinante des metrischen Tensors (erinnern Sie sich: das ist unsere "Landkarte", die beschreibt, wie stark Raum und Zeit lokal verzerrt sind), und $d^4x$ bedeutet, dass wir über alle vier Dimensionen (drei Raum-, eine Zeitdimension) integrieren.
 
 Die entscheidende Erkenntnis ist folgende: Im Grenzfall, wenn ξ gegen null geht, verschwindet der fraktale Korrekturterm, und wir erhalten exakt die Einstein-Hilbert-Wirkung zurück – die Grundlage der Allgemeinen Relativitätstheorie. Das bedeutet: Die FFGFT ist eine echte Erweiterung der ART, keine Widerlegung. Sie bestätigt alle erfolgreichen Vorhersagen Einsteins (wie die Perihelverschiebung des Merkur oder die Krümmung von Lichtstrahlen durch massive Objekte) und geht gleichzeitig über sie hinaus.
 
 ## Die modifizierten Einstein-Gleichungen
 
-Aus der Wirkung leiten wir durch Variation nach der Metrik $g_{\mu\nu}$ (das ist der mathematische Ausdruck für die Geometrie der Raumzeit) die Feldgleichungen ab:
+Aus der Wirkung leiten wir durch Variation nach der Metrik $g_{\mu\nu}$ (unserer Raumzeit-"Landkarte", die wir bereits kennengelernt haben) die Feldgleichungen ab:
 
 $$R_{\mu\nu} - \frac{1}{2} R g_{\mu\nu} + \xi \cdot T_{\mu\nu}^{\text{fractal}} = 8\pi G \left( T_{\mu\nu}^{\text{matter}} + T_{\mu\nu}^{\text{vac}} \right)$$
 
 Diese Gleichung sieht auf den ersten Blick kompliziert aus, aber lassen Sie uns auch sie gemeinsam entschlüsseln:
 
-- **$R_{\mu\nu}$** ist der Ricci-Tensor, eine verfeinerte Version des Ricci-Skalars. Er beschreibt, wie die Raumzeit in verschiedene Richtungen gekrümmt ist.
+- **$R_{\mu\nu}$** ist der Ricci-Tensor, eine verfeinerte Version des Ricci-Skalars. Während der Ricci-Skalar $R$ die durchschnittliche Krümmung an einem Punkt misst, beschreibt der Ricci-Tensor, wie die Raumzeit in verschiedene Richtungen gekrümmt ist – ähnlich wie bei unserem Schwamm-Beispiel.
 
-- **$g_{\mu\nu}$** ist der metrische Tensor – die "Landkarte" der Raumzeit. Er legt fest, wie Abstände und Zeitintervalle gemessen werden.
+- **$g_{\mu\nu}$** ist unser bereits bekannter metrischer Tensor – die "Landkarte" der Raumzeit, die festlegt, wie Abstände und Zeitintervalle gemessen werden.
 
-- **$T_{\mu\nu}^{\text{fractal}}$** ist der fraktale Energie-Impuls-Tensor. Er beschreibt die Energie und den Impuls, die in der fraktalen Struktur selbst stecken. Auf großen, kosmischen Skalen (größer als etwa $10^{-15}$ Meter) verschwindet dieser Term praktisch – die Fraktalität macht sich nur auf mikroskopischen Skalen bemerkbar.
+- **$T_{\mu\nu}^{\text{fractal}}$** ist ein Energie-Impuls-Tensor (wir haben diesen Begriff schon kennengelernt), der speziell die Energie und den Impuls beschreibt, die in der fraktalen Struktur selbst stecken. Auf großen, kosmischen Skalen (größer als etwa $10^{-15}$ Meter) verschwindet dieser Term praktisch – die Fraktalität macht sich nur auf mikroskopischen Skalen bemerkbar.
 
-- **$T_{\mu\nu}^{\text{matter}}$** ist der bekannte Energie-Impuls-Tensor der Materie: Sterne, Planeten, Staub, Gas, Strahlung – alles, was wir als "Materie" und "Energie" kennen.
+- **$T_{\mu\nu}^{\text{matter}}$** ist der Energie-Impuls-Tensor der gewöhnlichen Materie: Sterne, Planeten, Staub, Gas, Strahlung – alles, was wir als "Materie" und "Energie" kennen.
 
 - **$T_{\mu\nu}^{\text{vac}}$** ist der Vakuum-Energie-Impuls-Tensor. Auch das scheinbar leere Vakuum trägt zur Krümmung bei – ein Phänomen, das wir normalerweise der "Dunklen Energie" zuschreiben.
 
