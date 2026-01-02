@@ -2,8 +2,8 @@
 
 ## 📚 Release: FFGFT Narrative Books (German & English)
 
-**Release Date:** January 2, 2026  
-**Version:** 1.0.2  
+**Release Date:** January 1, 2026  
+**Version:** 1.0.0  
 **DOI:** 10.5281/zenodo.17522475
 
 ---
@@ -61,43 +61,10 @@ We are excited to announce the **complete integration and publication** of all 4
 - **Complete math:** All equations preserved for researchers
 
 ### Production Quality
-- **Professional LaTeX compilation:** 4-pass process with full cross-references
-- **Kindle-optimized:** Custom hyphenation for long German compounds
-- **Clean typography:** Optimized for both print and e-readers
-- **Modular structure:** 88 content files for flexible compilation
+- **Kindle-optimized:** Enhanced readability for e-readers
+- **Clean typography:** Optimized for both print and digital reading
 
 ---
-
-## 📊 Technical Achievements
-
-### Compilation Success
-```
-✅ 44/44 German chapters compiled
-✅ 44/44 English chapters compiled
-✅ 88 modular content files extracted
-✅ Both master PDFs successfully generated
-✅ Kindle optimization applied
-✅ Repository cleaned (35 obsolete files removed)
-```
-
-### Quality Metrics
-- **LaTeX warnings:** Only harmless cosmetic warnings remain
-- **Mathematical accuracy:** All formulas cross-verified
-- **Consistency:** Progressive chapter structure maintained
-- **Formatting:** Professional book-quality typography
-
-### Repository Organization
-```
-Narrative Edition Files:
-├── 44 German chapters (Kapitel_XX_Narrative_De.tex)
-├── 44 English chapters (Kapitel_XX_Narrative_En.tex)  
-├── 88 content files (modular compilation)
-├── 2 master documents (German & English)
-├── 1 automation script (complete_book_workflow.py)
-└── 2 compiled PDFs (817 KB + 972 KB)
-
-Total: 180 source files + 2 production-ready PDFs
-```
 
 ---
 
@@ -118,11 +85,7 @@ Total: 180 source files + 2 production-ready PDFs
 ### For Researchers
 
 **LaTeX Source Files:**
-All source files are available in `/2/narrative/` for:
-- Custom compilation
-- Chapter extraction
-- Translation to other languages
-- Academic citations
+All source files are available in `/2/narrative/` for academic citations and research purposes.
 
 **Citation:**
 ```bibtex
@@ -139,39 +102,6 @@ All source files are available in `/2/narrative/` for:
 
 ---
 
-## 🔧 Technical Details
-
-### LaTeX Compilation Requirements
-```bash
-texlive-latex-base, texlive-latex-extra
-texlive-fonts-recommended, texlive-fonts-extra
-texlive-lang-german, texlive-lang-english
-texlive-science (physics.sty), latexmk
-```
-
-### Kindle Optimization Settings
-```latex
-\usepackage{hyphenat}              % Enhanced hyphenation
-\sloppy                            % Tolerant line breaking  
-\emergencystretch=3em             % Flexible spacing
-\hyphenpenalty=500                % Word breaking optimization
-\tolerance=2000                   % Typography improvement
-\hbadness=2000                    % Warning suppression
-```
-
-### Custom siunitx Units
-```latex
-\DeclareSIUnit\gigalightyear{Glj}  % 10^9 light-years
-\DeclareSIUnit\megalightyear{Mlj}  % 10^6 light-years
-\DeclareSIUnit\kilolightyear{klj}  % 10^3 light-years
-\DeclareSIUnit\lightyear{lj}       % Light-year
-\DeclareSIUnit\mev{MeV}            % Mega electron-volt
-\DeclareSIUnit\gev{GeV}            % Giga electron-volt
-\DeclareSIUnit\tev{TeV}            % Tera electron-volt
-```
-
----
-
 ## 📈 What Makes This Release Special
 
 ### 1. Complete Integration
@@ -180,22 +110,10 @@ For the first time, all 44 narrative chapters are available as cohesive, profess
 ### 2. Accessibility Breakthrough
 The cosmic brain metaphor makes advanced theoretical physics accessible to general audiences without sacrificing mathematical rigor.
 
-### 3. Production Quality
-Professional LaTeX compilation with Kindle optimization ensures excellent reading experience across all platforms.
-
-### 4. Open Source
+### 3. Open Source
 All source files are publicly available, enabling:
 - Community verification
-- Translation to additional languages
 - Academic citations and references
-- Custom compilations
-
-### 5. Modular Architecture
-88 content files enable flexible document assembly for:
-- Custom book versions
-- Chapter anthologies
-- Topical compilations
-- Educational materials
 
 ---
 
@@ -220,8 +138,6 @@ All source files are publicly available, enabling:
 - Testable cosmological predictions
 
 ### Educators
-- Modular chapter structure
-- LaTeX source for customization
 - German and English versions
 - Supporting materials in `/2/html/`
 
@@ -274,8 +190,6 @@ All source files are publicly available, enabling:
 - **Open source community** - LaTeX tools and feedback
 
 ### Tools and Technologies
-- **LaTeX/TeX Live** - Document preparation
-- **Python** - Automation scripts
 - **GitHub** - Version control and hosting
 - **Zenodo** - Archival and DOI assignment
 
