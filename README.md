@@ -3,19 +3,31 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17522475.svg)](https://doi.org/10.5281/zenodo.17522475)
 
 
-# T0-Time-Mass-Duality: A Unified Framework for Quantum Mechanics and Relativity
+# T0-Time-Mass-Duality: A Revolutionary Geometric Framework Unifying Quantum Mechanics, Relativity, and Cosmology
 
-**Keywords/Tags for Discoverability:** Unified Field Theory, Time-Mass Duality, Geometric Physics, Fine Structure Constant, Fractal Spacetime, Deterministic Quantum Mechanics, SI Units Reform, Particle Masses Calculation, Muon g-2 Anomaly, Cosmology Alternatives, RSA Factorization Quantum, Planck Constants Derivation, ξ Geometric Parameter, Quantum Computing Simulator, Dirac Equation Simplification
+**Keywords/Tags for Discoverability:** Unified Field Theory, FFGFT (Fundamental Fractal-Geometric Field Theory), Time-Mass Duality, Geometric Physics, Fine Structure Constant α, Fractal Spacetime, Deterministic Quantum Mechanics, SI Units Reform, Particle Mass Predictions, Muon g-2 Anomaly Resolution, Dark Energy Alternative, MOND Alternative, CMB Anomalies, Hubble Tension Solution, RSA Factorization Quantum, Planck Constants Derivation, ξ Geometric Parameter, Vacuum Energy Density, Quantum Computing Simulator, Dirac Equation Simplification, Emergent Gravity, Cosmic Brain Metaphor, Narrative Physics Edition
 
-**Topics (GitHub Topics):** #unifiedfieldtheory #quantumrelativity #finestructureconstant #fractalphysics #deterministicqm #geometricconstants #particlephysics #cosmology #quantumcomputing #rsaquantum #siunits #plancklength #gravitationalconstant #muong2 #cmbanomaly #lagrangiansimplification #diracequation #energyduality #timemassduality #xigeometry
+**Topics (GitHub Topics):** #ffgft #unifiedfieldtheory #quantumrelativity #finestructureconstant #fractalphysics #deterministicqm #geometricconstants #particlephysics #cosmology #quantumgravity #quantumcomputing #rsaquantum #siunits #plancklength #gravitationalconstant #muong2 #cmbanomaly #hubbletension #darkenergy #mond #lagrangiansimplification #diracequation #energyduality #timemassduality #xigeometry #vacuumenergy #emergentgravity #narrativephysics #cosmicbrain #popularsciencephysics
 
-**Abstract/Summary for Search Engines:** The T0-Time-Mass-Duality model is a revolutionary geometric framework unifying quantum mechanics and general relativity through a single parameter ξ = (4/3) × 10⁻⁴. Deriving all physical constants (G, c, lₚ, α ≈ 1/137) from fractal spacetime geometry, it eliminates the Standard Model's 20+ parameters, achieves 98% accuracy in particle mass predictions, resolves the muon g-2 anomaly (0.05σ), and enables deterministic quantum computing. Includes interactive tools, Python implementations, 172+ PDF documents, audio podcasts, and YouTube videos. Ideal for researchers in theoretical physics, quantum information, and cosmology. DOI: 10.5281/zenodo.17390358.
+**Abstract/Summary for Search Engines:** The T0-Time-Mass-Duality model, also known as FFGFT (Fundamental Fractal-Geometric Field Theory), is a revolutionary geometric framework unifying quantum mechanics, general relativity, and cosmology through a single parameter ξ = (4/3) × 10⁻⁴. Deriving all physical constants (G, c, ℏ, lₚ, α ≈ 1/137.036) from fractal spacetime geometry, it eliminates the Standard Model's 20+ free parameters, achieves 98% accuracy in particle mass predictions (electron, muon, tau, quarks), resolves the muon g-2 anomaly to 0.05σ precision, solves the Hubble tension and CMB anomalies, provides alternatives to dark energy and MOND, and enables deterministic quantum computing. Features 44-chapter narrative edition with cosmic brain metaphor, interactive tools, Python implementations, 178+ LaTeX source files, 172+ PDF documents, audio podcasts, and YouTube videos. Ideal for researchers in theoretical physics, quantum information, cosmology, and alternative physics. DOI: 10.5281/zenodo.17522475.
 
 ## Overview
 
-The T0 model proposes an approach to fundamental physics through time-energy duality, where the intrinsic time field T(x,t) provides a unified treatment of quantum mechanics and relativity. This framework operates with the universal geometric parameter ξ = (4/3) × 10⁻⁴ derived from three-dimensional space geometry, establishing the fundamental relationship T_field · E_field = 1.
+**Welcome to the T0 Revolution in Fundamental Physics** 
 
-**Why Search for T0?** If you're exploring alternatives to the Standard Model, solutions to quantum gravity, or deterministic interpretations of QM, T0 offers parameter-free derivations and testable predictions. Featured in physics forums like Physics Stack Exchange and Reddit r/Physics.
+The T0 model presents a paradigm-shifting approach to understanding the universe through time-energy duality, where an intrinsic time field T(x,t) provides a unified, parameter-free treatment of quantum mechanics, general relativity, and cosmological phenomena. At its core lies the **Fundamental Fractal-Geometric Field Theory (FFGFT)**, operating with the universal geometric parameter **ξ = (4/3) × 10⁻⁴** derived purely from three-dimensional space geometry.
+
+**Key Innovation:** The framework establishes the fundamental relationship **T_field · E_field = 1**, eliminating the need for independent definitions of time and energy while deriving all physical constants from first principles.
+
+**What Makes T0/FFGFT Unique:**
+- **Zero Free Parameters:** All constants emerge from geometry alone
+- **Testable Predictions:** Specific values for particle masses, anomalous magnetic moments, and cosmological observables
+- **Resolves Major Anomalies:** Muon g-2, Hubble tension, CMB power spectrum deviations
+- **Alternative Cosmology:** Explains dark energy and MOND phenomena without exotic matter
+- **Deterministic QM:** Removes quantum measurement paradoxes through geometric interpretation
+- **Practical Applications:** Quantum computing algorithms, RSA factorization, precision metrology
+
+**Why Explore T0/FFGFT?** Whether you're researching alternatives to the Standard Model, seeking solutions to quantum gravity, investigating cosmological anomalies, or exploring deterministic interpretations of quantum mechanics, T0 offers rigorous mathematical derivations with experimentally testable predictions. Featured in physics forums (Physics Stack Exchange, Reddit r/Physics) and now available as an accessible **Narrative Edition** using the cosmic brain metaphor.
 
 ## Main Overview and Calculator Documents
 

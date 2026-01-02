@@ -2,19 +2,31 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17522475.svg)](https://doi.org/10.5281/zenodo.17522475)
 
-# T0-Zeit-Masse-Dualität: Ein einheitlicher Rahmen für Quantenmechanik und Relativität
+# T0-Zeit-Masse-Dualität: Ein revolutionärer geometrischer Rahmen zur Vereinheitlichung von Quantenmechanik, Relativität und Kosmologie
 
-**Schlüsselwörter/Tags für Auffindbarkeit:** Vereinheitlichte Feldtheorie, Zeit-Masse-Dualität, Geometrische Physik, Feinstrukturkonstante, Fraktale Raumzeit, Deterministische Quantenmechanik, SI-Einheiten-Reform, Teilchenmassenberechnung, Myon g-2 Anomalie, Kosmologie-Alternativen, RSA-Faktorisierung Quanten, Planck-Konstanten-Ableitung, ξ Geometrischer Parameter, Quantencomputing-Simulator, Dirac-Gleichung-Vereinfachung
+**Schlüsselwörter/Tags für Auffindbarkeit:** Vereinheitlichte Feldtheorie, FFGFT (Fundamentale Fraktal-Geometrische Feldtheorie), Zeit-Masse-Dualität, Geometrische Physik, Feinstrukturkonstante α, Fraktale Raumzeit, Deterministische Quantenmechanik, SI-Einheiten-Reform, Teilchenmassen-Vorhersagen, Myon g-2 Anomalie-Lösung, Dunkle-Energie-Alternative, MOND-Alternative, CMB-Anomalien, Hubble-Spannungs-Lösung, RSA-Faktorisierung Quanten, Planck-Konstanten-Ableitung, ξ Geometrischer Parameter, Vakuumenergiedichte, Quantencomputing-Simulator, Dirac-Gleichung-Vereinfachung, Emergente Gravitation, Kosmisches-Gehirn-Metapher, Narrative Physik-Edition
 
-**Themen (GitHub Topics):** #vereinheitlichte-feldtheorie #quantenrelativität #feinstrukturkonstante #fraktalphysik #deterministische-qm #geometrischekonstanten #teilchenphysik #kosmologie #quantencomputing #rsa-quanten #si-einheiten #plancklaenge #gravitationskonstante #muong2 #cmbanomalie #lagrangianvereinfachung #diracgleichung #energiedualität #zeitmassedualität #xigeometrie
+**Themen (GitHub Topics):** #ffgft #vereinheitlichte-feldtheorie #quantenrelativität #feinstrukturkonstante #fraktalphysik #deterministische-qm #geometrischekonstanten #teilchenphysik #kosmologie #quantengravitation #quantencomputing #rsa-quanten #si-einheiten #plancklaenge #gravitationskonstante #muong2 #cmbanomalie #hubblespannung #dunkleenergie #mond #lagrangianvereinfachung #diracgleichung #energiedualität #zeitmassedualität #xigeometrie #vakuumenergie #emergenteGravitation #narrativphysik #kosmischesGehirn #populärwissenschaftphysik
 
-**Zusammenfassung/Abstract für Suchmaschinen:** Das T0-Zeit-Masse-Dualitätsmodell ist ein revolutionärer geometrischer Rahmen, der Quantenmechanik und allgemeine Relativität durch einen einzigen Parameter ξ = (4/3) × 10⁻⁴ vereinheitlicht. Es leitet alle physikalischen Konstanten (G, c, lₚ, α ≈ 1/137) aus fraktaler Raumzeit-Geometrie ab, eliminiert die 20+ Parameter des Standardmodells, erreicht 98% Genauigkeit bei Teilchenmassen-Vorhersagen, löst die Myon g-2 Anomalie (0.05σ) und ermöglicht deterministisches Quantencomputing. Enthält interaktive Tools, Python-Implementierungen, 172+ PDF-Dokumente, Audio-Podcasts und YouTube-Videos. Ideal für Forscher in theoretischer Physik, Quanteninformation und Kosmologie. DOI: 10.5281/zenodo.17390358.
+**Zusammenfassung/Abstract für Suchmaschinen:** Das T0-Zeit-Masse-Dualitätsmodell, auch bekannt als FFGFT (Fundamentale Fraktal-Geometrische Feldtheorie), ist ein revolutionärer geometrischer Rahmen, der Quantenmechanik, allgemeine Relativität und Kosmologie durch einen einzigen Parameter ξ = (4/3) × 10⁻⁴ vereinheitlicht. Es leitet alle physikalischen Konstanten (G, c, ℏ, lₚ, α ≈ 1/137,036) aus fraktaler Raumzeit-Geometrie ab, eliminiert die 20+ freien Parameter des Standardmodells, erreicht 98% Genauigkeit bei Teilchenmassen-Vorhersagen (Elektron, Myon, Tau, Quarks), löst die Myon g-2 Anomalie auf 0,05σ Präzision, löst die Hubble-Spannung und CMB-Anomalien, bietet Alternativen zu dunkler Energie und MOND, und ermöglicht deterministisches Quantencomputing. Enthält 44-Kapitel narrative Edition mit kosmischer Gehirn-Metapher, interaktive Tools, Python-Implementierungen, 178+ LaTeX-Quelldateien, 172+ PDF-Dokumente, Audio-Podcasts und YouTube-Videos. Ideal für Forscher in theoretischer Physik, Quanteninformation, Kosmologie und alternativer Physik. DOI: 10.5281/zenodo.17522475.
 
 ## Überblick
 
-Das T0-Modell schlägt einen Ansatz für die fundamentale Physik durch Zeit-Energie-Dualität vor, bei dem das intrinsische Zeitfeld T(x,t) eine einheitliche Behandlung von Quantenmechanik und Relativität ermöglicht. Dieser Rahmen arbeitet mit dem universellen geometrischen Parameter ξ = (4/3) × 10⁻⁴, der aus der Geometrie des dreidimensionalen Raums abgeleitet ist, und etabliert die fundamentale Beziehung T_field · E_field = 1.
+**Willkommen zur T0-Revolution in der Fundamentalphysik**
 
-**Warum nach T0 suchen?** Wenn Sie Alternativen zum Standardmodell, Lösungen für Quantengravitation oder deterministische Interpretationen der QM erkunden, bietet T0 parameterfreie Ableitungen und testbare Vorhersagen. Erwähnt in Physik-Foren wie Physics Stack Exchange und Reddit r/Physics.
+Das T0-Modell präsentiert einen paradigmenwechselnden Ansatz zum Verständnis des Universums durch Zeit-Energie-Dualität, wobei ein intrinsisches Zeitfeld T(x,t) eine einheitliche, parameterfreie Behandlung von Quantenmechanik, allgemeiner Relativität und kosmologischen Phänomenen ermöglicht. Im Zentrum steht die **Fundamentale Fraktal-Geometrische Feldtheorie (FFGFT)**, die mit dem universellen geometrischen Parameter **ξ = (4/3) × 10⁻⁴** arbeitet, der rein aus der Geometrie des dreidimensionalen Raums abgeleitet wird.
+
+**Zentrale Innovation:** Der Rahmen etabliert die fundamentale Beziehung **T_Feld · E_Feld = 1**, wodurch unabhängige Definitionen von Zeit und Energie überflüssig werden und alle physikalischen Konstanten aus ersten Prinzipien abgeleitet werden können.
+
+**Was T0/FFGFT einzigartig macht:**
+- **Null freie Parameter:** Alle Konstanten emergieren allein aus der Geometrie
+- **Testbare Vorhersagen:** Spezifische Werte für Teilchenmassen, anomale magnetische Momente und kosmologische Observablen
+- **Löst wichtige Anomalien:** Myon g-2, Hubble-Spannung, CMB-Leistungsspektrum-Abweichungen
+- **Alternative Kosmologie:** Erklärt dunkle Energie und MOND-Phänomene ohne exotische Materie
+- **Deterministische QM:** Beseitigt Quantenmessungs-Paradoxien durch geometrische Interpretation
+- **Praktische Anwendungen:** Quantencomputing-Algorithmen, RSA-Faktorisierung, Präzisionsmetrologie
+
+**Warum T0/FFGFT erkunden?** Ob Sie Alternativen zum Standardmodell erforschen, Lösungen für Quantengravitation suchen, kosmologische Anomalien untersuchen oder deterministische Interpretationen der Quantenmechanik erkunden – T0 bietet rigorose mathematische Ableitungen mit experimentell testbaren Vorhersagen. Erwähnt in Physik-Foren (Physics Stack Exchange, Reddit r/Physics) und jetzt als zugängliche **Narrative Edition** mit kosmischer Gehirn-Metapher verfügbar.
 
 ## Hauptübersicht und Rechner-Dokumente
 
