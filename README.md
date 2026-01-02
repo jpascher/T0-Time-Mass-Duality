@@ -71,12 +71,6 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 - **Part II (Ch. 14-27):** Unification - All constants from ξ
 - **Part III (Ch. 28-44):** Applications - Predictions and cosmology
 
-**Technical Excellence:**
-- 178 LaTeX source files (88 modular _content files)
-- 4-pass pdflatex compilation with complete cross-references
-- Custom siunitx units for physics notation
-- Professional book quality for print and e-readers
-
 **For Readers:** No prerequisites required - progressive learning structure  
 **For Students:** Complete derivations with cross-references  
 **For Researchers:** LaTeX sources available in `/2/narrative/`
@@ -167,12 +161,6 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 - **Euler's Number e:** Mass hierarchy m_n = m_0·e^(ξ·n·κ), logarithmic distribution (see Document 008)
 - **Golden Ratio φ:** Tetrahedral packing and Fibonacci patterns, ξ ~ 1/φ^n (see Document 009)
 - **Mathematical Harmony:** T0 unites π, e, and φ through ξ = f(π, e, φ) ≈ 4/(3·φ^12·e²)
-
-**Technical Excellence:**
-- Complete table of contents (tocdepth=3) with all hierarchical levels
-- Multiple mathematical perspectives: exact, linearized, renormalized
-- Cross-references to Documents 006, 008, 009, 011
-- Numerical verification tables and best practices for precision
 
 ---
 
@@ -379,7 +367,6 @@ The `2/tex/` directory contains complete LaTeX source files:
 - **[T0_Kosmologie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Kosmologie_En.pdf)** – Cosmological applications of T0 theory  
 - **[T0_QM-QFT-RT](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_QM-QFT-RT_En.pdf)** – Complete quantum field theory in T0 framework  
 
-*(Die weiteren Abschnitte „Core Theory Documents“, „Revolutionary Simplifications“, „Fine Structure Constant Analysis“, „Particle Physics & Experimental Results“, „Cosmology & Astrophysics“, „Mathematical Foundations“, „Quantum Computing & Cryptography“, „Quantum Field Theory Integration“, „Energy & Motion Analysis“, „Special Effects & Advanced Topics“, „Advanced Mathematical Methods“, „Unit Systems & Standards“ bleiben wie in Deiner bisherigen README erhalten – inklusive aller Links. Falls Du möchtest, kann ich sie ebenfalls mit neuen Links wie `T0_threeclock_*` oder eventuellen neuen PDFs erweitern.)*
 
 ## Interactive HTML Tools (18 files)
 
