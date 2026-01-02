@@ -1,9 +1,9 @@
 # T0 Theory - Release Notes
-
+gh release create v1.0.1 --title "Release v1.0.1" --notes-file RELEASE_NOTES.md
 ---
 
 ## ✨ **January 2026: FFGFT Narrative Edition v1.0**
-### Version 1.0.0 - January 1, 2026
+### Version 1.0.1 - January 1, 2026
 
 ### 🎯 Release Highlights
 
@@ -17,10 +17,6 @@ Complete integration of all 44 chapters of the **Fundamental Fractal-Geometric F
 
 ### 🆕 Major Features
 
-**Complete Book Structure:**
-- **Part I (Chapters 1-13):** Foundations - From T0 origin to quantum gravity
-- **Part II (Chapters 14-27):** Unification - Standard Model emergence and dark matter
-- **Part III (Chapters 28-44):** Applications - Cosmology, consciousness, and testable predictions
 
 **Content Highlights:**
 - ✅ All 44 chapters with "cosmic brain" metaphor narrative approach
@@ -30,17 +26,6 @@ Complete integration of all 44 chapters of the **Fundamental Fractal-Geometric F
 - ✅ Professional book-quality typesetting
 - ✅ Kindle-optimized hyphenation for long German compound words
 
-**Technical Achievements:**
-- 178 LaTeX source files organized in clean directory structure
-- Custom siunitx units defined for astrophysical scales
-- 4-pass pdflatex compilation for complete cross-references
-- UTF-8 encoding throughout
-- Source/output separation: `.tex` files in `/2/narrative/`, PDFs in `/2/pdf/`
-
-**Documentation:**
-- 📚 [Narrative Edition README](2/narrative/README.md) - Complete documentation
-- 📋 [Release Notes v1.0](RELEASE_NOTES_v1.0.md) - Detailed release information
-- 🔬 Chapter-by-chapter topics and compilation instructions
 
 **Target Audiences:**
 - **General Readers:** No prerequisites required, accessible explanations
