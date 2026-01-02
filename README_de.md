@@ -70,12 +70,6 @@ Das T0-Modell präsentiert einen paradigmenwechselnden Ansatz zum Verständnis d
 - **Teil II (Kap. 14-27):** Vereinheitlichung - Alle Konstanten aus ξ
 - **Teil III (Kap. 28-44):** Anwendungen - Vorhersagen und Kosmologie
 
-**Technische Exzellenz:**
-- 178 LaTeX-Quelldateien (88 modulare _content-Dateien)
-- 4-Pass pdflatex-Kompilierung mit vollständigen Querverweisen
-- Custom siunitx Units für Physik-Notation
-- Professionelle Buchqualität für Print und E-Reader
-
 **Für Leser:** Keine Vorkenntnisse erforderlich - progressiver Lernaufbau  
 **Für Studenten:** Vollständige Herleitungen mit Querverweisen  
 **Für Forscher:** LaTeX-Quellen in `/2/narrative/` verfügbar
@@ -166,12 +160,6 @@ Das T0-Modell präsentiert einen paradigmenwechselnden Ansatz zum Verständnis d
 - **Euler'sche Zahl e:** Massenhierarchie m_n = m_0·e^(ξ·n·κ), logarithmische Verteilung (siehe Dokument 008)
 - **Goldener Schnitt φ:** Tetraedrische Packung und Fibonacci-Muster, ξ ~ 1/φ^n (siehe Dokument 009)
 - **Mathematische Harmonie:** T0 vereinigt π, e und φ durch ξ = f(π, e, φ) ≈ 4/(3·φ^12·e²)
-
-**Technische Exzellenz:**
-- Vollständiges Inhaltsverzeichnis (tocdepth=3) mit allen hierarchischen Ebenen
-- Multiple mathematische Perspektiven: exakt, linearisiert, renormiert
-- Querverweise zu Dokumenten 006, 008, 009, 011
-- Numerische Verifikationstabellen und Best Practices für Präzision
 
 ---
 
