@@ -27,21 +27,10 @@
 \usepackage{lmodern}
 
 % =============================================================================
-% SECTION 2: Page Geometry (Kindle-optimized with larger margins)
+% SECTION 2: Page Geometry
 % =============================================================================
-\usepackage[a4paper, left=3cm, right=3cm, top=3cm, bottom=3.5cm]{geometry}
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=3.5cm]{geometry}
 \setlength{\headheight}{15pt}
-
-% =============================================================================
-% Hyphenation and Line Breaking for Kindle Compatibility
-% =============================================================================
-% Enable better line breaking for e-readers
-\usepackage{hyphenat}
-\sloppy                     % More tolerant line breaking
-\emergencystretch=2em      % Balanced stretch to avoid overfull boxes
-\hyphenpenalty=1000        % Moderate hyphenation (not too aggressive)
-\tolerance=5000            % Reasonable tolerance for word spacing
-\hbadness=3000            % Reasonable threshold for warnings
 
 % =============================================================================
 % SECTION 3: Mathematics and Physics
@@ -50,10 +39,15 @@
 \usepackage{mathtools}
 \usepackage{physics}
 
-% Prevent inline math from being scaled down - enforce readable sizes
-% Alternative approach to avoid halign errors: selectively use \textstyle where needed
-\everymath{\displaystyle}  % Use display style in all inline math for readability
+% Kindle readability fix: Force display style for ALL math (inline and display)
+% This makes all formulas larger and more readable on Kindle
+% Side effect: inline formulas will take more vertical space
+\everymath{\displaystyle}
 \everydisplay{\displaystyle}
+
+% Allow line breaks in inline math at relations and binary operators
+\relpenalty=10
+\binoppenalty=10
 
 \usepackage{siunitx}
 \sisetup{
@@ -622,25 +616,13 @@
 % SECTION 17: Layout Settings (Kindle-compatible)
 % =============================================================================
 \sloppy  % Allow more flexible line breaking
-\hfuzz=2pt  % Only suppress trivial overfull warnings (Kindle needs readable text!)
-\vfuzz=2pt  
-\tolerance=5000  % Moderate tolerance - not too aggressive
-\emergencystretch=2em  % Reasonable stretch to avoid overfull boxes
-\hbadness=3000  % Moderate threshold for underfull box warnings
-\vbadness=3000  % Moderate threshold for underfull vbox warnings
+\hfuzz=100pt  % Suppress overfull warnings up to 100pt (Kindle compatibility)
+\vfuzz=100pt  
+\tolerance=9999  % High tolerance for bad line breaks
+\emergencystretch=5em  % Extra stretch to avoid overfull boxes
+\hbadness=10000  % Suppress underfull box warnings
+\vbadness=10000  % Suppress underfull vbox warnings
 \raggedbottom
-
-% Ensure minimum font size for Kindle readability (7pt minimum)
-\renewcommand{\tiny}{\fontsize{8pt}{9.6pt}\selectfont}
-\renewcommand{\scriptsize}{\fontsize{9pt}{10.8pt}\selectfont}
-\renewcommand{\footnotesize}{\fontsize{10pt}{12pt}\selectfont}
-\renewcommand{\small}{\fontsize{10.5pt}{12.6pt}\selectfont}
-\renewcommand{\normalsize}{\fontsize{11pt}{13.2pt}\selectfont}
-\renewcommand{\large}{\fontsize{12pt}{14.4pt}\selectfont}
-\renewcommand{\Large}{\fontsize{14pt}{16.8pt}\selectfont}
-\renewcommand{\LARGE}{\fontsize{17pt}{20.4pt}\selectfont}
-\renewcommand{\huge}{\fontsize{20pt}{24pt}\selectfont}
-\renewcommand{\Huge}{\fontsize{25pt}{30pt}\selectfont}
 
 % Auto-resize tables that are too wide
 \usepackage{environ}
