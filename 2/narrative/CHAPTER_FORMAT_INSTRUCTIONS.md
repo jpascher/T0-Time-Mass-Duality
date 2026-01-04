@@ -5,6 +5,8 @@ Directory: `2/narrative`
 
 This document defines the **exact** format for all DE/EN chapter files and how to convert from the existing standalone files.
 
+**Current state:** The directories `de_chapters/` and `en_chapters/` are currently empty on branch `copilot/reset-copilot-narrative`. Copilot must (re)create all 44 DE/EN chapter files from the standalones using these rules.
+
 ---
 
 ## 1. Source and Target Files
