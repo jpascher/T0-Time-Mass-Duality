@@ -1,0 +1,44 @@
+# Copilot Next Steps: Clean DE Standalones and Continue EN Workflow
+
+Branch: `copilot/reset-copilot-narrative`
+Directory: `2/narrative`
+
+## 1. Current State (Manual Edits by User)
+
+- All **German standalone** files in `de_standalone/` have been manually cleaned:
+  - Old symbol/legend boxes were removed.
+  - Long lines were manually wrapped to avoid overfull boxes.
+- These DE standalones are now the **authoritative text source** for the narrative (DE).
+
+## 2. Rules for Copilot (Do NOT undo)
+
+- **Do NOT reintroduce** any local "Zeichenerklärung" boxes into the DE standalones.
+  - Global symbol legends are handled only via:
+    - `Zentrale_Zeichenerklaerung_De.tex`
+    - `Zentrale_Zeichenerklaerung_En.tex`
+- Preserve the manual line breaks and wrapping in the DE standalones as much as possible.
+- When generating EN or chapter versions, always use the **clean DE standalones** as the semantic reference.
+
+## 3. Chapter Workflow (DE/EN)
+
+- Follow `CHAPTER_FORMAT_INSTRUCTIONS.md` for all work on `de_chapters/` and `en_chapters/`:
+  - Use numbered `\chapter{Kapitel XX: ...}` / `\chapter{Chapter XX: ...}`.
+  - Convert `\section*{Abstract}` / `\section*{Zusammenfassung}` to numbered sections in chapter files.
+  - Ensure masters (`FFGFT_Narrative_Master_De.tex`, `FFGFT_Narrative_Master_En.tex`) only `\input{...}` the chapter files.
+
+## 4. EN Workflow and Kindle Checks
+
+- EN standalones in `en_standalone/` remain the basis for KDP/Kindle-optimized PDFs.
+- Continue to:
+  - Keep EN standalones consistent with the cleaned DE standalones (content-wise).
+  - Apply Kindle optimization rules from `KINDLE_OPTIMIZATION_GUIDE.md`.
+  - Fix any remaining overfull/underfull boxes in EN standalones and master EN PDF.
+
+## 5. High-Level Task for Copilot Agent
+
+1. Use the **already cleaned DE standalones** in `de_standalone/` as the single source of truth.
+2. Bring all remaining `de_chapters/` and `en_chapters/` files in line with `CHAPTER_FORMAT_INSTRUCTIONS.md`.
+3. Ensure both masters build cleanly and match the cleaned content:
+   - `FFGFT_Narrative_Master_De.tex`
+   - `FFGFT_Narrative_Master_En.tex`
+4. Do not add any new local symbol boxes inside chapters or standalones; use only the central legend files.
