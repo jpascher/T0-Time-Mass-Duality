@@ -75,10 +75,12 @@ Behebe alle Fehler, die das Kompilieren stoppen, insbesondere:
 - Nur die LaTeX-Struktur reparieren (Umgebungen, Klammern, Paket-Ladereihenfolge).
 - Inhaltliche Aussagen, Zahlen und mathematische Formeln **nicht** verändern.
 
-### 4.2 Warnungen
+### 4.2 Warnungen: zu breite Tabellen (bis zu 201 Dokumente korrigieren)
 
-- Normale Warnungen wie Overfull/Underfull `\hbox`/`\vbox` sind tolerierbar, **sofern** sie das Layout nicht offensichtlich zerstören.
-- PDF-String-Warnungen (Math in Bookmarks) dürfen bleiben.
+- Warnungen vom Typ **Overfull `\hbox`** oder **Float too large for page** bei Tabellen sollen systematisch reduziert werden, sodass alle Tabellen innerhalb der Textbreite liegen.
+- Bearbeite dazu rekursiv bis zu **201** unterschiedliche `.tex`-Dateien aus `2/fix_tabellen/extracted_tables` (Sortierreihenfolge der `standalone_tables_list.txt`).
+- Erlaubte Maßnahmen: Spaltenbreiten anpassen (`p{...}`, `tabularx`, `arraystretch`), Zeilenumbrüche in Zellen setzen, Tabellen ggf. mit `adjustbox`/`resizebox` auf `\textwidth` skalieren.
+- PDF-String-Warnungen (Math in Bookmarks) und geringfügige Underfull-Warnungen dürfen bleiben.
 
 ---
 
