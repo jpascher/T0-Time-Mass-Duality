@@ -68,7 +68,7 @@ The branch `standalone-tree` was created in the CI environment but cannot be pus
 Alternatively, the branch has already been created locally in this workspace as a demonstration. To push it from the local repository, navigate to your repository directory and run:
 
 ```bash
-cd C:\users\johann\B15  # Or your actual repository path
+cd /path/to/your/repository  # e.g., C:\users\johann\B15 or ~/projects/T0-Time-Mass-Duality
 git checkout standalone-tree  # If not already on this branch
 git push -u origin standalone-tree
 ```
