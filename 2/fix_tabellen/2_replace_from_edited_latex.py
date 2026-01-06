@@ -7,52 +7,79 @@ EN_DIR = os.path.join(BASE_DIR, "en_standalone")
 PROCESS_DIRS = [DE_DIR, EN_DIR]
 
 EXTRACTED_DIR = os.path.join(BASE_DIR, "extracted_tables")
+FINAL_CORRECTED_DIR = os.path.join(BASE_DIR, "final_corrected")
+os.makedirs(FINAL_CORRECTED_DIR, exist_ok=True)
 
 def replace_edited_tables():
-    """Setzt korrigierte Tabellen aus _tables_edited.tex in die Originaldateien ein."""
+    print("=== Skript 2: Bearbeitete Tabellen aus _tables.tex einsetzen ===\n")
+
     for directory in PROCESS_DIRS:
         if not os.path.exists(directory):
             continue
-        
-        print(f"\nVerarbeite Ordner: {directory}")
-        
+
         for root, _, files in os.walk(directory):
             for file in files:
                 if not file.endswith('.tex'):
                     continue
-                file_path = os.path.join(root, file)
-                rel_file = os.path.basename(file_path)
-                
-                edited_file = os.path.join(EXTRACTED_DIR, f"{rel_file}_tables_edited.tex")
-                if not os.path.exists(edited_file):
-                    print(f"  Bearbeitete Datei fehlt: {os.path.basename(edited_file)}")
-                    continue
-                
-                with open(edited_file, 'r', encoding='utf-8') as f:
-                    edited_content = f.read()
+                original_path = os.path.join(root, file)
+                original_name = os.path.basename(file)
 
-                with open(file_path, 'r', encoding='utf-8') as f:
+                # Bearbeitete Datei: Originalname + _tables.tex
+                edited_file_name = original_name.replace('.tex', '_tables.tex')
+                edited_path = os.path.join(EXTRACTED_DIR, edited_file_name)
+
+                if not os.path.exists(edited_path):
+                    print(f"  Bearbeitete Datei fehlt: {edited_file_name} → überspringe {original_name}")
+                    continue
+
+                print(f"  Einsetzen in: {original_name}")
+
+                with open(original_path, 'r', encoding='utf-8') as f:
                     original_content = f.read()
 
-                # Extrahiere korrigierte Tabellen aus edited .tex
-                edited_tables = re.findall(r'\\section*\{Tabelle \d+ aus .*?\}\s*(\\begin\{adjustbox\}.*?\\end\{adjustbox\})', edited_content, re.DOTALL)
-                original_tables = re.findall(r'(\\begin\{adjustbox\}.*?\\end\{adjustbox\})', original_content, re.DOTALL)
+                with open(edited_path, 'r', encoding='utf-8') as f:
+                    edited_content = f.read()
 
-                if len(edited_tables) != len(original_tables):
-                    print(f"  Anzahl Tabellen stimmt nicht überein in {rel_file}: Original {len(original_tables)}, Edited {len(edited_tables)}")
-                    continue
+                # Extrahiere korrigierte Tabellen aus der bearbeiteten Datei
+                pattern = r'\\section\*\{Tabelle \d+ aus [^}]*\}\s*([\s\S]*?)(?=\\section\*\{Tabelle |\Z)'
+                edited_tables = re.findall(pattern, edited_content)
+
+                # Original-Tabellen finden
+                original_tables_raw = re.findall(r'(\\begin\{(tabular\*?|longtable|tcolorbox)\}[^}]*\}[\s\S]*?\\end\{\2\})', original_content)
+                original_tables = [t[0] for t in original_tables_raw]
 
                 updated_content = original_content
-                for old, new in zip(original_tables, edited_tables):
-                    updated_content = updated_content.replace(old, new.strip())
+                replaced_count = 0
+                for old_table, new_table in zip(original_tables, edited_tables):
+                    if old_table.strip() in updated_content:
+                        updated_content = updated_content.replace(old_table.strip(), new_table.strip(), 1)
+                        replaced_count += 1
 
-                final_path = file_path.replace('.tex', '_kdp_final.tex')
+                if replaced_count < len(edited_tables):
+                    print(f"    Fallback aktiv – positionsbasiertes Ersetzen")
+                    parts = re.split(r'(\\begin\{(tabular\*?|longtable|tcolorbox)\}[^}]*\}[\s\S]*?\\end\{\2\})', original_content)
+                    new_parts = parts[:1]
+                    idx = 0
+                    for i in range(1, len(parts), 2):
+                        if idx < len(edited_tables):
+                            new_parts.append(edited_tables[idx].strip())
+                            if i + 1 < len(parts):
+                                new_parts.append(parts[i + 1])
+                            idx += 1
+                        else:
+                            new_parts.append(parts[i])
+                            if i + 1 < len(parts):
+                                new_parts.append(parts[i + 1])
+                    updated_content = ''.join(new_parts)
+
+                # Speichern mit Originalnamen
+                final_path = os.path.join(FINAL_CORRECTED_DIR, original_name)
                 with open(final_path, 'w', encoding='utf-8') as f:
                     f.write(updated_content)
 
-                print(f"  Tabellen eingesetzt → {os.path.basename(final_path)}")
+                print(f"    → {len(edited_tables)} Tabellen eingesetzt → {original_name}")
+
+    print(f"\nFertig! Alle korrigierten Dateien liegen in:\n{FINAL_CORRECTED_DIR}")
 
 if __name__ == "__main__":
-    print("=== Skript 2: Bearbeitete Tabellen einsetzen ===")
     replace_edited_tables()
-    print("\nFertig! Alle _kdp_final.tex erstellt.")
