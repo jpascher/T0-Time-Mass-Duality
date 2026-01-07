@@ -43,6 +43,11 @@ DEFAULT_LANGUAGE = "en"
 # GUI-Konfiguration
 WINDOW_TOPMOST_DELAY_MS = 100  # Verzögerung in Millisekunden bevor topmost-Attribut entfernt wird
 
+# GUI-Farben
+COLOR_HEADER_BLUE = "#2196F3"  # Blau für PostInputDialog Header
+COLOR_INSTRUCTIONS_ORANGE = "#FF9800"  # Orange für InteractiveEditor Anweisungsbereich
+COLOR_INPUT_BACKGROUND = "#FFF8DC"  # Heller Hintergrund für Texteingabefelder
+
 # Repository-URL-Muster für Ihre Dokumente
 REPOSITORY_URL_PATTERN = r"https://github\.com/[A-Za-z0-9_\-]+/[A-Za-z0-9_\-]+/blob/[A-Za-z0-9_\-/]+\.pdf"
 
@@ -74,6 +79,12 @@ Bitte formuliere eine wissenchaftlich fundierte, freundliche und überzeugende A
 def activate_window(window):
     """Aktiviert ein Fenster und bringt es in den Vordergrund.
     
+    Setzt das Fenster temporär als oberstes Fenster (-topmost), um sicherzustellen,
+    dass es im Vordergrund erscheint. Nach einer kurzen Verzögerung (definiert durch
+    WINDOW_TOPMOST_DELAY_MS) wird das topmost-Attribut wieder entfernt, damit das
+    Fenster sich normal verhält und vom Benutzer hinter andere Fenster verschoben
+    werden kann.
+    
     Args:
         window: Das tkinter-Fenster, das aktiviert werden soll
     """
@@ -93,12 +104,12 @@ class PostInputDialog:
         self.dialog.grab_set()
         
         # Hauptüberschrift mit Anweisungen
-        header_frame = tk.Frame(self.dialog, bg="#2196F3", pady=10)
+        header_frame = tk.Frame(self.dialog, bg=COLOR_HEADER_BLUE, pady=10)
         header_frame.pack(fill=tk.X)
         tk.Label(header_frame, text="Eingabefenster für Anweisungen", 
-                font=("Arial", 14, "bold"), bg="#2196F3", fg="white").pack()
+                font=("Arial", 14, "bold"), bg=COLOR_HEADER_BLUE, fg="white").pack()
         tk.Label(header_frame, text="Geben Sie hier Ihre Anweisungen, Post-Titel und Text ein", 
-                font=("Arial", 10), bg="#2196F3", fg="white").pack()
+                font=("Arial", 10), bg=COLOR_HEADER_BLUE, fg="white").pack()
         
         # Titel
         tk.Label(self.dialog, text="Titel des Posts / Thema:", font=("Arial", 12, "bold")).pack(anchor=tk.W, padx=10, pady=(10,5))
@@ -181,13 +192,13 @@ class InteractiveEditor:
         self.frame_edit.pack(pady=10, padx=10, fill=tk.BOTH)
         
         # Hervorgehobener Header für Anweisungen
-        instructions_header = tk.Frame(self.frame_edit, bg="#FF9800", pady=5)
+        instructions_header = tk.Frame(self.frame_edit, bg=COLOR_INSTRUCTIONS_ORANGE, pady=5)
         instructions_header.pack(fill=tk.X)
         tk.Label(instructions_header, text="✏️ Eingabefenster für Anweisungen an die KI", 
-                 font=("Arial", 12, "bold"), bg="#FF9800", fg="white").pack(anchor=tk.W, padx=5)
+                 font=("Arial", 12, "bold"), bg=COLOR_INSTRUCTIONS_ORANGE, fg="white").pack(anchor=tk.W, padx=5)
         
         self.text_edit = scrolledtext.ScrolledText(self.frame_edit, wrap=tk.WORD, height=6, 
-                                                    font=("Arial", 10), bg="#FFF8DC", 
+                                                    font=("Arial", 10), bg=COLOR_INPUT_BACKGROUND, 
                                                     relief=tk.SOLID, borderwidth=2)
         self.text_edit.pack(fill=tk.BOTH, expand=True, pady=(5,0))
         self.text_edit.insert(tk.END, "Bitte überarbeite die Antwort so, dass...")
