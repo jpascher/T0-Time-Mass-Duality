@@ -74,18 +74,26 @@ class PostInputDialog:
     def __init__(self, parent):
         self.result = None
         self.dialog = tk.Toplevel(parent)
-        self.dialog.title("Post-Details eingeben")
+        self.dialog.title("Eingabefenster für Anweisungen / Post-Details eingeben")
         self.dialog.geometry("800x600")
         self.dialog.transient(parent)
         self.dialog.grab_set()
         
+        # Hauptüberschrift mit Anweisungen
+        header_frame = tk.Frame(self.dialog, bg="#2196F3", pady=10)
+        header_frame.pack(fill=tk.X)
+        tk.Label(header_frame, text="Eingabefenster für Anweisungen", 
+                font=("Arial", 14, "bold"), bg="#2196F3", fg="white").pack()
+        tk.Label(header_frame, text="Geben Sie hier Ihre Anweisungen, Post-Titel und Text ein", 
+                font=("Arial", 10), bg="#2196F3", fg="white").pack()
+        
         # Titel
-        tk.Label(self.dialog, text="Titel des Posts:", font=("Arial", 12, "bold")).pack(anchor=tk.W, padx=10, pady=(10,5))
+        tk.Label(self.dialog, text="Titel des Posts / Thema:", font=("Arial", 12, "bold")).pack(anchor=tk.W, padx=10, pady=(10,5))
         self.title_entry = tk.Entry(self.dialog, width=80, font=("Arial", 10))
         self.title_entry.pack(fill=tk.X, padx=10, pady=(0,10))
         
-        # Post-Text
-        tk.Label(self.dialog, text="Text des Posts (optional):", font=("Arial", 12, "bold")).pack(anchor=tk.W, padx=10, pady=(10,5))
+        # Post-Text / Anweisungen
+        tk.Label(self.dialog, text="Anweisungen / Text des Posts (optional):", font=("Arial", 12, "bold")).pack(anchor=tk.W, padx=10, pady=(10,5))
         self.text_entry = scrolledtext.ScrolledText(self.dialog, height=10, width=80, font=("Arial", 10))
         self.text_entry.pack(fill=tk.BOTH, expand=True, padx=10, pady=(0,10))
         
@@ -106,6 +114,11 @@ class PostInputDialog:
         x = (parent.winfo_width() // 2) - (width // 2)
         y = (parent.winfo_height() // 2) - (height // 2)
         self.dialog.geometry(f"+{x}+{y}")
+        
+        # Fenster aktivieren und in den Vordergrund bringen
+        self.dialog.lift()
+        self.dialog.attributes('-topmost', True)
+        self.dialog.after(100, lambda: self.dialog.attributes('-topmost', False))
         
         # Fokus setzen
         self.title_entry.focus_set()
@@ -137,9 +150,12 @@ class InteractiveEditor:
         self.repository_urls = repository_urls
         self.post_details = post_details
         
-        # Hauptfenster konfigurieren
-        self.master.title("T0-Modell Antwort-Editor")
+        # Hauptfenster konfigurieren und aktivieren
+        self.master.title("T0-Modell Antwort-Editor - Eingabefenster für Anweisungen")
         self.master.geometry("1000x700")
+        self.master.lift()
+        self.master.attributes('-topmost', True)
+        self.master.after(100, lambda: self.master.attributes('-topmost', False))
         
         # Antwortbereich
         self.frame_response = tk.Frame(master)
@@ -151,15 +167,22 @@ class InteractiveEditor:
         self.text_response.pack(fill=tk.BOTH, expand=True)
         self.text_response.insert(tk.END, initial_response)
         
-        # Bearbeitungsanweisungen
+        # Bearbeitungsanweisungen - prominenter gestaltet
         self.frame_edit = tk.Frame(master)
         self.frame_edit.pack(pady=10, padx=10, fill=tk.BOTH)
         
-        tk.Label(self.frame_edit, text="Ihre Anweisungen an die KI:", font=("Arial", 12, "bold")).pack(anchor=tk.W)
+        # Hervorgehobener Header für Anweisungen
+        instructions_header = tk.Frame(self.frame_edit, bg="#FF9800", pady=5)
+        instructions_header.pack(fill=tk.X)
+        tk.Label(instructions_header, text="✏️ Eingabefenster für Anweisungen an die KI", 
+                font=("Arial", 12, "bold"), bg="#FF9800", fg="white").pack(anchor=tk.W, padx=5)
         
-        self.text_edit = scrolledtext.ScrolledText(self.frame_edit, wrap=tk.WORD, height=6, font=("Arial", 10))
-        self.text_edit.pack(fill=tk.BOTH, expand=True)
+        self.text_edit = scrolledtext.ScrolledText(self.frame_edit, wrap=tk.WORD, height=6, font=("Arial", 10), 
+                                                   bg="#FFF8DC", relief=tk.SOLID, borderwidth=2)
+        self.text_edit.pack(fill=tk.BOTH, expand=True, pady=(5,0))
         self.text_edit.insert(tk.END, "Bitte überarbeite die Antwort so, dass...")
+        # Fokus auf Anweisungsfeld setzen
+        self.text_edit.focus_set()
         
         # Buttons
         self.frame_buttons = tk.Frame(master)
