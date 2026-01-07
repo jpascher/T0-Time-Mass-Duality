@@ -47,6 +47,14 @@ fi
 ```bash
 while true; do
     pdflatex -interaction=nonstopmode document.tex 2>&1 | tee compile.log
+    
+    # Check if compile.log is empty - don't proceed if no output was captured
+    if [ ! -s compile.log ]; then
+        echo "✗ ERROR: Compilation produced no output (empty log)"
+        echo "  This likely means compilation failed completely or document.tex is missing"
+        exit 1
+    fi
+    
     WARNINGS=$(grep -c "Overfull\|Underfull" compile.log)
     ERRORS=$(grep -c "^!" compile.log)
     
@@ -101,6 +109,13 @@ while [ $iteration -lt $MAX_ITERATIONS ]; do
     for pass in 1 2 3; do
         pdflatex -interaction=nonstopmode "$BOOK" > /tmp/compile_pass${pass}.log 2>&1
     done
+    
+    # Check if compilation log is empty - don't proceed if no output
+    if [ ! -s /tmp/compile_pass3.log ]; then
+        echo "✗ ERROR: $BOOK compilation produced no output (empty log)"
+        echo "  This likely means compilation failed completely or $BOOK is missing"
+        exit 1
+    fi
     
     # Check for warnings and errors
     WARNINGS=$(grep -c "Overfull\|Underfull" /tmp/compile_pass3.log)
