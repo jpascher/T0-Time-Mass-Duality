@@ -40,6 +40,9 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 # Bevorzugte Sprache (en = Englisch, de = Deutsch)
 DEFAULT_LANGUAGE = "en"
 
+# GUI-Konfiguration
+WINDOW_TOPMOST_DELAY_MS = 100  # Verzögerung in Millisekunden bevor topmost-Attribut entfernt wird
+
 # Repository-URL-Muster für Ihre Dokumente
 REPOSITORY_URL_PATTERN = r"https://github\.com/[A-Za-z0-9_\-]+/[A-Za-z0-9_\-]+/blob/[A-Za-z0-9_\-/]+\.pdf"
 
@@ -67,6 +70,16 @@ Hauptmerkmale des Modells:
 
 Bitte formuliere eine wissenchaftlich fundierte, freundliche und überzeugende Antwort basierend auf diesen Konzepten und den extrahierten Inhalten aus den Forschungsdokumenten.
 """
+
+def activate_window(window):
+    """Aktiviert ein Fenster und bringt es in den Vordergrund.
+    
+    Args:
+        window: Das tkinter-Fenster, das aktiviert werden soll
+    """
+    window.lift()
+    window.attributes('-topmost', True)
+    window.after(WINDOW_TOPMOST_DELAY_MS, lambda: window.attributes('-topmost', False))
 
 class PostInputDialog:
     """Dialog zum Eingeben von Post-Details"""
@@ -116,9 +129,7 @@ class PostInputDialog:
         self.dialog.geometry(f"+{x}+{y}")
         
         # Fenster aktivieren und in den Vordergrund bringen
-        self.dialog.lift()
-        self.dialog.attributes('-topmost', True)
-        self.dialog.after(100, lambda: self.dialog.attributes('-topmost', False))
+        activate_window(self.dialog)
         
         # Fokus setzen
         self.title_entry.focus_set()
@@ -153,9 +164,7 @@ class InteractiveEditor:
         # Hauptfenster konfigurieren und aktivieren
         self.master.title("T0-Modell Antwort-Editor - Eingabefenster für Anweisungen")
         self.master.geometry("1000x700")
-        self.master.lift()
-        self.master.attributes('-topmost', True)
-        self.master.after(100, lambda: self.master.attributes('-topmost', False))
+        activate_window(self.master)
         
         # Antwortbereich
         self.frame_response = tk.Frame(master)
@@ -175,10 +184,11 @@ class InteractiveEditor:
         instructions_header = tk.Frame(self.frame_edit, bg="#FF9800", pady=5)
         instructions_header.pack(fill=tk.X)
         tk.Label(instructions_header, text="✏️ Eingabefenster für Anweisungen an die KI", 
-                font=("Arial", 12, "bold"), bg="#FF9800", fg="white").pack(anchor=tk.W, padx=5)
+                 font=("Arial", 12, "bold"), bg="#FF9800", fg="white").pack(anchor=tk.W, padx=5)
         
-        self.text_edit = scrolledtext.ScrolledText(self.frame_edit, wrap=tk.WORD, height=6, font=("Arial", 10), 
-                                                   bg="#FFF8DC", relief=tk.SOLID, borderwidth=2)
+        self.text_edit = scrolledtext.ScrolledText(self.frame_edit, wrap=tk.WORD, height=6, 
+                                                    font=("Arial", 10), bg="#FFF8DC", 
+                                                    relief=tk.SOLID, borderwidth=2)
         self.text_edit.pack(fill=tk.BOTH, expand=True, pady=(5,0))
         self.text_edit.insert(tk.END, "Bitte überarbeite die Antwort so, dass...")
         # Fokus auf Anweisungsfeld setzen
