@@ -78,6 +78,57 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 **[Complete Documentation →](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/narrative/README.md)**  
 **[Release Notes v1.0 →](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/RELEASE_NOTES_v1.0.md)**
 
+### Published Book Series - Available on Amazon Kindle
+
+**Complete T0/FFGFT book series now available as Kindle eBooks:**
+
+#### 1. **FFGFT Narrative: The Cosmic Brain**
+*Popular science edition explaining the universe through the cosmic brain metaphor*
+
+- 🇩🇪 **[Das Kosmische Gehirn (German)](https://www.amazon.de/dp/B0GDNZYZ5T)** - ASIN: B0GDNZYZ5T  
+  Von der Quantengravitation zum Bewusstsein. Fundamental Fraktalgeometrischen Feldtheorie
+- 🇬🇧 **[The Cosmic Brain (English)](https://www.amazon.com/dp/B0GDP3XG4H)** - ASIN: B0GDP3XG4H  
+  From Quantum Gravity to Consciousness, fundamental Fractal-Geometric Field Theory
+
+**Repository PDFs:** [FFGFT_Narrative_Master_De.pdf](2\pdf\FFGFT_Narrative_Master_De.pdf) | [FFGFT_Narrative_Master_En.pdf](2\pdf\FFGFT_Narrative_Master_En.pdf)
+
+#### 2. **T0 Anwendungen: The Seven Mysteries of Physics**
+*Unified resolution of the seven fundamental puzzles through T0/FFGFT theory*
+
+- 🇩🇪 **[Was verbirgt sich hinter den sieben Rätseln der Physik? (German)](https://www.amazon.de/dp/B0G72MWQTN)** - ASIN: B0G72MWQTN  
+  Eine Reise zu den tiefsten Geheimnissen des Universums
+- 🇬🇧 **[What Lies Behind the Seven Mysteries of Physics? (English)](https://www.amazon.com/dp/B0G6G9ZZY6)** - ASIN: B0G6G9ZZY6  
+  A Journey to the Universe's Deepest Secrets
+
+**Repository Sources:** [T0_Anwendungen_De.tex](2\tex-n\completed\T0_Anwendungen_De.tex) | [T0_Anwendungen_En.tex](2\tex-n\completed\T0_Anwendungen_En.tex)  
+**Related PDF:** [028_T0_7-fragen-3_De.pdf](2\pdf\028_T0_7-fragen-3_De.pdf) | [028_T0_7-fragen-3_En.pdf](2\pdf\028_T0_7-fragen-3_En.pdf)
+
+#### 3. **Teil 1-3: Complete Document Collections**
+*Comprehensive compilations of all T0 technical documents organized by theme*
+
+**Teil 1 - Core Foundations and Geometric Principles:**
+- 🇩🇪 **[T0-Theorie Zeit Masse Dualität (German)](https://www.amazon.de/dp/B0G4WKH496)** - ASIN: B0G4WKH496
+- 🇬🇧 **[T0 Theory: Time-Mass Duality (English)](https://www.amazon.com/dp/B0G5LFTFY1)** - ASIN: B0G5LFTFY1
+
+**Repository PDFs:** [Teil1a_De.pdf](2\pdf\Teil1a_De.pdf) (3.7 MB) | [Teil1a_En.pdf](2\pdf\Teil1a_En.pdf) (3.7 MB)  
+**Kindle-optimized:** [Teil1.ebook_De.pdf](2\pdf\Teil1.ebook_De.pdf) | [Teil1.ebook_En.pdf](2\pdf\Teil1.ebook_En.pdf)
+
+**Teil 2 - Mathematical Derivations and Constants:**
+- 🇩🇪 **[T0-Theorie Teil 2 Zeit-Masse Dualität (German)](https://www.amazon.de/dp/B0G5K4W56T)** - ASIN: B0G5K4W56T
+- 🇬🇧 **[T0 Theory 2 - Time Mass Duality (English)](https://www.amazon.com/dp/B0G5LM6MSQ)** - ASIN: B0G5LM6MSQ
+
+**Repository PDFs:** [Teil2_De.pdf](2\pdf\Teil2_De.pdf) (3.4 MB) | [Teil2_En.pdf](2\pdf\Teil2_En.pdf) (3.3 MB)  
+**Kindle-optimized:** [Teil2.ebook_De.pdf](2\pdf\Teil2.ebook_De.pdf) | [Teil2.ebook_En.pdf](2\pdf\Teil2.ebook_En.pdf)
+
+**Teil 3 - Quantum Mechanics and Cosmological Applications:**
+- 🇩🇪 **[T0-Theorie Teil 3: Zeit-Masse-Dualität (German)](https://www.amazon.de/dp/B0GGB8JNZ8)** - ASIN: B0GGB8JNZ8
+- 🇬🇧 **[T0 Theory (part 3) Time-Mass Duality (English)](https://www.amazon.com/dp/B0G57VBM89)** - ASIN: B0G57VBM89
+
+**Repository PDFs:** [Teil3a_De.pdf](2\pdf\Teil3a_De.pdf) (2.7 MB) | [Teil3a_En.pdf](2\pdf\Teil3a_En.pdf) (2.3 MB)  
+**Kindle-optimized:** [Teil3.ebook_De.pdf](2\pdf\Teil3.ebook_De.pdf) | [Teil3.ebook_En.pdf](2\pdf\Teil3.ebook_En.pdf)
+
+**Note:** All books published December 2025 - January 2026. Free PDF versions and LaTeX sources available in this repository for academic verification and peer review.
+
 ---
 
 ### December 2025: Consciousness and Quantum Agency - Geometric Resolution
