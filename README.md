@@ -264,6 +264,50 @@ The `2/tex/` directory contains complete LaTeX source files:
 
 **Note:** The standalone LaTeX files are cosmetically adapted copies of the original PDF documents. Content remains unchanged; only formatting adjustments were made for book compilation (shared preambles, consistent styling, table sizing).
 
+### Published Books – Repository PDFs
+
+The following ten published books (Kindle, paperback, hardcover) are represented in this repository by compiled PDFs. These PDFs are the canonical technical and narrative sources corresponding to the Amazon editions; ASINs and store metadata are intentionally omitted here.
+
+1. **T0 Theory: Time-Mass Duality: Unified Physics from a Single Number: Complete Spacetime Geometry Synthesis** (English)
+   - PDF: [Teil1.ebook_En.pdf](2/tex-n/completed/Teil1.ebook_En.pdf)  
+     Pfad: `2\tex-n\completed\Teil1.ebook_En.pdf`
+
+2. **T0-Theorie Zeit Masse Dualität: Die vereinheitlichte Physik aus einer einzigen Zahl – Eine vollständige Synthese der Raumzeit-Geometrie** (Deutsch)
+   - PDF: [Teil1.ebook_De.pdf](2/tex-n/completed/Teil1.ebook_De.pdf)  
+     Pfad: `2\tex-n\completed\Teil1.ebook_De.pdf`
+
+3. **T0-Theorie Teil (Teil2) Zeit- Masse Dualität: Vereinheitlichte Physik aus einer einzigen Zahl: Vollständige Synthese der Raumzeit-Geometrie** (Deutsch)
+   - PDF: [Teil2.ebook_De.pdf](2/tex-n/completed/Teil2.ebook_De.pdf)  
+     Pfad: `2\tex-n\completed\Teil2.ebook_De.pdf`
+
+4. **T0 Theory 2- Time Mass Duality: A Geometric Framework for Unifying Time, Mass, and Quantum Realities** (English)
+   - PDF: [Teil2.ebook_En.pdf](2/tex-n/completed/Teil2.ebook_En.pdf)  
+     Pfad: `2\tex-n\completed\Teil2.ebook_En.pdf`
+
+5. **T0 Theory (part 3) Time-Mass Duality: Unified Physics from a Single Number: Complete Spacetime Geometry Synthesis** (English)
+   - PDF: [Teil3.ebook_En.pdf](2/tex-n/completed/Teil3.ebook_En.pdf)  
+     Pfad: `2\tex-n\completed\Teil3.ebook_En.pdf`
+
+6. **T0-Theorie: Zeit-Masse-Dualität – (Teil 3): Vereinheitlichte Physik aus einer einzigen Zahl: Vollständige Synthese der Raumzeit-Geometrie** (Deutsch)
+   - PDF: [Teil3.ebook_De.pdf](2/tex-n/completed/Teil3.ebook_De.pdf)  
+     Pfad: `2\tex-n\completed\Teil3.ebook_De.pdf`
+
+7. **What Lies Behind the Seven Mysteries of Physics?: A Journey to the Universe's Deepest Secrets – and How a New Theory Connects Them** (English)
+   - PDF: [T0_Anwendungen_En.pdf](2/tex-n/completed/T0_Anwendungen_En.pdf)  
+     Pfad: `2\tex-n\completed\T0_Anwendungen_En.pdf`
+
+8. **Was verbirgt sich hinter den sieben Rätseln der Physik?: Eine Reise zu den tiefsten Geheimnissen des Universums – und wie eine neue Theorie sie verbindet** (Deutsch)
+   - PDF: [T0_Anwendungen_De.pdf](2/tex-n/completed/T0_Anwendungen_De.pdf)  
+     Pfad: `2\tex-n\completed\T0_Anwendungen_De.pdf`
+
+9. **Das Kosmische Gehirn: Von der Quantengravitation zum Bewusstsein. Fundamental Fraktalgeometrischen Feldtheorie (FFGFT)** (Deutsch)
+   - PDF: [FFGFT_Narrative_Master_De.pdf](2/pdf/FFGFT_Narrative_Master_De.pdf)  
+     Pfad: `2\pdf\FFGFT_Narrative_Master_De.pdf`
+
+10. **The Cosmic Brain: From Quantum Gravity to Consciousness, fundamental Fractal-Geometric Field Theory (FFGFT)** (English)
+    - PDF: [FFGFT_Narrative_Master_En.pdf](2/pdf/FFGFT_Narrative_Master_En.pdf)  
+      Pfad: `2\pdf\FFGFT_Narrative_Master_En.pdf`
+
 ### Latest Additions (November 2025) (updated)
 
 **Revolutionary New Documents:**
@@ -366,6 +410,16 @@ The `2/tex/` directory contains complete LaTeX source files:
 - **[T0_Anomale_Magnetische_Momente](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Anomale_Magnetische_Momente_En.pdf)** – Solution to muon g-2 anomaly  
 - **[T0_Kosmologie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Kosmologie_En.pdf)** – Cosmological applications of T0 theory  
 - **[T0_QM-QFT-RT](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_QM-QFT-RT_En.pdf)** – Complete quantum field theory in T0 framework  
+
+### Redshift Newly Understood
+
+For cosmological redshift, the primary technical references are `2\pdf\065_redshift_deflection_En.pdf` / `2\pdf\065_redshift_deflection_De.pdf` and `2\pdf\039_Zwei-Dipole-CMB_En.pdf` / `2\pdf\039_Zwei-Dipole-CMB_De.pdf`. These analyses supersede earlier heuristic redshift sketches and should be treated as the authoritative T0 treatment of redshift.
+
+Light from distant galaxies is redshifted — its wavelength is stretched as it travels through the hierarchical ξ-field in the static T0 universe. The standard model interprets this as evidence for cosmic expansion; in the T0 theory, however, the redshift arises from geometric photon–ξ interactions: photons undergo a non-scattering, energy-dependent phase shift and dissipation within the finite, discrete elements of the ξ hierarchy.
+
+This mechanism differs fundamentally from classical "tired light" hypotheses (e.g. Compton scattering or plasma interactions), which have been ruled out by observations such as the Tolman surface-brightness test, the absence of spectral line broadening, and supernova time dilation. The T0 ξ-field interaction preserves spectral integrity, surface brightness, and time-dilation effects while producing the observed redshift–distance relation without requiring universal expansion.
+
+Finite-element calculations on the ξ hierarchy confirm this: no intrinsic cosmological redshift from expansion is required in the static framework; the observed redshift is attributed to local, geometric ξ interactions leading to energy dissipation. Recent JWST observations (2024–2025) of mature, massive galaxies at high redshifts further challenge pure expansion models and align with the T0 static-universe interpretation.
 
 
 ## Interactive HTML Tools (18 files)
