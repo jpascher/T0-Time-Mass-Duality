@@ -77,6 +77,12 @@ Das T0-Modell präsentiert einen paradigmenwechselnden Ansatz zum Verständnis d
 **[Vollständige Dokumentation →](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/narrative/README.md)**  
 **[Release Notes v1.0 →](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/RELEASE_NOTES_v1.0.md)**
 
+### Januar 2026: Donoghue und FFGFT – Methodologische Analyse
+
+**NEU: Detaillierter methodologischer Vergleich zwischen John F. Donoghues Programm und FFGFT/T0.**
+
+- **[T0_CMB_Donoghue_Analyse](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/140_T0_CMB_Donoghue_Analyse_De.pdf)** – Ausführliche Analyse von Donoghues effektiver Feldtheorie, quadratischer Gravitation und Random Dynamics und wie diese Prinzipien den FFGFT-Rahmen konzeptionell stützen (Deutsch; Englisch: `140_T0_CMB_Donoghue_Analyse_En.pdf`).
+
 ---
 
 ### Dezember 2025: Bewusstsein und Quanten-Agentität - Geometrische Auflösung
