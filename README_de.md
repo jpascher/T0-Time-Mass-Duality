@@ -83,7 +83,7 @@ Das T0-Modell präsentiert einen paradigmenwechselnden Ansatz zum Verständnis d
 
 - **[T0_CMB_Donoghue_Analyse](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/140_T0_CMB_Donoghue_Analyse_De.pdf)** – Ausführliche Analyse von Donoghues effektiver Feldtheorie, quadratischer Gravitation und Random Dynamics und wie diese Prinzipien den FFGFT-Rahmen konzeptionell stützen (Deutsch; Englisch: `140_T0_CMB_Donoghue_Analyse_En.pdf`).
 - **[Renormierung und fraktale Raumzeit](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/141_Renormierung_De.pdf)** – Überblick über die Quantengravitationsliteratur zu Dimensionsfluss (spektrale Dimension ≈2 im UV, ≈4 im IR), power-counting-Renormierbarkeit und Singularitätsauflösung in fraktalen Raumzeitansätzen (Deutsch; Englisch: `141_Renormierung_En.pdf`).
-- **[Verschränkungs-Experiment – T0-Vorhersage](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/142_Experimet-verschränküng_De.pdf)** – Vorschlag für ein konkretes Verschränkungsexperiment zur Prüfung charakteristischer, geometrieinduzierter Abweichungen von Standard-Quantenvorhersagen im T0/FFGFT-Rahmen (Deutsch; Englisch: `142_Experimet-verschränküng_En.pdf`).
+- **[Verschränkungs-Experiment – T0-Vorhersage](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/142_Experimet-verschränkung_De.pdf)** – Vorschlag für ein konkretes Verschränkungsexperiment zur Prüfung charakteristischer, geometrieinduzierter Abweichungen von Standard-Quantenvorhersagen im T0/FFGFT-Rahmen (Deutsch; Englisch: `142_Experimet-verschränkung_En.pdf`).
 
 ---
 

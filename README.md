@@ -84,7 +84,7 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 
 - **[T0_CMB_Donoghue_Analyse](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/140_T0_CMB_Donoghue_Analyse_En.pdf)** – In-depth analysis of Donoghue's effective field theory, quadratic gravity, and random dynamics, and how these principles conceptually support the FFGFT framework (English; German: `140_T0_CMB_Donoghue_Analyse_De.pdf`).
 - **[Renormalization and Fractal Spacetime](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/141_Renormierung_En.pdf)** – Survey of quantum gravity literature on dimensional flow (spectral dimension ≈2 in the UV, ≈4 in the IR), power-counting renormalizability, and singularity resolution in fractal spacetime approaches (English; German: `141_Renormierung_De.pdf`).
-- **[Entanglement Experiment – T0 Prediction](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/142_Experimet-verschränküng_En.pdf)** – Proposal for a concrete entanglement experiment designed to test characteristic, geometry-induced deviations from standard quantum predictions in the T0/FFGFT framework (English; German: `142_Experimet-verschränküng_De.pdf`).
+- **[Entanglement Experiment – T0 Prediction](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/142_Experimet-verschränkung_En.pdf)** – Proposal for a concrete entanglement experiment designed to test characteristic, geometry-induced deviations from standard quantum predictions in the T0/FFGFT framework (English; German: `142_Experimet-verschränkung_De.pdf`).
 
 ---
 
