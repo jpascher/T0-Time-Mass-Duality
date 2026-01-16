@@ -26,7 +26,8 @@ compile_file() {
     echo -ne "\r[$TOTAL] Compiling: $basename..."
     
     cd "$(dirname "$file")"
-    lualatex -interaction=nonstopmode -halt-on-error "$basename.tex" > /tmp/${basename}_compile.log 2>&1
+    local log_file="/tmp/${basename}_compile.log"
+    lualatex -interaction=nonstopmode -halt-on-error "$basename.tex" > "$log_file" 2>&1
     
     if [ $? -eq 0 ]; then
         SUCCESS=$((SUCCESS + 1))
@@ -39,7 +40,7 @@ compile_file() {
         echo "✗ FAILED: $basename" >> $LOG_FILE
         
         # Extract error
-        error=$(grep -A3 "^!" /tmp/${basename}_compile.log | head -5)
+        error=$(grep -A3 "^!" "$log_file" | head -5)
         echo "$error" >> $LOG_FILE
         echo "" >> $LOG_FILE
         
