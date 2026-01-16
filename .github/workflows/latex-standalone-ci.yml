@@ -19,7 +19,39 @@ jobs:
       - name: Install TeX Live (basic) with LuaLaTeX
         run: |
           sudo apt-get update
-          sudo apt-get install -y texlive-latex-recommended texlive-latex-extra texlive-lang-german texlive-lang-english texlive-fonts-recommended texlive-luatex latexmk
+          sudo apt-get install -y texlive-latex-recommended texlive-latex-extra texlive-lang-german texlive-lang-english texlive-fonts-recommended texlive-luatex latexmk wget unzip fontconfig
+
+      - name: Install custom fonts (Inter, JetBrains Mono, Libertinus Math)
+        run: |
+          # Create fonts directory
+          mkdir -p ~/.local/share/fonts
+          
+          # Install Inter font
+          echo "Installing Inter font..."
+          wget -q https://github.com/rsms/inter/releases/download/v4.0/Inter-4.0.zip -O /tmp/inter.zip
+          unzip -q /tmp/inter.zip -d /tmp/inter
+          cp /tmp/inter/Inter\ Desktop/*.ttf ~/.local/share/fonts/ || cp /tmp/inter/*.ttf ~/.local/share/fonts/ || true
+          
+          # Install JetBrains Mono font
+          echo "Installing JetBrains Mono font..."
+          wget -q https://github.com/JetBrains/JetBrainsMono/releases/download/v2.304/JetBrainsMono-2.304.zip -O /tmp/jetbrains.zip
+          unzip -q /tmp/jetbrains.zip -d /tmp/jetbrains
+          cp /tmp/jetbrains/fonts/ttf/*.ttf ~/.local/share/fonts/ || true
+          
+          # Install Libertinus fonts (includes Libertinus Math)
+          echo "Installing Libertinus fonts..."
+          wget -q https://github.com/alerque/libertinus/releases/download/v7.040/Libertinus-7.040.tar.xz -O /tmp/libertinus.tar.xz
+          tar -xf /tmp/libertinus.tar.xz -C /tmp/
+          cp /tmp/Libertinus-7.040/static/OTF/*.otf ~/.local/share/fonts/ || true
+          
+          # Refresh font cache
+          fc-cache -f -v
+          
+          # Verify fonts are installed
+          echo "Verifying font installation..."
+          fc-list | grep -i "inter" || echo "Warning: Inter font not found"
+          fc-list | grep -i "jetbrains" || echo "Warning: JetBrains Mono font not found"
+          fc-list | grep -i "libertinus" || echo "Warning: Libertinus fonts not found"
 
       - name: Make standalone recursive script executable
         run: chmod +x ./compile_standalone_recursive.sh
