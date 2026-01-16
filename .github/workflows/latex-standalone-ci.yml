@@ -1,0 +1,51 @@
+name: LaTeX Standalone (LuaLaTeX)
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '2/tex-n/de_standalone/**.tex'
+      - '2/tex-n/en_standalone/**.tex'
+      - 'compile_standalone_recursive.sh'
+
+jobs:
+  compile-standalone:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install TeX Live (basic) with LuaLaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-recommended texlive-latex-extra texlive-lang-german texlive-lang-english texlive-fonts-recommended texlive-luatex latexmk
+
+      - name: Make standalone recursive script executable
+        run: chmod +x ./compile_standalone_recursive.sh
+
+      - name: Run recursive standalone compilation (LuaLaTeX)
+        run: |
+          bash ./compile_standalone_recursive.sh || true
+
+      - name: Collect compile logs
+        if: always()
+        run: |
+          mkdir -p compile-logs
+          cp /tmp/*_compile.log compile-logs/ 2>/dev/null || true
+          cp /tmp/recursive_compilation.log compile-logs/ 2>/dev/null || true
+
+      - name: Upload compile logs artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: standalone-lualatex-logs
+          path: compile-logs
+
+      - name: Fail if any compilation failed
+        run: |
+          if grep -q 'FAILED:' /tmp/recursive_compilation.log 2>/dev/null; then
+            echo 'Some standalone documents failed to compile. Check the artifact logs.'
+            exit 1
+          fi
+          echo 'All standalone documents compiled successfully.'
