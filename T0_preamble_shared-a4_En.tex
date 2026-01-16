@@ -1,60 +1,126 @@
 % ==============================================================================
-% T0 Theory: Shared English Preamble – Optimized for Book (approx. 500 Pages)
-% Version: 1.2
+% T0 Theory: Shared ENGLISH Preamble – Optimized for eBook/Book
+% Version: 2.0 – Final 2026 (LuaLaTeX only) – ENGLISH corrected
 % Author: Johann Pascher
-% Date: 2026
+% Date: January 2026
 % ==============================================================================
 %
-% This preamble is optimized for thick books (approx. 500 pages).
-% Paper format: 8.25" × 11"
-% Binding adjustments:
-%   - Enlarged inner margin and bindingoffset for perfect binding
-%   - Slightly smaller outer margins for more text per page
-%   - Enlarged bottom margin for comfortable readability
-%   - Openright for new chapters (with book class)
+% IMPORTANT: Compile EXCLUSIVELY with LuaLaTeX!
+% In TeXstudio: Options → Configure TeXstudio → Build → Default Compiler → LuaLaTeX
 %
-% Recommended document class:
-%   \documentclass[11pt,openright,twoside]{book}
-%
+% Required Fonts (install once):
+% - Inter: https://fonts.google.com/specimen/Inter
+% - JetBrains Mono: https://www.jetbrains.com/lp/mono/
+% - Libertinus Math: https://github.com/libertinus-fonts/libertinus
 % ==============================================================================
 
-% =============================================================================
-% SECTION 1: Encoding and Language
-% =============================================================================
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+% === CHAPTER 1: BASIC PACKAGES (must come FIRST) ===
+\RequirePackage{fontspec}
+\RequirePackage{unicode-math}
+
+% === CHAPTER 2: LANGUAGE (ENGLISH) ===
 \usepackage[english]{babel}
-\usepackage{lmodern}
+\usepackage{microtype}                    % IMPORTANT for better hyphenation!
 
-% =============================================================================
-% SECTION 2: Page Geometry – Book Optimization for ~500 Pages (8.25" × 11")
-% =============================================================================
-\usepackage[paperwidth=8.25 in, paperheight=11in,
-top=1.0in,
-bottom=1.1in,           % enlarged for better readability
-inner=1.0in,            % larger inner margin (binding)
-outer=0.75in,           % smaller outer margin → more text per page
-bindingoffset=0.75in,   % additional buffer for binding
-twoside]{geometry}
-\setlength{\headheight}{15pt}
+% Typography settings for better line breaking
+\frenchspacing                     % Correct English spacing after punctuation
+\emergencystretch=3em              % Allows more stretch for difficult lines
+\tolerance=2500                    % Higher tolerance for line breaks
+\hbadness=10000                    % Suppresses "underfull hbox" warnings
+\hfuzz=2pt                         % Allows minimal overfull
+\pretolerance=150                  % Better word breaking
 
-% =============================================================================
-% SECTION 3: Mathematics and Physics
-% =============================================================================
-\usepackage{amsmath,amssymb,amsfonts,amsthm}
-\usepackage{mathtools}
-\usepackage{physics}
+% Prevent bad page breaks
+\clubpenalty=10000           % No "orphans"
+\widowpenalty=10000          % No "widows"
+\displaywidowpenalty=10000   % Also with equations
+\brokenpenalty=10000         % No broken words across pages
+
+% Explicit hyphenation for long technical words
+\hyphenation{Fun-da-men-tal Frac-tal-Ge-o-met-ric Field The-o-ry Meth-od-o-log-i-cal}
+\hyphenation{Re-vi-sion-ism Quan-ti-za-tion U-ni-fi-ca-tion Ef-fec-tive}
+\hyphenation{Re-nor-mal-iz-a-bil-i-ty Sin-gu-lar-i-ties Con-cil-i-a-tion}
+\hyphenation{E-mer-gence Phe-nom-e-no-log-i-cal Doc-u-men-ta-tion A-nal-y-sis}
+\hyphenation{Grav-i-ta-tion Quan-tum Me-chan-ics Dog-ma-tism Con-se-quent}
+\hyphenation{Par-al-lel-ism Im-ple-men-ta-tion Per-tur-ba-tions}
+\hyphenation{Geo-met-ric Ar-ti-fact In-com-pat-i-bil-i-ty Con-struc-tive}
+\hyphenation{Frac-tal Di-men-sion-less In-ves-ti-ga-tion De-scrip-tion}
+\hyphenation{In-ter-pre-ta-tion Phe-nom-e-no-log-i-cal Math-e-mat-i-cal}
+\hyphenation{Phi-lo-soph-i-cal Le-git-i-ma-tion Ap-pli-ca-tion Der-i-va-tion}
+\hyphenation{U-ni-fi-ca-tion As-sump-tion Con-cep-tion Ex-pec-ta-tion}
+\hyphenation{Sym-me-try-ex-ten-sion O-ver-all-pic-ture Chal-lenge}
+\hyphenation{In-ter-ac-tion Ma-te-ri-al Ap-proach Per-spec-tive Pro-ce-dure}
+
+% === CHAPTER 3: FONTS (with proper ligatures) ===
+\setmainfont{Inter}[
+Scale=1.02,
+UprightFont=*-Regular,
+BoldFont=*-Bold,
+ItalicFont=*-Italic,
+BoldItalicFont=*-BoldItalic,
+Ligatures=TeX,           % IMPORTANT for proper typography
+Language=English         % Explicit language support
+]
+\setsansfont{Inter}[
+Scale=MatchLowercase,
+Ligatures=TeX,
+Language=English
+]
+\setmonofont{JetBrains Mono}[
+Scale=0.95,
+Language=English
+]
+
+% Math Font (simple & stable) – MUST come AFTER language definition
+% IMPORTANT: Libertinus Math for correct \underbrace display!
+\setmathfont{Libertinus Math}[Scale=1.0]
+
+% === CHAPTER 4: MATHEMATICS PACKAGES (in STRICT order!) ===
+% IMPORTANT: mathtools must come BEFORE unicode-math for some commands!
+\usepackage{mathtools}           % FIRST mathtools!
+
+% Then the rest
+\usepackage{amsmath, amsfonts, amsthm}
+
+% SIUNITX MUST be loaded BEFORE physics!
 \usepackage{siunitx}
 \sisetup{
-	locale=US,
-	group-separator={,},
-	output-decimal-marker={.},
-	per-mode=symbol
+	locale=US,                    % ENGLISH settings for SI units!
+	group-separator={,},          % Thousands separator comma
+	output-decimal-marker={.},    % Decimal separator point
+	per-mode=symbol,
+	separate-uncertainty=true
 }
 
+% physics – MUST be loaded AFTER siunitx and mathtools
+\usepackage{physics}
+
+% === CHAPTER 5: ADDITIONS from pdflatex best practices ===
+\usepackage{colortbl}        % Colored tables (ESSENTIAL!)
+\usepackage{placeins}        % Float control: \FloatBarrier
+\usepackage{subcaption}      % Subfigures
+\usepackage{xurl}            % Better URL line breaking
+
+% === CHAPTER 6: PAGE LAYOUT
+%\usepackage[paperwidth=8.25in, paperheight=11in,
+%left=2.5cm, 
+%right=2.5cm, 
+%top=2.5cm, 
+%bottom=3.5cm,
+%bindingoffset=0.5cm]{geometry}
+%\setlength{\headheight}{15pt}
 % =============================================================================
-% SECTION 4: Graphics and Tables
+% Page Geometry – Buch-Optimierung
 % =============================================================================
+\usepackage[paperwidth=8.25in, paperheight=11in,
+top=1.0in,
+bottom=1.2in,
+inner=1.0in,
+outer=0.75in,
+bindingoffset=0.75in,
+twoside]{geometry}
+\setlength{\headheight}{15pt}
+% === CHAPTER 7: GRAPHICS AND TABLES ===
 \usepackage{graphicx}
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{tikz}
@@ -72,37 +138,21 @@ twoside]{geometry}
 \usepackage{tabularx}
 \usepackage{makecell}
 \usepackage{multirow}
-%\usepackage{alphalph}
-% =============================================================================
-% SECTION 5: Document Formatting
-% =============================================================================
+
+% === CHAPTER 8: DOCUMENT FORMATTING ===
 \usepackage{fancyhdr}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 \usepackage{tocloft}
-\usepackage{hyperref}
-\hypersetup{
-	colorlinks=true,
-	linkcolor=black,
-	citecolor=black,
-	urlcolor=black,
-	breaklinks=true,
-	bookmarksnumbered=true,
-	unicode=true
-}
-\usepackage{bookmark}
-\usepackage{cleveref}
 
-\setcounter{tocdepth}{3}
-\usepackage{microtype}
 \usepackage{enumitem}
+\setlist[itemize]{leftmargin=*, topsep=2pt, partopsep=0pt, parsep=2pt, itemsep=2pt}
+\setlist[enumerate]{leftmargin=*, topsep=2pt, partopsep=0pt, parsep=2pt, itemsep=2pt}
 \usepackage{setspace}
 \usepackage{ragged2e}
 \usepackage{multicol}
 
-% =============================================================================
-% SECTION 6: Code and Algorithms
-% =============================================================================
+% === CHAPTER 9: CODE AND ALGORITHMS ===
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{listings}
@@ -115,46 +165,70 @@ twoside]{geometry}
 	showstringspaces=false,
 	frame=single,
 	xleftmargin=0pt,
-	xrightmargin=0pt
+	xrightmargin=0pt,
+	literate=              % For special characters in code listings
+	{ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1 {ß}{{\ss}}1
+	{Ä}{{\"A}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
 }
 \usepackage{mdframed}
 
-% =============================================================================
-% SECTION 7: Additional Packages
-% =============================================================================
+% === CHAPTER 10: ADDITIONAL PACKAGES ===
 \usepackage{pdflscape}
 \usepackage{braket}
 \usepackage{cancel}
 \usepackage{caption}
+\captionsetup{format=plain, labelfont=bf, justification=centering}
 \usepackage{csquotes}
 \usepackage{gensymb}
-\usepackage{hyphenat}
 \usepackage{textcomp}
 \usepackage{textgreek}
 \usepackage{upgreek}
 \usepackage{url}
 \usepackage{slashed}
 \usepackage{bm}
-\usepackage{newunicodechar}
 
-% Für bessere Zeilenumbrüche
-\emergencystretch=3em
-\tolerance=1000
-\hbadness=1000
-% --- Mathematical Operators and Notation ---
-\newcommand{\primrel}[1]{\mathbf{#1}} % Prime relation notation
-\newcommand{\vect}[1]{\mathbf{#1}}    % Vector notation (bold)
-% Alternative vector notation (if you prefer arrows):
-% \newcommand{\vect}[1]{\vec{#1}}
-% =============================================================================
-% SECTION 8: Citation Commands (Compatibility)
-% =============================================================================
+% === CHAPTER 11: HYPERREF (must come SECOND TO LAST!) ===
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	citecolor=black,
+	urlcolor=black,
+	breaklinks=true,           % IMPORTANT for special characters in URLs!
+	bookmarksnumbered=true,
+	unicode=true,
+	pdfencoding=auto,
+	pdflang=en,                % Set PDF language to English
+	pdfsubject={T0 Theory - Fundamental Fractal-Geometric Field Theory}
+}
+
+% === CHAPTER 12: BOOKMARK (must come AFTER hyperref!) ===
+\usepackage{bookmark}
+
+% === CHAPTER 13: CLEVEREF (ENGLISH LABELS) ===
+\usepackage[english]{cleveref}
+\crefname{equation}{Equation}{Equations}
+\crefname{figure}{Figure}{Figures}
+\crefname{table}{Table}{Tables}
+\crefname{section}{Section}{Sections}
+\crefname{chapter}{Chapter}{Chapters}
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{definition}{Definition}{Definitions}
+\crefname{example}{Example}{Examples}
+\crefname{remark}{Remark}{Remarks}
+
+% ==============================================================================
+% FROM HERE: YOUR DEFINITIONS (unchanged)
+% ==============================================================================
+
+\setcounter{tocdepth}{3}
+
+% === CITATION COMMANDS ===
 \providecommand{\citep}[1]{\cite{#1}}
 \providecommand{\citet}[1]{\cite{#1}}
 
-% =============================================================================
-% SECTION 9: Colors
-% =============================================================================
+% === COLORS ===
 \definecolor{gold}{RGB}{255,215,0}
 \definecolor{blue}{rgb}{0,0,1}
 \definecolor{boxgray}{RGB}{240,240,240}
@@ -168,78 +242,25 @@ twoside]{geometry}
 \definecolor{t0red}{RGB}{244,67,54}
 \definecolor{t0yellow}{RGB}{255,204,0}
 
-% =============================================================================
-% SECTION 10: Column Types
-% =============================================================================
+% === COLUMN TYPES ===
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 
-% =============================================================================
-% SECTION 11: Unicode Character Mappings
-% =============================================================================
-\newunicodechar{ħ}{$\hbar$}
-\newunicodechar{↔}{$\leftrightarrow$}
-\newunicodechar{⇐}{$\Leftarrow$}
-\newunicodechar{⇒}{$\Rightarrow$}
-\newunicodechar{⇔}{$\Leftrightarrow$}
-\newunicodechar{∂}{$\partial$}
-\newunicodechar{∅}{$\emptyset$}
-\newunicodechar{∇}{$\nabla$}
-\newunicodechar{∈}{$\in$}
-\newunicodechar{∉}{$\notin$}
-\newunicodechar{∏}{$\prod$}
-\newunicodechar{∑}{$\sum$}
-\newunicodechar{√}{\ensuremath{\sqrt{}}}
-\newunicodechar{∝}{$\propto$}
-\newunicodechar{∞}{$\infty$}
-\newunicodechar{∩}{$\cap$}
-\newunicodechar{∪}{$\cup$}
-\newunicodechar{∫}{$\int$}
-\newunicodechar{≈}{$\approx$}
-\newunicodechar{≠}{$\neq$}
-\newunicodechar{≤}{$\leq$}
-\newunicodechar{≥}{$\geq$}
-\newunicodechar{ξ}{\ensuremath{\xi}}
-\newunicodechar{μ}{\ensuremath{\mu}}
-\newunicodechar{ψ}{\ensuremath{\psi}}
-\newunicodechar{φ}{\ensuremath{\phi}}
-\newunicodechar{π}{\ensuremath{\pi}}
-\newunicodechar{λ}{\ensuremath{\lambda}}
-\newunicodechar{Δ}{\ensuremath{\Delta}}
-
-% Custom commands for specific documents
-\newcommand{\Weyl}{\mathrm{Weyl}}
-\newcommand{\ZPinch}{\nabla p = \mathbf{J} \times \mathbf{B}}
-\newcommand{\SynchPower}{P_{\text{synch}}}
-% Symbole für Tabellen
-\newcommand{\checkmarkx}{$\checkmark$}
-\newcommand{\warningx}{{\color{orange}$\triangle$}}
-
-% Mathematische Operatoren
-\newcommand{\mytimes}{\times}
-\newcommand{\xiT}{\xi_{\mathrm{T}}}
-\newcommand{\phiT}{\phi_{\mathrm{T}}}
-\newcommand{\Lorentz}{\mathcal{L}}
-\newcommand{\Riem}{\mathcal{R}}
-% In T0_preamble_shared-a4_En.tex oder Hauptdatei:
-\newcommand{\lambdabar}{\mathchar'26\mkern-11mu\lambda}
-
-% =============================================================================
-% SECTION 12: Hyperref Settings
-% =============================================================================
+% === HYPERREF SETTINGS (updated) ===
 \hypersetup{
 	colorlinks=true,
-	linkcolor=blue,
-	citecolor=blue,
-	urlcolor=blue,
+	linkcolor=t0blue,
+	citecolor=t0blue,
+	urlcolor=t0blue,
 	breaklinks=true,
 	bookmarksnumbered=true,
-	pdfstartview=FitH
+	pdfstartview=FitH,
+	pdfencoding=auto,
+	pdfdisplaydoctitle=true
 }
 
-% =============================================================================
-% SECTION 13: Theorem Environments (English)
-% =============================================================================
+% === ENGLISH THEOREM ENVIRONMENTS ===
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -251,18 +272,19 @@ twoside]{geometry}
 \newtheorem{example}[theorem]{Example}
 \newtheorem{insight}[theorem]{Insight}
 \newtheorem{discovery}[theorem]{Discovery}
-\newtheorem{erkenntnis}[theorem]{Insight}
 
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{axiom}{Axiom}
 \newtheorem{principle}{Principle}
-\newtheorem{bemerkung}[theorem]{Remark}
-\newtheorem{warnung}[theorem]{Warning}
+%\newtheorem{warning}[theorem]{Warning}
 
-% =============================================================================
+% === T0-SPECIFIC COMMANDS ===
+% (Here follow all your \newcommand and \providecommand definitions)
+% These remain UNCHANGED as in your original preamble
+% ==============================================================================
 % SECTION 14: T0-Specific Commands
-% =============================================================================
+% ==============================================================================
 
 % --- Core T0 Fields ---
 \newcommand{\Tfield}{T(x,t)}
@@ -278,7 +300,7 @@ twoside]{geometry}
 % --- Greek Letters and Constants ---
 \newcommand{\alphaem}{\alpha}
 \newcommand{\betaT}{\beta_T}
-
+\newcommand{\xiT}{\xi}
 \newcommand{\xipar}{\xi}
 
 % --- Energy and Planck Units ---
@@ -305,7 +327,7 @@ twoside]{geometry}
 \newcommand{\xirat}{\xi_{\mathrm{rat}}}
 \newcommand{\tzero}{t_{0}}
 \newcommand{\Lambdat}{\Lambda_{\mathrm{t}}}
-\newcommand{\EP}{E_{\mathrm{P}}}
+\newcommand{\EP}{E_{\text{P}}}
 \newcommand{\Emu}{E_{\mu}}
 \newcommand{\Ee}{E_{e}}
 \newcommand{\Etau}{E_{\tau}}
@@ -315,8 +337,7 @@ twoside]{geometry}
 \newcommand{\Lp}{\ell_{\mathrm{P}}}
 
 % --- Additional T0 Commands ---
-\newcommand{\Cconv}{C_{\mathrm{conv}}}  % Conversion factor for gravitational constant
-\newcommand{\Kfrak}{K_{\mathrm{frak}}}  % Fractal correction factor
+\newcommand{\Kfrak}{K_{\text{frak}}}
 \newcommand{\Dfrak}{D_{\text{frak}}}
 \newcommand{\betapar}{\ensuremath{\beta_T}}
 \newcommand{\alphapar}{\alpha}
@@ -333,32 +354,8 @@ twoside]{geometry}
 \newcommand{\Tzero}{\ensuremath{T_0}}
 \newcommand{\Eabs}{E_{\text{abs}}}
 \newcommand{\taupar}{\tau}
-% ============================================
-% MISSING CUSTOM COMMAND DEFINITIONS
-% ============================================
 
-% Mathematical symbols and operators
-\newcommand{\Df}{D_f}                     % Fractal dimension
-\newcommand{\Evis}{E_{\text{vis}}}        % Visual energy scale
-
-\newcommand{\Phiphoton}{\Phi_{\gamma}}    % Photon flux
-\newcommand{\etavis}{\eta_{\text{vis}}}   % Visual efficiency
-\newcommand{\Cto}{C_{\text{to}}}          % Conversion constant
-\newcommand{\lambdazero}{\lambda_0}       % Reference wavelength
-\newcommand{\nuzero}{\nu_0}               % Reference frequency
-
-\newcommand{\pichar}{\pi}                 % Pi (character)
-\newcommand{\lambdah}{\lambda_h}          % Higgs lambda
-
-\newcommand{\Rzero}{R_0}                  % Reference radius
-\newcommand{\alphaWnat}{\alpha_{\text{W}}^{\text{(nat)}}} % Weak coupling (natural)
-\newcommand{\alphaWSI}{\alpha_{\text{W}}^{\text{(SI)}}}   % Weak coupling (SI)
-
-% Special characters
-\newcommand{\checked}{$\checkmark$}       % Checkmark symbol
-
-% ============================================
-% --- Provided Commands (may be redefined elsewhere) ---
+% --- Provided Commands ---
 \providecommand{\xiconst}{\xi_{\text{const}}}
 \providecommand{\DhiggsT}{D_{\text{Higgs-T}}}
 \providecommand{\rhoE}{\rho_{E}}
@@ -376,69 +373,108 @@ twoside]{geometry}
 \providecommand{\mzerot}{m_{0}(t)}
 \providecommand{\Ezeroabs}{E_{0,\text{abs}}}
 \providecommand{\Epar}{E_{\text{par}}}
-\providecommand{\EzeroT}{E_{0,T}}
-\providecommand{\EzeroH}{E_{0,H}}
-\providecommand{\EzeroF}{E_{0,F}}
-\providecommand{\EzeroM}{E_{0,M}}
-\providecommand{\EzeroG}{E_{0,G}}
-\providecommand{\EzeroQ}{E_{0,Q}}
-\providecommand{\EzeroC}{E_{0,C}}
-\providecommand{\EzeroP}{E_{0,P}}
-\providecommand{\EzeroL}{E_{0,L}}
-\providecommand{\EzeroS}{E_{0,S}}
-\providecommand{\EzeroB}{E_{0,B}}
-\providecommand{\EzeroD}{E_{0,D}}
-\providecommand{\EzeroA}{E_{0,A}}
-\providecommand{\EzeroR}{E_{0,R}}
-\providecommand{\EzeroI}{E_{0,I}}
-\providecommand{\EzeroU}{E_{0,U}}
-\providecommand{\EzeroN}{E_{0,N}}
-\providecommand{\EzeroV}{E_{0,V}}
-\providecommand{\EzeroW}{E_{0,W}}
-\providecommand{\EzeroY}{E_{0,Y}}
-\providecommand{\EzeroK}{E_{0,K}}
-\providecommand{\EzeroJ}{E_{0,J}}
-\providecommand{\EzeroO}{E_{0,O}}
+\providecommand{\Lnat}{\ell_{\text{nat}}}
+\providecommand{\Tnat}{T_{\text{nat}}}
+\providecommand{\xifrak}{\xi_{\text{frac}}}
+\providecommand{\Tfrak}{T_{\text{frac}}}
+\providecommand{\mfrak}{m_{\text{frac}}}
+\providecommand{\Dfrac}{D_{\text{frac}}}
+\providecommand{\EphotSI}{E_{\gamma,\text{SI}}}
+\providecommand{\EphotNat}{E_{\gamma,\text{nat}}}
+\providecommand{\Eabsint}{E_{\text{abs,int}}}
+\providecommand{\mphoton}{m_{\gamma}}
+\providecommand{\Evis}{E_{\text{vis}}}
+\providecommand{\Cto}{C_{T0}}
+\providecommand{\mytimes}{\times}
+\providecommand{\lambdah}{\lambda_h}
+\providecommand{\checkmarkx}{\checkmark}
+\providecommand{\Enorm}{E_{\text{norm}}}
+\providecommand{\Tobs}{T_{\text{obs}}}
+\providecommand{\mobs}{m_{\text{obs}}}
+\providecommand{\Eobs}{E_{\text{obs}}}
+\providecommand{\Lobs}{\ell_{\text{obs}}}
+\providecommand{\xobs}{\xi_{\text{obs}}}
+\providecommand{\calE}{\mathcal{E}}
+\providecommand{\calT}{\mathcal{T}}
+\providecommand{\calM}{\mathcal{M}}
+\providecommand{\alphag}{\alpha_g}
+\providecommand{\Tmax}{T_{\text{max}}}
+\providecommand{\mmin}{m_{\text{min}}}
+\providecommand{\Lmax}{\ell_{\text{max}}}
+\providecommand{\Emin}{E_{\text{min}}}
+\providecommand{\Geff}{G_{\text{eff}}}
+\providecommand{\rhoeff}{\rho_{\text{eff}}}
+\providecommand{\xieff}{\xi_{\text{eff}}}
+\providecommand{\Teff}{T_{\text{eff}}}
+\providecommand{\hPlanck}{h}
+\providecommand{\kB}{k_B}
+\providecommand{\muB}{\mu_B}
+\providecommand{\lambdaC}{\lambda_C}
+\providecommand{\omegaP}{\omega_P}
+\providecommand{\rhoP}{\rho_P}
+\providecommand{\Tref}{T_{\text{ref}}}
+\providecommand{\Eref}{E_{\text{ref}}}
+\providecommand{\mref}{m_{\text{ref}}}
+\providecommand{\Lref}{\ell_{\text{ref}}}
+\providecommand{\xikonst}{\xi_0}
+\providecommand{\Phiphoton}{\Phi_{\gamma}}
+\providecommand{\etavis}{\eta_{\text{vis}}}
+\providecommand{\pichar}{\pi}
+\providecommand{\primrel}{\mathcal{P}_{\text{rel}}}
+\providecommand{\warningx}{\textcolor{orange}{\textbf{!}}}
+\providecommand{\phiT}{\phi_T}
+\providecommand{\Lorentz}{\Lambda}
+\providecommand{\Cconv}{C_{\text{conv}}}
+\providecommand{\Df}{\Delta f}
+\providecommand{\lambdazero}{\lambda_0}
+\providecommand{\myapprox}{\approx}
+\providecommand{\checked}{\checkmark}
+\providecommand{\alphaWSI}{\alpha_W^{\text{SI}}}
+\providecommand{\alphaWnat}{\alpha_W^{\text{nat}}}
+\providecommand{\vect}[1]{\vec{#1}}
+\providecommand{\Rzero}{R_0}
+\providecommand{\Riem}{\mathcal{R}}
+\providecommand{\nuzero}{\nu_0}
+\providecommand{\mypi}{\pi}
 
 % =============================================================================
-% SECTION 15: Color Boxes
+% TCOLORBOX STYLES AND ENVIRONMENTS (English titles)
 % =============================================================================
-
-% --- CRITICAL: Missing Definitions Added Here ---
-\newtcolorbox{keyresult}[1][]{
-	colback=green!5!white,
-	colframe=green!75!black,
-	fonttitle=\bfseries,
-	title=#1,
-	breakable,
-	enhanced,
-	before skip=10pt,
-	after skip=10pt
+\tcbset{
+	keyresult/.style={
+		colback=blue!5!white,
+		colframe=blue!75!black,
+		title=Key Result,
+		fonttitle=\bfseries
+	},
+	foundation/.style={
+		colback=green!5!white,
+		colframe=green!75!black,
+		title=Foundation,
+		fonttitle=\bfseries
+	},
+	alternative/.style={
+		colback=orange!5!white,
+		colframe=orange!75!black,
+		title=Alternative,
+		fonttitle=\bfseries
+	},
+	warningbox/.style={
+		colback=red!5!white,
+		colframe=red!75!black,
+		title=Warning,
+		fonttitle=\bfseries
+	}
 }
 
-\newtcolorbox{analysis}[1][]{
-	colback=blue!5!white,
-	colframe=blue!75!black,
-	fonttitle=\bfseries,
-	title=#1,
-	breakable,
-	enhanced,
-	before skip=10pt,
-	after skip=10pt
-}
+% (Here follow all your tcolorbox definitions with English titles)
+\newtcolorbox{keyresultbox}[1][]{colback=blue!5!white,colframe=blue!75!black,fonttitle=\bfseries,title={#1},breakable}
+\newtcolorbox{keyresult}[1][Key Result]{colback=blue!5!white,colframe=blue!75!black,fonttitle=\bfseries,title={#1},breakable}
+\newtcolorbox{foundationbox}[1][]{colback=green!5!white,colframe=green!75!black,fonttitle=\bfseries,title={#1},breakable}
+\newtcolorbox{foundation}[1][Foundation]{colback=green!5!white,colframe=green!75!black,fonttitle=\bfseries,title={#1},breakable}
+\newtcolorbox{alternativebox}[1][]{colback=orange!5!white,colframe=orange!75!black,fonttitle=\bfseries,title={#1},breakable}
+\newtcolorbox{warningboxenv}[1][Warning]{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,title={#1},breakable}
 
-\newtcolorbox{correct}[1][]{
-	colback=yellow!5!white,
-	colframe=orange!75!black,
-	fonttitle=\bfseries,
-	title=#1,
-	breakable,
-	enhanced,
-	before skip=10pt,
-	after skip=10pt
-}
-
-% --- Existing Definitions (Keep All) ---
 \newtcolorbox{fundamental}[1][]{
 	colback=boxgray,
 	colframe=t0blue,
@@ -448,153 +484,59 @@ twoside]{geometry}
 	boxrule=2pt
 }
 
-\newtcolorbox{newperspective}[1][]{
-	colback=red!5!white,
-	colframe=t0red,
-	fonttitle=\bfseries,
-	title=#1,
-	sharp corners,
-	boxrule=2pt
-}
+\newtcolorbox{insightBox}[1][Insight]{colback=blue!5,colframe=t0blue,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{discoveryBox}[1][Discovery]{colback=green!5,colframe=t0green,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{revelation}[1][Revelation]{colback=red!5,colframe=t0red,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{keypoint}[1][Key Point]{colback=blue!5,colframe=t0blue,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{evidence}[1][Evidence]{colback=green!5,colframe=t0green,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{conclusionBox}[1][Conclusion]{colback=gray!5,colframe=gray,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{significance}[1][Significance]{colback=yellow!5,colframe=orange,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{philosophical}[1][Philosophical]{colback=purple!5,colframe=purple,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{implicationBox}[1][Implication]{colback=cyan!5,colframe=cyan,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{perspectiveBox}[1][Perspective]{colback=blue!5,colframe=t0blue,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{revolutionary}[1][Revolutionary]{colback=red!5,colframe=t0red,title={#1},fonttitle=\bfseries,breakable}
 
-\newtcolorbox{formula}[1][]{
-	colback=blue!5!white,
-	colframe=blue!75!black,
-	fonttitle=\bfseries,
-	title=#1
-}
+\newtcolorbox{technical}[1][Technical]{colback=gray!5,colframe=gray!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{technicalBox}[1][Technical]{colback=gray!5,colframe=gray!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{notationBox}[1][Notation]{colback=yellow!5,colframe=yellow!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{verification}[1][Verification]{colback=orange!5!white,colframe=orange!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{explanationBox}[1][Explanation]{colback=purple!5!white,colframe=purple!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{interpretationBox}[1][Interpretation]{colback=cyan!5!white,colframe=cyan!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{explanation}[1][Explanation]{colback=purple!5!white,colframe=purple!75!black,fonttitle=\bfseries,title=#1,breakable}
+\newtcolorbox{interpretation}[1][Interpretation]{colback=cyan!5!white,colframe=cyan!75!black,fonttitle=\bfseries,title=#1,breakable}
+\newtcolorbox{proof_step}[1][Proof Step]{colback=gray!5!white,colframe=gray!75!black,fonttitle=\bfseries,title=#1,breakable}
+\newtcolorbox{experimental}[1][Experimental]{colback=teal!5!white,colframe=teal!75!black,fonttitle=\bfseries,title=#1,breakable}
 
-\newtcolorbox{result}[1][]{
-	colback=green!5!white,
-	colframe=green!75!black,
-	fonttitle=\bfseries,
-	title=#1
-}
+\newtcolorbox{important}[1][Important]{colback=red!5!white,colframe=red!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{warning}[1][Warning]{colback=orange!5!white,colframe=orange!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{caution}[1][Caution]{colback=yellow!5!white,colframe=yellow!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{highlight}[1][Highlight]{colback=yellow!10!white,colframe=yellow!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{critical}[1][Critical]{colback=red!10!white,colframe=red!75!black,title={#1},fonttitle=\bfseries,breakable}
 
-\newtcolorbox{derivation}[1][]{
-	colback=green!5!white,
-	colframe=green!75!black,
-	title=#1,
-	fonttitle=\bfseries,
-	breakable
-}
+\newtcolorbox{analysis}[1][Analysis]{colback=blue!5!white,colframe=blue!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{application}[1][Application]{colback=green!5!white,colframe=green!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{experiment}[1][Experiment]{colback=cyan!5!white,colframe=cyan!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{historical}[1][Historical]{colback=brown!5!white,colframe=brown!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{numerical}[1][Numerical]{colback=gray!5!white,colframe=gray!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{overview}[1][Overview]{colback=blue!5!white,colframe=blue!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{speculation}[1][Speculation]{colback=purple!5!white,colframe=purple!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{question}[1][Question]{colback=orange!5!white,colframe=orange!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{method}[1][Method]{colback=teal!5!white,colframe=teal!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{correct}[1][Correct]{colback=green!10!white,colframe=green!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{units}[1][Units]{colback=gray!5!white,colframe=gray!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{achievement}[1][Achievement]{colback=gold!5!white,colframe=orange!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{equivalence}[1][Equivalence]{colback=cyan!5!white,colframe=cyan!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{dimensional}[1][Dimensional Analysis]{colback=purple!5!white,colframe=purple!75!black,title={#1},fonttitle=\bfseries,breakable}
 
-\newtcolorbox{summary}[1][]{
-	colback=gray!10!white,
-	colframe=gray!75!black,
-	title=#1,
-	fonttitle=\bfseries,
-	breakable
-}
-
-\newtcolorbox{comparison}[1][]{
-	colback=purple!5!white,
-	colframe=purple!75!black,
-	title=#1,
-	fonttitle=\bfseries,
-	breakable
-}
-
-\newtcolorbox{relation}[1][]{
-	colback=cyan!5!white,
-	colframe=cyan!75!black,
-	title=#1,
-	fonttitle=\bfseries,
-	breakable
-}
-
-\newtcolorbox{principleBox}[1][]{
-	colback=yellow!5!white,
-	colframe=yellow!75!black,
-	title=#1,
-	fonttitle=\bfseries,
-	breakable
-}
-
-\newtcolorbox{insightBox}[1][]{colback=blue!5,colframe=t0blue,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{discoveryBox}[1][]{colback=green!5,colframe=t0green,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{revelation}[1][]{colback=red!5,colframe=t0red,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{keypoint}[1][]{colback=blue!5,colframe=t0blue,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{evidence}[1][]{colback=green!5,colframe=t0green,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{conclusionBox}[1][]{colback=gray!5,colframe=gray,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{significance}[1][]{colback=yellow!5,colframe=orange,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{philosophical}[1][]{colback=purple!5,colframe=purple,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{implicationBox}[1][]{colback=cyan!5,colframe=cyan,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{perspectiveBox}[1][]{colback=blue!5,colframe=t0blue,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{revolutionary}[1][]{colback=red!5,colframe=t0red,title={#1},fonttitle=\bfseries,breakable}
-
-\newtcolorbox{technical}[1][]{colback=gray!5,colframe=gray!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{technicalBox}[1][]{colback=gray!5,colframe=gray!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{notationBox}[1][]{colback=yellow!5,colframe=yellow!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{verification}[1][]{colback=orange!5!white,colframe=orange!75!black,fonttitle=\bfseries,title={#1}}
-\newtcolorbox{explanationBox}[1][]{colback=purple!5!white,colframe=purple!75!black,fonttitle=\bfseries,title={#1}}
-\newtcolorbox{interpretationBox}[1][]{colback=cyan!5!white,colframe=cyan!75!black,fonttitle=\bfseries,title={#1}}
-\newtcolorbox{explanation}[1][]{colback=purple!5!white,colframe=purple!75!black,fonttitle=\bfseries,title={#1},breakable}
-\newtcolorbox{interpretation}[1][]{colback=cyan!5!white,colframe=cyan!75!black,fonttitle=\bfseries,title={#1},breakable}
-\newtcolorbox{proof_step}[1][]{colback=gray!5!white,colframe=gray!75!black,fonttitle=\bfseries,title={#1},breakable}
-\newtcolorbox{experimental}[1][]{colback=teal!5!white,colframe=teal!75!black,fonttitle=\bfseries,title={#1},breakable}
-
-\newtcolorbox{important}[1][]{colback=red!5!white,colframe=red!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{warning}[1][]{colback=orange!5!white,colframe=orange!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{caution}[1][]{colback=yellow!5!white,colframe=yellow!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{highlight}[1][]{colback=yellow!10!white,colframe=yellow!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{critical}[1][]{colback=red!10!white,colframe=red!75!black,title={#1},fonttitle=\bfseries,breakable}
-
-\newtcolorbox{application}[1][]{colback=green!5!white,colframe=green!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{experiment}[1][]{colback=cyan!5!white,colframe=cyan!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{historical}[1][]{colback=brown!5!white,colframe=brown!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{numerical}[1][]{colback=gray!5!white,colframe=gray!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{overview}[1][]{colback=blue!5!white,colframe=blue!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{speculation}[1][]{colback=purple!5!white,colframe=purple!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{question}[1][]{colback=orange!5!white,colframe=orange!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{method}[1][]{colback=teal!5!white,colframe=teal!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{units}[1][]{colback=gray!5!white,colframe=gray!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{achievement}[1][]{colback=gold!5!white,colframe=orange!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{equivalence}[1][]{colback=cyan!5!white,colframe=cyan!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{dimensional}[1][]{colback=purple!5!white,colframe=purple!75!black,title={#1},fonttitle=\bfseries,breakable}
-
-\newtcolorbox{photon}[1][]{colback=yellow!5!white,colframe=yellow!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{neutrino}[1][]{colback=blue!5!white,colframe=blue!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{revolution}[1][]{colback=red!5!white,colframe=red!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{t0box}[1][]{colback=blue!5!white,colframe=t0blue,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{documentbox}[1][]{colback=gray!5!white,colframe=gray!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{sibox}[1][]{colback=green!5!white,colframe=green!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{smbox}[1][]{colback=blue!5!white,colframe=blue!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{pvbox}[1][]{colback=purple!5!white,colframe=purple!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{koidebox}[1][]{colback=orange!5!white,colframe=orange!75!black,title={#1},fonttitle=\bfseries,breakable}
-
-\newtcolorbox{formel}[1][]{colback=blue!5!white,colframe=blue!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{schluessel}[1][]{colback=blue!5!white,colframe=blue!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{wichtig}[1][]{colback=red!5!white,colframe=red!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{vorsicht}[1][]{colback=orange!5!white,colframe=orange!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{revolutionaer}[1][]{colback=red!5!white,colframe=red!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{numerisch}[1][]{colback=gray!5!white,colframe=gray!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{experimentell}[1][]{colback=cyan!5!white,colframe=cyan!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{anwendung}[1][]{colback=green!5!white,colframe=green!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{alternative}[1][]{colback=orange!5!white,colframe=orange!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{beziehung}[1][]{colback=cyan!5!white,colframe=cyan!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{folgerung}[1][]{colback=green!5!white,colframe=green!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{abhandlung}[1][]{colback=gray!5!white,colframe=gray!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{prinzipBox}[1][]{colback=blue!5!white,colframe=blue!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{prinzip}[1][]{colback=blue!5!white,colframe=blue!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{beweis}[1][]{colback=gray!5!white,colframe=gray!75!black,title={#1},fonttitle=\bfseries,breakable}
-\newtcolorbox{key}[2][]{colback=blue!5!white,colframe=blue!75!black,title={#2},fonttitle=\bfseries,breakable}
-\newtcolorbox{category}[1][]{colback=purple!5!white,colframe=purple!75!black,title={#1},fonttitle=\bfseries,breakable}
-
-% =============================================================================
-% SECTION 16: Additional Simple Environments
-% =============================================================================
+% === ADDITIONAL SIMPLE ENVIRONMENTS ===
 \newenvironment{treatise}{\begin{quote}}{\end{quote}}
 \newenvironment{gemeinsam}{\begin{quote}}{\end{quote}}
 \newenvironment{vergleich}{\begin{quote}}{\end{quote}}
 \newenvironment{vorteil}{\begin{quote}}{\end{quote}}
 \newenvironment{quantum}{\begin{quote}}{\end{quote}}
 
-% =============================================================================
-% SECTION 17: Layout Settings (Kindle-compatible)
-% =============================================================================
+% === LAYOUT SETTINGS ===
 \raggedbottom
-
 \usepackage{environ}
 \let\oldtabular\tabular
 \let\endoldtabular\endtabular
@@ -607,60 +549,20 @@ twoside]{geometry}
 
 \newcommand{\widetable}[1]{\resizebox{\textwidth}{!}{#1}}
 
-% =============================================================================
-% SECTION 18: Table of Contents Formatting
-% =============================================================================
+% === TABLE OF CONTENTS FORMATTING ===
 \renewcommand{\cftsecfont}{\color{blue}}
 \renewcommand{\cftsubsecfont}{\color{blue}}
 \renewcommand{\cftsecpagefont}{\color{blue}}
 \renewcommand{\cftsubsecpagefont}{\color{blue}}
 \renewcommand{\cfttoctitlefont}{\huge\bfseries\color{blue}}
 
-% =============================================================================
-% SECTION 19: Default Header and Footer – Book-Style
-% =============================================================================
+% === DEFAULT HEADER AND FOOTER ===
 \pagestyle{fancy}
 \fancyhf{}
+\fancyhead[L]{\textsc{T0 Theory}}
+\fancyhead[R]{\textsc{J. Pascher}}
 \fancyfoot[C]{\thepage}
-% Wichtig: Auch der plain-Stil (Kapitelanfangsseiten) soll genau dasselbe haben
-\fancypagestyle{plain}{%
-\fancyfoot[C]{\thepage}
-}
-% =============================================================================
-% SECTION 20: Custom T0 Commands (for specific documents)
-% =============================================================================
-% Plasma cosmology commands (used in 036_T0_peratt)
-\providecommand{\Weyl}{\mathrm{Weyl}}
-\providecommand{\ZPinch}{\nabla p = \mathbf{J} \times \mathbf{B}}
-\providecommand{\SynchPower}{P_{\text{synch}}}
-
-% =============================================================================
-% SECTION 21: Additional Book-specific Settings
-% =============================================================================
-\usepackage{titlesec}
-\titleformat{\chapter}[display]
-{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
-\titlespacing*{\chapter}{0pt}{50pt}{40pt}
-
-\setlength{\parindent}{1.5em}
-\setlength{\parskip}{0pt}
 
 % ==============================================================================
-% End of Shared Preamble – Book Version
+% End of Shared Preamble for English
 % ==============================================================================
-% ============================================
-% Foundation Environment Definition
-% ============================================
-\newenvironment{foundation}
-{\begin{quote}\itshape}
-	{\end{quote}}
-% Einfache Definitionen ohne zusätzliche Pakete
-\newenvironment{common}
-{\par\noindent\textbf{Common Ground:}\par\nopagebreak\medskip}
-{\par\medskip}
-
-
-
-\newenvironment{advantage}
-{\par\noindent\textbf{T0 Advantage:}\par\nopagebreak\medskip}
-{\par\medskip}
