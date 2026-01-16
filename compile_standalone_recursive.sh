@@ -26,7 +26,7 @@ compile_file() {
     echo -ne "\r[$TOTAL] Compiling: $basename..."
     
     cd "$(dirname "$file")"
-    pdflatex -interaction=nonstopmode -halt-on-error "$basename.tex" > /tmp/${basename}_compile.log 2>&1
+    lualatex -interaction=nonstopmode -halt-on-error "$basename.tex" > /tmp/${basename}_compile.log 2>&1
     
     if [ $? -eq 0 ]; then
         SUCCESS=$((SUCCESS + 1))

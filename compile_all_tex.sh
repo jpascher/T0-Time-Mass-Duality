@@ -92,10 +92,10 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Check if pdflatex is available
-if ! command -v pdflatex &> /dev/null; then
-    echo -e "${RED}Error: pdflatex is not installed or not in PATH${NC}"
-    echo "Please install TeX Live or another LaTeX distribution."
+# Check if lualatex is available
+if ! command -v lualatex &> /dev/null; then
+    echo -e "${RED}Error: lualatex is not installed or not in PATH${NC}"
+    echo "Please install TeX Live (with LuaLaTeX) or another compatible LaTeX distribution."
     exit 1
 fi
 
@@ -171,14 +171,14 @@ compile_tex() {
         out_dir="$OUTPUT_DIR"
     fi
     
-    # Run pdflatex
+    # Run lualatex
     local success=true
     for run in $(seq 1 $MAX_RUNS); do
         if $VERBOSE; then
-            echo "  Running pdflatex (pass $run) on $filename..."
+            echo "  Running lualatex (pass $run) on $filename..."
         fi
         
-        if ! pdflatex -interaction=nonstopmode -halt-on-error \
+        if ! lualatex -interaction=nonstopmode -halt-on-error \
             -output-directory="$dir" "$tex_file" > /dev/null 2>&1; then
             success=false
             break
