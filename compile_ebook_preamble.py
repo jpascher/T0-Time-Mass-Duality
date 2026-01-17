@@ -79,15 +79,29 @@ def compile_document(tex_file: Path, lang: str) -> bool:
         return False
     
     # Compile with LuaLaTeX
+    base_name = tex_file.stem
+    pdf_file = tex_file.parent / f"{base_name}.pdf"
+    
     try:
         result = subprocess.run(
             ["lualatex", "-interaction=nonstopmode", "-file-line-error", tex_file.name],
             cwd=tex_file.parent,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            timeout=120
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            timeout=120,
+            text=True
         )
-        success = result.returncode == 0
+        # Check if PDF was created (more reliable than returncode)
+        success = pdf_file.exists()
+        
+        if not success:
+            print(f"  [FAIL] {tex_file.name} - No PDF generated")
+            if result.stdout:
+                # Print last error from log
+                lines = result.stdout.split('\n')
+                for line in lines[-20:]:
+                    if 'error' in line.lower() or '!' in line:
+                        print(f"         {line.strip()}")
     except subprocess.TimeoutExpired:
         print(f"  [FAIL] Timeout for {tex_file.name}")
         success = False
@@ -101,23 +115,16 @@ def compile_document(tex_file: Path, lang: str) -> bool:
         except Exception as e:
             print(f"  [WARN] Cannot restore {tex_file.name}: {e}")
     
-    # Clean up auxiliary files
-    base_name = tex_file.stem
+    # Clean up auxiliary files (but keep PDF!)
     for ext in ['.aux', '.log', '.out', '.toc', '.synctex.gz', '.fls', '.fdb_latexmk']:
         aux_file = tex_file.parent / f"{base_name}{ext}"
         if aux_file.exists():
             aux_file.unlink()
     
     if success:
-        pdf_file = tex_file.parent / f"{base_name}.pdf"
-        if pdf_file.exists():
-            print(f"  [OK] {tex_file.name} → {pdf_file.name}")
-            return True
-        else:
-            print(f"  [FAIL] No PDF generated for {tex_file.name}")
-            return False
+        print(f"  [OK] {tex_file.name} → {pdf_file.name}")
+        return True
     else:
-        print(f"  [FAIL] Compilation failed for {tex_file.name}")
         return False
 
 
