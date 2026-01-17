@@ -33,6 +33,10 @@ compile_file() {
         SUCCESS=$((SUCCESS + 1))
         echo -ne "\r[$TOTAL] ✓ $basename"
         echo "✓ SUCCESS: $basename" >> $LOG_FILE
+        # Copy fresh PDF into central 2/pdf directory (overwrites older versions)
+        if [ -f "${basename}.pdf" ]; then
+            cp "${basename}.pdf" "$REPO_ROOT/2/pdf/${basename}.pdf"
+        fi
         return 0
     else
         FAILED=$((FAILED + 1))
