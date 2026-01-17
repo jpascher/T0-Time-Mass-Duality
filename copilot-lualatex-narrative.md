@@ -34,12 +34,14 @@ Annahmen:
 
 ## 3. Zu kompilierende Narrative-Hauptdokumente und Header-Wahl (Buchformat)
 
-**WICHTIG (Schritt 1):** Das Narrative-Buch nutzt dieselben Buch-Preambeln wie die übrigen FFGFT-Hauptdokumente. Die Master-Dokumente sollen daher die gemeinsamen Preambeln
+**WICHTIG (Schritt 1):** Das Narrative-Buch soll im finalen Satzspiegel dem Trim-Format **6×9 Zoll** entsprechen.
+Die Master-Dokumente sollen weiterhin die gemeinsamen Preambeln
 
 - `T0_preamble_shared_De.tex`
 - `T0_preamble_shared_En.tex`
 
-über `\\input{../../T0_preamble_shared_De}` bzw. `\\input{../../T0_preamble_shared_En}` einbinden. Diese Preambeln sind aktuell mit `geometry` auf ein Buchformat von `paperwidth=8.25in` und `paperheight=11in` eingestellt.
+über `\\input{../../T0_preamble_shared_De}` bzw. `\\input{../../T0_preamble_shared_En}` einbinden.
+Aktuell setzen diese Preambeln mit `geometry` ein Buchformat von `paperwidth=8.25in` und `paperheight=11in`; für das Narrative-Buch darf der Agent in einem separaten Branch die `geometry`-Parameter **gezielt auf 6in × 9in** anpassen (z.B. über eine narrative-spezifische Variante der Shared-Preambel), bevor die LuaLaTeX-Kompilation erfolgt.
 
 Folgende Dateien gelten als Hauptmanuskripte des narrativen FFGFT-Buches und müssen mit LuaLaTeX gebaut werden:
 
