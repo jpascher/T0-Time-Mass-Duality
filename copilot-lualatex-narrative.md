@@ -32,16 +32,23 @@ Annahmen:
 - Kompilation mit `latexmk -lualatex -interaction=nonstopmode -halt-on-error`.
 - Preambeln verwenden `fontspec` und sind bereits an LuaLaTeX angepasst (ggf. analog zu den anderen LuaLaTeX-Preambeln im Projekt).
 
-## 3. Zu kompilierende Narrative-Hauptdokumente
+## 3. Zu kompilierende Narrative-Hauptdokumente und Header-Wahl (6x9 Zoll)
+
+**WICHTIG (Schritt 1):** Das Narrative-Buch ist für das Format **6×9 Zoll** bzw. Buch/eBook-Layout ausgelegt. Vor jeder Kompilierung muss geprüft werden, dass die Master-Dokumente die eBook/Buch-Preambeln
+
+- `T0_preamble_shared-ebook_De.tex`
+- `T0_preamble_shared-ebook_En.tex`
+
+über `\\input{../../T0_preamble_shared-ebook_De}` bzw. `\\input{../../T0_preamble_shared-ebook_En}` einbinden (statt generischer A4-Preambeln).
 
 Folgende Dateien gelten als Hauptmanuskripte des narrativen FFGFT-Buches und müssen mit LuaLaTeX gebaut werden:
 
-- `2\narrative\FFGFT_Narrative_Master_De.tex`
-- `2\narrative\FFGFT_Narrative_Master_En.tex`
+- `2\\narrative\\FFGFT_Narrative_Master_De.tex`
+- `2\\narrative\\FFGFT_Narrative_Master_En.tex`
 
-Die Kapiteldateien unter `2\narrative\de_chapters`, `2\narrative\en_chapters`, `2\narrative\de_standalone` und `2\narrative\en_standalone` werden jeweils über diese Master-Dokumente eingebunden und müssen nur dann separat kompiliert werden, wenn dies für Fehlersuche notwendig ist.
+Die Kapiteldateien unter `2\\narrative\\de_chapters`, `2\\narrative\\en_chapters`, `2\\narrative\\de_standalone` und `2\\narrative\\en_standalone` werden jeweils über diese Master-Dokumente eingebunden und müssen nur dann separat kompiliert werden, wenn dies für Fehlersuche notwendig ist.
 
-Die resultierenden PDFs sollen unter `2\pdf` liegen und die Dateinamen
+Die resultierenden PDFs sollen unter `2\\pdf` liegen und die Dateinamen
 
 - `2\pdf\FFGFT_Narrative_Master_De.pdf`
 - `2\pdf\FFGFT_Narrative_Master_En.pdf`
