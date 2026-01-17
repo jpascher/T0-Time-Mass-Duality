@@ -32,14 +32,14 @@ Annahmen:
 - Kompilation mit `latexmk -lualatex -interaction=nonstopmode -halt-on-error`.
 - Preambeln verwenden `fontspec` und sind bereits an LuaLaTeX angepasst (ggf. analog zu den anderen LuaLaTeX-Preambeln im Projekt).
 
-## 3. Zu kompilierende Narrative-Hauptdokumente und Header-Wahl (6x9 Zoll)
+## 3. Zu kompilierende Narrative-Hauptdokumente und Header-Wahl (Buchformat)
 
-**WICHTIG (Schritt 1):** Das Narrative-Buch ist für das Format **6×9 Zoll** bzw. Buch/eBook-Layout ausgelegt. Vor jeder Kompilierung muss geprüft werden, dass die Master-Dokumente die eBook/Buch-Preambeln
+**WICHTIG (Schritt 1):** Das Narrative-Buch nutzt dieselben Buch-Preambeln wie die übrigen FFGFT-Hauptdokumente. Die Master-Dokumente sollen daher die gemeinsamen Preambeln
 
-- `T0_preamble_shared-ebook_De.tex`
-- `T0_preamble_shared-ebook_En.tex`
+- `T0_preamble_shared_De.tex`
+- `T0_preamble_shared_En.tex`
 
-über `\\input{../../T0_preamble_shared-ebook_De}` bzw. `\\input{../../T0_preamble_shared-ebook_En}` einbinden (statt generischer A4-Preambeln).
+über `\\input{../../T0_preamble_shared_De}` bzw. `\\input{../../T0_preamble_shared_En}` einbinden. Diese Preambeln sind aktuell mit `geometry` auf ein Buchformat von `paperwidth=8.25in` und `paperheight=11in` eingestellt.
 
 Folgende Dateien gelten als Hauptmanuskripte des narrativen FFGFT-Buches und müssen mit LuaLaTeX gebaut werden:
 
