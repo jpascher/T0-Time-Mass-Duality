@@ -632,63 +632,77 @@
 	\subsection{Implementierungs-Code-Beispiele}
 	
 	\subsubsection{Relationale Parameter-Anpassung}
-	\begin{verbatim}
-		def adaptive_xi_for_hardware(self, hardware_type: str = standard) -> float:
-		# Adaptive xi-Skalierung basierend auf Problemgröße
-		if self.rsa_bits <= 64:
-		base_xi = 1e-5  # Optimal für Standard-Probleme
-		elif self.rsa_bits <= 256:
-		base_xi = 1e-6  # Reduzierte Kopplung für mittlere Größen
-		elif self.rsa_bits <= 1024:
-		base_xi = 1e-7  # Minimale Kopplung für große Probleme
-		else:
-		base_xi = 1e-8  # Extrem reduziert für Stabilität
-		
-		hardware_factor = {standard: 1.0, gpu: 1.2, quantum: 0.5}
-		return base_xi * hardware_factor.get(hardware_type, 1.0)
-	\end{verbatim}
+	\begin{mdframed}[linecolor=gray!60,backgroundcolor=gray!5]
+	\begin{lstlisting}[language=Python]
+	def adaptive_xi_for_hardware(self, hardware_type: str = "standard") -> float:
+	    # Adaptive xi-Skalierung basierend auf Problemgröße
+	    if self.rsa_bits <= 64:
+	        base_xi = 1e-5  # Optimal für Standard-Probleme
+	    elif self.rsa_bits <= 256:
+	        base_xi = 1e-6  # Reduzierte Kopplung für mittlere Größen
+	    elif self.rsa_bits <= 1024:
+	        base_xi = 1e-7  # Minimale Kopplung für große Probleme
+	    else:
+	        base_xi = 1e-8  # Extrem reduziert für Stabilität
+
+	    hardware_factor = {"standard": 1.0, "gpu": 1.2, "quantum": 0.5}
+	    return base_xi * hardware_factor.get(hardware_type, 1.0)
+	\end{lstlisting}
+	\end{mdframed}
 	
 	\subsubsection{Energiefeld-Relationen}
-	\begin{verbatim}
-		def solve_energy_field(self, x: np.ndarray, t: np.ndarray) -> np.ndarray:
-		# T0-Framework: c² = 1 + xi (relationale Koppelung)
-		c_squared = 1.0 + abs(self.xi)  # NICHT nur xi!
-		
-		for i in range(2, len(t)):
-		for j in range(1, len(x)-1):
-		spatial_laplacian = (E[j+1,i-1] - 2*E[j,i-1] + E[j-1,i-1]) / (dx**2)
-		# Wellengleichung mit relationaler Geschwindigkeit
-		E[j,i] = 2*E[j,i-1] - E[j,i-2] + c_squared * (dt**2) * spatial_laplacian
-	\end{verbatim}
+	\begin{mdframed}[linecolor=gray!60,backgroundcolor=gray!5]
+	\begin{lstlisting}[language=Python]
+	def solve_energy_field(self, x: np.ndarray, t: np.ndarray) -> np.ndarray:
+	    # T0-Framework: c^2 = 1 + xi (relationale Kopplung)
+	    c_squared = 1.0 + abs(self.xi)  # NICHT nur xi!
+
+	    for i in range(2, len(t)):
+	        for j in range(1, len(x)-1):
+	            spatial_laplacian = (
+	                E[j+1, i-1] - 2*E[j, i-1] + E[j-1, i-1]
+	            ) / (dx**2)
+	            # Wellengleichung mit relationaler Geschwindigkeit
+	            E[j, i] = (
+	                2*E[j, i-1] - E[j, i-2]
+	                + c_squared * (dt**2) * spatial_laplacian
+	            )
+	\end{lstlisting}
+	\end{mdframed}
 	
 	\subsubsection{Relationale Quantengates}
-	\begin{verbatim}
-		def hadamard_t0(self, E_field_0: float, 
-		                E_field_1: float) -> Tuple[float, float]:
-		xi = self.adaptive_xi_for_hardware()
-		correction = 1 + xi  # Relationale Korrektur, nicht absolut
-		inv_sqrt2 = 1 / math.sqrt(2)
-		
-		# Hadamard mit relationaler xi-Korrektur
-		E_out_0 = (E_field_0 + E_field_1) * inv_sqrt2 * correction
-		E_out_1 = (E_field_0 - E_field_1) * inv_sqrt2 * correction
-		return (E_out_0, E_out_1)
-	\end{verbatim}
+	\begin{mdframed}[linecolor=gray!60,backgroundcolor=gray!5]
+	\begin{lstlisting}[language=Python]
+	def hadamard_t0(self, E_field_0: float,
+	                E_field_1: float) -> Tuple[float, float]:
+	    xi = self.adaptive_xi_for_hardware()
+	    correction = 1 + xi  # Relationale Korrektur, nicht absolut
+	    inv_sqrt2 = 1 / math.sqrt(2)
+
+	    # Hadamard mit relationaler xi-Korrektur
+	    E_out_0 = (E_field_0 + E_field_1) * inv_sqrt2 * correction
+	    E_out_1 = (E_field_0 - E_field_1) * inv_sqrt2 * correction
+	    return (E_out_0, E_out_1)
+	\end{lstlisting}
+	\end{mdframed}
 	
 	\subsubsection{Periodenfindung durch Verhältnis-Resonanz}
-	\begin{verbatim}
-		def quantum_period_finding(self, a: int) -> Optional[int]:
-		for r in range(1, max_period):
-		if self.mod_pow(a, r, self.rsa_N) == 1:
-		omega = 2 * math.pi / r
-		
-		# Relationale Energiefeld-Korrelation statt absoluter Berechnung
-		E_corr = self.xi * (E1 * E2) / (r**2)
-		base_resonance = math.exp(-((omega - math.pi)**2) / (4 * abs(self.xi)))
-		
-		# Resonanz verstärkt durch Verhältnis-Korrelationen
-		total_resonance = base_resonance * (1 + E_corr)**2.5
-	\end{verbatim}
+	\begin{mdframed}[linecolor=gray!60,backgroundcolor=gray!5]
+	\begin{lstlisting}[language=Python]
+	def quantum_period_finding(self, a: int) -> Optional[int]:
+	    for r in range(1, max_period):
+	        if self.mod_pow(a, r, self.rsa_N) == 1:
+	            omega = 2 * math.pi / r
+
+	            # Relationale Energiefeld-Korrelation statt absoluter Berechnung
+	            E_corr = self.xi * (E1 * E2) / (r**2)
+	            base_resonance = math.exp(-((omega - math.pi)**2)
+	                                   / (4 * abs(self.xi)))
+
+	            # Resonanz verstärkt durch Verhältnis-Korrelationen
+	            total_resonance = base_resonance * (1 + E_corr)**2.5
+	\end{lstlisting}
+	\end{mdframed}
 	
 	\subsection{Erkenntnisse für das relationale Zahlensystem}
 	
