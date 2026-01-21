@@ -14,14 +14,14 @@ This public update adds a new compiled **Asymmetry Monograph** (German/English) 
 
 ## 2. New Asymmetry Monograph (Book 7)
 
-### 2.1 New Compiled Book
+### 2.1 New Compiled Internal Monograph
 
-A new two-part monograph on fundamental **asymmetries in physics** has been compiled as a standalone book in both German and English:
+A new two-part **internal mathematical monograph** on fundamental asymmetries in physics has been compiled as a technical PDF in both German and English (currently **not intended for public Amazon publication**):
 
 - **German PDF:** `2/pdf/144_Asymmetrie-Master_De.pdf`  
 - **English PDF:** `2/pdf/144_Asymmetrie-Master_En.pdf`
 
-These PDFs collect and extend the content of the former standalone documents `143_Asymmetrie-teil1_*` and `144_Asymmetrie-teil2_*` into a single coherent volume.
+These PDFs collect and extend the content of the former standalone documents `143_Asymmetrie-teil1_*` and `144_Asymmetrie-teil2_*` into a single coherent volume for further internal mathematical development.
 
 ### 2.2 Scientific Focus
 
