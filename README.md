@@ -49,6 +49,12 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 
 ## Latest Highlights
 
+### January 2026: Asymmetry Analysis – New FFGFT Monograph
+
+- **[FFGFT Asymmetry Master (German)](2/pdf/144_Asymmetrie-Master_De.pdf)** – Asymmetry in fundamental physics: conceptual foundations and refutation of objections (Parts 1 and 2, German edition).
+- **[FFGFT Asymmetry Master (English)](2/pdf/144_Asymmetrie-Master_En.pdf)** – Asymmetry in fundamental physics: conceptual foundations and refutation of objections (Parts 1 and 2, English edition).
+
+
 ### January 2026: FFGFT Narrative Edition - Complete Integration ✨
 
 **NEW: The Cosmic Brain Awakens - Popular Science Book Edition**
@@ -262,13 +268,14 @@ All documents are available in German and English versions where applicable.
 
 ### LaTeX Source Files and Compiled Books
 
-The `2/tex/` directory contains complete LaTeX source files:
+The `2/tex-n/` directory contains complete LaTeX source files:
 - **108 German standalone documents** (`de_standalone/`)
 - **105 English standalone documents** (`en_standalone/`)
-- **6 compiled books** in `completed/Deutsch/` and `completed/Englisch/`:
+- **7 compiled books** in `tex-n/completed/`:
   - Teil1 (Part 1): Core documents
   - Teil2 (Part 2): Mathematical foundations
   - Teil3 (Part 3): Quantum mechanics & applications
+  - 144 Asymmetry Master (DE/EN): Asymmetry analysis and objections (two-part monograph)
 
 **Note:** The standalone LaTeX files are cosmetically adapted copies of the original PDF documents. Content remains unchanged; only formatting adjustments were made for book compilation (shared preambles, consistent styling, table sizing).
 

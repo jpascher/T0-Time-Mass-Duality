@@ -48,6 +48,12 @@ Das T0-Modell präsentiert einen paradigmenwechselnden Ansatz zum Verständnis d
 
 ## Neueste Highlights
 
+### Januar 2026: Asymmetrie-Analyse – Neue FFGFT-Monographie
+
+- **[FFGFT Asymmetrie-Master (Deutsch)](2/pdf/144_Asymmetrie-Master_De.pdf)** – Asymmetrie in der fundamentalen Physik: konzeptionelle Grundlagen und Widerlegung von Einwänden (Teil 1 und 2).
+- **[FFGFT Asymmetry Master (English)](2/pdf/144_Asymmetrie-Master_En.pdf)** – Asymmetry in fundamental physics: conceptual foundations and refutation of objections (Parts 1 and 2).
+
+
 ### Januar 2026: FFGFT Narrative Edition - Vollständige Integration ✨
 
 **NEU: Das kosmische Gehirn erwacht - Populärwissenschaftliche Buchausgabe**
@@ -261,13 +267,14 @@ Alle Dokumente in deutscher und englischer Version verfügbar, soweit vorhanden.
 
 ### LaTeX-Quelldateien und kompilierte Bücher
 
-Das Verzeichnis `2/tex/` enthält vollständige LaTeX-Quelldateien:
+Das Verzeichnis `2/tex-n/` enthält vollständige LaTeX-Quelldateien:
 - **108 deutsche Standalone-Dokumente** (`de_standalone/`)
 - **105 englische Standalone-Dokumente** (`en_standalone/`)
-- **6 kompilierte Bücher** in `completed/Deutsch/` und `completed/Englisch/`:
+- **7 kompilierte Bücher** in `tex-n/completed/`:
   - Teil1: Kerndokumente
   - Teil2: Mathematische Grundlagen
   - Teil3: Quantenmechanik & Anwendungen
+  - 144 Asymmetrie-Master (DE/EN): Asymmetrie-Analyse und Einwände (zweiteilige Monographie)
 
 **Hinweis:** Die Standalone-LaTeX-Dateien sind kosmetisch angepasste Kopien der Original-PDF-Dokumente. Der Inhalt bleibt unverändert; nur Formatierungsanpassungen wurden für die Buchkompilierung vorgenommen (gemeinsame Präambeln, konsistentes Styling, Tabellengrößenanpassung).
 
