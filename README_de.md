@@ -53,6 +53,9 @@ Das T0-Modell präsentiert einen paradigmenwechselnden Ansatz zum Verständnis d
 - **[FFGFT Asymmetrie-Master (Deutsch)](2/pdf/144_Asymmetrie-Master_De.pdf)** – Asymmetrie in der fundamentalen Physik: konzeptionelle Grundlagen und Widerlegung von Einwänden (Teil 1 und 2).
 - **[FFGFT Asymmetry Master (English)](2/pdf/144_Asymmetrie-Master_En.pdf)** – Asymmetry in fundamental physics: conceptual foundations and refutation of objections (Parts 1 and 2).
 
+### Januar 2026: FFGFT-Donat-Reihe – Toroidgeometrie und Elektronenstruktur
+
+- **[145 FFGFT Donat Teil 1 (Deutsch)](2/pdf/145_FFGFT_donat-teil1_De.pdf)** / **[145 FFGFT Donat Part 1 (English)](2/pdf/145_FFGFT_donat-teil1_En.pdf)** – Konzeptionelle Einführung in die toroidale FFGFT-Geometrie, effektive vs. fundamentale (Sub-Planck-)Skalen und Verweise auf interaktive HTML-Visualisierungen.
 
 ### Januar 2026: FFGFT Narrative Edition - Vollständige Integration ✨
 

@@ -54,6 +54,9 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 - **[FFGFT Asymmetry Master (German)](2/pdf/144_Asymmetrie-Master_De.pdf)** – Asymmetry in fundamental physics: conceptual foundations and refutation of objections (Parts 1 and 2, German edition).
 - **[FFGFT Asymmetry Master (English)](2/pdf/144_Asymmetrie-Master_En.pdf)** – Asymmetry in fundamental physics: conceptual foundations and refutation of objections (Parts 1 and 2, English edition).
 
+### January 2026: FFGFT Donat Series – Toroidal Geometry and Electron Structure
+
+- **[145 FFGFT Donat Part 1 (German)](2/pdf/145_FFGFT_donat-teil1_De.pdf)** / **[145 FFGFT Donat Part 1 (English)](2/pdf/145_FFGFT_donat-teil1_En.pdf)** – Conceptual introduction to the toroidal FFGFT geometry, effective vs fundamental (sub-Planck) scales, and links to interactive HTML visualizations.
 
 ### January 2026: FFGFT Narrative Edition - Complete Integration ✨
 
