@@ -54,10 +54,11 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 - **[FFGFT Asymmetry Master (German)](2/pdf/144_Asymmetrie-Master_De.pdf)** – Asymmetry in fundamental physics: conceptual foundations and refutation of objections (Parts 1 and 2, German edition).
 - **[FFGFT Asymmetry Master (English)](2/pdf/144_Asymmetrie-Master_En.pdf)** – Asymmetry in fundamental physics: conceptual foundations and refutation of objections (Parts 1 and 2, English edition).
 
-### January 2026: FFGFT Donat Series – Toroidal Geometry, Electron Structure and Computation
+### January 2026: FFGFT Donat and Quantum Computing Series – Geometry, Computation and Algorithms
 
 - **[145 FFGFT Donat Part 1 (German)](2/pdf/145_FFGFT_donat-teil1_De.pdf)** / **[145 FFGFT Donat Part 1 (English)](2/pdf/145_FFGFT_donat-teil1_En.pdf)** – Conceptual introduction to the toroidal FFGFT geometry, effective vs fundamental (sub-Planck) scales, and links to interactive HTML visualizations.
 - **[146 Turing and FFGFT (German)](2/pdf/146_turing_De.pdf)** / **[146 Turing and FFGFT (English)](2/pdf/146_turing_En.pdf)** – New standalone analysis on Turing universality, computation in a fractal geometric field framework, and how FFGFT extends classical computability concepts.
+- **[147 Quantum Computing and T0 (German)](2/pdf/147_quantum_computing_De.pdf)** / **[147 Quantum Computing and T0 (English)](2/pdf/147_quantum_computing_En.pdf)** – Integrated overview of T0-based quantum computing: 73-qubit Bell tests, deterministic Shor algorithm, and links to the new Python implementations in `/2/python`.
 
 ### January 2026: FFGFT Narrative Edition - Complete Integration ✨
 
