@@ -88,6 +88,14 @@ Das T0-Modell präsentiert einen paradigmenwechselnden Ansatz zum Verständnis d
 **[Vollständige Dokumentation →](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/narrative/README.md)**  
 **[Release Notes v1.0 →](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/RELEASE_NOTES_v1.0.md)**
 
+### Januar 2026: Muon g-2 und Dirac-Dokumente – Aktualisiert
+
+- **Muon g-2 (Deutsch, aktualisiert):** [018a_T0_Anomale-g2-9_De.pdf](2/pdf/018a_T0_Anomale-g2-9_De.pdf) – überarbeitete T0-Analyse des anomalen magnetischen Moments.
+- **Dirac vereinfacht (Deutsch):** [050_diracVereinfacht_De.pdf](2/pdf/050_diracVereinfacht_De.pdf) – bereinigtes und konsolidiertes Dirac-Vereinfachungsdokument.
+- **Dirac vereinfacht (Englisch):** [050_diracVereinfacht_En.pdf](2/pdf/050_diracVereinfacht_En.pdf).
+- **Dirac vollständig (Deutsch):** [051_dirac_De.pdf](2/pdf/051_dirac_De.pdf).
+- **Dirac vollständig (Englisch):** [051_dirac_En.pdf](2/pdf/051_dirac_En.pdf).
+
 ### Januar 2026: Donoghue, fraktale Raumzeit, Verschränkung und FFGFT – Methodologische Analyse
 
 **NEU: Detaillierter methodologischer Vergleich zwischen John F. Donoghues Programm, Renormierungsergebnissen zur fraktalen Raumzeit und FFGFT/T0, ergänzt um einen expliziten Verschränkungs-Experimentvorschlag.**
