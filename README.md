@@ -89,6 +89,12 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 **[Complete Documentation →](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/narrative/README.md)**  
 **[Release Notes v1.0 →](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/RELEASE_NOTES_v1.0.md)**
 
+### January 2026: Xi Narrative Restoration – "Gott wuerfelt nicht" / "God Does Not Play Dice"
+
+- **Xi Narrative (German, restored):** `2/narrative/xi_chapters/De/` with master `Xi_Narrative_Master_De.tex` (16 chapters, 6x9" layout).
+- **Xi Narrative (English, restored):** `2/narrative/xi_chapters/En/` with master `Xi_Narrative_Master_En.tex`.
+- **Context:** Book reconstructed from the original Xi PDFs; formulas cleaned (ξ, E_0, K_frak) and all content now reproducible from LaTeX sources.
+
 ### January 2026: Donoghue, Fractal Spacetime, Entanglement and FFGFT – Methodological Analysis
 
 **NEW: Detailed methodological comparison between John F. Donoghue's program, fractal spacetime renormalization results, and FFGFT/T0, extended by an explicit experimental entanglement proposal.**
