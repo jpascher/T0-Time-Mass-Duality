@@ -89,11 +89,14 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 **[Complete Documentation →](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/narrative/README.md)**  
 **[Release Notes v1.0 →](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/RELEASE_NOTES_v1.0.md)**
 
-### January 2026: Xi Narrative Restoration – "Gott wuerfelt nicht" / "God Does Not Play Dice"
+### January 2026: Muon g-2 and Dirac Documents – Updated
 
-- **Xi Narrative (German, restored):** `2/narrative/xi_chapters/De/` with master `Xi_Narrative_Master_De.tex` (16 chapters, 6x9" layout).
-- **Xi Narrative (English, restored):** `2/narrative/xi_chapters/En/` with master `Xi_Narrative_Master_En.tex`.
-- **Context:** Book reconstructed from the original Xi PDFs; formulas cleaned (ξ, E_0, K_frak) and all content now reproducible from LaTeX sources.
+- **Muon g-2 (German, updated):** [018a_T0_Anomale-g2-9_De.pdf](2/pdf/018a_T0_Anomale-g2-9_De.pdf) – revised T0-theory analysis of the anomalous magnetic moment.
+- **Muon g-2 (English, updated):** [018a_T0_Anomale-g2-9_En.pdf](2/pdf/018a_T0_Anomale-g2-9_En.pdf).
+- **Dirac Simplified (German):** [050_diracVereinfacht_De.pdf](2/pdf/050_diracVereinfacht_De.pdf) – cleaned and consolidated Dirac simplification document.
+- **Dirac Simplified (English):** [050_diracVereinfacht_En.pdf](2/pdf/050_diracVereinfacht_En.pdf).
+- **Dirac Full (German):** [051_dirac_De.pdf](2/pdf/051_dirac_De.pdf).
+- **Dirac Full (English):** [051_dirac_En.pdf](2/pdf/051_dirac_En.pdf).
 
 ### January 2026: Donoghue, Fractal Spacetime, Entanglement and FFGFT – Methodological Analysis
 
