@@ -92,6 +92,7 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 ### January 2026: Muon g-2 and Dirac Documents – Updated
 
 - **Muon g-2 (German, updated):** [018a_T0_Anomale-g2-9_De.pdf](2/pdf/018a_T0_Anomale-g2-9_De.pdf) – revised T0-theory analysis of the anomalous magnetic moment.
+- **Muon g-2 (English, updated):** [018a_T0_Anomale-g2-9_En.pdf](2/pdf/018a_T0_Anomale-g2-9_En.pdf).
 - **Dirac Simplified (German):** [050_diracVereinfacht_De.pdf](2/pdf/050_diracVereinfacht_De.pdf) – cleaned and consolidated Dirac simplification document.
 - **Dirac Simplified (English):** [050_diracVereinfacht_En.pdf](2/pdf/050_diracVereinfacht_En.pdf).
 - **Dirac Full (German):** [051_dirac_De.pdf](2/pdf/051_dirac_De.pdf).
