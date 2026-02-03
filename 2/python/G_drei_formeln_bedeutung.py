@@ -10,7 +10,17 @@ Wir haben drei scheinbar verschiedene Formeln für G:
 
 Was bedeuten sie und wie hängen sie zusammen?
 
+WICHTIG:
+Die drei Formeln beschreiben DIE GLEICHE Gravitationskonstante G,
+nur aus verschiedenen Perspektiven (Mikro, Struktur, Makro).
+
+SYNCHRONISATION:
+- Dieses Skript ist mit B18_Gesamtherleitung2_De.tex synchronisiert
+- Enthält die Geschwindigkeits-Analogie zur Verdeutlichung
+- Erklärt die Rolle von ℏ und c als reine SI-Umrechnungsfaktoren
+
 Datum: 2026-02-03
+Letzte Synchronisation: 2026-02-03
 """
 
 import math

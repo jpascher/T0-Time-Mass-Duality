@@ -17,8 +17,14 @@ KERNPHILOSOPHIE:
 - Keine gefitteten Korrekturfaktoren
 - Symbolische Formeln zeigen die Struktur
 
+SYNCHRONISATION:
+- Dieses Skript ist mit B18_Gesamtherleitung2_De.tex synchronisiert
+- Alle Formeln und Werte stimmen mit der LaTeX-Dokumentation überein
+- Enthält die gleichen Analogien (z.B. Geschwindigkeits-Analogie für G)
+
 Autor: Basierend auf T0-Theorie
 Datum: 2026-02-03
+Letzte Synchronisation: 2026-02-03
 """
 
 import math
