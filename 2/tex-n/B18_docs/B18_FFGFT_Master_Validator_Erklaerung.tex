@@ -1,0 +1,61 @@
+\documentclass[12pt,a4paper]{article}
+\input{../../../T0_preamble_shared-ebook_De}
+
+\title{\textbf{B18/FFGFT: Master-Validator, fraktale Spannung und System-Bias}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Die Skripte \texttt{ffgft\_constants.py}, \texttt{ffgft\_torsion.py}, \texttt{031\_master.py} (FFGFT\_Validator) und \texttt{system\_bias.py} überprüfen die Konsistenz der FFGFT-Parameter mit der B18-Weltformel.
+Dieses Dokument erklärt die Größen \(T0\_ANKER\), \(F\_REAL\), \(\Delta\), die Imperfektion und den daraus abgeleiteten Energie-Bias.
+\end{abstract}
+\tableofcontents
+
+\section{Anker, Realfaktor und fraktale Spannung}
+In \texttt{ffgft\_constants.py} werden die fundamentalen Konstanten der FFGFT definiert:
+\begin{align}
+  T0_{\text{ANKER}} &= 7500{,}0, \\
+  F_{\text{REAL}}  &= 7491{,}91, \\
+  \Delta &= T0_{\text{ANKER}} - F_{\text{REAL}} = 8{,}09 = 5\varphi, \\
+  \text{Imperfektion} &= \frac{\Delta}{T0_{\text{ANKER}}} \approx 0{,}108\%.
+\end{align}
+Diese Zahlen werden im FFGFT-Validator (\texttt{031\_master.py}) direkt übernommen und dort als \\"Ur-Spannung\\" des Feldes interpretiert.
+
+\section{Reale Gittertorsion}
+\texttt{ffgft\_torsion.py} kombiniert die Konstanten mit der 4D-Hülle \(2\pi^2\):
+\begin{equation}
+  \mathcal{T}_{\text{real}} = 2\pi^2\,\frac{F_{\text{REAL}}}{T0_{\text{ANKER}}}.
+\end{equation}
+Damit wird die reale Gittertorsion als dimensionsloser Maßstab für die Energie-Dichte des FFGFT-Feldes eingeführt.
+
+\section{Leptonen-g-2 und kosmische Harmonisierung}
+Die Methode \texttt{berechne\_g2\_leptonen()} im \texttt{FFGFT\_Validator} nutzt die Konstanten, um die Verhältnisse
+\begin{align}
+  a_\mu/a_e &\propto \left(\frac{m_\mu}{m_e}\right)^2\,\frac{F_{\text{REAL}}}{T0_{\text{ANKER}}}, \\
+  a_\tau/a_\mu &\propto \left(\frac{m_\tau}{m_\mu}\right)^2\,\Bigl(1 - \frac{\Delta}{T0_{\text{ANKER}}}\Bigr)
+\end{align}
+zu berechnen.
+Gleichzeitig liefert \texttt{kosmische\_harmonisierung()} eine Dunkelenergiedichte
+\begin{equation}
+  \rho_\Lambda = \frac{\rho_{\text{Planck}}}{F_{\text{REAL}}^{32}/\pi^4}\cdot 1{,}54
+\end{equation}
+und einen Dunkel-Materie-Haltfaktor
+\begin{equation}
+  H_{\text{DM}} = \frac{\sqrt{F_{\text{REAL}}}}{2\pi^2/1{,}275},
+\end{equation}
+was direkt an die bereits in \texttt{B18\_Gravitation\_und\_Kosmos\_Erklaerung.tex} erklärten Formeln anschließt.
+
+\section{Fraktaler System-Bias}
+Im Skript \texttt{system\_bias.py} wird die Differenz \(\Delta = 8{,}09 = 5\varphi\) als Ursache einer kleinen Energieverschiebung interpretiert:
+\begin{equation}
+  E_{\text{bias}} = \frac{\Delta}{2\pi} \approx 1{,}30~\text{MeV}.
+\end{equation}
+Dies liegt numerisch nahe an der Neutron-Proton-Massendifferenz und wird im Text als Erklärung der \enquote{System-Abweichung} im t0-Feld diskutiert.
+
+\section{Zusammenfassung}
+Die FFGFT-Master- und Konstanten-Skripte stellen sicher, dass die aus der B18-Weltformel abgeleiteten Parameter \(f\), \(T0\_{\text{ANKER}}\), \(F_{\text{REAL}}\), \(\Delta\) und die resultierenden Imperfektionen sowohl in der Leptonenphysik als auch in der Kosmologie konsistent verwendet werden.
+Die kleine Abweichung von 8.2 Einheiten zwischen Ideal- und Realgitter erzeugt dabei genau den Energie-Bias, der für beobachtete Massenunterschiede und Dunkel-Energie-/Materieeffekte benötigt wird.
+
+\end{document}

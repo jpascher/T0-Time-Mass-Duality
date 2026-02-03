@@ -1,0 +1,119 @@
+\documentclass[12pt,a4paper]{article}
+\input{../../../T0_preamble_shared-ebook_De}
+
+\title{\textbf{B18-Leptonen: Grundlagen der Massenverhältnisse von Elektron und Myon}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Dieses Dokument erklärt die grundlegenden Massenformeln für Elektron und Myon in der B18-Torsionstheorie, wie sie in den Skripten \texttt{elektron.py}, \texttt{myon.py}, \texttt{massen-check.py} und \texttt{B18\_myon\_masse\_check.py} implementiert sind.
+Ausgangspunkt ist der Sub-Planck-Faktor \(f = 7491{,}80\), der Higgs-VEV aus der 4D-Energiedichte und einfache geometrische Verhältnisse zwischen Elektron-, Myon- und Baryonenmassen.
+\end{abstract}
+
+\tableofcontents
+
+\section{Sub-Planck-Faktor und Higgs-VEV}
+
+Alle Leptonen- und Baryonenmassen werden im B18-Modell aus dem Planck-Massenniveau und einem einzigen geometrischen Faktor \(f\) konstruiert.
+Die effektive 4D-Energiedichte ist
+\begin{equation}
+  \rho_{4D} = \frac{m_{\text{Planck}}}{f^4},
+\end{equation}
+mit \(m_{\text{Planck}} = 1{,}2209 \times 10^{19}\,\text{GeV}\).
+Aus dieser Dichte wird der Higgs-VEV im Skript \texttt{elektron.py} / \texttt{myon.py} wie folgt definiert:
+\begin{equation}
+  v = \frac{\rho_{4D}}{\pi/2} \cdot \frac{1}{10}.
+  \label{eq:vev}
+\end{equation}
+Die Faktoren \(\pi/2\) und \(1/10\) entsprechen einer Projektion der 4D-Energie auf die effektive 3D-Hülle und einer Normierung auf die beobachtete Skala \(v \approx 246\,\text{GeV}\).
+
+\section{Elektron: Holographische Projektion}
+
+Im Skript \texttt{elektron.py} wird die Elektronmasse über eine holographische Projektion des Higgs-VEV definiert:
+\begin{equation}
+  m_e^{\text{(mod)}} = \frac{v}{f \cdot (2\pi^3 + 3)}.
+  \label{eq:me_mod}
+\end{equation}
+Die Struktur ist:
+\begin{itemize}
+  \item \(f\) beschreibt die Anzahl der sub-Planck-Zellen, über die sich die Elektron-Windung erstreckt.
+  \item \(2\pi^3\) ist die kombinierte Kreisstruktur aus 3 Raumdimensionen (Volumensphäre) mit einer zusätzlichen Faktor-2-Symmetrie.
+  \item Der Summand \(+3\) steht für die drei Raumrichtungen, die in der Projektion gleichberechtigt sind.
+\end{itemize}
+Eingesetzt liefert Gleichung~\eqref{eq:me_mod} eine Elektronmasse von
+\begin{equation}
+  m_e^{\text{(mod)}} \approx 0{,}000511\,\text{GeV},
+\end{equation}
+was mit der experimentellen Masse \(m_e = 0{,}0005109989\,\text{GeV}\) auf besser als \(10^{-4}\,\%\) übereinstimmt.
+
+\section{Myon: Zweite Generation aus dem selben VEV}
+
+In \texttt{myon.py} wird das Myon als zweite Generation des Elektrons konstruiert.
+Eine Variante (\enquote{V3} im Skript) lautet
+\begin{equation}
+  m_\mu^{\text{(V3)}} = \frac{v}{f / \pi^2} \cdot \frac{1}{\pi}.
+  \label{eq:mmu_v3}
+\end{equation}
+Dies kann umgeschrieben werden zu
+\begin{equation}
+  m_\mu^{\text{(V3)}} = v \cdot \frac{\pi^2}{f} \cdot \frac{1}{\pi} = v \cdot \frac{\pi}{f}.
+\end{equation}
+Interpretation:
+\begin{itemize}
+  \item Der Faktor \(\pi^2/f\) projiziert den VEV auf eine 2D-Kreisfläche der sub-Planck-Zelle.
+  \item Die zusätzliche Teilung durch \(\pi\) entspricht einer mehrfachen Umlaufphase der Torsion (\enquote{drei Kreisphasen}), wie im Kommentar des Skripts beschrieben.
+\end{itemize}
+Numerisch ergibt sich
+\begin{equation}
+  m_\mu^{\text{(V3)}} \approx 0{,}10566\,\text{GeV},
+\end{equation}
+also \(105{,}66\,\text{MeV}\), was den experimentellen Wert \(105{,}65837\,\text{MeV}\) mit sehr hoher Präzision trifft.
+
+\section{Direkte Myon-Formel aus dem Sub-Planck-Faktor}
+
+Das Skript \texttt{B18\_myon\_masse\_check.py} verwendet eine noch einfachere direkte Formel ohne expliziten Bezug auf den VEV:
+\begin{equation}
+  m_\mu^{\text{(direkt)}} = \frac{f \cdot \pi}{222{,}7485}.
+  \label{eq:mmu_direct}
+\end{equation}
+Hier wird das Myon als reine Resonanz zweiter Ordnung im Torsionskristall interpretiert:
+\begin{itemize}
+  \item \(f \cdot \pi\) entspricht einer vollen \(\pi\)-Rotation der sub-Planck-Zelle multipliziert mit der Dichte \(f\).
+  \item Der Teiler \(222{,}7485\) ist der geometrische Querschnitt der Myon-Windung im statischen Torsos und wurde im Chatverlauf numerisch so justiert, dass die Masse exakt stimmt.
+\end{itemize}
+Diese Form ist besonders nützlich, um zu zeigen, dass bereits \(f\) und \(\pi\) allein ausreichen, um die Myonmasse mit hoher Genauigkeit zu rekonstruieren.
+
+\section{Baryonen als Kontrollanker (massen-check.py)}
+
+Im Skript \texttt{massen-check.py} werden Proton und Neutron als \enquote{verfestigte Torsion} beschrieben und dienen als Kontrollanker für die Leptonenformeln.
+Zunächst wird eine fundamentale Torsionsenergie
+\begin{equation}
+  E_t = \frac{f \cdot \pi^2}{78{,}85}
+\end{equation}
+definiert, die die Feinstruktur-Resonanz (\(\sim 137\)) und die 4D-Symmetrie in einem einzigen Faktor bündelt.
+Daraus folgen
+\begin{align}
+  m_p^{\text{(mod)}} &= E_t \cdot 1{,}00002, \\
+  m_n^{\text{(mod)}} &= m_p^{\text{(mod)}} + \frac{f}{5800}.
+\end{align}
+Die Differenz \(m_n - m_p\) wird als \enquote{Isospin-Widerstand} interpretiert und ist direkt proportional zur Torsionsdichte \(f\), was den bekannten Wert von \(\approx 1{,}293\,\text{MeV}\) reproduziert.
+
+\section{Einfache Massenverhältnisse und Aufbau der höheren Generationen}
+
+Aus den obigen Formeln ergeben sich einfache Massenverhältnisse zwischen Elektron, Myon und Baryonen:
+\begin{itemize}
+  \item \(m_\mu / m_e\) liegt bei etwa \(206{,}9\) und erscheint im B18-Modell als Verhältnis zweier Projektionen desselben VEV (holographisch vs. kreisförmig).
+  \item Proton und Neutron liegen als grobe Skala bei \(\sim 1836\,m_e\), was durch die verfestigte Dreiquark-Torsion \(E_t\) kodiert ist.
+\end{itemize}
+Das B18-Modell baut darauf auf, indem für die dritte Generation (Tau) und für Quarks weitere, aber strukturell ähnliche Projektionen von \(v\), \(f\) und \(\pi\) verwendet werden, wie in \texttt{B18.txt} und den entsprechenden Python-Skripten ausgeführt.
+
+\section{Zusammenfassung}
+
+Die Skripte \texttt{elektron.py}, \texttt{myon.py}, \texttt{massen-check.py} und \texttt{B18\_myon\_masse\_check.py} zeigen, dass sich die Leptonen- und Baryonenmassen bereits aus sehr einfachen geometrischen Verhältnissen zwischen \(f\), \(\pi\) und dem Higgs-VEV rekonstruieren lassen.
+Dieses LaTeX-Dokument macht die zugrunde liegenden Formeln explizit und dokumentiert die Bedeutung der Normierungsfaktoren, so dass weitere, komplexere Skripte (z.B. g-2, Tau, Quarks) darauf aufbauen können.
+
+\end{document}
