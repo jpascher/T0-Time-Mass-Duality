@@ -366,10 +366,10 @@ Das Verzeichnis `2/tex-n/` enthält vollständige LaTeX-Quelldateien:
   - Alternative zum Standard-Kosmologiemodell  
   - Testbare Vorhersagen
 
-- **[T0_Anomale-g2-9](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Anomale-g2-9_De.pdf)** – Myon g-2, Iteration 9 (DE; EN: `T0_Anomale-g2-9_En.pdf`)  
+- ~~**[T0_Anomale-g2-9](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Anomale-g2-9_De.pdf)** – Myon g-2, Iteration 9 (DE; EN: `T0_Anomale-g2-9_En.pdf`)~~ (ersetzt durch 018_T0_Anomale-g2-10)  
   - Ultrapräzise fraktale Korrekturen
 
-- **[T0_Anomale-g2-6](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Anomale-g2-6_De.pdf)** – Myon g-2, Iteration 6 (DE; EN: `T0_Anomale-g2-6_En.pdf`)  
+- ~~**[T0_Anomale-g2-6](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Anomale-g2-6_De.pdf)** – Myon g-2, Iteration 6 (DE; EN: `T0_Anomale-g2-6_En.pdf`)~~ (ersetzt durch 018_T0_Anomale-g2-10)  
   - Zwischenstufen der Verfeinerung
 
 - **[T0_lagrndian](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_lagrndian_De.pdf)** – Aktualisierte Lagrange-Dichte (DE; EN: `T0_lagrndian_En.pdf`)  

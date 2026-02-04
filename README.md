@@ -412,10 +412,10 @@ The following ten published books (Kindle, paperback, hardcover) are represented
   - Alternative to standard cosmological model  
   - Testable predictions
 
-- **[T0_Anomale-g2-9](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Anomale-g2-9_En.pdf)** – Muon g-2 anomaly iteration 9 (English; German: `T0_Anomale-g2-9_De.pdf`)  
+- ~~**[T0_Anomale-g2-9](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Anomale-g2-9_En.pdf)** – Muon g-2 anomaly iteration 9 (English; German: `T0_Anomale-g2-9_De.pdf`)~~ (superseded by 018_T0_Anomale-g2-10)  
   - Ultra-precise fractal corrections
 
-- **[T0_Anomale-g2-6](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Anomale-g2-6_En.pdf)** – Muon g-2 anomaly iteration 6 (English; German: `T0_Anomale-g2-6_De.pdf`)  
+- ~~**[T0_Anomale-g2-6](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Anomale-g2-6_En.pdf)** – Muon g-2 anomaly iteration 6 (English; German: `T0_Anomale-g2-6_De.pdf`)~~ (superseded by 018_T0_Anomale-g2-10)  
   - Intermediate refinement steps
 
 - **[T0_lagrndian](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_lagrndian_En.pdf)** – Lagrangian density updates (English; German: `T0_lagrndian_De.pdf`)  
@@ -436,7 +436,7 @@ The following ten published books (Kindle, paperback, hardcover) are represented
 - **[T0_Gravitationskonstante](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Gravitationskonstante_En.pdf)** – Detailed gravitational calculations  
 - **[T0_Teilchenmassen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Teilchenmassen_En.pdf)** – Systematic mass calculation of all fermions  
 - **[T0_Neutrinos](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Neutrinos_En.pdf)** – Special treatment of neutrino physics  
-- **[T0_Anomale_Magnetische_Momente](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Anomale_Magnetische_Momente_En.pdf)** – Solution to muon g-2 anomaly  
+- **[018_T0_Anomale-g2-10](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/018_T0_Anomale-g2-10_De.pdf)** – Solution to muon g-2 anomaly  
 - **[T0_Kosmologie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Kosmologie_En.pdf)** – Cosmological applications of T0 theory  
 - **[T0_QM-QFT-RT](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_QM-QFT-RT_En.pdf)** – Complete quantum field theory in T0 framework  
 
