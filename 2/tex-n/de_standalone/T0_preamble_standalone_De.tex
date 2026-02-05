@@ -1,33 +1,35 @@
-% Minimale T0 Standalone Preamble - A4 einseitig
+% T0 Standalone Preamble - A4 einseitig (single-sided)
 \RequirePackage{fontspec}
 \RequirePackage{unicode-math}
+% Deutsche Sprache mit optimierter Silbentrennung
 \usepackage[ngerman]{babel}
 \usepackage{microtype}
-% Fonts - safe fallback if not available
-\IfFontExistsTF{Inter}{
-  \setmainfont{Inter}
-}{
-  \setmainfont{Latin Modern Roman}
-}
-\IfFontExistsTF{JetBrains Mono}{
-  \setmonofont{JetBrains Mono}
-}{
-  \setmonofont{Latin Modern Mono}
-}
-\IfFontExistsTF{Libertinus Math}{
-  \setmathfont{Libertinus Math}
-}{
-  \setmathfont{Latin Modern Math}
-}
+% Bessere Silbentrennung für deutsche Komposita
+\usepackage{hyphsubst}
+\HyphSubstIfExists{ngerman-x-latest}{%
+  \HyphSubstLet{ngerman}{ngerman-x-latest}
+}{}
+% Manuelle Trennhilfen für Fachbegriffe
+\hyphenation{Standard-modell Quanten-feld-theorie Gravi-tations-konstante}
+% Fonts
+\setmainfont{Inter}[Scale=1.0]
+\setmonofont{JetBrains Mono}[Scale=0.95]
+\setmathfont{Libertinus Math}[Scale=1.0]
+% Math packages
 \usepackage{amsmath,amsfonts,amsthm}
 \usepackage{mathtools}
+% Graphics
 \usepackage{graphicx}
 \usepackage{xcolor}
 \definecolor{t0blue}{RGB}{0,102,204}
 \definecolor{t0green}{RGB}{34,139,34}
 \definecolor{t0red}{RGB}{204,0,0}
-% A4 einseitig (single-sided)
+% Layout - A4 single-sided
 \usepackage[a4paper,margin=2.5cm,twoside=false]{geometry}
+% Better line breaking for German
+\emergencystretch=3em
+\tolerance=2000
+\hbadness=10000
 % Table packages
 \usepackage{longtable}
 \usepackage{tabularx}
@@ -35,6 +37,9 @@
 \usepackage{adjustbox}
 \usepackage{lscape}
 \usepackage{pdflscape}
+% Algorithm packages
+\usepackage{algorithm}
+\usepackage{algorithmic}
 % tcolorbox
 \usepackage[most]{tcolorbox}
 \newtcolorbox{keyresult}[1][]{colback=yellow!5,colframe=t0blue!80,fonttitle=\bfseries,title={#1},breakable}
@@ -84,13 +89,24 @@
 \newtcolorbox{vorteil}[1][]{colback=green!5,colframe=t0green!80,fonttitle=\bfseries,title={#1},breakable}
 \newtcolorbox{axiom}[1][]{colback=blue!5,colframe=t0blue!80,fonttitle=\bfseries,title={#1},breakable}
 \newtcolorbox{folgerung}[1][]{colback=yellow!5,colframe=t0blue!80,fonttitle=\bfseries,title={#1},breakable}
-% Theorem environments
+\newtcolorbox{revolutionaer}[1][]{colback=red!5,colframe=t0red!80,fonttitle=\bfseries,title={#1},breakable}
+\newtcolorbox{prinzip}[1][]{colback=yellow!5,colframe=t0blue!80,fonttitle=\bfseries,title={#1},breakable}
+% Theorems
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Korollar}
-% T0-specific commands
+% T0 commands
 \newcommand{\Tfield}{\ensuremath{\mathcal{T}}}
-% Hyperlinks
+\newcommand{\xipar}{\ensuremath{\xi}}
+\newcommand{\Kfrak}{\ensuremath{\mathfrak{K}}}
+% Hyperlinks - must be last
 \usepackage{hyperref}
-\hypersetup{colorlinks=true,linkcolor=t0blue}
+\hypersetup{colorlinks=true,linkcolor=t0blue,pdfencoding=unicode,unicode=true,psdextra}
+% Protect math in section titles
+\pdfstringdefDisableCommands{%
+  \def\xi{xi}%
+  \def\alpha{alpha}%
+  \def\beta{beta}%
+  \def\gamma{gamma}%
+}
