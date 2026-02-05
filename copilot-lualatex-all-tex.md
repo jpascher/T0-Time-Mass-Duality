@@ -151,3 +151,46 @@ Am Ende dieses Prozesses sollen:
 - Alle eigenständig kompilierbaren LaTeX‑Dokumente im Repository mit LuaLaTeX auf GitHub gebaut worden sein.
 - Alle zugehörigen PDFs an den vorgesehenen Orten (insb. `2/pdf`) vorliegen.
 - Alle von Claude oder anderen Tools verursachten LaTeX‑Syntax‑ oder Encoding‑Fehler rekursiv und minimalinvasiv behoben sein.
+
+## 9. Direkt einsetzbarer Prompt für den Copilot‑Assistenten
+
+Den folgenden Prompt kannst du im GitHub‑Copilot‑Fenster (oder einem vergleichbaren Assistenten) auf `main` verwenden, um den hier beschriebenen Prozess auszuführen:
+
+```text
+Du bist ein LaTeX‑Build‑Assistent in meinem GitHub‑Repository. Bitte arbeite ausschließlich auf dem aktuellen Stand von `main` und führe alle Schritte im GitHub‑Runner aus, nicht lokal auf meinem Rechner.
+
+Ziel:
+- Alle eigenständig kompilierbaren LaTeX‑Dokumente (mit `\documentclass`) im Repository rekursiv finden, LaTeX‑Fehler minimal korrigieren und mit LuaLaTeX kompilieren.
+- Besonders wichtig: Alle Standalone‑Dokumente (de/en, *_standalone, *_standalone_pdflatex) und alle Buch‑Master (unter `2/tex-n/completed` sowie Narrative‑Master unter `2/narrative`) sollen erfolgreich durchlaufen und ihre PDFs behalten/aktualisieren.
+- PDFs dürfen überschrieben, aber nicht explizit gelöscht werden.
+
+Vorgehen:
+1. Wechsle ins Repo‑Root und stelle sicher, dass `main` aktuell ist:
+   - `git checkout main`
+   - `git pull --ff-only`
+2. Installiere eine vollständige LuaLaTeX‑Umgebung:
+   - `sudo apt-get update`
+   - `sudo apt-get install -y texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra texlive-luatex texlive-lang-german texlive-lang-english texlive-science latexmk ripgrep`
+3. Finde alle `.tex`‑Dateien mit `\documentclass` unterhalb von `2/`:
+   - `cd "$GITHUB_WORKSPACE"`
+   - `find 2 -name "*.tex" -print0 | xargs -0 rg -n "^\\documentclass" --glob "*.tex" --no-messages > tex_documentclass_files.txt`
+   - `cut -d":" -f1 tex_documentclass_files.txt | sort -u > tex_master_files.txt`
+4. Kompiliere alle in `tex_master_files.txt` gelisteten Dateien mit `latexmk -lualatex` in ein gemeinsames Ausgabe‑Verzeichnis (z.B. `2/pdf`), ohne PDFs zu löschen:
+   - `mkdir -p 2/pdf`
+   - `> tex_compile_errors.txt`
+   - `while read -r F; do latexmk -lualatex -interaction=nonstopmode -halt-on-error -output-directory="2/pdf" "$F" || echo "$F" >> tex_compile_errors.txt; done < tex_master_files.txt`
+5. Für jede Datei in `tex_compile_errors.txt`:
+   - Öffne die `.log`‑Datei im Output‑Verzeichnis (`2/pdf`).
+   - Finde die erste echte Fehlermeldung (`! LaTeX Error:`, `Undefined control sequence`, `Missing \end{}`, Encoding‑Fehler, etc.).
+   - Korrigiere den Fehler direkt in der entsprechenden `.tex`‑Datei mit einer minimalen Änderung.
+   - Kompiliere das betroffene Dokument erneut mit `latexmk -lualatex`.
+   - Entferne die Datei aus `tex_compile_errors.txt`, sobald sie erfolgreich durchläuft.
+6. Wiederhole Schritt 5 iterativ, bis `tex_compile_errors.txt` leer ist und alle Master‑/Standalone‑Dokumente ohne Fehler durchlaufen.
+
+Inhaltliche/g‑2‑Spezialregeln:
+- Detaillierte g‑2/anomale magnetische Momente‑Formeln, numerische Vorhersagen und genaue Werte dürfen nur in den zentralen Anomalie‑Dokumenten `018_T0_Anomale-g2-10_De.tex` und `018_T0_Anomale-g2-10_En.tex` stehen.
+- In allen anderen Dokumenten sind Erwähnungen von g‑2 erlaubt, aber ohne falsche oder veraltete exakte Zahlenvorhersagen; bei Bedarf stattdessen qualitativ formulieren oder explizit auf das entsprechende Anomalie‑Dokument verweisen.
+- Physikalischen Inhalt im Übrigen nicht verändern; der Fokus liegt ausschließlich auf der Beseitigung von LaTeX‑Fehlern und der korrekten Kompilation.
+
+Wenn du Änderungen an `.tex`‑Dateien vornimmst, fasse sie in kleinen, sinnvollen Commits zusammen (z.B. `Fix LuaLaTeX error in <Dateiname>`) und pushe sie zurück auf `main`, sobald alle betroffenen Dokumente sauber durchkompiliert sind.
+```
