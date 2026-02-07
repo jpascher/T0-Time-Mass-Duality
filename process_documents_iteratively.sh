@@ -74,19 +74,27 @@ while IFS= read -r texfile && [ $doc_count -lt $max_docs ]; do
     
     # Try to compile
     echo "Compiling with LuaLaTeX..."
-    if latexmk -lualatex \
+    
+    # Get the directory of the tex file for proper path resolution
+    texdir=$(dirname "$texfile")
+    texbase=$(basename "$texfile")
+    
+    # Change to the tex file's directory before compiling
+    (cd "$texdir" && latexmk -lualatex \
         -interaction=nonstopmode \
         -halt-on-error \
-        -output-directory="$OUTDIR" \
-        "$texfile" > "$logfile" 2>&1; then
+        "$texbase") > "$logfile" 2>&1
+    
+    if [ $? -eq 0 ]; then
         
         echo "✓ SUCCESS: $texfile"
         echo "$texfile" >> documents_completed.txt
         
-        # Verify PDF was created
-        pdffile="$OUTDIR/${basename}.pdf"
+        # Move PDF to output directory
+        pdffile="$texdir/${basename}.pdf"
         if [ -f "$pdffile" ]; then
-            echo "  PDF created: $pdffile ($(du -h "$pdffile" | cut -f1))"
+            mv "$pdffile" "$OUTDIR/"
+            echo "  PDF moved to: $OUTDIR/${basename}.pdf ($(du -h "$OUTDIR/${basename}.pdf" | cut -f1))"
         fi
     else
         echo "✗ FAILED: $texfile"
