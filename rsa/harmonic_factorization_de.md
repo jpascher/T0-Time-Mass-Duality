@@ -70,9 +70,9 @@ Die musikalischen Intervalle, reduziert auf ihre mathematische Essenz:
 
 #### 2. Primzahl-Verhältnisse fallen durch das Raster
 ```
-3×7=21:   Verhältnis 2.33 → 24.4% Abweichung ❌
-3×11=33:  Verhältnis 3.67 → 95.6% Abweichung ❌
-5×11=55:  Verhältnis 2.20 → 17.3% Abweichung ❌
+3×7=21:  Verhältnis 2.33 → 24.4% Abweichung ❌
+3×11=33: Verhältnis 3.67 → 95.6% Abweichung ❌
+5×11=55: Verhältnis 2.20 → 17.3% Abweichung ❌
 ```
 
 ---
@@ -94,8 +94,8 @@ Harmonische Distanz = |1200 × log₂(ratio₁ / ratio₂)| Cents
 Oktaven-Reduktion: ratio_reduced = ratio / 2^⌊log₂(ratio)⌋
 
 Toleranz: 50 Cents = halber Halbton (großzügig musikalisch)
-         20 Cents = 1/5 Halbton (präzise musikalisch)
-         5 Cents = kaum hörbar (sehr exakt)
+     20 Cents = 1/5 Halbton (präzise musikalisch)
+     5 Cents = kaum hörbar (sehr exakt)
 ```
 
 ---
@@ -195,23 +195,23 @@ Das System wurde mit Zahlen verschiedener Bit-Größen getestet:
 #### Pseudocode:
 ```python
 def logarithmic_factorize(n, tolerance_cents=50):
-    # 1. Finde Faktoren (klassisch)
-    factors = find_factors(n)
-    if not factors: return PRIME
-    
-    # 2. Berechne Verhältnis
-    ratio = max(factors) / min(factors)
-    
-    # 3. Oktaven-Reduktion
-    reduced_ratio, octave_shift = reduce_to_base_octave(ratio)
-    
-    # 4. Logarithmische Harmonie-Suche
-    for interval in HARMONIC_INTERVALS:
-        cents_deviation = abs(1200 * log2(reduced_ratio / interval.ratio))
-        if cents_deviation <= tolerance_cents:
-            return SUCCESS(interval, cents_deviation, octave_shift)
-    
-    return FAILURE
+  # 1. Finde Faktoren (klassisch)
+  factors = find_factors(n)
+  if not factors: return PRIME
+  
+  # 2. Berechne Verhältnis
+  ratio = max(factors) / min(factors)
+  
+  # 3. Oktaven-Reduktion
+  reduced_ratio, octave_shift = reduce_to_base_octave(ratio)
+  
+  # 4. Logarithmische Harmonie-Suche
+  for interval in HARMONIC_INTERVALS:
+    cents_deviation = abs(1200 * log2(reduced_ratio / interval.ratio))
+    if cents_deviation <= tolerance_cents:
+      return SUCCESS(interval, cents_deviation, octave_shift)
+  
+  return FAILURE
 ```
 
 #### Komplexitäts-Analyse:
@@ -313,5 +313,5 @@ Aber jetzt verstehen wir sie. Und sie sind logarithmisch. 🎵
 
 ---
 
-*© 2024 Harmonic Mathematics Research*  
+*© 2024 Harmonic Mathematics Research* 
 *"Wo Effizienz und Eleganz sich treffen, entsteht Perfektion"* 🎵⚡✨

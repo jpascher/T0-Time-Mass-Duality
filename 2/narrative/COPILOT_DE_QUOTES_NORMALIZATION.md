@@ -1,6 +1,6 @@
 # Copilot Task: Normalize German Quotes in DE Narrative Files
 
-Branch: `copilot/reset-copilot-narrative`  
+Branch: `copilot/reset-copilot-narrative` 
 Directory: `2/narrative`
 
 Ziel: In allen deutschen narrativen Dateien sollen Anführungszeichen konsequent im LaTeX-Format ``Text'' verwendet werden. Gemischte Unicode-Anführungszeichen („…“) und einfache ASCII-Doppelt-Anführungszeichen `"Text"` sollen systematisch ersetzt werden.
@@ -12,9 +12,9 @@ Ziel: In allen deutschen narrativen Dateien sollen Anführungszeichen konsequent
 Bearbeite **nur** folgende Verzeichnisse/Dateien:
 
 - Deutsche Kapitel:
-  - `2/narrative/de_chapters/Kapitel_XX_Narrative_De.tex`
+ - `2/narrative/de_chapters/Kapitel_XX_Narrative_De.tex`
 - Deutsche Standalones:
-  - `2/narrative/de_standalone/Kapitel_XXa_Narrative_De.tex`
+ - `2/narrative/de_standalone/Kapitel_XXa_Narrative_De.tex`
 
 Dabei gilt:
 - **Keine** Änderungen in EN-Dateien.
@@ -27,14 +27,14 @@ Dabei gilt:
 
 Nach der Bereinigung sollen Anführungszeichen in den deutschen Narrativen nur noch so aussehen:
 
-- LaTeX-Variante:  
-  ```latex
-  ``Text'
-  ```
+- LaTeX-Variante: 
+ ```latex
+ ``Text'
+ ```
 
 Unicode- und ASCII-Varianten sind zu vermeiden:
 
-- `„Text“`  (typografische Anführungszeichen) → **ersetzen**
+- `„Text“` (typografische Anführungszeichen) → **ersetzen**
 - `"Text"` (einfache ASCII-Doppelt-Anführungszeichen) → **ersetzen**
 
 ---
@@ -71,11 +71,11 @@ Dabei vorsichtig vorgehen:
 Bei allen Ersetzungen **keine** Änderungen vornehmen:
 
 - Innerhalb von Mathe-Umgebungen:
-  - Inline-Math: `$...$`, `\(...\)`
-  - Display-Math: `\[...\]`, `equation`, `align`, `gather`, etc.
+ - Inline-Math: `$...$`, `\(...\)`
+ - Display-Math: `\[...\]`, `equation`, `align`, `gather`, etc.
 - In URL- oder Link-Kommandos:
-  - `\url{...}`
-  - `\href{...}{...}`
+ - `\url{...}`
+ - `\href{...}{...}`
 - In sonstigen LaTeX-Kommandos, bei denen `"` o.ä. bewusst verwendet werden könnte.
 
 Falls unsicher, lieber das konkrete Vorkommen unverändert lassen.
@@ -85,10 +85,10 @@ Falls unsicher, lieber das konkrete Vorkommen unverändert lassen.
 ## 5. Vorgehensvorschlag (Implementierung)
 
 1. Schreibe ein kleines Skript (z.B. in Python), das:
-   - Alle Dateien unter `de_chapters` und `de_standalone` mit Namen `Kapitel_*_Narrative_De.tex` durchläuft.
-   - Den Inhalt einliest (UTF-8).
-   - Zuerst alle Unicode-Anführungszeichen `„`, `“`, `”` durch ihre LaTeX-Entsprechungen ersetzt.
-   - Anschließend einfache ASCII-Paare `"Text"` im Fließtext konvertiert zu ``Text'.
+  - Alle Dateien unter `de_chapters` und `de_standalone` mit Namen `Kapitel_*_Narrative_De.tex` durchläuft.
+  - Den Inhalt einliest (UTF-8).
+  - Zuerst alle Unicode-Anführungszeichen `„`, `“`, `”` durch ihre LaTeX-Entsprechungen ersetzt.
+  - Anschließend einfache ASCII-Paare `"Text"` im Fließtext konvertiert zu ``Text'.
 
 2. Achte darauf, dass Mathe- und URL-Bereiche (siehe Abschnitt 4) entweder übersprungen oder mit einem robusten Parser erkannt werden.
 
@@ -99,35 +99,35 @@ Falls unsicher, lieber das konkrete Vorkommen unverändert lassen.
 ## 6. Kontrolle und Validierung
 
 1. Nach der Ersetzung:
-   - Führe `grep`-Checks aus, z.B.:
-     - Suche nach verbliebenen `„`, `“`, `”` in `de_chapters` und `de_standalone`.
-     - Suche nach isolierten `"` in denselben Verzeichnissen.
+  - Führe `grep`-Checks aus, z.B.:
+   - Suche nach verbliebenen `„`, `“`, `”` in `de_chapters` und `de_standalone`.
+   - Suche nach isolierten `"` in denselben Verzeichnissen.
 
 2. Stichprobenartig mehrere Kapitel öffnen (z.B. 5, 12, 13, 28, 35) und visuell prüfen, ob:
-   - Anführungszeichen überall als ``Text' erscheinen.
-   - Keine kaputten LaTeX-Konstrukte (z.B. in Mathe-Umgebungen) entstanden sind.
+  - Anführungszeichen überall als ``Text' erscheinen.
+  - Keine kaputten LaTeX-Konstrukte (z.B. in Mathe-Umgebungen) entstanden sind.
 
 3. Danach (optional, aber empfohlen):
-   - `FFGFT_Narrative_Master_De.tex` im Ordner `2/narrative` mehrfach kompilieren:
-     ```bash
-     cd 2/narrative
-     for i in {1..3}; do
-       pdflatex -interaction=nonstopmode FFGFT_Narrative_Master_De.tex
-     done
-     ```
-   - Das `.log`-File prüfen, ob **neue** Fehler durch die Quote-Anpassungen entstanden sind; falls ja, die betroffenen Stellen minimal korrigieren.
+  - `FFGFT_Narrative_Master_De.tex` im Ordner `2/narrative` mehrfach kompilieren:
+   ```bash
+   cd 2/narrative
+   for i in {1..3}; do
+    pdflatex -interaction=nonstopmode FFGFT_Narrative_Master_De.tex
+   done
+   ```
+  - Das `.log`-File prüfen, ob **neue** Fehler durch die Quote-Anpassungen entstanden sind; falls ja, die betroffenen Stellen minimal korrigieren.
 
 ---
 
 ## 7. Versionierung
 
 1. Nach erfolgreicher Normalisierung und Prüfung:
-   - Nur diese Pfade zum Commit hinzufügen:
-     - `2/narrative/de_chapters/*.tex`
-     - `2/narrative/de_standalone/*.tex`
+  - Nur diese Pfade zum Commit hinzufügen:
+   - `2/narrative/de_chapters/*.tex`
+   - `2/narrative/de_standalone/*.tex`
 
 2. Commit-Message (Vorschlag):
-   - `Normalize German quotes in DE narrative chapters/standalones to ``...'`
+  - `Normalize German quotes in DE narrative chapters/standalones to ``...'`
 
 3. Änderungen nach `copilot/reset-copilot-narrative` pushen.
 
@@ -138,4 +138,5 @@ Falls unsicher, lieber das konkrete Vorkommen unverändert lassen.
 - Alle deutschen narrativen Kapitel und Standalone-Dateien verwenden **einheitlich** LaTeX-Anführungszeichen im Format ``Text'.
 - Es gibt keine gemischten Unicode-Quotes mehr, und der optische Eindruck der Anführungszeichen (inkl. Abstände) ist konsistent.
 - `FFGFT_Narrative_Master_De.tex` kompiliert weiterhin fehlerfrei.
+
 

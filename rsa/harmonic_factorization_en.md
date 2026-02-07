@@ -70,9 +70,9 @@ Musical intervals reduced to their mathematical essence:
 
 #### 2. Prime Number Ratios Fall Through the Cracks
 ```
-3×7=21:   Ratio 2.33 → 24.4% deviation ❌
-3×11=33:  Ratio 3.67 → 95.6% deviation ❌
-5×11=55:  Ratio 2.20 → 17.3% deviation ❌
+3×7=21:  Ratio 2.33 → 24.4% deviation ❌
+3×11=33: Ratio 3.67 → 95.6% deviation ❌
+5×11=55: Ratio 2.20 → 17.3% deviation ❌
 ```
 
 ---
@@ -94,8 +94,8 @@ Harmonic Distance = |1200 × log₂(ratio₁ / ratio₂)| Cents
 Octave Reduction: ratio_reduced = ratio / 2^⌊log₂(ratio)⌋
 
 Tolerance: 50 Cents = half semitone (musically generous)
-          20 Cents = 1/5 semitone (musically precise)
-          5 Cents = barely audible (very exact)
+     20 Cents = 1/5 semitone (musically precise)
+     5 Cents = barely audible (very exact)
 ```
 
 ---
@@ -195,23 +195,23 @@ The system was tested with numbers of various bit sizes:
 #### Pseudocode:
 ```python
 def logarithmic_factorize(n, tolerance_cents=50):
-    # 1. Find factors (classical)
-    factors = find_factors(n)
-    if not factors: return PRIME
-    
-    # 2. Calculate ratio
-    ratio = max(factors) / min(factors)
-    
-    # 3. Octave reduction
-    reduced_ratio, octave_shift = reduce_to_base_octave(ratio)
-    
-    # 4. Logarithmic harmony search
-    for interval in HARMONIC_INTERVALS:
-        cents_deviation = abs(1200 * log2(reduced_ratio / interval.ratio))
-        if cents_deviation <= tolerance_cents:
-            return SUCCESS(interval, cents_deviation, octave_shift)
-    
-    return FAILURE
+  # 1. Find factors (classical)
+  factors = find_factors(n)
+  if not factors: return PRIME
+  
+  # 2. Calculate ratio
+  ratio = max(factors) / min(factors)
+  
+  # 3. Octave reduction
+  reduced_ratio, octave_shift = reduce_to_base_octave(ratio)
+  
+  # 4. Logarithmic harmony search
+  for interval in HARMONIC_INTERVALS:
+    cents_deviation = abs(1200 * log2(reduced_ratio / interval.ratio))
+    if cents_deviation <= tolerance_cents:
+      return SUCCESS(interval, cents_deviation, octave_shift)
+  
+  return FAILURE
 ```
 
 #### Complexity Analysis:
@@ -313,5 +313,5 @@ But now we understand them. And they are logarithmic. 🎵
 
 ---
 
-*© 2024 Harmonic Mathematics Research*  
+*© 2024 Harmonic Mathematics Research* 
 *"Where efficiency and elegance meet, perfection emerges"* 🎵⚡✨

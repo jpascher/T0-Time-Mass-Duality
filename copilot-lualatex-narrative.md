@@ -6,8 +6,8 @@ Diese Datei dient als präzise Anweisung für einen Copilot-Agenten oder ein CI-
 
 - Kompiliere die narrativen Hauptdokumente unter `2\narrative` mit **LuaLaTeX**.
 - Erzeuge für jede Sprachversion ein konsistentes PDF unter `2\pdf`:
-  - `FFGFT_Narrative_Master_De.pdf`
-  - `FFGFT_Narrative_Master_En.pdf`
+ - `FFGFT_Narrative_Master_De.pdf`
+ - `FFGFT_Narrative_Master_En.pdf`
 - Nutze dasselbe moderne LuaLaTeX-/Font-/Sprach-Setup wie für die restlichen Bücher und Standalone-Dokumente.
 
 ## 2. Benötigte LaTeX-Umgebung (Server, z.B. GitHub Actions Ubuntu)
@@ -17,15 +17,15 @@ Installiere (falls noch nicht vorhanden) ein vollständiges LuaLaTeX-Setup inkl.
 ```bash
 sudo apt-get update
 sudo apt-get install -y \
-  texlive-latex-recommended \
-  texlive-latex-extra \
-  texlive-fonts-recommended \
-  texlive-fonts-extra \
-  texlive-luatex \
-  texlive-lang-german \
-  texlive-lang-english \
-  texlive-science \
-  latexmk
+ texlive-latex-recommended \
+ texlive-latex-extra \
+ texlive-fonts-recommended \
+ texlive-fonts-extra \
+ texlive-luatex \
+ texlive-lang-german \
+ texlive-lang-english \
+ texlive-science \
+ latexmk
 ```
 
 Annahmen:
@@ -63,40 +63,40 @@ tragen (analog zum bestehenden Stand im Repository).
 2. **TeX-Umgebung installieren**, wie in Abschnitt 2 beschrieben (falls auf dem Runner noch nicht vorhanden).
 3. In das Verzeichnis `2/narrative` wechseln:
 
-   ```bash
-   cd 2/narrative
-   ```
+  ```bash
+  cd 2/narrative
+  ```
 
 4. Für jede der beiden Sprachversionen aus Abschnitt 3 ausführen:
 
-   ```bash
-   latexmk -lualatex -interaction=nonstopmode -halt-on-error \
-     -output-directory=../pdf \
-     FFGFT_Narrative_Master_De.tex
+  ```bash
+  latexmk -lualatex -interaction=nonstopmode -halt-on-error \
+   -output-directory=../pdf \
+   FFGFT_Narrative_Master_De.tex
 
-   latexmk -lualatex -interaction=nonstopmode -halt-on-error \
-     -output-directory=../pdf \
-     FFGFT_Narrative_Master_En.tex
-   ```
+  latexmk -lualatex -interaction=nonstopmode -halt-on-error \
+   -output-directory=../pdf \
+   FFGFT_Narrative_Master_En.tex
+  ```
 
 5. Nach der Kompilierung prüfen:
-   - Existieren `2/pdf/FFGFT_Narrative_Master_De.pdf` und `2/pdf/FFGFT_Narrative_Master_En.pdf`?
-   - Sind die PDFs vollständig (keine auffälligen Fehlermeldungsseiten am Anfang/Ende)?
+  - Existieren `2/pdf/FFGFT_Narrative_Master_De.pdf` und `2/pdf/FFGFT_Narrative_Master_En.pdf`?
+  - Sind die PDFs vollständig (keine auffälligen Fehlermeldungsseiten am Anfang/Ende)?
 
 6. Bei Kompilationsfehlern:
-   - Die zugehörige `.log`-Datei im Ausgabeverzeichnis analysieren.
-   - Nur die **minimal notwendige Änderung** an der entsprechenden `.tex`-Datei oder Preambel vornehmen, z.B.:
-     - Nachladen fehlender Standardpakete (`siunitx`, weitere Core-Pakete),
-     - Anpassen von Sprachoptionen (`babel`/`polyglossia`) für Deutsch/Englisch,
-     - Bereinigen von veralteten `pdflatex`-spezifischen Einstellungen, die unter LuaLaTeX nicht mehr gelten.
-   - Erneut mit `latexmk -lualatex` kompilieren.
+  - Die zugehörige `.log`-Datei im Ausgabeverzeichnis analysieren.
+  - Nur die **minimal notwendige Änderung** an der entsprechenden `.tex`-Datei oder Preambel vornehmen, z.B.:
+   - Nachladen fehlender Standardpakete (`siunitx`, weitere Core-Pakete),
+   - Anpassen von Sprachoptionen (`babel`/`polyglossia`) für Deutsch/Englisch,
+   - Bereinigen von veralteten `pdflatex`-spezifischen Einstellungen, die unter LuaLaTeX nicht mehr gelten.
+  - Erneut mit `latexmk -lualatex` kompilieren.
 
 7. Änderungen in sinnvollen, kleinen Batches committen, z.B.:
 
-   - `Fix LuaLaTeX narrative compilation (De)`
-   - `Fix LuaLaTeX narrative compilation (En)`
+  - `Fix LuaLaTeX narrative compilation (De)`
+  - `Fix LuaLaTeX narrative compilation (En)`
 
-   und anschließend auf den Ziel-Branch pushen.
+  und anschließend auf den Ziel-Branch pushen.
 
 ## 5. Nutzung von vorhandenen Skripten
 
@@ -109,3 +109,4 @@ tragen (analog zum bestehenden Stand im Repository).
 - Keine Quellen oder PDFs löschen oder umbenennen, außer dies ist explizit durch den Auftrag oder bestehende Projektkonventionen vorgegeben.
 - **Physikalische, konzeptionelle und narrative Inhalte dürfen nicht verändert werden**; erlaubt sind ausschließlich LaTeX-syntaktische und paketbezogene Anpassungen.
 - Bevor neue Workarounds eingeführt werden, orientiere dich an bereits etablierten LuaLaTeX-Lösungen im Projekt (Preambel-Strukturen, Font-Setups, Sprachkonfigurationen).
+

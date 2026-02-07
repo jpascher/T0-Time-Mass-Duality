@@ -1,481 +1,482 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <title>Torus-Geometrie in der FFGF-Theorie</title>
-  <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0f172a;
-      color: #111827;
-      margin: 0;
-      padding: 1.5rem;
-      display: flex;
-      justify-content: center;
-    }
-    .page {
-      width: 100%;
-      max-width: 960px;
-    }
-    .card {
-      background: #ffffff;
-      border-radius: 0.75rem;
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.35);
-      padding: 1.5rem;
-    }
-    .card-header {
-      margin-bottom: 1rem;
-    }
-    .card-title {
-      font-size: 1.35rem;
-      font-weight: 600;
-    }
-    .viz-container {
-      background: #020617;
-      border-radius: 0.75rem;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .controls {
-      margin-bottom: 1.5rem;
-    }
-    .btn-row {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-top: 0.25rem;
-    }
-    .btn-scale {
-      padding: 0.4rem 0.9rem;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      font-size: 0.85rem;
-      background: #e5e7eb;
-      color: #111827;
-    }
-    .btn-scale.active {
-      background: #2563eb;
-      color: #f9fafb;
-    }
-    .checkbox-row {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      margin-top: 0.75rem;
-      font-size: 0.9rem;
-    }
-    .info-card {
-      background: #f9fafb;
-      border-radius: 0.75rem;
-      padding: 0.75rem 1rem;
-      margin-bottom: 1rem;
-    }
-    .info-dot {
-      width: 0.8rem;
-      height: 0.8rem;
-      border-radius: 999px;
-      flex-shrink: 0;
-    }
-    .info-header {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-    .info-text-main {
-      font-size: 0.85rem;
-      color: #4b5563;
-    }
-    .info-text-desc {
-      font-size: 0.85rem;
-      color: #374151;
-      margin-top: 0.25rem;
-    }
-    .math-card {
-      border-radius: 0.75rem;
-      border: 1px solid #e5e7eb;
-      padding: 0.9rem 1rem;
-      margin-bottom: 1rem;
-    }
-    .math-title {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-    .math-block {
-      background: #f3f4f6;
-      border-radius: 0.5rem;
-      padding: 0.4rem 0.6rem;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 0.8rem;
-    }
-    .math-caption {
-      font-size: 0.8rem;
-      color: #4b5563;
-      margin-top: 0.25rem;
-    }
-    .ffgf-card {
-      border-radius: 0.75rem;
-      border: 1px solid #bfdbfe;
-      background: #eff6ff;
-      padding: 0.9rem 1rem;
-      margin-bottom: 0.5rem;
-    }
-    .ffgf-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #1d4ed8;
-      margin-bottom: 0.5rem;
-    }
-    .ffgf-text {
-      font-size: 0.9rem;
-      color: #1f2937;
-      margin-bottom: 0.25rem;
-    }
-    label {
-      font-size: 0.9rem;
-      color: #111827;
-    }
-  </style>
+ <meta charset="UTF-8" />
+ <title>Torus-Geometrie in der FFGF-Theorie</title>
+ <style>
+  body {
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+   background: #0f172a;
+   color: #111827;
+   margin: 0;
+   padding: 1.5rem;
+   display: flex;
+   justify-content: center;
+  }
+  .page {
+   width: 100%;
+   max-width: 960px;
+  }
+  .card {
+   background: #ffffff;
+   border-radius: 0.75rem;
+   box-shadow: 0 10px 25px rgba(15, 23, 42, 0.35);
+   padding: 1.5rem;
+  }
+  .card-header {
+   margin-bottom: 1rem;
+  }
+  .card-title {
+   font-size: 1.35rem;
+   font-weight: 600;
+  }
+  .viz-container {
+   background: #020617;
+   border-radius: 0.75rem;
+   padding: 1rem;
+   margin-bottom: 1.5rem;
+  }
+  .controls {
+   margin-bottom: 1.5rem;
+  }
+  .btn-row {
+   display: flex;
+   gap: 0.5rem;
+   flex-wrap: wrap;
+   margin-top: 0.25rem;
+  }
+  .btn-scale {
+   padding: 0.4rem 0.9rem;
+   border-radius: 999px;
+   border: none;
+   cursor: pointer;
+   font-size: 0.85rem;
+   background: #e5e7eb;
+   color: #111827;
+  }
+  .btn-scale.active {
+   background: #2563eb;
+   color: #f9fafb;
+  }
+  .checkbox-row {
+   display: flex;
+   align-items: center;
+   gap: 0.4rem;
+   margin-top: 0.75rem;
+   font-size: 0.9rem;
+  }
+  .info-card {
+   background: #f9fafb;
+   border-radius: 0.75rem;
+   padding: 0.75rem 1rem;
+   margin-bottom: 1rem;
+  }
+  .info-dot {
+   width: 0.8rem;
+   height: 0.8rem;
+   border-radius: 999px;
+   flex-shrink: 0;
+  }
+  .info-header {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+   font-weight: 600;
+   margin-bottom: 0.25rem;
+  }
+  .info-text-main {
+   font-size: 0.85rem;
+   color: #4b5563;
+  }
+  .info-text-desc {
+   font-size: 0.85rem;
+   color: #374151;
+   margin-top: 0.25rem;
+  }
+  .math-card {
+   border-radius: 0.75rem;
+   border: 1px solid #e5e7eb;
+   padding: 0.9rem 1rem;
+   margin-bottom: 1rem;
+  }
+  .math-title {
+   font-size: 1rem;
+   font-weight: 600;
+   margin-bottom: 0.5rem;
+  }
+  .math-block {
+   background: #f3f4f6;
+   border-radius: 0.5rem;
+   padding: 0.4rem 0.6rem;
+   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+   font-size: 0.8rem;
+  }
+  .math-caption {
+   font-size: 0.8rem;
+   color: #4b5563;
+   margin-top: 0.25rem;
+  }
+  .ffgf-card {
+   border-radius: 0.75rem;
+   border: 1px solid #bfdbfe;
+   background: #eff6ff;
+   padding: 0.9rem 1rem;
+   margin-bottom: 0.5rem;
+  }
+  .ffgf-title {
+   font-size: 1rem;
+   font-weight: 600;
+   color: #1d4ed8;
+   margin-bottom: 0.5rem;
+  }
+  .ffgf-text {
+   font-size: 0.9rem;
+   color: #1f2937;
+   margin-bottom: 0.25rem;
+  }
+  label {
+   font-size: 0.9rem;
+   color: #111827;
+  }
+ </style>
 </head>
 <body>
-  <div class="page">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">Torus-Geometrie in der FFGF-Theorie</div>
-      </div>
-      <div class="viz-container">
-        <svg id="torus-svg" width="100%" height="400" viewBox="0 0 800 400"></svg>
-      </div>
+ <div class="page">
+  <div class="card">
+   <div class="card-header">
+    <div class="card-title">Torus-Geometrie in der FFGF-Theorie</div>
+   </div>
+   <div class="viz-container">
+    <svg id="torus-svg" width="100%" height="400" viewBox="0 0 800 400"></svg>
+   </div>
 
-      <div class="controls">
-        <div>
-          <label>Skalierungsebene:</label>
-          <div class="btn-row">
-            <button class="btn-scale" data-scale="micro">Planck-Skala (Proton)</button>
-            <button class="btn-scale" data-scale="meso">Planetar</button>
-            <button class="btn-scale" data-scale="macro">Galaktisch</button>
-          </div>
-        </div>
-        <div class="checkbox-row">
-          <input type="checkbox" id="vectors" checked />
-          <label for="vectors">Energiefluss-Vektoren anzeigen</label>
-        </div>
-      </div>
-
-      <div id="scale-info" class="info-card">
-        <div class="info-header">
-          <div id="scale-dot" class="info-dot"></div>
-          <span id="scale-name"></span>
-        </div>
-        <div id="scale-radius" class="info-text-main"></div>
-        <div id="scale-desc" class="info-text-desc"></div>
-      </div>
-
-      <div class="math-card">
-        <div class="math-title">Torus-Mathematik</div>
-        <div class="math-block">
-          x = (R + r·cos θ)·cos φ<br/>
-          y = (R + r·cos θ)·sin φ<br/>
-          z = r·sin θ
-        </div>
-        <div class="math-caption">
-          R = Hauptradius, r = Röhrenradius; θ ∈ [0, 2π] (poloidal), φ ∈ [0, 2π] (toroidal)
-        </div>
-        <br/>
-        <div class="math-block">
-          Oberfläche: A = 4π²·R·r
-        </div>
-        <br/>
-        <div class="math-block">
-          Volumen: V = 2π²·R·r²
-        </div>
-        <br/>
-        <div class="math-block">
-          Gaußsche Krümmung: K = cos θ / [r (R + r·cos θ)]
-        </div>
-        <div class="math-caption">
-          Positiv innen, negativ außen → Sattelpunkt-Geometrie
-        </div>
-      </div>
-
-      <div class="ffgf-card">
-        <div class="ffgf-title">FFGF-Interpretation des Torus</div>
-        <p class="ffgf-text"><strong>Energiefluss:</strong> Energie wird im Zentrum „eingesaugt“ (Kontraktion/Gravitation) und an den Rändern wieder ausgestoßen (Expansion). Dies erzeugt ein selbsterhaltendes Wirbelmuster.</p>
-        <p class="ffgf-text"><strong>Selbstähnlichkeit:</strong> Die Torus-Geometrie wiederholt sich auf allen Skalen – vom Proton bis zur Galaxie. Der Unterschied liegt nur im Maßstab (fraktale Skalierung).</p>
-        <p class="ffgf-text"><strong>Masse-Entstehung:</strong> Masse entsteht, wo die Energiefluss-Linien sich in einer stabilen Wirbel-Konfiguration verfangen. Die Torus-Form ist die stabilste Geometrie für diese „gefangene“ Energie.</p>
-        <p class="ffgf-text"><strong>Dimension D<sub>f</sub> = 3 − ξ:</strong> Die fraktale Struktur verhindert, dass der Torus zu einer Singularität kollabiert. Der Dimensionsdefekt ξ sorgt für einen minimalen Radius r<sub>min</sub> ~ ℓ<sub>Planck</sub>.</p>
-      </div>
+   <div class="controls">
+    <div>
+     <label>Skalierungsebene:</label>
+     <div class="btn-row">
+      <button class="btn-scale" data-scale="micro">Planck-Skala (Proton)</button>
+      <button class="btn-scale" data-scale="meso">Planetar</button>
+      <button class="btn-scale" data-scale="macro">Galaktisch</button>
+     </div>
     </div>
+    <div class="checkbox-row">
+     <input type="checkbox" id="vectors" checked />
+     <label for="vectors">Energiefluss-Vektoren anzeigen</label>
+    </div>
+   </div>
+
+   <div id="scale-info" class="info-card">
+    <div class="info-header">
+     <div id="scale-dot" class="info-dot"></div>
+     <span id="scale-name"></span>
+    </div>
+    <div id="scale-radius" class="info-text-main"></div>
+    <div id="scale-desc" class="info-text-desc"></div>
+   </div>
+
+   <div class="math-card">
+    <div class="math-title">Torus-Mathematik</div>
+    <div class="math-block">
+     x = (R + r·cos θ)·cos φ<br/>
+     y = (R + r·cos θ)·sin φ<br/>
+     z = r·sin θ
+    </div>
+    <div class="math-caption">
+     R = Hauptradius, r = Röhrenradius; θ ∈ [0, 2π] (poloidal), φ ∈ [0, 2π] (toroidal)
+    </div>
+    <br/>
+    <div class="math-block">
+     Oberfläche: A = 4π²·R·r
+    </div>
+    <br/>
+    <div class="math-block">
+     Volumen: V = 2π²·R·r²
+    </div>
+    <br/>
+    <div class="math-block">
+     Gaußsche Krümmung: K = cos θ / [r (R + r·cos θ)]
+    </div>
+    <div class="math-caption">
+     Positiv innen, negativ außen → Sattelpunkt-Geometrie
+    </div>
+   </div>
+
+   <div class="ffgf-card">
+    <div class="ffgf-title">FFGF-Interpretation des Torus</div>
+    <p class="ffgf-text"><strong>Energiefluss:</strong> Energie wird im Zentrum „eingesaugt“ (Kontraktion/Gravitation) und an den Rändern wieder ausgestoßen (Expansion). Dies erzeugt ein selbsterhaltendes Wirbelmuster.</p>
+    <p class="ffgf-text"><strong>Selbstähnlichkeit:</strong> Die Torus-Geometrie wiederholt sich auf allen Skalen – vom Proton bis zur Galaxie. Der Unterschied liegt nur im Maßstab (fraktale Skalierung).</p>
+    <p class="ffgf-text"><strong>Masse-Entstehung:</strong> Masse entsteht, wo die Energiefluss-Linien sich in einer stabilen Wirbel-Konfiguration verfangen. Die Torus-Form ist die stabilste Geometrie für diese „gefangene“ Energie.</p>
+    <p class="ffgf-text"><strong>Dimension D<sub>f</sub> = 3 − ξ:</strong> Die fraktale Struktur verhindert, dass der Torus zu einer Singularität kollabiert. Der Dimensionsdefekt ξ sorgt für einen minimalen Radius r<sub>min</sub> ~ ℓ<sub>Planck</sub>.</p>
+   </div>
   </div>
+ </div>
 
-  <script>
-    (function() {
-      const svg = document.getElementById('torus-svg');
-      const vectorsCheckbox = document.getElementById('vectors');
-      const scaleButtons = document.querySelectorAll('.btn-scale');
-      const scaleDot = document.getElementById('scale-dot');
-      const scaleName = document.getElementById('scale-name');
-      const scaleRadius = document.getElementById('scale-radius');
-      const scaleDesc = document.getElementById('scale-desc');
+ <script>
+  (function() {
+   const svg = document.getElementById('torus-svg');
+   const vectorsCheckbox = document.getElementById('vectors');
+   const scaleButtons = document.querySelectorAll('.btn-scale');
+   const scaleDot = document.getElementById('scale-dot');
+   const scaleName = document.getElementById('scale-name');
+   const scaleRadius = document.getElementById('scale-radius');
+   const scaleDesc = document.getElementById('scale-desc');
 
-      const scaleInfo = {
-        micro: {
-          name: 'Planck-Skala (Proton)',
-          R: 'Hauptradius: R ≈ 10⁻¹⁵ m',
-          desc: 'Stark fraktal gekrümmt, hohe Energiedichte',
-          color: '#ef4444'
-        },
-        meso: {
-          name: 'Planetar',
-          R: 'Hauptradius: R ≈ 10⁶ m',
-          desc: 'Moderate Krümmung, sichtbare Gravitation',
-          color: '#3b82f6'
-        },
-        macro: {
-          name: 'Galaktisch',
-          R: 'Hauptradius: R ≈ 10²⁰ m',
-          desc: 'Schwache Krümmung, "Dunkle Materie"-Effekt',
-          color: '#8b5cf6'
-        }
-      };
+   const scaleInfo = {
+    micro: {
+     name: 'Planck-Skala (Proton)',
+     R: 'Hauptradius: R ≈ 10⁻¹⁵ m',
+     desc: 'Stark fraktal gekrümmt, hohe Energiedichte',
+     color: '#ef4444'
+    },
+    meso: {
+     name: 'Planetar',
+     R: 'Hauptradius: R ≈ 10⁶ m',
+     desc: 'Moderate Krümmung, sichtbare Gravitation',
+     color: '#3b82f6'
+    },
+    macro: {
+     name: 'Galaktisch',
+     R: 'Hauptradius: R ≈ 10²⁰ m',
+     desc: 'Schwache Krümmung, "Dunkle Materie"-Effekt',
+     color: '#8b5cf6'
+    }
+   };
 
-      let rotation = 0;
-      let currentScale = 'micro';
+   let rotation = 0;
+   let currentScale = 'micro';
 
-      function updateScaleInfo() {
-        const info = scaleInfo[currentScale];
-        scaleDot.style.backgroundColor = info.color;
-        scaleName.textContent = info.name;
-        scaleRadius.textContent = info.R;
-        scaleDesc.textContent = info.desc;
+   function updateScaleInfo() {
+    const info = scaleInfo[currentScale];
+    scaleDot.style.backgroundColor = info.color;
+    scaleName.textContent = info.name;
+    scaleRadius.textContent = info.R;
+    scaleDesc.textContent = info.desc;
 
-        scaleButtons.forEach(btn => {
-          if (btn.dataset.scale === currentScale) {
-            btn.classList.add('active');
-          } else {
-            btn.classList.remove('active');
-          }
-        });
-      }
+    scaleButtons.forEach(btn => {
+     if (btn.dataset.scale === currentScale) {
+      btn.classList.add('active');
+     } else {
+      btn.classList.remove('active');
+     }
+    });
+   }
 
-      function clearSvg() {
-        while (svg.firstChild) svg.removeChild(svg.firstChild);
-      }
+   function clearSvg() {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+   }
 
-      function createDefs() {
-        const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+   function createDefs() {
+    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
 
-        const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
-        marker.setAttribute('id', 'arrowhead');
-        marker.setAttribute('markerWidth', '10');
-        marker.setAttribute('markerHeight', '10');
-        marker.setAttribute('refX', '9');
-        marker.setAttribute('refY', '3');
-        marker.setAttribute('orient', 'auto');
-        const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-        poly.setAttribute('points', '0 0, 10 3, 0 6');
-        poly.setAttribute('fill', '#f59e0b');
-        marker.appendChild(poly);
+    const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+    marker.setAttribute('id', 'arrowhead');
+    marker.setAttribute('markerWidth', '10');
+    marker.setAttribute('markerHeight', '10');
+    marker.setAttribute('refX', '9');
+    marker.setAttribute('refY', '3');
+    marker.setAttribute('orient', 'auto');
+    const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    poly.setAttribute('points', '0 0, 10 3, 0 6');
+    poly.setAttribute('fill', '#f59e0b');
+    marker.appendChild(poly);
 
-        const radial = document.createElementNS('http://www.w3.org/2000/svg', 'radialGradient');
-        radial.setAttribute('id', 'energyGlow');
-        const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-        stop1.setAttribute('offset', '0%');
-        stop1.setAttribute('stop-color', '#fbbf24');
-        stop1.setAttribute('stop-opacity', '0.8');
-        const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-        stop2.setAttribute('offset', '100%');
-        stop2.setAttribute('stop-color', '#f59e0b');
-        stop2.setAttribute('stop-opacity', '0');
-        radial.appendChild(stop1);
-        radial.appendChild(stop2);
+    const radial = document.createElementNS('http://www.w3.org/2000/svg', 'radialGradient');
+    radial.setAttribute('id', 'energyGlow');
+    const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    stop1.setAttribute('offset', '0%');
+    stop1.setAttribute('stop-color', '#fbbf24');
+    stop1.setAttribute('stop-opacity', '0.8');
+    const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    stop2.setAttribute('offset', '100%');
+    stop2.setAttribute('stop-color', '#f59e0b');
+    stop2.setAttribute('stop-opacity', '0');
+    radial.appendChild(stop1);
+    radial.appendChild(stop2);
 
-        defs.appendChild(marker);
-        defs.appendChild(radial);
-        svg.appendChild(defs);
-      }
+    defs.appendChild(marker);
+    defs.appendChild(radial);
+    svg.appendChild(defs);
+   }
 
-      function drawTorus(centerX, centerY, R, r, detail = 20) {
-        const angle = rotation * Math.PI / 180;
+   function drawTorus(centerX, centerY, R, r, detail = 20) {
+    const angle = rotation * Math.PI / 180;
 
-        // Meridian circles
-        for (let i = 0; i < detail; i++) {
-          const phi = (i / detail) * 2 * Math.PI;
-          const points = [];
+    // Meridian circles
+    for (let i = 0; i < detail; i++) {
+     const phi = (i / detail) * 2 * Math.PI;
+     const points = [];
 
-          for (let j = 0; j <= detail; j++) {
-            const theta = (j / detail) * 2 * Math.PI;
-            const x = (R + r * Math.cos(theta)) * Math.cos(phi);
-            const y = (R + r * Math.cos(theta)) * Math.sin(phi);
-            const z = r * Math.sin(theta);
+     for (let j = 0; j <= detail; j++) {
+      const theta = (j / detail) * 2 * Math.PI;
+      const x = (R + r * Math.cos(theta)) * Math.cos(phi);
+      const y = (R + r * Math.cos(theta)) * Math.sin(phi);
+      const z = r * Math.sin(theta);
 
-            const rotX = x * Math.cos(angle) - z * Math.sin(angle);
-            const rotZ = x * Math.sin(angle) + z * Math.cos(angle);
+      const rotX = x * Math.cos(angle) - z * Math.sin(angle);
+      const rotZ = x * Math.sin(angle) + z * Math.cos(angle);
 
-            const s = 200 / (200 + rotZ);
-            const projX = centerX + rotX * s;
-            const projY = centerY + y * s;
+      const s = 200 / (200 + rotZ);
+      const projX = centerX + rotX * s;
+      const projY = centerY + y * s;
 
-            points.push(`${projX},${projY}`);
-          }
+      points.push(`${projX},${projY}`);
+     }
 
-          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-          path.setAttribute('d', `M ${points.join(' L ')}`);
-          path.setAttribute('fill', 'none');
-          path.setAttribute('stroke', '#60a5fa');
-          path.setAttribute('stroke-width', '1');
-          path.setAttribute('opacity', '0.6');
-          svg.appendChild(path);
-        }
+     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+     path.setAttribute('d', `M ${points.join(' L ')}`);
+     path.setAttribute('fill', 'none');
+     path.setAttribute('stroke', '#60a5fa');
+     path.setAttribute('stroke-width', '1');
+     path.setAttribute('opacity', '0.6');
+     svg.appendChild(path);
+    }
 
-        // Parallel circles
-        for (let j = 0; j < detail; j++) {
-          const theta = (j / detail) * 2 * Math.PI;
-          const points = [];
+    // Parallel circles
+    for (let j = 0; j < detail; j++) {
+     const theta = (j / detail) * 2 * Math.PI;
+     const points = [];
 
-          for (let i = 0; i <= detail; i++) {
-            const phi = (i / detail) * 2 * Math.PI;
-            const x = (R + r * Math.cos(theta)) * Math.cos(phi);
-            const y = (R + r * Math.cos(theta)) * Math.sin(phi);
-            const z = r * Math.sin(theta);
+     for (let i = 0; i <= detail; i++) {
+      const phi = (i / detail) * 2 * Math.PI;
+      const x = (R + r * Math.cos(theta)) * Math.cos(phi);
+      const y = (R + r * Math.cos(theta)) * Math.sin(phi);
+      const z = r * Math.sin(theta);
 
-            const rotX = x * Math.cos(angle) - z * Math.sin(angle);
-            const rotZ = x * Math.sin(angle) + z * Math.cos(angle);
+      const rotX = x * Math.cos(angle) - z * Math.sin(angle);
+      const rotZ = x * Math.sin(angle) + z * Math.cos(angle);
 
-            const s = 200 / (200 + rotZ);
-            const projX = centerX + rotX * s;
-            const projY = centerY + y * s;
+      const s = 200 / (200 + rotZ);
+      const projX = centerX + rotX * s;
+      const projY = centerY + y * s;
 
-            points.push(`${projX},${projY}`);
-          }
+      points.push(`${projX},${projY}`);
+     }
 
-          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-          path.setAttribute('d', `M ${points.join(' L ')}`);
-          path.setAttribute('fill', 'none');
-          path.setAttribute('stroke', '#60a5fa');
-          path.setAttribute('stroke-width', '1');
-          path.setAttribute('opacity', '0.4');
-          svg.appendChild(path);
-        }
-      }
+     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+     path.setAttribute('d', `M ${points.join(' L ')}`);
+     path.setAttribute('fill', 'none');
+     path.setAttribute('stroke', '#60a5fa');
+     path.setAttribute('stroke-width', '1');
+     path.setAttribute('opacity', '0.4');
+     svg.appendChild(path);
+    }
+   }
 
-      function drawFlowVectors(centerX, centerY, R, r) {
-        if (!vectorsCheckbox.checked) return;
-        const numVectors = 8;
+   function drawFlowVectors(centerX, centerY, R, r) {
+    if (!vectorsCheckbox.checked) return;
+    const numVectors = 8;
 
-        for (let i = 0; i < numVectors; i++) {
-          const phi = (i / numVectors) * 2 * Math.PI;
-          const theta = rotation * Math.PI / 180;
+    for (let i = 0; i < numVectors; i++) {
+     const phi = (i / numVectors) * 2 * Math.PI;
+     const theta = rotation * Math.PI / 180;
 
-          const x = (R + r * Math.cos(theta)) * Math.cos(phi);
-          const y = (R + r * Math.cos(theta)) * Math.sin(phi);
+     const x = (R + r * Math.cos(theta)) * Math.cos(phi);
+     const y = (R + r * Math.cos(theta)) * Math.sin(phi);
 
-          const vx = -Math.sin(phi) * 15;
-          const vy = Math.cos(phi) * 15;
+     const vx = -Math.sin(phi) * 15;
+     const vy = Math.cos(phi) * 15;
 
-          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-          line.setAttribute('x1', centerX + x);
-          line.setAttribute('y1', centerY + y);
-          line.setAttribute('x2', centerX + x + vx);
-          line.setAttribute('y2', centerY + y + vy);
-          line.setAttribute('stroke', '#f59e0b');
-          line.setAttribute('stroke-width', '2');
-          line.setAttribute('marker-end', 'url(#arrowhead)');
-          svg.appendChild(line);
-        }
-      }
+     const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+     line.setAttribute('x1', centerX + x);
+     line.setAttribute('y1', centerY + y);
+     line.setAttribute('x2', centerX + x + vx);
+     line.setAttribute('y2', centerY + y + vy);
+     line.setAttribute('stroke', '#f59e0b');
+     line.setAttribute('stroke-width', '2');
+     line.setAttribute('marker-end', 'url(#arrowhead)');
+     svg.appendChild(line);
+    }
+   }
 
-      function drawLabels() {
-        const title = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        title.setAttribute('x', '400');
-        title.setAttribute('y', '30');
-        title.setAttribute('text-anchor', 'middle');
-        title.setAttribute('fill', 'white');
-        title.setAttribute('font-size', '16');
-        title.setAttribute('font-weight', 'bold');
-        title.textContent = scaleInfo[currentScale].name;
-        svg.appendChild(title);
+   function drawLabels() {
+    const title = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    title.setAttribute('x', '400');
+    title.setAttribute('y', '30');
+    title.setAttribute('text-anchor', 'middle');
+    title.setAttribute('fill', 'white');
+    title.setAttribute('font-size', '16');
+    title.setAttribute('font-weight', 'bold');
+    title.textContent = scaleInfo[currentScale].name;
+    svg.appendChild(title);
 
-        const bottom = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        bottom.setAttribute('x', '400');
-        bottom.setAttribute('y', '380');
-        bottom.setAttribute('text-anchor', 'middle');
-        bottom.setAttribute('fill', '#60a5fa');
-        bottom.setAttribute('font-size', '12');
-        bottom.textContent = 'Einfluss (innen) → Ausfluss (außen)';
-        svg.appendChild(bottom);
+    const bottom = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    bottom.setAttribute('x', '400');
+    bottom.setAttribute('y', '380');
+    bottom.setAttribute('text-anchor', 'middle');
+    bottom.setAttribute('fill', '#60a5fa');
+    bottom.setAttribute('font-size', '12');
+    bottom.textContent = 'Einfluss (innen) → Ausfluss (außen)';
+    svg.appendChild(bottom);
 
-        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        g.setAttribute('transform', 'translate(50, 100)');
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('transform', 'translate(50, 100)');
 
-        const t1 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        t1.setAttribute('fill', 'white');
-        t1.setAttribute('font-size', '14');
-        t1.setAttribute('font-weight', 'bold');
-        t1.textContent = 'Df = 3 - ξ';
-        g.appendChild(t1);
+    const t1 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t1.setAttribute('fill', 'white');
+    t1.setAttribute('font-size', '14');
+    t1.setAttribute('font-weight', 'bold');
+    t1.textContent = 'Df = 3 - ξ';
+    g.appendChild(t1);
 
-        const t2 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        t2.setAttribute('y', '20');
-        t2.setAttribute('fill', '#86efac');
-        t2.setAttribute('font-size', '12');
-        t2.textContent = 'ξ = 4/3 × 10⁻⁴';
-        g.appendChild(t2);
+    const t2 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t2.setAttribute('y', '20');
+    t2.setAttribute('fill', '#86efac');
+    t2.setAttribute('font-size', '12');
+    t2.textContent = 'ξ = 4/3 × 10⁻⁴';
+    g.appendChild(t2);
 
-        const t3 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        t3.setAttribute('y', '40');
-        t3.setAttribute('fill', '#fbbf24');
-        t3.setAttribute('font-size', '12');
-        t3.textContent = 'Df ≈ 2.9998666';
-        g.appendChild(t3);
+    const t3 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t3.setAttribute('y', '40');
+    t3.setAttribute('fill', '#fbbf24');
+    t3.setAttribute('font-size', '12');
+    t3.textContent = 'Df ≈ 2.9998666';
+    g.appendChild(t3);
 
-        svg.appendChild(g);
-      }
+    svg.appendChild(g);
+   }
 
-      function drawEnergyCenter() {
-        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        circle.setAttribute('cx', '400');
-        circle.setAttribute('cy', '200');
-        circle.setAttribute('r', '30');
-        circle.setAttribute('fill', 'url(#energyGlow)');
-        svg.appendChild(circle);
-      }
+   function drawEnergyCenter() {
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', '400');
+    circle.setAttribute('cy', '200');
+    circle.setAttribute('r', '30');
+    circle.setAttribute('fill', 'url(#energyGlow)');
+    svg.appendChild(circle);
+   }
 
-      function render() {
-        clearSvg();
-        createDefs();
-        drawEnergyCenter();
-        drawTorus(400, 200, 80, 30);
-        drawFlowVectors(400, 200, 80, 30);
-        drawLabels();
-      }
+   function render() {
+    clearSvg();
+    createDefs();
+    drawEnergyCenter();
+    drawTorus(400, 200, 80, 30);
+    drawFlowVectors(400, 200, 80, 30);
+    drawLabels();
+   }
 
-      // Event handlers
-      scaleButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          currentScale = btn.dataset.scale;
-          updateScaleInfo();
-          render();
-        });
-      });
+   // Event handlers
+   scaleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+     currentScale = btn.dataset.scale;
+     updateScaleInfo();
+     render();
+    });
+   });
 
-      vectorsCheckbox.addEventListener('change', () => {
-        render();
-      });
+   vectorsCheckbox.addEventListener('change', () => {
+    render();
+   });
 
-      // Initial state
-      updateScaleInfo();
-      render();
+   // Initial state
+   updateScaleInfo();
+   render();
 
-      // Animation loop
-      setInterval(() => {
-        rotation = (rotation + 1) % 360;
-        render();
-      }, 50);
-    })();
-  </script>
+   // Animation loop
+   setInterval(() => {
+    rotation = (rotation + 1) % 360;
+    render();
+   }, 50);
+  })();
+ </script>
 </body>
 </html>
+

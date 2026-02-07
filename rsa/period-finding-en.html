@@ -1,488 +1,488 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T0 Period Finding - Rational Arithmetic</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            min-height: 100vh;
-        }
-        
-        .language-switch {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-        
-        .lang-link {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            text-decoration: none;
-            transition: background 0.3s ease;
-        }
-        
-        .lang-link:hover {
-            background: rgba(255,255,255,0.3);
-            color: white;
-            text-decoration: none;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 40px;
-            padding: 30px 0;
-        }
-        
-        .header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .nav-back {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            display: inline-block;
-            margin-bottom: 20px;
-            transition: background 0.3s ease;
-        }
-        
-        .nav-back:hover {
-            background: rgba(255,255,255,0.3);
-            color: white;
-            text-decoration: none;
-        }
-        
-        .content-section {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin: 20px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
-        .key-principle {
-            background: linear-gradient(135deg, #48bb78, #38a169);
-            color: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
-            text-align: center;
-        }
-        
-        .principle-title {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-        
-        .principle-description {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        
-        .approach-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 25px 0;
-        }
-        
-        .approach-card {
-            background: linear-gradient(145deg, #f7fafc, #edf2f7);
-            border-radius: 15px;
-            padding: 20px;
-            border-left: 4px solid #667eea;
-        }
-        
-        .approach-number {
-            font-size: 2rem;
-            color: #667eea;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        
-        .approach-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #4a5568;
-            margin-bottom: 10px;
-        }
-        
-        .approach-text {
-            color: #718096;
-        }
-        
-        .xi-strategies {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .xi-card {
-            border-radius: 10px;
-            padding: 20px;
-            color: white;
-            text-align: center;
-        }
-        
-        .xi-twin {
-            background: linear-gradient(135deg, #48bb78, #38a169);
-        }
-        
-        .xi-universal {
-            background: linear-gradient(135deg, #4299e1, #3182ce);
-        }
-        
-        .xi-medium {
-            background: linear-gradient(135deg, #ed8936, #dd6b20);
-        }
-        
-        .xi-special {
-            background: linear-gradient(135deg, #9f7aea, #805ad5);
-        }
-        
-        .xi-value {
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        
-        .xi-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        
-        .results-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .results-table th,
-        .results-table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        
-        .results-table th {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            font-weight: 600;
-        }
-        
-        .results-table tr:hover {
-            background: #f7fafc;
-        }
-        
-        .success-icon {
-            color: #48bb78;
-            font-weight: bold;
-        }
-        
-        .time-value {
-            font-family: 'Courier New', monospace;
-            color: #2d3748;
-        }
-        
-        .ratio-value {
-            font-family: 'Courier New', monospace;
-            color: #4299e1;
-        }
-        
-        .algorithm-box {
-            background: #2d3748;
-            color: #e2e8f0;
-            padding: 25px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            overflow-x: auto;
-            margin: 20px 0;
-            border-left: 4px solid #667eea;
-        }
-        
-        .formula-section {
-            background: linear-gradient(145deg, #edf2f7, #e2e8f0);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
-        }
-        
-        .formula-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #4a5568;
-            margin-bottom: 15px;
-        }
-        
-        .formula-content {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: 'Times New Roman', serif;
-            font-size: 1.1rem;
-            margin: 10px 0;
-            border-left: 3px solid #667eea;
-        }
-        
-        .insight-box {
-            background: linear-gradient(145deg, #e6fffa, #b2f5ea);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 25px 0;
-            border-left: 4px solid #38b2ac;
-        }
-        
-        .insight-box h3 {
-            color: #2c7a7b;
-            margin-bottom: 15px;
-        }
-        
-        .comparison-section {
-            background: linear-gradient(145deg, #fff5f5, #fed7d7);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 25px 0;
-            border-left: 4px solid #f56565;
-        }
-        
-        .comparison-section h3 {
-            color: #c53030;
-            margin-bottom: 15px;
-        }
-        
-        @media (max-width: 768px) {
-            .approach-grid,
-            .xi-strategies {
-                grid-template-columns: 1fr;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T0 Period Finding - Rational Arithmetic</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+      min-height: 100vh;
+    }
+    
+    .language-switch {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    
+    .lang-link {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    
+    .lang-link:hover {
+      background: rgba(255,255,255,0.3);
+      color: white;
+      text-decoration: none;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+      padding: 30px 0;
+    }
+    
+    .header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .nav-back {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 20px;
+      transition: background 0.3s ease;
+    }
+    
+    .nav-back:hover {
+      background: rgba(255,255,255,0.3);
+      color: white;
+      text-decoration: none;
+    }
+    
+    .content-section {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      margin: 20px 0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .key-principle {
+      background: linear-gradient(135deg, #48bb78, #38a169);
+      color: white;
+      border-radius: 15px;
+      padding: 25px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    
+    .principle-title {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+    
+    .principle-description {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin: 25px 0;
+    }
+    
+    .approach-card {
+      background: linear-gradient(145deg, #f7fafc, #edf2f7);
+      border-radius: 15px;
+      padding: 20px;
+      border-left: 4px solid #667eea;
+    }
+    
+    .approach-number {
+      font-size: 2rem;
+      color: #667eea;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .approach-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #4a5568;
+      margin-bottom: 10px;
+    }
+    
+    .approach-text {
+      color: #718096;
+    }
+    
+    .xi-strategies {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .xi-card {
+      border-radius: 10px;
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+    
+    .xi-twin {
+      background: linear-gradient(135deg, #48bb78, #38a169);
+    }
+    
+    .xi-universal {
+      background: linear-gradient(135deg, #4299e1, #3182ce);
+    }
+    
+    .xi-medium {
+      background: linear-gradient(135deg, #ed8936, #dd6b20);
+    }
+    
+    .xi-special {
+      background: linear-gradient(135deg, #9f7aea, #805ad5);
+    }
+    
+    .xi-value {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    
+    .xi-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .results-table th,
+    .results-table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .results-table th {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      font-weight: 600;
+    }
+    
+    .results-table tr:hover {
+      background: #f7fafc;
+    }
+    
+    .success-icon {
+      color: #48bb78;
+      font-weight: bold;
+    }
+    
+    .time-value {
+      font-family: 'Courier New', monospace;
+      color: #2d3748;
+    }
+    
+    .ratio-value {
+      font-family: 'Courier New', monospace;
+      color: #4299e1;
+    }
+    
+    .algorithm-box {
+      background: #2d3748;
+      color: #e2e8f0;
+      padding: 25px;
+      border-radius: 10px;
+      font-family: 'Courier New', monospace;
+      overflow-x: auto;
+      margin: 20px 0;
+      border-left: 4px solid #667eea;
+    }
+    
+    .formula-section {
+      background: linear-gradient(145deg, #edf2f7, #e2e8f0);
+      border-radius: 15px;
+      padding: 25px;
+      margin: 20px 0;
+    }
+    
+    .formula-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #4a5568;
+      margin-bottom: 15px;
+    }
+    
+    .formula-content {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: 'Times New Roman', serif;
+      font-size: 1.1rem;
+      margin: 10px 0;
+      border-left: 3px solid #667eea;
+    }
+    
+    .insight-box {
+      background: linear-gradient(145deg, #e6fffa, #b2f5ea);
+      border-radius: 15px;
+      padding: 25px;
+      margin: 25px 0;
+      border-left: 4px solid #38b2ac;
+    }
+    
+    .insight-box h3 {
+      color: #2c7a7b;
+      margin-bottom: 15px;
+    }
+    
+    .comparison-section {
+      background: linear-gradient(145deg, #fff5f5, #fed7d7);
+      border-radius: 15px;
+      padding: 25px;
+      margin: 25px 0;
+      border-left: 4px solid #f56565;
+    }
+    
+    .comparison-section h3 {
+      color: #c53030;
+      margin-bottom: 15px;
+    }
+    
+    @media (max-width: 768px) {
+      .approach-grid,
+      .xi-strategies {
+        grid-template-columns: 1fr;
+      }
+      
+      .header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="language-switch">
-        <a href="period-finding-de.html" class="lang-link">🇩🇪 Deutsch</a>
-    </div>
+  <div class="language-switch">
+    <a href="period-finding-de.html" class="lang-link">🇩🇪 Deutsch</a>
+  </div>
 
-    <div class="container">
-        <div class="header">
-            <a href="index.html" class="nav-back">← Back to Hub</a>
-            <h1>⚡ T0 Period Finding</h1>
-            <p>Factorization through rational arithmetic and period evaluation</p>
+  <div class="container">
+    <div class="header">
+      <a href="index.html" class="nav-back">← Back to Hub</a>
+      <h1>⚡ T0 Period Finding</h1>
+      <p>Factorization through rational arithmetic and period evaluation</p>
+    </div>
+    
+    <div class="key-principle">
+      <div class="principle-title">The T0 Principle</div>
+      <div class="principle-description">
+        Period finding solves the factorization problem through mathematical period recognition: 
+        Find a period r such that a^r ≡ 1 (mod N), then extract factors via x = a^(r/2)
+      </div>
+    </div>
+    
+    <div class="content-section">
+      <h2>🧠 Core Principles of the T0 Method</h2>
+      
+      <div class="approach-grid">
+        <div class="approach-card">
+          <div class="approach-number">1</div>
+          <div class="approach-title">Everything is a Ratio</div>
+          <div class="approach-text">
+            Numbers are not absolute, but relative to each other. 
+            ξ-parameters as 1/50 or 1/100 instead of 1e-5, π as 355/113.
+          </div>
         </div>
         
-        <div class="key-principle">
-            <div class="principle-title">The T0 Principle</div>
-            <div class="principle-description">
-                Period finding solves the factorization problem through mathematical period recognition: 
-                Find a period r such that a^r ≡ 1 (mod N), then extract factors via x = a^(r/2)
-            </div>
+        <div class="approach-card">
+          <div class="approach-number">2</div>
+          <div class="approach-title">N is the Unit</div>
+          <div class="approach-text">
+            N is not a number - it is the unit. Factors are represented as 
+            p/N and q/N, everything is relative to N.
+          </div>
         </div>
         
-        <div class="content-section">
-            <h2>🧠 Core Principles of the T0 Method</h2>
-            
-            <div class="approach-grid">
-                <div class="approach-card">
-                    <div class="approach-number">1</div>
-                    <div class="approach-title">Everything is a Ratio</div>
-                    <div class="approach-text">
-                        Numbers are not absolute, but relative to each other. 
-                        ξ-parameters as 1/50 or 1/100 instead of 1e-5, π as 355/113.
-                    </div>
-                </div>
-                
-                <div class="approach-card">
-                    <div class="approach-number">2</div>
-                    <div class="approach-title">N is the Unit</div>
-                    <div class="approach-text">
-                        N is not a number - it is the unit. Factors are represented as 
-                        p/N and q/N, everything is relative to N.
-                    </div>
-                </div>
-                
-                <div class="approach-card">
-                    <div class="approach-number">3</div>
-                    <div class="approach-title">Period Evaluation</div>
-                    <div class="approach-text">
-                        Ratio-based score instead of exponential function. Mathematical 
-                        harmony through exact rational arithmetic.
-                    </div>
-                </div>
-            </div>
+        <div class="approach-card">
+          <div class="approach-number">3</div>
+          <div class="approach-title">Period Evaluation</div>
+          <div class="approach-text">
+            Ratio-based score instead of exponential function. Mathematical 
+            harmony through exact rational arithmetic.
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="content-section">
+      <h2>⚙️ Adaptive ξ-Strategies</h2>
+      <p>T0 uses different ξ-values for different number types:</p>
+      
+      <div class="xi-strategies">
+        <div class="xi-card xi-twin">
+          <div class="xi-value">1/50</div>
+          <div>Twin Prime</div>
+          <div class="xi-label">Optimized for twin primes</div>
         </div>
         
-        <div class="content-section">
-            <h2>⚙️ Adaptive ξ-Strategies</h2>
-            <p>T0 uses different ξ-values for different number types:</p>
-            
-            <div class="xi-strategies">
-                <div class="xi-card xi-twin">
-                    <div class="xi-value">1/50</div>
-                    <div>Twin Prime</div>
-                    <div class="xi-label">Optimized for twin primes</div>
-                </div>
-                
-                <div class="xi-card xi-universal">
-                    <div class="xi-value">1/100</div>
-                    <div>Universal</div>
-                    <div class="xi-label">Works for all semiprimes</div>
-                </div>
-                
-                <div class="xi-card xi-medium">
-                    <div class="xi-value">1/1000</div>
-                    <div>Medium Size</div>
-                    <div class="xi-label">For larger numbers</div>
-                </div>
-                
-                <div class="xi-card xi-special">
-                    <div class="xi-value">1/42</div>
-                    <div>Special Cases</div>
-                    <div class="xi-label">Special mathematical constants</div>
-                </div>
-            </div>
+        <div class="xi-card xi-universal">
+          <div class="xi-value">1/100</div>
+          <div>Universal</div>
+          <div class="xi-label">Works for all semiprimes</div>
         </div>
         
-        <div class="content-section">
-            <h2>📊 Functionality and Results</h2>
-            
-            <table class="results-table">
-                <thead>
-                    <tr>
-                        <th>N</th>
-                        <th>Factors</th>
-                        <th>p/q Ratio</th>
-                        <th>Time (s)</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>15</td>
-                        <td>3 × 5</td>
-                        <td class="ratio-value">3/5 ≈ 0.600</td>
-                        <td class="time-value">0.0006</td>
-                        <td class="success-icon">✓</td>
-                    </tr>
-                    <tr>
-                        <td>21</td>
-                        <td>3 × 7</td>
-                        <td class="ratio-value">3/7 ≈ 0.429</td>
-                        <td class="time-value">0.0011</td>
-                        <td class="success-icon">✓</td>
-                    </tr>
-                    <tr>
-                        <td>77</td>
-                        <td>7 × 11</td>
-                        <td class="ratio-value">7/11 ≈ 0.636</td>
-                        <td class="time-value">0.0009</td>
-                        <td class="success-icon">✓</td>
-                    </tr>
-                    <tr>
-                        <td>143</td>
-                        <td>11 × 13</td>
-                        <td class="ratio-value">11/13 ≈ 0.846</td>
-                        <td class="time-value">0.0004</td>
-                        <td class="success-icon">✓</td>
-                    </tr>
-                    <tr>
-                        <td>323</td>
-                        <td>17 × 19</td>
-                        <td class="ratio-value">17/19 ≈ 0.895</td>
-                        <td class="time-value">0.0015</td>
-                        <td class="success-icon">✓</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <p><strong>Average:</strong> 0.0025s per number | <strong>Success rate:</strong> 83.8% on systematic tests</p>
+        <div class="xi-card xi-medium">
+          <div class="xi-value">1/1000</div>
+          <div>Medium Size</div>
+          <div class="xi-label">For larger numbers</div>
         </div>
         
-        <div class="content-section">
-            <h2>🧮 Mathematical Formulation</h2>
-            
-            <div class="formula-section">
-                <div class="formula-title">Original T0 Formula:</div>
-                <div class="formula-content">R(r) = exp(-((ω-π)²)/(4|ξ|))</div>
-                
-                <div class="formula-title">Rational T0 Implementation:</div>
-                <div class="formula-content">
-                    ω = 2π/r as exact ratio<br>
-                    Score = 1/(1 + |exponent|) - only ratios!
-                </div>
-            </div>
-            
-            <div class="algorithm-box">
+        <div class="xi-card xi-special">
+          <div class="xi-value">1/42</div>
+          <div>Special Cases</div>
+          <div class="xi-label">Special mathematical constants</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="content-section">
+      <h2>📊 Functionality and Results</h2>
+      
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>N</th>
+            <th>Factors</th>
+            <th>p/q Ratio</th>
+            <th>Time (s)</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>15</td>
+            <td>3 × 5</td>
+            <td class="ratio-value">3/5 ≈ 0.600</td>
+            <td class="time-value">0.0006</td>
+            <td class="success-icon">✓</td>
+          </tr>
+          <tr>
+            <td>21</td>
+            <td>3 × 7</td>
+            <td class="ratio-value">3/7 ≈ 0.429</td>
+            <td class="time-value">0.0011</td>
+            <td class="success-icon">✓</td>
+          </tr>
+          <tr>
+            <td>77</td>
+            <td>7 × 11</td>
+            <td class="ratio-value">7/11 ≈ 0.636</td>
+            <td class="time-value">0.0009</td>
+            <td class="success-icon">✓</td>
+          </tr>
+          <tr>
+            <td>143</td>
+            <td>11 × 13</td>
+            <td class="ratio-value">11/13 ≈ 0.846</td>
+            <td class="time-value">0.0004</td>
+            <td class="success-icon">✓</td>
+          </tr>
+          <tr>
+            <td>323</td>
+            <td>17 × 19</td>
+            <td class="ratio-value">17/19 ≈ 0.895</td>
+            <td class="time-value">0.0015</td>
+            <td class="success-icon">✓</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <p><strong>Average:</strong> 0.0025s per number | <strong>Success rate:</strong> 83.8% on systematic tests</p>
+    </div>
+    
+    <div class="content-section">
+      <h2>🧮 Mathematical Formulation</h2>
+      
+      <div class="formula-section">
+        <div class="formula-title">Original T0 Formula:</div>
+        <div class="formula-content">R(r) = exp(-((ω-π)²)/(4|ξ|))</div>
+        
+        <div class="formula-title">Rational T0 Implementation:</div>
+        <div class="formula-content">
+          ω = 2π/r as exact ratio<br>
+          Score = 1/(1 + |exponent|) - only ratios!
+        </div>
+      </div>
+      
+      <div class="algorithm-box">
 def _calculate_period_evaluation_rational(self, r, N):
-    # ω = 2π/r as EXACT ratio
-    omega = Fraction(2, 1) * self.pi_ratio / Fraction(r, 1)
+  # ω = 2π/r as EXACT ratio
+  omega = Fraction(2, 1) * self.pi_ratio / Fraction(r, 1)
+  
+  # Difference ω - π as EXACT ratio 
+  diff = omega - self.pi_ratio
+  
+  # Everything stays exact - not a single rounding error!
+  diff_squared = diff * diff
+  denominator = Fraction(4, 1) * self.xi_ratio
+  exponent = -diff_squared / denominator
+  
+  # Score = 1/(1 + |exponent|) - only ratios!
+  score = Fraction(1, 1) / (Fraction(1, 1) + abs(exponent))
+  return score
+      </div>
+    </div>
     
-    # Difference ω - π as EXACT ratio  
-    diff = omega - self.pi_ratio
+    <div class="insight-box">
+      <h3>🎵 Musical Consonance = Mathematical Harmony</h3>
+      <p>T0 recognizes the same ratios that also sound "good" musically:</p>
+      <ul style="margin-top: 15px; padding-left: 20px;">
+        <li><strong>Perfect Fifth (3:2)</strong> → p/q ≈ 1.5 → Good T0 performance</li>
+        <li><strong>Major Third (5:4)</strong> → p/q ≈ 1.25 → Good T0 performance</li>
+        <li><strong>Golden Ratio (φ:1)</strong> → p/q ≈ 1.618 → Natural harmony</li>
+        <li><strong>Tritone (√2:1)</strong> → p/q ≈ 1.414 → Poor T0 performance (dissonant)</li>
+      </ul>
+    </div>
     
-    # Everything stays exact - not a single rounding error!
-    diff_squared = diff * diff
-    denominator = Fraction(4, 1) * self.xi_ratio
-    exponent = -diff_squared / denominator
-    
-    # Score = 1/(1 + |exponent|) - only ratios!
-    score = Fraction(1, 1) / (Fraction(1, 1) + abs(exponent))
-    return score
-            </div>
-        </div>
+    <div class="content-section">
+      <h2>🔧 Why T0 Computes with Ratios</h2>
+      
+      <div class="comparison-section">
+        <h3>The Rounding Error Problem</h3>
+        <p>Classical algorithms often fail due to tiny inaccuracies:</p>
         
-        <div class="insight-box">
-            <h3>🎵 Musical Consonance = Mathematical Harmony</h3>
-            <p>T0 recognizes the same ratios that also sound "good" musically:</p>
-            <ul style="margin-top: 15px; padding-left: 20px;">
-                <li><strong>Perfect Fifth (3:2)</strong> → p/q ≈ 1.5 → Good T0 performance</li>
-                <li><strong>Major Third (5:4)</strong> → p/q ≈ 1.25 → Good T0 performance</li>
-                <li><strong>Golden Ratio (φ:1)</strong> → p/q ≈ 1.618 → Natural harmony</li>
-                <li><strong>Tritone (√2:1)</strong> → p/q ≈ 1.414 → Poor T0 performance (dissonant)</li>
-            </ul>
-        </div>
-        
-        <div class="content-section">
-            <h2>🔧 Why T0 Computes with Ratios</h2>
-            
-            <div class="comparison-section">
-                <h3>The Rounding Error Problem</h3>
-                <p>Classical algorithms often fail due to tiny inaccuracies:</p>
-                
-                <div class="algorithm-box" style="margin: 15px 0;">
+        <div class="algorithm-box" style="margin: 15px 0;">
 # Classical - ERROR-PRONE:
 evaluation1 = exp(-((2*3.14159/r - 3.14159)**2)/(4*0.00001))
 evaluation2 = exp(-((2*3.14160/r - 3.14160)**2)/(4*0.00001))
@@ -490,29 +490,29 @@ evaluation2 = exp(-((2*3.14160/r - 3.14160)**2)/(4*0.00001))
 
 # T0 - EXACT:
 evaluation1 = calculate_with_ratios(Fraction(355,113))
-evaluation2 = calculate_with_ratios(Fraction(355,113))  
+evaluation2 = calculate_with_ratios(Fraction(355,113)) 
 # evaluation1 == evaluation2 ALWAYS! ✓
-                </div>
-            </div>
-            
-            <p><strong>Deterministic Results:</strong> With ratios, T0 is 100% reproducible on any hardware, with any compiler, with any math library.</p>
         </div>
-        
-        <div class="content-section">
-            <h2>🎯 Conclusion of T0 Period Finding</h2>
-            
-            <div class="key-principle">
-                <div class="principle-title">The Fundamental Insight</div>
-                <div class="principle-description">
-                    "Never compute with inaccurate decimal numbers - always use exact ratios!"<br><br>
-                    This ratio mathematics makes T0: 100% reproducible, 
-                    free from rounding errors, hardware-independent and deterministically functional.
-                </div>
-            </div>
-            
-            <p>T0 works because it implements the same fundamental ordering principle of nature 
-            that also governs atomic structures, molecular vibrations, crystal lattices and harmonic oscillators.</p>
-        </div>
+      </div>
+      
+      <p><strong>Deterministic Results:</strong> With ratios, T0 is 100% reproducible on any hardware, with any compiler, with any math library.</p>
     </div>
+    
+    <div class="content-section">
+      <h2>🎯 Conclusion of T0 Period Finding</h2>
+      
+      <div class="key-principle">
+        <div class="principle-title">The Fundamental Insight</div>
+        <div class="principle-description">
+          "Never compute with inaccurate decimal numbers - always use exact ratios!"<br><br>
+          This ratio mathematics makes T0: 100% reproducible, 
+          free from rounding errors, hardware-independent and deterministically functional.
+        </div>
+      </div>
+      
+      <p>T0 works because it implements the same fundamental ordering principle of nature 
+      that also governs atomic structures, molecular vibrations, crystal lattices and harmonic oscillators.</p>
+    </div>
+  </div>
 </body>
 </html>

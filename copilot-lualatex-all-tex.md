@@ -16,15 +16,15 @@ Installiere eine vollständige LuaLaTeX‑Umgebung (analog zu den bestehenden Co
 ```bash
 sudo apt-get update
 sudo apt-get install -y \
-  texlive-latex-recommended \
-  texlive-latex-extra \
-  texlive-fonts-recommended \
-  texlive-fonts-extra \
-  texlive-luatex \
-  texlive-lang-german \
-  texlive-lang-english \
-  texlive-science \
-  latexmk
+ texlive-latex-recommended \
+ texlive-latex-extra \
+ texlive-fonts-recommended \
+ texlive-fonts-extra \
+ texlive-luatex \
+ texlive-lang-german \
+ texlive-lang-english \
+ texlive-science \
+ latexmk
 ```
 
 Annahmen:
@@ -36,7 +36,7 @@ Annahmen:
 
 Betrachte mindestens folgende Verzeichnisse:
 
-- `2/tex-n`  (Bücher, Standalones, Tabellen, FFGFT‑Dokumente)
+- `2/tex-n` (Bücher, Standalones, Tabellen, FFGFT‑Dokumente)
 - `2/narrative` (Narrative FFGFT‑Bücher und Kapitel)
 
 Innerhalb dieser Verzeichnisse:
@@ -47,35 +47,35 @@ Innerhalb dieser Verzeichnisse:
 Beispiele für bereits definierte Master‑Dokumente (siehe andere Copilot‑Anleitungen):
 
 - Narrative:
-  - `2/narrative/FFGFT_Narrative_Master_De.tex`
-  - `2/narrative/FFGFT_Narrative_Master_En.tex`
+ - `2/narrative/FFGFT_Narrative_Master_De.tex`
+ - `2/narrative/FFGFT_Narrative_Master_En.tex`
 - Bücher (fertige Manuskripte):
-  - `2/tex-n/completed/Teil1a_De.tex`, `Teil1a_En.tex`, `Teil2_*.tex`, `Teil3_*.tex`, `T0_Anwendungen_*.tex`
+ - `2/tex-n/completed/Teil1a_De.tex`, `Teil1a_En.tex`, `Teil2_*.tex`, `Teil3_*.tex`, `T0_Anwendungen_*.tex`
 - Diverse Standalone‑Dokumente (z.B. in `2/tex-n/de_standalone`, `2/tex-n/en_standalone`, `2/tex-n/*_standalone_pdflatex`).
 
 ## 4. Automatisches Auffinden der zu kompilierenden Dokumente
 
 1. Wechsle ins Repository‑Root:
 
-   ```bash
-   cd "$GITHUB_WORKSPACE"
-   ```
+  ```bash
+  cd "$GITHUB_WORKSPACE"
+  ```
 
 2. Erzeuge eine Liste aller potentiell eigenständigen Dokumente unter `2/`:
 
-   ```bash
-   find 2 -name "*.tex" -print0 | \
-     xargs -0 rg -n "^\\\documentclass" --glob "*.tex" --no-messages \
-     > tex_documentclass_files.txt
-   ```
+  ```bash
+  find 2 -name "*.tex" -print0 | \
+   xargs -0 rg -n "^\\\documentclass" --glob "*.tex" --no-messages \
+   > tex_documentclass_files.txt
+  ```
 
-   - Jede Zeile enthält Pfad + Zeilennummer + die `\\documentclass`‑Zeile.
+  - Jede Zeile enthält Pfad + Zeilennummer + die `\\documentclass`‑Zeile.
 
 3. Extrahiere die eindeutigen Dateipfade:
 
-   ```bash
-   cut -d":" -f1 tex_documentclass_files.txt | sort -u > tex_master_files.txt
-   ```
+  ```bash
+  cut -d":" -f1 tex_documentclass_files.txt | sort -u > tex_master_files.txt
+  ```
 
 4. Optional: Filtere (falls nötig) Dateien heraus, die **nur als Kapitel** gedacht sind und über bekannte Master‑Dokumente inkludiert werden (siehe projektinterne Konventionen). Standardmäßig können aber alle in `tex_master_files.txt` aufgeführten Dateien nacheinander kompiliert werden.
 
@@ -85,42 +85,42 @@ Für jede Datei `F` in `tex_master_files.txt`:
 
 1. Bestimme ein sinnvolles Ausgabe‑Verzeichnis:
 
-   - Für Narrative‑Master: `2/pdf`
-   - Für fertige Bücher unter `2/tex-n/completed`: ebenfalls `2/pdf`
-   - Für Standalones: entweder `2/pdf` oder ein lokales Unterverzeichnis (z.B. `2/tex-n/pdf_standalone`), **ohne bestehende PDFs zu löschen**.
+  - Für Narrative‑Master: `2/pdf`
+  - Für fertige Bücher unter `2/tex-n/completed`: ebenfalls `2/pdf`
+  - Für Standalones: entweder `2/pdf` oder ein lokales Unterverzeichnis (z.B. `2/tex-n/pdf_standalone`), **ohne bestehende PDFs zu löschen**.
 
-   Beispiel (einfacher globaler Ansatz):
+  Beispiel (einfacher globaler Ansatz):
 
-   ```bash
-   outdir="2/pdf"
-   mkdir -p "$outdir"
+  ```bash
+  outdir="2/pdf"
+  mkdir -p "$outdir"
 
-   while read -r F; do
-     latexmk -lualatex -interaction=nonstopmode -halt-on-error \
-       -output-directory="$outdir" "$F" || echo "Kompilationsfehler in $F" >> tex_compile_errors.txt
-   done < tex_master_files.txt
-   ```
+  while read -r F; do
+   latexmk -lualatex -interaction=nonstopmode -halt-on-error \
+    -output-directory="$outdir" "$F" || echo "Kompilationsfehler in $F" >> tex_compile_errors.txt
+  done < tex_master_files.txt
+  ```
 
 2. **Wichtig:**
 
-   - Keine PDFs löschen (weder vor noch nach der Kompilation).
-   - Wenn ein PDF bereits existiert, darf es **überschrieben**, aber nicht explizit gelöscht werden.
+  - Keine PDFs löschen (weder vor noch nach der Kompilation).
+  - Wenn ein PDF bereits existiert, darf es **überschrieben**, aber nicht explizit gelöscht werden.
 
 3. Bei Kompilationsfehlern (Dateien in `tex_compile_errors.txt`):
 
-   - Öffne die zugehörige `.log`‑Datei im Ausgabeverzeichnis.
-   - Identifiziere die erste signifikante Fehlermeldung (z.B. `Undefined control sequence`, `Missing \end{}`, Encoding‑Fehler).
-   - Navigiere zur entsprechenden `.tex`‑Datei und führe **nur die minimal nötige Korrektur** durch.
+  - Öffne die zugehörige `.log`‑Datei im Ausgabeverzeichnis.
+  - Identifiziere die erste signifikante Fehlermeldung (z.B. `Undefined control sequence`, `Missing \end{}`, Encoding‑Fehler).
+  - Navigiere zur entsprechenden `.tex`‑Datei und führe **nur die minimal nötige Korrektur** durch.
 
 ## 6. Typische Claude-/Auto-Edit-Fehler bereinigen
 
 Beim Bereinigen von Fehlern besonders auf folgende Muster achten (aus früheren Claude‑Edits bekannt):
 
 - **Encoding‑Artefakte** in deutschen Texten (z.B. `k\u0000f6nnen`, `Verh\u0000e4ltnisse`):
-  - Zurücksetzen auf gültige UTF‑8‑Umlaute oder klassische TeX‑Schreibweisen (`k\"onnen`, `Verh\"altnisse`).
+ - Zurücksetzen auf gültige UTF‑8‑Umlaute oder klassische TeX‑Schreibweisen (`k\"onnen`, `Verh\"altnisse`).
 - **Zerbrochene Befehle/Umgebungen**:
-  - Unvollständige `\\begin{}`/`\\end{}`‑Paare.
-  - Mischungen aus alten und neuen Preambeln.
+ - Unvollständige `\\begin{}`/`\\end{}`‑Paare.
+ - Mischungen aus alten und neuen Preambeln.
 - **Falsche oder doppelte `\\documentclass`‑Zeilen** bei Kapiteln, die eigentlich über einen Master eingebunden werden sollten.
 
 Projekt­spezifische inhaltliche Richtlinien sind einzuhalten, z.B.:
@@ -134,9 +134,9 @@ Projekt­spezifische inhaltliche Richtlinien sind einzuhalten, z.B.:
 
 1. Erster Durchlauf: Alle Master‑/Standalone‑Texte nach obigem Schema kompilieren; fehlschlagende Dateien in `tex_compile_errors.txt` sammeln.
 2. Zweiter Durchlauf: Für jede fehlerhafte Datei:
-   - `.log` analysieren,
-   - minimal korrigieren,
-   - erneut kompilieren.
+  - `.log` analysieren,
+  - minimal korrigieren,
+  - erneut kompilieren.
 3. Prozess wiederholen, bis **alle** Master‑/Standalone‑Dokumente ohne Fehler durchlaufen und ihre PDFs (neu) erzeugt wurden.
 
 Dabei gilt immer:
@@ -166,25 +166,25 @@ Ziel:
 
 Vorgehen:
 1. Wechsle ins Repo‑Root und stelle sicher, dass `main` aktuell ist:
-   - `git checkout main`
-   - `git pull --ff-only`
+  - `git checkout main`
+  - `git pull --ff-only`
 2. Installiere eine vollständige LuaLaTeX‑Umgebung:
-   - `sudo apt-get update`
-   - `sudo apt-get install -y texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra texlive-luatex texlive-lang-german texlive-lang-english texlive-science latexmk ripgrep`
+  - `sudo apt-get update`
+  - `sudo apt-get install -y texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra texlive-luatex texlive-lang-german texlive-lang-english texlive-science latexmk ripgrep`
 3. Finde alle `.tex`‑Dateien mit `\documentclass` unterhalb von `2/`:
-   - `cd "$GITHUB_WORKSPACE"`
-   - `find 2 -name "*.tex" -print0 | xargs -0 rg -n "^\\documentclass" --glob "*.tex" --no-messages > tex_documentclass_files.txt`
-   - `cut -d":" -f1 tex_documentclass_files.txt | sort -u > tex_master_files.txt`
+  - `cd "$GITHUB_WORKSPACE"`
+  - `find 2 -name "*.tex" -print0 | xargs -0 rg -n "^\\documentclass" --glob "*.tex" --no-messages > tex_documentclass_files.txt`
+  - `cut -d":" -f1 tex_documentclass_files.txt | sort -u > tex_master_files.txt`
 4. Kompiliere alle in `tex_master_files.txt` gelisteten Dateien mit `latexmk -lualatex` in ein gemeinsames Ausgabe‑Verzeichnis (z.B. `2/pdf`), ohne PDFs zu löschen:
-   - `mkdir -p 2/pdf`
-   - `> tex_compile_errors.txt`
-   - `while read -r F; do latexmk -lualatex -interaction=nonstopmode -halt-on-error -output-directory="2/pdf" "$F" || echo "$F" >> tex_compile_errors.txt; done < tex_master_files.txt`
+  - `mkdir -p 2/pdf`
+  - `> tex_compile_errors.txt`
+  - `while read -r F; do latexmk -lualatex -interaction=nonstopmode -halt-on-error -output-directory="2/pdf" "$F" || echo "$F" >> tex_compile_errors.txt; done < tex_master_files.txt`
 5. Für jede Datei in `tex_compile_errors.txt`:
-   - Öffne die `.log`‑Datei im Output‑Verzeichnis (`2/pdf`).
-   - Finde die erste echte Fehlermeldung (`! LaTeX Error:`, `Undefined control sequence`, `Missing \end{}`, Encoding‑Fehler, etc.).
-   - Korrigiere den Fehler direkt in der entsprechenden `.tex`‑Datei mit einer minimalen Änderung.
-   - Kompiliere das betroffene Dokument erneut mit `latexmk -lualatex`.
-   - Entferne die Datei aus `tex_compile_errors.txt`, sobald sie erfolgreich durchläuft.
+  - Öffne die `.log`‑Datei im Output‑Verzeichnis (`2/pdf`).
+  - Finde die erste echte Fehlermeldung (`! LaTeX Error:`, `Undefined control sequence`, `Missing \end{}`, Encoding‑Fehler, etc.).
+  - Korrigiere den Fehler direkt in der entsprechenden `.tex`‑Datei mit einer minimalen Änderung.
+  - Kompiliere das betroffene Dokument erneut mit `latexmk -lualatex`.
+  - Entferne die Datei aus `tex_compile_errors.txt`, sobald sie erfolgreich durchläuft.
 6. Wiederhole Schritt 5 iterativ, bis `tex_compile_errors.txt` leer ist und alle Master‑/Standalone‑Dokumente ohne Fehler durchlaufen.
 
 Inhaltliche/g‑2‑Spezialregeln:
@@ -194,3 +194,4 @@ Inhaltliche/g‑2‑Spezialregeln:
 
 Wenn du Änderungen an `.tex`‑Dateien vornimmst, fasse sie in kleinen, sinnvollen Commits zusammen (z.B. `Fix LuaLaTeX error in <Dateiname>`) und pushe sie zurück auf `main`, sobald alle betroffenen Dokumente sauber durchkompiliert sind.
 ```
+

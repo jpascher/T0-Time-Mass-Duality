@@ -1,524 +1,524 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Algorithm Workflows - Implementation Functionality</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            min-height: 100vh;
-        }
-        
-        .language-switch {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-        
-        .lang-link {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            text-decoration: none;
-            transition: background 0.3s ease;
-        }
-        
-        .lang-link:hover {
-            background: rgba(255,255,255,0.3);
-            color: white;
-            text-decoration: none;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 40px;
-            padding: 30px 0;
-        }
-        
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .nav-back {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            display: inline-block;
-            margin-bottom: 20px;
-            transition: background 0.3s ease;
-        }
-        
-        .nav-back:hover {
-            background: rgba(255,255,255,0.3);
-            color: white;
-            text-decoration: none;
-        }
-        
-        .content-section {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin: 20px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
-        .workflow-section {
-            margin: 30px 0;
-        }
-        
-        .workflow-title {
-            font-size: 1.5rem;
-            color: #4a5568;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e2e8f0;
-        }
-        
-        .step-list {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-        
-        .step-item {
-            background: #f7fafc;
-            border-left: 4px solid #667eea;
-            margin: 15px 0;
-            padding: 20px;
-            border-radius: 8px;
-            position: relative;
-        }
-        
-        .step-number {
-            background: #667eea;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            position: absolute;
-            left: -15px;
-            top: 20px;
-        }
-        
-        .step-content {
-            margin-left: 25px;
-        }
-        
-        .step-title {
-            font-weight: bold;
-            color: #2d3748;
-            margin-bottom: 8px;
-        }
-        
-        .step-description {
-            color: #4a5568;
-            margin-bottom: 10px;
-        }
-        
-        .step-code {
-            background: #2d3748;
-            color: #e2e8f0;
-            padding: 12px;
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            overflow-x: auto;
-        }
-        
-        .algorithm-overview {
-            background: linear-gradient(145deg, #f0f4f8, #e2e8f0);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 25px 0;
-        }
-        
-        .algorithm-overview h3 {
-            color: #2d3748;
-            margin-bottom: 15px;
-        }
-        
-        .component-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-        
-        .component-card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            border-left: 4px solid #4299e1;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        
-        .component-title {
-            font-weight: bold;
-            color: #2d3748;
-            margin-bottom: 10px;
-        }
-        
-        .component-description {
-            color: #4a5568;
-            font-size: 0.95rem;
-        }
-        
-        .decision-tree {
-            background: #fffaf0;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 15px 0;
-            border-left: 4px solid #ed8936;
-        }
-        
-        .decision-tree h4 {
-            color: #c05621;
-            margin-bottom: 10px;
-        }
-        
-        .condition {
-            margin: 10px 0;
-            padding: 8px 12px;
-            background: white;
-            border-radius: 6px;
-            border: 1px solid #fbd38d;
-        }
-        
-        .condition-if {
-            font-weight: bold;
-            color: #c05621;
-        }
-        
-        .condition-then {
-            color: #2d3748;
-            margin-left: 20px;
-        }
-        
-        .data-flow-section {
-            background: linear-gradient(145deg, #e6fffa, #b2f5ea);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 25px 0;
-            border-left: 4px solid #38b2ac;
-        }
-        
-        .data-flow-section h3 {
-            color: #2c7a7b;
-            margin-bottom: 15px;
-        }
-        
-        @media (max-width: 768px) {
-            .component-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algorithm Workflows - Implementation Functionality</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+      min-height: 100vh;
+    }
+    
+    .language-switch {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    
+    .lang-link {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    
+    .lang-link:hover {
+      background: rgba(255,255,255,0.3);
+      color: white;
+      text-decoration: none;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+      padding: 30px 0;
+    }
+    
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .nav-back {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 20px;
+      transition: background 0.3s ease;
+    }
+    
+    .nav-back:hover {
+      background: rgba(255,255,255,0.3);
+      color: white;
+      text-decoration: none;
+    }
+    
+    .content-section {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      margin: 20px 0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .workflow-section {
+      margin: 30px 0;
+    }
+    
+    .workflow-title {
+      font-size: 1.5rem;
+      color: #4a5568;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    
+    .step-list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+    
+    .step-item {
+      background: #f7fafc;
+      border-left: 4px solid #667eea;
+      margin: 15px 0;
+      padding: 20px;
+      border-radius: 8px;
+      position: relative;
+    }
+    
+    .step-number {
+      background: #667eea;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      position: absolute;
+      left: -15px;
+      top: 20px;
+    }
+    
+    .step-content {
+      margin-left: 25px;
+    }
+    
+    .step-title {
+      font-weight: bold;
+      color: #2d3748;
+      margin-bottom: 8px;
+    }
+    
+    .step-description {
+      color: #4a5568;
+      margin-bottom: 10px;
+    }
+    
+    .step-code {
+      background: #2d3748;
+      color: #e2e8f0;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+    
+    .algorithm-overview {
+      background: linear-gradient(145deg, #f0f4f8, #e2e8f0);
+      border-radius: 15px;
+      padding: 25px;
+      margin: 25px 0;
+    }
+    
+    .algorithm-overview h3 {
+      color: #2d3748;
+      margin-bottom: 15px;
+    }
+    
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+    
+    .component-card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      border-left: 4px solid #4299e1;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .component-title {
+      font-weight: bold;
+      color: #2d3748;
+      margin-bottom: 10px;
+    }
+    
+    .component-description {
+      color: #4a5568;
+      font-size: 0.95rem;
+    }
+    
+    .decision-tree {
+      background: #fffaf0;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 15px 0;
+      border-left: 4px solid #ed8936;
+    }
+    
+    .decision-tree h4 {
+      color: #c05621;
+      margin-bottom: 10px;
+    }
+    
+    .condition {
+      margin: 10px 0;
+      padding: 8px 12px;
+      background: white;
+      border-radius: 6px;
+      border: 1px solid #fbd38d;
+    }
+    
+    .condition-if {
+      font-weight: bold;
+      color: #c05621;
+    }
+    
+    .condition-then {
+      color: #2d3748;
+      margin-left: 20px;
+    }
+    
+    .data-flow-section {
+      background: linear-gradient(145deg, #e6fffa, #b2f5ea);
+      border-radius: 15px;
+      padding: 25px;
+      margin: 25px 0;
+      border-left: 4px solid #38b2ac;
+    }
+    
+    .data-flow-section h3 {
+      color: #2c7a7b;
+      margin-bottom: 15px;
+    }
+    
+    @media (max-width: 768px) {
+      .component-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="language-switch">
-        <a href="workflows-de.html" class="lang-link">🇩🇪 Deutsch</a>
-    </div>
+  <div class="language-switch">
+    <a href="workflows-de.html" class="lang-link">🇩🇪 Deutsch</a>
+  </div>
 
-    <div class="container">
-        <div class="header">
-            <a href="index.html" class="nav-back">← Back to Hub</a>
-            <h1>🔧 Algorithm Workflows</h1>
-            <p>Step-by-step functionality of both approaches</p>
-        </div>
+  <div class="container">
+    <div class="header">
+      <a href="index.html" class="nav-back">← Back to Hub</a>
+      <h1>🔧 Algorithm Workflows</h1>
+      <p>Step-by-step functionality of both approaches</p>
+    </div>
+    
+    <div class="content-section">
+      <h2>⚡ T0 Period Finding - Workflow</h2>
+      
+      <div class="algorithm-overview">
+        <h3>Overview</h3>
+        <p>The T0 algorithm performs period finding to determine factors of composite numbers. The implementation uses adaptive ξ-strategies for different number types and operates with rational arithmetic.</p>
+      </div>
+      
+      <div class="workflow-section">
+        <div class="workflow-title">T0 Factorization Process</div>
         
-        <div class="content-section">
-            <h2>⚡ T0 Period Finding - Workflow</h2>
-            
-            <div class="algorithm-overview">
-                <h3>Overview</h3>
-                <p>The T0 algorithm performs period finding to determine factors of composite numbers. The implementation uses adaptive ξ-strategies for different number types and operates with rational arithmetic.</p>
-            </div>
-            
-            <div class="workflow-section">
-                <div class="workflow-title">T0 Factorization Process</div>
-                
-                <ul class="step-list">
-                    <li class="step-item">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <div class="step-title">Input Validation and ξ-Strategy Selection</div>
-                            <div class="step-description">
-                                The number is categorized (twin_prime, cousin_prime, etc.) and the corresponding ξ-strategy is selected.
-                            </div>
-                            <div class="step-code">
+        <ul class="step-list">
+          <li class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <div class="step-title">Input Validation and ξ-Strategy Selection</div>
+              <div class="step-description">
+                The number is categorized (twin_prime, cousin_prime, etc.) and the corresponding ξ-strategy is selected.
+              </div>
+              <div class="step-code">
 xi_strategy = self._select_optimized_xi_strategy(n)
 xi_value = self.xi_profiles[xi_strategy]</div>
-                        </div>
-                    </li>
-                    
-                    <li class="step-item">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <div class="step-title">Trivial Factor Check</div>
-                            <div class="step-description">
-                                Check for simple factors using small primes (2, 3, 5, 7) via GCD.
-                            </div>
-                            <div class="step-code">
+            </div>
+          </li>
+          
+          <li class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <div class="step-title">Trivial Factor Check</div>
+              <div class="step-description">
+                Check for simple factors using small primes (2, 3, 5, 7) via GCD.
+              </div>
+              <div class="step-code">
 for basis in [2, 3, 5, 7]:
-    if math.gcd(basis, n) > 1:
-        factor = math.gcd(basis, n)
-        return [factor, n // factor]</div>
-                        </div>
-                    </li>
-                    
-                    <li class="step-item">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <div class="step-title">Period Search with Resonance Evaluation</div>
-                            <div class="step-description">
-                                For each base, periods are systematically searched and evaluated using the selected ξ-strategy.
-                            </div>
-                            <div class="step-code">
+  if math.gcd(basis, n) > 1:
+    factor = math.gcd(basis, n)
+    return [factor, n // factor]</div>
+            </div>
+          </li>
+          
+          <li class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <div class="step-title">Period Search with Resonance Evaluation</div>
+              <div class="step-description">
+                For each base, periods are systematically searched and evaluated using the selected ξ-strategy.
+              </div>
+              <div class="step-code">
 for r in range(2, max_periods):
-    if pow(a, r, n) == 1:  # Period found
-        resonance = self._calculate_resonance(r, xi_value)
-        if resonance > threshold:
-            return self._extract_factors(a, r, n)</div>
-                        </div>
-                    </li>
-                    
-                    <li class="step-item">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <div class="step-title">Factor Extraction</div>
-                            <div class="step-description">
-                                When a suitable period is found, factors are extracted via x = a^(r/2) mod n.
-                            </div>
-                            <div class="step-code">
+  if pow(a, r, n) == 1: # Period found
+    resonance = self._calculate_resonance(r, xi_value)
+    if resonance > threshold:
+      return self._extract_factors(a, r, n)</div>
+            </div>
+          </li>
+          
+          <li class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <div class="step-title">Factor Extraction</div>
+              <div class="step-description">
+                When a suitable period is found, factors are extracted via x = a^(r/2) mod n.
+              </div>
+              <div class="step-code">
 x = pow(a, period // 2, n)
 f1 = math.gcd(x - 1, n)
 f2 = math.gcd(x + 1, n)
 if 1 < f1 < n: return [f1, n // f1]</div>
-                        </div>
-                    </li>
-                </ul>
             </div>
-            
-            <div class="data-flow-section">
-                <h3>ξ-Strategy Selection Details</h3>
-                
-                <div class="decision-tree">
-                    <h4>Decision Logic</h4>
-                    <div class="condition">
-                        <span class="condition-if">IF</span> |p - q| = 2 
-                        <div class="condition-then">→ twin_prime_optimized (ξ = 1/50)</div>
-                    </div>
-                    <div class="condition">
-                        <span class="condition-if">IF</span> |p - q| ≤ 6 
-                        <div class="condition-then">→ cousin_prime (ξ = 1/100)</div>
-                    </div>
-                    <div class="condition">
-                        <span class="condition-if">IF</span> n > 1000 
-                        <div class="condition-then">→ medium_size (ξ = 1/1000)</div>
-                    </div>
-                    <div class="condition">
-                        <span class="condition-if">ELSE</span>
-                        <div class="condition-then">→ universal (ξ = 1/100)</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="data-flow-section">
+        <h3>ξ-Strategy Selection Details</h3>
         
-        <div class="content-section">
-            <h2>🎼 Harmonic Factorization - Workflow</h2>
-            
-            <div class="algorithm-overview">
-                <h3>Overview</h3>
-                <p>Harmonic factorization recognizes musical intervals in number ratios. It uses hierarchical 4-level search with logarithmic octave reduction and Euler's Gradus Suavitatis.</p>
-            </div>
-            
-            <div class="workflow-section">
-                <div class="workflow-title">Harmonic Factorization Process</div>
-                
-                <ul class="step-list">
-                    <li class="step-item">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <div class="step-title">Find Factors</div>
-                            <div class="step-description">
-                                Classical factor search using trial division up to √n.
-                            </div>
-                            <div class="step-code">
+        <div class="decision-tree">
+          <h4>Decision Logic</h4>
+          <div class="condition">
+            <span class="condition-if">IF</span> |p - q| = 2 
+            <div class="condition-then">→ twin_prime_optimized (ξ = 1/50)</div>
+          </div>
+          <div class="condition">
+            <span class="condition-if">IF</span> |p - q| ≤ 6 
+            <div class="condition-then">→ cousin_prime (ξ = 1/100)</div>
+          </div>
+          <div class="condition">
+            <span class="condition-if">IF</span> n > 1000 
+            <div class="condition-then">→ medium_size (ξ = 1/1000)</div>
+          </div>
+          <div class="condition">
+            <span class="condition-if">ELSE</span>
+            <div class="condition-then">→ universal (ξ = 1/100)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="content-section">
+      <h2>🎼 Harmonic Factorization - Workflow</h2>
+      
+      <div class="algorithm-overview">
+        <h3>Overview</h3>
+        <p>Harmonic factorization recognizes musical intervals in number ratios. It uses hierarchical 4-level search with logarithmic octave reduction and Euler's Gradus Suavitatis.</p>
+      </div>
+      
+      <div class="workflow-section">
+        <div class="workflow-title">Harmonic Factorization Process</div>
+        
+        <ul class="step-list">
+          <li class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <div class="step-title">Find Factors</div>
+              <div class="step-description">
+                Classical factor search using trial division up to √n.
+              </div>
+              <div class="step-code">
 for i in range(2, int(math.sqrt(n)) + 1):
-    if n % i == 0:
-        return (i, n // i)</div>
-                        </div>
-                    </li>
-                    
-                    <li class="step-item">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <div class="step-title">Calculate Ratio and Octave Reduction</div>
-                            <div class="step-description">
-                                The ratio max(factors)/min(factors) is calculated and reduced to the base octave.
-                            </div>
-                            <div class="step-code">
+  if n % i == 0:
+    return (i, n // i)</div>
+            </div>
+          </li>
+          
+          <li class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <div class="step-title">Calculate Ratio and Octave Reduction</div>
+              <div class="step-description">
+                The ratio max(factors)/min(factors) is calculated and reduced to the base octave.
+              </div>
+              <div class="step-code">
 ratio = max(factors) / min(factors)
 while ratio >= 2.0:
-    ratio /= 2.0
-    octave_shift += 1</div>
-                        </div>
-                    </li>
-                    
-                    <li class="step-item">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <div class="step-title">Level Prediction</div>
-                            <div class="step-description">
-                                Based on maximum prime and ratio value, the optimal hierarchy level is predicted.
-                            </div>
-                            <div class="step-code">
-if max_prime <= 7: level = 1  # BASIS
-elif max_prime <= 19: level = 2  # EXTENDED
-elif max_prime <= 31: level = 3  # COMPLEX
-else: level = 4  # ULTRA</div>
-                        </div>
-                    </li>
-                    
-                    <li class="step-item">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <div class="step-title">Hierarchical Harmony Search</div>
-                            <div class="step-description">
-                                The harmony levels are searched in optimal order, starting with the predicted level.
-                            </div>
-                            <div class="step-code">
+  ratio /= 2.0
+  octave_shift += 1</div>
+            </div>
+          </li>
+          
+          <li class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <div class="step-title">Level Prediction</div>
+              <div class="step-description">
+                Based on maximum prime and ratio value, the optimal hierarchy level is predicted.
+              </div>
+              <div class="step-code">
+if max_prime <= 7: level = 1 # BASIS
+elif max_prime <= 19: level = 2 # EXTENDED
+elif max_prime <= 31: level = 3 # COMPLEX
+else: level = 4 # ULTRA</div>
+            </div>
+          </li>
+          
+          <li class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <div class="step-title">Hierarchical Harmony Search</div>
+              <div class="step-description">
+                The harmony levels are searched in optimal order, starting with the predicted level.
+              </div>
+              <div class="step-code">
 for level_idx in search_order:
-    for ratio, interval in level.intervals:
-        cents_deviation = abs(1200 * log2(target_ratio / ratio))
-        if cents_deviation <= tolerance:
-            return SUCCESS(interval, cents_deviation)</div>
-                        </div>
-                    </li>
-                </ul>
+  for ratio, interval in level.intervals:
+    cents_deviation = abs(1200 * log2(target_ratio / ratio))
+    if cents_deviation <= tolerance:
+      return SUCCESS(interval, cents_deviation)</div>
             </div>
-            
-            <div class="component-grid">
-                <div class="component-card">
-                    <div class="component-title">BASIS Level (95%)</div>
-                    <div class="component-description">
-                        Classical musical intervals: Unison (1:1), fifth (3:2), fourth (4:3), major third (5:4), etc. Handles the vast majority of cases.
-                    </div>
-                </div>
-                
-                <div class="component-card">
-                    <div class="component-title">EXTENDED Level (4%)</div>
-                    <div class="component-description">
-                        Jazz and modern harmonies: 11th harmonic (11:8), 13th harmonic (13:8), natural seventh (7:4). For more complex but recognizable ratios.
-                    </div>
-                </div>
-                
-                <div class="component-card">
-                    <div class="component-title">COMPLEX Level (0.9%)</div>
-                    <div class="component-description">
-                        Spectral music and microtonal: 29:16, 31:16, 25:16. Handles rare but mathematically interesting ratios.
-                    </div>
-                </div>
-                
-                <div class="component-card">
-                    <div class="component-title">ULTRA Level (0.1%)</div>
-                    <div class="component-description">
-                        Xenharmonic experiments: 37:32, 41:32, 61:32. For very large primes and experimental ratios.
-                    </div>
-                </div>
-            </div>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="component-grid">
+        <div class="component-card">
+          <div class="component-title">BASIS Level (95%)</div>
+          <div class="component-description">
+            Classical musical intervals: Unison (1:1), fifth (3:2), fourth (4:3), major third (5:4), etc. Handles the vast majority of cases.
+          </div>
         </div>
         
-        <div class="content-section">
-            <h2>🔄 Optimization Strategies for Both Approaches</h2>
-            
-            <div class="component-grid">
-                <div class="component-card">
-                    <div class="component-title">Mathematical Bounds Filtering</div>
-                    <div class="component-description">
-                        Calculation of upper and lower bounds for valid ratios based on tolerance to reduce search time.
-                    </div>
-                </div>
-                
-                <div class="component-card">
-                    <div class="component-title">Cached Calculations</div>
-                    <div class="component-description">
-                        LRU cache for frequent octave reductions and logarithmic distance calculations using @lru_cache decorator.
-                    </div>
-                </div>
-                
-                <div class="component-card">
-                    <div class="component-title">Intelligent Search Order</div>
-                    <div class="component-description">
-                        Both approaches use prediction-based search optimization: T0 for ξ-strategies, Harmonic for level ordering.
-                    </div>
-                </div>
-                
-                <div class="component-card">
-                    <div class="component-title">Rational Arithmetic</div>
-                    <div class="component-description">
-                        Both use Fraction-based calculations to avoid rounding errors and guarantee deterministic results.
-                    </div>
-                </div>
-            </div>
+        <div class="component-card">
+          <div class="component-title">EXTENDED Level (4%)</div>
+          <div class="component-description">
+            Jazz and modern harmonies: 11th harmonic (11:8), 13th harmonic (13:8), natural seventh (7:4). For more complex but recognizable ratios.
+          </div>
         </div>
         
-        <div class="content-section">
-            <h2>🎯 Differences Between Approaches</h2>
-            
-            <div class="data-flow-section">
-                <h3>T0 Period Finding vs. Harmonic Ratio Search</h3>
-                <p><strong>T0 Period Finding:</strong> Searches for mathematical periods in modular arithmetic and evaluates them with ξ-parameters.</p>
-                <p><strong>Harmonic Factorization:</strong> Directly analyzes the ratios between factors and maps them to musical intervals.</p>
-                
-                <div class="decision-tree">
-                    <h4>When to Use Which Approach?</h4>
-                    <div class="condition">
-                        <span class="condition-if">For semiprimes with known properties:</span>
-                        <div class="condition-then">→ T0 Period Finding (higher precision)</div>
-                    </div>
-                    <div class="condition">
-                        <span class="condition-if">For unknown number ratios:</span>
-                        <div class="condition-then">→ Harmonic Factorization (broader coverage)</div>
-                    </div>
-                    <div class="condition">
-                        <span class="condition-if">For mathematical analysis:</span>
-                        <div class="condition-then">→ Use both complementarily</div>
-                    </div>
-                </div>
-            </div>
+        <div class="component-card">
+          <div class="component-title">COMPLEX Level (0.9%)</div>
+          <div class="component-description">
+            Spectral music and microtonal: 29:16, 31:16, 25:16. Handles rare but mathematically interesting ratios.
+          </div>
         </div>
+        
+        <div class="component-card">
+          <div class="component-title">ULTRA Level (0.1%)</div>
+          <div class="component-description">
+            Xenharmonic experiments: 37:32, 41:32, 61:32. For very large primes and experimental ratios.
+          </div>
+        </div>
+      </div>
     </div>
+    
+    <div class="content-section">
+      <h2>🔄 Optimization Strategies for Both Approaches</h2>
+      
+      <div class="component-grid">
+        <div class="component-card">
+          <div class="component-title">Mathematical Bounds Filtering</div>
+          <div class="component-description">
+            Calculation of upper and lower bounds for valid ratios based on tolerance to reduce search time.
+          </div>
+        </div>
+        
+        <div class="component-card">
+          <div class="component-title">Cached Calculations</div>
+          <div class="component-description">
+            LRU cache for frequent octave reductions and logarithmic distance calculations using @lru_cache decorator.
+          </div>
+        </div>
+        
+        <div class="component-card">
+          <div class="component-title">Intelligent Search Order</div>
+          <div class="component-description">
+            Both approaches use prediction-based search optimization: T0 for ξ-strategies, Harmonic for level ordering.
+          </div>
+        </div>
+        
+        <div class="component-card">
+          <div class="component-title">Rational Arithmetic</div>
+          <div class="component-description">
+            Both use Fraction-based calculations to avoid rounding errors and guarantee deterministic results.
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="content-section">
+      <h2>🎯 Differences Between Approaches</h2>
+      
+      <div class="data-flow-section">
+        <h3>T0 Period Finding vs. Harmonic Ratio Search</h3>
+        <p><strong>T0 Period Finding:</strong> Searches for mathematical periods in modular arithmetic and evaluates them with ξ-parameters.</p>
+        <p><strong>Harmonic Factorization:</strong> Directly analyzes the ratios between factors and maps them to musical intervals.</p>
+        
+        <div class="decision-tree">
+          <h4>When to Use Which Approach?</h4>
+          <div class="condition">
+            <span class="condition-if">For semiprimes with known properties:</span>
+            <div class="condition-then">→ T0 Period Finding (higher precision)</div>
+          </div>
+          <div class="condition">
+            <span class="condition-if">For unknown number ratios:</span>
+            <div class="condition-then">→ Harmonic Factorization (broader coverage)</div>
+          </div>
+          <div class="condition">
+            <span class="condition-if">For mathematical analysis:</span>
+            <div class="condition-then">→ Use both complementarily</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

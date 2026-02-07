@@ -31,21 +31,21 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 
 ## Main Overview and Calculator Documents
 
-- [T0_vereinigter_bericht.pdf](2/pdf/T0_vereinigter_bericht.pdf)  
-  German: unified calculator results (“Vereinigter Rechner Ergebnisse”) – masses and constants from geometric principles.
+- [T0_vereinigter_bericht.pdf](2/pdf/T0_vereinigter_bericht.pdf) 
+ German: unified calculator results (“Vereinigter Rechner Ergebnisse”) – masses and constants from geometric principles.
 
-- [T0_unified_report.pdf](2/pdf/T0_unified_report.pdf)  
-  English: unified calculator results – same dataset in English.
+- [T0_unified_report.pdf](2/pdf/T0_unified_report.pdf) 
+ English: unified calculator results – same dataset in English.
 
-- [T0_Dokumentenübersicht_De.pdf](2/pdf/T0_Dokumenten%C3%BCbersicht_De.pdf)  
-  [T0_Dokumentenübersicht_En.pdf](2/pdf/T0_Dokumenten%C3%BCbersicht_En.pdf)  
-  High-level overview of all T0 documents (DE/EN).
+- [T0_Dokumentenübersicht_De.pdf](2/pdf/T0_Dokumenten%C3%BCbersicht_De.pdf) 
+ [T0_Dokumentenübersicht_En.pdf](2/pdf/T0_Dokumenten%C3%BCbersicht_En.pdf) 
+ High-level overview of all T0 documents (DE/EN).
 
-- [HdokumentDe.pdf](2/pdf/HdokumentDe.pdf) / [HdokumentEn.pdf](2/pdf/HdokumentEn.pdf)  
-  Earlier “main document” versions summarizing the T0 framework (DE/EN).
+- [HdokumentDe.pdf](2/pdf/HdokumentDe.pdf) / [HdokumentEn.pdf](2/pdf/HdokumentEn.pdf) 
+ Earlier “main document” versions summarizing the T0 framework (DE/EN).
 
-- [T0_threeclock_De.pdf](2/pdf/T0_threeclock_De.pdf) / [T0_threeclock_En.pdf](2/pdf/T0_threeclock_En.pdf)  
-  New: Single-clock metrology and three-clock experiment; detailed analysis of the Scientific Reports paper “A single-clock approach to fundamental metrology” (DOI: 10.1038/s41598-024-71907-0) and its consistency with T0 (time–mass duality and ξ-based SI derivations).
+- [T0_threeclock_De.pdf](2/pdf/T0_threeclock_De.pdf) / [T0_threeclock_En.pdf](2/pdf/T0_threeclock_En.pdf) 
+ New: Single-clock metrology and three-clock experiment; detailed analysis of the Scientific Reports paper “A single-clock approach to fundamental metrology” (DOI: 10.1038/s41598-024-71907-0) and its consistency with T0 (time–mass duality and ξ-based SI derivations).
 
 ## Latest Highlights
 
@@ -64,7 +64,7 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 
 **NEW: The Cosmic Brain Awakens - Popular Science Book Edition**
 
-**[FFGFT Narrative Master (German)](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/FFGFT_Narrative_Master_De.pdf)** (817 KB, 139 pages)  
+**[FFGFT Narrative Master (German)](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/FFGFT_Narrative_Master_De.pdf)** (817 KB, 139 pages) 
 **[FFGFT Narrative Master (English)](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/FFGFT_Narrative_Master_En.pdf)** (972 KB, 169 pages)
 
 **Key Achievement:** All 44 chapters of the Fundamental Fractal-Geometric Field Theory (FFGFT) integrated as a cohesive popular science book using the "cosmic brain" metaphor.
@@ -82,17 +82,15 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 - **Part II (Ch. 14-27):** Unification - All constants from ξ
 - **Part III (Ch. 28-44):** Applications - Predictions and cosmology
 
-**For Readers:** No prerequisites required - progressive learning structure  
-**For Students:** Complete derivations with cross-references  
+**For Readers:** No prerequisites required - progressive learning structure 
+**For Students:** Complete derivations with cross-references 
 **For Researchers:** LaTeX sources available in `/2/narrative/`
 
-**[Complete Documentation →](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/narrative/README.md)**  
+**[Complete Documentation →](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/narrative/README.md)** 
 **[Release Notes v1.0 →](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/RELEASE_NOTES_v1.0.md)**
 
 ### January 2026: Muon g-2 and Dirac Documents – Updated
 
-- **Muon g-2 (German, updated):** [018a_T0_Anomale-g2-9_De.pdf](2/pdf/018a_T0_Anomale-g2-9_De.pdf) – revised T0-theory analysis of the anomalous magnetic moment.
-- **Muon g-2 (English, updated):** [018a_T0_Anomale-g2-9_En.pdf](2/pdf/018a_T0_Anomale-g2-9_En.pdf).
 - **Dirac Simplified (German):** [050_diracVereinfacht_De.pdf](2/pdf/050_diracVereinfacht_De.pdf) – cleaned and consolidated Dirac simplification document.
 - **Dirac Simplified (English):** [050_diracVereinfacht_En.pdf](2/pdf/050_diracVereinfacht_En.pdf).
 - **Dirac Full (German):** [051_dirac_De.pdf](2/pdf/051_dirac_De.pdf).
@@ -194,7 +192,7 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 
 ### December 2025: Matsas et al. (2024) Integration - Theory Validation
 
-**Major theoretical convergence discovered:**  
+**Major theoretical convergence discovered:** 
 Independent research from two completely different perspectives arrives at the same conclusion - **ONE parameter describes all of physics**:
 
 - **Matsas et al. (2024):** Show that in relativistic spacetimes, ONE time unit (operationally defined) suffices to express all observables
@@ -227,7 +225,7 @@ Independent research from two completely different perspectives arrives at the s
 - Gravitational constant G, Planck length lₚ, and speed of light c all follow from ξ
 - The "arbitrary" SI values are geometrically necessary
 
-**[Complete Closure Document](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_SI_En.pdf)**  
+**[Complete Closure Document](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_SI_En.pdf)** 
 *Proof that the universe is pure geometry encoded in a single parameter*
 
 **Discoverability Note:** This document is indexed on Zenodo and Google Scholar under "SI Reform 2019 geometric interpretation" – cite it for papers on unit systems and fundamental constants.
@@ -239,7 +237,7 @@ Independent research from two completely different perspectives arrives at the s
 - Both conventions (α = 1 and α = 1/137) are correct
 - T0 explains WHY this number exists
 
-**[Interactive Fractal-α Visualization](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal-137.html)**  
+**[Interactive Fractal-α Visualization](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal-137.html)** 
 *Explore how fractal spacetime structure generates the famous number 137*
 
 **Discoverability Note:** Search "fine structure constant fractal derivation" on arXiv or YouTube for T0-specific results and community discussions.
@@ -249,33 +247,35 @@ Independent research from two completely different perspectives arrives at the s
 ```text
 T0-Time-Mass-Duality/
 ├── 2/
-│   ├── html/                     # Interactive HTML explorations
-│   ├── pdf/                      # Technical documents (213+ files)
-│   ├── tex/                      # LaTeX source files
-│   │   ├── de_standalone/        # 108 German standalone documents
-│   │   ├── en_standalone/        # 105 English standalone documents
-│   │   ├── de_chapters_new/      # Chapter versions for books
-│   │   ├── en_chapters_new/      # Chapter versions for books
-│   │   └── completed/            # 6 compiled books (Deutsch/ & Englisch/)
-│   ├── esotherik.md              # Esoteric considerations
-│   ├── OntologischeAequivalenz.md # Ontological equivalence (DE/EN)
-│   └── index.html & website.html # Local web interfaces
-├── rsa/                          # RSA factorization demos and implementations
-├── sig/                          # Audio signal analysis (3 files)
-│   ├── xi_harmonic_analysis_demo.html
-│   ├── xi_harmonic_documentation.md
-│   └── xi_oscilloscope_spectrum-basis.html
-├── Audio Documentation/          # Dialog series and spoken explanations
-├── Python Modules/               # Direct implementations (5 files)
-├── Technical Reports/            # Comprehensive analyses
-└── README.md / README_de.md      # Documentation
+│  ├── html/           # Interactive HTML explorations
+│  ├── pdf/           # Technical documents (213+ files)
+│  ├── tex-n/         # LaTeX sources (normalized structure)
+│  │  ├── de_standalone/    # German standalone documents (current, numbered names)
+│  │  ├── en_standalone/    # English standalone documents (current, numbered names)
+│  │  ├── de_standalone_pdflatex/  # Legacy DE standalone sources (old names, kept for reference)
+│  │  ├── en_standalone_pdflatex/  # Legacy EN standalone sources (old names, kept for reference)
+│  │  ├── de_chapters_new/   # Chapter versions for books
+│  │  ├── en_chapters_new/   # Chapter versions for books
+│  │  └── completed/      # Compiled books (Teil1–3, Anwendungen, Asymmetrie, etc.)
+│  ├── esotherik.md       # Esoteric considerations
+│  ├── OntologischeAequivalenz.md # Ontological equivalence (DE/EN)
+│  └── index.html & website.html # Local web interfaces
+├── rsa/             # RSA factorization demos and implementations
+├── sig/             # Audio signal analysis (3 files)
+│  ├── xi_harmonic_analysis_demo.html
+│  ├── xi_harmonic_documentation.md
+│  └── xi_oscilloscope_spectrum-basis.html
+├── Audio Documentation/     # Dialog series and spoken explanations
+├── Python Modules/        # Direct implementations (5 files)
+├── Technical Reports/      # Comprehensive analyses
+└── README.md / README_de.md   # Documentation
 ```
 
 **GitHub Search Optimization:** This repo is tagged with "quantum-physics", "unified-theory", "fractal-geometry", and "deterministic-computing" for easy discovery via GitHub's topic search.
 
 ## Complete PDF Documentation (213+ Files, ~75MB total)
 
-All documents are available in German and English versions where applicable.  
+All documents are available in German and English versions where applicable. 
 **Pro Tip:** Use GitHub's search bar with `T0_ filename` or `Matsas` or `Consciousness` to quickly locate specific PDFs.
 
 **December 2025 Update:** Added comprehensive Matsas et al. (2024) comparative analysis (105_Matsas_T0_Vergleich_De/En) with dynamic perspective and GitHub PDF links, plus groundbreaking Consciousness documents (100_Consciousness_De/En) resolving the quantum agency problem. See December 2025 Highlights section above for details.
@@ -286,10 +286,10 @@ The `2/tex-n/` directory contains complete LaTeX source files:
 - **108 German standalone documents** (`de_standalone/`)
 - **105 English standalone documents** (`en_standalone/`)
 - **7 compiled books** in `tex-n/completed/`:
-  - Teil1 (Part 1): Core documents
-  - Teil2 (Part 2): Mathematical foundations
-  - Teil3 (Part 3): Quantum mechanics & applications
-  - 144 Asymmetry Master (DE/EN): Asymmetry analysis and objections (two-part monograph)
+ - Teil1 (Part 1): Core documents
+ - Teil2 (Part 2): Mathematical foundations
+ - Teil3 (Part 3): Quantum mechanics & applications
+ - 144 Asymmetry Master (DE/EN): Asymmetry analysis and objections (two-part monograph)
 
 **Note:** The standalone LaTeX files are cosmetically adapted copies of the original PDF documents. Content remains unchanged; only formatting adjustments were made for book compilation (shared preambles, consistent styling, table sizing).
 
@@ -298,80 +298,80 @@ The `2/tex-n/` directory contains complete LaTeX source files:
 The following ten published books (Kindle, paperback, hardcover) are represented in this repository by compiled PDFs. These PDFs are the canonical technical and narrative sources corresponding to the Amazon editions; ASINs and store metadata are intentionally omitted here.
 
 1. **T0 Theory: Time-Mass Duality: Unified Physics from a Single Number: Complete Spacetime Geometry Synthesis** (English)
-   - PDF: [Teil1.ebook_En.pdf](2/tex-n/completed/Teil1.ebook_En.pdf)  
-     Pfad: `2\tex-n\completed\Teil1.ebook_En.pdf`
+  - PDF: [Teil1.ebook_En.pdf](2/tex-n/completed/Teil1.ebook_En.pdf) 
+   Pfad: `2\tex-n\completed\Teil1.ebook_En.pdf`
 
 2. **T0-Theorie Zeit Masse Dualität: Die vereinheitlichte Physik aus einer einzigen Zahl – Eine vollständige Synthese der Raumzeit-Geometrie** (Deutsch)
-   - PDF: [Teil1.ebook_De.pdf](2/tex-n/completed/Teil1.ebook_De.pdf)  
-     Pfad: `2\tex-n\completed\Teil1.ebook_De.pdf`
+  - PDF: [Teil1.ebook_De.pdf](2/tex-n/completed/Teil1.ebook_De.pdf) 
+   Pfad: `2\tex-n\completed\Teil1.ebook_De.pdf`
 
 3. **T0-Theorie Teil (Teil2) Zeit- Masse Dualität: Vereinheitlichte Physik aus einer einzigen Zahl: Vollständige Synthese der Raumzeit-Geometrie** (Deutsch)
-   - PDF: [Teil2.ebook_De.pdf](2/tex-n/completed/Teil2.ebook_De.pdf)  
-     Pfad: `2\tex-n\completed\Teil2.ebook_De.pdf`
+  - PDF: [Teil2.ebook_De.pdf](2/tex-n/completed/Teil2.ebook_De.pdf) 
+   Pfad: `2\tex-n\completed\Teil2.ebook_De.pdf`
 
 4. **T0 Theory 2- Time Mass Duality: A Geometric Framework for Unifying Time, Mass, and Quantum Realities** (English)
-   - PDF: [Teil2.ebook_En.pdf](2/tex-n/completed/Teil2.ebook_En.pdf)  
-     Pfad: `2\tex-n\completed\Teil2.ebook_En.pdf`
+  - PDF: [Teil2.ebook_En.pdf](2/tex-n/completed/Teil2.ebook_En.pdf) 
+   Pfad: `2\tex-n\completed\Teil2.ebook_En.pdf`
 
 5. **T0 Theory (part 3) Time-Mass Duality: Unified Physics from a Single Number: Complete Spacetime Geometry Synthesis** (English)
-   - PDF: [Teil3.ebook_En.pdf](2/tex-n/completed/Teil3.ebook_En.pdf)  
-     Pfad: `2\tex-n\completed\Teil3.ebook_En.pdf`
+  - PDF: [Teil3.ebook_En.pdf](2/tex-n/completed/Teil3.ebook_En.pdf) 
+   Pfad: `2\tex-n\completed\Teil3.ebook_En.pdf`
 
 6. **T0-Theorie: Zeit-Masse-Dualität – (Teil 3): Vereinheitlichte Physik aus einer einzigen Zahl: Vollständige Synthese der Raumzeit-Geometrie** (Deutsch)
-   - PDF: [Teil3.ebook_De.pdf](2/tex-n/completed/Teil3.ebook_De.pdf)  
-     Pfad: `2\tex-n\completed\Teil3.ebook_De.pdf`
+  - PDF: [Teil3.ebook_De.pdf](2/tex-n/completed/Teil3.ebook_De.pdf) 
+   Pfad: `2\tex-n\completed\Teil3.ebook_De.pdf`
 
 7. **What Lies Behind the Seven Mysteries of Physics?: A Journey to the Universe's Deepest Secrets – and How a New Theory Connects Them** (English)
-   - PDF: [T0_Anwendungen_En.pdf](2/tex-n/completed/T0_Anwendungen_En.pdf)  
-     Pfad: `2\tex-n\completed\T0_Anwendungen_En.pdf`
+  - PDF: [T0_Anwendungen_En.pdf](2/tex-n/completed/T0_Anwendungen_En.pdf) 
+   Pfad: `2\tex-n\completed\T0_Anwendungen_En.pdf`
 
 8. **Was verbirgt sich hinter den sieben Rätseln der Physik?: Eine Reise zu den tiefsten Geheimnissen des Universums – und wie eine neue Theorie sie verbindet** (Deutsch)
-   - PDF: [T0_Anwendungen_De.pdf](2/tex-n/completed/T0_Anwendungen_De.pdf)  
-     Pfad: `2\tex-n\completed\T0_Anwendungen_De.pdf`
+  - PDF: [T0_Anwendungen_De.pdf](2/tex-n/completed/T0_Anwendungen_De.pdf) 
+   Pfad: `2\tex-n\completed\T0_Anwendungen_De.pdf`
 
 9. **Das Kosmische Gehirn: Von der Quantengravitation zum Bewusstsein. Fundamental Fraktalgeometrischen Feldtheorie (FFGFT)** (Deutsch)
-   - PDF: [FFGFT_Narrative_Master_De.pdf](2/pdf/FFGFT_Narrative_Master_De.pdf)  
-     Pfad: `2\pdf\FFGFT_Narrative_Master_De.pdf`
+  - PDF: [FFGFT_Narrative_Master_De.pdf](2/pdf/FFGFT_Narrative_Master_De.pdf) 
+   Pfad: `2\pdf\FFGFT_Narrative_Master_De.pdf`
 
 10. **The Cosmic Brain: From Quantum Gravity to Consciousness, fundamental Fractal-Geometric Field Theory (FFGFT)** (English)
-    - PDF: [FFGFT_Narrative_Master_En.pdf](2/pdf/FFGFT_Narrative_Master_En.pdf)  
-      Pfad: `2\pdf\FFGFT_Narrative_Master_En.pdf`
+  - PDF: [FFGFT_Narrative_Master_En.pdf](2/pdf/FFGFT_Narrative_Master_En.pdf) 
+   Pfad: `2\pdf\FFGFT_Narrative_Master_En.pdf`
 
 ### Latest Additions (November 2025) (updated)
 
 **Revolutionary New Documents:**
 
-- **[T0_koide-formel-3](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_koide-formel-3_En.pdf)** – Extension of Koide formula in T0 framework (English; German: `T0_koide-formel-3_De.pdf`)  
-  - Detailed integration with lepton mass relations  
-  - Geometric derivation from ξ
+- **[T0_koide-formel-3](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_koide-formel-3_En.pdf)** – Extension of Koide formula in T0 framework (English; German: `T0_koide-formel-3_De.pdf`) 
+ - Detailed integration with lepton mass relations 
+ - Geometric derivation from ξ
 
-- **[T0_koideformel](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_koideformel_En.pdf)** – Core Koide formula analysis in T0 (English; German: `T0_koideformel_De.pdf`)  
-  - Parameter-free predictions for quark/lepton masses
+- **[T0_koideformel](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_koideformel_En.pdf)** – Core Koide formula analysis in T0 (English; German: `T0_koideformel_De.pdf`) 
+ - Parameter-free predictions for quark/lepton masses
 
-- **[T0_g2-erweiterung-4](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_g2-erweiterung-4_En.pdf)** – Extended muon g-2 analysis, iteration 4 (English; German: `T0_g2-erweiterung-4_De.pdf`)  
-  - Further refinement to 0.03σ agreement
+- **[T0_g2-erweiterung-4](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_g2-erweiterung-4_En.pdf)** – Extended muon g-2 analysis, iteration 4 (English; German: `T0_g2-erweiterung-4_De.pdf`) 
+ - Further refinement to 0.03σ agreement
 
-- **[T0_umkehrung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_umkehrung_En.pdf)** – Inversion mechanisms in T0 duality (English; German: `T0_umkehrung_De.pdf`)  
-  - Reinterpretation of time-mass inversions
+- **[T0_umkehrung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_umkehrung_En.pdf)** – Inversion mechanisms in T0 duality (English; German: `T0_umkehrung_De.pdf`) 
+ - Reinterpretation of time-mass inversions
 
-- **[T0_tm-erweiterung-x6](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_tm-erweiterung-x6_En.pdf)** – Time-mass extension x6 model (English; German: `T0_tm-erweiterung-x6_De.pdf`)  
-  - Advanced scaling for cosmological applications
+- **[T0_tm-erweiterung-x6](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_tm-erweiterung-x6_En.pdf)** – Time-mass extension x6 model (English; German: `T0_tm-erweiterung-x6_De.pdf`) 
+ - Advanced scaling for cosmological applications
 
-- **[T0-QFT-ML_Addendum](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-QFT-ML_Addendum_En.pdf)** – Addendum to QFT and machine learning integration (English; German: `T0-QFT-ML_Addendum_De.pdf`)  
-  - Computational verification of T0 predictions
+- **[T0-QFT-ML_Addendum](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-QFT-ML_Addendum_En.pdf)** – Addendum to QFT and machine learning integration (English; German: `T0-QFT-ML_Addendum_De.pdf`) 
+ - Computational verification of T0 predictions
 
-- **[QM](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM_En.pdf)** – Quantum mechanics foundations in T0 (English; German: `QM_De.pdf`)  
-  - Deterministic reinterpretation
+- **[QM](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/QM_En.pdf)** – Quantum mechanics foundations in T0 (English; German: `QM_De.pdf`) 
+ - Deterministic reinterpretation
 
-- **[Bell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Bell_En.pdf)** – Bell inequality resolutions via T0 (English; German: `Bell_De.pdf`)  
-  - Connection to non-locality and fractal geometry
+- **[Bell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Bell_En.pdf)** – Bell inequality resolutions via T0 (English; German: `Bell_De.pdf`) 
+ - Connection to non-locality and fractal geometry
 
-- **[T0_xi_ursprung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_xi_ursprung_En.pdf)** – Origin of ξ parameter derivation (English; German: `T0_xi_ursprung_De.pdf`)  
-  - Geometric proofs from 3D space
+- **[T0_xi_ursprung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_xi_ursprung_En.pdf)** – Origin of ξ parameter derivation (English; German: `T0_xi_ursprung_De.pdf`) 
+ - Geometric proofs from 3D space
 
-- **[T0_threeclock](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_threeclock_En.pdf)** – Single-clock metrology and three-clock experiment (English; German: `T0_threeclock_De.pdf`)  
-  - Detailed analysis of the Scientific Reports paper “A single-clock approach to fundamental metrology” (DOI: 10.1038/s41598-024-71907-0)  
-  - Shows how single-clock metrology fits into the T0 time–mass duality and ξ-based SI derivations
+- **[T0_threeclock](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_threeclock_En.pdf)** – Single-clock metrology and three-clock experiment (English; German: `T0_threeclock_De.pdf`) 
+ - Detailed analysis of the Scientific Reports paper “A single-clock approach to fundamental metrology” (DOI: 10.1038/s41598-024-71907-0) 
+ - Shows how single-clock metrology fits into the T0 time–mass duality and ξ-based SI derivations
 
 *(plus the other November files already listed in this section)*
 
@@ -379,66 +379,64 @@ The following ten published books (Kindle, paperback, hardcover) are represented
 
 **Revolutionary New Documents:**
 
-- **[T0_SI](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_SI_En.pdf)** – **THE COMPLETE CLOSURE**: Why the SI Reform 2019 unknowingly implemented ξ-geometry  
-  - Single parameter ξ = 4/3 × 10⁻⁴ derives EVERYTHING  
-  - Gravitational constant G from ξ  
-  - Planck length lₚ from ξ  
-  - Speed of light c geometrically determined  
-  - Proves: SI 2019 = geometric calibration to ξ
+- **[T0_SI](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_SI_En.pdf)** – **THE COMPLETE CLOSURE**: Why the SI Reform 2019 unknowingly implemented ξ-geometry 
+ - Single parameter ξ = 4/3 × 10⁻⁴ derives EVERYTHING 
+ - Gravitational constant G from ξ 
+ - Planck length lₚ from ξ 
+ - Speed of light c geometrically determined 
+ - Proves: SI 2019 = geometric calibration to ξ
 
-- **[T0_Bibliography](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Bibliography_En.pdf)** – Complete indexed bibliography of all T0 documents  
-  - Systematic categorization by topic  
-  - Direct links to all PDFs  
-  - Foundation for academic citations
+- **[T0_Bibliography](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Bibliography_En.pdf)** – Complete indexed bibliography of all T0 documents 
+ - Systematic categorization by topic 
+ - Direct links to all PDFs 
+ - Foundation for academic citations
 
-- **[T0_nat-si](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_nat-si_En.pdf)** – Bridge between natural units and SI measurements  
-  - Conversion framework  
-  - Scaling factor S_T0 = 1 MeV/c² derivation  
-  - Why unit conversions are not arbitrary
+- **[T0_nat-si](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_nat-si_En.pdf)** – Bridge between natural units and SI measurements 
+ - Conversion framework 
+ - Scaling factor S_T0 = 1 MeV/c² derivation 
+ - Why unit conversions are not arbitrary
 
-- **[T0_verhaeltnis-absolut](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_verhaeltnis-absolut_En.pdf)** – Critical distinction explained  
-  - Why ratios need NO fractal correction  
-  - Why absolute values DO need correction  
-  - Resolves apparent inconsistencies in T0 calculations
+- **[T0_verhaeltnis-absolut](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_verhaeltnis-absolut_En.pdf)** – Critical distinction explained 
+ - Why ratios need NO fractal correction 
+ - Why absolute values DO need correction 
+ - Resolves apparent inconsistencies in T0 calculations
 
-- **[T0_Gravitationskonstante](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Gravitationskonstante_En.pdf)** (Updated Oct 2025) – Enhanced with complete derivation chain  
-  - G from ξ via electron mass  
-  - Dimensional analysis  
-  - Fractal corrections K_frak = 0.986  
-  - <0.0002% agreement with CODATA
+- **[T0_Gravitationskonstante](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Gravitationskonstante_En.pdf)** (Updated Oct 2025) – Enhanced with complete derivation chain 
+ - G from ξ via electron mass 
+ - Dimensional analysis 
+ - Fractal corrections K_frak = 0.986 
+ - <0.0002% agreement with CODATA
 
-- **[Zwei-Dipole-CMB](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Zwei-Dipole-CMB_En.pdf)** – Novel CMB interpretation  
-  - Two-dipole structure in cosmic microwave background  
-  - Alternative to standard cosmological model  
-  - Testable predictions
+- **[Zwei-Dipole-CMB](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Zwei-Dipole-CMB_En.pdf)** – Novel CMB interpretation 
+ - Two-dipole structure in cosmic microwave background 
+ - Alternative to standard cosmological model 
+ - Testable predictions
 
-- ~~**[T0_Anomale-g2-9](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Anomale-g2-9_En.pdf)** – Muon g-2 anomaly iteration 9 (English; German: `T0_Anomale-g2-9_De.pdf`)~~ (superseded by 018_T0_Anomale-g2-10)  
-  - Ultra-precise fractal corrections
+ - Ultra-precise fractal corrections
 
-- ~~**[T0_Anomale-g2-6](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Anomale-g2-6_En.pdf)** – Muon g-2 anomaly iteration 6 (English; German: `T0_Anomale-g2-6_De.pdf`)~~ (superseded by 018_T0_Anomale-g2-10)  
-  - Intermediate refinement steps
+ - Intermediate refinement steps
 
-- **[T0_lagrndian](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_lagrndian_En.pdf)** – Lagrangian density updates (English; German: `T0_lagrndian_De.pdf`)  
-  - Simplified one-term formulation
+- **[T0_lagrndian](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_lagrndian_En.pdf)** – Lagrangian density updates (English; German: `T0_lagrndian_De.pdf`) 
+ - Simplified one-term formulation
 
-- **[T0_xi-und-e](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_xi-und-e_En.pdf)** – ξ and e constant interrelations (English; German: `T0_xi-und-e_De.pdf`)  
-  - Geometric links to elementary charge
+- **[T0_xi-und-e](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_xi-und-e_En.pdf)** – ξ and e constant interrelations (English; German: `T0_xi-und-e_De.pdf`) 
+ - Geometric links to elementary charge
 
-- **[T0-Theory-vs-Synergetics](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-Theory-vs-Synergetics_En.pdf)** – Comparison with synergetics (English; German: `T0-Theory-vs-Synergetics_De.pdf`)  
-  - Pattern formation analogies
+- **[T0-Theory-vs-Synergetics](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0-Theory-vs-Synergetics_En.pdf)** – Comparison with synergetics (English; German: `T0-Theory-vs-Synergetics_De.pdf`) 
+ - Pattern formation analogies
 
-- **[Markov](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Markov_En.pdf)** – Markov processes in T0 dynamics (English; German: `Markov_De.pdf`)  
-  - Probabilistic to deterministic transitions
+- **[Markov](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/Markov_En.pdf)** – Markov processes in T0 dynamics (English; German: `Markov_De.pdf`) 
+ - Probabilistic to deterministic transitions
 
 ### Current Comprehensive Summary Series (16 files)
-- **[T0_Grundlagen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Grundlagen_en.pdf)** – Fundamental T0 framework foundations  
-- **[T0_Feinstruktur](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Feinstruktur_En.pdf)** – Mathematical derivation of fine structure constant  
-- **[T0_Gravitationskonstante](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Gravitationskonstante_En.pdf)** – Detailed gravitational calculations  
-- **[T0_Teilchenmassen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Teilchenmassen_En.pdf)** – Systematic mass calculation of all fermions  
-- **[T0_Neutrinos](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Neutrinos_En.pdf)** – Special treatment of neutrino physics  
-- **[018_T0_Anomale-g2-10](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/018_T0_Anomale-g2-10_De.pdf)** – Solution to muon g-2 anomaly  
-- **[T0_Kosmologie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Kosmologie_En.pdf)** – Cosmological applications of T0 theory  
-- **[T0_QM-QFT-RT](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_QM-QFT-RT_En.pdf)** – Complete quantum field theory in T0 framework  
+- **[T0_Grundlagen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Grundlagen_en.pdf)** – Fundamental T0 framework foundations 
+- **[T0_Feinstruktur](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Feinstruktur_En.pdf)** – Mathematical derivation of fine structure constant 
+- **[T0_Gravitationskonstante](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Gravitationskonstante_En.pdf)** – Detailed gravitational calculations 
+- **[T0_Teilchenmassen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Teilchenmassen_En.pdf)** – Systematic mass calculation of all fermions 
+- **[T0_Neutrinos](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Neutrinos_En.pdf)** – Special treatment of neutrino physics 
+- **[018_T0_Anomale-g2-10](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/018_T0_Anomale-g2-10_De.pdf)** – Solution to muon g-2 anomaly 
+- **[T0_Kosmologie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_Kosmologie_En.pdf)** – Cosmological applications of T0 theory 
+- **[T0_QM-QFT-RT](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_QM-QFT-RT_En.pdf)** – Complete quantum field theory in T0 framework 
 
 ### Redshift Newly Understood
 
@@ -456,102 +454,102 @@ Finite-element calculations on the ξ hierarchy confirm this: no intrinsic cosmo
 **Discoverability Note:** These tools are hosted on GitHub Pages and indexed by search engines – search "T0 fractal 137 interactive" or "T0 particle mass calculator" for direct access.
 
 ### Revolutionary Fine Structure Constant Explorer
-**[Fractal α Visualization](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal-137.html)**  
+**[Fractal α Visualization](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal-137.html)** 
 *Interactive demonstration showing how the famous number 137 emerges from fractal spacetime geometry*
 
 ### Revolutionary Particle Mass Calculator
-**[Parameter-Free Particle Mass Calculator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/simple_mass_formula.html)**  
+**[Parameter-Free Particle Mass Calculator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/simple_mass_formula.html)** 
 *Interactive demonstration showing how the single formula E = 1/ξ calculates ALL particle masses with 98% accuracy*
 
 ### RSA Factorization & Cryptographic Analysis
-**[RSA Factorization Demo](https://jpascher.github.io/T0-Time-Mass-Duality/rsa/t0_factorization_demo.html)**  
+**[RSA Factorization Demo](https://jpascher.github.io/T0-Time-Mass-Duality/rsa/t0_factorization_demo.html)** 
 *Advanced web-based demonstration of T0-Framework applied to RSA number factorization*
 
 ### Simulation and Implementation Tools
-**[Deterministic Quantum Computer Simulator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/quantum_simulator_deterministic.html)**  
+**[Deterministic Quantum Computer Simulator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/quantum_simulator_deterministic.html)** 
 *Complete quantum computer simulator implementing T0 framework with hardware validation*
 
-**[T0 Shor Algorithm Simulator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_Shore_simulator.html)**  
+**[T0 Shor Algorithm Simulator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_Shore_simulator.html)** 
 *Advanced implementation of Shor's algorithm with T0 deterministic framework*
 
 ### Advanced Analysis Tools
-**[Particle Spectrum Comparison](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_de_.html)**  
+**[Particle Spectrum Comparison](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_de_.html)** 
 *Interactive comparison: Standard Model (61+ particles) vs. T0 (1 field)*
 
-**[Muon g-2 Analysis](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/muon_g2_analysis.html)**  
+**[Muon g-2 Analysis](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/muon_g2_analysis.html)** 
 *Simplified visualization of the muon anomaly and T0's spectacular 0.05σ agreement*
 
-**[Trilingual Scientific Dialog](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_dialogue_multilingual.html)**  
+**[Trilingual Scientific Dialog](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_dialogue_multilingual.html)** 
 *Discussion between T0 developer and physicist (DE/EN/FR)*
 
 ### Signal Analysis & Harmonics
-**[Xi Harmonic Analysis](https://jpascher.github.io/T0-Time-Mass-Duality/sig/xi_harmonic_analysis_demo.html)**  
+**[Xi Harmonic Analysis](https://jpascher.github.io/T0-Time-Mass-Duality/sig/xi_harmonic_analysis_demo.html)** 
 *Interactive demonstration of T0 framework applied to audio signal analysis*
 
-**[Spectrum Analysis Tool](https://jpascher.github.io/T0-Time-Mass-Duality/sig/xi_oscilloscope_spectrum-basis.html)**  
+**[Spectrum Analysis Tool](https://jpascher.github.io/T0-Time-Mass-Duality/sig/xi_oscilloscope_spectrum-basis.html)** 
 *Advanced oscilloscope-style spectrum analyzer using T0 principles*
 
 ## Audio Learning Resources
-**[Complete T0 Audio Library on Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)**  
+**[Complete T0 Audio Library on Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)** 
 *All T0 audio content now available as podcast episodes.*
 
-- `T0_Dialog_Professor.mp3` – Comprehensive professorial explanation  
-- `T0_Dialog_Quantenmechanik.mp3` – Quantum mechanics discussion  
-- `T0_Dialog_Teilchenphysik.mp3` – Particle physics analysis  
-- `T0_Dialog_CMB.mp3` – Cosmic microwave background  
-- `T0_Dialog_Gravitation.mp3` – Gravitational effects  
-- `T0_kurz_verbal_De/En.mp3` – Concise bilingual introductions  
+- `T0_Dialog_Professor.mp3` – Comprehensive professorial explanation 
+- `T0_Dialog_Quantenmechanik.mp3` – Quantum mechanics discussion 
+- `T0_Dialog_Teilchenphysik.mp3` – Particle physics analysis 
+- `T0_Dialog_CMB.mp3` – Cosmic microwave background 
+- `T0_Dialog_Gravitation.mp3` – Gravitational effects 
+- `T0_kurz_verbal_De/En.mp3` – Concise bilingual introductions 
 - plus additional dialog parts on specialized topics
 
 ## Python Implementations (5 files)
 
-- `authentic_t0_quantum.py` – Complete T0 quantum implementation  
-- `t0_Pure Quantum.py` – Pure quantum without fallbacks  
-- `t0_rational_optimized.py` – Optimized rational arithmetic  
-- `t0_no_fallback_shore.py` – Deterministic Shor algorithm  
+- `authentic_t0_quantum.py` – Complete T0 quantum implementation 
+- `t0_Pure Quantum.py` – Pure quantum without fallbacks 
+- `t0_rational_optimized.py` – Optimized rational arithmetic 
+- `t0_no_fallback_shore.py` – Deterministic Shor algorithm 
 - `t0_Shore_simulator.html` – Web-based Shor implementation
 
 ## Theoretical Framework
 
 ### Core Concepts
 
-- **Time-Energy Duality**: $T_\text{field} \cdot E_\text{field} = 1$  
-- **Universal Geometric Parameter**: $\xi = (4/3) \times 10^{-4}$ from 3D space geometry  
-- **Universal Field**: Particles as excitation patterns in a single energy field  
-- **Parameter-Free Theory**: One geometric constant defines all physics  
-- **Deterministic Framework**: Alternative to probabilistic quantum mechanics  
+- **Time-Energy Duality**: $T_\text{field} \cdot E_\text{field} = 1$ 
+- **Universal Geometric Parameter**: $\xi = (4/3) \times 10^{-4}$ from 3D space geometry 
+- **Universal Field**: Particles as excitation patterns in a single energy field 
+- **Parameter-Free Theory**: One geometric constant defines all physics 
+- **Deterministic Framework**: Alternative to probabilistic quantum mechanics 
 
 ### Revolutionary Results (Updated November 2025)
 
-- **Complete Closure**: Single parameter ξ derives all physical constants  
-- **SI Reform 2019**: Unknowingly implemented ξ-geometry calibration  
-- **Zero Free Parameters**: Standard Model's 20+ parameters → 0 parameters  
-- **98% Average Accuracy**: All particle masses from single formula $E = 1/\xi$  
-- **Unified Field Theory**: One energy field explains all 61+ known particles  
-- **Deterministic Quantum Computing**: Functional algorithms without randomness  
-- **Fine Structure Constant**: Explains why $\alpha \approx 1/137$ from fractal geometry  
-- **Muon g-2 Anomaly**: 0.05σ agreement  
-- **Simplified Physics**: Dirac equation reduced from $4\times4$ matrices to field nodes  
+- **Complete Closure**: Single parameter ξ derives all physical constants 
+- **SI Reform 2019**: Unknowingly implemented ξ-geometry calibration 
+- **Zero Free Parameters**: Standard Model's 20+ parameters → 0 parameters 
+- **98% Average Accuracy**: All particle masses from single formula $E = 1/\xi$ 
+- **Unified Field Theory**: One energy field explains all 61+ known particles 
+- **Deterministic Quantum Computing**: Functional algorithms without randomness 
+- **Fine Structure Constant**: Explains why $\alpha \approx 1/137$ from fractal geometry 
+- **Muon g-2 Anomaly**: 0.05σ agreement 
+- **Simplified Physics**: Dirac equation reduced from $4\times4$ matrices to field nodes 
 
 ## Getting Started
 
-1. **Complete Closure**: read [T0_SI_En.pdf](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_SI_En.pdf)  
-2. **Three-Clock / Single-Clock Metrology**: read [T0_threeclock_En.pdf](2/pdf/T0_threeclock_En.pdf)  
-3. **Fine Structure**: try the [Fractal α Visualization](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal-137.html)  
-4. **Unified Report**: check [T0_unified_report.pdf](2/pdf/T0_unified_report.pdf)  
-5. **Run Python**: start with `authentic_t0_quantum.py` in the Python modules  
+1. **Complete Closure**: read [T0_SI_En.pdf](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/T0_SI_En.pdf) 
+2. **Three-Clock / Single-Clock Metrology**: read [T0_threeclock_En.pdf](2/pdf/T0_threeclock_En.pdf) 
+3. **Fine Structure**: try the [Fractal α Visualization](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal-137.html) 
+4. **Unified Report**: check [T0_unified_report.pdf](2/pdf/T0_unified_report.pdf) 
+5. **Run Python**: start with `authentic_t0_quantum.py` in the Python modules 
 
 ## Official T0 Platforms
 
-- [Interactive T0 Website](https://jpascher.github.io/T0-Time-Mass-Duality/)  
-- [T0 YouTube Channel](https://www.youtube.com/@Time-MassDuality)  
-- [T0 Audio Library on Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes)  
+- [Interactive T0 Website](https://jpascher.github.io/T0-Time-Mass-Duality/) 
+- [T0 YouTube Channel](https://www.youtube.com/@Time-MassDuality) 
+- [T0 Audio Library on Spotify](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) 
 
 ## Contact
 
-**Author**: Johann Pascher  
-**Institution**: Department of Communications Engineering, HTL Leonding, Austria  
-**Email**: johann.pascher@gmail.com  
+**Author**: Johann Pascher 
+**Institution**: Department of Communications Engineering 
+**Email**: johann.pascher@gmail.com 
 
 ## License
 

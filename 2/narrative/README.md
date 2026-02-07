@@ -45,28 +45,28 @@ Demonstrates predictions, testable results, and cosmological implications.
 
 ```
 2/narrative/
-├── FFGFT_Narrative_Master_De.tex          # German master document
-├── FFGFT_Narrative_Master_En.tex          # English master document
+├── FFGFT_Narrative_Master_De.tex     # German master document
+├── FFGFT_Narrative_Master_En.tex     # English master document
 │
-├── Kapitel_01_Narrative_De.tex            # German chapters 01-44
-├── Kapitel_01_Narrative_En.tex            # English chapters 01-44
+├── Kapitel_01_Narrative_De.tex      # German chapters 01-44
+├── Kapitel_01_Narrative_En.tex      # English chapters 01-44
 ├── ...
 ├── Kapitel_44_Narrative_De.tex
 ├── Kapitel_44_Narrative_En.tex
 │
-├── Kapitel_01_Narrative_De_content.tex    # Modular content files
-├── Kapitel_01_Narrative_En_content.tex    # (for flexible compilation)
+├── Kapitel_01_Narrative_De_content.tex  # Modular content files
+├── Kapitel_01_Narrative_En_content.tex  # (for flexible compilation)
 ├── ...
 ├── Kapitel_44_Narrative_De_content.tex
 ├── Kapitel_44_Narrative_En_content.tex
 │
-├── raw_narrative_chapters_13-44/          # Source files (user-provided)
-│   ├── Kapitel_01a_Narrative_De.tex
-│   ├── ...
-│   └── Kapitel_44a_Narrative_De.tex
+├── raw_narrative_chapters_13-44/     # Source files (user-provided)
+│  ├── Kapitel_01a_Narrative_De.tex
+│  ├── ...
+│  └── Kapitel_44a_Narrative_De.tex
 │
-├── complete_book_workflow.py              # Automation script
-└── README.md                              # This file
+├── complete_book_workflow.py       # Automation script
+└── README.md               # This file
 ```
 
 **File Count:**
@@ -87,11 +87,11 @@ Both master PDFs are compiled with:
 
 ### Kindle Optimization Features
 ```latex
-\usepackage{hyphenat}              % Improved hyphenation
-\sloppy                            % Tolerant line breaking
-\emergencystretch=3em             % Flexible spacing
-\hyphenpenalty=500                % Better word breaking
-\tolerance=2000                   % Improved typography
+\usepackage{hyphenat}       % Improved hyphenation
+\sloppy              % Tolerant line breaking
+\emergencystretch=3em       % Flexible spacing
+\hyphenpenalty=500        % Better word breaking
+\tolerance=2000          % Improved typography
 ```
 
 ### Required LaTeX Packages
@@ -106,9 +106,9 @@ Both master PDFs are compiled with:
 ### Prerequisites
 ```bash
 sudo apt-get install texlive-latex-base texlive-latex-extra \
-                     texlive-fonts-recommended texlive-fonts-extra \
-                     texlive-lang-german texlive-lang-english \
-                     texlive-science latexmk
+           texlive-fonts-recommended texlive-fonts-extra \
+           texlive-lang-german texlive-lang-english \
+           texlive-science latexmk
 ```
 
 ### Compilation Commands
@@ -141,12 +141,12 @@ pdflatex -synctex=1 -interaction=nonstopmode FFGFT_Narrative_Master_En.tex
 
 ### Sample Chapter Titles
 
-**Chapter 1:** Das kosmische Gehirn erwacht / The Cosmic Brain Awakens  
-**Chapter 5:** Die Spezielle Relativitätstheorie / Special Relativity  
-**Chapter 14:** Quantenverschränkung als neuronales Netzwerk / Quantum Entanglement as Neural Network  
-**Chapter 22:** Die Feinstrukturkonstante / The Fine Structure Constant  
-**Chapter 30:** Dunkle Materie und Dunkle Energie / Dark Matter and Dark Energy  
-**Chapter 37:** Das Universum als Quantencomputer / The Universe as Quantum Computer  
+**Chapter 1:** Das kosmische Gehirn erwacht / The Cosmic Brain Awakens 
+**Chapter 5:** Die Spezielle Relativitätstheorie / Special Relativity 
+**Chapter 14:** Quantenverschränkung als neuronales Netzwerk / Quantum Entanglement as Neural Network 
+**Chapter 22:** Die Feinstrukturkonstante / The Fine Structure Constant 
+**Chapter 30:** Dunkle Materie und Dunkle Energie / Dark Matter and Dark Energy 
+**Chapter 37:** Das Universum als Quantencomputer / The Universe as Quantum Computer 
 **Chapter 44:** Das erwachte Universum / The Awakened Universe
 
 ## 🔄 Automation Scripts
@@ -182,13 +182,13 @@ python complete_book_workflow.py
 ### Citation Information
 ```bibtex
 @book{pascher2025_ffgft_narrative,
-  author    = {Johann Pascher},
-  title     = {Fundamental Fractal-Geometric Field Theory: 
-               The Universe as a Growing Brain (Narrative Edition)},
-  year      = {2025},
-  publisher = {HTL Leonding},
-  note      = {Available at: https://github.com/jpascher/T0-Time-Mass-Duality},
-  doi       = {10.5281/zenodo.17522475}
+ author  = {Johann Pascher},
+ title   = {Fundamental Fractal-Geometric Field Theory: 
+        The Universe as a Growing Brain (Narrative Edition)},
+ year   = {2025},
+ publisher = {},
+ note   = {Available at: https://github.com/jpascher/T0-Time-Mass-Duality},
+ doi    = {10.5281/zenodo.17522475}
 }
 ```
 
@@ -201,9 +201,9 @@ python complete_book_workflow.py
 
 ## 📧 Contact
 
-**Author:** Johann Pascher  
-**Institution:** HTL Leonding, Department of Communications Engineering, Austria  
-**Email:** johann.pascher@gmail.com  
+**Author:** Johann Pascher 
+**Institution:** , Department of Communications Engineering, Austria 
+**Email:** johann.pascher@gmail.com 
 **GitHub:** https://github.com/jpascher/T0-Time-Mass-Duality
 
 ## 📜 License
@@ -214,6 +214,7 @@ python complete_book_workflow.py
 
 **Note:** This narrative edition presents the same rigorous T0 theory as the technical documents, but makes it accessible to general audiences through the brain metaphor and popular science writing style. All mathematical content and predictions remain identical to the technical version.
 
-**For Technical Documentation:** See `/2/pdf/` directory for 213+ technical PDF documents.  
-**For Interactive Tools:** See `/2/html/` directory for web-based calculators and visualizations.  
+**For Technical Documentation:** See `/2/pdf/` directory for 213+ technical PDF documents. 
+**For Interactive Tools:** See `/2/html/` directory for web-based calculators and visualizations. 
 **For Main Repository:** See root `README.md` for complete project overview.
+

@@ -1,16 +1,16 @@
 import numpy as np
 from scipy.optimize import minimize_scalar
 
-xi_base = 4 / 30000  # ≈1.333e-4
+xi_base = 4 / 30000 # ≈1.333e-4
 xi_fit = 1.340e-4
 D_f_base = 3 - xi_base
 D_f_fit = 3 - xi_fit
 
 # Beispiel: CHSH-Loss-Funktion (aus 3.6)
 def chsh_loss(xi, obs=2.8275, N=73):
-    chsh_qm = 2 * np.sqrt(2)
-    damping = np.exp(-xi * np.log(N) / (3 - xi))
-    return (chsh_qm * damping - obs)**2
+  chsh_qm = 2 * np.sqrt(2)
+  damping = np.exp(-xi * np.log(N) / (3 - xi))
+  return (chsh_qm * damping - obs)**2
 
 loss_base = chsh_loss(xi_base)
 loss_fit = chsh_loss(xi_fit)

@@ -2,8 +2,8 @@
 
 ## 📚 Release: FFGFT Narrative Books (German & English)
 
-**Release Date:** January 1, 2026  
-**Version:** 1.0.0  
+**Release Date:** January 1, 2026 
+**Version:** 1.0.0 
 **DOI:** 10.5281/zenodo.17522475
 
 ---
@@ -90,13 +90,13 @@ All source files are available in `/2/narrative/` for academic citations and res
 **Citation:**
 ```bibtex
 @book{pascher2025_ffgft_narrative,
-  author    = {Johann Pascher},
-  title     = {Fundamental Fractal-Geometric Field Theory: 
-               The Universe as a Growing Brain},
-  year      = {2025},
-  publisher = {HTL Leonding},
-  note      = {Narrative Edition, 44 chapters},
-  doi       = {10.5281/zenodo.17522475}
+ author  = {Johann Pascher},
+ title   = {Fundamental Fractal-Geometric Field Theory: 
+        The Universe as a Growing Brain},
+ year   = {2025},
+ publisher = {},
+ note   = {Narrative Edition, 44 chapters},
+ doi    = {10.5281/zenodo.17522475}
 }
 ```
 
@@ -186,7 +186,7 @@ All source files are publicly available, enabling:
 
 ### Contributors
 - **Dr. Johann Pascher** - Theory development and all narrative chapters
-- **HTL Leonding** - Institutional support
+- **** - Institutional support
 - **Open source community** - LaTeX tools and feedback
 
 ### Tools and Technologies
@@ -219,13 +219,13 @@ All source files are publicly available, enabling:
 
 ## 📞 Contact & Support
 
-**Author:** Dr. Johann Pascher  
-**Institution:** HTL Leonding, Austria  
-**Department:** Communications Engineering  
-**Email:** johann.pascher@gmail.com  
+**Author:** Dr. Johann Pascher 
+**Institution:**  
+**Department:** Communications Engineering 
+**Email:** johann.pascher@gmail.com 
 
-**For Bug Reports:** Open issue on GitHub  
-**For Questions:** Email or GitHub discussions  
+**For Bug Reports:** Open issue on GitHub 
+**For Questions:** Email or GitHub discussions 
 **For Collaboration:** Contact via email
 
 ---
@@ -275,3 +275,4 @@ We invite researchers, students, educators, and curious readers to explore this 
 ---
 
 *"The universe is not just like a brain - it IS a brain, thinking itself into existence through the geometry of spacetime."* - T0 Theory
+

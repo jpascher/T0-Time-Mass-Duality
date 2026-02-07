@@ -3,7 +3,7 @@
 
 ### Document Classification
 - **Date**: June 1, 2025
-- **Researcher**: Johann Pascher  
+- **Researcher**: Johann Pascher 
 - **Institution**: Independent Quantum Research
 - **Hardware**: IBM Quantum Brisbane & Sherbrooke (127 Qubits)
 - **Experiment Type**: T0-Theory vs. Standard Quantum Mechanics Hardware Validation
@@ -52,24 +52,24 @@ The ξ-parameter emerges from Higgs sector physics and introduces systematic cor
 **Standard QM → T0-Theory Correspondence:**
 
 1. **Quantum States**
-   ```
-   Standard: |ψ⟩ = Σᵢ cᵢ|i⟩     →     T0: {E₀(x,t), E₁(x,t), ..., Eₙ(x,t)}
-   ```
+  ```
+  Standard: |ψ⟩ = Σᵢ cᵢ|i⟩   →   T0: {E₀(x,t), E₁(x,t), ..., Eₙ(x,t)}
+  ```
 
 2. **Probability Amplitudes**
-   ```
-   Standard: cᵢ = ⟨i|ψ⟩         →     T0: Eᵢ(x,t) = normalized energy field
-   ```
+  ```
+  Standard: cᵢ = ⟨i|ψ⟩     →   T0: Eᵢ(x,t) = normalized energy field
+  ```
 
 3. **Measurement Probabilities**
-   ```
-   Standard: P(i) = |cᵢ|²       →     T0: P(i) = [Eᵢ(x,t)]²
-   ```
+  ```
+  Standard: P(i) = |cᵢ|²    →   T0: P(i) = [Eᵢ(x,t)]²
+  ```
 
 4. **Unitary Evolution**
-   ```
-   Standard: |ψ(t)⟩ = U(t)|ψ(0)⟩  →  T0: E(x,t) = deterministic field evolution
-   ```
+  ```
+  Standard: |ψ(t)⟩ = U(t)|ψ(0)⟩ → T0: E(x,t) = deterministic field evolution
+  ```
 
 #### Gate Operation Mathematics
 
@@ -77,7 +77,7 @@ The ξ-parameter emerges from Higgs sector physics and introduces systematic cor
 
 **1. Hadamard Gate:**
 ```
-Input:  E = [E₀, E₁]
+Input: E = [E₀, E₁]
 Output: E' = [(E₀ + E₁)/√2 × (1+ξ), (E₀ - E₁)/√2 × (1+ξ)]
 ```
 
@@ -185,22 +185,22 @@ Enhancement = (S_T0 - S_QM)/S_QM × 10⁶ = 10 ppm
 1. **Fundamental Circumvention Mechanism**: T0 theory circumvents Bell's theorem through violation of measurement freedom, not through violation of locality or realism.
 
 2. **Superdeterministic Correlations**: Energy fields E(x,t) create correlations between:
-   - Measurement apparatus settings
-   - Quantum system properties  
-   - Detector orientations
-   - Environmental conditions
+  - Measurement apparatus settings
+  - Quantum system properties 
+  - Detector orientations
+  - Environmental conditions
 
 3. **Mathematical Justification**: The extended inequality accounts for these correlations:
-   ```
-   Standard Bell: Assumes measurement independence
-   T0 Extended: Includes apparatus-system correlations
-   ```
+  ```
+  Standard Bell: Assumes measurement independence
+  T0 Extended: Includes apparatus-system correlations
+  ```
 
 4. **Experimental Signature**: T0 predicts measurable violations of the standard Bell bound:
-   ```
-   Standard QM: |S| ≤ 2√2 ≈ 2.828 (Tsirelson bound)
-   T0 Theory: |S| can exceed 2.828 by ε_T0
-   ```
+  ```
+  Standard QM: |S| ≤ 2√2 ≈ 2.828 (Tsirelson bound)
+  T0 Theory: |S| can exceed 2.828 by ε_T0
+  ```
 
 #### 1.2.3 Response to Standard Objections
 
@@ -212,7 +212,7 @@ Enhancement = (S_T0 - S_QM)/S_QM × 10⁶ = 10 ppm
 
 *T0 Response:* T0 superdeterminism makes specific, testable predictions:
 - Extended Bell inequality violations
-- Perfect algorithmic repeatability  
+- Perfect algorithmic repeatability 
 - ξ-parameter systematic effects
 - Spatial energy field correlations
 
@@ -233,7 +233,7 @@ Enhancement = (S_T0 - S_QM)/S_QM × 10⁶ = 10 ppm
 **Complete experimental reproduction requires three executable Python files:**
 
 1. **`t0_quantum_simulator.py`** - Core T0-Theory implementation
-2. **`t0_ibm_hardware_test.py`** - IBM Quantum hardware integration  
+2. **`t0_ibm_hardware_test.py`** - IBM Quantum hardware integration 
 3. **`t0_validation_suite.py`** - Complete validation test suite
 
 **System Requirements:**
@@ -257,7 +257,7 @@ python t0_ibm_hardware_test.py
 
 ### 2.2 Hardware Specifications
 - **Primary Backend**: IBM Brisbane (127 qubits)
-- **Secondary Backend**: IBM Sherbrooke (127 qubits)  
+- **Secondary Backend**: IBM Sherbrooke (127 qubits) 
 - **Access Method**: IBM Quantum Platform via Qiskit Runtime
 - **Queue Position**: 3-4 pending jobs (excellent availability)
 
@@ -277,7 +277,7 @@ Qiskit Results: {'00': 0.4999999999999999, '11': 0.4999999999999999}
 Maximum difference: 0.00e+00
 T0 validation: ✅ PASSED
 
-🔬 DEUTSCH ALGORITHM VALIDATION  
+🔬 DEUTSCH ALGORITHM VALIDATION 
 CONSTANT: T0=0, Qiskit=0, Expected=0
 BALANCED: T0=1, Qiskit=1, Expected=1
 Deutsch validation: ✅ PASSED
@@ -296,7 +296,7 @@ python t0_ibm_hardware_test.py
 
 Expected Process:
 1. Connect to IBM Quantum Platform
-2. List available quantum computers  
+2. List available quantum computers 
 3. Select optimal backend (lowest queue)
 4. Generate T0 predictions
 5. Execute Bell state circuit on hardware
@@ -312,10 +312,10 @@ Expected Process:
 #### IBM Brisbane Results (2048 shots):
 | State | T0 Prediction | IBM Hardware | Deviation | Deviation % |
 |-------|---------------|--------------|-----------|-------------|
-| \|00⟩ | 0.500000      | 0.473633     | 0.026367  | 2.637%      |
-| \|01⟩ | 0.000000      | 0.010742     | 0.010742  | -           |
-| \|10⟩ | 0.000000      | 0.017578     | 0.017578  | -           |
-| \|11⟩ | 0.500000      | 0.498047     | 0.001953  | 0.195%      |
+| \|00⟩ | 0.500000   | 0.473633   | 0.026367 | 2.637%   |
+| \|01⟩ | 0.000000   | 0.010742   | 0.010742 | -      |
+| \|10⟩ | 0.000000   | 0.017578   | 0.017578 | -      |
+| \|11⟩ | 0.500000   | 0.498047   | 0.001953 | 0.195%   |
 
 **Bell State Fidelity**: 97.168% (0.473633 + 0.498047)
 
@@ -329,9 +329,9 @@ Expected Process:
 #### IBM Sherbrooke Results (3 identical runs):
 | Run | P(00) Measured | Deviation from Mean |
 |-----|----------------|-------------------|
-| 1   | 0.500000       | +0.013021         |
-| 2   | 0.464844       | -0.022135         |
-| 3   | 0.496094       | +0.009115         |
+| 1  | 0.500000    | +0.013021     |
+| 2  | 0.464844    | -0.022135     |
+| 3  | 0.496094    | +0.009115     |
 
 **Statistical Analysis**:
 - **Mean P(00)**: 0.486979
@@ -353,36 +353,36 @@ Expected Process:
 #### VALIDATED ASPECTS:
 
 1. **Hardware Compatibility**
-   - T0 algorithms execute successfully on IBM quantum hardware
-   - No fundamental incompatibilities detected
-   - Successful completion on both Brisbane and Sherbrooke backends
+  - T0 algorithms execute successfully on IBM quantum hardware
+  - No fundamental incompatibilities detected
+  - Successful completion on both Brisbane and Sherbrooke backends
 
-2. **Algorithmic Equivalence**  
-   - T0 predictions within experimental error margins
-   - Bell state generation matches theoretical expectations
-   - Quantum circuit execution behaves as predicted
+2. **Algorithmic Equivalence** 
+  - T0 predictions within experimental error margins
+  - Bell state generation matches theoretical expectations
+  - Quantum circuit execution behaves as predicted
 
 3. **Enhanced Repeatability**
-   - Observed variance (0.000248) lower than typical
-   - Multiple runs show improved consistency
-   - Evidence supports T0's deterministic advantages
+  - Observed variance (0.000248) lower than typical
+  - Multiple runs show improved consistency
+  - Evidence supports T0's deterministic advantages
 
 4. **Precision Consistency**
-   - Hardware results align with T0 theoretical framework
-   - No systematic deviations beyond hardware noise
-   - Bell fidelity (97.17%) good for NISQ devices
+  - Hardware results align with T0 theoretical framework
+  - No systematic deviations beyond hardware noise
+  - Bell fidelity (97.17%) good for NISQ devices
 
 #### ⚠️ **LIMITATIONS IDENTIFIED**:
 
 1. **ξ-Parameter Detection**
-   - Predicted 0.001% effects below hardware noise floor (~2.8%)
-   - Current NISQ hardware insufficient for ξ-signature detection
-   - Requires fault-tolerant quantum computers for verification
+  - Predicted 0.001% effects below hardware noise floor (~2.8%)
+  - Current NISQ hardware insufficient for ξ-signature detection
+  - Requires fault-tolerant quantum computers for verification
 
 2. **Precision Threshold**
-   - T0's most distinctive predictions require sub-ppm precision
-   - Hardware noise masks subtle ξ-parameter corrections
-   - Statistical significance limited by current technology
+  - T0's most distinctive predictions require sub-ppm precision
+  - Hardware noise masks subtle ξ-parameter corrections
+  - Statistical significance limited by current technology
 
 ### 4.2 Extended Bell Inequality Analysis
 
@@ -411,25 +411,25 @@ The T0-predicted 10 ppm enhancement is **280× smaller** than the observed hardw
 **T0 Superdeterministic Predictions vs. Hardware Results:**
 
 1. **Measurement Setting Correlations**
-   ```
-   T0 Prediction: Subtle correlations between "random" measurement choices
-   Hardware Reality: Settings controlled by classical software (inherently deterministic)
-   Assessment: Hardware architecture consistent with T0 superdeterminism
-   ```
+  ```
+  T0 Prediction: Subtle correlations between "random" measurement choices
+  Hardware Reality: Settings controlled by classical software (inherently deterministic)
+  Assessment: Hardware architecture consistent with T0 superdeterminism
+  ```
 
 2. **Apparatus-System Coupling**
-   ```
-   T0 Prediction: Energy fields couple measurement apparatus with quantum system
-   Hardware Evidence: Circuit compilation and gate optimization create system-dependent correlations
-   Assessment: ✅ Observable apparatus-system coupling present
-   ```
+  ```
+  T0 Prediction: Energy fields couple measurement apparatus with quantum system
+  Hardware Evidence: Circuit compilation and gate optimization create system-dependent correlations
+  Assessment: ✅ Observable apparatus-system coupling present
+  ```
 
 3. **Perfect Repeatability**
-   ```
-   T0 Prediction: Zero variance under identical conditions
-   Hardware Results: Variance = 0.000248 (very low, ~100× better than typical)
-   Assessment: ✅ Enhanced repeatability consistent with T0 superdeterminism
-   ```
+  ```
+  T0 Prediction: Zero variance under identical conditions
+  Hardware Results: Variance = 0.000248 (very low, ~100× better than typical)
+  Assessment: ✅ Enhanced repeatability consistent with T0 superdeterminism
+  ```
 
 #### 4.2.3 Bell Inequality Circumvention Mechanism
 
@@ -440,27 +440,27 @@ The hardware validation provides evidence for T0's proposed mechanism:
 ```
 Standard Bell Assumptions:
 1. Locality ✓ (maintained in T0)
-2. Realism ✓ (maintained in T0)  
+2. Realism ✓ (maintained in T0) 
 3. Measurement freedom ❌ (violated by T0 through energy field correlations)
 ```
 
 **Observed Evidence for Measurement Freedom Violation:**
 
 1. **Circuit Compilation Determinism**: Hardware execution depends on:
-   - Backend calibration state
-   - Queue position and timing
-   - Environmental conditions
-   - Previous job history
+  - Backend calibration state
+  - Queue position and timing
+  - Environmental conditions
+  - Previous job history
 
 2. **Energy Field Spatial Correlations**: Hardware shows:
-   - Gate fidelity variations across chip topology
-   - Crosstalk between adjacent qubits
-   - Calibration drift affecting measurement outcomes
+  - Gate fidelity variations across chip topology
+  - Crosstalk between adjacent qubits
+  - Calibration drift affecting measurement outcomes
 
 3. **Enhanced Determinism**: Observed repeatability variance (0.000248) suggests:
-   - Reduced randomness compared to standard QM expectations
-   - Systematic correlations in measurement processes
-   - Hardware behavior more deterministic than theoretical models predict
+  - Reduced randomness compared to standard QM expectations
+  - Systematic correlations in measurement processes
+  - Hardware behavior more deterministic than theoretical models predict
 
 #### 4.2.4 Implications for Bell Test Interpretation
 
@@ -478,23 +478,23 @@ Standard Bell Assumptions:
 **Recommendations for T0-Aware Bell Testing:**
 
 1. **Higher Precision Requirements**:
-   ```
-   Required sensitivity: 10 ppm (T0 enhancement)
-   Current hardware precision: ~2.8% noise
-   Improvement needed: 280× better precision
-   ```
+  ```
+  Required sensitivity: 10 ppm (T0 enhancement)
+  Current hardware precision: ~2.8% noise
+  Improvement needed: 280× better precision
+  ```
 
 2. **Superdeterminism Detection Protocols**:
-   - Statistical analysis of "random" number generator outputs
-   - Correlation analysis between measurement choices and system properties
-   - Long-term repeatability studies across multiple hardware calibrations
+  - Statistical analysis of "random" number generator outputs
+  - Correlation analysis between measurement choices and system properties
+  - Long-term repeatability studies across multiple hardware calibrations
 
 3. **Extended Bell Inequality Experiments**:
-   ```
-   Target measurement: |S| > 2.828427 (QM Tsirelson bound)
-   T0 prediction: |S| ≈ 2.828455 ± experimental error
-   Required precision: σ < 1×10⁻⁵ systematic error
-   ```
+  ```
+  Target measurement: |S| > 2.828427 (QM Tsirelson bound)
+  T0 prediction: |S| ≈ 2.828455 ± experimental error
+  Required precision: σ < 1×10⁻⁵ systematic error
+  ```
 
 **Verdict**: While current hardware cannot detect T0's extended Bell inequality enhancements due to noise limitations, the observed enhanced repeatability and apparatus correlations provide circumstantial evidence supporting T0's superdeterministic framework.
 
@@ -561,48 +561,48 @@ This validation challenges fundamental assumptions about quantum mechanics:
 ### 7.1 Immediate Opportunities (2025-2026)
 
 1. **Extended Algorithm Testing**
-   - Grover's algorithm on hardware
-   - Quantum Fourier Transform validation
-   - Shor's algorithm components
+  - Grover's algorithm on hardware
+  - Quantum Fourier Transform validation
+  - Shor's algorithm components
 
 2. **Statistical Significance**
-   - Larger shot counts (8192 maximum)
-   - Multiple backend comparisons  
-   - Long-term repeatability studies
+  - Larger shot counts (8192 maximum)
+  - Multiple backend comparisons 
+  - Long-term repeatability studies
 
 3. **Error Mitigation**
-   - Zero-noise extrapolation for ξ-parameter detection
-   - Error correction protocols for T0-specific tests
-   - Calibration optimization for precision measurements
+  - Zero-noise extrapolation for ξ-parameter detection
+  - Error correction protocols for T0-specific tests
+  - Calibration optimization for precision measurements
 
 ### 7.2 Medium-term Prospects (2026-2030)
 
 1. **Improved Hardware Precision**
-   - Next-generation IBM quantum computers
-   - Error rates approaching 0.1%
-   - Dedicated T0-optimized quantum circuits
+  - Next-generation IBM quantum computers
+  - Error rates approaching 0.1%
+  - Dedicated T0-optimized quantum circuits
 
 2. **ξ-Parameter Detection**
-   - Sub-percent precision Bell inequality tests
-   - Systematic search for 10 ppm Bell enhancement
-   - Multi-qubit ξ-signature experiments
+  - Sub-percent precision Bell inequality tests
+  - Systematic search for 10 ppm Bell enhancement
+  - Multi-qubit ξ-signature experiments
 
 3. **Theoretical Extensions**
-   - T0-specific quantum algorithms
-   - Deterministic quantum error correction
-   - T0-optimized quantum computer architectures
+  - T0-specific quantum algorithms
+  - Deterministic quantum error correction
+  - T0-optimized quantum computer architectures
 
 ### 7.3 Long-term Vision (2030+)
 
 1. **Fault-tolerant Validation**
-   - Error-corrected quantum computers
-   - Part-per-million precision measurements
-   - Definitive ξ-parameter confirmation
+  - Error-corrected quantum computers
+  - Part-per-million precision measurements
+  - Definitive ξ-parameter confirmation
 
 2. **Technological Applications**
-   - T0-enhanced quantum algorithms
-   - Deterministic quantum simulations
-   - New quantum computing paradigms
+  - T0-enhanced quantum algorithms
+  - Deterministic quantum simulations
+  - New quantum computing paradigms
 
 ---
 
@@ -612,10 +612,10 @@ This validation challenges fundamental assumptions about quantum mechanics:
 
 **Summary of Achievements**: T0-Theory has passed experimental testing on quantum hardware, demonstrating:
 
-- **Hardware Compatibility**: T0 algorithms execute on 127-qubit IBM quantum computers  
-- **Theoretical Consistency**: All predictions within experimental error margins  
-- **Enhanced Performance**: Improved repeatability compared to standard quantum mechanics  
-- **Scientific Rigor**: Comprehensive testing across multiple quantum backends  
+- **Hardware Compatibility**: T0 algorithms execute on 127-qubit IBM quantum computers 
+- **Theoretical Consistency**: All predictions within experimental error margins 
+- **Enhanced Performance**: Improved repeatability compared to standard quantum mechanics 
+- **Scientific Rigor**: Comprehensive testing across multiple quantum backends 
 
 ### 8.2 Critical Analysis of Extended Bell Inequality
 
@@ -627,7 +627,7 @@ This validation challenges fundamental assumptions about quantum mechanics:
 
 Bell's theorem relies on three assumptions:
 1. **Locality** ✅ (T0 maintains)
-2. **Realism** ✅ (T0 maintains)  
+2. **Realism** ✅ (T0 maintains) 
 3. **Measurement Freedom** ❌ (T0 explicitly violates)
 
 **The Mathematical Resolution:**
@@ -659,39 +659,39 @@ Where:
 **Our IBM quantum hardware experiments provide evidence supporting T0's extended framework:**
 
 1. **Enhanced Repeatability** (Variance = 0.000248):
-   - Standard QM predicts statistical variation
-   - T0 predicts enhanced determinism through energy field correlations
-   - ✅ Observed: Superior repeatability consistent with T0
+  - Standard QM predicts statistical variation
+  - T0 predicts enhanced determinism through energy field correlations
+  - ✅ Observed: Superior repeatability consistent with T0
 
 2. **Apparatus-System Correlations**:
-   - Circuit compilation creates systematic correlations
-   - Hardware calibration couples measurement apparatus with quantum system
-   - ✅ Observed: Clear apparatus-dependent measurement outcomes
+  - Circuit compilation creates systematic correlations
+  - Hardware calibration couples measurement apparatus with quantum system
+  - ✅ Observed: Clear apparatus-dependent measurement outcomes
 
 3. **Spatial Field Structure**:
-   - T0 predicts spatially extended energy fields E(x,t)
-   - Quantum hardware shows position-dependent gate fidelities
-   - ✅ Observed: Spatial correlations in hardware performance
+  - T0 predicts spatially extended energy fields E(x,t)
+  - Quantum hardware shows position-dependent gate fidelities
+  - ✅ Observed: Spatial correlations in hardware performance
 
 #### 8.2.3 Testable Predictions of Extended Bell Inequality
 
 **T0 makes specific, falsifiable predictions that distinguish it from standard QM:**
 
 1. **Measurable Bell Enhancement**:
-   ```
-   Standard QM: |S| ≤ 2√2 ≈ 2.828427 (Tsirelson bound)
-   T0 Prediction: |S| ≤ 2.828455 (10 ppm enhancement)
-   ```
+  ```
+  Standard QM: |S| ≤ 2√2 ≈ 2.828427 (Tsirelson bound)
+  T0 Prediction: |S| ≤ 2.828455 (10 ppm enhancement)
+  ```
 
 2. **Systematic Measurement Correlations**:
-   - "Random" measurement setting generators show subtle patterns
-   - Correlation between measurement choices and system properties
-   - Environmental coupling affects both system and measurement apparatus
+  - "Random" measurement setting generators show subtle patterns
+  - Correlation between measurement choices and system properties
+  - Environmental coupling affects both system and measurement apparatus
 
 3. **Hardware-Dependent Bell Violations**:
-   - Different quantum computers should show different ε_T0 values
-   - Calibration changes should affect Bell test outcomes
-   - Spatial position of qubits should influence correlations
+  - Different quantum computers should show different ε_T0 values
+  - Calibration changes should affect Bell test outcomes
+  - Spatial position of qubits should influence correlations
 
 #### 8.2.4 Scientific Rigor and Falsifiability
 
@@ -704,7 +704,7 @@ Where:
 
 **Falsification Criteria:**
 - If Bell violations never exceed QM Tsirelson bound: T0 disproven
-- If repeatability shows pure statistical variation: T0 disproven  
+- If repeatability shows pure statistical variation: T0 disproven 
 - If no apparatus-system correlations detected: T0 disproven
 - If hardware shows no spatial energy field structure: T0 disproven
 
@@ -748,7 +748,7 @@ Where:
 The T0-energy field formulation has been validated experimentally on quantum hardware. While the most subtle predictions (ξ-parameter effects) require higher precision hardware, the core theoretical framework demonstrates:
 
 - **Mathematical Consistency**: Confirmed through comprehensive simulation
-- **Algorithmic Equivalence**: Verified on quantum hardware  
+- **Algorithmic Equivalence**: Verified on quantum hardware 
 - **Enhanced Determinism**: Demonstrated through repeatability analysis
 - **Hardware Viability**: Proven on quantum computers
 
@@ -770,7 +770,7 @@ The T0-energy field formulation has been validated experimentally on quantum har
 
 ### Development Process
 - **Simulation Validation**: Complete verification against Qiskit simulation
-- **Algorithm Portfolio**: From basic gates through advanced quantum algorithms  
+- **Algorithm Portfolio**: From basic gates through advanced quantum algorithms 
 - **Systematic Testing**: Comprehensive validation across multiple test vectors
 
 ---
@@ -787,7 +787,7 @@ Backend: ibm_brisbane (127 qubits)
 
 Measurement Results:
 |00⟩: 970 counts (47.3633%)
-|01⟩: 22 counts (1.0742%)  
+|01⟩: 22 counts (1.0742%) 
 |10⟩: 36 counts (1.7578%)
 |11⟩: 1020 counts (49.8047%)
 
@@ -801,7 +801,7 @@ Backend: ibm_sherbrooke (127 qubits)
 Test Protocol: 3 × 1024 shots
 
 Run 1: P(00) = 0.500000
-Run 2: P(00) = 0.464844  
+Run 2: P(00) = 0.464844 
 Run 3: P(00) = 0.496094
 
 Statistical Analysis:
@@ -825,75 +825,75 @@ Experimentally validated on IBM Brisbane & Sherbrooke (127 qubits)
 import numpy as np
 
 class T0QuantumSimulator:
-    """T0-Theory Quantum Simulator with ξ-parameter corrections"""
+  """T0-Theory Quantum Simulator with ξ-parameter corrections"""
+  
+  def __init__(self, num_qubits, xi=1.0e-5):
+    self.n = num_qubits
+    self.s = 1 << num_qubits # 2^n states
+    self.xi = xi
+    self.amplitudes = [1.0] + [0.0] * (self.s - 1) # Start in |0...0⟩
+    self.history = []
     
-    def __init__(self, num_qubits, xi=1.0e-5):
-        self.n = num_qubits
-        self.s = 1 << num_qubits  # 2^n states
-        self.xi = xi
-        self.amplitudes = [1.0] + [0.0] * (self.s - 1)  # Start in |0...0⟩
-        self.history = []
-        
-    def normalize(self):
-        """Normalize amplitudes"""
-        norm = np.sqrt(sum(amp * amp for amp in self.amplitudes))
-        if norm > 1e-15:
-            self.amplitudes = [amp / norm for amp in self.amplitudes]
+  def normalize(self):
+    """Normalize amplitudes"""
+    norm = np.sqrt(sum(amp * amp for amp in self.amplitudes))
+    if norm > 1e-15:
+      self.amplitudes = [amp / norm for amp in self.amplitudes]
+  
+  def hadamard(self, qubit):
+    """T0-corrected Hadamard gate"""
+    self.history.append(f"H({qubit})")
+    new_amps = [0.0] * self.s
+    mask = 1 << qubit
+    correction = 1 + self.xi
+    inv_sqrt2 = 1 / np.sqrt(2)
     
-    def hadamard(self, qubit):
-        """T0-corrected Hadamard gate"""
-        self.history.append(f"H({qubit})")
-        new_amps = [0.0] * self.s
-        mask = 1 << qubit
-        correction = 1 + self.xi
-        inv_sqrt2 = 1 / np.sqrt(2)
+    for i in range(self.s):
+      amp = self.amplitudes[i]
+      if abs(amp) < 1e-15:
+        continue
         
-        for i in range(self.s):
-            amp = self.amplitudes[i]
-            if abs(amp) < 1e-15:
-                continue
-                
-            if i & mask:  # Qubit is |1⟩
-                new_amps[i & ~mask] += amp * inv_sqrt2 * correction
-                new_amps[i] -= amp * inv_sqrt2 * correction
-            else:  # Qubit is |0⟩
-                new_amps[i] += amp * inv_sqrt2 * correction
-                new_amps[i | mask] += amp * inv_sqrt2 * correction
-        
-        self.amplitudes = new_amps
-        self.normalize()
+      if i & mask: # Qubit is |1⟩
+        new_amps[i & ~mask] += amp * inv_sqrt2 * correction
+        new_amps[i] -= amp * inv_sqrt2 * correction
+      else: # Qubit is |0⟩
+        new_amps[i] += amp * inv_sqrt2 * correction
+        new_amps[i | mask] += amp * inv_sqrt2 * correction
     
-    def cnot(self, control, target):
-        """T0-corrected CNOT gate"""
-        self.history.append(f"CNOT({control},{target})")
-        new_amps = [0.0] * self.s
-        ctrl_mask = 1 << control
-        targ_mask = 1 << target
-        correction = 1 + self.xi
-        
-        for i in range(self.s):
-            amp = self.amplitudes[i]
-            if abs(amp) < 1e-15:
-                continue
-                
-            if i & ctrl_mask:  # Control is |1⟩: flip target
-                new_state = i ^ targ_mask
-                new_amps[new_state] += amp * correction
-            else:  # Control is |0⟩: no change
-                new_amps[i] += amp * correction
-        
-        self.amplitudes = new_amps
-        self.normalize()
+    self.amplitudes = new_amps
+    self.normalize()
+  
+  def cnot(self, control, target):
+    """T0-corrected CNOT gate"""
+    self.history.append(f"CNOT({control},{target})")
+    new_amps = [0.0] * self.s
+    ctrl_mask = 1 << control
+    targ_mask = 1 << target
+    correction = 1 + self.xi
     
-    def get_probabilities(self):
-        """Get measurement probabilities"""
-        probs = {}
-        for i in range(self.s):
-            prob = self.amplitudes[i] * self.amplitudes[i]
-            if prob > 1e-12:
-                binary = format(i, f'0{self.n}b')
-                probs[binary] = prob
-        return probs
+    for i in range(self.s):
+      amp = self.amplitudes[i]
+      if abs(amp) < 1e-15:
+        continue
+        
+      if i & ctrl_mask: # Control is |1⟩: flip target
+        new_state = i ^ targ_mask
+        new_amps[new_state] += amp * correction
+      else: # Control is |0⟩: no change
+        new_amps[i] += amp * correction
+    
+    self.amplitudes = new_amps
+    self.normalize()
+  
+  def get_probabilities(self):
+    """Get measurement probabilities"""
+    probs = {}
+    for i in range(self.s):
+      prob = self.amplitudes[i] * self.amplitudes[i]
+      if prob > 1e-12:
+        binary = format(i, f'0{self.n}b')
+        probs[binary] = prob
+    return probs
 ```
 
 #### B.2 Complete IBM Hardware Test Script
@@ -916,139 +916,139 @@ from datetime import datetime
 from t0_quantum_simulator import T0QuantumSimulator
 
 class T0IBMHardwareTest:
-    """Test T0-theory predictions against real IBM Quantum hardware"""
+  """Test T0-theory predictions against real IBM Quantum hardware"""
+  
+  def __init__(self, api_token):
+    self.service = QiskitRuntimeService(
+      channel="ibm_quantum",
+      token=api_token
+    )
     
-    def __init__(self, api_token):
-        self.service = QiskitRuntimeService(
-            channel="ibm_quantum",
-            token=api_token
-        )
-        
-    def select_best_backend(self):
-        """Select optimal IBM Quantum backend"""
-        backends = self.service.backends(operational=True, simulator=False)
-        suitable_backends = [b for b in backends if b.configuration().n_qubits >= 2]
-        
-        if not suitable_backends:
-            return None
-        
-        # Choose backend with least pending jobs
-        best_backend = min(suitable_backends, key=lambda b: b.status().pending_jobs)
-        
-        print(f"🎯 SELECTED BACKEND: {best_backend.name}")
-        print(f"   Qubits: {best_backend.configuration().n_qubits}")
-        print(f"   Pending jobs: {best_backend.status().pending_jobs}")
-        
-        return best_backend
+  def select_best_backend(self):
+    """Select optimal IBM Quantum backend"""
+    backends = self.service.backends(operational=True, simulator=False)
+    suitable_backends = [b for b in backends if b.configuration().n_qubits >= 2]
     
-    def create_bell_circuit(self):
-        """Create Bell state test circuit"""
-        qc = QuantumCircuit(2, 2)
-        qc.h(0)
-        qc.cx(0, 1)
-        qc.measure_all()
-        return qc
+    if not suitable_backends:
+      return None
     
-    def run_bell_hardware_test(self, shots=2048):
-        """Execute Bell state test on IBM hardware"""
-        print(f"\n🚀 RUNNING T0 BELL TEST ON IBM QUANTUM HARDWARE")
-        print("=" * 60)
-        
-        # 1. Generate T0 predictions
-        t0_sim = T0QuantumSimulator(2, xi=1.0e-5)
-        t0_sim.hadamard(0)
-        t0_sim.cnot(0, 1)
-        t0_predictions = t0_sim.get_probabilities()
-        
-        print(f"T0-Theory Prediction (ξ = {t0_sim.xi}):")
-        print(f"  P(00) = {t0_predictions.get('00', 0):.10f}")
-        print(f"  P(11) = {t0_predictions.get('11', 0):.10f}")
-        
-        # 2. Execute on IBM hardware
-        backend = self.select_best_backend()
-        if not backend:
-            return None
-        
-        qc = self.create_bell_circuit()
-        qc_transpiled = transpile(qc, backend, optimization_level=3)
-        
-        print(f"📡 Executing on {backend.name} with {shots} shots...")
-        print(f"⏰ Start time: {datetime.now().strftime('%H:%M:%S')}")
-        
-        sampler = SamplerV2(mode=backend)
-        job = sampler.run([qc_transpiled], shots=shots)
-        
-        print(f"🔄 Job ID: {job.job_id()}")
-        print("⏳ Waiting for results...")
-        
-        result = job.result()
-        counts = result[0].data.meas.get_counts()
-        total_shots = sum(counts.values())
-        
-        # Convert to probabilities
-        hardware_probs = {}
-        for outcome, count in counts.items():
-            hardware_probs[outcome] = count / total_shots
-        
-        print(f"\n📊 IBM QUANTUM HARDWARE RESULTS:")
-        print(f"  Total shots: {total_shots}")
-        for outcome in ['00', '01', '10', '11']:
-            prob = hardware_probs.get(outcome, 0)
-            count = counts.get(outcome, 0)
-            print(f"  P({outcome}) = {prob:.6f} ({count} counts)")
-        
-        # 3. Analysis
-        print(f"\n🔬 T0-THEORY vs IBM HARDWARE COMPARISON:")
-        print("=" * 50)
-        
-        total_deviation = 0
-        for state in ['00', '11']:
-            t0_prob = t0_predictions.get(state, 0)
-            hw_prob = hardware_probs.get(state, 0)
-            deviation = abs(t0_prob - hw_prob)
-            deviation_percent = deviation * 100
-            total_deviation += deviation_percent
-            
-            print(f"State |{state}⟩:")
-            print(f"  T0 prediction: {t0_prob:.6f}")
-            print(f"  IBM hardware:  {hw_prob:.6f}")
-            print(f"  Deviation:     {deviation:.6f} ({deviation_percent:.3f}%)")
-        
-        # 4. Validation assessment
-        bell_fidelity = hardware_probs.get('00', 0) + hardware_probs.get('11', 0)
-        
-        print(f"\n🎯 T0-THEORY HARDWARE VALIDATION:")
-        print("=" * 50)
-        print(f"Bell state fidelity: {bell_fidelity:.6f}")
-        print(f"Total deviation: {total_deviation:.3f}%")
-        
-        return {
-            't0_predictions': t0_predictions,
-            'hardware_results': hardware_probs,
-            'backend_name': backend.name,
-            'bell_fidelity': bell_fidelity,
-            'total_deviation_percent': total_deviation,
-            'job_id': job.job_id(),
-            'timestamp': datetime.now().isoformat()
-        }
+    # Choose backend with least pending jobs
+    best_backend = min(suitable_backends, key=lambda b: b.status().pending_jobs)
+    
+    print(f"🎯 SELECTED BACKEND: {best_backend.name}")
+    print(f"  Qubits: {best_backend.configuration().n_qubits}")
+    print(f"  Pending jobs: {best_backend.status().pending_jobs}")
+    
+    return best_backend
+  
+  def create_bell_circuit(self):
+    """Create Bell state test circuit"""
+    qc = QuantumCircuit(2, 2)
+    qc.h(0)
+    qc.cx(0, 1)
+    qc.measure_all()
+    return qc
+  
+  def run_bell_hardware_test(self, shots=2048):
+    """Execute Bell state test on IBM hardware"""
+    print(f"\n🚀 RUNNING T0 BELL TEST ON IBM QUANTUM HARDWARE")
+    print("=" * 60)
+    
+    # 1. Generate T0 predictions
+    t0_sim = T0QuantumSimulator(2, xi=1.0e-5)
+    t0_sim.hadamard(0)
+    t0_sim.cnot(0, 1)
+    t0_predictions = t0_sim.get_probabilities()
+    
+    print(f"T0-Theory Prediction (ξ = {t0_sim.xi}):")
+    print(f" P(00) = {t0_predictions.get('00', 0):.10f}")
+    print(f" P(11) = {t0_predictions.get('11', 0):.10f}")
+    
+    # 2. Execute on IBM hardware
+    backend = self.select_best_backend()
+    if not backend:
+      return None
+    
+    qc = self.create_bell_circuit()
+    qc_transpiled = transpile(qc, backend, optimization_level=3)
+    
+    print(f"📡 Executing on {backend.name} with {shots} shots...")
+    print(f"⏰ Start time: {datetime.now().strftime('%H:%M:%S')}")
+    
+    sampler = SamplerV2(mode=backend)
+    job = sampler.run([qc_transpiled], shots=shots)
+    
+    print(f"🔄 Job ID: {job.job_id()}")
+    print("⏳ Waiting for results...")
+    
+    result = job.result()
+    counts = result[0].data.meas.get_counts()
+    total_shots = sum(counts.values())
+    
+    # Convert to probabilities
+    hardware_probs = {}
+    for outcome, count in counts.items():
+      hardware_probs[outcome] = count / total_shots
+    
+    print(f"\n📊 IBM QUANTUM HARDWARE RESULTS:")
+    print(f" Total shots: {total_shots}")
+    for outcome in ['00', '01', '10', '11']:
+      prob = hardware_probs.get(outcome, 0)
+      count = counts.get(outcome, 0)
+      print(f" P({outcome}) = {prob:.6f} ({count} counts)")
+    
+    # 3. Analysis
+    print(f"\n🔬 T0-THEORY vs IBM HARDWARE COMPARISON:")
+    print("=" * 50)
+    
+    total_deviation = 0
+    for state in ['00', '11']:
+      t0_prob = t0_predictions.get(state, 0)
+      hw_prob = hardware_probs.get(state, 0)
+      deviation = abs(t0_prob - hw_prob)
+      deviation_percent = deviation * 100
+      total_deviation += deviation_percent
+      
+      print(f"State |{state}⟩:")
+      print(f" T0 prediction: {t0_prob:.6f}")
+      print(f" IBM hardware: {hw_prob:.6f}")
+      print(f" Deviation:   {deviation:.6f} ({deviation_percent:.3f}%)")
+    
+    # 4. Validation assessment
+    bell_fidelity = hardware_probs.get('00', 0) + hardware_probs.get('11', 0)
+    
+    print(f"\n🎯 T0-THEORY HARDWARE VALIDATION:")
+    print("=" * 50)
+    print(f"Bell state fidelity: {bell_fidelity:.6f}")
+    print(f"Total deviation: {total_deviation:.3f}%")
+    
+    return {
+      't0_predictions': t0_predictions,
+      'hardware_results': hardware_probs,
+      'backend_name': backend.name,
+      'bell_fidelity': bell_fidelity,
+      'total_deviation_percent': total_deviation,
+      'job_id': job.job_id(),
+      'timestamp': datetime.now().isoformat()
+    }
 
 def main():
-    """Main execution function"""
-    # Insert your IBM Quantum API token here
-    API_TOKEN = "YOUR_IBM_QUANTUM_TOKEN_HERE"
-    
-    # Initialize and run test
-    tester = T0IBMHardwareTest(API_TOKEN)
-    results = tester.run_bell_hardware_test(shots=2048)
-    
-    if results:
-        print(f"\n🎉 HARDWARE VALIDATION COMPLETED!")
-        print(f"Backend: {results['backend_name']}")
-        print(f"Fidelity: {results['bell_fidelity']:.6f}")
-        print(f"Job ID: {results['job_id']}")
+  """Main execution function"""
+  # Insert your IBM Quantum API token here
+  API_TOKEN = "YOUR_IBM_QUANTUM_TOKEN_HERE"
+  
+  # Initialize and run test
+  tester = T0IBMHardwareTest(API_TOKEN)
+  results = tester.run_bell_hardware_test(shots=2048)
+  
+  if results:
+    print(f"\n🎉 HARDWARE VALIDATION COMPLETED!")
+    print(f"Backend: {results['backend_name']}")
+    print(f"Fidelity: {results['bell_fidelity']:.6f}")
+    print(f"Job ID: {results['job_id']}")
 
 if __name__ == "__main__":
-    main()
+  main()
 ```
 
 #### B.3 Complete Validation Test Suite
@@ -1067,120 +1067,120 @@ from qiskit.quantum_info import Statevector
 from t0_quantum_simulator import T0QuantumSimulator
 
 def validate_bell_states():
-    """Validate T0 vs Qiskit Bell states"""
-    print("🔬 BELL STATE VALIDATION")
-    print("=" * 40)
-    
-    # T0 implementation
-    t0_bell = T0QuantumSimulator(2, xi=1.0e-5)
-    t0_bell.hadamard(0)
-    t0_bell.cnot(0, 1)
-    t0_probs = t0_bell.get_probabilities()
-    
-    # Qiskit reference
-    qc = QuantumCircuit(2)
-    qc.h(0)
-    qc.cx(0, 1)
-    statevector = Statevector.from_instruction(qc)
-    
-    qiskit_probs = {}
-    for i, amp in enumerate(statevector.data):
-        if abs(amp)**2 > 1e-12:
-            binary = format(i, '02b')
-            qiskit_probs[binary] = abs(amp)**2
-    
-    print(f"T0 Results: {t0_probs}")
-    print(f"Qiskit Results: {qiskit_probs}")
-    
-    # Comparison
-    max_diff = max(abs(t0_probs.get('00', 0) - qiskit_probs.get('00', 0)),
-                   abs(t0_probs.get('11', 0) - qiskit_probs.get('11', 0)))
-    
-    print(f"Maximum difference: {max_diff:.2e}")
-    print(f"T0 validation: {'✅ PASSED' if max_diff < 1e-10 else '❌ FAILED'}")
-    
-    return max_diff < 1e-10
+  """Validate T0 vs Qiskit Bell states"""
+  print("🔬 BELL STATE VALIDATION")
+  print("=" * 40)
+  
+  # T0 implementation
+  t0_bell = T0QuantumSimulator(2, xi=1.0e-5)
+  t0_bell.hadamard(0)
+  t0_bell.cnot(0, 1)
+  t0_probs = t0_bell.get_probabilities()
+  
+  # Qiskit reference
+  qc = QuantumCircuit(2)
+  qc.h(0)
+  qc.cx(0, 1)
+  statevector = Statevector.from_instruction(qc)
+  
+  qiskit_probs = {}
+  for i, amp in enumerate(statevector.data):
+    if abs(amp)**2 > 1e-12:
+      binary = format(i, '02b')
+      qiskit_probs[binary] = abs(amp)**2
+  
+  print(f"T0 Results: {t0_probs}")
+  print(f"Qiskit Results: {qiskit_probs}")
+  
+  # Comparison
+  max_diff = max(abs(t0_probs.get('00', 0) - qiskit_probs.get('00', 0)),
+          abs(t0_probs.get('11', 0) - qiskit_probs.get('11', 0)))
+  
+  print(f"Maximum difference: {max_diff:.2e}")
+  print(f"T0 validation: {'✅ PASSED' if max_diff < 1e-10 else '❌ FAILED'}")
+  
+  return max_diff < 1e-10
 
 def validate_deutsch_algorithm():
-    """Validate T0 vs Qiskit Deutsch algorithm"""
-    print(f"\n🔬 DEUTSCH ALGORITHM VALIDATION")
-    print("=" * 40)
+  """Validate T0 vs Qiskit Deutsch algorithm"""
+  print(f"\n🔬 DEUTSCH ALGORITHM VALIDATION")
+  print("=" * 40)
+  
+  success_count = 0
+  
+  for oracle_type in ['constant', 'balanced']:
+    # T0 implementation
+    t0_sim = T0QuantumSimulator(1, xi=1.0e-5)
+    t0_sim.hadamard(0)
     
-    success_count = 0
+    if oracle_type == "balanced":
+      t0_sim.amplitudes[1] *= -1 # Phase flip
+      t0_sim.history.append("Z(0)")
     
-    for oracle_type in ['constant', 'balanced']:
-        # T0 implementation
-        t0_sim = T0QuantumSimulator(1, xi=1.0e-5)
-        t0_sim.hadamard(0)
-        
-        if oracle_type == "balanced":
-            t0_sim.amplitudes[1] *= -1  # Phase flip
-            t0_sim.history.append("Z(0)")
-        
-        t0_sim.hadamard(0)
-        t0_probs = t0_sim.get_probabilities()
-        t0_result = 0 if t0_probs.get('0', 0) > 0.5 else 1
-        
-        # Qiskit implementation
-        qc = QuantumCircuit(1)
-        qc.h(0)
-        if oracle_type == "balanced":
-            qc.z(0)
-        qc.h(0)
-        
-        statevector = Statevector.from_instruction(qc)
-        qiskit_probs = {}
-        for i, amp in enumerate(statevector.data):
-            if abs(amp)**2 > 1e-12:
-                binary = format(i, '01b')
-                qiskit_probs[binary] = abs(amp)**2
-        
-        qiskit_result = 0 if qiskit_probs.get('0', 0) > 0.5 else 1
-        
-        expected = 0 if oracle_type == 'constant' else 1
-        t0_correct = t0_result == expected
-        qiskit_correct = qiskit_result == expected
-        agreement = t0_result == qiskit_result
-        
-        print(f"{oracle_type.upper()}: T0={t0_result}, Qiskit={qiskit_result}, Expected={expected}")
-        print(f"  T0 correct: {t0_correct}, Agreement: {agreement}")
-        
-        if t0_correct and agreement:
-            success_count += 1
+    t0_sim.hadamard(0)
+    t0_probs = t0_sim.get_probabilities()
+    t0_result = 0 if t0_probs.get('0', 0) > 0.5 else 1
     
-    validation_passed = success_count == 2
-    print(f"Deutsch validation: {'✅ PASSED' if validation_passed else '❌ FAILED'}")
+    # Qiskit implementation
+    qc = QuantumCircuit(1)
+    qc.h(0)
+    if oracle_type == "balanced":
+      qc.z(0)
+    qc.h(0)
     
-    return validation_passed
+    statevector = Statevector.from_instruction(qc)
+    qiskit_probs = {}
+    for i, amp in enumerate(statevector.data):
+      if abs(amp)**2 > 1e-12:
+        binary = format(i, '01b')
+        qiskit_probs[binary] = abs(amp)**2
+    
+    qiskit_result = 0 if qiskit_probs.get('0', 0) > 0.5 else 1
+    
+    expected = 0 if oracle_type == 'constant' else 1
+    t0_correct = t0_result == expected
+    qiskit_correct = qiskit_result == expected
+    agreement = t0_result == qiskit_result
+    
+    print(f"{oracle_type.upper()}: T0={t0_result}, Qiskit={qiskit_result}, Expected={expected}")
+    print(f" T0 correct: {t0_correct}, Agreement: {agreement}")
+    
+    if t0_correct and agreement:
+      success_count += 1
+  
+  validation_passed = success_count == 2
+  print(f"Deutsch validation: {'✅ PASSED' if validation_passed else '❌ FAILED'}")
+  
+  return validation_passed
 
 def run_complete_validation():
-    """Run complete T0 validation suite"""
-    print("🚀 T0-THEORY COMPLETE VALIDATION SUITE")
-    print("=" * 60)
-    print("Reproducing all experiments from hardware validation report")
-    print("=" * 60)
-    
-    # Run all validation tests
-    bell_passed = validate_bell_states()
-    deutsch_passed = validate_deutsch_algorithm()
-    
-    # Final assessment
-    print(f"\n🎯 VALIDATION SUMMARY")
-    print("=" * 30)
-    print(f"Bell States: {'✅ PASSED' if bell_passed else '❌ FAILED'}")
-    print(f"Deutsch Algorithm: {'✅ PASSED' if deutsch_passed else '❌ FAILED'}")
-    
-    overall_passed = bell_passed and deutsch_passed
-    print(f"Overall Validation: {'✅ COMPLETE SUCCESS' if overall_passed else '❌ FAILED'}")
-    
-    if overall_passed:
-        print(f"\n🎉 T0-Theory implementation ready for hardware testing!")
-        print(f"Use t0_ibm_hardware_test.py with your IBM Quantum token.")
-    
-    return overall_passed
+  """Run complete T0 validation suite"""
+  print("🚀 T0-THEORY COMPLETE VALIDATION SUITE")
+  print("=" * 60)
+  print("Reproducing all experiments from hardware validation report")
+  print("=" * 60)
+  
+  # Run all validation tests
+  bell_passed = validate_bell_states()
+  deutsch_passed = validate_deutsch_algorithm()
+  
+  # Final assessment
+  print(f"\n🎯 VALIDATION SUMMARY")
+  print("=" * 30)
+  print(f"Bell States: {'✅ PASSED' if bell_passed else '❌ FAILED'}")
+  print(f"Deutsch Algorithm: {'✅ PASSED' if deutsch_passed else '❌ FAILED'}")
+  
+  overall_passed = bell_passed and deutsch_passed
+  print(f"Overall Validation: {'✅ COMPLETE SUCCESS' if overall_passed else '❌ FAILED'}")
+  
+  if overall_passed:
+    print(f"\n🎉 T0-Theory implementation ready for hardware testing!")
+    print(f"Use t0_ibm_hardware_test.py with your IBM Quantum token.")
+  
+  return overall_passed
 
 if __name__ == "__main__":
-    run_complete_validation()
+  run_complete_validation()
 ```
 
 ### Appendix C: Hardware Specifications
@@ -1192,26 +1192,26 @@ if __name__ == "__main__":
 - **Coherence Time**: T1 ~100μs, T2 ~50μs
 - **Calibration**: Daily updates
 
-#### IBM Sherbrooke Configuration  
+#### IBM Sherbrooke Configuration 
 - **Qubits**: 127 (heavy-hex lattice)
 - **Similar specifications to Brisbane**
 - **Independent calibration and noise characteristics**
 
 ---
 
-**Document Classification**: Scientific Research Report  
-**Significance Level**: Breakthrough Discovery  
-**Validation Status**: ✅ Peer-Reviewable Results  
-**Historic Impact**: 🌟 Paradigm-Shifting Experimental Evidence  
+**Document Classification**: Scientific Research Report 
+**Significance Level**: Breakthrough Discovery 
+**Validation Status**: ✅ Peer-Reviewable Results 
+**Historic Impact**: 🌟 Paradigm-Shifting Experimental Evidence 
 
 ### Appendix D: Reproduction Checklist
 
 #### D.1 Pre-Requirements Verification
 ```bash
 # ✅ Check Python environment
-python --version  # Requires Python 3.8+
+python --version # Requires Python 3.8+
 
-# ✅ Install dependencies  
+# ✅ Install dependencies 
 pip install qiskit qiskit-aer qiskit-ibm-runtime numpy matplotlib
 
 # ✅ Verify Qiskit installation
@@ -1228,7 +1228,7 @@ python -c "import qiskit; print(qiskit.__version__)"
 ```bash
 # Download all three Python files:
 # - t0_quantum_simulator.py
-# - t0_validation_suite.py  
+# - t0_validation_suite.py 
 # - t0_ibm_hardware_test.py
 
 # Verify file integrity
@@ -1265,24 +1265,24 @@ python t0_ibm_hardware_test.py
 **Common Issues and Solutions:**
 
 1. **"No module named 'qiskit_ibm_runtime'"**
-   ```bash
-   pip install qiskit-ibm-runtime
-   ```
+  ```bash
+  pip install qiskit-ibm-runtime
+  ```
 
 2. **"Invalid API token"**
-   - Verify token copied correctly (no extra spaces)
-   - Check IBM Quantum account is active
-   - Regenerate token if necessary
+  - Verify token copied correctly (no extra spaces)
+  - Check IBM Quantum account is active
+  - Regenerate token if necessary
 
 3. **"No suitable backends available"**
-   - Try during off-peak hours (US evening/night)
-   - Check IBM Quantum status page
-   - Wait for queue to decrease
+  - Try during off-peak hours (US evening/night)
+  - Check IBM Quantum status page
+  - Wait for queue to decrease
 
 4. **Hardware job timeout**
-   - Normal for busy periods
-   - Job will complete eventually
-   - Check IBM Quantum dashboard for job status
+  - Normal for busy periods
+  - Job will complete eventually
+  - Check IBM Quantum dashboard for job status
 
 #### D.4 Expected Results Verification
 
@@ -1294,7 +1294,7 @@ python t0_ibm_hardware_test.py
 **Hardware Results (approximate ranges):**
 - Bell state fidelity: 95-98%
 - P(00) deviation: 1-5% (hardware noise)
-- P(11) deviation: 1-5% (hardware noise)  
+- P(11) deviation: 1-5% (hardware noise) 
 - Repeatability variance: 0.0001-0.001 (excellent consistency)
 
 #### D.5 Research Extension Opportunities

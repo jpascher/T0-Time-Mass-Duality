@@ -57,60 +57,60 @@ book_footer = r"""
 """
 
 def extract_content(file_path):
-    with open(file_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    # Finde \\begin{document} und \\end{document}
-    start_match = re.search(r'\\begin\{document\}', content)
-    end_match = re.search(r'\\end\{document\}', content)
-    
-    if start_match and end_match:
-        start = start_match.end()
-        end = end_match.start()
-        return content[start:end].strip()
-    else:
-        # Fallback: Wenn keine document-Umgebung, nimm den ganzen Inhalt
-        return content
-
-def filter_content(content):
-    # Entferne tcolorbox Umgebungen (Boxen)
-    content = re.sub(r'\\begin\{tcolorbox\}.*?\\end\{tcolorbox\}', '', content, flags=re.DOTALL)
-    # Entferne Summary sections
-    content = re.sub(r'\\section\{[^}]*[Ss]ummary[^}]*\}.*?(?=\\section|\\\\chapter|\\Z)', '', content, flags=re.DOTALL)
-    # Entferne Outlook sections
-    content = re.sub(r'\\section\{[^}]*[Oo]utlook[^}]*\}.*?(?=\\section|\\\\chapter|\\Z)', '', content, flags=re.DOTALL)
-    # Entferne deutsche Varianten (falls vorhanden)
-    content = re.sub(r'\\section\{[^}]*[Zz]usammenfassung[^}]*\}.*?(?=\\section|\\\\chapter|\\Z)', '', content, flags=re.DOTALL)
-    content = re.sub(r'\\section\{[^}]*[Aa]usblicke?[^}]*\}.*?(?=\\section|\\\\chapter|\\Z)', '', content, flags=re.DOTALL)
-    # Entferne insight, discovery etc. Umgebungen
-    content = re.sub(r'\\begin\{insight\}.*?\\end\{insight\}', '', content, flags=re.DOTALL)
-    content = re.sub(r'\\begin\{discovery\}.*?\\end\{discovery\}', '', content, flags=re.DOTALL)
-    content = re.sub(r'\\begin\{fundamental\}.*?\\end\{fundamental\}', '', content, flags=re.DOTALL)
-    content = re.sub(r'\\begin\{newperspective\}.*?\\end\{newperspective\}', '', content, flags=re.DOTALL)
+  with open(file_path, 'r', encoding='utf-8') as f:
+    content = f.read()
+  
+  # Finde \\begin{document} und \\end{document}
+  start_match = re.search(r'\\begin\{document\}', content)
+  end_match = re.search(r'\\end\{document\}', content)
+  
+  if start_match and end_match:
+    start = start_match.end()
+    end = end_match.start()
+    return content[start:end].strip()
+  else:
+    # Fallback: Wenn keine document-Umgebung, nimm den ganzen Inhalt
     return content
 
+def filter_content(content):
+  # Entferne tcolorbox Umgebungen (Boxen)
+  content = re.sub(r'\\begin\{tcolorbox\}.*?\\end\{tcolorbox\}', '', content, flags=re.DOTALL)
+  # Entferne Summary sections
+  content = re.sub(r'\\section\{[^}]*[Ss]ummary[^}]*\}.*?(?=\\section|\\\\chapter|\\Z)', '', content, flags=re.DOTALL)
+  # Entferne Outlook sections
+  content = re.sub(r'\\section\{[^}]*[Oo]utlook[^}]*\}.*?(?=\\section|\\\\chapter|\\Z)', '', content, flags=re.DOTALL)
+  # Entferne deutsche Varianten (falls vorhanden)
+  content = re.sub(r'\\section\{[^}]*[Zz]usammenfassung[^}]*\}.*?(?=\\section|\\\\chapter|\\Z)', '', content, flags=re.DOTALL)
+  content = re.sub(r'\\section\{[^}]*[Aa]usblicke?[^}]*\}.*?(?=\\section|\\\\chapter|\\Z)', '', content, flags=re.DOTALL)
+  # Entferne insight, discovery etc. Umgebungen
+  content = re.sub(r'\\begin\{insight\}.*?\\end\{insight\}', '', content, flags=re.DOTALL)
+  content = re.sub(r'\\begin\{discovery\}.*?\\end\{discovery\}', '', content, flags=re.DOTALL)
+  content = re.sub(r'\\begin\{fundamental\}.*?\\end\{fundamental\}', '', content, flags=re.DOTALL)
+  content = re.sub(r'\\begin\{newperspective\}.*?\\end\{newperspective\}', '', content, flags=re.DOTALL)
+  return content
+
 def main():
-    if not os.path.exists(tex_dir):
-        print(f"Verzeichnis {tex_dir} nicht gefunden.")
-        return
+  if not os.path.exists(tex_dir):
+    print(f"Verzeichnis {tex_dir} nicht gefunden.")
+    return
+  
+  english_files = [f for f in os.listdir(tex_dir) if f.endswith('_En.tex')]
+  # Systematische Sortierung: T0-Dateien zuerst (neuere), dann andere (ältere als Quellen)
+  english_files.sort(key=lambda x: (0 if x.startswith('T0') else 1, x))
+  
+  with open(output_file, 'w', encoding='utf-8') as out:
+    out.write(book_header)
     
-    english_files = [f for f in os.listdir(tex_dir) if f.endswith('_En.tex')]
-    # Systematische Sortierung: T0-Dateien zuerst (neuere), dann andere (ältere als Quellen)
-    english_files.sort(key=lambda x: (0 if x.startswith('T0') else 1, x))
+    for filename in english_files:
+      chapter_title = filename.replace('_En.tex', '').replace('_', ' ')
+      out.write(rf"\chapter{{{chapter_title}}}\n")
+      content = extract_content(os.path.join(tex_dir, filename))
+      content = filter_content(content)
+      out.write(content + "\n\n")
     
-    with open(output_file, 'w', encoding='utf-8') as out:
-        out.write(book_header)
-        
-        for filename in english_files:
-            chapter_title = filename.replace('_En.tex', '').replace('_', ' ')
-            out.write(rf"\chapter{{{chapter_title}}}\n")
-            content = extract_content(os.path.join(tex_dir, filename))
-            content = filter_content(content)
-            out.write(content + "\n\n")
-        
-        out.write(book_footer)
-    
-    print(f"Buch erstellt: {output_file}")
+    out.write(book_footer)
+  
+  print(f"Buch erstellt: {output_file}")
 
 if __name__ == "__main__":
-    main()
+  main()

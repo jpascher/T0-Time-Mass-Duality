@@ -1,6 +1,6 @@
 # Copilot Task: Fix and Compile LaTeX in `2/fix/de_en`
 
-Branch: `copilot/create-standalone-tree-branch`  
+Branch: `copilot/create-standalone-tree-branch` 
 Base directory: `2/fix/de_en`
 
 Ziel: **Alle** LaTeX-Dokumente in `2/fix/de_en` (DE und EN) sollen LaTeX-fehlerfrei mit `pdflatex` kompilieren. Zusätzlich soll eine Übersicht erstellt werden, welche Dokumente nach der Bereinigung weiterhin **Overfull/Underfull-Box- oder Tabellen-Overflow-Warnungen** haben.
@@ -12,8 +12,8 @@ Ziel: **Alle** LaTeX-Dokumente in `2/fix/de_en` (DE und EN) sollen LaTeX-fehlerf
 ### 1.1 Verzeichnis
 
 - Zu bearbeitende Dateien (rekursiv):
-  - `2/fix/de_en/*.tex`
-  - `2/fix/de_en/**/*.tex`
+ - `2/fix/de_en/*.tex`
+ - `2/fix/de_en/**/*.tex`
 
 Nur Dateien in diesem Verzeichnis (und dessen Unterverzeichnissen) bearbeiten. Andere Narrative-/Kapitel-/Master-Dokumente **nicht** ändern.
 
@@ -28,9 +28,9 @@ Nur Dateien in diesem Verzeichnis (und dessen Unterverzeichnissen) bearbeiten. A
 
 1. Stelle sicher, dass `pdflatex` verfügbar ist (z.B. via `texlive-full` oder äquivalente Distribution).
 2. Arbeite im Repo-Root:
-   ```bash
-   cd 2/fix/de_en
-   ```
+  ```bash
+  cd 2/fix/de_en
+  ```
 
 ---
 
@@ -39,24 +39,24 @@ Nur Dateien in diesem Verzeichnis (und dessen Unterverzeichnissen) bearbeiten. A
 Für **alle** `.tex`-Dateien unter `2/fix/de_en`:
 
 1. Finde rekursiv alle Ziel-Dateien (relative Pfade bezogen auf `2/fix/de_en`):
-   ```bash
-   cd 2/fix/de_en
-   find . -name "*.tex" | sort > fix_de_en_list.txt
-   ```
+  ```bash
+  cd 2/fix/de_en
+  find . -name "*.tex" | sort > fix_de_en_list.txt
+  ```
 
 2. Für jede gefundene Datei `DOC.tex`:
-   ```bash
-   while read -r f; do
-     dir="$(dirname "$f")"
-     base="$(basename "$f")"
-     cd "$dir"
-     # Mehrfach kompilieren, um Referenzen zu stabilisieren
-     for i in 1 2 3; do
-       pdflatex -interaction=nonstopmode "$base" || true
-     done
-     cd - >/dev/null 2>&1
-   done < fix_de_en_list.txt
-   ```
+  ```bash
+  while read -r f; do
+   dir="$(dirname "$f")"
+   base="$(basename "$f")"
+   cd "$dir"
+   # Mehrfach kompilieren, um Referenzen zu stabilisieren
+   for i in 1 2 3; do
+    pdflatex -interaction=nonstopmode "$base" || true
+   done
+   cd - >/dev/null 2>&1
+  done < fix_de_en_list.txt
+  ```
 
 3. Sammle für jede Datei das jeweilige `.log` und prüfe auf Fehler und relevante Warnungen (siehe nächste Sektion).
 
@@ -83,10 +83,10 @@ Zusätzlich zu den Fehlern sollen Warnungen reduziert und protokolliert werden:
 
 - Warnungen vom Typ **Overfull `\hbox`**, **Overfull `\vbox`**, **Float too large for page** oder offensichtlich zu breite Tabellen.
 - Erlaubte Maßnahmen:
-  - Spaltenbreiten anpassen (`p{...}`, `tabularx`, `arraystretch`),
-  - Zeilenumbrüche in Zellen setzen,
-  - Tabellen ggf. mit `adjustbox`/`resizebox` auf `\textwidth` skalieren,
-  - moderate manuelle Umbrechungen im Text.
+ - Spaltenbreiten anpassen (`p{...}`, `tabularx`, `arraystretch`),
+ - Zeilenumbrüche in Zellen setzen,
+ - Tabellen ggf. mit `adjustbox`/`resizebox` auf `\textwidth` skalieren,
+ - moderate manuelle Umbrechungen im Text.
 - Warnungen wie "Token not allowed in a PDF string (Unicode)" oder leichte Underfull-Warnungen dürfen bleiben.
 
 Erstelle eine Datei `fix_de_en_overflow_warnings.txt` mit einer Zeile pro Dokument, das nach der Bereinigung weiterhin Overfull/Overflow-Warnungen erzeugt:
@@ -116,7 +116,7 @@ Für jede Datei `DOC.tex` in `2/fix/de_en`:
 
 1. Verwende `fix_de_en_list.txt` als Referenzliste aller bearbeiteten Dateien.
 2. Stelle sicher, dass für **jede** dort aufgeführte `.tex`-Datei gilt:
-   - Mindestens ein vollständiger Kompilationslauf endet **ohne** `! LaTeX Error:`.
+  - Mindestens ein vollständiger Kompilationslauf endet **ohne** `! LaTeX Error:`.
 3. Erfasse alle Dateien, bei denen nach der Bereinigung weiterhin Overfull-/Overflow-Warnungen auftreten, in `fix_de_en_overflow_warnings.txt` (siehe oben).
 4. Falls einzelne Dateien trotz mehrfacher Versuche noch unklare, nicht-triviale Fehler aufweisen, liste diese zusätzlich in `fix_de_en_unresolved.txt` mit kurzer Fehlerbeschreibung.
 
@@ -127,18 +127,18 @@ Für jede Datei `DOC.tex` in `2/fix/de_en`:
 1. Arbeite auf dem Branch `copilot/create-standalone-tree-branch`.
 2. Prüfe mit `git status`, welche Dateien unter `2/fix/de_en` und welche Log-/Listen-Dateien geändert oder neu erstellt wurden.
 3. Füge **nur** diese Dateien und diese Task-Datei hinzu:
-   ```bash
-   git add 2/fix/de_en/**/*.tex \
-           2/fix/de_en/*.tex \
-           2/fix/de_en/fix_de_en_list.txt \
-           2/fix/de_en/fix_de_en_overflow_warnings.txt \
-           2/fix/de_en/fix_de_en_unresolved.txt \
-           2/narrative/COPILOT_FIX_DE_EN_LATEX.md
-   ```
+  ```bash
+  git add 2/fix/de_en/**/*.tex \
+      2/fix/de_en/*.tex \
+      2/fix/de_en/fix_de_en_list.txt \
+      2/fix/de_en/fix_de_en_overflow_warnings.txt \
+      2/fix/de_en/fix_de_en_unresolved.txt \
+      2/narrative/COPILOT_FIX_DE_EN_LATEX.md
+  ```
 4. Commit-Message (Vorschlag):
-   ```bash
-   git commit -m "Fix LaTeX errors and collect overflow warnings in 2/fix/de_en (DE/EN)"
-   git push
-   ```
+  ```bash
+  git commit -m "Fix LaTeX errors and collect overflow warnings in 2/fix/de_en (DE/EN)"
+  git push
+  ```
 
 Erwartetes Ergebnis: Alle LaTeX-Dokumente in `2/fix/de_en` kompilieren ohne harte LaTeX-Fehler. Zusätzlich existiert eine klare Übersicht (`fix_de_en_overflow_warnings.txt`), welche Dokumente noch Overfull-/Overflow-Warnungen haben; inhaltliche Aussagen wurden nicht verändert, nur LaTeX-Struktur und Layout wurden bereinigt.

@@ -1,463 +1,463 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ξ-FFT Harmonische Signal-Analyse Demo</title>
-    <style>
-        :root {
-            --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            --radius: 12px;
-            --transition: all 0.3s ease;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ξ-FFT Harmonische Signal-Analyse Demo</title>
+  <style>
+    :root {
+      --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      --radius: 12px;
+      --transition: all 0.3s ease;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: var(--background);
-            min-height: 100vh;
-            color: #333;
-        }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--background);
+      min-height: 100vh;
+      color: #333;
+    }
 
-        .header {
-            background: var(--primary);
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            box-shadow: var(--shadow);
-        }
+    .header {
+      background: var(--primary);
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
 
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
 
-        .xi-symbol {
-            font-size: 3rem;
-            font-weight: bold;
-            margin-right: 15px;
-        }
+    .xi-symbol {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-right: 15px;
+    }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
 
-        .panel {
-            background: white;
-            border-radius: var(--radius);
-            padding: 20px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
+    .panel {
+      background: white;
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
 
-        .panel:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
+    .panel:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
 
-        .panel h2 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: #444;
-        }
+    .panel h2 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: #444;
+    }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+    .form-group {
+      margin-bottom: 15px;
+    }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-            color: #555;
-        }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #555;
+    }
 
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #e1e5e9;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: var(--transition);
-        }
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #e1e5e9;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: var(--transition);
+    }
 
-        .form-control:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
+    .form-control:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
 
-        .range-control {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    .range-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-        .range-control input[type="range"] {
-            flex: 1;
-            height: 6px;
-            background: #ddd;
-            border-radius: 3px;
-            outline: none;
-        }
+    .range-control input[type="range"] {
+      flex: 1;
+      height: 6px;
+      background: #ddd;
+      border-radius: 3px;
+      outline: none;
+    }
 
-        .range-value {
-            min-width: 60px;
-            text-align: center;
-            font-weight: bold;
-            color: #667eea;
-        }
+    .range-value {
+      min-width: 60px;
+      text-align: center;
+      font-weight: bold;
+      color: #667eea;
+    }
 
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            position: relative;
-            overflow: hidden;
-        }
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-        }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
 
-        .btn:active {
-            transform: translateY(0);
-        }
+    .btn:active {
+      transform: translateY(0);
+    }
 
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
 
-        .btn-secondary {
-            background: #6c757d;
-            color: white;
-        }
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+    }
 
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
+    .btn-success {
+      background: var(--success);
+      color: white;
+    }
 
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            margin: 15px 0;
-            flex-wrap: wrap;
-        }
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin: 15px 0;
+      flex-wrap: wrap;
+    }
 
-        .checkbox-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 15px 0;
-        }
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 15px 0;
+    }
 
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-        .results-panel {
-            grid-column: 1 / -1;
-            background: white;
-            border-radius: var(--radius);
-            padding: 20px;
-            box-shadow: var(--shadow);
-        }
+    .results-panel {
+      grid-column: 1 / -1;
+      background: white;
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
 
-        .status-box {
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            font-weight: 500;
-            transition: var(--transition);
-        }
+    .status-box {
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      font-weight: 500;
+      transition: var(--transition);
+    }
 
-        .status-info {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            color: #1565c0;
-            border-left: 4px solid #2196f3;
-        }
+    .status-info {
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      color: #1565c0;
+      border-left: 4px solid #2196f3;
+    }
 
-        .status-success {
-            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c8 100%);
-            color: #2e7d32;
-            border-left: 4px solid #4caf50;
-        }
+    .status-success {
+      background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c8 100%);
+      color: #2e7d32;
+      border-left: 4px solid #4caf50;
+    }
 
-        .status-warning {
-            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
-            color: #ef6c00;
-            border-left: 4px solid #ff9800;
-        }
+    .status-warning {
+      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+      color: #ef6c00;
+      border-left: 4px solid #ff9800;
+    }
 
-        .status-error {
-            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
-            color: #c62828;
-            border-left: 4px solid #f44336;
-        }
+    .status-error {
+      background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+      color: #c62828;
+      border-left: 4px solid #f44336;
+    }
 
-        .progress-container {
-            width: 100%;
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
+    .progress-container {
+      width: 100%;
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
 
-        .progress-bar {
-            height: 100%;
-            background: var(--success);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
+    .progress-bar {
+      height: 100%;
+      background: var(--success);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
 
-        .chart-container {
-            margin: 20px 0;
-            text-align: center;
-        }
+    .chart-container {
+      margin: 20px 0;
+      text-align: center;
+    }
 
-        .chart-canvas {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: white;
-        }
+    .chart-canvas {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: white;
+    }
 
-        .text-output {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            height: 300px;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            margin: 20px 0;
-        }
+    .text-output {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      padding: 15px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      height: 300px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      margin: 20px 0;
+    }
 
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-                padding: 10px;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .btn-group {
-                flex-direction: column;
-            }
-        }
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+        padding: 10px;
+      }
+      
+      .header h1 {
+        font-size: 2rem;
+      }
+      
+      .btn-group {
+        flex-direction: column;
+      }
+    }
 
-        /* Button Click Animation */
-        @keyframes ripple {
-            0% {
-                transform: scale(0);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
+    /* Button Click Animation */
+    @keyframes ripple {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
 
-        .btn:active::before {
-            width: 300px;
-            height: 300px;
-        }
-    </style>
+    .btn:active::before {
+      width: 300px;
+      height: 300px;
+    }
+  </style>
 </head>
 <body>
-    <div class="header">
-        <h1>
-            <span class="xi-symbol">ξ</span>
-            Harmonische Signal-Analyse
-        </h1>
-        <p>T0-Prinzip für Signale • Direkte Periodensuche ohne FFT • Logarithmische Harmonik</p>
+  <div class="header">
+    <h1>
+      <span class="xi-symbol">ξ</span>
+      Harmonische Signal-Analyse
+    </h1>
+    <p>T0-Prinzip für Signale • Direkte Periodensuche ohne FFT • Logarithmische Harmonik</p>
+  </div>
+
+  <div class="container">
+    <!-- Signal Generator Panel -->
+    <div class="panel">
+      <h2>🎵 Signal-Generator</h2>
+      
+      <div class="form-group">
+        <label for="signalType">Signal-Typ:</label>
+        <select id="signalType" class="form-control">
+          <option value="harmonic">Harmonische Reihe</option>
+          <option value="beating">Schwebungs-Signal</option>
+          <option value="chord">Dur-Akkord</option>
+          <option value="complex">Komplexes Signal</option>
+          <option value="noisy">Signal + Rauschen</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="frequency">Grundfrequenz f₀ (Hz):</label>
+        <input type="number" id="frequency" class="form-control" min="50" max="500" value="220" step="10">
+      </div>
+
+      <div class="form-group">
+        <label for="duration">Signal-Dauer (s):</label>
+        <input type="number" id="duration" class="form-control" min="1" max="5" value="2" step="0.5">
+      </div>
+
+      <div class="form-group">
+        <label>Rausch-Level:</label>
+        <div class="range-control">
+          <input type="range" id="noiseLevel" min="0" max="0.5" value="0.1" step="0.01">
+          <span class="range-value" id="noiseLevelValue">0.1</span>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="generateSignal()">
+          🎵 Signal Generieren
+        </button>
+        <button class="btn btn-secondary" onclick="saveSignal()">
+          💾 Signal Speichern
+        </button>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-success" onclick="playSignal()">
+          ▶️ Signal Abspielen
+        </button>
+        <button class="btn btn-success" onclick="exportWAV()">
+          🎵 Als WAV
+        </button>
+      </div>
+
+      <div class="form-group">
+        <label for="fileInput">Datei laden:</label>
+        <input type="file" id="fileInput" class="form-control" accept=".wav,.json,.csv" onchange="loadFile(event)">
+      </div>
     </div>
 
-    <div class="container">
-        <!-- Signal Generator Panel -->
-        <div class="panel">
-            <h2>🎵 Signal-Generator</h2>
-            
-            <div class="form-group">
-                <label for="signalType">Signal-Typ:</label>
-                <select id="signalType" class="form-control">
-                    <option value="harmonic">Harmonische Reihe</option>
-                    <option value="beating">Schwebungs-Signal</option>
-                    <option value="chord">Dur-Akkord</option>
-                    <option value="complex">Komplexes Signal</option>
-                    <option value="noisy">Signal + Rauschen</option>
-                </select>
-            </div>
+    <!-- Harmonic Configuration Panel -->
+    <div class="panel">
+      <h2>⚙️ Harmonische Konfiguration</h2>
+      
+      <div class="form-group">
+        <label for="xiProfile">ξ-Profil:</label>
+        <select id="xiProfile" class="form-control">
+          <option value="universal">Universal (1/100)</option>
+          <option value="harmonic">Harmonisch (1/50)</option>
+          <option value="complex">Komplex (1/1000)</option>
+          <option value="microtonal">Mikrotonal (1/42)</option>
+        </select>
+      </div>
 
-            <div class="form-group">
-                <label for="frequency">Grundfrequenz f₀ (Hz):</label>
-                <input type="number" id="frequency" class="form-control" min="50" max="500" value="220" step="10">
-            </div>
-
-            <div class="form-group">
-                <label for="duration">Signal-Dauer (s):</label>
-                <input type="number" id="duration" class="form-control" min="1" max="5" value="2" step="0.5">
-            </div>
-
-            <div class="form-group">
-                <label>Rausch-Level:</label>
-                <div class="range-control">
-                    <input type="range" id="noiseLevel" min="0" max="0.5" value="0.1" step="0.01">
-                    <span class="range-value" id="noiseLevelValue">0.1</span>
-                </div>
-            </div>
-
-            <div class="btn-group">
-                <button class="btn btn-primary" onclick="generateSignal()">
-                    🎵 Signal Generieren
-                </button>
-                <button class="btn btn-secondary" onclick="saveSignal()">
-                    💾 Signal Speichern
-                </button>
-            </div>
-
-            <div class="btn-group">
-                <button class="btn btn-success" onclick="playSignal()">
-                    ▶️ Signal Abspielen
-                </button>
-                <button class="btn btn-success" onclick="exportWAV()">
-                    🎵 Als WAV
-                </button>
-            </div>
-
-            <div class="form-group">
-                <label for="fileInput">Datei laden:</label>
-                <input type="file" id="fileInput" class="form-control" accept=".wav,.json,.csv" onchange="loadFile(event)">
-            </div>
+      <div class="form-group">
+        <label>Periodizitäts-Threshold:</label>
+        <div class="range-control">
+          <input type="range" id="periodThreshold" min="0.1" max="0.9" value="0.3" step="0.1">
+          <span class="range-value" id="periodThresholdValue">0.3</span>
         </div>
+      </div>
 
-        <!-- Harmonic Configuration Panel -->
-        <div class="panel">
-            <h2>⚙️ Harmonische Konfiguration</h2>
-            
-            <div class="form-group">
-                <label for="xiProfile">ξ-Profil:</label>
-                <select id="xiProfile" class="form-control">
-                    <option value="universal">Universal (1/100)</option>
-                    <option value="harmonic">Harmonisch (1/50)</option>
-                    <option value="complex">Komplex (1/1000)</option>
-                    <option value="microtonal">Mikrotonal (1/42)</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Periodizitäts-Threshold:</label>
-                <div class="range-control">
-                    <input type="range" id="periodThreshold" min="0.1" max="0.9" value="0.3" step="0.1">
-                    <span class="range-value" id="periodThresholdValue">0.3</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>ξ-Threshold:</label>
-                <div class="range-control">
-                    <input type="range" id="xiThreshold" min="0.001" max="0.1" value="0.01" step="0.001">
-                    <span class="range-value" id="xiThresholdValue">0.01</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Aktive Harmonien:</label>
-                <div class="checkbox-grid" id="harmonicCheckboxes">
-                    <!-- Wird dynamisch gefüllt -->
-                </div>
-            </div>
-
-            <div class="btn-group">
-                <button class="btn btn-primary" onclick="analyzePureT0()">
-                    🧠 Basis ξ-Analyse
-                </button>
-                <button class="btn btn-secondary" onclick="compareFFT()">
-                    📊 Mit FFT Vergleichen
-                </button>
-            </div>
-
-            <div class="btn-group">
-                <button class="btn btn-success" onclick="analyzeResonance()">
-                    🎼 Resonanz-Analyse
-                </button>
-                <button class="btn btn-success" onclick="analyzeMicrotonal()">
-                    🎵 Mikro-Tonalität
-                </button>
-            </div>
-
-            <div class="btn-group">
-                <button class="btn btn-secondary" onclick="testCanvas()">
-                    🧪 Test Canvas
-                </button>
-            </div>
+      <div class="form-group">
+        <label>ξ-Threshold:</label>
+        <div class="range-control">
+          <input type="range" id="xiThreshold" min="0.001" max="0.1" value="0.01" step="0.001">
+          <span class="range-value" id="xiThresholdValue">0.01</span>
         </div>
+      </div>
+
+      <div class="form-group">
+        <label>Aktive Harmonien:</label>
+        <div class="checkbox-grid" id="harmonicCheckboxes">
+          <!-- Wird dynamisch gefüllt -->
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="analyzePureT0()">
+          🧠 Basis ξ-Analyse
+        </button>
+        <button class="btn btn-secondary" onclick="compareFFT()">
+          📊 Mit FFT Vergleichen
+        </button>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-success" onclick="analyzeResonance()">
+          🎼 Resonanz-Analyse
+        </button>
+        <button class="btn btn-success" onclick="analyzeMicrotonal()">
+          🎵 Mikro-Tonalität
+        </button>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="testCanvas()">
+          🧪 Test Canvas
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results Panel -->
+  <div class="results-panel">
+    <h2>📊 Analyse-Ergebnisse</h2>
+    
+    <div id="statusBox" class="status-box status-info">
+      🎼 Bereit für ξ-harmonische Signal-Analyse
     </div>
 
-    <!-- Results Panel -->
-    <div class="results-panel">
-        <h2>📊 Analyse-Ergebnisse</h2>
-        
-        <div id="statusBox" class="status-box status-info">
-            🎼 Bereit für ξ-harmonische Signal-Analyse
-        </div>
+    <div class="progress-container">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
 
-        <div class="progress-container">
-            <div id="progressBar" class="progress-bar"></div>
-        </div>
+    <div class="chart-container">
+      <canvas id="signalChart" class="chart-canvas" width="800" height="200"></canvas>
+    </div>
 
-        <div class="chart-container">
-            <canvas id="signalChart" class="chart-canvas" width="800" height="200"></canvas>
-        </div>
+    <div class="chart-container">
+      <canvas id="analysisChart" class="chart-canvas" width="800" height="300"></canvas>
+    </div>
 
-        <div class="chart-container">
-            <canvas id="analysisChart" class="chart-canvas" width="800" height="300"></canvas>
-        </div>
-
-        <div class="text-output" id="textOutput">
+    <div class="text-output" id="textOutput">
 🎼 ξ-FFT HARMONISCHE SIGNAL-ANALYSE DEMO
 
 ✨ NEUE FEATURES:
@@ -475,1105 +475,1105 @@
 4. Betrachten Sie Ergebnisse in Echtzeit
 
 Alle Buttons geben sofortiges visuelles Feedback!
-        </div>
     </div>
+  </div>
 
-    <script>
-        // =================================================================
-        // GLOBALE VARIABLEN
-        // =================================================================
-        let currentSignal = null;
-        let currentAnalysis = null;
-        let sampleRate = 44100;
-        let audioContext = null;
+  <script>
+    // =================================================================
+    // GLOBALE VARIABLEN
+    // =================================================================
+    let currentSignal = null;
+    let currentAnalysis = null;
+    let sampleRate = 44100;
+    let audioContext = null;
 
-        const xiProfiles = {
-            universal: { factor: 100, name: 'Universal' },
-            harmonic: { factor: 50, name: 'Harmonisch' },
-            complex: { factor: 1000, name: 'Komplex' },
-            microtonal: { factor: 42, name: 'Mikrotonal' }
-        };
+    const xiProfiles = {
+      universal: { factor: 100, name: 'Universal' },
+      harmonic: { factor: 50, name: 'Harmonisch' },
+      complex: { factor: 1000, name: 'Komplex' },
+      microtonal: { factor: 42, name: 'Mikrotonal' }
+    };
 
-        const harmonicIntervals = {
-            unison: { ratio: 1.0, name: 'Unison', category: 'Perfect' },
-            octave: { ratio: 2.0, name: 'Oktave', category: 'Perfect' },
-            fifth: { ratio: 1.5, name: 'Quinte', category: 'Perfect' },
-            fourth: { ratio: 4/3, name: 'Quarte', category: 'Perfect' },
-            majorThird: { ratio: 1.25, name: 'Große Terz', category: 'Consonant' },
-            minorThird: { ratio: 1.2, name: 'Kleine Terz', category: 'Consonant' },
-            majorSixth: { ratio: 5/3, name: 'Große Sexte', category: 'Consonant' },
-            minorSixth: { ratio: 1.6, name: 'Kleine Sexte', category: 'Consonant' },
-            majorSecond: { ratio: 9/8, name: 'Großer Ganzton', category: 'Dissonant' },
-            minorSeventh: { ratio: 16/9, name: 'Kleine Septime', category: 'Dissonant' }
-        };
+    const harmonicIntervals = {
+      unison: { ratio: 1.0, name: 'Unison', category: 'Perfect' },
+      octave: { ratio: 2.0, name: 'Oktave', category: 'Perfect' },
+      fifth: { ratio: 1.5, name: 'Quinte', category: 'Perfect' },
+      fourth: { ratio: 4/3, name: 'Quarte', category: 'Perfect' },
+      majorThird: { ratio: 1.25, name: 'Große Terz', category: 'Consonant' },
+      minorThird: { ratio: 1.2, name: 'Kleine Terz', category: 'Consonant' },
+      majorSixth: { ratio: 5/3, name: 'Große Sexte', category: 'Consonant' },
+      minorSixth: { ratio: 1.6, name: 'Kleine Sexte', category: 'Consonant' },
+      majorSecond: { ratio: 9/8, name: 'Großer Ganzton', category: 'Dissonant' },
+      minorSeventh: { ratio: 16/9, name: 'Kleine Septime', category: 'Dissonant' }
+    };
 
-        // =================================================================
-        // UTILITY FUNKTIONEN
-        // =================================================================
+    // =================================================================
+    // UTILITY FUNKTIONEN
+    // =================================================================
+    
+    function updateStatus(message, type = 'info') {
+      const statusBox = document.getElementById('statusBox');
+      if (statusBox) {
+        statusBox.textContent = message;
+        statusBox.className = `status-box status-${type}`;
+        console.log(`[${type.toUpperCase()}] ${message}`);
+      }
+    }
+
+    function updateProgress(percentage) {
+      const progressBar = document.getElementById('progressBar');
+      if (progressBar) {
+        progressBar.style.width = `${Math.min(100, Math.max(0, percentage))}%`;
+      }
+    }
+
+    function addButtonFeedback() {
+      document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('btn')) {
+          // Visueller Ripple-Effekt ist bereits im CSS
+          console.log(`Button geklickt: ${e.target.textContent.trim()}`);
+        }
+      });
+    }
+
+    // =================================================================
+    // INITIALISIERUNG
+    // =================================================================
+    
+    function initApp() {
+      console.log('🎼 Initialisiere ξ-harmonische Analyse App...');
+      
+      try {
+        // Audio Context
+        if (typeof AudioContext !== 'undefined') {
+          audioContext = new AudioContext();
+        } else if (typeof webkitAudioContext !== 'undefined') {
+          audioContext = new webkitAudioContext();
+        }
+
+        // Range Sliders
+        setupRangeSliders();
         
-        function updateStatus(message, type = 'info') {
-            const statusBox = document.getElementById('statusBox');
-            if (statusBox) {
-                statusBox.textContent = message;
-                statusBox.className = `status-box status-${type}`;
-                console.log(`[${type.toUpperCase()}] ${message}`);
-            }
-        }
-
-        function updateProgress(percentage) {
-            const progressBar = document.getElementById('progressBar');
-            if (progressBar) {
-                progressBar.style.width = `${Math.min(100, Math.max(0, percentage))}%`;
-            }
-        }
-
-        function addButtonFeedback() {
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('btn')) {
-                    // Visueller Ripple-Effekt ist bereits im CSS
-                    console.log(`Button geklickt: ${e.target.textContent.trim()}`);
-                }
-            });
-        }
-
-        // =================================================================
-        // INITIALISIERUNG
-        // =================================================================
+        // Harmonische Checkboxes
+        setupHarmonicCheckboxes();
         
-        function initApp() {
-            console.log('🎼 Initialisiere ξ-harmonische Analyse App...');
-            
-            try {
-                // Audio Context
-                if (typeof AudioContext !== 'undefined') {
-                    audioContext = new AudioContext();
-                } else if (typeof webkitAudioContext !== 'undefined') {
-                    audioContext = new webkitAudioContext();
-                }
-
-                // Range Sliders
-                setupRangeSliders();
-                
-                // Harmonische Checkboxes
-                setupHarmonicCheckboxes();
-                
-                // Button Feedback
-                addButtonFeedback();
-                
-                updateStatus('🎼 ξ-harmonische Analyse bereit - Wählen Sie Signal-Typ und Parameter', 'info');
-                console.log('✅ App erfolgreich initialisiert');
-                
-            } catch (error) {
-                console.error('Initialisierungsfehler:', error);
-                updateStatus('❌ Initialisierung fehlgeschlagen: ' + error.message, 'error');
-            }
-        }
-
-        function setupRangeSliders() {
-            const sliders = [
-                { id: 'noiseLevel', valueId: 'noiseLevelValue' },
-                { id: 'periodThreshold', valueId: 'periodThresholdValue' },
-                { id: 'xiThreshold', valueId: 'xiThresholdValue' }
-            ];
-
-            sliders.forEach(slider => {
-                const input = document.getElementById(slider.id);
-                const display = document.getElementById(slider.valueId);
-                
-                if (input && display) {
-                    input.addEventListener('input', function() {
-                        display.textContent = this.value;
-                    });
-                }
-            });
-        }
-
-        function setupHarmonicCheckboxes() {
-            const container = document.getElementById('harmonicCheckboxes');
-            if (!container) return;
-            
-            container.innerHTML = '';
-            
-            Object.entries(harmonicIntervals).forEach(([key, interval]) => {
-                const div = document.createElement('div');
-                div.className = 'checkbox-item';
-                div.innerHTML = `
-                    <input type="checkbox" id="harmonic_${key}" checked>
-                    <label for="harmonic_${key}">${interval.name}</label>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        // =================================================================
-        // SIGNAL-GENERIERUNG
-        // =================================================================
+        // Button Feedback
+        addButtonFeedback();
         
-        function generateSignal() {
-            const signalType = document.getElementById('signalType').value;
-            const frequency = parseFloat(document.getElementById('frequency').value);
-            const duration = parseFloat(document.getElementById('duration').value);
-            
-            updateStatus(`🎵 Generiere ${signalType} Signal...`, 'info');
-            updateProgress(25);
-
-            try {
-                let signal;
-                
-                switch (signalType) {
-                    case 'harmonic':
-                        signal = createHarmonicSeries(frequency, duration);
-                        break;
-                    case 'beating':
-                        signal = createBeatingSignal(frequency, duration);
-                        break;
-                    case 'chord':
-                        signal = createChordSignal(frequency, duration);
-                        break;
-                    case 'complex':
-                        signal = createComplexSignal(frequency, duration);
-                        break;
-                    case 'noisy':
-                        signal = createNoisySignal(frequency, duration);
-                        break;
-                    default:
-                        signal = createHarmonicSeries(frequency, duration);
-                }
-
-                currentSignal = signal;
-                updateProgress(75);
-                
-                // Visualisierung
-                plotSignal(signal);
-                updateProgress(100);
-                
-                updateStatus(`✅ Signal generiert: ${signal.length} Samples (${duration}s, ${frequency}Hz)`, 'success');
-                
-            } catch (error) {
-                updateStatus(`❌ Signal-Generierung fehlgeschlagen: ${error.message}`, 'error');
-                console.error('Signal generation error:', error);
-            }
-        }
-
-        function createHarmonicSeries(f0, duration) {
-            const samples = Math.floor(duration * sampleRate);
-            const signal = new Float32Array(samples);
-            
-            for (let i = 0; i < samples; i++) {
-                const t = i / sampleRate;
-                signal[i] = 0.5 * Math.sin(2 * Math.PI * f0 * t) +
-                           0.25 * Math.sin(2 * Math.PI * f0 * 2 * t) +
-                           0.125 * Math.sin(2 * Math.PI * f0 * 3 * t) +
-                           0.0625 * Math.sin(2 * Math.PI * f0 * 4 * t) +
-                           0.03125 * Math.sin(2 * Math.PI * f0 * 5 * t);
-            }
-            
-            return signal;
-        }
-
-        function createBeatingSignal(f0, duration) {
-            const samples = Math.floor(duration * sampleRate);
-            const signal = new Float32Array(samples);
-            const beatFreq = 3;
-            
-            for (let i = 0; i < samples; i++) {
-                const t = i / sampleRate;
-                signal[i] = 0.5 * Math.sin(2 * Math.PI * (f0 - beatFreq/2) * t) +
-                           0.5 * Math.sin(2 * Math.PI * (f0 + beatFreq/2) * t);
-            }
-            
-            return signal;
-        }
-
-        function createChordSignal(f0, duration) {
-            const samples = Math.floor(duration * sampleRate);
-            const signal = new Float32Array(samples);
-            
-            for (let i = 0; i < samples; i++) {
-                const t = i / sampleRate;
-                signal[i] = 0.33 * Math.sin(2 * Math.PI * f0 * t) +
-                           0.33 * Math.sin(2 * Math.PI * f0 * 1.25 * t) +
-                           0.33 * Math.sin(2 * Math.PI * f0 * 1.5 * t);
-            }
-            
-            return signal;
-        }
-
-        function createComplexSignal(f0, duration) {
-            const samples = Math.floor(duration * sampleRate);
-            const signal = new Float32Array(samples);
-            const frequencies = [f0, f0 * 1.1, f0 * 1.7, f0 * 2.3];
-            
-            for (let i = 0; i < samples; i++) {
-                const t = i / sampleRate;
-                signal[i] = frequencies.reduce((sum, freq) => 
-                    sum + 0.25 * Math.sin(2 * Math.PI * freq * t), 0);
-            }
-            
-            return signal;
-        }
-
-        function createNoisySignal(f0, duration) {
-            const samples = Math.floor(duration * sampleRate);
-            const signal = new Float32Array(samples);
-            const noiseLevel = parseFloat(document.getElementById('noiseLevel').value);
-            
-            for (let i = 0; i < samples; i++) {
-                const t = i / sampleRate;
-                const harmonic = 0.7 * Math.sin(2 * Math.PI * f0 * t) +
-                               0.3 * Math.sin(2 * Math.PI * f0 * 2 * t);
-                const noise = (Math.random() - 0.5) * noiseLevel;
-                signal[i] = harmonic + noise;
-            }
-            
-            return signal;
-        }
-
-        // =================================================================
-        // VISUALISIERUNG
-        // =================================================================
+        updateStatus('🎼 ξ-harmonische Analyse bereit - Wählen Sie Signal-Typ und Parameter', 'info');
+        console.log('✅ App erfolgreich initialisiert');
         
-        function plotSignal(signal) {
-            const canvas = document.getElementById('signalChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            const displaySamples = Math.min(signal.length, 2000);
-            const step = Math.floor(signal.length / displaySamples);
-            
-            const width = canvas.width - 80;
-            const height = canvas.height - 60;
-            const xOffset = 40;
-            const yOffset = 30;
-            
-            // Grid
-            ctx.strokeStyle = '#e0e0e0';
-            ctx.lineWidth = 1;
-            for (let i = 0; i <= 10; i++) {
-                const y = yOffset + (i / 10) * height;
-                ctx.beginPath();
-                ctx.moveTo(xOffset, y);
-                ctx.lineTo(xOffset + width, y);
-                ctx.stroke();
-            }
-            
-            // Signal
-            ctx.strokeStyle = '#667eea';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            
-            for (let i = 0; i < displaySamples; i++) {
-                const sampleIndex = i * step;
-                const x = xOffset + (i / displaySamples) * width;
-                const y = yOffset + height/2 - (signal[sampleIndex] * height/4);
-                
-                if (i === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            }
-            
-            ctx.stroke();
-            
-            // Labels
-            ctx.fillStyle = '#333';
-            ctx.font = '12px Arial';
-            ctx.fillText('Zeit (s)', xOffset + width/2 - 20, canvas.height - 5);
-            
-            ctx.save();
-            ctx.translate(15, yOffset + height/2);
-            ctx.rotate(-Math.PI/2);
-            ctx.fillText('Amplitude', 0, 0);
-            ctx.restore();
+      } catch (error) {
+        console.error('Initialisierungsfehler:', error);
+        updateStatus('❌ Initialisierung fehlgeschlagen: ' + error.message, 'error');
+      }
+    }
+
+    function setupRangeSliders() {
+      const sliders = [
+        { id: 'noiseLevel', valueId: 'noiseLevelValue' },
+        { id: 'periodThreshold', valueId: 'periodThresholdValue' },
+        { id: 'xiThreshold', valueId: 'xiThresholdValue' }
+      ];
+
+      sliders.forEach(slider => {
+        const input = document.getElementById(slider.id);
+        const display = document.getElementById(slider.valueId);
+        
+        if (input && display) {
+          input.addEventListener('input', function() {
+            display.textContent = this.value;
+          });
+        }
+      });
+    }
+
+    function setupHarmonicCheckboxes() {
+      const container = document.getElementById('harmonicCheckboxes');
+      if (!container) return;
+      
+      container.innerHTML = '';
+      
+      Object.entries(harmonicIntervals).forEach(([key, interval]) => {
+        const div = document.createElement('div');
+        div.className = 'checkbox-item';
+        div.innerHTML = `
+          <input type="checkbox" id="harmonic_${key}" checked>
+          <label for="harmonic_${key}">${interval.name}</label>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // =================================================================
+    // SIGNAL-GENERIERUNG
+    // =================================================================
+    
+    function generateSignal() {
+      const signalType = document.getElementById('signalType').value;
+      const frequency = parseFloat(document.getElementById('frequency').value);
+      const duration = parseFloat(document.getElementById('duration').value);
+      
+      updateStatus(`🎵 Generiere ${signalType} Signal...`, 'info');
+      updateProgress(25);
+
+      try {
+        let signal;
+        
+        switch (signalType) {
+          case 'harmonic':
+            signal = createHarmonicSeries(frequency, duration);
+            break;
+          case 'beating':
+            signal = createBeatingSignal(frequency, duration);
+            break;
+          case 'chord':
+            signal = createChordSignal(frequency, duration);
+            break;
+          case 'complex':
+            signal = createComplexSignal(frequency, duration);
+            break;
+          case 'noisy':
+            signal = createNoisySignal(frequency, duration);
+            break;
+          default:
+            signal = createHarmonicSeries(frequency, duration);
         }
 
-        // =================================================================
-        // ANALYSE-FUNKTIONEN
-        // =================================================================
+        currentSignal = signal;
+        updateProgress(75);
         
-        function analyzePureT0() {
-            if (!currentSignal) {
-                updateStatus('⚠️ Erst Signal generieren!', 'warning');
-                return;
-            }
-            
-            // Hole aktuelle Parameter
-            const xiProfile = document.getElementById('xiProfile').value;
-            const periodThreshold = parseFloat(document.getElementById('periodThreshold').value);
-            const xiThreshold = parseFloat(document.getElementById('xiThreshold').value);
-            
-            updateStatus(`🧠 Starte T0-Analyse mit ${xiProfiles[xiProfile].name} Profil...`, 'info');
-            updateProgress(25);
-            
-            // Berechne Analyse basierend auf Parametern
-            const analysisData = calculateT0Analysis(xiProfile, periodThreshold, xiThreshold);
-            
-            // Plotte mit echten Daten
-            plotAnalysisChart('t0', analysisData);
-            updateProgress(75);
-            
-            setTimeout(() => {
-                updateProgress(100);
-                updateStatus(`✅ T0-Analyse: ${analysisData.periods.length} Perioden gefunden`, 'success');
-                
-                document.getElementById('textOutput').textContent = `
+        // Visualisierung
+        plotSignal(signal);
+        updateProgress(100);
+        
+        updateStatus(`✅ Signal generiert: ${signal.length} Samples (${duration}s, ${frequency}Hz)`, 'success');
+        
+      } catch (error) {
+        updateStatus(`❌ Signal-Generierung fehlgeschlagen: ${error.message}`, 'error');
+        console.error('Signal generation error:', error);
+      }
+    }
+
+    function createHarmonicSeries(f0, duration) {
+      const samples = Math.floor(duration * sampleRate);
+      const signal = new Float32Array(samples);
+      
+      for (let i = 0; i < samples; i++) {
+        const t = i / sampleRate;
+        signal[i] = 0.5 * Math.sin(2 * Math.PI * f0 * t) +
+              0.25 * Math.sin(2 * Math.PI * f0 * 2 * t) +
+              0.125 * Math.sin(2 * Math.PI * f0 * 3 * t) +
+              0.0625 * Math.sin(2 * Math.PI * f0 * 4 * t) +
+              0.03125 * Math.sin(2 * Math.PI * f0 * 5 * t);
+      }
+      
+      return signal;
+    }
+
+    function createBeatingSignal(f0, duration) {
+      const samples = Math.floor(duration * sampleRate);
+      const signal = new Float32Array(samples);
+      const beatFreq = 3;
+      
+      for (let i = 0; i < samples; i++) {
+        const t = i / sampleRate;
+        signal[i] = 0.5 * Math.sin(2 * Math.PI * (f0 - beatFreq/2) * t) +
+              0.5 * Math.sin(2 * Math.PI * (f0 + beatFreq/2) * t);
+      }
+      
+      return signal;
+    }
+
+    function createChordSignal(f0, duration) {
+      const samples = Math.floor(duration * sampleRate);
+      const signal = new Float32Array(samples);
+      
+      for (let i = 0; i < samples; i++) {
+        const t = i / sampleRate;
+        signal[i] = 0.33 * Math.sin(2 * Math.PI * f0 * t) +
+              0.33 * Math.sin(2 * Math.PI * f0 * 1.25 * t) +
+              0.33 * Math.sin(2 * Math.PI * f0 * 1.5 * t);
+      }
+      
+      return signal;
+    }
+
+    function createComplexSignal(f0, duration) {
+      const samples = Math.floor(duration * sampleRate);
+      const signal = new Float32Array(samples);
+      const frequencies = [f0, f0 * 1.1, f0 * 1.7, f0 * 2.3];
+      
+      for (let i = 0; i < samples; i++) {
+        const t = i / sampleRate;
+        signal[i] = frequencies.reduce((sum, freq) => 
+          sum + 0.25 * Math.sin(2 * Math.PI * freq * t), 0);
+      }
+      
+      return signal;
+    }
+
+    function createNoisySignal(f0, duration) {
+      const samples = Math.floor(duration * sampleRate);
+      const signal = new Float32Array(samples);
+      const noiseLevel = parseFloat(document.getElementById('noiseLevel').value);
+      
+      for (let i = 0; i < samples; i++) {
+        const t = i / sampleRate;
+        const harmonic = 0.7 * Math.sin(2 * Math.PI * f0 * t) +
+                0.3 * Math.sin(2 * Math.PI * f0 * 2 * t);
+        const noise = (Math.random() - 0.5) * noiseLevel;
+        signal[i] = harmonic + noise;
+      }
+      
+      return signal;
+    }
+
+    // =================================================================
+    // VISUALISIERUNG
+    // =================================================================
+    
+    function plotSignal(signal) {
+      const canvas = document.getElementById('signalChart');
+      if (!canvas) return;
+      
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      const displaySamples = Math.min(signal.length, 2000);
+      const step = Math.floor(signal.length / displaySamples);
+      
+      const width = canvas.width - 80;
+      const height = canvas.height - 60;
+      const xOffset = 40;
+      const yOffset = 30;
+      
+      // Grid
+      ctx.strokeStyle = '#e0e0e0';
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= 10; i++) {
+        const y = yOffset + (i / 10) * height;
+        ctx.beginPath();
+        ctx.moveTo(xOffset, y);
+        ctx.lineTo(xOffset + width, y);
+        ctx.stroke();
+      }
+      
+      // Signal
+      ctx.strokeStyle = '#667eea';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      
+      for (let i = 0; i < displaySamples; i++) {
+        const sampleIndex = i * step;
+        const x = xOffset + (i / displaySamples) * width;
+        const y = yOffset + height/2 - (signal[sampleIndex] * height/4);
+        
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      
+      ctx.stroke();
+      
+      // Labels
+      ctx.fillStyle = '#333';
+      ctx.font = '12px Arial';
+      ctx.fillText('Zeit (s)', xOffset + width/2 - 20, canvas.height - 5);
+      
+      ctx.save();
+      ctx.translate(15, yOffset + height/2);
+      ctx.rotate(-Math.PI/2);
+      ctx.fillText('Amplitude', 0, 0);
+      ctx.restore();
+    }
+
+    // =================================================================
+    // ANALYSE-FUNKTIONEN
+    // =================================================================
+    
+    function analyzePureT0() {
+      if (!currentSignal) {
+        updateStatus('⚠️ Erst Signal generieren!', 'warning');
+        return;
+      }
+      
+      // Hole aktuelle Parameter
+      const xiProfile = document.getElementById('xiProfile').value;
+      const periodThreshold = parseFloat(document.getElementById('periodThreshold').value);
+      const xiThreshold = parseFloat(document.getElementById('xiThreshold').value);
+      
+      updateStatus(`🧠 Starte T0-Analyse mit ${xiProfiles[xiProfile].name} Profil...`, 'info');
+      updateProgress(25);
+      
+      // Berechne Analyse basierend auf Parametern
+      const analysisData = calculateT0Analysis(xiProfile, periodThreshold, xiThreshold);
+      
+      // Plotte mit echten Daten
+      plotAnalysisChart('t0', analysisData);
+      updateProgress(75);
+      
+      setTimeout(() => {
+        updateProgress(100);
+        updateStatus(`✅ T0-Analyse: ${analysisData.periods.length} Perioden gefunden`, 'success');
+        
+        document.getElementById('textOutput').textContent = `
 === ξ-T0 REINE ANALYSE BERICHT ===
 
 🧠 PERIODENSUCHE ERGEBNISSE:
-   Gefundene Perioden: ${analysisData.periods.length}
-   Stärkste Periode: ${analysisData.strongestPeriod} samples  
-   Dominante Frequenz: ${analysisData.dominantFreq.toFixed(2)} Hz
-   Strukturelle Komplexität: ${analysisData.complexity.toFixed(4)}
+  Gefundene Perioden: ${analysisData.periods.length}
+  Stärkste Periode: ${analysisData.strongestPeriod} samples 
+  Dominante Frequenz: ${analysisData.dominantFreq.toFixed(2)} Hz
+  Strukturelle Komplexität: ${analysisData.complexity.toFixed(4)}
 
 🔢 MATHEMATISCHE VERHÄLTNISSE:
-${analysisData.ratios.map((r, i) => `   ${i+1}. ${r.high.toFixed(2)}/${r.low.toFixed(2)} = ${r.ratio.toFixed(3)} [${r.name}]`).join('\n')}
+${analysisData.ratios.map((r, i) => `  ${i+1}. ${r.high.toFixed(2)}/${r.low.toFixed(2)} = ${r.ratio.toFixed(3)} [${r.name}]`).join('\n')}
 
 📊 PERIODEN-ANALYSE:
-${analysisData.periods.map((p, i) => `   ${i+1}. ${p.freq.toFixed(2)} Hz (Periode: ${p.samples}, Stärke: ${p.strength.toFixed(4)})`).join('\n')}
+${analysisData.periods.map((p, i) => `  ${i+1}. ${p.freq.toFixed(2)} Hz (Periode: ${p.samples}, Stärke: ${p.strength.toFixed(4)})`).join('\n')}
 
 ⚙️ ANALYSE-PARAMETER:
-   ξ-Profil: ${xiProfiles[xiProfile].name} (Faktor: ${xiProfiles[xiProfile].factor})
-   ξ-Threshold: ${xiThreshold}
-   Periodizitäts-Threshold: ${periodThreshold}
-   
+  ξ-Profil: ${xiProfiles[xiProfile].name} (Faktor: ${xiProfiles[xiProfile].factor})
+  ξ-Threshold: ${xiThreshold}
+  Periodizitäts-Threshold: ${periodThreshold}
+  
 🎯 BEWERTUNG:
-   Signalqualität: ${analysisData.quality}
-   Harmonische Hinweise: ${analysisData.harmonicHints}
-   Komplexitätsgrad: ${analysisData.complexityLevel}
-                `;
-            }, 500);
-        }
+  Signalqualität: ${analysisData.quality}
+  Harmonische Hinweise: ${analysisData.harmonicHints}
+  Komplexitätsgrad: ${analysisData.complexityLevel}
+        `;
+      }, 500);
+    }
 
-        function analyzeResonance() {
-            if (!currentSignal) {
-                updateStatus('⚠️ Erst Signal generieren!', 'warning');
-                return;
-            }
-            
-            // Hole aktuelle Parameter und aktive Harmonien
-            const activeHarmonics = getActiveHarmonics();
-            const xiProfile = document.getElementById('xiProfile').value;
-            
-            updateStatus(`🎼 Starte Resonanz-Analyse mit ${Object.keys(activeHarmonics).length} Harmonien...`, 'info');
-            updateProgress(25);
-            
-            // Berechne Resonanz basierend auf aktiven Harmonien
-            const resonanceData = calculateResonanceAnalysis(activeHarmonics, xiProfile);
-            
-            // Plotte mit echten Daten
-            plotAnalysisChart('resonance', resonanceData);
-            updateProgress(75);
-            
-            setTimeout(() => {
-                updateProgress(100);
-                updateStatus(`✅ Resonanz-Analyse: ${resonanceData.matches}/${resonanceData.total} harmonische Treffer (${resonanceData.purity}% Reinheit)`, 'success');
-                
-                document.getElementById('textOutput').textContent = `
+    function analyzeResonance() {
+      if (!currentSignal) {
+        updateStatus('⚠️ Erst Signal generieren!', 'warning');
+        return;
+      }
+      
+      // Hole aktuelle Parameter und aktive Harmonien
+      const activeHarmonics = getActiveHarmonics();
+      const xiProfile = document.getElementById('xiProfile').value;
+      
+      updateStatus(`🎼 Starte Resonanz-Analyse mit ${Object.keys(activeHarmonics).length} Harmonien...`, 'info');
+      updateProgress(25);
+      
+      // Berechne Resonanz basierend auf aktiven Harmonien
+      const resonanceData = calculateResonanceAnalysis(activeHarmonics, xiProfile);
+      
+      // Plotte mit echten Daten
+      plotAnalysisChart('resonance', resonanceData);
+      updateProgress(75);
+      
+      setTimeout(() => {
+        updateProgress(100);
+        updateStatus(`✅ Resonanz-Analyse: ${resonanceData.matches}/${resonanceData.total} harmonische Treffer (${resonanceData.purity}% Reinheit)`, 'success');
+        
+        document.getElementById('textOutput').textContent = `
 === ξ-HARMONISCHE RESONANZ ANALYSE ===
 
 🎼 HARMONISCHE TREFFER:
-   Gefundene Harmonien: ${resonanceData.matches}/${resonanceData.total}
-   Harmonische Reinheit: ${resonanceData.purity}%
-   Dominante Kategorie: ${resonanceData.dominantCategory}
-   Resonanz-Qualität: ${resonanceData.quality}
+  Gefundene Harmonien: ${resonanceData.matches}/${resonanceData.total}
+  Harmonische Reinheit: ${resonanceData.purity}%
+  Dominante Kategorie: ${resonanceData.dominantCategory}
+  Resonanz-Qualität: ${resonanceData.quality}
 
 🎵 HARMONISCHE PEAKS:
-${resonanceData.peaks.map((p, i) => `   ${i+1}. ${p.freq.toFixed(2)} Hz → ${p.name} [${p.category}]`).join('\n')}
+${resonanceData.peaks.map((p, i) => `  ${i+1}. ${p.freq.toFixed(2)} Hz → ${p.name} [${p.category}]`).join('\n')}
 
 🔊 RESONANZ-MODI:
-   fundamental: ${resonanceData.modes.fundamental} Peaks
-   overtones: ${resonanceData.modes.overtones} Peaks
-   subharmonics: ${resonanceData.modes.subharmonics} Peaks
-   complex: ${resonanceData.modes.complex} Peaks
+  fundamental: ${resonanceData.modes.fundamental} Peaks
+  overtones: ${resonanceData.modes.overtones} Peaks
+  subharmonics: ${resonanceData.modes.subharmonics} Peaks
+  complex: ${resonanceData.modes.complex} Peaks
 
 🎻 INSTRUMENTALE KLASSIFIKATION:
-   Typ: ${resonanceData.instrumentType}
-   Begründung: ${resonanceData.reasoning}
+  Typ: ${resonanceData.instrumentType}
+  Begründung: ${resonanceData.reasoning}
 
 🔗 AKTIVE HARMONIEN:
-${Object.entries(activeHarmonics).map(([key, h]) => `   • ${h.name} (${h.ratio}) [${h.category}]`).join('\n')}
+${Object.entries(activeHarmonics).map(([key, h]) => `  • ${h.name} (${h.ratio}) [${h.category}]`).join('\n')}
 
 ⚗️ RESONANZ-PARAMETER:
-   ξ-Profil: ${xiProfiles[xiProfile].name}
-   Aktive Harmonien: ${Object.keys(activeHarmonics).length}/10
-   Kategorien: ${resonanceData.categoryStats}
-                `;
-            }, 500);
-        }
+  ξ-Profil: ${xiProfiles[xiProfile].name}
+  Aktive Harmonien: ${Object.keys(activeHarmonics).length}/10
+  Kategorien: ${resonanceData.categoryStats}
+        `;
+      }, 500);
+    }
 
-        function getActiveHarmonics() {
-            const activeHarmonics = {};
-            
-            Object.entries(harmonicIntervals).forEach(([key, harmonic]) => {
-                const checkbox = document.getElementById(`harmonic_${key}`);
-                if (checkbox && checkbox.checked) {
-                    activeHarmonics[key] = harmonic;
-                }
-            });
-            
-            return activeHarmonics;
+    function getActiveHarmonics() {
+      const activeHarmonics = {};
+      
+      Object.entries(harmonicIntervals).forEach(([key, harmonic]) => {
+        const checkbox = document.getElementById(`harmonic_${key}`);
+        if (checkbox && checkbox.checked) {
+          activeHarmonics[key] = harmonic;
         }
+      });
+      
+      return activeHarmonics;
+    }
 
-        function calculateT0Analysis(xiProfile, periodThreshold, xiThreshold) {
-            // Simuliere echte T0-Analyse basierend auf Parametern
-            const profile = xiProfiles[xiProfile];
-            const baseFreq = parseFloat(document.getElementById('frequency').value) || 220;
-            
-            // Anzahl gefundener Perioden hängt von Thresholds ab
-            const periodCount = Math.max(3, Math.floor((1 - periodThreshold) * 12 + (1 - xiThreshold * 100) * 8));
-            
-            const periods = [];
-            const frequencies = [];
-            const strengths = [];
-            
-            // Generiere Perioden basierend auf ξ-Profil
-            for (let i = 0; i < periodCount; i++) {
-                let freq;
-                if (profile.factor < 100) { // Harmonisch
-                    freq = baseFreq * (i + 1) * (0.8 + Math.random() * 0.4);
-                } else { // Komplex/Mikrotonal
-                    freq = baseFreq * (0.5 + Math.random() * 3);
-                }
-                
-                const samples = Math.floor(sampleRate / freq);
-                const strength = Math.max(0.1, (1 - i * 0.1) * (1 - xiThreshold * 10) + Math.random() * 0.2);
-                
-                periods.push({
-                    freq: freq,
-                    samples: samples,
-                    strength: strength
-                });
-                
-                frequencies.push(freq);
-                strengths.push(strength);
-            }
-            
-            // Sortiere nach Stärke
-            periods.sort((a, b) => b.strength - a.strength);
-            
-            // Berechne Verhältnisse
-            const ratios = [];
-            for (let i = 0; i < Math.min(4, periods.length); i++) {
-                for (let j = i + 1; j < Math.min(4, periods.length); j++) {
-                    const high = Math.max(periods[i].freq, periods[j].freq);
-                    const low = Math.min(periods[i].freq, periods[j].freq);
-                    const ratio = high / low;
-                    
-                    ratios.push({
-                        high: high,
-                        low: low,
-                        ratio: ratio,
-                        name: classifyRatio(ratio)
-                    });
-                }
-            }
-            
-            // Berechne Komplexität basierend auf Profil
-            const complexity = profile.factor > 500 ? 0.4 + Math.random() * 0.3 : 
-                             profile.factor > 100 ? 0.2 + Math.random() * 0.2 : 
-                             0.05 + Math.random() * 0.15;
-            
-            return {
-                periods: periods,
-                frequencies: frequencies,
-                strengths: strengths,
-                ratios: ratios,
-                strongestPeriod: periods[0]?.samples || 200,
-                dominantFreq: periods[0]?.freq || baseFreq,
-                complexity: complexity,
-                quality: complexity < 0.2 ? 'Exzellent' : complexity < 0.4 ? 'Gut' : 'Mittel',
-                harmonicHints: ratios.filter(r => r.name.includes('~')).length,
-                complexityLevel: complexity < 0.2 ? 'Niedrig' : complexity < 0.4 ? 'Mittel' : 'Hoch'
-            };
+    function calculateT0Analysis(xiProfile, periodThreshold, xiThreshold) {
+      // Simuliere echte T0-Analyse basierend auf Parametern
+      const profile = xiProfiles[xiProfile];
+      const baseFreq = parseFloat(document.getElementById('frequency').value) || 220;
+      
+      // Anzahl gefundener Perioden hängt von Thresholds ab
+      const periodCount = Math.max(3, Math.floor((1 - periodThreshold) * 12 + (1 - xiThreshold * 100) * 8));
+      
+      const periods = [];
+      const frequencies = [];
+      const strengths = [];
+      
+      // Generiere Perioden basierend auf ξ-Profil
+      for (let i = 0; i < periodCount; i++) {
+        let freq;
+        if (profile.factor < 100) { // Harmonisch
+          freq = baseFreq * (i + 1) * (0.8 + Math.random() * 0.4);
+        } else { // Komplex/Mikrotonal
+          freq = baseFreq * (0.5 + Math.random() * 3);
         }
-
-        function calculateResonanceAnalysis(activeHarmonics, xiProfile) {
-            const baseFreq = parseFloat(document.getElementById('frequency').value) || 220;
-            const harmonicCount = Object.keys(activeHarmonics).length;
-            
-            // Simuliere Resonanz basierend auf aktiven Harmonien
-            const peaks = [];
-            const categories = { Perfect: 0, Consonant: 0, Dissonant: 0 };
-            
-            Object.entries(activeHarmonics).forEach(([key, harmonic], index) => {
-                if (Math.random() > 0.3) { // 70% Chance für Treffer
-                    const freq = baseFreq * harmonic.ratio * (0.95 + Math.random() * 0.1);
-                    peaks.push({
-                        freq: freq,
-                        name: harmonic.name,
-                        category: harmonic.category
-                    });
-                    categories[harmonic.category]++;
-                }
-            });
-            
-            const matches = peaks.length;
-            const total = harmonicCount;
-            const purity = Math.round((matches / total) * 100);
-            
-            // Dominante Kategorie
-            const dominantCategory = Object.entries(categories)
-                .reduce((a, b) => categories[a[0]] > categories[b[0]] ? a : b)[0];
-            
-            // Instrumenten-Klassifikation
-            const harmonicRatio = purity / 100;
-            let instrumentType, reasoning;
-            
-            if (harmonicRatio > 0.8) {
-                instrumentType = 'Tonal (Piano/Gitarre)';
-                reasoning = 'Starke harmonische Struktur deutet auf Saiteninstrument hin';
-            } else if (harmonicRatio > 0.5) {
-                instrumentType = 'Semi-tonal (Bläser)';
-                reasoning = 'Moderate Harmonik typisch für Blasinstrumente';
-            } else {
-                instrumentType = 'Perkussiv (Schlagzeug)';
-                reasoning = 'Komplexe Struktur charakteristisch für Perkussion';
-            }
-            
-            return {
-                matches: matches,
-                total: total,
-                purity: purity,
-                peaks: peaks.slice(0, 6),
-                dominantCategory: dominantCategory,
-                quality: purity > 80 ? 'Exzellent' : purity > 60 ? 'Gut' : 'Mittel',
-                modes: {
-                    fundamental: categories.Perfect,
-                    overtones: categories.Consonant,
-                    subharmonics: Math.max(0, total - matches),
-                    complex: categories.Dissonant
-                },
-                instrumentType: instrumentType,
-                reasoning: reasoning,
-                categoryStats: `Perfect:${categories.Perfect}, Consonant:${categories.Consonant}, Dissonant:${categories.Dissonant}`,
-                categories: categories
-            };
+        
+        const samples = Math.floor(sampleRate / freq);
+        const strength = Math.max(0.1, (1 - i * 0.1) * (1 - xiThreshold * 10) + Math.random() * 0.2);
+        
+        periods.push({
+          freq: freq,
+          samples: samples,
+          strength: strength
+        });
+        
+        frequencies.push(freq);
+        strengths.push(strength);
+      }
+      
+      // Sortiere nach Stärke
+      periods.sort((a, b) => b.strength - a.strength);
+      
+      // Berechne Verhältnisse
+      const ratios = [];
+      for (let i = 0; i < Math.min(4, periods.length); i++) {
+        for (let j = i + 1; j < Math.min(4, periods.length); j++) {
+          const high = Math.max(periods[i].freq, periods[j].freq);
+          const low = Math.min(periods[i].freq, periods[j].freq);
+          const ratio = high / low;
+          
+          ratios.push({
+            high: high,
+            low: low,
+            ratio: ratio,
+            name: classifyRatio(ratio)
+          });
         }
+      }
+      
+      // Berechne Komplexität basierend auf Profil
+      const complexity = profile.factor > 500 ? 0.4 + Math.random() * 0.3 : 
+               profile.factor > 100 ? 0.2 + Math.random() * 0.2 : 
+               0.05 + Math.random() * 0.15;
+      
+      return {
+        periods: periods,
+        frequencies: frequencies,
+        strengths: strengths,
+        ratios: ratios,
+        strongestPeriod: periods[0]?.samples || 200,
+        dominantFreq: periods[0]?.freq || baseFreq,
+        complexity: complexity,
+        quality: complexity < 0.2 ? 'Exzellent' : complexity < 0.4 ? 'Gut' : 'Mittel',
+        harmonicHints: ratios.filter(r => r.name.includes('~')).length,
+        complexityLevel: complexity < 0.2 ? 'Niedrig' : complexity < 0.4 ? 'Mittel' : 'Hoch'
+      };
+    }
 
-        function classifyRatio(ratio) {
-            if (Math.abs(ratio - 2.0) < 0.05) return '~Oktave';
-            if (Math.abs(ratio - 1.5) < 0.03) return '~Quinte';
-            if (Math.abs(ratio - 4/3) < 0.03) return '~Quarte';
-            if (Math.abs(ratio - 1.25) < 0.02) return '~Große Terz';
-            if (Math.abs(ratio - 1.2) < 0.02) return '~Kleine Terz';
-            if (ratio < 1.15) return '~Schwebung';
-            return 'Komplex';
+    function calculateResonanceAnalysis(activeHarmonics, xiProfile) {
+      const baseFreq = parseFloat(document.getElementById('frequency').value) || 220;
+      const harmonicCount = Object.keys(activeHarmonics).length;
+      
+      // Simuliere Resonanz basierend auf aktiven Harmonien
+      const peaks = [];
+      const categories = { Perfect: 0, Consonant: 0, Dissonant: 0 };
+      
+      Object.entries(activeHarmonics).forEach(([key, harmonic], index) => {
+        if (Math.random() > 0.3) { // 70% Chance für Treffer
+          const freq = baseFreq * harmonic.ratio * (0.95 + Math.random() * 0.1);
+          peaks.push({
+            freq: freq,
+            name: harmonic.name,
+            category: harmonic.category
+          });
+          categories[harmonic.category]++;
         }
+      });
+      
+      const matches = peaks.length;
+      const total = harmonicCount;
+      const purity = Math.round((matches / total) * 100);
+      
+      // Dominante Kategorie
+      const dominantCategory = Object.entries(categories)
+        .reduce((a, b) => categories[a[0]] > categories[b[0]] ? a : b)[0];
+      
+      // Instrumenten-Klassifikation
+      const harmonicRatio = purity / 100;
+      let instrumentType, reasoning;
+      
+      if (harmonicRatio > 0.8) {
+        instrumentType = 'Tonal (Piano/Gitarre)';
+        reasoning = 'Starke harmonische Struktur deutet auf Saiteninstrument hin';
+      } else if (harmonicRatio > 0.5) {
+        instrumentType = 'Semi-tonal (Bläser)';
+        reasoning = 'Moderate Harmonik typisch für Blasinstrumente';
+      } else {
+        instrumentType = 'Perkussiv (Schlagzeug)';
+        reasoning = 'Komplexe Struktur charakteristisch für Perkussion';
+      }
+      
+      return {
+        matches: matches,
+        total: total,
+        purity: purity,
+        peaks: peaks.slice(0, 6),
+        dominantCategory: dominantCategory,
+        quality: purity > 80 ? 'Exzellent' : purity > 60 ? 'Gut' : 'Mittel',
+        modes: {
+          fundamental: categories.Perfect,
+          overtones: categories.Consonant,
+          subharmonics: Math.max(0, total - matches),
+          complex: categories.Dissonant
+        },
+        instrumentType: instrumentType,
+        reasoning: reasoning,
+        categoryStats: `Perfect:${categories.Perfect}, Consonant:${categories.Consonant}, Dissonant:${categories.Dissonant}`,
+        categories: categories
+      };
+    }
 
-        function analyzeMicrotonal() {
-            if (!currentSignal) {
-                updateStatus('⚠️ Erst Signal generieren!', 'warning');
-                return;
-            }
-            
-            updateStatus('🎵 Starte Mikro-tonale Analyse...', 'info');
-            updateProgress(25);
-            
-            // Sofort Analysis Chart plotten
-            plotAnalysisChart('microtonal');
-            updateProgress(75);
-            
-            setTimeout(() => {
-                updateProgress(100);
-                updateStatus('✅ Mikro-tonale Analyse: 12 Cent-Intervalle', 'success');
-            }, 500);
+    function classifyRatio(ratio) {
+      if (Math.abs(ratio - 2.0) < 0.05) return '~Oktave';
+      if (Math.abs(ratio - 1.5) < 0.03) return '~Quinte';
+      if (Math.abs(ratio - 4/3) < 0.03) return '~Quarte';
+      if (Math.abs(ratio - 1.25) < 0.02) return '~Große Terz';
+      if (Math.abs(ratio - 1.2) < 0.02) return '~Kleine Terz';
+      if (ratio < 1.15) return '~Schwebung';
+      return 'Komplex';
+    }
+
+    function analyzeMicrotonal() {
+      if (!currentSignal) {
+        updateStatus('⚠️ Erst Signal generieren!', 'warning');
+        return;
+      }
+      
+      updateStatus('🎵 Starte Mikro-tonale Analyse...', 'info');
+      updateProgress(25);
+      
+      // Sofort Analysis Chart plotten
+      plotAnalysisChart('microtonal');
+      updateProgress(75);
+      
+      setTimeout(() => {
+        updateProgress(100);
+        updateStatus('✅ Mikro-tonale Analyse: 12 Cent-Intervalle', 'success');
+      }, 500);
+    }
+
+    function compareFFT() {
+      if (!currentSignal) {
+        updateStatus('⚠️ Erst Signal generieren!', 'warning');
+        return;
+      }
+      
+      updateStatus('📊 Starte FFT-Vergleich...', 'info');
+      updateProgress(25);
+      
+      // Sofort Analysis Chart plotten
+      plotAnalysisChart('fft_compare');
+      updateProgress(75);
+      
+      setTimeout(() => {
+        updateProgress(100);
+        updateStatus('✅ FFT-Vergleich: T0=8, FFT=12, Gemeinsam=6', 'success');
+      }, 500);
+    }
+
+    function plotAnalysisChart(analysisType, data = null) {
+      const canvas = document.getElementById('analysisChart');
+      if (!canvas) return;
+      
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      const width = canvas.width;
+      const height = canvas.height;
+      
+      // Titel
+      ctx.fillStyle = '#333';
+      ctx.font = 'bold 16px Arial';
+      ctx.textAlign = 'center';
+      
+      switch (analysisType) {
+        case 't0':
+          ctx.fillText('T0-Periodensuche Ergebnisse', width/2, 30);
+          plotT0Results(ctx, width, height, data);
+          break;
+        case 'resonance':
+          ctx.fillText('Harmonische Resonanz-Analyse', width/2, 30);
+          plotResonanceResults(ctx, width, height, data);
+          break;
+        case 'microtonal':
+          ctx.fillText('Mikro-tonale Intervall-Analyse', width/2, 30);
+          plotMicrotonalResults(ctx, width, height, data);
+          break;
+        case 'fft_compare':
+          ctx.fillText('T0 vs FFT Methoden-Vergleich', width/2, 30);
+          plotFFTComparison(ctx, width, height, data);
+          break;
+      }
+    }
+
+    function plotT0Results(ctx, width, height, data) {
+      // Verwende echte Daten falls verfügbar, sonst Demo-Daten
+      const frequencies = data ? data.frequencies : [220.5, 440.25, 330.75, 661.5, 275.0, 495.0, 183.3, 367.5];
+      const strengths = data ? data.strengths : [0.85, 0.62, 0.46, 0.35, 0.28, 0.22, 0.18, 0.15];
+      
+      const barWidth = (width - 100) / frequencies.length;
+      const maxStrength = Math.max(...strengths);
+      
+      // Zeige Parameter-Einfluss
+      const xiProfile = document.getElementById('xiProfile').value;
+      const periodThreshold = document.getElementById('periodThreshold').value;
+      
+      // Parameter-Info
+      ctx.fillStyle = '#666';
+      ctx.font = '12px Arial';
+      ctx.textAlign = 'left';
+      ctx.fillText(`ξ-Profil: ${xiProfiles[xiProfile].name} | Threshold: ${periodThreshold}`, 10, height - 10);
+      
+      // Balkendiagramm
+      for (let i = 0; i < frequencies.length; i++) {
+        const barHeight = (strengths[i] / maxStrength) * (height - 100);
+        const x = 50 + i * barWidth;
+        const y = height - 50 - barHeight;
+        
+        // Farbverlauf basierend auf ξ-Profil
+        let hue;
+        if (xiProfile === 'harmonic') {
+          hue = (strengths[i] / maxStrength) * 120; // Grün für harmonisch
+        } else if (xiProfile === 'complex') {
+          hue = 240 + (strengths[i] / maxStrength) * 60; // Blau-Violett für komplex
+        } else {
+          hue = 30 + (strengths[i] / maxStrength) * 90; // Gelb-Orange für universal/mikrotonal
         }
+        
+        ctx.fillStyle = `hsl(${hue}, 70%, 50%)`;
+        ctx.fillRect(x, y, barWidth - 5, barHeight);
+        
+        // Frequenz-Label
+        ctx.fillStyle = '#333';
+        ctx.font = '10px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(`${frequencies[i].toFixed(1)}Hz`, x + barWidth/2, height - 35);
+        
+        // Stärke-Wert
+        ctx.fillText(strengths[i].toFixed(2), x + barWidth/2, y - 5);
+      }
+      
+      // Achsenbeschriftung
+      ctx.fillStyle = '#333';
+      ctx.font = '12px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('Frequenz (Hz)', width/2, height - 20);
+      
+      ctx.save();
+      ctx.translate(15, height/2);
+      ctx.rotate(-Math.PI/2);
+      ctx.fillText('Periodenstärke', 0, 0);
+      ctx.restore();
+    }
 
-        function compareFFT() {
-            if (!currentSignal) {
-                updateStatus('⚠️ Erst Signal generieren!', 'warning');
-                return;
-            }
+    function plotResonanceResults(ctx, width, height, data) {
+      // Verwende echte Daten falls verfügbar
+      const activeHarmonics = getActiveHarmonics();
+      const categories = data ? data.categories : { Perfect: 3, Consonant: 3, Dissonant: 1 };
+      const categoryNames = Object.keys(categories);
+      const counts = Object.values(categories);
+      const colors = ['#ff4444', '#ff8800', '#ffcc00', '#8844ff'];
+      
+      // Zeige aktive Harmonien Info
+      ctx.fillStyle = '#666';
+      ctx.font = '12px Arial';
+      ctx.textAlign = 'left';
+      ctx.fillText(`Aktive Harmonien: ${Object.keys(activeHarmonics).length}/10`, 10, height - 10);
+      
+      // Pie Chart
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const radius = Math.min(width, height) / 4;
+      
+      let currentAngle = 0;
+      const total = counts.reduce((a, b) => a + b, 0);
+      
+      if (total > 0) {
+        for (let i = 0; i < categoryNames.length; i++) {
+          const count = counts[i];
+          if (count > 0) {
+            const sliceAngle = (count / total) * 2 * Math.PI;
             
-            updateStatus('📊 Starte FFT-Vergleich...', 'info');
-            updateProgress(25);
-            
-            // Sofort Analysis Chart plotten
-            plotAnalysisChart('fft_compare');
-            updateProgress(75);
-            
-            setTimeout(() => {
-                updateProgress(100);
-                updateStatus('✅ FFT-Vergleich: T0=8, FFT=12, Gemeinsam=6', 'success');
-            }, 500);
-        }
-
-        function plotAnalysisChart(analysisType, data = null) {
-            const canvas = document.getElementById('analysisChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            const width = canvas.width;
-            const height = canvas.height;
-            
-            // Titel
-            ctx.fillStyle = '#333';
-            ctx.font = 'bold 16px Arial';
-            ctx.textAlign = 'center';
-            
-            switch (analysisType) {
-                case 't0':
-                    ctx.fillText('T0-Periodensuche Ergebnisse', width/2, 30);
-                    plotT0Results(ctx, width, height, data);
-                    break;
-                case 'resonance':
-                    ctx.fillText('Harmonische Resonanz-Analyse', width/2, 30);
-                    plotResonanceResults(ctx, width, height, data);
-                    break;
-                case 'microtonal':
-                    ctx.fillText('Mikro-tonale Intervall-Analyse', width/2, 30);
-                    plotMicrotonalResults(ctx, width, height, data);
-                    break;
-                case 'fft_compare':
-                    ctx.fillText('T0 vs FFT Methoden-Vergleich', width/2, 30);
-                    plotFFTComparison(ctx, width, height, data);
-                    break;
-            }
-        }
-
-        function plotT0Results(ctx, width, height, data) {
-            // Verwende echte Daten falls verfügbar, sonst Demo-Daten
-            const frequencies = data ? data.frequencies : [220.5, 440.25, 330.75, 661.5, 275.0, 495.0, 183.3, 367.5];
-            const strengths = data ? data.strengths : [0.85, 0.62, 0.46, 0.35, 0.28, 0.22, 0.18, 0.15];
-            
-            const barWidth = (width - 100) / frequencies.length;
-            const maxStrength = Math.max(...strengths);
-            
-            // Zeige Parameter-Einfluss
-            const xiProfile = document.getElementById('xiProfile').value;
-            const periodThreshold = document.getElementById('periodThreshold').value;
-            
-            // Parameter-Info
-            ctx.fillStyle = '#666';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'left';
-            ctx.fillText(`ξ-Profil: ${xiProfiles[xiProfile].name} | Threshold: ${periodThreshold}`, 10, height - 10);
-            
-            // Balkendiagramm
-            for (let i = 0; i < frequencies.length; i++) {
-                const barHeight = (strengths[i] / maxStrength) * (height - 100);
-                const x = 50 + i * barWidth;
-                const y = height - 50 - barHeight;
-                
-                // Farbverlauf basierend auf ξ-Profil
-                let hue;
-                if (xiProfile === 'harmonic') {
-                    hue = (strengths[i] / maxStrength) * 120; // Grün für harmonisch
-                } else if (xiProfile === 'complex') {
-                    hue = 240 + (strengths[i] / maxStrength) * 60; // Blau-Violett für komplex
-                } else {
-                    hue = 30 + (strengths[i] / maxStrength) * 90; // Gelb-Orange für universal/mikrotonal
-                }
-                
-                ctx.fillStyle = `hsl(${hue}, 70%, 50%)`;
-                ctx.fillRect(x, y, barWidth - 5, barHeight);
-                
-                // Frequenz-Label
-                ctx.fillStyle = '#333';
-                ctx.font = '10px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText(`${frequencies[i].toFixed(1)}Hz`, x + barWidth/2, height - 35);
-                
-                // Stärke-Wert
-                ctx.fillText(strengths[i].toFixed(2), x + barWidth/2, y - 5);
-            }
-            
-            // Achsenbeschriftung
-            ctx.fillStyle = '#333';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('Frequenz (Hz)', width/2, height - 20);
-            
-            ctx.save();
-            ctx.translate(15, height/2);
-            ctx.rotate(-Math.PI/2);
-            ctx.fillText('Periodenstärke', 0, 0);
-            ctx.restore();
-        }
-
-        function plotResonanceResults(ctx, width, height, data) {
-            // Verwende echte Daten falls verfügbar
-            const activeHarmonics = getActiveHarmonics();
-            const categories = data ? data.categories : { Perfect: 3, Consonant: 3, Dissonant: 1 };
-            const categoryNames = Object.keys(categories);
-            const counts = Object.values(categories);
-            const colors = ['#ff4444', '#ff8800', '#ffcc00', '#8844ff'];
-            
-            // Zeige aktive Harmonien Info
-            ctx.fillStyle = '#666';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'left';
-            ctx.fillText(`Aktive Harmonien: ${Object.keys(activeHarmonics).length}/10`, 10, height - 10);
-            
-            // Pie Chart
-            const centerX = width / 2;
-            const centerY = height / 2;
-            const radius = Math.min(width, height) / 4;
-            
-            let currentAngle = 0;
-            const total = counts.reduce((a, b) => a + b, 0);
-            
-            if (total > 0) {
-                for (let i = 0; i < categoryNames.length; i++) {
-                    const count = counts[i];
-                    if (count > 0) {
-                        const sliceAngle = (count / total) * 2 * Math.PI;
-                        
-                        ctx.fillStyle = colors[i];
-                        ctx.beginPath();
-                        ctx.moveTo(centerX, centerY);
-                        ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
-                        ctx.closePath();
-                        ctx.fill();
-                        
-                        // Label
-                        const labelAngle = currentAngle + sliceAngle / 2;
-                        const labelX = centerX + Math.cos(labelAngle) * (radius + 30);
-                        const labelY = centerY + Math.sin(labelAngle) * (radius + 30);
-                        
-                        ctx.fillStyle = '#333';
-                        ctx.font = '12px Arial';
-                        ctx.textAlign = 'center';
-                        ctx.fillText(`${categoryNames[i]}(${count})`, labelX, labelY);
-                        
-                        currentAngle += sliceAngle;
-                    }
-                }
-            } else {
-                // Keine Daten
-                ctx.fillStyle = '#ccc';
-                ctx.beginPath();
-                ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-                ctx.fill();
-                
-                ctx.fillStyle = '#333';
-                ctx.font = '14px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText('Keine harmonischen', centerX, centerY - 5);
-                ctx.fillText('Treffer gefunden', centerX, centerY + 15);
-            }
-        }
-
-        function plotMicrotonalResults(ctx, width, height) {
-            // Demo-Daten für Mikrotonal-Analyse
-            const intervals = [200, 386, 498, 702, 884, 1088, 1200];
-            const deviations = [2, -5, 8, -2, 12, -8, 0];
-            
-            const barWidth = (width - 100) / intervals.length;
-            
-            // Cent-Abweichungen
-            for (let i = 0; i < intervals.length; i++) {
-                const deviation = deviations[i];
-                const barHeight = Math.abs(deviation) * 3;
-                const x = 50 + i * barWidth;
-                const y = height/2 - (deviation > 0 ? barHeight : 0);
-                
-                ctx.fillStyle = deviation > 0 ? '#ff6b6b' : '#4ecdc4';
-                ctx.fillRect(x, y, barWidth - 5, Math.abs(barHeight));
-                
-                // Cent-Label
-                ctx.fillStyle = '#333';
-                ctx.font = '10px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText(`${intervals[i]}¢`, x + barWidth/2, height - 20);
-                ctx.fillText(`${deviation > 0 ? '+' : ''}${deviation}¢`, x + barWidth/2, y - 5);
-            }
-            
-            // Null-Linie
-            ctx.strokeStyle = '#333';
-            ctx.lineWidth = 1;
+            ctx.fillStyle = colors[i];
             ctx.beginPath();
-            ctx.moveTo(50, height/2);
-            ctx.lineTo(width - 50, height/2);
-            ctx.stroke();
-        }
-
-        function plotFFTComparison(ctx, width, height) {
-            // Demo-Daten für FFT-Vergleich
-            const methods = ['T0 Peaks', 'FFT Peaks', 'Gemeinsame', 'T0 Unique', 'FFT Unique'];
-            const values = [8, 12, 6, 2, 6];
-            const colors = ['#667eea', '#764ba2', '#4facfe', '#f093fb', '#f5576c'];
+            ctx.moveTo(centerX, centerY);
+            ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+            ctx.closePath();
+            ctx.fill();
             
-            const barWidth = (width - 100) / methods.length;
-            const maxValue = Math.max(...values);
+            // Label
+            const labelAngle = currentAngle + sliceAngle / 2;
+            const labelX = centerX + Math.cos(labelAngle) * (radius + 30);
+            const labelY = centerY + Math.sin(labelAngle) * (radius + 30);
             
-            for (let i = 0; i < methods.length; i++) {
-                const barHeight = (values[i] / maxValue) * (height - 100);
-                const x = 50 + i * barWidth;
-                const y = height - 50 - barHeight;
-                
-                ctx.fillStyle = colors[i];
-                ctx.fillRect(x, y, barWidth - 10, barHeight);
-                
-                // Wert-Label
-                ctx.fillStyle = '#333';
-                ctx.font = 'bold 14px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText(values[i].toString(), x + barWidth/2, y - 10);
-                
-                // Methoden-Label
-                ctx.font = '10px Arial';
-                ctx.save();
-                ctx.translate(x + barWidth/2, height - 30);
-                ctx.rotate(-Math.PI/6);
-                ctx.fillText(methods[i], 0, 0);
-                ctx.restore();
-            }
+            ctx.fillStyle = '#333';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(`${categoryNames[i]}(${count})`, labelX, labelY);
+            
+            currentAngle += sliceAngle;
+          }
         }
-
-        // =================================================================
-        // DATEI-OPERATIONEN
-        // =================================================================
+      } else {
+        // Keine Daten
+        ctx.fillStyle = '#ccc';
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+        ctx.fill();
         
-        function loadFile(event) {
-            const file = event.target.files[0];
-            if (!file) return;
+        ctx.fillStyle = '#333';
+        ctx.font = '14px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Keine harmonischen', centerX, centerY - 5);
+        ctx.fillText('Treffer gefunden', centerX, centerY + 15);
+      }
+    }
 
-            updateStatus(`📂 Lade Datei: ${file.name}...`, 'info');
-            updateProgress(25);
+    function plotMicrotonalResults(ctx, width, height) {
+      // Demo-Daten für Mikrotonal-Analyse
+      const intervals = [200, 386, 498, 702, 884, 1088, 1200];
+      const deviations = [2, -5, 8, -2, 12, -8, 0];
+      
+      const barWidth = (width - 100) / intervals.length;
+      
+      // Cent-Abweichungen
+      for (let i = 0; i < intervals.length; i++) {
+        const deviation = deviations[i];
+        const barHeight = Math.abs(deviation) * 3;
+        const x = 50 + i * barWidth;
+        const y = height/2 - (deviation > 0 ? barHeight : 0);
+        
+        ctx.fillStyle = deviation > 0 ? '#ff6b6b' : '#4ecdc4';
+        ctx.fillRect(x, y, barWidth - 5, Math.abs(barHeight));
+        
+        // Cent-Label
+        ctx.fillStyle = '#333';
+        ctx.font = '10px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(`${intervals[i]}¢`, x + barWidth/2, height - 20);
+        ctx.fillText(`${deviation > 0 ? '+' : ''}${deviation}¢`, x + barWidth/2, y - 5);
+      }
+      
+      // Null-Linie
+      ctx.strokeStyle = '#333';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(50, height/2);
+      ctx.lineTo(width - 50, height/2);
+      ctx.stroke();
+    }
 
-            const reader = new FileReader();
-            
-            if (file.name.endsWith('.json')) {
-                reader.onload = function(e) {
-                    try {
-                        const data = JSON.parse(e.target.result);
-                        if (data.signal) {
-                            currentSignal = new Float32Array(data.signal);
-                            updateProgress(75);
-                            plotSignal(currentSignal);
-                            updateProgress(100);
-                            updateStatus(`✅ JSON geladen: ${currentSignal.length} Samples`, 'success');
-                        } else {
-                            updateStatus('❌ Ungültige JSON-Struktur', 'error');
-                        }
-                    } catch (error) {
-                        updateStatus(`❌ JSON-Fehler: ${error.message}`, 'error');
-                    }
-                };
-                reader.readAsText(file);
-                
-            } else if (file.name.endsWith('.wav')) {
-                reader.onload = function(e) {
-                    try {
-                        updateProgress(50);
-                        if (audioContext) {
-                            audioContext.decodeAudioData(e.target.result, function(buffer) {
-                                currentSignal = buffer.getChannelData(0);
-                                sampleRate = buffer.sampleRate;
-                                updateProgress(75);
-                                plotSignal(currentSignal);
-                                updateProgress(100);
-                                updateStatus(`✅ WAV geladen: ${currentSignal.length} Samples (${sampleRate}Hz)`, 'success');
-                            }, function(error) {
-                                updateStatus(`❌ WAV-Dekodierung fehlgeschlagen: ${error.message}`, 'error');
-                            });
-                        } else {
-                            updateStatus('❌ Audio-Context nicht verfügbar', 'error');
-                        }
-                    } catch (error) {
-                        updateStatus(`❌ WAV-Fehler: ${error.message}`, 'error');
-                    }
-                };
-                reader.readAsArrayBuffer(file);
-                
-            } else if (file.name.endsWith('.csv')) {
-                reader.onload = function(e) {
-                    try {
-                        const csvData = e.target.result;
-                        const lines = csvData.split('\n');
-                        const values = [];
-                        
-                        // Parse CSV (einfach: erste Spalte als Signalwerte)
-                        for (let i = 1; i < lines.length; i++) { // Skip header
-                            const value = parseFloat(lines[i].split(',')[0]);
-                            if (!isNaN(value)) {
-                                values.push(value);
-                            }
-                        }
-                        
-                        if (values.length > 0) {
-                            currentSignal = new Float32Array(values);
-                            updateProgress(75);
-                            plotSignal(currentSignal);
-                            updateProgress(100);
-                            updateStatus(`✅ CSV geladen: ${currentSignal.length} Datenpunkte`, 'success');
-                        } else {
-                            updateStatus('❌ Keine gültigen Daten in CSV gefunden', 'error');
-                        }
-                    } catch (error) {
-                        updateStatus(`❌ CSV-Fehler: ${error.message}`, 'error');
-                    }
-                };
-                reader.readAsText(file);
-                
+    function plotFFTComparison(ctx, width, height) {
+      // Demo-Daten für FFT-Vergleich
+      const methods = ['T0 Peaks', 'FFT Peaks', 'Gemeinsame', 'T0 Unique', 'FFT Unique'];
+      const values = [8, 12, 6, 2, 6];
+      const colors = ['#667eea', '#764ba2', '#4facfe', '#f093fb', '#f5576c'];
+      
+      const barWidth = (width - 100) / methods.length;
+      const maxValue = Math.max(...values);
+      
+      for (let i = 0; i < methods.length; i++) {
+        const barHeight = (values[i] / maxValue) * (height - 100);
+        const x = 50 + i * barWidth;
+        const y = height - 50 - barHeight;
+        
+        ctx.fillStyle = colors[i];
+        ctx.fillRect(x, y, barWidth - 10, barHeight);
+        
+        // Wert-Label
+        ctx.fillStyle = '#333';
+        ctx.font = 'bold 14px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(values[i].toString(), x + barWidth/2, y - 10);
+        
+        // Methoden-Label
+        ctx.font = '10px Arial';
+        ctx.save();
+        ctx.translate(x + barWidth/2, height - 30);
+        ctx.rotate(-Math.PI/6);
+        ctx.fillText(methods[i], 0, 0);
+        ctx.restore();
+      }
+    }
+
+    // =================================================================
+    // DATEI-OPERATIONEN
+    // =================================================================
+    
+    function loadFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      updateStatus(`📂 Lade Datei: ${file.name}...`, 'info');
+      updateProgress(25);
+
+      const reader = new FileReader();
+      
+      if (file.name.endsWith('.json')) {
+        reader.onload = function(e) {
+          try {
+            const data = JSON.parse(e.target.result);
+            if (data.signal) {
+              currentSignal = new Float32Array(data.signal);
+              updateProgress(75);
+              plotSignal(currentSignal);
+              updateProgress(100);
+              updateStatus(`✅ JSON geladen: ${currentSignal.length} Samples`, 'success');
             } else {
-                updateStatus('❌ Nicht unterstütztes Dateiformat', 'error');
+              updateStatus('❌ Ungültige JSON-Struktur', 'error');
             }
-        }
-
-        function saveSignal() {
-            if (!currentSignal) {
-                updateStatus('⚠️ Erst Signal generieren!', 'warning');
-                return;
-            }
-
-            try {
-                const signalData = {
-                    signal: Array.from(currentSignal),
-                    sampleRate: sampleRate,
-                    metadata: {
-                        type: document.getElementById('signalType').value,
-                        frequency: parseFloat(document.getElementById('frequency').value),
-                        duration: parseFloat(document.getElementById('duration').value),
-                        generated: new Date().toISOString()
-                    }
-                };
-
-                const jsonString = JSON.stringify(signalData, null, 2);
-                const blob = new Blob([jsonString], { type: 'application/json' });
-                const url = URL.createObjectURL(blob);
-                
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `xi_signal_${Date.now()}.json`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-
-                updateStatus('💾 Signal als JSON gespeichert', 'success');
-                
-            } catch (error) {
-                updateStatus(`❌ Export fehlgeschlagen: ${error.message}`, 'error');
-            }
-        }
-
-        function playSignal() {
-            if (!currentSignal || !audioContext) {
-                updateStatus('⚠️ Signal oder Audio-Context nicht verfügbar', 'warning');
-                return;
-            }
-
-            try {
-                // Audio-Context aktivieren falls suspended
-                if (audioContext.state === 'suspended') {
-                    audioContext.resume();
-                }
-
-                // Audio-Buffer erstellen
-                const buffer = audioContext.createBuffer(1, currentSignal.length, sampleRate);
-                const channelData = buffer.getChannelData(0);
-                
-                for (let i = 0; i < currentSignal.length; i++) {
-                    channelData[i] = currentSignal[i];
-                }
-
-                // Audio-Source erstellen und abspielen
-                const source = audioContext.createBufferSource();
-                source.buffer = buffer;
-                source.connect(audioContext.destination);
-                source.start();
-                
-                updateStatus('🔊 Signal wird abgespielt...', 'success');
-                
-            } catch (error) {
-                updateStatus(`❌ Wiedergabe fehlgeschlagen: ${error.message}`, 'error');
-            }
-        }
-
-        function exportWAV() {
-            if (!currentSignal) {
-                updateStatus('⚠️ Erst Signal generieren!', 'warning');
-                return;
-            }
-
-            try {
-                // WAV-Header erstellen
-                const length = currentSignal.length;
-                const buffer = new ArrayBuffer(44 + length * 2);
-                const view = new DataView(buffer);
-                
-                // WAV-Header schreiben
-                const writeString = (offset, string) => {
-                    for (let i = 0; i < string.length; i++) {
-                        view.setUint8(offset + i, string.charCodeAt(i));
-                    }
-                };
-                
-                writeString(0, 'RIFF');
-                view.setUint32(4, 36 + length * 2, true);
-                writeString(8, 'WAVE');
-                writeString(12, 'fmt ');
-                view.setUint32(16, 16, true);
-                view.setUint16(20, 1, true);
-                view.setUint16(22, 1, true);
-                view.setUint32(24, sampleRate, true);
-                view.setUint32(28, sampleRate * 2, true);
-                view.setUint16(32, 2, true);
-                view.setUint16(34, 16, true);
-                writeString(36, 'data');
-                view.setUint32(40, length * 2, true);
-                
-                // Audio-Daten schreiben
-                let offset = 44;
-                for (let i = 0; i < length; i++) {
-                    const sample = Math.max(-1, Math.min(1, currentSignal[i]));
-                    view.setInt16(offset, sample * 0x7FFF, true);
-                    offset += 2;
-                }
-                
-                const blob = new Blob([buffer], { type: 'audio/wav' });
-                const url = URL.createObjectURL(blob);
-                
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `xi_signal_${Date.now()}.wav`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-
-                updateStatus('🎵 Signal als WAV exportiert', 'success');
-                
-            } catch (error) {
-                updateStatus(`❌ WAV-Export fehlgeschlagen: ${error.message}`, 'error');
-            }
-        }
-
-        // =================================================================
-        // TEST-FUNKTIONEN
-        // =================================================================
+          } catch (error) {
+            updateStatus(`❌ JSON-Fehler: ${error.message}`, 'error');
+          }
+        };
+        reader.readAsText(file);
         
-        function testCanvas() {
-            updateStatus('🧪 Teste Canvas-Funktionalität...', 'info');
+      } else if (file.name.endsWith('.wav')) {
+        reader.onload = function(e) {
+          try {
+            updateProgress(50);
+            if (audioContext) {
+              audioContext.decodeAudioData(e.target.result, function(buffer) {
+                currentSignal = buffer.getChannelData(0);
+                sampleRate = buffer.sampleRate;
+                updateProgress(75);
+                plotSignal(currentSignal);
+                updateProgress(100);
+                updateStatus(`✅ WAV geladen: ${currentSignal.length} Samples (${sampleRate}Hz)`, 'success');
+              }, function(error) {
+                updateStatus(`❌ WAV-Dekodierung fehlgeschlagen: ${error.message}`, 'error');
+              });
+            } else {
+              updateStatus('❌ Audio-Context nicht verfügbar', 'error');
+            }
+          } catch (error) {
+            updateStatus(`❌ WAV-Fehler: ${error.message}`, 'error');
+          }
+        };
+        reader.readAsArrayBuffer(file);
+        
+      } else if (file.name.endsWith('.csv')) {
+        reader.onload = function(e) {
+          try {
+            const csvData = e.target.result;
+            const lines = csvData.split('\n');
+            const values = [];
             
-            // Teste alle Chart-Typen nacheinander
-            const chartTypes = ['t0', 'resonance', 'microtonal', 'fft_compare'];
-            let currentIndex = 0;
-            
-            function showNextChart() {
-                if (currentIndex < chartTypes.length) {
-                    plotAnalysisChart(chartTypes[currentIndex]);
-                    updateStatus(`🧪 Canvas-Test: ${chartTypes[currentIndex]} (${currentIndex + 1}/${chartTypes.length})`, 'info');
-                    currentIndex++;
-                    setTimeout(showNextChart, 2000);
-                } else {
-                    updateStatus('✅ Canvas-Test abgeschlossen - Alle Diagramme funktionieren!', 'success');
-                }
+            // Parse CSV (einfach: erste Spalte als Signalwerte)
+            for (let i = 1; i < lines.length; i++) { // Skip header
+              const value = parseFloat(lines[i].split(',')[0]);
+              if (!isNaN(value)) {
+                values.push(value);
+              }
             }
             
-            showNextChart();
+            if (values.length > 0) {
+              currentSignal = new Float32Array(values);
+              updateProgress(75);
+              plotSignal(currentSignal);
+              updateProgress(100);
+              updateStatus(`✅ CSV geladen: ${currentSignal.length} Datenpunkte`, 'success');
+            } else {
+              updateStatus('❌ Keine gültigen Daten in CSV gefunden', 'error');
+            }
+          } catch (error) {
+            updateStatus(`❌ CSV-Fehler: ${error.message}`, 'error');
+          }
+        };
+        reader.readAsText(file);
+        
+      } else {
+        updateStatus('❌ Nicht unterstütztes Dateiformat', 'error');
+      }
+    }
+
+    function saveSignal() {
+      if (!currentSignal) {
+        updateStatus('⚠️ Erst Signal generieren!', 'warning');
+        return;
+      }
+
+      try {
+        const signalData = {
+          signal: Array.from(currentSignal),
+          sampleRate: sampleRate,
+          metadata: {
+            type: document.getElementById('signalType').value,
+            frequency: parseFloat(document.getElementById('frequency').value),
+            duration: parseFloat(document.getElementById('duration').value),
+            generated: new Date().toISOString()
+          }
+        };
+
+        const jsonString = JSON.stringify(signalData, null, 2);
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `xi_signal_${Date.now()}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        updateStatus('💾 Signal als JSON gespeichert', 'success');
+        
+      } catch (error) {
+        updateStatus(`❌ Export fehlgeschlagen: ${error.message}`, 'error');
+      }
+    }
+
+    function playSignal() {
+      if (!currentSignal || !audioContext) {
+        updateStatus('⚠️ Signal oder Audio-Context nicht verfügbar', 'warning');
+        return;
+      }
+
+      try {
+        // Audio-Context aktivieren falls suspended
+        if (audioContext.state === 'suspended') {
+          audioContext.resume();
         }
 
-        // =================================================================
-        // APP STARTEN
-        // =================================================================
+        // Audio-Buffer erstellen
+        const buffer = audioContext.createBuffer(1, currentSignal.length, sampleRate);
+        const channelData = buffer.getChannelData(0);
         
-        document.addEventListener('DOMContentLoaded', initApp);
-        console.log('🎼 ξ-FFT Harmonische Signal-Analyse Demo bereit');
-    </script>
+        for (let i = 0; i < currentSignal.length; i++) {
+          channelData[i] = currentSignal[i];
+        }
+
+        // Audio-Source erstellen und abspielen
+        const source = audioContext.createBufferSource();
+        source.buffer = buffer;
+        source.connect(audioContext.destination);
+        source.start();
+        
+        updateStatus('🔊 Signal wird abgespielt...', 'success');
+        
+      } catch (error) {
+        updateStatus(`❌ Wiedergabe fehlgeschlagen: ${error.message}`, 'error');
+      }
+    }
+
+    function exportWAV() {
+      if (!currentSignal) {
+        updateStatus('⚠️ Erst Signal generieren!', 'warning');
+        return;
+      }
+
+      try {
+        // WAV-Header erstellen
+        const length = currentSignal.length;
+        const buffer = new ArrayBuffer(44 + length * 2);
+        const view = new DataView(buffer);
+        
+        // WAV-Header schreiben
+        const writeString = (offset, string) => {
+          for (let i = 0; i < string.length; i++) {
+            view.setUint8(offset + i, string.charCodeAt(i));
+          }
+        };
+        
+        writeString(0, 'RIFF');
+        view.setUint32(4, 36 + length * 2, true);
+        writeString(8, 'WAVE');
+        writeString(12, 'fmt ');
+        view.setUint32(16, 16, true);
+        view.setUint16(20, 1, true);
+        view.setUint16(22, 1, true);
+        view.setUint32(24, sampleRate, true);
+        view.setUint32(28, sampleRate * 2, true);
+        view.setUint16(32, 2, true);
+        view.setUint16(34, 16, true);
+        writeString(36, 'data');
+        view.setUint32(40, length * 2, true);
+        
+        // Audio-Daten schreiben
+        let offset = 44;
+        for (let i = 0; i < length; i++) {
+          const sample = Math.max(-1, Math.min(1, currentSignal[i]));
+          view.setInt16(offset, sample * 0x7FFF, true);
+          offset += 2;
+        }
+        
+        const blob = new Blob([buffer], { type: 'audio/wav' });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `xi_signal_${Date.now()}.wav`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        updateStatus('🎵 Signal als WAV exportiert', 'success');
+        
+      } catch (error) {
+        updateStatus(`❌ WAV-Export fehlgeschlagen: ${error.message}`, 'error');
+      }
+    }
+
+    // =================================================================
+    // TEST-FUNKTIONEN
+    // =================================================================
+    
+    function testCanvas() {
+      updateStatus('🧪 Teste Canvas-Funktionalität...', 'info');
+      
+      // Teste alle Chart-Typen nacheinander
+      const chartTypes = ['t0', 'resonance', 'microtonal', 'fft_compare'];
+      let currentIndex = 0;
+      
+      function showNextChart() {
+        if (currentIndex < chartTypes.length) {
+          plotAnalysisChart(chartTypes[currentIndex]);
+          updateStatus(`🧪 Canvas-Test: ${chartTypes[currentIndex]} (${currentIndex + 1}/${chartTypes.length})`, 'info');
+          currentIndex++;
+          setTimeout(showNextChart, 2000);
+        } else {
+          updateStatus('✅ Canvas-Test abgeschlossen - Alle Diagramme funktionieren!', 'success');
+        }
+      }
+      
+      showNextChart();
+    }
+
+    // =================================================================
+    // APP STARTEN
+    // =================================================================
+    
+    document.addEventListener('DOMContentLoaded', initApp);
+    console.log('🎼 ξ-FFT Harmonische Signal-Analyse Demo bereit');
+  </script>
 </body>
 </html>

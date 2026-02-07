@@ -2,748 +2,748 @@ html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T0-Theory: Unified Anomalous Magnetic Moments (Rev. 9)</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-            min-height: 100vh;
-            color: #e0e6ed;
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .header {
-            background: rgba(30, 30, 50, 0.95);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            border-radius: 25px;
-            padding: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.1), transparent);
-            animation: shimmer 4s infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-        
-        .title {
-            font-size: 3em;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 15px;
-            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .subtitle {
-            font-size: 1.3em;
-            color: #9ca3af;
-            margin-bottom: 25px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .author {
-            font-size: 1.1em;
-            color: #6b7280;
-            font-style: italic;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .language-toggle {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin: 25px 0;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .lang-btn {
-            padding: 15px 30px;
-            border: 2px solid rgba(102, 126, 234, 0.5);
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 1.1em;
-            transition: all 0.3s ease;
-            background: rgba(30, 30, 50, 0.8);
-            color: #e0e6ed;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-        
-        .lang-btn.active {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border-color: #667eea;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
-        }
-        
-        .lang-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
-            border-color: #667eea;
-        }
-        
-        .content {
-            background: rgba(30, 30, 50, 0.95);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            border-radius: 25px;
-            padding: 50px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-            margin-bottom: 20px;
-        }
-        
-        .section {
-            margin-bottom: 50px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-        
-        .section.animate {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .section h2 {
-            color: #ffffff;
-            border-bottom: 4px solid #667eea;
-            padding-bottom: 15px;
-            margin-bottom: 30px;
-            font-size: 2.2em;
-            font-weight: 700;
-            position: relative;
-        }
-        
-        .section h2::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 4px;
-            background: linear-gradient(45deg, #f093fb, #f5576c);
-            animation: expand 2s ease-out forwards;
-            animation-delay: 0.5s;
-        }
-        
-        @keyframes expand {
-            to { width: 150px; }
-        }
-        
-        .section h3 {
-            color: #d1d5db;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-            font-weight: 600;
-        }
-        
-        .formula-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            margin: 30px 0;
-            border-radius: 20px;
-            font-family: 'Courier New', monospace;
-            font-size: 1.4em;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
-            position: relative;
-            overflow: hidden;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .derivation-chain {
-            background: rgba(20, 20, 40, 0.8);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
-            border-left: 6px solid #667eea;
-        }
-        
-        .chain-step {
-            display: flex;
-            align-items: center;
-            margin: 15px 0;
-            font-size: 1.1em;
-            color: #e0e6ed;
-        }
-        
-        .chain-step::before {
-            content: '↓';
-            font-size: 1.5em;
-            color: #667eea;
-            margin-right: 15px;
-            font-weight: bold;
-        }
-        
-        .chain-step:first-child::before {
-            content: '●';
-        }
-        
-        .lagrangian-section {
-            background: rgba(50, 20, 70, 0.6);
-            border: 2px solid rgba(147, 51, 234, 0.4);
-            border-radius: 20px;
-            padding: 30px;
-            margin: 30px 0;
-        }
-        
-        .lagrangian-title {
-            color: #a78bfa;
-            font-size: 1.6em;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .results-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 30px 0;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            border-radius: 20px;
-            overflow: hidden;
-            background: rgba(20, 20, 40, 0.9);
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            table-layout: fixed;
-        }
-        
-        .results-table th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 10px;
-            text-align: center;
-            font-weight: 700;
-            font-size: 1em;
-            word-wrap: break-word;
-            width: 20%;
-        }
-        
-        .results-table td {
-            padding: 15px 10px;
-            text-align: center;
-            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
-            font-size: 1em;
-            transition: all 0.3s ease;
-            color: #e0e6ed;
-            word-wrap: break-word;
-            vertical-align: middle;
-        }
-        
-        .results-table tr:hover td {
-            background: rgba(102, 126, 234, 0.2);
-            transform: scale(1.02);
-        }
-        
-        .results-table .particle {
-            font-weight: 700;
-            color: #ffffff;
-        }
-        
-        .key-insight {
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(21, 128, 61, 0.3) 100%);
-            border: 3px solid #22c55e;
-            padding: 30px;
-            border-radius: 20px;
-            margin: 40px 0;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.3);
-        }
-        
-        .key-insight h3 {
-            color: #6ee7b7;
-            margin-bottom: 15px;
-            font-size: 1.8em;
-        }
-        
-        .key-insight p {
-            color: #d1fae5;
-            font-size: 1.2em;
-            line-height: 1.7;
-        }
-        
-        .breakthrough-box {
-            background: linear-gradient(135deg, rgba(236, 72, 153, 0.2) 0%, rgba(157, 23, 77, 0.3) 100%);
-            border: 3px solid #ec4899;
-            padding: 30px;
-            border-radius: 20px;
-            margin: 40px 0;
-            box-shadow: 0 20px 40px rgba(236, 72, 153, 0.3);
-        }
-        
-        .breakthrough-box h3 {
-            color: #f9a8d4;
-            margin-bottom: 15px;
-            font-size: 1.8em;
-        }
-        
-        .breakthrough-box p {
-            color: #fce7f3;
-            font-size: 1.1em;
-            line-height: 1.7;
-        }
-        
-        .navigation {
-            text-align: center;
-            margin-top: 40px;
-        }
-        
-        .nav-btn {
-            display: inline-block;
-            padding: 18px 40px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 1.1em;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .nav-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.6);
-        }
-        
-        .warning-box {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(180, 83, 9, 0.3) 100%);
-            border: 3px solid #f59e0b;
-            padding: 25px;
-            border-radius: 15px;
-            margin: 30px 0;
-            color: #fef3c7;
-        }
-        
-        .warning-box h4 {
-            color: #fbbf24;
-            margin-bottom: 10px;
-            font-size: 1.3em;
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        .sigma-highlight {
-            background: linear-gradient(45deg, #dc2626, #b91c1c);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 10px;
-            font-weight: 700;
-            display: inline-block;
-            margin: 5px;
-            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
-        }
-        
-        .perfect-match {
-            background: linear-gradient(45deg, #059669, #047857);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 10px;
-            font-weight: 700;
-            display: inline-block;
-            margin: 5px;
-            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.4);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T0-Theory: Unified Anomalous Magnetic Moments (Rev. 9)</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+      min-height: 100vh;
+      color: #e0e6ed;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .header {
+      background: rgba(30, 30, 50, 0.95);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(102, 126, 234, 0.3);
+      border-radius: 25px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+      animation: shimmer 4s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+    
+    .title {
+      font-size: 3em;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 15px;
+      background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .subtitle {
+      font-size: 1.3em;
+      color: #9ca3af;
+      margin-bottom: 25px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .author {
+      font-size: 1.1em;
+      color: #6b7280;
+      font-style: italic;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .language-toggle {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin: 25px 0;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .lang-btn {
+      padding: 15px 30px;
+      border: 2px solid rgba(102, 126, 234, 0.5);
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1.1em;
+      transition: all 0.3s ease;
+      background: rgba(30, 30, 50, 0.8);
+      color: #e0e6ed;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+    
+    .lang-btn.active {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      border-color: #667eea;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+    }
+    
+    .lang-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+      border-color: #667eea;
+    }
+    
+    .content {
+      background: rgba(30, 30, 50, 0.95);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(102, 126, 234, 0.3);
+      border-radius: 25px;
+      padding: 50px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      margin-bottom: 20px;
+    }
+    
+    .section {
+      margin-bottom: 50px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+    
+    .section.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .section h2 {
+      color: #ffffff;
+      border-bottom: 4px solid #667eea;
+      padding-bottom: 15px;
+      margin-bottom: 30px;
+      font-size: 2.2em;
+      font-weight: 700;
+      position: relative;
+    }
+    
+    .section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 4px;
+      background: linear-gradient(45deg, #f093fb, #f5576c);
+      animation: expand 2s ease-out forwards;
+      animation-delay: 0.5s;
+    }
+    
+    @keyframes expand {
+      to { width: 150px; }
+    }
+    
+    .section h3 {
+      color: #d1d5db;
+      margin-bottom: 20px;
+      font-size: 1.5em;
+      font-weight: 600;
+    }
+    
+    .formula-box {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+      margin: 30px 0;
+      border-radius: 20px;
+      font-family: 'Courier New', monospace;
+      font-size: 1.4em;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .derivation-chain {
+      background: rgba(20, 20, 40, 0.8);
+      border-radius: 15px;
+      padding: 25px;
+      margin: 20px 0;
+      border-left: 6px solid #667eea;
+    }
+    
+    .chain-step {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+      font-size: 1.1em;
+      color: #e0e6ed;
+    }
+    
+    .chain-step::before {
+      content: '↓';
+      font-size: 1.5em;
+      color: #667eea;
+      margin-right: 15px;
+      font-weight: bold;
+    }
+    
+    .chain-step:first-child::before {
+      content: '●';
+    }
+    
+    .lagrangian-section {
+      background: rgba(50, 20, 70, 0.6);
+      border: 2px solid rgba(147, 51, 234, 0.4);
+      border-radius: 20px;
+      padding: 30px;
+      margin: 30px 0;
+    }
+    
+    .lagrangian-title {
+      color: #a78bfa;
+      font-size: 1.6em;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 30px 0;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(20, 20, 40, 0.9);
+      border: 1px solid rgba(102, 126, 234, 0.3);
+      table-layout: fixed;
+    }
+    
+    .results-table th {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px 10px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1em;
+      word-wrap: break-word;
+      width: 20%;
+    }
+    
+    .results-table td {
+      padding: 15px 10px;
+      text-align: center;
+      border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+      font-size: 1em;
+      transition: all 0.3s ease;
+      color: #e0e6ed;
+      word-wrap: break-word;
+      vertical-align: middle;
+    }
+    
+    .results-table tr:hover td {
+      background: rgba(102, 126, 234, 0.2);
+      transform: scale(1.02);
+    }
+    
+    .results-table .particle {
+      font-weight: 700;
+      color: #ffffff;
+    }
+    
+    .key-insight {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(21, 128, 61, 0.3) 100%);
+      border: 3px solid #22c55e;
+      padding: 30px;
+      border-radius: 20px;
+      margin: 40px 0;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(34, 197, 94, 0.3);
+    }
+    
+    .key-insight h3 {
+      color: #6ee7b7;
+      margin-bottom: 15px;
+      font-size: 1.8em;
+    }
+    
+    .key-insight p {
+      color: #d1fae5;
+      font-size: 1.2em;
+      line-height: 1.7;
+    }
+    
+    .breakthrough-box {
+      background: linear-gradient(135deg, rgba(236, 72, 153, 0.2) 0%, rgba(157, 23, 77, 0.3) 100%);
+      border: 3px solid #ec4899;
+      padding: 30px;
+      border-radius: 20px;
+      margin: 40px 0;
+      box-shadow: 0 20px 40px rgba(236, 72, 153, 0.3);
+    }
+    
+    .breakthrough-box h3 {
+      color: #f9a8d4;
+      margin-bottom: 15px;
+      font-size: 1.8em;
+    }
+    
+    .breakthrough-box p {
+      color: #fce7f3;
+      font-size: 1.1em;
+      line-height: 1.7;
+    }
+    
+    .navigation {
+      text-align: center;
+      margin-top: 40px;
+    }
+    
+    .nav-btn {
+      display: inline-block;
+      padding: 18px 40px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1.1em;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .nav-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 20px 40px rgba(102, 126, 234, 0.6);
+    }
+    
+    .warning-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(180, 83, 9, 0.3) 100%);
+      border: 3px solid #f59e0b;
+      padding: 25px;
+      border-radius: 15px;
+      margin: 30px 0;
+      color: #fef3c7;
+    }
+    
+    .warning-box h4 {
+      color: #fbbf24;
+      margin-bottom: 10px;
+      font-size: 1.3em;
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    .sigma-highlight {
+      background: linear-gradient(45deg, #dc2626, #b91c1c);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-weight: 700;
+      display: inline-block;
+      margin: 5px;
+      box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+    }
+    
+    .perfect-match {
+      background: linear-gradient(45deg, #059669, #047857);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-weight: 700;
+      display: inline-block;
+      margin: 5px;
+      box-shadow: 0 4px 15px rgba(5, 150, 105, 0.4);
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1 class="title" data-en="T0-Theory: Unified Anomalous Magnetic Moments (Rev. 9)" data-de="T0-Theorie: Vereinheitlichte Berechnung des anomalen magnetischen Moments (Rev. 9)">T0-Theory: Unified Anomalous Magnetic Moments (Rev. 9)</h1>
-            <p class="subtitle" data-en="Complete ξ Contribution with Torsion Extension -- Parameter-Free Geometric Solution" data-de="Vollständiger Beitrag von ξ mit Torsionserweiterung -- Parameterfreie geometrische Lösung">Complete ξ Contribution with Torsion Extension -- Parameter-Free Geometric Solution</p>
-            <p class="author">Johann Pascher • HTL Leonding, Austria • November 1, 2025</p>
-            
-            <div class="language-toggle">
-                <button class="lang-btn active" onclick="switchLanguage('en')">English</button>
-                <button class="lang-btn" onclick="switchLanguage('de')">Deutsch</button>
-            </div>
-        </div>
-        
-        <div class="content">
-            <!-- English Content -->
-            <div id="content-en">
-                <div class="section">
-                    <h2>The Muon g-2 Anomaly (Pre-2025 Context)</h2>
-                    <p>Pre-2025 precision measurements showed a discrepancy between theory and experiment for the muon's anomalous magnetic moment:</p>
-                    
-                    <div class="derivation-chain">
-                        <div class="chain-step">Experimental: a<sub>μ</sub><sup>exp</sup> = 116,592,059(22) × 10<sup>-11</sup></div>
-                        <div class="chain-step">Standard Model: a<sub>μ</sub><sup>SM</sup> = 116,591,810(43) × 10<sup>-11</sup></div>
-                        <div class="chain-step"><span class="sigma-highlight">Pre-2025 Status: 4.2σ discrepancy from SM</span></div>
-                        <div class="chain-step">Missing theoretical contribution: Δa<sub>μ</sub> ≈ 249 × 10<sup>-11</sup></div>
-                    </div>
-                    <p>Post-2025 Fermilab data (127 ppb precision) resolves tension to ~0.15σ via lattice HVP, aligning with pure T0 predictions.</p>
-                </div>
-                
-                <div class="section">
-                    <h2>T0 Time-Mass Duality Foundation (ξ-Geometry)</h2>
-                    <p>The T0-theory introduces a fundamental duality between time and mass fields, with universal geometric parameter ξ = 4/30000 ≈ 1.33333 × 10<sup>-4</sup>:</p>
-                    
-                    <div class="formula-box">
-                        T · m = 1 (in natural units); E<sub>0</sub> = 1/ξ ≈ 7500 GeV
-                    </div>
-                    
-                    <p>This leads to an extended Lagrangian with a fundamental time field Δm(x,t) and fractal dimension D<sub>f</sub> = 3 - ξ ≈ 2.999867:</p>
-                    
-                    <div class="lagrangian-section">
-                        <div class="lagrangian-title">Standard Model Extension with Torsion</div>
-                        <div class="formula-box">
-                            ℒ<sub>total</sub> = ℒ<sub>SM</sub> + ℒ<sub>T0</sub>
-                        </div>
-                        
-                        <p>Where the T0 contribution is:</p>
-                        <div class="formula-box">
-                            ℒ<sub>T0</sub> = ξ · T<sub>field</sub> · (∂<sup>μ</sup> E<sub>field</sub>) (∂<sub>μ</sub> E<sub>field</sub>) + g<sub>T0</sub> ψ̄<sub>ℓ</sub> γ<sup>μ</sup> ψ<sub>ℓ</sub> V<sub>μ</sub>
-                        </div>
-                        
-                        <div class="derivation-chain">
-                            <div class="chain-step">ξ = universal geometric parameter from T0 duality</div>
-                            <div class="chain-step">g<sub>T0</sub> = √(α K<sub>frak</sub>) ≈ 0.0849 (mass-independent coupling)</div>
-                            <div class="chain-step">V<sub>μ</sub> = vector torsion mediator; m<sub>T</sub> ≈ 5.22 GeV (SymPy-validated)</div>
-                            <div class="chain-step">K<sub>frak</sub> = 1 - 100ξ ≈ 0.9867 (fractal correction)</div>
-                            <div class="chain-step">Result: Mass-dependent correction to anomalous magnetic moment via quadratic scaling</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="section">
-                    <h2>Universal T0 Correction Formula (Rev. 9: RG-Duality)</h2>
-                    <p>From the extended Lagrangian, Feynman loop integrals (SymPy-verified), and RG-duality correction (p = -2/3), T0 theory predicts:</p>
-                    
-                    <div class="formula-box">
-                        a<sub>ℓ</sub><sup>T0</sup> = [α(ξ) K<sub>frak</sub><sup>2</sup> m<sub>ℓ</sub><sup>2</sup>] / [48 π<sup>2</sup> m<sub>T</sub><sup>2</sup>] · 1 / [1 + (ξ E<sub>0</sub>/m<sub>T</sub>)<sup>p</sup>] = 153 × 10⁻¹¹ × (m<sub>ℓ</sub>/m<sub>μ</sub>)²
-                    </div>
-                    
-                    <div class="key-insight">
-                        <h3>T0's Theoretical Contribution (Post-2025)</h3>
-                        <p>The T0 core of 153 × 10⁻¹¹ embeds SM via ξ-duality, achieving ~0.15σ agreement with 2025 data (Fermilab 127 ppb). Hybrid view optional for pre-2025 bridging.</p>
-                    </div>
-                </div>
-                
-                <div class="section">
-                    <h2>Complete Lepton Analysis (Rev. 9: Unified Scaling)</h2>
-                    <table class="results-table">
-                        <thead>
-                            <tr>
-                                <th>Lepton</th>
-                                <th>Mass<br>[MeV]</th>
-                                <th>T0 Core<br>a<sub>ℓ</sub><sup>T0</sup> (×10<sup>n</sup>)</th>
-                                <th>Full Value<br>(Embed SM)</th>
-                                <th>Status (2025)</th>
-                                <th>T0 Assessment</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="particle">Electron</td>
-                                <td>0.511</td>
-                                <td>n=-11: 0.0036</td>
-                                <td>1159652180.46(18) ×10<sup>-12</sup></td>
-                                <td><span class="perfect-match">0σ Agreement</span></td>
-                                <td>Core negligible; QED embedded via ξ</td>
-                            </tr>
-                            <tr>
-                                <td class="particle">Muon</td>
-                                <td>105.66</td>
-                                <td>n=-11: 153</td>
-                                <td>116592070(148) ×10<sup>-11</sup></td>
-                                <td><span class="perfect-match">~0.15σ</span></td>
-                                <td>Core fills discrepancy; 90% improvement post-HVP</td>
-                            </tr>
-                            <tr>
-                                <td class="particle">Tau</td>
-                                <td>1776.86</td>
-                                <td>n=-7: 43300</td>
-                                <td><9.5 ×10<sup>3</sup> (limit)</td>
-                                <td><span class="sigma-highlight">Measurement pending</span></td>
-                                <td>Large T0 effect; testable at Belle II 2026</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="section">
-                    <h2>Physical Mechanism and Embeddings</h2>
-                    <div class="derivation-chain">
-                        <div class="chain-step"><strong>Mass-dependent coupling:</strong> Heavier particles interact more strongly with time field (m<sub>ℓ</sub><sup>2</sup> scaling)</div>
-                        <div class="chain-step"><strong>Torsion mediator:</strong> m<sub>T</sub> = 5.22 GeV from fractal geometry (SymPy-validated)</div>
-                        <div class="chain-step"><strong>RG-duality (p=-2/3):</strong> From σ<sup>μν</sup> dimension in fractal space</div>
-                        <div class="chain-step"><strong>Embedding:</strong> SM (QED/HVP) as ξ-duality approximations; pure T0 replaces/adds to SM</div>
-                        <div class="chain-step"><strong>Hierarchy:</strong> a<sub>e</sub> : a<sub>μ</sub> : a<sub>τ</sub> = 1 : 42,500 : 283,000 (quadratic enhancement)</div>
-                    </div>
-                    
-                    <p>This natural scaling explains lepton hierarchy; electron consistency via QED-embedding resolves pre-2025 apparent inconsistencies.</p>
-                </div>
-                
-                <div class="section">
-                    <h2>Prototype Integration (Sept. 2025 vs. Rev. 9)</h2>
-                    <div class="breakthrough-box">
-                        <h3>Evolution from Prototype</h3>
-                        <p>Sept. 2025: Calibrated λ ≈ 2.725 × 10<sup>-3</sup> MeV for 251 × 10<sup>-11</sup> (pre-2025). Rev. 9: Parameter-free, ξ-derived m<sub>T</sub>, RG-correction for 153 × 10<sup>-11</sup> (~0.15σ post-2025). Lagrangian evolved to torsion+duality; consistent with GitHub repo (DOI: 10.5281/zenodo.17390358).</p>
-                    </div>
-                </div>
-                
-                <div class="warning-box">
-                    <h4>Scientific Status</h4>
-                    <p>This framework extends the Standard Model geometrically. Mathematical formulation is systematic (SymPy-verified integrals), muon results align with 2025 data. Experimental validation via tau (Belle II 2026) and peer review essential.</p>
-                </div>
-            </div>
-            
-            <!-- German Content -->
-            <div id="content-de" class="hidden">
-                <div class="section">
-                    <h2>Die Myon g-2 Anomalie (Pre-2025 Kontext)</h2>
-                    <p>Pre-2025 Präzisionsmessungen zeigten eine Diskrepanz zwischen Theorie und Experiment beim anomalen magnetischen Moment des Myons:</p>
-                    
-                    <div class="derivation-chain">
-                        <div class="chain-step">Experimentell: a<sub>μ</sub><sup>exp</sup> = 116.592.059(22) × 10<sup>-11</sup></div>
-                        <div class="chain-step">Standardmodell: a<sub>μ</sub><sup>SM</sup> = 116.591.810(43) × 10<sup>-11</sup></div>
-                        <div class="chain-step"><span class="sigma-highlight">Pre-2025 Status: 4,2σ Diskrepanz vom SM</span></div>
-                        <div class="chain-step">Fehlender theoretischer Beitrag: Δa<sub>μ</sub> ≈ 249 × 10<sup>-11</sup></div>
-                    </div>
-                    <p>Post-2025 Fermilab-Daten (127 ppb Präzision) lösen Spannung auf ~0,15σ via Gitter-HVP, im Einklang mit reinen T0-Vorhersagen.</p>
-                </div>
-                
-                <div class="section">
-                    <h2>T0 Zeit-Masse-Dualitätsgrundlage (ξ-Geometrie)</h2>
-                    <p>Die T0-Theorie führt eine fundamentale Dualität zwischen Zeit- und Massefeldern ein, mit universellem geometrischen Parameter ξ = 4/30000 ≈ 1,33333 × 10<sup>-4</sup>:</p>
-                    
-                    <div class="formula-box">
-                        T · m = 1 (in natürlichen Einheiten); E<sub>0</sub> = 1/ξ ≈ 7500 GeV
-                    </div>
-                    
-                    <p>Diese führt zu einer erweiterten Lagrangedichte mit fundamentalem Zeitfeld Δm(x,t) und fraktaler Dimension D<sub>f</sub> = 3 - ξ ≈ 2,999867:</p>
-                    
-                    <div class="lagrangian-section">
-                        <div class="lagrangian-title">Standardmodell-Erweiterung mit Torsion</div>
-                        <div class="formula-box">
-                            ℒ<sub>gesamt</sub> = ℒ<sub>SM</sub> + ℒ<sub>T0</sub>
-                        </div>
-                        
-                        <p>Wobei der T0-Beitrag ist:</p>
-                        <div class="formula-box">
-                            ℒ<sub>T0</sub> = ξ · T<sub>field</sub> · (∂<sup>μ</sup> E<sub>field</sub>) (∂<sub>μ</sub> E<sub>field</sub>) + g<sub>T0</sub> ψ̄<sub>ℓ</sub> γ<sup>μ</sup> ψ<sub>ℓ</sub> V<sub>μ</sub>
-                        </div>
-                        
-                        <div class="derivation-chain">
-                            <div class="chain-step">ξ = universeller geometrischer Parameter aus T0-Dualität</div>
-                            <div class="chain-step">g<sub>T0</sub> = √(α K<sub>frak</sub>) ≈ 0,0849 (massenunabhängige Kopplung)</div>
-                            <div class="chain-step">V<sub>μ</sub> = vektorielle Torsions-Mediator; m<sub>T</sub> ≈ 5,22 GeV (SymPy-validiert)</div>
-                            <div class="chain-step">K<sub>frak</sub> = 1 - 100ξ ≈ 0,9867 (fraktale Korrektur)</div>
-                            <div class="chain-step">Ergebnis: Massenabhängige Korrektur zum anomalen magnetischen Moment via quadratischer Skalierung</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="section">
-                    <h2>Universelle T0-Korrektur-Formel (Rev. 9: RG-Dualität)</h2>
-                    <p>Aus der erweiterten Lagrangedichte, Feynman-Schleifenintegralen (SymPy-verifiziert) und RG-Dualitätskorrektur (p = -2/3) sagt T0 voraus:</p>
-                    
-                    <div class="formula-box">
-                        a<sub>ℓ</sub><sup>T0</sup> = [α(ξ) K<sub>frak</sub><sup>2</sup> m<sub>ℓ</sub><sup>2</sup>] / [48 π<sup>2</sup> m<sub>T</sub><sup>2</sup>] · 1 / [1 + (ξ E<sub>0</sub>/m<sub>T</sub>)<sup>p</sup>] = 153 × 10⁻¹¹ × (m<sub>ℓ</sub>/m<sub>μ</sub>)²
-                    </div>
-                    
-                    <div class="key-insight">
-                        <h3>T0s theoretischer Beitrag (Post-2025)</h3>
-                        <p>Der T0-Kern von 153 × 10⁻¹¹ bettet SM via ξ-Dualität ein und erreicht ~0,15σ Übereinstimmung mit 2025-Daten (Fermilab 127 ppb). Hybrid-Ansicht optional für Pre-2025-Brücke.</p>
-                    </div>
-                </div>
-                
-                <div class="section">
-                    <h2>Vollständige Leptonen-Analyse (Rev. 9: Vereinheitlichte Skalierung)</h2>
-                    <table class="results-table">
-                        <thead>
-                            <tr>
-                                <th>Lepton</th>
-                                <th>Masse<br>[MeV]</th>
-                                <th>T0-Kern<br>a<sub>ℓ</sub><sup>T0</sup> (×10<sup>n</sup>)</th>
-                                <th>Vollständiger Wert<br>(SM eingebettet)</th>
-                                <th>Status (2025)</th>
-                                <th>T0-Bewertung</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="particle">Elektron</td>
-                                <td>0,511</td>
-                                <td>n=-11: 0,0036</td>
-                                <td>1.159.652.180,46(18) ×10<sup>-12</sup></td>
-                                <td><span class="perfect-match">0σ Übereinstimmung</span></td>
-                                <td>Kern vernachlässigbar; QED via ξ eingebettet</td>
-                            </tr>
-                            <tr>
-                                <td class="particle">Myon</td>
-                                <td>105,66</td>
-                                <td>n=-11: 153</td>
-                                <td>116.592.070(148) ×10<sup>-11</sup></td>
-                                <td><span class="perfect-match">~0,15σ</span></td>
-                                <td>Kern füllt Diskrepanz; 90% Verbesserung post-HVP</td>
-                            </tr>
-                            <tr>
-                                <td class="particle">Tau</td>
-                                <td>1776,86</td>
-                                <td>n=-7: 43300</td>
-                                <td><9,5 ×10<sup>3</sup> (Grenze)</td>
-                                <td><span class="sigma-highlight">Messung ausstehend</span></td>
-                                <td>Großer T0-Effekt; testbar bei Belle II 2026</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="section">
-                    <h2>Physikalischer Mechanismus und Einbettungen</h2>
-                    <div class="derivation-chain">
-                        <div class="chain-step"><strong>Massenabhängige Kopplung:</strong> Schwerere Teilchen wechselwirken stärker mit Zeitfeld (m<sub>ℓ</sub><sup>2</sup>-Skalierung)</div>
-                        <div class="chain-step"><strong>Torsions-Mediator:</strong> m<sub>T</sub> = 5,22 GeV aus fraktaler Geometrie (SymPy-validiert)</div>
-                        <div class="chain-step"><strong>RG-Dualität (p=-2/3):</strong> Aus σ<sup>μν</sup>-Dimension in fraktalem Raum</div>
-                        <div class="chain-step"><strong>Einbettung:</strong> SM (QED/HVP) als ξ-Dualitäts-Approximationen; reine T0 ersetzt/addiert SM</div>
-                        <div class="chain-step"><strong>Hierarchie:</strong> a<sub>e</sub> : a<sub>μ</sub> : a<sub>τ</sub> = 1 : 42.500 : 283.000 (quadratische Verstärkung)</div>
-                    </div>
-                    
-                    <p>Diese natürliche Skalierung erklärt Leptonenhierarchie; Elektron-Konsistenz via QED-Einbettung löst Pre-2025 scheinbare Inkonsistenzen.</p>
-                </div>
-                
-                <div class="section">
-                    <h2>Prototyp-Integration (Sept. 2025 vs. Rev. 9)</h2>
-                    <div class="breakthrough-box">
-                        <h3>Evolution vom Prototyp</h3>
-                        <p>Sept. 2025: Kalibrierter λ ≈ 2,725 × 10<sup>-3</sup> MeV für 251 × 10<sup>-11</sup> (Pre-2025). Rev. 9: Parameterfrei, ξ-abgeleitet m<sub>T</sub>, RG-Korrektur für 153 × 10<sup>-11</sup> (~0,15σ Post-2025). Lagrangedichte evolviert zu Torsion+Dualität; konsistent mit GitHub-Repo (DOI: 10.5281/zenodo.17390358).</p>
-                    </div>
-                </div>
-                
-                <div class="warning-box">
-                    <h4>Wissenschaftlicher Status</h4>
-                    <p>Dieses Framework erweitert das Standardmodell geometrisch. Mathematische Formulierung systematisch (SymPy-verifizierte Integrale), Myon-Ergebnisse im Einklang mit 2025-Daten. Experimentelle Validierung via Tau (Belle II 2026) und Peer-Review unerlässlich.</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="navigation">
-            <a href="https://jpascher.github.io/T0-Time-Mass-Duality/" class="nav-btn">
-                <span data-en="← Back to T0 Repository" data-de="← Zurück zum T0-Repository">← Back to T0 Repository</span>
-            </a>
-        </div>
+  <div class="container">
+    <div class="header">
+      <h1 class="title" data-en="T0-Theory: Unified Anomalous Magnetic Moments (Rev. 9)" data-de="T0-Theorie: Vereinheitlichte Berechnung des anomalen magnetischen Moments (Rev. 9)">T0-Theory: Unified Anomalous Magnetic Moments (Rev. 9)</h1>
+      <p class="subtitle" data-en="Complete ξ Contribution with Torsion Extension -- Parameter-Free Geometric Solution" data-de="Vollständiger Beitrag von ξ mit Torsionserweiterung -- Parameterfreie geometrische Lösung">Complete ξ Contribution with Torsion Extension -- Parameter-Free Geometric Solution</p>
+      <p class="author">Johann Pascher • • November 1, 2025</p>
+      
+      <div class="language-toggle">
+        <button class="lang-btn active" onclick="switchLanguage('en')">English</button>
+        <button class="lang-btn" onclick="switchLanguage('de')">Deutsch</button>
+      </div>
     </div>
     
-    <script>
-        function switchLanguage(lang) {
-            // Hide all content
-            document.getElementById('content-en').classList.add('hidden');
-            document.getElementById('content-de').classList.add('hidden');
-            
-            // Remove active class from all buttons
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            
-            // Show selected content
-            document.getElementById('content-' + lang).classList.remove('hidden');
-            
-            // Activate button
-            event.target.classList.add('active');
-            
-            // Update header text
-            const titleEl = document.querySelector('.title');
-            const subtitleEl = document.querySelector('.subtitle');
-            const navTextEl = document.querySelector('.nav-btn span');
-            
-            titleEl.textContent = titleEl.getAttribute('data-' + lang);
-            subtitleEl.textContent = subtitleEl.getAttribute('data-' + lang);
-            navTextEl.textContent = navTextEl.getAttribute('data-' + lang);
-            
-            // Re-animate sections
-            setTimeout(() => {
-                const sections = document.querySelectorAll('#content-' + lang + ' .section');
-                sections.forEach((el, index) => {
-                    el.classList.remove('animate');
-                    setTimeout(() => {
-                        el.classList.add('animate');
-                    }, index * 100);
-                });
-            }, 50);
-        }
+    <div class="content">
+      <!-- English Content -->
+      <div id="content-en">
+        <div class="section">
+          <h2>The Muon g-2 Anomaly (Pre-2025 Context)</h2>
+          <p>Pre-2025 precision measurements showed a discrepancy between theory and experiment for the muon's anomalous magnetic moment:</p>
+          
+          <div class="derivation-chain">
+            <div class="chain-step">Experimental: a<sub>μ</sub><sup>exp</sup> = 116,592,059(22) × 10<sup>-11</sup></div>
+            <div class="chain-step">Standard Model: a<sub>μ</sub><sup>SM</sup> = 116,591,810(43) × 10<sup>-11</sup></div>
+            <div class="chain-step"><span class="sigma-highlight">Pre-2025 Status: 4.2σ discrepancy from SM</span></div>
+            <div class="chain-step">Missing theoretical contribution: Δa<sub>μ</sub> ≈ 249 × 10<sup>-11</sup></div>
+          </div>
+          <p>Post-2025 Fermilab data (127 ppb precision) resolves tension to ~0.15σ via lattice HVP, aligning with pure T0 predictions.</p>
+        </div>
         
-        // Animate sections on scroll
-        function animateOnScroll() {
-            const sections = document.querySelectorAll('.section');
-            const windowHeight = window.innerHeight;
+        <div class="section">
+          <h2>T0 Time-Mass Duality Foundation (ξ-Geometry)</h2>
+          <p>The T0-theory introduces a fundamental duality between time and mass fields, with universal geometric parameter ξ = 4/30000 ≈ 1.33333 × 10<sup>-4</sup>:</p>
+          
+          <div class="formula-box">
+            T · m = 1 (in natural units); E<sub>0</sub> = 1/ξ ≈ 7500 GeV
+          </div>
+          
+          <p>This leads to an extended Lagrangian with a fundamental time field Δm(x,t) and fractal dimension D<sub>f</sub> = 3 - ξ ≈ 2.999867:</p>
+          
+          <div class="lagrangian-section">
+            <div class="lagrangian-title">Standard Model Extension with Torsion</div>
+            <div class="formula-box">
+              ℒ<sub>total</sub> = ℒ<sub>SM</sub> + ℒ<sub>T0</sub>
+            </div>
             
-            sections.forEach(section => {
-                const sectionTop = section.getBoundingClientRect().top;
-                if (sectionTop < windowHeight * 0.8) {
-                    section.classList.add('animate');
-                }
-            });
-        }
+            <p>Where the T0 contribution is:</p>
+            <div class="formula-box">
+              ℒ<sub>T0</sub> = ξ · T<sub>field</sub> · (∂<sup>μ</sup> E<sub>field</sub>) (∂<sub>μ</sub> E<sub>field</sub>) + g<sub>T0</sub> ψ̄<sub>ℓ</sub> γ<sup>μ</sup> ψ<sub>ℓ</sub> V<sub>μ</sub>
+            </div>
+            
+            <div class="derivation-chain">
+              <div class="chain-step">ξ = universal geometric parameter from T0 duality</div>
+              <div class="chain-step">g<sub>T0</sub> = √(α K<sub>frak</sub>) ≈ 0.0849 (mass-independent coupling)</div>
+              <div class="chain-step">V<sub>μ</sub> = vector torsion mediator; m<sub>T</sub> ≈ 5.22 GeV (SymPy-validated)</div>
+              <div class="chain-step">K<sub>frak</sub> = 1 - 100ξ ≈ 0.9867 (fractal correction)</div>
+              <div class="chain-step">Result: Mass-dependent correction to anomalous magnetic moment via quadratic scaling</div>
+            </div>
+          </div>
+        </div>
         
-        // Initialize animations
-        document.addEventListener('DOMContentLoaded', function() {
-            animateOnScroll();
+        <div class="section">
+          <h2>Universal T0 Correction Formula (Rev. 9: RG-Duality)</h2>
+          <p>From the extended Lagrangian, Feynman loop integrals (SymPy-verified), and RG-duality correction (p = -2/3), T0 theory predicts:</p>
+          
+          <div class="formula-box">
+            a<sub>ℓ</sub><sup>T0</sup> = [α(ξ) K<sub>frak</sub><sup>2</sup> m<sub>ℓ</sub><sup>2</sup>] / [48 π<sup>2</sup> m<sub>T</sub><sup>2</sup>] · 1 / [1 + (ξ E<sub>0</sub>/m<sub>T</sub>)<sup>p</sup>] = 153 × 10⁻¹¹ × (m<sub>ℓ</sub>/m<sub>μ</sub>)²
+          </div>
+          
+          <div class="key-insight">
+            <h3>T0's Theoretical Contribution (Post-2025)</h3>
+            <p>The T0 core of 153 × 10⁻¹¹ embeds SM via ξ-duality, achieving ~0.15σ agreement with 2025 data (Fermilab 127 ppb). Hybrid view optional for pre-2025 bridging.</p>
+          </div>
+        </div>
+        
+        <div class="section">
+          <h2>Complete Lepton Analysis (Rev. 9: Unified Scaling)</h2>
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>Lepton</th>
+                <th>Mass<br>[MeV]</th>
+                <th>T0 Core<br>a<sub>ℓ</sub><sup>T0</sup> (×10<sup>n</sup>)</th>
+                <th>Full Value<br>(Embed SM)</th>
+                <th>Status (2025)</th>
+                <th>T0 Assessment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="particle">Electron</td>
+                <td>0.511</td>
+                <td>n=-11: 0.0036</td>
+                <td>1159652180.46(18) ×10<sup>-12</sup></td>
+                <td><span class="perfect-match">0σ Agreement</span></td>
+                <td>Core negligible; QED embedded via ξ</td>
+              </tr>
+              <tr>
+                <td class="particle">Muon</td>
+                <td>105.66</td>
+                <td>n=-11: 153</td>
+                <td>116592070(148) ×10<sup>-11</sup></td>
+                <td><span class="perfect-match">~0.15σ</span></td>
+                <td>Core fills discrepancy; 90% improvement post-HVP</td>
+              </tr>
+              <tr>
+                <td class="particle">Tau</td>
+                <td>1776.86</td>
+                <td>n=-7: 43300</td>
+                <td><9.5 ×10<sup>3</sup> (limit)</td>
+                <td><span class="sigma-highlight">Measurement pending</span></td>
+                <td>Large T0 effect; testable at Belle II 2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="section">
+          <h2>Physical Mechanism and Embeddings</h2>
+          <div class="derivation-chain">
+            <div class="chain-step"><strong>Mass-dependent coupling:</strong> Heavier particles interact more strongly with time field (m<sub>ℓ</sub><sup>2</sup> scaling)</div>
+            <div class="chain-step"><strong>Torsion mediator:</strong> m<sub>T</sub> = 5.22 GeV from fractal geometry (SymPy-validated)</div>
+            <div class="chain-step"><strong>RG-duality (p=-2/3):</strong> From σ<sup>μν</sup> dimension in fractal space</div>
+            <div class="chain-step"><strong>Embedding:</strong> SM (QED/HVP) as ξ-duality approximations; pure T0 replaces/adds to SM</div>
+            <div class="chain-step"><strong>Hierarchy:</strong> a<sub>e</sub> : a<sub>μ</sub> : a<sub>τ</sub> = 1 : 42,500 : 283,000 (quadratic enhancement)</div>
+          </div>
+          
+          <p>This natural scaling explains lepton hierarchy; electron consistency via QED-embedding resolves pre-2025 apparent inconsistencies.</p>
+        </div>
+        
+        <div class="section">
+          <h2>Prototype Integration (Sept. 2025 vs. Rev. 9)</h2>
+          <div class="breakthrough-box">
+            <h3>Evolution from Prototype</h3>
+            <p>Sept. 2025: Calibrated λ ≈ 2.725 × 10<sup>-3</sup> MeV for 251 × 10<sup>-11</sup> (pre-2025). Rev. 9: Parameter-free, ξ-derived m<sub>T</sub>, RG-correction for 153 × 10<sup>-11</sup> (~0.15σ post-2025). Lagrangian evolved to torsion+duality; consistent with GitHub repo (DOI: 10.5281/zenodo.17390358).</p>
+          </div>
+        </div>
+        
+        <div class="warning-box">
+          <h4>Scientific Status</h4>
+          <p>This framework extends the Standard Model geometrically. Mathematical formulation is systematic (SymPy-verified integrals), muon results align with 2025 data. Experimental validation via tau (Belle II 2026) and peer review essential.</p>
+        </div>
+      </div>
+      
+      <!-- German Content -->
+      <div id="content-de" class="hidden">
+        <div class="section">
+          <h2>Die Myon g-2 Anomalie (Pre-2025 Kontext)</h2>
+          <p>Pre-2025 Präzisionsmessungen zeigten eine Diskrepanz zwischen Theorie und Experiment beim anomalen magnetischen Moment des Myons:</p>
+          
+          <div class="derivation-chain">
+            <div class="chain-step">Experimentell: a<sub>μ</sub><sup>exp</sup> = 116.592.059(22) × 10<sup>-11</sup></div>
+            <div class="chain-step">Standardmodell: a<sub>μ</sub><sup>SM</sup> = 116.591.810(43) × 10<sup>-11</sup></div>
+            <div class="chain-step"><span class="sigma-highlight">Pre-2025 Status: 4,2σ Diskrepanz vom SM</span></div>
+            <div class="chain-step">Fehlender theoretischer Beitrag: Δa<sub>μ</sub> ≈ 249 × 10<sup>-11</sup></div>
+          </div>
+          <p>Post-2025 Fermilab-Daten (127 ppb Präzision) lösen Spannung auf ~0,15σ via Gitter-HVP, im Einklang mit reinen T0-Vorhersagen.</p>
+        </div>
+        
+        <div class="section">
+          <h2>T0 Zeit-Masse-Dualitätsgrundlage (ξ-Geometrie)</h2>
+          <p>Die T0-Theorie führt eine fundamentale Dualität zwischen Zeit- und Massefeldern ein, mit universellem geometrischen Parameter ξ = 4/30000 ≈ 1,33333 × 10<sup>-4</sup>:</p>
+          
+          <div class="formula-box">
+            T · m = 1 (in natürlichen Einheiten); E<sub>0</sub> = 1/ξ ≈ 7500 GeV
+          </div>
+          
+          <p>Diese führt zu einer erweiterten Lagrangedichte mit fundamentalem Zeitfeld Δm(x,t) und fraktaler Dimension D<sub>f</sub> = 3 - ξ ≈ 2,999867:</p>
+          
+          <div class="lagrangian-section">
+            <div class="lagrangian-title">Standardmodell-Erweiterung mit Torsion</div>
+            <div class="formula-box">
+              ℒ<sub>gesamt</sub> = ℒ<sub>SM</sub> + ℒ<sub>T0</sub>
+            </div>
             
-            // Add scroll event listener
-            window.addEventListener('scroll', animateOnScroll);
+            <p>Wobei der T0-Beitrag ist:</p>
+            <div class="formula-box">
+              ℒ<sub>T0</sub> = ξ · T<sub>field</sub> · (∂<sup>μ</sup> E<sub>field</sub>) (∂<sub>μ</sub> E<sub>field</sub>) + g<sub>T0</sub> ψ̄<sub>ℓ</sub> γ<sup>μ</sup> ψ<sub>ℓ</sub> V<sub>μ</sub>
+            </div>
             
-            // Initial animation for visible sections
-            setTimeout(() => {
-                document.querySelectorAll('#content-en .section').forEach((el, index) => {
-                    setTimeout(() => {
-                        el.classList.add('animate');
-                    }, index * 200);
-                });
-            }, 100);
+            <div class="derivation-chain">
+              <div class="chain-step">ξ = universeller geometrischer Parameter aus T0-Dualität</div>
+              <div class="chain-step">g<sub>T0</sub> = √(α K<sub>frak</sub>) ≈ 0,0849 (massenunabhängige Kopplung)</div>
+              <div class="chain-step">V<sub>μ</sub> = vektorielle Torsions-Mediator; m<sub>T</sub> ≈ 5,22 GeV (SymPy-validiert)</div>
+              <div class="chain-step">K<sub>frak</sub> = 1 - 100ξ ≈ 0,9867 (fraktale Korrektur)</div>
+              <div class="chain-step">Ergebnis: Massenabhängige Korrektur zum anomalen magnetischen Moment via quadratischer Skalierung</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="section">
+          <h2>Universelle T0-Korrektur-Formel (Rev. 9: RG-Dualität)</h2>
+          <p>Aus der erweiterten Lagrangedichte, Feynman-Schleifenintegralen (SymPy-verifiziert) und RG-Dualitätskorrektur (p = -2/3) sagt T0 voraus:</p>
+          
+          <div class="formula-box">
+            a<sub>ℓ</sub><sup>T0</sup> = [α(ξ) K<sub>frak</sub><sup>2</sup> m<sub>ℓ</sub><sup>2</sup>] / [48 π<sup>2</sup> m<sub>T</sub><sup>2</sup>] · 1 / [1 + (ξ E<sub>0</sub>/m<sub>T</sub>)<sup>p</sup>] = 153 × 10⁻¹¹ × (m<sub>ℓ</sub>/m<sub>μ</sub>)²
+          </div>
+          
+          <div class="key-insight">
+            <h3>T0s theoretischer Beitrag (Post-2025)</h3>
+            <p>Der T0-Kern von 153 × 10⁻¹¹ bettet SM via ξ-Dualität ein und erreicht ~0,15σ Übereinstimmung mit 2025-Daten (Fermilab 127 ppb). Hybrid-Ansicht optional für Pre-2025-Brücke.</p>
+          </div>
+        </div>
+        
+        <div class="section">
+          <h2>Vollständige Leptonen-Analyse (Rev. 9: Vereinheitlichte Skalierung)</h2>
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>Lepton</th>
+                <th>Masse<br>[MeV]</th>
+                <th>T0-Kern<br>a<sub>ℓ</sub><sup>T0</sup> (×10<sup>n</sup>)</th>
+                <th>Vollständiger Wert<br>(SM eingebettet)</th>
+                <th>Status (2025)</th>
+                <th>T0-Bewertung</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="particle">Elektron</td>
+                <td>0,511</td>
+                <td>n=-11: 0,0036</td>
+                <td>1.159.652.180,46(18) ×10<sup>-12</sup></td>
+                <td><span class="perfect-match">0σ Übereinstimmung</span></td>
+                <td>Kern vernachlässigbar; QED via ξ eingebettet</td>
+              </tr>
+              <tr>
+                <td class="particle">Myon</td>
+                <td>105,66</td>
+                <td>n=-11: 153</td>
+                <td>116.592.070(148) ×10<sup>-11</sup></td>
+                <td><span class="perfect-match">~0,15σ</span></td>
+                <td>Kern füllt Diskrepanz; 90% Verbesserung post-HVP</td>
+              </tr>
+              <tr>
+                <td class="particle">Tau</td>
+                <td>1776,86</td>
+                <td>n=-7: 43300</td>
+                <td><9,5 ×10<sup>3</sup> (Grenze)</td>
+                <td><span class="sigma-highlight">Messung ausstehend</span></td>
+                <td>Großer T0-Effekt; testbar bei Belle II 2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="section">
+          <h2>Physikalischer Mechanismus und Einbettungen</h2>
+          <div class="derivation-chain">
+            <div class="chain-step"><strong>Massenabhängige Kopplung:</strong> Schwerere Teilchen wechselwirken stärker mit Zeitfeld (m<sub>ℓ</sub><sup>2</sup>-Skalierung)</div>
+            <div class="chain-step"><strong>Torsions-Mediator:</strong> m<sub>T</sub> = 5,22 GeV aus fraktaler Geometrie (SymPy-validiert)</div>
+            <div class="chain-step"><strong>RG-Dualität (p=-2/3):</strong> Aus σ<sup>μν</sup>-Dimension in fraktalem Raum</div>
+            <div class="chain-step"><strong>Einbettung:</strong> SM (QED/HVP) als ξ-Dualitäts-Approximationen; reine T0 ersetzt/addiert SM</div>
+            <div class="chain-step"><strong>Hierarchie:</strong> a<sub>e</sub> : a<sub>μ</sub> : a<sub>τ</sub> = 1 : 42.500 : 283.000 (quadratische Verstärkung)</div>
+          </div>
+          
+          <p>Diese natürliche Skalierung erklärt Leptonenhierarchie; Elektron-Konsistenz via QED-Einbettung löst Pre-2025 scheinbare Inkonsistenzen.</p>
+        </div>
+        
+        <div class="section">
+          <h2>Prototyp-Integration (Sept. 2025 vs. Rev. 9)</h2>
+          <div class="breakthrough-box">
+            <h3>Evolution vom Prototyp</h3>
+            <p>Sept. 2025: Kalibrierter λ ≈ 2,725 × 10<sup>-3</sup> MeV für 251 × 10<sup>-11</sup> (Pre-2025). Rev. 9: Parameterfrei, ξ-abgeleitet m<sub>T</sub>, RG-Korrektur für 153 × 10<sup>-11</sup> (~0,15σ Post-2025). Lagrangedichte evolviert zu Torsion+Dualität; konsistent mit GitHub-Repo (DOI: 10.5281/zenodo.17390358).</p>
+          </div>
+        </div>
+        
+        <div class="warning-box">
+          <h4>Wissenschaftlicher Status</h4>
+          <p>Dieses Framework erweitert das Standardmodell geometrisch. Mathematische Formulierung systematisch (SymPy-verifizierte Integrale), Myon-Ergebnisse im Einklang mit 2025-Daten. Experimentelle Validierung via Tau (Belle II 2026) und Peer-Review unerlässlich.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="navigation">
+      <a href="https://jpascher.github.io/T0-Time-Mass-Duality/" class="nav-btn">
+        <span data-en="← Back to T0 Repository" data-de="← Zurück zum T0-Repository">← Back to T0 Repository</span>
+      </a>
+    </div>
+  </div>
+  
+  <script>
+    function switchLanguage(lang) {
+      // Hide all content
+      document.getElementById('content-en').classList.add('hidden');
+      document.getElementById('content-de').classList.add('hidden');
+      
+      // Remove active class from all buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      
+      // Show selected content
+      document.getElementById('content-' + lang).classList.remove('hidden');
+      
+      // Activate button
+      event.target.classList.add('active');
+      
+      // Update header text
+      const titleEl = document.querySelector('.title');
+      const subtitleEl = document.querySelector('.subtitle');
+      const navTextEl = document.querySelector('.nav-btn span');
+      
+      titleEl.textContent = titleEl.getAttribute('data-' + lang);
+      subtitleEl.textContent = subtitleEl.getAttribute('data-' + lang);
+      navTextEl.textContent = navTextEl.getAttribute('data-' + lang);
+      
+      // Re-animate sections
+      setTimeout(() => {
+        const sections = document.querySelectorAll('#content-' + lang + ' .section');
+        sections.forEach((el, index) => {
+          el.classList.remove('animate');
+          setTimeout(() => {
+            el.classList.add('animate');
+          }, index * 100);
         });
-        
-        // Add interactive hover effects for tables
-        document.addEventListener('DOMContentLoaded', function() {
-            const tableRows = document.querySelectorAll('.results-table tbody tr');
-            tableRows.forEach(row => {
-                row.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.02)';
-                });
-                row.addEventListener('mouseleave', function() {
-                    this.style.transform = 'scale(1.0)';
-                });
-            });
+      }, 50);
+    }
+    
+    // Animate sections on scroll
+    function animateOnScroll() {
+      const sections = document.querySelectorAll('.section');
+      const windowHeight = window.innerHeight;
+      
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if (sectionTop < windowHeight * 0.8) {
+          section.classList.add('animate');
+        }
+      });
+    }
+    
+    // Initialize animations
+    document.addEventListener('DOMContentLoaded', function() {
+      animateOnScroll();
+      
+      // Add scroll event listener
+      window.addEventListener('scroll', animateOnScroll);
+      
+      // Initial animation for visible sections
+      setTimeout(() => {
+        document.querySelectorAll('#content-en .section').forEach((el, index) => {
+          setTimeout(() => {
+            el.classList.add('animate');
+          }, index * 200);
         });
-    </script>
+      }, 100);
+    });
+    
+    // Add interactive hover effects for tables
+    document.addEventListener('DOMContentLoaded', function() {
+      const tableRows = document.querySelectorAll('.results-table tbody tr');
+      tableRows.forEach(row => {
+        row.addEventListener('mouseenter', function() {
+          this.style.transform = 'scale(1.02)';
+        });
+        row.addEventListener('mouseleave', function() {
+          this.style.transform = 'scale(1.0)';
+        });
+      });
+    });
+  </script>
 </body>
 </html>

@@ -31,13 +31,13 @@ The standard Kindle-optimized preamble should include:
 - Long section titles: Break with `\\`
 - Long formulas: Use `align*`, `split`, or `\allowbreak`
 - Set text wrapping parameters:
-  ```latex
-  \sloppy
-  \emergencystretch=3em
-  \hyphenpenalty=500
-  \tolerance=2000
-  \hbadness=2000
-  ```
+ ```latex
+ \sloppy
+ \emergencystretch=3em
+ \hyphenpenalty=500
+ \tolerance=2000
+ \hbadness=2000
+ ```
 
 ### 2. Table Optimization
 **Rule**: All tables must fit within text width.
@@ -45,8 +45,8 @@ The standard Kindle-optimized preamble should include:
 **Solution**: Wrap oversized tables with `\resizebox`:
 ```latex
 \resizebox{\textwidth}{!}{
-  \begin{tabular}{...}
-  ...
+ \begin{tabular}{...}
+ ...
 =======
 # Kindle/KDP-Optimierungs-Richtlinien für FFGFT Narrative Edition
 
@@ -61,9 +61,9 @@ Dieses Dokument beschreibt alle notwendigen Schritte und Anforderungen zur Optim
 ### 1.1 Seitenformat
 - **Format:** 6" × 9" (15.24 × 22.86 cm) - US Trade Book Standard
 - **LaTeX-Code:**
-  ```latex
-  \usepackage[paperwidth=6in, paperheight=9in, ...]{geometry}
-  ```
+ ```latex
+ \usepackage[paperwidth=6in, paperheight=9in, ...]{geometry}
+ ```
 
 ### 1.2 KDP-konforme Ränder
 Für Bücher mit 200-270 Seiten gelten folgende **Mindestanforderungen**:
@@ -75,13 +75,13 @@ Für Bücher mit 200-270 Seiten gelten folgende **Mindestanforderungen**:
 ### 1.3 Empfohlene Ränder (mit Sicherheitsmargen)
 ```latex
 \usepackage[
-  paperwidth=6in, 
-  paperheight=9in, 
-  inner=0.625in,  % 25% über Minimum
-  outer=0.625in,  % 150% über Minimum
-  top=0.625in,    % 150% über Minimum
-  bottom=1.0in,   % 300% über Minimum (Platz für Seitenzahlen!)
-  twoside         % Für korrekte Buchbindung
+ paperwidth=6in, 
+ paperheight=9in, 
+ inner=0.625in, % 25% über Minimum
+ outer=0.625in, % 150% über Minimum
+ top=0.625in,  % 150% über Minimum
+ bottom=1.0in,  % 300% über Minimum (Platz für Seitenzahlen!)
+ twoside     % Für korrekte Buchbindung
 ]{geometry}
 ```
 
@@ -100,10 +100,10 @@ Für Bücher mit 200-270 Seiten gelten folgende **Mindestanforderungen**:
 
 #### Schritt 1: displaystyle für Hauptformeln
 ```latex
-\everymath{\displaystyle}      % Inline-Formeln in voller Größe
-\everydisplay{\displaystyle}   % Display-Formeln optimiert
-\relpenalty=10                 % Zeilenumbrüche bei Relationen erlauben
-\binoppenalty=10               % Zeilenumbrüche bei binären Operatoren
+\everymath{\displaystyle}   % Inline-Formeln in voller Größe
+\everydisplay{\displaystyle}  % Display-Formeln optimiert
+\relpenalty=10         % Zeilenumbrüche bei Relationen erlauben
+\binoppenalty=10        % Zeilenumbrüche bei binären Operatoren
 ```
 
 **Effekt:**
@@ -113,8 +113,8 @@ Für Bücher mit 200-270 Seiten gelten folgende **Mindestanforderungen**:
 
 #### Schritt 2: DeclareMathSizes für Subscripts/Superscripts
 ```latex
-\DeclareMathSizes{11}{11}{9}{8}     % Base 11pt: script=9pt, scriptscript=8pt
-\DeclareMathSizes{10.95}{11}{9}{8}  % Für normalsize
+\DeclareMathSizes{11}{11}{9}{8}   % Base 11pt: script=9pt, scriptscript=8pt
+\DeclareMathSizes{10.95}{11}{9}{8} % Für normalsize
 ```
 
 **Effekt:**
@@ -133,10 +133,10 @@ Für Bücher mit 200-270 Seiten gelten folgende **Mindestanforderungen**:
 ### 3.2 Lösung: resizebox
 ```latex
 \resizebox{\textwidth}{!}{
-  \begin{tabular}{...}
-    % Tabelleninhalt
+ \begin{tabular}{...}
+  % Tabelleninhalt
 >>>>>>> copilot/narrative-reset
-  \end{tabular}
+ \end{tabular}
 }
 ```
 
@@ -176,7 +176,7 @@ Compile **4 times** to ensure:
 ### Command
 ```bash
 for i in {1..4}; do
-  sudo pdflatex -interaction=nonstopmode Kapitel_XXa_Narrative_En.tex
+ sudo pdflatex -interaction=nonstopmode Kapitel_XXa_Narrative_En.tex
 done
 ```
 
@@ -249,19 +249,19 @@ Before committing a chapter:
 #### Option 1: align* für mehrzeilige Formeln
 ```latex
 \begin{align*}
-  \text{Teil 1} &= \text{Ausdruck 1} \\
-  &= \text{Ausdruck 2} \\
-  &= \text{Ergebnis}
+ \text{Teil 1} &= \text{Ausdruck 1} \\
+ &= \text{Ausdruck 2} \\
+ &= \text{Ergebnis}
 \end{align*}
 ```
 
 #### Option 2: split innerhalb von equation
 ```latex
 \begin{equation}
-  \begin{split}
-    \text{Lange Formel} &= \text{Teil 1} \\
-    &\quad + \text{Teil 2}
-  \end{split}
+ \begin{split}
+  \text{Lange Formel} &= \text{Teil 1} \\
+  &\quad + \text{Teil 2}
+ \end{split}
 \end{equation}
 ```
 
@@ -291,8 +291,8 @@ Separate Dateien:
 Einbindung in Master-Dokument:
 ```latex
 \tableofcontents
-\input{Zentrale_Zeichenerklaerung_De}  % Nach TOC
-\chapter{...}  % Erstes Kapitel
+\input{Zentrale_Zeichenerklaerung_De} % Nach TOC
+\chapter{...} % Erstes Kapitel
 ```
 
 ---
@@ -309,10 +309,10 @@ Einbindung in Master-Dokument:
 
 ### 6.2 Verwendung
 ```latex
-\SI{13.8}{\gigalightyear}  % 13.8 Gly
-\SI{4.2}{\lightyear}       % 4.2 ly
-\SI{938}{\mev}             % 938 MeV
-\SI{14}{\gev}              % 14 GeV
+\SI{13.8}{\gigalightyear} % 13.8 Gly
+\SI{4.2}{\lightyear}    % 4.2 ly
+\SI{938}{\mev}       % 938 MeV
+\SI{14}{\gev}       % 14 GeV
 ```
 
 ---
@@ -325,12 +325,12 @@ cd 2/narrative
 
 # Deutsche PDF (4 Pässe mit sudo)
 for i in {1..4}; do
-  sudo pdflatex -interaction=nonstopmode FFGFT_Narrative_Master_De.tex
+ sudo pdflatex -interaction=nonstopmode FFGFT_Narrative_Master_De.tex
 done
 
 # Englische PDF (4 Pässe mit sudo)
 for i in {1..4}; do
-  sudo pdflatex -interaction=nonstopmode FFGFT_Narrative_Master_En.tex
+ sudo pdflatex -interaction=nonstopmode FFGFT_Narrative_Master_En.tex
 done
 ```
 
@@ -450,7 +450,8 @@ KDP meldet typischerweise:
 
 ---
 
-**Erstellt:** Januar 2026  
-**Version:** 1.0  
+**Erstellt:** Januar 2026 
+**Version:** 1.0 
 **Autor:** Copilot für FFGFT Narrative Edition
 >>>>>>> copilot/narrative-reset
+

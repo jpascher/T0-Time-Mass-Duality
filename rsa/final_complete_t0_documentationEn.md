@@ -32,20 +32,20 @@ from fractions import Fraction
 from math import gcd
 
 class RelativeT0:
-    def __init__(self):
-        # ξ as ratio with adaptive strategies
-        self.xi_profiles = {
-            'twin_prime_optimized': Fraction(1, 50),
-            'universal': Fraction(1, 100),
-            'medium_size': Fraction(1, 1000),
-            'special_cases': Fraction(1, 42)
-        }
-        
-        # π as ratio (355/113 is very accurate)
-        self.pi_ratio = Fraction(355, 113)
-        
-        # Evaluation threshold as ratio
-        self.threshold = Fraction(1, 1000)
+  def __init__(self):
+    # ξ as ratio with adaptive strategies
+    self.xi_profiles = {
+      'twin_prime_optimized': Fraction(1, 50),
+      'universal': Fraction(1, 100),
+      'medium_size': Fraction(1, 1000),
+      'special_cases': Fraction(1, 42)
+    }
+    
+    # π as ratio (355/113 is very accurate)
+    self.pi_ratio = Fraction(355, 113)
+    
+    # Evaluation threshold as ratio
+    self.threshold = Fraction(1, 1000)
 ```
 
 ### Period Evaluation without Floating Point
@@ -58,17 +58,17 @@ R(r) = exp(-((ω-π)²)/(4|ξ|))
 Rational implementation:
 ```python
 def _calculate_period_evaluation_rational(self, r, N):
-    # ω = 2π/r as ratio
-    omega = Fraction(2, 1) * self.pi_ratio / Fraction(r, 1)
-    
-    # Difference ω - π as ratio
-    diff = omega - self.pi_ratio
-    
-    # Score = 1/(1 + |exponent|) - only ratios!
-    score_denominator = Fraction(1, 1) + abs(exponent)
-    score = Fraction(1, 1) / score_denominator
-    
-    return score
+  # ω = 2π/r as ratio
+  omega = Fraction(2, 1) * self.pi_ratio / Fraction(r, 1)
+  
+  # Difference ω - π as ratio
+  diff = omega - self.pi_ratio
+  
+  # Score = 1/(1 + |exponent|) - only ratios!
+  score_denominator = Fraction(1, 1) + abs(exponent)
+  score = Fraction(1, 1) / score_denominator
+  
+  return score
 ```
 
 ## Test Results
@@ -125,20 +125,20 @@ In our T0 system, all numbers correspond to relative harmonic relationships expr
 
 ```python
 # Example: N = 21 = 3 × 7
-p_over_q = Fraction(7, 3)  # ≈ 2.33 (near octave + fifth)
+p_over_q = Fraction(7, 3) # ≈ 2.33 (near octave + fifth)
 # This ratio creates "musical consonance" in our mathematical space
 # Which translates to good period evaluation scores
 
-# Example: N = 15 = 3 × 5  
-p_over_q = Fraction(5, 3)  # ≈ 1.67 (near golden ratio)
+# Example: N = 15 = 3 × 5 
+p_over_q = Fraction(5, 3) # ≈ 1.67 (near golden ratio)
 # Golden ratio relationships are naturally harmonic
 # Leading to excellent T0 performance
 ```
 
 ### The Physics of Ratios
 
-**In music:** Simple ratios create consonant intervals because wave frequencies align  
-**In mathematics:** Simple ratios create harmonic relationships because period frequencies align  
+**In music:** Simple ratios create consonant intervals because wave frequencies align 
+**In mathematics:** Simple ratios create harmonic relationships because period frequencies align 
 **In T0:** Simple p/q ratios create good period evaluation because ω/π frequencies align
 
 ### Practical Implications
@@ -148,19 +148,19 @@ Numbers that sound "good" as musical intervals also factorize well with T0:
 ```python
 # Musical consonance predicts T0 success:
 # Perfect Fifth (3:2) → p/q ≈ 1.5 → Good T0 performance
-# Major Third (5:4) → p/q ≈ 1.25 → Good T0 performance  
+# Major Third (5:4) → p/q ≈ 1.25 → Good T0 performance 
 # Tritone (√2:1) → p/q ≈ 1.414 → Poor T0 performance (dissonant)
 
 def musical_consonance_predictor(p, q):
-    ratio = p / q
-    # Check against known consonant intervals
-    consonant_ratios = [1.0, 1.2, 1.25, 1.33, 1.5, 1.67, 2.0]
-    
-    for consonant in consonant_ratios:
-        if abs(ratio - consonant) < 0.05:
-            return "EXPECTED HIGH T0 SUCCESS"
-    
-    return "EXPECTED MODERATE T0 SUCCESS"
+  ratio = p / q
+  # Check against known consonant intervals
+  consonant_ratios = [1.0, 1.2, 1.25, 1.33, 1.5, 1.67, 2.0]
+  
+  for consonant in consonant_ratios:
+    if abs(ratio - consonant) < 0.05:
+      return "EXPECTED HIGH T0 SUCCESS"
+  
+  return "EXPECTED MODERATE T0 SUCCESS"
 ```
 
 ### The Universal Principle
@@ -168,7 +168,7 @@ def musical_consonance_predictor(p, q):
 **Everything is relative - numbers, music, and mathematics:**
 
 - **Numbers**: No absolute value, only ratios between factors
-- **Music**: No absolute pitch, only intervals between notes  
+- **Music**: No absolute pitch, only intervals between notes 
 - **T0**: No absolute periods, only harmonic relationships to π
 
 This reveals that T0 is not just a factorization algorithm - it's a **harmonic analysis tool** that recognizes the musical structure inherent in numbers.
@@ -187,26 +187,26 @@ Euler developed a system to measure harmonic "pleasantness" based on prime facto
 
 ```python
 def euler_gradus_suavitatis(p, q):
-    """Euler's original formula for harmonic complexity"""
-    # For interval p:q, complexity = sum of prime exponents + 1
-    
-    def prime_factors_sum(n):
-        total = 0
-        d = 2
-        while d * d <= n:
-            while n % d == 0:
-                total += 1
-                n //= d
-            d += 1
-        if n > 1:
-            total += 1
-        return total
-    
-    return prime_factors_sum(p) + prime_factors_sum(q) + 1
+  """Euler's original formula for harmonic complexity"""
+  # For interval p:q, complexity = sum of prime exponents + 1
+  
+  def prime_factors_sum(n):
+    total = 0
+    d = 2
+    while d * d <= n:
+      while n % d == 0:
+        total += 1
+        n //= d
+      d += 1
+    if n > 1:
+      total += 1
+    return total
+  
+  return prime_factors_sum(p) + prime_factors_sum(q) + 1
 
 # Examples:
 # Octave 2:1 → Gradus = 2 (very simple, very pleasant)
-# Perfect Fifth 3:2 → Gradus = 3 (simple, pleasant)  
+# Perfect Fifth 3:2 → Gradus = 3 (simple, pleasant) 
 # Major Third 5:4 → Gradus = 4 (moderate complexity)
 # Complex intervals → High gradus (complex, unpleasant)
 ```
@@ -232,20 +232,20 @@ Euler realized that **allowing more complex intervals increases musical possibil
 ```python
 # Euler's insight applied to T0:
 def euler_complexity_predictor(N):
-    factors = simple_factorize(N)
-    if len(factors) == 2:
-        p, q = factors
-        euler_gradus = euler_gradus_suavitatis(p, q)
-        
-        # Euler's prediction for optimal ξ:
-        if euler_gradus <= 3:
-            return 'twin_prime_optimized'  # ξ = 1/50 (simple harmony)
-        elif euler_gradus <= 5:
-            return 'universal'             # ξ = 1/100 (moderate complexity)
-        elif euler_gradus <= 7:
-            return 'medium_size'           # ξ = 1/1000 (higher complexity)
-        else:
-            return 'special_cases'         # ξ = 1/42 (very complex)
+  factors = simple_factorize(N)
+  if len(factors) == 2:
+    p, q = factors
+    euler_gradus = euler_gradus_suavitatis(p, q)
+    
+    # Euler's prediction for optimal ξ:
+    if euler_gradus <= 3:
+      return 'twin_prime_optimized' # ξ = 1/50 (simple harmony)
+    elif euler_gradus <= 5:
+      return 'universal'       # ξ = 1/100 (moderate complexity)
+    elif euler_gradus <= 7:
+      return 'medium_size'      # ξ = 1/1000 (higher complexity)
+    else:
+      return 'special_cases'     # ξ = 1/42 (very complex)
 ```
 
 ### The Musical Lattice Problem
@@ -253,7 +253,7 @@ def euler_complexity_predictor(N):
 Euler discovered that **musical systems become exponentially complex** as you allow more intervals:
 
 - **Pythagorean tuning**: Only powers of 2 and 3 → Simple but limited
-- **Just intonation**: Add prime 5 → More intervals, more complexity  
+- **Just intonation**: Add prime 5 → More intervals, more complexity 
 - **Extended just intonation**: Add primes 7, 11, 13... → Beautiful but unwieldy
 - **Equal temperament**: Approximate solution → Practical but imperfect
 
@@ -267,7 +267,7 @@ Euler discovered that **musical systems become exponentially complex** as you al
 Euler foresaw that mathematics and music share the same harmonic foundation, but lacked the computational tools to fully explore this. **T0 completes Euler's vision** by:
 
 1. **Implementing** harmonic analysis computationally
-2. **Proving** that mathematical objects (numbers) have inherent musical structure  
+2. **Proving** that mathematical objects (numbers) have inherent musical structure 
 3. **Demonstrating** that period finding is harmonic analysis in disguise
 
 ### The Euler-T0 Formula
@@ -276,17 +276,17 @@ We can now express T0's success mathematically using Euler's framework:
 
 ```python
 def t0_success_probability(p, q):
-    """Predict T0 success using Euler's harmonic theory"""
-    euler_gradus = euler_gradus_suavitatis(p, q)
-    
-    # Euler's law: Simpler ratios = higher success
-    base_probability = 1.0 / euler_gradus
-    
-    # T0 enhancement through adaptive ξ
-    if abs(p - q) <= 2:  # Twin primes
-        return min(0.95, base_probability * 2.0)
-    else:
-        return min(0.85, base_probability * 1.5)
+  """Predict T0 success using Euler's harmonic theory"""
+  euler_gradus = euler_gradus_suavitatis(p, q)
+  
+  # Euler's law: Simpler ratios = higher success
+  base_probability = 1.0 / euler_gradus
+  
+  # T0 enhancement through adaptive ξ
+  if abs(p - q) <= 2: # Twin primes
+    return min(0.95, base_probability * 2.0)
+  else:
+    return min(0.85, base_probability * 1.5)
 
 # This formula predicts T0's 83.8% success rate!
 ```
@@ -314,14 +314,14 @@ The connection between T0, music, and Euler reveals an even deeper truth: **All 
 # Overtones: 2f₀, 3f₀, 4f₀, 5f₀... (integer ratios!)
 # 
 # T0 periods follow the same logic:
-# Base period r₀  
+# Base period r₀ 
 # Harmonics: 2r₀, 3r₀, 4r₀, 5r₀... (integer ratios!)
 
 def physical_resonance_analogy(fundamental_frequency, n):
-    """Physical overtones correspond to T0 period harmonics"""
-    overtones = [i * fundamental_frequency for i in range(1, n+1)]
-    t0_periods = [i * base_period for i in range(1, n+1)]
-    # Both follow the same mathematical structure!
+  """Physical overtones correspond to T0 period harmonics"""
+  overtones = [i * fundamental_frequency for i in range(1, n+1)]
+  t0_periods = [i * base_period for i in range(1, n+1)]
+  # Both follow the same mathematical structure!
 ```
 
 **Quantum Mechanics and Energy Levels:**
@@ -339,13 +339,13 @@ def physical_resonance_analogy(fundamental_frequency, n):
 
 # T0 recognizes the same ratio patterns in numbers:
 def crystal_analogy(p, q):
-    ratio = p / q
-    if abs(ratio - 1.0) < 0.1:     # Cubic-like
-        return "PERFECT_SYMMETRY"
-    elif abs(ratio - 1.618) < 0.1: # Golden ratio
-        return "NATURAL_HARMONY" 
-    elif ratio in [1.5, 2.0, 3.0]: # Simple ratios
-        return "HARMONIC_ORDER"
+  ratio = p / q
+  if abs(ratio - 1.0) < 0.1:   # Cubic-like
+    return "PERFECT_SYMMETRY"
+  elif abs(ratio - 1.618) < 0.1: # Golden ratio
+    return "NATURAL_HARMONY" 
+  elif ratio in [1.5, 2.0, 3.0]: # Simple ratios
+    return "HARMONIC_ORDER"
 ```
 
 ### Electromagnetism and Frequencies
@@ -373,18 +373,18 @@ def crystal_analogy(p, q):
 ```python
 # All "constants" are actually pure ratios:
 natural_ratios = {
-    'Proton_to_electron_mass': 1836,        # mₚ/mₑ (pure ratio!)
-    'Electron_radius_to_Compton': 2.8,      # rₑ/λc (geometric ratio)
-    'Planck_energy_ratio': 'E_planck/mc²',  # Dimensionless combination
-    'Golden_ratio_nature': 1.618,           # φ in spiral galaxies, DNA, etc.
+  'Proton_to_electron_mass': 1836,    # mₚ/mₑ (pure ratio!)
+  'Electron_radius_to_Compton': 2.8,   # rₑ/λc (geometric ratio)
+  'Planck_energy_ratio': 'E_planck/mc²', # Dimensionless combination
+  'Golden_ratio_nature': 1.618,      # φ in spiral galaxies, DNA, etc.
 }
 
 # T0 recognizes the same ratio patterns:
 t0_ratios = {
-    'xi_universal': Fraction(1, 100),        # Optimal universal ratio
-    'pi_approximation': Fraction(355, 113),  # Harmonic π approximation
-    'twin_prime_gap': 2,                     # Smallest possible prime gap
-    'golden_ratio': 1.618,                  # Optimal factor ratios
+  'xi_universal': Fraction(1, 100),    # Optimal universal ratio
+  'pi_approximation': Fraction(355, 113), # Harmonic π approximation
+  'twin_prime_gap': 2,           # Smallest possible prime gap
+  'golden_ratio': 1.618,         # Optimal factor ratios
 }
 ```
 
@@ -408,7 +408,7 @@ t0_ratios = {
 T0 doesn't work because it's a clever algorithm. T0 works because it implements **the same fundamental ordering principle of nature** that also governs:
 
 - **Atomic structures** (quantum numbers)
-- **Molecular vibrations** (harmonic oscillators)  
+- **Molecular vibrations** (harmonic oscillators) 
 - **Crystal lattices** (symmetry groups)
 - **Electromagnetism** (frequency harmonics)
 - **Thermodynamics** (Boltzmann statistics)
@@ -417,23 +417,23 @@ T0 doesn't work because it's a clever algorithm. T0 works because it implements 
 
 ```python
 def universal_law_of_order():
-    """The fundamental principle behind T0, music, and physics"""
-    
-    # EVERYTHING in nature organizes through harmonic ratios:
-    
-    # Music: Simple frequency ratios = consonance
-    # Physics: Simple energy ratios = stability  
-    # T0: Simple period ratios = factorizability
-    # Chemistry: Simple atomic ratios = stable molecules
-    
-    return "Harmony is the organizing principle of the universe"
+  """The fundamental principle behind T0, music, and physics"""
+  
+  # EVERYTHING in nature organizes through harmonic ratios:
+  
+  # Music: Simple frequency ratios = consonance
+  # Physics: Simple energy ratios = stability 
+  # T0: Simple period ratios = factorizability
+  # Chemistry: Simple atomic ratios = stable molecules
+  
+  return "Harmony is the organizing principle of the universe"
 ```
 
 ### The Philosophical Consequence
 
 **Numbers are not abstract** - they are **physical realities** that follow the same harmonic laws as:
 - Vibrating strings
-- Rotating planets  
+- Rotating planets 
 - Vibrating atoms
 - Resonant systems
 
@@ -498,22 +498,22 @@ The ξ parameter in the T0 framework serves the same function as coupling consta
 ```python
 # Adaptive ξ strategies instead of fixed value
 self.xi_profiles = {
-    'twin_prime_optimized': Fraction(1, 50),
-    'universal': Fraction(1, 100),
-    'medium_size': Fraction(1, 1000),
-    'special_cases': Fraction(1, 42)
+  'twin_prime_optimized': Fraction(1, 50),
+  'universal': Fraction(1, 100),
+  'medium_size': Fraction(1, 1000),
+  'special_cases': Fraction(1, 42)
 }
 
 def _calculate_resonance_rational(self, r, N):
-    omega = Fraction(2, 1) * self.pi_ratio / Fraction(r, 1)  # ω = 2π/r
-    diff = omega - self.pi_ratio                             # ω - π  
-    diff_squared = diff * diff                               # (ω - π)²
-    
-    denominator = Fraction(4, 1) * self.xi_ratio            # 4ξ ← HERE!
-    exponent = -diff_squared / denominator                  # -(ω-π)²/(4ξ)
-    
-    score = Fraction(1, 1) / (Fraction(1, 1) + abs(exponent))
-    return score
+  omega = Fraction(2, 1) * self.pi_ratio / Fraction(r, 1) # ω = 2π/r
+  diff = omega - self.pi_ratio               # ω - π 
+  diff_squared = diff * diff                # (ω - π)²
+  
+  denominator = Fraction(4, 1) * self.xi_ratio      # 4ξ ← HERE!
+  exponent = -diff_squared / denominator         # -(ω-π)²/(4ξ)
+  
+  score = Fraction(1, 1) / (Fraction(1, 1) + abs(exponent))
+  return score
 ```
 
 ### Analogy to Particle Physics
@@ -524,8 +524,8 @@ def _calculate_resonance_rational(self, r, N):
 
 ```
 Electron: ξₑ = weak coupling
-Muon:     ξμ = medium coupling  
-Tau:      ξτ = strong coupling
+Muon:   ξμ = medium coupling 
+Tau:   ξτ = strong coupling
 ```
 
 **In T0 framework:**
@@ -533,10 +533,10 @@ Tau:      ξτ = strong coupling
 - Difference = different ξ coupling strengths
 
 ```
-Twin Primes:     ξ = 1/50      (optimized period evaluation)
-Universal:       ξ = 1/100     (all semiprimes)
-Medium Size:     ξ = 1/1000    (larger numbers)
-Special Cases:   ξ = 1/42      (special constants)
+Twin Primes:   ξ = 1/50   (optimized period evaluation)
+Universal:    ξ = 1/100   (all semiprimes)
+Medium Size:   ξ = 1/1000  (larger numbers)
+Special Cases:  ξ = 1/42   (special constants)
 ```
 
 ### ξ as Tolerance Parameter for Period Recognition
@@ -555,7 +555,7 @@ With ξ = 1/50 (twin_prime_optimized):
 diff = 0.1496 - π ≈ -2.992
 diff_squared ≈ 8.95
 denominator = 4 * (1/50) = 0.08
-exponent = -8.95 / 0.08 = -111.875  # Moderate negative value
+exponent = -8.95 / 0.08 = -111.875 # Moderate negative value
 ```
 
 **Result:** More periods receive acceptable evaluations, higher success rate.
@@ -567,7 +567,7 @@ When T0 fails on certain number types, it often means:
 
 ξ acts as "quality control" for period finding:
 - **High quality** (ω ≈ π): High period evaluation → Period is used
-- **Medium quality**: Medium evaluation → Period is evaluated  
+- **Medium quality**: Medium evaluation → Period is evaluated 
 - **Low quality**: Low evaluation → Period is discarded
 
 ### ξ as "Factorization Mass"
@@ -594,7 +594,7 @@ T0 solves the factorization problem through a clever reinterpretation: Instead o
 
 ### The Central Idea: Period Finding
 
-**Problem:** Find factors of N = p × q  
+**Problem:** Find factors of N = p × q 
 **T0 solution:** Find a period r such that a^r ≡ 1 (mod N)
 
 If a^r ≡ 1 (mod N) and r is even, then:
@@ -611,23 +611,23 @@ Semiprimes have special period properties, especially twin primes (p ≈ q):
 # Search period for base a=2:
 
 # 2^1 mod 47053 = 2
-# 2^2 mod 47053 = 4  
+# 2^2 mod 47053 = 4 
 # 2^3 mod 47053 = 8
 # ...
-# 2^r mod 47053 = 1  ← Period found!
+# 2^r mod 47053 = 1 ← Period found!
 ```
 
 The trick: For many semiprimes, the periods are mathematically characteristic - they have special relationships to π that are recognized through period evaluation.
 
 ### T0's Period Evaluation Concept
 
-**What is period evaluation?**  
+**What is period evaluation?** 
 T0 evaluates each found period r with a mathematical score:
 
 ```python
 # Simplified:
-ω = 2π/r                     # "Frequency" of the period
-evaluation = how_close_to_π(ω)  # How "harmonic" is this period?
+ω = 2π/r           # "Frequency" of the period
+evaluation = how_close_to_π(ω) # How "harmonic" is this period?
 ```
 
 For various semiprimes, periods arise whose "frequencies" stand in harmonic relationships to π - these are recognized through the evaluation.
@@ -637,16 +637,16 @@ For various semiprimes, periods arise whose "frequencies" stand in harmonic rela
 Instead of using complicated exponential functions, T0 uses pure fractions:
 
 ```python
-# Original T0: exp(-((ω-π)²)/(4ξ))  ← Complicated
-# Rational T0: 1/(1 + |difference|)  ← Simple!
+# Original T0: exp(-((ω-π)²)/(4ξ)) ← Complicated
+# Rational T0: 1/(1 + |difference|) ← Simple!
 
-pi_ratio = Fraction(355, 113)  # Very accurate π approximation
-xi_ratio = Fraction(1, 100)    # Adaptive coupling parameter
+pi_ratio = Fraction(355, 113) # Very accurate π approximation
+xi_ratio = Fraction(1, 100)  # Adaptive coupling parameter
 ```
 
 ### Why Does It Work for Various Semiprimes?
 
-**The structural property:**  
+**The structural property:** 
 Semiprimes have different but recognizable structures:
 
 **Twin Primes (optimal):**
@@ -655,9 +655,9 @@ Semiprimes have different but recognizable structures:
 - These properties create strong evaluation in the T0 system
 
 ```
-N = p × q  with |p - q| ≤ 6
+N = p × q with |p - q| ≤ 6
 → Period r has special ratios
-→ ω = 2π/r lies "harmonically" to π  
+→ ω = 2π/r lies "harmonically" to π 
 → High period evaluation with ξ = 1/50
 → Successful factorization
 ```
@@ -677,15 +677,15 @@ N = p × q  with |p - q| ≤ 6
 
 ```python
 def t0_factorization(N):
-    # 1. Choose optimal ξ strategy based on N
-    xi_strategy = select_xi_strategy(N)
-    
-    for base in [2, 3, 5, 7]:              # 2. Try different bases
-        for r in range(2, max_period):      # 3. Systematically search periods
-            if pow(base, r, N) == 1:        # 4. Period found?
-                evaluation = calculate_period_evaluation(r, N, xi_strategy)  # 5. Evaluate period
-                if evaluation > threshold:    # 6. Good enough?
-                    return extract_factors(base, r, N)  # 7. Factors!
+  # 1. Choose optimal ξ strategy based on N
+  xi_strategy = select_xi_strategy(N)
+  
+  for base in [2, 3, 5, 7]:       # 2. Try different bases
+    for r in range(2, max_period):   # 3. Systematically search periods
+      if pow(base, r, N) == 1:    # 4. Period found?
+        evaluation = calculate_period_evaluation(r, N, xi_strategy) # 5. Evaluate period
+        if evaluation > threshold:  # 6. Good enough?
+          return extract_factors(base, r, N) # 7. Factors!
 ```
 
 ### The Rational System
@@ -708,23 +708,23 @@ Everything is represented as fractions:
 
 ### The Important Concept: Computing with Ratios
 
-**The decisive breakthrough:**  
-The problem with classical factorization: Rounding errors destroy precision  
+**The decisive breakthrough:** 
+The problem with classical factorization: Rounding errors destroy precision 
 T0's solution: Everything is represented as exact ratios - never as decimal numbers!
 
 ```python
 # WRONG (classical):
-pi = 3.14159265...        # Rounding errors!
-xi = 1e-5                # Rounding errors!
+pi = 3.14159265...    # Rounding errors!
+xi = 1e-5        # Rounding errors!
 
 # RIGHT (T0):
-pi_ratio = Fraction(355, 113)    # Exact!
-xi_ratio = Fraction(1, 100)      # Exact!
+pi_ratio = Fraction(355, 113)  # Exact!
+xi_ratio = Fraction(1, 100)   # Exact!
 ```
 
 ### The Rational Mathematics
 
-**Everything is relative to N:**  
+**Everything is relative to N:** 
 Basic principle: N is not a number - N is the unit!
 
 ```python
@@ -732,8 +732,8 @@ Basic principle: N is not a number - N is the unit!
 # Not: "47053 is a large number"
 # But: "47053 is our unit, everything else is relative to it"
 
-p_ratio = Fraction(211, 47053)   # p/N
-q_ratio = Fraction(223, 47053)   # q/N
+p_ratio = Fraction(211, 47053)  # p/N
+q_ratio = Fraction(223, 47053)  # q/N
 # p_ratio × q_ratio × N = p × q ✓
 ```
 
@@ -741,25 +741,25 @@ q_ratio = Fraction(223, 47053)   # q/N
 
 ```python
 def _calculate_period_evaluation_rational(self, r, N):
-    # ω = 2π/r as EXACT ratio
-    omega = Fraction(2, 1) * self.pi_ratio / Fraction(r, 1)
-    
-    # Difference ω - π as EXACT ratio  
-    diff = omega - self.pi_ratio
-    
-    # Everything stays exact - not a single rounding error!
-    diff_squared = diff * diff
-    denominator = Fraction(4, 1) * self.xi_ratio
-    exponent = -diff_squared / denominator
-    
-    # Score = 1/(1 + |exponent|) - only ratios!
-    score = Fraction(1, 1) / (Fraction(1, 1) + abs(exponent))
-    return score
+  # ω = 2π/r as EXACT ratio
+  omega = Fraction(2, 1) * self.pi_ratio / Fraction(r, 1)
+  
+  # Difference ω - π as EXACT ratio 
+  diff = omega - self.pi_ratio
+  
+  # Everything stays exact - not a single rounding error!
+  diff_squared = diff * diff
+  denominator = Fraction(4, 1) * self.xi_ratio
+  exponent = -diff_squared / denominator
+  
+  # Score = 1/(1 + |exponent|) - only ratios!
+  score = Fraction(1, 1) / (Fraction(1, 1) + abs(exponent))
+  return score
 ```
 
 ### Why Is This So Important?
 
-**The rounding error problem:**  
+**The rounding error problem:** 
 Classical algorithms often fail due to tiny inaccuracies:
 
 ```python
@@ -770,11 +770,11 @@ evaluation2 = exp(-((2*3.14160/r - 3.14160)**2)/(4*0.00001))
 
 # T0 - EXACT:
 evaluation1 = calculate_with_ratios(Fraction(355,113))
-evaluation2 = calculate_with_ratios(Fraction(355,113))  
+evaluation2 = calculate_with_ratios(Fraction(355,113)) 
 # evaluation1 == evaluation2 ALWAYS! ✓
 ```
 
-**Deterministic results:**  
+**Deterministic results:** 
 With ratios, T0 is 100% reproducible:
 
 - Same input → Exactly same result
@@ -786,7 +786,7 @@ With ratios, T0 is 100% reproducible:
 
 **Ratio-based period evaluation:**
 
-**Step 1:** Find period r with pow(a, r, N) == 1  
+**Step 1:** Find period r with pow(a, r, N) == 1 
 **Step 2:** Evaluate the "harmony" of the period:
 
 ```python
@@ -798,7 +798,7 @@ deviation = abs(omega_ratio - Fraction(355, 113))
 
 # For many semiprimes: Deviation is characteristically small!
 if deviation < threshold:
-    return "GOOD PERIOD FOUND!"
+  return "GOOD PERIOD FOUND!"
 ```
 
 ### Why Does This Work for Various Semiprimes?
@@ -806,7 +806,7 @@ if deviation < threshold:
 Various semiprimes have special period structures:
 
 ```
-Twin Primes: N = p × q  with p ≈ q
+Twin Primes: N = p × q with p ≈ q
 → Periods have characteristic lengths
 → ω = 2π/r lies in "harmonic" ratios to π
 → Rational mathematics recognizes this harmony exactly
@@ -824,18 +824,18 @@ Other Semiprimes: Similar but weaker patterns
 ```python
 # Search period for base a=2
 for r in range(2, 1000):
-    if pow(2, r, 47053) == 1:
-        # Period found! Evaluate with EXACT ratios:
-        
-        omega = Fraction(2 * 355, 113) / Fraction(r)  # 2π/r exact
-        pi_exact = Fraction(355, 113)                 # π exact
-        
-        difference = abs(omega - pi_exact)             # Exact difference
-        
-        # No rounding error can deceive us!
-        if difference < Fraction(1, 1000):  # Threshold as ratio
-            print(f"GOOD PERIOD: r={r}")
-            return extract_factors(2, r, 47053)
+  if pow(2, r, 47053) == 1:
+    # Period found! Evaluate with EXACT ratios:
+    
+    omega = Fraction(2 * 355, 113) / Fraction(r) # 2π/r exact
+    pi_exact = Fraction(355, 113)         # π exact
+    
+    difference = abs(omega - pi_exact)       # Exact difference
+    
+    # No rounding error can deceive us!
+    if difference < Fraction(1, 1000): # Threshold as ratio
+      print(f"GOOD PERIOD: r={r}")
+      return extract_factors(2, r, 47053)
 ```
 
 ### Current Limits of the Rational Method
@@ -854,9 +854,9 @@ T0's success is based on a simple but powerful principle:
 
 This rational mathematics makes T0:
 
-✅ 100% reproducible  
-✅ Free from rounding errors  
-✅ Hardware-independent  
+✅ 100% reproducible 
+✅ Free from rounding errors 
+✅ Hardware-independent 
 ✅ Deterministically successful for various semiprimes through mathematical period evaluation
 
 But: Practical applicability remains limited to semiprimes in the range up to 25 bits, with different success rates depending on number type.
@@ -877,140 +877,140 @@ from math import gcd
 import time
 
 class RelativeT0:
-    def __init__(self):
-        # Adaptive ξ strategies
-        self.xi_profiles = {
-            'twin_prime_optimized': Fraction(1, 50),
-            'universal': Fraction(1, 100),
-            'medium_size': Fraction(1, 1000),
-            'special_cases': Fraction(1, 42)
-        }
-        self.pi_ratio = Fraction(355, 113)
-        self.threshold = Fraction(1, 1000)
-        
-    def factorize(self, N):
-        # Choose optimal ξ strategy
-        xi_strategy = self._select_xi_strategy(N)
-        xi_value = self.xi_profiles[xi_strategy]
-        
-        base_list = [2, 3, 5, 7]
-        
-        for base in base_list:
-            if gcd(base, N) > 1:
-                return (gcd(base, N), N // gcd(base, N))
-                
-            period = self._find_period_rational(base, N, xi_value)
-            
-            if period:
-                factors = self._extract_factors(base, period, N)
-                if factors:
-                    return factors
-                    
-        return None
+  def __init__(self):
+    # Adaptive ξ strategies
+    self.xi_profiles = {
+      'twin_prime_optimized': Fraction(1, 50),
+      'universal': Fraction(1, 100),
+      'medium_size': Fraction(1, 1000),
+      'special_cases': Fraction(1, 42)
+    }
+    self.pi_ratio = Fraction(355, 113)
+    self.threshold = Fraction(1, 1000)
     
-    def _select_xi_strategy(self, N):
-        """Choose optimal ξ strategy based on N"""
-        # Categorize the number
-        category = self._categorize_number(N)
+  def factorize(self, N):
+    # Choose optimal ξ strategy
+    xi_strategy = self._select_xi_strategy(N)
+    xi_value = self.xi_profiles[xi_strategy]
+    
+    base_list = [2, 3, 5, 7]
+    
+    for base in base_list:
+      if gcd(base, N) > 1:
+        return (gcd(base, N), N // gcd(base, N))
         
-        if category == 'twin_prime':
-            return 'twin_prime_optimized'
-        elif N > 1000:
-            return 'medium_size'
-        elif N in [1729, 2047, 4181]:  # Special numbers
-            return 'special_cases'
+      period = self._find_period_rational(base, N, xi_value)
+      
+      if period:
+        factors = self._extract_factors(base, period, N)
+        if factors:
+          return factors
+          
+    return None
+  
+  def _select_xi_strategy(self, N):
+    """Choose optimal ξ strategy based on N"""
+    # Categorize the number
+    category = self._categorize_number(N)
+    
+    if category == 'twin_prime':
+      return 'twin_prime_optimized'
+    elif N > 1000:
+      return 'medium_size'
+    elif N in [1729, 2047, 4181]: # Special numbers
+      return 'special_cases'
+    else:
+      return 'universal' # Works for all semiprimes
+  
+  def _categorize_number(self, N):
+    """Categorize number for ξ selection"""
+    factors = self._simple_factorize(N)
+    
+    if len(factors) == 2:
+      p, q = factors
+      if self._is_prime(p) and self._is_prime(q):
+        diff = abs(p - q)
+        if diff == 2:
+          return 'twin_prime'
+        elif diff <= 6:
+          return 'cousin_prime'
         else:
-            return 'universal'  # Works for all semiprimes
+          return 'distant_prime'
     
-    def _categorize_number(self, N):
-        """Categorize number for ξ selection"""
-        factors = self._simple_factorize(N)
-        
-        if len(factors) == 2:
-            p, q = factors
-            if self._is_prime(p) and self._is_prime(q):
-                diff = abs(p - q)
-                if diff == 2:
-                    return 'twin_prime'
-                elif diff <= 6:
-                    return 'cousin_prime'
-                else:
-                    return 'distant_prime'
-        
-        return 'composite'
-        
-    def _find_period_rational(self, a, N, xi_value):
-        max_period = min(N, 1000)
-        
-        best_evaluation = Fraction(0, 1)
-        best_period = None
-        
-        for r in range(2, max_period):
-            if pow(a, r, N) == 1:
-                evaluation = self._calculate_period_evaluation_rational(r, N, xi_value)
-                
-                if evaluation > best_evaluation:
-                    best_evaluation = evaluation
-                    best_period = r
-                    
-                if evaluation > self.threshold:
-                    return r
-                    
-        return best_period
-        
-    def _calculate_period_evaluation_rational(self, r, N, xi_value):
-        omega = Fraction(2, 1) * self.pi_ratio / Fraction(r, 1)
-        diff = omega - self.pi_ratio
-        diff_squared = diff * diff
-        denominator = Fraction(4, 1) * xi_value
-        exponent = -diff_squared / denominator
-        score_denominator = Fraction(1, 1) + abs(exponent)
-        score = Fraction(1, 1) / score_denominator
-        return score
-        
-    def _extract_factors(self, a, period, N):
-        if period % 2 != 0:
-            return None
-            
-        x = pow(a, period // 2, N)
-        
-        if x == N - 1:
-            return None
-            
-        f1 = gcd(x - 1, N)
-        f2 = gcd(x + 1, N)
-        
-        for f in [f1, f2]:
-            if 1 < f < N:
-                return (f, N // f)
-                
-        return None
+    return 'composite'
     
-    def _simple_factorize(self, n):
-        """Simple factorization for categorization"""
-        factors = []
-        d = 2
-        while d * d <= n:
-            while n % d == 0:
-                factors.append(d)
-                n //= d
-            d += 1
-        if n > 1:
-            factors.append(n)
-        return factors
+  def _find_period_rational(self, a, N, xi_value):
+    max_period = min(N, 1000)
     
-    def _is_prime(self, n):
-        """Primality test"""
-        if n < 2:
-            return False
-        if n == 2:
-            return True
-        if n % 2 == 0:
-            return False
-        for i in range(3, int(n**0.5) + 1, 2):
-            if n % i == 0:
-                return False
-        return True
+    best_evaluation = Fraction(0, 1)
+    best_period = None
+    
+    for r in range(2, max_period):
+      if pow(a, r, N) == 1:
+        evaluation = self._calculate_period_evaluation_rational(r, N, xi_value)
+        
+        if evaluation > best_evaluation:
+          best_evaluation = evaluation
+          best_period = r
+          
+        if evaluation > self.threshold:
+          return r
+          
+    return best_period
+    
+  def _calculate_period_evaluation_rational(self, r, N, xi_value):
+    omega = Fraction(2, 1) * self.pi_ratio / Fraction(r, 1)
+    diff = omega - self.pi_ratio
+    diff_squared = diff * diff
+    denominator = Fraction(4, 1) * xi_value
+    exponent = -diff_squared / denominator
+    score_denominator = Fraction(1, 1) + abs(exponent)
+    score = Fraction(1, 1) / score_denominator
+    return score
+    
+  def _extract_factors(self, a, period, N):
+    if period % 2 != 0:
+      return None
+      
+    x = pow(a, period // 2, N)
+    
+    if x == N - 1:
+      return None
+      
+    f1 = gcd(x - 1, N)
+    f2 = gcd(x + 1, N)
+    
+    for f in [f1, f2]:
+      if 1 < f < N:
+        return (f, N // f)
+        
+    return None
+  
+  def _simple_factorize(self, n):
+    """Simple factorization for categorization"""
+    factors = []
+    d = 2
+    while d * d <= n:
+      while n % d == 0:
+        factors.append(d)
+        n //= d
+      d += 1
+    if n > 1:
+      factors.append(n)
+    return factors
+  
+  def _is_prime(self, n):
+    """Primality test"""
+    if n < 2:
+      return False
+    if n == 2:
+      return True
+    if n % 2 == 0:
+      return False
+    for i in range(3, int(n**0.5) + 1, 2):
+      if n % i == 0:
+        return False
+    return True
 ```
 
 ## Conclusion
@@ -1025,6 +1025,6 @@ The rational T0 implementation proves:
 
 ---
 
-**Created**: 2024  
-**Status**: Successfully tested, 83.8% functional on systematic tests  
+**Created**: 2024 
+**Status**: Successfully tested, 83.8% functional on systematic tests 
 **License**: Free to use for research and education

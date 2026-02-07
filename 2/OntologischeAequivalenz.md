@@ -254,50 +254,50 @@ Es ist entscheidend zu verstehen, dass das Standardmodell selbst spezifische Erw
 Das Erweiterte Standardmodell im T0-Rahmen behält die fundamentale Struktur des SM bei, fügt aber Schlüsselelemente hinzu:
 
 1. **Higgs-T(x)-Sektor:** Der Higgs-Mechanismus verbindet sich direkt mit dem intrinsischen Zeitfeld:
-   ```
-   L_Higgs-T = |T(x)(∂_μ + igA_μ)Φ + Φ∂_μT(x)|² - λ(|Φ|² - v²)² + ½∂_μT(x)∂^μT(x) - V(T(x),Φ)
-   ```
+  ```
+  L_Higgs-T = |T(x)(∂_μ + igA_μ)Φ + Φ∂_μT(x)|² - λ(|Φ|² - v²)² + ½∂_μT(x)∂^μT(x) - V(T(x),Φ)
+  ```
 
 2. **Modifizierte Eichsektoren:** Alle Eichwechselwirkungen werden durch T(x) moduliert:
-   ```
-   L_Gauge = -¼T(x)²F_μν F^μν
-   ```
+  ```
+  L_Gauge = -¼T(x)²F_μν F^μν
+  ```
 
 3. **Fermionen-Sektor:** Fermionen-Kinetik und Yukawa-Kopplungen beinhalten T(x):
-   ```
-   L_Fermion = ψ̄iγ^μ(T(x)∂_μψ + ψ∂_μT(x)) - yψ̄Φψ
-   ```
+  ```
+  L_Fermion = ψ̄iγ^μ(T(x)∂_μψ + ψ∂_μT(x)) - yψ̄Φψ
+  ```
 
 4. **T(x)-Dynamik:** Ein völlig neuer Sektor, der die intrinsische Zeitdynamik beschreibt:
-   ```
-   L_intrinsic = ½∂_μT(x)∂^μT(x) - ½T(x)² - ρ/T(x)
-   ```
+  ```
+  L_intrinsic = ½∂_μT(x)∂^μT(x) - ½T(x)² - ρ/T(x)
+  ```
 
 Umgekehrt muss das Standardmodell zur Herstellung wahrer Dualität erweitert werden mit:
 
 1. **Wellenlängenabhängigen Rotverschiebungsmechanismen**: Jenseits der einfachen expansionsbasierten Rotverschiebung
-   ```
-   z(λ) = z_expansion(1 + f(λ/λ₀))
-   ```
-   wobei f(λ/λ₀) dem logarithmischen Term im T0-Modell entspricht.
+  ```
+  z(λ) = z_expansion(1 + f(λ/λ₀))
+  ```
+  wobei f(λ/λ₀) dem logarithmischen Term im T0-Modell entspricht.
 
 2. **Skalenabhängigen Gravitationseffekten**: Jenseits einfacher Verteilungen dunkler Materie
-   ```
-   Λ_eff(r) = Λ₀ + Λ₁(r/r₀)
-   ```
-   um dem linearen Term κr im T0-Gravitationspotential zu entsprechen.
+  ```
+  Λ_eff(r) = Λ₀ + Λ₁(r/r₀)
+  ```
+  um dem linearen Term κr im T0-Gravitationspotential zu entsprechen.
 
 3. **Direkter Kopplung zwischen Quanteneigenschaften und Metrik**: Jenseits des Mindestkopplungsprinzips
-   ```
-   S_EH = ∫(R - 2Λ + αR²)√(-g)d⁴x
-   ```
-   wobei der R²-Term die notwendigen Korrekturen auf galaktischen Skalen liefert.
+  ```
+  S_EH = ∫(R - 2Λ + αR²)√(-g)d⁴x
+  ```
+  wobei der R²-Term die notwendigen Korrekturen auf galaktischen Skalen liefert.
 
 4. **Metrik-gekoppelten Quanteneffekten**: Die Standard-Quantenfeldtheorie muss erweitert werden mit:
-   ```
-   m_eff = m₀(1 + βΦ)
-   ```
-   um die Massenvariationseffekte im T0-Modell abzubilden.
+  ```
+  m_eff = m₀(1 + βΦ)
+  ```
+  um die Massenvariationseffekte im T0-Modell abzubilden.
 
 ### 9.3 Symmetriestruktur und Vereinheitlichung
 

@@ -1,480 +1,480 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hybrid T0-Framework Quantum Simulator - Hilfe & Anleitung</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            min-height: 100vh;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        
-        /* Language Toggle */
-        .language-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            display: flex;
-            gap: 10px;
-        }
-        .lang-btn {
-            background: linear-gradient(135deg, #4f46e5, #3730a3);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        .lang-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
-        .lang-btn.active {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-        }
-        
-        /* Language Content */
-        .language-content {
-            display: none;
-        }
-        .language-content.active {
-            display: block;
-        }
-        
-        h1 {
-            text-align: center;
-            font-size: 2.8em;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientShift 4s ease infinite;
-        }
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        .subtitle {
-            text-align: center;
-            font-size: 1.3em;
-            color: #a0a0a0;
-            margin-bottom: 40px;
-        }
-        
-        .section {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 30px;
-            margin: 30px 0;
-            border-left: 5px solid #667eea;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .section h2 {
-            color: #667eea;
-            font-size: 1.8em;
-            margin-top: 0;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .section h3 {
-            color: #764ba2;
-            font-size: 1.3em;
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
-        .tutorial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 25px 0;
-        }
-        .tutorial-card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            border: 2px solid #e9ecef;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .tutorial-card:hover {
-            border-color: #667eea;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
-        }
-        .tutorial-card h4 {
-            color: #667eea;
-            margin-top: 0;
-            font-size: 1.2em;
-        }
-        .step-list {
-            background: #e3f2fd;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .step-list ol {
-            margin: 0;
-            padding-left: 20px;
-        }
-        .step-list li {
-            margin: 10px 0;
-            padding: 5px 0;
-        }
-        .highlight {
-            background: linear-gradient(45deg, #fff3cd, #ffeaa7);
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #f39c12;
-            margin: 15px 0;
-        }
-        .warning {
-            background: linear-gradient(45deg, #f8d7da, #f5c6cb);
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #e74c3c;
-            margin: 15px 0;
-        }
-        .success {
-            background: linear-gradient(45deg, #d4edda, #c3e6cb);
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #27ae60;
-            margin: 15px 0;
-        }
-        .info {
-            background: linear-gradient(45deg, #d1ecf1, #bee5eb);
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #17a2b8;
-            margin: 15px 0;
-        }
-        .code-block {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            margin: 15px 0;
-            overflow-x: auto;
-        }
-        .quantum-state {
-            font-family: 'Times New Roman', serif;
-            font-style: italic;
-            font-weight: bold;
-            color: #9b59b6;
-        }
-        .btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            display: inline-block;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            margin: 10px 5px;
-        }
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-        }
-        .toc {
-            background: #f1f3f4;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .toc ul {
-            list-style: none;
-            padding: 0;
-        }
-        .toc li {
-            padding: 5px 0;
-        }
-        .toc a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .toc a:hover {
-            text-decoration: underline;
-        }
-        .experiment-box {
-            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
-            border: 2px dashed #27ae60;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .experiment-box h4 {
-            color: #27ae60;
-            margin-top: 0;
-        }
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .comparison-table th {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 15px;
-            text-align: left;
-        }
-        .comparison-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #e9ecef;
-        }
-        .comparison-table tr:nth-child(even) {
-            background: #f8f9fa;
-        }
-        @media (max-width: 768px) {
-            .container { padding: 20px; }
-            .tutorial-grid { grid-template-columns: 1fr; }
-            h1 { font-size: 2.2em; }
-            .language-toggle {
-                position: relative;
-                top: auto;
-                right: auto;
-                margin-bottom: 20px;
-                justify-content: center;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hybrid T0-Framework Quantum Simulator - Hilfe & Anleitung</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    /* Language Toggle */
+    .language-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      gap: 10px;
+    }
+    .lang-btn {
+      background: linear-gradient(135deg, #4f46e5, #3730a3);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .lang-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+    .lang-btn.active {
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+    }
+    
+    /* Language Content */
+    .language-content {
+      display: none;
+    }
+    .language-content.active {
+      display: block;
+    }
+    
+    h1 {
+      text-align: center;
+      font-size: 2.8em;
+      margin-bottom: 10px;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 4s ease infinite;
+    }
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 1.3em;
+      color: #a0a0a0;
+      margin-bottom: 40px;
+    }
+    
+    .section {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 30px;
+      margin: 30px 0;
+      border-left: 5px solid #667eea;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .section h2 {
+      color: #667eea;
+      font-size: 1.8em;
+      margin-top: 0;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section h3 {
+      color: #764ba2;
+      font-size: 1.3em;
+      margin-top: 25px;
+      margin-bottom: 15px;
+    }
+    .tutorial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin: 25px 0;
+    }
+    .tutorial-card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      border: 2px solid #e9ecef;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .tutorial-card:hover {
+      border-color: #667eea;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+    }
+    .tutorial-card h4 {
+      color: #667eea;
+      margin-top: 0;
+      font-size: 1.2em;
+    }
+    .step-list {
+      background: #e3f2fd;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .step-list ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .step-list li {
+      margin: 10px 0;
+      padding: 5px 0;
+    }
+    .highlight {
+      background: linear-gradient(45deg, #fff3cd, #ffeaa7);
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #f39c12;
+      margin: 15px 0;
+    }
+    .warning {
+      background: linear-gradient(45deg, #f8d7da, #f5c6cb);
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #e74c3c;
+      margin: 15px 0;
+    }
+    .success {
+      background: linear-gradient(45deg, #d4edda, #c3e6cb);
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #27ae60;
+      margin: 15px 0;
+    }
+    .info {
+      background: linear-gradient(45deg, #d1ecf1, #bee5eb);
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #17a2b8;
+      margin: 15px 0;
+    }
+    .code-block {
+      background: #2c3e50;
+      color: #ecf0f1;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      margin: 15px 0;
+      overflow-x: auto;
+    }
+    .quantum-state {
+      font-family: 'Times New Roman', serif;
+      font-style: italic;
+      font-weight: bold;
+      color: #9b59b6;
+    }
+    .btn {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      margin: 10px 5px;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+    .toc {
+      background: #f1f3f4;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .toc ul {
+      list-style: none;
+      padding: 0;
+    }
+    .toc li {
+      padding: 5px 0;
+    }
+    .toc a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .toc a:hover {
+      text-decoration: underline;
+    }
+    .experiment-box {
+      background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+      border: 2px dashed #27ae60;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .experiment-box h4 {
+      color: #27ae60;
+      margin-top: 0;
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .comparison-table th {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 15px;
+      text-align: left;
+    }
+    .comparison-table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #e9ecef;
+    }
+    .comparison-table tr:nth-child(even) {
+      background: #f8f9fa;
+    }
+    @media (max-width: 768px) {
+      .container { padding: 20px; }
+      .tutorial-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 2.2em; }
+      .language-toggle {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin-bottom: 20px;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="language-toggle">
-        <button class="lang-btn active" onclick="switchLanguage('de')">Deutsch</button>
-        <button class="lang-btn" onclick="switchLanguage('en')">English</button>
-    </div>
+  <div class="language-toggle">
+    <button class="lang-btn active" onclick="switchLanguage('de')">Deutsch</button>
+    <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+  </div>
 
-    <div class="container">
-        <!-- German Content -->
-        <div id="german-content" class="language-content active">
-            <h1>⚛️ Hybrid T0-Framework Quantum Simulator</h1>
-            <div class="subtitle">Vollständige Anleitung für intelligenten Hybrid-Quantum-Computer mit automatischer Algorithmus-Auswahl</div>
+  <div class="container">
+    <!-- German Content -->
+    <div id="german-content" class="language-content active">
+      <h1>⚛️ Hybrid T0-Framework Quantum Simulator</h1>
+      <div class="subtitle">Vollständige Anleitung für intelligenten Hybrid-Quantum-Computer mit automatischer Algorithmus-Auswahl</div>
 
-            <!-- Inhaltsverzeichnis -->
-            <div class="toc">
-                <h3>📚 Inhaltsverzeichnis</h3>
-                <ul>
-                    <li><a href="#basics-de">🎯 Grundlagen & Erste Schritte</a></li>
-                    <li><a href="#hybrid-de">🤖 Hybrid T0-Framework</a></li>
-                    <li><a href="#algorithms-de">⚛️ Algorithmus-Vergleich</a></li>
-                    <li><a href="#qubits-de">🎛️ Qubit-Steuerung</a></li>
-                    <li><a href="#gates-de">🚪 Quantum Gates</a></li>
-                    <li><a href="#prime-de">🔍 Primzahl-Erkennung</a></li>
-                    <li><a href="#experiments-de">🧪 Experimente & Tutorials</a></li>
-                    <li><a href="#advanced-de">🚀 Erweiterte Konzepte</a></li>
-                    <li><a href="#troubleshooting-de">🔧 Problemlösung</a></li>
-                </ul>
+      <!-- Inhaltsverzeichnis -->
+      <div class="toc">
+        <h3>📚 Inhaltsverzeichnis</h3>
+        <ul>
+          <li><a href="#basics-de">🎯 Grundlagen & Erste Schritte</a></li>
+          <li><a href="#hybrid-de">🤖 Hybrid T0-Framework</a></li>
+          <li><a href="#algorithms-de">⚛️ Algorithmus-Vergleich</a></li>
+          <li><a href="#qubits-de">🎛️ Qubit-Steuerung</a></li>
+          <li><a href="#gates-de">🚪 Quantum Gates</a></li>
+          <li><a href="#prime-de">🔍 Primzahl-Erkennung</a></li>
+          <li><a href="#experiments-de">🧪 Experimente & Tutorials</a></li>
+          <li><a href="#advanced-de">🚀 Erweiterte Konzepte</a></li>
+          <li><a href="#troubleshooting-de">🔧 Problemlösung</a></li>
+        </ul>
+      </div>
+
+      <!-- Grundlagen -->
+      <div class="section" id="basics-de">
+        <h2>🎯 Grundlagen & Erste Schritte</h2>
+        
+        <h3>Was ist der Hybrid T0-Framework Quantum Simulator?</h3>
+        <p>Unser Simulator kombiniert <strong>drei verschiedene Quantenalgorithmen</strong> in einem intelligenten System, das automatisch den besten Ansatz für jede Faktorisierungsaufgabe auswählt. Das Hybrid T0-Framework nutzt fortgeschrittene T0-Physik mit deterministischer Quantenmechanik.</p>
+
+        <div class="highlight">
+          <strong>🎮 Schnellstart:</strong> Geben Sie eine Zahl (z.B. 77) ein und klicken Sie auf "🚀 Starte Hybrid T0 Shor Algorithmus" für die beste automatische Faktorisierung!
+        </div>
+
+        <h3>Wichtige Quantenkonzepte:</h3>
+        <ul>
+          <li><strong>Hybrid T0-Framework:</strong> Intelligente Kombination aus Pure T0 und Advanced T0</li>
+          <li><strong>Primzahl-Erkennung:</strong> Automatische Erkennung nicht faktorisierbarer Zahlen</li>
+          <li><strong>Deterministische Quantenmechanik:</strong> Reproduzierbare Ergebnisse ohne Zufall</li>
+          <li><strong>Multi-Base Strategy:</strong> Verwendung mehrerer Basen für robuste Faktorisierung</li>
+          <li><strong>Qubit:</strong> Die Grundeinheit der Quanteninformation</li>
+          <li><strong>Superposition:</strong> Ein Qubit kann gleichzeitig in mehreren Zuständen existieren</li>
+          <li><strong>Verschränkung:</strong> Qubits können so verbunden werden, dass sie sich gegenseitig beeinflussen</li>
+        </ul>
+
+        <div class="step-list">
+          <h4>🚀 Erste Schritte:</h4>
+          <ol>
+            <li>Geben Sie eine Zahl zum Faktorisieren ein (empfohlen: 15, 21, 35, 77, 143)</li>
+            <li>Wählen Sie einen der vier Algorithmus-Modi</li>
+            <li>Beobachten Sie die intelligente Algorithmus-Auswahl und Performance-Analyse</li>
+            <li>Experimentieren Sie mit Primzahlen (7, 11, 13, 17, 19, 23) zur Primzahl-Erkennung</li>
+            <li>Verwenden Sie Quantum Gates für direkte Qubit-Manipulation</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Hybrid T0-Framework -->
+      <div class="section" id="hybrid-de">
+        <h2>🤖 Hybrid T0-Framework - Intelligente Algorithmus-Auswahl</h2>
+        
+        <h3>Vier verfügbare Modi:</h3>
+        <div class="tutorial-grid">
+          <div class="tutorial-card">
+            <h4>🚀 Hybrid T0 Shor Algorithm</h4>
+            <p><strong>Empfohlener Hauptmodus</strong></p>
+            <p>Führt Pure T0 und Advanced T0 parallel aus und wählt automatisch das beste Ergebnis. Enthält Primzahl-Vorerkennung für sofortige korrekte Antworten.</p>
+            <div class="success">
+              <strong>Beste Wahl für:</strong> Alle Zahlen - optimale Ergebnisse garantiert
             </div>
-
-            <!-- Grundlagen -->
-            <div class="section" id="basics-de">
-                <h2>🎯 Grundlagen & Erste Schritte</h2>
-                
-                <h3>Was ist der Hybrid T0-Framework Quantum Simulator?</h3>
-                <p>Unser Simulator kombiniert <strong>drei verschiedene Quantenalgorithmen</strong> in einem intelligenten System, das automatisch den besten Ansatz für jede Faktorisierungsaufgabe auswählt. Das Hybrid T0-Framework nutzt fortgeschrittene T0-Physik mit deterministischer Quantenmechanik.</p>
-
-                <div class="highlight">
-                    <strong>🎮 Schnellstart:</strong> Geben Sie eine Zahl (z.B. 77) ein und klicken Sie auf "🚀 Starte Hybrid T0 Shor Algorithmus" für die beste automatische Faktorisierung!
-                </div>
-
-                <h3>Wichtige Quantenkonzepte:</h3>
-                <ul>
-                    <li><strong>Hybrid T0-Framework:</strong> Intelligente Kombination aus Pure T0 und Advanced T0</li>
-                    <li><strong>Primzahl-Erkennung:</strong> Automatische Erkennung nicht faktorisierbarer Zahlen</li>
-                    <li><strong>Deterministische Quantenmechanik:</strong> Reproduzierbare Ergebnisse ohne Zufall</li>
-                    <li><strong>Multi-Base Strategy:</strong> Verwendung mehrerer Basen für robuste Faktorisierung</li>
-                    <li><strong>Qubit:</strong> Die Grundeinheit der Quanteninformation</li>
-                    <li><strong>Superposition:</strong> Ein Qubit kann gleichzeitig in mehreren Zuständen existieren</li>
-                    <li><strong>Verschränkung:</strong> Qubits können so verbunden werden, dass sie sich gegenseitig beeinflussen</li>
-                </ul>
-
-                <div class="step-list">
-                    <h4>🚀 Erste Schritte:</h4>
-                    <ol>
-                        <li>Geben Sie eine Zahl zum Faktorisieren ein (empfohlen: 15, 21, 35, 77, 143)</li>
-                        <li>Wählen Sie einen der vier Algorithmus-Modi</li>
-                        <li>Beobachten Sie die intelligente Algorithmus-Auswahl und Performance-Analyse</li>
-                        <li>Experimentieren Sie mit Primzahlen (7, 11, 13, 17, 19, 23) zur Primzahl-Erkennung</li>
-                        <li>Verwenden Sie Quantum Gates für direkte Qubit-Manipulation</li>
-                    </ol>
-                </div>
+          </div>
+          <div class="tutorial-card">
+            <h4>⚛️ Pure Quantum T0</h4>
+            <p><strong>Schneller & Einfacher Ansatz</strong></p>
+            <p>Deterministischer Algorithmus mit fester Base a=2. Sehr schnell, aber bei manchen Zahlen begrenzt. Ideal für einfache Faktorisierungen.</p>
+            <div class="info">
+              <strong>Beste Wahl für:</strong> Schnelle Tests, einfache zusammengesetzte Zahlen
             </div>
-
-            <!-- Hybrid T0-Framework -->
-            <div class="section" id="hybrid-de">
-                <h2>🤖 Hybrid T0-Framework - Intelligente Algorithmus-Auswahl</h2>
-                
-                <h3>Vier verfügbare Modi:</h3>
-                <div class="tutorial-grid">
-                    <div class="tutorial-card">
-                        <h4>🚀 Hybrid T0 Shor Algorithm</h4>
-                        <p><strong>Empfohlener Hauptmodus</strong></p>
-                        <p>Führt Pure T0 und Advanced T0 parallel aus und wählt automatisch das beste Ergebnis. Enthält Primzahl-Vorerkennung für sofortige korrekte Antworten.</p>
-                        <div class="success">
-                            <strong>Beste Wahl für:</strong> Alle Zahlen - optimale Ergebnisse garantiert
-                        </div>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>⚛️ Pure Quantum T0</h4>
-                        <p><strong>Schneller & Einfacher Ansatz</strong></p>
-                        <p>Deterministischer Algorithmus mit fester Base a=2. Sehr schnell, aber bei manchen Zahlen begrenzt. Ideal für einfache Faktorisierungen.</p>
-                        <div class="info">
-                            <strong>Beste Wahl für:</strong> Schnelle Tests, einfache zusammengesetzte Zahlen
-                        </div>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>🧠 Advanced T0 Framework</h4>
-                        <p><strong>Robuster Multi-Base Ansatz</strong></p>
-                        <p>Verwendet mehrere Basen [2,3,5,7,11,13,17,19] mit T0-Resonance Filtering. Langsamer, aber erfolgreicher bei schwierigen Zahlen.</p>
-                        <div class="info">
-                            <strong>Beste Wahl für:</strong> Schwierige Faktorisierungen, wissenschaftliche Analyse
-                        </div>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>📊 Algorithm Vergleich</h4>
-                        <p><strong>Detaillierte Performance-Analyse</strong></p>
-                        <p>Führt alle Algorithmen aus und zeigt detaillierte Vergleiche, Geschwindigkeits-Metriken und Empfehlungen.</p>
-                        <div class="info">
-                            <strong>Beste Wahl für:</strong> Lernzwecke, Performance-Benchmarking
-                        </div>
-                    </div>
-                </div>
-
-                <h3>Intelligente Entscheidungslogik des Hybrid-Systems:</h3>
-                <div class="step-list">
-                    <ol>
-                        <li><strong>Primzahl-Vorerkennung:</strong> Sofortige Erkennung von Primzahlen (mathematisch korrekt)</li>
-                        <li><strong>Parallele Ausführung:</strong> Pure T0 und Advanced T0 laufen gleichzeitig</li>
-                        <li><strong>Intelligente Auswahl:</strong>
-                            <ul>
-                                <li>Beide erfolgreich → Wähle schnelleren (mit 50% Toleranz)</li>
-                                <li>Nur einer erfolgreich → Wähle erfolgreichen</li>
-                                <li>Beide versagen → Wähle schnelleren Versuch</li>
-                            </ul>
-                        </li>
-                        <li><strong>Transparente Berichterstattung:</strong> Vollständige Performance-Analyse aller Methoden</li>
-                    </ol>
-                </div>
+          </div>
+          <div class="tutorial-card">
+            <h4>🧠 Advanced T0 Framework</h4>
+            <p><strong>Robuster Multi-Base Ansatz</strong></p>
+            <p>Verwendet mehrere Basen [2,3,5,7,11,13,17,19] mit T0-Resonance Filtering. Langsamer, aber erfolgreicher bei schwierigen Zahlen.</p>
+            <div class="info">
+              <strong>Beste Wahl für:</strong> Schwierige Faktorisierungen, wissenschaftliche Analyse
             </div>
-
-            <!-- Algorithmus-Vergleich -->
-            <div class="section" id="algorithms-de">
-                <h2>⚛️ Algorithmus-Vergleich & Performance</h2>
-                
-                <h3>Detaillierte Algorithmus-Eigenschaften:</h3>
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Eigenschaft</th>
-                            <th>Pure Quantum T0</th>
-                            <th>Advanced T0 Framework</th>
-                            <th>Hybrid T0</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Erfolgsrate</strong></td>
-                            <td>~67% (bei 237 Tests)</td>
-                            <td>~91% (bei 237 Tests)</td>
-                            <td>~95% (kombiniert)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Durchschnittszeit</strong></td>
-                            <td>0.13ms (sehr schnell)</td>
-                            <td>0.89ms (6.7x langsamer)</td>
-                            <td>Variable (optimal)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Verwendete Basen</strong></td>
-                            <td>Fest: a=2</td>
-                            <td>Multi: [2,3,5,7,11,13,17,19]</td>
-                            <td>Beide verfügbar</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Komplexität</strong></td>
-                            <td>Minimal</td>
-                            <td>Hoch (Resonance-Filter)</td>
-                            <td>Intelligent managed</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Primzahl-Erkennung</strong></td>
-                            <td>✅ Integriert</td>
-                            <td>✅ Integriert</td>
-                            <td>✅ Priorität 1</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="experiment-box">
-                    <h4>🧪 Performance-Test Experiment</h4>
-                    <ol>
-                        <li>Geben Sie N=77 ein</li>
-                        <li>Klicken Sie "📊 Algorithm Vergleich"</li>
-                        <li>Beobachten Sie detaillierte Performance-Metriken:</li>
-                        <ul>
-                            <li>Pure T0: ✅ 7×11 (0.1ms) - Fixed Base a=2</li>
-                            <li>Advanced T0: ✅ 7×11 (1.2ms) - Multi-Base Strategy</li>
-                            <li>Hybrid Wahl: Pure Quantum T0 (schneller bei gleicher Korrektheit)</li>
-                        </ul>
-                    </ol>
-                </div>
+          </div>
+          <div class="tutorial-card">
+            <h4>📊 Algorithm Vergleich</h4>
+            <p><strong>Detaillierte Performance-Analyse</strong></p>
+            <p>Führt alle Algorithmen aus und zeigt detaillierte Vergleiche, Geschwindigkeits-Metriken und Empfehlungen.</p>
+            <div class="info">
+              <strong>Beste Wahl für:</strong> Lernzwecke, Performance-Benchmarking
             </div>
+          </div>
+        </div>
 
-            <!-- Primzahl-Erkennung -->
-            <div class="section" id="prime-de">
-                <h2>🔍 Intelligente Primzahl-Erkennung</h2>
-                
-                <h3>Warum Primzahl-Erkennung wichtig ist:</h3>
-                <p>Primzahlen können <strong>mathematisch nicht faktorisiert werden</strong>, da sie nur durch 1 und sich selbst teilbar sind. Unser Simulator erkennt dies intelligent und gibt korrekte Antworten statt sinnloser Fehlversuche.</p>
+        <h3>Intelligente Entscheidungslogik des Hybrid-Systems:</h3>
+        <div class="step-list">
+          <ol>
+            <li><strong>Primzahl-Vorerkennung:</strong> Sofortige Erkennung von Primzahlen (mathematisch korrekt)</li>
+            <li><strong>Parallele Ausführung:</strong> Pure T0 und Advanced T0 laufen gleichzeitig</li>
+            <li><strong>Intelligente Auswahl:</strong>
+              <ul>
+                <li>Beide erfolgreich → Wähle schnelleren (mit 50% Toleranz)</li>
+                <li>Nur einer erfolgreich → Wähle erfolgreichen</li>
+                <li>Beide versagen → Wähle schnelleren Versuch</li>
+              </ul>
+            </li>
+            <li><strong>Transparente Berichterstattung:</strong> Vollständige Performance-Analyse aller Methoden</li>
+          </ol>
+        </div>
+      </div>
 
-                <div class="tutorial-grid">
-                    <div class="tutorial-card">
-                        <h4>🔬 Deterministische Prüfung</h4>
-                        <p>6k±1 Optimierung für schnelle, exakte Primzahl-Erkennung bis √N.</p>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>🎲 Fermat-Test</h4>
-                        <p>Probabilistische Bestätigung mit 95-100% Sicherheit für große Zahlen.</p>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>🎯 Confidence-System</h4>
-                        <p>Kombiniert beide Methoden für maximale Zuverlässigkeit der Primzahl-Erkennung.</p>
-                    </div>
-                </div>
+      <!-- Algorithmus-Vergleich -->
+      <div class="section" id="algorithms-de">
+        <h2>⚛️ Algorithmus-Vergleich & Performance</h2>
+        
+        <h3>Detaillierte Algorithmus-Eigenschaften:</h3>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Eigenschaft</th>
+              <th>Pure Quantum T0</th>
+              <th>Advanced T0 Framework</th>
+              <th>Hybrid T0</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Erfolgsrate</strong></td>
+              <td>~67% (bei 237 Tests)</td>
+              <td>~91% (bei 237 Tests)</td>
+              <td>~95% (kombiniert)</td>
+            </tr>
+            <tr>
+              <td><strong>Durchschnittszeit</strong></td>
+              <td>0.13ms (sehr schnell)</td>
+              <td>0.89ms (6.7x langsamer)</td>
+              <td>Variable (optimal)</td>
+            </tr>
+            <tr>
+              <td><strong>Verwendete Basen</strong></td>
+              <td>Fest: a=2</td>
+              <td>Multi: [2,3,5,7,11,13,17,19]</td>
+              <td>Beide verfügbar</td>
+            </tr>
+            <tr>
+              <td><strong>Komplexität</strong></td>
+              <td>Minimal</td>
+              <td>Hoch (Resonance-Filter)</td>
+              <td>Intelligent managed</td>
+            </tr>
+            <tr>
+              <td><strong>Primzahl-Erkennung</strong></td>
+              <td>✅ Integriert</td>
+              <td>✅ Integriert</td>
+              <td>✅ Priorität 1</td>
+            </tr>
+          </tbody>
+        </table>
 
-                <h3>Beispiel-Ausgaben:</h3>
-                <div class="code-block">
+        <div class="experiment-box">
+          <h4>🧪 Performance-Test Experiment</h4>
+          <ol>
+            <li>Geben Sie N=77 ein</li>
+            <li>Klicken Sie "📊 Algorithm Vergleich"</li>
+            <li>Beobachten Sie detaillierte Performance-Metriken:</li>
+            <ul>
+              <li>Pure T0: ✅ 7×11 (0.1ms) - Fixed Base a=2</li>
+              <li>Advanced T0: ✅ 7×11 (1.2ms) - Multi-Base Strategy</li>
+              <li>Hybrid Wahl: Pure Quantum T0 (schneller bei gleicher Korrektheit)</li>
+            </ul>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Primzahl-Erkennung -->
+      <div class="section" id="prime-de">
+        <h2>🔍 Intelligente Primzahl-Erkennung</h2>
+        
+        <h3>Warum Primzahl-Erkennung wichtig ist:</h3>
+        <p>Primzahlen können <strong>mathematisch nicht faktorisiert werden</strong>, da sie nur durch 1 und sich selbst teilbar sind. Unser Simulator erkennt dies intelligent und gibt korrekte Antworten statt sinnloser Fehlversuche.</p>
+
+        <div class="tutorial-grid">
+          <div class="tutorial-card">
+            <h4>🔬 Deterministische Prüfung</h4>
+            <p>6k±1 Optimierung für schnelle, exakte Primzahl-Erkennung bis √N.</p>
+          </div>
+          <div class="tutorial-card">
+            <h4>🎲 Fermat-Test</h4>
+            <p>Probabilistische Bestätigung mit 95-100% Sicherheit für große Zahlen.</p>
+          </div>
+          <div class="tutorial-card">
+            <h4>🎯 Confidence-System</h4>
+            <p>Kombiniert beide Methoden für maximale Zuverlässigkeit der Primzahl-Erkennung.</p>
+          </div>
+        </div>
+
+        <h3>Beispiel-Ausgaben:</h3>
+        <div class="code-block">
 Eingabe: N=23 (Primzahl)
 🔍 Primzahl-Vorprüfung: N=23 ist eine Primzahl (100% sicher)
 💡 Primzahlen können nicht faktorisiert werden - das ist mathematisch korrekt
@@ -482,7 +482,7 @@ Eingabe: N=23 (Primzahl)
 🎉 HYBRID T0-ERFOLG! Primzahl korrekt erkannt: 23 ist eine Primzahl
 </div>
 
-                <div class="code-block">
+        <div class="code-block">
 Eingabe: N=77 (Zusammengesetzt)
 ⚛️ Starte Hybrid T0 für N=77
 🔍 Vorprüfung: N=77 ist zusammengesetzt - starte Faktorisierung
@@ -490,432 +490,432 @@ Eingabe: N=77 (Zusammengesetzt)
 🔍 Verifikation: 7 × 11 = 77 ✓
 </div>
 
-                <div class="experiment-box">
-                    <h4>🧪 Primzahl-Test Experiment</h4>
-                    <p><strong>Teste diese Primzahlen:</strong> 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113</p>
-                    <p><strong>Erwartung:</strong> Alle werden sofort als Primzahlen erkannt (100% Erfolgsrate)</p>
-                    <p><strong>Vergleiche mit zusammengesetzten Zahlen:</strong> 15, 21, 35, 77, 143, 323</p>
-                </div>
-            </div>
+        <div class="experiment-box">
+          <h4>🧪 Primzahl-Test Experiment</h4>
+          <p><strong>Teste diese Primzahlen:</strong> 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113</p>
+          <p><strong>Erwartung:</strong> Alle werden sofort als Primzahlen erkannt (100% Erfolgsrate)</p>
+          <p><strong>Vergleiche mit zusammengesetzten Zahlen:</strong> 15, 21, 35, 77, 143, 323</p>
+        </div>
+      </div>
 
-            <!-- Qubit-Steuerung -->
-            <div class="section" id="qubits-de">
-                <h2>🎛️ Qubit-Steuerung</h2>
-                
-                <h3>Qubit-Zustände verstehen:</h3>
-                <div class="tutorial-grid">
-                    <div class="tutorial-card">
-                        <h4>🔴 Zustand |0⟩</h4>
-                        <p>Klassischer "Aus"-Zustand. Qubit ist definitiv in Position 0. Wahrscheinlichkeit: 100% für 0, 0% für 1.</p>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>🟢 Zustand |1⟩</h4>
-                        <p>Klassischer "An"-Zustand. Qubit ist definitiv in Position 1. Wahrscheinlichkeit: 0% für 0, 100% für 1.</p>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>⚡ Superposition</h4>
-                        <p>Quantenzustand: Qubit ist gleichzeitig 0 UND 1. Erst bei Messung "entscheidet" es sich für einen Wert.</p>
-                    </div>
-                </div>
+      <!-- Qubit-Steuerung -->
+      <div class="section" id="qubits-de">
+        <h2>🎛️ Qubit-Steuerung</h2>
+        
+        <h3>Qubit-Zustände verstehen:</h3>
+        <div class="tutorial-grid">
+          <div class="tutorial-card">
+            <h4>🔴 Zustand |0⟩</h4>
+            <p>Klassischer "Aus"-Zustand. Qubit ist definitiv in Position 0. Wahrscheinlichkeit: 100% für 0, 0% für 1.</p>
+          </div>
+          <div class="tutorial-card">
+            <h4>🟢 Zustand |1⟩</h4>
+            <p>Klassischer "An"-Zustand. Qubit ist definitiv in Position 1. Wahrscheinlichkeit: 0% für 0, 100% für 1.</p>
+          </div>
+          <div class="tutorial-card">
+            <h4>⚡ Superposition</h4>
+            <p>Quantenzustand: Qubit ist gleichzeitig 0 UND 1. Erst bei Messung "entscheidet" es sich für einen Wert.</p>
+          </div>
+        </div>
 
-                <div class="experiment-box">
-                    <h4>🧪 Experiment 1: Superposition erkunden</h4>
-                    <ol>
-                        <li>Setzen Sie alle Qubits auf <span class="quantum-state">|0⟩</span> (Reset All)</li>
-                        <li>Klicken Sie "Superposition" - alle Qubits blinken jetzt</li>
-                        <li>Klicken Sie mehrmals "Measure All" - beobachten Sie die zufälligen Ergebnisse!</li>
-                        <li>Jede Messung gibt verschiedene Binärzahlen zurück</li>
-                    </ol>
-                </div>
-            </div>
+        <div class="experiment-box">
+          <h4>🧪 Experiment 1: Superposition erkunden</h4>
+          <ol>
+            <li>Setzen Sie alle Qubits auf <span class="quantum-state">|0⟩</span> (Reset All)</li>
+            <li>Klicken Sie "Superposition" - alle Qubits blinken jetzt</li>
+            <li>Klicken Sie mehrmals "Measure All" - beobachten Sie die zufälligen Ergebnisse!</li>
+            <li>Jede Messung gibt verschiedene Binärzahlen zurück</li>
+          </ol>
+        </div>
+      </div>
 
-            <!-- Quantum Gates -->
-            <div class="section" id="gates-de">
-                <h2>🚪 Quantum Gates</h2>
-                
-                <p>Quantum Gates sind die "Bausteine" der Quantenberechnung. Sie transformieren Qubits mathematisch präzise.</p>
+      <!-- Quantum Gates -->
+      <div class="section" id="gates-de">
+        <h2>🚪 Quantum Gates</h2>
+        
+        <p>Quantum Gates sind die "Bausteine" der Quantenberechnung. Sie transformieren Qubits mathematisch präzise.</p>
 
-                <h3>Single-Qubit Gates:</h3>
-                <div class="tutorial-grid">
-                    <div class="tutorial-card">
-                        <h4>H - Hadamard Gate</h4>
-                        <p><strong>Funktion:</strong> Erzeugt Superposition<br>
-                        <span class="quantum-state">|0⟩ → (|0⟩ + |1⟩)/√2</span><br>
-                        <span class="quantum-state">|1⟩ → (|0⟩ - |1⟩)/√2</span></p>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>X - Pauli-X Gate</h4>
-                        <p><strong>Funktion:</strong> Bit-Flip (Quantum NOT)<br>
-                        <span class="quantum-state">|0⟩ → |1⟩</span><br>
-                        <span class="quantum-state">|1⟩ → |0⟩</span></p>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>CNOT Gate</h4>
-                        <p><strong>Funktion:</strong> Controlled NOT<br>
-                        Flippt Target nur wenn Control = <span class="quantum-state">|1⟩</span><br>
-                        Erzeugt Verschränkung!</p>
-                    </div>
-                </div>
+        <h3>Single-Qubit Gates:</h3>
+        <div class="tutorial-grid">
+          <div class="tutorial-card">
+            <h4>H - Hadamard Gate</h4>
+            <p><strong>Funktion:</strong> Erzeugt Superposition<br>
+            <span class="quantum-state">|0⟩ → (|0⟩ + |1⟩)/√2</span><br>
+            <span class="quantum-state">|1⟩ → (|0⟩ - |1⟩)/√2</span></p>
+          </div>
+          <div class="tutorial-card">
+            <h4>X - Pauli-X Gate</h4>
+            <p><strong>Funktion:</strong> Bit-Flip (Quantum NOT)<br>
+            <span class="quantum-state">|0⟩ → |1⟩</span><br>
+            <span class="quantum-state">|1⟩ → |0⟩</span></p>
+          </div>
+          <div class="tutorial-card">
+            <h4>CNOT Gate</h4>
+            <p><strong>Funktion:</strong> Controlled NOT<br>
+            Flippt Target nur wenn Control = <span class="quantum-state">|1⟩</span><br>
+            Erzeugt Verschränkung!</p>
+          </div>
+        </div>
 
-                <div class="experiment-box">
-                    <h4>🧪 Experiment 2: Bell-Zustand erzeugen</h4>
-                    <ol>
-                        <li>Reset All Qubits</li>
-                        <li>Wählen Sie Qubit 0 als Target, klicken Sie "H (Hadamard)"</li>
-                        <li>Setzen Sie Control = 0, Target = 1</li>
-                        <li>Klicken Sie "CNOT Gate"</li>
-                        <li><strong>Ergebnis:</strong> Verschränkter Bell-Zustand erzeugt!</li>
-                    </ol>
-                </div>
-            </div>
+        <div class="experiment-box">
+          <h4>🧪 Experiment 2: Bell-Zustand erzeugen</h4>
+          <ol>
+            <li>Reset All Qubits</li>
+            <li>Wählen Sie Qubit 0 als Target, klicken Sie "H (Hadamard)"</li>
+            <li>Setzen Sie Control = 0, Target = 1</li>
+            <li>Klicken Sie "CNOT Gate"</li>
+            <li><strong>Ergebnis:</strong> Verschränkter Bell-Zustand erzeugt!</li>
+          </ol>
+        </div>
+      </div>
 
-            <!-- Experimente -->
-            <div class="section" id="experiments-de">
-                <h2>🧪 Experimente & Tutorials</h2>
+      <!-- Experimente -->
+      <div class="section" id="experiments-de">
+        <h2>🧪 Experimente & Tutorials</h2>
 
-                <div class="experiment-box">
-                    <h4>Tutorial 1: Hybrid T0 Performance-Vergleich</h4>
-                    <ol>
-                        <li>Geben Sie N=323 ein (schwierigere Zahl)</li>
-                        <li>Klicken Sie "📊 Algorithm Vergleich"</li>
-                        <li>Beobachten Sie: Pure T0 vs Advanced T0 Performance</li>
-                        <li>Analysieren Sie die Hybrid-Entscheidung und Begründung</li>
-                        <li>Verstehen Sie warum Advanced T0 bei dieser Zahl überlegen ist</li>
-                    </ol>
-                </div>
+        <div class="experiment-box">
+          <h4>Tutorial 1: Hybrid T0 Performance-Vergleich</h4>
+          <ol>
+            <li>Geben Sie N=323 ein (schwierigere Zahl)</li>
+            <li>Klicken Sie "📊 Algorithm Vergleich"</li>
+            <li>Beobachten Sie: Pure T0 vs Advanced T0 Performance</li>
+            <li>Analysieren Sie die Hybrid-Entscheidung und Begründung</li>
+            <li>Verstehen Sie warum Advanced T0 bei dieser Zahl überlegen ist</li>
+          </ol>
+        </div>
 
-                <div class="experiment-box">
-                    <h4>Tutorial 2: Primzahl vs. Zusammengesetzte Zahl</h4>
-                    <ol>
-                        <li>Teste Primzahl: N=47 mit Hybrid T0</li>
-                        <li>Beobachte sofortige Primzahl-Erkennung</li>
-                        <li>Teste Zusammengesetzte: N=143 mit Hybrid T0</li>
-                        <li>Vergleiche die unterschiedlichen Ausgaben und Prozesse</li>
-                        <li>Verstehe den Unterschied zwischen "korrekt erkannt" und "erfolgreich faktorisiert"</li>
-                    </ol>
-                </div>
+        <div class="experiment-box">
+          <h4>Tutorial 2: Primzahl vs. Zusammengesetzte Zahl</h4>
+          <ol>
+            <li>Teste Primzahl: N=47 mit Hybrid T0</li>
+            <li>Beobachte sofortige Primzahl-Erkennung</li>
+            <li>Teste Zusammengesetzte: N=143 mit Hybrid T0</li>
+            <li>Vergleiche die unterschiedlichen Ausgaben und Prozesse</li>
+            <li>Verstehe den Unterschied zwischen "korrekt erkannt" und "erfolgreich faktorisiert"</li>
+          </ol>
+        </div>
 
-                <div class="experiment-box">
-                    <h4>Tutorial 3: Quantum Random Generator</h4>
-                    <ol>
-                        <li>8 Qubits einstellen</li>
-                        <li>"Superposition" klicken</li>
-                        <li>"Measure All" → zufällige 8-Bit Zahl</li>
-                        <li>10x wiederholen - jedes Mal anders!</li>
-                    </ol>
-                </div>
+        <div class="experiment-box">
+          <h4>Tutorial 3: Quantum Random Generator</h4>
+          <ol>
+            <li>8 Qubits einstellen</li>
+            <li>"Superposition" klicken</li>
+            <li>"Measure All" → zufällige 8-Bit Zahl</li>
+            <li>10x wiederholen - jedes Mal anders!</li>
+          </ol>
+        </div>
 
-                <div class="experiment-box">
-                    <h4>Tutorial 4: Quantum Teleportation</h4>
-                    <ol>
-                        <li>3 Qubits: Alice (0), Hilfs (1), Bob (2)</li>
-                        <li>Alice's Qubit in Zustand setzen (X-Gate)</li>
-                        <li>Bell-Paar: H auf Qubit 1, CNOT(1→2)</li>
-                        <li>Alice misst: CNOT(0→1), H auf 0</li>
-                        <li>Bob hat Alice's Zustand!</li>
-                    </ol>
-                </div>
-            </div>
+        <div class="experiment-box">
+          <h4>Tutorial 4: Quantum Teleportation</h4>
+          <ol>
+            <li>3 Qubits: Alice (0), Hilfs (1), Bob (2)</li>
+            <li>Alice's Qubit in Zustand setzen (X-Gate)</li>
+            <li>Bell-Paar: H auf Qubit 1, CNOT(1→2)</li>
+            <li>Alice misst: CNOT(0→1), H auf 0</li>
+            <li>Bob hat Alice's Zustand!</li>
+          </ol>
+        </div>
+      </div>
 
-            <!-- Erweiterte Konzepte -->
-            <div class="section" id="advanced-de">
-                <h2>🚀 Erweiterte Konzepte</h2>
-                
-                <h3>T0-Framework Physik:</h3>
-                <ul>
-                    <li><strong>ξ-Parameter:</strong> Adaptive Optimierung basierend auf Bit-Größe (1e-5 bis 1e-8)</li>
-                    <li><strong>Resonance Filtering:</strong> T0-spezifische Perioden-Bewertung</li>
-                    <li><strong>Multi-Base Strategy:</strong> Robustheit durch verschiedene Basis-Ansätze</li>
-                    <li><strong>Deterministische Quantenmechanik:</strong> Reproduzierbare Ergebnisse</li>
-                </ul>
+      <!-- Erweiterte Konzepte -->
+      <div class="section" id="advanced-de">
+        <h2>🚀 Erweiterte Konzepte</h2>
+        
+        <h3>T0-Framework Physik:</h3>
+        <ul>
+          <li><strong>ξ-Parameter:</strong> Adaptive Optimierung basierend auf Bit-Größe (1e-5 bis 1e-8)</li>
+          <li><strong>Resonance Filtering:</strong> T0-spezifische Perioden-Bewertung</li>
+          <li><strong>Multi-Base Strategy:</strong> Robustheit durch verschiedene Basis-Ansätze</li>
+          <li><strong>Deterministische Quantenmechanik:</strong> Reproduzierbare Ergebnisse</li>
+        </ul>
 
-                <h3>Bloch-Sphere verstehen:</h3>
-                <ul>
-                    <li><strong>Nord-Pol:</strong> <span class="quantum-state">|0⟩</span> Zustand</li>
-                    <li><strong>Süd-Pol:</strong> <span class="quantum-state">|1⟩</span> Zustand</li>
-                    <li><strong>Äquator:</strong> Superposition</li>
-                </ul>
+        <h3>Bloch-Sphere verstehen:</h3>
+        <ul>
+          <li><strong>Nord-Pol:</strong> <span class="quantum-state">|0⟩</span> Zustand</li>
+          <li><strong>Süd-Pol:</strong> <span class="quantum-state">|1⟩</span> Zustand</li>
+          <li><strong>Äquator:</strong> Superposition</li>
+        </ul>
 
-                <div class="highlight">
-                    <strong>Quantum Advantage:</strong> Exponentieller Speedup - klassisch O(2^N), Quantum O(N³)!
-                </div>
+        <div class="highlight">
+          <strong>Quantum Advantage:</strong> Exponentieller Speedup - klassisch O(2^N), Quantum O(N³)!
+        </div>
 
-                <h3>Optimale Eingabewerte:</h3>
-                <div class="tutorial-grid">
-                    <div class="tutorial-card">
-                        <h4>🟢 Leichte Zahlen (4-8 bits)</h4>
-                        <p>15, 21, 35, 55, 77, 91, 143, 187<br>
-                        <strong>Empfehlung:</strong> Alle Modi funktionieren gut</p>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>🟡 Mittlere Zahlen (9-12 bits)</h4>
-                        <p>323, 437, 899, 1247, 1333<br>
-                        <strong>Empfehlung:</strong> Hybrid T0 oder Advanced T0</p>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>🔴 Schwere Zahlen (13+ bits)</h4>
-                        <p>Primzahlen oder sehr große zusammengesetzte Zahlen<br>
-                        <strong>Empfehlung:</strong> Nur Hybrid T0</p>
-                    </div>
-                </div>
-            </div>
+        <h3>Optimale Eingabewerte:</h3>
+        <div class="tutorial-grid">
+          <div class="tutorial-card">
+            <h4>🟢 Leichte Zahlen (4-8 bits)</h4>
+            <p>15, 21, 35, 55, 77, 91, 143, 187<br>
+            <strong>Empfehlung:</strong> Alle Modi funktionieren gut</p>
+          </div>
+          <div class="tutorial-card">
+            <h4>🟡 Mittlere Zahlen (9-12 bits)</h4>
+            <p>323, 437, 899, 1247, 1333<br>
+            <strong>Empfehlung:</strong> Hybrid T0 oder Advanced T0</p>
+          </div>
+          <div class="tutorial-card">
+            <h4>🔴 Schwere Zahlen (13+ bits)</h4>
+            <p>Primzahlen oder sehr große zusammengesetzte Zahlen<br>
+            <strong>Empfehlung:</strong> Nur Hybrid T0</p>
+          </div>
+        </div>
+      </div>
 
-            <!-- Problemlösung -->
-            <div class="section" id="troubleshooting-de">
-                <h2>🔧 Problemlösung & FAQ</h2>
+      <!-- Problemlösung -->
+      <div class="section" id="troubleshooting-de">
+        <h2>🔧 Problemlösung & FAQ</h2>
 
-                <h3>Häufige Fragen:</h3>
-                <div class="tutorial-grid">
-                    <div class="tutorial-card">
-                        <h4>❓ Warum blinkt mein Qubit?</h4>
-                        <p><strong>Antwort:</strong> Superposition! Das Qubit ist gleichzeitig 0 und 1. Das ist korrekt und gewünscht.</p>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>❓ Warum findet der Algorithmus keine Faktoren?</h4>
-                        <p><strong>Mögliche Gründe:</strong><br>
-                        • Die Zahl ist eine Primzahl (mathematisch korrekt)<br>
-                        • Pure T0 ist bei dieser Zahl begrenzt → Versuchen Sie Advanced T0<br>
-                        • Sehr große/schwierige Zahl → Verwenden Sie Hybrid T0</p>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>❓ Welcher Algorithmus ist der beste?</h4>
-                        <p><strong>Antwort:</strong> Hybrid T0 Shor Algorithm - er wählt automatisch den optimalen Ansatz und hat die höchste Erfolgsrate.</p>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>❓ Was bedeutet "Primzahl korrekt erkannt"?</h4>
-                        <p><strong>Antwort:</strong> Das ist ein Erfolg! Primzahlen können mathematisch nicht faktorisiert werden. Die korrekte Erkennung ist ein positives Ergebnis.</p>
-                    </div>
-                </div>
+        <h3>Häufige Fragen:</h3>
+        <div class="tutorial-grid">
+          <div class="tutorial-card">
+            <h4>❓ Warum blinkt mein Qubit?</h4>
+            <p><strong>Antwort:</strong> Superposition! Das Qubit ist gleichzeitig 0 und 1. Das ist korrekt und gewünscht.</p>
+          </div>
+          <div class="tutorial-card">
+            <h4>❓ Warum findet der Algorithmus keine Faktoren?</h4>
+            <p><strong>Mögliche Gründe:</strong><br>
+            • Die Zahl ist eine Primzahl (mathematisch korrekt)<br>
+            • Pure T0 ist bei dieser Zahl begrenzt → Versuchen Sie Advanced T0<br>
+            • Sehr große/schwierige Zahl → Verwenden Sie Hybrid T0</p>
+          </div>
+          <div class="tutorial-card">
+            <h4>❓ Welcher Algorithmus ist der beste?</h4>
+            <p><strong>Antwort:</strong> Hybrid T0 Shor Algorithm - er wählt automatisch den optimalen Ansatz und hat die höchste Erfolgsrate.</p>
+          </div>
+          <div class="tutorial-card">
+            <h4>❓ Was bedeutet "Primzahl korrekt erkannt"?</h4>
+            <p><strong>Antwort:</strong> Das ist ein Erfolg! Primzahlen können mathematisch nicht faktorisiert werden. Die korrekte Erkennung ist ein positives Ergebnis.</p>
+          </div>
+        </div>
 
-                <h3>Fehlerbehebung:</h3>
-                <div class="warning">
-                    <strong>Problem:</strong> "Hybrid T0-Faktorisierung fehlgeschlagen"<br>
-                    <strong>Lösung:</strong> Die Zahl ist wahrscheinlich eine Primzahl oder sehr schwierig. Prüfen Sie, ob es sich um eine Primzahl handelt.
-                </div>
+        <h3>Fehlerbehebung:</h3>
+        <div class="warning">
+          <strong>Problem:</strong> "Hybrid T0-Faktorisierung fehlgeschlagen"<br>
+          <strong>Lösung:</strong> Die Zahl ist wahrscheinlich eine Primzahl oder sehr schwierig. Prüfen Sie, ob es sich um eine Primzahl handelt.
+        </div>
 
-                <div class="warning">
-                    <strong>Problem:</strong> Pure T0 versagt bei zusammengesetzten Zahlen<br>
-                    <strong>Lösung:</strong> Pure T0 ist bei bestimmten Zahlen begrenzt. Verwenden Sie Advanced T0 oder Hybrid T0.
-                </div>
+        <div class="warning">
+          <strong>Problem:</strong> Pure T0 versagt bei zusammengesetzten Zahlen<br>
+          <strong>Lösung:</strong> Pure T0 ist bei bestimmten Zahlen begrenzt. Verwenden Sie Advanced T0 oder Hybrid T0.
+        </div>
 
-                <div class="success">
-                    <strong>🎯 Beste Lernstrategie:</strong><br>
-                    1. Beginnen Sie mit Hybrid T0 für alle Zahlen<br>
-                    2. Verwenden Sie Algorithm Vergleich zum Lernen<br>
-                    3. Testen Sie bewusst Primzahlen vs. zusammengesetzte Zahlen<br>
-                    4. Experimentieren Sie mit Quantum Gates für das Verständnis<br>
-                    5. Verstehen Sie die mathematischen Grundlagen
-                </div>
+        <div class="success">
+          <strong>🎯 Beste Lernstrategie:</strong><br>
+          1. Beginnen Sie mit Hybrid T0 für alle Zahlen<br>
+          2. Verwenden Sie Algorithm Vergleich zum Lernen<br>
+          3. Testen Sie bewusst Primzahlen vs. zusammengesetzte Zahlen<br>
+          4. Experimentieren Sie mit Quantum Gates für das Verständnis<br>
+          5. Verstehen Sie die mathematischen Grundlagen
+        </div>
 
-                <h3>Empfohlene Testzahlen:</h3>
-                <div class="code-block">
+        <h3>Empfohlene Testzahlen:</h3>
+        <div class="code-block">
 Einfache zusammengesetzte Zahlen: 15, 21, 35, 55, 77, 91, 143
-Schwierigere zusammengesetzte Zahlen: 323, 437, 899, 1247, 1333  
+Schwierigere zusammengesetzte Zahlen: 323, 437, 899, 1247, 1333 
 Kleine Primzahlen: 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47
 Größere Primzahlen: 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103
 </div>
-            </div>
+      </div>
+    </div>
+
+    <!-- English Content -->
+    <div id="english-content" class="language-content">
+      <h1>⚛️ Hybrid T0-Framework Quantum Simulator</h1>
+      <div class="subtitle">Complete Guide for Intelligent Hybrid Quantum Computer with Automatic Algorithm Selection</div>
+
+      <!-- Table of Contents -->
+      <div class="toc">
+        <h3>📚 Table of Contents</h3>
+        <ul>
+          <li><a href="#basics-en">🎯 Basics & Getting Started</a></li>
+          <li><a href="#hybrid-en">🤖 Hybrid T0-Framework</a></li>
+          <li><a href="#algorithms-en">⚛️ Algorithm Comparison</a></li>
+          <li><a href="#qubits-en">🎛️ Qubit Control</a></li>
+          <li><a href="#gates-en">🚪 Quantum Gates</a></li>
+          <li><a href="#prime-en">🔍 Prime Detection</a></li>
+          <li><a href="#experiments-en">🧪 Experiments & Tutorials</a></li>
+          <li><a href="#advanced-en">🚀 Advanced Concepts</a></li>
+          <li><a href="#troubleshooting-en">🔧 Troubleshooting</a></li>
+        </ul>
+      </div>
+
+      <!-- Basics -->
+      <div class="section" id="basics-en">
+        <h2>🎯 Basics & Getting Started</h2>
+        
+        <h3>What is the Hybrid T0-Framework Quantum Simulator?</h3>
+        <p>Our simulator combines <strong>three different quantum algorithms</strong> in an intelligent system that automatically selects the best approach for each factorization task. The Hybrid T0-Framework uses advanced T0-physics with deterministic quantum mechanics.</p>
+
+        <div class="highlight">
+          <strong>🎮 Quick Start:</strong> Enter a number (e.g., 77) and click "🚀 Start Hybrid T0 Shor Algorithm" for the best automatic factorization!
         </div>
 
-        <!-- English Content -->
-        <div id="english-content" class="language-content">
-            <h1>⚛️ Hybrid T0-Framework Quantum Simulator</h1>
-            <div class="subtitle">Complete Guide for Intelligent Hybrid Quantum Computer with Automatic Algorithm Selection</div>
+        <h3>Important Quantum Concepts:</h3>
+        <ul>
+          <li><strong>Hybrid T0-Framework:</strong> Intelligent combination of Pure T0 and Advanced T0</li>
+          <li><strong>Prime Detection:</strong> Automatic recognition of non-factorizable numbers</li>
+          <li><strong>Deterministic Quantum Mechanics:</strong> Reproducible results without randomness</li>
+          <li><strong>Multi-Base Strategy:</strong> Using multiple bases for robust factorization</li>
+          <li><strong>Qubit:</strong> Basic unit of quantum information</li>
+          <li><strong>Superposition:</strong> A qubit can exist in multiple states simultaneously</li>
+          <li><strong>Entanglement:</strong> Qubits can be connected to influence each other</li>
+        </ul>
 
-            <!-- Table of Contents -->
-            <div class="toc">
-                <h3>📚 Table of Contents</h3>
-                <ul>
-                    <li><a href="#basics-en">🎯 Basics & Getting Started</a></li>
-                    <li><a href="#hybrid-en">🤖 Hybrid T0-Framework</a></li>
-                    <li><a href="#algorithms-en">⚛️ Algorithm Comparison</a></li>
-                    <li><a href="#qubits-en">🎛️ Qubit Control</a></li>
-                    <li><a href="#gates-en">🚪 Quantum Gates</a></li>
-                    <li><a href="#prime-en">🔍 Prime Detection</a></li>
-                    <li><a href="#experiments-en">🧪 Experiments & Tutorials</a></li>
-                    <li><a href="#advanced-en">🚀 Advanced Concepts</a></li>
-                    <li><a href="#troubleshooting-en">🔧 Troubleshooting</a></li>
-                </ul>
+        <div class="step-list">
+          <h4>🚀 First Steps:</h4>
+          <ol>
+            <li>Enter a number to factorize (recommended: 15, 21, 35, 77, 143)</li>
+            <li>Choose one of the four algorithm modes</li>
+            <li>Observe intelligent algorithm selection and performance analysis</li>
+            <li>Experiment with prime numbers (7, 11, 13, 17, 19, 23) for prime detection</li>
+            <li>Use Quantum Gates for direct qubit manipulation</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Hybrid T0-Framework -->
+      <div class="section" id="hybrid-en">
+        <h2>🤖 Hybrid T0-Framework - Intelligent Algorithm Selection</h2>
+        
+        <h3>Four Available Modes:</h3>
+        <div class="tutorial-grid">
+          <div class="tutorial-card">
+            <h4>🚀 Hybrid T0 Shor Algorithm</h4>
+            <p><strong>Recommended Main Mode</strong></p>
+            <p>Runs Pure T0 and Advanced T0 in parallel and automatically selects the best result. Includes prime pre-detection for immediate correct answers.</p>
+            <div class="success">
+              <strong>Best Choice for:</strong> All numbers - optimal results guaranteed
             </div>
-
-            <!-- Basics -->
-            <div class="section" id="basics-en">
-                <h2>🎯 Basics & Getting Started</h2>
-                
-                <h3>What is the Hybrid T0-Framework Quantum Simulator?</h3>
-                <p>Our simulator combines <strong>three different quantum algorithms</strong> in an intelligent system that automatically selects the best approach for each factorization task. The Hybrid T0-Framework uses advanced T0-physics with deterministic quantum mechanics.</p>
-
-                <div class="highlight">
-                    <strong>🎮 Quick Start:</strong> Enter a number (e.g., 77) and click "🚀 Start Hybrid T0 Shor Algorithm" for the best automatic factorization!
-                </div>
-
-                <h3>Important Quantum Concepts:</h3>
-                <ul>
-                    <li><strong>Hybrid T0-Framework:</strong> Intelligent combination of Pure T0 and Advanced T0</li>
-                    <li><strong>Prime Detection:</strong> Automatic recognition of non-factorizable numbers</li>
-                    <li><strong>Deterministic Quantum Mechanics:</strong> Reproducible results without randomness</li>
-                    <li><strong>Multi-Base Strategy:</strong> Using multiple bases for robust factorization</li>
-                    <li><strong>Qubit:</strong> Basic unit of quantum information</li>
-                    <li><strong>Superposition:</strong> A qubit can exist in multiple states simultaneously</li>
-                    <li><strong>Entanglement:</strong> Qubits can be connected to influence each other</li>
-                </ul>
-
-                <div class="step-list">
-                    <h4>🚀 First Steps:</h4>
-                    <ol>
-                        <li>Enter a number to factorize (recommended: 15, 21, 35, 77, 143)</li>
-                        <li>Choose one of the four algorithm modes</li>
-                        <li>Observe intelligent algorithm selection and performance analysis</li>
-                        <li>Experiment with prime numbers (7, 11, 13, 17, 19, 23) for prime detection</li>
-                        <li>Use Quantum Gates for direct qubit manipulation</li>
-                    </ol>
-                </div>
+          </div>
+          <div class="tutorial-card">
+            <h4>⚛️ Pure Quantum T0</h4>
+            <p><strong>Fast & Simple Approach</strong></p>
+            <p>Deterministic algorithm with fixed base a=2. Very fast, but limited for some numbers. Ideal for simple factorizations.</p>
+            <div class="info">
+              <strong>Best Choice for:</strong> Quick tests, simple composite numbers
             </div>
-
-            <!-- Hybrid T0-Framework -->
-            <div class="section" id="hybrid-en">
-                <h2>🤖 Hybrid T0-Framework - Intelligent Algorithm Selection</h2>
-                
-                <h3>Four Available Modes:</h3>
-                <div class="tutorial-grid">
-                    <div class="tutorial-card">
-                        <h4>🚀 Hybrid T0 Shor Algorithm</h4>
-                        <p><strong>Recommended Main Mode</strong></p>
-                        <p>Runs Pure T0 and Advanced T0 in parallel and automatically selects the best result. Includes prime pre-detection for immediate correct answers.</p>
-                        <div class="success">
-                            <strong>Best Choice for:</strong> All numbers - optimal results guaranteed
-                        </div>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>⚛️ Pure Quantum T0</h4>
-                        <p><strong>Fast & Simple Approach</strong></p>
-                        <p>Deterministic algorithm with fixed base a=2. Very fast, but limited for some numbers. Ideal for simple factorizations.</p>
-                        <div class="info">
-                            <strong>Best Choice for:</strong> Quick tests, simple composite numbers
-                        </div>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>🧠 Advanced T0 Framework</h4>
-                        <p><strong>Robust Multi-Base Approach</strong></p>
-                        <p>Uses multiple bases [2,3,5,7,11,13,17,19] with T0-Resonance Filtering. Slower, but more successful with difficult numbers.</p>
-                        <div class="info">
-                            <strong>Best Choice for:</strong> Difficult factorizations, scientific analysis
-                        </div>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>📊 Algorithm Comparison</h4>
-                        <p><strong>Detailed Performance Analysis</strong></p>
-                        <p>Runs all algorithms and shows detailed comparisons, speed metrics, and recommendations.</p>
-                        <div class="info">
-                            <strong>Best Choice for:</strong> Learning purposes, performance benchmarking
-                        </div>
-                    </div>
-                </div>
-
-                <h3>Intelligent Decision Logic of the Hybrid System:</h3>
-                <div class="step-list">
-                    <ol>
-                        <li><strong>Prime Pre-Detection:</strong> Immediate recognition of prime numbers (mathematically correct)</li>
-                        <li><strong>Parallel Execution:</strong> Pure T0 and Advanced T0 run simultaneously</li>
-                        <li><strong>Intelligent Selection:</strong>
-                            <ul>
-                                <li>Both successful → Choose faster (with 50% tolerance)</li>
-                                <li>Only one successful → Choose successful one</li>
-                                <li>Both fail → Choose faster attempt</li>
-                            </ul>
-                        </li>
-                        <li><strong>Transparent Reporting:</strong> Complete performance analysis of all methods</li>
-                    </ol>
-                </div>
+          </div>
+          <div class="tutorial-card">
+            <h4>🧠 Advanced T0 Framework</h4>
+            <p><strong>Robust Multi-Base Approach</strong></p>
+            <p>Uses multiple bases [2,3,5,7,11,13,17,19] with T0-Resonance Filtering. Slower, but more successful with difficult numbers.</p>
+            <div class="info">
+              <strong>Best Choice for:</strong> Difficult factorizations, scientific analysis
             </div>
-
-            <!-- Algorithm Comparison -->
-            <div class="section" id="algorithms-en">
-                <h2>⚛️ Algorithm Comparison & Performance</h2>
-                
-                <h3>Detailed Algorithm Properties:</h3>
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Property</th>
-                            <th>Pure Quantum T0</th>
-                            <th>Advanced T0 Framework</th>
-                            <th>Hybrid T0</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Success Rate</strong></td>
-                            <td>~67% (237 tests)</td>
-                            <td>~91% (237 tests)</td>
-                            <td>~95% (combined)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Average Time</strong></td>
-                            <td>0.13ms (very fast)</td>
-                            <td>0.89ms (6.7x slower)</td>
-                            <td>Variable (optimal)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Bases Used</strong></td>
-                            <td>Fixed: a=2</td>
-                            <td>Multi: [2,3,5,7,11,13,17,19]</td>
-                            <td>Both available</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Complexity</strong></td>
-                            <td>Minimal</td>
-                            <td>High (Resonance Filter)</td>
-                            <td>Intelligently managed</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Prime Detection</strong></td>
-                            <td>✅ Integrated</td>
-                            <td>✅ Integrated</td>
-                            <td>✅ Priority 1</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="experiment-box">
-                    <h4>🧪 Performance Test Experiment</h4>
-                    <ol>
-                        <li>Enter N=77</li>
-                        <li>Click "📊 Algorithm Comparison"</li>
-                        <li>Observe detailed performance metrics:</li>
-                        <ul>
-                            <li>Pure T0: ✅ 7×11 (0.1ms) - Fixed Base a=2</li>
-                            <li>Advanced T0: ✅ 7×11 (1.2ms) - Multi-Base Strategy</li>
-                            <li>Hybrid Choice: Pure Quantum T0 (faster with same correctness)</li>
-                        </ul>
-                    </ol>
-                </div>
+          </div>
+          <div class="tutorial-card">
+            <h4>📊 Algorithm Comparison</h4>
+            <p><strong>Detailed Performance Analysis</strong></p>
+            <p>Runs all algorithms and shows detailed comparisons, speed metrics, and recommendations.</p>
+            <div class="info">
+              <strong>Best Choice for:</strong> Learning purposes, performance benchmarking
             </div>
+          </div>
+        </div>
 
-            <!-- Prime Detection -->
-            <div class="section" id="prime-en">
-                <h2>🔍 Intelligent Prime Detection</h2>
-                
-                <h3>Why Prime Detection is Important:</h3>
-                <p>Prime numbers <strong>mathematically cannot be factorized</strong> as they are only divisible by 1 and themselves. Our simulator intelligently recognizes this and gives correct answers instead of meaningless failed attempts.</p>
+        <h3>Intelligent Decision Logic of the Hybrid System:</h3>
+        <div class="step-list">
+          <ol>
+            <li><strong>Prime Pre-Detection:</strong> Immediate recognition of prime numbers (mathematically correct)</li>
+            <li><strong>Parallel Execution:</strong> Pure T0 and Advanced T0 run simultaneously</li>
+            <li><strong>Intelligent Selection:</strong>
+              <ul>
+                <li>Both successful → Choose faster (with 50% tolerance)</li>
+                <li>Only one successful → Choose successful one</li>
+                <li>Both fail → Choose faster attempt</li>
+              </ul>
+            </li>
+            <li><strong>Transparent Reporting:</strong> Complete performance analysis of all methods</li>
+          </ol>
+        </div>
+      </div>
 
-                <div class="tutorial-grid">
-                    <div class="tutorial-card">
-                        <h4>🔬 Deterministic Check</h4>
-                        <p>6k±1 optimization for fast, exact prime detection up to √N.</p>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>🎲 Fermat Test</h4>
-                        <p>Probabilistic confirmation with 95-100% certainty for large numbers.</p>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>🎯 Confidence System</h4>
-                        <p>Combines both methods for maximum reliability of prime detection.</p>
-                    </div>
-                </div>
+      <!-- Algorithm Comparison -->
+      <div class="section" id="algorithms-en">
+        <h2>⚛️ Algorithm Comparison & Performance</h2>
+        
+        <h3>Detailed Algorithm Properties:</h3>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Pure Quantum T0</th>
+              <th>Advanced T0 Framework</th>
+              <th>Hybrid T0</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Success Rate</strong></td>
+              <td>~67% (237 tests)</td>
+              <td>~91% (237 tests)</td>
+              <td>~95% (combined)</td>
+            </tr>
+            <tr>
+              <td><strong>Average Time</strong></td>
+              <td>0.13ms (very fast)</td>
+              <td>0.89ms (6.7x slower)</td>
+              <td>Variable (optimal)</td>
+            </tr>
+            <tr>
+              <td><strong>Bases Used</strong></td>
+              <td>Fixed: a=2</td>
+              <td>Multi: [2,3,5,7,11,13,17,19]</td>
+              <td>Both available</td>
+            </tr>
+            <tr>
+              <td><strong>Complexity</strong></td>
+              <td>Minimal</td>
+              <td>High (Resonance Filter)</td>
+              <td>Intelligently managed</td>
+            </tr>
+            <tr>
+              <td><strong>Prime Detection</strong></td>
+              <td>✅ Integrated</td>
+              <td>✅ Integrated</td>
+              <td>✅ Priority 1</td>
+            </tr>
+          </tbody>
+        </table>
 
-                <h3>Example Outputs:</h3>
-                <div class="code-block">
+        <div class="experiment-box">
+          <h4>🧪 Performance Test Experiment</h4>
+          <ol>
+            <li>Enter N=77</li>
+            <li>Click "📊 Algorithm Comparison"</li>
+            <li>Observe detailed performance metrics:</li>
+            <ul>
+              <li>Pure T0: ✅ 7×11 (0.1ms) - Fixed Base a=2</li>
+              <li>Advanced T0: ✅ 7×11 (1.2ms) - Multi-Base Strategy</li>
+              <li>Hybrid Choice: Pure Quantum T0 (faster with same correctness)</li>
+            </ul>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Prime Detection -->
+      <div class="section" id="prime-en">
+        <h2>🔍 Intelligent Prime Detection</h2>
+        
+        <h3>Why Prime Detection is Important:</h3>
+        <p>Prime numbers <strong>mathematically cannot be factorized</strong> as they are only divisible by 1 and themselves. Our simulator intelligently recognizes this and gives correct answers instead of meaningless failed attempts.</p>
+
+        <div class="tutorial-grid">
+          <div class="tutorial-card">
+            <h4>🔬 Deterministic Check</h4>
+            <p>6k±1 optimization for fast, exact prime detection up to √N.</p>
+          </div>
+          <div class="tutorial-card">
+            <h4>🎲 Fermat Test</h4>
+            <p>Probabilistic confirmation with 95-100% certainty for large numbers.</p>
+          </div>
+          <div class="tutorial-card">
+            <h4>🎯 Confidence System</h4>
+            <p>Combines both methods for maximum reliability of prime detection.</p>
+          </div>
+        </div>
+
+        <h3>Example Outputs:</h3>
+        <div class="code-block">
 Input: N=23 (Prime)
 🔍 Prime pre-check: N=23 is a prime number (100% certain)
 💡 Prime numbers cannot be factorized - this is mathematically correct
@@ -923,7 +923,7 @@ Input: N=23 (Prime)
 🎉 HYBRID T0-SUCCESS! Prime correctly detected: 23 is a prime number
 </div>
 
-                <div class="code-block">
+        <div class="code-block">
 Input: N=77 (Composite)
 ⚛️ Start Hybrid T0 for N=77
 🔍 Pre-check: N=77 is composite - start factorization
@@ -931,113 +931,113 @@ Input: N=77 (Composite)
 🔍 Verification: 7 × 11 = 77 ✓
 </div>
 
-                <div class="experiment-box">
-                    <h4>🧪 Prime Test Experiment</h4>
-                    <p><strong>Test these primes:</strong> 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113</p>
-                    <p><strong>Expectation:</strong> All will be immediately recognized as primes (100% success rate)</p>
-                    <p><strong>Compare with composite numbers:</strong> 15, 21, 35, 77, 143, 323</p>
-                </div>
-            </div>
+        <div class="experiment-box">
+          <h4>🧪 Prime Test Experiment</h4>
+          <p><strong>Test these primes:</strong> 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113</p>
+          <p><strong>Expectation:</strong> All will be immediately recognized as primes (100% success rate)</p>
+          <p><strong>Compare with composite numbers:</strong> 15, 21, 35, 77, 143, 323</p>
+        </div>
+      </div>
 
-            <!-- Continue with other sections in English... -->
-            <!-- [Similar structure as German content] -->
+      <!-- Continue with other sections in English... -->
+      <!-- [Similar structure as German content] -->
 
-            <!-- Troubleshooting -->
-            <div class="section" id="troubleshooting-en">
-                <h2>🔧 Troubleshooting & FAQ</h2>
+      <!-- Troubleshooting -->
+      <div class="section" id="troubleshooting-en">
+        <h2>🔧 Troubleshooting & FAQ</h2>
 
-                <h3>Frequently Asked Questions:</h3>
-                <div class="tutorial-grid">
-                    <div class="tutorial-card">
-                        <h4>❓ Why is my qubit blinking?</h4>
-                        <p><strong>Answer:</strong> Superposition! The qubit is simultaneously 0 and 1. This is correct and intended.</p>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>❓ Why doesn't the algorithm find factors?</h4>
-                        <p><strong>Possible reasons:</strong><br>
-                        • The number is prime (mathematically correct)<br>
-                        • Pure T0 is limited for this number → Try Advanced T0<br>
-                        • Very large/difficult number → Use Hybrid T0</p>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>❓ Which algorithm is the best?</h4>
-                        <p><strong>Answer:</strong> Hybrid T0 Shor Algorithm - it automatically selects the optimal approach and has the highest success rate.</p>
-                    </div>
-                    <div class="tutorial-card">
-                        <h4>❓ What does "prime correctly detected" mean?</h4>
-                        <p><strong>Answer:</strong> This is a success! Prime numbers mathematically cannot be factorized. Correct detection is a positive result.</p>
-                    </div>
-                </div>
-
-                <div class="success">
-                    <strong>🎯 Best Learning Strategy:</strong><br>
-                    1. Start with Hybrid T0 for all numbers<br>
-                    2. Use Algorithm Comparison for learning<br>
-                    3. Consciously test primes vs. composite numbers<br>
-                    4. Experiment with Quantum Gates for understanding<br>
-                    5. Understand the mathematical foundations
-                </div>
-            </div>
+        <h3>Frequently Asked Questions:</h3>
+        <div class="tutorial-grid">
+          <div class="tutorial-card">
+            <h4>❓ Why is my qubit blinking?</h4>
+            <p><strong>Answer:</strong> Superposition! The qubit is simultaneously 0 and 1. This is correct and intended.</p>
+          </div>
+          <div class="tutorial-card">
+            <h4>❓ Why doesn't the algorithm find factors?</h4>
+            <p><strong>Possible reasons:</strong><br>
+            • The number is prime (mathematically correct)<br>
+            • Pure T0 is limited for this number → Try Advanced T0<br>
+            • Very large/difficult number → Use Hybrid T0</p>
+          </div>
+          <div class="tutorial-card">
+            <h4>❓ Which algorithm is the best?</h4>
+            <p><strong>Answer:</strong> Hybrid T0 Shor Algorithm - it automatically selects the optimal approach and has the highest success rate.</p>
+          </div>
+          <div class="tutorial-card">
+            <h4>❓ What does "prime correctly detected" mean?</h4>
+            <p><strong>Answer:</strong> This is a success! Prime numbers mathematically cannot be factorized. Correct detection is a positive result.</p>
+          </div>
         </div>
 
-        <div style="text-align: center; margin: 40px 0;">
-            <a href="#" onclick="history.back()" class="btn">⬅️ Zurück zum Simulator / Back to Simulator</a>
-            <a href="#basics" class="btn">📚 Nach oben / To Top</a>
+        <div class="success">
+          <strong>🎯 Best Learning Strategy:</strong><br>
+          1. Start with Hybrid T0 for all numbers<br>
+          2. Use Algorithm Comparison for learning<br>
+          3. Consciously test primes vs. composite numbers<br>
+          4. Experiment with Quantum Gates for understanding<br>
+          5. Understand the mathematical foundations
         </div>
-
-        <footer style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid #e9ecef; color: #666;">
-            <p><strong>Hybrid T0-Framework Quantum Computing Simulator</strong> • Advanced Educational Version</p>
-            <p>🎓 Developed for Students, Teachers and Quantum Enthusiasts • Features Intelligent Algorithm Selection</p>
-            <p>🤖 Hybrid T0-Framework • ⚛️ Pure Quantum T0 • 🧠 Advanced T0 • 🔍 Prime Detection • 📊 Performance Analysis</p>
-        </footer>
+      </div>
     </div>
 
-    <script>
-        // Language switching functionality
-        let currentLang = 'de';
+    <div style="text-align: center; margin: 40px 0;">
+      <a href="#" onclick="history.back()" class="btn">⬅️ Zurück zum Simulator / Back to Simulator</a>
+      <a href="#basics" class="btn">📚 Nach oben / To Top</a>
+    </div>
 
-        function switchLanguage(lang) {
-            currentLang = lang;
-            
-            // Hide all language content
-            document.querySelectorAll('.language-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            // Remove active class from all language buttons
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // Show selected language content
-            if (lang === 'de') {
-                document.getElementById('german-content').classList.add('active');
-                document.querySelector('[onclick="switchLanguage(\'de\')"]').classList.add('active');
-            } else {
-                document.getElementById('english-content').classList.add('active');
-                document.querySelector('[onclick="switchLanguage(\'en\')"]').classList.add('active');
-            }
+    <footer style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid #e9ecef; color: #666;">
+      <p><strong>Hybrid T0-Framework Quantum Computing Simulator</strong> • Advanced Educational Version</p>
+      <p>🎓 Developed for Students, Teachers and Quantum Enthusiasts • Features Intelligent Algorithm Selection</p>
+      <p>🤖 Hybrid T0-Framework • ⚛️ Pure Quantum T0 • 🧠 Advanced T0 • 🔍 Prime Detection • 📊 Performance Analysis</p>
+    </footer>
+  </div>
+
+  <script>
+    // Language switching functionality
+    let currentLang = 'de';
+
+    function switchLanguage(lang) {
+      currentLang = lang;
+      
+      // Hide all language content
+      document.querySelectorAll('.language-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      
+      // Remove active class from all language buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Show selected language content
+      if (lang === 'de') {
+        document.getElementById('german-content').classList.add('active');
+        document.querySelector('[onclick="switchLanguage(\'de\')"]').classList.add('active');
+      } else {
+        document.getElementById('english-content').classList.add('active');
+        document.querySelector('[onclick="switchLanguage(\'en\')"]').classList.add('active');
+      }
+    }
+
+    // Initialize with German
+    window.addEventListener('load', () => {
+      switchLanguage('de');
+    });
+
+    // Smooth scrolling for anchor links
+    document.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A' && e.target.getAttribute('href').startsWith('#')) {
+        e.preventDefault();
+        const targetId = e.target.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
         }
-
-        // Initialize with German
-        window.addEventListener('load', () => {
-            switchLanguage('de');
-        });
-
-        // Smooth scrolling for anchor links
-        document.addEventListener('click', function(e) {
-            if (e.target.tagName === 'A' && e.target.getAttribute('href').startsWith('#')) {
-                e.preventDefault();
-                const targetId = e.target.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            }
-        });
-    </script>
+      }
+    });
+  </script>
 </body>
 </html>

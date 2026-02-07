@@ -256,50 +256,50 @@ It's crucial to understand that the Standard Model itself requires specific exte
 The Extended Standard Model within the T0 framework retains the fundamental structure of the SM while adding key elements:
 
 1. **Higgs-T(x) Sector:** The Higgs mechanism connects directly to the intrinsic time field:
-   ```
-   L_Higgs-T = |T(x)(∂_μ + igA_μ)Φ + Φ∂_μT(x)|² - λ(|Φ|² - v²)² + ½∂_μT(x)∂^μT(x) - V(T(x),Φ)
-   ```
+  ```
+  L_Higgs-T = |T(x)(∂_μ + igA_μ)Φ + Φ∂_μT(x)|² - λ(|Φ|² - v²)² + ½∂_μT(x)∂^μT(x) - V(T(x),Φ)
+  ```
 
 2. **Modified Gauge Sectors:** All gauge interactions are modulated by T(x):
-   ```
-   L_Gauge = -¼T(x)²F_μν F^μν
-   ```
+  ```
+  L_Gauge = -¼T(x)²F_μν F^μν
+  ```
 
 3. **Fermion Sector:** Fermion kinetics and Yukawa couplings incorporate T(x):
-   ```
-   L_Fermion = ψ̄iγ^μ(T(x)∂_μψ + ψ∂_μT(x)) - yψ̄Φψ
-   ```
+  ```
+  L_Fermion = ψ̄iγ^μ(T(x)∂_μψ + ψ∂_μT(x)) - yψ̄Φψ
+  ```
 
 4. **T(x) Dynamics:** An entirely new sector describing intrinsic time dynamics:
-   ```
-   L_intrinsic = ½∂_μT(x)∂^μT(x) - ½T(x)² - ρ/T(x)
-   ```
+  ```
+  L_intrinsic = ½∂_μT(x)∂^μT(x) - ½T(x)² - ρ/T(x)
+  ```
 
 Conversely, to establish true duality, the Standard Model must be extended with:
 
 1. **Curvature-Dependent Redshift:** The standard cosmological redshift equation must incorporate wavelength dependence to match T0 predictions:
-   ```
-   z(λ) = z_expansion(1 + f(λ/λ₀))
-   ```
-   where f(λ/λ₀) corresponds to the logarithmic term in the T0 model.
+  ```
+  z(λ) = z_expansion(1 + f(λ/λ₀))
+  ```
+  where f(λ/λ₀) corresponds to the logarithmic term in the T0 model.
 
 2. **Modified ΛCDM Dynamics:** The cosmological constant must be extended to include scale-dependent effects:
-   ```
-   Λ_eff(r) = Λ₀ + Λ₁(r/r₀)
-   ```
-   to match the linear term κr in the T0 gravitational potential.
+  ```
+  Λ_eff(r) = Λ₀ + Λ₁(r/r₀)
+  ```
+  to match the linear term κr in the T0 gravitational potential.
 
 3. **Extended Gravity Coupling:** The Einstein-Hilbert action must include:
-   ```
-   S_EH = ∫(R - 2Λ + αR²)√(-g)d⁴x
-   ```
-   with the R² term providing the necessary corrections at galactic scales.
+  ```
+  S_EH = ∫(R - 2Λ + αR²)√(-g)d⁴x
+  ```
+  with the R² term providing the necessary corrections at galactic scales.
 
 4. **Quantum Metric Coupling:** The standard quantum field theory must be extended with metric-dependent mass terms:
-   ```
-   m_eff = m₀(1 + βΦ)
-   ```
-   to match the mass-variation effects in the T0 model.
+  ```
+  m_eff = m₀(1 + βΦ)
+  ```
+  to match the mass-variation effects in the T0 model.
 
 ### 9.3 Symmetry Structure and Unification
 

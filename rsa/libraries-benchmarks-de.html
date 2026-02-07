@@ -1,476 +1,476 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bibliotheken & Benchmarks - Implementierungen und Performance</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            min-height: 100vh;
-        }
-        
-        .language-switch {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-        
-        .lang-link {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            text-decoration: none;
-            transition: background 0.3s ease;
-        }
-        
-        .lang-link:hover {
-            background: rgba(255,255,255,0.3);
-            color: white;
-            text-decoration: none;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 40px;
-            padding: 30px 0;
-        }
-        
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .nav-back {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            display: inline-block;
-            margin-bottom: 20px;
-            transition: background 0.3s ease;
-        }
-        
-        .nav-back:hover {
-            background: rgba(255,255,255,0.3);
-            color: white;
-            text-decoration: none;
-        }
-        
-        .content-section {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin: 20px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
-        .library-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            margin: 25px 0;
-        }
-        
-        .library-card {
-            background: linear-gradient(145deg, #f7fafc, #edf2f7);
-            border-radius: 15px;
-            padding: 25px;
-            border-left: 5px solid #667eea;
-        }
-        
-        .library-title {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: #4a5568;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .library-version {
-            background: #667eea;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: normal;
-        }
-        
-        .feature-list {
-            list-style: none;
-            padding: 0;
-            margin: 15px 0;
-        }
-        
-        .feature-list li {
-            padding: 8px 0;
-            color: #2d3748;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .feature-icon {
-            color: #48bb78;
-            font-weight: bold;
-        }
-        
-        .implementation-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin: 25px 0;
-        }
-        
-        .impl-card {
-            border-radius: 15px;
-            padding: 25px;
-            color: white;
-            text-align: center;
-        }
-        
-        .impl-t0 {
-            background: linear-gradient(135deg, #48bb78, #38a169);
-        }
-        
-        .impl-harmonic {
-            background: linear-gradient(135deg, #4299e1, #3182ce);
-        }
-        
-        .impl-benchmark {
-            background: linear-gradient(135deg, #ed8936, #dd6b20);
-        }
-        
-        .impl-optimized {
-            background: linear-gradient(135deg, #9f7aea, #805ad5);
-        }
-        
-        .impl-name {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        
-        .impl-description {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        
-        .performance-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .performance-table th,
-        .performance-table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        
-        .performance-table th {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            font-weight: 600;
-        }
-        
-        .performance-table tr:hover {
-            background: #f7fafc;
-        }
-        
-        .good-performance {
-            color: #48bb78;
-            font-weight: bold;
-        }
-        
-        .moderate-performance {
-            color: #ed8936;
-            font-weight: bold;
-        }
-        
-        .code-example {
-            background: #2d3748;
-            color: #e2e8f0;
-            padding: 25px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            overflow-x: auto;
-            margin: 20px 0;
-            border-left: 4px solid #667eea;
-        }
-        
-        .api-section {
-            background: linear-gradient(145deg, #e6fffa, #b2f5ea);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 25px 0;
-            border-left: 4px solid #38b2ac;
-        }
-        
-        .api-section h3 {
-            color: #2c7a7b;
-            margin-bottom: 15px;
-        }
-        
-        .method-signature {
-            background: #2d3748;
-            color: #e2e8f0;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            margin: 10px 0;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .stat-box {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        
-        @media (max-width: 768px) {
-            .library-grid,
-            .implementation-showcase,
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bibliotheken & Benchmarks - Implementierungen und Performance</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+      min-height: 100vh;
+    }
+    
+    .language-switch {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    
+    .lang-link {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    
+    .lang-link:hover {
+      background: rgba(255,255,255,0.3);
+      color: white;
+      text-decoration: none;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+      padding: 30px 0;
+    }
+    
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .nav-back {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 20px;
+      transition: background 0.3s ease;
+    }
+    
+    .nav-back:hover {
+      background: rgba(255,255,255,0.3);
+      color: white;
+      text-decoration: none;
+    }
+    
+    .content-section {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      margin: 20px 0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .library-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+      margin: 25px 0;
+    }
+    
+    .library-card {
+      background: linear-gradient(145deg, #f7fafc, #edf2f7);
+      border-radius: 15px;
+      padding: 25px;
+      border-left: 5px solid #667eea;
+    }
+    
+    .library-title {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #4a5568;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .library-version {
+      background: #667eea;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: normal;
+    }
+    
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 15px 0;
+    }
+    
+    .feature-list li {
+      padding: 8px 0;
+      color: #2d3748;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .feature-icon {
+      color: #48bb78;
+      font-weight: bold;
+    }
+    
+    .implementation-showcase {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 25px 0;
+    }
+    
+    .impl-card {
+      border-radius: 15px;
+      padding: 25px;
+      color: white;
+      text-align: center;
+    }
+    
+    .impl-t0 {
+      background: linear-gradient(135deg, #48bb78, #38a169);
+    }
+    
+    .impl-harmonic {
+      background: linear-gradient(135deg, #4299e1, #3182ce);
+    }
+    
+    .impl-benchmark {
+      background: linear-gradient(135deg, #ed8936, #dd6b20);
+    }
+    
+    .impl-optimized {
+      background: linear-gradient(135deg, #9f7aea, #805ad5);
+    }
+    
+    .impl-name {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .impl-description {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    
+    .performance-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .performance-table th,
+    .performance-table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .performance-table th {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      font-weight: 600;
+    }
+    
+    .performance-table tr:hover {
+      background: #f7fafc;
+    }
+    
+    .good-performance {
+      color: #48bb78;
+      font-weight: bold;
+    }
+    
+    .moderate-performance {
+      color: #ed8936;
+      font-weight: bold;
+    }
+    
+    .code-example {
+      background: #2d3748;
+      color: #e2e8f0;
+      padding: 25px;
+      border-radius: 10px;
+      font-family: 'Courier New', monospace;
+      overflow-x: auto;
+      margin: 20px 0;
+      border-left: 4px solid #667eea;
+    }
+    
+    .api-section {
+      background: linear-gradient(145deg, #e6fffa, #b2f5ea);
+      border-radius: 15px;
+      padding: 25px;
+      margin: 25px 0;
+      border-left: 4px solid #38b2ac;
+    }
+    
+    .api-section h3 {
+      color: #2c7a7b;
+      margin-bottom: 15px;
+    }
+    
+    .method-signature {
+      background: #2d3748;
+      color: #e2e8f0;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      margin: 10px 0;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .stat-box {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    
+    @media (max-width: 768px) {
+      .library-grid,
+      .implementation-showcase,
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="language-switch">
-        <a href="libraries-benchmarks-en.html" class="lang-link">🇬🇧 English</a>
-    </div>
+  <div class="language-switch">
+    <a href="libraries-benchmarks-en.html" class="lang-link">🇬🇧 English</a>
+  </div>
 
-    <div class="container">
-        <div class="header">
-            <a href="index.html" class="nav-back">← Zurück zum Hub</a>
-            <h1>📚 Bibliotheken & Benchmarks</h1>
-            <p>Implementierungen und Performance-Analyse beider Ansätze</p>
+  <div class="container">
+    <div class="header">
+      <a href="index.html" class="nav-back">← Zurück zum Hub</a>
+      <h1>📚 Bibliotheken & Benchmarks</h1>
+      <p>Implementierungen und Performance-Analyse beider Ansätze</p>
+    </div>
+    
+    <div class="content-section">
+      <h2>📦 Verfügbare Bibliotheken</h2>
+      
+      <div class="library-grid">
+        <div class="library-card">
+          <div class="library-title">
+            ⚡ T0 Period Finding Library
+            <span class="library-version">v2.1.0</span>
+          </div>
+          <ul class="feature-list">
+            <li><span class="feature-icon">✓</span>Adaptive ξ-Parameter (1/50, 1/100, 1/1000, 1/42)</li>
+            <li><span class="feature-icon">✓</span>Rationale Arithmetik mit Fraction</li>
+            <li><span class="feature-icon">✓</span>Periodenbewertung und Resonanzberechnung</li>
+            <li><span class="feature-icon">✓</span>83.8% Erfolgsquote bei Semiprimes</li>
+            <li><span class="feature-icon">✓</span>Deterministische Ergebnisse</li>
+          </ul>
         </div>
         
-        <div class="content-section">
-            <h2>📦 Verfügbare Bibliotheken</h2>
-            
-            <div class="library-grid">
-                <div class="library-card">
-                    <div class="library-title">
-                        ⚡ T0 Period Finding Library
-                        <span class="library-version">v2.1.0</span>
-                    </div>
-                    <ul class="feature-list">
-                        <li><span class="feature-icon">✓</span>Adaptive ξ-Parameter (1/50, 1/100, 1/1000, 1/42)</li>
-                        <li><span class="feature-icon">✓</span>Rationale Arithmetik mit Fraction</li>
-                        <li><span class="feature-icon">✓</span>Periodenbewertung und Resonanzberechnung</li>
-                        <li><span class="feature-icon">✓</span>83.8% Erfolgsquote bei Semiprimes</li>
-                        <li><span class="feature-icon">✓</span>Deterministische Ergebnisse</li>
-                    </ul>
-                </div>
-                
-                <div class="library-card">
-                    <div class="library-title">
-                        🎼 Harmonic Factorization Library
-                        <span class="library-version">v2.1.0</span>
-                    </div>
-                    <ul class="feature-list">
-                        <li><span class="feature-icon">✓</span>4-Level Hierarchie (BASIS→ULTRA)</li>
-                        <li><span class="feature-icon">✓</span>Logarithmische Oktaven-Reduktion</li>
-                        <li><span class="feature-icon">✓</span>Erweiterte Intervall-Sets (120+ Verhältnisse)</li>
-                        <li><span class="feature-icon">✓</span>Mathematische Grenzen-Filterung</li>
-                        <li><span class="feature-icon">✓</span>LRU-Cache für Optimierung</li>
-                    </ul>
-                </div>
-                
-                <div class="library-card">
-                    <div class="library-title">
-                        📊 Benchmark Framework
-                        <span class="library-version">v2.1.0</span>
-                    </div>
-                    <ul class="feature-list">
-                        <li><span class="feature-icon">✓</span>Performance-Vergleiche zwischen Algorithmen</li>
-                        <li><span class="feature-icon">✓</span>Detaillierte Metriken und Statistiken</li>
-                        <li><span class="feature-icon">✓</span>JSON Export/Import für Ergebnisse</li>
-                        <li><span class="feature-icon">✓</span>Adaptive Testfall-Generierung</li>
-                        <li><span class="feature-icon">✓</span>Zeitreihen-Analyse</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="library-card">
+          <div class="library-title">
+            🎼 Harmonic Factorization Library
+            <span class="library-version">v2.1.0</span>
+          </div>
+          <ul class="feature-list">
+            <li><span class="feature-icon">✓</span>4-Level Hierarchie (BASIS→ULTRA)</li>
+            <li><span class="feature-icon">✓</span>Logarithmische Oktaven-Reduktion</li>
+            <li><span class="feature-icon">✓</span>Erweiterte Intervall-Sets (120+ Verhältnisse)</li>
+            <li><span class="feature-icon">✓</span>Mathematische Grenzen-Filterung</li>
+            <li><span class="feature-icon">✓</span>LRU-Cache für Optimierung</li>
+          </ul>
         </div>
         
-        <div class="content-section">
-            <h2>🛠️ Implementierungs-Übersicht</h2>
-            
-            <div class="implementation-showcase">
-                <div class="impl-card impl-t0">
-                    <div class="impl-name">T0 Period Finding</div>
-                    <div class="impl-description">
-                        Periodenfindung mit rationaler Arithmetik und adaptiven ξ-Strategien
-                    </div>
-                </div>
-                
-                <div class="impl-card impl-harmonic">
-                    <div class="impl-name">Harmonic Factorization</div>
-                    <div class="impl-description">
-                        Hierarchische Harmoniesuche mit musikalischen Intervallen
-                    </div>
-                </div>
-                
-                <div class="impl-card impl-benchmark">
-                    <div class="impl-name">Benchmark Framework</div>
-                    <div class="impl-description">
-                        Performance-Analyse und Vergleichstools für beide Ansätze
-                    </div>
-                </div>
-                
-                <div class="impl-card impl-optimized">
-                    <div class="impl-name">Optimized Libraries</div>
-                    <div class="impl-description">
-                        Erweiterte Versionen mit Cache und Grenzen-Filterung
-                    </div>
-                </div>
-            </div>
+        <div class="library-card">
+          <div class="library-title">
+            📊 Benchmark Framework
+            <span class="library-version">v2.1.0</span>
+          </div>
+          <ul class="feature-list">
+            <li><span class="feature-icon">✓</span>Performance-Vergleiche zwischen Algorithmen</li>
+            <li><span class="feature-icon">✓</span>Detaillierte Metriken und Statistiken</li>
+            <li><span class="feature-icon">✓</span>JSON Export/Import für Ergebnisse</li>
+            <li><span class="feature-icon">✓</span>Adaptive Testfall-Generierung</li>
+            <li><span class="feature-icon">✓</span>Zeitreihen-Analyse</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="content-section">
+      <h2>🛠️ Implementierungs-Übersicht</h2>
+      
+      <div class="implementation-showcase">
+        <div class="impl-card impl-t0">
+          <div class="impl-name">T0 Period Finding</div>
+          <div class="impl-description">
+            Periodenfindung mit rationaler Arithmetik und adaptiven ξ-Strategien
+          </div>
         </div>
         
-        <div class="content-section">
-            <h2>📈 Performance-Vergleiche</h2>
-            
-            <table class="performance-table">
-                <thead>
-                    <tr>
-                        <th>Algorithmus</th>
-                        <th>Ansatz</th>
-                        <th>Durchschnitt Zeit</th>
-                        <th>Erfolgsquote</th>
-                        <th>Speicher</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>T0 Optimiert</strong></td>
-                        <td>Periodenfindung</td>
-                        <td class="good-performance">0.0025s</td>
-                        <td class="good-performance">83.8%</td>
-                        <td class="good-performance">O(1)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Harmonic Hierarchisch</strong></td>
-                        <td>Verhältnissuche</td>
-                        <td class="good-performance">0.8ms</td>
-                        <td class="good-performance">97.1%</td>
-                        <td class="good-performance">O(log n)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Trial Division</strong></td>
-                        <td>Klassisch</td>
-                        <td class="moderate-performance">0.135s</td>
-                        <td class="good-performance">100%</td>
-                        <td class="good-performance">O(1)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Pollard Rho</strong></td>
-                        <td>Probabilistisch</td>
-                        <td class="moderate-performance">0.05s</td>
-                        <td class="moderate-performance">60-80%</td>
-                        <td class="good-performance">O(1)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Fermat</strong></td>
-                        <td>Quadratisch</td>
-                        <td class="moderate-performance">0.08s</td>
-                        <td class="moderate-performance">40-60%</td>
-                        <td class="good-performance">O(1)</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <div class="stat-number">2</div>
-                    <div class="stat-label">Hauptansätze</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">5</div>
-                    <div class="stat-label">Algorithmus-Varianten</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">0</div>
-                    <div class="stat-label">Externe Dependencies</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Reproduzierbarkeit</div>
-                </div>
-            </div>
+        <div class="impl-card impl-harmonic">
+          <div class="impl-name">Harmonic Factorization</div>
+          <div class="impl-description">
+            Hierarchische Harmoniesuche mit musikalischen Intervallen
+          </div>
         </div>
         
-        <div class="api-section">
-            <h3>🔧 API-Dokumentation</h3>
-            <p><strong>T0 Period Finding:</strong></p>
-            
-            <div class="method-signature">
+        <div class="impl-card impl-benchmark">
+          <div class="impl-name">Benchmark Framework</div>
+          <div class="impl-description">
+            Performance-Analyse und Vergleichstools für beide Ansätze
+          </div>
+        </div>
+        
+        <div class="impl-card impl-optimized">
+          <div class="impl-name">Optimized Libraries</div>
+          <div class="impl-description">
+            Erweiterte Versionen mit Cache und Grenzen-Filterung
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="content-section">
+      <h2>📈 Performance-Vergleiche</h2>
+      
+      <table class="performance-table">
+        <thead>
+          <tr>
+            <th>Algorithmus</th>
+            <th>Ansatz</th>
+            <th>Durchschnitt Zeit</th>
+            <th>Erfolgsquote</th>
+            <th>Speicher</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>T0 Optimiert</strong></td>
+            <td>Periodenfindung</td>
+            <td class="good-performance">0.0025s</td>
+            <td class="good-performance">83.8%</td>
+            <td class="good-performance">O(1)</td>
+          </tr>
+          <tr>
+            <td><strong>Harmonic Hierarchisch</strong></td>
+            <td>Verhältnissuche</td>
+            <td class="good-performance">0.8ms</td>
+            <td class="good-performance">97.1%</td>
+            <td class="good-performance">O(log n)</td>
+          </tr>
+          <tr>
+            <td><strong>Trial Division</strong></td>
+            <td>Klassisch</td>
+            <td class="moderate-performance">0.135s</td>
+            <td class="good-performance">100%</td>
+            <td class="good-performance">O(1)</td>
+          </tr>
+          <tr>
+            <td><strong>Pollard Rho</strong></td>
+            <td>Probabilistisch</td>
+            <td class="moderate-performance">0.05s</td>
+            <td class="moderate-performance">60-80%</td>
+            <td class="good-performance">O(1)</td>
+          </tr>
+          <tr>
+            <td><strong>Fermat</strong></td>
+            <td>Quadratisch</td>
+            <td class="moderate-performance">0.08s</td>
+            <td class="moderate-performance">40-60%</td>
+            <td class="good-performance">O(1)</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-number">2</div>
+          <div class="stat-label">Hauptansätze</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Algorithmus-Varianten</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">0</div>
+          <div class="stat-label">Externe Dependencies</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Reproduzierbarkeit</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="api-section">
+      <h3>🔧 API-Dokumentation</h3>
+      <p><strong>T0 Period Finding:</strong></p>
+      
+      <div class="method-signature">
 # T0 Periodenfindung mit adaptiven ξ-Strategien
 from t0_period_finding import RelativeT0
 
 t0 = RelativeT0()
-result = t0.factorize(1643)  # Automatische ξ-Auswahl
+result = t0.factorize(1643) # Automatische ξ-Auswahl
 print(f"Faktoren: {result['factors']}")
 print(f"ξ-Strategie: {result['method_specific']['xi_strategy']}")
 print(f"Resonanz: {result['method_specific']['resonance_score']}")
-            </div>
-            
-            <p><strong>Harmonic Factorization:</strong></p>
-            
-            <div class="method-signature">
+      </div>
+      
+      <p><strong>Harmonic Factorization:</strong></p>
+      
+      <div class="method-signature">
 # Harmonische Faktorisierung mit Hierarchie
 from optimized_harmonic_lib import OptimizedHarmonicFactorizer
 
@@ -479,76 +479,76 @@ result = factorizer.factorize(221, verbose=True)
 print(f"Harmonie: {result.harmonic_name}")
 print(f"Level: {result.level_name}")
 print(f"Abweichung: {result.deviation_cents:.1f} Cents")
-            </div>
-        </div>
-        
-        <div class="content-section">
-            <h2>🔬 Technische Details</h2>
-            
-            <div class="code-example">
+      </div>
+    </div>
+    
+    <div class="content-section">
+      <h2>🔬 Technische Details</h2>
+      
+      <div class="code-example">
 # Rationale Arithmetik - Kernprinzip beider Ansätze
 from fractions import Fraction
 
 # Exakte Verhältnisse statt Fließkommazahlen
-pi_exact = Fraction(355, 113)  # Sehr genaue π-Approximation
-xi_value = Fraction(1, 100)    # Adaptive ξ-Parameter
+pi_exact = Fraction(355, 113) # Sehr genaue π-Approximation
+xi_value = Fraction(1, 100)  # Adaptive ξ-Parameter
 
 # T0: Periodenbewertung mit exakten Verhältnissen
 def calculate_period_score(r, xi):
-    omega = Fraction(2) * pi_exact / Fraction(r)
-    diff = omega - pi_exact
-    score = Fraction(1) / (Fraction(1) + abs(diff / xi))
-    return score
+  omega = Fraction(2) * pi_exact / Fraction(r)
+  diff = omega - pi_exact
+  score = Fraction(1) / (Fraction(1) + abs(diff / xi))
+  return score
 
 # Harmonic: Logarithmische Cents-Berechnung
 def calculate_cents_deviation(ratio1, ratio2):
-    return abs(1200 * math.log2(float(ratio1 / ratio2)))
-            </div>
-            
-            <p><strong>Warum rationale Arithmetik?</strong></p>
-            <ul style="margin: 15px 0; padding-left: 20px;">
-                <li>100% reproduzierbare Ergebnisse auf jeder Hardware</li>
-                <li>Keine Rundungsfehler möglich</li>
-                <li>Deterministische Berechnungen</li>
-                <li>Hardware-unabhängige Implementierung</li>
-            </ul>
-        </div>
-        
-        <div class="content-section">
-            <h2>🎯 Praktische Anwendung</h2>
-            
-            <div class="code-example">
+  return abs(1200 * math.log2(float(ratio1 / ratio2)))
+      </div>
+      
+      <p><strong>Warum rationale Arithmetik?</strong></p>
+      <ul style="margin: 15px 0; padding-left: 20px;">
+        <li>100% reproduzierbare Ergebnisse auf jeder Hardware</li>
+        <li>Keine Rundungsfehler möglich</li>
+        <li>Deterministische Berechnungen</li>
+        <li>Hardware-unabhängige Implementierung</li>
+      </ul>
+    </div>
+    
+    <div class="content-section">
+      <h2>🎯 Praktische Anwendung</h2>
+      
+      <div class="code-example">
 # Beispiel: Vollständiger Workflow mit beiden Ansätzen
 from t0_period_finding import RelativeT0
 from optimized_harmonic_lib import OptimizedHarmonicFactorizer
 
 def analyze_number(n):
-    """Analysiere Zahl mit beiden Ansätzen"""
-    
-    # T0 Periodenfindung
-    t0 = RelativeT0()
-    t0_result = t0.factorize(n)
-    
-    # Harmonische Faktorisierung
-    harmonic = OptimizedHarmonicFactorizer()
-    harmonic_result = harmonic.factorize(n)
-    
-    print(f"Zahl: {n}")
-    print(f"T0 Erfolg: {t0_result['factors'] is not None}")
-    print(f"Harmonic Erfolg: {harmonic_result.success}")
-    
-    if harmonic_result.success:
-        print(f"Musikalisches Intervall: {harmonic_result.harmonic_name}")
-        print(f"Hierarchie-Level: {harmonic_result.level_name}")
-    
-    return t0_result, harmonic_result
+  """Analysiere Zahl mit beiden Ansätzen"""
+  
+  # T0 Periodenfindung
+  t0 = RelativeT0()
+  t0_result = t0.factorize(n)
+  
+  # Harmonische Faktorisierung
+  harmonic = OptimizedHarmonicFactorizer()
+  harmonic_result = harmonic.factorize(n)
+  
+  print(f"Zahl: {n}")
+  print(f"T0 Erfolg: {t0_result['factors'] is not None}")
+  print(f"Harmonic Erfolg: {harmonic_result.success}")
+  
+  if harmonic_result.success:
+    print(f"Musikalisches Intervall: {harmonic_result.harmonic_name}")
+    print(f"Hierarchie-Level: {harmonic_result.level_name}")
+  
+  return t0_result, harmonic_result
 
 # Test verschiedener Zahlentypen
 test_numbers = [221, 323, 1643, 2491, 10403]
 for num in test_numbers:
-    analyze_number(num)
-            </div>
-        </div>
+  analyze_number(num)
+      </div>
     </div>
+  </div>
 </body>
 </html>

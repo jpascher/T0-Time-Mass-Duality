@@ -161,14 +161,14 @@ python t0_cosmic_error_correction.py --complete --output meine_analyse.json
 ### Dateiinhalt
 ```json
 {
-  "current_conditions": {...},
-  "time_optimization": {...},
-  "qubit_arrangement": {...},
-  "threshold_analysis": {...},
-  "simulation": {...},
-  "adaptive_schedule": [...],
-  "recommendations": [...],
-  "summary": {...}
+ "current_conditions": {...},
+ "time_optimization": {...},
+ "qubit_arrangement": {...},
+ "threshold_analysis": {...},
+ "simulation": {...},
+ "adaptive_schedule": [...],
+ "recommendations": [...],
+ "summary": {...}
 }
 ```
 
@@ -176,20 +176,20 @@ python t0_cosmic_error_correction.py --complete --output meine_analyse.json
 
 ### Häufige Fehler
 1. **"NameError: name 'start' is not defined"**
-   - Problem: Alte Version des Skripts
-   - Lösung: Aktuelle Version verwenden
+  - Problem: Alte Version des Skripts
+  - Lösung: Aktuelle Version verwenden
 
 2. **"ModuleNotFoundError: No module named 'numpy'"**
-   - Problem: Pakete nicht installiert
-   - Lösung: `pip install numpy ephem`
+  - Problem: Pakete nicht installiert
+  - Lösung: `pip install numpy ephem`
 
 3. **Neues Fenster öffnet und schließt sofort**
-   - Problem: `python` vergessen
-   - Lösung: Immer `python skript.py` verwenden
+  - Problem: `python` vergessen
+  - Lösung: Immer `python skript.py` verwenden
 
 4. **Virtual Environment nicht aktiv**
-   - Problem: Pakete in falscher Umgebung
-   - Lösung: `.\cosmic_env\Scripts\Activate.ps1`
+  - Problem: Pakete in falscher Umgebung
+  - Lösung: `.\cosmic_env\Scripts\Activate.ps1`
 
 ### Debug-Modus
 ```powershell
@@ -217,21 +217,21 @@ python t0_cosmic_error_correction.py --complete --debug --verbose
 
 ```
 🌌 Aktuelle kosmische Bedingungen:
-   Korrektur: 1.0456
-   Verbesserung: +4.56%
+  Korrektur: 1.0456
+  Verbesserung: +4.56%
 
 ⏰ Beste Startzeit für grover:
-   Start: 22:15 (+8.7%, Wartezeit: 0.0h)
+  Start: 22:15 (+8.7%, Wartezeit: 0.0h)
 
 ⚡ cosmic_code Fehlerschwelle:
-   Effektiv: 5.23e-02 (Verbesserung: 1.046x)
+  Effektiv: 5.23e-02 (Verbesserung: 1.046x)
 
 🔌 Simulation (20 Gatter):
-   Erfolg mit Korrektur: 89.23%
-   Kosmische Verbesserung: 1.28x
+  Erfolg mit Korrektur: 89.23%
+  Kosmische Verbesserung: 1.28x
 
 💡 Empfehlungen:
-   [HIGH] SOFORT STARTEN
+  [HIGH] SOFORT STARTEN
 ```
 
 ## 📚 Nächste Schritte
