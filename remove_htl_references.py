@@ -69,9 +69,9 @@ def main():
     # Find all .tex files recursively
     tex_files = []
     for root, dirs, files in os.walk(base_dir):
-        # Skip backup directories
-        if any(skip in root for skip in ['.bak', 'backup', '_orig']):
-            continue
+        # Skip ONLY explicit backup files, not directories
+        dirs[:] = [d for d in dirs if not any(skip in d for skip in ['_orig', '_pdflatex'])]
+        
         for file in files:
             if file.endswith('.tex') and not file.endswith('.bak_htl'):
                 tex_files.append(os.path.join(root, file))
