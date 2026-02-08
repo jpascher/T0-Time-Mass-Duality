@@ -78,7 +78,7 @@
 		C_SPEED = 299792.458 # km/s
 		GEOMETRIC_FACTOR_C = 0.76 # Aus der Simulation ermittelter Gitterfaktor
 		def simulate_t0_field(grid_size):
-		"""Simuliert ein statisches T0-Vakuumfeld mit Fluktuationen."""
+		``''''Simuliert ein statisches T0-Vakuumfeld mit Fluktuationen.''''''
 		# Vereinfachte Simulation: Normalverteilte Fluktuationen, deren
 		# Amplitude durch XI skaliert wird. Eine echte Simulation würde die
 		# T0-Feldgleichung numerisch lösen (z.B. mit FEniCS).
@@ -88,12 +88,12 @@
 		return base_field + fluctuations
 		
 		def calculate_path_cost(field_value):
-		"""Die "Kosten" (effektive Distanz), um einen Gitterpunkt zu durchqueren."""
-		# Der Weg durch einen Punkt mit höherer Feldenergie ist "länger".
+		``''''Die ``Kosten'' (effektive Distanz), um einen Gitterpunkt zu durchqueren.''''''
+		# Der Weg durch einen Punkt mit höherer Feldenergie ist ``länger''.
 		return 1.0 * field_value
 		
 		def find_geodesic_path(t0_field, start_node, end_node):
-		"""Findet den kürzen Pfad (Geodäte) mittels Dijkstra-Algorithmus."""
+		``''''Findet den kürzen Pfad (Geodäte) mittels Dijkstra-Algorithmus.''''''
 		grid_size = t0_field.shape[0]
 		distances = np.full((grid_size, grid_size, grid_size), np.inf)
 		distances[start_node[0], start_node[1], start_node[2]] = 0
@@ -128,19 +128,19 @@
 		GRID_SIZE = 100 # Gittergröß e für die Simulation
 		START_NODE = (0, 50, 50)
 		END_NODE = (99, 50, 50)
-		print("1. Simuliere T0-Vakuumfeld...")
+		print(``1. Simuliere T0-Vakuumfeld...'')
 		t0_vacuum = simulate_t0_field(GRID_SIZE)
-		print("2. Berechne geodätischen Pfad durch das Feld...")
+		print(``2. Berechne geodätischen Pfad durch das Feld...'')
 		effective_path_length = find_geodesic_path(t0_vacuum, START_NODE, END_NODE)
 		# Euklidische Distanz als Referenz
 		euclidean_distance = np.sqrt((END_NODE[0] - START_NODE[0])**2 + (END_NODE[1] - START_NODE[1])**2 + (END_NODE[2] - START_NODE[2])**2)
 		# --- 3. Ergebnisse berechnen und ausgeben ---
-		print(f"\n--- Ergebnisse ---")
-		print(f"Euklidische Distanz (d): {euclidean_distance:.4f} Einheiten")
-		print(f"Effektive Pfadlänge (Leff): {effective_path_length:.4f} Einheiten")
+		print(f''\n--- Ergebnisse ---'')
+		print(f''Euklidische Distanz (d): {euclidean_distance:.4f} Einheiten'')
+		print(f''Effektive Pfadlänge (Leff): {effective_path_length:.4f} Einheiten'')
 		# Geometrische Rotverschiebung z
 		redshift_z = (effective_path_length - euclidean_distance) / euclidean_distance
-		print(f"Geometrische Rotverschiebung (z): {redshift_z:.6f}")
+		print(f''Geometrische Rotverschiebung (z): {redshift_z:.6f}'')
 		# Herleitung der Hubble-Konstante
 		# z = d * C * xi => H0 = c * C * xi
 		# Für unsere Simulation normalisieren wir d auf 1 Mpc
@@ -149,11 +149,11 @@
 		H0_simulated = C_SPEED * z_per_Mpc
 		# Direkte Berechnung aus der T0-Formel
 		H0_formula = C_SPEED * GEOMETRIC_FACTOR_C * XI * 3.26e6 / (1e3) # in km/s/Mpc
-		print("\n--- Kosmologische Vorhersage ---")
-		print(f"Simulierte Hubble-Konstante (H0): {H0_simulated:.2f} km/s/Mpc")
-		print(f"Formel-basierte Hubble-Konstante (H0): {H0_formula:.2f} km/s/Mpc")
-		print("\nErgebnis: Die Simulation bestätigt, dass die Rotverschiebung als")
-		print("geometrischer Effekt im T0-Vakuum die Hubble-Konstante korrekt reproduziert.")
+		print(``\n--- Kosmologische Vorhersage ---'')
+		print(f''Simulierte Hubble-Konstante (H0): {H0_simulated:.2f} km/s/Mpc'')
+		print(f''Formel-basierte Hubble-Konstante (H0): {H0_formula:.2f} km/s/Mpc'')
+		print(``\nErgebnis: Die Simulation bestätigt, dass die Rotverschiebung als'')
+		print(``geometrischer Effekt im T0-Vakuum die Hubble-Konstante korrekt reproduziert.'')
 	\end{lstlisting}
 \end{document}
 
