@@ -1,0 +1,257 @@
+\chapter{RSA Algorithm Implementation and Mathematical Analysis}
+
+	
+	
+\section*{Abstract}
+		This document provides a comprehensive mathematical analysis of the RSA encryption algorithm. We examine the underlying number theory, implementation details, security considerations, and computational complexity. The analysis includes proofs of correctness, discussions of common attacks, and optimization techniques for practical implementations.
+
+	
+	
+	\section{Introduction to RSA Cryptography}
+	
+	The RSA algorithm, named after Rivest, Shamir, and Adleman (1977), is one of the first practical public-key cryptosystems and is widely used for secure data transmission.
+	
+	\subsection{Mathematical Foundation}
+	
+	RSA is based on the computational difficulty of factoring large integers and the properties of modular arithmetic.
+	
+	\subsection{Key Generation}
+	
+	The RSA key generation process involves the following steps:
+	
+	\begin{enumerate}
+		\item Choose two distinct prime numbers $p$ and $q$
+		\item Compute $n = p \cdot q$
+		\item Compute Euler's totient function: $\varphi(n) = (p-1)(q-1)$
+		\item Choose an integer $e$ such that $1 < e < \varphi(n)$ and $\gcd(e, \varphi(n)) = 1$
+		\item Compute $d$ such that $d \cdot e \equiv 1 \pmod{\varphi(n)}$
+	\end{enumerate}
+	
+	\subsection{Encryption and Decryption}
+	
+	For a message $M$ represented as an integer with $0 \leq M < n$:
+	
+	\textbf{Encryption}: $C \equiv M^e \pmod{n}$
+	
+	\textbf{Decryption}: $M \equiv C^d \pmod{n}$
+	
+	\section{Mathematical Proofs}
+	
+	\subsection{Correctness Proof}
+	
+	Using Euler's theorem and the Chinese Remainder Theorem, we can prove:
+	
+	\begin{theorem}[RSA Correctness]
+		For any message $M$ with $0 \leq M < n$ and $\gcd(M, n) = 1$, the RSA encryption and decryption satisfy:
+		\[
+		(M^e)^d \equiv M \pmod{n}
+		\]
+	\end{theorem}
+	
+	\begin{proof}
+		Since $ed \equiv 1 \pmod{\varphi(n)}$, we have $ed = 1 + k\varphi(n)$ for some integer $k$.
+		
+		By Euler's theorem, if $\gcd(M, n) = 1$, then $M^{\varphi(n)} \equiv 1 \pmod{n}$.
+		
+		Therefore:
+		\[
+		C^d \equiv (M^e)^d \equiv M^{ed} \equiv M^{1 + k\varphi(n)} \equiv M \cdot (M^{\varphi(n)})^k \equiv M \cdot 1^k \equiv M \pmod{n}
+		\]
+		
+		For the case where $\gcd(M, n) \neq 1$, the Chinese Remainder Theorem ensures the result still holds.
+	\end{proof}
+	
+	\section{Implementation Details}
+	
+	\subsection{Modular Exponentiation}
+	
+	Efficient modular exponentiation is crucial for RSA performance. The square-and-multiply algorithm provides $O(\log e)$ complexity:
+	
+	\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Algorithm: Modular Exponentiation]
+		\textbf{Function} ModExp($base$, $exponent$, $modulus$):
+		\begin{enumerate}
+			\item $result \gets 1$
+			\item $base \gets base \bmod modulus$
+			\item \textbf{while} $exponent > 0$:
+			\begin{enumerate}
+				\item \textbf{if} $exponent \bmod 2 = 1$:
+				\begin{enumerate}
+					\item $result \gets (result \times base) \bmod modulus$
+				\end{enumerate}
+				\item $exponent \gets \lfloor exponent / 2 \rfloor$
+				\item $base \gets (base \times base) \bmod modulus$
+			\end{enumerate}
+			\item \textbf{return} $result$
+		\end{enumerate}
+	\end{tcolorbox}
+	
+	\subsection{Prime Generation}
+	
+	Generating large primes is essential for RSA security:
+	
+	\begin{itemize}
+		\item Use probabilistic primality tests (Miller-Rabin)
+		\item Ensure $p$ and $q$ are of similar bit length
+		\item Avoid primes with special forms that are easier to factor
+	\end{itemize}
+	
+	\section{Security Analysis}
+	
+	\subsection{Common Attacks}
+	
+	\begin{table}[htbp]
+		\centering
+		\begin{tabular}{lp{8cm}}
+			\toprule
+			\textbf{Attack Type} & \textbf{Description} \\
+			\midrule
+			Factorization & Attempt to factor $n$ into $p$ and $q$ \\
+			Small $e$ attacks & When $e$ is too small, certain messages can be recovered \\
+			Timing attacks & Measure computation time to deduce secret information \\
+			Side-channel attacks & Use power consumption, electromagnetic leaks, etc. \\
+			\bottomrule
+		\end{tabular}
+		\caption{Common attacks on RSA}
+	\end{table}
+	
+	\subsection{Security Recommendations}
+	
+	\begin{enumerate}
+		\item Use key sizes of at least 2048 bits (3072 or 4096 for long-term security)
+		\item Use proper padding schemes (OAEP)
+		\item Implement constant-time algorithms to prevent timing attacks
+		\item Regularly update cryptographic libraries
+	\end{enumerate}
+	
+	\section{Performance Analysis}
+	
+	\subsection{Computational Complexity}
+	
+	\begin{table}[htbp]
+		\centering
+		\begin{tabular}{lcc}
+			\toprule
+			\textbf{Operation} & \textbf{Complexity} & \textbf{Typical time (2048-bit)} \\
+			\midrule
+			Key generation & $O(k^3)$ & 1-10 seconds \\
+			Encryption & $O(k^2)$ & < 1 ms \\
+			Decryption & $O(k^3)$ & 10-100 ms \\
+			\bottomrule
+		\end{tabular}
+		\caption{Computational complexity of RSA operations}
+	\end{table}
+	
+	\subsection{Optimization Techniques}
+	
+	\begin{itemize}
+		\item Use Chinese Remainder Theorem for faster decryption
+		\item Implement windowing methods for exponentiation
+		\item Use hardware acceleration (AES-NI, etc.)
+	\end{itemize}
+	
+	\section{Mathematical Extensions}
+	
+	\subsection{RSA with Multiple Primes}
+	
+	Instead of two primes, use $k$ primes: $n = p_1 p_2 \cdots p_k$
+	
+	Advantages:
+	\begin{itemize}
+		\item Faster decryption using multi-prime CRT
+		\item Same security with smaller total modulus
+	\end{itemize}
+	
+	\subsection{Blinding Techniques}
+	
+	To prevent timing attacks:
+	\[
+	C' = C \cdot r^e \pmod{n}
+	\]
+	\[
+	M' = (C')^d \pmod{n}
+	\]
+	\[
+	M = M' \cdot r^{-1} \pmod{n}
+	\]
+	
+	\section{Practical Considerations}
+	
+	\subsection{Key Management}
+	
+	\begin{itemize}
+		\item Secure storage of private keys
+		\item Regular key rotation
+		\item Certificate management
+	\end{itemize}
+	
+	\subsection{Compliance Standards}
+	
+	\begin{itemize}
+		\item FIPS 140-2/3 for government use
+		\item Common Criteria evaluation
+		\item Industry-specific regulations
+	\end{itemize}
+	
+	\section{Conclusion}
+	
+	RSA remains a fundamental public-key cryptosystem despite the emergence of newer algorithms. Its security relies on the hardness of integer factorization, which remains computationally infeasible for properly chosen key sizes.
+	
+	\subsection{Future Directions}
+	
+	\begin{itemize}
+		\item Post-quantum cryptography alternatives
+		\item Homomorphic encryption extensions
+		\item Improved side-channel resistance
+	\end{itemize}
+	
+	\appendix
+	
+	\section{Appendix A: Mathematical Background}
+	
+	\subsection{Euler's Theorem}
+	
+	For any integers $a$ and $n$ with $\gcd(a, n) = 1$:
+	\[
+	a^{\varphi(n)} \equiv 1 \pmod{n}
+	\]
+	
+	\subsection{Chinese Remainder Theorem}
+	
+	If $n_1, n_2, \ldots, n_k$ are pairwise coprime, then the system of congruences:
+	\begin{align*}
+		x &\equiv a_1 \pmod{n_1} \\
+		x &\equiv a_2 \pmod{n_2} \\
+		&\vdots \\
+		x &\equiv a_k \pmod{n_k}
+	\end{align*}
+	has a unique solution modulo $N = n_1 n_2 \cdots n_k$.
+	
+	\section{Appendix B: Sample Code}
+	
+	\begin{verbatim}
+		# Simple RSA implementation in Python
+		import random
+		from math import gcd
+		
+		def generate_keypair(bits=1024):
+		p = generate_prime(bits//2)
+		q = generate_prime(bits//2)
+		n = p * q
+		phi = (p-1) * (q-1)
+		
+		e = 65537
+		d = modinv(e, phi)
+		
+		return ((e, n), (d, n))
+		
+		def encrypt(pk, plaintext):
+		key, n = pk
+		cipher = pow(plaintext, key, n)
+		return cipher
+		
+		def decrypt(pk, ciphertext):
+		key, n = pk
+		plain = pow(ciphertext, key, n)
+		return plain
+	\end{verbatim}
+	
