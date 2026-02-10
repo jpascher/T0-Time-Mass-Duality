@@ -19,6 +19,26 @@ def convert_standalone_to_chapter(source_file, target_file):
     
     try:
         # Read source file
+        # Skip if target file already exists and language matches
+        if os.path.exists(target_file):
+            # Check language marker in both source and target
+            with open(source_file, 'r', encoding='utf-8') as f:
+                src_content = f.read()
+            with open(target_file, 'r', encoding='utf-8') as f:
+                tgt_content = f.read()
+            def detect_lang(text):
+                if re.search(r'\\usepackage\[ngerman\]', text) or re.search(r'\\selectlanguage\{german\}', text) or re.search(r'\\begin\{document\}.*?german', text, re.DOTALL):
+                    return 'de'
+                if re.search(r'\\usepackage\[english\]', text) or re.search(r'\\selectlanguage\{english\}', text) or re.search(r'\\begin\{document\}.*?english', text, re.DOTALL):
+                    return 'en'
+                return None
+            src_lang = detect_lang(src_content)
+            tgt_lang = detect_lang(tgt_content)
+            if src_lang == tgt_lang:
+                print(f"   ⚠️  Zieldatei existiert bereits und Sprache stimmt überein: {target_file}, überspringe.")
+                return True
+            else:
+                print(f"   ⚠️  Zieldatei existiert, aber Sprache stimmt nicht überein: {target_file}, wird überschrieben.")
         with open(source_file, 'r', encoding='utf-8') as f:
             content = f.read()
         
@@ -38,16 +58,26 @@ def convert_standalone_to_chapter(source_file, target_file):
         
         # First, find and extract \title
         title_content = None
-        for line in lines:
+        title_index = -1
+        for idx, line in enumerate(lines):
             title_match = re.search(r'\\title\{(.+?)\}', line)
             if title_match:
                 title_content = title_match.group(1)
+                title_index = idx
                 print(f"   ✅ Titel gefunden: {title_content[:50]}...")
                 break
+        # Remove everything before \title
+        if title_index > 0:
+            lines = lines[title_index:]
         
         # Process from \begin{document} onwards
         new_lines = []
-        
+
+        # Insert date for en_standalone files if missing
+        if 'en_standalone' in str(source_file) and not any(re.match(r'^\\date\{', l) for l in lines):
+            new_lines.append('\\date{January 2025}')
+            print(f"   🗓️  Datum für englische Standalone-Datei ergänzt.")
+
         # Add chapter from title
         if title_content:
             new_lines.append(f'\\chapter{{{title_content}}}')
