@@ -16,12 +16,7 @@
 
 % === CHAPTER 1: BASIC PACKAGES (must come FIRST) ===
 \RequirePackage{fontspec}
-\RequirePackage{unicode-math}
-\usepackage{chngcntr}
-\setcounter{secnumdepth}{1}  % Nur Sections nummerieren (nicht subsections)
-\setcounter{tocdepth}{1}     % Nur Sections im TOC (nicht subsections)
-\counterwithout{section}{chapter}  % Falls Kapitel existieren
-\counterwithout{subsection}{section}  % Löse Verknüpfung
+% unicode-math wird später geladen (nach mathtools)
 % === CHAPTER 2: LANGUAGE (ENGLISH) ===
 \usepackage[english]{babel}
 \usepackage{microtype}                    % IMPORTANT for better hyphenation!
@@ -75,13 +70,16 @@ Scale=0.95,
 Language=English
 ]
 
-% Math Font (simple & stable) – MUST come AFTER language definition
-% IMPORTANT: Libertinus Math for correct \underbrace display!
-\setmathfont{Libertinus Math}[Scale=1.0]
+% Math Font wird nach unicode-math gesetzt (siehe unten)
 
 % === CHAPTER 4: MATHEMATICS PACKAGES (in STRICT order!) ===
 % IMPORTANT: mathtools must come BEFORE unicode-math for some commands!
 \usepackage{mathtools}           % FIRST mathtools!
+\RequirePackage{unicode-math}    % THEN unicode-math
+
+% Math Font (MUST come AFTER unicode-math!)
+% IMPORTANT: Libertinus Math for correct \underbrace display!
+\setmathfont{Libertinus Math}[Scale=1.0]
 
 % Then the rest
 \usepackage{amsmath, amsfonts, amsthm}
@@ -111,25 +109,13 @@ Language=English
 % Hyphenation for URLs in bibliography
 \def\UrlBreaks{\do\/\do-}
 
-% === CHAPTER 6: PAGE LAYOUT
+% === CHAPTER 6: PAGE LAYOUT (eBook format - smaller margins) ===
 \usepackage[paperwidth=8.25in, paperheight=11in,
-left=2.5cm, 
-right=2.5cm, 
-top=2.5cm, 
-bottom=3.5cm,
-bindingoffset=0.5cm]{geometry}
+top=1.0in,
+bottom=1.0in,
+left=0.75in,
+right=0.75in]{geometry}
 \setlength{\headheight}{15pt}
-% =============================================================================
-% Page Geometry – Buch-Optimierung
-% =============================================================================
-%\usepackage[paperwidth=8.25in, paperheight=11in,
-%top=1.0in,
-%bottom=1.2in,
-%inner=1.0in,
-%outer=0.75in,
-%bindingoffset=0.75in,
-%twoside]{geometry}
-%\setlength{\headheight}{15pt}
 % === CHAPTER 7: GRAPHICS AND TABLES ===
 \usepackage{graphicx}
 \usepackage[table,xcdraw]{xcolor}
@@ -156,7 +142,7 @@ bindingoffset=0.5cm]{geometry}
 
 % === WICHTIG: Algorithm-Konflikt umgehen ===
 % Option: algorithmic mit GROSSBUCHSTABEN
-% Shared box for experiments
+% Gemeinsame Box für Experimente
 \newtcolorbox{experimentbox}[1][]{
 	colback=green!5!white,
 	colframe=t0green!80!black,
@@ -170,7 +156,8 @@ bindingoffset=0.5cm]{geometry}
 \newenvironment{abstract}{\section*{\abstractname}\itshape\small\par\bigskip}{\bigskip}
 \fi
 
-% === SAFE MACRO DEFINITIONS (NO double subscripts) ===
+% === MAKROS SICHER NEU DEFINIEREN / ÜBERSCHREIBEN ===
+% Definiere Makros OHNE doppelte Subskripte
 \newcommand{\phipar}{\phi_{\mathrm{par}}}
 %\newcommand{\xipar}{\xi_{\mathrm{par}}}
 \newcommand{\Qphipar}{Q_{\phi_{\mathrm{par}}}}
@@ -215,8 +202,8 @@ bindingoffset=0.5cm]{geometry}
 	xleftmargin=0pt,
 	xrightmargin=0pt,
 	literate=              % For special characters in code listings
-	{ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1 {ß}{{\ss}}1
-	{Ä}{{\"A}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+	{ä}{ä}1 {ö}{ö}1 {ü}{ü}1 {ß}{ß}1
+	{Ä}{Ä}1 {Ö}{Ö}1 {Ü}{Ü}1
 }
 \usepackage{mdframed}
 
@@ -237,6 +224,26 @@ bindingoffset=0.5cm]{geometry}
 
 % === CHAPTER 11: HYPERREF (must come SECOND TO LAST!) ===
 \usepackage{hyperref}
+% =============================================================================
+% TOC-Tiefe und Appendix-Zähler Konfiguration
+% =============================================================================
+% Verhindert "Counter too large" Fehler bei >26 Appendizes
+% Beschränkt Inhaltsverzeichnis auf erste Ebene
+\setcounter{tocdepth}{1}        % Nur chapter und section im TOC
+\setcounter{secnumdepth}{1}     % Nur chapter und section nummeriert
+
+% Erweitere Appendix-Zähler für mehr als 26 Kapitel
+\usepackage{alphalph}
+\makeatletter
+\renewcommand{\thechapter}{%
+  \ifnum\c@chapter>26
+    \alphalph{\c@chapter}%
+  \else
+    \Alph{chapter}%
+  \fi
+}
+\makeatother
+
 \hypersetup{
 	colorlinks=true,
 	linkcolor=black,
@@ -250,8 +257,6 @@ bindingoffset=0.5cm]{geometry}
 	pdfsubject={T0 Theory - Fundamental Fractal-Geometric Field Theory}
 }
 
-% === CHAPTER 12: BOOKMARK (must come AFTER hyperref!) ===
-\usepackage{bookmark}
 % Fix for unicode-math symbols in PDF bookmarks
 \pdfstringdefDisableCommands{%
 	\def\xi{xi}%
@@ -315,6 +320,9 @@ bindingoffset=0.5cm]{geometry}
 	\def\mitOmega{Omega}%
 }
 
+% === CHAPTER 12: BOOKMARK (must come AFTER hyperref!) ===
+\usepackage{bookmark}
+
 % === CHAPTER 13: CLEVEREF (ENGLISH LABELS) ===
 \usepackage[english]{cleveref}
 \crefname{equation}{Equation}{Equations}
@@ -328,7 +336,8 @@ bindingoffset=0.5cm]{geometry}
 \crefname{example}{Example}{Examples}
 \crefname{remark}{Remark}{Remarks}
 
-% ==============================================================================
+% === CUSTOM ENVIRONMENTS ===
+% Alternative interpretation environment
 \newenvironment{alternative}{%
 	\begin{mdframed}[linecolor=black!30,linewidth=1pt,roundcorner=4pt,backgroundcolor=black!5]%
 	}{%
@@ -485,7 +494,7 @@ bindingoffset=0.5cm]{geometry}
 
 \newenvironment{wichtig}{%
 	\begin{mdframed}[linecolor=red!50,linewidth=2pt,roundcorner=4pt,backgroundcolor=red!10]%
-	\textbf{Important:} 
+		\textbf{Important:} 
 	}{%
 	\end{mdframed}%
 }
@@ -517,7 +526,7 @@ bindingoffset=0.5cm]{geometry}
 
 \newenvironment{beweis}{%
 	\begin{mdframed}[linecolor=brown!40,linewidth=1pt,roundcorner=4pt,backgroundcolor=brown!8]%
-	\textbf{Proof:} 
+		\textbf{Proof:} 
 	}{%
 	\end{mdframed}%
 }
@@ -558,6 +567,8 @@ bindingoffset=0.5cm]{geometry}
 	\end{mdframed}%
 }
 
+% Additional common environments
+% ==============================================================================
 % FROM HERE: YOUR DEFINITIONS (unchanged)
 % ==============================================================================
 
@@ -644,6 +655,7 @@ bindingoffset=0.5cm]{geometry}
 
 % --- Energy and Planck Units ---
 \newcommand{\Ezero}{E_0}
+\newcommand{\E}{E}
 \newcommand{\EPlanck}{E_{\text{Pl}}}
 \newcommand{\Mpl}{M_{\text{Pl}}}
 \newcommand{\mP}{m_{\text{P}}}
@@ -876,7 +888,8 @@ bindingoffset=0.5cm]{geometry}
 \newenvironment{comparison}{\begin{quote}}{\end{quote}}
 \newenvironment{advantage}{\begin{quote}}{\end{quote}}
 \newenvironment{quantum}{\begin{quote}}{\end{quote}}
-
+\newenvironment{proofenv}{\begin{quote}}{\end{quote}}
+\newenvironment{remarkenv}{\begin{quote}}{\end{quote}}
 % === LAYOUT SETTINGS ===
 \raggedbottom
 \usepackage{environ}
@@ -892,11 +905,23 @@ bindingoffset=0.5cm]{geometry}
 \newcommand{\widetable}[1]{\resizebox{\textwidth}{!}{#1}}
 
 % === TABLE OF CONTENTS FORMATTING ===
-\renewcommand{\cftsecfont}{\color{blue}}
-\renewcommand{\cftsubsecfont}{\color{blue}}
-\renewcommand{\cftsecpagefont}{\color{blue}}
-\renewcommand{\cftsubsecpagefont}{\color{blue}}
-\renewcommand{\cfttoctitlefont}{\huge\bfseries\color{blue}}
+\renewcommand{\cftchapfont}{\small\color{black}}           % Chapter klein
+\renewcommand{\cftsecfont}{\footnotesize\color{blue}}         % Section sehr klein
+\renewcommand{\cftsubsecfont}{\scriptsize\color{blue}}        % Subsection winzig
+\renewcommand{\cftchappagefont}{\small}
+\renewcommand{\cftsecpagefont}{\footnotesize\color{blue}}
+\renewcommand{\cftsubsecpagefont}{\scriptsize\color{blue}}
+\renewcommand{\cfttoctitlefont}{\large\bfseries\color{blue}}  % TOC-Titel normal (war \Large)
+
+% Optimierte Einrückungen für lange Titel
+\setlength{\cftchapindent}{0em}
+\setlength{\cftsecindent}{1em}
+\setlength{\cftsecnumwidth}{2.5em}
+\setlength{\cftbeforechapskip}{0.5em}
+\setlength{\cftbeforesecskip}{0.2em}
+
+% Punkte zwischen Titel und Seitenzahl
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 
 % === DEFAULT HEADER AND FOOTER ===
 \pagestyle{fancy}
@@ -908,5 +933,49 @@ bindingoffset=0.5cm]{geometry}
 % ==============================================================================
 % End of Shared Preamble for English
 % ==============================================================================
+% Zusätzliche Pakete die nicht in Preamble sind
+\usepackage{longtable}
+\usepackage{listings}
+
+\lstset{
+	language=Python,
+	basicstyle=\small\ttfamily,
+	keywordstyle=\color{blue},
+	commentstyle=\color{gray},
+	stringstyle=\color{red},
+	frame=single,
+	breaklines=true,
+	postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
 
 
+% ============================================================================
+
+% =============================================================================
+% Unterdrücke leere Seiten (cleardoublepage → clearpage)
+% =============================================================================
+% Verhindert leere Seiten zwischen Kapiteln im twoside/openright Modus
+\let\cleardoublepage\clearpage
+
+% Additional definitions for shared preambles
+% ============================================================================
+
+% Weyl tensor and related physics definitions
+\providecommand{\Weyl}{\mathrm{Weyl}}
+\providecommand{\ZPinch}{\nabla p = \mathbf{J} \times \mathbf{B}}
+\providecommand{\SynchPower}{P_{\text{synch}}}
+
+% Lambda bar (Compton wavelength)
+\providecommand{\lambdabar}{\bar{\lambda}}
+
+% Feynman diagrams - requires LuaLaTeX
+\usepackage[compat=1.1.0]{tikz-feynman}
+
+% Vorsicht/Warning Environment
+\newenvironment{vorsicht}{%
+  \begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=\textbf{Vorsicht}]
+}{%
+  \end{tcolorbox}
+}
+
+% ============================================================================
