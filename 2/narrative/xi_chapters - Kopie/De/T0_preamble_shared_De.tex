@@ -1,0 +1,910 @@
+% ==============================================================================
+% T0 Theory: Shared GERMAN Preamble – Optimized for eBook/Book
+% Version: 2.0 – Final 2026 (LuaLaTeX only) – DEUTSCH korrigiert
+% Author: Johann Pascher
+% Date: Januar 2026
+% ==============================================================================
+%
+% WICHTIG: Compile EXCLUSIVELY with LuaLaTeX!
+% In TeXstudio: Options → Configure TeXstudio → Build → Default Compiler → LuaLaTeX
+%
+% Required Fonts (install once):
+% - Inter: https://fonts.google.com/specimen/Inter
+% - JetBrains Mono: https://www.jetbrains.com/lp/mono/
+% - Libertinus Math: https://github.com/libertinus-fonts/libertinus
+% ==============================================================================
+
+% === KAPITEL 1: GRUNDLEGENDE PAKETE (müssen ZUERST kommen) ===
+\RequirePackage{fontspec}
+\RequirePackage{unicode-math}
+
+% === KAPITEL 2: SPRACHE (DEUTSCH mit voller Silbentrennung) ===
+\usepackage[ngerman]{babel}
+\usepackage{microtype}                    % WICHTIG für bessere Silbentrennung!
+
+% Typographie-Einstellungen für besseren deutschen Umbruch
+\frenchspacing                     % Korrekte deutsche Abstände nach Satzzeichen
+\emergencystretch=3em              % Erlaubt mehr Dehnung bei schwierigen Zeilen
+\tolerance=2500                    % Höhere Toleranz für Zeilenumbrüche
+\hbadness=10000                    % Unterdrückt "underfull hbox" Warnungen
+\hfuzz=2pt                         % Erlaubt minimalen Overfull
+\pretolerance=150                  % Bessere Worttrennung
+
+% Bessere Seitenumbrüche verhindern
+\clubpenalty=10000           % Keine "Schusterjungen"
+\widowpenalty=10000          % Keine "Hurenkinder"  
+\displaywidowpenalty=10000   % Auch bei Formeln
+\brokenpenalty=10000         % Keine getrennten Wörter über Seiten
+
+% Explizite Trennungen für lange deutsche Wörter
+\hyphenation{Fun-da-men-tal Frak-tal-Ge-o-me-trisch Fel-the-o-rie Me-tho-do-lo-gisch}
+\hyphenation{Re-vi-si-o-nis-mus Quan-ti-sie-rung U-ni-fi-ka-ti-on Ef-fek-tiv}
+\hyphenation{Re-nor-mier-bar-keit Sin-gu-la-ri-tä-ten Kon-zi-li-an-tis-mus}
+\hyphenation{E-mer-genz Phä-no-me-no-lo-gisch Do-ku-men-ta-ti-on Ana-ly-se}
+\hyphenation{Gra-vi-ta-ti-on Quan-ten-me-cha-nik Do-gma-tis-mus Kon-se-quent}
+\hyphenation{Par-al-le-lis-mus Im-ple-men-tie-rung Per-tur-ba-ti-o-nen}
+\hyphenation{Ge-o-me-trisch Ar-te-fakt In-ko-mpa-ti-bi-li-tät Kon-struk-tiv}
+\hyphenation{Frak-tal Di-men-si-ons-los Un-ter-such-ung Be-schrei-bung}
+\hyphenation{In-ter-pre-ta-ti-on Phe-no-me-no-lo-gisch Ma-the-ma-tisch}
+\hyphenation{Phi-lo-so-phisch Le-gi-ti-ma-ti-on An-wen-dung Ab-lei-tung}
+\hyphenation{Ver-ein-heit-li-chung An-na-hme Vor-stel-lung Er-war-tung}
+\hyphenation{Sym-me-trie-ern-wei-te-rung Ge-samt-bild Her-aus-fo-rde-rung}
+\hyphenation{Wech-sel-wir-kung Ma-te-ri-al An-satz Per-spek-ti-ve Vor-ge-hen}
+
+% === KAPITEL 3: SCHRIFTEN (mit deutschen Ligaturen) ===
+\setmainfont{Inter}[
+Scale=1.02,
+UprightFont=*-Regular,
+BoldFont=*-Bold,
+ItalicFont=*-Italic,
+BoldItalicFont=*-BoldItalic,
+Ligatures=TeX,           % WICHTIG für deutsche Typografie
+Language=German          % Explizite Sprachunterstützung
+]
+\setsansfont{Inter}[
+Scale=MatchLowercase,
+Ligatures=TeX,
+Language=German
+]
+\setmonofont{JetBrains Mono}[
+Scale=0.95,
+Language=German
+]
+
+% Math Font (simple & stable) – MUSS NACH der Sprachdefinition kommen
+% WICHTIG: Libertinus Math für korrekte \underbrace-Darstellung!
+\setmathfont{Libertinus Math}[Scale=1.0]
+
+% === KAPITEL 4: MATHEMATIK-PAKETE (in STRENGER Reihenfolge!) ===
+% WICHTIG: mathtools muss VOR unicode-math für manche Befehle!
+\usepackage{mathtools}           % ZUERST mathtools!
+
+% Dann der Rest
+\usepackage{amsmath, amsfonts, amsthm}
+
+% SIUNITX MUSS VOR physics geladen werden!
+\usepackage{siunitx}
+\sisetup{
+	locale=DE,                    % DEUTSCHE Einstellungen für SI-Einheiten!
+	group-separator={.},          % Tausendertrennzeichen Punkt
+	output-decimal-marker={,},    % Dezimaltrennzeichen Komma
+	per-mode=symbol,
+	separate-uncertainty=true
+}
+
+% Benutzerdefinierte SI-Einheiten für Narrative und Bücher
+\DeclareSIUnit\gigalightyear{Gly}
+\DeclareSIUnit\mev{MeV}
+
+% physics – MUSS NACH siunitx und mathtools geladen werden
+\usepackage{physics}
+
+% === KAPITEL 5: ERGÄNZUNGEN aus pdflatex-Best Practices ===
+\usepackage{colortbl}        % Farbige Tabellen (ESSENTIELL!)
+\usepackage{placeins}        % Float-Kontrolle: \FloatBarrier
+\usepackage{subcaption}      % Unterabbildungen
+\usepackage{xurl}            % Bessere URL-Umbrüche
+% Hyphenation for URLs in bibliography
+\def\UrlBreaks{\do\/\do-}
+
+% === KAPITEL 6: SEITENGESTALTUNG =
+% =============================================================================
+% SECTION 2: Page Geometry – 6" × 9" Buchformat
+% =============================================================================
+\usepackage[paperwidth=6in, paperheight=9in,
+top=0.9in,
+bottom=1.1in,
+inner=0.9in,            % Größerer Innenrand für Bindung
+outer=0.6in,            % Kleinerer Außenrand → mehr Text pro Seite
+bindingoffset=0.5in,    % Puffer für Bindung (Steg)
+twoside]{geometry}
+\setlength{\headheight}{15pt}
+%\usepackage[paperwidth=8.25in, paperheight=11in,
+%top=1.0in,
+%bottom=1.0in,
+%left=1.0in,
+%right=1.0in,
+%twoside=false
+
+% === KAPITEL 7: GRAFIKEN UND TABELLEN ===
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+% T0 Markenfarben
+\definecolor{gold}{RGB}{255,215,0}
+\definecolor{blue}{rgb}{0,0,1}
+\definecolor{boxgray}{RGB}{240,240,240}
+\definecolor{deepblue}{RGB}{0,0,127}
+\definecolor{deepgreen}{RGB}{0,127,0}
+\definecolor{deepred}{RGB}{191,0,0}
+\definecolor{t0blue}{RGB}{33,150,243}
+\definecolor{t0green}{RGB}{76,175,80}
+\definecolor{t0orange}{RGB}{255,152,0}
+\definecolor{t0purple}{RGB}{156,39,176}
+\definecolor{t0red}{RGB}{244,67,54}
+\definecolor{t0yellow}{RGB}{255,204,0}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,decorations.pathmorphing,patterns,shapes.arrows,intersections}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{quantikz}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable}
+
+% === WICHTIG: Algorithm-Konflikt umgehen ===
+% Option: algorithmic mit GROSSBUCHSTABEN
+% Gemeinsame Box für Experimente
+\newtcolorbox{experimentbox}[1][]{
+	colback=green!5!white,
+	colframe=t0green!80!black,
+	fonttitle=\bfseries,
+	title={{#1}},
+	breakable
+}
+
+% Abstract-Fallback
+\ifdefined\abstract\else
+\newenvironment{abstract}{\section*{\abstractname}\itshape\small\par\bigskip}{\bigskip}
+\fi
+
+% === MAKROS SICHER NEU DEFINIEREN / ÜBERSCHREIBEN ===
+% Definiere Makros OHNE doppelte Subskripte
+\newcommand{\phipar}{\phi_{\mathrm{par}}}
+%\newcommand{\xipar}{\xi_{\mathrm{par}}}
+\newcommand{\Qphipar}{Q_{\phi_{\mathrm{par}}}}
+\newcommand{\rphipar}{r_{\phi_{\mathrm{par}}}}
+\newcommand{\logphipar}{\log_{\phi_{\mathrm{par}}}}
+\newcommand{\CHSH}{\text{CHSH}}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{adjustbox}
+\usepackage{rotating}
+\usepackage{tabularx}
+\usepackage{makecell}
+\usepackage{multirow}
+
+% === KAPITEL 8: DOKUMENTFORMATIERUNG ===
+\usepackage{fancyhdr}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\usepackage{tocloft}
+
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=*, topsep=2pt, partopsep=0pt, parsep=2pt, itemsep=2pt}
+\setlist[enumerate]{leftmargin=*, topsep=2pt, partopsep=0pt, parsep=2pt, itemsep=2pt}
+\usepackage{setspace}
+\usepackage{ragged2e}
+\usepackage{multicol}
+
+% === KAPITEL 9: CODE UND ALGORITHMEN ===
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{listings}
+\lstset{
+	basicstyle=\ttfamily\footnotesize,
+	breaklines=true,
+	breakatwhitespace=true,
+	columns=flexible,
+	keepspaces=true,
+	showstringspaces=false,
+	frame=single,
+	xleftmargin=0pt,
+	xrightmargin=0pt,
+	literate=              % Für deutsche Umlaute in Code-Listings
+	{ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1 {ß}{{\ss}}1
+	{Ä}{{\"A}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+}
+\usepackage{mdframed}
+
+% === KAPITEL 10: ZUSÄTZLICHE PAKETE ===
+\usepackage{pdflscape}
+\usepackage{braket}
+\usepackage{cancel}
+\usepackage{caption}
+\captionsetup{format=plain, labelfont=bf, justification=centering}
+\usepackage{csquotes}
+\usepackage{gensymb}
+\usepackage{textcomp}
+\usepackage{textgreek}
+\usepackage{upgreek}
+\usepackage{url}
+\usepackage{slashed}
+\usepackage{bm}
+
+% === KAPITEL 11: HYPERREF (muss als VORLETZTES Paket kommen!) ===
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	citecolor=black,
+	urlcolor=black,
+	breaklinks=true,           % WICHTIG für deutsche Umlaute in URLs!
+	bookmarksnumbered=true,
+	unicode=true,
+	pdfencoding=auto,
+	pdflang=de,                % PDF-Sprache auf Deutsch setzen
+	pdfsubject={T0 Theorie - Fundamental Fractal-Geometric Field Theory}
+}
+
+% Fix for unicode-math symbols in PDF bookmarks
+\pdfstringdefDisableCommands{%
+	\def\xi{xi}%
+	\def\alpha{alpha}%
+	\def\beta{beta}%
+	\def\gamma{gamma}%
+	\def\delta{delta}%
+	\def\Delta{Delta}%
+	\def\epsilon{epsilon}%
+	\def\varepsilon{epsilon}%
+	\def\theta{theta}%
+	\def\kappa{kappa}%
+	\def\lambda{lambda}%
+	\def\mu{mu}%
+	\def\nu{nu}%
+	\def\pi{pi}%
+	\def\rho{rho}%
+	\def\sigma{sigma}%
+	\def\tau{tau}%
+	\def\phi{phi}%
+	\def\chi{chi}%
+	\def\psi{psi}%
+	\def\omega{omega}%
+	\def\Omega{Omega}%
+	\def\Lambda{Lambda}%
+	\def\times{x}%
+	\def\cdot{*}%
+	\def\pm{+/-}%
+	\def\approx{~}%
+	\def\sim{~}%
+	\def\equiv{=}%
+	\def\ell{l}%
+	\def\hbar{h}%
+	\def\rightarrow{->}%
+	\def\leftarrow{<-}%
+	\def\Rightarrow{=>}%
+	\def\Leftarrow{<=}%
+	\def\propto{~}%
+	\def\mitxi{xi}%
+	\def\mitalpha{alpha}%
+	\def\mitbeta{beta}%
+	\def\mitgamma{gamma}%
+	\def\mitdelta{delta}%
+	\def\mitDelta{Delta}%
+	\def\mitepsilon{epsilon}%
+	\def\mitvarepsilon{epsilon}%
+	\def\mittheta{theta}%
+	\def\mitkappa{kappa}%
+	\def\mitlambda{lambda}%
+	\def\mitLambda{Lambda}%
+	\def\mitmu{mu}%
+	\def\mitnu{nu}%
+	\def\mitpi{pi}%
+	\def\mitrho{rho}%
+	\def\mitsigma{sigma}%
+	\def\mittau{tau}%
+	\def\mitphi{phi}%
+	\def\mitchi{chi}%
+	\def\mitpsi{psi}%
+	\def\mitomega{omega}%
+	\def\mitOmega{Omega}%
+}
+
+% === KAPITEL 12: BOOKMARK (muss NACH hyperref kommen!) ===
+\usepackage{bookmark}
+
+% === KAPITEL 13: CLEVEREF (DEUTSCHE LABELS) ===
+\usepackage[ngerman]{cleveref}
+\crefname{equation}{Gleichung}{Gleichungen}
+\crefname{figure}{Abbildung}{Abbildungen}
+\crefname{table}{Tabelle}{Tabellen}
+\crefname{section}{Abschnitt}{Abschnitte}
+\crefname{chapter}{Kapitel}{Kapitel}
+\crefname{theorem}{Satz}{Sätze}
+\crefname{lemma}{Lemma}{Lemmata}
+\crefname{definition}{Definition}{Definitionen}
+\crefname{example}{Beispiel}{Beispiele}
+\crefname{remark}{Bemerkung}{Bemerkungen}
+
+% === BENUTZERDEFINIERTE UMGEBUNGEN ===
+% Alternative interpretation environment
+\newenvironment{alternative}{%
+	\begin{mdframed}[linecolor=black!30,linewidth=1pt,roundcorner=4pt,backgroundcolor=black!5]%
+	}{%
+	\end{mdframed}%
+}
+
+% Photon/particle environment
+\newenvironment{photon}{%
+	\begin{mdframed}[linecolor=blue!30,linewidth=1pt,roundcorner=4pt,backgroundcolor=blue!5]%
+	}{%
+	\end{mdframed}%
+}
+
+% Koide formula box environment
+\newenvironment{koidebox}{%
+	\begin{mdframed}[linecolor=green!30,linewidth=1pt,roundcorner=4pt,backgroundcolor=green!5]%
+	}{%
+	\end{mdframed}%
+}
+
+% Erkenntnis/insight environment
+\newenvironment{erkenntnis}{%
+	\begin{mdframed}[linecolor=orange!30,linewidth=1pt,roundcorner=4pt,backgroundcolor=orange!5]%
+	}{%
+	\end{mdframed}%
+}
+
+% Beziehung/relationship environment
+\newenvironment{beziehung}{%
+	\begin{mdframed}[linecolor=purple!30,linewidth=1pt,roundcorner=4pt,backgroundcolor=purple!5]%
+	}{%
+	\end{mdframed}%
+}
+
+% Derivation environment
+\newenvironment{derivation}{%
+	\begin{mdframed}[linecolor=teal!30,linewidth=1pt,roundcorner=4pt,backgroundcolor=teal!5]%
+	}{%
+	\end{mdframed}%
+}
+
+% Abhandlung/treatise environment
+\newenvironment{abhandlung}{%
+	\begin{mdframed}[linecolor=brown!30,linewidth=1pt,roundcorner=4pt,backgroundcolor=brown!5]%
+	}{%
+	\end{mdframed}%
+}
+
+% Anwendung/application environment
+\newenvironment{anwendung}{%
+	\begin{mdframed}[linecolor=cyan!30,linewidth=1pt,roundcorner=4pt,backgroundcolor=cyan!5]%
+	}{%
+	\end{mdframed}%
+}
+
+% Additional common environments
+\newenvironment{konsequenz}{%
+	\begin{mdframed}[linecolor=red!30,linewidth=1pt,roundcorner=4pt,backgroundcolor=red!5]%
+	}{%
+	\end{mdframed}%
+}
+
+\newenvironment{schlussfolgerung}{%
+	\begin{mdframed}[linecolor=gray!30,linewidth=1pt,roundcorner=4pt,backgroundcolor=gray!5]%
+	}{%
+	\end{mdframed}%
+}
+
+\newenvironment{result}{%
+	\begin{mdframed}[linecolor=violet!30,linewidth=1pt,roundcorner=4pt,backgroundcolor=violet!5]%
+	}{%
+	\end{mdframed}%
+}
+
+% Formula environment
+\newenvironment{formula}{%
+	\begin{mdframed}[linecolor=yellow!30,linewidth=1pt,roundcorner=4pt,backgroundcolor=yellow!5]%
+	}{%
+	\end{mdframed}%
+}
+
+% Revolutionaer/revolutionary environment
+\newenvironment{revolutionaer}{%
+	\begin{mdframed}[linecolor=red!50,linewidth=2pt,roundcorner=4pt,backgroundcolor=red!10]%
+	}{%
+	\end{mdframed}%
+}
+
+% Formel environment (German version of formula)
+\newenvironment{formel}{%
+	\begin{mdframed}[linecolor=yellow!30,linewidth=1pt,roundcorner=4pt,backgroundcolor=yellow!5]%
+	}{%
+	\end{mdframed}%
+}
+
+% Prinzip/principle environment
+\newenvironment{prinzip}{%
+	\begin{mdframed}[linecolor=blue!50,linewidth=2pt,roundcorner=4pt,backgroundcolor=blue!10]%
+	}{%
+	\end{mdframed}%
+}
+
+% Experimentell/experimental environment
+\newenvironment{experimentell}{%
+	\begin{mdframed}[linecolor=magenta!30,linewidth=1pt,roundcorner=4pt,backgroundcolor=magenta!5]%
+	}{%
+	\end{mdframed}%
+}
+
+% Neutrino environment
+\newenvironment{neutrino}{%
+	\begin{mdframed}[linecolor=cyan!40,linewidth=1pt,roundcorner=4pt,backgroundcolor=cyan!8]%
+	}{%
+	\end{mdframed}%
+}
+
+% Additional missing environments
+\newenvironment{schluessel}{%
+	\begin{mdframed}[linecolor=yellow!50,linewidth=1pt,roundcorner=4pt,backgroundcolor=yellow!10]%
+	}{%
+	\end{mdframed}%
+}
+
+\newenvironment{summary}{%
+	\begin{mdframed}[linecolor=gray!40,linewidth=1pt,roundcorner=4pt,backgroundcolor=gray!8]%
+	}{%
+	\end{mdframed}%
+}
+
+\newenvironment{category}{%
+	\begin{mdframed}[linecolor=pink!40,linewidth=1pt,roundcorner=4pt,backgroundcolor=pink!8]%
+	}{%
+	\end{mdframed}%
+}
+
+\newenvironment{sibox}{%
+	\begin{mdframed}[linecolor=lime!40,linewidth=1pt,roundcorner=4pt,backgroundcolor=lime!8]%
+	}{%
+	\end{mdframed}%
+}
+
+% More missing environments
+\newenvironment{documentbox}{%
+	\begin{mdframed}[linecolor=teal!40,linewidth=1pt,roundcorner=4pt,backgroundcolor=teal!8]%
+	}{%
+	\end{mdframed}%
+}
+
+\newenvironment{t0box}{%
+	\begin{mdframed}[linecolor=violet!40,linewidth=1pt,roundcorner=4pt,backgroundcolor=violet!8]%
+	}{%
+	\end{mdframed}%
+}
+
+\newenvironment{wichtig}{%
+	\begin{mdframed}[linecolor=red!50,linewidth=2pt,roundcorner=4pt,backgroundcolor=red!10]%
+	\textbf{Wichtig:} 
+	}{%
+	\end{mdframed}%
+}
+
+\newenvironment{smbox}{%
+	\begin{mdframed}[linecolor=orange!40,linewidth=1pt,roundcorner=4pt,backgroundcolor=orange!8]%
+	}{%
+	\end{mdframed}%
+}
+
+\newenvironment{pvbox}{%
+	\begin{mdframed}[linecolor=purple!40,linewidth=1pt,roundcorner=4pt,backgroundcolor=purple!8]%
+	}{%
+	\end{mdframed}%
+}
+
+\newenvironment{numerisch}{%
+	\begin{mdframed}[linecolor=blue!40,linewidth=1pt,roundcorner=4pt,backgroundcolor=blue!8]%
+	}{%
+	\end{mdframed}%
+}
+
+% More missing environments
+\newenvironment{relation}{%
+	\begin{mdframed}[linecolor=green!40,linewidth=1pt,roundcorner=4pt,backgroundcolor=green!8]%
+	}{%
+	\end{mdframed}%
+}
+
+\newenvironment{beweis}{%
+	\begin{mdframed}[linecolor=brown!40,linewidth=1pt,roundcorner=4pt,backgroundcolor=brown!8]%
+	\textbf{Beweis:} 
+	}{%
+	\end{mdframed}%
+}
+
+\newenvironment{revolution}{%
+	\begin{mdframed}[linecolor=red!60,linewidth=2pt,roundcorner=4pt,backgroundcolor=red!12]%
+	}{%
+	\end{mdframed}%
+}
+
+\newenvironment{key}{%
+	\begin{mdframed}[linecolor=yellow!50,linewidth=1pt,roundcorner=4pt,backgroundcolor=yellow!10]%
+	}{%
+	\end{mdframed}%
+}
+
+\newenvironment{newperspective}{%
+	\begin{mdframed}[linecolor=cyan!50,linewidth=1pt,roundcorner=4pt,backgroundcolor=cyan!10]%
+	}{%
+	\end{mdframed}%
+}
+
+\newenvironment{literatur}{%
+	\begin{mdframed}[linecolor=gray!50,linewidth=1pt,roundcorner=4pt,backgroundcolor=gray!10]%
+	}{%
+	\end{mdframed}%
+}
+
+\newenvironment{folgerung}{%
+	\begin{mdframed}[linecolor=teal!50,linewidth=1pt,roundcorner=4pt,backgroundcolor=teal!10]%
+	}{%
+	\end{mdframed}%
+}
+
+\newenvironment{principle}{%
+	\begin{mdframed}[linecolor=blue!60,linewidth=2pt,roundcorner=4pt,backgroundcolor=blue!12]%
+	}{%
+	\end{mdframed}%
+}
+
+% Additional common environments
+% ==============================================================================
+% AB HIER: IHRE DEFINITIONEN (angepasst für Deutsch)
+% ==============================================================================
+
+\setcounter{tocdepth}{3}
+
+% === ZITATBEFEHLE ===
+\providecommand{\citep}[1]{\cite{#1}}
+\providecommand{\citet}[1]{\cite{#1}}
+
+% === FARBEN ===
+\definecolor{gold}{RGB}{255,215,0}
+\definecolor{blue}{rgb}{0,0,1}
+\definecolor{boxgray}{RGB}{240,240,240}
+\definecolor{deepblue}{RGB}{0,0,127}
+\definecolor{deepgreen}{RGB}{0,127,0}
+\definecolor{deepred}{RGB}{191,0,0}
+\definecolor{t0blue}{RGB}{33,150,243}
+\definecolor{t0green}{RGB}{76,175,80}
+\definecolor{t0orange}{RGB}{255,152,0}
+\definecolor{t0purple}{RGB}{156,39,176}
+\definecolor{t0red}{RGB}{244,67,54}
+\definecolor{t0yellow}{RGB}{255,204,0}
+
+% === SPALTENTYPEN ===
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+% === HYPERREF-EINSTELLUNGEN (aktualisiert) ===
+\hypersetup{
+	colorlinks=true,
+	linkcolor=t0blue,
+	citecolor=t0blue,
+	urlcolor=t0blue,
+	breaklinks=true,
+	bookmarksnumbered=true,
+	pdfstartview=FitH,
+	pdfencoding=auto,
+	pdfdisplaydoctitle=true
+}
+
+% === DEUTSCHE THEOREM-UMGEBUNGEN ===
+\theoremstyle{plain}
+\newtheorem{theorem}{Satz}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Korollar}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Beispiel}
+\newtheorem{insight}[theorem]{Erkenntnis}
+\newtheorem{discovery}[theorem]{Entdeckung}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Bemerkung}
+\newtheorem{axiom}{Axiom}
+%\newtheorem{principle}{Principle}  % Commented out to avoid conflicts with document-specific definitions
+\newtheorem{warnung}[theorem]{Warnung}
+
+% === T0-SPEZIFISCHE BEFEHLE ===
+% (Hier folgen alle Ihre \newcommand und \providecommand Definitionen)
+% Diese bleiben UNVERÄNDERT wie in Ihrer Original-Preamble
+% ==============================================================================
+% SECTION 14: T0-Specific Commands
+% ==============================================================================
+
+% --- Core T0 Fields ---
+\newcommand{\Tfield}{T(x,t)}
+\providecommand{\Tfieldt}{T(\vec{x},t)}
+\newcommand{\Efield}{E(x,t)}
+\newcommand{\mfield}{m(x,t)}
+\providecommand{\vecx}{\vec{x}}
+
+% --- Lagrangian ---
+\newcommand{\Lag}{\mathcal{L}}
+\newcommand{\calL}{\mathcal{L}}
+
+% --- Greek Letters and Constants ---
+\newcommand{\alphaem}{\alpha}
+\newcommand{\betaT}{\beta_T}
+\newcommand{\xiT}{\xi}
+\newcommand{\xipar}{\xi}
+
+% --- Energy and Planck Units ---
+\newcommand{\Ezero}{E_0}
+\newcommand{\EPlanck}{E_{\text{Pl}}}
+\newcommand{\Mpl}{M_{\text{Pl}}}
+\newcommand{\mP}{m_{\text{P}}}
+\newcommand{\lP}{\ell_{\text{P}}}
+\newcommand{\tP}{t_{\text{P}}}
+\newcommand{\LPlanck}{\ell_{\text{Pl}}}
+\newcommand{\TPlanck}{t_{\text{Pl}}}
+
+% --- Coupling Constants ---
+\newcommand{\Gnat}{G_{\text{nat}}}
+\newcommand{\alphaEM}{\alpha_{\text{EM}}}
+\newcommand{\alphaSI}{\alpha_{\text{SI}}}
+\newcommand{\Hubble}{H_0}
+\newcommand{\LCDM}{\Lambda\text{CDM}}
+\newcommand{\natunits}{(nat. units)}
+
+% --- T0 Model Parameters ---
+\newcommand{\xigeom}{\xi_{\mathrm{geom}}}
+\newcommand{\rzero}{r_{0}}
+\newcommand{\xirat}{\xi_{\mathrm{rat}}}
+\newcommand{\tzero}{t_{0}}
+\newcommand{\Lambdat}{\Lambda_{\mathrm{t}}}
+\newcommand{\EP}{E_{\text{P}}}
+\newcommand{\Emu}{E_{\mu}}
+\newcommand{\Ee}{E_{e}}
+\newcommand{\Etau}{E_{\tau}}
+\newcommand{\alphafine}{\alpha_{\mathrm{fine}}}
+\newcommand{\alphal}{\alpha_{\ell}}
+\newcommand{\Lzero}{\ell_{0}}
+\newcommand{\Lp}{\ell_{\mathrm{P}}}
+
+% --- Additional T0 Commands ---
+\newcommand{\Kfrak}{K_{\text{frak}}}
+\newcommand{\Dfrak}{D_{\text{frak}}}
+\newcommand{\betapar}{\ensuremath{\beta_T}}
+\newcommand{\alphapar}{\alpha}
+\newcommand{\deltafield}{\delta \phi}
+\newcommand{\deltam}{\delta m}
+\newcommand{\deltaE}{\delta E}
+\newcommand{\Exi}{E_{\xi}}
+\newcommand{\Lxi}{\ell_{\xi}}
+\newcommand{\rhoCMB}{\rho_{\text{CMB}}}
+\newcommand{\rhoCasimir}{\rho_{\text{Casimir}}}
+\newcommand{\Leff}{L_{\text{eff}}}
+\newcommand{\CQCD}{C_{\mathrm{QCD}}}
+\newcommand{\Kspec}{K_{\mathrm{spec}}}
+\newcommand{\Tzero}{\ensuremath{T_0}}
+\newcommand{\Eabs}{E_{\text{abs}}}
+\newcommand{\taupar}{\tau}
+
+% --- Provided Commands ---
+\providecommand{\xiconst}{\xi_{\text{const}}}
+\providecommand{\DhiggsT}{D_{\text{Higgs-T}}}
+\providecommand{\rhoE}{\rho_{E}}
+\providecommand{\Echar}{E_{\text{char}}}
+\providecommand{\kfrac}{k_{\text{frac}}}
+\providecommand{\alphaEMSI}{\alpha_{\text{EM,SI}}}
+\providecommand{\alphaEMnat}{\alpha_{\text{EM,nat}}}
+\providecommand{\betaTSI}{\beta_{T,\text{SI}}}
+\providecommand{\betaTnat}{\beta_{T,\text{nat}}}
+\providecommand{\Gsi}{G_{\text{SI}}}
+\providecommand{\xiparSI}{\xi_{\text{SI}}}
+\providecommand{\xiparnat}{\xi_{\text{nat}}}
+\providecommand{\meff}{m_{\text{eff}}}
+\providecommand{\Tzerot}{T_{0}(t)}
+\providecommand{\mzerot}{m_{0}(t)}
+\providecommand{\Ezeroabs}{E_{0,\text{abs}}}
+\providecommand{\Epar}{E_{\text{par}}}
+\providecommand{\Lnat}{\ell_{\text{nat}}}
+\providecommand{\Tnat}{T_{\text{nat}}}
+\providecommand{\xifrak}{\xi_{\text{frac}}}
+\providecommand{\Tfrak}{T_{\text{frac}}}
+\providecommand{\mfrak}{m_{\text{frac}}}
+\providecommand{\Dfrac}{D_{\text{frac}}}
+\providecommand{\EphotSI}{E_{\gamma,\text{SI}}}
+\providecommand{\EphotNat}{E_{\gamma,\text{nat}}}
+\providecommand{\Eabsint}{E_{\text{abs,int}}}
+\providecommand{\mphoton}{m_{\gamma}}
+\providecommand{\Evis}{E_{\text{vis}}}
+\providecommand{\Cto}{C_{T0}}
+\providecommand{\mytimes}{\times}
+\providecommand{\lambdah}{\lambda_h}
+\providecommand{\checkmarkx}{\checkmark}
+\providecommand{\Enorm}{E_{\text{norm}}}
+\providecommand{\Tobs}{T_{\text{obs}}}
+\providecommand{\mobs}{m_{\text{obs}}}
+\providecommand{\Eobs}{E_{\text{obs}}}
+\providecommand{\Lobs}{\ell_{\text{obs}}}
+\providecommand{\xobs}{\xi_{\text{obs}}}
+\providecommand{\calE}{\mathcal{E}}
+\providecommand{\calT}{\mathcal{T}}
+\providecommand{\calM}{\mathcal{M}}
+\providecommand{\alphag}{\alpha_g}
+\providecommand{\Tmax}{T_{\text{max}}}
+\providecommand{\mmin}{m_{\text{min}}}
+\providecommand{\Lmax}{\ell_{\text{max}}}
+\providecommand{\Emin}{E_{\text{min}}}
+\providecommand{\Geff}{G_{\text{eff}}}
+\providecommand{\rhoeff}{\rho_{\text{eff}}}
+\providecommand{\xieff}{\xi_{\text{eff}}}
+\providecommand{\Teff}{T_{\text{eff}}}
+\providecommand{\hPlanck}{h}
+\providecommand{\kB}{k_B}
+\providecommand{\muB}{\mu_B}
+\providecommand{\lambdaC}{\lambda_C}
+\providecommand{\omegaP}{\omega_P}
+\providecommand{\rhoP}{\rho_P}
+\providecommand{\Tref}{T_{\text{ref}}}
+\providecommand{\Eref}{E_{\text{ref}}}
+\providecommand{\mref}{m_{\text{ref}}}
+\providecommand{\Lref}{\ell_{\text{ref}}}
+\providecommand{\xikonst}{\xi_0}
+\providecommand{\Phiphoton}{\Phi_{\gamma}}
+\providecommand{\etavis}{\eta_{\text{vis}}}
+\providecommand{\pichar}{\pi}
+\providecommand{\primrel}{\mathcal{P}_{\text{rel}}}
+\providecommand{\warningx}{\textcolor{orange}{\textbf{!}}}
+\providecommand{\phiT}{\phi_T}
+\providecommand{\Lorentz}{\Lambda}
+\providecommand{\Cconv}{C_{\text{conv}}}
+\providecommand{\Df}{\Delta f}
+\providecommand{\lambdazero}{\lambda_0}
+\providecommand{\myapprox}{\approx}
+\providecommand{\checked}{\checkmark}
+\providecommand{\alphaWSI}{\alpha_W^{\text{SI}}}
+\providecommand{\alphaWnat}{\alpha_W^{\text{nat}}}
+\providecommand{\vect}[1]{\vec{#1}}
+\providecommand{\Rzero}{R_0}
+\providecommand{\Riem}{\mathcal{R}}
+\providecommand{\nuzero}{\nu_0}
+\providecommand{\mypi}{\pi}
+
+% =============================================================================
+% TCOLORBOX-STILE UND UMGEBUNGEN (deutsche Titel)
+% =============================================================================
+\tcbset{
+	keyresult/.style={
+		colback=blue!5!white,
+		colframe=blue!75!black,
+		title=Schlüsselergebnis,
+		fonttitle=\bfseries
+	},
+	foundation/.style={
+		colback=green!5!white,
+		colframe=green!75!black,
+		title=Grundlage,
+		fonttitle=\bfseries
+	},
+	alternative/.style={
+		colback=orange!5!white,
+		colframe=orange!75!black,
+		title=Alternative,
+		fonttitle=\bfseries
+	},
+	warningbox/.style={
+		colback=red!5!white,
+		colframe=red!75!black,
+		title=Warnung,
+		fonttitle=\bfseries
+	}
+}
+
+% (Hier folgen alle Ihre tcolorbox-Definitionen mit deutschen Titeln)
+\newtcolorbox{keyresultbox}[1][]{colback=blue!5!white,colframe=blue!75!black,fonttitle=\bfseries,title={#1},breakable}
+\newtcolorbox{keyresult}[1][Schlüsselergebnis]{colback=blue!5!white,colframe=blue!75!black,fonttitle=\bfseries,title={#1},breakable}
+\newtcolorbox{foundationbox}[1][]{colback=green!5!white,colframe=green!75!black,fonttitle=\bfseries,title={#1},breakable}
+\newtcolorbox{foundation}[1][Grundlage]{colback=green!5!white,colframe=green!75!black,fonttitle=\bfseries,title={#1},breakable}
+\newtcolorbox{alternativebox}[1][]{colback=orange!5!white,colframe=orange!75!black,fonttitle=\bfseries,title={#1},breakable}
+\newtcolorbox{warningboxenv}[1][Warnung]{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,title={#1},breakable}
+
+\newtcolorbox{fundamental}[1][]{
+	colback=boxgray,
+	colframe=t0blue,
+	fonttitle=\bfseries,
+	title=#1,
+	sharp corners,
+	boxrule=2pt
+}
+
+\newtcolorbox{insightBox}[1][Erkenntnis]{colback=blue!5,colframe=t0blue,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{discoveryBox}[1][Entdeckung]{colback=green!5,colframe=t0green,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{revelation}[1][Offenbarung]{colback=red!5,colframe=t0red,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{keypoint}[1][Schlüsselpunkt]{colback=blue!5,colframe=t0blue,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{evidence}[1][Beleg]{colback=green!5,colframe=t0green,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{conclusionBox}[1][Fazit]{colback=gray!5,colframe=gray,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{significance}[1][Bedeutung]{colback=yellow!5,colframe=orange,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{philosophical}[1][Philosophisch]{colback=purple!5,colframe=purple,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{implicationBox}[1][Implikation]{colback=cyan!5,colframe=cyan,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{perspectiveBox}[1][Perspektive]{colback=blue!5,colframe=t0blue,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{revolutionary}[1][Revolutionär]{colback=red!5,colframe=t0red,title={#1},fonttitle=\bfseries,breakable}
+
+\newtcolorbox{technical}[1][Technisch]{colback=gray!5,colframe=gray!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{technicalBox}[1][Technisch]{colback=gray!5,colframe=gray!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{notationBox}[1][Notation]{colback=yellow!5,colframe=yellow!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{verification}[1][Verifikation]{colback=orange!5!white,colframe=orange!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{explanationBox}[1][Erklärung]{colback=purple!5!white,colframe=purple!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{interpretationBox}[1][Interpretation]{colback=cyan!5!white,colframe=cyan!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{explanation}[1][Erklärung]{colback=purple!5!white,colframe=purple!75!black,fonttitle=\bfseries,title=#1,breakable}
+\newtcolorbox{interpretation}[1][Interpretation]{colback=cyan!5!white,colframe=cyan!75!black,fonttitle=\bfseries,title=#1,breakable}
+\newtcolorbox{proof_step}[1][Beweisschritt]{colback=gray!5!white,colframe=gray!75!black,fonttitle=\bfseries,title=#1,breakable}
+\newtcolorbox{experimental}[1][Experimentell]{colback=teal!5!white,colframe=teal!75!black,fonttitle=\bfseries,title=#1,breakable}
+
+\newtcolorbox{important}[1][Wichtig]{colback=red!5!white,colframe=red!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{warning}[1][Warnung]{colback=orange!5!white,colframe=orange!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{caution}[1][Vorsicht]{colback=yellow!5!white,colframe=yellow!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{highlight}[1][Hervorhebung]{colback=yellow!10!white,colframe=yellow!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{critical}[1][Kritisch]{colback=red!10!white,colframe=red!75!black,title={#1},fonttitle=\bfseries,breakable}
+
+\newtcolorbox{analysis}[1][Analyse]{colback=blue!5!white,colframe=blue!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{application}[1][Anwendung]{colback=green!5!white,colframe=green!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{experiment}[1][Experiment]{colback=cyan!5!white,colframe=cyan!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{historical}[1][Historisch]{colback=brown!5!white,colframe=brown!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{numerical}[1][Numerisch]{colback=gray!5!white,colframe=gray!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{overview}[1][Überblick]{colback=blue!5!white,colframe=blue!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{speculation}[1][Spekulation]{colback=purple!5!white,colframe=purple!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{question}[1][Frage]{colback=orange!5!white,colframe=orange!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{method}[1][Methode]{colback=teal!5!white,colframe=teal!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{correct}[1][Korrekt]{colback=green!10!white,colframe=green!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{units}[1][Einheiten]{colback=gray!5!white,colframe=gray!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{achievement}[1][Errungenschaft]{colback=gold!5!white,colframe=orange!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{equivalence}[1][Äquivalenz]{colback=cyan!5!white,colframe=cyan!75!black,title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{dimensional}[1][Dimensionsanalyse]{colback=purple!5!white,colframe=purple!75!black,title={#1},fonttitle=\bfseries,breakable}
+
+% === ZUSÄTZLICHE EINFACHE UMGEBUNGEN ===
+\newenvironment{treatise}{\begin{quote}}{\end{quote}}
+\newenvironment{gemeinsam}{\begin{quote}}{\end{quote}}
+\newenvironment{vergleich}{\begin{quote}}{\end{quote}}
+\newenvironment{vorteil}{\begin{quote}}{\end{quote}}
+\newenvironment{quantum}{\begin{quote}}{\end{quote}}
+
+% === LAYOUT-EINSTELLUNGEN ===
+\raggedbottom
+\usepackage{environ}
+\let\oldtabular\tabular
+\let\endoldtabular\endtabular
+
+\newenvironment{scaledtable}[1][0.85]{%
+	\begingroup\footnotesize\setlength{\LTleft}{0pt}\setlength{\LTright}{0pt}%
+}{%
+	\endgroup%
+}
+
+\newcommand{\widetable}[1]{\resizebox{\textwidth}{!}{#1}}
+
+% === INHALTSVERZEICHNIS-FORMATIERUNG ===
+\renewcommand{\cftsecfont}{\color{blue}}
+\renewcommand{\cftsubsecfont}{\color{blue}}
+\renewcommand{\cftsecpagefont}{\color{blue}}
+\renewcommand{\cftsubsecpagefont}{\color{blue}}
+\renewcommand{\cfttoctitlefont}{\huge\bfseries\color{blue}}
+
+% === STANDARD-KOPF- UND FUßZEILE ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textsc{T0 Theorie}}
+\fancyhead[R]{\textsc{J. Pascher}}
+\fancyfoot[C]{\thepage}
+
+% ==============================================================================
+% Ende der Shared Preamble für Deutsch
+% ==============================================================================
+
+

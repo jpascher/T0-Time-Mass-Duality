@@ -14,8 +14,6 @@ twoside
 \input{T0_preamble_En.tex}
 
 \begin{document}
-% Unterdrücke leere Seiten
-\let\cleardoublepage\clearpage
 
 % RESET alle Zähler am Anfang
 \setcounter{section}{0}
@@ -25,18 +23,60 @@ twoside
 
 % Tiefe für Nummerierung und TOC
 \setcounter{secnumdepth}{1}  % Nur Sections nummerieren
-\setcounter{tocdepth}{1}     % Nur Sections im TOC	
-	\begin{center}
-		\vspace*{2cm}
-		{\Huge\textbf{FFGFT: Time-Mass Duality}}\\[1cm]
-		{\Large Part 2: Mathematical Foundations and Formulas}\\[2cm]
-	\end{center}
+% Part in TOC: footnotesize, bold, NO page break
+\makeatletter
+\renewcommand*\l@part[2]{%
+  \ifnum \c@tocdepth >-2\relax
+    \addpenalty{-\@highpenalty}%
+    \addvspace{0.8em \@plus\p@}%
+    {\leftskip 0em \relax
+     \rightskip \@tocrmarg
+     \parfillskip -\rightskip
+     \parindent 0em \relax\@afterindenttrue
+     \interlinepenalty\@M
+     \leavevmode
+     {\footnotesize\bfseries #1}\nobreak
+     \leaders\hbox{$\m@th\mkern \@dotsep mu\hbox{}\mkern \@dotsep mu$}\hfill
+     \nobreak\hb@xt@\@pnumwidth{\hss #2}\par}%
+    \addvspace{0.2em \@plus\p@}%
+    \nobreak
+  \fi}
+\makeatother
+
+% Chapter in TOC: footnotesize, bold
+\renewcommand{\cftchapfont}{\footnotesize\bfseries}
+\renewcommand{\cftchappagefont}{\footnotesize\bfseries}
+\setlength{\cftbeforechapskip}{0.3em}
+
+% Only Chapters in TOC (no Sections/Subsections)
+\setcounter{tocdepth}{0}
+	\begin{titlepage}
+	\centering
+	\vspace*{2cm}
+	
+	{\Huge\bfseries The T0 Theory (FFGFT)}\\[0.8cm]
+	{\LARGE Fundamental Fractal Geometric Field Theory}\\[0.5cm]
+	{\LARGE Time-Mass Duality}\\[1.5cm]
+	
+	{\Large\itshape Part 2: Mathematical Foundations and Formulas}\\[2cm]
+	
+	{\large Johann Pascher}\\[1cm]
+	
+	{\large 2025}
+	
+	\vfill
+\end{titlepage}
 	
 	\frontmatter
-	\pagestyle{empty}
+	\pagestyle{fancy}
+% Fancy auch auf Chapter/Part-Anfangsseiten erzwingen
+\makeatletter
+\let\ps@plain\ps@fancy
+\let\ps@empty\ps@fancy
+\makeatother
 	
 	\mainmatter
-	\pagestyle{plain}
+	\pagestyle{fancy}
 	
 	\tableofcontents
 	%\listoftables
