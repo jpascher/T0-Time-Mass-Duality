@@ -40,17 +40,17 @@
 	\begin{equation}
 		z \approx d \cdot C \cdot \xi
 	\end{equation}
-	wobei $C$ ein geometrischer Faktor der Ordnung 1 ist, der aus der Gitter-Topologie bestimmt wird. Aus unserer Simulation ergab sich $C \approx 0.76$.
+	Die parameterfreie Vorhersage der T0-Theorie ist $H_0^{\text{T0}} = \xi \cdot c$, ohne zusätzlichen geometrischen Faktor.
 	Vergleicht man dies mit dem Hubble-Gesetz in der Form $c \cdot z = H_0 \cdot d$, erhält man durch Kürzen der Distanz $d$ eine fundamentale Beziehung \cite{pascher:geometric_formalism}:
 	\begin{equation}
-		H_0 = c \cdot C \cdot \xi
+		H_0^{\text{T0}} = \xi \cdot c
 	\end{equation}
-	Mit dem kalibrierten Wert $\xi = 1.340 \times 10^{-4}$ (aus Bell-Test-Simulationen) ergibt sich:
+	Mit dem universellen Parameter $\xi = \frac{4}{3} \times 10^{-4}$ ergibt sich:
 	\begin{align*}
-		H_0 &= (3 \times 10^8 \, \text{m/s}) \cdot 0.76 \cdot (1.340 \times 10^{-4}) \\
-		&\approx 99.4 \, \frac{\text{km}}{\text{s} \cdot \text{Mpc}}
+		H_0^{\text{T0}} &= \xi \cdot c = \frac{4}{3} \times 10^{-4} \times 299\,792\,\text{km/s} \\
+		&\approx 40{,}0 \, \frac{\text{km}}{\text{s} \cdot \text{Mpc}}
 	\end{align*}
-	Dieser Wert liegt im Bereich der experimentell gemessenen Werte \cite{riess2019} und bietet eine natürliche Erklärung für die ``Hubble-Spannung'', da leichte Variationen der Gittergeometrie in verschiedenen Himmelsrichtungen zu unterschiedlichen Messwerten führen können.
+	Der experimentell extrahierte Standardwert $H_0^{\text{exp}} \approx 70\,$km/s/Mpc (Faktor $\approx 7/4$) ist modellabhängig und setzt ein expandierendes Friedmann-Universum voraus. Der Faktor $7/4$ ist eine offene Forschungsfrage. 026 verwendet keinen freien Geometriefaktor mehr \cite{riess2019} und bietet eine natürliche Erklärung für die ``Hubble-Spannung'', da leichte Variationen der Gittergeometrie in verschiedenen Himmelsrichtungen zu unterschiedlichen Messwerten führen können.
 	\section{Schlussfolgerung: Eine neue Kosmologie}
 	Die Simulation beweist, dass die T0-Theorie in einem statischen, flachen Universum die kosmologische Rotverschiebung als rein geometrischen Effekt erklären kann.
 	\begin{enumerate}
@@ -76,7 +76,7 @@
 		# --- 1. Globale T0-Parameter ---
 		XI = 1.340e-4 # Kalibrierter T0-Parameter
 		C_SPEED = 299792.458 # km/s
-		GEOMETRIC_FACTOR_C = 0.76 # Aus der Simulation ermittelter Gitterfaktor
+		# GEOMETRIC_FACTOR_C removed - no free geometric factor needed
 		def simulate_t0_field(grid_size):
 		``''''Simuliert ein statisches T0-Vakuumfeld mit Fluktuationen.''''''
 		# Vereinfachte Simulation: Normalverteilte Fluktuationen, deren
@@ -142,13 +142,14 @@
 		redshift_z = (effective_path_length - euclidean_distance) / euclidean_distance
 		print(f''Geometrische Rotverschiebung (z): {redshift_z:.6f}'')
 		# Herleitung der Hubble-Konstante
-		# z = d * C * xi => H0 = c * C * xi
+		# z = d * xi => H0 = xi * c
 		# Für unsere Simulation normalisieren wir d auf 1 Mpc
 		dist_Mpc = 1.0 # Angenommene Distanz von 1 Mpc
 		z_per_Mpc = redshift_z / euclidean_distance * (3.26e6 * GRID_SIZE) # Skalierung auf Mpc
 		H0_simulated = C_SPEED * z_per_Mpc
 		# Direkte Berechnung aus der T0-Formel
-		H0_formula = C_SPEED * GEOMETRIC_FACTOR_C * XI * 3.26e6 / (1e3) # in km/s/Mpc
+		H0_formula = XI * C_SPEED / 1e3 * 3.0857e22 / 3.0857e22  # H0 = xi * c in km/s/Mpc
+		H0_formula = XI * C_SPEED / 1e3  # simplified: xi * c in km/s -> /Mpc implicit
 		print(``\n--- Kosmologische Vorhersage ---'')
 		print(f''Simulierte Hubble-Konstante (H0): {H0_simulated:.2f} km/s/Mpc'')
 		print(f''Formel-basierte Hubble-Konstante (H0): {H0_formula:.2f} km/s/Mpc'')

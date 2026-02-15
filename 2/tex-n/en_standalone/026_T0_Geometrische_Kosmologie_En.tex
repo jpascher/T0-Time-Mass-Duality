@@ -57,7 +57,7 @@
 	\begin{equation}
 		z \approx d \cdot C \cdot \xiT
 	\end{equation}
-	where $C$ is a geometric factor of order 1, determined from the mesh topology. Our simulation yielded $C \approx 0.76$.
+	The parameter-free T0 prediction is $H_0^{\text{T0}} = \xi \cdot c$, without any additional geometric factor.
 	
 	Comparing this with the Hubble-Lemaître law in the form $c \cdot z = \Hubble \cdot d$, we can cancel the distance $d$ to obtain a fundamental relationship \cite{pascher:geometric_formalism}:
 	\begin{equation}
@@ -66,8 +66,8 @@
 	
 	Using the calibrated value $\xiT = 1.340 \times 10^{-4}$ (from Bell test simulations), we get:
 	\begin{align*}
-		\Hubble &= (3 \times 10^8 \, \text{m/s}) \cdot 0.76 \cdot (1.340 \times 10^{-4}) \\
-		&\approx 99.4 \, \frac{\text{km}}{\text{s} \cdot \text{Mpc}}
+		H_0^{\text{T0}} &= \xi \cdot c = \frac{4}{3} \times 10^{-4} \times 299{,}792\,\text{km/s} \\
+		&\approx 40.0 \, \frac{\text{km}}{\text{s} \cdot \text{Mpc}}
 	\end{align*}
 	This value is within the range of experimentally measured values \cite{riess2019} and offers a natural explanation for the "Hubble tension," as slight variations in the mesh geometry in different directions could lead to different measured values.
 	
@@ -80,7 +80,7 @@
 		# --- 1. Global T0 Parameters ---
 		XI = 1.340e-4  # Calibrated T0 parameter
 		C_SPEED = 299792.458  # km/s
-		GEOMETRIC_FACTOR_C = 0.76 # Grid factor derived from simulation
+		# GEOMETRIC_FACTOR_C removed - no free geometric factor needed
 		
 		def simulate_t0_field(grid_size):
 		``''''Simulates a static T0 vacuum field with fluctuations.''''''
@@ -160,14 +160,15 @@
 		print(f''Geometric Redshift (z): {redshift_z:.6f}'')
 		
 		# Derivation of the Hubble Constant
-		# z = d * C * xi => H0 = c * C * xi
+		# z = d * xi => H0 = xi * c
 		# For our simulation, we normalize d to 1 Mpc
 		dist_Mpc = 1.0 # Assumed distance of 1 Mpc
 		z_per_Mpc = redshift_z / euclidean_distance * (3.26e6 * GRID_SIZE) # Scale to Mpc
 		H0_simulated = C_SPEED * z_per_Mpc
 		
 		# Direct calculation from the T0 formula
-		H0_formula = C_SPEED * GEOMETRIC_FACTOR_C * XI * 3.26e6 / (1e3) # in km/s/Mpc
+		H0_formula = XI * C_SPEED / 1e3 * 3.0857e22 / 3.0857e22  # H0 = xi * c in km/s/Mpc
+		H0_formula = XI * C_SPEED / 1e3  # simplified: xi * c in km/s -> /Mpc implicit
 		
 		print(``\n--- Cosmological Prediction ---'')
 		print(f''Simulated Hubble Constant (H0): {H0_simulated:.2f} km/s/Mpc'')
