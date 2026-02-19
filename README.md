@@ -9,7 +9,7 @@
 
 **Topics (GitHub Topics):** #ffgft #unifiedfieldtheory #quantumrelativity #finestructureconstant #fractalphysics #deterministicqm #geometricconstants #particlephysics #cosmology #quantumgravity #quantumcomputing #rsaquantum #siunits #plancklength #gravitationalconstant #muong2 #cmbanomaly #hubbletension #darkenergy #mond #lagrangiansimplification #diracequation #energyduality #timemassduality #xigeometry #vacuumenergy #emergentgravity #narrativephysics #cosmicbrain #popularsciencephysics
 
-**Abstract/Summary for Search Engines:** The T0-Time-Mass-Duality model, also known as FFGFT (Fundamental Fractal-Geometric Field Theory), is a revolutionary geometric framework unifying quantum mechanics, general relativity, and cosmology through a single parameter ξ = (4/3) × 10⁻⁴. Deriving all physical constants (G, c, ℏ, lₚ, α ≈ 1/137.036) from fractal spacetime geometry, it eliminates the Standard Model's 20+ free parameters, achieves 98% accuracy in particle mass predictions (electron, muon, tau, quarks), resolves the muon g-2 anomaly to 0.05σ precision, solves the Hubble tension and CMB anomalies, provides alternatives to dark energy and MOND, and enables deterministic quantum computing. Features 44-chapter narrative edition with cosmic brain metaphor, interactive tools, Python implementations, 178+ LaTeX source files, 172+ PDF documents, audio podcasts, and YouTube videos. Ideal for researchers in theoretical physics, quantum information, cosmology, and alternative physics. DOI: 10.5281/zenodo.17522475.
+**Abstract/Summary for Search Engines:** The T0-Time-Mass-Duality model, also known as FFGFT (Fundamental Fractal-Geometric Field Theory), is a revolutionary geometric framework unifying quantum mechanics, general relativity, and cosmology through a single parameter ξ = (4/3) × 10⁻⁴. Deriving all physical constants (G, c, ℏ, lₚ, α ≈ 1/137.036) from fractal spacetime geometry, it eliminates the Standard Model's 20+ free parameters, achieves 98% accuracy in particle mass predictions (electron, muon, tau, quarks), resolves the muon g-2 anomaly to 0.05σ precision, solves the Hubble tension and CMB anomalies, provides alternatives to dark energy and MOND, and enables deterministic quantum computing. Features 44-chapter narrative edition with cosmic brain metaphor, interactive tools, Python implementations, 185+ LaTeX source files, 180+ PDF documents, audio podcasts, and YouTube videos. Ideal for researchers in theoretical physics, quantum information, cosmology, and alternative physics. DOI: 10.5281/zenodo.17522475.
 
 ## Overview
 
@@ -48,6 +48,35 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
  New: Single-clock metrology and three-clock experiment; detailed analysis of the Scientific Reports paper “A single-clock approach to fundamental metrology” (DOI: 10.1038/s41598-024-71907-0) and its consistency with T0 (time–mass duality and ξ-based SI derivations).
 
 ## Latest Highlights
+
+### February 2026: NEW BOOK — From α = 1 to Complete Physics 📖
+
+**The definitive T0 narrative — now as Kindle-optimized 6×9 book**
+
+**[Von α = 1 zur vollständigen Physik (Deutsch, Kindle)](2/pdf/Von_Alpha1_zur_vollstaendigen_Physik_KINDLE.pdf)** (107 pages)  
+**[From α = 1 to Complete Physics (English, Kindle)](2/pdf/From_Alpha1_to_Complete_Physics_KINDLE.pdf)** (107 pages)
+
+**What the book does:** Starting from α = 1 and the 2019 SI reform, it derives — step by step, in 17 chapters — all particle masses, the gravitational constant, the Planck length, and the structure of spacetime from a single geometric parameter ξ = 4/30 000.
+
+**Key features:**
+- **17 chapters + 4 appendices** covering the full T0 derivation chain
+- **Professional Kindle format** (6 × 9 in, Inter + JetBrains Mono fonts, XeLaTeX)
+- **TikZ diagrams** replacing all placeholder figures (SI reform, derivation cascade, time-mass hyperbola, vacuum field, torus geometry)
+- **NASA/ESA images** (Ring Nebula M57, Hubble Ultra Deep Field, Einstein Ring, LIGO, Planck CMB)
+- **Both languages** with identical structure and full GitHub interlinks
+- **LaTeX sources included** — fully reproducible
+
+Also available as standard A4 PDF:  
+**[Von_Alpha1_zur_vollstaendigen_Physik_De.pdf](2/pdf/Von_Alpha1_zur_vollstaendigen_Physik_De.pdf)** (Deutsch)
+
+### February 2026: Updated Compiled Books
+
+All compiled books (Teil 1–3, FFGFT Narrative Master, Xi Narrative Master, T0 Anwendungen) have been recompiled with updated content reflecting the latest corrections and February 2026 additions:
+- **157_Buch_De.pdf / 157_Book_En.pdf** — Complete standalone book (DE/EN)
+- **FFGFT_Narrative_Master_De/En.pdf** — 44-chapter narrative edition, updated
+- **Teil1/2/3 ebook and letter editions** — All recompiled
+
+---
 
 ### January 2026: Asymmetry Analysis – New FFGFT Monograph
 
@@ -248,7 +277,7 @@ Independent research from two completely different perspectives arrives at the s
 T0-Time-Mass-Duality/
 ├── 2/
 │  ├── html/           # Interactive HTML explorations
-│  ├── pdf/           # Technical documents (213+ files)
+│  ├── pdf/           # Technical documents (220+ files)
 │  ├── tex-n/         # LaTeX sources (normalized structure)
 │  │  ├── de_standalone/    # German standalone documents (current, numbered names)
 │  │  ├── en_standalone/    # English standalone documents (current, numbered names)
@@ -273,7 +302,7 @@ T0-Time-Mass-Duality/
 
 **GitHub Search Optimization:** This repo is tagged with "quantum-physics", "unified-theory", "fractal-geometry", and "deterministic-computing" for easy discovery via GitHub's topic search.
 
-## Complete PDF Documentation (213+ Files, ~75MB total)
+## Complete PDF Documentation (220+ Files, ~75MB total)
 
 All documents are available in German and English versions where applicable. 
 **Pro Tip:** Use GitHub's search bar with `T0_ filename` or `Matsas` or `Consciousness` to quickly locate specific PDFs.
@@ -336,6 +365,17 @@ The following ten published books (Kindle, paperback, hardcover) are represented
 10. **The Cosmic Brain: From Quantum Gravity to Consciousness, fundamental Fractal-Geometric Field Theory (FFGFT)** (English)
   - PDF: [FFGFT_Narrative_Master_En.pdf](2/pdf/FFGFT_Narrative_Master_En.pdf) 
    Pfad: `2\pdf\FFGFT_Narrative_Master_En.pdf`
+
+
+11. **Von α = 1 zur vollständigen Physik: Wie die SI-Reform 2019 und ein verhältnisbasiertes Einheitensystem natürlich zur Zeit-Masse-Dualität und zur Angepassten Dynamischen Vakuum-Feldtheorie führen** (Deutsch)
+   - PDF: [Von_Alpha1_zur_vollstaendigen_Physik_KINDLE.pdf](2/pdf/Von_Alpha1_zur_vollstaendigen_Physik_KINDLE.pdf)
+   - Also: [Von_Alpha1_zur_vollstaendigen_Physik_De.pdf](2/pdf/Von_Alpha1_zur_vollstaendigen_Physik_De.pdf) (A4)
+
+12. **From α = 1 to Complete Physics: How the SI Reform of 2019 and a Ratio-Based Unit System Naturally Lead to Time-Mass Duality and the Adapted Dynamic Vacuum Field Theory** (English)
+   - PDF: [From_Alpha1_to_Complete_Physics_KINDLE.pdf](2/pdf/From_Alpha1_to_Complete_Physics_KINDLE.pdf)
+
+13. **Das Kosmische Gehirn (ebook edition)** / **The Cosmic Brain (ebook edition)** (DE/EN)
+   - PDF: [157_Buch_De_ebook.pdf](2/pdf/157_Buch_De_ebook.pdf) / [157_Book_En_ebook.pdf](2/pdf/157_Book_En_ebook.pdf)
 
 ### Latest Additions (November 2025) (updated)
 
@@ -553,7 +593,7 @@ Finite-element calculations on the ξ hierarchy confirm this: no intrinsic cosmo
 
 ## License
 
-© 2025 Johann Pascher. All rights reserved.
+© 2025–2026 Johann Pascher. All rights reserved.
 
 ---
 

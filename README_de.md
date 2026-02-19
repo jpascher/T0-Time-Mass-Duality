@@ -8,7 +8,7 @@
 
 **Themen (GitHub Topics):** #ffgft #vereinheitlichte-feldtheorie #quantenrelativität #feinstrukturkonstante #fraktalphysik #deterministische-qm #geometrischekonstanten #teilchenphysik #kosmologie #quantengravitation #quantencomputing #rsa-quanten #si-einheiten #plancklaenge #gravitationskonstante #muong2 #cmbanomalie #hubblespannung #dunkleenergie #mond #lagrangianvereinfachung #diracgleichung #energiedualität #zeitmassedualität #xigeometrie #vakuumenergie #emergenteGravitation #narrativphysik #kosmischesGehirn #populärwissenschaftphysik
 
-**Zusammenfassung/Abstract für Suchmaschinen:** Das T0-Zeit-Masse-Dualitätsmodell, auch bekannt als FFGFT (Fundamentale Fraktal-Geometrische Feldtheorie), ist ein revolutionärer geometrischer Rahmen, der Quantenmechanik, allgemeine Relativität und Kosmologie durch einen einzigen Parameter ξ = (4/3) × 10⁻⁴ vereinheitlicht. Es leitet alle physikalischen Konstanten (G, c, ℏ, lₚ, α ≈ 1/137,036) aus fraktaler Raumzeit-Geometrie ab, eliminiert die 20+ freien Parameter des Standardmodells, erreicht 98% Genauigkeit bei Teilchenmassen-Vorhersagen (Elektron, Myon, Tau, Quarks), löst die Myon g-2 Anomalie auf 0,05σ Präzision, löst die Hubble-Spannung und CMB-Anomalien, bietet Alternativen zu dunkler Energie und MOND, und ermöglicht deterministisches Quantencomputing. Enthält 44-Kapitel narrative Edition mit kosmischer Gehirn-Metapher, interaktive Tools, Python-Implementierungen, 178+ LaTeX-Quelldateien, 172+ PDF-Dokumente, Audio-Podcasts und YouTube-Videos. Ideal für Forscher in theoretischer Physik, Quanteninformation, Kosmologie und alternativer Physik. DOI: 10.5281/zenodo.17522475.
+**Zusammenfassung/Abstract für Suchmaschinen:** Das T0-Zeit-Masse-Dualitätsmodell, auch bekannt als FFGFT (Fundamentale Fraktal-Geometrische Feldtheorie), ist ein revolutionärer geometrischer Rahmen, der Quantenmechanik, allgemeine Relativität und Kosmologie durch einen einzigen Parameter ξ = (4/3) × 10⁻⁴ vereinheitlicht. Es leitet alle physikalischen Konstanten (G, c, ℏ, lₚ, α ≈ 1/137,036) aus fraktaler Raumzeit-Geometrie ab, eliminiert die 20+ freien Parameter des Standardmodells, erreicht 98% Genauigkeit bei Teilchenmassen-Vorhersagen (Elektron, Myon, Tau, Quarks), löst die Myon g-2 Anomalie auf 0,05σ Präzision, löst die Hubble-Spannung und CMB-Anomalien, bietet Alternativen zu dunkler Energie und MOND, und ermöglicht deterministisches Quantencomputing. Enthält 44-Kapitel narrative Edition mit kosmischer Gehirn-Metapher, interaktive Tools, Python-Implementierungen, 185+ LaTeX-Quelldateien, 180+ PDF-Dokumente, Audio-Podcasts und YouTube-Videos. Ideal für Forscher in theoretischer Physik, Quanteninformation, Kosmologie und alternativer Physik. DOI: 10.5281/zenodo.17522475.
 
 ## Überblick
 
@@ -47,6 +47,35 @@ Das T0-Modell präsentiert einen paradigmenwechselnden Ansatz zum Verständnis d
  NEU: Ein-Uhr-Metrologie und Drei-Uhren-Experiment; detaillierte Analyse des Scientific-Reports-Artikels „A single-clock approach to fundamental metrology“ (DOI: 10.1038/s41598-024-71907-0) und seine Konsistenz mit T0 (Zeit-Masse-Dualität und ξ-basierte SI-Ableitungen).
 
 ## Neueste Highlights
+
+### Februar 2026: NEUES BUCH — Von α = 1 zur vollständigen Physik 📖
+
+**Die definitive T0-Erzählung — jetzt als Kindle-optimiertes 6×9-Buch**
+
+**[Von α = 1 zur vollständigen Physik (Deutsch, Kindle)](2/pdf/Von_Alpha1_zur_vollstaendigen_Physik_KINDLE.pdf)** (107 Seiten)  
+**[From α = 1 to Complete Physics (English, Kindle)](2/pdf/From_Alpha1_to_Complete_Physics_KINDLE.pdf)** (107 Seiten)
+
+**Was das Buch leistet:** Ausgehend von α = 1 und der SI-Reform 2019 leitet es — Schritt für Schritt in 17 Kapiteln — alle Teilchenmassen, die Gravitationskonstante, die Planck-Länge und die Struktur der Raumzeit aus einem einzigen geometrischen Parameter ξ = 4/30 000 ab.
+
+**Besondere Merkmale:**
+- **17 Kapitel + 4 Anhänge** mit der vollständigen T0-Ableitungskette
+- **Professionelles Kindle-Format** (6 × 9 Zoll, Inter + JetBrains Mono, XeLaTeX)
+- **TikZ-Diagramme** für alle Abbildungen (SI-Reform, Ableitungskaskade, Zeit-Masse-Hyperbel, Vakuumfeld, Torus-Geometrie)
+- **NASA/ESA-Bilder** (Ringnebel M57, Hubble Ultra Deep Field, Einstein-Ring, LIGO, Planck-CMB)
+- **Beide Sprachen** mit identischer Struktur und vollständigen GitHub-Querverweisen
+- **LaTeX-Quellen enthalten** — vollständig reproduzierbar
+
+Auch als Standard-A4-PDF verfügbar:  
+**[Von_Alpha1_zur_vollstaendigen_Physik_De.pdf](2/pdf/Von_Alpha1_zur_vollstaendigen_Physik_De.pdf)** (Deutsch)
+
+### Februar 2026: Aktualisierte Sammelbände
+
+Alle kompilierten Bücher (Teil 1–3, FFGFT Narrative Master, Xi Narrative Master, T0 Anwendungen) wurden mit aktualisierten Inhalten neu kompiliert:
+- **157_Buch_De.pdf / 157_Book_En.pdf** — Vollständiges Standalone-Buch (DE/EN)
+- **FFGFT_Narrative_Master_De/En.pdf** — 44-Kapitel narrative Edition, aktualisiert
+- **Teil1/2/3 eBook- und Letter-Editionen** — Alle neu kompiliert
+
+---
 
 ### Januar 2026: Asymmetrie-Analyse – Neue FFGFT-Monographie
 
@@ -432,7 +461,7 @@ Alle T0-Audioinhalte als Podcast-Episoden verfügbar.
 
 ## Lizenz
 
-© 2025 Johann Pascher. Alle Rechte vorbehalten.
+© 2025–2026 Johann Pascher. Alle Rechte vorbehalten.
 
 ---
 
