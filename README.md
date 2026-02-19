@@ -31,9 +31,7 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 
 ## Main Overview and Calculator Documents
 
- German: unified calculator results (“Vereinigter Rechner Ergebnisse”) – masses and constants from geometric principles.
 
- English: unified calculator results – same dataset in English.
 
 - [T0_Dokumentenübersicht_De.pdf](2/pdf/086_T0_Dokumentenuebersicht_De.pdf) 
  [T0_Dokumentenübersicht_En.pdf](2/pdf/086_T0_Dokumentenuebersicht_En.pdf) 

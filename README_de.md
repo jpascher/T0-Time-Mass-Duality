@@ -30,9 +30,6 @@ Das T0-Modell präsentiert einen paradigmenwechselnden Ansatz zum Verständnis d
 
 ## Hauptübersicht und Rechner-Dokumente
 
- Deutscher „Vereinigter Bericht“ der T0-Rechnerergebnisse – Massen und Konstanten aus geometrischen Prinzipien.
-
- Englischer „Unified Report“ der T0-Rechnerergebnisse.
 
 - [T0_Dokumentenübersicht_De.pdf](2/pdf/086_T0_Dokumentenuebersicht_De.pdf) 
  [T0_Dokumentenübersicht_En.pdf](2/pdf/086_T0_Dokumentenuebersicht_En.pdf) 
