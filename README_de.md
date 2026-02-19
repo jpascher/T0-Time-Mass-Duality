@@ -66,7 +66,6 @@ Auch als Standard-A4-PDF verfügbar:
 ### Februar 2026: Aktualisierte Sammelbände
 
 Alle kompilierten Bücher (Teil 1–3, FFGFT Narrative Master, Xi Narrative Master, T0 Anwendungen) wurden mit aktualisierten Inhalten neu kompiliert:
-- **157_Buch_De.pdf / 157_Book_En.pdf** — Vollständiges Standalone-Buch (DE/EN)
 - **FFGFT_Narrative_Master_De/En.pdf** — 44-Kapitel narrative Edition, aktualisiert
 - **Teil1/2/3 eBook- und Letter-Editionen** — Alle neu kompiliert
 
@@ -272,25 +271,9 @@ T0-Zeit-Masse-Dualität/
 ├── 2/
 │  ├── html/           # Interaktive HTML-Explorationen
 │  ├── pdf/           # Technische Dokumente (213+ Dateien)
-│  ├── tex-n/         # LaTeX-Quellen (normalisierte Struktur)
-│  │  ├── de_standalone/    # Deutsche Standalone-Dokumente (aktuell, mit Nummernpräfix)
-│  │  ├── en_standalone/    # Englische Standalone-Dokumente (aktuell, mit Nummernpräfix)
-│  │  ├── de_standalone_pdflatex/  # Alte DE-Standalone-Quellen (ohne Präfix, nur Referenz)
-│  │  ├── en_standalone_pdflatex/  # Alte EN-Standalone-Quellen (ohne Präfix, nur Referenz)
-│  │  ├── de_chapters_new/   # Kapitelversionen für Bücher
-│  │  ├── en_chapters_new/   # Kapitelversionen für Bücher
-│  │  └── completed/      # Kompilierte Bücher (Teil1–3, Anwendungen, Asymmetrie, etc.)
-│  ├── esotherik.md       # Esoterische Betrachtungen
-│  ├── OntologischeAequivalenz.md # Ontologische Äquivalenz (DE/EN)
 │  └── index.html & website.html # Lokale Web-Schnittstellen
 ├── rsa/             # RSA-Faktorisierungs-Demos und Implementierungen
 ├── sig/             # Audio-Signalanalyse (3 Dateien)
-│  ├── xi_harmonic_analysis_demo.html
-│  ├── xi_harmonic_documentation.md
-│  └── xi_oscilloscope_spectrum-basis.html
-├── Audio-Dokumentation/     # Dialogserien und gesprochene Erklärungen
-├── Python-Module/        # Direkte Implementierungen (5 Dateien)
-├── Technische Berichte/     # Umfassende Analysen
 └── README.md / README_de.md   # Dokumentation
 ```
 

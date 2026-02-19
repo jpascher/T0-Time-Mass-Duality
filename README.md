@@ -57,7 +57,7 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 **Key features:**
 - **17 chapters + 4 appendices** covering the full T0 derivation chain
 - **Professional Kindle format** (6 × 9 in, Inter + JetBrains Mono fonts, XeLaTeX)
-- **TikZ diagrams** replacing all placeholder figures (SI reform, derivation cascade, time-mass hyperbola, vacuum field, torus geometry)
+- **TikZ diagrams**  (SI reform, derivation cascade, time-mass hyperbola, vacuum field, torus geometry)
 - **NASA/ESA images** (Ring Nebula M57, Hubble Ultra Deep Field, Einstein Ring, LIGO, Planck CMB)
 - **Both languages** with identical structure and full GitHub interlinks
 - **LaTeX sources included** — fully reproducible
@@ -274,25 +274,9 @@ T0-Time-Mass-Duality/
 ├── 2/
 │  ├── html/           # Interactive HTML explorations
 │  ├── pdf/           # Technical documents (220+ files)
-│  ├── tex-n/         # LaTeX sources (normalized structure)
-│  │  ├── de_standalone/    # German standalone documents (current, numbered names)
-│  │  ├── en_standalone/    # English standalone documents (current, numbered names)
-│  │  ├── de_standalone_pdflatex/  # Legacy DE standalone sources (old names, kept for reference)
-│  │  ├── en_standalone_pdflatex/  # Legacy EN standalone sources (old names, kept for reference)
-│  │  ├── de_chapters_new/   # Chapter versions for books
-│  │  ├── en_chapters_new/   # Chapter versions for books
-│  │  └── completed/      # Compiled books (Teil1–3, Anwendungen, Asymmetrie, etc.)
-│  ├── esotherik.md       # Esoteric considerations
-│  ├── OntologischeAequivalenz.md # Ontological equivalence (DE/EN)
 │  └── index.html & website.html # Local web interfaces
 ├── rsa/             # RSA factorization demos and implementations
 ├── sig/             # Audio signal analysis (3 files)
-│  ├── xi_harmonic_analysis_demo.html
-│  ├── xi_harmonic_documentation.md
-│  └── xi_oscilloscope_spectrum-basis.html
-├── Audio Documentation/     # Dialog series and spoken explanations
-├── Python Modules/        # Direct implementations (5 files)
-├── Technical Reports/      # Comprehensive analyses
 └── README.md / README_de.md   # Documentation
 ```
 
