@@ -62,8 +62,6 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 - **Both languages** with identical structure and full GitHub interlinks
 - **LaTeX sources included** — fully reproducible
 
-Also available as standard A4 PDF:  
-**[Von_Alpha1_zur_vollstaendigen_Physik_De.pdf](2/pdf/Von_Alpha1_zur_vollstaendigen_Physik_De.pdf)** (Deutsch)
 
 ### February 2026: Updated Compiled Books
 

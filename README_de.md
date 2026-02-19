@@ -60,9 +60,6 @@ Das T0-Modell präsentiert einen paradigmenwechselnden Ansatz zum Verständnis d
 - **Beide Sprachen** mit identischer Struktur und vollständigen GitHub-Querverweisen
 - **LaTeX-Quellen enthalten** — vollständig reproduzierbar
 
-Auch als Standard-A4-PDF verfügbar:  
-**[Von_Alpha1_zur_vollstaendigen_Physik_De.pdf](2/pdf/Von_Alpha1_zur_vollstaendigen_Physik_De.pdf)** (Deutsch)
-
 ### Februar 2026: Aktualisierte Sammelbände
 
 Alle kompilierten Bücher (Teil 1–3, FFGFT Narrative Master, Xi Narrative Master, T0 Anwendungen) wurden mit aktualisierten Inhalten neu kompiliert:
