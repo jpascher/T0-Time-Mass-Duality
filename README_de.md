@@ -121,7 +121,7 @@ Alle kompilierten Bücher (Teil 1–3, FFGFT Narrative Master, Xi Narrative Mast
 
 - **[T0_CMB_Donoghue_Analyse](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/140_T0_CMB_Donoghue_Analyse_De.pdf)** – Ausführliche Analyse von Donoghues effektiver Feldtheorie, quadratischer Gravitation und Random Dynamics und wie diese Prinzipien den FFGFT-Rahmen konzeptionell stützen (Deutsch; Englisch: `140_T0_CMB_Donoghue_Analyse_En.pdf`).
 - **[Renormierung und fraktale Raumzeit](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/141_Renormierung_De.pdf)** – Überblick über die Quantengravitationsliteratur zu Dimensionsfluss (spektrale Dimension ≈2 im UV, ≈4 im IR), power-counting-Renormierbarkeit und Singularitätsauflösung in fraktalen Raumzeitansätzen (Deutsch; Englisch: `141_Renormierung_En.pdf`).
-- **[Verschränkungs-Experiment – T0-Vorhersage](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/142_Experimet-verschraenkung_De.pdf)** – Vorschlag für ein konkretes Verschränkungsexperiment zur Prüfung charakteristischer, geometrieinduzierter Abweichungen von Standard-Quantenvorhersagen im T0/FFGFT-Rahmen (Deutsch; Englisch: `142_Experimet-verschränkung_En.pdf`).
+- **[Verschränkungs-Experiment – T0-Vorhersage](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/142_Experimet-verschraenkung_De.pdf)** – Vorschlag für ein konkretes Verschränkungsexperiment zur Prüfung charakteristischer, geometrieinduzierter Abweichungen von Standard-Quantenvorhersagen im T0/FFGFT-Rahmen (Deutsch; Englisch: `142_Experimet-verschraenkung_En.pdf`).
 
 ---
 
@@ -300,7 +300,7 @@ Das Verzeichnis `2/tex-n/` enthält vollständige LaTeX-Quelldateien:
 
 **Revolutionäre neue Dokumente:**
 
-- **[T0_koide-formel-3](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/116_T0_koide-formel-3_De.pdf)** – Erweiterung der Koide-Formel im T0-Rahmen (DE; EN: `T0_koide-formel-3_En.pdf`) 
+- **[T0_koide-formel-3](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/116_T0_koide-formel-3_De.pdf)** – Erweiterung der Koide-Formel im T0-Rahmen (DE; EN: `116_T0_koide-formel-3_En.pdf`) 
  - Detaillierte Integration mit Leptonen-Massenbeziehungen 
  - Geometrische Ableitung aus ξ
 
@@ -308,25 +308,25 @@ Das Verzeichnis `2/tex-n/` enthält vollständige LaTeX-Quelldateien:
 
  - Weitere Verfeinerung auf 0.03σ Übereinstimmung
 
-- **[T0_umkehrung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/032_T0_umkehrung_De.pdf)** – Umkehrmechanismen in der T0-Dualität (DE; EN: `T0_umkehrung_En.pdf`) 
+- **[T0_umkehrung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/032_T0_umkehrung_De.pdf)** – Umkehrmechanismen in der T0-Dualität (DE; EN: `032_T0_umkehrung_En.pdf`) 
  - Neuinterpretation von Zeit-Masse-Umkehrungen
 
-- **[T0_tm-erweiterung-x6](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/005_T0_tm-erweiterung-x6_De.pdf)** – Zeit-Masse-Erweiterung x6-Modell (DE; EN: `T0_tm-erweiterung-x6_En.pdf`) 
+- **[T0_tm-erweiterung-x6](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/005_T0_tm-erweiterung-x6_De.pdf)** – Zeit-Masse-Erweiterung x6-Modell (DE; EN: `005_T0_tm-erweiterung-x6_En.pdf`) 
  - Fortgeschrittene Skalierung für kosmologische Anwendungen
 
-- **[T0-QFT-ML_Addendum](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/022_T0-QFT-ML_Addendum_De.pdf)** – Addendum zur QFT- und Machine-Learning-Integration (DE; EN: `T0-QFT-ML_Addendum_En.pdf`) 
+- **[T0-QFT-ML_Addendum](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/022_T0-QFT-ML_Addendum_De.pdf)** – Addendum zur QFT- und Machine-Learning-Integration (DE; EN: `022_T0-QFT-ML_Addendum_En.pdf`) 
  - Computergestützte Verifikation von T0-Vorhersagen
 
-- **[QM](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/035_QM_De.pdf)** – Quantenmechanik-Grundlagen im T0 (DE; EN: `QM_En.pdf`) 
+- **[QM](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/035_QM_De.pdf)** – Quantenmechanik-Grundlagen im T0 (DE; EN: `035_QM_En.pdf`) 
  - Deterministische Neuinterpretation
 
-- **[Bell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/023_Bell_De.pdf)** – Bell-Ungleichungs-Analysen im T0-Rahmen (DE; EN: `Bell_En.pdf`) 
+- **[Bell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/023_Bell_De.pdf)** – Bell-Ungleichungs-Analysen im T0-Rahmen (DE; EN: `023_Bell_En.pdf`) 
  - Verbindung zu Nichtlokalität und fraktaler Geometrie
 
-- **[T0_xi_ursprung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/009_T0_xi_ursprung_De.pdf)** – Ursprung der ξ-Parameter-Ableitung (DE; EN: `T0_xi_ursprung_En.pdf`) 
+- **[T0_xi_ursprung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/009_T0_xi_ursprung_De.pdf)** – Ursprung der ξ-Parameter-Ableitung (DE; EN: `009_T0_xi_ursprung_En.pdf`) 
  - Geometrische Herleitungen aus der 3D-Raumgeometrie
 
-- **[T0_threeclock](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/029_T0_threeclock_De.pdf)** – Ein-Uhr-Metrologie und Drei-Uhren-Experiment im T0-Rahmen (DE; EN: `T0_threeclock_En.pdf`) 
+- **[T0_threeclock](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/029_T0_threeclock_De.pdf)** – Ein-Uhr-Metrologie und Drei-Uhren-Experiment im T0-Rahmen (DE; EN: `029_T0_threeclock_En.pdf`) 
  - Detaillierte Analyse des Scientific-Reports-Artikels „A single-clock approach to fundamental metrology“ (Sci. Rep. 2024, DOI: 10.1038/s41598-024-71907-0) 
  - Zeigt, wie Ein-Uhr-Metrologie in die T0-Zeit-Masse-Dualität und die ξ-basierten SI-Ableitungen eingebettet ist
 
@@ -372,16 +372,16 @@ Das Verzeichnis `2/tex-n/` enthält vollständige LaTeX-Quelldateien:
 
  - Zwischenstufen der Verfeinerung
 
-- **[T0_lagrndian](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/019_T0_lagrndian_De.pdf)** – Aktualisierte Lagrange-Dichte (DE; EN: `T0_lagrndian_En.pdf`) 
+- **[T0_lagrndian](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/019_T0_lagrndian_De.pdf)** – Aktualisierte Lagrange-Dichte (DE; EN: `019_T0_lagrndian_En.pdf`) 
  - Vereinfachte Ein-Term-Formulierung
 
-- **[T0_xi-und-e](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/008_T0_xi-und-e_De.pdf)** – ξ und e (DE; EN: `T0_xi-und-e_En.pdf`) 
+- **[T0_xi-und-e](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/008_T0_xi-und-e_De.pdf)** – ξ und e (DE; EN: `008_T0_xi-und-e_En.pdf`) 
  - Geometrische Verknüpfung mit der Elementarladung
 
-- **[T0-Theory-vs-Synergetics](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/033_T0-Theory-vs-Synergetics_De.pdf)** – Vergleich mit Synergetik (DE; EN: `T0-Theory-vs-Synergetics_En.pdf`) 
+- **[T0-Theory-vs-Synergetics](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/033_T0-Theory-vs-Synergetics_De.pdf)** – Vergleich mit Synergetik (DE; EN: `033_T0-Theory-vs-Synergetics_En.pdf`) 
  - Analogien zur Musterbildung
 
-- **[Markov](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/038_Markov_De.pdf)** – Markov-Prozesse in der T0-Dynamik (DE; EN: `Markov_En.pdf`) 
+- **[Markov](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/038_Markov_De.pdf)** – Markov-Prozesse in der T0-Dynamik (DE; EN: `038_Markov_En.pdf`) 
  - Übergang von probabilistisch zu deterministisch
 
 *(Die nachfolgenden Sektionen „Umfassende Zusammenfassungsserie“, „Kerntheorie-Dokumente“, „Revolutionäre Vereinfachungen“, „Feinstrukturkonstanten-Analyse“, „Teilchenphysik & Experiment“, „Kosmologie“, „Mathematische Grundlagen“, „Quantencomputing & Kryptographie“, „QFT-Integration“, „Energie & Bewegung“, „Spezialeffekte“, „Fortgeschrittene Methoden“ und „Einheitensysteme“ bleiben inhaltlich wie in der bisherigen README-Version. Sie wurden nicht verändert, nur die neuen PDFs ergänzt.)*

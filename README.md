@@ -125,7 +125,7 @@ All compiled books (Teil 1–3, FFGFT Narrative Master, Xi Narrative Master, T0 
 
 - **[T0_CMB_Donoghue_Analyse](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/140_T0_CMB_Donoghue_Analyse_En.pdf)** – In-depth analysis of Donoghue's effective field theory, quadratic gravity, and random dynamics, and how these principles conceptually support the FFGFT framework (English; German: `140_T0_CMB_Donoghue_Analyse_De.pdf`).
 - **[Renormalization and Fractal Spacetime](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/141_Renormierung_En.pdf)** – Survey of quantum gravity literature on dimensional flow (spectral dimension ≈2 in the UV, ≈4 in the IR), power-counting renormalizability, and singularity resolution in fractal spacetime approaches (English; German: `141_Renormierung_De.pdf`).
-- **[Entanglement Experiment – T0 Prediction](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/142_Experimet-verschraenkung_En.pdf)** – Proposal for a concrete entanglement experiment designed to test characteristic, geometry-induced deviations from standard quantum predictions in the T0/FFGFT framework (English; German: `142_Experimet-verschränkung_De.pdf`).
+- **[Entanglement Experiment – T0 Prediction](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/142_Experimet-verschraenkung_En.pdf)** – Proposal for a concrete entanglement experiment designed to test characteristic, geometry-induced deviations from standard quantum predictions in the T0/FFGFT framework (English; German: `142_Experimet-verschraenkung_De.pdf`).
 
 ---
 
@@ -359,7 +359,7 @@ The following ten published books (Kindle, paperback, hardcover) are represented
 
 **Revolutionary New Documents:**
 
-- **[T0_koide-formel-3](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/116_T0_koide-formel-3_En.pdf)** – Extension of Koide formula in T0 framework (English; German: `T0_koide-formel-3_De.pdf`) 
+- **[T0_koide-formel-3](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/116_T0_koide-formel-3_En.pdf)** – Extension of Koide formula in T0 framework (English; German: `116_T0_koide-formel-3_De.pdf`) 
  - Detailed integration with lepton mass relations 
  - Geometric derivation from ξ
 
@@ -367,25 +367,25 @@ The following ten published books (Kindle, paperback, hardcover) are represented
 
  - Further refinement to 0.03σ agreement
 
-- **[T0_umkehrung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/032_T0_umkehrung_En.pdf)** – Inversion mechanisms in T0 duality (English; German: `T0_umkehrung_De.pdf`) 
+- **[T0_umkehrung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/032_T0_umkehrung_En.pdf)** – Inversion mechanisms in T0 duality (English; German: `032_T0_umkehrung_De.pdf`) 
  - Reinterpretation of time-mass inversions
 
-- **[T0_tm-erweiterung-x6](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/005_T0_tm-erweiterung-x6_En.pdf)** – Time-mass extension x6 model (English; German: `T0_tm-erweiterung-x6_De.pdf`) 
+- **[T0_tm-erweiterung-x6](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/005_T0_tm-erweiterung-x6_En.pdf)** – Time-mass extension x6 model (English; German: `005_T0_tm-erweiterung-x6_De.pdf`) 
  - Advanced scaling for cosmological applications
 
-- **[T0-QFT-ML_Addendum](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/022_T0-QFT-ML_Addendum_En.pdf)** – Addendum to QFT and machine learning integration (English; German: `T0-QFT-ML_Addendum_De.pdf`) 
+- **[T0-QFT-ML_Addendum](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/022_T0-QFT-ML_Addendum_En.pdf)** – Addendum to QFT and machine learning integration (English; German: `022_T0-QFT-ML_Addendum_De.pdf`) 
  - Computational verification of T0 predictions
 
-- **[QM](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/035_QM_En.pdf)** – Quantum mechanics foundations in T0 (English; German: `QM_De.pdf`) 
+- **[QM](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/035_QM_En.pdf)** – Quantum mechanics foundations in T0 (English; German: `035_QM_De.pdf`) 
  - Deterministic reinterpretation
 
-- **[Bell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/023_Bell_En.pdf)** – Bell inequality resolutions via T0 (English; German: `Bell_De.pdf`) 
+- **[Bell](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/023_Bell_En.pdf)** – Bell inequality resolutions via T0 (English; German: `023_Bell_De.pdf`) 
  - Connection to non-locality and fractal geometry
 
-- **[T0_xi_ursprung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/009_T0_xi_ursprung_En.pdf)** – Origin of ξ parameter derivation (English; German: `T0_xi_ursprung_De.pdf`) 
+- **[T0_xi_ursprung](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/009_T0_xi_ursprung_En.pdf)** – Origin of ξ parameter derivation (English; German: `009_T0_xi_ursprung_De.pdf`) 
  - Geometric proofs from 3D space
 
-- **[T0_threeclock](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/029_T0_threeclock_En.pdf)** – Single-clock metrology and three-clock experiment (English; German: `T0_threeclock_De.pdf`) 
+- **[T0_threeclock](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/029_T0_threeclock_En.pdf)** – Single-clock metrology and three-clock experiment (English; German: `029_T0_threeclock_De.pdf`) 
  - Detailed analysis of the Scientific Reports paper “A single-clock approach to fundamental metrology” (DOI: 10.1038/s41598-024-71907-0) 
  - Shows how single-clock metrology fits into the T0 time–mass duality and ξ-based SI derivations
 
@@ -431,16 +431,16 @@ The following ten published books (Kindle, paperback, hardcover) are represented
 
  - Intermediate refinement steps
 
-- **[T0_lagrndian](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/019_T0_lagrndian_En.pdf)** – Lagrangian density updates (English; German: `T0_lagrndian_De.pdf`) 
+- **[T0_lagrndian](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/019_T0_lagrndian_En.pdf)** – Lagrangian density updates (English; German: `019_T0_lagrndian_De.pdf`) 
  - Simplified one-term formulation
 
-- **[T0_xi-und-e](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/008_T0_xi-und-e_En.pdf)** – ξ and e constant interrelations (English; German: `T0_xi-und-e_De.pdf`) 
+- **[T0_xi-und-e](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/008_T0_xi-und-e_En.pdf)** – ξ and e constant interrelations (English; German: `008_T0_xi-und-e_De.pdf`) 
  - Geometric links to elementary charge
 
-- **[T0-Theory-vs-Synergetics](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/033_T0-Theory-vs-Synergetics_En.pdf)** – Comparison with synergetics (English; German: `T0-Theory-vs-Synergetics_De.pdf`) 
+- **[T0-Theory-vs-Synergetics](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/033_T0-Theory-vs-Synergetics_En.pdf)** – Comparison with synergetics (English; German: `033_T0-Theory-vs-Synergetics_De.pdf`) 
  - Pattern formation analogies
 
-- **[Markov](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/038_Markov_En.pdf)** – Markov processes in T0 dynamics (English; German: `Markov_De.pdf`) 
+- **[Markov](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/038_Markov_En.pdf)** – Markov processes in T0 dynamics (English; German: `038_Markov_De.pdf`) 
  - Probabilistic to deterministic transitions
 
 ### Current Comprehensive Summary Series (16 files)
@@ -455,7 +455,7 @@ The following ten published books (Kindle, paperback, hardcover) are represented
 
 ### Redshift Newly Understood
 
-For cosmological redshift, the primary technical references are `2\pdf\065_redshift_deflection_En.pdf` / `2\pdf\065_redshift_deflection_De.pdf` and `2\pdf\039_Zwei-Dipole-CMB_En.pdf` / `2\pdf\039_Zwei-Dipole-CMB_De.pdf`. These analyses supersede earlier heuristic redshift sketches and should be treated as the authoritative T0 treatment of redshift.
+For cosmological redshift, the primary technical references are `2\pdf\039_Zwei-Dipole-CMB_En.pdf` / `2\pdf\039_Zwei-Dipole-CMB_De.pdf`. These analyses supersede earlier heuristic redshift sketches and should be treated as the authoritative T0 treatment of redshift.
 
 Light from distant galaxies is redshifted — its wavelength is stretched as it travels through the hierarchical ξ-field in the static T0 universe. The standard model interprets this as evidence for cosmic expansion; in the T0 theory, however, the redshift arises from geometric photon–ξ interactions: photons undergo a non-scattering, energy-dependent phase shift and dissipation within the finite, discrete elements of the ξ hierarchy.
 
