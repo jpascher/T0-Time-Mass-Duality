@@ -8,7 +8,7 @@
 
 **Themen (GitHub Topics):** #ffgft #vereinheitlichte-feldtheorie #quantenrelativität #feinstrukturkonstante #fraktalphysik #deterministische-qm #geometrischekonstanten #teilchenphysik #kosmologie #quantengravitation #quantencomputing #rsa-quanten #si-einheiten #plancklaenge #gravitationskonstante #muong2 #cmbanomalie #hubblespannung #dunkleenergie #mond #lagrangianvereinfachung #diracgleichung #energiedualität #zeitmassedualität #xigeometrie #vakuumenergie #emergenteGravitation #narrativphysik #kosmischesGehirn #populärwissenschaftphysik
 
-**Zusammenfassung/Abstract für Suchmaschinen:** Das T0-Zeit-Masse-Dualitätsmodell, auch bekannt als FFGFT (Fundamentale Fraktal-Geometrische Feldtheorie), ist ein revolutionärer geometrischer Rahmen, der Quantenmechanik, allgemeine Relativität und Kosmologie durch einen einzigen Parameter ξ = (4/3) × 10⁻⁴ vereinheitlicht. Es leitet alle physikalischen Konstanten (G, c, ℏ, lₚ, α ≈ 1/137,036) aus fraktaler Raumzeit-Geometrie ab, eliminiert die 20+ freien Parameter des Standardmodells, erreicht 98% Genauigkeit bei Teilchenmassen-Vorhersagen (Elektron, Myon, Tau, Quarks), löst die Myon g-2 Anomalie auf 0,05σ Präzision, löst die Hubble-Spannung und CMB-Anomalien, bietet Alternativen zu dunkler Energie und MOND, und ermöglicht deterministisches Quantencomputing. Enthält 44-Kapitel narrative Edition mit kosmischer Gehirn-Metapher, interaktive Tools, Python-Implementierungen, 185+ LaTeX-Quelldateien, 180+ PDF-Dokumente, Audio-Podcasts und YouTube-Videos. Ideal für Forscher in theoretischer Physik, Quanteninformation, Kosmologie und alternativer Physik. DOI: 10.5281/zenodo.17522475.
+**Zusammenfassung/Abstract für Suchmaschinen:** Das T0-Zeit-Masse-Dualitätsmodell, auch bekannt als FFGFT (Fundamentale Fraktal-Geometrische Feldtheorie), ist ein revolutionärer geometrischer Rahmen, der Quantenmechanik, allgemeine Relativität und Kosmologie durch einen einzigen Parameter ξ = (4/3) × 10⁻⁴ vereinheitlicht. Es leitet alle physikalischen Konstanten (G, c, ℏ, lₚ, α ≈ 1/137,036) aus fraktaler Raumzeit-Geometrie ab, eliminiert die 20+ freien Parameter des Standardmodells, erreicht 98% Genauigkeit bei Teilchenmassen-Vorhersagen (Elektron, Myon, Tau, Quarks), löst die Myon g-2 Anomalie auf 0,05σ Präzision, löst die Hubble-Spannung und CMB-Anomalien, bietet Alternativen zu dunkler Energie und MOND, und ermöglicht deterministisches Quantencomputing. Enthält 44-Kapitel narrative Edition mit kosmischer Gehirn-Metapher, interaktive Tools, Python-Implementierungen, 187+ LaTeX-Quelldateien, 182+ PDF-Dokumente, Audio-Podcasts und YouTube-Videos. Ideal für Forscher in theoretischer Physik, Quanteninformation, Kosmologie und alternativer Physik. DOI: 10.5281/zenodo.17522475.
 
 ## Überblick
 
@@ -65,6 +65,10 @@ Das T0-Modell präsentiert einen paradigmenwechselnden Ansatz zum Verständnis d
 Alle kompilierten Bücher (Teil 1–3, FFGFT Narrative Master, Xi Narrative Master, T0 Anwendungen) wurden mit aktualisierten Inhalten neu kompiliert:
 - **FFGFT_Narrative_Master_De/En.pdf** — 44-Kapitel narrative Edition, aktualisiert
 - **Teil1/2/3 eBook- und Letter-Editionen** — Alle neu kompiliert
+
+### Februar 2026: Zeitpfeil — Neues Dokument 🕐
+
+- **[157_Zeitpfeil_De.pdf](2/pdf/157_Zeitpfeil_De.pdf)** / **[157_Zeitpfeil_En.pdf](2/pdf/157_Zeitpfeil_En.pdf)** — Warum ist die Zeit gerichtet? Der Zeitpfeil als geometrische Konsequenz der Raumzeitstruktur. Alle fundamentalen Gleichungen (Newton, Maxwell, Schrödinger, Dirac, Einstein) sind zeitumkehrinvariant — dennoch erleben wir gerichtete Zeit. Die T0-Theorie löst dies durch vier geometrische Argumente: T·m = 1 erzwingt T > 0 algebraisch, die Toruswicklung definiert eine topologisch geschützte Richtung, die fraktale Raumzeit (D_f < 3) bricht die Spiegelsymmetrie, und die Zeit emergiert irreversibel aus Symmetriebrechung.
 
 ---
 

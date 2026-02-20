@@ -9,7 +9,7 @@
 
 **Topics (GitHub Topics):** #ffgft #unifiedfieldtheory #quantumrelativity #finestructureconstant #fractalphysics #deterministicqm #geometricconstants #particlephysics #cosmology #quantumgravity #quantumcomputing #rsaquantum #siunits #plancklength #gravitationalconstant #muong2 #cmbanomaly #hubbletension #darkenergy #mond #lagrangiansimplification #diracequation #energyduality #timemassduality #xigeometry #vacuumenergy #emergentgravity #narrativephysics #cosmicbrain #popularsciencephysics
 
-**Abstract/Summary for Search Engines:** The T0-Time-Mass-Duality model, also known as FFGFT (Fundamental Fractal-Geometric Field Theory), is a revolutionary geometric framework unifying quantum mechanics, general relativity, and cosmology through a single parameter ξ = (4/3) × 10⁻⁴. Deriving all physical constants (G, c, ℏ, lₚ, α ≈ 1/137.036) from fractal spacetime geometry, it eliminates the Standard Model's 20+ free parameters, achieves 98% accuracy in particle mass predictions (electron, muon, tau, quarks), resolves the muon g-2 anomaly to 0.05σ precision, solves the Hubble tension and CMB anomalies, provides alternatives to dark energy and MOND, and enables deterministic quantum computing. Features 44-chapter narrative edition with cosmic brain metaphor, interactive tools, Python implementations, 185+ LaTeX source files, 180+ PDF documents, audio podcasts, and YouTube videos. Ideal for researchers in theoretical physics, quantum information, cosmology, and alternative physics. DOI: 10.5281/zenodo.17522475.
+**Abstract/Summary for Search Engines:** The T0-Time-Mass-Duality model, also known as FFGFT (Fundamental Fractal-Geometric Field Theory), is a revolutionary geometric framework unifying quantum mechanics, general relativity, and cosmology through a single parameter ξ = (4/3) × 10⁻⁴. Deriving all physical constants (G, c, ℏ, lₚ, α ≈ 1/137.036) from fractal spacetime geometry, it eliminates the Standard Model's 20+ free parameters, achieves 98% accuracy in particle mass predictions (electron, muon, tau, quarks), resolves the muon g-2 anomaly to 0.05σ precision, solves the Hubble tension and CMB anomalies, provides alternatives to dark energy and MOND, and enables deterministic quantum computing. Features 44-chapter narrative edition with cosmic brain metaphor, interactive tools, Python implementations, 187+ LaTeX source files, 182+ PDF documents, audio podcasts, and YouTube videos. Ideal for researchers in theoretical physics, quantum information, cosmology, and alternative physics. DOI: 10.5281/zenodo.17522475.
 
 ## Overview
 
@@ -66,9 +66,12 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 ### February 2026: Updated Compiled Books
 
 All compiled books (Teil 1–3, FFGFT Narrative Master, Xi Narrative Master, T0 Anwendungen) have been recompiled with updated content reflecting the latest corrections and February 2026 additions:
-- **157_Buch_De.pdf / 157_Book_En.pdf** — Complete standalone book (DE/EN)
 - **FFGFT_Narrative_Master_De/En.pdf** — 44-chapter narrative edition, updated
 - **Teil1/2/3 ebook and letter editions** — All recompiled
+
+### February 2026: Arrow of Time — New Document 🕐
+
+- **[157_Zeitpfeil_De.pdf](2/pdf/157_Zeitpfeil_De.pdf)** / **[157_Zeitpfeil_En.pdf](2/pdf/157_Zeitpfeil_En.pdf)** — Why is time directed? The arrow of time as a geometric consequence of spacetime structure. All fundamental equations (Newton, Maxwell, Schrödinger, Dirac, Einstein) are time-reversal invariant — yet we experience directed time. T0 theory resolves this through four geometric arguments: T·m = 1 forces T > 0 algebraically, torus winding defines a topologically protected direction, fractal spacetime (D_f < 3) breaks mirror symmetry, and time emerges irreversibly from symmetry breaking.
 
 ---
 
@@ -353,7 +356,6 @@ The following ten published books (Kindle, paperback, hardcover) are represented
    - PDF: [From_Alpha1_to_Complete_Physics_KINDLE.pdf](2/pdf/From_Alpha1_to_Complete_Physics_KINDLE.pdf)
 
 13. **Das Kosmische Gehirn (ebook edition)** / **The Cosmic Brain (ebook edition)** (DE/EN)
-   - PDF: [157_Buch_De_ebook.pdf](2/pdf/157_Buch_De_ebook.pdf) / [157_Book_En_ebook.pdf](2/pdf/157_Book_En_ebook.pdf)
 
 ### Latest Additions (November 2025) (updated)
 
