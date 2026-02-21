@@ -70,6 +70,10 @@ Alle kompilierten Bücher (Teil 1–3, FFGFT Narrative Master, Xi Narrative Mast
 
 - **[157_Zeitpfeil_De.pdf](2/pdf/157_Zeitpfeil_De.pdf)** / **[157_Zeitpfeil_En.pdf](2/pdf/157_Zeitpfeil_En.pdf)** — Warum ist die Zeit gerichtet? Der Zeitpfeil als geometrische Konsequenz der Raumzeitstruktur. Alle fundamentalen Gleichungen (Newton, Maxwell, Schrödinger, Dirac, Einstein) sind zeitumkehrinvariant — dennoch erleben wir gerichtete Zeit. Die T0-Theorie löst dies durch vier geometrische Argumente: T·m = 1 erzwingt T > 0 algebraisch, die Toruswicklung definiert eine topologisch geschützte Richtung, die fraktale Raumzeit (D_f < 3) bricht die Spiegelsymmetrie, und die Zeit emergiert irreversibel aus Symmetriebrechung.
 
+### Februar 2026: g-2-Dokument — Großes Update mit Koide-Brücke 🔬
+
+- **[018_T0_Anomale-g2-10_De.pdf](2/pdf/018_T0_Anomale-g2-10_De.pdf)** / **[018_T0_Anomale-g2-10_En.pdf](2/pdf/018_T0_Anomale-g2-10_En.pdf)** — Rev. 12: Integration der Koide-zu-g-2-Brückenformel. Wesentliche Neuerungen: (1) Brückenformel verbindet Massenverhältnisse direkt mit g-2-Verhältnissen: Δa(τ-e)/Δa(μ-e) = (144/125)·m_τ/m_μ, ergibt a_τ = 1,282×10⁻³ aus nur drei experimentellen Zahlen. (2) Korrektur: 1/3-Schrittweite gilt nur für μ→τ (nicht e→μ = 1/2). (3) α-Ableitung aus T0: α = ξ·E₀² → 1/α = 137,035. (4) SM-Zirkularitätsargument (α wird aus a_e extrahiert, dann zur Berechnung von a_e verwendet). (5) Korrigierte experimentelle Werte (Δa(μ-e) = 6,269×10⁻⁶). T0-Vorhersage 9% über SM — testbar bei Belle II.
+
 ---
 
 ### Januar 2026: Asymmetrie-Analyse – Neue FFGFT-Monographie

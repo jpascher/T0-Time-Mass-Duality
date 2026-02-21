@@ -73,6 +73,10 @@ All compiled books (Teil 1–3, FFGFT Narrative Master, Xi Narrative Master, T0 
 
 - **[157_Zeitpfeil_De.pdf](2/pdf/157_Zeitpfeil_De.pdf)** / **[157_Zeitpfeil_En.pdf](2/pdf/157_Zeitpfeil_En.pdf)** — Why is time directed? The arrow of time as a geometric consequence of spacetime structure. All fundamental equations (Newton, Maxwell, Schrödinger, Dirac, Einstein) are time-reversal invariant — yet we experience directed time. T0 theory resolves this through four geometric arguments: T·m = 1 forces T > 0 algebraically, torus winding defines a topologically protected direction, fractal spacetime (D_f < 3) breaks mirror symmetry, and time emerges irreversibly from symmetry breaking.
 
+### February 2026: g-2 Document Major Update — Koide Bridge Integration 🔬
+
+- **[018_T0_Anomale-g2-10_De.pdf](2/pdf/018_T0_Anomale-g2-10_De.pdf)** / **[018_T0_Anomale-g2-10_En.pdf](2/pdf/018_T0_Anomale-g2-10_En.pdf)** — Rev. 12: Integration of the Koide-to-g-2 bridge formula. Key additions: (1) Bridge formula connecting mass ratios directly to g-2 ratios: Δa(τ-e)/Δa(μ-e) = (144/125)·m_τ/m_μ, yielding a_τ = 1.282×10⁻³ from three experimental numbers alone. (2) Correction: 1/3-step applies to μ→τ only (not e→μ = 1/2). (3) α derivation from T0: α = ξ·E₀² → 1/α = 137.035. (4) SM circularity argument (α extracted from a_e, then used to compute a_e). (5) Fixed experimental values (Δa(μ-e) = 6.269×10⁻⁶). T0 prediction 9% above SM — testable at Belle II.
+
 ---
 
 ### January 2026: Asymmetry Analysis – New FFGFT Monograph
@@ -451,7 +455,7 @@ The following ten published books (Kindle, paperback, hardcover) are represented
 - **[T0_Gravitationskonstante](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/012_T0_Gravitationskonstante_En.pdf)** – Detailed gravitational calculations 
 - **[T0_Teilchenmassen](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/006_T0_Teilchenmassen_En.pdf)** – Systematic mass calculation of all fermions 
 - **[T0_Neutrinos](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/007_T0_Neutrinos_En.pdf)** – Special treatment of neutrino physics 
-- **[018_T0_Anomale-g2-10](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/018_T0_Anomale-g2-10_De.pdf)** – Solution to muon g-2 anomaly 
+- **[018_T0_Anomale-g2-10](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/018_T0_Anomale-g2-10_De.pdf)** – Solution to muon g-2 anomaly; Koide-to-g-2 bridge formula; tau prediction a_τ = 1.282×10⁻³ (Rev. 12) 
 - **[T0_Kosmologie](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/025_T0_Kosmologie_En.pdf)** – Cosmological applications of T0 theory 
 - **[T0_QM-QFT-RT](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/020_T0_QM-QFT-RT_En.pdf)** – Complete quantum field theory in T0 framework 
 
