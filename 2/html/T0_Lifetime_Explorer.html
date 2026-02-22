@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T0 Lepton Lifetime Explorer</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e17;
+  --bg2: #111827;
+  --bg3: #1a2235;
+  --border: #2a3650;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --accent: #38bdf8;
+  --accent2: #818cf8;
+  --green: #34d399;
+  --red: #f87171;
+  --yellow: #fbbf24;
+  --orange: #fb923c;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+/* Top bar */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 20px;
+  background: #060a12;
+  border-bottom: 1px solid var(--border);
+}
+.back-btn {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  transition: all 0.2s;
+}
+.back-btn:hover { border-color: var(--accent); background: rgba(56,189,248,0.1); }
+.lang-toggle { display: flex; gap: 6px; }
+.lang-btn {
+  padding: 4px 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text2);
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+.lang-btn:hover, .lang-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(56,189,248,0.1);
+}
+
+/* Header */
+header {
+  padding: 28px 40px 20px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, #0f1524 0%, var(--bg) 100%);
+}
+header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+header p {
+  color: var(--text2);
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* Layout */
+.container {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  min-height: calc(100vh - 80px);
+}
+
+/* Controls Panel */
+.controls {
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+}
+.control-group {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: var(--bg3);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.control-group h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--accent);
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+.slider-row {
+  margin-bottom: 14px;
+}
+.slider-row:last-child { margin-bottom: 0; }
+.slider-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+.slider-label span:first-child {
+  font-size: 13px;
+  color: var(--text2);
+}
+.slider-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--bg);
+  padding: 2px 8px;
+  border-radius: 4px;
+  min-width: 80px;
+  text-align: right;
+}
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(56,189,248,0.4);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+/* Preset buttons */
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+.preset-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 4px 10px;
+  background: var(--bg);
+  color: var(--text2);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.preset-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.preset-btn.active {
+  background: rgba(56,189,248,0.15);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Results */
+.results {
+  padding: 24px 32px;
+  overflow-y: auto;
+}
+
+/* Formula display */
+.formula-box {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.formula-box .formula {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  color: var(--accent);
+  margin: 10px 0;
+  line-height: 1.8;
+}
+
+/* Results table */
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+.result-table th {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text2);
+  font-weight: 500;
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 2px solid var(--border);
+}
+.result-table th:nth-child(n+3) { text-align: right; }
+.result-table td {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(42,54,80,0.5);
+}
+.result-table td:nth-child(n+3) { text-align: right; }
+.result-table tr:hover { background: rgba(56,189,248,0.03); }
+.result-table .particle-name {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+}
+
+/* Deviation indicator */
+.dev {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  min-width: 65px;
+  text-align: center;
+}
+.dev.excellent { background: rgba(52,211,153,0.15); color: var(--green); }
+.dev.good { background: rgba(251,191,36,0.15); color: var(--yellow); }
+.dev.fair { background: rgba(251,146,60,0.15); color: var(--orange); }
+.dev.poor { background: rgba(248,113,113,0.15); color: var(--red); }
+
+/* Bar chart */
+.bar-section {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+.bar-section h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text2);
+  margin-bottom: 16px;
+}
+.bar-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 12px;
+}
+.bar-label {
+  width: 50px;
+  font-size: 13px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.bar-track {
+  flex: 1;
+  height: 24px;
+  background: var(--bg);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease, background 0.3s ease;
+  position: absolute;
+  left: 50%;
+}
+.bar-fill.negative { right: 50%; left: auto; }
+.bar-center {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--text2);
+  opacity: 0.3;
+  z-index: 1;
+}
+.bar-dev {
+  width: 65px;
+  text-align: right;
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+}
+
+/* Info section */
+.info-box {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6;
+}
+.info-box strong { color: var(--text); }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .container { grid-template-columns: 1fr; }
+  .controls { border-right: none; border-bottom: 1px solid var(--border); }
+}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="index.html" class="back-btn">← Index</a>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('de',this)">DE</button>
+    <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+  </div>
+</div>
+<header>
+  <h1 id="main-title">T0 Lepton-Lebensdauer Explorer</h1>
+  <p id="main-subtitle">Interaktive Berechnung der Lepton-Lebensdauern aus T0-Torus-Geometrie</p>
+</header>
+
+<div class="container">
+  <div class="controls">
+    
+    <div class="control-group">
+      <h3>T0 Parameter</h3>
+      <div class="slider-row">
+        <div class="slider-label">
+          <span>ξ = 4/30000</span>
+          <span class="slider-value" id="xi-val">1.333e-4</span>
+        </div>
+      </div>
+      <div class="slider-row">
+        <div class="slider-label">
+          <span>f = 1/ξ</span>
+          <span class="slider-value" id="f-val">7500</span>
+        </div>
+      </div>
+      <div class="slider-row">
+        <div class="slider-label">
+          <span>D<sub>f</sub> = 3 - ξ</span>
+          <span class="slider-value" id="df-val">2.999867</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <h3>Korrekturfaktor K<sub>QCD</sub></h3>
+      <div class="slider-row">
+        <div class="slider-label">
+          <span>K<sub>QCD</sub></span>
+          <span class="slider-value" id="kqcd-val">1.000</span>
+        </div>
+        <input type="range" id="kqcd-slider" min="0.800" max="1.500" step="0.001" value="1.152">
+      </div>
+      <div class="presets" id="kqcd-presets">
+        <button class="preset-btn" data-val="1.000">1</button>
+        <button class="preset-btn" data-val="1.1050">1+α<sub>s</sub>/π</button>
+        <button class="preset-btn active" data-val="1.1520">K<sub>frak</sub></button>
+        <button class="preset-btn" data-val="1.2143">17/14</button>
+        <button class="preset-btn" data-val="1.2222">11/9</button>
+        <button class="preset-btn" data-val="1.2365">K<sub>frak</sub><sup>3/2</sup></button>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <h3>Farbfaktor Basis</h3>
+      <div class="slider-row">
+        <div class="slider-label">
+          <span>N<sub>c,eff</sub></span>
+          <span class="slider-value" id="nc-val">3.000</span>
+        </div>
+        <input type="range" id="nc-slider" min="2.500" max="4.000" step="0.001" value="3.150">
+      </div>
+      <div class="presets" id="nc-presets">
+        <button class="preset-btn" data-val="2.999867">D<sub>f</sub></button>
+        <button class="preset-btn" data-val="3.000">3</button>
+        <button class="preset-btn active" data-val="3.1650" data-val-dynamic="as2">3+α<sub>s</sub>/2 (3.165)</button>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <h3>Phasenraum</h3>
+      <div class="slider-row">
+        <div class="slider-label">
+          <span>Phasenraum-Korrektur</span>
+          <span class="slider-value" id="ps-val">An</span>
+        </div>
+        <input type="range" id="ps-slider" min="0" max="1" step="1" value="1">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <h3>Berechnungsmethode</h3>
+      <div class="slider-row">
+        <div class="slider-label">
+          <span>R<sub>had</sub> Formel</span>
+        </div>
+      </div>
+      <div class="presets" id="method-presets">
+        <button class="preset-btn active" data-method="nc_kqcd">N<sub>c</sub>·K<sub>QCD</sub></button>
+        <button class="preset-btn" data-method="simple">1/(2+D)</button>
+      </div>
+    </div>
+
+    <div class="control-group" id="alpha-s-group">
+      <h3>α<sub>s</sub> Quelle</h3>
+      <div class="slider-row">
+        <div class="slider-label">
+          <span>α<sub>s</sub>(m<sub>τ</sub>)</span>
+          <span class="slider-value" id="as-val">0.3300</span>
+        </div>
+      </div>
+      <div class="presets" id="as-presets">
+        <button class="preset-btn active" data-as="exp">Exp (0.330)</button>
+        <button class="preset-btn" data-as="Dxi">D·ξ<sup>1/4</sup></button>
+        <button class="preset-btn" data-as="pixi">π·ξ<sup>1/4</sup></button>
+        <button class="preset-btn" data-as="6xi">2D·ξ<sup>1/3</sup></button>
+      </div>
+      <div style="margin-top:8px; font-size:11px; color:var(--text2)" id="as-detail">
+        Experimenteller Wert: 0.330 ± 0.02
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>Formel:</strong> τ<sub>μ</sub>/τ<sub>τ</sub> = (m<sub>τ</sub>/m<sub>μ</sub>)⁵ · PS / BR<sub>e</sub><br>
+      wobei BR<sub>e</sub> = 1/(1 + PS<sub>μ</sub>/PS<sub>e</sub> + R<sub>had</sub>)<br>
+      und R<sub>had</sub> = N<sub>c,eff</sub> · K<sub>QCD</sub>
+    </div>
+  </div>
+
+  <div class="results">
+    <div class="formula-box">
+      <div style="font-size:12px; color:var(--text2); text-transform:uppercase; letter-spacing:1px;">Aktuelle Formel</div>
+      <div class="formula" id="formula-display">
+        R<sub>had</sub> = N<sub>c</sub> · K<sub>QCD</sub> = 3.000 · 1.000 = 3.000
+      </div>
+      <div class="formula" id="formula-as" style="font-size:12px; color:var(--text2)">
+        α<sub>s</sub> = 0.330 (exp)
+      </div>
+      <div class="formula" id="formula-br">
+        BR<sub>e</sub> = 0.2000 → τ<sub>μ</sub>/τ<sub>τ</sub> = 6,725,493
+      </div>
+    </div>
+
+    <div class="bar-section">
+      <h3>Abweichung vom Experiment</h3>
+      <div id="bar-chart"></div>
+    </div>
+
+    <table class="result-table">
+      <thead>
+        <tr>
+          <th>Teilchen</th>
+          <th>Verhältnis</th>
+          <th>T0 Vorhersage</th>
+          <th>Experiment</th>
+          <th>Abweichung</th>
+        </tr>
+      </thead>
+      <tbody id="result-body">
+      </tbody>
+    </table>
+
+    <div class="bar-section">
+      <h3>Detailwerte</h3>
+      <table class="result-table" id="detail-table">
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Wert</th>
+            <th>Bemerkung</th>
+          </tr>
+        </thead>
+        <tbody id="detail-body"></tbody>
+      </table>
+    </div>
+
+    <div class="info-box" id="best-match-info"></div>
+  </div>
+</div>
+
+<script>
+// === Experimental data ===
+const m_e = 0.51100;    // MeV
+const m_mu = 105.658;   // MeV
+const m_tau = 1776.86;  // MeV
+
+const tau_mu_exp = 2.1969e-6;   // s
+const tau_tau_exp = 2.903e-13;  // s
+const R_exp = tau_mu_exp / tau_tau_exp; // ~7568
+
+const xi = 4/30000;
+const f = 7500;
+const f_13 = Math.pow(f, 1/3);
+const D_f = 3 - xi;
+const K_frak = 144/125;
+const K_frak_32 = Math.pow(K_frak, 1.5);
+
+// Phase space function
+function phaseSpace(m_d, m_p) {
+  const x = Math.pow(m_d / m_p, 2);
+  if (x < 1e-10) return 1.0;
+  return 1 - 8*x + 8*x*x*x - x*x*x*x - 12*x*x*Math.log(x);
+}
+
+const PS_mu_e = phaseSpace(m_e, m_mu);
+const PS_tau_e = phaseSpace(m_e, m_tau);
+const PS_tau_mu = phaseSpace(m_mu, m_tau);
+
+// Mass ratios
+const r_tau_mu = m_tau / m_mu;
+const r5 = Math.pow(r_tau_mu, 5);
+
+// Branching ratios experimental
+const BR_e_exp = 0.1782;
+const BR_mu_exp = 0.1739;
+
+// State
+let method = 'nc_kqcd';
+let alphaS_source = 'exp';
+
+// alpha_s values from different sources
+function getAlphaS() {
+  switch(alphaS_source) {
+    case 'Dxi': return 3 * Math.pow(xi, 1/4);      // D·ξ^(1/4) = 0.3224
+    case 'pixi': return Math.PI * Math.pow(xi, 1/4); // π·ξ^(1/4) = 0.3376
+    case '6xi': return 6 * Math.pow(xi, 1/3);        // 2D·ξ^(1/3) = 0.3065
+    default: return 0.330;                            // experimental
+  }
+}
+
+// Elements
+const kqcdSlider = document.getElementById('kqcd-slider');
+const ncSlider = document.getElementById('nc-slider');
+const psSlider = document.getElementById('ps-slider');
+
+function getDevClass(absdev) {
+  if (absdev < 1) return 'excellent';
+  if (absdev < 3) return 'good';
+  if (absdev < 10) return 'fair';
+  return 'poor';
+}
+
+function fmt(n, digits=4) {
+  if (Math.abs(n) > 1e6) return n.toExponential(1);
+  if (Math.abs(n) > 1000) return Math.round(n).toLocaleString('de-DE');
+  if (Math.abs(n) > 1) return n.toFixed(digits);
+  return n.toExponential(digits);
+}
+
+function calculate() {
+  const K_QCD = parseFloat(kqcdSlider.value);
+  const N_c = parseFloat(ncSlider.value);
+  const usePS = parseInt(psSlider.value) === 1;
+  const alpha_s = getAlphaS();
+
+  // Update display values
+  document.getElementById('kqcd-val').textContent = K_QCD.toFixed(4);
+  document.getElementById('nc-val').textContent = N_c.toFixed(3);
+  document.getElementById('ps-val').textContent = usePS ? 'An' : 'Aus';
+  document.getElementById('xi-val').textContent = xi.toExponential(3);
+  document.getElementById('f-val').textContent = f;
+  document.getElementById('df-val').textContent = D_f.toFixed(6);
+  document.getElementById('as-val').textContent = alpha_s.toFixed(4);
+
+  // Update alpha_s detail
+  const t = i18n[currentLang] || i18n.de;
+  const asNames = {
+    'exp': 'Experimentell: 0.330 ± 0.02',
+    'Dxi': `D·ξ^(1/4) = 3·${Math.pow(xi,0.25).toFixed(6)} = ${(3*Math.pow(xi,0.25)).toFixed(4)}`,
+    'pixi': `π·ξ^(1/4) = π·${Math.pow(xi,0.25).toFixed(6)} = ${(Math.PI*Math.pow(xi,0.25)).toFixed(4)}`,
+    '6xi': `2D·ξ^(1/3) = 6·${Math.pow(xi,1/3).toFixed(6)} = ${(6*Math.pow(xi,1/3)).toFixed(4)}`,
+  };
+  const asNamesEn = {
+    'exp': 'Experimental: 0.330 ± 0.02',
+    'Dxi': `D·ξ^(1/4) = 3·${Math.pow(xi,0.25).toFixed(6)} = ${(3*Math.pow(xi,0.25)).toFixed(4)}`,
+    'pixi': `π·ξ^(1/4) = π·${Math.pow(xi,0.25).toFixed(6)} = ${(Math.PI*Math.pow(xi,0.25)).toFixed(4)}`,
+    '6xi': `2D·ξ^(1/3) = 6·${Math.pow(xi,1/3).toFixed(6)} = ${(6*Math.pow(xi,1/3)).toFixed(4)}`,
+  };
+  const devAs = ((alpha_s / 0.330) - 1) * 100;
+  const detailMap = currentLang === 'en' ? asNamesEn : asNames;
+  document.getElementById('as-detail').innerHTML = 
+    `${detailMap[alphaS_source]} <span style="color:${Math.abs(devAs)<6?'var(--green)':'var(--yellow)'}"> (${devAs>=0?'+':''}${devAs.toFixed(1)}% vs exp)</span>`;
+
+  // Update N_c preset for 3+alpha_s/2
+  const ncAs2 = 3 + alpha_s/2;
+  const ncPresetBtn = document.querySelector('#nc-presets .preset-btn[data-val-dynamic="as2"]');
+  if (ncPresetBtn) {
+    ncPresetBtn.dataset.val = ncAs2.toFixed(4);
+    ncPresetBtn.innerHTML = `3+α<sub>s</sub>/2 (${ncAs2.toFixed(3)})`;
+  }
+
+  // Compute R_had
+  let R_had, BR_e, R_ratio;
+  
+  if (method === 'nc_kqcd') {
+    R_had = N_c * K_QCD;
+    if (usePS) {
+      BR_e = 1 / (1 + PS_tau_mu/PS_tau_e + R_had);
+      R_ratio = r5 * PS_tau_e / (PS_mu_e * BR_e);
+    } else {
+      BR_e = 1 / (2 + R_had);
+      R_ratio = r5 / BR_e;
+    }
+  } else { // simple
+    R_had = D_f;
+    BR_e = 1 / (2 + D_f);
+    R_ratio = r5 / BR_e;
+  }
+
+  const tau_tau_pred = tau_mu_exp / R_ratio;
+  const dev_tau = (R_ratio / R_exp - 1) * 100;
+
+  // Formula display
+  document.getElementById('formula-display').innerHTML = 
+    `R<sub>had</sub> = ${N_c.toFixed(3)} · ${K_QCD.toFixed(4)} = ${R_had.toFixed(4)}`;
+  const asLabel = {
+    'exp': 'exp', 'Dxi': 'D·ξ<sup>1/4</sup>', 
+    'pixi': 'π·ξ<sup>1/4</sup>', '6xi': '2D·ξ<sup>1/3</sup>'
+  }[alphaS_source];
+  document.getElementById('formula-as').innerHTML = 
+    `α<sub>s</sub> = ${alpha_s.toFixed(4)} (${asLabel}) → N<sub>c,eff</sub> = 3 + ${(alpha_s/2).toFixed(4)} = ${(3+alpha_s/2).toFixed(4)}`;
+  document.getElementById('formula-br').innerHTML = 
+    `BR<sub>e</sub> = ${BR_e.toFixed(4)} → τ<sub>μ</sub>/τ<sub>τ</sub> = ${Math.round(R_ratio).toLocaleString('de-DE')}`;
+
+  // === Additional ratios ===
+  // We can also compute: 
+  // 1. tau_tau absolute lifetime
+  // 2. BR ratios
+  // 3. If we had muon lifetime from tau: tau_mu predicted from tau_tau
+
+  // BR_mu prediction: BR_mu = PS_tau_mu / (PS_tau_e + PS_tau_mu + R_had * PS_tau_e)
+  // More precisely: Gamma_mu/Gamma_e = PS_tau_mu/PS_tau_e
+  // BR_mu = (PS_tau_mu/PS_tau_e) * BR_e
+  let BR_mu_pred, BR_had_pred;
+  if (usePS) {
+    BR_mu_pred = (PS_tau_mu / PS_tau_e) * BR_e;
+    BR_had_pred = R_had * BR_e / 1; // R_had is ratio to e-channel implicitly
+    // Actually: BR_e : BR_mu : BR_had = 1 : PS_tau_mu/PS_tau_e : R_had
+    const total = 1 + PS_tau_mu/PS_tau_e + R_had;
+    BR_mu_pred = (PS_tau_mu/PS_tau_e) / total;
+    BR_had_pred = R_had / total;
+  } else {
+    BR_mu_pred = BR_e; // without PS, mu ≈ e
+    BR_had_pred = R_had / (2 + R_had);
+  }
+
+  const dev_BR_e = (BR_e / BR_e_exp - 1) * 100;
+  const dev_BR_mu = (BR_mu_pred / BR_mu_exp - 1) * 100;
+  const dev_BR_had = (BR_had_pred / 0.6479 - 1) * 100;
+
+  // Results table
+  const results = [
+    {
+      name: 'τ<sub>μ</sub>/τ<sub>τ</sub>',
+      ratio: 'Lebensdauer-Verhältnis',
+      pred: Math.round(R_ratio).toLocaleString('de-DE'),
+      exp: Math.round(R_exp).toLocaleString('de-DE'),
+      dev: dev_tau
+    },
+    {
+      name: 'τ<sub>τ</sub>',
+      ratio: 'Tau-Lebensdauer',
+      pred: tau_tau_pred.toExponential(3) + ' s',
+      exp: tau_tau_exp.toExponential(3) + ' s',
+      dev: -dev_tau  // inverse
+    },
+    {
+      name: 'BR(τ→e)',
+      ratio: 'Branching Ratio e',
+      pred: (BR_e * 100).toFixed(2) + '%',
+      exp: (BR_e_exp * 100).toFixed(2) + '%',
+      dev: dev_BR_e
+    },
+    {
+      name: 'BR(τ→μ)',
+      ratio: 'Branching Ratio μ',
+      pred: (BR_mu_pred * 100).toFixed(2) + '%',
+      exp: (BR_mu_exp * 100).toFixed(2) + '%',
+      dev: dev_BR_mu
+    },
+    {
+      name: 'BR(τ→had)',
+      ratio: 'Branching Ratio hadr.',
+      pred: (BR_had_pred * 100).toFixed(2) + '%',
+      exp: '64.79%',
+      dev: dev_BR_had
+    },
+    {
+      name: 'R<sub>had</sub>',
+      ratio: 'Γ<sub>had</sub>/Γ<sub>e</sub>',
+      pred: R_had.toFixed(4),
+      exp: '3.636',
+      dev: (R_had / 3.636 - 1) * 100
+    }
+  ];
+
+  let tbody = '';
+  results.forEach(r => {
+    const absdev = Math.abs(r.dev);
+    const cls = getDevClass(absdev);
+    tbody += `<tr>
+      <td class="particle-name">${r.name}</td>
+      <td style="color:var(--text2); font-family:'DM Sans',sans-serif; font-size:12px">${r.ratio}</td>
+      <td>${r.pred}</td>
+      <td style="color:var(--text2)">${r.exp}</td>
+      <td><span class="dev ${cls}">${r.dev >= 0 ? '+' : ''}${r.dev.toFixed(2)}%</span></td>
+    </tr>`;
+  });
+  document.getElementById('result-body').innerHTML = tbody;
+
+  // Bar chart
+  let bars = '';
+  const barData = [
+    { label: 'τ<sub>μ</sub>/τ<sub>τ</sub>', dev: dev_tau },
+    { label: 'BR<sub>e</sub>', dev: dev_BR_e },
+    { label: 'BR<sub>μ</sub>', dev: dev_BR_mu },
+    { label: 'BR<sub>had</sub>', dev: dev_BR_had },
+    { label: 'R<sub>had</sub>', dev: (R_had / 3.636 - 1) * 100 },
+    { label: 'α<sub>s</sub>', dev: (alpha_s / 0.330 - 1) * 100 },
+  ];
+
+  barData.forEach(b => {
+    const maxDev = 20;
+    const pct = Math.min(Math.abs(b.dev), maxDev) / maxDev * 50;
+    const cls = getDevClass(Math.abs(b.dev));
+    const colors = {
+      excellent: 'var(--green)',
+      good: 'var(--yellow)',
+      fair: 'var(--orange)',
+      poor: 'var(--red)'
+    };
+    const isNeg = b.dev < 0;
+    bars += `<div class="bar-row">
+      <div class="bar-label">${b.label}</div>
+      <div class="bar-track">
+        <div class="bar-center"></div>
+        <div class="bar-fill ${isNeg ? 'negative' : ''}" style="
+          width: ${pct}%;
+          background: ${colors[cls]};
+          ${isNeg ? 'right:50%;left:auto;' : 'left:50%;'}
+        "></div>
+      </div>
+      <div class="bar-dev" style="color:${colors[cls]}">${b.dev >= 0 ? '+' : ''}${b.dev.toFixed(2)}%</div>
+    </div>`;
+  });
+  document.getElementById('bar-chart').innerHTML = bars;
+
+  // Detail table
+  let details = '';
+  const detailData = [
+    ['m<sub>τ</sub>/m<sub>μ</sub>', r_tau_mu.toFixed(4), 'Experimentell'],
+    ['(m<sub>τ</sub>/m<sub>μ</sub>)⁵', Math.round(r5).toLocaleString('de-DE'), 'Massenexponent'],
+    ['PS(τ→e)', PS_tau_e.toFixed(6), 'Phasenraum e-Kanal'],
+    ['PS(τ→μ)', PS_tau_mu.toFixed(6), 'Phasenraum μ-Kanal'],
+    ['PS(μ→e)', PS_mu_e.toFixed(6), 'Phasenraum Myon'],
+    ['N<sub>c,eff</sub>', N_c.toFixed(4), 'Farbfaktor'],
+    ['K<sub>QCD</sub>', K_QCD.toFixed(4), 'Korrekturfaktor'],
+    ['R<sub>had</sub>', R_had.toFixed(4), `= ${N_c.toFixed(3)} × ${K_QCD.toFixed(4)}`],
+    ['BR<sub>e</sub>', BR_e.toFixed(5), `1/(1+${(PS_tau_mu/PS_tau_e).toFixed(4)}+${R_had.toFixed(4)})`],
+  ];
+  detailData.forEach(d => {
+    details += `<tr><td class="particle-name">${d[0]}</td><td>${d[1]}</td><td style="color:var(--text2);font-family:'DM Sans',sans-serif;font-size:12px">${d[2]}</td></tr>`;
+  });
+  document.getElementById('detail-body').innerHTML = details;
+
+  // Best match info
+  const BR_e_needed = r5 * PS_tau_e / (PS_mu_e * R_exp);
+  const R_had_needed = 1/BR_e_needed - 1 - PS_tau_mu/PS_tau_e;
+  const K_needed = R_had_needed / N_c;
+  
+  document.getElementById('best-match-info').innerHTML = `
+    <strong>Für exakte Übereinstimmung:</strong><br>
+    R<sub>had</sub> = ${R_had_needed.toFixed(4)} → K<sub>QCD</sub> = ${K_needed.toFixed(4)} (bei N<sub>c</sub> = ${N_c.toFixed(3)})<br>
+    <span style="color:var(--accent)">Aktuell: K<sub>QCD</sub> = ${K_QCD.toFixed(4)} → Δ = ${((K_QCD/K_needed - 1)*100).toFixed(2)}% vom Optimum</span><br><br>
+    <strong>Referenzwerte:</strong>
+    K<sub>frak</sub> = 144/125 = ${K_frak.toFixed(4)} &nbsp;|&nbsp;
+    K<sub>frak</sub><sup>3/2</sup> = ${K_frak_32.toFixed(4)} &nbsp;|&nbsp;
+    1+α<sub>s</sub>/π = 1.1050 &nbsp;|&nbsp;
+    17/14 = ${(17/14).toFixed(4)} &nbsp;|&nbsp;
+    11/9 = ${(11/9).toFixed(4)}
+  `;
+
+  // Update preset highlights
+  document.querySelectorAll('#kqcd-presets .preset-btn').forEach(btn => {
+    const v = parseFloat(btn.dataset.val);
+    btn.classList.toggle('active', Math.abs(K_QCD - v) < 0.002);
+  });
+  document.querySelectorAll('#nc-presets .preset-btn').forEach(btn => {
+    const v = parseFloat(btn.dataset.val);
+    btn.classList.toggle('active', Math.abs(N_c - v) < 0.002);
+  });
+}
+
+// Event listeners
+kqcdSlider.addEventListener('input', calculate);
+ncSlider.addEventListener('input', calculate);
+psSlider.addEventListener('input', calculate);
+
+document.querySelectorAll('#kqcd-presets .preset-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    kqcdSlider.value = btn.dataset.val;
+    calculate();
+  });
+});
+
+document.querySelectorAll('#nc-presets .preset-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    ncSlider.value = btn.dataset.val;
+    calculate();
+  });
+});
+
+document.querySelectorAll('#method-presets .preset-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#method-presets .preset-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    method = btn.dataset.method;
+    calculate();
+  });
+});
+
+// alpha_s source presets
+document.querySelectorAll('#as-presets .preset-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#as-presets .preset-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    alphaS_source = btn.dataset.as;
+    // Auto-update N_c slider to 3+alpha_s/2 when switching alpha_s source
+    const alpha_s = getAlphaS();
+    const ncAs2 = 3 + alpha_s/2;
+    ncSlider.value = ncAs2.toFixed(4);
+    calculate();
+  });
+});
+
+// Language support
+const i18n = {
+  de: {
+    title: 'T0 Lepton-Lebensdauer Explorer',
+    subtitle: 'Interaktive Berechnung der Lepton-Lebensdauern aus T0-Torus-Geometrie',
+    t0params: 'T0 Parameter',
+    corrFactor: 'Korrekturfaktor K',
+    colorBasis: 'Farbfaktor Basis',
+    phaseSpace: 'Phasenraum',
+    psCorr: 'Phasenraum-Korrektur',
+    on: 'An', off: 'Aus',
+    calcMethod: 'Berechnungsmethode',
+    formula: 'Formel',
+    currentFormula: 'Aktuelle Formel',
+    devFromExp: 'Abweichung vom Experiment',
+    particle: 'Teilchen',
+    ratio: 'Verhältnis',
+    t0pred: 'T0 Vorhersage',
+    experiment: 'Experiment',
+    deviation: 'Abweichung',
+    detailValues: 'Detailwerte',
+    parameter: 'Parameter',
+    value: 'Wert',
+    remark: 'Bemerkung',
+    forExact: 'Für exakte Übereinstimmung:',
+    current: 'Aktuell:',
+    fromOptimum: 'vom Optimum',
+    refValues: 'Referenzwerte:',
+    lifetimeRatio: 'Lebensdauer-Verhältnis',
+    tauLifetime: 'Tau-Lebensdauer',
+    brE: 'Branching Ratio e',
+    brMu: 'Branching Ratio μ',
+    brHad: 'Branching Ratio hadr.',
+    experimental: 'Experimentell',
+    formulaInfo: '<strong>Formel:</strong> τ<sub>μ</sub>/τ<sub>τ</sub> = (m<sub>τ</sub>/m<sub>μ</sub>)⁵ · PS / BR<sub>e</sub><br>wobei BR<sub>e</sub> = 1/(1 + PS<sub>μ</sub>/PS<sub>e</sub> + R<sub>had</sub>)<br>und R<sub>had</sub> = N<sub>c,eff</sub> · K<sub>QCD</sub>',
+    psE: 'Phasenraum e-Kanal',
+    psMu: 'Phasenraum μ-Kanal',
+    psMuon: 'Phasenraum Myon',
+    colorFactor: 'Farbfaktor',
+    correctionFactor: 'Korrekturfaktor',
+    alphaSource: 'α_s Quelle',
+  },
+  en: {
+    title: 'T0 Lepton Lifetime Explorer',
+    subtitle: 'Interactive calculation of lepton lifetimes from T0 torus geometry',
+    t0params: 'T0 Parameters',
+    corrFactor: 'Correction Factor K',
+    colorBasis: 'Color Factor Basis',
+    phaseSpace: 'Phase Space',
+    psCorr: 'Phase Space Correction',
+    on: 'On', off: 'Off',
+    calcMethod: 'Calculation Method',
+    formula: 'Formula',
+    currentFormula: 'Current Formula',
+    devFromExp: 'Deviation from Experiment',
+    particle: 'Particle',
+    ratio: 'Ratio',
+    t0pred: 'T0 Prediction',
+    experiment: 'Experiment',
+    deviation: 'Deviation',
+    detailValues: 'Detail Values',
+    parameter: 'Parameter',
+    value: 'Value',
+    remark: 'Remark',
+    forExact: 'For exact match:',
+    current: 'Current:',
+    fromOptimum: 'from optimum',
+    refValues: 'Reference values:',
+    lifetimeRatio: 'Lifetime Ratio',
+    tauLifetime: 'Tau Lifetime',
+    brE: 'Branching Ratio e',
+    brMu: 'Branching Ratio μ',
+    brHad: 'Branching Ratio hadr.',
+    experimental: 'Experimental',
+    formulaInfo: '<strong>Formula:</strong> τ<sub>μ</sub>/τ<sub>τ</sub> = (m<sub>τ</sub>/m<sub>μ</sub>)⁵ · PS / BR<sub>e</sub><br>where BR<sub>e</sub> = 1/(1 + PS<sub>μ</sub>/PS<sub>e</sub> + R<sub>had</sub>)<br>and R<sub>had</sub> = N<sub>c,eff</sub> · K<sub>QCD</sub>',
+    psE: 'Phase space e-channel',
+    psMu: 'Phase space μ-channel',
+    psMuon: 'Phase space muon',
+    colorFactor: 'Color factor',
+    correctionFactor: 'Correction factor',
+    alphaSource: 'α_s Source',
+  }
+};
+
+let currentLang = 'de';
+
+function setLang(lang, btn) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  
+  const t = i18n[lang];
+  document.getElementById('main-title').textContent = t.title;
+  document.getElementById('main-subtitle').textContent = t.subtitle;
+  
+  // Control group headers
+  const headers = document.querySelectorAll('.control-group h3');
+  if (headers[0]) headers[0].textContent = t.t0params;
+  if (headers[1]) headers[1].innerHTML = t.corrFactor + '<sub>QCD</sub>';
+  if (headers[2]) headers[2].textContent = t.colorBasis;
+  if (headers[3]) headers[3].textContent = t.phaseSpace;
+  if (headers[4]) headers[4].textContent = t.calcMethod;
+  if (headers[5]) {
+    headers[5].innerHTML = 'α<sub>s</sub> ' + (lang === 'en' ? 'Source' : 'Quelle');
+  }
+  
+  // Phase space label
+  const psLabel = document.querySelector('#ps-slider').closest('.slider-row').querySelector('.slider-label span:first-child');
+  if (psLabel) psLabel.textContent = t.psCorr;
+  
+  // Info box
+  document.querySelector('.info-box').innerHTML = t.formulaInfo;
+  
+  // Results section headers
+  const barTitle = document.querySelector('.bar-section h3');
+  if (barTitle) barTitle.textContent = t.devFromExp;
+  
+  // Table headers
+  const ths = document.querySelectorAll('.result-table')[0].querySelectorAll('th');
+  if (ths.length >= 5) {
+    ths[0].textContent = t.particle;
+    ths[1].textContent = t.ratio;
+    ths[2].textContent = t.t0pred;
+    ths[3].textContent = t.experiment;
+    ths[4].textContent = t.deviation;
+  }
+  
+  // Detail table headers
+  const detailThs = document.getElementById('detail-table').querySelectorAll('th');
+  if (detailThs.length >= 3) {
+    detailThs[0].textContent = t.parameter;
+    detailThs[1].textContent = t.value;
+    detailThs[2].textContent = t.remark;
+  }
+  
+  // Recalculate to update all dynamic text
+  calculate();
+}
+
+// Initial calculation
+calculate();
+</script>
+</body>
+</html>
