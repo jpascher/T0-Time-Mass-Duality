@@ -1,1228 +1,241 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-  <!-- Last updated: 2025-06-07 -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>T0 Theory Interactive Explorer / T0 Theory Interaktiver Explorer</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-      color: #ffffff;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    
-    .language-switcher {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1001;
-      display: flex;
-      gap: 10px;
-    }
-    
-    .lang-btn {
-      padding: 10px 20px;
-      background: rgba(255, 255, 255, 0.2);
-      border: 2px solid white;
-      color: white;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: 500;
-    }
-    
-    .lang-btn.active {
-      background: white;
-      color: #0f0f23;
-    }
-    
-    .lang-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
-    }
-    
-    .back-to-main {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
-      padding: 12px 24px;
-      background: linear-gradient(45deg, #4ecdc4, #45b7b8);
-      color: white;
-      text-decoration: none;
-      border-radius: 25px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
-    }
-    
-    .back-to-main:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
-    }
-    
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 20px;
-      margin-top: 60px;
-    }
-    
-    .header {
-      text-align: center;
-      margin-bottom: 40px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 15px;
-      backdrop-filter: blur(10px);
-    }
-    
-    .header h1 {
-      font-size: 2.5em;
-      background: linear-gradient(45deg, #00d4ff, #ff6b6b, #4ecdc4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 10px;
-    }
-    
-    .header p {
-      font-size: 1.2em;
-      opacity: 0.9;
-    }
-    
-    .tabs {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    
-    .tab {
-      padding: 12px 24px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 2px solid transparent;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
-    }
-    
-    .tab:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-2px);
-    }
-    
-    .tab.active {
-      background: linear-gradient(45deg, #00d4ff, #4ecdc4);
-      color: #000;
-      font-weight: bold;
-    }
-    
-    .content {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 15px;
-      padding: 30px;
-      backdrop-filter: blur(10px);
-      margin-bottom: 20px;
-    }
-    
-    .fundamental-law {
-      text-align: center;
-      padding: 30px;
-      background: linear-gradient(45deg, rgba(0, 212, 255, 0.1), rgba(76, 205, 196, 0.1));
-      border-radius: 15px;
-      margin: 30px 0;
-      border: 2px solid rgba(0, 212, 255, 0.3);
-    }
-    
-    .fundamental-law .equation {
-      font-size: 2.5em;
-      font-weight: bold;
-      margin: 20px 0;
-      font-family: 'Courier New', monospace;
-    }
-    
-    .comparison-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin: 20px 0;
-    }
-    
-    .comparison-card {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-      padding: 20px;
-      border-left: 4px solid;
-    }
-    
-    .standard-model {
-      border-left-color: #ff6b6b;
-    }
-    
-    .t0-model {
-      border-left-color: #4ecdc4;
-    }
-    
-    .predictions-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      margin: 20px 0;
-    }
-    
-    .prediction-card {
-      background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
-      border-radius: 10px;
-      padding: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .equation-box {
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 8px;
-      padding: 15px;
-      margin: 15px 0;
-      font-family: 'Courier New', monospace;
-      border-left: 4px solid #00d4ff;
-    }
-    
-    .highlight {
-      background: linear-gradient(45deg, rgba(255, 107, 107, 0.2), rgba(78, 205, 196, 0.2));
-      padding: 15px;
-      border-radius: 10px;
-      margin: 15px 0;
-      border-left: 4px solid #4ecdc4;
-    }
-    
-    .feature-list {
-      list-style: none;
-      margin: 15px 0;
-    }
-    
-    .feature-list li {
-      padding: 8px 0;
-      padding-left: 25px;
-      position: relative;
-    }
-    
-    .feature-list li:before {
-      content: "●";
-      color: #4ecdc4;
-      position: absolute;
-      left: 0;
-    }
-    
-    .stage-timeline {
-      display: flex;
-      justify-content: space-between;
-      margin: 30px 0;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-    
-    .stage {
-      flex: 1;
-      min-width: 200px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-      padding: 20px;
-      text-align: center;
-      border: 2px solid rgba(0, 212, 255, 0.3);
-      transition: all 0.3s ease;
-    }
-    
-    .stage:hover {
-      transform: translateY(-5px);
-      border-color: #4ecdc4;
-    }
-    
-    .stage h3 {
-      color: #4ecdc4;
-      margin-bottom: 10px;
-    }
-    
-    .quantum-visualization {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin: 20px 0;
-    }
-    
-    .particle-node {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(45deg, #00d4ff, #4ecdc4);
-      margin: 10px;
-      display: inline-block;
-      position: relative;
-      animation: pulse 2s infinite;
-    }
-    
-    .antiparticle-node {
-      background: linear-gradient(45deg, #ff6b6b, #ff9999);
-    }
-    
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.1); opacity: 0.7; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    
-    .parameter-comparison {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 10px;
-      margin: 15px 0;
-      font-size: 0.9em;
-    }
-    
-    .parameter-header {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 10px;
-      font-weight: bold;
-      text-align: center;
-    }
-    
-    .parameter-row {
-      display: contents;
-    }
-    
-    .parameter-cell {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 8px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .lang-content {
-      display: none;
-    }
-    
-    .lang-content.active {
-      display: block;
-    }
-    
-    @media (max-width: 768px) {
-      .comparison-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .quantum-visualization {
-        grid-template-columns: 1fr;
-      }
-      
-      .stage-timeline {
-        flex-direction: column;
-      }
-      
-      .header h1 {
-        font-size: 2em;
-      }
-      
-      .tabs {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .language-switcher {
-        top: 70px;
-        right: 10px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T0 Theory Explorer — Gesamtüberblick | Complete Overview</title>
+    <style>
+        :root {
+            --bg:#090b10; --bg2:#0e1018; --bg3:#161926; --card:#10121c;
+            --accent:#4aaf6e; --accent2:#2d8a4e; --accent-dim:rgba(74,175,110,0.10);
+            --gold:#d4a84a; --text:#c8ccd6; --text2:#8a90a4; --text3:#575d72;
+            --blue:#5e9de5; --green:#58b87a; --red:#d85858; --orange:#d89a4a; --purple:#9878d0;
+            --border:#1f2336; --formula-bg:#0c0e18;
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Palatino Linotype','Book Antiqua',Georgia,serif;background:var(--bg);color:var(--text);line-height:1.72}
+        header{background:linear-gradient(180deg,var(--bg2),var(--bg));border-bottom:1px solid var(--border);padding:2.5rem 2rem 2rem;text-align:center;position:relative}
+        header h1{font-size:1.7rem;color:var(--accent);font-weight:600;margin-bottom:0.3rem}
+        header .sub{color:var(--text2);font-size:1rem;font-style:italic}
+        .lang-toggle{position:absolute;top:1rem;right:1.5rem;display:flex;border:1px solid var(--border);border-radius:5px;overflow:hidden}
+        .lang-btn{background:transparent;border:none;color:var(--text3);padding:0.3rem 0.8rem;cursor:pointer;font-family:inherit;font-size:0.82rem;transition:all .2s}
+        .lang-btn.active{background:var(--accent2);color:#fff}
+        .lang-btn:hover:not(.active){color:var(--text);background:var(--bg3)}
+        .back-btn{position:absolute;top:1rem;left:1.5rem;color:var(--text3);text-decoration:none;font-size:0.82rem;padding:0.3rem 0.7rem;border:1px solid var(--border);border-radius:5px;transition:all .2s}
+        .back-btn:hover{color:var(--text);background:var(--bg3);text-decoration:none}
+        main{max-width:920px;margin:0 auto;padding:2rem 1.5rem 4rem}
+        section{margin-bottom:3rem}
+        h2{color:var(--accent);font-size:1.35rem;font-weight:600;margin-bottom:1rem;padding-bottom:0.35rem;border-bottom:1px solid var(--border)}
+        h3{color:var(--text);font-size:1.08rem;font-weight:600;margin:1.3rem 0 0.4rem}
+        p{margin-bottom:0.85rem}
+        a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+        .formula{background:var(--formula-bg);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:4px;padding:1rem 1.3rem;margin:1rem 0;overflow-x:auto}
+        .formula.center{text-align:center}
+        .formula.gold{border-left-color:var(--gold)}
+        .f-main{font-size:1.2rem;color:var(--accent);font-weight:600;margin:0.2rem 0}
+        .f-detail{font-size:0.96rem;color:var(--text);margin:0.2rem 0;font-family:'Courier New',monospace}
+        .f-note{font-size:0.85rem;color:var(--text2);font-style:italic;margin-top:0.3rem}
+        table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.91rem}
+        th{background:var(--bg3);color:var(--accent);font-weight:600;text-align:left;padding:0.6rem 0.8rem;border-bottom:2px solid var(--border)}
+        td{padding:0.5rem 0.8rem;border-bottom:1px solid var(--border)}
+        tr:hover td{background:rgba(255,255,255,.015)}
+        .val{font-family:'Courier New',monospace;color:var(--blue)}
+        .good{color:var(--green)}.ok{color:var(--orange)}
+        .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:1.2rem 0}
+        .card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.1rem}
+        .card-label{font-size:0.76rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:0.3rem}
+        .card-value{font-family:'Courier New',monospace;font-size:1.2rem;color:var(--accent)}
+        .card-desc{font-size:0.85rem;color:var(--text2);margin-top:0.2rem}
+        .key-box{background:rgba(74,175,110,.06);border:1px solid rgba(74,175,110,.18);border-radius:6px;padding:1.1rem 1.3rem;margin:1.2rem 0}
+        .key-box .label{color:var(--accent);font-weight:700;font-size:0.8rem;text-transform:uppercase;letter-spacing:.07em;margin-bottom:0.4rem}
+        .pdf-links{margin:1.2rem 0;padding:1rem 1.3rem;background:var(--bg2);border:1px solid var(--border);border-radius:6px}
+        .pdf-links h4{color:var(--text3);font-size:0.8rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:0.4rem}
+        .pdf-links a{display:inline-block;margin:0.12rem 0;font-size:0.86rem}
+        footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:var(--text3);font-size:0.82rem}
+        .de,.en{display:none}
+        body.show-de .de{display:block}body.show-en .en{display:block}
+        @media(max-width:640px){header h1{font-size:1.3rem}main{padding:1.2rem 1rem 3rem}.cards{grid-template-columns:1fr}.lang-toggle{position:static;margin:.8rem auto 0;display:inline-flex}.back-btn{position:static;display:inline-block;margin:0 auto .6rem}header{padding-top:1.5rem}}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}section{animation:fadeUp .35s ease-out}
+    </style>
 </head>
-<body>
-  <div class="language-switcher">
-    <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
-    <button class="lang-btn" onclick="switchLanguage('de')">DE</button>
-  </div>
-  
-  <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/index.html" class="back-to-main">
-    <span class="lang-en">← Back to Main Page</span>
-    <span class="lang-de" style="display:none;">← Zurück zur Hauptseite</span>
-  </a>
-  
-  <div class="container">
-    <!-- English Content -->
-    <div class="lang-content lang-en active">
-      <div class="header">
-        <h1>T0 Theory: The Revolutionary Unification</h1>
-        <p>From Maximum Complexity to Ultimate Simplicity</p>
-      </div>
-      
-      <div class="tabs">
-        <div class="tab active" onclick="showTab('overview')">Overview</div>
-        <div class="tab" onclick="showTab('lagrangian')">Simple Lagrangian</div>
-        <div class="tab" onclick="showTab('dirac')">Simplified Dirac</div>
-        <div class="tab" onclick="showTab('predictions')">Predictions</div>
-        <div class="tab" onclick="showTab('quantum')">Deterministic QM</div>
-        <div class="tab" onclick="showTab('ratios')">Ratio Physics</div>
-      </div>
-      
-      <div id="overview" class="content">
-        <h2>The T0 Revolution: Four-Stage Transformation</h2>
-        
-        <div class="fundamental-law">
-          <h3>Fundamental Law of T0 Theory</h3>
-          <div class="equation">T(x,t) · m(x,t) = 1</div>
-          <p>Time and mass are complementary aspects of a single reality</p>
-        </div>
-        
-        <div class="stage-timeline">
-          <div class="stage">
-            <h3>Stage 1</h3>
-            <h4>Simplified Dirac</h4>
-            <p>Complex 4×4 matrices → Simple field dynamics</p>
-            <div class="equation-box">∂²δm = 0</div>
-          </div>
-          <div class="stage">
-            <h3>Stage 2</h3>
-            <h4>Universal Lagrangian</h4>
-            <p>20+ fields → One equation</p>
-            <div class="equation-box">ℒ = ε · (∂δm)²</div>
-          </div>
-          <div class="stage">
-            <h3>Stage 3</h3>
-            <h4>Ratio Physics</h4>
-            <p>Multiple parameters → Energy ratios</p>
-            <div class="equation-box">ξ = 1.33×10⁻⁴</div>
-          </div>
-          <div class="stage">
-            <h3>Stage 4</h3>
-            <h4>Deterministic QM</h4>
-            <p>Probability → Deterministic fields</p>
-            <div class="equation-box">∂²E = 0</div>
-          </div>
-        </div>
-        
-        <div class="highlight">
-          <h3>Revolutionary Achievements</h3>
-          <ul class="feature-list">
-            <li>Eliminates 20+ Standard Model fields → 1 universal field</li>
-            <li>Reduces 19+ free parameters → 1 SI reference scale</li>
-            <li>Solves antiparticle duplication → Same field, opposite sign</li>
-            <li>Includes gravity automatically → Through T·m = 1</li>
-            <li>Explains dark matter/energy → Field effects</li>
-            <li>Achieves 100.000% mathematical accuracy</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div id="lagrangian" class="content" style="display: none;">
-        <h2>Simple Lagrangian Revolution</h2>
-        
-        <div class="comparison-grid">
-          <div class="comparison-card standard-model">
-            <h3>Standard Model Complexity</h3>
-            <ul class="feature-list">
-              <li>Over 20 different field types</li>
-              <li>19+ free parameters</li>
-              <li>Separate antiparticle fields</li>
-              <li>Complex gauge theories</li>
-              <li>No gravity inclusion</li>
-              <li>Mysterious Higgs mechanism</li>
-            </ul>
-            <div class="equation-box">
-              ℒ = √(-g)[½g^μν∂μT∂νT - V(T)] + √(-g)Ω⁴(T)[...] + ...<br>
-              + dozens of additional terms
-            </div>
-          </div>
-          
-          <div class="comparison-card t0-model">
-            <h3>T0 Simple Lagrangian</h3>
-            <ul class="feature-list">
-              <li>1 field: δm(x,t)</li>
-              <li>0 free parameters</li>
-              <li>Same field for particles/antiparticles</li>
-              <li>No gauge complications</li>
-              <li>Gravity automatic</li>
-              <li>Higgs as foundation</li>
-            </ul>
-            <div class="equation-box">
-              ℒ = ε · (∂δm)²<br><br>
-              That's it!
-            </div>
-          </div>
-        </div>
-        
-        <div class="highlight">
-          <h3>Antiparticles: No Mirror Images Needed!</h3>
-          <p>Revolutionary insight: Antiparticles are simply negative field excitations</p>
-          <div class="equation-box">
-            Particle: +δm(x,t)<br>
-            Antiparticle: -δm(x,t)<br>
-            Annihilation: +δm + (-δm) = 0
-          </div>
-          <div style="text-align: center; margin: 20px 0;">
-            <div class="particle-node"></div>
-            <span style="font-size: 2em; margin: 0 20px;">+</span>
-            <div class="particle-node antiparticle-node"></div>
-            <span style="font-size: 2em; margin: 0 20px;">=</span>
-            <span style="font-size: 1.5em;">0 (vacuum)</span>
-          </div>
-        </div>
-        
-        <div class="parameter-comparison">
-          <div class="parameter-header">Aspect</div>
-          <div class="parameter-header">Standard Model</div>
-          <div class="parameter-header">Simple Lagrangian</div>
-          
-          <div class="parameter-cell">Number of fields</div>
-          <div class="parameter-cell">20+</div>
-          <div class="parameter-cell">1</div>
-          
-          <div class="parameter-cell">Free parameters</div>
-          <div class="parameter-cell">19+</div>
-          <div class="parameter-cell">0</div>
-          
-          <div class="parameter-cell">Antiparticle treatment</div>
-          <div class="parameter-cell">Separate fields</div>
-          <div class="parameter-cell">Opposite sign</div>
-          
-          <div class="parameter-cell">Gravity inclusion</div>
-          <div class="parameter-cell">Not possible</div>
-          <div class="parameter-cell">Automatic</div>
-          
-          <div class="parameter-cell">Mathematical complexity</div>
-          <div class="parameter-cell">Extremely high</div>
-          <div class="parameter-cell">Minimal</div>
-        </div>
-      </div>
-      
-      <div id="dirac" class="content" style="display: none;">
-        <h2>Simplified Dirac Equation</h2>
-        
-        <div class="comparison-grid">
-          <div class="comparison-card standard-model">
-            <h3>Traditional Dirac Complexity</h3>
-            <div class="equation-box">(iγ^μ∂μ - m)ψ = 0</div>
-            <ul class="feature-list">
-              <li>4×4 matrix complexity</li>
-              <li>Clifford algebra required</li>
-              <li>Abstract spinors</li>
-              <li>Separate fermion/boson treatment</li>
-              <li>Spin as mysterious property</li>
-              <li>Graduate-level mathematics</li>
-            </ul>
-          </div>
-          
-          <div class="comparison-card t0-model">
-            <h3>T0 Simplified Approach</h3>
-            <div class="equation-box">∂²δm = 0</div>
-            <ul class="feature-list">
-              <li>Simple wave equation</li>
-              <li>No matrices needed</li>
-              <li>Physical field excitations</li>
-              <li>Universal for all particles</li>
-              <li>Spin as node rotation</li>
-              <li>Undergraduate accessible</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="highlight">
-          <h3>Particles as Field Node Patterns</h3>
-          <p>What we call "particles" are simply different excitation patterns in the field δm(x,t):</p>
-          <ul class="feature-list">
-            <li><strong>Electron:</strong> Node pattern with εₑ</li>
-            <li><strong>Muon:</strong> Node pattern with εμ</li>
-            <li><strong>Photon:</strong> Node pattern with εγ → 0</li>
-            <li><strong>All fermions:</strong> Different node excitation modes</li>
-          </ul>
-          <div class="equation-box">
-            Spin emerges from node rotation dynamics!<br>
-            No intrinsic mystery - just geometric rotation
-          </div>
-        </div>
-        
-        <div class="fundamental-law">
-          <h3>The Revolutionary Insight</h3>
-          <div class="equation">All particles = Field node patterns in δm(x,t)</div>
-          <p>Same experimental predictions, infinite conceptual simplification!</p>
-        </div>
-      </div>
-      
-      <div id="predictions" class="content" style="display: none;">
-        <h2>Experimental Predictions and Verification</h2>
-        
-        <div class="predictions-grid">
-          <div class="prediction-card">
-            <h3>Muon g-2 Anomaly</h3>
-            <div class="equation-box">
-              T0 Prediction: 245(15) × 10⁻¹¹<br>
-              Experiment: 251(59) × 10⁻¹¹<br>
-              Agreement: 0.10σ
-            </div>
-            <p>Remarkable agreement with experimental measurement!</p>
-          </div>
-          
-          <div class="prediction-card">
-            <h3>Hubble Parameter H₀</h3>
-            <div class="equation-box">
-              T0 Prediction: 69.9 km/s/Mpc<br>
-              Planck: 67.4 ± 0.5<br>
-              SH0ES: 74.0 ± 1.4
-            </div>
-            <p>Optimal resolution of Hubble tension</p>
-          </div>
-          
-          <div class="prediction-card">
-            <h3>Universal Lepton Ratios</h3>
-            <div class="equation-box">
-              aₑ^(T0) / aμ^(T0) = 1<br>
-              (Universal correction)
-            </div>
-            <p>All leptons receive identical energy corrections</p>
-          </div>
-          
-          <div class="prediction-card">
-            <h3>Energy Independence</h3>
-            <div class="equation-box">
-              ΔΓ^μ(E₁) / ΔΓ^μ(E₂) = 1<br>
-              (No running couplings)
-            </div>
-            <p>Unlike Standard Model energy dependence</p>
-          </div>
-        </div>
-        
-        <div class="highlight">
-          <h3>Universal Parameter ξ</h3>
-          <p>Single dimensionless ratio governs ALL physics:</p>
-          <div class="equation-box">
-            ξ = λₕ²v² / (16π³Eₕ²) ≈ 1.33 × 10⁻⁴
-          </div>
-          <p>This one parameter determines:</p>
-          <ul class="feature-list">
-            <li>All particle g-2 anomalies</li>
-            <li>Cosmological parameters</li>
-            <li>QED corrections</li>
-            <li>Dark matter/energy effects</li>
-            <li>Gravitational modifications</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div id="quantum" class="content" style="display: none;">
-        <h2>Deterministic Quantum Mechanics</h2>
-        
-        <div class="quantum-visualization">
-          <div>
-            <h3>Standard QM Problems</h3>
-            <ul class="feature-list">
-              <li>Mysterious superposition</li>
-              <li>Probabilistic predictions only</li>
-              <li>Wave function collapse</li>
-              <li>Multiple interpretations</li>
-              <li>Unpredictable single measurements</li>
-              <li>Non-local "spooky action"</li>
-            </ul>
-            <div class="equation-box">
-              |ψ⟩ = α|↑⟩ + β|↓⟩<br>
-              P(↑) = |α|²<br>
-              (Statistical only)
-            </div>
-          </div>
-          
-          <div>
-            <h3>T0 Deterministic Solution</h3>
-            <ul class="feature-list">
-              <li>Real energy field configurations</li>
-              <li>Deterministic evolution</li>
-              <li>No collapse needed</li>
-              <li>Single interpretation</li>
-              <li>Predictable individual events</li>
-              <li>Local field correlations</li>
-            </ul>
-            <div class="equation-box">
-              State ≡ {E₁(x,t), E₂(x,t)}<br>
-              ∂²E = 0<br>
-              (Completely deterministic)
-            </div>
-          </div>
-        </div>
-        
-        <div class="highlight">
-          <h3>Revolutionary Quantum Reality</h3>
-          <div class="equation-box">
-            ⟨σᵢ⟩ₜ₀ = (E↓ - E↑) / (E↓ + E↑)
-          </div>
-          <p>Quantum measurements become energy field ratio comparisons:</p>
-          <ul class="feature-list">
-            <li>No mysterious wave function collapse</li>
-            <li>No fundamental randomness</li>
-            <li>Single, objective reality</li>
-            <li>Predictable individual measurements</li>
-            <li>Local energy field interactions</li>
-          </ul>
-        </div>
-        
-        <div class="fundamental-law">
-          <h3>Quantum Computing Revolution</h3>
-          <div class="equation">Deterministic quantum algorithms</div>
-          <p>No probabilistic error correction needed!</p>
-        </div>
-      </div>
-      
-      <div id="ratios" class="content" style="display: none;">
-        <h2>Pure Ratio-Based Physics</h2>
-        
-        <div class="comparison-grid">
-          <div class="comparison-card standard-model">
-            <h3>Traditional Parameter Physics</h3>
-            <ul class="feature-list">
-              <li>G = 6.67 × 10⁻¹¹ m³/(kg·s²)</li>
-              <li>α = 1/137</li>
-              <li>mₑ = 9.109 × 10⁻³¹ kg</li>
-              <li>20+ independent parameters</li>
-              <li>All experimentally determined</li>
-              <li>No theoretical relationships</li>
-            </ul>
-          </div>
-          
-          <div class="comparison-card t0-model">
-            <h3>T0 Ratio-Based Physics</h3>
-            <ul class="feature-list">
-              <li>All physics through energy ratios</li>
-              <li>One SI reference: ξ = 1.33×10⁻⁴</li>
-              <li>Mathematical relations, not parameters</li>
-              <li>E = m, E = 1/L, E = 1/T</li>
-              <li>100.000% mathematical accuracy</li>
-              <li>Pure energy identities</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="highlight">
-          <h3>Universal Energy Relations</h3>
-          <div class="equation-box">
-            E = m (mass is energy)<br>
-            E = T_temp (temperature is energy)<br>
-            E = ω (frequency is energy)<br>
-            E = 1/L (length is inverse energy)<br>
-            E = 1/T (time is inverse energy)
-          </div>
-          <p><strong>Mathematical accuracy:</strong> 100.000% (exact identities)</p>
-          <p><strong>Complex formulas:</strong> 99.98-100.04% (rounding errors)</p>
-        </div>
-        
-        <div class="fundamental-law">
-          <h3>The Ultimate Truth</h3>
-          <div class="equation">Reality = Energy ratios in E(x,t)</div>
-          <p>Physics is finished. The universe is pure energy ratios.</p>
-        </div>
-        
-        <div class="parameter-comparison">
-          <div class="parameter-header">Physics Aspect</div>
-          <div class="parameter-header">Complex Formulas</div>
-          <div class="parameter-header">Simple Energy Relations</div>
-          
-          <div class="parameter-cell">Planck Time</div>
-          <div class="parameter-cell">√(ℏG/c⁵) - 100.016%</div>
-          <div class="parameter-cell">Direct identity - 100.000%</div>
-          
-          <div class="parameter-cell">Mass-Energy</div>
-          <div class="parameter-cell">E = mc² - 99.98%</div>
-          <div class="parameter-cell">E = m - 100.000%</div>
-          
-          <div class="parameter-cell">Frequency-Energy</div>
-          <div class="parameter-cell">E = ℏω - 100.04%</div>
-          <div class="parameter-cell">E = ω - 100.000%</div>
-          
-          <div class="parameter-cell">Length-Energy</div>
-          <div class="parameter-cell">Complex relations - ~100%</div>
-          <div class="parameter-cell">E = 1/L - 100.000%</div>
-        </div>
-      </div>
+<body class="show-de">
+<header>
+    <a href="../index.html" class="back-btn">← Index</a>
+    <div class="lang-toggle">
+        <button class="lang-btn active" id="btn-de" onclick="setLang('de')">DE</button>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
     </div>
+    <h1>T0 Theory Explorer</h1>
+    <div class="sub">
+        <span class="de">Gesamtüberblick über die T0-Theorie</span>
+        <span class="en">Complete overview of T0 theory</span>
+    </div>
+</header>
+<main>
 
-    <!-- German Content -->
-    <div class="lang-content lang-de">
-      <div class="header">
-        <h1>T0 Theory: Die Revolutionäre Vereinheitlichung</h1>
-        <p>Von maximaler Komplexität zu ultimativer Einfachheit</p>
-      </div>
-      
-      <div class="tabs">
-        <div class="tab active" onclick="showTab('overview-de')">Übersicht</div>
-        <div class="tab" onclick="showTab('lagrangian-de')">Einfacher Lagrangian</div>
-        <div class="tab" onclick="showTab('dirac-de')">Vereinfachter Dirac</div>
-        <div class="tab" onclick="showTab('predictions-de')">Vorhersagen</div>
-        <div class="tab" onclick="showTab('quantum-de')">Deterministische QM</div>
-        <div class="tab" onclick="showTab('ratios-de')">Verhältnis-Physik</div>
-      </div>
-      
-      <div id="overview-de" class="content">
-        <h2>Die T0-Revolution: Vier-Stufen-Transformation</h2>
-        
-        <div class="fundamental-law">
-          <h3>Fundamentales Gesetz der T0-Theorie</h3>
-          <div class="equation">T(x,t) · m(x,t) = 1</div>
-          <p>Zeit und Masse sind komplementäre Aspekte einer einzigen Realität</p>
-        </div>
-        
-        <div class="stage-timeline">
-          <div class="stage">
-            <h3>Stufe 1</h3>
-            <h4>Vereinfachter Dirac</h4>
-            <p>Komplexe 4×4 Matrizen → Einfache Felddynamik</p>
-            <div class="equation-box">∂²δm = 0</div>
-          </div>
-          <div class="stage">
-            <h3>Stufe 2</h3>
-            <h4>Universeller Lagrangian</h4>
-            <p>20+ Felder → Eine Gleichung</p>
-            <div class="equation-box">ℒ = ε · (∂δm)²</div>
-          </div>
-          <div class="stage">
-            <h3>Stufe 3</h3>
-            <h4>Verhältnis-Physik</h4>
-            <p>Mehrere Parameter → Energieverhältnisse</p>
-            <div class="equation-box">ξ = 1.33×10⁻⁴</div>
-          </div>
-          <div class="stage">
-            <h3>Stufe 4</h3>
-            <h4>Deterministische QM</h4>
-            <p>Wahrscheinlichkeit → Deterministische Felder</p>
-            <div class="equation-box">∂²E = 0</div>
-          </div>
-        </div>
-        
-        <div class="highlight">
-          <h3>Revolutionäre Errungenschaften</h3>
-          <ul class="feature-list">
-            <li>Eliminiert 20+ Standard Model Felder → 1 universelles Feld</li>
-            <li>Reduziert 19+ freie Parameter → 1 SI-Referenzskala</li>
-            <li>Löst Antiteilchen-Duplikation → Gleiches Feld, entgegengesetztes Vorzeichen</li>
-            <li>Beinhaltet Gravitation automatisch → Durch T·m = 1</li>
-            <li>Erklärt dunkle Materie/Energie → Feldeffekte</li>
-            <li>Erreicht 100.000% mathematische Genauigkeit</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div id="lagrangian-de" class="content" style="display: none;">
-        <h2>Einfacher Lagrangian Revolution</h2>
-        
-        <div class="comparison-grid">
-          <div class="comparison-card standard-model">
-            <h3>Standard Model Komplexität</h3>
-            <ul class="feature-list">
-              <li>Über 20 verschiedene Feldtypen</li>
-              <li>19+ freie Parameter</li>
-              <li>Separate Antiteilchen-Felder</li>
-              <li>Komplexe Eichtheorien</li>
-              <li>Keine Gravitations-Inklusion</li>
-              <li>Mysteriöser Higgs-Mechanismus</li>
-            </ul>
-            <div class="equation-box">
-              ℒ = √(-g)[½g^μν∂μT∂νT - V(T)] + √(-g)Ω⁴(T)[...] + ...<br>
-              + dutzende zusätzliche Terme
-            </div>
-          </div>
-          
-          <div class="comparison-card t0-model">
-            <h3>T0 Einfacher Lagrangian</h3>
-            <ul class="feature-list">
-              <li>1 Feld: δm(x,t)</li>
-              <li>0 freie Parameter</li>
-              <li>Gleiches Feld für Teilchen/Antiteilchen</li>
-              <li>Keine Eich-Komplikationen</li>
-              <li>Gravitation automatisch</li>
-              <li>Higgs als Grundlage</li>
-            </ul>
-            <div class="equation-box">
-              ℒ = ε · (∂δm)²<br><br>
-              Das ist alles!
-            </div>
-          </div>
-        </div>
-        
-        <div class="highlight">
-          <h3>Antiteilchen: Keine Spiegelbilder nötig!</h3>
-          <p>Revolutionäre Erkenntnis: Antiteilchen sind einfach negative Feldanregungen</p>
-          <div class="equation-box">
-            Teilchen: +δm(x,t)<br>
-            Antiteilchen: -δm(x,t)<br>
-            Annihilation: +δm + (-δm) = 0
-          </div>
-          <div style="text-align: center; margin: 20px 0;">
-            <div class="particle-node"></div>
-            <span style="font-size: 2em; margin: 0 20px;">+</span>
-            <div class="particle-node antiparticle-node"></div>
-            <span style="font-size: 2em; margin: 0 20px;">=</span>
-            <span style="font-size: 1.5em;">0 (Vakuum)</span>
-          </div>
-        </div>
-        
-        <div class="parameter-comparison">
-          <div class="parameter-header">Aspekt</div>
-          <div class="parameter-header">Standard Model</div>
-          <div class="parameter-header">Einfacher Lagrangian</div>
-          
-          <div class="parameter-cell">Anzahl Felder</div>
-          <div class="parameter-cell">20+</div>
-          <div class="parameter-cell">1</div>
-          
-          <div class="parameter-cell">Freie Parameter</div>
-          <div class="parameter-cell">19+</div>
-          <div class="parameter-cell">0</div>
-          
-          <div class="parameter-cell">Antiteilchen-Behandlung</div>
-          <div class="parameter-cell">Separate Felder</div>
-          <div class="parameter-cell">Entgegengesetztes Vorzeichen</div>
-          
-          <div class="parameter-cell">Gravitations-Inklusion</div>
-          <div class="parameter-cell">Nicht möglich</div>
-          <div class="parameter-cell">Automatisch</div>
-          
-          <div class="parameter-cell">Mathematische Komplexität</div>
-          <div class="parameter-cell">Extrem hoch</div>
-          <div class="parameter-cell">Minimal</div>
-        </div>
-      </div>
-      
-      <div id="dirac-de" class="content" style="display: none;">
-        <h2>Vereinfachte Dirac-Gleichung</h2>
-        
-        <div class="comparison-grid">
-          <div class="comparison-card standard-model">
-            <h3>Traditionelle Dirac-Komplexität</h3>
-            <div class="equation-box">(iγ^μ∂μ - m)ψ = 0</div>
-            <ul class="feature-list">
-              <li>4×4 Matrix-Komplexität</li>
-              <li>Clifford-Algebra erforderlich</li>
-              <li>Abstrakte Spinoren</li>
-              <li>Separate Fermion/Boson-Behandlung</li>
-              <li>Spin als mysteriöse Eigenschaft</li>
-              <li>Graduierten-Mathematik</li>
-            </ul>
-          </div>
-          
-          <div class="comparison-card t0-model">
-            <h3>T0 Vereinfachter Ansatz</h3>
-            <div class="equation-box">∂²δm = 0</div>
-            <ul class="feature-list">
-              <li>Einfache Wellengleichung</li>
-              <li>Keine Matrizen nötig</li>
-              <li>Physikalische Feldanregungen</li>
-              <li>Universal für alle Teilchen</li>
-              <li>Spin als Knotenrotation</li>
-              <li>Bachelor-zugänglich</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="highlight">
-          <h3>Teilchen als Feld-Knotenmuster</h3>
-          <p>Was wir "Teilchen" nennen, sind einfach verschiedene Anregungsmuster im Feld δm(x,t):</p>
-          <ul class="feature-list">
-            <li><strong>Elektron:</strong> Knotenmuster mit εₑ</li>
-            <li><strong>Myon:</strong> Knotenmuster mit εμ</li>
-            <li><strong>Photon:</strong> Knotenmuster mit εγ → 0</li>
-            <li><strong>Alle Fermionen:</strong> Verschiedene Knoten-Anregungsmodi</li>
-          </ul>
-          <div class="equation-box">
-            Spin entsteht aus Knoten-Rotationsdynamik!<br>
-            Kein intrinsisches Mysterium - nur geometrische Rotation
-          </div>
-        </div>
-        
-        <div class="fundamental-law">
-          <h3>Die Revolutionäre Erkenntnis</h3>
-          <div class="equation">Alle Teilchen = Feld-Knotenmuster in δm(x,t)</div>
-          <p>Gleiche experimentelle Vorhersagen, unendliche konzeptuelle Vereinfachung!</p>
-        </div>
-      </div>
-      
-      <div id="predictions-de" class="content" style="display: none;">
-        <h2>Experimentelle Vorhersagen und Verifikation</h2>
-        
-        <div class="predictions-grid">
-          <div class="prediction-card">
-            <h3>Myon g-2 Anomalie</h3>
-            <div class="equation-box">
-              T0-Vorhersage: 245(15) × 10⁻¹¹<br>
-              Experiment: 251(59) × 10⁻¹¹<br>
-              Übereinstimmung: 0.10σ
-            </div>
-            <p>Bemerkenswerte Übereinstimmung mit experimenteller Messung!</p>
-          </div>
-          
-          <div class="prediction-card">
-            <h3>Hubble-Parameter H₀</h3>
-            <div class="equation-box">
-              T0-Vorhersage: 69.9 km/s/Mpc<br>
-              Planck: 67.4 ± 0.5<br>
-              SH0ES: 74.0 ± 1.4
-            </div>
-            <p>Optimale Auflösung der Hubble-Spannung</p>
-          </div>
-          
-          <div class="prediction-card">
-            <h3>Universelle Lepton-Verhältnisse</h3>
-            <div class="equation-box">
-              aₑ^(T0) / aμ^(T0) = 1<br>
-              (Universelle Korrektur)
-            </div>
-            <p>Alle Leptonen erhalten identische Energiekorrekturen</p>
-          </div>
-          
-          <div class="prediction-card">
-            <h3>Energie-Unabhängigkeit</h3>
-            <div class="equation-box">
-              ΔΓ^μ(E₁) / ΔΓ^μ(E₂) = 1<br>
-              (Keine laufenden Kopplungen)
-            </div>
-            <p>Anders als Standard Model Energieabhängigkeit</p>
-          </div>
-        </div>
-        
-        <div class="highlight">
-          <h3>Universeller Parameter ξ</h3>
-          <p>Ein einziges dimensionsloses Verhältnis regiert ALLE Physik:</p>
-          <div class="equation-box">
-            ξ = λₕ²v² / (16π³Eₕ²) ≈ 1.33 × 10⁻⁴
-          </div>
-          <p>Dieser eine Parameter bestimmt:</p>
-          <ul class="feature-list">
-            <li>Alle Teilchen g-2 Anomalien</li>
-            <li>Kosmologische Parameter</li>
-            <li>QED-Korrekturen</li>
-            <li>Dunkle Materie/Energie-Effekte</li>
-            <li>Gravitationsmodifikationen</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div id="quantum-de" class="content" style="display: none;">
-        <h2>Deterministische Quantenmechanik</h2>
-        
-        <div class="quantum-visualization">
-          <div>
-            <h3>Standard QM Probleme</h3>
-            <ul class="feature-list">
-              <li>Mysteriöse Superposition</li>
-              <li>Nur probabilistische Vorhersagen</li>
-              <li>Wellenfunktions-Kollaps</li>
-              <li>Multiple Interpretationen</li>
-              <li>Unvorhersagbare Einzelmessungen</li>
-              <li>Nicht-lokale "spukhafte Wirkung"</li>
-            </ul>
-            <div class="equation-box">
-              |ψ⟩ = α|↑⟩ + β|↓⟩<br>
-              P(↑) = |α|²<br>
-              (Nur statistisch)
-            </div>
-          </div>
-          
-          <div>
-            <h3>T0 Deterministische Lösung</h3>
-            <ul class="feature-list">
-              <li>Reale Energiefeld-Konfigurationen</li>
-              <li>Deterministische Evolution</li>
-              <li>Kein Kollaps nötig</li>
-              <li>Eine Interpretation</li>
-              <li>Vorhersagbare individuelle Ereignisse</li>
-              <li>Lokale Feld-Korrelationen</li>
-            </ul>
-            <div class="equation-box">
-              Zustand ≡ {E₁(x,t), E₂(x,t)}<br>
-              ∂²E = 0<br>
-              (Vollständig deterministisch)
-            </div>
-          </div>
-        </div>
-        
-        <div class="highlight">
-          <h3>Revolutionäre Quanten-Realität</h3>
-          <div class="equation-box">
-            ⟨σᵢ⟩ₜ₀ = (E↓ - E↑) / (E↓ + E↑)
-          </div>
-          <p>Quantenmessungen werden zu Energiefeld-Verhältnis-Vergleichen:</p>
-          <ul class="feature-list">
-            <li>Kein mysteriöser Wellenfunktions-Kollaps</li>
-            <li>Keine fundamentale Zufälligkeit</li>
-            <li>Eine, objektive Realität</li>
-            <li>Vorhersagbare Einzelmessungen</li>
-            <li>Lokale Energiefeld-Wechselwirkungen</li>
-          </ul>
-        </div>
-        
-        <div class="fundamental-law">
-          <h3>Quantencomputing-Revolution</h3>
-          <div class="equation">Deterministische Quantenalgorithmen</div>
-          <p>Keine probabilistische Fehlerkorrektur nötig!</p>
-        </div>
-      </div>
-      
-      <div id="ratios-de" class="content" style="display: none;">
-        <h2>Reine Verhältnis-basierte Physik</h2>
-        
-        <div class="comparison-grid">
-          <div class="comparison-card standard-model">
-            <h3>Traditionelle Parameter-Physik</h3>
-            <ul class="feature-list">
-              <li>G = 6.67 × 10⁻¹¹ m³/(kg·s²)</li>
-              <li>α = 1/137</li>
-              <li>mₑ = 9.109 × 10⁻³¹ kg</li>
-              <li>20+ unabhängige Parameter</li>
-              <li>Alle experimentell bestimmt</li>
-              <li>Keine theoretischen Beziehungen</li>
-            </ul>
-          </div>
-          
-          <div class="comparison-card t0-model">
-            <h3>T0 Verhältnis-basierte Physik</h3>
-            <ul class="feature-list">
-              <li>Alle Physik durch Energieverhältnisse</li>
-              <li>Eine SI-Referenz: ξ = 1.33×10⁻⁴</li>
-              <li>Mathematische Relationen, keine Parameter</li>
-              <li>E = m, E = 1/L, E = 1/T</li>
-              <li>100.000% mathematische Genauigkeit</li>
-              <li>Reine Energie-Identitäten</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="highlight">
-          <h3>Universelle Energie-Relationen</h3>
-          <div class="equation-box">
-            E = m (Masse ist Energie)<br>
-            E = T_temp (Temperatur ist Energie)<br>
-            E = ω (Frequenz ist Energie)<br>
-            E = 1/L (Länge ist inverse Energie)<br>
-            E = 1/T (Zeit ist inverse Energie)
-          </div>
-          <p><strong>Mathematische Genauigkeit:</strong> 100.000% (exakte Identitäten)</p>
-          <p><strong>Komplexe Formeln:</strong> 99.98-100.04% (Rundungsfehler)</p>
-        </div>
-        
-        <div class="fundamental-law">
-          <h3>Die ultimative Wahrheit</h3>
-          <div class="equation">Realität = Energieverhältnisse in E(x,t)</div>
-          <p>Die Physik ist beendet. Das Universum sind reine Energieverhältnisse.</p>
-        </div>
-        
-        <div class="parameter-comparison">
-          <div class="parameter-header">Physik-Aspekt</div>
-          <div class="parameter-header">Komplexe Formeln</div>
-          <div class="parameter-header">Einfache Energie-Relationen</div>
-          
-          <div class="parameter-cell">Planck-Zeit</div>
-          <div class="parameter-cell">√(ℏG/c⁵) - 100.016%</div>
-          <div class="parameter-cell">Direkte Identität - 100.000%</div>
-          
-          <div class="parameter-cell">Masse-Energie</div>
-          <div class="parameter-cell">E = mc² - 99.98%</div>
-          <div class="parameter-cell">E = m - 100.000%</div>
-          
-          <div class="parameter-cell">Frequenz-Energie</div>
-          <div class="parameter-cell">E = ℏω - 100.04%</div>
-          <div class="parameter-cell">E = ω - 100.000%</div>
-          
-          <div class="parameter-cell">Länge-Energie</div>
-          <div class="parameter-cell">Komplexe Relationen - ~100%</div>
-          <div class="parameter-cell">E = 1/L - 100.000%</div>
-        </div>
-      </div>
+<!-- 1. WHAT IS T0 -->
+<section>
+    <h2><span class="de">1. Was ist die T0-Theorie?</span><span class="en">1. What is T0 Theory?</span></h2>
+    <div class="de"><p>Die T0-Theorie ist ein geometrischer Rahmen, der alle fundamentalen physikalischen Konstanten und Teilchenmassen aus einem einzigen dimensionslosen Parameter ξ = 4/30000 ableitet. Im Standardmodell der Teilchenphysik sind über 20 freie Parameter erforderlich; die T0-Theorie reduziert diese auf einen.</p></div>
+    <div class="en"><p>T0 theory is a geometric framework that derives all fundamental physical constants and particle masses from a single dimensionless parameter ξ = 4/30000. The Standard Model of particle physics requires over 20 free parameters; T0 theory reduces these to one.</p></div>
+    <div class="formula center">
+        <div class="f-main">ξ = 4/30000 = (4/3) × 10⁻⁴</div>
+        <div class="f-note"><span class="de">Einziger freier Parameter der Theorie</span><span class="en">The theory's only free parameter</span></div>
     </div>
-  </div>
-  
-  <script>
-    function switchLanguage(lang) {
-      // Update button states
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      event.target.classList.add('active');
-      
-      // Switch content
-      document.querySelectorAll('.lang-content').forEach(content => {
-        content.classList.remove('active');
-      });
-      document.querySelectorAll('.lang-' + lang).forEach(element => {
-        element.classList.add('active');
-      });
-      
-      // Update back button text
-      document.querySelectorAll('.back-to-main span').forEach(span => {
-        span.style.display = 'none';
-      });
-      document.querySelector('.back-to-main .lang-' + lang).style.display = 'inline';
-      
-      // Update page language attribute
-      document.documentElement.lang = lang;
-      
-      // Reset to overview tab with language suffix
-      const suffix = lang === 'de' ? '-de' : '';
-      showTab('overview' + suffix);
-    }
-    
-    function showTab(tabName) {
-      // Determine current language
-      const currentLang = document.documentElement.lang || 'en';
-      const suffix = currentLang === 'de' ? '-de' : '';
-      
-      // Hide all content divs within active language content
-      const activeContent = document.querySelector('.lang-content.active');
-      if (activeContent) {
-        activeContent.querySelectorAll('.content').forEach(content => {
-          content.style.display = 'none';
-        });
-      }
-      
-      // Remove active class from all tabs in current language
-      const activeTabs = document.querySelector('.lang-content.active .tabs');
-      if (activeTabs) {
-        activeTabs.querySelectorAll('.tab').forEach(tab => {
-          tab.classList.remove('active');
-        });
-      }
-      
-      // Show selected content
-      const selectedContent = document.getElementById(tabName);
-      if (selectedContent) {
-        selectedContent.style.display = 'block';
-      }
-      
-      // Add active class to clicked tab
-      if (event && event.target) {
-        event.target.classList.add('active');
-      }
-    }
-    
-    // Add some dynamic effects
-    document.addEventListener('DOMContentLoaded', function() {
-      // Animate particle nodes
-      const particles = document.querySelectorAll('.particle-node');
-      particles.forEach((particle, index) => {
-        particle.style.animationDelay = `${index * 0.5}s`;
-      });
-      
-      // Add hover effects to equations
-      const equations = document.querySelectorAll('.equation-box');
-      equations.forEach(eq => {
-        eq.addEventListener('mouseenter', function() {
-          this.style.transform = 'scale(1.02)';
-          this.style.transition = 'transform 0.3s ease';
-        });
-        
-        eq.addEventListener('mouseleave', function() {
-          this.style.transform = 'scale(1)';
-        });
-      });
-    });
-  </script>
+    <table>
+        <thead><tr><th><span class="de">Aspekt</span><span class="en">Aspect</span></th><th><span class="de">Standardmodell</span><span class="en">Standard Model</span></th><th>T0</th></tr></thead>
+        <tbody>
+            <tr><td><span class="de">Freie Parameter</span><span class="en">Free parameters</span></td><td>> 20</td><td><strong>1 (ξ)</strong></td></tr>
+            <tr><td><span class="de">Teilchenmassen</span><span class="en">Particle masses</span></td><td><span class="de">Empirisch</span><span class="en">Empirical</span></td><td><span class="de">Aus Quantenzahlen</span><span class="en">From quantum numbers</span></td></tr>
+            <tr><td><span class="de">Konstanten</span><span class="en">Constants</span></td><td><span class="de">Gemessen</span><span class="en">Measured</span></td><td><span class="de">Geometrisch abgeleitet</span><span class="en">Geometrically derived</span></td></tr>
+            <tr><td><span class="de">Vereinheitlichung</span><span class="en">Unification</span></td><td><span class="de">Getrennte Theorien</span><span class="en">Separate theories</span></td><td><span class="de">Einheitlicher Rahmen</span><span class="en">Unified framework</span></td></tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- 2. CORE PRINCIPLES -->
+<section>
+    <h2><span class="de">2. Kernprinzipien</span><span class="en">2. Core Principles</span></h2>
+    <h3><span class="de">Zeit-Masse-Dualität</span><span class="en">Time-Mass Duality</span></h3>
+    <div class="de"><p>In natürlichen Einheiten (ℏ = c = 1) gilt die fundamentale Beziehung T · m = 1. Schwere Teilchen haben kurze charakteristische Zeitskalen, leichte Teilchen lange. Diese Dualität ist keine bloße Konvention, sondern spiegelt eine geometrische Eigenschaft der Raumzeit wider.</p></div>
+    <div class="en"><p>In natural units (ℏ = c = 1), the fundamental relation T · m = 1 holds. Heavy particles have short characteristic time scales, light particles long ones. This duality is not a mere convention but reflects a geometric property of spacetime.</p></div>
+    <div class="formula center"><div class="f-main">T<sub>Feld</sub> · E<sub>Feld</sub> = 1</div></div>
+
+    <h3><span class="de">Universelles Energiefeld</span><span class="en">Universal Energy Field</span></h3>
+    <div class="de"><p>Das T0-Modell beschreibt alle Physik durch ein einziges universelles Energiefeld E(x,t), das der d'Alembert-Gleichung gehorcht. Teilchen sind lokalisierte Anregungen dieses Feldes, Kräfte Gradienten-Wechselwirkungen.</p></div>
+    <div class="en"><p>The T0 model describes all physics through a single universal energy field E(x,t) obeying the d'Alembert equation. Particles are localized excitations of this field, forces are gradient interactions.</p></div>
+    <div class="formula"><div class="f-detail">□E = (∇² − ∂²/∂t²) E = 0</div></div>
+
+    <h3><span class="de">Fraktale Raumzeit</span><span class="en">Fractal Spacetime</span></h3>
+    <div class="de"><p>Die Raumdimension ist nicht exakt 3, sondern weicht um ξ davon ab. Die lokale Raumdimension beträgt D<sub>f</sub><sup>Raum</sup> = 3 − ξ = 2.999867, die über den RG-Fluss kumulierte effektive Dimension D<sub>f</sub><sup>eff</sup> ≈ 2.973.</p></div>
+    <div class="en"><p>The spatial dimension is not exactly 3 but deviates by ξ. The local spatial dimension is D<sub>f</sub><sup>space</sup> = 3 − ξ = 2.999867, the effective dimension cumulated over the RG flow is D<sub>f</sub><sup>eff</sup> ≈ 2.973.</p></div>
+    <div class="cards">
+        <div class="card"><div class="card-label">D<sub>f</sub><sup>Raum</sup></div><div class="card-value" style="color:var(--green)">2.999867</div><div class="card-desc">= 3 − ξ</div></div>
+        <div class="card"><div class="card-label">D<sub>f</sub><sup>eff</sup></div><div class="card-value" style="color:var(--orange)">≈ 2.973</div><div class="card-desc"><span class="de">Kumuliert über RG-Fluss</span><span class="en">Cumulated over RG flow</span></div></div>
+        <div class="card"><div class="card-label">K<sub>frak</sub></div><div class="card-value">0.98667</div><div class="card-desc">= 1 − 100ξ</div></div>
+    </div>
+</section>
+
+<!-- 3. WHAT ξ DERIVES -->
+<section>
+    <h2><span class="de">3. Was aus ξ folgt</span><span class="en">3. What ξ Derives</span></h2>
+    <table>
+        <thead><tr><th><span class="de">Größe</span><span class="en">Quantity</span></th><th><span class="de">T0-Ausdruck</span><span class="en">T0 expression</span></th><th><span class="de">Wert</span><span class="en">Value</span></th><th><span class="de">Abw.</span><span class="en">Dev.</span></th></tr></thead>
+        <tbody>
+            <tr><td>α⁻¹</td><td class="val">ξ · (E₀/MeV)²</td><td class="val">137.04</td><td class="good">0.003%</td></tr>
+            <tr><td>G</td><td class="val"><span class="de">Aus ξ über m<sub>e</sub></span><span class="en">From ξ via m<sub>e</sub></span></td><td class="val">6.67430×10⁻¹¹</td><td class="good">&lt;0.0002%</td></tr>
+            <tr><td>m<sub>e</sub></td><td class="val">c<sub>e</sub> · ξ<sup>5/2</sup></td><td class="val">0.511 MeV</td><td class="good">~0%</td></tr>
+            <tr><td>m<sub>μ</sub></td><td class="val">c<sub>μ</sub> · ξ<sup>2</sup></td><td class="val">105.7 MeV</td><td class="good">~0.04%</td></tr>
+            <tr><td>m<sub>τ</sub></td><td class="val"><span class="de">Aus (n,l,s)=(3,2,½)</span><span class="en">From (n,l,s)=(3,2,½)</span></td><td class="val">1776.9 MeV</td><td class="good">~0%</td></tr>
+            <tr><td>H₀</td><td class="val">E₀·ξ<sup>41/4</sup>/ℏ</td><td class="val">66.2 km/s/Mpc</td><td class="ok">−1.9%</td></tr>
+            <tr><td>T<sub>CMB</sub></td><td class="val">(16/9)·ξ²·E<sub>ξ</sub></td><td class="val">2.725 K</td><td class="good">~0%</td></tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- 4. LAGRANGIAN -->
+<section>
+    <h2><span class="de">4. Lagrange-Dichte</span><span class="en">4. Lagrangian Density</span></h2>
+    <div class="de"><p>Die T0-Theorie benötigt keine 20+ Terme wie das Standardmodell. Die vollständige Physik folgt aus einer einzigen Lagrange-Dichte:</p></div>
+    <div class="en"><p>T0 theory requires no 20+ terms like the Standard Model. All physics follows from a single Lagrangian density:</p></div>
+    <div class="formula gold center">
+        <div class="f-main">ℒ = (ξ/E<sub>P</sub>²) · (∂Δm)²</div>
+        <div class="f-note"><span class="de">Δm = Masse-Abweichung vom Vakuumwert, E<sub>P</sub> = Planck-Energie</span><span class="en">Δm = mass deviation from vacuum value, E<sub>P</sub> = Planck energy</span></div>
+    </div>
+    <div class="de"><p>Aus dieser Dichte folgen Bewegungsgleichungen, Kopplungskonstanten und das vollständige Teilchenspektrum. Der Vergleich verschiedener Lagrange-Formulierungen findet sich in Doc 049.</p></div>
+    <div class="en"><p>From this density follow equations of motion, coupling constants, and the complete particle spectrum. A comparison of different Lagrangian formulations can be found in Doc 049.</p></div>
+</section>
+
+<!-- 5. DIRAC -->
+<section>
+    <h2><span class="de">5. Vereinfachte Dirac-Gleichung</span><span class="en">5. Simplified Dirac Equation</span></h2>
+    <div class="de"><p>Die Standard-Dirac-Gleichung mit 4×4-Matrixstruktur und Clifford-Algebra wird in der T0-Theorie durch Kopplung an das Zeitfeld T(x,t) erweitert:</p></div>
+    <div class="en"><p>The standard Dirac equation with 4×4 matrix structure and Clifford algebra is extended in T0 theory through coupling to the time field T(x,t):</p></div>
+    <div class="formula">
+        <div class="f-detail">iℏ ∂ψ/∂t + iψ [∂T/∂t + v⃗ · ∇T] = Ĥψ</div>
+        <div class="f-note"><span class="de">Der zusätzliche Term beschreibt die Kopplung an das Zeitfeld (ähnlich Doppler-Termen).</span><span class="en">The additional term describes coupling to the time field (similar to Doppler terms).</span></div>
+    </div>
+</section>
+
+<!-- 6. g-2 -->
+<section>
+    <h2><span class="de">6. Anomale magnetische Momente (g−2)</span><span class="en">6. Anomalous Magnetic Moments (g−2)</span></h2>
+    <div class="de"><p>Die T0-Theorie berechnet g−2-Anomalien direkt aus ξ. Die aktuelle Analyse (Rev. 12) zeigt, dass fraktale Korrekturen (K<sub>frak</sub><sup>3/2</sup>) zuvor unerklärte ~2%-Abweichungen erklären können:</p></div>
+    <div class="en"><p>T0 theory calculates g−2 anomalies directly from ξ. The current analysis (Rev. 12) shows that fractal corrections (K<sub>frak</sub><sup>3/2</sup>) can explain previously unexplained ~2% deviations:</p></div>
+    <table>
+        <thead><tr><th>Lepton</th><th><span class="de">T0-Vorhersage</span><span class="en">T0 prediction</span></th><th><span class="de">Abweichung</span><span class="en">Deviation</span></th></tr></thead>
+        <tbody>
+            <tr><td><span class="de">Elektron a<sub>e</sub></span><span class="en">Electron a<sub>e</sub></span></td><td class="val"><span class="de">mit K<sub>frak</sub><sup>3/2</sup></span><span class="en">with K<sub>frak</sub><sup>3/2</sup></span></td><td class="good">0.014%</td></tr>
+            <tr><td><span class="de">Myon a<sub>μ</sub></span><span class="en">Muon a<sub>μ</sub></span></td><td class="val"><span class="de">mit K<sub>frak</sub><sup>3/2</sup></span><span class="en">with K<sub>frak</sub><sup>3/2</sup></span></td><td class="good">0.15%</td></tr>
+            <tr><td>Tau a<sub>τ</sub></td><td class="val">1.282×10⁻³</td><td class="ok"><span class="de">Testbar bei Belle II</span><span class="en">Testable at Belle II</span></td></tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- 7. COSMOLOGY SUMMARY -->
+<section>
+    <h2><span class="de">7. Kosmologie</span><span class="en">7. Cosmology</span></h2>
+    <div class="de"><p>Die T0-Theorie postuliert ein statisches Universum ohne Urknall. Die kosmische Rotverschiebung ist ein geometrischer Effekt (Pfadstreckung im ξ-Feld), die CMB-Temperatur ergibt sich aus ξ-Feld-Fluktuationen, und Dunkle Energie wird nicht benötigt. Die Hubble-Konstante folgt paramterfrei: H₀ = E₀·ξ<sup>41/4</sup>/ℏ ≈ 66.2 km/s/Mpc (−1.9% von Planck).</p></div>
+    <div class="en"><p>T0 theory postulates a static universe without a Big Bang. Cosmic redshift is a geometric effect (path stretching in the ξ field), CMB temperature follows from ξ-field fluctuations, and dark energy is not needed. The Hubble constant follows parameter-free: H₀ = E₀·ξ<sup>41/4</sup>/ℏ ≈ 66.2 km/s/Mpc (−1.9% from Planck).</p></div>
+</section>
+
+<!-- 8. FIELD GEOMETRIES -->
+<section>
+    <h2><span class="de">8. Drei Feldgeometrien</span><span class="en">8. Three Field Geometries</span></h2>
+    <div class="de"><p>Die T0-Theorie unterscheidet drei charakteristische Feldgeometrien, analog zur Systemtheorie (konzentrierte Elemente, Leitungen, Kontinuumsfelder):</p></div>
+    <div class="en"><p>T0 theory distinguishes three characteristic field geometries, analogous to system theory (lumped elements, transmission lines, continuum fields):</p></div>
+    <table>
+        <thead><tr><th><span class="de">Geometrie</span><span class="en">Geometry</span></th><th><span class="de">Beschreibung</span><span class="en">Description</span></th><th><span class="de">Anwendung</span><span class="en">Application</span></th></tr></thead>
+        <tbody>
+            <tr><td><span class="de">Lokalisiert sphärisch</span><span class="en">Localized spherical</span></td><td>ξ = ℓ<sub>P</sub>/r₀, β = r₀/r</td><td><span class="de">Teilchen, Atome</span><span class="en">Particles, atoms</span></td></tr>
+            <tr><td><span class="de">Lokalisiert nicht-sphärisch</span><span class="en">Localized non-spherical</span></td><td><span class="de">Tensorielle Parameter β<sub>ij</sub></span><span class="en">Tensorial parameters β<sub>ij</sub></span></td><td><span class="de">Moleküle, Kristalle</span><span class="en">Molecules, crystals</span></td></tr>
+            <tr><td><span class="de">Ausgedehnt homogen</span><span class="en">Extended homogeneous</span></td><td>ξ<sub>eff</sub> = ξ/2</td><td><span class="de">Kosmologie</span><span class="en">Cosmology</span></td></tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- 9. DOCUMENT MAP -->
+<section>
+    <h2><span class="de">9. Dokumentenübersicht</span><span class="en">9. Document Map</span></h2>
+    <div class="de"><p>Die T0-Theorie ist in einer Serie technischer Dokumente entwickelt. Die wichtigsten Einstiegspunkte:</p></div>
+    <div class="en"><p>T0 theory is developed across a series of technical documents. The most important entry points:</p></div>
+    <div class="pdf-links">
+        <h4><span class="de">Grundlagen</span><span class="en">Foundations</span></h4>
+        <a href="../pdf/003_T0_Grundlagen_v1_De.pdf" target="_blank">003 — Grundlagen (DE)</a> / <a href="../pdf/003_T0_Grundlagen_v1_En.pdf" target="_blank">(EN)</a><br>
+        <a href="../pdf/004_T0_Modell_Uebersicht_De.pdf" target="_blank">004 — Modellübersicht (DE)</a> / <a href="../pdf/004_T0_Modell_Uebersicht_En.pdf" target="_blank">(EN)</a><br>
+        <a href="../pdf/040_Hdokument_De.pdf" target="_blank">040 — Hauptdokument (DE)</a> / <a href="../pdf/040_Hdokument_En.pdf" target="_blank">(EN)</a><br>
+        <a href="../pdf/086_T0_Dokumentenuebersicht_De.pdf" target="_blank">086 — Dokumentenübersicht (DE)</a> / <a href="../pdf/086_T0_Dokumentenuebersicht_En.pdf" target="_blank">(EN)</a>
+    </div>
+    <div class="pdf-links">
+        <h4><span class="de">Kernthemen</span><span class="en">Core Topics</span></h4>
+        <a href="../pdf/011_T0_Feinstruktur_De.pdf" target="_blank">011 — Feinstrukturkonstante</a> /
+        <a href="../pdf/006_T0_Teilchenmassen_De.pdf" target="_blank">006 — Teilchenmassen</a> /
+        <a href="../pdf/012_T0_Gravitationskonstante_De.pdf" target="_blank">012 — Gravitationskonstante</a><br>
+        <a href="../pdf/019_T0_lagrndian_De.pdf" target="_blank">019 — Lagrangian</a> /
+        <a href="../pdf/018_T0_Anomale-g2-10_De.pdf" target="_blank">018 — g−2 Anomalie</a> /
+        <a href="../pdf/013_T0_SI_De.pdf" target="_blank">013 — SI-Einheiten</a>
+    </div>
+    <div class="pdf-links">
+        <h4><span class="de">Kosmologie</span><span class="en">Cosmology</span></h4>
+        <a href="../pdf/025_T0_Kosmologie_De.pdf" target="_blank">025 — Kosmologie</a> /
+        <a href="../pdf/026_T0_Geometrische_Kosmologie_De.pdf" target="_blank">026 — Geometrische Kosmologie</a> /
+        <a href="../pdf/039_Zwei-Dipole-CMB_De.pdf" target="_blank">039 — CMB</a>
+    </div>
+    <div class="pdf-links">
+        <h4><span class="de">Erweitert</span><span class="en">Advanced</span></h4>
+        <a href="../pdf/049_LagrandianVergleich_De.pdf" target="_blank">049 — Lagrangian-Vergleich</a> /
+        <a href="../pdf/050_diracVereinfacht_De.pdf" target="_blank">050 — Dirac vereinfacht</a> /
+        <a href="../pdf/133_Fraktale_Korrektur_Herleitung_De.pdf" target="_blank">133 — K<sub>frak</sub> Herleitung</a>
+    </div>
+</section>
+
+</main>
+<footer>
+    <p>T0 Theory — Johann Pascher | <a href="https://github.com/jpascher/T0-Time-Mass-Duality">GitHub</a></p>
+    <p style="margin-top:.2rem"><span class="de">HTML/Unicode — offline-fähig</span><span class="en">HTML/Unicode — offline-capable</span></p>
+</footer>
+<script>
+function setLang(l){document.body.className='show-'+l;document.getElementById('btn-de').classList.toggle('active',l==='de');document.getElementById('btn-en').classList.toggle('active',l==='en');document.documentElement.lang=l}
+</script>
 </body>
 </html>
