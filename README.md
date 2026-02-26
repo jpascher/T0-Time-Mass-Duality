@@ -77,6 +77,10 @@ All compiled books (Teil 1–3, FFGFT Narrative Master, Xi Narrative Master, T0 
 
 - **[018_T0_Anomale-g2-10_De.pdf](2/pdf/018_T0_Anomale-g2-10_De.pdf)** / **[018_T0_Anomale-g2-10_En.pdf](2/pdf/018_T0_Anomale-g2-10_En.pdf)** — Rev. 12: Integration of the Koide-to-g-2 bridge formula. Key additions: (1) Bridge formula connecting mass ratios directly to g-2 ratios: Δa(τ-e)/Δa(μ-e) = (144/125)·m_τ/m_μ, yielding a_τ = 1.282×10⁻³ from three experimental numbers alone. (2) Correction: 1/3-step applies to μ→τ only (not e→μ = 1/2). (3) α derivation from T0: α = ξ·E₀² → 1/α = 137.035. (4) SM circularity argument (α extracted from a_e, then used to compute a_e). (5) Fixed experimental values (Δa(μ-e) = 6.269×10⁻⁶). T0 prediction 9% above SM — testable at Belle II.
 
+### February 2026: T0 Projection onto Scramblon Physics — New Document 🔗
+
+- **[148_T0_scramblons_De.pdf](2/pdf/148_T0_scramblons_De.pdf)** / **[148_T0_scramblons_En.pdf](2/pdf/148_T0_scramblons_En.pdf)** — Quantitative comparison between T0 and the scramblon physics of Li, Zhou, Zhang et al. (Phys. Rev. Lett. **136**, 060403, 2026), who achieved the first experimental extraction of the quantum Lyapunov exponent via solid-state NMR on adamantane. Key results: (1) The same T0 damping factor D(N) = exp(−ξ·ln(N)/D_f) that describes IBM quantum processor data also applies to NMR spin systems — zero free parameters, one line of math. (2) The T0 correction (~1.2×10⁻⁴) lies at the boundary of the scramblon experiment's confidence intervals, explaining why it is not separately visible. (3) Testable prediction: after scramblon error correction, a ln(N)-scaling residuum should remain — distinguishable from standard 1/N or exp(−N) error models. (4) Cross-platform consistency demonstrated from NMR (N=16) to IBM Sherbrooke (N=127). Scramblons describe dynamics (how fast chaos grows); T0 describes geometry (what fundamental limit exists). Both are complementary, not contradictory.
+
 ---
 
 ### January 2026: Asymmetry Analysis – New FFGFT Monograph
@@ -89,6 +93,7 @@ All compiled books (Teil 1–3, FFGFT Narrative Master, Xi Narrative Master, T0 
 - **[145 FFGFT Donat Part 1 (German)](2/pdf/145_FFGFT_donat-teil1_De.pdf)** / **[145 FFGFT Donat Part 1 (English)](2/pdf/145_FFGFT_donat-teil1_En.pdf)** – Conceptual introduction to the toroidal FFGFT geometry, effective vs fundamental (sub-Planck) scales, and links to interactive HTML visualizations.
 - **[146 Turing and FFGFT (German)](2/pdf/146_turing_De.pdf)** / **[146 Turing and FFGFT (English)](2/pdf/146_turing_En.pdf)** – New standalone analysis on Turing universality, computation in a fractal geometric field framework, and how FFGFT extends classical computability concepts.
 - **[147 Quantum Computing and T0 (German)](2/pdf/147_quantum_computing_De.pdf)** / **[147 Quantum Computing and T0 (English)](2/pdf/147_quantum_computing_En.pdf)** – Integrated overview of T0-based quantum computing: 73-qubit Bell tests, deterministic Shor algorithm, and links to the new Python implementations in `/2/python`.
+- **[148 T0 Scramblons Bridge (German)](2/pdf/148_T0_scramblons_De.pdf)** / **[148 T0 Scramblons Bridge (English)](2/pdf/148_T0_scramblons_En.pdf)** – Quantitative bridge between T0 geometric correction and scramblon physics (Li et al., PRL 2026). Cross-platform validation from NMR to IBM quantum processors. Testable ln(N) residuum prediction.
 
 ### January 2026: FFGFT Narrative Edition - Complete Integration ✨
 
@@ -267,7 +272,7 @@ Independent research from two completely different perspectives arrives at the s
 - Both conventions (α = 1 and α = 1/137) are correct
 - T0 explains WHY this number exists
 
-**[Interactive Fractal-α Visualization](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal-137.html)** 
+**[Interactive Fine Structure Constant Explorer](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/137_hidden_secret.html)** 
 *Explore how fractal spacetime structure generates the famous number 137*
 
 **Discoverability Note:** Search "fine structure constant fractal derivation" on arXiv or YouTube for T0-specific results and community discussions.
@@ -470,44 +475,80 @@ This mechanism differs fundamentally from classical "tired light" hypotheses (e.
 Finite-element calculations on the ξ hierarchy confirm this: no intrinsic cosmological redshift from expansion is required in the static framework; the observed redshift is attributed to local, geometric ξ interactions leading to energy dissipation. Recent JWST observations (2024–2025) of mature, massive galaxies at high redshifts further challenge pure expansion models and align with the T0 static-universe interpretation.
 
 
-## Interactive HTML Tools (18 files)
+## Interactive HTML Tools (19 files)
 
 **Discoverability Note:** These tools are hosted on GitHub Pages and indexed by search engines – search "T0 fractal 137 interactive" or "T0 particle mass calculator" for direct access.
 
-### Revolutionary Fine Structure Constant Explorer
-**[Fractal α Visualization](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal-137.html)** 
+**[T0 Main Portal](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/index.html)**
+*Central landing page with navigation to all interactive tools*
+
+### Fine Structure Constant & Geometry
+**[The Secret of 1/137](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/137_hidden_secret.html)**
 *Interactive demonstration showing how the famous number 137 emerges from fractal spacetime geometry*
 
-### Revolutionary Particle Mass Calculator
-**[Parameter-Free Particle Mass Calculator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/simple_mass_formula.html)** 
+**[Music and T0 Physics — Structural Parallels](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/musical_spiral_137.html)**
+*Musical spiral visualization revealing structural parallels between harmonic series and ξ-geometry*
+
+### Particle Physics & Mass Predictions
+**[T0 Mass Formulas](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/simple_mass_formula.html)**
 *Interactive demonstration showing how the single formula E = 1/ξ calculates ALL particle masses with 98% accuracy*
 
-### RSA Factorization & Cryptographic Analysis
-**[RSA Factorization Demo](https://jpascher.github.io/T0-Time-Mass-Duality/rsa/t0_factorization_demo.html)** 
-*Advanced web-based demonstration of T0-Framework applied to RSA number factorization*
-
-### Simulation and Implementation Tools
-**[Deterministic Quantum Computer Simulator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/quantum_simulator_deterministic.html)** 
-*Complete quantum computer simulator implementing T0 framework with hardware validation*
-
-**[T0 Shor Algorithm Simulator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_Shore_simulator.html)** 
-*Advanced implementation of Shor's algorithm with T0 deterministic framework*
-
-### Advanced Analysis Tools
-**[Particle Spectrum Comparison](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum_de_.html)** 
+**[T0 Particle Spectrum](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum.html)**
 *Interactive comparison: Standard Model (61+ particles) vs. T0 (1 field)*
 
-**[Muon g-2 Analysis](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/muon_g2_analysis.html)** 
-*Simplified visualization of the muon anomaly and T0's spectacular 0.05σ agreement*
+**[T0 Particle Physics — ξ-Framework](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/teilchenphysik-deutsch.html)**
+*Comprehensive particle physics explorer with T0 predictions (bilingual)*
 
-**[Trilingual Scientific Dialog](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_dialogue_multilingual.html)** 
-*Discussion between T0 developer and physicist (DE/EN/FR)*
+**[T0 Lepton Lifetime Explorer](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/T0_Lifetime_Explorer.html)**
+*Interactive exploration of lepton lifetimes and decay channels in the T0 framework*
 
-### Signal Analysis & Harmonics
-**[Xi Harmonic Analysis](https://jpascher.github.io/T0-Time-Mass-Duality/sig/xi_harmonic_analysis_demo.html)** 
+**[Muon g-2 Analysis — Rev. 12](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/muon_g2_analysis.html)**
+*Visualization of the muon anomaly, Koide bridge formula, and T0's 0.05σ agreement*
+
+### Quantum Computing & Simulation
+**[Deterministic Quantum Computer Simulator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/quantum_simulator_deterministic.html)**
+*Complete quantum computer simulator implementing T0 framework with hardware validation*
+
+**[T0 Shor Algorithm Simulator](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_Shore_simulator.html)**
+*Advanced implementation of Shor's algorithm with T0 deterministic framework*
+
+**[T0 Quantum Computing — Simplified](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_simple.html)**
+*Accessible introduction to T0-based quantum computing concepts*
+
+**[Quantum Simulator Help & Guide](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/quantum_help_guide.html)**
+*Comprehensive help guide for the hybrid T0-framework quantum simulator*
+
+**[T0 Quantum Module Implementation](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/step_by_step_modules_bilingual.html)**
+*Step-by-step module implementation guide (bilingual)*
+
+### Theory Explorers & Overviews
+**[T0 Parameter Explorer](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/T0_Explorer.html)**
+*One parameter — all of physics. Interactive exploration of how ξ generates all constants*
+
+**[T0 Theory Explorer — Complete Overview](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_theory_explorer_de_.html)**
+*Comprehensive bilingual overview of the entire T0 framework*
+
+**[T0 Cosmology](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/cosmic.html)**
+*Interactive cosmology explorer: Hubble tension, CMB anomalies, dark energy alternative*
+
+**[T0 and SI Units](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/einheiten_reform_de_.html)**
+*How the 2019 SI reform unknowingly implemented ξ-geometry calibration*
+
+### Geometry & Sub-Planck Structure
+**[Torus Geometry in FFGFT](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/torus_geometry_ffgf.html)**
+*Interactive visualization of the toroidal spacetime geometry underlying T0*
+
+**[Sub-Planck Structure](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_subplanck_structure.html)**
+*Exploration of T0's sub-Planck scale L₀ = ξ·ℓₚ structure*
+
+### RSA Factorization & Signal Analysis
+**[RSA Factorization Demo](https://jpascher.github.io/T0-Time-Mass-Duality/rsa/t0_factorization_demo.html)**
+*Advanced web-based demonstration of T0-Framework applied to RSA number factorization*
+
+**[Xi Harmonic Analysis](https://jpascher.github.io/T0-Time-Mass-Duality/sig/xi_harmonic_analysis_demo.html)**
 *Interactive demonstration of T0 framework applied to audio signal analysis*
 
-**[Spectrum Analysis Tool](https://jpascher.github.io/T0-Time-Mass-Duality/sig/xi_oscilloscope_spectrum-basis.html)** 
+**[Spectrum Analysis Tool](https://jpascher.github.io/T0-Time-Mass-Duality/sig/xi_oscilloscope_spectrum-basis.html)**
 *Advanced oscilloscope-style spectrum analyzer using T0 principles*
 
 ## Audio Learning Resources
@@ -556,7 +597,7 @@ Finite-element calculations on the ξ hierarchy confirm this: no intrinsic cosmo
 
 1. **Complete Closure**: read [T0_SI_En.pdf](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/013_T0_SI_En.pdf) 
 2. **Three-Clock / Single-Clock Metrology**: read [T0_threeclock_En.pdf](2/pdf/029_T0_threeclock_En.pdf) 
-3. **Fine Structure**: try the [Fractal α Visualization](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/fraktal-137.html) 
+3. **Fine Structure**: try the [The Secret of 1/137](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/137_hidden_secret.html) 
 5. **Run Python**: start with `authentic_t0_quantum.py` in the Python modules 
 
 ## Official T0 Platforms
