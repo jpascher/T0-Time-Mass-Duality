@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Von α = 1 zur vollständigen Physik — T0 Theory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-slide: #0f1528;
+  --bg-card: #161d35;
+  --accent-gold: #c9a84c;
+  --accent-blue: #4a8eff;
+  --accent-cyan: #22d3ee;
+  --accent-teal: #14b8a6;
+  --text-primary: #e8eaf0;
+  --text-secondary: #9ca3af;
+  --text-dim: #6b7280;
+  --border: rgba(201, 168, 76, 0.15);
+  --glow: rgba(74, 138, 255, 0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* ===== SLIDE CONTAINER ===== */
+.slides-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 80px;
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+  overflow-y: auto;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: all;
+}
+
+.slide.prev {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.slide-inner {
+  max-width: 1100px;
+  width: 100%;
+  position: relative;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 { font-size: 3.2rem; letter-spacing: -0.02em; }
+h2 { font-size: 2.2rem; letter-spacing: -0.01em; margin-bottom: 0.6em; }
+h3 { font-size: 1.4rem; color: var(--accent-gold); margin-bottom: 0.4em; font-weight: 400; }
+
+p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 0.8em;
+}
+
+.lead {
+  font-size: 1.35rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.epigraph {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--accent-gold);
+  opacity: 0.85;
+  margin-bottom: 1.8em;
+  padding-left: 1.5em;
+  border-left: 2px solid var(--accent-gold);
+}
+
+.formula-highlight {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2.4rem;
+  color: var(--accent-cyan);
+  text-align: center;
+  margin: 1.2em 0;
+  letter-spacing: 0.02em;
+}
+
+.formula-box {
+  background: rgba(34, 211, 238, 0.05);
+  border: 1px solid rgba(34, 211, 238, 0.15);
+  border-radius: 12px;
+  padding: 1.2em 1.8em;
+  text-align: center;
+  margin: 1em 0;
+}
+
+.kerngedanke {
+  background: linear-gradient(135deg, rgba(74, 138, 255, 0.08), rgba(201, 168, 76, 0.06));
+  border-left: 3px solid var(--accent-gold);
+  border-radius: 0 12px 12px 0;
+  padding: 1.2em 1.6em;
+  margin: 1.5em 0;
+}
+
+.kerngedanke p {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* ===== LAYOUTS ===== */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3em;
+  align-items: center;
+}
+
+.two-col.text-heavy {
+  grid-template-columns: 1.3fr 0.7fr;
+}
+
+.two-col.img-heavy {
+  grid-template-columns: 0.7fr 1.3fr;
+}
+
+.slide-img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.slide-img-small {
+  max-height: 320px;
+  object-fit: contain;
+}
+
+/* ===== TITLE SLIDE ===== */
+.title-slide {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-slide h1 {
+  font-size: 3.6rem;
+  background: linear-gradient(135deg, var(--text-primary), var(--accent-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.3em;
+}
+
+.title-slide .subtitle {
+  font-size: 1.4rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  max-width: 700px;
+  line-height: 1.6;
+  margin-bottom: 2em;
+}
+
+.title-slide .author {
+  font-size: 1.1rem;
+  color: var(--accent-gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.title-slide .date {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  margin-top: 0.5em;
+}
+
+/* ===== PART DIVIDER ===== */
+.part-slide {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.part-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--accent-gold);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 1em;
+}
+
+.part-slide h2 {
+  font-size: 2.8rem;
+  color: var(--text-primary);
+}
+
+.part-slide .part-desc {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-top: 1em;
+  max-width: 600px;
+  font-weight: 300;
+}
+
+/* ===== GRID CARDS ===== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2em;
+  margin-top: 1.2em;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.3em 1.5em;
+}
+
+.card h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--accent-cyan);
+  margin-bottom: 0.5em;
+  letter-spacing: 0.05em;
+}
+
+.card p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* ===== CASCADE / FLOW ===== */
+.cascade {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  margin: 1em 0;
+}
+
+.cascade-step {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding: 0.6em 1em;
+  background: var(--bg-card);
+  border-radius: 8px;
+  border-left: 3px solid var(--accent-blue);
+}
+
+.cascade-step .step-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--accent-gold);
+  min-width: 2em;
+}
+
+.cascade-step .step-text {
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.cascade-arrow {
+  text-align: center;
+  color: var(--accent-blue);
+  font-size: 1.2rem;
+  opacity: 0.5;
+}
+
+/* ===== BIG STAT ===== */
+.big-stat {
+  text-align: center;
+  margin: 1em 0;
+}
+
+.big-stat .number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 4rem;
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+
+.big-stat .label {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-top: 0.3em;
+}
+
+/* ===== NAVIGATION ===== */
+.nav-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 52px;
+  background: rgba(10, 14, 26, 0.92);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 100;
+}
+
+.nav-left, .nav-right { display: flex; align-items: center; gap: 12px; }
+
+.nav-btn {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-secondary);
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-family: 'Source Sans 3', sans-serif;
+  transition: all 0.2s;
+}
+
+.nav-btn:hover { background: rgba(255,255,255,0.12); color: var(--text-primary); }
+.nav-btn.active { background: var(--accent-gold); color: var(--bg-deep); border-color: var(--accent-gold); }
+
+.slide-counter {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+  transition: width 0.3s ease;
+  z-index: 100;
+}
+
+/* ===== LANGUAGE TOGGLE ===== */
+.lang-toggle {
+  display: flex;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  padding: 4px 12px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  transition: all 0.2s;
+}
+
+.lang-btn.active {
+  background: var(--accent-gold);
+  color: var(--bg-deep);
+}
+
+/* ===== TABLE OF CONTENTS ===== */
+.toc-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10, 14, 26, 0.95);
+  backdrop-filter: blur(8px);
+  z-index: 200;
+  display: none;
+  overflow-y: auto;
+  padding: 60px 80px;
+}
+
+.toc-overlay.visible { display: block; }
+
+.toc-overlay h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5em;
+  color: var(--accent-gold);
+}
+
+.toc-list { max-width: 800px; margin: 0 auto; }
+
+.toc-item {
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 2px;
+}
+
+.toc-item:hover { background: rgba(255,255,255,0.05); }
+
+.toc-item .toc-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  min-width: 2.5em;
+}
+
+.toc-item .toc-title {
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.toc-item.part-item { margin-top: 1em; }
+.toc-item.part-item .toc-title {
+  color: var(--accent-gold);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.toc-close {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 201;
+}
+
+/* ===== MATH ===== */
+.katex { font-size: 1.1em; }
+.formula-highlight .katex { font-size: 1em; }
+.formula-box .katex { font-size: 1.3em; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .slide { padding: 40px 30px; }
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.6rem; }
+  .title-slide h1 { font-size: 2.4rem; }
+  .two-col { grid-template-columns: 1fr; gap: 1.5em; }
+  .card-grid { grid-template-columns: 1fr; }
+  .big-stat .number { font-size: 2.8rem; }
+}
+
+/* Background textures */
+.slide::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(ellipse at 20% 50%, var(--glow), transparent 70%);
+  pointer-events: none;
+}
+
+.part-slide::before {
+  background: radial-gradient(ellipse at 50% 50%, rgba(201, 168, 76, 0.04), transparent 60%);
+}
+
+[data-lang-en] { display: none; }
+body.lang-en [data-lang-de] { display: none; }
+body.lang-en [data-lang-en] { display: block; }
+body.lang-en span[data-lang-en] { display: inline; }
+body.lang-en span[data-lang-de] { display: none; }
+span[data-lang-de] { display: inline; }
+span[data-lang-en] { display: none; }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<!-- ===== TABLE OF CONTENTS OVERLAY ===== -->
+<div class="toc-overlay" id="toc">
+  <button class="toc-close" onclick="closeToc()">×</button>
+  <div class="toc-list">
+    <h2><span data-lang-de>Inhaltsverzeichnis</span><span data-lang-en>Table of Contents</span></h2>
+    <div id="toc-items"></div>
+  </div>
+</div>
+
+<!-- ===== SLIDES ===== -->
+<div class="slides-container" id="slides">
+
+<!-- SLIDE 0: TITLE -->
+<div class="slide active" data-title-de="Titelfolie" data-title-en="Title Slide">
+<div class="slide-inner title-slide">
+  <div data-lang-de>
+    <h1>Von α = 1 zur vollständigen Physik</h1>
+    <div class="subtitle">Wie die SI-Reform 2019 und ein verhältnisbasiertes Einheitensystem natürlich zur Zeit-Masse-Dualität und zur Angepassten Dynamischen Vakuum-Feldtheorie führen</div>
+  </div>
+  <div data-lang-en>
+    <h1>From α = 1 to Complete Physics</h1>
+    <div class="subtitle">How the 2019 SI reform and a ratio-based unit system naturally lead to time-mass duality and the Adapted Dynamic Vacuum Field Theory</div>
+  </div>
+  <div class="author">Johann Pascher</div>
+  <div class="date">Linz, Februar 2026</div>
+</div>
+</div>
+
+<!-- SLIDE 1: PREFACE -->
+<div class="slide" data-title-de="Vorwort" data-title-en="Preface">
+<div class="slide-inner">
+  <div class="two-col text-heavy">
+    <div>
+      <h3><span data-lang-de>Vorwort</span><span data-lang-en>Preface</span></h3>
+      <div data-lang-de>
+        <h2>Eine einfache Frage</h2>
+        <p class="lead">Was passiert, wenn man die Konventionen der Physik konsequent zu Ende denkt?</p>
+        <p>Setzt man α = 1, entfaltet sich ein vollständiges Bild der Physik. Aus einem einzigen geometrischen Parameter — ξ = 4/30000 — folgen die Massen aller Elementarteilchen, die Gravitationskonstante, die Planck-Länge, die Struktur der Raumzeit.</p>
+        <p><strong>Ein einziger Messwert — α ≈ 1/137,036 — genügt, um das gesamte Gebäude der Physik zu rekonstruieren.</strong></p>
+      </div>
+      <div data-lang-en>
+        <h2>A Simple Question</h2>
+        <p class="lead">What happens if you follow the conventions of physics to their logical conclusion?</p>
+        <p>Setting α = 1 unfolds a complete picture of physics. From a single geometric parameter — ξ = 4/30000 — follow all particle masses, the gravitational constant, the Planck length, the structure of spacetime.</p>
+        <p><strong>A single measured value — α ≈ 1/137.036 — suffices to reconstruct the entire edifice of physics.</strong></p>
+      </div>
+    </div>
+    <div>
+      <img src="img/cover.png" class="slide-img" alt="Book Cover">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 2: PART I -->
+<div class="slide" data-title-de="Teil I: Das Fundament" data-title-en="Part I: The Foundation">
+<div class="slide-inner part-slide">
+  <div class="part-number"><span data-lang-de>Teil I</span><span data-lang-en>Part I</span></div>
+  <h2><span data-lang-de>Das Fundament</span><span data-lang-en>The Foundation</span></h2>
+  <div class="part-desc"><span data-lang-de>Von der SI-Reform zur Ableitungskaskade</span><span data-lang-en>From the SI reform to the derivation cascade</span></div>
+</div>
+</div>
+
+<!-- SLIDE 3: SI REFORM -->
+<div class="slide" data-title-de="Die SI-Reform 2019" data-title-en="The 2019 SI Reform">
+<div class="slide-inner">
+  <div class="two-col">
+    <div>
+      <div class="epigraph"><span data-lang-de>Die Natur spricht in Verhältnissen, nicht in Kilogramm.</span><span data-lang-en>Nature speaks in ratios, not in kilograms.</span></div>
+      <h2><span data-lang-de>Die SI-Reform 2019</span><span data-lang-en>The 2019 SI Reform</span></h2>
+      <div data-lang-de>
+        <p class="lead">Am 20. Mai 2019 wurden vier Naturkonstanten auf exakte Werte festgelegt — die Natur selbst wurde zum Maßstab.</p>
+        <p>Bis zu diesem Tag war das Kilogramm definiert durch einen Zylinder aus Platin-Iridium in einem Pariser Tresor. Nach der Reform: definiert durch das Planck'sche Wirkungsquantum ℏ.</p>
+      </div>
+      <div data-lang-en>
+        <p class="lead">On May 20, 2019, four natural constants were fixed to exact values — nature itself became the standard.</p>
+        <p>Until that day, the kilogram was defined by a platinum-iridium cylinder in a Parisian vault. After the reform: defined through the Planck constant ℏ.</p>
+      </div>
+    </div>
+    <div>
+      <img src="img/ch01_si_pyramid.png" class="slide-img" alt="SI Pyramid">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 4: SI REFORM KEY INSIGHT -->
+<div class="slide" data-title-de="SI-Reform: Kerngedanke" data-title-en="SI Reform: Key Insight">
+<div class="slide-inner">
+  <h2><span data-lang-de>Die unvollendete Revolution</span><span data-lang-en>The Unfinished Revolution</span></h2>
+  <div class="card-grid">
+    <div class="card">
+      <h4><span data-lang-de>Fixiert</span><span data-lang-en>Fixed</span></h4>
+      <p>\( c = 299\,792\,458 \;\text{m/s} \)</p>
+    </div>
+    <div class="card">
+      <h4><span data-lang-de>Fixiert</span><span data-lang-en>Fixed</span></h4>
+      <p>\( \hbar = 1{,}054... \times 10^{-34} \;\text{J·s} \)</p>
+    </div>
+    <div class="card">
+      <h4><span data-lang-de>Fixiert</span><span data-lang-en>Fixed</span></h4>
+      <p>\( e = 1{,}602... \times 10^{-19} \;\text{C} \)</p>
+    </div>
+    <div class="card">
+      <h4 style="color:var(--accent-gold)"><span data-lang-de>Noch frei?</span><span data-lang-en>Still free?</span></h4>
+      <p>\( \alpha \approx 1/137{,}036 \)</p>
+    </div>
+  </div>
+  <div class="kerngedanke">
+    <div data-lang-de><p>Die SI-Reform 2019 hat die Richtung vorgegeben: Weg von Artefakten, hin zu Naturkonstanten. Aber sie hat den logischen nächsten Schritt nicht gewagt — nämlich zu fragen, ob <em>alle</em> Konstanten aus einer einzigen folgen könnten.</p></div>
+    <div data-lang-en><p>The 2019 SI reform set the direction: away from artifacts, toward natural constants. But it didn't dare take the next logical step — asking whether <em>all</em> constants could follow from a single one.</p></div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 5: α = 1 -->
+<div class="slide" data-title-de="α = 1: Das Gedankenexperiment" data-title-en="α = 1: The Thought Experiment">
+<div class="slide-inner">
+  <div class="two-col">
+    <div>
+      <div class="epigraph"><span data-lang-de>Es ist keine neue Physik. Es ist dieselbe Physik — nur ehrlicher aufgeschrieben.</span><span data-lang-en>It's not new physics. It's the same physics — just written more honestly.</span></div>
+      <h2><span data-lang-de>Der logische nächste Schritt</span><span data-lang-en>The Logical Next Step</span></h2>
+      <div class="formula-box">$$ c = \hbar = \alpha = 1 $$</div>
+      <div data-lang-de>
+        <p>α = 1 zu setzen ist kein physikalischer Widerspruch. Es ist eine Umdefinition der Ladungseinheit, die das Einheitensystem radikal vereinfacht. Was sich ändert, sind Zahlenwerte. Was sich <em>nicht</em> ändert, sind alle physikalischen Vorhersagen.</p>
+      </div>
+      <div data-lang-en>
+        <p>Setting α = 1 is not a physical contradiction. It is a redefinition of the charge unit that radically simplifies the unit system. What changes are numerical values. What does <em>not</em> change: all physical predictions.</p>
+      </div>
+    </div>
+    <div>
+      <img src="img/ch02_comparison.png" class="slide-img" alt="25 Parameters vs 1">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 6: ξ PARAMETER -->
+<div class="slide" data-title-de="Der Parameter ξ" data-title-en="The Parameter ξ">
+<div class="slide-inner">
+  <h2><span data-lang-de>Ein Messwert. Sonst nichts.</span><span data-lang-en>One Measurement. Nothing Else.</span></h2>
+  <div class="big-stat">
+    <div class="number">ξ = 4/30000</div>
+    <div class="label"><span data-lang-de>Der einzige geometrische Parameter</span><span data-lang-en>The single geometric parameter</span></div>
+  </div>
+  <div class="formula-box">
+    $$ \xi = \frac{\alpha}{(E_0/1\,\text{MeV})^2} = \frac{4}{3} \times 10^{-4} $$
+  </div>
+  <div data-lang-de>
+    <p class="lead" style="text-align:center">Aus ξ folgt <strong>alles</strong>: Alle Teilchenmassen, die Gravitationskonstante, die Planck-Länge, die Lichtgeschwindigkeit, die Boltzmann-Konstante.</p>
+  </div>
+  <div data-lang-en>
+    <p class="lead" style="text-align:center">From ξ follows <strong>everything</strong>: All particle masses, the gravitational constant, the Planck length, the speed of light, the Boltzmann constant.</p>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 7: DERIVATION CASCADE -->
+<div class="slide" data-title-de="Die Ableitungskaskade" data-title-en="The Derivation Cascade">
+<div class="slide-inner">
+  <div class="two-col text-heavy">
+    <div>
+      <div class="epigraph"><span data-lang-de>Wenn man genau eine Zahl kennt, kennt man alle.</span><span data-lang-en>If you know exactly one number, you know them all.</span></div>
+      <h2><span data-lang-de>Die Kaskade</span><span data-lang-en>The Cascade</span></h2>
+      <div class="cascade">
+        <div class="cascade-step"><span class="step-num">01</span><span class="step-text">α ≈ 1/137,036 <span data-lang-de>(gemessen)</span><span data-lang-en>(measured)</span></span></div>
+        <div class="cascade-arrow">↓</div>
+        <div class="cascade-step"><span class="step-num">02</span><span class="step-text">ξ = 4/30000 <span data-lang-de>(geometrisch)</span><span data-lang-en>(geometric)</span></span></div>
+        <div class="cascade-arrow">↓</div>
+        <div class="cascade-step"><span class="step-num">03</span><span class="step-text"><span data-lang-de>Teilchenmassen (ξ-Quantisierung)</span><span data-lang-en>Particle masses (ξ-quantization)</span></span></div>
+        <div class="cascade-arrow">↓</div>
+        <div class="cascade-step"><span class="step-num">04</span><span class="step-text">G = ξ²/(4m_e) × K_frak</span></div>
+        <div class="cascade-arrow">↓</div>
+        <div class="cascade-step"><span class="step-num">05</span><span class="step-text">ℓ_P, c, L₀ = ξ · ℓ_P</span></div>
+        <div class="cascade-arrow">↓</div>
+        <div class="cascade-step"><span class="step-num">06</span><span class="step-text"><span data-lang-de>Kosmologie, CMB, T·m = 1</span><span data-lang-en>Cosmology, CMB, T·m = 1</span></span></div>
+      </div>
+    </div>
+    <div>
+      <img src="img/ch03_cascade.png" class="slide-img" alt="Derivation Cascade">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 8: CASCADE KEY INSIGHT -->
+<div class="slide" data-title-de="Kaskade: Kerngedanke" data-title-en="Cascade: Key Insight">
+<div class="slide-inner">
+  <h2><span data-lang-de>Keine Zirkularität</span><span data-lang-en>No Circularity</span></h2>
+  <div data-lang-de>
+    <p class="lead">Die SI-Konstanten (c, ℏ, e, k_B, G) sind keine unabhängigen Größen. Sie sind verschiedene Fenster auf <em>eine</em> geometrische Realität.</p>
+    <p>Der Wert 4/30000 ist kein Zufall. Er hat eine direkte geometrische Interpretation: 30000/4 = 7500 ist die Windungszahl des fundamentalen Torus. Und f = 7500 = 2² × 3 × 5⁴ besitzt mit seinen 36 Teilern eine ideale Symmetriestruktur für Resonanzen.</p>
+  </div>
+  <div data-lang-en>
+    <p class="lead">The SI constants (c, ℏ, e, k_B, G) are not independent quantities. They are different windows into <em>one</em> geometric reality.</p>
+    <p>The value 4/30000 is not coincidental. It has a direct geometric interpretation: 30000/4 = 7500 is the winding number of the fundamental torus. And f = 7500 = 2² × 3 × 5⁴ with its 36 divisors possesses an ideal symmetry structure for resonances.</p>
+  </div>
+  <div class="kerngedanke">
+    <div data-lang-de><p>Die gesamte Ableitungskette ist keine Spekulation, sondern eine mathematische Kaskade: Jeder Schritt ist durch Gleichungen verbunden, die überprüfbar sind. Die einzige empirische Eingabe ist α. Alles andere ist Geometrie und Algebra.</p></div>
+    <div data-lang-en><p>The entire derivation chain is not speculation, but a mathematical cascade: every step is connected by verifiable equations. The only empirical input is α. Everything else is geometry and algebra.</p></div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 9: PART II -->
+<div class="slide" data-title-de="Teil II: Die Architektur" data-title-en="Part II: The Architecture">
+<div class="slide-inner part-slide">
+  <div class="part-number"><span data-lang-de>Teil II</span><span data-lang-en>Part II</span></div>
+  <h2><span data-lang-de>Die Architektur der Natur</span><span data-lang-en>The Architecture of Nature</span></h2>
+  <div class="part-desc"><span data-lang-de>Zeit-Masse-Dualität, Vakuumfeld und Gravitation</span><span data-lang-en>Time-mass duality, vacuum field, and gravitation</span></div>
+</div>
+</div>
+
+<!-- SLIDE 10: TIME-MASS DUALITY -->
+<div class="slide" data-title-de="Zeit-Masse-Dualität" data-title-en="Time-Mass Duality">
+<div class="slide-inner">
+  <div class="two-col">
+    <div>
+      <div class="epigraph"><span data-lang-de>Masse ist nicht das Gegenteil von Leichtigkeit. Masse ist das Gegenteil von Zeit.</span><span data-lang-en>Mass is not the opposite of lightness. Mass is the opposite of time.</span></div>
+      <h2><span data-lang-de>Das Kernaxiom</span><span data-lang-en>The Core Axiom</span></h2>
+      <div class="formula-box">$$ T(x,t) \cdot m(x,t) = 1 $$</div>
+      <div data-lang-de>
+        <p>Zeit und Masse sind <em>dual</em> zueinander — zwei Perspektiven auf dieselbe physikalische Realität. Wo die Masse höher ist, vergeht die lokale Zeit langsamer. Wo weniger Masse vorhanden ist, ticken die Uhren schneller.</p>
+      </div>
+      <div data-lang-en>
+        <p>Time and mass are <em>dual</em> to each other — two perspectives on the same physical reality. Where mass is higher, local time runs slower. Where less mass is present, clocks tick faster.</p>
+      </div>
+    </div>
+    <div>
+      <img src="img/ch04_time_mass.png" class="slide-img" alt="Time-Mass Duality">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 11: THREE PERSPECTIVES -->
+<div class="slide" data-title-de="Drei Perspektiven" data-title-en="Three Perspectives">
+<div class="slide-inner">
+  <h2><span data-lang-de>Drei gleichberechtigte Lesarten</span><span data-lang-en>Three Equivalent Readings</span></h2>
+  <div class="card-grid" style="grid-template-columns: repeat(3, 1fr);">
+    <div class="card" style="text-align:center;">
+      <h4><span data-lang-de>Alles ist Energie</span><span data-lang-en>Everything is Energy</span></h4>
+      <p style="font-size:1.3rem;">\( E \) <span data-lang-de>als fundamentales Feld</span><span data-lang-en>as fundamental field</span></p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h4><span data-lang-de>Alles ist Masse</span><span data-lang-en>Everything is Mass</span></h4>
+      <p style="font-size:1.3rem;">\( m = E/c^2 = 1/T \)</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h4><span data-lang-de>Alles ist Zeit</span><span data-lang-en>Everything is Time</span></h4>
+      <p style="font-size:1.3rem;">\( T = 1/m \)</p>
+    </div>
+  </div>
+  <div class="kerngedanke">
+    <div data-lang-de><p>Die Zeit-Masse-Dualität ist keine Hypothese. Sie ist die logische Konsequenz eines Systems, das alle Konstanten auf Eins setzt und nur mit Verhältnissen arbeitet. In einem solchen System <em>gibt es keine andere Möglichkeit</em>, als dass Zeit und Masse invers zueinander sind.</p></div>
+    <div data-lang-en><p>Time-mass duality is not a hypothesis. It is the logical consequence of a system that sets all constants to one and works only with ratios. In such a system, <em>there is no other possibility</em> than time and mass being inverse to each other.</p></div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 12: VACUUM FIELD -->
+<div class="slide" data-title-de="FFGFT: Das Vakuumfeld" data-title-en="FFGFT: The Vacuum Field">
+<div class="slide-inner">
+  <div class="two-col">
+    <div>
+      <div class="epigraph"><span data-lang-de>Das Vakuum ist nicht leer. Es ist das dichteste, was es gibt.</span><span data-lang-en>The vacuum is not empty. It is the densest thing there is.</span></div>
+      <h2><span data-lang-de>Das Vakuumfeld Φ</span><span data-lang-en>The Vacuum Field Φ</span></h2>
+      <div class="formula-box">$$ \Phi(x) = \rho(x) \cdot e^{i\theta(x)} $$</div>
+      <div data-lang-de>
+        <p><strong>ρ(x)</strong> — Vakuumamplitude, proportional zur lokalen Massendichte.</p>
+        <p><strong>θ(x)</strong> — Vakuumphase, beschreibt die Zeitentwicklung: θ̇ = m = 1/T.</p>
+      </div>
+      <div data-lang-en>
+        <p><strong>ρ(x)</strong> — Vacuum amplitude, proportional to local mass density.</p>
+        <p><strong>θ(x)</strong> — Vacuum phase, describes time evolution: θ̇ = m = 1/T.</p>
+      </div>
+    </div>
+    <div>
+      <img src="img/ch05_vacuum_field.png" class="slide-img" alt="Vacuum Field">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 13: FOUR PILLARS -->
+<div class="slide" data-title-de="Vier Säulen der FFGFT" data-title-en="Four Pillars of FFGFT">
+<div class="slide-inner">
+  <h2><span data-lang-de>Aus einem Feld — alle Physik</span><span data-lang-en>From One Field — All of Physics</span></h2>
+  <div class="card-grid">
+    <div class="card">
+      <h4><span data-lang-de>Gravitation = Vakuumkonvergenz</span><span data-lang-en>Gravitation = Vacuum Convergence</span></h4>
+      <div data-lang-de><p>Keine separate Kraft. Kohärente Phasenkrümmung des Vakuumfeldes.</p></div>
+      <div data-lang-en><p>Not a separate force. Coherent phase curvature of the vacuum field.</p></div>
+    </div>
+    <div class="card">
+      <h4><span data-lang-de>Quantenmechanik = Vakuumkohärenz</span><span data-lang-en>Quantum Mechanics = Vacuum Coherence</span></h4>
+      <div data-lang-de><p>Interferenz, Superposition, Verschränkung — Eigenschaften von Φ.</p></div>
+      <div data-lang-en><p>Interference, superposition, entanglement — properties of Φ.</p></div>
+    </div>
+    <div class="card">
+      <h4><span data-lang-de>Masse = Vakuumenergie</span><span data-lang-en>Mass = Vacuum Energy</span></h4>
+      <div data-lang-de><p>Ein Elektron ist eine stabile Resonanz in Φ. Masse ist die Frequenz.</p></div>
+      <div data-lang-en><p>An electron is a stable resonance in Φ. Mass is the frequency.</p></div>
+    </div>
+    <div class="card">
+      <h4><span data-lang-de>Schwarze Löcher = stabile Kerne</span><span data-lang-en>Black Holes = Stable Cores</span></h4>
+      <div data-lang-de><p>Keine Singularitäten. Stabile T0-Knoten stabilisieren die Torusstruktur.</p></div>
+      <div data-lang-en><p>No singularities. Stable T0 nodes stabilize the torus structure.</p></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 14: GRAVITY -->
+<div class="slide" data-title-de="Gravitation: abgeleitet" data-title-en="Gravity: Derived">
+<div class="slide-inner">
+  <div class="two-col img-heavy">
+    <div>
+      <div class="epigraph"><span data-lang-de>Die Schwäche der Gravitation ist keine Schwäche — sie ist eine geometrische Verdünnung.</span><span data-lang-en>The weakness of gravity is not a weakness — it is a geometric dilution.</span></div>
+      <h2><span data-lang-de>G ist abgeleitet</span><span data-lang-en>G is Derived</span></h2>
+      <div class="formula-box">$$ G = \frac{\xi^2}{4\,m_e} \times C_{\text{conv}} \times K_{\text{frak}} $$</div>
+      <div data-lang-de>
+        <p>G geht wie ξ² ≈ 10⁻⁸. Die Schwäche der Gravitation ist die Tatsache, dass die Raumzeit fast perfekt dreidimensional ist: D_f ≈ 2,9999.</p>
+      </div>
+      <div data-lang-en>
+        <p>G scales as ξ² ≈ 10⁻⁸. The weakness of gravity is the fact that spacetime is almost perfectly three-dimensional: D_f ≈ 2.9999.</p>
+      </div>
+    </div>
+    <div>
+      <img src="img/ch06_hierarchy.png" class="slide-img" alt="Hierarchy Problem">
+    </div>
+  </div>
+  <div class="kerngedanke">
+    <div data-lang-de><p>Es gibt kein Hierarchieproblem. Es gibt nur eine geometrische Verdünnung. G „misst" nicht die Stärke einer Kraft — es beschreibt, wie die Torsion der Raumzeit auf Masseverteilungen reagiert.</p></div>
+    <div data-lang-en><p>There is no hierarchy problem. There is only a geometric dilution. G doesn't "measure" the strength of a force — it describes how spacetime torsion responds to mass distributions.</p></div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 15: PART III -->
+<div class="slide" data-title-de="Teil III: Die Geometrie" data-title-en="Part III: The Geometry">
+<div class="slide-inner part-slide">
+  <div class="part-number"><span data-lang-de>Teil III</span><span data-lang-en>Part III</span></div>
+  <h2><span data-lang-de>Die Geometrie des Universums</span><span data-lang-en>The Geometry of the Universe</span></h2>
+  <div class="part-desc"><span data-lang-de>Torus, Hirnwindungen, fraktale Korrekturen</span><span data-lang-en>Torus, brain windings, fractal corrections</span></div>
+</div>
+</div>
+
+<!-- SLIDE 16: TORUS -->
+<div class="slide" data-title-de="Der Torus" data-title-en="The Torus">
+<div class="slide-inner">
+  <div class="two-col">
+    <div>
+      <div class="epigraph"><span data-lang-de>Unendlich und begrenzt zugleich. Kein Rand, kein Anfang, kein Ende.</span><span data-lang-en>Infinite and bounded at once. No edge, no beginning, no end.</span></div>
+      <h2><span data-lang-de>Der Torsionskristall</span><span data-lang-en>The Torsion Crystal</span></h2>
+      <div data-lang-de>
+        <p class="lead">Das Universum ist ein statischer, vierdimensionaler Torsionskristall. Das fundamentale Element: der Torus.</p>
+        <p>Endliches Volumen, keine Ränder. Keine Singularitäten. Die Windungszahl f = 7500 erzeugt die Sub-Planck-Skala. Selbstähnlich über alle Größenordnungen.</p>
+      </div>
+      <div data-lang-en>
+        <p class="lead">The universe is a static, four-dimensional torsion crystal. The fundamental element: the torus.</p>
+        <p>Finite volume, no boundaries. No singularities. The winding number f = 7500 generates the sub-Planck scale. Self-similar across all scales.</p>
+      </div>
+    </div>
+    <div>
+      <img src="img/ch07_torus.png" class="slide-img" alt="Torus">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 17: TORUS CONSEQUENCES -->
+<div class="slide" data-title-de="Torus: Konsequenzen" data-title-en="Torus: Consequences">
+<div class="slide-inner">
+  <div class="two-col img-heavy">
+    <div>
+      <h2><span data-lang-de>Was der Torus löst</span><span data-lang-en>What the Torus Resolves</span></h2>
+      <div class="cascade">
+        <div class="cascade-step"><span class="step-num">⊘</span><span class="step-text"><span data-lang-de>Schwarze Löcher: Keine Punktsingularität — stabile Vakuumkerne</span><span data-lang-en>Black holes: No point singularity — stable vacuum cores</span></span></div>
+        <div class="cascade-step"><span class="step-num">⊘</span><span class="step-text"><span data-lang-de>Urknall: Kein singulärer Anfang — das Universum ist ewig</span><span data-lang-en>Big Bang: No singular beginning — the universe is eternal</span></span></div>
+        <div class="cascade-step"><span class="step-num">⊘</span><span class="step-text"><span data-lang-de>Feldtheorie: Propagatoren divergieren nie — keine Renormierung nötig</span><span data-lang-en>Field theory: Propagators never diverge — no renormalization needed</span></span></div>
+      </div>
+    </div>
+    <div>
+      <img src="img/ring_nebula_big.jpg" class="slide-img" alt="Ring Nebula — cosmic torus">
+    </div>
+  </div>
+  <div class="kerngedanke">
+    <div data-lang-de><p>Der Torus ist das <em>einzige</em> geometrische Objekt, das gleichzeitig endlich, randlos, singularitätsfrei und selbstähnlich ist — und alle vier Dimensionen konsistent verbindet.</p></div>
+    <div data-lang-en><p>The torus is the <em>only</em> geometric object that is simultaneously finite, boundaryless, singularity-free, and self-similar — connecting all four dimensions consistently.</p></div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 18: BRAIN TORUS -->
+<div class="slide" data-title-de="Hirnwindungs-Torus" data-title-en="Brain-Winding Torus">
+<div class="slide-inner">
+  <div class="two-col">
+    <div>
+      <div class="epigraph"><span data-lang-de>Die Natur faltet, um zu verdichten — vom Gehirn bis zum Universum.</span><span data-lang-en>Nature folds to densify — from the brain to the universe.</span></div>
+      <h2><span data-lang-de>Vom Torus zum Hirnwindungsgeflecht</span><span data-lang-en>From Torus to Brain-Winding Structure</span></h2>
+      <div data-lang-de>
+        <p>Der glatte Torus verformt sich zu einer Topologie, die an die Gyri und Sulci der Großhirnrinde erinnert. Dieselbe geometrische Lösung: Oberfläche maximieren in begrenztem Volumen.</p>
+        <p><strong>Elementarteilchen</strong> = stehende Wellen im Windungsgeflecht. Die drei Generationen = drei Resonanzmoden desselben geometrischen Objekts.</p>
+      </div>
+      <div data-lang-en>
+        <p>The smooth torus deforms into a topology reminiscent of the gyri and sulci of the cerebral cortex. The same geometric solution: maximize surface area in limited volume.</p>
+        <p><strong>Elementary particles</strong> = standing waves in the winding structure. Three generations = three resonance modes of the same geometric object.</p>
+      </div>
+    </div>
+    <div>
+      <img src="img/ch08_brain_torus.png" class="slide-img" alt="Brain Torus">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 19: FRACTAL CORRECTION -->
+<div class="slide" data-title-de="Fraktale Korrektur" data-title-en="Fractal Correction">
+<div class="slide-inner">
+  <div class="two-col text-heavy">
+    <div>
+      <div class="epigraph"><span data-lang-de>Die Raumzeit ist fast dreidimensional. Aber „fast" macht den Unterschied.</span><span data-lang-en>Spacetime is almost three-dimensional. But "almost" makes the difference.</span></div>
+      <h2><span data-lang-de>K<sub>frak</sub> = 0,9867</span><span data-lang-en>K<sub>frac</sub> = 0.9867</span></h2>
+      <div class="formula-box">$$ D_f^{\text{Raum}} = 3 - \xi \approx 2{,}9998667 $$</div>
+      <div data-lang-de>
+        <p>Eine winzige Abweichung von der perfekten Drei. Aber über 17 Größenordnungen Energielauf (von der Planck- zur elektroschwachen Skala) akkumuliert sie sich zu einer messbaren 1,3%-Korrektur:</p>
+      </div>
+      <div data-lang-en>
+        <p>A tiny deviation from the perfect three. But over 17 orders of magnitude of energy flow (from Planck to electroweak scale), it accumulates into a measurable 1.3% correction:</p>
+      </div>
+      <div class="formula-box">$$ K_{\text{frak}} = 1 - 100\xi \approx 0{,}9867 $$</div>
+    </div>
+    <div>
+      <img src="img/ch09_fractal_rg.png" class="slide-img" alt="Fractal RG Flow">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 20: FRACTAL KEY INSIGHT -->
+<div class="slide" data-title-de="Fraktal: Kerngedanke" data-title-en="Fractal: Key Insight">
+<div class="slide-inner">
+  <h2><span data-lang-de>Warum K<sub>frak</sub> keine Wahl ist</span><span data-lang-en>Why K<sub>frac</sub> is Not a Choice</span></h2>
+  <div data-lang-de>
+    <p class="lead">Es gibt zwei unabhängige Wege, das Massenverhältnis m<sub>e</sub>/m<sub>μ</sub> zu berechnen. Die Forderung, dass beide denselben experimentellen Wert liefern, bestimmt K<sub>frak</sub> <em>eindeutig</em>.</p>
+    <p>Die fraktale Raumzeit wirkt als natürlicher Regulator: Die Divergenzen der Standard-QFT entstehen in T0 gar nicht erst — weil die Raumzeit selbst einen eingebauten Cutoff besitzt.</p>
+  </div>
+  <div data-lang-en>
+    <p class="lead">There are two independent ways to calculate the mass ratio m<sub>e</sub>/m<sub>μ</sub>. The requirement that both yield the same experimental value determines K<sub>frac</sub> <em>uniquely</em>.</p>
+    <p>Fractal spacetime acts as a natural regulator: the divergences of standard QFT never arise in T0 — because spacetime itself has a built-in cutoff.</p>
+  </div>
+  <div class="kerngedanke">
+    <div data-lang-de><p>K<sub>frak</sub> ist keine freie Wahl, kein Anpassungsparameter. Er ist eine geometrische Notwendigkeit, erzwungen durch die innere Konsistenz der Theorie.</p></div>
+    <div data-lang-en><p>K<sub>frac</sub> is not a free choice, not a fitting parameter. It is a geometric necessity, enforced by the internal consistency of the theory.</p></div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 21: PART IV -->
+<div class="slide" data-title-de="Teil IV: Die Konsequenzen" data-title-en="Part IV: The Consequences">
+<div class="slide-inner part-slide">
+  <div class="part-number"><span data-lang-de>Teil IV</span><span data-lang-en>Part IV</span></div>
+  <h2><span data-lang-de>Die Konsequenzen</span><span data-lang-en>The Consequences</span></h2>
+  <div class="part-desc"><span data-lang-de>Quantencomputer und experimentelle Vorhersagen</span><span data-lang-en>Quantum computers and experimental predictions</span></div>
+</div>
+</div>
+
+<!-- SLIDE 22: QUANTUM COMPUTERS -->
+<div class="slide" data-title-de="Quantencomputer" data-title-en="Quantum Computers">
+<div class="slide-inner">
+  <div class="two-col">
+    <div>
+      <h2><span data-lang-de>Deterministische Quantenlogik</span><span data-lang-en>Deterministic Quantum Logic</span></h2>
+      <div data-lang-de>
+        <p class="lead">In T0 sind Qubits keine probabilistischen Zustände, sondern Energiefeld-Konfigurationen.</p>
+        <p>Das Hadamard-Gatter erhält eine ξ-Korrektur. Der Shor-Algorithmus verbessert sich leicht. Besonders vielversprechend: die fraktale ξ-Dämpfung bietet natürliche Stabilisierung gegen Dekohärenz.</p>
+        <p>Das Messproblem verschwindet: kein Wellenfunktionskollaps, nur kontinuierliche Zeitfeld-Evolution.</p>
+      </div>
+      <div data-lang-en>
+        <p class="lead">In T0, qubits are not probabilistic states but energy field configurations.</p>
+        <p>The Hadamard gate receives a ξ correction. Shor's algorithm improves slightly. Particularly promising: fractal ξ-damping provides natural stabilization against decoherence.</p>
+        <p>The measurement problem disappears: no wave function collapse, only continuous time-field evolution.</p>
+      </div>
+    </div>
+    <div>
+      <img src="img/ch10_quantum_circuit.png" class="slide-img" alt="Quantum Circuit">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 23: EXPERIMENTS -->
+<div class="slide" data-title-de="Experimentelle Vorhersagen" data-title-en="Experimental Predictions">
+<div class="slide-inner">
+  <div class="two-col text-heavy">
+    <div>
+      <div class="epigraph"><span data-lang-de>Eine Theorie ohne testbare Vorhersagen ist Philosophie. T0 liefert Zahlen.</span><span data-lang-en>A theory without testable predictions is philosophy. T0 delivers numbers.</span></div>
+      <h2><span data-lang-de>Testbare Vorhersagen</span><span data-lang-en>Testable Predictions</span></h2>
+      <div class="cascade">
+        <div class="cascade-step"><span class="step-num">01</span><span class="step-text"><span data-lang-de>Bell-Test-Abweichungen ~10⁻³ in 73-Qubit-Systemen</span><span data-lang-en>Bell test deviations ~10⁻³ in 73-qubit systems</span></span></div>
+        <div class="cascade-step"><span class="step-num">02</span><span class="step-text"><span data-lang-de>Räumliche Korrelationsverzögerungen: ~445 ns bei 1000 km</span><span data-lang-en>Spatial correlation delays: ~445 ns at 1000 km</span></span></div>
+        <div class="cascade-step"><span class="step-num">03</span><span class="step-text"><span data-lang-de>Tau-Anomalie: a<sub>τ</sub> ≈ 1,282 × 10⁻³ (Belle II)</span><span data-lang-en>Tau anomaly: a<sub>τ</sub> ≈ 1.282 × 10⁻³ (Belle II)</span></span></div>
+        <div class="cascade-step"><span class="step-num">04</span><span class="step-text"><span data-lang-de>α<sub>s</sub>(m<sub>τ</sub>) = 0,3224 (2,3% Abweichung)</span><span data-lang-en>α<sub>s</sub>(m<sub>τ</sub>) = 0.3224 (2.3% deviation)</span></span></div>
+        <div class="cascade-step"><span class="step-num">05</span><span class="step-text"><span data-lang-de>Gravitationswellen-Korrekturen bei hohen Frequenzen</span><span data-lang-en>Gravitational wave corrections at high frequencies</span></span></div>
+      </div>
+    </div>
+    <div>
+      <img src="img/ch11_grav_wave.png" class="slide-img" alt="Gravitational Waves">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 24: CMB -->
+<div class="slide" data-title-de="CMB und Kosmologie" data-title-en="CMB and Cosmology">
+<div class="slide-inner">
+  <div class="two-col img-heavy">
+    <div>
+      <h2><span data-lang-de>Kosmische Mikrowellen&shy;hintergrundstrahlung</span><span data-lang-en>Cosmic Microwave Background</span></h2>
+      <div data-lang-de>
+        <p>In T0 entstehen die CMB-Anisotropien durch Zeitfeldvariationen — nicht durch inflationäre Expansion. Die Rotverschiebung ist keine Expansion des Raumes, sondern Folge der Zeitfeld-Dynamik.</p>
+      </div>
+      <div data-lang-en>
+        <p>In T0, CMB anisotropies arise from time field variations — not from inflationary expansion. Redshift is not expansion of space, but a consequence of time-field dynamics.</p>
+      </div>
+    </div>
+    <div>
+      <img src="img/planck_cmb_final.jpg" class="slide-img" alt="Planck CMB">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 25: PART V -->
+<div class="slide" data-title-de="Teil V: Das größere Bild" data-title-en="Part V: The Bigger Picture">
+<div class="slide-inner part-slide">
+  <div class="part-number"><span data-lang-de>Teil V</span><span data-lang-en>Part V</span></div>
+  <h2><span data-lang-de>Das größere Bild</span><span data-lang-en>The Bigger Picture</span></h2>
+  <div class="part-desc"><span data-lang-de>Determinismus, Bewusstsein und die Grenzen der Beschreibung</span><span data-lang-en>Determinism, consciousness, and the limits of description</span></div>
+</div>
+</div>
+
+<!-- SLIDE 26: DETERMINISM -->
+<div class="slide" data-title-de="Determinismus" data-title-en="Determinism">
+<div class="slide-inner">
+  <div class="two-col">
+    <div>
+      <div class="epigraph"><span data-lang-de>Gott würfelt nicht — aber der Schmetterling flattert auf allen Skalen.</span><span data-lang-en>God does not play dice — but the butterfly flutters on all scales.</span></div>
+      <h2><span data-lang-de>Zufall oder Vorher&shy;bestimmung?</span><span data-lang-en>Chance or Predetermination?</span></h2>
+      <div data-lang-de>
+        <p class="lead">In T0 ist alles prinzipiell determiniert. Quantenzufall ist eine Illusion deterministischer Zeitfeld-Dynamik.</p>
+        <p>Der fraktale Schmetterlingseffekt im Hirnwindungs-Torus potenziert sich über alle Skalen. Die Born-Regel P = |ψ|² ist nicht fundamental — sie ist <em>emergent</em>.</p>
+      </div>
+      <div data-lang-en>
+        <p class="lead">In T0, everything is in principle determined. Quantum randomness is an illusion of deterministic time-field dynamics.</p>
+        <p>The fractal butterfly effect in the brain-winding torus potentiates across all scales. The Born rule P = |ψ|² is not fundamental — it is <em>emergent</em>.</p>
+      </div>
+    </div>
+    <div>
+      <img src="img/ch12_butterfly.png" class="slide-img" alt="Butterfly / Lorenz Attractor">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 27: DETERMINISM KEY INSIGHT -->
+<div class="slide" data-title-de="Determinismus: Kerngedanke" data-title-en="Determinism: Key Insight">
+<div class="slide-inner">
+  <h2><span data-lang-de>Determiniert und doch unvorhersagbar</span><span data-lang-en>Determined Yet Unpredictable</span></h2>
+  <div data-lang-de>
+    <p class="lead">Die Wahrscheinlichkeitsbeschreibung funktioniert nicht, weil die Natur zufällig ist. Sie funktioniert, weil die deterministische Komplexität unsere Rechenkapazität — und jede prinzipiell mögliche Rechenkapazität — übersteigt.</p>
+  </div>
+  <div data-lang-en>
+    <p class="lead">The probabilistic description works not because nature is random. It works because deterministic complexity exceeds our computational capacity — and any principally possible computational capacity.</p>
+  </div>
+  <div class="kerngedanke">
+    <div data-lang-de><p>T0 vereint scheinbar Unvereinbares: vollständigen Determinismus mit praktischer Unvorhersagbarkeit. Die Born-Regel ist der beste Kompass in einem Labyrinth, das zu komplex für eine exakte Karte ist.</p></div>
+    <div data-lang-en><p>T0 unites the seemingly incompatible: complete determinism with practical unpredictability. The Born rule is the best compass in a labyrinth too complex for an exact map.</p></div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 28: CONSCIOUSNESS -->
+<div class="slide" data-title-de="Bewusstsein" data-title-en="Consciousness">
+<div class="slide-inner">
+  <div class="two-col">
+    <div>
+      <div class="epigraph"><span data-lang-de>Bewusstsein ist keine Substanz. Es ist eine Topologie.</span><span data-lang-en>Consciousness is not a substance. It is a topology.</span></div>
+      <h2><span data-lang-de>Fraktale Rekursion</span><span data-lang-en>Fractal Recursion</span></h2>
+      <div data-lang-de>
+        <p>Bewusstsein entsteht dort, wo ein System <em>sich selbst beobachtet</em>. Die fraktale Struktur ermöglicht unendlich viele Rückkopplungsebenen auf endlichem Volumen.</p>
+        <p>Das Gefühl von „Wahl" ist die innere Perspektive eines Systems, das zu komplex ist, um sich selbst vorherzusagen.</p>
+      </div>
+      <div data-lang-en>
+        <p>Consciousness arises where a system <em>observes itself</em>. The fractal structure enables infinitely many feedback levels in finite volume.</p>
+        <p>The feeling of "choice" is the internal perspective of a system too complex to predict itself.</p>
+      </div>
+    </div>
+    <div>
+      <img src="img/ch13_fractal_tree.png" class="slide-img" alt="Fractal Tree">
+    </div>
+  </div>
+  <div class="kerngedanke">
+    <div data-lang-de><p>Das Gehirn ist nicht zufällig ein gefaltetes Objekt. Die Hirnwindungs-Topologie ist die Voraussetzung für Bewusstsein — die Natur hat auf der fundamentalsten und auf der komplexesten Ebene dieselbe Lösung gefunden.</p></div>
+    <div data-lang-en><p>The brain is not accidentally a folded object. The brain-winding topology is the prerequisite for consciousness — nature found the same solution at both the most fundamental and the most complex level.</p></div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 29: LIMITS -->
+<div class="slide" data-title-de="Die Grenzen der Beschreibung" data-title-en="The Limits of Description">
+<div class="slide-inner">
+  <div class="two-col img-heavy">
+    <div>
+      <div class="epigraph"><span data-lang-de>Die Landkarte ist nicht das Territorium.</span><span data-lang-en>The map is not the territory.</span> — Alfred Korzybski</div>
+      <h2><span data-lang-de>Demut vor der Natur</span><span data-lang-en>Humility Before Nature</span></h2>
+      <div data-lang-de>
+        <p>Die Gleichungen sind Landkarten, nicht das Territorium. Was die Theorie leistet: zeigen, dass die Natur mit einem einzigen Parameter beschrieben werden kann.</p>
+        <p>Was sie nicht leistet: erklären, <em>warum</em> es überhaupt etwas gibt statt nichts.</p>
+      </div>
+      <div data-lang-en>
+        <p>The equations are maps, not the territory. What the theory achieves: showing that nature can be described with a single parameter.</p>
+        <p>What it does not achieve: explaining <em>why</em> there is something rather than nothing.</p>
+      </div>
+    </div>
+    <div>
+      <img src="img/hubble_udf_big.jpg" class="slide-img" alt="Hubble Ultra Deep Field">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 30: INFORMATION -->
+<div class="slide" data-title-de="Alles ist Information" data-title-en="Everything is Information">
+<div class="slide-inner">
+  <div class="two-col">
+    <div>
+      <div class="epigraph"><span data-lang-de>Am Anfang war das Wort — und das Wort war eine Zahl.</span><span data-lang-en>In the beginning was the Word — and the Word was a number.</span></div>
+      <h2><span data-lang-de>Die vierte Perspektive</span><span data-lang-en>The Fourth Perspective</span></h2>
+      <div data-lang-de>
+        <p class="lead">Energie, Masse, Zeit — und tiefer als alle drei: <strong>Information</strong>.</p>
+        <p>Die gesamte T0-Physik reduziert sich auf drei Elemente: Eine Zahl (ξ = 4/30000), eine Geometrie (den Torus), eine Regel (T · m = 1). Das sind keine physikalischen Objekte. Das sind reine Relationen.</p>
+      </div>
+      <div data-lang-en>
+        <p class="lead">Energy, mass, time — and deeper than all three: <strong>Information</strong>.</p>
+        <p>All of T0 physics reduces to three elements: A number (ξ = 4/30000), a geometry (the torus), a rule (T · m = 1). These are not physical objects. They are pure relations.</p>
+      </div>
+    </div>
+    <div>
+      <img src="img/ch16_network.png" class="slide-img" alt="Information Network">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 31: EVOLUTION -->
+<div class="slide" data-title-de="Evolution: geometrisch geführt" data-title-en="Evolution: Geometrically Guided">
+<div class="slide-inner">
+  <div class="two-col img-heavy">
+    <div>
+      <h2><span data-lang-de>Nicht zufällig, sondern geometrisch</span><span data-lang-en>Not Random, But Geometric</span></h2>
+      <div data-lang-de>
+        <p>Evolution ist nicht blind. Sie ist <em>geometrisch geführt</em>. Die ξ-Geometrie definiert eine Energielandschaft, und die Evolution wandert auf dieser Landschaft.</p>
+        <p>Das Gehirn mit seinen Windungen, die Lunge mit ihren Verästelungen, die Blutgefäße — geometrische Attraktoren im Raum der möglichen Formen.</p>
+      </div>
+      <div data-lang-en>
+        <p>Evolution is not blind. It is <em>geometrically guided</em>. The ξ geometry defines an energy landscape, and evolution wanders this landscape.</p>
+        <p>The brain with its folds, the lung with its branches, blood vessels — geometric attractors in the space of possible forms.</p>
+      </div>
+    </div>
+    <div>
+      <img src="img/ch16_evolution.png" class="slide-img" alt="Geometric Evolution">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 32: SUB-PLANCK -->
+<div class="slide" data-title-de="Die Sub-Planck-Grenze" data-title-en="The Sub-Planck Boundary">
+<div class="slide-inner">
+  <div class="two-col">
+    <div>
+      <h2><span data-lang-de>Wo die Physik endet</span><span data-lang-en>Where Physics Ends</span></h2>
+      <div data-lang-de>
+        <p class="lead">Unterhalb der Sub-Planck-Skala t₀ = ℓ_P / 7500 hat die Raumzeit keine definierte Struktur im Sinne der T0-Feldgleichungen.</p>
+        <p>Was dort geschieht, ist für die Physik — prinzipiell, nicht nur praktisch — unsichtbar. Hier öffnet sich ein Nadelöhr: Eine Entität außerhalb des Systems müsste keine Naturgesetze brechen, um zu wirken. Eine Verschiebung kleiner als ξ · ℓ_P — physikalisch undetektierbar, kausal wirksam durch den fraktalen Schmetterlingseffekt.</p>
+      </div>
+      <div data-lang-en>
+        <p class="lead">Below the sub-Planck scale t₀ = ℓ_P / 7500, spacetime has no defined structure in the sense of the T0 field equations.</p>
+        <p>What happens there is invisible to physics — in principle, not just in practice. A needle's eye opens here: an entity outside the system wouldn't need to break natural laws to act. A shift smaller than ξ · ℓ_P — physically undetectable, causally effective through the fractal butterfly effect.</p>
+      </div>
+    </div>
+    <div>
+      <img src="img/ch16_subplanck.png" class="slide-img" alt="Sub-Planck Boundary">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 33: SUMMARY -->
+<div class="slide" data-title-de="Der rote Faden" data-title-en="The Common Thread">
+<div class="slide-inner">
+  <h2><span data-lang-de>Der rote Faden</span><span data-lang-en>The Common Thread</span></h2>
+  <div class="cascade">
+    <div class="cascade-step"><span class="step-num">01</span><span class="step-text"><span data-lang-de>SI-Reform 2019: Konstanten fixiert</span><span data-lang-en>2019 SI reform: constants fixed</span></span></div>
+    <div class="cascade-arrow">↓</div>
+    <div class="cascade-step"><span class="step-num">02</span><span class="step-text"><span data-lang-de>Konsequent weiterdenken: α = 1</span><span data-lang-en>Thinking further: α = 1</span></span></div>
+    <div class="cascade-arrow">↓</div>
+    <div class="cascade-step"><span class="step-num">03</span><span class="step-text"><span data-lang-de>Verhältnisbasiertes System → ξ = 4/30000</span><span data-lang-en>Ratio-based system → ξ = 4/30000</span></span></div>
+    <div class="cascade-arrow">↓</div>
+    <div class="cascade-step"><span class="step-num">04</span><span class="step-text"><span data-lang-de>Torus → Hirnwindungsgeflecht → Fraktale Korrektur K<sub>frak</sub></span><span data-lang-en>Torus → brain-winding structure → fractal correction K<sub>frac</sub></span></span></div>
+    <div class="cascade-arrow">↓</div>
+    <div class="cascade-step"><span class="step-num">05</span><span class="step-text"><span data-lang-de>Zeit-Masse-Dualität: T · m = 1</span><span data-lang-en>Time-mass duality: T · m = 1</span></span></div>
+    <div class="cascade-arrow">↓</div>
+    <div class="cascade-step"><span class="step-num">06</span><span class="step-text"><span data-lang-de>FFGFT/DVFT: Φ = ρ · e^{iθ}</span><span data-lang-en>FFGFT/DVFT: Φ = ρ · e^{iθ}</span></span></div>
+    <div class="cascade-arrow">↓</div>
+    <div class="cascade-step"><span class="step-num">07</span><span class="step-text"><span data-lang-de>G, Teilchenmassen, Planck-Skala, Kosmologie, Quantencomputer</span><span data-lang-en>G, particle masses, Planck scale, cosmology, quantum computers</span></span></div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 34: FINAL -->
+<div class="slide" data-title-de="Schluss" data-title-en="Conclusion">
+<div class="slide-inner title-slide">
+  <div data-lang-de>
+    <h1 style="font-size:2.4rem;margin-bottom:0.8em;">Die Natur ist einfacher als gedacht.</h1>
+    <div class="subtitle" style="font-style:italic;font-family:'Playfair Display',serif;">Wir haben sie nur in zu vielen willkürlichen Einheiten versteckt — und die Windungen des fundamentalen Torus übersehen.</div>
+  </div>
+  <div data-lang-en>
+    <h1 style="font-size:2.4rem;margin-bottom:0.8em;">Nature is simpler than we thought.</h1>
+    <div class="subtitle" style="font-style:italic;font-family:'Playfair Display',serif;">We merely hid it behind too many arbitrary units — and overlooked the windings of the fundamental torus.</div>
+  </div>
+  <div style="margin-top:2.5em;">
+    <div class="author">Johann Pascher — T0 Theory</div>
+    <div class="date" style="margin-top:0.8em;font-size:0.9rem;">
+      <a href="https://github.com/jpascher/T0-Time-Mass-Duality/" style="color:var(--accent-blue);text-decoration:none;">github.com/jpascher/T0-Time-Mass-Duality</a>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- /slides-container -->
+
+<!-- ===== NAVIGATION BAR ===== -->
+<div class="nav-bar">
+  <div class="nav-left">
+    <a href="index.html" class="nav-btn" style="text-decoration:none">🏠</a>
+    <button class="nav-btn" onclick="showToc()">☰</button>
+    <button class="nav-btn" onclick="prevSlide()">← <span data-lang-de>Zurück</span><span data-lang-en>Back</span></button>
+    <button class="nav-btn" onclick="nextSlide()"><span data-lang-de>Weiter</span><span data-lang-en>Next</span> →</button>
+    <span class="slide-counter" id="counter">1 / 35</span>
+  </div>
+  <div class="nav-right">
+    <button class="nav-btn" id="btnAudioP" onclick="ttsToggle()" title="Folie vorlesen / Read slide">🔇</button>
+    <button class="nav-btn" id="btnAutoP" onclick="ttsAutoToggle()" title="Auto-advance" style="font-size:.7rem">Auto ▶</button>
+    <select id="selRateP" onchange="ttsRate=+this.value" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--text-secondary);padding:3px 6px;border-radius:5px;font-size:.72rem;cursor:pointer">
+      <option value="0.8">0.8×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.2">1.2×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-de" onclick="setLang('de')">DE</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</div>
+<audio id="mp3Player" preload="none"></audio>
+
+<script>
+// ===== SLIDE NAVIGATION =====
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+
+function showSlide(n) {
+  if (n < 0 || n >= slides.length) return;
+  slides[current].classList.remove('active');
+  slides[current].classList.add('prev');
+  setTimeout(() => slides[current === n ? current : (current < n ? current : current)].classList.remove('prev'), 500);
+  
+  slides.forEach(s => { s.classList.remove('active', 'prev'); });
+  current = n;
+  slides[current].classList.add('active');
+  
+  document.getElementById('counter').textContent = `${current + 1} / ${slides.length}`;
+  document.getElementById('progress').style.width = `${((current + 1) / slides.length) * 100}%`;
+}
+
+function nextSlide() { showSlide(current + 1); }
+function prevSlide() { showSlide(current - 1); }
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (document.getElementById('toc').classList.contains('visible')) {
+    if (e.key === 'Escape') closeToc();
+    return;
+  }
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+  else if (e.key === 'Home') { e.preventDefault(); showSlide(0); }
+  else if (e.key === 'End') { e.preventDefault(); showSlide(slides.length - 1); }
+});
+
+// Touch navigation
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+document.addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].screenX;
+  if (Math.abs(diff) > 50) { diff > 0 ? nextSlide() : prevSlide(); }
+});
+
+// ===== LANGUAGE =====
+function setLang(lang) {
+  if (lang === 'en') {
+    document.body.classList.add('lang-en');
+    document.getElementById('btn-en').classList.add('active');
+    document.getElementById('btn-de').classList.remove('active');
+  } else {
+    document.body.classList.remove('lang-en');
+    document.getElementById('btn-de').classList.add('active');
+    document.getElementById('btn-en').classList.remove('active');
+  }
+  renderMath();
+}
+
+// ===== TABLE OF CONTENTS =====
+function buildToc() {
+  const container = document.getElementById('toc-items');
+  slides.forEach((slide, i) => {
+    const isEn = document.body.classList.contains('lang-en');
+    const titleDe = slide.dataset.titleDe || '';
+    const titleEn = slide.dataset.titleEn || '';
+    const title = titleDe; // always show both
+    
+    const item = document.createElement('div');
+    item.className = 'toc-item' + (slide.querySelector('.part-slide') ? ' part-item' : '');
+    item.innerHTML = `<span class="toc-num">${String(i + 1).padStart(2, '0')}</span>
+      <span class="toc-title"><span data-lang-de>${titleDe}</span><span data-lang-en>${titleEn}</span></span>`;
+    item.onclick = () => { showSlide(i); closeToc(); };
+    container.appendChild(item);
+  });
+}
+
+function showToc() { document.getElementById('toc').classList.add('visible'); }
+function closeToc() { document.getElementById('toc').classList.remove('visible'); }
+
+// ===== MATH RENDERING =====
+function renderMath() {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: '$$', right: '$$', display: true },
+      { left: '\\(', right: '\\)', display: false },
+      { left: '$', right: '$', display: false }
+    ],
+    throwOnError: false
+  });
+}
+
+// ===== INIT =====
+buildToc();
+renderMath();
+showSlide(0);
+
+// ===== TTS AUDIO ENGINE =====
+let ttsActive = false;
+let ttsAutoplay = false;
+let ttsRate = 1;
+let ttsSpeaking = false;
+const mp3Player = document.getElementById('mp3Player');
+const btnAudioP = document.getElementById('btnAudioP');
+const btnAutoP = document.getElementById('btnAutoP');
+
+function getCurLang() { return document.body.classList.contains('lang-en') ? 'en' : 'de'; }
+
+function slideText(idx) {
+  const s = slides[idx];
+  if (!s) return '';
+  const lang = getCurLang();
+  const clone = s.cloneNode(true);
+  // Remove elements of the OTHER language
+  if (lang === 'en') clone.querySelectorAll('[data-lang-de]').forEach(e => e.remove());
+  else clone.querySelectorAll('[data-lang-en]').forEach(e => e.remove());
+  clone.querySelectorAll('.formula-box, .katex, .katex-display, script, style').forEach(e => e.remove());
+  let txt = clone.textContent || '';
+  txt = txt.replace(/\$\$[^$]*\$\$/g, '').replace(/\$[^$]*\$/g, '').replace(/\\\([^)]*\\\)/g, '');
+  txt = txt.replace(/[{}\[\]\\]/g, '');
+  txt = txt.replace(/ξ/g, lang === 'de' ? 'Ksi' : 'Xi');
+  txt = txt.replace(/α/g, 'Alpha');
+  txt = txt.replace(/ℏ/g, lang === 'de' ? 'h quer' : 'h bar');
+  txt = txt.replace(/ℓ/g, 'l');
+  txt = txt.replace(/Φ/g, 'Phi');
+  txt = txt.replace(/θ/g, 'Theta');
+  txt = txt.replace(/ρ/g, 'Rho');
+  txt = txt.replace(/Ω/g, 'Omega');
+  txt = txt.replace(/Λ/g, 'Lambda');
+  txt = txt.replace(/≈/g, lang === 'de' ? ' ungefähr ' : ' approximately ');
+  txt = txt.replace(/→/g, lang === 'de' ? ' ergibt ' : ' yields ');
+  txt = txt.replace(/×/g, lang === 'de' ? ' mal ' : ' times ');
+  txt = txt.replace(/·/g, lang === 'de' ? ' mal ' : ' times ');
+  txt = txt.replace(/\s+/g, ' ').trim();
+  return txt;
+}
+
+function ttsSpeak(idx) {
+  ttsStop();
+  if (!ttsActive) return;
+  const lang = getCurLang();
+  const mp3Path = 'audio/pres_' + lang + '_' + String(idx).padStart(2,'0') + '.mp3';
+  mp3Player.src = mp3Path;
+  mp3Player.playbackRate = ttsRate;
+  const tryMp3 = mp3Player.play();
+  if (tryMp3 !== undefined) {
+    tryMp3.then(() => {
+      ttsSpeaking = true; btnAudioP.textContent = '🔊';
+      mp3Player.onended = () => { ttsSpeaking = false; btnAudioP.textContent = '🔈';
+        if (ttsAutoplay) { nextSlide(); setTimeout(() => ttsSpeak(current), 600); } };
+    }).catch(() => { ttsSpeakBrowser(idx); });
+  } else { ttsSpeakBrowser(idx); }
+}
+
+function ttsSpeakBrowser(idx) {
+  if (!('speechSynthesis' in window)) { alert('Browser supports no speech synthesis.'); return; }
+  const lang = getCurLang();
+  const text = slideText(idx);
+  if (!text) return;
+  const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+  const chunks = []; let c = '';
+  sentences.forEach(s => { if ((c+s).length > 250) { if(c) chunks.push(c.trim()); c = s; } else { c += s; } });
+  if (c) chunks.push(c.trim());
+  let ci = 0;
+  function speakNext() {
+    if (ci >= chunks.length || !ttsActive) { ttsSpeaking = false; btnAudioP.textContent = '🔈';
+      if (ttsAutoplay && ttsActive) { nextSlide(); setTimeout(() => ttsSpeak(current), 600); } return; }
+    const u = new SpeechSynthesisUtterance(chunks[ci]);
+    u.lang = lang === 'de' ? 'de-DE' : 'en-US';
+    u.rate = ttsRate; u.pitch = 1;
+    const voices = speechSynthesis.getVoices();
+    const pref = lang === 'de' ? 'de-DE' : 'en-US';
+    const v = voices.find(v => v.lang === pref && v.name.includes('Google'))
+      || voices.find(v => v.lang === pref && !v.localService)
+      || voices.find(v => v.lang.startsWith(lang));
+    if (v) u.voice = v;
+    u.onend = () => { ci++; speakNext(); };
+    u.onerror = () => { ci++; speakNext(); };
+    ttsSpeaking = true; btnAudioP.textContent = '🔊';
+    speechSynthesis.speak(u);
+  }
+  speakNext();
+}
+
+function ttsStop() {
+  ttsSpeaking = false; speechSynthesis.cancel();
+  mp3Player.pause(); mp3Player.currentTime = 0;
+  if (ttsActive) btnAudioP.textContent = '🔈';
+}
+
+function ttsToggle() {
+  if (ttsActive && ttsSpeaking) { ttsStop(); ttsActive = false; btnAudioP.textContent = '🔇'; return; }
+  if (ttsActive && !ttsSpeaking) { ttsActive = false; btnAudioP.textContent = '🔇'; return; }
+  ttsActive = true; btnAudioP.textContent = '🔈'; ttsSpeak(current);
+}
+
+function ttsAutoToggle() {
+  ttsAutoplay = !ttsAutoplay;
+  btnAutoP.style.background = ttsAutoplay ? 'rgba(45,212,191,.2)' : '';
+  btnAutoP.style.borderColor = ttsAutoplay ? '#2dd4bf' : '';
+  btnAutoP.style.color = ttsAutoplay ? '#2dd4bf' : '';
+  if (ttsAutoplay) btnAutoP.classList.add('active'); else btnAutoP.classList.remove('active');
+}
+
+// Override showSlide to stop/restart audio
+const _origShowSlide = showSlide;
+showSlide = function(n) { if (n !== current) ttsStop(); _origShowSlide(n); if (ttsActive && !ttsAutoplay) setTimeout(() => ttsSpeak(current), 300); };
+
+if ('speechSynthesis' in window) { speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices(); }
+</script>
+</body>
+</html>

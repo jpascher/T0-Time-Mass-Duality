@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FFGFT — Das fundamentale fraktalgeometrische Feld · Narrative Präsentation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#060b18;--bg2:#0c1326;--card:#121a33;
+  --gold:#d4a843;--cyan:#38bdf8;--teal:#2dd4bf;--rose:#f472b6;
+  --txt:#dfe3ec;--txt2:#94a3b8;--dim:#475569;
+  --border:rgba(212,168,67,.12);
+}
+body{font-family:'Nunito Sans',sans-serif;background:var(--bg);color:var(--txt);overflow:hidden;height:100vh;width:100vw}
+
+/* === SLIDES === */
+.slides{width:100vw;height:100vh;position:relative}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:flex-start;justify-content:center;opacity:0;transform:translateY(20px);transition:opacity .45s,transform .45s;pointer-events:none;overflow-y:auto;padding:50px 60px 80px}
+.slide.active{opacity:1;transform:translateY(0);pointer-events:all}
+.slide::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 15% 30%,rgba(56,189,248,.04),transparent 60%);pointer-events:none}
+.inner{max-width:960px;width:100%;position:relative;z-index:1}
+
+/* === TYPOGRAPHY === */
+h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:700;line-height:1.18}
+h1{font-size:3rem;letter-spacing:-.02em}
+h2{font-size:2rem;margin-bottom:.5em}
+h3{font-size:1.3rem;color:var(--gold);font-weight:600;margin-bottom:.3em}
+p{font-size:1.08rem;line-height:1.75;color:var(--txt2);margin-bottom:.9em}
+p.lead{font-size:1.22rem;color:var(--txt);font-weight:300;line-height:1.65}
+.chapter-label{font-family:'Fira Code',monospace;font-size:.75rem;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.6em;display:block}
+
+.epigraph{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--gold);opacity:.8;border-left:2px solid var(--gold);padding-left:1.2em;margin-bottom:1.6em}
+
+.formula-box{background:rgba(56,189,248,.04);border:1px solid rgba(56,189,248,.12);border-radius:10px;padding:1em 1.4em;text-align:center;margin:1.2em 0}
+.kern{background:linear-gradient(135deg,rgba(56,189,248,.06),rgba(212,168,67,.04));border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:1em 1.4em;margin:1.4em 0}
+.kern p{color:var(--txt);margin:0;font-size:1.05rem}
+
+/* === IMAGES === */
+.img-float-right{float:right;width:42%;margin:0 0 1em 1.6em;border-radius:10px;box-shadow:0 6px 30px rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.04)}
+.img-full{width:100%;border-radius:10px;box-shadow:0 6px 30px rgba(0,0,0,.4);margin:1em 0;border:1px solid rgba(255,255,255,.04)}
+.img-center{display:block;max-width:70%;margin:1.2em auto;border-radius:10px;box-shadow:0 6px 30px rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.04)}
+.img-caption{text-align:center;font-size:.82rem;color:var(--dim);font-style:italic;margin-top:-.6em;margin-bottom:1em}
+.clearfix::after{content:'';display:table;clear:both}
+
+/* === TWO COL === */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:2.5em;align-items:start}
+@media(max-width:860px){.two-col{grid-template-columns:1fr}.img-float-right{float:none;width:100%;margin:1em 0}}
+
+/* === TITLE === */
+.title-slide{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:80vh}
+.title-slide h1{font-size:3.2rem;background:linear-gradient(135deg,var(--txt),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3em}
+.title-slide .sub{font-size:1.3rem;color:var(--txt2);font-weight:300;max-width:680px;line-height:1.6;margin-bottom:2em}
+.title-slide .author{font-size:1rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;font-weight:600}
+
+/* === PART === */
+.part-slide{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:70vh}
+.part-num{font-family:'Fira Code',monospace;font-size:.8rem;color:var(--gold);letter-spacing:.3em;text-transform:uppercase;margin-bottom:1em}
+.part-slide h2{font-size:2.6rem;color:var(--txt)}
+.part-slide .pdesc{font-size:1.15rem;color:var(--txt2);margin-top:.8em;max-width:560px;font-weight:300}
+
+/* === CARDS === */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:1em;margin:1em 0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.1em 1.3em}
+.card h4{font-family:'Fira Code',monospace;font-size:.8rem;color:var(--cyan);margin-bottom:.4em;letter-spacing:.04em}
+.card p{font-size:.95rem;margin:0}
+
+/* === NAV === */
+.nav{position:fixed;bottom:0;left:0;right:0;height:48px;background:rgba(6,11,24,.93);backdrop-filter:blur(10px);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;z-index:100}
+.nav button{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--txt2);padding:5px 12px;border-radius:5px;cursor:pointer;font-size:.82rem;font-family:'Nunito Sans',sans-serif;transition:all .2s}
+.nav button:hover{background:rgba(255,255,255,.12);color:var(--txt)}
+.counter{font-family:'Fira Code',monospace;font-size:.75rem;color:var(--dim)}
+.progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--cyan));transition:width .3s;z-index:100}
+
+/* === TOC === */
+.toc-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(6,11,24,.96);backdrop-filter:blur(6px);z-index:200;display:none;overflow-y:auto;padding:50px 60px}
+.toc-overlay.show{display:block}
+.toc-overlay h2{font-size:1.8rem;color:var(--gold);margin-bottom:1.2em}
+.toc-list{max-width:750px;margin:0 auto}
+.toc-item{padding:8px 14px;border-radius:6px;cursor:pointer;transition:background .2s;display:flex;gap:10px;align-items:baseline;margin-bottom:2px}
+.toc-item:hover{background:rgba(255,255,255,.04)}
+.toc-n{font-family:'Fira Code',monospace;font-size:.7rem;color:var(--dim);min-width:2.2em}
+.toc-t{font-size:.95rem;color:var(--txt)}
+.toc-item.part .toc-t{color:var(--gold);font-weight:600;font-size:1.05rem}
+.toc-item.part{margin-top:.8em}
+.toc-close{position:fixed;top:16px;right:24px;background:none;border:none;color:var(--txt2);font-size:1.8rem;cursor:pointer;z-index:201}
+
+.katex{font-size:1.05em}
+.formula-box .katex{font-size:1.25em}
+</style>
+</head>
+<body>
+
+<div class="progress" id="prog"></div>
+
+<div class="toc-overlay" id="toc">
+<button class="toc-close" onclick="closeToc()">×</button>
+<div class="toc-list"><h2>Inhalt</h2><div id="toc-items"></div></div>
+</div>
+
+<div class="slides" id="slides">
+
+<!-- ============ SLIDE 0: TITLE ============ -->
+<div class="slide active" data-t="FFGFT — Narrative Präsentation">
+<div class="inner title-slide">
+<h1>Das fundamentale fraktal­geometrische Feld</h1>
+<div class="sub">Eine neue Sicht auf die Wirklichkeit — Das Universum als sich vertiefendes Gehirn, beschrieben durch einen einzigen Parameter</div>
+<div class="formula-box">$$ \xi = \tfrac{4}{3} \times 10^{-4} $$</div>
+<div class="author">Johann Pascher · FFGFT Narrative Version · 2026</div>
+</div>
+</div>
+
+<!-- ============ SLIDE 1: Kap 1 Intro ============ -->
+<div class="slide" data-t="Kap. 1 — Eine einzige Zahl">
+<div class="inner clearfix">
+<span class="chapter-label">Kapitel 1</span>
+<h2>Eine einzige Zahl beschreibt das Universum</h2>
+<img src="img/ch03_cascade.png" class="img-float-right" alt="Ableitungskaskade">
+<p class="lead">Stellen Sie sich vor, Sie könnten das gesamte Universum mit nur einer einzigen Zahl beschreiben. Nicht mit Dutzenden von Naturkonstanten, nicht mit komplexen Gleichungssystemen — sondern mit einem einzigen geometrischen Parameter.</p>
+<p>Diese Zahl lautet <strong>ξ = 4/3 × 10⁻⁴</strong> — etwa 0,000133. Dimensionslos, eine reine Zahl ohne Einheit. Und aus dieser winzigen, unscheinbar wirkenden Zahl erwachsen alle fundamentalen Eigenschaften unseres Universums: die Lichtgeschwindigkeit, die Gravitationskonstante, das Plancksche Wirkungsquantum, die Feinstrukturkonstante — einfach alles.</p>
+<p>Der Wert ist kein Zufall. ξ wurde nicht aus α abgeleitet, sondern aus der Geometrie selbst: aus der Torus-Topologie des Universums und der Kugeltetraederpackung — der dichtesten Packung von Kugeln im dreidimensionalen Raum. Daraus ergaben sich harmonische Resonanzen, die zu den beobachteten Massenverhältnissen führen.</p>
+<div class="kern"><p><strong>Die fraktale Dimension der Raumzeit:</strong> ξ definiert, wie „körnig" die Raumzeit auf kleinsten Skalen ist. Die Dimension beträgt nicht exakt 3, sondern D<sub>f</sub> = 3 − ξ ≈ 2,999867. Dieser winzige Unterschied reguliert alle Divergenzen der Quantenfeldtheorie und verhindert Singularitäten.</p></div>
+</div>
+</div>
+
+<!-- ============ SLIDE 2: Gehirn-Metapher ============ -->
+<div class="slide" data-t="Kap. 1 — Die Gehirn-Metapher">
+<div class="inner clearfix">
+<span class="chapter-label">Kapitel 1</span>
+<h2>Das Universum als wachsendes Gehirn</h2>
+<img src="img/brain_torus_artistic.png" class="img-float-right" alt="Hirnwindungs-Torus">
+<p class="lead">Während ein Embryo heranwächst, vergrößert sich das Gehirn nicht durch Expansion seines Volumens, sondern durch Zunahme seiner Windungen — der Faltung der Hirnrinde. Mehr Windungen bedeuten mehr Oberfläche, mehr Komplexität, mehr Informationsverarbeitung.</p>
+<p>Ähnlich verhält es sich mit dem Universum: <strong>Die Raumzeit bleibt im Wesentlichen statisch, aber ihre innere, fraktale Komplexität nimmt zu.</strong> Was wir als Expansion wahrnehmen, ist eine Veränderung der fraktalen Tiefe — eine Zunahme der „Windungen" der Raumzeit, ohne dass sie sich tatsächlich aufbläht.</p>
+<p>Stellen Sie sich vor, Sie betrachten eine Karte mit immer höherer Auflösung: Zunächst sehen Sie nur grobe Umrisse, dann Straßen, dann Häuser, schließlich einzelne Bäume. Die Landschaft hat sich nicht verändert, aber Ihre Wahrnehmung ihrer Komplexität hat zugenommen.</p>
+<div class="kern"><p><strong>Kernbotschaft:</strong> Der Raum dehnt sich nicht aus — die fraktale Struktur entfaltet sich und wird komplexer. Wie ein Gehirn, das nicht durch Ausdehnung, sondern durch Faltung wächst.</p></div>
+</div>
+</div>
+
+<!-- ============ SLIDE 3: Kap 2 — Warum fraktal ============ -->
+<div class="slide" data-t="Kap. 2 — Warum fraktal?">
+<div class="inner clearfix">
+<span class="chapter-label">Kapitel 2</span>
+<h2>Warum die Raumzeit fraktal sein <em>muss</em></h2>
+<img src="img/ch09_fractal_rg.png" class="img-float-right" alt="Fraktale Korrektur">
+<p class="lead">Wenn wir versuchen, Quantenfeldtheorie auf einer perfekt glatten Raumzeit zu betreiben, erhalten wir unendliche Werte — sogenannte ultraviolette Divergenzen. Um sie loszuwerden, müssen wir „renormieren" — geschickt Unendlichkeiten voneinander subtrahieren. Das funktioniert, fühlt sich aber an wie Schummeln.</p>
+<p>In der Nähe von Schwarzen Löchern oder beim Urknall sagt die Allgemeine Relativitätstheorie, dass die Krümmung gegen unendlich geht — eine Singularität. An diesen Punkten brechen alle Gesetze zusammen.</p>
+<p>Die FFGFT löst beide Probleme auf einen Schlag. Die Volumenskalierung folgt nicht mehr V ~ r³, sondern V ~ r<sup>D<sub>f</sub></sup> = r<sup>3−ξ</sup>. Für große Abstände macht das keinen Unterschied. Aber für winzige Abstände nahe der Planck-Skala ändert sich alles: Die Unendlichkeiten verschwinden, die Theorie bleibt finit.</p>
+<div class="kern"><p><strong>Die Metapher:</strong> Bei einem perfekt glatten Raum wäre D<sub>f</sub> = 3 — wie ein Gehirn ohne Windungen, eine glatte Kugel. Ein solches Gehirn könnte nicht denken. Erst die Windungen machen Komplexität und Intelligenz möglich. So macht die fraktale Körnigkeit das Universum „lebendig".</p></div>
+</div>
+</div>
+
+<!-- ============ SLIDE 4: Kap 2 — Zeit-Masse-Dualität ============ -->
+<div class="slide" data-t="Kap. 2 — Zeit-Masse-Dualität">
+<div class="inner">
+<span class="chapter-label">Kapitel 2</span>
+<div class="two-col">
+<div>
+<h2>T · m = 1 — Zwei Seiten einer Medaille</h2>
+<p class="lead">Die zweite Säule der FFGFT: Zeit und Masse sind nicht unabhängig, sondern zwei Aspekte derselben fundamentalen Realität.</p>
+<div class="formula-box">$$ T(x,t) \cdot m(x,t) = 1 $$</div>
+<p>In Regionen hoher Massendichte vergeht die Zeit langsamer. Wo weniger Masse ist, läuft die Zeit schneller. Das Produkt bleibt konstant — das Universum als Ganzes bleibt im Gleichgewicht.</p>
+<p>Diese Dualität folgt zwingend aus der fraktalen Selbstähnlichkeit: Wenn wir die Skala um ξ ändern, müssen sich Zeit und Masse so transformieren, dass ihr Produkt invariant bleibt. Nur so bleibt das Vakuum stabil.</p>
+</div>
+<div>
+<img src="img/ch04_time_mass.png" class="img-full" alt="Zeit-Masse-Dualität">
+<p class="img-caption">Die Hyperbel T · m = 1: Jedes Teilchen sitzt auf derselben Kurve</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ============ SLIDE 5: Kap 3 — Probleme der ART ============ -->
+<div class="slide" data-t="Kap. 3 — Probleme der ART">
+<div class="inner clearfix">
+<span class="chapter-label">Kapitel 3</span>
+<h2>Drei Probleme der Allgemeinen Relativitätstheorie</h2>
+<img src="img/einstein_ring_big.jpg" class="img-float-right" alt="Einstein-Ring">
+<p class="lead">Einsteins ART ist eine der erfolgreichsten Theorien aller Zeiten. Und doch leidet sie unter fundamentalen Problemen.</p>
+<p><strong>1. Singularitäten:</strong> Im Zentrum Schwarzer Löcher und am Urknall divergiert die Krümmung ins Unendliche. Die FFGFT löst das: die effektive Krümmung bleibt stets endlich, begrenzt durch R<sub>eff</sub> ≤ ξ²/ℓ<sub>P</sub>². Die fraktale Körnigkeit wirkt als eingebauter Dämpfungsmechanismus.</p>
+<p><strong>2. Dunkle Materie & Dunkle Energie:</strong> 95% des Universums bestehen angeblich aus unsichtbarer Substanz. Die FFGFT sagt: Es gibt keine Dunkle Materie und keine Dunkle Energie. Was wir beobachten, sind Effekte der fraktalen Modifikation der Gravitation.</p>
+<p><strong>3. Quanteninkompatibilität:</strong> ART und Quantenmechanik sprechen verschiedene Sprachen. Die FFGFT erklärt Quantenphänomene als Emergenz aus der fraktalen Struktur — die Theorie ist von Natur aus UV-finit.</p>
+<div class="kern"><p>Die FFGFT löst nicht eines dieser Probleme — sie löst alle drei auf einmal, mit einem einzigen Parameter. Das ist die Macht der Einfachheit.</p></div>
+</div>
+</div>
+
+<!-- ============ SLIDE 6: Kap 4 — Schwarze Löcher ============ -->
+<div class="slide" data-t="Kap. 4 — Schwarze Löcher ohne Singularitäten">
+<div class="inner clearfix">
+<span class="chapter-label">Kapitel 4</span>
+<h2>Schwarze Löcher: Tiefe Falten, keine Risse</h2>
+<img src="img/ch07_torus.png" class="img-float-right" alt="Torus-Struktur">
+<p class="lead">In der klassischen ART kollabiert Materie im Zentrum eines Schwarzen Lochs zu einem Punkt unendlicher Dichte — einer Singularität. Die FFGFT zeigt: Das ist eine Illusion.</p>
+<p>Die fraktale Dimension ändert sich in der Nähe des Horizonts dramatisch: D<sub>f</sub> → 2 + ξ ≈ 2,000133. Die Raumzeit wird effektiv zweidimensional — eine <strong>fraktale Membran</strong>, nicht ein dreidimensionaler Raum mit einem Punkt im Zentrum.</p>
+<p>Ein Blatt Papier hat kein „Inneres" — es <em>ist</em> seine Oberfläche. Ebenso ist ein Schwarzes Loch in der FFGFT seine fraktale Horizontstruktur, auf der Information kodiert wird, nicht dahinter.</p>
+<p>Die Hawking-Strahlung entsteht nicht durch zufällige Teilchenpaare, sondern durch Schwingungen der fraktalen Membranoberfläche. Die emittierte Strahlung trägt subtile Korrelationen — <strong>Information bleibt erhalten</strong>.</p>
+<div class="kern"><p><strong>Metapher:</strong> Ein Schwarzes Loch ist wie eine tiefe Falte im kosmischen Gehirn — eine Region extremer Komplexität, wo die Windungen so eng gepackt sind, dass Licht nicht entkommen kann. Aber es gibt keinen Riss, keine Singularität.</p></div>
+</div>
+</div>
+
+<!-- ============ SLIDE 7: Kap 5 — Spezielle Relativitätstheorie ============ -->
+<div class="slide" data-t="Kap. 5 — Emergenz der Speziellen Relativität">
+<div class="inner">
+<span class="chapter-label">Kapitel 5</span>
+<h2>Bewegung als emergente Eigenschaft</h2>
+<p class="lead">Die Spezielle Relativitätstheorie mit ihrer Konstanz der Lichtgeschwindigkeit und der Lorentz-Invarianz ist keine fundamentale Eigenschaft des Universums — sie ist eine Konsequenz der fraktalen Hierarchie.</p>
+<div class="two-col">
+<div>
+<p>Die Lichtgeschwindigkeit emergiert aus dem Verhältnis zwischen ξ und der fundamentalen Zeitskala. In der FFGFT ist c keine fundamentale Konstante, sondern eine Folge der Geometrie:</p>
+<div class="formula-box">$$ c^2 = \frac{1}{\xi \cdot T_0^2} $$</div>
+<p>Einsteins berühmte Formel E = mc² wird zur Konsequenz der Zeit-Masse-Dualität: <strong>Masse ist gespeicherte Zeit, Energie ist Zeit in Bewegung.</strong></p>
+</div>
+<div>
+<p>Die Zeitdilatation und Längenkontraktion sind direkte Konsequenzen der fraktalen Struktur: Bewegte „Gedanken" im kosmischen Gehirn laufen langsamer ab — nicht weil Raum und Zeit fundamental sind, sondern weil die fraktale Hierarchie dies erzwingt.</p>
+<p><strong>Testbare Vorhersage:</strong> Bei extrem hohen Energien (nahe der Planck-Skala) sollten subtile Abweichungen von der perfekten Lorentz-Invarianz auftreten, die mit ξ skalieren.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ============ SLIDE 8: Kap 6 — Dunkle Energie ============ -->
+<div class="slide" data-t="Kap. 6 — Dunkle Energie als Metabolismus">
+<div class="inner clearfix">
+<span class="chapter-label">Kapitel 6</span>
+<h2>Dunkle Energie: Der Stoffwechsel des kosmischen Gehirns</h2>
+<img src="img/hubble_udf_big.jpg" class="img-float-right" alt="Hubble Deep Field">
+<p class="lead">Das klassische kosmologische Konstantenproblem: Die Quantenfeldtheorie sagt eine Vakuumenergiedichte von ~10¹¹³ J/m³ voraus. Beobachtet wird ~10⁻⁷ J/m³. Die Diskrepanz: 120 Größenordnungen — eine der peinlichsten Fehlvorhersagen der Physik.</p>
+<p>Die FFGFT löst das Problem parameterfrei:</p>
+<div class="formula-box">$$ \rho_{\text{vac}} = \xi^2 \cdot \rho_{\text{crit}} \approx 0{,}7 \, \rho_{\text{crit}} $$</div>
+<p>Der kleine Parameter ξ² ≈ 1,77 × 10⁻⁸ dämpft die riesige Planck-Energie auf beobachtbare Werte — ohne jede Feinabstimmung. Es gibt keine echte Expansion des Raums und keine mysteriöse abstoßende Kraft.</p>
+<p>Was wir messen — die zunehmende Rotverschiebung ferner Objekte — ist die natürliche Konsequenz der langsam fortschreitenden fraktalen Vertiefung, gesteuert allein durch ξ. Wie ein aktives Gehirn Energie verbraucht, um seine Strukturen aufrechtzuerhalten, so „verbraucht" das fraktale Vakuum Energie für seine fortgesetzte Vertiefung.</p>
+</div>
+</div>
+
+<!-- ============ SLIDE 9: Kap 7 — Testbare Vorhersagen ============ -->
+<div class="slide" data-t="Kap. 7 — Testbare Vorhersagen">
+<div class="inner">
+<span class="chapter-label">Kapitel 7</span>
+<h2>Das Universum wird entscheiden</h2>
+<p class="lead">Die FFGFT ist keine „alles-passt"-Theorie — sie liefert präzise, messbare Abweichungen von der Standardphysik, die in den kommenden Jahren überprüfbar sind.</p>
+<div class="cards">
+<div class="card">
+<h4>Schwarzer-Loch-Schatten</h4>
+<p>0,5–1% Abweichung vom ART-Wert. Nachweisbar mit nächster Generation EHT (ngEHT, ab 2030).</p>
+</div>
+<div class="card">
+<h4>Gravitationswellen-Ringdown</h4>
+<p>Logarithmische Frequenzkorrektur ~0,1–0,5%. Testbar mit LISA (2035+) und Einstein Telescope.</p>
+</div>
+<div class="card">
+<h4>CMB-Fraktalmuster</h4>
+<p>Subtile Korrelationen C<sub>ℓ</sub> ∝ ℓ<sup>ξ</sup> auf kleinen Winkelskalen. Messbar mit CMB-S4 und LiteBIRD.</p>
+</div>
+<div class="card">
+<h4>Zeitvariation von Konstanten</h4>
+<p>α̇/α ≈ 2ξ̇/ξ ≈ 10⁻¹⁸/Jahr — am Rand aktueller Messpräzision mit Atomuhren.</p>
+</div>
+</div>
+<div class="kern"><p><strong>Die fundamentale Messgrenze:</strong> Unsere Messgeräte sind selbst Teil des fraktalen Vakuums. In einem Universum, in dem alle Konstanten aus einem Parameter emergieren, gibt es keinen externen Referenzrahmen. Daher sind <em>Verhältnisse</em> robuster als Absolutmessungen.</p></div>
+</div>
+</div>
+
+<!-- ============ SLIDE 10: Kap 8 — Quantengravitation ============ -->
+<div class="slide" data-t="Kap. 8 — Quantengravitation">
+<div class="inner clearfix">
+<span class="chapter-label">Kapitel 8</span>
+<h2>Emergenz statt Quantisierung</h2>
+<img src="img/ch10_quantum_circuit.png" class="img-float-right" alt="Quantenschaltkreis">
+<p class="lead">Loop Quantum Gravity quantisiert die Raumzeit in diskrete Schleifen. Stringtheorie braucht 10/11 Dimensionen. Die FFGFT geht einen anderen Weg: Sie quantisiert nicht die Raumzeit — sie zeigt, dass Quantenphänomene aus der fraktalen Struktur <em>emergieren</em>.</p>
+<p>Die Heisenbergsche Unschärferelation erhält eine logarithmische Korrektur:</p>
+<div class="formula-box">$$ \Delta x \cdot \Delta p \geq \frac{\hbar}{2}\left(1 + \xi \ln\frac{x}{\ell_P}\right) $$</div>
+<p>Auf großen Skalen ist die Korrektur vernachlässigbar — klassische Physik. Auf kleinsten Skalen wird die Unschärfe verstärkt, was Divergenzen verhindert. Die effektive Plancksche Konstante wird skalenabhängig: bei kleinem x wächst ℏ<sub>eff</sub> logarithmisch, die Kopplung wird schwächer — das Gegenteil der divergenten Renormierung.</p>
+<p>Gravitation selbst ist eine emergente Phasenverschiebung des Vakuumfeldes — analog zur Metrik in der Hydrodynamik von Superfluiden.</p>
+<div class="kern"><p>Quantengravitation muss nicht von außen erzwungen werden — sie ist bereits da, eingebaut in die fraktale Natur der Raumzeit. Das kosmische Gehirn denkt nicht durch willkürliche Quantensprünge einzelner Neuronen — es denkt durch die kollektive, fraktale Vernetzung seiner Windungen.</p></div>
+</div>
+</div>
+
+<!-- ============ SLIDE 11: Kap 9 — Vereinheitlichung ============ -->
+<div class="slide" data-t="Kap. 9 — Alle Kräfte aus ξ">
+<div class="inner clearfix">
+<span class="chapter-label">Kapitel 9</span>
+<h2>Eine Theorie von allem aus einem Parameter</h2>
+<img src="img/ch06_hierarchy.png" class="img-float-right" alt="Krafthierarchie">
+<p class="lead">Die vier Kräfte — Elektromagnetismus, schwache und starke Wechselwirkung, Gravitation — sind wie verschiedene Melodien, die aus demselben fraktalen Instrument gespielt werden. ξ ist die Saitenspannung, die alle Töne bestimmt.</p>
+<p>Das Vakuumfeld Φ = ρ·e<sup>iθ/ξ</sup> hat zwei Steifigkeiten: die Amplituden-Steifigkeit (→ Gravitation, schwache Kraft) und die Phasen-Steifigkeit (→ Elektromagnetismus, starke Kraft). In natürlichen Einheiten gilt α = 1 und G = 1 — die „kleinen" SI-Werte entstehen durch Umrechnungsfaktoren.</p>
+<div class="cards">
+<div class="card">
+<h4>α ≈ 1/137</h4>
+<p>Feinstrukturkonstante aus ξ²-Skalierung der Phasensteifigkeit</p>
+</div>
+<div class="card">
+<h4>G ≈ 6,674 × 10⁻¹¹</h4>
+<p>Gravitationskonstante: ξ⁴-Dämpfung der Planck-Einheiten</p>
+</div>
+<div class="card">
+<h4>Λ<sub>QCD</sub> ≈ 300 MeV</h4>
+<p>QCD-Skala direkt aus fraktaler Phasensteifigkeit</p>
+</div>
+<div class="card">
+<h4>ρ<sub>vac</sub>/ρ<sub>c</sub> ≈ 0,7</h4>
+<p>Vakuumenergie parameterfrei aus ξ²</p>
+</div>
+</div>
+<p>Alle Werte stimmen auf hoher Präzision — parameterfrei aus ξ. Wo GUTs drei Kräfte bei 10¹⁶ GeV vereinheitlichen und Gravitation draußen lassen, vereinheitlicht die FFGFT <strong>alle vier Kräfte</strong> in 4D mit <strong>einem Parameter</strong>.</p>
+</div>
+</div>
+
+<!-- ============ SLIDE 12: Kap 10 — Teilchenmassen ============ -->
+<div class="slide" data-t="Kap. 10 — Massenhierarchien">
+<div class="inner clearfix">
+<span class="chapter-label">Kapitel 10</span>
+<h2>Warum Neutrinos so leicht und Quarks so schwer sind</h2>
+<img src="img/ch08_brain_torus.png" class="img-float-right" alt="Hirnwindungs-Torus">
+<p class="lead">Im Standardmodell sind die Yukawa-Kopplungen freie Parameter — 19 an der Zahl, über 12 Größenordnungen gespannt. Kein Prinzip erklärt diese Hierarchie. Die FFGFT liefert eine parameterfrei Erklärung.</p>
+<p>Teilchen sind fraktale Resonanzmoden des Vakuumfeldes. Leichte Teilchen (Photonen, Neutrinos) sind hochfrequente Phasenmoden δθ. Schwere Teilchen (Quarks, W/Z-Bosonen) sind Amplitudenmoden δρ. Die effektive Masse skaliert mit der Hierarchiestufe:</p>
+<div class="formula-box">$$ m_n \propto m_P \cdot \xi^n $$</div>
+<p>ξ ≈ 10⁻⁴ erzeugt exponentielle Hierarchien: ξ¹ ≈ 10⁻⁴, ξ² ≈ 10⁻⁸, ξ³ ≈ 10⁻¹². So ist das Top-Quark (n ≈ 0) schwer, das Elektron (n ≈ 2) leicht, und Neutrinos (n ≈ 3–4) extrem leicht. Die drei Generationen entsprechen fraktalen Hierarchiestufen — keine Willkür, sondern geometrische Notwendigkeit.</p>
+<div class="kern"><p>Die Teilchenwelt ist ein Orchester fraktaler Schwingungen — alle Töne aus einer einzigen Saite. Leichte Neutrinos sind schnelle Gedanken im kosmischen Gehirn, schwere Quarks tiefe, stabile Strukturen.</p></div>
+</div>
+</div>
+
+<!-- ============ SLIDE 13: Kap 11 — Kosmologie ohne Inflation ============ -->
+<div class="slide" data-t="Kap. 11 — Ohne Inflation">
+<div class="inner clearfix">
+<span class="chapter-label">Kapitel 11</span>
+<h2>Kosmologie ohne Inflation</h2>
+<img src="img/planck_cmb_final.jpg" class="img-float-right" alt="CMB Planck">
+<p class="lead">Das Standardmodell braucht Inflation — eine exponentielle Expansion in den ersten 10⁻³² Sekunden — um Horizont-, Flachheits- und Monopolproblem zu lösen. Inflation erfordert ein Inflaton-Feld, Feinabstimmung und führt zum Multiversum.</p>
+<p><strong>Horizontproblem:</strong> Die FFGFT löst es durch fraktale Phasenkohärenz. Das Vakuumfeld war nie unkorreliert — die Phasenfluktuation wächst nur logarithmisch mit der Distanz: ⟨Δθ²⟩ = ξ · ln(L/ℓ₀). Wie ein Kristall, dessen Atome alle phasenkohärent sind — nicht weil sie kommunizieren, sondern weil die Kristallordnung die Phase global festlegt.</p>
+<p><strong>Flachheitsproblem:</strong> Ω − 1 ∝ ξ² ≈ 10⁻⁸. Das Universum ist „fast flach", weil die fraktale Dimension nahe bei 3 liegt — geometrisch erzwungen, keine Feinabstimmung.</p>
+<p><strong>Spektraler Index:</strong> Das Fluktuationsspektrum ist nahezu skaleninvariant: n<sub>s</sub> ≈ 1 − ξ ln(k/k₀) ≈ 0,96 — exakt wie beobachtet (Planck-Daten).</p>
+<div class="kern"><p>Das Universum ist von Anfang an ein kohärentes, fraktales Ganzes — wie ein Gehirn, das bereits bei der Geburt global vernetzt ist.</p></div>
+</div>
+</div>
+
+<!-- ============ SLIDE 14: Kap 12a — Phasenübergang ============ -->
+<div class="slide" data-t="Kap. 12 — Der Big Bang als Erwachen">
+<div class="inner clearfix">
+<span class="chapter-label">Kapitel 12</span>
+<h2>Der Big Bang: Kein Knall, sondern ein Erwachen</h2>
+<img src="img/ch16_network.png" class="img-float-right" alt="Informationsnetzwerk">
+<p class="lead">In der FFGFT ist der Big Bang keine Explosion aus dem Nichts, keine Singularität. Er war ein Phasenübergang — der Moment, in dem das kosmische Gehirn zu „denken" begann.</p>
+<p><strong>Vor dem Übergang:</strong> Das „schlafende" Universum — minimale Vakuumamplitude ρ ≈ ρ<sub>min</sub>, gleichförmige Phase, fraktale Tiefe D<sub>f</sub> ≈ 2. Wie ein Gehirn vor der Entwicklung: glatte Oberfläche ohne Windungen.</p>
+<p><strong>Der Übergang:</strong> ρ wächst plötzlich exponentiell, θ differenziert sich. Aus stiller Potentialität wird strukturierte Realität. Die fraktale Dimension stabilisiert bei D<sub>f</sub> = 3 − ξ₀. Keine Explosion, sondern Erwachen.</p>
+<p><strong>Danach:</strong> ρ stabilisiert sich, θ entwickelt sich kohärent weiter. Das Universum „vertieft" sich — ξ(t) nimmt langsam ab, die fraktale Komplexität wächst asymptotisch einem stationären Endzustand entgegen.</p>
+<p>Die FFGFT beschreibt den Übergang mathematisch präzise, lässt aber eine tiefere Frage offen: <em>Warum</em> erwachte das stille Prä-Vakuum? Ob der Impuls intrinsisch war oder auf etwas jenseits des physikalischen Systems verweist — diese Frage übersteigt die Naturwissenschaft.</p>
+</div>
+</div>
+
+<!-- ============ SLIDE 15: Kap 12b — Fraktale Rotverschiebung ============ -->
+<div class="slide" data-t="Kap. 12 — Fraktale Rotverschiebung">
+<div class="inner">
+<span class="chapter-label">Kapitel 12</span>
+<h2>Die fundamentale Täuschung: Expansion ohne Bewegung</h2>
+<div class="two-col">
+<div>
+<p class="lead">Astronomen sehen bei fernen Galaxien eine systematische Rotverschiebung. Im Standardmodell: Doppler-Effekt durch expandierenden Raum. In der FFGFT: eine Änderung der fraktalen Skalenstruktur zwischen Emission und Beobachtung.</p>
+<div class="formula-box">$$ 1 + z = \left(\frac{\xi(t_{\text{em}})}{\xi(t_{\text{obs}})}\right)^{-k} $$</div>
+<p>Wie eine Melodie, die durch ein sich langsam verformendes Medium wandert und dadurch tiefer klingt, so wird Licht durch die sich vertiefende fraktale Struktur rotverschoben. Es gibt keine Bewegung — nur eine Perspektivänderung durch dynamische Geometrie.</p>
+<p>Die „Hubble-Konstante" ist keine Expansionsrate, sondern die Änderungsrate von ξ:</p>
+<div class="formula-box">$$ H_0 = \left|\frac{\dot{\xi}}{\xi}\right| \approx 70 \,\text{km/s/Mpc} $$</div>
+</div>
+<div>
+<img src="img/ring_nebula_big.jpg" class="img-full" alt="Ringnebel">
+<p class="img-caption">Ringnebel M57 — toroidale Strukturen auf kosmischer Skala</p>
+<div class="kern"><p><strong>Frequenzunabhängigkeit:</strong> Da die Rotverschiebung geometrisch ist (Pfadstreckung im fraktalen Vakuum), ist sie strikt frequenzunabhängig — anders als bei „Tired Light"-Modellen, die frequenzabhängig streuen.</p></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ============ SLIDE 16: Kap 12c — Vergleichstabelle ============ -->
+<div class="slide" data-t="Kap. 12 — Paradigmenwechsel">
+<div class="inner">
+<span class="chapter-label">Kapitel 12</span>
+<h2>Zwei Paradigmen im Vergleich</h2>
+<div class="cards">
+<div class="card">
+<h4>ΛCDM: Raum expandiert</h4>
+<p>Physikalische Ausdehnung des Raums, Big Bang als Singularität, Dunkle Materie als Teilchen, 6+ freie Parameter, Inflation nötig</p>
+</div>
+<div class="card">
+<h4>FFGFT: Fraktale Vertiefung</h4>
+<p>Raum ist statisch, Big Bang als Phasenübergang, Dunkle Materie als Geometrie, 1 Parameter (ξ), keine Inflation nötig</p>
+</div>
+</div>
+<p class="lead" style="margin-top:1.4em;text-align:center">Die vier Epochen des Universums in der FFGFT:</p>
+<div class="cards">
+<div class="card">
+<h4>1. Frühe fraktale Ära</h4>
+<p>t < 10⁻³² s — Das frisch erwachte Vakuum. Wie ein neugeborenes Gehirn ohne Windungen.</p>
+</div>
+<div class="card">
+<h4>2. Strahlungs-Phase</h4>
+<p>ξ nimmt langsam ab, Energie dominiert. Neuronale Migration, erste Verbindungsbildung.</p>
+</div>
+<div class="card">
+<h4>3. Materie-Phase</h4>
+<p>Galaxien als fraktale Resonanzmuster. Massive Synaptogenese — Bildung von Verbindungen.</p>
+</div>
+<div class="card">
+<h4>4. Vertiefungs-Phase</h4>
+<p>ξ̇/ξ dominiert — die „beschleunigte Expansion". Reifung und Optimierung der Strukturen.</p>
+</div>
+</div>
+<div class="kern"><p><strong>Das Gehirn denkt weiter. Das Universum vertieft sich. Und wir — mitten darin — beginnen gerade erst zu verstehen, was das bedeutet.</strong></p></div>
+</div>
+</div>
+
+<!-- ============ SLIDE 17: SCHLUSS ============ -->
+<div class="slide" data-t="Synthese">
+<div class="inner title-slide">
+<h1 style="font-size:2.2rem;margin-bottom:.6em">Wir leben nicht in einem expandierenden Ballon</h1>
+<div class="sub" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;">sondern in einem sich vertiefenden, faltenden, selbstähnlichen Gewebe — einem kosmischen Gehirn, dessen Windungen sich durch die fraktale Zeit-Masse-Dualität ständig weiter ausprägen.</div>
+<div class="formula-box" style="max-width:500px">$$ \xi = \tfrac{4}{3} \times 10^{-4} \quad \longrightarrow \quad \text{alles} $$</div>
+<div class="author" style="margin-top:2em">Johann Pascher · FFGFT / T0-Theorie<br><span style="font-size:.85rem;color:var(--dim);letter-spacing:0;text-transform:none"><a href="https://github.com/jpascher/T0-Time-Mass-Duality/" style="color:var(--cyan);text-decoration:none">github.com/jpascher/T0-Time-Mass-Duality</a></span></div>
+</div>
+</div>
+
+</div><!-- /slides -->
+
+<!-- NAV -->
+<div class="nav">
+<div style="display:flex;align-items:center;gap:10px">
+<a href="index.html" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--txt2);padding:5px 12px;border-radius:5px;text-decoration:none;font-size:.82rem;font-family:'Nunito Sans',sans-serif;transition:all .2s">🏠</a>
+<button onclick="showToc()">☰</button>
+<button onclick="prev()">← Zurück</button>
+<button onclick="next()">Weiter →</button>
+<span class="counter" id="ctr">1 / 18</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px">
+<button id="btnAudio" onclick="ttsToggle()" title="Folie vorlesen" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--txt2);padding:5px 12px;border-radius:5px;cursor:pointer;font-size:.95rem;transition:all .2s">🔇</button>
+<button id="btnAutoplay" onclick="ttsAutoToggle()" title="Automatisch weiter" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--txt2);padding:5px 10px;border-radius:5px;cursor:pointer;font-size:.75rem;font-family:'Nunito Sans',sans-serif;transition:all .2s">Auto ▶</button>
+<select id="selRate" onchange="ttsRate=+this.value" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--txt2);padding:3px 6px;border-radius:5px;font-size:.75rem;cursor:pointer">
+<option value="0.8">0.8×</option>
+<option value="1" selected>1×</option>
+<option value="1.2">1.2×</option>
+<option value="1.5">1.5×</option>
+</select>
+</div>
+</div>
+
+<!-- Hidden audio element for MP3 playback -->
+<audio id="mp3Player" preload="none"></audio>
+
+<script>
+const ss=document.querySelectorAll('.slide');let cur=0;
+function go(n){if(n<0||n>=ss.length)return;ss.forEach(s=>s.classList.remove('active'));cur=n;ss[cur].classList.add('active');document.getElementById('ctr').textContent=`${cur+1} / ${ss.length}`;document.getElementById('prog').style.width=`${(cur+1)/ss.length*100}%`;ss[cur].scrollTop=0}
+function next(){go(cur+1)}function prev(){go(cur-1)}
+document.addEventListener('keydown',e=>{if(document.getElementById('toc').classList.contains('show')){if(e.key==='Escape')closeToc();return}if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();next()}else if(e.key==='ArrowLeft'){e.preventDefault();prev()}});
+let tx=0;document.addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX});document.addEventListener('touchend',e=>{const d=tx-e.changedTouches[0].screenX;if(Math.abs(d)>50){d>0?next():prev()}});
+function buildToc(){const c=document.getElementById('toc-items');ss.forEach((s,i)=>{const d=document.createElement('div');d.className='toc-item';d.innerHTML=`<span class="toc-n">${String(i+1).padStart(2,'0')}</span><span class="toc-t">${s.dataset.t||''}</span>`;d.onclick=()=>{go(i);closeToc()};c.appendChild(d)})}
+function showToc(){document.getElementById('toc').classList.add('show')}function closeToc(){document.getElementById('toc').classList.remove('show')}
+buildToc();go(0);
+document.addEventListener('DOMContentLoaded',()=>{renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false})});
+setTimeout(()=>{renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false})},200);
+
+// ===== TTS AUDIO ENGINE =====
+let ttsActive = false;
+let ttsAutoplay = false;
+let ttsRate = 1;
+let ttsSpeaking = false;
+const mp3Player = document.getElementById('mp3Player');
+const btnAudio = document.getElementById('btnAudio');
+const btnAutoplay = document.getElementById('btnAutoplay');
+
+// Extract clean readable text from a slide
+function slideText(idx) {
+  const s = ss[idx];
+  if (!s) return '';
+  // Clone to avoid modifying DOM
+  const clone = s.cloneNode(true);
+  // Remove formula boxes and KaTeX
+  clone.querySelectorAll('.formula-box, .katex, .katex-display, script, style').forEach(e => e.remove());
+  let txt = clone.textContent || '';
+  // Clean up
+  txt = txt.replace(/\$\$[^$]*\$\$/g, ''); // remove TeX
+  txt = txt.replace(/\$[^$]*\$/g, '');
+  txt = txt.replace(/[{}\[\]\\]/g, '');
+  txt = txt.replace(/\s+/g, ' ').trim();
+  // Pronunciation helpers
+  txt = txt.replace(/ξ/g, 'Ksi');
+  txt = txt.replace(/α/g, 'Alpha');
+  txt = txt.replace(/ℏ/g, 'h quer');
+  txt = txt.replace(/ℓ/g, 'l');
+  txt = txt.replace(/Φ/g, 'Phi');
+  txt = txt.replace(/θ/g, 'Theta');
+  txt = txt.replace(/ρ/g, 'Rho');
+  txt = txt.replace(/Ω/g, 'Omega');
+  txt = txt.replace(/Λ/g, 'Lambda');
+  txt = txt.replace(/≈/g, ' ungefähr gleich ');
+  txt = txt.replace(/→/g, ' ergibt ');
+  txt = txt.replace(/×/g, ' mal ');
+  txt = txt.replace(/·/g, ' mal ');
+  txt = txt.replace(/\s+/g, ' ').trim();
+  return txt;
+}
+
+// Try MP3 first, fallback to Web Speech API
+function ttsSpeak(idx) {
+  ttsStop();
+  if (!ttsActive) return;
+  const mp3Path = 'audio/narrativ_' + String(idx).padStart(2,'0') + '.mp3';
+  
+  // Try MP3 first
+  mp3Player.src = mp3Path;
+  mp3Player.playbackRate = ttsRate;
+  const tryMp3 = mp3Player.play();
+  
+  if (tryMp3 !== undefined) {
+    tryMp3.then(() => {
+      ttsSpeaking = true;
+      btnAudio.textContent = '🔊';
+      mp3Player.onended = () => { ttsSpeaking = false; btnAudio.textContent = '🔈'; if (ttsAutoplay) { next(); setTimeout(() => ttsSpeak(cur), 600); } };
+    }).catch(() => {
+      // MP3 not found -> use Web Speech API
+      ttsSpeakBrowser(idx);
+    });
+  } else {
+    ttsSpeakBrowser(idx);
+  }
+}
+
+function ttsSpeakBrowser(idx) {
+  if (!('speechSynthesis' in window)) { alert('Browser unterstützt keine Sprachsynthese.'); return; }
+  const text = slideText(idx);
+  if (!text) return;
+  
+  // Split into chunks (max ~200 chars for better reliability)
+  const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+  const chunks = [];
+  let current = '';
+  sentences.forEach(s => {
+    if ((current + s).length > 250) { if(current) chunks.push(current.trim()); current = s; }
+    else { current += s; }
+  });
+  if (current) chunks.push(current.trim());
+  
+  let ci = 0;
+  function speakNext() {
+    if (ci >= chunks.length || !ttsActive) { ttsSpeaking = false; btnAudio.textContent = '🔈'; if (ttsAutoplay && ttsActive) { next(); setTimeout(() => ttsSpeak(cur), 600); } return; }
+    const u = new SpeechSynthesisUtterance(chunks[ci]);
+    u.lang = 'de-DE';
+    u.rate = ttsRate;
+    u.pitch = 1;
+    // Try to pick a good German voice
+    const voices = speechSynthesis.getVoices();
+    const deVoice = voices.find(v => v.lang === 'de-DE' && v.name.includes('Google')) 
+      || voices.find(v => v.lang === 'de-DE' && !v.localService)
+      || voices.find(v => v.lang.startsWith('de'));
+    if (deVoice) u.voice = deVoice;
+    u.onend = () => { ci++; speakNext(); };
+    u.onerror = () => { ci++; speakNext(); };
+    ttsSpeaking = true;
+    btnAudio.textContent = '🔊';
+    speechSynthesis.speak(u);
+  }
+  speakNext();
+}
+
+function ttsStop() {
+  ttsSpeaking = false;
+  speechSynthesis.cancel();
+  mp3Player.pause();
+  mp3Player.currentTime = 0;
+  if (ttsActive) btnAudio.textContent = '🔈';
+}
+
+function ttsToggle() {
+  if (ttsActive && ttsSpeaking) { ttsStop(); ttsActive = false; btnAudio.textContent = '🔇'; return; }
+  if (ttsActive && !ttsSpeaking) { ttsActive = false; btnAudio.textContent = '🔇'; return; }
+  ttsActive = true;
+  btnAudio.textContent = '🔈';
+  ttsSpeak(cur);
+}
+
+function ttsAutoToggle() {
+  ttsAutoplay = !ttsAutoplay;
+  btnAutoplay.style.background = ttsAutoplay ? 'rgba(45,212,191,.2)' : 'rgba(255,255,255,.06)';
+  btnAutoplay.style.borderColor = ttsAutoplay ? '#2dd4bf' : 'rgba(255,255,255,.08)';
+  btnAutoplay.style.color = ttsAutoplay ? '#2dd4bf' : 'var(--txt2)';
+}
+
+// Stop when changing slides manually
+const origGo = go;
+go = function(n) { if (n !== cur) ttsStop(); origGo(n); if (ttsActive && !ttsAutoplay) setTimeout(() => ttsSpeak(cur), 300); };
+
+// Load voices (some browsers need this)
+if ('speechSynthesis' in window) { speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices(); }
+</script>
+</body>
+</html>

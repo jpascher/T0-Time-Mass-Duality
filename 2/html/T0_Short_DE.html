@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>T0-Theorie — YouTube Short</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 1080px; height: 1920px; overflow: hidden; background: #07070d; color: #e8e8f0; font-family: 'Space Grotesk', sans-serif; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .serif { font-family: 'Playfair Display', serif; }
+
+  .bg-grid { position: fixed; inset: 0; z-index: 0; background-image: radial-gradient(circle at 20% 30%, #f59e0b08 0%, transparent 50%), radial-gradient(circle at 80% 70%, #8b5cf608 0%, transparent 50%), linear-gradient(180deg, #07070d 0%, #0c0c18 100%); }
+  .bg-grid::after { content: ''; position: absolute; inset: 0; background-image: linear-gradient(#ffffff06 1px, transparent 1px), linear-gradient(90deg, #ffffff06 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 70%); }
+
+  .scene { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; padding: 40px 50px 30px; opacity: 0; pointer-events: none; transition: opacity 0.8s ease; }
+  .scene.active { opacity: 1; pointer-events: auto; }
+
+
+  /* S1 */ .s1-q { font-size: 78px; font-weight: 300; text-align: center; line-height: 1.25; opacity: 0; animation: fadeUp 1s .3s forwards; }
+  .s1-q em { font-style: normal; font-weight: 700; background: linear-gradient(135deg, #f59e0b, #ef4444); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .s1-sub { font-size: 38px; opacity: 0; margin-top: 60px; color: #888; line-height: 1.6; animation: fadeUp .8s 1.5s forwards; }
+  .s1-sub strong { color: #f59e0b; }
+
+  .s2-xi { font-size: 200px; font-weight: 700; color: #f59e0b; text-shadow: 0 0 80px #f59e0b44; opacity: 0; animation: scaleIn .8s .6s forwards; margin: 10px 0; }
+  .s2-eq { font-size: 52px; color: #aaa; opacity: 0; animation: fadeUp .6s 1.2s forwards; }
+  .s2-eq span { color: #f59e0b; font-weight: 600; }
+  .s2-desc { font-size: 32px; color: #666; line-height: 1.7; opacity: 0; animation: fadeUp .6s 1.8s forwards; }
+  .s2-desc strong { color: #e8e8f0; }
+
+  /* S3 */ .s3-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; width: 100%; }
+  .s3-c { background: #ffffff06; border: 1px solid #ffffff10; border-radius: 12px; padding: 18px 10px; text-align: center; opacity: 0; transform: translateY(20px); }
+  .s3-c .sy { font-size: 40px; font-weight: 700; color: #f59e0b; }
+  .s3-c .nm { font-size: 15px; color: #888; margin: 2px 0 6px; }
+  .s3-c .vl { font-size: 19px; font-weight: 600; }
+  .s3-c .dv { font-size: 16px; margin-top: 2px; font-weight: 600; color: #22c55e; }
+
+  /* S4 */ .s4-vs { display: flex; align-items: center; gap: 30px; width: 100%; }
+  .s4-bx { flex: 1; text-align: center; padding: 50px 20px; border-radius: 16px; opacity: 0; transform: scale(.9); }
+  .s4-bx.sm { background: #ef444412; border: 2px solid #ef444433; }
+  .s4-bx.t0 { background: #22c55e12; border: 2px solid #22c55e33; }
+  .s4-bx .nm { font-size: 130px; font-weight: 700; }
+  .s4-bx.sm .nm { color: #ef4444; }
+  .s4-bx.t0 .nm { color: #22c55e; }
+  .s4-bx .lb { font-size: 24px; color: #888; margin-top: 8px; letter-spacing: 2px; }
+  .s4-mid { font-size: 60px; font-weight: 700; color: #333; opacity: 0; animation: fadeUp .5s .8s forwards; }
+
+  .s5-st { display: flex; align-items: center; gap: 16px; padding: 14px 20px; margin-bottom: 4px; border-radius: 8px; opacity: 0; transform: translateX(-30px); width: 100%; }
+  .s5-st .ic { font-size: 28px; width: 44px; text-align: center; }
+  .s5-st .tx { font-size: 28px; font-weight: 500; flex: 1; }
+  .s5-st .vl { font-size: 22px; color: #888; }
+  .s5-ar { text-align: center; font-size: 24px; color: #333; margin: 1px 0; opacity: 0; }
+
+  .s6-pr { display: flex; align-items: center; gap: 16px; padding: 18px 24px; margin-bottom: 10px; border-radius: 10px; border-left: 4px solid; opacity: 0; transform: translateX(30px); width: 100%; }
+  .s6-pr .lb { font-size: 28px; font-weight: 600; flex: 1; }
+  .s6-pr .bd { font-size: 13px; letter-spacing: 2px; padding: 4px 12px; border-radius: 20px; font-weight: 600; white-space: nowrap; }
+
+  /* S7 */ .s7-logo { font-size: 140px; font-weight: 700; background: linear-gradient(135deg,#f59e0b,#ef4444,#8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0; animation: scaleIn .8s .3s forwards; }
+  .s7-sub { font-size: 40px; color: #888; margin-top: 10px; opacity: 0; animation: fadeUp .6s .8s forwards; }
+  .s7-url { font-size: 28px; color: #f59e0b; padding: 14px 36px; border: 2px solid #f59e0b44; border-radius: 50px; margin-top: 40px; opacity: 0; animation: fadeUp .6s 1.3s forwards; }
+  .s7-au { margin-top: 30px; font-size: 22px; color: #555; opacity: 0; animation: fadeUp .6s 1.8s forwards; }
+
+
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scaleIn { from { opacity: 0; transform: scale(.5); } to { opacity: 1; transform: scale(1); } }
+  @keyframes slideIn { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes slideInR { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+
+<!-- S1: Hook -->
+<div class="scene active" id="scene-1" style="justify-content:center;align-items:center">
+  <div class="s1-q">Was, wenn die <em>gesamte</em> Physik<br>aus <em>einer</em> Zahl<br>folgen würde?</div>
+  <div class="s1-sub">Keine 20+ Parameter. Kein Feintuning.<br><strong>Eine einzige geometrische Zahl.</strong></div>
+</div>
+
+<!-- S2: ξ — nur Symbol und Gleichung -->
+<div class="scene" id="scene-2" style="justify-content:center;align-items:center">
+  <div class="s2-xi mono">ξ</div>
+  <div class="s2-eq mono">= <span>4 / 30.000</span></div>
+  <div class="s2-desc" style="margin-top:50px">
+    Ein <strong>dimensionsloses Verhältnis</strong> aus tetraedrischer Kugelpackung.<br><br>Die Windungszahl des <strong>fundamentalen Torus</strong> der Raumzeit.
+  </div>
+</div>
+
+<!-- S3: Massen — nur Karten, kein Extra-Text -->
+<div class="scene" id="scene-3" style="justify-content:center;align-items:center">
+  <div class="s3-grid">
+    <div class="s3-c" style="animation:fadeUp .5s .3s forwards"><div class="sy mono">e</div><div class="nm">Elektron</div><div class="vl mono">0,511 MeV</div><div class="dv">+0,0%</div></div>
+    <div class="s3-c" style="animation:fadeUp .5s .5s forwards"><div class="sy mono">μ</div><div class="nm">Myon</div><div class="vl mono">105,1 MeV</div><div class="dv">−0,5%</div></div>
+    <div class="s3-c" style="animation:fadeUp .5s .7s forwards"><div class="sy mono">τ</div><div class="nm">Tau</div><div class="vl mono">1779 MeV</div><div class="dv">+0,1%</div></div>
+    <div class="s3-c" style="animation:fadeUp .5s .9s forwards"><div class="sy mono">u</div><div class="nm">Up</div><div class="vl mono">2,27 MeV</div><div class="dv">+0,0%</div></div>
+    <div class="s3-c" style="animation:fadeUp .5s 1.1s forwards"><div class="sy mono">c</div><div class="nm">Charm</div><div class="vl mono">1282 MeV</div><div class="dv">+0,3%</div></div>
+    <div class="s3-c" style="animation:fadeUp .5s 1.3s forwards"><div class="sy mono">t</div><div class="nm">Top</div><div class="vl mono">172,0 GeV</div><div class="dv">+0,0%</div></div>
+    <div class="s3-c" style="animation:fadeUp .5s 1.5s forwards"><div class="sy mono">d</div><div class="nm">Down</div><div class="vl mono">4,80 MeV</div><div class="dv">+1,4%</div></div>
+    <div class="s3-c" style="animation:fadeUp .5s 1.7s forwards"><div class="sy mono">s</div><div class="nm">Strange</div><div class="vl mono">95,0 MeV</div><div class="dv">+0,0%</div></div>
+    <div class="s3-c" style="animation:fadeUp .5s 1.9s forwards"><div class="sy mono">b</div><div class="nm">Bottom</div><div class="vl mono">4258 MeV</div><div class="dv">−0,1%</div></div>
+  </div>
+</div>
+
+<!-- S4: Vergleich — nur Boxen -->
+<div class="scene" id="scene-4" style="justify-content:center;align-items:center">
+  <div class="s4-vs">
+    <div class="s4-bx sm" style="animation:slideIn .7s .3s forwards"><div class="nm mono">20+</div><div class="lb">STANDARDMODELL</div></div>
+    <div class="s4-mid">vs</div>
+    <div class="s4-bx t0" style="animation:slideInR .7s .6s forwards"><div class="nm mono">1</div><div class="lb">T0-THEORIE</div></div>
+  </div>
+</div>
+
+<!-- S5: Kaskade — nur Steps -->
+<div class="scene" id="scene-5" style="justify-content:center;align-items:center">
+  <div style="width:100%">
+    <div class="s5-st" style="background:#f59e0b11;border-left:3px solid #f59e0b;animation:slideIn .5s .3s forwards"><div class="ic">🔢</div><div class="tx" style="color:#f59e0b">ξ = 4/30.000</div><div class="vl mono">1,333×10⁻⁴</div></div>
+    <div class="s5-ar" style="animation:fadeUp .3s .6s forwards">↓</div>
+    <div class="s5-st" style="background:#3b82f611;border-left:3px solid #3b82f6;animation:slideIn .5s .8s forwards"><div class="ic">⚡</div><div class="tx" style="color:#3b82f6">α = 1/137,036</div><div class="vl mono">Feinstruktur</div></div>
+    <div class="s5-ar" style="animation:fadeUp .3s 1.0s forwards">↓</div>
+    <div class="s5-st" style="background:#10b98111;border-left:3px solid #10b981;animation:slideIn .5s 1.2s forwards"><div class="ic">⚛</div><div class="tx" style="color:#10b981">Alle Teilchenmassen</div><div class="vl mono">e, μ, τ, Quarks</div></div>
+    <div class="s5-ar" style="animation:fadeUp .3s 1.4s forwards">↓</div>
+    <div class="s5-st" style="background:#8b5cf611;border-left:3px solid #8b5cf6;animation:slideIn .5s 1.6s forwards"><div class="ic">🌀</div><div class="tx" style="color:#8b5cf6">K<sub>frak</sub> = 0,9867</div><div class="vl mono">Fraktale Korrektur</div></div>
+    <div class="s5-ar" style="animation:fadeUp .3s 1.8s forwards">↓</div>
+    <div class="s5-st" style="background:#ef444411;border-left:3px solid #ef4444;animation:slideIn .5s 2.0s forwards"><div class="ic">🍎</div><div class="tx" style="color:#ef4444">G = 6,674×10⁻¹¹</div><div class="vl mono">Gravitation</div></div>
+    <div class="s5-ar" style="animation:fadeUp .3s 2.2s forwards">↓</div>
+    <div class="s5-st" style="background:#ec489911;border-left:3px solid #ec4899;animation:slideIn .5s 2.4s forwards"><div class="ic">🌌</div><div class="tx" style="color:#ec4899">T · m = 1</div><div class="vl mono">Zeit-Masse-Dualität</div></div>
+  </div>
+</div>
+
+<!-- S6: Testbar — nur Karten -->
+<div class="scene" id="scene-6" style="justify-content:center;align-items:center">
+  <div style="width:100%">
+    <div class="s6-pr" style="border-color:#3b82f6;background:#3b82f608;animation:slideInR .5s .5s forwards"><div class="lb">Belle II: τ-Anomalie</div><div class="bd mono" style="background:#3b82f622;color:#3b82f6">JETZT TESTBAR</div></div>
+    <div class="s6-pr" style="border-color:#8b5cf6;background:#8b5cf608;animation:slideInR .5s .9s forwards"><div class="lb">Rotverschiebung durch fraktale Wegverlängerung — selbes Ergebnis wie SM</div><div class="bd mono" style="background:#8b5cf622;color:#8b5cf6">KONSISTENT</div></div>
+    <div class="s6-pr" style="border-color:#3b82f6;background:#3b82f608;animation:slideInR .5s 1.3s forwards"><div class="lb">Neutrinomassen: KATRIN</div><div class="bd mono" style="background:#3b82f622;color:#3b82f6">JETZT TESTBAR</div></div>
+    <div class="s6-pr" style="border-color:#8b5cf6;background:#8b5cf608;animation:slideInR .5s 1.7s forwards"><div class="lb">g−2 Fraktale Korrektur</div><div class="bd mono" style="background:#8b5cf622;color:#8b5cf6">0,014% MATCH</div></div>
+  </div>
+</div>
+
+<!-- S7: CTA -->
+<div class="scene" id="scene-7" style="justify-content:center;align-items:center">
+  <div class="s7-logo serif">T0</div>
+  <div class="s7-sub">Ein Parameter. Die gesamte Physik.</div>
+  <div class="s7-url mono">github.com/jpascher/T0-Time-Mass-Duality</div>
+  <div class="s7-au">Johann Pascher — Linz, 2026</div>
+</div>
+
+<script>
+const SCENES=[{id:'scene-1',duration:8000},{id:'scene-2',duration:10000},{id:'scene-3',duration:12000},{id:'scene-4',duration:10000},{id:'scene-5',duration:10000},{id:'scene-6',duration:8000},{id:'scene-7',duration:7000}];
+const TOTAL=SCENES.reduce((a,s)=>a+s.duration,0);let startTime=null,cur=0;
+function tick(){const e=Date.now()-startTime;let a=0;for(let i=0;i<SCENES.length;i++){if(e<a+SCENES[i].duration){if(i!==cur){document.getElementById(SCENES[cur].id).classList.remove('active');document.getElementById(SCENES[i].id).classList.add('active');cur=i;}break;}a+=SCENES[i].duration;}if(e<TOTAL)requestAnimationFrame(tick);}
+setTimeout(()=>{startTime=Date.now();tick();},500);
+document.addEventListener('click',()=>{const n=(cur+1)%SCENES.length;document.getElementById(SCENES[cur].id).classList.remove('active');document.getElementById(SCENES[n].id).classList.add('active');cur=n;});
+</script>
+</body>
+</html>
