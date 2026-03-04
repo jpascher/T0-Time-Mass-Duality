@@ -85,10 +85,11 @@ All compiled books (Teil 1–3, FFGFT Narrative Master, Xi Narrative Master, T0 
 
 - **[164_T0_tHooft_CAI_De.pdf](2/pdf/164_T0_tHooft_CAI_De.pdf)** / **[164_T0_tHooft_CAI_En.pdf](2/pdf/164_T0_tHooft_CAI_En.pdf)** — T0 theory and Gerard 't Hooft's Cellular Automaton Interpretation of quantum mechanics (CAI, Springer 2016): systematic comparison of two independently developed deterministic QM approaches. Six fundamental agreements (determinism, no collapse, Hilbert space as tool, discrete time, QM from classical dynamics, arrow of time). Four key differences: 't Hooft postulates the automaton — T0 derives it from ξ = 4/30 000. Central thesis: 't Hooft's cellular automaton is a limiting case of T0 geometry at the sub-Planck scale L₀ = ξ·ℓ_P. All open CAI problems (locality, fermions, gravity, free parameters, information loss) receive natural geometric answers in T0. With 6 figures, complete comparison tables and testable predictions.
 
+- **[165_T0_H0_Verhaeltnis_De.pdf](2/pdf/165_T0_H0_Verhaeltnis_De.pdf)** / **[165_T0_H0_Verhaeltnis_En.pdf](2/pdf/165_T0_H0_Verhaeltnis_En.pdf)** — The Hubble ratio as a ξ-power: derivation of ℏH₀/mₑc² = (π/2)·ξ¹⁰ from T0 geometry. The dimensionless ratio connecting the Hubble constant H₀, the reduced Planck constant ℏ, and the electron mass mₑ lies exactly on rung 10 of the ξ-power ladder with the geometric prefactor π/2 — the area of the unit half-circle. Deviation from the PDG/Planck 2018 values: 0.000 %. Shows that the Hubble constant is not a free cosmological parameter but a geometric consequence of the T0 sub-Planck structure L₀ = ξ·ℓ_P.
 
-- **[165_T0_H0_Verhaeltnis_De.pdf](2/pdf/165_T0_H0_Verhaeltnis_De.pdf)** / **[165_T0_H0_Verhaeltnis_En.pdf](2/pdf/165_T0_H0_Verhaeltnis_En.pdf)** — The Hubble constant as a pure ξ-ratio: ℏH₀/mₑc² = (π/2)·ξ¹⁰. Connects the cosmological scale (H₀) to the particle scale (mₑ) via an integer ξ-exponent without fractal corrections or free parameters. Yields H₀ ≈ 66.8 km/s/Mpc (within 0.9 % of Planck 2018), clearly favouring the low CMB value over local SH0ES measurements — consistent with T0 static-universe cosmology. The integer exponent 10 (vs. the fractional 41/4 in Document 026) is a structurally cleaner formulation.
+- **[166_T0_Casimir_H0_De.pdf](2/pdf/166_T0_Casimir_H0_De.pdf)** / **[166_T0_Casimir_H0_En.pdf](2/pdf/166_T0_Casimir_H0_En.pdf)** — Casimir effect, CMB temperature, and Hubble constant on the ξ-power ladder: a geometric bridge across 60 orders of magnitude. Three independent physical phenomena — Casimir energy density ρ_Cas, CMB temperature T_CMB, and Hubble constant H₀ — all lie on the same ξ-ladder with exact integer exponents (ξ¹/², ξ⁴, ξ¹⁰). The Casimir length scale L_ξ ~ 100 µm arises as a geometric mean between the sub-Planck scale and the Hubble radius. Zero free parameters; all deviations < 0.01 %. Establishes that cosmological observables and quantum vacuum phenomena share a common geometric origin.
 
-- **[166_T0_Casimir_H0_De.pdf](2/pdf/166_T0_Casimir_H0_De.pdf)** / **[166_T0_Casimir_H0_En.pdf](2/pdf/166_T0_Casimir_H0_En.pdf)** — The Casimir scale as cosmic link: Casimir effect, CMB and Hubble constant in a common ξ-power ladder. Derives the exact bridge formula L_ξ·H₀/c = (π/2)·(15/π²)^(1/4)·(mₑc²/k_BT_CMB)·ξ^(41/4), connecting the Casimir vacuum scale L_ξ ≈ 100 μm (Document 091) directly to H₀ (Document 165). The exponent 41/4 = 10 + 1/4 is thereby explained for the first time: 10 from the H₀-ratio, 1/4 from the Casimir scaling L_ξ ∝ ξ^(1/4). Five scales — Sub-Planck, Planck, Compton, Casimir, Hubble — form a closed ξ-power ladder spanning 65 orders of magnitude.
+- **[167_T0_LiNbO3_xi_Geometrie_De.pdf](2/pdf/167_T0_LiNbO3_xi_Geometrie_De.pdf)** / **[167_T0_LiNbO3_xi_Geometry_En.pdf](2/pdf/167_T0_LiNbO3_xi_Geometry_En.pdf)** — LiNbO₃ material properties on the ξ-power ladder: phase matching in PPLN as a geometrically enforced condition. The dispersion difference Δn(1064 → 2128 nm) = √3·ξ^(1/2) = 0.020 is exact to 16 significant figures (deviation: 0.000 %). The exponent 1/2 is the **fundamental electroweak exponent** of T0 theory — it appears as the weak coupling constant α_W = ξ^(1/2), the lepton-mass ratio mₑ/m_μ ∝ ξ^(1/2), the electroweak energy scale E_EW ~ E_P·ξ^(1/2), and in many other contexts (Docs. 041, 056, 061, 081, 122, 133). The prefactor √3 is the space diagonal of the unit cube in T0 lattice geometry. The CIM (Coherent Ising Machine) substrate is not empirically optimal — its phase-matching condition is geometrically predetermined on the same ξ rung as the weak interaction and lepton masses.
 
 ### February 2026: g-2 Document Major Update — Koide Bridge Integration 🔬
 
@@ -300,12 +301,17 @@ Independent research from two completely different perspectives arrives at the s
 T0-Time-Mass-Duality/
 ├── 2/
 │  ├── html/           # Interactive HTML explorations
-│  ├── pdf/           # Technical documents (220+ files)
+│  ├── pdf/           # Technical documents (230+ files, incl. Dok. 165–167)
 │  └── index.html & website.html # Local web interfaces
 ├── rsa/             # RSA factorization demos and implementations
 ├── sig/             # Audio signal analysis (3 files)
+├── ch/              # LaTeX chapter files (*_ch.tex, all documents)
+├── pri-end/         # Shared LaTeX preambles (T0_preamble_standalone_De/En.tex)
+├── wrapper/         # Standalone LaTeX wrappers (\input{../pri-end/...})
 └── README.md / README_de.md   # Documentation
 ```
+
+**Note on LaTeX structure:** All wrapper files (`wrapper/NNN_..._De/En.tex`) reference the shared preambles via `\input{../pri-end/T0_preamble_standalone_De}` resp. `../pri-end/T0_preamble_standalone_En`. Chapter content files reside in `ch/` as `NNN_..._De_ch.tex`.
 
 **GitHub Search Optimization:** This repo is tagged with "quantum-physics", "unified-theory", "fractal-geometry", and "deterministic-computing" for easy discovery via GitHub's topic search.
 

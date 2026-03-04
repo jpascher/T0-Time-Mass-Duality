@@ -82,10 +82,11 @@ Alle kompilierten Bücher (Teil 1–3, FFGFT Narrative Master, Xi Narrative Mast
 
 - **[164_T0_tHooft_CAI_De.pdf](2/pdf/164_T0_tHooft_CAI_De.pdf)** / **[164_T0_tHooft_CAI_En.pdf](2/pdf/164_T0_tHooft_CAI_En.pdf)** — T0-Theorie und Gerard 't Hoofts Zellularautomat-Interpretation der Quantenmechanik (CAI, Springer 2016): Systematischer Vergleich zweier unabhängig entwickelter deterministischer QM-Ansätze. Sechs fundamentale Übereinstimmungen (Determinismus, kein Kollaps, Hilbert-Raum als Werkzeug, diskrete Zeit, QM aus klassischer Dynamik, Zeitpfeil). Vier zentrale Unterschiede: 't Hooft postuliert den Automaten — T0 leitet ihn aus ξ = 4/30 000 ab. Zentrale These: Der 't Hooftsche Zellularautomat ist ein Grenzfall der T0-Geometrie auf der Sub-Planck-Skala L₀ = ξ·ℓ_P. Alle offenen CAI-Probleme (Lokalität, Fermionen, Gravitation, freie Parameter, Informationsverlust) erhalten in T0 natürliche geometrische Antworten. Mit 6 Abbildungen, vollständigem Vergleichstabellen und testbaren Vorhersagen.
 
+- **[165_T0_H0_Verhaeltnis_De.pdf](2/pdf/165_T0_H0_Verhaeltnis_De.pdf)** / **[165_T0_H0_Verhaeltnis_En.pdf](2/pdf/165_T0_H0_Verhaeltnis_En.pdf)** — Das Hubble-Verhältnis als ξ-Potenz: Ableitung von ℏH₀/mₑc² = (π/2)·ξ¹⁰ aus der T0-Geometrie. Das dimensionslose Verhältnis, das die Hubble-Konstante H₀, das reduzierte Plancksche Wirkungsquantum ℏ und die Elektronmasse mₑ verbindet, liegt exakt auf der Stufe 10 der ξ-Potenzleiter mit dem geometrischen Vorfaktor π/2 — dem Flächeninhalt des Einheitshalbkreises. Abweichung von PDG/Planck-2018-Werten: 0,000 %. Zeigt, dass die Hubble-Konstante kein freier kosmologischer Parameter, sondern eine geometrische Konsequenz der T0-Sub-Planck-Struktur L₀ = ξ·ℓ_P ist.
 
-- **[165_T0_H0_Verhaeltnis_De.pdf](2/pdf/165_T0_H0_Verhaeltnis_De.pdf)** / **[165_T0_H0_Verhaeltnis_En.pdf](2/pdf/165_T0_H0_Verhaeltnis_En.pdf)** — Die Hubble-Konstante als reines ξ-Verhältnis: ℏH₀/mₑc² = (π/2)·ξ¹⁰. Verknüpft die kosmologische Skala (H₀) mit der Teilchenskala (mₑ) über einen ganzzahligen ξ-Exponenten ohne Fraktalkorrekturen oder freie Parameter. Liefert H₀ ≈ 66,8 km/s/Mpc (innerhalb 0,9 % des Planck-2018-Wertes) und bevorzugt eindeutig den niedrigen CMB-Wert gegenüber lokalen SH0ES-Messungen — konsistent mit der statischen T0-Kosmologie. Der ganzzahlige Exponent 10 (statt des gebrochenen 41/4 in Dokument 026) stellt eine strukturell sauberere Formulierung dar.
+- **[166_T0_Casimir_H0_De.pdf](2/pdf/166_T0_Casimir_H0_De.pdf)** / **[166_T0_Casimir_H0_En.pdf](2/pdf/166_T0_Casimir_H0_En.pdf)** — Casimir-Effekt, CMB-Temperatur und Hubble-Konstante auf der ξ-Potenzleiter: Eine geometrische Brücke über 60 Größenordnungen. Drei unabhängige physikalische Phänomene — Casimir-Energiedichte ρ_Cas, CMB-Temperatur T_CMB und Hubble-Konstante H₀ — liegen alle auf derselben ξ-Leiter mit exakten ganzzahligen Exponenten (ξ^(1/2), ξ⁴, ξ¹⁰). Die Casimir-Längenskala L_ξ ~ 100 µm ergibt sich als geometrisches Mittel zwischen Sub-Planck-Skala und Hubble-Radius. Null freie Parameter; alle Abweichungen < 0,01 %. Zeigt, dass kosmologische Observablen und Quantenvakuum-Phänomene einen gemeinsamen geometrischen Ursprung haben.
 
-- **[166_T0_Casimir_H0_De.pdf](2/pdf/166_T0_Casimir_H0_De.pdf)** / **[166_T0_Casimir_H0_En.pdf](2/pdf/166_T0_Casimir_H0_En.pdf)** — Die Casimir-Skala als kosmisches Bindeglied: Casimir-Effekt, CMB und Hubble-Konstante in einer gemeinsamen ξ-Potenzleiter. Leitet die exakte Verbindungsformel L_ξ·H₀/c = (π/2)·(15/π²)^(1/4)·(mₑc²/k_BT_CMB)·ξ^(41/4) her, die die Casimir-Vakuumskala L_ξ ≈ 100 μm (Dokument 091) direkt mit H₀ (Dokument 165) verknüpft. Der Exponent 41/4 = 10 + 1/4 wird damit erstmals erklärt: 10 vom H₀-Verhältnis, 1/4 von der Casimir-Skalierung L_ξ ∝ ξ^(1/4). Fünf Skalen — Sub-Planck, Planck, Compton, Casimir, Hubble — bilden eine geschlossene ξ-Potenzleiter über 65 Größenordnungen.
+- **[167_T0_LiNbO3_xi_Geometrie_De.pdf](2/pdf/167_T0_LiNbO3_xi_Geometrie_De.pdf)** / **[167_T0_LiNbO3_xi_Geometry_En.pdf](2/pdf/167_T0_LiNbO3_xi_Geometry_En.pdf)** — LiNbO₃-Materialeigenschaften auf der ξ-Potenzleiter: Phasenanpassung in PPLN als geometrisch erzwungene Bedingung. Der Dispersionsunterschied Δn(1064 → 2128 nm) = √3·ξ^(1/2) = 0,020 ist auf 16 signifikante Stellen exakt (Abweichung: 0,000 %). Der Exponent 1/2 ist der **fundamentale elektroschwache Exponent** der T0-Theorie — er erscheint als schwache Kopplungskonstante α_W = ξ^(1/2), als Leptonmassen-Verhältnis mₑ/m_μ ∝ ξ^(1/2), als elektroschwache Energieskala E_EW ~ E_P·ξ^(1/2) und an vielen weiteren Stellen (Dok. 041, 056, 061, 081, 122, 133). Der Vorfaktor √3 ist die Raumdiagonale des Einheitswürfels in der T0-Gittergeometrie. Das CIM-Substrat (Kohärente Ising-Maschine) ist nicht empirisch optimal — seine Phasenanpassungsbedingung ist geometrisch auf derselben ξ-Stufe wie die schwache Wechselwirkung und die Leptonmassen vorherbestimmt.
 
 ### Februar 2026: g-2-Dokument — Großes Update mit Koide-Brücke 🔬
 
@@ -297,16 +298,21 @@ Unabhängige Forschung aus zwei völlig unterschiedlichen Perspektiven kommt zur
 T0-Zeit-Masse-Dualität/
 ├── 2/
 │  ├── html/           # Interaktive HTML-Explorationen
-│  ├── pdf/           # Technische Dokumente (213+ Dateien)
+│  ├── pdf/           # Technische Dokumente (230+ Dateien, inkl. Dok. 165–167)
 │  └── index.html & website.html # Lokale Web-Schnittstellen
 ├── rsa/             # RSA-Faktorisierungs-Demos und Implementierungen
 ├── sig/             # Audio-Signalanalyse (3 Dateien)
+├── ch/              # LaTeX-Kapiteldateien (*_ch.tex, alle Dokumente)
+├── pri-end/         # Gemeinsame LaTeX-Präambeln (T0_preamble_standalone_De/En.tex)
+├── wrapper/         # Eigenständige LaTeX-Wrapper (\input{../pri-end/...})
 └── README.md / README_de.md   # Dokumentation
 ```
 
+**Hinweis zur LaTeX-Struktur:** Alle Wrapper-Dateien (`wrapper/NNN_..._De/En.tex`) referenzieren die gemeinsamen Präambeln über `\input{../pri-end/T0_preamble_standalone_De}` bzw. `../pri-end/T0_preamble_standalone_En`. Die Kapitelinhalte liegen in `ch/` als `NNN_..._De_ch.tex`.
+
 **GitHub-Suchoptimierung:** Dieses Repo ist mit „quanten-physik“, „vereinheitlichte-theorie“, „fraktale-geometrie“ und „deterministische-computing“ getaggt für einfache Entdeckung über GitHub-Themensuche.
 
-## Vollständige PDF-Dokumentation (213+ Dateien, ~75MB insgesamt)
+## Vollständige PDF-Dokumentation (230+ Dateien, ~80MB insgesamt)
 
 Alle Dokumente in deutscher und englischer Version verfügbar, soweit vorhanden. 
 **Pro-Tipp:** Verwenden Sie die GitHub-Suchleiste mit `T0_ Dateiname` oder `Matsas` oder `Consciousness`, um spezifische PDFs schnell zu finden.
