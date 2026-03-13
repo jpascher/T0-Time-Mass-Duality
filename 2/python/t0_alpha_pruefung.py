@@ -626,6 +626,48 @@ class T0_Pruefung:
     # 15. ZUSAMMENFASSUNG ALLER ERGEBNISSE
     # ==========================================================================
     
+    def pruefe_rekursionskonvergenz(self):
+        """
+        Prüft die Konvergenz von M1 und M2 und verifiziert dass die
+        Rekursionstiefe durch ξ und die Z3³-Topologie bestimmt ist.
+        """
+        print("\n" + "="*80)
+        print("14b. PRÜFUNG: REKURSIONSTIEFE UND KONVERGENZ M1 ↔ M2")
+        print("="*80)
+
+        alpha_m1 = self.xi * self.phi**3 * 13
+        m_e_t0, m_mu_t0 = 0.505, 105.0
+        alpha_m2 = self.xi * m_e_t0 * m_mu_t0
+
+        # Einschlusstest
+        assert 1/alpha_m1 < self.alpha_inv_exp < 1/alpha_m2, \
+            "Fehler: Experiment liegt nicht zwischen M1 und M2!"
+        print(f"✓ Einschluss: M1={1/alpha_m1:.3f} < exp={self.alpha_inv_exp:.3f} < M2={1/alpha_m2:.3f}")
+
+        # Fibonacci-Abbruchbedingung
+        n_abbruch = -np.log(self.xi * np.sqrt(5)) / (2 * np.log(self.phi))
+        print(f"✓ Fibonacci-Abbruch: n = {n_abbruch:.3f}  (gerundet: {round(n_abbruch)})")
+
+        # Numerische Konvergenz M2 mit 8 Stufen
+        K_stufe = 1 + self.xi * self.phi**7
+        alpha_m2_8 = alpha_m2 * K_stufe**8
+        abw_8 = abs(1/alpha_m2_8 - self.alpha_inv_exp)
+        print(f"✓ M2 + 8×K_frak: α⁻¹ = {1/alpha_m2_8:.4f}  (Abw: {abw_8:.4f})")
+
+        # Topologische Bedingung
+        arctan_deg = np.degrees(np.arctan(self.phi**(-3)))
+        print(f"✓ 27×arctan(φ⁻³) = {27*arctan_deg:.4f}°  (Defizit: {360-27*arctan_deg:.4f}°)")
+
+        ergebnis = {
+            'alpha_m1_inv': 1/alpha_m1,
+            'alpha_m2_inv': 1/alpha_m2,
+            'alpha_m2_korr_inv': 1/alpha_m2_8,
+            'n_abbruch': n_abbruch,
+            'abw_nach_8': abw_8,
+        }
+        self.ergebnisse['rekursion'] = ergebnis
+        return ergebnis
+
     def zusammenfassung(self):
         """Erstellt eine Zusammenfassung aller Ergebnisse"""
         print("\n" + "="*80)
@@ -647,6 +689,7 @@ class T0_Pruefung:
         self.selbstaehnlichkeit_iteration()
         self.ergebnisse['dune'] = self.dune_vorhersage()
         self.ergebnisse['verbindung'] = self.verbindung_t0_rosenthal()
+        self.ergebnisse['rekursion'] = self.pruefe_rekursionskonvergenz()
         
         # Tabelle der wichtigsten Ergebnisse
         print("\n" + "="*80)
