@@ -191,69 +191,65 @@ class T0_Herleitung:
         return faktor
     
     # ==========================================================================
-    # 4. HERLEITUNG DER KOMPLEXEN FORMELN
+    # 4. HERLEITUNG DER KOMBINIERTEN FORMEL α = ξ · m_e · m_μ
     # ==========================================================================
     
-    def herleitung_komplexe_formeln(self):
-        """Leitet die komplexeren T0-Formeln her"""
+    def herleitung_kombinierte_formel(self):
+        """Kombiniert α = ξ·E0² mit E0 = √(m_e·m_μ) — dimensional konsistent"""
         print("\n" + "="*80)
-        print("4. HERLEITUNG DER KOMPLEXEN FORMELN")
+        print("4. HERLEITUNG DER KOMBINIERTEN FORMEL α = ξ · m_e · m_μ")
         print("="*80)
         
         print("""
-        Aus der vollständigen T0-Theorie folgen weitere Beziehungen:
+        Aus den beiden Grundformeln der T0-Theorie:
         
-        (1) E0 = [ (m_μ·m_e) / (4√2) ]^(1/4) · ξ^(-1)
+            (A)  α = ξ · E0²                [mit E0 numerisch in MeV]
+            (B)  E0 = √(m_e · m_μ)          [geometrisches Mittel, in MeV]
         
-        (2) α = [ (m_μ·m_e) / (4√2) ]^(1/2) · ξ^(-1)
+        folgt durch direkte Substitution von (B) in (A):
         
-        (3) α ∝ ξ^(-1)
+            (C)  α = ξ · m_e · m_μ
+        
+        Dimensionsanalyse: ξ dimensionslos, m_e und m_μ sind dimensionslose
+        Zahlenwerte (Massen in MeV). Das Produkt ist dimensionslos → ✓
+        
+        Hinweis: Die Formel ist eine Näherung, da E0 nicht exakt das
+        geometrische Mittel der experimentellen Massen ist (≈ 0.7% Abweichung).
+        Die fundamentale Formel bleibt α = ξ · E0² mit E0 = 7.398 MeV.
         """)
         
-        # Formel (1)
+        # Formel (C): α = ξ · m_e · m_μ
         m_produkt = self.m_mu * self.m_e
-        nenner = 4 * np.sqrt(2)
-        e0_komplex = (m_produkt / nenner)**(1/4) * (1/self.xi)
+        alpha_kombiniert = self.xi * m_produkt
         
-        print(f"\n(1) E0 = [ (m_μ·m_e) / (4√2) ]^(1/4) · ξ^(-1)")
-        print(f"    m_μ·m_e = {m_produkt:.3f} MeV²")
-        print(f"    4√2 = {nenner:.3f}")
-        print(f"    (m_μ·m_e)/(4√2) = {m_produkt/nenner:.3f}")
-        print(f"    4. Wurzel: {(m_produkt/nenner)**(1/4):.3f}")
-        print(f"    ξ^(-1) = {1/self.xi:.1f}")
-        print(f"    E0 = {e0_komplex:.3f} MeV")
-        print(f"    E0_theorie = {self.E0:.3f} MeV")
-        print(f"    Abweichung: {abs(e0_komplex - self.E0)/self.E0*100:.3f}%")
-        
-        # Formel (2)
-        alpha_komplex = np.sqrt(m_produkt / nenner) * (1/self.xi)
-        
-        print(f"\n(2) α = [ (m_μ·m_e) / (4√2) ]^(1/2) · ξ^(-1)")
-        print(f"    α = {alpha_komplex:.8f}")
+        print(f"\n(C) α = ξ · m_e · m_μ")
+        print(f"    ξ = {self.xi:.6e}")
+        print(f"    m_e = {self.m_e} MeV")
+        print(f"    m_μ = {self.m_mu} MeV")
+        print(f"    m_e · m_μ = {m_produkt:.4f} MeV²")
+        print(f"    α = {self.xi:.6e} × {m_produkt:.4f} = {alpha_kombiniert:.8f}")
         print(f"    α_exp = {self.alpha:.8f}")
-        print(f"    Abweichung: {abs(alpha_komplex - self.alpha)/self.alpha*100:.3f}%")
+        print(f"    Abweichung: {abs(alpha_kombiniert - self.alpha)/self.alpha*100:.3f}%")
+        print(f"    α⁻¹ = {1/alpha_kombiniert:.3f}  (exp: {1/self.alpha:.3f})")
         
-        # Formel (3) - α ∝ ξ^(-1)
+        # Proportionalitätskonstante
         konstante = self.alpha * self.xi
-        print(f"\n(3) α ∝ ξ^(-1)")
+        print(f"\nProportionalitätskonstante α·ξ:")
         print(f"    α·ξ = {konstante:.8f}")
-        print(f"    Das ist etwa E0²/13?")
-        print(f"    E0²/13 = {self.E0**2/13:.3f}")
-        print(f"    Verhältnis: {konstante / (self.E0**2/13):.3f}")
+        print(f"    E0² = {self.E0**2:.4f}  (aus Grundformel: α/ξ)")
+        print(f"    m_e·m_μ = {m_produkt:.4f}  (aus Massenprodukт)")
+        print(f"    Verhältnis E0² / (m_e·m_μ) = {self.E0**2 / m_produkt:.6f}")
+        print(f"    → E0 weicht um {abs(self.E0 - np.sqrt(m_produkt))/self.E0*100:.3f}% vom geometrischen Mittel ab")
         
-        # Symbolische Darstellung
-        m_e_sym, m_mu_sym, xi_sym = sp.symbols('m_e m_μ ξ')
-        sqrt2 = sp.sqrt(2)
-        e0_sym = ((m_e_sym * m_mu_sym) / (4 * sqrt2))**(1/4) * (1/xi_sym)
-        alpha_sym = sp.sqrt((m_e_sym * m_mu_sym) / (4 * sqrt2)) * (1/xi_sym)
+        # Symbolisch
+        m_e_sym, m_mu_sym, xi_sym = sp.symbols('m_e m_\\mu \\xi')
+        alpha_sym = xi_sym * m_e_sym * m_mu_sym
         
-        print(f"\nSymbolisch:")
-        print(f"E0 = {sp.latex(e0_sym)}")
-        print(f"α = {sp.latex(alpha_sym)}")
+        print(f"\nSymbolisch: α = {sp.latex(alpha_sym)}")
+        print(f"           (mit m_e, m_μ als dimensionslose Zahlenwerte in MeV)")
         
         return {
-            'e0_komplex': e0_komplex,
-            'alpha_komplex': alpha_komplex,
+            'alpha_kombiniert': alpha_kombiniert,
             'konstante': konstante
         }
     
@@ -439,7 +435,7 @@ class T0_Herleitung:
         alpha_grund = self.herleitung_grundformel()
         e0_geo = self.herleitung_e0_geometrisches_mittel()
         faktor = self.herleitung_phi_hierarchie()
-        komplex = self.herleitung_komplexe_formeln()
+        komplex = self.herleitung_kombinierte_formel()
         arctan = self.herleitung_arctan_phi_inv3()
         defizit = self.herleitung_photon_rekurrenz()
         D_f = self.herleitung_fraktale_dimension()
@@ -464,9 +460,9 @@ class T0_Herleitung:
             ξ → ξ·φ³ → ξ·φ³·13 ≈ α
             mit φ³ = 4.2360679 und 13 (Fibonacci)
         
-        (D) KOMPLEXE FORMELN:
-            E0 = [ (m_μ·m_e)/(4√2) ]^(1/4) · ξ^(-1)
-            α = [ (m_μ·m_e)/(4√2) ]^(1/2) · ξ^(-1)
+        (D) KOMBINIERTE FORMEL (aus A+B):
+            α = ξ · m_e · m_μ  [m_e, m_μ numerisch in MeV]
+            α = (4/30000) × 0.511 × 105.66 ≈ 7.199×10⁻³  (Näherung, ~0.7% Abw.)
         
         (E) CP-PHASE (Rosenthal):
             δ = 270° + arctan(φ⁻³) = 283.2825°

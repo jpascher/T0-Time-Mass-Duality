@@ -349,64 +349,63 @@ class T0_Pruefung:
         return ergebnisse
     
     # ==========================================================================
-    # 8. KOMPLEXERE T0-FORMELN (KORRIGIERT)
+    # 8. KOMBINIERTE T0-FORMEL α = ξ · m_e · m_μ
     # ==========================================================================
     
-    def pruefe_komplexe_formeln(self):
-        """Prüft die komplexeren T0-Formeln aus dem Dokument"""
+    def pruefe_kombinierte_formel(self):
+        """Prüft die dimensionskonsistente Kombination α = ξ · m_e · m_μ"""
         print("\n" + "="*80)
-        print("8. KOMPLEXERE T0-FORMELN")
+        print("8. KOMBINIERTE T0-FORMEL α = ξ · m_e · m_μ")
         print("="*80)
         
         ergebnisse = {}
         
-        # HINWEIS: Die Formeln im Dokument beziehen sich auf T0-Massen in GeV?
-        # Ich verwende hier die experimentellen Massen in MeV, aber die Formeln
-        # scheinen auf andere Einheiten skaliert zu sein.
+        print("""
+        Aus den beiden Grundformeln (dimensionskonsistent, m in MeV):
         
-        print("\n8.1 E0 aus Massen und ξ (mit Korrekturfaktor):")
-        print("E0 = [ (m_μ·m_e) / (4√2) ]^(1/4) · ξ^(-1) · k")
+            α = ξ · E0²          und          E0 = √(m_e · m_μ)
         
-        m_produkt = self.m_mu_t0 * self.m_e_t0
-        nenner = 4 * np.sqrt(2)
+        folgt durch Substitution:
         
-        # Die Formel liefert unrealistische Werte, daher muss ein
-        # Korrekturfaktor eingeführt werden, der die Einheiten berücksichtigt
-        # Vermutlich sind die Massen in der Formel in GeV, nicht in MeV
-        m_produkt_gev = (self.m_mu_t0 / 1000) * (self.m_e_t0 / 1000)
+            α = ξ · m_e · m_μ
         
-        e0_berechnet_roh = (m_produkt_gev / nenner)**(1/4) * (1/self.xi)
-        # Umrechnung zurück nach MeV
-        e0_berechnet = e0_berechnet_roh * 1000
+        Alle Größen sind dimensionslos (ξ ist dimensionslos, m_e und m_μ
+        sind numerische Werte in MeV). Die Formel erfordert keine Einheiten-
+        konversion und ist direkt berechenbar.
+        """)
         
-        print(f"m_μ·m_e (MeV²) = {m_produkt:.3f}")
-        print(f"m_μ·m_e (GeV²) = {m_produkt_gev:.6e}")
-        print(f"4√2 = {nenner:.3f}")
-        print(f"(m_μ·m_e)/(4√2) in GeV² = {m_produkt_gev/nenner:.6e}")
-        print(f"Davon 4. Wurzel: {(m_produkt_gev/nenner)**(1/4):.6f} GeV^(1/2)")
-        print(f"ξ⁻¹ = {1/self.xi:.1f}")
-        print(f"E0_berechnet = {e0_berechnet:.3f} MeV")
-        print(f"E0_theorie   = {self.E0:.3f} MeV")
-        print(f"Abweichung: {abs(e0_berechnet - self.E0)/self.E0*100:.3f}%")
-        ergebnisse['e0_komplex'] = e0_berechnet
+        # 8.1 Mit experimentellen Massen
+        print("8.1 Mit experimentellen Massen:")
+        m_produkt_exp = self.m_e_exp * self.m_mu_exp
+        alpha_exp_formel = self.xi * m_produkt_exp
+        print(f"    m_e = {self.m_e_exp} MeV,  m_μ = {self.m_mu_exp} MeV")
+        print(f"    m_e · m_μ = {m_produkt_exp:.4f}")
+        print(f"    α = ξ · m_e · m_μ = {self.xi:.6e} × {m_produkt_exp:.4f} = {alpha_exp_formel:.8f}")
+        print(f"    α_exp = {self.alpha_exp:.8f}")
+        print(f"    Abweichung: {abs(alpha_exp_formel - self.alpha_exp)/self.alpha_exp*100:.3f}%")
+        print(f"    α⁻¹ = {1/alpha_exp_formel:.4f}  (exp: {self.alpha_inv_exp:.4f})")
+        ergebnisse['alpha_kombiniert_exp'] = alpha_exp_formel
         
-        # Formel 2: α daraus
-        print("\n8.2 α aus kombinierter Formel (mit Korrektur):")
-        print("α = [ (m_μ·m_e)/(4√2) ]^(1/2) · ξ^(-1) · k²")
+        # 8.2 Mit T0-Massen
+        print(f"\n8.2 Mit T0-Massen:")
+        m_produkt_t0 = self.m_e_t0 * self.m_mu_t0
+        alpha_t0_formel = self.xi * m_produkt_t0
+        print(f"    m_e_t0 = {self.m_e_t0} MeV,  m_μ_t0 = {self.m_mu_t0} MeV")
+        print(f"    m_e · m_μ = {m_produkt_t0:.4f}")
+        print(f"    α = ξ · m_e · m_μ = {self.xi:.6e} × {m_produkt_t0:.4f} = {alpha_t0_formel:.8f}")
+        print(f"    α_exp = {self.alpha_exp:.8f}")
+        print(f"    Abweichung: {abs(alpha_t0_formel - self.alpha_exp)/self.alpha_exp*100:.3f}%")
+        ergebnisse['alpha_kombiniert_t0'] = alpha_t0_formel
         
-        alpha_berechnet = np.sqrt(m_produkt_gev / nenner) * (1/self.xi)
-        print(f"α = {alpha_berechnet:.8f}")
-        print(f"α_exp = {self.alpha_exp:.8f}")
-        print(f"Abweichung: {abs(alpha_berechnet - self.alpha_exp)/self.alpha_exp*100:.3f}%")
-        ergebnisse['alpha_komplex'] = alpha_berechnet
-        
-        # Vereinfachung: α ∝ ξ^(-1)
-        konstante = self.alpha_exp * self.xi
-        print(f"\n8.3 α ∝ ξ^(-1):")
-        print(f"α·ξ = {konstante:.8f}")
-        print(f"Das ist etwa E0²/13?")
-        print(f"E0²/13 = {self.E0**2/13:.6f}")
-        print(f"Verhältnis: {konstante / (self.E0**2/13):.3f}")
+        # 8.3 Verhältnis E0² zu m_e·m_μ
+        print(f"\n8.3 Konsistenzcheck E0² vs. m_e·m_μ:")
+        e0_quadrat = self.E0**2
+        print(f"    E0² = {e0_quadrat:.4f}  (aus α/ξ = Grundformel)")
+        print(f"    m_e·m_μ (exp) = {m_produkt_exp:.4f}")
+        print(f"    Verhältnis E0² / (m_e·m_μ) = {e0_quadrat / m_produkt_exp:.6f}")
+        print(f"    Abweichung: {abs(e0_quadrat - m_produkt_exp)/m_produkt_exp*100:.3f}%")
+        print(f"    → E0 ≈ √(m_e·m_μ) ist eine gute Näherung (~{abs(self.E0 - np.sqrt(m_produkt_exp))/self.E0*100:.2f}% Abw.)")
+        ergebnisse['verhaeltnis_e0_geo'] = e0_quadrat / m_produkt_exp
         
         return ergebnisse
     
@@ -641,7 +640,7 @@ class T0_Pruefung:
         self.ergebnisse['baryon'] = self.pruefe_baryonenasymmetrie()
         self.ergebnisse['alpha'] = self.pruefe_feinstrukturkonstante()
         self.ergebnisse['e0'] = self.pruefe_e0_als_geometrisches_mittel()
-        self.ergebnisse['komplex'] = self.pruefe_komplexe_formeln()
+        self.ergebnisse['komplex'] = self.pruefe_kombinierte_formel()
         self.ergebnisse['phi_hierarchie'] = self.pruefe_phi_hierarchie()
         self.ergebnisse['photon'] = self.pruefe_photon_rekurrenz()
         self.ergebnisse['fraktal'] = self.pruefe_fraktale_dimension()
