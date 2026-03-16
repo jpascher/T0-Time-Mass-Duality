@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T0-ξ Hypothesentest: Basisauswahl und Perioden</title>
+<style>
+  body { font-family: 'Segoe UI', sans-serif; background: #0f0f1a; color: #e0e0e0;
+         margin: 0; padding: 20px; }
+  .container { max-width: 1000px; margin: 0 auto; background: #1a1a2e;
+               border-radius: 12px; padding: 28px; border: 1px solid #2a2a4a; }
+  h1 { color: #7eb8f7; text-align: center; font-size: 1.7em; margin-bottom: 4px; }
+  .subtitle { text-align: center; color: #888; margin-bottom: 20px; font-size: 0.9em; }
+  h2 { color: #5dade2; border-left: 4px solid #5dade2; padding-left: 12px;
+       font-size: 1.05em; margin: 22px 0 10px; }
+  .panel { background: #16213e; border: 1px solid #2a3f5f; border-radius: 8px;
+           padding: 16px; margin: 12px 0; }
+  .row { display: flex; align-items: center; gap: 12px; margin: 8px 0; flex-wrap: wrap; }
+  label { min-width: 160px; font-size: 0.88em; color: #aaa; }
+  input, select { background: #0f0f23; border: 1px solid #3a3a6a; border-radius: 6px;
+                  color: #e0e0e0; padding: 7px 11px; font-size: 0.9em; flex: 1;
+                  min-width: 150px; }
+  input:focus, select:focus { border-color: #5dade2; outline: none; }
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+  button { padding: 9px 18px; border: none; border-radius: 6px; cursor: pointer;
+           font-weight: bold; font-size: 0.88em; transition: 0.2s; }
+  .btn-a { background: #27ae60; color: #fff; }
+  .btn-b { background: #8e44ad; color: #fff; }
+  .btn-c { background: #2980b9; color: #fff; }
+  .btn-x { background: #555;    color: #fff; }
+  button:hover { opacity: 0.82; transform: translateY(-1px); }
+  button:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .log { background: #0a0a15; border: 1px solid #2a2a4a; border-radius: 8px;
+         padding: 14px; font-family: 'Courier New', monospace; font-size: 0.82em;
+         min-height: 100px; max-height: 420px; overflow-y: auto; line-height: 1.55; }
+  .ok  { color: #2ecc71; } .warn{ color: #f39c12; } .err { color: #e74c3c; }
+  .inf { color: #5dade2; } .dim { color: #555; }    .hi  { color: #f7dc6f; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit,minmax(145px,1fr));
+           gap: 9px; margin: 12px 0; }
+  .stat { background: #16213e; border: 1px solid #2a3f5f; border-radius: 8px;
+          padding: 10px; text-align: center; }
+  .stat-val { font-size: 1.45em; font-weight: bold; color: #7eb8f7; }
+  .stat-lbl { font-size: 0.75em; color: #777; margin-top: 3px; }
+  .prog-wrap { background: #0a0a20; border-radius: 6px; height: 14px;
+               overflow: hidden; margin: 8px 0; }
+  .prog-bar  { height: 100%; background: linear-gradient(90deg,#2980b9,#27ae60);
+               transition: width 0.15s; border-radius: 6px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82em; margin-top: 8px; }
+  th { background: #1e3050; color: #7eb8f7; padding: 7px 9px; text-align: left; }
+  td { padding: 5px 9px; border-bottom: 1px solid #1a1a3a; font-family: monospace; }
+  tr:hover td { background: #1a2a3a; }
+  .hyp-box { background: #1a2a1a; border: 1px solid #2a4a2a; border-radius: 6px;
+             padding: 12px; font-size: 0.84em; color: #8bc34a; margin: 10px 0;
+             line-height: 1.6; }
+  .result-box { border-radius: 8px; padding: 14px; margin: 10px 0; font-size: 0.9em; }
+  .result-confirm { background:#1a2a1a; border:1px solid #27ae60; color:#2ecc71; }
+  .result-neutral { background:#1a1a2a; border:1px solid #5dade2; color:#7eb8f7; }
+  .result-refute  { background:#2a1a1a; border:1px solid #e74c3c; color:#e74c3c; }
+  canvas { width: 100%; border-radius: 6px; background: #0a0a18;
+           border: 1px solid #2a2a4a; display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🔬 T0-ξ Hypothesentest</h1>
+<div class="subtitle">
+  Erzeugen ξ-optimale Basen systematisch kleinere Perioden als zufällige Basen?<br>
+  Alle Arithmetik exakt via BigInt · kein Float-Overflow
+</div>
+
+<div class="hyp-box">
+  <strong>Hypothese (aus FFGFT/T0-Theorie):</strong><br>
+  Der Parameter ξ ≈ 1,333×10⁻⁴ beschreibt eine geometrische Resonanzstruktur.
+  Wenn diese Resonanz eine physikalische Bedeutung in der Zahlentheorie hat,
+  sollten Basen a die nach dem ξ-Resonanzkriterium ausgewählt werden,
+  <em>statistisch häufiger kleinere Perioden</em> erzeugen als zufällig gewählte Basen —
+  gemessen über viele zusammengesetzte Zahlen N.<br><br>
+  <strong>Nullhypothese H₀:</strong> ξ-optimale Basen und zufällige Basen erzeugen
+  Perioden gleicher Größenordnung (kein Vorteil durch ξ-Auswahl).<br>
+  <strong>Alternativhypothese H₁:</strong> ξ-Basen erzeugen im Median kleinere Perioden
+  (Faktor &gt; 1,5 gegenüber Zufallsbasen über N=50 Versuche).
+</div>
+
+<!-- Test A: Einzelne N -->
+<div class="panel">
+  <h2>🔍 Test A — Basisvergleich für einzelne N</h2>
+  <div class="row">
+    <label>N (zusammengesetzt)</label>
+    <input type="text" id="tA_N" value="10403">
+    <label>Anzahl Zufallsbasen</label>
+    <input type="number" id="tA_bases" value="20" min="5" max="100">
+  </div>
+  <div class="row">
+    <label>Max Periode (Scan)</label>
+    <input type="number" id="tA_maxR" value="500000" min="1000">
+    <label>ξ</label>
+    <input type="text" id="tA_xi" value="1.333e-4">
+  </div>
+  <div class="btns">
+    <button class="btn-a" id="btnA" onclick="runTestA()">▶ Basisvergleich starten</button>
+    <button class="btn-x" onclick="clearLog('logA')">✕</button>
+  </div>
+  <div class="prog-wrap"><div class="prog-bar" id="progA" style="width:0%"></div></div>
+  <div class="log" id="logA"><span class="dim">Bereit.</span></div>
+  <div id="resultA"></div>
+</div>
+
+<!-- Test B: Statistischer Test über viele N -->
+<div class="panel">
+  <h2>📊 Test B — Statistischer Test: N Zahlen × M Basen</h2>
+  <div class="row">
+    <label>Anzahl N-Werte</label>
+    <input type="number" id="tB_count" value="30" min="5" max="200">
+    <label>N-Bereich</label>
+    <select id="tB_range">
+      <option value="small">Klein: 100 – 10.000</option>
+      <option value="medium" selected>Mittel: 10.000 – 1.000.000</option>
+      <option value="large">Groß: 10⁶ – 10¹⁰</option>
+    </select>
+  </div>
+  <div class="row">
+    <label>Zufallsbasen pro N</label>
+    <input type="number" id="tB_bases" value="10" min="3" max="50">
+    <label>Max Scan-r</label>
+    <input type="number" id="tB_maxR" value="200000" min="1000">
+  </div>
+  <div class="btns">
+    <button class="btn-b" id="btnB" onclick="runTestB()">▶ Statistiktest starten</button>
+    <button class="btn-x" onclick="clearLog('logB')">✕</button>
+  </div>
+  <div class="prog-wrap"><div class="prog-bar" id="progB" style="width:0%"></div></div>
+  <div class="log" id="logB"><span class="dim">Bereit.</span></div>
+  <div class="stats">
+    <div class="stat"><div class="stat-val" id="sN">—</div>
+      <div class="stat-lbl">Getestete N</div></div>
+    <div class="stat"><div class="stat-val" id="sXiWins">—</div>
+      <div class="stat-lbl">ξ kleiner</div></div>
+    <div class="stat"><div class="stat-val" id="sRandWins">—</div>
+      <div class="stat-lbl">Zufall kleiner</div></div>
+    <div class="stat"><div class="stat-val" id="sTies">—</div>
+      <div class="stat-lbl">Gleich / kein Fund</div></div>
+    <div class="stat"><div class="stat-val" id="sRatio">—</div>
+      <div class="stat-lbl">Median-Verhältnis ξ/Rand</div></div>
+    <div class="stat"><div class="stat-val" id="sWinRate">—</div>
+      <div class="stat-lbl">ξ-Gewinnrate</div></div>
+  </div>
+  <canvas id="chartB" height="180"></canvas>
+  <div id="resultB"></div>
+</div>
+
+<!-- Ergebnis-Tabelle -->
+<div class="panel" id="tablePanel" style="display:none">
+  <h2>📋 Detailergebnisse</h2>
+  <div id="detailTable"></div>
+</div>
+
+</div>
+
+<script>
+// ─── BigInt Arithmetik (exakt) ────────────────────────────────────────────
+
+function modPow(base, exp, mod) {
+  base = BigInt(base); exp = BigInt(exp); mod = BigInt(mod);
+  if (mod === 1n) return 0n;
+  let r = 1n; base = base % mod;
+  while (exp > 0n) {
+    if (exp & 1n) r = r * base % mod;
+    exp >>= 1n; base = base * base % mod;
+  }
+  return r;
+}
+
+function gcd(a, b) {
+  a = BigInt(a); b = BigInt(b);
+  while (b) [a,b] = [b, a%b];
+  return a;
+}
+
+function isqrt(n) {
+  n = BigInt(n);
+  if (n < 2n) return n;
+  let x = BigInt(Math.ceil(Math.sqrt(Number(n))));
+  let p; do { p=x; x=(x+n/x)/2n; } while(x<p);
+  return p;
+}
+
+function isPrime(n) {
+  n = BigInt(n);
+  if (n<2n) return false;
+  if (n===2n||n===3n||n===5n||n===7n) return true;
+  if (n%2n===0n) return false;
+  let d=n-1n, r=0;
+  while(d%2n===0n){d/=2n;r++;}
+  for(const a of [2n,3n,5n,7n,11n,13n,17n,19n,23n,29n,31n,37n]){
+    if(a>=n) continue;
+    let x=modPow(a,d,n);
+    if(x===1n||x===n-1n) continue;
+    let ok=false;
+    for(let i=0;i<r-1;i++){x=x*x%n;if(x===n-1n){ok=true;break;}}
+    if(!ok) return false;
+  }
+  return true;
+}
+
+// ─── Periode finden (exakt, BigInt) ──────────────────────────────────────
+
+function findPeriod(a, N, maxR) {
+  const aN=BigInt(a), NN=BigInt(N);
+  for (let r=1; r<=maxR; r++) {
+    if (modPow(aN,BigInt(r),NN)===1n) return r;
+  }
+  return null; // nicht gefunden
+}
+
+// ─── ξ-Basisbewertung ────────────────────────────────────────────────────
+
+function xiScore(a, N, xi) {
+  const aN=BigInt(a), NN=BigInt(N);
+  // Resonanzschätzung: omega = 2π / schätzPeriode
+  // Schätze Periode über ord_schätzung = lambda(N)/gcd(a,lambda)
+  // Vereinfacht: benutze cos-Modulation wie im Original, aber sauber
+  const g = gcd(aN-1n, NN);
+  const smoothness = g > 1n ? Number(g) / Number(NN) : 0;
+  const periodicHint = Math.abs(Math.cos(2*Math.PI*a/Number(NN)));
+  const resonance = Math.exp(-((2*Math.PI/Math.max(a,1) - Math.PI)**2)/(4*xi));
+  return resonance * (1 + smoothness) * (1 + periodicHint*0.3);
+}
+
+function pickXiBases(N, count, xi) {
+  const NN = BigInt(N);
+  const candidates = [];
+  const limit = Math.min(N-1, 2000);
+  for (let a=2; a<limit; a++) {
+    if (gcd(BigInt(a), NN) === 1n)
+      candidates.push({a, score: xiScore(a, N, xi)});
+  }
+  candidates.sort((x,y)=>y.score-x.score);
+  return candidates.slice(0, count).map(c=>c.a);
+}
+
+function pickRandomBases(N, count) {
+  const NN = BigInt(N);
+  const result = new Set();
+  let tries = 0;
+  while (result.size < count && tries < 10000) {
+    tries++;
+    const a = 2 + Math.floor(Math.random()*(Math.min(N-2, 5000)));
+    if (gcd(BigInt(a), NN) === 1n) result.add(a);
+  }
+  return [...result];
+}
+
+// ─── Hilfsfunktionen ─────────────────────────────────────────────────────
+
+function logLine(id, html) {
+  const el = document.getElementById(id);
+  el.innerHTML += html + '\n';
+  el.scrollTop = el.scrollHeight;
+}
+
+function clearLog(id) {
+  document.getElementById(id).innerHTML = '<span class="dim">Log geleert.</span>\n';
+}
+
+function setProgress(id, pct) {
+  document.getElementById(id).style.width = pct + '%';
+}
+
+function median(arr) {
+  if (!arr.length) return null;
+  const s = [...arr].sort((a,b)=>a-b);
+  const m = Math.floor(s.length/2);
+  return s.length%2 ? s[m] : (s[m-1]+s[m])/2;
+}
+
+function sleep(ms) { return new Promise(r=>setTimeout(r,ms)); }
+
+// ─── Test A: Basisvergleich für einzelne N ────────────────────────────────
+
+async function runTestA() {
+  const N    = parseInt(document.getElementById('tA_N').value);
+  const nBases= parseInt(document.getElementById('tA_bases').value);
+  const maxR  = parseInt(document.getElementById('tA_maxR').value);
+  const xi    = parseFloat(document.getElementById('tA_xi').value);
+  const btn   = document.getElementById('btnA');
+  btn.disabled = true;
+
+  document.getElementById('resultA').innerHTML = '';
+  clearLog('logA');
+  logLine('logA',`<span class="inf">N=${N}, ξ=${xi.toExponential(3)}, maxR=${maxR}, ${nBases} Zufallsbasen</span>`);
+
+  if (isPrime(BigInt(N))) {
+    logLine('logA','<span class="err">N ist eine Primzahl — kein Test möglich.</span>');
+    btn.disabled=false; return;
+  }
+
+  // ξ-Basen
+  const xiBases = pickXiBases(N, Math.min(nBases, 10), xi);
+  logLine('logA',`<span class="inf">ξ-Top-Basen: ${xiBases.slice(0,8).join(', ')}…</span>`);
+
+  const xiPeriods=[]; const rndPeriods=[];
+  const rows=[];
+
+  // ξ-Basen testen
+  for (let i=0; i<xiBases.length; i++) {
+    const a = xiBases[i];
+    setProgress('progA', 50*i/xiBases.length);
+    await sleep(0);
+    const r = findPeriod(a, N, maxR);
+    xiPeriods.push(r);
+    rows.push({base:a, type:'ξ-optimal', r: r||'>', score: xiScore(a,N,xi).toExponential(3)});
+    logLine('logA', r
+      ? `<span class="ok">  ξ-Basis a=${a}: r=${r}</span>`
+      : `<span class="warn">  ξ-Basis a=${a}: r>${maxR} (nicht gefunden)</span>`);
+  }
+
+  // Zufallsbasen testen
+  const rndBases = pickRandomBases(N, nBases);
+  for (let i=0; i<rndBases.length; i++) {
+    const a = rndBases[i];
+    setProgress('progA', 50+50*i/rndBases.length);
+    await sleep(0);
+    const r = findPeriod(a, N, maxR);
+    rndPeriods.push(r);
+    rows.push({base:a, type:'Zufall', r: r||'>', score: xiScore(a,N,xi).toExponential(3)});
+    logLine('logA', r
+      ? `<span class="dim">  Zufallsbasis a=${a}: r=${r}</span>`
+      : `<span class="dim">  Zufallsbasis a=${a}: r>${maxR}</span>`);
+  }
+
+  setProgress('progA', 100);
+
+  const xiFound   = xiPeriods.filter(r=>r!==null);
+  const rndFound  = rndPeriods.filter(r=>r!==null);
+  const xiMed     = median(xiFound);
+  const rndMed    = median(rndFound);
+  const ratio     = (xiMed && rndMed) ? (rndMed/xiMed).toFixed(3) : '—';
+
+  logLine('logA',`<br><span class="hi">─── Ergebnis ───</span>`);
+  logLine('logA',`Median Periode ξ-Basen:   ${xiMed||'—'} (${xiFound.length}/${xiBases.length} gefunden)`);
+  logLine('logA',`Median Periode Zufallsbasen: ${rndMed||'—'} (${rndFound.length}/${rndBases.length} gefunden)`);
+  logLine('logA',`Verhältnis Zufall/ξ: ${ratio}  (>1 = ξ besser, <1 = Zufall besser)`);
+
+  // Tabelle
+  rows.sort((a,b)=>(a.r==='>'+maxR?Infinity:a.r)-(b.r==='>'+maxR?Infinity:b.r));
+  let html='<table><tr><th>Basis a</th><th>Typ</th><th>Periode r</th><th>ξ-Score</th></tr>';
+  for(const row of rows){
+    const c=row.type.startsWith('ξ')?'ok':'dim';
+    html+=`<tr><td>${row.base}</td><td class="${c}">${row.type}</td>
+              <td>${row.r}</td><td>${row.score}</td></tr>`;
+  }
+  html+='</table>';
+
+  const verdict = !xiMed||!rndMed ? 'neutral' :
+                  ratio>1.5 ? 'confirm' : ratio<0.8 ? 'refute' : 'neutral';
+  const verdictText = {
+    confirm: `✓ ξ-Basen fanden Perioden im Median ${ratio}× kleiner als Zufallsbasen. Hypothese gestützt.`,
+    neutral: `≈ Kein signifikanter Unterschied (Verhältnis=${ratio}). Hypothese weder bestätigt noch widerlegt.`,
+    refute:  `✗ Zufallsbasen waren besser (Verhältnis=${ratio}). Hypothese für dieses N nicht gestützt.`
+  }[verdict];
+
+  document.getElementById('resultA').innerHTML =
+    `<div class="result-box result-${verdict}">${verdictText}</div>${html}`;
+  document.getElementById('tablePanel').style.display='block';
+  document.getElementById('detailTable').innerHTML=html;
+  btn.disabled=false;
+}
+
+// ─── Test B: Statistischer Test über viele N ──────────────────────────────
+
+async function runTestB() {
+  const count  = parseInt(document.getElementById('tB_count').value);
+  const range  = document.getElementById('tB_range').value;
+  const nBases = parseInt(document.getElementById('tB_bases').value);
+  const maxR   = parseInt(document.getElementById('tB_maxR').value);
+  const xi     = 4/30000;
+  const btn    = document.getElementById('btnB');
+  btn.disabled = true;
+
+  clearLog('logB');
+  document.getElementById('resultB').innerHTML='';
+  logLine('logB',`<span class="inf">Statistiktest: ${count} Zahlen, ${nBases} Zufallsbasen/N, ξ=${xi.toExponential(3)}</span>`);
+
+  // N-Generator: zusammengesetzte Zahlen im Bereich
+  const [lo,hi] = range==='small' ? [100,10000] :
+                  range==='large' ? [1e6,1e10]  : [10000,1e6];
+
+  function randComposite() {
+    for(let i=0;i<1000;i++){
+      const n=Math.floor(lo+Math.random()*(hi-lo));
+      if(!isPrime(BigInt(n)) && n>4) return n;
+    }
+    return null;
+  }
+
+  let xiWins=0, rndWins=0, ties=0;
+  const allRatios=[];
+  const chartData=[];
+
+  for(let i=0;i<count;i++){
+    setProgress('progB', 100*i/count);
+    await sleep(0);
+
+    const N = randComposite();
+    if(!N){ ties++; continue; }
+
+    const xiBases  = pickXiBases(N, 3, xi);
+    const rndBases = pickRandomBases(N, nBases);
+
+    const xiPeriods  = xiBases.map(a=>findPeriod(a,N,maxR)).filter(r=>r!==null);
+    const rndPeriods = rndBases.map(a=>findPeriod(a,N,maxR)).filter(r=>r!==null);
+
+    const xiMin  = xiPeriods.length  ? Math.min(...xiPeriods)  : null;
+    const rndMin = rndPeriods.length ? Math.min(...rndPeriods) : null;
+
+    if(xiMin===null||rndMin===null){ ties++; continue; }
+
+    const ratio = rndMin/xiMin;
+    allRatios.push(ratio);
+    chartData.push({N, xiMin, rndMin, ratio});
+
+    if(ratio>1.05)      { xiWins++;  logLine('logB',`<span class="ok">  N=${N}: ξ besser (r=${xiMin} vs ${rndMin}, ×${ratio.toFixed(2)})</span>`); }
+    else if(ratio<0.95) { rndWins++; logLine('logB',`<span class="warn">  N=${N}: Zufall besser (r=${xiMin} vs ${rndMin}, ×${ratio.toFixed(2)})</span>`); }
+    else                { ties++;    logLine('logB',`<span class="dim">  N=${N}: gleichwertig (r≈${xiMin})</span>`); }
+
+    // Stats aktualisieren
+    document.getElementById('sN').textContent       = i+1;
+    document.getElementById('sXiWins').textContent  = xiWins;
+    document.getElementById('sRandWins').textContent= rndWins;
+    document.getElementById('sTies').textContent    = ties;
+    const med = median(allRatios);
+    document.getElementById('sRatio').textContent   = med?med.toFixed(3):'—';
+    const total = xiWins+rndWins+ties;
+    document.getElementById('sWinRate').textContent =
+      total ? (100*xiWins/total).toFixed(1)+'%' : '—';
+  }
+
+  setProgress('progB',100);
+
+  // Chart
+  drawChart(chartData);
+
+  // Gesamtergebnis
+  const med = median(allRatios);
+  const total = xiWins+rndWins+ties;
+  const winRate = total ? xiWins/total : 0;
+
+  let verdict, vtext;
+  if(med===null){ verdict='neutral'; vtext='Zu wenig Daten für Aussage.'; }
+  else if(med>1.3&&winRate>0.55){ verdict='confirm';
+    vtext=`✓ HYPOTHESE GESTÜTZT: ξ-Basen fanden im Median ${med.toFixed(2)}× kleinere Perioden
+    (Gewinnrate ${(winRate*100).toFixed(0)}% über ${total} Fälle).
+    Das deutet auf einen statistisch messbaren ξ-Effekt hin.`; }
+  else if(med<0.9&&winRate<0.4){ verdict='refute';
+    vtext=`✗ HYPOTHESE NICHT GESTÜTZT: Zufallsbasen waren im Median besser
+    (Verhältnis=${med.toFixed(2)}, ξ-Gewinnrate=${(winRate*100).toFixed(0)}%).`; }
+  else { verdict='neutral';
+    vtext=`≈ KEIN KLARER EFFEKT: Median-Verhältnis=${med.toFixed(3)},
+    ξ-Gewinnrate=${(winRate*100).toFixed(0)}%.
+    Der Unterschied liegt innerhalb statistischer Schwankung.
+    Mehr Stichproben oder größere N-Bereiche nötig für klareres Bild.`; }
+
+  document.getElementById('resultB').innerHTML=
+    `<div class="result-box result-${verdict}">${vtext}</div>`;
+  logLine('logB',`<br><span class="hi">─── Gesamtergebnis ───</span>`);
+  logLine('logB',`ξ-Gewinnrate: ${(winRate*100).toFixed(1)}%  Median r_rand/r_ξ = ${med?med.toFixed(3):'—'}`);
+  btn.disabled=false;
+}
+
+// ─── Chart ───────────────────────────────────────────────────────────────
+
+function drawChart(data) {
+  const canvas = document.getElementById('chartB');
+  const ctx = canvas.getContext('2d');
+  canvas.width  = canvas.offsetWidth  || 800;
+  canvas.height = 180;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  if(!data.length) return;
+
+  const W=canvas.width, H=canvas.height;
+  const pad={l:50,r:20,t:20,b:30};
+  const maxRatio = Math.max(3, ...data.map(d=>d.ratio));
+
+  ctx.fillStyle='#0a0a18';
+  ctx.fillRect(0,0,W,H);
+
+  // Achsen
+  ctx.strokeStyle='#333'; ctx.lineWidth=1;
+  ctx.beginPath();
+  ctx.moveTo(pad.l,pad.t); ctx.lineTo(pad.l,H-pad.b);
+  ctx.lineTo(W-pad.r,H-pad.b);
+  ctx.stroke();
+
+  // Linie y=1 (kein Vorteil)
+  const y1 = H-pad.b-(1/maxRatio)*(H-pad.t-pad.b);
+  ctx.strokeStyle='#555'; ctx.setLineDash([4,4]);
+  ctx.beginPath(); ctx.moveTo(pad.l,y1); ctx.lineTo(W-pad.r,y1); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='#555'; ctx.font='10px monospace';
+  ctx.fillText('1.0',2,y1+4);
+
+  // Datenpunkte
+  const xStep=(W-pad.l-pad.r)/Math.max(data.length-1,1);
+  for(let i=0;i<data.length;i++){
+    const x=pad.l+i*xStep;
+    const y=H-pad.b-(data[i].ratio/maxRatio)*(H-pad.t-pad.b);
+    const col=data[i].ratio>1.05?'#2ecc71':data[i].ratio<0.95?'#e74c3c':'#5dade2';
+    ctx.fillStyle=col;
+    ctx.beginPath(); ctx.arc(x,y,3,0,2*Math.PI); ctx.fill();
+    if(i>0){
+      const px=pad.l+(i-1)*xStep;
+      const py=H-pad.b-(data[i-1].ratio/maxRatio)*(H-pad.t-pad.b);
+      ctx.strokeStyle=col+'88'; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(x,y); ctx.stroke();
+    }
+  }
+
+  // Y-Label
+  ctx.fillStyle='#888'; ctx.font='10px sans-serif';
+  ctx.fillText('r_rand/r_ξ',2,pad.t+10);
+  ctx.fillText('i (Test)',pad.l,H-5);
+}
+</script>
+</body>
+</html>

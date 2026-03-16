@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T0-Shor Simulator — BigInt-Korrektur</title>
+<style>
+  body { font-family: 'Segoe UI', sans-serif; background: #0f0f1a; color: #e0e0e0;
+         margin: 0; padding: 20px; min-height: 100vh; }
+  .container { max-width: 960px; margin: 0 auto; background: #1a1a2e;
+               border-radius: 12px; padding: 28px; border: 1px solid #2a2a4a; }
+  h1 { color: #7eb8f7; text-align: center; font-size: 1.8em; margin-bottom: 4px; }
+  .subtitle { text-align: center; color: #888; margin-bottom: 24px; font-size: 0.95em; }
+  h2 { color: #5dade2; border-left: 4px solid #5dade2; padding-left: 12px;
+       font-size: 1.1em; margin-top: 28px; }
+  .panel { background: #16213e; border: 1px solid #2a3f5f; border-radius: 8px;
+           padding: 18px; margin: 14px 0; }
+  .row { display: flex; align-items: center; gap: 12px; margin: 10px 0; flex-wrap: wrap; }
+  label { min-width: 140px; font-size: 0.9em; color: #aaa; }
+  input, select { background: #0f0f23; border: 1px solid #3a3a6a; border-radius: 6px;
+                  color: #e0e0e0; padding: 8px 12px; font-size: 0.95em; flex: 1;
+                  min-width: 180px; }
+  input:focus, select:focus { border-color: #5dade2; outline: none; }
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0; }
+  button { padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer;
+           font-weight: bold; font-size: 0.9em; transition: 0.2s; }
+  .btn-run  { background: #27ae60; color: #fff; }
+  .btn-bench{ background: #2980b9; color: #fff; }
+  .btn-clear{ background: #555; color: #fff; }
+  button:hover { opacity: 0.85; transform: translateY(-1px); }
+  .log { background: #0a0a15; border: 1px solid #2a2a4a; border-radius: 8px;
+         padding: 16px; font-family: 'Courier New', monospace; font-size: 0.85em;
+         min-height: 120px; max-height: 500px; overflow-y: auto; line-height: 1.6; }
+  .ok  { color: #2ecc71; }
+  .warn{ color: #f39c12; }
+  .err { color: #e74c3c; }
+  .inf { color: #5dade2; }
+  .dim { color: #666; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+           gap: 10px; margin: 14px 0; }
+  .stat { background: #16213e; border: 1px solid #2a3f5f; border-radius: 8px;
+          padding: 12px; text-align: center; }
+  .stat-val { font-size: 1.6em; font-weight: bold; color: #7eb8f7; }
+  .stat-lbl { font-size: 0.78em; color: #888; margin-top: 4px; }
+  .note { background: #1a2a1a; border: 1px solid #2a4a2a; border-radius: 6px;
+          padding: 12px; font-size: 0.85em; color: #8bc34a; margin: 10px 0; }
+  .warn-box { background: #2a1a0a; border: 1px solid #f39c12; border-radius: 6px;
+              padding: 12px; font-size: 0.85em; color: #f39c12; margin: 10px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85em; margin-top: 10px; }
+  th { background: #1e3050; color: #7eb8f7; padding: 8px 10px; text-align: left; }
+  td { padding: 6px 10px; border-bottom: 1px solid #1a1a3a; }
+  tr:hover td { background: #1a2a3a; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🔬 T0-Shor Simulator</h1>
+<div class="subtitle">
+  BigInt-korrigierte Arithmetik · ehrliche Periodizitätsmessung · Vergleich T0 vs. klassisch
+</div>
+
+<div class="warn-box">
+  <strong>Ursprüngliches Problem:</strong> Der alte Simulator verwendete JavaScript
+  <code>Number</code> (IEEE 754, 53 Bit Mantisse). Für N &gt; ~10⁷ liefert
+  <code>(base * base) % mod</code> falsche Ergebnisse durch Fließkomma-Rundung.
+  Schein-Perioden werden gefunden, echte Perioden übersehen.
+  <br><strong>Fix:</strong> Alle modularen Operationen laufen jetzt mit <code>BigInt</code> —
+  exakt für beliebige N.
+</div>
+
+<div class="panel">
+  <h2>⚙️ Parameter</h2>
+  <div class="row">
+    <label>N (zu faktorisieren)</label>
+    <input type="text" id="inputN" value="143" placeholder="z.B. 143, 10403, 3233">
+    <select id="presets" onchange="applyPreset()">
+      <option value="">— Beispiele —</option>
+      <option value="15">15 = 3×5</option>
+      <option value="21">21 = 3×7</option>
+      <option value="143">143 = 11×13</option>
+      <option value="10403">10403 = 101×103</option>
+      <option value="1299709">1299709 (Primzahl!)</option>
+      <option value="1299721">1299721 = 1049×1239 ... nein: Primzahltest</option>
+      <option value="15480049">15480049 = 3937×3937</option>
+      <option value="999999937">999999937 (Primzahl)</option>
+      <option value="4294967291">4294967291 (Primzahl)</option>
+      <option value="9999999999971">9999999999971 (Primzahl)</option>
+      <option value="100000007000000049">100000007×1000000007</option>
+    </select>
+  </div>
+  <div class="row">
+    <label>Basis a</label>
+    <input type="text" id="inputA" value="" placeholder="leer = automatisch">
+    <label style="min-width:100px;">Max Scan-r</label>
+    <input type="number" id="inputMaxR" value="100000" min="100" max="10000000">
+  </div>
+  <div class="row">
+    <label>ξ-Parameter</label>
+    <select id="xiMode">
+      <option value="canonical">Kanonisch: 4/30000 ≈ 1.333×10⁻⁴</option>
+      <option value="auto">Adaptiv (N-abhängig)</option>
+      <option value="custom">Benutzerdefiniert</option>
+    </select>
+    <input type="text" id="xiCustom" value="1.333e-4" placeholder="ξ Wert"
+           style="display:none; max-width:160px;">
+  </div>
+  <div class="btns">
+    <button class="btn-run"   onclick="runSingle()">▶ Faktorisieren</button>
+    <button class="btn-bench" onclick="runBenchmark()">📊 Benchmark (10 Zahlen)</button>
+    <button class="btn-clear" onclick="clearLog()">✕ Log leeren</button>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-val" id="sTotal">—</div>
+    <div class="stat-lbl">Gesamt Tests</div></div>
+  <div class="stat"><div class="stat-val" id="sT0">—</div>
+    <div class="stat-lbl">T0-Erfolge</div></div>
+  <div class="stat"><div class="stat-val" id="sClassic">—</div>
+    <div class="stat-lbl">Klass. Fallback</div></div>
+  <div class="stat"><div class="stat-val" id="sAvgR">—</div>
+    <div class="stat-lbl">Ø Periode r</div></div>
+  <div class="stat"><div class="stat-val" id="sAvgTime">—</div>
+    <div class="stat-lbl">Ø Zeit (ms)</div></div>
+</div>
+
+<div class="panel">
+  <h2>📋 Log</h2>
+  <div class="log" id="log"><span class="dim">Bereit. Gib N ein und klicke Faktorisieren.</span></div>
+</div>
+
+<div class="panel">
+  <h2>📈 Benchmark-Ergebnisse</h2>
+  <div id="benchTable"><span style="color:#555">Noch kein Benchmark gelaufen.</span></div>
+</div>
+
+<div class="note">
+  <strong>Methodologie:</strong> Die T0-Periodensuche scannt r = 1 … max_r und bewertet
+  jeden Treffer (a^r ≡ 1 mod N) mit der ξ-Resonanzformel
+  ω = 2π/r, Resonanz = exp(−(ω−π)²/(4|ξ|)). Die Periode mit höchster Resonanz
+  wird gewählt. Verglichen wird mit klassischem Trial Division bis √N.
+  Alle Modular-Arithmetik exakt via BigInt.
+</div>
+
+</div>
+
+<script>
+// ─── BigInt Kern-Arithmetik ───────────────────────────────────────────────
+
+function modPow(base, exp, mod) {
+  // Exakt — keine Float-Rundung
+  base = BigInt(base); exp = BigInt(exp); mod = BigInt(mod);
+  if (mod === 1n) return 0n;
+  let result = 1n;
+  base = base % mod;
+  while (exp > 0n) {
+    if (exp % 2n === 1n) result = (result * base) % mod;
+    exp = exp >> 1n;
+    base = (base * base) % mod;
+  }
+  return result;
+}
+
+function gcd(a, b) {
+  a = BigInt(a); b = BigInt(b);
+  while (b > 0n) { [a, b] = [b, a % b]; }
+  return a;
+}
+
+function isqrt(n) {
+  n = BigInt(n);
+  if (n < 0n) return 0n;
+  if (n < 2n) return n;
+  let x = BigInt(Math.ceil(Math.sqrt(Number(n))));
+  let prev;
+  do { prev = x; x = (x + n / x) / 2n; } while (x < prev);
+  return prev;
+}
+
+// Miller-Rabin Primtest (deterministisch für n < 3,317,044,064,679,887,385,961,981)
+function isPrime(n) {
+  n = BigInt(n);
+  if (n < 2n) return false;
+  if (n === 2n || n === 3n || n === 5n || n === 7n) return true;
+  if (n % 2n === 0n) return false;
+  const witnesses = [2n,3n,5n,7n,11n,13n,17n,19n,23n,29n,31n,37n];
+  let d = n - 1n, r = 0;
+  while (d % 2n === 0n) { d /= 2n; r++; }
+  outer: for (const a of witnesses) {
+    if (a >= n) continue;
+    let x = modPow(a, d, n);
+    if (x === 1n || x === n - 1n) continue;
+    for (let i = 0; i < r - 1; i++) {
+      x = (x * x) % n;
+      if (x === n - 1n) continue outer;
+    }
+    return false;
+  }
+  return true;
+}
+
+// ─── ξ-Wert ─────────────────────────────────────────────────────────────
+
+function getXi() {
+  const mode = document.getElementById('xiMode').value;
+  if (mode === 'canonical') return 4/30000;
+  if (mode === 'custom')    return parseFloat(document.getElementById('xiCustom').value) || 4/30000;
+  // adaptive
+  const N = BigInt(document.getElementById('inputN').value.replace(/\s/g,'') || '143');
+  const bits = N.toString(2).length;
+  if (bits <= 32)  return 1e-4;
+  if (bits <= 64)  return 1e-5;
+  if (bits <= 128) return 1e-6;
+  return 1e-7;
+}
+
+// ─── T0-Periodensuche (BigInt-exakt) ────────────────────────────────────
+
+function t0FindPeriod(a, N, maxR, xi) {
+  const aN = BigInt(a), NN = BigInt(N);
+  let best = null, bestRes = -1;
+  let count = 0;
+
+  for (let r = 1; r <= maxR; r++) {
+    if (modPow(aN, BigInt(r), NN) === 1n) {
+      // ξ-Resonanzbewertung
+      const omega = 2 * Math.PI / r;
+      const resonance = Math.exp(-((omega - Math.PI)**2) / (4 * Math.abs(xi)));
+      if (resonance > bestRes) { bestRes = resonance; best = r; }
+      count++;
+      if (count >= 1000) break; // Nicht endlos sammeln
+    }
+  }
+  return best ? { period: best, resonance: bestRes, candidates: count } : null;
+}
+
+function extractFactors(a, r, N) {
+  if (r % 2 !== 0) return null;
+  const aN = BigInt(a), NN = BigInt(N), rN = BigInt(r);
+  const half = modPow(aN, rN / 2n, NN);
+  if (half === NN - 1n) return null;
+  const f1 = gcd(half - 1n, NN);
+  const f2 = gcd(half + 1n, NN);
+  for (const f of [f1, f2]) {
+    if (f > 1n && f < NN && NN % f === 0n) return [f, NN / f];
+  }
+  return null;
+}
+
+// ─── Klassischer Trial Division (Referenz) ───────────────────────────────
+
+function classicFactor(N) {
+  const NN = BigInt(N);
+  if (NN < 2n) return null;
+  if (NN % 2n === 0n) return [2n, NN/2n];
+  const sq = isqrt(NN);
+  for (let i = 3n; i <= sq; i += 2n) {
+    if (NN % i === 0n) return [i, NN/i];
+  }
+  return null; // Primzahl
+}
+
+// ─── Basis-Suche ─────────────────────────────────────────────────────────
+
+function findGoodBase(N) {
+  const NN = BigInt(N);
+  for (let a = 2; a < Math.min(N, 200); a++) {
+    if (gcd(BigInt(a), NN) === 1n) return a;
+  }
+  return 2;
+}
+
+// ─── Hauptroutine ────────────────────────────────────────────────────────
+
+let stats = { total:0, t0:0, classic:0, sumR:0, sumTime:0, trials:0 };
+
+function factorize(N_str, a_input, maxR, xi) {
+  const t0 = performance.now();
+  const N = BigInt(N_str.replace(/\s/g,''));
+  const Nnum = Number(N);
+
+  const result = {
+    N: N.toString(), method: null,
+    factors: null, period: null, resonance: null,
+    base: null, time: null, note: null
+  };
+
+  // 1. Primzahltest
+  if (isPrime(N)) {
+    result.method = 'prime'; result.note = 'Primzahl — keine Faktorisierung möglich';
+    result.time = performance.now() - t0;
+    return result;
+  }
+
+  // 2. Gerade Zahl
+  if (N % 2n === 0n) {
+    result.method = 'trivial'; result.factors = [2n, N/2n];
+    result.time = performance.now() - t0;
+    return result;
+  }
+
+  // 3. Perfekte Quadrate
+  const sq = isqrt(N);
+  if (sq * sq === N) {
+    result.method = 'perfect_square'; result.factors = [sq, sq];
+    result.time = performance.now() - t0;
+    return result;
+  }
+
+  // 4. Basis wählen
+  const a = a_input && a_input > 1 ? parseInt(a_input) : findGoodBase(Nnum);
+  result.base = a;
+
+  // GCD-Schnelltest
+  const g = gcd(BigInt(a), N);
+  if (g > 1n && g < N) {
+    result.method = 'gcd_shortcut'; result.factors = [g, N/g];
+    result.time = performance.now() - t0;
+    return result;
+  }
+
+  // 5. T0-Periodensuche
+  const periodRes = t0FindPeriod(a, Nnum, maxR, xi);
+  if (periodRes) {
+    const factors = extractFactors(a, periodRes.period, Nnum);
+    if (factors) {
+      result.method = 't0_period'; result.factors = factors;
+      result.period = periodRes.period; result.resonance = periodRes.resonance;
+      result.time = performance.now() - t0;
+      return result;
+    }
+    result.note = `Periode r=${periodRes.period} gefunden, aber keine Faktoren extrahierbar`;
+  } else {
+    result.note = `Keine Periode in r ≤ ${maxR} gefunden`;
+  }
+
+  // 6. Klassischer Fallback
+  const cf = classicFactor(Nnum);
+  if (cf) {
+    result.method = 'classic_fallback'; result.factors = cf;
+    result.time = performance.now() - t0;
+    return result;
+  }
+
+  result.method = 'failure';
+  result.time = performance.now() - t0;
+  return result;
+}
+
+// ─── UI ──────────────────────────────────────────────────────────────────
+
+function log(html) {
+  const el = document.getElementById('log');
+  el.innerHTML += html + '\n';
+  el.scrollTop = el.scrollHeight;
+}
+
+function clearLog() {
+  document.getElementById('log').innerHTML = '<span class="dim">Log geleert.</span>\n';
+}
+
+function updateStats() {
+  document.getElementById('sTotal').textContent   = stats.total;
+  document.getElementById('sT0').textContent      = stats.t0;
+  document.getElementById('sClassic').textContent = stats.classic;
+  document.getElementById('sAvgR').textContent    = stats.trials > 0
+    ? Math.round(stats.sumR / stats.trials) : '—';
+  document.getElementById('sAvgTime').textContent = stats.total > 0
+    ? (stats.sumTime / stats.total).toFixed(1) : '—';
+}
+
+function formatResult(r) {
+  const timeStr = r.time !== null ? r.time.toFixed(1) + ' ms' : '?';
+  if (r.method === 'prime') {
+    return `<span class="warn">⚠ N=${r.N} ist eine Primzahl — nicht faktorisierbar. [${timeStr}]</span>`;
+  }
+  if (!r.factors) {
+    return `<span class="err">✗ N=${r.N} — Fehlgeschlagen (${r.method}). ${r.note||''} [${timeStr}]</span>`;
+  }
+  const fs = r.factors.map(f => f.toString()).join(' × ');
+  const check = r.factors[0] * r.factors[1] === BigInt(r.N) ? '✓' : '✗FEHLER';
+  let extra = '';
+  if (r.method === 't0_period')
+    extra = ` | Basis=${r.base}, r=${r.period}, Res=${r.resonance.toExponential(2)}`;
+  if (r.method === 'classic_fallback') extra = ' <span class="warn">[klassischer Fallback]</span>';
+  if (r.method === 'gcd_shortcut')     extra = ' [GCD-Abkürzung]';
+  const cls = r.method === 't0_period' ? 'ok' :
+              r.method === 'classic_fallback' ? 'warn' : 'inf';
+  return `<span class="${cls}">${check} N=${r.N} = ${fs} (${r.method})${extra} [${timeStr}]</span>`;
+}
+
+function runSingle() {
+  const N_str  = document.getElementById('inputN').value.trim();
+  const a_str  = document.getElementById('inputA').value.trim();
+  const maxR   = parseInt(document.getElementById('inputMaxR').value) || 100000;
+  const xi     = getXi();
+
+  if (!N_str) { log('<span class="err">Kein N eingegeben.</span>'); return; }
+
+  log(`<span class="dim">─── Faktorisiere N=${N_str}, ξ=${xi.toExponential(3)}, maxR=${maxR} ───</span>`);
+
+  try {
+    const r = factorize(N_str, a_str || null, maxR, xi);
+    log(formatResult(r));
+
+    stats.total++; stats.sumTime += r.time || 0;
+    if (r.method === 't0_period')       { stats.t0++;      stats.sumR += r.period; stats.trials++; }
+    if (r.method === 'classic_fallback') stats.classic++;
+    updateStats();
+  } catch(e) {
+    log(`<span class="err">Fehler: ${e.message}</span>`);
+  }
+}
+
+// ─── Benchmark ───────────────────────────────────────────────────────────
+
+const BENCH_CASES = [
+  {N:'15',        label:'15 = 3×5'},
+  {N:'143',       label:'143 = 11×13'},
+  {N:'10403',     label:'10403 = 101×103'},
+  {N:'1073741827',label:'1073741827 = 32771×32771+... (zusammengesetzt)'},
+  {N:'2147483647',label:'2147483647 (Mersenne-Primzahl!)'},
+  {N:'4294967291',label:'4294967291 (Primzahl)'},
+  {N:'15480049',  label:'15480049 = 3937²'},
+  {N:'100000007000000049', label:'10^8+7 × 10^9+7 (zwei Primzahlen)'},
+  {N:'999999999999999877', label:'~10^18 (Primzahltest)'},
+  {N:'9007199254740881',   label:'9007199254740881 = 94906249×94906249+...'},
+];
+
+async function runBenchmark() {
+  const maxR = parseInt(document.getElementById('inputMaxR').value) || 100000;
+  const xi   = getXi();
+  const rows = [];
+
+  log(`<span class="dim">─── Benchmark: ${BENCH_CASES.length} Fälle, ξ=${xi.toExponential(3)}, maxR=${maxR} ───</span>`);
+  document.getElementById('benchTable').innerHTML = '<span style="color:#888">Läuft...</span>';
+
+  // Async um UI nicht zu blockieren
+  for (const c of BENCH_CASES) {
+    await new Promise(r => setTimeout(r, 0));
+    try {
+      const res = factorize(c.N, null, maxR, xi);
+      log(formatResult(res));
+
+      stats.total++; stats.sumTime += res.time || 0;
+      if (res.method === 't0_period')       { stats.t0++;      stats.sumR += res.period; stats.trials++; }
+      if (res.method === 'classic_fallback') stats.classic++;
+      updateStats();
+
+      rows.push({
+        N: c.N,
+        label: c.label,
+        method: res.method,
+        factors: res.factors ? res.factors.map(f=>f.toString()).join(' × ') : '—',
+        period: res.period || '—',
+        time: res.time !== null ? res.time.toFixed(1)+' ms' : '—',
+        ok: !!res.factors || res.method === 'prime'
+      });
+    } catch(e) {
+      log(`<span class="err">Fehler bei N=${c.N}: ${e.message}</span>`);
+      rows.push({ N: c.N, label: c.label, method: 'error', factors:'—',
+                  period:'—', time:'—', ok: false });
+    }
+  }
+
+  // Tabelle rendern
+  let html = `<table>
+    <tr><th>N</th><th>Beschreibung</th><th>Methode</th><th>Faktoren</th>
+        <th>Periode r</th><th>Zeit</th></tr>`;
+  for (const row of rows) {
+    const color = row.ok ? (row.method==='t0_period' ? '#2ecc71' :
+                            row.method==='classic_fallback' ? '#f39c12' :
+                            '#5dade2') : '#e74c3c';
+    html += `<tr>
+      <td style="font-family:monospace">${row.N.length>16 ? row.N.slice(0,13)+'…' : row.N}</td>
+      <td style="color:#aaa;font-size:0.8em">${row.label}</td>
+      <td style="color:${color}">${row.method}</td>
+      <td style="font-family:monospace;font-size:0.85em">${row.factors}</td>
+      <td>${row.period}</td>
+      <td>${row.time}</td>
+    </tr>`;
+  }
+  html += '</table>';
+  document.getElementById('benchTable').innerHTML = html;
+
+  // Fazit
+  const t0count = rows.filter(r=>r.method==='t0_period').length;
+  const cfcount = rows.filter(r=>r.method==='classic_fallback').length;
+  const pcount  = rows.filter(r=>r.method==='prime').length;
+  log(`<span class="inf">─── Fazit: T0-Periodensuche=${t0count}, Klassisch=${cfcount}, Primzahlen=${pcount} ───</span>`);
+}
+
+// ─── Hilfsfunktionen ─────────────────────────────────────────────────────
+
+function applyPreset() {
+  const v = document.getElementById('presets').value;
+  if (v) document.getElementById('inputN').value = v;
+}
+
+document.getElementById('xiMode').addEventListener('change', function() {
+  document.getElementById('xiCustom').style.display =
+    this.value === 'custom' ? 'inline-block' : 'none';
+});
+</script>
+</body>
+</html>

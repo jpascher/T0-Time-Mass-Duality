@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Primzahl-Periodizität — Lücken, Muster, λ(N)-Verbindung</title>
+<style>
+  body { font-family: 'Segoe UI', sans-serif; background: #0f0f1a; color: #e0e0e0;
+         margin: 0; padding: 20px; }
+  .container { max-width: 1020px; margin: 0 auto; background: #1a1a2e;
+               border-radius: 12px; padding: 28px; border: 1px solid #2a2a4a; }
+  h1 { color: #7eb8f7; text-align: center; font-size: 1.7em; margin-bottom: 4px; }
+  .subtitle { text-align: center; color: #888; margin-bottom: 20px;
+              font-size: 0.88em; line-height: 1.6; }
+  h2 { color: #5dade2; border-left: 4px solid #5dade2; padding-left: 12px;
+       font-size: 1.05em; margin: 22px 0 10px; }
+  .panel { background: #16213e; border: 1px solid #2a3f5f; border-radius: 8px;
+           padding: 16px; margin: 12px 0; }
+  .row { display: flex; align-items: center; gap: 12px; margin: 8px 0; flex-wrap: wrap; }
+  label { min-width: 160px; font-size: 0.88em; color: #aaa; }
+  input, select { background: #0f0f23; border: 1px solid #3a3a6a; border-radius: 6px;
+                  color: #e0e0e0; padding: 7px 11px; font-size: 0.9em; flex: 1;
+                  min-width: 150px; }
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+  button { padding: 9px 18px; border: none; border-radius: 6px; cursor: pointer;
+           font-weight: bold; font-size: 0.88em; transition: 0.2s; }
+  .btn-a { background: #27ae60; color:#fff; }
+  .btn-b { background: #8e44ad; color:#fff; }
+  .btn-c { background: #2980b9; color:#fff; }
+  .btn-d { background: #c0392b; color:#fff; }
+  .btn-x { background: #555;    color:#fff; }
+  button:hover { opacity:0.82; transform:translateY(-1px); }
+  button:disabled { opacity:0.4; cursor:not-allowed; transform:none; }
+  .log { background: #0a0a15; border: 1px solid #2a2a4a; border-radius: 8px;
+         padding: 14px; font-family: 'Courier New', monospace; font-size: 0.82em;
+         min-height: 60px; max-height: 320px; overflow-y: auto; line-height: 1.55; }
+  .ok  {color:#2ecc71} .warn{color:#f39c12} .err{color:#e74c3c}
+  .inf {color:#5dade2} .dim {color:#555}    .hi {color:#f7dc6f}
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+           gap:9px; margin:12px 0; }
+  .stat { background:#16213e; border:1px solid #2a3f5f; border-radius:8px;
+          padding:10px; text-align:center; }
+  .stat-val { font-size:1.35em; font-weight:bold; color:#7eb8f7; }
+  .stat-lbl { font-size:0.75em; color:#777; margin-top:3px; }
+  .prog-wrap { background:#0a0a20; border-radius:6px; height:12px;
+               overflow:hidden; margin:8px 0; }
+  .prog-bar  { height:100%; background:linear-gradient(90deg,#2980b9,#27ae60);
+               transition:width 0.1s; }
+  canvas { width:100%; border-radius:6px; background:#0a0a18;
+           border:1px solid #2a2a4a; display:block; margin-top:8px; }
+  .theory { background:#1a2a1a; border:1px solid #2a4a2a; border-radius:6px;
+            padding:14px; font-size:0.86em; color:#8bc34a; margin:10px 0;
+            line-height:1.7; }
+  .result-box { border-radius:8px; padding:14px; margin:10px 0; font-size:0.88em;
+                line-height:1.6; }
+  .confirm {background:#1a2a1a;border:1px solid #27ae60;color:#2ecc71}
+  .neutral {background:#1a1a2a;border:1px solid #5dade2;color:#7eb8f7}
+  table { width:100%; border-collapse:collapse; font-size:0.82em; margin-top:8px; }
+  th { background:#1e3050; color:#7eb8f7; padding:7px 9px; text-align:left; }
+  td { padding:5px 9px; border-bottom:1px solid #1a1a3a; font-family:monospace; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🔢 Primzahl-Periodizität</h1>
+<div class="subtitle">
+  Primzahllücken · Restklassenmuster · Primorial-Perioden · Verbindung zu λ(N)<br>
+  Alle Primzahlen &gt; 3 liegen auf 6k±1 — aber welche tieferen Muster gibt es?
+</div>
+
+<div class="theory">
+  <strong>Was wir untersuchen:</strong><br>
+  1. <strong>Lückenverteilung:</strong> Die Abstände zwischen aufeinanderfolgenden Primzahlen — 
+     haben sie eine charakteristische Verteilung?<br>
+  2. <strong>Restklassenmuster:</strong> Primzahlen mod 6, mod 30, mod 210 (Primorials) — 
+     welche Restklassen werden bevorzugt?<br>
+  3. <strong>p−1 Struktur:</strong> Was ist die typische Glattheit von p−1 
+     und wie bestimmt das λ(N)?<br>
+  4. <strong>Verbindung zu λ(N):</strong> Wie hängt die Periodenstruktur von N = p·q 
+     mit den Primzahlmustern zusammen?
+</div>
+
+<!-- Test A: Primzahllücken -->
+<div class="panel">
+  <h2>📊 Test A — Primzahllücken und ihre Periodizität</h2>
+  <div class="row">
+    <label>Primzahlen bis</label>
+    <input type="number" id="tA_limit" value="100000" min="1000" max="10000000">
+    <label>Histogram-Bins</label>
+    <input type="number" id="tA_bins" value="60" min="20" max="200">
+  </div>
+  <div class="btns">
+    <button class="btn-a" id="btnA" onclick="runGaps()">▶ Lückenanalyse</button>
+    <button class="btn-x" onclick="clearLog('logA')">✕</button>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-val" id="sAPrimes">—</div>
+      <div class="stat-lbl">Primzahlen</div></div>
+    <div class="stat"><div class="stat-val" id="sAMed">—</div>
+      <div class="stat-lbl">Median Lücke</div></div>
+    <div class="stat"><div class="stat-val" id="sAMax">—</div>
+      <div class="stat-lbl">Max Lücke</div></div>
+    <div class="stat"><div class="stat-val" id="sADom">—</div>
+      <div class="stat-lbl">Dom. Lücke</div></div>
+    <div class="stat"><div class="stat-val" id="sADiv">—</div>
+      <div class="stat-lbl">% durch 6 teilbar</div></div>
+  </div>
+  <canvas id="chartA" height="180"></canvas>
+  <div class="log" id="logA"><span class="dim">Bereit.</span></div>
+</div>
+
+<!-- Test B: Restklassenmuster -->
+<div class="panel">
+  <h2>🔄 Test B — Restklassenmuster (mod Primorial)</h2>
+  <div class="row">
+    <label>Primzahlen bis</label>
+    <input type="number" id="tB_limit" value="50000" min="1000">
+    <label>Modulus</label>
+    <select id="tB_mod">
+      <option value="6">6 = 2·3</option>
+      <option value="30" selected>30 = 2·3·5</option>
+      <option value="210">210 = 2·3·5·7</option>
+      <option value="2310">2310 = 2·3·5·7·11</option>
+    </select>
+  </div>
+  <div class="btns">
+    <button class="btn-b" id="btnB" onclick="runResidues()">▶ Restklassen analysieren</button>
+    <button class="btn-x" onclick="clearLog('logB')">✕</button>
+  </div>
+  <canvas id="chartB" height="180"></canvas>
+  <div class="log" id="logB"><span class="dim">Bereit.</span></div>
+</div>
+
+<!-- Test C: p-1 Struktur -->
+<div class="panel">
+  <h2>⚙️ Test C — p−1 Glattheit und λ(N)-Bestimmung</h2>
+  <div class="row">
+    <label>Primzahlen bis</label>
+    <input type="number" id="tC_limit" value="10000" min="100">
+    <label>N = p·q Stichproben</label>
+    <input type="number" id="tC_samples" value="500" min="50">
+  </div>
+  <div class="btns">
+    <button class="btn-c" id="btnC" onclick="runSmooth()">▶ p−1 Glattheit und λ(N)</button>
+    <button class="btn-x" onclick="clearLog('logC')">✕</button>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-val" id="sCLamSmall">—</div>
+      <div class="stat-lbl">λ(N)/N &lt; 0.1</div></div>
+    <div class="stat"><div class="stat-val" id="sCLamMed">—</div>
+      <div class="stat-lbl">λ(N)/N 0.1–0.4</div></div>
+    <div class="stat"><div class="stat-val" id="sCLamLarge">—</div>
+      <div class="stat-lbl">λ(N)/N &gt; 0.4</div></div>
+    <div class="stat"><div class="stat-val" id="sCGcdMed">—</div>
+      <div class="stat-lbl">Median gcd(p−1,q−1)</div></div>
+  </div>
+  <canvas id="chartC" height="180"></canvas>
+  <div class="log" id="logC"><span class="dim">Bereit.</span></div>
+</div>
+
+<!-- Test D: Periodenmuster in Primzahlsequenz -->
+<div class="panel">
+  <h2>🌀 Test D — Hat die Primzahlsequenz selbst eine Periode?</h2>
+  <div class="row">
+    <label>Primzahlen bis</label>
+    <input type="number" id="tD_limit" value="200000" min="1000">
+    <label>Autokorrelations-Lags</label>
+    <input type="number" id="tD_lags" value="100" min="10" max="500">
+  </div>
+  <div class="btns">
+    <button class="btn-d" id="btnD" onclick="runAutocorr()">▶ Autokorrelation der Lücken</button>
+    <button class="btn-x" onclick="clearLog('logD')">✕</button>
+  </div>
+  <canvas id="chartD" height="180"></canvas>
+  <div class="log" id="logD"><span class="dim">Bereit.</span></div>
+  <div id="resultD"></div>
+</div>
+
+</div>
+
+<script>
+// ─── Primzahlsieb ────────────────────────────────────────────────────────
+
+function sieve(limit) {
+  const composite = new Uint8Array(limit+1);
+  composite[0]=composite[1]=1;
+  for(let i=2;i*i<=limit;i++)
+    if(!composite[i]) for(let j=i*i;j<=limit;j+=i) composite[j]=1;
+  const primes=[];
+  for(let i=2;i<=limit;i++) if(!composite[i]) primes.push(i);
+  return primes;
+}
+
+function gcd(a,b){ while(b){[a,b]=[b,a%b];} return a; }
+function lcm(a,b){ return a/gcd(a,b)*b; }
+
+function smoothness(n) {
+  // Größter Primfaktor von n
+  let m=n, lf=1;
+  for(let p=2;p*p<=m;p++){while(m%p===0){lf=p;m=Math.floor(m/p);}}
+  return m>1?m:lf;
+}
+
+function smallestPrimeFactor(n){
+  if(n%2===0) return 2;
+  for(let i=3;i*i<=n;i+=2) if(n%i===0) return i;
+  return n;
+}
+
+// ─── Hilfsfunktionen ─────────────────────────────────────────────────────
+
+function logLine(id,html){
+  const el=document.getElementById(id);
+  el.innerHTML+=html+'\n'; el.scrollTop=el.scrollHeight;
+}
+function clearLog(id){document.getElementById(id).innerHTML='<span class="dim">Log geleert.</span>\n';}
+function median(arr){ if(!arr.length)return null;
+  const s=[...arr].sort((a,b)=>a-b); const m=Math.floor(s.length/2);
+  return s.length%2?s[m]:(s[m-1]+s[m])/2; }
+function mean(arr){ return arr.reduce((a,b)=>a+b,0)/arr.length; }
+function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
+
+// ─── Zeichenfunktionen ────────────────────────────────────────────────────
+
+function drawBar(canvasId, labels, values, title, color='#2980b9', highlight=null) {
+  const canvas=document.getElementById(canvasId);
+  canvas.width=canvas.offsetWidth||900; canvas.height=180;
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#0a0a18'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  if(!values.length) return;
+  const W=canvas.width, H=canvas.height;
+  const pad={l:45,r:10,t:25,b:35};
+  const maxV=Math.max(...values);
+  const bw=(W-pad.l-pad.r)/values.length;
+
+  values.forEach((v,i)=>{
+    const bh=(v/maxV)*(H-pad.t-pad.b);
+    const x=pad.l+i*bw;
+    const y=H-pad.b-bh;
+    const isHi=highlight&&labels[i]===highlight;
+    ctx.fillStyle=isHi?'#2ecc71':color+'aa';
+    ctx.fillRect(x,y,bw-1,bh);
+  });
+
+  ctx.strokeStyle='#333'; ctx.lineWidth=1;
+  ctx.beginPath();
+  ctx.moveTo(pad.l,pad.t); ctx.lineTo(pad.l,H-pad.b);
+  ctx.lineTo(W-pad.r,H-pad.b); ctx.stroke();
+
+  // X labels (every nth)
+  const step=Math.max(1,Math.floor(values.length/12));
+  ctx.fillStyle='#666'; ctx.font='9px monospace';
+  labels.forEach((l,i)=>{
+    if(i%step===0){
+      const x=pad.l+i*bw+bw/2;
+      ctx.fillText(String(l).length>5?String(l).slice(0,5):l, x-10, H-5);
+    }
+  });
+  ctx.fillStyle='#888'; ctx.font='10px sans-serif';
+  ctx.fillText(title, pad.l+2, pad.t-8);
+}
+
+function drawLine(canvasId, xvals, yvals, title, color='#5dade2', refLines=[]) {
+  const canvas=document.getElementById(canvasId);
+  canvas.width=canvas.offsetWidth||900; canvas.height=180;
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#0a0a18'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  if(!yvals.length) return;
+  const W=canvas.width, H=canvas.height;
+  const pad={l:45,r:10,t:25,b:30};
+  const minY=Math.min(...yvals), maxY=Math.max(...yvals);
+  const rangeY=maxY-minY||1;
+  const toX=(i)=>pad.l+i/(xvals.length-1)*(W-pad.l-pad.r);
+  const toY=(v)=>H-pad.b-(v-minY)/rangeY*(H-pad.t-pad.b);
+
+  // Ref lines
+  refLines.forEach(({v,col,label})=>{
+    if(v<minY||v>maxY) return;
+    ctx.strokeStyle=col||'#555'; ctx.lineWidth=1; ctx.setLineDash([4,3]);
+    ctx.beginPath(); ctx.moveTo(pad.l,toY(v)); ctx.lineTo(W-pad.r,toY(v)); ctx.stroke();
+    ctx.setLineDash([]);
+    if(label){ ctx.fillStyle=col||'#555'; ctx.font='9px monospace'; ctx.fillText(label,W-pad.r-30,toY(v)-3); }
+  });
+
+  // Line
+  ctx.strokeStyle=color; ctx.lineWidth=1.5;
+  ctx.beginPath();
+  xvals.forEach((x,i)=>{ i===0?ctx.moveTo(toX(i),toY(yvals[i])):ctx.lineTo(toX(i),toY(yvals[i])); });
+  ctx.stroke();
+
+  // Axes
+  ctx.strokeStyle='#333'; ctx.lineWidth=1;
+  ctx.beginPath();
+  ctx.moveTo(pad.l,pad.t); ctx.lineTo(pad.l,H-pad.b);
+  ctx.lineTo(W-pad.r,H-pad.b); ctx.stroke();
+
+  // X labels
+  const step=Math.max(1,Math.floor(xvals.length/10));
+  ctx.fillStyle='#666'; ctx.font='9px monospace';
+  xvals.forEach((x,i)=>{ if(i%step===0) ctx.fillText(x,toX(i)-8,H-5); });
+  ctx.fillStyle='#888'; ctx.font='10px sans-serif';
+  ctx.fillText(title,pad.l+2,pad.t-8);
+}
+
+// ─── Test A: Primzahllücken ───────────────────────────────────────────────
+
+async function runGaps(){
+  const limit=parseInt(document.getElementById('tA_limit').value)||100000;
+  const bins=parseInt(document.getElementById('tA_bins').value)||60;
+  const btn=document.getElementById('btnA');
+  btn.disabled=true; clearLog('logA');
+
+  logLine('logA',`<span class="inf">Siebe Primzahlen bis ${limit.toLocaleString()}...</span>`);
+  await sleep(0);
+
+  const primes=sieve(limit);
+  const gaps=[];
+  for(let i=1;i<primes.length;i++) gaps.push(primes[i]-primes[i-1]);
+
+  // Häufigkeit der Lücken
+  const freq={};
+  gaps.forEach(g=>{ freq[g]=(freq[g]||0)+1; });
+  const gapKeys=Object.keys(freq).map(Number).sort((a,b)=>a-b);
+
+  // Statistiken
+  const med=median(gaps);
+  const maxGap=Math.max(...gaps);
+  const dom=gapKeys.reduce((a,b)=>freq[a]>freq[b]?a:b);
+  const div6=gapKeys.filter(g=>g%6===0).reduce((s,g)=>s+freq[g],0);
+  const div6pct=(100*div6/gaps.length).toFixed(1);
+
+  document.getElementById('sAPrimes').textContent=primes.length.toLocaleString();
+  document.getElementById('sAMed').textContent=med;
+  document.getElementById('sAMax').textContent=maxGap;
+  document.getElementById('sADom').textContent=dom;
+  document.getElementById('sADiv').textContent=div6pct+'%';
+
+  // Histogram (nur häufige Lücken)
+  const topGaps=gapKeys.filter(g=>freq[g]>gaps.length/200).slice(0,bins);
+  drawBar('chartA', topGaps, topGaps.map(g=>freq[g]),
+    'Häufigkeit der Primzahllücken', '#8e44ad', 6);
+
+  logLine('logA',`Primzahlen bis ${limit}: ${primes.length.toLocaleString()}`);
+  logLine('logA',`Lückenverteilung (Top 15):`);
+  gapKeys.slice(0,15).forEach(g=>{
+    const pct=(100*freq[g]/gaps.length).toFixed(1);
+    const bar='█'.repeat(Math.round(freq[g]/gaps.length*40));
+    logLine('logA',`  Lücke ${String(g).padStart(4)}: ${String(freq[g]).padStart(6)}× (${pct}%) ${g%6===0?'<span class="ok">[÷6]</span>':''} ${bar}`);
+  });
+  logLine('logA',`<br><span class="hi">Anteil durch 6 teilbarer Lücken: ${div6pct}%</span>`);
+  logLine('logA',`<span class="hi">Dominante Lücke: ${dom} — Muster: ${dom%6===0?'Vielfaches von 6':'nicht ÷6'}</span>`);
+  logLine('logA',`<br><span class="inf">Interpretation: Primzahlen mod 6 ∈ {1,5} → Differenzen ∈ {2,4,6,8,...} mit Periode 6</span>`);
+  btn.disabled=false;
+}
+
+// ─── Test B: Restklassenmuster ────────────────────────────────────────────
+
+async function runResidues(){
+  const limit=parseInt(document.getElementById('tB_limit').value)||50000;
+  const mod=parseInt(document.getElementById('tB_mod').value)||30;
+  const btn=document.getElementById('btnB'); btn.disabled=true; clearLog('logB');
+
+  logLine('logB',`<span class="inf">Analysiere Primzahlen bis ${limit.toLocaleString()} mod ${mod}...</span>`);
+  await sleep(0);
+
+  const primes=sieve(limit);
+  // Nur Restklassen die teilerfremd zu mod sind (erlaubte Residuen)
+  const allowed=[];
+  for(let r=1;r<mod;r++) if(gcd(r,mod)===1) allowed.push(r);
+
+  const freq={};
+  allowed.forEach(r=>freq[r]=0);
+  primes.forEach(p=>{ if(p>mod){ const r=p%mod; if(freq[r]!==undefined) freq[r]++; } });
+
+  const total=Object.values(freq).reduce((a,b)=>a+b,0);
+  const expected=total/allowed.length;
+
+  // Chi-Quadrat-Test auf Gleichverteilung
+  const chi2=allowed.reduce((s,r)=>s+Math.pow(freq[r]-expected,2)/expected,0);
+  const dof=allowed.length-1;
+
+  drawBar('chartB', allowed, allowed.map(r=>freq[r]),
+    `Primzahlen mod ${mod} (Häufigkeit nach Restklasse)`, '#2980b9');
+
+  logLine('logB',`Erlaubte Restklassen mod ${mod}: ${allowed.length} (teilerfremd)`);
+  logLine('logB',`Erwartet pro Klasse (Gleichverteilung): ${Math.round(expected)}`);
+  logLine('logB',`<br>Top Restklassen:`);
+  allowed.sort((a,b)=>freq[b]-freq[a]).slice(0,10).forEach(r=>{
+    const dev=((freq[r]-expected)/expected*100).toFixed(1);
+    const sign=dev>0?'+':'';
+    logLine('logB',`  mod ${mod} ≡ ${String(r).padStart(4)}: ${freq[r]} (${sign}${dev}%)`);
+  });
+  logLine('logB',`<br><span class="hi">χ²-Test: χ²=${chi2.toFixed(1)}, df=${dof}</span>`);
+  logLine('logB',chi2/dof<1.5
+    ? `<span class="ok">→ Nahezu gleichmäßige Verteilung (Dirichlet-Theorem bestätigt)</span>`
+    : `<span class="warn">→ Ungleichmäßige Verteilung — Bias erkennbar</span>`);
+  logLine('logB',`<br><span class="inf">Interpretation: Primzahlen verteilen sich gleichmäßig auf alle zu ${mod} teilerfremden Restklassen (Dirichlet). Die Periode ${mod} ist eine Symmetrieperiode, keine Häufungsperiode.</span>`);
+  btn.disabled=false;
+}
+
+// ─── Test C: p-1 Glattheit und λ(N) ──────────────────────────────────────
+
+async function runSmooth(){
+  const limit=parseInt(document.getElementById('tC_limit').value)||10000;
+  const samples=parseInt(document.getElementById('tC_samples').value)||500;
+  const btn=document.getElementById('btnC'); btn.disabled=true; clearLog('logC');
+
+  logLine('logC',`<span class="inf">Berechne p−1 Glattheit für Primzahlen bis ${limit}...</span>`);
+  await sleep(0);
+
+  const primes=sieve(limit).filter(p=>p>2);
+  const smoothVals=primes.map(p=>smoothness(p-1));
+  const gcdVals=[], lamRatios=[];
+
+  // Zufällige Paare p,q → λ(N)/N
+  for(let i=0;i<samples&&i<primes.length-1;i++){
+    const p=primes[Math.floor(Math.random()*primes.length)];
+    const q=primes[Math.floor(Math.random()*primes.length)];
+    if(p===q) continue;
+    const g=gcd(p-1,q-1);
+    gcdVals.push(g);
+    const lam=lcm(p-1,q-1);
+    lamRatios.push(lam/(p*q));
+  }
+
+  // Kategorien
+  const small=lamRatios.filter(x=>x<0.1).length;
+  const med2=lamRatios.filter(x=>x>=0.1&&x<0.4).length;
+  const large=lamRatios.filter(x=>x>=0.4).length;
+  const gcdMed=median(gcdVals);
+
+  document.getElementById('sCLamSmall').textContent=(100*small/lamRatios.length).toFixed(0)+'%';
+  document.getElementById('sCLamMed').textContent=(100*med2/lamRatios.length).toFixed(0)+'%';
+  document.getElementById('sCLamLarge').textContent=(100*large/lamRatios.length).toFixed(0)+'%';
+  document.getElementById('sCGcdMed').textContent=gcdMed;
+
+  // Histogram der Glattheitswerte (log-Skala)
+  const smoothFreq={};
+  smoothVals.forEach(s=>{ smoothFreq[s]=(smoothFreq[s]||0)+1; });
+  const skeys=Object.keys(smoothFreq).map(Number).sort((a,b)=>a-b).slice(0,40);
+  drawBar('chartC', skeys, skeys.map(k=>smoothFreq[k]),
+    'Größter Primfaktor von p−1 (Glattheit)', '#c0392b');
+
+  logLine('logC',`Analysierte Primzahlen: ${primes.length}`);
+  logLine('logC',`Median Glattheit von p−1: ${median(smoothVals)}`);
+  logLine('logC',`Häufigste Glattheitswerte:`);
+  skeys.slice(0,10).forEach(k=>{
+    logLine('logC',`  lgf(p−1)=${k}: ${smoothFreq[k]}× (${(100*smoothFreq[k]/primes.length).toFixed(1)}%)`);
+  });
+  logLine('logC',`<br>λ(N)/N Verteilung für ${lamRatios.length} zufällige N=p·q:`);
+  logLine('logC',`  λ(N)/N < 0.1:  ${(100*small/lamRatios.length).toFixed(1)}%  (glatte Primen → kleine Periode)`);
+  logLine('logC',`  0.1–0.4:        ${(100*med2/lamRatios.length).toFixed(1)}%`);
+  logLine('logC',`  > 0.4:          ${(100*large/lamRatios.length).toFixed(1)}%  (harte Primen → große Periode)`);
+  logLine('logC',`  Median gcd(p−1,q−1): ${gcdMed}`);
+  logLine('logC',`<br><span class="hi">Schlüsselerkenntnis: Die Periodenstruktur von N wird vollständig durch gcd(p−1,q−1) bestimmt. Dieser Wert ist eine Eigenschaft der Primzahlen selbst — nicht des Zahlenraums.</span>`);
+  btn.disabled=false;
+}
+
+// ─── Test D: Autokorrelation der Primzahllücken ───────────────────────────
+
+async function runAutocorr(){
+  const limit=parseInt(document.getElementById('tD_limit').value)||200000;
+  const maxLag=parseInt(document.getElementById('tD_lags').value)||100;
+  const btn=document.getElementById('btnD'); btn.disabled=true;
+  clearLog('logD'); document.getElementById('resultD').innerHTML='';
+
+  logLine('logD',`<span class="inf">Berechne Autokorrelation der Primzahllücken bis ${limit.toLocaleString()}...</span>`);
+  await sleep(0);
+
+  const primes=sieve(limit);
+  const gaps=[];
+  for(let i=1;i<primes.length;i++) gaps.push(primes[i]-primes[i-1]);
+
+  const mn=mean(gaps);
+  const variance=gaps.reduce((s,g)=>s+(g-mn)**2,0)/gaps.length;
+
+  // Autokorrelation für Lags 1..maxLag
+  const acf=[];
+  for(let lag=1;lag<=maxLag;lag++){
+    let cov=0;
+    const n=gaps.length-lag;
+    for(let i=0;i<n;i++) cov+=(gaps[i]-mn)*(gaps[i+lag]-mn);
+    acf.push(cov/(n*variance));
+  }
+
+  // Zeichne ACF
+  const lags=Array.from({length:maxLag},(_,i)=>i+1);
+  drawLine('chartD', lags, acf,
+    'Autokorrelation der Primzahllücken (ACF)',
+    '#f39c12',
+    [{v:0,col:'#555',label:'0'},
+     {v:1.96/Math.sqrt(gaps.length),col:'#2ecc7155',label:'+95%'},
+     {v:-1.96/Math.sqrt(gaps.length),col:'#2ecc7155',label:'-95%'}]);
+
+  // Peaks finden
+  const threshold=2/Math.sqrt(gaps.length);
+  const sigPeaks=lags.filter((l,i)=>Math.abs(acf[i])>threshold);
+  const strongPeaks=lags.filter((l,i)=>acf[i]>threshold*2);
+
+  logLine('logD',`Analysierte Lücken: ${gaps.length.toLocaleString()}`);
+  logLine('logD',`Mittlere Lücke: ${mn.toFixed(2)}`);
+  logLine('logD',`95%-Signifikanzschwelle: ±${threshold.toFixed(4)}`);
+  logLine('logD',`Signifikante ACF-Peaks: ${sigPeaks.length} (bei Lags: ${sigPeaks.slice(0,15).join(', ')}${sigPeaks.length>15?'...':''})`);
+  if(strongPeaks.length>0)
+    logLine('logD',`<span class="ok">Starke positive Peaks bei: ${strongPeaks.slice(0,10).join(', ')}</span>`);
+
+  // Interpretation
+  const hasPeriodic=strongPeaks.length>3;
+  const verdict=hasPeriodic?'confirm':'neutral';
+  const vtext=hasPeriodic
+    ? `✓ Die Primzahllücken zeigen signifikante Autokorrelation bei mehreren Lags — 
+       periodische Struktur nachweisbar. Die dominanten Peaks liegen bei 
+       ${strongPeaks.slice(0,5).join(', ')}.`
+    : `≈ Keine starke periodische Struktur in den Primzahllücken nachweisbar. 
+       Die Lücken verhalten sich näherungsweise wie unkorreliertes Rauschen 
+       — konsistent mit der Riemann-Hypothese (zufällige Verteilung auf der kritischen Linie).`;
+
+  document.getElementById('resultD').innerHTML=
+    `<div class="result-box ${verdict}">${vtext}<br><br>
+     <strong>Gesamtinterpretation:</strong><br>
+     Primzahlen haben <em>keine</em> klassische Periode wie ein Signal — 
+     aber sie haben eine <strong>Symmetriestruktur</strong> (Dirichlet: 
+     Gleichverteilung auf Restklassen mod Primorial) und eine 
+     <strong>statistisch charakteristische Lückenverteilung</strong> 
+     (dominierte durch Vielfache von 6).<br><br>
+     Diese Struktur ist basissystemunabhängig und bestimmt über gcd(p−1,q−1) 
+     direkt λ(N) — und damit die Schwierigkeit der Periodensuche bei Shor.<br><br>
+     <strong>Der Schlüssel liegt nicht in einem globalen ξ-Parameter, 
+     sondern in der individuellen gcd-Struktur der Primfaktoren von N.</strong>
+     </div>`;
+
+  btn.disabled=false;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,774 @@
+% ============================================================
+% Inhalt: Spin lesen und schreiben --- und darüber hinaus
+% Spin-Manipulation, Spin-Auslese und
+% Qubits mit mehr als zwei Zuständen im FFGFT-Rahmen
+% Neufassung März 2026
+% ============================================================
+
+% Dirac-Notation (braket-Paket nicht im Preamble)
+\providecommand{\ket}[1]{\left|#1\right\rangle}
+\providecommand{\bra}[1]{\left\langle#1\right|}
+\providecommand{\braket}[2]{\left\langle#1\middle|#2\right\rangle}
+
+% ============================================================
+\section{Spin beeinflussen --- mehr als nur Magnetfelder}
+\label{sec:spin-manipulieren}
+% ============================================================
+
+In Kapitel~173 erschien der Spin im Rahmen der Ising-Maschine und
+des minimalen Quantenresonators kurz: zwei erlaubte Orientierungen
+einer Torsionskonfiguration --- Spin-up und Spin-down.
+Die Frage wie man diese Orientierung von außen dreht
+und wie man sie ausliest, ist die Brücke zwischen dem abstrakten
+Resonatorbild und der technischen Realisierung.
+
+Das Magnetfeld ist der historisch erste und anschaulichste Weg ---
+aber bei weitem nicht der einzige.
+
+% ============================================================
+\subsection{Methode 1: Magnetfeld --- Zeeman-Effekt}
+\label{sec:zeeman}
+% ============================================================
+
+Ein statisches Magnetfeld $\mathbf{B}$ spaltet die beiden
+Spin-Zustände energetisch auf:
+\begin{equation}
+  \Delta E_Z \;=\; g^* \mu_B B,
+\end{equation}
+wobei $g^*$ der effektive $g$-Faktor des Materials und
+$\mu_B$ das Bohr-Magneton sind.
+Für GaAs gilt $g^* \approx -0{,}44$ ---
+deutlich kleiner als beim freien Elektron ($g = 2$),
+weil die Bandstruktur des Kristalls die effektive
+Spin-Bahn-Kopplung modifiziert.
+
+Ein resonanter Hochfrequenzpuls bei der Larmor-Frequenz
+$\nu_L = g^* \mu_B B / h$ dreht den Spin gezielt um.
+Das ist das Prinzip der Elektronenspinresonanz (ESR)
+und --- im Kern --- auch der Magnetresonanztomographie.
+
+\begin{keypoint}[FFGFT-Sprache: Magnetfeld als globales Torsionsfeld]
+Ein äußeres Magnetfeld legt eine bevorzugte Richtung
+im Torsionsfeld fest. Es bricht die Symmetrie zwischen
+Spin-up und Spin-down energetisch auf.
+Der Hochfrequenzpuls bei $\nu_L$ ist eine periodisch
+oszillierende Torsionsstörung --- resonant, wenn ihre
+Frequenz genau der Energiedifferenz der beiden
+Torsionskonfigurationen entspricht.
+\end{keypoint}
+
+% ============================================================
+\subsection{Methode 2: Elektrisches Feld --- EDSR}
+\label{sec:edsr}
+% ============================================================
+
+Elektrische Felder koppeln nicht direkt an den Spin ---
+das Elektron hat keine elektrische Dipolmoment-Komponente
+im Spinraum. Aber indirekt koppeln sie sehr wohl,
+über die \textbf{Spin-Bahn-Kopplung}:
+
+Das Elektron, das sich im elektrischen Feld des Kristallgitters
+bewegt, sieht in seinem eigenen Ruhesystem ein effektives
+Magnetfeld. Dieses interne Feld dreht den Spin.
+Ein schnell variierendes äußeres elektrisches Feld
+kann diesen Mechanismus resonant ansteuern ---
+das nennt sich \textbf{EDSR} (Electric Dipole Spin Resonance).
+
+\begin{important}[Vorteil gegenüber Magnetfeldmethoden]
+Elektrische Felder lassen sich mit Gate-Elektroden
+auf wenigen Nanometern lokal erzeugen und in unter
+einer Nanosekunde schalten --- Magnetfelder nicht.
+Für integrierte Qubit-Arrays ist EDSR daher die
+bevorzugte Methode zur Einzel-Qubit-Rotation.
+\end{important}
+
+In FFGFT-Sprache: das elektrische Feld deformiert
+die Resonatorgeometrie lokal --- und über die
+Spin-Bahn-Kopplung transliert diese Geometrieänderung
+direkt in eine Torsionsänderung des Spinfreiheitsgrades.
+Die Kopplung ist nicht direkt, aber geometrisch vermittelt.
+
+% ============================================================
+\subsection{Methode 3: Zirkulär polarisiertes Licht}
+\label{sec:optisch}
+% ============================================================
+
+Zirkulär polarisiertes Licht ($\sigma^+$ oder $\sigma^-$)
+trägt Drehimpuls $\pm\hbar$ pro Photon.
+Bei resonanter Anregung eines Quantenpunkts überträgt
+ein $\sigma^+$-Photon diesen Drehimpuls direkt auf
+das erzeugte Exziton --- und damit auf den Elektronenspin.
+
+Das erlaubt \textbf{rein optische Spinpräparation}
+ohne jedes äußere Feld: durch Wahl der Photonpolarisation
+wählt man den Spinzustand.
+
+Ausgelesenes wird über die Polarisation des
+Fluoreszenzlichts: je nach Spinzustand emittiert der
+Quantenpunkt bevorzugt $\sigma^+$ oder $\sigma^-$-Licht.
+Polarisationsmessung $\equiv$ Spinmessung.
+
+\begin{foundation}[FFGFT: Photon überträgt Torsionsdrehimpuls]
+In FFGFT trägt das Photon seinen Drehimpuls als
+topologische Eigenschaft der elektromagnetischen
+Feldtorsion. Bei der Absorption rotiert diese
+Feldtorsion die Elektronentorsion in die
+komplementäre Konfiguration.
+Spin-up und Spin-down sind zwei entgegengesetzte
+Torsionswindungen --- das zirkulare Photon
+schaltet zwischen ihnen um, weil es selbst
+eine gerichtete Windung trägt.
+\end{foundation}
+
+% ============================================================
+\subsection{Methode 4: Austauschwechselwirkung}
+\label{sec:exchange}
+% ============================================================
+
+Wenn zwei Elektronen in benachbarten Quantenpunkten
+räumlich überlappen, koppeln ihre Spins direkt
+aneinander --- die \textbf{Austauschwechselwirkung}
+(exchange interaction) mit Stärke $J$:
+\begin{equation}
+  H_J \;=\; J(t)\;\mathbf{S}_1 \cdot \mathbf{S}_2.
+\end{equation}
+Durch Pulsieren des Gate-Feldes (das den Überlapp und
+damit $J(t)$ steuert) kann man gezielte
+Zwei-Qubit-Operationen ausführen.
+
+Das ist die Basis für \textbf{Spin-Qubit-Gatter}
+in Halbleitersystemen (Loss-DiVincenzo-Modell, 1998).
+Die Stärke: keine externe Mikrowelle nötig ---
+die Kopplung ist rein elektrisch steuerbar.
+
+% ============================================================
+\subsection{Methode 5: Hyperfein-Wechselwirkung}
+\label{sec:hyperfein}
+% ============================================================
+
+Das Elektron im Quantenpunkt wechselwirkt mit den
+Kernspins der $\sim 10^4$--$10^6$ umliegenden Atome.
+Diese Kopplung ist normalerweise ein Problem:
+das fluktuierende Kernspinbad erzeugt ein
+zufälliges effektives Magnetfeld und zerstört
+die Spinpolarisation in Zeiten von $T_2^* \sim 10$--100\,ns.
+
+Aber kontrolliert eingesetzt ist sie ein Werkzeug:
+durch dynamische Entkopplung (schnelle Pulsfolgen
+die die Kernspin-Fluktuationen mitteln)
+kann $T_2$ auf Mikrosekunden verlängert werden.
+In einigen Systemen (z.\,B. Phosphor in Silizium)
+wird der Kernspin selbst als hochstabiles Qubit genutzt
+($T_1 > 1$\,s bei tiefen Temperaturen).
+
+% ============================================================
+\section{Spin auslesen --- fünf Wege}
+\label{sec:spin-auslesen}
+% ============================================================
+
+% ============================================================
+\subsection{Spin-zu-Ladungs-Konversion}
+\label{sec:spin-ladung}
+% ============================================================
+
+Der wichtigste Weg in der Praxis.
+Man wählt das Potential so, dass nur Spin-down
+(oder nur Spin-up) energetisch erlaubt ist,
+aus dem Quantenpunkt heraus zu tunneln.
+Ein einzelnes tunnelndes Elektron erzeugt einen
+messbaren Strompuls im benachbarten
+\textbf{Einzelelektronen-Transistor} (SET).
+
+Kein Signal: Spin-up (geblockt).
+Signal: Spin-down (getunnelt).
+Empfindlichkeit: einzelne Elektronen, Fehlerrate $< 1\,\%$.
+
+\begin{keyresult}[Spin-zu-Ladungs-Konversion: technischer Stand 2025]
+In Si/SiGe- und GaAs-Systemen erreichen
+Spin-zu-Ladungs-Konversions-Readout-Schemen
+Genauigkeiten $> 99{,}5\,\%$ bei Auslesezeiten
+unter $1\,\mu$s --- ausreichend für fehlerkorrigierte
+Quantencomputer nach dem Surface-Code-Schwellenwert.
+\end{keyresult}
+
+% ============================================================
+\subsection{Pauli-Blockade}
+\label{sec:pauli}
+% ============================================================
+
+Eleganter: kein externes Messgerät nötig.
+Das Pauli-Prinzip selbst ist der Detektor.
+
+Zwei benachbarte Quantenpunkte, je ein Elektron.
+Man versucht beide Elektronen in denselben Punkt zu laden.
+Sind die Spins antiparallel: geht (beide passen ins Grundniveau).
+Sind die Spins parallel: geht nicht (Pauli-Verbot) ---
+der Transport ist \textbf{blockiert}.
+
+Messbar als Leitwert-Unterschied: Blockade $\equiv$ gleiche Spins.
+
+\begin{foundation}[FFGFT: Pauli-Blockade als geometrische Inkompatibilität]
+Zwei gleiche Torsionskonfigurationen können nicht
+denselben Resonator belegen --- nicht wegen eines
+postulierten Verbots, sondern weil dieselbe Torsionswindung
+in einem Hohlraum keine zweite stabile Konfiguration
+derselben Art zulässt.
+Das Pauli-Prinzip ist in FFGFT eine geometrische Aussage
+über die Kompatibilität von Feldkonfigurationen ---
+keine unabhängige Quantisierungsregel.
+\end{foundation}
+
+% ============================================================
+\subsection{Faraday- und Kerr-Rotation --- zustandserhaltende Auslese}
+\label{sec:optisch-auslesen}
+% ============================================================
+
+Optische Auslese nutzt dass Spin-up und Spin-down
+an verschiedene optische Übergänge koppeln.
+Zirkulär polarisiertes Licht wird je nach Spinzustand
+unterschiedlich gestreut --- die Polarisation
+des Fluoreszenzlichts verrät den Spinzustand.
+Diese resonante Fluoreszenz ist invasiv: das absorbierte
+Photon regt das System an und verändert seinen Zustand.
+
+Davon grundlegend verschieden ist die
+\textbf{Faraday- bzw. Kerr-Rotation}:
+Ein linear polarisierter Laserstrahl läuft am Quantenpunkt
+\emph{vorbei} --- er wird nicht absorbiert, sondern dreht
+seine Polarisationsebene um einen winzigen Winkel
+$\theta_F \propto S_z$ beim Passieren.
+Der Spinzustand ist aus dem Drehwinkel ablesbar,
+ohne dass ein einziges Photon absorbiert wird.
+
+\begin{keyresult}[Faraday-Rotation: Quantenzustand auslesen ohne ihn zu stören]
+Die Faraday-Rotation ist eine
+\textbf{Quantum-Non-Demolition-Messung} (QND) ---
+eine Auslesemethode die den gemessenen Zustand
+selbst nicht verändert.
+
+Physikalisch: Das Lichtfeld koppelt dispersiv an den Spin ---
+die Wechselwirkung ist so gewählt dass sie \emph{kommutiert}
+mit dem Spin-Operator $S_z$:
+\begin{equation}
+  [H_\text{Faraday},\; S_z] \;=\; 0.
+\end{equation}
+Eine Observable die mit dem Hamiltonoperator kommutiert,
+wird durch die Messung nicht gestört.
+Die Polarisationsdrehung $\theta_F$ ist proportional zu $S_z$
+--- der Eigenwert wird abgelesen, der Eigenzustand bleibt erhalten.
+
+Zeitauflösung: im Pikosekundenbereich.
+Empfindlichkeit: einzelne Spins in Quantenpunkten nachweisbar.
+Der Spinzustand kann \emph{wiederholt} gemessen werden ---
+jede Messung liefert dasselbe Ergebnis.
+\end{keyresult}
+
+\begin{foundation}[FFGFT: QND-Messung als Beweis für stabile Torsionskonfiguration]
+Die Tatsache dass die Faraday-Rotation den Spinzustand
+nicht verändert, ist in FFGFT kein Sonderfall ---
+es ist die direkte Folge der Stabilität der Torsionskonfiguration.
+
+Spin-up ist eine stabile topologische Torsion.
+Ein vorbeilaufendes Photon dreht seine Polarisationsebene
+weil es das Torsionsfeld passiert --- aber es bringt
+die Torsionskonfiguration nicht aus ihrem stabilen Zustand,
+weil die Kopplung so schwach und symmetrisch ist,
+dass kein Energieübertrag in die Torsionsmode stattfindet.
+
+Das ist dieselbe Logik wie bei einem Resonator:
+ein schwaches Signal das die Resonanzfrequenz nicht trifft,
+passiert den Resonator ohne ihn anzuregen.
+Das Photon der Faraday-Messung trifft absichtlich
+\emph{nicht} die Resonanzfrequenz des Übergangs ---
+es liest die topologische Invariante ab, ohne sie zu stören.
+
+\textbf{Der entscheidende Schluss:}
+Wenn eine Messung denselben Zustand immer wieder liefert
+und dabei den Zustand nicht verändert,
+dann hatte der Zustand diesen Wert \emph{vor der Messung}.
+Das ist der empirische Beweis dass stabile
+Torsionskonfigurationen real und definiert existieren ---
+unabhängig davon ob wir sie messen oder nicht.
+Die QND-Messung beweist den Determinismus.
+\end{foundation}
+
+% ============================================================
+\section{Die Grenze von zwei Zuständen --- und wie man sie überwindet}
+\label{sec:jenseits-spin}
+% ============================================================
+
+Ein Spin-Qubit hat zwei Zustände: $\ket{\uparrow}$ und $\ket{\downarrow}$.
+Das ist das absolute Minimum eines Quantenresonators
+(Kapitel~173, Abschnitt über den minimalen Resonator).
+
+Aber ein Quantenpunkt ist kein Zwei-Zustands-System von Natur aus ---
+er hat beliebig viele Energieniveaus.
+Der Spin ist nur das \textit{einfachste} Merkmal.
+
+Es gibt mindestens fünf Strategien wie man aus einem
+Quantenpunkt mehr als zwei unterscheidbare Zustände
+für Quanteninformation gewinnt.
+
+% ============================================================
+\subsection{Strategie 1: Qutrit und Qudit --- mehr Energieniveaus}
+\label{sec:qudit}
+% ============================================================
+
+Statt $\ket{0}$ und $\ket{1}$ nutzt man $\ket{0}$, $\ket{1}$, $\ket{2}$
+--- ein \textbf{Qutrit} (drei Zustände) ---
+oder allgemein $\ket{0}$ bis $\ket{d-1}$:
+ein \textbf{Qudit} der Dimension $d$.
+
+Im Quantenpunkt entspricht das den ersten $d$ Energieniveaus.
+Die Grundformel:
+\begin{equation}
+  E_n \;=\; \frac{n^2 \pi^2 \hbar^2}{2m_\text{eff} R^2},
+  \quad n = 1, 2, \ldots, d.
+\end{equation}
+Für $d = 3$ (Qutrit) braucht man drei unterscheidbare Niveaus
+mit $E_3 - E_2 \gg k_BT$ --- sonst verwischt die thermische
+Besetzung die dritte Stufe.
+
+\begin{important}[Bedingung für stabiles Qudit der Dimension $d$]
+Alle $d$ Niveauabstände müssen die thermische Energie übersteigen:
+\[
+  E_{n+1} - E_n \;=\; (2n+1)\,E_1 \;\gg\; k_BT
+  \quad \text{für alle } n = 1,\ldots,d-1.
+\]
+Der kritischste Abstand ist $E_2 - E_1 = 3E_1$ (der kleinste).
+Qudits hoher Dimension erfordern kleine Quantenpunkte
+oder tiefe Temperaturen --- oder beides.
+\end{important}
+
+Die Informationsdichte eines Qudits:
+$\log_2(d)$ Bits pro Objekt.
+Ein Qutrit kodiert $\log_2(3) \approx 1{,}585$ Bits ---
+58\,\% mehr als ein Qubit pro Objekt.
+Ein Qu\textit{fünf}-it kodiert $\log_2(5) \approx 2{,}32$ Bits.
+
+\begin{keyresult}[Qudit-Effizienz auf der $\xi$-Stufe $N \approx 8$]
+Ein Quantenpunkt mit $R = 3$\,nm bei 4\,K
+hat mindestens 5 thermisch stabile Niveaus
+(alle Abstände $\gg k_BT(4\,\text{K}) = 0{,}34$\,meV).
+Das entspricht einem Qu\textit{fünf}-it mit
+$\log_2(5) \approx 2{,}32$ Bits Informationsinhalt ---
+in einem Resonator der 22\,nm Durchmesser hat.
+\end{keyresult}
+
+% ============================================================
+\subsection{Strategie 2: Orbital-Qubit --- Geometrie statt Energie}
+\label{sec:orbital}
+% ============================================================
+
+Ein Quantenpunkt hat nicht nur verschiedene Energieniveaus ---
+er hat auch verschiedene \textbf{Orbitale} (räumliche
+Wellenformuster mit gleicher Energie, aber unterschiedlicher
+Geometrie): s-, p-, d-artige Zustände wie im Atom.
+
+In einem nicht-sphärischen Quantenpunkt sind die
+p-Orbitale energetisch aufgespalten.
+Man kann die beiden untersten p-Zustände ($p_x$ und $p_y$)
+als Qubit nutzen --- ein \textbf{Orbital-Qubit} ---
+\emph{ohne} auf den Spin zu schauen.
+
+Der Vorteil: Orbital-Zustände koppeln stark an elektrische
+Felder, schwach an magnetische Störfelder.
+Das macht sie potenziell kohärenter in magnetisch
+verrauschten Umgebungen.
+
+% ============================================================
+\subsection{Strategie 3: Exziton-Zahl-Qudit}
+\label{sec:exziton-qudit}
+% ============================================================
+
+Aus Kapitel~173: ein Quantenpunkt kann $0, 1, 2, 3, \ldots$
+Exzitonen gleichzeitig tragen --- diskrete Speicherstufen,
+scharf unterscheidbar.
+
+Diese Exzitonen-Zahl selbst ist ein Qudit:
+\[
+  \ket{0\,\text{Ex}},\quad
+  \ket{1\,\text{Ex}},\quad
+  \ket{2\,\text{Ex}},\quad
+  \ket{3\,\text{Ex}},\;\ldots
+\]
+Das Auslesen erfolgt über die Emissionswellenlänge:
+Ein Biexziton ($\ket{2\,\text{Ex}}$) emittiert bei einer
+anderen Frequenz als ein Exziton ($\ket{1\,\text{Ex}}$)
+--- spektral klar unterscheidbar.
+
+\begin{foundation}[FFGFT: Exziton-Zahl als Torsionspaar-Zahl]
+Jedes Exziton ist ein gebundenes Paar entgegengesetzter
+Torsionskonfigurationen (Elektron + Loch = Torsion + Anti-Torsion).
+Die Exziton-Zahl zählt wie viele solcher Paare
+gleichzeitig im Resonator stabil koexistieren können.
+Die Obergrenze ist durch die Resonatorgeometrie gegeben ---
+zu viele Torsionspaare in einem zu kleinen Raum
+führen zu instabilen Überlagerungen (Auger-Rekombination).
+\end{foundation}
+
+% ============================================================
+\subsection{Strategie 4: Spin-Bahn-Qudit --- Spin und Orbital kombiniert}
+\label{sec:spin-orbital}
+% ============================================================
+
+Der reichhaltigste Zustandsraum entsteht wenn man
+\textbf{Spin} und \textbf{Orbital} kombiniert.
+
+Ein Elektron in einem Quantenpunkt hat:
+\begin{itemize}
+  \item 2 Spinzustände ($\uparrow$, $\downarrow$)
+  \item mehrere Orbitalzustände (s, $p_x$, $p_y$, \ldots)
+\end{itemize}
+Der kombinierte Zustandsraum:
+\begin{equation}
+  \ket{n_\text{orbital},\, m_\text{spin}}
+  \;=\; \ket{1,\uparrow},\;\ket{1,\downarrow},\;
+  \ket{2,\uparrow},\;\ket{2,\downarrow},\;\ldots
+\end{equation}
+Für die untersten zwei Orbitale ergibt das 4 Zustände ---
+ein \textbf{Ququart} (Qudit der Dimension 4,
+entspricht 2 verschränkten Qubits in einem einzigen Objekt).
+
+Die Spin-Bahn-Kopplung verbindet die beiden Freiheitsgrade
+und erlaubt es, durch elektrische Felder gezielt
+zwischen den kombinierten Zuständen zu navigieren.
+
+\begin{center}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{clcc}
+\toprule
+\textbf{Strategie} & \textbf{Freiheitsgrad} & \textbf{Dimension $d$} & \textbf{Bits pro QD} \\
+\midrule
+Spin-Qubit     & Spin           & 2      & 1{,}00 \\
+Orbital-Qubit  & Orbital        & 2--4   & 1{,}00--2{,}00 \\
+Qudit          & Energieniveau  & 3--6   & 1{,}58--2{,}58 \\
+Exziton-Qudit  & Exziton-Zahl   & 3--5   & 1{,}58--2{,}32 \\
+Spin-Orbital   & Spin + Orbital & 4--8   & 2{,}00--3{,}00 \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+% ============================================================
+\subsection{Strategie 5: Kontinuierliche Variablen ---
+  der quantenmechanische Oszillator}
+\label{sec:cv}
+% ============================================================
+
+Eine radikale Alternative zum diskreten Qudit-Konzept:
+statt diskreter Zustände nutzt man
+\textbf{kontinuierliche Variablen} (CV).
+
+Ein harmonischer Oszillator hat unendlich viele
+Energieniveaus $\ket{n}$, $n = 0, 1, 2, \ldots$
+Die Information wird nicht in einzelnen Niveaus
+gespeichert, sondern in der \textbf{Wellenform}
+des Zustands --- zum Beispiel als kohärenter Zustand
+$\ket{\alpha}$ mit komplexer Amplitude $\alpha$.
+
+Quantenpunkte sind \emph{keine} harmonischen Oszillatoren
+(ihre Niveauabstände sind nicht äquidistant: $E_n \sim n^2$) ---
+aber \textbf{optische Kavitäten} und
+\textbf{Supraleiter-Resonatoren} (Circuit-QED) sind es näherungsweise.
+
+\begin{keypoint}[Diskret oder kontinuierlich --- eine Wahl der Beschreibungsebene]
+In FFGFT sind beide Beschreibungen Facetten derselben
+Physik. Diskrete Zustände entstehen aus der
+endlichen Geometrie des Resonators --- der Resonator
+ist endlich, also sind seine Moden abzählbar.
+Eine unendliche Modenzahl (idealer harmonischer Oszillator)
+ist der Grenzfall eines unendlich tiefen Potentials
+mit gleichmäßigen Wänden --- eine Idealisierung.
+Reale Systeme sind immer diskret.
+Kontinuierliche Variablen sind eine nützliche Näherung
+wenn die Modenzahl so groß ist dass man sie
+als kontinuierlich behandeln kann ---
+analog zur klassischen Physik als Limes vieler Quantenzustände.
+\end{keypoint}
+
+% ============================================================
+\section{Superposition --- was zwischen den Zuständen liegt}
+\label{sec:superposition}
+% ============================================================
+
+Bisher: diskrete Zustände $\ket{0}$, $\ket{1}$, \ldots
+Das Besondere an Quantensystemen ist nicht dass sie
+diskrete Zustände haben --- klassische Münzen auch.
+Das Besondere ist die \textbf{Superposition}:
+
+\begin{equation}
+  \ket{\psi} \;=\; \alpha\ket{0} + \beta\ket{1},
+  \quad |\alpha|^2 + |\beta|^2 = 1.
+\end{equation}
+Das ist kein Unwissen über den Zustand ---
+das ist ein genuiner Zwischenzustand.
+
+Auf der Bloch-Kugel (Abbildung der Qubit-Zustände
+auf eine Kugeloberfläche) entspricht jeder Punkt
+einem möglichen Quantenzustand ---
+unendlich viele kontinuierliche Punkte auf der Kugel,
+nicht nur die zwei Pole.
+
+\begin{foundation}[FFGFT: Superposition als intermediäre Torsion]
+Spin-up und Spin-down sind die beiden stabilen
+Torsionsextreme des Resonators.
+Ein Superpositonszustand $\alpha\ket{\uparrow}+\beta\ket{\downarrow}$
+ist eine \textbf{metastabile Zwischentorsion} ---
+nicht stabil im Grundzustand, aber stabil auf
+der Zeitskala der Kohärenzzeit $T_2$.
+
+Die Phase $\phi = \arg(\alpha/\beta)$ ist die
+Rotationsstellung dieser Zwischentorsion.
+Dekohärenz ist der Prozess bei dem die Umgebung
+diese intermediäre Torsion in eine der beiden
+stabilen Extremkonfigurationen drängt.
+\end{foundation}
+
+Für ein Qudit der Dimension $d$ liegt der
+allgemeine Zustand auf einer $(d-1)$-dimensionalen
+komplexen Kugel --- dem \textbf{$\mathbb{CP}^{d-1}$}.
+Mit wachsendem $d$ wächst der Zustandsraum
+exponentiell: $n$ Qudits der Dimension $d$
+spannen einen Raum der Dimension $d^n$ auf.
+
+% ============================================================
+\section{Dekohärenz --- der Feind der Superposition}
+\label{sec:dekohärenz}
+% ============================================================
+
+Superposition ist fragil. Die Umgebung misst ständig
+mit --- jede Wechselwirkung mit einem Phonon,
+einem Kernspin, einem Photon ist eine
+(ungewollte) Messung die den Zustand kollabiert.
+
+Zwei Zeitskalen:
+
+\textbf{$T_1$ (Relaxationszeit)}: Zeit bis das System
+aus dem angeregten Zustand in den Grundzustand gefallen ist.
+Energierelaxation --- der Zustand $\ket{1}$ wird zu $\ket{0}$.
+
+\textbf{$T_2$ (Kohärenzzeit)}: Zeit bis die Phase $\phi$
+der Superposition zerstört ist.
+Immer $T_2 \leq 2T_1$ (Phasenrelaxation ist mindestens
+so schnell wie Energierelaxation, meist schneller).
+
+\begin{center}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrl}
+\toprule
+\textbf{System} & \textbf{$T_1$} & \textbf{$T_2$} & \textbf{Hauptmechanismus} \\
+\midrule
+Elektron-Spin in GaAs       & $\sim 1$\,ms   & $\sim 10$\,ns   & Kernspin-Bad \\
+Elektron-Spin in Si/SiGe    & $> 1$\,s       & $\sim 10$\,ms   & $^{28}$Si (kernspinfrei) \\
+Elektron-Spin in P:Si       & $> 1$\,s       & $> 100$\,ms     & Isotopische Reinigung \\
+Exziton in CdSe-QD          & $\sim 1$\,ns   & $\sim 10$\,ps   & Phonon-Streuung \\
+Supraleiter-Transmon        & $\sim 100$\,µs & $\sim 100$\,µs  & Dielektrische Verluste \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+\begin{keyresult}[Si/SiGe: FFGFT-Bedeutung von $T_2 \sim 10$\,ms]
+Silizium mit angereichertem $^{28}$Si (kernspinfrei)
+eliminiert das Kernspin-Bad fast vollständig.
+In FFGFT-Sprache: der Resonator wird von einer
+Quelle zufälliger Torsionsstörungen (Kernspins)
+befreit. Was übrig bleibt ist die intrinsische
+Geometrie des Resonators --- und damit
+die fundamentale Grenze $T_2 \leq 2T_1$.
+Die lange Kohärenzzeit in $^{28}$Si ist ein
+direkter Beleg dafür dass Bedingung~1
+(geometrische Perfektion) die entscheidende ist.
+\end{keyresult}
+
+% ============================================================
+\section{Offene Verbindungen zur FFGFT}
+\label{sec:offene-verbindungen}
+% ============================================================
+
+Die folgenden Punkte sind noch nicht ausgearbeitet ---
+sie markieren Stellen wo das Resonatorbild der FFGFT
+konkrete Vorhersagen machen könnte:
+
+\begin{significance}[Offene Fragen für weitere Kapitel]
+\textbf{1. Qudit-Niveaustruktur und $\Kfrak$:}\\
+Der fraktale Korrekturfaktor $\Kfrak$ (Kapitel~173)
+verschiebt alle Energieniveaus um denselben relativen Betrag.
+Für ein Qudit der Dimension $d$ bedeutet das
+$d-1$ verschobene Übergänge --- eine strukturierte
+spektrale Signatur die von der idealen Parabolik abweicht.
+Ist diese Abweichung messbar mit moderner
+Mehrphotonen-Spektroskopie?\\[6pt]
+
+\textbf{2. Spin-Orbital-Kopplung als Torsions-Torsions-Kopplung:}\\
+Die Spin-Bahn-Kopplung verbindet zwei geometrische
+Freiheitsgrade (Spin = Torsionsrichtung,
+Orbital = Torsionsmuster). In FFGFT sollte diese
+Kopplung materialabhängig sein --- genau über den
+effektiven $g$-Faktor $g^*$ und die
+Bandstruktur-Torsion des Kristalls.
+Kann $g^*$ aus $\xi$ und der Kristallgeometrie
+hergeleitet werden?\\[6pt]
+
+\textbf{3. Dekohärenz-Zeitskalen und $\xi$-Hierarchie:}\\
+Warum sind $T_2$ in Si/SiGe ($\sim 10$\,ms) und
+$T_1$ in P:Si ($> 1$\,s) so dramatisch verschieden von
+Exziton-Kohärenzzeiten ($\sim 10$\,ps)?
+Der Unterschied ist 9 Größenordnungen ---
+entspricht das einer Stufe in der $\xi$-Hierarchie?
+$\xi^{-1} \approx 7500$: eine Stufe überbrückt
+$\sim 4$ Größenordnungen. Zwei Stufen $\sim 8$ Größenordnungen.
+Das wäre eine erstaunliche Übereinstimmung.\\[6pt]
+
+\textbf{4. Verschränkung als Torsions-Topologie:}\\
+Zwei verschränkte Qubits befinden sich in einem Zustand
+der nicht als Produkt zweier Einzelzustände geschrieben
+werden kann --- eine gemeinsame Torsionskonfiguration
+über räumlich getrennte Resonatoren.
+Was bedeutet das für die lokale Topologie
+des FFGFT-Feldes?
+Gibt es eine natürliche Beschreibung von Bell-Zuständen
+als toroidale Feldkonfigurationen?
+\end{significance}
+
+% ============================================================
+\section{Zusammenfassung: Vom Spin zum Qudit}
+\label{sec:zusammenfassung-174}
+% ============================================================
+
+\begin{conclusionBox}[Fazit]
+Spin-up und Spin-down sind das Minimum ---
+zwei Torsionsorientierungen in einem Resonator.
+
+Beeinflussen: Magnetfeld (global), elektrisches Feld
+via Spin-Bahn-Kopplung (lokal, schnell), zirkulares Licht
+(drehimpulsübertragend), Austauschwechselwirkung (Zwei-QD-Gatter).
+
+Auslesen: Spin-zu-Ladungs-Konversion (praktisch, präzise),
+Pauli-Blockade (geometrisch selbst-auslesen),
+Fluoreszenz-Polarisation (invasiv, zeitaufgelöst),
+\textbf{Faraday/Kerr-Rotation (QND --- zustandserhaltend, wiederholbar)}.
+
+Die QND-Messung ist dabei der physikalisch wichtigste Punkt:
+Sie beweist dass der Spinzustand vor der Messung
+einen definierten Wert hatte --- die Torsionskonfiguration
+ist real und stabil, unabhängig von der Beobachtung.
+Das ist der empirische Befund für Determinismus.
+
+Jenseits von zwei Zuständen:
+Energieniveau-Qudits, Orbital-Qubits, Exziton-Qudit,
+Spin-Orbital-Kombination --- alle in demselben
+winzigen Resonator, alle auf der $\xi$-Stufe $N \approx 8$.
+
+Superposition liegt zwischen den Zuständen ---
+nicht Unwissen, sondern genuiner Zwischenzustand
+(intermediäre Torsion).
+Dekohärenz ist ihr natürlicher Feind:
+die Umgebung kollabiert die Torsion in eine der
+stabilen Extremkonfigurationen.
+
+Geometrische Perfektion (Bedingung~1) ist
+die universelle Grundlage --- für jeden dieser Effekte.
+Ohne präzisen Resonator kein Qudit, kein Qubit,
+kein Spin-Gatter. Die FFGFT-Deutung:
+alle diese Phänomene sind verschiedene Ausdrucksformen
+stabiler Torsionskonfigurationen in geometrisch
+präzisen Hohlräumen auf der Skala $N \approx 8$.
+\end{conclusionBox}
+
+% ============================================================
+% ============================================================
+
+\begin{thebibliography}{99}
+
+% --- Spin-Manipulation: Magnetfeld / Zeeman ---
+\bibitem{Loss1998}
+Loss, D. \& DiVincenzo, D.\,P.
+\textit{Quantum computation with quantum dots.}
+Phys.\ Rev.\ A \textbf{57}, 120--126 (1998).
+
+% --- EDSR ---
+\bibitem{Koppens2006}
+Koppens, F.\,H.\,L. et al.
+\textit{Driven coherent oscillations of a single electron spin in a quantum dot.}
+Nature \textbf{442}, 766--771 (2006).
+
+\bibitem{Nowack2007}
+Nowack, K.\,C. et al.
+\textit{Coherent control of a single electron spin with electric fields.}
+Science \textbf{318}, 1430--1433 (2007).
+
+\bibitem{Corna2018}
+Corna, A. et al.
+\textit{Electrically driven electron spin resonance mediated by
+spin--valley--orbit coupling in a silicon quantum dot.}
+npj Quantum Inf.\ \textbf{4}, 6 (2018).
+
+% --- Optische Spinpräparation und Manipulation ---
+\bibitem{Atature2006}
+Atatüre, M. et al.
+\textit{Quantum-dot spin-state preparation with near-unity fidelity.}
+Science \textbf{312}, 551--553 (2006).
+
+\bibitem{Press2008}
+Press, D. et al.
+\textit{Complete quantum control of a single quantum dot spin using
+ultrafast optical pulses.}
+Nature \textbf{456}, 218--221 (2008).
+
+% --- Austauschwechselwirkung ---
+\bibitem{Petta2005}
+Petta, J.\,R. et al.
+\textit{Coherent manipulation of coupled electron spins in semiconductor
+quantum dots.}
+Science \textbf{309}, 2180--2184 (2005).
+
+% --- Spin-zu-Ladungs-Konversion (Elzerman-Auslese) ---
+\bibitem{Elzerman2004}
+Elzerman, J.\,M. et al.
+\textit{Single-shot read-out of an individual electron spin in a quantum dot.}
+Nature \textbf{430}, 431--435 (2004).
+
+% --- Pauli-Blockade ---
+\bibitem{Ono2002}
+Ono, K. et al.
+\textit{Current rectification by Pauli exclusion in a weakly coupled
+double quantum dot system.}
+Science \textbf{297}, 1313--1317 (2002).
+
+% --- Faraday-/Kerr-Rotation: QND-Auslese ---
+\bibitem{Atature2007}
+Atatüre, M. et al.
+\textit{Observation of Faraday rotation from a single confined spin.}
+Nature Phys.\ \textbf{3}, 101--105 (2007).
+
+\bibitem{Berezovsky2008}
+Berezovsky, J. et al.
+\textit{Picosecond coherent optical manipulation of a single electron spin in a
+quantum dot.}
+Science \textbf{320}, 349--352 (2008).
+
+\bibitem{Grangier1998}
+Grangier, P., Levenson, J.\,A. \& Poizat, J.\,P.
+\textit{Quantum non-demolition measurements in optics.}
+Nature \textbf{396}, 537--542 (1998).
+
+% --- QND-Messung eines Elektronenspins ---
+\bibitem{Delbecq2019}
+Delbecq, M.\,R. et al.
+\textit{Quantum non-demolition measurement of an electron spin qubit.}
+Nature Nanotechnol.\ \textbf{14}, 446--450 (2019).
+
+\bibitem{Xue2020}
+Xue, X. et al.
+\textit{Quantum non-demolition readout of an electron spin in silicon.}
+Nature Commun.\ \textbf{11}, 1178 (2020).
+
+% --- Si/SiGe Kohärenzzeiten ---
+\bibitem{Veldhorst2014}
+Veldhorst, M. et al.
+\textit{An addressable quantum dot qubit with fault-tolerant control-fidelity.}
+Nature Nanotechnol.\ \textbf{9}, 981--985 (2014).
+
+\end{thebibliography}

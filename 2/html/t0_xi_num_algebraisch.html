@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ξ_num — Algebraische Resonanzstruktur im Zahlenraum</title>
+<style>
+  body { font-family: 'Segoe UI', sans-serif; background: #0f0f1a; color: #e0e0e0;
+         margin: 0; padding: 20px; }
+  .container { max-width: 1020px; margin: 0 auto; background: #1a1a2e;
+               border-radius: 12px; padding: 28px; border: 1px solid #2a2a4a; }
+  h1 { color: #7eb8f7; text-align: center; font-size: 1.7em; margin-bottom: 4px; }
+  .subtitle { text-align: center; color: #888; margin-bottom: 20px;
+              font-size: 0.88em; line-height: 1.6; }
+  h2 { color: #5dade2; border-left: 4px solid #5dade2; padding-left: 12px;
+       font-size: 1.05em; margin: 22px 0 10px; }
+  .panel { background: #16213e; border: 1px solid #2a3f5f; border-radius: 8px;
+           padding: 16px; margin: 12px 0; }
+  .row { display: flex; align-items: center; gap: 12px; margin: 8px 0; flex-wrap: wrap; }
+  label { min-width: 170px; font-size: 0.88em; color: #aaa; }
+  input, select { background: #0f0f23; border: 1px solid #3a3a6a; border-radius: 6px;
+                  color: #e0e0e0; padding: 7px 11px; font-size: 0.9em; flex: 1;
+                  min-width: 150px; }
+  input:focus, select:focus { border-color: #5dade2; outline: none; }
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+  button { padding: 9px 18px; border: none; border-radius: 6px; cursor: pointer;
+           font-weight: bold; font-size: 0.88em; transition: 0.2s; }
+  .btn-a { background: #27ae60; color: #fff; }
+  .btn-b { background: #8e44ad; color: #fff; }
+  .btn-c { background: #2980b9; color: #fff; }
+  .btn-x { background: #555;    color: #fff; }
+  button:hover { opacity: 0.82; transform: translateY(-1px); }
+  button:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .log { background: #0a0a15; border: 1px solid #2a2a4a; border-radius: 8px;
+         padding: 14px; font-family: 'Courier New', monospace; font-size: 0.82em;
+         min-height: 80px; max-height: 380px; overflow-y: auto; line-height: 1.55; }
+  .ok  { color: #2ecc71; } .warn{ color: #f39c12; } .err { color: #e74c3c; }
+  .inf { color: #5dade2; } .dim { color: #555; }    .hi  { color: #f7dc6f; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+           gap: 9px; margin: 12px 0; }
+  .stat { background: #16213e; border: 1px solid #2a3f5f; border-radius: 8px;
+          padding: 10px; text-align: center; }
+  .stat-val { font-size: 1.4em; font-weight: bold; color: #7eb8f7; }
+  .stat-lbl { font-size: 0.75em; color: #777; margin-top: 3px; }
+  .prog-wrap { background: #0a0a20; border-radius: 6px; height: 12px;
+               overflow: hidden; margin: 8px 0; }
+  .prog-bar  { height: 100%; background: linear-gradient(90deg,#2980b9,#27ae60);
+               transition: width 0.15s; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82em; margin-top: 8px; }
+  th { background: #1e3050; color: #7eb8f7; padding: 7px 9px; text-align: left; }
+  td { padding: 5px 9px; border-bottom: 1px solid #1a1a3a; font-family: monospace; }
+  tr:hover td { background: #1a2a3a; }
+  .theory-box { background: #1a2a1a; border: 1px solid #2a4a2a; border-radius: 6px;
+                padding: 14px; font-size: 0.86em; color: #8bc34a; margin: 10px 0;
+                line-height: 1.7; }
+  .result-box { border-radius: 8px; padding: 14px; margin: 10px 0; font-size: 0.88em;
+                line-height: 1.6; }
+  .confirm { background:#1a2a1a; border:1px solid #27ae60; color:#2ecc71; }
+  .neutral { background:#1a1a2a; border:1px solid #5dade2; color:#7eb8f7; }
+  .refute  { background:#2a1a1a; border:1px solid #e74c3c; color:#e74c3c; }
+  canvas { width:100%; border-radius:6px; background:#0a0a18;
+           border:1px solid #2a2a4a; display:block; margin-top:8px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🔢 ξ_num — Algebraische Resonanzstruktur im Zahlenraum</h1>
+<div class="subtitle">
+  Primzahlen sind basissystemunabhängig — wie natürliche Einheiten in der Physik.<br>
+  Die Frage: Hat die Periodenstruktur von ℤ/Nℤ eine universelle Verteilung<br>
+  die analog zur ξ-Hierarchie der FFGFT strukturiert ist?<br>
+  Alle Arithmetik exakt via BigInt · keine Dezimalsystem-Artefakte.
+</div>
+
+<div class="theory-box">
+  <strong>Algebraische Grundlage (basisunabhängig):</strong><br>
+  Für N = p·q gilt: Carmichael-Funktion λ(N) = lcm(p−1, q−1).<br>
+  Die kleinstmögliche Periode r = ord_a(N) teilt λ(N).<br>
+  Definiere: <strong>ξ_num(N) = λ(N) / N</strong> — dimensionslos, repräsentationsunabhängig.<br>
+  Für harte Primzahlen (RSA): ξ_num ≈ 1/2 (große Periode, schwer).<br>
+  Für glatte Primzahlen: ξ_num ≪ 1 (kleine Periode, leicht).<br><br>
+  <strong>Hypothese:</strong> Die Verteilung von ξ_num über zufällige semiprime N
+  zeigt eine Resonanzstruktur — diskrete Häufungspunkte statt Gleichverteilung —
+  analog zur ξ-Stufenhierarchie der FFGFT.
+</div>
+
+<!-- Test A: Einzelanalyse -->
+<div class="panel">
+  <h2>🔍 Test A — Algebraische Analyse einzelner N</h2>
+  <div class="row">
+    <label>N (semiprim: N = p·q)</label>
+    <input type="text" id="tA_N" value="10403">
+    <label>Max Scan-r</label>
+    <input type="number" id="tA_maxR" value="200000">
+  </div>
+  <div class="btns">
+    <button class="btn-a" onclick="runSingle()">▶ Analysieren</button>
+    <button class="btn-x" onclick="clearLog('logA')">✕</button>
+  </div>
+  <div class="log" id="logA"><span class="dim">Bereit.</span></div>
+</div>
+
+<!-- Test B: Verteilungsanalyse -->
+<div class="panel">
+  <h2>📊 Test B — Verteilung von ξ_num über viele N</h2>
+  <div class="row">
+    <label>Anzahl semiprime N</label>
+    <input type="number" id="tB_count" value="200" min="20" max="2000">
+    <label>Bitgröße der Primfaktoren</label>
+    <select id="tB_bits">
+      <option value="8">8 Bit (p,q < 256)</option>
+      <option value="12" selected>12 Bit (p,q < 4096)</option>
+      <option value="16">16 Bit (p,q < 65536)</option>
+      <option value="20">20 Bit (p,q < 1M)</option>
+    </select>
+  </div>
+  <div class="row">
+    <label>Primtyp</label>
+    <select id="tB_type">
+      <option value="random">Zufällige Primzahlen</option>
+      <option value="safe">Sichere Primzahlen (p = 2q+1)</option>
+      <option value="smooth">Glatte Primzahlen (p−1 hat kleine Teiler)</option>
+      <option value="mixed">Gemischt</option>
+    </select>
+    <label>Max Scan-r</label>
+    <input type="number" id="tB_maxR" value="100000">
+  </div>
+  <div class="btns">
+    <button class="btn-b" id="btnB" onclick="runDistribution()">▶ Verteilungsanalyse</button>
+    <button class="btn-x" onclick="clearLog('logB')">✕</button>
+  </div>
+  <div class="prog-wrap"><div class="prog-bar" id="progB" style="width:0%"></div></div>
+  <div class="stats">
+    <div class="stat"><div class="stat-val" id="sCount">—</div>
+      <div class="stat-lbl">Analysierte N</div></div>
+    <div class="stat"><div class="stat-val" id="sXiMin">—</div>
+      <div class="stat-lbl">ξ_num Minimum</div></div>
+    <div class="stat"><div class="stat-val" id="sXiMed">—</div>
+      <div class="stat-lbl">ξ_num Median</div></div>
+    <div class="stat"><div class="stat-val" id="sXiMax">—</div>
+      <div class="stat-lbl">ξ_num Maximum</div></div>
+    <div class="stat"><div class="stat-val" id="sRatioMed">—</div>
+      <div class="stat-lbl">r / λ(N) Median</div></div>
+    <div class="stat"><div class="stat-val" id="sClusters">—</div>
+      <div class="stat-lbl">Häufungspunkte</div></div>
+  </div>
+  <canvas id="chartDist" height="200"></canvas>
+  <div class="log" id="logB"><span class="dim">Bereit.</span></div>
+  <div id="resultB"></div>
+</div>
+
+<!-- Test C: xi_num vs xi_phys Vergleich -->
+<div class="panel">
+  <h2>⚖️ Test C — ξ_num Verteilung vs. FFGFT-Stufenhierarchie</h2>
+  <div class="row">
+    <label>Stichprobengröße</label>
+    <input type="number" id="tC_count" value="500" min="50" max="5000">
+    <label>Bitbereich</label>
+    <select id="tC_bits">
+      <option value="8,20">8–20 Bit (gemischt)</option>
+      <option value="10,14" selected>10–14 Bit</option>
+      <option value="14,20">14–20 Bit</option>
+    </select>
+  </div>
+  <div class="btns">
+    <button class="btn-c" id="btnC" onclick="runComparison()">▶ Stufenvergleich</button>
+    <button class="btn-x" onclick="clearLog('logC')">✕</button>
+  </div>
+  <div class="prog-wrap"><div class="prog-bar" id="progC" style="width:0%"></div></div>
+  <canvas id="chartComp" height="220"></canvas>
+  <div class="log" id="logC"><span class="dim">Bereit.</span></div>
+  <div id="resultC"></div>
+</div>
+
+</div>
+
+<script>
+// ─── BigInt Arithmetik ────────────────────────────────────────────────────
+
+function modPow(base, exp, mod) {
+  base=BigInt(base); exp=BigInt(exp); mod=BigInt(mod);
+  if(mod===1n) return 0n;
+  let r=1n; base=base%mod;
+  while(exp>0n){if(exp&1n)r=r*base%mod; exp>>=1n; base=base*base%mod;}
+  return r;
+}
+
+function gcd(a,b){ a=BigInt(a);b=BigInt(b); while(b){[a,b]=[b,a%b];} return a; }
+
+function isPrime(n){
+  n=BigInt(n);
+  if(n<2n) return false;
+  if(n===2n||n===3n||n===5n||n===7n) return true;
+  if(n%2n===0n) return false;
+  let d=n-1n,r=0;
+  while(d%2n===0n){d/=2n;r++;}
+  for(const a of [2n,3n,5n,7n,11n,13n,17n,19n,23n,29n,31n,37n]){
+    if(a>=n) continue;
+    let x=modPow(a,d,n);
+    if(x===1n||x===n-1n) continue;
+    let ok=false;
+    for(let i=0;i<r-1;i++){x=x*x%n; if(x===n-1n){ok=true;break;}}
+    if(!ok) return false;
+  }
+  return true;
+}
+
+// ─── Primzahlgeneratoren ─────────────────────────────────────────────────
+
+function randBits(bits) {
+  const lo = 2**(bits-1), hi = 2**bits - 1;
+  return lo + Math.floor(Math.random()*(hi-lo));
+}
+
+function randPrime(bits) {
+  for(let i=0;i<10000;i++){
+    const n = randBits(bits) | 1; // ungerade
+    if(isPrime(BigInt(n))) return n;
+  }
+  return null;
+}
+
+function randSafePrime(bits) {
+  // p = 2q+1 wo beide prim
+  for(let i=0;i<10000;i++){
+    const q = randPrime(bits-1);
+    if(!q) continue;
+    const p = 2*q+1;
+    if(isPrime(BigInt(p))) return p;
+  }
+  return null;
+}
+
+function randSmoothPrime(bits) {
+  // p-1 hat nur kleine Primteiler (2,3,5,7,11,13)
+  const smallPrimes = [2,3,5,7,11,13];
+  for(let attempt=0;attempt<5000;attempt++){
+    let pm1 = 1;
+    while(pm1 < 2**(bits-2)) {
+      pm1 *= smallPrimes[Math.floor(Math.random()*smallPrimes.length)];
+    }
+    const p = pm1 + 1;
+    if(p < 2**bits && isPrime(BigInt(p))) return p;
+  }
+  return null;
+}
+
+function makeSemiprime(bits, type) {
+  let p=null, q=null;
+  const hb = Math.ceil(bits/2);
+  for(let i=0;i<100;i++){
+    if(type==='safe'){
+      p=randSafePrime(hb); q=randSafePrime(hb);
+    } else if(type==='smooth'){
+      p=randSmoothPrime(hb); q=randSmoothPrime(hb);
+    } else {
+      p=randPrime(hb); q=randPrime(hb);
+    }
+    if(p&&q&&p!==q) return {N:p*q, p, q};
+  }
+  return null;
+}
+
+// ─── Algebraische Größen (basisunabhängig) ────────────────────────────────
+
+function carmichael(p, q) {
+  // λ(p*q) = lcm(p-1, q-1)
+  const pm1=BigInt(p)-1n, qm1=BigInt(q)-1n;
+  return pm1 * qm1 / gcd(pm1, qm1);
+}
+
+function xiNum(p, q) {
+  // ξ_num = λ(N) / N — dimensionslos, basisunabhängig
+  const N = BigInt(p)*BigInt(q);
+  const lam = carmichael(p,q);
+  return Number(lam) / Number(N);
+}
+
+function smallestPrimeFactor(n) {
+  if(n<=1) return n;
+  if(n%2===0) return 2;
+  for(let i=3;i*i<=n;i+=2) if(n%i===0) return i;
+  return n;
+}
+
+function smoothness(n) {
+  // Größter Primfaktor von n (kleinerer = glatter)
+  let m = n, largest = 1;
+  for(let p=2;p*p<=m;p++){
+    while(m%p===0){largest=p;m=Math.floor(m/p);}
+  }
+  if(m>1) largest=m;
+  return largest;
+}
+
+function findMinPeriod(N, maxR) {
+  const NN=BigInt(N);
+  for(let a=2;a<Math.min(N,50);a++){
+    if(gcd(BigInt(a),NN)!==1n) continue;
+    for(let r=1;r<=maxR;r++){
+      if(modPow(BigInt(a),BigInt(r),NN)===1n) return r;
+    }
+  }
+  return null;
+}
+
+// ─── Hilfsfunktionen ─────────────────────────────────────────────────────
+
+function logLine(id,html){
+  const el=document.getElementById(id);
+  el.innerHTML+=html+'\n';
+  el.scrollTop=el.scrollHeight;
+}
+function clearLog(id){document.getElementById(id).innerHTML='<span class="dim">Log geleert.</span>\n';}
+function setProgress(id,pct){document.getElementById(id).style.width=pct+'%';}
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+
+function median(arr){
+  if(!arr.length) return null;
+  const s=[...arr].sort((a,b)=>a-b);
+  const m=Math.floor(s.length/2);
+  return s.length%2?s[m]:(s[m-1]+s[m])/2;
+}
+
+function mean(arr){ return arr.length?arr.reduce((a,b)=>a+b,0)/arr.length:null; }
+
+// ─── Test A: Einzelanalyse ────────────────────────────────────────────────
+
+function runSingle(){
+  const N_str=document.getElementById('tA_N').value.trim();
+  const maxR=parseInt(document.getElementById('tA_maxR').value)||200000;
+  clearLog('logA');
+
+  let N,p,q;
+  try { N=parseInt(N_str); } catch(e){ logLine('logA','<span class="err">Ungültige Zahl.</span>'); return; }
+
+  if(isPrime(BigInt(N))){ logLine('logA','<span class="err">N ist Primzahl — brauche semiprime N = p·q</span>'); return; }
+
+  // Faktorisieren
+  logLine('logA',`<span class="inf">Analysiere N=${N}...</span>`);
+  for(let i=2;i<=Math.sqrt(N)+1;i++){
+    if(N%i===0){ p=i; q=N/i; break; }
+  }
+  if(!p||!isPrime(BigInt(p))||!isPrime(BigInt(q))){
+    logLine('logA','<span class="warn">N ist kein Produkt zweier Primzahlen.</span>');
+    return;
+  }
+
+  const lam = carmichael(p,q);
+  const xi  = xiNum(p,q);
+  const smoothP = smoothness(p-1);
+  const smoothQ = smoothness(q-1);
+  const minR = findMinPeriod(N, maxR);
+
+  logLine('logA',`<span class="ok">N = ${p} × ${q}</span>`);
+  logLine('logA',`  p−1 = ${p-1}  (größter Primfaktor: ${smoothP})`);
+  logLine('logA',`  q−1 = ${q-1}  (größter Primfaktor: ${smoothQ})`);
+  logLine('logA',`  λ(N) = lcm(${p-1}, ${q-1}) = ${lam.toString()}`);
+  logLine('logA',`<span class="hi">  ξ_num = λ(N)/N = ${xi.toExponential(4)}</span>`);
+  logLine('logA',`  Glattheit p−1: ${smoothP} | q−1: ${smoothQ}`);
+  if(minR) logLine('logA',`<span class="ok">  Kleinste Periode gefunden: r_min = ${minR}</span>`);
+  else     logLine('logA',`<span class="warn">  Keine Periode in r ≤ ${maxR} gefunden</span>`);
+
+  if(minR){
+    const rRatio = minR/Number(lam);
+    logLine('logA',`  r_min / λ(N) = ${rRatio.toExponential(3)}`);
+    const xi_phys = 4/30000;
+    logLine('logA',`<br>  ξ_phys = ${xi_phys.toExponential(4)}  (physikalisch, 3D-Torus)`);
+    logLine('logA',`  ξ_num  = ${xi.toExponential(4)}  (algebraisch, Zahlenraum)`);
+    logLine('logA',`  Verhältnis ξ_num/ξ_phys = ${(xi/xi_phys).toFixed(3)}`);
+  }
+}
+
+// ─── Test B: Verteilungsanalyse ───────────────────────────────────────────
+
+async function runDistribution(){
+  const count=parseInt(document.getElementById('tB_count').value)||200;
+  const bits=parseInt(document.getElementById('tB_bits').value)||12;
+  const type=document.getElementById('tB_type').value;
+  const maxR=parseInt(document.getElementById('tB_maxR').value)||100000;
+  const btn=document.getElementById('btnB');
+  btn.disabled=true; clearLog('logB');
+  document.getElementById('resultB').innerHTML='';
+
+  logLine('logB',`<span class="inf">Analysiere ${count} semiprime N (${bits}-Bit, Typ: ${type})...</span>`);
+
+  const xiValues=[], rRatios=[], data=[];
+
+  for(let i=0;i<count;i++){
+    if(i%10===0){
+      setProgress('progB',100*i/count);
+      await sleep(0);
+    }
+    let sm;
+    try{ sm=makeSemiprime(bits,type); }catch(e){ continue; }
+    if(!sm) continue;
+
+    const {N,p,q}=sm;
+    const lam=carmichael(p,q);
+    const xi=xiNum(p,q);
+    const sP=smoothness(p-1);
+    const sQ=smoothness(q-1);
+
+    xiValues.push(xi);
+    data.push({N,p,q,lam:Number(lam),xi,sP,sQ});
+
+    // Stats aktualisieren
+    document.getElementById('sCount').textContent=i+1;
+    const med=median(xiValues);
+    document.getElementById('sXiMed').textContent=med?med.toExponential(3):'—';
+    document.getElementById('sXiMin').textContent=Math.min(...xiValues).toExponential(3);
+    document.getElementById('sXiMax').textContent=Math.max(...xiValues).toExponential(3);
+  }
+
+  setProgress('progB',100);
+
+  // Häufungspunkte erkennen
+  const clusters=detectClusters(xiValues);
+  document.getElementById('sClusters').textContent=clusters.length;
+
+  // r/λ Median
+  let rCount=0, rSum=0;
+  for(const d of data.slice(0,50)){
+    const r=findMinPeriod(d.N, maxR);
+    if(r){ rSum+=r/d.lam; rCount++; }
+  }
+  document.getElementById('sRatioMed').textContent=
+    rCount>0?(rSum/rCount).toExponential(3):'—';
+
+  // Chart
+  drawHistogram('chartDist', xiValues, clusters);
+
+  // Log Zusammenfassung
+  logLine('logB',`<br><span class="hi">─── Ergebnis ───</span>`);
+  logLine('logB',`Median ξ_num = ${median(xiValues).toExponential(4)}`);
+  logLine('logB',`Bereich: ${Math.min(...xiValues).toExponential(3)} — ${Math.max(...xiValues).toExponential(3)}`);
+  logLine('logB',`Erkannte Häufungspunkte: ${clusters.length}`);
+  clusters.forEach((c,i)=>logLine('logB',
+    `  Cluster ${i+1}: ξ_num ≈ ${c.center.toExponential(3)} (${c.count} Werte, ${(100*c.count/xiValues.length).toFixed(1)}%)`));
+
+  // Verdikt
+  const xi_phys=4/30000;
+  const nearPhys=clusters.filter(c=>Math.abs(Math.log10(c.center)-Math.log10(xi_phys))<0.5);
+  let verdict, vtext;
+  if(clusters.length>=3&&clusters.some(c=>c.count/xiValues.length>0.15)){
+    verdict='confirm';
+    vtext=`✓ Diskrete Häufungspunkte in der ξ_num-Verteilung gefunden (${clusters.length} Cluster).
+    Die Verteilung ist nicht gleichmäßig — sie zeigt eine Resonanzstruktur analog zu
+    diskreten Stufen. Dies unterstützt die Hypothese einer hierarchischen Struktur
+    im Zahlenraum. ${nearPhys.length>0?'Ein Cluster liegt in der Nähe von ξ_phys.':''}`;
+  } else if(clusters.length===0){
+    verdict='refute';
+    vtext='✗ Keine Clusterstruktur erkannt — ξ_num ist gleichmäßig verteilt. Keine Resonanzstruktur nachweisbar.';
+  } else {
+    verdict='neutral';
+    vtext=`≈ Schwache Struktur erkannt (${clusters.length} Cluster). Mehr Stichproben oder andere Primtypen könnten klareres Bild geben.`;
+  }
+  document.getElementById('resultB').innerHTML=`<div class="result-box ${verdict}">${vtext}</div>`;
+  btn.disabled=false;
+}
+
+// ─── Test C: Stufenvergleich ──────────────────────────────────────────────
+
+async function runComparison(){
+  const count=parseInt(document.getElementById('tC_count').value)||500;
+  const [b1,b2]=document.getElementById('tC_bits').value.split(',').map(Number);
+  const btn=document.getElementById('btnC');
+  btn.disabled=true; clearLog('logC');
+
+  logLine('logC',`<span class="inf">Sammle ${count} ξ_num-Werte (${b1}–${b2} Bit)...</span>`);
+
+  const xiAll=[];
+  for(let i=0;i<count;i++){
+    if(i%20===0){ setProgress('progC',100*i/count); await sleep(0); }
+    const bits=b1+Math.floor(Math.random()*(b2-b1+1));
+    const sm=makeSemiprime(bits,'random');
+    if(sm) xiAll.push(xiNum(sm.p,sm.q));
+  }
+  setProgress('progC',100);
+
+  // FFGFT-Stufen: xi_phys^N für N = 1,2,3,...
+  const xi_phys=4/30000;
+  const ffgftLevels=[];
+  for(let n=0;n<=6;n++) ffgftLevels.push(Math.pow(xi_phys,n));
+
+  drawComparison('chartComp', xiAll, ffgftLevels);
+
+  // Log
+  logLine('logC',`Gesammelt: ${xiAll.length} ξ_num-Werte`);
+  logLine('logC',`Bereich: ${Math.min(...xiAll).toExponential(3)} — ${Math.max(...xiAll).toExponential(3)}`);
+  logLine('logC',`<br>FFGFT-Referenzstufen (ξ_phys^N):`);
+  ffgftLevels.forEach((v,n)=>logLine('logC',
+    `  N=${n}: ξ_phys^${n} = ${v.toExponential(3)}`));
+
+  // Prüfe ob ξ_num-Cluster nahe an FFGFT-Stufen liegen
+  const clusters=detectClusters(xiAll);
+  logLine('logC',`<br>Erkannte ξ_num-Cluster:`);
+  clusters.forEach(c=>{
+    const nearestFFGFT=ffgftLevels.reduce((best,v)=>
+      Math.abs(Math.log10(v)-Math.log10(c.center))<Math.abs(Math.log10(best)-Math.log10(c.center))?v:best);
+    const dist=Math.abs(Math.log10(c.center)-Math.log10(nearestFFGFT));
+    const match=dist<0.3?'<span class="ok">≈ FFGFT-Stufe!</span>':'<span class="dim">kein Match</span>';
+    logLine('logC',`  ξ_num ≈ ${c.center.toExponential(3)} (${c.count}×) → nächste FFGFT: ${nearestFFGFT.toExponential(3)} ${match}`);
+  });
+
+  const matches=clusters.filter(c=>{
+    const best=ffgftLevels.reduce((b,v)=>
+      Math.abs(Math.log10(v)-Math.log10(c.center))<Math.abs(Math.log10(b)-Math.log10(c.center))?v:b);
+    return Math.abs(Math.log10(c.center)-Math.log10(best))<0.3;
+  });
+
+  let verdict, vtext;
+  if(matches.length>=2){
+    verdict='confirm';
+    vtext=`✓ ${matches.length} ξ_num-Cluster liegen nahe an FFGFT-Stufenwerten.
+    Zahlenraum und physikalischer Raum teilen möglicherweise analoge Resonanzstrukturen —
+    nicht identisch (verschiedene Geometrien), aber strukturell ähnlich.`;
+  } else if(matches.length===1){
+    verdict='neutral';
+    vtext=`≈ 1 Cluster nahe einer FFGFT-Stufe — Zufall nicht ausgeschlossen. Mehr Stichproben nötig.`;
+  } else {
+    verdict='neutral';
+    vtext=`≈ Keine klare Entsprechung zu FFGFT-Stufen gefunden. Die Strukturen sind verschieden — 
+    wie erwartet: Zahlenraum ≠ physikalischer 3D-Raum.`;
+  }
+  document.getElementById('resultC').innerHTML=`<div class="result-box ${verdict}">${vtext}</div>`;
+  btn.disabled=false;
+}
+
+// ─── Cluster-Erkennung ────────────────────────────────────────────────────
+
+function detectClusters(values) {
+  if(!values.length) return [];
+  // Log-Skala Histogram mit 40 Bins
+  const logVals=values.map(v=>Math.log10(v));
+  const lo=Math.min(...logVals), hi=Math.max(...logVals);
+  const BINS=40;
+  const hist=new Array(BINS).fill(0);
+  logVals.forEach(v=>{
+    const b=Math.min(BINS-1,Math.floor((v-lo)/(hi-lo+1e-10)*BINS));
+    hist[b]++;
+  });
+  const threshold=values.length/BINS*1.8; // 80% über Durchschnitt
+  const clusters=[];
+  let inCluster=false, start=0, sum=0, cnt=0;
+  for(let i=0;i<BINS;i++){
+    if(hist[i]>threshold){
+      if(!inCluster){inCluster=true;start=i;sum=0;cnt=0;}
+      sum+=hist[i]*(lo+(i+0.5)*(hi-lo)/BINS);
+      cnt+=hist[i];
+    } else if(inCluster){
+      inCluster=false;
+      clusters.push({center:Math.pow(10,sum/cnt),count:cnt});
+    }
+  }
+  if(inCluster) clusters.push({center:Math.pow(10,sum/cnt),count:cnt});
+  return clusters.sort((a,b)=>b.count-a.count);
+}
+
+// ─── Charts ───────────────────────────────────────────────────────────────
+
+function drawHistogram(canvasId, values, clusters){
+  const canvas=document.getElementById(canvasId);
+  canvas.width=canvas.offsetWidth||900; canvas.height=200;
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#0a0a18'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  if(!values.length) return;
+
+  const W=canvas.width, H=canvas.height;
+  const pad={l:55,r:15,t:20,b:35};
+
+  const logVals=values.map(v=>Math.log10(v));
+  const lo=Math.floor(Math.min(...logVals)), hi=Math.ceil(Math.max(...logVals));
+  const BINS=50;
+  const hist=new Array(BINS).fill(0);
+  logVals.forEach(v=>{
+    const b=Math.min(BINS-1,Math.floor((v-lo)/(hi-lo)*BINS));
+    hist[b]++;
+  });
+  const maxH=Math.max(...hist);
+
+  // Bars
+  const bw=(W-pad.l-pad.r)/BINS;
+  hist.forEach((h,i)=>{
+    const bh=(h/maxH)*(H-pad.t-pad.b);
+    const x=pad.l+i*bw;
+    const y=H-pad.b-bh;
+    ctx.fillStyle='#2980b966';
+    ctx.fillRect(x,y,bw-1,bh);
+  });
+
+  // Cluster markers
+  clusters.forEach(c=>{
+    const x=pad.l+(Math.log10(c.center)-lo)/(hi-lo)*(W-pad.l-pad.r);
+    ctx.strokeStyle='#2ecc71'; ctx.lineWidth=2; ctx.setLineDash([4,3]);
+    ctx.beginPath(); ctx.moveTo(x,pad.t); ctx.lineTo(x,H-pad.b); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle='#2ecc71'; ctx.font='10px monospace';
+    ctx.fillText(c.center.toExponential(1),x+3,pad.t+12);
+  });
+
+  // ξ_phys marker
+  const xi_phys=4/30000;
+  if(Math.log10(xi_phys)>=lo && Math.log10(xi_phys)<=hi){
+    const x=pad.l+(Math.log10(xi_phys)-lo)/(hi-lo)*(W-pad.l-pad.r);
+    ctx.strokeStyle='#f59e0b'; ctx.lineWidth=2; ctx.setLineDash([6,3]);
+    ctx.beginPath(); ctx.moveTo(x,pad.t); ctx.lineTo(x,H-pad.b); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle='#f59e0b'; ctx.font='10px monospace';
+    ctx.fillText('ξ_phys',x+3,H-pad.b-4);
+  }
+
+  // Achsen
+  ctx.strokeStyle='#333'; ctx.lineWidth=1;
+  ctx.beginPath();
+  ctx.moveTo(pad.l,pad.t); ctx.lineTo(pad.l,H-pad.b);
+  ctx.lineTo(W-pad.r,H-pad.b); ctx.stroke();
+
+  // X-Ticks (log10)
+  ctx.fillStyle='#666'; ctx.font='10px monospace';
+  for(let v=lo;v<=hi;v++){
+    const x=pad.l+(v-lo)/(hi-lo)*(W-pad.l-pad.r);
+    ctx.fillText(`10^${v}`,x-12,H-5);
+  }
+  ctx.fillStyle='#888'; ctx.font='10px sans-serif';
+  ctx.fillText('ξ_num = λ(N)/N',pad.l,pad.t-5);
+  ctx.fillText('Häufigkeit',4,pad.t+30);
+}
+
+function drawComparison(canvasId, xiAll, ffgftLevels){
+  const canvas=document.getElementById(canvasId);
+  canvas.width=canvas.offsetWidth||900; canvas.height=220;
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#0a0a18'; ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  const W=canvas.width, H=canvas.height;
+  const pad={l:55,r:15,t:30,b:40};
+
+  const logVals=xiAll.map(v=>Math.log10(v));
+  const allLogs=[...logVals,...ffgftLevels.map(v=>Math.log10(v))];
+  const lo=Math.floor(Math.min(...allLogs)), hi=Math.ceil(Math.max(...allLogs));
+  const BINS=60;
+  const hist=new Array(BINS).fill(0);
+  logVals.forEach(v=>{
+    const b=Math.min(BINS-1,Math.floor((v-lo)/(hi-lo+1e-10)*BINS));
+    hist[b]++;
+  });
+  const maxH=Math.max(...hist);
+
+  // Bars
+  const bw=(W-pad.l-pad.r)/BINS;
+  hist.forEach((h,i)=>{
+    if(!h) return;
+    const bh=(h/maxH)*(H-pad.t-pad.b);
+    const x=pad.l+i*bw;
+    ctx.fillStyle='#5dade266';
+    ctx.fillRect(x,H-pad.b-bh,bw-1,bh);
+  });
+
+  // FFGFT-Stufen
+  ffgftLevels.forEach((v,n)=>{
+    if(Math.log10(v)<lo||Math.log10(v)>hi) return;
+    const x=pad.l+(Math.log10(v)-lo)/(hi-lo)*(W-pad.l-pad.r);
+    ctx.strokeStyle='#f59e0b'; ctx.lineWidth=1.5;
+    ctx.setLineDash(n===0?[]:[5,3]);
+    ctx.beginPath(); ctx.moveTo(x,pad.t); ctx.lineTo(x,H-pad.b); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle='#f59e0b'; ctx.font='9px monospace';
+    ctx.fillText(`N=${n}`,x+2,pad.t+8+n*2);
+  });
+
+  // Achsen + Labels
+  ctx.strokeStyle='#333'; ctx.lineWidth=1;
+  ctx.beginPath();
+  ctx.moveTo(pad.l,pad.t); ctx.lineTo(pad.l,H-pad.b);
+  ctx.lineTo(W-pad.r,H-pad.b); ctx.stroke();
+
+  ctx.fillStyle='#666'; ctx.font='10px monospace';
+  for(let v=lo;v<=hi;v++){
+    const x=pad.l+(v-lo)/(hi-lo)*(W-pad.l-pad.r);
+    ctx.fillText(`10^${v}`,x-12,H-5);
+  }
+  ctx.fillStyle='#f59e0b'; ctx.font='10px sans-serif';
+  ctx.fillText('— FFGFT ξ_phys^N',W-130,pad.t+12);
+  ctx.fillStyle='#5dade2';
+  ctx.fillText('■ ξ_num Verteilung',W-130,pad.t+24);
+}
+</script>
+</body>
+</html>
