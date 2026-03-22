@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FFGFT — Fundamentale Fraktale Geometrische Feldtheorie / Fundamental Fractal Geometric Field Theory</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#1a1a18;padding:24px 16px;min-height:100vh}
+.card{background:#fff;border-radius:12px;border:0.5px solid rgba(0,0,0,0.12);padding:20px 24px;max-width:860px;margin:0 auto}
+h1{font-size:18px;font-weight:500;margin-bottom:3px;color:#1a1a18;line-height:1.35}
+.sub{font-size:12px;color:#5f5e5a;margin-bottom:16px}
+a{color:#185FA5}
+.ltog{display:flex;gap:0;margin-bottom:16px;border:0.5px solid rgba(0,0,0,0.15);border-radius:8px;overflow:hidden;width:fit-content}
+.ltog button{padding:5px 18px;font-size:13px;font-family:inherit;border:none;background:transparent;cursor:pointer;color:#5f5e5a;transition:background .15s,color .15s}
+.ltog button.act{background:#1a1a18;color:#f5f4f0}
+svg text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+.xn{cursor:pointer}
+.xn:hover rect{opacity:0.82}
+.c-purple rect{fill:#EEEDFE;stroke:#534AB7} .c-purple text{fill:#3C3489}
+.c-teal   rect{fill:#E1F5EE;stroke:#0F6E56} .c-teal   text{fill:#085041}
+.c-amber  rect{fill:#FAEEDA;stroke:#854F0B} .c-amber  text{fill:#633806}
+.c-coral  rect{fill:#FAECE7;stroke:#993C1D} .c-coral  text{fill:#712B13}
+.c-blue   rect{fill:#E6F1FB;stroke:#185FA5} .c-blue   text{fill:#0C447C}
+.c-green  rect{fill:#EAF3DE;stroke:#3B6D11} .c-green  text{fill:#27500A}
+#det{margin-top:14px;padding:14px 18px;background:#f5f4f0;border-radius:10px;min-height:64px;font-size:13px;line-height:1.7;color:#1a1a18;border:0.5px solid rgba(0,0,0,0.08)}
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+@media(max-width:580px){.pg{grid-template-columns:1fr 1fr}}
+.pc{background:#fff;border:0.5px solid rgba(0,0,0,0.12);border-radius:8px;padding:10px 12px}
+.pv{font-size:15px;font-weight:500;color:#1a1a18}
+.pl{font-size:11px;color:#5f5e5a;margin-top:3px;line-height:1.4}
+.ok{border-left:2.5px solid #1D9E75}
+.pn{border-left:2.5px solid #BA7517}
+.foot{margin-top:14px;padding:9px 14px;background:#f5f4f0;border-radius:8px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-size:11px;color:#888780}
+@media(prefers-color-scheme:dark){
+  body{background:#1a1a18;color:#e0ddd4}
+  .card{background:#26261f;border-color:rgba(255,255,255,0.1)}
+  h1{color:#e0ddd4} .sub{color:#888780}
+  .ltog{border-color:rgba(255,255,255,0.15)}
+  .ltog button{color:#888780}
+  .ltog button.act{background:#e0ddd4;color:#1a1a18}
+  #det{background:#1a1a18;color:#e0ddd4;border-color:rgba(255,255,255,0.08)}
+  .pc{background:#26261f;border-color:rgba(255,255,255,0.1)}
+  .ok{border-left:2.5px solid #1D9E75}
+  .pn{border-left:2.5px solid #BA7517}
+  .pv{color:#e0ddd4} .pl{color:#888780}
+  .foot{background:#1a1a18;color:#888780}
+  .c-purple rect{fill:#26215C;stroke:#AFA9EC} .c-purple text{fill:#CECBF6}
+  .c-teal   rect{fill:#04342C;stroke:#5DCAA5} .c-teal   text{fill:#9FE1CB}
+  .c-amber  rect{fill:#412402;stroke:#EF9F27} .c-amber  text{fill:#FAC775}
+  .c-coral  rect{fill:#4A1B0C;stroke:#F0997B} .c-coral  text{fill:#F5C4B3}
+  .c-blue   rect{fill:#042C53;stroke:#85B7EB} .c-blue   text{fill:#B5D4F4}
+  .c-green  rect{fill:#173404;stroke:#97C459} .c-green  text{fill:#C0DD97}
+}
+</style>
+</head>
+<body>
+<a href="index.html" style="position:fixed;top:14px;left:16px;z-index:200;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(13,16,24,0.88);border:1px solid rgba(232,184,75,0.4);border-radius:6px;color:#e8b84b;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-decoration:none;backdrop-filter:blur(10px);transition:background .2s;" onmouseover="this.style.background='rgba(232,184,75,0.12)'" onmouseout="this.style.background='rgba(13,16,24,0.88)'">← Index</a>
+<div class="card">
+
+<div class="ltog">
+  <button class="act" onclick="setLang('de',this)">DE</button>
+  <button onclick="setLang('en',this)">EN</button>
+</div>
+
+<h1 id="ttl">Fundamentale Fraktale Geometrische Feldtheorie (FFGFT)</h1>
+<p class="sub" id="sttl">Johann Pascher · T0-Zeit-Masse-Dualität · <a href="https://github.com/jpascher/T0-Time-Mass-Duality" target="_blank">github.com/jpascher/T0-Time-Mass-Duality</a></p>
+
+<!-- 5-column diagram — col width 116px, gap 10px, start x=30 -->
+<!-- centers: 88, 214, 340, 466, 592 -->
+<svg width="100%" viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="mh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+
+<!-- Root -->
+<g class="xn c-purple" onclick="showD('xi')">
+  <rect x="30" y="14" width="620" height="60" rx="8" stroke-width="0.5"/>
+  <text id="n-xi-1" font-size="14" font-weight="500" x="340" y="36" text-anchor="middle" dominant-baseline="central">ξ = 4/3 × 10⁻⁴</text>
+  <text id="n-xi-2" font-size="11" x="340" y="57" text-anchor="middle" dominant-baseline="central">Fundamentale Fraktale Geometrische Feldtheorie · T·m = 1</text>
+</g>
+
+<!-- Root → column connectors -->
+<path d="M340 74 L340 84 L88 84 L88 96"  fill="none" stroke="#888780" stroke-width="0.8" marker-end="url(#mh)"/>
+<path d="M340 74 L340 84 L214 84 L214 96" fill="none" stroke="#888780" stroke-width="0.8" marker-end="url(#mh)"/>
+<path d="M340 74 L340 84" fill="none" stroke="#888780" stroke-width="0.8"/>
+<line x1="340" y1="84" x2="340" y2="96" stroke="#888780" stroke-width="0.8" marker-end="url(#mh)"/>
+<path d="M340 74 L340 84 L466 84 L466 96" fill="none" stroke="#888780" stroke-width="0.8" marker-end="url(#mh)"/>
+<path d="M340 74 L340 84 L592 84 L592 96" fill="none" stroke="#888780" stroke-width="0.8" marker-end="url(#mh)"/>
+
+<!-- ── COL 1: TEAL — Fractal / g-2 (x=30, center=88) ── -->
+<g class="xn c-teal" onclick="showD('fr1')">
+  <rect x="30" y="96" width="116" height="52" rx="6" stroke-width="0.5"/>
+  <text id="n-fr1-1" font-size="12" font-weight="500" x="88" y="114" text-anchor="middle" dominant-baseline="central">Fraktal-Dimension</text>
+  <text id="n-fr1-2" font-size="11" x="88" y="134" text-anchor="middle" dominant-baseline="central">D_f = 3 − ξ</text>
+</g>
+<line x1="88" y1="148" x2="88" y2="164" stroke="#888780" stroke-width="0.8" marker-end="url(#mh)"/>
+<g class="xn c-teal" onclick="showD('fr2')">
+  <rect x="30" y="164" width="116" height="52" rx="6" stroke-width="0.5"/>
+  <text id="n-fr2-1" font-size="12" font-weight="500" x="88" y="182" text-anchor="middle" dominant-baseline="central">Fraktal-Korrektur</text>
+  <text id="n-fr2-2" font-size="11" x="88" y="202" text-anchor="middle" dominant-baseline="central">K_frak = 0.986</text>
+</g>
+<line x1="88" y1="216" x2="88" y2="232" stroke="#888780" stroke-width="0.8" marker-end="url(#mh)"/>
+<g class="xn c-teal" onclick="showD('fr3')">
+  <rect x="30" y="232" width="116" height="52" rx="6" stroke-width="0.5"/>
+  <text id="n-fr3-1" font-size="12" font-weight="500" x="88" y="250" text-anchor="middle" dominant-baseline="central">g-2 Anomalie</text>
+  <text id="n-fr3-2" font-size="11" x="88" y="270" text-anchor="middle" dominant-baseline="central">δ_e &lt; 0.015%</text>
+</g>
+
+<!-- ── COL 2: AMBER — EM / Masses (x=156, center=214) ── -->
+<g class="xn c-amber" onclick="showD('em1')">
+  <rect x="156" y="96" width="116" height="52" rx="6" stroke-width="0.5"/>
+  <text id="n-em1-1" font-size="12" font-weight="500" x="214" y="114" text-anchor="middle" dominant-baseline="central">Feinstruktur α</text>
+  <text id="n-em1-2" font-size="11" x="214" y="134" text-anchor="middle" dominant-baseline="central">1/137 aus ξ</text>
+</g>
+<line x1="214" y1="148" x2="214" y2="164" stroke="#888780" stroke-width="0.8" marker-end="url(#mh)"/>
+<g class="xn c-amber" onclick="showD('em2')">
+  <rect x="156" y="164" width="116" height="52" rx="6" stroke-width="0.5"/>
+  <text id="n-em2-1" font-size="12" font-weight="500" x="214" y="182" text-anchor="middle" dominant-baseline="central">Higgs-Vakuum</text>
+  <text id="n-em2-2" font-size="11" x="214" y="202" text-anchor="middle" dominant-baseline="central">v = 246 GeV</text>
+</g>
+<line x1="214" y1="216" x2="214" y2="232" stroke="#888780" stroke-width="0.8" marker-end="url(#mh)"/>
+<g class="xn c-amber" onclick="showD('em3')">
+  <rect x="156" y="232" width="116" height="52" rx="6" stroke-width="0.5"/>
+  <text id="n-em3-1" font-size="12" font-weight="500" x="214" y="250" text-anchor="middle" dominant-baseline="central">Leptonmassen</text>
+  <text id="n-em3-2" font-size="11" x="214" y="270" text-anchor="middle" dominant-baseline="central">m_e, m_μ, m_τ</text>
+</g>
+
+<!-- ── COL 3: CORAL — Forces / G (x=282, center=340) ── -->
+<g class="xn c-coral" onclick="showD('st1')">
+  <rect x="282" y="96" width="116" height="52" rx="6" stroke-width="0.5"/>
+  <text id="n-st1-1" font-size="12" font-weight="500" x="340" y="114" text-anchor="middle" dominant-baseline="central">Starke Kopplung</text>
+  <text id="n-st1-2" font-size="11" x="340" y="134" text-anchor="middle" dominant-baseline="central">αS = ξ^(−1/3)</text>
+</g>
+<line x1="340" y1="148" x2="340" y2="164" stroke="#888780" stroke-width="0.8" marker-end="url(#mh)"/>
+<g class="xn c-coral" onclick="showD('st2')">
+  <rect x="282" y="164" width="116" height="52" rx="6" stroke-width="0.5"/>
+  <text id="n-st2-1" font-size="12" font-weight="500" x="340" y="182" text-anchor="middle" dominant-baseline="central">Gravitation G</text>
+  <text id="n-st2-2" font-size="11" x="340" y="202" text-anchor="middle" dominant-baseline="central">G = ξ²/(4m_μ)</text>
+</g>
+<line x1="340" y1="216" x2="340" y2="232" stroke="#888780" stroke-width="0.8" marker-end="url(#mh)"/>
+<g class="xn c-coral" onclick="showD('st3')">
+  <rect x="282" y="232" width="116" height="52" rx="6" stroke-width="0.5"/>
+  <text id="n-st3-1" font-size="12" font-weight="500" x="340" y="250" text-anchor="middle" dominant-baseline="central">Quark-Massen</text>
+  <text id="n-st3-2" font-size="11" x="340" y="270" text-anchor="middle" dominant-baseline="central">alle 6 aus ξ</text>
+</g>
+
+<!-- ── COL 4: BLUE — Cosmology (x=408, center=466) ── -->
+<g class="xn c-blue" onclick="showD('co1')">
+  <rect x="408" y="96" width="116" height="52" rx="6" stroke-width="0.5"/>
+  <text id="n-co1-1" font-size="12" font-weight="500" x="466" y="114" text-anchor="middle" dominant-baseline="central">Kosmologie</text>
+  <text id="n-co1-2" font-size="11" x="466" y="134" text-anchor="middle" dominant-baseline="central">statisch, kein BB</text>
+</g>
+<line x1="466" y1="148" x2="466" y2="164" stroke="#888780" stroke-width="0.8" marker-end="url(#mh)"/>
+<g class="xn c-blue" onclick="showD('co2')">
+  <rect x="408" y="164" width="116" height="52" rx="6" stroke-width="0.5"/>
+  <text id="n-co2-1" font-size="12" font-weight="500" x="466" y="182" text-anchor="middle" dominant-baseline="central">4D-Torus</text>
+  <text id="n-co2-2" font-size="11" x="466" y="202" text-anchor="middle" dominant-baseline="central">Torus-Topologie</text>
+</g>
+<line x1="466" y1="216" x2="466" y2="232" stroke="#888780" stroke-width="0.8" marker-end="url(#mh)"/>
+<g class="xn c-blue" onclick="showD('co3')">
+  <rect x="408" y="232" width="116" height="52" rx="6" stroke-width="0.5"/>
+  <text id="n-co3-1" font-size="12" font-weight="500" x="466" y="250" text-anchor="middle" dominant-baseline="central">Kein DM/DE</text>
+  <text id="n-co3-2" font-size="11" x="466" y="270" text-anchor="middle" dominant-baseline="central">kein freier Param.</text>
+</g>
+
+<!-- ── COL 5: GREEN — Quantum Computing (x=534, center=592) ── -->
+<g class="xn c-green" onclick="showD('qc1')">
+  <rect x="534" y="96" width="116" height="52" rx="6" stroke-width="0.5"/>
+  <text id="n-qc1-1" font-size="12" font-weight="500" x="592" y="114" text-anchor="middle" dominant-baseline="central">Spin als Torsion</text>
+  <text id="n-qc1-2" font-size="11" x="592" y="134" text-anchor="middle" dominant-baseline="central">Dok. 174, 178</text>
+</g>
+<line x1="592" y1="148" x2="592" y2="164" stroke="#888780" stroke-width="0.8" marker-end="url(#mh)"/>
+<g class="xn c-green" onclick="showD('qc2')">
+  <rect x="534" y="164" width="116" height="52" rx="6" stroke-width="0.5"/>
+  <text id="n-qc2-1" font-size="12" font-weight="500" x="592" y="182" text-anchor="middle" dominant-baseline="central">T0-Qubits</text>
+  <text id="n-qc2-2" font-size="11" x="592" y="202" text-anchor="middle" dominant-baseline="central">deterministisch</text>
+</g>
+<line x1="592" y1="216" x2="592" y2="232" stroke="#888780" stroke-width="0.8" marker-end="url(#mh)"/>
+<g class="xn c-green" onclick="showD('qc3')">
+  <rect x="534" y="232" width="116" height="52" rx="6" stroke-width="0.5"/>
+  <text id="n-qc3-1" font-size="12" font-weight="500" x="592" y="250" text-anchor="middle" dominant-baseline="central">Shor &amp; Ising</text>
+  <text id="n-qc3-2" font-size="11" x="592" y="270" text-anchor="middle" dominant-baseline="central">ϕ-QFT, ξ-Dämpfung</text>
+</g>
+
+<!-- Level row labels -->
+<text id="lv1" font-size="10" fill="#888780" x="30" y="90">Ebene 1</text>
+<text id="lv2" font-size="10" fill="#888780" x="30" y="158">Ebene 2</text>
+<text id="lv3" font-size="10" fill="#888780" x="30" y="226">Ebene 3</text>
+</svg>
+
+<div id="det" style="color:#5f5e5a">
+  <span id="det-hint">↑ Klicke einen Knoten für Details zur Herleitung</span>
+</div>
+
+<p id="pred-title" style="font-size:12px;font-weight:500;color:#5f5e5a;margin:18px 0 6px">Numerische Vorhersagen vs. Experiment</p>
+<div class="pg">
+  <div class="pc ok"><div class="pv">0.014%</div><div class="pl" id="p1">g-2 Elektron — Restabweichung nach K_frak</div></div>
+  <div class="pc ok"><div class="pv">1/137.036</div><div class="pl" id="p2">Feinstrukturkonstante α — aus ξ berechnet</div></div>
+  <div class="pc ok"><div class="pv">173.0 GeV</div><div class="pl" id="p3">Top-Quark m_t (exp: 172.76 GeV)</div></div>
+  <div class="pc ok"><div class="pv">1778 MeV</div><div class="pl" id="p4">Tau-Masse m_τ (exp: 1776.86 MeV)</div></div>
+  <div class="pc pn"><div class="pv">CHSH ~10⁻³</div><div class="pl" id="p5">73-Qubit Bell-Test — T0-Abweichung von QM</div></div>
+  <div class="pc pn"><div class="pv">445 ns</div><div class="pl" id="p6">Korrelationsverzögerung über 1000 km (Satellit)</div></div>
+</div>
+
+<div class="foot">
+  <span id="foot-docs">149 Dokumente · Dok. 001–182 + 201 · <a href="https://github.com/jpascher/T0-Time-Mass-Duality">github.com/jpascher/T0-Time-Mass-Duality</a></span>
+  <span id="foot-legend">■ bestätigt &nbsp; ■ vorhergesagt</span>
+</div>
+</div>
+
+<script>
+const T = {
+  de: {
+    ttl: 'Fundamentale Fraktale Geometrische Feldtheorie (FFGFT)',
+    sttl: 'Johann Pascher · T0-Zeit-Masse-Dualität · <a href="https://github.com/jpascher/T0-Time-Mass-Duality" target="_blank">github.com/jpascher/T0-Time-Mass-Duality</a>',
+    hint: '↑ Klicke einen Knoten für Details zur Herleitung',
+    predTitle: 'Numerische Vorhersagen vs. Experiment',
+    footDocs: '149 Dokumente · Dok. 001–182 + 201 · <a href="https://github.com/jpascher/T0-Time-Mass-Duality">github.com/jpascher/T0-Time-Mass-Duality</a>',
+    footLegend: '■ bestätigt &nbsp; ■ vorhergesagt',
+    lv: ['Ebene 1','Ebene 2','Ebene 3'],
+    nodes: {
+      xi:  ['ξ = 4/3 × 10⁻⁴','Fundamentale Fraktale Geometrische Feldtheorie · T·m = 1'],
+      fr1: ['Fraktal-Dimension','D_f = 3 − ξ'],
+      fr2: ['Fraktal-Korrektur','K_frak = 0.986'],
+      fr3: ['g-2 Anomalie','δ_e < 0.015%'],
+      em1: ['Feinstruktur α','1/137 aus ξ'],
+      em2: ['Higgs-Vakuum','v = 246 GeV'],
+      em3: ['Leptonmassen','m_e, m_μ, m_τ'],
+      st1: ['Starke Kopplung','αS = ξ^(−1/3)'],
+      st2: ['Gravitation G','G = ξ²/(4m_μ)'],
+      st3: ['Quark-Massen','alle 6 aus ξ'],
+      co1: ['Kosmologie','statisch, kein BB'],
+      co2: ['4D-Torus','Torus-Topologie'],
+      co3: ['Kein DM/DE','kein freier Param.'],
+      qc1: ['Spin als Torsion','Dok. 174, 178'],
+      qc2: ['T0-Qubits','deterministisch'],
+      qc3: ['Shor & Ising','ϕ-QFT, ξ-Dämpfung'],
+    },
+    preds: [
+      'g-2 Elektron — Restabweichung nach K_frak',
+      'Feinstrukturkonstante α — aus ξ berechnet',
+      'Top-Quark m_t (exp: 172.76 GeV)',
+      'Tau-Masse m_τ (exp: 1776.86 MeV)',
+      '73-Qubit Bell-Test — T0-Abweichung von QM',
+      'Korrelationsverzögerung über 1000 km (Satellit)',
+    ],
+    details: {
+      xi:  ['ξ = 4/3 × 10⁻⁴ — Der universelle Urparameter','Dimensionsloser geometrischer Parameter aus der 3D-Raumstruktur: ξ = (4π/3)·(1/4π×10⁴). Der Faktor 4/3 kodiert die Kugelgeometrie, der 10⁻⁴-Faktor entsteht aus Loop-Unterdrückung in der QFT. Aus diesem einzigen Wert folgen alle physikalischen Konstanten. Standardmodell: >20 freie Parameter. FFGFT: genau 1.'],
+      fr1: ['Fraktale Dimension D_f = 3 − ξ ≈ 2.99987','Die Quantenraumzeit weicht minimal von ganzzahliger Dimension ab. D_f = 3 − ξ kodiert sämtliche Quantenkorrekturen rein geometrisch — ohne Renormierungsrezepte. Die winzige Abweichung von 3 ist die Quelle des universellen Korrekturfaktors K_frak. Dok. 132, 133.'],
+      fr2: ['Fraktal-Korrekturfaktor K_frak = 0.986','K_frak = (l_P/λ_C)^(D_f−3) = 0.986 ersetzt QED-Strahlungskorrekturen durch reine Geometrie. Für Elektron: K_frak^(3/2) = 0.979. Angewendet auf Fermionmassen, anomale magnetische Momente und Kopplungsstärken. Dok. 132, 133.'],
+      fr3: ['g-2 Anomalie: geometrisch erklärt','Anomales magnetisches Moment des Elektrons: die ~2%-Diskrepanz wird durch K_frak^(3/2) auf δ_e < 0.014% reduziert. Für das Myon dieselbe Struktur. Revision 12 von Dok. 018 enthält die vollständige Herleitung mit drei unabhängigen Bestätigungswegen.'],
+      em1: ['Feinstrukturkonstante α = 1/137.036 aus ξ','Methode 1: α = ξ·(E₀/MeV)² mit E₀ = 7.35 MeV → α⁻¹ ≈ 137.0. Methode 2: fraktale Renormierung α_nackt⁻¹ = 3π·ξ⁻¹·ln(Λ_P/m_μ) mit D_frak-Dämpfungsfaktor → α⁻¹ = 137.036. Beide Methoden klammern den Experimentalwert ein. Dok. 011, 041, 043, 044.'],
+      em2: ['Higgs-Vakuumerwartungswert v = 246 GeV','v = (4/3)·ξ₀^(−1/2)·K_quantum ≈ 246.2 GeV (exp: 246.22 GeV). Alle Yukawa-Kopplungen sind Potenzen von ξ multipliziert mit v. Higgs-Masse m_h = v·ξ^(1/4) ≈ 125 GeV. Dok. 005, 041.'],
+      em3: ['Leptonmassen — Grundton und Obertöne','m_e = v·(4/3)·ξ^(3/2) ≈ 0.502 MeV (exp: 0.511). m_μ = v·(16/5)·ξ ≈ 105.0 MeV (exp: 105.66). m_τ = v·(5/4)·ξ^(2/3) ≈ 1778 MeV (exp: 1776.86). Die drei Generationen sind Grundton und Obertöne eines geometrischen Resonators. Dok. 006, 159.'],
+      st1: ['Alle Kopplungsstärken als ξ-Potenzen','αS = ξ^(−1/3) ≈ 0.118 (stark). αW = ξ^(1/2) ≈ 0.0115 (schwach). αG = ξ² ≈ 1.78×10⁻⁸ (Gravitation). Alle vier fundamentalen Wechselwirkungen als Potenzen desselben geometrischen Parameters. Dok. 041.'],
+      st2: ['Gravitationskonstante G emergent aus ξ','G = ξ²/(4m_μ) in natürlichen Einheiten. Gravitation ist kein fundamentales Feld, sondern emergent aus der fraktalen Raumgeometrie. Stationäres Gravitationspotential als Zeitfeldgradient. Dok. 012, 127.'],
+      st3: ['Alle 6 Quark-Massen aus ξ','m_u = 2.27 MeV, m_d = 4.72 MeV, m_s = 97.9 MeV; m_c = 1.279 GeV, m_b = 4.254 GeV, m_t = 173.0 GeV. Schema: m_q = v·f(n,l,j)·ξ^p mit rationalen Bruchzahlen und einfachen Exponenten. Dok. 006, 042, 046.'],
+      co1: ['Statisches Universum — kein Urknall','Rotverschiebung entsteht durch Variation des intrinsischen Zeitfelds T̃(x), nicht durch Expansion. CMB-Temperatur folgt aus ξ ohne Expansionshypothese. Dok. 025, 026, 061, 063.'],
+      co2: ['4D-Torus-Topologie des Universums','Maximale Skala: L_max ≈ (1/ξ)·l_P. Minimale Skala: L_0 = ξ·l_P — unterhalb der Planck-Länge; kein echtes Null wegen fraktaler Bodenstruktur. Dok. 180, 181, 182.'],
+      co3: ['Kein Dark Matter, keine Dark Energy','DM/DE sind im ΛCDM notwendige Hilfshypothesen. Im T0-Modell erklären Zeitfeldgradienten alle Rotverschiebungsbeobachtungen. Baryon-Asymmetrie η ≈ 10⁻¹⁰ aus δ_CP via ξ. Dok. 143, 144, 025.'],
+      qc1: ['Spin als topologische Torsionskonfiguration','In FFGFT sind Spin-up und Spin-down keine abstrakten Zustände, sondern zwei geometrisch ausgezeichnete Torsionswindungen des Energiefelds. Magnetfelder, elektrische Felder (EDSR) und zirkulär polarisiertes Licht manipulieren den Spin, indem sie diese Torsion rotieren. Der Permanentmagnet beweist: diskrete Spin-Stabilität ist makroskopisch robust. Dok. 174, 178.'],
+      qc2: ['T0-Qubits — deterministisch statt probabilistisch','Standard-QM beschreibt Qubits als Vektoren α|0⟩ + β|1⟩ mit probabilistischem Kollaps. T0-Qubits sind Energie-Feld-Konfigurationen (z, r, θ) in Zylinderkoordinaten: r² ist Energiedichte, keine Wahrscheinlichkeit. Das ermöglicht deterministische Evolution bei Beibehaltung quantenmechanischer Interferenz. ξ-Dämpfung (Bell-Korrektur) unterdrückt Dekohärenz. Dok. 147, 175.'],
+      qc3: ['Shor-Algorithmus mit ϕ-QFT und Ising-Optimierung','Die ϕ-hierarchische QFT wendet Phasen 2π/ϕ^k statt 2π/2^k an und ist funktional äquivalent zur Standard-QFT, bietet aber zusätzliche Stabilität durch Bell-korrigierte Verschränkungsdämpfung. Vorhersage: CHSH-Abweichung ~10⁻³ in 73-Qubit-Systemen; räumliche Korrelationsverzögerung ~445 ns über 1000 km. Python-Implementierung: 100% Erfolgsrate bei N≤143. Ising-Maschine als minimaler Quantenresonator. Dok. 147, 161, 162, 176.'],
+    }
+  },
+  en: {
+    ttl: 'Fundamental Fractal Geometric Field Theory (FFGFT)',
+    sttl: 'Johann Pascher · T0 Time-Mass Duality · <a href="https://github.com/jpascher/T0-Time-Mass-Duality" target="_blank">github.com/jpascher/T0-Time-Mass-Duality</a>',
+    hint: '↑ Click a node for derivation details',
+    predTitle: 'Numerical predictions vs. experiment',
+    footDocs: '149 documents · Doc. 001–182 + 201 · <a href="https://github.com/jpascher/T0-Time-Mass-Duality">github.com/jpascher/T0-Time-Mass-Duality</a>',
+    footLegend: '■ confirmed &nbsp; ■ predicted',
+    lv: ['Level 1','Level 2','Level 3'],
+    nodes: {
+      xi:  ['ξ = 4/3 × 10⁻⁴','Fundamental Fractal Geometric Field Theory · T·m = 1'],
+      fr1: ['Fractal dimension','D_f = 3 − ξ'],
+      fr2: ['Fractal correction','K_frak = 0.986'],
+      fr3: ['g-2 anomaly','δ_e < 0.015%'],
+      em1: ['Fine structure α','1/137 from ξ'],
+      em2: ['Higgs vacuum','v = 246 GeV'],
+      em3: ['Lepton masses','m_e, m_μ, m_τ'],
+      st1: ['Strong coupling','αS = ξ^(−1/3)'],
+      st2: ['Gravitation G','G = ξ²/(4m_μ)'],
+      st3: ['Quark masses','all 6 from ξ'],
+      co1: ['Cosmology','static, no Big Bang'],
+      co2: ['4D torus','torus topology'],
+      co3: ['No DM/DE','no free parameter'],
+      qc1: ['Spin as torsion','Doc. 174, 178'],
+      qc2: ['T0 qubits','deterministic'],
+      qc3: ['Shor & Ising','ϕ-QFT, ξ-damping'],
+    },
+    preds: [
+      'g-2 electron — residual deviation after K_frak',
+      'Fine-structure constant α — computed from ξ',
+      'Top quark m_t (exp: 172.76 GeV)',
+      'Tau mass m_τ (exp: 1776.86 MeV)',
+      '73-qubit Bell test — T0 deviation from QM',
+      'Correlation delay over 1000 km (satellite)',
+    ],
+    details: {
+      xi:  ['ξ = 4/3 × 10⁻⁴ — The universal primordial parameter','Dimensionless geometric parameter from 3D spatial structure: ξ = (4π/3)·(1/4π×10⁴). The factor 4/3 encodes spherical geometry; the 10⁻⁴ factor arises from loop suppression in QFT. Every physical constant follows from this single value. Standard Model: >20 free parameters. FFGFT: exactly 1.'],
+      fr1: ['Fractal dimension D_f = 3 − ξ ≈ 2.99987','Quantum spacetime deviates minimally from integer dimension. D_f = 3 − ξ encodes all quantum corrections as pure geometry — no renormalisation recipes. The tiny deviation from 3 is the origin of the universal correction factor K_frak. Doc. 132, 133.'],
+      fr2: ['Fractal correction factor K_frak = 0.986','K_frak = (l_P/λ_C)^(D_f−3) = 0.986 replaces QED radiative corrections with pure geometry. For the electron: K_frak^(3/2) = 0.979. Applied to fermion masses, anomalous magnetic moments, and coupling strengths. Doc. 132, 133.'],
+      fr3: ['g-2 anomaly: explained geometrically','Anomalous magnetic moment of the electron: the ~2% discrepancy is reduced to δ_e < 0.014% by K_frak^(3/2). Same structure for the muon (g-2)_μ. Revision 12 of Doc. 018 contains the full derivation with three independent confirmation paths.'],
+      em1: ['Fine-structure constant α = 1/137.036 from ξ','Method 1: α = ξ·(E₀/MeV)² with E₀ = 7.35 MeV → α⁻¹ ≈ 137.0. Method 2: fractal renormalisation with D_frak damping → α⁻¹ = 137.036. Both methods bracket the experimental value. Doc. 011, 041, 043, 044.'],
+      em2: ['Higgs vacuum expectation value v = 246 GeV','v = (4/3)·ξ₀^(−1/2)·K_quantum ≈ 246.2 GeV (exp: 246.22 GeV). All Yukawa couplings are powers of ξ times v. Higgs mass m_h = v·ξ^(1/4) ≈ 125 GeV. Doc. 005, 041.'],
+      em3: ['Lepton masses — fundamental tone and overtones','m_e ≈ 0.502 MeV (exp: 0.511), m_μ ≈ 105.0 MeV (exp: 105.66), m_τ ≈ 1778 MeV (exp: 1776.86). The three generations are the fundamental tone and overtones of a single geometric resonator — not independent degrees of freedom. Doc. 006, 159.'],
+      st1: ['All coupling strengths as ξ-powers','αS = ξ^(−1/3) ≈ 0.118 (strong). αW = ξ^(1/2) ≈ 0.0115 (weak). αG = ξ² ≈ 1.78×10⁻⁸ (gravitational). All four fundamental interactions as powers of the same geometric parameter. Doc. 041.'],
+      st2: ['Gravitational constant G emergent from ξ','G = ξ²/(4m_μ) in natural units. Gravity is not a fundamental field but emerges from fractal spacetime geometry. The static gravitational potential is a time-field gradient. Doc. 012, 127.'],
+      st3: ['All 6 quark masses from ξ','m_u = 2.27, m_d = 4.72, m_s = 97.9 MeV; m_c = 1.279 GeV, m_b = 4.254 GeV, m_t = 173.0 GeV. Pattern: m_q = v·f(n,l,j)·ξ^p with rational fractions and simple exponents. Doc. 006, 042, 046.'],
+      co1: ['Static universe — no Big Bang','Redshift arises from variation of the intrinsic time field T̃(x), not from spatial expansion. CMB temperature follows from ξ without an expansion hypothesis. Doc. 025, 026, 061, 063.'],
+      co2: ['4D torus topology of the universe','Maximum scale: L_max ≈ (1/ξ)·l_P. Minimum scale: L_0 = ξ·l_P — below the Planck length; no true zero due to fractal floor structure. Doc. 180, 181, 182.'],
+      co3: ['No dark matter, no dark energy','DM/DE are necessary auxiliary hypotheses in ΛCDM. In T0, time-field gradients explain all redshift observations. Baryon asymmetry η ≈ 10⁻¹⁰ from δ_CP via ξ-geometry. Doc. 143, 144, 025.'],
+      qc1: ['Spin as topological torsion configuration','In FFGFT, spin-up and spin-down are not abstract states but two geometrically distinguished torsion windings of the energy field. Magnetic fields, electric fields (EDSR), and circularly polarised light manipulate spin by rotating this torsion. The permanent magnet proves: discrete spin stability is macroscopically robust. Doc. 174, 178.'],
+      qc2: ['T0 qubits — deterministic not probabilistic','Standard QM describes qubits as vectors α|0⟩ + β|1⟩ with probabilistic collapse. T0 qubits are energy-field configurations (z, r, θ) in cylindrical coordinates: r² is energy density, not probability. This enables deterministic evolution while preserving quantum interference. ξ-damping (Bell correction) suppresses decoherence. Doc. 147, 175.'],
+      qc3: ['Shor algorithm with ϕ-QFT and Ising optimisation','The ϕ-hierarchical QFT applies phases 2π/ϕ^k instead of 2π/2^k and is functionally equivalent to standard QFT, but offers additional stability through Bell-corrected entanglement damping. Predictions: CHSH deviation ~10⁻³ in 73-qubit systems; spatial correlation delay ~445 ns over 1000 km. Python implementation: 100% success rate for N≤143. Ising machine as minimal quantum resonator. Doc. 147, 161, 162, 176.'],
+    }
+  }
+};
+
+let lang = 'de';
+let lastKey = null;
+
+function setLang(l, btn) {
+  lang = l;
+  document.querySelectorAll('.ltog button').forEach(b => b.classList.remove('act'));
+  btn.classList.add('act');
+  applyLang();
+  if (lastKey) showD(lastKey);
+}
+
+function applyLang() {
+  const t = T[lang];
+  document.getElementById('ttl').innerHTML = t.ttl;
+  document.getElementById('sttl').innerHTML = t.sttl;
+  document.getElementById('pred-title').textContent = t.predTitle;
+  document.getElementById('foot-docs').innerHTML = t.footDocs;
+  document.getElementById('foot-legend').innerHTML = t.footLegend;
+  document.getElementById('lv1').textContent = t.lv[0];
+  document.getElementById('lv2').textContent = t.lv[1];
+  document.getElementById('lv3').textContent = t.lv[2];
+  for (const [k, v] of Object.entries(t.nodes)) {
+    const a = document.getElementById('n-'+k+'-1');
+    const b = document.getElementById('n-'+k+'-2');
+    if (a) a.textContent = v[0];
+    if (b) b.textContent = v[1];
+  }
+  t.preds.forEach((p, i) => {
+    const el = document.getElementById('p'+(i+1));
+    if (el) el.textContent = p;
+  });
+  if (!lastKey) {
+    document.getElementById('det').innerHTML = '<span id="det-hint">'+t.hint+'</span>';
+  }
+}
+
+function showD(k) {
+  lastKey = k;
+  const [title, body] = T[lang].details[k];
+  document.getElementById('det').innerHTML =
+    '<strong>'+title+'</strong><br><span style="color:#5f5e5a">'+body+'</span>';
+}
+</script>
+</body>
+</html>
