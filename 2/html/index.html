@@ -1,726 +1,889 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>T0 Zeit-Masse-Dualität - Eine neue Ära der Quantenphysik</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T0 Zeit-Masse-Dualität</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #07080f;
+  --surface:   #0d1018;
+  --card:      #111722;
+  --card-h:    #161e2e;
+  --border:    rgba(255,255,255,0.055);
+  --border-h:  rgba(232,184,75,0.35);
+  --gold:      #e8b84b;
+  --gold-dim:  rgba(232,184,75,0.12);
+  --blue:      #4fc3f7;
+  --blue-dim:  rgba(79,195,247,0.1);
+  --green:     #5dbb8e;
+  --coral:     #e07b6a;
+  --violet:    #a78bfa;
+  --text:      #eaeef5;
+  --text-sec:  #7a8aa0;
+  --text-ter:  #3d4f65;
+  --serif:     'Cormorant Garamond', Georgia, serif;
+  --mono:      'JetBrains Mono', monospace;
+  --sans:      'DM Sans', sans-serif;
+}
 
-    :root {
-      --primary: #1a1a2e;
-      --secondary: #16213e;
-      --accent: #0f3460;
-      --highlight: #e94560;
-      --text: #eaeaea;
-      --text-dim: #b8b8b8;
-      --glow: #00d4ff;
-      --success: #00ff88;
-      --warning: #ff6b6b;
-    }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--primary);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
 
-    .quantum-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(233, 69, 96, 0.1) 0%, transparent 50%);
-      z-index: -1;
-    }
+/* ── BACKGROUND GRID ─────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(79,195,247,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,195,247,0.025) 1px, transparent 1px);
+  background-size: 52px 52px;
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 20%, rgba(79,195,247,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 85% 80%, rgba(232,184,75,0.06) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
 
-    .particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
+/* ── LANG TOGGLE ─────────────────────────────── */
+.lang-bar {
+  position: fixed; top: 18px; right: 20px;
+  z-index: 100;
+  display: flex; gap: 4px;
+  background: rgba(13,16,24,0.85);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3px;
+  backdrop-filter: blur(12px);
+}
+.lang-bar button {
+  padding: 4px 13px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-sec);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all .2s;
+}
+.lang-bar button.on {
+  background: var(--gold);
+  color: #07080f;
+  font-weight: 500;
+}
 
-    .particle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: var(--glow);
-      border-radius: 50%;
-      opacity: 0;
-      animation: float 15s infinite;
-      box-shadow: 0 0 8px var(--glow);
-    }
+/* ── HERO ────────────────────────────────────── */
+.hero {
+  position: relative;
+  z-index: 1;
+  padding: 100px 2rem 60px;
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp .8s .1s forwards;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeUp .8s .2s forwards;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--text-sec);
+  font-weight: 300;
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: fadeUp .8s .3s forwards;
+}
+.formula-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 28px;
+  background: rgba(13,16,24,0.8);
+  border: 1px solid rgba(232,184,75,0.3);
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 1.25rem;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  opacity: 0;
+  animation: fadeUp .8s .4s forwards;
+  position: relative;
+  overflow: hidden;
+}
+.formula-pill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(232,184,75,0.06), transparent);
+  transform: translateX(-100%);
+  animation: shimmer 3s 1s infinite;
+}
+@keyframes shimmer { to { transform: translateX(200%); } }
 
-    @keyframes float {
-      0% { transform: translateY(100vh) scale(0); opacity: 0; }
-      10% { opacity: 0.7; }
-      90% { opacity: 0.7; }
-      100% { transform: translateY(-100vh) scale(1); opacity: 0; }
-    }
+/* stats row */
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 48px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp .8s .5s forwards;
+}
+.stat { text-align: center; }
+.stat-n {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1;
+}
+.stat-l {
+  font-size: 0.75rem;
+  color: var(--text-ter);
+  font-family: var(--mono);
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+.stat-div {
+  width: 1px;
+  background: var(--border);
+  align-self: stretch;
+  margin: 4px 0;
+}
 
-    header {
-      background: rgba(22, 33, 62, 0.85);
-      backdrop-filter: blur(10px);
-      padding: 2rem 0;
-      border-bottom: 1px solid rgba(233, 69, 96, 0.3);
-    }
+/* ── CATEGORY FILTER ─────────────────────────── */
+.filter-wrap {
+  position: relative; z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto 36px;
+  padding: 0 2rem;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  opacity: 0;
+  animation: fadeUp .8s .6s forwards;
+}
+.filter-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--text-ter);
+  text-transform: uppercase;
+  margin-right: 4px;
+}
+.fbtn {
+  padding: 5px 14px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--text-sec);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all .18s;
+  white-space: nowrap;
+}
+.fbtn:hover { border-color: rgba(255,255,255,0.15); color: var(--text); }
+.fbtn.on {
+  background: var(--gold-dim);
+  border-color: rgba(232,184,75,0.4);
+  color: var(--gold);
+}
 
-    .header-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      text-align: center;
-    }
+/* ── SECTION LABEL ───────────────────────────── */
+.section-label {
+  position: relative; z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto 18px;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.section-label-text {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--text-ter);
+  text-transform: uppercase;
+}
+.section-label-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
 
-    h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, var(--glow), var(--highlight));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: glow 3s ease-in-out infinite;
-    }
+/* ── GRID ────────────────────────────────────── */
+.grid {
+  position: relative; z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto 56px;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
 
-    @keyframes glow {
-      0%, 100% { filter: brightness(1); }
-      50% { filter: brightness(1.2); }
-    }
+/* ── CARD ────────────────────────────────────── */
+.card {
+  background: var(--card);
+  padding: 22px 24px;
+  cursor: pointer;
+  transition: background .18s;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--gold);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform .22s;
+}
+.card:hover {
+  background: var(--card-h);
+}
+.card:hover::before { transform: scaleY(1); }
 
-    .subtitle {
-      font-size: 1.3rem;
-      color: var(--text-dim);
-      margin-bottom: 1.5rem;
-    }
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.card-icon-wrap {
+  width: 36px; height: 36px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+.card-badges { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+.badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  padding: 2px 7px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.badge-gold   { background: rgba(232,184,75,0.12); color: var(--gold); border: 1px solid rgba(232,184,75,0.2); }
+.badge-blue   { background: rgba(79,195,247,0.1);  color: var(--blue); border: 1px solid rgba(79,195,247,0.2); }
+.badge-green  { background: rgba(93,187,142,0.1);  color: var(--green); border: 1px solid rgba(93,187,142,0.2); }
+.badge-coral  { background: rgba(224,123,106,0.1); color: var(--coral); border: 1px solid rgba(224,123,106,0.2); }
+.badge-violet { background: rgba(167,139,250,0.1); color: var(--violet); border: 1px solid rgba(167,139,250,0.2); }
 
-    .hero-formula {
-      font-size: 1.8rem;
-      padding: 0.8rem 1.5rem;
-      background: rgba(15, 52, 96, 0.5);
-      border: 2px solid var(--glow);
-      border-radius: 10px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+.card-title {
+  font-family: var(--serif);
+  font-size: 1.12rem;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 7px;
+  line-height: 1.25;
+  transition: color .18s;
+}
+.card:hover .card-title { color: #fff; }
 
-    .hero-formula:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-    }
+.card-desc {
+  font-size: 0.82rem;
+  color: var(--text-sec);
+  line-height: 1.55;
+  flex: 1;
+  margin-bottom: 16px;
+}
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
-    }
+.card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+.card-link-btn {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: gap .18s;
+}
+.card:hover .card-link-btn { gap: 9px; }
+.card-link-arrow { font-size: 12px; }
 
-    .section-header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
+/* icon bg colors per category */
+.ic-theory  { background: rgba(167,139,250,0.12); }
+.ic-tool    { background: rgba(79,195,247,0.1); }
+.ic-qc      { background: rgba(93,187,142,0.1); }
+.ic-math    { background: rgba(232,184,75,0.1); }
+.ic-cosmo   { background: rgba(224,123,106,0.1); }
+.ic-signal  { background: rgba(79,195,247,0.1); }
+.ic-media   { background: rgba(93,93,93,0.2); }
 
-    .section-title {
-      font-size: 2.2rem;
-      position: relative;
-      display: inline-block;
-    }
+/* ── HIDDEN ──────────────────────────────────── */
+.card.hide { display: none; }
 
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--highlight), transparent);
-      animation: slide 3s infinite;
-    }
+/* ── CTA ─────────────────────────────────────── */
+.cta-section {
+  position: relative; z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  padding: 0 2rem;
+}
+.cta-inner {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 36px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: var(--card);
+  flex-wrap: wrap;
+}
+.cta-text h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+.cta-text p { font-size: 0.88rem; color: var(--text-sec); }
+.cta-btn {
+  padding: 10px 26px;
+  background: var(--gold);
+  color: #07080f;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: opacity .18s, transform .18s;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
 
-    @keyframes slide {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
+/* ── FOOTER ──────────────────────────────────── */
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 24px 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 0.8rem;
+  color: var(--text-ter);
+  font-family: var(--mono);
+}
+footer a { color: var(--gold); text-decoration: none; }
 
-    .doc-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
+/* ── ANIMATIONS ──────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-    .doc-card {
-      background: rgba(22, 33, 62, 0.7);
-      border: 1px solid rgba(0, 212, 255, 0.2);
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .doc-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--glow);
-      box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
-    }
-
-    .card-icon {
-      font-size: 2rem;
-      margin-bottom: 0.8rem;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-
-    .card-title {
-      font-size: 1.2rem;
-      color: var(--glow);
-      margin-bottom: 0.5rem;
-    }
-
-    .card-desc {
-      color: var(--text-dim);
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-
-    .card-link {
-      display: inline-block;
-      margin-top: 1rem;
-      color: var(--highlight);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    .card-link:hover {
-      color: var(--glow);
-    }
-
-    .card-link:not(:last-child) {
-      margin-right: 1rem;
-    }
-
-    .category-badge {
-      display: inline-block;
-      padding: 0.3rem 0.8rem;
-      background: rgba(233, 69, 96, 0.2);
-      border: 1px solid var(--highlight);
-      border-radius: 15px;
-      font-size: 0.75rem;
-      margin-top: 0.5rem;
-      color: var(--highlight);
-    }
-
-    .deterministic-badge {
-      background: rgba(0, 255, 136, 0.2);
-      border: 1px solid var(--success);
-      color: var(--success);
-    }
-
-    .cta {
-      text-align: center;
-      padding: 3rem 2rem;
-      background: linear-gradient(135deg, rgba(233, 69, 96, 0.1), rgba(0, 212, 255, 0.1));
-      border-radius: 15px;
-      margin: 3rem 0;
-    }
-
-    .cta-button {
-      display: inline-block;
-      padding: 0.8rem 2.5rem;
-      background: var(--highlight);
-      color: white;
-      text-decoration: none;
-      border-radius: 25px;
-      font-weight: 500;
-      font-size: 1.1rem;
-      transition: all 0.3s ease;
-    }
-
-    .cta-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(233, 69, 96, 0.4);
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: rgba(22, 33, 62, 0.85);
-      border-top: 1px solid rgba(0, 212, 255, 0.3);
-    }
-
-    @media (max-width: 768px) {
-      h1 { font-size: 2.2rem; }
-      .subtitle { font-size: 1.1rem; }
-      .hero-formula { font-size: 1.4rem; padding: 0.6rem 1.2rem; }
-      .section-title { font-size: 1.8rem; }
-      .doc-grid { grid-template-columns: 1fr; }
-    }
-
-    .lang-toggle {
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      z-index: 1000;
-      display: flex;
-      gap: 8px;
-    }
-
-    .lang-btn {
-      padding: 0.4rem 0.8rem;
-      background: rgba(22, 33, 62, 0.9);
-      border: 1px solid var(--glow);
-      border-radius: 5px;
-      color: var(--text);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .lang-btn:hover, .lang-btn.active {
-      background: var(--glow);
-      color: var(--primary);
-    }
-  </style>
+/* ── RESPONSIVE ──────────────────────────────── */
+@media (max-width: 640px) {
+  .hero { padding: 80px 1.5rem 48px; }
+  .stats-row { gap: 24px; }
+  .stat-div { display: none; }
+  .grid { grid-template-columns: 1fr; }
+  .cta-inner { flex-direction: column; align-items: flex-start; }
+  footer { flex-direction: column; text-align: center; }
+}
+</style>
 </head>
 <body>
-  <div class="quantum-bg"></div>
-  <div class="particles" id="particles"></div>
 
-  <div class="lang-toggle">
-    <button class="lang-btn active" onclick="setLanguage('de', this)">DE</button>
-    <button class="lang-btn" onclick="setLanguage('en', this)">EN</button>
+<!-- LANG TOGGLE -->
+<div class="lang-bar">
+  <button class="on" onclick="setLang('de',this)">DE</button>
+  <button onclick="setLang('en',this)">EN</button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow" id="ey">Johann Pascher · T0 Zeit-Masse-Dualität</p>
+  <h1 id="h1">Alles aus <em>einer</em> Zahl</h1>
+  <p class="hero-sub" id="sub">Fundamentale Fraktale Geometrische Feldtheorie — alle Konstanten, alle Massen, alle Kräfte aus ξ</p>
+  <div class="formula-pill">T̃ · Ẽ = 1 &nbsp;·&nbsp; ξ = 4/3 × 10⁻⁴</div>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-n">149</div><div class="stat-l" id="sl1">Dokumente</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-n">1</div><div class="stat-l" id="sl2">Freier Parameter</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-n">&gt;20</div><div class="stat-l" id="sl3">SM-Parameter ersetzt</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-n">27</div><div class="stat-l" id="sl4">Interaktive Tools</div></div>
   </div>
+</section>
 
-  <header>
-    <div class="header-content">
-      <h1>T0 Zeit-Masse-Dualität</h1>
-      <p class="subtitle">Ein neuer Ansatz zur Quantenmechanik</p>
-      <div class="hero-formula">T_field · E_field = 1</div>
+<!-- FILTER -->
+<div class="filter-wrap">
+  <span class="filter-label" id="fl">Filter</span>
+  <button class="fbtn on" onclick="filter('all',this)" data-de="Alle" data-en="All">Alle</button>
+  <button class="fbtn" onclick="filter('theory',this)" data-de="Theorie" data-en="Theory">Theorie</button>
+  <button class="fbtn" onclick="filter('tool',this)" data-de="Interaktiv" data-en="Interactive">Interaktiv</button>
+  <button class="fbtn" onclick="filter('qc',this)" data-de="Quantencomputing" data-en="Quantum Computing">Quantencomputing</button>
+  <button class="fbtn" onclick="filter('math',this)" data-de="Mathematik" data-en="Mathematics">Mathematik</button>
+  <button class="fbtn" onclick="filter('cosmo',this)" data-de="Kosmologie" data-en="Cosmology">Kosmologie</button>
+  <button class="fbtn" onclick="filter('signal',this)" data-de="Signalanalyse" data-en="Signal Analysis">Signalanalyse</button>
+  <button class="fbtn" onclick="filter('media',this)" data-de="Medien" data-en="Media">Medien</button>
+</div>
+
+<!-- SECTION LABEL -->
+<div class="section-label">
+  <span class="section-label-text" id="sec-lbl">Ressourcen</span>
+  <div class="section-label-line"></div>
+  <span class="section-label-text" id="sec-count">27 einträge</span>
+</div>
+
+<!-- GRID -->
+<div class="grid" id="grid">
+
+  <!-- ── THEORIE ──────────────────────────────── -->
+  <div class="card" data-cat="theory" onclick="go('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/einheiten_reform_de_.html','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-theory">⚖️</div>
+      <div class="card-badges"><span class="badge badge-violet" data-de="Theorie" data-en="Theory">Theorie</span></div>
     </div>
-  </header>
-
-  <div class="container">
-    <!-- Key Resources Section -->
-    <section>
-      <div class="section-header">
-        <h2 class="section-title">Schlüsselressourcen</h2>
-      </div>
-      <div class="doc-grid">
-        <!-- 1. T0 Parameter Explorer -->
-        <div class="doc-card" onclick="window.open('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/T0_Explorer.html', '_blank')">
-          <div class="card-icon">🎛️</div>
-          <h3 class="card-title">T0 Parameter Explorer</h3>
-          <p class="card-desc">Interaktiver Schieberegler: Alle Teilchenmassen und Konstanten aus einem einzigen Parameter ξ berechnen.</p>
-          <span class="category-badge deterministic-badge">Interaktiv</span>
-          <a href="#" class="card-link">Explorer öffnen</a>
-        </div>
-        <!-- 2. Einheiten-Reform -->
-        <div class="doc-card" onclick="window.open('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/einheiten_reform_de_.html', '_blank')">
-          <div class="card-icon">🔄</div>
-          <h3 class="card-title">Einheiten-Reform</h3>
-          <p class="card-desc">Analyse der E=mc² ↔ E=m Äquivalenz.</p>
-          <span class="category-badge">Mathematik</span>
-          <a href="#" class="card-link">Reform verstehen</a>
-        </div>
-        <!-- 3. Teilchenspektrum -->
-        <div class="doc-card" onclick="window.open('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum.html', '_blank')">
-          <div class="card-icon">⚛️</div>
-          <h3 class="card-title">Teilchenspektrum-Vergleich</h3>
-          <p class="card-desc">Standard Model (61+ Teilchen) vs. T0 (1 Feld).</p>
-          <span class="category-badge">Teilchenphysik</span>
-          <a href="#" class="card-link">Vergleich ansehen</a>
-        </div>
-        <!-- 4. Teilchenmassen -->
-        <div class="doc-card" onclick="window.open('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/simple_mass_formula.html', '_blank')">
-          <div class="card-icon">⚛️</div>
-          <h3 class="card-title">Teilchenmassen</h3>
-          <p class="card-desc">Ein-Formel-Rechner: E = 1/ξ berechnet ALLE Teilchenmassen mit 98% Genauigkeit – ohne freie Parameter.</p>
-          <span class="category-badge deterministic-badge">Parameter-frei</span>
-          <a href="#" class="card-link">Rechner öffnen</a>
-        </div>
-        <!-- 5. Deterministischer Simulator -->
-        <div class="doc-card" onclick="window.open('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/quantum_simulator_deterministic.html', '_blank')">
-          <div class="card-icon">💻</div>
-          <h3 class="card-title">Deterministischer Simulator</h3>
-          <p class="card-desc">Vollständig deterministischer Quantencomputer-Simulator für 3-10 Qubits.</p>
-          <span class="category-badge">Simulator</span>
-          <a href="#" class="card-link">Simulator starten</a>
-        </div>
-        <!-- 6. T0-Shor -->
-        <div class="doc-card" onclick="window.open('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_Shore_simulator.html', '_blank')">
-          <div class="card-icon">🔐</div>
-          <h3 class="card-title">T0-Shor Algorithmus</h3>
-          <p class="card-desc">Deterministischer Shor-Algorithmus für garantierte Faktorisierung.</p>
-          <span class="category-badge">Kryptografie</span>
-          <a href="#" class="card-link">Shor testen</a>
-        </div>
-        <!-- 7. Faktorisierung Demo -->
-        <div class="doc-card" onclick="window.open('https://jpascher.github.io/T0-Time-Mass-Duality/rsa/t0_factorization_demo.html', '_blank')">
-          <div class="card-icon">🔬</div>
-          <h3 class="card-title">T0-Faktorisierung Demo</h3>
-          <p class="card-desc">Praktische Demonstration der deterministischen Faktorisierung mit T0.</p>
-          <span class="category-badge deterministic-badge">Deterministisch</span>
-          <a href="#" class="card-link">Demo starten</a>
-        </div>
-        <!-- 8. Quantencomputing -->
-        <div class="doc-card" onclick="window.open('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_simple.html', '_blank')">
-          <div class="card-icon">🌟</div>
-          <h3 class="card-title">T0-Quantencomputing</h3>
-          <p class="card-desc">Deterministische Quantensimulation: T0-Qubits, Bell-Dämpfung, φ-QFT, Shor-Algorithmus und CHSH-Vorhersagen.</p>
-          <span class="category-badge">Quantencomputing</span>
-          <a href="#" class="card-link">Jetzt entdecken</a>
-        </div>
-        <!-- 9. Teilchenphysik -->
-        <div class="doc-card" onclick="window.open('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/teilchenphysik-deutsch.html', '_blank')">
-          <div class="card-icon">⚛️</div>
-          <h3 class="card-title">Teilchenphysik: ξ-Rahmenwerk</h3>
-          <p class="card-desc">Vereinfachte Gleichungen und neue Erkenntnisse der T0-Teilchenphysik.</p>
-          <span class="category-badge">Theorie</span>
-          <a href="#" class="card-link">Jetzt entdecken</a>
-        </div>
-        <!-- 11. Myon g-2 -->
-        <div class="doc-card" onclick="window.open('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/muon_g2_analysis.html', '_blank')">
-          <div class="card-icon">🧲</div>
-          <h3 class="card-title">Myon g-2 Analyse</h3>
-          <p class="card-desc">Vollständige parameterfreie Berechnung des anomalen magnetischen Moments des Myons im T0-Modell.</p>
-          <span class="category-badge deterministic-badge">Parameterfrei</span>
-          <a href="#" class="card-link">Analyse öffnen</a>
-        </div>
-        <!-- 12. Lepton-Lebensdauer -->
-        <div class="doc-card" onclick="window.open('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/T0_Lifetime_Explorer.html', '_blank')">
-          <div class="card-icon">⏱️</div>
-          <h3 class="card-title">Lepton-Lebensdauer Explorer</h3>
-          <p class="card-desc">Interaktiver Explorer: Lebensdauer-Verhältnis τμ/ττ aus Torus-Geometrie mit K_frak und Farbfaktor. Abweichung nur 0,11%.</p>
-          <span class="category-badge deterministic-badge">Interaktiv</span>
-          <a href="#" class="card-link">Explorer öffnen</a>
-        </div>
-        <!-- 13. 1/137 -->
-        <div class="doc-card" onclick="window.open('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/137_hidden_secret.html', '_blank')">
-          <div class="card-icon">🔮</div>
-          <h3 class="card-title">Das Geheimnis von 1/137</h3>
-          <p class="card-desc">Die neue Perspektiveninversion in der Fundamentalphysik - warum 137 kein Zufall ist.</p>
-          <span class="category-badge">Fundamentalphysik</span>
-          <a href="#" class="card-link">Entdecken</a>
-        </div>
-        <!-- 14. Musikalische Spirale -->
-        <div class="doc-card" onclick="window.open('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/musical_spiral_137.html', '_blank')">
-          <div class="card-icon">🎵</div>
-          <h3 class="card-title">Die musikalische Spirale und 137</h3>
-          <p class="card-desc">Mathematische Entdeckung: (4/3)^137 ≈ 2^57 - die kosmische Resonanz mit 15 Dezimalstellen Genauigkeit.</p>
-          <span class="category-badge">Mathematik</span>
-          <a href="#" class="card-link">Resonanz erkunden</a>
-        </div>
-        <!-- 15. Kosmische Beziehungen -->
-        <div class="doc-card" onclick="window.open('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/cosmic.html', '_blank')">
-          <div class="card-icon">🌌</div>
-          <h3 class="card-title">Kosmische Beziehungen</h3>
-          <p class="card-desc">Gravitation, CMB, Casimir-Effekt und Rotverschiebung im ξ-Universum.</p>
-          <span class="category-badge">Kosmologie</span>
-          <a href="#" class="card-link">Kosmos entdecken</a>
-        </div>
-        <!-- 16. YouTube -->
-        <div class="doc-card" onclick="window.open('https://www.youtube.com/@Time-MassDuality', '_blank')">
-          <div class="card-icon">📺</div>
-          <h3 class="card-title">YouTube Kanal</h3>
-          <p class="card-desc">Video-Tutorials, Demonstrationen und detaillierte Erklärungen der T0-Theorie.</p>
-          <span class="category-badge">Video</span>
-          <a href="#" class="card-link">Kanal besuchen</a>
-        </div>
-        <!-- 17. T0 Model Website -->
-        <div class="doc-card" onclick="window.open('https://sites.google.com/view/t0-model-deterministic-quantum', '_blank')">
-          <div class="card-icon">🌐</div>
-          <h3 class="card-title">T0 Model Website</h3>
-          <p class="card-desc">Umfassende Übersicht über das deterministische T0-Quantenmodell mit allen wichtigen Konzepten.</p>
-          <span class="category-badge">Website</span>
-          <a href="#" class="card-link">Website besuchen</a>
-        </div>
-        <!-- 18. Audio-Bibliothek (Spotify) -->
-        <div class="doc-card" onclick="window.open('https://open.spotify.com/show/0PwnOIqjFepxA7NQ5i3fwR', '_blank')">
-          <div class="card-icon">🎧</div>
-          <h3 class="card-title">T0 Audio-Bibliothek</h3>
-          <p class="card-desc">Podcast-Serie mit Diskussionen und Einführungen.</p>
-          <span class="category-badge">Audio</span>
-          <a href="#" class="card-link">Jetzt streamen</a>
-        </div>
-        <!-- 18. GitHub -->
-        <div class="doc-card" onclick="window.open('https://github.com/jpascher/T0-Time-Mass-Duality/tree/main', '_blank')">
-          <div class="card-icon">📁</div>
-          <h3 class="card-title">GitHub Repository</h3>
-          <p class="card-desc">Vollständiger Quellcode, Dokumentation und alle T0-Theorie Dateien.</p>
-          <span class="category-badge">Repository</span>
-          <a href="#" class="card-link">Repository besuchen</a>
-        </div>
-        <!-- 19. Buch-Präsentation -->
-        <div class="doc-card" onclick="window.location.href='presentation.html'">
-          <div class="card-icon">📖</div>
-          <h3 class="card-title">Buch-Präsentation</h3>
-          <p class="card-desc">Interaktive Slideshow: Alle Kernaussagen des Buches „Von Alpha=1 zur vollständigen Physik" in 35 Folien (DE/EN).</p>
-          <span class="category-badge deterministic-badge">Interaktiv</span>
-          <a href="presentation.html" class="card-link">Präsentation öffnen</a>
-        </div>
-        <!-- 20. Narrative FFGFT -->
-        <div class="doc-card" onclick="window.location.href='narrativ.html'">
-          <div class="card-icon">🧠</div>
-          <h3 class="card-title">FFGFT Narrativ</h3>
-          <p class="card-desc">Das Universum als sich vertiefendes Gehirn – die erzählerische Version der FFGFT in 18 Kapiteln mit Metaphern und Formeln.</p>
-          <span class="category-badge deterministic-badge">Interaktiv</span>
-          <a href="narrativ.html" class="card-link">Narrativ öffnen</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Signal Analysis Section -->
-    <section>
-      <div class="section-header">
-        <h2 class="section-title">Signalanalyse</h2>
-      </div>
-      <div class="doc-grid">
-        <div class="doc-card" onclick="window.open('https://jpascher.github.io/T0-Time-Mass-Duality/sig/xi_harmonic_analysis_demo.html', '_blank')">
-          <div class="card-icon">🔊</div>
-          <h3 class="card-title">Xi Harmonische Analyse</h3>
-          <p class="card-desc">Interaktive Demonstration der T0-Signalanalyse.</p>
-          <span class="category-badge">Signalanalyse</span>
-          <a href="#" class="card-link">Demo starten</a>
-        </div>
-        <div class="doc-card" onclick="window.open('https://jpascher.github.io/T0-Time-Mass-Duality/sig/xi_oscilloscope_spectrum-basis.html', '_blank')">
-          <div class="card-icon">📊</div>
-          <h3 class="card-title">Spektrumanalyse-Tool</h3>
-          <p class="card-desc">Oszilloskop-ähnliches Spektrumanalyse-Tool mit T0-Prinzipien.</p>
-          <span class="category-badge">Signalanalyse</span>
-          <a href="#" class="card-link">Tool öffnen</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta">
-      <h2>Die T0-Perspektive erkunden</h2>
-      <p style="font-size: 1.1rem; margin: 1rem 0; color: var(--text-dim);">
-        Erkunden Sie das mathematische Rahmenwerk hinter diesen interaktiven Tools.
-      </p>
-      <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/040_Hdokument_De.pdf" class="cta-button" target="_blank">
-        Vollständiges Paper lesen
-      </a>
-    </section>
+    <h3 class="card-title" data-de="Einheiten-Reform" data-en="Units Reform">Einheiten-Reform</h3>
+    <p class="card-desc" data-de="Analyse der E=mc² ↔ E=m Äquivalenz und die mathematische Bedeutung der Einheitenwahl." data-en="Analysis of the E=mc² ↔ E=m equivalence and the mathematical significance of unit choice.">Analyse der E=mc² ↔ E=m Äquivalenz und die mathematische Bedeutung der Einheitenwahl.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Öffnen" data-en="Open">Öffnen</span><span class="card-link-arrow">→</span></span></div>
   </div>
 
-  <footer>
-    <p>&copy; 2025 T0 Zeit-Masse-Dualität | Johann Pascher</p>
-    <p style="margin-top: 0.5rem; color: var(--text-dim);">
-      Kontakt: <a href="/cdn-cgi/l/email-protection#b2d8dddad3dcdc9cc2d3c1d1dad7c0f2d5dfd3dbde9cd1dddf" style="color: var(--highlight);"><span class="__cf_email__" data-cfemail="53393c3b323d3d7d233220303b362113343e323a3f7d303c3e">[email&#160;protected]</span></a>
-    </p>
-  </footer>
+  <div class="card" data-cat="theory" onclick="go('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/complete_particle_spectrum.html','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-theory">⚛️</div>
+      <div class="card-badges"><span class="badge badge-violet" data-de="Theorie" data-en="Theory">Theorie</span></div>
+    </div>
+    <h3 class="card-title" data-de="Teilchenspektrum-Vergleich" data-en="Particle Spectrum Comparison">Teilchenspektrum-Vergleich</h3>
+    <p class="card-desc" data-de="Standard Model (61+ Teilchen, >20 Parameter) vs. T0 (1 Energiefeld, 1 Parameter)." data-en="Standard Model (61+ particles, >20 parameters) vs. T0 (1 energy field, 1 parameter).">Standard Model (61+ Teilchen, >20 Parameter) vs. T0 (1 Energiefeld, 1 Parameter).</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Vergleich" data-en="Compare">Vergleich</span><span class="card-link-arrow">→</span></span></div>
+  </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    function createParticles() {
-      const particlesContainer = document.getElementById('particles');
-      const particleCount = 40;
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.animationDelay = Math.random() * 15 + 's';
-        particle.style.animationDuration = 15 + Math.random() * 10 + 's';
-        particlesContainer.appendChild(particle);
-      }
-    }
+  <div class="card" data-cat="theory" onclick="go('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/teilchenphysik-deutsch.html','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-theory">🧩</div>
+      <div class="card-badges"><span class="badge badge-violet" data-de="Theorie" data-en="Theory">Theorie</span></div>
+    </div>
+    <h3 class="card-title" data-de="Teilchenphysik: ξ-Rahmenwerk" data-en="Particle Physics: ξ-Framework">Teilchenphysik: ξ-Rahmenwerk</h3>
+    <p class="card-desc" data-de="Vereinfachte Gleichungen und neue Erkenntnisse der T0-Teilchenphysik — alle Kräfte als Potenzen von ξ." data-en="Simplified equations and new insights of T0 particle physics — all forces as powers of ξ.">Vereinfachte Gleichungen und neue Erkenntnisse der T0-Teilchenphysik — alle Kräfte als Potenzen von ξ.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Öffnen" data-en="Open">Öffnen</span><span class="card-link-arrow">→</span></span></div>
+  </div>
 
-    function setLanguage(lang, button) {
-      const buttons = document.querySelectorAll('.lang-btn');
-      buttons.forEach(btn => btn.classList.remove('active'));
-      button.classList.add('active');
+  <div class="card" data-cat="theory" onclick="go('presentation.html','_self')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-theory">📖</div>
+      <div class="card-badges"><span class="badge badge-violet" data-de="Theorie" data-en="Theory">Theorie</span><span class="badge badge-blue" data-de="Interaktiv" data-en="Interactive">Interaktiv</span></div>
+    </div>
+    <h3 class="card-title" data-de="Buch-Präsentation" data-en="Book Presentation">Buch-Präsentation</h3>
+    <p class="card-desc" data-de="35 Folien: Alle Kernaussagen aus „Von Alpha=1 zur vollständigen Physik" — interaktiv, DE/EN." data-en="35 slides: All key insights from 'From Alpha=1 to Complete Physics' — interactive, DE/EN.">35 Folien: Alle Kernaussagen aus „Von Alpha=1 zur vollständigen Physik" — interaktiv, DE/EN.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Präsentation" data-en="Presentation">Präsentation</span><span class="card-link-arrow">→</span></span></div>
+  </div>
 
-      if (lang === 'en') {
-        document.querySelector('h1').textContent = 'T0 Time-Mass Duality';
-        document.querySelector('.subtitle').textContent = 'A New Approach to Quantum Mechanics';
-        document.querySelector('.hero-formula').textContent = 'T_field · E_field = 1';
+  <div class="card" data-cat="theory" onclick="go('narrativ.html','_self')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-theory">🧠</div>
+      <div class="card-badges"><span class="badge badge-violet" data-de="Theorie" data-en="Theory">Theorie</span><span class="badge badge-blue" data-de="Interaktiv" data-en="Interactive">Interaktiv</span></div>
+    </div>
+    <h3 class="card-title" data-de="FFGFT Narrativ" data-en="FFGFT Narrative">FFGFT Narrativ</h3>
+    <p class="card-desc" data-de="Das Universum als sich vertiefendes Gehirn — 18 Kapitel mit Metaphern, Formeln und geometrischer Anschauung." data-en="The universe as a deepening brain — 18 chapters with metaphors, formulas, and geometric intuition.">Das Universum als sich vertiefendes Gehirn — 18 Kapitel mit Metaphern, Formeln und geometrischer Anschauung.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Narrativ" data-en="Narrative">Narrativ</span><span class="card-link-arrow">→</span></span></div>
+  </div>
 
-        document.querySelectorAll('.section-title')[0].textContent = 'Key Resources';
-        document.querySelectorAll('.section-title')[1].textContent = 'Signal Analysis';
+  <!-- ── INTERAKTIVE TOOLS ─────────────────────── -->
+  <div class="card" data-cat="tool" onclick="go('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/T0_Explorer.html','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-tool">🎛️</div>
+      <div class="card-badges"><span class="badge badge-blue" data-de="Interaktiv" data-en="Interactive">Interaktiv</span><span class="badge badge-gold" data-de="Parameterfrei" data-en="Parameter-free">Parameterfrei</span></div>
+    </div>
+    <h3 class="card-title" data-de="T0 Parameter Explorer" data-en="T0 Parameter Explorer">T0 Parameter Explorer</h3>
+    <p class="card-desc" data-de="Echtzeit-Schieberegler: Alle Teilchenmassen und Naturkonstanten live aus ξ berechnen." data-en="Real-time slider: Calculate all particle masses and constants live from ξ.">Echtzeit-Schieberegler: Alle Teilchenmassen und Naturkonstanten live aus ξ berechnen.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Explorer" data-en="Explorer">Explorer</span><span class="card-link-arrow">→</span></span></div>
+  </div>
 
-        const cardTitles = document.querySelectorAll('.card-title');
-        cardTitles[0].textContent = 'T0 Parameter Explorer';
-        cardTitles[1].textContent = 'Units Reform';
-        cardTitles[2].textContent = 'Particle Spectrum Comparison';
-        cardTitles[3].textContent = 'Particle Mass';
-        cardTitles[4].textContent = 'Deterministic Simulator';
-        cardTitles[5].textContent = 'T0-Shor Algorithm';
-        cardTitles[6].textContent = 'T0 Factorization Demo';
-        cardTitles[7].textContent = 'T0 Quantum Simply Explained';
-        cardTitles[8].textContent = 'Particle Physics: ξ-Framework';
-        cardTitles[9].textContent = 'Muon g-2 Analysis';
-        cardTitles[10].textContent = 'Lepton Lifetime Explorer';
-        cardTitles[11].textContent = 'The Hidden Secret of 1/137';
-        cardTitles[12].textContent = 'The Musical Spiral and 137';
-        cardTitles[13].textContent = 'Cosmic Relations';
-        cardTitles[14].textContent = 'YouTube Channel';
-        cardTitles[15].textContent = 'T0 Model Website';
-        cardTitles[16].textContent = 'T0 Audio Library';
-        cardTitles[17].textContent = 'GitHub Repository';
-        cardTitles[18].textContent = 'Book Presentation';
-        cardTitles[19].textContent = 'FFGFT Narrative';
-        cardTitles[20].textContent = 'Xi Harmonic Analysis';
-        cardTitles[21].textContent = 'Spectrum Analysis Tool';
+  <div class="card" data-cat="tool" onclick="go('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/simple_mass_formula.html','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-tool">⚗️</div>
+      <div class="card-badges"><span class="badge badge-gold" data-de="Parameterfrei" data-en="Parameter-free">Parameterfrei</span></div>
+    </div>
+    <h3 class="card-title" data-de="Teilchenmassen-Rechner" data-en="Particle Mass Calculator">Teilchenmassen-Rechner</h3>
+    <p class="card-desc" data-de="E = 1/ξ berechnet ALLE Teilchenmassen mit 98% Genauigkeit — keine freien Parameter, eine Formel." data-en="E = 1/ξ calculates ALL particle masses with 98% accuracy — no free parameters, one formula.">E = 1/ξ berechnet ALLE Teilchenmassen mit 98% Genauigkeit — keine freien Parameter, eine Formel.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Rechner" data-en="Calculator">Rechner</span><span class="card-link-arrow">→</span></span></div>
+  </div>
 
-        const cardDescs = document.querySelectorAll('.card-desc');
-        cardDescs[0].textContent = 'Interactive slider: Calculate all particle masses and constants from a single parameter ξ.';
-        cardDescs[1].textContent = 'Analysis of the E=mc² ↔ E=m equivalence.';
-        cardDescs[2].textContent = 'Standard Model (61+ particles) vs. T0 (1 field).';
-        cardDescs[3].textContent = 'One-formula calculator: E = 1/ξ calculates ALL particle masses with 98% accuracy – without free parameters.';
-        cardDescs[4].textContent = 'Fully deterministic quantum computer simulator for 3-10 qubits.';
-        cardDescs[5].textContent = 'Deterministic Shor algorithm for guaranteed factorization.';
-        cardDescs[6].textContent = 'Practical demonstration of deterministic factorization with T0.';
-        cardDescs[7].textContent = 'Introduction to T0 quantum computing with the energy-ocean metaphor.';
-        cardDescs[8].textContent = 'Simplified equations and new insights of T0 particle physics.';
-        cardDescs[9].textContent = 'Complete parameter-free calculation of the anomalous magnetic moment of the muon in T0 model.';
-        cardDescs[10].textContent = 'Interactive explorer: Lifetime ratio τμ/ττ from torus geometry with K_frak and color factor. Only 0.11% deviation.';
-        cardDescs[11].textContent = 'The new perspective inversion in fundamental physics - why 137 is no coincidence.';
-        cardDescs[12].textContent = 'Mathematical discovery: (4/3)^137 ≈ 2^57 - the cosmic resonance with 15 decimal places accuracy.';
-        cardDescs[13].textContent = 'Gravitation, CMB, Casimir effect and redshift in the ξ-universe.';
-        cardDescs[14].textContent = 'Video tutorials, demonstrations and detailed explanations of T0 theory.';
-        cardDescs[15].textContent = 'Comprehensive overview of the deterministic T0 quantum model with all key concepts.';
-        cardDescs[16].textContent = 'Podcast series with discussions and introductions.';
-        cardDescs[17].textContent = 'Complete source code, documentation and all T0-theory files.';
-        cardDescs[18].textContent = 'Interactive slideshow: All key insights from the book "From Alpha=1 to Complete Physics" in 35 slides (DE/EN).';
-        cardDescs[19].textContent = 'The universe as a deepening brain – the narrative version of the FFGFT in 18 chapters with metaphors and formulas.';
-        cardDescs[20].textContent = 'Interactive demonstration of T0 signal analysis.';
-        cardDescs[21].textContent = 'Oscilloscope-like spectrum analysis tool with T0 principles.';
+  <div class="card" data-cat="tool" onclick="go('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/muon_g2_analysis.html','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-tool">🧲</div>
+      <div class="card-badges"><span class="badge badge-gold" data-de="Parameterfrei" data-en="Parameter-free">Parameterfrei</span></div>
+    </div>
+    <h3 class="card-title" data-de="Myon g-2 Analyse" data-en="Muon g-2 Analysis">Myon g-2 Analyse</h3>
+    <p class="card-desc" data-de="Vollständige parameterfreie Berechnung des anomalen magnetischen Moments — K_frak^(3/2) reduziert Abweichung auf 0.014%." data-en="Complete parameter-free calculation of the anomalous magnetic moment — K_frak^(3/2) reduces deviation to 0.014%.">Vollständige parameterfreie Berechnung des anomalen magnetischen Moments — K_frak^(3/2) reduziert Abweichung auf 0.014%.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Analyse" data-en="Analysis">Analyse</span><span class="card-link-arrow">→</span></span></div>
+  </div>
 
-        const badges = document.querySelectorAll('.category-badge:not(.deterministic-badge)');
-        badges[0].textContent = 'Mathematics';
-        badges[1].textContent = 'Particle Physics';
-        badges[2].textContent = 'Simulator';
-        badges[3].textContent = 'Cryptography';
-        badges[4].textContent = 'Quantum Computing';
-        badges[5].textContent = 'Theory';
-        badges[6].textContent = 'Fundamental Physics';
-        badges[7].textContent = 'Mathematics';
-        badges[8].textContent = 'Cosmology';
-        badges[9].textContent = 'Video';
-        badges[10].textContent = 'Website';
-        badges[11].textContent = 'Audio';
-        badges[12].textContent = 'Repository';
-        badges[13].textContent = 'Signal Analysis';
-        badges[14].textContent = 'Signal Analysis';
+  <div class="card" data-cat="tool" onclick="go('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/T0_Lifetime_Explorer.html','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-tool">⏱️</div>
+      <div class="card-badges"><span class="badge badge-blue" data-de="Interaktiv" data-en="Interactive">Interaktiv</span></div>
+    </div>
+    <h3 class="card-title" data-de="Lepton-Lebensdauer Explorer" data-en="Lepton Lifetime Explorer">Lepton-Lebensdauer Explorer</h3>
+    <p class="card-desc" data-de="τμ/ττ aus Torus-Geometrie mit K_frak und Farbfaktor — Abweichung nur 0,11% vom Experiment." data-en="τμ/ττ from torus geometry with K_frak and colour factor — only 0.11% deviation from experiment.">τμ/ττ aus Torus-Geometrie mit K_frak und Farbfaktor — Abweichung nur 0,11% vom Experiment.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Explorer" data-en="Explorer">Explorer</span><span class="card-link-arrow">→</span></span></div>
+  </div>
 
-        const detBadges = document.querySelectorAll('.deterministic-badge');
-        detBadges[0].textContent = 'Interactive';
-        detBadges[1].textContent = 'Parameter-free';
-        detBadges[2].textContent = 'Deterministic';
-        detBadges[3].textContent = 'Parameter-free';
-        detBadges[4].textContent = 'Interactive';
-        detBadges[5].textContent = 'Interactive';
-        detBadges[6].textContent = 'Interactive';
+  <div class="card" data-cat="tool" onclick="go('FFGFT_Visualisierung_5Saeulen_DE_EN.html','_self')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-tool">🗺️</div>
+      <div class="card-badges"><span class="badge badge-blue" data-de="Interaktiv" data-en="Interactive">Interaktiv</span><span class="badge badge-gold" data-de="DE/EN" data-en="DE/EN">DE/EN</span></div>
+    </div>
+    <h3 class="card-title" data-de="FFGFT Ableitungskaskade" data-en="FFGFT Derivation Cascade">FFGFT Ableitungskaskade</h3>
+    <p class="card-desc" data-de="Alle 5 Säulen der FFGFT: Fraktal, EM, Kräfte, Kosmologie, Quantencomputing — klickbare Detailansicht." data-en="All 5 pillars of FFGFT: Fractal, EM, Forces, Cosmology, Quantum Computing — clickable detail view.">Alle 5 Säulen der FFGFT: Fraktal, EM, Kräfte, Kosmologie, Quantencomputing — klickbare Detailansicht.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Kaskade" data-en="Cascade">Kaskade</span><span class="card-link-arrow">→</span></span></div>
+  </div>
 
-        document.querySelector('.cta h2').textContent = 'Explore the T0 Perspective';
-        document.querySelector('.cta p').textContent = 'Explore the mathematical framework behind these interactive tools.';
-        document.querySelector('.cta-button').textContent = 'Read Complete Paper';
-        document.querySelector('.cta-button').setAttribute('href', 'https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/040_Hdokument_En.pdf');
-        document.querySelector('footer p').innerHTML = '&copy; 2025 T0 Time-Mass Duality | Johann Pascher';
-        document.querySelectorAll('footer p')[1].innerHTML = 'Contact: <a href="mailto:johann.pascher@gmail.com" style="color: var(--highlight);">johann.pascher@gmail.com</a>';
+  <div class="card" data-cat="tool" onclick="go('https://jpascher.github.io/T0-Time-Mass-Duality/rsa/t0_factorization_demo.html','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-tool">🔬</div>
+      <div class="card-badges"><span class="badge badge-green" data-de="Deterministisch" data-en="Deterministic">Deterministisch</span></div>
+    </div>
+    <h3 class="card-title" data-de="T0-Faktorisierung Demo" data-en="T0 Factorization Demo">T0-Faktorisierung Demo</h3>
+    <p class="card-desc" data-de="Praktische Demonstration der deterministischen Faktorisierung — wie T0-ξ-Geometrie Periodenfindung steuert." data-en="Practical demonstration of deterministic factorization — how T0-ξ geometry drives period finding.">Praktische Demonstration der deterministischen Faktorisierung — wie T0-ξ-Geometrie Periodenfindung steuert.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Demo" data-en="Demo">Demo</span><span class="card-link-arrow">→</span></span></div>
+  </div>
 
-      } else {
-        document.querySelector('h1').textContent = 'T0 Zeit-Masse-Dualität';
-        document.querySelector('.subtitle').textContent = 'Ein neuer Ansatz zur Quantenmechanik';
-        document.querySelector('.hero-formula').textContent = 'T_field · E_field = 1';
+  <!-- ── QUANTENCOMPUTING ─────────────────────── -->
+  <div class="card" data-cat="qc" onclick="go('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_quantum_simple.html','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-qc">🌟</div>
+      <div class="card-badges"><span class="badge badge-green" data-de="Quantencomputing" data-en="Quantum Computing">QC</span></div>
+    </div>
+    <h3 class="card-title" data-de="T0-Quantencomputing" data-en="T0 Quantum Computing">T0-Quantencomputing</h3>
+    <p class="card-desc" data-de="T0-Qubits, Bell-Dämpfung, φ-QFT und CHSH-Vorhersagen — deterministisch statt probabilistisch." data-en="T0 qubits, Bell damping, φ-QFT and CHSH predictions — deterministic instead of probabilistic.">T0-Qubits, Bell-Dämpfung, φ-QFT und CHSH-Vorhersagen — deterministisch statt probabilistisch.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Öffnen" data-en="Open">Öffnen</span><span class="card-link-arrow">→</span></span></div>
+  </div>
 
-        document.querySelectorAll('.section-title')[0].textContent = 'Schlüsselressourcen';
-        document.querySelectorAll('.section-title')[1].textContent = 'Signalanalyse';
+  <div class="card" data-cat="qc" onclick="go('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/quantum_simulator_deterministic.html','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-qc">💻</div>
+      <div class="card-badges"><span class="badge badge-green" data-de="Deterministisch" data-en="Deterministic">Deterministisch</span></div>
+    </div>
+    <h3 class="card-title" data-de="Deterministischer Simulator" data-en="Deterministic Simulator">Deterministischer Simulator</h3>
+    <p class="card-desc" data-de="Vollständig deterministischer Quantencomputer-Simulator für 3–10 Qubits — kein Kollaps, nur Geometrie." data-en="Fully deterministic quantum computer simulator for 3–10 qubits — no collapse, only geometry.">Vollständig deterministischer Quantencomputer-Simulator für 3–10 Qubits — kein Kollaps, nur Geometrie.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Simulator" data-en="Simulator">Simulator</span><span class="card-link-arrow">→</span></span></div>
+  </div>
 
-        const cardTitles = document.querySelectorAll('.card-title');
-        cardTitles[0].textContent = 'T0 Parameter Explorer';
-        cardTitles[1].textContent = 'Einheiten-Reform';
-        cardTitles[2].textContent = 'Teilchenspektrum-Vergleich';
-        cardTitles[3].textContent = 'Teilchenmassen';
-        cardTitles[4].textContent = 'Deterministischer Simulator';
-        cardTitles[5].textContent = 'T0-Shor Algorithmus';
-        cardTitles[6].textContent = 'T0-Faktorisierung Demo';
-        cardTitles[7].textContent = 'T0-Quantencomputing';
-        cardTitles[8].textContent = 'Teilchenphysik: ξ-Rahmenwerk';
-        cardTitles[9].textContent = 'Myon g-2 Analyse';
-        cardTitles[10].textContent = 'Lepton-Lebensdauer Explorer';
-        cardTitles[11].textContent = 'Das Geheimnis von 1/137';
-        cardTitles[12].textContent = 'Die musikalische Spirale und 137';
-        cardTitles[13].textContent = 'Kosmische Beziehungen';
-        cardTitles[14].textContent = 'YouTube Kanal';
-        cardTitles[15].textContent = 'T0 Model Website';
-        cardTitles[16].textContent = 'T0 Audio-Bibliothek';
-        cardTitles[17].textContent = 'GitHub Repository';
-        cardTitles[18].textContent = 'Buch-Präsentation';
-        cardTitles[19].textContent = 'FFGFT Narrativ';
-        cardTitles[20].textContent = 'Xi Harmonische Analyse';
-        cardTitles[21].textContent = 'Spektrumanalyse-Tool';
+  <div class="card" data-cat="qc" onclick="go('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_Shore_simulator.html','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-qc">🔐</div>
+      <div class="card-badges"><span class="badge badge-green" data-de="Deterministisch" data-en="Deterministic">Deterministisch</span><span class="badge badge-coral" data-de="Kryptografie" data-en="Cryptography">Krypto</span></div>
+    </div>
+    <h3 class="card-title" data-de="T0-Shor Algorithmus" data-en="T0-Shor Algorithm">T0-Shor Algorithmus</h3>
+    <p class="card-desc" data-de="Deterministischer Shor-Algorithmus mit φ-QFT — garantierte Faktorisierung, 100% Erfolgsrate bis N=143." data-en="Deterministic Shor algorithm with φ-QFT — guaranteed factorization, 100% success rate up to N=143.">Deterministischer Shor-Algorithmus mit φ-QFT — garantierte Faktorisierung, 100% Erfolgsrate bis N=143.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Testen" data-en="Test">Testen</span><span class="card-link-arrow">→</span></span></div>
+  </div>
 
-        const cardDescs = document.querySelectorAll('.card-desc');
-        cardDescs[0].textContent = 'Interaktiver Schieberegler: Alle Teilchenmassen und Konstanten aus einem einzigen Parameter ξ berechnen.';
-        cardDescs[1].textContent = 'Analyse der E=mc² ↔ E=m Äquivalenz.';
-        cardDescs[2].textContent = 'Standard Model (61+ Teilchen) vs. T0 (1 Feld).';
-        cardDescs[3].textContent = 'Ein-Formel-Rechner: E = 1/ξ berechnet ALLE Teilchenmassen mit 98% Genauigkeit – ohne freie Parameter.';
-        cardDescs[4].textContent = 'Vollständig deterministischer Quantencomputer-Simulator für 3-10 Qubits.';
-        cardDescs[5].textContent = 'Deterministischer Shor-Algorithmus für garantierte Faktorisierung.';
-        cardDescs[6].textContent = 'Praktische Demonstration der deterministischen Faktorisierung mit T0.';
-        cardDescs[7].textContent = 'Deterministische Quantensimulation: T0-Qubits, Bell-Dämpfung, φ-QFT, Shor-Algorithmus und CHSH-Vorhersagen.';
-        cardDescs[8].textContent = 'Vereinfachte Gleichungen und neue Erkenntnisse der T0-Teilchenphysik.';
-        cardDescs[9].textContent = 'Vollständige parameterfreie Berechnung des anomalen magnetischen Moments des Myons im T0-Modell.';
-        cardDescs[10].textContent = 'Interaktiver Explorer: Lebensdauer-Verhältnis τμ/ττ aus Torus-Geometrie mit K_frak und Farbfaktor. Nur 0,11% Abweichung.';
-        cardDescs[11].textContent = 'Die neue Perspektiveninversion in der Fundamentalphysik - warum 137 kein Zufall ist.';
-        cardDescs[12].textContent = 'Mathematische Entdeckung: (4/3)^137 ≈ 2^57 - die kosmische Resonanz mit 15 Dezimalstellen Genauigkeit.';
-        cardDescs[13].textContent = 'Gravitation, CMB, Casimir-Effekt und Rotverschiebung im ξ-Universum.';
-        cardDescs[14].textContent = 'Video-Tutorials, Demonstrationen und detaillierte Erklärungen der T0-Theorie.';
-        cardDescs[15].textContent = 'Umfassende Übersicht über das deterministische T0-Quantenmodell mit allen wichtigen Konzepten.';
-        cardDescs[16].textContent = 'Podcast-Serie mit Diskussionen und Einführungen.';
-        cardDescs[17].textContent = 'Vollständiger Quellcode, Dokumentation und alle T0-Theorie Dateien.';
-        cardDescs[18].textContent = 'Interaktive Slideshow: Alle Kernaussagen des Buches „Von Alpha=1 zur vollständigen Physik" in 35 Folien (DE/EN).';
-        cardDescs[19].textContent = 'Das Universum als sich vertiefendes Gehirn – die erzählerische Version der FFGFT in 18 Kapiteln mit Metaphern und Formeln.';
-        cardDescs[20].textContent = 'Interaktive Demonstration der T0-Signalanalyse.';
-        cardDescs[21].textContent = 'Oszilloskop-ähnliches Spektrumanalyse-Tool mit T0-Prinzipien.';
+  <div class="card" data-cat="qc" onclick="go('t0_shor_hypothesis.html','_self')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-qc">🧪</div>
+      <div class="card-badges"><span class="badge badge-coral" data-de="Kryptografie" data-en="Cryptography">Krypto</span></div>
+    </div>
+    <h3 class="card-title" data-de="T0-Shor Hypothesentest" data-en="T0-Shor Hypothesis Test">T0-Shor Hypothesentest</h3>
+    <p class="card-desc" data-de="Basisauswahl und Periodenstruktur: Systematischer Test der T0-ξ-Hypothese für deterministische Periodenfindung." data-en="Basis selection and period structure: Systematic test of the T0-ξ hypothesis for deterministic period finding.">Basisauswahl und Periodenstruktur: Systematischer Test der T0-ξ-Hypothese für deterministische Periodenfindung.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Test öffnen" data-en="Open test">Test öffnen</span><span class="card-link-arrow">→</span></span></div>
+  </div>
 
-        const badges = document.querySelectorAll('.category-badge:not(.deterministic-badge)');
-        badges[0].textContent = 'Mathematik';
-        badges[1].textContent = 'Teilchenphysik';
-        badges[2].textContent = 'Simulator';
-        badges[3].textContent = 'Kryptografie';
-        badges[4].textContent = 'Quantencomputing';
-        badges[5].textContent = 'Theorie';
-        badges[6].textContent = 'Fundamentalphysik';
-        badges[7].textContent = 'Mathematik';
-        badges[8].textContent = 'Kosmologie';
-        badges[9].textContent = 'Video';
-        badges[10].textContent = 'Website';
-        badges[11].textContent = 'Audio';
-        badges[12].textContent = 'Repository';
-        badges[13].textContent = 'Signalanalyse';
-        badges[14].textContent = 'Signalanalyse';
+  <div class="card" data-cat="qc" onclick="go('t0_shor_bigint.html','_self')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-qc">🔢</div>
+      <div class="card-badges"><span class="badge badge-green" data-de="Deterministisch" data-en="Deterministic">Deterministisch</span><span class="badge badge-coral" data-de="Kryptografie" data-en="Cryptography">Krypto</span></div>
+    </div>
+    <h3 class="card-title" data-de="T0-Shor BigInt-Simulator" data-en="T0-Shor BigInt Simulator">T0-Shor BigInt-Simulator</h3>
+    <p class="card-desc" data-de="Erweiterter Shor-Simulator mit BigInt-Unterstützung — präzise Faktorisierung großer Zahlen ohne Rundungsfehler." data-en="Extended Shor simulator with BigInt support — precise factorization of large numbers without rounding errors.">Erweiterter Shor-Simulator mit BigInt-Unterstützung — präzise Faktorisierung großer Zahlen ohne Rundungsfehler.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Simulator" data-en="Simulator">Simulator</span><span class="card-link-arrow">→</span></span></div>
+  </div>
 
+  <!-- ── MATHEMATIK ───────────────────────────── -->
+  <div class="card" data-cat="math" onclick="go('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/137_hidden_secret.html','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-math">🔮</div>
+      <div class="card-badges"><span class="badge badge-gold" data-de="Mathematik" data-en="Mathematics">Mathematik</span></div>
+    </div>
+    <h3 class="card-title" data-de="Das Geheimnis von 1/137" data-en="The Secret of 1/137">Das Geheimnis von 1/137</h3>
+    <p class="card-desc" data-de="Perspektiveninversion: Warum α = 1/137 keine empirische Konstante ist, sondern zwingend aus der Raumgeometrie folgt." data-en="Perspective inversion: Why α = 1/137 is not an empirical constant but necessarily follows from spatial geometry.">Perspektiveninversion: Warum α = 1/137 keine empirische Konstante ist, sondern zwingend aus der Raumgeometrie folgt.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Entdecken" data-en="Discover">Entdecken</span><span class="card-link-arrow">→</span></span></div>
+  </div>
 
-        const detBadges = document.querySelectorAll('.deterministic-badge');
-        detBadges[0].textContent = 'Interaktiv';
-        detBadges[1].textContent = 'Parameter-frei';
-        detBadges[2].textContent = 'Deterministisch';
-        detBadges[3].textContent = 'Parameterfrei';
-        detBadges[4].textContent = 'Interaktiv';
-        detBadges[5].textContent = 'Interaktiv';
-        detBadges[6].textContent = 'Interaktiv';
-				
-        document.querySelector('.cta h2').textContent = 'Die T0-Perspektive erkunden';
-        document.querySelector('.cta p').textContent = 'Erkunden Sie das mathematische Rahmenwerk hinter diesen interaktiven Tools.';
-        document.querySelector('.cta-button').textContent = 'Vollständiges Paper lesen';
-        document.querySelector('.cta-button').setAttribute('href', 'https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/040_Hdokument_De.pdf');
-        document.querySelector('footer p').innerHTML = '&copy; 2025 T0 Zeit-Masse-Dualität | Johann Pascher';
-        document.querySelectorAll('footer p')[1].innerHTML = 'Kontakt: <a href="mailto:johann.pascher@gmail.com" style="color: var(--highlight);">johann.pascher@gmail.com</a>';
+  <div class="card" data-cat="math" onclick="go('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/musical_spiral_137.html','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-math">🎵</div>
+      <div class="card-badges"><span class="badge badge-gold" data-de="Mathematik" data-en="Mathematics">Mathematik</span></div>
+    </div>
+    <h3 class="card-title" data-de="Musikalische Spirale &amp; 137" data-en="Musical Spiral &amp; 137">Musikalische Spirale &amp; 137</h3>
+    <p class="card-desc" data-de="(4/3)^137 ≈ 2^57 — kosmische Resonanz mit 15 Dezimalstellen. Die Verbindung von Musik, Geometrie und Physik." data-en="(4/3)^137 ≈ 2^57 — cosmic resonance to 15 decimal places. The connection of music, geometry, and physics.">(4/3)^137 ≈ 2^57 — kosmische Resonanz mit 15 Dezimalstellen. Die Verbindung von Musik, Geometrie und Physik.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Erkunden" data-en="Explore">Erkunden</span><span class="card-link-arrow">→</span></span></div>
+  </div>
 
-        document.querySelectorAll('.do
+  <div class="card" data-cat="math" onclick="go('t0_primzahl_periodizitaet.html','_self')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-math">📐</div>
+      <div class="card-badges"><span class="badge badge-gold" data-de="Zahlentheorie" data-en="Number Theory">Zahlentheorie</span></div>
+    </div>
+    <h3 class="card-title" data-de="Primzahl-Periodizität" data-en="Prime Number Periodicity">Primzahl-Periodizität</h3>
+    <p class="card-desc" data-de="Lücken, Muster und λ(N)-Verbindung: T0-Resonanzstruktur als Erklärung für Primzahlverteilungen." data-en="Gaps, patterns and λ(N)-connection: T0 resonance structure as explanation for prime number distributions.">Lücken, Muster und λ(N)-Verbindung: T0-Resonanzstruktur als Erklärung für Primzahlverteilungen.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Explorer" data-en="Explorer">Explorer</span><span class="card-link-arrow">→</span></span></div>
+  </div>
+
+  <div class="card" data-cat="math" onclick="go('t0_xi_num_algebraisch.html','_self')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-math">🔣</div>
+      <div class="card-badges"><span class="badge badge-gold" data-en="Mathematics" data-de="Mathematik">Mathematik</span></div>
+    </div>
+    <h3 class="card-title" data-de="ξ_num — Algebraische Resonanz" data-en="ξ_num — Algebraic Resonance">ξ_num — Algebraische Resonanz</h3>
+    <p class="card-desc" data-de="Algebraische Resonanzstruktur im Zahlenraum: ξ_num als Brücke zwischen geometrischem Parameter und Zahlentheorie." data-en="Algebraic resonance structure in number space: ξ_num as bridge between geometric parameter and number theory.">Algebraische Resonanzstruktur im Zahlenraum: ξ_num als Brücke zwischen geometrischem Parameter und Zahlentheorie.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Analyse" data-en="Analysis">Analyse</span><span class="card-link-arrow">→</span></span></div>
+  </div>
+
+  <!-- ── KOSMOLOGIE ────────────────────────────── -->
+  <div class="card" data-cat="cosmo" onclick="go('https://jpascher.github.io/T0-Time-Mass-Duality/2/html/cosmic.html','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-cosmo">🌌</div>
+      <div class="card-badges"><span class="badge badge-coral" data-de="Kosmologie" data-en="Cosmology">Kosmologie</span></div>
+    </div>
+    <h3 class="card-title" data-de="Kosmische Beziehungen" data-en="Cosmic Relations">Kosmische Beziehungen</h3>
+    <p class="card-desc" data-de="Gravitation, CMB-Temperatur, Casimir-Effekt und Rotverschiebung im ξ-Universum — kein Urknall, kein DM/DE." data-en="Gravitation, CMB temperature, Casimir effect and redshift in the ξ-universe — no Big Bang, no DM/DE.">Gravitation, CMB-Temperatur, Casimir-Effekt und Rotverschiebung im ξ-Universum — kein Urknall, kein DM/DE.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Kosmos" data-en="Cosmos">Kosmos</span><span class="card-link-arrow">→</span></span></div>
+  </div>
+
+  <!-- ── SIGNALANALYSE ─────────────────────────── -->
+  <div class="card" data-cat="signal" onclick="go('https://jpascher.github.io/T0-Time-Mass-Duality/sig/xi_harmonic_analysis_demo.html','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-signal">🔊</div>
+      <div class="card-badges"><span class="badge badge-blue" data-de="Signalanalyse" data-en="Signal Analysis">Signal</span></div>
+    </div>
+    <h3 class="card-title" data-de="Xi Harmonische Analyse" data-en="Xi Harmonic Analysis">Xi Harmonische Analyse</h3>
+    <p class="card-desc" data-de="Interaktive Demonstration der T0-Signalanalyse — ξ-Resonanzstruktur in Frequenzraum und Zeit." data-en="Interactive demonstration of T0 signal analysis — ξ resonance structure in frequency space and time.">Interaktive Demonstration der T0-Signalanalyse — ξ-Resonanzstruktur in Frequenzraum und Zeit.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Demo" data-en="Demo">Demo</span><span class="card-link-arrow">→</span></span></div>
+  </div>
+
+  <div class="card" data-cat="signal" onclick="go('https://jpascher.github.io/T0-Time-Mass-Duality/sig/xi_oscilloscope_spectrum-basis.html','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-signal">📊</div>
+      <div class="card-badges"><span class="badge badge-blue" data-de="Signalanalyse" data-en="Signal Analysis">Signal</span></div>
+    </div>
+    <h3 class="card-title" data-de="Spektrumanalyse-Tool" data-en="Spectrum Analysis Tool">Spektrumanalyse-Tool</h3>
+    <p class="card-desc" data-de="Oszilloskop-ähnliches Spektrumanalyse-Tool mit T0-Prinzipien — visuelle Darstellung der ξ-Struktur." data-en="Oscilloscope-like spectrum analysis tool with T0 principles — visual representation of ξ structure.">Oszilloskop-ähnliches Spektrumanalyse-Tool mit T0-Prinzipien — visuelle Darstellung der ξ-Struktur.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Tool" data-en="Tool">Tool</span><span class="card-link-arrow">→</span></span></div>
+  </div>
+
+  <!-- ── MEDIEN ────────────────────────────────── -->
+  <div class="card" data-cat="media" onclick="go('https://www.youtube.com/@Time-MassDuality','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-media">📺</div>
+      <div class="card-badges"><span class="badge" style="background:rgba(255,80,80,0.1);color:#ff6060;border:1px solid rgba(255,80,80,0.2)" data-de="Video" data-en="Video">Video</span></div>
+    </div>
+    <h3 class="card-title" data-de="YouTube Kanal" data-en="YouTube Channel">YouTube Kanal</h3>
+    <p class="card-desc" data-de="Video-Tutorials, Demonstrationen und detaillierte Erklärungen der T0-Theorie @Time-MassDuality." data-en="Video tutorials, demonstrations and detailed explanations of T0 theory @Time-MassDuality.">Video-Tutorials, Demonstrationen und detaillierte Erklärungen der T0-Theorie @Time-MassDuality.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Kanal" data-en="Channel">Kanal</span><span class="card-link-arrow">→</span></span></div>
+  </div>
+
+  <div class="card" data-cat="media" onclick="go('https://sites.google.com/view/t0-model-deterministic-quantum','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-media">🌐</div>
+      <div class="card-badges"><span class="badge" style="background:rgba(100,100,100,0.15);color:#9aa;border:1px solid rgba(100,100,100,0.25)" data-de="Website" data-en="Website">Website</span></div>
+    </div>
+    <h3 class="card-title" data-de="T0 Model Website" data-en="T0 Model Website">T0 Model Website</h3>
+    <p class="card-desc" data-de="Umfassende Übersicht über das deterministische T0-Quantenmodell mit allen wichtigen Konzepten und Einstiegspunkten." data-en="Comprehensive overview of the deterministic T0 quantum model with all key concepts and entry points.">Umfassende Übersicht über das deterministische T0-Quantenmodell mit allen wichtigen Konzepten und Einstiegspunkten.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Website" data-en="Website">Website</span><span class="card-link-arrow">→</span></span></div>
+  </div>
+
+  <div class="card" data-cat="media" onclick="go('https://open.spotify.com/show/0PwnOIqjFepxA7NQ5i3fwR','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-media">🎧</div>
+      <div class="card-badges"><span class="badge" style="background:rgba(30,215,96,0.08);color:#1ed760;border:1px solid rgba(30,215,96,0.2)" data-de="Audio" data-en="Audio">Audio</span></div>
+    </div>
+    <h3 class="card-title" data-de="T0 Audio-Bibliothek" data-en="T0 Audio Library">T0 Audio-Bibliothek</h3>
+    <p class="card-desc" data-de="Podcast-Serie auf Spotify: Diskussionen, Einführungen und vertiefte Gespräche zur T0-Theorie." data-en="Podcast series on Spotify: discussions, introductions and in-depth conversations about T0 theory.">Podcast-Serie auf Spotify: Diskussionen, Einführungen und vertiefte Gespräche zur T0-Theorie.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Streamen" data-en="Stream">Streamen</span><span class="card-link-arrow">→</span></span></div>
+  </div>
+
+  <div class="card" data-cat="media" onclick="go('https://github.com/jpascher/T0-Time-Mass-Duality/tree/main','_blank')">
+    <div class="card-top">
+      <div class="card-icon-wrap ic-media">📁</div>
+      <div class="card-badges"><span class="badge" style="background:rgba(100,100,100,0.15);color:#9aa;border:1px solid rgba(100,100,100,0.25)" data-de="Repository" data-en="Repository">Repository</span></div>
+    </div>
+    <h3 class="card-title" data-de="GitHub Repository" data-en="GitHub Repository">GitHub Repository</h3>
+    <p class="card-desc" data-de="Vollständiger Quellcode, 149 LaTeX-Dokumente und alle T0-Theorie-Dateien öffentlich zugänglich." data-en="Complete source code, 149 LaTeX documents and all T0 theory files publicly accessible.">Vollständiger Quellcode, 149 LaTeX-Dokumente und alle T0-Theorie-Dateien öffentlich zugänglich.</p>
+    <div class="card-foot"><span class="card-link-btn"><span data-de="Repository" data-en="Repository">Repository</span><span class="card-link-arrow">→</span></span></div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-text">
+      <h2 id="cta-h" data-de="Das vollständige Rahmenwerk" data-en="The complete framework">Das vollständige Rahmenwerk</h2>
+      <p id="cta-p" data-de="Mathematische Grundlagen, alle Herleitungen und experimentellen Vorhersagen im Hauptdokument." data-en="Mathematical foundations, all derivations and experimental predictions in the main document.">Mathematische Grundlagen, alle Herleitungen und experimentellen Vorhersagen im Hauptdokument.</p>
+    </div>
+    <a id="cta-btn" class="cta-btn" href="https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/040_Hdokument_De.pdf" target="_blank" data-de="Paper lesen →" data-en="Read paper →">Paper lesen →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span id="ft-copy">© 2025 T0 Zeit-Masse-Dualität · Johann Pascher</span>
+  <span>Kontakt: <a href="mailto:johann.pascher@gmail.com">johann.pascher@gmail.com</a></span>
+  <span style="color:var(--text-ter)">T̃ · Ẽ = 1</span>
+</footer>
+
+<script>
+/* ── NAVIGATION ──────────────────────────────── */
+function go(url, target) {
+  if (target === '_blank') window.open(url, '_blank');
+  else window.location.href = url;
+}
+
+/* ── FILTER ──────────────────────────────────── */
+let currentCat = 'all';
+function filter(cat, btn) {
+  currentCat = cat;
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  const cards = document.querySelectorAll('.card');
+  let visible = 0;
+  cards.forEach(c => {
+    const show = cat === 'all' || c.dataset.cat === cat;
+    c.classList.toggle('hide', !show);
+    if (show) visible++;
+  });
+  document.getElementById('sec-count').textContent = visible + (currentLang === 'de' ? ' einträge' : ' entries');
+}
+
+/* ── LANGUAGE ────────────────────────────────── */
+let currentLang = 'de';
+function setLang(l, btn) {
+  currentLang = l;
+  document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  document.documentElement.lang = l;
+
+  // all [data-de] / [data-en] elements
+  document.querySelectorAll('[data-de]').forEach(el => {
+    const t = el.getAttribute('data-' + l);
+    if (t) el.textContent = t;
+  });
+
+  // hero
+  const hero = {
+    de: { ey: 'Johann Pascher · T0 Zeit-Masse-Dualität', h1: 'Alles aus <em>einer</em> Zahl', sub: 'Fundamentale Fraktale Geometrische Feldtheorie — alle Konstanten, alle Massen, alle Kräfte aus ξ' },
+    en: { ey: 'Johann Pascher · T0 Time-Mass Duality',   h1: 'Everything from <em>one</em> number', sub: 'Fundamental Fractal Geometric Field Theory — all constants, all masses, all forces from ξ' }
+  };
+  document.getElementById('ey').textContent = hero[l].ey;
+  document.getElementById('h1').innerHTML   = hero[l].h1;
+  document.getElementById('sub').textContent = hero[l].sub;
+
+  // stat labels
+  const sl = {
+    de: ['Dokumente','Freier Parameter','SM-Parameter ersetzt','Interaktive Tools'],
+    en: ['Documents','Free parameter','SM parameters replaced','Interactive Tools']
+  };
+  ['sl1','sl2','sl3','sl4'].forEach((id, i) => { document.getElementById(id).textContent = sl[l][i]; });
+
+  // filter label
+  document.getElementById('fl').textContent = l === 'de' ? 'Filter' : 'Filter';
+  // filter buttons text
+  document.querySelectorAll('.fbtn').forEach(b => {
+    const t = b.getAttribute('data-' + l);
+    if (t) b.textContent = t;
+  });
+
+  // section label
+  document.getElementById('sec-lbl').textContent = l === 'de' ? 'Ressourcen' : 'Resources';
+  const cards = document.querySelectorAll('.card:not(.hide)');
+  document.getElementById('sec-count').textContent = cards.length + (l === 'de' ? ' einträge' : ' entries');
+
+  // cta
+  document.getElementById('cta-h').textContent = l === 'de' ? 'Das vollständige Rahmenwerk' : 'The complete framework';
+  document.getElementById('cta-p').textContent = l === 'de'
+    ? 'Mathematische Grundlagen, alle Herleitungen und experimentellen Vorhersagen im Hauptdokument.'
+    : 'Mathematical foundations, all derivations and experimental predictions in the main document.';
+  document.getElementById('cta-btn').textContent = l === 'de' ? 'Paper lesen →' : 'Read paper →';
+  document.getElementById('cta-btn').href = l === 'de'
+    ? 'https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/040_Hdokument_De.pdf'
+    : 'https://jpascher.github.io/T0-Time-Mass-Duality/2/pdf/040_Hdokument_En.pdf';
+
+  // footer
+  document.getElementById('ft-copy').textContent = l === 'de'
+    ? '© 2025 T0 Zeit-Masse-Dualität · Johann Pascher'
+    : '© 2025 T0 Time-Mass Duality · Johann Pascher';
+}
+</script>
+</body>
+</html>
