@@ -354,6 +354,83 @@ Was als Vakuumrauschen oder Vakuumfluktuationen gemessen wird, muss nicht
 intrinsisch zufällig sein. Es könnte die Überlagerung einer Vielzahl
 deterministischer Harmonischer sein, deren Phasen wir bisher nicht auflösen können.
 
+\subsection{Warum die Rekonstruktion scheitert — strukturelle Sensitivität der Rückkopplung}
+
+Das Problem liegt nicht darin, ob man mit $4/3$ oder $1{,}333\ldots$ rechnet.
+Die Natur hat einen exakten Wert für $\xipar$ — den wir als $4/3 \times 10^{-4}$
+gut annähern. Aber selbst wenn man diesen Näherungswert als exakten Startwert nähme,
+würde die Simulation scheitern. Der Grund liegt tiefer: in der \textbf{strukturellen
+Sensitivität der rekursiven Rückkopplung}.
+
+Jede Rückkopplungsschleife des Torus-Systems erzeugt eine Phasenverschiebung.
+Bei einem deterministischen System, das sensitiv von jedem Zwischenschritt abhängt,
+führt jede endliche Rechengenauigkeit — nicht nur am Anfangswert, sondern
+bei jeder einzelnen Operation — zu einem akkumulierenden Phasenfehler $\varepsilon$.
+Nach $N$ Zyklen beträgt dieser Fehler mindestens $N \cdot \varepsilon$.
+Da konstruktive Interferenz in destruktive übergeht, sobald Phasen um mehr als
+$\pi/2$ abweichen, zerfällt die Kohärenz nach etwa
+\begin{equation}
+    N_\text{krit} \approx \frac{\pi}{2\varepsilon}
+\end{equation}
+Zyklen. Das ist deterministisches Chaos im Lorenz-Sinne: Das System ist vollständig
+deterministisch, aber sensitiv auf jeden Zwischenzustand.
+
+\begin{keypoint}[Realisation vs. Simulation]
+Die physikalische Realisation des Torus-Spektrums kennt keine diskreten
+Zwischenschritte — sie ist kontinuierlich, kausal, ohne Rundung.
+
+Jede numerische Simulation schneidet die Kontinuität in diskrete Schritte,
+bei denen Fehler entstehen und durch die Rückkopplungsdynamik exponentiell
+verstärkt werden. Das Ergebnis sieht aus wie Rauschen — nicht weil das
+System zufällig ist, sondern weil die Simulation die Dynamik nicht vollständig
+verfolgen kann.
+
+Das Universum sieht kein Chaos, weil es nicht rechnet.
+Unsere Modelle sehen Chaos, weil sie rechnen müssen.
+\end{keypoint}
+
+\subsubsection*{Primzahlen und Faktorisierung — was in FFGFT wirklich passiert}
+
+Hier ist Vorsicht geboten. Das Analogon zwischen Primzahlen und dem Vakuumrauschen
+ist tiefer als eine Ähnlichkeit der Verteilung — es gibt eine physikalische Verbindung
+über den Begriff der Periode.
+
+In Dokument~075 (T0-Shor) und Dokument~057 (Relationales Zahlensystem) wird gezeigt:
+Jede Ganzzahl ist eindeutig ein Produkt von Primzahlen:
+\begin{equation}
+    n = p_1^{a_1} \cdot p_2^{a_2} \cdot p_3^{a_3} \cdots
+    \quad \text{(Fundamentalsatz der Arithmetik)}
+\end{equation}
+Das ist im Zahlenraum dasselbe wie im Frequenzraum: Jedes Signal ist eine Überlagerung
+von Grundfrequenzen. Primzahlen sind die \textbf{irreduziblen Frequenzen des Zahlenraums}
+— Verhältnisse, die sich nicht weiter zerlegen lassen (Dok.~057, n-limit-Systeme).
+
+\begin{technical}[Warum Faktorisierung physikalisch schwer ist]
+Faktorisierung ist \textbf{Periodenfindung} (Dok.~075, Shor-Algorithmus): Man sucht
+die Periode $r$ der Funktion $f(x) = a^x \bmod N$. Diese Periode kodiert die
+Primfaktoren:
+\begin{equation}
+    a^r \equiv 1 \pmod{N}
+    \;\Rightarrow\;
+    a^r - 1 = (a^{r/2}-1)(a^{r/2}+1) \equiv 0 \pmod{N}
+\end{equation}
+Die nötige Frequenzauflösung ist $\Delta f \approx f_0/r^2$. Für kryptographisch
+relevante $N$ mit $r \approx N$ braucht man Präzision $\epsilon \approx 1/N^2$ —
+für 1024-Bit-RSA $\epsilon \approx 10^{-617}$, weit jenseits jeder erreichbaren
+Rechengenauigkeit.
+
+In FFGFT-Sprache: Faktorisierung ist die Suche nach der Umlaufzeit $T_\text{rev}$
+einer spezifischen resonanten Rückkopplung im Zahlenraum. Eine Primzahl hat
+\textbf{keine Sub-Resonanz} — sie ist irreduzibel, ihre Umlaufzeit lässt sich
+nicht als Produkt kürzerer Umlaufzeiten schreiben. Das macht sie schwer zu finden.
+
+Die Rekursions-Sensitivität (Lorenz-Chaos) trifft auch hier zu: Um die Periode
+$r$ aus der Rückkopplung $a^x \bmod N$ zu extrahieren, braucht man für jede
+Verdopplung von $N$ quadratisch mehr Präzision. Das ist keine technische
+Beschränkung — es ist die Struktur der rekursiven Rückkopplung selbst.
+\end{technical}
+
+
 \subsection{Vakuumrauschen als Fourier-Synthese der Torus-Geometrie}
 
 In der FFGFT ist das Vakuumspektrum nicht weiß — es hat eine geometrische Struktur.
@@ -437,47 +514,84 @@ Der vorige Abschnitt hat gezeigt, \emph{was} das Spektrum ist. Jetzt die Frage:
 \emph{Wie entsteht es?} Wie erzeugt eine einzige Grundschwingung durch zeitliche
 Verläufe, Phasenverschiebungen und Rückkopplung das volle Spektrum?
 
-\subsubsection*{Schritt 1: Die Grundschwingung}
+\subsubsection*{Schritt 1: Die Grundschwingung und die fundamentale Umlaufzeit}
 
 Auf dem Torus $T^4$ mit Periode $L_0 = \xipar \cdot \ell_P$ gibt es eine
 kleinste mögliche Schwingung — die Mode $\mathbf{n} = (1,0,0,0)$ mit
 Wellenlänge $L_0$ und Frequenz $\nu_0 = c/L_0$. Das ist die Grundschwingung
 des Vakuumfeldes.
 
-In der Zeit-Masse-Dualität $\tilde{T} \cdot m = 1$ ist diese Frequenz mit einer
-minimalen Masse verknüpft:
+Dazu gehört eine fundamentale Umlaufzeit: die Zeit, die das Feld benötigt,
+um einmal vollständig durch die Torus-Geometrie zu laufen und wieder an seinen
+Ausgangspunkt zurückzukehren:
 \begin{equation}
-    m_0 = \hbar \nu_0 / c^2 = \frac{\hbar}{c \cdot L_0} = \frac{\hbar}{c \cdot \xipar \cdot \ell_P}
+    \boxed{T_\text{rev} = \frac{L_0}{c} = \frac{\xipar \cdot \ell_P}{c}
+    \approx \frac{1{,}33 \times 10^{-4} \times 1{,}62 \times 10^{-35}\,\text{m}}{3 \times 10^8\,\text{m/s}}
+    \approx 7{,}2 \times 10^{-48}\,\text{s}}
+    \label{eq:Trev}
 \end{equation}
-Das ist die geometrische Grundeinheit der Masse — die kleinste auf dem Torus
-darstellbare Energieskala.
+Das ist die \textbf{fundamentale Zeiteinheit der FFGFT} — nicht eine externe Uhr,
+sondern die Laufzeit des Feldes durch seine eigene Geometrie. In der
+Zeit-Masse-Dualität $\tilde{T} \cdot m = 1$ entspricht $T_\text{rev}$ der
+reziproken Grundmasse:
+\begin{equation}
+    m_0 = \frac{\hbar}{c \cdot L_0} = \frac{\hbar}{c^2 \cdot T_\text{rev}}
+    = \frac{1}{T_\text{rev}} \quad \text{(in natürlichen Einheiten)}
+\end{equation}
+Masse ist inverse Umlaufzeit. Schwerere Teilchen haben kürzere $T_\text{rev}$,
+leichtere längere — das ist die Zeit-Masse-Dualität in ihrer direkten geometrischen
+Bedeutung.
 
-\subsubsection*{Schritt 2: Reflexion und Phasenverschiebung}
+\begin{foundation}[Die FFGFT-Rekursionsformel]
+Der Zustand des Feldes zum Zeitpunkt $t$ ist eine Funktion des Zustands
+vor genau einer Umlaufzeit, modifiziert durch die fraktale Geometrie $\xipar$:
+\begin{equation}
+    \Psi(t) = G\!\left(\Psi(t - T_\text{rev}),\; \xipar\right)
+    \label{eq:recursion}
+\end{equation}
+Das ist keine Näherung und keine Differenzengleichung — es ist die exakte
+geometrische Aussage: Die Gegenwart des Feldes ist die Vergangenheit vor
+$T_\text{rev}$, durch die fraktale Krümmung transformiert. Rekursion ohne
+Zeit ist unmöglich. Zeit ohne Rekursion ist bedeutungslos.
+\end{foundation}
 
-Die Grundschwingung läuft auf dem Torus — und trifft auf sich selbst zurück.
-Auf einem einfachen Kreis $S^1$ wäre das trivial: die Welle interferiert
-konstruktiv mit sich selbst, wenn die Wellenlänge ein ganzzahliger Teiler des
-Umfangs ist. Das erzeugt die bekannten stehenden Wellen.
+\subsubsection*{Schritt 2: Reflexion, Phasenverschiebung und zeitliche Akkumulation}
 
-Auf dem \emph{fraktalen} Torus mit Dimension $D_f = 3 - \xipar$ — also nicht
-exakt $D_f = 3$ — ist die Rücklaufzeit nicht exakt gleich der Vorwärtszeit.
-Die Abweichung der fraktalen Dimension von der ganzzahligen erzeugt bei jedem
-Umlauf eine \textbf{Phasenverschiebung}:
+Die Grundschwingung läuft auf dem Torus — und trifft nach genau $T_\text{rev}$
+wieder auf sich selbst zurück. Das ist kein abstraktes Ereignis, sondern ein
+physikalischer Prozess in realer Zeit.
+
+Auf einem einfachen Kreis $S^1$ wäre das Ergebnis trivial: die Welle
+interferiert konstruktiv mit sich selbst, wenn die Wellenlänge ein ganzzahliger
+Teiler des Umfangs ist — stehende Wellen, sofort stabil.
+
+Auf dem \emph{fraktalen} Torus mit Dimension $D_f = 3 - \xipar$ ist die
+Rücklaufzeit nicht exakt gleich der Vorwärtszeit. Bei jedem Umlauf erzeugt
+die fraktale Krümmung eine \textbf{Phasenverschiebung}:
 \begin{equation}
     \Delta\phi = 2\pi \cdot \xipar \cdot n
+    \quad \text{nach } n \text{ Umläufen, d.h. nach } t = n \cdot T_\text{rev}
 \end{equation}
-nach $n$ Umläufen. Diese Phasenverschiebung ist klein — $\xipar \approx 10^{-4}$
-— aber akkumuliert sich mit jedem Umlauf. Nach $1/\xipar \approx 7500$ Umläufen
-hat sich die Phase um $2\pi$ verschoben. Das entspricht einer neuen, kohärenten
-Mode.
+Diese Phasenverschiebung ist winzig — $\xipar \approx 10^{-4}$ — aber sie
+akkumuliert sich mit \emph{jedem Umlauf in realer Zeit}. Nach
+$1/\xipar \approx 7500$ Umläufen, also nach
+\begin{equation}
+    t_\text{koh} = \frac{T_\text{rev}}{\xipar} = \frac{L_0}{\xipar \cdot c}
+    = \frac{\ell_P}{c} = t_P \approx 5{,}4 \times 10^{-44}\,\text{s}
+\end{equation}
+hat sich die Phase um $2\pi$ verschoben — und eine neue kohärente Mode entsteht.
+Das ist die Planck-Zeit $t_P$ als natürliche Kohärenzzeit des Systems, emergiert
+aus $T_\text{rev}$ und $\xipar$.
 
-\begin{technical}[Fraktale Dimension als Phasengenerator]
+\begin{technical}[Fraktale Dimension als Phasengenerator in der Zeit]
 Eine Raumzeit mit ganzzahliger Dimension $D = 3$ hätte keine akkumulierende
-Phasenverschiebung — die Welle kehrt exakt phasengleich zurück. Nur die
-fraktale Abweichung $D_f = 3 - \xipar$ erzeugt bei jedem Umlauf eine
-Phasenverschiebung $\Delta\phi \propto \xipar$. Das ist der Mechanismus, durch den
-$\xipar$ physikalisch wirksam wird: nicht als Korrekturfaktor auf eine gegebene
-Theorie, sondern als Generator zeitlicher Phasendrift.
+Phasenverschiebung — die Welle kehrt nach jedem $T_\text{rev}$ exakt phasengleich
+zurück. Nur die fraktale Abweichung $D_f = 3 - \xipar$ erzeugt die zeitliche
+Phasendrift. $\xipar$ ist der Phasengenerator, $T_\text{rev}$ ist der Takt.
+
+Beide zusammen bestimmen, wann und wie das Spektrum aufgebaut wird — nicht
+als zeitloser Rechenschritt, sondern als physikalischer Prozess, der Zeit
+\emph{verbraucht}.
 \end{technical}
 
 \subsubsection*{Schritt 3: Nichtlineare Rückkopplung erzeugt Obertöne}

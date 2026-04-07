@@ -340,6 +340,83 @@ measured as vacuum noise or vacuum fluctuations need not be intrinsically random
 It could be the superposition of a vast number of deterministic harmonics whose
 phases we cannot yet resolve.
 
+
+\subsection{Why Reconstruction Fails — Structural Sensitivity of Feedback}
+
+The problem is not whether one computes with $4/3$ or $1.333\ldots$.
+Nature has an exact value for $\xipar$ — which we approximate well as
+$4/3 \times 10^{-4}$. But even taking this approximation as an exact starting
+value, the simulation would fail. The reason lies deeper: in the \textbf{structural
+sensitivity of the recursive feedback}.
+
+Every feedback loop of the torus system generates a phase shift. In a deterministic
+system sensitive to every intermediate step, any finite computational precision —
+not only in the starting value, but in every single operation — leads to an
+accumulating phase error $\varepsilon$. After $N$ cycles this error is at least
+$N \cdot \varepsilon$. Since constructive interference becomes destructive when
+phases deviate by more than $\pi/2$, coherence collapses after approximately
+\begin{equation}
+    N_\text{crit} \approx \frac{\pi}{2\varepsilon}
+\end{equation}
+cycles. This is deterministic chaos in the Lorenz sense: the system is fully
+deterministic, but sensitive to every intermediate state.
+
+\begin{keypoint}[Realisation vs.\ Simulation]
+The physical realisation of the torus spectrum has no discrete intermediate steps —
+it is continuous, causal, without rounding.
+
+Every numerical simulation cuts the continuum into discrete steps, where errors
+arise and are exponentially amplified by the feedback dynamics. The result looks
+like noise — not because the system is random, but because the simulation cannot
+fully track the dynamics.
+
+The universe sees no chaos because it does not compute.
+Our models see chaos because they must compute.
+\end{keypoint}
+
+\subsubsection*{Prime Numbers and Factorisation — What Really Happens in FFGFT}
+
+Care is needed here. The analogy between prime numbers and vacuum noise is deeper
+than a similarity of distribution — there is a physical connection through the
+concept of period.
+
+Document~075 (T0-Shor) and Document~057 (Relational Number System) show:
+every integer is uniquely a product of primes:
+\begin{equation}
+    n = p_1^{a_1} \cdot p_2^{a_2} \cdot p_3^{a_3} \cdots
+    \quad \text{(Fundamental theorem of arithmetic)}
+\end{equation}
+In number space this is the same as in frequency space: every signal is a
+superposition of fundamental frequencies. Primes are the \textbf{irreducible
+frequencies of number space} — ratios that cannot be decomposed further
+(Doc.~057, n-limit systems).
+
+\begin{technical}[Why Factorisation Is Physically Hard]
+Factorisation is \textbf{period finding} (Doc.~075, Shor algorithm): one searches
+for the period $r$ of the function $f(x) = a^x \bmod N$. This period encodes
+the prime factors:
+\begin{equation}
+    a^r \equiv 1 \pmod{N}
+    \;\Rightarrow\;
+    a^r - 1 = (a^{r/2}-1)(a^{r/2}+1) \equiv 0 \pmod{N}
+\end{equation}
+The required frequency resolution is $\Delta f \approx f_0/r^2$. For
+cryptographically relevant $N$ with $r \approx N$, one needs precision
+$\epsilon \approx 1/N^2$ — for 1024-bit RSA this is $\epsilon \approx 10^{-617}$,
+far beyond any achievable computational precision.
+
+In FFGFT language: factorisation is the search for the revolution time $T_\text{rev}$
+of a specific resonant feedback in number space. A prime number has
+\textbf{no sub-resonance} — it is irreducible; its revolution time cannot be
+written as a product of shorter revolution times. That is what makes it hard to find.
+
+The recursion sensitivity (Lorenz chaos) applies here too: to extract the period
+$r$ from the feedback $a^x \bmod N$, every doubling of $N$ requires quadratically
+more precision. This is not a technical limitation — it is the structure of the
+recursive feedback itself.
+\end{technical}
+
+
 \subsection{Vacuum Noise as Fourier Synthesis of the Torus Geometry}
 
 In FFGFT, the vacuum spectrum is not white — it has geometric structure.
@@ -423,45 +500,81 @@ The previous section showed \emph{what} the spectrum is. Now the question:
 \emph{how does it arise?} How does a single fundamental oscillation generate the
 full spectrum through temporal processes, phase shifts, and feedback?
 
-\subsubsection*{Step 1: The Fundamental Oscillation}
+\subsubsection*{Step 1: The Fundamental Oscillation and the Fundamental Revolution Time}
 
 On the torus $T^4$ with period $L_0 = \xipar \cdot \ell_P$, there exists a
 smallest possible oscillation — the mode $\mathbf{n} = (1,0,0,0)$ with
 wavelength $L_0$ and frequency $\nu_0 = c/L_0$. This is the fundamental
 oscillation of the vacuum field.
 
-Through the time-mass duality $\tilde{T} \cdot m = 1$, this frequency is linked
-to a minimal mass:
+Associated with it is a fundamental revolution time: the time the field needs
+to travel once completely through the torus geometry and return to its starting point:
 \begin{equation}
-    m_0 = \hbar \nu_0 / c^2 = \frac{\hbar}{c \cdot L_0} = \frac{\hbar}{c \cdot \xipar \cdot \ell_P}
+    \boxed{T_\text{rev} = \frac{L_0}{c} = \frac{\xipar \cdot \ell_P}{c}
+    \approx \frac{1.33 \times 10^{-4} \times 1.62 \times 10^{-35}\,\text{m}}{3 \times 10^8\,\text{m/s}}
+    \approx 7.2 \times 10^{-48}\,\text{s}}
+    \label{eq:Trev}
 \end{equation}
-This is the geometric fundamental unit of mass — the smallest energy scale
-representable on the torus.
+This is the \textbf{fundamental time unit of FFGFT} — not an external clock,
+but the travel time of the field through its own geometry. Through the time-mass
+duality $\tilde{T} \cdot m = 1$, $T_\text{rev}$ corresponds to the reciprocal
+fundamental mass:
+\begin{equation}
+    m_0 = \frac{\hbar}{c \cdot L_0} = \frac{\hbar}{c^2 \cdot T_\text{rev}}
+    = \frac{1}{T_\text{rev}} \quad \text{(natural units)}
+\end{equation}
+Mass is inverse revolution time. Heavier particles have shorter $T_\text{rev}$,
+lighter ones longer — this is the time-mass duality in its direct geometric meaning.
 
-\subsubsection*{Step 2: Reflection and Phase Shift}
+\begin{foundation}[The FFGFT Recursion Formula]
+The state of the field at time $t$ is a function of its state exactly one
+revolution time ago, modified by the fractal geometry $\xipar$:
+\begin{equation}
+    \Psi(t) = G\!\left(\Psi(t - T_\text{rev}),\; \xipar\right)
+    \label{eq:recursion}
+\end{equation}
+This is not an approximation and not a difference equation — it is the exact
+geometric statement: the present of the field is its past by $T_\text{rev}$,
+transformed by the fractal curvature. Recursion without time is impossible.
+Time without recursion is meaningless.
+\end{foundation}
 
-The fundamental oscillation travels on the torus — and meets itself on return.
-On a simple circle $S^1$, this would be trivial: the wave interferes constructively
-with itself when the wavelength is an integer divisor of the circumference.
-That generates familiar standing waves.
+\subsubsection*{Step 2: Reflection, Phase Shift, and Temporal Accumulation}
 
-On the \emph{fractal} torus with dimension $D_f = 3 - \xipar$ — not exactly
-$D_f = 3$ — the return time is not exactly equal to the forward time. The
-deviation of the fractal dimension from the integer generates a \textbf{phase
-shift} at every revolution:
+The fundamental oscillation travels on the torus — and meets itself on return
+after exactly $T_\text{rev}$. This is not an abstract event but a physical process
+in real time.
+
+On a simple circle $S^1$, the result would be trivial: the wave interferes
+constructively with itself when the wavelength is an integer divisor of the
+circumference — standing waves, immediately stable.
+
+On the \emph{fractal} torus with dimension $D_f = 3 - \xipar$, the return time
+is not exactly equal to the forward time. At every revolution, the fractal
+curvature generates a \textbf{phase shift}:
 \begin{equation}
     \Delta\phi = 2\pi \cdot \xipar \cdot n
+    \quad \text{after } n \text{ revolutions, i.e.\ after } t = n \cdot T_\text{rev}
 \end{equation}
-after $n$ revolutions. This phase shift is small — $\xipar \approx 10^{-4}$
-— but accumulates with every revolution. After $1/\xipar \approx 7500$ revolutions,
-the phase has shifted by $2\pi$. This corresponds to a new coherent mode.
+This phase shift is tiny — $\xipar \approx 10^{-4}$ — but it accumulates with
+\emph{every revolution in real time}. After $1/\xipar \approx 7500$ revolutions,
+that is after
+\begin{equation}
+    t_\text{coh} = \frac{T_\text{rev}}{\xipar} = \frac{L_0}{\xipar \cdot c}
+    = \frac{\ell_P}{c} = t_P \approx 5.4 \times 10^{-44}\,\text{s}
+\end{equation}
+the phase has shifted by $2\pi$ — and a new coherent mode emerges.
+This is the Planck time $t_P$ as the natural coherence time of the system,
+emerging from $T_\text{rev}$ and $\xipar$.
 
-\begin{technical}[Fractal Dimension as Phase Generator]
+\begin{technical}[Fractal Dimension as Phase Generator in Time]
 A spacetime with integer dimension $D = 3$ would have no accumulating phase shift —
-the wave returns exactly in phase. Only the fractal deviation $D_f = 3 - \xipar$
-generates a phase shift $\Delta\phi \propto \xipar$ at each revolution. This is the
-mechanism by which $\xipar$ becomes physically effective: not as a correction factor
-on a given theory, but as a generator of temporal phase drift.
+the wave returns exactly in phase after every $T_\text{rev}$. Only the fractal
+deviation $D_f = 3 - \xipar$ generates the temporal phase drift. $\xipar$ is the
+phase generator, $T_\text{rev}$ is the clock.
+
+Both together determine when and how the spectrum is built up — not as a timeless
+computational step, but as a physical process that \emph{consumes} time.
 \end{technical}
 
 \subsubsection*{Step 3: Nonlinear Feedback Generates Overtones}
