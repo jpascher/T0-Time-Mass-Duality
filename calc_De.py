@@ -575,7 +575,7 @@ class T0VereinigterRechner:
             # Referenzwert bestimmen
             if konstante in self.experimentelle_werte:
               ref = self.experimentelle_werte[konstante]
-              ref_str = f"{ref:.6e}"
+              ref_str = f"{ref:.6e}" if ref is not None else "T0-abgeleitet"
             else:
               ref_str = "T0-abgeleitet"
             
@@ -875,7 +875,7 @@ class T0VereinigterRechner:
               wert = self.berechnete_konstanten[konstante]
               if konstante in self.experimentelle_werte:
                 ref = self.experimentelle_werte[konstante]
-                ref_str = f"{ref:.6e}"
+                ref_str = f"{ref:.6e}" if ref is not None else "T0-abgeleitet"
               else:
                 ref_str = "T0-abgeleitet"
               einheit = self.konstanten_einheiten.get(konstante, "unbekannt")
