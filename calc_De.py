@@ -114,6 +114,8 @@ class T0VereinigterRechner:
       'Phi0': 2.067833848e-15,   # Magnetisches Flussquantum [Wb]
       'sigma_SB': 5.670374419e-8,  # Stefan-Boltzmann [W/(m²K⁴)]
       'N_A': 6.02214076e23,     # Avogadro-Konstante [mol⁻¹]
+      'L0': None,               # T0-abgeleitet: xi * l_P (kein SI-Referenzwert)
+      't0': None,               # T0-abgeleitet: L0 / c  (kein SI-Referenzwert)
       'm_e': 9.1093837015e-31,   # Elektronmasse [kg]
       'm_p': 1.67262192369e-27,   # Protonmasse [kg]
       # ERWEITERTE SI-Referenzwerte für alle berechneten Konstanten
@@ -134,7 +136,7 @@ class T0VereinigterRechner:
       'F': 96485.33212,       # Faraday-Konstante [C/mol]
       'R_gas': 8.314462618,     # Gaskonstante [J/(mol·K)]
       'H0': 2.196e-18,       # Hubble-Konstante [s⁻¹]
-      'Lambda': 1.105e-52,     # Kosmologische Konstante [m⁻²]
+      'Lambda': None,           # Kein Vergleich: ΛCDM ≠ T0-Modell (verschiedene Kosmologien)
       't_universum': 4.551e17,   # Alter des Universums [s]
       'rho_krit': 8.558e-27,    # Kritische Dichte [kg/m³]
       'l_Hubble': 1.364e26,     # Hubble-Länge [m]
@@ -152,7 +154,7 @@ class T0VereinigterRechner:
     
     # Konstanten-Kategorien für bessere Fehleranalyse (VOLLSTAENDIG ERWEITERT)
     self.konstanten_kategorien = {
-      'fundamental': ['alpha', 'm_char'], # Direkt aus ξ
+      'fundamental': ['alpha', 'm_char', 'L0', 't0'], # Direkt aus ξ
       'gravitation': ['G', 'G_nat', 'G_t0_dimensionless', 'umrechnungsfaktor_nat', 'SI_umrechnungsfaktor'], # Gravitationsbezogen
       'planck': ['m_P', 't_P', 'T_P', 'E_P', 'F_P', 'P_P'], # Planck-Einheiten
       'elektromagnetisch': ['e', 'eps0', 'mu0', 'Z0', 'k_e'], # EM-Konstanten
@@ -167,6 +169,8 @@ class T0VereinigterRechner:
     self.konstanten_einheiten = {
       'alpha': '(dimensionslos)',
       'm_char': '(dimensionslos)',
+      'L0': 'm',
+      't0': 's',
       'G': 'm³·kg⁻¹·s⁻²',
       'G_nat': 'E⁻²',
       'G_t0_dimensionless': '(dimensionslos)',
@@ -353,6 +357,10 @@ class T0VereinigterRechner:
     self.berechnete_konstanten['F_P'] = self.berechnete_konstanten['m_P'] * c / self.berechnete_konstanten['t_P']
     self.berechnete_konstanten['P_P'] = self.berechnete_konstanten['E_P'] / self.berechnete_konstanten['t_P']
     
+    # Sub-Planck-Skalen (T0-Fundamentalskalen)
+    self.berechnete_konstanten['L0'] = float(self.xi) * self.l_P  # L0 = xi * l_P [m]
+    self.berechnete_konstanten['t0'] = self.berechnete_konstanten['L0'] / c  # t0 = L0/c [s]
+    
     self._level3_erledigt = True
     
   def berechne_level_4(self):
@@ -469,7 +477,7 @@ class T0VereinigterRechner:
     self.berechnete_konstanten['R_gas'] = N_A * k_B
     
     # Loschmidt-Konstante (bei Normalbedingungen)
-    self.berechnete_konstanten['n0'] = N_A / 22.413969545 # m⁻³ bei STP
+    self.berechnete_konstanten['n0'] = N_A / 22.413969545e-3 # m⁻³ bei STP (22.414 L = 0.022414 m³)
     
     self._level7_erledigt = True
     
