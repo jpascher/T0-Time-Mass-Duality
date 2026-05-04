@@ -73,6 +73,76 @@ All compiled books (Teil 1–3, FFGFT Narrative Master, Xi Narrative Master, T0 
 
 - **[157_Zeitpfeil_De.pdf](2/pdf/157_Zeitpfeil_De.pdf)** / **[157_Zeitpfeil_En.pdf](2/pdf/157_Zeitpfeil_En.pdf)** — Why is time directed? The arrow of time as a geometric consequence of spacetime structure. All fundamental equations (Newton, Maxwell, Schrödinger, Dirac, Einstein) are time-reversal invariant — yet we experience directed time. T0 theory resolves this through four geometric arguments: T·m = 1 forces T > 0 algebraically, torus winding defines a topologically protected direction, fractal spacetime (D_f < 3) breaks mirror symmetry, and time emerges irreversibly from symmetry breaking.
 
+
+### April/May 2026: Quantum Computing Series, Avi Dialogue, RSA Precision Barrier, Lagrangian 🔬
+
+- **[168_T0_Periodensystem_xi_De.pdf](2/pdf/168_T0_Periodensystem_xi_De.pdf)** / **[168_T0_Periodensystem_xi_En.pdf](2/pdf/168_T0_Periodensystem_xi_En.pdf)** — The periodic table as ξ-geometry: radial mass ladder and angular shell structure from a common origin. The atomic shells and period lengths are derived from the same ξ-power ladder that generates particle masses.
+
+- **[169_T0_Nachfolge_De.pdf](2/pdf/169_T0_Nachfolge_De.pdf)** / **[169_T0_Nachfolge_En.pdf](2/pdf/169_T0_Nachfolge_En.pdf)** — Follow-up investigations to Doc. 168: angular corrections, binding energies and heavy elements. Extension of the ξ-geometry to the full periodic table including lanthanides and actinides.
+
+- **[170_bewustsein_De.pdf](2/pdf/170_bewustsein_De.pdf)** / **[170_bewustsein_En.pdf](2/pdf/170_bewustsein_En.pdf)** — Consciousness and complexity thresholds in FFGFT. At which recursive nesting depth does consciousness emerge from ξ-geometry? The T0 framework defines minimal complexity thresholds for self-referential systems.
+
+- **[171_string-torsus_De.pdf](2/pdf/171_string-torsus_De.pdf)** / **[171_string-torsus_En.pdf](2/pdf/171_string-torsus_En.pdf)** — String theory vs. torus geometry: systematic comparison. FFGFT derives its 4D torus topology from ξ alone — no compactification, no extra dimensions. The 10/11 dimensions of string theory are contrasted with the single-parameter FFGFT torus.
+
+- **[172_T0_Avi_Dialog_De.pdf](2/pdf/172_T0_Avi_Dialog_De.pdf)** / **[172_T0_Avi_Dialog_En.pdf](2/pdf/172_T0_Avi_Dialog_En.pdf)** — Geometric convergence: dialogue with Avi Rosenthal (SU(27) torsion geometry, Z3 fixed points, φ-recursion). Three independently derived predictions: CP phase δ = 283.28° (dev. 0.18°), sin²θ_W = 3/13 (dev. 0.195%), baryon asymmetry η = 6.03×10⁻¹⁰ (dev. 0.5%). All confirmed within 0.5%. Falsifiable by DUNE 2028.
+
+- **[173_T0_Quantenpunkt_De.pdf](2/pdf/173_T0_Quantenpunkt_De.pdf)** / **[173_T0_Quantenpunkt_En.pdf](2/pdf/173_T0_Quantenpunkt_En.pdf)** — Quantum dots, synapses and resonators in the ξ-scaling ladder. Quantum dots anchor the ξ-recursion depth N≈8 through exciton scales. Biological quantum effects (FMO complex, DNA) and transistors are interpreted as scaled quantum dot systems.
+
+- **[174_T0_Spin_Qubit_Zustaende_De.pdf](2/pdf/174_T0_Spin_Qubit_Zustaende_De.pdf)** / **[174_T0_Spin_Qubit_Zustaende_En.pdf](2/pdf/174_T0_Spin_Qubit_Zustaende_En.pdf)** — Spin readout, manipulation and extension in FFGFT. The two ξ parameters (ξ_par geometric, ξ_Higgs algebraic) map to the T₂ coherence time hierarchy: 9 orders of magnitude from exciton to nuclear spin reproduced from ξ alone.
+
+- **[175_T0_Qubit_Zustandsraeume_De.pdf](2/pdf/175_T0_Qubit_Zustandsraeume_De.pdf)** / **[175_T0_Qubit_Zustandsraeume_En.pdf](2/pdf/175_T0_Qubit_Zustandsraeume_En.pdf)** — Beyond two states: qubit state spaces, registers and qudits. FFGFT interprets qubit states as stable torsion minima on the Bloch sphere. Superposition, entanglement and d-level qudits correspond to specific torus winding configurations.
+
+- **[176_T0_Shor_Photon_De.pdf](2/pdf/176_T0_Shor_Photon_De.pdf)** / **[176_T0_Shor_Photon_En.pdf](2/pdf/176_T0_Shor_Photon_En.pdf)** — Shor's algorithm from a photonic perspective. FFGFT replaces the QFT with ξ-resonance search; period finding becomes a spectroscopic problem on the sub-Planck lattice. The ξ_num distribution follows the harmonic series — explaining the 0% classical success rate as a structural precision barrier.
+
+- **[178_FFGFT_Spin_Stabilitaet_De.pdf](2/pdf/178_FFGFT_Spin_Stabilitaet_De.pdf)** / **[178_FFGFT_Spin_Stabilitaet_En.pdf](2/pdf/178_FFGFT_Spin_Stabilitaet_En.pdf)** — Spin stability and permanent magnets in FFGFT. Ferromagnetic alignment corresponds to a global torsion minimum; coercive field to the energy barrier between torsion states. Macroscopic magnetism as macroscopic torsion coherence.
+
+- **[179_FFGFT_Paare_Photonen_De.pdf](2/pdf/179_FFGFT_Paare_Photonen_De.pdf)** / **[179_FFGFT_Paare_Photonen_En.pdf](2/pdf/179_FFGFT_Paare_Photonen_En.pdf)** — Pairs, photons and holes: torsion conservation in FFGFT. Electron-hole pairs, Cooper pairs and photon emission all follow from torsion winding number conservation. Pair creation/annihilation corresponds to topologically allowed torus transitions.
+
+- **[180_T0_L0_Herleitung_De.pdf](2/pdf/180_T0_L0_Herleitung_De.pdf)** / **[180_T0_L0_Herleitung_En.pdf](2/pdf/180_T0_L0_Herleitung_En.pdf)** — Derivation of L₀ from the T0 Lagrangian: five-step derivation chain showing that ξ and L₀ = ξ·ℓ_P are not postulated but emerge necessarily from the self-consistency of the T0 Lagrangian. The gravitational constant G follows from ξ through the same chain.
+
+- **[181_T0_Torus_Begruendung_De.pdf](2/pdf/181_T0_Torus_Begruendung_De.pdf)** / **[181_T0_Torus_Begruendung_En.pdf](2/pdf/181_T0_Torus_Begruendung_En.pdf)** — Justification of the 4D torus: the torus is not a T0 postulate. It follows from three independent conditions: (1) divergence-free QFT requires periodic topology, (2) ξ_par = 4/30000 encodes exactly four spacetime dimensions, (3) stable winding numbers generate the observed quantum numbers. L₀ is geometrically the length of a single torus lattice cell.
+
+- **[182_T0_Universum_Maximalskala_De.pdf](2/pdf/182_T0_Universum_Maximalskala_De.pdf)** / **[182_T0_Universum_Maximalskala_En.pdf](2/pdf/182_T0_Universum_Maximalskala_En.pdf)** — Maximum cosmological scale: the ratio R_H/L₀ = 6.49×10⁶⁴ follows entirely from ξ_par = 4/30000. FFGFT has no single universal maximum size — every scale has its own system-specific upper bound R_torus(m) = ℏ/mc. R_H is the upper bound of the cosmological sector only.
+
+- **[183_T0_Willow_Selbstmessung_De.pdf](2/pdf/183_T0_Willow_Selbstmessung_De.pdf)** / **[183_T0_Willow_Selbstmessung_En.pdf](2/pdf/183_T0_Willow_Selbstmessung_En.pdf)** — Google Willow and the physics of self-measurement: topological patterns, quantum echoes and the continuum of complexity. Analysis of Google's Willow quantum processor results from the FFGFT perspective. Connection to Doc. 159 (harmonic torus structure).
+
+- **[184_p-bit_De.pdf](2/pdf/184_p-bit_De.pdf)** / **[184_p-bit_En.pdf](2/pdf/184_p-bit_En.pdf)** — p-bits: the operating point between bit and qubit. Probabilistic bits (p-bits) operating in the subthreshold transistor regime as the classical/quantum boundary interpreted geometrically. The thermal fluctuation scale maps directly onto the ξ-geometry precision barrier.
+
+- **[185_T0_Zeit_Einbettungspreis_De.pdf](2/pdf/185_T0_Zeit_Einbettungspreis_De.pdf)** / **[185_T0_Zeit_Einbettungspreis_En.pdf](2/pdf/185_T0_Zeit_Einbettungspreis_En.pdf)** — Time as the embedding cost of mathematics: factorisation, quantum computers and the physical limit of RSA decomposition. The FFGFT recursion formula Ψ(t) = G(Ψ(t−T_rev), ξ) frames time as the price of realising mathematical structure in physical space. Includes precision barrier table by RSA key length.
+
+- **[187_T0_FFGFT_Photonik_De.pdf](2/pdf/187_T0_FFGFT_Photonik_De.pdf)** / **[187_T0_FFGFT_Photonik_En.pdf](2/pdf/187_T0_FFGFT_Photonik_En.pdf)** — FFGFT analytics: photonics, matrix space and B mesons. Application of FFGFT geometric methods to photonic systems and B-meson phenomenology. Matrix space representations of the torsion field.
+
+- **[188_T0_Geometrie_Grundlagen_De.pdf](2/pdf/188_T0_Geometrie_Grundlagen_De.pdf)** / **[188_T0_Geometrie_Grundlagen_En.pdf](2/pdf/188_T0_Geometrie_Grundlagen_En.pdf)** — Geometric foundations of FFGFT: the universal phase condition as the origin of all forms. Derives the fundamental geometric constraints that force the torus topology from the phase coherence requirement.
+
+- **[189_TorusAbleitung_De.pdf](2/pdf/189_TorusAbleitung_De.pdf)** / **[189_TorusAbleitung_En.pdf](2/pdf/189_TorusAbleitung_En.pdf)** — Torus derivation and the FFGFT Lagrangian. Systematic derivation of the 4D torus topology from T̃·m = 1 with ξ as sole input. L₀ = ξ·ℓ_P is the geometric fundamental length — not a Schwarzschild radius, but valid as a Schwarzschild consistency check (Doc. 190).
+
+- **[190_T0_Korrekturen_De.pdf](2/pdf/190_T0_Korrekturen_De.pdf)** / **[190_T0_Korrekturen_En.pdf](2/pdf/190_T0_Korrekturen_En.pdf)** — Corrections and clarifications register (binding). Three corrections: K1 Higgs prefactor (64π⁴ → 16π³), K2 tau prefactor (r_τ = 8/3 → 25/9), K3 g-2 surface factor (4π → 2π²). Five clarifications: Koide precision, ℏ derivation chain, two ξ parameters (geometric vs. algebraic), L₀ as geometric length, scope of mass formulas.
+
+- **[191_T0_Gemini_Dialog_FFGFT_De.pdf](2/pdf/191_T0_Gemini_Dialog_FFGFT_De.pdf)** / **[191_T0_Gemini_Dialog_FFGFT_En.pdf](2/pdf/191_T0_Gemini_Dialog_FFGFT_En.pdf)** — FFGFT in dialogue with Gemini: warp drive, entanglement and torus geometry. Four YouTube video discussions analysed from the FFGFT perspective. Central insight: every mass concentration is already a spatial bubble — warp drives cannot escape the torus constraint.
+
+- **[201_FFGFT-alles_De.pdf](2/pdf/201_FFGFT-alles_De.pdf)** / **[201_FFGFT-alles_En.pdf](2/pdf/201_FFGFT-alles_En.pdf)** — FFGFT unified: comprehensive integration of all FFGFT derivations into a single framework. Spacetime curvature emerges from distortions in a dynamic vacuum field Φ(x) = ρ(x)·e^{iθ(x)}, fully derived from T0's mass-fluctuation field. Complete synthesis document.
+
+
+### February/March 2026: Torsion Geometry, Ontology, Koide-g2 Bridge — New Documents
+
+- **[149_FFGFT-torsion_De.pdf](2/pdf/149_FFGFT-torsion_De.pdf)** / **[149_FFGFT-torsion_En.pdf](2/pdf/149_FFGFT-torsion_En.pdf)** — FFGFT torsion: spacetime as a 4D brain-fold torus. Reinterpretation of the vacuum from a point-like to a purely geometric description as a 4D torsion crystal. Shows that all quantum numbers correspond to stable winding configurations.
+
+- **[150_kompatiblitaet_De.pdf](2/pdf/150_kompatiblitaet_De.pdf)** / **[150_kompatiblitaet_En.pdf](2/pdf/150_kompatiblitaet_En.pdf)** — Compatibility of dimensional descriptions in T0: the 4D torsion crystal formulation and the fractal dimension D_f = 3 − ξ are fully compatible complementary perspectives. Both lead to identical experimental predictions from the single parameter ξ = 4/30000.
+
+- **[152_ontologische-ord_De.pdf](2/pdf/152_ontologische-ord_De.pdf)** / **[152_ontologische-ord_En.pdf](2/pdf/152_ontologische-ord_En.pdf)** — Ontological ordering in T0 theory: four-level hierarchy — (1) 4D torsion crystal as primary reality, (2) fractal analytic description, (3) observable 3D physics, (4) narrative models. Clarifies which description level represents fundamental reality.
+
+- **[153_energie-reduktion-on_De.pdf](2/pdf/153_energie-reduktion-on_De.pdf)** / **[153_energie-reduktion-on_En.pdf](2/pdf/153_energie-reduktion-on_En.pdf)** — Energy reduction and natural units: ontological hierarchy of T0 under natural units where time-mass duality T·m = 1 eliminates independent definitions. Shows how all dimensional constants reduce to ξ.
+
+- **[154_Cortex_De.pdf](2/pdf/154_Cortex_De.pdf)** / **[154_Cortex_En.pdf](2/pdf/154_Cortex_En.pdf)** — Cortex folds and torus geometry: nine precise mathematical parallels between brain convolutions and the 4D torsion structure. Both systems solve the same fundamental problem: maximising surface/information in minimal volume without singularities. Sulci correspond to mass condensations; genus = 1 for both.
+
+- **[155_DNA_De.pdf](2/pdf/155_DNA_De.pdf)** / **[155_DNA_En.pdf](2/pdf/155_DNA_En.pdf)** — DNA structure and torus geometry: ten structural parallels between the DNA double helix and 4D torsion. Both use the same geometric trick — double helices winding around tori that fold hierarchically — achieving 10,000-fold lossless compression. DNA compaction is the biological solution to the same geometric problem structuring physics at all scales.
+
+- **[156_was-ist-universum_De.pdf](2/pdf/156_was-ist-universum_De.pdf)** / **[156_was-ist-universum_En.pdf](2/pdf/156_was-ist-universum_En.pdf)** — What is the universe really? The radical T0 answer: the universe IS a universal energy field E_field(x,t) with a single field equation □E = 0 and one parameter ξ = 4/30000. Time and mass are not fundamental — they are complementary energy manifestations through T·m = 1.
+
+- **[158_T0_Koide-zu-g2-1_De.pdf](2/pdf/158_T0_Koide-zu-g2-1_De.pdf)** / **[158_T0_Koide-zu-g2-1_En.pdf](2/pdf/158_T0_Koide-zu-g2-1_En.pdf)** — Koide-to-g-2 bridge: the Koide formula Q = 2/3 and the g-2 anomaly share the same exponent step size Δp = 1/3 = 1/D from the three spatial dimensions of the torus. The bridge formula Δa(τ-e)/Δa(μ-e) = (144/125)·m_τ/m_μ yields a_τ = 1.282×10⁻³ from three experimental numbers alone.
+
+- **[159_T0_Harmonische-Struktur-Torus-1_De.pdf](2/pdf/159_T0_Harmonische-Struktur-Torus-1_De.pdf)** / **[159_T0_Harmonische-Struktur-Torus-1_En.pdf](2/pdf/159_T0_Harmonische-Struktur-Torus-1_En.pdf)** — Harmonic structure of the T0 torus: Euler's Basel problem (ζ(2) = π²/6) reinterpreted as the eigenvalue spectrum of the Laplace operator on the T0 fractal 4D torus. The harmonic series that diverges on an infinite line converges on the torus — resolving the vacuum catastrophe (10¹²⁰ discrepancy) without artificial renormalisation. Particle masses emerge as torus overtones with step 1/3.
+
 ### March 2026: T0 and Coherent Ising Machines / UV Catastrophe / 't Hooft CAI — New Documents 🔬
 
 - **[160_T0_Lepton-Lebensdauer-Verh_De.pdf](2/pdf/160_T0_Lepton-Lebensdauer-Verh_De.pdf)** / **[160_T0_Lepton-Lebensdauer-Verh_En.pdf](2/pdf/160_T0_Lepton-Lebensdauer-Verh_En.pdf)** — Lepton lifetime ratios in the T0 framework. Systematic derivation of muon and tau lifetimes from the time-mass duality T·m = 1 and the geometric parameter ξ. Comparison with precision measurements (PDG 2024).

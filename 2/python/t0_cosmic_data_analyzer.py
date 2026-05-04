@@ -7,6 +7,8 @@ Speicherort: 2/python/t0_cosmic_data_analyzer.py
 
 import numpy as np
 import pandas as pd
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from datetime import datetime
 from scipy import signal, stats
@@ -26,7 +28,7 @@ class CosmicDataAnalyzer:
     n_samples = 1000
     
     # Simulierte Zeitreihe mit kosmischem Signal
-    times = pd.date_range('2025-01-01', periods=n_samples, freq='H')
+    times = pd.date_range('2025-01-01', periods=n_samples, freq='h')
     
     # Basisrauschen
     base_noise = np.random.normal(0, 0.01, n_samples)
@@ -94,7 +96,8 @@ class CosmicDataAnalyzer:
     
     # 2. Periodogramm
     periods, power = self.detect_cosmic_periodicity(df['T2'].values)
-    axes[0,1].plot(1/periods[:20], power[:20], 'r-')
+    n = min(len(periods), len(power), 20)
+    axes[0,1].plot(1/periods[:n], power[:n], 'r-')
     axes[0,1].set_title('Fourier-Analyse: Periodische Signale')
     axes[0,1].set_xlabel('Frequenz (1/h)')
     axes[0,1].set_ylabel('Leistung')
