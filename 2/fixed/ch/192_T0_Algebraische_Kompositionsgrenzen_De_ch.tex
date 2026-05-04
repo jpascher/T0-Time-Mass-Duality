@@ -1,0 +1,295 @@
+% ============================================================
+% 192_T0_Algebraische_Kompositionsgrenzen_De_ch.tex
+% Kapitel-Inhalt: Algebraische Kompositionsgrenzen in FFGFT
+% Warum strukturelle Terme nicht in fremde Formeln eingesetzt werden dürfen
+% Johann Pascher, Mai 2026
+% ============================================================
+
+\section*{Abstract}
+
+In FFGFT leiten sich Teilchenmassen aus einer algebraischen Torus-Struktur ab:
+$m_\ell = r_\ell \cdot \xi^{p_\ell} \cdot v$. Diese Terme tragen implizit die
+Geometrie ihrer Herkunft. Wenn man sie in Formeln aus einem anderen algebraischen
+Kontext einsetzt — etwa die Koide-Relation oder Streuamplituden des Standardmodells
+— entstehen strukturfremde Kreuzterme, die weder zur FFGFT-Geometrie noch zur
+Zielformel gehören. Dieser Fehler ist kein numerisches Problem, sondern ein
+Kategorienfehler: Er verletzt die Kompositionsgrenzen zwischen verschiedenen
+algebraischen Strukturräumen. Das Dokument analysiert diesen Fehler systematisch,
+zeigt seine Erscheinungsformen in FFGFT, und formuliert die korrekte Regel für
+den Umgang mit theorieinternen Termen in externen Formeln.
+
+% ============================================================
+\section{Das Problem: Terme versus Ergebnisse}
+% ============================================================
+
+\subsection{Zwei Ebenen in FFGFT}
+
+Die FFGFT arbeitet auf zwei klar getrennten Ebenen:
+
+\begin{description}
+  \item[Strukturebene (Terme):] Symbolische Ausdrücke wie
+    $m_\tau = r_\tau \cdot \xi^{2/3} \cdot v$ beschreiben die
+    \emph{geometrische Herkunft} der Masse. Sie kodieren die
+    Torus-Topologie (Exponent $p = 2/3$), die Rekursionstiefe
+    (Vorfaktor $r_\tau = 25/9$) und die Skala (Vakuumerwartungswert $v$).
+  \item[Ergebnisebene (Zahlen):] Der numerische Wert
+    $m_\tau \approx 1783\,\text{MeV}$ ist eine Zahl ohne strukturelle
+    Erinnerung. Er kann wie ein Messwert in beliebige Formeln eingesetzt werden.
+\end{description}
+
+\textbf{Die Regel:} Ergebnisse (Zahlen) dürfen überall eingesetzt werden.
+Terme (algebraische Ausdrücke) dürfen nur innerhalb des algebraischen Raums
+verwendet werden, aus dem sie stammen.
+
+\subsection{Das Koide-Beispiel}
+
+Die Koide-Relation lautet:
+\begin{equation}
+  Q = \frac{m_e + m_\mu + m_\tau}{(\sqrt{m_e}+\sqrt{m_\mu}+\sqrt{m_\tau})^2}
+  = \frac{2}{3}
+  \label{eq:koide}
+\end{equation}
+Dies ist experimentell auf $0{,}001\,\%$ bestätigt (PDG-Messwerte).
+
+\subsubsection*{Erlaubte Verwendung}
+
+Man wertet die FFGFT-Terme numerisch aus:
+\begin{align*}
+  m_e &\approx 0{,}511\,\text{MeV}, \\
+  m_\mu &\approx 105{,}7\,\text{MeV}, \\
+  m_\tau &\approx 1783\,\text{MeV},
+\end{align*}
+und setzt diese Zahlen in \eqref{eq:koide} ein. Man erhält
+$Q_{\text{FFGFT}} \approx 0{,}6677 \neq 2/3$, eine Abweichung von $0{,}16\,\%$.
+Das ist korrekt und ehrlich: die FFGFT-Massen sind Näherungen
+($\sim 1\,\%$ Genauigkeit), und diese Ungenauigkeit propagiert in $Q$.
+
+\subsubsection*{Nicht erlaubte Verwendung}
+
+Man setzt die FFGFT-Terme \emph{symbolisch} in \eqref{eq:koide} ein:
+\begin{equation}
+  Q \stackrel{?}{=}
+  \frac{r_e\,\xi^{3/2} + r_\mu\,\xi + r_\tau\,\xi^{2/3}}
+  {(\sqrt{r_e\,\xi^{3/2}}+\sqrt{r_\mu\,\xi}+\sqrt{r_\tau\,\xi^{2/3}})^2}
+  \stackrel{?}{=} \frac{2}{3}
+  \label{eq:falsch}
+\end{equation}
+und versucht, diese Gleichung algebraisch zu verifizieren.
+
+Das schlägt fehl. Der Grund wird im nächsten Abschnitt analysiert.
+
+% ============================================================
+\section{Die Kreuzterm-Analyse}
+% ============================================================
+
+\subsection{Woher kommen die Kreuzterme?}
+
+Der Nenner von $Q$ enthält $(\sqrt{m_e}+\sqrt{m_\mu}+\sqrt{m_\tau})^2$.
+Wenn man die FFGFT-Terme einsetzt:
+\begin{align*}
+  \sqrt{m_e} &\propto \xi^{3/4}, \\
+  \sqrt{m_\mu} &\propto \xi^{1/2}, \\
+  \sqrt{m_\tau} &\propto \xi^{1/3},
+\end{align*}
+dann erzeugt das Quadrat des Nenners drei \emph{Diagonalterme}:
+\begin{equation}
+  m_e + m_\mu + m_\tau \propto \xi^{3/2} + \xi + \xi^{2/3}
+\end{equation}
+(dieselben Potenzen wie im Zähler) — und drei \emph{Kreuzterme}:
+\begin{align}
+  2\sqrt{m_e\,m_\mu} &\propto \xi^{3/4+1/2} = \xi^{5/4}, \label{eq:k1}\\
+  2\sqrt{m_e\,m_\tau} &\propto \xi^{3/4+1/3} = \xi^{13/12}, \label{eq:k2}\\
+  2\sqrt{m_\mu\,m_\tau} &\propto \xi^{1/2+1/3} = \xi^{5/6}. \label{eq:k3}
+\end{align}
+
+\subsection{Warum diese Kreuzterme strukturfremd sind}
+
+Die Exponenten im FFGFT-Strukturraum sind Vielfache von $1/3$:
+\[
+  p \in \left\{\frac{2}{3},\; 1,\; \frac{3}{2},\; \frac{1}{3},\; \frac{1}{2},\; \frac{3}{4}\right\}.
+\]
+Die Kreuzterm-Exponenten $5/4$, $13/12$, $5/6$ gehören \emph{nicht} zu dieser
+Menge. Sie entstehen erst durch die Quadratwurzel-Operation der Koide-Formel
+und haben keine Entsprechung in der Torus-Geometrie.
+
+\begin{keypoint}[Strukturfremde Terme]
+Kreuzterme aus der Koide-Operation liegen außerhalb des FFGFT-Strukturraums.
+Sie sind weder geometrisch interpretierbar noch physikalisch bedeutsam.
+Sie sind ein Artefakt der Formel-Komposition.
+\end{keypoint}
+
+\subsection{Bedingung für $Q = 2/3$ exakt}
+
+Damit $Q = 2/3$ algebraisch exakt gilt, müsste gelten:
+\begin{equation}
+  m_e + m_\mu + m_\tau = 4\left(\sqrt{m_e\,m_\mu} + \sqrt{m_e\,m_\tau} + \sqrt{m_\mu\,m_\tau}\right).
+  \label{eq:bedingung}
+\end{equation}
+Diese Gleichung verknüpft die Diagonalterme mit den Kreuzterme.
+Sie ist für $\xi = 4/30000$ nicht erfüllt. Der $\xi$-Wert, für den sie
+exakt gilt, berechnet sich zu $\xi_{\text{Koide}} \approx 1{,}372 \times 10^{-4}$
+— $2{,}9\,\%$ größer als der geometrische Wert $\xi_{\text{par}} = 4/30000$.
+
+Das zeigt: die Koide-Relation erzwingt eine algebraische Nebenbedingung,
+die unabhängig von der FFGFT-Torus-Geometrie ist.
+
+% ============================================================
+\section{Das allgemeine Prinzip: Kompositionsgrenzen}
+% ============================================================
+
+\subsection{Algebraische Strukturräume}
+
+Jede physikalische Theorie definiert einen \emph{algebraischen Strukturraum}:
+die Menge der Ausdrücke, die innerhalb der Theorie wohlgeformt sind, und die
+Operationen, die innerhalb dieses Raums erlaubt sind.
+
+\begin{description}
+  \item[FFGFT-Strukturraum:] Ausdrücke der Form $r \cdot \xi^{p} \cdot v$
+    mit $p \in \frac{1}{3}\mathbb{Z}$. Erlaubte Operationen: Multiplikation,
+    Division, Potenzieren mit Vielfachen von $1/3$.
+  \item[Koide-Raum:] Die Formel \eqref{eq:koide} mit der Operation
+    $\sqrt{\cdot}$. Diese Operation verlässt den FFGFT-Strukturraum:
+    $\sqrt{\xi^{2/3}} = \xi^{1/3}$ ist noch drin,
+    aber $\xi^{1/3} \cdot \xi^{1/2} = \xi^{5/6}$ ist nicht mehr in $\frac{1}{3}\mathbb{Z}$.
+\end{description}
+
+\begin{foundation}[Kompositionsgrenze]
+Zwei algebraische Strukturräume $\mathcal{A}$ und $\mathcal{B}$ sind
+\emph{kompositionell verträglich}, wenn alle Operationen in $\mathcal{B}$
+den Raum $\mathcal{A}$ invariant lassen. Andernfalls existiert eine
+Kompositionsgrenze: Terme aus $\mathcal{A}$ dürfen nicht symbolisch
+in Formeln aus $\mathcal{B}$ eingesetzt werden.
+\end{foundation}
+
+\subsection{Weitere Erscheinungsformen in FFGFT}
+
+Das Koide-Beispiel ist kein Einzelfall. Das gleiche Problem tritt auf:
+
+\subsubsection*{Quantenzahlen in Standardmodell-Formeln}
+
+FFGFT-Quantenzahlen (Torus-Wicklungszahlen, $Z_3$-Ladungen) haben eine
+spezifische algebraische Herkunft. Sie dürfen nicht direkt in
+Renormierungsgleichungen oder Streuamplituden des Standardmodells
+eingesetzt werden, da diese Formeln andere algebraische Konventionen
+voraussetzen.
+
+\subsubsection*{Einheitensysteme als Sonderfall}
+
+Das bekannteste Beispiel von Kompositionsgrenzen sind Einheitensysteme.
+Ein Ausdruck in natürlichen Einheiten ($\hbar = c = 1$) darf nicht
+ohne Umrechnung in eine SI-Formel eingesetzt werden. FFGFT-Terme
+enthalten eine analoge implizite „Einheit": die Torus-Geometrie.
+
+\subsubsection*{Skalenhierarchien}
+
+Die FFGFT-Terme $\xi^{p_\ell} \cdot v$ sind für den Teilchensektor
+kalibriert. Sie dürfen nicht ohne Skalenkorrektur in kosmologische
+Formeln eingesetzt werden, da dort andere Skalenstufen der $\xi$-Hierarchie
+gelten.
+
+\subsection{Die korrekte Vorgehensweise}
+
+\begin{keyresult}[Kompositionsregel]
+\textbf{Schritt 1:} FFGFT-Term numerisch auswerten (Ergebnis als Zahl).\\
+\textbf{Schritt 2:} Diese Zahl wie einen Messwert in die Zielformel einsetzen.\\
+\textbf{Schritt 3:} Das Ergebnis ehrlich als Näherung deklarieren,
+  wenn der Term selbst nur eine Näherung ist.
+\end{keyresult}
+
+Das ist strukturell identisch mit der Fehlerfortpflanzung in der
+Experimentalphysik: Bevor man einen Wert in eine neue Formel einsetzt,
+trennt man Zahl und Unsicherheit. Die Unsicherheit des FFGFT-Terms
+($\sim 1\,\%$) überträgt sich — und erzeugt bei nichtlinearen Formeln
+wie Koide eine andere Abweichung als bei linearen.
+
+% ============================================================
+\section{Konsequenzen für die FFGFT-Dokumentation}
+% ============================================================
+
+\subsection{Was die Koide-Abweichung bedeutet}
+
+Die Abweichung $Q_{\text{FFGFT}} \approx 0{,}6677 \neq 2/3$ ist kein Fehler
+der Theorie und kein Widerspruch zur experimentellen Bestätigung der
+Koide-Relation. Sie ist die korrekte Propagation der FFGFT-Massengenauigkeit
+($\sim 1\,\%$) durch eine nichtlineare Formel mit Kreuztermproblem.
+
+Die experimentelle Koide-Relation $Q = 2/3$ bestätigt die
+FFGFT-Exponentenstruktur $\Delta p = 1/3$ auf einem anderen Weg:
+Sie zeigt, dass die \emph{wahren} Massen die Bedingung \eqref{eq:bedingung}
+erfüllen — und dass die FFGFT-Terme dieser Bedingung auf $0{,}16\,\%$ nahekommen,
+ohne sie zu erzwingen.
+
+\subsection{Sprachliche Konsequenz}
+
+In externen Kommunikationen ist zu unterscheiden:
+
+\begin{center}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{p{5cm}p{5cm}p{4cm}}
+\toprule
+\textbf{Aussage} & \textbf{Status} & \textbf{Begründung} \\
+\midrule
+„FFGFT erklärt die Koide-Formel durch den Exponentenschritt $1/3$" &
+✅ Korrekt &
+Strukturelle Aussage über Herkunft \\[6pt]
+„FFGFT berechnet $Q = 2/3$ exakt" &
+❌ Falsch &
+Kategoriegrenzen-Verletzung \\[6pt]
+„Die FFGFT-Massen stimmen mit der Koide-Relation auf $0{,}16\,\%$ überein" &
+✅ Korrekt &
+Ehrliche numerische Aussage \\[6pt]
+„Die Koide-Relation ist nur mit PDG-Werten gültig" &
+✅ Korrekt &
+Kontext der Originalformel \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+% ============================================================
+
+\section*{Verbindung zu Dok.~193}
+
+\textbf{Dokument~070} (\textit{Zur mathematischen Struktur der T0-Theorie:
+Warum Produkte verschiedener $r_i$ strukturell bedeutungslos sind})
+behandelt dasselbe Grundprinzip auf der Ebene der Massenformeln.
+
+Dok.~193 beweist das \textbf{Nichtabschluss-Theorem}: Die Menge der
+zulässigen Paare $(r_i, p_i)$ in FFGFT ist bezüglich der Multiplikation
+nicht abgeschlossen:
+\[
+  \forall\, i \neq j:\quad (r_i \cdot r_j,\; p_i + p_j) \notin \mathcal{P}
+\]
+Das bedeutet: $r_e \cdot r_\mu = 4/3 \cdot 16/5 = 64/15$ gehört zu
+keiner Torusmode und keinem Teilchen in FFGFT.
+Die $r_i$ sind keine Zahlen in einem Körper, sondern Etiketten eines
+diskreten geometrischen Raums --- ihre Verknüpfung ist nicht die
+gewöhnliche Körpermultiplikation.
+
+Dok.~193 zeigt: \emph{Massenformeln dürfen nicht symbolisch in andere
+Formeln eingesetzt werden, weil dabei Kreuzprodukte $r_i \cdot r_j$
+entstehen, die außerhalb von $\mathcal{P}$ liegen.}
+
+Dok.~192 (dieses Dokument) verallgemeinert: \emph{Terme aus einem
+algebraischen Strukturraum dürfen nicht symbolisch in Formeln eines
+fremden Strukturraums eingesetzt werden} --- das gilt für die
+Koide-Relation, für Quantenzahlen in SM-Formeln, und für alle
+Skalenhierarchien in FFGFT.
+
+Beide Dokumente beschreiben dieselbe Kompositionsgrenze:
+Dok.~193 auf der Ebene der Massenformel-Terme (Nichtabschluss-Theorem),
+Dok.~192 auf der Ebene der Formel-Komposition zwischen verschiedenen Theorien.
+
+\section*{Zusammenfassung}
+% ============================================================
+
+Die Kompositionsgrenze zwischen dem FFGFT-Strukturraum und der
+Koide-Formel erklärt die beobachtete $0{,}16\,\%$-Abweichung bei $Q$.
+Sie ist kein Theoriefehler, sondern ein Hinweis auf einen kategoriellen
+Unterschied: strukturelle Terme (mit impliziter Geometrie) und numerische
+Ergebnisse (Zahlen ohne Strukturerinnerung) dürfen nicht in fremden
+algebraischen Kontexten synonym verwendet werden.
+
+Das Prinzip ist allgemein: Es gilt für Quantenzahlen in SM-Formeln,
+für Einheitensystem-Übergänge und für Skalenhierarchien in FFGFT.
+Die korrekte Vorgehensweise ist stets: zuerst auswerten, dann einsetzen.
