@@ -1,6 +1,6 @@
 # T0 Time-Mass Duality
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17522475.svg)](https://doi.org/10.5281/zenodo.17522475)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20022166.svg)](https://doi.org/10.5281/zenodo.20022166)
 
 
 # T0-Time-Mass-Duality: A Revolutionary Geometric Framework Unifying Quantum Mechanics, Relativity, and Cosmology
@@ -9,7 +9,7 @@
 
 **Topics (GitHub Topics):** #ffgft #unifiedfieldtheory #quantumrelativity #finestructureconstant #fractalphysics #deterministicqm #geometricconstants #particlephysics #cosmology #quantumgravity #quantumcomputing #rsaquantum #siunits #plancklength #gravitationalconstant #muong2 #cmbanomaly #hubbletension #darkenergy #mond #lagrangiansimplification #diracequation #energyduality #timemassduality #xigeometry #vacuumenergy #emergentgravity #narrativephysics #cosmicbrain #popularsciencephysics
 
-**Abstract/Summary for Search Engines:** The T0-Time-Mass-Duality model, also known as FFGFT (Fundamental Fractal-Geometric Field Theory), is a revolutionary geometric framework unifying quantum mechanics, general relativity, and cosmology through a single parameter ξ = (4/3) × 10⁻⁴. Deriving all physical constants (G, c, ℏ, lₚ, α ≈ 1/137.036) from fractal spacetime geometry, it eliminates the Standard Model's 20+ free parameters, achieves 98% accuracy in particle mass predictions (electron, muon, tau, quarks), resolves the muon g-2 anomaly to 0.05σ precision, solves the Hubble tension and CMB anomalies, provides alternatives to dark energy and MOND, and enables deterministic quantum computing. Features 44-chapter narrative edition with cosmic brain metaphor, interactive tools, Python implementations, 191+ LaTeX source files, 186+ PDF documents, audio podcasts, and YouTube videos. Ideal for researchers in theoretical physics, quantum information, cosmology, and alternative physics. DOI: 10.5281/zenodo.17522475.
+**Abstract/Summary for Search Engines:** The T0-Time-Mass-Duality model, also known as FFGFT (Fundamental Fractal-Geometric Field Theory), is a revolutionary geometric framework unifying quantum mechanics, general relativity, and cosmology through a single parameter ξ = (4/3) × 10⁻⁴. Deriving all physical constants (G, c, ℏ, lₚ, α ≈ 1/137.036) from fractal spacetime geometry, it eliminates the Standard Model's 20+ free parameters, achieves 98% accuracy in particle mass predictions (electron, muon, tau, quarks), resolves the muon g-2 anomaly to 0.05σ precision, solves the Hubble tension and CMB anomalies, provides alternatives to dark energy and MOND, and enables deterministic quantum computing. Features 44-chapter narrative edition with cosmic brain metaphor, interactive tools, Python implementations, 191+ LaTeX source files, 186+ PDF documents, audio podcasts, and YouTube videos. Ideal for researchers in theoretical physics, quantum information, cosmology, and alternative physics. DOI: 10.5281/zenodo.20022166.
 
 ## Overview
 
@@ -45,6 +45,32 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
 
 ## Latest Highlights
 
+### May 2026 (v1.0.13): Quantum-Mechanical Bridge, Methodological Status, Narrative Translation 📐
+
+This release adds the connection of the FFGFT field theory (Doc. 202) to the standard quantum-mechanical equations of motion, the methodological status of the verification condition, the renaming of the renormalisation-group section to FFGFT-native scale-structure language, and a complete plain-language translation of the core Lagrangian formulations as a new standalone document (Doc. 205).
+
+- **[202_FFGFT_Feldtheorie_Gesamt_De.pdf](2/pdf/202_FFGFT_Feldtheorie_Gesamt_De.pdf)** / **[En](2/pdf/202_FFGFT_Feldtheorie_Gesamt_En.pdf)** — Substantially extended (now 28/25 pages):
+  - **§15 Connection to the Quantum Mechanical Equations of Motion** — Bridge formula 202 ↔ 201 (mode sum → DVFT polar decomposition); simplified Dirac equation with explicit Clifford-algebra discussion (4×4 γ-matrices remain as a representation, not eliminated, per Doc. 050/051); Schrödinger equation as low-energy limit; Bell correlations with modified CHSH form (202.QM-5) and Lagrangian connection via $\xi_0$, $D_f$, $K_\text{frak}$; qubit mappings on cylindrical phase space $(z, r, \theta)$ with explicit Lagrangian connection through the mode catalogue. Comprehensive cross-references to all parallel QM derivations (Docs. 020, 023, 023a, 034, 035, 037, 050–053, 055, 067, 074, 095, 129, 131, 147, 161, 173–178, 183).
+  - **§17 Methodological Status of the Verification Condition** — Four-subsection treatment: (1) reduction is not precision improvement (FFGFT Lagrangian → SM Lagrangian for $\xi_0 \to 0$); (2) predictions beyond the Standard Model (Bell-CHSH, dark matter/energy, hierarchy problem, CMB without inflation); (3) circularity of the comparison basis (PDG values are not raw — they contain SI-2019-fixed constants and loop corrections); (4) consequence for assessment (verification is structural, not quantitative). Cross-references to Doc. 066 (parameter-transfer problem) and Doc. 101 (circularity of constants).
+  - **§19 Scale Structure from Recursion** (formerly "The Renormalisation Group") — Renamed and reframed as a direct consequence of the recursion operator $\mathcal{R}$ (Doc. 203) on the fractal torus geometry, not a renormalisation procedure. Note on terminology refers to Doc. 190 R7 (binding language convention).
+  - Extended grey box at §8 (Free Lagrangian) — DVFT cross-reference plus terminology note on "renormalisation group".
+
+- **[190_T0_Korrekturen_De.pdf](2/pdf/190_T0_Korrekturen_De.pdf)** / **[En](2/pdf/190_T0_Korrekturen_En.pdf)** — Extended corrections register:
+  - **R7 (terminology):** "Renormalisation group" → "scale structure from recursion" / "$\mathcal{R}$-induced scale correction" — binding for the entire series. Affects Docs. 005, 008, 019, 086, 189, 202 (FFGFT-native description bypasses RG language).
+  - **R8 (terminology):** "Fractal renormalisation" → "geometric scale adaptation" (units context) or "fractal correction" (Doc. 060 musical analogy).
+
+- **[205_FFGFT_Narrativ_De.pdf](2/pdf/205_FFGFT_Narrativ_De.pdf)** / **[En](2/pdf/205_FFGFT_Narrativ_En.pdf)** — **NEW: FFGFT in Plain Language — The Core Formulations Narrated.** A complete plain-language translation of the central Lagrangian formulations (24/22 pages, Kindle 6×9 format). Eleven chapters covering: the big picture, why a fractal torus, the modes and what oscillates, the free Lagrangian as bare oscillation, the correction term as fractal geometry shaping oscillation (with piano-inharmonicity analogy from Doc. 060), the binding picture for mass generation, Yukawa coupling as matter-vacuum interface, the recursion as scale self-similarity, the bridge formula, what the Lagrangian formulation achieves (structural unification, parameter reduction 25→1, QFT-GR bridge, explanation of "unexplained residues"), and what the theory does **not** claim (no precision improvement of SM calculations, no QFT replacement, no ontological commitment, no measurement-problem solution; with explicit subparagraph on the circularity of the measurement basis). Every formula carries an explicit symbol-explanation block (six glossary blocks), grounded only in metaphors actually used in the corpus (vibrating string from Doc. 159, piano inharmonicity from Doc. 060, resonator from Doc. 173, fractal coastline). No hallucinations.
+
+### May 2026 (v1.0.12): Complete Field Theory, Recursion Operator, Fractal Boundary Condition 🔬
+
+- **[193_Nichtabschluss_De.pdf](2/pdf/193_Nichtabschluss_De.pdf)** / **[En](2/pdf/193_Nichtabschluss_En.pdf)** — Non-Closure Theorem (standalone, extended). The r_i prefactors are discrete geometric winding ratios of the 4D torus — not optimised for any external formula. Cross-products of different mode labels are structurally inadmissible (tensor-product category error). Connection to Koide: Q_FFGFT ≈ 0.6677 ≠ 2/3 is consistent because FFGFT does not derive Koide. Lepton exponent architecture uses two distinct mechanisms: p_τ = 1−1/D (complement step, D=3 topological) and p_e = 1+1/(D−1) (spin-winding, Doc. 051).
+
+- **[202_FFGFT_Feldtheorie_Gesamt_De.pdf](2/pdf/202_FFGFT_Feldtheorie_Gesamt_De.pdf)** / **[En](2/pdf/202_FFGFT_Feldtheorie_Gesamt_En.pdf)** — Initial release of the Complete Field Theory of FFGFT. Unified synthesis: torus modes and quantum numbers, non-closure theorem, free Lagrangian L₀ = ½(∂δm)², mode operator Φ = Σm_i P_i, bridge formula ∫L₀d⁴x = ½⟨ψ|Φ²|ψ⟩, mass generation as binding phenomenon, recursion operator, algebraic structure C^k_{ij} = δ_{k,i+j}, open tasks with status. Includes reference to Doc. 201 (DVFT adaptation: apparent cosmic acceleration and galactic rotation curves without dark energy/matter). **Substantially extended in v1.0.13 (see above).**
+
+- **[203_R_Operator_De.pdf](2/pdf/203_R_Operator_De.pdf)** / **[En](2/pdf/203_R_Operator_En.pdf)** — The Recursion Operator ℛ. Formal translation of the ξ₀ = 4/30000 derivation (Doc. 180) into operator language: eigenvalues λ_{n,l,j} = ξ₀^{p−1}·K_frak, fixed-point condition ℛ^{(7)}(Φ*) = Φ*. Explicit clarification: comparing K_frak across different modes is the same category error as the non-closure theorem — K_frak ≈ 0.986 is a single universal geometric constant.
+
+- **[204_Fraktale_Randbedingung_De.pdf](2/pdf/204_Fraktale_Randbedingung_De.pdf)** / **[En](2/pdf/204_Fraktale_Randbedingung_En.pdf)** — Fractal Boundary Condition. First-order perturbation theory in ξ₀ for the torus wave functions: normalisation correction N = 1−4.6×10⁻⁵, dispersion correction +0.69ξ₀ ≈ 3×10⁻⁵. Confirms D_f = 3−ξ₀ corrections are order 10⁻⁴, well below Koide precision. Δp = 1/3 is tied to D = 3 topological, not D_f.
+
 ### February 2026: NEW BOOK — From α = 1 to Complete Physics 📖
 
 **The definitive T0 narrative — now as Kindle-optimized 6×9 book**
@@ -74,16 +100,6 @@ All compiled books (Teil 1–3, FFGFT Narrative Master, Xi Narrative Master, T0 
 - **[157_Zeitpfeil_De.pdf](2/pdf/157_Zeitpfeil_De.pdf)** / **[157_Zeitpfeil_En.pdf](2/pdf/157_Zeitpfeil_En.pdf)** — Why is time directed? The arrow of time as a geometric consequence of spacetime structure. All fundamental equations (Newton, Maxwell, Schrödinger, Dirac, Einstein) are time-reversal invariant — yet we experience directed time. T0 theory resolves this through four geometric arguments: T·m = 1 forces T > 0 algebraically, torus winding defines a topologically protected direction, fractal spacetime (D_f < 3) breaks mirror symmetry, and time emerges irreversibly from symmetry breaking.
 
 
-
-### May 2026: Complete Field Theory, Recursion Operator, Fractal Boundary Condition 🔬
-
-- **[193_Nichtabschluss_De.pdf](2/pdf/193_Nichtabschluss_De.pdf)** / **[En](2/pdf/193_Nichtabschluss_En.pdf)** — Non-Closure Theorem (standalone, extended). The r_i prefactors are discrete geometric winding ratios of the 4D torus — not optimised for any external formula. Cross-products of different mode labels are structurally inadmissible (tensor-product category error). Connection to Koide: Q_FFGFT ≈ 0.6677 ≠ 2/3 is consistent because FFGFT does not derive Koide. Lepton exponent architecture uses two distinct mechanisms: p_τ = 1−1/D (complement step, D=3 topological) and p_e = 1+1/(D−1) (spin-winding, Doc. 051).
-
-- **[202_FFGFT_Feldtheorie_Gesamt_De.pdf](2/pdf/202_FFGFT_Feldtheorie_Gesamt_De.pdf)** / **[En](2/pdf/202_FFGFT_Feldtheorie_Gesamt_En.pdf)** — The Complete Field Theory of FFGFT (8 parts, 18/15 pages). Unified synthesis: torus modes and quantum numbers, non-closure theorem, free Lagrangian L₀ = ½(∂δm)², mode operator Φ = Σm_i P_i, bridge formula ∫L₀d⁴x = ½⟨ψ|Φ²|ψ⟩, mass generation as binding phenomenon, recursion operator, algebraic structure C^k_{ij} = δ_{k,i+j}, open tasks with status. Includes reference to Doc. 201 (DVFT adaptation: apparent cosmic acceleration and galactic rotation curves without dark energy/matter).
-
-- **[203_R_Operator_De.pdf](2/pdf/203_R_Operator_De.pdf)** / **[En](2/pdf/203_R_Operator_En.pdf)** — The Recursion Operator ℛ. Formal translation of the ξ₀ = 4/30000 derivation (Doc. 180) into operator language: eigenvalues λ_{n,l,j} = ξ₀^{p−1}·K_frak, fixed-point condition ℛ^{(7)}(Φ*) = Φ*. Explicit clarification: comparing K_frak across different modes is the same category error as the non-closure theorem — K_frak ≈ 0.986 is a single universal geometric constant.
-
-- **[204_Fraktale_Randbedingung_De.pdf](2/pdf/204_Fraktale_Randbedingung_De.pdf)** / **[En](2/pdf/204_Fraktale_Randbedingung_En.pdf)** — Fractal Boundary Condition. First-order perturbation theory in ξ₀ for the torus wave functions: normalisation correction N = 1−4.6×10⁻⁵, dispersion correction +0.69ξ₀ ≈ 3×10⁻⁵. Confirms D_f = 3−ξ₀ corrections are order 10⁻⁴, well below Koide precision. Δp = 1/3 is tied to D = 3 topological, not D_f.
 
 ### April/May 2026: Quantum Computing Series, Avi Dialogue, RSA Precision Barrier, Lagrangian 🔬
 

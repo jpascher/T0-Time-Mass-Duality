@@ -1,6 +1,6 @@
 # T0 Time-Mass Duality
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17522475.svg)](https://doi.org/10.5281/zenodo.17522475)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20022166.svg)](https://doi.org/10.5281/zenodo.20022166)
 
 # T0-Zeit-Masse-Dualität: Ein revolutionärer geometrischer Rahmen zur Vereinheitlichung von Quantenmechanik, Relativität und Kosmologie
 
@@ -8,7 +8,7 @@
 
 **Themen (GitHub Topics):** #ffgft #vereinheitlichte-feldtheorie #quantenrelativität #feinstrukturkonstante #fraktalphysik #deterministische-qm #geometrischekonstanten #teilchenphysik #kosmologie #quantengravitation #quantencomputing #rsa-quanten #si-einheiten #plancklaenge #gravitationskonstante #muong2 #cmbanomalie #hubblespannung #dunkleenergie #mond #lagrangianvereinfachung #diracgleichung #energiedualität #zeitmassedualität #xigeometrie #vakuumenergie #emergenteGravitation #narrativphysik #kosmischesGehirn #populärwissenschaftphysik
 
-**Zusammenfassung/Abstract für Suchmaschinen:** Das T0-Zeit-Masse-Dualitätsmodell, auch bekannt als FFGFT (Fundamentale Fraktal-Geometrische Feldtheorie), ist ein revolutionärer geometrischer Rahmen, der Quantenmechanik, allgemeine Relativität und Kosmologie durch einen einzigen Parameter ξ = (4/3) × 10⁻⁴ vereinheitlicht. Es leitet alle physikalischen Konstanten (G, c, ℏ, lₚ, α ≈ 1/137,036) aus fraktaler Raumzeit-Geometrie ab, eliminiert die 20+ freien Parameter des Standardmodells, erreicht 98% Genauigkeit bei Teilchenmassen-Vorhersagen (Elektron, Myon, Tau, Quarks), löst die Myon g-2 Anomalie auf 0,05σ Präzision, löst die Hubble-Spannung und CMB-Anomalien, bietet Alternativen zu dunkler Energie und MOND, und ermöglicht deterministisches Quantencomputing. Enthält 44-Kapitel narrative Edition mit kosmischer Gehirn-Metapher, interaktive Tools, Python-Implementierungen, 191+ LaTeX-Quelldateien, 186+ PDF-Dokumente, Audio-Podcasts und YouTube-Videos. Ideal für Forscher in theoretischer Physik, Quanteninformation, Kosmologie und alternativer Physik. DOI: 10.5281/zenodo.17522475.
+**Zusammenfassung/Abstract für Suchmaschinen:** Das T0-Zeit-Masse-Dualitätsmodell, auch bekannt als FFGFT (Fundamentale Fraktal-Geometrische Feldtheorie), ist ein revolutionärer geometrischer Rahmen, der Quantenmechanik, allgemeine Relativität und Kosmologie durch einen einzigen Parameter ξ = (4/3) × 10⁻⁴ vereinheitlicht. Es leitet alle physikalischen Konstanten (G, c, ℏ, lₚ, α ≈ 1/137,036) aus fraktaler Raumzeit-Geometrie ab, eliminiert die 20+ freien Parameter des Standardmodells, erreicht 98% Genauigkeit bei Teilchenmassen-Vorhersagen (Elektron, Myon, Tau, Quarks), löst die Myon g-2 Anomalie auf 0,05σ Präzision, löst die Hubble-Spannung und CMB-Anomalien, bietet Alternativen zu dunkler Energie und MOND, und ermöglicht deterministisches Quantencomputing. Enthält 44-Kapitel narrative Edition mit kosmischer Gehirn-Metapher, interaktive Tools, Python-Implementierungen, 191+ LaTeX-Quelldateien, 186+ PDF-Dokumente, Audio-Podcasts und YouTube-Videos. Ideal für Forscher in theoretischer Physik, Quanteninformation, Kosmologie und alternativer Physik. DOI: 10.5281/zenodo.20022166.
 
 ## Überblick
 
@@ -43,6 +43,32 @@ Das T0-Modell präsentiert einen paradigmenwechselnden Ansatz zum Verständnis d
 
 ## Neueste Highlights
 
+### Mai 2026 (v1.0.13): Quantenmechanische Brücke, methodische Stellung, narrative Übersetzung 📐
+
+Dieses Release ergänzt den Anschluss der FFGFT-Feldtheorie (Dok. 202) an die quantenmechanischen Standard-Bewegungsgleichungen, die methodische Stellung der Prüfbedingung, die Umbenennung der Renormierungsgruppen-Section in FFGFT-native Skalenstruktur-Sprache, sowie eine vollständige Alltagssprache-Übersetzung der zentralen Lagrangian-Formulierungen als neues eigenständiges Dokument (Dok. 205).
+
+- **[202_FFGFT_Feldtheorie_Gesamt_De.pdf](2/pdf/202_FFGFT_Feldtheorie_Gesamt_De.pdf)** / **[En](2/pdf/202_FFGFT_Feldtheorie_Gesamt_En.pdf)** — Substantiell erweitert (jetzt 28/25 Seiten):
+  - **§15 Anschluss an die quantenmechanischen Bewegungsgleichungen** — Brückenformel 202 ↔ 201 (Modensumme → DVFT-Polarzerlegung); vereinfachte Dirac-Gleichung mit expliziter Clifford-Algebra-Diskussion (4×4-γ-Matrizen bleiben als Darstellung erhalten, werden nicht beseitigt, gemäß Dok. 050/051); Schrödinger-Gleichung als Niederenergie-Grenzfall; Bell-Korrelationen mit modifizierter CHSH-Form (202.QM-5) und Lagrangian-Verbindung über $\xi_0$, $D_f$, $K_\text{frak}$; Qubit-Abbildungen auf zylindrischem Phasenraum $(z, r, \theta)$ mit expliziter Lagrangian-Verbindung über den Modenkatalog. Umfangreiche Querverweise auf alle parallelen QM-Ableitungen (Dok. 020, 023, 023a, 034, 035, 037, 050–053, 055, 067, 074, 095, 129, 131, 147, 161, 173–178, 183).
+  - **§17 Methodische Stellung der Prüfbedingung** — Vier-Subsection-Behandlung: (1) Reduktion ist nicht Präzisionssteigerung (FFGFT-Lagrangian → SM-Lagrangian für $\xi_0 \to 0$); (2) Vorhersagen jenseits des Standardmodells (Bell-CHSH, dunkle Materie/Energie, Hierarchieproblem, CMB ohne Inflation); (3) Zirkularität der Vergleichsbasis (PDG-Werte sind nicht roh — sie enthalten SI-2019-fixierte Konstanten und Schleifenkorrekturen); (4) Konsequenz für Bewertung (Prüfung ist strukturell, nicht quantitativ). Querverweise auf Dok. 066 (Parameter-Übertragungsproblem) und Dok. 101 (Zirkularität der Konstanten).
+  - **§19 Skalenstruktur aus der Rekursion** (zuvor „Die Renormierungsgruppe") — Umbenannt und neu gerahmt als unmittelbare Konsequenz des Rekursionsoperators $\mathcal{R}$ (Dok. 203) auf der fraktalen Torusgeometrie, kein Renormierungsverfahren. Anmerkung zur Begrifflichkeit verweist auf Dok. 190 P7 (verbindliche Sprachregelung).
+  - Erweiterte graue Box bei §8 (Freier Lagrangian) — DVFT-Querverweis plus Anmerkung zur Begrifflichkeit „Renormierungsgruppe".
+
+- **[190_T0_Korrekturen_De.pdf](2/pdf/190_T0_Korrekturen_De.pdf)** / **[En](2/pdf/190_T0_Korrekturen_En.pdf)** — Erweitertes Korrekturenverzeichnis:
+  - **P7 (Begrifflichkeit):** „Renormierungsgruppe" → „Skalenstruktur aus der Rekursion" / „$\mathcal{R}$-induzierte Skalenkorrektur" — verbindlich für die gesamte Reihe. Betrifft Dok. 005, 008, 019, 086, 189, 202 (FFGFT-native Beschreibung umgeht RG-Sprache).
+  - **P8 (Begrifflichkeit):** „Fraktale Renormierung" → „geometrische Skalenanpassung" (Einheiten-Kontext) oder „fraktale Korrektur" (Dok. 060 Musik-Analogie).
+
+- **[205_FFGFT_Narrativ_De.pdf](2/pdf/205_FFGFT_Narrativ_De.pdf)** / **[En](2/pdf/205_FFGFT_Narrativ_En.pdf)** — **NEU: FFGFT in Alltagssprache — Die Kernformulierungen narrativ.** Eine vollständige Alltagssprache-Übersetzung der zentralen Lagrangian-Formulierungen (24/22 Seiten, Kindle-6×9-Format). Elf Kapitel: das große Bild, warum ein fraktaler Torus, die Moden und was schwingt, der freie Lagrangian als nackte Schwingung, der Korrekturterm als geometrische Formung der Schwingung (mit Klavier-Inharmonizitäts-Analogie aus Dok. 060), das Bindungsbild der Massenentstehung, Yukawa-Kopplung als Materie-Vakuum-Kopplung, die Rekursion als Skalen-Selbstähnlichkeit, die Brückenformel, was die Lagrangian-Formulierung leistet (strukturelle Vereinheitlichung, Parameter-Reduktion 25→1, QFT-RT-Brücke, Erklärung der „ungeklärten Reste"), und was die Theorie **nicht** behauptet (keine Präzisionsverbesserung der SM-Berechnungen, kein QFT-Ersatz, keine ontologische Festlegung, keine Lösung des Messproblems; mit explizitem Subparagraph zur Zirkularität der Vermessungsbasis). Jede Formel hat einen expliziten Symbol-Erklärungs-Block (sechs Glossar-Blöcke), gegründet ausschließlich in Metaphern, die im Korpus selbst verwendet werden (schwingende Saite aus Dok. 159, Klavier-Inharmonizität aus Dok. 060, Resonator aus Dok. 173, fraktale Küstenlinie). Keine Halluzinationen.
+
+### Mai 2026 (v1.0.12): Vollständige Feldtheorie, Rekursionsoperator, Fraktale Randbedingung 🔬
+
+- **[193_Nichtabschluss_De.pdf](2/pdf/193_Nichtabschluss_De.pdf)** / **[En](2/pdf/193_Nichtabschluss_En.pdf)** — Nichtabschluss-Theorem (eigenständig, erweitert). Die r_i-Vorfaktoren sind diskrete geometrische Wicklungsverhältnisse des 4D-Torus — nicht auf externe Formeln optimiert. Kreuzprodukte verschiedener Modenbezeichner sind strukturell unzulässig (Tensor-Produkt-Kategorieverletzung). Verbindung zu Koide: Q_FFGFT ≈ 0.6677 ≠ 2/3 ist konsistent, da FFGFT Koide nicht ableitet. Die Leptonen-Exponenten verwenden zwei verschiedene Mechanismen: p_τ = 1−1/D (Komplementschritt, D=3 topologisch) und p_e = 1+1/(D−1) (Spin-Wicklung, Dok. 051).
+
+- **[202_FFGFT_Feldtheorie_Gesamt_De.pdf](2/pdf/202_FFGFT_Feldtheorie_Gesamt_De.pdf)** / **[En](2/pdf/202_FFGFT_Feldtheorie_Gesamt_En.pdf)** — Erstveröffentlichung der vollständigen Feldtheorie der FFGFT. Vereinheitlichte Synthese: Torusmoden und Quantenzahlen, Nichtabschluss-Theorem, freier Lagrangian L₀ = ½(∂δm)², Moden-Operator Φ = Σm_i P_i, Brückenformel ∫L₀d⁴x = ½⟨ψ|Φ²|ψ⟩, Massenentstehung als Bindungsphänomen, Rekursionsoperator, algebraische Struktur C^k_{ij} = δ_{k,i+j}, offene Aufgaben mit Status. Enthält Verweis auf Dok. 201 (DVFT-Adaptation: scheinbare kosmische Beschleunigung und galaktische Rotationskurven ohne dunkle Energie/Materie). **Substantiell erweitert in v1.0.13 (siehe oben).**
+
+- **[203_R_Operator_De.pdf](2/pdf/203_R_Operator_De.pdf)** / **[En](2/pdf/203_R_Operator_En.pdf)** — Der Rekursionsoperator ℛ. Formale Übersetzung der ξ₀ = 4/30000-Herleitung (Dok. 180) in Operatorsprache: Eigenwerte λ_{n,l,j} = ξ₀^{p−1}·K_frak, Fixpunktbedingung ℛ^{(7)}(Φ*) = Φ*. Klarstellung: der Vergleich von K_frak über verschiedene Moden hinweg ist dieselbe Kategorieverletzung wie das Nichtabschluss-Theorem — K_frak ≈ 0.986 ist eine einzige universelle geometrische Konstante.
+
+- **[204_Fraktale_Randbedingung_De.pdf](2/pdf/204_Fraktale_Randbedingung_De.pdf)** / **[En](2/pdf/204_Fraktale_Randbedingung_En.pdf)** — Fraktale Randbedingung. Störungsrechnung erster Ordnung in ξ₀ für die Toruswellenfunktionen: Normierungskorrektur N = 1−4.6×10⁻⁵, Dispersionskorrektur +0.69ξ₀ ≈ 3×10⁻⁵. Bestätigt: D_f = 3−ξ₀-Korrekturen sind von Ordnung 10⁻⁴, weit unterhalb der Koide-Präzision. Δp = 1/3 basiert auf D = 3 topologisch, nicht auf D_f.
+
 ### Februar 2026: NEUES BUCH — Von α = 1 zur vollständigen Physik 📖
 
 **Die definitive T0-Erzählung — jetzt als Kindle-optimiertes 6×9-Buch**
@@ -69,19 +95,6 @@ Alle kompilierten Bücher (Teil 1–3, FFGFT Narrative Master, Xi Narrative Mast
 ### Februar 2026: Zeitpfeil — Neues Dokument 🕐
 
 - **[157_Zeitpfeil_De.pdf](2/pdf/157_Zeitpfeil_De.pdf)** / **[157_Zeitpfeil_En.pdf](2/pdf/157_Zeitpfeil_En.pdf)** — Warum ist die Zeit gerichtet? Der Zeitpfeil als geometrische Konsequenz der Raumzeitstruktur. Alle fundamentalen Gleichungen (Newton, Maxwell, Schrödinger, Dirac, Einstein) sind zeitumkehrinvariant — dennoch erleben wir gerichtete Zeit. Die T0-Theorie löst dies durch vier geometrische Argumente: T·m = 1 erzwingt T > 0 algebraisch, die Toruswicklung definiert eine topologisch geschützte Richtung, die fraktale Raumzeit (D_f < 3) bricht die Spiegelsymmetrie, und die Zeit emergiert irreversibel aus Symmetriebrechung.
-
-
-
-### Mai 2026: Vollständige Feldtheorie, Rekursionsoperator, Fraktale Randbedingung 🔬
-
-- **[193_Nichtabschluss_De.pdf](2/pdf/193_Nichtabschluss_De.pdf)** / **[En](2/pdf/193_Nichtabschluss_En.pdf)** — Nichtabschluss-Theorem (eigenständig, erweitert). Die r_i-Vorfaktoren sind diskrete geometrische Wicklungsverhältnisse des 4D-Torus — nicht auf externe Formeln optimiert. Kreuzprodukte verschiedener Modenbezeichner sind strukturell unzulässig (Tensor-Produkt-Kategorieverletzung). Verbindung zu Koide: Q_FFGFT ≈ 0.6677 ≠ 2/3 ist konsistent, da FFGFT Koide nicht ableitet. Die Leptonen-Exponenten verwenden zwei verschiedene Mechanismen: p_τ = 1−1/D (Komplementschritt, D=3 topologisch) und p_e = 1+1/(D−1) (Spin-Wicklung, Dok. 051).
-
-- **[202_FFGFT_Feldtheorie_Gesamt_De.pdf](2/pdf/202_FFGFT_Feldtheorie_Gesamt_De.pdf)** / **[En](2/pdf/202_FFGFT_Feldtheorie_Gesamt_En.pdf)** — Die vollständige Feldtheorie der FFGFT (8 Teile, 18/15 Seiten). Vereinheitlichte Synthese: Torusmoden und Quantenzahlen, Nichtabschluss-Theorem, freier Lagrangian L₀ = ½(∂δm)², Moden-Operator Φ = Σm_i P_i, Brückenformel ∫L₀d⁴x = ½⟨ψ|Φ²|ψ⟩, Massenentstehung als Bindungsphänomen, Rekursionsoperator, algebraische Struktur C^k_{ij} = δ_{k,i+j}, offene Aufgaben mit Status. Enthält Verweis auf Dok. 201 (DVFT-Adaptation: scheinbare kosmische Beschleunigung und galaktische Rotationskurven ohne dunkle Energie/Materie).
-
-- **[203_R_Operator_De.pdf](2/pdf/203_R_Operator_De.pdf)** / **[En](2/pdf/203_R_Operator_En.pdf)** — Der Rekursionsoperator ℛ. Formale Übersetzung der ξ₀ = 4/30000-Herleitung (Dok. 180) in Operatorsprache: Eigenwerte λ_{n,l,j} = ξ₀^{p−1}·K_frak, Fixpunktbedingung ℛ^{(7)}(Φ*) = Φ*. Klarstellung: der Vergleich von K_frak über verschiedene Moden hinweg ist dieselbe Kategorieverletzung wie das Nichtabschluss-Theorem — K_frak ≈ 0.986 ist eine einzige universelle geometrische Konstante.
-
-- **[204_Fraktale_Randbedingung_De.pdf](2/pdf/204_Fraktale_Randbedingung_De.pdf)** / **[En](2/pdf/204_Fraktale_Randbedingung_En.pdf)** — Fraktale Randbedingung. Störungsrechnung erster Ordnung in ξ₀ für die Toruswellenfunktionen: Normierungskorrektur N = 1−4.6×10⁻⁵, Dispersionskorrektur +0.69ξ₀ ≈ 3×10⁻⁵. Bestätigt: D_f = 3−ξ₀-Korrekturen sind von Ordnung 10⁻⁴, weit unterhalb der Koide-Präzision. Δp = 1/3 basiert auf D = 3 topologisch, nicht auf D_f.
-
 
 ### April/Mai 2026: Quanten-Computing-Serie, Avi-Dialog, RSA-Präzisionsbarriere, Lagrangian 🔬
 
