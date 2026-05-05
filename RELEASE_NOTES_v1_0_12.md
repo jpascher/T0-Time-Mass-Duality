@@ -1,6 +1,6 @@
 # T0 Theory / FFGFT v1.0.12 – Quantum Computing Series, Periodic Table, RSA Precision Barrier, Corrections Register & Non-Closure Theorem
 
-**Release Date:** 2026-05-04  
+**Release Date:** 2026-05-05  
 **Version:** 1.0.12  
 **DOI:** 10.5281/zenodo.20022166  
 **GitHub:** https://github.com/jpascher/T0-Time-Mass-Duality
@@ -9,7 +9,7 @@
 
 ## 1. Overview
 
-This release adds 34 new documents (Docs 149–156, 158–159, 168–169, 170–176, 178–185, 187–193, 201) across seven research directions:
+This release adds 37 new documents (Docs 149–156, 158–159, 168–169, 170–176, 178–185, 187–193, 201) across seven research directions:
 
 1. **Docs 149–156, 158–159** — Torsion geometry, ontology, biological analogies (cortex, DNA), Koide-g2 bridge, harmonic torus structure.
 2. **Docs 168–169** — Periodic table as ξ-geometry.
@@ -17,6 +17,7 @@ This release adds 34 new documents (Docs 149–156, 158–159, 168–169, 170–
 4. **Docs 180–182** — Lagrangian derivation of L₀, torus justification, cosmological maximum scale.
 5. **Docs 183–185, 187–191** — Google Willow, p-bits, RSA precision barrier, photonics, geometric foundations, torus derivation, corrections register, Gemini dialogue.
 6. **Doc 201** — FFGFT unified synthesis.
+7. **Docs 202–204** — Complete field theory, recursion operator, fractal boundary condition.
 
 No existing predictions, derivations, or numerical results have been changed. All corrections are documented in Doc. 190 (see Section 4).
 
@@ -246,6 +247,61 @@ Concrete example: r_e·r_μ = (4/3)·(16/5) = 64/15 with exponent 5/2 belongs to
 **Files:** `201_FFGFT-alles_De.pdf` / `201_FFGFT-alles_En.pdf`
 
 Comprehensive integration of all FFGFT derivations into a single framework. Spacetime curvature emerges from distortions in a dynamic vacuum field Φ(x) = ρ(x)·e^{iθ(x)}, fully derived from T0's mass-fluctuation field Δm(x,t). Complete synthesis document.
+
+---
+
+### 2.9 Complete Field Theory and Operator Formalism (Docs 202–204)
+
+#### Doc 202 — The Complete Field Theory of FFGFT
+**Files:** `202_FFGFT_Feldtheorie_Gesamt_De.pdf` / `202_FFGFT_Feldtheorie_Gesamt_En.pdf`  
+**Supersedes:** The planned individual documents 194–200 are consolidated here.
+
+Eight-part unified presentation (18 pages DE / 15 pages EN):
+
+| Part | Content |
+|------|---------|
+| I | Foundations: universal fractal torus, ξ₀ = 4/30000, D_f = 3−ξ₀, L₀ = ℓ_P/ξ₀ |
+| II | Torus modes: quantum numbers (n,l,j), explicit wave functions, spin winding (Doc. 051) |
+| III | Non-closure theorem: cross-products of modes inadmissible; r_e·r_μ = 64/15 ∉ 𝒫 verified |
+| IV | Lagrangian and bridge: L₀ = ½(∂δm)², Φ = Σm_i P_i, ∫L₀d⁴x = ½⟨ψ|Φ²|ψ⟩ in 6 steps |
+| V | Mass generation as binding phenomenon: kinetic ≈ potential, crystal/hydrogen analogy |
+| VI | Field-theoretic formulation: ℛ-operator, C^k_{ij} = δ_{k,i+j}, β-function (Doc. 008) |
+| VII | Open tasks: Problems 1+2 resolved in Docs 203+204; Problem 4 (L_int) remains open |
+| VIII | Summary and notation table (23 symbols) |
+
+Includes note on Doc. 201 (DVFT: apparent cosmic acceleration and galactic rotation curves without dark energy/matter, polar field Φ = ρe^{iθ}).
+
+Connection to Austin/Koide analysis (May 2026): FFGFT does not derive the Koide relation. Q_FFGFT ≈ 0.6677 ≠ 2/3 is consistent — r_i are geometric invariants (winding ratios), not optimised for A = B. The lepton exponent architecture uses two mechanisms: p_τ = 1−1/D (complement step, Route 2 in Austin's framework) and p_e = 1+1/(D−1) = 3/2 (spin-winding, Doc. 051). The step Δp = 1/3 applies only to μ→τ; the e→μ step is 1/(D−1) = 1/2.
+
+#### Doc 203 — The Recursion Operator ℛ in FFGFT
+**Files:** `203_R_Operator_De.pdf` / `203_R_Operator_En.pdf`  
+**Resolves:** Open Task 1 from Doc. 202.
+
+Formal translation of the ξ₀ = 4/30000 derivation (Doc. 180) into mode-operator language:
+- **Diagonal form:** ℛ(e_{n,l,j}) = λ_{n,l,j} · e_{n,l,j}
+- **Eigenvalues:** λ_{n,l,j} = ξ₀^{p−1} · K_frak with K_frak ≈ 0.986 (universal, Doc. 180)
+- **Fixed point:** ℛ^{(7)}(Φ*) = Φ* with κ = 7 from e-p-μ self-consistency (0.04% accuracy)
+- **Three-step derivation:** 10⁻⁴ from spacetime dimensionality, 4/3 from tetrahedral geometry, uniqueness from κ = 7
+
+**Critical clarification (non-closure connection):** The apparent contradiction K_frak(e) ≈ 86.6, K_frak(μ) = 1, K_frak(τ) ≈ 0.051 — obtained by requiring λ_i = 1 per mode — is the same category error as the non-closure theorem. Comparing expressions from different mode spaces is inadmissible. K_frak ≈ 0.986 is a single universal geometric constant; the fixed-point condition is global on Φ*, not per-mode.
+
+#### Doc 204 — Fractal Boundary Condition in the Torus Modes
+**Files:** `204_Fraktale_Randbedingung_De.pdf` / `204_Fraktale_Randbedingung_En.pdf`  
+**Resolves:** Open Task 2 from Doc. 202.
+
+First-order perturbation theory in ξ₀ ≪ 1:
+
+| Quantity | Result | Order |
+|---------|--------|-------|
+| Fractal measure | dμ_{D_f} = (1 − ξ₀ ln\|x\|/L₀) d³x | — |
+| Normalisation correction | N = 1 − 4.6×10⁻⁵ | O(ξ₀) |
+| Dispersion correction | +0.69ξ₀ ≈ 3×10⁻⁵ | O(ξ₀) |
+
+Both corrections are of order ξ₀ ≈ 1.3×10⁻⁴. Consequences:
+- D_f = 3−ξ₀ corrections are far below Koide precision (σ_Q ≈ 5×10⁻⁶)
+- Δp = 1/3 is tied to D = 3 topological (not D_f) — consistent with Austin's D vs D_f separation
+- Orthogonality of mode functions and the non-closure theorem remain valid to all orders in ξ₀
+- The mass-generation binding picture (Part V of Doc. 202) is unaffected
 
 ---
 
