@@ -1,0 +1,247 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{fontspec}
+\setmainfont{DejaVu Sans}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}[Scale=0.88]
+\defaultfontfeatures{Ligatures=TeX}
+\usepackage{microtype}
+\usepackage{unicode-math}
+\setmathfont{Latin Modern Math}[Scale=1.0]
+\usepackage[ngerman]{babel}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+% --- Zeilenumbruch: sauber wie im Harmonikabuch ---
+\sloppy
+\emergencystretch=3em
+\tolerance=2500
+\hbadness=10000
+\hfuzz=2pt
+\clubpenalty=10000
+\widowpenalty=10000
+
+\usepackage{amsmath,amssymb}
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!50!black,
+  urlcolor=blue!50!black,
+  pdftitle={FFGFT, das Standardmodell und die Tool-Praxis - eine Abklärung},
+  pdfauthor={Johann Pascher}
+}
+
+\title{FFGFT, das Standardmodell und die Tool-Praxis\\[2pt]
+  \large Eine Abklärung dessen, was FFGFT operativ leistet und nicht leistet}
+\author{Johann Pascher\\[2pt]
+\small ORCID: \href{https://orcid.org/0009-0000-6518-4064}{0009-0000-6518-4064}\\
+\small GitHub: \url{https://github.com/jpascher/T0-Time-Mass-Duality}\\
+\small Zenodo (FFGFT v1.0.13): \url{https://zenodo.org/records/20041529}\\
+\small DOI: \href{https://doi.org/10.5281/zenodo.20041529}{10.5281/zenodo.20041529}}
+\date{Mai 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent Diese Notiz klärt, was FFGFT im Verhältnis zum operativen Standardmodell-Werkzeugkasten leistet und was nicht. Der Leser soll am Ende drei Dinge auseinanderhalten können: (1) was im Standardmodell-Lagrangian-Formalismus tatsächlich gerechnet wird und mit welchen Werkzeugen, (2) welche Funktion FFGFT als geometrische Reduktion auf einen einzigen dimensionslosen Parameter $\xi = 4/30{,}000$ erfüllt, und (3) wo FFGFT operativ keinen Genauigkeitsvorteil bietet, wo aber konzeptionell und für neue Vorhersagen ein substantieller Beitrag liegt. Die Notiz verfolgt die Doc-206-Disziplin (\S 11/\S 12): klar zu sagen, was die Theorie leistet und was nicht.
+\end{abstract}
+
+\section{Anlass: Wer rechnet mit der Lagrangian?}
+
+Die Standardmodell-Lagrangian erscheint in Lehrbüchern in zwei Formen. Die kompakte Hauptformel,
+\[
+\mathcal{L}_{\mathrm{SM}} = -\tfrac{1}{4}\,F_{\mu\nu}F^{\mu\nu} + i\,\bar\psi\,\!\not{\!D}\psi + \psi_i\,Y_{ij}\,\psi_j\,\phi + \mathrm{h.c.} + |D_\mu\phi|^2 - V(\phi)\,,
+\]
+ist eine \emph{didaktisch-konzeptionelle} Form, die auf vier Zeilen passt. Die ausgeschriebene Form, in der die drei Eichgruppen $\mathrm{SU}(3)\times\mathrm{SU}(2)\times\mathrm{U}(1)$ komponentenweise expandiert sind, über die drei Generationen summiert ist, mit CKM- und PMNS-Mischungen, allen Yukawa-Kopplungen und allen Lorentz-/Spinor-Indizes, umfasst typischerweise 50--100 Zeilen Formeln mit etwa 19 freien Parametern.
+
+\textbf{Die zentrale Beobachtung:} Niemand rechnet mit der gesamten ausgeschriebenen Lagrangian. Die operative Praxis arbeitet sektorweise und mit einer Industrie von Computer-Werkzeugen, die zwischen Lagrangian-Beschreibung und Vorhersage vermitteln.
+
+\section{Die operative Praxis im Standardmodell}
+
+Die typische Pipeline läuft so:
+
+\begin{enumerate}\itemsep2pt
+\item \textbf{Sektorweise Auswahl.} Eine Theoretikerin, die einen LHC-Prozess wie $gg \to H \to \gamma\gamma$ rechnet, nimmt nur die relevanten Teile der Lagrangian: den QCD-Sektor für den Anfangszustand, die Higgs-Yukawa-Kopplung an Top, die elektromagnetische Kopplung für den Endzustand. Die elektroschwache Mischung, die Neutrino-Sektoren, die Lepton-Yukawas usw.\ kommen nicht vor.
+
+\item \textbf{Übersetzung in Feynman-Regeln.} Lagrangian-Terme werden mechanisch in Vertexfaktoren und Propagatoren umgesetzt. Ab hier wird mit Diagrammen gerechnet, nicht mit Lagrangian-Termen.
+
+\item \textbf{Computer-Werkzeuge.} Eine etablierte Toolchain übernimmt die Übersetzung und Rechnung:
+\begin{itemize}\itemsep1pt
+\item \textbf{FeynRules} -- generiert Feynman-Regeln aus einer Lagrangian-Modelldatei
+\item \textbf{FormCalc / FeynCalc} -- Loop-Integrale und Renormierung
+\item \textbf{MadGraph / Sherpa / Pythia} -- Event-Generatoren für LHC-Daten
+\item \textbf{Lattice-QCD-Codes} -- nicht-perturbative QCD-Rechnungen
+\item \textbf{CAMB / CLASS} -- kosmologische Code-Pipelines
+\item \textbf{AlterBBN / PArthENoPE} -- Big-Bang-Nukleosynthese-Codes
+\end{itemize}
+
+\item \textbf{Effektive Theorien.} Für spezifische Energiebereiche werden reduzierte Lagrangians benutzt: HQET (schwere Quarks), ChPT (chirale Störungstheorie), NRQCD, SMEFT. In ihnen sind die nicht-relevanten Freiheitsgrade ausintegriert.
+
+\item \textbf{Konzeptionelle Funktion der Hauptformel.} Sie wird nicht zur Rechnung benutzt, sondern für Symmetrie-Argumente, Anomalie-Diskussionen, Renormierungsgruppen-Argumente und Konsistenz-Prüfungen.
+\end{enumerate}
+
+\textbf{Schlüsselbeobachtung:} Die operative Komplexität liegt nicht in der Lagrangian-Form, sondern in den 19+ freien Parametern, die aus dem Experiment justiert werden müssen, und in der Computer-Vermittlung zwischen Lagrangian und Vorhersage.
+
+\section{Was FFGFT leistet}
+
+FFGFT ist eine geometrische Reduktion. Ein einziger dimensionsloser Parameter,
+\[
+\xi = \frac{4}{30{,}000} = 1{,}333 \times 10^{-4}\,,
+\]
+zusammen mit der Skalen-Anker-Beziehung $\tilde T \cdot m = 1$, leitet eine ganze Hierarchie physikalischer Skalen und Konstanten ab, die im Standardmodell als unabhängige freie Parameter auftreten:
+
+\begin{table}[h]
+\centering\footnotesize
+\begin{tabular}{lcc}
+\toprule
+\textbf{Größe} & \textbf{Standardmodell-Status} & \textbf{FFGFT-Status} \\
+\midrule
+$\alpha^{-1}$ & freie Eingabe (gemessen) & abgeleitet aus $\xi$ und Geometrie \\
+$\sin^2\theta_W$ & freie Eingabe (gemessen) & exakt $3/13$ \\
+Lepton-Massen $m_e, m_\mu, m_\tau$ & 3 freie Yukawas & aus $\xi$-Rekursion (Doc 006) \\
+Quark-Massen, CKM & freie Eingaben & aus $\xi$-Geometrie \\
+Higgs-Masse, vev & 2 freie Eingaben & aus $16\pi^3$ und $\xi$ (Doc 073) \\
+Koide-Verhältnis $Q$ & nicht beachtet & exakt $2/3$ \\
+$\eta_{\mathrm{Baryon}}$ & freie Eingabe & $\sim 6\times 10^{-10}$ aus $\xi$ \\
+$H_0$ & freie kosm.\ Eingabe & $(\pi/2)\xi^{10}\,m_e c^2/\hbar$ (Doc 165) \\
+$L_\xi$ (Casimir) & nicht im SM & $\approx 100\,\mu$m aus $\rho_{\mathrm{CMB}}$ (Doc 091) \\
+$\Lambda$ (kosmolog.\ Konstante) & freie Eingabe & geometrisch fixiert \\
+\bottomrule
+\end{tabular}
+\caption{Die Reduktion: 19+ freie Parameter im SM werden zu Konsequenzen einer einzigen geometrischen Struktur in FFGFT.}
+\end{table}
+
+\section{Was operativ überflüssig wird}
+
+Aus FFGFT-Sicht wird ein erheblicher Teil der ausgeschriebenen SM-Lagrangian-Komplexität \emph{Bookkeeping einer emergenten Struktur}, deren tatsächliche Quelle die $\xi$-Geometrie ist:
+
+\begin{itemize}\itemsep2pt
+\item \textbf{Die 19+ freien Parameter} sind keine unabhängigen Größen, sondern $\xi$-Funktionen.
+\item \textbf{Die hierarchische Yukawa-Matrix-Form} (warum $m_\tau / m_e \sim 3500$, nicht 1 oder $10^{10}$) ist Konsequenz der $\xi$-Rekursionstiefe.
+\item \textbf{Die spezifische Mischungsstruktur in CKM und PMNS} folgt aus der $\xi$-Geometrie der Generationen.
+\item \textbf{Der Higgs-Sektor mit seinen $\lambda$-, $\mu^2$-Postulaten} reduziert sich auf $16\pi^3$- und $\xi$-Strukturen.
+\item \textbf{Die spezifische Wahl von $\sin^2\theta_W = 0{,}231$} ist nicht freier Parameter, sondern $3/13$ aus Z$_3$-Geometrie.
+\end{itemize}
+
+\section{Was operativ nicht überflüssig wird}
+
+Die SM-Lagrangian-Form als \emph{operationales Werkzeug} bleibt nützlich. Was nicht entfällt:
+
+\begin{itemize}\itemsep2pt
+\item \textbf{Feynman-Regeln} -- als operationale Brücke zu experimentellen Wirkungsquerschnitten.
+\item \textbf{Renormierungs-Maschinerie} -- für Strahlungskorrekturen.
+\item \textbf{Eichinvarianz-Struktur} -- Konsequenz der $\xi$-Geometrie, aber operative Form, in der die Konsequenz manifest wird.
+\item \textbf{Die Toolchain} (FeynRules, MadGraph, CAMB usw.) -- für Vergleiche mit Daten.
+\end{itemize}
+
+\textbf{Paradigmatischer Wechsel, kein Widerspruch:} Die SM-Lagrangian ist nicht falsch, sondern eine korrekte Beschreibung auf einer mittleren Beschreibungsebene. FFGFT liefert die geometrische Quelle, aus der diese effektive Beschreibung folgt.
+
+\section{Die Genauigkeitshierarchie -- ein zentraler Punkt}
+
+Hier liegt eine Differenzierung, die oft übersehen wird. \textbf{Auf operativer Ebene liefert FFGFT auf einzelne Konstanten keine Genauigkeitsverbesserung gegenüber der direkten Messung.} Beispiel $\alpha^{-1}$:
+
+\begin{align*}
+\text{FFGFT-Ableitung:} \quad \alpha^{-1} &= 137{,}035 \quad \text{(4--5 signifikante Stellen)} \\
+\text{PDG-Messwert:} \quad \alpha^{-1} &= 137{,}035\,999\,084 \pm 0{,}000\,000\,021 \quad \text{(10+ signifikante Stellen)}
+\end{align*}
+
+Für eine Präzisions-QED-Rechnung in MadGraph oder FormCalc will man den PDG-Wert. Eine FFGFT-basierte Eingabe wäre systematisch \emph{ungenauer} als die direkte experimentelle Bestimmung. Das gilt für alle Konstanten, die experimentell auf $\geq 6$ signifikante Stellen bekannt sind: $m_e, m_\mu, m_W, m_Z, \sin^2\theta_W$ usw.
+
+\textbf{Praktische Konsequenz:} Wer FFGFT in die Standard-Toolchain einbauen will, sollte die operativen Eingabewerte aus PDG nehmen und die FFGFT-Ableitungen als \emph{Konsistenz-Check} verwenden. Die Frage ist nicht: ,,Liefert FFGFT bessere LHC-Vorhersagen?'' Die Frage ist: ,,Sind die FFGFT-Ableitungen mit den PDG-Werten innerhalb der Theorie-Genauigkeit kompatibel?''
+
+\section{Wo FFGFT operativ Mehrwert liefert}
+
+Vier Funktionen, in denen FFGFT operativ einen Beitrag leistet, der durch PDG-Messung nicht ersetzbar ist:
+
+\begin{enumerate}\itemsep2pt
+\item \textbf{Theoretische Erklärung der Konstanten.} Warum hat $\alpha^{-1}$ den Wert 137,035 und nicht 142,5 oder 119,3? PDG misst es; das SM kann es nicht erklären; FFGFT liefert die geometrische Struktur, aus der der Wert folgt.
+
+\item \textbf{Vorhersagen jenseits der Präzisions-Grenze.} Wo Messwerte ungenau sind, kann FFGFT eine Aussage liefern, die präziser ist als der aktuelle experimentelle Stand. Beispiel: die CHSH-Bell-Abweichung $\sim 10^{-4}$ für massive Teilchen (Doc 023) -- aktuelle Bell-Experimente mit massiven Teilchen haben hier weniger Genauigkeit als die FFGFT-Vorhersage.
+
+\item \textbf{Vorhersagen, die im SM gar nicht existieren.}
+\begin{itemize}\itemsep1pt
+\item Casimir-Vakuumskala $L_\xi \approx 100\,\mu$m direkt aus $\rho_{\mathrm{CMB}}$ und $\xi$ (Doc 091)
+\item Hubble-Konstante $H_0$ aus $\xi^{10}$ (Doc 165), ohne kosmologische Pipeline
+\item Spite-Plateau-Erklärungs-Mechanismus über stationäres Reaktionsnetzwerk im $\xi$-Vakuum (Lithium-Briefing)
+\item Cosmological constant $\Lambda$ als geometrische Konsequenz, nicht als 120-Größenordnungs-Anomalie
+\end{itemize}
+
+\item \textbf{Strukturelle Verbindungen.} FFGFT prädiziert Beziehungen \emph{zwischen} Größen, die im SM als unabhängig behandelt werden:
+\[
+L_\xi \cdot \frac{H_0}{c} = \frac{\pi}{2}\left(\frac{15}{\pi^2}\right)^{1/4}\frac{m_e c^2}{k_B T_{\mathrm{CMB}}}\,\xi^{41/4}\,, \qquad \frac{41}{4} = 10 + \frac{1}{4}\,.
+\]
+Eine genauere PDG-Messung der Einzelgrößen $L_\xi, H_0, m_e, T_{\mathrm{CMB}}$ ersetzt diese Vorhersage \emph{zwischen} ihnen nicht.
+\end{enumerate}
+
+\section{Tool-Implementation: praktische Andockstellen}
+
+Wenn jemand mit Tool-Zugang FFGFT prüfen oder anwenden will, sind folgende Andockstellen direkt zugänglich:
+
+\begin{enumerate}\itemsep2pt
+\item \textbf{FeynRules-Modelldatei für FFGFT.} Die FFGFT-Lagrangian-Form (Doc 019, 067) als \texttt{FFGFT.fr}-Datei. Damit ist FFGFT für alle nachgelagerten Tools (MadGraph, FormCalc usw.) zugänglich. Die operativen Werte sollten aus PDG kommen, die FFGFT-Werte als Konsistenz-Check.
+
+\item \textbf{CAMB / CLASS mit FFGFT-Kosmologie.} $H_0 \approx 66{,}5$ km/s/Mpc, $T_{\mathrm{CMB}}, \eta, \rho_\Lambda$ als Inputs setzen, Vergleich mit Planck-Spektren. Test der Konsistenz der FFGFT-Ableitungen mit CMB-Beobachtungen.
+
+\item \textbf{AlterBBN / PArthENoPE mit Stationaritäts-Annahme.} Statt der zeitlich aufgelösten Freeze-out-Rechnung eine stationäre Netzwerk-Berechnung im $\xi$-Vakuum. Ziel: zeigen, ob das $^7$Li-Plateau natürlich als Attraktor herauskommt. Dies ist genau die offene Arbeit aus dem Lithium-Briefing \S 4.
+
+\item \textbf{Casimir-Setup mit $L_\xi$-Vorhersage.} Direkter experimenteller Test, ob bei Plattenabstand $d \approx L_\xi \approx 100\,\mu$m eine Charakteristik der Casimir-Energiedichte sichtbar ist, die mit $\rho_{\mathrm{CMB}}$ übereinstimmt.
+
+\item \textbf{Bell-Experimente mit massiven Teilchen.} Test der CHSH-Abweichung $\sim 10^{-4}$, etwa mit $^4$He$^*$-Atom-Korrelationen (ANU-Daten).
+\end{enumerate}
+
+Diese Aufgaben sind klar definiert. Sie sind \emph{nicht} Aufgaben des FFGFT-Theoretikers, sondern Andockstellen für Implementierer mit Tool-Zugang. FFGFT als geometrische Theorie ist mit der Bereitstellung dieser Andockstellen vollständig; die operationalen Tests sind eine getrennte Aktivität.
+
+\section{Zusammenfassung -- was FFGFT ist und nicht ist}
+
+Eine ehrliche Liste, im Geist der Doc-206-\S 11/\S 12-Disziplin:
+
+\textbf{FFGFT ist nicht:}
+\begin{itemize}\itemsep1pt
+\item kein Ersatz für Präzisions-Messungen einzelner Konstanten
+\item kein schnelleres oder genaueres Rechen-Werkzeug für LHC-Streuamplituden
+\item keine Konkurrenz zu MadGraph, FeynRules oder CAMB
+\item keine Behauptung, dass die SM-Lagrangian falsch sei
+\item keine fertig ausgearbeitete Theorie der nicht-perturbativen QCD oder der Hadronen-Massen
+\end{itemize}
+
+\textbf{FFGFT ist:}
+\begin{itemize}\itemsep1pt
+\item eine Reduktion der freien Parameter von 19+ auf 1
+\item eine geometrische Erklärung, warum die Konstanten ihre konkreten Werte haben
+\item eine Quelle struktureller Verbindungen zwischen Größen, die im SM unabhängig erscheinen
+\item eine Quelle neuer Vorhersagen (Casimir, Bell, Hubble, BBN-Mechanismus) jenseits des SM-Bereichs
+\item eine konzeptionelle Klärung dessen, was die SM-Lagrangian beschreibt: eine emergente Struktur, deren Quelle die $\xi$-Geometrie ist
+\end{itemize}
+
+\textbf{Die operative Arbeitsteilung:}
+\begin{itemize}\itemsep1pt
+\item PDG-Messwerte liefern operative Eingaben für Hochpräzisions-Rechnungen.
+\item FFGFT liefert konzeptionelle Reduktion und Vorhersagen außerhalb der PDG-Tabelle.
+\item Tool-Implementation ist eine eigenständige Aktivität für Praktiker mit Tool-Zugang -- keine Aufgabe des theoretischen Programms.
+\end{itemize}
+
+\section*{Quelldokumente im FFGFT-Korpus}
+
+\noindent\small
+\begin{tabular}{ll}
+\textbf{Doc 003} & Grundlagen: $\xi$-Geometrie und fraktale Raumzeitstruktur \\
+\textbf{Doc 006} & Teilchenmassen aus $\xi$-Rekursion \\
+\textbf{Doc 019, 067} & Lagrangian-Formulierungen in FFGFT \\
+\textbf{Doc 023} & Bell-CHSH-Abweichung für massive Teilchen \\
+\textbf{Doc 073} & Higgs-Sektor und $16\pi^3$-Struktur \\
+\textbf{Doc 091} & Casimir-CMB-Beziehung, $L_\xi \approx 100\,\mu$m \\
+\textbf{Doc 165} & Hubble-Verhältnis $\hbar H_0/(m_e c^2) = (\pi/2)\xi^{10}$ \\
+\textbf{Doc 166} & Casimir-Hubble-Brücke, $\xi$-Potenzleiter \\
+\textbf{Doc 206} & Triangle-Matrix-Reduktionstheorem \\
+\end{tabular}
+
+\medskip
+\noindent\small Alle Dokumente verfügbar unter \url{https://github.com/jpascher/T0-Time-Mass-Duality}\\
+und als Zenodo-Release v1.0.13: \url{https://zenodo.org/records/20041529} (DOI 10.5281/zenodo.20041529).
+
+\end{document}
