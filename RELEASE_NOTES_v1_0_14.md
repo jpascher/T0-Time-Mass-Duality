@@ -2,7 +2,7 @@
 
 **Release Date:** 2026-05-10
 **Version:** 1.0.14
-**DOI:** TBA — to be assigned upon Zenodo release
+**DOI:** [10.5281/zenodo.20041543](https://doi.org/10.5281/zenodo.20041543)
 **GitHub:** https://github.com/jpascher/T0-Time-Mass-Duality
 **Predecessor (v1.0.13):** [10.5281/zenodo.20041529](https://doi.org/10.5281/zenodo.20041529)
 
@@ -282,7 +282,7 @@ The three documents together yield the picture: FFGFT **demonstrably contains** 
 
 Both `README.md` and `README_de.md` have been updated:
 
-- **DOI badge** updated to v1.0.13 (10.5281/zenodo.20041529) — predecessor reference until the v1.0.14 Zenodo release assigns the new DOI.
+- **DOI badge** updated to v1.0.14 ([10.5281/zenodo.20041543](https://doi.org/10.5281/zenodo.20041543)). The v1.0.13 predecessor reference ([10.5281/zenodo.20041529](https://doi.org/10.5281/zenodo.20041529)) is retained in this Release Notes file for traceability.
 - **New section "May 2026 (v1.0.14)"** added at the top of *Latest Highlights*, summarising:
   - Doc. 206 (Triangle–Matrix Reduction Theorem),
   - Doc. 207 (Algebraic Bridges to the Consciousness Discussion),
@@ -404,4 +404,4 @@ The following items are open for v1.0.15 or later:
 ---
 
 *Document version: RELEASE_NOTES_v1_0_14.md, 2026-05-10.*
-*To be updated upon Zenodo release with the v1.0.14 DOI.*
+*Zenodo DOI assigned: [10.5281/zenodo.20041543](https://doi.org/10.5281/zenodo.20041543).*
