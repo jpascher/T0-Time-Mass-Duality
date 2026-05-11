@@ -2,6 +2,8 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20041543.svg)](https://doi.org/10.5281/zenodo.20041543)
 
+> 📋 **Major release v1.1.0 available.** A consolidated entry document covering the full corpus and highlighting the Hilbert-space bijection (Doc. 230) as the centrepiece is now the recommended reading: **[RELEASE_NOTES_v1_1_0.md](RELEASE_NOTES_v1_1_0.md)** (English) / **[RELEASE_NOTES_v1_1_0_de.md](RELEASE_NOTES_v1_1_0_de.md)** (Deutsch). The individual point-release notes (v1.0.11–v1.0.14) remain available for full historical detail.
+
 
 # T0-Time-Mass-Duality: A Revolutionary Geometric Framework Unifying Quantum Mechanics, Relativity, and Cosmology
 

@@ -2,6 +2,8 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20041543.svg)](https://doi.org/10.5281/zenodo.20041543)
 
+> 📋 **Major Release v1.1.0 verfügbar.** Ein konsolidiertes Eingangsdokument, das den gesamten Korpus abdeckt und die Hilbertraum-Bijektion (Dok. 230) als Herzstück hervorhebt, ist jetzt die empfohlene Lektüre: **[RELEASE_NOTES_v1_1_0_de.md](RELEASE_NOTES_v1_1_0_de.md)** (Deutsch) / **[RELEASE_NOTES_v1_1_0.md](RELEASE_NOTES_v1_1_0.md)** (English). Die einzelnen Punkt-Release-Notes (v1.0.11–v1.0.14) bleiben für vollständige historische Details verfügbar.
+
 # T0-Zeit-Masse-Dualität: Ein revolutionärer geometrischer Rahmen zur Vereinheitlichung von Quantenmechanik, Relativität und Kosmologie
 
 **Schlüsselwörter/Tags für Auffindbarkeit:** Vereinheitlichte Feldtheorie, FFGFT (Fundamentale Fraktal-Geometrische Feldtheorie), Zeit-Masse-Dualität, Geometrische Physik, Feinstrukturkonstante α, Fraktale Raumzeit, Deterministische Quantenmechanik, SI-Einheiten-Reform, Teilchenmassen-Vorhersagen, Myon g-2 Anomalie-Lösung, Dunkle-Energie-Alternative, MOND-Alternative, CMB-Anomalien, Hubble-Spannungs-Lösung, RSA-Faktorisierung Quanten, Planck-Konstanten-Ableitung, ξ Geometrischer Parameter, Vakuumenergiedichte, Quantencomputing-Simulator, Dirac-Gleichung-Vereinfachung, Emergente Gravitation, Kosmisches-Gehirn-Metapher, Narrative Physik-Edition
