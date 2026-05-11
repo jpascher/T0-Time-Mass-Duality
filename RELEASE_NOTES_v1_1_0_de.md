@@ -2,7 +2,7 @@
 
 **Veröffentlichungsdatum:** 2026-05-11
 **Version:** 1.1.0 (konsolidiert)
-**DOI:** TBA — wird bei Zenodo-Release vergeben
+**DOI:** [10.5281/zenodo.20117635](https://doi.org/10.5281/zenodo.20117635)
 **GitHub:** https://github.com/jpascher/T0-Time-Mass-Duality
 **Autor:** Johann Pascher (ORCID: [0009-0000-6518-4064](https://orcid.org/0009-0000-6518-4064))
 **Vorgänger:** v1.0.14 ([10.5281/zenodo.20041543](https://doi.org/10.5281/zenodo.20041543)); v1.0.13 ([10.5281/zenodo.20041529](https://doi.org/10.5281/zenodo.20041529)); v1.0.12 ([10.5281/zenodo.20022166](https://doi.org/10.5281/zenodo.20022166)); v1.0.11 ([10.5281/zenodo.18834145](https://doi.org/10.5281/zenodo.18834145))
@@ -245,7 +245,7 @@ Die folgenden Punkte sind offen für v1.2.0 oder später:
 | 1.0.12 | 2026-05-05 | [20022166](https://doi.org/10.5281/zenodo.20022166) | Nichtabschluss-Theorem (Dok. 192–193); Feldtheorie und Operatorformalismus (Dok. 202–204) |
 | 1.0.13 | 2026-05-05 | [20041529](https://doi.org/10.5281/zenodo.20041529) | Dok. 202 §15 (QM-Brücke), §17 (PDG-Zirkularität); Dok. 205 (Alltagssprache); Dok. 190 R7/R8 |
 | 1.0.14 | 2026-05-10 | [20041543](https://doi.org/10.5281/zenodo.20041543) | Dreieck-Matrix-Reduktion (206), Bewusstseinsbrücken (207), Wicklungsklärung (210), Falsifikationstrilogie (220–222), Hilbertraum-Triptychon (230–232) |
-| **1.1.0** | **2026-05-11** | **TBA** | **Konsolidiertes Release: Hilbertraum-Bijektion als Herzstück** |
+| **1.1.0** | **2026-05-11** | **[10.5281/zenodo.20117635](https://doi.org/10.5281/zenodo.20117635)** | **Konsolidiertes Release: Hilbertraum-Bijektion als Herzstück** |
 
 Die früheren Punkt-Release-Notes (`RELEASE_NOTES_v1_0_11.md` bis `RELEASE_NOTES_v1_0_14.md`) bleiben im Repository erhalten für volle historische Details. v1.1.0 löst sie als Eingangsdokument ab.
 
@@ -253,7 +253,7 @@ Die früheren Punkt-Release-Notes (`RELEASE_NOTES_v1_0_11.md` bis `RELEASE_NOTES
 
 ## Wie zu zitieren
 
-> Pascher, J. (2026). *T0-Zeit-Masse-Dualität / FFGFT v1.1.0: Hilbertraum-Brücke — Ein konsolidiertes Release.* Zenodo. DOI: TBA bei Zenodo-Release.
+> Pascher, J. (2026). *T0-Zeit-Masse-Dualität / FFGFT v1.1.0: Hilbertraum-Brücke — Ein konsolidiertes Release.* Zenodo. DOI: [10.5281/zenodo.20117635](https://doi.org/10.5281/zenodo.20117635).
 
 Für den v1.0.14-Korpus-Stand mit allen einzelnen Dokumentverweisen:
 
@@ -271,4 +271,4 @@ Für den v1.0.14-Korpus-Stand mit allen einzelnen Dokumentverweisen:
 ---
 
 *Dokumentversion: RELEASE_NOTES_v1_1_0_de.md, 2026-05-11.*
-*Wird bei Zenodo-Release mit der v1.1.0-DOI aktualisiert.*
+*Zenodo-DOI vergeben: 10.5281/zenodo.20117635.*

@@ -2,7 +2,7 @@
 
 **Release Date:** 2026-05-11
 **Version:** 1.1.0 (consolidated)
-**DOI:** TBA — to be assigned upon Zenodo release
+**DOI:** [10.5281/zenodo.20117635](https://doi.org/10.5281/zenodo.20117635)
 **GitHub:** https://github.com/jpascher/T0-Time-Mass-Duality
 **Author:** Johann Pascher (ORCID: [0009-0000-6518-4064](https://orcid.org/0009-0000-6518-4064))
 **Predecessors:** v1.0.14 ([10.5281/zenodo.20041543](https://doi.org/10.5281/zenodo.20041543)); v1.0.13 ([10.5281/zenodo.20041529](https://doi.org/10.5281/zenodo.20041529)); v1.0.12 ([10.5281/zenodo.20022166](https://doi.org/10.5281/zenodo.20022166)); v1.0.11 ([10.5281/zenodo.18834145](https://doi.org/10.5281/zenodo.18834145))
@@ -245,7 +245,7 @@ The following items are open for v1.2.0 or later:
 | 1.0.12 | 2026-05-05 | [20022166](https://doi.org/10.5281/zenodo.20022166) | Non-closure theorem (Docs. 192–193); field theory and operator formalism (Docs. 202–204) |
 | 1.0.13 | 2026-05-05 | [20041529](https://doi.org/10.5281/zenodo.20041529) | Doc. 202 §15 (QM bridge), §17 (PDG-circularity); Doc. 205 (Plain Language); Doc. 190 R7/R8 |
 | 1.0.14 | 2026-05-10 | [20041543](https://doi.org/10.5281/zenodo.20041543) | Triangle–Matrix Reduction (206), consciousness bridges (207), winding clarification (210), falsification trilogy (220–222), Hilbert-space triptych (230–232) |
-| **1.1.0** | **2026-05-11** | **TBA** | **Consolidated release: Hilbert-space bijection as centrepiece** |
+| **1.1.0** | **2026-05-11** | **[10.5281/zenodo.20117635](https://doi.org/10.5281/zenodo.20117635)** | **Consolidated release: Hilbert-space bijection as centrepiece** |
 
 The earlier point-release notes (`RELEASE_NOTES_v1_0_11.md` through `RELEASE_NOTES_v1_0_14.md`) are retained in the repository for full historical detail. v1.1.0 supersedes them as the entry point.
 
@@ -253,7 +253,7 @@ The earlier point-release notes (`RELEASE_NOTES_v1_0_11.md` through `RELEASE_NOT
 
 ## How to cite
 
-> Pascher, J. (2026). *T0-Time-Mass-Duality / FFGFT v1.1.0: Hilbert-Space Bridge — A Consolidated Release.* Zenodo. DOI: TBA upon Zenodo release.
+> Pascher, J. (2026). *T0-Time-Mass-Duality / FFGFT v1.1.0: Hilbert-Space Bridge — A Consolidated Release.* Zenodo. DOI: [10.5281/zenodo.20117635](https://doi.org/10.5281/zenodo.20117635).
 
 For the v1.0.14 corpus state with all individual document references:
 
@@ -271,4 +271,4 @@ For the v1.0.14 corpus state with all individual document references:
 ---
 
 *Document version: RELEASE_NOTES_v1_1_0.md, 2026-05-11.*
-*To be updated upon Zenodo release with the v1.1.0 DOI.*
+*Zenodo DOI assigned: 10.5281/zenodo.20117635.*
