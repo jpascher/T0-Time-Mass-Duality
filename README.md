@@ -626,7 +626,7 @@ This mechanism differs fundamentally from classical "tired light" hypotheses (e.
 Finite-element calculations on the ξ hierarchy confirm this: no intrinsic cosmological redshift from expansion is required in the static framework; the observed redshift is attributed to local, geometric ξ interactions leading to energy dissipation. Recent JWST observations (2024–2025) of mature, massive galaxies at high redshifts further challenge pure expansion models and align with the T0 static-universe interpretation.
 
 
-## Interactive HTML Tools (19 files)
+## Interactive HTML Tools (21 files)
 
 **Discoverability Note:** These tools are hosted on GitHub Pages and indexed by search engines – search "T0 fractal 137 interactive" or "T0 particle mass calculator" for direct access.
 
@@ -688,6 +688,12 @@ Finite-element calculations on the ξ hierarchy confirm this: no intrinsic cosmo
 ### Geometry & Sub-Planck Structure
 **[Torus Geometry in FFGFT](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/torus_geometry_ffgf.html)**
 *Interactive visualization of the toroidal spacetime geometry underlying T0*
+
+**[T⁴ Torus Animation — θ₄ as Colour](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/ffgft_t4_torus.html)**
+*Interactive animation of the T⁴ torus: three dimensions shown as geometry, the fourth dimension (θ₄) colour-coded. Winding numbers p:q adjustable — equal colour means equal phase in the fourth dimension.*
+
+**[T⁴ = T² × T² — Two Coupled Tori](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/ffgft_t4_two_tori.html)**
+*T⁴ visualised as two independent tori with bilingual explanatory text (DE/EN). Equal colour = equal θ₄ phase = geometric coupling without connecting line. Particle generations visible through p:q winding ratio.*
 
 **[Sub-Planck Structure](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_subplanck_structure.html)**
 *Exploration of T0's sub-Planck scale L₀ = ξ·ℓₚ structure*

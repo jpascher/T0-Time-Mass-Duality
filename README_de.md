@@ -548,7 +548,7 @@ Das Verzeichnis `2/tex-n/` enthält vollständige LaTeX-Quelldateien:
 
 *(Die nachfolgenden Sektionen „Umfassende Zusammenfassungsserie“, „Kerntheorie-Dokumente“, „Revolutionäre Vereinfachungen“, „Feinstrukturkonstanten-Analyse“, „Teilchenphysik & Experiment“, „Kosmologie“, „Mathematische Grundlagen“, „Quantencomputing & Kryptographie“, „QFT-Integration“, „Energie & Bewegung“, „Spezialeffekte“, „Fortgeschrittene Methoden“ und „Einheitensysteme“ bleiben inhaltlich wie in der bisherigen README-Version. Sie wurden nicht verändert, nur die neuen PDFs ergänzt.)*
 
-## Interaktive HTML-Tools (19 Dateien)
+## Interaktive HTML-Tools (21 Dateien)
 
 **Auffindbarkeits-Hinweis:** Diese Tools sind auf GitHub Pages gehostet und von Suchmaschinen indiziert – suchen Sie „T0 fraktal 137 interaktiv“ oder „T0 Teilchenmassenrechner“ für direkten Zugriff.
 
@@ -580,6 +580,10 @@ Das Verzeichnis `2/tex-n/` enthält vollständige LaTeX-Quelldateien:
 
 ### Geometrie & Sub-Planck-Struktur
 - **[Torus-Geometrie in FFGFT](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/torus_geometry_ffgf.html)** – Interaktive Visualisierung der toroidalen Raumzeitgeometrie
+- **[T⁴-Torus-Animation — θ₄ als Farbe](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/ffgft_t4_torus.html)** – Interaktive Animation des T⁴-Torus: drei Dimensionen als Geometrie, die vierte Dimension (θ₄) als Farbe codiert. Wicklungszahlen p:q steuerbar — gleiche Farbe bedeutet gleiche Phase in der vierten Dimension.
+
+- **[T⁴ = T² × T² — Zwei gekoppelte Tori](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/ffgft_t4_two_tori.html)** – T⁴ als zwei unabhängige Tori mit zweisprachigem Erklärungstext (DE/EN). Gleiche Farbe = gleiche θ₄-Phase = geometrische Kopplung ohne Verbindungslinie. Teilchengenerationen durch p:q-Wicklungsverhältnis sichtbar.
+
 - **[Sub-Planck-Struktur](https://jpascher.github.io/T0-Time-Mass-Duality/2/html/t0_subplanck_structure.html)** – T0-Sub-Planck-Skala L₀ = ξ·ℓₚ
 
 ### RSA-Faktorisierung & Signalanalyse
