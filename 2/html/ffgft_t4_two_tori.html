@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FFGFT — T⁴ as Two Coupled Tori</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#111;color:#ccc;font-family:sans-serif;display:flex;flex-direction:column;align-items:center;padding:24px 16px;max-width:700px;margin:0 auto}
+h1{font-size:18px;font-weight:500;color:#ddd;margin-bottom:4px;text-align:center}
+.subtitle{font-size:13px;color:#666;margin-bottom:20px;text-align:center;letter-spacing:0.04em}
+
+.explanation{background:#1a1a1a;border:0.5px solid #2a2a2a;border-radius:10px;padding:20px 24px;margin-bottom:24px;line-height:1.75;font-size:14px;color:#aaa}
+.explanation h2{font-size:14px;font-weight:500;color:#ddd;margin-bottom:10px;letter-spacing:0.03em}
+.explanation p{margin-bottom:10px}
+.explanation p:last-child{margin-bottom:0}
+.explanation b{color:#ccc;font-weight:500}
+.explanation .eq{font-family:monospace;background:#222;padding:2px 8px;border-radius:4px;color:#7ab;font-size:13px}
+
+.titles{display:flex;justify-content:space-around;width:640px;margin-bottom:4px}
+.titles span{font-size:13px;color:#888;text-align:center;width:50%}
+canvas{display:block;border:0.5px solid #2a2a2a;border-radius:8px;margin-bottom:12px}
+
+.ctrl{display:flex;align-items:center;gap:12px;margin:5px 0;width:640px}
+.ctrl label{font-size:12px;color:#777;min-width:120px}
+.ctrl input{flex:1;accent-color:#378ADD}
+.ctrl span{font-size:12px;font-weight:500;color:#ccc;min-width:28px}
+.section-label{font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.08em;margin:10px 0 4px;width:640px}
+
+.info{display:flex;gap:8px;justify-content:center;margin:12px 0;flex-wrap:wrap;width:640px}
+.badge{font-size:12px;padding:4px 10px;border-radius:6px;background:#1e1e1e;color:#777;border:0.5px solid #2a2a2a}
+.badge b{color:#ddd;font-weight:500}
+
+.legend{font-size:12px;color:#555;margin:0 0 20px;text-align:center}
+.leg-bar{width:160px;height:7px;border-radius:4px;background:linear-gradient(to right,hsl(240,80%,55%),hsl(120,80%,45%),hsl(60,90%,50%),hsl(0,80%,55%),hsl(300,70%,55%),hsl(240,80%,55%));display:inline-block;vertical-align:middle;margin:0 8px}
+
+.note{font-size:12px;color:#555;text-align:center;margin-top:16px;line-height:1.6;max-width:600px}
+</style>
+</head>
+<body>
+
+<h1>FFGFT — T⁴ Geometry: Two Coupled Tori</h1>
+<div class="subtitle">Fundamental Fractal Geometric Field Theory · J. Pascher</div>
+
+<div class="explanation">
+  <h2>What you are looking at</h2>
+  <p>
+    In <b>Fundamental Fractal Geometric Field Theory (FFGFT)</b>, the foundational geometric object is not ordinary 3D space but a <b>4-dimensional torus T⁴</b>. This is the Cartesian product of two independent 2-tori: <span class="eq">T⁴ = T²(θ₁, θ₂) × T²(θ₃, θ₄)</span>. Each T² carries two independent angular coordinates running from 0 to 2π.
+  </p>
+  <p>
+    The two tori shown here are <b>not separate objects</b> — they are two projections of a single 4-dimensional structure. A particle trajectory on T⁴ winds simultaneously around both tori. The winding numbers <b>p</b> and <b>q</b> on each torus encode the quantum numbers of the particle — different combinations correspond to different particle generations.
+  </p>
+  <p>
+    <b>Color encodes θ₄</b>, the fourth angular coordinate. Since it cannot be shown as a spatial dimension, it is mapped onto the color spectrum (blue → green → yellow → red → violet → blue = one full 2π cycle). Points of equal color on both tori share the same θ₄ value — they are <b>simultaneous in the fourth dimension</b>. The color itself is the coupling between the two tori: no connecting line is needed, because equal color means equal phase, not a bridge between two separate objects.
+  </p>
+  <p>
+    The central relation of FFGFT is <span class="eq">T̃ · m = 1</span>, where T̃ is the intrinsic time scale and m is mass. Time is not an independent background dimension but is geometrically coupled to mass through the single dimensionless parameter <span class="eq">ξ = 4/30000</span>, from which all Standard Model constants are derived.
+  </p>
+  <p>
+    <b>Try this:</b> Set the same p:q ratio on both tori — the winding structures resonate, representing the same particle. Change one ratio — the structures diverge, representing a different particle generation. The color coupling (θ₄) remains unchanged regardless of the winding numbers.
+  </p>
+</div>
+
+<div class="titles">
+  <span>T²(θ₁, θ₂)</span>
+  <span>T²(θ₃, θ₄)</span>
+</div>
+<canvas id="cv" width="640" height="300"></canvas>
+
+<div class="legend">
+  <span class="leg-bar"></span> θ₄ = 0 → 2π &nbsp;·&nbsp; brightness = depth (z) &nbsp;·&nbsp; equal color = coupled phase
+</div>
+
+<div class="section-label">Global</div>
+<div class="ctrl"><label>Rotation speed</label><input type="range" min="0" max="20" value="6" id="sp" step="1"><span id="sp-o">6</span></div>
+<div class="ctrl"><label>θ₄ speed</label><input type="range" min="0" max="20" value="5" id="s4" step="1"><span id="s4-o">5</span></div>
+
+<div class="section-label">Torus 1 — T²(θ₁, θ₂)</div>
+<div class="ctrl"><label>Winding p₁</label><input type="range" min="1" max="7" value="3" id="p1" step="1"><span id="p1-o">3</span></div>
+<div class="ctrl"><label>Winding q₁</label><input type="range" min="1" max="7" value="2" id="q1" step="1"><span id="q1-o">2</span></div>
+
+<div class="section-label">Torus 2 — T²(θ₃, θ₄)</div>
+<div class="ctrl"><label>Winding p₂</label><input type="range" min="1" max="7" value="2" id="p2" step="1"><span id="p2-o">2</span></div>
+<div class="ctrl"><label>Winding q₂</label><input type="range" min="1" max="7" value="1" id="q2" step="1"><span id="q2-o">1</span></div>
+
+<div class="info">
+  <div class="badge">Color = <b>θ₄</b> (coupling)</div>
+  <div class="badge">T1 p:q = <b id="pq1">3:2</b></div>
+  <div class="badge">T2 p:q = <b id="pq2">2:1</b></div>
+  <div class="badge">T̃·m = <b>1</b></div>
+  <div class="badge">ξ = <b>4/30000</b></div>
+</div>
+
+<div class="note">
+  Every visualization of T⁴ is a projection — like a shadow of a cube on paper.<br>
+  The geometry is richer than any image of it. Its structure is accessible through consequences, not direct perception.
+</div>
+
+<script>
+var cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+var W=640,H=300,t=0,sp=6,s4=5,p1=3,q1=2,p2=2,q2=1;
+var cx1=160,cy1=150,cx2=480,cy2=150;
+
+function makePts(cx,cy,pp,qq,rotY){
+  var R=100,r=36,N=500,pts=[];
+  var rx=0.45+Math.sin(t*0.0025)*0.12;
+  for(var i=0;i<=N;i++){
+    var s=i/N;
+    var t1=s*Math.PI*2*pp;
+    var t2=s*Math.PI*2*qq;
+    var t3=s*Math.PI*2+t*0.008;
+    var t4=s*Math.PI*2*(pp+qq)+t*s4*0.0008;
+    var x=(R+r*Math.cos(t2+Math.sin(t3)*5))*Math.cos(t1+rotY);
+    var y=(R+r*Math.cos(t2+Math.sin(t3)*5))*Math.sin(t1+rotY);
+    var z=r*Math.sin(t2+Math.sin(t3)*5);
+    var y1=y*Math.cos(rx)-z*Math.sin(rx),z1=y*Math.sin(rx)+z*Math.cos(rx);
+    var sc=280/(280+z1);
+    var br=Math.max(0.3,Math.min(1,(z1+120)/240));
+    var hue=((t4/(Math.PI*2))*360)%360;
+    pts.push({sx:cx+x*sc,sy:cy+y1*sc,hue:hue,br:br});
+  }
+  return pts;
+}
+
+function drawTorus(pts){
+  for(var i=1;i<pts.length;i++){
+    var a=pts[i-1],b=pts[i];
+    ctx.beginPath();ctx.moveTo(a.sx,a.sy);ctx.lineTo(b.sx,b.sy);
+    ctx.strokeStyle='hsl('+b.hue.toFixed(0)+','+(70+b.br*20).toFixed(0)+'%,'+(30+b.br*35).toFixed(0)+'%)';
+    ctx.lineWidth=1.6+b.br*0.8;ctx.globalAlpha=0.55+b.br*0.45;ctx.stroke();ctx.globalAlpha=1;
+  }
+}
+
+function drawParticle(pts){
+  var pi=Math.floor((t*s4*0.0004%1)*pts.length);
+  if(pi>=pts.length) return null;
+  var pt=pts[pi];
+  ctx.beginPath();ctx.arc(pt.sx,pt.sy,5,0,Math.PI*2);
+  ctx.fillStyle='hsl('+pt.hue.toFixed(0)+',95%,72%)';ctx.fill();
+  ctx.beginPath();ctx.arc(pt.sx,pt.sy,9,0,Math.PI*2);
+  ctx.strokeStyle='hsl('+pt.hue.toFixed(0)+',95%,72%)';ctx.lineWidth=1;ctx.globalAlpha=0.3;ctx.stroke();ctx.globalAlpha=1;
+  return pt;
+}
+
+function frame(){
+  ctx.clearRect(0,0,W,H);
+  var ry=t*sp*0.00035;
+
+  ctx.beginPath();ctx.moveTo(320,20);ctx.lineTo(320,280);
+  ctx.strokeStyle='#2a2a2a';ctx.lineWidth=0.5;ctx.globalAlpha=0.8;ctx.stroke();ctx.globalAlpha=1;
+
+  var pts1=makePts(cx1,cy1,p1,q1,ry);
+  var pts2=makePts(cx2,cy2,p2,q2,ry);
+
+  drawTorus(pts1);
+  drawTorus(pts2);
+
+  var par1=drawParticle(pts1);
+  var par2=drawParticle(pts2);
+
+  if(par1&&par2){
+    ctx.beginPath();
+    ctx.arc(320,16,7,0,Math.PI*2);
+    ctx.fillStyle='hsl('+par1.hue.toFixed(0)+',90%,60%)';
+    ctx.fill();
+  }
+
+  t++;requestAnimationFrame(frame);
+}
+
+function bind(id,oid,cb){
+  var el=document.getElementById(id),out=document.getElementById(oid);
+  el.addEventListener('input',function(){
+    cb(+el.value);out.textContent=el.value;
+    document.getElementById('pq1').textContent=p1+':'+q1;
+    document.getElementById('pq2').textContent=p2+':'+q2;
+  });
+}
+bind('sp','sp-o',function(v){sp=v});
+bind('s4','s4-o',function(v){s4=v});
+bind('p1','p1-o',function(v){p1=v});
+bind('q1','q1-o',function(v){q1=v});
+bind('p2','p2-o',function(v){p2=v});
+bind('q2','q2-o',function(v){q2=v});
+frame();
+</script>
+</body>
+</html>
