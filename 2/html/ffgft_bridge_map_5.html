@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FFGFT — T⁴ Bridge Map</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Spectral:ital,wght@0,300;0,400;1,300&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0a08;color:#c8c4b8;font-family:'Spectral',serif;display:flex;flex-direction:column;align-items:center;padding:20px 12px}
+h1{font-size:14px;font-weight:300;color:#777;letter-spacing:.15em;text-transform:uppercase;margin-bottom:3px;text-align:center}
+.sub{font-size:11px;color:#444;margin-bottom:6px;text-align:center;font-style:italic}
+.langbar{display:flex;gap:0;margin-bottom:16px}
+.lbtn{font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 12px;background:#0f0f0c;border:.5px solid #2a2a22;color:#555;cursor:pointer;transition:all .15s}
+.lbtn:first-child{border-radius:4px 0 0 4px}
+.lbtn:last-child{border-radius:0 4px 4px 0}
+.lbtn.active{background:#1e1e18;color:#9a8a6a;border-color:#3a3a28}
+.stage{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.panel{background:#0f0f0c;border:.5px solid #222;border-radius:6px;overflow:hidden}
+.ptitle{font-family:'JetBrains Mono',monospace;font-size:10px;padding:7px 11px;border-bottom:.5px solid #1a1a16;display:flex;align-items:center;gap:7px}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.controls{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.ctrl{display:flex;align-items:center;gap:6px}
+.ctrl label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#555}
+.ctrl input[type=range]{width:90px;accent-color:#5a8a6a}
+.ctrl span{font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;min-width:22px}
+.ncpanel{width:660px;max-width:100%;background:#0f0f0c;border:.5px solid #222;border-radius:6px;overflow:hidden;margin-bottom:14px}
+.ncinner{display:flex;align-items:stretch}
+.ncinfo{flex:1;padding:11px 14px;display:flex;flex-direction:column;gap:7px;justify-content:center}
+.ncs{font-family:'JetBrains Mono',monospace;font-size:10px;color:#555}
+.ncs b{color:#9a7a5a}
+.ncdesc{font-size:11px;color:#484840;line-height:1.6;font-style:italic}
+.caveat{width:660px;max-width:100%;background:#0f0f0c;border:.5px solid #1e1e18;border-radius:6px;padding:13px 16px;margin-bottom:16px}
+.caveat h3{font-family:'JetBrains Mono',monospace;font-size:10px;color:#7a6a4a;margin-bottom:7px;letter-spacing:.08em}
+.caveat p{font-size:12px;color:#555;line-height:1.65;margin-bottom:5px}
+.caveat p:last-child{margin-bottom:0}
+.btable{width:660px;max-width:100%;border-collapse:collapse;margin-bottom:16px;font-size:11px}
+.btable th{font-family:'JetBrains Mono',monospace;font-size:9px;color:#555;text-align:left;padding:5px 9px;border-bottom:.5px solid #1e1e18;letter-spacing:.08em}
+.btable td{padding:6px 9px;border-bottom:.5px solid #141410;color:#777;vertical-align:top;line-height:1.45}
+.btable tr:last-child td{border-bottom:none}
+.fw{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;color:#666}
+.fc{color:#6a9a8a}.rc{color:#8a7a5a}.sc{color:#7a6a9a}
+.foot{font-size:10px;color:#333;text-align:center;font-style:italic}
+</style>
+</head>
+<body>
+
+<h1>T⁴ Bridge Map</h1>
+<div class="sub">FFGFT · RSG · Surtea — <span data-en="three frameworks, one geometric object" data-de="drei Rahmenwerke, ein geometrisches Objekt">three frameworks, one geometric object</span> · J. Pascher / IPI May 2026</div>
+
+<div class="langbar">
+  <button class="lbtn active" onclick="setLang('en')">EN</button>
+  <button class="lbtn" onclick="setLang('de')">DE</button>
+</div>
+
+<div class="stage">
+  <div class="panel">
+    <div class="ptitle"><div class="dot" style="background:#6a9a8a"></div><span class="fc">FFGFT</span><span style="color:#2a2a26"> <span data-en="winding / θ₄ phase / T̃·m=1" data-de="Wicklung / θ₄-Phase / T̃·m=1">winding / θ₄ phase / T̃·m=1</span></span></div>
+    <canvas id="c1" width="200" height="200"></canvas>
+  </div>
+  <div class="panel">
+    <div class="ptitle"><div class="dot" style="background:#8a7a5a"></div><span class="rc">RSG</span><span style="color:#2a2a26"> <span data-en="survival-weighted histories" data-de="survival-gewichtete Historien">survival-weighted histories</span></span></div>
+    <canvas id="c2" width="200" height="200"></canvas>
+  </div>
+  <div class="panel">
+    <div class="ptitle"><div class="dot" style="background:#7a6a9a"></div><span class="sc">Surtea</span><span style="color:#2a2a26"> <span data-en="partition topology U=(M,D)" data-de="Partitionstopologie U=(M,D)">partition topology U=(M,D)</span></span></div>
+    <canvas id="c3" width="200" height="200"></canvas>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="ctrl"><label data-en="Rotation" data-de="Rotation">Rotation</label><input type="range" min="0" max="20" value="5" id="iSp" step="1"><span id="oSp">5</span></div>
+  <div class="ctrl"><label>p</label><input type="range" min="1" max="6" value="3" id="iPp" step="1"><span id="oPp">3</span></div>
+  <div class="ctrl"><label>q</label><input type="range" min="1" max="6" value="2" id="iQq" step="1"><span id="oQq">2</span></div>
+  <div class="ctrl"><label data-en="θ₄ speed" data-de="θ₄-Geschw.">θ₄ speed</label><input type="range" min="0" max="15" value="4" id="iS4" step="1"><span id="oS4">4</span></div>
+  <div class="ctrl"><label data-en="Survival λ" data-de="Survival λ">Survival λ</label><input type="range" min="1" max="20" value="8" id="iSv" step="1"><span id="oSv">8</span></div>
+</div>
+
+<div class="ncpanel">
+  <div class="ptitle">
+    <div class="dot" style="background:#9a7a5a"></div>
+    <span style="color:#9a7a5a" data-en="Non-closure (ε) — geometric arrow of time" data-de="Nichtabschluss (ε) — geometrischer Zeitpfeil">Non-closure (ε) — geometric arrow of time</span>
+    <span style="color:#2a2a26;margin-left:8px" data-en="orange=closing · white trail=drifting" data-de="orange=schließend · weißer Trail=driftend">orange=closing · white trail=drifting</span>
+  </div>
+  <div class="ncinner">
+    <canvas id="cnc" width="260" height="160"></canvas>
+    <div class="ncinfo">
+      <div class="ncs"><span data-en="Drift/step:" data-de="Drift/Schritt:">Drift/step:</span> <b id="oDrift">0.0001</b> rad</div>
+      <div class="ncs"><span data-en="Accumulated:" data-de="Akkumuliert:">Accumulated:</span> <b id="oAcc">0.000</b> rad</div>
+      <div class="ncs">Trail: <b id="oTrail">800</b> <span data-en="steps" data-de="Schritte">steps</span> <input type="range" min="50" max="3000" value="800" id="iTrail" step="50" style="width:70px;accent-color:#9a7a5a;vertical-align:middle"></div>
+      <div class="ncs">ε <span data-en="scale" data-de="Skala">scale</span>: <b id="oEps">×5</b> <input type="range" min="1" max="60" value="5" id="iEps" step="1" style="width:70px;accent-color:#9a7a5a;vertical-align:middle"></div>
+      <div class="ncdesc" data-en="After many cycles the drifting path fills the torus — Weyl equidistribution. This is the FFGFT arrow of time: deterministic, geometric, irreversible. It is invisible in ideal projection — only the accumulation reveals it." data-de="Nach vielen Zyklen füllt die driftende Bahn den Torus gleichmäßig aus — Weyl-Äquidistribution. Das ist der FFGFT-Zeitpfeil: deterministisch, geometrisch, irreversibel. In der idealen Projektion unsichtbar — nur die Akkumulation macht ihn sichtbar.">After many cycles the drifting path fills the torus — Weyl equidistribution. This is the FFGFT arrow of time: deterministic, geometric, irreversible. It is invisible in ideal projection — only the accumulation reveals it.</div>
+    </div>
+  </div>
+</div>
+
+<div class="caveat">
+  <h3 data-en="⚠ PROJECTION LIMITS — what this animation cannot show" data-de="⚠ PROJEKTIONSGRENZEN — was diese Animation nicht zeigen kann">⚠ PROJECTION LIMITS — what this animation cannot show</h3>
+  <p data-en="<b>1. Spacetime curvature.</b> FFGFT geometry is not flat — ξ induces D_f = 3−ξ. This deformation is not representable in 2D projection." data-de="<b>1. Raumzeitkrümmung.</b> Die FFGFT-Geometrie ist nicht flach — ξ induziert D_f = 3−ξ. Diese Verformung ist in 2D-Projektion nicht darstellbar."><b>1. Spacetime curvature.</b> FFGFT geometry is not flat — ξ induces D_f = 3−ξ. This deformation is not representable in 2D projection.</p>
+  <p data-en="<b>2. T̃·m coupling.</b> Equal colour = equal θ₄-phase only in the idealised flat case. The duality warps the simultaneity surface." data-de="<b>2. T̃·m-Kopplung.</b> Gleiche Farbe = gleiche θ₄-Phase nur im idealisierten flachen Fall. Die Dualität verformt die Gleichzeitigkeitsfläche."><b>2. T̃·m coupling.</b> Equal colour = equal θ₄-phase only in the idealised flat case. The duality warps the simultaneity surface.</p>
+  <p data-en="<b>3. Recursive non-closure.</b> No trajectory ever exactly closes (ε ≈ 0.001, Doc 193). The three panels show visually closed orbits — the physical drift is shown separately above." data-de="<b>3. Rekursiver Nichtabschluss.</b> Keine Bahn schließt sich jemals exakt (ε ≈ 0.001, Dok. 193). Die drei Panels zeigen optisch geschlossene Orbits — der physikalische Drift wird separat oben gezeigt."><b>3. Recursive non-closure.</b> No trajectory ever exactly closes (ε ≈ 0.001, Doc 193). The three panels show visually closed orbits — the physical drift is shown separately above.</p>
+  <p style="color:#3a3a32;font-style:italic" data-en="The geometry is richer than any image of it. Its structure is accessible through consequences, not direct perception." data-de="Die Geometrie ist reicher als jede Abbildung von ihr. Ihre Struktur ist durch Konsequenzen zugänglich, nicht durch direkte Anschauung.">The geometry is richer than any image of it. Its structure is accessible through consequences, not direct perception.</p>
+</div>
+
+<table class="btable">
+  <thead>
+    <tr>
+      <th data-en="Layer" data-de="Schicht">Layer</th>
+      <th class="fc">FFGFT</th>
+      <th class="rc">RSG</th>
+      <th class="sc">Surtea</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="fw" data-en="Object" data-de="Objekt">Object</td>
+      <td class="fc" data-en="Point/curve/winding on T⁴" data-de="Punkt/Kurve/Wicklung auf T⁴">Point/curve/winding on T⁴</td>
+      <td class="rc" data-en="Structured state σ_n=(X_n,φ_n,μ_n,S_n)" data-de="Strukturierter Zustand σ_n=(X_n,φ_n,μ_n,S_n)">Structured state σ_n=(X_n,φ_n,μ_n,S_n)</td>
+      <td class="sc" data-en="Topological support X⊂M in U=(M,D)" data-de="Topologischer Träger X⊂M in U=(M,D)">Topological support X⊂M in U=(M,D)</td>
+    </tr>
+    <tr>
+      <td class="fw" data-en="Map" data-de="Abbildung">Map</td>
+      <td class="fc" data-en="Winding (p,q) → quantum numbers" data-de="Wicklung (p,q) → Quantenzahlen">Winding (p,q) → quantum numbers</td>
+      <td class="rc" data-en="Recursion R: σ_n → σ_{n+1}" data-de="Rekursion R: σ_n → σ_{n+1}">Recursion R: σ_n → σ_{n+1}</td>
+      <td class="sc" data-en="D-photon unions → topology τ_D" data-de="D-Photon-Vereinigungen → Topologie τ_D">D-photon unions → topology τ_D</td>
+    </tr>
+    <tr>
+      <td class="fw" data-en="Invariant" data-de="Invariante">Invariant</td>
+      <td class="fc" data-en="det(A_ξ)=1−ξ; θ₄ colour=coupling" data-de="det(A_ξ)=1−ξ; θ₄-Farbe=Kopplung">det(A_ξ)=1−ξ; θ₄ colour=coupling</td>
+      <td class="rc" data-en="Survival weight S_n; high-S=observable" data-de="Survival-Gewicht S_n; hohes S=beobachtbar">Survival weight S_n; high-S=observable</td>
+      <td class="sc" data-en="Partition: interior / boundary ∂X / exterior" data-de="Partition: Innen / Rand ∂X / Außen">Partition: interior / boundary ∂X / exterior</td>
+    </tr>
+    <tr>
+      <td class="fw" data-en="Residual" data-de="Residuum">Residual</td>
+      <td class="fc" data-en="ε≈0.001 non-closure; geometric time arrow" data-de="ε≈0.001 Nichtabschluss; geometrischer Zeitpfeil">ε≈0.001 non-closure; geometric time arrow</td>
+      <td class="rc" data-en="Fading histories; differential persistence" data-de="Verblassende Historien; differentielle Persistenz">Fading histories; differential persistence</td>
+      <td class="sc" data-en="Boundary ∂X instability; no diff. structure on X" data-de="Randinstabilität ∂X; keine Differentialstruktur auf X">Boundary ∂X instability; no diff. structure on X</td>
+    </tr>
+    <tr>
+      <td class="fw" data-en="Time arrow" data-de="Zeitpfeil">Time arrow</td>
+      <td class="fc" data-en="Z₃ geometric drift (non-closure)" data-de="Z₃-geometrischer Drift (Nichtabschluss)">Z₃ geometric drift (non-closure)</td>
+      <td class="rc" data-en="Survival-weighted persistence" data-de="Survival-gewichtete Persistenz">Survival-weighted persistence</td>
+      <td class="sc" data-en="Not specified (discrete; no diff. structure)" data-de="Nicht spezifiziert (diskret; keine Differentialstruktur)">Not specified (discrete; no diff. structure)</td>
+    </tr>
+    <tr>
+      <td class="fw" data-en="Contact" data-de="Kontakt">Contact</td>
+      <td colspan="3" style="color:#333;font-style:italic"
+        data-en="Layer 1 (geometric transport): FFGFT Z₃ recursion ↔ RSG generated histories ↔ Surtea support topology. Correspondences without forced identification."
+        data-de="Schicht 1 (geometrischer Transport): FFGFT-Z₃-Rekursion ↔ RSG-generierte Historien ↔ Surtea-Trägertopologie. Korrespondenzen ohne erzwungene Identifikation.">Layer 1 (geometric transport): FFGFT Z₃ recursion ↔ RSG generated histories ↔ Surtea support topology. Correspondences without forced identification.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="foot">Doc 206 (Triangle–Matrix Reduction) · Doc 193 (Non-closure) · IPI May 2026 · github.com/jpascher/T0-Time-Mass-Duality</div>
+
+<script>
+var gT=0;
+var gSp=5, gP=3, gQ=2, gS4=4, gSv=8;
+var gTrail=800, gEpsMult=5;
+var gDriftAcc=0;
+var gTrailPts=[];
+var gLang='en';
+
+var C1=document.getElementById('c1').getContext('2d');
+var C2=document.getElementById('c2').getContext('2d');
+var C3=document.getElementById('c3').getContext('2d');
+var CNC=document.getElementById('cnc').getContext('2d');
+
+// ── language switch ──────────────────────────────────────
+function setLang(lang){
+  gLang=lang;
+  document.querySelectorAll('.lbtn').forEach(function(b){
+    b.classList.toggle('active', b.textContent===lang.toUpperCase());
+  });
+  document.querySelectorAll('[data-en]').forEach(function(el){
+    var txt=el.getAttribute('data-'+lang);
+    if(txt) el.innerHTML=txt;
+  });
+}
+
+// ── projection ───────────────────────────────────────────
+function doProj(x,y,z,rx,ry,sc){
+  var y1=y*Math.cos(rx)-z*Math.sin(rx);
+  var z1=y*Math.sin(rx)+z*Math.cos(rx);
+  var x1=x*Math.cos(ry)-z1*Math.sin(ry);
+  var z2=x*Math.sin(ry)+z1*Math.cos(ry);
+  var s=sc/(sc+z2);
+  var br=Math.max(0.2,Math.min(1,(z2+sc*0.4)/(sc*0.8)));
+  return{sx:x1*s,sy:y1*s,br:br};
+}
+
+// ── build knot points ────────────────────────────────────
+function buildPts(ry){
+  var rx=0.42+Math.sin(gT*0.002)*0.1;
+  var R=75,r=26,N=440;
+  var pts=[];
+  for(var i=0;i<=N;i++){
+    var s=i/N;
+    var a1=s*Math.PI*2*gP;
+    var a2=s*Math.PI*2*gQ;
+    var a3=s*Math.PI*2+gT*0.006;
+    var a4=s*Math.PI*2*(gP+gQ)+gT*gS4*0.0006;
+    var cx2=(R+r*Math.cos(a2+Math.sin(a3)*3.5))*Math.cos(a1+ry);
+    var cy2=(R+r*Math.cos(a2+Math.sin(a3)*3.5))*Math.sin(a1+ry);
+    var cz2=r*Math.sin(a2+Math.sin(a3)*3.5);
+    var pv=doProj(cx2,cy2,cz2,rx,ry,240);
+    var hue=((a4/(Math.PI*2))*360)%360;
+    var surv=Math.exp(-gSv*0.05*Math.abs(Math.sin(a2*1.5+gT*0.003)));
+    var dist=Math.abs(r*Math.sin(a2+Math.sin(a3)*3.5));
+    var zone=dist<r*0.35?0:dist<r*0.7?1:2;
+    pts.push({sx:100+pv.sx,sy:100+pv.sy,br:pv.br,hue:hue,surv:surv,zone:zone});
+  }
+  return pts;
+}
+
+function drawFFGFT(pts){
+  C1.clearRect(0,0,200,200);
+  for(var i=1;i<pts.length;i++){
+    var a=pts[i-1],b=pts[i];
+    C1.beginPath();C1.moveTo(a.sx,a.sy);C1.lineTo(b.sx,b.sy);
+    var L=28+b.br*36;
+    C1.strokeStyle='hsl('+b.hue.toFixed(0)+',52%,'+L.toFixed(0)+'%)';
+    C1.lineWidth=1.3+b.br*0.7;C1.globalAlpha=0.45+b.br*0.55;C1.stroke();C1.globalAlpha=1;
+  }
+  var pi=Math.floor((gT*gS4*0.0003%1)*pts.length);
+  if(pi<pts.length){
+    C1.beginPath();C1.arc(pts[pi].sx,pts[pi].sy,4.5,0,Math.PI*2);
+    C1.fillStyle='hsl('+pts[pi].hue.toFixed(0)+',85%,72%)';C1.fill();
+  }
+}
+
+function drawRSG(pts){
+  C2.clearRect(0,0,200,200);
+  for(var i=1;i<pts.length;i++){
+    var a=pts[i-1],b=pts[i];
+    C2.beginPath();C2.moveTo(a.sx,a.sy);C2.lineTo(b.sx,b.sy);
+    var sv=b.surv;
+    var h=38+sv*12,sat=18+sv*42,lig=8+sv*32;
+    C2.strokeStyle='hsl('+h.toFixed(0)+','+sat.toFixed(0)+'%,'+lig.toFixed(0)+'%)';
+    C2.lineWidth=0.7+sv*1.5;C2.globalAlpha=(0.12+sv*0.88)*b.br;C2.stroke();C2.globalAlpha=1;
+  }
+  var pi=Math.floor((gT*gS4*0.0003%1)*pts.length);
+  if(pi<pts.length && pts[pi].surv>0.45){
+    C2.beginPath();C2.arc(pts[pi].sx,pts[pi].sy,4,0,Math.PI*2);
+    C2.fillStyle='hsl(45,72%,66%)';C2.fill();
+  }
+}
+
+function drawSurtea(pts){
+  C3.clearRect(0,0,200,200);
+  for(var i=1;i<pts.length;i++){
+    var a=pts[i-1],b=pts[i];
+    C3.beginPath();C3.moveTo(a.sx,a.sy);C3.lineTo(b.sx,b.sy);
+    var col,lw,alpha;
+    if(b.zone===0){col='hsl(260,32%,44%)';lw=1.9;alpha=0.65+b.br*0.35;}
+    else if(b.zone===1){col='hsl(260,18%,26%)';lw=1.0;alpha=0.3+b.br*0.3;}
+    else{col='hsl(0,0%,9%)';lw=0.4;alpha=0.12;}
+    C3.strokeStyle=col;C3.lineWidth=lw;C3.globalAlpha=alpha*b.br;C3.stroke();C3.globalAlpha=1;
+  }
+  var pi=Math.floor((gT*gS4*0.0003%1)*pts.length);
+  if(pi<pts.length){
+    var z=pts[pi].zone;
+    C3.beginPath();C3.arc(pts[pi].sx,pts[pi].sy,4,0,Math.PI*2);
+    C3.fillStyle=z===0?'hsl(260,62%,72%)':z===1?'hsl(260,38%,48%)':'#1a1a1a';C3.fill();
+  }
+}
+
+function drawNC(){
+  CNC.clearRect(0,0,260,160);
+  var ry=gT*gSp*0.0003;
+  var rx=0.42+Math.sin(gT*0.002)*0.1;
+  var NR=52,Nr=18,NCX=130,NCY=80;
+  var N2=280;
+  for(var i=1;i<=N2;i++){
+    var s=i/N2, sp2=(i-1)/N2;
+    var b1=s*Math.PI*2*gP,  b2=s*Math.PI*2*gQ;
+    var c1=sp2*Math.PI*2*gP, c2=sp2*Math.PI*2*gQ;
+    var xa=(NR+Nr*Math.cos(b2))*Math.cos(b1+ry);
+    var ya=(NR+Nr*Math.cos(b2))*Math.sin(b1+ry);
+    var za=Nr*Math.sin(b2);
+    var xb=(NR+Nr*Math.cos(c2))*Math.cos(c1+ry);
+    var yb=(NR+Nr*Math.cos(c2))*Math.sin(c1+ry);
+    var zb=Nr*Math.sin(c2);
+    var pa=doProj(xa,ya,za,rx,ry,170);
+    var pb=doProj(xb,yb,zb,rx,ry,170);
+    CNC.beginPath();
+    CNC.moveTo(NCX+pb.sx,NCY+pb.sy);
+    CNC.lineTo(NCX+pa.sx,NCY+pa.sy);
+    CNC.strokeStyle='rgba(180,95,35,0.45)';CNC.lineWidth=1.1;CNC.stroke();
+  }
+  var eps=gEpsMult*0.0001;
+  var curS=(gT*gS4*0.0004)%1;
+  var da1=curS*Math.PI*2*gP+gDriftAcc;
+  var da2=curS*Math.PI*2*gQ+gDriftAcc*0.618;
+  var dx=(NR+Nr*Math.cos(da2))*Math.cos(da1+ry);
+  var dy=(NR+Nr*Math.cos(da2))*Math.sin(da1+ry);
+  var dz=Nr*Math.sin(da2);
+  var dp=doProj(dx,dy,dz,rx,ry,170);
+  gTrailPts.push({px:NCX+dp.sx,py:NCY+dp.sy,age:0});
+  for(var j=0;j<gTrailPts.length;j++) gTrailPts[j].age++;
+  gTrailPts=gTrailPts.filter(function(tp){return tp.age<gTrail;});
+  for(var j=1;j<gTrailPts.length;j++){
+    var alpha=1-gTrailPts[j].age/gTrail;
+    CNC.beginPath();
+    CNC.moveTo(gTrailPts[j-1].px,gTrailPts[j-1].py);
+    CNC.lineTo(gTrailPts[j].px,gTrailPts[j].py);
+    CNC.strokeStyle='rgba(215,205,185,'+(alpha*0.88).toFixed(2)+')';
+    CNC.lineWidth=1.4*alpha;CNC.stroke();
+  }
+  CNC.beginPath();CNC.arc(NCX+dp.sx,NCY+dp.sy,4,0,Math.PI*2);
+  CNC.fillStyle='rgba(215,200,160,0.95)';CNC.fill();
+  gDriftAcc+=eps;
+  document.getElementById('oDrift').textContent=eps.toFixed(4);
+  document.getElementById('oAcc').textContent=gDriftAcc.toFixed(3);
+}
+
+function frame(){
+  var ry=gT*gSp*0.0003;
+  var pts=buildPts(ry);
+  drawFFGFT(pts);
+  drawRSG(pts);
+  drawSurtea(pts);
+  drawNC();
+  gT++;
+  requestAnimationFrame(frame);
+}
+
+function bind(inId,outId,cb){
+  var el=document.getElementById(inId);
+  el.addEventListener('input',function(){
+    cb(+el.value);
+    var out=document.getElementById(outId);
+    if(out) out.textContent=el.value;
+  });
+}
+bind('iSp','oSp',function(v){gSp=v;});
+bind('iPp','oPp',function(v){gP=v;});
+bind('iQq','oQq',function(v){gQ=v;});
+bind('iS4','oS4',function(v){gS4=v;});
+bind('iSv','oSv',function(v){gSv=v;});
+bind('iTrail','oTrail',function(v){gTrail=v;});
+document.getElementById('iEps').addEventListener('input',function(){
+  gEpsMult=+this.value;
+  gDriftAcc=0;gTrailPts=[];
+  document.getElementById('oEps').textContent='×'+this.value;
+});
+
+frame();
+</script>
+</body>
+</html>
