@@ -172,14 +172,16 @@ print(f"Fehler: K_frak (1-1/75) ist NICHT direkt die CHSH-Dämpfung")
 print(f"Korrekte Dämpfung hängt von N (Anzahl Messungen) ab")
 print(f"Doc 230 gibt ΔCHSH ≈ 10⁻⁵ ohne explizite N-Angabe")
 print(f"→ Offener Punkt: welches N und welche Formel führt zu 10⁻⁵?")
-print(f"  Für ΔCHSH = 10⁻⁵ würde N ≈ {math.exp(math.log(1e-5/tsirelson)/(-xi/D_f)):.0f} folgen")
-# Lösung: ΔCHSH = 2√2·(1 - exp(-ξ·ln(N)/D_f)) = 10⁻⁵
-# 1 - exp(-ξ·ln(N)/D_f) = 10⁻⁵/(2√2)
-# -ξ·ln(N)/D_f = ln(1 - 10⁻⁵/(2√2))
-# N = exp(-D_f/ξ · ln(1 - 10⁻⁵/(2√2)))
-val = math.log(1 - 1e-5/tsirelson)
-N_needed = math.exp(-D_f/xi * val)
-print(f"  N für ΔCHSH=10⁻⁵: N = {N_needed:.2e}")
+# WICHTIGE Unterscheidung (Onur Teker, Mai 2026):
+# CHSH(N) → 0  bedeutet die Korrelation selbst verschwindet → erfordert N → inf → OverflowError
+# ΔCHSH = 10⁻⁵ bedeutet ABWEICHUNG von der Tsirelson-Grenze = 10⁻⁵
+# Beide Bedingungen bestätigen: Doc 022 Formel kann Doc 230 Wert bei keinem endlichen N reproduzieren
+N_min = 2
+chsh_min = tsirelson * math.exp(-xi * math.log(N_min) / D_f)
+delta_min = tsirelson - chsh_min
+print(f"  Bei N=2 (Minimum): ΔCHSH = {delta_min:.2e} (bereits groesser als 10⁻⁵)")
+print(f"  ΔCHSH waechst monoton mit N → 10⁻⁵ ist bei keinem N erreichbar")
+print(f"  → Doc 230 ΔCHSH=10⁻⁵ erfordert anderen/zusaetzlichen Mechanismus")
 
 # ============================================================
 # 5. κ = 7 EINDEUTIGKEIT
@@ -217,9 +219,11 @@ Bestätigt (Onur hat recht):
   ✓ ΔCHSH=10⁻⁵ in Doc 230 ohne explizite Herleitung
   ✓ κ = 7.001374, nicht exakt 7
 
-Onur irrt sich:
-  ✗ Higgs: 0.56σ, NICHT außerhalb PDG — λ_h hat ±4.65% Unsicherheit
-  ✗ ΔCHSH: 2√2/75 ist falsche Rechnung — K_frak dämpft nicht direkt
+Onur irrt sich (inzwischen selbst korrigiert):
+  ✗ Higgs: 0.25σ, NICHT außerhalb PDG — λ_h hat ±9.3% Unsicherheit (SM-Fit dominiert)
+  ✗ ΔCHSH: 2√2/75 ist falsche Rechnung — K_frak dämpft nicht direkt die Tsirelson-Grenze
+     Korrekte Formel: CHSH(N) = 2√2·exp(-ξ·ln(N)/D_f)
+     ΔCHSH wächst monoton mit N; 10⁻⁵ ist bei keinem endlichen N erreichbar
 
 Neue Befunde (für Doc 190 R11):
   ★ T_CMB = (16/9)·ξ·(1 − 275/4·ξ) = 2.725486 K (Δ=0.0002%)
