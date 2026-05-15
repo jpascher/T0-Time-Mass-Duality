@@ -947,6 +947,121 @@ The elementary deviation $\xi/(2\pi) \approx 2\times10^{-5}$ would
 require single-shot precision beyond current technology.
 
 % ============================================================
+
+% ==============================================================================
+\section{Refinement~13: Bridge formula between $\xi_\text{FFGFT}$ and $\xi_\text{UIFT}$}
+% ==============================================================================
+
+\subsection*{Context}
+
+In the IPI discussion (May 2026), Onur Teker (UIFT) writes:
+\begin{quote}
+$\xi = k_B T_\text{CMB} \ln 2 / (m_e c^2)$, derived from three independent
+measurements (T\_CMB, k\_B, m\_e). This is not a hyperparameter — it is a prediction.
+\end{quote}
+
+This appears to identify $\xi_\text{UIFT}$ with $\xi_\text{FFGFT} = 4/30000$.
+Numerically they are very different. This refinement documents the exact relation.
+
+\subsection*{The key: FFGFT uses eV as temperature unit}
+
+In FFGFT, the natural unit system sets $\hbar = c = k_B = 1$.
+Temperatures are expressed in eV (not in Kelvin):
+\begin{equation}
+  T_\text{CMB}[\text{eV}] \;=\; k_B \cdot T_\text{CMB}[\text{K}]
+  \;=\; k_B \cdot 2.72548\,\text{K}
+  \;=\; 2.3486 \times 10^{-4}\,\text{eV}
+  \tag{190.23}
+\end{equation}
+
+The FFGFT formula (Doc.~025) then reads — to first order:
+\begin{equation}
+  T_\text{CMB}[\text{eV}] \;=\; \frac{16}{9}\,\xi_\text{FFGFT}
+  \;=\; 2.3704 \times 10^{-4}\,\text{eV}
+  \qquad (\Delta = 0.93\,\%)
+  \tag{190.24}
+\end{equation}
+
+and to second order (Doc.~190 R11):
+\begin{equation}
+  T_\text{CMB}[\text{eV}] \;=\; \frac{16}{9}\,\xi_\text{FFGFT}
+  \!\left(1 - \frac{275}{4}\,\xi_\text{FFGFT}\right)
+  \;=\; 2.3486 \times 10^{-4}\,\text{eV}
+  \qquad (\Delta = 0.0002\,\%)
+  \tag{190.25}
+\end{equation}
+
+\subsection*{Bridge formula}
+
+Substituting (190.24) into Onur's expression (first order):
+\begin{align}
+  \xi_\text{UIFT}
+  &= \frac{k_B\,T_\text{CMB}[\text{K}]\,\ln 2}{m_e c^2}
+  = \frac{T_\text{CMB}[\text{eV}]\cdot\ln 2}{m_e c^2 / \text{eV}}
+  \notag\\[4pt]
+  &= \frac{\dfrac{16}{9}\,\xi_\text{FFGFT}\cdot\ln 2}{m_e c^2/\text{eV}}
+  \tag{190.26}
+\end{align}
+
+Rearranging:
+\begin{equation}
+  \boxed{
+  \frac{\xi_\text{FFGFT}}{\xi_\text{UIFT}}
+  \;=\;
+  \frac{m_e c^2/\text{eV}}{\dfrac{16}{9}\cdot\ln 2}
+  \;=\;
+  \frac{510\,999\,\text{eV}}{1.2323\,\text{eV}}
+  \;\approx\; 414\,684
+  }
+  \tag{190.27}
+\end{equation}
+
+\subsection*{Numerical verification}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+{\small
+\begin{tabular}{p{6cm}p{4cm}p{3cm}}
+\toprule
+\textbf{Quantity} & \textbf{Value} & \textbf{Unit} \\
+\midrule
+$\xi_\text{FFGFT} = 4/30000$ & $1.3333\times10^{-4}$ & dimensionless \\
+$\xi_\text{UIFT} = k_BT_\text{CMB}\ln2/(m_ec^2)$ & $3.1858\times10^{-10}$ & dimensionless \\
+Ratio $\xi_\text{FFGFT}/\xi_\text{UIFT}$ & $418\,521$ & — \\
+Scale factor $m_ec^2/(\frac{16}{9}\ln2)$ [eV] & $414\,684$ & — \\
+$T_\text{CMB}$ [K] (Planck 2018) & $2.72548$ & K \\
+$T_\text{CMB}$ [eV] $= k_B\cdot T_\text{CMB}[\text{K}]$ & $2.3486\times10^{-4}$ & eV \\
+$(16/9)\cdot\xi$ [eV] (FFGFT 1st order) & $2.3704\times10^{-4}$ & eV \\
+$(16/9)\cdot\xi(1-275/4\cdot\xi)$ [eV] (R11) & $2.3486\times10^{-4}$ & eV \\
+$m_ec^2$ & $510\,999$ & eV \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+The residual difference of $0.93\,\%$ between the ratio ($418\,521$) and the
+scale factor ($414\,684$) is exactly the first-order T\_CMB error — confirming
+that the bridge formula is correct.
+
+\subsection*{Physical interpretation}
+
+$\xi_\text{FFGFT}$ and $\xi_\text{UIFT}$ are \textbf{not the same quantity}.
+They are related by a pure SI conversion factor: the ratio of the relativistic
+electron energy ($m_ec^2 = 511\,\text{keV}$) to the eV scale of the FFGFT
+temperature formula, modulated by $(16/9)\cdot\ln 2$.
+
+This was documented in older versions of Doc.~013 (SI conversion tables,
+subsequently removed). The relation $T_\text{CMB}[\text{eV}] = k_B\cdot T[\text{K}]$
+is stated explicitly in Doc.~013 (archived version, March 2026).
+
+The Vopson-Teker experiment measures $\xi_\text{UIFT}$ directly.
+If confirmed, it does not by itself confirm $\xi_\text{FFGFT} = 4/30000$
+— it confirms the thermodynamic ground state at $T_\text{CMB}$.
+The geometric derivation of $\xi_\text{FFGFT}$ from $\kappa = 7$ (Doc.~009)
+is a separate and independent constraint.
+
+
+% ==============================================================================
 \section*{Updated Summary}
 % ============================================================
 
