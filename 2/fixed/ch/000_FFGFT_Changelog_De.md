@@ -478,3 +478,71 @@ Alle 5 Dokumente (10 Dateien: De+En) wurden im Kindle 6×9-Format (432×648 pt) 
 **Zusätzliche Layout-Korrektur 091:** Die 11 longtables mit Spaltenbreiten `p{1cm} p{8cm} p{3cm}` bzw. `p{2cm} p{8cm} p{3cm}` (Gesamt 12-13 cm) überstiegen die Kindle-Textbreite von 12,04 cm. Reduziert auf `p{1cm} p{7cm} p{2.5cm}` bzw. `p{1.5cm} p{6.5cm} p{2.5cm}` mit `\raggedright\arraybackslash`. Verbleibende Überstände < 4 mm.
 
 **Wrapper 124 De/En:** Neu erstellt (existierten zuvor nicht), Titel „Die Elektronen-Einheitsladung in T0: Geometrische Auflösung von Punkt-Singularitäten" / „The Electron Unit Charge in T0: Geometric Resolution of Point Singularities".
+
+---
+
+## Vollständige Kompilation aller Dokumente (Mai 2026)
+
+Nach der Inhaltsprüfung der 147 weiteren Dokumente und der Anwendung der 6 erforderlichen P7/P8/P9-Korrekturen wurden alle Dokumente der Sammlung im Kindle 6×9 Format neu kompiliert.
+
+### Ergebnis
+
+| Metrik | Wert |
+|---|---|
+| Kompilierte PDFs total | **341** |
+| Davon im Kindle 6×9 Format (432×648 pt) | **341** (100%) |
+| Dokumentpaare (DE+EN) | 168 + 5 inline-Dokumente |
+| Overfull-Boxen total | 350 (∅ 1,0 pro PDF) |
+| Davon > 5 mm (15 pt) | 167 |
+| Davon > 15 mm (45 pt) | wenige Spezialfälle in Math-Tabellen |
+
+### Behobene Wrapper-Probleme
+
+Bei der Kompilation der weiteren ~270 Dokumente traten verschiedene Wrapper-Inkonsistenzen auf, die alle behoben wurden:
+
+| Anzahl | Problem | Lösung |
+|---|---|---|
+| 17 | Wrapper nutzten `T0_preamble_local_De/En` (xelatex+DejaVu) | Umgestellt auf `T0_preamble_standalone_De/En` (lualatex+Inter) |
+| 8 | Wrapper hatten `\input{NAME_ch}` ohne `../ch/` Pfad | Pfad ergänzt |
+| 6 | Wrapper hatten `\input{T0_preamble_standalone_De}` ohne `../pri-end/` Pfad | Pfad ergänzt |
+| 2 | Wrapper hatten `\input{pri-end/...}` oder `\input{ch/...}` ohne `../` | `../` ergänzt |
+| 1 | 161_T0_Ising_Machine_En: defekter Wrapper ohne `\documentclass` | Neu erstellt |
+| 1 | 186_FFGFT_Photonik_Analyse: defekter `\title{}` (kein schließendes `}`) | Neu erstellt |
+| 3 | Inline-Dokumente (Adaptive, Fruehe, 192) mit A4-Geometrie | Auf Kindle 6×9 umgestellt |
+| 2 | 210 De/En: eigene `\geometry{paperwidth=210mm,…}` Block | Block entfernt (Preamble übernimmt) |
+| 1 | 186: `\usepackage{geometry}\geometry{margin=2.5cm}` | Block entfernt |
+| 2 | 172 De/En: `avipost` und `response` Umgebungen undefiniert | tcolorbox-Definitionen in Wrapper ergänzt |
+
+### Behobene Preamble-Erweiterungen
+
+Für PDF-Bookmark-Erzeugung (hyperref-Kompatibilität mit unicode-math-Symbolen) wurden ergänzt:
+
+```latex
+\pdfstringdefDisableCommands{
+  % ... bestehende Einträge ...
+  \def\varphi{phi}
+  \def\mitvarphi{phi}
+  \def\Phi{Phi}
+  \def\mitPhi{Phi}
+  \def\leftrightarrow{<->}
+  \def\Leftrightarrow{<=>}
+}
+```
+
+### Entfernte Duplikate
+
+Folgende Wrapper waren Duplikate ohne eigene `_ch.tex`-Datei und wurden entfernt:
+- `189_T0_TorusAbleitung_De/En.tex` (Duplikat von `189_TorusAbleitung_De/En.tex`)
+- `160_T0_Lepton-Lebensdauer-Verhaeltnisse-1_De/En.tex` (Duplikat von `160_T0_Lepton-Lebensdauer-Verh_De/En.tex`)
+- `167_T0_LiNbO3_xi_Geometrie_En.tex` (kein `_ch.tex` vorhanden, nur DE)
+- `187_T0_FFGFT_Photonik_En.tex` (kein `_ch.tex` vorhanden, nur DE)
+- `188_T0_Geometrie_Grundlagen_En.tex` (kein `_ch.tex` vorhanden, nur DE)
+- `207_tex.tex` (Streufile)
+- `T0_preamble_local_De/En.tex` (waren irrtümlich im Wrapper-Ordner)
+
+### Status
+
+| ✓ | Erledigt | Mai 2026 |
+
+Alle 341 PDFs im einheitlichen Kindle 6×9 Format verfügbar.
+
