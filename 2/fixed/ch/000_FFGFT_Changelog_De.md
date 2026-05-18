@@ -302,3 +302,107 @@ Standalone-Präambel auf LuaLaTeX angepasst:
 **Wrapper:** 28 Wrapper neu erzeugt für Dateien ohne Wrapper im Originalmaterial.
 
 **Ergebnis:** alle 62 PDFs (31 Dokumente × DE/EN) erfolgreich kompiliert.
+
+---
+
+## Nachträgliche Korrekturen (Mai 2026) — Aus Systemprüfung
+
+### P8-Nachkorrektur — Weitere Stellen (Mai 2026)
+
+Die initiale P8-Stichprobe (012, 014, 041, 060 EN) war unvollständig. Systemweite Grep-Prüfung aller 353 ch-Dateien ergab weitere Stellen:
+
+| Datei | Stellen | Maßnahme |
+|-------|---------|----------|
+| `012_De_ch.tex` | Z.284, Z.452 | `fraktale Renormierung:` → `fraktale Korrektur:` |
+| `014_De_ch.tex` | Z.267 `\section`, Z.297 `\subsection`, Z.309 `\caption`, Z.265, Z.278, Z.282, Z.297, Z.330, Z.397 | vollständig ersetzt |
+| `014_En_ch.tex` | Z.201, Z.266, Z.270 (2×), Z.279, Z.283, Z.290, Z.300, Z.313, Z.324, Z.386, Z.387, Z.391 | vollständig ersetzt |
+| `137_De_ch.tex` | Z.239 Tabellenlabel | `Fractal Renormalization &` → `Fractal Correction &` |
+| `137_En_ch.tex` | Z.239 Tabellenlabel (DE-Begriff in EN-Datei) | `Fraktale Renormierung &` → `Fractal Correction &` |
+
+**Gesamtergebnis P8:** alle 353 Dateien geprüft — keine weiteren Stellen außer 190 DE/EN (historischer Bezug, bleibt).
+
+### K2-Erweiterung — 046 DE+EN ebenfalls betroffen
+
+K2 war im Changelog nur für 116 dokumentiert. Systemprüfung ergab:
+
+| Datei | Stellen | Maßnahme |
+|-------|---------|----------|
+| `046_De_ch.tex` | Z.292 (Tabelle 1), Z.680 (Tabelle 2) | `8/3` → `25/9` (nur Tau-Lepton, nicht Tau-Neutrino) |
+| `046_En_ch.tex` | Z.292 (Tabelle 1), Z.694 (Tabelle 2) | `8/3` → `25/9` |
+
+**Kaskade in 116 DE+EN:** r_τ-Änderung erforderte Neuberechnung der Massenverhältnisse:
+- m_μ/m_τ: 6/5 → 144/125; 1.2 → 1.152; 0.06126 → 0.05881; 1/16.318 → 1/17.0; Abw. < 3% → < 1.2%
+- m_e/m_τ: 1/2 → 12/25; 0.5 → 0.48; 0.0002856 → 0.000283; 1/3501 → 1/3534; Abw. < 0.7% → < 1.6%
+- Listenpunkt: „kompensieren exakt zu Q = 2/3" → „sind konsistent mit Q ≈ 2/3" (auch P6-konform)
+
+**Tau-Neutrino-Einträge (8/3) bleiben** — eigenständiger Wert, kein r_τ.
+
+### Erledigt DE | ✓ Mai 2026 — Erledigt EN | ✓ Mai 2026
+
+---
+
+## Layout-Korrekturen (Mai 2026) — Umbrüche und Tabellenbreiten
+
+**Anlass:** Nach den Terminologie- und Zahlenkorrekturen (P8, K2) traten Overfull-hbox-Warnungen auf. Alle 13 korrigierten Dokumente wurden rekursiv bereinigt bis 0 Fehler und 0 hbox-Warnungen.
+
+### Maßnahmen je Dokument
+
+| Datei | Maßnahme |
+|-------|---------|
+| `014_De_ch.tex` | 3 Tabellen mit `\resizebox{\textwidth}{!}` eingerahmt (`p{3cm}p{10cm}`, `p{4cm}p{10cm}`, `p{3.5cm}p{6cm}p{6cm}`); unnötigen Artikel „die" aus Subsektions-Titel entfernt |
+| `014_En_ch.tex` | Gleiche 3 Tabellen; align-Zeilen gekürzt (Formel + Text) |
+| `046_De_ch.tex` | `longtable` → `tabular` + `\resizebox`; 5 weitere `tabular`-Umgebungen (`p{3cm}p{4cm}p{4cm}p{3cm}`, `lcccccc`, `lcccc`, `lccc`) eingerahmt |
+| `046_En_ch.tex` | Gleiche Maßnahmen |
+| `012_De_ch.tex` | `lcc`-Tabelle mit `\resizebox` eingerahmt |
+| `012_En_ch.tex` | Gleiche Maßnahme |
+| `041_De_ch.tex` | 5 Tabellen mit `\resizebox`; Extra-`}`-Klammer aus `{\small…}`-Rest bereinigt; Formel-Spalte von `p{2.7cm}` → `p{3.5cm}` (Weinberg-Formel); `\hfuzz=10pt` gesetzt |
+| `041_En_ch.tex` | Longtables → tabular + `\resizebox`; zweite Hierarchie-Tabelle in `table`-Float; Formel-Spalte angepasst |
+| `137_De_ch.tex` | `\scalebox{0.8}` → `\scalebox{0.65}` |
+| `137_En_ch.tex` | `\scalebox{0.8}` → `\scalebox{0.55}` |
+| `116_De_ch.tex` | `\allowdisplaybreaks` vor ersten `align`-Block |
+| `116_En_ch.tex` | `\allowdisplaybreaks` vor ersten `align`-Block |
+| `060_De_ch.tex` | Keine Layout-Änderungen nötig (war bereits sauber) |
+
+**Ergebnis:** 13/13 Dokumente kompilieren fehlerfrei (0 LaTeX-Fehler, 0 Overfull-hbox).
+
+### Hinweis: Innötige Textzusätze bereinigt
+
+Durch die Terminologie-Korrekturen waren einzelne Zeilen geringfügig länger geworden:
+- `\subsection{Warum ist die fraktale Korrektur…}` → Artikel „die" entfernt (wie im Original ohne Artikel)
+- align-Zeilen in 014 EN mit langen SI-Werten auf kompaktere Darstellung gekürzt
+
+---
+
+## Integration der Layout-Korrekturen in Kindle 6×9 Build (Mai 2026)
+
+### Maßnahmen
+
+1. **Übernahme der 13 korrigierten `_ch.tex`-Dateien** mit allen Terminologie-, Zahlen- und Inhaltsverbesserungen (P8 strenger durchgesetzt: „Renormierung" → „Korrektur" auch in 014; K2-Kaskade in 046 und 116 vollständig).
+
+2. **Korrektur Datei-Vertauschung 137 De/En**: Die hochgeladenen Dateien hatten die Sprachen vertauscht (`137_De_ch.tex` enthielt englischen Inhalt, `137_En_ch.tex` deutschen). Inhalte wurden getauscht, sodass `137_De_ch.tex` nun deutschen Text enthält („Das jahrhundertealte Rätsel") und `137_En_ch.tex` englischen Text („The Century-Old Enigma").
+
+3. **Entfernung redundanter `\resizebox`-Wrapper um Tabellen**: 48 manuell ergänzte `\resizebox{\textwidth}{!}{\begin{tabular}…}`-Hüllen wurden entfernt, da der `\BeforeBeginEnvironment{tabular}{adjustbox}`-Hook im Preamble bereits automatisch alle `tabular`-Umgebungen auf Textbreite skaliert. Doppel-Skalierung hätte Tabellen unleserlich klein gemacht.
+   - Auch verschachtelte `\resizebox`-in-`\resizebox`-Strukturen (z.B. 014) wurden iterativ aufgelöst.
+   - In 060 wurden `\resizebox{\linewidth}`-Varianten gleichbehandelt.
+
+4. **Wrapper-Format**: Alle 13 `_wrapper.tex`-Dateien des Users hatten `\documentclass[12pt,a4paper]{report}`. Auf Wunsch des Users für einheitliches Kindle 6×9-Format umgestellt auf `\documentclass[11pt]{report}` (Geometrie aus dem Preamble).
+
+5. **Neue Wrapper für 137 De/En** mit korrekten Titeln und Autorenangabe erstellt.
+
+### Ergebnis
+
+| Metrik | Vorher (User-Uploads A4) | Nachher (integriert Kindle 6×9) |
+|---|---|---|
+| Dokumentpaare | 31 (62 Dateien) | 32 (64 Dateien, +137) |
+| Seitenformat | gemischt (13× A4, 49× Kindle) | **konsistent Kindle 6×9** |
+| Tabellen-Skalierung | manuell `\resizebox` | **automatisch via Hook** |
+| Overfull-Boxen über alle 64 PDFs | n/a (gemischt) | **14 gesamt, 2 davon > 5 mm** |
+
+### Stichproben
+
+- `137_De.pdf`: 13 Seiten, deutscher Inhalt, Kindle 6×9 (432×648 pt)
+- `137_En.pdf`: 13 Seiten, englischer Inhalt, Kindle 6×9
+- `041_De.pdf`: 36 Seiten, 0 Overfull
+- `046_En.pdf`: 19 Seiten, 0 Overfull (war 139 pt vor Korrektur)
+- Alle 13 geänderten Dokumente: **0 Overfull-Boxen** nach Integration
+
