@@ -11,7 +11,7 @@
 
 **Topics (GitHub Topics):** #ffgft #unifiedfieldtheory #quantumrelativity #finestructureconstant #fractalphysics #deterministicqm #geometricconstants #particlephysics #cosmology #quantumgravity #quantumcomputing #rsaquantum #siunits #plancklength #gravitationalconstant #muong2 #cmbanomaly #hubbletension #darkenergy #mond #lagrangiansimplification #diracequation #energyduality #timemassduality #xigeometry #vacuumenergy #emergentgravity #narrativephysics #cosmicbrain #popularsciencephysics
 
-**Abstract/Summary for Search Engines:** The T0-Time-Mass-Duality model, also known as FFGFT (Fundamental Fractal-Geometric Field Theory), is a revolutionary geometric framework unifying quantum mechanics, general relativity, and cosmology through a single parameter ξ = (4/3) × 10⁻⁴. Deriving all physical constants (G, c, ℏ, lₚ, α ≈ 1/137.036) from fractal spacetime geometry, it eliminates the Standard Model's 20+ free parameters, achieves 98% accuracy in particle mass predictions (electron, muon, tau, quarks), resolves the muon g-2 anomaly to 0.05σ precision, solves the Hubble tension and CMB anomalies, provides alternatives to dark energy and MOND, and enables deterministic quantum computing. Features 44-chapter narrative edition with cosmic brain metaphor, interactive tools, Python implementations, 191+ LaTeX source files, 186+ PDF documents, audio podcasts, and YouTube videos. Ideal for researchers in theoretical physics, quantum information, cosmology, and alternative physics. DOI: 10.5281/zenodo.20117635.
+**Abstract/Summary for Search Engines:** The T0-Time-Mass-Duality model, also known as FFGFT (Fundamental Fractal-Geometric Field Theory), is a revolutionary geometric framework unifying quantum mechanics, general relativity, and cosmology through a single parameter ξ = (4/3) × 10⁻⁴. Deriving all physical constants (G, c, ℏ, lₚ, α ≈ 1/137.036) from fractal spacetime geometry, it eliminates the Standard Model's 20+ free parameters, achieves 98% accuracy in particle mass predictions (electron, muon, tau, quarks), resolves the muon g-2 anomaly to 0.05σ precision, solves the Hubble tension and CMB anomalies, provides alternatives to dark energy and MOND, and enables deterministic quantum computing. Features 44-chapter narrative edition with cosmic brain metaphor, interactive tools, Python implementations, 200+ LaTeX source files, 195+ PDF documents, audio podcasts, and YouTube videos. Ideal for researchers in theoretical physics, quantum information, cosmology, and alternative physics. DOI: 10.5281/zenodo.20117635.
 
 ## Overview
 
@@ -46,6 +46,39 @@ The T0 model presents a paradigm-shifting approach to understanding the universe
  New: Single-clock metrology and three-clock experiment; detailed analysis of the Scientific Reports paper “A single-clock approach to fundamental metrology” (DOI: 10.1038/s41598-024-71907-0) and its consistency with T0 (time–mass duality and ξ-based SI derivations).
 
 ## Latest Highlights
+
+### May 2026 (post-v1.1.0): IPI Bridges, Black Hole Information, Dual Ordering Principles, and Number Theory 🔭⚖️🔢
+
+This batch adds eleven new documents across five thematic clusters, produced in the context of active IPI mailing-list correspondence and new theoretical development.
+
+**IPI Methodological Analysis:**
+
+- **[240_KI_Detektoren_De.pdf](2/pdf/240_KI_Detektoren_De.pdf)** / **[En](2/pdf/240_KI_Detektoren_En.pdf)** — **NEW: KI-Detektoren und Ad-hominem-Argumentation** (14/15 pages). Structural analysis of manipulation patterns in scientific discourse, both classical ad-hominem and AI-detector-based dismissal. Key sources: Liang et al. 2023, OpenAI classifier shutdown July 2023, Festinger 1956/1957. Occasioned by IPI mailing-list discussion. A methodological document, not FFGFT physics.
+
+**FFGFT Compared to External IPI Frameworks:**
+
+- **[245_FFGFT_RA21_Vergleich_De.pdf](2/pdf/245_FFGFT_RA21_Vergleich_De.pdf)** / **[En](2/pdf/245_FFGFT_RA21_Vergleich_En.pdf)** — **NEW: FFGFT Mapped onto RA 2.1** (José Guevara). Structural comparison of FFGFT's ξ-recursion and winding-number architecture with Guevara's Recursive Abstraction 2.1 framework. Layer-by-layer correspondence table; convergences and irreducible differences explicitly identified.
+
+- **[246_FFGFT_RSG_Vergleich_De.pdf](2/pdf/246_FFGFT_RSG_Vergleich_De.pdf)** / **[En](2/pdf/246_FFGFT_RSG_Vergleich_En.pdf)** — **NEW: FFGFT and RSG — Structural Comparison** (Peter Austin). Systematic comparison of FFGFT's topological invariants with Austin's Recursive Survival Grammar. Convergence on constraint-first architecture (UC Layer 0); divergence on ontological commitments clearly stated.
+
+- **[247_Kategorienfehler_Revisited_De.pdf](2/pdf/247_Kategorienfehler_Revisited_De.pdf)** / **[En](2/pdf/247_Kategorienfehler_Revisited_En.pdf)** — **NEW: Category Error — Revised Framing.** Softened language replacing the earlier sharp "category error" framing in IPI bridge discussions with a more constructive "admissibility condition" framing, consistent with Dok. 206.
+
+**Black Hole Information and Hawking Radiation:**
+
+- **[250_FFGFT_Information_SL_De.pdf](2/pdf/250_FFGFT_Information_SL_De.pdf)** / **[En](2/pdf/250_FFGFT_Information_SL_En.pdf)** — **NEW: FFGFT — Information and Black Holes** (8 sections, 7/6 pages). What is fundamental information in FFGFT? Resolves the Hawking information paradox through the ontology/epistemology distinction: topological winding numbers are preserved as topological charge, not epistemically recoverable. Includes full derivation of the **spectrum modification from lattice dispersion** (Debye-analog): E(k) = (2ℏc/L₀)sin(kL₀/2), leading correction ΔE/E = −(E/E_max)²/24 — derived, not assumed. Honest assessment: ~10⁻⁸⁶ for real black holes, significant only at the remnant scale M_crit ≈ 10⁻¹³ kg. Remnant rather than destruction; information preserved on this side. Algebraic protection T̃·m = 1 (Dok. 078) and the interior operator at L₀. Python-verified key numbers.
+
+- **[251_FFGFT_Vopson_Vergleich_De.pdf](2/pdf/251_FFGFT_Vopson_Vergleich_De.pdf)** / **[En](2/pdf/251_FFGFT_Vopson_Vergleich_En.pdf)** — **NEW: FFGFT and Vopson's Infodynamics — Comparison.** FFGFT's node-count account and Vopson's particle-state account count different things; they converge only in phenomenology, not identity. Honest translation, not merger.
+
+**Number Theory and Signal Analysis:**
+
+- **[252_Phillips_FFGFT_Vergleich_De.pdf](2/pdf/252_Phillips_FFGFT_Vergleich_De.pdf)** / **[En](2/pdf/252_Phillips_FFGFT_Vergleich_En.pdf)** — **NEW: Phillips sigma-Orphan Primes and FFGFT.** Python-verified finding: the sigma-orphan primes in the 13-smooth ambient ⟨2,3,5,7,11,13⟩ are exactly {2,5,11} — and 5,11 are precisely the middle terms of the cubic sequence 3→5→11→1321. Connection to ξ⁻¹ = 7500 = 3·2²·5⁴; σ(15) = σ(14) = 24 = 4! = |S₄|. Cubical formula unknown; open questions explicitly stated.
+
+- **[253_Xi_Zahlenraum_Analyse_De.pdf](2/pdf/253_Xi_Zahlenraum_Analyse_De.pdf)** / **[En](2/pdf/253_Xi_Zahlenraum_Analyse_En.pdf)** — **NEW: Xi Number-Space Dependence.** Result documentation of an unresolved question: ξ_num(N) = λ(N)/N (Carmichael lcm(p−1,q−1)/N) lies in [0.008–0.49], fully determined by gcd(p−1,q−1); the geometric ξ_FFGFT = 1.333×10⁻⁴ lies far outside. Factorisation number-space dependence is real classical number theory (Pollard-p, ECM); the connection to FFGFT geometry remains an unproven conjecture. **Conclusion: the facts are what they are.** Missing: an algebraic bridge proof.
+
+**Dual Ordering Principles:**
+
+- **[254_Zwei_Ordnungsprinzipien_De.pdf](2/pdf/254_Zwei_Ordnungsprinzipien_De.pdf)** / **[En](2/pdf/254_Zwei_Ordnungsprinzipien_En.pdf)** — **NEW: Two Ordering Principles and the Area-Bound Theorem** (5/5 pages). Resolves the apparent contradiction between the resonance principle (ξ-recursion selects stable configurations) and the thermodynamic principle (entropy maximises). The area-bound theorem derives — not postulates — that information capacity must decrease: holographic bound N_max ∝ A + Hawking evaporation A ∝ M² + FFGFT lower bound L₀ → capacity necessarily falls. The entropic principle drives evaporation, thereby forcing the resonant concentration of preserved topological charge: the two principles are causally connected, not opposed. Vopson's Second Law of Infodynamics reproduced phenomenologically through geometry rather than postulated. Python-verified (infodynamik.py, kapazitaet.py). Three open proof gaps explicitly named: correct topological charge Q (must scale ≤ M²), extremal principle (ξ fixed point as minimum of information functional), definition of information entropy in FFGFT.
+
 
 ### May 2026 (v1.0.14): Triangle–Matrix Reduction, Consciousness Bridges, Winding Clarification, Falsification Trilogy, and Hilbert-Space Triptych 🔺📐⚖️
 

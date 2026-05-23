@@ -10,7 +10,7 @@
 
 **Themen (GitHub Topics):** #ffgft #vereinheitlichte-feldtheorie #quantenrelativität #feinstrukturkonstante #fraktalphysik #deterministische-qm #geometrischekonstanten #teilchenphysik #kosmologie #quantengravitation #quantencomputing #rsa-quanten #si-einheiten #plancklaenge #gravitationskonstante #muong2 #cmbanomalie #hubblespannung #dunkleenergie #mond #lagrangianvereinfachung #diracgleichung #energiedualität #zeitmassedualität #xigeometrie #vakuumenergie #emergenteGravitation #narrativphysik #kosmischesGehirn #populärwissenschaftphysik
 
-**Zusammenfassung/Abstract für Suchmaschinen:** Das T0-Zeit-Masse-Dualitätsmodell, auch bekannt als FFGFT (Fundamentale Fraktal-Geometrische Feldtheorie), ist ein revolutionärer geometrischer Rahmen, der Quantenmechanik, allgemeine Relativität und Kosmologie durch einen einzigen Parameter ξ = (4/3) × 10⁻⁴ vereinheitlicht. Es leitet alle physikalischen Konstanten (G, c, ℏ, lₚ, α ≈ 1/137,036) aus fraktaler Raumzeit-Geometrie ab, eliminiert die 20+ freien Parameter des Standardmodells, erreicht 98% Genauigkeit bei Teilchenmassen-Vorhersagen (Elektron, Myon, Tau, Quarks), löst die Myon g-2 Anomalie auf 0,05σ Präzision, löst die Hubble-Spannung und CMB-Anomalien, bietet Alternativen zu dunkler Energie und MOND, und ermöglicht deterministisches Quantencomputing. Enthält 44-Kapitel narrative Edition mit kosmischer Gehirn-Metapher, interaktive Tools, Python-Implementierungen, 191+ LaTeX-Quelldateien, 186+ PDF-Dokumente, Audio-Podcasts und YouTube-Videos. Ideal für Forscher in theoretischer Physik, Quanteninformation, Kosmologie und alternativer Physik. DOI: 10.5281/zenodo.20117635.
+**Zusammenfassung/Abstract für Suchmaschinen:** Das T0-Zeit-Masse-Dualitätsmodell, auch bekannt als FFGFT (Fundamentale Fraktal-Geometrische Feldtheorie), ist ein revolutionärer geometrischer Rahmen, der Quantenmechanik, allgemeine Relativität und Kosmologie durch einen einzigen Parameter ξ = (4/3) × 10⁻⁴ vereinheitlicht. Es leitet alle physikalischen Konstanten (G, c, ℏ, lₚ, α ≈ 1/137,036) aus fraktaler Raumzeit-Geometrie ab, eliminiert die 20+ freien Parameter des Standardmodells, erreicht 98% Genauigkeit bei Teilchenmassen-Vorhersagen (Elektron, Myon, Tau, Quarks), löst die Myon g-2 Anomalie auf 0,05σ Präzision, löst die Hubble-Spannung und CMB-Anomalien, bietet Alternativen zu dunkler Energie und MOND, und ermöglicht deterministisches Quantencomputing. Enthält 44-Kapitel narrative Edition mit kosmischer Gehirn-Metapher, interaktive Tools, Python-Implementierungen, 200+ LaTeX-Quelldateien, 195+ PDF-Dokumente, Audio-Podcasts und YouTube-Videos. Ideal für Forscher in theoretischer Physik, Quanteninformation, Kosmologie und alternativer Physik. DOI: 10.5281/zenodo.20117635.
 
 ## Überblick
 
@@ -44,6 +44,39 @@ Das T0-Modell präsentiert einen paradigmenwechselnden Ansatz zum Verständnis d
  NEU: Ein-Uhr-Metrologie und Drei-Uhren-Experiment; detaillierte Analyse des Scientific-Reports-Artikels „A single-clock approach to fundamental metrology“ (DOI: 10.1038/s41598-024-71907-0) und seine Konsistenz mit T0 (Zeit-Masse-Dualität und ξ-basierte SI-Ableitungen).
 
 ## Neueste Highlights
+
+### Mai 2026 (nach v1.1.0): IPI-Brücken, Schwarzloch-Information, Duale Ordnungsprinzipien und Zahlentheorie 🔭⚖️🔢
+
+Diese Gruppe ergänzt elf neue Dokumente in fünf thematischen Clustern, entstanden im Rahmen aktiver IPI-Mailinglisten-Korrespondenz und neuer theoretischer Entwicklung.
+
+**IPI-Methodologische Analyse:**
+
+- **[240_KI_Detektoren_De.pdf](2/pdf/240_KI_Detektoren_De.pdf)** / **[En](2/pdf/240_KI_Detektoren_En.pdf)** — **NEU: KI-Detektoren und Ad-hominem-Argumentation** (14/15 Seiten). Strukturanalyse von Manipulationsmustern im wissenschaftlichen Diskurs — klassische Ad-hominem-Argumentation und KI-Detektor-basierte Ablehnung. Quellen: Liang et al. 2023, OpenAI-Classifier-Abschaltung Juli 2023, Festinger 1956/1957. Anlass: IPI-Mailinglisten-Diskussion. Ein methodologisches Dokument, keine FFGFT-Physik.
+
+**FFGFT im Vergleich mit externen IPI-Rahmenwerken:**
+
+- **[245_FFGFT_RA21_Vergleich_De.pdf](2/pdf/245_FFGFT_RA21_Vergleich_De.pdf)** / **[En](2/pdf/245_FFGFT_RA21_Vergleich_En.pdf)** — **NEU: FFGFT und RA 2.1 abgebildet** (José Guevara). Strukturvergleich von FFGFTs ξ-Rekursion und Wicklungszahl-Architektur mit Guevaras Recursive Abstraction 2.1. Schicht-für-Schicht-Korrespondenztabelle; Konvergenzen und irreduzible Unterschiede explizit ausgewiesen.
+
+- **[246_FFGFT_RSG_Vergleich_De.pdf](2/pdf/246_FFGFT_RSG_Vergleich_De.pdf)** / **[En](2/pdf/246_FFGFT_RSG_Vergleich_En.pdf)** — **NEU: FFGFT und RSG — Strukturvergleich** (Peter Austin). Systematischer Vergleich von FFGFTs topologischen Invarianten mit Austins Recursive Survival Grammar. Konvergenz bei der Constraint-first-Architektur (UC Layer 0); Divergenz bei ontologischen Festlegungen klar ausgewiesen.
+
+- **[247_Kategorienfehler_Revisited_De.pdf](2/pdf/247_Kategorienfehler_Revisited_De.pdf)** / **[En](2/pdf/247_Kategorienfehler_Revisited_En.pdf)** — **NEU: Kategorienfehler — Überarbeitete Formulierung.** Abgemilderte Sprache: ersetzt das frühere schroffe „Kategorienfehler"-Framing in IPI-Brückendiskussionen durch ein konstruktiveres „Zulässigkeitsbedingung"-Framing, konsistent mit Dok. 206.
+
+**Schwarzloch-Information und Hawking-Strahlung:**
+
+- **[250_FFGFT_Information_SL_De.pdf](2/pdf/250_FFGFT_Information_SL_De.pdf)** / **[En](2/pdf/250_FFGFT_Information_SL_En.pdf)** — **NEU: FFGFT — Information und schwarze Löcher** (8 Abschnitte, 7/6 Seiten). Was ist Grundinformation in FFGFT? Löst das Hawking-Informationsparadoxon durch die Ontologie/Epistemologie-Unterscheidung: topologische Wicklungszahlen sind als topologische Ladung erhalten, nicht epistemisch rekonstruierbar. Enthält vollständige **Herleitung der Spektrummodifikation aus der Gitterdispersion** (Debye-Analogon): E(k) = (2ℏc/L₀)sin(kL₀/2), führende Korrektur ΔE/E = −(E/E_max)²/24 — hergeleitet, nicht angesetzt. Ehrliche Einordnung: ~10⁻⁸⁶ für reale schwarze Löcher, signifikant erst an der Remnant-Skala M_krit ≈ 10⁻¹³ kg. Remnant statt Vernichtung; Information bleibt diesseits. Algebraischer Schutz T̃·m = 1 (Dok. 078) und der Interior-Operator bei L₀. Python-verifizierte Schlüsselzahlen.
+
+- **[251_FFGFT_Vopson_Vergleich_De.pdf](2/pdf/251_FFGFT_Vopson_Vergleich_De.pdf)** / **[En](2/pdf/251_FFGFT_Vopson_Vergleich_En.pdf)** — **NEU: FFGFT und Vopsons Infodynamik — Vergleich.** Das FFGFT-Knoten-Konto und Vopsons Teilchenzustands-Konto zählen Verschiedenes; sie konvergieren nur in der Phänomenologie, nicht in der Identität. Ehrliche Übersetzung, keine Fusion.
+
+**Zahlentheorie und Signalanalyse:**
+
+- **[252_Phillips_FFGFT_Vergleich_De.pdf](2/pdf/252_Phillips_FFGFT_Vergleich_De.pdf)** / **[En](2/pdf/252_Phillips_FFGFT_Vergleich_En.pdf)** — **NEU: Phillips sigma-Waisen-Primzahlen und FFGFT.** Python-verifizierter Befund: Die sigma-Waisen-Primzahlen im 13-glatten Ambient ⟨2,3,5,7,11,13⟩ sind exakt {2,5,11} — und 5,11 sind genau die mittleren Terme der kubischen Folge 3→5→11→1321. Verbindung zu ξ⁻¹ = 7500 = 3·2²·5⁴; σ(15) = σ(14) = 24 = 4! = |S₄|. Kubische Formel unbekannt; offene Fragen explizit ausgewiesen.
+
+- **[253_Xi_Zahlenraum_Analyse_De.pdf](2/pdf/253_Xi_Zahlenraum_Analyse_De.pdf)** / **[En](2/pdf/253_Xi_Zahlenraum_Analyse_En.pdf)** — **NEU: Xi-Zahlenraumabhängigkeit.** Ergebnisdokumentation einer ungelösten Frage: ξ_num(N) = λ(N)/N (Carmichael lcm(p−1,q−1)/N) liegt in [0,008–0,49], vollständig durch gcd(p−1,q−1) bestimmt; das geometrische ξ_FFGFT = 1,333×10⁻⁴ liegt weit außerhalb. Zahlenraumabhängigkeit ist reale klassische Zahlentheorie (Pollard-p, ECM); die Verbindung zur FFGFT-Geometrie bleibt unbewiesene Vermutung. **Fazit: Das sind die Fakten.** Fehlend: algebraischer Brückenbeweis.
+
+**Duale Ordnungsprinzipien:**
+
+- **[254_Zwei_Ordnungsprinzipien_De.pdf](2/pdf/254_Zwei_Ordnungsprinzipien_De.pdf)** / **[En](2/pdf/254_Zwei_Ordnungsprinzipien_En.pdf)** — **NEU: Zwei Ordnungsprinzipien und das Flächenschranken-Theorem** (5/5 Seiten). Löst den scheinbaren Widerspruch zwischen dem Resonanzprinzip (ξ-Rekursion selektiert stabile Konfigurationen) und dem thermodynamischen Prinzip (Entropie maximiert). Das Flächenschranken-Theorem leitet — nicht postuliert — ab, dass die Informationskapazität sinken muss: holographische Schranke N_max ∝ A + Hawking-Verdampfung A ∝ M² + FFGFT-Untergrenze L₀ → Kapazität sinkt zwingend. Das entropische Prinzip treibt die Verdampfung und erzwingt damit die resonante Verdichtung der erhaltenen topologischen Ladung: die zwei Prinzipien sind kausal verbunden, nicht entgegengesetzt. Vopsons zweites Infodynamik-Gesetz wird phänomenologisch durch Geometrie reproduziert, nicht postuliert. Python-verifiziert (infodynamik.py, kapazitaet.py). Drei offene Beweislücken explizit benannt: korrekte topologische Ladung Q (muss ≤ M² skalieren), Extremalprinzip (ξ-Fixpunkt als Minimum einer Informationsfunktion), Definition der Informationsentropie in FFGFT.
+
 
 ### Mai 2026 (v1.0.14): Dreieck-Matrix-Reduktion, Bewusstseinsbrücken, Wicklungs-Klärung, Falsifikationstrilogie und Hilbertraum-Triptychon 🔺📐⚖️
 
@@ -424,7 +457,7 @@ Unabhängige Forschung aus zwei völlig unterschiedlichen Perspektiven kommt zur
 T0-Zeit-Masse-Dualität/
 ├── 2/
 │  ├── html/           # Interaktive HTML-Explorationen
-│  ├── pdf/           # Technische Dokumente (230+ Dateien, inkl. Dok. 165–167)
+│  ├── pdf/           # Technische Dokumente (240+ Dateien, inkl. Dok. 165–167)
 │  └── index.html & website.html # Lokale Web-Schnittstellen
 ├── rsa/             # RSA-Faktorisierungs-Demos und Implementierungen
 ├── sig/             # Audio-Signalanalyse (3 Dateien)
@@ -438,7 +471,7 @@ T0-Zeit-Masse-Dualität/
 
 **GitHub-Suchoptimierung:** Dieses Repo ist mit „quanten-physik“, „vereinheitlichte-theorie“, „fraktale-geometrie“ und „deterministische-computing“ getaggt für einfache Entdeckung über GitHub-Themensuche.
 
-## Vollständige PDF-Dokumentation (230+ Dateien, ~80MB insgesamt)
+## Vollständige PDF-Dokumentation (240+ Dateien, ~85MB insgesamt)
 
 Alle Dokumente in deutscher und englischer Version verfügbar, soweit vorhanden. 
 **Pro-Tipp:** Verwenden Sie die GitHub-Suchleiste mit `T0_ Dateiname` oder `Matsas` oder `Consciousness`, um spezifische PDFs schnell zu finden.
