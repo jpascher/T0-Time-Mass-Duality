@@ -1,6 +1,6 @@
 # T0-Time-Mass-Duality / FFGFT — Release Notes v1.1.1
 
-**DOI:** TBA — to be assigned upon Zenodo release  
+**DOI:** [10.5281/zenodo.20355305](https://doi.org/10.5281/zenodo.20355305)  
 **Date:** 2026-05-23  
 **Predecessor:** [10.5281/zenodo.20117635](https://doi.org/10.5281/zenodo.20117635) (v1.1.0)  
 **Repository:** https://github.com/jpascher/T0-Time-Mass-Duality
@@ -80,7 +80,7 @@ The entropic principle drives evaporation, thereby forcing the resonant concentr
 
 | Version | DOI | Date | Key Addition |
 |---------|-----|------|-------------|
-| v1.1.1 | **TBA** | 2026-05-23 | Docs. 240, 245–254: IPI bridges, black hole information, dual ordering principles |
+| v1.1.1 | **[10.5281/zenodo.20355305](https://doi.org/10.5281/zenodo.20355305)** | 2026-05-23 | Docs. 240, 245–254: IPI bridges, black hole information, dual ordering principles |
 | **v1.1.0** | **[10.5281/zenodo.20117635](https://doi.org/10.5281/zenodo.20117635)** | **2026-05-11** | **Hilbert-Space Triptych (Docs. 230–232) — main consolidated release** |
 | v1.0.14 | [10.5281/zenodo.20041543](https://doi.org/10.5281/zenodo.20041543) | 2026-05 | Triangle-Matrix Reduction, Falsification Trilogy, Docs. 206–210, 220–222 |
 | v1.0.13 | [10.5281/zenodo.20041529](https://doi.org/10.5281/zenodo.20041529) | 2026-05 | QM bridge, narrative translation, Doc. 205 |
@@ -97,8 +97,8 @@ For the framework:
 > Pascher, J. (2026). T0-Time-Mass-Duality / FFGFT v1.1.0 — Hilbert-Space Bridge: A Consolidated Release. Zenodo. DOI: [10.5281/zenodo.20117635](https://doi.org/10.5281/zenodo.20117635).
 
 For this point release:
-> Pascher, J. (2026). T0-Time-Mass-Duality / FFGFT v1.1.1 — IPI Bridges, Black Hole Information, Dual Ordering Principles. Zenodo. DOI: TBA upon Zenodo release.
+> Pascher, J. (2026). T0-Time-Mass-Duality / FFGFT v1.1.1 — IPI Bridges, Black Hole Information, Dual Ordering Principles. Zenodo. DOI: [10.5281/zenodo.20355305](https://doi.org/10.5281/zenodo.20355305).
 
 ---
 
-*To be updated upon Zenodo release with the v1.1.1 DOI.*
+*Zenodo DOI assigned: 10.5281/zenodo.20355305.*

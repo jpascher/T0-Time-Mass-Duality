@@ -1,6 +1,6 @@
 # T0-Zeit-Masse-Dualität / FFGFT — Release Notes v1.1.1
 
-**DOI:** TBA — wird bei Zenodo-Release vergeben  
+**DOI:** [10.5281/zenodo.20355305](https://doi.org/10.5281/zenodo.20355305)  
 **Datum:** 2026-05-23  
 **Vorgänger:** [10.5281/zenodo.20117635](https://doi.org/10.5281/zenodo.20117635) (v1.1.0)  
 **Repository:** https://github.com/jpascher/T0-Time-Mass-Duality
@@ -80,7 +80,7 @@ Das entropische Prinzip treibt die Verdampfung und erzwingt damit die resonante 
 
 | Version | DOI | Datum | Wesentliche Neuerung |
 |---------|-----|-------|----------------------|
-| v1.1.1 | **TBA** | 2026-05-23 | Dok. 240, 245–254: IPI-Brücken, Schwarzloch-Information, duale Ordnungsprinzipien |
+| v1.1.1 | **[10.5281/zenodo.20355305](https://doi.org/10.5281/zenodo.20355305)** | 2026-05-23 | Dok. 240, 245–254: IPI-Brücken, Schwarzloch-Information, duale Ordnungsprinzipien |
 | **v1.1.0** | **[10.5281/zenodo.20117635](https://doi.org/10.5281/zenodo.20117635)** | **2026-05-11** | **Hilbertraum-Triptychon (Dok. 230–232) — konsolidierter Hauptrelease** |
 | v1.0.14 | [10.5281/zenodo.20041543](https://doi.org/10.5281/zenodo.20041543) | 2026-05 | Dreieck-Matrix-Reduktion, Falsifikationstrilogie, Dok. 206–210, 220–222 |
 | v1.0.13 | [10.5281/zenodo.20041529](https://doi.org/10.5281/zenodo.20041529) | 2026-05 | QM-Brücke, Narrativ-Übersetzung, Dok. 205 |
@@ -97,8 +97,8 @@ Für das Rahmenwerk:
 > Pascher, J. (2026). T0-Zeit-Masse-Dualität / FFGFT v1.1.0 — Hilbertraum-Brücke: Ein konsolidierter Release. Zenodo. DOI: [10.5281/zenodo.20117635](https://doi.org/10.5281/zenodo.20117635).
 
 Für diesen Punkt-Release:
-> Pascher, J. (2026). T0-Zeit-Masse-Dualität / FFGFT v1.1.1 — IPI-Brücken, Schwarzloch-Information, Duale Ordnungsprinzipien. Zenodo. DOI: TBA bei Zenodo-Release.
+> Pascher, J. (2026). T0-Zeit-Masse-Dualität / FFGFT v1.1.1 — IPI-Brücken, Schwarzloch-Information, Duale Ordnungsprinzipien. Zenodo. DOI: [10.5281/zenodo.20355305](https://doi.org/10.5281/zenodo.20355305).
 
 ---
 
-*Wird bei Zenodo-Release mit der v1.1.1-DOI aktualisiert.*
+*Zenodo-DOI vergeben: 10.5281/zenodo.20355305.*

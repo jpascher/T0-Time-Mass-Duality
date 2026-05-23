@@ -1,6 +1,8 @@
 # T0 Time-Mass Duality
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20117635.svg)](https://doi.org/10.5281/zenodo.20117635)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20355305.svg)](https://doi.org/10.5281/zenodo.20355305)
+
+> 📋 **Point release v1.1.1 available** — DOI: [10.5281/zenodo.20355305](https://doi.org/10.5281/zenodo.20355305). Adds Docs. 240, 245–254 (IPI bridges, black hole information, dual ordering principles). See **[RELEASE_NOTES_v1_1_1.md](RELEASE_NOTES_v1_1_1.md)** (English) / **[RELEASE_NOTES_v1_1_1_de.md](RELEASE_NOTES_v1_1_1_de.md)** (Deutsch).
 
 > 📋 **Major release v1.1.0 available.** A consolidated entry document covering the full corpus and highlighting the Hilbert-space bijection (Doc. 230) as the centrepiece is now the recommended reading: **[RELEASE_NOTES_v1_1_0.md](RELEASE_NOTES_v1_1_0.md)** (English) / **[RELEASE_NOTES_v1_1_0_de.md](RELEASE_NOTES_v1_1_0_de.md)** (Deutsch). The individual point-release notes (v1.0.11–v1.0.14) remain available for full historical detail.
 
@@ -11,7 +13,7 @@
 
 **Topics (GitHub Topics):** #ffgft #unifiedfieldtheory #quantumrelativity #finestructureconstant #fractalphysics #deterministicqm #geometricconstants #particlephysics #cosmology #quantumgravity #quantumcomputing #rsaquantum #siunits #plancklength #gravitationalconstant #muong2 #cmbanomaly #hubbletension #darkenergy #mond #lagrangiansimplification #diracequation #energyduality #timemassduality #xigeometry #vacuumenergy #emergentgravity #narrativephysics #cosmicbrain #popularsciencephysics
 
-**Abstract/Summary for Search Engines:** The T0-Time-Mass-Duality model, also known as FFGFT (Fundamental Fractal-Geometric Field Theory), is a revolutionary geometric framework unifying quantum mechanics, general relativity, and cosmology through a single parameter ξ = (4/3) × 10⁻⁴. Deriving all physical constants (G, c, ℏ, lₚ, α ≈ 1/137.036) from fractal spacetime geometry, it eliminates the Standard Model's 20+ free parameters, achieves 98% accuracy in particle mass predictions (electron, muon, tau, quarks), resolves the muon g-2 anomaly to 0.05σ precision, solves the Hubble tension and CMB anomalies, provides alternatives to dark energy and MOND, and enables deterministic quantum computing. Features 44-chapter narrative edition with cosmic brain metaphor, interactive tools, Python implementations, 200+ LaTeX source files, 195+ PDF documents, audio podcasts, and YouTube videos. Ideal for researchers in theoretical physics, quantum information, cosmology, and alternative physics. DOI: 10.5281/zenodo.20117635.
+**Abstract/Summary for Search Engines:** The T0-Time-Mass-Duality model, also known as FFGFT (Fundamental Fractal-Geometric Field Theory), is a revolutionary geometric framework unifying quantum mechanics, general relativity, and cosmology through a single parameter ξ = (4/3) × 10⁻⁴. Deriving all physical constants (G, c, ℏ, lₚ, α ≈ 1/137.036) from fractal spacetime geometry, it eliminates the Standard Model's 20+ free parameters, achieves 98% accuracy in particle mass predictions (electron, muon, tau, quarks), resolves the muon g-2 anomaly to 0.05σ precision, solves the Hubble tension and CMB anomalies, provides alternatives to dark energy and MOND, and enables deterministic quantum computing. Features 44-chapter narrative edition with cosmic brain metaphor, interactive tools, Python implementations, 200+ LaTeX source files, 195+ PDF documents, audio podcasts, and YouTube videos. Ideal for researchers in theoretical physics, quantum information, cosmology, and alternative physics. DOI: 10.5281/zenodo.20355305.
 
 ## Overview
 
