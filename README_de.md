@@ -127,4 +127,4 @@ Vollständige Release-Notes als `RELEASE_NOTES_*.md`-Dateien verfügbar.
 
 © 2025–2026 Johann Pascher. Lizenziert unter [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
-*Alle Behauptungen und Vorhersagen erfordern weitere experimentelle Überprüfung.*
+*Bestätigte Ergebnisse sind im Korpus dokumentiert; offene Vorhersagen bedürfen experimenteller Überprüfung.*

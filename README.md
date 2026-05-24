@@ -127,4 +127,4 @@ Full release notes available as `RELEASE_NOTES_*.md` files.
 
 © 2025–2026 Johann Pascher. Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
-*All claims and predictions require further experimental verification.*
+*Established results are documented in the corpus; open predictions are subject to experimental verification.*
