@@ -91,14 +91,16 @@ T0-Time-Mass-Duality/
 ├── 2/
 │   ├── pdf/          # 250+ Dokumente (DE/EN-Paare)
 │   ├── html/         # Interaktive Tools (21 Dateien)
-│   └── python/       # Python-Implementierungen
-├── ch/               # LaTeX-Kapitelquellen (*_ch.tex)
-├── pri-end/          # Gemeinsame LaTeX-Präambeln
+│   ├── python/       # Python-Implementierungen
+│   └── fixed/
+│       ├── ch/       # LaTeX-Kapitelquellen (*_ch.tex)
+│       ├── wrapper/  # Eigenständige LaTeX-Wrapper
+│       └── pri-end/  # Gemeinsame LaTeX-Präambeln
 ├── rsa/              # RSA-Faktorisierungs-Demos
 └── sig/              # Signalanalyse-Tools
 ```
 
-LaTeX-Struktur: Wrapper-Dateien in `wrapper/` referenzieren `../pri-end/T0_preamble_standalone_De/En`. Kapitelinhalte in `ch/` als `NNN_..._De/En_ch.tex`.
+LaTeX-Struktur: Wrapper-Dateien in `2/fixed/wrapper/` referenzieren `../pri-end/T0_preamble_standalone_De/En`. Kapitelinhalte in `2/fixed/ch/` als `NNN_..._De/En_ch.tex`.
 
 ---
 
