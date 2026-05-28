@@ -1,7 +1,7 @@
 # FFGFT Changelog
 ## Korrekturen und Präzisierungen der Dokumentenserie
 **Grundlage:** Dok. 190 (allgemein) und Dok. 210 (Wicklungszahlen)
-**Stand:** Mai 2026 (zuletzt erweitert: 27. Mai 2026 — N261, N013-INFO, K2-Nachtrag)
+**Stand:** Mai 2026 (zuletzt erweitert: 28. Mai 2026 — N261, N013-INFO, K2-Nachtrag, N255-257-Verschaltung, HW147)
 
 ---
 
@@ -736,6 +736,8 @@ User-Anforderung: Jedes Dokument muss mit Zahl-Präfix beginnen, und kein Präfi
 ---
 
 ### N013-INFO — Dok. 013: Abschnitt „Statische und dynamische Informationseinheit"
+
+> ⚠️ **Nachträglich präzisiert (27. Mai 2026):** Dieser Eintrag stellte den 013-Einschub ursprünglich als eigenständige Erweiterung dar. Tatsächlich überschneidet er sich inhaltlich erheblich mit Dok.~**255** („Information als topologisch eingefrorene kinetische Energie") und Dok.~**257** („Skalenabhängige Informationseinheiten als Phasenübergänge auf T⁴"). Diese beiden waren zum Zeitpunkt des Einschubs übersehen worden. Variante C wurde gewählt (013-Einschub bleibt für SI-Reform-Leser; 255/257 sind die ausführlichen Träger des Themas). Siehe nachstehenden Eintrag „N255-257-Verschaltung".
 | Feld | Inhalt |
 |------|--------|
 | Betroffene Dok. | 013 (DE+EN), neuer Unterabschnitt nach dem ξ_FFGFT/ξ_UIFT-Vergleich (P13) |
@@ -817,3 +819,116 @@ Die frühere Festlegung „ν_τ bleibt 8/3" (K2-Erweiterung) ist **revidiert**.
 | ID | Status | Bemerkung |
 |----|--------|-----------|
 | K2-Nachtrag | ✓ 27. Mai 2026 | vollständige Einarbeitung: 016 EN, 046 DE+EN, 116 EN; ν_τ → 25/9 |
+
+---
+
+## N255-257-Verschaltung — Korpus-Integration der Informations-Dokumente (27. Mai 2026)
+
+**Anlass:** Bei der Arbeit am 013-Einschub (siehe N013-INFO) wurde nachträglich erkannt, dass Dok. 255 und 257 das Thema „Energie pro Bit / Informationseinheit / Statisch vs. dynamisch" bereits ausführlich behandeln — 255 leitet Landauer und Vopson aus T⁴-Geometrie ab, 257 präzisiert mit der Drei-Ebenen-Hierarchie (topologisch / geometrisch / thermodynamisch). Entscheidung: **Variante C** — der 013-Einschub bleibt für SI-Reform-Leser; 255 und 257 werden mit den jüngeren Dokumenten (184, 261, 013) sichtbar verschaltet, ohne ihren Inhalt zu ändern.
+
+### Eingearbeitete Querverweise
+
+| Datei | Ergänzung |
+|-------|-----------|
+| 255 DE+EN | Abschnitt „Verschaltung im Korpus" / „Integration in the corpus" nach der Methodologie-Notiz. Querverweise: Dok. 257 (Drei-Ebenen-Hierarchie, Spezialfall-Einordnung); Dok. 184 (Energiehierarchie E_N = ħc/L_N); Dok. 261 (Schicht 1 = topologisch eingefroren, Schicht 2 = freie kinetische Seite mit Einbettungspreis c, ħ, ε₀). |
+| 257 DE+EN | Abschnitt „Verschaltung im Korpus" / „Integration in the corpus" nach der Methodologie-Notiz. Querverweise: Dok. 261 (Drei-Ebenen-Hierarchie als feldtheoretische Ausarbeitung der Schicht-1/Schicht-2-Demarkation); Dok. 184 (E_bit(L) = ħc/L identisch mit E_N = ħc/L_N); Dok. 013 (Vopson-Faktor 414 684 als Projektionsverhältnis Schicht-1 ↔ Schicht-2). |
+
+### Was nicht geändert wurde
+
+Der mathematische und inhaltliche Kern beider Dokumente bleibt unverändert. Die Ableitung von Landauer/Vopson aus T⁴ (Dok. 255), die Drei-Ebenen-Hierarchie (Dok. 257) und die Skalenresonanz-Hypothese (Lebensskala, Dok. 257) sind nicht angetastet. Nur die Verschaltung mit dem aktuellen Korpus-Stand wurde sichtbar gemacht.
+
+### Verifikation
+
+- Querverweise im PDF-Text geprüft: Dok. 257/261/184 (in 255 DE+EN), Dok. 261/184/013 + Vopson-Faktor 414 684 (in 257 DE+EN).
+- Vier PDFs neu kompiliert (Kindle 6×9): 255 DE (11 S.), 255 EN (10 S.), 257 DE (9 S.), 257 EN (8 S.).
+
+### Status
+
+| ✓ | Erledigt DE | 27. Mai 2026 |
+| ✓ | Erledigt EN | 27. Mai 2026 |
+
+---
+
+### Übersichtstabelle — Nachtrag (Fortsetzung)
+
+| ID | Status | Bemerkung |
+|----|--------|-----------|
+| N255-257-Verschaltung | ✓ 27. Mai 2026 | Querverweise auf Dok. 261/184/013 (255); 261/184/013 inkl. Vopson-Faktor (257); inhaltlich nichts geändert |
+
+---
+
+## HW147 — Dok. 147 §8: Hardware-Validierung auf echte Messung korrigiert (28. Mai 2026)
+
+**Anlass:** Eigene Hardware-Läufe auf IBM Quantum (28. Mai 2026, ibm_kingston / ibm_marrakesh, beide Heron r2, 156 Qubit) zur Überprüfung der in Dok. 147 §8 berichteten Zahlen. Abgleich mit dem Juni-2025-Hardware-Validierungsreport ergab, dass mehrere §8-Behauptungen entweder durch die neuen Daten widerlegt oder in den verfügbaren Aufzeichnungen nicht belegt sind.
+
+### Korrigierte Behauptungen (DE+EN parallel)
+
+| Stelle | Vorher (unbelegt/widerlegt) | Nachher (echte Messung) |
+|--------|------------------------------|--------------------------|
+| Bell-Treue-Tabelle | 3 Läufe, „Treue 1,000", Varianz 0,000248 | 50 Läufe, Fidelität 98,76 %, Varianz 1,249·10⁻⁴ |
+| „40× deterministischer als QM" | behauptet | widerlegt: Varianz-Verhältnis 1,02, χ²-p = 0,86 |
+| CHSH 73-Qubit | S = 2,8275 „aus 2025-Daten" | nicht belegt → ersetzt durch S = 2,7396 (gemessen) |
+| CHSH 127-Qubit | S = 2,8278, „nahezu perfekte ξ-Übereinstimmung" | nicht belegt → ersetzt durch echte Messung |
+| ξ-Fit-Tabellen (73/127) | ξ_fit angepasst an unbelegte CHSH-Werte | entfernt (Datengrundlage fehlt) |
+| Monte-Carlo „kompatibel mit IBM-Beobachtung" | stützte sich auf unbelegte 2,8275 | entfernt |
+| Abstract „CHSH ~10⁻³ in 73-Qubit testbar" | überzogen | ehrlich: ξ ~10⁻⁵, unter NISQ-Rauschen |
+| „Experimentell validiert: CHSH = 2,827888" | überzogen | „Hardware-getestet: S = 2,74, Bell-Verletzung" |
+| Schluss-Zusammenfassung | wiederholte alle obigen Werte | echte Werte + ξ-Messbarkeitsbefund |
+
+### Neue, belegte Datenlage in §8
+
+- **Bell-Wiederholbarkeit (50 Läufe):** Fidelität 98,76 %; Varianz mit Shot-Noise verträglich (1,02; p = 0,86). Die deterministische Varianzreduktion besteht nicht.
+- **CHSH (gemessen):** S = 2,7396 ± 0,0071 (Kingston, 15 Messungen), 96,9 % der Tsirelson-Schranke, 105 σ über klassisch. Klare Bell-Verletzung.
+- **Cross-Platform:** Marrakesh S = 2,7016; Geräte-zu-Geräte-Differenz 0,038 (Welch t = 2,46, p = 0,028). Diese Variation übersteigt den ξ-Effekt um ~1400× → ξ mit NISQ-Hardware prinzipiell nicht auflösbar (empirisch, nicht geschätzt).
+- Zwei `important`-Korrektur-Boxen dokumentieren die Änderungen im Dokument selbst.
+
+### Methodische Befunde
+
+- Die unbelegten CHSH-Werte 2,8275/2,8278 stammten aus reinen Fitting-Skripten (bell_73qubit_fit.py, bell_2025_sherbrooke_fit.py), die diese Werte als hardcoded Input nahmen; keine Roh-Aufzeichnungen (Job-IDs, Counts) existieren dafür im Archiv. Der dokumentierte 2025-Lauf betraf ausschließlich Bell-Zustands-Generierung.
+- Im ersten Auswertungslauf des CHSH-Skripts (Stufe 2) wurde eine zu den Winkeln nicht passende Vorzeichenkombination verwendet (Ergebnis fälschlich S ≈ 0); aus denselben Rohdaten korrekt rekombiniert ergibt sich S = 2,7396, ohne erneuten Hardware-Lauf.
+
+### Verifikation
+
+- begin/end-Umgebungen balanciert (DE+EN), keine zerbrochenen Tabellen, keine hängenden \ref auf gelöschte Tabellen-Labels (tab:chsh_73, tab:chsh_127, tab:system_comparison entfernt).
+- Reports erstellt: Bell_Wiederholbarkeit_Report_2026-05-28.md (DE) + _En.md, mit vollständigen Job-IDs.
+- Rohdaten archiviert: bell_repeatability_2026.csv (50 Zeilen), chsh_stage2_2026.csv, chsh_stage2_marrakesh_2026.csv.
+
+### Folgedokumente — abgeschlossen (28. Mai 2026)
+
+Pro Dokument geprüft, ob die unbelegten Werte eigene Behauptung sind (korrigiert) oder legitime Theorie/Fehltreffer (unverändert):
+
+- **Korrigiert (DE+EN), unbelegte Hardware-Werte ersetzt/markiert:**
+  - Dok. 148 (scramblons): IBM-Geräte-Zeilen (Brisbane/Sherbrooke) in der Cross-Platform-Tabelle als „Supraleitend (Vorhersage)" relabelt; keyresult-Übereinstimmungsbehauptung durch Verweis auf echte Messung (S=2,74) ersetzt.
+  - Dok. 022 (QFT-ML-Addendum): „2025-Daten S≈2,8275"-Fit-Grundlage durch Korrektur-Box ersetzt; CHSH-Werte als theoretisch markiert; ξ-Fit als gegenstandslos gekennzeichnet (Formel als Skalenstruktur erhalten).
+  - Dok. 035 (QM): Testbarkeits-Vorhersage als theoretisch markiert; Korrektur-Box vor dem „2025-Daten identifiziert"-Arbeitsnotiz-Abschnitt.
+  - Dok. 202 (Feldtheorie-Gesamt): Verweis auf Dok. 147 von „ΔCHSH~10⁻³" auf „theoretischer ξ-Effekt ~10⁻⁵, unter NISQ-Rauschen; Hardware S=2,74" aktualisiert (zwei Stellen).
+- **Unverändert — legitime theoretische Vorhersage (kein Hardware-Claim):**
+  - Dok. 023, 023a (Bell): CHSH 2,828→2,827 ist die theoretische ξ-Dämpfung; 73-Qubit-Lie-Detector als *zukünftiger* Test zitiert (sciencedaily2025) — korrekt.
+  - Dok. 175 (Qubit-Zustandsräume): „2√2→2,8275" ist theoretische ξ-Dämpfung, kein Messwert.
+- **Unverändert — Fehltreffer (kein Bezug zu Bell/Fidelität):**
+  - Dok. 041: „0,974" ist das CKM-Matrixelement |V_ud|.
+  - Dok. 155: „40-fach" bezieht sich auf DNA-Datenkompression.
+
+### PDF-Ausgabe
+
+Alle vier korrigierten Dokumente in DE+EN als PDF gebaut (XeLaTeX, echte Standalone-Präambel, 6×9). Wrapper unverändert (nur ch/-Kapitelinhalt geändert, Struktur gleich). Sandbox-Caveat: Math = Latin Modern (statt Libertinus), keine deutsche Silbentrennung wie unter LuaLaTeX.
+
+### Offen / Hinweise
+
+- Die Korrektur-Boxen in 022/035 verwenden `tcolorbox` (rot) — beim finalen LuaLaTeX-Build prüfen, ob Stil zur Hausfarbe passt.
+- **Budget-Hinweis:** Die Hardware-Läufe verbrauchten 8 von 10 min des Open-Plan-Zyklus (28-Tage-Fenster).
+
+### Status
+
+| ✓ | Erledigt DE | 28. Mai 2026 |
+| ✓ | Erledigt EN | 28. Mai 2026 |
+| ⏳ | Folgedokumente (148, 035, 022, 023, 023a, 202, 175, 041, 155) | offen |
+
+---
+
+### Übersichtstabelle — Nachtrag (Fortsetzung)
+
+| ID | Status | Bemerkung |
+|----|--------|-----------|
+| HW147 | ✓ 28. Mai 2026 | Dok. 147 §8 auf echte Messung korrigiert (S = 2,74); „40×" widerlegt |
+| HW147-Folge | ✓ 28. Mai 2026 | Folgedok. 148/022/035/202 (DE+EN) korrigiert + PDF; 023/023a/175 legitime Vorhersage; 041/155 Fehltreffer |

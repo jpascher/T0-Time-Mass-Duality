@@ -1,5 +1,5 @@
 \section*{Abstract}
-We present a comprehensive theoretical framework for quantum computing based on the T0 time-mass duality theory. The central result is a rigorous proof that the $\phi$-hierarchical quantum Fourier transform ($\phi$-QFT) for period finding in Shor's algorithm is functionally equivalent to the standard QFT, while offering additional stability through Bell-corrected entanglement damping. We establish three fundamental mechanisms: (1) energy field superposition as a deterministic alternative to probabilistic collapse, (2) local correlation fields that explain Bell violations without nonlocality, and (3) fractal damping that suppresses decoherence. The theory makes precise experimental predictions testable with current technology: CHSH deviations of $\sim 10^{-3}$ in 73-qubit systems and spatial correlation delays of $\sim$445 ns over 1000 km. We provide a complete Python implementation demonstrating 100 percent success rate on benchmark factorizations up to N=143. This work connects fundamental quantum theory with practical quantum computing applications.
+We present a comprehensive theoretical framework for quantum computing based on the T0 time-mass duality theory. The central result is a rigorous proof that the $\phi$-hierarchical quantum Fourier transform ($\phi$-QFT) for period finding in Shor's algorithm is functionally equivalent to the standard QFT, while offering additional stability through Bell-corrected entanglement damping. We establish three fundamental mechanisms: (1) energy field superposition as a deterministic alternative to probabilistic collapse, (2) local correlation fields that explain Bell violations without nonlocality, and (3) fractal damping that suppresses decoherence. The theory makes precise theoretical predictions; the central one is a CHSH deviation of order $\xi \sim 10^{-5}$ from the Tsirelson bound. Hardware measurements (May 2026, IBM Heron r2) confirm clear Bell violation ($S = 2.74$, $96.9\%$ of the Tsirelson bound) and the runnability of T0 circuits; the $\xi$-effect itself lies far below current NISQ noise and is not resolvable with present hardware. We provide a complete Python implementation demonstrating 100 percent success rate on benchmark factorizations up to N=143. This work connects fundamental quantum theory with practical quantum computing applications.
 
 
 \clearpage
@@ -242,7 +242,7 @@ For quantum computing applications where $R/r > 10^{12}$ (all practical scenario
 	\item \textbf{Physically exact:} Equivalent to torus geometry in the appropriate limit
 	\item \textbf{Computationally optimal:} $O(n^2)$ vs. $O(n^3)$ operations
 	\item \textbf{Numerically stable:} No singularities or convergence problems
-	\item \textbf{Experimentally validated:} CHSH = 2.827888 agrees with IBM data to within 0.014 percent
+	\item \textbf{Hardware-tested:} clear Bell violation measured ($S = 2.74$, 96.9\% of Tsirelson); the $\xi$-level deviation is below current NISQ noise
 \end{itemize}
 
 $\Rightarrow$ \textbf{Recommended implementation for all T0 quantum computing applications at atomic scale.}
@@ -566,7 +566,7 @@ The additional $\xipar$ term represents the $\xi$-resonance scan, which is negli
 
 \subsection{Hardware Tests on 73-Qubit and 127-Qubit Systems}
 
-We performed experimental validation on IBM Quantum processors Brisbane and Sherbrooke (127 physical qubits) during 2025.
+Initial validation runs were performed on IBM Quantum (Brisbane, Sherbrooke; 127 physical qubits each) during 2025. An extended, statistically robust repetition was carried out on 28 May 2026 on \texttt{ibm\_kingston} (Heron r2, 156 qubits) with 50 independent runs; the values in this section refer to that 50-run measurement.
 
 \subsubsection{Bell State Fidelity Tests}
 
@@ -576,192 +576,91 @@ We performed experimental validation on IBM Quantum processors Brisbane and Sher
 		\item Apply Hadamard gate to qubit 0
 		\item Apply CNOT with control=0, target=1
 		\item Measure both qubits
-		\item Repeat for 2048 shots
+		\item Repeat for 2048 shots, 50 independent runs
 	\end{itemize}
 \end{experimentbox}
 
-\textbf{Results from 3 independent runs on Sherbrooke:}
+\textbf{Results from 50 independent runs on \texttt{ibm\_kingston} (28 May 2026):}
 
 \begin{table}[h]
 	\centering
-	\caption{Bell state fidelity: Experimental results}
+	\caption{Bell state fidelity: Experimental results (50 runs)}
 	\label{tab:bell_fidelity}
-	\begin{tabular}{@{}lccccc@{}}
+	\begin{tabular}{@{}lcccc@{}}
 		\toprule
-		Run & $P(|00\rangle)$ & $P(|11\rangle)$ & $P(|01\rangle)$ & $P(|10\rangle)$ & Fidelity \\
+		Quantity & $P(|00\rangle)$ & $P(|11\rangle)$ & Leakage & Fidelity \\
 		\midrule
-		1 & 0.500000 & 0.500000 & 0.000000 & 0.000000 & 1.000 \\
-		2 & 0.464844 & 0.465210 & 0.034960 & 0.035000 & 0.930 \\
-		3 & 0.496094 & 0.495950 & 0.003906 & 0.004050 & 0.992 \\
-		\midrule
-		\textbf{Average} & \textbf{0.487} & \textbf{0.487} & \textbf{0.013} & \textbf{0.013} & \textbf{0.974} \\
+		Mean & 0.5091 & 0.4785 & 0.0124 & 0.9876 \\
+		Std dev & 0.0112 & 0.0109 & --- & 0.0028 \\
 		\bottomrule
 	\end{tabular}
 \end{table}
 
 \textbf{Statistical Analysis:}
 \begin{align}
-	\text{Mean fidelity} &= 0.974 \pm 0.036 \\
-	\text{Variance} &= 0.000248 \\
-	\text{Standard deviation} &= 0.0157
+	\text{Mean fidelity} &= 0.9876 \pm 0.0028 \\
+	\text{Variance } P(|00\rangle) &= 1.249 \times 10^{-4} \\
+	\text{Shot-noise expectation} &= 0.25/2048 = 1.221 \times 10^{-4}
 \end{align}
 
 \textbf{Comparison with standard QM expectation:}
 \begin{itemize}
-	\item QM expected variance: $\sim 0.01$
-	\item Observed variance: $0.000248$
-	\item \textbf{Improvement: 40× more deterministic than QM prediction!}
+	\item Ratio of observed variance to shot-noise: $1.02$
+	\item The repeatability variance is \textbf{statistically consistent} with ordinary quantum shot-noise.
 \end{itemize}
 
-\begin{keyresult}[Chi-square test for T0 compatibility]
-	Test of null hypothesis: Data consistent with T0 prediction $P(|00\rangle) = 0.5$
+\begin{important}
+	\textbf{Correction (May 2026):} An earlier analysis (3 runs, 2025) reported a variance of $0.000248$ and interpreted it as "40× more deterministic than QM". The extended 50-run measurement refutes this claim: the variance is indistinguishable from shot-noise (ratio $1.02$). Three runs were statistically too few; the claimed deterministic variance reduction does not hold. The high Bell fidelity remains confirmed.
+\end{important}
+
+\begin{keyresult}[Chi-square test for repeatability]
+	Null hypothesis: variance of $P(|00\rangle)$ equals the shot-noise variance.
 	\begin{equation}
-		\chi^2 = \sum_{i=1}^{3} \frac{(P_i - 0.5)^2}{\sigma^2} = 3.47, \quad p = 0.176
+		\chi^2 = (n-1)\,s^2/\sigma_0^2 = 50.14, \quad \mathrm{df}=49, \quad p = 0.856
 	\end{equation}
-	\textbf{Conclusion:} $p > 0.05$ $\Rightarrow$ Data \textbf{compatible} with T0 theory at 95 percent confidence level.
+	\textbf{Conclusion:} $p \gg 0.05$ $\Rightarrow$ the observed variance is fully consistent with pure shot-noise. No evidence of sub-shot-noise determinism.
 \end{keyresult}
 
 \subsection{CHSH Parameter Measurements}
 
-\subsubsection{73-Qubit System Results}
+On 28 May 2026 a real CHSH-parameter measurement was carried out on hardware (15 measurements on \texttt{ibm\_kingston}, 10 on \texttt{ibm\_marrakesh}, four angle settings each, 2048 shots). It is the first hardware-measured CHSH determination of this corpus, fully documented with job IDs.
 
-\textbf{Observed CHSH value:} $S_{\text{obs}} = 2.8275 \pm 0.0002$ (from 2025 IBM data)
+\subsubsection{Measurement setup}
 
-\textbf{$\xi$ parameter fit:}
-Fitting T0 model to observations yields:
-\begin{equation}
-	\xi_{\text{fit}}(73) = (2.29 \pm 0.26) \times 10^{-4}
-\end{equation}
-
-\textbf{Comparison with theory:}
-\begin{align}
-	\xi_{\text{base}} &= 1.333 \times 10^{-4} \quad \text{(Higgs prediction)} \\
-	\xi_{\text{fit}} / \xi_{\text{base}} &= 1.72 \pm 0.19 \\
-	\text{Excess} &= 72\% \pm 19\%
-\end{align}
-
-\textbf{Interpretation:} The excess is consistent with hardware imperfections in the 73-qubit system. Smaller chips experience higher relative noise due to edge effects and calibration errors.
+Alice angles $a=0°$, $a'=45°$; Bob $b=22.5°$, $b'=-22.5°$. Correlator $E = [N_{00}-N_{01}-N_{10}+N_{11}]/N$. CHSH combination $S = E(a,b)+E(a,b')+E(a',b)-E(a',b')$.
 
 \begin{table}[h]
 	\centering
-	\caption{CHSH values: Theory vs. experiment (73-qubit)}
-	\label{tab:chsh_73}
-	\begin{tabular}{@{}lcc@{}}
+	\caption{CHSH measurement: Hardware results (28 May 2026)}
+	\label{tab:chsh_real}
+	\begin{tabular}{@{}lccccc@{}}
 		\toprule
-		Method & CHSH value & $\Delta$ vs. observation (\%) \\
+		Device & Measurements & Mean $S$ & SE & \% Tsirelson & Bell violation \\
 		\midrule
-		Standard QM & 2.828427 & 0.035 \\
-		T0 theory ($\xi_{\text{base}}$) & 2.827888 & 0.014 \\
-		T0 fitted ($\xi_{\text{fit}}$) & 2.827500 & 0.000 \\
-		IBM observed & 2.827500 & --- \\
-		Monte Carlo (corrected) & $2.8274 \pm 0.0001$ & 0.004 \\
+		\texttt{ibm\_kingston} & 15 & 2.7396 & 0.0071 & 96.9\% & 105\,$\sigma$ \\
+		\texttt{ibm\_marrakesh} & 10 & 2.7016 & 0.0138 & 95.5\% & 51\,$\sigma$ \\
+		\textbf{pooled} & \textbf{25} & \textbf{2.7244} & \textbf{0.0078} & \textbf{96.3\%} & --- \\
 		\bottomrule
 	\end{tabular}
 \end{table}
 
-\subsubsection{127-Qubit System Results (Sherbrooke)}
+\textbf{Reference values:} Tsirelson bound $2\sqrt{2} = 2.8284$; classical bound $2.0$.
 
-\textbf{Observed CHSH value:} $S_{\text{obs}} = 2.8278 \pm 0.0001$
+\begin{keyresult}[Bell violation confirmed]
+	The measured CHSH value $S = 2.74$ lies $105\,\sigma$ (Kingston) above the classical bound. Local realism is excluded; the entanglement generated is genuine. At 96.9\% of the Tsirelson bound this is an excellent result for NISQ hardware.
+\end{keyresult}
 
-\textbf{Fitted $\xi$ parameter:}
-\begin{equation}
-	\xi_{\text{fit}}(127) = (1.37 \pm 0.03) \times 10^{-4}
-\end{equation}
+\subsubsection{Deviation from the Tsirelson bound}
 
-\textbf{Remarkable agreement:}
-\begin{align}
-	\xi_{\text{fit}} / \xi_{\text{base}} &= 1.03 \pm 0.02 \\
-	\text{Excess} &= 3\% \pm 2\%
-\end{align}
+The measured value lies $3.14\%$ below $2\sqrt{2}$. The mean correlator magnitude is $0.685$ instead of the ideal $0.707$ --- corresponding to $\sim 1.5\%$ gate and readout error (NISQ characteristic). This deviation is \textbf{decoherence, not the $\xi$-effect}: the predicted $\xi$-effect is $\sim 10^{-5}$ (order $0.001\%$ of $S$), about $3000\times$ smaller than the measured gap.
 
-The 127-qubit system shows \textbf{nearly perfect agreement} with theoretical $\xi$, indicating better hardware quality and calibration on the larger chip.
+\begin{important}
+	\textbf{Correction (May 2026):} Earlier versions of this section cited CHSH values of $2.8275$ (73-qubit) and $2.8278$ (127-qubit) "from 2025 data" with $\xi$ values fitted to them. These values are not substantiated in the available hardware records and are replaced by the direct measurement of 28 May 2026 ($S = 2.74$). The documented 2025 hardware validation run concerned only Bell-state generation, not the CHSH parameter.
+\end{important}
 
-\begin{table}[h]
-	\centering
-	\caption{CHSH values: Theory vs. experiment (127-qubit)}
-	\label{tab:chsh_127}
-	\begin{tabular}{@{}lcc@{}}
-		\toprule
-		Method & CHSH value & $\Delta$ vs. observation (\%) \\
-		\midrule
-		Standard QM & 2.828427 & 0.024 \\
-		T0 theory ($\xi_{\text{base}}$) & 2.827818 & 0.0006 \\
-		T0 fitted ($\xi_{\text{fit}}$) & 2.827800 & 0.0000 \\
-		IBM observed & 2.827800 & --- \\
-		\bottomrule
-	\end{tabular}
-\end{table}
+\subsubsection{Cross-platform finding on the measurability of $\xi$}
 
-\subsection{Monte Carlo Validation}
-
-To verify the experimental results, we performed 10,000 Monte Carlo simulations:
-
-\begin{lstlisting}[language=Python, caption={Corrected Monte Carlo simulation}]
-	def simulate_chsh(xi, n_qubits=73, n_runs=10000):
-	settings = [(0, pi/4), (0, 3*pi/4), (pi/2, pi/4), (pi/2, 3*pi/4)]
-	chsh_vals = []
-	
-	for _ in range(n_runs):
-	correlations = [-cos(a - b) * exp(-xi * log(n_qubits) / D_f)
-	for a, b in settings]
-	chsh = abs(corr[0] - corr[1] + corr[2] + corr[3])
-	chsh_vals.append(chsh + noise)
-	
-	return mean(chsh_vals), std(chsh_vals) / sqrt(n_runs)
-\end{lstlisting}
-
-\textbf{Results (73-qubit):}
-\begin{equation}
-	S_{\text{MC}} = 2.8274 \pm 0.0001
-\end{equation}
-
-\textbf{Statistical comparison:}
-\begin{align}
-	|S_{\text{MC}} - S_{\text{obs}}| &= 0.0001 \\
-	Z\text{-score} &= -1.27\sigma \\
-	p\text{-value} &= 0.204
-\end{align}
-
-\textbf{Conclusion:} $p > 0.05$ $\Rightarrow$ Monte Carlo results \textbf{compatible} with IBM observations.
-
-\subsection{Comparison of 73-Qubit vs. 127-Qubit Systems}
-
-\begin{table}[h]
-	\centering
-	\caption{System comparison: $\xi$ parameter scaling}
-	\label{tab:system_comparison}
-	\begin{tabular}{@{}lcccc@{}}
-		\toprule
-		System & $N$ qubits & $\xi_{\text{fit}}$ ($\times 10^{-4}$) & $\xi/\xi_{\text{base}}$ & CHSH (observed) \\
-		\midrule
-		Theory & --- & 1.333 & 1.00 & --- \\
-		73-qubit & 73 & $2.29 \pm 0.26$ & $1.72 \pm 0.19$ & 2.8275 \\
-		127-qubit & 127 & $1.37 \pm 0.03$ & $1.03 \pm 0.02$ & 2.8278 \\
-		\bottomrule
-	\end{tabular}
-\end{table}
-
-\textbf{Key observations:}
-\begin{enumerate}
-	\item \textbf{Scaling trend:} Larger systems show $\xi$ closer to theoretical value
-	\item \textbf{Hardware quality:} 127-qubit chip has 3 percent excess vs. 72 percent for 73-qubit
-	\item \textbf{Perfect agreement:} Sherbrooke (127) agrees to within 0.0006 percent with theory
-\end{enumerate}
-
-\textbf{Physical interpretation:}
-The discrepancy can be modeled as:
-\begin{equation}
-	\xi_{\text{eff}}(N) = \xi_{\text{base}} \cdot \left(1 + \frac{\epsilon_{\text{hw}}}{N^{\alpha}}\right)
-\end{equation}
-where $\epsilon_{\text{hw}}$ represents hardware noise and $\alpha \approx 0.5$--$1.0$ characterizes scaling.
-
-Fitting to our two data points:
-\begin{align}
-	\epsilon_{\text{hw}} &\approx 5.2 \\
-	\alpha &\approx 0.65
-\end{align}
-
-This suggests hardware imperfections scale as $N^{-0.65}$, with larger systems achieving better performance.
+Two identical-model Heron r2 chips differ in their measured CHSH value by $0.038$ ($\approx 1.4\%$ of $S$; Welch $t$-test $t=2.46$, $p=0.028$), purely through calibration and noise differences. Since the sought $\xi$-effect is $\sim 1400\times$ smaller than this device-to-device variation, the $\xi$-prediction is \textbf{in principle not resolvable} with present NISQ hardware --- a directly measured, not merely estimated, finding. The $\xi$-test requires error-corrected qubits with sub-ppm, device-stable precision.
 
 \subsection{73-Qubit Bell Test}
 
@@ -932,12 +831,12 @@ We have presented a comprehensive theoretical and experimental validation of qua
 
 \subsection{Experimental Validation}
 
-\textbf{3. IBM Quantum hardware tests (2025)}
+\textbf{3. IBM Quantum hardware tests (2025 + May 2026)}
 \begin{itemize}
-	\item \textbf{Bell fidelity:} 97.4 percent average with 40× lower variance than QM prediction
-	\item \textbf{73-qubit CHSH:} $2.8275 \pm 0.0002$, compatible with T0 (Δ = 0.014 percent)
-	\item \textbf{127-qubit CHSH:} $2.8278 \pm 0.0001$, nearly perfect agreement (Δ = 0.0006 percent)
-	\item \textbf{Statistical significance:} All tests compatible at 95 percent CL ($p > 0.05$)
+	\item \textbf{Bell fidelity:} 98.8 percent (50 runs, ibm\_kingston, May 2026); variance consistent with shot-noise (ratio 1.02) --- the earlier "40×" claim is refuted
+	\item \textbf{CHSH (measured):} $S = 2.74$ (96.9 percent of the Tsirelson bound), clear Bell violation (105\,$\sigma$ over classical)
+	\item \textbf{$\xi$ measurability:} device-to-device variation ($\approx 1.4$ percent) exceeds the $\xi$-effect by $\sim 1400\times$; not resolvable with NISQ hardware
+	\item \textbf{Runnability:} T0 circuits execute cleanly on production hardware
 \end{itemize}
 
 \textbf{4. Monte Carlo validation}
