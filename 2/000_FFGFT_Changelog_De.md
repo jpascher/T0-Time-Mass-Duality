@@ -1,7 +1,7 @@
 # FFGFT Changelog
 ## Korrekturen und Präzisierungen der Dokumentenserie
 **Grundlage:** Dok. 190 (allgemein) und Dok. 210 (Wicklungszahlen)
-**Stand:** Mai 2026 (zuletzt erweitert: 27. Mai 2026 — N261, N013-INFO, K2-Nachtrag)
+**Stand:** Mai 2026 (zuletzt erweitert: 30. Mai 2026 — N261, N013-INFO, K2-Nachtrag, N255-257-Verschaltung, HW147, HW147-Folge, Dok-230)
 
 ---
 
@@ -817,3 +817,159 @@ Die frühere Festlegung „ν_τ bleibt 8/3" (K2-Erweiterung) ist **revidiert**.
 | ID | Status | Bemerkung |
 |----|--------|-----------|
 | K2-Nachtrag | ✓ 27. Mai 2026 | vollständige Einarbeitung: 016 EN, 046 DE+EN, 116 EN; ν_τ → 25/9 |
+
+---
+
+## N255-257-Verschaltung — Korpus-Integration der Informations-Dokumente (27. Mai 2026)
+
+**Anlass:** Die Dokumente 255 (Information aus Geometrie) und 257 (Informations-Brücke FFGFT ↔ UC) waren als Einzeldokumente vorhanden, aber im Korpus nicht querverschaltet. Verbindung zu Dok. 230 (Hilbertraum-Brücke) und Dok. 260 (UC-FFGFT-Vergleich) hergestellt.
+
+### Eingearbeitete Querverweise
+
+- **Dok. 230 §9 (Konsequenz):** Verweis auf Dok. 255 für die informationstheoretische Lesart der Übersetzbarkeit.
+- **Dok. 257 §Einleitung:** Verweis auf Dok. 260 als ausgearbeitete Bridge-Case-Vorlage.
+- **Dok. 260 §2 (Strukturparallelen):** Querverweis auf Dok. 255 für die geometrische Information-aus-Geometrie-Position.
+
+### Was nicht geändert wurde
+
+- Inhaltliche Substanz der vier Dokumente unverändert.
+- Keine Strukturänderung an den Wrappern.
+- Bibliographie-Einträge bleiben gleich.
+
+### Verifikation
+
+LaTeX-Umgebungen balanciert in allen vier Dokumenten (DE+EN); keine zerbrochenen Querverweise; PDF-Build erfolgreich.
+
+### Status
+
+| ✓ | Erledigt DE | 27. Mai 2026 |
+| ✓ | Erledigt EN | 27. Mai 2026 |
+
+---
+
+## HW147 — Dok. 147 §8: Hardware-Validierung auf echte Messung korrigiert (28. Mai 2026)
+
+**Anlass:** Eigene Hardware-Läufe auf IBM Quantum (28. Mai 2026, ibm_kingston / ibm_marrakesh, beide Heron r2, 156 Qubit) zur Überprüfung der in Dok. 147 §8 berichteten Zahlen. Abgleich mit dem Juni-2025-Hardware-Validierungsreport ergab, dass mehrere §8-Behauptungen entweder durch die neuen Daten widerlegt oder in den verfügbaren Aufzeichnungen nicht belegt sind.
+
+### Korrigierte Behauptungen (DE+EN parallel)
+
+| Stelle | Vorher (unbelegt/widerlegt) | Nachher (echte Messung) |
+|--------|------------------------------|--------------------------|
+| Bell-Treue-Tabelle | 3 Läufe, „Treue 1,000", Varianz 0,000248 | 50 Läufe, Fidelität 98,76 %, Varianz 1,249·10⁻⁴ |
+| „40× deterministischer als QM" | behauptet | widerlegt: Varianz-Verhältnis 1,02, χ²-p = 0,86 |
+| CHSH 73-Qubit | S = 2,8275 „aus 2025-Daten" | nicht belegt → ersetzt durch S = 2,7396 (gemessen) |
+| CHSH 127-Qubit | S = 2,8278, „nahezu perfekte ξ-Übereinstimmung" | nicht belegt → ersetzt durch echte Messung |
+| ξ-Fit-Tabellen (73/127) | ξ_fit angepasst an unbelegte CHSH-Werte | entfernt (Datengrundlage fehlt) |
+| Monte-Carlo „kompatibel mit IBM-Beobachtung" | stützte sich auf unbelegte 2,8275 | entfernt |
+| Abstract „CHSH ~10⁻³ in 73-Qubit testbar" | überzogen | ehrlich: ξ ~10⁻⁵, unter NISQ-Rauschen |
+| „Experimentell validiert: CHSH = 2,827888" | überzogen | „Hardware-getestet: S = 2,74, Bell-Verletzung" |
+| Schluss-Zusammenfassung | wiederholte alle obigen Werte | echte Werte + ξ-Messbarkeitsbefund |
+
+### Neue, belegte Datenlage in §8
+
+- **Bell-Wiederholbarkeit (50 Läufe):** Fidelität 98,76 %; Varianz mit Shot-Noise verträglich (1,02; p = 0,86). Die deterministische Varianzreduktion besteht nicht.
+- **CHSH (gemessen):** S = 2,7396 ± 0,0071 (Kingston, 15 Messungen), 96,9 % der Tsirelson-Schranke, 105 σ über klassisch. Klare Bell-Verletzung.
+- **Cross-Platform:** Marrakesh S = 2,7016; Geräte-zu-Geräte-Differenz 0,038 (Welch t = 2,46, p = 0,028). Diese Variation übersteigt den ξ-Effekt um ~1400× → ξ mit NISQ-Hardware prinzipiell nicht auflösbar (empirisch, nicht geschätzt).
+- Zwei `important`-Korrektur-Boxen dokumentieren die Änderungen im Dokument selbst.
+
+### Methodische Befunde
+
+- Die unbelegten CHSH-Werte 2,8275/2,8278 stammten aus reinen Fitting-Skripten (bell_73qubit_fit.py, bell_2025_sherbrooke_fit.py), die diese Werte als hardcoded Input nahmen; keine Roh-Aufzeichnungen (Job-IDs, Counts) existieren dafür im Archiv. Der dokumentierte 2025-Lauf betraf ausschließlich Bell-Zustands-Generierung.
+- Im ersten Auswertungslauf des CHSH-Skripts (Stufe 2) wurde eine zu den Winkeln nicht passende Vorzeichenkombination verwendet (Ergebnis fälschlich S ≈ 0); aus denselben Rohdaten korrekt rekombiniert ergibt sich S = 2,7396, ohne erneuten Hardware-Lauf.
+
+### Verifikation
+
+- begin/end-Umgebungen balanciert (DE+EN), keine zerbrochenen Tabellen, keine hängenden \ref auf gelöschte Tabellen-Labels (tab:chsh_73, tab:chsh_127, tab:system_comparison entfernt).
+- Reports erstellt: Bell_Wiederholbarkeit_Report_2026-05-28.md (DE) + _En.md, mit vollständigen Job-IDs.
+- Rohdaten archiviert: bell_repeatability_2026.csv (50 Zeilen), chsh_stage2_2026.csv, chsh_stage2_marrakesh_2026.csv.
+
+### Status
+
+| ✓ | Erledigt DE | 28. Mai 2026 |
+| ✓ | Erledigt EN | 28. Mai 2026 |
+
+---
+
+## HW147-Folge — Folgedokumente korrigiert (28. Mai 2026)
+
+**Anlass:** Im Anschluss an HW147 wurden weitere Dokumente geprüft, die dieselben unbelegten 2,8275/2,8278-Werte oder die 0,974-Fidelität enthielten. Pro Dokument geprüft, ob die unbelegten Werte eigene Behauptung sind (korrigiert) oder legitime Theorie/Fehltreffer (unverändert).
+
+### Korrigiert (DE+EN), unbelegte Hardware-Werte ersetzt/markiert
+
+- **Dok. 148 (scramblons):** IBM-Geräte-Zeilen (Brisbane/Sherbrooke) in der Cross-Platform-Tabelle als „Supraleitend (Vorhersage)" relabelt; keyresult-Übereinstimmungsbehauptung durch Verweis auf echte Messung (S=2,74) ersetzt.
+- **Dok. 022 (QFT-ML-Addendum):** „2025-Daten S≈2,8275"-Fit-Grundlage durch Korrektur-Box ersetzt; CHSH-Werte als theoretisch markiert; ξ-Fit als gegenstandslos gekennzeichnet (Formel als Skalenstruktur erhalten).
+- **Dok. 035 (QM):** Testbarkeits-Vorhersage als theoretisch markiert; Korrektur-Box vor dem „2025-Daten identifiziert"-Arbeitsnotiz-Abschnitt.
+- **Dok. 202 (Feldtheorie-Gesamt):** Verweis auf Dok. 147 von „ΔCHSH~10⁻³" auf „theoretischer ξ-Effekt ~10⁻⁵, unter NISQ-Rauschen; Hardware S=2,74" aktualisiert (zwei Stellen).
+
+### Unverändert — legitime theoretische Vorhersage (kein Hardware-Claim)
+
+- **Dok. 023, 023a (Bell):** CHSH 2,828→2,827 ist die theoretische ξ-Dämpfung; 73-Qubit-Lie-Detector als *zukünftiger* Test zitiert (sciencedaily2025) — korrekt.
+- **Dok. 175 (Qubit-Zustandsräume):** „2√2→2,8275" ist theoretische ξ-Dämpfung, kein Messwert.
+
+### Unverändert — Fehltreffer (kein Bezug zu Bell/Fidelität)
+
+- **Dok. 041:** „0,974" ist das CKM-Matrixelement |V_ud|.
+- **Dok. 155:** „40-fach" bezieht sich auf DNA-Datenkompression.
+
+### PDF-Ausgabe
+
+Alle vier korrigierten Dokumente in DE+EN als PDF gebaut (XeLaTeX, echte Standalone-Präambel, 6×9). Wrapper unverändert (nur ch/-Kapitelinhalt geändert, Struktur gleich). Sandbox-Caveat: Math = Latin Modern (statt Libertinus), keine deutsche Silbentrennung wie unter LuaLaTeX.
+
+### Status
+
+| ✓ | Erledigt DE | 28. Mai 2026 |
+| ✓ | Erledigt EN | 28. Mai 2026 |
+
+---
+
+## Dok-230 — Operationale Äquivalenz und interpretative Divergenz (30. Mai 2026)
+
+**Anlass:** Nach der Hardware-Validierung (HW147) wurde im Gespräch deutlich, dass die in Dok. 230 (Hilbertraum-Brücke) etablierte „vollständige Übersetzbarkeit" als ontologische Identität fehlgelesen werden konnte. FFGFT teilt mit der Standard-QM die *messbaren* Vorhersagen (bis auf ξ-Korrekturen), aber nicht alle *ontologischen Interpretationen* — Letzteres wird in der Standard-Lesart bestimmter Grundbegriffe als Artefakt der unvollständigen Trägerannahmen gelesen, nicht als fundamentale Eigenschaft der Natur. Diese Klärung gehört explizit in Dok. 230.
+
+### Eingearbeitete Änderungen (DE+EN parallel)
+
+**1. Neue Sektion „Operationale Äquivalenz und interpretative Divergenz"** zwischen „Konsequenz: Erweiterung, nicht Ersatz" und „Zusammenfassung" eingefügt. Inhalt:
+
+- Eröffnungsabsatz: ξ → 0 reproduziert die *Zahlen* der Standard-QM, nicht notwendigerweise deren ontologische Lesart.
+- **Fünf Punkte** mit jeweils Standardlesart / FFGFT-Lesart / „operational gleich, interpretativ verschieden":
+  - Born-Regel als irreduzibler Zufall vs. deterministische Polübergangs-Dynamik auf T⁴
+  - Nicht-Lokalität in ℝ³ vs. topologische Verbindung auf T⁴
+  - ℏ als ontologische Primitive vs. SI-Konversionsfaktor aus S=h
+  - Raumzeit als gegebene Bühne vs. aus T⁴-Geometrie abgeleitet
+  - Singularitäten als physikalische Endpunkte vs. Endpunkte des Trägermodells
+- Zwei Schlussabsätze: „Methodischer Status" und „Operationale Äquivalenz" (mit Verweis auf Hardware-Validierung Mai 2026, Dok. 147 §8).
+
+**2. Vorbemerkung verfeinert:** Frühere Formulierung „QM ist eine Untermenge von FFGFT" durch differenziertere Aussage ersetzt — „Beide Formalismen liefern dieselben messbaren Vorhersagen (bis auf ξ-Korrektur), unterscheiden sich aber in der ontologischen Lesart einiger Grundbegriffe". Verweis auf den neuen Abschnitt; Dok. 202 §22 als breiterer Querverweis erhalten.
+
+**3. Zusammenfassung umstrukturiert in vier Untertitel:**
+
+- „Was vollständig übersetzbar ist" (sechs formale Punkte: Zustände, Operatoren, Gatter, Tensorprodukte, Messung, Evolution) — explizit als „auf der formalen Ebene"
+- „Was FFGFT zusätzlich liefert" (vier Mehrwert-Punkte: α/m_i/ξ-Herleitung, K_frak, Bell-Auflösung, CHSH-Vorhersage) — explizit als „außerhalb dessen, was reine Hilbertraum-QM leistet"
+- „Wo die Interpretation auseinandergeht" (fünf Punkte als kompakte Liste, Querverweis auf den neuen Abschnitt; Schluss: „Operational identisch; interpretativ verschieden")
+- „Methodische Position" (verfeinert: „bestätigt auf der Vorhersageebene und erweitert auf der strukturellen; widerlegt nichts, was QM messbar aussagt; schlägt aber eine andere ontologische Lesart einiger Grundbegriffe vor")
+
+### Verifikation
+
+- LaTeX-Umgebungen balanciert in beiden Sprachen (DE: 828 Zeilen, EN: 811 Zeilen).
+- Keine offenen `\ref`; zwei ursprünglich gesetzte Labels (sec:messung, sec:bell) durch Plain-Sektionsnamen ersetzt — konsistent mit dem übrigen Verweisstil von Dok. 230.
+- PDFs gebaut: DE 21 Seiten, EN 20 Seiten (XeLaTeX, echte Standalone-Präambel). Stichprobe bestätigt alle vier neuen Subsektions-Titel und die fünf Interpretations-Punkte im Output.
+
+### Methodischer Anlass dokumentiert
+
+Die Erweiterung schließt eine Lücke, die durch die Hardware-Validierung (HW147) sichtbar wurde: Wenn ξ ~10⁻⁵ unter dem aktuellen NISQ-Rauschen liegt, dann ist „FFGFT als Erweiterung der QM" nicht durch eine Messung der ξ-Differenz von der Standard-Lesart abgrenzbar. Die Abgrenzung muss interpretativ-strukturell erfolgen — und das wird jetzt explizit gemacht. Die fünf Punkte sind keine empirischen Behauptungen gegen Standard-QM, sondern Interpretationsdifferenzen, die sichtbar werden, sobald nach dem ontologischen Träger der Theorie gefragt wird.
+
+### Status
+
+| ✓ | Erledigt DE | 30. Mai 2026 |
+| ✓ | Erledigt EN | 30. Mai 2026 |
+
+---
+
+### Übersichtstabelle — Nachtrag (Fortsetzung 2)
+
+| ID | Status | Bemerkung |
+|----|--------|-----------|
+| N255-257-Verschaltung | ✓ 27. Mai 2026 | Querverweise zwischen Dok. 230/255/257/260 hergestellt |
+| HW147 | ✓ 28. Mai 2026 | Dok. 147 §8 auf echte Messung korrigiert (S = 2,74); „40×" widerlegt |
+| HW147-Folge | ✓ 28. Mai 2026 | Folgedok. 148/022/035/202 (DE+EN) korrigiert + PDF; 023/023a/175 legitime Vorhersage; 041/155 Fehltreffer |
+| Dok-230 | ✓ 30. Mai 2026 | Neue Sektion „Operationale Äquivalenz und interpretative Divergenz" (5 Punkte); Vorbemerkung und Zusammenfassung überarbeitet |
