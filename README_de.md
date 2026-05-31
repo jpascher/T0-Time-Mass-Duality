@@ -2,6 +2,10 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20355305.svg)](https://doi.org/10.5281/zenodo.20355305)
 
+> Das DOI-Badge oben verweist noch auf v1.1.1. Die DOI für das neue
+> Release v1.1.2 (Buchserien-Neuauflage) wird beim Zenodo-Upload
+> vergeben und hier ergänzt.
+
 **FFGFT (Fundamentale Fraktale Geometrische Feldtheorie)** leitet alle Standardmodell-Konstanten — Teilchenmassen, α, G, ℏ, c — aus einem einzigen dimensionslosen Parameter **ξ = 4/3 × 10⁻⁴** auf einem 4D-Identifikationstorus T⁴ her. Die Grundrelation lautet **T̃ · m = 1** (Zeit-Masse-Dualität). Keine freien Parameter. Alle Konstanten sind geometrische Konsequenzen.
 
 **Autor:** Johann Pascher · johann.pascher@gmail.com  
@@ -46,7 +50,34 @@
 
 ---
 
-## Aktuelles Release: v1.1.1 (Mai 2026)
+## Aktuelles Release: v1.1.2 (Mai 2026)
+
+**Schwerpunkt: Komplette Neuauflage der Kindle-Buchserie.** Die
+Buchsammlung wird von drei auf **fünf Bände** erweitert und liegt jetzt
+in drei KDP-Formaten vor: eBook 6×9, Taschenbuch 8.5×11 und Hardcover
+8.25×11 — jeweils auf Deutsch und Englisch. Vollständige Details:
+**[RELEASE_NOTES_v1_1_2_de.md](RELEASE_NOTES_v1_1_2_de.md)**
+
+Was sich gegenüber v1.1.1 ändert:
+
+- **Bände 1–3 neu gebaut** mit allen Korrekturen seit Februar 2026
+  (HW147-Korrektur in Dok. 147 §8, Folgedokument-Updates, Dok. 230
+  erweitert).
+- **Bände 4 und 5 ergänzt**, die Sammlung um 74 Dokumente erweitert,
+  die seit der ursprünglichen Drei-Band-Konzeption hinzugekommen
+  sind — Hilbertraum-Bijektion, Falsifikationstrilogie,
+  Schichten/Skalenleiter, IPI-Brücken, Schwarzloch-Information, duale
+  Ordnungsprinzipien, epistemische Selbstpositionierung.
+- **Jeder Band jetzt in drei KDP-Formaten** (eBook + Taschenbuch +
+  Hardcover), auf Deutsch und Englisch: insgesamt 30 PDFs.
+- **Technische Verbesserungen:** alle 650 Tabellen in 206 ch-Dateien
+  in `\adjustbox{max width=\textwidth}{...}` gewrappt für
+  Kindle-Breite; `T0_preamble_patches.tex` ergänzt fehlende
+  Environments; Typo-Korrektur in `Teil2-end`.
+
+---
+
+## Vorheriges Release: v1.1.1 (Mai 2026)
 
 11 neue Dokumente in fünf Clustern. Vollständige Details: **[RELEASE_NOTES_v1_1_1_de.md](RELEASE_NOTES_v1_1_1_de.md)**
 
@@ -96,6 +127,7 @@ T0-Time-Mass-Duality/
 │       ├── ch/       # LaTeX-Kapitelquellen (*_ch.tex)
 │       ├── wrapper/  # Eigenständige LaTeX-Wrapper
 │       └── pri-end/  # Gemeinsame LaTeX-Präambeln
+├── books/            # NEU: KDP-fertige PDFs (5 Bände × 2 Sprachen × 3 Formate)
 ├── rsa/              # RSA-Faktorisierungs-Demos
 └── sig/              # Signalanalyse-Tools
 ```
@@ -104,9 +136,31 @@ LaTeX-Struktur: Wrapper-Dateien in `2/fixed/wrapper/` referenzieren `../pri-end/
 
 ---
 
-## Veröffentlichte Bücher (13 Bände, Amazon KDP)
+## Veröffentlichte Bücher — Amazon KDP (v1.1.2)
 
-Kindle- und Taschenbuchausgaben auf Deutsch und Englisch — Teil 1–3, FFGFT Narrative Master („Das Kosmische Gehirn"), T0 Anwendungen („Sieben Rätsel der Physik"), Von α=1 zur vollständigen Physik. PDF-Versionen in `2/pdf/` und `2/tex-n/completed/`.
+Die Buchsammlung ist jetzt eine **Fünf-Band-Serie** in **drei KDP-Formaten**:
+
+| Format | Größe | KDP-Typ | Seitenlimit |
+|--------|-------|---------|-------------|
+| eBook | 6 × 9 Zoll | Kindle eBook | ≤ 550 |
+| Taschenbuch | 8,5 × 11 Zoll | KDP Print Paperback | ≤ 828 |
+| Hardcover | 8,25 × 11 Zoll | KDP Print Hardcover | ≤ 550 |
+
+Jeder Band ist auf Deutsch und Englisch verfügbar.
+
+| Band | Inhalt | Dok. | eBook DE | Taschenbuch DE | Hardcover DE |
+|------|--------|------|----------|----------------|--------------|
+| Teil 1 | Grundlagen, ξ, Konstanten, Einheiten | 40 | 533 | 452 | 459 |
+| Teil 2 | Lagrangian, QFT, QM-Tests | 36 | 505 | 423 | 427 |
+| Teil 3 | Kosmologie, Bewusstsein | 35 | 487 | 412 | 415 |
+| Teil 4 | Frühe Erweiterungen (bis Dok. 184) | 37 | 473 | 407 | 414 |
+| Teil 5 | Schichten, Hilbertraum-Brücke, jüngste Klärungen | 37 | 506 | 436 | 438 |
+
+Alle Seitenzahlen innerhalb der KDP-Limits. PDF-Versionen in `books/`.
+
+Zusätzliche Einzelausgaben (FFGFT Narrative Master „Das Kosmische
+Gehirn", T0 Anwendungen „Sieben Rätsel der Physik", Von α=1 zur
+vollständigen Physik) in `2/tex-n/completed/`.
 
 ---
 
@@ -114,6 +168,7 @@ Kindle- und Taschenbuchausgaben auf Deutsch und Englisch — Teil 1–3, FFGFT N
 
 | Version | DOI | Inhalt |
 |---------|-----|--------|
+| v1.1.2 | (wird beim Upload vergeben) | Komplette Buchserien-Neuauflage (5 Bände × 3 KDP-Formate) |
 | v1.1.1 | [20355305](https://doi.org/10.5281/zenodo.20355305) | IPI-Brücken, Schwarzloch-Information, duale Ordnung |
 | v1.1.0 | [20117635](https://doi.org/10.5281/zenodo.20117635) | Hilbertraum-Bijektion (Herzstück) |
 | v1.0.14 | [20041543](https://doi.org/10.5281/zenodo.20041543) | Dreieck-Matrix-Reduktion, Falsifikationstrilogie |

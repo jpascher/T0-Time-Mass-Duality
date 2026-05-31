@@ -2,6 +2,10 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20355305.svg)](https://doi.org/10.5281/zenodo.20355305)
 
+> The DOI badge above still points to v1.1.1. The DOI for the new
+> release v1.1.2 (book series re-edition) will be assigned upon
+> Zenodo upload and added here.
+
 **FFGFT (Fundamental Fractal-Geometric Field Theory)** derives all Standard Model constants — particle masses, α, G, ℏ, c — from a single dimensionless parameter **ξ = 4/3 × 10⁻⁴** on a 4D identification torus T⁴. The foundational relation is **T̃ · m = 1** (time-mass duality). No free parameters. All constants are geometric consequences.
 
 **Author:** Johann Pascher · johann.pascher@gmail.com  
@@ -46,7 +50,33 @@
 
 ---
 
-## Current Release: v1.1.1 (May 2026)
+## Current Release: v1.1.2 (May 2026)
+
+**Focus: complete Kindle book series re-edition.** The book collection
+is expanded from three to **five volumes** and now exists in three KDP
+formats: eBook 6×9, Paperback 8.5×11, and Hardcover 8.25×11 — in both
+German and English. Full details: **[RELEASE_NOTES_v1_1_2.md](RELEASE_NOTES_v1_1_2.md)**
+
+What's new compared to v1.1.1:
+
+- **Volumes 1–3 rebuilt** with all corrections since February 2026
+  (HW147 correction in Doc. 147 §8, follow-up document updates, Doc. 230
+  extended).
+- **Volumes 4 and 5 added**, extending the collection by 74 documents
+  added since the original three-volume conception — Hilbert-space
+  bijection, falsification trilogy, layers/scale ladder, IPI bridges,
+  black-hole information, dual ordering principles, epistemic
+  self-positioning.
+- **Each volume now in three KDP formats** (eBook + Paperback + Hardcover),
+  in German and English: 30 PDFs in total.
+- **Technical improvements:** all 650 tables in 206 ch files wrapped in
+  `\adjustbox{max width=\textwidth}{...}` for Kindle width;
+  `T0_preamble_patches.tex` adds missing environments; typo correction
+  in `Teil2-end`.
+
+---
+
+## Previous Release: v1.1.1 (May 2026)
 
 Adds 11 new documents across five clusters. Full details: **[RELEASE_NOTES_v1_1_1.md](RELEASE_NOTES_v1_1_1.md)**
 
@@ -96,6 +126,7 @@ T0-Time-Mass-Duality/
 │       ├── ch/       # LaTeX chapter sources (*_ch.tex)
 │       ├── wrapper/  # Standalone LaTeX wrappers
 │       └── pri-end/  # Shared LaTeX preambles
+├── books/            # NEW: KDP-ready PDFs (5 volumes × 2 langs × 3 formats)
 ├── rsa/              # RSA factorization demos
 └── sig/              # Signal analysis tools
 ```
@@ -104,9 +135,31 @@ LaTeX structure: wrapper files in `2/fixed/wrapper/` reference `../pri-end/T0_pr
 
 ---
 
-## Published Books (13 volumes, Amazon KDP)
+## Published Books — Amazon KDP (v1.1.2)
 
-Kindle and paperback editions in German and English — Teil 1–3, FFGFT Narrative Master ("The Cosmic Brain"), T0 Anwendungen ("Seven Mysteries of Physics"), Von α=1 zur vollständigen Physik. PDF versions in `2/pdf/` and `2/tex-n/completed/`.
+The book collection is now a **five-volume series** in **three KDP formats**:
+
+| Format | Size | KDP type | Page limit |
+|--------|------|----------|------------|
+| eBook | 6 × 9 in | Kindle eBook | ≤ 550 |
+| Paperback | 8.5 × 11 in | KDP Print Paperback | ≤ 828 |
+| Hardcover | 8.25 × 11 in | KDP Print Hardcover | ≤ 550 |
+
+Each volume is available in both German and English.
+
+| Volume | Content | Docs | eBook DE | Paperback DE | Hardcover DE |
+|--------|---------|------|----------|--------------|--------------|
+| Teil 1 | Foundations, ξ, constants, units | 40 | 533 | 452 | 459 |
+| Teil 2 | Lagrangian, QFT, QM tests | 36 | 505 | 423 | 427 |
+| Teil 3 | Cosmology, consciousness | 35 | 487 | 412 | 415 |
+| Teil 4 | Early extensions (up to Doc. 184) | 37 | 473 | 407 | 414 |
+| Teil 5 | Layers, Hilbert bridge, recent | 37 | 506 | 436 | 438 |
+
+All page counts within KDP limits. PDF versions in `books/`.
+
+Additional standalone editions (FFGFT Narrative Master "The Cosmic Brain",
+T0 Anwendungen "Seven Mysteries of Physics", Von α=1 zur vollständigen
+Physik) in `2/tex-n/completed/`.
 
 ---
 
@@ -114,6 +167,7 @@ Kindle and paperback editions in German and English — Teil 1–3, FFGFT Narrat
 
 | Version | DOI | Key Content |
 |---------|-----|-------------|
+| v1.1.2 | (assigned upon upload) | Complete book series re-edition (5 volumes × 3 KDP formats) |
 | v1.1.1 | [20355305](https://doi.org/10.5281/zenodo.20355305) | IPI bridges, black hole information, dual ordering |
 | v1.1.0 | [20117635](https://doi.org/10.5281/zenodo.20117635) | Hilbert-space bijection (centrepiece) |
 | v1.0.14 | [20041543](https://doi.org/10.5281/zenodo.20041543) | Triangle–matrix reduction, falsification trilogy |
