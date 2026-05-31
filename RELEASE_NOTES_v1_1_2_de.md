@@ -4,7 +4,7 @@
 > Fünf-Band-Sammlung in drei KDP-Formaten — Erweiterung um alle nach
 > v1.1.0 hinzugekommenen Dokumente.
 
-**DOI:** wird bei Zenodo-Upload vergeben (Platzhalter im README)
+**DOI:** [10.5281/zenodo.20474821](https://doi.org/10.5281/zenodo.20474821)
 
 ---
 

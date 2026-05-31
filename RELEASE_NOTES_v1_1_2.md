@@ -4,7 +4,7 @@
 > five-volume collection in three KDP formats — extension to include
 > all documents added since v1.1.0.
 
-**DOI:** assigned upon Zenodo upload (placeholder in README)
+**DOI:** [10.5281/zenodo.20474821](https://doi.org/10.5281/zenodo.20474821)
 
 ---
 

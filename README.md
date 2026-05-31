@@ -1,10 +1,6 @@
 # T0 Time-Mass Duality · FFGFT
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20355305.svg)](https://doi.org/10.5281/zenodo.20355305)
-
-> The DOI badge above still points to v1.1.1. The DOI for the new
-> release v1.1.2 (book series re-edition) will be assigned upon
-> Zenodo upload and added here.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20474821.svg)](https://doi.org/10.5281/zenodo.20474821)
 
 **FFGFT (Fundamental Fractal-Geometric Field Theory)** derives all Standard Model constants — particle masses, α, G, ℏ, c — from a single dimensionless parameter **ξ = 4/3 × 10⁻⁴** on a 4D identification torus T⁴. The foundational relation is **T̃ · m = 1** (time-mass duality). No free parameters. All constants are geometric consequences.
 
@@ -19,7 +15,7 @@
 |----------|------|
 | 🔬 Interactive Portal (Hugging Face) | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages (Tools & HTML) | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo Archive v1.1.1 | [DOI 10.5281/zenodo.20355305](https://doi.org/10.5281/zenodo.20355305) |
+| 📦 Zenodo Archive v1.1.2 | [DOI 10.5281/zenodo.20474821](https://doi.org/10.5281/zenodo.20474821) |
 | 🎵 Audio Library (Spotify) | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
@@ -167,7 +163,7 @@ Physik) in `2/tex-n/completed/`.
 
 | Version | DOI | Key Content |
 |---------|-----|-------------|
-| v1.1.2 | (assigned upon upload) | Complete book series re-edition (5 volumes × 3 KDP formats) |
+| v1.1.2 | [20474821](https://doi.org/10.5281/zenodo.20474821) | Complete book series re-edition (5 volumes × 3 KDP formats) |
 | v1.1.1 | [20355305](https://doi.org/10.5281/zenodo.20355305) | IPI bridges, black hole information, dual ordering |
 | v1.1.0 | [20117635](https://doi.org/10.5281/zenodo.20117635) | Hilbert-space bijection (centrepiece) |
 | v1.0.14 | [20041543](https://doi.org/10.5281/zenodo.20041543) | Triangle–matrix reduction, falsification trilogy |

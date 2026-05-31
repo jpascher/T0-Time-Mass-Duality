@@ -1,10 +1,6 @@
 # T0 Zeit-Masse-Dualität · FFGFT
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20355305.svg)](https://doi.org/10.5281/zenodo.20355305)
-
-> Das DOI-Badge oben verweist noch auf v1.1.1. Die DOI für das neue
-> Release v1.1.2 (Buchserien-Neuauflage) wird beim Zenodo-Upload
-> vergeben und hier ergänzt.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20474821.svg)](https://doi.org/10.5281/zenodo.20474821)
 
 **FFGFT (Fundamentale Fraktale Geometrische Feldtheorie)** leitet alle Standardmodell-Konstanten — Teilchenmassen, α, G, ℏ, c — aus einem einzigen dimensionslosen Parameter **ξ = 4/3 × 10⁻⁴** auf einem 4D-Identifikationstorus T⁴ her. Die Grundrelation lautet **T̃ · m = 1** (Zeit-Masse-Dualität). Keine freien Parameter. Alle Konstanten sind geometrische Konsequenzen.
 
@@ -19,7 +15,7 @@
 |-----------|------|
 | 🔬 Interaktives Portal (Hugging Face) | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages (Tools & HTML) | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo Archiv v1.1.1 | [DOI 10.5281/zenodo.20355305](https://doi.org/10.5281/zenodo.20355305) |
+| 📦 Zenodo Archiv v1.1.2 | [DOI 10.5281/zenodo.20474821](https://doi.org/10.5281/zenodo.20474821) |
 | 🎵 Audiobibliothek (Spotify) | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
@@ -168,7 +164,7 @@ vollständigen Physik) in `2/tex-n/completed/`.
 
 | Version | DOI | Inhalt |
 |---------|-----|--------|
-| v1.1.2 | (wird beim Upload vergeben) | Komplette Buchserien-Neuauflage (5 Bände × 3 KDP-Formate) |
+| v1.1.2 | [20474821](https://doi.org/10.5281/zenodo.20474821) | Komplette Buchserien-Neuauflage (5 Bände × 3 KDP-Formate) |
 | v1.1.1 | [20355305](https://doi.org/10.5281/zenodo.20355305) | IPI-Brücken, Schwarzloch-Information, duale Ordnung |
 | v1.1.0 | [20117635](https://doi.org/10.5281/zenodo.20117635) | Hilbertraum-Bijektion (Herzstück) |
 | v1.0.14 | [20041543](https://doi.org/10.5281/zenodo.20041543) | Dreieck-Matrix-Reduktion, Falsifikationstrilogie |

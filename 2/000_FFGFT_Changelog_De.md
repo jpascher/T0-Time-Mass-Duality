@@ -1,7 +1,7 @@
 # FFGFT Changelog
 ## Korrekturen und Präzisierungen der Dokumentenserie
 **Grundlage:** Dok. 190 (allgemein) und Dok. 210 (Wicklungszahlen)
-**Stand:** Mai 2026 (zuletzt erweitert: 31. Mai 2026 — Bücher-Neuauflage v1.1.2: Fünf-Band-Serie in drei KDP-Formaten)
+**Stand:** Mai 2026 (zuletzt erweitert: 31. Mai 2026 — Bücher-Neuauflage v1.1.2 / DOI 10.5281/zenodo.20474821)
 
 ---
 
@@ -1035,6 +1035,8 @@ Präfix 262 statt 162/163 gewählt: Dok. 262 folgt thematisch auf Dok. 261 (Stat
 ---
 
 ## Bücher-Neuauflage v1.1.2 (Mai 2026) — Fünf Bände, drei KDP-Formate
+
+**DOI:** [10.5281/zenodo.20474821](https://doi.org/10.5281/zenodo.20474821) — Zenodo-Release v1.1.2
 
 **Anlass:** Die bisherige Drei-Band-Sammlung (Teil 1–3) war im Februar
 2026 zuletzt veröffentlicht worden und enthielt weder die Korrekturen
