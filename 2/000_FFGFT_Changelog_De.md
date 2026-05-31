@@ -1,7 +1,7 @@
 # FFGFT Changelog
 ## Korrekturen und Präzisierungen der Dokumentenserie
 **Grundlage:** Dok. 190 (allgemein) und Dok. 210 (Wicklungszahlen)
-**Stand:** Mai 2026 (zuletzt erweitert: 30. Mai 2026 — N261, N013-INFO, K2-Nachtrag, N255-257-Verschaltung, HW147, HW147-Folge, Dok-230, Dok-162, Dok-163)
+**Stand:** Mai 2026 (zuletzt erweitert: 30. Mai 2026 — N261, N013-INFO, K2-Nachtrag, N255-257-Verschaltung, HW147, HW147-Folge, Dok-230, Dok-262)
 
 ---
 
@@ -976,35 +976,48 @@ Die Erweiterung schließt eine Lücke, die durch die Hardware-Validierung (HW147
 
 ---
 
-## Dok-162 — Akzeptanz ohne Anschauung: Zum erkenntnistheoretischen Status von T⁴ (30. Mai 2026)
+## Dok-262 — Akzeptanz ohne Anschauung und Innensicht der dekompaktifizierten Zeit (30. Mai 2026)
 
-**Anlass:** Im Gespräch über die Vermittelbarkeit der 4D-Trägergeometrie wurde deutlich, dass die übliche didaktische Herangehensweise — eine räumliche Anschauung von T⁴ zu erzeugen — methodisch in die Irre führt. Räumliche Vorstellbarkeit ist seit über hundert Jahren kein Akzeptanzkriterium der Physik mehr (komplexwertige Wellenfunktionen, Minkowski-Raumzeit, Hilberträume, Eichgruppen, Spinoren sind alle nicht vorstellbar und dennoch akzeptiert). Das neue Dokument macht diese epistemische Position explizit und positioniert FFGFT in der Tradition der modernen Physik, statt gegen sie.
+**Anlass:** Zwei zuvor getrennt geplante Dokumente (Dok. 162: epistemische Selbstpositionierung; Dok. 163: positive Innensicht-Lesart) wurden zu einem einzigen Dokument unter neuem Präfix Dok. 262 zusammengeführt. Sachlich gehören die beiden Teile zusammen — ohne Teil A (negative Seite) würde Teil B (positive Seite) als Esoterik missverstanden; ohne Teil B bliebe Teil A rein defensiv. Das gemeinsame Dokument macht die FFGFT-Position zur Vorstellbarkeit von T⁴ vollständig.
 
-### Inhalt
+### Struktur
 
-Sechs Sektionen, parallel DE+EN:
+Zwei Teile, parallel DE+EN, je 6 nummerierte Sektionen (12 insgesamt):
 
-1. **Was nicht vorstellbar ist, ist nicht unverständlich** — Liste der akzeptierten unvorstellbaren mathematischen Konstrukte: imaginäre Zahlen (mit Gauß'scher Erweiterung als historischem Akzeptanz-Schritt), komplexwertige Wellenfunktionen, Minkowski mit ict, unendlich-dimensionale Hilberträume, Eichgruppen, Spinoren mit 4π-Periodizität, Calabi-Yau-Räume. Als historisches Pendant: negative Zahlen — niemand konnte sich „−3 Äpfel" vorstellen, *aber* „drei geborgte Äpfel" sehr wohl. Die Lektion: nicht die Anschauung änderte sich, sondern der Beschreibungsrahmen wechselte (von Apfel-Inventar zu Schuldbeziehung).
+**Teil A — Akzeptanz ohne Anschauung: Zum erkenntnistheoretischen Status von T⁴**
 
-2. **Das tatsächliche Akzeptanzkriterium** — interne Konsistenz und prüfbare Konsequenzen. Beide *strukturell, nicht visuell*. Vorstellbarkeit als psychologisches Phänomen, kein erkenntnistheoretisches.
+1. **Was nicht vorstellbar ist, ist nicht unverständlich** — Liste der akzeptierten unvorstellbaren Konstrukte: imaginäre Zahlen (mit Gauß'scher Erweiterung), komplexwertige Wellenfunktionen, Minkowski mit ict, Hilberträume, Eichgruppen, Spinoren mit 4π-Periodizität, Calabi-Yau-Räume. Negative Zahlen als historisches Pendant — niemand konnte sich „−3 Äpfel" vorstellen, aber „drei geborgte Äpfel" sehr wohl: nicht die Anschauung änderte sich, sondern der Beschreibungsrahmen wechselte.
+2. **Das tatsächliche Akzeptanzkriterium** — interne Konsistenz und prüfbare Konsequenzen. Vorstellbarkeit als psychologisches Phänomen, kein erkenntnistheoretisches.
+3. **T⁴ als strukturelle Außenperspektive** — mathematische Konstrukte machen sichtbar, was aus jeder Innenperspektive heraus unvollständig wäre. Drei Beispiele: Lorentz-Geometrie, Wellenfunktion, Eichgruppe. T⁴ steht in dieser Reihe.
+4. **Was das nicht ist** — drei Abgrenzungen: keine privilegierte Außenposition, keine ontologische Behauptung, keine Forderung nach Vorstellung.
+5. **Konsequenz für die Diskussion von FFGFT** — wer T⁴ wegen Unvorstellbarkeit ablehnt, müsste auch komplexwertige Wellenfunktion, Lorentz mit ict, Hilberträume, Spinoren und Eichgruppen ablehnen. Verweis auf Konsistenz (Dok. 001a, 181, 193, 230) und Konsequenzen (Dok. 147 §8, Bell 96,9 %).
+6. **Zusammenfassung** Teil A: „Die Vorstellung muss nicht visuell sein, um wirksam zu sein."
 
-3. **T⁴ als strukturelle Außenperspektive** — die Pointe: was die genannten Konstrukte gemeinsam haben, ist mehr als ihre Unanschaulichkeit; sie sind alle *Außenperspektiven* auf Systeme, die aus jeder Innen-Wahrnehmung heraus unvollständig blieben. Lorentz-Geometrie, Wellenfunktion im Hilbertraum, Eichgruppen-innere-Struktur — drei Beispiele. T⁴ steht in dieser Reihe: nicht eine Anschauung, sondern eine Außensprache, in der QM und ART nicht widersprüchlich erscheinen.
+**Teil B — Zeit als Modus, Masse als Verformung, Fraktalität als Innensicht der dekompaktifizierten Zeit**
 
-4. **Was das nicht ist** — drei Abgrenzungen: keine privilegierte Außenposition, keine ontologische Behauptung „die Welt ist wirklich T⁴", keine Forderung nach Vorstellung. Das Dokument macht *keinen* Vorstellungs-Anspruch.
-
-5. **Konsequenz für die Diskussion von FFGFT** — wer T⁴ wegen Unvorstellbarkeit ablehnt, müsste auch komplexwertige Wellenfunktion, Lorentz mit ict, Hilberträume, Spinoren, Eichgruppen ablehnen — und damit die halbe moderne Physik. Die maßgeblichen Fragen werden konkret beantwortet: interne Konsistenz (Verweis auf Dok. 001a, 181, 193, 230) und prüfbare Konsequenzen (Dok. 147 §8 mit Bell-Verletzung 96,9 % der Tsirelson-Schranke, Mai 2026).
-
-6. **Zusammenfassung** — Schlusssatz: „Die Vorstellung muss nicht visuell sein, um wirksam zu sein." Direkte Antwort auf den Ausgangseinwand „keine Darstellung = keine Vorstellung".
+1. **Zeit als Modus, nicht als Bühne** — auf T⁴ sind alle vier Koordinaten gleichberechtigt periodisch; „kontinuierlich fließende Zeit" ist die phänomenale Auflösung eines diskreten Modus. Konsistent mit ℏ als SI-Konversionsfaktor (Dok. 001a, 230) und T̃·m=1 als strikter Reziprozität.
+2. **Geborgte Zeit: T̃ und Energie als reziproke Lesarten** — die Apfel-Parallele aus Teil A wird auf die Zeit übertragen: wie negative Zahlen erst akzeptierbar wurden, als der Rahmen von „Apfel-Inventar" zu „Schuldbeziehung" wechselte, ist T̃ in FFGFT keine offene Zeitkoordinate, sondern eine reziproke Lesart der energetischen Wirkung auf T⁴ — *geborgte Energie*. T̃·m=1 als strukturelle Schuldbeziehung. Alle dynamischen Größen (T̃, m, Impuls, Frequenz, Wellenzahl) als verschiedene Skalierungsachsen einer einzigen energetischen Wirkung; nicht-energetisches Substrat ist allein die Topologie von T⁴ selbst. Vorbereitet §3 (Masse als Verformung): Krümmung und Energie als zwei Aspekte desselben, nicht als zwei wechselwirkende Dinge.
+3. **Masse als Verformung des Trägers** — ART-Krümmung übertragen auf T⁴ als lokale Verformung der geschlossenen Geometrie; ART als linear-inertialer Grenzfall.
+4. **T⁴ als skalen-strukturelle, nicht skalen-metrische Aussage** — Antwort auf die Frage „welche Skala hat der Torus?". T⁴ ist kein Objekt mit fester Längenskala, sondern eine *strukturelle Eigenschaft*, deren Schließungs-Invariante ξ skaleninvariant ist. Auf jeder Skala dasselbe Schließungsprinzip mit skala-spezifischer Auflösung — nicht „viele Tori", sondern eine strukturelle (nicht metrische) Aussage. Empirische Spur: ξ erscheint als *dieselbe* dimensionslose Zahl in fünf unabhängigen Kontexten (Lepton-Massen, Higgs-Formel, α, LiNbO₃-Dispersion auf 16 Stellen Dok. 167, Koide). Strukturelle Parallele zur Renormierungsgruppe: dasselbe theoretische Muster auf verschiedenen Skalen mit skalenabhängigen effektiven Manifestationen. Konsistent mit Dok. 182 (kein universeller maximaler Umfang; jede Skala hat eine system-spezifische obere Schranke). Anknüpfung an §2: so wie T̃ und m reziproke Lesarten derselben Wirkung sind, sind die Tori auf verschiedenen Skalen dieselbe strukturelle Eigenschaft auf je anderen Auflösungs-Achsen.
+5. **Fraktalität als Phänomen der Innensicht** — Kernpunkt: Selbst-Iteration braucht eine Richtung „vorher → nachher"; auf einem geschlossenen Modus existiert sie nicht. Die fraktale Struktur (K_frak, Lepton-Massenkaskade, π-Gatter) ist ein Phänomen der dekompaktifizierten Zeit, kein Träger-Merkmal. **Strukturelle Parallele zur Born-Regel-Lesart** aus Dok. 230: zwei Phänomene (Quantenzufall, fraktale Korrekturen) als Konsequenzen derselben Dekompaktifizierung. **Rechnerischer Beweis (Schluss-Absatz)** mit Verweis auf Dok. 261: In natürlichen Einheiten (ℏ=c=1) ist die FFGFT-Beschreibung korrekturfrei; die fraktalen Korrekturen erscheinen erst beim Übersetzen in SI. Damit ist die Fraktalität-als-Innensicht-Lesart nicht nur ontologische Klärung, sondern *rechnerisch nachweisbarer Befund*: dieselbe physikalische Aussage in zwei Einheitensystemen — eine zeigt die Korrekturen, die andere nicht. Schicht 1 (kompakt, statisch) vs. Schicht 2 (dekompaktifiziert, SI-Projektion).
+6. **Innensicht-Metapher: Gehirnwindungen und das Licht** — Gehirnwindungs-Metapher *explizit* eingeführt mit wörtlicher Einrahmung „Innensicht-Metapher, nicht ontologische Behauptung". Sagt nicht „T⁴ sieht aus wie ein Gehirn"; sagt: sobald Zeit dekompaktifiziert wird, erlebt der Beobachter im Inneren eine fraktal verwundene Erfahrungsgeometrie, für die das Bild zutreffend ist. Lichtbeispiel: außen geradlinig, innen den Falten folgend. Drei Bullet-Points: was die Metapher leistet, was sie nicht ist, wo sie gilt.
+7. **Konsequenzen** — drei Aussagen als gemeinsame strukturelle Linie: Zeit nicht ausgezeichnet, Masse als Trägerverformung, Fraktalität als Innensicht-Phänomen.
+8. **Zusammenfassung** Teil B: „Die Außenbeschreibung ist einfach. Die Innenwelt, in der wir leben, ist verwunden. Beide Beschreibungen sind nicht im Widerspruch — sie sind die zwei Seiten desselben Übergangs."
 
 ### Methodische Einordnung
 
-Das Dokument ist eine epistemische Selbstpositionierung in der Reihe der methodisch-grundlegenden Schriften (analog zu Dok. 001a und Dok. 230). Es macht eine Lücke im Korpus explizit: bislang wurde nirgends festgehalten, *wie* FFGFT die Frage „dann müsste man sich T⁴ doch vorstellen können" wissenschaftlich saubere Form beantwortet. Diese Antwort wird jetzt mit Verweis auf bewährte Beispiele (negative Zahlen, imaginäre Zahlen, Hilberträume) gegeben — und die Antwort ist: Vorstellbarkeit ist nicht das Kriterium, war es seit über hundert Jahren nicht.
+Dok. 262 ist die epistemische Selbstpositionierung von FFGFT in vollständiger Form. Es klärt nach außen, dass Unvorstellbarkeit kein Ablehnungsgrund ist (Teil A), und nach innen, welche Innensicht-Bilder zulässig sind und wo ihre Grenzen liegen (Teil B). Die strukturelle Parallele zwischen Born-Regel und fraktaler Innengeometrie (Teil B §5) ist ein neues Verständnis-Resultat im Korpus: zwei Phänomene, die in der Standard-Physik unverbunden sind, erscheinen in FFGFT als Konsequenzen derselben Zeit-Dekompaktifizierung. Ergänzt um Teil B §2 („Geborgte Zeit") wird zusätzlich die Apfel-Schuld-Parallele aus Teil A auf die Energie-Zeit-Dualität übertragen: T̃ als geborgte Energie, T̃·m=1 als strukturelle Schuldbeziehung. Damit schließt sich der Bogen zwischen Teil A und Teil B auch begrifflich, nicht nur strukturell. Hinzu kommt der rechnerische Beweis am Ende von Teil B §5: dass die Fraktalität in natürlichen Einheiten gar nicht erscheint und erst beim Übersetzen in SI auftritt (Verweis Dok. 261), macht die Lesart-Klärung zu einem operationalen Befund. Die Probe ist die Rechnung selbst.
+
+### Präfix-Wahl
+
+Präfix 262 statt 162/163 gewählt: Dok. 262 folgt thematisch auf Dok. 261 (Statische Geometrie und SI-Projektion) und Dok. 260 (UC-FFGFT-Vergleich) und gehört in den 260er-Block der methodisch-grundlegenden Schriften. Die Nummern 162 und 163 sind damit unbelegt und stehen für zukünftige Arbeiten in der 160er-Reihe wieder zur Verfügung.
 
 ### Verifikation
 
 - LaTeX-Umgebungen balanciert in beiden Sprachen.
-- PDFs gebaut: DE 8 Seiten, EN 9 Seiten (XeLaTeX, echte Standalone-Präambel).
-- Stichprobe bestätigt alle Schlüsselbegriffe und den Schlusssatz in beiden Sprachen.
+- Inhaltsstruktur: 2 \\part-Trennungen mit Vorbemerkungen, 14 nummerierte Sektionen (6+8) pro Sprache.
+- PDFs gebaut: DE 20 Seiten, EN 20 Seiten (XeLaTeX, echte Standalone-Präambel).
+- Stichprobe bestätigt: Teil-A-Inhalte (geborgte Äpfel, akzeptierte unvorstellbare Konstrukte), Teil-B-Inhalte (Zeit als Modus, Gehirnwindungs-Metapher mit Einrahmung) und alle Schlüsselsätze in beiden Sprachen vorhanden.
 
 ### Status
 
@@ -1017,51 +1030,4 @@ Das Dokument ist eine epistemische Selbstpositionierung in der Reihe der methodi
 
 | ID | Status | Bemerkung |
 |----|--------|-----------|
-| Dok-162 | ✓ 30. Mai 2026 | Neues methodisch-grundlegendes Dokument (DE+EN, PDF): Akzeptanz ohne Anschauung — Vorstellbarkeit ist kein Akzeptanzkriterium der modernen Physik |
-
----
-
-## Dok-163 — Zeit als Modus, Masse als Verformung, Fraktalität als Innensicht der dekompaktifizierten Zeit (30. Mai 2026)
-
-**Anlass:** Die Klärung in Dok. 162 („Akzeptanz ohne Anschauung") hat die negative Seite festgehalten — Vorstellbarkeit ist kein Akzeptanzkriterium der modernen Physik. Im weiteren Gespräch wurde deutlich, dass die positive Ergänzung fehlt: *was eine zugelassene Innensicht-Metaphorik leisten kann*. Daraus entstand die Lesart: Auf T⁴ ist Zeit ein Modus unter vier gleichberechtigten zyklischen Koordinaten, Masse erscheint als Verformung des Trägers, und die fraktale Struktur, die FFGFT überall sieht, ist kein Merkmal des Trägers selbst, sondern ein Phänomen, das beim Übergang in die dekompaktifizierte Zeitbeschreibung entsteht.
-
-### Inhalt
-
-Sechs Sektionen, parallel DE+EN:
-
-1. **Zeit als Modus, nicht als Bühne** — Auf T⁴ sind alle vier Koordinaten gleichberechtigt periodisch. Die Aufteilung „drei Raumdimensionen plus eine Zeit" ist eine Beschreibungswahl, nicht eine Eigenschaft des Trägers. Konsistent mit ℏ als SI-Konversionsfaktor (Dok. 001a, 230) und mit T̃·m=1 als strikter Reziprozität, nicht als offener Zeitkoordinate.
-
-2. **Masse als Verformung des Trägers** — Was die ART als Raumzeit-Krümmung beschreibt, ist auf T⁴ eine lokale Verformung der geschlossenen Geometrie. ART als linear-inertialer Grenzfall, in dem die globale Schließung unsichtbar bleibt. Singularitäten erscheinen strukturell anders (Querverweis Dok. 230 §Operationale Äquivalenz).
-
-3. **Fraktalität als Phänomen der Innensicht** — Der Kernpunkt: Solange Zeit ein diskreter Modus ist, gibt es keine echte Selbst-Iteration (Rekursion braucht eine Richtung „vorher → nachher"). Die fraktale Struktur (K_frak, Lepton-Massenkaskade, π-Gatter) ist ein *Phänomen der dekompaktifizierten Zeit*, kein ontologisches Merkmal des Trägers. Strukturelle Parallele zur Born-Regel-Lesart aus Dok. 230: beide Phänomene — scheinbarer Zufall und fraktale Innengeometrie — sind Konsequenzen *derselben Dekompaktifizierung*. Damit erscheinen zwei sonst unverbundene Befunde der Standard-Physik (Quantenzufall, fraktale Korrekturen) als Manifestationen einer einzigen Ursache.
-
-4. **Innensicht-Metapher: Gehirnwindungen und das Licht** — Die Gehirnwindungs-Metapher wird *explizit* eingeführt und sauber eingerahmt als „Innensicht-Metapher, nicht ontologische Behauptung". Sie sagt nicht „T⁴ sieht aus wie ein Gehirn", sondern: sobald die Zeit dekompaktifiziert wird, erlebt der Beobachter im Inneren eine fraktal verwundene Erfahrungsgeometrie, für die das Bild der Gehirnfalten zutreffend ist. Lichtbeispiel: außen geradlinig, innen den Falten folgend — beide Beschreibungen nicht im Widerspruch, sondern zwei Seiten desselben Übergangs. Drei explizite Bullet-Points, was die Metapher leistet, was sie nicht ist, und wo sie gilt.
-
-5. **Konsequenzen** — Drei Aussagen werden zum ersten Mal als gemeinsame strukturelle Linie zusammengeführt: Zeit nicht ausgezeichnet, Masse als Trägerverformung, Fraktalität als Innensicht-Phänomen. Methodische Position: keine empirische Verschärfung, keine Rechnungsänderung — eine *Lesart-Klärung*.
-
-6. **Zusammenfassung** — Schlusssatz: „Die Außenbeschreibung ist einfach. Die Innenwelt, in der wir leben, ist verwunden. Beide Beschreibungen sind nicht im Widerspruch — sie sind die zwei Seiten desselben Übergangs."
-
-### Methodische Einordnung
-
-Dok. 163 ist das positive Gegenstück zu Dok. 162. Wo 162 zeigt, was *keine* Vorstellung leistet (räumliche Anschauung von T⁴), zeigt 163, was eine *bewusst eingegrenzte* Innensicht-Metaphorik leistet (Plausibilisierung der Beziehung zwischen einfacher Außenstruktur und komplexer Innenwelt). Die Gehirnwindungs-Metapher hat damit einen kontrollierten Platz im Korpus statt als unkontrollierte Esoterik-Andeutung wirken zu können.
-
-Zugleich ist die strukturelle Parallele zur Born-Regel (§3 von 163) ein neues Ergebnis: zwei Phänomene, die in der Standard-Physik unverbunden sind, erscheinen in FFGFT als Konsequenzen derselben Zeit-Dekompaktifizierung. Das ist ein nicht-triviales Verständnis-Resultat, das vor 163 nicht expliziert war.
-
-### Verifikation
-
-- LaTeX-Umgebungen balanciert in beiden Sprachen.
-- PDFs gebaut: DE 8 Seiten, EN 9 Seiten (XeLaTeX, echte Standalone-Präambel).
-- Stichprobe bestätigt alle Schlüsselbegriffe (Zeit als Modus, Masse als Verformung, Innensicht-Metapher, dekompaktifiziert, Born-Regel-Parallele) und die Einrahmung „Innensicht-Metapher, nicht ontologische Behauptung" in beiden Sprachen.
-
-### Status
-
-| ✓ | Erstellt DE | 30. Mai 2026 |
-| ✓ | Erstellt EN | 30. Mai 2026 |
-
----
-
-### Übersichtstabelle — Nachtrag (Fortsetzung 4)
-
-| ID | Status | Bemerkung |
-|----|--------|-----------|
-| Dok-163 | ✓ 30. Mai 2026 | Positive Ergänzung zu 162: Zeit als Modus, Masse als Trägerverformung, Fraktalität als Innensicht-Phänomen der dekompaktifizierten Zeit; Gehirnwindungs-Metapher explizit eingeführt mit Einrahmung „Innensicht-Metapher, nicht ontologische Behauptung"; strukturelle Parallele zur Born-Regel (Dok. 230) |
+| Dok-262 | ✓ 30. Mai 2026 | Zusammenführung der ursprünglich getrennt geplanten Dok. 162 (Akzeptanz ohne Anschauung) und Dok. 163 (Zeit als Modus, Innensicht-Metaphorik) zu einem Dokument im 260er-Block. Zwei Teile, 14 Sektionen, DE 20 / EN 20 Seiten. Gehirnwindungs-Metapher explizit mit Einrahmung; strukturelle Parallele Born-Regel ↔ Fraktalität als neues Verständnis-Resultat. Teil B §2 „Geborgte Zeit" überträgt die Apfel-Schuld-Parallele auf die Energie-Zeit-Dualität; neuer Teil B §4 „T⁴ als skalen-strukturelle Aussage" klärt die Tori-auf-allen-Skalen-Frage (ξ skaleninvariant, Renormierungsgruppen-Parallele, Querverweise Dok. 167 und 182); Schluss-Absatz von §5 hält den rechnerischen Beweis fest: korrekturfrei in natürlichen Einheiten, fraktale Korrekturen erst beim SI-Übersetzungsschritt (Querverweis Dok. 261).
