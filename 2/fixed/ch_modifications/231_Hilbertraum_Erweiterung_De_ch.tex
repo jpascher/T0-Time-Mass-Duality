@@ -1,0 +1,666 @@
+% ==============================================================================
+% T0/FFGFT-Theorie: Dokument 231
+% Titel: Erweiterungen des Hilbertraum-Formalismus für volle FFGFT
+% Autor: Johann Pascher
+% Datum: Mai 2026
+% Bezug: Dokumente 175 (Qubit-Zustandsräume), 174 (Spin-Qubit), 210 (Wicklungen),
+%        202 (Feldtheorie), 230 (Hilbertraum-Übersetzung)
+% ==============================================================================
+
+\section*{Vorbemerkung}
+
+Dokument~230 hat gezeigt, wie sich FFGFT-Aussagen \emph{in den
+Standard-Hilbertraum übersetzen lassen} -- mit Reduktionen, die bei
+jeder Stufe Information verlieren. Dieses Dokument dreht die
+Frage um:
+
+\begin{quote}
+\itshape
+\enquote{Welche zusätzlichen mathematischen Strukturen muss man dem
+Standard-Hilbertraum hinzufügen, damit er die volle FFGFT-Geometrie
+\textbf{nativ} -- also ohne Reduktion -- abbilden kann?}
+\end{quote}
+
+Die Antwort hat eine bemerkenswerte Eigenschaft: jede notwendige
+Erweiterung entspricht einer \emph{etablierten mathematischen
+Struktur} aus anderen Bereichen der theoretischen Physik. FFGFT
+\enquote{erfindet} keine neue Mathematik; sie ist die spezifische
+Kombination etablierter Erweiterungen, die parameterfrei alle
+Standardmodell-Konstanten liefert.
+
+% ==============================================================================
+\section*{Zeichenerklärung}
+% ==============================================================================
+
+\subsection*{Geometrische Räume und Hilberträume}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{8.2cm}}
+\toprule
+\textbf{Symbol} & \textbf{Bedeutung} \\
+\midrule
+$\mathbb{R}$ & reelle Zahlen \\
+$\mathbb{C}$ & komplexe Zahlen \\
+$\mathbb{C}^2$ & Standard-Qubit-Hilbertraum \\
+$\mathbb{Z}$ & ganze Zahlen (Wicklungsindex) \\
+$\aleph_0$ & abzählbar unendlich (Hilbertraum-Dimension nach Erweiterung 2) \\
+$S^1, S^2$ & Kreis, 2-Sphäre \\
+$T^n$ & $n$-Torus, $n$ kompakte Schleifen \\
+$L^2(M, S)$ & Schnitte des Spinorbündels $S$ über Mannigfaltigkeit $M$ \\
+$\mathcal{H}_{\text{std}}$ & Standard-Hilbertraum \\
+$\mathcal{H}^{T^n}_{\text{FFGFT}}$ & FFGFT-Hilbertraum auf $T^n$ \\
+$\bigoplus_n$ & direkte Summe über Index $n$ \\
+$\bigotimes$ & Tensorprodukt \\
+\bottomrule
+\end{tabular}%
+}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\subsection*{Algebraische Strukturen}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{8.2cm}}
+\toprule
+\textbf{Symbol} & \textbf{Bedeutung} \\
+\midrule
+$SU(2)$ & spezielle unitäre Gruppe (Standard) \\
+$SU_q(2)$ & $q$-deformierte Quantengruppe (Drinfeld-Jimbo) \\
+$q$ & Deformationsparameter, $q = e^{i\pi(1-K_{\text{frak}})} = e^{i\pi/75}$ \\
+$[n]_q$ & $q$-deformierte Zahl, $[n]_q = (q^n - q^{-n})/(q - q^{-1})$ \\
+$\sigma_x, \sigma_y, \sigma_z$ & Pauli-Matrizen \\
+$\sigma_x^{\text{FFGFT}}$ & FFGFT-modifiziertes $\sigma_x = K_{\text{frak}} \sigma_x$ \\
+$[A, B]$ & Kommutator $AB - BA$ \\
+$\{A, B\}$ & Antikommutator $AB + BA$ \\
+$\mathbb{1}$ & Einheitsmatrix \\
+$\delta_{ij}, \epsilon_{ijk}$ & Kronecker-Delta, Levi-Civita-Tensor \\
+\bottomrule
+\end{tabular}%
+}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\subsection*{FFGFT-Geometrie-Parameter}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{8.2cm}}
+\toprule
+\textbf{Symbol} & \textbf{Bedeutung} \\
+\midrule
+$\xi_0 = 4/30000$ & dimensionsloser FFGFT-Geometrieparameter \\
+$\xi$ & alternative Schreibweise für $\xi_0$ \\
+$D_f = 2{,}999867$ & fraktale Raumzeitdimension \\
+$K_{\text{frak}}$ & fraktale Korrektur, $K_{\text{frak}} = 1 - 100\xi_0 \approx 0{,}9867$ \\
+$1 - K_{\text{frak}}$ & Deformationsphase, $\approx 0{,}0133$ \\
+$v$ & Higgs-Vakuumerwartungswert, $\approx 246$ GeV \\
+$\hbar, c$ & Plancksches Wirkungsquantum, Lichtgeschwindigkeit \\
+\bottomrule
+\end{tabular}%
+}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\subsection*{Wicklungsstruktur (Erweiterungen 2 und 4)}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{8.2cm}}
+\toprule
+\textbf{Symbol} & \textbf{Bedeutung} \\
+\midrule
+$n \in \mathbb{Z}$ & zyklische Wicklungs-Quantenzahl (Schleife) \\
+$|\psi; n\rangle$ & Zustand mit Wicklungszahl $n$ \\
+$\mathbb{C}^2_n$ & Qubit-Hilbertraum im $n$-Wicklungssektor \\
+$E_n$ & Energie der $n$-ten Wicklungsanregung \\
+$R$ & Schleifenradius (Hauptradius des Torus) \\
+$a^\dagger, a$ & Erzeugungs- und Vernichtungsoperatoren für Wicklungsanregungen \\
+$k_t \in \mathbb{Z}$ & zeitliche Wicklungs-Quantenzahl \\
+$f(k_t)$ & periodische Energiefunktion der $k_t$-Wicklung \\
+$(n_x, n_y, n_z)$ & räumliche Wicklungs-Quantenzahlen \\
+$(n_\theta, n_\phi)$ & Spin-Wicklungs-Quantenzahlen \\
+\bottomrule
+\end{tabular}%
+}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\subsection*{Operatoren auf Faserbündeln (Erweiterung 3)}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{8.2cm}}
+\toprule
+\textbf{Symbol} & \textbf{Bedeutung} \\
+\midrule
+$\vec L$ & Bahn-Drehimpuls-Operator \\
+$\vec S$ & Spin-Operator \\
+$L_i, S_j$ & Komponenten von $\vec L, \vec S$ \\
+$H_{\text{SO}}$ & Spin-Bahn-Kopplungs-Hamilton \\
+$\xi(r)$ & radiale Spin-Bahn-Kopplungsfunktion \\
+$Z$ & Kernladungszahl \\
+$S$ & Spinorbündel über $T^3$ oder $T^4$ \\
+$\mathcal{D}_{T^4}$ & Dirac-artiger Operator auf $T^4$ \\
+\bottomrule
+\end{tabular}%
+}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\subsection*{Standard-QM-Größen}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{8.2cm}}
+\toprule
+\textbf{Symbol} & \textbf{Bedeutung} \\
+\midrule
+$|\psi\rangle$ & Quantenzustand \\
+$|0\rangle, |1\rangle$ & Berechnungsbasis-Zustände \\
+$\alpha, \beta$ & komplexe Amplituden \\
+$\psi(x,y,z)$ & Ortswellenfunktion \\
+$\omega = 2\pi/T$ & Kreisfrequenz \\
+$E$ & Energie \\
+$m, m_i$ & Masse, Masse des Fermions $i$ \\
+$\alpha$ & Feinstrukturkonstante \\
+$\nabla^2$ & Laplace-Operator \\
+\bottomrule
+\end{tabular}%
+}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+% ==============================================================================
+\section*{Die vier notwendigen Erweiterungen}
+% ==============================================================================
+
+Aus Dok.~230 wissen wir: die Hilbertraum-Übersetzung eines einzelnen
+Qubits passiert auf der Bloch-Sphäre ($S^2$), die durch zwei
+Reduktionen aus der vollen FFGFT-Geometrie entsteht
+($T^4 \to T^3 \to T^2 \to \text{Zylinder} \to S^2$). Jede dieser
+Reduktionen entspricht dem Verlust einer Strukturschicht. Um die
+volle FFGFT zu rekonstruieren, müssen wir vier Erweiterungen
+zurückgewinnen.
+
+\textbf{Übersicht:}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+{\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{>{\raggedright\arraybackslash}p{1.7cm}>{\raggedright\arraybackslash}p{4.0cm}>{\raggedright\arraybackslash}p{4.3cm}}
+\toprule
+\textbf{Stufe} & \textbf{Erweiterung} & \textbf{Mathematisches Vorbild} \\
+\midrule
+$S^2 \to$ Zylinder
+  & deformierte SU(2)-Algebra
+  & Quantengruppen $SU_q(2)$ \\[4pt]
+Zyl.\ $\to T^2$
+  & zusätzliche zyklische Quantenzahl
+  & Kac-Moody-Algebren, Wicklungs-Zustände \\[4pt]
+$T^2 \to T^3$
+  & Bündelstruktur statt Tensorprodukt
+  & Faserbündel, Kaluza-Klein \\[4pt]
+$T^3 \to T^4$
+  & zusätzliche zeitliche Wicklungsdimension
+  & Kaluza-Klein, kompakte Extradimensionen \\
+\bottomrule
+\end{tabular}%
+}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+% ==============================================================================
+\section{Erweiterung 1: deformierte SU(2)-Algebra}
+% ==============================================================================
+
+\subsection{Standard-Pauli-Algebra}
+
+Die Pauli-Matrizen $\sigma_x, \sigma_y, \sigma_z$ erzeugen die
+isotrope $SU(2)$-Algebra:
+\begin{equation}
+  [\sigma_i, \sigma_j] = 2i\epsilon_{ijk}\sigma_k,
+  \qquad
+  \{\sigma_i, \sigma_j\} = 2\delta_{ij}\mathbb{1}.
+\end{equation}
+\enquote{Isotrop} bedeutet hier: alle drei Achsen $x, y, z$ sind
+gleichberechtigt; eine Drehung um $\sigma_x$ ist exakt äquivalent zu
+einer Drehung um $\sigma_z$ nach geeigneter Basisänderung.
+
+\subsection{FFGFT-Anisotropie}
+
+In FFGFT gibt es einen \emph{ausgezeichneten Vorfaktor} für die
+$\sigma_x$-Drehung:
+\begin{equation}
+  \sigma_x^{\text{FFGFT}} = K_{\text{frak}} \cdot \sigma_x,
+  \qquad
+  K_{\text{frak}} = 1 - 100\xi_0 \approx 0{,}9867.
+\end{equation}
+Die $\sigma_y$- und $\sigma_z$-Drehungen sind ungestört. Damit ist
+die Algebra nicht mehr isotrop: $\sigma_x$ ist ausgezeichnet.
+
+\subsection{Mathematische Identifikation: $SU_q(2)$}
+
+Die $SU_q(2)$-Quantengruppe (Drinfeld-Jimbo, 1985) ist die
+$q$-Deformation der $SU(2)$, mit modifizierten Vertauschungsrelationen.
+Im Limes $q \to 1$ wird sie zur Standard-$SU(2)$. Die FFGFT-Anisotropie
+entspricht der Identifikation:
+\begin{equation}
+  \boxed{
+    q = e^{i\pi(1 - K_{\text{frak}})}
+      = e^{i\pi \cdot 100\xi_0}
+      = e^{i\pi/75}
+      \approx 0{,}999 + 0{,}042i.
+  }
+\end{equation}
+
+Die $q$-Phase ist klein ($\pi/75 \approx 0{,}042$ rad), aber
+strukturell signifikant: sie bricht die kugelsymmetrische
+$SU(2)$-Algebra zu einer anisotropen, achsenausgezeichneten Algebra.
+Die Anisotropie ist die mathematische Erinnerung des Zylinders an
+seine Torus-Herkunft.
+
+\subsection{Was diese Erweiterung kostet}
+
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item Hilbertraum bleibt $\mathbb{C}^2$ -- keine Dimensions-Erweiterung.
+  \item Operatoren bleiben $2\times 2$-Matrizen -- keine
+        Matrix-Erweiterung.
+  \item Was sich ändert: die Strukturkonstanten der Algebra
+        (Casimir-Operatoren, Multipliers).
+  \item Konsequenz: alle $\pi$-Gatter weichen systematisch um
+        $0{,}013\,\%$ vom idealen Wert ab (Dok.~175 §3, testbar in
+        Hochpräzisions-Quantengatter-Experimenten).
+\end{itemize}
+
+% ==============================================================================
+\section{\texorpdfstring{Erweiterung 2: zyklische Quantenzahl}{Erweiterung 2: zyklische Quantenzahl}}
+% ==============================================================================
+
+\subsection{Was beim Zylinder fehlt}
+
+Der Zylinder $\mathbb{R} \times S^1$ hat \emph{eine} kompakte
+Schleife (die Phase $\theta$) und \emph{eine} lineare Achse ($z$). Im
+2-Torus $T^2 = S^1 \times S^1$ sind \emph{beide} Achsen kompakt --
+das heißt, $z = +1$ und $z = -1$ sind durch eine zweite Schleife
+verbunden. Im Bloch-Sphäre-Limes (alle Pole zusammenziehen) und
+selbst im Zylinder-Limes (eine Schleife auseinanderziehen) verliert
+man diese Verbindung.
+
+\subsection{Hilbertraum-Erweiterung}
+
+Um die zweite Schleife zu repräsentieren, muss der Hilbertraum eine
+zusätzliche \emph{Wicklungs-Quantenzahl} $n \in \mathbb{Z}$ tragen.
+Statt
+\begin{equation}
+  |\psi\rangle = \alpha|0\rangle + \beta|1\rangle \in \mathbb{C}^2
+\end{equation}
+wird der Zustand
+\begin{equation}
+  |\psi; n\rangle = \alpha|0; n\rangle + \beta|1; n\rangle,
+\end{equation}
+wobei $n$ angibt, wie oft die Mode-Konfiguration die zweite
+Schleife des $T^2$ umläuft. Der Hilbertraum wird:
+\begin{equation}
+  \boxed{
+    \mathcal{H}^{T^2}_{\text{FFGFT}}
+    = \bigoplus_{n \in \mathbb{Z}} \mathbb{C}^2_n.
+  }
+\end{equation}
+Das ist ein \emph{abzählbar unendlich-dimensionaler} Hilbertraum,
+nicht mehr 2-dimensional.
+
+\subsection{Niederenergielimit: warum wir das normalerweise nicht sehen}
+
+Höhere Wicklungs-Anregungen ($n \neq 0$) haben höhere Energie:
+\begin{equation}
+  E_n \sim n^2 \cdot \frac{\hbar^2}{m R^2},
+\end{equation}
+wobei $R$ der Schleifenradius ist. Bei niedrigen Energien ist nur
+$n = 0$ besetzt, und der Hilbertraum reduziert sich effektiv zu
+$\mathbb{C}^2$ -- die Standard-Bloch-Sphäre. Höhere
+$n$-Anregungen werden bei makroskopischen $R$ rasch unsichtbar.
+
+\subsection{Mathematisches Vorbild}
+
+Die Struktur $\bigoplus_n \mathbb{C}^2_n$ ist genau das, was in der
+Stringtheorie als \emph{Wicklungs-Zustände kompakter Dimensionen}
+auftritt, und in Kac-Moody-Algebren als \emph{Levels}. Auch hier ist
+die Mathematik bekannt -- FFGFT importiert sie mit einer
+spezifischen geometrischen Bedeutung.
+
+\subsection{Was diese Erweiterung kostet}
+
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item Hilbertraum-Dimension wird $\aleph_0$ statt $2$.
+  \item Operatoren werden unendlich-dimensional, aber blockdiagonal:
+        innerhalb jedes $n$-Sektors sind sie $2\times 2$.
+  \item Zusätzliche Operatoren $a^\dagger, a$ propagieren zwischen
+        Wicklungssektoren ($n \to n \pm 1$).
+  \item In niederen Energien irrelevant; in der vollen Theorie
+        notwendig (z.B.\ für Vakuum-Casimir-Effekte zwischen den
+        Polen, Dok.~091/220).
+\end{itemize}
+
+% ==============================================================================
+\section{Erweiterung 3: Bündelstruktur statt Tensorprodukt}
+% ==============================================================================
+
+\subsection{Standard-QM für ein Teilchen mit Spin}
+
+Ein Spin-$\tfrac{1}{2}$-Teilchen im Raum hat in der Standard-QM den
+Hilbertraum:
+\begin{equation}
+  \mathcal{H}_{\text{std}} = L^2(\mathbb{R}^3) \otimes \mathbb{C}^2.
+\end{equation}
+Das \emph{Tensorprodukt} bedeutet: Ortsraum und Spin-Raum sind
+\textbf{unabhängige} Hilberträume. Operatoren des einen Faktors
+kommutieren mit Operatoren des anderen:
+\begin{equation}
+  [L_i, S_j] = 0
+  \qquad \text{(Bahn- und Spin-Drehimpuls vertauschen)}.
+\end{equation}
+Spin-Bahn-Kopplung muss als \emph{zusätzlicher Hamilton-Term}
+eingeführt werden:
+\begin{equation}
+  H_{\text{SO}} = \xi(r)\, \vec L \cdot \vec S,
+\end{equation}
+wobei die \enquote{Spin-Bahn-Konstante} $\xi(r)$ ein freier
+Parameter ist (typisch $\sim Z^4 \alpha^2$ für ein
+wasserstoffartiges Atom).
+
+\subsection{FFGFT: Spin und Ort auf demselben $T^3$}
+
+In FFGFT entstehen sowohl der \enquote{Ort} als auch der
+\enquote{Spin} aus Wicklungen auf demselben 3-Torus $T^3$ (Dok.~210):
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item räumliche Wicklungen $(n_x, n_y, n_z)$: Modenraum-Position,
+  \item Spin-Wicklungen $(n_\theta, n_\phi)$: 3-1-Spin-Index.
+\end{itemize}
+Beide Sätze von Wicklungszahlen leben auf derselben kompakten
+Mannigfaltigkeit. Sie sind nicht unabhängig.
+
+\subsection{Hilbertraum als Spinorbündel}
+
+Mathematisch korrekt ist der FFGFT-Hilbertraum für ein Teilchen
+mit Spin auf $T^3$ \emph{kein} Tensorprodukt, sondern der Raum der
+Schnitte eines Spinorbündels:
+\begin{equation}
+  \boxed{
+    \mathcal{H}^{T^3}_{\text{FFGFT}}
+    = L^2(T^3, S),
+  }
+\end{equation}
+wobei $S$ das Spinorbündel über $T^3$ ist. In dieser Struktur sind
+Bahn- und Spin-Operatoren \emph{nicht mehr unabhängig}:
+\begin{equation}
+  [L_i, S_j] \neq 0
+  \qquad \text{mit Korrekturen} \sim \xi.
+\end{equation}
+
+\subsection{Konsequenz: geometrische Spin-Bahn-Kopplung}
+
+Die Spin-Bahn-Kopplung ist in FFGFT \emph{nicht} ein zusätzlicher
+Hamilton-Term, sondern eine \textbf{geometrische Eigenschaft des
+Bündels}. Die \enquote{Spin-Bahn-Konstante} $\xi(r)$ ist nicht
+ein freier Parameter, sondern folgt aus der Wicklungsgeometrie.
+Insbesondere: das Verhalten von $\xi(r) \propto Z^4 \alpha^2$ in
+schweren Atomen folgt aus der spezifischen Wicklungs-Topologie
+(Dok.~174).
+
+\subsection{Mathematisches Vorbild}
+
+Die Bündelstruktur ist Standard-Differentialgeometrie -- jedes
+moderne Differentialgeometrie-Lehrbuch behandelt Spinorbündel.
+Der spezifische FFGFT-Schritt ist die geometrische Identifikation:
+\enquote{Spin und Ort sind nicht zwei Hilberträume, sondern zwei
+Aspekte derselben Wicklungsstruktur auf einer kompakten
+Mannigfaltigkeit.}
+
+\subsection{Was diese Erweiterung kostet}
+
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item Hilbertraum ist \emph{kein} Tensorprodukt mehr -- die
+        algebraische Struktur ist anders.
+  \item Pauli-Prinzip wird geometrisch: zwei Fermionen können nicht
+        denselben Wicklungs-Zustand besetzen, weil die
+        Bündel-Geometrie das verbietet (Dok.~174 §3).
+  \item Drehimpuls-Algebra ist mit Translations-Algebra verschränkt.
+  \item Konsequenz: alle phänomenologischen
+        \enquote{Spin-Bahn-Konstanten} der Atomphysik sind aus
+        FFGFT herleitbar -- sie sind nicht frei.
+\end{itemize}
+
+% ==============================================================================
+\section{\texorpdfstring{Erweiterung 4: zeitliche Wicklung $k_t$}{Erweiterung 4: zeitliche Wicklung k_t}}
+% ==============================================================================
+
+\subsection{Was die Standard-QM mit der Zeit macht}
+
+In der Standard-QM ist die Zeit eine \emph{kontinuierliche, lineare}
+Achse $\mathbb{R}$. Die Schrödinger-Gleichung:
+\begin{equation}
+  i\hbar \frac{\partial \psi}{\partial t} = H \psi,
+  \qquad
+  E = \hbar \omega
+  \qquad \text{(Standard-Dispersion)}.
+\end{equation}
+Die Energie ist linear in der Frequenz $\omega = 2\pi/T$.
+
+\subsection{FFGFT: Zeit auf $S^1$}
+
+In FFGFT ist die Zeit eine \emph{kompakte} Wicklungsrichtung mit
+Quantenzahl $k_t \in \mathbb{Z}$ (Dok.~210). Die Energie wird:
+\begin{equation}
+  \boxed{
+    E = \hbar f(k_t),
+  }
+\end{equation}
+wobei $f$ eine periodische Funktion ist. Im niedrigsten
+Wicklungssektor reduziert sich das auf $E \approx \hbar \omega$, aber
+die Wicklungsstruktur ist real und trägt physikalische Bedeutung.
+
+\subsection{Mass aus Wicklung}
+
+Die zentrale FFGFT-Aussage: \textbf{die Masse einer Mode ist die
+$k_t$-Wicklungsenergie}:
+\begin{equation}
+  m_i c^2 = \hbar f(k_t^{(i)})
+  \qquad \text{für die Mode $i$}.
+\end{equation}
+In Kombination mit der Yukawa-Form (Dok.~006):
+\begin{equation}
+  m_i = r_i \cdot \xi_0^{p_i} \cdot v,
+\end{equation}
+folgen alle 12 Standardmodell-Fermionenmassen aus den Tupeln
+$(n_x, n_y, n_z, k_t^{(i)})$ ohne freie Parameter.
+
+\subsection{Hilbertraum-Erweiterung}
+
+Statt $\mathcal{H} = L^2(\mathbb{R}^3) \otimes \mathbb{C}^2$ und Zeit
+als kontinuierlicher Parameter, wird der volle FFGFT-Hilbertraum:
+\begin{equation}
+  \mathcal{H}^{T^4}_{\text{FFGFT}} = L^2(T^4, S),
+\end{equation}
+mit Schnitten eines Spinorbündels über dem 4-Torus. Die
+Schrödinger-Gleichung wird zu einer \emph{Mode-Gleichung} auf $T^4$:
+\begin{equation}
+  i\hbar \frac{\partial \varphi_{n,l,j}}{\partial t}
+  = \mathcal{D}_{T^4} \varphi_{n,l,j},
+\end{equation}
+wobei $\mathcal{D}_{T^4}$ ein Dirac-artiger Operator auf dem 4-Torus
+ist. Im Niederenergielimit reduziert sich dies auf die
+Standard-Schrödinger-Gleichung mit fester Masse.
+
+\subsection{Mathematisches Vorbild}
+
+Kompakte Extra-Dimensionen sind seit Kaluza (1921) und Klein (1926)
+ein etablierter Rahmen. FFGFT verwendet diese Struktur mit zwei
+Modifikationen:
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item Die Extra-Dimension ist \emph{zeitlich}, nicht räumlich.
+  \item Die Wicklungs-Quantenzahl $k_t$ ist nicht frei, sondern
+        durch Geometrie und Higgs-Matching festgelegt.
+\end{itemize}
+
+\subsection{Was diese Erweiterung kostet}
+
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item Schrödinger-Gleichung selbst wird modifiziert.
+  \item Massen sind nicht mehr externe Parameter.
+  \item Die Standard-QFT-Konstruktion (Lagrangedichten mit
+        Yukawa-Termen) ist eine \emph{Niederenergie-Approximation}
+        der vollen FFGFT-Mode-Theorie.
+  \item Konsequenz: alle 12 Fermionenmassen, die
+        Feinstrukturkonstante, und die Higgs-Selbstkopplung
+        folgen parameterfrei aus der 4D-Wicklungsgeometrie.
+\end{itemize}
+
+% ==============================================================================
+\section{Die strukturelle Pointe: bekannte Mathematik, neue Kombination}
+% ==============================================================================
+
+Jede der vier Erweiterungen entspricht einer mathematisch \emph{wohlbekannten} Struktur:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+{\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{>{\raggedright\arraybackslash}p{1.0cm}>{\raggedright\arraybackslash}p{3.5cm}>{\raggedright\arraybackslash}p{5.5cm}}
+\toprule
+\textbf{Erw.} & \textbf{Mathematik} & \textbf{Etabliert seit} \\
+\midrule
+1 & Quantengruppen $SU_q(2)$ & Drinfeld/Jimbo 1985 \\
+2 & Wicklungs-Anregungen & Stringtheorie, Kac-Moody (1980er) \\
+3 & Spinorbündel & Differentialgeometrie 1950er \\
+4 & Kompakte Extradimension & Kaluza 1921, Klein 1926 \\
+\bottomrule
+\end{tabular}%
+}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+Keine dieser Strukturen ist neu. Was FFGFT \emph{spezifisch} macht,
+ist die \textbf{Kombination}: alle vier Erweiterungen gemeinsam und
+mit einer einzigen geometrischen Begründung.
+
+\textbf{Was keine andere Theorie tut:}
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item Quantengruppen werden in der Mathematik studiert, aber nicht
+        durch Geometrie aus einer Raumzeit-Dimension begründet.
+  \item Stringtheorie hat Wicklungs-Anregungen, aber benötigt 10 oder
+        11 Dimensionen und liefert die Standardmodell-Massen nicht
+        parameterfrei.
+  \item Spinorbündel sind Standardgeometrie, aber die typischen QFT-
+        Anwendungen geben Spin und Ort als Tensorprodukt vor.
+  \item Kaluza-Klein-Theorien existieren in zahlreichen Varianten,
+        aber keine liefert alle 12 SM-Massen aus einer einzigen
+        kompakten Dimension.
+\end{itemize}
+
+FFGFT ist die \emph{Konvergenz} dieser vier Erweiterungen mit einer
+gemeinsamen geometrischen Quelle ($T^4$ und $\xi_0$).
+
+% ==============================================================================
+\section{Was eine Hilbertraum-erweiterte Formulierung leistet}
+% ==============================================================================
+
+Wenn man den Standard-Hilbertraum mit allen vier Erweiterungen
+versieht, erhält man eine vollständige FFGFT-äquivalente
+Formulierung, die für Mathematiker und QM-Praktiker zugänglich ist:
+
+\begin{equation}
+  \mathcal{H}^{\text{FFGFT}}
+  = L^2(T^4, S) \;\bigotimes\; \text{(deformierte $SU_q(2)$-Algebra)},
+\end{equation}
+mit zusätzlicher Wicklungs-Quantenzahl $n$ pro
+Spin-Drehfreiheitsgrad und einer modifizierten Mode-Gleichung
+$\mathcal{D}_{T^4}\varphi = E \varphi$ statt der
+Schrödinger-Gleichung.
+
+In dieser Formulierung sind alle FFGFT-Vorhersagen direkt aus der
+Hilbertraum-Algebra ableitbar:
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item Massen aus den $k_t$-Wicklungen,
+  \item Feinstrukturkonstante aus dem $SU_q(2)$-Casimir,
+  \item Spin-Bahn-Kopplung aus der Bündelstruktur,
+  \item $K_{\text{frak}}$-Korrekturen aus der Quantengruppen-Deformation,
+  \item Casimir-Effekt und kosmologischer Energieverlust aus den
+        Wicklungs-Vakuum-Strukturen.
+\end{itemize}
+
+\textbf{Methodische Konsequenz:} FFGFT lässt sich \emph{vollständig
+in Hilbertraum-Sprache formulieren}, vorausgesetzt man akzeptiert die
+vier Erweiterungen. Wer den Standard-Hilbertraum minimal erweitern
+möchte, kann mit Stufe 1 ($SU_q(2)$) beginnen, dann Stufe 2
+(Wicklungs-Quantenzahl), und so weiter -- jede Stufe bringt eine
+weitere Klasse von FFGFT-Aussagen ins Hilbertraum-Vokabular.
+
+% ==============================================================================
+\section{Zusammenfassung}
+% ==============================================================================
+
+Der Standard-Hilbertraum ($\mathbb{C}^2$ pro Qubit, $L^2(\mathbb{R}^3)$
+pro Teilchen, Tensorprodukt für zusammengesetzte Systeme) muss durch
+\textbf{vier Erweiterungen} ergänzt werden, um die volle FFGFT
+abzubilden:
+
+\begin{enumerate}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item \textbf{Deformierte Algebra} $SU_q(2)$ mit
+        $q = e^{i\pi(1-K_{\text{frak}})}$.
+  \item \textbf{Zyklische Wicklungs-Quantenzahl} $n \in \mathbb{Z}$ für jede
+        kompakte Dimension; Hilbertraum wird
+        $\bigoplus_n \mathbb{C}^2_n$.
+  \item \textbf{Bündelstruktur} statt Tensorprodukt zwischen Ort und
+        Spin: $L^2(T^3, S)$ mit gekoppelten Operatoren.
+  \item \textbf{Zeitliche Wicklungsdimension} $k_t$ mit Energie
+        $E = \hbar f(k_t)$ statt $E = \hbar\omega$; Massen aus
+        $k_t$-Wicklungen.
+\end{enumerate}
+
+Jede Erweiterung entspricht einer etablierten mathematischen
+Struktur (Quantengruppen, Stringtheorie-Wicklungen, Differentialgeometrie,
+Kaluza-Klein). FFGFT ist die spezifische, geometrisch begründete
+Kombination dieser vier Strukturen, die parameterfrei alle
+Standardmodell-Konstanten liefert.
+
+\textbf{Methodische Position:}
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item FFGFT \emph{fügt sich ein} in den Hilbertraum-Formalismus,
+        sofern dieser entsprechend erweitert wird.
+  \item Die Erweiterungen sind \emph{nicht ad hoc}, sondern folgen
+        aus der spezifischen geometrischen Struktur des $T^4$.
+  \item Mathematiker und QM-Praktiker können FFGFT \emph{Stufe für
+        Stufe} adaptieren -- mit jeder Erweiterung erhalten sie eine
+        weitere Klasse von vorher externen Parametern als
+        herleitbare Größen.
+\end{itemize}
+
+\textbf{Verbindung zu Dok.~230:} während Dok.~230 die
+\enquote{Abwärts-Übersetzung} (FFGFT zum Standard-Hilbertraum, mit
+Reduktionen) beschrieb, formuliert dieses Dokument die
+\enquote{Aufwärts-Übersetzung} (Hilbertraum-Erweiterungen, um FFGFT
+nativ zu tragen). Beide Richtungen sind notwendig, um die
+strukturelle Verbindung vollständig zu verstehen.

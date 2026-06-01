@@ -1,0 +1,547 @@
+% ============================================================
+% dok206_dreieck_matrix_reduktion_En_ch.tex
+% Triangle-Matrix Reduction Theorem
+% FFGFT Document 206 — Body
+% Status: 8 May 2026
+% ============================================================
+
+\section{Introduction}
+\label{sec:intro}
+
+In the course of discussions on the \emph{Information Physics Institute} mailing list over the past weeks, several geometric formulations of physical structures have appeared which stand in striking resonance with the Fundamental Fractal Geometric Field Theory (FFGFT) without being identical to it. Peter Austin formulates a projector-based construction with \(D = 3 + \varepsilon\); Onur Tekermen postulates a \emph{constitutive openness} of recursion in his UIFT; Phillips Paul works with a \emph{Self-Dual Construction} (C-25) in which a \(2/3\) dynamics emerges; E.\,K.\,Porter, in the Hylo-Phase Framework v2.4.0, describes the cosmological constant as \emph{\(\Lambda\)-linear} on a bipartite \(L_\text{vac}^2\) structure; Sergei Chekanov and his coauthor Hakan find complex trigonometric expressions in the Standard Model mass spectrum from two parameters; and George Moseley postulates a fundamental substrate frequency \(\nu_M \approx 8.23\) THz in his ITR.
+
+Against this constellation, the question becomes pressing: \emph{is FFGFT an isolated construction, or is it in a precisely specifiable sense the common skeletal structure to which these various formulations all reduce?}
+
+We claim in this document:
+\begin{quote}
+Every consistent geometric description of physical structures that falls into the same scale regime as FFGFT can be mapped onto two equivalent representations: a Z\textsubscript{3} triangle connection and a 3\,$\times$\,3 matrix algebra.
+\end{quote}
+
+This claim is initially a hypothesis. We test it not with philosophical arguments but \emph{algorithmically}: every claimed bridge is verified by an independent Python script that symbolically and numerically confirms or refutes the postulated identification. Thirteen scripts are attached to this document; they are reproducible by any reader.
+
+This method has a further advantage: it protects against the subtle temptation of numerology, to which phenomenological frameworks are particularly susceptible. We make this protection explicit by including a stage at the end which tests an apparent fit for \(\Omega_\Lambda = 0.6889\) against purely random target numbers --- and rejects it as non-theoretical.
+
+The text is structured so that the mathematical foundation is developed in Sections \ref{sec:kern1}--\ref{sec:kern3}, the bridge tests follow in Sections \ref{sec:austin}--\ref{sec:moseley}, and the cosmological methodology section (\ref{sec:cosmology_methodology}) and numerology check (\ref{sec:numerologie}) close the discussion.
+
+\section[Mathematical core: Z3 triangle and 3 x 3 matrix]{Mathematical core: Z\textsubscript{3} triangle and 3\texorpdfstring{\,\(\times\)\,}{ x }3 matrix}
+\label{sec:kern1}
+
+\subsection[The adjacency matrix of the Z3 cycle]{The adjacency matrix of the Z\textsubscript{3} cycle}
+
+We begin with the simplest non-trivial geometric structure: the directed Z\textsubscript{3} cycle. Three nodes \(\{0, 1, 2\}\) are connected cyclically by three edges \(0 \to 1 \to 2 \to 0\). The adjacency matrix of this graph is
+\begin{equation}
+A = \begin{pmatrix} 0 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0 \end{pmatrix}.
+\label{eq:A}
+\end{equation}
+
+\begin{foundation}[Foundation: Spectrum]
+The eigenvalues of \(A\) are the three solutions of \(\lambda^3 = 1\), namely the third roots of unity \(\{1,\, \omega,\, \omega^2\}\) with \(\omega = e^{2\pi i / 3}\).
+\end{foundation}
+
+\noindent\textbf{Proof.} The characteristic polynomial is \(\det(A - \lambda I) = -\lambda^3 + 1\), whose zeros are exactly the third roots of unity. \(\blacksquare\)
+
+\subsection[The Z3 characters as spectrum]{The Z\textsubscript{3} characters as spectrum}
+
+The third roots of unity \(\{1, \omega, \omega^2\}\) are not arbitrary --- they are the \emph{Z\textsubscript{3} characters}, that is, the irreducible representations of the cyclic group Z\textsubscript{3}. Hence:
+
+\begin{insightBox}[Identification: Geometry $\leftrightarrow$ Algebra]
+The Z\textsubscript{3} triangle (as a graph) and the 3$\times$3 matrix \(A\) are not merely isomorphic, but \emph{algebraically identical}: the spectrum of \(A\) is the character table of Z\textsubscript{3}.
+\end{insightBox}
+
+This identification is the basic claim of the entire reduction program. It is mathematically trivial, but conceptually central: \emph{geometry and matrix algebra are not two pictures of the same thing, they are the same thing.}
+
+\subsection{Consistency}
+
+Four properties confirm the structure:
+\begin{itemize}
+\item \(A^3 = I\) (cyclic closure),
+\item \(\operatorname{Tr}(A) = 0\) (no diagonal elements),
+\item \(\det(A) = +1\) (even cycle of the permutation),
+\item \(\prod_k \lambda_k = 1\) (product of eigenvalues).
+\end{itemize}
+
+All four are numerically and symbolically verified in script \texttt{stufe1\_z3\_dreieck.py}.
+
+\section[The xi perturbation and the fractal dimension]{The \texorpdfstring{\(\xi\)}{xi} perturbation and the fractal dimension}
+\label{sec:kern2}
+
+\subsection{Definition of the perturbed adjacency}
+
+We open the Z\textsubscript{3} triangle by attenuating the closing edge \(2 \to 0\) by the parameter \(\xi\):
+\begin{equation}
+A_\xi = \begin{pmatrix} 0 & 0 & 1 - \xi \\ 1 & 0 & 0 \\ 0 & 1 & 0 \end{pmatrix}.
+\label{eq:Axi}
+\end{equation}
+
+In FFGFT, \(\xi = 4/30{,}000\) is the only dimensionless fundamental parameter from which the theory derives all further scales. The geometric meaning of the perturbation is a \emph{closure deficit}: the triangle does not quite close, the return path from node 2 to node 0 is damped by \(\xi\).
+
+\subsection{Spectrum of the perturbed matrix}
+
+\begin{foundation}[Foundation: Spectrum of $A_\xi$]
+We have \(A_\xi^3 = (1 - \xi)\,I\), from which it follows that
+\begin{equation}
+\lambda_k(\xi) = (1 - \xi)^{1/3}\,\omega^k, \quad k = 0, 1, 2.
+\label{eq:spec_xi}
+\end{equation}
+In particular, \(\det(A_\xi) = 1 - \xi\).
+\end{foundation}
+
+\noindent\textbf{Proof.} Direct computation of \(A_\xi^3\) yields the diagonal matrix \((1-\xi)\,I\). Therefore the eigenvalues satisfy \(\lambda^3 = 1 - \xi\), and their cube roots are precisely \eqref{eq:spec_xi}. The determinant follows from \(\det(A_\xi) = \prod_k \lambda_k = (1-\xi)^{1/3} \cdot (1-\xi)^{1/3} \omega \cdot (1-\xi)^{1/3} \omega^2 = (1-\xi) \omega^3 = 1 - \xi\). \(\blacksquare\)
+
+\subsection{The fractal dimension as spectral sum}
+
+The sum of eigenvalue moduli,
+\begin{equation}
+D_\text{spec}(\xi) := \sum_k |\lambda_k(\xi)| = 3 \cdot (1 - \xi)^{1/3},
+\label{eq:Dspec}
+\end{equation}
+has the linear-order expansion in \(\xi\):
+\begin{equation}
+D_\text{spec}(\xi) = 3 - \xi - \frac{\xi^2}{3} - \mathcal{O}(\xi^3).
+\label{eq:Dspec_taylor}
+\end{equation}
+
+\begin{keyresult}[Geometric derivation of $D_f$]
+The FFGFT statement \(D_f = 3 - \xi\) is not an arbitrary convention but follows necessarily from the spectral geometry of the \(\xi\)-perturbed Z\textsubscript{3} adjacency matrix in linear order.
+\end{keyresult}
+
+Script \texttt{stufe2\_xi\_stoerung.py} verifies this both symbolically and numerically through linear regression on a sweep \(\xi \in (10^{-6}, 10^{-2})\). Slope: \(-1.003\), intercept: \(+3.000006\) --- consistent with \(D = 3 - \xi\) within numerical precision.
+
+\section[The Z3 cubed structure and the three generations]{The Z\textsubscript{3}\textsuperscript{3} structure and the three generations}
+\label{sec:kern3}
+
+\subsection{Tensor product of the adjacency matrices}
+
+FFGFT postulates that the three generations of the Standard Model are realized as three nested Z\textsubscript{3} triangles. Mathematically, this corresponds to the threefold tensor product
+\begin{equation}
+T(\xi) := A_\xi \otimes A_\xi \otimes A_\xi.
+\label{eq:T}
+\end{equation}
+This is a \(27 \times 27\) matrix.
+
+\subsection{Spectrum and generation structure}
+
+\begin{foundation}[Foundation: 27 = 3\textsuperscript{3} eigenvalues]
+The spectrum of \(T(\xi)\) consists of \(27\) eigenvalues of the form \((1-\xi)\,\omega^{a+b+c}\) with \(a, b, c \in \{0, 1, 2\}\). They split into three classes according to the value of \((a+b+c) \bmod 3\), each with multiplicity \(9\).
+\end{foundation}
+
+\noindent\textbf{Proof.} The eigenvalues of the Kronecker product are all triple products of the eigenvalues of the individual factors. With \(\lambda_k = (1-\xi)^{1/3} \omega^k\) we get \((1-\xi)^{1/3} \omega^a \cdot (1-\xi)^{1/3} \omega^b \cdot (1-\xi)^{1/3} \omega^c = (1-\xi) \omega^{a+b+c}\). The number of triples \((a,b,c)\) with fixed \((a+b+c) \bmod 3\) is \(9\) (e.\,g.\ for class 0: \((0,0,0), (1,1,1), (2,2,2), (0,1,2)\) and permutations, totaling \(1 + 1 + 1 + 6 = 9\)). \(\blacksquare\)
+
+\subsection{Determinant of the tensor product}
+
+\begin{keyresult}[Determinant identity]
+We have
+\begin{equation}
+\det T(\xi) = (1 - \xi)^{27}.
+\label{eq:detT}
+\end{equation}
+\end{keyresult}
+
+\noindent\textbf{Proof.} We apply the tensor-determinant identity \(\det(A \otimes B) = \det(A)^m \det(B)^n\) for \(A \in \mathbb{C}^{n \times n}\), \(B \in \mathbb{C}^{m \times m}\) iteratively: \(\det(A_\xi \otimes A_\xi) = \det(A_\xi)^3 \cdot \det(A_\xi)^3 = \det(A_\xi)^6\), and \(\det((A_\xi \otimes A_\xi) \otimes A_\xi) = \det(A_\xi \otimes A_\xi)^3 \cdot \det(A_\xi)^9 = \det(A_\xi)^{18+9} = \det(A_\xi)^{27}\). With \(\det(A_\xi) = 1 - \xi\), the result follows. \(\blacksquare\)
+
+\subsection{The hierarchy of layers}
+
+The eigenvalues \(\lambda_k(\xi)\) of the individual factors have modulus \((1-\xi)^{1/3}\); the eigenvalues of \(A_\xi^2\) have modulus \((1-\xi)^{2/3}\); the eigenvalues of \(T(\xi) = A_\xi^3\)-equivalent have modulus \((1-\xi)\).
+
+\begin{insightBox}[Z3 scale ladder]
+The three generations of the Standard Model, read as layers 1, 2, 3 of the Z\textsubscript{3}\textsuperscript{3} structure, scale as \((1-\xi)^{n/3}\) for \(n = 1, 2, 3\). The third-integer powers form the algebraic skeleton of the generation hierarchy.
+\end{insightBox}
+
+Script \texttt{stufe3\_z3\_hoch3.py} verifies all points numerically.
+
+\section[Bridge to Austin: epsilon = -xi]{Bridge to Austin: \texorpdfstring{\(\varepsilon = -\xi\)}{epsilon = -xi}}
+\label{sec:austin}
+
+\subsection{Austin's projector formulation}
+
+Peter Austin postulates a modified projector construction with a non-integer trace:
+\begin{equation}
+P(\varepsilon) = I_3 + \varepsilon\, vv^\top, \quad v = \frac{1}{\sqrt{3}}(1, 1, 1)^\top.
+\label{eq:Paustin}
+\end{equation}
+We have \(\operatorname{Tr}(P) = 3 + \varepsilon\) and \(\det(P) = 1 + \varepsilon\). The ``effective dimension'' is interpreted as \(D = 3 + \varepsilon\).
+
+\subsection[The bridge relation via log det]{The bridge relation via \texorpdfstring{\(\log \det\)}{log det}}
+
+Both structures --- \(A_\xi\) (cyclic-multiplicative) and \(P(\varepsilon)\) (projector-additive) --- are not directly isomorphic. They have unequal traces (\(0\) vs.~\(3+\varepsilon\)) and unequal eigenvalue distributions. The invariant bridge quantity is the \emph{logarithmic determinant}:
+\begin{align}
+\log \det A_\xi &= \log(1 - \xi) = -\xi - \frac{\xi^2}{2} - \mathcal{O}(\xi^3),\\
+\log \det P(\varepsilon) &= \log(1 + \varepsilon) = \varepsilon - \frac{\varepsilon^2}{2} + \mathcal{O}(\varepsilon^3).
+\end{align}
+
+\begin{keyresult}[Austin--FFGFT bridge]
+With the identification \(\log \det P = \log \det A\), it follows in leading order that
+\begin{equation}
+\boxed{\varepsilon = -\xi + \mathcal{O}(\xi^2).}
+\label{eq:eps_xi}
+\end{equation}
+\end{keyresult}
+
+Numerical test (\texttt{stufe4\_bruecke\_austin.py}): with \(\xi = 4/30{,}000\), solving \(1 + \varepsilon = e^{\log(1-\xi)}\) yields \(\varepsilon = -1.33333333 \times 10^{-4}\), and the ratio \(\varepsilon / (-\xi) = 1.00000000\) to ten digits.
+
+\begin{interpretation}
+Austin and FFGFT measure the same geometric defect with opposite signs: Austin interprets it as an \emph{excess} (fiber dimension), FFGFT as a \emph{deficit} (closure deficit). The relation \(\varepsilon = -\xi\) is not numerological but algebraically anchored in the \(\log\det\) bridge.
+\end{interpretation}
+
+\section{Bridge to Tekermen: Constitutive Openness}
+\label{sec:tekermen}
+
+\subsection{Tekermen's UIFT postulate}
+
+Onur Tekermen, in his UIFT, formulates the thesis that a recursion remains meaningful only if it does not close --- ``constitutive openness'' is for him a fundamental principle.
+
+In FFGFT, this corresponds to the \emph{Non-closure Theorem} (Document 193, introduced in v1.0.12 and confirmed in v1.0.13):
+\begin{quote}
+For \(\xi > 0\), the Z\textsubscript{3} recursion is non-periodic.
+\end{quote}
+
+\subsection{Algebraic proof of the identity}
+
+We iterate the recursion \(v_{n+1} = A_\xi v_n\) with starting vector \(v_0 = (1, 0, 0)^\top\) for \(\xi = 4/30{,}000\):
+
+\begin{table}[h]
+\centering
+\caption{Trajectories of the Z\textsubscript{3} recursion: unperturbed vs.~perturbed}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{cll}
+\toprule
+\(n\) & \(v_n\) (\(\xi = 0\)) & \(v_n\) (\(\xi = 4/30{,}000\)) \\
+\midrule
+0 & \((1, 0, 0)\) & \((1, 0, 0)\) \\
+1 & \((0, 1, 0)\) & \((0, 1, 0)\) \\
+2 & \((0, 0, 1)\) & \((0, 0, 1)\) \\
+3 & \((1, 0, 0)\) & \((7499/7500, 0, 0)\) \\
+6 & \((1, 0, 0)\) & \((56{,}235{,}001/56{,}250{,}000, 0, 0)\) \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{keyresult}[Tekermen--FFGFT bridge]
+The trajectory drifts by exactly \(\xi\) per Z\textsubscript{3} period --- the ``signature of openness'' is algebraically \(\xi\) itself. Tekermen's \emph{constitutive openness} and FFGFT's \emph{non-closure theorem} are algebraically identical statements.
+\end{keyresult}
+
+Script \texttt{stufe6\_bruecke\_tekermen.py} confirms four tests: (i) unperturbed periodic, (ii) perturbed non-periodic, (iii) inversion correct, (iv) no finite cycle within 100 steps.
+
+The inverse \(A_\xi^{-1}\) is remarkable:
+\begin{equation}
+A_\xi^{-1} = \begin{pmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ \frac{1}{1-\xi} & 0 & 0 \end{pmatrix}.
+\end{equation}
+It is no longer a permutation matrix --- the term \(1/(1-\xi)\) carries the signature of openness even into the reversal operation.
+
+\section{Bridge to Phillips: Self-Dual and 2/3 Dynamics}
+\label{sec:phillips}
+
+\subsection{Phillips' C-25 construction}
+
+Phillips Paul postulates a ``Self-Dual Construction'' (C-25) within which a \(2/3\) dynamics emerges. His \emph{Information Grounding Law} states that information must be anchored in a self-dual structure.
+
+\subsection[The Z3 complement as 2/3 phase space]{The Z\textsubscript{3} complement as 2/3 phase space}
+
+The Z\textsubscript{3} adjacency \(A\) has three eigenspaces corresponding to \(\{1, \omega, \omega^2\}\). The spectral projectors are
+\begin{equation}
+P_k = |\chi_k\rangle\langle\chi_k|, \quad |\chi_k\rangle = \frac{1}{\sqrt{3}}(1, \omega^k, \omega^{2k})^\top,
+\end{equation}
+with \(\operatorname{Tr}(P_k) = 1\) and \(P_0 + P_1 + P_2 = I\).
+
+\begin{keyresult}[Phillips' 2/3 as Z3 complement]
+Choosing \(P_0\) as the ``active'' Z\textsubscript{3} class, \(P_1\) and \(P_2\) together fill exactly \(2/3\) of the phase space:
+\begin{equation}
+\frac{\operatorname{Tr}(P_1 + P_2)}{\operatorname{Tr}(I)} = \frac{2}{3}.
+\end{equation}
+\end{keyresult}
+
+Classes 1 and 2 are mapped onto each other under complex conjugation (\(\omega^* = \omega^2\)) --- they form a \emph{self-dual pair}. Class 0 is self-conjugate (real). The \(2/3\) dimension is therefore precisely the self-dual component of the Z\textsubscript{3} classification.
+
+\subsection[Information Grounding Law: A^2 = A^T]{Information Grounding Law: \texorpdfstring{\(A^2 = A^\top\)}{A2 = AT}}
+
+A direct calculation shows:
+\begin{equation}
+A^2 = A^\top = A^{-1}.
+\label{eq:igl}
+\end{equation}
+The Z\textsubscript{3} permutation is \emph{self-inverse in the quadratic sense}: \(A\) is forward cycle, \(A^2\) is backward cycle, and both are the same operation in opposite direction.
+
+\begin{interpretation}
+Phillips' \emph{Information Grounding Law} acquires the precise algebraic form \(A^2 = A^\top\) of the Z\textsubscript{3} adjacency in the FFGFT language. The ``anchoring of information in self-dual structure'' is the Z\textsubscript{3} self-inversion.
+\end{interpretation}
+
+Script \texttt{stufe7\_bruecke\_phillips.py} verifies all four statements.
+
+\section[Bridge to Porter: Lambda-linear and Friedmann]{Bridge to Porter: \texorpdfstring{\(\Lambda\)-linear}{Lambda-linear} and Friedmann}
+\label{sec:porter}
+
+\subsection{Porter's Hylo-Phase v2.4.0}
+
+E.\,K.\,Porter formulates in the Hylo-Phase Framework v2.4.0 that the cosmological constant \(\Lambda\) is a linear form on a bipartite \(L_\text{vac}^2\) structure.
+
+\subsection{The Friedmann identification}
+
+From the Friedmann equation, for a flat universe with vacuum contribution:
+\begin{equation}
+\Lambda = \frac{3 H_0^2 \Omega_\Lambda}{c^2}.
+\end{equation}
+With \(l_H = c/H_0\) (Hubble radius):
+\begin{equation}
+\Lambda \cdot l_H^2 = 3 \Omega_\Lambda \approx 2.07.
+\label{eq:lambda_lH}
+\end{equation}
+
+\begin{keyresult}[Porter--FFGFT bridge (structural)]
+With \(L_\text{vac} = l_H\), Porter's \(\Lambda\)-linear form is exactly the Friedmann identity \eqref{eq:lambda_lH}. FFGFT confirms this form via the 4D torus geometry with scale anchor \(R_\text{torus}(m) = \hbar/(mc)\).
+\end{keyresult}
+
+\subsection{Vacuum mass scale and neutrino regime}
+
+From \(\Lambda_\text{measured}\), a cosmological ``vacuum mass'' follows:
+\begin{equation}
+m_\Lambda = \left(\frac{\rho_\Lambda \hbar^3}{c^5}\right)^{1/4} \approx 4 \times 10^{-39}\,\text{kg},
+\end{equation}
+that is,
+\begin{equation}
+m_\Lambda c^2 \approx 2.24\,\text{meV},
+\end{equation}
+exactly within the range of current upper bounds on neutrino masses. This coincidence is known in cosmological literature as the \emph{$\Lambda$--neutrino connection}; its confirmation by FFGFT's independent scale anchor \(\tilde T \cdot m = 1\) is a non-trivial consistency test.
+
+\subsection{What remains open}
+
+The quantitative derivation of \(\Omega_\Lambda = 0.6889\) from FFGFT geometry was a central attempt of this program --- and it has \emph{not} succeeded. We treat this in detail in Section \ref{sec:cosmology_methodology} (methodological status of cosmological data) and Section \ref{sec:numerologie} (numerology check of the naive fit).
+
+\section{Bridge to Chekanov-Hakan: Newton Polynomials}
+\label{sec:chekanov}
+
+\subsection{Chekanov's observation}
+
+Sergei Chekanov, in private correspondence, has pointed out that he and his coauthor Hakan, in arXiv:2509.07713, derived ``rather complex trigonometric expressions'' for SM mass spectra from two parameters. The question: can this phenomenological structure be explained structurally from FFGFT?
+
+\subsection[Newton identities of the Z3 eigenvalues]{Newton identities of the Z\textsubscript{3} eigenvalues}
+
+For the \(\xi\)-perturbed adjacency \(A_\xi\), the eigenvalues are \(\lambda_k = R\,\omega^k\) with \(R = (1-\xi)^{1/3}\). The Newton power sums are
+\begin{equation}
+p_n := \sum_k \lambda_k^n = R^n \sum_k \omega^{nk} = \begin{cases} 3 R^n = 3 (1-\xi)^{n/3} & n \equiv 0 \pmod 3 \\ 0 & \text{otherwise.} \end{cases}
+\end{equation}
+
+\begin{keyresult}[Chekanov-Hakan--FFGFT bridge]
+The ``complex trigonometric expressions'' in the SM mass spectrum of Chekanov-Hakan are the Newton polynomials of the Z\textsubscript{3} eigenvalues. The two parameters are \(\xi\) (the Z\textsubscript{3} defect) and \(k \in \{0, 1, 2\}\) (the Z\textsubscript{3} class).
+\end{keyresult}
+
+The trigonometry is not coincidental: \(\omega^k = \cos(120^\circ \cdot k) + i \sin(120^\circ \cdot k)\), and all Newton identities yield trigonometric multiple-angle formulas in disguise.
+
+Script \texttt{stufe9\_bruecke\_chekanov.py} verifies: \(p_n = 3(1-\xi)^{n/3}\) for \(n \equiv 0 \pmod 3\), and \(p_n = 0\) otherwise, by direct calculation up to \(n = 6\).
+
+\section{Bridge to Moseley: Regime Separation Instead of Identification}
+\label{sec:moseley}
+
+\subsection{Moseley's postulate}
+
+George Moseley postulates in his ITR (Information-Theoretic Reality) a fundamental substrate frequency \(\nu_M \approx 8.23\) THz, which he interprets as a vacuum clock rate.
+
+\subsection{Attempt at FFGFT reconstruction}
+
+A direct reconstruction via \(\xi\)-powers of the Planck frequency \(f_P = 1.855 \times 10^{43}\,\text{Hz}\) yields
+\begin{equation}
+\frac{\nu_M}{f_P} = 4.44 \times 10^{-31}, \quad \log_\xi \frac{\nu_M}{f_P} = 7.83.
+\end{equation}
+The value is therefore close to \(\xi^8 \cdot f_P = 1.85 \times 10^{12}\,\text{Hz}\), but not exact --- the deviation in the logarithm is \(0.65\).
+
+An alternative trail leads to the geometric mean \(\sqrt{H_0 \cdot f_P} \approx 6.37\) THz, which comes very close to \(\nu_M\) with deviation \(\log_{10}(\nu_M/\sqrt{H_0 f_P}) = 0.11\) --- but this geometric mean is not generated by \(\xi\)-recursion.
+
+\subsection{The diagnosis}
+
+\(\nu_M = 8.23\) THz corresponds to the thermal energy \(34\,\text{meV} = 395\,\text{K}\). This is a \emph{thermal vacuum scale}, not a quantum gravity scale.
+
+\begin{conclusionBox}[Moseley--FFGFT: regime separation]
+FFGFT (quantum gravity, Planck scale) and Moseley-ITR (thermal vacuum phenomenology at \(\sim 395\,\text{K}\)) describe different physical regimes. The missing bridge is not a contradiction between the theories but a clarification of their domains of validity.
+\end{conclusionBox}
+
+Scripts \texttt{stufe5\_bruecke\_moseley.py} and \texttt{stufe5b\_geometrisches\_mittel.py} document the honest diagnosis without forcing a bridge.
+
+\section{Methodological Status of Cosmological Reference Data}
+\label{sec:cosmology_methodology}
+
+Before we attempt an FFGFT derivation of \(\Omega_\Lambda\) in the next section and critically test it, a methodological clarification is necessary, to be read in analogy to the treatment of particle masses in Doc.\,202 \S17 (Release v1.0.13).
+
+\subsection{The character of cosmological data}
+
+The values cited in the literature as ``measured''
+\begin{equation}
+\Omega_\Lambda = 0.6889, \quad \Omega_M = 0.3111, \quad H_0 = 67.4\,\text{km/s/Mpc}
+\end{equation}
+(Planck CMB 2018, TT,TE,EE+lowE+lensing) are \emph{not} raw data. They are the result of an evaluation pipeline whose input assumptions already contain a complete theory of the universe:
+
+\begin{itemize}
+\item The Friedmann-Robertson-Walker metric with homogeneous and isotropic expansion.
+\item The \emph{\(\Lambda\)CDM} model with dark matter as a separate energy density component.
+\item The assumption of a flat universe (\(\Omega_K = 0\)).
+\item Standard inflation as the generator of initial conditions.
+\item Standard Model plasma physics in the radiation-dominated phase.
+\item Acoustic oscillations under the assumption of a standard sound speed in the photon-baryon plasma.
+\item Radiation pressure and scattering with SM cross sections.
+\end{itemize}
+
+In the evaluation of the CMB spectrum, these assumptions are simultaneously fed into a likelihood function. From the resulting best-fit values, it cannot be extracted which portion stems from the assumptions and which from the pure data signal --- the assumptions are ``baked into'' the values.
+
+\begin{important}[Circularity of the cosmological reference basis]
+Anyone taking \(\Omega_\Lambda = 0.6889\) as a target value for derivation from a geometric theory implicitly compares \emph{their own model} with the \(\Lambda\)CDM model. Agreement does not prove that the geometric theory yields the ``correct'' \(\Omega_\Lambda\) --- it only shows that both models are compatible for a particular data configuration.
+
+A discrepancy, on the other hand, does not prove that the geometric theory is wrong --- it could be correct and yield a different \(\Omega_\Lambda\) which would have to be extracted from the \emph{same} CMB raw data without the \(\Lambda\)CDM evaluation pipeline.
+\end{important}
+
+\subsection{Consequence for FFGFT}
+
+This situation is particularly relevant for FFGFT. The theory's approach is not to reproduce \(\Lambda\)CDM, but to offer an alternative geometric explanation --- in particular with the possibility of deriving \emph{dark matter and dark energy without separate components} from the 4D torus geometry and the DVFT line (Doc.\,201), and explaining \emph{CMB homogeneity without inflation} (Doc.\,140, 201). These program points are explicitly listed in Doc.\,202 \S17.2 as ``Predictions beyond the Standard Model''.
+
+But if the DM and inflation assumptions are precisely \emph{the ones} encoded into the value \(\Omega_\Lambda = 0.6889\), then comparing an FFGFT prediction with this value is no neutral test. It forces FFGFT to measure itself against a model assumption that FFGFT itself is meant to replace.
+
+\begin{conclusionBox}[Methodological position]
+\(\Omega_\Lambda\), \(\Omega_M\), and \(H_0\) are well-determined quantities within the \(\Lambda\)CDM framework. They are not without further qualification to be read as universal observational constants against which every competing theory must measure itself.
+
+An FFGFT-conformant test of cosmological predictions would have to start at the \emph{CMB raw data} (pixel-level temperature and polarization maps) and be channeled through an FFGFT-native evaluation pipeline that incorporates FFGFT-specific assumptions about geometry, DM replacement, and initial conditions. Only then would a direct comparison of the extracted parameters be meaningful.
+
+Such an end-to-end comparison is a substantial, independent piece of work. As long as it has not been done, comparisons with \(\Omega_\Lambda = 0.6889\) as a number are to be read with the same care as comparisons with PDG mass tables (Doc.\,202 \S17.3).
+\end{conclusionBox}
+
+This clarification changes the status of the next section: the attempt to derive \(\Omega_\Lambda = 0.6889\) from FFGFT geometry is not primarily a test of FFGFT, but a test of the question whether FFGFT is compatible with the \(\Lambda\)CDM-conformant result. The finding --- that no simple geometric formula reproduces the value exactly --- says, under the methodological conditions stated, little about whether FFGFT correctly describes the underlying vacuum energy.
+
+\section[Numerology check: Omega-Lambda is not derivable from xi]{Numerology Check: \texorpdfstring{\(\Omega_\Lambda = 0.6889\)}{Omega-Lambda = 0.6889} is not derivable from \texorpdfstring{\(\xi\)}{xi}}
+\label{sec:numerologie}
+
+\subsection{An apparent fit}
+
+A systematic search for formulas of the form \(\Omega_\Lambda = a + b \cdot \xi^p\) with \(a, b\) from simple fractions and \(p \in \{1, 1/2, 1/3, 1/4, 2/3, 3/4, \dots\}\) finds an apparent fit:
+\begin{equation}
+\Omega_\Lambda \stackrel{?}{=} \frac{11}{16} + \frac{1}{2} \xi^{2/3} = 0.688805,
+\end{equation}
+against the measured value \(0.6889 \pm 0.0056\) --- deviation only \(0.014\,\%\).
+
+\subsection{Numerology filter}
+
+Before booking this fit as a success, we test it with a control experiment: \emph{how often does the same search algorithm find an equally good fit for purely random target numbers?}
+
+We choose 30 random numbers \(z \in [0.1,\, 0.9]\) and run the same search for each.
+
+\begin{table}[h]
+\centering
+\caption{Numerology filter: distribution of random ``hits''}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{lr}
+\toprule
+Median deviation across 30 target numbers & \(5.6 \times 10^{-5}\) \\
+Best deviation & \(3 \times 10^{-6}\) \\
+Number with deviation \(< 10^{-3}\) & 30 of 30 \\
+Number with deviation \(< 10^{-4}\) & 20 of 30 \\
+\midrule
+Number with deviation \(\leq\) that of the \(\Omega_\Lambda\) fit & 12 of 30 (40\%) \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{important}[Verdict: Numerology, not a theoretical finding]
+40\,\% of purely random target numbers yield, with the same search, an equally good or better match as the apparent \(\Omega_\Lambda\) fit. The finding is therefore \emph{not} supported by theory --- it is statistical noise from a permissive search in the space of simple fractions.
+\end{important}
+
+\subsection{What this means}
+
+We do \emph{not} book the \(\Omega_\Lambda\) attempt as a success. The bridge to Porter (Section \ref{sec:porter}) remains structural --- the Friedmann form is confirmed, the vacuum mass falls in the neutrino regime, the geometric origin as 4D torus scale anchor is consistent. But \(\Omega_\Lambda = 0.6889\) as a specific number does \emph{not} follow from \(\xi\) and simple Z\textsubscript{3} geometry.
+
+\begin{philosophical}[Self-restraint as strength]
+FFGFT does not claim to derive all cosmological observables from \(\xi\). Quantities like \(\Omega_\Lambda\) presumably depend on early universe history (inflation factor, vacuum phase transitions) --- these are not given purely by the fundamental geometry.
+
+The strength of a theory also shows itself in what it does \emph{not} claim. Honest self-restraint is more valuable than a numerological fit.
+\end{philosophical}
+
+Script \texttt{stufe10b\_numerologie\_filter.py} documents the methodology of the filter; \texttt{stufe10\_omega\_lambda.py} documents the attempt.
+
+\section{Summary and Balance}
+\label{sec:bilanz}
+
+\subsection{What has been proved}
+
+The mathematical core of the reduction theorem is secured:
+
+\begin{table}[h]
+\centering
+\caption{Mathematical core (Stages 1--3)}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{ll}
+\toprule
+Statement & Status \\
+\midrule
+Z\textsubscript{3} triangle \(\leftrightarrow\) 3$\times$3 matrix isomorphic & proved \\
+\(\det(A_\xi) = 1 - \xi\) and \(D_f = 3 - \xi\) (linear) & proved \\
+27 = 3\textsuperscript{3} generation structure, \(\det T = (1-\xi)^{27}\) & proved \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\subsection{Balance of the six bridges}
+
+\begin{table}[h]
+\centering
+\caption{Bridge tests}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{lll}
+\toprule
+Bridge & Identification & Status \\
+\midrule
+Austin (\(D = 3 + \varepsilon\)) & \(\varepsilon = -\xi\) exactly & {\color{t0green}\textbf{OK}} \\
+Tekermen (UIFT openness) & \(\xi > 0\) algebraically identical to Doc 193 & {\color{t0green}\textbf{OK}} \\
+Phillips (C-25, 2/3, IGL) & 2/3 = Z\textsubscript{3} complement; \(A^2 = A^\top\) & {\color{t0green}\textbf{OK}} \\
+Porter (\(\Lambda\)-linear) & Friedmann form, neutrino regime & {\color{t0blue}\textbf{structural OK}} \\
+Chekanov-Hakan (trig.) & Newton polynomials of Z\textsubscript{3} eigenvalues & {\color{t0green}\textbf{OK}} \\
+Moseley (\(\nu_M\)) & different regimes (thermal vs.\ QG) & {\color{t0gray}\textbf{regime separation}} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\subsection{What remains open}
+
+\begin{itemize}
+\item The quantitative derivation of \(\Omega_\Lambda\) from FFGFT geometry. By the numerology filter, the naive fit \(11/16 + \tfrac{1}{2}\xi^{2/3}\) is identified as statistical noise. More importantly (Section \ref{sec:cosmology_methodology}): the reference value \(\Omega_\Lambda = 0.6889\) itself is determined within \(\Lambda\)CDM (dark matter, inflation, FRW expansion) and is not model-independent. A serious FFGFT treatment of the cosmological constant must start at CMB raw data and be channeled through an FFGFT-native evaluation pipeline --- an independent piece of future work.
+\item The precise placement of Moseley's \(\nu_M\) within thermal vacuum phenomenology. This is not a task for FFGFT but for a theory of thermal vacuum effects.
+\end{itemize}
+
+\subsection{Conclusion}
+
+\begin{conclusionBox}[Balance of the reduction theorem]
+The original thesis --- \emph{every consistent geometric description can be reduced to triangle connections and matrix representations} --- is supported by five out of six bridge tests and refined by one clearly documented negative finding. The theorem holds for frameworks that fall into the same scale regime as FFGFT.
+
+The geometric structure to which all confirmed bridges point is the Z\textsubscript{3} adjacency matrix \(A_\xi\) with \(\det A_\xi = 1 - \xi\). This matrix is the elementary algebraic embodiment of FFGFT's only free parameter \(\xi\) and the geometric structure it induces.
+\end{conclusionBox}
+
+\section*{Reproducibility}
+
+All proofs in this document are reproducibly implemented in thirteen Python scripts:
+
+\begin{itemize}
+\item \texttt{stufe1\_z3\_dreieck.py} --- Z\textsubscript{3} triangle and spectrum
+\item \texttt{stufe2\_xi\_stoerung.py} --- \(\xi\) perturbation, \(D_f = 3 - \xi\)
+\item \texttt{stufe3\_z3\_hoch3.py} --- Z\textsubscript{3}\textsuperscript{3} and 27 eigenvalues
+\item \texttt{stufe4\_bruecke\_austin.py} --- Austin bridge
+\item \texttt{stufe5\_bruecke\_moseley.py} --- Moseley attempt
+\item \texttt{stufe5b\_geometrisches\_mittel.py} --- Geometric mean deepening
+\item \texttt{stufe6\_bruecke\_tekermen.py} --- Tekermen bridge
+\item \texttt{stufe7\_bruecke\_phillips.py} --- Phillips bridge
+\item \texttt{stufe8\_bruecke\_porter.py} --- Porter bridge
+\item \texttt{stufe9\_bruecke\_chekanov.py} --- Chekanov-Hakan bridge
+\item \texttt{stufe10\_omega\_lambda.py} --- \(\Omega_\Lambda\) attempt
+\item \texttt{stufe10b\_numerologie\_filter.py} --- Numerology check
+\item \texttt{master\_uebersicht.py} --- Master run of all stages
+\end{itemize}
+
+Scripts run in Python 3 with \texttt{numpy}, \texttt{sympy}, and \texttt{matplotlib}. They are available for direct download in the GitHub repository at \href{https://github.com/jpascher/T0-Time-Mass-Duality/tree/main/2/python/bridge}{\texttt{2/python/bridge/}}.
+
+\section*{Acknowledgments}
+
+The bridges formulated here arose from the discussions on the \emph{Information Physics Institute} mailing list during the weeks before this document was prepared. My thanks go in particular to Peter Austin, Phillips Paul, Onur Tekermen, E.\,K.\,Porter, George Moseley, and Sergei Chekanov for their contributions and correspondence which made these bridges visible at all.
+
+\section*{License and Availability}
+
+\textbf{Zenodo:} \href{https://zenodo.org/records/20041529}{\texttt{zenodo.org/records/20041529}} (DOI: \href{https://doi.org/10.5281/zenodo.20041529}{10.5281/zenodo.20041529}, Version v1.0.13)\\
+\textbf{GitHub:} \href{https://github.com/jpascher/T0-Time-Mass-Duality}{\texttt{github.com/jpascher/T0-Time-Mass-Duality}}\\
+\textbf{ORCID:} \href{https://orcid.org/0009-0000-6518-4064}{0009-0000-6518-4064}\\
+\textbf{License:} CC-BY-SA 4.0
+

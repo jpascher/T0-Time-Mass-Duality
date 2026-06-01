@@ -1,0 +1,1595 @@
+{\centering
+\Large\bfseries\color{T0blue}
+FFGFT: Torus-Geometrie und Ableitungshierarchie der Teilchenmassen\\[0.4em]
+\normalsize\color{T0gray}
+Johann Pascher · Oberösterreich, Österreich\\
+\href{https://github.com/jpascher/T0-FFGFT-Time-Mass-Duality}{github.com/jpascher/T0-FFGFT-Time-Mass-Duality}\\
+\href{https://zenodo.org/records/20474821}{DOI: 10.5281/zenodo.20474821}\\[0.8em]
+}
+\thispagestyle{firstpage}
+
+\section*{Abstract}
+Dieses Dokument leitet die Teilchenmassen-Struktur der FFGFT/T0-FFGFT
+aus rein geometrischen Prinzipien her. Ausgangspunkt ist die freie
+Lagrange-Dichte $\mathcal{L}_0 = \varepsilon \cdot (\partial\delta m)^2$.
+In drei Schritten wird gezeigt: (1) Die rationalen Vorfaktoren $r_i$ der
+Yukawa-Formel folgen aus Wicklungszahlen auf dem 4D-Torus. (2) Die
+Rekursionskorrekturen folgen formal aus der FFGFT-Rekursionsformel
+$\Psi(t) = G(\Psi(t-T_{\mathrm{rev}}), \xi)$ als Störungsreihe in $\xi$.
+(3) Eine numerische Prüfung dieser Korrekturen erfordert Messunsicherheiten
+unterhalb von $\xi \sim 10^{-4}$, was die aktuellen PDG-Werte für Quarks
+nicht leisten.
+
+\textbf{Zur Einordnung der Abweichungen}: Die verbleibenden $0{,}5$--$1\%$
+Abweichungen zwischen T0-FFGFT-Idealwerten und PDG-Leptonen-Massen
+liegen in derselben Größenordnung wie die SM-Strahlungskorrekturen
+($\sim 0{,}3$--$0{,}5\%$), die in den PDG-Werten enthalten sind.
+Die PDG-Werte sind SM-modellabhängig -- ein direkter Vergleich ohne
+T0-eigenes Korrektursystem ist daher nicht abschließend. Die
+T0-FFGFT-Berechnungen könnten besser sein als der direkte Vergleich
+suggeriert (Abschnitt~9).
+
+\tableofcontents
+\newpage
+
+\section{Ableitungshierarchie}
+
+\subsection{Übersicht}
+
+Die FFGFT-Struktur baut auf sechs Stufen auf, wobei jede Stufe logisch
+aus der vorherigen folgt:
+
+\begin{enumerate}
+    \item \textbf{Fundament}: $\tilde{T} \cdot m = 1$,
+          $\xi = \frac{4}{3} \times 10^{-4}$ (Dok.~049, 129)
+    \item \textbf{Freies Feld}: $\mathcal{L}_0 = \varepsilon \cdot
+          (\partial\delta m)^2$ (Dok.~049, 095, 129)
+    \item \textbf{Torus-Geometrie}: Krümmungskorrektur $\Delta\mathcal{L}$,
+          fraktale Metrik $D_f = 3 - \xi$ (Dok.~009, 133 -- hergeleitet; Dok.~050, 051 -- Anwendung)
+    \item \textbf{Fraktale Rekursion}: $\xi^p$-Exponenten und
+          $r$-Vorfaktoren aus Torus-Topologie (Dok.~006,
+          \texttt{calc-resonanz-leiter.py})
+    \item \textbf{Teilchenspektrum}: $m_i = r_i \cdot \xi^{p_i} \cdot v$,
+          9 Massen, 47 Konstanten, $\varnothing$ Fehler 0{,}84\,\%
+          (\texttt{calc\_De.py})
+    \item \textbf{Spin / Dirac}: Clifford-Algebra aus Torus-Topologie,
+          setzt Stufe~3 voraus (Dok.~050, 051)
+\end{enumerate}
+
+Der gegenwärtige Engpass liegt bei \textbf{Stufe~3}: der formalen
+Einbettung der Torus-Krümmung in die Lagrange-Dichte.
+
+\section{Stufe 1 und 2: Fundament und freies Feld}
+
+\subsection{Der einzige konsistente Wert von \texorpdfstring{$\xi$}{xi}}
+
+Die Formel aus Dok.~049 (Korrektur K1, Dok.~186):
+\begin{equation}
+    \xi = \frac{\lambda_h^2\, v^2}{16\pi^3\, m_h^2}
+    \approx 1{,}33 \times 10^{-4}
+    \label{eq:xi_higgs}
+\end{equation}
+ist eine \textbf{Prüfformel}, keine freie Definition. Sie zeigt:
+Setzt man die gemessenen Higgs-Parameter
+($\lambda_h \approx 0{,}129$, $v \approx 246{,}22$ GeV,
+$m_h \approx 125{,}10$ GeV) ein, erhält man exakt den
+geometrischen Sollwert $\xi = 4/30000$.
+
+\textbf{SM-Abhängigkeit der Eingaben} (Skript \texttt{higgs\_pruefformel.py}):
+Alle drei Eingaben sind SM-modellabhängige Messwerte:
+$\lambda_h$ nur aus SM-Higgs-Potential-Fit;
+$v$ aus W-Boson-Masse via SM-Relation $v = 2m_W/g$;
+$m_h$ relativ direkt gemessen.
+Die Fehlerfortpflanzung ergibt eine Gesamtunsicherheit von $\pm 4{,}7\%$
+(dominiert von $\lambda_h$ mit $\pm 4{,}65\%$).
+Die Abweichung $\xi_{\text{Higgs}} - \xi_{\text{T0}} = -2{,}5\%$
+liegt bei nur \textbf{0,6$\sigma$} -- vollständig innerhalb der
+Messungenauigkeit.
+
+\textbf{Eindeutigkeit in zwei Richtungen}:
+\begin{enumerate}
+    \item \textbf{Higgs-Konsistenz}: $\xi = 4/30000$ erfüllt
+          Gleichung~\eqref{eq:xi_higgs} innerhalb $0{,}6\sigma$
+          der kombinierten SM-Messungenauigkeit.
+          Kein unabhängiger Beweis (SM-Eingaben), aber auch
+          kein Widerspruch.
+    \item \textbf{$\alpha$-Übersetzung}: Nur dieser Wert lässt sich
+          über $\alpha_{\text{T0-FFGFT}} = \xi \cdot E_0^2 = 1$ in die
+          SM-Feinstrukturkonstante $\alpha_{\text{SI}} = 1/137{,}036$
+          übersetzen (Dok.~011).
+\end{enumerate}
+
+$\xi$ ist damit kein freier Parameter im üblichen Sinne -- er ist
+der \textbf{einzige geometrisch mögliche Wert}. Die Freiheit
+besteht nur darin, das Einheitensystem zu wählen; der physikalische
+Inhalt ist eindeutig bestimmt.
+
+\subsection{Grundrelation}
+
+Das einzige fundamentale Gesetz der FFGFT lautet:
+\begin{equation}
+    \tilde{T}(x,t) \cdot m(x,t) = 1
+    \label{eq:fundamental}
+\end{equation}
+mit dem einzigen konsistenten Parameter
+\begin{equation}
+    \xi = \frac{4}{3} \times 10^{-4}
+\end{equation}
+Der Wert $\xi = 4/30000$ ist keine freie Wahl -- er ist der
+\textbf{einzige Wert}, der die Konsistenzprüfung mit dem
+Higgs-Feld besteht und sich gleichzeitig in die
+SM-Feinstrukturkonstante $\alpha_{\text{SI}} = 1/137{,}036$
+übersetzen lässt (Dok.~049, 186, 011).
+
+\subsection{Freie Lagrange-Dichte}
+
+Teilchen sind kleine Anregungen $\delta m(x,t)$ im Hintergrundfeld $m_0$:
+\begin{equation}
+    m(x,t) = m_0 + \delta m(x,t), \qquad |\delta m| \ll m_0
+\end{equation}
+
+Die freie Lagrange-Dichte reduziert sich auf:
+\begin{equation}
+    \mathcal{L}_0 = \varepsilon \cdot (\partial_\mu \delta m)^2
+    \label{eq:L0}
+\end{equation}
+Dies ist formal äquivalent zu einem masselosen Skalarfeld. Die
+Massen entstehen durch die Torus-Geometrie -- nicht durch einen
+separaten Mechanismus.
+
+\section{Stufe 3: Torus-Geometrie und Krümmungs\-korrektur}
+
+\subsection{Torus-Metrik}
+
+Der 4D-Torus $\mathbb{T}^4$ mit Hauptradius $R$ und Nebenradius $r$
+trägt die Gaußsche Krümmung:
+\begin{equation}
+    K(\theta) = \frac{\cos\theta}{r(R + r\cos\theta)}
+\end{equation}
+
+Der Satz von Gauss-Bonnet liefert die zentrale Eigenschaft:
+\begin{equation}
+    \oint_{\mathbb{T}^2} K \, dA = 0
+\end{equation}
+Innen- und Außenkrümmung heben sich exakt auf. Daher ist die
+Annahme eines flachen Universums im Standardmodell konsistent -- sie
+entspricht der gemittelten Torus-Geometrie. Die FFGFT ergänzt das
+Standardmodell um die \emph{lokalen} Krümmungseffekte, die im
+Mittel verschwinden, aber die Teilchenstruktur bestimmen.
+
+Das Verhältnis der Radien wird mit $\xi$ identifiziert:
+\begin{equation}
+    \xi = \frac{r}{R}
+\end{equation}
+
+\subsection{Herleitung der fraktalen Dimension \texorpdfstring{$D_f = 3 - \xi$}{Df = 3 - xi}}
+
+Die fraktale Raumdimension ist kein Postulat — sie wird aus der
+Volumenskalierung in fraktalen Räumen hergeleitet (Dok.~009, 133).
+
+\textbf{Schritt 1: Volumenskalierung} (aus Dok.~133):
+In einem Raum mit ganzzahliger Dimension $d$ gilt $V_d(r) \propto r^d$.
+In einem leicht fraktalen Raum mit $D_f$ gilt entsprechend:
+\begin{equation}
+    V_{D_f}(r) \propto r^{D_f}
+    \quad \Rightarrow \quad
+    \frac{V_{D_f}(r)}{V_3(r)} = r^{D_f - 3} = r^{-\xi}
+\end{equation}
+
+Daraus folgt direkt:
+\begin{equation}
+    \boxed{D_f^{\,\text{Raum}} = 3 - \xi \approx 2{,}9998667}
+\end{equation}
+
+\textbf{Schritt 2: Eindeutige Bestimmung von $K_{\text{frak}}$}
+(Dok.~133, Schlüsselbeweis):
+
+$K_{\text{frak}}$ ist nicht frei wählbar -- er ist durch die Forderung
+eindeutig bestimmt, dass \textbf{zwei unabhängige Herleitungen} des
+Massenverhältnisses $m_e/m_\mu$ denselben Wert liefern:
+\begin{align}
+    \text{Weg 1 (geometrisch):} &\quad
+    \frac{m_\mu}{m_e} = \frac{r_\mu \cdot \xi^{p_\mu}}{r_e \cdot \xi^{p_e}}
+    = \frac{12}{5} \cdot \xi^{-1/2} \approx 207{,}8 \\
+    \text{Weg 2 (fraktal):} &\quad
+    \frac{m_\mu}{m_e} = \left(\frac{D_f^{\,\text{eff}}}{3}\right)^{\!D_f^{\,\text{eff}}/2}
+    \cdot f(\xi) \approx 206{,}8
+\end{align}
+
+Beide Wege stimmen überein -- das ist kein Fit, sondern ein
+Konsistenztest der die Einzigkeit von $K_{\text{frak}}$ beweist.
+
+\textbf{Wichtige Unterscheidung (Dok.~133)}: Es treten zwei
+verschiedene fraktale Dimensionen auf:
+\begin{itemize}
+    \item $D_f^{\,\text{Raum}} = 3 - \xi$ -- lokale Raumzeit-Dimension,
+          minimale Abweichung von 3, direkt unmessbar klein
+    \item $D_f^{\,\text{eff}} \approx 2{,}973$ -- effektive Dimension
+          nach kumulativem Skalenfluss (Rekursion $\mathcal{R}$) von Planck- bis
+          elektroschwacher Skala (17 Größenordnungen)
+\end{itemize}
+
+Die physikalisch relevante fraktale Korrektur $K_{\text{frak}} = 1 - 100\xi$
+entsteht nicht aus $D_f^{\,\text{Raum}}$ allein, sondern aus der
+\emph{kumulativen Wirkung} über den gesamten Energiebereich. Der
+Faktor 100 ergibt sich aus dem logarithmischen Abstand der Skalen:
+\begin{equation}
+    \ln\!\left(\frac{\ell_{\text{EW}}}{\ell_P}\right)
+    \approx \ln\!\left(10^{17}\right)
+    \approx 39 \quad \longrightarrow \quad
+    K_{\text{frak}} = \left(\frac{D_f^{\,\text{eff}}}{3}\right)^{\!D_f^{\,\text{eff}}/2}
+    = 1 - 100\xi
+\end{equation}
+
+\textbf{Fazit}: $D_f = 3 - \xi$ ist in FFGFT eine
+\textbf{abgeleitete Größe}, nicht eine Annahme. Die Herleitung
+in Dok.~009 und 133 ist vollständig.
+
+\subsection{Fraktale Metrik}
+
+Die fraktale Raumdimension lautet:
+\begin{equation}
+    D_f = 3 - \xi
+\end{equation}
+
+Dies modifiziert die Clifford-Algebra-Struktur (Dok.~050, 051):
+\begin{equation}
+    \mathbf{e}_\mu^{(\mathrm{frak})} \mathbf{e}_\nu^{(\mathrm{frak})}
+    + \mathbf{e}_\nu^{(\mathrm{frak})} \mathbf{e}_\mu^{(\mathrm{frak})}
+    = 2\, g_{\mu\nu}^{(\mathrm{frak})}
+\end{equation}
+
+\subsection{Vollständige Lagrange-Dichte}
+
+Das Feld $\delta m$ propagiert auf dem Torus-Hintergrund. Mit
+$g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}^{(\mathrm{torus})}$
+und Entwicklung in $\xi$:
+\begin{align}
+    \sqrt{|g|} &\approx 1 + \frac{\xi}{2} f(\theta) + \mathcal{O}(\xi^2) \\
+    g^{\mu\nu} &\approx \eta^{\mu\nu} - \xi \cdot k^{\mu\nu}(\theta)
+    + \mathcal{O}(\xi^2)
+\end{align}
+
+Die volle Lagrange-Dichte bis zur ersten Ordnung in $\xi$:
+\begin{equation}
+    \mathcal{L} = \varepsilon \cdot (\partial\delta m)^2
+    + \Delta\mathcal{L}_{\mathrm{Torus}} + \mathcal{O}(\xi^2)
+\end{equation}
+
+mit dem Korrekturterm:
+\begin{equation}
+    \boxed{
+    \Delta\mathcal{L}_{\mathrm{Torus}} = \varepsilon \cdot \xi \left[
+    \frac{f(\theta)}{2} \cdot (\partial\delta m)^2
+    - k^{\mu\nu}(\theta) \cdot \partial_\mu\delta m \cdot \partial_\nu\delta m
+    \right]
+    }
+    \label{eq:deltaL}
+\end{equation}
+
+Winkelgemittelt über den Torus verschwindet der erste Moment:
+\begin{equation}
+    \langle \Delta\mathcal{L}_{\mathrm{Torus}} \rangle_\theta
+    = -\frac{\varepsilon \xi^2}{2} \cdot (\partial\delta m)^2
+    + \mathcal{O}(\xi^3)
+\end{equation}
+
+Die Korrektur ist von der Ordnung $\xi^2 \approx 10^{-8}$ -- was erklärt,
+warum $\mathcal{L}_0$ allein bereits 0{,}84\,\% Genauigkeit liefert.
+
+\section{Stufe 4: Wicklungszahlen und Vorfaktoren}
+
+\subsection{Resonanzbedingung}
+
+Jedes Teilchen entspricht einem Feldmodus mit Wicklungszahlen
+$(n_\theta, n_\phi) \in \mathbb{Z}^2$ auf dem Torus. Die
+modusspezifische effektive Masse lautet:
+\begin{equation}
+    m_{\mathrm{eff}}^2(n_\theta, n_\phi)
+    = m_0^2 + \varepsilon \cdot \xi \cdot R_{\mathrm{eff}}(n_\theta, n_\phi)
+\end{equation}
+
+mit der effektiven Krümmung für einen Modus:
+\begin{equation}
+    R_{\mathrm{eff}}(n_\theta, n_\phi)
+    \sim \left(\frac{n_\phi}{n_\theta}\right)^2 \cdot \frac{\xi}{L_0^2}
+\end{equation}
+
+\subsection{Herleitung der rationalen Vorfaktoren}
+
+\textbf{Ansatz}: Die $r$-Vorfaktoren folgen aus den Wicklungszahlen:
+\begin{equation}
+    \boxed{r_i = \frac{n_{\phi,i}^2}{n_{\theta,i}}}
+    \label{eq:r_winding}
+\end{equation}
+
+Für die Leptonen ergibt sich:
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcccl}
+\toprule
+\textbf{Teilchen} & $n_\theta$ & $n_\phi$ & $r_i = n_\phi^2/n_\theta$
+& \textbf{Probe} \\
+\midrule
+Elektron & $3$ & $2$ & $4/3$  & $\checkmark$ \\
+Myon     & $5$ & $4$ & $16/5$ & $\checkmark$ \\
+Tau      & $9$ & $5$ & $25/9$ & $\checkmark$ \\
+\bottomrule
+\end{tabular}
+\caption{Wicklungszahlen der Leptonen. Die rationalen Vorfaktoren folgen
+exakt aus $r_i = n_\phi^2 / n_\theta$.}
+\label{tab:leptonen_wicklung}
+\end{table}
+
+Die Neutrinos tragen dieselben $(n_\theta, n_\phi)$ wie ihre
+Leptonen-Partner, jedoch mit doppelter $\xi$-Unterdrückung:
+\begin{equation}
+    m_{\nu_i} = r_i \cdot \xi^2 \cdot m_e
+\end{equation}
+
+Dies deutet auf dieselbe Torus-Topologie hin, aber eine andere
+Rekursionstiefe.
+
+\subsection{Quarks: andere Topologie}
+
+Quarks tragen Farbladung (SU(3)-Struktur). Der Ansatz
+$r_i = n_\phi^2 / n_\theta$ gilt dort nicht direkt. Vermutlicher
+Ansatz mit dreifacher Farbstruktur $n_c = 3$:
+\begin{equation}
+    r_i^{(\mathrm{Quark})} = \frac{n_{\phi,i}^2}{n_{\theta,i} \cdot n_c}
+\end{equation}
+
+Eine vollständige Herleitung steht hier noch aus. Die Messungenauigkeiten
+der Quarkmassen (bis zu 30\,\% bei Strange) übersteigen die zu
+erwartenden Korrekturen bei weitem, sodass eine numerische Prüfung
+derzeit nicht möglich ist.
+
+\section{Stufe 4 (Fortsetzung): Rekursionskorrekturen}
+
+\subsection{Formale Herleitung aus der Rekursionsformel}
+
+Die FFGFT-Rekursionsformel lautet (Dok.~183, 184):
+\begin{equation}
+    \Psi(t) = G\!\left(\Psi(t - T_{\mathrm{rev}}),\, \xi\right)
+    \label{eq:recursion}
+\end{equation}
+
+Für kleines $\xi$ entwickelt man:
+\begin{equation}
+    \Psi^{(n)} = \Psi^{(0)}
+    + \xi \cdot \Psi^{(1)}
+    + \xi^2 \cdot \Psi^{(2)}
+    + \ldots
+\end{equation}
+
+Die Koeffizienten $c_k$ der Rekursionskorrekturen folgen rein
+aus der Geometrie von $G$:
+\begin{equation}
+    c_k = \frac{1}{k!}
+    \left.\frac{\partial^k G}{\partial \xi^k}\right|_{\xi=0}
+    \label{eq:ck}
+\end{equation}
+
+Der effektive Vorfaktor mit Rekursionskorrekturen lautet:
+\begin{equation}
+    r_i^{(\mathrm{eff})} = r_i^{(\mathrm{ideal})}
+    \cdot \prod_{k=1}^{N} \left(1 + c_k \cdot \xi^k\right)
+    \label{eq:r_eff}
+\end{equation}
+
+\subsection{Prüfbarkeit und Messgenauigkeit}
+
+\textbf{Wichtiger Hinweis zur Falsifizierbarkeit}:
+
+Die aus \eqref{eq:r_eff} folgenden Korrekturen liegen bei der Ordnung:
+\begin{equation}
+    \delta r_i / r_i \sim c_1 \cdot \xi \approx c_1 \times 10^{-4}
+\end{equation}
+
+Die aktuellen PDG-Messunsicherheiten der Teilchenmassen:
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Teilchen} & \textbf{Rel. Messfehler} & \textbf{Prüfbar?} \\
+\midrule
+Elektron & $\sim 10^{-9}$ & Ja -- Theorie trägt die Last \\
+Myon     & $\sim 10^{-8}$ & Ja -- Theorie trägt die Last \\
+Tau      & $\sim 10^{-4}$ & Grenzfall \\
+Charm    & $\sim 10^{-2}$ & Nein \\
+Bottom   & $\sim 10^{-3}$ & Nein \\
+Up/Down/Strange & $\sim 10\text{--}30\,\%$ & Nein \\
+Top      & $\sim 10^{-3}$ & Nein \\
+\bottomrule
+\end{tabular}
+\caption{Relative PDG-Messgenauigkeiten im Vergleich zur erwarteten
+Korrekturordnung $\xi \sim 10^{-4}$.}
+\label{tab:messgenauigkeit}
+\end{table}
+
+\textbf{Folgerung}: Die idealen Wicklungsbrüche $r_i^{(\mathrm{ideal})}$
+sind für Elektron und Myon bereits so präzise, dass Rekursionskorrekturen
+dort die Übereinstimmung \emph{verschlechtern} würden. Das bedeutet:
+Die Kopplung der Rekursion ist für Leptonen entweder topologisch
+unterdrückt, oder die Brüche $4/3$, $16/5$, $25/9$ sind bereits
+die volle Antwort inklusive aller Korrekturen.
+
+Für Quarks sind Rekursionskorrekturen prinzipiell denkbar, aber
+numerisch nicht prüfbar bis Messunsicherheiten unter $\xi \sim 10^{-4}$
+fallen.
+
+\subsection{Epistemische Position}
+
+Die Theorie macht geometrische Vorhersagen, die derzeit nicht alle
+numerisch prüfbar sind. Das ist kein Mangel der Theorie, sondern
+eine Aussage über den Stand der experimentellen Physik. Analog
+waren viele Vorhersagen des Standardmodells Jahrzehnte vor ihrer
+experimentellen Bestätigung theoretisch konsistent formuliert.
+
+Die prüfbaren Vorhersagen der FFGFT -- CP-Verletzungsphase
+$\delta_{CP} = 283{,}3°$, schwacher Mischungswinkel $\sin^2\theta_W = 3/13$,
+Bell-Korrelationen für massive Teilchen -- sind von dieser
+Einschränkung nicht betroffen, da sie dimensionslose Verhältnisse
+betreffen, nicht absolute Massenwerte.
+
+
+\section{Herleitung der \texorpdfstring{$p$}{p}-Exponenten aus der Torus-Topologie}
+
+\subsection{Die reguläre Leiter}
+
+Auf einem 3D-Torus $\mathbb{T}^3$ sind die erlaubten Impulse in
+$d_{\text{akt}}$ aktiven Dimensionen quantisiert. Die Energie eines
+Feldmodus skaliert mit der Anzahl aktiver Dimensionen:
+\begin{equation}
+    E \sim \xi^{\,d_{\text{akt}}/3} \cdot v
+    \qquad \Rightarrow \qquad
+    p = \frac{d_{\text{akt}}}{3}
+\end{equation}
+
+Dies liefert die reguläre Leiter in Schritten von $\Delta p = 1/3$:
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcl}
+\toprule
+$p$ & $d_{\text{akt}}$ & \textbf{Teilchen} \\
+\midrule
+$3/2$ & $4{,}5$? & Elektron, Up, Down \\
+$1$   & $3$     & Myon, Strange \\
+$2/3$ & $2$     & Tau, Charm \\
+$1/3$ & $1$     & (hypothetisch) \\
+$0$   & $0$     & Higgs-Skala \\
+\bottomrule
+\end{tabular}
+\caption{Reguläre $p$-Leiter: jede Stufe entspricht einer aktiven
+Torus-Dimension weniger.}
+\label{tab:p_leiter}
+\end{table}
+
+\textbf{Hinweis}: $p = 3/2$ erfordert formal $d_{\text{akt}} = 4{,}5$
+Dimensionen, was auf einen Mischterm zwischen Raum- und
+Zeitkomponenten des 4D-Torus hindeutet. Dies ist ein offener Punkt.
+
+\subsection{Das Top-Quark: negativer Exponent als inverse Skala}
+
+Das Top-Quark nimmt eine Sonderstellung ein:
+\begin{equation}
+    p_{\text{Top}} = -\frac{1}{3}, \qquad
+    r_{\text{Top}} = \frac{1}{28}, \qquad
+    m_t \approx 172{,}7 \text{ GeV}
+\end{equation}
+
+Numerische Probe:
+\begin{equation}
+    m_t = \frac{1}{28} \cdot \xi^{-1/3} \cdot v
+    = \frac{1}{28} \cdot (7500)^{1/3} \cdot 246 \text{ GeV}
+    \approx 172{,}0 \text{ GeV} \quad \checkmark
+\end{equation}
+
+\textbf{Geometrische Interpretation}: Alle anderen Fermionen haben
+$m_i \ll v$ -- sie sind durch $\xi^p$ mit $p > 0$ gegenüber der
+Higgs-Skala unterdrückt. Das Top-Quark ist der einzige Fermion mit
+$m_t \approx 0{,}7\,v$ -- seine Yukawa-Kopplung ist $y_t \approx 1$,
+d.h. es koppelt ohne Unterdrückung an das Higgs-Feld.
+
+In Torus-Sprache bedeutet $p < 0$: der Modus windet sich in der
+\emph{inversen} Richtung auf einer Torus-Dimension. Statt
+$\xi$-Unterdrückung erhält man eine $\xi^{-1/3}$-Verstärkung:
+\begin{equation}
+    \xi^{-1/3} = \left(\frac{1}{\xi}\right)^{1/3}
+    = \left(\frac{30000}{4}\right)^{1/3}
+    = 7500^{1/3} \approx 19{,}57
+\end{equation}
+
+\begin{predbox}[Geometrische Aussage -- Status: Ansatz]
+Das Top-Quark ist das einzige Fermion, dessen Torus-Modus eine
+\textbf{inverse Windung} auf einer Raumdimension trägt. Dies
+entspricht $p = -1/3$ und liefert eine Yukawa-Kopplung der Ordnung
+Eins -- was das Top als \emph{natürliches} Teilchen der Higgs-Skala
+auszeichnet, während alle anderen Fermionen unterdrückt sind.
+\end{predbox}
+
+\textbf{Epistemischer Status}: Dies ist ein geometrisch motivierter
+Ansatz, keine abgeschlossene Herleitung. Die Frage, warum genau
+$d_{\text{akt}} = -1$ (eine inverse Dimension) für das Top gilt,
+ist noch offen.
+
+\subsection{Das Bottom-Quark: Übergangsexponent}
+
+Das Bottom-Quark hat $p = 1/2$ -- kein ganzzahliges Vielfaches
+von $1/3$:
+\begin{equation}
+    p_{\text{Bottom}} = \frac{1}{2}, \qquad
+    r_{\text{Bottom}} = \frac{3}{2}, \qquad
+    m_b \approx 4{,}18 \text{ GeV}
+\end{equation}
+
+Numerische Probe:
+\begin{equation}
+    m_b = \frac{3}{2} \cdot \xi^{1/2} \cdot v
+    = \frac{3}{2} \cdot \sqrt{\frac{4}{30000}} \cdot 246 \text{ GeV}
+    \approx 4{,}26 \text{ GeV} \quad \checkmark
+\end{equation}
+
+$p = 1/2$ entspricht geometrisch einem \textbf{2D-Querschnitt} des
+3D-Torus -- einer Fläche statt eines Volumens oder einer Linie.
+Dies deutet darauf hin, dass der Bottom-Modus auf einer 2D-Untermannigfaltigkeit
+des Torus lokalisiert ist, was physikalisch dem Übergang zwischen
+regulärer Unterdrückung und inverser Top-Skala entspricht.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{lccc}
+\toprule
+\textbf{Teilchen} & $p$ & \textbf{Geometrie} & \textbf{Status} \\
+\midrule
+Elektron, Up, Down & $3/2$ & 3D + Zeit\-komponente & offen ($d=4{,}5$?) \\
+Myon, Strange      & $1$   & 3D Volumen          & hergeleitet \\
+Tau, Charm         & $2/3$ & 2D Fläche           & hergeleitet \\
+Bottom             & $1/2$ & 2D Querschnitt      & Ansatz \\
+Top                & $-1/3$& Inverse 1D Windung  & Ansatz \\
+\bottomrule
+\end{tabular}
+\caption{Geometrische Interpretation der $p$-Exponenten.
+Hergeleitet = aus $d_{\text{akt}}/3$ direkt; Ansatz = motiviert
+aber noch nicht formal abgeschlossen.}
+\label{tab:p_geometrie}
+\end{table}
+
+\subsection{Inkonsistenz in Dok.~006}
+
+In Dok.~006 findet sich an einer Stelle die Zuordnung
+$p_{\text{Top}} = 2/3$ (3.~Generation, reguläre Leiter). Dies
+ist numerisch falsch -- die korrekte Vorhersage $m_t \approx 172$~GeV
+erfordert zwingend $p = -1/3$. Die Tabelle in Dok.~006 enthält den
+korrekten Wert; der Fließtext an jener Stelle ist zu korrigieren.
+
+\section{Harmonische Interpretation der \texorpdfstring{$p$}{p}-Exponenten}
+
+\subsection{Die \texorpdfstring{$\xi^p$}{xi\^{}p}-Skala als logarithmische Resonanzskala}
+
+Die Teilchenmassen folgen der Yukawa-Formel $m_i = r_i \cdot \xi^{p_i} \cdot v$.
+Da $\xi \ll 1$, ist die $p$-Achse eine \textbf{logarithmische Resonanzskala}:
+\begin{equation}
+    \log m_i = \log r_i + p_i \cdot \log \xi + \log v
+\end{equation}
+
+Jeder Schritt $\Delta p = 1/3$ entspricht auf dieser Skala einem festen
+Intervall:
+\begin{equation}
+    \frac{m(p + 1/3)}{m(p)} = \xi^{1/3}
+    = \left(\frac{4}{30000}\right)^{1/3} \approx \frac{1}{19{,}6}
+\end{equation}
+
+Dies ist in FFGFT die fundamentale \textbf{Terz} der Teilchenspektrum-Skala.
+In Dok.~060 wird gezeigt, dass die $r$-Vorfaktoren 5-Limit-Verhältnisse
+sind -- dieselben Primfaktoren wie in der reinen Stimmung der Musiktheorie.
+
+\subsection{Parallele zur Musiktheorie (Dok.~060, 159)}
+
+In der Musiktheorie bilden Obertöne einer schwingenden Saite eine
+harmonische Reihe mit diskreten Frequenzverhältnissen. Der Laplace-Operator
+auf einem Kreis $S^1$ hat Eigenwerte:
+\begin{equation}
+    \lambda_n = n^2, \qquad n = 0, \pm 1, \pm 2, \pm 3, \ldots
+\end{equation}
+
+Die negativen Werte $n < 0$ sind keine Ausnahme -- sie sind die
+\emph{andere Richtung} der Windung auf dem Kreis. In Dok.~159 wird
+gezeigt, dass die Teilchenmassen als \textbf{Torus-Obertöne} mit
+Schrittweite $\Delta p = 1/3 = 1/D$ erscheinen, wobei $D = 3$ die
+Raumdimension ist.
+
+Die vollständige $p$-Skala in harmonischer Sprache:
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{lccll}
+\toprule
+\textbf{Teilchen} & $p$ & \textbf{$\xi^p$} & \textbf{Harmonie} & \textbf{Richtung} \\
+\midrule
+Top     & $-1/3$ & ${\approx}19{,}6$ & Terz aufwärts  & Inverse Windung \\
+---     & $0$    & $1$               & Grundton       & Higgs-Skala $v$ \\
+Bottom  & $1/2$  & ${\approx}1/87$   & Quarte         & log. Mitte \\
+Tau, Charm & $2/3$ & ${\approx}1/384$ & Quinte        & 2 Terzen \\
+Myon, Strange & $1$ & ${\approx}1/7500$ & Oktave      & 3 Terzen \\
+e, u, d & $3/2$  & ${\approx}1/65{\cdot}10^4$ & Quinte+Okt. & 4,5 Terzen \\
+\bottomrule
+\end{tabular}
+\caption{Die $p$-Exponenten als harmonische Intervalle auf der
+logarithmischen $\xi$-Skala. Der Grundton ist die Higgs-Skala $v$.
+Schrittweite $\Delta p = 1/3$ entspricht einer Terz.}
+\label{tab:harmonisch}
+\end{table}
+
+\subsection{Das negative Vorzeichen als Umkehrung -- keine Ausnahme}
+
+In der Musiktheorie ist ein Intervall abwärts (z.B. eine Quarte nach
+unten) genauso natürlich wie dasselbe Intervall aufwärts. Das
+negative Vorzeichen $p < 0$ bedeutet in der harmonischen Interpretation
+lediglich eine \textbf{Windung in der Gegenrichtung} auf dem Torus.
+
+Aus Dok.~159: Der Laplace-Operator auf $\mathbb{T}^3$ hat Eigenwerte
+$\lambda_{(n_1,n_2,n_3)} = n_1^2 + n_2^2 + n_3^2$ mit
+$n_i \in \mathbb{Z}$. Negative $n_i$ sind gleichwertige Windungen
+in der Gegenrichtung.
+
+Für das Top-Quark:
+\begin{equation}
+    p_{\text{Top}} = -\frac{1}{3}
+    \quad \Longleftrightarrow \quad
+    n_{\text{eff}} = -1 \text{ auf einer Torus-Dimension}
+\end{equation}
+
+Das ergibt eine Verstärkung statt Unterdrückung:
+\begin{equation}
+    \xi^{-1/3} = \frac{1}{\xi^{1/3}} \approx 19{,}6
+\end{equation}
+
+\textbf{Warum nur das Top?} Das Top ist das einzige Fermion dessen
+natürliche Resonanzfrequenz \emph{oberhalb} des Higgs-Grundtons $v$
+liegt. Alle anderen Fermionen sind durch positive $p$-Werte unterdrückt.
+Das Top schwingt in der Gegenrichtung -- es ist der einzige Oberton
+der über den Grundton hinausgeht.
+
+\subsection{Der $p = 1/2$ des Bottom als logarithmische Mitte}
+
+$p = 1/2$ ist in der harmonischen Interpretation die
+\textbf{geometrische Mitte} zwischen $p = 0$ (Grundton) und $p = 1$
+(erste Oktave):
+\begin{equation}
+    \xi^{1/2} = \sqrt{\xi} \qquad \longleftrightarrow \qquad
+    \text{eine Oktave tiefer in der log-Skala}
+\end{equation}
+
+In der Musiktheorie entspricht die geometrische Mitte zwischen zwei
+Frequenzen dem \textbf{geometrischen Mittel} -- dem einzigen
+gleichabständigen Punkt auf einer logarithmischen Skala. $p = 1/2$
+ist daher keine Anomalie, sondern ein ausgezeichneter Punkt der
+harmonischen Struktur.
+
+In Dok.~060 trägt der $r$-Koeffizient des Bottom den Wert $3/2$ --
+die \textbf{reine Quinte} $702{,}0$ Cent, das konsonanteste
+Intervall nach der Oktave. Zusammen mit $p = 1/2$ ist das Bottom-Quark
+damit der harmonisch einfachste Quark der Theorie.
+
+\subsection{Zusammenfassung: Die vollständige harmonische Struktur}
+
+Die $p$-Exponenten sind keine willkürlichen Zahlen. Sie sind
+\textbf{Windungszahlen auf einem logarithmischen Torus} mit
+Schrittweite $1/3$. Negative Werte sind Gegenwindungen.
+Halbzahlige Werte sind geometrische Mitten zwischen Windungsebenen.
+
+Dies ist dieselbe Struktur wie in der Musiktheorie: Obertöne,
+Oktaven, Quinten und Quarten entstehen nicht durch Design, sondern
+durch die \textbf{Geometrie der periodischen Randbedingung}.
+
+\begin{predbox}[Harmonisches Prinzip]
+Die Teilchenspektrum-Skala der FFGFT ist eine harmonische Reihe auf
+dem logarithmischen Torus. Schrittweite $\Delta p = 1/3$ ist die
+fundamentale Terz. Negative $p$ sind Gegenwindungen. $p = 1/2$ ist
+die geometrische Mitte (Tritonus). Das Top-Quark ist der einzige
+Fermion oberhalb des Grundtons.
+\end{predbox}
+
+\noindent\textit{Querverweise: Dok.~060 (Musiktheorie-Parallelen,
+pythagoreisches Komma, 5-Limit-Koeffizienten),
+Dok.~159 (harmonische Reihe, Torus-Obertöne, Vakuumkatastrophe).}
+
+\section{Stufe 6: Spin und Dirac-Gleichung aus der Torus-Topologie}
+
+\subsection{Die zentrale Einsicht: Wicklungszahlen bestimmen Masse \emph{und} Spin}
+
+In den vorangegangenen Abschnitten wurden die Wicklungszahlen
+$(n_\theta, n_\phi)$ verwendet um die Masse-Vorfaktoren herzuleiten:
+\begin{equation}
+    r_i = \frac{n_{\phi,i}^2}{n_{\theta,i}}
+\end{equation}
+
+Aus Dok.~050 folgt eine direkte Verbindung zum Spin:
+\begin{equation}
+    \text{Spin-}s \;\longleftrightarrow\; \frac{n_\phi}{n_\theta} = 2s
+\end{equation}
+
+Daraus folgt unmittelbar:
+\begin{equation}
+    \boxed{r_i = \frac{n_{\phi,i}^2}{n_{\theta,i}}
+    = n_{\phi,i} \cdot \underbrace{\frac{n_{\phi,i}}{n_{\theta,i}}}_{=\,2s_i}
+    = 2 s_i \cdot n_{\phi,i}}
+\end{equation}
+
+\textbf{Für Spin-$1/2$ Fermionen} ($s = 1/2$, also $n_\phi/n_\theta = 1$):
+\begin{equation}
+    n_\phi = n_\theta \quad \Rightarrow \quad r_i = n_\phi
+\end{equation}
+
+Für das Elektron: $n_\phi = n_\theta = ?$ -- die Tabelle aus
+Abschnitt~4 zeigt $(n_\theta = 3, n_\phi = 2)$, also
+$n_\phi/n_\theta = 2/3 \neq 1$.
+
+\textbf{Wichtige Korrektur}: Die Spin-$1/2$-Bedingung
+$n_\phi/n_\theta = 1$ gilt für den \emph{Spinor-Anteil} der Wicklung,
+nicht für den Masse-erzeugenden Anteil. Masse und Spin entstehen aus
+\emph{verschiedenen Projektionen} derselben Wicklungszahlen auf den
+4D-Torus. Dies ist in Dok.~051 ausgeführt.
+
+\subsection{Clifford-Algebra aus der Torus-Geometrie}
+
+Die fundamentale Dirac-Gleichung in FFGFT lautet (Dok.~050):
+\begin{equation}
+    (i\,\mathbf{e}_\mu^{(\mathrm{frak})}\,\partial^\mu - m)\,\Psi = 0
+\end{equation}
+
+mit der fraktalen Clifford-Algebra:
+\begin{equation}
+    \mathbf{e}_\mu^{(\mathrm{frak})} \mathbf{e}_\nu^{(\mathrm{frak})}
+    + \mathbf{e}_\nu^{(\mathrm{frak})} \mathbf{e}_\mu^{(\mathrm{frak})}
+    = 2\,g_{\mu\nu}^{(\mathrm{frak})}
+\end{equation}
+
+Die 4×4-Dirac-Matrizen $\gamma^\mu$ sind \emph{eine} Matrixdarstellung
+dieser abstrakten Struktur -- nicht die Physik selbst. Die Physik
+ist die Torus-Geometrie.
+
+\subsection{Spin-$1/2$ als topologische Eigenschaft}
+
+Die bekannte 720°-Eigenschaft von Spin-$1/2$:
+\begin{equation}
+    R(360°)\,\Psi = -\Psi \qquad R(720°)\,\Psi = +\Psi
+\end{equation}
+
+folgt direkt aus der Torus-Wicklung (Dok.~050):
+
+\begin{keybox}[Spin als Topologie]
+Spin-$1/2$ entspricht der Wicklung $(n_\theta, n_\phi) = (1,1)$ auf
+dem Torus. Ein 360°-Umlauf = einmaliger Durchlauf der Wicklung $\to$
+Vorzeichenwechsel. Ein 720°-Umlauf = zweimaliger Durchlauf $\to$
+Rückkehr zur Identität. Dies ist \textbf{reine Topologie}, keine
+mysteriöse Quanteneigenschaft.
+\end{keybox}
+
+\subsection{Die T0-FFGFT-Dirac-Gleichung mit dynamischer Masse}
+
+In FFGFT ist die Masse keine Konstante sondern ein dynamisches Feld
+(aus der Grundrelation $\tilde{T}\cdot m = 1$). Die Dirac-Gleichung
+wird zu:
+\begin{equation}
+    \left(i\,\mathbf{e}_\mu^{(\mathrm{frak})}\,\partial^\mu
+    - m(x,t)\right)\Psi = 0
+\end{equation}
+
+mit $m(x,t) = m_0 + \delta m(x,t)$. Für kleine Anregungen:
+\begin{equation}
+    \left(i\,\mathbf{e}_\mu^{(\mathrm{frak})}\,\partial^\mu - m_0\right)\Psi
+    = \delta m(x,t)\cdot\Psi
+\end{equation}
+
+Der rechte Term koppelt den Dirac-Spinor $\Psi$ an das
+Massenanregungs-Feld $\delta m$ -- der Lagrangian-Term hierfür
+lautet:
+\begin{equation}
+    \mathcal{L}_{\mathrm{Dirac-T0-FFGFT}}
+    = \bar{\Psi}\left(i\,\mathbf{e}_\mu^{(\mathrm{frak})}\,\partial^\mu
+    - m_0\right)\Psi - \delta m \cdot \bar{\Psi}\Psi
+\end{equation}
+
+\subsection{Verbindung zur Lagrange-Hierarchie}
+
+Die vollständige FFGFT-Lagrangedichte vereinigt alle Stufen:
+\begin{equation}
+    \boxed{
+    \mathcal{L}_{\mathrm{FFGFT}} = \underbrace{\varepsilon\,(\partial\delta m)^2}_{\text{Stufe 2}}
+    + \underbrace{\Delta\mathcal{L}_{\mathrm{Torus}}}_{\text{Stufe 3}}
+    + \underbrace{\bar{\Psi}(i\,\mathbf{e}_\mu^{(\mathrm{frak})}\,\partial^\mu
+    - m_0)\Psi - \delta m\,\bar{\Psi}\Psi}_{\text{Stufe 6}}
+    }
+\end{equation}
+
+Die Massen $m_0 = m_i = r_i \cdot \xi^{p_i} \cdot v$ folgen aus
+Stufe~4 (Wicklungszahlen). Der Torus-Korrekturterm $\Delta\mathcal{L}$
+aus Stufe~3 modifiziert die Metrik $g_{\mu\nu}^{(\mathrm{frak})}$.
+Alles hängt an $\xi$.
+
+\subsection{Offener Punkt: Quarks und Farbladung}
+
+Für Quarks (SU(3)-Struktur, Farbladung) ist die Spinor-Struktur
+komplexer. Die Wicklungszahlen müssen um eine Farb-Quantenzahl
+$n_c = 3$ erweitert werden. Dies ist in Dok.~051 konzeptuell
+angedeutet, aber noch nicht vollständig formalisiert.
+
+\noindent\textit{Querverweise: Dok.~050 (Dirac geometrisch, vereinfacht),
+Dok.~051 (vollständige technische Darstellung).}
+
+\section{Lagrangian-Erweiterung: Präzision jenseits des \texorpdfstring{SM}{SM}}
+
+\subsection{Ausgangspunkt und Ziel}
+
+Das Standardmodell behandelt die Yukawa-Kopplungen $y_i$ als freie
+Parameter -- 12 unabhängige Zahlen ohne geometrischen Ursprung.
+Die T0-FFGFT-Erweiterung des Lagrangians hat ein konkretes Ziel:
+die $r_i$ und $p_i$ aus der Torus-Geometrie zu \textbf{erzwingen},
+nicht nur zu beschreiben. Damit werden Berechnungen möglich die
+das SM strukturell nicht leisten kann.
+
+\subsection{Der erweiterte Lagrangian mit Resonanzmoden}
+
+Der vollständige FFGFT-Lagrangian für ein Fermion-Feld mit
+Wicklungszahlen $(n_\theta, n_\phi)$ auf dem 4D-Torus lautet:
+
+\begin{equation}
+    \mathcal{L}_{(n_\theta, n_\phi)} = \varepsilon_{(n)} \cdot
+    (\partial_\mu \delta m)^2
+    + \frac{\kappa}{L_0^2} \cdot \frac{n_\phi^2}{n_\theta} \cdot
+    \xi^{d_{\text{akt}}/3} \cdot \delta m^2
+    + \Delta\mathcal{L}_{\text{Torus}}
+    \label{eq:L_extended}
+\end{equation}
+
+Der zweite Term ist der \textbf{Resonanz-Massenterm}:
+\begin{itemize}
+    \item $n_\phi^2/n_\theta = r_i$ -- der Yukawa-Vorfaktor folgt
+          geometrisch aus den Wicklungszahlen
+    \item $\xi^{d_{\text{akt}}/3} = \xi^{p_i}$ -- der Exponent
+          folgt aus der Anzahl aktiver Torus-Dimensionen
+    \item $\kappa = \varepsilon \cdot v^2$ -- Kopplungsstärke
+          an die Higgs-Skala
+\end{itemize}
+
+Aus dem Euler-Lagrange-Gleichung für diesen Term folgt die
+effektive Masse des Modus:
+\begin{equation}
+    m_i^2 = \frac{\kappa}{L_0^2} \cdot \frac{n_{\phi,i}^2}{n_{\theta,i}}
+    \cdot \xi^{d_{\text{akt},i}/3}
+    = r_i \cdot \xi^{p_i} \cdot v^2 \cdot \frac{1}{L_0^2}
+\end{equation}
+
+Das ist exakt die Yukawa-Formel $m_i = r_i \cdot \xi^{p_i} \cdot v$
+-- nun aber aus dem Lagrangian hergeleitet, nicht postuliert.
+
+\subsection{Was dieser Lagrangian leistet}
+
+\textbf{Was das SM nicht kann, T0-FFGFT aber kann:}
+
+\begin{table}[htbp]
+\centering\footnotesize
+\begin{tabular}{lll}
+\toprule
+\textbf{Größe} & \textbf{SM} & \textbf{T0-FFGFT} \\
+\midrule
+Yukawa-Kopplungen & 12 freie Parameter & $r_i = n_\phi^2/n_\theta$ aus Wicklung \\
+Massenexponenten  & Keine Struktur     & $p_i = d_{\text{akt}}/3$ aus Topologie \\
+Generationszahl   & Empirisch 3        & Torus-Dimensionen: $d=3$ \\
+Neutrino-Massen   & Seesaw ad hoc      & $\xi^2$-Unterdrückung geometrisch \\
+Koide-Relation    & Zufällig           & Konsequenz der $p_i$-Struktur \\
+\bottomrule
+\end{tabular}
+\caption{Verbesserungen durch den erweiterten T0-FFGFT-Lagrangian
+gegenüber dem Standardmodell.}
+\label{tab:verbesserungen}
+\end{table}
+
+\subsection{Korrekturen höherer Ordnung}
+
+Der Korrekturterm $\Delta\mathcal{L}_{\text{Torus}}$ aus
+Abschnitt~3 erzeugt modusspezifische Korrekturen. Winkelgemittelt:
+\begin{equation}
+    m_i^{(\text{eff})} = m_i^{(0)} \cdot
+    \left(1 + \sum_{k=1}^{N} c_k \cdot \xi^k \cdot f(p_i, k)\right)
+\end{equation}
+
+wobei $f(p_i, k)$ die generationsabhängige Gewichtung des
+$k$-ten Korrekturterms ist. Diese Korrekturen gehen über das
+SM hinaus weil sie die Torus-Krümmung modusweise kodieren.
+
+\textbf{Warum besser als SM:}
+\begin{enumerate}
+    \item \textbf{Strukturell}: Die Yukawa-Kopplungen sind nicht
+          frei -- sie sind durch $(n_\theta, n_\phi)$ festgelegt.
+          Das SM hat hier keine Vorhersagekraft.
+
+    \item \textbf{Präzision}: Die Korrekturen $c_k \cdot \xi^k$
+          sind geometrisch bestimmt, nicht durch Renormierung
+          von Divergenzen regularisiert. Das SM-Korrektursystem
+          (QED bis $\alpha^5$) ist modellabhängig.
+
+    \item \textbf{Konsistenz}: Masse, Spin und Generation folgen
+          aus denselben Wicklungszahlen -- im SM sind das
+          separate Freiheitsgrade.
+\end{enumerate}
+
+\subsection{Offene Frage: Eigener Korrekturformalismus oder SM-Kopie?}
+
+Der naheliegende nächste Schritt wäre, Strahlungskorrekturen analog
+zum SM zu berechnen:
+\begin{equation}
+    m_i^{(\text{T0-phys})} = m_i^{(0)} \cdot
+    \left(1 + \frac{\alpha_{\text{T0}}}{2\pi} \cdot g(p_i) + \ldots\right)
+\end{equation}
+mit $\alpha_{\text{T0}} = \xi \cdot E_0^2 = 1$ in T0-Einheiten.
+
+Aber hier ist Vorsicht geboten: Würde man denselben Formalismus wie
+das SM übernehmen -- Feynman-Diagramme, Schleifenintegrale,
+Renormierungsschema -- dann wäre das keine neue Physik, sondern
+das SM mit geometrischer Regularisierung. Das erklärt ähnliche
+Zahlen, aber nicht warum sie geometrisch sein \emph{müssen}.
+
+\textbf{Was der Torus strukturell anders macht:}
+
+Der 4D-Torus hat \textbf{diskrete Impulsmoden} -- keine kontinuierliche
+Impulsintegration. Die Konsequenzen:
+\begin{itemize}
+    \item Keine UV-Divergenzen -- der Torus liefert einen natürlichen
+          Cutoff bei $1/L_0$, ohne Regularisierung
+    \item Schleifenintegrale werden zu \textbf{endlichen Summen}
+          über Wicklungszahlen $(n_\theta, n_\phi)$
+    \item Renormierung wäre nicht nötig -- oder hätte eine
+          fundamental andere geometrische Bedeutung
+\end{itemize}
+
+\textbf{Die tiefere Möglichkeit:}
+
+Die Korrekturen in T0-FFGFT folgen möglicherweise direkt aus
+der Rekursionsformel:
+\begin{equation}
+    \Psi(t) = G\!\left(\Psi(t - T_{\text{rev}}),\, \xi\right)
+\end{equation}
+Die Rekursion \emph{ist} die Quantenkorrektur -- nicht ein Zusatz
+dazu. Jede Rekursionstiefe $k$ entspricht einer Korrekturordnung,
+und $c_k$ ist kein Renormierungsparameter, sondern ein geometrischer
+Koeffizient aus $G$.
+
+\begin{predbox}[Offene Grundfrage]
+Folgen die T0-FFGFT-Korrekturen aus der Rekursionsstruktur
+$\Psi(t) = G(\Psi(t-T_{\text{rev}}), \xi)$ ohne SM-Formalismus --
+oder braucht es einen SM-analogen Korrekturformalismus?\\[4pt]
+Die Antwort bestimmt ob T0-FFGFT eine \textbf{strukturell neue
+Physik} liefert oder eine geometrisch fundierte Variante des SM.
+\end{predbox}
+
+\noindent\textit{Querverweise: Abschnitt~3 (Torus-Krümmungskorrektur),
+Abschnitt~4 (Wicklungszahlen), Dok.~183, 184 (Rekursionsformel).}
+
+\section{Planck-Größen als Übersetzungsfaktoren}
+
+\subsection{Zwei verschiedene Rollen der Planck-Größen}
+
+Im Standardmodell und in der üblichen Quantengravitation werden
+die Planck-Einheiten als \textbf{fundamentale Konstanten} behandelt:
+$G = \hbar = c = 1$ (Planck-Einheiten). Die Formeln sehen damit
+vereinfacht aus, aber die Konstanten bleiben konzeptuell fundamental.
+
+In FFGFT ist die Rolle eine andere: Planck-Größen sind
+\textbf{Übersetzungsfaktoren} zwischen dem verhältnisbasierten
+T0-FFGFT-Einheitensystem und dem SI-Messsystem. Sie sind selbst aus
+$\xi$ ableitbar (Dok.~013):
+
+\begin{align}
+    G &= \frac{\xi^2}{4\,m_e}
+    \quad \text{(Gravitationskonstante aus } \xi\text{)} \\[4pt]
+    \ell_P &= \sqrt{G} = \frac{\xi}{2\sqrt{m_e}}
+    \quad \text{(Planck-Länge aus } \xi\text{)} \\[4pt]
+    \alpha &= \xi \cdot E_0^2 = 1
+    \quad \text{(T0-FFGFT-Einheiten; SI: } 1/137{,}036\text{)}
+\end{align}
+
+\subsection{Was die SM-Formeln wirklich kodieren}
+
+Die Formeln des SM, die $G$, $\hbar$ und $c$ enthalten, kodieren
+nicht fundamentale Konstanten -- sie kodieren
+\textbf{Übersetzungsverhältnisse} zwischen dem dimensionslosen
+geometrischen T0-FFGFT-System und dem SI-Maßsystem:
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{lll}
+\toprule
+\textbf{SM-Formel} & \textbf{SM-Interpretation} & \textbf{T0-FFGFT-Interpretation} \\
+\midrule
+$\ell_P = \sqrt{\hbar G/c^3}$ & Definition, fundamental & $\xi/(2\sqrt{m_e})$, aus $\xi$ \\
+$G = 6{,}674 \times 10^{-11}$ & Freie Konstante          & $\xi^2/(4m_e)$, geometrisch \\
+$\alpha = 1/137$ & Universelle Konstante    & Einheitenkonvention \\
+$c = 1$ (Planck) & Konvention               & Verhältnis $\ell_P/t_P$ \\
+\bottomrule
+\end{tabular}
+\caption{Planck-Größen im SM (als Konstanten) vs.\ T0-FFGFT (als
+Übersetzungsfaktoren zwischen Einheitensystemen). Dok.~013, 014, 015.}
+\label{tab:planck_translation}
+\end{table}
+
+\subsection{Verhältnisbasierte natürliche Einheiten}
+
+In den T0-FFGFT-natürlichen Einheiten gibt es keine willkürlich
+gesetzten Konstanten. Stattdessen sind alle Größen
+\textbf{Verhältnisse}:
+
+\begin{equation}
+    \frac{m_i}{m_e} = r_i \cdot \xi^{p_i} \cdot \frac{v}{m_e}
+    \qquad \text{(reines Verhältnis)}
+\end{equation}
+
+Die Planck-Länge $\ell_P$ dient dabei als Brücke zwischen der
+geometrischen Skala $L_0 = \xi \cdot \ell_P$ und der SI-Messung
+in Metern. Sie ist kein Fundament der Theorie, sondern ein
+Kalibrierungspunkt.
+
+\textbf{Konsequenz für die epistemische Barriere}:
+Die Physik-Gemeinschaft hat Planck-Einheiten als fundamentale
+Konstanten interpretiert und danach gesucht, warum $G$, $\hbar$,
+$c$ genau diese Werte haben. In T0-FFGFT ist das die falsche Frage --
+die richtigen Fragen sind: Welche geometrischen Verhältnisse
+erzeugen diese Messwerte? Antwort: $\xi = 4/30000$.
+
+\noindent\textit{Querverweise: Dok.~012 ($G$ aus $\xi$),
+Dok.~013 (SI-Übersetzung), Dok.~014 (natürliche Einheiten),
+Dok.~015 (Einheitensystematik).}
+
+\section{Epistemische Barrieren: Warum die Gemeinschaft nicht früher zum selben Schluss kam}
+
+\subsection{Die Fehlinterpretation der Feinstrukturkonstante}
+
+Die Feinstrukturkonstante $\alpha \approx 1/137{,}036$ wird im
+Standardmodell als universell fixer dimensionsloser Parameter
+behandelt -- unabhängig vom gewählten Einheitensystem. Das ist
+eine \textbf{Fehlinterpretation}.
+
+Aus Dok.~011, 013, 014 und 015 folgt klar:
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Einheitensystem} & $\alpha$ & \textbf{Interpretation} \\
+\midrule
+SI                        & $1/137{,}036$ & Messwert, systemabhängig \\
+T0-FFGFT-Einheiten   & $1$ (exakt)   & Geometrische Identität \\
+Gaußsche Einheiten        & $1$ (exakt)   & Andere Konvention \\
+\bottomrule
+\end{tabular}
+\caption{$\alpha$ ist keine universelle Konstante, sondern eine
+Übersetzungskonvention zwischen Einheitensystemen (Dok.~013, 015).}
+\label{tab:alpha_einheiten}
+\end{table}
+
+Der numerische Wert $1/137{,}036$ kodiert nicht eine fundamentale
+Eigenschaft der Natur, sondern das \textbf{Verhältnis zweier
+Maßeinheiten} im SI-System. In T0-FFGFT-natürlichen Einheiten gilt:
+\begin{equation}
+    \alpha_{\text{T0-FFGFT}} = \xi \cdot E_0^2 = 1
+    \qquad \text{(geometrische Identität, Dok.~011)}
+\end{equation}
+
+Die Suche nach einer ``Erklärung'' von $1/137$ war deshalb von
+Anfang an eine Suche nach dem Schatten eines Einheitensystems --
+nicht nach der Geometrie dahinter. Feynman nannte $\alpha$ das
+größte Mysterium der Physik. Es ist kein Mysterium, sobald man
+das richtige Einheitensystem wählt.
+
+\subsection{Die erzwungene Trennung von QM und SM}
+
+Die zweite epistemische Barriere ist die Vorstellung dass
+Quantenmechanik (QM) und Standardmodell (SM) nicht gemischt
+werden dürfen -- sie operieren auf verschiedenen Skalen, mit
+verschiedenen Formalismen, und die Grenzen sind historisch
+gewachsen.
+
+Diese Trennung hat verhindert dass die geometrische Struktur
+sichtbar wurde, die beiden gemeinsam zugrunde liegt:
+
+\begin{table}[htbp]
+\centering\footnotesize
+\begin{tabular}{lll}
+\toprule
+\textbf{Phänomen} & \textbf{QM/SM behandelt es als} & \textbf{FFGFT zeigt} \\
+\midrule
+Fermionmassen & Yukawa-Parameter (frei) & $r_i \cdot \xi^{p_i} \cdot v$, geometrisch \\
+$\alpha$ & Universelle Konstante & Einheitenkonv., $\alpha_{\text{T0-FFGFT}}=1$ \\
+Spin-$1/2$ & Matrixeigenschaft & Torus-Wicklungszahl \\
+Neutrino-Masse & Seesaw-Mechanismus & $\xi^2 \cdot m_e$, topologisch \\
+Vakuumenergie & Renormierung nötig & Torus-Topologie konvergiert \\
+\bottomrule
+\end{tabular}
+\caption{Phänomene die SM und QM als getrennte Probleme behandeln,
+aber in FFGFT aus derselben Torus-Geometrie folgen.}
+\label{tab:sm_qm}
+\end{table}
+
+\subsection{Die geometrische Gravitation}
+
+Ein dritter Punkt betrifft die Gravitationskonstante $G$.
+Im SM ist $G$ ein freier Parameter ohne geometrische Herleitung.
+In FFGFT folgt $G$ aus $\xi$ und der Torus-Geometrie -- gezeigt
+in den entsprechenden Dokumenten der Reihe. Die Identifikation
+$G \sim \xi \cdot \ell_P^2 / \hbar$ verbindet Gravitation direkt
+mit dem einzigen freien Parameter.
+
+\subsection{Zusammenfassung der epistemischen Barrieren}
+
+Drei Barrieren haben verhindert dass die Gemeinschaft früher
+zum selben Schluss gelangte:
+
+\begin{enumerate}
+    \item \textbf{$\alpha$ als universeller Fixwert} -- statt als
+          Einheitenkonvention. Die geometrische Herleitung
+          $\alpha = \xi \cdot E_0^2$ ist im SI-Rahmen unsichtbar.
+
+    \item \textbf{Zwanghafte SM/QM-Trennung} -- verhindert die
+          Erkennung der gemeinsamen Torus-Geometrie. Fermionmassen,
+          Spin und Mischungswinkel folgen aus derselben Quelle.
+
+    \item \textbf{Renormierung als Lösung} -- statt als Symptom.
+          Die Vakuumkatastrophe entsteht nur im falschen
+          (nicht-toroidalen) Hintergrund. In der korrekten
+          Topologie konvergiert die harmonische Reihe (Dok.~159).
+\end{enumerate}
+
+\textit{Querverweise: Dok.~011 ($\alpha$-Herleitung), Dok.~012
+(Gravitationskonstante), Dok.~013 (SI vs.\ T0-FFGFT-Einheiten),
+Dok.~014 (natürliche Einheiten), Dok.~015 (Einheitensystematik),
+Dok.~159 (Vakuumkatastrophe und Torus).}
+
+
+\section{Offene Frage: Sind alle 12 Fermionen fundamentale Torus-Resonanzen?}
+
+\subsection{Das Euler-Tonnetz und die Grenzen der Harmonie}
+
+In der klassischen Musiktheorie bilden die Primzahlen 2, 3 und 5
+die drei Achsen des \textbf{Euler-Tonnetzes} -- das vollständige
+Gitter aller konsonanten Intervalle der reinen Stimmung (5-limit).
+
+Die Primzahl 7 erzeugt die \textbf{Naturseptime} -- ein Intervall
+das in keinem reinen Stimmungssystem auflösbar ist. Sie liegt
+buchstäblich außerhalb des harmonischen Raums: eine vierte Dimension
+wäre nötig um sie einzubetten. Die Primzahl 13 hat in der
+westlichen Harmonielehre überhaupt keine Rolle -- sie ist jenseits
+jeder bekannten konsonanten Struktur.
+
+\subsection{5-Limit-Analyse der Fermion-Vorfaktoren}
+
+Die $r$-Vorfaktoren der FFGFT-Fermionen wurden in Dok.~060
+systematisch auf ihre Primfaktorstruktur untersucht:
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{llcll}
+\toprule
+\textbf{Teilchen} & $r$ & \textbf{Primfaktoren} & \textbf{5-limit?}
+& \textbf{Musikalisches Intervall} \\
+\midrule
+Elektron  & $4/3$  & $2^2/3$      & \checkmark & Reine Quarte \\
+Myon      & $16/5$ & $2^4/5$      & \checkmark & Kl. Sexte + Oktave \\
+Tau       & $25/9$ & $5^2/3^2$    & \checkmark & Übermäß. Quarte \\
+Up        & $6$    & $2\cdot3$    & \checkmark & Quinte + 2 Okt. \\
+Down      & $25/2$ & $5^2/2$      & \checkmark & 2 gr. Terzen \\
+Charm     & $2$    & $2$          & \checkmark & Oktave \\
+Bottom    & $3/2$  & $3/2$        & \checkmark & Reine Quinte \\
+\midrule
+Strange   & $26/9$ & $2\cdot\mathbf{13}/3^2$ & $\times$ & außerhalb (13) \\
+Top       & $1/28$ & $1/(2^2\cdot\mathbf{7})$& $\times$ & Naturseptime (7) \\
+\bottomrule
+\end{tabular}
+\caption{5-Limit-Analyse der Fermion-Vorfaktoren. Sieben von neun
+Fermionen sind konsonante 5-limit-Verhältnisse. Strange (Faktor~13)
+und Top (Faktor~7) liegen außerhalb des harmonischen Gitters.}
+\label{tab:5limit}
+\end{table}
+
+\subsection{Geometrische Konsequenz}
+
+Im Euler-Tonnetz benötigen 2, 3, 5 je eine Achse -- ein
+3-dimensionales Gitter. Die Primzahl 7 würde eine
+\textbf{vierte Dimension} erfordern, 13 eine fünfte. In der
+FFGFT-Torus-Geometrie hat der 4D-Torus genau 4 Dimensionen --
+die vierte ist die Zeitdimension.
+
+\textbf{Mögliche Interpretation}:
+\begin{itemize}
+    \item Die 7 Fermionen mit 5-limit-Vorfaktoren sind
+          \textbf{echte Raumresonanzen} auf $\mathbb{T}^3$
+    \item Top ($\times 7$) könnte eine Resonanz unter Beteiligung
+          der \textbf{Zeitdimension} sein -- was erklären würde
+          warum seine Masse nahe der Higgs-Skala $v$ liegt
+    \item Strange ($\times 13$) liegt \textbf{außerhalb jeder
+          bekannten harmonischen Struktur} -- stärkster Kandidat
+          für eine Nicht-Grundresonanz
+\end{itemize}
+
+\subsection{Logarithmische Kombinationsanalyse}
+
+In einer harmonischen Resonanzskala bedeutet Addition der Exponenten
+Multiplikation der Massen:
+\begin{equation}
+    m_{\text{komb}} = r_1 \cdot r_2 \cdot \xi^{p_1+p_2} \cdot v
+    \quad \text{(logarithmische Kombination)}
+\end{equation}
+
+Eine numerische Prüfung aller Paare ergibt zwei auffällige Treffer:
+
+\begin{table}[htbp]
+\centering\footnotesize
+\begin{tabular}{lccll}
+\toprule
+\textbf{Kombination} & $p_{\text{sum}}$ & $r_{\text{prod}}$ & $m_{\text{komb}}$ & \textbf{Vergleich} \\
+\midrule
+Charm $\otimes$ Strange & $5/3$ & $52/9$ & 495 keV & $m_e$: T0 $\Delta{=}2{,}1\%$; PDG $\Delta{=}3{,}1\%$ \\
+Top $\otimes$ Tau       & $1/3$ & $25/252$ & 1{,}25 GeV & $m_c$: T0 $\Delta{=}2{,}9\%$; PDG $\Delta{=}1{,}7\%$ \\
+\bottomrule
+\end{tabular}
+\caption{Zwei Paare deren Kombinationsmasse nahe einer bekannten
+Teilchenmasse liegt. Die $p$-Exponenten stimmen jedoch nicht exakt
+mit der Leiter überein (5/3 $\neq$ 3/2, 1/3 $\notin$ Leiter).}
+\label{tab:kombination}
+\end{table}
+
+Die Treffer sind interessant, aber nicht beweisend: die
+$p$-Exponenten der Kombinationen passen nicht exakt auf die
+bekannten Leiterpositionen.
+
+\subsection{Die Koide-Formel als dasselbe Phänomen}
+
+Die Koide-Formel (1981) verbindet die Leptonen-Massen:
+\begin{equation}
+    Q = \frac{m_e + m_\mu + m_\tau}
+    {(\sqrt{m_e} + \sqrt{m_\mu} + \sqrt{m_\tau})^2} = \frac{2}{3}
+    \quad \text{(exp. Genauigkeit $< 0{,}001\%$)}
+\end{equation}
+
+In Dok.~116 wird gezeigt: die Koide-Formel ist keine unabhängige
+empirische Relation, sondern folgt direkt aus der T0-FFGFT-Struktur.
+Der Grund liegt im \textbf{selben Phänomen}: Die $\sqrt{m}$-Terme
+enthalten $p/2$-Exponenten:
+\begin{equation}
+    \sqrt{m_i} = \sqrt{r_i} \cdot \xi^{p_i/2} \cdot \sqrt{v}
+\end{equation}
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{lccc}
+\toprule
+\textbf{Lepton} & $p$ & $p/2$ & $\sqrt{r_i}$ \\
+\midrule
+Elektron & $3/2$ & $3/4$ & $\sqrt{4/3} \approx 1{,}155$ \\
+Myon     & $1$   & $1/2$ & $\sqrt{16/5} \approx 1{,}789$ \\
+Tau      & $2/3$ & $1/3$ & $\sqrt{25/9} \approx 1{,}667$ \\
+\bottomrule
+\end{tabular}
+\caption{Die $\sqrt{m}$-Terme der Koide-Formel erzeugen eine
+Halb-Leiter mit $p/2$-Exponenten: $3/4$, $1/2$, $1/3$ --
+Schrittweite $\Delta(p/2) = 1/4$ bzw. $1/6$.}
+\label{tab:koide_p}
+\end{table}
+
+Das T0-FFGFT-Ergebnis: Mit den \textbf{T0-FFGFT-Idealwerten} ergibt sich $Q = 0{,}6677$ -- Abweichung $0{,}16\%$. Mit den \textbf{PDG-Messwerten} hingegen: $Q = 0{,}66666$ -- Abweichung $0{,}0009\%$.
+
+Auf den ersten Blick sieht das wie ein Defizit der Idealwerte aus.
+Eine genauere Analyse zeigt jedoch:
+
+\textbf{PDG-Messwerte sind modellabhängig} (Skript \texttt{messwert\_analyse.py}):
+Die PDG-Leptonen-Massen werden unter Verwendung von SM-Strahlungs\-korrekturen
+(QED bis Ordnung $\alpha^5$, elektroschwache Korrekturen) bestimmt.
+Diese Korrekturen liegen für $m_\tau$ bei $\sim 0{,}3$--$0{,}5\%$.
+Die T0-FFGFT-Abweichung bei $m_\tau$ beträgt $+0{,}46\%$ --
+\textbf{dieselbe Größenordnung}.
+
+Die $\sigma$-Abweichungen ($m_e$: $3{,}7 \times 10^{14}\,\sigma$,
+$m_\mu$: $2{,}6 \times 10^5\,\sigma$) sind physikalisch bedeutungslos
+-- die statistische Messungenauigkeit der PDG-Werte ist irrelevant,
+solange die systematische Modellabhängigkeit ($\sim 0{,}3$--$1\%$)
+größer ist als die T0-Abweichung.
+
+\textbf{Konsequenz}: Die T0-FFGFT-Berechnungen könnten besser sein
+als der direkte Vergleich mit PDG-Werten suggeriert. Die verbleibenden
+$0{,}5$--$1\%$ Abweichungen liegen im Bereich wo SM-Strahlungs\-korrekturen
+und T0-FFGFT-Korrekturen divergieren. Ohne ein vollständiges
+T0-Korrektursystem für Strahlungskorrekturen kann nicht entschieden
+werden ob die Abweichungen aus:
+\begin{enumerate}
+    \item $\xi = 4/30000$ als leichter rationaler Näherung,
+    \item $v = 246{,}22$ GeV als SM-abhängigem Messwert, oder
+    \item dem Unterschied zwischen SM- und T0-Strahlungskorrekturen
+\end{enumerate}
+stammen -- oder einer Kombination aller drei.
+
+Die geometrische Aussage der T0-FFGFT bleibt präzise:
+Die $p$-Werte $\{3/2, 1, 2/3\}$ erklären \textbf{warum} $Q$ nahe
+bei $2/3$ liegt. Die Brüche $r_i$ und Exponenten $p_i$ sind
+geometrisch exakt -- die Restabweichungen sind keine Fehler der
+Geometrie.
+
+\textbf{Numerisch geprüft} (Skripte \texttt{koide\_test.py},
+\texttt{koide\_kfrak\_test.py}, \texttt{koide\_e0\_test.py},
+\texttt{koide\_korrekt.py}):
+$Q$ ist keine reine rationale Verhältnisformel. Sie enthält
+$\xi^{1/2}$ und $\xi^{1/6}$ -- beide transzendent. $v$ kürzt sich
+heraus, $\xi$ nicht. Die Brüche $r_i \cdot \xi^{p_i}$ sind als
+unteilbare Einheiten zu behandeln (Einheitenfehler bei separatem Kürzen).
+
+\noindent\textit{Querverweise: Dok.~116 (Koide-Formel und T0-FFGFT),
+Dok.~060 (5-limit-Analyse).}
+
+\subsection{Epistemischer Status}
+
+\begin{predbox}[Offene Frage -- kein Bestandteil der abgeschlossenen FFGFT]
+Strange und Top sind die einzigen Fermionen deren $r$-Vorfaktoren
+die Primzahlen 13 bzw.\ 7 enthalten -- außerhalb des 5-limit-Schemas
+aller anderen Fermionen. In Analogie zum Euler-Tonnetz legt dies
+nahe, dass diese zwei Quarks möglicherweise keine eigenständigen
+Grundresonanzen des 3D-Torus sind. Eine abgeschlossene Herleitung
+fehlt. Dies ist eine offene Frage für die weitere Entwicklung der
+Theorie.
+\end{predbox}
+
+\noindent\textit{Querverweise: Dok.~060 (5-limit-Analyse, Euler-Tonnetz,
+Musiktheorie-Parallelen).}
+
+\section{Abschließende Zusammenfassung: Struktureller Vergleich mit dem SM}
+
+\subsection{Was das Standardmodell zu den Fermionmassen sagt}
+
+Das SM beschreibt 9 geladene Fermionmassen durch 12 freie
+Yukawa-Parameter:
+\begin{equation}
+    m_i = y_i \cdot \frac{v}{\sqrt{2}}
+\end{equation}
+
+Das ist keine Erklärung -- es ist eine Umbenennung. Die 12 Zahlen
+$y_i$ könnten jeden beliebigen Wert annehmen; das SM würde mit
+völlig anderen Fermionmassen genauso funktionieren. Es beantwortet
+nicht:
+\begin{itemize}
+    \item Warum gibt es genau drei Generationen?
+    \item Warum ist $m_\mu/m_e \approx 207$?
+    \item Warum folgen die Leptonen der Koide-Formel?
+    \item Warum ist $m_t \approx v$ während alle anderen Fermionen
+          unter 5 GeV liegen?
+\end{itemize}
+
+Auf alle diese Fragen antwortet das SM: ``Das sind eben die Messwerte.''
+
+\subsection{Was T0-FFGFT mit einem Parameter leistet}
+
+T0-FFGFT erklärt dieselben Massen aus $\xi = 4/30000$:
+
+\begin{table}[htbp]
+\centering\footnotesize
+\begin{tabular}{lll}
+\toprule
+\textbf{Leistung} & \textbf{SM} & \textbf{T0-FFGFT} \\
+\midrule
+Freie Massenparameter & 12 Yukawa-Koppl. & \textbf{1} ($\xi$) \\
+$r_i$-Vorfaktoren & Beliebig & $n_\phi^2/n_\theta$ -- Wicklung \\
+$p_i$-Exponenten & Kein Konzept & $d_{\text{akt}}/3$ -- Topologie \\
+Generationszahl & 3 (empirisch) & 3 (Dim. $\mathbb{T}^3$) \\
+$m_t \approx v$ & Zufall ($y_t \approx 1$) & $p=-1/3$ -- inv. Windung \\
+Koide $Q=2/3$ & Reiner Zufall & Aus $p_i$-Struktur \\
+Neutrino-Massen & Seesaw (ad hoc) & $\xi^2 \cdot m_e$ -- geometrisch \\
+5-Limit-Struktur & Keine & 7/9 Fermionen konsonant \\
+\bottomrule
+\end{tabular}
+\caption{Struktureller Vergleich SM vs.\ T0-FFGFT.}
+\label{tab:sm_vergleich}
+\end{table}
+
+\subsection{Die ehrliche Einschränkung}
+
+\begin{warnbox}[Wichtige Einschränkung]
+T0-FFGFT bietet derzeit \textbf{keine numerisch besseren Berechnungen}
+als das SM. Die Idealwerte weichen 0{,}5--1\% von den PDG-Messwerten
+ab -- das SM trifft dieselben Werte durch direkte Parametrisierung
+per Definition.
+
+Die Überlegenheit von T0-FFGFT ist \textbf{strukturell, nicht numerisch}:
+Sie reduziert 12 freie Parameter auf 1 und liefert strukturelle
+Erklärungen wo das SM nur Messwerte einträgt.
+\end{warnbox}
+
+Die verbleibende 0{,}84\% Abweichung liegt in derselben Größenordnung
+wie die SM-Strahlungskorrekturen in den PDG-Werten ($\sim 0{,}3$--$0{,}5\%$).
+Ob die Abweichung ein Defizit der T0-FFGFT oder ein Artefakt der
+SM-Modellabhängigkeit der Messwerte ist, lässt sich ohne ein
+T0-eigenes Korrektursystem nicht entscheiden.
+
+\subsection{Fazit}
+
+\begin{predbox}[Struktureller Befund]
+Das SM \textbf{beschreibt} Fermionmassen mit 12 Parametern.\\
+T0-FFGFT \textbf{erklärt} dieselben Massen mit 1 Parameter.\\[4pt]
+Das ist eine kategorial andere Art von Theorie -- unabhängig davon
+ob alle Details der Herleitung bereits abgeschlossen sind.\\[4pt]
+Darüber hinaus leistet T0-FFGFT etwas das weder QM noch RT
+allein leisten: Die Grundrelation $\tilde{T} \cdot m = 1$ vereint
+beide Theorien in einem einzigen geometrischen Rahmen.
+Die Quantenmechanik beschreibt Wellenfunktionen in einem festen
+Raumzeit-Hintergrund. Die Relativitätstheorie beschreibt
+Raumzeit-Krümmung ohne Quantenstruktur. T0-FFGFT codiert beide
+in der Torus-Geometrie: Das Massenfeld $m(x,t)$ ist gleichzeitig
+die Quelle der Raumzeit-Krümmung (RT) und der Träger der
+Quantenresonanzen (QM).\\[4pt]
+\textbf{Was Quantenmoden wirklich sind:}
+Die diskreten Moden der QM sind dieselben wie die Torus-Moden --
+keine Analogie, sondern Identität. Wicklungszahlen
+$(n_\theta, n_\phi) \in \mathbb{Z}$ sind ganzzahlig weil ein Feld
+auf einem kompakten Torus nur ganzzahlig oft herumwickeln kann.
+Das ist topologische Notwendigkeit, kein aufzuerlegendes Postulat.
+T0-FFGFT \textbf{quantisiert nicht} -- sie zeigt dass Quantisierung
+topologische Konsequenz ist.\\[4pt]
+Selbst wenn T0-FFGFT sich als unvollständig herausstellen sollte,
+hat sie bereits gezeigt: Die Fermionmassen sind nicht beliebig.
+Sie folgen einer rationalen Torus-Resonanzstruktur mit
+5-Limit-Primfaktoren. Das SM hat darauf 50 Jahre lang nur
+eine Antwort gegeben: ``Das sind eben die Messwerte.''
+\end{predbox}
+
+\section*{Zeichenerklärung}
+\addcontentsline{toc}{section}{Zeichenerklärung}
+
+\begin{longtable}{lp{9.5cm}}
+\toprule
+\textbf{Symbol} & \textbf{Bedeutung} \\
+\midrule
+\endhead
+$\xi$ & Fundamentaler geometrischer Parameter der T0-FFGFT,
+        $\xi = 4/30000 \approx 1{,}333 \times 10^{-4}$.
+        Einziger freier Parameter; bestimmt alle Naturkonstanten. \\[4pt]
+$\tilde{T}(x,t)$ & Dynamisches Zeitfeld (reziprokes Massenfeld);
+        Grundrelation: $\tilde{T} \cdot m = 1$. \\[4pt]
+$\delta m(x,t)$ & Massenanregungsfeld; kleine Abweichung vom
+        Hintergrundwert $m_0$: $m = m_0 + \delta m$. \\[4pt]
+$\mathcal{L}_0$ & Freie Lagrange-Dichte:
+        $\mathcal{L}_0 = \varepsilon \cdot (\partial\delta m)^2$. \\[4pt]
+$\Delta\mathcal{L}_{\mathrm{Torus}}$ & Torus-Krümmungskorrektur
+        zur freien Lagrange-Dichte; erster Ordnung in $\xi$. \\[4pt]
+$\varepsilon$ & Kopplungskonstante der freien Lagrange-Dichte;
+        $\varepsilon_i = \xi \cdot m_i^2$. \\[4pt]
+$r_i$ & Rationaler Yukawa-Vorfaktor des Teilchens $i$;
+        hergeleitet aus Wicklungszahlen: $r_i = n_{\phi,i}^2/n_{\theta,i}$.
+        5-Limit-Verhältnis (Dok.~060). \\[4pt]
+$p_i$ & Torus-Exponent des Teilchens $i$; bestimmt die
+        $\xi$-Unterdrückung: $m_i = r_i \cdot \xi^{p_i} \cdot v$.
+        Schrittweite $\Delta p = 1/3$. \\[4pt]
+$v$ & Higgs-Vakuumerwartungswert (VEV), $v \approx 246{,}22$ GeV;
+        Grundskala aller Fermionmassen. \\[4pt]
+$n_\theta, n_\phi$ & Wicklungszahlen auf dem Torus;
+        bestimmen Masse ($r_i = n_\phi^2/n_\theta$) und
+        Spin ($n_\phi/n_\theta = 2s$). \\[4pt]
+$s$ & Spin des Teilchens; topologische Eigenschaft der
+        Torus-Wicklung. \\[4pt]
+$n_c$ & Farbquantenzahl der Quarks; $n_c = 3$ (SU(3)-Struktur). \\[4pt]
+$D_f$ & Fraktale Raumdimension;
+        $D_f^{\,\text{Raum}} = 3 - \xi \approx 2{,}9999$
+        (hergeleitet in Dok.~009, 133). \\[4pt]
+$\mathbf{e}_\mu^{(\mathrm{frak})}$ & Fraktale Clifford-Algebra-Basisvektoren;
+        Antikommutatorrelation:
+        $\mathbf{e}_\mu\mathbf{e}_\nu + \mathbf{e}_\nu\mathbf{e}_\mu
+        = 2g_{\mu\nu}^{(\mathrm{frak})}$. \\[4pt]
+$\Psi, \bar{\Psi}$ & Dirac-Spinor und adjungierter Spinor;
+        topologisches Objekt im Spin-Bündel über dem Torus. \\[4pt]
+$\ell_P$ & Planck-Länge; in T0-FFGFT kein fundamentaler Parameter
+        sondern Übersetzungsfaktor:
+        $\ell_P = \xi/(2\sqrt{m_e})$ (Dok.~013). \\[4pt]
+$L_0$ & Fundamentale T0-FFGFT-Länge;
+        $L_0 = \xi \cdot \ell_P \approx 2{,}155 \times 10^{-39}$ m. \\[4pt]
+$E_0$ & Charakteristische Energieskala;
+        $E_0 = \sqrt{m_e \cdot m_\mu} \approx 7{,}398$ MeV. \\[4pt]
+$\alpha$ & Feinstrukturkonstante; in T0-FFGFT-Einheiten $\alpha = 1$
+        (exakt), in SI-Einheiten $\alpha = 1/137{,}036$.
+        Einheitenkonvention, kein universeller Fixwert (Dok.~011). \\[4pt]
+$K_{\text{frak}}$ & Fraktale Korrektur;
+        $K_{\text{frak}} = 1 - 100\xi \approx 0{,}9867$.
+        Entsteht durch kumulativen Skalenfluss über 17 Größenordnungen
+        (Dok.~133). \\[4pt]
+$\lambda_h$ & Higgs-Selbstkopplung, $\lambda_h \approx 0{,}129$. \\[4pt]
+$m_h$ & Higgs-Masse, $m_h \approx 125{,}10$ GeV. \\[4pt]
+$G$ & Gravitationskonstante; in T0-FFGFT kein freier Parameter:
+        $G = \xi^2/(4m_e)$ (Dok.~012). \\[4pt]
+$\Psi(t)$ & FFGFT-Rekursionsfeld;
+        $\Psi(t) = G(\Psi(t-T_{\mathrm{rev}}), \xi)$ (Dok.~183, 184). \\[4pt]
+$T_{\mathrm{rev}}$ & Rekursionsperiode im FFGFT-Zeitfeld (Dok.~184). \\
+\bottomrule
+\end{longtable}
+
+\begin{thebibliography}{99}
+
+\bibitem{pascher_006}
+J.~Pascher,
+\textit{Teilchenmassen: $r$- und $p$-Tabelle},
+Dokument~006, T0-FFGFT.
+
+\bibitem{pascher_009}
+J.~Pascher,
+\textit{Ursprung des Parameters $\xi$},
+Dokument~009, T0-FFGFT.
+
+\bibitem{pascher_011}
+J.~Pascher,
+\textit{Feinstrukturkonstante in der T0-FFGFT},
+Dokument~011, T0-FFGFT.
+
+\bibitem{pascher_012}
+J.~Pascher,
+\textit{Gravitationskonstante aus $\xi$},
+Dokument~012, T0-FFGFT.
+
+\bibitem{pascher_013}
+J.~Pascher,
+\textit{SI-Einheiten und T0-FFGFT-Übersetzung},
+Dokument~013, T0-FFGFT.
+
+\bibitem{pascher_049}
+J.~Pascher,
+\textit{Lagrangian und Higgs-Integration},
+Dokument~049, T0-FFGFT.
+
+\bibitem{pascher_050}
+J.~Pascher,
+\textit{Dirac-Gleichung in der T0-FFGFT: Geometrische Einführung},
+Dokument~050, T0-FFGFT.
+
+\bibitem{pascher_051}
+J.~Pascher,
+\textit{Dirac-Gleichung in der T0-FFGFT: Vollständige Darstellung},
+Dokument~051, T0-FFGFT.
+
+\bibitem{pascher_060}
+J.~Pascher,
+\textit{Musiktheorie und T0-FFGFT-Parallelen},
+Dokument~060, T0-FFGFT.
+
+\bibitem{pascher_133}
+J.~Pascher,
+\textit{Herleitung der fraktalen Korrektur $K_{\text{frak}}$},
+Dokument~133, T0-FFGFT.
+
+\bibitem{pascher_159}
+J.~Pascher,
+\textit{Harmonische Struktur des Torus},
+Dokument~159, T0-FFGFT.
+
+\bibitem{pascher_183}
+J.~Pascher,
+\textit{Physikalische Präzisionsbarriere und RSA-Kryptographie},
+Dokument~183, T0-FFGFT.
+
+\bibitem{pascher_184}
+J.~Pascher,
+\textit{Die Zeit als Einbettungspreis der Mathematik},
+Dokument~184, T0-FFGFT.
+
+\bibitem{pascher_186}
+J.~Pascher,
+\textit{Korrekturverzeichnis},
+Dokument~186, T0-FFGFT.
+
+\bibitem{pdg_2024}
+Particle Data Group (2024).
+\textit{Review of Particle Physics}.
+Prog.\ Theor.\ Exp.\ Phys.\ \textbf{2024}, 083C01.
+
+\bibitem{gauss_bonnet}
+C.~F.~Gauss,
+\textit{Disquisitiones generales circa superficies curvas} (1827).
+P.~O.~Bonnet,
+\textit{Mémoire sur la théorie des surfaces} (1848).
+
+\end{thebibliography}

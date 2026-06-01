@@ -1,0 +1,180 @@
+\section*{Doc.\ 253 — \texorpdfstring{$\xi$}{xi} and Number-Space Dependence in Factorisation}
+\addcontentsline{toc}{section}{Doc.\ 253 — xi and Number-Space Dependence}
+
+\begin{abstract}
+Working document. Purpose: preservation of results from an extended investigation
+without breakthrough. The question investigated was whether the FFGFT parameter
+$\xi = 4/30000$ exhibits number-space dependence in the factorisation of composite
+integers, and whether this dependence follows an FFGFT-type step hierarchy.
+All calculations were verified with Python. The connection to FFGFT remains
+a conjecture without an algebraic bridge proof.
+\end{abstract}
+
+\subsection*{1. Background and Motivation}
+
+During work on a T0/FFGFT-based factorisation approach (Python scripts and
+HTML test programs, 2024--2026), the following was observed: the effectiveness
+of a global $\xi$-parameter in period-finding (Shor's algorithm) does not
+appear constant, but depends on the number space. At the same time, rounding
+errors and computational precision limits enter the results indirectly.
+
+This gave rise to two questions:
+
+\begin{enumerate}
+\item Is there a genuine number-space dependence of $\xi$ in factorisation?
+\item Does this dependence follow an FFGFT-type step hierarchy?
+\end{enumerate}
+
+\begin{mdframed}[style=warn]
+\textbf{Status after extended work without breakthrough:} Both questions are
+neither proved nor disproved. The calculations below provide the established facts.
+\end{mdframed}
+
+\subsection*{2. The Algebraically Correct Quantity: $\xi_\text{num}(N)$}
+
+The HTML file \texttt{t0\_xi\_num\_algebraisch.html} correctly defined the
+relevant quantity:
+\[
+\xi_\text{num}(N) = \frac{\lambda(N)}{N}
+\]
+where $\lambda(N) = \text{lcm}(p-1,\, q-1)$ is the Carmichael function for
+$N = p \cdot q$. This quantity is dimensionless and basis-independent.
+
+Analytical approximation for large primes $p$, $q$:
+\[
+\xi_\text{num}(N) = \frac{\text{lcm}(p-1,\, q-1)}{p \cdot q}
+\;\approx\; \frac{1}{2 \cdot \gcd(p-1,\, q-1)}
+\]
+
+\begin{mdframed}[style=ok]
+\textbf{Key finding} (from \texttt{t0\_primzahl\_periodizitaet.html},
+Python-confirmed): The period structure of $N$ is determined entirely by
+$\gcd(p-1, q-1)$. This is a property of the primes themselves —
+not of a global parameter.
+\end{mdframed}
+
+\subsection*{3. Python Verification: $\xi_\text{num}$ Tables}
+
+\subsubsection*{3.1 Concrete Semiprimes}
+
+\begin{center}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{rrrrrrl}
+\toprule
+$N$ & $p$ & $q$ & $\gcd(p{-}1,q{-}1)$ & $\lambda(N)$ & $\xi_\text{num}$ & Type \\
+\midrule
+15    & 3   & 5   & 2 & 4    & 0.2667 & Shor classic \\
+35    & 5   & 7   & 2 & 12   & 0.3429 & \\
+143   & 11  & 13  & 2 & 60   & 0.4196 & twin primes \\
+65    & 5   & 13  & 4 & 12   & 0.1846 & $\gcd = 4$ \\
+301   & 7   & 43  & 6 & 42   & 0.1395 & $\gcd = 6$ \\
+77    & 7   & 11  & 2 & 30   & 0.3896 & $\gcd = 2$ \\
+4087  & 61  & 67  & 6 & 660  & 0.1615 & twin ${\sim}60$ \\
+9797  & 97  & 101 & 4 & 2400 & 0.2450 & smooth $p{-}1$ \\
+10403 & 101 & 103 & 2 & 5100 & 0.4902 & twin ${\sim}100$ \\
+291   & 3   & 97  & 2 & 96   & 0.3299 & very unequal \\
+\bottomrule
+\end{tabular}%
+}
+\end{center}
+
+\begin{mdframed}[style=warn]
+$\xi_\text{num}$ lies in the range $[0.14,\; 0.49]$. \\
+$\xi_\text{FFGFT} = 1.333 \times 10^{-4}$ lies far outside this range.
+\end{mdframed}
+
+\subsubsection*{3.2 Dependence on $\gcd(p-1, q-1)$}
+
+\begin{center}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{rlll}
+\toprule
+$\gcd$ & $\xi_\text{num}$ (analytical) & Factorisability & Example \\
+\midrule
+2  & ${\approx}\,0.25$  & hard (RSA class)   & twin primes \\
+4  & ${\approx}\,0.125$ & moderate           & $p \equiv 1, q \equiv 1 \pmod{4}$ \\
+6  & ${\approx}\,0.083$ & easier             & $p \equiv 1, q \equiv 1 \pmod{6}$ \\
+12 & ${\approx}\,0.042$ & easy               & smooth $p{-}1$, $q{-}1$ \\
+30 & ${\approx}\,0.017$ & very easy          & $B$-smooth primes \\
+60 & ${\approx}\,0.008$ & trivial            & highly smooth primes \\
+\bottomrule
+\end{tabular}%
+}
+\end{center}
+
+The number-space dependence is real — but it is classical number theory.
+Pollard's $p$-method and Lenstra's ECM exploit precisely this $\gcd$-structure.
+It is not an FFGFT-specific phenomenon.
+
+\subsection*{4. What the HTML Tests Established}
+
+The following HTML test programs were developed:
+\texttt{t0\_shor\_hypothesis.html}, \texttt{t0\_xi\_num\_algebraisch.html},
+\texttt{t0\_primzahl\_periodizitaet.html}, \texttt{t0\_shor\_bigint.html}.
+They formulated the questions correctly but produced no systematic result tables.
+
+\paragraph{Formulated hypotheses (now numerically clarified):}
+
+\begin{description}
+\item[$H_0$] $\xi$-optimal bases and random bases produce periods of the same
+order of magnitude (no advantage from $\xi$-selection).
+\item[$H_1$] $\xi$-bases produce smaller periods in the median (factor $> 1.5$
+over $N = 50$ trials).
+\end{description}
+
+\begin{mdframed}[style=warn]
+The $\xi$-resonance function in the scripts
+($\omega = 2\pi/r$, resonance $= \exp(-(\omega - \pi)^2 / (4|\xi|))$)
+is a heuristic without physical derivation. It preferentially selects $r \approx 2$
+— which is the most common $\gcd$-case, not a $\xi$-effect.
+\end{mdframed}
+
+\subsection*{5. Relationship to $\xi_\text{FFGFT}$}
+
+\[
+\xi_\text{FFGFT} = \frac{4}{30000} = 1.333 \times 10^{-4}
+\;\ll\; \xi_\text{num} \in [0.008,\; 0.49]
+\]
+
+The two quantities are not numerically identical and not simply related by
+a scale factor. A structural connection — for instance that $\xi_\text{num}$
+is a ``projection'' of $\xi_\text{FFGFT}$ onto the number space — remains a
+conjecture without an algebraic bridge proof.
+
+What is missing for a proof:
+\begin{enumerate}
+\item An argument for why $\xi_\text{FFGFT}$ (geometric) should appear in
+$\xi_\text{num}$ (arithmetic)
+\item A scale relation explaining how $\xi_\text{FFGFT} \approx 10^{-4}$
+maps onto $\xi_\text{num} \approx 0.1\text{--}0.5$
+\item A prediction that differs from classical number theory
+\end{enumerate}
+
+\subsection*{6. Established Facts — Summary}
+
+\begin{center}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{lc}
+\toprule
+Statement & Status \\
+\midrule
+$\xi_\text{num}(N)$ is number-space dependent & $\checkmark$ Proved \\
+The dependence is classical number theory & $\checkmark$ Proved \\
+No global $\xi$ optimises factorisation universally & $\checkmark$ Proved \\
+$\xi$-resonance heuristic favours $r \approx 2$ & $\checkmark$ Clear \\
+Rounding errors affect effective $\xi$ & $\checkmark$ Known \\
+$\xi_\text{num}$ follows FFGFT step hierarchy & $\times$ Not proved \\
+$\xi_\text{FFGFT}$ and $\xi_\text{num}$ structurally related & $\times$ Not proved \\
+$\xi$-basis selection improves period-finding & $\times$ $H_0$ not refuted \\
+\bottomrule
+\end{tabular}%
+}
+\end{center}
+
+\begin{mdframed}[style=info]
+\textbf{Conclusion:} The number-space dependence is real but classical. The
+connection to FFGFT geometry is open and remains a conjecture. The breakthrough
+is missing because the algebraic bridge proof is missing — it would need to show
+why a geometric invariant of T$^4$ appears in the Carmichael structure of
+arithmetic number spaces.
+\end{mdframed}

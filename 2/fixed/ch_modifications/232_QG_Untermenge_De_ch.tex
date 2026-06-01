@@ -1,0 +1,811 @@
+% ==============================================================================
+% T0/FFGFT-Theorie: Dokument 232
+% Titel: Quantum Graphity als Untermenge von FFGFT
+% Autor: Johann Pascher
+% Datum: Mai 2026
+% Bezug: Dokumente 230 (Hilbertraum-Übersetzung), 231 (Hilbertraum-Erweiterung),
+%        202 (Feldtheorie), 210 (Wicklungen)
+% ==============================================================================
+
+\section*{Vorbemerkung}
+
+Dokumente~230 und~231 haben gezeigt, dass die Standard-Quantenmechanik
+(Hilbertraum-Formalismus) eine \emph{Untermenge} von FFGFT ist, die
+durch eine Reduktionskette
+\[
+S^2 \subset \text{Zylinder} \subset T^2 \subset T^3 \subset T^4
+\]
+aus der Vollgeometrie hervorgeht. Dieses Dokument wendet dieselbe
+methodische Strategie auf eine andere etablierte Theorie an:
+\textbf{Quantum Graphity} (Konopka, Markopoulou, Smolin, Severini,
+2008).
+
+Quantum Graphity ist ein peer-reviewed, hintergrund-unabhängiges
+Modell, in dem Raumzeit und Geometrie als emergente Eigenschaften
+eines fundamentalen \emph{gewichteten Graphen} entstehen. Es ist
+mathematisch klar definiert, in \emph{Phys.~Rev.~D}~77, 104029 (2008)
+publiziert, und damit ein konkretes Vergleichsobjekt.
+
+\textbf{Zentrale These dieses Dokuments:} Quantum Graphity \emph{lässt
+sich plausibel als Untermenge von FFGFT skizzieren}, durch eine
+fünfstufige Reduktionskette aus der vollen FFGFT-Geometrie -- analog
+zur Bloch-Sphäre, aber durch andere Reduktionsschritte. Im Unterschied
+zu Dok.~230 ist diese Übersetzung jedoch \emph{nicht durchgeführt},
+sondern eine Hypothese: die mathematische Triangulierungs-Konstruktion
+und der zugehörige Konvergenz-Beweis sind offene Forschungsaufgaben
+(siehe §10.4 unten). Methodisch wichtig ist aber bereits, dass FFGFT
+mit Quantum Graphity (und LQG, CDT, Wolfram-Hypergraphen) das
+Grundprogramm \enquote{emergente Geometrie aus diskreter Mikrostruktur}
+teilt -- ohne deren Beschränkungen zu übernehmen.
+
+% ==============================================================================
+\section*{Zeichenerklärung}
+% ==============================================================================
+
+\subsection*{Quantum-Graphity-Symbole}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{7.4cm}}
+\toprule
+\textbf{Symbol} & \textbf{Bedeutung} \\
+\midrule
+$K_N$ & vollständiger Graph auf $N$ Vertices (alle Vertices verbunden) \\
+$N$ & Anzahl der Vertices (typisch $N \gg 1$) \\
+$V_a$ & Vertex (Knoten) $a$ \\
+$e_{ab}$ & Kante zwischen Vertex $a$ und $b$ \\
+$n_{ab} \in \{0, 1\}$ & Besetzungszahl der Kante $e_{ab}$ (aus/an), Grundmodell \\
+$|0\rangle, |1\rangle$ & Kantenzustände: aus/an \\
+$a^\dagger_{ab}, a_{ab}$ & Erzeugungs- und Vernichtungsoperatoren auf Kante $e_{ab}$ \\
+$\{a, a^\dagger\}$ & fermionischer Antikommutator, $= 1$ \\
+$N_{ab} = a^\dagger_{ab} a_{ab}$ & Zahloperator (Adjazenz-Matrix-Element) \\
+$|j, m\rangle$ & erweiterte Kantenetiketten ($j = 0, 1$, $m \in \{-j, \ldots, j\}$) \\
+$M, M^\pm$ & Drehimpulsoperatoren auf $|j, m\rangle$-Etiketten \\
+$\mathcal{H}_{\text{edge}}$ & Hilbertraum einer einzelnen Kante \\
+$\mathcal{H}_{\text{total}}$ & Tensorprodukt-Hilbertraum aller Kanten \\
+$H_V, H_B, H_C, H_D, H_\pm$ & Hamilton-Komponenten (Valenz, Cycles, $C$, $D$, Loop) \\
+$g_V, g_B, g_C, g_D, g_\pm$ & Kopplungskonstanten der Hamilton-Terme \\
+$v_0$ & bevorzugte Vertex-Valenz (typisch $v_0 = 3$ für hexagonal) \\
+$S_N$ & Permutationsgruppe von $N$ Elementen \\
+\bottomrule
+\end{tabular}%
+}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\subsection*{FFGFT-Symbole (Wiederholung aus Dok.~230/231)}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{7.4cm}}
+\toprule
+\textbf{Symbol} & \textbf{Bedeutung} \\
+\midrule
+$T^n$ & $n$-Torus, $n$ kompakte Schleifen \\
+$T^4$ & FFGFT-Vollgeometrie inkl.\ Zeit-Wicklung \\
+$(n_x, n_y, n_z, k_t)$ & FFGFT-Wicklungs-Quantenzahlen \\
+$\varphi_{n,l,j}$ & FFGFT-Modenfunktion auf $T^4$ \\
+$\xi_0 = 4/30000$ & FFGFT-Geometrieparameter \\
+$L_0 = \xi_0 \cdot L_P$ & FFGFT-Mindestlängenskala (Sub-Planck) \\
+$L_P$ & Planck-Länge \\
+$U(1)$ & elektromagnetische Eichgruppe \\
+\bottomrule
+\end{tabular}%
+}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\subsection*{Sonstige Symbole}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{7.4cm}}
+\toprule
+\textbf{Symbol} & \textbf{Bedeutung} \\
+\midrule
+$\subset$ & Teilmenge von, ist enthalten in \\
+$\to$ & Reduktion oder Übergang \\
+$\beta = 1/k_BT$ & inverse Temperatur \\
+$T_c$ & kritische Temperatur (Phasenübergang) \\
+\bottomrule
+\end{tabular}%
+}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+% ==============================================================================
+\section{Quantum Graphity in einer Seite}
+% ==============================================================================
+
+Quantum Graphity (Konopka, Markopoulou, Severini, \emph{Phys.~Rev.~D}~77,
+104029 (2008), arXiv:0801.0861) ist ein hintergrund-unabhängiges
+Modell, in dem Raum und Geometrie aus einem dynamischen \emph{Graphen}
+emergieren. Die Grundannahmen sind:
+
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item \textbf{Vollständiger Graph $K_N$:} Auf $N \gg 1$ Vertices
+        sind \emph{alle} Vertex-Paare durch Kanten verbunden. $K_N$
+        hat $\binom{N}{2}$ Kanten.
+  \item \textbf{Kanten-Hilbertraum (Grundmodell):} Jeder Kante
+        $e_{ab}$ ist ein Hilbertraum
+        $\mathcal{H}_{\text{edge}} = \text{span}\{|0\rangle, |1\rangle\}$
+        zugeordnet -- ein \emph{fermionischer Oszillator} (oder
+        äquivalent: ein Qubit). $|0\rangle$ heißt \enquote{aus},
+        $|1\rangle$ heißt \enquote{an}.
+  \item \textbf{Tensorprodukt-Hilbertraum:} Der Gesamthilbertraum
+        ist
+        $\mathcal{H}_{\text{total}} = \bigotimes_{a<b} \mathcal{H}_{\text{edge}}$,
+        also Tensorprodukt über alle $\binom{N}{2}$ Kanten.
+  \item \textbf{Adjazenz-Operatoren:} $N_{ab} = a^\dagger_{ab} a_{ab}$
+        ist die quantenmechanische Adjazenzmatrix; die aktiven Kanten
+        bilden einen Subgraphen von $K_N$.
+  \item \textbf{Hamiltonian:} mehrere permutationsinvariante Terme
+        ($H_V$ Valenz, $H_B$ Cycles, etc.), die einen
+        \emph{Phasenübergang} steuern.
+  \item \textbf{Hochenergiephase:} alle Kanten an, volle
+        Permutations\-symmetrie $S_N$, kein Lokalitätsbegriff.
+  \item \textbf{Tieftemperaturphase:} Permutationssymmetrie bricht
+        zur Translationssymmetrie. Es entsteht ein \emph{regelmäßiger
+        Subgraph} -- im Standardfall eine \emph{hexagonale}
+        ($3$-reguläre) Konfiguration.
+  \item \textbf{Erweiterung mit \enquote{Materie-Etiketten}
+        $|j, m\rangle$:} In §IV des Papers wird das Grundmodell
+        erweitert: jede Kante kann zusätzlich $j = 0, 1$ und
+        $m \in \{-j, \ldots, +j\}$ tragen. Diese Erweiterung erlaubt
+        \emph{emergente Materie} und \emph{emergente $U(1)$-Eichtheorie}
+        durch String-Net-Kondensation (Levin-Wen-Mechanismus).
+\end{itemize}
+
+\textbf{Was Quantum Graphity nicht tut:} Sie liefert keine
+Standardmodell-Konstanten, keine Fermionenmassen, keine
+Feinstrukturkonstante. Sie liefert das Skelett \enquote{wie
+Geometrie aus diskreter Mikrostruktur emergiert}, plus eine
+emergente $U(1)$-Eichtheorie, ohne die SM-Materiestruktur
+spezifisch zu erklären.
+
+% ==============================================================================
+\section{Methodische Parallele zur Hilbertraum-Reduktion}
+% ==============================================================================
+
+In Dok.~230 wurde gezeigt, wie die Standard-Bloch-Sphäre der
+Quantenmechanik aus FFGFT entsteht: durch geometrische Reduktion
+($T^4 \to T^3 \to T^2 \to \text{Zylinder} \to S^2$). Bei jedem Schritt
+ging eine spezifische Strukturschicht verloren -- fraktale
+Korrekturen, Wicklungs-Quantenzahlen, Bündelstruktur, zeitliche
+Wicklung.
+
+Hier zeigen wir die analoge Reduktion für Quantum Graphity:
+\begin{equation}
+  \boxed{\text{Quantum Graphity} \subset \text{FFGFT}}
+\end{equation}
+durch eine andere -- aber strukturell vergleichbare --
+Reduktionskette. Die Reduktionsschritte sind:
+\begin{enumerate}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item \textbf{Diskretisierung:} kontinuierliches $T^4$ $\to$
+        diskreter Graph mit $N$ Vertices.
+  \item \textbf{Topologie-Vergessen:} $T^4$-Topologie $\to$
+        abstrakter vollständiger Graph $K_N$.
+  \item \textbf{Quantenzahl-Verallgemeinerung:} FFGFT-Wicklungen
+        $(n_x, n_y, n_z, k_t)$ $\to$ allgemeine Spin-Etiketten
+        $(J, M)$.
+  \item \textbf{Parameter-Verallgemeinerung:} $\xi_0 = 4/30000$
+        $\to$ allgemeiner Kopplungsparameter.
+  \item \textbf{Materie-Abwurf:} 12 Fermionenmassen $+ \alpha$
+        $\to$ kein Pendant.
+\end{enumerate}
+
+Diese fünf Reduktionen führen zusammen zum Quantum-Graphity-Skelett.
+Sie entsprechen \emph{nicht} der vollständigen Bloch-Sphäre-Reduktion
+aus Dok.~230 -- sie sind eine \emph{andere} Projektion derselben
+FFGFT-Vollgeometrie auf eine andere abstrakte Beschreibung.
+
+% ==============================================================================
+\section{Reduktion 1: Kontinuum zu Diskret}
+% ==============================================================================
+
+\subsection{\texorpdfstring{FFGFT: kontinuierliche Wicklungen auf $T^4$}{FFGFT: kontinuierliche Wicklungen auf T4}}
+
+In FFGFT lebt die Vollgeometrie auf einem 4D-Torus
+$T^4 = T^3 \times S^1$. Modenfunktionen $\varphi_{n,l,j}(x_0, x_1, x_2, t)$
+sind \emph{glatte Funktionen} auf dieser kompakten Mannigfaltigkeit.
+Die Mode-Quantenzahlen $(n_x, n_y, n_z, k_t)$ sind diskret -- aber
+jede Mode ist eine kontinuierliche Funktion, und die zugrundeliegende
+Geometrie ist differentialgeometrisch glatt.
+
+\subsection{Quantum Graphity: diskreter Graph}
+
+In Quantum Graphity gibt es keine glatte Mannigfaltigkeit. Es gibt
+nur den diskreten vollständigen Graphen $K_N$ mit $N$ Vertices und
+$\binom{N}{2}$ möglichen Kanten. Jede Kante ist entweder aktiv oder
+inaktiv; aktive Kanten tragen Etiketten.
+
+\subsection{Reduktion}
+
+Die Diskretisierung \emph{wäre} formal als Triangulierung des $T^4$
+zu skizzieren: wenn man $T^4$ in $N$ kleine Zellen unterteilt (etwa
+Tetraeder oder Würfelchen), entsteht ein Graph, dessen Vertices den
+Zellen entsprechen und dessen Kanten die Nachbarschaftsbeziehungen
+kodieren. Heuristisch sollte bei feinem Gitter ($N \to \infty$,
+Zellengröße $\to 0$) dieser Graph gegen die kontinuierliche
+Mannigfaltigkeit konvergieren.
+
+\textbf{Wichtige Relativierung:} Diese Konstruktion ist eine
+\emph{Skizze}, kein durchgeführter Beweis. Eine rigorose Triangulierungs-
+Übersetzung FFGFT $\to$ Quantum Graphity wurde in den FFGFT-
+Dokumenten nicht ausgearbeitet -- sie ist eine offene Forschungs-
+aufgabe (siehe §10.5 unten). Die methodische Plausibilität, dass
+eine solche Konstruktion möglich ist, stützt sich auf die etablierte
+Tradition der simplizialen Approximation in der algebraischen
+Topologie. Ein konkretes Konvergenz-Theorem für die FFGFT-
+Modenfunktionen $\varphi_{n,l,j}$ unter einer spezifischen
+$T^4$-Triangulierung ist jedoch nicht bewiesen.
+
+\textbf{Was verloren geht:} die Differentialgeometrie. Die FFGFT-
+Bewegungsgleichung $\mathcal{D}_{T^4}\varphi = E\varphi$
+(Dirac-artiger Operator auf $T^4$) hat im diskreten Bild kein
+direktes Pendant -- man bekommt stattdessen eine Hamiltonsche
+Update-Regel auf den Kanten.
+
+\textbf{Was bleibt:} die topologische Information \emph{wenn} man
+sich erinnert, dass der Graph aus einer 4D-Torus-Triangulierung
+hervorging. In Quantum Graphity wird diese Erinnerung jedoch
+\emph{absichtlich vergessen} (siehe Reduktion~2).
+
+% ==============================================================================
+\section{Reduktion 2: Topologie vergessen}
+% ==============================================================================
+
+\subsection{\texorpdfstring{FFGFT: $T^4$-Topologie}{FFGFT: T4-Topologie}}
+
+Der 4D-Torus hat eine sehr spezifische Topologie: vier kompakte
+Schleifen, jede mit Wicklungszahl $\in \mathbb{Z}$. Diese Topologie
+ist \emph{Teil der physikalischen Aussage} von FFGFT -- die
+Wicklungs-Quantenzahlen sind nicht beliebig, sondern entsprechen
+spezifischen physikalischen Größen (Massen, Ladungen, Spin).
+
+\subsection{\texorpdfstring{Quantum Graphity: vollständiger Graph $K_N$}{Quantum Graphity: vollstaendiger Graph KN}}
+
+In Quantum Graphity beginnt man mit dem \emph{vollständigen} Graphen
+$K_N$ -- also mit \emph{maximaler} Konnektivität, ohne irgendeine
+Topologie. Das ist der Hochtemperatur-Zustand. Erst der
+Phasenübergang bei niedriger Temperatur lässt eine niedrigdimensionale
+Topologie emergieren.
+
+\textbf{Aus FFGFT-Sicht:} Der vollständige Graph $K_N$ entspricht
+einem \enquote{Vergessen} der $T^4$-Topologie. Wenn man sich nicht
+mehr daran erinnert, dass die $N$ Punkte ursprünglich in einer
+4D-Torus-Geometrie organisiert waren, kann man jeden Punkt mit jedem
+verbinden -- das ergibt $K_N$.
+
+\subsection{Reduktion}
+
+Heuristisch lässt sich der Schritt so beschreiben: Ausgehend von
+einer (skizzierten) Triangulierung von $T^4$ aus Reduktion~1 hätte
+man einen \emph{lokalen} Graphen $G_{T^4}$, in dem jeder Vertex nur
+Nachbarn in seiner Nähe hat. Würde man diese Lokalitätsinformation
+\emph{abstreifen} und alle Vertex-Paare als potenziell verbindbar
+deklarieren, erhielte man $K_N$.
+
+\textbf{Auch dieser Schritt bleibt eine Skizze.} Die konkrete
+Konstruktion einer Abbildung $G_{T^4} \to K_N$ und der Beweis, dass
+unter dieser Abbildung die Quantum-Graphity-Hamiltonkomponenten
+($H_V$, $H_B$, etc.) die korrekte FFGFT-Niederenergiephysik
+reproduzieren, sind nicht ausgearbeitet.
+
+\textbf{Was verloren geht:} die Lokalität. In FFGFT ist Lokalität
+gegeben (durch die $T^4$-Geometrie). In Quantum Graphity ist
+Lokalität ein \emph{Emergenz-Phänomen} der Tieftemperaturphase.
+
+\textbf{Methodische Pointe:} Quantum Graphity behandelt Lokalität
+als emergent. FFGFT behandelt sie als gegeben. Das ist nicht ein
+Widerspruch, sondern ein Unterschied der Beschreibungsebene -- in
+FFGFT ist die zugrundeliegende Geometrie bereits gewählt; in
+Quantum Graphity wird die Geometriewahl dem System überlassen.
+
+% ==============================================================================
+\section{Reduktion 3: Wicklungen zu Spin-Etiketten}
+% ==============================================================================
+
+\subsection{FFGFT: spezifische Wicklungs-Quantenzahlen}
+
+In FFGFT sind die Wicklungs-Quantenzahlen
+$(n_x, n_y, n_z, k_t) \in \mathbb{Z}^4$ \emph{physikalisch
+interpretiert}:
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item $(n_x, n_y, n_z)$ kodieren räumliche Mode-Position und
+        Drehimpuls (Dok.~210),
+  \item $k_t$ trägt die Massenenergie der Mode
+        ($m c^2 = \hbar f(k_t)$),
+  \item bestimmte Tupel ergeben spezifische Standardmodell-Teilchen.
+\end{itemize}
+
+\subsection{Quantum Graphity: fermionische Besetzung und $(j, m)$-Etiketten}
+
+In Quantum Graphity tragen die Kanten im \emph{Grundmodell} nur eine
+fermionische Besetzungszahl $n_{ab} \in \{0, 1\}$ -- aus oder an. In
+der \emph{erweiterten Version} (§IV des Papers) erhalten die
+\enquote{an}-Zustände zusätzliche Etiketten $|j, m\rangle$ mit
+$j = 0, 1$ und $m \in \{-j, \ldots, +j\}$. Die Etiketten sind
+allgemein \emph{Spin-Netzwerk-artig} und gehören zur
+LQG-Tradition. Die Operatoren $M, M^\pm$ erfüllen die übliche
+Drehimpulsalgebra
+\[
+  [M^+, M^-] = M, \qquad [M, M^\pm] = \pm M^\pm.
+\]
+
+\subsection{Reduktion}
+
+Die Reduktion FFGFT $\to$ Quantum Graphity in dieser Schicht ist
+das \emph{Vergessen der spezifischen physikalischen Bedeutung} der
+Wicklungs-Quantenzahlen. Das spezifische Tupel
+$(n_x, n_y, n_z, k_t)$, das z.B.\ ein Elektron beschreibt, wird
+ersetzt durch:
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item Im Grundmodell: nur \enquote{an}/\enquote{aus} pro Kante --
+        keinerlei Quantenzahl-Information.
+  \item In der erweiterten Version: $(j, m)$-Etiketten, die
+        allgemeine Spin-1-Information tragen, ohne Festlegung,
+        welche Zahl welche physikalische Größe trägt.
+\end{itemize}
+
+\textbf{Was verloren geht:} die Verbindung zum Standardmodell. In
+FFGFT folgt aus der Wicklungsstruktur direkt die Massenformel
+$m_i = r_i \xi^{p_i} v$ und damit alle 12 Fermionenmassen. In
+Quantum Graphity gibt es keinen Mechanismus, der bestimmte
+$(j, m)$-Werte mit bestimmten Massen verknüpft.
+
+% ==============================================================================
+\section{Reduktion 4: Geometrieparameter zu Phasenparameter}
+% ==============================================================================
+
+\subsection{\texorpdfstring{FFGFT: $\xi_0 = 4/30000$ ist geometrisch fixiert}{FFGFT: xi0 = 4/30000 ist geometrisch fixiert}}
+
+In FFGFT ist die Geometriekonstante $\xi_0 = 4/30000$ nicht ein
+freier Parameter, sondern folgt aus dem Higgs-Matching
+$\xi_0 = \lambda_h^2 v^2/(16\pi^3 m_h^2)$ (Dok.~006). Sie ist
+geometrisch und physikalisch \emph{eindeutig festgelegt}.
+
+\subsection{Quantum Graphity: mehrere Kopplungsparameter}
+
+In Quantum Graphity gibt es einen ganzen Satz Kopplungsparameter:
+$g_V, g_B, g_C, g_D, g_\pm$ (Hamilton-Komponenten) sowie $v_0$
+(bevorzugte Vertex-Valenz) und $p, r$. Ihre Werte bestimmen, wo der
+Phasenübergang stattfindet, welcher Subgraph in der Tieftemperaturphase
+herauskommt (typisch $v_0 = 3$ ergibt eine \emph{hexagonale} Konfiguration),
+und wie stark die String-Net-Kondensation ist. Keiner dieser
+Parameter ist von außen festgelegt -- sie sind \emph{frei}.
+
+\subsection{Reduktion}
+
+Der Übergang FFGFT $\to$ Quantum Graphity in dieser Schicht ist die
+\emph{Vervielfachung und Verallgemeinerung der Parameter}. Die
+einzige geometrisch fixierte Größe $\xi_0 = 4/30000$ wird ersetzt
+durch ein ganzes Set von freien Kopplungen.
+
+\textbf{Was verloren geht:} die Vorhersagekraft. Die Werte aller SM-
+Konstanten in FFGFT folgen aus dem einen Parameter $\xi_0$. Wenn man
+$\xi_0$ durch mehrere freie Kopplungen ersetzt, sind diese
+Vorhersagen verloren -- man kann das Phasendiagramm bestimmen, aber
+nicht die Werte physikalischer Konstanten.
+
+\textbf{Methodische Pointe:} Quantum Graphity zeigt, dass eine
+Familie von Parametern genügt, um eine reichhaltige emergente
+Geometrie zu erzeugen. FFGFT zeigt zusätzlich, dass alle diese
+Parameter durch eine einzige geometrische Größe ($\xi_0$) festgelegt
+werden können -- und dann auch alle SM-Konstanten liefern.
+
+% ==============================================================================
+\section{Reduktion 5: Materiesektor abwerfen}
+% ==============================================================================
+
+\subsection{FFGFT: vollständiger Materie-Sektor}
+
+In FFGFT folgen aus den Wicklungs-Quantenzahlen alle 12 Fermionen-
+Massen, die Feinstrukturkonstante $\alpha = \xi \cdot E_0^2$, die
+Higgs-Selbstkopplung, und die Spin-Bahn-Konstanten der Atomphysik
+(Dok.~006, 174, 210). Der Materie-Sektor ist nicht zusätzlich
+eingeführt, sondern \emph{integraler Teil} der Geometrie.
+
+\subsection{Quantum Graphity: kein Materie-Sektor (im Grundmodell)}
+
+Im Grundmodell von Quantum Graphity gibt es keine Materie-
+Spezifizierung -- nur die binären Kanten-Zustände $|0\rangle, |1\rangle$
+und das emergente Gitter. In der \emph{erweiterten Version} mit
+$(j, m)$-Etiketten emergiert ein \emph{$U(1)$-Eichfeld} (über die
+String-Net-Kondensation von Levin-Wen) -- das ist analog zu einem
+Photonen-Feld. Aber es gibt keine Fermionen, keine Quarks, keine
+Massen -- die String-Net-Kondensation erzeugt zwar punktartige
+Anregungen mit Masse $\propto g_C$, aber diese Massen sind freie
+Parameter, nicht aus geometrischer Quelle bestimmt.
+
+\subsection{Reduktion}
+
+Der letzte Reduktionsschritt ist das vollständige \emph{Abwerfen}
+des materiebestimmenden FFGFT-Sektors. FFGFT enthält Materie als
+Wicklungsmodi auf $T^4$ mit \emph{festgelegten Massenrelationen}.
+Quantum Graphity in der erweiterten Version enthält emergente
+$U(1)$-Eichfelder und schwach-gebundene Anregungen, aber ohne
+geometrische Massenformel.
+
+\textbf{Was verloren geht:} alles, was FFGFT für die Erklärung der
+SM-Massen und -Kopplungen liefert.
+
+\textbf{Was bleibt:} die emergente Eichtheorie. Die Tatsache, dass
+$U(1)$ in beiden Theorien aus der Mikrostruktur emergiert, ist eine
+echte strukturelle Übereinstimmung -- sie ist die einzige Zeile in
+der Übersetzungstabelle, die wirklich \emph{exakt} korrespondiert.
+
+% ==============================================================================
+\section{Übersetzungstabelle}
+% ==============================================================================
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+{\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{3.7cm}>{\raggedright\arraybackslash}p{3.3cm}}
+\toprule
+\textbf{FFGFT-Struktur} & \textbf{Quantum-Graphity-Pendant} & \textbf{Reduktion} \\
+\midrule
+4D-Torus $T^4$ & vollständiger Graph $K_N$ & Diskretisierung + Topologievergessen \\[3pt]
+Wicklungen $(n_x, n_y, n_z, k_t)$ & Besetzungszahl $n_{ab}$ + erw.\ $(j, m)$ & spezifische Bedeutung verloren \\[3pt]
+Modenfunktionen $\varphi_{n,l,j}$ & Kantenzustände $|0\rangle, |1\rangle$ & glatt $\to$ diskret \\[3pt]
+$\xi_0 = 4/30000$ einzelne Konstante & $g_V, g_B, g_C, g_D, g_\pm$ und $v_0$ frei & Vorhersagekraft verloren \\[3pt]
+Niederenergie-Glättung zu $T^4$-Geometrie & Tieftemperatur: hexagonal $3$-regulär & dasselbe Prinzip \\[3pt]
+emergente $U(1)$ aus EM-Wicklung & emergente $U(1)$ via Levin-Wen (nur erw.) & echte Korrespondenz \\[3pt]
+12 Fermionenmassen & --- & Pendant fehlt \\[3pt]
+$\alpha = \xi E_0^2$ & --- & Pendant fehlt \\[3pt]
+Spin-Bahn-Konstanten & --- & Pendant fehlt \\
+\bottomrule
+\end{tabular}%
+}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\textbf{Status der Korrespondenzen:}
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item \textbf{Eine echte Korrespondenz:} emergente $U(1)$ in beiden
+        Theorien aus Mikrostruktur (in QG nur in der erweiterten
+        Version mit $(j, m)$-Etiketten).
+  \item \textbf{Strukturelle Parallelen:} Niederenergie-Glättung zur
+        geordneten Geometrie ist in beiden Theorien dasselbe
+        Grundprinzip.
+  \item \textbf{Reduktionsverluste:} alle SM-spezifischen Größen
+        (Massen, $\alpha$, Spin-Bahn) haben kein Quantum-Graphity-
+        Pendant -- sie sind im Reduktionsprozess verloren.
+\end{itemize}
+
+% ==============================================================================
+\section{Was bei der Reduktion verloren geht -- und was bleibt}
+% ==============================================================================
+
+\subsection{Was verloren geht}
+
+Die fünf Reduktionsschritte führen zu einem progressiven Verlust:
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item Differentialgeometrie (Reduktion 1),
+  \item Lokalität als gegebene Struktur (Reduktion 2),
+  \item physikalische Bedeutung der Wicklungs-Quantenzahlen
+        (Reduktion 3),
+  \item Geometrieparameter-Spezifizität (Reduktion 4),
+  \item gesamter Materie-Sektor (Reduktion 5).
+\end{itemize}
+
+\subsection{Was bleibt}
+
+Bemerkenswerterweise bleibt \emph{das wesentliche Geometrie-
+Emergenz-Schema} erhalten:
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item In FFGFT: die volle Geometrie ist nicht direkt sichtbar,
+        sondern emergiert aus der Mode-Konfiguration im
+        Niederenergielimit.
+  \item In Quantum Graphity: die Geometrie ist nicht zugrunde gelegt,
+        sondern emergiert aus dem Phasenübergang in der
+        Tieftemperaturphase.
+\end{itemize}
+
+\textbf{Beide Theorien haben dieselbe methodische Position:
+Geometrie ist nicht gegeben, sondern emergent.} FFGFT spezifiziert,
+\emph{welche} Geometrie ($T^4$) und \emph{warum} (geometrisches
+Higgs-Matching, $\xi_0$-Quantisierung). Quantum Graphity zeigt, dass
+diese Idee einer emergenten Geometrie aus diskreter Mikrostruktur
+\emph{nicht exotisch} ist, sondern in der etablierten Quantengravitations-
+Forschung peer-reviewed verfolgt wird.
+
+% ==============================================================================
+\section{Methodische Position}
+% ==============================================================================
+
+\subsection{Was diese Reduktion zeigt}
+
+Die fünf Reduktionsschritte zeigen, dass Quantum Graphity eine
+\emph{Untermenge von FFGFT} ist -- analog zur Bloch-Sphäre, aber
+durch andere Reduktionsschritte. Konkret:
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item Bloch-Sphäre $\subset$ FFGFT durch \emph{geometrische
+        Reduktion} (Polkontraktion, Schleifen-Aufschneidung).
+  \item Quantum Graphity $\subset$ FFGFT durch \emph{strukturelle
+        Reduktion} (Diskretisierung, Topologievergessen,
+        Materieabwurf).
+\end{itemize}
+
+\subsection{Warum das wichtig ist}
+
+Diese Strategie -- statt vollständiger Bijektion eine
+\emph{Untermengen-Beziehung} -- ist methodisch wichtig:
+
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item Sie ist \textbf{ehrlich:} keine Behauptung einer exakten
+        Übersetzung, wo nur eine partielle möglich ist.
+  \item Sie \textbf{positioniert FFGFT als das umfassendere
+        Framework:} Quantum Graphity ist ein Spezialfall, kein
+        Konkurrent.
+  \item Sie \textbf{verbindet FFGFT mit etablierter Forschung:}
+        FFGFT teilt das methodische Grundprogramm mit Konopka,
+        Markopoulou, Smolin, Severini -- und damit auch mit Loop
+        Quantum Gravity, Causal Dynamical Triangulation,
+        Wolfram-Hypergraphen.
+  \item Sie \textbf{zeigt FFGFTs Mehrwert:} während Quantum Graphity
+        nur emergente Geometrie liefert, liefert FFGFT zusätzlich
+        die Standardmodell-Konstanten.
+\end{itemize}
+
+\subsection{Verbindung zu Dok.~230 und 231}
+
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item \textbf{Dok.~230} zeigte: Hilbertraum-QM $\subset$ FFGFT
+        (durch geometrische Reduktion zur Bloch-Sphäre). Diese
+        Reduktion ist \emph{durchgeführt} -- die
+        Übersetzungs-Brücke
+        $\alpha = \sqrt{(1+z)/2}\,e^{i\theta/2}$ ist eine konkrete
+        Bijektion.
+  \item \textbf{Dok.~231} zeigte: Hilbertraum-QM kann zur vollen
+        FFGFT \emph{erweitert} werden (durch vier mathematische
+        Strukturen: $SU_q(2)$, Wicklungs-Quantenzahlen, Spinorbündel,
+        Kaluza-Klein). Diese Erweiterungen sind \emph{etabliert} --
+        $SU_q(2)$ existiert seit 1985, Spinorbündel seit den 1950ern,
+        Kaluza-Klein seit 1921.
+  \item \textbf{Dok.~232 (dieses Dokument)} skizziert: Quantum
+        Graphity $\subset$ FFGFT (durch strukturelle Reduktion).
+        Diese Reduktion ist \emph{noch nicht durchgeführt} --
+        sie ist plausibel skizziert, aber nicht rigoros
+        konstruiert (siehe §10.4).
+\end{itemize}
+
+Zusammen ergeben die drei Dokumente das Bild: \textbf{FFGFT enthält
+die Hilbertraum-QM nachweislich als Untermenge (Dok.~230/231) und
+die diskreten-Geometrie-Programme plausibel als Spezialfall, sofern
+die Triangulierungs-Reduktion tatsächlich durchführbar ist
+(Dok.~232).} Sie ist nicht ein Konkurrent zu diesen Theorien, aber
+das Verhältnis zu Hilbertraum-QM und zu Quantum Graphity ist
+\emph{nicht symmetrisch} -- siehe §10.4 und §11.
+
+\subsection{Status der Reduktion: Hypothese, kein Beweis}
+
+\textbf{Wichtige Einschränkung.} An mehreren Stellen in den
+FFGFT-Dokumenten -- einschließlich dieses -- ist die Rede von
+\enquote{Triangulierungen}, \enquote{Tetraeder-Geometrie}, und
+\enquote{Übersetzbarkeit in Dreiecks- oder Netzwerk-Beschreibungen}.
+Diese Sprache ist nützlich für die methodische Verortung von FFGFT
+in der breiteren Quantengravitations-Tradition (LQG, CDT, Wolfram,
+Quantum Graphity), aber sie darf nicht als bewiesener mathematischer
+Übersetzungs-Satz verstanden werden.
+
+\textbf{Was tatsächlich gilt:}
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item \emph{Methodische Verwandtschaft:} FFGFT teilt mit Quantum
+        Graphity (und LQG, CDT) das Grundprogramm \enquote{emergente
+        Geometrie aus diskreter Mikrostruktur}. Das ist eine
+        konzeptuelle Aussage, kein mathematischer Satz.
+  \item \emph{Plausible Reduktionskette:} die fünf Reduktionsschritte
+        in §3-7 dieses Dokuments sind eine plausible Skizze, wie eine
+        Übersetzung FFGFT $\to$ Quantum Graphity \emph{aussehen
+        könnte}. Sie ist konsistent mit der Standard-Differential-
+        topologie (simpliziale Approximation) und mit den Strukturen
+        des Quantum-Graphity-Hilbertraums (fermionisches Tensorprodukt
+        über Kanten).
+  \item \emph{Innere FFGFT-Tetraeder-Geometrie:} Der Tetraeder-Faktor
+        $4/3$ in $\xi_0 = 4/30000$ ist eine \emph{interne}
+        FFGFT-Aussage (Dok.~180, 202), keine Behauptung über
+        Übersetzbarkeit zu LQG-Spin-Foam-Modellen.
+\end{itemize}
+
+\textbf{Was offen bleibt:}
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item Ein \emph{rigoroser Konvergenz-Beweis}, dass eine bestimmte
+        $T^4$-Triangulierung mit $N \to \infty$ die FFGFT-Modenfunktionen
+        $\varphi_{n,l,j}$ approximiert.
+  \item Ein \emph{Hamilton-Übersetzungssatz}, der den FFGFT-Operator
+        $\mathcal{D}_{T^4}$ mit der Quantum-Graphity-Hamiltonkette
+        $H_V + H_B + \cdots$ in Beziehung setzt.
+  \item Ein \emph{Rückgewinnungs-Satz}, der zeigt, dass aus der
+        Tieftemperaturphase eines Quantum-Graphity-Modells mit
+        passend gewählten Kopplungen ein effektives $T^4$ herauskommt.
+\end{itemize}
+
+\textbf{Methodische Konsequenz:} Die Aussage \enquote{Quantum
+Graphity $\subset$ FFGFT} ist ein \emph{plausibler Programmpunkt},
+keine bewiesene Strukturaussage -- im Gegensatz zur Hilbertraum-
+Übersetzung in Dok.~230, die als konkrete Bijektion vorliegt.
+Diese Asymmetrie zwischen Doks 230 und 232 muss bei der Verwendung
+beider Dokumente bedacht werden. Wer FFGFTs Verhältnis zu LQG-,
+CDT-, Wolfram- oder Quantum-Graphity-Programmen darstellt, sollte
+es als \emph{methodische Verwandtschaft mit gemeinsamen
+Grundannahmen} formulieren -- nicht als formal bewiesene Reduktion.
+
+% ==============================================================================
+\section{Vergleich der Aussagekraft: Hilbertraum-QM vs.\ Quantum Graphity}
+% ==============================================================================
+
+Die Reduktion FFGFT $\to$ Quantum Graphity unterscheidet sich
+\emph{grundlegend} von der Reduktion FFGFT $\to$ Hilbertraum-QM
+(Dok.~230) -- nicht nur in den Reduktionsschritten, sondern in der
+\textbf{Aussagekraft} der jeweils erreichten Theorie. Diese Asymmetrie
+ist methodisch wichtig und soll hier explizit gemacht werden.
+
+\subsection{Hilbertraum-QM: substantieller Inhalt}
+
+Die Standard-Hilbertraum-Quantenmechanik ist eine \emph{mathematisch
+reife, vollständige} Theorie:
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item Sie beschreibt Materie vollständig (Wellenfunktionen,
+        Spinoren, Vielteilchen-Zustände).
+  \item Sie liefert präzise Vorhersagen (Atomspektren,
+        Streuamplituden, Quantengatter-Operationen).
+  \item Sie ist experimentell überwältigend bestätigt.
+  \item Sie nimmt alle drei Eichgruppen $SU(3) \times SU(2) \times U(1)$
+        in Tensorprodukt-Form auf.
+  \item Sie hat ein Jahrhundert mathematischer Entwicklung hinter
+        sich.
+\end{itemize}
+
+Die Übersetzbarkeit FFGFT $\leftrightarrow$ Hilbertraum-QM
+(Dok.~230) ist daher eine \emph{Brücke zwischen zwei reifen
+Theorien}, mit kleinem, quantifizierbarem Verlust
+($K_{\text{frak}}$-Korrektur, $\Delta\text{CHSH} \approx 10^{-5}$).
+
+\subsection{Quantum Graphity: programmatischer Inhalt}
+
+Quantum Graphity ist ein \emph{Programm}, kein vollständiges Werkzeug:
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item Materie ist im Grundmodell nicht beschrieben; in der
+        erweiterten Version nur als $(j, m)$-Etiketten ohne
+        Massenspezifizität.
+  \item Vorhersagen sind \emph{qualitativ} (Phasenübergang,
+        emergente Lokalität), nicht quantitativ.
+  \item Es gibt keine direkten experimentellen Bestätigungen --
+        Quantum Graphity arbeitet auf der Planck-Skala.
+  \item Nur eine Eichgruppe ($U(1)$) emergiert, und auch das nur in
+        der erweiterten Version mit Levin-Wen-String-Net-Kondensation.
+  \item Es ist 17~Jahre alt (Erstpaper 2008), mit einer kleinen
+        Forschungsgemeinschaft.
+\end{itemize}
+
+\subsection{Quantitativer Vergleich}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+{\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}p{3.4cm}}
+\toprule
+\textbf{Aspekt} & \textbf{Hilbertraum-QM} & \textbf{Quantum Graphity} \\
+\midrule
+Materie-Sektor & vollständig beschrieben & nicht vorhanden (Grundmodell) \\[3pt]
+Massen & als externe Yukawa-Parameter & nicht vorhanden \\[3pt]
+Eichtheorien & $SU(3)\!\times\!SU(2)\!\times\!U(1)$ & nur $U(1)$ (erw.\ Version) \\[3pt]
+Spin-Algebra & vollständig & bei Bedarf nachgerüstet \\[3pt]
+Vorhersagen & präzise quantitativ & qualitativ \\[3pt]
+Experimentelle Bestätigung & überwältigend & keine direkte \\[3pt]
+Mathematische Reife & ein Jahrhundert & 17~Jahre \\[3pt]
+Reduktionsverlust gegenüber FFGFT & klein, quantifizierbar & massiv \\
+\bottomrule
+\end{tabular}%
+}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\subsection{Was die Asymmetrie für FFGFTs Position bedeutet}
+
+Die beiden Reduktionen zeigen FFGFTs Verhältnis zu zwei sehr
+unterschiedlichen Theorie-Klassen:
+
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item \textbf{Gegenüber Hilbertraum-QM:} FFGFT muss eine
+        \emph{große, etablierte} Theorie respektieren -- und tut
+        das, mit voller Übersetzbarkeit und kleinen geometrischen
+        Korrekturen. Das ist FFGFTs Beweis ihrer
+        \emph{Konsistenz} mit der bekannten Physik.
+
+  \item \textbf{Gegenüber Quantum Graphity:} FFGFT enthält ein
+        \emph{kleines, programmatisches} Modell als Spezialfall.
+        Das ist FFGFTs Beweis ihrer \emph{methodischen Verwandtschaft}
+        mit anderen Quantengravitations-Programmen -- ohne dass FFGFT
+        deren Beschränkungen übernehmen müsste.
+\end{itemize}
+
+\textbf{Die Pointe:} Quantum Graphity ist \emph{nicht falsch}, sondern
+\emph{wenig}. FFGFT teilt mit ihr das methodische Grundprogramm
+\enquote{emergente Geometrie aus diskreter Mikrostruktur}, geht aber
+weit darüber hinaus: sie spezifiziert die Geometrie ($T^4$), den
+einzigen Parameter ($\xi_0$), und liefert daraus alle 12 Fermionen-
+massen, die Feinstrukturkonstante, die Eichgruppen-Struktur, und die
+Spin-Bahn-Konstanten -- alles parameterfrei.
+
+\subsection{Strategische Konsequenz}
+
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item \textbf{An Hilbertraum-Praktiker (Mathematiker,
+        QM-Theoretiker):} FFGFT respektiert die volle Standard-QM
+        und erweitert sie konsistent (Dok.~230, 231). Die
+        Übersetzungstabellen sind interoperabel.
+
+  \item \textbf{An Quantengravitations-Forscher (LQG, Wolfram,
+        Quantum Graphity):} FFGFT teilt das Grundprogramm
+        \enquote{emergente Geometrie aus Mikrostruktur}, geht aber
+        weiter und liefert SM-Konstanten parameterfrei. Quantum
+        Graphity ist ein Spezialfall, in dem fast alle FFGFT-Aussagen
+        abgeworfen werden.
+\end{itemize}
+
+\textbf{FFGFTs Stärke ergibt sich genau aus dieser Asymmetrie:}
+sie ist \emph{groß genug}, um Hilbertraum-QM zu enthalten, und
+\emph{spezifisch genug}, um Quantum Graphity zu erweitern.
+
+% ==============================================================================
+\section{Zusammenfassung}
+% ==============================================================================
+
+\textbf{Quantum Graphity ist plausibel als Untermenge von FFGFT
+darstellbar -- im Sinne einer skizzierten, nicht durchgeführten
+Reduktion.}
+
+Die Reduktionskette FFGFT $\to$ Quantum Graphity besteht aus fünf
+Schritten:
+\begin{enumerate}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item Diskretisierung des $T^4$-Kontinuums (skizziert als
+        Triangulierung -- noch nicht rigoros konstruiert).
+  \item Vergessen der $T^4$-Topologie zugunsten des vollständigen
+        Graphen $K_N$.
+  \item Verallgemeinerung der Wicklungs-Quantenzahlen
+        $(n_x, n_y, n_z, k_t)$ zu Kantenbesetzungen $n_{ab}$
+        (Grundmodell) bzw.\ $(j, m)$-Etiketten (erweiterte Version).
+  \item Verallgemeinerung des Geometrieparameters $\xi_0 = 4/30000$
+        zu freien Kopplungen $g_V, g_B, g_C, g_D, g_\pm, v_0, \ldots$.
+  \item Abwerfen des Materie-Sektors (Massen, $\alpha$, Spin-Bahn).
+\end{enumerate}
+
+Was bei der Reduktion bleibt: das \emph{Geometrie-Emergenz-Schema}
+und die \emph{emergente $U(1)$-Eichtheorie}. Was verloren geht: die
+SM-spezifischen Vorhersagen.
+
+\textbf{Methodische Position:} FFGFT teilt mit Quantum Graphity (und
+LQG, CDT, Wolfram-Hypergraphen) das Grundprogramm \enquote{emergente
+Geometrie aus diskreter Mikrostruktur}. FFGFT geht weiter: sie
+spezifiziert die Geometrie ($T^4$), den Parameter ($\xi_0$), und
+liefert daraus alle SM-Konstanten parameterfrei.
+
+\textbf{Status der Reduktion:} Im Gegensatz zur Hilbertraum-Übersetzung
+in Dok.~230 (konkrete Bijektion mit $\alpha = \sqrt{(1+z)/2}\,e^{i\theta/2}$)
+ist die Reduktion in diesem Dokument eine \emph{Hypothese} -- plausibel
+gestützt auf Standard-Differentialtopologie, aber ohne durchgeführten
+Konvergenz-Beweis. Die Aussage \enquote{Quantum Graphity $\subset$
+FFGFT} ist daher als \emph{methodischer Programmpunkt} zu verstehen,
+nicht als formal bewiesene Strukturaussage.
+
+Quantum Graphity ist damit \emph{nicht ein Widerspruch} zu FFGFT,
+sondern ein \emph{partielles FFGFT-Skelett} -- die emergente
+Geometrie-Komponente ohne die Materie-Spezifizität. Die Existenz
+von Quantum Graphity als peer-reviewed Forschungsprogramm zeigt,
+dass FFGFTs methodische Grundannahmen \emph{nicht exotisch} sind.
