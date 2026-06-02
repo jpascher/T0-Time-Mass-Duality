@@ -1,0 +1,403 @@
+% ==============================================================================
+% T0-Theorie: Dokument 162
+% Titel: T0-Optimierungsstrategien: QM-Optimierung und Coherent Ising Machine im Vergleich
+% Autor: Johann Pascher
+% Datum: Februar 2026
+% ==============================================================================
+
+\section*{Abstract}
+
+Die T0-Theorie enthält zwei komplementäre Optimierungsrahmenwerke: Das Dokument~034
+(\emph{QM-Optimierung}) beschreibt, wie Quantencomputer durch geometrische Transformation
+im zylindrischen Phasenraum und durch Rauschunterdrückung via Zeitfeld-Modulation
+optimiert werden können. Das vorliegende Dokument~161 (\emph{T0-Ising Machine}) zeigt,
+dass kombinatorische NP-harte Optimierung durch geometrische Relaxation des Massenfeldes
+$\mfield$ gelöst werden kann. Dieses Dokument~162 stellt beide Ansätze systematisch
+gegenüber und zeigt: Sie sind nicht konkurrierend, sondern \emph{komplementäre Ebenen
+desselben geometrischen Prinzips} -- Optimierung als physikalische Relaxation in ein
+geometrisches Minimum.
+
+\clearpage
+
+\section{Einführung: Zwei Optimierungsebenen in T0}
+\label{sec:intro}
+
+\subsection{Das Ausgangsproblem}
+
+Quantencomputing kämpft auf zwei grundlegend verschiedenen Ebenen mit Rauschen und
+Suboptimalität:
+
+\begin{enumerate}
+    \item \textbf{Gate-Ebene}: Einzelne Quantengatter sind durch Dekohärenz, Phasenrauschen
+    und fraktale Dämpfung gestört. Die Frage: Wie optimiert man \emph{einzelne Operationen}?
+
+    \item \textbf{Problem-Ebene}: Kombinatorische Optimierungsprobleme (NP-hart) sind
+    selbst mit perfekten Gattern schwer lösbar. Die Frage: Wie findet man
+    \emph{globale Minima} in riesigen Lösungsräumen?
+\end{enumerate}
+
+Die T0-Theorie adressiert \textbf{beide Ebenen} -- aber mit unterschiedlichen
+Werkzeugen und auf unterschiedlichen Abstraktionsebenen. Dokument~034 \cite{pascher:qmopt}
+löst Problem~1; Dokument~161 \cite{pascher:ising} löst Problem~2.
+
+\subsection{Die gemeinsame Wurzel}
+
+Beide Ansätze teilen denselben geometrischen Ursprung: den Parameter
+$\xipar = 4/30000 \approx 1{,}333 \times 10^{-4}$
+und die Zeitfeld-Bindungsbedingung $T \cdot m = 1$.
+Die Unterschiede sind nicht konzeptuell -- sie sind Unterschiede in der
+\emph{Skalierungsebene} der Anwendung.
+
+\clearpage
+
+\section{Dokument 034: QM-Optimierung durch geometrischen Formalismus}
+\label{sec:doc034}
+
+\subsection{Der zylindrische Phasenraum}
+
+In Dokument~034 \cite{pascher:qmopt} wird der Hilbertraum durch einen
+\textbf{zylindrischen Phasenraum} ersetzt. Ein Qubit ist kein 2D-komplexer Vektor,
+sondern ein Punkt $(z, r, \theta)$:
+
+\begin{itemize}
+    \item $z \in [-1, 1]$: klassische Basisprojektion ($z=+1 \equiv |0\rangle$,
+    $z=-1 \equiv |1\rangle$)
+    \item $r \geq 0$: Kohärenzradius (Superpositionsgröße), mit $z^2 + r^2 = 1$
+    \item $\theta \in [0, 2\pi)$: relative Phase der Überlagerung
+\end{itemize}
+
+Gatter-Operationen sind geometrische Transformationen dieses Raumes, keine Matrizenmultiplikationen.
+
+\subsection{Fraktale Dämpfung als intrinsisches Rauschen}
+
+Das X-Gatter (Bit-Flip) ist im T0-Formalismus keine ideale $\pi$-Rotation, sondern
+eine gedämpfte Rotation um den Winkel $\alpha = \pi \cdot \Kfrak$:
+
+\begin{align}
+    z' &= z \cos(\alpha) - r \sin(\alpha) \\
+    r' &= z \sin(\alpha) + r \cos(\alpha)
+\end{align}
+
+mit der fraktalen Dämpfungskonstante $\Kfrak = 1 - 100\xipar$.
+Ein perfekter Flip ($\alpha = \pi$) ist physikalisch unmöglich -- die Raumzeit
+dämpft jede Rotation inhärent. \textbf{Dies ist eine testbare Vorhersage.}
+
+\subsection{Die drei Optimierungsstrategien aus Dok. 034}
+
+\begin{enumerate}
+    \item \textbf{T0-Topologie-Compiler}: Qubits werden nicht angeordnet, um SWAP-Operationen
+    zu minimieren, sondern um die kumulative \emph{fraktale Weglänge} aller
+    Verschränkungsoperationen zu minimieren. Kritisch interagierende Qubits müssen
+    physisch näher zusammengebracht werden.
+
+    \item \textbf{Harmonische Resonanzfrequenzen}: Qubit-Frequenzen werden auf
+    ''magische'' Frequenzen kalibriert, die sich aus der harmonischen Struktur
+    des T0-Zeitfeldes ergeben:
+    \begin{equation}
+        f_n = \left(\frac{\Ezero}{h}\right) \cdot \xipar^2 \cdot (\phiT^2)^{-n}
+        \label{eq:harmonic_freq}
+    \end{equation}
+    Für supraleitende Qubits ergeben sich Sweet Spots bei ca.\ \textbf{6,24 GHz}
+    ($n=14$) und \textbf{2,38 GHz} ($n=15$). Diese Kalibrierung reduziert
+    Phasenrauschen intrinsisch.
+
+    \item \textbf{Aktive Zeitfeld-Modulation}: Eine hochfrequente
+    \emph{Zeitfeld-Pumpe} bestrahlt untätige Qubits, um das fundamentale
+    $\xipar$-Rauschen auszumitteln und die passive $T_2$-Kohärenzgrenze zu
+    überwinden -- aktive Dekohärenz-Unterdrückung statt passivem Warten.
+\end{enumerate}
+
+\clearpage
+
+\section{Dokument 161: T0-Ising Machine -- Kombinatorische Optimierung}
+\label{sec:doc161}
+
+\subsection{Das Ising-Modell als Optimierungssprache}
+
+In Dokument~161 \cite{pascher:ising} wird gezeigt, dass NP-harte kombinatorische
+Probleme als Minimierung des Ising-Hamiltonians formuliert werden können:
+
+\begin{equation}
+    H_{\text{Ising}} = -\frac{1}{2} \sum_{i \neq j} J_{ij} \, \sigma_i \sigma_j
+    - \sum_i h_i \, \sigma_i
+    \label{eq:ising}
+\end{equation}
+
+Eine Coherent Ising Machine (CIM) findet den Grundzustand dieses Hamiltonians durch
+physikalische Relaxation von Laserpulsen (Spins = Phasenzustände 0° oder 180°).
+
+\subsection{Die T0-Ising Machine: Emergente Kopplungen}
+
+Die T0-Theorie erweitert die CIM fundamental: Die Kopplungen $J_{ij}$ sind nicht
+extern programmierbar -- sie emergieren geometrisch aus dem Zeitfeld:
+
+\begin{equation}
+    J_{ij}^{(\text{T0})} = \int \Tfield_i \cdot \Tfield_j \cdot G(x_i, x_j) \, d^3x
+    \label{eq:t0_coupling}
+\end{equation}
+
+Das Energiefunktional ist:
+\begin{equation}
+    H_{\text{Ising}} \leftrightarrow E_{\text{T0}} = \int |\nabla \Tfield|^2 \, d^4x
+    \label{eq:energy_equiv}
+\end{equation}
+
+\subsection{Rauschen in der CIM: Das Annealing-Problem}
+
+In der CIM spielt Rauschen eine paradoxe Rolle: Es ist gleichzeitig Problem und
+Werkzeug. Zu wenig thermisches Rauschen führt zu lokalen Minima-Fallen;
+zu viel Rauschen verhindert Konvergenz. Der Annealing-Temperaturparameter
+$T_{\text{ann}}$ balanciert diesen Konflikt.
+
+In der T0-Ising Machine übernimmt $\Kfrak^{3/2}$ diese Rolle -- nicht als
+externer Parameter, sondern als geometrisch bestimmte fraktale Korrekturgröße.
+
+\clearpage
+
+\section{Systematischer Vergleich: Dok. 034 vs. Dok. 161}
+\label{sec:comparison}
+
+\subsection{Übersichtstabelle}
+
+\begin{table}[h]
+    \centering
+    \caption{Direktvergleich der beiden T0-Optimierungsrahmenwerke}
+    \label{tab:main_comparison}
+    \resizebox{\textwidth}{!}{\begin{tabular}{@{}llll@{}}
+        \toprule
+        Aspekt & Dok.\ 034: QM-Optimierung & Dok.\ 161: T0-Ising Machine & Gemeinsame Wurzel \\
+        \midrule
+        Zielproblem & Gate-Rauschen, Dekohärenz & NP-harte Optimierung & Geometrische Relaxation \\
+        Skalierungsebene & Einzelnes Qubit / Gate & Gesamtsystem ($N$ Spins) & $\xipar = 4/30000$ \\
+        Spin-Darstellung & $(z, r, \theta)$ im Zylinder & Phase $0°/180°$ (CIM) & $T \cdot m = 1$-Dualität \\
+        Rauschrolle & Störung (zu minimieren) & Werkzeug (Annealing) & $\Kfrak$-Korrektur \\
+        Kopplung & Gatter-Pulse (extern) & $J_{ij}$ (geometrisch emergiert) & Zeitfeld $\Tfield$ \\
+        Optimierungsziel & Maximale Gate-Treue & Globales Minimum von $H$ & Energieminimierung \\
+        Determinismus & Explizit (geometr. Trafo) & Versteckt (OPO-Gleichungen) & Beide deterministisch \\
+        Testbare Vorhersage & Gedämpfter X-Flip & $\ln(N)$-Residuum nach CIM & $\xipar$-Signaturen \\
+        \bottomrule
+    \end{tabular}}
+\end{table}
+
+\subsection{Parallele 1: Rauschen -- Feind oder Verbündeter?}
+
+Dies ist der tiefste konzeptuelle Unterschied zwischen beiden Dokumenten:
+
+\begin{table}[h]
+    \centering
+    \caption{Die gegensätzliche Rolle von Rauschen in beiden Frameworks}
+    \label{tab:noise_role}
+    \resizebox{\textwidth}{!}{\begin{tabular}{@{}lll@{}}
+        \toprule
+        Aspekt & Dok.\ 034: QM-Optimierung & Dok.\ 161: T0-Ising Machine \\
+        \midrule
+        Rauschen ist... & \textbf{Feind} -- stört Gate-Treue & \textbf{Werkzeug} -- ermöglicht Annealing \\
+        T0-Ursache & Fraktale Dämpfung $\Kfrak$ & Thermische Fluktuationen im OPO \\
+        Strategie & Aktiv unterdrücken & Kontrolliert einsetzen \\
+        Mechanismus & Zeitfeld-Pumpe moduliert $T(x)$ & Temperaturparameter $T_{\text{ann}}$ \\
+        Optimum & Rauschen $\rightarrow 0$ & Rauschen $\rightarrow$ Minimum (dann $\rightarrow 0$) \\
+        T0-Analogon & $\Kfrak \rightarrow 1$ (perfekte Gatter) & $\Kfrak^{3/2}$ als Annealing-Kraft \\
+        \bottomrule
+    \end{tabular}}
+\end{table}
+
+\begin{important}[Auflösung des Widerspruchs]
+    Der scheinbare Widerspruch -- Rauschen ist in Dok.\ 034 schlecht, in Dok.\ 161 gut --
+    löst sich durch die Skalierungsebene auf: Auf Gate-Ebene ist jedes Rauschen schädlich.
+    Auf Systemebene ist kontrolliertes Rauschen notwendig, um lokale Minima zu verlassen.
+    T0 beschreibt denselben physikalischen Mechanismus ($\Kfrak$) auf beiden Ebenen.
+\end{important}
+
+\subsection{Parallele 2: Fraktale Dämpfung als universeller T0-Mechanismus}
+
+\begin{table}[h]
+    \centering
+    \caption{$\Kfrak$ als universeller T0-Mechanismus auf verschiedenen Ebenen}
+    \label{tab:kfrak_universal}
+    \resizebox{\textwidth}{!}{\begin{tabular}{@{}llll@{}}
+        \toprule
+        Kontext & Dok.\ 034 & Dok.\ 161 & Physikalische Bedeutung \\
+        \midrule
+        $\Kfrak$-Definition & $1 - 100\xipar$ & $K_{\text{frak}}^{3/2}$ (g-2-Korrektur) & Fraktale Raumzeit-Struktur \\
+        Wirkung auf... & X-Gate-Rotation (dämpft) & Annealing-Dynamik (reguliert) & Abweichung vom Ideal \\
+        Mathematisch & $\alpha = \pi \cdot \Kfrak$ & $\mathcal{D}(N) = e^{-\xipar \ln N/\Dfrak}$ & Geometrische Dämpfung \\
+        Messbar durch & Residualer Flip-Fehler & $\ln(N)$-Residuum nach CIM & $\xipar$-Signaturen \\
+        Testbar an & IBM-Quantencomputer & CIM mit variabler Spingröße & Beide Plattformen \\
+        \bottomrule
+    \end{tabular}}
+\end{table}
+
+\subsection{Parallele 3: Frequenzoptimierung vs.\ Topologieoptimierung}
+
+Beide Dokumente schlagen Optimierungen der \emph{Systemarchitektur} vor -- auf
+verschiedenen Ebenen:
+
+\begin{table}[h]
+    \centering
+    \caption{Architekturoptimierungen: Gate-Level vs.\ System-Level}
+    \label{tab:architecture}
+    \resizebox{\textwidth}{!}{\begin{tabular}{@{}lll@{}}
+        \toprule
+        Optimierungstyp & Dok.\ 034: QM-Optimierung & Dok.\ 161: T0-Ising Machine \\
+        \midrule
+        Frequenzoptimierung & Harmonische Resonanzfrequenzen $f_n$ & -- \\
+        Topologieoptimierung & T0-Topologie-Compiler (fraktale Weglänge) & 4D-Torus-Topologie \\
+        Dekohärenzschutz & Aktive Zeitfeld-Modulation & Toroidale Randbedingungen \\
+        Kopplungsstruktur & Gate-Pulse vorkompensiert & $J_{ij}$ geometrisch emergiert \\
+        Ziel & Max.\ Gate-Treue & Min.\ Ising-Hamiltonian \\
+        \bottomrule
+    \end{tabular}}
+\end{table}
+
+\subsection{Parallele 4: Determinismus und Messbarkeit}
+
+\begin{table}[h]
+    \centering
+    \caption{Determinismus und testbare Vorhersagen beider Dokumente}
+    \label{tab:determinism}
+    \resizebox{\textwidth}{!}{\begin{tabular}{@{}lll@{}}
+        \toprule
+        Aspekt & Dok.\ 034: QM-Optimierung & Dok.\ 161: T0-Ising Machine \\
+        \midrule
+        Art des Determinismus & Explizit: geometrische Transformationen & Versteckt: OPO-Feldgleichungen \\
+        Quelle der Stochastik & Fraktale Raumzeit-Fluktuationen & Quantenvakuum-Anfangsbedingungen \\
+        Testbare Vorhersage 1 & Gedämpfter X-Flip: $\alpha < \pi$ & $\ln(N)$-skalierendes Residuum \\
+        Testbare Vorhersage 2 & Sweet Spots bei 6,24/2,38 GHz & $J_{ij}$-Abweichungen vom freien Param. \\
+        Plattform & IBM Brisbane/Sherbrooke & CIM mit 1000+ Spins \\
+        Quantifizierung & $\Delta\alpha = \pi(1 - \Kfrak) \approx 10^{-2}$ & $\xipar \approx 1{,}3 \times 10^{-4}$ \\
+        \bottomrule
+    \end{tabular}}
+\end{table}
+
+\clearpage
+
+\section{Neue Optimierungsmöglichkeiten durch die Verbindung}
+\label{sec:new_opportunities}
+
+Die systematische Gegenüberstellung beider Dokumente eröffnet Optimierungsmöglichkeiten,
+die in keinem der beiden Dokumente allein sichtbar waren:
+
+\subsection{Hybride Optimierung: Gate-Ebene + Systemebene}
+
+\begin{keyresult}[Hybride T0-Optimierungsstrategie]
+    Eine vollständige T0-optimierte Quantenarchitektur kombiniert beide Ebenen:
+    \begin{enumerate}
+        \item \textbf{Gate-Ebene} (Dok.\ 034): Harmonische Frequenzkalibration +
+        Zeitfeld-Pumpe für maximale Gate-Treue
+        \item \textbf{Systemebene} (Dok.\ 161): T0-Ising Machine für kombinatorische
+        Optimierung mit geometrisch emergenten Kopplungen
+        \item \textbf{Verbindungsebene}: Der T0-Topologie-Compiler (Dok.\ 034) minimiert
+        fraktale Weglängen -- dies ist dasselbe geometrische Prinzip wie die
+        Torusstruktur in Dok.\ 161
+    \end{enumerate}
+\end{keyresult}
+
+\subsection{Rauschen als Brücke zwischen beiden Ebenen}
+
+Die dualistische Rauschrolle eröffnet eine neue Optimierungsstrategie:
+
+\begin{itemize}
+    \item \textbf{Phase 1 (Annealing)}: Kontrolliertes Rauschen ($\Kfrak$-Regime)
+    -- die T0-Ising Machine sucht globale Minima
+    \item \textbf{Phase 2 (Präzision)}: Rauschunterdrückung (Zeitfeld-Pumpe)
+    -- Quantengatter führen die Lösung mit maximaler Treue aus
+    \item \textbf{Übergang}: Der fraktale Parameter $\Kfrak$ reguliert beide Phasen --
+    als Annealing-Mechanismus (Dok.\ 161) und als Gate-Dämpfung (Dok.\ 034)
+\end{itemize}
+
+\begin{equation}
+    \text{Optimierung} = \underbrace{\Kfrak^{3/2}\text{-Annealing}}_{\text{Dok.\ 161:\ globales Minimum}}
+    + \underbrace{\Kfrak \rightarrow 1\text{-Präzision}}_{\text{Dok.\ 034:\ Gate-Treue}}
+    \label{eq:hybrid_optimization}
+\end{equation}
+
+\subsection{Neue testbare Vorhersage: Korrelation zwischen Gate-Fehler und CIM-Residuum}
+
+Wenn $\Kfrak$ denselben universellen T0-Parameter auf beiden Ebenen beschreibt, dann
+gilt:
+
+\begin{equation}
+    \frac{\Delta\alpha_{\text{Gate}}}{\pi} = \frac{\mathcal{D}_{\text{CIM}}(N)}{\ln N}
+    = \xipar + O(\xipar^2)
+    \label{eq:universal_kfrak}
+\end{equation}
+
+Das ist eine \textbf{neue quantitative Vorhersage}: Der gemessene Gate-Flip-Fehler an
+IBM-Quantencomputern sollte mit dem $\ln(N)$-Residuum in CIM-Messungen
+\emph{auf denselben numerischen Wert} $\xipar \approx 1{,}3 \times 10^{-4}$ konvergieren.
+Dies ist expermenell überprüfbar mit heutiger Technologie.
+
+\clearpage
+
+\section{Zusammenfassung: Komplementäre Ebenen desselben Prinzips}
+\label{sec:summary}
+
+\begin{table}[h]
+    \centering
+    \caption{Vollständige Synthese: Beide Dokumente als komplementäre T0-Ebenen}
+    \label{tab:synthesis}
+    \resizebox{\textwidth}{!}{\begin{tabular}{@{}llll@{}}
+        \toprule
+        Dimension & Dok.\ 034 & Dok.\ 161 & Verbindung \\
+        \midrule
+        Ebene & Gate / Qubit & System / Spins & Selber $\xipar$ \\
+        Rauschen & Feind (unterdrücken) & Werkzeug (kontrollieren) & $\Kfrak$ auf beiden Ebenen \\
+        Darstellung & Zylindrisch $(z,r,\theta)$ & Phase $0°/180°$ & $T \cdot m = 1$-Zustände \\
+        Topologie & Fraktale Weglänge & 4D-Torus & Geometrische Minimierung \\
+        Kopplung & Gate-Pulse (vorkompensiert) & $J_{ij}$ (emergiert) & Zeitfeld $\Tfield$ \\
+        Vorhersage & $\Delta\alpha \approx 10^{-2}$ & $\ln(N)$-Residuum & $\xipar = 4/30000$ \\
+        \bottomrule
+    \end{tabular}}
+\end{table}
+
+Die zentrale Einsicht lautet:
+
+\begin{revolutionary}[Die vereinigte T0-Optimierungsperspektive]
+    Sowohl Gate-Rauschen (Dok.\ 034) als auch kombinatorische NP-Optimierung
+    (Dok.\ 161) sind Manifestationen \emph{desselben geometrischen Prinzips}:
+    physikalische Relaxation in das Minimum des T0-Energiefunktionals
+    $E_{\text{T0}} = \int |\nabla \Tfield|^2 \, d^4x$.
+    Der Unterschied ist nicht konzeptuell -- er ist die Skalierungsebene der
+    Betrachtung. Die fraktale Korrekturgröße $\Kfrak$ erscheint auf beiden Ebenen
+    als derselbe universelle Parameter mit numerisch übereinstimmenden Vorhersagen.
+\end{revolutionary}
+
+\begin{thebibliography}{9}
+
+\bibitem{pascher:qmopt}
+J.~Pascher,
+\newblock T0-Quantenmechanik: Geometrischer Formalismus und Optimierungsstrategien
+für Quantencomputer,
+\newblock T0-Dokumentationsreihe, Dokument 034 (2025).
+
+\bibitem{pascher:ising}
+J.~Pascher,
+\newblock T0-Theorie und Coherent Ising Machines: Strukturelle Parallelen,
+\newblock T0-Dokumentationsreihe, Dokument 161 (2026).
+
+\bibitem{pascher:fundamentals}
+J.~Pascher,
+\newblock T0-Theorie: Zeit-Masse-Dualität als fundamentales Prinzip,
+\newblock T0-Dokumentationsreihe, Dokument 003 (2025).
+
+\bibitem{pascher:g2}
+J.~Pascher,
+\newblock Fraktale Korrekturen und die g-2-Anomalie,
+\newblock T0-Dokumentationsreihe, Dokument 018 (2025).
+
+\bibitem{pascher:quantum}
+J.~Pascher,
+\newblock T0-Quantencomputing: Qubits und Logikgatter,
+\newblock T0-Dokumentationsreihe, Dokument 147 (2025).
+
+\bibitem{pascher:scramblons}
+J.~Pascher,
+\newblock T0-Projektion auf Scramblon-Physik,
+\newblock T0-Dokumentationsreihe, Dokument 148 (2026).
+
+\bibitem{inagaki_cim_2016}
+T.~Inagaki et al.,
+\newblock A coherent Ising machine for 2000-node optimization problems,
+\newblock \emph{Science} \textbf{354}, 603 (2016).
+
+\end{thebibliography}

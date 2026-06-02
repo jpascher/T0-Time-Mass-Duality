@@ -26,6 +26,47 @@ Frühere A4-Build (Mai 2026) hatte zwei Mängel — beide jetzt behoben:
    zur Buch-Sammlung erfolgt **nur über das Verzeichnis**
    (`Einzeldokumente_A4/Deutsch/` vs. `Buecher/PDFs/`).
 
+## Revision Juni 2026 (P14 / Rotverschiebung + ch-Konsolidierung)
+
+Diese überarbeitete Auslieferung ergänzt das Mai/Juni-Update um folgende
+inhaltliche und strukturelle Korrekturen:
+
+1. **P14 / R14 — Rotverschiebung in Dok. 041.** Die Beschreibung
+   "Photon energy loss through xi-field" wurde ersetzt durch
+   **fraktale Wegverlaengerung** (geometrische Wegstreckung; ein
+   "Energieverlust" ist nur ein scheinbares Artefakt, das entstuende,
+   wenn man die Wegverlaengerung weglaesst; die Weglaengen-Abhaengigkeit
+   bleibt). Eingearbeitet in **Dok. 041** (DE+EN) umgesetzt und in **Dok. 190** als erledigt
+   verbucht (Status: P1--P14 / R1--R14 eingearbeitet; DE: P14, EN: R14;
+   EN-Uebersichtstabelle um R12/R13 vervollstaendigt).
+
+2. **ch-Konsolidierung.** Die bisher getrennten Quellverzeichnisse `ch`
+   und `ch_modifications` wurden zu **einem einzigen** Verzeichnis
+   `Sources/ch/` zusammengefuehrt (vollstaendiger aktueller Stand,
+   391 Dateien inkl. der Teil-Einleitungen 1-5). Praezedenz: In-Session-
+   Edits (041/190) > layout-gepatchte Fassung (adjustbox-Tabellen) > Basis.
+   `ch_modifications` entfaellt.
+
+3. **Buch-Preamble-Patches.** `Sources/pri-end/T0_preamble_patches.tex`
+   definiert nun zusaetzlich den Seitenstil `firstpage`, laedt `nicefrac`
+   und stellt `\blacksquare`/`\square` bereit — Befehle, die einige
+   Kapitel nutzen, die im Buch-Preamble bislang fehlten. Dadurch bauen
+   die betroffenen Baende sauber (zuvor stillschweigend fehlerhaft
+   gerendert).
+
+**Neu gebaute PDFs in dieser Revision:** Einzeldokumente 041 und 190
+(DE+EN) sowie die Baende **Teil 1** (enthaelt Dok. 041) und **Teil 5**
+(enthaelt Dok. 190) in allen drei Formaten und beiden Sprachen. Alle
+uebrigen PDFs sind inhaltlich unveraendert uebernommen.
+
+4. **Zitationsbefehle in Dok. 248 bereinigt.** Dok. 248 (Epistemologie,
+   DE+EN) nutzte `\citeauthor`/`\citeyear` ohne geladenes Zitationspaket
+   (nicht-fatale Warnung, auch im Original). Lokal ersetzt durch Klartext
+   (Autor/Jahr: Shannon 1948, Bateson 1972) -- kein globaler Preamble-
+   Eingriff, daher ohne Nebenwirkung auf die 164 anderen Dokumente mit
+   `thebibliography`. Damit bauen Dok. 248 und Teil 5 jetzt ohne
+   undefinierte Befehle.
+
 ## Struktur
 
 ```
@@ -56,7 +97,7 @@ FFGFT_v1_1_2_Komplett/
     │                                 (Originalwrapper mit Titel+ToC,
     │                                 nur Präambel auf A4 umgestellt)
     ├── pri-end/                      Alle Präambeln (inkl. neuer A4)
-    └── ch_modifications/             218 modifizierte ch-Dateien
+    └── ch/  (konsolidiert, 391 Dateien)             218 modifizierte ch-Dateien
 ```
 
 ## Bücher (5 Bände × 3 KDP-Formate)

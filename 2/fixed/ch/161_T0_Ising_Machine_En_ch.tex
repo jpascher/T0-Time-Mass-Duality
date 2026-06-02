@@ -1,0 +1,579 @@
+% ==============================================================================
+% T0 Theory: Document 161 (English)
+% Title: T0 Theory and Coherent Ising Machines
+% Author: Johann Pascher
+% Date: February 2026
+% ==============================================================================
+
+\section*{Abstract}
+
+We analyze the structural parallels between the T0 time-mass duality theory and the
+Coherent Ising Machine (CIM), a photonic analog computer for solving combinatorial
+NP-hard optimization problems. We show that both systems rest on the same fundamental
+principle: \emph{optimization as physical relaxation into a geometric minimum} -- not
+as algorithmic iteration. Six structural parallels are identified, covering determinism,
+ground state, qubit structure, coupling matrix, fractal corrections, and toroidal
+topology. The central consequence is the concept of a \emph{T0 Ising Machine}, in which
+all couplings $J_{ij}$ are not externally programmed but geometrically emerge from the
+intrinsic time field $\Tfield$.
+
+\clearpage
+
+\section{Introduction}
+\label{sec:intro}
+
+\subsection{Motivation}
+
+The Coherent Ising Machine (CIM) is an optical analog computer that solves combinatorial
+optimization problems by physical relaxation into the ground state of an Ising Hamiltonian
+\cite{inagaki_cim_2016, mcmahon_cim_2016}. The fundamental principle -- the system
+``falls'' physically into its solution -- stands in direct conceptual relation to the
+T0 theory \cite{pascher_t0_2025}, which derives all fundamental constants from a single
+geometric parameter $\xipar = 4/30000$.
+
+This document investigates this connection systematically. We show that T0 not only
+provides a conceptual parallel to the CIM, but enables a fundamentally stronger
+formulation: a T0-based Ising Machine in which the coupling matrix $J_{ij}$ geometrically
+emerges from the mass field $\mfield$ -- rather than being externally programmed.
+
+\subsection{Structure}
+
+Section~\ref{sec:ising} describes the Ising model as a universal optimization language.
+Section~\ref{sec:cim} explains the operating principle of the CIM.
+Section~\ref{sec:t0} summarizes the relevant T0 foundations.
+Section~\ref{sec:parallels} systematically analyzes the six structural parallels.
+Section~\ref{sec:t0machine} formulates the concept of the T0 Ising Machine.
+Section~\ref{sec:questions} discusses open research questions.
+
+\clearpage
+
+\section{The Ising Model as Universal Optimization Language}
+\label{sec:ising}
+
+\subsection{The Hamiltonian}
+
+The Ising model from solid-state physics describes magnetic spins
+$\sigma_i \in \{-1, +1\}$ interacting through a Hamiltonian:
+
+\begin{equation}
+    H_{\text{Ising}} = -\frac{1}{2} \sum_{i \neq j} J_{ij} \, \sigma_i \sigma_j
+    - \sum_{i} h_i \, \sigma_i
+    \label{eq:ising_hamiltonian}
+\end{equation}
+
+Here $J_{ij}$ are the coupling strengths between spins $i$ and $j$, and $h_i$ are
+external fields (bias terms). The ground state -- the spin configuration with minimal
+$H_{\text{Ising}}$ -- corresponds to the optimal solution of the encoded problem.
+
+\subsection{QUBO: The Universal Mapping}
+
+Every NP-hard combinatorial problem can be formulated as minimization of the Ising
+Hamiltonian \eqref{eq:ising_hamiltonian} via \emph{Quadratic Unconstrained Binary
+Optimization} (QUBO):
+
+\begin{table}[h]
+    \centering
+    \caption{Examples of the mapping of NP-hard problems onto Ising Hamiltonians}
+    \label{tab:qubo_examples}
+    \resizebox{\textwidth}{!}{\begin{tabular}{@{}ll@{}}
+        \toprule
+        Optimization Problem & Ising Correspondence \\
+        \midrule
+        Travelling Salesman Problem & Couplings $J_{ij}$ as distance matrix \\
+        MaxCut (graph partitioning) & Spins represent node assignments \\
+        Portfolio optimization & Spins as stock selection (buy/not buy) \\
+        Protein structure prediction & Spins as torsion angle configurations \\
+        RSA factorization & Spins as bit representation of factors \\
+        \bottomrule
+    \end{tabular}}
+\end{table}
+
+This mapping is not an approximation -- it is exact. Finding the ground state of
+\eqref{eq:ising_hamiltonian} solves the optimization problem.
+
+\begin{important}[Central Principle]
+    Combinatorial optimization $\equiv$ search for the ground state of the Ising
+    Hamiltonian. This is the conceptual core of both the CIM and -- as we will show --
+    the T0 theory.
+\end{important}
+
+\clearpage
+
+\section{Coherent Ising Machine: Operating Principle}
+\label{sec:cim}
+
+\subsection{Physical Implementation}
+
+A Coherent Ising Machine (CIM) physically implements the Ising model through a
+network of time-multiplexed degenerate optical parametric oscillators (DOPO)
+\cite{yamamoto_cim_2017, honjo_100k_cim_2021}:
+
+\begin{itemize}
+    \item \textbf{Spin} $\sigma_i = +1$: laser pulse with phase $0°$
+    \item \textbf{Spin} $\sigma_i = -1$: laser pulse with phase $180°$
+    \item \textbf{Coupling} $J_{ij}$: electronic feedback network between pulses
+    \item \textbf{Dynamics}: physical relaxation into the energy minimum
+\end{itemize}
+
+The system evolves deterministically according to the field equations of the
+parametric oscillator -- and in doing so automatically finds (or with high probability
+finds) the ground state of the Hamiltonian \eqref{eq:ising_hamiltonian}.
+
+\subsection{Scaling and State of the Art}
+
+\begin{table}[h]
+    \centering
+    \caption{Comparison: Classical computer vs.\ Coherent Ising Machine}
+    \label{tab:cim_vs_classical}
+    \resizebox{\textwidth}{!}{\begin{tabular}{@{}lll@{}}
+        \toprule
+        Property & Classical Computer & Coherent Ising Machine \\
+        \midrule
+        Parallelism & Sequential / limited & Massively parallel (all spins simultaneous) \\
+        Solution paradigm & Algorithm iterates & Physical relaxation \\
+        Scaling & Exponentially harder & Natural via light propagation \\
+        Energy demand & High for NP-hard problems & Potentially orders of magnitude lower \\
+        Spins (as of 2024) & -- & Up to 100,000 optical spins \\
+        \bottomrule
+    \end{tabular}}
+\end{table}
+
+\subsection{Determinism Behind Apparent Stochasticity}
+\label{subsec:cim_determinism}
+
+A CIM appears to search stochastically: different runs sometimes yield different
+solutions. But this is a surface property: physically the system follows
+\emph{deterministically} the field equations of the OPO. The apparent randomness
+is solely ignorance of the exact initial conditions of the quantum vacuum.
+
+This is the first and most fundamental parallel to the T0 theory.
+
+\clearpage
+
+\section{T0 Foundations: Relevant Concepts}
+\label{sec:t0}
+
+\subsection{The Fundamental Binding Condition}
+
+The T0 theory postulates time-mass duality as a fundamental geometric constraint:
+
+\begin{equation}
+    T \cdot m = 1 \quad \text{(in natural units)}
+    \label{eq:t0_constraint}
+\end{equation}
+
+The intrinsic time field of a particle with mass $m$ is:
+
+\begin{equation}
+    \Tfield = \frac{\hbar}{m(x,t) \cdot c^2}
+    \label{eq:t0_timefield}
+\end{equation}
+
+Time and mass are not independent quantities -- they are reciprocal aspects of a
+single geometric reality.
+
+\subsection{The Geometric Origin Parameter}
+
+All fundamental constants emerge from a single dimensionless geometric parameter
+\cite{pascher_xi_2025}:
+
+\begin{equation}
+    \xipar = \frac{4}{30000} \approx 1.333 \times 10^{-4}
+    \label{eq:xi_param}
+\end{equation}
+
+This parameter defines the ratio between the Planck scale and the cosmic scale.
+There are \textbf{no free parameters} -- the ground state of the theory is fully
+determined by $\xipar$.
+
+\subsection{T0 Qubits}
+
+In the T0 theory, qubits emerge naturally from time-mass duality
+\cite{pascher_quantum_2025}:
+
+\begin{equation}
+    |\text{T0-Qubit}\rangle = \alpha \, |T{\uparrow}, m{\downarrow}\rangle
+    + \beta \, |T{\downarrow}, m{\uparrow}\rangle
+    \label{eq:t0_qubit}
+\end{equation}
+
+with the binding condition $T \cdot m = 1$. The spin states are not chosen
+arbitrarily -- they are forced by fundamental geometry:
+
+\begin{itemize}
+    \item $|T{\uparrow}, m{\downarrow}\rangle$: high time / low mass
+    \item $|T{\downarrow}, m{\uparrow}\rangle$: low time / high mass
+\end{itemize}
+
+\subsection{The Fractal Correction}
+
+The fractal correction $\Kfrak$ plays a central role in T0:
+$\Kfrak^{3/2}$ explains the $\sim 2\%$ deviation in the anomalous magnetic
+moment of the muon (g-2 anomaly) \cite{pascher_g2_2025}. This is structurally
+analogous to the annealing mechanism in the CIM.
+
+\clearpage
+
+\section{Six Structural Parallels: T0 and CIM}
+\label{sec:parallels}
+
+\subsection{Parallel 1: Determinism Behind Apparent Stochasticity}
+
+\begin{table}[h]
+    \centering
+    \caption{Parallel 1: Determinism}
+    \label{tab:parallel1}
+    \resizebox{\textwidth}{!}{\begin{tabular}{@{}lll@{}}
+        \toprule
+        Aspect & Coherent Ising Machine & T0 Theory \\
+        \midrule
+        Surface & Apparently stochastic search & Apparently probabilistic QM \\
+        Deep structure & Deterministic (OPO field eqs.) & Deterministic ($\mfield$ geometry) \\
+        Source of ``randomness'' & Unknown initial conditions & Unknown field configuration \\
+        Consequence & Solution is physically forced & Measurement result geometrically fixed \\
+        \bottomrule
+    \end{tabular}}
+\end{table}
+
+Both systems replace fundamental probabilism with hidden determinism:
+in the CIM the solution is not computed, it \emph{emerges}.
+In T0 the measurement result is not chosen randomly -- it is already determined
+by the mass field $\mfield$.
+
+\begin{keyresult}[Parallel 1]
+    Apparent probabilism $\equiv$ hidden determinism through geometric field structure --
+    in CIM \emph{and} T0.
+\end{keyresult}
+
+\subsection{Parallel 2: Ground State as Geometric Minimum}
+
+The CIM solves optimization through physical relaxation:
+\begin{equation}
+    H_{\text{Ising}} \rightarrow \text{minimum} \equiv \text{optimization solution}
+    \label{eq:cim_groundstate}
+\end{equation}
+
+T0 describes the universe as already residing in the ground state of its own geometry:
+\begin{equation}
+    \xipar = \frac{4}{30000} \equiv \text{geometric minimum} \Rightarrow
+    \text{all fundamental constants}
+    \label{eq:t0_groundstate}
+\end{equation}
+
+In both cases the ``solution'' is not a computation -- it is the physically natural
+resting state of the system. \textbf{Optimization is relaxation, not iteration.}
+
+\subsection{Parallel 3: Qubit Structure}
+
+\begin{table}[h]
+    \centering
+    \caption{Parallel 3: Comparison of qubit structures}
+    \label{tab:parallel3}
+    \resizebox{\textwidth}{!}{\begin{tabular}{@{}lll@{}}
+        \toprule
+        Aspect & CIM Spin & T0 Qubit \\
+        \midrule
+        Carrier & Phase of laser pulse & Time-mass relation \\
+        Spin $+1$ & Phase $0°$ & $|T{\uparrow}, m{\downarrow}\rangle$ \\
+        Spin $-1$ & Phase $180°$ & $|T{\downarrow}, m{\uparrow}\rangle$ \\
+        Constraint & External (laser pump) & Intrinsic: $T \cdot m = 1$ \\
+        Superposition & Coherent phase superposition & $\alpha|T{\uparrow},m{\downarrow}\rangle
+        + \beta|T{\downarrow},m{\uparrow}\rangle$ \\
+        Collapse & Phase measurement & Geometric field projection \\
+        \bottomrule
+    \end{tabular}}
+\end{table}
+
+\begin{important}[Fundamental Difference]
+    The T0 spin is \emph{more fundamental} than the CIM spin: it carries its own
+    constraint ($T \cdot m = 1$) intrinsically. A CIM spin must be externally
+    constrained to $\pm 1$; a T0 spin is constrained by the geometry of spacetime itself.
+\end{important}
+
+\subsection{Parallel 4: The Coupling Matrix $J_{ij}$}
+\label{subsec:coupling}
+
+This is the deepest and physically most significant parallel:
+
+\begin{table}[h]
+    \centering
+    \caption{Parallel 4: Coupling matrix -- the decisive difference}
+    \label{tab:parallel4}
+    \resizebox{\textwidth}{!}{\begin{tabular}{@{}lll@{}}
+        \toprule
+        Aspect & Classical CIM & T0 Ising Machine (concept) \\
+        \midrule
+        Couplings $J_{ij}$ & Externally programmed & Geometrically emergent \\
+        Degrees of freedom & $J_{ij}$ freely selectable & Uniquely fixed by field geometry \\
+        Physical meaning & Mathematical auxiliary & Real geometric interactions \\
+        Universality & Arbitrary problems encodable & Physically meaningful problems \\
+        Advantage & Maximum flexibility & No encoding errors possible \\
+        \bottomrule
+    \end{tabular}}
+\end{table}
+
+In a T0-based Ising Machine, $J_{ij}$ is \emph{not} a free parameter -- it emerges
+directly from the intrinsic time field:
+
+\begin{equation}
+    J_{ij}^{(\text{T0})} = \int \Tfield_i \cdot \Tfield_j \cdot G(x_i, x_j) \, d^3x
+    \label{eq:t0_coupling}
+\end{equation}
+
+where $G(x_i, x_j)$ is the geometric propagator of the T0 mass field.
+
+\subsection{Parallel 5: Fractal Correction as Annealing Mechanism}
+
+\begin{table}[h]
+    \centering
+    \caption{Parallel 5: Fractal correction and annealing}
+    \label{tab:parallel5}
+    \resizebox{\textwidth}{!}{\begin{tabular}{@{}lll@{}}
+        \toprule
+        Aspect & Simulated Annealing (CIM) & T0 Fractal Correction \\
+        \midrule
+        Parameter & Temperature $T_{\text{ann}}$ & Correction factor $\Kfrak$ \\
+        Function & Prevents local minima & Explains systematic deviations \\
+        Effect & Cooling $\rightarrow$ ground state & Scaling $\rightarrow$ precision \\
+        Example & MaxCut optimization & g-2 anomaly: $\Kfrak^{3/2}$ explains $\sim 2\%$ \\
+        Mechanism & Thermal fluctuations & Fractal self-similarity \\
+        \bottomrule
+    \end{tabular}}
+\end{table}
+
+The fractal correction $\Kfrak^{3/2}$ in T0 plays the analogous role of the
+annealing temperature parameter: it prevents the system from becoming trapped in
+a local minimum of the geometric energy landscape.
+
+\subsection{Parallel 6: Toroidal Topology as Optimal CIM Geometry}
+
+T0 describes the universe as a 4D torus crystal \cite{pascher_torus_2025}.
+This topology has direct implications for a T0-based Ising Machine:
+
+\begin{itemize}
+    \item \textbf{Toroidal boundary conditions}: no boundary problem in optimization --
+    all spins have equally many neighbors
+    \item \textbf{Periodic structure}: natural implementation of translation-invariant
+    couplings
+    \item \textbf{4D instead of 3D}: richer coupling structure than classical 2D/3D
+    CIM arrays
+    \item \textbf{Crystal symmetry}: discrete symmetry groups $\rightarrow$ natural
+    spin lattices without external structure specification
+\end{itemize}
+
+\begin{keyresult}[Parallel 6]
+    A T0 Ising Machine would operate on the \emph{natural geometry of the universe} --
+    not on an artificially constructed graph.
+\end{keyresult}
+
+\clearpage
+
+\section{The T0 Ising Machine: Conceptual Formulation}
+\label{sec:t0machine}
+
+\subsection{Overall Structure}
+
+Based on the six identified parallels, a T0-based Ising Machine can be conceptually
+defined:
+
+\begin{table}[h]
+    \centering
+    \caption{Overall comparison: Classical CIM vs.\ T0 Ising Machine}
+    \label{tab:t0machine}
+    \resizebox{\textwidth}{!}{\begin{tabular}{@{}lll@{}}
+        \toprule
+        Component & Classical CIM & T0 Ising Machine \\
+        \midrule
+        Spin carrier & DOPO laser pulses (phase) & Time field states $\Tfield$ \\
+        Spin values & $\pm 1$ (phase $0°/180°$) & $|T{\uparrow},m{\downarrow}\rangle$,
+        $|T{\downarrow},m{\uparrow}\rangle$ \\
+        Couplings & Externally programmed & Geometrically emergent from $\mfield$ \\
+        Topology & Arbitrary graph & 4D torus crystal \\
+        Ground state & Solution sought & Geometric fixed point $\xipar$ \\
+        Annealing & External (temperature) & Internal ($\Kfrak$ correction) \\
+        Determinism & Hidden deterministic & Explicitly deterministic \\
+        \bottomrule
+    \end{tabular}}
+\end{table}
+
+\subsection{Formal Correspondence}
+
+The complete mapping between T0 geometry and the Ising formalism reads:
+
+\begin{align}
+    \sigma_i &\leftrightarrow \operatorname{sign}\!\left(\Tfield_i - \bar{T}\right)
+    &&\text{[spin from time field]}
+    \label{eq:t0_spin_map}\\
+    J_{ij} &\leftrightarrow \langle \Tfield_i \cdot \Tfield_j \rangle_{\xipar}
+    &&\text{[coupling from $\xipar$ geometry]}
+    \label{eq:t0_j_map}\\
+    h_i &\leftrightarrow \frac{\partial \xipar}{\partial \Tfield_i}
+    &&\text{[external field from $\xipar$ gradient]}
+    \label{eq:t0_h_map}\\
+    H_{\text{Ising}} &\leftrightarrow E_{\text{T0}} = \int |\nabla \Tfield|^2 \, d^4x
+    &&\text{[energy functionals identical]}
+    \label{eq:t0_energy_map}
+\end{align}
+
+The minimum of the T0 energy functional \eqref{eq:t0_energy_map} is identical to
+the ground state of the associated Ising Hamiltonian -- with the crucial difference
+that in T0 all quantities ($J_{ij}$, $h_i$, $H$) emerge from a single parameter
+$\xipar$.
+
+\subsection{The Central Consequence}
+
+\begin{revolutionary}[Fundamental Implication of the T0 Ising Machine]
+    If T0 is correct, then every physically realizable optimization problem is already
+    encoded as a geometric structure in the mass field $\mfield$. A T0 Ising Machine
+    would not optimize -- it would \emph{read} a physical reality. The solution is not
+    the result of a search, but the unveiling of an already-existing geometric truth.
+\end{revolutionary}
+
+\clearpage
+
+\section{Open Questions and Research Directions}
+\label{sec:questions}
+
+\subsection{Theoretical Openness}
+
+\begin{itemize}
+    \item What is the explicit geometric propagator $G(x_i, x_j)$ in the T0 mass field?
+    What symmetries does the torus topology enforce?
+
+    \item Is there a natural restriction on which NP-hard problems are representable
+    through T0 geometry -- or are all problems in principle encodable?
+
+    \item How does $\Kfrak$ behave as an annealing parameter for different problem
+    classes? Are there universal scaling laws?
+
+    \item What is the connection between the torus structure of the T0 universe and
+    optimal CIM topologies (toroidal vs.\ Möbius-band couplings)?
+\end{itemize}
+
+\subsection{Experimental Directions}
+
+\begin{itemize}
+    \item \textbf{Coupling structure comparison}: compare the coupling matrix of
+    existing CIMs with T0 field propagator predictions. Are there systematic
+    deviations pointing to geometric constraints?
+
+    \item \textbf{Toroidal CIM topologies}: do toroidal CIM architectures show
+    performance advantages over open graphs that go beyond combinatorial explanations?
+
+    \item \textbf{T0 qubit test}: do the T0 qubits defined in \eqref{eq:t0_qubit}
+    show characteristic signatures in existing photonic quantum computing experiments?
+
+    \item \textbf{Testable prediction}: in a CIM with $N$ spins, the T0 correction
+    factor $\mathcal{D}(N) = \exp(-\xipar \ln N / \Dfrak)$ should produce a measurable
+    $\ln(N)$-scaling residual that is qualitatively distinct from standard error models
+    ($1/N$ or $e^{-N}$).
+\end{itemize}
+
+\subsection{Connection to Scramblon Physics}
+
+This document extends \cite{pascher_scramblons_2026}, which analyzed the T0 connection
+to scramblon physics. Combining both approaches yields a complete picture:
+
+\begin{itemize}
+    \item \textbf{Scramblon theory}: dynamic description -- how quantum information
+    scrambles in a CIM-like system
+    \item \textbf{T0 Ising Machine}: geometric description -- which fundamental
+    couplings follow from the spacetime structure
+    \item \textbf{Synthesis}: scramblons describe the \emph{dynamics} of information
+    spreading; T0 describes the \emph{geometry} of the coupling structure
+\end{itemize}
+
+\clearpage
+
+\section{Summary}
+\label{sec:summary}
+
+We have identified and systematically analyzed six structural parallels between
+Coherent Ising Machines and the T0 theory:
+
+\begin{table}[h]
+    \centering
+    \caption{Summary: Six parallels T0 $\leftrightarrow$ CIM}
+    \label{tab:summary}
+    \resizebox{\textwidth}{!}{\begin{tabular}{@{}clll@{}}
+        \toprule
+        \# & Parallel & CIM & T0 \\
+        \midrule
+        1 & Determinism & Hidden (OPO) & Explicit (geometry) \\
+        2 & Ground state & Solution sought & Fixed point $\xipar$ \\
+        3 & Qubit structure & Phase $0°/180°$ & $T \cdot m = 1$ states \\
+        4 & Couplings $J_{ij}$ & Externally programmed & Geometrically emergent \\
+        5 & Annealing & External temperature & $\Kfrak$ correction \\
+        6 & Topology & Arbitrary graph & 4D torus \\
+        \bottomrule
+    \end{tabular}}
+\end{table}
+
+T0 does not merely provide a conceptual parallel to the CIM -- it offers a
+fundamentally deeper justification: optimization is not a computation executed on an
+artificially constructed system, but physical relaxation into a geometric truth already
+inscribed in the mass field of the universe.
+
+\begin{keyresult}[Central Result]
+    The formal correspondence
+    \begin{equation}
+        H_{\text{Ising}} \leftrightarrow E_{\text{T0}} = \int |\nabla \Tfield|^2 \, d^4x
+    \end{equation}
+    shows: Ising optimization and T0 energy minimization are mathematically equivalent
+    formulations of the same geometric principle -- with the decisive difference that
+    in T0 \emph{all} couplings emerge parameter-free from $\xipar = 4/30000$.
+\end{keyresult}
+
+\begin{thebibliography}{99}
+
+\bibitem{inagaki_cim_2016}
+T.~Inagaki et al.,
+\newblock A coherent Ising machine for 2000-node optimization problems,
+\newblock \emph{Science} \textbf{354}, 603 (2016).
+
+\bibitem{mcmahon_cim_2016}
+P.~L.~McMahon et al.,
+\newblock A fully programmable 100-spin coherent Ising machine with all-to-all connections,
+\newblock \emph{Science} \textbf{354}, 614 (2016).
+
+\bibitem{yamamoto_cim_2017}
+Y.~Yamamoto et al.,
+\newblock Coherent Ising machines -- optical neural networks operating at the quantum limit,
+\newblock \emph{npj Quantum Inf.} \textbf{3}, 49 (2017).
+
+\bibitem{honjo_100k_cim_2021}
+T.~Honjo et al.,
+\newblock 100,000-spin coherent Ising machine,
+\newblock \emph{Sci.\ Adv.} \textbf{7}, eabh0952 (2021).
+
+\bibitem{pascher_t0_2025}
+J.~Pascher,
+\newblock T0 Theory: Time-Mass Duality as a Fundamental Principle,
+\newblock T0 Documentation Series, Document 003 (2025).
+
+\bibitem{pascher_xi_2025}
+J.~Pascher,
+\newblock The Geometric Origin Parameter $\xi = 4/30000$,
+\newblock T0 Documentation Series, Document 009 (2025).
+
+\bibitem{pascher_quantum_2025}
+J.~Pascher,
+\newblock T0 Quantum Computing: Qubits and Logic Gates,
+\newblock T0 Documentation Series, Document 147 (2025).
+
+\bibitem{pascher_g2_2025}
+J.~Pascher,
+\newblock Fractal Corrections and the g-2 Anomaly,
+\newblock T0 Documentation Series, Document 018 (2025).
+
+\bibitem{pascher_torus_2025}
+J.~Pascher,
+\newblock The Universe as a 4D Torus Crystal: Geometric Cosmology,
+\newblock T0 Documentation Series, Document 026 (2025).
+
+\bibitem{pascher_scramblons_2026}
+J.~Pascher,
+\newblock T0 Projection onto Scramblon Physics,
+\newblock T0 Documentation Series, Document 148 (2026).
+
+\end{thebibliography}
