@@ -26,6 +26,33 @@ Frühere A4-Build (Mai 2026) hatte zwei Mängel — beide jetzt behoben:
    zur Buch-Sammlung erfolgt **nur über das Verzeichnis**
    (`Einzeldokumente_A4/Deutsch/` vs. `Buecher/PDFs/`).
 
+## Revision Juni 2026 (2. Update): z-Korrektur (P15/R15) + Dok 263
+
+Ergaenzend zur ersten Juni-Revision:
+
+5. **P15/R15 - kosmologisches z als LambdaCDM-Vergleichsgroesse.** Das statische
+   xi-Universum kennt kein kosmologisches z im Expansionssinn (FFGFT-Rotverschiebung
+   = fraktale Wegverlaengerung). Unmarkierte z-Rechnungen, die wie FFGFT-eigene
+   Ergebnisse aussahen, wurden ausdruecklich als LambdaCDM-Vergleichsrechnungen
+   markiert: Dok. 061 (Rekombinations-Abschnitt als Vergleichsrahmen gerahmt;
+   Abstract/Zusammenfassung auf "ohne Entkopplung bei irgendeinem z" umgestellt)
+   und Dok. 041 (z=1100-Werte als "(LambdaCDM)" gekennzeichnet). Registriert als
+   P15/R15 in Dok. 190. Die CMB entsteht in FFGFT durch stationaere Thermalisierung
+   in einem unendlich alten Universum. Hinweis: weitere unmarkierte Pipeline-
+   Vergleiche im Korpus sind separat zu pruefen (laufend).
+
+6. **Dok. 263 - Fraktale Holografie** (neu, DE+EN). Verortet FFGFT gegenueber dem
+   holografischen Prinzip: belegte Beruehrungspunkte (Flaechengesetz aus
+   Knotenzaehlung), offene Skalierungsfrage (Flaeche vs. Volumen, Reduktionsschicht),
+   Hologramm-Analogie (Metapher), Reversibilitaet (FFGFT leitet Zeit-Asymmetrie ab,
+   Dok. 157), Verankerung am beschraenkten Kern (keine Singularitaet), und die
+   offene Feststellung: keine exakte Uebersetzungsgroesse gefunden. Liegt als
+   Einzeldokument (A4, DE+EN) bei; noch keinem Buchband zugeordnet.
+
+**Neu gebaute Baende in diesem Update:** Teil 1 (enthaelt Dok. 041), Teil 3
+(enthaelt Dok. 061) und Teil 5 (enthaelt Dok. 190), je in allen drei Formaten
+und beiden Sprachen. Teil 2 und Teil 4 unveraendert.
+
 ## Revision Juni 2026 (P14 / Rotverschiebung + ch-Konsolidierung)
 
 Diese überarbeitete Auslieferung ergänzt das Mai/Juni-Update um folgende
