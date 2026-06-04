@@ -7,7 +7,7 @@ nach Release v1.1.2:
 
 - **30 Bücher** (5 Bände × 2 Sprachen × 3 KDP-Formate) — derzeit auf
   Amazon KDP im Genehmigungsverfahren.
-- **368 Einzeldokumente** als A4-PDFs (184 DE + 184 EN) für
+- **370 Einzeldokumente** als A4-PDFs (185 DE + 185 EN) für
   wissenschaftliche Nutzung, Referenz, Druck auf A4-Papier.
 - **Vollständige LaTeX-Sourcen** für alle Wrapper, Präambeln und
   modifizierten ch-Dateien.
@@ -25,6 +25,21 @@ Frühere A4-Build (Mai 2026) hatte zwei Mängel — beide jetzt behoben:
    wie `001a_T0_Book_Abstract_De.pdf`, ohne `_A4_`. Die Unterscheidung
    zur Buch-Sammlung erfolgt **nur über das Verzeichnis**
    (`Einzeldokumente_A4/Deutsch/` vs. `Buecher/PDFs/`).
+
+## Revision Juni 2026 (3. Update): Dok 263 erweitert + Dok 190 P16/P17
+
+- **Dok. 263 (Fraktale Holografie)** erweitert (DE+EN): neue Abschnitte
+  "H_0 als Projektions-Artefakt" (inkl. z als ΛCDM-Fehldeutung, übersetzbar),
+  "Konstanten als Projektionsfaktoren und die Vakuumenergie" (c, ħc,
+  √(ħG/c⁵) als SI-Umrechnungsfaktoren; Vakuumenergie kompaktifiziert
+  vorhanden, dekompaktifiziert sichtbar; T_00 ohne statischen Sockel) sowie
+  eine Zeichenerklärung (Notationstabelle). Begleitskripte: h0_artefakt.py,
+  vakuum_emergenz.py, vakuum_zeitlich.py, c_emergenz.py, dark_sector_ehrlich.py,
+  holo_scaling.py.
+- **Dok. 190 (Korrekturen)** erweitert (DE+EN): P16/R16 (H_0 emergent,
+  nicht fundamental; Dok 026/064/181 als veraltet vorgemerkt) und P17/R17
+  (DE/DM-Verhältnis zirkulär als Vorhersage, zulässig nur als eingeschränkter
+  Umrechnungsfaktor; zwei nicht-tragfähige a_0-Formeln; Rotationskurve offen).
 
 ## Revision Juni 2026 (2. Update): z-Korrektur (P15/R15) + Dok 263
 

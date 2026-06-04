@@ -1,7 +1,7 @@
 # FFGFT Changelog
 ## Korrekturen und Präzisierungen der Dokumentenserie
 **Grundlage:** Dok. 190 (allgemein) und Dok. 210 (Wicklungszahlen)
-**Stand:** Mai 2026 (zuletzt erweitert: 31. Mai 2026 — Bücher-Neuauflage v1.1.2 / DOI 10.5281/zenodo.20474821)
+**Stand:** Juni 2026 (zuletzt erweitert: Juni 2026 — 3. Update: Dok. 263 erweitert, P11 neugefasst, P14–P17, Komplett-ZIP neu)
 
 ---
 
@@ -1129,3 +1129,106 @@ Dies erfolgt im Anschluss als separater Schritt.
 |----|--------|-----------|
 | Bücher-v1.1.2 | ✓ 31. Mai 2026 | Komplette Fünf-Band-Neuauflage in drei KDP-Formaten (30 PDFs); Bd. 1–3 mit aktuellen ch-Dateien neu gebaut, Bd. 4+5 für 74 neue Dokumente erstellt; Tabellen-Wrap für Kindle, Patches-Datei für fehlende Environments, Typo-Fix in Teil2-end. DOI-Aktualisierung in Buchinhalten erfolgt nach Zenodo-Upload. |
 
+
+---
+
+## Revision Juni 2026 (3. Update) — Dok. 263 erweitert, P11 präzisiert, P14–P17
+
+**Stand:** Juni 2026. Schwerpunkt: statische Geometrie / SI-Projektion konsequent
+durchgezogen (Konstanten als Umrechnungsfaktoren), Dunkler-Sektor-Status geklärt,
+T_CMB-Korrektur richtig eingeordnet. Alle Änderungen DE+EN, PDFs gebaut und verifiziert.
+
+### P11 (Neufassung) — T_CMB-Restdifferenz ist normale Theorie-Messung-Abweichung
+| Status | **erledigt (neugefasst)** | ✓ Juni 2026 DE/EN (Dok. 190) |
+
+Frühere Fassung legte nahe, der geometrische Ursprung von 275/4 sei ein zu
+lösender **offener Punkt**. Neufassung: Nach Anwendung der primären fraktalen
+Korrektur K_frak (Dok. 133: 1−100ξ = 74/75) verbleibt eine Restdifferenz von
+≈ 0,9 % zum Messwert. **Das ist keine offene Lücke, sondern eine normale
+Theorie-gegen-Messung-Abweichung** (wie H₀ ≈ −1,9 %, Casimir/CMB ≈ 1,3 %,
+τ-Masse ≈ 0,35 %). Der Planck-Wert 2,72548 K ist unter ΛCDM aus dem Spektrum
+extrahiert — kein modellunabhängiger absoluter Referenzwert; die Theorie muss
+ihn nicht exakt treffen. Der Ausdruck (1−275/4·ξ) trifft ihn numerisch exakt,
+ist aber **nicht erforderlich** und hat keine geometrische Herleitung. Problem B
+(zwei inkonsistente K_frak-Definitionen; Dok. 133 primär, Dok. 003 tetraedrisches
+Modell nur heuristisch) unverändert bestehen.
+
+### P14 — Rotverschiebung ist fraktale Wegverlängerung, kein Energieverlust
+| Status | **erledigt** | ✓ Juni 2026 DE/EN |
+
+Frühere „Photon verliert Energie"-Bilder sind überholt. z ist fraktale
+Wegverlängerung im statischen Universum; das ΛCDM-z(d) und das FFGFT-z(d) bilden
+auf dieselbe Kurve ab (z als Λ​CDM-Vergleichsgröße, kein FFGFT-Energieverlust).
+
+### P15 — z als ΛCDM-Pipeline-Größe markiert
+| Status | **erledigt / laufend** | ✓ Juni 2026 DE/EN |
+
+z-Werte (z. B. z=1100) sind ΛCDM-Pipeline-Ausgaben, nicht modellneutral; als
+Vergleichsgröße zu kennzeichnen. Breiterer Pipeline-Scan nach weiteren
+unmarkierten ΛCDM-Vergleichen **laufend**.
+
+### P16 — H₀ ist emergent, nicht fundamental
+| Status | **erledigt** | ✓ Juni 2026 DE/EN (Dok. 263; Dok. 026/064/181 vorgemerkt) |
+
+H₀ = E_H/ℏ ist eine dekompaktifizierte (SI-projizierte) Größe, ℏ wirkt nur als
+Umrechnung. H₀ ist kein dynamischer Expansionsparameter, sondern ein
+geometrischer, als Expansion fehlgedeuteter Koeffizient. Ältere Stellen mit
+„fundamentale Konstante"/Energieverlust-Vakuum-Bild (Dok. 026 Z.116/117,
+Ausläufer 064/181) als veraltet **vorgemerkt** (größere Baustelle).
+
+### P17 — Dunkler Sektor: Deutung geklärt, Quantifizierung offen
+| Status | **erledigt (Register), Quantifizierung offen** | ✓ Juni 2026 DE/EN (Dok. 190; Dok. 028 vorgemerkt) |
+
+- **DE/DM-Verhältnis** ξ^(ln2,5/lnξ): als Vorhersage zirkulär (ergibt für jedes ξ
+  exakt 2,5); zulässig nur als **eingeschränkter Umrechnungsfaktor** zur ΛCDM-Ω-
+  Buchhaltung (wie c/z), eingeschränkt durch das ρ_DE-Artefakt (kein FFGFT-
+  Gegenstück).
+- **Deutung geklärt:** Dunkle Materie ist ein ξ-geometrischer Effekt (Artefakt der
+  ΛCDM-Sicht, wie H₀ und z); Dunkle Energie ist eliminiert (kein Λ).
+- **Zwei nicht-tragfähige a₀-Formeln:** Dok. 028 fit-abhängig (K_M=1,637);
+  Dok. 201 §4.3 a₀=c²ξ/(4λ) dimensionsinkonsistent (λ müsste Länge sein, ist via
+  m_T=λ/ξ Energie). Flache Rotationskurve folgt qualitativ als MOND-Konsequenz;
+  v(r)-Profil und SPARC-Vergleich **nicht durchgerechnet — offen**.
+
+### Dok. 263 (Fraktale Holografie) — mehrfach erweitert
+| Status | **erledigt** | ✓ Juni 2026 DE/EN |
+
+Eigenständiges IPI-Dokument (keinem Buchband zugeordnet). Neue Abschnitte:
+- **Zeichenerklärung** (Notationstabelle: ξ, T̃·m=1, D_f, E₀, E_H, H₀, R_H, L₀,
+  L_ξ, z, ρ_vac, m_T/λ, c/ℏ/ℏc, T_00) + Schichten + stehende Mahnung.
+- **„H₀ als Projektions-Artefakt"** (P16 umgesetzt; z als ΛCDM-Fehldeutung;
+  differenzierter 41/4-Schluss: Struktur belegt / Zahlenwert offen, Deutung
+  unabhängig).
+- **„Konstanten als Projektionsfaktoren und die Vakuumenergie"** (4 Schritte):
+  (1) c, ℏc, √(ℏG/c⁵) begründen nichts — SI-Umrechnung (c=L/T Dok. 134; G c-frei
+  aus ξ Dok. 012/013); (2) Vakuumstruktur kompaktifiziert vollständig vorhanden,
+  dekompaktifiziert nur SI-sichtbar (entsteht nicht); (3) kein statischer
+  Energie-Sockel: T_00=ξ[(∂_tE)²+(∇E)²] aus ℒ=ξ(∂E)², □E=0 (Dok. 010), bei
+  ∂_tE=0 ist T_00=0 — Energie aus zeitlicher Komponente; (4) Abgrenzung
+  belastbar/zirkulär (CMB/Casimir echt; DE/DM Umrechnungsfaktor; vgl. P17).
+- **T_CMB-Klarstellung:** T_CMB=(16/9)ξ²E_ξ ist eine algebraische ξ-Relation,
+  16/9=(4/3)², **keine fraktale Korrektur**; D_f spielt keine Rolle. Belastbar
+  als Verhältnis; absoluter Kelvin-Wert über SI; Restabweichung nicht aus ξ.
+- **„Formale Brücke zu UIFT — einseitig verifizierbar"** (Dok. 257): beruht auf
+  erster Ordnung (16/9)ξ; ξ_FFGFT/ξ_UIFT ≈ 414.684 ist Umrechnungsfaktor (P13);
+  **FFGFT-Seite verifizierbar, UIFT-Seite nicht** (Tekers Relation, außerhalb
+  unseres Zugriffs). K_frak und absoluter Wert für die Brücke irrelevant.
+
+### Komplett-ZIP neu gebaut
+| Status | **erledigt** | ✓ Juni 2026 |
+
+`FFGFT_v1_1_2_Komplett.zip` neu gepackt mit aktuellem Stand von Dok. 263 und 190;
+sechs Begleitskripte zu Dok. 263 im Ordner `Dok263_Skripte/`; README und dieser
+Changelog aktualisiert. Keine Buchbände betroffen (Dok. 190/263 in keinem Band).
+
+### Status
+| ✓ | Erstellt DE | Juni 2026 |
+| ✓ | Erstellt EN | Juni 2026 |
+
+---
+
+### Übersichtstabelle — Nachtrag (Fortsetzung 5)
+
+| ID | Status | Bemerkung |
+|----|--------|-----------|
+| Juni-3.Update | ✓ Juni 2026 | P11 neugefasst (T_CMB-Restdifferenz = normale Theorie-Messung-Abweichung, keine offene Lücke); P14–P17 ergänzt (z fraktale Wegverlängerung; H₀ emergent; Dunkler-Sektor-Deutung geklärt / Quantifizierung offen, zwei nicht-tragfähige a₀-Formeln). Dok. 263 mehrfach erweitert (Notationstabelle, H₀-Projektions-Artefakt, Konstanten als Projektionsfaktoren + Vakuumenergie, T_CMB-Klarstellung, formale UIFT-Brücke einseitig verifizierbar). Komplett-ZIP neu gebaut inkl. Dok263-Skripte. |
