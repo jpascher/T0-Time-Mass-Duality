@@ -1,7 +1,7 @@
 # FFGFT Changelog
 ## Korrekturen und Präzisierungen der Dokumentenserie
 **Grundlage:** Dok. 190 (allgemein) und Dok. 210 (Wicklungszahlen)
-**Stand:** Juni 2026 (zuletzt erweitert: Juni 2026 — 3. Update: Dok. 263 erweitert, P11 neugefasst, P14–P17, Komplett-ZIP neu)
+**Stand:** Juni 2026 (zuletzt erweitert: Juni 2026 — 6. Update: Dok. 266/267 neu, CMB-Peak-Analyse, Trompeten-Mechanismus, symmetrische Zirkularität, neue Verifikationsskripte)
 
 ---
 
@@ -1232,3 +1232,306 @@ Changelog aktualisiert. Keine Buchbände betroffen (Dok. 190/263 in keinem Band)
 | ID | Status | Bemerkung |
 |----|--------|-----------|
 | Juni-3.Update | ✓ Juni 2026 | P11 neugefasst (T_CMB-Restdifferenz = normale Theorie-Messung-Abweichung, keine offene Lücke); P14–P17 ergänzt (z fraktale Wegverlängerung; H₀ emergent; Dunkler-Sektor-Deutung geklärt / Quantifizierung offen, zwei nicht-tragfähige a₀-Formeln). Dok. 263 mehrfach erweitert (Notationstabelle, H₀-Projektions-Artefakt, Konstanten als Projektionsfaktoren + Vakuumenergie, T_CMB-Klarstellung, formale UIFT-Brücke einseitig verifizierbar). Komplett-ZIP neu gebaut inkl. Dok263-Skripte. |
+
+---
+
+## Revision Juni 2026 (4. Update) — Dok. 264 neu, methodische Klärungen, neue Skripte
+
+**Stand:** Juni 2026. Schwerpunkt: Ferrotoroidizitäts-Paper interpretiert,
+ΛCDM-Zirkularität dokumentiert, WBE/T⁴-Analyse, z als Nicht-FFGFT-Größe
+konsequent durchgezogen. Alle Änderungen DE+EN, PDFs gebaut und verifiziert.
+
+### Dok. 264 (Ferrotoroidizität und Quaternärspeicher) — neu, DE+EN
+| Status | **erledigt** | ✓ Juni 2026 DE/EN |
+
+Neues eigenständiges IPI-Dokument. Referenzarbeit: Qureshi et al., *Nature
+Communications* 17:4033 (2026), DOI: 10.1038/s41467-026-70767-8.
+
+Alle 6 Formeln des Papers (Toroidisierung, Polarisationsmatrix Gl. 2/3,
+allgemeine Polarisationsmatrix Gl. 9, DM-Hamiltonoperator Gl. 4–6,
+Messwert Gl. 7, Endpolarisation Gl. 8) aus FFGFT-Sicht interpretiert.
+
+**Kernbrücken (algebraisch exakt):**
+- Vier Domänen = ℤ₂×ℤ₂-Gruppe der T⁴-Windungsmoden (Zeit-Inversion × Raum-
+  spiegelung); keine Analogie, algebraisch exakt.
+- P'' = 0 (rein imaginäres M⊥) = statischer T⁴-Grundzustand (keine
+  Modenerzeugung = keine Expansion).
+- Nichtflüchtigkeit = topologischer Schutz der Windungszahl (Dok. 204),
+  dasselbe Prinzip wie Stabilität der Leptonmassen-Hierarchie (Dok. 190 P2).
+
+**Aus DeepSeek-Vorlage übernommen (bereinigt):**
+- Tired-Light-Abgrenzung (3 Punkte: Kohärenz, Zeitdilatation, CMB-Spektrum).
+- Skalenvergleichstabelle (Atomar / Sub-Planck / Kosmologisch) **ohne**
+  w = −3/4 (das ist UIFT, nicht FFGFT).
+- Korrespondenztabelle (10 belegte Zeilen, 5 fehlerhafte DeepSeek-Einträge
+  entfernt: w = −3/4, D^b/D^c = ξ [Faktor ~5000 daneben], DM = Wegverlängerung,
+  T₄ = Strahlung-Materie-Übergang, Invariante = z).
+
+**Wichtige Formulierungskorrektur:** z existiert in FFGFT nicht als
+Primärgröße. Überall in Dok. 264 steht daher λ_b/λ_e (gemessenes
+Wellenlängenverhältnis); z = λ_b/λ_e − 1 ist nur eine Bezeichnung
+(keine FFGFT-Größe, Dok. 190 P14).
+
+### Neue Begleitskripte
+| Status | **erledigt** | ✓ Juni 2026 |
+
+- **wbe_t4_flrw.py**: WBE-Argument auf T⁴ (statisch, alle drei Voraus-
+  setzungen exakt erfüllt) vs. FLRW (Voraussetzung B bricht: Bekenstein-
+  Surface vs. WBE-Volume). Strukturelle Asymmetrie belegt.
+- **lcdm_circularity.py**: Methodisches Audit der ΛCDM-Pipeline-Zirkularität
+  (T_CMB, r_s, Ω-Werte, Pantheon+). FFGFT-Gegenpart: H₀ aus ξ (null freie
+  Parameter). UIFT-Konsequenz: ΛCDM-Zahlen sind Orientierungswerte, keine
+  Referenzwerte für Tests alternativer Modelle.
+- **UIFT.py**: Formale Brücke FFGFT ↔ UIFT (erste Ordnung, K_frak separat,
+  FFGFT-Seite verifizierbar, UIFT-Seite nicht).
+
+### Methodische Klärungen (IPI-Korrespondenz, Onur Teker)
+| Status | **erledigt / laufend** | ✓ Juni 2026 |
+
+- **z als Nicht-FFGFT-Größe**: FFGFT kann strukturell nicht auf Expansion
+  umgedeutet werden (T̃·m = 1 schließt a(t) aus). z tritt in FFGFT nur als
+  Übersetzungsversuch mit ΛCDM-Pipeline-Werten auf; fehlerbehaftet per
+  Konstruktion.
+- **WBE-Analyse**: WBE-Voraussetzungen auf T⁴ exakt erfüllt; auf FLRW
+  bricht Voraussetzung (B) strukturell (Bekenstein-Surface vs. WBE-Volume).
+  α = D_f/(D_f+1) ist in FFGFT Ableitung, in FLRW Posit (Onurs eigene
+  Aussage bestätigt).
+- **P'' = 0 als experimenteller Fingerabdruck**: Static-T⁴-Bedingung
+  im Ferrotoroidizitäts-Paper nachgewiesen; FLRW hätte P'' ≠ 0 durch
+  Expansionsdynamik.
+- **D_eff = 2 im Experiment**: Vier Domänen haben D_eff = 2 (ℤ₂×ℤ₂),
+  α(D=2) = 2/3, d.h. w = −2/3 ≠ −3/4. Frage ob Onurs Holographiefläche
+  D = 3 (Bulk) oder D = 2 (Surface) ist, ändert die w-Vorhersage.
+- **Drafts**: Mehrere IPI-Entwürfe zu Onur, Peter, José ungesendet.
+
+### Komplett-ZIP und Changelog: Nächster Update ausstehend
+| Status | **offen** |
+
+Dok. 264 noch nicht im großen ZIP; bei Gelegenheit einzubauen
+(372 Einzeldok-PDFs nach Einschluss).
+
+### Übersichtstabelle — Nachtrag (Fortsetzung 6)
+
+| ID | Status | Bemerkung |
+|----|--------|-----------|
+| Juni-4.Update | ✓ Juni 2026 | Dok. 264 (Ferrotoroidizität, DE+EN, 9/10 S.): alle 6 Paper-Formeln aus FFGFT-Sicht, ℤ₂×ℤ₂-Brücke, Tired-Light-Abgrenzung, bereinigte Korrespondenztabelle. z als Nicht-FFGFT-Größe konsequent (λ_b/λ_e statt z). Neue Skripte: wbe_t4_flrw.py, lcdm_circularity.py, UIFT.py. ΛCDM-Zirkularitäts-Audit. IPI-Korrespondenz: WBE/T⁴-Analyse, P''=0-Fingerabdruck, D_eff=2-Beobachtung. |
+
+---
+
+## Revision Juni 2026 (4. Update) — Dok. 264 neu, methodische Klärungen, neue Skripte
+
+**Stand:** Juni 2026. Schwerpunkt: Ferrotoroidizitäts-Paper interpretiert,
+ΛCDM-Zirkularität dokumentiert, WBE/T⁴-Analyse, z als Nicht-FFGFT-Größe
+konsequent durchgezogen. Alle Änderungen DE+EN, PDFs gebaut und verifiziert.
+
+### Dok. 264 (Ferrotoroidizität und Quaternärspeicher) — neu, DE+EN
+| Status | **erledigt** | ✓ Juni 2026 DE/EN |
+
+Neues eigenständiges IPI-Dokument. Referenzarbeit: Qureshi et al., *Nature
+Communications* 17:4033 (2026). Alle 6 Formeln des Papers aus FFGFT-Sicht
+interpretiert. Kernbrücken (algebraisch exakt): Vier Domänen = ℤ₂×ℤ₂ der
+T⁴-Windungsmoden; P''=0 = statischer T⁴-Grundzustand; Nichtflüchtigkeit
+= topologischer Schutz (Dok. 204). Tired-Light-Abgrenzung, bereinigte
+Skalenvergleichs- und Korrespondenztabelle eingearbeitet.
+**Formulierungskorrektur:** z existiert in FFGFT nicht als Primärgröße;
+überall λ_b/λ_e (gemessenes Wellenlängenverhältnis), z nur Bezeichnung
+(Dok. 190 P14).
+
+### Neue Begleitskripte (EN)
+| Status | **erledigt** | ✓ Juni 2026 |
+
+- **wbe_t4_flrw.py**: WBE auf T⁴ exakt vs. FLRW (Voraussetzung B bricht).
+- **lcdm_circularity.py**: ΛCDM-Pipeline-Zirkularitäts-Audit + FFGFT-Gegenpart.
+- **UIFT.py**: Formale Brücke FFGFT↔UIFT (überarbeitet, K_frak korrekt).
+
+### Methodische Klärungen (IPI-Korrespondenz Onur Teker)
+| Status | **erledigt / laufend** | ✓ Juni 2026 |
+
+z als Nicht-FFGFT-Größe (T̃·m=1 schließt a(t) aus); WBE/T⁴-Analyse
+(α aus Geometrie, nicht Posit); P''=0 als experimenteller Fingerabdruck
+static/expanding; D_eff=2 Beobachtung (α=2/3, w=−2/3 ≠ −3/4).
+Mehrere IPI-Entwürfe ungesendet.
+
+### ZIP-Update ausstehend
+Dok. 264 noch nicht im großen ZIP (→ 372 Einzeldok-PDFs).
+
+### Übersichtstabelle — Nachtrag (Fortsetzung 6)
+
+| ID | Status | Bemerkung |
+|----|--------|-----------|
+| Juni-4.Update | ✓ Juni 2026 | Dok. 264 (Ferrotoroidizität DE/EN, 9/10 S.): alle 6 Paper-Formeln, ℤ₂×ℤ₂-Brücke, Tired-Light-Abgrenzung, bereinigte Tabellen, λ_b/λ_e statt z. Neue Skripte: wbe_t4_flrw, lcdm_circularity, UIFT. ΛCDM-Zirkularitäts-Audit. IPI: WBE/T⁴, P''=0, D_eff=2. |
+
+---
+
+## Revision Juni 2026 (5. Update) — P18–P20, Dok. 264/265, Onur-Briefwechsel, Hausdorff-Skript
+
+**Stand:** 5. Juni 2026. Schwerpunkt: Ehrliche Eingrenzung der kosmologischen
+Anwendbarkeit von FFGFT; neue Dokumente 264/265; Hausdorff-Herleitung der
+fraktalen Wegverlängerung; präzisierter Onur-Briefwechsel.
+
+### Dok. 264 (Ferrotoroidizität und Quaternärspeicher) — neu, DE+EN, 9/10 S.
+| Status | **erledigt** | ✓ 5. Juni 2026 |
+
+Alle 6 Formeln von Qureshi et al. (Nature Communications 17:4033, 2026)
+aus FFGFT-Sicht interpretiert. Kernbrücken (algebraisch exakt):
+ℤ₂×ℤ₂-Gruppenstruktur = T⁴-Windungsmoden; P''=0 = statischer Grundzustand;
+Nichtflüchtigkeit = topologischer Schutz (Dok. 204).
+Tired-Light-Abgrenzung (3 Punkte), Skalenvergleichstabelle (bereinigt,
+kein w=−3/4), Korrespondenztabelle (10 belegte Zeilen).
+Formulierungskorrektur: λ_b/λ_e statt z (keine FFGFT-Primärgröße, P14).
+
+### Dok. 265 (Korrespondenzebenen zwischen Formalismen) — neu, DE+EN, 6 S.
+| Status | **erledigt** | ✓ 5. Juni 2026 |
+
+Methodisches Werkzeugdokument für Stefaans Modell-Einordnungsarbeit.
+Drei Ebenen: Fast-Äquivalenz (ℤ₂×ℤ₂, P''=0, topolog. Schutz),
+struktureller Überlapp (DM-Antisymmetrie, Projektionsfaktoren),
+komplementär (FFGFT: warum 4 Zustände; Blume-Maleev: Übergangstemperaturen).
+Analogie: Wigner-Gruppenklassifikation vs. QED-Feldtheorie.
+
+### P18 — E_H/ℏ ist geometrische Skalenkonstante, keine H₀-Vorhersage
+| Status | **vorgemerkt** | ✓ 5. Juni 2026 (Dok. 190) |
+
+E_H/ℏ ist intern ohne freie Parameter definiert (ξ → E₀ → E_H = E₀·ξ^(41/4)
+→ E_H/ℏ). Nähe zum ΛCDM-H₀-Wert (66,2 vs. 67,4 km/s/Mpc) bekannt,
+aber ob der Exponent 41/4 durch ΛCDM-Vergleich motiviert wurde, ist
+nicht ausschließbar. Keine unabhängige Bestätigung vorhanden.
+
+### P19 — Hausdorff-Herleitung ergibt Potenzgesetz (Widerspruch zu Dok. 182)
+| Status | **vorgemerkt** | ✓ 5. Juni 2026 (Dok. 190, Skript hausdorff_wegverlaengerung.py) |
+
+Herleitung der fraktalen Wegverlängerung aus der Hausdorff-Metrik:
+L_eff/R = (R/L₀)^(ξ/D_f) — ein Potenzgesetz, nicht exp(d/R_H).
+Exponent ξ/D_f ≈ ξ/3 aus 3/D_f − 1 = (3−D_f)/D_f.
+Skalenunabhängig (L₀ = ξ·ℓ_P konstant). Im Kristall winziger Effekt
+(~4×10⁻⁴), kosmologisch ~0,7% — beide zu klein gegenüber Beobachtung.
+Widerspruch zu Dok. 182 (exp(d/R_H)) ungelöst und vorgemerkt.
+
+### P20 — R_H ist modellabhängige Konvention; FFGFT braucht externen Parameter
+| Status | **vorgemerkt** | ✓ 5. Juni 2026 (Dok. 190) |
+
+R_H ist keine Naturkonstante sondern eine ΛCDM-Pipeline-Ausgabe.
+Es gibt keine modellneutrale Messmethode für die Größe des Universums.
+Innen/Außen-Asymmetrie des T⁴: von außen ist die Torusgröße irrelevant
+(statisch), von innen entscheidend (fraktale Erweiterung akkumuliert).
+**Eindeutig festgehalten:** FFGFT kommt auch bei kosmologischen Berechnungen
+nicht ohne eine weitere Annahme aus. „Null freie Parameter" gilt nur intern.
+Kosmologisch hat FFGFT einen externen Parameter: R_H. Solange dieser nicht
+ΛCDM-unabhängig bestimmbar ist, bleibt jede kosmologische Formel ΛCDM-abhängig.
+
+### IPI-Korrespondenz (Onur Teker, WBE-Thread)
+| Status | **laufend** | ✓ 5. Juni 2026 |
+
+Onurs Mail (5.6., 00:18): Alle drei FFGFT-Punkte numerisch getestet.
+P''=0/Stationarität bestätigt (N_active ∝ a^ν verletzt WBE-Voraussetzung).
+D_eff=2 getestet: 10,6σ vs. 7,7σ — Leiter D=2→3→4→∞ zeigt Daten wählen
+extensives Limit (w→−1). Holografische Spannung: Volume-WBE vs.
+Surface-Bekenstein widersprechen sich intern. Statisches Universum:
+Δχ²≈138 schlechter, SNe-Zeitdilatation bei ~90σ ausgeschlossen.
+Onurs Schluss: Fraktalität im Materie-Sektor, nicht im DE-Sektor.
+
+Neuer Entwurf (r4396191531249081705): Herleitung ξ→E₀→E_H=E₀·ξ^(41/4)
+→E_H/ℏ explizit; R_H als modellabhängige Konvention; Innen/Außen-Asymmetrie;
+ehrliche Parameterzählung (intern: null; kosmologisch: +1 externer Parameter);
+Symmetrie zu Onur: beide brauchen ΛCDM-Skala für Tests.
+
+### Neue Skripte
+| Status | **erledigt** | ✓ 5. Juni 2026 |
+
+- **hausdorff_wegverlaengerung.py**: Herleitung der fraktalen Wegverlängerung
+  aus Hausdorff-Metrik; Potenzgesetz vs. Exponentialgesetz; skalenunabhängige
+  Struktur; numerischer Vergleich drei Skalen.
+
+### ZIP-Update ausstehend
+Dok. 264/265 und P18–P20 noch nicht im großen ZIP.
+
+### Übersichtstabelle — Nachtrag (Fortsetzung 7)
+
+| ID | Status | Bemerkung |
+|----|--------|-----------|
+| Juni-5.Update | ✓ 5. Juni 2026 | Dok. 264 (Ferrotoroidizität, DE/EN): ℤ₂×ℤ₂-Brücke, P''=0, topolog. Schutz, Tired-Light, bereinigte Tabellen. Dok. 265 (Formalismus-Korrespondenz, DE/EN): 3-Ebenen-Klassifikation für Stefaan. P18 (E_H/ℏ = geometrische Skalenkonstante, keine H₀-Vorhersage). P19 (Hausdorff → Potenzgesetz, Widerspruch zu Dok. 182). P20 (R_H = modellabhängige Konvention; FFGFT braucht externen kosmologischen Parameter; Innen/Außen-Asymmetrie T⁴). hausdorff_wegverlaengerung.py. Onur-Briefwechsel: P''=0-Test, D_eff=2-Leiter, statisches-Universum-Test; neuer Entwurf mit Herleitung ξ^(41/4). |
+
+---
+
+## Revision Juni 2026 (6. Update) — Dok. 266/267 neu, CMB-Peak-Analyse, Trompeten-Mechanismus, symmetrische Zirkularität
+
+### Dok. 266 (Analyse von Onur Tekers numerischen Tests) — neu, DE+EN, 6 S.
+| Status | **erledigt** | ✓ Juni 2026 |
+
+Geht Onurs drei Tests nach: (1) P''=0/Stationarität — N_active ∝ a^ν
+verletzt WBE, intern inkonsistent; (2) Dimensionsleiter D=2→3→4→∞
+(σ=10,6/7,7/6,1/0), holografischer Riss Volume-WBE(3/4) vs.
+Surface-Bekenstein(2/3); (3) statisches Universum BAO Δχ²≈138, SNe Ia
+b=1,003±0,011 schließt b=0 aus, aber NICHT FFGFT (sagt b=1). Brücke
+FFGFT/UIFT (ξ_FFGFT/ξ_UIFT≈414,684) bleibt gültig, braucht kein R_H.
+
+### Dok. 267 (Kosmologische Entartung: ΛCDM und FFGFT) — neu, DE+EN, 9/7 S.
+| Status | **erledigt** | ✓ Juni 2026 |
+
+Ausführliche Gegenüberstellung beider Modelle. Kernthese: SNe Ia, BAO und
+CMB-Temperatur sind entartet — sie unterscheiden nicht zwischen metrischer
+Expansion (ΛCDM) und fraktaler Zeitentfaltung (FFGFT). Inhalt:
+- **Invertierte Anfangsbedingung:** ΛCDM (heiß+schnell → kalt+beschleunigt)
+  vs. FFGFT (kalt+langsam bei L₀, Zeit extrem langsam, topologische statt
+  thermodynamische Konzentration → scheinbar warm+beschleunigt).
+- **Peak-Struktur aus reiner Geometrie:** Moden-Verhältnisse hängen nur von
+  der Resonatorgeometrie ab, nicht vom Medium. Diskrete Peaks ⇒ kompakte
+  Topologie (Argument FÜR T⁴, GEGEN unendlich-offenes Universum).
+- **Trompeten-/Resonator-Mechanismus:** Peak-Formel ℓ_n = A·n/(1+B/n).
+  A = Grundskala = externer Parameter (Torusgröße = R_H, P20).
+  B = 1/(D−1) = 1/3 aus Dimension D=4 — KEINE externe Eingabe, reine
+  Dimensionszahl. Form folgt aus „kompakter Resonator + Randanpassung".
+- **Modellneutraler Test:** rohe Peak-Verhältnisse (FFGFT B=1/3:
+  1:2,29:3,60:4,92:6,25 vs. gemessen 1:2,44:3,68:5,09:6,56, ~3,3%).
+  Caveat: nur modellfreie lokale Maxima sauber; ΛCDM-Template-Fit-Werte
+  kürzen sich in Verhältnissen NICHT heraus (~1–2% Restabhängigkeit).
+- **Umkehrung:** Messung liefert nur Produkt H₀·L_res = θ₁·c/ln(1+z_*)
+  ≈ 458 km/s, nicht H₀ allein (Winkel = Längenverhältnis).
+- **Symmetrische Zirkularität:** ΛCDM (r_s aus 6 Param + heiße Frühphase)
+  und FFGFT (R_H aus E_H/ℏ) gleichermaßen zirkulär; niemand gewinnt
+  modellneutrales H₀ aus CMB-Peaks. Fairer Vergleich: Sparsamkeit vs.
+  Verankerung, keine Überlegenheitsbehauptung.
+- **Drei-Phasen-Struktur ΛCDM:** Inflation (beschleunigt) → Materie/Strahlung
+  (gebremst) → Λ (wieder beschleunigt) verlangt zwei separate, unabhängig
+  postulierte Beschleunigungsmechanismen + Koinzidenzproblem; FFGFT mit
+  einem Mechanismus (Rekursion). Strukturell, nicht empirisch.
+- **Grenze der Übersetzbarkeit:** Alle Größen mit einem Bezugspunkt nur
+  näherungsweise/in Größenordnung nahe ΛCDM; exakte Übersetzung nicht möglich
+  (verschiedene Strukturen). Frühphase für BEIDE Modelle kaum belegbar.
+
+z_* ≈ 875 als rein geometrische FFGFT-Größe (Resonanzbedingung
+(1+z_*)^(1/ln(1/ξ)) = λ_e/L₀), nicht identisch mit ΛCDM-Rekombination
+(z≈1089). Keine Überlegenheitsbehauptung; ehrliche Eingrenzung durchgängig.
+
+### Neue Verifikationsskripte
+| Status | **erledigt** | ✓ Juni 2026 |
+
+- **verify_z_star_final.py**: unabhängige z_*-Nachrechnung aus ξ+CODATA.
+- **verify_cmb_peaks_final.py**: dimensionelle Prüfung; Peak-Struktur.
+- **ffgft_cmb_zirkularitaet_komplett.py**: konsolidierte 6-Teile-Kette
+  (z_*, CMB-Peaks, reine Geometrie, Trompete, Umkehrung, Zirkularität).
+- **ffgft_trompeten_mechanismus.py**: Resonator + Randanpassung.
+- **ffgft_eingaben_buchhaltung.py**: A extern vs. B=1/3 reine Dimensionszahl.
+- **ffgft_rohe_peak_verhaeltnisse.py**: modellneutraler Verhältnis-Test.
+- **ffgft_lambda_im_messprozess.py**: wo ΛCDM schon im Messprozess steckt.
+- **ffgft_zirkularitaet_symmetrie.py**: symmetrische Zirkularität ΛCDM↔FFGFT.
+- **ffgft_lcdm_zeitverlauf.py**: Drei-Phasen-Struktur der ΛCDM-Expansion.
+
+### Korrektur eigener Befunde (intern, ehrlich)
+- Eingereichte externe Skripte (z_*≈1103, CMB-Übereinstimmung „0,1–1,5%")
+  erwiesen sich als fehlerhaft (gewählter Exponent 8,55 statt ln(1/ξ)=8,92;
+  χ²-Werte unbrauchbar). Nach Löschung dieser Skripte: alle Hinweise darauf
+  und die falschen Berechnungen aus Dok. 267 entfernt; nur eigene,
+  verifizierte Werte (z_*≈875) bleiben.
+- Mehrere Scheintreffer verworfen: √(D_f/2)=√(3/2) ist ξ-unabhängig;
+  Offset 1/φ² ist Fit-Artefakt; Bessel-Projektion erklärt Versatz NICHT.
+  ξ spielt in der Peak-STRUKTUR keine Rolle (testet Geometrie/Dimension).
+
+### ZIP-Update ausstehend
+Dok. 264/265/266/267 und P18–P20 noch nicht im großen ZIP.
+
+### Übersichtstabelle — Nachtrag (Fortsetzung 8)
+
+| ID | Status | Bemerkung |
+|----|--------|-----------|
+| Juni-6.Update | ✓ Juni 2026 | Dok. 266 (Onur-Tests-Analyse, DE/EN): P''=0, Dimensionsleiter, statisches-Universum-Test, FFGFT/UIFT-Brücke. Dok. 267 (Kosmologische Entartung, DE/EN, 9/7 S.): invertierte Anfangsbedingung, Peak-Struktur aus reiner Geometrie, Trompeten-Mechanismus ℓ_n=A·n/(1+B/n) mit B=1/3 aus D=4, modellneutraler Verhältnis-Test (~3,3%), Umkehrung (nur H₀·L_res messbar), symmetrische Zirkularität, Drei-Phasen-ΛCDM-Struktur, Grenze der Übersetzbarkeit. z_*≈875 rein geometrisch. Neue Skripte: verify_z_star_final, verify_cmb_peaks_final, ffgft_cmb_zirkularitaet_komplett, ffgft_trompeten_mechanismus, ffgft_eingaben_buchhaltung, ffgft_rohe_peak_verhaeltnisse, ffgft_lambda_im_messprozess, ffgft_zirkularitaet_symmetrie, ffgft_lcdm_zeitverlauf. Fehlerhafte externe Skripte (z_*=1103) gelöscht; Hinweise aus Dok. 267 entfernt. |
