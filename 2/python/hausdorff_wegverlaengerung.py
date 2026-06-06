@@ -161,6 +161,14 @@ print(f"""
      a deeper formula. This needs resolution before either can be
      used as a prediction.
 
+     STATUS (open): This is registered as refinement P14 (Doc. 190):
+     redshift = fractal path-lengthening, not energy loss. The exact
+     functional form (power law here vs. exponential in Doc. 182)
+     is NOT yet settled. This script documents the Hausdorff power-law
+     candidate; it does NOT claim it supersedes Doc. 182. The
+     discrepancy is left open deliberately -- it is a genuine
+     unresolved point, not a result.
+
   4. The connection to the observable wavelength ratio in the crystal
      (SNP polarization matrix) is structural (Z2xZ2, P''=0) but
      not yet quantitative. The power-law lengthening
