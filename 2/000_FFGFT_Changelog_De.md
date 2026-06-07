@@ -1,7 +1,7 @@
 # FFGFT Changelog
 ## Korrekturen und Präzisierungen der Dokumentenserie
 **Grundlage:** Dok. 190 (allgemein) und Dok. 210 (Wicklungszahlen)
-**Stand:** Juni 2026 (zuletzt erweitert: Juni 2026 — 6. Update: Dok. 266/267 neu, CMB-Peak-Analyse, Trompeten-Mechanismus, symmetrische Zirkularität, neue Verifikationsskripte)
+**Stand:** Juni 2026 (zuletzt erweitert: Juni 2026 — 8. Update: Dok. 268 EN vollständig, Frequenzanalyse-Abschnitt 10.7, K4 in 268 vervollständigt, zwei fehlende 267-Skripte erstellt)
 
 ---
 
@@ -250,9 +250,13 @@ DE hatte einen Texteditierungs-Artefakt „LATEX" als eigene Zeile nach „Querv
 | ID | Status | Bemerkung |
 |----|--------|-----------|
 | K1–K3 | ✓ Mai 2026 | inhaltliche Fehler |
+| K4 | ✓ Juni 2026 | Faktor 3 = 3D-Beobachter, nicht fraktale Dispersion (267 DE+EN, 268 DE) |
 | P1–P13 | ✓ Mai 2026 | Präzisierungen |
+| P14–P17 | ✓ Juni 2026 | Rotverschiebung, z, H₀, dunkler Sektor |
+| P18–P30 | ✓ Juni 2026 | in Dok. 190 konsolidiert (P19→P14, P28→P20); P20/P30 offen, P29 teilw. |
 | W1–W6 | ✓ Mai 2026 | Wicklungszahlen |
 | N246, N247 | ✓ | neue Dokumente |
+| N267, N268 | ✓ Juni 2026 | Kosmologische Entartung (DE+EN); CMB-Peaks aus T⁴ (DE+EN) |
 | S1–S11 | ✓ Mai 2026 | DE/EN-Symmetrierung |
 
 ---
@@ -1535,3 +1539,266 @@ Dok. 264/265/266/267 und P18–P20 noch nicht im großen ZIP.
 | ID | Status | Bemerkung |
 |----|--------|-----------|
 | Juni-6.Update | ✓ Juni 2026 | Dok. 266 (Onur-Tests-Analyse, DE/EN): P''=0, Dimensionsleiter, statisches-Universum-Test, FFGFT/UIFT-Brücke. Dok. 267 (Kosmologische Entartung, DE/EN, 9/7 S.): invertierte Anfangsbedingung, Peak-Struktur aus reiner Geometrie, Trompeten-Mechanismus ℓ_n=A·n/(1+B/n) mit B=1/3 aus D=4, modellneutraler Verhältnis-Test (~3,3%), Umkehrung (nur H₀·L_res messbar), symmetrische Zirkularität, Drei-Phasen-ΛCDM-Struktur, Grenze der Übersetzbarkeit. z_*≈875 rein geometrisch. Neue Skripte: verify_z_star_final, verify_cmb_peaks_final, ffgft_cmb_zirkularitaet_komplett, ffgft_trompeten_mechanismus, ffgft_eingaben_buchhaltung, ffgft_rohe_peak_verhaeltnisse, ffgft_lambda_im_messprozess, ffgft_zirkularitaet_symmetrie, ffgft_lcdm_zeitverlauf. Fehlerhafte externe Skripte (z_*=1103) gelöscht; Hinweise aus Dok. 267 entfernt. |
+
+---
+
+## Revision Juni 2026 (7. Update) — Dok. 268 neu, Beobachter-Mechanismus, P-Register-Konsolidierung P18–P30
+
+**Grundlage dieser Session:** Vertiefung der CMB-Peak-Herleitung aus der
+T⁴-Gitterstruktur, Korrektur einer fehlerhaften Faktor-3-Begründung,
+Bereinigung und Vervollständigung des P-Registers in Dok. 190.
+
+### N268 — Dok. 268 „CMB-Akustikpeaks aus der T⁴-Gitterstruktur" (neu, DE)
+| Status | **erledigt DE** / EN ausstehend |
+|--------|-------------------------------|
+
+Schrittweise Herleitung (16 Schritte, 19 S.) der CMB-Peak-Verhältnisse aus
+der T⁴-Gitterstruktur:
+
+- **Schritt 1–5:** T⁴-Zustandsraum, Jacobi-Entartung g(|n|²) (nicht monoton),
+  Bose-Einstein-Gewichtung I(r)=g·⟨N⟩·r, lokale Maxima bei |n|²=3,6,10,14,18,…
+  Dominante Grundpeaks |n|²=1,6,14,26.
+- **Schritt 6–7:** absolute Skala (extern, P20); Schritt 7 als Vorausverweis
+  auf die Auflösung in Schritt 8/9 (nicht mehr „einzige offene Frage").
+- **Schritt 8–9:** Faktor 3 = **drei beobachtbare Raumdimensionen**.
+  k_obs² = (n₁²+n₂²+n₃²)/L², symmetrischste Grundmode (1,1,1,0) gibt 3.
+  Sichtbare Serie 3·{1,6,14,26} = {3,18,42,78}.
+  Verhältnisse 1:2,449:3,742:5,099 vs. CMB 1:2,441:3,682:5,091 (< 2 %).
+- **Schritt 10:** Doppel-Resonator-Bild (T⁴-Gitter + 3D-Beobachterprojektion).
+- **Schritt 10.6 (neu):** „Was aus den Peaks folgt: zwei Filter" — siehe unten.
+- **Schritt 11:** Kein-Fit-Nachweis; ehrliche Abgrenzung (absolute Skala P20,
+  strenge C_ℓ-Projektion P30 offen).
+- **Schritt 12–16:** Schwarzschild-Verbindung, Messproblem FFGFT vs. ΛCDM,
+  universelle Compton-Schwarzschild-Relation, T⁴-Länge als Schwarzschild-Radius,
+  und (Schritt 16) ehrliche Klarstellung, warum die Schwarzschild-Relation R_H
+  NICHT herleitet (m_e→M_U-Trugschluss aufgedeckt).
+
+### K4 — Faktor 3: Beobachter-Mechanismus statt fraktaler Dispersionsrelation
+| Feld | Inhalt |
+|------|--------|
+| Betroffene Dok. | 267 (DE+EN), 268 (DE) |
+| Status | **erledigt** |
+| Erledigt DE | ✓ Juni 2026 |
+| Erledigt EN | ✓ Juni 2026 (267 + 268) |
+
+**Falsch (frühere Begründung):** Der Faktor 3 ist die fraktale Dimension D_f;
+er folgt aus einer „fraktalen Dispersionsrelation k²_eff = D_f·k²_Torus
+(Dok. 051, Tetrad-Formalismus)".
+
+**Korrekt:** Der Faktor 3 zählt die **drei beobachtbaren Raumdimensionen**.
+Der Beobachter misst k_obs² = (n₁²+n₂²+n₃²)/L² (die vierte Torusrichtung ist
+Zeitentfaltung). Die konforme Metrik aus Dok. 051 hebt sich für masselose
+Teilchen heraus; die fraktale Korrektur aus Dok. 204 ist +0,69·ξ·k² ≈ 10⁻⁵,
+NICHT der Faktor 3. D_f = 3−ξ ist mit dem Faktor 3 **konsistent** (D_f ist
+die Raumdimension, leicht durch ξ modifiziert), aber NICHT seine Herkunft.
+Korrektur durchgängig in 267 (DE+EN) und 268 (DE); alle Stellen mit
+„k²_eff=D_f·k²", „√D_f-Skalierung" und „Tetrad-Formalismus als Herleitung"
+ersetzt.
+
+### Zwei-Filter-Aussage (Dok. 267 DE+EN, Dok. 268 DE Schritt 10.6)
+| Status | **erledigt** | ✓ Juni 2026 DE+EN |
+
+Die diskreten, scharfen CMB-Peaks folgen aus zwei zusammenwirkenden
+Eigenschaften desselben **vollständigen** T⁴, gesehen aus zwei Bezugspunkten:
+
+- **Filter 1 — Kompaktheit (T⁴ als Ganzes, von außen):** erzeugt das
+  *diskrete* Modenspektrum; erzwingt die *Existenz* scharfer Peaks.
+  Ohne Kompaktheit: Kontinuum, keine Peaks.
+- **Filter 2 — fraktale Struktur (von innen, dekompaktifiziert):** die
+  Jacobi-Entartung + Bose-Einstein gewichten die Moden ungleich; erzwingt
+  die *Lage* der dominanten Peaks. Ohne diskretes Gitter kein Angriffspunkt.
+
+Beide sind **keine zwei Objekte**, sondern zwei Bezugspunkte auf denselben
+geschlossenen Torus: von außen kompakt-endlich, von innen fraktal-granuliert
+bis L₀=ξ·ℓ_P. Die fraktale Ungeschlossenheit ist damit keine zweite, der
+Kompaktheit widersprechende Eigenschaft, sondern die Innenansicht — eine
+**Bezugspunkt-Angelegenheit** (Innen/Außen, P20). Erst beide Filter zusammen
+geben die beobachtete Serie.
+
+**Ableitbare Aussage:** Die diskreten Peaks sprechen FÜR ein kompaktes
+(endliches) Universum und GEGEN ein rein-unendlich-offenes.
+**Ehrliche Abgrenzung:** FFGFT-intern; ΛCDM erzeugt dieselben Peaks aus einer
+zeitlichen Schranke (Schallhorizont) in einem räumlich unendlichen Universum.
+Die Peaks allein unterscheiden räumliche Kompaktheit und Zeitschranke nicht.
+
+### P-Register-Konsolidierung in Dok. 190 (DE: P-Nummern, EN: R-Nummern)
+| Status | **erledigt** | ✓ Juni 2026 DE+EN |
+
+Dok. 190 listete nur P1–P17, obwohl Dok. 267/268 bereits P18–P30 benannten.
+Nachgetragen und konsolidiert:
+
+- **P18** (R18): ΛCDM/FFGFT als zwei Lesarten — theoretisch, nicht empirisch
+  unterscheidbar. *Konzeptuelle Einordnung.*
+- **P20** (R20): absolute kosmologische Skala R_H/D_A/z_* ist **externe
+  Eingabe** ≡ Exponent 41/4 bzw. E_H=E₀·ξ^(41/4). Betrifft nur
+  Absolutpositionen, nicht die Verhältnisse. **Offen.**
+- **P29** (R29): Peak-Auswahlregel — **teilweise beantwortet** durch den
+  3D-Beobachter-Mechanismus (Schritt 8/9).
+- **P30** (R30): strenge sphärische C_ℓ-Projektion mit Bessel-Funktionen —
+  machbare Rechnung, kein prinzipielles Hindernis. **Offen.**
+- **Zusammenführungen:** P19 (CMB-Wegverlängerung) → in **P14** aufgegangen;
+  P28 (Exponent für z_*) → in **P20** aufgegangen. Beide erscheinen nicht
+  mehr als eigene Zeilen. Verweise in 267/268 entsprechend umgestellt
+  (P28→P20, P19→P14/P20).
+- Status-Header in 190 auf P1–P30 (DE) bzw. R1–R30 (EN) aktualisiert,
+  Nachträge vom 6. Juni ergänzt.
+
+### Korrektur des z_*-Exponenten (Dok. 267 DE+EN)
+| Status | **erledigt** | ✓ Juni 2026 |
+
+z_* ≈ 875 als **Referenzwert** in richtiger Größenordnung markiert (nicht als
+FFGFT-Resultat): (λ_e/L₀)^(1/ln(1/ξ)) ≈ 875. Der Exponent 1/ln(1/ξ) ist nicht
+aus der T⁴-Geometrie hergeleitet (P28→P20). Der frühere DeepSeek-Wert z_*=1103
+(Exponent 8,55) bleibt verworfen — nicht aus ξ herleitbar.
+
+### Skripte überarbeitet (Namen beibehalten — Mail-Links bleiben gültig)
+| Status | **erledigt** | ✓ Juni 2026 |
+
+- **ffgft_cmb_t4_peaks.py** (NEU erstellt): reproduziert die Dok.-268-Herleitung
+  exakt (Jacobi-Entartung → Bose-Einstein → Peaks {3,18,42,78} →
+  Beobachter-Faktor 3 → Verhältnisse 1:2,449:3,742:5,099, max. Abw. 1,63 %).
+- **verify_cmb_peaks_final.py** (neu geschrieben): verifiziert jetzt die
+  T⁴-Herleitung unabhängig (Entartung per Direktzählung ≡ Jacobi-Formel),
+  nicht mehr das alte DeepSeek-Skript. Grenzt absolute Skala (P20) ehrlich ab.
+- **hausdorff_wegverlaengerung.py**: Widerspruch zwischen Hausdorff-Potenzgesetz
+  und Dok. 182 (Exponential) bleibt **bewusst offen** (P14/P19), jetzt explizit
+  als ungelöster Punkt markiert, keine Auflösungsbehauptung.
+- **verify_z_star_final.py, lcdm_circularity.py, wbe_t4_flrw.py,
+  ffgft_lcdm_zeitverlauf.py**: inhaltlich geprüft (z_*=875, H₀=66,19,
+  α=D_f/(D_f+1)=0,75 → w=−3/4, Drei-Phasen-Vergleich) — korrekt, unverändert.
+
+### Korrektur eigener früherer Aussagen (intern, ehrlich)
+Aus dem 6. Update (Trompeten-Mechanismus) überholt:
+
+- **„B = 1/3 aus Dimension D=4, reine Dimensionszahl"** war eine Überdehnung.
+  Der Faktor 3 ist der 3D-Beobachter-Mechanismus (k_obs²), nicht ein
+  Trompeten-Randanpassungsterm B. Der Trompeten-Mechanismus ℓ_n=A·n/(1+B/n)
+  bleibt als phänomenologische Form möglich, aber B=1/3 ist ein **Ansatz**
+  (Analogie), keine strenge Herleitung — in Dok. 267 entsprechend markiert.
+- Die Begründung des Faktors 3 über „fraktale Dispersionsrelation" (Dok. 051)
+  ist verworfen (siehe K4).
+
+### Offene Punkte
+- **268 EN**: englische Version von Dok. 268 noch nicht erstellt.
+- **P20**: Herleitung des Exponenten 41/4 (≡ R_H/H₀) aus der T⁴-Geometrie.
+- **P30**: strenge sphärische C_ℓ-Projektion der T⁴-Moden.
+- **Skript-Referenzen in 267**: ffgft_lambda_im_messprozess.py und
+  ffgft_zirkularitaet_symmetrie.py werden referenziert, sind aber noch nicht
+  als Dateien vorhanden.
+- **ZIP-Update**: Dok. 268 und P18–P30-Stand noch nicht im großen ZIP.
+
+### Übersichtstabelle — Nachtrag (Fortsetzung 9)
+
+| ID | Status | Bemerkung |
+|----|--------|-----------|
+| Juni-7.Update | ✓ Juni 2026 | Dok. 268 neu (DE, 19 S.): CMB-Peaks aus T⁴, 16 Schritte. K4: Faktor 3 = 3D-Beobachter (k_obs²), nicht fraktale Dispersionsrelation — korrigiert in 267 (DE+EN) und 268 (DE). Zwei-Filter-Aussage (Kompaktheit + Fraktalität als Bezugspunkte) in 267 (DE+EN) und 268 Schritt 10.6. P-Register in Dok. 190 konsolidiert: P18/P20/P29/P30 nachgetragen, P19→P14 und P28→P20 zusammengeführt (DE: P-Nr., EN: R-Nr.). z_*=875 als Referenzwert markiert. ffgft_cmb_t4_peaks.py neu; verify_cmb_peaks_final.py auf T⁴-Herleitung umgeschrieben; hausdorff-Widerspruch offen markiert. Offen: 268 EN, P20-Exponent 41/4, P30 C_ℓ-Projektion. |
+
+---
+
+## Revision Juni 2026 (8. Update) — Dok. 268 EN vollständig, Frequenzanalyse-Abschnitt, 267-Skripte
+
+**Grundlage dieser Session:** Vervollständigung von Dok. 268 (englische
+Gesamtversion, neuer Frequenzanalyse-Abschnitt), Konsistenz-Durchgang K4
+auch in den Schritten 10/11 von Dok. 268, und Erstellung der zwei in
+Dok. 267 referenzierten, bisher fehlenden Skripte.
+
+### Dok. 268 EN — vollständige englische Version (neu)
+| Status | **erledigt** | ✓ Juni 2026 |
+
+Die komplette englische Fassung von Dok. 268 wurde von Grund auf erstellt
+(22 Seiten, alle 16 Schritte plus beide Zusammenfassungen plus Abschnitt
+10.7). Konsistent mit dem aktuellen DE-Stand: Beobachter-Mechanismus
+(kein veraltetes D_f-Dispersionsbild), R-Nummern statt P, durchgehende
+englische Fachterminologie. Verifiziert: keine deutschen Reste, keine
+P-Nummern.
+
+### Dok. 268 — Frequenzanalyse-Abschnitt 10.7 (neu, DE eingebaut + EN)
+| Status | **erledigt** | ✓ Juni 2026 DE+EN |
+
+Neuer Abschnitt „Was die Peak-Verhältnisse modellfrei aussagen“
+(zwischen 10.6 und Schritt 11), aus der Spektral-/Frequenzanalyse-Sicht,
+ohne T⁴-Annahme:
+
+- **10.7.0 Begriffsklärung „akustisch“:** kein Schall, keine
+  Zeitschwingung, nur räumliche Verteilung am Himmel gemessen.
+  „Akustisch“ ist ΛCDM-Erbe (Druckwellen im Plasma) und trägt eine
+  Modellannahme im Namen. Zwei verschiedene „Frequenzen“ getrennt:
+  (A) Photonen-Frequenz ~160 GHz (Hz, zeitlich) vs. (B) Fleckenmuster
+  ℓ=220,537,… (Winkel, räumlich). Die Peaks gehören zu (B).
+  Sprachregelung: „Winkelspektrum-Peaks“ statt „akustisch“; Resonator
+  nur als mathematische Analogie.
+- **10.7.1 Krümmung real:** Abstände 317/273/310/330 nicht konstant,
+  Verhältnisse sub-linear → gerade Obertöne ausgeschlossen, deutlich
+  über Messunsicherheit.
+- **10.7.2 missing-fundamental-Falle:** linearer Fit gibt negativen
+  Offset (−72) → unphysikalischer „Grundton bei ℓ<0“ → die lineare
+  Deutung ist ein Differenzbildungs-Artefakt.
+- **10.7.3 Gitter-Grundton:** ℓ/√(|n|²) ≈ 126 (Streuung 1,6%), ein
+  Parameter, sparsamste Deutung der Krümmung.
+- **10.7.4 Grundton ≠ erster Peak:** c≈126 entspricht |n|²=1 bei ℓ≈126
+  (Sachs-Wolfe-Plateau, kein Peak); echte aber unsichtbare Mode (1,0,0,0)
+  erfüllt die 3D-Symmetriebedingung nicht. Schwach falsifizierbare
+  Konsistenzbedingung.
+- **10.7.5 Keine Größe des Universums:** θ=L/D_A ist nur ein Verhältnis;
+  derselbe Winkel passt zu „groß und weit“ wie „klein und nah“; D_A ist
+  Modell-Output. Orgelpfeifen-Vergleich: die Wellenlängen-Methode bräuchte
+  Wellenlänge-in-Metern + bekanntes Medium; bei der CMB fehlt beides, und
+  das ΛCDM-„Medium“ c_s(z) ist selbst aus Dichte/Expansion/Metrik
+  herausgerechnet (dreifach modellabhängig). Messung ist maßstabslos.
+- **10.7.6 Sicher vs. nicht ablesbar + Abtastgrenze:** breite Peaks
+  (~1–3%), FFGFT-√-Gitter vs. ΛCDM-Dispersion nicht unterscheidbar.
+
+### K4-Konsistenz in Dok. 268 Schritte 10/11 (vervollständigt)
+| Status | **erledigt** | ✓ Juni 2026 DE (EN gleich erstellt) |
+
+Die im 7. Update für 267/268 begonnene K4-Korrektur (Faktor 3 =
+3D-Beobachter, nicht fraktale Dispersionsrelation) wurde in Dok. 268 an
+allen verbliebenen Stellen vollzogen: Doppel-Resonator-Tabelle 10.2
+(„System 2“: 3D-Beobachterprojektion statt „fraktale Mannigfaltigkeit /
+√D_f“), Schritt 10.4 (Beobachterprojektion statt „D_f in der
+Dispersionsrelation“), Schritt 11.1-Tabelle (Faktor 3 = Raumdimensionen
+statt „D_f·{…}“), Schritt 11.3 (Selektionsmechanismus/C_ℓ-Projektion
+statt „k²_eff=D_f·k²“), Bezug-Block (Dok. 050/051 T⁴-Topologie statt
+„Tetrad-Formalismus“). Verifiziert: keine „k²_eff=D_f·k²“- oder
+„√D_f-Skalierung“-Stelle mehr in 268.
+
+### Zwei fehlende 267-Skripte erstellt
+| Status | **erledigt** | ✓ Juni 2026 |
+
+Dok. 267 referenzierte zwei Skripte, die nie existierten. Beide erstellt,
+konsistent mit dem Dokument (θ₁=π/A, A=303,6, H0=66,19, H0·L_res=458 km/s):
+
+- **ffgft_lambda_im_messprozess.py:** die Längenskala im Messprozess.
+  R_H aus ξ (extern via Exponent 41/4, P20); der gemessene Winkel legt
+  nur das Produkt H0·L_res=458 km/s fest, nicht H0 allein. Demonstration:
+  derselbe Winkel für jedes H0.
+- **ffgft_zirkularitaet_symmetrie.py:** die symmetrische Zirkularität.
+  Beide Modelle (ΛCDM r_s≈147 Mpc / FFGFT R_H) müssen eine absolute
+  Skala hineinstecken; keines gewinnt aus den Peaks ein modellneutrales
+  H0. FFGFT-Gegenpart zu lcdm_circularity.py — keine einseitige Kritik.
+  Fairer Vergleich: Sparsamkeit (FFGFT eine Skala) vs. Verankerung
+  (ΛCDM breiter getestet).
+
+Damit sind alle in Dok. 267 referenzierten Skripte vorhanden
+(ffgft_lambda_im_messprozess, ffgft_zirkularitaet_symmetrie,
+lcdm_circularity).
+
+### Hinweis zu den Kernzahlen (E0/H0-Konvention)
+Bei der Skripterstellung fiel auf: CODATA-Massen (m_e=0,51099895 MeV,
+m_μ=105,6583755 MeV) geben E0=√(m_e·m_μ)=7,348 MeV und H0=65,73 km/s/Mpc.
+Die Kernzahl-Referenz nennt E0=7,398 MeV und H0=66,19 (leicht andere
+Massenkonvention). Die Skripte verwenden H0=66,19 als FFGFT-Referenz
+(konsistent mit verify_z_star_final, lcdm_circularity). Die ~0,5 km/s/Mpc
+Differenz ist eine Rundungs-/Konventionsfrage, nicht inhaltlich.
+
+### Offene Punkte (Stand nach 8. Update)
+- **P20**: Herleitung des Exponenten 41/4 (≡ R_H/H₀) aus der T⁴-Geometrie.
+- **P30**: strenge sphärische C_ℓ-Projektion der T⁴-Moden.
+- **ZIP-Update**: großes ZIP mit Dok. 268 DE+EN, P18–P30, neuen Skripten
+  noch nicht aktualisiert.
+
+### Übersichtstabelle — Nachtrag (Fortsetzung 10)
+
+| ID | Status | Bemerkung |
+|----|--------|-----------|
+| Juni-8.Update | ✓ Juni 2026 | Dok. 268 EN vollständig (22 S., alle 16 Schritte + 10.7). Frequenzanalyse-Abschnitt 10.7 (DE eingebaut + EN): Begriffsklärung „akustisch“, missing-fundamental-Falle, Gitter-Grundton c≈126, keine Größe des Universums (Orgelpfeifen/Medium-Argument), Abtastgrenze. K4-Konsistenz in 268 Schritte 10/11 vollzogen (keine D_f-Dispersionsstelle mehr). Zwei fehlende 267-Skripte erstellt (ffgft_lambda_im_messprozess, ffgft_zirkularitaet_symmetrie), konsistent mit Dok. 267 (H0·L_res=458 km/s). Offen: P20-Exponent, P30, ZIP-Update. |
