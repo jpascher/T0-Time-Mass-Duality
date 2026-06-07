@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FFGFT — Natürliche Einheiten und SI / Natural Units and SI</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#1a1a18;padding:24px 16px;min-height:100vh;line-height:1.7}
+.card{background:#fff;border-radius:12px;border:0.5px solid rgba(0,0,0,0.12);padding:24px 28px;max-width:760px;margin:0 auto}
+h1{font-size:18px;font-weight:500;margin-bottom:3px;color:#1a1a18;line-height:1.35}
+h2{font-size:14px;font-weight:500;color:#1a1a18;margin:22px 0 8px}
+.sub{font-size:12px;color:#5f5e5a;margin-bottom:20px}
+p{font-size:13px;color:#3d3d3a;margin-bottom:10px}
+a{color:#185FA5}
+.ltog{display:flex;gap:0;margin-bottom:20px;border:0.5px solid rgba(0,0,0,0.15);border-radius:8px;overflow:hidden;width:fit-content}
+.ltog button{padding:5px 18px;font-size:13px;font-family:inherit;border:none;background:transparent;cursor:pointer;color:#5f5e5a;transition:background .15s,color .15s}
+.ltog button.act{background:#1a1a18;color:#f5f4f0}
+.box{border-radius:8px;padding:14px 18px;margin:14px 0;font-size:13px;line-height:1.7}
+.box-teal{background:#E1F5EE;border-left:3px solid #0F6E56;color:#04342C}
+.box-amber{background:#FAEEDA;border-left:3px solid #854F0B;color:#412402}
+.box-purple{background:#EEEDFE;border-left:3px solid #534AB7;color:#26215C}
+.box-coral{background:#FAECE7;border-left:3px solid #993C1D;color:#4A1B0C}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+@media(max-width:520px){.row{grid-template-columns:1fr}}
+.col{background:#f5f4f0;border-radius:8px;padding:12px 16px;border:0.5px solid rgba(0,0,0,0.08)}
+.col-head{font-size:12px;font-weight:500;color:#1a1a18;margin-bottom:6px}
+.col-body{font-size:12px;color:#5f5e5a;line-height:1.65}
+.formula{font-family:ui-monospace,monospace;font-size:13px;background:#f5f4f0;border-radius:6px;padding:8px 14px;margin:8px 0;color:#1a1a18;border:0.5px solid rgba(0,0,0,0.08)}
+.sep{height:0.5px;background:rgba(0,0,0,0.08);margin:20px 0}
+.foot{margin-top:20px;padding:9px 14px;background:#f5f4f0;border-radius:8px;font-size:11px;color:#888780}
+@media(prefers-color-scheme:dark){
+  body{background:#1a1a18;color:#e0ddd4}
+  .card{background:#26261f;border-color:rgba(255,255,255,0.1)}
+  h1,h2{color:#e0ddd4} .sub{color:#888780} p{color:#b4b2a9}
+  .ltog{border-color:rgba(255,255,255,0.15)}
+  .ltog button{color:#888780}
+  .ltog button.act{background:#e0ddd4;color:#1a1a18}
+  .box-teal{background:#04342C;border-left-color:#5DCAA5;color:#9FE1CB}
+  .box-amber{background:#412402;border-left-color:#EF9F27;color:#FAC775}
+  .box-purple{background:#26215C;border-left-color:#AFA9EC;color:#CECBF6}
+  .box-coral{background:#4A1B0C;border-left-color:#F0997B;color:#F5C4B3}
+  .col{background:#1a1a18;border-color:rgba(255,255,255,0.08)}
+  .col-head{color:#e0ddd4} .col-body{color:#888780}
+  .formula{background:#1a1a18;color:#e0ddd4;border-color:rgba(255,255,255,0.08)}
+  .sep{background:rgba(255,255,255,0.08)}
+  .foot{background:#1a1a18;color:#888780}
+}
+</style>
+</head>
+<body>
+<div class="card">
+
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:8px;">
+  <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;padding:7px 18px;background:var(--color-background-secondary,#eee);border:1px solid var(--color-border-primary,#ccc);border-radius:8px;color:var(--color-text-primary,#333);font-size:13px;font-weight:600;text-decoration:none;">&#8592; Index</a>
+  <div class="ltog">
+    <button class="act" onclick="setLang('de',this)">DE</button>
+    <button onclick="setLang('en',this)">EN</button>
+  </div>
+</div>
+
+<h1 id="ttl">Warum natürliche Einheiten — und warum SI trotzdem nicht überflüssig ist</h1>
+<p class="sub" id="sttl">Johann Pascher · FFGFT · T0-Zeit-Masse-Dualität · <a href="https://github.com/jpascher/T0-Time-Mass-Duality" target="_blank">github.com/jpascher/T0-Time-Mass-Duality</a></p>
+
+<!-- SECTION 1 -->
+<h2 id="h1">Warum natürliche Einheiten in FFGFT funktionieren</h2>
+
+<p id="p1">In natürlichen Einheiten (ħ = c = 1) reduziert sich alle Physik auf eine einzige Dimension: Masse. Längen, Zeiten, Energien — alles wird zu Potenzen von Masse. Damit werden alle Verhältnisse zwischen physikalischen Größen dimensionslos. Sie hängen nicht vom Einheitensystem ab. Das ist kein Trick, sondern eine fundamentale Tatsache: Physik beschreibt Beziehungen, keine absoluten Werte.</p>
+
+<div class="box box-teal" id="b1">
+  <strong id="b1h">Warum das in FFGFT besonders gilt:</strong><br id="b1br">
+  ξ = 1/7500 ist von Natur aus dimensionslos — eine reine Verhältniszahl aus der 3D-Kugelgeometrie. Der T4-Torus arbeitet mit ganzzahligen Wicklungszahlen (n₁, n₂, n₃, n₄ ∈ ℤ). Die Jacobi-Entartung g(|n|²) ist ganzzahlige Arithmetik. Bose-Einstein-Gewichtung ist eine Formel in reinen Zahlen. Das Ergebnis: Peak-Verhältnisse, Massenratios und Kopplungsstärken sind reine geometrische Verhältnisse — ohne Einheit, ohne freien Parameter.
+</div>
+
+<p id="p2">Die Zwangsbedingung T̃·m = 1 ist in natürlichen Einheiten dimensionslos: T̃ hat Einheit [Masse]⁻¹, m hat Einheit [Masse] — Produkt = 1, eine reine Zahl. Daraus folgen alle Verhältnisse.</p>
+
+<div class="formula" id="f1">
+  ξ dimensionslos → alle Massenratios dimensionslos → in nat. Einheiten: reine Geometrie
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="col-head" id="c1h">Aus ξ + T4 allein</div>
+    <div class="col-body" id="c1b">m_μ/m_e ≈ 206.8<br>m_τ/m_e ≈ 3477<br>Koide-Formel = 2/3<br>α ≈ 1/137<br>αS/α = ξ^(−4/3)<br>CMB: 1 : 2.449 : 3.742</div>
+  </div>
+  <div class="col">
+    <div class="col-head" id="c2h">Alles dimensionslos</div>
+    <div class="col-body" id="c2b">Kein Einheitensystem nötig.<br>Kein freier Parameter.<br>Reine algebraische Zahlen<br>aus ganzzahliger T4-Geometrie<br>und einer Zahl: ξ = 1/7500.</div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- SECTION 2 -->
+<h2 id="h2">Warum SI-Berechnungen trotzdem nicht überflüssig sind</h2>
+
+<p id="p3">Wer glaubt, mit natürlichen Einheiten sei SI überflüssig, verwechselt zwei verschiedene Fragen: <em id="em1">Was ist die Struktur?</em> und <em id="em2">Was messe ich morgen im Labor?</em></p>
+
+<div class="box box-amber" id="b2">
+  <strong id="b2h">Die Planck-Konversion ist kein Physik-Schritt — aber ein notwendiger:</strong><br id="b2br">
+  L₀ = ξ · ℓ_P sagt: die minimale Länge in FFGFT ist ξ mal der Planck-Länge. Das ist ein reines Verhältnis (ξ), skaliert mit ℓ_P als SI-Anker. Die Konversion zu SI ist eine Übersetzung zwischen Sprachen — aber Experimente sprechen SI.
+</div>
+
+<h2 id="h3">Sechs Gründe warum SI-Berechnungen unersetzlich bleiben</h2>
+
+<div class="box box-purple" id="r1">
+  <strong id="r1h">1. Experimenteller Kontakt</strong><br>
+  <span id="r1b">Jedes Experiment liefert Ergebnisse in SI: Massen in eV, Längen in m, Zeiten in s. Um FFGFT gegen 100 Jahre Messungen zu prüfen, muss man übersetzen. Ohne diese Übersetzung bleibt jede Theorie eine geschlossene mathematische Welt.</span>
+</div>
+
+<div class="box box-purple" id="r2">
+  <strong id="r2h">2. Skalen-Identifikation</strong><br>
+  <span id="r2b">Natürliche Einheiten zeigen dass zwei Dinge das richtige Verhältnis haben. SI zeigt was das bedeutet: Ist diese Energie am LHC zugänglich? Ist diese Länge mit Interferometrie messbar? Das Verhältnis m_μ/m_e ist abstrakt — m_μ = 105.66 MeV ist konkret.</span>
+</div>
+
+<div class="box box-purple" id="r3">
+  <strong id="r3h">3. Die Planck-Konversion trägt selbst Physik</strong><br>
+  <span id="r3b">ℓ_P ≈ 1.62 × 10⁻³⁵ m — nicht 1 cm, nicht 1 km. Diese Zahl sagt: Quantengravitation wird bei 10⁻³⁵ m relevant, nicht bei menschlichen Skalen. Dass ξ · ℓ_P ≈ 2 × 10⁻³⁹ m die Untergrenze ist, ist eine physikalische Aussage über die Welt — nicht nur ein Verhältnis.</span>
+</div>
+
+<div class="box box-purple" id="r4">
+  <strong id="r4h">4. Dimensionsanalyse als Fehlerfänger</strong><br>
+  <span id="r4b">In SI kann man prüfen ob eine Formel konsistent ist bevor man rechnet. In natürlichen Einheiten wo alles [Masse]^n ist, fallen viele Fehler erst im numerischen Ergebnis auf. SI-Dimensionsanalyse ist ein Werkzeug, kein Formalismus.</span>
+</div>
+
+<div class="box box-purple" id="r5">
+  <strong id="r5h">5. Physikalische Intuition und Kommunikation</strong><br>
+  <span id="r5b">„Elektronmasse 0.511 MeV" ist ein konkretes Bild. „m_e = 4.19 × 10⁻²³ in Planck-Einheiten" ist eine Zahl ohne greifbares Bild. Für den Dialog mit Experiment, Technik und Öffentlichkeit braucht man SI — auch wenn die fundamentale Struktur in natürlichen Einheiten liegt.</span>
+</div>
+
+<div class="box box-purple" id="r6">
+  <strong id="r6h">6. Der offene Exponent 41/4</strong><br>
+  <span id="r6b">E_H = E₀ · ξ^(41/4) → H₀: Der Exponent 41/4 ist äquivalent dazu H₀ als externe Skala einzugeben. Solange er nicht aus der T4-Geometrie abgeleitet ist, braucht FFGFT für den kosmologischen Sektor eine SI-gemessene Größe als Anker — genau wie ΛCDM. Das macht SI-Berechnungen unabdingbar.</span>
+</div>
+
+<div class="sep"></div>
+
+<div class="box box-amber" id="r7">
+  <strong id="r7h">7. Natürliche Einheiten erhöhen die Fehleranfälligkeit bei Alltagsberechnungen</strong><br>
+  <span id="r7b">In SI fängt die Dimensionsprüfung Fehler ab bevor man rechnet. In natürlichen Einheiten (ħ = c = 1) werden Längen und Zeiten zur gleichen Einheit — ein vergessener Faktor c ist unsichtbar. Jede Rückkonversion nach SI erfordert die exakte Anzahl von ħ- und c-Potenzen. ħ ≈ 10⁻³⁴ J·s: eine fehlende Potenz verschiebt das Ergebnis um 34 Größenordnungen, ohne dass die Formel formal falsch aussieht. Das ist kein theoretisches Problem — es ist der häufigste Fehler in der Praxis.</span>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="col-head" id="c3h">In SI: Fehler sofort sichtbar</div>
+    <div class="col-body" id="c3b">Formel gibt [m²/s] statt [m/s²]<br>→ Dimensionsfehler sofort erkannt<br><br>E = mc² in SI:<br>c = 3×10⁸ m/s explizit<br>→ falsche Potenz fällt auf<br><br>Sanity-Check: 0.511 MeV<br>ist ein bekanntes Bild</div>
+  </div>
+  <div class="col">
+    <div class="col-head" id="c4h">In nat. Einheiten: Fehler versteckt</div>
+    <div class="col-body" id="c4b">Länge = Zeit = Masse⁻¹<br>→ falsche Einheit unsichtbar<br><br>E = m (c=1 gesetzt):<br>fehlende c²-Potenz unbemerkt<br>→ Fehler erst im SI-Ergebnis<br><br>m_e = 4.19×10⁻²³ (Planck):<br>kein Bild, kein Sanity-Check</div>
+  </div>
+</div>
+
+<div class="box box-amber" id="r8">
+  <strong id="r8h">8. Rundungsfehler in der Berechnungskette: Einstiegspunkt entscheidet</strong><br>
+  <span id="r8b">Wer von ξ = 1/7500 aus die gesamte Kette durchrechnet, trägt Rundungsfehler durch jede Potenzierung. Ein relativer Fehler δξ in ξ wird zu δ(ξⁿ) ≈ n·δξ — bei ξ^(41/4) mit n ≈ 10.25 wächst der Fehler um Faktor 10. Wer dagegen später in die Kette einsteigt und eine SI-gemessene Größe als Anker nutzt, vermeidet diese Fehleramplifizierung. Aber: dieser Einstiegspunkt ist selbst nicht exakt — er trägt die experimentelle Unsicherheit der SI-Messung. Es gibt keine fehlerfreie Strategie, nur eine Wahl zwischen zwei Fehlerquellen.</span>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="col-head" id="c5h">Von Grund auf: Fehler wachsen mit Potenz</div>
+    <div class="col-body" id="c5b">ξ = 1/7500 exakt als Bruch<br>als Gleitkomma: ≈ 1.3333...×10⁻⁴<br><br>ξ^(41/4): relativer Fehler<br>× Faktor 41/4 ≈ 10<br><br>ξ^(3/2): Faktor 1.5<br>ξ^(1/3): Faktor 0.33<br><br>Höhere Potenzen → stärkere<br>Fehleramplifizierung</div>
+  </div>
+  <div class="col">
+    <div class="col-head" id="c6h">Später einsteigen: Einstiegspunkt nicht exakt</div>
+    <div class="col-body" id="c6b">SI-Messung H₀ als Anker:<br>Unsicherheit ~1–2%<br><br>SI-Messung m_e:<br>Unsicherheit ~10⁻⁸<br>→ begrenzt alle weiteren<br>Ableitungen auf diese Genauigkeit<br><br>Konversion SI→nat. Einheiten<br>führt weitere Rundung ein</div>
+  </div>
+</div>
+
+<div class="box box-coral" id="key">
+  <strong id="keyh">Der entscheidende Unterschied:</strong><br>
+  <span id="keyb">Natürliche Einheiten + T4-Geometrie geben die <strong>Struktur</strong>: welche Verhältnisse gelten, welche Konstanten wie zusammenhängen — ohne freien Parameter. SI-Berechnungen geben den <strong>Kontakt mit der Realität</strong>: was in konkreten Experimenten messbar ist, welche Skalen zugänglich sind, ob die Theorie tatsächlich die Welt beschreibt. Beide sind unersetzlich — sie antworten auf verschiedene Fragen.</span>
+</div>
+
+<div class="formula" id="f2">
+  Natürliche Einheiten: WARUM und WIE VIEL (verhältnismäßig)
+  SI-Einheiten:         WAS und OB (experimentell)
+</div>
+
+<div class="foot" id="foot">
+  Dok. 049, 182, 190, 267, 268 · <a href="https://github.com/jpascher/T0-Time-Mass-Duality">github.com/jpascher/T0-Time-Mass-Duality</a>
+</div>
+</div>
+
+<script>
+const T = {
+  de: {
+    ttl: 'Warum natürliche Einheiten — und warum SI trotzdem nicht überflüssig ist',
+    sttl: 'Johann Pascher · FFGFT · T0-Zeit-Masse-Dualität · <a href="https://github.com/jpascher/T0-Time-Mass-Duality" target="_blank">github.com/jpascher/T0-Time-Mass-Duality</a>',
+    h1: 'Warum natürliche Einheiten in FFGFT funktionieren',
+    p1: 'In natürlichen Einheiten (ħ = c = 1) reduziert sich alle Physik auf eine einzige Dimension: Masse. Längen, Zeiten, Energien — alles wird zu Potenzen von Masse. Damit werden alle Verhältnisse zwischen physikalischen Größen dimensionslos. Sie hängen nicht vom Einheitensystem ab. Das ist kein Trick, sondern eine fundamentale Tatsache: Physik beschreibt Beziehungen, keine absoluten Werte.',
+    b1h: 'Warum das in FFGFT besonders gilt:',
+    b1: 'ξ = 1/7500 ist von Natur aus dimensionslos — eine reine Verhältniszahl aus der 3D-Kugelgeometrie. Der T4-Torus arbeitet mit ganzzahligen Wicklungszahlen (n₁, n₂, n₃, n₄ ∈ ℤ). Die Jacobi-Entartung g(|n|²) ist ganzzahlige Arithmetik. Bose-Einstein-Gewichtung ist eine Formel in reinen Zahlen. Das Ergebnis: Peak-Verhältnisse, Massenratios und Kopplungsstärken sind reine geometrische Verhältnisse — ohne Einheit, ohne freien Parameter.',
+    p2: 'Die Zwangsbedingung T̃·m = 1 ist in natürlichen Einheiten dimensionslos: T̃ hat Einheit [Masse]⁻¹, m hat Einheit [Masse] — Produkt = 1, eine reine Zahl. Daraus folgen alle Verhältnisse.',
+    f1: 'ξ dimensionslos → alle Massenratios dimensionslos → in nat. Einheiten: reine Geometrie',
+    c1h: 'Aus ξ + T4 allein',
+    c1b: 'm_μ/m_e ≈ 206.8\nm_τ/m_e ≈ 3477\nKoide-Formel = 2/3\nα ≈ 1/137\nαS/α = ξ^(−4/3)\nCMB: 1 : 2.449 : 3.742',
+    c2h: 'Alles dimensionslos',
+    c2b: 'Kein Einheitensystem nötig.\nKein freier Parameter.\nReine algebraische Zahlen\naus ganzzahliger T4-Geometrie\nund einer Zahl: ξ = 1/7500.',
+    h2: 'Warum SI-Berechnungen trotzdem nicht überflüssig sind',
+    p3: 'Wer glaubt, mit natürlichen Einheiten sei SI überflüssig, verwechselt zwei verschiedene Fragen:',
+    em1: 'Was ist die Struktur?',
+    em2: 'Was messe ich morgen im Labor?',
+    b2h: 'Die Planck-Konversion ist kein Physik-Schritt — aber ein notwendiger:',
+    b2: 'L₀ = ξ · ℓ_P sagt: die minimale Länge in FFGFT ist ξ mal der Planck-Länge. Das ist ein reines Verhältnis (ξ), skaliert mit ℓ_P als SI-Anker. Die Konversion zu SI ist eine Übersetzung zwischen Sprachen — aber Experimente sprechen SI.',
+    h3: 'Sechs Gründe warum SI-Berechnungen unersetzlich bleiben',
+    r1h: '1. Experimenteller Kontakt',
+    r1b: 'Jedes Experiment liefert Ergebnisse in SI: Massen in eV, Längen in m, Zeiten in s. Um FFGFT gegen 100 Jahre Messungen zu prüfen, muss man übersetzen. Ohne diese Übersetzung bleibt jede Theorie eine geschlossene mathematische Welt.',
+    r2h: '2. Skalen-Identifikation',
+    r2b: 'Natürliche Einheiten zeigen dass zwei Dinge das richtige Verhältnis haben. SI zeigt was das bedeutet: Ist diese Energie am LHC zugänglich? Ist diese Länge mit Interferometrie messbar? Das Verhältnis m_μ/m_e ist abstrakt — m_μ = 105.66 MeV ist konkret.',
+    r3h: '3. Die Planck-Konversion trägt selbst Physik',
+    r3b: 'ℓ_P ≈ 1.62 × 10⁻³⁵ m — nicht 1 cm, nicht 1 km. Diese Zahl sagt: Quantengravitation wird bei 10⁻³⁵ m relevant, nicht bei menschlichen Skalen. Dass ξ · ℓ_P ≈ 2 × 10⁻³⁹ m die Untergrenze ist, ist eine physikalische Aussage über die Welt — nicht nur ein Verhältnis.',
+    r4h: '4. Dimensionsanalyse als Fehlerfänger',
+    r4b: 'In SI kann man prüfen ob eine Formel konsistent ist bevor man rechnet. In natürlichen Einheiten wo alles [Masse]^n ist, fallen viele Fehler erst im numerischen Ergebnis auf. SI-Dimensionsanalyse ist ein Werkzeug, kein Formalismus.',
+    r5h: '5. Physikalische Intuition und Kommunikation',
+    r5b: '„Elektronmasse 0.511 MeV" ist ein konkretes Bild. „m_e = 4.19 × 10⁻²³ in Planck-Einheiten" ist eine Zahl ohne greifbares Bild. Für den Dialog mit Experiment, Technik und Öffentlichkeit braucht man SI — auch wenn die fundamentale Struktur in natürlichen Einheiten liegt.',
+    r6h: '6. Der offene Exponent 41/4',
+    r6b: 'E_H = E₀ · ξ^(41/4) → H₀: Der Exponent 41/4 ist äquivalent dazu H₀ als externe Skala einzugeben. Solange er nicht aus der T4-Geometrie abgeleitet ist, braucht FFGFT für den kosmologischen Sektor eine SI-gemessene Größe als Anker — genau wie ΛCDM. Das macht SI-Berechnungen unabdingbar.',
+    keyh: 'Der entscheidende Unterschied:',
+    keyb: 'Natürliche Einheiten + T4-Geometrie geben die <strong>Struktur</strong>: welche Verhältnisse gelten, welche Konstanten wie zusammenhängen — ohne freien Parameter. SI-Berechnungen geben den <strong>Kontakt mit der Realität</strong>: was in konkreten Experimenten messbar ist, welche Skalen zugänglich sind, ob die Theorie tatsächlich die Welt beschreibt. Beide sind unersetzlich — sie antworten auf verschiedene Fragen.',
+    f2: 'Natürliche Einheiten: WARUM und WIE VIEL (verhältnismäßig)\nSI-Einheiten:         WAS und OB (experimentell)',
+    r8h: '8. Rundungsfehler in der Berechnungskette: Einstiegspunkt entscheidet',
+    r8b: 'Wer von ξ = 1/7500 aus die gesamte Kette durchrechnet, trägt Rundungsfehler durch jede Potenzierung. Ein relativer Fehler δξ in ξ wird zu δ(ξⁿ) ≈ n·δξ — bei ξ^(41/4) mit n ≈ 10.25 wächst der Fehler um Faktor 10. Wer dagegen später in die Kette einsteigt und eine SI-gemessene Größe als Anker nutzt, vermeidet diese Fehleramplifizierung. Aber: dieser Einstiegspunkt ist selbst nicht exakt — er trägt die experimentelle Unsicherheit der SI-Messung. Es gibt keine fehlerfreie Strategie, nur eine Wahl zwischen zwei Fehlerquellen.',
+    c5h: 'Von Grund auf: Fehler wachsen mit Potenz',
+    c5b: 'ξ = 1/7500 exakt als Bruch\naber als Gleitkomma: ≈ 1.3333...×10⁻⁴\n\nξ^(41/4): relativer Fehler\n× Faktor 41/4 ≈ 10\n\nξ^(3/2): Faktor 1.5\nξ^(1/3): Faktor 0.33\n\nHöhere Potenzen → stärkere\nFehleramplifizierung',
+    c6h: 'Später einsteigen: Einstiegspunkt nicht exakt',
+    c6b: 'SI-Messung H₀ als Anker:\nUnsicherheit ~1–2%\n\nSI-Messung m_e:\nUnsicherheit ~10⁻⁸\n→ begrenzt alle weiteren\nAbleitungen auf diese Genauigkeit\n\nKonversion SI→nat. Einheiten\nführt weitere Rundung ein',
+    r7h: '7. Natürliche Einheiten erhöhen die Fehleranfälligkeit bei Alltagsberechnungen',
+    r7b: 'In SI fängt die Dimensionsprüfung Fehler ab bevor man rechnet. In natürlichen Einheiten (ħ = c = 1) werden Längen und Zeiten zur gleichen Einheit — ein vergessener Faktor c ist unsichtbar. Jede Rückkonversion nach SI erfordert die exakte Anzahl von ħ- und c-Potenzen. ħ ≈ 10⁻³⁴ J·s: eine fehlende Potenz verschiebt das Ergebnis um 34 Größenordnungen, ohne dass die Formel formal falsch aussieht. Das ist kein theoretisches Problem — es ist der häufigste Fehler in der Praxis.',
+    c3h: 'In SI: Fehler sofort sichtbar',
+    c3b: 'Formel gibt [m²/s] statt [m/s²]\n→ Dimensionsfehler sofort erkannt\n\nE = mc² in SI:\nc = 3×10⁸ m/s explizit\n→ falsche Potenz fällt auf\n\nSanity-Check: 0.511 MeV\nist ein bekanntes Bild',
+    c4h: 'In nat. Einheiten: Fehler versteckt',
+    c4b: 'Länge = Zeit = Masse⁻¹\n→ falsche Einheit unsichtbar\n\nE = m (c=1 gesetzt):\nfehlende c²-Potenz unbemerkt\n→ Fehler erst im SI-Ergebnis\n\nm_e = 4.19×10⁻²³ (Planck):\nkein Bild, kein Sanity-Check',
+    foot: 'Dok. 049, 182, 190, 267, 268 · <a href="https://github.com/jpascher/T0-Time-Mass-Duality">github.com/jpascher/T0-Time-Mass-Duality</a>',
+  },
+  en: {
+    ttl: 'Why natural units — and why SI is not superfluous',
+    sttl: 'Johann Pascher · FFGFT · T0 Time-Mass Duality · <a href="https://github.com/jpascher/T0-Time-Mass-Duality" target="_blank">github.com/jpascher/T0-Time-Mass-Duality</a>',
+    h1: 'Why natural units work in FFGFT',
+    p1: 'In natural units (ħ = c = 1), all physics reduces to a single dimension: mass. Lengths, times, energies — everything becomes powers of mass. As a result, all ratios between physical quantities become dimensionless. They do not depend on the unit system. This is not a trick but a fundamental fact: physics describes relationships, not absolute values.',
+    b1h: 'Why this holds especially in FFGFT:',
+    b1: 'ξ = 1/7500 is intrinsically dimensionless — a pure ratio number from 3D spherical geometry. The T4 torus works with integer winding numbers (n₁, n₂, n₃, n₄ ∈ ℤ). Jacobi degeneracy g(|n|²) is integer arithmetic. Bose-Einstein weighting is a formula in pure numbers. The result: peak ratios, mass ratios and coupling strengths are pure geometric ratios — without units, without free parameters.',
+    p2: 'The constraint T̃·m = 1 is dimensionless in natural units: T̃ has unit [mass]⁻¹, m has unit [mass] — product = 1, a pure number. All ratios follow from this.',
+    f1: 'ξ dimensionless → all mass ratios dimensionless → in nat. units: pure geometry',
+    c1h: 'From ξ + T4 alone',
+    c1b: 'm_μ/m_e ≈ 206.8\nm_τ/m_e ≈ 3477\nKoide formula = 2/3\nα ≈ 1/137\nαS/α = ξ^(−4/3)\nCMB: 1 : 2.449 : 3.742',
+    c2h: 'Everything dimensionless',
+    c2b: 'No unit system needed.\nNo free parameter.\nPure algebraic numbers\nfrom integer T4 geometry\nand one number: ξ = 1/7500.',
+    h2: 'Why SI calculations are not superfluous',
+    p3: 'Anyone who believes natural units make SI superfluous confuses two different questions:',
+    em1: 'What is the structure?',
+    em2: 'What do I measure in the lab tomorrow?',
+    b2h: 'The Planck conversion is not a physics step — but a necessary one:',
+    b2: 'L₀ = ξ · ℓ_P says: the minimal length in FFGFT is ξ times the Planck length. This is a pure ratio (ξ), scaled by ℓ_P as the SI anchor. The conversion to SI is a translation between languages — but experiments speak SI.',
+    h3: 'Six reasons why SI calculations remain indispensable',
+    r1h: '1. Experimental contact',
+    r1b: 'Every experiment delivers results in SI: masses in eV, lengths in m, times in s. To test FFGFT against 100 years of measurements, one must translate. Without this translation, any theory remains a closed mathematical world.',
+    r2h: '2. Scale identification',
+    r2b: 'Natural units show that two things have the right ratio. SI shows what that means: Is this energy accessible at the LHC? Is this length measurable by interferometry? The ratio m_μ/m_e is abstract — m_μ = 105.66 MeV is concrete.',
+    r3h: '3. The Planck conversion itself carries physics',
+    r3b: 'ℓ_P ≈ 1.62 × 10⁻³⁵ m — not 1 cm, not 1 km. This number says: quantum gravity becomes relevant at 10⁻³⁵ m, not at human scales. That ξ · ℓ_P ≈ 2 × 10⁻³⁹ m is the lower bound is a physical statement about the world — not just a ratio.',
+    r4h: '4. Dimensional analysis as error catcher',
+    r4b: 'In SI one can check whether a formula is consistent before computing. In natural units where everything is [mass]^n, many errors only show up in the numerical result. SI dimensional analysis is a tool, not a formalism.',
+    r5h: '5. Physical intuition and communication',
+    r5b: '"Electron mass 0.511 MeV" is a concrete picture. "m_e = 4.19 × 10⁻²³ in Planck units" is a number without a tangible image. For dialogue with experiment, technology and the public, SI is needed — even if the fundamental structure lies in natural units.',
+    r6h: '6. The open exponent 41/4',
+    r6b: 'E_H = E₀ · ξ^(41/4) → H₀: the exponent 41/4 is equivalent to supplying H₀ as an external scale. Until it is derived from T4 geometry, FFGFT needs one SI-measured quantity as anchor for the cosmological sector — just like ΛCDM. This makes SI calculations indispensable.',
+    keyh: 'The decisive distinction:',
+    keyb: 'Natural units + T4 geometry give the <strong>structure</strong>: which ratios hold, how constants relate — without free parameters. SI calculations give <strong>contact with reality</strong>: what is measurable in concrete experiments, which scales are accessible, whether the theory actually describes the world. Both are indispensable — they answer different questions.',
+    f2: 'Natural units: WHY and HOW MUCH (proportionally)\nSI units:       WHAT and WHETHER (experimentally)',
+    r8h: '8. Rundungsfehler in der Berechnungskette: Einstiegspunkt entscheidet',
+    r8b: 'Wer von ξ = 1/7500 aus die gesamte Kette durchrechnet, trägt Rundungsfehler durch jede Potenzierung. Ein relativer Fehler δξ in ξ wird zu δ(ξⁿ) ≈ n·δξ — bei ξ^(41/4) mit n ≈ 10.25 wächst der Fehler um Faktor 10. Wer dagegen später in die Kette einsteigt und eine SI-gemessene Größe als Anker nutzt, vermeidet diese Fehleramplifizierung. Aber: dieser Einstiegspunkt ist selbst nicht exakt — er trägt die experimentelle Unsicherheit der SI-Messung. Es gibt keine fehlerfreie Strategie, nur eine Wahl zwischen zwei Fehlerquellen.',
+    c5h: 'Von Grund auf: Fehler wachsen mit Potenz',
+    c5b: 'ξ = 1/7500 exakt als Bruch\naber als Gleitkomma: ≈ 1.3333...×10⁻⁴\n\nξ^(41/4): relativer Fehler\n× Faktor 41/4 ≈ 10\n\nξ^(3/2): Faktor 1.5\nξ^(1/3): Faktor 0.33\n\nHöhere Potenzen → stärkere\nFehleramplifizierung',
+    c6h: 'Später einsteigen: Einstiegspunkt nicht exakt',
+    c6b: 'SI-Messung H₀ als Anker:\nUnsicherheit ~1–2%\n\nSI-Messung m_e:\nUnsicherheit ~10⁻⁸\n→ begrenzt alle weiteren\nAbleitungen auf diese Genauigkeit\n\nKonversion SI→nat. Einheiten\nführt weitere Rundung ein',
+    r8h: '8. Rounding errors in the calculation chain: entry point decides',
+    r8b: 'Whoever computes the entire chain from ξ = 1/7500 carries rounding errors through every power. A relative error δξ in ξ becomes δ(ξⁿ) ≈ n·δξ — for ξ^(41/4) with n ≈ 10.25 the error grows by a factor of 10. Whoever enters the chain later and uses a SI-measured quantity as anchor avoids this error amplification. But: that entry point is itself not exact — it carries the experimental uncertainty of the SI measurement. There is no error-free strategy, only a choice between two error sources.',
+    c5h: 'From scratch: errors grow with power',
+    c5b: 'ξ = 1/7500 exact as fraction\nbut as float: ≈ 1.3333...×10⁻⁴\n\nξ^(41/4): relative error\n× factor 41/4 ≈ 10\n\nξ^(3/2): factor 1.5\nξ^(1/3): factor 0.33\n\nHigher powers → stronger\nerror amplification',
+    c6h: 'Entering later: entry point not exact',
+    c6b: 'SI measurement H₀ as anchor:\nuncertainty ~1–2%\n\nSI measurement m_e:\nuncertainty ~10⁻⁸\n→ limits all further\nderivations to this precision\n\nSI→nat. unit conversion\nintroduces further rounding',
+    r7h: '7. Natural units increase error-proneness in everyday calculations',
+    r7b: 'In SI, dimensional analysis catches errors before computing. In natural units (ħ = c = 1), lengths and times become the same unit — a forgotten factor of c is invisible. Every back-conversion to SI requires the exact number of ħ and c powers. ħ ≈ 10⁻³⁴ J·s: one missing power shifts the result by 34 orders of magnitude without the formula looking formally wrong. This is not a theoretical problem — it is the most common error in practice.',
+    c3h: 'In SI: errors immediately visible',
+    c3b: 'Formula gives [m²/s] instead of [m/s²]\n→ dimensional error caught at once\n\nE = mc² in SI:\nc = 3×10⁸ m/s explicit\n→ wrong power is obvious\n\nSanity check: 0.511 MeV\nis a familiar picture',
+    c4h: 'In nat. units: errors hidden',
+    c4b: 'Length = time = mass⁻¹\n→ wrong unit invisible\n\nE = m (c=1 set):\nmissing c² power unnoticed\n→ error only in SI result\n\nm_e = 4.19×10⁻²³ (Planck):\nno picture, no sanity check',
+    foot: 'Doc. 049, 182, 190, 267, 268 · <a href="https://github.com/jpascher/T0-Time-Mass-Duality">github.com/jpascher/T0-Time-Mass-Duality</a>',
+  }
+};
+
+let lang = 'de';
+
+function setLang(l, btn) {
+  lang = l;
+  document.querySelectorAll('.ltog button').forEach(b => b.classList.remove('act'));
+  btn.classList.add('act');
+  applyLang();
+}
+
+function applyLang() {
+  const t = T[lang];
+  const ids = ['ttl','sttl','h1','p1','b1h','p2','f1','c1h','c2h','h2','p3','em1','em2','b2h','h3','r1h','r1b','r2h','r2b','r3h','r3b','r4h','r4b','r5h','r5b','r6h','r6b','keyh','f2','foot'];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && t[id] !== undefined) el.innerHTML = t[id];
+  });
+  // multi-line formula
+  document.getElementById('f1').textContent = t.f1;
+  document.getElementById('f2').textContent = t.f2;
+  // box bodies with br
+  const b1el = document.getElementById('b1');
+  if (b1el) b1el.innerHTML = '<strong id="b1h">'+t.b1h+'</strong><br><span>'+t.b1+'</span>';
+  const b2el = document.getElementById('b2');
+  if (b2el) b2el.innerHTML = '<strong id="b2h">'+t.b2h+'</strong><br><span>'+t.b2+'</span>';
+  ['r1','r2','r3','r4','r5','r6'].forEach(r => {
+    const el = document.getElementById(r);
+    if (el) el.innerHTML = '<strong>'+t[r+'h']+'</strong><br><span>'+t[r+'b']+'</span>';
+  });
+  const keyel = document.getElementById('key');
+  if (keyel) keyel.innerHTML = '<strong>'+t.keyh+'</strong><br><span>'+t.keyb+'</span>';
+  // r7 box
+  const r8el = document.getElementById('r8');
+  if (r8el) r8el.innerHTML = '<strong>'+t.r8h+'</strong><br><span>'+t.r8b+'</span>';
+  ['c5h','c6h'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && t[id]) el.textContent = t[id];
+  });
+  const c5b = document.getElementById('c5b');
+  if (c5b) c5b.innerHTML = t.c5b.split('\n').join('<br>');
+  const c6b = document.getElementById('c6b');
+  if (c6b) c6b.innerHTML = t.c6b.split('\n').join('<br>');
+  const r7el = document.getElementById('r7');
+  if (r7el) r7el.innerHTML = '<strong>'+t.r7h+'</strong><br><span>'+t.r7b+'</span>';
+  // col heads c3 c4
+  ['c3h','c4h'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && t[id]) el.textContent = t[id];
+  });
+  // col bodies with line breaks
+  const c1b = document.getElementById('c1b');
+  if (c1b) c1b.innerHTML = t.c1b.split('\n').join('<br>');
+  const c2b = document.getElementById('c2b');
+  if (c2b) c2b.innerHTML = t.c2b.split('\n').join('<br>');
+  const c3b = document.getElementById('c3b');
+  if (c3b) c3b.innerHTML = t.c3b.split('\n').join('<br>');
+  const c4b = document.getElementById('c4b');
+  if (c4b) c4b.innerHTML = t.c4b.split('\n').join('<br>');
+}
+</script>
+</body>
+</html>
