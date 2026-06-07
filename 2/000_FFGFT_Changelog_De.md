@@ -1,7 +1,7 @@
 # FFGFT Changelog
 ## Korrekturen und Präzisierungen der Dokumentenserie
 **Grundlage:** Dok. 190 (allgemein) und Dok. 210 (Wicklungszahlen)
-**Stand:** Juni 2026 (zuletzt erweitert: Juni 2026 — 8. Update: Dok. 268 EN vollständig, Frequenzanalyse-Abschnitt 10.7, K4 in 268 vervollständigt, zwei fehlende 267-Skripte erstellt)
+**Stand:** Juni 2026 (zuletzt erweitert: 7. Juni 2026 — 9. Update: CMB-Peak-Sektor ehrlich abgestuft — {3,18,42,78} als Retrodiktion erkannt; Forward-Gewinn ist die geometrische Anharmonizität (Kodim-1 → J₀-Membran, neues P31); P29/P30 zurück auf offen; Dok. 268 Schritt 17 neu; Dok. 190 P-Tabelle → longtable; \checkmark-Patch in T0_preamble_patches.tex; 10. Update: P20 verschärft — Form fest als ξ-Verhältnis R_H/ℓ_P, Faktor 41/4 als *deklarierte externe ΛCDM-Kalibrierung* (Einheitenwahl, nicht hergeleitet, zählt nicht als FFGFT-Bestätigung; Fitten = Retrodiktion); neues P32 — H₀-Herleitungsaussagen korpusweit zu bereinigen, vorerst nur vermerkt)
 
 ---
 
@@ -1802,3 +1802,142 @@ Differenz ist eine Rundungs-/Konventionsfrage, nicht inhaltlich.
 | ID | Status | Bemerkung |
 |----|--------|-----------|
 | Juni-8.Update | ✓ Juni 2026 | Dok. 268 EN vollständig (22 S., alle 16 Schritte + 10.7). Frequenzanalyse-Abschnitt 10.7 (DE eingebaut + EN): Begriffsklärung „akustisch“, missing-fundamental-Falle, Gitter-Grundton c≈126, keine Größe des Universums (Orgelpfeifen/Medium-Argument), Abtastgrenze. K4-Konsistenz in 268 Schritte 10/11 vollzogen (keine D_f-Dispersionsstelle mehr). Zwei fehlende 267-Skripte erstellt (ffgft_lambda_im_messprozess, ffgft_zirkularitaet_symmetrie), konsistent mit Dok. 267 (H0·L_res=458 km/s). Offen: P20-Exponent, P30, ZIP-Update. |
+
+---
+
+## 9. Update (Juni 2026) — Dok. 269 + Gesamtarchiv
+
+### Neues Dokument: Dok. 269 (FFGFT ↔ RA/PMT, bidirektional)
+Vergleich von FFGFT mit dem RA/PMT-Architekturschema (J. T. Guevara,
+*Regional Arenas / Perception Mechanism Theory*, Teil I–III). DE+EN, je 6 S.
+Zwei Richtungen in einem Dokument:
+- **Richtung A**: FFGFT bewertet RA/PMT mit dem Sechs-Achsen-Operator
+  (Dok. 265) → vier Achsen ohne Berührung, zwei nur Meta-Ebene →
+  Kategorienverschiedenheit, einziger Überlapp = Schichtungs-Disziplin.
+- **Richtung B**: RA/PMT-Raster (RA4→RA1.5→RA2→RA1) auf FFGFT angewandt →
+  FFGFT hat kein RA1.5 und braucht keines (statisch, keine Auswahl aus
+  vielen); legt versteckte Annahme im Raster offen; RA1.5 ist nach
+  Guevaras eigener RA3-Definition selbst ein Residuum.
+- Synthese: Gegenpole derselben Frage; faire Würdigung als Meta-Werkzeug;
+  zwei deklarierte Residuen. Bezug: Dok. 265, 267, 203, 190.
+
+### Gesamtarchiv aktualisiert (dieses ZIP)
+Das große ZIP (FFGFT_v1_1_2_Komplett) ist jetzt auf aktuellen Stand gebracht:
+- **Sources/ch/**: 190 (DE+EN, aktualisiert mit konsolidiertem P-Register
+  P18–P30), 265, 267, 268, 269 (je DE+EN) neu eingespielt.
+- **Sources/wr_standalone_A4/**: Wrapper für 265, 267, 268, 269 (DE+EN).
+- **Einzeldokumente_A4/**: gebaute PDFs für 190 (aktualisiert), 265, 267,
+  268, 269 (Deutsch + English).
+- **Dok267_268_Skripte/** (neu): 9 Python-Skripte zu 267/268
+  (ffgft_cmb_t4_peaks, ffgft_lambda_im_messprozess, ffgft_lcdm_zeitverlauf,
+  ffgft_zirkularitaet_symmetrie, hausdorff_wegverlaengerung,
+  lcdm_circularity, verify_cmb_peaks_final, verify_z_star_final,
+  wbe_t4_flrw).
+
+### Offene Punkte (Stand nach 9. Update)
+- **P20**: Herleitung des Exponenten 41/4 (≡ R_H/H₀) aus der T⁴-Geometrie.
+- **P30**: strenge sphärische C_ℓ-Projektion der T⁴-Moden.
+- (ZIP-Update erledigt.)
+
+---
+
+## Revision 7. Juni 2026 (9. Update) — CMB-Peak-Sektor ehrlich abgestuft, Forward-Anharmonizität (P31), Render-Patches
+
+**Anlass:** Eine durchgängige Vorwärts-Prüfung (ohne aus den Messdaten abgelesene Größen) des CMB-Peak-Sektors. Ergebnis: Teile des 6.–8. Updates waren überdehnt und werden hier ehrlich zurückgenommen; gleichzeitig ein echter, parameterfreier Forward-Gewinn nachgetragen.
+
+### P29 — Peak-Auswahlregel (Korrektur gegenüber 7. Update)
+| Feld | Inhalt |
+|------|--------|
+| Betroffene Dok. | 268 (Schritt 11.1, 17), 190 |
+| Status | **offen** (vorher fälschlich „teilweise beantwortet") |
+| Eingetragen | 7. Juni 2026 |
+| Erledigt DE | ✓ 7. Juni 2026 |
+| Erledigt EN | ✓ 7. Juni 2026 |
+
+**Falsch (7. Update):** Die Peak-Auswahl {3,18,42,78} sei durch den 3D-Beobachter-Mechanismus (Faktor 3) bereits *teilweise* hergeleitet.
+**Korrekt:** Der Faktor-3-Filter schließt $|n|^2=30$ (=3·10) **nicht** aus. Mit Intensität $I(30)=13{,}2 > I(42)=7{,}6 > I(78)=1{,}7$ müsste bei $\ell\approx696$ ein Peak vergleichbarer Stärke liegen — er fehlt in der Beobachtung. Die Auswahl genau {3,18,42,78} ist damit **nicht** vorwärts hergeleitet, sondern aus den gemessenen Verhältnissen abgelesen (Retrodiktion).
+
+### P30 — strenge sphärische C_ℓ-Projektion (Korrektur gegenüber 7. Update)
+| Feld | Inhalt |
+|------|--------|
+| Betroffene Dok. | 268 (Schritt 17), 190 |
+| Status | **offen** (vorher „machbare Rechnung, kein prinzipielles Hindernis") |
+| Eingetragen | 7. Juni 2026 |
+| Erledigt DE | ✓ 7. Juni 2026 |
+| Erledigt EN | ✓ 7. Juni 2026 |
+
+**Falsch (7. Update):** Die strenge C_ℓ-Projektion sei nur noch eine „machbare Rechnung, kein prinzipielles Hindernis".
+**Korrekt:** Die naive Bessel-Projektion des dichten T⁴-Spektrums auf $C_\ell$ wäscht die diskrete Peak-Struktur **aus** (resultierendes Maximum bei $\ell\approx122$, keine Serie {3,18,42,78}). Es fehlt nach wie vor eine physikalische Quell-/Fensterfunktion, die genau diese Moden selektiert. Punkt bleibt **offen**.
+
+### P31 (R31) — Geometrische Anharmonizität der Peak-Verhältnisse (NEU, Forward-Gewinn)
+| Feld | Inhalt |
+|------|--------|
+| Betroffene Dok. | 268 (Schritt 17, neu), 190 |
+| Status | **teilweise hergeleitet** (Führungsverhalten forward, Restabweichung offen) |
+| Eingetragen | 7. Juni 2026 |
+| Erledigt DE | ✓ 7. Juni 2026 |
+| Erledigt EN | ✓ 7. Juni 2026 |
+
+**Befund:** Forward erzeugt das symmetrische T⁴-Resonanz-Rückgrat ($k^2=3n^2$) die *harmonische* Reihe $1:2:3:4:5$ — „zu sauber". Die beobachtete *Anharmonizität* $1:2{,}44:3{,}68:5{,}09$ folgt **parameterfrei** aus der Kodimension-1-Projektion: Letztstreufläche ⇒ $D_\mathrm{eff}=D_f-1=2-\xi\approx2$ ⇒ Bessel-Index $\nu=-\xi/2\approx0$ ⇒ $J_0$-Membran ⇒ $1:2{,}30:3{,}60:4{,}90$, Treffer auf $\sim5\,\%$, ohne Modenauswahl. Anharmonizität ist bei $D=2$ maximal (bei $D=1,3$ harmonisch). Restabweichung ($D\approx1{,}86$) ist **nicht** aus $\xi$ herleitbar und liegt in der Größenordnung der Messunsicherheit. Der Teilchensektor ($\alpha$, Leptonmassen, Koide) ist davon unberührt (direkte $\xi$-Potenzen).
+
+### Dok. 268 — Überarbeitung
+| Status | **erledigt** | ✓ 7. Juni 2026 DE+EN |
+
+- **Überblick** trennt jetzt klar **(A) Retrodiktion** (Verhältnis-Match, rückwärts) von **(B) Forward-Anharmonizität** (geometrisch, parameterfrei).
+- **Schritt 11.1** korrigiert: die frühere Behauptung „{1,6,14,26} folgt aus ξ allein als lokale Maxima" war falsch (echte Forward-Maxima sind dicht {3,6,10,14,18,22,26,30,…}); jetzt als Retrodiktion markiert.
+- **Schritt 17 (neu):** vollständige Forward-Prüfung (naive Bessel-Auswaschung, $|n|^2=30$, Resonator-Vergleich $J_0$, Kodim-1-Herleitung, Restabweichung, geschichtete Zusammenfassung).
+- **Schritt 9** (KDP-Rand): Tabelle von `{clll}`+`\newline` (207 pt Überlauf) auf feste `p{}`-Breiten umgestellt.
+
+### Dok. 190 — Korrekturverzeichnis
+| Status | **erledigt** | ✓ 7. Juni 2026 DE+EN |
+
+- P-Register-Tabelle (P1–P31) von `\resizebox{\textwidth}{!}{tabular}` (kein Seitenumbruch, lief unten über) auf **longtable** umgestellt — bricht jetzt über Seiten mit Kopf-Wiederholung.
+- P29/P30 auf **offen** zurückgesetzt, **P31** ergänzt; neuer Prosa-Abschnitt „Präzisierung 14".
+- Status-Header auf P1–P31 / R1–R31.
+
+### Skripte (Dok267_268_Skripte/)
+| Status | **erledigt** | ✓ 7. Juni 2026 |
+
+- **Neu (5):** `forward_t4_spektrum.py` (echte Forward-Maxima, dicht), `naive_bessel_projektion.py` (Auswaschung, ℓ≈122), `resonator_vergleich.py` ($J_0$ vs. harmonisch), `dimension_anharmonizitaet.py` (Anharmonizität max. bei D=2), `spektral_dimension.py` (schwach-fraktal bleibt ≈2).
+- **Aktualisiert (2):** `ffgft_cmb_t4_peaks.py`, `verify_cmb_peaks_final.py` — Rechnung korrekt, Schlussfolgerung von „Forward-Herleitung" auf „Retrodiktion + Forward-Anharmonizität" präzisiert (Korrektur-Kopf ergänzt).
+
+### Patch — \checkmark (Sources/pri-end/T0_preamble_patches.tex)
+| Status | **erledigt** | ✓ 7. Juni 2026 |
+
+`\checkmark` (U+2713) fehlt in Libertinus Math und erschien korpusweit als `.notdef`-Kasten (u.a. Dok. 268 Abschnitt 12.1, Dok. 190). In `T0_preamble_patches.tex` idempotent durch ein Zapf-Dingbat-Häkchen ersetzt (mathmodus-sicher, kein amssymb). Methode wie bisher: jede Änderung in DE und EN geprüft.
+
+### Wrapper
+- **Sources/wr_standalone_A4/190_T0_Korrekturen_De.tex:** Titelblock ergänzt (`\title`/`\maketitle`/`\tableofcontents`) — der DE-Wrapper hatte als einziger keinen Titel; an den EN-Wrapper angeglichen.
+
+### Offene Punkte (Stand nach 9. Update)
+- **P20**: Herleitung des Exponenten 41/4 (≡ R_H/H₀) aus der T⁴-Geometrie.
+- **P29**: physikalische Begründung, warum genau {3,18,42,78} und nicht z.B. $|n|^2=30$.
+- **P30**: Quell-/Fensterfunktion, die in einer strengen C_ℓ-Projektion die diskreten Peaks selektiert (naive Projektion wäscht aus).
+- **P31-Rest**: Restabweichung $D=2\to1{,}86$ nicht aus ξ herleitbar (vermutlich Messunsicherheit).
+
+---
+
+## 10. Update (7. Juni 2026) — P20 verschärft, P32 neu (H₀-Bereinigung vermerkt)
+
+Anlass: Diskussion über das Rand-/Maßstab-/Relationalitäts-Problem. Ergebnis: ein Maßstab ist per Definition eine Relation; es kann kein inneres Glied geben, das eine *absolute* Skala festsetzt. Nur dimensionslose Verhältnisse sind real. Für R_H/ℓ_P heißt das: die **Form** liegt fest, der **Faktor** (Exponent 41/4) nicht.
+
+### Dok. 190 — P20/R20 verschärft
+| Status | **erledigt** | ✓ 7. Juni 2026 (DE + EN) |
+
+- Aus „R_H externe Eingabe, offen" wird die präzise Aussage: die **Form** ist fest (dimensionsloses ξ-Verhältnis R_H/ℓ_P), der **Faktor** wird **nicht** hergeleitet und **darf nicht gefittet** werden (Fitten = Retrodiktion).
+- FFGFT ist nicht der traditionelle Maßstab → der Faktor wird als **deklarierte externe Kalibrierung** aus ΛCDM übernommen (Einheitenwahl, **nicht** Physik-Übernahme), mit dem konvergierten Wert einzusetzen, sobald die H₀-Spannung (~67 vs. ~73) geklärt ist; bis dahin parametrisiert.
+- Der importierte Wert zählt **nicht** als FFGFT-Bestätigung. Innere Vorwärts-Herleitung des Faktors bleibt das offene Ziel (P20).
+
+### Dok. 190 — P32/R32 neu (Vermerk)
+| Status | **vermerkt** (Bereinigung aufgeschoben) | ✓ 7. Juni 2026 (DE + EN) |
+
+- Folgt aus P20: H₀ / die absolute Skala ist eine **importierte** Kalibrierung, nicht hergeleitet.
+- Alle Dokumentstellen, die H₀ als **FFGFT-Resultat** darstellen, sind korpusweit zu bereinigen („importiert/deklariert" statt „hergeleitet").
+- **Vorerst nur vermerkt**; die korpusweite Bereinigung ist als offener Punkt registriert, aber bewusst aufgeschoben.
+
+### Offene Punkte (Stand nach 10. Update)
+- **P20**: innere Vorwärts-Herleitung des Faktors 41/4 (≡ R_H/ℓ_P) aus ξ/T⁴-Geometrie — Form fest, Faktor offen.
+- **P29**: warum genau {3,18,42,78} und nicht z.B. |n|²=30.
+- **P30**: Quell-/Fensterfunktion für die strenge C_ℓ-Projektion (naive Projektion wäscht aus).
+- **P31-Rest**: Restabweichung D=2→1,86 (vermutlich Messunsicherheit).
+- **P32**: korpusweite Bereinigung der H₀-als-hergeleitet-Aussagen (vermerkt, aufgeschoben).

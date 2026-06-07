@@ -1,6 +1,24 @@
 #!/usr/bin/env python3
 """
 ================================================================================
+KORREKTUR-HINWEIS (7. Juni 2026) -- bitte zuerst lesen
+================================================================================
+Die Rechnung in diesem Skript (Jacobi-Entartung, Bose-Einstein, Verhaeltnisse)
+ist korrekt. ABER die fruehere SCHLUSSFOLGERUNG, die Folge {1,6,14,26} folge
+"aus xi allein als lokale Maxima", ist NICHT korrekt:
+  - Echte Forward-Maxima des vollen T4-Spektrums: {3,6,10,14,18,22,26,30,...}
+    (dicht). Davon ist 1 KEIN Maximum, und 10 (ein Maximum) fehlt in der Folge.
+  - {1,6,14,26} wurde aus den gemessenen CMB-Verhaeltnissen abgelesen
+    (Dok 268, Schritt 4) -> RETRODIKTION, keine Forward-Vorhersage.
+Der ehrliche Forward-Gehalt (geometrische Anharmonizitaet aus der
+Kodimension-1-Projektion, J0-Membran) steht in:
+  forward_t4_spektrum.py, naive_bessel_projektion.py, resonator_vergleich.py,
+  dimension_anharmonizitaet.py, spektral_dimension.py  (Dok 268, Schritt 17).
+Dieses Skript daher als REIN ILLUSTRATIV / RETRODIKTION verstehen.
+================================================================================
+"""
+"""
+================================================================================
 ffgft_cmb_t4_peaks.py
 CMB-Akustikpeaks aus der T4-Gitterstruktur (FFGFT)
 ================================================================================
