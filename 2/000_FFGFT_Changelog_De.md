@@ -1,7 +1,7 @@
 # FFGFT Changelog
 ## Korrekturen und Präzisierungen der Dokumentenserie
 **Grundlage:** Dok. 190 (allgemein) und Dok. 210 (Wicklungszahlen)
-**Stand:** Juni 2026 (zuletzt erweitert: 7. Juni 2026 — 9. Update: CMB-Peak-Sektor ehrlich abgestuft — {3,18,42,78} als Retrodiktion erkannt; Forward-Gewinn ist die geometrische Anharmonizität (Kodim-1 → J₀-Membran, neues P31); P29/P30 zurück auf offen; Dok. 268 Schritt 17 neu; Dok. 190 P-Tabelle → longtable; \checkmark-Patch in T0_preamble_patches.tex; 10. Update: P20 verschärft — Form fest als ξ-Verhältnis R_H/ℓ_P, Faktor 41/4 als *deklarierte externe ΛCDM-Kalibrierung* (Einheitenwahl, nicht hergeleitet, zählt nicht als FFGFT-Bestätigung; Fitten = Retrodiktion); neues P32 — H₀-Herleitungsaussagen korpusweit zu bereinigen, vorerst nur vermerkt)
+**Stand:** Juni 2026 (zuletzt erweitert: 7. Juni 2026 — 9. Update: CMB-Peak-Sektor ehrlich abgestuft — {3,18,42,78} als Retrodiktion erkannt; Forward-Gewinn ist die geometrische Anharmonizität (Kodim-1 → J₀-Membran, neues P31); P29/P30 zurück auf offen; Dok. 268 Schritt 17 neu; Dok. 190 P-Tabelle → longtable; \checkmark-Patch in T0_preamble_patches.tex; 10. Update: P20 verschärft — Form fest als ξ-Verhältnis R_H/ℓ_P, Faktor 41/4 als *deklarierte externe ΛCDM-Kalibrierung* (Einheitenwahl, nicht hergeleitet, zählt nicht als FFGFT-Bestätigung; Fitten = Retrodiktion); neues P32 — H₀-Herleitungsaussagen korpusweit zu bereinigen, vorerst nur vermerkt; 11. Update: Dok. 270 (Projektionskette T⁴–T⁰) aufgenommen und nach Review überarbeitet — Zwei/Drei-Typen-Reduktion (Typ I Masse↔Zeit-Dualität, Typ II räumliche Projektion, Typ III T⁴↔Hilbert bijektiv); R_H als deklarierte externe/importierte Skala gekennzeichnet (P20-konsistent), Stufe 1 in Ia/Ib (Dualität vs. Limes) getrennt, R_m als KK-Turmspitze präzisiert)
 
 ---
 
@@ -1941,3 +1941,29 @@ Anlass: Diskussion über das Rand-/Maßstab-/Relationalitäts-Problem. Ergebnis:
 - **P30**: Quell-/Fensterfunktion für die strenge C_ℓ-Projektion (naive Projektion wäscht aus).
 - **P31-Rest**: Restabweichung D=2→1,86 (vermutlich Messunsicherheit).
 - **P32**: korpusweite Bereinigung der H₀-als-hergeleitet-Aussagen (vermerkt, aufgeschoben).
+
+---
+
+## 11. Update (8. Juni 2026) — Dok. 270 aufgenommen und überarbeitet
+
+### Dok. 270 „Projektionskette T⁴ → T⁰" — neu
+| Status | **aufgenommen** (DE + EN, A4-Standalone, je 9–10 S.) | ✓ 8. Juni 2026 |
+
+Inhalt: Die Reduktion T⁴ → T⁰ ist **nicht** gleichförmig, sondern zerfällt in qualitativ verschiedene Operationen:
+- **Typ I** — Masse↔Zeit-Dualitäts-Dekompaktifizierung (T̃·m=1): *einbettend*, im Modeninhalt informationserhaltend; nur die Sichtbarkeit der Kompaktheit überlebt als Spektralsignatur (ξⁿ).
+- **Typ II** — räumliche Projektion (D3→D2→D1→D0): streng verlustbehaftet, nicht reversibel, von der Rekursion **nicht** kompensiert; Stufe D3→D2 = holographisches Prinzip.
+- **Typ III** — repräsentationelle Übersetzung T⁴ ↔ Hilbertraum/Matrix (Dok. 230/206/231): *bijektiv/verlustfrei*, gerade weil keine geometrischen Extra-Dimensionen hinzukommen.
+
+Zentrales Resultat: Asymmetrie „geometrisch-runter verlustbehaftet vs. repräsentationell-hoch bijektiv". Prüfbarkeit der Identifikation t∼t+R_m über T_rev und CHSH-Abweichung ∼ξ (Dok. 147/183); linear/log-Regime-Trennung explizit.
+
+### Dok. 270 — Überarbeitung nach Review
+| Status | **überarbeitet** (DE + EN) | ✓ 8. Juni 2026 |
+
+- **R_H als importierte Skala gekennzeichnet (P20-konsistent).** Neue Bemerkung „Status der beiden Skalen": R_H ist die *deklarierte externe* (importierte) kosmologische Skala, **nicht** aus ξ hergeleitet; intrinsisch ist nur die Form (Radienklassen-Trennung bzw. R_H/ℓ_P), nicht der Faktor (Verweis Dok. 190, P20). Verhindert die Lesart „R_H als Strukturgröße des Torus" — folgt P32.
+- **Stufe 1 in Ia/Ib getrennt.** Die bisher als „Typ I" gebündelte Stufe 1 trennt jetzt **(Ia)** Massekreis-Dualität (T̃m=1) von **(Ib)** räumlicher *Limes*-Dekompaktifizierung (R→∞) — verschiedener Mechanismus, gleicher einbettender Charakter. Offener Punkt 3 von „Frage" auf „präzisiert" umgestellt.
+- **R_m-Turmspitze präzisiert.** R_m ∼ ξℓ_P setzt die Spitze des KK-Turms (1/R_m ∼ ξ⁻¹ m_P, transplanckisch); beobachtete Massen liegen ξⁿ-suppressed darunter (Verweis 159, 258/259).
+
+Kompiliert sauber (lualatex, Libertinus): 0 fehlende Glyphen, 0 ungelöste Referenzen, 0 Überlauf; Underbrace/Box/deutsche Anführungszeichen korrekt.
+
+### Offener Punkt (von Dok. 270, vom Autor gegenzulesen)
+- **R_m vs. 41/4.** Zahlencheck, dass R_m ∼ ξℓ_P (1/R_m ∼ ξ⁻¹ m_P) konsistent ist mit der Parametrisierung E_H = E₀ξ^{41/4} (Dok. 182) und der Massenleiter (Dok. 159, 258/259) — gerahmt, aber noch nicht numerisch bestätigt.
