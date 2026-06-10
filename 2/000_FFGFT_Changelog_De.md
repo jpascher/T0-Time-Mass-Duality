@@ -1,7 +1,7 @@
 # FFGFT Changelog
 ## Korrekturen und Präzisierungen der Dokumentenserie
 **Grundlage:** Dok. 190 (allgemein) und Dok. 210 (Wicklungszahlen)
-**Stand:** Juni 2026 (zuletzt erweitert: 7. Juni 2026 — 9. Update: CMB-Peak-Sektor ehrlich abgestuft — {3,18,42,78} als Retrodiktion erkannt; Forward-Gewinn ist die geometrische Anharmonizität (Kodim-1 → J₀-Membran, neues P31); P29/P30 zurück auf offen; Dok. 268 Schritt 17 neu; Dok. 190 P-Tabelle → longtable; \checkmark-Patch in T0_preamble_patches.tex; 10. Update: P20 verschärft — Form fest als ξ-Verhältnis R_H/ℓ_P, Faktor 41/4 als *deklarierte externe ΛCDM-Kalibrierung* (Einheitenwahl, nicht hergeleitet, zählt nicht als FFGFT-Bestätigung; Fitten = Retrodiktion); neues P32 — H₀-Herleitungsaussagen korpusweit zu bereinigen, vorerst nur vermerkt; 11. Update: Dok. 270 (Projektionskette T⁴–T⁰) aufgenommen und nach Review überarbeitet — Zwei/Drei-Typen-Reduktion (Typ I Masse↔Zeit-Dualität, Typ II räumliche Projektion, Typ III T⁴↔Hilbert bijektiv); R_H als deklarierte externe/importierte Skala gekennzeichnet (P20-konsistent), Stufe 1 in Ia/Ib (Dualität vs. Limes) getrennt, R_m als KK-Turmspitze präzisiert)
+**Stand:** Juni 2026 (zuletzt erweitert: 10. Juni 2026; davor 7. Juni 2026 — 9. Update: CMB-Peak-Sektor ehrlich abgestuft — {3,18,42,78} als Retrodiktion erkannt; Forward-Gewinn ist die geometrische Anharmonizität (Kodim-1 → J₀-Membran, neues P31); P29/P30 zurück auf offen; Dok. 268 Schritt 17 neu; Dok. 190 P-Tabelle → longtable; \checkmark-Patch in T0_preamble_patches.tex; 10. Update: P20 verschärft — Form fest als ξ-Verhältnis R_H/ℓ_P, Faktor 41/4 als *deklarierte externe ΛCDM-Kalibrierung* (Einheitenwahl, nicht hergeleitet, zählt nicht als FFGFT-Bestätigung; Fitten = Retrodiktion); neues P32 — H₀-Herleitungsaussagen korpusweit zu bereinigen, vorerst nur vermerkt; 11. Update: Dok. 270 (Projektionskette T⁴–T⁰) aufgenommen und nach Review überarbeitet — Zwei/Drei-Typen-Reduktion (Typ I Masse↔Zeit-Dualität, Typ II räumliche Projektion, Typ III T⁴↔Hilbert bijektiv); R_H als deklarierte externe/importierte Skala gekennzeichnet (P20-konsistent), Stufe 1 in Ia/Ib (Dualität vs. Limes) getrennt, R_m als KK-Turmspitze präzisiert; 12. Update: P33/R33 in Dok. 190 — die 5⁴-Magnitude in ξ = 1/(3·2²·5⁴) wird offen als intuitiv (harmonisch/Euler-Tonnetz) bzw. empirisch (Higgs-Sektor) begründet deklariert, nicht als Vorwärts-Herleitung; Form (4/3, 3, 2²) vorwärts, Magnitude offen, Struktur-Parallele zu P20; 13. Update: P34/R34 in Dok. 190 — Dimensionsstruktur präzisiert: 3+1 ist empirische Eingabe (nicht hergeleitet), vorwärts sind Periodizität, Torus-statt-Kugel, Minimal-Suffizienz (4 statt 5 via Dualität T̃·m=1) und verlustfreie Hilbert-Repräsentation (Typ III); zugleich festgehalten, dass die SI-Umrechnungen für die c-Potenz und Zeit-Potenz unverzichtbar sind — die Vier-Kreis-Struktur ist die Exponenten-Buchhaltung (c = Raum-Zeit-, ħ = Masse-Zeit-Brücke); 14. Update: Dok. 270 erweitert — neue Synthese-Sektion „Warum genau vier Kreise?“ (Minimal-Suffizienz: 4 statt 5 via Dualität T̃·m=1; die vier Kreise als SI-Einheiten-Buchhaltung, c = Raum-Zeit-, ħ = Masse-Zeit-Brücke, daher SI für c-/Zeit-Potenz unverzichtbar; Hilbert-Veranschaulichung als zwei Lesarten einer Bijektion, 4D generativ); konsistent mit P34/P33/P20); 15. Update: P33/R33 und P34/R34 in Dok. 190 vorsichtiger formuliert — die (eher zirkulären) Begründungen für 4/3 bzw. 5⁴ sind nicht aussagelos, sie zeigen sinnvolle Verhältnis-/Harmoniestrukturen (und Verhältnisse sind nach FFGFT das Intrinsische); die absolute Magnitude bzw. die bloße Zahl bleibt aber eine Eingabe); 16. Update: neuer Eintrag P35/R35 in Dok. 190 — SI-Umrechnungsfaktor (ℓ_P) nicht in den ξ-Exponenten absorbieren; „X = ξ^N“ ist für sich aussagelos, da jede Magnitude eine ξ-Potenz ist; Befund: nur L₀/ℓ_P = ξ¹ exakt, R_H = ℓ_P·ξ^(−63/4) mit 63/4 = 41/4 + 11/2 — das Korpus-41/4 ist an E₀ statt Planck referenziert, die „schönen Brüche“ sind Rundungen gemessener Exponenten); 17. Update: neuer Eintrag P36/R36 in Dok. 190 — R_H-Deutung: R_H = c/H₀ ist die Hubble-Länge (lokale Rate als Distanz), nicht die Universumsgröße und nicht der beobachtbare Horizont (≈ 3 R_H); das echte Universum übersteigt R_H (nur untere Schranke messbar). Dok. 182s „Maximalskala“ nur als obere Skala des kosmologischen Torus-Sektors haltbar, nicht als Ausdehnung des Universums); 18. Update (10. Juni 2026): neues Dok. 275 (Von ξ zu φ — rekursive Skalenhierarchie): 1/φ als Fixpunkt der ξ-Dämpfungsrekursion r(k+1)=r(k)·(1−ξ) nach k* = log(φ)/ξ ≈ 3609 Skalenebenen (q=2/3 intern konvergent, kein RG-Faktor 2); zugehörig neuer Eintrag P37/R37 in Dok. 190 — drei φ-Rollen im Korpus getrennt (mikroskopisch ξ / makroskopisch 1/φ als Fixpunkt / Teilchenphysik Q_FFGFT≈0,6677), abgegrenzt von der ξ^N/φ^N-Trivialität (P35) und vom empirischen Anker in Dok. 009 (P10); k*-Fehlerangabe in Dok. 275 nach unabhängiger Nachrechnung korrigiert: 4,0×10⁻⁵ absolut (relativ 6,5×10⁻⁵) bei ganzzahligem k=3609 — die frühere Angabe <10⁻⁹ war falsch (galt nur für das nach 1/φ aufgelöste reelle k, zirkulär) und ist im Text sichtbar als korrigiert vermerkt; numerische Validierung v3 (N=2000, 3 Seeds, endlicher T⁴-Graph): FFGFT-T⁴-Graph gap_CV=1,68±0,09 außerhalb Null-Band [0,31, 1,05], HLV gap_CV=0,755 ≈ jittered-kubisch 0,755 im Band (konsistent mit Krüger Run E); Skripte in Dok275_Skripte/; zudem Tabelleneinträge P35 (ξ^N-Trivialität) und P36 (R_H-Deutung) in Dok. 190 nachgetragen (waren seit Updates 16/17 nur per Changelog deklariert)
 
 ---
 
@@ -1967,3 +1967,242 @@ Kompiliert sauber (lualatex, Libertinus): 0 fehlende Glyphen, 0 ungelöste Refer
 
 ### Offener Punkt (von Dok. 270, vom Autor gegenzulesen)
 - **R_m vs. 41/4.** Zahlencheck, dass R_m ∼ ξℓ_P (1/R_m ∼ ξ⁻¹ m_P) konsistent ist mit der Parametrisierung E_H = E₀ξ^{41/4} (Dok. 182) und der Massenleiter (Dok. 159, 258/259) — gerahmt, aber noch nicht numerisch bestätigt.
+
+---
+
+## 12. Update (8. Juni 2026) — P33/R33: Status des 5⁴-Faktors in ξ
+
+### Dok. 190 — P33/R33 neu (deklariert)
+| Status | **deklariert/vermerkt** (DE + EN) | ✓ 8. Juni 2026 |
+
+Anlass: Suche im Korpus nach einer Vorwärts-Herleitung des magnitudentragenden Faktors **5⁴ = 625** in der Primfaktorform ξ = 4/30000 = 1/(3·2²·5⁴).
+
+Befund (Doks. 009, 042, 056, 181, 133, 159 durchsucht):
+- Die **Form** von ξ ist vorwärts: 4/3 (reine Quarte, harmonisch, Dok. 042/159) gibt die Leitziffer; 3 = Raumdimensionen, 2² = 4 = Raumzeit liest man aus der Geometrie.
+- Der **magnitudentragende Faktor 5⁴** (→ 10⁻⁴) ist **nicht** vorwärts hergeleitet. Er wird nur *behauptet* („emergiert aus der fraktalen Struktur", Dok. 009; „kodiert die Symmetriestruktur", Dok. 181 — dort zirkulär über 30000/4) bzw. der Wert ist *empirisch* (Dok. 042: aus dem Higgs-Sektor gemessen 1,3194×10⁻⁴, ~1 % neben dem Ideal 4/30000). In Dok. 133/159 kommt 5⁴ nicht vor.
+
+Konsequenz: **P33/R33** hält offen fest, dass die Magnitude von ξ bei der **intuitiven** (harmonisch/Euler-Tonnetz) bzw. **empirischen** Begründung bleibt und so *deklariert* wird — nicht als Vorwärts-Herleitung ausgegeben. Struktur-Parallele zu P20 (Form fest, Faktor offen), eine Ebene tiefer.
+
+Auch die Dezimal-Frage ist damit sauber abgelegt: ξ ist basis-unabhängig (Primfaktorform 1/(3·2²·5⁴); „×10⁴" ist nur das Dezimalbild von 2⁴·5⁴) — der frühere Basis-Einwand greift nicht (Dok. 009 explizit; gestützt von Dok. 253/057). Die offene Stelle ist allein die Vorwärts-Herkunft des 5⁴.
+
+Statuskopf Dok. 190: P1–P33 / R1–R33 (P33/R33 deklariert).
+
+---
+
+## 13. Update (8. Juni 2026) — P34/R34: Dimensionsstruktur & SI-Umrechnungen
+
+### Dok. 190 — P34/R34 neu (präzisiert)
+| Status | **präzisiert/deklariert** (DE + EN) | ✓ 8. Juni 2026 |
+
+Anlass: Frage „warum sind T⁴ und T³+Zeit die optimalen Dimensionen?" und der Zusammenhang mit der Unverzichtbarkeit der SI-Umrechnungen für die c-/Zeit-Potenz.
+
+Befund/Präzisierung (Dok. 181 stellt D=4 als „folgt zwingend / kein Postulat" dar — das ist überstellt):
+- **3+1 ist empirische Eingabe** — keine Theorie leitet die Dimensionszahl her (SM, ART nehmen sie an; Stringtheorie scheitert am Landschaftsproblem).
+- **Vorwärts** sind nur: (i) Periodizität (Divergenzfreiheit), (ii) Torus-statt-Kugel (π₁≠0, stabile Windungen), (iii) **Minimal-Suffizienz** — 4 statt naiv 5, weil die Dualität T̃·m=1 einen Kreis Masse *und* Zeit tragen lässt, (iv) verlustfreie (bijektive) **Hilbert-Repräsentation** (Typ III, Dok. 270/206/230).
+- Die **bloße Zahl 4** ist *nicht* vorwärts erzwungen; die „4 aus ξ"-Begründung in Dok. 181 ist zirkulär bzw. basis-abhängig.
+
+**Zusammenhang mit den Einheiten (c-Potenz):** Die Vier-Kreis-Struktur *ist* die Exponenten-Buchhaltung der SI-Umrechnungen — c = Raum↔Zeit-Brücke (die drei T³-Kreise gegen die Zeitrichtung), ħ = Masse↔Zeit-Brücke (S¹_m, T̃·m=1). Darum sind die SI-Faktoren für die **c-Potenz** und die **Zeit-Potenz** unverzichtbar: c=ħ=1 kollabiert L,T,M zu einer Achse und vernichtet genau die Exponentenstruktur. T⁴ (Masse-Lesart) und T³+Zeit (Zeit-Lesart) sind dasselbe Objekt.
+
+Zusammenfassung der Dimensions-Linie: **T⁴/T³+Zeit ist die minimal-suffiziente, dual-ökonomische und Hilbert-treue Konfiguration gegeben 3+1** — die Stärke ist Ökonomie + Treue, nicht eine Eindeutigkeit der Zahl. Damit dieselbe Signatur wie bei P20 (Kosmo-Faktor) und P33 (ξ-Magnitude): **Struktur/Form vorwärts, Zahl Eingabe/abgelesen.**
+
+Statuskopf Dok. 190: P1–P34 / R1–R34 (P34/R34 präzisiert).
+
+---
+
+## 14. Update (8. Juni 2026) — Dok. 270 erweitert: „Warum genau vier Kreise?"
+
+### Dok. 270 — neue Synthese-Sektion
+| Status | **erweitert** (DE + EN) | ✓ 8. Juni 2026 |
+
+Neue Sektion „Warum genau vier Kreise? Minimal-Suffizienz, Einheiten und Veranschaulichung" (nach der Typ-III-Sektion), die die Dimensions-Diskussion in das Dokument einarbeitet — konsistent mit P34/R34:
+
+- **3+1 ist Eingabe, nicht Herleitung** (keine Theorie leitet die Dimensionszahl her).
+- **Minimal-Suffizienz: vier statt fünf** — die Dualität T̃·m=1 lässt einen Kreis Masse *und* Zeit tragen; damit kollabiert die naive 5 auf 4. Weniger → kein Massenspektrum/keine Zeit; mehr → überzählig.
+- **Die vier Kreise als Einheiten-Buchhaltung** — c = Raum↔Zeit-Brücke (die drei Raumkreise), ħ = Masse↔Zeit-Brücke (S¹_m, T̃·m=1). Darum sind die SI-Umrechnungen für die *Potenz von c* und die *Potenz der Zeit* unverzichtbar: c=ħ=1 kollabiert L,T,M und vernichtet die Exponentenstruktur. (G ist dagegen *hergeleitet* — rekonstruiert aus ℓ_P, c, ħ, wofür es nur die SI-Relationen braucht, Dok. 012/056 — und trägt keinen freien Faktor; der einzige freie Faktor sitzt in der kosmologischen Absolutskala R_H, Exponent 41/4, P20.)
+- **Dieselbe Struktur als Hilbert-Veranschaulichung** — zwei Lesarten einer Bijektion: generativ (T⁴ → ℋ, Dok. 206) und veranschaulichend (ℋ wird durch die 4D-Geometrie anschaulich). „Höherdimensional" ≠ „fundamentaler". Treue, weil generativ — kein Cartoon.
+- **Zusammenfassung:** T⁴/T³+Zeit = die minimal-suffiziente, dual-ökonomische, Hilbert-treue Konfiguration gegeben 3+1; Stärke = Ökonomie + Treue, nicht Eindeutigkeit der Zahl. Signatur wie P20/P33/P34: Struktur vorwärts, Zahl Eingabe.
+
+Sauber kompiliert (lualatex, Libertinus): DE 11 S., EN 11 S.; 0 fehlende Glyphen, 0 ungelöste Referenzen, 0 Überlauf; Brücken-Diagramm (\xrightarrow mit Underbraces), Boxen, ℋ korrekt.
+
+---
+
+## 15. Update (8. Juni 2026) — P33/P34 vorsichtiger formuliert
+
+### Dok. 190 — P33/R33 und P34/R34 nachgeschärft (DE + EN)
+| Status | **umformuliert** | ✓ 8. Juni 2026 |
+
+Auf Hinweis: die ursprünglichen Korpus-Argumente (4/3 als „herleitbar", 5⁴ aus der fraktalen Struktur, „4 aus ξ") sind zwar **eher zirkulär**, aber **nicht aussagelos** — sie *zeigen Verhältnisse*, und Verhältnisse sind nach FFGFT gerade das Intrinsische. Entsprechend abgeschwächt:
+
+- **P33/R33:** „er wird nur behauptet" → „die Begründungen … sind eher *zirkulär*". Neu: *Zirkulär heißt hier jedoch nicht aussagelos* — die Begründungen zeigen, dass der Wert in einer sinnvollen Verhältnis-/Harmoniestruktur sitzt (4/3 = Quarte; Primfaktorform 3·2²·5⁴ an Dimensionen geknüpft; Euler-Tonnetz). Schlussfolgerung unverändert korrekt: die **absolute Magnitude** bleibt eine *Eingabe* (intuitiv/empirisch), keine Vorwärts-Herleitung. Struktur-Parallele zu P20 jetzt: „Verhältnis fest, absolute Magnitude Eingabe".
+- **P34/R34:** die „4 aus ξ"-Begründung (Dok. 181) ist „eher zirkulär bzw. basis-abhängig — sie *zeigt* eine Verknüpfung Zähler↔Dimensionszahl, *erzwingt* die Zahl aber nicht".
+
+Inhaltliche Linie unverändert: **Struktur/Verhältnis vorwärts, Zahl/Magnitude Eingabe** (P20/P33/P34). Nur der Ton ist fairer: zirkuläre Begründungen haben Aussagekraft, weil sie Verhältnisse sichtbar machen.
+
+---
+
+## 16. Update (8. Juni 2026) — neuer Eintrag P35/R35 in Dok. 190
+
+### Dok. 190 — P35/R35 hinzugefügt (DE + EN)
+| Status | **neu** | ✓ 8. Juni 2026 |
+
+Neuer Korrektur-Eintrag **P35/R35: „Umrechnungsfaktor nicht in den ξ-Exponenten absorbieren"** (Tabellenzeile + Nachtrag + Status-Header auf P1–P35/R1–R35):
+
+- **Kernregel:** Jede Magnitude ist als ξ-Potenz schreibbar (M = ξ^(log M/log ξ)); „X = ξ^N" ist daher *für sich aussagelos*. Der Vorwärts-Inhalt liegt allein darin, ob der Exponent unabhängig aus ξ-Struktur folgt. Disziplin: absolute SI-Skala stets als ℓ_P · ξ^(struktureller Exponent) schreiben, ℓ_P explizit halten, nur den Rest-Exponenten prüfen.
+- **Befund:** exakt sauber ist nur L₀/ℓ_P = ξ¹. Planck-referenziert ist R_H = ℓ_P · ξ^(−63/4) mit **63/4 = 41/4 + 11/2** — das Korpus-41/4 ist an E₀ (Teilchenskala), *nicht* an Planck referenziert; die 11/2 ist die verschwiegene Planck→E₀-Lücke. Die „schönen Brüche" (41/4, 11/2, 63/4) sind Rundungen gemessener Exponenten; der „−1,9 %"-Rest beim 41/4 ist der Rundungsrest, nicht ξ.
+- Schärft P20/P33/P34. Betrifft die „aus ξ allein"-Aussagen in Dok. 182/163 (deren Entschärfung steht noch aus — vorerst nur in 190 vermerkt).
+
+Sauber kompiliert (lualatex): DE 31 S., EN 26 S.; 0 fehlende Glyphen, 0 ungelöste Referenzen, 0 Überlauf; P35-Zeile visuell bestätigt. ZIP bewusst nicht neu gebaut (Feinschliff-Phase).
+
+---
+
+## 17. Update (8. Juni 2026) — neuer Eintrag P36/R36 in Dok. 190
+
+### Dok. 190 — P36/R36 hinzugefügt (DE + EN)
+| Status | **neu** | ✓ 8. Juni 2026 |
+
+Neuer Korrektur-Eintrag **P36/R36: „R_H-Deutung — Hubble-Länge vs. Maximalskala vs. Universumsgröße"** (Tabellenzeile + Nachtrag + Status-Header auf P1–P36/R1–R36):
+
+- **R_H = c/H₀ ist die Hubble-Länge** — die lokale Rate H₀ als Distanz, *nicht* die Größe des Universums und *nicht* der beobachtbare Horizont (Teilchenhorizont ≈ 3 R_H).
+- Das tatsächliche Universum **übersteigt R_H** (mind. der beobachtbare Teil, real ≫, evtl. unendlich); nur eine *untere* Schranke ist messbar — Licht jenseits des Horizonts erreicht uns nie.
+- Dok. 182s Bezeichnung **„Universum-Maximalskala"** ist allenfalls als *obere Skala des kosmologischen Torus-Sektors* (FFGFT-interne Identifikation) haltbar, nicht als Ausdehnung des Universums.
+- Zu trennen: (a) Hubble-Länge c/H₀ (Rate→Länge), (b) FFGFT-Sektor-Maximalskala (Deutung), (c) reale Universumsgröße (größer/unbegrenzt).
+
+Sauber kompiliert (lualatex): DE 31 S., EN 26 S.; 0 fehlende Glyphen, 0 ungelöste Referenzen, 0 Überlauf; P36-Zeile visuell bestätigt. Betrifft die Deutung von R_H in Dok. 182 (deren Anpassung steht noch aus — vorerst nur in 190 vermerkt). ZIP weiterhin gehalten. Ergänzt: in P36/R36 explizit die SI-Formel R_H = c/H₀ (H₀ gemessen, c Umrechnung) — die ξ^(−63/4)-Schreibweise ist nur diese Zahl umgeschrieben, kein eigener Inhalt.
+ Zusätzlich ergänzt: R_H steht epistemisch auf einer Stufe mit ħ, c, G — nicht aus ξ erzeugt, sondern Eingabe/Umrechnung (H₀ gemessen, c Umrechnung wie ħ, G); der Unterschied ist allein die Skala (andere „Liga" — Quanten/Planck vs. kosmologisch).
+
+---
+
+## 18. Update (8. Juni 2026) — Quellen-Entrümpelung: kosmologische Skalen-Claims (Dok. 182, 026)
+
+Die Quellen werden mit P35/P36 (Dok. 190) in Sync gebracht. Prinzip: kosmologische **Skalen**-Behauptungen von „Herleitung/parameterfrei" auf „Umschreibung/Eingabe" zurückgestuft; die **Form**-Aussagen (z∝ξd, Peak-Verhältnisse, B=1/3, L₀=ξ·ℓ_P) bleiben unangetastet.
+
+### Dok. 182 (DE + EN)
+- „R_H/L₀ = 6,49·10⁶⁴ folgt vollständig aus ξ allein" → der Exponent 41/4 ist an den gemessenen H₀ kalibriert, kein eigenständiges ξ-Resultat; R_H/L₀ ist die gemessene kosmische Skala in ξ-Schreibweise.
+- „Hubble-Energie folgt direkt aus ξ" → „in ξ-Form geschrieben"; Zusatz: 41/4 nicht hergeleitet, sondern so gewählt, dass H₀ getroffen wird.
+- 2× „Vollständig aus ξ abgeleitet, ohne freie Parameter" → „in ξ-Schreibweise; 41/4 an H₀ kalibriert".
+- Abschnitts- und Tabellentitel entsprechend qualifiziert.
+- Unverändert (war schon korrekt): die ξ→L₀-Kette und die Abgrenzung „R_H = Obergrenze des kosmologischen Sektors, nicht des Universums".
+
+### Dok. 026 (DE + EN)
+- „parameterfreie Vorhersage" und Tabellen-„parameterfrei" → „an H₀ kalibriert". Der „41/4 bedarf Begründung"-Caveat stand bereits im Dokument; der interne Widerspruch ist damit beseitigt.
+
+### Geprüft, unverändert
+- Dok. 025, 016: keine kosmologischen Skalen-Über-Claims (z∝ξd ist Form; „kein H₀ im statischen Universum" ist ehrlich).
+- Dok. 163: L₀=ξ·ℓ_P ist korrekt (exakt/definitorisch). Enthält einen ħ-Claim („h emergiert parameterlos aus ξ"), der zur **Konstanten-Familie** (P33/P34) gehört, nicht zur kosmologischen Skala — offen für separate Entscheidung.
+
+Sauber kompiliert (lualatex): 182 DE/EN 10 S., 026 DE/EN 8 S.; 0 fehlende Glyphen, 0 ungelöste Referenzen. ZIP weiterhin gehalten.
+
+**Nachtrag zu 18. Update — Dok. 163 (DE + EN), Konstanten-Familie (light fix):**
+Klarstellung: „Konstante aus ξ" ist *nicht* dasselbe wie der kosmologische Fall. ħ ist über die Kette ξ→α→ħ mit ξ verknüpft (α ist ein echter, isolierter, vorhergesagter ξ-Bezug). Entscheidend: alle SI-Werte sind aus ξ und der **einen** Einheiten-Kalibrierung ableitbar — die SI-Konvention selbst fügt nichts hinzu (c, ħ, e sind keine zusätzlichen freien Eingaben). Das unterscheidet die Konstanten vom kosmologischen R_H, der *zusätzlich* das gefittete 41/4 (= gemessener H₀) braucht. Daher kein Streichen, nur: „$h$ emergiert parameterlos aus ξ" → „$h$ folgt über die Kette ξ→α→h aus ξ; alle SI-Werte aus ξ + der einen Kalibrierung ableitbar, eine zusätzliche Konvention braucht es nicht"." Die L₀=ξ·ℓ_P-Inhalte bleiben unverändert (korrekt). Kompiliert: 163 DE/EN 18 S., 0 Glyphen/0 Referenzen.
+
+---
+
+## 19. Update (8. Juni 2026) — Korpusweiter Sweep: kosmologische Skalen-Claims
+
+Selbständige Durchsuchung aller 395 Quelldateien nach kosmologischen Skalen-Über-Claims (H₀/R_H „parameterfrei / aus ξ / abgeleitet / Vorhersage"). Prinzip wie gehabt: **Skala → „an H₀ kalibriert / gemessene Eingabe"; Form/Verhältnisse/Konstanten/L₀ bleiben.**
+
+### Gefixt (DE+EN, sofern beide vorhanden)
+- **039** — „parameterfreie T0-Vorhersage H₀≈66,2" → „an H₀ kalibrierter T0-Wert".
+- **054** (EN) — „(parameter-free, see Doc. 026)" → „(calibrated to H₀…)". (DE war schon sauber: „(siehe Dok. 026)".)
+- **061** — Tabelle „parameterfrei" + Fußnote „parameterfreie T0-Vorhersage" → „an H₀ kalibriert".
+- **145** (EN) — „parameter-free prediction" → „value, calibrated to H₀" (Caveat „41/4 requires justification" stand schon).
+- **182** — Z. 160 boxed „R_H/L₀ = 6,49·10⁶⁴ (aus ξ allein)" → „(an H₀ kalibriert)". (Diese Zeile war im ersten Durchgang übersehen worden; Z. 238/242 waren bereits ehrlich.)
+- **201** — „H₀≈66,2 (vollständige Herleitung)" → „… an H₀ kalibriert, nicht aus ξ hergeleitet".
+- **263** — „R_H/L₀ ≈ 6,5·10⁶⁴, das selbst allein aus ξ folgt" → „… an H₀ kalibriert, nicht allein aus ξ".
+- **268** — bald-Zeile „FFGFT leitet H₀ aus ξ^(41/4) ab" → „… schreibt H₀ als ξ^(41/4)". (Der Rest von 268 ist ehrlich: Abschnitt „Offene Frage", konditional „wenn 41/4 aus Geometrie folgt — noch offen"; Peak-Form B=1/3 bleibt.)
+
+Alle gefixten Docs kompilieren clean (lualatex, 0 Glyphen/0 Referenzen). 054 hat keinen EN-Standalone-Wrapper (Edit dennoch im _ch gesetzt).
+
+### Bewusst NICHT geändert
+- **Legitim** (Ratio-/Form-Parameterfreiheit): 053, 054 (allg. „ξ ist Skalenverhältnis"), 190/268 Peak-Form (B=1/3, Gitterzahlen 3,18,42,78), z∝ξd, L₀=ξ·ℓ_P, 182 Z. 53 (parameterlos via die eine Kalibrierung).
+- **Schon ehrlich**: 206 (disclaimt explizit, nicht alle Kosmo-Größen aus ξ), 144 (gehedged), 182 Z. 238/242, 268 „Offene Frage / Retrodiktion".
+
+### Geflaggt — deine Entscheidung (sweeping „parameterfreie Physik bis Kosmologie")
+- **068** (Z. 842/940), **086** (Z. 2), **201** (Z. 712/870 — DVFT „parameterfreies kosmologisches Modell"), **269** (Z. 236/228). Diese sind interpretativ: „parameterfrei" trifft auf die QM-/Ratio-Teile zu, nicht auf die kosmologische Absolutskala. Nicht automatisch geändert.
+
+ZIP weiterhin gehalten.
+
+---
+
+## 23. Update (8. Juni 2026) — Neues Vergleichsdokument Dok. 271 (FFGFT ↔ HLV)
+
+Neues **Dok. 271** „FFGFT (T0) und Helix–Light–Vortex (HLV) im Vergleich" (DE+EN, 6/5 S.), im Stil der Vergleichsdokumente 245/269. Inhalt:
+- **Gemeinsame Achsen** (Übersichtstabelle): Substrat/Projektion, Zeitstruktur, Teilchen-Ontologie, generativer Kern, Rückgewinnungslimit, Falsifikationskanal.
+- **Echte Isomorphismen vs. Oberflächen-Analogien**: Projektion aus höherer Dimension (ℤ⁵-Cut-and-Project ↔ T⁴→T⁰), Triadik (ψ=t+iφ+jχ ↔ Z₃, det=1−ξ), topologische Teilchen (Vortices ↔ Windungszahlen), harmonische Wurzel (φ/Fibonacci ↔ Euler-Tonnetz), Methodik (Recovery + Nullmodell).
+- **Divergenzen/Komplementarität**: ξ-Samen mit Vorwärts-Vorhersagen (FFGFT) vs. reproduzierbares aperiodisches Substrat + Graph-Laplace-Testbed (HLV); aperiodisch vs. periodisch; Fundament-Reife; Bewusstseins-/Biogravimetrie-Schicht ausdrücklich ausgeklammert.
+- **Unterscheidende Vorhersage (spektrale Gabel)**: periodisches T⁴ → ganzzahlige Harmonik-Leiter (CMB-Peak-Verhältnisse aus D=4) vs. aperiodischer Quasikristall → hierarchisches Lückenspektrum; skaleninvarianter Verhältnistest + periodisches Null-Gitter als Diskriminator.
+- **Gemeinsame Leitplanke**: X=φ^N/ξ^N-Trivialität; Vorwärts-Gehalt nur in isolierten/vorhergesagten/präzisen dimensionslosen Verhältnissen.
+
+Quellen: Krüger, Zenodo 10.5281/zenodo.20596861 und 10.5281/zenodo.20275888. Beide Sprachen kompilieren clean (0 Glyphen/Refs/Overfull). Archiv neu gebaut.
+
+---
+
+## 24. Update (8. Juni 2026) — Neues Dok. 272 (FFGFT & HLV, eingeordnet nach Dot Theory)
+
+Neues **Dok. 272** (DE+EN, je 5 S.): Meta-Ebenen-Einordnung von FFGFT und HLV durch Stefaan Vossens **Dot Theory** — nicht paarweise (das ist Dok. 271), sondern *eine Ebene höher*, durch Dots kontextuell-operationales Raster:
+- Achsen: Informations-Zugänglichkeit/Fragegeometrie, operationale Invarianten, Rekonstruierbarkeit/Projektionsverlust, Beobachter-Einbettung, empirischer Diskriminator (Admissibilität).
+- Genutzt wird nur Dots **epistemische Routing-Funktion** (Architecture/Research-Programme, Mai 2026, mit IPI/Pascher), *nicht* dessen eigene physikalische ToE-/ψ-Schicht.
+- Kernergebnis (Kommensurabilität): FFGFT (beobachterunabhängig/periodisch/vorwärts-prädiktiv) und HLV (beobachtereingebettet/aperiodisch/substrat-distinktiv) überlappen nur auf der **spektral-/Rückgewinnungs-Achse** — dort ist Dok. 271 lizenziert; auf Fragegeometrie und Beobachter-Einbettung verschiedene Regime (direkter Vergleich = Kategorienfehler). Erklärt nachträglich, warum 271 seine Vorbehalte brauchte.
+- Rückbezug: Dok. 270 (Rekonstruierbarkeits-Typologie) und Dok. 190 P35 (ξ^N-Trivialität) als FFGFT-Bausteine in Dots Architektur.
+
+Quellen: Vossen, Dot Theory (dottheory.co.uk); Krüger, HLV (Zenodo). Beide Sprachen kompilieren clean (0 Glyphen/Refs/Overfull). Archiv neu gebaut.
+
+---
+
+## 25. Update (8. Juni 2026) — Dok. 272 neu gefasst (aktueller Dot-Governance-Stand)
+
+Dok. 272 (DE+EN, je 5 S.) **neu geschrieben** mit dem aktuellen Governance-Stand aus dem IPI-Direktaustausch mit Stefaan Vossen statt aus den publizierten Papieren:
+- Die vier Aufzeichnungsobjekte: **Lexicon** (Struktur/Terminologie), **OAP** (Admissibilität), **Matrix** (Beziehungen), **FAH** (Framework Admissibility History; O0→O1/O2-Renderings, permanent/anfechtbar).
+- Prinzipien: „declared provenance, not universal agreement" und „preservation of meaning-making, not allocation of meaning" (FAH = historisches Objekt, kein Wahrheitsanspruch).
+- Die FFGFT↔HLV-Einordnung ist jetzt explizit als **Matrix-Eintrag** verortet und wird als **sekundäres Rendering (O2)** eingebracht — erklärte Lesart Paschers, O0 bei Krüger (HLV) und Vossen (Dot).
+- Achsen den Lexicon-Begriffen zugeordnet; Admissibilität beider Frameworks im OAP geprüft; Dok. 270/190-P35 als Rückbezug in die Architektur.
+- Nur Dots Governance-/Routing-Schicht genutzt (nicht dessen ToE/ψ-Schicht). Stand Juni 2026, ausdrücklich vorläufig/ablösbar.
+
+Beide Sprachen kompilieren clean (0 Glyphen/Refs/Overfull). Archiv neu gebaut.
+
+---
+
+## 26. Update (9. Juni 2026) — Neues Dok. 274 (FFGFT im IPI-Feld, Zwei-Achsen-Landkarte)
+
+Neues **Dok. 274** (DE+EN, je 6 S.): konsolidierende Landkarte der im Information-Physics-Institute diskutierten Rahmenwerke entlang **zweier orthogonaler Achsen** statt eines weiteren Paarvergleichs.
+
+- **Achse 1 — Substrat-Geometrie (die Kristall-Achse):** FFGFT = periodisches Kristallgitter (T⁴) ↔ HLV = aperiodischer Quasikristall ↔ zufälliges Substrat (Kontrolle). Diese Triade ist genau die, die der Spektral-Testbed aus Dok. 271 messbar macht (⟨r⟩, Entartungsanteil, Lücken-Reichhaltigkeit; periodisch ⟨r⟩≈0/stark entartet, zufällig ⟨r⟩≈0,50/GOE, Quasikristall intermediär+lückenreich; |n|²-Leiter, in D=4 jede ganze Zahl per Lagrange).
+- **Achse 2 — Primitiv:** Geometrie (FFGFT) ↔ Information (Vopson; stromabwärts Leavitt) ↔ Algebra/Hilbertraum (UMF) ↔ Selektion/Constraint (RA/PMT, RSG, UC, UIFT) ↔ Kontinuums-topologisch (αLGQV) ↔ Meta/Governance (Dot Theory).
+- **Vopson aufgenommen** (fehlte in früheren Karten): informations-primitiv, Kontrast zu FFGFT ist Geometrie- vs. Informations-Seite derselben MEI-Relation (Dok. 251); Außen/Simulation in FFGFT strukturell ausgeschlossen. Leavitts Bit-Budget als stromabwärts von Vopson verortet.
+- **Gesamtkarte** (Tabelle): Rahmenwerk · Eigner · Kategorie · Relation zu FFGFT · Vergleichsdok. Verweise auf 244/245/246/251/260/267-268/269/270/271/272/190-P35.
+- **Erklärt** das wiederkehrende „Kategorieunterschied, nicht Widerspruch": FFGFT sitzt auf beiden Achsen am strukturell-geometrischen Pol und lässt die Slots (Selektor, Volumen→Rand-Naht, Constraint, Informations-Primitiv, Außen/Simulation) leer bzw. besetzt sie anders.
+- **Ehrliche Residuen deklariert:** die Karte ist eine erklärte Lesart des Autors (Dot-Theory-O2), kein Eigenvokabular der Rahmenwerke; O0 verbleibt bei den Urhebern; die Substrat-Triade ordnet sauber nur FFGFT/HLV/Kontrolle (UMF, αLGQV liegen daneben); datiert/vorläufig.
+
+Beide Sprachen kompilieren clean (0 Glyphen/Refs/Overfull, je 6 S.). Archiv neu gebaut.
+
+---
+
+## 27. Update (9. Juni 2026) — Skript-Ordner Dok271_274_Skripte/
+
+Neuer Ordner **Dok271_274_Skripte/** (analog Dok263_Skripte / Dok267_268_Skripte): der reproduzierbare FFGFT-Spektral-Diskriminator zur Substrat-Achse von Dok. 271/274.
+
+- `hlv_ffgft_spectral.py` (numpy-only, Seed 20260609): periodische Torus-Laplace-Spektren (D=2,3,4; D=4=T⁴), gradangepasstes Erdős–Rényi-Nullmodell, skaleninvariante Diskriminatoren (⟨r⟩-Statistik, Entartungsanteil, Lücken-Reichhaltigkeit), |n|²-Leiter (D=4 trifft jede ganze Zahl), Recovery-Limit-Fit. Eine Schnittstelle `analyze_spectrum(eigenwerte, name)` für extern gelieferte Spektren (HLV-Quasikristall) → apfel-mit-apfel.
+- `README.md` (DE+EN) und Beispiel-Output `ffgft_periodic_spectral_summary.csv`.
+- Damit löst der „beiliegendes Skript"-Verweis in Dok. 271/274 auf.
+
+---
+
+## 28. Update (9. Juni 2026) — Dok. 274 nachgeschärft, 086 erweitert, Skripte ins Archiv
+
+**Dok. 274 (DE+EN, je 7 S.) — zwei Ergänzungen nach Stefaan Vossens Einwand:**
+- **Achsen als deklarierte Projektion:** §1 stellt nun explizit klar, dass die Wahl der beiden Achsen (Substrat-Geometrie, Primitiv) selbst eine deklarierte Projektion ist — kein universelles Raster. Andere Achsen (Zugänglichkeit/Constraint, Beobachterabhängigkeit/Rückgewinnbarkeit) sind gleichermaßen zulässig; die Achsen werden als eigens ausgewiesenes Feld geführt, nicht als implizite Universalien. Entsprechender Residuum-Bullet ergänzt.
+- **Neue Sektion „Vom Matrix-Eintrag zum A*":** die FFGFT↔HLV-Achse als durchlaufener Governance-Workflow (Vossen/Guevara-Vokabular, attribuiert): deklarierte Projektion → PRC → PRM (= der spektrale Diskriminator) → Residuum (das ehrliche Teilnegativ der unabhängigen HLV-Reproduktion: ⟨r⟩ trennt noch nicht von Zufall) → Operational Accord (Marcel-Protokoll) → Cooperative Admissible Space (A*). Operativ statt bloß deklariert, weil die Messung scheitern kann. Als erklärte Anwendung fremden Vokabulars unter Korrekturvorbehalt der Urheber gekennzeichnet.
+
+**Dok. 086 (DE+EN, je 7 S.):** neue Sektion „Vergleichs- und Einordnungsserie (IPI-Feld)" — listet 245/246/251/260/269/271/272/274 als eigene Reihe (Vergleiche, keine Grundlagen). 086 bleibt sonst die kuratierte 8-Dokumente-Grundlagen-Erzählung.
+
+**Skripte ins Archiv (reproduzierbar mitversioniert):**
+- `Dok271_274_Skripte/`: + `hlv_glattice_reproduction.py` (unabhängige HLV-G-Gitter-Reproduktion aus Krügers ℤ⁶-Projektion + k-NN; identische analyze_spectrum-Pipeline; erstes Ergebnis = Teilnegativ auf ⟨r⟩, schwache Signatur in Lücken/Tiefsektor; d_s≈2,7 vs. berichtete 2,49). README erweitert.
+- `Dok023_230_Skripte/` (neu): `bell_xi_differential.py` (ξ-Skalen-Bell/CHSH; uniforme (1−ξ)-Dämpfung = entartet mit Visibilität, nicht beobachtbar; beobachtbar ist die Winkelabhängigkeit des Defizits, Differenz an θ≈π vs θ≈0; Signal ξ/D_f…ξ; N≈6×10⁷–6×10⁸ Koinzidenzen).
+
+Alle vier neu/geänderten PDFs kompilieren clean (0 Glyphen/Refs/Overfull). Archiv neu gebaut.
+
+---
+
+## 29. Update (9. Juni 2026) — Dok. 274: O0/O2-Verwendung explizit deklariert
+
+Nach Stefaan Vossens Verfeinerung: in §1 von Dok. 274 (DE+EN) eine deklarierte Zeile ergänzt, die die O0/O2-Verwendung festlegt — \emph{provenienzwahrend} (Marker für Deutungshoheit/Korrekturrecht), \emph{nicht} als vollständiger Import von Guevaras Rendering-Hierarchie (O0/O1/O2 als Repräsentationsebenen). Ob beide zusammenfallen, bleibt offen (vgl. Vossens FAH-Anliegen). Mit dem Orthogonalitäts-Hinweis: Rendering-Ebene und Provenienz koppeln nur im Fremdvergleich, sonst entkoppeln sie. Beide Sprachen kompilieren clean (je 7 S., 0 Glyphen/Refs/Overfull). Archiv neu gebaut.

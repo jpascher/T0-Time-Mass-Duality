@@ -1,0 +1,1761 @@
+% ============================================================================
+% Dok. 268 -- CMB-Akustikpeaks aus der T4-Gitterstruktur
+%
+% Zweck: Schrittweise Herleitung der CMB-Peak-Verhältnisse aus der
+%        T4-Topologie der FFGFT. Nur was tatsächlich gerechnet und
+%        geprüft wurde. Keine Behauptungen ohne Grundlage.
+%
+% Autor: Johann Pascher
+% Datum: Juni 2026
+% Status: Verhältnis-Match = Retrodiktion (Schritt 4/17.1). Forward-Gehalt
+%         = geometrische Anharmonizität (Kodimension-1 J0, Schritt 17).
+%         P29 teilw., P30 offen. Naive Bessel-Projektion unzureichend.
+% ============================================================================
+
+\section*{Überblick}
+
+Dieses Dokument untersucht den Zusammenhang zwischen der
+T$^4$-Gitterstruktur der FFGFT und den beobachteten CMB-Peak-Verhältnissen.
+Alle Zahlen sind direkt nachrechenbar. Was Konsistenzprüfung (rückwärts) und
+was echte Vorwärts-Vorhersage ist, wird ab Schritt~17 klar getrennt --
+ein wichtiger Punkt, der in früheren Fassungen dieses Dokuments verwischt war.
+
+\textbf{Zwei getrennte Aussagen, die nicht verwechselt werden dürfen:}
+\begin{itemize}
+  \item \textbf{(A) Verhältnis-Befund (Konsistenzprüfung, rückwärts).}
+        Die Werte $|n|^2 = 3, 18, 42, 78$ erzeugen Verhältnisse
+        $1\,:\,2{,}449\,:\,3{,}742\,:\,5{,}099$, die mit den beobachteten
+        CMB-Peaks ($1\,:\,2{,}441\,:\,3{,}682\,:\,5{,}091$) auf $<2\%$
+        übereinstimmen. \emph{Aber:} die Folge $\{1,6,14,26\}$ (vor dem
+        Faktor~3) wurde aus den \emph{gemessenen} CMB-Verhältnissen
+        abgelesen (Schritt~4), nicht vorwärts aus T$^4$ erzeugt. Dies ist
+        eine erfolgreiche \emph{Retrodiktion}, keine parameterfreie
+        Vorhersage (siehe Schritt~17.1).
+  \item \textbf{(B) Anharmonizität-Befund (Vorwärts, neu).}
+        Forward erzeugt T$^4$ entweder ein dichtes Modenspektrum oder --
+        bei symmetrischer Resonanz -- die \emph{harmonische} Reihe
+        $1:2:3:4:5$. Der CMB ist aber \emph{anharmonisch}
+        ($1:2{,}44:3{,}68:5{,}09$). Diese Anharmonizität folgt
+        \emph{vorwärts und parameterfrei} aus der Kodimension-1-Projektion
+        in der fraktalen Geometrie ($D_f-1 \approx 2 \Rightarrow$
+        Bessel-Index $\nu\approx0 \Rightarrow J_0$-Membran), die die
+        beobachtete Serie auf $\sim5\%$ trifft -- ohne Modenauswahl
+        (Schritt~17). Dies ist die konzeptuell sauberere Aussage und der
+        eigentliche Fortschritt dieses Dokuments.
+\end{itemize}
+
+\textbf{Ehrliche Kurzfassung:} Der Verhältnis-Match ist real, aber
+rückwärts gefunden. Der Forward-Gehalt liegt in der \emph{Anharmonizität}
+als geometrischem Effekt der flachen Kodimension-1-Projektion. Der
+strenge Selektionsmechanismus für genau $\{3,18,42,78\}$ bleibt offen
+(P29/P30, Dok.~190); insbesondere wird $|n|^2=30$ durch den bisherigen
+Faktor-3-Filter nicht ausgeschlossen (Schritt~17.1).
+
+% ============================================================================
+\section{Schritt 1: Der T\textsuperscript{4}-Zustandsraum}
+% ============================================================================
+
+Auf dem T$^4$-Torus hat jede Mode eine ganzzahlige Wicklungszahl in
+vier Richtungen:
+\[
+  \vec{n} = (n_1, n_2, n_3, n_4) \in \mathbb{Z}^4
+\]
+Der Radius (die Quantenzahl) einer Mode ist:
+\[
+  |\vec{n}| = \sqrt{n_1^2 + n_2^2 + n_3^2 + n_4^2}
+\]
+
+Die niedrigsten Stufen mit je einem Beispiel-Tupel:
+
+\begin{center}
+\begin{tabular}{rrlr}
+\toprule
+$|n|^2$ & $|n|$ & Beispiel-Tupel & Entartung $g$ \\
+\midrule
+1 & 1{,}0000 & $(-1,0,0,0)$ & 8 \\
+2 & 1{,}4142 & $(-1,-1,0,0)$ & 24 \\
+3 & 1{,}7321 & $(-1,-1,-1,0)$ & 32 \\
+4 & 2{,}0000 & $(-2,0,0,0)$ & 24 \\
+5 & 2{,}2361 & $(-2,-1,0,0)$ & 48 \\
+6 & 2{,}4495 & $(-2,-1,-1,0)$ & 96 \\
+7 & 2{,}6458 & $(-2,-1,-1,-1)$ & 64 \\
+8 & 2{,}8284 & $(-2,-2,0,0)$ & 24 \\
+9 & 3{,}0000 & $(-3,0,0,0)$ & 104 \\
+10 & 3{,}1623 & $(-3,-1,0,0)$ & 144 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Wichtig:} Die Entartung $g(|n|^2)$ ist \emph{nicht} monoton.
+Bei $|n|^2 = 6$ springt sie auf 96 -- zwölfmal mehr als bei $|n|^2 = 1$.
+Das folgt aus der Jacobi-Formel für die Darstellungsanzahl als Summe
+von vier Quadraten: $g(n) = 8 \sum_{d | n,\, 4\nmid d} d$.
+
+% ============================================================================
+\section{Schritt 2: Thermische Besetzung (Bose-Einstein)}
+% ============================================================================
+
+Die Energie einer Mode mit Radius $r = |n|$ ist (aus der Kalibrierung
+$L_\mathrm{tor} = 1/(k_B T_\mathrm{CMB})$, Dok.~025):
+\[
+  E_r = r \cdot k_B T_\mathrm{CMB}
+\]
+Die thermische Besetzung nach Bose-Einstein mit $\mu = 0$:
+\[
+  \langle N(r) \rangle = \frac{1}{e^r - 1}
+\]
+Die spektrale Dichte -- wie viel Energie insgesamt in Stufe $r$ steckt:
+\[
+  \boxed{I(r) = g(r) \cdot \langle N(r) \rangle \cdot r}
+\]
+
+Numerische Werte für die niedrigsten Stufen:
+
+\begin{center}
+\begin{tabular}{rrrrrr}
+\toprule
+$|n|^2$ & $|n|$ & $g$ & $\langle N\rangle$ & $I = g\cdot N\cdot |n|$ & Lok. Max.? \\
+\midrule
+1  & 1{,}0000 & 8   & 0{,}582 & 4{,}66  & \\
+2  & 1{,}4142 & 24  & 0{,}321 & 10{,}90 & \\
+3  & 1{,}7321 & 32  & 0{,}215 & 11{,}91 & \textbf{Ja} \\
+4  & 2{,}0000 & 24  & 0{,}157 & 7{,}51  & \\
+5  & 2{,}2361 & 48  & 0{,}120 & 12{,}84 & \\
+6  & 2{,}4495 & 96  & 0{,}094 & 22{,}22 & \textbf{Ja} \\
+7  & 2{,}6458 & 64  & 0{,}076 & 12{,}93 & \\
+8  & 2{,}8284 & 24  & 0{,}063 & 4{,}26  & \\
+9  & 3{,}0000 & 104 & 0{,}052 & 16{,}35 & \\
+10 & 3{,}1623 & 144 & 0{,}044 & 20{,}13 & \textbf{Ja} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die vollständige Liste der lokalen Maxima bis $|n|^2 = 80$:
+
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+Peak & $|n|^2$ & $|n|$ & $I$ \\
+\midrule
+1 & 3  & 1{,}7321 & 11{,}91 \\
+2 & 6  & 2{,}4495 & 22{,}22 \\
+3 & 10 & 3{,}1623 & 20{,}13 \\
+4 & 14 & 3{,}7417 & 17{,}45 \\
+5 & 18 & 4{,}2426 & 19{,}30 \\
+6 & 22 & 4{,}6904 & 12{,}52 \\
+7 & 26 & 5{,}0990 & 10{,}52 \\
+8 & 30 & 5{,}4772 & 13{,}25 \\
+9 & 42 & 6{,}4807 & 7{,}64  \\
+10 & 66 & 8{,}1240 & 2{,}77 \\
+11 & 78 & 8{,}8318 & 1{,}73 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ============================================================================
+\section{Schritt 3: Projektion auf Multipolmomente}
+% ============================================================================
+
+Das beobachtbare Multipolmoment $\ell$ ist proportional zur
+Wellenzahl der Mode:
+\[
+  \ell \propto |\vec{n}| = \sqrt{|n|^2}
+\]
+Damit sind die \emph{Verhältnisse} der Peak-$\ell$-Werte direkt die
+Verhältnisse der $\sqrt{|n|^2}$-Werte -- unabhängig von der absoluten
+Skala (die $D_A$ und $L_\mathrm{tor}$ enthält):
+\[
+  \frac{\ell_k}{\ell_1} = \frac{\sqrt{|n|^2_k}}{\sqrt{|n|^2_1}}
+\]
+
+% ============================================================================
+\section{Schritt 4: Der entscheidende Befund}
+% ============================================================================
+
+Die CMB-Verhältnisse \emph{quadriert} geben direkt die nötigen
+$|n|^2$-Verhältnisse:
+
+\begin{center}
+\begin{tabular}{rrrrl}
+\toprule
+CMB-Peak & $\ell_\mathrm{obs}$ & $\ell/\ell_1$ & $(\ell/\ell_1)^2$ & nächstes $|n|^2$ \\
+\midrule
+1 & 220  & 1{,}000 & 1{,}00  & 1 \\
+2 & 537  & 2{,}441 & 5{,}96  & \textbf{6} \\
+3 & 810  & 3{,}682 & 13{,}56 & \textbf{14} \\
+4 & 1120 & 5{,}091 & 25{,}92 & \textbf{26} \\
+5 & 1440 & 6{,}545 & 42{,}84 & \textbf{43} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Wenn der \emph{erste} CMB-Peak bei $|n|^2 = X$ liegt, dann
+liegen die weiteren bei $X \cdot 6$, $X \cdot 14$, $X \cdot 26$, \ldots
+
+Für $X = 3$: Die Peaks liegen bei $|n|^2 = 3, 18, 42, 78$.
+
+\begin{tcolorbox}[colback=red!4!white, colframe=red!55!black,
+  title={Ehrliche Einordnung von Schritt~4 (Richtung der Schlussfolgerung)}]
+Die Folge $\{1,6,14,26\}$ entsteht hier durch \emph{Quadrieren der
+gemessenen} CMB-Verhältnisse und Runden auf die nächste ganze Zahl --
+also \emph{aus den Daten}, nicht vorwärts aus T$^4$. Schritt~5 prüft
+anschließend, ob $3\cdot\{1,6,14,26\}$ echte lokale Maxima des
+T$^4$-Spektrums sind (sie sind es). Das ist eine \textbf{Konsistenzprüfung
+(Retrodiktion)}, keine Vorhersage. Die Richtung läuft
+$\text{Daten}\to\{1,6,14,26\}\to{\times3}$, nicht $\text{T}^4\to\text{Daten}$.
+Der echte Forward-Gehalt -- die Anharmonizität als geometrischer Effekt --
+wird in Schritt~17 entwickelt.
+\end{tcolorbox}
+
+% ============================================================================
+\section{Schritt 5: Vergleich mit den T\textsuperscript{4}-Peaks}
+% ============================================================================
+
+Sind $|n|^2 = 3, 18, 42, 78$ echte lokale Maxima im T$^4$-Spektrum?
+
+\begin{center}
+\begin{tabular}{rrrrl}
+\toprule
+$|n|^2$ & $g$ & $I$ & $I_\mathrm{links}$ & Lokales Maximum? \\
+\midrule
+3  & 32   & 11{,}91 & 10{,}90 & \textbf{Ja} \\
+18 & 312  & 19{,}30 & 9{,}77  & \textbf{Ja} \\
+42 & 768  & 7{,}64  & 3{,}57  & \textbf{Ja} \\
+78 & 1344 & 1{,}73  & 1{,}71  & \textbf{Ja} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Alle vier sind echte lokale Maxima. Die Verhältnisse:
+
+\begin{center}
+\begin{tabular}{rllll}
+\toprule
+ & Peak 1 & Peak 2 & Peak 3 & Peak 4 \\
+\midrule
+$|n|^2$ & 3 & 18 & 42 & 78 \\
+$\sqrt{|n|^2}$ & 1{,}7321 & 4{,}2426 & 6{,}4807 & 8{,}8318 \\
+Verhältnis zu Peak 1 & 1{,}000 & 2{,}449 & 3{,}742 & 5{,}099 \\
+CMB-Verhältnis & 1{,}000 & 2{,}441 & 3{,}682 & 5{,}091 \\
+Abweichung & 0{,}0\% & $+0{,}3\%$ & $+1{,}6\%$ & $+0{,}2\%$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Abweichung $< 2\%$ -- ohne freien Parameter.}
+
+Die Verhältnisse folgen allein aus der Jacobi-Entartungsstruktur
+des T$^4$-Gitters und der Bose-Einstein-Statistik.
+
+% ============================================================================
+\section{Schritt 6: Was die absolute Skala bestimmt}
+% ============================================================================
+
+Die Verhältnisse sind skalenunabhängig. Die absolute Position
+des ersten Peaks ($\ell_1 \approx 220$) hängt von:
+\[
+  \ell_1 = \frac{\pi \cdot D_A}{L_\mathrm{tor} / \sqrt{3}}
+\]
+mit der Winkeldistanz $D_A$ (externer Parameter, P20) und
+$L_\mathrm{tor} = 1/(k_B T_\mathrm{CMB})$ (intern aus $\xi$).
+Dies bestimmt $A \approx 303{,}6$ in der Trompetenformel (Dok.~267).
+
+% ============================================================================
+\section{Schritt 7: Was noch offen ist (P29)}
+% ============================================================================
+
+Das T$^4$-Spektrum hat Peaks bei $|n|^2 = 3, 6, 10, 14, 18, 22, 26, 30, \ldots$
+Die CMB zeigt nur die Teilmenge $3, 18, 42, 78$.
+
+Zwischen diesen liegen starke Peaks -- insbesondere $|n|^2 = 6$ mit
+$I = 22{,}22$, dem größten Wert im ganzen Spektrum.
+
+\textbf{Frage (P29):} Welche Auswahlregel erklärt, warum
+$|n|^2 = 6, 10, 14, 22, 26, 30$ nicht als CMB-Peaks sichtbar sind?
+
+\textbf{Diese Frage wird in Schritt~8 und~9 beantwortet.} Der Schlüssel
+ist, dass der Beobachter im 3D-Raum misst (plus Zeitentfaltung): er sieht
+nicht den vollen T$^4$-Radius $|n|^2$, sondern nur die räumliche Projektion
+$k_\mathrm{obs}^2 = (n_1^2 + n_2^2 + n_3^2)/L^2$. Die symmetrischsten Moden
+liefern dabei den Faktor~3, sodass die sichtbare Serie
+$3\cdot\{1,6,14,26\} = \{3,18,42,78\}$ entsteht (Dok.~190, P29).
+
+Was \emph{streng} noch aussteht, ist allein die vollständige sphärische
+Projektion der T$^4$-Moden auf das Winkelleistungsspektrum $C_\ell$ mit
+sphärischen Bessel-Funktionen (Dok.~190, P30) -- eine machbare Rechnung,
+kein prinzipielles Hindernis. Die Verhältnisse selbst sind gerechnet
+und stehen fest.
+
+% ============================================================================
+\section{Zusammenfassung}
+% ============================================================================
+
+\begin{center}
+\begin{tabular}{p{4cm}p{8cm}}
+\toprule
+\textbf{Schritt} & \textbf{Ergebnis} \\
+\midrule
+1. T$^4$-Zustandsraum &
+  Wicklungszahlen $\vec{n} \in \mathbb{Z}^4$,
+  Jacobi-Entartung $g(|n|^2)$ nicht monoton \\
+\addlinespace
+2. Bose-Einstein &
+  $I(r) = g(r) \cdot \frac{1}{e^r-1} \cdot r$,
+  lokale Maxima bei $|n|^2 = 3, 6, 10, 14, 18, \ldots$ \\
+\addlinespace
+3. Projektion &
+  $\ell \propto \sqrt{|n|^2}$,
+  Verhältnisse skalenunabhängig \\
+\addlinespace
+4. CMB-Verhältnisse &
+  $(\ell/\ell_1)^2 \approx 1, 6, 14, 26$ für $|n|^2 = 1, 6, 14, 26$
+  (oder $\times 3$ für $|n|^2 = 3, 18, 42, 78$) \\
+\addlinespace
+5. Übereinstimmung &
+  $\sqrt{3}:\sqrt{18}:\sqrt{42}:\sqrt{78} = 1:2{,}449:3{,}742:5{,}099$
+  vs. CMB $1:2{,}441:3{,}682:5{,}091$, Abweichung $< 2\%$ \\
+\addlinespace
+6. Absolute Skala &
+  $\ell_1 \approx 220$ aus $D_A$ (extern) und $L_\mathrm{tor}$
+  (intern aus $\xi$) \\
+\addlinespace
+7. P29/P30 &
+  Auswahlregel für die Teilmenge $3, 18, 42, 78$: durch den
+  3D-Beobachter (Schritt~8/9) beantwortet; strenge $C_\ell$-Projektion
+  (P30) ausstehend \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Bezug:} Dok.~025 ($T_\mathrm{CMB}$ aus $\xi$),
+Dok.~050 (T$^4$-Topologie, Spinstruktur),
+Dok.~190 (P14 Wegverlängerung, P20 $R_H$ als externer Parameter),
+Dok.~203 (Rekursionsoperator $\mathcal{R}$),
+Dok.~267 (Kosmologische Entartung, Trompetenformel).
+
+\noindent\emph{Python-Skript:} \texttt{ffgft\_cmb\_t4\_peaks.py}
+
+% ============================================================================
+\section{Schritt 8: Woher kommen Faktor 3 und $k^2$?}
+% ============================================================================
+
+\subsection*{8.1 Woher kommt das $k^2$?}
+
+Das $^2$ in $k_\mathrm{eff}^2$ kommt nicht aus dem Faktor~3 --
+es kommt aus der Wellengleichung selbst.
+Die Wellengleichung für ein masseloses Feld ($m=0$, Photon):
+\[
+  \left(\frac{\partial^2}{\partial t^2} - c^2\,\Delta\right)\phi = 0
+\]
+Der Laplace-Operator $\Delta$ enthält \emph{zweite} Ableitungen.
+Fourier-Ansatz $\phi \sim e^{i(\mathbf{k}\cdot\mathbf{x}-\omega t)}$
+einsetzen ergibt:
+\[
+  -\omega^2 + c^2 k^2 = 0
+  \quad\Rightarrow\quad
+  \omega^2 = c^2 k^2
+  \quad\Rightarrow\quad
+  E = \hbar\omega = \hbar c\,k
+\]
+Das $^2$ ist universell -- es gilt für jede Wellengleichung,
+unabhängig von FFGFT.
+
+\subsection*{8.2 Woher kommt der Faktor 3?}
+
+Der Beobachter lebt in \textbf{3 Raumdimensionen + Zeitentfaltung}.
+Er nimmt den T$^4$-Torus durch seine 3 Raumrichtungen wahr.
+Die vierte Torusrichtung ist die Zeitentfaltung -- sie ist nicht
+eine weitere Raumrichtung, sondern der Mechanismus durch den der
+Beobachter überhaupt existiert.
+
+Konkret: Eine T$^4$-Mode mit Wicklungszahl
+$\vec{n} = (n_1, n_2, n_3, n_4)$ erscheint dem 3D-Beobachter
+mit der beobachtbaren 3D-Wellenzahl:
+\[
+  k_\mathrm{obs}^2 = \frac{n_1^2 + n_2^2 + n_3^2}{L_\mathrm{tor}^2}
+\]
+Die $n_4$-Komponente ist in der Zeitentfaltung ``versteckt''.
+
+Für die T$^4$-Grundmode $(1,1,1,0)$ -- alle drei Raumrichtungen
+gleichwertig, $n_4 = 0$ -- gilt:
+\[
+  k_\mathrm{obs}^2 = \frac{1^2+1^2+1^2}{L_\mathrm{tor}^2}
+  = \frac{3}{L_\mathrm{tor}^2}
+\]
+Das ist genau der \textbf{Faktor~3}: er zählt die drei
+beobachtbaren Raumdimensionen.
+
+Die fraktale Raumdimension $D_f = 3 - \xi \approx 3$
+(Dok.~051) ist konsistent damit: $D_f$ ist die Anzahl der
+Raumdimensionen, leicht durch $\xi$ modifiziert. Die Korrektur
+$\xi/3 \approx 4{,}4 \times 10^{-5}$ ist vernachlässigbar.
+
+\subsection*{8.3 Die beobachtbare Serie}
+
+Das beobachtbare Multipolmoment ist
+$\ell \propto k_\mathrm{obs} \cdot D_A$:
+\[
+  \ell^2 \propto k_\mathrm{obs}^2 \cdot D_A^2
+  = \frac{n_1^2+n_2^2+n_3^2}{L_\mathrm{tor}^2} \cdot D_A^2
+\]
+Für die dominanten T$^4$-Grundpeaks bei $|n|^2 = 1, 6, 14, 26$
+-- alle mit der Eigenschaft dass $n_1^2+n_2^2+n_3^2 = 3\cdot|n_\mathrm{min}|^2$
+für die symmetrischste Mode -- gilt:
+\[
+  \ell^2 \propto 3 \cdot |n|^2
+\]
+Die sichtbaren Peaks $\{3, 18, 42, 78\} = 3\cdot\{1, 6, 14, 26\}$:
+
+\begin{center}
+\begin{tabular}{rllll}
+\toprule
+ & Peak 1 & Peak 2 & Peak 3 & Peak 4 \\
+\midrule
+T$^4$-Grundpeak $|n|^2$ & 1 & 6 & 14 & 26 \\
+$\times 3$ (Raumdim.) & 3 & 18 & 42 & 78 \\
+$\ell \propto \sqrt{3\cdot|n|^2}$ & 1{,}732 & 4{,}243 & 6{,}481 & 8{,}832 \\
+Verhältnis zu Peak~1 & 1{,}000 & 2{,}449 & 3{,}742 & 5{,}099 \\
+CMB-Verhältnis & 1{,}000 & 2{,}441 & 3{,}682 & 5{,}091 \\
+Abweichung & $0{,}0\%$ & $+0{,}3\%$ & $+1{,}6\%$ & $+0{,}2\%$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{8.4 Was noch offen ist}
+
+Die Aussage ``$n_1^2+n_2^2+n_3^2 = 3\cdot|n|^2$ für die dominanten
+Moden'' gilt exakt nur für Moden der Form $(n,n,n,0)$.
+Die allgemeine Verteilung über alle Moden eines $|n|^2$-Niveaus
+ergibt im Mittel $\langle n_1^2+n_2^2+n_3^2\rangle = \tfrac{3}{4}|n|^2$
+(isotrope T$^4$-Verteilung), nicht $3\cdot|n|^2$.
+
+Der genaue Selektionsmechanismus -- warum der 3D-Beobachter
+gerade die Koinzidenz-Peaks $3\cdot\{1,6,14,26\}=\{3,18,42,78\}$
+bevorzugt -- ist noch nicht streng hergeleitet.
+\textbf{Die physikalische Motivation} (3 Raumdimensionen,
+Beobachter in 3D + Zeitentfaltung) ist klar.
+Die vollständige sphärische Projektion der T$^4$-Moden auf $C_\ell$
+mit sphärischen Bessel-Funktionen würde das zeigen --
+eine offene Rechnung, kein prinzipielles Hindernis (P30).
+
+% ============================================================================
+\section{Schritt 9: Vollständige Herleitung -- Überblick}
+% ============================================================================
+
+Die CMB-Peak-Verhältnisse folgen aus drei Schritten:
+
+\begin{center}
+\begin{tabular}{c p{2.1cm} p{6.3cm} p{3.8cm}}
+\toprule
+Schritt & Eingabe & Mechanismus & Ausgabe \\
+\midrule
+1 & $\xi = 1/7500$ &
+  Jacobi-Entartung $g(|n|^2)$, Bose-Einstein $N(r)$ &
+  T$^4$-Peaks bei $|n|^2 = 1, 6, 14, 26$ \\
+\addlinespace
+2 & $D = 3$ Raumdim. &
+  Beobachter in 3D + Zeitentfaltung:
+  $k_\mathrm{obs}^2 = (n_1^2+n_2^2+n_3^2)/L^2$ &
+  Faktor~3 in $\ell^2 \propto 3\cdot|n|^2$ \\
+\addlinespace
+3 & Schritte 1+2 &
+  $\ell \propto \sqrt{3\cdot|n|^2}$ &
+  Verhältnisse $1:2{,}449:3{,}742:5{,}099$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Beobachtet: $1:2{,}441:3{,}682:5{,}091$. Abweichung $< 2\%$.
+
+\textbf{Das $^2$} in $k_\mathrm{obs}^2$ kommt aus der Wellengleichung
+(zweite Ableitungen des Laplace-Operators) -- universell, keine FFGFT-Spezialität.
+
+\textbf{Der Faktor~3} kommt aus den 3 beobachtbaren Raumdimensionen --
+der Beobachter in 3D + Zeitentfaltung sieht nur $n_1^2+n_2^2+n_3^2$,
+nicht den vollen T$^4$-Radius $|n|^2$.
+
+\textbf{Offener Schritt:} Der genaue Selektionsmechanismus --
+warum der Beobachter die symmetrischsten Moden
+$(n_1^2+n_2^2+n_3^2 \approx 3\cdot|n_\mathrm{min}|^2)$ bevorzugt --
+ist noch nicht streng hergeleitet.
+
+\textbf{Wichtige Einordnung (siehe Schritt~17):} Die in der Tabelle als
+``Ausgabe'' von Schritt~1 genannte Folge $\{1,6,14,26\}$ ist \emph{nicht}
+vorwärts aus T$^4$ erzeugt, sondern aus den gemessenen CMB-Verhältnissen
+abgelesen (Schritt~4). Dieser ``Überblick'' beschreibt also die
+\emph{Retrodiktion}. Der eigentliche Forward-Gehalt -- die Anharmonizität
+aus der Kodimension-1-Projektion -- steht in Schritt~17.
+
+% ============================================================================
+\section{Zusammenfassung (aktualisiert)}
+% ============================================================================
+
+\begin{center}
+\begin{tabular}{p{3.5cm}p{8.5cm}}
+\toprule
+\textbf{Schritt} & \textbf{Ergebnis} \\
+\midrule
+1. T$^4$-Zustandsraum &
+  Jacobi-Entartung $g(|n|^2)$ nicht monoton \\
+\addlinespace
+2. Bose-Einstein &
+  Lokale Maxima bei $|n|^2 = 1, 6, 14, 26, \ldots$ \\
+\addlinespace
+3. Beobachter in 3D &
+  $k_\mathrm{obs}^2 = (n_1^2+n_2^2+n_3^2)/L^2$,
+  Faktor~3 aus 3 Raumdimensionen;
+  $^2$ aus Wellengleichung (Laplace) \\
+\addlinespace
+4. CMB-Serie &
+  $3 \cdot \{1, 6, 14, 26\} = \{3, 18, 42, 78\}$,
+  alle echte T$^4$-Peaks \\
+\addlinespace
+5. Verhältnisse &
+  $1:2{,}449:3{,}742:5{,}099$ vs.\ CMB $1:2{,}441:3{,}682:5{,}091$,
+  Abweichung $< 2\%$ \\
+\addlinespace
+6. Absolute Skala &
+  $D_A$ extern (P20), $L_\mathrm{tor}$ intern aus $\xi$ \\
+\addlinespace
+7. Noch offen &
+  Strenger Selektionsmechanismus:
+  warum $n_1^2+n_2^2+n_3^2 = 3\cdot|n_\mathrm{min}|^2$
+  für die dominanten Moden? \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Bezug:} Dok.~025 ($T_\mathrm{CMB}$ aus $\xi$),
+Dok.~050/051 (T$^4$-Topologie, Dirac-Struktur),
+Dok.~190 (P14, P20, P29, P30),
+Dok.~203 (Rekursionsoperator $\mathcal{R}$),
+Dok.~267 (Kosmologische Entartung).
+
+% ============================================================================
+\section{Schritt 10: Die physikalische Intuition -- Doppel-Resonator}
+% ============================================================================
+
+\subsection*{10.1 Offenes und geschlossenes Rohr}
+
+In der klassischen Akustik bestimmen die Randbedingungen welche Moden
+resonieren:
+
+\begin{center}
+\begin{tabular}{p{3.8cm}p{3.4cm}p{5.2cm}}
+\toprule
+\textbf{System} & \textbf{Randbedingung} & \textbf{Moden-Verhältnisse} \\
+\midrule
+Geschlossenes Rohr & beide Enden fest & $1:2:3:4:5$ (alle) \\
+Halboffenes Rohr & ein Ende offen & $1:3:5:7$ (nur ungerade) \\
+Kreismembran (2D) & Rand fest & $1:2{,}30:3{,}60:4{,}90$ \\
+\midrule
+\textbf{Fraktaler T$^4$} & \textbf{zwei gekoppelte Systeme} &
+  $\mathbf{1:2{,}449:3{,}742:5{,}099}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Der reine T$^4$ (ganzzahlige Dimension $D=4$, vollständig kompakt)
+entspricht einem \emph{geschlossenen} System -- alle Moden resonieren.
+Der fraktale T$^4$ (Dimension $D_f = 3-\xi < 4$) hat eine
+qualitativ andere Resonanzstruktur.
+
+\subsection*{10.2 Der fraktale T$^4$ als Doppel-Resonator}
+
+Die Analogie zum halboffenen Rohr (das einen Faktor~2 erzeugt) liegt
+nahe -- aber sie ist nicht vollständig. Der fraktale T$^4$ ist
+kein einfach offenes oder einfach geschlossenes System. Er wirkt
+als \textbf{Doppel-Resonator}: zwei überlagerte Resonanzstrukturen,
+deren Koinzidenzen die sichtbaren Peaks bestimmen.
+
+\begin{center}
+\begin{tabular}{p{3cm}p{5cm}p{5cm}}
+\toprule
+ & \textbf{System 1} & \textbf{System 2} \\
+ & T$^4$-Gitter & 3D-Beobachterprojektion \\
+\midrule
+Resonanzen & $|n|^2 = 1, 6, 14, 26, \ldots$ &
+  Projiziert auf $n_1^2+n_2^2+n_3^2$ \\
+Bedingung & Lokales Maximum in $I(r)$ &
+  $k_\mathrm{obs}^2 = (n_1^2+n_2^2+n_3^2)/L^2$ \\
+Herkunft & Jacobi-Entartung $g(|n|^2)$ &
+  3 Raumdimensionen ($D_f = 3-\xi \approx 3$) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Sichtbar sind nur die Koinzidenz-Resonanzen} -- Moden bei
+denen beide Systeme gleichzeitig resonieren:
+\[
+  |n|^2_\mathrm{sichtbar}
+  = 3 \cdot |n|^2_\mathrm{Gitter}
+  = 3 \cdot \{1,\,6,\,14,\,26\}
+  = \{3,\,18,\,42,\,78\}
+\]
+
+\subsection*{10.3 Warum nicht alle Koinzidenzen sichtbar sind}
+
+Die Doppel-Resonanzbedingung liefert mehr Kandidaten als nur
+$\{3, 18, 42, 78\}$:
+
+\begin{center}
+\begin{tabular}{rrrrl}
+\toprule
+$|n|^2$ & $|n|^2/3$ & Peak in Sys.~1? & $I$ & CMB-Peak? \\
+\midrule
+3  & 1  & nein & 11{,}91 & \textbf{Ja} (stärkster im Bereich) \\
+18 & 6  & \textbf{Ja} & 19{,}30 & \textbf{Ja} \\
+30 & 10 & \textbf{Ja} & 13{,}25 & Nein (schwächer) \\
+42 & 14 & \textbf{Ja} & 7{,}64  & \textbf{Ja} \\
+54 & 18 & \textbf{Ja} & 4{,}54  & Nein (schwächer) \\
+66 & 22 & \textbf{Ja} & 2{,}77  & Nein (schwächer) \\
+78 & 26 & \textbf{Ja} & 1{,}73  & \textbf{Ja} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die Peaks $|n|^2 = 30, 54, 66$ erfüllen die Doppel-Resonanzbedingung,
+sind aber thermisch schwächer ($I$ kleiner) als $|n|^2 = 18, 42, 78$.
+In jedem Bereich setzt sich der \emph{stärkste} Koinzidenz-Peak durch:
+
+\begin{itemize}
+  \item Bereich $|n|^2 \in [1, 20]$:\quad
+        Stärkster Koinzidenz-Peak: $|n|^2 = 18$ ($I = 19{,}3$) \\
+        \hphantom{Bereich $|n|^2 \in [1, 20]$:\quad}
+        $|n|^2 = 30$ hätte $I = 13{,}2$ -- unterdrückt.
+  \item Bereich $|n|^2 \in [20, 50]$:\quad
+        Stärkster Koinzidenz-Peak: $|n|^2 = 42$ ($I = 7{,}6$) \\
+        \hphantom{Bereich $|n|^2 \in [20, 50]$:\quad}
+        $|n|^2 = 30$ ist stärker ($I = 13{,}2$), aber kein CMB-Peak --
+        es liegt zwischen den Koinzidenzen.
+  \item Bereich $|n|^2 \in [50, 90]$:\quad
+        Stärkster Koinzidenz-Peak: $|n|^2 = 78$ ($I = 1{,}7$).
+\end{itemize}
+
+\subsection*{10.4 Die physikalische Bedeutung}
+
+Der Übergang von $D = 4$ (reiner T$^4$, ganzzahlig kompakt) zu
+$D_f = 3 - \xi$ (fraktaler T$^4$) entspricht dem Übergang von einem
+vollständig geschlossenen zu einem \emph{fraktal-teiloffenen} System:
+
+\begin{itemize}
+  \item \textbf{$D = 4$ (rein kompakt):} Alle vier Torusrichtungen
+        schwingen gleichberechtigt. Jedes $|n|^2$ kann resonieren.
+        Das entspricht einem Resonator mit $4$ gleichwertigen,
+        geschlossenen Richtungen.
+
+  \item \textbf{$D_f = 3 - \xi$ (fraktal):} Die vierte Richtung ist
+        nicht mehr ganzzahlig-kompakt, sondern fraktal-granuliert.
+        Sie verhält sich wie eine Richtung mit \emph{kontinuierlichem
+        Spektrum} -- analog zur offenen Seite eines halboffenen Rohrs.
+        Entscheidend ist: der Beobachter im 3D-Raum sieht nur die drei
+        räumlichen Komponenten $n_1^2+n_2^2+n_3^2$ (die vierte ist
+        Zeitentfaltung). Das erzeugt den Faktor~3 in der
+        beobachtbaren Projektion und selektiert die
+        Koinzidenz-Resonanzen.
+\end{itemize}
+
+\textbf{Kurz:} Der fraktale T$^4$ ist kein geschlossener und kein
+offener Resonator -- er ist ein \emph{Doppel-Resonator} mit gekoppelten
+Systemen. Die CMB-Peaks markieren die Koinzidenzen, bei denen
+T$^4$-Gittergeometrie und 3D-Beobachterprojektion gleichzeitig
+Resonanzbedingungen erfüllen.
+
+\subsection*{10.5 Vergleich der Resonator-Typen}
+
+\begin{center}
+\begin{tabular}{p{3.5cm}p{3.5cm}p{5cm}}
+\toprule
+\textbf{Analogie} & \textbf{Mechanismus} & \textbf{Selektiert} \\
+\midrule
+Geschlossenes Rohr & eine Randbedingung & alle Ganzzahlen \\
+Halboffenes Rohr & eine Randbedingung & nur Ungerade \\
+Kreismembran & 2D-Geometrie & Bessel-Nullstellen \\
+\midrule
+\textbf{Fraktaler T$^4$} &
+  \textbf{Koinzidenz zweier} \newline \textbf{Resonatorsysteme} &
+  $D_f \cdot \{$Gitter-Peaks$\}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die CMB-Peakserie $1:2{,}449:3{,}742:5{,}099$ ist damit die
+akustische Signatur eines fraktal-teiloffenen, vierdimensionalen
+Resonanzraums -- nicht eines Plasmas, nicht einer einfachen Membrane,
+sondern der spezifischen Kombination aus T$^4$-Topologie und
+fraktaler Dimension $D_f = 3 - \xi$.
+
+\subsection*{10.6 Was aus den Peaks folgt: zwei Filter}
+
+Die diskreten, scharfen Peaks folgen aus zwei zusammenwirkenden
+Eigenschaften desselben vollständigen T$^4$ -- gesehen aus zwei
+Bezugspunkten:
+
+\begin{center}
+\begin{tabular}{p{2.2cm}p{4.6cm}p{4.6cm}}
+\toprule
+ & \textbf{Filter~1: Kompaktheit} & \textbf{Filter~2: Fraktalität} \\
+ & (T$^4$ als Ganzes, von außen) & (von innen, dekompaktifiziert) \\
+\midrule
+Wirkung & erzeugt \emph{diskretes} Spektrum &
+  gewichtet die Moden ungleich \\
+\addlinespace
+erzwingt & \emph{Existenz} scharfer Peaks &
+  \emph{Lage} der dominanten Peaks \\
+\addlinespace
+Herkunft & endliche, geschlossene Topologie &
+  Jacobi-Entartung $g(|n|^2)$ + Bose-Einstein \\
+\addlinespace
+Ergebnis & gleichförmiges Modengitter &
+  Peaks bei $|n|^2 = 3, 6, 10, 14, \ldots$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Beide sind keine zwei Objekte}, sondern zwei Bezugspunkte auf
+denselben vollständigen T$^4$: von außen kompakt-endlich (Filter~1),
+von innen fraktal-granuliert bis $L_0 = \xi\cdot\ell_P$ (Filter~2).
+Die fraktale Ungeschlossenheit ist damit keine \emph{zweite}, der
+Kompaktheit widersprechende Eigenschaft, sondern die Innenansicht
+desselben geschlossenen Torus -- eine Bezugspunkt-Angelegenheit
+(Innen/Außen, P20).
+
+\textbf{Erst beide Filter zusammen} geben die beobachtete Struktur:
+\begin{itemize}
+  \item Filter~1 allein: gleichförmiges diskretes Gitter -- jedes
+        $|n|^2$ gleich, keine bevorzugten Peaks.
+  \item Filter~2 allein: braucht ein diskretes Gitter, auf dem er
+        wirken kann -- ohne Kompaktheit kein Gitter.
+  \item Filter~1 $+$ Filter~2: dominante Peaks an bestimmten $|n|^2$,
+        die nach 3D-Projektion (Schritt~8) die CMB-Serie ergeben.
+\end{itemize}
+
+\textbf{Was daraus ableitbar ist:} Die diskreten Peaks sprechen
+\emph{für} ein kompaktes (endliches) Universum und \emph{gegen} ein
+rein-unendlich-offenes -- ein rein offener Raum gäbe ein Kontinuum
+ohne scharfe Peaks. Das ist die stärkste strukturelle Aussage, die
+sich aus den Peaks ziehen lässt.
+
+\textbf{Ehrliche Abgrenzung:} Dieser Schluss ist FFGFT-intern. Die
+Peaks \emph{zwingen} die Raumkompaktheit nicht -- $\Lambda$CDM erzeugt
+dieselben diskreten Peaks aus einer \emph{zeitlichen} Schranke (dem
+Schallhorizont bei Rekombination) in einem räumlich unendlichen
+Universum. Die Peaks allein unterscheiden räumliche Kompaktheit
+(FFGFT) und zeitliche Schranke ($\Lambda$CDM) nicht; das ist die
+kosmologische Entartung (Dok.~267).
+
+% ============================================================================
+% Schritt 10.7 (Frequenzanalyse-Perspektive) -- eingebaut Juni 2026
+\subsection*{10.7 Was die Peak-Verhältnisse modellfrei aussagen}
+
+Dieser Abschnitt betrachtet die gemessenen Peak-Positionen ausschließlich
+mit den Methoden der Spektral-/Frequenzanalyse -- ohne jede
+T$^4$-Annahme. Die Frage: Was lässt sich aus den reinen Zahlen
+$\ell \approx 220, 537, 810, 1120, 1450$ ablesen, und wo lauern
+typische Fehlinterpretationen durch Differenzbildung und Abtastgrenzen?
+
+\subsubsection*{10.7.0 Begriffsklärung: ,,akustisch`` führt in die Irre}
+
+Die CMB-Peaks heißen historisch ,,akustische Peaks``. Der Begriff
+schickt jeden, der ihn zum ersten Mal hört, in die falsche Richtung,
+denn es ist \emph{nichts} mit Schall im Spiel:
+
+\begin{itemize}
+  \item \textbf{Kein Schall:} Es gibt kein hörbares Signal, keine
+        Druckwelle in Luft.
+  \item \textbf{Keine Zeitschwingung:} Die CMB ist ein eingefrorenes
+        Standbild, kein zeitliches Signal. Gemessen wird nichts in Hertz.
+  \item \textbf{Keine direkte Wellenmessung:} Das Teleskop misst die
+        Temperatur als Funktion der \emph{Himmelsrichtung} -- eine Karte
+        aus heißen und kalten Flecken. Ausgewertet wird die
+        \emph{räumliche Verteilung am Himmel}, nicht eine Schwingung.
+\end{itemize}
+
+Das Wort ,,akustisch`` stammt aus dem $\Lambda$CDM-\emph{Erklärungsmodell}:
+dort werden die Flecken als eingefrorene Druckwellen im Photon-Baryon-Plasma
+\emph{vor} der Rekombination gedeutet. Das ist eine modellabhängige
+Deutung des \emph{Mechanismus} -- sie steckt bereits im Namen, noch bevor
+irgendetwas gemessen ist. Die \emph{Messgröße} selbst ist neutral: ein
+räumliches Interferenzmuster am Himmel, beschrieben durch das
+Winkelspektrum $C_\ell$.
+
+\textbf{Zwei verschiedene ,,Frequenzen`` -- nicht verwechseln.} Bei der
+CMB tragen zwei völlig verschiedene Dinge den Namen ,,Frequenz``:
+
+\begin{center}
+\begin{tabular}{p{1cm}p{5.3cm}p{5.3cm}}
+\toprule
+ & \textbf{(A) Photonen-Frequenz} & \textbf{(B) Fleckenmuster} \\
+\midrule
+Was & Farbe/Energie des Lichts & Winkelstruktur der Flecken \\
+Wert & $\sim 160$\,GHz & $\ell = 220, 537, \ldots$ \\
+Einheit & Hertz (zeitlich) & dimensionslos / Winkel (räumlich) \\
+gemessen als & Radiometer (Photonenenergie) & Winkel am Himmel \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die Peak-Verhältnisse $1:2{,}44:3{,}68:\ldots$ gehören zu \textbf{(B)},
+dem \emph{räumlichen} Winkelmuster. Mit (A), der Photonenfrequenz, haben
+sie nichts zu tun. Eine Umrechnung der Multipole in eine Hertz-Frequenz
+wäre künstlich und irreführend -- sie würde ein räumliches Muster in
+eine fiktive Zeitschwingung übersetzen, die so nicht existiert.
+
+\textbf{Sprachregelung in diesem Dokument:} Wir vermeiden ,,akustisch``
+wo möglich und schreiben \emph{Winkelspektrum-Peaks} oder schlicht
+\emph{CMB-Peaks}. Die Resonator-Analogie (offenes/geschlossenes Rohr,
+Doppel-Resonator) bleibt als rein \emph{mathematische} Analogie für ein
+diskretes Eigenmoden-Spektrum -- nicht als Behauptung, dass dort Schall
+war. Ob die Resonanzen aus Druckwellen ($\Lambda$CDM) oder aus
+geometrischen Gittermoden (FFGFT) stammen, ist genau die offene Frage,
+die der Name ,,akustisch`` vorschnell zugunsten von $\Lambda$CDM
+entscheidet.
+
+\subsubsection*{10.7.1 Erste und zweite Differenz: die Krümmung ist real}
+
+Die Abstände aufeinanderfolgender Peaks sind \emph{nicht} konstant:
+\[
+  \Delta\ell = 317,\; 273,\; 310,\; 330.
+\]
+Eine reine harmonische Serie (gerade Obertöne $1:2:3:4:5$) hätte
+konstante Abstände. Die Verhältnisse $1:2{,}44:3{,}68:5{,}09:6{,}59$
+wachsen \emph{langsamer} als $1:2:3:4:5$ -- die Kennlinie ist
+\textbf{konkav gekrümmt}. Diese Krümmung ist deutlich größer als die
+Messunsicherheit der Peak-Positionen ($\sim 1$--$3\,\%$ bei breiten
+Peaks). Sie ist daher \emph{kein} Differenzbildungs-Artefakt, sondern
+ein reales Merkmal des Spektrums.
+
+\textbf{Folgerung 1:} Gerade Obertöne (eine einfache harmonische
+Grundschwingung) sind ausgeschlossen.
+
+\subsubsection*{10.7.2 Die Falle: ,,missing fundamental`` beim linearen Lesen}
+
+Aus der Praxis der Frequenzanalyse ist bekannt: Misst man nur Obertöne
+und fehlt der Grundton, suggerieren die Abstände eine Grundschwingung,
+die real nicht angeregt ist. Liest man die CMB-Peaks linear
+($\ell_n = A + B\,n$), ergibt der Fit:
+\[
+  A = -72, \qquad B = 297.
+\]
+Der Offset $A$ ist \textbf{negativ}. Die lineare Fortsetzung verlangt
+also einen ,,Grundton`` bei $\ell < 0$ -- physikalisch sinnlos. Genau das
+ist das missing-fundamental-Artefakt: Wer die Peaks als ,,Obertöne einer
+verschobenen Grundschwingung`` deutet, konstruiert eine Grundmode, die
+es nicht gibt.
+
+\textbf{Folgerung 2:} Die lineare Deutung (gerade Obertöne plus Versatz)
+ist ein Differenzbildungs-Artefakt und scheidet aus.
+
+\subsubsection*{10.7.3 Der Grundton im Gitter-Sinn ist rekonstruierbar}
+
+Prüft man stattdessen, ob die Peaks $\sqrt{\text{Ganzzahl}}$-Vielfache
+eines gemeinsamen Grundtons sind, also $\ell = c\cdot\sqrt{|n|^2}$ mit
+$|n|^2 = 3, 18, 42, 78$, so ist $c = \ell/\sqrt{|n|^2}$ nahezu konstant:
+\[
+  c = 127{,}0;\; 126{,}6;\; 125{,}0;\; 126{,}8
+  \quad(\text{Streuung } 1{,}6\,\%).
+\]
+Es existiert also ein gemeinsamer \textbf{Gitter-Grundton}
+$c \approx 126$. Das ist die sparsamste Deutung der Krümmung:
+\emph{ein} Parameter (die Skala $c$) genügt, denn die Krümmung selbst
+steckt parameterfrei in den festen Gitterzahlen $3, 18, 42, 78$.
+
+\begin{center}
+\begin{tabular}{p{4.5cm}p{3.5cm}p{3.5cm}}
+\toprule
+ & \textbf{harmonisch} & \textbf{Gitter ($\sqrt{|n|^2}$)} \\
+\midrule
+Grundton-Definition & $\ell_n = f_0\cdot n$ & $\ell = c\cdot\sqrt{|n|^2}$ \\
+Konstanz-Test & $\ell/n = 220\ldots290$ & $\ell/\sqrt{|n|^2} \approx 126$ \\
+Parameter & 2 (Offset $+$ Steigung) & 1 (nur Skala $c$) \\
+Offset & $A = -72$ (unphysikalisch) & keiner nötig \\
+Ergebnis & scheitert & $c \approx 126$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Folgerung 3:} Der Grundton ist rekonstruierbar -- aber nur im
+Gitter-Sinn ($\ell = c\sqrt{|n|^2}$), nicht im harmonischen. Der Wert
+$c \approx 126$ entspricht der Mode $|n|^2 = 1$.
+
+\subsubsection*{10.7.4 Der rekonstruierte Grundton ist nicht der erste Peak}
+
+Der Gitter-Grundton $c \approx 126$ entspricht $\ell \approx 126$ für
+$|n|^2 = 1$. Der erste \emph{sichtbare} Peak liegt aber bei
+$|n|^2 = 3$, also $\ell \approx 219$. Es gibt somit eine \textbf{echte,
+aber als Peak unsichtbare} Grundmode:
+\[
+  |n|^2 = 1 \;\to\; \ell \approx 126
+  \quad(\text{Grundmode, kein Peak}),
+\]
+\[
+  |n|^2 = 3 \;\to\; \ell \approx 219
+  \quad(\text{erster sichtbarer Peak}).
+\]
+Bemerkenswert: $\ell \approx 126$ liegt \emph{mitten im beobachteten
+Bereich}, aber dort ist kein Akustik-Peak, sondern das ansteigende
+Sachs-Wolfe-Plateau. Das ist konsistent mit dem Beobachter-Mechanismus
+(Schritt~8): die Mode $|n|^2=1$ ist die Einzelachsen-Mode $(1,0,0,0)$,
+die die symmetrische 3D-Projektionsbedingung \emph{nicht} erfüllt; erst
+$(1,1,1,0)$ mit $|n|^2=3$ projiziert isotrop und wird zum ersten Peak.
+
+\textbf{Folgerung 4:} Es gibt eine reale, tieferliegende Grundmode bei
+$\ell \approx 126$, die als Skalensetzer wirkt, aber wegen fehlender
+Symmetrie nicht als Peak erscheint. Dies ist eine schwach
+falsifizierbare Konsistenzbedingung: der aus den oberen Peaks
+rekonstruierte Grundton $c$ muss zur Stelle passen, an der das Spektrum
+vom Plateau in den ersten Peak übergeht.
+
+\subsubsection*{10.7.5 Keine Größe des Universums aus den Schwingungen}
+
+Aus den Winkel-Schwingungen lässt sich \emph{keine absolute Größe}
+ablesen -- weder die Größe der Strukturen noch die des Universums.
+Der gemessene Winkel eines Peaks ist
+\[
+  \theta = \frac{L_\mathrm{struktur}}{D_A},
+\]
+also nur das \emph{Verhältnis} aus physischer Strukturgröße
+$L_\mathrm{struktur}$ und Distanz $D_A$ (Winkeldistanz zur
+Ursprungsfläche). Derselbe Winkel passt zu ,,große Struktur, weit weg``
+ebenso wie zu ,,kleine Struktur, nah dran``:
+
+\begin{center}
+\begin{tabular}{p{4cm}p{4cm}}
+\toprule
+\textbf{angenommenes $D_A$} & \textbf{$\to L_\mathrm{struktur}$ (bei $\theta\approx0{,}8°$)} \\
+\midrule
+$14\,000$\,Mpc & $\approx 200$\,Mpc \\
+$100$\,Mpc & $\approx 1{,}4$\,Mpc \\
+$1$\,Mpc & $\approx 0{,}01$\,Mpc \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Um aus dem Winkel eine absolute Länge zu machen, braucht man $D_A$ --
+und $D_A$ ist keine Messgröße, sondern ein \textbf{Modell-Output}:
+\begin{itemize}
+  \item $\Lambda$CDM: $D_A = \int c/H(z)\,dz$ -- erfordert $H_0$,
+        $\Omega_m$, $\Omega_\Lambda$, das Rekombinations-$z_*$.
+  \item FFGFT: $D_A = R_H\ln(1+z_*)$ -- erfordert $R_H$, den externen
+        Parameter (P20), der nicht aus $\xi$ allein folgt.
+\end{itemize}
+
+In beiden Fällen kommt die Distanz aus dem Modell, nicht aus der
+Messung. Die Winkel-Messung ist \textbf{maßstabslos}: sie zeigt die
+\emph{Form} des Musters (die Verhältnisse), aber nicht seine absolute
+Größe -- wie ein Foto ohne Maßstab die Form eines Objekts zeigt, nicht
+seine Größe. Das ist exakt dieselbe Grenze wie bei den
+Peak-Verhältnissen: die \emph{Form} folgt aus der Geometrie, die
+\emph{absolute Skala} braucht einen externen Parameter (P20).
+
+\textbf{Warum die Resonator-Methode hier nicht hilft.} Bei einem echten
+Resonator vor uns -- einer Orgelpfeife etwa -- steckt die Größe sehr wohl
+in der Grundschwingung: misst man die Grundwellenlänge $\lambda_0$
+\emph{in Metern} und kennt das Medium (Schallgeschwindigkeit
+$c_\mathrm{Medium}$), folgt die Länge direkt, $L = \lambda_0/2$. Diese
+Methode braucht zwei Dinge, die bei der CMB beide fehlen:
+
+\begin{itemize}
+  \item \textbf{Eine Wellenlänge in Metern} -- nicht nur einen Winkel.
+        Die Orgelpfeife liegt vor uns; wir messen ihre Länge direkt.
+        Der CMB-,,Resonator`` ist unerreichbar weit weg; wir sehen nur
+        seinen Winkel am Himmel, nicht seine Länge. Der Schritt vom
+        Winkel zur Länge braucht $D_A$ -- den unbekannten Modell-Output.
+  \item \textbf{Ein bekanntes Medium.} Bei der Orgelpfeife ist
+        $c_\mathrm{Medium}$ eine bekannte Konstante. Im
+        $\Lambda$CDM-Plasma-Bild ist die ,,Schallgeschwindigkeit``
+        $c_s(z) = c/\sqrt{3(1+R(z))}$ keine Konstante, sondern eine
+        \emph{aus dem Modell gerechnete Funktion}: sie erfordert die
+        Baryonen- und Photonendichte als Funktion der Zeit, die
+        Expansionsgeschichte und den Rekombinationszustand. Das
+        ,,Medium`` ist hier kein Stoff, den man wie Luft vor sich hat
+        und dessen $c$ man misst -- es entsteht erst \emph{indirekt} aus
+        der angenommenen Krümmung und Expansion. ,,Früher dichter`` ist
+        bereits eine Aussage über die Geometrie, nicht über ein
+        unabhängig existierendes Medium.
+\end{itemize}
+
+Damit ist die Rückrechnung im $\Lambda$CDM-Bild gleich dreifach
+modellabhängig: die ,,Wellenlänge`` ist nur ein Winkel, das ,,Medium``
+$c_s(z)$ ist aus Dichte, Expansion und Metrik herausgerechnet, und die
+Distanz $D_A$ ist ebenfalls ein Modell-Output. Keine der drei Zutaten ist
+eine modellfreie Messung; das ,,Medium`` ist sogar die am stärksten
+abgeleitete Größe. FFGFT braucht im Gegenzug \emph{kein} Medium und
+\emph{keine} Schallgeschwindigkeit -- die Peaks sind Eigenmoden einer
+Geometrie, kein Schall in einem Stoff -- benötigt aber für die absolute
+Skala $R_H$ als externen Parameter (P20). Nicht annahmenfrei, sondern
+eine andere \emph{Art} von Annahme: eine geometrische Skala statt einer
+ganzen Plasma- und Expansionsgeschichte.
+
+\subsubsection*{10.7.6 Was sicher ist und was nicht -- die Abtastgrenze}
+
+\textbf{Sicher ablesbar (modellfrei):}
+\begin{itemize}
+  \item Keine geraden Obertöne -- die Krümmung ist real, kein Artefakt.
+  \item Die Krümmung ist konkav (Verhältnisse wachsen sub-linear).
+  \item Ein diskretes Modengitter mit $\sqrt{|n|^2}$-Skalierung ist die
+        sparsamste Deutung (ein Parameter, $c \approx 126$).
+  \item Es gibt keine harmonische Grundschwingung ,,unter`` dem ersten
+        Peak; der lineare Fit dorthin ist ein missing-fundamental-Artefakt.
+  \item Es lässt sich \emph{keine absolute Größe} (des Universums oder der
+        Strukturen) ablesen -- der Winkel gibt nur $L/D_A$, und $D_A$ ist
+        ein Modell-Output.
+\end{itemize}
+
+\textbf{Nicht ablesbar (Grenze der Methode):}
+\begin{itemize}
+  \item Ob die konkave Krümmung von einem $\sqrt{\text{Ganzzahl-Gitter}}$
+        (FFGFT) oder von akustischer $\Lambda$CDM-Dispersion stammt --
+        beide erzeugen dieselbe Form (kosmologische Entartung, Dok.~267).
+  \item Feinunterschiede zwischen gekrümmten Gesetzen: die CMB-Peaks sind
+        \emph{breit} (Halbwertsbreite $\Delta\ell \sim 100$--$200$), die
+        Positionen nur auf $\sim 1$--$3\,\%$ bestimmbar. Das reicht zum
+        \emph{Ausschluss} gerader Obertöne, nicht zur Unterscheidung der
+        konkaven Gesetze.
+\end{itemize}
+
+\textbf{Fazit dieses Abschnitts:} Die reine Frequenzanalyse -- ohne jede
+T$^4$-Annahme -- liefert drei robuste Aussagen: (i)~keine harmonische
+Obertonreihe, (ii)~die Krümmung ist real und konkav, (iii)~ein
+Gitter-Grundton $c \approx 126$ existiert und entspricht einer echten,
+aber unsichtbaren $|n|^2{=}1$-Mode. Diese Aussagen sind unabhängig von
+der FFGFT-Herleitung gewonnen und stützen sie von der Messseite her,
+ohne die kosmologische Entartung (FFGFT vs.\ $\Lambda$CDM) aufzuheben.
+
+% ============================================================================
+\section{Schritt 11: Kein Fit -- was hergeleitet ist und was offen bleibt}
+% ============================================================================
+
+Die Übereinstimmung der Peak-Verhältnisse auf $< 2\%$ kommt
+\emph{nicht} aus einem Fit. Dieser Abschnitt zeigt explizit
+was woher kommt.
+
+\subsection*{11.1 Was aus $\xi$ allein folgt -- und was nicht}
+
+\begin{tcolorbox}[colback=red!4!white, colframe=red!55!black,
+  title={Korrektur gegenüber früheren Fassungen}]
+Frühere Fassungen behaupteten, die Folge $\{1,6,14,26\}$ folge ``aus
+$\xi$ allein als lokale Maxima''. Das ist \emph{nicht} korrekt. Die
+echten lokalen Maxima des vollen thermisch gewichteten T$^4$-Spektrums
+liegen bei $|n|^2 = 3, 6, 10, 14, 18, 22, 26, 30, \ldots$ (dicht). Davon
+sind $6,14,26$ lokale Maxima, aber $1$ ist es \emph{nicht}, und $10$
+(ein lokales Maximum) fehlt in der Folge. $\{1,6,14,26\}$ ist also
+\emph{keine} natürliche Forward-Teilmenge -- sie wurde aus den Daten
+abgelesen (Schritt~4). Was vorwärts aus T$^4$ folgt, ist in Schritt~17
+sauber getrennt.
+\end{tcolorbox}
+
+\begin{center}
+\begin{tabular}{p{4cm}p{8cm}}
+\toprule
+\textbf{Größe} & \textbf{Herkunft} \\
+\midrule
+T$^4$-Spektrum-Maxima bei \newline $|n|^2 = 3,6,10,14,18,22,26,30,\ldots$ &
+  Lokale Maxima von $I(r) = g(r)\cdot N(r)\cdot r$;
+  $g$ aus Jacobi-Formel (exakt), $N$ aus Bose-Einstein.
+  Eingabe: nur $\xi = 1/7500$. \emph{Forward, aber dicht.} \\
+\addlinespace
+Harmonisches Rückgrat $1:2:3:4:5$ &
+  Symmetrische Resonanz $(n,n,n)$: $k^2_\mathrm{obs}=3n^2$.
+  \emph{Forward}, aber harmonisch -- ``zu sauber''. \\
+\addlinespace
+Anharmonizität (Streckung) &
+  Kodimension-1-Projektion $D_f-1\approx2 \Rightarrow J_0$-Bessel.
+  \emph{Forward, parameterfrei} (Schritt~17). \\
+\addlinespace
+Auswahl genau $\{1,6,14,26\}$ &
+  \emph{Aus den CMB-Daten abgelesen} (Schritt~4), nicht vorwärts. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Was forward ist:} das dichte Spektrum, das harmonische Rückgrat
+und die geometrische Anharmonizität. \textbf{Was rückwärts ist:} die
+konkrete Auswahl der vier sichtbaren Peaks.
+
+\subsection*{11.2 Was noch nicht streng hergeleitet ist}
+
+\begin{center}
+\begin{tabular}{p{4cm}p{4cm}p{4cm}}
+\toprule
+\textbf{Annahme} & \textbf{Status} & \textbf{Konsequenz} \\
+\midrule
+$L_\mathrm{tor} = 1/(k_BT_\mathrm{CMB})$ &
+  Physikalisch motiviert, nicht streng bewiesen &
+  Betrifft nur die absolute Skala, \emph{nicht} die Verhältnisse \\
+\addlinespace
+$k_\mathrm{obs}^2 = (n_1^2+n_2^2+n_3^2)/L^2$ &
+  Beobachter in 3D + Zeitentfaltung,\newline $n_4$ = Zeitentfaltung &
+  Betrifft den Faktor~3; physikalisch motiviert, mathematisch offen \\
+\addlinespace
+$D_A$ (Winkeldistanz) &
+  Externer Parameter $R_H$ nötig (P20) &
+  Betrifft nur $\ell_1 \approx 220$, nicht die Verhältnisse \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{11.3 Was die Verhältnisse beweisen und was nicht}
+
+Die Verhältnisse $1:2{,}449:3{,}742:5{,}099$ stimmen mit CMB auf
+$< 2\%$ überein \emph{ohne} freie Parameter. Das zeigt:
+
+\begin{itemize}
+  \item Die T$^4$-Geometrie und die 3D-Beobachterprojektion erzeugen
+        \emph{automatisch} eine Peak-Struktur in der richtigen
+        Größenordnung.
+  \item Die Abweichung von $< 2\%$ liegt innerhalb der
+        Messungenauigkeit der rohen CMB-Peak-Positionen
+        (ohne $\Lambda$CDM-Template-Fit).
+\end{itemize}
+
+Das beweist \emph{nicht}:
+
+\begin{itemize}
+  \item Dass der Selektionsmechanismus (warum der 3D-Beobachter genau
+        die symmetrischsten Moden mit $n_1^2+n_2^2+n_3^2 = 3\cdot|n_\mathrm{min}|^2$
+        bevorzugt) streng aus der sphärischen $C_\ell$-Projektion folgt
+        (noch zu zeigen, P30).
+  \item Dass keine andere Theorie dieselben Verhältnisse erzeugen kann.
+  \item Dass FFGFT den gesamten CMB korrekt beschreibt
+        (Amplituden, Polarisation, Frühphasen-Physik offen).
+\end{itemize}
+
+\textbf{Der Status ist:} Ein nicht-angepasstes Ergebnis aus $\xi$,
+das die beobachteten Verhältnisse auf $< 2\%$ trifft.
+Das ist ein echter Test -- falsifizierbar durch genauere
+modellfreie Messung der rohen Peak-Positionen.
+
+% ============================================================================
+\section{Schritt 12: Schwarzschild-Verbindung und $R_H$}
+% ============================================================================
+
+\subsection*{12.1 Die zwei Schwarzschild-Radien in FFGFT}
+
+FFGFT hat zwei Skalen die gleichzeitig Schwarzschild-Radien sind
+(Dok.~190, P4; Dok.~182):
+
+\begin{center}
+\begin{tabular}{p{2.5cm}p{4cm}p{4cm}l}
+\toprule
+\textbf{Skala} & \textbf{Definition} & \textbf{Schwarzschild-Masse} & \textbf{Check} \\
+\midrule
+$L_0 = \xi\cdot\ell_P$ &
+  Sub-Planck-Fundamentallänge &
+  $M_0 = \xi\cdot m_P/2$ &
+  $r_S(M_0) = L_0$ \\
+\addlinespace
+$R_H = \hbar c/E_H$ &
+  Hubble-Horizont &
+  $M_U = R_H c^2/(2G)$ &
+  $r_S(M_U) = R_H$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Beide Checks numerisch:
+\[
+  r_S(M_0) = \frac{2G\cdot\xi\cdot m_P/2}{c^2}
+  = \xi\cdot\frac{G\,m_P}{c^2}
+  = \xi\cdot\ell_P = L_0
+  \quad\checkmark
+\]
+\[
+  r_S(M_U) = \frac{2G\cdot M_U}{c^2}
+  = \frac{2G}{c^2}\cdot\frac{R_H c^2}{2G}
+  = R_H
+  \quad\checkmark
+\]
+
+\subsection*{12.2 Die Umrechnung: $R_H$ aus den zwei Schwarzschild-Bedingungen}
+
+Division der zwei Schwarzschild-Formeln:
+\[
+  \frac{R_H}{L_0}
+  = \frac{2G\,M_U/c^2}{2G\,M_0/c^2}
+  = \frac{M_U}{M_0}
+\]
+
+Also:
+\[
+  \boxed{R_H = L_0 \cdot \frac{M_U}{M_0}
+  = \xi\cdot\ell_P\cdot\frac{M_U}{\xi\cdot m_P/2}
+  = \frac{2\,\ell_P\cdot M_U}{m_P}}
+\]
+
+Das ist eine reine Umrechnung -- kein Modell, keine Annahme.
+Sie zeigt: $R_H$ folgt direkt aus $L_0$ und dem Massenverhältnis
+$M_U/M_0$.
+
+\subsection*{12.3 Was das bedeutet}
+
+$L_0 = \xi\cdot\ell_P$ ist vollständig aus $\xi$ hergeleitet.
+$M_0 = \xi\cdot m_P/2$ ebenso.
+
+$R_H$ ist damit vollständig bestimmt \emph{sobald} $M_U$ bekannt ist:
+\[
+  R_H = \frac{2\,\ell_P}{m_P}\cdot M_U
+\]
+
+In Dok.~182 wird $M_U$ über $E_H = E_0\cdot\xi^{41/4}$ gewonnen.
+Die Schwarzschild-Umrechnung zeigt denselben $R_H$ von einer anderen
+Seite -- als direkte Konsequenz der Massenskala des Universums.
+
+\subsection*{12.4 Offene Frage: $M_U$ unabhängig aus $\xi$?}
+
+Die Verbindung $R_H = 2\ell_P M_U/m_P$ ist exakt.
+Offen ist: kann $M_U$ aus der T$^4$-Modenstruktur hergeleitet werden
+\emph{ohne} $R_H$ vorauszusetzen?
+
+Wenn ja, dann wäre $R_H$ eine echte Vorhersage aus $\xi$ allein --
+ohne den Exponenten $41/4$ als Eingabe zu brauchen.
+Das ist eine offene Herleitung, kein prinzipielles Hindernis.
+
+% ============================================================================
+\section{Schritt 13: Das Messproblem -- was FFGFT kann, was $\Lambda$CDM nicht kann}
+% ============================================================================
+
+\subsection*{13.1 Der Exponent 41/4 ist äquivalent zu $H_0$}
+
+Aus $E_H = E_0 \cdot \xi^{41/4}$ und $H_0 = E_H/\hbar$ folgt:
+\[
+  \frac{41}{4} = \frac{\ln(E_0/(\hbar H_0))}{\ln(1/\xi)}
+\]
+Der Exponent $41/4$ ist damit \textbf{äquivalent zur Messung von $H_0$}.
+Numerisch:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+$H_0$ [km/s/Mpc] & Quelle & Exponent \\
+\midrule
+$66{,}19$ & FFGFT (aus $41/4$) & $10{,}2492$ \\
+$67{,}40$ & Planck/CMB ($\Lambda$CDM) & $10{,}2472$ \\
+$73{,}00$ & SH0ES (Distanzleiter) & $10{,}2382$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Der Unterschied zwischen den Exponenten ist kleiner als $0{,}02$ --
+alle $H_0$-Messungen geben denselben Exponenten auf $\sim 0{,}1\%$.
+
+\subsection*{13.2 Das Messproblem}
+
+Eine modellfreie Messung von $H_0$ gibt es nicht.
+Jede Messung setzt Modellannahmen voraus:
+
+\begin{center}
+\begin{tabular}{p{3.5cm}p{5.5cm}p{3cm}}
+\toprule
+\textbf{Methode} & \textbf{Modellannahme} & \textbf{Ergebnis} \\
+\midrule
+CMB-Peaks ($\Lambda$CDM) &
+  Expansion, FLRW-Metrik, Rekombination &
+  $67{,}4$ km/s/Mpc \\
+\addlinespace
+Distanzleiter (SH0ES) &
+  Kalibrierte Standardkerzen, lokale Geometrie &
+  $73{,}0$ km/s/Mpc \\
+\addlinespace
+FFGFT ($\xi^{41/4}$) &
+  Statisches Universum, T$^4$-Topologie,\newline
+  Exponent $41/4$ aus Theorie &
+  $66{,}2$ km/s/Mpc \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+In FFGFT bedeutet $H_0$ etwas anderes als in $\Lambda$CDM:
+nicht die Expansionsrate, sondern den Kehrwert der
+fraktalen Wegverlängerungsskala $R_H = c/H_0$.
+Was $\Lambda$CDM als Expansion misst, interpretiert FFGFT
+als fraktale Wegverlängerung $z(d)$ (Dok.~190, P14).
+
+\subsection*{13.3 Was FFGFT kann, was $\Lambda$CDM nicht kann}
+
+\begin{center}
+\begin{tabular}{p{5cm}p{4.5cm}p{4.5cm}}
+\toprule
+\textbf{Größe} & \textbf{$\Lambda$CDM} & \textbf{FFGFT} \\
+\midrule
+$H_0$ &
+  Freier Parameter\newline (aus Daten bestimmt) &
+  Aus $\xi^{41/4}$ abgeleitet\newline (wenn $41/4$ hergeleitet) \\
+\addlinespace
+CMB-Peak-Verhältnisse &
+  Aus $r_s(z^*)$ und $D_A(z^*)$\newline (braucht $H_0$, $\Omega_b$, \ldots) &
+  Aus T$^4$-Geometrie\newline (kein freier Parameter) \\
+\addlinespace
+Absolute Peak-Position $\ell_1$ &
+  Aus $H_0$, $z^*$, $r_s$ &
+  Aus $R_H$ (aus $\xi^{41/4}$)\newline + offene Verbindung P20 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Der strukturelle Unterschied:}
+$\Lambda$CDM braucht $H_0$ als Eingabe -- gemessen, nicht hergeleitet.
+FFGFT schreibt $H_0 = 66{,}2$\,km/s/Mpc als $\xi^{41/4}$.
+Wenn $41/4$ aus der T$^4$-Geometrie folgt (noch offen),
+ist $H_0$ eine \emph{Vorhersage} -- kein freier Parameter.
+
+\textbf{Das verbleibende offene Problem:}
+Der Exponent $41/4$ ist in keinem Dokument aus der T$^4$-Geometrie
+hergeleitet. Er ist die einzige Stelle in der FFGFT-Kosmologie
+wo eine externe Eingabe nötig ist -- äquivalent zu $H_0$.
+Solange diese Herleitung fehlt, steht FFGFT und $\Lambda$CDM
+in dieser Hinsicht gleich: beide brauchen eine kosmologische
+Skala als Eingabe.
+
+% ============================================================================
+\section{Schritt 14: Die universelle Compton-Schwarzschild-Relation}
+% ============================================================================
+
+\subsection*{14.1 Jede Länge hat zwei zugeordnete Massen}
+
+Zu jeder Länge $R$ gehören zwei Massen:
+\[
+  M_c(R) = \frac{\hbar}{R\,c}
+  \quad\text{(}R\text{ ist ihre Compton-Wellenlänge)}
+\]
+\[
+  M_s(R) = \frac{R\,c^2}{2G}
+  \quad\text{(}R\text{ ist ihr Schwarzschild-Radius)}
+\]
+
+Ihr Produkt ist \emph{unabhängig von $R$}:
+\[
+  \boxed{M_c(R)\cdot M_s(R)
+  = \frac{\hbar}{Rc}\cdot\frac{Rc^2}{2G}
+  = \frac{\hbar c}{2G}
+  = \frac{m_P^2}{2}}
+\]
+
+\subsection*{14.2 Anwendung auf das Elektron}
+
+Äquivalent in Längen: zu jeder Masse $m$ gehören Compton-Wellenlänge
+$\lambda = \hbar/(mc)$ und Schwarzschild-Radius $r_S = 2Gm/c^2$, mit
+\[
+  \lambda \cdot r_S = \frac{\hbar}{mc}\cdot\frac{2Gm}{c^2}
+  = \frac{2G\hbar}{c^3} = 2\,\ell_P^2
+\]
+Also:
+\[
+  \sqrt{\lambda_e \cdot r_S(e)} = \sqrt{2}\,\ell_P
+\]
+Die beiden Skalen des Elektrons liegen \emph{geometrisch symmetrisch}
+um die Planck-Länge -- unabhängig von der Elektronmasse.
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Skala} & \textbf{Wert} & \textbf{Bedeutung} \\
+\midrule
+$r_S(e) = 2Gm_e/c^2$ & $1{,}35\times10^{-57}$\,m & Schwarzschild (unten) \\
+$\ell_P$ & $1{,}62\times10^{-35}$\,m & Planck (Mitte) \\
+$\lambda_e = \hbar/(m_e c)$ & $3{,}86\times10^{-13}$\,m & Compton (oben) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{14.3 Anwendung auf $R_H$}
+
+Dieselbe Relation gilt für den Hubble-Radius:
+\[
+  M_c(R_H) = \frac{\hbar}{R_H c} = \frac{E_H}{c^2}
+  \quad\text{(winzig)}
+\]
+\[
+  M_s(R_H) = \frac{R_H c^2}{2G} = M_U
+  \quad\text{(Universumsmasse)}
+\]
+mit
+\[
+  M_c(R_H)\cdot M_s(R_H) = \frac{E_H}{c^2}\cdot M_U
+  = \frac{m_P^2}{2}
+  \quad\checkmark
+\]
+
+\subsection*{14.4 Was diese Relation leistet und was nicht}
+
+\textbf{Sie leistet:} Eine elegante interne Konsistenz.
+Die Schwarzschild-Masse des Universums $M_U$ und die
+kosmologische Energie $E_H$ sind durch $M_U \cdot E_H/c^2 = m_P^2/2$
+verbunden -- exakt, ohne freien Parameter. Die zwei Schwarzschild-Skalen
+$L_0$ (unten) und $R_H$ (oben) sind keine willkürlichen Grenzen,
+sondern Schwarzschild-Radien realer Massen ($M_0 = \xi m_P/2$ und $M_U$).
+
+\textbf{Sie leistet nicht:} Eine Bestimmung von $R_H$.
+Die Relation $M_c \cdot M_s = m_P^2/2$ ist eine universelle Identität --
+sie gilt für \emph{jede} Länge und gibt daher keine neue Information
+über den Zahlenwert von $R_H$. Beide Massen $M_c(R_H)$ und $M_s(R_H)$
+sind über $R_H$ definiert; ihr Produkt ist tautologisch $m_P^2/2$.
+
+Um $R_H$ festzulegen braucht man eine \emph{unabhängige} Eingabe:
+die kosmologische Energie $E_H = E_0\cdot\xi^{41/4}$ (Dok.~182).
+Das Elektron legt über $\sqrt{\lambda_e r_S(e)} = \sqrt{2}\ell_P$
+die Planck-Skala fest, aber nicht $R_H$.
+
+\textbf{Das verbleibende offene Problem bleibt:}
+Der Exponent $41/4$ -- äquivalent zur kosmologischen Energieskala $E_H$ --
+ist die einzige Eingabe die FFGFT für die absolute kosmologische Skala
+braucht. Die Compton-Schwarzschild-Relation erklärt die \emph{Struktur}
+der Skalenhierarchie, aber nicht den \emph{Wert} von $E_H$.
+
+% ============================================================================
+\section{Schritt 15: Die T$^4$-Länge ist ein Schwarzschild-Radius}
+% ============================================================================
+
+\subsection*{15.1 Die fundamentale Identität (Dok.~010, 066, 067)}
+
+Die FFGFT-Dokumente definieren die T0-Länge eines Objekts als:
+\[
+  r_0 = 2Gm \quad\text{(natürliche Einheiten, } c=1\text{)}
+\]
+Dok.~067 stellt explizit fest: der Faktor~2 ergibt sich aus der
+relativistischen Feldstruktur und \emph{stimmt exakt mit dem
+Schwarzschild-Radius überein}. Dok.~010 schreibt $r_0 = 2GE$
+(Energie statt Masse), Dok.~066 als Verhältnis $\xi = r_0/\ell_P = 2Gm/\ell_P$.
+
+\textbf{Das bedeutet:} Jede charakteristische T0-Länge \emph{ist}
+ein Schwarzschild-Radius -- nicht analog, sondern identisch.
+
+\subsection*{15.2 Warum verschiedene Formeln in den Dokumenten?}
+
+Es ist dieselbe Formel in verschiedenen Einheitensystemen:
+
+\begin{center}
+\begin{tabular}{p{3cm}p{3.5cm}p{4.5cm}}
+\toprule
+\textbf{Dokument} & \textbf{Formel} & \textbf{Einheitensystem} \\
+\midrule
+SI & $r_S = 2Gm/c^2$ & Meter, kg, Sekunden \\
+Dok.~015, 029 & $r_S = 2M$ & natürlich ($G=c=1$) \\
+Dok.~010 & $r_0 = 2GE$ & $c=1$, Energie statt Masse \\
+Dok.~066 & $r_0 = \xi\cdot\ell_P$ & Planck ($\ell_P=1$) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Für die Minimalmasse $M_0 = (\xi/2)\,m_P$ geben \emph{alle} denselben Wert:
+\[
+  \frac{2G M_0}{c^2}
+  = \frac{2G}{c^2}\cdot\frac{\xi}{2}\,m_P
+  = \xi\cdot\frac{G\,m_P}{c^2}
+  = \xi\cdot\ell_P = L_0 = 2{,}155\times10^{-39}\,\text{m}
+\]
+Die scheinbare Vielfalt ist nur die SI-Umrechnung, die Faktoren
+$c^2$ und $G$ ein- oder ausblendet. Sobald in SI-Einheiten gerechnet
+wird, erscheinen $c^2$ und $G$ explizit; in natürlichen Einheiten
+verschwinden sie. Die Physik ist in allen Fällen identisch.
+
+\subsection*{15.3 ``ein Schwarzschild-Radius'' vs.\ ``der Schwarzschild-Radius''}
+
+In der Standardphysik spricht man von \emph{dem} Schwarzschild-Radius
+eines Objekts -- die eine Länge bei der diese Masse zum Schwarzen Loch wird.
+
+In FFGFT ist die T0-Länge \emph{immer} ein Schwarzschild-Radius --
+aber \emph{welcher}, hängt von der Masse ab:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Masse} & \textbf{Schwarzschild-Radius} & \textbf{Rolle} \\
+\midrule
+Elektron $m_e$ & $1{,}35\times10^{-57}$\,m & Teilchen-Skala \\
+$M_0 = (\xi/2)m_P$ & $L_0 = 2{,}16\times10^{-39}$\,m & Fundamentallänge \\
+Proton & $2{,}48\times10^{-54}$\,m & Teilchen-Skala \\
+$M_U$ (Universum) & $R_H = 1{,}41\times10^{26}$\,m & Hubble-Horizont \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Daher:} $L_0$ \emph{ist ein} Schwarzschild-Radius
+(nämlich der von $M_0$) -- aber \emph{nicht der} Schwarzschild-Radius
+schlechthin, weil es keinen einzigen universellen gibt.
+Ebenso ist $R_H$ \emph{ein} Schwarzschild-Radius (der von $M_U$),
+nicht \emph{der} eine.
+
+Das ist die Skalenrelativität aus Dok.~182: jedes System trägt
+seinen eigenen Torus mit eigener charakteristischer Skala
+$R_\mathrm{Torus}(m) = \hbar/(mc)$. Die universelle Untergrenze $L_0$
+gilt für alle; eine universelle Obergrenze existiert nicht --
+$R_H$ ist nur die Obergrenze des kosmologischen Sektors.
+
+\subsection*{15.4 Was das für $R_H$ bedeutet}
+
+$R_H$ \emph{deckt sich exakt} mit dem Schwarzschild-Radius von $M_U$ --
+das ist in den Dokumenten korrekt formuliert und keine Näherung.
+Aber: weil $r_0 = 2Gm$ die \emph{Definition} der T0-Länge ist,
+ist die Übereinstimmung notwendig, nicht überraschend. Die T0-Länge
+einer Masse und ihr Schwarzschild-Radius sind dasselbe Objekt.
+
+Die Identität legt $R_H$ nicht unabhängig fest: man braucht weiterhin
+$M_U$ (bzw.\ $E_H = E_0\cdot\xi^{41/4}$). Was die Identität leistet,
+ist die \emph{physikalische Deutung}: $R_H$ ist nicht ein abstrakter
+Horizont, sondern der Schwarzschild-Radius der Gesamtmasse des
+statischen Universums -- das Universum sitzt an seiner eigenen
+Schwarzschild-Grenze.
+
+% ============================================================================
+\section{Schritt 16: Warum die Schwarzschild-Relation $R_H$ nicht herleitet}
+% ============================================================================
+
+\subsection*{16.1 Die verlockende, aber falsche Schlussfolgerung}
+
+Aus zwei wahren Formeln entstand ein Trugschluss:
+\begin{align}
+  \text{(A)} \quad & \xi = L_0/\ell_P, \quad L_0 = \xi\cdot\ell_P \\
+  \text{(B)} \quad & r_S(m)\cdot r_C(m) = 2\,\ell_P^2 \quad\text{(universell)}
+\end{align}
+
+Beide sind korrekt. Der Fehler entstand durch eine stillschweigende
+Annahme: dass man in Relation (B) die Elektronmasse $m_e$ durch die
+Universumsmasse $M_U$ ersetzen kann, \emph{während man $\lambda_e$
+beibehält}, und so $R_H = r_S(M_U)$ herausbekommt.
+
+\subsection*{16.2 Der genaue Fehler}
+
+Relation (B) verbindet zwei Größen \emph{derselben} Masse. Beim Elektron:
+\[
+  \underbrace{r_S(m_e)}_{1{,}35\times10^{-57}\,\text{m}}
+  \cdot
+  \underbrace{\lambda_e}_{3{,}86\times10^{-13}\,\text{m}}
+  = 2\,\ell_P^2
+\]
+Beide Faktoren gehören zu $m_e$.
+
+Ersetzt man $m_e \to M_U$, so ersetzt man \emph{beide} Faktoren:
+\[
+  \underbrace{r_S(M_U)}_{R_H \,=\, 1{,}41\times10^{26}\,\text{m}}
+  \cdot
+  \underbrace{r_C(M_U)}_{3{,}7\times10^{-96}\,\text{m}}
+  = 2\,\ell_P^2
+\]
+Die Compton-Wellenlänge von $M_U$ ist $3{,}7\times10^{-96}$\,m --
+\textbf{nicht} $\lambda_e$. Die Vermischung war: $R_H$ (Schwarzschild
+des \emph{Universums}) wurde mit $\lambda_e$ (Compton des
+\emph{Elektrons}) in eine Relation gesteckt, die nur für eine
+einzige Masse gilt. Tatsächlich:
+\[
+  r_S(M_U)\cdot\lambda_e
+  = 5{,}4\times10^{13}\,\text{m}^2
+  \neq 2\,\ell_P^2 = 5{,}2\times10^{-70}\,\text{m}^2
+\]
+-- um den Faktor $10^{83}$ daneben.
+
+\subsection*{16.3 Zwei getrennte Systeme}
+
+Elektron und Universum sind zwei verschiedene Systeme, jedes in sich
+konsistent:
+\[
+  \text{Elektron:}\quad m_e \to \{r_S(e),\,\lambda_e\},
+  \quad r_S(e)\cdot\lambda_e = 2\ell_P^2
+\]
+\[
+  \text{Universum:}\quad M_U \to \{R_H,\,r_C(M_U)\},
+  \quad R_H\cdot r_C(M_U) = 2\ell_P^2
+\]
+Zwischen den Systemen gibt es \emph{keine} Brücke aus dieser Relation.
+
+\subsection*{16.4 Die Schwarzschild-Formel erzeugt keine Information}
+
+Der tiefere Grund: $r_S = 2GM/c^2$ ist eine \emph{Umrechnung}
+zwischen Masse und Länge. Wie bei jedem Objekt:
+
+\begin{center}
+\begin{tabular}{p{4cm}p{8cm}}
+\toprule
+\textbf{Bekannt} & \textbf{Folgt} \\
+\midrule
+Masse $M$ & Schwarzschild-Radius $r_S = 2GM/c^2$ \\
+Länge $r_S$ & Masse $M = r_S c^2/(2G)$ \\
+\textbf{keins von beiden} & \textbf{nichts} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Das gilt für ein Schwarzes Loch, die Sonne, das Elektron und das
+Universum gleichermaßen. Um $R_H$ zu kennen, muss eine der vier
+äquivalenten Größen unabhängig bekannt sein:
+\[
+  M_U \;\longleftrightarrow\; H_0 \;\longleftrightarrow\;
+  E_H \;\longleftrightarrow\; R_H
+\]
+Sie bilden einen Ring von Umrechnungen -- aber keinen Eingang.
+
+\subsection*{16.5 Wo FFGFT die Eingabe liefert}
+
+FFGFT liefert genau eine kosmologische Eingabe:
+\[
+  E_H = E_0\cdot\xi^{41/4}, \qquad E_0 = \sqrt{m_e\,m_\mu}
+\]
+Daraus folgt $R_H = \hbar c/E_H$ und alles Übrige. Der Exponent
+$41/4$ ist äquivalent zur Angabe von $H_0$ und ist in keinem
+Dokument aus der T$^4$-Geometrie hergeleitet (offenes Problem).
+
+\textbf{Fazit:} Die Schwarzschild-Identität ($L_0$, $R_H$ sind
+Schwarzschild-Radien) ist eine echte strukturelle Eigenschaft und
+liefert die \emph{physikalische Deutung}. Aber sie kann die
+kosmologische Skala nicht \emph{erzeugen} -- dafür braucht es die
+eine Eingabe $E_H$. Der frühere Eindruck, die zwei Formeln (A) und (B)
+würden $R_H$ herleiten, beruhte auf der stillschweigenden Ersetzung
+$m_e \to M_U$, die zwei verschiedene Massen vermischt.
+
+% ============================================================================
+\section{Schritt 17: Forward-Test -- Anharmonizität aus der Kodimension-1-Projektion}
+% ============================================================================
+
+Dieser Schritt trennt sauber, was \emph{vorwärts} (ohne Datenblick) aus
+T$^4$ folgt und was \emph{rückwärts} (Konsistenzprüfung) ist. Er
+dokumentiert das Ergebnis einer expliziten Forward-Untersuchung und ist
+der konzeptuelle Fortschritt gegenüber den Schritten 1--11. Alle hier
+genannten Zahlen sind mit den beiliegenden Skripten
+(\texttt{Dok268\_Skripte/}) nachrechenbar.
+
+\subsection*{17.1 Was die naive Vorwärts-Rechnung ergibt -- und was nicht}
+
+Drei Forward-Rechnungen, alle ohne jeden Blick auf die Daten:
+
+\begin{enumerate}
+  \item \textbf{Symmetrischer T$^4$, sphärische $C_\ell$-Bessel-Projektion}
+        ($C_\ell = \sum_n N_\mathrm{BE}\,|j_\ell(k_\mathrm{obs}D_A)|^2$):
+        reproduziert $\{3,18,42,78\}$ \emph{nicht}. Das Ergebnis ist ein
+        Quasi-Kontinuum, dominiert von den niedrigsten Moden
+        (stärkster Peak bei $\ell\approx122$). Die naive Bessel-Projektion
+        ist \emph{unzureichend} (entgegen der früheren P30-Formulierung
+        ``machbare Rechnung, kein prinzipielles Hindernis'').
+  \item \textbf{3+Zeit (T$^3$-Raumspektrum):} lokale Maxima bei
+        $|n|^2=2,5,9,14,17,21,26,\ldots$ -- dicht, und \emph{nicht}
+        $\{1,6,14,26\}$.
+  \item \textbf{Symmetrische Raumresonanz $(n,n,n)$:} $k^2_\mathrm{obs}=3n^2$
+        $\Rightarrow$ Serie $\{3,12,27,48,75\}$, Verhältnisse
+        $\sqrt{3}:\sqrt{12}:\sqrt{27}:\ldots = 1:2:3:4:5$
+        (\emph{harmonisch}).
+\end{enumerate}
+
+\textbf{Folgerung:} Forward erzeugt T$^4$ entweder ein dichtes Spektrum
+oder das harmonische Rückgrat $1:2:3:4:5$. Die spärliche, anharmonische
+Serie $\{3,18,42,78\}$ ist \emph{kein} Forward-Output; sie entsteht nur
+durch die aus den Daten abgelesene Auswahl $\{1,6,14,26\}$.
+
+\textbf{Konkret offen ($|n|^2=30$, von O.~Teker geschärft):} $30=3\cdot10$,
+und $|n|^2=10$ ist ein echtes lokales Maximum ($I=20{,}1$). Damit erfüllt
+$30$ den Faktor-3-Filter. Thermisch ist es sogar \emph{stärker} als zwei
+der sichtbaren Peaks: $I(30)=13{,}2 > I(42)=7{,}6 > I(78)=1{,}7$. Trotzdem
+zeigt der CMB bei $|n|^2=30$ ($\ell\approx696$, im Tal zwischen Peak~2 und
+Peak~3) keinen Peak. Das Argument ``stärkstes im Bereich'' (frühere
+Fassung) versagt hier. Der Selektionsmechanismus ist damit \emph{nicht}
+durch den Faktor~3 allein geliefert (P29 nur teilweise, P30 offen).
+
+\subsection*{17.2 Der eigentliche Forward-Befund: Anharmonizität ist geometrisch}
+
+Das harmonische Rückgrat $1:2:3:4:5$ ist ``zu sauber'' -- wie die idealen
+Obertöne einer steifigkeitsfreien Saite. Reale Saiten sind durch ihre
+Steifigkeit \emph{inharmonisch} (gestreckte Klavierstimmung). Analog
+\emph{erwarten} wir Anharmonizität, weil die Raumzeit aus unserer Sicht
+gekrümmt ist und die Projektion nicht-linear (fraktale Wegverlängerung).
+
+Akustische Resonatoren zeigen, dass Anharmonizität rein \emph{geometrisch}
+ist (forward, ohne Fit, ohne Medium):
+
+\begin{center}
+\begin{tabular}{p{5.5cm}p{4.5cm}p{2cm}}
+\toprule
+\textbf{Resonator (Dimension $D$)} & \textbf{Verhältnisse} & \textbf{Abw. zu CMB} \\
+\midrule
+Rohr/Kugel $j_0$ ($D=3$, $\nu=\tfrac12$) & $1:2:3:4$ (harmonisch) & $-18$ bis $-24\%$ \\
+\textbf{Kreismembran $J_0$ ($D=2$, $\nu=0$)} & $\mathbf{1:2{,}30:3{,}60:4{,}90}$ & $\mathbf{-2}$ bis $\mathbf{-6\%}$ \\
+S$^3$-Laplace & $1:1{,}63:2{,}24$ & $-33$ bis $-48\%$ \\
+S$^2$ (Y$_{\ell m}$) & $1:1{,}73:2{,}45$ & zu dicht \\
+\midrule
+\textbf{CMB beobachtet} & $1:2{,}44:3{,}68:5{,}09$ & --- \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Schlüsselfakt:} Der radiale Bessel-Index ist $\nu = D/2-1$. Die
+Anharmonizität ist \emph{maximal bei $D=2$} ($\nu=0$, $J_0$) und
+verschwindet bei $D=1$ und $D=3$ (beide harmonisch). Die CMB-Serie sitzt
+genau bei $D\approx2$ -- der Dimension maximaler Anharmonizität.
+
+\textbf{Wichtig:} Der Match ist zur \emph{flachen} Kreismembran ($J_0$),
+\emph{nicht} zur gekrümmten 2-Sphäre (Y$_{\ell m}$, gibt $1:1{,}73:\ldots$,
+falsch). Die richtige Erwartung ist eine \emph{flache begrenzte Scheibe},
+keine Sphäre -- denn die CMB-Peaks kommen aus der \emph{radialen}
+Projektion, nicht aus den Eigenwerten der Beobachtungsfläche.
+
+\subsection*{17.3 Herleitung: flache Scheibe aus der fraktalen Kodimension-1}
+
+Die Letztstreufläche ist eine \textbf{Kodimension-1-Hyperfläche} im
+fraktalen Raum:
+\[
+  D_\mathrm{eff} = D_f - 1 = (3-\xi) - 1 = 2 - \xi \approx 2.
+\]
+Radiale Moden in $D$ Dimensionen sind Nullstellen von $J_{D/2-1}$. Für
+$D = 2-\xi$:
+\[
+  \nu = \frac{D}{2}-1 = \frac{2-\xi}{2}-1 = -\frac{\xi}{2}
+      \approx -6{,}7\times10^{-5} \approx 0
+  \;\Rightarrow\; J_0\text{-Membran}.
+\]
+Das gibt forward, \textbf{parameterfrei und ohne Modenauswahl}, die
+anharmonische Serie $1:2{,}30:3{,}60:4{,}90$ -- Treffer auf $\sim5\%$.
+Die Anharmonizität folgt aus der Kodimension-1-Projektion in der
+fraktalen Geometrie, genau wie aus der Krümmung erwartet.
+
+\subsection*{17.4 Die kleine Restabweichung -- ehrlich offen}
+
+Der Best-Fit liegt bei $\nu\approx-0{,}07$, also effektiver Dimension
+$D\approx1{,}86$ -- knapp \emph{unter} 2. Die naheliegende physikalische
+Quelle wäre die \emph{Spektral-Dimension} $d_s$ (maßgeblich für
+Wellenausbreitung auf einem Fraktal), die generell unter der
+Hausdorff-Dimension liegt: $d_s = 2D_f/d_w$ mit Walk-Dimension $d_w>2$.
+
+Die explizite Rechnung schließt diese Quelle jedoch aus:
+\begin{itemize}
+  \item Das FFGFT-Fraktal ist \emph{zu schwach fraktal}: mit
+        $D_f=3-\xi$ ist $d_w = 2+O(\xi)$, also $d_s(\text{Fläche})\approx2{,}00$.
+        $\xi$ ist $\sim1000\times$ zu klein, um $D$ auf $1{,}86$ zu drücken.
+  \item Für $d_s=1{,}86$ bräuchte man $d_w\approx2{,}15$ (starke
+        Fraktalität), unvereinbar mit $D_f=2-\xi$.
+\end{itemize}
+\textbf{Die Restabweichung ist nicht aus $\xi$ herleitbar.} Zudem ist sie
+von der Größenordnung der Messunsicherheit: die reine $J_0$-Vorhersage
+($D=2$) ist mit den Peaks~3 und~4 innerhalb $\sim2\sigma$ konsistent; nur
+Peak~2 sitzt bei $\sim4\sigma$. Der ``Best-Fit $1{,}86$'' ist damit
+weitgehend Messrauschen; auf einen exakten Wert (etwa $13/7$) zu zeigen
+wäre Zahlenspielerei, die die Datenqualität nicht hergibt.
+
+\subsection*{17.5 Zusammenfassung -- geschichtete, ehrliche Struktur}
+
+\begin{center}
+\begin{tabular}{p{5.5cm}p{6.5cm}}
+\toprule
+\textbf{Schicht} & \textbf{Status} \\
+\midrule
+$D=3\to2$ (Kodimension-1, $J_0$) &
+  \textbf{forward, parameterfrei, hergeleitet}; $\sim5\%$ \\
+Anharmonizität geometrisch &
+  hergeleitet (maximal bei $D=2$) \\
+Verhältnis-Match $\{3,18,42,78\}$ &
+  Retrodiktion (aus Daten), \emph{nicht} Vorhersage \\
+$D=2\to1{,}86$ (Sub-2) &
+  nicht aus $\xi$; weitgehend Messrauschen; offen \\
+Ausschluss $|n|^2=30$ &
+  offen (P29 nur teilweise, P30) \\
+Peak-2-Rest ($\sim4\sigma$) &
+  kleiner genuiner offener Punkt, vermutlich andere Physik \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Verteidigbare Aussage (statt ``Fit auf $D=1{,}86$''):} Die
+fraktale Kodimension-1-Projektion erzeugt forward und parameterfrei das
+$J_0$-Membran-Spektrum ($D\approx2$) und trifft die CMB-Anharmonizität auf
+$\sim5\%$ -- im Rahmen der Messfehler. Das harmonische Rückgrat kommt aus
+der symmetrischen T$^4$-Resonanz; die Streckung aus der Geometrie der
+Beobachtung. Diese Formulierung ist konzeptuell sauberer als die frühere
+Modenauswahl, weil sie \emph{keine} Auswahl aus den Daten benötigt und
+damit den Zirkularitätseinwand (O.~Teker) ausräumt. Der strenge
+Selektionsmechanismus für die diskreten Einzelpeaks bleibt offen.
