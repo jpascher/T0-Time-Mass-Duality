@@ -135,30 +135,31 @@ A complete list of all ~275 documents with short description and direct PDF link
 ```
 T0-Time-Mass-Duality/
 ├── 2/
-│   ├── pdf/              # 275+ documents (DE/EN pairs)
-│   ├── html/             # Interactive tools
-│   ├── python/           # Python implementations
-│   └── Sources/          # LaTeX sources
-│       ├── ch/           # Chapter sources (*_De/En_ch.tex)
-│       ├── wr_standalone_A4/  # Standalone document wrappers
-│       ├── wr_books/     # Book wrappers (5 volumes × 3 formats)
-│       └── pri-end/      # Shared preambles
-├── PDFs/                 # Standalone A4 documents (DE/EN)
-├── books/                # KDP-ready PDFs (5 vols × 2 langs × 3 formats)
-├── Dok023_230_Skripte/   # Scripts: Bell / Hilbert space
-├── Dok263_Skripte/       # Scripts: fractal holography
-├── Dok267_268_Skripte/   # Scripts: CMB peaks
-├── Dok271_274_Skripte/   # Scripts: HLV comparison
-├── Dok275_Skripte/       # Scripts: ξ→φ recursion (v2/v3/v4)
-├── rsa/                  # RSA factorisation demos
-├── sig/                  # Signal analysis tools
+│   ├── pdf/                   # 275+ documents (DE/EN pairs)
+│   ├── html/                  # Interactive tools
+│   ├── python/                # Python implementations
+│   ├── Sources/               # LaTeX sources
+│   │   ├── ch/                # Chapter sources (*_De/En_ch.tex)
+│   │   ├── wr_standalone_A4/  # Standalone document wrappers
+│   │   ├── wr_books/          # Book wrappers (5 volumes × 3 formats)
+│   │   └── pri-end/           # Shared preambles
+│   ├── PDFs/                  # Standalone A4 documents (DE/EN)
+│   ├── Dok023_230_Skripte/    # Scripts: Bell / Hilbert space
+│   ├── Dok263_Skripte/        # Scripts: fractal holography
+│   ├── Dok267_268_Skripte/    # Scripts: CMB peaks
+│   ├── Dok271_274_Skripte/    # Scripts: HLV comparison
+│   └── Dok275_Skripte/        # Scripts: ξ→φ recursion (v2/v3/v4)
+├── books/                     # KDP-ready PDFs (5 vols × 2 langs × 3 formats)
+├── rsa/                       # RSA factorisation demos
+├── sig/                       # Signal analysis tools
 ├── 000_FFGFT_Changelog_De.md
-└── README.md / README_de.md
+├── README_de.md
+└── README.md
 ```
 
-LaTeX structure: wrappers in `Sources/wr_standalone_A4/` and `Sources/wr_books/`
-reference preambles from `Sources/pri-end/`. Chapter content in
-`Sources/ch/` as `NNN_..._De/En_ch.tex`.
+LaTeX structure: wrappers in `2/Sources/wr_standalone_A4/` and `2/Sources/wr_books/`
+reference preambles from `2/Sources/pri-end/`. Chapter content in
+`2/Sources/ch/` as `NNN_..._De/En_ch.tex`.
 
 ---
 

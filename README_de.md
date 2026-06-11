@@ -138,30 +138,31 @@ Eine vollständige Liste aller ~275 Dokumente mit Kurzinfo und direktem PDF-Link
 ```
 T0-Time-Mass-Duality/
 ├── 2/
-│   ├── pdf/              # 275+ Dokumente (DE/EN-Paare)
-│   ├── html/             # Interaktive Tools
-│   ├── python/           # Python-Implementierungen
-│   └── Sources/          # LaTeX-Quellen
-│       ├── ch/           # Kapitelquellen (*_De/En_ch.tex)
-│       ├── wr_standalone_A4/  # Einzeldokument-Wrapper
-│       ├── wr_books/     # Buch-Wrapper (5 Bände × 3 Formate)
-│       └── pri-end/      # Gemeinsame Präambeln
-├── PDFs/                 # Einzeldokumente A4 (DE/EN)
-├── books/                # KDP-fertige PDFs (5 Bände × 2 Sprachen × 3 Formate)
-├── Dok023_230_Skripte/   # Skripte Bell / Hilbertraum
-├── Dok263_Skripte/       # Skripte Fraktale Holografie
-├── Dok267_268_Skripte/   # Skripte CMB-Peaks
-├── Dok271_274_Skripte/   # Skripte HLV-Vergleich
-├── Dok275_Skripte/       # Skripte ξ→φ-Rekursion (v2/v3/v4)
-├── rsa/                  # RSA-Faktorisierungs-Demos
-├── sig/                  # Signalanalyse-Tools
+│   ├── pdf/                   # 275+ Dokumente (DE/EN-Paare)
+│   ├── html/                  # Interaktive Tools
+│   ├── python/                # Python-Implementierungen
+│   ├── Sources/               # LaTeX-Quellen
+│   │   ├── ch/                # Kapitelquellen (*_De/En_ch.tex)
+│   │   ├── wr_standalone_A4/  # Einzeldokument-Wrapper
+│   │   ├── wr_books/          # Buch-Wrapper (5 Bände × 3 Formate)
+│   │   └── pri-end/           # Gemeinsame Präambeln
+│   ├── PDFs/                  # Einzeldokumente A4 (DE/EN)
+│   ├── Dok023_230_Skripte/    # Skripte Bell / Hilbertraum
+│   ├── Dok263_Skripte/        # Skripte Fraktale Holografie
+│   ├── Dok267_268_Skripte/    # Skripte CMB-Peaks
+│   ├── Dok271_274_Skripte/    # Skripte HLV-Vergleich
+│   └── Dok275_Skripte/        # Skripte ξ→φ-Rekursion (v2/v3/v4)
+├── books/                     # KDP-fertige PDFs (5 Bände × 2 Sprachen × 3 Formate)
+├── rsa/                       # RSA-Faktorisierungs-Demos
+├── sig/                       # Signalanalyse-Tools
 ├── 000_FFGFT_Changelog_De.md
-└── README.md / README_de.md
+├── README_de.md
+└── README.md
 ```
 
-LaTeX-Struktur: Wrapper in `Sources/wr_standalone_A4/` und `Sources/wr_books/`
-referenzieren Präambeln aus `Sources/pri-end/`. Kapitelinhalte in
-`Sources/ch/` als `NNN_..._De/En_ch.tex`.
+LaTeX-Struktur: Wrapper in `2/Sources/wr_standalone_A4/` und `2/Sources/wr_books/`
+referenzieren Präambeln aus `2/Sources/pri-end/`. Kapitelinhalte in
+`2/Sources/ch/` als `NNN_..._De/En_ch.tex`.
 
 ---
 
