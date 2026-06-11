@@ -4,7 +4,7 @@
 > Projektionskette T⁴→T⁰, CMB-Peakanalyse, natürliche Einheiten
 > statisch, ξ→φ-Rekursion präzisiert.
 
-**DOI:** [10.5281/zenodo.20474821](https://doi.org/10.5281/zenodo.20474821)
+**DOI:** [10.5281/zenodo.20640799](https://doi.org/10.5281/zenodo.20640799)
 
 ---
 

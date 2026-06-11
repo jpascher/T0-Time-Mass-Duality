@@ -1,6 +1,6 @@
 # T0 Time-Mass Duality · FFGFT
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20474821.svg)](https://doi.org/10.5281/zenodo.20474821)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20640799.svg)](https://doi.org/10.5281/zenodo.20640799)
 
 **FFGFT — Fundamental Fractal-Geometric Field Theory** shows:
 all Standard Model constants follow from a single dimensionless
@@ -106,7 +106,7 @@ measurable (Doc. 230).
 |----------|------|
 | 🔬 Interactive Portal | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo v1.1.2 | [DOI 10.5281/zenodo.20474821](https://doi.org/10.5281/zenodo.20474821) |
+| 📦 Zenodo v1.1.3 | [DOI 10.5281/zenodo.20640799](https://doi.org/10.5281/zenodo.20640799) |
 | 🎵 Spotify | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
@@ -155,7 +155,7 @@ German and English.
 
 | Version | DOI | Focus |
 |---------|-----|-------|
-| v1.1.3 | [20474821](https://doi.org/10.5281/zenodo.20474821) | Koide sector, projection chain, CMB, ξ→φ revised |
+| v1.1.3 | [20640799](https://doi.org/10.5281/zenodo.20640799) | Koide sector, projection chain, CMB, ξ→φ revised |
 | v1.1.2 | [20474821](https://doi.org/10.5281/zenodo.20474821) | Book series (5 volumes, 3 KDP formats) |
 | v1.1.1 | [20355305](https://doi.org/10.5281/zenodo.20355305) | Black hole information, dual ordering |
 | v1.1.0 | [20117635](https://doi.org/10.5281/zenodo.20117635) | Hilbert-space bijection |
