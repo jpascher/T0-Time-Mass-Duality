@@ -2,25 +2,37 @@
 % T0 Theory / FFGFT: Document 275 (Chapter Content, DE)
 % Titel: Von xi zu phi -- Rekursive Skalenhierarchie und spektrale Lueckenstruktur
 % Autor: Johann Pascher
-% Datum: Juni 2026
+% Datum: Juni 2026; revidiert 11. Juni 2026 (Audit P. Stoychev, IPI)
 % Referenzen: Dok. 009 (P10), 188, 190 (P35 Trivialität / P37 phi-Rollen), 258, 270, 271, 272, 274; Krueger (HLV) Zenodo 20615649
 % ==============================================================================
 
+\newtheorem*{beobachtung*}{Beobachtung}
+
 \section*{Abstract}
-Wir zeigen, dass der goldene Schnitt $\varphi$ in der FFGFT kein unabhängiger
-Parameter ist, sondern der Fixpunkt einer rekursiven Dämpfungsfolge, die allein
-aus dem fundamentalen geometrischen Parameter $\xi = 4/30000$ und der fraktalen
-Dimension $D_f = 3-\xi$ folgt. Nach
-$k^* = \log(\varphi)/\xi \approx 3609$ Rekursionsebenen gilt
-$r(k^*) \approx 1/\varphi$ mit einem absoluten Fehler von $4{\cdot}10^{-5}$ (relativ $6{,}5{\cdot}10^{-5}$) bei ganzzahligem $k=3609$; das exakte reelle $k^*_\mathrm{exakt}=3608{,}51$ (mit $r(0)$-Korrektur) trifft $1/\varphi$ identisch.
-Die Rekursionsebenen sind dabei keine Renormierungsgruppen-Schritte mit Faktor~2,
-sondern geometrische Skalenebenen mit dem FFGFT-internen Faktor $q = 2/3$;
-mit diesem Faktor ist $(2/3)^{3609}$ eine konvergente, theorieinterne
-Skalierung. Dieses Ergebnis verbindet die mikroskopische fraktale Struktur des
-$T^4$-Torus mit der makroskopischen $\varphi$-Geometrie, wie sie im HLV-Gitter
-(6D$\to$3D cut-and-project) erscheint, ohne freie Parameter.
-Eine numerische Validierungsstudie vergleicht die spektrale Lückenstruktur von
-FFGFT~$T^4$, HLV~G-Lattice und Null-Modellen über drei Ebenen.
+Wir untersuchen die rekursive Dämpfungsfolge
+$r(k{+}1)=r(k)(1-\xi)$, $r(0)=D_f/3$, die allein aus dem fundamentalen
+geometrischen Parameter $\xi = 4/30000$ und der fraktalen Dimension
+$D_f = 3-\xi$ folgt. Bei der Rekursionstiefe
+$k^* = \log(\varphi)/\xi \approx 3609$ \emph{passiert} die Folge den
+Wert $1/\varphi$: $r(3609) \approx 1/\varphi$ mit absolutem Fehler
+$4{\cdot}10^{-5}$ (relativ $6{,}5{\cdot}10^{-5}$); das exakte reelle
+$k^*_\mathrm{exakt}=3608{,}51$ trifft $1/\varphi$ identisch.
+\textbf{Statusklärung (Revision 11.~Juni 2026):} $1/\varphi$ ist
+\emph{kein Fixpunkt} der Rekursion (der einzige Fixpunkt ist $0$),
+sondern ein Durchgangspunkt; da $k^*(c)$ für \emph{jedes} Ziel
+$c\in(0,1)$ mit identischem Parameterstatus existiert, greift die
+$\xi^N/\varphi^N$-Trivialitätswarnung (Dok.~190 P35) auf dieses
+Resultat in vollem Umfang. Physikalischen Gehalt erhielte es erst durch
+eine unabhängige Fixierung von $k^*\approx 3609$ -- derzeit offen.
+Die Rekursionsebenen sind geometrische Skalenebenen mit dem
+FFGFT-internen Faktor $q = 2/3$; $(2/3)^{3609}$ ist konvergent.
+Die numerische Validierungsstudie wurde nach einem unabhängigen Audit
+(P.~Stoychev, IPI, 11.~Juni 2026) vollständig korrigiert (v4):
+mit echter 4D-Implementierung des $T^4$-Graphen und
+dimensions-gematchten 4D-Null-Modellen liegt FFGFT~$T^4$ \emph{im}
+Null-Band; HLV liegt mit echtem Ensemble ebenfalls im Band. Frühere
+gegenteilige Befunde (v3) waren Implementierungsartefakte und werden
+in diesem Dokument sichtbar widerrufen.
 
 % ============================================================================
 \section{Motivation und Einordnung}
@@ -76,7 +88,7 @@ Größe & Wert & Rolle \\
 $\xi = 4/30000$ & $1{,}333\times10^{-4}$ &
   fundamentaler Input; fraktale Dim.; überall aktiv \\
 $1/\varphi$ & $0{,}6180$ &
-  makroskopischer Schalenratio; Fixpunkt der $\xi$-Rekursion (Output) \\
+  makroskopischer Schalenratio; Durchgangspunkt der $\xi$-Rekursion (Output; Status s.\ Abschn.~\ref{sec:durchgang275}) \\
 $Q_\mathrm{FFGFT}$ & $0{,}6677$ &
   Koide-Skalar Leptonen (Output, Dok.~258); nur Teilchenphysikskala \\
 \bottomrule
@@ -109,39 +121,58 @@ Der physikalische Inhalt: $r(0) = D_f/3$ ist das Verhältnis der fraktalen
 Dimension zur topologischen Dimension~3. Jede Skalenebene dämpft dieses
 Verhältnis um den Faktor $(1-\xi)$.
 
-\subsection{Hauptresultat: $1/\varphi$ als Fixpunkt}
+\subsection{Hauptbeobachtung (revidiert): $1/\varphi$ als Durchgangspunkt}\label{sec:durchgang275}
 
-\begin{theorem}[$1/\varphi$ als Fixpunkt der $\xi$-Rekursion]\label{satz:fixpunkt275}
-Es existiert eine eindeutige Rekursionstiefe
+\begin{remark}[Revision 11.~Juni 2026]
+Die ursprüngliche Fassung dieses Abschnitts bezeichnete $1/\varphi$ als
+\emph{Fixpunkt} der Rekursion und führte das Resultat als Theorem. Beides
+war falsch bzw.\ überhöht: der einzige Fixpunkt von $r\mapsto r(1-\xi)$
+ist $r=0$; $1/\varphi$ ist ein \emph{Durchgangspunkt}. Die Korrektur
+folgt dem Audit von P.~Stoychev (IPI-Liste, 11.~Juni 2026).
+\end{remark}
+
+\begin{beobachtung*}
+Die Folge $r(k)$ passiert den Wert $1/\varphi$ bei der Rekursionstiefe
 \begin{equation}
-  \boxed{k^* = \frac{\log\varphi}{\xi}
+  k^* = \frac{\log\varphi}{\xi}
       = \frac{\log\!\bigl(\tfrac{1+\sqrt{5}}{2}\bigr)}{4/30000}
-      \approx 3609}
+      \approx 3609,
   \label{eq:kstar275}
 \end{equation}
-so dass $r(k^*) \approx 1/\varphi$ bis auf einen absoluten Fehler von $4{\cdot}10^{-5}$ bei ganzzahligem $k=3609$. Das exakte reelle $k^*_\mathrm{exakt} = \bigl(\log(1/\varphi)-\log(D_f/3)\bigr)/\log(1-\xi) = 3608{,}51$ erfüllt $r(k^*_\mathrm{exakt}) = 1/\varphi$ identisch.
-\end{theorem}
+mit $r(3609) = 0{,}6179940013\ldots$ und
+$|r(3609)-1/\varphi| = 4{,}0\times10^{-5}$
+(relativ $6{,}5\times10^{-5}$). Das exakte reelle
+$k^*_\mathrm{exakt} = \bigl(\log(1/\varphi)-\log(D_f/3)\bigr)/\log(1-\xi)
+= 3608{,}51$ erfüllt $r(k^*_\mathrm{exakt}) = 1/\varphi$ identisch.
+\end{beobachtung*}
 
-\begin{beweis}
-Aus~\eqref{eq:closed275}: $r(k^*) = 1/\varphi$ genau dann, wenn
-$(D_f/3)\cdot(1-\xi)^{k^*} = 1/\varphi$.
-Da $D_f/3 \approx 1$ für kleines $\xi$:
-$(1-\xi)^{k^*} \approx e^{-\xi k^*} \approx 1/\varphi$,
-also $k^* \approx \log(\varphi)/\xi$.
-Numerische Verifikation:
-\begin{align*}
-  r(0)   &= 0{,}9999\overline{5} \\
-  r(k{=}3609) &= 0{,}6179940013\ldots \\
-  1/\varphi &= 0{,}6180339887\ldots \\
-  |r(3609)-1/\varphi| &= 4{,}0\times10^{-5}
-  \quad(\text{relativ } 6{,}5\times10^{-5}). \qquad\square
-\end{align*}
-\end{beweis}
-
-\begin{remark}[Parameterfreiheit]
-$k^* = \log(\varphi)/\xi$ enthält ausschließlich $\xi = 4/30000$
-(Definitionsgröße) und $\varphi$ (mathematische Konstante).
-Kein freier Parameter, kein Fit.
+\begin{remark}[Parameterstatus -- die entscheidende Einschränkung]
+Die Arithmetik ist korrekt, aber die Aussage ist \emph{nicht}
+ausgezeichnet: für \emph{jedes} Ziel $c\in(0,1)$ existiert
+\begin{equation}
+  k^*(c) = \frac{\log c - \log(D_f/3)}{\log(1-\xi)}
+\end{equation}
+mit exakt demselben Parameterstatus -- \enquote{kein freier Parameter}
+gilt für alle Ziele gleichermaßen, weil der freie Exponent lediglich in
+$k^*$ umbenannt und nach dem Ziel aufgelöst wurde:
+\begin{center}
+\begin{tabular}{@{}lr@{}}
+\toprule
+Ziel $c$ & $k^*(c)$ \\
+\midrule
+$1/\varphi = 0{,}6180$        & $3608{,}5$ \\
+$Q_\mathrm{FFGFT} = 0{,}6677$ & $3028{,}8$ \\
+$1/2$                          & $5197{,}9$ \\
+$1/e$                          & $7499{,}2$ \\
+$\alpha_\mathrm{em}$          & $36899{,}0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Die $\xi^N/\varphi^N$-Trivialitätswarnung (Dok.~190 P35) greift damit
+auf das eigene Resultat. Physikalischen Gehalt erhielte die Beobachtung
+erst, wenn $k^*\approx 3609$ durch etwas Unabhängiges fixiert würde
+(eine Ebenenzählung der Konstruktion, eine Observable) und \emph{dann}
+auf $1/\varphi$ träfe. Eine solche Fixierung ist derzeit nicht bekannt.
 \end{remark}
 
 % ============================================================================
@@ -183,12 +214,29 @@ der Theorie, kein astronomischer Grenzwert.
 
 \subsection{Design}
 
-Verglichen werden: FFGFT~$T^4$ (analytischer Laplacian, $\xi$-Dämpfung,
-$q=2/3$), FFGFT~$T^4$ endlicher Graph (kNN-Laplacian auf $T^4$-Punktgitter,
-analog HLV), HLV~G-Lattice (NNLS-gewichteter $k$NN-Graph), sowie vier
-Null-Modelle (periodischer Torus, kubisch, jittered-kubisch,
-zufällig-geometrisch). In v3 des Skripts: $N=2000$, $k=16$, drei Seeds
-für FFGFT-Graph und HLV.
+\textbf{Skriptversion v4 (revidiert nach Audit).} Verglichen werden
+zwei getrennte Sektoren mit jeweils dimensions-gematchten Null-Modellen:
+\emph{4D-Sektor} -- FFGFT~$T^4$ als kNN-Graph in echten
+4D-Koordinaten (anisotrope Toruslängen $L_\mu = 2\pi(2/3)^\mu$,
+Anisotropie $L_0/L_3 = 3{,}38$) gegen drei 4D-Nulls (isotrop-kubisch,
+jittered-anisotrop, random-anisotrope Box); \emph{3D-Sektor} -- HLV
+G-Lattice ($k$NN-Graph, jetzt mit echtem Seed-Ensemble $\sigma=0{,}05$)
+gegen drei 3D-Nulls (jittered-kubisch, random, kubisch).
+$N=2000$, $k=16$, drei Seeds für alle Modelle; Eindeutigkeit aller
+Punktmengen wird per Assertion erzwungen.
+
+\begin{remark}[Was an v3 falsch war -- Audit P.~Stoychev]
+(i)~Der v3-\enquote{$T^4$-Graph} nutzte die Gitterkoordinate $n_3$ nur
+in der Akzeptanznorm, nicht in der Position: von 2000 Punkten waren nur
+729 eindeutige 3D-Positionen; die $1/d^2$-Gewichtung mit Clamp erzeugte
+Laplacian-Eigenwerte bis $2{,}5\times10^{12}$.
+(ii)~\texttt{hlv\_points(seed)} verwendete den Seed nicht -- das
+\enquote{Ensemble} war dreimal dieselbe Rechnung.
+(iii)~Der Schalen-Detektor war für Ziele $<1$ strukturell verzerrt
+(s.\ Abschn.~\ref{sec:ebene2-275}). Alle drei Fehler sind in v4 behoben;
+zusätzlich werden 4D-Modelle nur gegen 4D-Nulls verglichen, da der
+Vergleich eines 4D-Graphen mit 3D-Nulls erneut unfair wäre.
+\end{remark}
 
 \begin{description}
   \item[Ebene~1] Gap-Hierarchie-Metriken: max.\ Lücke, Gap-CV,
@@ -205,72 +253,96 @@ die radiale Verteilungsfunktion $g(r)$ robuster. Die Ensemble-Größe
 (3~Seeds) ist illustrativ, nicht statistisch abgesichert.
 \end{remark}
 
-\subsection{Ergebnisse Ebene~1: Gap-Hierarchie ($N=2000$)}
+\subsection{Ergebnisse Ebene~1 (v4): Gap-Hierarchie ($N=2000$, 3~Seeds)}
+
+\begin{remark}[Widerruf des v3-Resultats]
+Das in der Erstfassung berichtete Resultat
+\enquote{FFGFT $T^4$-Graph außerhalb des Null-Bandes,
+gap\_CV $=1{,}68\pm0{,}09$} wird \textbf{widerrufen}: es war
+vollständig ein Artefakt der Punktduplikate (729 eindeutige von
+2000 Punkten) in Kombination mit dem $1/d^2$-Clamp. Ebenso wird die
+Präzisionsaussage \enquote{HLV $\approx$ jittered, $\Delta<0{,}001$
+über 3 Seeds} zurückgenommen -- sie verglich eine einzelne Realisierung
+mit sich selbst (Seed-Bug).
+\end{remark}
 
 \begin{table}[ht]
 \centering
-\caption{Gap-Hierarchie-Metriken, Low-Sektor ($n=100$ Moden, $N=2000$).
-FFGFT Graph: Mittelwert über 3~Seeds mit Jitter~$\sigma=0{,}05$.
-Null-Band: \mbox{[0{,}31, 1{,}05]} aus den vier Null-Modellen.}
-\label{tab:gap275v3}
-\begin{tabular}{@{}lrrrl@{}}
+\caption{Gap-CV (Low-Sektor, $n{=}100$ Moden, $N{=}2000$,
+Mittel~$\pm$~Std über 3~Seeds), v4: getrennte Sektoren mit
+dimensions-gematchten Null-Modellen.}
+\label{tab:gap275v4}
+\begin{tabular}{@{}llrl@{}}
 \toprule
-Modell & max\_gap & gap\_CV & low $\langle r\rangle$ & Band-Status \\
+Sektor & Modell & gap\_CV & Band-Status \\
 \midrule
-FFGFT $T^4$ analytisch      & 4{,}871 & 0{,}831 & 0{,}370 & im Band \\
-FFGFT $T^4$ Graph (mean±std)& 0{,}047 & $1{,}680\pm0{,}092$ & 0{,}452 & \textbf{außerhalb} \\
-HLV G-Lattice               & 0{,}185 & 0{,}755 & 0{,}461 & im Band \\
+4D & \textbf{FFGFT $T^4$ (anisotrop)} & $1{,}329\pm0{,}025$ & im Band \\
+4D & Null: kubisch isotrop            & $2{,}406\pm0{,}010$ & Bandgrenze oben \\
+4D & Null: jittered anisotrop         & $0{,}690\pm0{,}026$ & Bandgrenze unten \\
+4D & Null: random anisotrope Box      & $0{,}740\pm0{,}037$ & -- \\
 \midrule
-Periodischer Torus          & 2{,}000 & 0{,}306 & 0{,}833 & (Grenze) \\
-Kubisch                     & 0{,}250 & 1{,}051 & 0{,}343 & (Grenze) \\
-Jittered-kubisch            & 0{,}118 & 0{,}755 & 0{,}456 & -- \\
-Zufällig-geometrisch        & 0{,}105 & 0{,}616 & 0{,}567 & -- \\
+3D & \textbf{HLV G-Lattice} ($\sigma{=}0{,}05$) & $0{,}710\pm0{,}008$ & im Band \\
+3D & Null: jittered kubisch           & $0{,}768\pm0{,}011$ & -- \\
+3D & Null: random                     & $0{,}675\pm0{,}043$ & Bandgrenze unten \\
+3D & Null: kubisch                    & $0{,}978\pm0{,}010$ & Bandgrenze oben \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Drei Befunde:
+Befunde:
 
 \begin{enumerate}
-  \item \textbf{FFGFT $T^4$ endlicher Graph liegt außerhalb des Null-Bandes}
-        (gap\_CV~$= 1{,}68 \pm 0{,}09$, Band-Obergrenze~$1{,}05$).
-        Das ist ein stärkeres Ergebnis als in v2.
-
-  \item \textbf{HLV liegt im Null-Band}: gap\_CV~$= 0{,}755 \approx$
-        Jittered-kubisch~$= 0{,}755$ (Differenz~$< 0{,}001$).
-        HLV ist spektral nicht von jittered-kubischem Gitter unterscheidbar.
-        Das ist \emph{konsistent} mit Krügers Run~E.
-
-  \item \textbf{FFGFT analytisch und HLV} liegen im Band, aber aus
-        verschiedenen Gründen: FFGFT~analytisch hat eine andere Spektralstruktur
-        als der endliche Graph; HLV zeigt dieselbe gap\_CV wie ein
-        Zufalls-Kontrollmodell.
+  \item \textbf{Kein Modell separiert.} FFGFT~$T^4$ liegt mit
+        $1{,}329$ innerhalb des 4D-Null-Bandes $[0{,}690,\,2{,}406]$;
+        HLV liegt mit $0{,}710$ innerhalb des 3D-Null-Bandes
+        $[0{,}675,\,0{,}978]$.
+  \item \textbf{Das isotrope 4D-Gitter selbst hat die höchste gap\_CV}
+        ($2{,}406$) -- reguläre Gitter erzeugen in 4D starke
+        Eigenwert-Degenerationen. Eine hohe gap\_CV ist daher kein
+        $T^4$-Spezifikum, sondern eine generische Ordnungs-Signatur.
+  \item \textbf{Robustheit geprüft:} Das $T^4$-Resultat ist
+        jitter-stabil ($\sigma=0{,}02$--$0{,}10$: $1{,}43/1{,}35/1{,}35$)
+        und für $n_\mathrm{range}=4/5$ konsistent ($1{,}35/1{,}40$);
+        $n_\mathrm{range}=3$ ($2{,}28$) ist ein
+        Kleinheits-Artefakt.
+  \item \textbf{HLV mit echtem Ensemble} bleibt im Band und
+        nahe jittered-kubisch -- der \emph{Befund} von v3 (konsistent
+        mit Krügers Run~E) überlebt, die damals behauptete Präzision
+        nicht.
 \end{enumerate}
 
 \begin{remark}[Konsequenz für den Vergleich]
-Der endliche FFGFT~$T^4$-Graph und HLV liegen im gap\_CV-Bereich
-\emph{nicht} im selben Regime. Das schränkt die in Dok.~271 formulierte
-Hypothese einer gemeinsamen spektralen Signatur ein: strukturelle
-Ähnlichkeit ist auf der analytischen Ebene sichtbar, auf der
-Graphen-Ebene bei $N=2000$ aber nicht mehr robust.
+Bei $N=2000$ trennt die gap\_CV-Diagnostik weder den
+$T^4$-Graphen noch HLV von dimensions-gematchten Null-Modellen.
+Das \emph{verstärkt} Krügers konservativen Run-E-Befund aus einer
+unabhängigen Pipeline und schränkt die in Dok.~271 formulierte
+Hypothese einer gemeinsamen spektralen Signatur weiter ein: auf der
+Graphen-Ebene ist bei dieser Größe keine Signatur nachweisbar.
 \end{remark}
 
-\subsection{Ergebnisse Ebene~2: Schalenstruktur ($N=2000$)}
+\subsection{Ergebnisse Ebene~2: Schalenstruktur -- widerrufen}\label{sec:ebene2-275}
 
-Bei $N=2000$ ist die Diskriminierung zwischen $1/\varphi$ und
-$Q_\mathrm{FFGFT}$ erstmals messbar:
-\begin{equation}
-  |{}\mathrm{err}(1/\varphi) - \mathrm{err}(Q_\mathrm{FFGFT}){}|_\mathrm{HLV}
-  = |0{,}949 - 0{,}804| = 0{,}145 > 0{,}05.
-\end{equation}
-$Q_\mathrm{FFGFT} \approx 0{,}6677$ passt bei $N=2000$ besser zur
-HLV-Schalenstruktur als $1/\varphi \approx 0{,}6180$. Das ist ein
-\emph{vorläufiger} Befund -- beide Werte zeigen absolute Fehler~$> 0{,}8$,
-was auf eine noch imperfekte Schalenauflösung hinweist.
+\begin{remark}[Widerruf der v3-Diskriminierung]
+Die in der Erstfassung berichtete Diskriminierung
+($\mathrm{err}(Q_\mathrm{FFGFT}) < \mathrm{err}(1/\varphi)$,
+$\Delta = 0{,}145$) wird \textbf{widerrufen}. Der Detektor erkennt
+Schalen als streng wachsende Distanzfolge (Faktor $\geq 1{,}05$);
+für jedes Zielverhältnis $c<1$ ist der minimal erreichbare Fehler
+$(1{,}05/c - 1)$: für $1/\varphi$ also $0{,}699$, für $Q_\mathrm{FFGFT}$
+$0{,}573$. \emph{Das größere von zwei sub-1-Verhältnissen gewinnt auf
+jedem Punktset} -- die eigenen Kontrollen zeigten dies bereits
+(kubisch: $0{,}976$ vs.\ $1{,}135$; random: $1{,}194$ vs.\ $1{,}371$),
+wurden aber nicht als Alarmsignal gelesen. Der Befund war strukturell,
+nicht physikalisch (Audit P.~Stoychev).
+\end{remark}
 
-Der FFGFT~$T^4$-Graph zeigt hier keine auswertbaren Schalen (reguläres
-Gitter, keine Schalentrennung bei diesem Threshold). Das ist kein
-Fehler, sondern eine Eigenschaft des regulären $T^4$-Gitters.
+In v4 wirft der Detektor für Ziele $\leq 1$ eine Ausnahme; getestet
+wird nur noch gegen Verhältnisse $>1$. Referenzwert:
+$\mathrm{err}(\varphi{=}1{,}618)_\mathrm{HLV} = 0{,}257$;
+das beste konsekutive Schalenverhältnis der HLV-Punktwolke liegt nach
+Stoychevs Messung bei $\approx 1{,}15$ -- weder $\varphi$, $1/\varphi$
+noch $Q_\mathrm{FFGFT}$. Für künftige Versionen ist die radiale
+Verteilungsfunktion $g(r)$ mit Peak-Positionsanalyse der robustere Weg.
 
 \subsection{Ergebnis Ebene~3: Numerische Verifikation}
 
@@ -281,47 +353,44 @@ Fehler, sondern eine Eigenschaft des regulären $T^4$-Gitters.
   \text{ relativ } 6{,}5\times10^{-5}).
 \end{equation}
 
-Das Ergebnis folgt ohne freie Parameter aus $\xi$ und $\varphi$;
-die Fehlerangabe wurde in v3 präzisiert (zuvor fälschlich $<10^{-9}$).
+Die Arithmetik ist korrekt; die Fehlerangabe wurde in v3 präzisiert
+(zuvor fälschlich $<10^{-9}$). Zum \emph{Status} der Aussage --
+Durchgangspunkt, nicht Fixpunkt; $k^*(c)$ für jedes Ziel existent --
+siehe Abschn.~\ref{sec:durchgang275}: \enquote{ohne freie Parameter}
+ist keine Auszeichnung dieses Resultats.
 
 % ============================================================================
 \section{Diskussion}
 % ============================================================================
 
-\subsection{Abgrenzung zur $\varphi^N$-Trivialitätswarnung (Dok.~190 P35)}
+\subsection{Verhältnis zur $\varphi^N$-Trivialitätswarnung (Dok.~190 P35) -- revidiert}
 
-Dok.~272 (und Dok.~190 P35, $\xi^N$-Trivialität) formulieren eine methodische Leitplanke:
-\emph{Jede Größe ist als $\varphi^N$ schreibbar; eine gemessene Skala in
-einem Exponenten ist keine Vorhersage.} Diese Warnung ist berechtigt und
-bleibt gültig -- sie trifft jedoch das $k^*$-Resultat dieses Dokuments
-\emph{nicht}, und zwar aus drei Gründen:
+\begin{remark}[Widerruf der Abgrenzung]
+Die Erstfassung dieses Abschnitts führte drei Argumente an, warum die
+Trivialitätswarnung das $k^*$-Resultat \emph{nicht} treffe
+(\enquote{kein freier Exponent}, \enquote{kein empirischer Anker},
+\enquote{keine externe Kalibrierung}). Diese Abgrenzung wird
+\textbf{widerrufen}: alle drei Argumente übersehen, dass der freie
+Exponent lediglich in $k^*$ \emph{umbenannt} und nach dem gewünschten
+Ziel \emph{aufgelöst} wurde. $k^*(c)$ existiert für jedes $c\in(0,1)$
+mit identischen Eigenschaften (Tabelle in
+Abschn.~\ref{sec:durchgang275}); die Auswahl des Ziels $1/\varphi$
+ist die versteckte Wahl. P35 greift in vollem Umfang -- das ist
+exakt der Fall, für den die Leitplanke geschrieben wurde, und ihre
+Anwendung auf ein eigenes Resultat ist ihr erster ernsthafter
+korpusinterner Härtetest (bestanden: das Resultat wird herabgestuft).
+\end{remark}
 
-\begin{enumerate}
-  \item \textbf{Kein freier Exponent.} In einem $\varphi^N$-Ausdruck ist
-        $N$ eine Wahl oder ein Fit. Hier ist $k^* = \log(\varphi)/\xi$ ein
-        \emph{Ergebnis} -- es gibt keine Freiheit, $k^*$ anders zu wählen.
-        Der Wert $3609$ folgt zwingend aus $\xi = 4/30000$.
-
-  \item \textbf{Kein empirischer Anker.} Dok.~009 (P10 in Dok.~190) schreibt
-        $245 = \varphi^{12}/(1{,}314)$ mit einem empirischen Faktor~$1{,}314$.
-        Das ist ein echter $\varphi^N$-Fall: der Nenner ist nicht hergeleitet.
-        Im $k^*$-Resultat gibt es keinen solchen Nenner -- $r(0) = D_f/3$
-        ist geometrisch definiert, nicht empirisch kalibriert.
-
-  \item \textbf{Keine externe Kalibrierung.} Die Rechnung enthält ausschließlich
-        $\xi = 4/30000$ (Definitionsgröße) und $\varphi$ (mathematische
-        Konstante). Keine SI-Einheitenwahl, keine Massenskala, kein
-        Renormierungsschritt.
-\end{enumerate}
-
-Die in Dok.~190 P37 dokumentierte Dreiteilung der $\varphi$-Rollen im
-Korpus -- (1)~mikroskopisch/$\xi$-Ebene, (2)~makroskopisch/$1/\varphi$
-als Fixpunkt, (3)~Teilchenphysik/$Q_\mathrm{FFGFT}$ -- ist in diesem
-Dokument umgesetzt. Dok.~188 verwendet $\varphi^{-1}$ bereits als
-phänomenologischen Skalierungsfaktor zwischen fraktalen Ebenen; das
-vorliegende Dokument zeigt, \emph{warum} dieser Faktor strukturell
-erscheint: er ist der Grenzwert der $\xi$-Rekursion, nicht eine
-unabhängige Annahme.
+Was bleibt: Die in Dok.~190 P37 dokumentierte Dreiteilung der
+$\varphi$-Rollen im Korpus -- (1)~mikroskopisch/$\xi$-Ebene,
+(2)~makroskopisch/$1/\varphi$ als Durchgangspunkt der Rekursion,
+(3)~Teilchenphysik/$Q_\mathrm{FFGFT}$ -- bleibt als
+\emph{Begriffstrennung} gültig und nützlich. Dok.~188 verwendet
+$\varphi^{-1}$ als phänomenologischen Skalierungsfaktor zwischen
+fraktalen Ebenen; ob dieser Faktor strukturell aus der
+$\xi$-Rekursion folgt, ist nach der vorliegenden Revision wieder eine
+\emph{offene Frage}: die Rekursion liefert ihn nur, wenn die Tiefe
+$k^*\approx3609$ unabhängig begründet wird.
 
 \subsection{Einordnung in die Dokument-Reihe}
 
@@ -339,14 +408,20 @@ diagnostischen Kanal.
 \subsection{Offene Punkte}
 
 \begin{enumerate}
-  \item Schalenstruktur-Diskriminierung ($1/\varphi$ vs.\ $Q_\mathrm{FFGFT}$)
-        erfordert $N \gtrsim 2000$ Punkte.
-  \item FFGFT-$T^4$-Laplacian auf endlichem Graphen (nicht nur analytisch)
-        für direkteren Vergleich mit HLV.
-  \item Pre-deklarierte Ensemble-Bandtests analog Krüger Run~E für
-        FFGFT~$T^4$ fehlen.
-  \item Physikalische Observable die $k^* \approx 3609$ als Skalenübergang
-        messbar machen würden -- offen.
+  \item Schalen-Diagnostik auf $g(r)$-Basis (Peak-Positionen,
+        Verhältnisse $>1$) -- der v3-Detektor ist für sub-1-Ziele
+        unbrauchbar (Abschn.~\ref{sec:ebene2-275}).
+  \item Pre-deklarierte Ensemble-Bandtests analog Krüger Run~E
+        (Metriken, Bänder und Seeds vor der Rechnung festgelegt)
+        für den 4D-$T^4$-Graphen.
+  \item Größere $N$ und mehr Seeds: die vorliegenden 3-Seed-Ensembles
+        sind illustrativ, nicht statistisch abgesichert.
+  \item Eine unabhängige Fixierung von $k^* \approx 3609$ (Ebenenzählung
+        der Konstruktion oder physikalische Observable) -- ohne sie hat
+        die Durchgangspunkt-Beobachtung keinen physikalischen Gehalt
+        (Abschn.~\ref{sec:durchgang275}). Derzeit nicht bekannt.
+  \item Kreuzvalidierung der v4-Implementierung gegen die von
+        P.~Stoychev angebotenen deduplizieren/geseedeten Varianten.
 \end{enumerate}
 
 % ============================================================================
@@ -354,30 +429,49 @@ diagnostischen Kanal.
 % ============================================================================
 
 \begin{enumerate}
-  \item $1/\varphi$ ist der Fixpunkt der $\xi$-Dämpfungsrekursion nach
-        $k^* = \log(\varphi)/\xi \approx 3609$ geometrischen Skalenebenen
-        mit Faktor $q = 2/3$ -- kein freier Parameter.
-  \item Mit $q = 2/3$ ist $(2/3)^{3609}$ konvergent und intern konsistent,
-        kein astronomischer Grenzwert.
-  \item \textbf{Neues Ergebnis (v3, $N=2000$):} FFGFT~$T^4$ endlicher Graph
-        liegt mit gap\_CV~$= 1{,}68 \pm 0{,}09$ außerhalb des Null-Bandes
-        $[0{,}31,\,1{,}05]$. HLV liegt mit gap\_CV~$= 0{,}755$ im Band
-        (nahezu identisch mit Jittered-kubisch~$= 0{,}755$, $\Delta < 0{,}001$).
-        HLV ist bei $N=2000$ spektral nicht von jittered-kubischen
-        Kontrollmodellen unterscheidbar -- konsistent mit Krüger Run~E.
-  \item Schalenstruktur bei $N=2000$: $Q_\mathrm{FFGFT} \approx 0{,}6677$
-        passt besser zur HLV-Schalenstruktur als $1/\varphi \approx 0{,}6180$
-        ($\Delta = 0{,}145$). Vorläufiger Befund, absolute Fehler noch groß.
-  \item Die drei Skalare $\xi$, $1/\varphi$, $Q_\mathrm{FFGFT}$ sind alle
-        herleitbar, operieren aber auf verschiedenen physikalischen Ebenen
-        (Dok.~190 P37).
+  \item Die $\xi$-Dämpfungsrekursion passiert $1/\varphi$ bei
+        $k^* = \log(\varphi)/\xi \approx 3609$; die Arithmetik ist
+        korrekt (Fehler $4{\cdot}10^{-5}$), aber $1/\varphi$ ist
+        \emph{Durchgangspunkt, nicht Fixpunkt}, und $k^*(c)$ existiert
+        für jedes Ziel -- die P35-Trivialitätswarnung greift; ohne
+        unabhängige Fixierung von $k^*$ hat die Beobachtung keinen
+        physikalischen Gehalt.
+  \item Mit $q = 2/3$ ist $(2/3)^{3609}$ konvergent und intern
+        konsistent, kein astronomischer Grenzwert -- diese
+        Skaleninterpretation bleibt bestehen.
+  \item \textbf{v4-Hauptergebnis ($N=2000$, dimensions-gematchte
+        Nulls):} Keine Separation. FFGFT~$T^4$ (echtes 4D,
+        gap\_CV $=1{,}329\pm0{,}025$) liegt im 4D-Null-Band
+        $[0{,}690,\,2{,}406]$; HLV (echtes Ensemble,
+        $0{,}710\pm0{,}008$) liegt im 3D-Null-Band
+        $[0{,}675,\,0{,}978]$. Das verstärkt Krügers konservativen
+        Run-E-Befund aus einer unabhängigen Pipeline.
+  \item Die v3-Befunde \enquote{$T^4$ außerhalb des Bandes} und
+        \enquote{$Q_\mathrm{FFGFT}$ diskriminiert gegen $1/\varphi$}
+        sind \textbf{widerrufen} (Duplikat-Artefakt bzw.\
+        Detektor-Bias); der Seed-Bug des HLV-Ensembles ist behoben.
+        Alle drei Fehler gehen auf das Audit von P.~Stoychev zurück
+        und sind in Dok.~190 als K4 registriert.
+  \item Die drei Skalare $\xi$, $1/\varphi$, $Q_\mathrm{FFGFT}$
+        bleiben als Begriffstrennung auf verschiedenen physikalischen
+        Ebenen nützlich (Dok.~190 P37); der \emph{Herleitungsanspruch}
+        für $1/\varphi$ aus der Rekursion ist auf den Status einer
+        offenen Frage zurückgestuft (Dok.~190 P38).
 \end{enumerate}
 
 \paragraph{Anschlüsse.}
 Dok.~258 ($Q_\mathrm{FFGFT}$, Koide-Leiter), Dok.~270 (Reduktionskette
 $T^4\to T^0$), Dok.~271 (FFGFT-HLV-Strukturvergleich), Dok.~272
 (HLV/Dot-Theory-Einordnung). Das Python-Skript
-\texttt{ffgft\_hlv\_gap\_v2.py} ist öffentlich zugänglich und reproduzierbar.
+\texttt{ffgft\_hlv\_gap\_v4.py} (korrigierte Fassung; v2/v3 bleiben
+als dokumentierte Fehlerstände im Archiv) ist öffentlich zugänglich
+und reproduzierbar.
+
+\paragraph{Dank.}
+Plamen Stoychev (IPI) für das unabhängige Audit vom 11.~Juni 2026,
+das alle drei Skriptfehler identifizierte und die Statusklärung des
+$k^*$-Resultats erzwang. Die Revision dieses Dokuments setzt sein
+Audit vollständig um.
 
 \begin{thebibliography}{9}
 
@@ -401,7 +495,7 @@ FFGFT-Korpus (2026).
 
 \bibitem{dok190}
 J.~Pascher, \emph{Dok.\,190: Korrekturverzeichnis FFGFT/T0
-(K1--K3, P1--P35)}, FFGFT-Korpus (2026).
+(K1--K4, P1--P38)}, FFGFT-Korpus (2026).
 
 \bibitem{dok009}
 J.~Pascher, \emph{Dok.\,009: Ursprung von $\xi = 4/30000$},

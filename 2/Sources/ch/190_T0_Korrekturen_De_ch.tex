@@ -8,7 +8,7 @@
 
 \section*{Vorbemerkung}
 
-\begin{tcolorbox}[colback=green!6!white, colframe=green!55!black, title={Status: K1--K3, P1--P37 (P16/P17 teilw., P20/P30/P32 offen, P29 teilw., P31 teilw. hergeleitet, P33 deklariert, P34 präzisiert; P35/P36 nachgetragen; P37 deklariert) (Stand 10.~Juni 2026)}]
+\begin{tcolorbox}[colback=green!6!white, colframe=green!55!black, title={Status: K1--K4, P1--P38 (P16/P17 teilw., P20/P30/P32 offen, P29 teilw., P31 teilw. hergeleitet, P33 deklariert, P34 präzisiert; P35/P36 nachgetragen; P37 revidiert; K4/P38 nach externem Audit) (Stand 11.~Juni 2026)}]
 Die in diesem Dokument aufgeführten Korrekturen (K1–K3) und
 Präzisierungen (P1–P13) sind in die jeweiligen Quelldokumente
 eingearbeitet. Die letzte offene Stelle --- K2 (Tau-Vorfaktor
@@ -76,6 +76,15 @@ die nicht verwechselt werden dürfen. P37 dokumentiert diese Trennung und
 ergänzt die $\xi^N$/$\varphi^N$-Trivialitätswarnung (P35) um die Rollenebene.
 Hinweis: P35 ($\xi^N$-Trivialität) und P36 ($R_H$-Deutung) waren per Changelog
 (Updates 16/17) deklariert; ihre Tabelleneinträge sind am 10.~Juni 2026 nachgetragen.
+
+\textbf{Nachtrag (11.~Juni 2026):} Neu \textbf{K4} (drei Implementierungs\-fehler
+im Validierungsskript v3 zu Dok.~275: Punktduplikate, Seed-Bug,
+Detektor-Bias -- alle behoben in v4, betroffene Resultate widerrufen)
+und \textbf{P38} ($k^*$-Resultat von \enquote{Fixpunkt ohne freien
+Parameter} auf \enquote{Durchgangspunkt, P35 greift} zurückgestuft;
+P37 Ebene~(2) entsprechend revidiert). Beide Einträge gehen auf das
+unabhängige Audit von P.~Stoychev (IPI-Liste, 11.~Juni 2026) zurück --
+der erste externe Audit-Eintrag des Registers.
 schützt vor zukünftiger Vermischung.
 \end{tcolorbox}
 
@@ -1575,6 +1584,24 @@ K2 & 116 (Tab.) &
 K3 & 018 (Explorer) &
   $a_e = 4\pi/(f \cdot k)$ &
   $a_e = 2\pi^2/(f \cdot k)$ \\[3pt]
+K4 & 275 (Skript v3) &
+  Drei Implementierungsfehler in \texttt{ffgft\_hlv\_gap\_v3.py}:
+  (a)~$T^4$-Punktgitter nutzte $n_3$ nur in der Akzeptanznorm, nicht in
+  der Position (729 eindeutige von 2000 Punkten; $1/d^2$-Clamp erzeugte
+  $\lambda_\mathrm{max}=2{,}5{\cdot}10^{12}$) -- Resultat
+  \enquote{gap\_CV $=1{,}68$ außerhalb des Bandes} war Artefakt;
+  (b)~\texttt{hlv\_points(seed)} verwendete den Seed nicht -- das
+  3-Seed-\enquote{Ensemble} war dreimal dieselbe Rechnung;
+  (c)~Schalen-Detektor für Zielverhältnisse $<1$ strukturell verzerrt
+  (Mindestfehler $(1{,}05/c-1)$; größeres sub-1-Ratio gewinnt auf jedem
+  Punktset) -- Diskriminierung $\Delta=0{,}145$ war strukturell &
+  \textbf{Alle drei behoben in v4} (11.~Juni 2026): $T^4$ als kNN in
+  echten 4D-Koordinaten mit dimensions-gematchten 4D-Nulls (Ergebnis:
+  $1{,}329\pm0{,}025$ \emph{im} Band $[0{,}690,\,2{,}406]$);
+  HLV-Ensemble mit $\sigma=0{,}05$ ($0{,}710\pm0{,}008$, im Band);
+  Schalen-Detektor wirft Ausnahme für Ziele $\leq1$.
+  v3-Resultate in Dok.~275 sichtbar widerrufen.
+  \emph{Audit: P.~Stoychev (IPI), 11.~Juni 2026} \\[3pt]
 P1 & 116 / 158 &
   $\Delta Q < 0{,}00003\,\%$ vs.\ $0{,}001\,\%$ &
   Beide korrekt; $0{,}001\,\%$ für extern \\[3pt]
@@ -1672,10 +1699,27 @@ P37 & 009, 188, 271, \newline 272, 275 &
   \newline
   \textbf{(1) Mikroskopisch -- Input:} $\xi = 4/30000$ (fraktale Dimension). $\varphi$ ist hier \emph{nicht} aktiv; $\xi$ und $\varphi$ sind verschiedene Objekte.
   \newline
-  \textbf{(2) Makroskopisch -- Output, hergeleitet:} $1/\varphi \approx 0{,}6180$ ist der \emph{Fixpunkt} der $\xi$-Dämpfungsrekursion $r(k+1)=r(k)\cdot(1-\xi)$ nach $k^* = \log(\varphi)/\xi \approx 3609$ geometrischen Skalenebenen (Faktor $q=2/3$). Das ist kein freier Parameter und keine $\varphi^N$-Trivialität: $k^*$ ergibt sich ohne Fit, die Zahl $k^*\approx3609$ ist ein \emph{Ergebnis}, nicht eine Wahl. Skalenebenen sind mit $q=2/3$ intern konvergent ($(2/3)^{3609}\to0$), nicht RG-Schritte mit Faktor~2.
+  \textbf{(2) Makroskopisch -- revidiert (s.\ P38):} $1/\varphi \approx 0{,}6180$ ist \emph{Durchgangspunkt} der $\xi$-Dämpfungsrekursion $r(k+1)=r(k)\cdot(1-\xi)$ bei $k^* = \log(\varphi)/\xi \approx 3609$ (einziger Fixpunkt: $0$). Der ursprüngliche Herleitungsanspruch ist auf eine offene Frage zurückgestuft -- $k^*(c)$ existiert für jedes Ziel $c$, P35 greift (Details: P38). Die Skaleninterpretation bleibt: Ebenen mit $q=2/3$ intern konvergent, keine RG-Schritte mit Faktor~2.
   \newline
   \textbf{(3) Teilchenphysik -- Output:} $Q_\mathrm{FFGFT}\approx 0{,}6677$ (Koide-Skalar, Dok.~258) operiert nur auf der Leptonmassen-Skala. Nicht mit $1/\varphi$ verwechseln.
   \newline
-  \textbf{Warnung Dok.~272 / P35 / P10:} Die Warnung \enquote{jede Größe ist als $\varphi^N$ schreibbar -- keine Vorhersage} bleibt gültig für Fälle wie Dok.~009 ($\varphi^{12}/1{,}314$, empirischer Anker). Das $k^*$-Resultat aus Dok.~275 ist davon \emph{verschieden}: es enthält keinen empirischen Anker, keine Freiheit in der Wahl von $N$, und keine externe Kalibrierung. \emph{Deklariert/vermerkt} \\
+  \textbf{Warnung Dok.~272 / P35 / P10:} Die Warnung \enquote{jede Größe ist als $\varphi^N$ schreibbar -- keine Vorhersage} bleibt gültig -- und trifft nach der Revision vom 11.~Juni 2026 \emph{auch} das $k^*$-Resultat aus Dok.~275 (die frühere gegenteilige Abgrenzung an dieser Stelle ist widerrufen, s.\ P38). \emph{Deklariert; Ebene~(2) revidiert 11.~Juni 2026} \\[3pt]
+P38 & 275 &
+  $k^* = \log(\varphi)/\xi \approx 3609$ als \enquote{Fixpunkt}-Resultat
+  \enquote{ohne freien Parameter} präsentiert; Abgrenzung von der
+  $\varphi^N$-Trivialität (P35) mit drei Argumenten behauptet &
+  \textbf{Statusklärung:} (a)~$1/\varphi$ ist \emph{Durchgangspunkt},
+  kein Fixpunkt -- der einzige Fixpunkt von $r\mapsto r(1-\xi)$ ist $0$.
+  (b)~$k^*(c) = [\log c - \log(D_f/3)]/\log(1-\xi)$ existiert für
+  \emph{jedes} Ziel $c\in(0,1)$ mit identischem Parameterstatus:
+  $k^*(Q_\mathrm{FFGFT})=3029$, $k^*(1/2)=5198$, $k^*(1/e)=7499$,
+  $k^*(\alpha_\mathrm{em})=36899$ -- der freie Exponent wurde nur in
+  $k^*$ umbenannt und nach dem Ziel aufgelöst. P35 greift in vollem
+  Umfang (erste korpusinterne Selbstanwendung der Leitplanke).
+  (c)~Die Arithmetik ($r(3609)=0{,}6179940$, Fehler $4{\cdot}10^{-5}$)
+  ist korrekt; physikalischen Gehalt erhielte die Beobachtung erst
+  durch unabhängige Fixierung von $k^*\approx3609$ (Ebenenzählung,
+  Observable) -- derzeit offen.
+  \emph{Revidiert nach Audit P.~Stoychev, 11.~Juni 2026} \\
 \end{longtable}
 }
