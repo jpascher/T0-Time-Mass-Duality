@@ -116,6 +116,13 @@ ist aber prinzipiell messbar (Dok. 230).
 
 ---
 
+## Alle Dokumente
+
+Eine vollständige Liste aller ~275 Dokumente mit Kurzinfo und direktem PDF-Link:
+**[DOCUMENTS_de.md](DOCUMENTS_de.md)**
+
+---
+
 ## Einstieg
 
 | Schritt | Dokument |
@@ -150,8 +157,23 @@ T0-Time-Mass-Duality/
 
 ## Bücher (Amazon KDP)
 
-Fünf-Band-Serie, drei Formate (eBook / Taschenbuch / Hardcover),
-Deutsch und Englisch.
+Die FFGFT-Buchserie ist als **Fünf-Band-Serie** auf Amazon KDP erhältlich —
+in drei Formaten (Kindle eBook / Taschenbuch 8,5×11 / Hardcover 8,25×11)
+jeweils auf Deutsch und Englisch (30 PDFs gesamt).
+
+| Band | Inhalt | Dok. |
+|------|--------|------|
+| Teil 1 | Grundlagen, ξ, Konstanten, Einheiten | 40 |
+| Teil 2 | Lagrangian, QFT, QM-Tests | 36 |
+| Teil 3 | Kosmologie, Bewusstsein | 35 |
+| Teil 4 | Frühe Erweiterungen (bis Dok. 184) | 37 |
+| Teil 5 | Schichten, Hilbertraum-Brücke, jüngste Klärungen | 37 |
+
+PDF-Versionen aller Bände auch im Repository unter `books/`.
+
+Zusätzliche Einzelausgaben: *FFGFT Narrativ — Das Kosmische Gehirn*,
+*T0 Anwendungen — Sieben Rätsel der Physik*,
+*Von α=1 zur vollständigen Physik* (in `2/tex-n/completed/`).
 
 ---
 

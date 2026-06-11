@@ -112,6 +112,13 @@ measurable (Doc. 230).
 
 ---
 
+## All Documents
+
+A complete list of all ~275 documents with short description and direct PDF link:
+**[DOCUMENTS.md](DOCUMENTS.md)**
+
+---
+
 ## Getting Started
 
 | Step | Document |
@@ -146,8 +153,23 @@ T0-Time-Mass-Duality/
 
 ## Books (Amazon KDP)
 
-Five-volume series, three formats (eBook / Paperback / Hardcover),
-German and English.
+The FFGFT book series is available on Amazon KDP as a **five-volume series** —
+in three formats (Kindle eBook / Paperback 8.5×11 / Hardcover 8.25×11)
+in both German and English (30 PDFs total).
+
+| Volume | Content | Docs |
+|--------|---------|------|
+| Teil 1 | Foundations, ξ, constants, units | 40 |
+| Teil 2 | Lagrangian, QFT, QM tests | 36 |
+| Teil 3 | Cosmology, consciousness | 35 |
+| Teil 4 | Early extensions (up to Doc. 184) | 37 |
+| Teil 5 | Layers, Hilbert bridge, recent clarifications | 37 |
+
+PDF versions of all volumes also in the repository under `books/`.
+
+Additional standalone editions: *FFGFT Narrative — The Cosmic Brain*,
+*T0 Applications — Seven Mysteries of Physics*,
+*From α=1 to Complete Physics* (in `2/tex-n/completed/`).
 
 ---
 
