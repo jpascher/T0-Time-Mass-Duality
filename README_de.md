@@ -44,15 +44,15 @@ was Eingabe ist, was folgt, ist immer klar deklariert.
 
 | Ergebnis | Dokument |
 |----------|----------|
-| Vollständige Ableitungskette ξ → G → ℓ_P → L₀ | Dok. 180 |
-| Lagrangian mit T̃·m=1; Feynman-Regeln | Dok. 019 |
-| Leptonmassen aus rationalen Invarianten r_i, p_i | Dok. 006/046 |
-| Koide-Skalar Q_FFGFT = 0,6677 (berechnet, nicht gefittet) | Dok. 258/259 |
-| α⁻¹ = 137,036 aus D_f = 3 − ξ | Dok. 011/043 |
-| SI-Brücke: alle Konstanten aus ξ | Dok. 013 |
-| E = mc² = E = m: Einheiten-Identität | Dok. 077 |
-| Natürliche Einheiten, statisch und korrekturfrei | Dok. 261 |
-| Zwei-Schichten-Struktur (Verhältnis / SI) | Dok. 241 |
+| Vollständige Ableitungskette ξ → G → ℓ_P → L₀ | [Dok. 180](2/pdf/180_T0_L0_Herleitung_De.pdf) |
+| Lagrangian mit T̃·m=1; Feynman-Regeln | [Dok. 019](2/pdf/019_T0_lagrndian_De.pdf) |
+| Leptonmassen aus rationalen Invarianten r_i, p_i | [Dok. 006](2/pdf/006_T0_Teilchenmassen_De.pdf) / [046](2/pdf/046_Teilchenmassen_De.pdf) |
+| Koide-Skalar Q_FFGFT = 0,6677 (berechnet, nicht gefittet) | [Dok. 258](2/pdf/258_Koide_2-3_De.pdf) / [259](2/pdf/259_Koide_Kreuzterme_De.pdf) |
+| α⁻¹ = 137,036 aus D_f = 3 − ξ | [Dok. 011](2/pdf/011_T0_Feinstruktur_De.pdf) / [043](2/pdf/043_ResolvingTheConstantsAlfa_De.pdf) |
+| SI-Brücke: alle Konstanten aus ξ | [Dok. 013](2/pdf/013_T0_SI_De.pdf) |
+| E = mc² = E = m: Einheiten-Identität | [Dok. 077](2/pdf/077_E-mc2_De.pdf) |
+| Natürliche Einheiten, statisch und korrekturfrei | [Dok. 261](2/pdf/261_NatEinheiten_Statisch_De.pdf) |
+| Zwei-Schichten-Struktur (Verhältnis / SI) | [Dok. 241](2/pdf/241_Zwei_Schichten_De.pdf) |
 
 ---
 
@@ -60,12 +60,12 @@ was Eingabe ist, was folgt, ist immer klar deklariert.
 
 | Ergebnis | Dokument |
 |----------|----------|
-| QFT-Quantisierung mit natürlichem UV-Cutoff | Dok. 020 |
-| Hilbertraum-Bijektion FFGFT ↔ Standard-QM | Dok. 230 |
-| Vier Hilbertraum-Erweiterungen (deformiertes SU(2), ...) | Dok. 231 |
-| Bell-Statistik: geometrisch real auf T⁴, keine Fernwirkung | Dok. 023/230 |
-| Dimensionsfluss d_s: 2 (UV) → 4 (IR) | Dok. 141 |
-| T0-kompilierter Quantencomputer | Dok. 034 |
+| QFT-Quantisierung mit natürlichem UV-Cutoff | [Dok. 020](2/pdf/020_T0_QM-QFT-RT_De.pdf) |
+| Hilbertraum-Bijektion FFGFT ↔ Standard-QM | [Dok. 230](2/pdf/230_Hilbertraum_Uebersetzung_De.pdf) |
+| Vier Hilbertraum-Erweiterungen (deformiertes SU(2), ...) | [Dok. 231](2/pdf/231_Hilbertraum_Erweiterung_De.pdf) |
+| Bell-Statistik: geometrisch real auf T⁴, keine Fernwirkung | [Dok. 023](2/pdf/023_Bell_De.pdf) / [230](2/pdf/230_Hilbertraum_Uebersetzung_De.pdf) |
+| Dimensionsfluss d_s: 2 (UV) → 4 (IR) | [Dok. 141](2/pdf/141_Renormierung_De.pdf) |
+| T0-kompilierter Quantencomputer | [Dok. 034](2/pdf/034_T0_QM-optimierung_De.pdf) |
 
 ---
 
@@ -92,12 +92,9 @@ zugelassene Ausgänge.
 
 Explizit ausgewiesen und prüfbar:
 
-- **Casimir-Effekt** (Dok. 220): modifizierte Kraft bei
-  Sub-Planck-Abständen
-- **Kosmologische Rotverschiebung** (Dok. 221): Unterschied zur
-  metrischen Expansion bei hohen z
-- **Lithium-Problem** (Dok. 222): primordiale Häufigkeiten aus
-  FFGFT-Kernphysik
+- **Casimir-Effekt** ([Dok. 220](2/pdf/220_Casimir_De.pdf)): modifizierte Kraft bei Sub-Planck-Abständen
+- **Kosmologische Rotverschiebung** ([Dok. 221](2/pdf/221_Rotverschiebung_De.pdf)): Unterschied zur metrischen Expansion bei hohen z
+- **Lithium-Problem** ([Dok. 222](2/pdf/222_Lithium_De.pdf)): primordiale Häufigkeiten aus FFGFT-Kernphysik
 
 ΔCHSH ~ ξ ≈ 10⁻⁴ liegt unterhalb des aktuellen NISQ-Rauschens,
 ist aber prinzipiell messbar (Dok. 230).
@@ -152,6 +149,18 @@ T0-Time-Mass-Duality/
 ├── Dok275_Skripte/   # Validierungsskripte
 └── rsa/              # RSA-Demos
 ```
+
+---
+
+## Korrekturregister & Changelog
+
+Das **Korrekturregister** [Dok. 190](2/pdf/190_T0_Korrekturen_De.pdf)
+dokumentiert jede Korrektur und Präzisierung mit Datum, Status und
+betroffenen Dokumenten — K1–K4 (Fehler) und P1–P38 (Präzisierungen).
+Nichts wird still überschrieben.
+
+Der **Changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)
+protokolliert alle laufenden Änderungen am Korpus chronologisch.
 
 ---
 

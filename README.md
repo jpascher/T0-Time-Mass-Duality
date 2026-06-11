@@ -42,15 +42,15 @@ what is input and what follows is always declared explicitly.
 
 | Result | Document |
 |--------|----------|
-| Complete chain ξ → G → ℓ_P → L₀ | Doc. 180 |
-| Lagrangian with T̃·m=1; Feynman rules | Doc. 019 |
-| Lepton masses from rational invariants r_i, p_i | Doc. 006/046 |
-| Koide scalar Q_FFGFT = 0.6677 (computed, not fitted) | Doc. 258/259 |
-| α⁻¹ = 137.036 from D_f = 3 − ξ | Doc. 011/043 |
-| SI bridge: all constants from ξ | Doc. 013 |
-| E = mc² = E = m: unit identity | Doc. 077 |
-| Natural units, static and correction-free | Doc. 261 |
-| Two-layer structure (ratio / SI) | Doc. 241 |
+| Complete chain ξ → G → ℓ_P → L₀ | [Doc. 180](2/pdf/180_T0_L0_Herleitung_En.pdf) |
+| Lagrangian with T̃·m=1; Feynman rules | [Doc. 019](2/pdf/019_T0_lagrndian_En.pdf) |
+| Lepton masses from rational invariants r_i, p_i | [Doc. 006](2/pdf/006_T0_Teilchenmassen_En.pdf) / [046](2/pdf/046_Teilchenmassen_En.pdf) |
+| Koide scalar Q_FFGFT = 0.6677 (computed, not fitted) | [Doc. 258](2/pdf/258_Koide_2-3_En.pdf) / [259](2/pdf/259_Koide_Kreuzterme_En.pdf) |
+| α⁻¹ = 137.036 from D_f = 3 − ξ | [Doc. 011](2/pdf/011_T0_Feinstruktur_En.pdf) / [043](2/pdf/043_ResolvingTheConstantsAlfa_En.pdf) |
+| SI bridge: all constants from ξ | [Doc. 013](2/pdf/013_T0_SI_En.pdf) |
+| E = mc² = E = m: unit identity | [Doc. 077](2/pdf/077_E-mc2_En.pdf) |
+| Natural units, static and correction-free | [Doc. 261](2/pdf/261_NatEinheiten_Statisch_En.pdf) |
+| Two-layer structure (ratio / SI) | [Doc. 241](2/pdf/241_Zwei_Schichten_En.pdf) |
 
 ---
 
@@ -58,12 +58,12 @@ what is input and what follows is always declared explicitly.
 
 | Result | Document |
 |--------|----------|
-| QFT quantisation with natural UV cutoff | Doc. 020 |
-| Hilbert-space bijection FFGFT ↔ standard QM | Doc. 230 |
-| Four Hilbert-space extensions (deformed SU(2), …) | Doc. 231 |
-| Bell statistics: geometrically real on T⁴, no action at distance | Doc. 023/230 |
-| Dimension flow d_s: 2 (UV) → 4 (IR) | Doc. 141 |
-| T0-compiled quantum computer | Doc. 034 |
+| QFT quantisation with natural UV cutoff | [Doc. 020](2/pdf/020_T0_QM-QFT-RT_En.pdf) |
+| Hilbert-space bijection FFGFT ↔ standard QM | [Doc. 230](2/pdf/230_Hilbertraum_Uebersetzung_En.pdf) |
+| Four Hilbert-space extensions (deformed SU(2), …) | [Doc. 231](2/pdf/231_Hilbertraum_Erweiterung_En.pdf) |
+| Bell statistics: geometrically real on T⁴, no action at distance | [Doc. 023](2/pdf/023_Bell_En.pdf) / [230](2/pdf/230_Hilbertraum_Uebersetzung_En.pdf) |
+| Dimension flow d_s: 2 (UV) → 4 (IR) | [Doc. 141](2/pdf/141_Renormierung_En.pdf) |
+| T0-compiled quantum computer | [Doc. 034](2/pdf/034_T0_QM-optimierung_En.pdf) |
 
 ---
 
@@ -89,11 +89,9 @@ declared as such. Negative results are explicitly admitted outcomes.
 
 Explicitly stated and testable:
 
-- **Casimir effect** (Doc. 220): modified force at sub-Planck distances
-- **Cosmological redshift** (Doc. 221): difference from metric
-  expansion at high z
-- **Lithium problem** (Doc. 222): primordial abundances from FFGFT
-  nuclear physics
+- **Casimir effect** ([Doc. 220](2/pdf/220_Casimir_En.pdf)): modified force at sub-Planck distances
+- **Cosmological redshift** ([Doc. 221](2/pdf/221_Rotverschiebung_En.pdf)): difference from metric expansion at high z
+- **Lithium problem** ([Doc. 222](2/pdf/222_Lithium_En.pdf)): primordial abundances from FFGFT nuclear physics
 
 ΔCHSH ~ ξ ≈ 10⁻⁴ lies below current NISQ noise but is in principle
 measurable (Doc. 230).
@@ -148,6 +146,18 @@ T0-Time-Mass-Duality/
 ├── Dok275_Skripte/   # Validation scripts
 └── rsa/              # RSA demos
 ```
+
+---
+
+## Correction Register & Changelog
+
+The **correction register** [Doc. 190](2/pdf/190_T0_Korrekturen_De.pdf)
+documents every correction and refinement with date, status, and
+affected documents — K1–K4 (errors) and P1–P38 (refinements).
+Nothing is silently overwritten.
+
+The **changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)
+records all running changes to the corpus chronologically.
 
 ---
 
