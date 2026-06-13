@@ -1,0 +1,284 @@
+% ==============================================================================
+% T0 Theory / FFGFT: Document 276 (Chapter Content, EN)
+% Title: Homology test of the HLV vortex hypothesis -- cell-shape-independent
+%        b1 filtration, deformation null test, and N-scaling
+% Author: Johann Pascher
+% Date: June 2026
+% References: Doc. 270, 271, 274, 275; Krueger (HLV) Zenodo 20668125, 20629842, 20615649
+% Companion script: Dok276_Skripte/ffgft_hlv_homology_check_v3.py
+% ==============================================================================
+
+\newtheorem*{observation*}{Observation}
+
+\section*{Abstract}
+Marcel Krüger's HLV G-Lattice programme~\cite{krueger276main} formulates a
+finite 6D$\to$3D cut-and-project construction and tests it through a ladder of
+pre-registered falsification runs (A--K7 plus the D1--D3 cell-geometry
+addendum). The D1--D3 audit \emph{withdrew} the original claim of exact
+dodecahedral Voronoi cells and replaced it with a narrower profile: a
+non-crystalline, mixed-face, $\varphi$-skewed cell ensemble. The revised
+vortex axiom therefore no longer requires a Platonic cell, but closed cycles,
+phase continuity, and holonomy-carrying loops. Exactly here the FFGFT side
+contributes something \emph{additive}: topological winding is a homotopy
+invariant; it lives in $\pi_1$ of the complex, not in the shape of its faces.
+We present a self-contained, reproducible test script (companion file,
+\texttt{numpy}/\texttt{scipy} only; \texttt{gudhi} optional) that
+operationalises this statement: over a kNN filtration it computes the GF(2)
+homology $b_1(\varepsilon)$, compares the \emph{whole} normalised Betti-curve
+shape against control clouds by an energy-distance permutation test, runs a
+deformation null test (persistence vs.\ drift, with optional persistent-cycle
+matching), and scales the effect size with $N$. \textbf{Finding (honest,
+conservative):} the \emph{scalar} total-persistence measure does not cleanly
+separate HLV and is $k$-sensitive; the \emph{curve shape}, by contrast,
+separates HLV significantly from all controls ($p<0.05$), sharply from
+crystalline lattices (FCC, cubic, BCC) and only weakly from the generic
+$\sqrt{2}$ quasicrystal. N-scaling shows that separation from crystalline
+grows/stabilises (structural) while separation from random shrinks. The
+discriminating feature is therefore \emph{``quasiperiodic cut-and-project
+structure''}, \emph{not} the golden ratio specifically. A separate, less
+circular diagnostic (longest persistent $H_1$ lifetime) additionally shows that
+cut-project clouds (HLV \emph{and} the $\sqrt{2}$ quasicrystal) host a markedly
+longer-lived $1$-cycle than lattices and random -- recorded as an observation,
+explicitly \emph{not} oversold as ``topological protection''.
+
+% ============================================================================
+\section{Context: HLV, FFGFT, and the division of labour}
+% ============================================================================
+
+Krüger's HLV (Helix--Light--Vortex) programme~\cite{krueger276main} tests a
+finite geometric substrate as a \emph{candidate object}, not as an ontology.
+Its methodological strength is the pre-registered falsification
+governance~\cite{krueger276gov}: positive, negative, partial and
+underdetermined outcomes are kept apart on a claim-state ledger
+(\emph{candidate / restricted / underdetermined / rejected / validated
+candidate}); a positive result may not erase a negative residual from another
+channel.
+
+The D1--D3 audit rejected the strong claim ``HLV produces exact dodecahedral
+Voronoi cells'' -- the exact 12-face channel is dominated by FCC/rhombic and
+HCP-like controls. What survives is the weaker, better-supported statement of
+a \emph{fresh-seed validated candidate}: a non-crystalline, mixed-face,
+$\varphi$-skewed finite Voronoi cell ensemble. The resulting reformulation of
+the vortex axiom reads, in essence: vortex and boundary modes are supported by
+the edge, face-boundary, loop, and defect-interface structure of a mixed-face
+complex -- not by an exact cell shape.
+
+\begin{observation*}
+Topological winding requires no Platonic cell. It requires closed graph
+cycles, phase continuity, and holonomy-carrying loops. These structures live
+in $\pi_1$ of the complex and are invariant under the cell shape.
+\end{observation*}
+
+This is also the FFGFT position: on the compact $T^4$ the relevant invariants
+are holonomy classes of $\pi_1(T^4)=\mathbb{Z}^4$, deliberately metric- and
+cell-independent (cf.\ Doc.~270~\cite{dok270}, Doc.~271~\cite{dok271}). The
+division of labour remains complementary, not overlapping: HLV as the
+boundary-pattern residual test, FFGFT as the scale-law / effective-$L_\xi$
+test (Doc.~275~\cite{dok275}).
+
+% ============================================================================
+\section{The test method}
+% ============================================================================
+
+\subsection{Complex and boundary operator}
+Instead of counting Voronoi faces, we build the clique complex of the
+symmetric kNN graph (the same graph object as in Krüger's runs, $k$
+adjustable) and read the cycle/holonomy sector off the GF(2) homology
+\[
+  H_1 = \ker \partial_1 / \operatorname{im} \partial_2,
+  \qquad
+  b_1 = \dim\ker\partial_1 - \operatorname{rank}\partial_2
+      = (E - \operatorname{rank}\partial_1) - \operatorname{rank}\partial_2 .
+\]
+Here $\operatorname{rank}\partial_1 = N - (\#\text{components})$ (union-find),
+and $\operatorname{rank}\partial_2$ is computed over GF(2). $b_1$ is the
+cell-shape-independent winding/holonomy capacity of the complex.
+
+\paragraph{Language precision.} $H_1$ is shape-independent \emph{within a fixed
+complex}; it still depends on $k$ and the metric. Hence (i) the $k$-sweep and
+(ii) the comparison of the \emph{whole} curve shape rather than a single
+``tessellation-free'' number.
+
+\subsection{Filtration and curve shape}
+A dense kNN complex is nearly contractible; the holonomy structure becomes
+visible only through a radius filtration. We evaluate $b_1(\varepsilon)$ on a
+grid $\varepsilon/d_0 \in \{1.1,\,1.35,\,1.6,\,1.85,\,2.1,\,2.35\}$ ($d_0$ =
+median nearest-neighbour distance) and compare the \emph{normalised} curve
+$\hat b_1 = b_1/\sum b_1$ -- the shape, not the area. The scalar total
+persistence $\int b_1\,\mathrm{d}\varepsilon$ is kept only as a coarse
+single-number summary.
+
+\subsection{Statistics and controls}
+Each cloud is promoted to an ensemble over seeds (the same
+``HLV-as-an-ensemble'' discipline as Krüger's Run~E). Scalars are compared by a
+permutation test, curve shapes by an energy-distance permutation test.
+Controls: FCC, simple cubic, BCC (crystalline); jittered cubic, uniform
+random, Poisson-disc (disordered, against density artefacts); generic
+$\sqrt{2}$ cut-and-project (quasicrystal without the golden ratio).
+
+\subsection{Deformation null test}
+We morph HLV $\to$ control continuously, $x(t)=(1-t)\,x_{\mathrm{HLV}}
++ t\,x_{\mathrm{control}}$, and track total persistence. With \texttt{gudhi}
+present we additionally track the \emph{longest} $H_1$ lifetime (Rips
+persistence) -- far less circular, since a single long bar is not forced to
+$0$. Caveat: a target with $b_1\approx 0$ (e.g.\ FCC) forces the endpoint to
+$0$; clean cycle matching is only possible via persistent homology.
+
+\subsection{N-scaling and pre-registered consistency check}
+The effect size (L1 distance of mean curve shapes, HLV vs.\ the pooled
+crystalline profile) is scaled with $N$: stabilising $\Rightarrow$ structural,
+vanishing $\Rightarrow$ finite-size artefact. The \texttt{-{}-falsify} switch
+implements a \emph{pre-registered consistency check} (fixed $N,k,p$;
+crystalline controls only) -- explicitly \emph{not} a Popperian falsification
+test: a negative result weakens the claim but does not logically falsify it.
+
+% ============================================================================
+\section{Results}
+% ============================================================================
+
+All numbers are from a real run of the companion script ($N=240$, $k=14$,
+seed base $20260613$, $5$ seeds).
+
+\paragraph{Scalar (Check 1/1b).} The total-persistence measure is unstable and
+$k$-sensitive: the simple-cubic control dominates ($\sim\!130$ vs.\ HLV
+$\sim\!50$), and over $k\in\{10,14,18\}$ HLV lies above the control band in
+$0/3$ cases. Claim-state: \emph{underdetermined}. This is precisely why the
+scalar is discarded and the shape compared.
+
+\paragraph{Curve shape (Check 1c).} The energy-distance test separates HLV
+from \emph{all} controls ($p<0.05$):
+
+\begin{center}
+\begin{tabular}{lrr}
+\hline
+Control & energy distance & $p$ \\
+\hline
+jittered cubic        & $2.81$ & $0.0015$ \\
+uniform random        & $2.79$ & $0.0060$ \\
+Poisson-disc          & $2.71$ & $0.0030$ \\
+FCC (rhombic-dodeca.) & $1.93$ & $0.0075$ \\
+cubic                 & $1.67$ & $0.0040$ \\
+BCC                   & $1.11$ & $0.0060$ \\
+generic QC ($\sqrt2$) & $0.15$ & $0.0085$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent The separation is sharp against crystalline lattices and very weak
+(smallest distance $0.15$) against the generic $\sqrt{2}$ quasicrystal.
+
+\paragraph{Longest $H_1$ lifetime (with \texttt{gudhi}, max edge $=2\,d_0$).}
+
+\begin{center}
+\begin{tabular}{lrr}
+\hline
+Cloud & raw & normalised ($/d_0$) \\
+\hline
+HLV (golden cut-project)    & $2.07$ & $0.87$ \\
+generic QC ($\sqrt2$)       & $2.01$ & $0.85$ \\
+cubic                       & $0.41$ & $0.41$ \\
+uniform random              & $0.25$ & $0.43$ \\
+BCC                         & $0.13$ & $0.15$ \\
+FCC                         & $0.00$ & $0.00$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{N-scaling.} The mean-shape L1 distance HLV-vs-crystalline
+grows/stabilises with $N$ ($\approx 0.56 \to 0.67 \to 1.61 \to 1.51$ for
+$N=200/400/600/800$) -- structural, not a pure finite-size artefact;
+HLV-vs-random shrinks accordingly.
+
+\paragraph{Deformation and consistency check.} In the deformation null test
+both total persistence and longest $H_1$ lifetime fall; at this $N$ there is
+\emph{no} robust plateau (status: underdetermined -- honest). The
+pre-registered consistency check (fixed $N,k,p<0.01$; FCC/cubic/BCC only)
+returns \emph{PASS}: HLV separates from every crystalline control.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{276_homology_figure.png}
+  \caption{Four-panel overview from the companion script (v3). A: normalised
+  Betti curves $b_1(\varepsilon)$ -- shape, not magnitude. B: curve-shape
+  energy distance HLV vs.\ controls. C: deformation null test (total
+  persistence and, with \texttt{gudhi}, longest $H_1$ lifetime). D: N-scaling
+  of the effect size (stable $=$ structural). Finite diagnostic; no claim about
+  physical spacetime microstructure.}
+  \label{fig:276homology}
+\end{figure}
+
+% ============================================================================
+\section{Discussion and claim-state}
+% ============================================================================
+
+The defensible statement is precise and conservative:
+\begin{enumerate}
+  \item HLV separates \emph{structurally} from crystalline lattices
+        (FCC/cubic/BCC) via the $b_1(\varepsilon)$ curve shape; the effect
+        grows with $N$ (claim-state: \emph{candidate}, shape-based
+        $k$-robust).
+  \item HLV is nearly indistinguishable from the generic $\sqrt{2}$
+        cut-and-project quasicrystal on \emph{every} metric (shape energy
+        distance $0.15$; longest cycle $2.07$ vs.\ $2.01$). The discriminating
+        feature is therefore \emph{``quasiperiodic cut-and-project
+        structure''}, \emph{not} the golden ratio specifically.
+  \item cut-project structures host a markedly longer-lived $H_1$ cycle
+        ($\sim\!2\,d_0$) than lattices and random ($\le 0.4\,d_0$). This is a
+        real observation of the less circular persistence diagnostic; it is
+        \emph{not} interpreted as ``topological protection'' -- that would be
+        the same overclaim with the opposite sign.
+\end{enumerate}
+
+Methodologically the script confirms the claim-state discipline of the HLV
+programme: the obvious scalar measure fails, and progress lies in the
+shape-based, ensemble- and permutation-supported comparison. Stronger
+statements require larger $N$, more seeds, exact repository adjacency, and
+independent reimplementation.
+
+\paragraph{Reproducibility.} The companion script
+(\texttt{Dok276\_Skripte/ffgft\_hlv\_homology\_check\_v3.py}) depends only on
+\texttt{numpy}/\texttt{scipy}; \texttt{gudhi} and \texttt{matplotlib} are
+optional (true persistence diagrams and the figure, respectively).
+Deliberately no hard dependency -- anyone on the IPI list can reproduce the
+result without a build step.
+
+\paragraph{Acknowledgement.} Marcel Krüger (HLV G-Lattice, falsification
+governance) for the open exchange and the pre-registered test architecture on
+which this document builds.
+
+% ============================================================================
+\begin{thebibliography}{9}
+
+\bibitem{krueger276main}
+M.~Krüger,
+\emph{Operational Falsification Pathways for the HLV G-Lattice:
+Weighted Spectral Forks, Fresh-Seed Cell-Shape Validation, Native 6D
+Operators, and Process-Tensor Bridge Tests},
+Zenodo (2026), \url{https://doi.org/10.5281/zenodo.20668125}.
+
+\bibitem{krueger276gov}
+M.~Krüger,
+\emph{Operational Falsification Governance: Residual Preservation,
+Claim-State Ledgers, and Revision-Admissible Scientific Frameworks},
+Zenodo (2026), \url{https://doi.org/10.5281/zenodo.20629842}.
+
+\bibitem{dok275}
+J.~Pascher, \emph{Doc.\,275: From $\xi$ to $\varphi$ -- Recursive scale
+hierarchy and spectral gap structure}, FFGFT corpus (2026).
+
+\bibitem{dok271}
+J.~Pascher, \emph{Doc.\,271: FFGFT compared with HLV}, FFGFT corpus (2026).
+
+\bibitem{dok270}
+J.~Pascher, \emph{Doc.\,270: Dimensional change in FFGFT
+($T^4 \to T^0$)}, FFGFT corpus (2026).
+
+\bibitem{edelsbrunner}
+H.~Edelsbrunner and J.~Harer, \emph{Computational Topology: An
+Introduction}, American Mathematical Society (2010).
+
+\bibitem{gretton}
+A.~Gretton et al., \emph{A kernel two-sample test},
+Journal of Machine Learning Research \textbf{13}, 723--773 (2012).
+
+\end{thebibliography}

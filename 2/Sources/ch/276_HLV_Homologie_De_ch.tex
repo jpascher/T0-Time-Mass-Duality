@@ -1,0 +1,296 @@
+% ==============================================================================
+% T0 Theory / FFGFT: Document 276 (Chapter Content, DE)
+% Titel: Homologie-Test der HLV-Vortex-Hypothese -- zell-form-unabhaengige
+%        b1-Filtration, Deformations-Null-Test und N-Skalierung
+% Autor: Johann Pascher
+% Datum: Juni 2026
+% Referenzen: Dok. 270, 271, 274, 275; Krueger (HLV) Zenodo 20668125, 20629842, 20615649
+% Begleitskript: Dok276_Skripte/ffgft_hlv_homology_check_v3.py
+% ==============================================================================
+
+\newtheorem*{beobachtung*}{Beobachtung}
+
+\section*{Abstract}
+Marcel Krügers HLV-G-Lattice-Programm~\cite{krueger276main} formuliert eine
+endliche 6D$\to$3D-cut-and-project-Konstruktion und prüft sie über eine
+Leiter pränumerierter Falsifikationstests (Runs A--K7 sowie das
+Zell\-geometrie-Addendum D1--D3). Das D1--D3-Audit hat die ursprüngliche
+Behauptung exakter dodekaedrischer Voronoi-Zellen \emph{zurückgenommen} und
+durch ein engeres Profil ersetzt: ein nicht-kristallines, gemischt-flächiges,
+$\varphi$-verzerrtes Zell-Ensemble. Die daraus revidierte Vortex-Achse
+verlangt keine platonische Zelle mehr, sondern geschlossene Zyklen,
+Phasen\-kontinuität und holonomietragende Schleifen. Genau an dieser Stelle
+liefert die FFGFT-Seite einen \emph{additiven} Beitrag: topologisches Winding
+ist eine Homotopie-Invariante; sie lebt in $\pi_1$ des Komplexes, nicht in der
+Form seiner Flächen. Wir stellen ein eigenständiges, reproduzierbares
+Prüf\-skript vor (Begleitdatei, nur \texttt{numpy}/\texttt{scipy}; optional
+\texttt{gudhi}), das diese Aussage operationalisiert: über eine
+kNN-Filtration wird die GF(2)-Homologie $b_1(\varepsilon)$ berechnet, die
+\emph{ganze} normierte Betti-Kurvenform per Energie-Distanz-Permutationstest
+gegen Kontrollwolken verglichen, ein Deformations-Null-Test (Persistenz vs.\
+Drift, mit optionalem Persistenz-Zyklen-Matching) durchgeführt und die
+Effektstärke über $N$ skaliert. \textbf{Befund (ehrlich, konservativ):} Das
+\emph{skalare} Gesamtpersistenz-Maß trennt HLV nicht sauber und ist
+$k$-sensitiv; die \emph{Kurvenform} hingegen separiert HLV signifikant von
+allen Kontrollen ($p<0{,}05$), scharf von kristallinen Gittern (FCC, cubic,
+BCC) und nur schwach vom generischen $\sqrt{2}$-Quasikristall. Die
+N-Skalierung zeigt: die Trennung von kristallin wächst/stabilisiert sich
+(strukturell), die von Zufall schrumpft. Der diskriminierende Faktor ist
+folglich \emph{``quasiperiodische cut-and-project-Struktur''}, \emph{nicht}
+der goldene Schnitt spezifisch. Eine separate, weniger zirkuläre Diagnostik
+(längste persistente $H_1$-Lebensdauer) zeigt zudem, dass cut-project-Wolken
+(HLV \emph{und} $\sqrt{2}$-Quasikristall) einen markant länger lebenden
+$1$-Zyklus tragen als Gitter und Zufall -- dies wird als Beobachtung
+festgehalten, ausdrücklich \emph{nicht} als ``topologischer Schutz''
+überverkauft.
+
+% ============================================================================
+\section{Einordnung: HLV, FFGFT und die Arbeitsteilung}
+% ============================================================================
+
+Das HLV-Programm (Helix--Light--Vortex) von Krüger~\cite{krueger276main}
+testet ein endliches geometrisches Substrat als \emph{Kandidatenobjekt}, nicht
+als Ontologie. Die methodische Stärke liegt in der pränumerierten
+Falsifikations-Governance~\cite{krueger276gov}: positive, negative, partielle
+und unter\-bestimmte Ausgänge werden in einer Claim-State-Leiter
+(\emph{candidate / restricted / underdetermined / rejected / validated
+candidate}) getrennt geführt; ein positiver Befund darf einen negativen
+Residual aus einem anderen Kanal nicht löschen.
+
+Im D1--D3-Audit wurde die starke Aussage ``HLV erzeugt exakte dodekaedrische
+Voronoi-Zellen'' verworfen -- der exakte 12-Flächen-Kanal wird von FCC/rhombisch
+und HCP-artigen Kontrollen dominiert. Übrig bleibt die schwächere, besser
+gestützte Aussage eines \emph{frischsaatvalidierten Kandidaten}: ein
+nicht-kristallines, gemischt-flächiges, $\varphi$-verzerrtes endliches
+Voronoi-Zell-Ensemble. Die daraus folgende Reformulierung der Vortex-Achse
+lautet sinngemäß: Vortex- und Randmoden werden von der Kanten-, Flächenrand-,
+Schleifen- und Defekt-Grenzflächen-Struktur eines gemischt-flächigen Komplexes
+getragen -- nicht von einer exakten Zellform.
+
+\begin{beobachtung*}
+Topologisches Winding verlangt keine platonische Zelle. Es verlangt
+geschlossene Graph-Zyklen, Phasenkontinuität und holonomietragende Schleifen.
+Diese Strukturen leben in $\pi_1$ des Komplexes und sind invariant gegenüber
+der Zellform.
+\end{beobachtung*}
+
+Dies ist zugleich die FFGFT-Position: Auf dem kompakten $T^4$ sind die
+relevanten Invarianten Holonomieklassen von $\pi_1(T^4)=\mathbb{Z}^4$, bewusst
+metrik- und zellunabhängig (vgl.\ Dok.~270~\cite{dok270},
+Dok.~271~\cite{dok271}). Die Arbeitsteilung bleibt komplementär, nicht
+überlappend: HLV als Randmuster-Residual-Test, FFGFT als
+Skalengesetz-/effektives-$L_\xi$-Test (Dok.~275~\cite{dok275}).
+
+% ============================================================================
+\section{Die Prüf-Methode}
+% ============================================================================
+
+\subsection{Komplex und Randoperator}
+Statt Voronoi-Flächen zu zählen, bilden wir den Cliquenkomplex des
+symmetrischen kNN-Graphen (dasselbe Graph-Objekt wie in Krügers Runs, $k$
+einstellbar) und lesen den Zyklen-/Holonomie-Sektor über die GF(2)-Homologie
+\[
+  H_1 = \ker \partial_1 / \operatorname{im} \partial_2,
+  \qquad
+  b_1 = \dim\ker\partial_1 - \operatorname{rank}\partial_2
+      = (E - \operatorname{rank}\partial_1) - \operatorname{rank}\partial_2 .
+\]
+Dabei ist $\operatorname{rank}\partial_1 = N - (\#\text{Komponenten})$ (per
+Union-Find), und $\operatorname{rank}\partial_2$ wird über GF(2) berechnet.
+$b_1$ ist die zell-form-unabhängige Winding-/Holonomie-Kapazität des Komplexes.
+
+\paragraph{Sprach-Präzisierung.} $H_1$ ist form-unabhängig \emph{innerhalb
+eines festen Komplexes}; es hängt jedoch weiterhin von $k$ und der Metrik ab.
+Daher (i) der $k$-Sweep und (ii) der Vergleich der \emph{ganzen} Kurvenform
+statt einer einzelnen ``tessellationsfreien'' Zahl.
+
+\subsection{Filtration und Kurvenform}
+Ein dichter kNN-Komplex ist nahezu kontrahierbar; die Holonomie-Struktur wird
+erst über eine Radius-Filtration sichtbar. Wir werten $b_1(\varepsilon)$ auf
+einem Gitter $\varepsilon/d_0 \in \{1{,}1;\,1{,}35;\,1{,}6;\,1{,}85;\,2{,}1;\,
+2{,}35\}$ aus ($d_0$ = Median-Nächste-Nachbar-Distanz) und vergleichen die
+\emph{normierte} Kurve $\hat b_1 = b_1/\sum b_1$ -- die Form, nicht die Fläche.
+Das skalare Gesamtpersistenz-Integral $\int b_1\,\mathrm{d}\varepsilon$ wird nur
+als grobe Einzahl-Zusammenfassung geführt.
+
+\subsection{Statistik und Kontrollen}
+Jede Wolke wird zu einem Ensemble über Seeds promoviert (dieselbe
+``HLV-als-Ensemble''-Disziplin wie in Krügers Run~E). Skalare werden per
+Permutationstest, Kurvenformen per Energie-Distanz-Permutationstest
+verglichen. Kontrollen: FCC, einfach-kubisch, BCC (kristallin);
+jittered-cubic, uniform-random, Poisson-Disc (ungeordnet, gegen
+Dichte-Artefakte); generischer $\sqrt{2}$-cut-and-project (Quasikristall ohne
+goldenes Verhältnis).
+
+\subsection{Deformations-Null-Test}
+Wir morphen HLV $\to$ Kontrolle stetig, $x(t)=(1-t)\,x_{\mathrm{HLV}}
++ t\,x_{\mathrm{Kontrolle}}$, und verfolgen die Gesamtpersistenz. Bei
+vorhandenem \texttt{gudhi} wird zusätzlich die \emph{längste}
+$H_1$-Lebensdauer (Rips-Persistenz) verfolgt -- deutlich weniger zirkulär, da
+ein einzelner langer Balken nicht zwangsläufig auf $0$ fällt. Caveat: Ein Ziel
+mit $b_1\approx 0$ (z.\,B.\ FCC) erzwingt den Endwert $0$; ein sauberes
+Zyklen-Matching ist nur über persistente Homologie möglich.
+
+\subsection{N-Skalierung und vorab registrierter Konsistenzcheck}
+Die Effektstärke (L1-Distanz der mittleren Kurvenformen, HLV gegen das
+gepoolte kristalline Profil) wird über $N$ skaliert: stabilisiert sie sich
+$\Rightarrow$ strukturell, verschwindet sie $\Rightarrow$ Finite-Size-Artefakt.
+Der \texttt{-{}-falsify}-Schalter implementiert einen \emph{vorab
+registrierten Konsistenzcheck} (festes $N,k,p$; nur kristalline Kontrollen) --
+ausdrücklich \emph{kein} Falsifikationstest im Popper'schen Sinn: ein negatives
+Ergebnis schwächt die Behauptung, falsifiziert sie aber nicht logisch.
+
+% ============================================================================
+\section{Ergebnisse}
+% ============================================================================
+
+Alle Zahlen stammen aus dem realen Lauf des Begleitskripts
+($N=240$, $k=14$, Seed-Basis $20260613$, $5$~Seeds).
+
+\paragraph{Skalar (Check 1/1b).} Das Gesamtpersistenz-Maß ist instabil und
+$k$-sensitiv: die einfach-kubische Kontrolle dominiert
+($\sim\!130$ gegen HLV $\sim\!50$), und über $k\in\{10,14,18\}$ liegt HLV in
+$0/3$ Fällen über dem Kontrollband. Claim-State: \emph{underdetermined}. Dies
+ist genau der Grund, das skalare Maß zu verwerfen und die Form zu vergleichen.
+
+\paragraph{Kurvenform (Check 1c).} Der Energie-Distanz-Test trennt HLV von
+\emph{allen} Kontrollen ($p<0{,}05$):
+
+\begin{center}
+\begin{tabular}{lrr}
+\hline
+Kontrolle & Energie-Distanz & $p$ \\
+\hline
+jittered cubic        & $2{,}81$ & $0{,}0015$ \\
+uniform random        & $2{,}79$ & $0{,}0060$ \\
+Poisson-Disc          & $2{,}71$ & $0{,}0030$ \\
+FCC (rhombendodeka.)  & $1{,}93$ & $0{,}0075$ \\
+cubic                 & $1{,}67$ & $0{,}0040$ \\
+BCC                   & $1{,}11$ & $0{,}0060$ \\
+generic QC ($\sqrt2$) & $0{,}15$ & $0{,}0085$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent Die Trennung ist scharf gegen kristalline Gitter und sehr schwach
+(kleinste Distanz $0{,}15$) gegen den generischen $\sqrt{2}$-Quasikristall.
+
+\paragraph{Längste $H_1$-Lebensdauer (mit \texttt{gudhi}, $\max$-Kante
+$=2\,d_0$).}
+
+\begin{center}
+\begin{tabular}{lrr}
+\hline
+Wolke & roh & normiert ($/d_0$) \\
+\hline
+HLV (golden cut-project)    & $2{,}07$ & $0{,}87$ \\
+generic QC ($\sqrt2$)       & $2{,}01$ & $0{,}85$ \\
+cubic                       & $0{,}41$ & $0{,}41$ \\
+uniform random              & $0{,}25$ & $0{,}43$ \\
+BCC                         & $0{,}13$ & $0{,}15$ \\
+FCC                         & $0{,}00$ & $0{,}00$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{N-Skalierung.} Die mittlere-Form-L1-Distanz HLV-gegen-kristallin
+wächst/stabilisiert mit $N$ ($\approx 0{,}56 \to 0{,}67 \to 1{,}61 \to 1{,}51$
+für $N=200/400/600/800$) -- strukturell, kein reines Finite-Size-Artefakt;
+HLV-gegen-Zufall schrumpft entsprechend.
+
+\paragraph{Deformations- und Konsistenzcheck.} Im Deformations-Null-Test
+fallen sowohl Gesamtpersistenz als auch längste $H_1$-Lebensdauer; bei diesem
+$N$ ergibt sich \emph{kein} robustes Plateau (Status: underdetermined --
+ehrlich). Der vorab registrierte Konsistenzcheck (festes $N,k,p<0{,}01$; nur
+FCC/cubic/BCC) ergibt \emph{PASS}: HLV trennt sich von jeder kristallinen
+Kontrolle.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{276_homology_figure.png}
+  \caption{Vier-Felder-Übersicht des Begleitskripts (v3). A: normierte
+  Betti-Kurven $b_1(\varepsilon)$ -- Form, nicht Betrag. B: Energie-Distanz der
+  Kurvenform HLV gegen Kontrollen. C: Deformations-Null-Test
+  (Gesamtpersistenz und, mit \texttt{gudhi}, längste $H_1$-Lebensdauer). D:
+  N-Skalierung der Effektstärke (stabil $=$ strukturell). Endliche Diagnostik;
+  keine Aussage über physikalische Raumzeit-Mikrostruktur.}
+  \label{fig:276homology}
+\end{figure}
+
+% ============================================================================
+\section{Diskussion und Claim-State}
+% ============================================================================
+
+Die verteidigbare Aussage ist präzise und konservativ:
+\begin{enumerate}
+  \item HLV trennt sich \emph{strukturell} von kristallinen Gittern
+        (FCC/cubic/BCC) über die $b_1(\varepsilon)$-Kurvenform; der Effekt
+        wächst mit $N$ (Claim-State: \emph{candidate}, form-basiert
+        $k$-robust).
+  \item HLV ist auf \emph{jeder} Metrik nahezu ununterscheidbar vom
+        generischen $\sqrt{2}$-cut-and-project-Quasikristall (Form-Energie\-distanz
+        $0{,}15$; längster Zyklus $2{,}07$ vs.\ $2{,}01$). Das diskriminierende
+        Merkmal ist daher \emph{``quasiperiodische cut-and-project-Struktur''},
+        \emph{nicht} der goldene Schnitt spezifisch.
+  \item cut-project-Strukturen tragen einen markant länger lebenden
+        $H_1$-Zyklus ($\sim\!2\,d_0$) als Gitter und Zufall ($\le 0{,}4\,d_0$).
+        Dies ist eine reale Beobachtung der weniger zirkulären
+        Persistenz-Diagnostik; sie wird \emph{nicht} als ``topologischer
+        Schutz'' interpretiert -- das wäre derselbe Overclaim, nur mit
+        umgekehrtem Vorzeichen.
+\end{enumerate}
+
+Methodisch bestätigt das Skript die Claim-State-Disziplin des HLV-Programms:
+das naheliegende skalare Maß scheitert, und der Fortschritt liegt im
+form\-basierten, ensemble- und permutations\-gestützten Vergleich. Stärkere
+Aussagen verlangen größeres $N$, mehr Seeds, exakte Repository-Adjazenz und
+unabhängige Reimplementierung.
+
+\paragraph{Reproduzierbarkeit.} Das Begleitskript
+(\texttt{Dok276\_Skripte/ffgft\_hlv\_homology\_check\_v3.py}) hängt allein von
+\texttt{numpy}/\texttt{scipy} ab; \texttt{gudhi} und \texttt{matplotlib} sind
+optional (echte Persistenzdiagramme bzw.\ die Figur). Bewusst keine harte
+Abhängigkeit -- jede:r auf der IPI-Liste kann das Resultat ohne Build-Schritt
+nachrechnen.
+
+\paragraph{Dank.} Marcel Krüger (HLV-G-Lattice, Falsifikations-Governance)
+für den offenen Austausch und die pränumerierte Test-Architektur, auf die
+dieses Dokument aufsetzt.
+
+% ============================================================================
+\begin{thebibliography}{9}
+
+\bibitem{krueger276main}
+M.~Krüger,
+\emph{Operational Falsification Pathways for the HLV G-Lattice:
+Weighted Spectral Forks, Fresh-Seed Cell-Shape Validation, Native 6D
+Operators, and Process-Tensor Bridge Tests},
+Zenodo (2026), \url{https://doi.org/10.5281/zenodo.20668125}.
+
+\bibitem{krueger276gov}
+M.~Krüger,
+\emph{Operational Falsification Governance: Residual Preservation,
+Claim-State Ledgers, and Revision-Admissible Scientific Frameworks},
+Zenodo (2026), \url{https://doi.org/10.5281/zenodo.20629842}.
+
+\bibitem{dok275}
+J.~Pascher, \emph{Dok.\,275: Von $\xi$ zu $\varphi$ -- Rekursive
+Skalenhierarchie und spektrale Lückenstruktur}, FFGFT-Korpus (2026).
+
+\bibitem{dok271}
+J.~Pascher, \emph{Dok.\,271: FFGFT gegenübergestellt mit HLV},
+FFGFT-Korpus (2026).
+
+\bibitem{dok270}
+J.~Pascher, \emph{Dok.\,270: Dimensionswechsel in der FFGFT
+($T^4 \to T^0$)}, FFGFT-Korpus (2026).
+
+\bibitem{edelsbrunner}
+H.~Edelsbrunner und J.~Harer, \emph{Computational Topology: An
+Introduction}, American Mathematical Society (2010).
+
+\bibitem{gretton}
+A.~Gretton et al., \emph{A kernel two-sample test},
+Journal of Machine Learning Research \textbf{13}, 723--773 (2012).
+
+\end{thebibliography}
