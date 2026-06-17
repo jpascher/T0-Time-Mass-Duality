@@ -1,0 +1,397 @@
+% ==============================================================================
+% T0 Theory / FFGFT: Document 283 (Chapter Content, DE)
+% Titel: FFGFT <-> HLV: die Bruecke und die Gabelung
+% Autor: Johann Pascher
+% Datum: 17. Juni 2026
+% Zweck: Strenge Pruefung der FFGFT<->HLV-Verbindung nach dem Drei-Teile-Kriterium.
+%        Befund: gemeinsamer Z3-Zirkulant entlang Kruegers C3-Achse (Krit. 1+2),
+%        fundamentale Gabelung an der Symmetrie-Ordnung (5-zaehlig/phi vs 3-zaehlig/sqrt2).
+% Referenzen: Dok. 206, 230, 271, 276, 281, 282.
+% Skript: ffgft_hlv_c3_bridge_probe.py
+% ==============================================================================
+
+\section*{Abstract}
+Marcel Krügers HLV baut den Raum als ikosaedrischen 6D$\to$3D-Cut-and-Project-Quasikristall.
+Ob FFGFT und HLV verbunden sind, wird hier streng nach dem Drei-Teile-Kriterium
+geprüft: (1)~dasselbe strukturelle Objekt aus der \emph{eigenen} Geometrie jedes
+Modells, (2)~eine explizite Abbildung zwischen den Herleitungen, (3)~ein
+Divergenzpunkt, der bloßes Stufe-0-Gerüst ausschließt. Befund: Ein
+Z$_3$-Zirkulant -- der Typ von FFGFTs Massenoperator -- lebt nachweislich in HLVs
+eigener Geometrie, entlang einer C$_3$-Achse der Ikosaedergruppe (Kriterien 1+2
+erfüllt). Die innere Invariante aber divergiert \emph{fundamental}: HLVs
+geschützte Struktur liefert rigide $r=2/\sqrt5$ (5-zählig, $\varphi$), FFGFT
+verlangt $r=\sqrt2$ (3-zählig, Koide $Q=2/3$). Kein Cut-and-Project-Parameter
+erreicht $\sqrt2$ ($r(\tau)\le1$ für alle $\tau$); $\sqrt2$ taucht in HLV nur als
+ungeschützter Zufallswinkel auf. Ergebnis: eine \emph{genuine} Verbindung mit
+einer \emph{fundamentalen} Gabelung an der Symmetrie-Ordnung -- keine
+Stufe-0-Trivialität, keine Identität. Die Gabelung sitzt im \emph{Raum}: HLVs
+Phasen-Schicht ist sein Spiral-Time-Operator (nicht $\theta=0$), und auf der
+Zeit/Gedächtnis-Ebene sind HLVs $\chi$-Kern und FFGFTs Dok.-282-Kern
+nicht-Markovsche Kerne derselben Klasse -- ein Brücken-Kandidat (§\,8). Alle
+geometrischen Aussagen sind mit
+\texttt{ffgft\_hlv\_c3\_bridge\_probe.py} reproduzierbar.
+
+% ==============================================================================
+\section{Anlass und Kriterium}
+% ==============================================================================
+
+Der Austausch mit Marcel Krüger (HLV/HICE) wirft wiederholt die Frage auf, ob
+FFGFT und HLV verbunden sind. Eine ehrliche Antwort braucht ein scharfes Kriterium,
+sonst landet man bei Scheinverbindungen, die nur gemeinsames Gerüst teilen
+(beide benutzen Planck-Einheiten, beide haben irgendwo eine Wurzel). Das
+Kriterium hat drei Teile:
+\begin{enumerate}
+\item \textbf{Gleiches Objekt:} dasselbe strukturelle Objekt, hergeleitet aus der
+      \emph{eigenen} Geometrie jedes Modells -- nicht aus geteiltem Skalengerüst.
+\item \textbf{Abbildung:} eine explizite Abbildung zwischen den beiden Herleitungen.
+\item \textbf{Divergenzpunkt:} ein Punkt, an dem sich die Modelle trennen --
+      sonst ist die „Verbindung`` entweder triviale Identität oder Stufe-0-Gerüst.
+\end{enumerate}
+Dieses Dokument wendet das Kriterium konkret an. Es behauptet keine theoretische
+Äquivalenz; es lokalisiert präzise, \emph{wo} sich FFGFT und HLV treffen und
+\emph{wo} sie auseinanderlaufen.
+
+% ==============================================================================
+\section{Wie Marcel seinen Raum baut}
+% ==============================================================================
+
+Aus dem HLV-Homologie-Skript (Dok.~271/276) ist die Konstruktion direkt lesbar:
+ein \textbf{ikosaedrischer 6D$\to$3D-Cut-and-Project-Quasikristall}. Ein
+$\mathbb{Z}^6$-Gitter wird über zwei Projektoren in einen 3D-Parallelraum
+(physisch) und einen 3D-Senkrechtraum (die „hidden layer``) zerlegt; ein
+Akzeptanzfenster im Senkrechtraum wählt aus, welche Gitterpunkte in den physischen
+Quasikristall projizieren. Krügers exakter Projektor:
+\[
+P(\tau)=\begin{pmatrix}
+1 & -1 & 0 & 0 & \tau & \tau\\
+\tau & \tau & 1 & -1 & 0 & 0\\
+0 & 0 & \tau & \tau & 1 & -1
+\end{pmatrix}\quad(\text{Spalten normiert}),
+\]
+mit $\tau=\varphi$ (golden) im Parallelraum und $\tau=\sigma=-1/\varphi$ im
+Senkrechtraum. Die sechs Spalten sind die sechs ikosaedrischen Fünfachsen (eine
+pro Antipodenpaar). Innere Symmetrie: ikosaedrisch (5-zählig); das Punktset ist
+aperiodisch. Auffällig für eine Brücke: der versteckte Raum ist \emph{3D} --
+dieselbe Dimensionszahl wie FFGFTs Generationenfaser $\mathbb{C}^3$.
+
+% ==============================================================================
+\section{Das gemeinsame Objekt: ein Z$_3$-Zirkulant auf der C$_3$-Achse}
+% ==============================================================================
+
+Die Ikosaedergruppe enthält C$_3$-Achsen. Die zyklische Koordinaten-Abbildung
+$(x,y,z)\mapsto(z,x,y)$ ist eine Drehung der Ordnung~3; sie zerlegt Krügers sechs
+Spalten in zwei 3-Zyklen, $\{c_1,c_3,c_5\}$ und $\{c_2,c_4,c_6\}$. Die Gram-Matrix
+eines solchen C$_3$-Orbits ist -- durch die C$_3$-Symmetrie erzwungen -- ein
+\emph{exakter reeller Z$_3$-Zirkulant}, genau der Typ von FFGFTs Massenoperator
+$S=\mathrm{circ}(t_0,t_1,t_2)$ auf $\mathbb{C}^3$:
+\[
+G_{\text{orbit}}=\mathrm{circ}\!\left(1,\;\tfrac{1}{\sqrt5},\;\tfrac{1}{\sqrt5}\right)
+\quad(\tau=\varphi,\ \text{normiert}),
+\]
+mit $r=2g_1/g_0=2/\sqrt5\approx0{,}894$ und Phase $\theta=0$ (reell). Der
+Senkrechtraum ($\tau=\sigma$) gibt $r=-2/\sqrt5$. Geschlossene Form:
+$\;|r|=2|\tau|/(1+\tau^2)$, und für $\tau=\varphi$ kürzt sich $\varphi$ exakt zu
+$2/\sqrt5$ heraus ($1+\varphi^2=\sqrt5\,\varphi$).
+
+\begin{keyresult}[Kriterien 1 und 2 erfüllt]
+Ein Z$_3$-Zirkulant lebt \emph{innerhalb} von HLVs eigener ikosaedrischer Geometrie
+-- nicht aufgesetzt, sondern als Gram-Matrix eines C$_3$-Orbits. Das ist dasselbe
+Objekt wie FFGFTs Massenoperator (Kriterium~1). Die Abbildung ist explizit
+(Kriterium~2): FFGFTs Z$_3$-Generationensymmetrie $\leftrightarrow$ eine C$_3$-Achse
+von HLVs Ikosaedergruppe, mit dem Orbit $\{c_1,c_3,c_5\}$ als Bild.
+\end{keyresult}
+
+% ==============================================================================
+\section{Die Gabelung: 5-zählig gegen 3-zählig}
+% ==============================================================================
+
+Der Divergenzpunkt (Kriterium~3) ist scharf und, wie drei Checks zeigen,
+\emph{fundamental} -- nicht durch einen Parameter zu schließen.
+
+\textbf{Nur $1/\sqrt5$.} Alle $6\times6$ Skalarprodukte von Krügers Spalten haben
+\emph{einen einzigen} Betrag: $1/\sqrt5$. Die 5-zählige Geometrie kennt nur den
+Winkel $\arccos(1/\sqrt5)\approx63{,}4^\circ$; den $45^\circ$-Winkel
+($\cos=1/\sqrt2$), den FFGFT braucht, gibt es zwischen den Vakuumrichtungen nicht.
+Jeder geschützte 3-Orbit liefert also $r=2/\sqrt5$.
+
+\textbf{Kein $\tau$ erreicht $\sqrt2$.} Die geschlossene Form $r(\tau)=2\tau/(1+\tau^2)$
+ist für \emph{jedes} $\tau$ durch $1$ gedeckelt (Maximum bei $\tau=1$, kubisch).
+FFGFT verlangt $r=\sqrt2\approx1{,}414>1$ -- das liegt \emph{außerhalb} der
+erreichbaren Spanne von Krügers Konstruktion, für jeden Parameter.
+
+\textbf{$\sqrt2$ braucht 3-Zähligkeit.} In einer allgemeinen 3-zähligen Geometrie
+(zyklische Basis $(a,b,c)$, $r=2(ab+bc+ca)/(a^2+b^2+c^2)$) ist $\sqrt2$ sehr wohl
+erreichbar, z.\,B. $v=(1,1,\sqrt2-2^{1/4})$. FFGFTs Koide-Punkt
+($\mathrm{circ}(1,\tfrac1{\sqrt2},\tfrac1{\sqrt2})$, Eigenwerte $0{,}29/0{,}29/2{,}41$,
+positiv semidefinit) ist also geometrisch legitim -- er verlangt nur eine
+\emph{3-zählige} Spalte, nicht Krügers 5-zählige.
+
+\begin{center}
+\begin{tabular}{lcccl}
+\toprule
+ & $r$ & $\theta$ & Koide $Q$ & Quelle \\
+\midrule
+HLV (geschützt) & $2/\sqrt5=0{,}894$ & $0$ & $7/15$ & 5-zählig / $\varphi$ \\
+FFGFT (Massenop.) & $\sqrt2=1{,}414$ & $2/9$ & $2/3$ & 3-zählig / Koide \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ==============================================================================
+\section{Geschützt gegen generisch: kein Schlupfloch}
+% ==============================================================================
+
+Ein Einwand bleibt: der HLV-Quasikristall hat tausende projizierte Punkte --
+könnte ein C$_3$-Orbit \emph{irgendeines} Punkts zufällig $\sqrt2$ treffen? Bei
+$9822$ projizierten Punkten im Akzeptanzfenster füllen die C$_3$-Orbit-Verhältnisse
+$g_1/g_0$ tatsächlich das ganze Kontinuum $[-\tfrac12,1]$, und $1/\sqrt2$ ist
+$150$-mal darunter.
+
+\begin{warningboxenv}[Ein generischer Treffer beweist nichts]
+Dass generische projizierte Punkte bei \emph{jedem} Winkel sitzen -- auch bei
+$1/\sqrt2$ --, gilt für jedes dichte 3-zählige Punktset, sogar für ein kubisches.
+Das ist die Stufe-0-Trivialität: man pickt eine \emph{ungeschützte} Richtung mit
+dem passenden Winkel. Die \emph{symmetriegeschützten} Orbits -- Krügers sechs
+Vakuumrichtungen -- geben dagegen rigide nur $\pm1/\sqrt5$. $\sqrt2$ ist in HLVs
+geschützter Struktur nicht vorhanden; es erscheint nur als bedeutungsloser
+Zufallswinkel.
+\end{warningboxenv}
+
+% ==============================================================================
+\section{HLV ist die dekompaktifizierte Variante: Masse und Zeit nur durch den Zusatz}
+% ==============================================================================
+
+Eine Schicht der Gabelung liegt noch tiefer als die Symmetrie-Ordnung und ist
+leicht zu übersehen. HLVs Cut-and-Project projiziert in einen unendlichen,
+aperiodischen $\mathbb{R}^3$ -- es ist die \emph{dekompaktifizierte} Variante.
+FFGFTs Raum ist dagegen \emph{kompakt} ($T^4$). Das ist nicht kosmetisch: Masse
+und Zeit sind in FFGFT intrinsisch, weil die Kompaktheit die Moden quantisiert --
+das ist die Zeit-Masse-Dualität $\tilde T\cdot m=1$. Ohne Kompaktheit keine
+Modenquantisierung, also \emph{kein intrinsischer Massenmaßstab und keine Zeit}.
+Genau deshalb ist HLVs geschützte \emph{räumliche} Struktur rein geometrisch: eine
+reelle Gram-Metrik mit $\theta=0$ und dimensionslosen Winkeln. Der intrinsische
+\emph{Massen}maßstab fehlt, weil die dekompaktifizierte Variante keine
+Modenquantisierung hat; er kommt, wie schon in Dok.~282 festgehalten, erst
+\emph{durch den Zusatz}. Wichtig ist aber: dieses $\theta=0$ ist die räumliche
+Metrik, \emph{nicht} HLVs Zeit. HLV ist nicht zeit- oder phasenlos -- seine Zeit
+sitzt in den nativen Spiral-Time-Operatoren (§\,8), die der räumliche Gram gar nicht
+erfasst. Der C$_3$-Probe hat nur die Geometrie gesehen, nicht die Dynamik.
+
+Das schärft Kriterium~1. Der gemeinsame Z$_3$-Zirkulant ist nur \emph{algebraisch}
+gleich (dieselbe zyklische Form). Physikalisch ist er verschieden: in HLV
+(dekompaktifiziert) eine \emph{räumliche Metrik} ohne Masse und Zeit, in FFGFT
+(kompakt) der \emph{Massenoperator} mit Masse und Zeit intrinsisch. Die Brücke
+trägt die Form, nicht den Inhalt.
+
+\begin{keyresult}[Die Gabelung hat drei Schichten]
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Schicht & HLV & FFGFT \\
+\midrule
+Kompaktheit & dekompaktifiziert (Metrik) & kompakt ($\tilde T\!\cdot\! m=1$) \\
+Symmetrie-Ordnung & 5-zählig ($\varphi$, $1/\sqrt5$) & 3-zählig ($\sqrt2$) \\
+Phase & Spiral-Time: schief-adj.\ $R$ (dyn., §\,8) & skalar, $\theta=2/9$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Die oben geforderte komplexe Holonomie ($\theta=2/9$, FFGFT) ist die
+\emph{operationale Folge} der Kompaktheit: Masse und Phase entstehen dort durch die
+quantisierten Moden. Die HLV-Spalte der Phasen-Zeile ist dabei subtiler als ein
+bloßes $\theta=0$ -- das war die \emph{räumliche} Gram-Metrik; HLVs eigene
+Zeit-Phase sitzt im schief-adjungierten Spiral-Time-Operator $R$ (§\,8). Eine
+vollständige Rekompaktifizierung von HLV muss diese Operatoren \emph{mit-integrieren},
+nicht nur den Raum periodisieren -- ein kompaktes HLV ist zudem kein Quasikristall mehr.
+\end{keyresult}
+
+% ==============================================================================
+\section{Eine kompaktifizierte Variante von HLV: der rationale Approximant}
+% ==============================================================================
+
+Lässt sich diese Rekompaktifizierung konkret durchführen, um den Vergleich fair zu
+machen? Ja -- mit einem etablierten Begriff der Quasikristall-Physik, dem
+\emph{rationalen Approximanten}. Man ersetzt das irrationale $\varphi$ im Projektor
+durch rationale Fibonacci-Verhältnisse $\tau_n=F_{n+1}/F_n$
+$(1,2,\tfrac32,\tfrac53,\tfrac85,\dots\to\varphi)$. Bei rationalem $\tau=p/q$ wird
+der physische Projektor nach Multiplikation mit $q$ \emph{ganzzahlig} -- die
+Projektion von $\mathbb{Z}^6$ landet auf einem skalierten Ganzzahlgitter
+$(1/q)\mathbb{Z}^3$, also auf einem \emph{periodischen Kristall} auf $T^3$. Bei
+irrationalem $\varphi$ gibt es keinen solchen Faktor; das Punktset bleibt dicht und
+aperiodisch. Das ist der präzise Sinn von „kompaktifiziertes HLV`` -- und es ist,
+wie §\,6 schon sagte, kein Quasikristall mehr, sondern sein periodischer Kristall-Approximant.
+
+Der Approximant ist periodisch, hat also diskrete Moden -- ein \emph{Massenmaßstab
+wird möglich}. Damit ist die tiefste Schicht der Gabelung (Kompaktheit)
+geschlossen: HLV liegt jetzt im selben Regime wie FFGFT. Das C$_3$-Verhältnis
+konvergiert dabei:
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+$\tau=F_{n+1}/F_n$ & $r$ (C$_3$) & Koide $Q$ \\
+\midrule
+$2/1$ & $0{,}800$ & $0{,}440$ \\
+$5/3$ & $0{,}882$ & $0{,}463$ \\
+$13/8$ & $0{,}893$ & $0{,}466$ \\
+$\to\varphi$ & $0{,}894=2/\sqrt5$ & $7/15$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Aber der Approximant erbt HLVs 5-Zähligkeit: $r\to2/\sqrt5$, Koide $\to7/15$; die
+\emph{räumliche} Metrik bleibt reell ($\theta=0$). Damit divergiert die
+Symmetrie-Ordnung weiter. Die Phasen-Schicht jedoch ist mit „$\theta=0$`` nicht
+erledigt: der rein räumliche Approximant rekompaktifiziert nur den Raum; HLVs
+Zeit-Phase liegt in den Spiral-Time-Operatoren, die er noch integrieren muss (§\,8).
+
+\begin{keyresult}[Die Gabelung übersteht den fairen Vergleich]
+Mit dem Approximanten ist der Vergleich \emph{kompakt gegen kompakt} und damit
+fair. Er bestätigt die Gabelung: \emph{selbst kompaktifiziert} gibt HLV Koide
+$7/15$, nicht FFGFTs $2/3$. Die Divergenz war also \emph{kein
+Kompakt/Dekompakt-Artefakt} -- sie sitzt echt in der 5- gegen 3-Zähligkeit. Man
+kann HLV kompaktifizieren; der Befund hält.
+\end{keyresult}
+
+% ==============================================================================
+\section{Was die Kompaktifizierung integrieren muss: HLVs Spiral-Time}
+% ==============================================================================
+
+Der Approximant aus §\,7 rekompaktifiziert HLVs \emph{Raum}. Aber HLV ist nicht
+rein räumlich: seine definierende Dynamik sind die nativen 6D-\emph{Spiral-Time}-Operatoren
+\begin{equation}
+\Psi(t)=t+i\,\phi(t)+j\,\chi(t),
+\end{equation}
+mit $\phi(t)$ als Phasen-/Kohärenzkanal und $\chi(t)$ als Gedächtnis-/Hysteresekanal
+(Krüger, Zenodo 20668125 und 20512650). Eine kompaktifizierte Variante, die HLV
+\emph{bleiben} soll, muss diese Operatoren integrieren -- der rein räumliche
+Approximant tut das noch nicht. Das korrigiert die Phasen-Schicht der Gabelung.
+
+Krüger wendet $\Psi$ nicht direkt an (das ergäbe hyperkomplexe Felder), sondern über
+eine \emph{konservative Übersetzung} in zwei reelle Operatoren:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Kanal & wird zu & Anforderung \\
+\midrule
+$\phi$ (Phase) & Phasen-/Vortizitätsordnung & schief-adjungierter Generator $R$ (energie-neutral) \\
+$\chi$ (Memory) & Geschichtsabhängigkeit & positiv-typiger Kern $K$ (dissipativ) \\
+\bottomrule
+\end{tabular}
+\end{center}
+mit Exponentialbeispiel $K_\tau(t)=\tfrac1\tau e^{-t/\tau}$, das auf eine interne
+Variable reduziert. Daraus folgt dreierlei:
+
+\begin{enumerate}
+\item \textbf{Die Phasen-Schicht ist nicht $\theta=0$.} Das $\theta=0$ aus §\,3 ist
+die \emph{räumliche} Gram-Metrik, nicht HLVs Zeit. HLVs Phase sitzt im
+schief-adjungierten Operator $R$, dynamisch getrieben von $\dot\phi(t)$. Die Schicht
+lautet also richtig: \emph{dynamische Operator-Phase $R$} (HLV) gegen \emph{feste
+skalare Phase $\theta=2/9$} (FFGFT) -- nicht phasenfrei gegen phasenbehaftet.
+
+\item \textbf{Die Zeit/Gedächtnis-Schicht ist ein echter Brücken-Kandidat.} HLVs
+$\chi$-Kanal ist ein positiv-typiger, nicht-Markovscher Gedächtniskern
+$\int_0^t K(t-s)\,u(s)\,ds$. FFGFTs Zeit-Erweiterung in Dok.~282 ergibt einen
+Gedächtniskern als Fourier-Transformierte der diskreten Spektraldichte
+$\sum_k g_k^2\,\delta(\omega-\omega_k)$ -- ebenfalls nicht-Markovsch
+(Rückfluss, Revivals), mit Exponentialform $\to$ interne Variable. \emph{Dieselbe
+Objektklasse.} Wo der Raum forkt (5- gegen 3-zählig), stehen sich auf der Zeit-Ebene
+zwei Kerne desselben Typs gegenüber: \emph{räumliche Gabelung, möglicher
+$\chi$-Gedächtnis-Brücke}.
+
+\item \textbf{Zwei ehrliche Grenzen.} Erstens: Die $i\!\cdot\!j$-Produktrelation der
+Spiral-Algebra ist in \emph{keiner} Quelle Krügers (Dok 271, FA-Hub, Navier-Stokes)
+festgelegt -- sie wird stets über die Operator-Übersetzung umgangen. Der
+Phasenvergleich ist deshalb \emph{operator-}, nicht algebra-seitig zu führen; ob die
+Operator-Phase $R$ FFGFTs $2/9$ trifft, lässt sich erst mit einer expliziten
+$R$-Spezifikation entscheiden. Zweitens: Krüger selbst hält fest, dass viele
+gewöhnliche reduzierte Modelle Gedächtnis erzeugen; die HLV-Deutung sei nur eine
+Kandidaten-Modellklasse, keine demonstrierte Ontologie (Run~M1: HLV-Kern schlägt
+schwache Nulls, nicht den generischen Biexponential). Die $\chi$-Brücke ist also
+\emph{strukturelle Verwandtschaft}, kein Eindeutigkeitsanspruch -- konsistent mit
+Dok.~276/281 (auch $\varphi$ ist nicht spezifisch).
+\end{enumerate}
+
+\begin{important}[Die drei Ebenen sind nicht gleich stark]
+Liest man die Verbindung nach physikalischer Ebene -- Raum, Zeit, Masse -- so sind
+die drei \emph{nicht} gleichwertig, und das ist methodisch entscheidend:
+\begin{itemize}
+\item \textbf{Masse (Z$_3$-Zirkulant):} die \emph{genuine} Brücke -- aus jeder
+Geometrie eigenständig hergeleitet, mit expliziter C$_3$-Abbildung und echtem
+Divergenzpunkt. Sie allein besteht das Drei-Teile-Kriterium vollständig.
+\item \textbf{Zeit ($\chi$-Gedächtnis):} \emph{strukturelle Verwandtschaft},
+Kandidat -- nicht HLV-eindeutig (Run~M1: ein generischer Biexponential schlägt den
+HLV-Kern). Bridge-Kandidat, kein Eindeutigkeitsanspruch.
+\item \textbf{Raum (Connection-Laplace auf Faserbündel):} \emph{geteilte Sprache},
+keine Brücke. Dass beide ein Connection-Laplace auf einem faserwertigen Raum sind,
+gilt für \emph{jede} Gitter-Eichtheorie -- das ist Stufe-0-Gerüst, genau das, was das
+Kriterium ausschließt. Es darf nicht als tragende Verbindung gezählt werden, sonst
+bläht man die Verbindung in Richtung Trivialität auf.
+\end{itemize}
+Nur die Masse-Ebene ist also eine Brücke im Sinne des Kriteriums; die Zeit-Ebene ein
+ehrlicher Kandidat; die Raum-Ebene ein gemeinsamer Rahmen, nicht mehr.
+\end{important}
+
+% ==============================================================================
+\section{Was übrig bleibt: hexagonal, nicht pentagonal}
+% ==============================================================================
+
+Streift man HLV die beiden Achsen ab, an denen es forkt -- Symmetrie-Ordnung und
+Kompaktheit --, bleibt genau ein Bestandteil, der nicht schon FFGFT ist: die
+Spiral-Time. Ihre Operatoren ($R$, $K$) hängen weder an der 3- noch an der
+5-Zähligkeit und überleben den Wechsel auf 3-zählig unverändert. \emph{Was von HLV
+substanziell bleibt, ist also nicht eine Geometrie, sondern eine Zeit} -- und genau
+dort, in der Dynamik, trifft sie FFGFTs nicht-Markovschen Kern aus Dok.~282. Der
+geometrische Rest -- die ikosaedrische 5-Zähligkeit -- ist ein eleganter, aber
+physikalisch leerer Ast: kein Sektor realisiert ihn, und $\varphi$ ist nicht
+spezifisch (Dok.~276/281).
+
+Daraus folgt eine knappe geometrische Lehre. Die 5-Zähligkeit ist
+\emph{nicht-kristallographisch} -- sie parkettiert nicht periodisch und erzwingt die
+Dekompaktifizierung; die 3-Zähligkeit ist \emph{kristallographisch}, aus derselben
+Familie wie die 6-Zähligkeit (Dreiecks-/Hexagonalgitter). Wo Geometrie die
+Massenstruktur trägt, ist sie damit hexagonal, nicht pentagonal -- und das ist kein
+neuer Befund, sondern FFGFTs eigener Anker: das \emph{Euler-Tonnetz} ist ein
+hexagonales Gitter (Dok.~275, „der Rahmen ankert im Euler-Tonnetz, nicht im Goldenen
+Schnitt``).
+
+\begin{important}[Die belastbare Form der These]
+„Hexagonal`` meint die kristallographische Familie (3-/6-zählig), nicht die
+Behauptung, die Raumzeit sei eine Hexagonal-Parkettierung -- FFGFTs Basis bleibt
+$T^4$ mit $Z_3$-Generationensymmetrie. Empirisch 3-zählig bestätigt sind bisher
+allein die geladenen Leptonen; die Hadronen sind fast entartet ($Q\approx1/3$), also
+weder 3- noch 5-zählig. Belastbar bleibt: \emph{wo Geometrie die Massenstruktur
+trägt, ist sie hexagonal/kristallographisch; das Pentagonale bleibt ein eleganter,
+physikalisch leerer Ast; und was von HLV substanziell übrig bleibt, ist seine Zeit,
+nicht seine Geometrie.}
+\end{important}
+
+% ==============================================================================
+\section{Fazit}
+% ==============================================================================
+
+Alle drei Teile des Kriteriums sind beantwortet. (1)~Gleiches Objekt: ein
+Z$_3$-Zirkulant aus HLVs eigener Geometrie. (2)~Abbildung: die C$_3$-Achseneinbettung
+von FFGFTs Z$_3$ in HLVs Ikosaedergruppe. (3)~Divergenz: fundamental, und in drei
+Schichten -- Kompaktheit (dekompaktifiziert/Metrik gegen kompakt/$\tilde T\!\cdot\! m=1$),
+Symmetrie-Ordnung (5-zählig $\varphi$, $1/\sqrt5$ gegen 3-zählig Koide, $\sqrt2$)
+und Phase (HLVs dynamische Spiral-Time-Operator-Phase $R$ gegen FFGFTs feste
+skalare $2/9$; §\,8). Die Kompaktheit bleibt entscheidend für den \emph{Massen}maßstab
+(ohne quantisierte Moden kein intrinsisches $m$); HLVs \emph{Zeit} jedoch sitzt in
+der Spiral-Time, unabhängig davon. Kein Parameter von HLV erreicht FFGFTs geschützten
+Koide-Punkt -- doch auf der Zeit/Gedächtnis-Ebene stehen sich beide nicht-Markovschen
+Kerne derselben Klasse gegenüber: \emph{räumliche Gabelung, möglicher Zeit-Brücke} (§\,8).
+
+Das ist genau, was das Kriterium liefern soll: eine \emph{genuine} Verbindung --
+gemeinsame Z$_3$-Zirkulant-Familie, explizite C$_3$-Abbildung -- \emph{mit} einem
+echten Divergenzpunkt, und nachweislich \emph{keine} Stufe-0-Trivialität (das
+Geschützte trennt sich, nur das Bedeutungslose fällt zusammen). FFGFT und HLV
+sitzen an zwei \emph{verschiedenen} Punkten derselben Familie. Es ist eine
+\emph{Gabelung}, kein Zusammenfall: gemeinsamer Stamm (Z$_3$-Zirkulant aus
+höherdimensionalem Gitter mit verstecktem Raum), zwei Äste je nach Symmetrie-Ordnung.
+
+Für die Korrespondenz ist die Aussage präzise und fair: \emph{Wir treffen uns im
+Z$_3$-Zirkulanten entlang deiner C$_3$-Achse; wir trennen uns, weil deine
+ikosaedrische 5-Zähligkeit rigide $1/\sqrt5$ erzwingt, während FFGFTs
+Koide-Bedingung 3-zählig $\sqrt2$ verlangt -- und kein Parameter deiner
+Konstruktion überbrückt das.} Reproduzierbar mit
+\texttt{ffgft\_hlv\_c3\_bridge\_probe.py} (sechs Checks, numpy-only).
