@@ -1,0 +1,314 @@
+% ==============================================================================
+% T0 Theory / FFGFT: Dokument 284 (Kapitelinhalt, DE)
+% Titel: Eine Formel-genaue Lesung des Spiral-Zeit-Neurodynamik-Modells
+% Autor: Johann Pascher
+% Datum: 19. Juni 2026
+% Zweck: Reproduzierbarer, formel-genauer Test von Krueger/Feeney/Wende
+%        (Medinformatics 2026); das grundlegende Zeitachsen-Problem; die FFGFT-
+%        Lesung Kompaktifizierung / Umwandlung-als-Messung.
+% Referenzen: Dok. 190, 210, 249, 263, 270, 282, 283.
+% Skripte: test_algebra.py, test_deltaphi.py, test_dynamics.py,
+%          test_compactification.py, make_figures.py
+% ==============================================================================
+
+\section*{Kurzfassung}
+Dieses Dokument ist eine reproduzierbare, formel-genaue Lesung von \emph{Information-Theoretic
+Modeling of Neural Coherence via Triadic Spiral-Time Dynamics: A Framework for
+Neurodynamic Collapse} (Kr\"uger, Feeney \& Wende, \emph{Medinformatics} 2026,
+DOI 10.47852/bonviewMEDIN62029043). Jeder Befund wird von einem kurzen, lauffähigen
+Skript erzeugt. Die Lesung trennt, was trägt (ein interpretierbares
+Phasen-Abweichungsmerkmal; echte Oktonion-Nichtassoziativität), von dem, was falsch
+etikettiert ist (die Tripel-Algebra ist quaternionisch, nicht bikomplex), intern
+widersprüchlich (zwei unvereinbare Definitionen von $\Delta\Phi$), nicht hergeleitet
+(die $0{,}40$-Schwelle; die behaupteten Spiralen und Grenzzyklen) oder aus dem Papier
+nicht reproduzierbar (das berichtete $r\approx0{,}96$). Darunter liegt \emph{ein}
+grundlegendes Problem: der Operator $\psi(t)=t+i\varphi(t)+j\chi(t)$ ist auf der
+physikalischen, linearen Zeit als Basisachse aufgebaut -- der dekompaktifizierten,
+nach-der-Messung-Koordinate -- sodass sein Gedächtnis per Konstruktion generisch ist.
+Die FFGFT-Lesung macht das präzise: das System ist kompakt und trägt Gedächtnis. Nach
+Dok.~270 ist die Dekompaktifizierung in die SI-Zeit ein mode-erhaltendes Embedding
+(verlustfrei), und FFGFT hat sehr wohl framework-spezifische SI-Observable
+(Massen/Koide, CHSH$\sim\xi$, $D_f$, $L_0$; Dok.~270/249); was die Wiederkehr entfernt,
+ist nicht die SI-Umwandlung, sondern das endliche, nichtperiodische Beobachtungsfenster
+plus Dekohärenz. Die scharfe, enge Folge: die Kohärenz-Sektor-Recurrence ist auf einem
+warmen, endlich-gefensterten SI-Zeit-Signal wie EEG nicht \emph{auflösbar}. Dies
+ist eine Gutachter-Notiz an die Autoren; der Maßstab ist die Falsifikations-Disziplin,
+die die HLV/HICE-Seite bereits anwendet.
+
+% ==============================================================================
+\section{Anlass und Methode}
+% ==============================================================================
+Das Medinformatics-Papier wendet den HLV-Spiral-Zeit-Operator auf neuronale Kohärenz an
+und schlägt das Information--Kohärenz--Energie-Prinzip (ICE) sowie eine
+$\Delta\Phi$-gestützte ``neurodynamische Kollaps''-Grenze vor. Statt aus dem Eindruck zu
+argumentieren, wird hier jede mathematische Behauptung rechnerisch geprüft. Die Skripte
+sind \texttt{test\_algebra.py}, \texttt{test\_deltaphi.py}, \texttt{test\_dynamics.py},
+\texttt{test\_compactification.py} und \texttt{make\_figures.py}; durchgängig feste Seeds.
+Die Befunde teilen sich in: \emph{trägt}, \emph{falsch etikettiert}, \emph{intern
+widersprüchlich}, \emph{nicht hergeleitet}, \emph{aus dem Papier nicht reproduzierbar}
+und \emph{spekulative Prämisse}. Ein Problem ist grundlegend -- die Zeitachse, auf der der
+Operator aufgebaut ist -- und wird zuerst behandelt, weil die Befunde zu $\Delta\Phi$ und
+zur Dynamik seine Symptome sind.
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}c p{4.1cm} p{1.7cm} p{5.0cm}@{}}
+\toprule
+Nr. & Behauptung & Abschnitt & Befund\\
+\midrule
+0 & Basis-Zeitachse $\psi(t)=t+i\varphi(t)+j\chi(t)$ auf physikalischer Linearzeit & 2.1, 2.2.1 & Grundlegend -- Operator auf der nach-der-Messung-Achse (ordnet 3 \& 5 unter)\\
+1 & Tripel-Zeit ``reduzierte bikomplexe/oktonionische Ebene'' & 2.1 & Falsch etikettiert -- es sind die Quaternionen\\
+2 & Oktonionischer Operator; Nichtassoz.\ ``erklärt Psychologie'' & 2.10 & Mathematik trägt, Behauptung überdehnt\\
+3 & $\Delta\Phi$-Instabilitätsfunktional & 2.6 vs 12/15 & Intern widersprüchlich (zwei Definitionen)\\
+4 & kritisch $\Delta\Phi_c\approx0{,}40$, ``kein freier Parameter'' & 2.5, 2.6.2 & Nicht hergeleitet (freier Parameter)\\
+5 & gesunde Spiralen / Trauma-Grenzzyklen & 2.2.3, 2.9 & Nicht aus den Gleichungen hergeleitet\\
+6 & $r\approx0{,}96$, $\Delta\Phi_c\approx0{,}40$ ``über Probanden'' & 3.4 & Aus dem Papier nicht reproduzierbar\\
+7 & Axon-Biphotonen-Kopplung $\Gamma_{\text{axon}}$ & 2.7--2.8 & Spekulative Prämisse als etabliert\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ==============================================================================
+\section{Die Basis-Zeitachse (grundlegend)}
+% ==============================================================================
+Dies ist die folgenreichste Wahl im Papier und jene, unter der die Befunde 3 und 5
+nachgeordnete Symptome sind. Der Spiral-Zeit-Operator
+\begin{equation}
+\psi(t) = t + i\,\varphi(t) + j\,\chi(t)
+\end{equation}
+nimmt die physikalische, lineare Zeit $t$ als Skalarbasis und schreibt $\varphi,\chi$ als
+Funktionen ebendieser $t$. Das Papier benennt $t$ ausdrücklich als physikalisch: $U_1$
+ist als ``lineare physikalische Zeit'', äußere Chronologie definiert (\S2.2.1). Das legt
+die Darstellung fest, in der jede spätere Gedächtnis- und Holonomie-Behauptung getroffen
+wird.
+
+\paragraph{Einheiten-unabhängig.} Damit $t + i\varphi + j\chi$ \emph{ein} algebraisches
+Objekt ist, müssen die drei Komponenten dieselbe Art von Größe sein. Das Papier behauptet
+Dimensionslosigkeit (\S2.1.2), nennt $t$ aber zugleich physikalische Zeit und Chronologie
+(\S2.2.1); $\varphi$ und $\chi$ sind interne Phasen-/Identitätskoordinaten. Eine
+physikalische Zeit zu internen Phasen in einer quaternionischen Summe zu addieren ist
+dimensionell inkohärent, solange nicht alle drei zuvor auf ein gemeinsames dimensionsloses
+Maß reduziert werden. (Da $i,j$ antikommutieren, ist das Objekt quaternionisch -- $t$ ist
+der Realteil eines Quaternions, dessen Kreuzterm $ij=k$ nie mitgeführt wird; siehe
+\S\ref{sec:alg}.)
+
+\paragraph{Tieferes.} Ein framework-spezifisches Gedächtnis lebt auf dem kompakten
+internen Zeitkreis $S^1$: ein diskretes Spektrum, eine exakte Wiederkehr (in FFGFT der
+Back-flow $5{,}125$ im Kohärenz-Sektor, Dok.~282). $\varphi(t),\chi(t)$ als einwertige
+Funktionen der physikalischen linearen $t$ zu schreiben, legt $S^1$ auf $\mathbb{R}$ flach
+-- es führt die Projektion $S^1\!\to\!\mathbb{R}$ \emph{vor jeder Dynamik} aus, und eine
+einwertige Funktion über linearer Zeit hat keine kompakte Periodizität, sodass die
+Wiederkehr auf dieser Achse gar nicht darstellbar ist. Nach dem Prinzip
+Umwandlung-als-Messung (\S\ref{sec:ffgft}) ist die Festlegung auf physikalische Zeit selbst
+die störende, informationsverwerfende Projektion -- kein Apparat nötig. Die Schreibweise
+hat diesen Schritt stillschweigend vollzogen und verbirgt die eine Operation -- die
+Umwandlung/Messung von der kompakten internen Zeit auf die physikalische SI-Zeit --, die
+entscheidet, ob eine Gedächtnis-Behauptung framework-spezifisch oder generisch ist.
+
+\paragraph{Folge.} Der Operator ist per Konstruktion nach-der-Messung: was immer er auf
+physikalischer (EEG-)Zeit an Gedächtnis trägt, ist generisch. Das ist reproduzierbar
+(\texttt{test\_compactification.py}): das Rückkehr-Signal des diskreten Spektrums hat auf
+dem kompakten Horizont den Back-flow $11{,}5$, den ein endliches physikalisches
+Auslesefenster auf $0{,}000$ treibt, während die sechs Linien nie auflösbar werden
+($2\pi/T_{\text{Fenster}}\gg$ Linienabstand $0{,}091$) -- die Auslesung ist eine
+nicht-invertierbare Projektion. Dieselbe Wurzel erklärt die beiden nachgeordneten Befunde:
+eine Berry-Phasen-Holonomie (Gl.~12/15, \S\ref{sec:dphi}) braucht eine geschlossene
+Schleife -- einen kompakten Zyklus --, und ein Grenzzyklus (\S\ref{sec:dyn}) braucht
+nicht-gradiente geschlossene Orbits; beides ist auf einer linearen physikalischen
+Zeitachse nicht tragfähig.
+
+\begin{figure}[h]\centering
+\includegraphics[width=0.95\linewidth]{fig_compactification.png}
+\caption{Auslesung als nicht-invertierbare Projektion. Links: in der kompakten Darstellung
+erzeugt das diskrete Spektrum Wiederkehren (Back-flow $\gg0$); das rote Band markiert ein
+endliches physikalisches Auslesefenster. Rechts: im Fenster zerfällt das Observable ohne
+Wiederkehr, und die diskreten Linien sind unaufgelöst.}
+\end{figure}
+
+\paragraph{Konstruktiver Ausweg.} Den Operator auf die kompakte, dimensionslose interne
+Zeit (zyklisch) stellen, auf der das diskrete Spektrum und die Wiederkehr leben, und die
+physikalische SI-Zeit nur über eine ausdrücklich deklarierte Umwandlung eintreten lassen
+-- und genau diese projiziert den framework-spezifischen Anteil heraus. Entweder bleibt
+der Operator intern/kompakt (keine direkte EEG-Aussage), oder er ist physikalisch/SI
+(generisches Gedächtnis). $\psi(t)=t+i\varphi(t)+j\chi(t)$ versucht beides. Die minimale
+Änderung ist, zwei verschiedene Zeiten zu deklarieren und die Umwandlung zwischen ihnen
+ausdrücklich als die Messung zu schreiben, die sie ist.
+
+% ==============================================================================
+\section{Tripel-Zeit-Algebra -- falsch etikettiert}\label{sec:alg}
+% ==============================================================================
+Die angegebenen Relationen $i^2=j^2=-1,\ ij=-ji$ sind genau die imaginären Quaternionen:
+mit $k:=ij$ ist $k^2=-1$, und $\{1,i,j,k\}$ schließt zu $\mathbb{H}$, das assoziativ und
+nichtkommutativ ist (\texttt{test\_algebra.py}, A). Eine \emph{bikomplexe} Ebene verlangt,
+dass die beiden imaginären Einheiten kommutieren ($ij=ji$); hier gilt $ij=-ji$, also ist
+die Algebra \emph{nicht} bikomplex. Ein Drei-Term-Operator $t+i\varphi+j\chi$ lebt in einer
+Quaternionen-Unteralgebra; Oktonionen sind dafür nicht nötig. Der korrekte Name ist
+quaternionisch.
+
+% ==============================================================================
+\section{Oktonionische Struktur -- Mathematik trägt, Deutung überdehnt}
+% ==============================================================================
+Die Oktonion-Nichtassoziativität ist real: der Assoziator
+$(e_1e_2)e_4-e_1(e_2e_4)=2e_7\neq0$ (Cayley--Dickson), während Assoziatoren auf einem
+quaternionischen Tripel verschwinden (\texttt{test\_algebra.py}, B). Das ist korrekte
+Mathematik. Der weitere Schritt -- dass dies ``empirische Psychologie direkt abbildet'' und
+``die erste physikbasierte Erklärung psychologischer Nichtlinearität'' sei -- ist eine
+interpretierende Analogie, keine Herleitung: keine psychologische Größe wird aus der
+Algebra berechnet oder gegen sie getestet, und die acht Basisrichtungen werden per
+Festsetzung mit Bedeutungen belegt.
+
+% ==============================================================================
+\section{$\Delta\Phi$ -- zwei unvereinbare Definitionen unter einem Symbol}\label{sec:dphi}
+% ==============================================================================
+\begin{itemize}
+\item \textbf{Definition 1 (\S2.6):} $\Delta\Phi=\alpha|\Delta S|+\beta|\Delta I|+\gamma|\Delta C|$,
+konvexe Gewichte, jede Komponente in $[0,1]$ -- ein einheitenloser gewichteter
+$L^1$-Index in $[0,1]$. Er ist in jeder Komponente linear, hat also keine Krümmung und
+keine intrinsische Bifurkation; die Niveaumenge $\Delta\Phi=c$ ist für jedes $c$ eine
+flache Polytop-Facette.
+\item \textbf{Definition 2 (Gl.~12, 15):} $\Delta\Phi=\oint(\nabla\times A)\cdot da
+\approx \mathrm{Im}\oint\langle\psi|\nabla\theta|\psi\rangle\,d\theta$ -- eine
+Berry-Phasen-Holonomie, ein Winkel im Bogenmaß über $0\ldots2\pi$, ohne Grund, in $[0,1]$
+oder nahe $0{,}40$ zu liegen (eine Schleife mit $|\gamma|=0{,}40$\,rad ist ein winziger
+$\sim$\,29$^\circ$-Kegel).
+\end{itemize}
+Ein normierter Abweichungsindex und eine Holonomie im Bogenmaß sind verschiedene
+mathematische Objekte. Beide ``$\Delta\Phi$'' zu nennen und beiden denselben kritischen
+Wert $0{,}40$ zuzuweisen, ist eine Äquivokation (\texttt{test\_deltaphi.py}, C/D).
+
+\begin{figure}[h]\centering
+\includegraphics[width=0.72\linewidth]{fig_deltaphi.png}
+\caption{Die zwei $\Delta\Phi$-Definitionen sind unvereinbare Objekte: eine Holonomie im
+Bogenmaß ($0\ldots2\pi$) gegenüber einem einheitenlosen Index ($0\ldots1$).}
+\end{figure}
+
+% ==============================================================================
+\section{Die $0{,}40$-Schwelle -- nicht hergeleitet}
+% ==============================================================================
+\S2.5 sagt, der Wert sei ``kein freier Tuning-Parameter'' und die Operatorstruktur
+``erzwinge'' eine begrenzte Instabilitätsfläche. Doch das $L^1$-Funktional hat keinen
+intrinsischen kritischen Punkt (es ist linear); die einzig verfügbare strukturelle Aussage
+ist die triviale Schranke $0\le\Delta\Phi\le1$ und die symmetrische Referenz
+$\Delta\Phi=d$ (also $1/3$ bei $d=1/3$). \S2.6.2 selbst schreibt die Differenz $0{,}40$ vs
+$0{,}333$ ``datensatzspezifischer Gewichtungs-Asymmetrie $\ldots$ und Normierung'' zu, und
+bei gleicher Abweichung $d=0{,}40$ liefert jede konvexe Gewichtung $0{,}40$
+(\texttt{test\_deltaphi.py}, C/E). Also ist $0{,}40$ ein empirischer/Konturwert, keine
+strukturell erzwungene Bifurkation.
+
+% ==============================================================================
+\section{Spiralen und Trauma-Grenzzyklen -- nicht hergeleitet}\label{sec:dyn}
+% ==============================================================================
+Der einzige mit expliziten Potenzialen angegebene dynamische Mechanismus (\S2.4) ist der
+Gradientenfluss-Teil der Mastergleichung, $\partial_t\Psi=-\nabla V_{\text{DLHR}}(\Psi)$.
+Für jeden Gradientenfluss gilt
+\begin{equation}
+\frac{dV}{dt}=\nabla V\cdot\frac{d\Psi}{dt}=-|\nabla V|^2\le0,
+\end{equation}
+also ist $V$ eine strikte Ljapunow-Funktion, und das System kann keine periodischen Orbits,
+Grenzzyklen oder anhaltenden Spiralen haben -- es relaxiert in Fixpunkte (Theorem).
+Numerisch (\texttt{test\_dynamics.py}, F): über 40 Trajektorien ist $V(t)$ monoton fallend
+(0 Verletzungen) und 0 geschlossene Orbits werden gefunden. Die Phänomenologie ``gesunde
+Kognition $\to$ stabile Einwärtsspiralen'', ``Trauma-Schleifen $\to$ Grenzzyklen'' folgt
+daher nicht aus der spezifizierten Dynamik; sie bräuchte die Advektionsterme
+$\lambda_\varphi\partial_\varphi,\ \lambda_\chi\partial_\chi$ oder $W_{\text{oct}}$, die nie
+konkret angegeben werden. (Der kubische $M^3$-Term macht $V$ zudem nach unten
+unbeschränkt.)
+
+\begin{figure}[h]\centering
+\includegraphics[width=0.95\linewidth]{fig_dynamics.png}
+\caption{Gradientenfluss mit den DLHR-Potenzialen des Papiers: Trajektorien relaxieren in
+Fixpunkte (keine geschlossenen Orbits, keine anhaltende Spirale), und $V(t)$ fällt monoton,
+sodass Grenzzyklen unmöglich sind.}
+\end{figure}
+
+% ==============================================================================
+\section{Empirische Behauptungen -- aus dem Papier nicht reproduzierbar}
+% ==============================================================================
+Das berichtete $r\approx0{,}96$ und $\Delta\Phi_c\approx0{,}40$ ``über Probanden'' (\S3.4)
+lassen sich aus dem Papier nicht nachrechnen, das keine Datentabelle gibt. Die Reproduktion
+braucht den externen Datensatz (Zenodo 10.5281/zenodo.17990696) und das Validierungs-Notebook.
+Ein fairer Test bräuchte den Datensatz plus ein vorregistriertes Protokoll mit den Nullmodellen,
+die die Autoren auf der HICE-Seite bereits verwenden (Zeit-Shuffle, present-state-matched,
+phasen-randomisiert).
+
+% ==============================================================================
+\section{Axon-Biphotonen-Verschränkung -- spekulative Prämisse als etabliert}
+% ==============================================================================
+$\Gamma_{\text{axon}}=g\,e^{i\varphi}E_{12}+g'e^{j\chi}E_{23}$ (\S2.8) ruht auf
+``experimentellen Befunden'' von Biphotonen-Verschränkung und Langstrecken-Kohärenz in
+myelinisierten Axonen, dargestellt als gesicherte Forschung. Verschränkung in warmen,
+nassen, myelinisierten Axonen ist keine etablierte Physik. Das ist kein Formelfehler, aber
+eine tragende empirische Prämisse, die als Tatsache behauptet wird und als Hypothese zu
+kennzeichnen ist.
+
+% ==============================================================================
+\section{Ein verteidigbarer Kern}
+% ==============================================================================
+Ohne den Überbau bleibt ein solides, bescheidenes Objekt:
+$\Delta\Phi=|\omega(t)-\omega_{\text{memory}}(t)|$ -- die Abweichung der momentanen
+Phasengeschwindigkeit von einem kurzen Phasengedächtnis -- ist ein interpretierbares,
+leichtes Zeitreihen-Instabilitätsmerkmal, und als Signalanalyse-Operator (die Rahmung des
+begleitenden Atem-Papiers) legitim. Die Probleme beschränken sich auf den
+HLV-/Oktonionen-/Bewusstseins-Überbau, die $\Delta\Phi$-Umdefinition sowie die nicht
+hergeleitete Schwelle und Dynamik.
+
+% ==============================================================================
+\section{Eine FFGFT-Lesung: Umwandlung als Messung}\label{sec:ffgft}
+% ==============================================================================
+Zeitliche Rekursion trägt Gedächtnis, und das bildet auf FFGFTs eigene Struktur ab (der
+Rekursionsoperator $\mathcal{R}$; der Gedächtniskern als Fourier-Transformierte der
+Spektraldichte des Verbindungs-Laplace-Operators, Dok.~282). Das Folgende ist als
+konstruktive Brücke und ausdrückliche Vermutung gemeint, nicht als Resultat.
+
+FFGFTs Gedächtnis hat zwei Gesichter. Auf dem überdämpften / Relaxations-Observablen ist der
+Kern eine positive Multiexponentielle, und ein generischer Biexponential reproduziert ihn
+(Residuum $\sim10^{-3}$): nicht-identifizierbar, Stufe-0. Auf dem Kohärenz-Observablen
+$c(t)=e^{-\Gamma(t)}$ -- seinem Heimat-Sektor -- erzeugt das diskrete Spektrum eine echte
+Wiederkehr: Back-flow $5{,}125$, den generische zerfallende Kerne nicht reproduzieren
+(Back-flow $0$). Das Gedächtnis ist also diskriminierend, aber nur im Kohärenz-Sektor und
+nur, wenn \emph{beides} zugleich gilt: ein diskretes Spektrum \emph{und} erhaltene Kohärenz
+(kleines $\Gamma$).
+
+FFGFT ist fundamental kompakt ($T^4$, diskretes Spektrum), und in dieser dimensionslosen
+Darstellung hat das System immer Gedächtnis. Es ist wichtig, den Verlust präzise zu
+verorten, denn die Umwandlung in SI ist \emph{nicht} die Stelle, wo er geschieht. Nach
+Dok.~270 ist die Typ-I-Dualitäts-Dekompaktifizierung $S^1_m\!\to\!\mathbb{R}_t$ (geregelt
+durch $\tilde{T}\cdot m=1$) ein \emph{mode-erhaltendes Embedding} -- verlustfrei; die
+Periodizität ist bloß nicht mehr direkt sichtbar und überlebt als diskretes Spektrum und
+als physikalische Observable (die Revival-Zeit $T_\text{rev}$, die CHSH-Abweichung
+$\sim\xi$). Eine reine Einheiten-Skalierung (mit $\hbar,c$) ist ebenso invertierbar und
+verliert nichts. Die wirklich verlustbehafteten Operationen sind drei und verschieden: die
+\emph{Rückrichtung} der Kompaktifizierung $\mathbb{R}\!\to\!S^1$ (nichtperiodische Anteile
+steigen nicht herab), die räumlichen Projektionen $D3\!\to\!D0$ (Dok.~270) und -- für jede
+Auslesung -- die Beschränkung auf ein \emph{endliches, nichtperiodisches Beobachtungsfenster
+plus Dekohärenz}. Es ist dieser letzte Schritt, nicht die Einheiten-Umwandlung, der das
+lokale Kurzzeitverhalten behält und die globale Wiederkehr verwirft -- genau wie eine
+Messung eine Basis wählt und die Kohärenzen fallen lässt (Test~G). Eine physikalische
+Messung ist dieselbe Fenster-und-Dekohärenz-Projektion an ihrem Starkkopplungs-Ende. Das ist
+verträglich mit dem, was der Korpus bereits führt: die Vakuumenergie ist kompaktifiziert
+vorhanden, dekompaktifiziert sichtbar, mit $c,\hbar c$ als SI-Umrechnungsfaktoren (Dok.~263)
+-- die dekompaktifizierte Sicht ist nicht weniger wahr, nur anders aufgelöst.
+
+Die Lesung stützt also den bescheidenen Kern (Rekursion trägt Gedächtnis) und begrenzt die
+Behauptung präzise. Die framework-spezifische Signatur überlebt sehr wohl in die SI-Welt --
+in den richtigen Kanälen: Mass-reading, CHSH$\sim\xi$, $D_f$, $L_0$ (Dok.~270/249). Was
+\emph{nicht} überlebt, ist die Kohärenz-Sektor-Recurrence, gelesen auf einem warmen,
+endlich-gefensterten SI-Zeit-Observablen: dort haben Fenster und Dekohärenz die globale
+Wiederkehr bereits verworfen, sodass gerade das Observable, das die klinischen Abschnitte
+verwenden -- SI-Zeit-EEG --, in genau diesem Sinn nach-der-Messung ist und das Regime
+darstellt, in dem der FFGFT-Harness (Dok.~282/283) das Gedächtnis als generisch zeigt, nicht
+als Fingerabdruck. Auch deshalb ist die Wahl der Basis-Zeitachse (\S3) entscheidend: der
+Operator wird von Anfang an auf dieser endlichen, nach-der-Messung-Achse geschrieben.
+
+% ==============================================================================
+\section{Reproduzierbarkeit}
+% ==============================================================================
+\begin{itemize}
+\item \texttt{test\_algebra.py} -- Quaternionen-Abschluss + Bikomplex-Widerlegung (A); Oktonion-Assoziator (B).
+\item \texttt{test\_deltaphi.py} -- $L^1$-Schranke/Linearität (C); Berry-Phasen-Bereich (D); $0{,}40$ als freier Knopf (E).
+\item \texttt{test\_dynamics.py} -- Gradientenfluss-Ljapunow / Test ohne Grenzzyklen (F).
+\item \texttt{test\_compactification.py} -- Auslesung als nicht-invertierbare Projektion: kompakter Back-flow vs.\ Fenster (G).
+\item \texttt{make\_figures.py} -- die oben verwendeten Abbildungen.
+\end{itemize}
+Die Abbildungen \texttt{fig\_deltaphi.png}, \texttt{fig\_dynamics.png} und
+\texttt{fig\_compactification.png} werden von diesen Skripten erzeugt; alle mit festen Seeds.

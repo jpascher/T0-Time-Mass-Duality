@@ -1,0 +1,293 @@
+% ==============================================================================
+% T0 Theory / FFGFT: Document 284 (Chapter Content, EN)
+% Title: A formula-level reading of the Spiral-Time neurodynamic model
+% Author: Johann Pascher
+% Date: 19 June 2026
+% Purpose: Reproducible, formula-level test of Krueger/Feeney/Wende
+%          (Medinformatics 2026); the foundational time-axis issue; the FFGFT
+%          compactification / conversion-as-measurement reading.
+% References: Doc. 190, 210, 249, 263, 270, 282, 283.
+% Scripts: test_algebra.py, test_deltaphi.py, test_dynamics.py,
+%          test_compactification.py, make_figures.py
+% ==============================================================================
+
+\section*{Abstract}
+This document is a reproducible, formula-level reading of \emph{Information-Theoretic
+Modeling of Neural Coherence via Triadic Spiral-Time Dynamics: A Framework for
+Neurodynamic Collapse} (Kr\"uger, Feeney \& Wende, \emph{Medinformatics} 2026,
+DOI 10.47852/bonviewMEDIN62029043). Every verdict is produced by a short runnable
+script. The reading separates what holds (an interpretable phase-deviation feature;
+genuine octonion non-associativity) from what is mislabeled (the triadic algebra is
+quaternionic, not bicomplex), internally inconsistent (two incompatible definitions of
+$\Delta\Phi$), not derived (the $0.40$ threshold; the claimed spirals and limit cycles),
+or not reproducible from the paper (the reported $r\approx0.96$). Underneath these sits
+\emph{one} foundational issue: the operator $\psi(t)=t+i\varphi(t)+j\chi(t)$ is built on
+physical, linear time as its base axis -- the decompactified, post-measurement coordinate
+-- so its memory is generic by construction. The FFGFT reading makes this precise: the
+system is compact and carries memory. By Doc.~270 the decompactification to SI time is a
+mode-preserving embedding (lossless), and FFGFT does carry framework-specific SI
+observables (masses/Koide, CHSH$\sim\xi$, $D_f$, $L_0$; Doc.~270/249); what removes the
+recurrence is not the SI conversion but the finite, non-periodic observation window plus
+decoherence. The sharp, narrow consequence: the coherence-sector recurrence is not
+\emph{resolvable} on a warm, finite-window SI-time signal such as EEG. This is a reviewer note addressed to the authors; the
+intent is the falsification-forward standard the HLV/HICE side already applies.
+
+% ==============================================================================
+\section{Occasion and method}
+% ==============================================================================
+The Medinformatics paper applies the HLV Spiral-Time operator to neural coherence and
+proposes the Information--Coherence--Energy (ICE) stability principle and a
+$\Delta\Phi$-based ``neurodynamic collapse'' boundary. Rather than argue from
+impression, each mathematical claim here is checked by computation. The scripts are
+\texttt{test\_algebra.py}, \texttt{test\_deltaphi.py}, \texttt{test\_dynamics.py},
+\texttt{test\_compactification.py} and \texttt{make\_figures.py}; fixed seeds throughout.
+Findings split into: \emph{holds}, \emph{mislabeled}, \emph{internally inconsistent},
+\emph{not derived}, \emph{not reproducible from the paper}, and \emph{speculative
+premise}. One issue is foundational -- the time-axis the operator is built on -- and is
+taken first, because findings on $\Delta\Phi$ and on the dynamics are its symptoms.
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}c p{4.1cm} p{1.7cm} p{5.0cm}@{}}
+\toprule
+\# & Claim & Section & Status\\
+\midrule
+0 & Base time-axis $\psi(t)=t+i\varphi(t)+j\chi(t)$ on physical linear time & 2.1, 2.2.1 & Foundational -- operator on the post-measurement axis (subsumes 3 \& 5)\\
+1 & Triadic time ``reduced bicomplex/octonionic plane'' & 2.1 & Mislabeled -- it is the quaternions\\
+2 & Octonionic operator; non-assoc.\ ``explains psychology'' & 2.10 & Math holds, claim overreaches\\
+3 & $\Delta\Phi$ instability functional & 2.6 vs 12/15 & Internally inconsistent (two definitions)\\
+4 & Critical $\Delta\Phi_c\approx0.40$, ``not a free parameter'' & 2.5, 2.6.2 & Not derived (free parameter)\\
+5 & Healthy spirals / trauma limit cycles & 2.2.3, 2.9 & Not derived from the equations\\
+6 & $r\approx0.96$, $\Delta\Phi_c\approx0.40$ ``across subjects'' & 3.4 & Not reproducible from the paper\\
+7 & Axonal biphoton entanglement coupling $\Gamma_{\text{axon}}$ & 2.7--2.8 & Speculative premise as established\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ==============================================================================
+\section{The base time-axis (foundational)}
+% ==============================================================================
+This is the most consequential choice in the paper, and the one under which findings 3
+and 5 are downstream symptoms. The Spiral-Time operator
+\begin{equation}
+\psi(t) = t + i\,\varphi(t) + j\,\chi(t)
+\end{equation}
+takes physical, linear time $t$ as its scalar base and writes $\varphi,\chi$ as
+functions of that same $t$. The paper is explicit that $t$ is physical: $U_1$ is defined
+as ``linear physical time,'' tracking external chronology (\S2.2.1). That fixes the
+representation in which every later memory and holonomy claim is made.
+
+\paragraph{Unit-independent.} For $t + i\varphi + j\chi$ to be one algebraic object the
+three components must be the same kind of quantity. The paper asserts dimensionlessness
+(\S2.1.2) yet simultaneously calls $t$ physical time and chronology (\S2.2.1); $\varphi$
+and $\chi$ are internal phase / identity coordinates. Adding a physical time to internal
+phases in one quaternionic sum is dimensionally incoherent unless all three are first
+reduced to a common dimensionless measure. (Since $i,j$ anticommute the object is
+quaternionic -- $t$ is the real part of a quaternion whose cross-term $ij=k$ is never
+tracked; see \S\ref{sec:alg}.)
+
+\paragraph{Deeper.} A framework-specific memory lives on the compact internal time-circle
+$S^1$: a discrete spectrum, an exact recurrence (in FFGFT the coherence-sector back-flow
+$5.125$, Doc.~282). Writing $\varphi(t),\chi(t)$ as single-valued functions of physical
+linear $t$ flattens $S^1$ onto $\mathbb{R}$ -- it performs the projection
+$S^1\!\to\!\mathbb{R}$ before any dynamics, and a single-valued function over linear time
+has no compact periodicity, so the recurrence is not representable on this axis at all.
+By the conversion-as-measurement principle (\S\ref{sec:ffgft}), committing to physical
+time is itself the disturbing, information-discarding projection -- no apparatus needed.
+The notation has silently taken that step, hiding the one operation -- the
+conversion/measurement from compact internal time to physical SI time -- that decides
+whether a memory claim is framework-specific or generic.
+
+\paragraph{Consequence.} The operator is, by construction, post-measurement: whatever
+memory it carries on physical (EEG) time is generic. This is reproducible
+(\texttt{test\_compactification.py}): the discrete-spectrum return signal has back-flow
+$11.5$ on the compact horizon, which a finite physical read-out window drives to $0.000$,
+while the six lines never resolve ($2\pi/T_{\text{win}}\gg$ line spacing $0.091$) -- the
+read-out is a non-invertible projection. The same root explains the two downstream
+findings: a Berry-phase holonomy (Eq.~12/15, \S\ref{sec:dphi}) needs a closed loop -- a
+compact cycle -- and a limit cycle (\S\ref{sec:dyn}) needs non-gradient closed orbits;
+neither is supported on a linear physical-time axis.
+
+\begin{figure}[h]\centering
+\includegraphics[width=0.95\linewidth]{fig_compactification.png}
+\caption{Read-out as a non-invertible projection. Left: on the compact representation the
+discrete spectrum produces revivals (back-flow $\gg0$); the red band marks a finite
+physical read-out window. Right: inside the window the observable decays without revival
+and the discrete lines are unresolved.}
+\end{figure}
+
+\paragraph{Constructive fix.} Define the operator on the compact, dimensionless internal
+time (cyclic), where the discrete spectrum and recurrence live, and let physical SI time
+enter only through an explicit, declared conversion -- which is precisely what projects
+out the framework-specific part. Either the operator stays internal/compact (no direct
+EEG claim) or it is physical/SI (generic memory). $\psi(t)=t+i\varphi(t)+j\chi(t)$ tries
+to be both. The minimal change is to declare two distinct times and write the conversion
+between them explicitly as the measurement it is.
+
+% ==============================================================================
+\section{Triadic time algebra -- mislabeled}\label{sec:alg}
+% ==============================================================================
+The stated relations $i^2=j^2=-1,\ ij=-ji$ are exactly the imaginary quaternions: setting
+$k:=ij$ gives $k^2=-1$, and $\{1,i,j,k\}$ closes into $\mathbb{H}$, which is associative
+and non-commutative (\texttt{test\_algebra.py}, A). A \emph{bicomplex} plane requires the
+two imaginary units to commute ($ij=ji$); here $ij=-ji$, so the algebra is \emph{not}
+bicomplex. A three-term operator $t+i\varphi+j\chi$ lives inside a quaternion
+sub-algebra; octonions are not required for it. The correct name is quaternionic.
+
+% ==============================================================================
+\section{Octonionic structure -- math holds, interpretation overreaches}
+% ==============================================================================
+Octonion non-associativity is real: the associator $(e_1e_2)e_4-e_1(e_2e_4)=2e_7\neq0$
+(Cayley--Dickson), while associators on a quaternionic triple vanish
+(\texttt{test\_algebra.py}, B). That is correct mathematics. The further step -- that this
+``directly matches empirical psychology'' and is ``the first physics-based explanation for
+psychological nonlinearity'' -- is an interpretive analogy, not a derivation: no
+psychological quantity is computed from or tested against the algebra, and the eight basis
+directions are assigned meanings by stipulation.
+
+% ==============================================================================
+\section{$\Delta\Phi$ -- two incompatible definitions under one symbol}\label{sec:dphi}
+% ==============================================================================
+\begin{itemize}
+\item \textbf{Definition 1 (\S2.6):} $\Delta\Phi=\alpha|\Delta S|+\beta|\Delta I|+\gamma|\Delta C|$,
+convex weights, each component in $[0,1]$ -- a unitless weighted-$L^1$ index in $[0,1]$.
+It is linear in each component, so it has no curvature and no intrinsic bifurcation; the
+level set $\Delta\Phi=c$ is a flat polytope facet for every $c$.
+\item \textbf{Definition 2 (Eq.~12, 15):} $\Delta\Phi=\oint(\nabla\times A)\cdot da
+\approx \mathrm{Im}\oint\langle\psi|\nabla\theta|\psi\rangle\,d\theta$ -- a Berry-phase
+holonomy, an angle in radians ranging over $0\ldots2\pi$, with no reason to lie in $[0,1]$
+or near $0.40$ (a loop with $|\gamma|=0.40$\,rad is a tiny $\sim$\,29$^\circ$ cone).
+\end{itemize}
+A normalized deviation index and a radian holonomy are different mathematical objects.
+Calling both ``$\Delta\Phi$'' and assigning both the same critical value $0.40$ is an
+equivocation (\texttt{test\_deltaphi.py}, C/D).
+
+\begin{figure}[h]\centering
+\includegraphics[width=0.72\linewidth]{fig_deltaphi.png}
+\caption{The two $\Delta\Phi$ definitions are incompatible objects: a radian holonomy
+($0\ldots2\pi$) versus a unitless index ($0\ldots1$).}
+\end{figure}
+
+% ==============================================================================
+\section{The $0.40$ threshold -- not derived}
+% ==============================================================================
+\S2.5 states the value is ``not imposed as a free tuning parameter'' and that the operator
+structure ``enforces'' a bounded instability surface. But the $L^1$ functional has no
+intrinsic critical point (it is linear); the only structural statement available is the
+trivial bound $0\le\Delta\Phi\le1$ and the symmetric reference $\Delta\Phi=d$ (so $1/3$ at
+$d=1/3$). \S2.6.2 itself attributes the $0.40$-vs-$0.333$ gap to ``dataset-specific
+weighting asymmetry $\ldots$ and normalization,'' and at equal deviation $d=0.40$ every
+convex weight set returns $0.40$ (\texttt{test\_deltaphi.py}, C/E). So $0.40$ is an
+empirical/contour value, not a structurally enforced bifurcation.
+
+% ==============================================================================
+\section{Spirals and trauma limit cycles -- not derived}\label{sec:dyn}
+% ==============================================================================
+The only dynamical mechanism given with explicit potentials (\S2.4) is the gradient-flow
+part of the master equation, $\partial_t\Psi=-\nabla V_{\text{DLHR}}(\Psi)$. For any
+gradient flow,
+\begin{equation}
+\frac{dV}{dt}=\nabla V\cdot\frac{d\Psi}{dt}=-|\nabla V|^2\le0,
+\end{equation}
+so $V$ is a strict Lyapunov function and the system cannot have periodic orbits, limit
+cycles, or sustained spirals -- it relaxes to fixed points (theorem). Numerically
+(\texttt{test\_dynamics.py}, F): across 40 trajectories $V(t)$ is monotonically decreasing
+(0 violations) and 0 closed orbits are found. The phenomenology ``healthy cognition
+$\to$ stable inward spirals,'' ``trauma loops $\to$ limit cycles'' therefore does not
+follow from the specified dynamics; it would require the advection terms
+$\lambda_\varphi\partial_\varphi,\ \lambda_\chi\partial_\chi$ or $W_{\text{oct}}$, which
+are never given concretely. (The cubic $M^3$ term also makes $V$ unbounded below.)
+
+\begin{figure}[h]\centering
+\includegraphics[width=0.95\linewidth]{fig_dynamics.png}
+\caption{Gradient flow with the paper's DLHR potentials: trajectories relax to fixed
+points (no closed orbits, no sustained spiral) and $V(t)$ decreases monotonically, so
+limit cycles are impossible.}
+\end{figure}
+
+% ==============================================================================
+\section{Empirical claims -- not reproducible from the paper}
+% ==============================================================================
+The reported $r\approx0.96$ and $\Delta\Phi_c\approx0.40$ ``across subjects'' (\S3.4)
+cannot be recomputed from the paper, which gives no data table. Reproduction needs the
+external dataset (Zenodo 10.5281/zenodo.17990696) and the validation notebook. A fair
+test would require the dataset plus a pre-registered protocol with the nulls the authors
+already use on the HICE side (time-shuffle, present-state-matched, phase-randomized).
+
+% ==============================================================================
+\section{Axonal biphoton entanglement -- speculative premise stated as established}
+% ==============================================================================
+$\Gamma_{\text{axon}}=g\,e^{i\varphi}E_{12}+g'e^{j\chi}E_{23}$ (\S2.8) is built on
+``experimental findings'' of biphoton entanglement and long-range coherence in myelinated
+axons, presented as settled research. Entanglement in warm, wet, myelinated axons is not
+established physics. This is not a formula error, but it is a load-bearing empirical
+premise asserted as fact and should be flagged as hypothesis.
+
+% ==============================================================================
+\section{A defensible core}
+% ==============================================================================
+Stripped of the superstructure there is a sound, modest object:
+$\Delta\Phi=|\omega(t)-\omega_{\text{memory}}(t)|$ -- the deviation of instantaneous phase
+velocity from a short-term phase-memory baseline -- is an interpretable, lightweight
+time-series instability feature, and as a signal-analysis operator (the framing of the
+companion respiratory paper) it is legitimate. The problems are confined to the
+HLV/octonion/consciousness superstructure, the $\Delta\Phi$ redefinition, and the
+un-derived threshold and dynamics.
+
+% ==============================================================================
+\section{An FFGFT reading: conversion as measurement}\label{sec:ffgft}
+% ==============================================================================
+Temporal recursion does carry memory, and it maps onto FFGFT's own structure (the
+recursion operator $\mathcal{R}$; the memory kernel as the Fourier transform of the
+connection-Laplacian spectral density, Doc.~282). The following is offered as a
+constructive bridge and an explicit conjecture, not a result.
+
+FFGFT's memory has two faces. On the overdamped / relaxation observable the kernel is a
+positive multi-exponential, and a generic biexponential reproduces it (residual
+$\sim10^{-3}$): non-identifiable, Stufe-0. On the coherence observable
+$c(t)=e^{-\Gamma(t)}$ -- its home sector -- the discrete spectrum produces a genuine
+revival: back-flow $5.125$, which generic decaying kernels cannot reproduce (back-flow
+$0$). So the memory is discriminating, but only on the coherence sector and only when
+\emph{both} a discrete spectrum \emph{and} preserved coherence (small $\Gamma$) hold.
+
+FFGFT is fundamentally compact ($T^4$, discrete spectrum), and in that dimensionless
+representation the system always has memory. It is important to locate the loss precisely,
+because the conversion to SI is \emph{not} where it happens. By Doc.~270 the Type~I duality
+decompactification $S^1_m\!\to\!\mathbb{R}_t$ (governed by $\tilde{T}\cdot m=1$) is a
+\emph{mode-preserving embedding} -- lossless; the periodicity merely stops being directly
+visible and survives as the discrete spectrum and as physical observables (the revival time
+$T_\text{rev}$, the CHSH deviation $\sim\xi$). A bare units rescaling (by $\hbar,c$) is
+likewise invertible and loses nothing. The genuinely lossy operations are three and
+distinct: the \emph{reverse} compactification $\mathbb{R}\!\to\!S^1$ (non-periodic parts do
+not descend), the spatial projections $D3\!\to\!D0$ (Doc.~270), and -- for any read-out --
+the restriction to a \emph{finite, non-periodic observation window plus decoherence}. It is
+this last step, not the unit conversion, that keeps the local short-time behaviour and
+discards the global recurrence, exactly as a measurement selects a basis and drops the
+coherences (Test~G). A physical measurement is the same window-and-decoherence projection
+at its strong-coupling end. This is consistent with what the corpus already records: the
+vacuum energy is present compactified, visible decompactified, with $c,\hbar c$ as SI
+conversion factors (Doc.~263) -- the decompactified view is not less true, only differently
+resolved.
+
+The reading therefore both supports the modest core (recursion does carry memory) and
+bounds the claim precisely. The framework-specific signature does survive into SI in the
+right channels -- mass reading, CHSH$\sim\xi$, $D_f$, $L_0$ (Doc.~270/249). What does
+\emph{not} survive is the coherence-sector recurrence read on a warm, finite-window SI-time
+observable: there the window and decoherence have already discarded the global recurrence,
+so the very observable the clinical sections use -- SI-time EEG -- is post-measurement in
+exactly that sense, and is the regime where the FFGFT harness (Doc.~282/283) shows the
+memory to be generic, not a fingerprint. This is also why the base-time-axis choice (\S3)
+is decisive: the operator is written on that finite, post-measurement axis from the start.
+
+% ==============================================================================
+\section{Reproducibility}
+% ==============================================================================
+\begin{itemize}
+\item \texttt{test\_algebra.py} -- quaternion closure + bicomplex refutation (A); octonion associator (B).
+\item \texttt{test\_deltaphi.py} -- $L^1$ bound/linearity (C); Berry-phase range (D); $0.40$ as free knob (E).
+\item \texttt{test\_dynamics.py} -- gradient-flow Lyapunov / no-limit-cycle test (F).
+\item \texttt{test\_compactification.py} -- read-out as a non-invertible projection: compact back-flow vs windowed (G).
+\item \texttt{make\_figures.py} -- the figures used above.
+\end{itemize}
+The figures \texttt{fig\_deltaphi.png}, \texttt{fig\_dynamics.png} and
+\texttt{fig\_compactification.png} are produced by these scripts; all use fixed seeds.

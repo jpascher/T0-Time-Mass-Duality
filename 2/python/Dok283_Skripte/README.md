@@ -57,3 +57,21 @@ gleich → generisch → Stufe-0, keine Brücke.
 (A r(τ)-Deckel, B Sektor-Koide, C kristallographische Restriktion, D χ-Kern gegen
 Baselines, E Connection-Laplace Stufe-0, F 6×6-Skalarprodukte, G geschützt-vs-generisch,
 H Approximanten-Konvergenz) plus eine Übersichtsfigur 283_overview.png in figures/.
+
+**ffgft_283_memory_harness_shared.py** — die gemeinsame HLV↔FFGFT-Memory-Harness nach
+Krügers vorab-registriertem Null-Modell-Protokoll (Zenodo 20514548), mit ZWEI
+Beobachtungsgrößen, weil die beiden Kerne strukturell verschieden sind (aus den Dokumenten
+gelesen, nicht erfunden): Krügers Kern ist ein positiver abklingender Exponential-Mix
+(überdämpft); FFGFTs Kern ist die FT der diskreten Spektraldichte Σ_k g_k²δ(ω−ω_k) — sechs
+dominante Moden des T⁴-Connection-Laplace (L=3, Fluss a=½π·(1+μ)), ω_k=√λ_k, g_k²∝Entartung,
+eine freie Kopplung — also OSZILLIEREND (Revivals), kein abklingender Mix.
+Part 1 (Krügers überdämpfte Vortizität, M₀/M₁/M_HLV/M₂): M_HLV schlägt M₀/M₁, liegt
+gleichauf mit M₂, per BIC bevorzugt → Nicht-Identifizierbarkeit (Run M1). Part 2
+(Kohärenz c(t)=e^{−Γ(t)}, FFGFTs Heimat-Sektor): der FFGFT-Diskretspektrum-Kern erzeugt
+BLP-Rückfluss 5.125 (exakt Dok-282-Wert); generische abklingende Kerne sind monoton
+(Rückfluss 0) und können die Revivals nicht reproduzieren → hier hat der strukturierte
+Kern eine Signatur, die der generische Null verfehlt. Der überdämpfte Sektor ist
+nicht-identifizierbar, der Kohärenz-Sektor diskriminiert. CSVs: memory_harness_models/
+_bootstrap/_crossflow/_ffgft_coherence.csv, ffgft_kernel_constants.csv; Plot
+figures/memory_harness.png. (Part-1-Daten sind modellgeneriert: reproduziert Protokoll +
+qualitatives Tabelle-1-Ergebnis, nicht Krügers exakte Zahlen.)
