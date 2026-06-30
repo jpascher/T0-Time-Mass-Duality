@@ -67,6 +67,48 @@ what is input and what follows is always declared explicitly.
 
 ---
 
+## FFGFT ↔ HLV Bridge (Information Physics Institute)
+
+A sustained structural comparison with Marcel Krüger's HLV / Spiral-Time
+framework. The shared object is a **Z₃-circulant mass operator** on the
+C₃ axis of a common icosahedral (A₅) geometry, where FFGFT's 3-fold and
+HLV's 5-fold structures coexist.
+
+| Result | Document |
+|--------|----------|
+| FFGFT↔HLV containment, CP, divisibility; Koide-phase elimination | [Doc. 282](2/pdf/282_FFGFT_HLV_CP_Teilbarkeit_En.pdf) |
+| The bridge: shared Z₃-circulant, C₃<A₅, r=√2 vs 2/√5 | [Doc. 283](2/pdf/283_FFGFT_HLV_Bruecke_En.pdf) |
+| Spiral-Time / neural-coherence formula analysis (claim boundaries) | [Doc. 284](2/pdf/284_FFGFT_Spiralzeit_Medin_En.pdf) |
+| Dimension bridge: the 6 = 3⊕3′ doubling, T⁴→T⁷ | [Doc. 285](2/pdf/285_FFGFT_HLV_Dimensionsbruecke_En.pdf) |
+| Dynamic/kinetic sector: AM-sideband ½, mode-locking, ξ¹ null-mode lift | [Doc. 286](2/pdf/286_Dynamischer_Sektor_Kinetik_En.pdf) |
+
+Reproducibility scripts: `2/Dok286_Skripte/` (numpy-only, seeded).
+
+### The Koide offset θ = 2/9 — localised, not derived
+
+The charged-lepton mass operator factorises into a **radial** (magnitude)
+and an **angular** (phase) sector. Everything FFGFT determines is radial —
+ξ, the hierarchy, the Koide amplitude **Q = 2/3 = r√2**, the mean ⟨f⟩. The
+one remaining empirical input is the **angular offset θ = 2/9** (radians).
+
+An explicit elimination chain (reproducible) establishes what θ is **not**:
+
+- **not a symmetric invariant** — the entire θ-dependence runs through cos 3θ, so every Z₃-invariant functional extremises at nπ/3, never 2/9 (cos 3θ theorem);
+- **not counting/topological** — 2/9 rad is transcendental in 2π (Lindemann–Weierstrass), hence not a root of unity;
+- **not fixed by the radial recursion** — θ does not appear in the fixed-point condition (radial–angular orthogonality);
+- **not a static geometric angle** — 2/9 rad = 12.73° is not an icosahedral axis angle (strictly checked; control arccos(1/√5) = 63.43° lands exactly).
+
+What remains is a **dynamical, angular** principle — a magnitude-preserving
+(all-pass) holonomy phase — which sits structurally on the HLV side
+(Krüger's BD17A boundary-holonomy mechanism). In signal terms: the mass
+operator is a Z₃-circulant, DFT-diagonalised, so √2 is the magnitude and θ
+the phase of the spectral coefficients — and **a magnitude spectrum does not
+fix the phase spectrum**. The empirical value is settled to ~4 significant
+figures; the theoretical forcing is the one open target, now precisely
+circumscribed. This is an honestly declared open result, not a derivation.
+
+---
+
 ## Projection Chain and Methodology
 
 The reduction T⁴ → T⁰ proceeds via three clearly distinct operation
@@ -104,7 +146,7 @@ measurable (Doc. 230).
 |----------|------|
 | 🔬 Interactive Portal | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo v1.1.3 | [DOI 10.5281/zenodo.20640799](https://doi.org/10.5281/zenodo.20640799) |
+| 📦 Zenodo | v1.1.6 _(DOI pending)_ · last published [v1.1.3 — 10.5281/zenodo.20640799](https://doi.org/10.5281/zenodo.20640799) |
 | 🎵 Spotify | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
@@ -112,7 +154,7 @@ measurable (Doc. 230).
 
 ## All Documents
 
-A complete list of all ~275 documents with short description and direct PDF link:
+A complete list of all ~286 documents with short description and direct PDF link:
 **[DOCUMENTS.md](DOCUMENTS.md)**
 
 ---
@@ -135,7 +177,7 @@ A complete list of all ~275 documents with short description and direct PDF link
 ```
 T0-Time-Mass-Duality/
 ├── 2/
-│   ├── pdf/                   # 275+ documents (DE/EN pairs)
+│   ├── pdf/                   # 286+ documents (DE/EN pairs)
 │   ├── html/                  # Interactive tools
 │   ├── python/                # Python implementations
 │   ├── Sources/               # LaTeX sources
@@ -201,6 +243,7 @@ Additional standalone editions: *FFGFT Narrative — The Cosmic Brain*,
 
 | Version | DOI | Focus |
 |---------|-----|-------|
+| v1.1.6 | _(pending Zenodo upload)_ | FFGFT↔HLV bridge (Doc. 282–286), Koide-phase θ=2/9 elimination, dynamic/kinetic sector |
 | v1.1.3 | [20640799](https://doi.org/10.5281/zenodo.20640799) | Koide sector, projection chain, CMB, ξ→φ revised |
 | v1.1.2 | [20474821](https://doi.org/10.5281/zenodo.20474821) | Book series (5 volumes, 3 KDP formats) |
 | v1.1.1 | [20355305](https://doi.org/10.5281/zenodo.20355305) | Black hole information, dual ordering |
