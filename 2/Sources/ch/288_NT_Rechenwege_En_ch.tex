@@ -1,0 +1,126 @@
+\section*{Abstract}
+Doc.~287 classifies FFGFT's parallel representations by relationship type (identity, bijection,
+projection). This document reads the same representations \emph{differently}: not as a map but as a
+\emph{toolbox}. The signal-engineering experience -- transforms exist because they make computations
+cheap (convolution becomes multiplication) -- carries over directly. The mass operator is a
+Z$_3$-circulant; the DFT diagonalises it. From this follow five concrete, machine-precision-checked
+computational levers: (1)~the lepton mass roots are a \emph{3-point DFT} instead of an eigenvalue
+problem; (2)~Koide $Q=2/3$ falls out in \emph{two Parseval lines} and is manifestly phase-independent;
+(3)~\emph{any} operator function (power, inverse, exponential) is a scalar evaluation at three
+eigenvalues; (4)~chaining Z$_3$ couplings is \emph{pointwise multiplication} in the DFT domain;
+(5)~the $\xi$ recursion is a \emph{first-order IIR filter} with a pole at $1-\xi$, and the three
+regimes are pole locations. Honestly: this is computational leverage, not a derivation -- the
+transform moves $\sqrt2$ and $\theta$, it does not create them.
+
+\section{The idea: changing representation as a computational lever}
+In signal engineering one changes representation not by taste but for computational gain. A convolution
+in the time domain is a pointwise multiplication in the frequency domain; a linear time-invariant
+system is an algebraic transfer function in the $z$ domain; magnitude and phase separate, so they are
+computed independently. Exactly this leverage sits in FFGFT's parallel representations -- one only has
+to read them as transforms rather than worldviews.
+
+The key is an observation from Doc.~286: the mass operator \emph{is} a Z$_3$-circulant. A circulant is
+diagonalised by the discrete Fourier transform (DFT) -- the signal-engineering principle \enquote{cyclic
+convolution $\leftrightarrow$ DFT}. Everything else follows.
+
+\begin{keyresult}
+The Z$_3$-circulant mass operator $C$ is diagonalised by the unitary DFT matrix $F$:
+$C = F^{\dagger}\Lambda F$, $\Lambda=\mathrm{diag}(\lambda_0,\lambda_1,\lambda_2)$. Thus every
+\enquote{function of $C$} problem becomes an evaluation at the three scalars $\lambda_k$.
+\end{keyresult}
+
+\section{The setup: first row and DFT}
+The Foot-Koide configuration $\sqrt{m_k}=1+\sqrt2\cos(\theta+2\pi k/3)$ is the DFT of a \emph{3-vector},
+the first row of the circulant:
+\[
+  c=\Bigl(1,\ \tfrac{\sqrt2}{2}\,e^{i\theta},\ \tfrac{\sqrt2}{2}\,e^{-i\theta}\Bigr),
+  \qquad r=\sqrt2,\quad \theta=\tfrac{2}{9}.
+\]
+Here the magnitude $r=\sqrt2$ sits in $|c_1|=|c_2|=\sqrt2/2$ and the phase $\theta$ in the argument --
+magnitude and phase parts are separated from the start. $C$ is Hermitian (checked:
+$\max|C-C^{\dagger}|=0$), hence real-spectral.
+
+\section{Lever 1: eigenvalues without a characteristic polynomial}
+The three mass roots $\sqrt{m_k}$ are the DFT of $c$: $\lambda_k=\sum_{j}c_j\,\omega^{jk}$,
+$\omega=e^{2\pi i/3}$. No $3\times3$ eigensolver, no polynomial -- a DFT. Numerically
+$\sqrt m=(0{.}0404,\ 0{.}5802,\ 2{.}3794)$, matching the closed Foot-Koide form and \texttt{eigvalsh}
+to $8{.}9\cdot10^{-16}$ (\texttt{dft\_eigenwerte.py}).
+
+\section{Lever 2: Koide Q in two Parseval lines}
+With $\lambda_k$ as DFT coefficients, Parseval gives directly:
+\[
+  \sum_k \sqrt{m_k}=3\,c_0=3,\qquad \sum_k m_k=3\sum_j|c_j|^2=6,
+  \qquad Q=\frac{\sum m_k}{(\sum\sqrt{m_k})^2}=\frac{6}{9}=\frac{2}{3}.
+\]
+$\sum\sqrt m$ reads only the DC term $c_0$, $\sum m$ only the energy $\sum|c_j|^2$. Both depend
+\emph{only on the magnitude} $|c_j|$, i.e.\ on $r$ -- not on $\theta$. Over all $\theta\in[0,2\pi)$,
+$Q$ stays exactly $0{.}666667$; a different magnitude shifts $Q$ ($r=1\!\to\!1/2$,
+$r=\sqrt2\!\to\!2/3$, $r=1{.}6\!\to\!0{.}76$). Thus the radial/angular conclusion of Doc.~282 is not a
+separate statement but a trivial Parseval consequence: the magnitude spectrum fixes the invariant, the
+phase spectrum does not enter (\texttt{parseval\_koide.py}).
+
+\section{Lever 3: any operator function for free}
+From $C=F^{\dagger}\Lambda F$ follows $f(C)=F^{\dagger}f(\Lambda)F$ for any function $f$. An operator
+function is therefore three scalar evaluations $f(\lambda_k)$ instead of matrix algebra:
+\begin{itemize}
+  \item \textbf{power} $C^n$ -- for recursion / scale flow;
+  \item \textbf{inverse} $C^{-1}$;
+  \item \textbf{exponential} $\exp(C)$ -- for time evolution / propagator.
+\end{itemize}
+Checked against \texttt{matrix\_power}, \texttt{inv} and a Taylor series: $C^5$ to
+$3{.}6\cdot10^{-14}$, $C^{-1}$ to $4{.}8\cdot10^{-15}$, $\exp(C)$ to $2{.}7\cdot10^{-15}$
+(\texttt{operatorfunktionen.py}). This is exactly the sector the dynamic part (Doc.~286) heads into:
+there one needs functions of the operator, and they are trivial in the DFT domain.
+
+\section{Lever 4: convolution becomes multiplication}
+A Z$_3$-cyclic coupling between the three generations is a circular convolution. The convolution
+theorem turns it, in the DFT domain, into a pointwise multiplication:
+$\mathrm{DFT}(a\ast b)=\mathrm{DFT}(a)\cdot\mathrm{DFT}(b)$. Chaining two Z$_3$ couplings -- a matrix
+product of two circulants -- becomes three scalar products. Checked to $9\cdot10^{-16}$
+(\texttt{faltung\_multiplikation.py}). This is the actual signal-engineering core: the expensive
+operation (matrix product) becomes cheap (three multiplications) once one computes in the right
+representation.
+
+\section{Lever 5: the recursion is a filter}
+$r(k{+}1)=r(k)(1-\xi)$ is a first-order IIR filter with $z$-transfer function
+$H(z)=1/(1-(1-\xi)z^{-1})$, a pole at $z=1-\xi=0{.}99986667$. $|z|<1$ means stable / contracting; the
+pole's distance to the unit circle is exactly $\xi$, hence the time constant $k^{*}\sim1/\xi=7500$
+steps. The three regimes of Doc.~285/286 are pole locations: inside (negative feedback, contracting),
+on the circle (Barkhausen limit), outside (positive feedback, run-away). Impulse response and direct
+recursion agree to $10^{-15}$ (\texttt{rekursion\_iir.py}). Log-periodicity, the $\xi\!\to\!\varphi$
+passage and decompactification-as-runaway are thus pole computations, not a separate formalism.
+
+\section{Magnitude and phase, minimum phase and all-pass}
+The five levers share a common ground that repeats the θ work (Doc.~286): in the spectral
+representation, magnitude and phase separate. Everything FFGFT determines is magnitude content ($\xi$,
+hierarchy, $Q=2/3$, $\langle f\rangle$); the one open value $\theta$ is pure phase. In signal terms
+FFGFT's real recursion is a minimum-phase / amplifier stage (the magnitude carries everything), and a
+phase stage $e^{i\varphi}$ is an all-pass (magnitude-preserving) -- exactly HLV's skew-adjoint $R$
+(BD17A). The all-pass can be \emph{appended} without touching the magnitude (and hence the masses and
+$Q$); this is why the phase is computationally separable and the open remainder.
+
+\section{What this means in practice}
+The gain is wherever one needs \emph{functions of the operator} or \emph{chains of couplings} -- i.e.\
+in the dynamic / kinetic sector (Doc.~286), at scale flow and time evolution. Instead of $3\times3$
+matrix algebra one computes at three eigenvalues; instead of matrix multiplication three scalar
+products; instead of recursion loops one pole location. The radial invariants (masses, $Q$) are
+Parseval one-liners. The toolbox is standard signal engineering applied to the Z$_3$ core.
+
+\section{Honest boundary}
+\begin{important}
+This is computational leverage, \emph{not} new physics (P35). The change of representation \emph{moves}
+$\sqrt2$ and $\theta$, it does not \emph{create} them -- both remain inputs. The full leverage is on
+the C$_3$/Z$_3$ sector (3$\times$3 circulant); the full $T^4$ with the $\varphi$ harmonics is larger,
+where the DFT diagonalisation is only the generation block. And no lever changes the status of the open
+phase: it only makes visible \emph{why} it stands separately.
+\end{important}
+
+\begin{conclusionBox}[Balance: the representations compute too]
+The parallel representations are not only classification (Doc.~287) but computational tools. Because
+the mass operator is a Z$_3$-circulant, the DFT diagonalises it, and five standard signal-engineering
+levers become applicable: eigenvalues as DFT, invariants as Parseval, operator functions as scalar
+evaluation, chaining as multiplication, recursion as filter pole. All five checked to machine precision.
+The gain is concrete in the dynamic sector; the boundary is honest: a faster computational route, not an
+additional derivation. The signal-engineering view missing in Doc.~287 is thereby added as its own
+toolbox.
+\end{conclusionBox}

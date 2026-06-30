@@ -107,6 +107,24 @@ fix the phase spectrum**. The empirical value is settled to ~4 significant
 figures; the theoretical forcing is the one open target, now precisely
 circumscribed. This is an honestly declared open result, not a derivation.
 
+### Internal representations and computational routes
+
+| Result | Document |
+|--------|----------|
+| Internal representation map — identity / bijection / projection; the Doc. 265 operator turned inward | [Doc. 287](2/pdf/287_Interne_Darstellungen_En.pdf) |
+| Signal-engineering routes — Z₃-circulant DFT diagonalisation, Parseval, operator functions, convolution theorem, filter pole | [Doc. 288](2/pdf/288_NT_Rechenwege_En.pdf) |
+| Magnitude/phase map of the four fermion sectors — leptons, quarks, neutrinos as the all-pass sector | [Doc. 289](2/pdf/289_Magnitude_Phase_Sektoren_En.pdf) |
+
+The T⁴ geometry is the generative core; other representations relate to it by
+identity (matrix algebra), lossless bijection (Hilbert space) or lossy
+projection (information formalism). Because the mass operator is a Z₃-circulant,
+the DFT diagonalises it — making eigenvalues a 3-point DFT, Koide Q a Parseval
+one-liner and operator functions trivial — and the four fermion sectors sit on
+one magnitude/phase map, with neutrinos as the pure phase (all-pass) sector.
+Computational leverage and diagnosis, not new derivations.
+
+Reproducibility scripts: `2/Dok288_Skripte/`, `2/Dok289_Skripte/`.
+
 ---
 
 ## Projection Chain and Methodology
@@ -154,7 +172,7 @@ measurable (Doc. 230).
 
 ## All Documents
 
-A complete list of all ~286 documents with short description and direct PDF link:
+A complete list of all ~289 documents with short description and direct PDF link:
 **[DOCUMENTS.md](DOCUMENTS.md)**
 
 ---
@@ -177,7 +195,7 @@ A complete list of all ~286 documents with short description and direct PDF link
 ```
 T0-Time-Mass-Duality/
 ├── 2/
-│   ├── pdf/                   # 286+ documents (DE/EN pairs)
+│   ├── pdf/                   # 289+ documents (DE/EN pairs)
 │   ├── html/                  # Interactive tools
 │   ├── python/                # Python implementations
 │   ├── Sources/               # LaTeX sources

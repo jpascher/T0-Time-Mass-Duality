@@ -1,0 +1,132 @@
+\section*{Kurzfassung}
+Dok.~287 ordnet die parallelen Darstellungen von FFGFT nach Beziehungstyp (Identität, Bijektion,
+Projektion). Dieses Dokument liest dieselben Darstellungen \emph{anders}: nicht als Landkarte,
+sondern als \emph{Werkzeugkasten}. Die nachrichtentechnische Erfahrung -- Transformationen
+existieren, weil sie Rechnungen billig machen (Faltung wird Multiplikation) -- überträgt sich direkt.
+Der Massenoperator ist ein Z$_3$-Zirkulant; die DFT diagonalisiert ihn. Daraus folgen fünf konkrete,
+maschinengenau geprüfte Rechenhebel: (1)~die Lepton-Massenwurzeln sind eine \emph{3-Punkt-DFT} statt
+ein Eigenwertproblem; (2)~Koide $Q=2/3$ fällt in \emph{zwei Parseval-Zeilen} und ist manifest
+phasenunabhängig; (3)~\emph{jede} Operatorfunktion (Potenz, Inverse, Exponential) ist eine
+Skalar-Auswertung an drei Eigenwerten; (4)~das Hintereinanderschalten von Z$_3$-Kopplungen ist
+\emph{punktweise Multiplikation} im DFT-Bild; (5)~die $\xi$-Rekursion ist ein \emph{IIR-Filter
+1.~Ordnung} mit Pol bei $1-\xi$, und die drei Regime sind Pol-Lagen. Ehrlich: das ist
+Rechenerleichterung, keine Herleitung -- die Transformation bewegt $\sqrt2$ und $\theta$, sie
+erzeugt sie nicht.
+
+\section{Die Idee: Darstellungswechsel als Rechenhebel}
+In der Nachrichtentechnik wechselt man die Darstellung nicht aus Geschmack, sondern aus Rechenvorteil.
+Eine Faltung im Zeitbereich ist im Frequenzbereich eine punktweise Multiplikation; ein lineares
+zeitinvariantes System ist im $z$-Bild eine algebraische Übertragungsfunktion; Betrag und Phase
+trennen sich, sodass man sie unabhängig rechnet. Genau dieselbe Hebelwirkung steckt in FFGFTs
+parallelen Darstellungen -- man muss sie nur als Transformationen statt als Weltbilder lesen.
+
+Der Schlüssel ist eine Beobachtung aus Dok.~286: der Massenoperator \emph{ist} ein Z$_3$-Zirkulant.
+Ein Zirkulant wird von der diskreten Fouriertransformation (DFT) diagonalisiert -- das ist der
+nachrichtentechnische Grundsatz \enquote{zyklische Faltung $\leftrightarrow$ DFT}. Alles Weitere
+folgt daraus.
+
+\begin{keyresult}
+Der Z$_3$-Zirkulant-Massenoperator $C$ wird von der unitären DFT-Matrix $F$ diagonalisiert:
+$C = F^{\dagger}\Lambda F$, $\Lambda=\mathrm{diag}(\lambda_0,\lambda_1,\lambda_2)$. Damit wird jedes
+Problem \enquote{Funktion von $C$} zu einer Auswertung an den drei Skalaren $\lambda_k$.
+\end{keyresult}
+
+\section{Der Aufbau: erste Zeile und DFT}
+Die Foot-Koide-Konfiguration $\sqrt{m_k}=1+\sqrt2\cos(\theta+2\pi k/3)$ ist die DFT eines
+\emph{3-Vektors}, der erste Zeile des Zirkulants:
+\[
+  c=\Bigl(1,\ \tfrac{\sqrt2}{2}\,e^{i\theta},\ \tfrac{\sqrt2}{2}\,e^{-i\theta}\Bigr),
+  \qquad r=\sqrt2,\quad \theta=\tfrac{2}{9}.
+\]
+Hier sitzt der Betrag $r=\sqrt2$ in $|c_1|=|c_2|=\sqrt2/2$ und die Phase $\theta$ im Argument --
+Betrags- und Phasenanteil sind von vornherein getrennt. $C$ ist hermitesch (geprüft:
+$\max|C-C^{\dagger}|=0$), also reell-spektral.
+
+\section{Hebel 1: Eigenwerte ohne charakteristisches Polynom}
+Die drei Massenwurzeln $\sqrt{m_k}$ sind die DFT von $c$:
+$\lambda_k=\sum_{j}c_j\,\omega^{jk}$, $\omega=e^{2\pi i/3}$. Kein $3\times3$-Eigensolver, kein
+Polynom -- eine DFT. Numerisch: $\sqrt m=(0{,}0404,\ 0{,}5802,\ 2{,}3794)$, übereinstimmend mit der
+geschlossenen Foot-Koide-Form und mit \texttt{eigvalsh} bis $8{,}9\cdot10^{-16}$
+(\texttt{dft\_eigenwerte.py}).
+
+\section{Hebel 2: Koide Q in zwei Parseval-Zeilen}
+Mit $\lambda_k$ als DFT-Koeffizienten liefert der Satz von Parseval direkt:
+\[
+  \sum_k \sqrt{m_k}=3\,c_0=3,\qquad \sum_k m_k=3\sum_j|c_j|^2=6,
+  \qquad Q=\frac{\sum m_k}{(\sum\sqrt{m_k})^2}=\frac{6}{9}=\frac{2}{3}.
+\]
+$\sum\sqrt m$ liest nur den DC-Term $c_0$, $\sum m$ nur die Energie $\sum|c_j|^2$. Beide hängen
+\emph{nur am Betrag} $|c_j|$, also an $r$ -- nicht an $\theta$. Über ganz $\theta\in[0,2\pi)$ bleibt
+$Q$ exakt $0{,}666667$; ein anderer Betrag verschiebt $Q$ ($r=1\!\to\!1/2$, $r=\sqrt2\!\to\!2/3$,
+$r=1{,}6\!\to\!0{,}76$). Damit ist der radial/angular-Schluss aus Dok.~282 keine separate Aussage,
+sondern eine triviale Parseval-Folge: das Betragsspektrum legt die Invariante fest, das
+Phasenspektrum geht nicht ein (\texttt{parseval\_koide.py}).
+
+\section{Hebel 3: jede Operatorfunktion gratis}
+Aus $C=F^{\dagger}\Lambda F$ folgt $f(C)=F^{\dagger}f(\Lambda)F$ für jede Funktion $f$. Eine
+Operatorfunktion ist also drei Skalar-Auswertungen $f(\lambda_k)$ statt Matrixalgebra:
+\begin{itemize}
+  \item \textbf{Potenz} $C^n$ -- für Rekursion / Skalenfluss;
+  \item \textbf{Inverse} $C^{-1}$;
+  \item \textbf{Exponential} $\exp(C)$ -- für Zeitentwicklung / Propagator.
+\end{itemize}
+Geprüft gegen \texttt{matrix\_power}, \texttt{inv} und eine Taylor-Reihe: $C^5$ bis
+$3{,}6\cdot10^{-14}$, $C^{-1}$ bis $4{,}8\cdot10^{-15}$, $\exp(C)$ bis $2{,}7\cdot10^{-15}$
+(\texttt{operatorfunktionen.py}). Das ist genau der Sektor, in den der dynamische Teil (Dok.~286)
+geht: dort braucht man Funktionen des Operators, und die sind im DFT-Bild trivial.
+
+\section{Hebel 4: Faltung wird Multiplikation}
+Eine Z$_3$-zyklische Kopplung zwischen den drei Generationen ist eine zirkuläre Faltung. Der
+Faltungssatz macht sie im DFT-Bild zu einer punktweisen Multiplikation:
+$\mathrm{DFT}(a\ast b)=\mathrm{DFT}(a)\cdot\mathrm{DFT}(b)$. Das Hintereinanderschalten zweier
+Z$_3$-Kopplungen -- ein Matrixprodukt zweier Zirkulanten -- wird zu drei Skalarprodukten. Geprüft
+bis $9\cdot10^{-16}$ (\texttt{faltung\_multiplikation.py}). Das ist der eigentliche
+nachrichtentechnische Kern: die teure Operation (Matrixprodukt) wird billig (drei Multiplikationen),
+sobald man in der richtigen Darstellung rechnet.
+
+\section{Hebel 5: die Rekursion ist ein Filter}
+$r(k{+}1)=r(k)(1-\xi)$ ist ein IIR-Filter 1.~Ordnung mit $z$-Übertragungsfunktion
+$H(z)=1/(1-(1-\xi)z^{-1})$, ein Pol bei $z=1-\xi=0{,}99986667$. $|z|<1$ heisst stabil /
+kontrahierend; der Pol-Abstand zum Einheitskreis ist gerade $\xi$, also die Zeitkonstante
+$k^{*}\sim1/\xi=7500$ Schritte. Die drei Regime aus Dok.~285/286 sind Pol-Lagen: innen (Gegenkopplung,
+kontrahiert), auf dem Kreis (Barkhausen-Grenzfall), aussen (Mitkopplung, Weglauf). Impulsantwort und
+direkte Rekursion stimmen bis $10^{-15}$ überein (\texttt{rekursion\_iir.py}). Log-Periodizität,
+$\xi\!\to\!\varphi$-Durchgang und Dekompaktifizierung-als-Weglauf sind damit Pol-Rechnungen, kein
+eigener Formalismus.
+
+\section{Betrag und Phase, Minimalphase und Allpass}
+Die fünf Hebel haben einen gemeinsamen Grund, der die θ-Arbeit (Dok.~286) wiederholt: in der
+spektralen Darstellung trennen sich Betrag und Phase. Alles, was FFGFT determiniert, ist
+Betragsinhalt ($\xi$, Hierarchie, $Q=2/3$, $\langle f\rangle$); der eine offene Wert $\theta$ ist
+reine Phase. Nachrichtentechnisch ist FFGFTs reelle Rekursion eine Minimalphasen-/Verstärkerstufe
+(der Betrag trägt alles), und eine Phasenstufe $e^{i\varphi}$ ist ein Allpass (betragserhaltend) --
+genau HLVs schief-adjungierte $R$ (BD17A). Der Allpass lässt sich \emph{anhängen}, ohne den Betrag
+(und damit die Massen und $Q$) zu berühren; deshalb ist die Phase rechnerisch separierbar und der
+offene Rest.
+
+\section{Was das praktisch bedeutet}
+Der Gewinn ist überall dort, wo man \emph{Funktionen des Operators} oder \emph{Verkettungen von
+Kopplungen} braucht -- also im dynamischen / kinetischen Sektor (Dok.~286), bei Skalenfluss und
+Zeitentwicklung. Statt $3\times3$-Matrixalgebra rechnet man an drei Eigenwerten; statt
+Matrixmultiplikation drei Skalarprodukte; statt Rekursionsschleifen eine Pol-Lage. Die radialen
+Invarianten (Massen, $Q$) sind Parseval-Einzeiler. Der Werkzeugkasten ist Standard-Nachrichtentechnik,
+angewandt auf den Z$_3$-Kern.
+
+\section{Ehrliche Grenze}
+\begin{important}
+Das ist Rechenerleichterung, \emph{keine} neue Physik (P35). Der Darstellungswechsel \emph{bewegt}
+$\sqrt2$ und $\theta$, er \emph{erzeugt} sie nicht -- beide bleiben Inputs. Die volle Hebelwirkung
+liegt am C$_3$/Z$_3$-Sektor (3$\times$3-Zirkulant); der volle $T^4$ mit den $\varphi$-Harmonischen ist
+grösser, dort ist die DFT-Diagonalisierung nur der Generationen-Block. Und kein Hebel ändert den
+Status der offenen Phase: er macht nur sichtbar, \emph{warum} sie separat steht.
+\end{important}
+
+\begin{conclusionBox}[Bilanz: die Darstellungen rechnen mit]
+Die parallelen Darstellungen sind nicht nur Einordnung (Dok.~287), sondern Rechenwerkzeug. Weil der
+Massenoperator ein Z$_3$-Zirkulant ist, diagonalisiert ihn die DFT, und fünf Standard-Hebel der
+Nachrichtentechnik werden anwendbar: Eigenwerte als DFT, Invarianten als Parseval, Operatorfunktionen
+als Skalar-Auswertung, Verkettung als Multiplikation, Rekursion als Filter-Pol. Alle fünf
+maschinengenau geprüft. Der Gewinn ist konkret im dynamischen Sektor; die Grenze ist ehrlich: ein
+schnellerer Rechenweg, keine zusätzliche Herleitung. Damit ist die nachrichtentechnische Sicht, die
+in Dok.~287 fehlte, als eigener Werkzeugkasten nachgetragen.
+\end{conclusionBox}

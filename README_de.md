@@ -110,6 +110,25 @@ Phasenspektrum nicht fest**. Der empirische Wert steht auf ~4 signifikante
 Stellen; die theoretische Erzwingung ist das eine offene Ziel, jetzt präzise
 umrissen. Ein ehrlich deklariertes offenes Resultat, keine Herleitung.
 
+### Interne Darstellungen und Rechenwege
+
+| Ergebnis | Dokument |
+|----------|----------|
+| Karte der internen Darstellungen — Identität / Bijektion / Projektion; der Dok.-265-Operator nach innen | [Dok. 287](2/pdf/287_Interne_Darstellungen_De.pdf) |
+| Nachrichtentechnische Rechenwege — Z₃-Zirkulant-DFT-Diagonalisierung, Parseval, Operatorfunktionen, Faltungssatz, Filter-Pol | [Dok. 288](2/pdf/288_NT_Rechenwege_De.pdf) |
+| Magnitude/Phase-Karte der vier Fermion-Sektoren — Leptonen, Quarks, Neutrinos als Allpass-Sektor | [Dok. 289](2/pdf/289_Magnitude_Phase_Sektoren_De.pdf) |
+
+Die T⁴-Geometrie ist der generative Kern; andere Darstellungen stehen zu ihr in
+Identität (Matrix-Algebra), verlustfreier Bijektion (Hilbertraum) oder
+verlustbehafteter Projektion (Informationsformalismus). Weil der Massenoperator
+ein Z₃-Zirkulant ist, diagonalisiert ihn die DFT — Eigenwerte werden zur
+3-Punkt-DFT, Koide Q zur Parseval-Zeile, Operatorfunktionen trivial — und die
+vier Fermion-Sektoren liegen auf einer Magnitude/Phase-Karte, mit den Neutrinos
+als reinem Phasen-(Allpass-)Sektor. Rechenerleichterung und Diagnose, keine
+neuen Herleitungen.
+
+Reproduzierbarkeits-Skripte: `2/Dok288_Skripte/`, `2/Dok289_Skripte/`.
+
 ---
 
 ## Projektionskette und Methodologie
@@ -158,7 +177,7 @@ ist aber prinzipiell messbar (Dok. 230).
 
 ## Alle Dokumente
 
-Eine vollständige Liste aller ~286 Dokumente mit Kurzinfo und direktem PDF-Link:
+Eine vollständige Liste aller ~289 Dokumente mit Kurzinfo und direktem PDF-Link:
 **[DOCUMENTS_de.md](DOCUMENTS_de.md)**
 
 ---
@@ -181,7 +200,7 @@ Eine vollständige Liste aller ~286 Dokumente mit Kurzinfo und direktem PDF-Link
 ```
 T0-Time-Mass-Duality/
 ├── 2/
-│   ├── pdf/                   # 286+ Dokumente (DE/EN-Paare)
+│   ├── pdf/                   # 289+ Dokumente (DE/EN-Paare)
 │   ├── html/                  # Interaktive Tools
 │   ├── python/                # Python-Implementierungen
 │   ├── Sources/               # LaTeX-Quellen
