@@ -1,6 +1,6 @@
 # Release Notes — v1.1.6 (Juni 2026)
 
-**DOI:** _Zenodo-Upload ausstehend_ · zuletzt veröffentlicht [v1.1.3 — 10.5281/zenodo.20640799](https://doi.org/10.5281/zenodo.20640799)
+**DOI:** [10.5281/zenodo.21061423](https://doi.org/10.5281/zenodo.21061423)
 
 Laufende Korrekturen: **[2/PDFs/190_T0_Korrekturen_De.pdf](2/PDFs/190_T0_Korrekturen_De.pdf)**  
 Änderungsprotokoll: **[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**
@@ -86,7 +86,7 @@ Dimensions-Defizit; die Trennung statisch (radial, hergeleitet) vs dynamisch
 |-----------|------|
 | 🔬 Interaktives Portal | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo | v1.1.6 _(DOI ausstehend)_ · zuletzt veröffentlicht [v1.1.3 — 10.5281/zenodo.20640799](https://doi.org/10.5281/zenodo.20640799) |
+| 📦 Zenodo v1.1.6 | [DOI 10.5281/zenodo.21061423](https://doi.org/10.5281/zenodo.21061423) |
 | 🎵 Spotify | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
