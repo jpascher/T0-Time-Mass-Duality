@@ -60,6 +60,16 @@ AM-Seitenband-Faktor; die ξ¹-Anhebung des Nullmodes durch das
 Dimensions-Defizit; die Trennung statisch (radial, hergeleitet) vs dynamisch
 (angular, offen), in nachrichtentechnischer Sprache — Betrag gegen Phase.
 
+### Darstellungen und Rechenwege
+
+Die parallelen Darstellungen werden nach Beziehungstyp kartiert (Identität / Bijektion / Projektion;
+[Dok. 287](2/pdf/287_Interne_Darstellungen_De.pdf)) und in einen nachrichtentechnischen Werkzeugkasten
+überführt ([Dok. 288](2/pdf/288_NT_Rechenwege_De.pdf)): der Z₃-Zirkulant-Massenoperator ist
+DFT-diagonalisiert, also sind Eigenwerte eine 3-Punkt-DFT, Koide Q eine Parseval-Zeile und
+Operatorfunktionen trivial. Die vier Fermion-Sektoren liegen dann auf einer Magnitude/Phase-Karte
+([Dok. 289](2/pdf/289_Magnitude_Phase_Sektoren_De.pdf)), mit den Neutrinos als reinem Phasen-(Allpass-)
+Sektor. Rechenerleichterung und Diagnose, keine neuen Herleitungen.
+
 ---
 
 ## Kernableitungen (Stand v1.1.6)
@@ -76,6 +86,7 @@ Dimensions-Defizit; die Trennung statisch (radial, hergeleitet) vs dynamisch
 | Projektionskette T⁴→T⁰ | [Dok. 270](2/pdf/270_Projektionskette_T4_T0_De.pdf) |
 | FFGFT↔HLV-Brücke (Z₃-Zirkulant, C₃<A₅) | [Dok. 282](2/pdf/282_FFGFT_HLV_CP_Teilbarkeit_De.pdf) / [283](2/pdf/283_FFGFT_HLV_Bruecke_De.pdf) |
 | Koide-Phase θ=2/9: Eliminationskette (offen) | [Dok. 282](2/pdf/282_FFGFT_HLV_CP_Teilbarkeit_De.pdf) / [286](2/pdf/286_Dynamischer_Sektor_Kinetik_De.pdf) |
+| Interne Darstellungen & nachrichtentechnische Rechenwege; 4-Sektoren-Magnitude/Phase-Karte | [Dok. 287](2/pdf/287_Interne_Darstellungen_De.pdf) / [288](2/pdf/288_NT_Rechenwege_De.pdf) / [289](2/pdf/289_Magnitude_Phase_Sektoren_De.pdf) |
 | Falsifikation: Casimir / Rotverschiebung / Lithium | [Dok. 220](2/pdf/220_Casimir_De.pdf) / [221](2/pdf/221_Rotverschiebung_De.pdf) / [222](2/pdf/222_Lithium_De.pdf) |
 
 ---

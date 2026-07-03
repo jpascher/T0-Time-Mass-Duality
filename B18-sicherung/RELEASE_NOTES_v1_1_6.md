@@ -58,6 +58,16 @@ AM-sideband factor; the ξ¹ null-mode lift from the dimension deficit; the
 static (radial, derived) vs dynamic (angular, open) split, in
 signal-engineering language — magnitude versus phase.
 
+### Representations and computational routes
+
+The parallel representations are mapped by relationship type (identity / bijection / projection;
+[Doc. 287](2/pdf/287_Interne_Darstellungen_En.pdf)) and turned into a signal-engineering toolbox
+([Doc. 288](2/pdf/288_NT_Rechenwege_En.pdf)): the Z₃-circulant mass operator is DFT-diagonalised, so
+eigenvalues are a 3-point DFT, Koide Q a Parseval one-liner and operator functions trivial. The four
+fermion sectors then sit on one magnitude/phase map ([Doc. 289](2/pdf/289_Magnitude_Phase_Sektoren_En.pdf)),
+with neutrinos as the pure phase (all-pass) sector. Computational leverage and diagnosis, not new
+derivations.
+
 ---
 
 ## Core Derivations (as of v1.1.6)
@@ -74,6 +84,7 @@ signal-engineering language — magnitude versus phase.
 | Projection chain T⁴→T⁰ | [Doc. 270](2/pdf/270_Projektionskette_T4_T0_En.pdf) |
 | FFGFT↔HLV bridge (Z₃-circulant, C₃<A₅) | [Doc. 282](2/pdf/282_FFGFT_HLV_CP_Teilbarkeit_En.pdf) / [283](2/pdf/283_FFGFT_HLV_Bruecke_En.pdf) |
 | Koide phase θ=2/9: elimination chain (open) | [Doc. 282](2/pdf/282_FFGFT_HLV_CP_Teilbarkeit_En.pdf) / [286](2/pdf/286_Dynamischer_Sektor_Kinetik_En.pdf) |
+| Internal representations & signal-engineering routes; 4-sector magnitude/phase map | [Doc. 287](2/pdf/287_Interne_Darstellungen_En.pdf) / [288](2/pdf/288_NT_Rechenwege_En.pdf) / [289](2/pdf/289_Magnitude_Phase_Sektoren_En.pdf) |
 | Falsification: Casimir / Redshift / Lithium | [Doc. 220](2/pdf/220_Casimir_En.pdf) / [221](2/pdf/221_Rotverschiebung_En.pdf) / [222](2/pdf/222_Lithium_En.pdf) |
 
 ---

@@ -1,6 +1,6 @@
 # T0 Time-Mass Duality · FFGFT
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21061423.svg)](https://doi.org/10.5281/zenodo.21061423)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21158441.svg)](https://doi.org/10.5281/zenodo.21158441)
 
 **FFGFT — Fundamental Fractal-Geometric Field Theory** shows:
 all Standard Model constants follow from a single dimensionless
@@ -178,7 +178,7 @@ measurable (Doc. 230).
 |----------|------|
 | 🔬 Interactive Portal | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo v1.1.7 | _DOI assigned on upload_ (supersedes [21061423](https://doi.org/10.5281/zenodo.21061423)) |
+| 📦 Zenodo v1.1.7 | [DOI 10.5281/zenodo.21158441](https://doi.org/10.5281/zenodo.21158441) |
 | 🎵 Spotify | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
@@ -275,7 +275,7 @@ Additional standalone editions: *FFGFT Narrative — The Cosmic Brain*,
 
 | Version | DOI | Focus |
 |---------|-----|-------|
-| v1.1.7 | _on upload_ | Lepton sector audit (Doc. 292), Koide phase θ=2/9 characterised as the circulant phase (Doc. 291), α two-route overdetermination, tolerance methodology |
+| v1.1.7 | [21158441](https://doi.org/10.5281/zenodo.21158441) | Lepton sector audit (Doc. 292), Koide phase θ=2/9 characterised as the circulant phase (Doc. 291), α two-route overdetermination, tolerance methodology |
 | v1.1.6 | [21061423](https://doi.org/10.5281/zenodo.21061423) | FFGFT↔HLV bridge (Doc. 282–286), Koide-phase θ=2/9 elimination, dynamic/kinetic sector |
 | v1.1.3 | [20640799](https://doi.org/10.5281/zenodo.20640799) | Koide sector, projection chain, CMB, ξ→φ revised |
 | v1.1.2 | [20474821](https://doi.org/10.5281/zenodo.20474821) | Book series (5 volumes, 3 KDP formats) |
