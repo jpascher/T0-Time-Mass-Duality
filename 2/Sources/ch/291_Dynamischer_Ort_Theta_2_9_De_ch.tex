@@ -1,0 +1,317 @@
+\section{Ausgangslage: in welchem Kanal lebt $\theta=2/9$?}
+Der Koide-Winkel $\theta=2/9$ ist empirisch auf sieben Stellen bestätigt, aber nicht aus der
+Geometrie hergeleitet. Er ist selbst kein Ansatz, sondern eine \emph{gefundene} Größe: erst die
+Hilbertraum-Übersetzung von FFGFT (Dok.~230/231/232) und ihre Fortführung bis zu den Massen
+(Dok.~282) machte sichtbar, dass die drei Lepton-Massen das Spektrum eines hermiteschen
+Z$_3$-Zirkulanten auf der $\mathbb{C}^3$-Faser sind, in dessen Eigenwerten $\theta=2/9$ als
+Ergebnis der Diagonalisierung erscheint. Genau dieser Zirkulant liefert die Amplituden $a_k$
+unten. Zur empirischen Einordnung des Winkels -- $2/9$ als rationale Adresse eines über einen
+Referenzpunkt fixierten Wertes, nicht als Polmassen-Exaktheitsanspruch (P42) -- siehe Dok.~292;
+für den hier gesuchten dynamischen Ort ist diese Feinunterscheidung ohne Belang, da die
+Orbit-Auflösung weit über dem $10^{-7}$-Niveau liegt. Die vorangehende Analyse (Dok.~290) trennt
+am Massenoperator einen
+\emph{Betragskanal} (die Eigenwerte, die Massen) von einem \emph{Phasenkanal} (Mischung,
+Allpass, Holonomie) und zeigt: ein Betragsspektrum legt die Phase nur bis auf einen
+Allpass-Faktor fest. Die Frage dieses Dokuments ist entsprechend: In welchem Kanal sitzt
+$\theta=2/9$ -- und welcher Art Größe ist er, verglichen mit einem erzwungenen Anker wie der
+Lichtgeschwindigkeit $c$? Die Rechnungen dazu liegen in \texttt{allpass\_theta.py},
+\texttt{allpass\_carrier\_selection.py} und \texttt{forced\_vs\_contingent.py} (numpy-only,
+Seed 20780458).
+
+\section{Die Betrags-Seite ist counter-blind}
+Mit den vorzeichenrichtigen Amplituden $a_k(\theta)=1+\sqrt2\cos(\theta+2\pi k/3)$ ($k=0,1,2$)
+ist der symmetrische Koide-Invariant $Q=(\sum_k a_k^2)/(\sum_k a_k)^2$ exakt und
+\emph{$\theta$-unabhängig}. Denn die Summe $S=\sum_k a_k=3+\sqrt2\sum_k\cos(\theta+2\pi k/3)=3$
+(drei um $120^\circ$ versetzte Kosinus summieren zu null), und die Quadratsumme
+$T=\sum_k a_k^2=3+0+2\cdot\tfrac32=6$ (mit $\sum_k\cos^2=\tfrac32$). Damit
+\[
+Q(\theta)=\frac{T}{S^2}=\frac{6}{9}=\frac{2}{3}\qquad\text{für jedes }\theta.
+\]
+$Q$ läuft für positive Massen über $[1/3,1]$; der Wert $2/9=0{,}2222$ liegt \emph{unter} diesem
+Bereich. $2/9$ ist somit kein Grenzwert, kein Extremum und kein Fixpunkt des symmetrischen
+Funktionals -- im Betragskanal ist $2/9$ vollständig unsichtbar. Das ist die algebraische Seite
+der \enquote{Counter-Blindheit} des $Z_3$-Kerns: die Orbit-Glieder $\{1/9,2/9,4/9\}$ sind für
+jede symmetrische, zählende Größe ununterscheidbar.
+
+\section{Der Allpass: drei Kanäle}
+Der Ort von $\theta$ lässt sich am Allpass sichtbar machen. Ein $Z_3$-symmetrisches
+Blaschke-Produkt $B_\theta(z)=\prod_{k}(z^{-1}-\bar a_k)/(1-a_k z^{-1})$ mit Polen
+$a_k=r\,e^{i(\theta+2\pi k/3)}$ (hier $r=0{,}5$) zerlegt die Phaseninformation in drei Größen,
+von denen zwei gegen $\theta$ blind sind und nur eine ihn trägt. Numerisch (für die
+Orbit-Winkel $\theta\in\{1/9,2/9,4/9\}$):
+\begin{itemize}
+\item \textbf{Betrag} $|B_\theta|=1$ (bis $\sim10^{-15}$) für alle $\theta$ -- der Betragskanal
+  ist blind.
+\item \textbf{Windungszahl} $=3$ exakt für alle $\theta$ -- die \emph{flach-topologische}
+  ganze Zahl ist blind. Das ist die numerische Seite der Aussage, dass $2/(9\pi)$ irrational
+  und $\theta=2/9$ daher kein flacher topologischer Invariant ist: die ganzzahlige Windung
+  trennt $2/9$ nicht von $1/9,4/9$.
+\item \textbf{Stetiges Phasenprofil} $\arg B_\theta(\omega)$ -- verschieden für
+  $1/9,2/9,4/9$ (am Referenzpunkt $\omega=0$: $0{,}093$, $0{,}171$, $0{,}249$; auch die
+  Gruppenlaufzeit unterscheidet sie). Nur das \emph{stetige, dynamische} Phasenprofil trägt
+  $\theta$.
+\end{itemize}
+Auch ein Energie-/Betrags-Funktional wie $\int|B|^2\,d\omega/2\pi$ ist für alle drei identisch.
+Die Distinktion $2/9$ gegen $1/9,4/9$ lebt somit weder im Betrag, noch in der ganzzahligen
+Windung, noch in einem symmetrischen Funktional -- allein im dynamischen Phasenprofil.
+
+\section{Ein illustrativer Auswahlmechanismus}
+Was ein Selektor leisten müsste, zeigt eine dynamische Phasen-Referenz. Die drei Orbit-Glieder
+haben Allpass-Phasen $\psi=(0{,}093,\,0{,}171,\,0{,}249)$. Ein Träger (\emph{Carrier}), der eine
+Holonomie $\Phi$ akkumuliert und auf die nächste Orbit-Phase einrastet, wählt genau einen
+Repräsentanten: $2/9$ wird ausgewählt genau dann, wenn $\Phi$ im $2/9$-Basin
+$[0{,}132,\,0{,}210]$ liegt (Breite $0{,}078$). Eine \emph{zufällige} Holonomie über den
+Orbit-Bereich trifft $2/9$ mit Wahrscheinlichkeit $\approx1/3$ -- ohne Grund bevorzugt nichts
+den Wert $2/9$.
+
+Die Form dieses Mechanismus ist die des offenen Problems: die Auswahl ist \emph{kontingent} auf
+eine externe dynamische Phase (eine Holonomie); $2/9$ hat ein eigenes Basin wie jedes Glied,
+und Betrag wie Windung geben ihm keinen Vorzug. Ein dynamischer Selektor müsste diese
+Holonomie \emph{erzwungen} liefern, aus einem inneren Grund der liefernden Dynamik, nicht durch
+eine von Hand gewählte Umbenennung. Dies ist derselbe Inhalt wie die Brechungsbedingung $(\delta,\chi)\approx(0{,}24,
+\pi/2)$: $\chi$ \emph{ist} die Holonomie-Phase, $\delta$ ihre freie Tiefe. (Illustration der
+Mechanismus-Form; keine Herleitung des Wertes $2/9$, keine Modellierung eines konkreten
+Trägers.)
+
+\section{Erzwungen oder kontingent: $\theta^*(\delta)$ und der Kontrast zum Photon}
+Ob $2/9$ \emph{erzwungen} ist wie $c$, entscheidet das Variationsverhalten. Der $\delta=0$-Anteil
+des Brechungsfunktionals hat die geschlossene Form (bis $10^{-15}$ bestätigt)
+\[
+E_3(\theta,0)=-\tfrac12+\tfrac{1}{\sqrt2}\cos 3\theta,\qquad
+\frac{dE_3}{d\theta}\Big|_{0}=-\frac{3}{\sqrt2}\sin 3\theta,
+\]
+mit Extrema an den $Z_3$-Punkten ($\sin3\theta=0$). Koppelt man das zweite Triplett $3'$ mit
+Stärke $\delta$ und Phase $\chi$ an, wandern die inneren Extrema vom $Z_3$-Punkt weg (es sind
+zwei; verfolgt wird der untere, orbitnahe Zweig $\theta^*$). Auf dem Zweig $\chi=\pi/2$ ist die
+Verschiebung glatt und monoton (numerisch,
+\texttt{forced\_vs\_contingent.py}): $\theta^*$ steigt von $0{,}099$ ($\delta=0{,}10$) über
+$0{,}223$ ($\delta=0{,}24$) bis $0{,}501$ ($\delta=1{,}0$); $d\theta^*/d\delta$ ist überall
+positiv (Median über das $\delta$-Gitter $0{,}31$, lokal bei $\delta^*\approx0{,}24$ etwa
+$0{,}80$). Der erreichte Bereich $[0{,}05,\,0{,}52]$ enthält $2/9$ im Inneren, unausgezeichnet.
+Das $2/9$-Basin im $\theta$-Raum -- nächstes Orbit-Glied, $[1/6,\,1/3]$, Breite $1/6$ --
+entspricht über die lokale Steigung einem $\delta$-Fenster von
+$\Delta\delta\approx0{,}167/0{,}80\approx0{,}21$. $\delta$ ist weich, nicht feinabgestimmt;
+$2/9$ wird herbeigezogen, es sitzt an keiner Struktur.
+
+Die Lichtgeschwindigkeit ist von anderem Typ. In $ds^2=-c^2dt^2+dx^2+dy^2+dz^2$ ist $c$ ein
+metrischer Koeffizient, kein Parameter eines Funktionals; $ds^2=0$ ist der Lichtkegel, und
+masselos bedeutet $v=c$ exakt -- die Sättigung der Ungleichung $v\le c$. Es gibt kein
+$c^*(\lambda)$; $dc/d\lambda\equiv0$, weil $c$ eine Konstante der Geometrie ist, kein Extremum.
+Dies spiegelt die physikalische Herkunft: die Masselosigkeit des Photons ist
+\emph{eichsymmetrie-geschützt} ($m=0$ exakt, daraus $v=c$), ein \emph{Rand}-/Fixpunktwert.
+$2/9$ dagegen ist der irreduzibel $Z_3$-\emph{brechende} Winkel im \emph{Inneren} des Orbits --
+symmetrie-brechend, nicht -geschützt, und daher kontingent.
+
+\section{Selbst- und schief-adjungierte Holonomien}
+Ist der Selektor eine Holonomie-Phase $\chi$, so ist zwischen zwei Sektoren zu unterscheiden. Im
+Brechungsterm $\delta\cos(2\varphi_k+\chi)$ ($\varphi_k=\theta+2\pi k/3$) trennt $\chi$ eine
+\emph{gerade} von einer \emph{ungeraden} Kopplung: $\chi=0$ (und $\chi=\pi$) gibt
+$\cos(2\varphi_k)$, eine gerade, \emph{selbst­adjungierte}, reelle Kopplung; $\chi=\pi/2$ gibt
+$\cos(2\varphi_k+\pi/2)=-\sin(2\varphi_k)$, eine ungerade, \emph{schief-adjungierte},
+imaginäre Kopplung.
+
+Die beiden Sektoren haben verschiedene natürliche Werte. Die \emph{selbst­adjungierten}
+Holonomien -- flache $Z_3$-Wilson-Linien ($\chi=2\pi n/3$) mal die zwei Spinstrukturen pro
+Zyklus (Versatz $0$ oder $\pi$) -- sind die Vielfachen von $\pi/3$,
+$\chi\in\{0,\pi/3,2\pi/3,\pi,4\pi/3,5\pi/3\}$; $\pi/2$ ist keiner davon. Der
+\emph{schief-adjungierte} Sektor dagegen hat seinen natürlichen Wert bei $\chi=\pi/2$: das ist
+die $i$-Phase, $e^{i\pi/2}=i=\sqrt{-1}$, gegenüber der reellen $e^{i\pi}=-1$. Der Übergang von
+reeller zu schief-adjungierter Kopplung \emph{halbiert} die Phase $\pi\to\pi/2$ -- er zieht die
+Wurzel aus $-1$.
+
+Entscheidend ist, welcher Sektor den Selektor stellt. Die Eliminationskette (Dok.~282) hat alle
+statischen, selbst­adjungierten Kandidaten ausgeschieden; der einzige Überlebende ist die
+dynamische \emph{schief-adjungierte} Phase. Damit ist der typ-konsistente Wert $\chi=\pi/2$ --
+die $i$-Phase des schief-adjungierten Sektors --, nicht ein Vielfaches von $\pi/3$. Und
+$\chi=\pi/2$ erreicht $\theta^*=2/9$ bei $\delta\approx0{,}24$ (numerisch,
+\texttt{holonomie\_landschaft.py}). Der schief-adjungierte Typ lässt dabei zunächst beide
+$i$-Werte zu, $\chi=\pi/2$ und $\chi=3\pi/2$ ($e^{\pm i\pi/2}=\pm i$); die Wahl des Zweigs ist
+eine Orientierungswahl (Umlaufsinn des Zyklus). Die beiden Zweige sind jedoch nicht äquivalent:
+der Spiegel-Zweig $\chi=3\pi/2$ besitzt bei $\delta\approx0{,}24$ kein inneres Extremum nahe
+$2/9$ (Extrema bei $0{,}83$ und $1{,}87$) -- nur der $+i$-Zweig erreicht den Orbit-Bereich.
+
+$\chi=\pi/2$ ist damit kein willkürlicher oder topologisch heimatloser Wert, sondern der von der
+Eliminationskette geforderte schief-adjungierte $i$-Wert -- ohne angenommene $Z_4$ und ohne
+Zahlenspiel. Präzise gehört \enquote{schief-adjungiert} dabei zum \emph{Generator}, nicht zur
+endlichen Holonomie: diese ist ein unitäres Gruppenelement $\exp(K)$ mit schief-adjungiertem
+$K$ ($K^\dagger=-K$); der schief-adjungierte Charakter sitzt in der erzeugenden Kopplung, nicht
+in der endlichen Holonomie-Matrix selbst. Die Tiefe $\delta$ bleibt jedoch \emph{frei}: der
+Sektor legt die Phase $\chi$ fest, nicht die Tiefe. Der offene Punkt ist damit geschärft --
+nicht ein beliebiger Winkel, sondern ob eine schief-adjungierte Dynamik gerade $\chi=\pi/2$
+trägt und darüber die Tiefe $\delta$ aus einem inneren Grund \emph{dieser Dynamik} festlegt
+(rekursionsintern ist nach Dok.~275 keine Auszeichnung möglich).
+
+\section{Die Tiefe $\delta$ als zweite Harmonische}
+Die Massen-Amplitude ist eine Fourier-Reihe im Faserwinkel,
+\[
+a(\varphi)=\underbrace{1}_{\text{Mittelwert}}+\underbrace{\sqrt2\cos\varphi}_{\text{1.\ Harmonische}}
++\underbrace{\delta\cos(2\varphi+\chi)}_{\text{2.\ Harmonische}},\qquad \varphi=\theta+2\pi k/3.
+\]
+Die erste Harmonische mit reeller Amplitude $c_1=\sqrt2$ legt den Koide-Invarianten $Q=2/3$ fest
+(sie ist der Betrag $r=\sqrt2$). Die zweite Harmonische hat die komplexe Amplitude
+$c_2=\delta\,e^{i\chi}$; ihr \emph{Betrag} ist $\delta=|c_2|$ und ihre \emph{Phase} ist
+$\chi=\arg c_2$. Für $\chi=\pi/2$ wird $c_2=i\delta$ rein imaginär -- die zweite Harmonische ist
+ein reiner Sinus, die schief-adjungierte Kopplung des vorigen Abschnitts.
+
+Damit sind $\delta$ und $\chi$ Betrag und Phase \emph{derselben} Größe $c_2$, gehören aber zu
+verschiedenen Sektoren: $\chi=\arg c_2$ liegt im Phasen-Sektor (von der Eliminationskette auf
+$\pi/2$ fixiert), $\delta=|c_2|$ im \emph{Betrags}-Sektor. Die Tiefe $\delta$ ist also kein
+Phasen-, sondern ein Amplituden-Freiheitsgrad -- die Amplitude des ersten Obertons, physikalisch
+die Stärke, mit der das zweite Triplett $3'$ (die Verdopplung $6=3\oplus3'$) in das primäre $3$
+einmischt.
+
+Das ist derselbe Sektor, der bereits $|c_1|=\sqrt2$ festlegt. Wie die erste harmonische Amplitude
+aus $Q=2/3$ folgt, müsste die zweite, $|c_2|=\delta$, aus dem Oberton-Gehalt der
+massenerzeugenden fraktalen Wellenform folgen (der Struktur $D_f=3-\xi$, der
+$3\oplus3'$-Verdopplung). Das Verhältnis $\delta/\sqrt2\approx0{,}17$ -- die zweite Harmonische ist
+rund $17\,\%$ der ersten -- ist eine reine \emph{Form}-Größe, die an der Wellenform hängt, nicht
+an der Phase. $\delta$ ist somit kein freier Abstimmparameter, sondern ein noch nicht
+ausgerechneter Betrags-Freiheitsgrad.
+
+Damit trennt sich die Frage nach $2/9$ endgültig in zwei Sektoren: die \emph{Phase} $\chi=\pi/2$
+ist schief-adjungiert und fixiert; der \emph{Betrag} $\delta$ ist die zweite harmonische Amplitude
+und gehört -- offen -- in denselben Betrags-Sektor wie $\sqrt2$.
+
+\section{$\delta$ als golden gedämpfte Amplitude}
+Der Oberton-Gehalt lässt sich schärfer fassen: die zweite harmonische Amplitude ist eine
+\emph{Golden-Dämpfung}. Der Wert, der $\theta^*=2/9$ bei $\chi=\pi/2$ exakt liefert, ist
+$\delta^*=0{,}2389$; der Golden-Attraktor $1/\varphi^3=0{,}2361$ liegt knapp darunter. Weil
+$1/\varphi^3=\varphi^{-3}$ eine \emph{negative} Golden-Potenz (ein Zerfall) ist, ist $\delta$
+eine Dämpfung, keine Verstärkung -- $\delta^*<1$ liegt eindeutig im Dämpfungs-Regime.
+
+Der Exponent $3$ ist nicht frei, sondern $=D$. Eine einzelne, dekompaktifizierte
+$3'$-Rekursion gäbe $1/\varphi^1=0{,}618$ (um $159\,\%$ daneben); erst die Dämpfung über
+$D=3$ Dimensionen (die fraktale/räumliche Dimension $D_f=3-\xi$, das \emph{volle} kompakte
+$T^4$) gibt $1/\varphi^3$. Der passende Exponent $3$ ist damit selbst ein Argument für das
+volle kompakte $T^4$ und gegen die Dekompaktifizierung auf eine einzelne Rekursion.
+
+Die $\xi$-Dämpfungs-Rekursion $r(k{+}1)=r(k)(1-\xi)$, $r(0)=D_f/3$ (Dok.~275) passiert
+$1/\varphi$ bei der Tiefe $k^*=\ln\varphi/\xi\approx3609$ und $1/\varphi^3$ bei $3\cdot3609
+\approx10827$ (auf $0{,}011\,\%$ genau). $\delta^*$ wird rund $89$ \emph{Einheiten} davor
+erreicht -- gemeint ist eine Differenz zweier reeller Log-Tiefen im dekompaktifizierten,
+kontinuierlichen Skalenfluss ($1/\varphi^3$ bei $10826{,}2$, $\delta^*$ bei $10737{,}7$;
+Differenz $88{,}5$), keine ganzzahlige Schrittzählung. So ist $\delta^*$ ein um rund $89$
+Log-Einheiten untergedämpftes $1/\varphi^3$, ein Überschuss von $+1{,}187\,\%$ über dem
+Attraktor -- beide Angaben sind über $\ln(\delta^*\varphi^{3})/\xi$ ein und dieselbe Zahl,
+keine zwei unabhängigen Befunde --, konsistent mit einer Annäherung von oben.
+
+Dieser Überschuss ist \emph{nicht} die fraktale Massenkorrektur $K_{\text{frak}}=1-100\xi$
+(Dok.~133): deren präzise Form $(D_f^{\text{eff}}/3)^{D_f^{\text{eff}}/2}$ mit
+$D_f^{\text{eff}}\approx2{,}973$ ergibt einen Faktor $\approx100$ ($1{,}333\,\%$), während
+$\delta$ nur $\approx89\,\xi$ ($1{,}187\,\%$) benötigt -- weniger, also nicht $K_{\text{frak}}$.
+Und die Rekursionstiefe ist in Dok.~275 ausdrücklich \emph{nicht} unabhängig fixiert: $1/\varphi^3$
+ist dort ein \emph{Durchgangspunkt}, kein Fixpunkt (der einzige Fixpunkt der Dämpfung ist $0$), und
+zu \emph{jedem} Ziel $c\in(0,1)$ existiert eine Tiefe $k^*(c)$ mit identischem Parameterstatus. Dass
+$\delta^*$ nahe $1/\varphi^3$ liegt, ist daher \emph{kein} Schließen der Rekursion, und ein Fixieren
+der Tiefe auf gerade diesen Wert wäre nach Dok.~275 keine Auszeichnung. Der $89$-Schritt-Überschuss
+bleibt damit ein offener, nicht hergeleiteter Feinwert.
+
+Damit ist der Betrags-Sektor so weit geklärt, wie die Struktur trägt: $\delta$ ist die golden
+gedämpfte zweite Harmonische, $1/\varphi^3$ über $D=3$ (volles $T^4$), mit einem kleinen
+Überschuss von oben. Form, Ordnung, Exponent und Richtung stehen fest; der exakte $\delta$-Wert
+-- der $89$-Schritt-Offset -- ist weder $K_{\text{frak}}$ noch eine fixierte Rekursionstiefe und
+bleibt offen (\texttt{delta\_golden\_daempfung.py}).
+
+\section{Was die Nicht-Schließung praktisch bedeutet: ein offener Kopplungskanal}
+Der bisherige Befund trennt zwei Sektoren mit gegensätzlichem Verhalten. Der Massen-Sektor ist
+\emph{geschlossen}: die Rekursion $R(\Phi^*)=\Phi^*$ (Dok.~203) besitzt einen nicht-trivialen
+Fixpunkt, und weil die Lepton-Massen an ihm sitzen, sind sie und der Koide-Wert $Q=2/3$ exakt und
+starr.\footnote{\enquote{Exakt} bezieht sich hier auf die geometrische Fixpunkt-Ebene: der
+dimensionslose Invariant $Q=2/3$ ist starr und wird von den Daten auf $-0{,}9\,\sigma$
+bestätigt (Dok.~292). Die \emph{Absolut}massen bzw.\ das Zahlenpaar $(\sqrt2,\ 2/9)$ sind davon
+zu unterscheiden: auf der gemessenen Polmassen-Ebene ist das Paar nicht gemeinsam exakt (Dok.~292,
+$\sim450\,\sigma$ im $m_\mu/m_e$-Kanal), weshalb $2/9$ per P42 als rationale Adresse eines über
+einen Referenzpunkt fixierten Winkels gilt, nicht als Polmassen-Exaktheitsanspruch. Für den hier
+diskutierten dynamischen Ort ist das ohne Belang -- die Orbit-Auflösung ($\sim0{,}1$) liegt weit
+über dem $10^{-7}$-Unterschied.}
+Dort gibt es nichts zu verstellen -- kein freier Parameter, kein Angriffspunkt für eine
+äußere Beeinflussung.
+
+Der Spielraum sitzt allein im offenen Sektor, der Phase. Die $\xi$-Dämpfungs-Rekursion schließt
+nie (Durchgangspunkt, einziger Fixpunkt $0$, Dok.~275); in der Sprache der Rückkopplung ist sie
+eine offene, gedämpfte Schleife mit Verstärkung kleiner eins, kein starr eingerasteter Fixpunkt.
+Eine solche offene, gedämpfte Schleife kann -- anders als ein geschlossener Fixpunkt -- von außen
+beeinflusst werden: durch Kopplung an einen zweiten Oszillator, durch Injektions- oder
+Mode-Locking (Dok.~286). Praktisch heißt die Nicht-Schließung daher: es existiert ein Kanal, über
+den ein zweites, dynamisches System die offene Phase einrasten kann. Der geschlossene
+Massen-Sektor bietet diesen Kanal nicht.
+
+Der Kanal ist jedoch eng und strukturiert, kein freier Parameter. Der Fangbereich einer solchen
+Kopplung ist von der Ordnung $\xi$ (Dok.~286) -- winzig; die $2/9$-Arnold-Zunge ist rund
+zwölfmal schmaler als $1/3$. Die Kopplung benachbarter Skalenebenen im kontinuierlichen Fluss ist
+real, aber betragsmäßig von der Ordnung $10^{-13}$ und destabilisiert die geschlossenen
+Vorhersagen nicht. Und die Wirkung ist gerichtet: sie läuft von der Dynamik in die Phase, nicht in
+den radialen Massen-Sektor, der starr bleibt (der radial/angulare Schnitt aus Dok.~282).
+
+Der eine Ort, an dem dieser Kanal genutzt würde, ist ein dynamischer schief-adjungierter Generator
+außerhalb der statischen FFGFT-Geometrie -- die Fortsetzung der Eliminationskette (Dok.~283/286).
+Rastet ein solcher Generator die offene Phase gerade auf $\chi=\pi/2$ und damit $\theta=2/9$ ein,
+erhielte $2/9$ den dynamischen, geschützten Status, den die folgende Bilanz beschreibt. Das ist
+ausdrücklich ein Kandidat, kein erreichtes Resultat: FFGFTs eigene Rekursion $R$ ist rein reell und
+trägt keinen solchen Generator; ob eine äußere Dynamik ihn liefert, bleibt offen.
+
+Entscheidend ist die Grenze dieses Spielraums. \enquote{Raum für gegenseitige Beeinflussung}
+bedeutet nicht, dass sich die Theorie beliebig biegen ließe. Der Raum ist beschränkt: der radiale
+Sektor bleibt starr, die Phase ist eng eingeschnürt (schief-adjungiert, $\chi=\pi/2$, transzendent
+in $2\pi$, $\xi$-schmaler Fangbereich), und die Rekursionstiefe fixiert keinen Wert (Dok.~275). Es
+ist strukturierter Spielraum, kein freier Parameter -- und genau diese Grenze unterscheidet einen
+Kanal für echte Kopplung von einer nachträglichen Zahlenanpassung.
+
+Dieser Kanal ist zugleich der Grund, warum der Fundamentalsektor nicht auf ein starres Skelett
+zusammenfällt. Ein vollständig geschlossenes Modell -- jeder Wert ein erzwungener Fixpunkt --
+wäre überdeterminiert: keine kontingente Auswahl innerhalb eines $Z_3$-Orbits, keine
+Flavour-Mischung, keine physikalische (nicht wegdrehbare) Phase. Gerade die Mischung ist Phase,
+nicht Betrag (Dok.~289: geladene Leptonen betrags-dominiert mit kleiner Mischung, Neutrinos
+phasen-dominiert mit großer Mischung, der reine Allpass-Sektor). Am schärfsten zeigt sich das an
+der Struktur der $CP$-Verletzung: sie verlangt eine irreduzible komplexe Phase -- eine rein reelle,
+selbst-adjungierte Struktur ist $CP$-erhaltend --, also genau den Typ des schief-adjungierten
+Kanals $\chi=\pi/2$. Der offene Phasenkanal ist damit strukturell von der Art, die $CP$-Verletzung
+tragen kann; eine vollständig selbst-adjungierte FFGFT wäre $CP$-gerade und nicht-mischend. Der
+Scope bleibt eng: der Kanal trägt Mischung, $CP$ und Kontingenz im \emph{Fundamentalsektor} -- nicht
+die makroskopische Vielfalt (Chemie, Strukturbildung), die eigene, davon unabhängige Quellen hat.
+
+\section{Bilanz: die dynamische offene Frage}
+Statisch ist die Lage eindeutig: $2/9$ ist unsichtbar im symmetrischen $Q$, blind gegen Betrag
+und ganzzahlige Windung, und ein inneres Extremum, das ein freier Parameter herbeizieht
+($d\theta^*/d\delta\neq0$). Es ist \emph{nicht} erzwungen wie $c$. Beide Größen teilen dieselbe
+flache $T^4$-Arena -- $c$ als Signatur-Rand, $2/9$ als innerer Phasen-Freiheitsgrad --, aber sie
+sind verschiedenen Typs.
+
+Damit $2/9$ einen $c$-artigen, erzwungenen Status erhielte, bräuchte es einen \emph{dynamischen}
+Fixpunkt, so wie die Eichsymmetrie $m=0$ (und damit $v=c$) erzwingt. Die vorangehenden
+Abschnitte lokalisieren diesen Fixpunkt: die \emph{Phase} $\chi=\pi/2$ ist der schief-adjungierte
+$i$-Wert, den die Eliminationskette fordert -- der Selektor ist typ-fixiert; offen bleibt allein
+der \emph{Betrag} $\delta$ (die golden gedämpfte Oberton-Amplitude). Dessen Feinwert ist dabei
+nicht \enquote{noch nicht} hergeleitet, sondern aus der Rekursion allein \emph{beweisbar nicht}
+herleitbar: die Nicht-Schließung ist Theorem (einziger Fixpunkt $0$), und die Resonanzdichte der
+Durchgangspunkte schließt auch jede rekursionsinterne Auszeichnung eines Wertes aus (Dok.~275,
+epistemische Grenze). Die Rekursionsseite ist damit erledigt, keine offene Frage; offen ist allein
+die Existenz des äußeren Ankers -- ob eine schief-adjungierte Dynamik gerade $\chi=\pi/2$ trägt
+und darüber die Tiefe $\delta$ aus einem inneren Grund \emph{dieser Dynamik} (nicht der Rekursion)
+festlegt; gelänge das,
+erhielte $2/9$ ein dynamisches, geschütztes Privileg, andernfalls bleibt es kontingent. Die
+Eliminationskette (Dok.~282) hat alle statischen Kandidaten -- symmetrisch, zählend-topologisch,
+radial, statisch-geometrisch -- ausgeschieden; der einzige Überlebende ist die dynamische
+schief-adjungierte Phase, deren Herkunft außerhalb der statischen Geometrie liegt. Genau dort,
+nicht im Betrag und nicht in einer flachen Windungszahl, wäre der Wert $2/9$ zu suchen.
+
+\section{Einordnung: Nutzen und Anwendungsnähe}
+Die Befunde dieses Dokuments sind Struktur- und Ausschluss-Resultate, keine Technologie. Ihr
+unmittelbarer Nutzen liegt bei drei Gruppen. Erstens bei Arbeiten an der Koide-Relation und der
+Flavour-Struktur: das No-Go ($2/(9\pi)$ irrational; Betrag und ganzzahlige Windung
+counter-blind) schließt topologische und abzählende Herleitungswege für $\theta=2/9$ ab und
+erspart deren weitere Verfolgung; die Eliminationskette lokalisiert die verbleibende Suche
+präzise im dynamischen schief-adjungierten Phasenkanal. Zweitens methodisch: die
+Betrag/Phase-Zerlegung taugt als gemeinsame Audit-Sprache für Framework-Vergleiche
+(skript-gedeckte Behauptungen, vorregistrierte Kriterien, matched nulls) und ist vom
+FFGFT-Inhalt unabhängig übertragbar. Drittens didaktisch: die Übersetzung zwischen
+Teilchenphysik und Nachrichtentechnik (Zirkulant als DFT, Allpass, Injektions-Locking,
+Arnold-Zungen) macht den Phasenkanal mit Standard-Ingenieurwerkzeugen rechenbar.
+
+An Messung rührt allein der Phasenkanal selbst: die Strukturaussage, dass Mischung und
+$CP$-Verletzung im schief-adjungierten Kanal leben (Dok.~289), hat in den Oszillationsphasen
+und $\delta_{CP}$ eine falsifizierbare Form, die laufende und kommende Experimente (DUNE,
+Hyper-Kamiokande) vermessen. Eine Anwendung im engeren Sinn -- Gerät, Verfahren, kurzfristiger
+Ingenieursnutzen -- folgt daraus nicht: die Werkzeuge laufen von der Nachrichtentechnik in die
+Physik, nicht zurück, und solange $\delta$ nicht hergeleitet ist, ist der Ertrag der eines
+geschärften offenen Problems, nicht eines Resultats.

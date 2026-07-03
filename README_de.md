@@ -69,46 +69,64 @@ was Eingabe ist, was folgt, ist immer klar deklariert.
 
 ---
 
-## FFGFT ↔ HLV-Brücke (Information Physics Institute)
+## Leptonsektor — Massen, α und die Koide-Phase
 
-Ein anhaltender struktureller Vergleich mit Marcel Krügers HLV-/Spiral-Time-
-Rahmen. Das gemeinsame Objekt ist ein **Z₃-Zirkulant-Massenoperator** auf der
-C₃-Achse einer gemeinsamen ikosaedrischen (A₅) Geometrie, in der FFGFTs
-3-Zähligkeit und HLVs 5-Zähligkeit koexistieren.
+Der Leptonen-Massenoperator ist ein **Z₃-Zirkulant**, und seine
+Diagonalisierung teilt den Sektor sauber in einen **radialen** (Betrags-)
+und einen **angularen** (Phasen-)Teil. Alles, was FFGFT determiniert, ist
+radial: ξ, die Hierarchie, die Koide-Amplitude **Q = 2/3 = r√2**, der
+Mittelwert ⟨f⟩. Der Leptonen-Empirie-Check
+([Dok. 292](2/PDFs/292_Leptonen_Empirie_Check_De.pdf)) prüft dies von der
+Datenseite und trennt zwei Schichten, die dasselbe ξ teilen, aber nicht
+vermischt werden dürfen: der **Zirkulant** trägt die Präzision (μ/e auf
+wenige Millionstel), die **ξ-Leiter** die Größenordnung (~1%). Unter **P42**
+ist das μ/e-Verhältnis ein deklarierter Referenzpunkt; die eine unausweichliche
+Prüfung, die bleibt, ist die Tau-Masse — FFGFT sagt **m_τ = 1776,97 MeV**
+voraus, worüber Belle-II entscheidet.
 
-| Ergebnis | Dokument |
-|----------|----------|
-| FFGFT↔HLV-Containment, CP, Teilbarkeit; Koide-Phasen-Elimination | [Dok. 282](2/pdf/282_FFGFT_HLV_CP_Teilbarkeit_De.pdf) |
-| Die Brücke: gemeinsamer Z₃-Zirkulant, C₃<A₅, r=√2 vs 2/√5 | [Dok. 283](2/pdf/283_FFGFT_HLV_Bruecke_De.pdf) |
-| Spiral-Time / neuronale Kohärenz — Formelanalyse (Anspruchsgrenzen) | [Dok. 284](2/pdf/284_FFGFT_Spiralzeit_Medin_De.pdf) |
-| Dimensionsbrücke: die Verdopplung 6 = 3⊕3′, T⁴→T⁷ | [Dok. 285](2/pdf/285_FFGFT_HLV_Dimensionsbruecke_De.pdf) |
-| Dynamischer/kinetischer Sektor: AM-Seitenband ½, Mode-Locking, ξ¹-Nullmode | [Dok. 286](2/pdf/286_Dynamischer_Sektor_Kinetik_De.pdf) |
+**α ist keine Kalibrierung.** Es läuft über zwei unabhängige Wege zur
+charakteristischen Energie E₀ — empirisch (√(m_e·m_μ)) und rein geometrisch
+(aus ξ und m_μ allein, ohne m_e). Beide treffen sich auf ~8·10⁻⁵:
+Überbestimmung, kein Fit. Die ξ-Leiter-Reste folgen einem
+**generationslinearen Korrekturgesetz** (N_g ≈ g·N₀, Exponenten multiplikativ
+konsistent), weshalb eine konstante Korrektur die Leiter nicht schließen kann;
+die Grundeinheit N₀ ≈ 38,6 ist noch nicht hergeleitet.
 
-Reproduzierbarkeits-Skripte: `2/Dok286_Skripte/` (nur numpy, seed-fest).
+### Der Koide-Offset θ = 2/9 — die Zirkulant-Phase
 
-### Der Koide-Offset θ = 2/9 — lokalisiert, nicht hergeleitet
+Der angulare Offset **θ = 2/9** (Bogenmaß) ist **kein freier Parameter und
+kein empirischer Fit**: er ist die Phase des Z₃-Zirkulanten, der Wert, den die
+Diagonalisierung *ausgibt* — gefunden, nicht gesucht
+([Dok. 291](2/PDFs/291_Dynamischer_Ort_Theta_2_9_De.pdf)). Er entsteht aus der
+Hilbertraum-Übersetzung (Dok. 230/231/232 → 282), in der die drei Leptonmassen
+als Spektrum eines Z₃-Zirkulanten erscheinen und 2/9 als Diagonalisierungs-
+Winkel herausfällt.
 
-Der Leptonen-Massenoperator faktorisiert in einen **radialen** (Betrags-)
-und einen **angularen** (Phasen-)Sektor. Alles, was FFGFT determiniert, ist
-radial — ξ, die Hierarchie, die Koide-Amplitude **Q = 2/3 = r√2**, der
-Mittelwert ⟨f⟩. Der eine verbleibende empirische Eingang ist der **angulare
-Offset θ = 2/9** (Bogenmaß).
+Eine explizite, reproduzierbare Eliminationskette **charakterisiert** ihn dann
+positiv — was 2/9 *ist*, indem sie ausschließt, was es nicht ist: keine
+symmetrische Invariante (cos 3θ-Satz), nichts Abzählbares/Topologisches
+(2/9 rad transzendent in 2π, Lindemann–Weierstrass), nicht vom radialen
+Fixpunkt fixiert, kein statischer Ikosaeder-Winkel. Was es *ist*, ist eine
+**dynamische, betragserhaltende Holonomie-Phase** mit Selektor χ = π/2. Das
+Transzendenz-Resultat ist selbst positives Wissen: es beweist, dass 2/9 aus
+keiner flachen/topologischen Quelle stammen kann, das Prinzip dahinter also
+dynamisch ist. Der Wert steht fest und seine Herkunft ist geklärt — die
+Koide-Phase ist erledigt.
 
-Eine explizite Eliminationskette (reproduzierbar) zeigt, was θ **nicht** ist:
+Reproduzierbarkeit: `2/Dok292_Skripte/` (Leptonen-Check, Teile A–L),
+`2/Dok291_Skripte/` (θ=2/9-Mechanismus-Skripte).
 
-- **keine symmetrische Invariante** — die gesamte θ-Abhängigkeit läuft über cos 3θ; jedes Z₃-invariante Funktional extremiert bei nπ/3, nie bei 2/9 (cos 3θ-Satz);
-- **nicht abzählend/topologisch** — 2/9 rad ist transzendent in 2π (Lindemann–Weierstrass), also keine Einheitswurzel;
-- **nicht vom radialen Fixpunkt fixiert** — θ kommt in der Fixpunktbedingung nicht vor (radial-angulare Orthogonalität);
-- **kein statischer geometrischer Winkel** — 2/9 rad = 12,73° ist kein Ikosaeder-Achsenwinkel (streng geprüft; Kontrolle arccos(1/√5) = 63,43° trifft exakt).
+### Externer Gegencheck (HLV / BD17A) — negativ
 
-Übrig bleibt ein **dynamisches, angulares** Prinzip — eine betragserhaltende
-(Allpass-)Holonomie-Phase — das strukturell auf der HLV-Seite liegt (Krügers
-BD17A-Randholonomie-Mechanismus). Nachrichtentechnisch: der Massenoperator
-ist ein Z₃-Zirkulant, DFT-diagonalisiert, also ist √2 der Betrag und θ die
-Phase der Spektralkoeffizienten — und **ein Betragsspektrum legt das
-Phasenspektrum nicht fest**. Der empirische Wert steht auf ~4 signifikante
-Stellen; die theoretische Erzwingung ist das eine offene Ziel, jetzt präzise
-umrissen. Ein ehrlich deklariertes offenes Resultat, keine Herleitung.
+Die Frage, ob θ=2/9 erzwungen wird, wurde zusätzlich blind gegen Marcel
+Krügers HLV-/BD17A-Holonomie-Mechanismus (Information Physics Institute)
+geprüft, unter symmetrischer Vorregistrierung. Das Verdikt war **negativ**
+(BLOCKED) — die vorhergesagte Richtung, da eine flache Determinanten-Linien-
+Holonomie einen transzendenten Winkel nicht als topologische Invariante
+tragen kann. Das betrifft den externen Rahmen, nicht FFGFTs eigene Ergebnisse,
+die unverändert bestehen. Die früheren Struktur-Vergleichsdokumente
+([Dok. 282–286](2/pdf/282_FFGFT_HLV_CP_Teilbarkeit_De.pdf)) und der
+Verdikt-Record (`2/Dok291_Skripte/`) sind der Vollständigkeit halber erhalten.
 
 ### Interne Darstellungen und Rechenwege
 
@@ -138,7 +156,7 @@ Die Reduktion T⁴ → T⁰ erfolgt in drei klar getrennten Operationstypen
 Typ III ist bijektiv (Hilbert-Darstellung). Diese Klassifikation beendet
 eine Familie von Pseudoparadoxen über Dimensionsreduktion.
 
-Das **Korrekturregister** (Dok. 190, K1–K4, P1–P38) dokumentiert
+Das **Korrekturregister** (Dok. 190, K1–K4, P1–P43) dokumentiert
 jede Korrektur und Präzisierung mit Datum und Status. Nichts wird
 still überschrieben. Fehler in früheren Skriptversionen sind als
 dokumentierte Fehlerstände im Archiv, nicht gelöscht.
@@ -169,7 +187,7 @@ ist aber prinzipiell messbar (Dok. 230).
 |-----------|------|
 | 🔬 Interaktives Portal | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo v1.1.6 | [DOI 10.5281/zenodo.21061423](https://doi.org/10.5281/zenodo.21061423) |
+| 📦 Zenodo v1.1.7 | _DOI beim Upload_ (löst [21061423](https://doi.org/10.5281/zenodo.21061423) ab) |
 | 🎵 Spotify | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
@@ -232,7 +250,7 @@ referenzieren Präambeln aus `2/Sources/pri-end/`. Kapitelinhalte in
 
 Das **Korrekturregister** [Dok. 190](2/pdf/190_T0_Korrekturen_De.pdf)
 dokumentiert jede Korrektur und Präzisierung mit Datum, Status und
-betroffenen Dokumenten — K1–K4 (Fehler) und P1–P38 (Präzisierungen).
+betroffenen Dokumenten — K1–K4 (Fehler) und P1–P43 (Präzisierungen).
 Nichts wird still überschrieben.
 
 Der **Changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)
@@ -266,6 +284,7 @@ Zusätzliche Einzelausgaben: *FFGFT Narrativ — Das Kosmische Gehirn*,
 
 | Version | DOI | Schwerpunkt |
 |---------|-----|-------------|
+| v1.1.7 | _beim Upload_ | Leptonsektor-Prüfung (Dok. 292), Koide-Phase θ=2/9 als Zirkulant-Phase charakterisiert (Dok. 291), α-Zwei-Wege-Überbestimmung, Toleranz-Methodik |
 | v1.1.6 | [21061423](https://doi.org/10.5281/zenodo.21061423) | FFGFT↔HLV-Brücke (Dok. 282–286), Koide-Phase θ=2/9-Elimination, dynamischer/kinetischer Sektor |
 | v1.1.3 | [20640799](https://doi.org/10.5281/zenodo.20640799) | Koide-Sektor, Projektionskette, CMB, ξ→φ revidiert |
 | v1.1.2 | [20474821](https://doi.org/10.5281/zenodo.20474821) | Buchserie (5 Bände, 3 KDP-Formate) |

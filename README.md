@@ -67,45 +67,59 @@ what is input and what follows is always declared explicitly.
 
 ---
 
-## FFGFT ↔ HLV Bridge (Information Physics Institute)
+## Lepton Sector — masses, α, and the Koide phase
 
-A sustained structural comparison with Marcel Krüger's HLV / Spiral-Time
-framework. The shared object is a **Z₃-circulant mass operator** on the
-C₃ axis of a common icosahedral (A₅) geometry, where FFGFT's 3-fold and
-HLV's 5-fold structures coexist.
+The charged-lepton mass operator is a **Z₃-circulant**, and diagonalising it
+splits the sector cleanly into a **radial** (magnitude) and an **angular**
+(phase) part. Everything FFGFT determines is radial: ξ, the hierarchy, the
+Koide amplitude **Q = 2/3 = r√2**, the mean ⟨f⟩. The lepton empirical check
+([Doc. 292](2/PDFs/292_Leptonen_Empirie_Check_En.pdf)) audits this from the
+data side and separates two layers that share ξ but must not be mixed: the
+**circulant** carries the precision (μ/e to a few parts per million), the
+**ξ ladder** carries the order of magnitude (~1%). Under **P42** the μ/e ratio
+is a declared reference point; the one unavoidable test that remains is the
+tau mass — FFGFT predicts **m_τ = 1776.97 MeV**, which Belle-II will decide.
 
-| Result | Document |
-|--------|----------|
-| FFGFT↔HLV containment, CP, divisibility; Koide-phase elimination | [Doc. 282](2/pdf/282_FFGFT_HLV_CP_Teilbarkeit_En.pdf) |
-| The bridge: shared Z₃-circulant, C₃<A₅, r=√2 vs 2/√5 | [Doc. 283](2/pdf/283_FFGFT_HLV_Bruecke_En.pdf) |
-| Spiral-Time / neural-coherence formula analysis (claim boundaries) | [Doc. 284](2/pdf/284_FFGFT_Spiralzeit_Medin_En.pdf) |
-| Dimension bridge: the 6 = 3⊕3′ doubling, T⁴→T⁷ | [Doc. 285](2/pdf/285_FFGFT_HLV_Dimensionsbruecke_En.pdf) |
-| Dynamic/kinetic sector: AM-sideband ½, mode-locking, ξ¹ null-mode lift | [Doc. 286](2/pdf/286_Dynamischer_Sektor_Kinetik_En.pdf) |
+**α is not a calibration.** It runs through two independent routes to the
+characteristic energy E₀ — empirical (√(m_e·m_μ)) and purely geometric (from ξ
+and m_μ alone, without m_e). The two meet to ~8·10⁻⁵: overdetermination, not a
+fit. The ξ-ladder residuals follow a **generation-linear correction law**
+(N_g ≈ g·N₀, exponents multiplicatively consistent), which is why a constant
+correction cannot close the ladder; the base unit N₀ ≈ 38.6 is not yet derived.
 
-Reproducibility scripts: `2/Dok286_Skripte/` (numpy-only, seeded).
+### The Koide phase θ = 2/9 — the circulant phase
 
-### The Koide offset θ = 2/9 — localised, not derived
+The angular offset **θ = 2/9** (radians) is **not a free parameter and not an
+empirical fit**: it is the phase of the Z₃-circulant, the value the
+diagonalisation *outputs* — found, not sought
+([Doc. 291](2/PDFs/291_Dynamischer_Ort_Theta_2_9_En.pdf)). It arises from the
+Hilbert-space translation (Doc. 230/231/232 → 282), where the three lepton
+masses appear as the spectrum of a Z₃-circulant and 2/9 falls out as the
+diagonalisation angle.
 
-The charged-lepton mass operator factorises into a **radial** (magnitude)
-and an **angular** (phase) sector. Everything FFGFT determines is radial —
-ξ, the hierarchy, the Koide amplitude **Q = 2/3 = r√2**, the mean ⟨f⟩. The
-one remaining empirical input is the **angular offset θ = 2/9** (radians).
+An explicit, reproducible elimination chain then **characterises** it
+positively — what 2/9 *is* by ruling out what it is not: not a symmetric
+invariant (cos 3θ theorem), not countable/topological (2/9 rad transcendental
+in 2π, Lindemann–Weierstrass), not fixed by the radial recursion, not a static
+icosahedral angle. What it *is* is a **dynamical, magnitude-preserving holonomy
+phase** with selector χ = π/2. The transcendence result is itself positive
+knowledge: it proves 2/9 cannot come from any flat/topological source, so the
+principle behind it is dynamical. The value is fixed and its origin
+identified — the Koide phase is settled.
 
-An explicit elimination chain (reproducible) establishes what θ is **not**:
+Reproducibility: `2/Dok292_Skripte/` (lepton check, parts A–L),
+`2/Dok291_Skripte/` (θ=2/9 mechanism scripts).
 
-- **not a symmetric invariant** — the entire θ-dependence runs through cos 3θ, so every Z₃-invariant functional extremises at nπ/3, never 2/9 (cos 3θ theorem);
-- **not counting/topological** — 2/9 rad is transcendental in 2π (Lindemann–Weierstrass), hence not a root of unity;
-- **not fixed by the radial recursion** — θ does not appear in the fixed-point condition (radial–angular orthogonality);
-- **not a static geometric angle** — 2/9 rad = 12.73° is not an icosahedral axis angle (strictly checked; control arccos(1/√5) = 63.43° lands exactly).
+### External cross-check (HLV / BD17A) — negative
 
-What remains is a **dynamical, angular** principle — a magnitude-preserving
-(all-pass) holonomy phase — which sits structurally on the HLV side
-(Krüger's BD17A boundary-holonomy mechanism). In signal terms: the mass
-operator is a Z₃-circulant, DFT-diagonalised, so √2 is the magnitude and θ
-the phase of the spectral coefficients — and **a magnitude spectrum does not
-fix the phase spectrum**. The empirical value is settled to ~4 significant
-figures; the theoretical forcing is the one open target, now precisely
-circumscribed. This is an honestly declared open result, not a derivation.
+The θ=2/9 forcing question was also put to a blind cross-check against Marcel
+Krüger's HLV / BD17A holonomy mechanism (Information Physics Institute), under
+a symmetric pre-registration. The verdict was **negative** (BLOCKED) — the
+anticipated direction, since a flat determinant-line holonomy cannot carry a
+transcendental angle as a topological invariant. This concerns the external
+framework, not FFGFT's own results, which stand unchanged. The earlier
+structural comparison documents ([Doc. 282–286](2/pdf/282_FFGFT_HLV_CP_Teilbarkeit_En.pdf))
+and the verdict record (`2/Dok291_Skripte/`) are retained for completeness.
 
 ### Internal representations and computational routes
 
@@ -134,7 +148,7 @@ types (Doc. 270): Type I preserves mode structure, Type II is lossy,
 Type III is bijective (Hilbert representation). This classification
 closes a family of pseudo-paradoxes about dimensional reduction.
 
-The **correction register** (Doc. 190, K1–K4, P1–P38) records every
+The **correction register** (Doc. 190, K1–K4, P1–P43) records every
 correction and refinement with date and status. Nothing is silently
 overwritten. Errors in earlier script versions are archived as
 documented error states, not deleted.
@@ -164,7 +178,7 @@ measurable (Doc. 230).
 |----------|------|
 | 🔬 Interactive Portal | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo v1.1.6 | [DOI 10.5281/zenodo.21061423](https://doi.org/10.5281/zenodo.21061423) |
+| 📦 Zenodo v1.1.7 | _DOI assigned on upload_ (supersedes [21061423](https://doi.org/10.5281/zenodo.21061423)) |
 | 🎵 Spotify | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
@@ -227,7 +241,7 @@ reference preambles from `2/Sources/pri-end/`. Chapter content in
 
 The **correction register** [Doc. 190](2/pdf/190_T0_Korrekturen_De.pdf)
 documents every correction and refinement with date, status, and
-affected documents — K1–K4 (errors) and P1–P38 (refinements).
+affected documents — K1–K4 (errors) and P1–P43 (refinements).
 Nothing is silently overwritten.
 
 The **changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)
@@ -261,6 +275,7 @@ Additional standalone editions: *FFGFT Narrative — The Cosmic Brain*,
 
 | Version | DOI | Focus |
 |---------|-----|-------|
+| v1.1.7 | _on upload_ | Lepton sector audit (Doc. 292), Koide phase θ=2/9 characterised as the circulant phase (Doc. 291), α two-route overdetermination, tolerance methodology |
 | v1.1.6 | [21061423](https://doi.org/10.5281/zenodo.21061423) | FFGFT↔HLV bridge (Doc. 282–286), Koide-phase θ=2/9 elimination, dynamic/kinetic sector |
 | v1.1.3 | [20640799](https://doi.org/10.5281/zenodo.20640799) | Koide sector, projection chain, CMB, ξ→φ revised |
 | v1.1.2 | [20474821](https://doi.org/10.5281/zenodo.20474821) | Book series (5 volumes, 3 KDP formats) |
