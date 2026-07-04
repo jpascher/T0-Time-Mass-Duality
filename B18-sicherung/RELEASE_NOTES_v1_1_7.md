@@ -1,6 +1,6 @@
 # Release Notes — v1.1.7 (July 2026)
 
-**DOI:** _assigned on Zenodo upload_ (supersedes v1.1.6 · [10.5281/zenodo.21061423](https://doi.org/10.5281/zenodo.21061423))
+**DOI:** [10.5281/zenodo.21158441](https://doi.org/10.5281/zenodo.21158441) (supersedes v1.1.6 · [10.5281/zenodo.21061423](https://doi.org/10.5281/zenodo.21061423))
 
 Running corrections: **[2/PDFs/190_T0_Korrekturen_De.pdf](2/PDFs/190_T0_Korrekturen_De.pdf)**
 Change log: **[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**

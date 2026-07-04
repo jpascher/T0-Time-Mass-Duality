@@ -107,8 +107,23 @@ knowledge: it proves 2/9 cannot come from any flat/topological source, so the
 principle behind it is dynamical. The value is fixed and its origin
 identified — the Koide phase is settled.
 
+A **second, independent witness** of the same value comes from geometry
+([Doc. 293](2/PDFs/293_Ikosaeder_Theta_2_9_En.pdf)): embed the electron mode
+of the C₃ fibre in the icosahedral group A₅ (C₃ < A₅) and apply the five-fold
+rotation — the electron redistributes with denominator-9 weights, and the
+weight into the trivial mode is **exactly 2/9**, with no 2/9 input, from
+five-foldness alone (icosahedron-specific: 0/200 random axes hit the value).
+Koide-2/9 (from the masses) and geometry-2/9 (from the redistribution) thus hit
+the same value as a **convergence of two witnesses**; 2/9 is a
+model-independent translation invariant. What remains open is only a direct
+mechanism coupling the redistribution weights to the mass ratios without the
+Koide detour — the value itself is doubly witnessed. **No** new particle
+follows from the scale-free pattern (occupation is scale-bound, emptiness
+theorem).
+
 Reproducibility: `2/Dok292_Skripte/` (lepton check, parts A–L),
-`2/Dok291_Skripte/` (θ=2/9 mechanism scripts).
+`2/Dok291_Skripte/` (θ=2/9 mechanism scripts),
+`2/Dok293_Skripte/` (icosahedral redistribution, p₀=2/9 exact + robustness).
 
 ### External cross-check (HLV / BD17A) — negative
 
@@ -275,6 +290,7 @@ Additional standalone editions: *FFGFT Narrative — The Cosmic Brain*,
 
 | Version | DOI | Focus |
 |---------|-----|-------|
+| v1.1.9 | _assigned on upload_ | θ=2/9 as a parameter-free C₃-in-A₅ geometric invariant / second witness (Doc. 293), shared φ-icosahedral object and HLV test direction (Doc. 294) |
 | v1.1.7 | [21158441](https://doi.org/10.5281/zenodo.21158441) | Lepton sector audit (Doc. 292), Koide phase θ=2/9 characterised as the circulant phase (Doc. 291), α two-route overdetermination, tolerance methodology |
 | v1.1.6 | [21061423](https://doi.org/10.5281/zenodo.21061423) | FFGFT↔HLV bridge (Doc. 282–286), Koide-phase θ=2/9 elimination, dynamic/kinetic sector |
 | v1.1.3 | [20640799](https://doi.org/10.5281/zenodo.20640799) | Koide sector, projection chain, CMB, ξ→φ revised |

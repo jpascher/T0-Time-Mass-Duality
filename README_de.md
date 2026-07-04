@@ -113,8 +113,23 @@ keiner flachen/topologischen Quelle stammen kann, das Prinzip dahinter also
 dynamisch ist. Der Wert steht fest und seine Herkunft ist geklärt — die
 Koide-Phase ist erledigt.
 
+Ein **zweiter, unabhängiger Zeuge** desselben Werts kommt aus der Geometrie
+([Dok. 293](2/PDFs/293_Ikosaeder_Theta_2_9_De.pdf)): bettet man den
+Elektron-Mode der C₃-Faser in die Ikosaedergruppe A₅ ein (C₃ < A₅) und wendet
+die fünfzählige Drehung an, verteilt sich das Elektron mit Nenner-9-Gewichten,
+und das Gewicht in den trivialen Mode ist **exakt 2/9** — ohne jede
+2/9-Eingabe, allein aus der 5-Zähligkeit (ikosaeder-spezifisch: 0/200 zufällige
+Achsen treffen den Wert). Koide-2/9 (aus den Massen) und Geometrie-2/9 (aus der
+Umverteilung) treffen damit denselben Wert als **Konvergenz zweier Zeugen**;
+2/9 ist ein modell-unabhängiger Translations-Invariant. Offen bleibt allein ein
+direkter Mechanismus, der die Umverteilungs-Gewichte ohne den Koide-Umweg an die
+Massenverhältnisse koppelt — der Wert selbst ist doppelt bezeugt. Aus dem
+skalenfreien Muster folgt **kein** neues Teilchen (Besetzung skalengebunden,
+Leerheitssatz).
+
 Reproduzierbarkeit: `2/Dok292_Skripte/` (Leptonen-Check, Teile A–L),
-`2/Dok291_Skripte/` (θ=2/9-Mechanismus-Skripte).
+`2/Dok291_Skripte/` (θ=2/9-Mechanismus-Skripte),
+`2/Dok293_Skripte/` (ikosaedrische Umverteilung, p₀=2/9 exakt + Robustheit).
 
 ### Externer Gegencheck (HLV / BD17A) — negativ
 
@@ -284,6 +299,7 @@ Zusätzliche Einzelausgaben: *FFGFT Narrativ — Das Kosmische Gehirn*,
 
 | Version | DOI | Schwerpunkt |
 |---------|-----|-------------|
+| v1.1.9 | _wird beim Upload vergeben_ | θ=2/9 als parameterfreier C₃-in-A₅-Geometrie-Invariant / zweiter Zeuge (Dok. 293), geteiltes φ-ikosaedrisches Objekt und HLV-Prüfrichtung (Dok. 294) |
 | v1.1.7 | [21158441](https://doi.org/10.5281/zenodo.21158441) | Leptonsektor-Prüfung (Dok. 292), Koide-Phase θ=2/9 als Zirkulant-Phase charakterisiert (Dok. 291), α-Zwei-Wege-Überbestimmung, Toleranz-Methodik |
 | v1.1.6 | [21061423](https://doi.org/10.5281/zenodo.21061423) | FFGFT↔HLV-Brücke (Dok. 282–286), Koide-Phase θ=2/9-Elimination, dynamischer/kinetischer Sektor |
 | v1.1.3 | [20640799](https://doi.org/10.5281/zenodo.20640799) | Koide-Sektor, Projektionskette, CMB, ξ→φ revidiert |
