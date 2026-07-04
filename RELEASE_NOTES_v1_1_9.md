@@ -1,6 +1,6 @@
 # Release Notes — v1.1.9 (July 2026)
 
-**DOI:** _assigned on Zenodo upload_ (supersedes v1.1.7 · [10.5281/zenodo.21158441](https://doi.org/10.5281/zenodo.21158441))
+**DOI:** [10.5281/zenodo.21193007](https://doi.org/10.5281/zenodo.21193007) (supersedes v1.1.7 · [10.5281/zenodo.21158441](https://doi.org/10.5281/zenodo.21158441))
 
 Running corrections: **[2/PDFs/190_T0_Korrekturen_En.pdf](2/PDFs/190_T0_Korrekturen_En.pdf)**
 Changelog: **[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**
@@ -86,6 +86,24 @@ The framework is of secondary importance for FFGFT — it would have been of
 interest only if a load-bearing bridge had been found (cf. the negative BD17A
 verdict in v1.1.7).
 
+### Doc. 295 — The time-winding as a logarithmic spiral
+
+[Doc. 295](2/PDFs/295_Zeit_Logspirale_En.pdf) settles FFGFT-internally what
+FFGFT's **time-winding** is: the K_frak recursion ξ_{n+1}=ξ_n(1−100ξ_n) forces
+it into a **logarithmic spiral with self-similarity ratio e**, i.e. into
+continuous scale invariance. Frozen, the winding closes after exactly 75 turns
+(75 = 1/(100ξ₀)); when ξ runs, ξ_n ≈ 1/(100(n+75)) decays, the cumulative defect
+becomes logarithmic, and with ρ = k+75 one gets ρ = 75·e^{β/2π}. The ratio e is
+the base of the natural logarithm from the harmonic sum — no extra parameter.
+The **choice of axis is a projection**: because T̃·m = 1 couples and nothing
+factorises, "time rolls up" is an artificial shift onto one axis. If time is set
+continuous, mass runs along and **space varies** (dual projection). The factor
+100 is **axis-symmetric** — worked out numerically: the per-step defect is equal
+on the time and mass/space sides (100ξ_n), both projections give the same ratio
+e. No axis is ontologically privileged; both variants are mathematical models,
+not reality. The placement relative to HLV's spiral time (a candidate, testable:
+"ratio e, yes or no?") comes at the end.
+
 ---
 
 ## Core derivations (as of v1.1.9)
@@ -111,6 +129,8 @@ verdict in v1.1.7).
 over random axes and the n-fold series), numpy-only.
 `2/Dok294_Skripte/` — angle-spectrum discrimination of the shared object
 (RMS-distance metric), numpy-only.
+`2/Dok295_Skripte/` — time-winding: 75-closure, log spiral (ratio e), dual
+time↔mass projection (factor 100 axis-symmetric), numpy-only.
 `2/Dok292_Skripte/` — lepton empirics check (parts A–L).
 `2/Dok291_Skripte/` — θ = 2/9 mechanism scripts.
 

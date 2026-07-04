@@ -294,7 +294,7 @@ Additional standalone editions: *FFGFT Narrative — The Cosmic Brain*,
 
 | Version | DOI | Focus |
 |---------|-----|-------|
-| v1.1.9 | [21193007](https://doi.org/10.5281/zenodo.21193007) | θ=2/9 as a parameter-free C₃-in-A₅ geometric invariant / second witness (Doc. 293), shared φ-icosahedral object and HLV test direction (Doc. 294) |
+| v1.1.9 | [21193007](https://doi.org/10.5281/zenodo.21193007) | θ=2/9 as a parameter-free C₃-in-A₅ geometric invariant / second witness (Doc. 293), shared φ-icosahedral object and HLV test direction (Doc. 294), time-winding as a log spiral with ratio e and projection duality (Doc. 295) |
 | v1.1.7 | [21158441](https://doi.org/10.5281/zenodo.21158441) | Lepton sector audit (Doc. 292), Koide phase θ=2/9 characterised as the circulant phase (Doc. 291), α two-route overdetermination, tolerance methodology |
 | v1.1.6 | [21061423](https://doi.org/10.5281/zenodo.21061423) | FFGFT↔HLV bridge (Doc. 282–286), Koide-phase θ=2/9 elimination, dynamic/kinetic sector |
 | v1.1.3 | [20640799](https://doi.org/10.5281/zenodo.20640799) | Koide sector, projection chain, CMB, ξ→φ revised |

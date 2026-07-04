@@ -1,6 +1,6 @@
 # Release Notes — v1.1.9 (Juli 2026)
 
-**DOI:** _wird beim Zenodo-Upload vergeben_ (löst v1.1.7 ab · [10.5281/zenodo.21158441](https://doi.org/10.5281/zenodo.21158441))
+**DOI:** [10.5281/zenodo.21193007](https://doi.org/10.5281/zenodo.21193007) (löst v1.1.7 ab · [10.5281/zenodo.21158441](https://doi.org/10.5281/zenodo.21158441))
 
 Laufende Korrekturen: **[2/PDFs/190_T0_Korrekturen_De.pdf](2/PDFs/190_T0_Korrekturen_De.pdf)**
 Änderungsprotokoll: **[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**
@@ -87,6 +87,25 @@ Objekt ein. Der Rahmen ist für FFGFT von untergeordneter Bedeutung — er wäre
 nur dann interessant gewesen, wenn eine tragende Brücke gefunden worden wäre
 (vgl. das negative BD17A-Verdikt in v1.1.7).
 
+### Dok. 295 — Die Zeit-Windung als logarithmische Spirale
+
+[Dok. 295](2/PDFs/295_Zeit_Logspirale_De.pdf) klärt FFGFT-intern, was FFGFTs
+**Zeit-Windung** ist: die K_frak-Rekursion ξ_{n+1}=ξ_n(1−100ξ_n) zwingt sie zu
+einer **logarithmischen Spirale mit Selbstähnlichkeits-Verhältnis e**, also zu
+kontinuierlicher Skaleninvarianz. Eingefroren schließt die Windung nach genau
+75 Umläufen (75 = 1/(100ξ₀)); läuft ξ, zerfällt ξ_n ≈ 1/(100(n+75)), der
+kumulierte Defekt wird logarithmisch, und mit ρ = k+75 folgt ρ = 75·e^{β/2π}.
+Das Verhältnis e ist die Basis des natürlichen Logarithmus aus der harmonischen
+Summe — kein Zusatzparameter. Die **Achsenwahl ist eine Projektion**: weil
+T̃·m = 1 koppelt und nichts faktorisiert, ist „Zeit rollt auf" eine künstliche
+Verschiebung auf eine Achse. Setzt man die Zeit kontinuierlich, zieht die Masse
+mit und der **Raum variiert** (duale Projektion). Der Faktor 100 ist dabei
+**achsensymmetrisch** — durchgerechnet: der Defekt je Schritt ist auf Zeit- und
+Masse/Raum-Seite gleich (100ξ_n), beide Projektionen ergeben dasselbe
+Verhältnis e. Keine Achse ist ontologisch ausgezeichnet; beide Varianten sind
+mathematische Modelle, nicht die Realität. Die Einordnung zu HLVs Spiral-Zeit
+(Kandidat, prüfbar: „Verhältnis e, ja oder nein?") steht am Ende.
+
 ---
 
 ## Kernableitungen (Stand v1.1.9)
@@ -112,6 +131,8 @@ nur dann interessant gewesen, wenn eine tragende Brücke gefunden worden wäre
 über zufällige Achsen und die n-zählige Reihe), numpy-only.
 `2/Dok294_Skripte/` — Winkelspektrum-Diskriminierung des geteilten Objekts
 (RMS-Distanz-Metrik), numpy-only.
+`2/Dok295_Skripte/` — Zeit-Windung: 75-Schließung, log-Spirale (Verhältnis e),
+duale Zeit↔Masse-Projektion (Faktor 100 achsensymmetrisch), numpy-only.
 `2/Dok292_Skripte/` — Leptonen-Empirie-Check (Teile A–L).
 `2/Dok291_Skripte/` — θ = 2/9-Mechanismus-Skripte.
 

@@ -302,7 +302,7 @@ Zusätzliche Einzelausgaben: *FFGFT Narrativ — Das Kosmische Gehirn*,
 
 | Version | DOI | Schwerpunkt |
 |---------|-----|-------------|
-| v1.1.9 | [21193007](https://doi.org/10.5281/zenodo.21193007) | θ=2/9 als parameterfreier C₃-in-A₅-Geometrie-Invariant / zweiter Zeuge (Dok. 293), geteiltes φ-ikosaedrisches Objekt und HLV-Prüfrichtung (Dok. 294) |
+| v1.1.9 | [21193007](https://doi.org/10.5281/zenodo.21193007) | θ=2/9 als parameterfreier C₃-in-A₅-Geometrie-Invariant / zweiter Zeuge (Dok. 293), geteiltes φ-ikosaedrisches Objekt und HLV-Prüfrichtung (Dok. 294), Zeit-Windung als log-Spirale mit Verhältnis e und Projektions-Dualität (Dok. 295) |
 | v1.1.7 | [21158441](https://doi.org/10.5281/zenodo.21158441) | Leptonsektor-Prüfung (Dok. 292), Koide-Phase θ=2/9 als Zirkulant-Phase charakterisiert (Dok. 291), α-Zwei-Wege-Überbestimmung, Toleranz-Methodik |
 | v1.1.6 | [21061423](https://doi.org/10.5281/zenodo.21061423) | FFGFT↔HLV-Brücke (Dok. 282–286), Koide-Phase θ=2/9-Elimination, dynamischer/kinetischer Sektor |
 | v1.1.3 | [20640799](https://doi.org/10.5281/zenodo.20640799) | Koide-Sektor, Projektionskette, CMB, ξ→φ revidiert |
