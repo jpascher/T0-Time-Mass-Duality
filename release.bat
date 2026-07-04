@@ -1,1 +1,1 @@
-gh release create v1.1.7 --title "Release v1.1.7" --notes-file RELEASE_NOTES_v1_1_7.md
+gh release create v1.1.9 --title "Release v1.1.9" --notes-file RELEASE_NOTES_v1_1_9.md

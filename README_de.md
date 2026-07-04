@@ -1,6 +1,6 @@
 # T0 Zeit-Masse-Dualität · FFGFT
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21158441.svg)](https://doi.org/10.5281/zenodo.21158441)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21193007.svg)](https://doi.org/10.5281/zenodo.21193007)
 
 **FFGFT — Fraktale Feldgeometrische Fundamentaltheorie** zeigt:
 Alle Konstanten des Standardmodells folgen aus einem einzigen
@@ -202,7 +202,7 @@ ist aber prinzipiell messbar (Dok. 230).
 |-----------|------|
 | 🔬 Interaktives Portal | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo v1.1.7 | [DOI 10.5281/zenodo.21158441](https://doi.org/10.5281/zenodo.21158441) |
+| 📦 Zenodo v1.1.9 | [DOI 10.5281/zenodo.21193007](https://doi.org/10.5281/zenodo.21193007) |
 | 🎵 Spotify | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
@@ -299,7 +299,7 @@ Zusätzliche Einzelausgaben: *FFGFT Narrativ — Das Kosmische Gehirn*,
 
 | Version | DOI | Schwerpunkt |
 |---------|-----|-------------|
-| v1.1.9 | _wird beim Upload vergeben_ | θ=2/9 als parameterfreier C₃-in-A₅-Geometrie-Invariant / zweiter Zeuge (Dok. 293), geteiltes φ-ikosaedrisches Objekt und HLV-Prüfrichtung (Dok. 294) |
+| v1.1.9 | [21193007](https://doi.org/10.5281/zenodo.21193007) | θ=2/9 als parameterfreier C₃-in-A₅-Geometrie-Invariant / zweiter Zeuge (Dok. 293), geteiltes φ-ikosaedrisches Objekt und HLV-Prüfrichtung (Dok. 294) |
 | v1.1.7 | [21158441](https://doi.org/10.5281/zenodo.21158441) | Leptonsektor-Prüfung (Dok. 292), Koide-Phase θ=2/9 als Zirkulant-Phase charakterisiert (Dok. 291), α-Zwei-Wege-Überbestimmung, Toleranz-Methodik |
 | v1.1.6 | [21061423](https://doi.org/10.5281/zenodo.21061423) | FFGFT↔HLV-Brücke (Dok. 282–286), Koide-Phase θ=2/9-Elimination, dynamischer/kinetischer Sektor |
 | v1.1.3 | [20640799](https://doi.org/10.5281/zenodo.20640799) | Koide-Sektor, Projektionskette, CMB, ξ→φ revidiert |
