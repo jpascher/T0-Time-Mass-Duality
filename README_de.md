@@ -131,15 +131,18 @@ Reproduzierbarkeit: `2/Dok292_Skripte/` (Leptonen-Check, Teile A–L),
 `2/Dok291_Skripte/` (θ=2/9-Mechanismus-Skripte),
 `2/Dok293_Skripte/` (ikosaedrische Umverteilung, p₀=2/9 exakt + Robustheit).
 
-### Externer Gegencheck (HLV / BD17A) — negativ
+### Verhältnis zu HLV (extern, nachrangig)
 
-Die Frage, ob θ=2/9 erzwungen wird, wurde zusätzlich blind gegen Marcel
-Krügers HLV-/BD17A-Holonomie-Mechanismus (Information Physics Institute)
-geprüft, unter symmetrischer Vorregistrierung. Das Verdikt war **negativ**
-(BLOCKED) — die vorhergesagte Richtung, da eine flache Determinanten-Linien-
-Holonomie einen transzendenten Winkel nicht als topologische Invariante
-tragen kann. Das betrifft den externen Rahmen, nicht FFGFTs eigene Ergebnisse,
-die unverändert bestehen. Die früheren Struktur-Vergleichsdokumente
+FFGFT und HLV (Marcel Krüger, Information Physics Institute) teilen dasselbe
+φ-ikosaedrische Objekt, auf dem θ=2/9 ein Invariant ist; weil FFGFT die
+absolute Skala besitzt (Referenzpunkt E₀) und HLV nicht, ist die Prüfrichtung
+einseitig FFGFT→HLV, ohne HLVs eigene Formulierungen zu übernehmen
+([Dok. 294](2/PDFs/294_HLV_Pruefrichtung_De.pdf)). Die frühere blinde,
+symmetrisch vorregistrierte Prüfung, ob θ=2/9 durch HLVs BD17A-Holonomie-
+Mechanismus erzwungen wird, fiel **negativ** (BLOCKED) aus — die vorhergesagte
+Richtung, da eine flache Holonomie einen transzendenten Winkel nicht als
+topologische Invariante tragen kann; das betrifft den externen Rahmen, nicht
+FFGFTs eigene Ergebnisse. Die Struktur-Vergleichsdokumente
 ([Dok. 282–286](2/pdf/282_FFGFT_HLV_CP_Teilbarkeit_De.pdf)) und der
 Verdikt-Record (`2/Dok291_Skripte/`) sind der Vollständigkeit halber erhalten.
 

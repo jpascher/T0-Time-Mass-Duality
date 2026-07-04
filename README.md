@@ -125,16 +125,20 @@ Reproducibility: `2/Dok292_Skripte/` (lepton check, parts A–L),
 `2/Dok291_Skripte/` (θ=2/9 mechanism scripts),
 `2/Dok293_Skripte/` (icosahedral redistribution, p₀=2/9 exact + robustness).
 
-### External cross-check (HLV / BD17A) — negative
+### Relation to HLV (external, secondary)
 
-The θ=2/9 forcing question was also put to a blind cross-check against Marcel
-Krüger's HLV / BD17A holonomy mechanism (Information Physics Institute), under
-a symmetric pre-registration. The verdict was **negative** (BLOCKED) — the
-anticipated direction, since a flat determinant-line holonomy cannot carry a
-transcendental angle as a topological invariant. This concerns the external
-framework, not FFGFT's own results, which stand unchanged. The earlier
-structural comparison documents ([Doc. 282–286](2/pdf/282_FFGFT_HLV_CP_Teilbarkeit_En.pdf))
-and the verdict record (`2/Dok291_Skripte/`) are retained for completeness.
+FFGFT and HLV (Marcel Krüger, Information Physics Institute) share the same
+φ-icosahedral object, on which θ=2/9 is an invariant; because FFGFT holds the
+absolute scale (reference point E₀) and HLV does not, the test direction is
+one-sided, FFGFT→HLV, without adopting HLV's own formulations
+([Doc. 294](2/PDFs/294_HLV_Pruefrichtung_En.pdf)). The earlier blind,
+symmetrically pre-registered check of whether θ=2/9 is forced by HLV's
+BD17A holonomy mechanism came out **negative** (BLOCKED) — the anticipated
+direction, since a flat holonomy cannot carry a transcendental angle as a
+topological invariant; this concerns the external framework, not FFGFT's own
+results. The structural comparison documents
+([Doc. 282–286](2/pdf/282_FFGFT_HLV_CP_Teilbarkeit_En.pdf)) and the verdict
+record (`2/Dok291_Skripte/`) are retained for completeness.
 
 ### Internal representations and computational routes
 
