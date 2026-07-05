@@ -23,7 +23,7 @@ v1.2.1 ist FFGFT-intern gerahmt. Kern: die Zeit-Windung — in v1.1.9 (Dok. 295)
 
 **Rahmungs-Korrektur (Johann):** ein erster Anlauf war als v1.2.0 zu HLV-lastig gerahmt (Spiral-Zeit-Abgleich im Schaufenster). Das Release spricht **nur von FFGFT** — HLV ist für FFGFT nachrangig (stehende Vorgabe; vgl. negatives BD17A-Verdikt v1.1.7). Die zugrunde liegende Doku-Arbeit an 294/295 (Abgrenzung, Abgleich, Open-System-Erdung, zwei Skripte) bleibt in den Docs erhalten und ist in den Detail-Nachträgen vom 4./5. Juli unten protokolliert; sie ist aber nicht der Release-Schwerpunkt.
 
-**Release-Satz:** Release Notes v1.2.1 DE+EN erstellt (FFGFT-only); README DE+EN Zenodo-Zeile + Versionshistorie auf v1.2.1 (FFGFT-Schwerpunkt). DOI wird beim Zenodo-Upload vergeben (löst v1.1.9/21193007 ab); drei DOI-Platzhalter in README (Badge, Zenodo-Zeile, Versionshistorie) nach Upload nachzuziehen — der Badge zeigt bis dahin die v1.1.9-DOI. Gesamtzip als FFGFT_v1_2_1_Release_2026-07-05.zip.
+**Release-Satz:** Release Notes v1.2.1 DE+EN erstellt (FFGFT-only); README DE+EN Zenodo-Zeile + Versionshistorie auf v1.2.1 (FFGFT-Schwerpunkt). DOI **10.5281/zenodo.21203746** vergeben (löst v1.1.9/21193007 ab); alle drei DOI-Stellen in README (Badge, Zenodo-Zeile, Versionshistorie) sowie die Release-Notes-Köpfe DE+EN gefüllt. Gesamtzip als FFGFT_v1_2_1_Release_2026-07-05.zip.
 
 ## 4. Juli 2026 — v1.1.9: zwei neue Dokumente (293/294) zur geometrischen Herkunft von θ=2/9
 
