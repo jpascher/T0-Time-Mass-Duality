@@ -17,6 +17,22 @@ DOI 10.5281/zenodo.21158441 (löst v1.1.6/21061423 ab). Platzhalter nachgezogen:
 
 ---
 
+## 6. Juli 2026 — Dok. 296: Zeit, Offenheit und Invarianz (neues Dokument, DE+EN je 7 S.)
+
+Dok. 296 (DE+EN, je 7 S., 0 Glyphen) fasst den narrativen Gedankenbogen dieser Session zusammen. Fünf Abschnitte:
+
+(1) **Beobachter, Skala und die Einfachheit des Kerns** — jeder Beobachter sieht eine Projektion von T⁴ auf seine Skala, nicht das Objekt selbst; Projektionen verschiedener Skalen müssen sich unterscheiden (struktureller Grund für QM↔RT-Schwierigkeit); ein Parameter ξ=4/30000 trägt die gesamte Komplexität des Standardmodells — die Komplexität sitzt in den Projektionen, nicht im Kern.
+
+(2) **Vom Körper zur Gesellschaft** — zwei Augen sind bereits zwei Beobachter; Tiefe ist Rekonstruktion, nicht direktes Sehen; T⁴ darunter ist der Grund der stabilen 3D-Projektion; dieselbe Struktur auf sozialer Ebene (Konflikte als Skalenkollisionen, Paradigmenwechsel als Skalenwechsel, Wissenschaft als systematische Triangulation von Projektionen).
+
+(3) **Skalenfolge als Abfolge von Projektionswechseln** — Teilchen (Z₃, SU(3), diskrete Massen) → atomar (EM-Resonanzen) → kristallin (Translationssymmetrie, kollektive Moden) → biologisch (gebrochene Symmetrien, Kohärenzfenster) → galaktisch (Gravitation, log-spirale Selbstähnlichkeit der K_frak-Rekursion in Spiralgalaxien).
+
+(4) **Skalenübergänge und ihre Anomalien** — Anomalien liegen im Übergang (Phasenübergänge, Dekohärenz, Emergenz), nicht in der Skala selbst; für FFGFT ein gerichteter Hinweis auf Projektionswechsel-Stellen.
+
+(5) **Spekulation (P35)** — unbeobachtbare Zwischenbereiche zwischen zugänglichen Skalen; Dunkle Materie/Energie als mögliche Signaturen von Zwischenskalen, auf die keine unserer Projektionen trifft; gerichtete Spekulation, kein Claim.
+
+Dann Rekursion (keine erreichbaren Ränder, kein Anfang/kein Ende), die vier Eigenschaften (ausgerollt / zeitlich kontinuierlich / Raum gekrümmt / invariabel), neue Probleme als Fortschrittszeichen, P35-Abschlussanmerkung (kosmologische Übertragung = Konsequenz, kein eigenständiges Modell; Widerspruchsfreiheit ≠ Vollständigkeit). IPI-Ankündigung (6. Juli) versandt.
+
 ## 5. Juli 2026 — v1.2.1: FFGFT-interne Klärung der Zeit-Windung (zwei gleichwertige Darstellungen)
 
 v1.2.1 ist FFGFT-intern gerahmt. Kern: die Zeit-Windung — in v1.1.9 (Dok. 295) als logarithmische Spirale mit Verhältnis e etabliert — ist **nicht an ein Bild gebunden**. Dieselbe Nichtschließung liegt in zwei gleichwertigen Darstellungen vor: geometrisch als log-Spirale (Dok. 295) und im Hilbertraum als Gedächtniskern (Fourier-Transformierte der diskreten Spektraldichte Σ_k g_k²δ(ω−ω_k) des T⁴-Connection-Laplace, Dok. 283, oszillierend/diskret-spektral mit Revivals/BLP-Rückfluss 5,125), auf der verlustfreien Bijektion H = L²(T⁴)⊗ℂ³ (Dok. 230/282, Typ III der Projektionskette Dok. 270). Die Hilbertraum-Übersetzung von FFGFT beschreibt damit auch die Zeit — mehrere gleichwertige Wege zum selben Ergebnis. Ausdrücklich als **Darstellungs-Robustheit, keine zusätzliche Evidenz** gehalten (Übersetzung ist nicht Begründung, P35); die Beweiskraft sitzt bei den unabhängigen Zeugen (z. B. θ=2/9 aus Koide UND aus der Geometrie, Dok. 293), nicht bei gleichwertigen Übersetzungen.
