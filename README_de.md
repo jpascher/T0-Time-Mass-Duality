@@ -1,6 +1,6 @@
 # T0 Zeit-Masse-Dualität · FFGFT
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21203746.svg)](https://doi.org/10.5281/zenodo.21203746)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21266963.svg)](https://doi.org/10.5281/zenodo.21266963)
 
 **FFGFT — Fraktale Feldgeometrische Fundamentaltheorie** zeigt:
 Alle Konstanten des Standardmodells folgen aus einem einzigen
@@ -205,7 +205,7 @@ ist aber prinzipiell messbar (Dok. 230).
 |-----------|------|
 | 🔬 Interaktives Portal | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo v1.2.1 | [DOI 10.5281/zenodo.21203746](https://doi.org/10.5281/zenodo.21203746) (löst v1.1.9 · [21193007](https://doi.org/10.5281/zenodo.21193007) ab) |
+| 📦 Zenodo v1.2.2 | [DOI 10.5281/zenodo.21266963](https://doi.org/10.5281/zenodo.21266963) (löst v1.2.1 · [21203746](https://doi.org/10.5281/zenodo.21203746) ab) |
 | 🎵 Spotify | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
@@ -302,7 +302,7 @@ Zusätzliche Einzelausgaben: *FFGFT Narrativ — Das Kosmische Gehirn*,
 
 | Version | DOI | Schwerpunkt |
 |---------|-----|-------------|
-| v1.2.2 | *(Zenodo-Upload)* | FFGFT-interne Klärungen: Standardmodell als dekompaktifizierte Projektion der kompakten T⁴-Struktur (Dok. 298); der fraktale Korrekturfaktor **K_frak = 1 − 100ξ = 74/75** aus dem Schließungs-Komma der 75-Windung gelesen, mit dem Anker Dok. 133 (RG-Lauf, m_e/m_μ-Konsistenz) — das Komma re-exprimiert 100ξ, leitet sie nicht ab (Dok. 300); ι-Einbettungsprotokoll mit abgeleitetem Zeugen (BLP-Rückfluss 5,125), Zeitsektor **zugelassen, nicht erzwungen** (Dok. 299). HLV nachrangig, Prüfrichtung FFGFT→HLV |
+| v1.2.2 | [21266963](https://doi.org/10.5281/zenodo.21266963) | FFGFT-interne Klärungen: Standardmodell als dekompaktifizierte Projektion der kompakten T⁴-Struktur (Dok. 298); der fraktale Korrekturfaktor **K_frak = 1 − 100ξ = 74/75** aus dem Schließungs-Komma der 75-Windung gelesen, mit dem Anker Dok. 133 (RG-Lauf, m_e/m_μ-Konsistenz) — das Komma re-exprimiert 100ξ, leitet sie nicht ab (Dok. 300); ι-Einbettungsprotokoll mit abgeleitetem Zeugen (BLP-Rückfluss 5,125), Zeitsektor **zugelassen, nicht erzwungen** (Dok. 299). HLV nachrangig, Prüfrichtung FFGFT→HLV |
 | v1.2.1 | [21203746](https://doi.org/10.5281/zenodo.21203746) | FFGFT-interne Klärung der Zeit-Windung: die log-Spirale mit Verhältnis e (Dok. 295) liegt gleichwertig auch als Hilbertraum-Gedächtniskern vor (Dok. 283, auf der verlustfreien Bijektion H = L²(T⁴)⊗ℂ³, Dok. 230/282) — die Hilbertraum-Übersetzung beschreibt auch die Zeit; mehrere gleichwertige Wege zum selben Ergebnis (Darstellungs-Robustheit, keine zusätzliche Evidenz, P35). Dazu Dok. 296: Zeit, Offenheit und Invarianz — narrativer Überblick über Beobachter/Skala-Struktur, Skalenfolge als Projektionswechsel, Übergänge/Anomalien, offene Zeitstruktur (kein Anfang, kein Ende). Dazu Dok. 297: HLV als mögliche Untermenge — Kandidat-Notiz; Markov-Grenzfall/Hard-Reset-Kern als Einbettungskandidat für Marcels U₃; Akkumulation als eigentliche Gedächtnisleistung |
 | v1.1.9 | [21193007](https://doi.org/10.5281/zenodo.21193007) | θ=2/9 als parameterfreier C₃-in-A₅-Geometrie-Invariant / zweiter Zeuge (Dok. 293), geteiltes φ-ikosaedrisches Objekt und HLV-Prüfrichtung (Dok. 294), Zeit-Windung als log-Spirale mit Verhältnis e und Projektions-Dualität (Dok. 295) |
 | v1.1.7 | [21158441](https://doi.org/10.5281/zenodo.21158441) | Leptonsektor-Prüfung (Dok. 292), Koide-Phase θ=2/9 als Zirkulant-Phase charakterisiert (Dok. 291), α-Zwei-Wege-Überbestimmung, Toleranz-Methodik |
