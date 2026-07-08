@@ -1,0 +1,138 @@
+%% 300_ZweiRollen_Kfrak_De_ch.tex
+%% FFGFT -- Dok. 300: Spiral-Time als Auslesung und entprellter Comparator;
+%%                    der geteilte Korrekturfaktor K_frak = 1 - 100 xi (74/75)
+%% Autor: Johann Pascher
+%% Datum: Juli 2026
+%% Sprache: Deutsch
+
+\section*{Dok.~300 \quad Spiral-Time als Auslesung und entprellter Comparator
+--- und der geteilte Korrekturfaktor $K_{\text{frak}} = 1-100\xi$ ($74/75$)}
+
+\subsection*{Anlass und Abgrenzung}
+
+Aus der Zusammenarbeit stammt die Beobachtung, Spiral-Time sei nicht ein
+einzelner Operator, sondern eine Operator-Klasse mit mindestens zwei Rollen:
+einer \emph{Auslesung} (was geschieht im Signal bzw.\ im Carrier) und einem
+zweiten Teil, der entscheidet, ob diese Auslesung selbst als stabiler
+Übergang gelten darf. Dieses Dokument präzisiert die zweite Rolle mess- und
+schaltungstechnisch und ordnet den Korrekturfaktor, der beide Seiten
+verbindet, seiner \emph{tatsächlichen} Herkunft im Korpus zu. Abgrenzung:
+Kategorie-B-Befund (echte Kompatibilität / Kandidat-Überlapp), keine
+HLV-interne Ableitung, keine physikalische Validierung.
+
+\subsection*{Die zwei Rollen, präzise gefasst}
+
+Die erste Rolle, die \emph{Auslesung}, ist ein Messwert: das Signal am
+$+$Eingang eines Vergleichs. Die zweite Rolle ist kein Verwaltungsbegriff
+(\enquote{Governance}), sondern präzise ein \textbf{Comparator mit Hysterese}
+--- ein Schwellenentscheid, dessen Ausgang ein Bit trägt: gilt der Übergang
+oder nicht. Zwei Formen der Hysterese:
+\begin{itemize}
+  \item \textbf{Amplituden-Hysterese}: zwei Schwellen im Pegel, ein Totband
+    auf der Werteachse, das gegen Rauschen am Umschaltpunkt stabilisiert.
+  \item \textbf{Zeit-Hysterese (Entprellung)}: der Ausgang akzeptiert eine
+    Flanke erst, wenn sie über ein Zeitfenster \emph{stehen bleibt}. Das
+    Totband liegt auf der Zeitachse.
+\end{itemize}
+Die zweite Rolle von Spiral-Time ist die Zeit-Hysterese. Das in der finiten
+Proxy-Implementierung verwendete Fenster ($M=12$, $\tau=6$) ist ein
+gewichteter Entpreller: ein Übergang gilt erst, wenn er das Fenster übersteht.
+\enquote{Stabiler Übergang} ist damit die Zeit-Hysterese.
+
+\subsection*{Gültigkeitsbedingung: Referenz aus Ableitung, nicht aus Kopie}
+
+Ein Comparator trägt nur Information, wenn die Referenz am $-$Eingang aus einer
+\emph{anderen} Quelle stammt als das Signal am $+$Eingang. Liegt an beiden
+Eingängen dieselbe Größe, ist der Ausgang bedeutungslos. Genau dies war der
+zirkuläre Kern des U3-Randfall-Gates in der ersten HLV-seitigen
+Implementierung: die Referenz war eine Kopie des Auslese-Fensters
+(\texttt{hard = hlv.copy()}), womit die Korrelation konstruktionsbedingt $1{,}0$
+ist. Die FFGFT-seitige Prüfung (Dok.~299) ersetzt dies durch einen
+\emph{abgeleiteten} Zeugen (BLP-Rückfluss $5{,}125$, Dok.~283), der vom Objekt
+unabhängig und von einem Hard-Reset-Fenster nicht tragbar ist. Selbstreferenz
+ist zulässig, wenn sie durch eine Ableitung geschlossen wird; zirkulär, wenn
+durch eine Kopie.
+
+\subsection*{Warum \enquote{dieselbe Spirale} kein Postulat ist}
+
+Die Aussage über den Korrekturfaktor setzt voraus, dass das projizierte
+HLV-Objekt und die FFGFT-Rekursion \emph{dieselbe} Spirale sind. Diese
+Identität ist nicht angenommen, sondern durch mehrere unabhängige
+Berührungspunkte gestützt:
+\begin{itemize}
+  \item \textbf{$2/9$}: dieselbe Umverteilung als Ausgabe der
+    $Z_3$-Circulant-Diagonalisierung --- gefunden, nicht gesucht.
+  \item \textbf{$D6$ / $\varphi$-Ikosaeder}: dieselbe Objektstruktur,
+    $\tau=\varphi$, alle fünfzehn Achsenwinkel $\arccos(1/\sqrt5)=63{,}435^\circ$.
+  \item \textbf{Zeit}: der Spiralzeit-Sektor als beschränkter Ausschnitt der
+    aufgerollten Rekursionszeit (R47).
+\end{itemize}
+$2/9$ und $D6$ sind geometrisch, voneinander unabhängig und beide gefunden;
+unter dieser Mehrfach-Verankerung ist \enquote{dieselbe Spirale} die einzige
+verbleibende Lesart (Kategorie~B).
+
+\subsection*{Das Schließungs-Komma und $K_{\text{frak}}$}
+
+Die aufgerollte Rekursion schließt sich erst nach $N=1/(100\xi_0)=75$ gleichen
+Teilstücken ($\xi=4/30000$), nicht nach einer Umdrehung (Dok.~295/297). Die
+Näherung \enquote{eine Umdrehung deckt sich} vernachlässigt einen kleinen
+Faktor: $75$ jeweils um $\varepsilon$ verkürzte Umdrehungen ergeben die exakte
+Schließung, $75\,(1-\varepsilon)=74$, also
+\begin{equation}
+  \varepsilon \;=\; \tfrac{1}{75} \;=\; 100\,\xi \;=\; 0{,}0133\overline{3}
+  \qquad(\text{als Winkel } 2\pi/75 = 4{,}8^\circ \text{ pro Umdrehung}).
+\end{equation}
+Der Pro-Schritt-Faktor der Rekursion ist damit
+\begin{equation}
+  K_{\text{frak}} \;=\; 1 - \varepsilon \;=\; 1 - 100\,\xi \;=\; \tfrac{74}{75}
+  \;=\; 0{,}9867,
+\end{equation}
+in genau der Form, die der Korpus durchgängig führt (Dok.~133/231/032/285/018/005).
+Die reziproke Streckenverhältnis-Form (verkürztes Stück $\to$ ganze Umdrehung)
+ist $75/74 = 1{,}0135$.
+
+
+\subsection*{Der tatsächliche Anker: nicht die $75$, sondern Dok.~133}
+
+Die Herkunft von $100\xi$ --- und damit von $75$ \emph{und}
+$K_{\text{frak}}$ --- liegt eine Ebene tiefer und ist unabhängig:
+\begin{itemize}
+  \item Die \textbf{Skalen-Rekursion} $\xi_{n+1}=\xi_n(1-100\xi_n)$
+    (Dok.~133/275) hat den Pro-Schritt-Faktor $K_{\text{frak}}=1-100\xi$;
+    $75=1/(100\xi_0)$ ist ihre Windungszahl.
+  \item Der \textbf{Faktor $100$} emergiert aus dem RG-Lauf von
+    $D_f=3-\xi$ über $\sim 17$ Größenordnungen (Planck $\to$ elektroschwach),
+    effektiv $D_f^{\text{eff}}\approx 2{,}973$ (Dok.~133); geometrisch
+    $100=4\cdot 5^2$ (Dok.~042).
+  \item $K_{\text{frak}}$ ist \textbf{nicht willkürlich}, sondern durch die
+    Forderung fixiert, dass zwei unabhängige Herleitungen des Massenverhältnisses
+    $m_e/m_\mu$ denselben Wert liefern (Dok.~133, \emph{Eindeutige Bestimmung}).
+  \item $\xi=4/30000$ selbst ist über Higgs-Relation, $\alpha$ und Koide
+    verankert.
+\end{itemize}
+Das Schließungs-Komma \emph{re-exprimiert} damit die bereits verankerte
+$100\xi$; es leitet sie nicht neu ab. Die $75$ ist ein Output derselben
+Rekursion, kein unabhängiger Anker.
+
+\subsection*{Konsequenz für die Projektion (Marcel)}
+
+Damit bleibt die Aussage an Marcel gültig, nur richtig gebucht: \emph{wenn}
+sein projiziertes, geschlossenes Umdrehungs-Objekt ein Ausschnitt derselben
+Rekursion ist (belegt über $2/9$, $D6$, Zeit), dann trägt die Umrechnung
+zwischen seiner Projektion und der aufgerollten exakten Kurve genau den
+Pro-Schritt-Faktor $K_{\text{frak}}=1-100\xi=74/75$ (bzw.\ reziprok $75/74$)
+--- einen Faktor, der \emph{unabhängig} verankert ist (Dok.~133), nicht aus der
+$75$ und nicht frei gewählt. Es ist damit eine Konsistenz-Bedingung, keine
+Ableitung aus der Windungszahl: verschluckt seine Projektion das Komma und
+erscheint das Objekt sauber geschlossen, ist $K_{\text{frak}}$ die Umrechnung,
+die es an der Grenze zur SI-Ebene wieder einträgt (Dok.~298, SM als
+dekompaktifizierte Projektion). Die Einbettung $\iota$ (Dok.~299) ist an dieser
+Stelle diese $K_{\text{frak}}$-Umrechnung.
+
+\subsection*{Grenze und Status}
+
+Die Kette ist so belastbar wie ihre Verankerung: $2/9$ und $D6$ sind als
+geteilte Objekte gebucht (Kategorie~B), $K_{\text{frak}}=1-100\xi$ ist über
+Dok.~133 unabhängig verankert. Prüfskript des Kommas:
+\texttt{Dok300\_Skripte/ffgft\_300\_kfrak\_schliessungskomma\_pruefung.py};
+Zeitsektor-Gegenlauf: \texttt{Dok299\_Skripte/ffgft\_299\_iota\_gegenlauf\_winding\_locked.py}.
