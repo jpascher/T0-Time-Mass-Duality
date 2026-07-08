@@ -17,6 +17,22 @@ DOI 10.5281/zenodo.21158441 (löst v1.1.6/21061423 ab). Platzhalter nachgezogen:
 
 ---
 
+## 6. Juli 2026 — Dok. 297: HLV als mögliche Untermenge von FFGFT (Kandidat-Notiz, DE+EN je 5 S.)
+
+Dok. 297 hält den Erkenntnisstand der internen HLV/FFGFT-Brückenanalyse als gerichtete Kandidat-Notiz fest (P35: kein abgeschlossener Beweis, benannter nächster Schritt).
+
+**Drei Schritte des Rückblicks:** (1) ursprüngliche Blockade: C₃-in-A₅ auf T⁴/Z₃ direkt nicht sichtbar; (2) Hilbertraum-Transformation öffnet den Weg: auf der ℂ³-Faser ist C₃ < A₅ natürlich zugänglich, θ=2/9 als Z₃-Zirkulant-Phase (Dok. 291) und als parameterfreier Invariant (Dok. 293) — zweifach bezeugt; (3) Konsequenz: HLVs geometrischer Kern könnte eine Untermenge der FFGFT-ℂ³-Fasergeometrie sein.
+
+**Was gesichert ist:** FFGFT enthält C₃ < A₅ über die Hilbertraum-Transformation (zweifach bezeugt). HLV bucht θ=2/9 als Kandidat-Überlapp ohne eigene Ableitung — belegt durch Durchsicht seiner vorliegenden Dokumente (Stage 19, HLV-Consciousness-Bridge1, Runs H–J): θ=2/9 erscheint dort in keiner HLV-internen Herleitung. Run H (H2/skew_J) enthält 1/φ und 1/φ² aber kein C₃-in-A₅-Ergebnis — und ist negative/underdetermined.
+
+**Konkreter Einbettungskandidat:** Marcels U₃ (Gl. 7, Consciousness-Dok.) ist ein Hard-Reset-Kern mit endlichem Träger M_m < 75 — unterhalb der kleinsten kohärenten Einheit der FFGFT-Rekursion (75 Umläufe). Hierarchie: U₃ ⊂ Markov-Limit ⊂ Archimedisch ⊂ Log-Spirale (e) = FFGFT-Kern (Dok. 295/283).
+
+**Darstellung ist nicht Struktur:** Spiralförmig, linear oder polar dargestellt — U₃ bleibt in jeder Koordinatenwahl ein Hard-Reset-Kern. Die geometrische Reichheit liegt in der Darstellung, nicht im Objekt (P35 rückwärts).
+
+**Akkumulation ist die eigentliche Gedächtnisleistung:** U₃ ersetzt statt zu akkumulieren — Vergangenheit jenseits M_m ist unwiederbringlich weg. Die K_frak-Rekursion trägt ihre gesamte Vorgeschichte strukturell in sich (generative Einprägung, keine Speicherung) und erzeugt daraus die log-Spirale mit e. Das ist Gedächtnis im tiefsten Sinn. U₃ ist der degenerierte Randfall darunter — Marcels eigener U3-Ablationstest (Tabelle 4 seines Consciousness-Dokuments) ist der richtige Test dafür.
+
+**Falsifikationsbedingung:** falls U₃ in seinen Daten Nicht-Markov-Signaturen trägt (Revivals, BLP-Rückfluss, Korrelationen jenseits M_m), übersteigt es den Randfall und eine tiefere Einbettung ist nötig. **Offene Bringschuld:** die Einbettungsabbildung ι (HLV-Grundobjekt → L²(T⁴)⊗ℂ³) ist noch nicht konstruiert — Untermenge bleibt Vermutung, kein Satz.
+
 ## 6. Juli 2026 — Dok. 296: Zeit, Offenheit und Invarianz (neues Dokument, DE+EN je 7 S.)
 
 Dok. 296 (DE+EN, je 7 S., 0 Glyphen) fasst den narrativen Gedankenbogen dieser Session zusammen. Fünf Abschnitte:
