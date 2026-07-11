@@ -1,0 +1,107 @@
+%% 305_Kruemmungstreue_Diskriminator_En_ch.tex
+%% FFGFT -- Doc. 305: The curvature-fidelity discriminator -- why reach does not separate
+%% Author: Johann Pascher
+%% Date: July 2026
+%% Language: English
+
+\section*{Doc.~305 \quad The curvature-fidelity discriminator --- why reach does not separate}
+
+\begingroup\small\noindent
+\textbf{Abstract.} Doc.~304 narrows the distinction between a uniform and an accumulating memory
+to a choice of axis: what separates is not \emph{reach} (finite window versus unbounded
+integral) but \emph{curvature-fidelity} (does the accumulator carry the $1/n$-decaying pitch,
+the self-similar texture, the ratio $e$). This note supports the finding internally to FFGFT
+with a deterministic testbench: at \emph{equal reach}, a reach-based metric returns the same for
+both accumulators, while the $e$-criterion (Doc.~295) separates them cleanly and exactly ---
+self-similarity $D(2k)-D(k)\to\ln 2$, pitch decay $d_n\sim n^{-1}$, scale ratio $\to e$. The
+finding is derivable from $\xi$ / the recursion (\emph{proven}). It establishes \emph{no}
+specificity of any cognitive memory model; that extension remains a restricted bridge
+(Category~B) and requires a separate, independent, jointly sealed benchmark.
+\par\endgroup
+
+\medskip
+
+\section{The reduced point}
+
+In Doc.~304 the operational question of a \enquote{genuine} memory collapses onto a single
+axis. A memory that carries something about a past sits, in FFGFT, at $D(k)$, the cumulated
+defect of the unrolled time-winding
+\begin{equation}
+D(k) = \sum_{n\le k} 100\,\xi_n \;\to\; \ln\!\left(1+\tfrac{k}{75}\right),
+\qquad \xi_{n+1}=\xi_n\,(1-100\,\xi_n)
+\end{equation}
+(Doc.~295/296). Two accumulators can then be contrasted: one that carries the fractal
+\emph{curvature} of this winding (the $1/n$-decaying pitch), and one that \emph{linearises} it
+(constant pitch, Archimedean winding, the $d=0$ limit). Doc.~304 argues that the load-bearing
+distinction is not reach but which of the two forms the accumulator carries. This note tests
+exactly that.
+
+\section{Two accumulators of equal reach}
+
+The testbench (\texttt{ffgft\_kruemmungstreue\_probe.py}) contrasts both forms at \emph{equal
+reach}, i.e.\ with the same total accumulation $D(N)$ at the horizon $N$:
+\begin{itemize}
+\item \emph{curvature-faithful} --- the exact recursion $d_{n+1}=d_n(1-d_n)$ with
+$d_n=100\,\xi_n$, start $d_1=1/75$; cumulated $D(k)\to\ln(1+k/75)$ (log-spiral, ratio $e$);
+\item \emph{uniform} --- constant pitch $d_{\text{const}}=D(N)/N$, cumulated
+$D_{\text{lin}}(k)=d_{\text{const}}\,k$ (Archimedean, no self-similarity).
+\end{itemize}
+Both reach the same $D$ at $N$ --- reach is identical by construction.
+
+\section{Reach does not separate}
+
+An \emph{unbounded} accumulator keeps the contribution of an arbitrarily old event in its
+running sum; a finite kernel of width $W$ loses it once $N-t_0>W$. A reach-based test ---
+\enquote{does an early impulse still affect the output?} --- therefore separates
+$\{$accumulators$\}$ from $\{$finite kernel$\}$, but returns the same for the curvature-faithful
+and the uniform accumulator: both retain the impulse. Reach \emph{cannot} tell the two apart.
+
+\section{Curvature-fidelity separates (the $e$-criterion)}
+
+The $e$-criterion of Doc.~295 --- a winding carries ratio $e$ exactly when the defect per step
+decays as $1/n$ --- separates them cleanly. Three signatures, all checked against the exact
+recursion:
+\begin{itemize}
+\item \emph{Self-similarity.} The scale-doubling increment $D(2k)-D(k)$ is, for the
+curvature-faithful accumulator, \emph{scale-invariant}, $\to\ln 2\approx0.6931$ (at $k=10^5$:
+$0.69274$, deviation $4.1\times10^{-4}$); for the uniform one it grows linearly with $k$ (at
+$k=10^5$: $2.76$). Only the log-spiral is similar to itself across scales.
+\item \emph{Pitch decay.} The exponent $p$ in $d_n\sim n^{-p}$ is, curvature-faithful,
+$\approx1$ (log-log slope $-0.984$ over a decade, i.e.\ $1/n$); uniform, $p=0$ (constant).
+\item \emph{Scale ratio.} The $k$-factor per unit increase of $D$ converges,
+curvature-faithful, to $e$ (at $D=6$: $2.7226$, deviation $4.3\times10^{-3}$; from
+$\exp D=1+k/75$); uniform, to $1$ (arithmetic, no log-spiral).
+\end{itemize}
+The convergence is asymptotically exact (an $O(1/k)$ remainder, consistent with the
+congruence/self-similarity discussion in Doc.~304): the self-similarity is not a finite exact
+symmetry but a continuous one that settles fully in the limit.
+
+\section{The positive criterion}
+
+Hence the positive discriminator Doc.~304 calls for: what is to be tested is not \enquote{finite
+window versus accumulation} (reach) but \emph{curvature-fidelity at equal reach} --- does the
+accumulator carry the $1/n$ pitch, the ratio $e$, the self-similar texture? A long but linear
+kernel passes every reach test and remains uniform; a short but curvature-faithful accumulator
+already carries the structure. The $e$-criterion is thus sharper than any reach boundary and
+makes the axis operationally testable.
+
+\section{Status}
+
+\emph{Proven (internal to FFGFT).} The accumulation form, the three-signature separation, and
+the $e$-criterion are derivable from $\xi$ and the recursion $\xi_{n+1}=\xi_n(1-100\,\xi_n)$ and
+verified against the exact recursion (Doc.~295; script \texttt{ffgft\_kruemmungstreue\_probe.py},
+deterministic). The $O(1/k)$ asymptotics is named.
+
+\emph{Restricted (Category~B).} This testbench establishes \emph{no} specificity of a cognitive,
+operationally and functionally defined memory (recursive access, semantic compression, affective
+weighting, identity binding, persistent state carry, predictive reuse). Whether curvature-fidelity
+separates such an object remains the restricted bridge of Doc.~304 and requires a separate,
+\emph{independent, jointly sealed} benchmark --- not an FFGFT-internal calculation. In both
+directions: a system may carry the $1/n$ texture without those functions, and a functionally
+relevant memory is not ruled out merely for failing the $e$-criterion.
+
+\emph{Provenance and symmetry.} $D(k)$, the $e$-criterion, and the FFGFT interpretation of
+temporal curvature originate in the FFGFT corpus; the operational memory architecture against
+which a bridge would be tested originates in independent work (Doc.~304, provenance section).
+Neither framework contains, grounds, or subordinates the other; rejection of the bridge leaves
+both unchanged.

@@ -1,0 +1,111 @@
+%% 305_Kruemmungstreue_Diskriminator_De_ch.tex
+%% FFGFT -- Dok. 305: Der Krümmungstreue-Diskriminator -- warum Reichweite nicht trennt
+%% Autor: Johann Pascher
+%% Datum: Juli 2026
+%% Sprache: Deutsch
+
+\section*{Dok.~305 \quad Der Krümmungstreue-Diskriminator --- warum Reichweite nicht trennt}
+
+\begingroup\small\noindent
+\textbf{Kurzfassung.} Dok.~304 verengt die Unterscheidung zwischen einem gleichförmigen und
+einem akkumulierenden Gedächtnis auf eine Achsen-Wahl: nicht die \emph{Reichweite} (endliches
+Fenster gegen unbegrenztes Integral) trennt, sondern die \emph{Krümmungstreue} (trägt der
+Akkumulator die $1/n$-zerfallende Ganghöhe, die selbstähnliche Textur, das Verhältnis $e$).
+Diese Notiz belegt den Befund FFGFT-intern mit einem deterministischen Prüfstand: bei
+\emph{gleicher Reichweite} liefert eine reichweitenbasierte Metrik für beide Akkumulatoren
+dasselbe, während das $e$-Kriterium (Dok.~295) sie sauber und exakt trennt --- Selbstähnlichkeit
+$D(2k)-D(k)\to\ln 2$, Ganghöhen-Zerfall $d_n\sim n^{-1}$, Skalen-Verhältnis $\to e$. Der Befund
+ist aus $\xi$ / der Rekursion ableitbar (\emph{proven}). Er etabliert \emph{keine} Spezifität
+eines kognitiven Gedächtnismodells; diese Ausdehnung bleibt eine restricted-Brücke
+(Kategorie~B) und verlangt einen eigenen, unabhängigen, gemeinsam versiegelten Benchmark.
+\par\endgroup
+
+\medskip
+
+\section{Der reduzierte Punkt}
+
+In Dok.~304 fällt die operationale Frage nach einem \enquote{echten} Gedächtnis auf eine
+einzige Achse zusammen. Ein Gedächtnis, das etwas über eine Vergangenheit trägt, sitzt in
+FFGFT bei $D(k)$, dem kumulierten Defekt der ausgerollten Zeit-Windung
+\begin{equation}
+D(k) = \sum_{n\le k} 100\,\xi_n \;\to\; \ln\!\left(1+\tfrac{k}{75}\right),
+\qquad \xi_{n+1}=\xi_n\,(1-100\,\xi_n)
+\end{equation}
+(Dok.~295/296). Zwei Akkumulatoren lassen sich nun kontrastieren: einer, der die fraktale
+\emph{Krümmung} dieser Windung trägt (die $1/n$-zerfallende Ganghöhe), und einer, der sie
+\emph{linearisiert} (konstante Ganghöhe, archimedische Windung, der $d=0$-Grenzfall). Dok.~304
+argumentiert, dass die tragende Unterscheidung nicht die Reichweite ist, sondern welche der
+beiden Formen der Akkumulator trägt. Diese Notiz prüft genau das.
+
+\section{Zwei Akkumulatoren gleicher Reichweite}
+
+Der Prüfstand (\texttt{ffgft\_kruemmungstreue\_probe.py}) stellt beide Formen mit \emph{gleicher
+Reichweite} gegenüber, d.\,h.\ mit derselben Gesamtakkumulation $D(N)$ am Horizont $N$:
+\begin{itemize}
+\item \emph{krümmungstreu} --- die exakte Rekursion $d_{n+1}=d_n(1-d_n)$ mit $d_n=100\,\xi_n$,
+Start $d_1=1/75$; kumuliert $D(k)\to\ln(1+k/75)$ (log-Spirale, Verhältnis $e$);
+\item \emph{gleichförmig} --- konstante Ganghöhe $d_{\text{const}}=D(N)/N$, kumuliert
+$D_{\text{lin}}(k)=d_{\text{const}}\,k$ (Archimedes, keine Selbstähnlichkeit).
+\end{itemize}
+Beide erreichen bei $N$ dasselbe $D$ --- die Reichweite ist per Konstruktion identisch.
+
+\section{Reichweite trennt nicht}
+
+Ein \emph{unbeschränkter} Akkumulator behält den Beitrag eines beliebig alten Ereignisses in
+seiner laufenden Summe; ein endlicher Kern der Breite $W$ verliert ihn, sobald $N-t_0>W$. Ein
+reichweitenbasierter Test --- \enquote{beeinflusst ein früher Impuls noch die Ausgabe?} ---
+trennt daher $\{$Akkumulatoren$\}$ von $\{$endlichem Kern$\}$, aber er gibt für den
+krümmungstreuen und den gleichförmigen Akkumulator dasselbe Ergebnis: beide behalten den
+Impuls. Reichweite kann die beiden \emph{nicht} unterscheiden.
+
+\section{Krümmungstreue trennt (das $e$-Kriterium)}
+
+Das $e$-Kriterium aus Dok.~295 --- eine Windung trägt genau dann das Verhältnis $e$, wenn der
+Defekt je Schritt wie $1/n$ zerfällt --- trennt die beiden sauber. Drei Signaturen, alle gegen
+die exakte Rekursion geprüft:
+\begin{itemize}
+\item \emph{Selbstähnlichkeit.} Das Skalen-Verdopplungs-Inkrement $D(2k)-D(k)$ ist
+krümmungstreu \emph{skaleninvariant}, $\to\ln 2\approx0{,}6931$ (bei $k=10^5$: $0{,}69274$,
+Abweichung $4{,}1\cdot10^{-4}$); gleichförmig wächst es linear mit $k$ (bei $k=10^5$:
+$2{,}76$). Nur die log-Spirale ist über die Skalen sich selbst ähnlich.
+\item \emph{Ganghöhen-Zerfall.} Der Exponent $p$ in $d_n\sim n^{-p}$ ist krümmungstreu
+$\approx1$ (log-log-Steigung $-0{,}984$ über eine Dekade, also $1/n$); gleichförmig $p=0$
+(konstant).
+\item \emph{Skalen-Verhältnis.} Der $k$-Faktor je Einheits-Zuwachs von $D$ konvergiert
+krümmungstreu gegen $e$ (bei $D=6$: $2{,}7226$, Abweichung $4{,}3\cdot10^{-3}$; aus
+$\exp D=1+k/75$); gleichförmig gegen $1$ (arithmetisch, keine log-Spirale).
+\end{itemize}
+Die Konvergenz ist asymptotisch exakt (ein $O(1/k)$-Rest, konsistent mit der
+Kongruenz-/Selbstähnlichkeits-Diskussion in Dok.~304): die Selbstähnlichkeit ist keine endliche
+exakte Symmetrie, sondern eine kontinuierliche, die sich im Grenzfall voll einstellt.
+
+\section{Das positive Kriterium}
+
+Daraus der positive Diskriminator, den Dok.~304 fordert: nicht \enquote{endliches Fenster gegen
+Akkumulation} ist zu prüfen (Reichweite), sondern \emph{Krümmungstreue bei gleicher Reichweite}
+--- trägt der Akkumulator die $1/n$-Ganghöhe, das Verhältnis $e$, die selbstähnliche Textur?
+Ein langer, aber linearer Kern besteht jeden Reichweiten-Test und bleibt doch gleichförmig; ein
+kurzer, aber krümmungstreuer Akkumulator trägt die Struktur schon. Das $e$-Kriterium ist damit
+schärfer als jede Reichweiten-Grenze und macht die Achse operativ prüfbar.
+
+\section{Status}
+
+\emph{Proven (FFGFT-intern).} Die Akkumulationsform, die Drei-Signaturen-Trennung und das
+$e$-Kriterium sind aus $\xi$ und der Rekursion $\xi_{n+1}=\xi_n(1-100\,\xi_n)$ ableitbar und
+gegen die exakte Rekursion verifiziert (Dok.~295; Skript \texttt{ffgft\_kruemmungstreue\_probe.py},
+deterministisch). Die $O(1/k)$-Asymptotik ist benannt.
+
+\emph{Restricted (Kategorie~B).} Dieser Prüfstand etabliert \emph{keine} Spezifität eines
+kognitiven, operational-funktional definierten Gedächtnisses (rekursiver Zugriff, semantische
+Kompression, affektive Gewichtung, Identitätsbindung, persistenter Zustandsübertrag, prädiktive
+Wiederverwendung). Ob die Krümmungstreue ein solches Objekt trennt, bleibt die restricted-Brücke
+aus Dok.~304 und verlangt einen eigenen, \emph{unabhängigen, gemeinsam versiegelten} Benchmark
+--- keine FFGFT-interne Rechnung. In beide Richtungen: ein System kann die $1/n$-Textur tragen
+ohne jene Funktionen, und ein funktional relevantes Gedächtnis ist nicht ausgeschlossen, nur
+weil es das $e$-Kriterium nicht erfüllt.
+
+\emph{Provenance und Symmetrie.} $D(k)$, das $e$-Kriterium und die FFGFT-Deutung zeitlicher
+Krümmung stammen aus dem FFGFT-Korpus; die operationale Gedächtnis-Architektur, gegen die eine
+Brücke zu prüfen wäre, stammt aus unabhängiger Arbeit (Dok.~304, Provenance-Abschnitt). Kein
+Rahmen enthält, begründet oder unterordnet den anderen; die Ablehnung der Brücke lässt beide
+unverändert.
