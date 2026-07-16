@@ -9,4 +9,4 @@ Reproduzierbares numpy-/python-only-Prüfskript.
   K_frak durch m_e/m_mu-Konsistenz fixiert), nicht die 75. Das Skript rechnet
   die xi-Seite exakt, lässt K_frak als Eingabe und listet beide Vorzeichen als
   Kandidaten. Der Zeitsektor-Gegenlauf (BLP-Rückfluss 5,125) liegt bei Dok 299
-  (`Dok299_Skripte/ffgft_299_iota_gegenlauf_winding_locked.py`).
+  (`python/Dok299_Skripte/ffgft_299_iota_gegenlauf_winding_locked.py`).

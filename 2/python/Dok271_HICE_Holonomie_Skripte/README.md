@@ -1,7 +1,7 @@
 # Dok271_HICE_Holonomie_Skripte — FFGFT↔HLV Holonomie-/HICE-Audit
 
 Der **Holonomie-Zweig** des FFGFT↔HLV-Vergleichs (Dok. 271), ergänzend zum
-*Spektral*-Diskriminator in `Dok271_274_Skripte/`. Diese Skripte spiegeln Marcel
+*Spektral*-Diskriminator in `python/Dok271_274_Skripte/`. Diese Skripte spiegeln Marcel
 Krügers HICE-/Hybrid-HLV-Programm und José De Jesus' W_psi-Audit auf dem
 FFGFT-T⁴-Träger und prüfen sie in Krügers Zulässigkeits-Sprache (Gate-Sets,
 Claim-State-Ledger). Konservativer Maximal-Status: „candidate carrier", **nicht**

@@ -56,7 +56,7 @@ OUTDIR = os.path.dirname(os.path.abspath(__file__))
 
 # ===========================================================================
 # FFGFT memory kernel -- constants FROM THE CORPUS (deterministic), copied
-# verbatim from Dok283_Skripte/ffgft_283_memory_harness_shared.py so the
+# verbatim from python/Dok283_Skripte/ffgft_283_memory_harness_shared.py so the
 # witness is the proven one, not a re-invention.
 # ===========================================================================
 def _build_T4(L):

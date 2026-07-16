@@ -76,7 +76,7 @@ Diagonalisierung teilt den Sektor sauber in einen **radialen** (Betrags-)
 und einen **angularen** (Phasen-)Teil. Alles, was FFGFT determiniert, ist
 radial: ξ, die Hierarchie, die Koide-Amplitude **Q = 2/3 = r√2**, der
 Mittelwert ⟨f⟩. Der Leptonen-Empirie-Check
-([Dok. 292](2/PDFs/292_Leptonen_Empirie_Check_De.pdf)) prüft dies von der
+([Dok. 292](2/pdf/292_Leptonen_Empirie_Check_De.pdf)) prüft dies von der
 Datenseite und trennt zwei Schichten, die dasselbe ξ teilen, aber nicht
 vermischt werden dürfen: der **Zirkulant** trägt die Präzision (μ/e auf
 wenige Millionstel), die **ξ-Leiter** die Größenordnung (~1%). Unter **P42**
@@ -97,7 +97,7 @@ die Grundeinheit N₀ ≈ 38,6 ist noch nicht hergeleitet.
 Der angulare Offset **θ = 2/9** (Bogenmaß) ist **kein freier Parameter und
 kein empirischer Fit**: er ist die Phase des Z₃-Zirkulanten, der Wert, den die
 Diagonalisierung *ausgibt* — gefunden, nicht gesucht
-([Dok. 291](2/PDFs/291_Dynamischer_Ort_Theta_2_9_De.pdf)). Er entsteht aus der
+([Dok. 291](2/pdf/291_Dynamischer_Ort_Theta_2_9_De.pdf)). Er entsteht aus der
 Hilbertraum-Übersetzung (Dok. 230/231/232 → 282), in der die drei Leptonmassen
 als Spektrum eines Z₃-Zirkulanten erscheinen und 2/9 als Diagonalisierungs-
 Winkel herausfällt.
@@ -114,7 +114,7 @@ dynamisch ist. Der Wert steht fest und seine Herkunft ist geklärt — die
 Koide-Phase ist erledigt.
 
 Ein **zweiter, unabhängiger Zeuge** desselben Werts kommt aus der Geometrie
-([Dok. 293](2/PDFs/293_Ikosaeder_Theta_2_9_De.pdf)): bettet man den
+([Dok. 293](2/pdf/293_Ikosaeder_Theta_2_9_De.pdf)): bettet man den
 Elektron-Mode der C₃-Faser in die Ikosaedergruppe A₅ ein (C₃ < A₅) und wendet
 die fünfzählige Drehung an, verteilt sich das Elektron mit Nenner-9-Gewichten,
 und das Gewicht in den trivialen Mode ist **exakt 2/9** — ohne jede
@@ -127,9 +127,9 @@ Massenverhältnisse koppelt — der Wert selbst ist doppelt bezeugt. Aus dem
 skalenfreien Muster folgt **kein** neues Teilchen (Besetzung skalengebunden,
 Leerheitssatz).
 
-Reproduzierbarkeit: `2/Dok292_Skripte/` (Leptonen-Check, Teile A–L),
-`2/Dok291_Skripte/` (θ=2/9-Mechanismus-Skripte),
-`2/Dok293_Skripte/` (ikosaedrische Umverteilung, p₀=2/9 exakt + Robustheit).
+Reproduzierbarkeit: `2/python/Dok292_Skripte/` (Leptonen-Check, Teile A–L),
+`2/python/Dok291_Skripte/` (θ=2/9-Mechanismus-Skripte),
+`2/python/Dok293_Skripte/` (ikosaedrische Umverteilung, p₀=2/9 exakt + Robustheit).
 
 ### Verhältnis zu HLV (extern, nachrangig)
 
@@ -137,14 +137,14 @@ FFGFT und HLV (Marcel Krüger, Information Physics Institute) teilen dasselbe
 φ-ikosaedrische Objekt, auf dem θ=2/9 ein Invariant ist; weil FFGFT die
 absolute Skala besitzt (Referenzpunkt E₀) und HLV nicht, ist die Prüfrichtung
 einseitig FFGFT→HLV, ohne HLVs eigene Formulierungen zu übernehmen
-([Dok. 294](2/PDFs/294_HLV_Pruefrichtung_De.pdf)). Die frühere blinde,
+([Dok. 294](2/pdf/294_HLV_Pruefrichtung_De.pdf)). Die frühere blinde,
 symmetrisch vorregistrierte Prüfung, ob θ=2/9 durch HLVs BD17A-Holonomie-
 Mechanismus erzwungen wird, fiel **negativ** (BLOCKED) aus — die vorhergesagte
 Richtung, da eine flache Holonomie einen transzendenten Winkel nicht als
 topologische Invariante tragen kann; das betrifft den externen Rahmen, nicht
 FFGFTs eigene Ergebnisse. Die Struktur-Vergleichsdokumente
 ([Dok. 282–286](2/pdf/282_FFGFT_HLV_CP_Teilbarkeit_De.pdf)) und der
-Verdikt-Record (`2/Dok291_Skripte/`) sind der Vollständigkeit halber erhalten.
+Verdikt-Record (`2/python/Dok291_Skripte/`) sind der Vollständigkeit halber erhalten.
 
 ### Interne Darstellungen und Rechenwege
 
@@ -163,7 +163,7 @@ vier Fermion-Sektoren liegen auf einer Magnitude/Phase-Karte, mit den Neutrinos
 als reinem Phasen-(Allpass-)Sektor. Rechenerleichterung und Diagnose, keine
 neuen Herleitungen.
 
-Reproduzierbarkeits-Skripte: `2/Dok288_Skripte/`, `2/Dok289_Skripte/`.
+Reproduzierbarkeits-Skripte: `2/python/Dok288_Skripte/`, `2/python/Dok289_Skripte/`.
 
 ---
 
@@ -236,20 +236,23 @@ Eine vollständige Liste aller ~289 Dokumente mit Kurzinfo und direktem PDF-Link
 ```
 T0-Time-Mass-Duality/
 ├── 2/
-│   ├── pdf/                   # 289+ Dokumente (DE/EN-Paare)
+│   ├── pdf/                   # Einzeldokumente A4, DE/EN-Paare
 │   ├── html/                  # Interaktive Tools
-│   ├── python/                # Python-Implementierungen
+│   ├── python/                # Reproduzierbarkeits-Skripte, je Dokument ein Ordner
+│   │   ├── Dok023_230_Skripte/        # Bell / Hilbertraum
+│   │   ├── Dok263_Skripte/            # Fraktale Holografie
+│   │   ├── Dok267_268_Skripte/        # CMB-Peaks
+│   │   ├── Dok271_274_Skripte/        # HLV-Vergleich
+│   │   ├── Dok275_Skripte/            # ξ→φ-Rekursion (v2/v3/v4)
+│   │   ├── ... (weitere DokNNN_Skripte/)
+│   │   └── Werkzeuge_Skripte/         # allgemeine Werkzeuge
 │   ├── Sources/               # LaTeX-Quellen
 │   │   ├── ch/                # Kapitelquellen (*_De/En_ch.tex)
 │   │   ├── wr_standalone_A4/  # Einzeldokument-Wrapper
 │   │   ├── wr_books/          # Buch-Wrapper (5 Bände × 3 Formate)
 │   │   └── pri-end/           # Gemeinsame Präambeln
-│   ├── PDFs/                  # Einzeldokumente A4 (DE/EN)
-│   ├── Dok023_230_Skripte/    # Skripte Bell / Hilbertraum
-│   ├── Dok263_Skripte/        # Skripte Fraktale Holografie
-│   ├── Dok267_268_Skripte/    # Skripte CMB-Peaks
-│   ├── Dok271_274_Skripte/    # Skripte HLV-Vergleich
-│   └── Dok275_Skripte/        # Skripte ξ→φ-Rekursion (v2/v3/v4)
+│   ├── fonts/                 # gebündelte Schriften (Inter, JetBrains Mono, Libertinus Math)
+│   └── setup_build_env.sh     # LaTeX-Build-Umgebung (LuaLaTeX) einrichten
 ├── books/                     # KDP-fertige PDFs (5 Bände × 2 Sprachen × 3 Formate)
 ├── rsa/                       # RSA-Faktorisierungs-Demos
 ├── sig/                       # Signalanalyse-Tools
