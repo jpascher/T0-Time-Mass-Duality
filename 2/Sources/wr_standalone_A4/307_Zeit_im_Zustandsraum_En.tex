@@ -1,0 +1,392 @@
+\documentclass[11pt,a4paper]{article}
+
+% ---- Engine: LuaLaTeX ----
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\usepackage{polyglossia}
+\setmainlanguage{english}
+
+\usepackage{microtype}
+% Blocksatz-Randausgleich (verhindert Text im Rand auf breitem A4-Satzspiegel):
+\emergencystretch=3.5em
+\tolerance=2500
+\hbadness=3000
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage[a4paper,margin=2.6cm,headsep=1.1em]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{needspace}
+
+% ---- Fonts ----
+\setmainfont{Inter}[
+  Scale=1.02,
+  Ligatures=TeX,
+  Language=English ]
+\setsansfont{Inter}[Scale=MatchLowercase,Ligatures=TeX]
+\setmonofont{JetBrains Mono}[Scale=0.95]
+\setmathfont{Libertinus Math}
+
+% ---- Colours ----
+\definecolor{accent}{HTML}{1F3A5F}     % deep slate blue
+\definecolor{accent2}{HTML}{6A4E2E}    % muted bronze
+\definecolor{rulecol}{HTML}{B9C2CE}
+\definecolor{linknav}{HTML}{2C5F8A}
+\definecolor{linkcite}{HTML}{7A5C2E}
+
+% ---- Hyperref ----
+\usepackage[
+  colorlinks=true,
+  linkcolor=linknav,
+  citecolor=linkcite,
+  urlcolor=linknav,
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  pdfstartview=FitH ]{hyperref}
+\hypersetup{
+  pdftitle={Time in the State Space, or Beside It},
+  pdfauthor={Johann Pascher},
+  pdfsubject={Grundlagen der Quantenmechanik --- Verortung der Zeit},
+  pdfkeywords={Zeit, Hilbertraum, kompakte Zeit, Kaluza-Klein, Massen-Moden, FFGFT}
+}
+
+% ---- Section styling ----
+\titleformat{\section}
+  {\color{accent}\normalfont\Large\bfseries}
+  {\color{accent2}\thesection}{0.7em}{}
+\titleformat{\subsection}
+  {\color{accent}\normalfont\large\bfseries}
+  {\color{accent2}\thesubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{1.6\baselineskip}{0.7\baselineskip}
+\titlespacing*{\subsection}{0pt}{1.1\baselineskip}{0.4\baselineskip}
+
+% ---- Headers ----
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{rulecol}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[L]{\footnotesize\color{accent}\itshape Time in the State Space, or Beside It}
+\fancyhead[R]{\footnotesize\color{accent2}\thepage}
+
+% ---- TOC look ----
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\normalfont}
+\renewcommand{\cftsecpagefont}{\normalfont}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftbeforesecskip}{3pt}
+
+% ---- Lead paragraph helper ----
+\newcommand{\lead}[1]{{\itshape\color{accent}#1}\par\vspace{0.4em}}
+
+\setlength{\parskip}{0.35em}
+\setlength{\parindent}{0pt}
+\linespread{1.06}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{2.2cm}
+{\color{rulecol}\rule{0.5\textwidth}{0.6pt}}\\[1.4cm]
+{\color{accent}\Huge\bfseries Time in the State Space\\[0.3em] or Beside It\par}
+\vspace{1.0cm}
+{\large\itshape An Extended Discussion\\ of the Origin of the Modes\par}
+\vspace{0.6cm}
+{\color{accent2}\rule{0.28\textwidth}{0.4pt}}\\[1.0cm]
+{\large FFGFT $\cdot$ Doc.~307\par}
+\vspace{0.5cm}
+{\normalsize Elaborated version with extended sources, cross-references and full bibliography\par}
+\vfill
+{\large Johann Pascher\par}
+\vspace{0.3cm}
+{\footnotesize ORCID: 0009-0000-6518-4064\par}
+\vspace{1.4cm}
+{\color{rulecol}\rule{0.5\textwidth}{0.6pt}}
+\vspace*{1.5cm}
+\end{titlepage}
+
+\tableofcontents
+\thispagestyle{fancy}
+\clearpage
+
+\begingroup\small\noindent
+\textbf{Abstract.} Two framings of quantum mechanics are contrasted: the \emph{unrolled} view, which keeps time as an external parameter, and the \emph{rolled-up} view, which draws it into the state space as a compact dimension. Both use the same operator formalism; the difference lies solely in whether time sits inside or outside. In the rolled-up view the masses become eigenvalues of a mode structure on a compact torus; the concrete FFGFT realisation is $\tilde T\cdot m = 1$ on $L^2(T^4)\otimes\mathbb{C}^3$ (Dok.~230/231/232, 306). The mass \emph{ratios} are thereby exact and derived from a single dimensionless parameter $\xi_0 = 4/30000$; the absolute scale carries its SI correction through fixed bridge constants (P40) but is not a free parameter. Apparently open questions --- absolute scale, causality of closed time, quantum gravity --- are placed as already decided within the corpus (Dok.~013/190, 306, 230). The rolled-up view is thus positioned as a derivation framework with framework-specific observables (mass-reading, CHSH$\sim\xi$, $D_f$, $L_0$), not as a thought experiment.
+\par\endgroup
+
+\medskip
+
+\section{The Fork}
+
+At the beginning of every quantum-mechanical model stands a choice that usually remains unspoken yet determines everything that follows: \textbf{Is time a direction \emph{within} the state space, or a parameter \emph{beside} it?}
+
+The question sounds technical but is ontological. It does not decide which mathematics is used --- both answers work with self-adjoint operators, spectra and projectors --- but \emph{where} time sits. And exactly this placement decides whether the physical quantities \emph{fall out} of the structure or must be \emph{attached} to it. The present discussion follows this single switch-point through its consequences.
+
+This fundamental question reaches back to the roots of quantum theory. As early as 1932 \textbf{Wolfgang Pauli} recognised that introducing a time operator canonically conjugate to the Hamiltonian runs into fundamental difficulties~\cite{Pauli1933}. The so-called ``Pauli theorem'' shaped the development of quantum mechanics decisively and made time as an external parameter seem unshakeable. Only later work, in particular by \textbf{Aharonov and Bohm}~\cite{AharonovBohm1961} as well as \textbf{Garrison and Wong}~\cite{GarrisonWong1970}, showed that under certain conditions (for example for spectra that are not half-bounded) time operators can nonetheless be constructed. The dispute over the time operator is not fully settled to this day and forms the background for the alternative discussed here~\cite{Muga2008}.
+
+% ===================== 2 =====================
+\section{The Unrolled View: Time as an External Parameter}
+
+The familiar formulation of quantum mechanics locates time outside the state space. The Hilbert space is the space of states \emph{at one instant}, typically $\mathcal{H} = L^2(\text{configuration space})$. Time is the parameter $t$ along which the state evolves, mediated by the unitary evolution $e^{-i\hat{H}t}$. The observables --- position, momentum, spin --- are operators \emph{on} $\mathcal{H}$. Time is not one of them.
+
+That it cannot be one is not an oversight but a known result: Pauli's objection~\cite{Pauli1933} shows that for a Hamiltonian bounded from below there is no self-adjoint, canonically conjugate time operator. In the unrolled view, therefore, time necessarily remains the stage, not the play.
+
+The consequence is structural and far-reaching: because time sits outside, the state space alone contains no dynamical scales. Masses, couplings, lifetimes are not present in the pure spatial structure --- they must be introduced from outside through \emph{additional} structures. In the Standard Model this happens through Yukawa terms and the free parameters that fix their strength. The structure provides the frame; the numbers come from measurement.
+
+This difficulty is not new. Already \textbf{Hermann Weyl}~\cite{Weyl1928} and later \textbf{Eugene Wigner}~\cite{Wigner1939} recognised that, from a group-theoretic perspective, the masses of the elementary particles appear as Casimir invariants --- that is, as structural labels, not attached parameters. Nevertheless the question of mass generation remained a central unsolved problem of theoretical physics. The Higgs mechanism~\cite{Higgs1964,Englert1964} does offer an explanation for the mass of the gauge bosons, but itself introduces new free parameters (the Yukawa couplings).
+
+The criticism of the unrolled view is therefore not that it is wrong, but that it leaves a fundamental question --- the origin of the mass scales --- unanswered and instead points to external inputs. This becomes especially clear when one considers the historical development of quantum field theory: the transition from the ``old'' quantum mechanics to quantum field theory did bring the possibility of particle creation and annihilation, but no intrinsic explanation for the mass values~\cite{Weinberg1995}.
+
+% ===================== 3 =====================
+\section{A Representative Construction of This Kind}
+
+Many model programmes that aim at a geometric origin of the particle properties follow --- for all their differences in detail --- the same basic scheme, and it is worth considering this scheme in the abstract:
+
+\begin{enumerate}[leftmargin=1.6em,itemsep=0.2em]
+ \item One chooses a discrete carrier (a lattice, a cut-and-project structure, a periodic graph).
+ \item On it one defines a self-adjoint family of operators.
+ \item Via spectral projectors one extracts \emph{sectors} --- eigenspaces or invariant subspaces of the operator.
+ \item These sectors are \emph{subsequently} assigned physical meaning: charge, spin, and mass --- the latter often through a parametric map, for example a Yukawa-type function with one or two free parameters.
+\end{enumerate}
+
+Such a procedure can be fully controlled and reproducible mathematically. The decisive observation concerns not its rigour but its \emph{placement of time}: the carrier is a spatial object, the operator evolution --- where it occurs at all --- runs over an external parameter. The sectors are therefore \textbf{spatial eigenspaces, not time modes}. The mass is not contained in them; it is attached to them through the parametric map.
+
+And here an argument applies that carries itself: \textbf{a parametric map with free parameters can hit any finite list of values.} If the map is not fixed \emph{in advance and universally}, it possesses no predictive content --- it merely renames the known inputs. To yield any numbers at all, such a construction must therefore be coupled to \emph{external} values: to measurement, and hence --- since the measured values of the particle sector are Standard-Model-calibrated --- indirectly to the Standard Model itself. This is the hard road: the numbers come from outside, not from the structure. A model that understands itself as an alternative ultimately draws its reference values from the very thing it wished to set itself apart from.
+
+The point is not that this procedure is wrong. It is honest, provided it declares its own limit --- namely that it does not \emph{derive} masses but provides a controlled architecture of hypotheses. The point is that the \emph{difficulty} of this road is no accident but the immediate consequence of the unrolled placement of time.
+
+\textbf{A concrete example:} the so-called ``graphene modelling'' of particle physics~\cite{Jackiw1999,Sutherland1986} defines quasi-particle excitations on hexagonal lattices. These excitations show linear dispersion relations and can be interpreted as massless fermions --- but introducing a mass always requires additional terms (for instance a Haldane term~\cite{Haldane1988} or a Kekulé distortion) endowed with free parameters. The geometry provides the kinematics, but not the mass scale.
+
+% ===================== 4 =====================
+\section{The Rolled-Up View: Time as a Compact Dimension of the State Space}
+
+The alternative neither leaves time outside nor eliminates it, but draws it \emph{into} the state space --- as a closed, periodic dimension. In Hilbert-space language, in place of $L^2(\text{space})$ with external $t$ there is a space in which a compact time direction is part of the geometry, for example $\mathcal{H} = L^2(T^4)\otimes(\text{internal factor})$, where one of the torus directions carries time. In the FFGFT corpus this Hilbert space is realised as $L^2(T^4)\otimes\mathbb{C}^3$ and the bijectivity of the representation (type~III) is established (Dok.~230/231/232, 270).\footnote{Dok numbers refer throughout to the FFGFT corpus (time--mass duality).}
+
+On a closed dimension the admissible states are \textbf{standing modes with discrete winding numbers}. Quantisation is then not postulated but geometrically enforced: only certain modes fit onto the closed structure. Mass becomes the \textbf{eigenvalue of an operator on $\mathcal{H}$ itself} --- not attached, but structurally contained. The ratios of the masses are fixed because the admissible modes are fixed.
+
+The relation time-cycle times mass equals one, $\tilde{T}\cdot m = 1$, is the concrete realisation of this idea: every massive quantity \emph{is} its own time-cycle. In the corpus this is the native time--energy reciprocity $T\cdot E = 1$ (Dok.~306), and the decompactification $S^1_m\to\mathbb{R}_t$ is measure-preserving, hence lossless (Dok.~270). That a compact dimension produces a discrete tower of modes whose masses behave like the inverse of the compactification period is no exotic feature but the mechanism \textbf{Kaluza and Klein}~\cite{Kaluza1921,Klein1926} already described for a compact spatial dimension ($m_n \propto n/R$). What holds there for a rolled-up spatial direction holds here for rolled-up time --- with mass in the role of the mode index.
+
+It is noteworthy that Pauli's objection does not touch the rolled-up view. It applies to an \emph{open}, downward-unbounded time conjugate to a bounded Hamiltonian. A \emph{compact} time behaves like an angle variable: its conjugate spectrum is discrete (as for angular momentum conjugate to an angle), and the Pauli argument lapses. Closed time is not only mathematically admissible, it is the natural home of a discrete mode structure.
+
+This insight has deep roots in mathematical physics. \textbf{Witten}~\cite{Witten1983} pointed out that compact time dimensions arise naturally in string theory. \textbf{Hawking}~\cite{Hawking1984} discussed the implications of a closed time for cosmology. The so-called ``Kaluza--Klein theory with compact time'' has been investigated in various contexts, for instance by \textbf{Reifler}~\cite{Reifler1992} and \textbf{Bars}~\cite{Bars1997,Bars2012}, who developed a ``two-time physics''.
+
+The rolled-up view also has connections to \textbf{thermodynamic time}~\cite{ConnesRovelli1994}. If time is compact, the thermodynamic arrow is not fundamental but an emergent property of the non-compact spatial parts. This could offer a natural explanation for the apparent irreversibility of macroscopic physics without resorting to ad-hoc assumptions about initial conditions.
+
+% ===================== 5 =====================
+\section{The Core of the Dispute}
+
+Now the actual weighing, without prejudgement.
+
+\textbf{What the unrolled view gains:} seamless connection to the established machinery of quantum field theory; freedom from a strong ontological commitment; the familiarity of the open time axis. \textbf{What it costs:} the structure alone fixes no masses. Dynamical values must come from outside; predictions hang on external calibration; and a model of this type that understands itself as self-standing nevertheless couples its numbers back to measurement --- and thus to the Standard Model.
+
+\textbf{What the rolled-up view gains:} the modes and their ratios fall out of the structure without parametric attachment; the discrete quantisation is a gift rather than a postulate. \textbf{What it costs:} a strong ontological claim --- time as a closed dimension --- which must be justified and which contradicts the habitual intuition of flowing time. And it does not remove every external tie: the \emph{absolute} scale still needs a unit bridge (the SI conversion via the conversion factors; Dok.~013, and Dok.~190 P40: absolute values carry the correction through bridge constants, ratios are exact) so that measurable numbers arise from the fixed ratios. What is given for free are the ratios, not the absolute scale.
+
+The decisive finding of the dispute, however, is this: \textbf{both roads use the same operator formalism.} The difference lies not in the mathematics but solely in whether time sits inside or outside. One can keep the same construction --- self-adjoint operator, spectral sectors --- and \emph{only draw time into the space}; then the sectors become modes, and the mass that previously had to be attached through a parametric map becomes the eigenvalue of the structure itself. Whoever reads the sectors as spatial eigenspaces must attach the physics. Whoever reads them as time modes finds it contained. It is the same computation --- with time in a different place.
+
+This recognition has far-reaching methodological implications. It shows that the choice of where to locate time constitutes a kind of ``framework choice'' that precedes the actual model-building and fixes its interpretive reach. \textbf{This is no trivial observation}: the so-called \textbf{``quantum equivalence''} of the two views is well known~\cite{Unruh1995}, but its methodological consequences have so far scarcely been investigated systematically.
+
+% ===================== 6 =====================
+\section{Who Has Already Pursued the Direction ``Time Not External''}
+
+The idea of not treating time as an external parameter is no novelty but a rich and long-pursued line in the foundations of physics. It is honest to place the rolled-up view within this line --- and to mark off its distinctive feature against it.
+
+\subsection{Relational Time}
+\begin{itemize}[leftmargin=1.4em,itemsep=0.25em]
+ \item \textbf{Page \& Wootters}~\cite{PageWootters1983} let time arise \emph{within} the state space: as a correlation (entanglement) between a clock subsystem and the rest. The total state is stationary; ``evolution without evolution''. Time here is internal, not external.
+ \item The work of \textbf{Moreva et al.}~\cite{Moreva2014} and \textbf{Marletto \& Vedral}~\cite{MarlettoVedral2017} made this mechanism precise and even illustrated it experimentally.
+ \item \textbf{Gambini \& Pullin}~\cite{GambiniPullin2015} developed the Montevideo interpretation with relational time.
+\end{itemize}
+
+\subsection{Timeless Quantum Gravity}
+\begin{itemize}[leftmargin=1.4em,itemsep=0.25em]
+ \item \textbf{Wheeler--DeWitt}~\cite{DeWitt1967,Wheeler1968}: in canonical quantum gravity the universal wave function is timeless, $\hat{H}\Psi = 0$. The resulting ``problem of time'' is precisely the statement that there is no external time.
+ \item \textbf{Kucha\v{r}}~\cite{Kuchar1992} and \textbf{Isham}~\cite{Isham1993} provided the authoritative surveys of the time problem of canonical quantum gravity.
+ \item \textbf{Rovelli}~\cite{Rovelli1996,Rovelli2009}: relational quantum mechanics; ``Forget Time''; with \textbf{Connes} the thermal-time hypothesis~\cite{ConnesRovelli1994} --- time as a derived, not fundamentally external quantity.
+ \item \textbf{Barbour}~\cite{Barbour1999}, \emph{The End of Time}: the consistent elimination of time in favour of timeless configurations.
+\end{itemize}
+
+\subsection{Compact Time in String Theory}
+\begin{itemize}[leftmargin=1.4em,itemsep=0.25em]
+ \item String theory has investigated compact time dimensions in various contexts~\cite{GreenSchwarzWitten1987,Polchinski1998}.
+ \item \textbf{Bars} and colleagues~\cite{Bars1997,Bars2012} developed a ``two-time physics'' that postulates an extended symmetry group with two time dimensions.
+\end{itemize}
+
+\subsection{The Mode Structure}
+Two further references bear less on the time question than on the \emph{mode} side and establish that ``mass as a structural eigenvalue'' is well familiar:
+\begin{itemize}[leftmargin=1.4em,itemsep=0.25em]
+ \item \textbf{Wigner}~\cite{Wigner1939}: mass is a Casimir invariant --- a label of irreducible representations of the Poincaré group. Mass there is already a structural eigenvalue, not an attached number.
+ \item \textbf{Kaluza}~\cite{Kaluza1921} / \textbf{Klein}~\cite{Klein1926}: a compactified dimension produces a discrete tower of modes with quantised charges --- the mathematical blueprint for a rolled-up dimension bringing forth modes.
+\end{itemize}
+
+The delimitation this overview permits is precise: the predominant part of this tradition makes time \emph{relational}, \emph{emergent} or \emph{timeless} --- it takes time \emph{out} as something fundamental. The rolled-up view does something subtly different: it takes time \emph{in} --- as a compact geometric dimension of the state space that carries modes. It shares with Page--Wootters and Rovelli the rejection of external parameter-time, but differs in the positive proposal (compact geometric time instead of relational or thermal time). The novelty lies, then, not in ``time is not external'' --- that is old and well established --- but in the specific route ``compact time produces mass modes''.
+
+% ===================== 7 =====================
+\section{Extension: Mathematical and Physical Implications}
+
+\subsection{The Mathematical Structure of Rolled-Up Time}
+
+For a more precise formulation of the rolled-up view the Hilbert space $\mathcal{H} = L^2(T^1 \times M) \otimes \mathcal{H}_{\text{int}}$ serves, where $T^1$ is a compact time dimension of length $T$ and $M$ is ordinary three-dimensional space. A function on this space can be expanded into a Fourier series:
+\[
+ \Psi(t, \mathbf{x}) = \sum_{n \in \mathbb{Z}} e^{i n t / T}\, \psi_n(\mathbf{x})
+\]
+The discrete frequencies $\omega_n = 2\pi n / T$ correspond to the mass values (in natural units $\hbar = c = 1$). The operator generating these frequencies is the energy operator $\hat{E} = -i\,\partial_t$, whose eigenvalues are exactly the discrete spectrum $\{2\pi n / T\}$.
+
+The decisive observation is: the quantisation of the masses is a direct consequence of the periodicity of time. \textbf{Nothing has to be postulated} --- the discrete modes are mathematically enforced.
+
+\subsection{The Yukawa Coupling in the Rolled-Up View}
+
+The coupling between different modes can be written as a matrix element of the interaction operator:
+\[
+ g_{ijk} \propto \int_{T^1} e^{i(n_i - n_j - n_k)t/T}\, dt = T \cdot \delta_{n_i,\, n_j + n_k}
+\]
+This is an exact conservation of angular momentum in the time direction! The ``Yukawa couplings'' of the Standard Model appear here as selection rules for the mode indices, not as free parameters~\cite{Weinberg1995}.
+
+\subsection{The Role of the Gauge Symmetries}
+
+Rolled-up time permits a natural extension of the gauge symmetries. \textbf{The compact time direction behaves like an additional fifth dimension} in the sense of Kaluza--Klein theory, but with the decisive difference that it is time-like. This provides the explanation for charge quantisation~\cite{Kaluza1921,Klein1926}:
+\[
+ Q \propto \frac{n}{R_T}
+\]
+where $R_T$ is the radius of the compact time. Charge quantisation is thereby a direct consequence of the periodicity of time.
+
+\subsection{The Mass Hierarchy in the Rolled-Up View}
+
+A central problem of particle physics is the mass hierarchy: why is the electron so much lighter than the top quark? The corpus describes the lepton masses in three representations that \emph{translate into one another} --- none is a separate ansatz; they are the same structure written differently (Dok.~006/046/282/292).
+
+\textbf{(1) Fundamental --- quantum numbers and fractal correction.} Particles are discrete resonance modes of the $\xi$-field; their scale follows from a geometric quantisation with the quantum numbers $(n_i,l_i,j_i)$ of the 3D wave equation,
+\[
+  \xi_i = \xi_0\cdot f(n_i,l_i,j_i),\qquad E_i = 1/\xi_i,\qquad \xi_0=\tfrac{4}{30000},
+\]
+where the absolute values carry the fractal correction $K_{\text{frak}}=1-100\,\xi$ (Dok.~011/012/133). Example: electron $(1,0,\tfrac12)$, muon $(2,1,\tfrac12)$.
+
+\textbf{(2) Yukawa / ladder form.} The same derivation is written as $m_i = r_i\,\xi^{\pi_i}\,v$ (Dok.~006/046) with rational $r_i$ and the generation hierarchy $\pi=\tfrac32,\,1,\,\tfrac23$ --- the Standard-Model-compatible bridge.
+
+\textbf{(3) Circulant / Koide.} The $\sqrt{m_k}$ are eigenvalues of a $\mathbb{Z}_3$-circulant, $\sqrt{m_k}=M\bigl(1+\sqrt2\cos(\tfrac29+2\pi k/3)\bigr)$ (Dok.~282/292), with the Koide relation $Q=2/3$; the angle $\theta=2/9$ is the output of the diagonalisation.
+
+The decisive point: the \emph{dimensionless ratios} are exact (Koide $Q=2/3$, $\theta=2/9$, the mass ratios from $(\sqrt2,\,2/9)$). Deviations arise only in the step to \emph{absolute} SI values, and there from several sources at once: the SI conversion itself ($\hbar,c,G$ are convention or conversion factors, not a measured dimensional anchor), the bridge constants $v$ and $E_0$ (P40), the fractal correction $K_{\text{frak}}$, and finite measurement precision (e.g.\ of the $\tau$ mass). The claim is therefore a \emph{structure proof}: the ratios are fixed, the absolute scale carries its correction --- a numerically better calculation than the Standard Model is not claimed.
+
+\subsection{The Relation to String Theory}
+
+Rolled-up time has parallels to \textbf{M-theory} and \textbf{F-theory}~\cite{Vafa1996}, both of which use compact dimensions. In F-theory the time dimension does have a compact direction responsible for the gauge symmetries. The view developed here could be understood as a kind of ``F-theory light'': a compact time dimension without the full string-theory machinery.
+
+% ===================== 8 =====================
+\section{Critical Appraisal and Placement}
+
+\subsection{Ontological Status of Time}
+
+The ontological claim of the rolled-up view is strong, but it is not left open in the corpus: compact time is real and geometric, not merely a computational technique. The boundary $\partial T^4 = \emptyset$ makes the question of a starting instant $t=0$ not wrongly answered but \emph{wrongly posed} (Dok.~306). The time here is \emph{discrete}: FFGFT possesses a minimal time increment $d_1 = 100\,\xi_0 = 1/75$ fixed by $\xi$ (Dok.~306), and the admissible states are discrete modes. Since these modes always stand in fixed relation to one another --- their ratios are exact ---, there is a common \emph{base tick}: via $\tilde T\cdot m = 1$ every massive quantity does carry its own cycle $T=\hbar/mc^2$, but these cycles are not independent clocks; they are commensurable multiples of the same $\xi$-fixed increment --- harmonics of one base tick, not a continuum of free clocks.
+
+The physicist \textbf{John Wheeler} spoke of ``time as an illusion'' --- a position the rolled-up view does not share. It takes time as real, but geometrically different from the accustomed picture.
+
+\subsection{The Absolute Scale: Fixed, Not Free}
+
+The ratios of the masses follow from the mode structure, and exactly they are exact. The absolute scale is thereby not yet expressed in SI numbers --- but it is for that reason no \emph{free} parameter. The ratio scaffold rests on a single dimensionless parameter $\xi_0 = 4/30000$ (the geometric $\xi$-value of the position-space torus). The absolute values carry their fractal or SI correction not as a fit but through fixed \emph{bridge constants} --- $v$ in the masses $m = r\,\xi^{p} v$, $E_0 = 7.398$~MeV in $\alpha = \xi E_0^2$, and fixed numerical factors in $G$. In ratios these bridge constants cancel ($m_\mu/m_e = 206.768$, correction-free). $\hbar$ and $c$ are pure SI conversion; a \emph{measured} dimensional anchor in the standard-physics sense does not exist.
+
+The Planck quantities are not a fundamental input but follow from $\xi$: the derivation chain reads $\xi \to \{m_e,\dots\} \to G \to \ell_P$, and $\hbar$ itself is geometric ($\xi \to L_0 = \xi_0\,\ell_P \to \hbar \sim \sqrt{\xi}\,\ell_P\,c$). The \emph{only} exact $\xi$-power relation here is
+\[
+ \frac{L_0}{\ell_P} = \xi_0, \qquad L_0 = \xi_0\,\ell_P \approx 2.15\times10^{-39}\,\text{m};
+\]
+the SI factor $\ell_P$ must \emph{not} be absorbed into a $\xi$ exponent. The time-cycle is therefore not ``coupled to the Planck scale'' --- the causal direction is reversed: the Planck quantities follow from $\xi$, not $\xi$ from them. Via $\tilde{T}\cdot m = 1$ (respectively $T\cdot E = 1$) the cycle is fixed as soon as the mass is fixed through the $\xi$-geometry. No modulus remains to be gauged; the dilaton or moduli analogy to string theory does not carry here. (Worked out in the corpus: Dok.~013 SI conversion table; Dok.~190 P40 and Präz.~2/4/5; Dok.~011/012 and Dok.~133 for $K_\text{frak}=1-100\,\xi$; $L_0=\xi_0\ell_P$ in Dok.~180--182.)
+
+\subsection{Causality}
+
+The obvious worry --- does a periodic time produce closed time-like curves (CTCs)? --- is addressed in the corpus, not open. The carrier is a torus ($\pi_1\neq0$, stable windings), not a simple circle, and the relevant connection is not ontological non-locality but a \emph{topological} connection on $T^4$: the Bell/CHSH correlation is geometrically real and carries an amplitude $\sim\xi$ (Dok.~230, cf.\ Dok.~022).
+
+The classical CTC problem of the Gödel solutions~\cite{Goedel1949} and the chronology-protection conjecture~\cite{Hawking1992} concern the \emph{decompactified} Lorentz sector; the compact mass--time direction is spectral, not causally closed (Dok.~270/306).
+
+\subsection{Experimental Testing}
+
+The predictions of the rolled-up view are \emph{not} those of a hidden heavy tower of modes above accelerator reach. The discrete spectrum of compact time \emph{is}, via $\tilde{T}\cdot m = 1$, already the observed particle spectrum (mass-reading); there is no additional Kaluza--Klein tower to wait for. The framework-specific, testable quantities are rather:
+\begin{enumerate}[leftmargin=1.6em,itemsep=0.2em]
+ \item \textbf{Mass-reading:} the particle masses themselves --- lepton mass structure ($m_\ell=r_\ell\xi^{p_\ell}v$, Dok.~190 Präz.~5), Koide relation ($10^{-5}$, Dok.~292), electron $g-2$ --- as $\xi$-derivations.
+ \item \textbf{Selection rules:} mode-index conservation is identical to the coupling selection rules of the Standard Model (cf.\ the section on the Yukawa coupling), with no free Yukawa numbers.
+ \item \textbf{CHSH $\sim \xi$:} the Bell correlation carries an amplitude of order $\xi$ (Dok.~230, Dok.~022) --- the compact time is measurable as a real, topological connection on $T^4$, not as ontological non-locality.
+ \item \textbf{Fractal structure:} the geometric fundamental length $L_0 = \xi_0\,\ell_P$ (Dok.~180--182) and the fractal dimension $D_f$ (Dok.~270/249).
+\end{enumerate}
+
+For a \emph{clean} falsification, ratio tests alone are insufficient --- they confirm (Koide) but hardly falsify, since deviations can always be read as unmodelled coupling. Only a \emph{forward}-fixed, independently testable new prediction is load-bearing (Dok.~190 P40).
+
+\subsection{Connection to Quantum Gravity}
+
+The bridge to quantum gravity is not merely hinted at in the corpus but worked out as a Hilbert-space construction: $L^2(T^4)\otimes\mathbb{C}^3$ with the quantity $\theta = 2/9$ following from the $\mathbb{Z}_3$-circulant diagonalisation (Dok.~230/231/232; in the corpus \emph{settled}, not open).
+
+In loop quantum gravity~\cite{Rovelli2004,Thiemann2007} time is understood relationally --- a position to which the rolled-up view is close; \textbf{Connes}~\cite{Connes1994} shows that time can follow from the operator algebra. The rolled-up view makes this line concrete geometrically rather than merely relationally.
+
+% ===================== 9 =====================
+\section{Conclusion}
+
+The choice of where time sits precedes the mathematics and decides whether the modes are a gift or an attachment. A construction that leaves time outside will --- structurally, not through carelessness --- have to attach its physical values from outside; and because free parametric maps hit any finite list of values, it couples its numbers to measurement and thereby to the Standard Model. That is the price of the unrolled view: no self-standing prediction without an external tie.
+
+Drawing time into the state space is \emph{one} road --- with a real ontological price --- to making the modes and their ratios structural. The long line from Page--Wootters through Wheeler--DeWitt to Kaluza--Klein shows that the move ``time not external'' is well motivated and much pursued; the concrete realisation ``compact time carries the mass modes'' is a definite, strong choice within this line.
+
+The dispute therefore does not end with a verdict but with a sharpened alternative: whoever reads sectors as spatial eigenspaces keeps the familiar physics and pays with the external attachment of the numbers. Whoever takes time as a closed dimension into the space obtains the modes structurally and pays with an ontological commitment. The ontological price of the second choice remains on the table --- but the methodological price of the first is no smaller, only more familiar.
+
+The rolled-up view is, in this, no mere thought experiment: it possesses framework-specific, testable quantities --- mass-reading (masses, Koide, $g-2$), CHSH~$\sim\xi$, fractal dimension $D_f$, fundamental length $L_0$ (see the section on experimental testing).
+
+The analysis developed here shows that the question of the origin of the modes is inseparable from the question of the placement of time. \textbf{Time is not merely a parameter --- it is the structure that shapes the modes.} Or, as the physicist \textbf{Carlo Rovelli}~\cite{Rovelli2009} put it: ``Time is not what we think it is.''
+
+
+\section{Epistemic Status}
+
+\emph{Proven (derived from $\xi$).} The ratio structure of the masses ($m_\ell=r_\ell\,\xi^{p_\ell}\,v$, structure proof to ${\sim}1\,\%$, Dok.~190 Präz.~5); the exactness of the dimensionless ratios (Koide $10^{-5}$; $m_\mu/m_e=206.768$; P40); the Hilbert-space representation $L^2(T^4)\otimes\mathbb{C}^3$ with $\theta=2/9$ from the $\mathbb{Z}_3$-circulant diagonalisation (Dok.~230/231/232); the native time--energy reciprocity $T\cdot E=1$ and $\partial T^4=\emptyset$ (Dok.~306); the only exact $\xi$-power relation $L_0/\ell_P=\xi_0$ (Dok.~180--182; P35).
+
+\emph{Restricted (bridge).} The absolute SI scale is fixed through fixed bridge constants ($v$, $E_0$, $G$-factors), not free --- but it is no $\xi$-forward result: $\hbar$ and $c$ are SI conversion, $G$ is derived ($\xi\to\{m_e,\dots\}\to G\to\ell_P$; Dok.~190 P40). A measured dimensional anchor in the standard-physics sense does not exist.
+
+\emph{Open.} The \emph{quantum equivalence} of the two framings is known; its methodological consequences are systematised here, not conclusively assessed.
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Complete Bibliography}
+\renewcommand{\refname}{Complete Bibliography}
+{\small\itshape The following sources were cited in the text or consulted for elaboration. All bibliographic details are given in full.\par}
+\vspace{0.4em}
+\begingroup
+\small
+\begin{thebibliography}{99}
+\setlength{\itemsep}{0.25em}
+\setlength{\itemsep}{0.25em}
+\bibitem{AharonovBohm1961}Aharonov, Y., \& Bohm, D. (1961). Time in the Quantum Theory and the Uncertainty Relation for Time and Energy. \emph{Physical Review}, 122(5), 1649.
+\bibitem{Barbour1999}Barbour, J. (1999). \emph{The End of Time: The Next Revolution in Physics}. Oxford University Press.
+\bibitem{Bars1997}Bars, I. (1997). Two-Time Physics. \emph{Physical Review D}, 55(4), 2375.
+\bibitem{Bars2012}Bars, I. (2012). Two-Time Physics: A Review. \emph{arXiv:1207.1693}.
+\bibitem{Connes1994}Connes, A. (1994). \emph{Noncommutative Geometry}. Academic Press.
+\bibitem{ConnesRovelli1994}Connes, A., \& Rovelli, C. (1994). Von Neumann algebra automorphisms and time--thermodynamics relation in generally covariant quantum theories. \emph{Classical and Quantum Gravity}, 11, 2899.
+\bibitem{DeWitt1967}DeWitt, B. S. (1967). Quantum Theory of Gravity. I. The Canonical Theory. \emph{Physical Review}, 160(5), 1113.
+\bibitem{Englert1964}Englert, F., \& Brout, R. (1964). Broken Symmetry and the Mass of Gauge Vector Mesons. \emph{Physical Review Letters}, 13(9), 321.
+\bibitem{GambiniPullin2015}Gambini, R., \& Pullin, J. (2015). The Montevideo Interpretation of Quantum Mechanics: A short review. \emph{Entropy}, 20(6), 413.
+\bibitem{GarrisonWong1970}Garrison, J. C., \& Wong, J. (1970). Time Operator and the Pauli Theorem. \emph{Journal of Mathematical Physics}, 11(8), 2242.
+\bibitem{Goedel1949}Gödel, K. (1949). An Example of a New Type of Cosmological Solutions of Einstein's Field Equations of Gravitation. \emph{Reviews of Modern Physics}, 21(3), 447.
+\bibitem{GreenSchwarzWitten1987}Green, M. B., Schwarz, J. H., \& Witten, E. (1987). \emph{Superstring Theory}. Cambridge University Press.
+\bibitem{Haldane1988}Haldane, F. D. M. (1988). Model for a Quantum Hall Effect without Landau Levels: Condensed-Matter Realization of the „Parity Anomaly``. \emph{Physical Review Letters}, 61(18), 2015.
+\bibitem{Hawking1984}Hawking, S. W. (1984). The Cosmological Constant and the Weak Anthropic Principle. \emph{Physics Letters B}, 134(6), 403.
+\bibitem{Hawking1992}Hawking, S. W. (1992). Chronology Protection Conjecture. \emph{Physical Review D}, 46(2), 603.
+\bibitem{Higgs1964}Higgs, P. W. (1964). Broken Symmetries and the Masses of Gauge Bosons. \emph{Physical Review Letters}, 13(16), 508.
+\bibitem{Isham1993}Isham, C. J. (1993). Canonical Quantum Gravity and the Problem of Time. In \emph{Integrable Systems, Quantum Groups, and Quantum Field Theories}, 157--287. Springer.
+\bibitem{Jackiw1999}Jackiw, R. (1999). The Unreasonable Effectiveness of Quantum Field Theory. \emph{Reviews of Modern Physics}, 71(2), S78.
+\bibitem{Kaluza1921}Kaluza, T. (1921). Zum Unitätsproblem der Physik. \emph{Sitzungsberichte der Preußischen Akademie der Wissenschaften}, 966.
+\bibitem{Klein1926}Klein, O. (1926). Quantentheorie und fünfdimensionale Relativitätstheorie. \emph{Zeitschrift für Physik}, 37, 895.
+\bibitem{Kuchar1992}Kuchař, K. V. (1992). Time and Interpretations of Quantum Gravity. In \emph{Proceedings of the 4th Canadian Conference on General Relativity and Relativistic Astrophysics}.
+\bibitem{MarlettoVedral2017}Marletto, C., \& Vedral, V. (2017). Evolution without evolution and without ambiguities. \emph{Physical Review D}, 95, 043510.
+\bibitem{Moreva2014}Moreva, E., Brida, G., Gramegna, M., Giovannetti, V., Maccone, L., \& Genovese, M. (2014). Time from quantum entanglement: An experimental illustration. \emph{Physical Review A}, 89, 052122.
+\bibitem{Muga2008}Muga, J. G., Mayato, R. S., \& Egusquiza, I. L. (Eds.). (2008). \emph{Time in Quantum Mechanics}. Springer.
+\bibitem{PageWootters1983}Page, D. N., \& Wootters, W. K. (1983). Evolution without evolution: Dynamics described by stationary observables. \emph{Physical Review D}, 27(12), 2885.
+\bibitem{Pauli1933}Pauli, W. (1933). Die allgemeinen Prinzipien der Wellenmechanik. In \emph{Handbuch der Physik}, Band 24, 83.
+\bibitem{Polchinski1998}Polchinski, J. (1998). \emph{String Theory}. Cambridge University Press.
+\bibitem{Reifler1992}Reifler, F. (1992). Kaluza-Klein Theory with Compact Time. \emph{Journal of Mathematical Physics}, 33(3), 1051.
+\bibitem{Rovelli1996}Rovelli, C. (1996). Relational Quantum Mechanics. \emph{International Journal of Theoretical Physics}, 35, 1637.
+\bibitem{Rovelli2004}Rovelli, C. (2004). \emph{Quantum Gravity}. Cambridge University Press.
+\bibitem{Rovelli2009}Rovelli, C. (2009). Forget time. \emph{Foundations of Physics}, 41, 1475.
+\bibitem{Sutherland1986}Sutherland, B. (1986). Localization of Electronic States in the Quantum Hall Effect. \emph{Physical Review B}, 34(8), 5208.
+\bibitem{Thiemann2007}Thiemann, T. (2007). \emph{Modern Canonical Quantum General Relativity}. Cambridge University Press.
+\bibitem{Unruh1995}Unruh, W. G. (1995). Time and the Quantum. \emph{arXiv:gr-qc/9508017}.
+\bibitem{Vafa1996}Vafa, C. (1996). Evidence for F-Theory. \emph{Nuclear Physics B}, 469(3), 403.
+\bibitem{Weinberg1995}Weinberg, S. (1995). \emph{The Quantum Theory of Fields}. Cambridge University Press.
+\bibitem{Weyl1928}Weyl, H. (1928). \emph{Gruppentheorie und Quantenmechanik}. Hirzel.
+\bibitem{Wheeler1968}Wheeler, J. A. (1968). Superspace and the nature of quantum geometrodynamics. In \emph{Battelle Rencontres}. Benjamin.
+\bibitem{Wigner1939}Wigner, E. P. (1939). On unitary representations of the inhomogeneous Lorentz group. \emph{Annals of Mathematics}, 40(1), 149.
+\bibitem{Witten1983}Witten, E. (1983). Some Problems in String Theory. In \emph{Proceedings of the 1982 Trieste Conference}. World Scientific.
+\end{thebibliography}
+\endgroup
+
+\end{document}

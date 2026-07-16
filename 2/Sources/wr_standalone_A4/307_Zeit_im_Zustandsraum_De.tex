@@ -1,0 +1,423 @@
+\documentclass[11pt,a4paper]{article}
+
+% ---- Engine: LuaLaTeX ----
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\usepackage{polyglossia}
+\setmainlanguage{german}
+
+\usepackage{microtype}
+% Blocksatz-Randausgleich (verhindert Text im Rand auf breitem A4-Satzspiegel):
+\emergencystretch=3.5em
+\tolerance=2500
+\hbadness=3000
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage[a4paper,margin=2.6cm,headsep=1.1em]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{needspace}
+
+% ---- Fonts ----
+\setmainfont{Inter}[
+  Scale=1.02,
+  Ligatures=TeX,
+  Language=German ]
+\setsansfont{Inter}[Scale=MatchLowercase,Ligatures=TeX]
+\setmonofont{JetBrains Mono}[Scale=0.95]
+\setmathfont{Libertinus Math}
+
+% ---- Colours ----
+\definecolor{accent}{HTML}{1F3A5F}     % deep slate blue
+\definecolor{accent2}{HTML}{6A4E2E}    % muted bronze
+\definecolor{rulecol}{HTML}{B9C2CE}
+\definecolor{linknav}{HTML}{2C5F8A}
+\definecolor{linkcite}{HTML}{7A5C2E}
+
+% ---- Hyperref ----
+\usepackage[
+  colorlinks=true,
+  linkcolor=linknav,
+  citecolor=linkcite,
+  urlcolor=linknav,
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  pdfstartview=FitH ]{hyperref}
+\hypersetup{
+  pdftitle={Zeit im Zustandsraum oder daneben},
+  pdfauthor={Johann Pascher},
+  pdfsubject={Grundlagen der Quantenmechanik --- Verortung der Zeit},
+  pdfkeywords={Zeit, Hilbertraum, kompakte Zeit, Kaluza-Klein, Massen-Moden, FFGFT}
+}
+
+% ---- Section styling ----
+\titleformat{\section}
+  {\color{accent}\normalfont\Large\bfseries}
+  {\color{accent2}\thesection}{0.7em}{}
+\titleformat{\subsection}
+  {\color{accent}\normalfont\large\bfseries}
+  {\color{accent2}\thesubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{1.6\baselineskip}{0.7\baselineskip}
+\titlespacing*{\subsection}{0pt}{1.1\baselineskip}{0.4\baselineskip}
+
+% ---- Headers ----
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{rulecol}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[L]{\footnotesize\color{accent}\itshape Zeit im Zustandsraum oder daneben}
+\fancyhead[R]{\footnotesize\color{accent2}\thepage}
+
+% ---- TOC look ----
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\normalfont}
+\renewcommand{\cftsecpagefont}{\normalfont}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftbeforesecskip}{3pt}
+
+% ---- Lead paragraph helper ----
+\newcommand{\lead}[1]{{\itshape\color{accent}#1}\par\vspace{0.4em}}
+
+\setlength{\parskip}{0.35em}
+\setlength{\parindent}{0pt}
+\linespread{1.06}
+
+\begin{document}
+
+% ===================== TITLE =====================
+\begin{titlepage}
+\centering
+\vspace*{2.2cm}
+{\color{rulecol}\rule{0.5\textwidth}{0.6pt}}\\[1.4cm]
+{\color{accent}\Huge\bfseries Zeit im Zustandsraum\\[0.3em] oder daneben\par}
+\vspace{1.0cm}
+{\large\itshape Eine erweiterte Auseinandersetzung\\ über die Herkunft der Moden\par}
+\vspace{0.6cm}
+{\color{accent2}\rule{0.28\textwidth}{0.4pt}}\\[1.0cm]
+{\large FFGFT $\cdot$ Dok.~307\par}
+\vspace{0.5cm}
+{\normalsize Ausgearbeitete Fassung mit erweiterten Quellen, Querverweisen und vollständiger Bibliographie\par}
+\vfill
+{\large Johann Pascher\par}
+\vspace{0.3cm}
+{\footnotesize ORCID: 0009-0000-6518-4064\par}
+\vspace{1.4cm}
+{\color{rulecol}\rule{0.5\textwidth}{0.6pt}}
+\vspace*{1.5cm}
+\end{titlepage}
+
+% ===================== TOC =====================
+\tableofcontents
+\thispagestyle{fancy}
+\clearpage
+
+\begingroup\small\noindent
+\textbf{Kurzfassung.} Zwei Rahmungen der Quantenmechanik werden gegenübergestellt: die \emph{ausgerollte} Sicht, die die Zeit als äußeren Parameter behält, und die \emph{eingerollte} Sicht, die sie als kompakte Dimension in den Zustandsraum zieht. Beide benutzen denselben Operator-Formalismus; der Unterschied liegt allein darin, ob die Zeit innen oder außen sitzt. In der eingerollten Sicht werden die Massen zu Eigenwerten einer Modenstruktur auf einem kompakten Torus; die konkrete FFGFT-Ausführung ist $\tilde T\cdot m = 1$ auf $L^2(T^4)\otimes\mathbb{C}^3$ (Dok.~230/231/232, 306). Die Verhältnisse der Massen sind damit exakt und aus einem einzigen dimensionslosen Parameter $\xi_0 = 4/30000$ abgeleitet; die absolute Skala trägt ihre SI-Korrektur über feste Brückenkonstanten (P40), ist aber kein freier Parameter. Vermeintlich offene Fragen --- absolute Skala, Kausalität geschlossener Zeit, Quantengravitation --- werden als im Korpus bereits entschieden eingeordnet (Dok.~013/190, 306, 230). Die eingerollte Sicht wird damit als Ableitungsrahmen mit framework-spezifischen Observablen (Mass-reading, CHSH$\sim\xi$, $D_f$, $L_0$) positioniert, nicht als Gedankenspiel.
+\par\endgroup
+
+\bigskip
+
+% ===================== 1 =====================
+\section{Die Gabelung}
+
+Am Anfang jeder quantenmechanischen Modellbildung steht eine Wahl, die meist unausgesprochen bleibt und dennoch alles Weitere festlegt: \textbf{Ist die Zeit eine Richtung \emph{im} Zustandsraum, oder ein Parameter \emph{neben} ihm?}
+
+Die Frage klingt technisch, ist aber ontologisch. Sie entscheidet nicht, welche Mathematik verwendet wird --- beide Antworten arbeiten mit selbstadjungierten Operatoren, Spektren und Projektoren --- sondern \emph{wo} die Zeit sitzt. Und genau diese Verortung entscheidet, ob die physikalischen Größen aus der Struktur \emph{fallen} oder ihr \emph{angeheftet} werden müssen. Die vorliegende Auseinandersetzung verfolgt diese eine Weichenstellung durch ihre Konsequenzen.
+
+Diese fundamentale Frage reicht bis zu den Wurzeln der Quantentheorie zurück. Schon 1932 erkannte \textbf{Wolfgang Pauli}, dass die Einführung eines Zeitoperators, der kanonisch zum Hamiltonian konjugiert ist, auf grundlegende Schwierigkeiten stößt~\cite{Pauli1933}. Das sogenannte „Pauli-Theorem`` hat die Entwicklung der Quantenmechanik maßgeblich geprägt und die Zeit als äußeren Parameter scheinbar unumstößlich gemacht. Erst spätere Arbeiten, insbesondere von \textbf{Aharonov und Bohm}~\cite{AharonovBohm1961} sowie \textbf{Garrison und Wong}~\cite{GarrisonWong1970}, zeigten, dass unter bestimmten Bedingungen (etwa bei nicht halb-beschränkten Spektren) Zeitoperatoren doch konstruiert werden können. Der Streit um den Zeitoperator ist bis heute nicht vollständig beigelegt und bildet den Hintergrund für die hier diskutierte Alternative~\cite{Muga2008}.
+
+% ===================== 2 =====================
+\section{Die ausgerollte Sicht: Zeit als äußerer Parameter}
+
+Die vertraute Formulierung der Quantenmechanik siedelt die Zeit außerhalb des Zustandsraums an. Der Hilbertraum ist der Raum der Zustände \emph{zu einem Zeitpunkt}, typischerweise $\mathcal{H} = L^2(\text{Konfigurationsraum})$. Die Zeit ist der Parameter $t$, entlang dessen sich der Zustand entwickelt, vermittelt durch die unitäre Evolution $e^{-i\hat{H}t}$. Die Observablen --- Ort, Impuls, Spin --- sind Operatoren \emph{auf} $\mathcal{H}$. Die Zeit ist keiner.
+
+Dass sie keiner sein kann, ist kein Versehen, sondern ein bekanntes Resultat: Paulis Einwand~\cite{Pauli1933} zeigt, dass zu einem nach unten beschränkten Hamiltonian kein selbstadjungierter, kanonisch konjugierter Zeitoperator existiert. In der ausgerollten Sicht bleibt die Zeit deshalb notwendig die Bühne, nicht das Stück.
+
+Die Konsequenz ist strukturell und folgenreich: Da die Zeit außen steht, enthält der Zustandsraum allein keine dynamischen Skalen. Massen, Kopplungen, Lebensdauern sind in der reinen Raumstruktur nicht vorhanden --- sie müssen über \emph{zusätzliche} Strukturen von außen eingeführt werden. Im Standardmodell geschieht dies durch Yukawa-Terme und die freien Parameter, die deren Stärke festlegen. Die Struktur liefert den Rahmen; die Zahlen kommen aus der Messung.
+
+Diese Problematik ist nicht neu. Bereits \textbf{Hermann Weyl}~\cite{Weyl1928} und später \textbf{Eugene Wigner}~\cite{Wigner1939} erkannten, dass die Massen der Elementarteilchen aus gruppentheoretischer Perspektive als Casimir-Invarianten erscheinen --- also als strukturelle Label, nicht als angeheftete Parameter. Dennoch blieb die Frage der Massengenerierung ein zentrales ungelöstes Problem der theoretischen Physik. Der Higgs-Mechanismus~\cite{Higgs1964,Englert1964} bietet zwar eine Erklärung für die Masse der Eichbosonen, führt aber selbst neue freie Parameter (die Yukawa-Kopplungen) ein.
+
+Die Kritik an der ausgerollten Sicht ist daher nicht, dass sie falsch wäre, sondern dass sie eine fundamentale Frage --- die Herkunft der Massenskalen --- unbeantwortet lässt und stattdessen auf externe Eingaben verweist. Dies wird besonders deutlich, wenn man die historische Entwicklung der Quantenfeldtheorie betrachtet: Der Übergang von der „alten`` Quantenmechanik zur Quantenfeldtheorie brachte zwar die Möglichkeit der Teilchenerzeugung und -vernichtung, aber keine intrinsische Erklärung für die Massenwerte~\cite{Weinberg1995}.
+
+% ===================== 3 =====================
+\section{Eine repräsentative Konstruktion dieser Art}
+
+Viele Modellprogramme, die eine geometrische Herkunft der Teilcheneigenschaften anstreben, folgen --- bei aller Verschiedenheit im Detail --- demselben Grundschema, und es lohnt, dieses Schema abstrakt zu betrachten:
+
+\begin{enumerate}[leftmargin=1.6em,itemsep=0.2em]
+  \item Man wählt einen diskreten Träger (ein Gitter, eine Cut-and-Project-Struktur, einen periodischen Graphen).
+  \item Auf ihm definiert man eine selbstadjungierte Operatorfamilie.
+  \item Über Spektralprojektoren extrahiert man \emph{Sektoren} --- Eigenräume oder invariante Unterräume des Operators.
+  \item Diesen Sektoren wird \emph{nachträglich} physikalische Bedeutung zugeordnet: Ladung, Spin, und Masse --- Letztere häufig über eine parametrische Abbildung, etwa eine Yukawa-artige Funktion mit ein oder zwei freien Parametern.
+\end{enumerate}
+
+Ein solches Vorgehen kann mathematisch vollständig kontrolliert und reproduzierbar sein. Die entscheidende Beobachtung betrifft nicht seine Strenge, sondern seine \emph{Verortung der Zeit}: Der Träger ist ein räumliches Objekt, die Operatorevolution --- wo sie überhaupt auftritt --- läuft über einen äußeren Parameter. Die Sektoren sind daher \textbf{räumliche Eigenräume, keine Zeit-Moden}. Die Masse ist in ihnen nicht enthalten; sie wird ihnen über die parametrische Abbildung angeheftet.
+
+Und hier greift ein Argument, das sich selbst trägt: \textbf{Eine parametrische Abbildung mit freien Parametern kann jede endliche Werteliste treffen.} Ist die Abbildung nicht \emph{vorab und universell} fixiert, so besitzt sie keinen prädiktiven Gehalt --- sie benennt die bekannten Eingaben um. Um überhaupt Zahlen zu liefern, muss eine solche Konstruktion daher an \emph{externe} Werte gekoppelt werden: an die Messung, und damit --- da die Messwerte des Teilchensektors standardmodell-kalibriert sind --- indirekt an das Standardmodell selbst. Das ist der schwierige Weg: Die Zahlen kommen von außen, nicht aus der Struktur. Ein Modell, das sich als Alternative versteht, bezieht seine Vergleichswerte am Ende doch aus dem, wovon es sich absetzen wollte.
+
+Der Punkt ist nicht, dass dieses Vorgehen falsch wäre. Es ist redlich, sofern es seine eigene Grenze deklariert --- dass es nämlich keine Massen \emph{ableitet}, sondern eine kontrollierte Hypothesenarchitektur bereitstellt. Der Punkt ist, dass die \emph{Schwierigkeit} dieses Wegs kein Zufall ist, sondern die unmittelbare Folge der ausgerollten Verortung der Zeit.
+
+\textbf{Ein konkretes Beispiel:} Die sogenannte „Graphen-Modellierung`` der Teilchenphysik~\cite{Jackiw1999,Sutherland1986} definiert Quasiteilchen-Anregungen auf hexagonalen Gittern. Diese Anregungen zeigen lineare Dispersionsrelationen und können als masselose Fermionen interpretiert werden --- aber die Einführung einer Masse erfordert stets zusätzliche Terme (etwa einen Haldane-Term~\cite{Haldane1988} oder eine Kekulé-Distorsion), die mit freien Parametern versehen sind. Die Geometrie liefert die Kinematik, aber nicht die Massenskala.
+
+% ===================== 4 =====================
+\section{Die eingerollte Sicht: Zeit als kompakte Dimension des Zustandsraums}
+
+Die Alternative belässt die Zeit nicht außen und eliminiert sie auch nicht, sondern zieht sie \emph{in} den Zustandsraum --- als geschlossene, periodische Dimension. In Hilbertraum-Sprache tritt an die Stelle von $L^2(\text{Raum})$ mit äußerem $t$ ein Raum, in dem eine kompakte Zeit-Richtung Teil der Geometrie ist, etwa $\mathcal{H} = L^2(T^4)\otimes(\text{interner Faktor})$, wobei eine der Torus-Richtungen die Zeit trägt. Im FFGFT-Korpus ist dieser Hilbertraum als $L^2(T^4)\otimes\mathbb{C}^3$ ausgeführt und die Bijektivität der Darstellung (Typ~III) belegt (Dok.~230/231/232, 270).\footnote{Dok-Nummern verweisen durchgehend auf den FFGFT-Korpus (Zeit-Masse-Dualität), nicht auf die nummerierte Bibliographie am Ende.}
+
+Auf einer geschlossenen Dimension sind die zulässigen Zustände \textbf{stehende Moden mit diskreten Windungszahlen}. Die Quantisierung ist dann nicht postuliert, sondern geometrisch erzwungen: Nur bestimmte Moden passen auf die geschlossene Struktur. Die Masse wird zum \textbf{Eigenwert eines Operators auf $\mathcal{H}$ selbst} --- nicht angeheftet, sondern strukturell enthalten. Die Verhältnisse der Massen liegen fest, weil die zulässigen Moden festliegen.
+
+Die Relation Zeitzyklus mal Masse gleich Eins, $\tilde{T}\cdot m = 1$, ist die konkrete Ausführung dieses Gedankens: Jede massive Größe \emph{ist} ihr eigener Zeitzyklus. Im Korpus ist dies die native Zeit-Energie-Reziprozität $T\cdot E = 1$ (Dok.~306), und die Entkompaktifizierung $S^1_m\to\mathbb{R}_t$ ist maßerhaltend, also verlustfrei (Dok.~270). Dass eine kompakte Dimension einen diskreten Moden-Turm erzeugt, dessen Massen sich wie das Inverse der Kompaktifizierungsperiode verhalten, ist kein exotischer Zug, sondern der Mechanismus, den \textbf{Kaluza und Klein}~\cite{Kaluza1921,Klein1926} bereits für eine kompakte Raum-Dimension beschrieben haben ($m_n \propto n/R$). Was dort für eine eingerollte Raum-Richtung gilt, gilt hier für die eingerollte Zeit --- mit der Masse in der Rolle des Modenindex.
+
+Bemerkenswert ist, dass Paulis Einwand~\cite{Pauli1933} die eingerollte Sicht nicht trifft. Er gilt für eine \emph{offene}, nach unten unbeschränkte Zeit konjugiert zu einem beschränkten Hamiltonian. Eine \emph{kompakte} Zeit verhält sich wie eine Winkelvariable: Ihr konjugiertes Spektrum ist diskret (wie beim Drehimpuls zum Winkel), und das Pauli-Argument entfällt. Die geschlossene Zeit ist mathematisch nicht nur zulässig, sie ist der natürliche Ort einer diskreten Modenstruktur.
+
+Diese Einsicht hat tiefe Wurzeln in der mathematischen Physik. \textbf{Witten}~\cite{Witten1983} wies darauf hin, dass kompakte Zeitdimensionen in der Stringtheorie natürlicherweise auftreten. \textbf{Hawking}~\cite{Hawking1984} diskutierte die Implikationen einer geschlossenen Zeit für die Kosmologie. Die sogenannte „Kaluza-Klein-Theorie mit kompakter Zeit`` wurde in verschiedenen Kontexten untersucht, etwa von \textbf{Reifler}~\cite{Reifler1992} und \textbf{Bars}~\cite{Bars1997,Bars2012}, die eine „zweizeitige Physik`` (two-time physics) entwickelten.
+
+Die eingerollte Sicht hat auch Verbindungen zur \textbf{thermodynamischen Zeit}~\cite{ConnesRovelli1994}. Wenn die Zeit kompakt ist, ist die thermodynamische Pfeilrichtung nicht fundamental, sondern eine emergente Eigenschaft der nicht-kompakten Raumanteile. Dies könnte eine natürliche Erklärung für die scheinbare Irreversibilität der makroskopischen Physik bieten, ohne auf Ad-hoc-Annahmen über Anfangsbedingungen zurückgreifen zu müssen.
+
+% ===================== 5 =====================
+\section{Der Kern der Auseinandersetzung}
+
+Nun die eigentliche Abwägung, ohne Vorentscheidung.
+
+\textbf{Was die ausgerollte Sicht gewinnt:} den nahtlosen Anschluss an die etablierte Maschinerie der Quantenfeldtheorie; die Freiheit von einer starken ontologischen Festlegung; die Vertrautheit der offenen Zeitachse. \textbf{Was sie kostet:} Die Struktur allein legt keine Massen fest. Dynamische Werte müssen von außen; Vorhersagen hängen an externer Kalibrierung; und ein Modell dieses Typs, das sich als eigenständig versteht, koppelt für seine Zahlen doch wieder an die Messung --- und damit ans Standardmodell.
+
+\textbf{Was die eingerollte Sicht gewinnt:} Die Moden und ihre Verhältnisse fallen aus der Struktur, ohne parametrisches Anheften; die diskrete Quantisierung ist geschenkt statt postuliert. \textbf{Was sie kostet:} eine starke ontologische Behauptung --- Zeit als geschlossene Dimension ---, die zu rechtfertigen ist und der gewohnten Intuition der laufenden Zeit widerspricht. Und sie hebt nicht jede äußere Anbindung auf: Die \emph{absolute} Skala braucht weiterhin eine Einheiten-Brücke (die SI-Umrechnung über die Konversionsfaktoren; Dok.~013, sowie Dok.~190 P40: Absolutwerte tragen die Korrektur über Brückenkonstanten, Verhältnisse sind exakt), damit aus den festen Verhältnissen messbare Zahlen werden. Geschenkt sind die Verhältnisse, nicht die absolute Skala.
+
+Der entscheidende Befund der Auseinandersetzung ist aber dieser: \textbf{Beide Wege benutzen denselben Operator-Formalismus.} Der Unterschied liegt nicht in der Mathematik, sondern allein darin, ob die Zeit innen oder außen sitzt. Man kann dieselbe Konstruktion --- selbstadjungierter Operator, Spektralsektoren --- beibehalten und \emph{nur die Zeit in den Raum ziehen}; dann werden die Sektoren zu Moden, und die Masse, die zuvor über eine parametrische Abbildung angeheftet werden musste, wird zum Eigenwert der Struktur selbst. Wer die Sektoren als räumliche Eigenräume liest, muss die Physik anheften. Wer sie als Zeit-Moden liest, findet sie enthalten. Es ist dieselbe Rechnung --- mit der Zeit an einem anderen Ort.
+
+Diese Erkenntnis hat weitreichende methodologische Implikationen. Sie zeigt, dass die Wahl der Zeitverortung eine Art „framework choice`` darstellt, die der eigentlichen Modellbildung vorausgeht und deren interpretative Reichweite festlegt. \textbf{Dies ist keine triviale Feststellung}: Die sogenannte \textbf{„quantum equivalence``} beider Sichten ist wohlbekannt~\cite{Unruh1995}, aber ihre methodologischen Konsequenzen wurden bisher kaum systematisch untersucht.
+
+% ===================== 6 =====================
+\section{Wer die Richtung „Zeit nicht extern`` bereits bemüht hat}
+
+Der Gedanke, die Zeit nicht als äußeren Parameter zu behandeln, ist keine Neuheit, sondern eine reiche und lange verfolgte Linie in den Grundlagen der Physik. Es ist redlich, die eingerollte Sicht in dieser Linie zu verorten --- und ihre Besonderheit gegen sie abzugrenzen.
+
+\subsection{Die relationale Zeit}
+\begin{itemize}[leftmargin=1.4em,itemsep=0.25em]
+  \item \textbf{Page \& Wootters}~\cite{PageWootters1983} lassen die Zeit \emph{innerhalb} des Zustandsraums entstehen: als Korrelation (Verschränkung) zwischen einem Uhr-Subsystem und dem Rest. Der Gesamtzustand ist stationär; „Evolution ohne Evolution``. Zeit ist hier intern, nicht extern.
+  \item Die Arbeiten von \textbf{Moreva et al.}~\cite{Moreva2014} und \textbf{Marletto \& Vedral}~\cite{MarlettoVedral2017} haben diesen Mechanismus präzisiert und sogar experimentell illustriert.
+  \item \textbf{Gambini \& Pullin}~\cite{GambiniPullin2015} entwickelten die Montevideo-Interpretation mit relationaler Zeit.
+\end{itemize}
+
+\subsection{Die zeitlose Quantengravitation}
+\begin{itemize}[leftmargin=1.4em,itemsep=0.25em]
+  \item \textbf{Wheeler--DeWitt}~\cite{DeWitt1967,Wheeler1968}: In der kanonischen Quantengravitation ist die universelle Wellenfunktion zeitlos, $\hat{H}\Psi = 0$. Das daraus folgende „Problem der Zeit`` ist genau die Feststellung, dass es keine äußere Zeit gibt.
+  \item \textbf{Kuchař}~\cite{Kuchar1992} und \textbf{Isham}~\cite{Isham1993} lieferten die maßgeblichen Übersichten zum Zeitproblem der kanonischen Quantengravitation.
+  \item \textbf{Rovelli}~\cite{Rovelli1996,Rovelli2009}: relationale Quantenmechanik; „Forget Time``; mit \textbf{Connes} die thermische-Zeit-Hypothese~\cite{ConnesRovelli1994} --- Zeit als abgeleitete, nicht fundamental-externe Größe.
+  \item \textbf{Barbour}~\cite{Barbour1999}, \emph{The End of Time}: die konsequente Elimination der Zeit zugunsten zeitloser Konfigurationen.
+\end{itemize}
+
+\subsection{Die kompakte Zeit in der Stringtheorie}
+\begin{itemize}[leftmargin=1.4em,itemsep=0.25em]
+  \item Die Stringtheorie hat kompakte Zeitdimensionen in verschiedenen Kontexten untersucht~\cite{GreenSchwarzWitten1987,Polchinski1998}.
+  \item \textbf{Bars} und Kollegen entwickelten eine „zweizeitige Physik`` (two-time physics)~\cite{Bars1997,Bars2012}, die eine erweiterte Symmetriegruppe mit zwei Zeitdimensionen postuliert.
+\end{itemize}
+
+\subsection{Die Moden-Struktur}
+Zwei weitere Referenzen tragen weniger die Zeit-Frage als die \emph{Moden}-Seite und begründen, dass „Masse als Struktur-Eigenwert`` wohlvertraut ist:
+\begin{itemize}[leftmargin=1.4em,itemsep=0.25em]
+  \item \textbf{Wigner}~\cite{Wigner1939}: Masse ist eine Casimir-Invariante --- ein Label irreduzibler Darstellungen der Poincaré-Gruppe. Masse ist dort bereits ein struktureller Eigenwert, nicht eine angeheftete Zahl.
+  \item \textbf{Kaluza}~\cite{Kaluza1921} / \textbf{Klein}~\cite{Klein1926}: eine kompaktifizierte Dimension erzeugt einen diskreten Moden-Turm mit gequantelten Ladungen --- die mathematische Blaupause dafür, dass eine eingerollte Dimension Moden hervorbringt.
+\end{itemize}
+
+Die Abgrenzung, die dieser Überblick erlaubt, ist präzise: Der überwiegende Teil dieser Tradition macht die Zeit \emph{relational}, \emph{emergent} oder \emph{zeitlos} --- sie nimmt die Zeit als Fundamentales \emph{heraus}. Die eingerollte Sicht tut etwas subtil anderes: Sie nimmt die Zeit \emph{hinein} --- als kompakte geometrische Dimension des Zustandsraums, die Moden trägt. Sie teilt mit Page--Wootters und Rovelli die Ablehnung der äußeren Parameter-Zeit, unterscheidet sich aber im positiven Vorschlag (kompakte geometrische Zeit statt relationaler oder thermischer Zeit). Die Neuheit liegt also nicht in „Zeit ist nicht extern`` --- das ist alt und gut belegt ---, sondern in der spezifischen Route „kompakte Zeit erzeugt Massen-Moden``.
+
+% ===================== 7 =====================
+\section{Erweiterung: Mathematische und physikalische Implikationen}
+
+\subsection{Die mathematische Struktur der eingerollten Zeit}
+
+Um die eingerollte Sicht präziser zu fassen, betrachten wir den Hilbertraum $\mathcal{H} = L^2(T^1 \times M) \otimes \mathcal{H}_{\text{int}}$, wobei $T^1$ eine kompakte Zeitdimension der Länge $T$ ist und $M$ der gewöhnliche dreidimensionale Raum. Eine Funktion auf diesem Raum kann in eine Fourier-Reihe entwickelt werden:
+\[
+  \Psi(t, \mathbf{x}) = \sum_{n \in \mathbb{Z}} e^{i n t / T}\, \psi_n(\mathbf{x})
+\]
+Die diskreten Frequenzen $\omega_n = 2\pi n / T$ entsprechen den Massenwerten (in natürlichen Einheiten $\hbar = c = 1$). Der Operator, der diese Frequenzen generiert, ist der Energie-Operator $\hat{E} = -i\,\partial_t$, dessen Eigenwerte genau das diskrete Spektrum $\{2\pi n / T\}$ sind.
+
+Die entscheidende Beobachtung ist: Die Quantisierung der Massen ist eine direkte Konsequenz der Periodizität der Zeit. \textbf{Nichts muss postuliert werden} --- die diskreten Moden sind mathematisch erzwungen.
+
+\subsection{Die Yukawa-Kopplung in der eingerollten Sicht}
+
+Die Kopplung zwischen verschiedenen Moden kann als Matrixelement des Wechselwirkungsoperators geschrieben werden:
+\[
+  g_{ijk} \propto \int_{T^1} e^{i(n_i - n_j - n_k)t/T}\, dt = T \cdot \delta_{n_i,\, n_j + n_k}
+\]
+Dies ist eine exakte Drehimpuls-Erhaltung in der Zeit-Richtung! Die „Yukawa-Kopplungen`` des Standardmodells erscheinen hier als Auswahlregeln für die Moden-Indices, nicht als freie Parameter~\cite{Weinberg1995}.
+
+\subsection{Die Rolle der Eichsymmetrien}
+
+Die eingerollte Zeit erlaubt eine natürliche Erweiterung der Eichsymmetrien. \textbf{Die kompakte Zeit-Richtung verhält sich wie eine zusätzliche fünfte Dimension} im Sinne der Kaluza-Klein-Theorie, aber mit dem entscheidenden Unterschied, dass sie zeitartig ist. Dies liefert die Erklärung für die Ladungsquantisierung~\cite{Kaluza1921,Klein1926}:
+\[
+  Q \propto \frac{n}{R_T}
+\]
+wobei $R_T$ der Radius der kompakten Zeit ist. Die Ladungsquantisierung ist damit eine direkte Konsequenz der Periodizität der Zeit.
+
+\subsection{Die Massenhierarchie in der eingerollten Sicht}
+
+Ein zentrales Problem der Teilchenphysik ist die Massenhierarchie: Warum ist das Elektron so viel leichter als das Top-Quark? Der Korpus beschreibt die Leptonmassen in drei Darstellungen, die \emph{ineinander übersetzbar} sind --- keine ist ein eigener Ansatz, sie sind dieselbe Struktur in verschiedener Schreibweise (Dok.~006/046/282/292).
+
+\textbf{(1) Grundlegend --- Quantenzahlen und fraktale Korrektur.} Teilchen sind diskrete Resonanzmoden des $\xi$-Feldes; ihre Skala folgt aus einer geometrischen Quantisierung mit den Quantenzahlen $(n_i,l_i,j_i)$ der 3D-Wellengleichung,
+\[
+  \xi_i = \xi_0\cdot f(n_i,l_i,j_i),\qquad E_i = 1/\xi_i,\qquad \xi_0=\tfrac{4}{30000},
+\]
+wobei die Absolutwerte die fraktale Korrektur $K_{\text{frak}}=1-100\,\xi$ tragen (Dok.~011/012/133). Beispiel: Elektron $(1,0,\tfrac12)$, Myon $(2,1,\tfrac12)$.
+
+\textbf{(2) Yukawa- bzw.\ Leiter-Form.} Dieselbe Ableitung schreibt sich als $m_i = r_i\,\xi^{\pi_i}\,v$ (Dok.~006/046) mit rationalen $r_i$ und der Generations-Hierarchie $\pi=\tfrac32,\,1,\,\tfrac23$ --- die stan\-dard\-modell-kompatible Brücke.
+
+\textbf{(3) Zirkulant/Koide.} Die $\sqrt{m_k}$ sind Eigenwerte eines $\mathbb{Z}_3$-Zirkulanten, $\sqrt{m_k}=M\bigl(1+\sqrt2\cos(\tfrac29+2\pi k/3)\bigr)$ (Dok.~282/292), mit der Koide-Relation $Q=2/3$; der Winkel $\theta=2/9$ ist die Ausgabe der Diagonalisierung.
+
+Der entscheidende Punkt: die \emph{dimensionslosen Verhältnisse} sind exakt (Koide $Q=2/3$, $\theta=2/9$, die Massenverhältnisse aus $(\sqrt2,\,2/9)$). Abweichungen entstehen erst beim Übergang zu \emph{absoluten} SI-Werten, und dort aus mehreren Gründen zugleich: der SI-Umrechnung selbst ($\hbar,c,G$ sind Konventions- bzw.\ Umrechnungsfaktoren, kein gemessener dimensionaler Anker), den Brückenkonstanten $v$ und $E_0$ (P40), der fraktalen Korrektur $K_{\text{frak}}$ sowie der endlichen Messgenauigkeit (etwa der $\tau$-Masse). Deshalb ist die Aussage ein \emph{Strukturbeweis}: die Verhältnisse liegen fest, die absolute Skala trägt ihre Korrektur --- eine numerisch bessere Berechnung als das Standardmodell wird nicht beansprucht.
+
+\subsection{Die Beziehung zur Stringtheorie}
+
+Die eingerollte Zeit hat Parallelen zur \textbf{M-Theorie} und zur \textbf{F-Theorie}~\cite{Vafa1996}, die beide kompakte Dimensionen verwenden. In der F-Theorie hat die Zeit-Dimension tatsächlich eine kompakte Richtung, die für die Eichsymmetrien verantwortlich ist. Die hier entwickelte Sicht könnte als eine Art „F-Theorie light`` verstanden werden: Eine kompakte Zeit-Dimension ohne die volle Stringtheorie-Maschinerie.
+
+% ===================== 8 =====================
+\section{Kritische Würdigung und Einordnung}
+
+\subsection{Ontologischer Status der Zeit}
+
+Der ontologische Anspruch der eingerollten Sicht ist stark, aber im Korpus nicht offen gelassen: Die kompakte Zeit ist real und geometrisch, nicht bloß eine Rechentechnik. Der Rand $\partial T^4 = \emptyset$ macht die Frage nach einem Anfangszeitpunkt $t=0$ nicht falsch beantwortet, sondern \emph{falsch gestellt} (Dok.~306). Die Zeit ist dabei \emph{diskret}: FFGFT besitzt ein minimales, von $\xi$ festgelegtes Zeitinkrement $d_1 = 100\,\xi_0 = 1/75$ (Dok.~306), und die zulässigen Zustände sind diskrete Moden. Da diese Moden untereinander stets in fester Relation stehen --- ihre Verhältnisse sind exakt ---, liegt ein gemeinsamer \emph{Grundtakt} vor: über $\tilde T\cdot m = 1$ trägt zwar jede massive Größe ihren eigenen Zyklus $T=\hbar/mc^2$, doch diese Zyklen sind keine unabhängigen Uhren, sondern kommensurable Vielfache desselben $\xi$-fixierten Inkrements --- Harmonische eines Grundtakts, nicht ein Kontinuum freier Uhren.
+
+Der Physiker \textbf{John Wheeler}~\cite{Wheeler1968} sprach von der „Zeit als einer Illusion`` --- eine Position, die die eingerollte Sicht nicht teilt. Sie nimmt die Zeit als real, aber geometrisch anders als gewohnt.
+
+\subsection{Die absolute Skala: fixiert, nicht frei}
+
+Die Verhältnisse der Massen folgen aus der Modenstruktur, und genau sie sind exakt. Die absolute Skala ist damit noch nicht in SI-Zahlen ausgedrückt --- aber sie ist deshalb kein \emph{freier} Parameter. Das Verhältnisgerüst ruht auf einem einzigen dimensionslosen Parameter $\xi_0 = 4/30000$ (dem geometrischen $\xi$-Wert des Ortsraum-Torus). Die Absolutwerte tragen ihre fraktale bzw.\ SI-Korrektur nicht als Fit, sondern über feste \emph{Brückenkonstanten} --- $v$ in den Massen $m = r\,\xi^{p} v$, $E_0 = 7{,}398$~MeV in $\alpha = \xi E_0^2$, und feste Zahlenfaktoren in $G$. In Verhältnissen kürzen sich diese Brückenkonstanten weg ($m_\mu/m_e = 206{,}768$, korrekturfrei). $\hbar$ und $c$ sind reine SI-Umrechnung; ein \emph{gemessener} dimensionaler Anker im Standardphysik-Sinn existiert nicht.
+
+Die Planck-Größen sind kein fundamentaler Eingang, sondern folgen aus $\xi$: die Ableitungskette lautet $\xi \to \{m_e,\dots\} \to G \to \ell_P$, und $\hbar$ selbst ist geometrisch ($\xi \to L_0 = \xi_0\,\ell_P \to \hbar \sim \sqrt{\xi}\,\ell_P\,c$). Die \emph{einzige} exakte $\xi$-Potenz-Relation ist dabei
+\[
+  \frac{L_0}{\ell_P} = \xi_0, \qquad L_0 = \xi_0\,\ell_P \approx 2{,}15\times10^{-39}\,\text{m};
+\]
+der SI-Faktor $\ell_P$ darf \emph{nicht} in einen $\xi$-Exponenten hineingerechnet werden. Der Zeitzyklus ist damit nicht „an die Planck-Skala gekoppelt`` --- die Kausalrichtung ist umgekehrt: die Planck-Größen folgen aus $\xi$, nicht $\xi$ aus ihnen. Über $\tilde{T}\cdot m = 1$ (bzw.\ $T\cdot E = 1$) liegt der Zyklus fest, sobald die Masse über die $\xi$-Geometrie feststeht. Es bleibt kein zu eichender Modul offen; die Dilaton- bzw.\ Moduli-Analogie zur Stringtheorie trägt hier nicht. (Ausgeführt im Korpus: Dok.~013 SI-Umrechnungstabelle; Dok.~190 P40 sowie Präz.~2/4/5; Dok.~011/012 und Dok.~133 für $K_\text{frak}=1-100\,\xi$; $L_0=\xi_0\ell_P$ in Dok.~180--182.)
+
+\subsection{Die Kausalität}
+
+Die naheliegende Sorge --- erzeugt eine periodische Zeit geschlossene zeitartige Kurven (CTCs)? --- ist im Korpus adressiert, nicht offen. Der Träger ist ein Torus ($\pi_1\neq0$, stabile Windungen), kein einfacher Kreis, und die relevante Verbindung ist nicht ontologische Nichtlokalität, sondern eine \emph{topologische} Verbindung auf $T^4$: die Bell-/CHSH-Korrelation ist geometrisch real und trägt eine Amplitude $\sim\xi$ (Dok.~230, vgl.\ Dok.~022).
+
+Die klassische CTC-Problematik der Gödel-Lösungen~\cite{Goedel1949} und die Chronologie-Schutz-Vermutung~\cite{Hawking1992} betreffen den \emph{dekompaktifizierten} Lorentz-Sektor; die kompakte Masse-Zeit-Richtung ist spektral, nicht kausal geschlossen (Dok.~270/306).
+
+\subsection{Die experimentelle Überprüfung}
+
+Die Vorhersagen der eingerollten Sicht sind \emph{nicht} die eines verborgenen schweren Moden-Turms oberhalb der Beschleuniger-Reichweite. Das diskrete Spektrum der kompakten Zeit \emph{ist} über $\tilde{T}\cdot m = 1$ bereits das beobachtete Teilchenspektrum (Mass-reading); es gibt keinen zusätzlichen Kaluza-Klein-Turm, auf den zu warten wäre. Die framework-spezifischen, überprüfbaren Größen sind vielmehr:
+\begin{enumerate}[leftmargin=1.6em,itemsep=0.2em]
+  \item \textbf{Mass-reading:} die Teilchenmassen selbst --- Lepton-Massenstruktur ($m_\ell=r_\ell\xi^{p_\ell}v$, Dok.~190 Präz.~5), Koide-Relation ($10^{-5}$, Dok.~292), $g-2$ des Elektrons --- als $\xi$-Ableitungen.
+  \item \textbf{Auswahlregeln:} die Moden-Index-Erhaltung ist identisch mit den Kopplungs-Auswahlregeln des Standardmodells (vgl.\ §7.2), keine freien Yukawa-Zahlen.
+  \item \textbf{CHSH $\sim \xi$:} die Bell-Korrelation trägt eine Amplitude der Größenordnung $\xi$ (Dok.~230, Dok.~022) --- die kompakte Zeit ist als reale, topologische Verbindung auf $T^4$ messbar, nicht als ontologische Nichtlokalität.
+  \item \textbf{Fraktale Struktur:} die geometrische Fundamentallänge $L_0 = \xi_0\,\ell_P$ (Dok.~180--182) und die fraktale Dimension $D_f$ (Dok.~270/249).
+\end{enumerate}
+
+Für eine \emph{saubere} Falsifikation reichen Verhältnis-Tests allein nicht --- sie bestätigen (Koide), falsifizieren aber kaum, weil Abweichungen stets als un-modellierte Kopplung deutbar sind. Belastbar ist erst eine \emph{vorwärts} festgelegte, unabhängig prüfbare neue Vorhersage (Dok.~190 P40).
+
+\subsection{Verbindung zur Quantengravitation}
+
+Die Brücke zur Quantengravitation ist im Korpus nicht bloß angedeutet, sondern als Hilbertraum-Konstruktion ausgeführt: $L^2(T^4)\otimes\mathbb{C}^3$ mit der aus der $\mathbb{Z}_3$-Zirkulanten-Diagonalisierung folgenden Größe $\theta = 2/9$ (Dok.~230/231/232; im Korpus \emph{settled}, nicht offen).
+
+In der Schleifenquantengravitation~\cite{Rovelli2004,Thiemann2007} wird die Zeit relational verstanden --- eine Position, der die eingerollte Sicht nahesteht; \textbf{Connes}~\cite{Connes1994} zeigt, dass Zeit aus der Operatoralgebra folgen kann. Die eingerollte Sicht konkretisiert diese Linie geometrisch statt bloß relational.
+
+% ===================== 9 =====================
+\section{Fazit}
+
+Die Wahl, wo die Zeit sitzt, geht der Mathematik voraus und entscheidet, ob die Moden geschenkt oder angeheftet sind. Eine Konstruktion, die die Zeit außen lässt, wird --- strukturell, nicht aus Nachlässigkeit --- ihre physikalischen Werte von außen anheften müssen; und weil freie parametrische Abbildungen jede endliche Werteliste treffen, koppelt sie für ihre Zahlen an die Messung und damit ans Standardmodell. Das ist der Preis der ausgerollten Sicht: keine eigenständige Vorhersage ohne äußere Anbindung.
+
+Die Zeit in den Zustandsraum zu ziehen ist \emph{ein} Weg --- mit einem realen ontologischen Preis ---, die Moden und ihre Verhältnisse strukturell zu machen. Die lange Linie von Page--Wootters über Wheeler--DeWitt bis Kaluza--Klein zeigt, dass die Bewegung „Zeit nicht extern`` gut motiviert und vielfach verfolgt ist; die konkrete Ausführung „kompakte Zeit trägt die Massen-Moden`` ist eine bestimmte, starke Wahl innerhalb dieser Linie.
+
+Die Auseinandersetzung endet daher nicht mit einem Urteil, sondern mit einer geschärften Alternative: Wer Sektoren als räumliche Eigenräume liest, hält die vertraute Physik und zahlt mit der äußeren Anheftung der Zahlen. Wer die Zeit als geschlossene Dimension in den Raum nimmt, erhält die Moden strukturell und zahlt mit einer ontologischen Festlegung. Der ontologische Preis der zweiten Wahl bleibt offen auf dem Tisch --- aber der methodische Preis der ersten ist nicht kleiner, er ist nur vertrauter.
+
+Die eingerollte Sicht ist dabei kein bloßes Gedankenspiel: Sie besitzt framework-spezifische, überprüfbare Größen --- Mass-reading (Massen, Koide, $g-2$), CHSH~$\sim\xi$, fraktale Dimension $D_f$, Fundamentallänge $L_0$ (§8.4).
+
+Die hier entwickelte Analyse zeigt, dass die Frage nach der Herkunft der Moden untrennbar mit der Frage nach der Verortung der Zeit verbunden ist. \textbf{Die Zeit ist nicht nur ein Parameter --- sie ist die Struktur, die die Moden formt.} Oder, wie es der Physiker \textbf{Carlo Rovelli}~\cite{Rovelli2009} ausdrückte: „Time is not what we think it is.``
+
+\section{Epistemischer Status}
+
+\emph{Proven (aus $\xi$ abgeleitet).} Die Verhältnisstruktur der Massen ($m_\ell=r_\ell\,\xi^{p_\ell}\,v$, Strukturbeweis auf ${\sim}1\,\%$, Dok.~190 Präz.~5); die Exaktheit der dimensionslosen Verhältnisse (Koide $10^{-5}$; $m_\mu/m_e=206{,}768$; P40); die Hilbertraum-Darstellung $L^2(T^4)\otimes\mathbb{C}^3$ mit $\theta=2/9$ aus der $\mathbb{Z}_3$-Zirkulanten-Diagonalisierung (Dok.~230/231/232); die native Zeit-Energie-Reziprozität $T\cdot E=1$ und $\partial T^4=\emptyset$ (Dok.~306); die einzige exakte $\xi$-Potenz-Relation $L_0/\ell_P=\xi_0$ (Dok.~180--182; P35).
+
+\emph{Restricted (Brücke).} Die absolute SI-Skala ist über feste Brückenkonstanten ($v$, $E_0$, $G$-Faktoren) fixiert, nicht frei --- aber sie ist kein $\xi$-Vorwärtsresultat: $\hbar$ und $c$ sind SI-Umrechnung, $G$ ist abgeleitet ($\xi\to\{m_e,\dots\}\to G\to\ell_P$; Dok.~190 P40). Ein gemessener dimensionaler Anker im Standardphysik-Sinn existiert nicht.
+
+\emph{Offen.} Die \emph{quantum equivalence} beider Rahmungen ist bekannt; ihre methodologischen Konsequenzen sind hier systematisiert, nicht abschließend bewertet.
+
+% ===================== BIBLIOGRAPHY =====================
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Vollständige Bibliographie}
+\renewcommand{\refname}{Vollständige Bibliographie}
+{\small\itshape Die folgenden Quellen wurden im Text zitiert oder zur Erweiterung herangezogen. Alle bibliografischen Details sind vollständig angegeben.\par}
+\vspace{0.4em}
+\begingroup
+\small
+\begin{thebibliography}{99}
+\setlength{\itemsep}{0.25em}
+\bibitem{AharonovBohm1961}Aharonov, Y., \& Bohm, D. (1961). Time in the Quantum Theory and the Uncertainty Relation for Time and Energy. \emph{Physical Review}, 122(5), 1649.
+\bibitem{Barbour1999}Barbour, J. (1999). \emph{The End of Time: The Next Revolution in Physics}. Oxford University Press.
+\bibitem{Bars1997}Bars, I. (1997). Two-Time Physics. \emph{Physical Review D}, 55(4), 2375.
+\bibitem{Bars2012}Bars, I. (2012). Two-Time Physics: A Review. \emph{arXiv:1207.1693}.
+\bibitem{Connes1994}Connes, A. (1994). \emph{Noncommutative Geometry}. Academic Press.
+\bibitem{ConnesRovelli1994}Connes, A., \& Rovelli, C. (1994). Von Neumann algebra automorphisms and time--thermodynamics relation in generally covariant quantum theories. \emph{Classical and Quantum Gravity}, 11, 2899.
+\bibitem{DeWitt1967}DeWitt, B. S. (1967). Quantum Theory of Gravity. I. The Canonical Theory. \emph{Physical Review}, 160(5), 1113.
+\bibitem{Englert1964}Englert, F., \& Brout, R. (1964). Broken Symmetry and the Mass of Gauge Vector Mesons. \emph{Physical Review Letters}, 13(9), 321.
+\bibitem{GambiniPullin2015}Gambini, R., \& Pullin, J. (2015). The Montevideo Interpretation of Quantum Mechanics: A short review. \emph{Entropy}, 20(6), 413.
+\bibitem{GarrisonWong1970}Garrison, J. C., \& Wong, J. (1970). Time Operator and the Pauli Theorem. \emph{Journal of Mathematical Physics}, 11(8), 2242.
+\bibitem{Goedel1949}Gödel, K. (1949). An Example of a New Type of Cosmological Solutions of Einstein's Field Equations of Gravitation. \emph{Reviews of Modern Physics}, 21(3), 447.
+\bibitem{GreenSchwarzWitten1987}Green, M. B., Schwarz, J. H., \& Witten, E. (1987). \emph{Superstring Theory}. Cambridge University Press.
+\bibitem{Haldane1988}Haldane, F. D. M. (1988). Model for a Quantum Hall Effect without Landau Levels: Condensed-Matter Realization of the „Parity Anomaly``. \emph{Physical Review Letters}, 61(18), 2015.
+\bibitem{Hawking1984}Hawking, S. W. (1984). The Cosmological Constant and the Weak Anthropic Principle. \emph{Physics Letters B}, 134(6), 403.
+\bibitem{Hawking1992}Hawking, S. W. (1992). Chronology Protection Conjecture. \emph{Physical Review D}, 46(2), 603.
+\bibitem{Higgs1964}Higgs, P. W. (1964). Broken Symmetries and the Masses of Gauge Bosons. \emph{Physical Review Letters}, 13(16), 508.
+\bibitem{Isham1993}Isham, C. J. (1993). Canonical Quantum Gravity and the Problem of Time. In \emph{Integrable Systems, Quantum Groups, and Quantum Field Theories}, 157--287. Springer.
+\bibitem{Jackiw1999}Jackiw, R. (1999). The Unreasonable Effectiveness of Quantum Field Theory. \emph{Reviews of Modern Physics}, 71(2), S78.
+\bibitem{Kaluza1921}Kaluza, T. (1921). Zum Unitätsproblem der Physik. \emph{Sitzungsberichte der Preußischen Akademie der Wissenschaften}, 966.
+\bibitem{Klein1926}Klein, O. (1926). Quantentheorie und fünfdimensionale Relativitätstheorie. \emph{Zeitschrift für Physik}, 37, 895.
+\bibitem{Kuchar1992}Kuchař, K. V. (1992). Time and Interpretations of Quantum Gravity. In \emph{Proceedings of the 4th Canadian Conference on General Relativity and Relativistic Astrophysics}.
+\bibitem{MarlettoVedral2017}Marletto, C., \& Vedral, V. (2017). Evolution without evolution and without ambiguities. \emph{Physical Review D}, 95, 043510.
+\bibitem{Moreva2014}Moreva, E., Brida, G., Gramegna, M., Giovannetti, V., Maccone, L., \& Genovese, M. (2014). Time from quantum entanglement: An experimental illustration. \emph{Physical Review A}, 89, 052122.
+\bibitem{Muga2008}Muga, J. G., Mayato, R. S., \& Egusquiza, I. L. (Eds.). (2008). \emph{Time in Quantum Mechanics}. Springer.
+\bibitem{PageWootters1983}Page, D. N., \& Wootters, W. K. (1983). Evolution without evolution: Dynamics described by stationary observables. \emph{Physical Review D}, 27(12), 2885.
+\bibitem{Pauli1933}Pauli, W. (1933). Die allgemeinen Prinzipien der Wellenmechanik. In \emph{Handbuch der Physik}, Band 24, 83.
+\bibitem{Polchinski1998}Polchinski, J. (1998). \emph{String Theory}. Cambridge University Press.
+\bibitem{Reifler1992}Reifler, F. (1992). Kaluza-Klein Theory with Compact Time. \emph{Journal of Mathematical Physics}, 33(3), 1051.
+\bibitem{Rovelli1996}Rovelli, C. (1996). Relational Quantum Mechanics. \emph{International Journal of Theoretical Physics}, 35, 1637.
+\bibitem{Rovelli2004}Rovelli, C. (2004). \emph{Quantum Gravity}. Cambridge University Press.
+\bibitem{Rovelli2009}Rovelli, C. (2009). Forget time. \emph{Foundations of Physics}, 41, 1475.
+\bibitem{Sutherland1986}Sutherland, B. (1986). Localization of Electronic States in the Quantum Hall Effect. \emph{Physical Review B}, 34(8), 5208.
+\bibitem{Thiemann2007}Thiemann, T. (2007). \emph{Modern Canonical Quantum General Relativity}. Cambridge University Press.
+\bibitem{Unruh1995}Unruh, W. G. (1995). Time and the Quantum. \emph{arXiv:gr-qc/9508017}.
+\bibitem{Vafa1996}Vafa, C. (1996). Evidence for F-Theory. \emph{Nuclear Physics B}, 469(3), 403.
+\bibitem{Weinberg1995}Weinberg, S. (1995). \emph{The Quantum Theory of Fields}. Cambridge University Press.
+\bibitem{Weyl1928}Weyl, H. (1928). \emph{Gruppentheorie und Quantenmechanik}. Hirzel.
+\bibitem{Wheeler1968}Wheeler, J. A. (1968). Superspace and the nature of quantum geometrodynamics. In \emph{Battelle Rencontres}. Benjamin.
+\bibitem{Wigner1939}Wigner, E. P. (1939). On unitary representations of the inhomogeneous Lorentz group. \emph{Annals of Mathematics}, 40(1), 149.
+\bibitem{Witten1983}Witten, E. (1983). Some Problems in String Theory. In \emph{Proceedings of the 1982 Trieste Conference}. World Scientific.
+\end{thebibliography}
+\endgroup
+
+% ===================== GLOSSARY =====================
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Anhang: Glossar}
+\section*{Anhang: Glossar}
+
+\begin{description}[leftmargin=0em,style=nextline,itemsep=0.4em]
+  \item[Casimir-Invariante] Ein Operator, der mit allen Erzeugenden einer Lie-Gruppe kommutiert und daher als Label für irreduzible Darstellungen dient. In der Poincaré-Gruppe sind die Masse und der Spin Casimir-Invarianten.
+  \item[Eingerollte Dimension] Eine Dimension, die so kompaktifiziert ist, dass ihre Ausdehnung unterhalb der Beobachtbarkeitsgrenze liegt, aber dennoch physikalische Effekte (wie diskrete Moden) erzeugt.
+  \item[Hilbertraum] Ein vollständiger Vektorraum mit einem Skalarprodukt, der die mathematische Grundlage der Quantenmechanik bildet.
+  \item[Kaluza-Klein-Moden] Diskrete Anregungen, die aus der Kompaktifizierung einer Dimension folgen. Ihre Massen sind ganzzahlige Vielfache der inversen Kompaktifizierungsskala.
+  \item[Ontologische Festlegung] Eine Annahme über die fundamentale Beschaffenheit der Wirklichkeit.
+  \item[Selbstadjungierter Operator] Ein Operator, der mit seinem adjungierten Operator übereinstimmt und daher reelle Eigenwerte besitzt --- eine Voraussetzung für physikalische Observablen.
+  \item[Spektralprojektor] Ein Projektor auf einen Eigenraum eines Operators; er extrahiert die Anteile des Zustandsvektors, die zu einem bestimmten Eigenwert gehören.
+  \item[Windungszahl] Eine topologische Invariante, die angibt, wie oft sich eine Funktion um eine geschlossene Dimension windet.
+\end{description}
+
+% ===================== NACHWORT =====================
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Nachwort}
+\section*{Nachwort}
+
+Die hier entwickelte Auseinandersetzung versteht sich als Beitrag zur Grundlagendiskussion der Quantenphysik. Sie erhebt keinen Anspruch auf eine abgeschlossene Theorie, sondern auf eine geschärfte Problemwahrnehmung. Die Frage nach der Herkunft der Moden ist eine der zentralen offenen Fragen der theoretischen Physik --- und sie hängt, wie gezeigt, unmittelbar mit der Frage nach der Verortung der Zeit zusammen.
+
+Die eingerollte Sicht ist ein Gedankenspiel --- aber eines mit ernsthaften mathematischen und physikalischen Konsequenzen. Sie zeigt, dass die Wahl des Rahmens (ob die Zeit innen oder außen sitzt) die physikalischen Inhalte bestimmt, bevor die eigentliche Rechnung beginnt. \textbf{Die Zeit ist nicht nur ein Parameter --- sie ist die Struktur, die die Moden formt.}
+
+Die Auseinandersetzung endet mit der Erkenntnis, dass beide Sichten ihre Vor- und Nachteile haben, und dass die Entscheidung zwischen ihnen letztlich eine ontologische ist, die über das empirisch Überprüfbare hinausgeht. In diesem Sinne ist die Frage nach der Zeit eine Frage nach der Natur der Wirklichkeit selbst.
+
+\end{document}
