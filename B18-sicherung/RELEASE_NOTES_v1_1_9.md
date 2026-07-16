@@ -2,7 +2,7 @@
 
 **DOI:** [10.5281/zenodo.21193007](https://doi.org/10.5281/zenodo.21193007) (supersedes v1.1.7 · [10.5281/zenodo.21158441](https://doi.org/10.5281/zenodo.21158441))
 
-Running corrections: **[2/PDFs/190_T0_Korrekturen_En.pdf](2/PDFs/190_T0_Korrekturen_En.pdf)**
+Running corrections: **[2/pdf/190_T0_Korrekturen_En.pdf](2/pdf/190_T0_Korrekturen_En.pdf)**
 Changelog: **[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**
 
 ---
@@ -21,7 +21,7 @@ coupled.
 
 v1.1.9 adds two documents that continue the same thread: the **geometric
 origin of the Koide phase θ = 2/9**. The centrepiece is
-[Doc. 293](2/PDFs/293_Ikosaeder_Theta_2_9_En.pdf) — a dynamics-independent,
+[Doc. 293](2/pdf/293_Ikosaeder_Theta_2_9_En.pdf) — a dynamics-independent,
 purely geometric second witness for the value 2/9. Doc. 294 places the same
 geometric object in relation to an external framework (HLV) and records the
 test direction.
@@ -75,7 +75,7 @@ bridge is open.
 
 ### Doc. 294 — Note: the shared φ-icosahedral object (HLV test direction)
 
-[Doc. 294](2/PDFs/294_HLV_Pruefrichtung_En.pdf) records that FFGFT and HLV
+[Doc. 294](2/pdf/294_HLV_Pruefrichtung_En.pdf) records that FFGFT and HLV
 share the **same** φ-icosahedral object (HLV's cut-and-project projector
 τ = φ, six five-fold axes, all 15 pairwise angles = arccos(1/√5)), and that
 θ = 2/9 is an invariant on this object. The decisive point is the
@@ -88,7 +88,7 @@ verdict in v1.1.7).
 
 ### Doc. 295 — The time-winding as a logarithmic spiral
 
-[Doc. 295](2/PDFs/295_Zeit_Logspirale_En.pdf) settles FFGFT-internally what
+[Doc. 295](2/pdf/295_Zeit_Logspirale_En.pdf) settles FFGFT-internally what
 FFGFT's **time-winding** is: the K_frak recursion ξ_{n+1}=ξ_n(1−100ξ_n) forces
 it into a **logarithmic spiral with self-similarity ratio e**, i.e. into
 continuous scale invariance. Frozen, the winding closes after exactly 75 turns
@@ -113,26 +113,26 @@ not reality. The placement relative to HLV's spiral time (a candidate, testable:
 | Derivation chain ξ → G → ℓ_P → L₀ | [Doc. 180](2/pdf/180_T0_L0_Herleitung_En.pdf) |
 | Lepton masses from rational invariants | [Doc. 006](2/pdf/006_T0_Teilchenmassen_En.pdf) / [046](2/pdf/046_Teilchenmassen_En.pdf) |
 | Koide scalar Q = 2/3 (computed) | [Doc. 258](2/pdf/258_Koide_2-3_En.pdf) / [259](2/pdf/259_Koide_Kreuzterme_En.pdf) |
-| θ = 2/9 as the Z₃ circulant phase | [Doc. 291](2/PDFs/291_Dynamischer_Ort_Theta_2_9_En.pdf) |
-| θ = 2/9 as a parameter-free C₃-in-A₅ geometric invariant (second witness) | [Doc. 293](2/PDFs/293_Ikosaeder_Theta_2_9_En.pdf) |
-| α⁻¹ = 137.036, two independent E₀ routes | [Doc. 011](2/pdf/011_T0_Feinstruktur_En.pdf) / [292](2/PDFs/292_Leptonen_Empirie_Check_En.pdf) |
+| θ = 2/9 as the Z₃ circulant phase | [Doc. 291](2/pdf/291_Dynamischer_Ort_Theta_2_9_En.pdf) |
+| θ = 2/9 as a parameter-free C₃-in-A₅ geometric invariant (second witness) | [Doc. 293](2/pdf/293_Ikosaeder_Theta_2_9_En.pdf) |
+| α⁻¹ = 137.036, two independent E₀ routes | [Doc. 011](2/pdf/011_T0_Feinstruktur_En.pdf) / [292](2/pdf/292_Leptonen_Empirie_Check_En.pdf) |
 | SI bridge | [Doc. 013](2/pdf/013_T0_SI_En.pdf) |
 | Hilbert-space bijection FFGFT ↔ QM | [Doc. 230](2/pdf/230_Hilbertraum_Uebersetzung_En.pdf) |
-| Lepton empirics check, m_τ prediction, tolerance ledger | [Doc. 292](2/PDFs/292_Leptonen_Empirie_Check_En.pdf) |
+| Lepton empirics check, m_τ prediction, tolerance ledger | [Doc. 292](2/pdf/292_Leptonen_Empirie_Check_En.pdf) |
 | Falsification: Casimir / redshift / lithium | [Doc. 220](2/pdf/220_Casimir_En.pdf) / [221](2/pdf/221_Rotverschiebung_En.pdf) / [222](2/pdf/222_Lithium_En.pdf) |
 
 ---
 
 ## Reproducibility
 
-`2/Dok293_Skripte/` — icosahedral redistribution (p₀ = 2/9 exact, robustness
+`2/python/Dok293_Skripte/` — icosahedral redistribution (p₀ = 2/9 exact, robustness
 over random axes and the n-fold series), numpy-only.
-`2/Dok294_Skripte/` — angle-spectrum discrimination of the shared object
+`2/python/Dok294_Skripte/` — angle-spectrum discrimination of the shared object
 (RMS-distance metric), numpy-only.
-`2/Dok295_Skripte/` — time-winding: 75-closure, log spiral (ratio e), dual
+`2/python/Dok295_Skripte/` — time-winding: 75-closure, log spiral (ratio e), dual
 time↔mass projection (factor 100 axis-symmetric), numpy-only.
-`2/Dok292_Skripte/` — lepton empirics check (parts A–L).
-`2/Dok291_Skripte/` — θ = 2/9 mechanism scripts.
+`2/python/Dok292_Skripte/` — lepton empirics check (parts A–L).
+`2/python/Dok291_Skripte/` — θ = 2/9 mechanism scripts.
 
 ---
 

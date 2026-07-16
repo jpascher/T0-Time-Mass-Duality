@@ -2,7 +2,7 @@
 
 **DOI:** [10.5281/zenodo.21193007](https://doi.org/10.5281/zenodo.21193007) (löst v1.1.7 ab · [10.5281/zenodo.21158441](https://doi.org/10.5281/zenodo.21158441))
 
-Laufende Korrekturen: **[2/PDFs/190_T0_Korrekturen_De.pdf](2/PDFs/190_T0_Korrekturen_De.pdf)**
+Laufende Korrekturen: **[2/pdf/190_T0_Korrekturen_De.pdf](2/pdf/190_T0_Korrekturen_De.pdf)**
 Änderungsprotokoll: **[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**
 
 ---
@@ -21,7 +21,7 @@ und Masse sind invers gekoppelt.
 
 v1.1.9 fügt zwei neue Dokumente hinzu, die denselben Faden weiterführen:
 die **geometrische Herkunft der Koide-Phase θ = 2/9**. Das Kernstück ist
-[Dok. 293](2/PDFs/293_Ikosaeder_Theta_2_9_De.pdf) — ein von der Dynamik
+[Dok. 293](2/pdf/293_Ikosaeder_Theta_2_9_De.pdf) — ein von der Dynamik
 unabhängiger, rein geometrischer zweiter Zeuge für den Wert 2/9. Dok. 294
 ordnet dasselbe geometrische Objekt in die Beziehung zu einem externen
 Rahmen (HLV) ein und hält die Prüfrichtung fest.
@@ -76,7 +76,7 @@ diese direkte Brücke.
 
 ### Dok. 294 — Anmerkung: das geteilte φ-ikosaedrische Objekt (HLV-Prüfrichtung)
 
-[Dok. 294](2/PDFs/294_HLV_Pruefrichtung_De.pdf) hält fest, dass FFGFT und HLV
+[Dok. 294](2/pdf/294_HLV_Pruefrichtung_De.pdf) hält fest, dass FFGFT und HLV
 **dasselbe** φ-ikosaedrische Objekt teilen (HLVs Cut-and-Project-Projektor
 τ = φ, sechs 5-zählige Achsen, alle 15 paarweisen Winkel = arccos(1/√5)),
 und dass θ = 2/9 ein Invariant auf diesem Objekt ist. Entscheidend ist die
@@ -89,7 +89,7 @@ nur dann interessant gewesen, wenn eine tragende Brücke gefunden worden wäre
 
 ### Dok. 295 — Die Zeit-Windung als logarithmische Spirale
 
-[Dok. 295](2/PDFs/295_Zeit_Logspirale_De.pdf) klärt FFGFT-intern, was FFGFTs
+[Dok. 295](2/pdf/295_Zeit_Logspirale_De.pdf) klärt FFGFT-intern, was FFGFTs
 **Zeit-Windung** ist: die K_frak-Rekursion ξ_{n+1}=ξ_n(1−100ξ_n) zwingt sie zu
 einer **logarithmischen Spirale mit Selbstähnlichkeits-Verhältnis e**, also zu
 kontinuierlicher Skaleninvarianz. Eingefroren schließt die Windung nach genau
@@ -115,26 +115,26 @@ mathematische Modelle, nicht die Realität. Die Einordnung zu HLVs Spiral-Zeit
 | Ableitungskette ξ → G → ℓ_P → L₀ | [Dok. 180](2/pdf/180_T0_L0_Herleitung_De.pdf) |
 | Leptonmassen aus rationalen Invarianten | [Dok. 006](2/pdf/006_T0_Teilchenmassen_De.pdf) / [046](2/pdf/046_Teilchenmassen_De.pdf) |
 | Koide-Skalar Q = 2/3 (berechnet) | [Dok. 258](2/pdf/258_Koide_2-3_De.pdf) / [259](2/pdf/259_Koide_Kreuzterme_De.pdf) |
-| θ = 2/9 als Z₃-Zirkulant-Phase | [Dok. 291](2/PDFs/291_Dynamischer_Ort_Theta_2_9_De.pdf) |
-| θ = 2/9 als parameterfreier C₃-in-A₅-Geometrie-Invariant (zweiter Zeuge) | [Dok. 293](2/PDFs/293_Ikosaeder_Theta_2_9_De.pdf) |
-| α⁻¹ = 137,036, zwei unabhängige E₀-Wege | [Dok. 011](2/pdf/011_T0_Feinstruktur_De.pdf) / [292](2/PDFs/292_Leptonen_Empirie_Check_De.pdf) |
+| θ = 2/9 als Z₃-Zirkulant-Phase | [Dok. 291](2/pdf/291_Dynamischer_Ort_Theta_2_9_De.pdf) |
+| θ = 2/9 als parameterfreier C₃-in-A₅-Geometrie-Invariant (zweiter Zeuge) | [Dok. 293](2/pdf/293_Ikosaeder_Theta_2_9_De.pdf) |
+| α⁻¹ = 137,036, zwei unabhängige E₀-Wege | [Dok. 011](2/pdf/011_T0_Feinstruktur_De.pdf) / [292](2/pdf/292_Leptonen_Empirie_Check_De.pdf) |
 | SI-Brücke | [Dok. 013](2/pdf/013_T0_SI_De.pdf) |
 | Hilbertraum-Bijektion FFGFT ↔ QM | [Dok. 230](2/pdf/230_Hilbertraum_Uebersetzung_De.pdf) |
-| Leptonen-Empirie-Check, m_τ-Vorhersage, Toleranz-Bilanz | [Dok. 292](2/PDFs/292_Leptonen_Empirie_Check_De.pdf) |
+| Leptonen-Empirie-Check, m_τ-Vorhersage, Toleranz-Bilanz | [Dok. 292](2/pdf/292_Leptonen_Empirie_Check_De.pdf) |
 | Falsifikation: Casimir / Rotverschiebung / Lithium | [Dok. 220](2/pdf/220_Casimir_De.pdf) / [221](2/pdf/221_Rotverschiebung_De.pdf) / [222](2/pdf/222_Lithium_De.pdf) |
 
 ---
 
 ## Reproduzierbarkeit
 
-`2/Dok293_Skripte/` — ikosaedrische Umverteilung (p₀ = 2/9 exakt, Robustheit
+`2/python/Dok293_Skripte/` — ikosaedrische Umverteilung (p₀ = 2/9 exakt, Robustheit
 über zufällige Achsen und die n-zählige Reihe), numpy-only.
-`2/Dok294_Skripte/` — Winkelspektrum-Diskriminierung des geteilten Objekts
+`2/python/Dok294_Skripte/` — Winkelspektrum-Diskriminierung des geteilten Objekts
 (RMS-Distanz-Metrik), numpy-only.
-`2/Dok295_Skripte/` — Zeit-Windung: 75-Schließung, log-Spirale (Verhältnis e),
+`2/python/Dok295_Skripte/` — Zeit-Windung: 75-Schließung, log-Spirale (Verhältnis e),
 duale Zeit↔Masse-Projektion (Faktor 100 achsensymmetrisch), numpy-only.
-`2/Dok292_Skripte/` — Leptonen-Empirie-Check (Teile A–L).
-`2/Dok291_Skripte/` — θ = 2/9-Mechanismus-Skripte.
+`2/python/Dok292_Skripte/` — Leptonen-Empirie-Check (Teile A–L).
+`2/python/Dok291_Skripte/` — θ = 2/9-Mechanismus-Skripte.
 
 ---
 
