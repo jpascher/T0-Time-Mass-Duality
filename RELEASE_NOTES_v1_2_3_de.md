@@ -1,6 +1,6 @@
 # Release Notes — v1.2.3 (Juli 2026)
 
-**DOI:** wird beim Zenodo-Upload vergeben (löst v1.2.2 · [10.5281/zenodo.21266963](https://doi.org/10.5281/zenodo.21266963) ab)
+**DOI:** [10.5281/zenodo.21396624](https://doi.org/10.5281/zenodo.21396624) (löst v1.2.2 · [10.5281/zenodo.21266963](https://doi.org/10.5281/zenodo.21266963) ab)
 
 Laufende Korrekturen: **[2/pdf/190_T0_Korrekturen_De.pdf](2/pdf/190_T0_Korrekturen_De.pdf)**
 Änderungsprotokoll: **[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**
@@ -126,7 +126,7 @@ Dok. 190 neu gebaut (DE 45 / EN 39 S., 0 Fehler).
 
 Berührungspunkte mit HLV (Marcel Krüger, Information Physics Institute) sind
 FFGFT-intern formuliert. Weil FFGFT die absolute Skala besitzt (Referenzpunkt
-E��) und HLV nicht, läuft die Prüfrichtung einseitig FFGFT→HLV; das
+E₀) und HLV nicht, läuft die Prüfrichtung einseitig FFGFT→HLV; das
 Stage-10-/BD17A-Verdikt (θ = 2/9 über eine flache Z₃-Holonomie) blieb blind und
 **BLOCKED** — vorhergesagt und ohne Widerspruch zur Zirkulant-2/9-Struktur des
 Massenspektrums. HLV bleibt ein nachrangiger Gegencheck, kein tragender
