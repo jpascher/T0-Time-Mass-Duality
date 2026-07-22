@@ -1,0 +1,136 @@
+\section{Die Rekursion}
+
+\textbf{[SETZUNG]} Die Skalenstruktur der Theorie wird durch die Abbildung
+\[
+  \xi_{n+1} = \xi_n\,\bigl(1 - 100\,\xi_n\bigr)
+\]
+erzeugt, ausgehend von $\xi_0 = 4/30000$.
+
+Das ist eine gedämpfte Rückkopplung: der Faktor $(1-100\xi_n)$ ist kleiner als
+Eins, die Folge fällt monoton. In nachrichtentechnischer Sprache ist es eine
+Schleife mit Verstärkung unter Eins -- sie kontrahiert, sie schwingt nicht auf.
+Die Verstärkung ist dabei nicht einstellbar: sie hängt allein an $\xi$, das
+gesetzt ist. Es gibt in dieser Schleife kein Stellrad.
+
+\section{Der Nichtschließungssatz}
+
+\textbf{[K]} Die Rekursion hat genau einen Fixpunkt, nämlich Null. Jeder Wert
+$c \in (0,1)$, den die Folge annimmt, ist ein Durchgangspunkt, kein Ziel.
+
+Der Beweis ist elementar: aus $\xi = \xi(1-100\xi)$ folgt $100\xi^2 = 0$, also
+$\xi = 0$. Und weil die Folge streng monoton fällt, aber positiv bleibt, wird
+sie nach endlich vielen Schritten keinen ihrer Werte wieder annehmen und Null
+in keinem endlichen Schritt erreichen.
+
+\textbf{[K]} Daraus folgt eine Aussage, die man leicht überliest und die
+tragend ist: \emph{aus der Rekursion allein lässt sich kein einzelner
+Zahlenwert auszeichnen}. Zu jedem Ziel $c$ existiert eine Tiefe $k^*(c)$, bei
+der die Folge in dessen Nähe kommt -- für jedes $c$ gleichermaßen, mit
+identischem Parameterstatus. Wer eine Zahl dadurch begründen will, dass die
+Rekursion sie passiert, hat nichts begründet.
+
+\textbf{[K]} Das ist ein Ergebnis, keine Lücke. Es schließt eine ganze Klasse
+von Herleitungsversuchen ab: die Frage, ob sich eine bestimmte Konstante aus
+der Rekursionstiefe gewinnen lässt, ist \emph{beantwortet}, und die Antwort
+lautet nein. Was offen bleibt, ist allein, ob es einen Anker außerhalb der
+Rekursion gibt.
+
+\section{Die eingefrorene Windung}
+
+\textbf{[B]} Hält man $\xi$ fest, statt es laufen zu lassen, schließt die
+Windung nach genau
+\[
+  \frac{1}{100\,\xi_0} = 75
+\]
+Umläufen. Die Rotationszahl ist dann $74/75$, und das fehlende Stück ist das
+Schließungskomma aus A040.
+
+Das ist die \emph{aufgerollte}, kompakte Lesart: eine Skala, eine geschlossene
+Windung, eine ganze Zahl von Umläufen.
+
+\section{Die entrollte Lesart: eine logarithmische Spirale}
+
+\textbf{[K]} Lässt man $\xi$ laufen, zerfällt die Folge asymptotisch wie
+\[
+  \xi_n \approx \frac{1}{100\,(n+75)} ,
+\]
+und der aufsummierte Defekt wird eine harmonische Summe, also logarithmisch:
+\[
+  D(k) \approx \ln\!\Bigl(1 + \frac{k}{75}\Bigr).
+\]
+
+\textbf{[K]} Setzt man $\rho = k + 75$ und $\beta = 2\pi D$, so ist
+\[
+  \rho = 75\,e^{\beta/2\pi} ,
+\]
+eine logarithmische Spirale mit Selbstähnlichkeitsverhältnis $e$.
+
+Zwei Punkte dazu, beide wichtig.
+
+Das Verhältnis $e$ ist \emph{kein zusätzlicher Parameter}. Es ist die Basis des
+natürlichen Logarithmus und stammt aus der harmonischen Summe -- es wird nicht
+gewählt, es fällt an. Der Pol bei $n = -75 = -1/(100\xi_0)$ ist ebenfalls nicht
+angepasst, sondern durch $\xi_0$ festgelegt.
+
+Die Skaleninvarianz ist \emph{kontinuierlich}, nicht diskret log-periodisch. Es
+gibt keine ausgezeichneten Stufen, keine bevorzugten Vielfachen.
+
+\textbf{[B]} Aufgerollt und entrollt sind zwei Lesarten desselben Objekts, nicht
+zwei Objekte: die geschlossene $75$-Windung ist die kompakte
+Ein-Skalen-Ansicht, die Spirale die entrollte Über-die-Skalen-Ansicht.
+
+\section{Warum die Rekursion nicht auf eine Achse gehört}
+
+\textbf{[B]} Die Formulierung, die Zeit rolle sich auf, legt nahe, die Zeitachse
+sei ausgezeichnet. Sie ist es nicht. Über $\tilde T\cdot m = 1$ zieht jede
+Aussage über die Zeit eine spiegelbildliche über die Masse nach sich: rückt die
+Zeit je Schritt um $K_\text{frak}$ vor, so die Masse um $1/K_\text{frak}$. Der
+Defekt ist auf beiden Seiten derselbe $100\xi_n$.
+
+\textbf{[B]} Der Faktor $100$ wandert also nicht zwischen den Achsen, er ist
+gespiegelt. Beide Projektionen führen auf dasselbe Verhältnis $e$. Die
+Zuordnung auf die Zeit ist eine Konvention, keine Auszeichnung.
+
+\section{Prüfskripte}
+
+\begin{itemize}
+  \item Fixpunktsatz und Nichtschließung: einziger Fixpunkt $0$, Monotonie,
+    und die Konstruktion von $k^*(c)$ für beliebige Ziele -- als Beleg dafür,
+    dass kein Wert ausgezeichnet ist:
+    \texttt{python/A\_Serie\_Skripte/a050\_nichtschliessung.py}
+  \item Spiralverhältnis: numerische Bestimmung des Verhältnisses aus dem
+    kumulierten Defekt, Vergleich mit $e$, und Prüfung auf kontinuierliche
+    statt log-periodische Skaleninvarianz:
+    \texttt{python/A\_Serie\_Skripte/a050\_spirale\_e.py}
+\end{itemize}
+
+\section{Was offen bleibt}
+
+\textbf{Erstens ist die Rekursionstiefe nicht fixiert.} Die Theorie gibt keine
+Regel an, bei welchem $k$ eine physikalische Größe abzulesen wäre. Nach dem
+Nichtschließungssatz kann sie das auch nicht -- das ist keine Nachlässigkeit,
+sondern bewiesen.
+
+\textbf{Zweitens folgt daraus eine harte Grenze für alle Feinwerte.} Jede Größe,
+deren Begründung darauf hinausliefe, dass die Rekursion sie erreicht, ist damit
+\emph{nicht} begründet. Das betrifft namentlich den Feinwert der
+Brechungsstärke $\delta$; er bleibt offen und ist in A230 gebucht.
+
+\textbf{Drittens verwendet die Rekursion den Faktor $100$, der in A040
+hergeleitet ist} (kumulativer RG-Lauf, Konsistenzbedingung; A040). Er wird
+hier benutzt, nicht neu begründet. Die Nichtschließung gilt unabhängig davon --
+sie folgt aus der Form der Abbildung, nicht aus dem Zahlenwert --, aber die
+konkrete Zahl $75$ tut es nicht.
+
+\section{Ersetzt}
+
+Dieses Dokument nimmt auf: Dok.~203 (R-Operator), Dok.~275 ($\xi$-Rekursion),
+Dok.~295 (Zeit als logarithmische Spirale). Eingearbeitet: P37 (drei Rollen von $\varphi$ getrennt), P35 (Trivialität der Potenzdarstellung).
+
+\section{Verwendung von KI-Werkzeugen}
+
+Dieses Dokument ist unter Verwendung KI-gestützter Werkzeuge entstanden. Die
+Fragestellungen, die Setzungen und alle inhaltlichen Entscheidungen stammen vom
+Autor; die Werkzeuge formulieren aus, rechnen nach und erstellen Prüfskripte.
+Die Verantwortung für Inhalt und Fehler liegt vollständig beim Autor. Der
+ausführliche Wortlaut steht in A010.

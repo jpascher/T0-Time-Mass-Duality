@@ -1,0 +1,72 @@
+% =============================================================================
+% T0_preamble_patches.tex
+% Ergänzt fehlende Environments und Farben, die in einigen ch-Dateien
+% verwendet werden, aber in T0_preamble_De.tex / _En.tex nicht definiert sind.
+% Wird VOR \begin{document} geladen, NACH der Hauptpräambel.
+% =============================================================================
+
+% --- Fehlende Farben ---
+% T0red, T0gray (Groß-/Kleinschreibung-Aliase)
+\providecolor{T0red}{RGB}{244,67,54}
+\providecolor{T0gray}{RGB}{120,120,120}
+\providecolor{t0gray}{RGB}{120,120,120}
+\providecolor{T0blue}{RGB}{33,150,243}
+\providecolor{T0green}{RGB}{76,175,80}
+\providecolor{T0orange}{RGB}{255,152,0}
+\providecolor{T0purple}{RGB}{156,39,176}
+\providecolor{T0yellow}{RGB}{255,204,0}
+
+% --- Fehlende Environments (Aliase als generische tcolorbox-Varianten) ---
+% Aus T0_preamble_standalone_De-o.tex übernommen:
+\newtcolorbox{avipost}[1][Implikation]{colback=cyan!5,colframe=cyan!75!black,fonttitle=\bfseries,title={#1},breakable,enhanced}
+\newtcolorbox{response}[1][Implikation]{colback=cyan!5,colframe=cyan!75!black,fonttitle=\bfseries,title={#1},breakable,enhanced}
+
+% Für Dok 187, 188, 189 (Photonik, Geometrie, Torus-Ableitung):
+\newtcolorbox{geminibox}[1][Gemini]{colback=yellow!5,colframe=orange!75!black,fonttitle=\bfseries,title={#1},breakable,enhanced}
+\newtcolorbox{infobox}[1][Info]{colback=blue!5,colframe=blue!75!black,fonttitle=\bfseries,title={#1},breakable,enhanced}
+\newtcolorbox{keybox}[1][Kernpunkt]{colback=green!5,colframe=green!75!black,fonttitle=\bfseries,title={#1},breakable,enhanced}
+\newtcolorbox{predbox}[1][Vorhersage]{colback=cyan!5,colframe=cyan!75!black,fonttitle=\bfseries,title={#1},breakable,enhanced}
+\newtcolorbox{warnbox}[1][Hinweis]{colback=orange!5,colframe=orange!75!black,fonttitle=\bfseries,title={#1},breakable,enhanced}
+
+% Für Dok 191 (Gemini-Dialog):
+\newtcolorbox{userbox}[1][Frage]{colback=gray!5,colframe=gray!50!black,fonttitle=\bfseries,title={#1},breakable,enhanced}
+\newtcolorbox{videobox}[1][Video]{colback=red!5,colframe=red!75!black,fonttitle=\bfseries,title={#1},breakable,enhanced}
+
+% ------------------------------------------------------------------
+% Patch (P14-Konsolidierung): firstpage-Seitenstil auch für Buch-Builds
+% Einige (Standalone-)Kapitel rufen \thispagestyle{firstpage}; im Buch-
+% Preamble war dieser Stil bisher nicht definiert. Idempotent definiert.
+% ------------------------------------------------------------------
+\makeatletter
+\@ifundefined{ps@firstpage}{%
+  \fancypagestyle{firstpage}{%
+    \fancyhf{}%
+    \fancyfoot[C]{\thepage}%
+    \renewcommand{\headrulewidth}{0pt}%
+  }%
+}{}
+\makeatother
+
+% Patch (P14-Konsolidierung): Pakete, die einige Standalone-Kapitel nutzen,
+% im Buch-Preamble aber fehlten.
+\makeatletter
+\@ifpackageloaded{nicefrac}{}{\usepackage{nicefrac}}
+\makeatother
+
+% Patch (P14-Konsolidierung): einzelne Mathe-Symbole, die Standalone-Kapitel
+% nutzen und die unter dem Buch-Mathe-Setup fehlten. unicode-math-sicher.
+\makeatletter
+\providecommand{\blacksquare}{\ensuremath{\mathord{\char"25A0}}}
+\providecommand{\square}{\ensuremath{\mathord{\char"25A1}}}
+\makeatother
+
+% ------------------------------------------------------------------
+% Patch (CMB-Ueberarbeitung Juni 2026): \checkmark
+% \checkmark (U+2713) fehlt in Libertinus Math -> .notdef-Kasten
+% (z.B. Dok. 268, Abschnitt 12.1; Dok. 190). amssymb ist bewusst
+% entfernt; daher Ersatz aus Zapf Dingbats, mathmodus-sicher.
+% ------------------------------------------------------------------
+\makeatletter
+\@ifpackageloaded{pifont}{}{\usepackage{pifont}}
+\makeatother
+\AtBeginDocument{\renewcommand{\checkmark}{\text{\ding{51}}}}

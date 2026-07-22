@@ -1,0 +1,285 @@
+\section{Purpose}
+
+\textbf{[STIPULATION]} In FFGFT all formulas are set up in natural units
+($c=\hbar=k_B=1$). When back-computing to SI quantities, the physical constants
+reappear with specific powers. These powers are \emph{not} freely choosable --
+they follow necessarily from dimensional analysis. An error in the power of $c$
+is an error of factors $\sim3\times10^8$ to $(3\times10^8)^4$ -- not noticeable
+when looking only at orders of magnitude, fatal when comparing with a measurement.
+
+This document gives the systematic procedure: first dimensional analysis in
+natural units, then automated back-computation, then verification. It is not a
+teaching document on unit systems (that is A080/A085) -- it is a practical
+toolbox for concrete calculations.
+
+\section{Basic Principle: All Dimensions as Energy Powers}
+
+\textbf{[B]} In natural units $c=\hbar=k_B=1$. Every physical quantity thereby
+has a unique dimension $[E]^n$ with rational $n$:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+{\small
+\begin{tabular}{llll}
+\toprule
+Quantity & Nat.\ dim. & SI origin & $n$ \\
+\midrule
+Energy & $[E]^1$ & --- & $+1$ \\
+Mass & $[E]^1$ & $E=mc^2\Rightarrow m=E/c^2$ & $+1$ \\
+Momentum & $[E]^1$ & $p=E/c$ & $+1$ \\
+Length & $[E]^{-1}$ & $\ell=\hbar c/E$ & $-1$ \\
+Time & $[E]^{-1}$ & $t=\hbar/E$ & $-1$ \\
+Velocity & $[E]^0$ & $v=\ell/t=c=1$ & $0$ \\
+Force & $[E]^2$ & $F=E/\ell=E^2/(\hbar c)$ & $+2$ \\
+Pressure/energy density & $[E]^4$ & $\rho=E/\ell^3=E^4/(\hbar c)^3$ & $+4$ \\
+Charge & $[E]^0$ & from $\alpha=e^2/(4\pi\varepsilon_0\hbar c)$ dimensionless & $0$ \\
+Temperature & $[E]^1$ & $T=E/k_B$ & $+1$ \\
+Entropy & $[E]^0$ & $S=k_B\cdot(\text{dimensionless})$ & $0$ \\
+Gravitational constant $G$ & $[E]^{-2}$ & $G=\ell_P^2c^3/\hbar$ & $-2$ \\
+\bottomrule
+\end{tabular}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\textbf{[B]} \textbf{Rule.} From $n$ the back-computation factor follows
+directly: a quantity with $[E]^n$ in natural units has the SI value
+\[
+  X_\text{SI} = X_\text{nat}\cdot\left(\frac{\hbar c}{1\,\text{SI-length}}\right)^n.
+\]
+In practice: assemble the SI factor from $\hbar$, $c$, $k_B$ so that the SI
+dimension comes out.
+
+\section{The $c$-Power in Back-Computation: Systematic Derivation}
+
+\textbf{[B]} The question ``which power of $c$?'' is answered from the SI
+dimension of the target quantity. The method in three steps:
+
+\textbf{Step 1: Write down the SI target dimension.}
+E.g.\ energy density: $[\rho]=\text{J/m}^3=\text{kg\,m}^{-1}\text{s}^{-2}$.
+
+\textbf{Step 2: Express SI dimension through $\hbar^a c^b k_B^d$.}
+$\hbar$ has SI dim $[\text{J\,s}]$, $c$ has $[\text{m/s}]$, $k_B$ has $[\text{J/K}]$.
+Find $a,b,d\in\mathbb Z$ such that $[\hbar^a c^b k_B^d]=$ target dim$/[E_\text{nat}^n]$.
+
+\textbf{Step 3: Verification by substitution.}
+Insert the found $(a,b,d)$ and check against the measured SI quantity.
+
+\textbf{[K]} \textbf{Table of most common back-computation factors:}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+{\small\setlength\tabcolsep{4pt}
+\begin{tabular}{lllp{4.5cm}}
+\toprule
+Quantity & Nat.\ unit & SI factor & Derivation \\
+\midrule
+Mass & $[E]$ in MeV & $\div c^2$ & $m_e=0{.}511\,\text{MeV}/c^2$ \\
+Length & $[E]^{-1}$ & $\times\hbar c$ & $\ell_P=1/E_P\cdot\hbar c$ \\
+Time & $[E]^{-1}$ & $\times\hbar$ & $t_P=1/E_P\cdot\hbar$ \\
+Velocity & dimensionless & $\times c$ & $v=0{.}5\cdot c$ \\
+Force & $[E]^2$ & $\div(\hbar c)$ & $F[\text{N}]=F_\text{nat}\cdot E^2/(\hbar c)$ \\
+Energy density & $[E]^4$ & $\div(\hbar c)^3$ & $\rho[\text{J/m}^3]=\rho_\text{nat}\cdot E^4/(\hbar c)^3$ \\
+Temperature & $[E]$ & $\div k_B$ & $T[\text{K}]=E[\text{J}]/k_B$ \\
+Frequency $f$ & $[E]^1$ & $\div\hbar$ & $f[\text{s}^{-1}]=E[\text{J}]/\hbar$ \\
+$G$ & $[E]^{-2}$ & $\times\hbar c^3$ & $G[\text{m}^3/\text{kg\,s}^2]=G_\text{nat}\cdot\hbar c^3$ \\
+\bottomrule
+\end{tabular}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\section{Concrete Examples from FFGFT}
+
+\subsection{Mass: One Power of $c^2$}
+
+\textbf{[K]} From $E=mc^2$ it follows that $m=E/c^2$. A value in natural units
+(MeV) becomes a SI mass by dividing by $c^2$:
+\[
+  m_e = 0{.}511\,\frac{\text{MeV}}{c^2}
+  = \frac{0{.}511\times10^6\times1{.}602\times10^{-19}\,\text{J}}{(2{.}998\times10^8\,\text{m/s})^2}
+  = 9{.}109\times10^{-31}\,\text{kg}.
+\]
+Error $c^1$ instead of $c^2$: factor $3\times10^8$ off.
+Error $c^0$ (no $c$): factor $(3\times10^8)^2\approx10^{17}$ off.
+
+\subsection{Planck Length: $\hbar c$ Together, Not $c$ Alone}
+
+\textbf{[K]} $\ell_P$ in natural units is an inverse energy. Back-computation to
+metres needs $\hbar c$:
+\[
+  \ell_P = \frac{\hbar c}{E_P}
+  = \frac{(1{.}055\times10^{-34}\,\text{J\,s})(2{.}998\times10^8\,\text{m/s})}
+         {1{.}956\times10^9\,\text{J}}
+  = 1{.}616\times10^{-35}\,\text{m}.
+\]
+Only $\hbar/E_P$ (without $c$) gives the Planck \emph{time}, not the Planck
+\emph{length} -- a typical error.
+
+\subsection{Energy to Inverse Time: Only $\hbar$, No $c$}
+
+\textbf{[K]} An energy $E$ (dimension $[E]^1$) is back-computed to inverse time
+$[\text{s}^{-1}]$ by dividing by $\hbar$:
+\[
+  f = \frac{E}{\hbar},
+  \qquad
+  [f] = \frac{[\text{J}]}{[\text{J\,s}]} = [\text{s}^{-1}].\checkmark
+\]
+Example: $E=1{.}41\times10^{-33}\,\text{eV}=2{.}26\times10^{-52}\,\text{J}$ gives
+$f=E/\hbar=2{.}14\times10^{-18}\,\text{s}^{-1}$ (A265). Dividing by $\hbar c$
+instead gives an inverse length (wrong dimension). The $c$-power is zero -- it
+does not appear.
+
+\subsection{Energy Density: Four Powers of $c$ in the Denominator}
+
+\textbf{[K]} Casimir energy density $\rho$ has dimension $[E]^4$ in natural
+units. Back-computation:
+\[
+  \rho[\text{J/m}^3]
+  = \rho_\text{nat}\,[E^4]\cdot\frac{1}{(\hbar c)^3}.
+\]
+Three powers of $\hbar c$ in the denominator -- because length contributes
+$[E]^{-1}$ three times. $c$ appears as $c^3$ (from the three $\hbar c$).
+
+\subsection{Gravitational Constant: $c^3$ in the Numerator}
+
+\textbf{[K]} In natural units $G$ has dimension $[E]^{-2}$. The SI constant
+$G=6{.}674\times10^{-11}\,\text{m}^3\text{kg}^{-1}\text{s}^{-2}$ requires:
+\[
+  G_\text{SI} = G_\text{nat}\cdot\hbar c^3,
+  \qquad
+  [G_\text{SI}] = [E]^{-2}\cdot[\hbar][c]^3
+  = \frac{\text{J\,s}\cdot\text{m}^3/\text{s}^3}{\text{J}^2}
+  = \frac{\text{m}^3}{\text{kg\,s}^2}.\checkmark
+\]
+Error: $c^2$ instead of $c^3$ gives wrong dimension immediately recognisable.
+
+\section{The General Procedure: Dimension Matrix}
+
+\textbf{[B]} For every formula $X=f(\xi,E_0,\ldots)$ in natural units:
+
+1. Determine $n$ from the table above (or by counting lengths/masses/times in
+   the SI dimension of $X$).
+
+2. Write the SI factor:
+\[
+  X_\text{SI} = X_\text{nat}\cdot\hbar^a\cdot c^b\cdot k_B^d
+\]
+with $a,b,d$ from the linear system:
+\begin{align*}
+  [\text{kg}]:&\quad -a+b = n_\text{kg} \\
+  [\text{m}]:&\quad a+b = n_\text{m} \\
+  [\text{s}]:&\quad -a-b = n_\text{s}
+\end{align*}
+(where $n_\text{kg}$, $n_\text{m}$, $n_\text{s}$ are the exponents of the SI
+dimension of $X$; $k_B$ is added when kelvin appears.)
+
+3. Verification: insert $\hbar=1{.}055\times10^{-34}\,\text{J\,s}$,
+   $c=2{.}998\times10^8\,\text{m/s}$,
+   $k_B=1{.}381\times10^{-23}\,\text{J/K}$ and check the SI unit.
+
+\textbf{[K]} \textbf{When $k_B$ appears and when not.} $k_B$ appears exactly when
+the target quantity contains kelvin (temperature, entropy/kelvin) or when
+converting from an energy to a kelvin quantity. In all other cases (masses,
+lengths, times, forces) $k_B$ does not appear.
+
+\section{Unit Check of a Formula}
+
+\textbf{[B]} Every formula set up in FFGFT should pass the unit check: both sides
+of the equation must have the same energy power $[E]^n$ in natural units, and
+on back-computation the same SI unit must emerge.
+
+\textbf{[K]} \textbf{Example: $T\cdot E = 1$} (A060). In natural units:
+$[T]=[E]^{-1}$ (time) and $[E]=[E]^{+1}$. Product: $[E]^0$ -- dimensionless.
+The product $T\cdot E=1$ is a correct equation between a time and an inverse time
+-- the unit check is passed.
+
+\textbf{[K]} \textbf{Example: $\alpha=\xi\cdot E_0^2$ -- unit check of the
+$\alpha$ formula.} The formula is \emph{correct}. The unit check shows why --
+and simultaneously makes the implicit reference scale visible.
+
+$\alpha$ is dimensionless, $\xi$ is dimensionless. The equation therefore holds
+only if $E_0^2$ is also dimensionless. That is the case when $E_0$ appears as a
+pure numerical ratio -- i.e.\ measured in MeV and divided by $1\,\text{MeV}$:
+\[
+  \alpha = \xi\cdot\Bigl(\frac{E_0}{1\,\text{MeV}}\Bigr)^2.
+\]
+The $1\,\text{MeV}$ in the denominator is the \emph{implicit reference scale} --
+it makes $E_0/1\,\text{MeV}$ dimensionless and the equation correct. It does not
+stand explicitly in the short notation, but is indispensable.
+
+\textbf{Numerical verification:}
+\[
+  \alpha = \frac{4}{30000}\cdot\Bigl(\frac{7{.}398\,\text{MeV}}{1\,\text{MeV}}\Bigr)^2
+  = 1{.}333\times10^{-4}\times54{.}73
+  = 7{.}297\times10^{-3}
+  = \frac{1}{137{.}0}.
+\]
+Agreement with experiment to $0{.}0005\,\%$ -- the formula is correct.
+
+\textbf{What the unit check reveals:} the choice of MeV as reference scale is not
+free -- it is the empirical SI anchor of the FFGFT sector. A different reference
+scale (e.g.\ GeV) would give $\xi$ a different numerical value, but $\alpha$
+remains the same physical number. This is the statement from A261: $E_0=7{.}398\,\text{MeV}$
+carries the anchor, and therefore one may not simply insert different energy units
+in this formula without simultaneously changing $\xi$.
+
+\textbf{[S]} \textbf{Converting to natural units.} Translating a SI formula to
+natural units: replace all $\hbar$, $c$, $k_B$ by $1$ and drop the units. The
+resulting formula is then valid only in natural units; on back-computation all
+factors return.
+
+\section{Symbol Glossary}
+
+Symbols used throughout the entire A-series are explained in A010.
+Specific to this document:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small\begin{tabular}{lp{9cm}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$[X]$ & Dimension of quantity $X$ \\
+$[E]^n$ & Energy dimension to power $n$ \\
+$n_\text{kg},n_\text{m},n_\text{s}$ & Exponents of the SI unit of $X$
+  in $\text{kg}^{n_\text{kg}}\text{m}^{n_\text{m}}\text{s}^{n_\text{s}}$ \\
+$a,b,d$ & Exponents of $\hbar^a c^b k_B^d$ in the back-computation factor \\
+$E_P = \sqrt{\hbar c^5/G}\approx1{.}956\times10^9\,\text{J}$ & Planck energy \\
+\bottomrule
+\end{tabular}}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\section{Verification Script}
+
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item Numerical verification of all back-computation examples; dimension matrix
+    solver for arbitrary SI target dimensions; verification for $m_e$, $\ell_P$,
+    inverse time, $\rho_\text{Casimir}$, $G$:
+    \texttt{python/A\_Serie\_Skripte/a266\_einheitenpruefung.py}
+\end{itemize}
+
+\section{Open Questions}
+
+\textbf{The dimension matrix presupposes that the formula is set up in pure Planck
+units.} Mixed systems (e.g.\ MeV for energy, fm for length) require additional
+conversion steps.
+
+\textbf{Non-integer energy powers.} Some FFGFT expressions have rational $n$
+(e.g.\ charge $[E]^{1/2}$). The procedure applies in principle, but the linear
+system then gives rational solutions.
+
+\section{Supersedes}
+
+This document subsumes: Dok.~013 (dimensional analysis, gravitational constant
+from $\xi$, Planck length, conversion factors), Dok.~014 (natural units,
+dimension table, scaling factor $S_{T0}$, derivation vs.\ back-computation),
+Dok.~015 (unit conversions, energy dimension table, force/pressure/charge).
+\emph{Not} taken over: pedagogical derivation of the individual constants from
+$\xi$ (A015, A145) and the unit convention as such (A080, A085).
+
+\section{Use of AI Tools}
+
+This document was created with the assistance of AI tools. Responsibility
+for content and errors rests with the author. Full wording of the rules in A010.

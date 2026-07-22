@@ -1,0 +1,460 @@
+\section{Purpose}
+
+\textbf{[STIPULATION]} This document formulates the \emph{complete
+translatability} between the FFGFT mode formalism and standard Hilbert-space
+quantum mechanics. The translation is not an approximation and not a
+specialisation, but a \textbf{bijective structural statement}: every QM
+computation is mappable into FFGFT language, and every FFGFT statement about
+quantum systems is reproducible in Hilbert-space language.
+
+\textbf{Layer note.} Alongside the algebraic bridges [B] and geometric core
+statements [K], this document contains a substantial proportion of conceptual
+and ontological framings [S]. The [S] statements concern interpretational
+questions (Born rule, determinism, Bloch-sphere position) -- they are correctly
+marked, but the reader should know: the ratio here is K~:~S~$\approx$~1~:~5.
+The established core is narrow; the rest is framing. That is not a deficiency
+-- framings belong in a bridge document. But bridge and core are not the same.
+
+This is the methodological point: FFGFT does not \emph{replace} quantum
+mechanics but \emph{extends} it. Both formalisms deliver the same measurable
+results -- up to a $\xi$-correction of order $10^{-5}$, which currently lies
+below the NISQ noise floor (A160). They differ only in the ontological reading
+of some basic concepts. One who computes with Hilbert-space tools can continue
+to do so; the translation table below is the bridge.
+
+The canonical Hilbert space of the full theory is
+\[
+  \boxed{\;\mathcal{H} = L^2(T^4)\otimes\mathbb{C}^3\;}
+\]
+-- square-integrable functions on the 4-torus, tensored with the three-element
+$Z_3$ fibre space (A030). This document builds it in two directions: \emph{downward}
+(FFGFT $\to$ standard Hilbert space, with reductions) and \emph{upward} (which
+extensions the standard Hilbert space needs to natively carry the full FFGFT).
+
+\section{Where We Are Geometrically}
+
+\textbf{[B]} Before the translation tables, the geometric picture. The full
+FFGFT geometry is the 4-torus $T^4 = T^3\times S^1$ (A030): three spatial
+winding directions and one temporal. For a single qubit -- a two-level system
+at fixed time, without mass dynamics -- most of these directions are inactive.
+Two rotational degrees of freedom remain: one for the position between $|0\rangle$
+and $|1\rangle$ (this becomes $z$), one for the phase (this becomes $\theta$).
+Their natural space is the 2-torus $T^2 = S^1\times S^1$.
+
+Pulling one major radius large, $T^2$ becomes locally the cylinder
+$\mathbb{R}\times S^1$: one loop is cut, $z$ becomes a \emph{linear} axis.
+Then contracting the two poles to points, the cylinder becomes the Bloch sphere
+$S^2$ of standard QM. This creates a hierarchy of reductions:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small
+\begin{tabular}{lcl}
+\toprule
+\textbf{Geometry} & \textbf{Dim.} & \textbf{Use} \\
+\midrule
+4-torus $T^4$ & 4 & full FFGFT (masses, $\alpha$) \\
+3-torus $T^3$ & 3 & mode space at fixed time \\
+2-torus $T^2$ & 2 & single qubit, without reduction \\
+Cylinder $\mathbb{R}\times S^1$ & 2 & limit $R\to\infty$, local approximation \\
+Bloch sphere $S^2$ & 2 & poles contracted, standard QM \\
+\bottomrule
+\end{tabular}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\textbf{[B]} \textbf{What the reductions cost -- and where the loss really sits.}
+Each level loses something: $T^4\to T^3$ the time winding and hence the masses;
+$T^3\to T^2$ a spatial winding and hence the third generation; $T^2\to$ cylinder
+\emph{one compact loop} -- the weakest reduction, and precisely here sits the
+fractal correction factor $K_{\text{frak}} = 1-100\xi \approx 0{.}9867$ (A040):
+$K_{\text{frak}}$ is the cylinder's memory of its torus origin. The loss is
+\emph{not} the subsequent SI conversion: the duality-carrying decompactification
+$S^1_m\to\mathbb{R}_t$ ($\tilde T\cdot m=1$, A060/A090) is a mode-preserving
+embedding and lossless; compactness survives as a discrete spectrum and as a
+physical observable (revival time, CHSH$\sim\xi$). The lossy operations are the
+\emph{reverse direction} $\mathbb{R}\to S^1$, the spatial projections, and -- for
+a readout -- the finite, non-periodic measurement window.
+
+\section{States: the Bijective Bridge}
+
+\textbf{[B]} In standard QM a qubit is a vector in $\mathbb{C}^2$:
+\[
+  |\psi\rangle = \alpha|0\rangle + \beta|1\rangle,
+  \qquad |\alpha|^2 + |\beta|^2 = 1,\qquad \alpha,\beta\in\mathbb{C}.
+\]
+In FFGFT the same qubit is a point $(z,r,\theta)$ on the cylinder/torus:
+\[
+  z\in[-1,1],\quad r\in[0,1],\quad \theta\in[0,2\pi),\qquad z^2+r^2=1,
+\]
+with $z$ as projection onto the computation axis, $r$ as radial superposition
+amplitude, $\theta$ as phase. Both representations are linked by a bridge:
+\[
+  \boxed{\;
+  \alpha = \sqrt{\tfrac{1+z}{2}}\,e^{i\theta/2},
+  \qquad
+  \beta = \sqrt{\tfrac{1-z}{2}}\,e^{-i\theta/2}\;}
+\]
+and conversely $z = |\alpha|^2-|\beta|^2$, $r = 2|\alpha\beta|$,
+$\theta = \arg(\alpha)-\arg(\beta)$. Consistency is immediate:
+$|\alpha|^2+|\beta|^2 = 1$ and $z^2+r^2 = 1$; $|0\rangle$ corresponds to
+$(1,0,*)$, $|1\rangle$ to $(-1,0,*)$.
+
+\textbf{[S]} The conceptual difference: in QM $|\alpha|^2$ is a
+\emph{probability} (Born rule), in FFGFT $r^2 = 1-z^2$ is an \emph{energy
+density} of the radial configuration. Numerically both coincide at large
+statistics; FFGFT is a deterministic geometric model whose statistical results
+agree with the Born rule.
+
+\section{Operators: Pauli Matrices as Rotations}
+
+\textbf{[B]} The three Pauli matrices generate all single-qubit operations, with
+algebra $\sigma_i\sigma_j = \delta_{ij}\mathbb{1} + i\epsilon_{ijk}\sigma_k$.
+On the Bloch cylinder they correspond to three geometric rotations: $\sigma_z$
+the phase rotation $\theta\to\theta+\pi$, $\sigma_x$ a $(z,r)$-rotation by $\pi$
+(bit flip), $\sigma_y$ the orthogonal rotation with phase flip.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+{\small
+\begin{tabular}{lcl}
+\toprule
+\textbf{Operator} & \textbf{Hilbert-space matrix} & \textbf{FFGFT geometry} \\
+\midrule
+$\sigma_z$ & $\begin{pmatrix}1&0\\0&-1\end{pmatrix}$ & Phase rotation $\theta\to\theta+\pi$ \\
+$\sigma_x$ & $\begin{pmatrix}0&1\\1&0\end{pmatrix}$ & $(z,r)$-rotation by $\pi K_{\text{frak}}$ \\
+$\sigma_y$ & $\begin{pmatrix}0&-i\\i&0\end{pmatrix}$ & Rotation with phase flip \\
+$H$ & $\tfrac{1}{\sqrt2}\begin{pmatrix}1&1\\1&-1\end{pmatrix}$ & swap $z\leftrightarrow r$, $\theta\to\theta+\pi/2$ \\
+$T$ & $\begin{pmatrix}1&0\\0&e^{i\pi/4}\end{pmatrix}$ & Phase rotation $\theta\to\theta+\pi/4$ \\
+\bottomrule
+\end{tabular}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\textbf{[K]} The \emph{only} FFGFT-specific deviation is the factor
+$K_{\text{frak}}\approx0{.}9867$ in the $\sigma_x$ rotation. It follows from the
+fractal dimension $D_f = 3-\xi$ (A040) and is a testable prediction: all
+$\pi$-gates deviate systematically by $\Delta\approx0{.}013\,\%$ from the ideal
+value. In the Hilbert-space formalism this would be an ad hoc correction to be
+built in as hardware noise; in FFGFT it follows from the geometry.
+
+\section{Gates and Universality}
+
+\textbf{[B]} Every unitary single-qubit gate $U\in U(2)$ is a Bloch rotation,
+\[
+  U = e^{i\alpha}R_{\hat n}(\phi)
+    = e^{i\alpha}\bigl(\cos(\phi/2)\,\mathbb{1} - i\sin(\phi/2)\,\hat n\cdot\vec\sigma\bigr),
+\]
+in FFGFT the rotation of the $(z,r,\theta)$ point around axis $\hat n$ by $\phi$.
+The CNOT gate translates as geometric conditioning: \emph{if $z_A=-1$ (control
+qubit on $|1\rangle$), apply bit flip on qubit B} -- topologically a linking of
+two cylinders (entanglement). Since the universal set $\{H,T,\text{CNOT}\}$
+(Solovay--Kitaev) is fully geometrically representable, FFGFT is \emph{universal
+for quantum computation}: there is no QM statement not formulable in FFGFT.
+
+\section{Tensor Products, Bell States, CHSH}
+
+\textbf{[B]} For $n$ qubits the Hilbert space is
+$\mathcal{H}_n = \bigotimes_{i=1}^n\mathbb{C}^2$ with dimension $2^n$. In FFGFT
+$n$ qubits correspond to $n$ mode configurations $(z_i,r_i,\theta_i)$ on a
+shared torus geometry; entanglement is a \emph{topological connection} -- knots
+not reducible to product form. The Bell state $|\Phi^+\rangle =
+\tfrac{1}{\sqrt2}(|00\rangle+|11\rangle)$ is a topologically connected cylinder
+configuration. Both formalisms reproduce the exponential growth $\dim = 2^n$
+with $2\cdot2^n-2$ real parameters.
+
+\textbf{[K]} \textbf{CHSH prediction.} Standard QM gives the Tsirelson bound
+$|\langle\text{CHSH}\rangle|\le 2\sqrt2$. FFGFT predicts a small, geometrically
+derived deviation $\Delta\text{CHSH}\approx10^{-5}$ -- the \emph{elementary}
+deviation per measurement. It lies below the current hardware noise floor and is
+an open task for high-precision Bell tests (A160/A210). Distinct from this is the
+cumulative value over many measurements; the two quantities are not directly
+comparable.
+
+\section{Measurement as Pole Transition}
+
+\textbf{[S]} In standard QM a measurement in the computation basis gives value
+$0$ with probability $|\alpha|^2$, with collapse to $|0\rangle$ or $|1\rangle$.
+In FFGFT measurement is \emph{not} a probabilistic collapse but a geometric
+interaction driving the $(z,r,\theta)$ point to the nearest stable extreme
+($z=+1$ or $z=-1$) -- a deterministic motion in mode space that is
+statistically indistinguishable from Born-rule behaviour because of the unknown
+phase $\theta$. At large statistics:
+\[
+  P_{\text{FFGFT}}(z=+1) = \tfrac{1+z}{2} = |\alpha|^2 = P_{\text{QM}}(0).
+\]
+The statistical results are identical; the Bell-test debate over local realism
+dissolves geometrically, because entanglement is represented as topological
+connection, not as non-local correlation.
+
+\section{Unitary Evolution: Schrödinger as Low-Energy Limit}
+
+\textbf{[B]} The QM time evolution $i\hbar\,\partial_t|\psi\rangle = H|\psi\rangle$
+is in FFGFT the deterministic motion of the mode configuration $\varphi_{n,l,j}$
+on $T^3\times\mathbb{R}$. The FFGFT mode equation reduces in the low-energy limit
+($E\ll E_\xi$) to the Schrödinger equation:
+\[
+  i\hbar\,\frac{\partial\varphi_{n,l,j}}{\partial t}
+  \;\xrightarrow{E\ll E_\xi}\;
+  -\frac{\hbar^2}{2m}\nabla^2\varphi_{n,l,j} + V\varphi_{n,l,j}.
+\]
+At higher energies $\xi$-corrections appear, which in the Hilbert-space formalism
+appear as Hamiltonian modifications.
+
+\section{What Is Translatable and What Remains FFGFT-Specific}
+
+\textbf{[B]} \emph{All} Hilbert-space statements are mappable into FFGFT: states,
+operators, gates (with or without $K_{\text{frak}}$), tensor products,
+entanglement, Bell/GHZ states, measurement, unitary evolution, algorithms (Shor,
+Grover, VQE). And conversely: the $(z,r,\theta)$ configuration corresponds
+uniquely to the $(\alpha,\beta)$ vector, geometric rotations to unitary operators,
+topological entanglements to entangled Hilbert-space vectors. Every computation
+in one formalism is executable in the other, with identical result.
+
+\textbf{[K]} The translatability holds for \emph{statements about quantum
+systems}, not for the \emph{input values}. In Hilbert space $\xi$, the fermion
+masses, $\alpha$, and $K_{\text{frak}}$ appear as external inputs; in FFGFT they
+follow from the geometry ($\xi$ as stipulation A020; the masses from
+$m_i = r_i\,\xi^{p_i}v$, A100/A110; $\alpha$ from A130; $K_{\text{frak}}$ from
+A040). This is the structural asymmetry: Hilbert space has all the tools for QM
+computations, but no explanation for the input values; FFGFT delivers both from
+one geometry. In this sense QM is a subset of FFGFT -- restricted to the question
+of \emph{how} systems behave, without the question of \emph{why} the constants
+have these values.
+
+\section{Operational Equivalence and Interpretative Divergence}
+
+\textbf{[S]} Complete translatability must not be read as ontological identity.
+\emph{Operationally} FFGFT and standard QM agree in every measurable result, up
+to $\xi$-corrections. \emph{Interpretatively} they diverge at points where the
+standard reading makes statements that in FFGFT appear as artefacts of the chosen
+carrier assumptions. Three points within QM:
+
+\begin{itemize}[leftmargin=2em,itemsep=3pt,topsep=3pt]
+  \item \textbf{Born rule as irreducible randomness.} Standard reading: $|\psi|^2$
+    as ontological probability, the outcome fundamentally random. FFGFT reading:
+    same distribution, but from deterministic pole-transition dynamics on $T^4$;
+    stochasticity arises at the measurement apparatus, not in the natural process.
+    Operationally identical.
+  \item \textbf{Non-locality as ontological property.} Standard reading of Bell
+    correlations: action at a distance in $\mathbb{R}^3$. FFGFT reading:
+    entanglement is a topological connection on $T^4$ -- geometric proximity in a
+    closed geometry, not action at a distance in open space (A160). Results
+    identical, ontological reading structurally different.
+  \item \textbf{$\hbar$ as ontological primitive.} Standard reading: $\hbar$ is a
+    fundamental constant of nature. FFGFT reading: $\hbar$ is an SI conversion
+    factor between energy and time measures, following from the closure condition
+    on $T^4$ (A080/A085). Numerically identical, ontologically derived.
+\end{itemize}
+
+\section{The Four Extensions: Hilbert Space Upward}
+
+\textbf{[B]} The downward translation loses a structural layer at each reduction.
+The reverse question is: which extensions must one \emph{add} to the standard
+Hilbert space so that it natively carries the full FFGFT? Remarkably, each
+extension corresponds to an established mathematical structure -- FFGFT invents no
+new mathematics, but is a specific combination of existing structures.
+
+\textbf{Extension 1 -- deformed algebra $SU_q(2)$.} The isotropic $SU(2)$ algebra
+$[\sigma_i,\sigma_j]=2i\epsilon_{ijk}\sigma_k$ becomes anisotropic in FFGFT:
+$\sigma_x^{\text{FFGFT}} = K_{\text{frak}}\,\sigma_x$, while $\sigma_y,\sigma_z$
+are undisturbed. This is the $q$-deformation (Drinfeld--Jimbo 1985) with
+\[
+  \boxed{\;q = e^{i\pi(1-K_{\text{frak}})} = e^{i\pi\cdot100\xi} = e^{i\pi/75}
+        \approx 0{.}999 + 0{.}042\,i\;}
+\]
+The deformation phase is small ($\pi/75\approx0{.}042$ rad) but structurally
+significant: it breaks spherical symmetry to an axis-distinguished algebra --
+the cylinder's memory of the torus. Cost: the Hilbert space remains $\mathbb{C}^2$,
+the $2\times2$ matrices remain; only the structure constants change. Consequence:
+all $\pi$-gates deviate by $0{.}013\,\%$ (testable).
+
+\textbf{Extension 2 -- cyclic winding quantum number.} The cylinder has one compact
+loop; the 2-torus has two. To represent the second, the Hilbert space carries a
+quantum number $n\in\mathbb{Z}$: from $|\psi\rangle = \alpha|0\rangle+\beta|1\rangle$
+one gets $|\psi;n\rangle = \alpha|0;n\rangle+\beta|1;n\rangle$, and
+\[
+  \boxed{\;\mathcal{H}^{T^2}_{\text{FFGFT}} = \bigoplus_{n\in\mathbb{Z}}\mathbb{C}^2_n\;}
+\]
+a countably infinite-dimensional space. The winding excitations have energy
+$E_n\sim n^2\hbar^2/(mR^2)$; at low energies only $n=0$ is occupied and the space
+effectively reduces to $\mathbb{C}^2$ -- the standard Bloch sphere.
+
+\textbf{Extension 3 -- bundle structure instead of tensor product.} In standard
+QM a spin-$\tfrac12$ particle is $\mathcal{H} = L^2(\mathbb{R}^3)\otimes\mathbb{C}^2$
+with $[L_i,S_j]=0$; spin-orbit coupling $H_{\text{SO}}=\xi(r)\,\vec L\cdot\vec S$
+must be introduced as an additional term with a free parameter. In FFGFT both
+position \emph{and} spin arise from windings on the same $T^3$; the correct
+Hilbert space is \emph{not} a tensor product but the section space of a spinor
+bundle,
+\[
+  \boxed{\;\mathcal{H}^{T^3}_{\text{FFGFT}} = L^2(T^3, S)\;}
+\]
+with $[L_i,S_j]\neq0$ (corrections $\sim\xi$). Spin-orbit coupling is thereby a
+\emph{geometric} property of the bundle, not a free parameter.
+
+\textbf{Extension 4 -- temporal winding $k_t$.} In standard QM time is a
+continuous linear axis with $E=\hbar\omega$. In FFGFT it is a compact winding
+direction with $k_t\in\mathbb{Z}$ and
+\[
+  \boxed{\;E = \hbar f(k_t)\;}
+\]
+for a periodic function $f$; in the lowest sector $E\approx\hbar\omega$. The
+central statement: the \emph{mass} of a mode is its $k_t$-winding energy,
+$m_i c^2 = \hbar f(k_t^{(i)})$, which together with the Yukawa form
+$m_i = r_i\,\xi^{p_i}v$ (A100) delivers all fermion masses from the winding
+tuples.
+
+\section{The Structural Point: Known Mathematics, New Combination}
+
+\textbf{[B]} Each of the four extensions corresponds to a well-known structure:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+{\small
+\begin{tabular}{clc}
+\toprule
+\textbf{Ext.} & \textbf{Mathematics} & \textbf{Established since} \\
+\midrule
+1 & Quantum groups $SU_q(2)$ & Drinfeld/Jimbo 1985 \\
+2 & Winding excitations & String theory, Kac--Moody \\
+3 & Spinor bundles & Differential geometry 1950s \\
+4 & Compact extra dimension & Kaluza 1921, Klein 1926 \\
+\bottomrule
+\end{tabular}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+None of these structures is new. What makes FFGFT specific is the
+\textbf{combination}: all four together, with a single geometric justification
+($T^4$ and $\xi$).
+
+\section{The Full Hilbert Space}
+
+\textbf{[B]} With all four extensions one obtains a complete FFGFT-equivalent
+formulation. In the canonical A-series notation the base space is
+\[
+  \mathcal{H} = L^2(T^4)\otimes\mathbb{C}^3,
+\]
+where the $\mathbb{C}^3$ factor carries the three-element $Z_3$ identification
+(A030); the full formulation supplements it with the spinor bundle $S$ and the
+deformed $SU_q(2)$ algebra. In this language the FFGFT results are directly
+derivable from the Hilbert-space structure: the masses from the $k_t$-windings
+(A100), $\alpha$ from an eigenvalue relation (A130), spin-orbit coupling from the
+bundle structure, the $K_{\text{frak}}$ corrections from the quantum-group
+deformation (A040).
+
+\textbf{[K]} On the same space the mass operator acts as a $Z_3$ circulant; from
+its diagonalisation follow the Koide condition $Q=2/3$ and the angle $\theta=2/9$.
+This computation is \emph{not} carried out here but belongs substantively in the
+lepton sector: the operator and its diagonalisation are in A110, the angle
+$\theta=2/9$ in A120. This document only provides the space on which they act.
+
+\section{Quantum Graphity as Sketched Subset}
+
+\textbf{[S]} The same subset strategy -- Bloch sphere $\subset$ FFGFT through
+reduction -- can be applied to another established, published quantum gravity
+theory: \emph{Quantum Graphity} (Konopka, Markopoulou, Severini, Smolin;
+\emph{Phys.~Rev.~D}~77, 104029, 2008; arXiv:0801.0861) -- a background-independent
+model in which space and geometry emerge from a dynamical weighted graph. It is
+mathematically clearly defined and a concrete comparison object. It is a comparison
+with established physics, not a load-bearing argument of FFGFT; and -- the crucial
+difference from the Hilbert-space bijection above -- the reduction is \emph{not
+carried out} but a hypothesis. Hence the consistent $[S]$ marking throughout.
+
+Five reduction steps: (1) continuum to discrete (triangulation of $T^4$, not
+proved); (2) topology forgotten ($K_N$ vs.\ $T^4$ winding structure); (3) windings
+to spin labels (physical meaning of $(n_x,n_y,n_z,k_t)$ lost); (4) geometry
+parameter to phase parameter ($\xi=4/30000$ fixed vs.\ free couplings
+$g_V,g_B,\ldots$); (5) matter sector discarded (all 12 fermion masses absent).
+
+What survives: one genuine correspondence -- emergent $U(1)$ from microstructure
+(Levin--Wen, extended version only). FFGFT contains Hilbert-space QM provably as
+a subset, and discrete-geometry programmes plausibly as a special case.
+
+\section{Field Theory: Modes, Lagrangian, Schrödinger Limit}
+
+\textbf{[B]} The complete field theory of the Hilbert space -- explicit mode
+functions $\phi_{n,l,j}$, free Lagrangian $\mathcal L_0$, bridge formula
+Lagrangian$\,\leftrightarrow\,$mode operator, Dirac line, and Schrödinger limit
+-- is in A075. Here only the key formulas needed for the Hilbert-space connection.
+
+\textbf{[B]} \textbf{Bridge formula.} Lagrangian and mode operator describe
+the same physics (derivation in six steps: A075):
+\[
+  \int\tfrac12(\partial\,\delta m)^2\,d^4x
+  = \tfrac12\langle\psi|\Phi^2|\psi\rangle,
+  \qquad \Phi = \sum_i m_i P_i.
+\]
+Mass arises not as a Lagrangian parameter but as an eigenvalue of the mode operator.
+
+\section{Symbol Glossary}
+
+Symbols used throughout the entire A-series are explained in A010.
+Specific to this document:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small\begin{tabular}{lp{9cm}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$q = e^{i\pi/75}$ & Deformation parameter of the Drinfeld--Jimbo quantum group;
+  follows from $q = e^{i\pi\cdot100\xi}$ with $\xi=4/30000$ \\
+$U_q(\mathfrak{su}(2))$ & $q$-deformed $\mathfrak{su}(2)$ algebra \\
+$[n]_q$ & $q$-number: $[n]_q = (q^n-q^{-n})/(q-q^{-1})$ \\
+$\sigma_x,\sigma_y,\sigma_z$ & Pauli matrices (spin operators) \\
+$S_\text{CHSH}$ & CHSH value, theoretical maximum $2\sqrt2\approx2{.}828$ \\
+\bottomrule
+\end{tabular}}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\section{Verification Scripts}
+
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item Bijective bridge $(z,r,\theta)\leftrightarrow(\alpha,\beta)$: numerical
+    verification of $|\alpha|^2+|\beta|^2=1$ and $z^2+r^2=1$ over random states,
+    plus operator translation Pauli$\,\leftrightarrow\,$rotation:
+    \texttt{python/A\_Serie\_Skripte/a070\_tensorfaktor.py}
+  \item $q$-deformation and factor structure: $q = e^{i\pi/75}$, limit $q\to1$,
+    and the tensor factor $L^2(T^4)\otimes\mathbb{C}^3$:
+    \texttt{python/A\_Serie\_Skripte/a070\_zirkulant\_dft.py}
+\end{itemize}
+
+\section{Open Questions}
+
+\textbf{The $\Delta\text{CHSH}\sim10^{-5}$ deviation is calculated, not measured.}
+The CHSH scaling formula is fully derived in A165; the computational framework
+($\phi$-QFT, Bell damping, T0-Shor) and the hardware status are there. The
+IBM-Heron-r2 measurement (May 2026) confirms Bell violation ($S=2{.}74$, 96{.}9\,\%
+of the Tsirelson bound), but the device-to-device variation ($\sim1{.}4\,\%$)
+exceeds the $\xi$ effect ($\sim0{.}001\,\%$) by a factor $\sim1400$ -- not
+resolvable with today's NISQ hardware in principle (A165). As a prediction with
+falsification criteria, $\Delta\text{CHSH}$ stands in A210.
+
+\textbf{Top quark, Down-type quarks, and quark $r_i$ deep structure are unclear.}
+The lepton exponents and Up-type quarks (up to Charm) follow the geometric $2/3$
+sequence (A075/A100); the top quark ($p_t=-1/3$, no known geometric reason) and
+the Down-type arithmetic step size remain open (A150).
+
+\section{Supersedes}
+
+This document subsumes: Dok.~230 (translatability FFGFT$\,\leftrightarrow\,$Hilbert-space
+QM, bijection, operators, gates, measurement, interpretative divergence), Dok.~231
+(the four Hilbert-space extensions), Dok.~232 (Quantum Graphity as sketched subset),
+and the framework section of Dok.~282 (the Hilbert space explicit). Incorporated:
+R41 (location of losses: the type-I decompactification is lossless; lossy are
+the reverse direction, spatial projection, and measurement window). \emph{Not}
+taken over: the mass operator/Koide part of Dok.~282 belongs substantively in
+A110; the HLV/CP comparison part of Dok.~282 remains independent as an IPI
+framework comparison (A240).
+
+\section{Use of AI Tools}
+
+This document was created with the assistance of AI tools.
+Responsibility for content and errors rests entirely with the author.
+Full wording of the rules in A010.

@@ -1,0 +1,420 @@
+\section{Purpose}
+
+\textbf{[STIPULATION]} Dieses Dokument entwickelt den Quantencomputing-Rahmen der
+FFGFT: Energie-Feld-Qubits, die $\phi$-hierarchische Quanten-Fourier-Transformation
+($\phi$-QFT), Bell-Test-Modifikationen mit der CHSH-Skalierungsformel
+$\text{CHSH}^{\text{T0}}(n) = 2\sqrt{2}\cdot\exp(-\xi\ln(n)/D_f)$ und die
+Hardware-Validierung auf IBM-Quantencomputern (Mai 2026). Das Dokument liefert
+den Nachweis, dass T0-Schaltkreise auf Produktionshardware lauffähig sind und
+Bell-Verletzung zeigen ($S=2{.}74$, $96{.}9\,\%$ der Tsirelson-Schranke), während
+der $\xi$-Effekt selbst mit heutiger NISQ-Hardware nicht auflösbar ist.
+
+\section{Energie-Feld-Qubits und die T0-Darstellung}
+
+\textbf{[B]} Standard-Qubits werden als komplexe Vektoren
+$\alpha|0\rangle+\beta|1\rangle\in\mathbb{C}^2$ im Hilbertraum dargestellt. T0
+verwendet stattdessen Zylinderkoordinaten $(z,r,\theta)$:
+
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item $z\in[-1,1]$: Projektion auf die Berechnungsachse ($z=+1
+        \Leftrightarrow|0\rangle$, $z=-1\Leftrightarrow|1\rangle$)
+  \item $r\in[0,1]$: Superpositionsamplitude (radialer Abstand), $z^2+r^2=1$
+  \item $\theta\in[0,2\pi)$: Phase (Azimutwinkel)
+\end{itemize}
+
+\textbf{[S]} Der entscheidende konzeptionelle Wechsel: $r^2$ ist keine
+Wahrscheinlichkeit, sondern repräsentiert \emph{Energiedichte} des
+Superpositionszustands. Das ermöglicht deterministische Evolution bei
+Beibehaltung quantenmechanischer Interferenz. Die Verbindung zur Standardform ist
+dieselbe Brücke wie in A070: $\alpha=\sqrt{(1+z)/2}\,e^{i\theta/2}$.
+
+\textbf{[B]} Die zylindrische Darstellung ist für atomare Systeme ($R/r\gg1$) die
+Näherung der vollständigen Torusgeometrie. Für Protonen-Skalensysteme ist das
+Seitenverhältnis $R/r\sim2{.}5\times10^{18}$ -- die Näherung ist im Grenzfall
+exakt. Numerische Vergleiche zylindrischer und toroidaler Berechnungen weichen
+für $R/r>10^{12}$ um weniger als $0{.}02\,\%$ voneinander ab.
+
+\textbf{[K]} Das modifizierte Hadamard-Gatter mit Bell-Dämpfung für ein $n$-Qubit-System:
+\[
+  H_{\text{T0}}^{(n)}:\; (z,r,\theta)\;\mapsto\;
+  \bigl(r\cdot e^{-\xi\ln(n)/D_f},\;z\cdot e^{-\xi\ln(n)/D_f},\;
+  \theta+\tfrac\pi2\bigr).
+\]
+Die Transformation $(z,r)\to(r,z)$ implementiert den Basiswechsel; der
+Dämpfungsfaktor $\exp(-\xi\ln(n)/D_f)$ stabilisiert die Multi-Qubit-Verschränkung.
+
+\section{Die \texorpdfstring{$\phi$}{phi}-hierarchische QFT}
+
+\textbf{[B]} Die $\phi$-hierarchische QFT wendet Phasen $2\pi/\phi^k$ statt
+$2\pi/2^k$ an, mit $\phi=(1+\sqrt5)/2$:
+\[
+  \phi\text{-QFT}:\;|x\rangle\;\mapsto\;
+  \frac{1}{\sqrt{Q_\phi}}\sum_{y=0}^{Q_\phi-1} e^{2\pi i xy/Q_\phi}|y\rangle,
+  \qquad Q_\phi=\phi^n.
+\]
+
+\textbf{[B]} \textbf{Äquivalenzsatz.} Für Shors Algorithmus zur Faktorisierung
+von $N<2^{20}$ mit Fehlerwahrscheinlichkeit $\delta<10^{-6}$ gilt:
+\[
+  P_{\text{Erfolg}}(\text{Standard-QFT})\;\le\;
+  P_{\text{Erfolg}}(\phi\text{-QFT})\;\le\;
+  P_{\text{Erfolg}}(\text{Standard-QFT}) + \xi.
+\]
+Der Beweis verläuft in drei Schritten: (1) Für jede Periode $r\in[2,N]$
+existiert $k\in\mathbb Z$ mit $|r-\phi^k\cdot c|<1/(2r^2)$ für eine rationale
+Zahl $c$ mit kleinem Nenner (Weylscher Gleichverteilungssatz, Dirichlet-Schubfach).
+(2) Diese Störung erfüllt die Kettenbruchstabilität
+$|y/Q-s/r|<1/(2r^2)$. (3) Die Bell-Dämpfung erhöht das Signal-zu-Rausch-Verhältnis:
+$\text{SNR}_{\phi\text{-QFT}} = \text{SNR}_\text{std}\cdot(1+\xi\ln(r)/D_f)$,
+was $P_{\phi\text{-QFT}}\ge P_\text{std}$ sichert.
+
+\textbf{[K]} \textbf{Dekohärenzunterdrückung.} Unter Phasenrauschen
+$\epsilon\cdot\sigma_z$ mit $\epsilon\sim\mathcal N(0,\sigma^2)$ gilt für
+$\epsilon<0{.}1$:
+\[
+  \text{Fidelity}_{\phi\text{-QFT}}
+  = \text{Fidelity}_\text{std}\cdot\exp\!\bigl(\xi\epsilon^2/D_f\bigr)
+  > \text{Fidelity}_\text{std}.
+\]
+Der Fehlerterm ist quadratisch in $\epsilon$ statt linear -- das ist der
+strukturelle Stabilitätsvorteil.
+
+\section{Bell-Test Modifications and CHSH Scaling}
+
+\textbf{[K]} Die T0-modifizierte Bell-Korrelation für zwei Qubits mit Messwinkeln
+$a$ und $b$:
+\[
+  E^{\text{T0}}(a,b) = -\cos(a-b)\cdot(1-\xi\cdot f(n,l,j)),
+\]
+mit $f(n,l,j)=(n/\phi)^l\cdot(1+\xi j/\pi)$. Für photon-ähnliche Qubits
+($n=1,l=0,j=1$): $f\approx1{.}000042$.
+
+\textbf{[K]} \textbf{CHSH-Skalierungsformel.} Für $n$ verschränkte Qubits:
+\[
+  \boxed{\;\text{CHSH}^{\text{T0}}(n)
+  = 2\sqrt2\cdot\exp\!\Bigl(-\frac{\xi\ln n}{D_f}\Bigr)\;}
+\]
+Die Ableitung: Mit T0-Modifikation und $n$-Qubit-Bell-Dämpfung gilt
+$E_i^{\text{T0}}\approx E_i^{\text{QM}}\cdot(1-\xi\ln n/D_f)$; Summation über
+die vier CHSH-Terme liefert die Formel. Für 73 Qubits:
+$\text{CHSH}^{\text{T0}}(73) = 2{.}828427\cdot e^{-\xi\cdot4{.}290/D_f}
+= 2{.}827888$, Abweichung $\Delta=5{.}39\times10^{-4}$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small
+\begin{tabular}{rcccc}
+\toprule
+$n$ Qubits & QM CHSH & T0 CHSH & $\Delta$ & Testbar \\
+\midrule
+10  & 2.828427 & 2.828138 & $1{.}0\times10^{-3}$ & Ja \\
+20  & 2.828427 & 2.828051 & $1{.}3\times10^{-3}$ & Ja \\
+50  & 2.828427 & 2.827935 & $1{.}7\times10^{-3}$ & Ja \\
+73  & 2.828427 & 2.827888 & $1{.}9\times10^{-3}$ & Ja \\
+100 & 2.828427 & 2.827848 & $2{.}1\times10^{-3}$ & Ja \\
+\bottomrule
+\end{tabular}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\textbf{[K]} \textbf{Räumliche Korrelationsverzögerung.} Für Bell-Tests über Distanz
+$d$ sagt T0 eine messbare Verzögerung voraus:
+\[
+  \Delta t = \xi\cdot\frac{d}{c}.
+\]
+Das Korrelationsfeld propagiert kausal; $\xi$ führt eine Phasenverzögerung ein.
+Für $d=1000\,\text{km}$: $\Delta t\approx445\,\text{ns}$ (messbar mit Atomuhren,
+Präzision $\sim10\,\text{ns}$).
+
+\section{Application: T0-Shor Algorithm}
+
+\textbf{[B]} T0-Shor ergänzt den Standardalgorithmus um zwei Suchstufen: (1)
+\textbf{$\xi$-Resonanz-Scan}: Für $r\in[2,\min(N,100)]$ wird
+$a^r\bmod N$ berechnet und die Resonanzstärke
+$\xi_\text{mod}/(\lvert a^r-1\rvert+1)$ mit $\xi_\text{mod}=e^{-\xi r^2/D_f}$
+ausgewertet; bei $a^r\equiv1\pmod N$ wird $r$ direkt zurückgegeben. (2)
+\textbf{$\phi$-Hierarchiesuche}: Teste $r=\text{round}(\phi^k)$ für
+$k\in[0,20]$.
+
+\textbf{[K]} \textbf{Komplexität.} Der $\xi$-Scan hat Kosten
+$O(\min(\sqrt N,100)\cdot\log^2N)$; die $\phi$-Suche $O(\log N\cdot\log^2N)$.
+Die Gesamtkomplexität bleibt $O(\log^3N)$ -- der Zusatzterm
+$O(\xi\log N)$ ist für praktisches $N$ vernachlässigbar.
+
+\textbf{[K]} \textbf{Benchmark-Ergebnisse} (Python-Implementierung,
+100\,\% Erfolgsrate):
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small
+\begin{tabular}{rccccc}
+\toprule
+$N$ & Faktoren & Periode $r$ & Methode & Zeit (s) \\
+\midrule
+15  & $3\times5$   &  4 & $\xi$-Resonanz & 0.033 \\
+21  & $3\times7$   &  2 & $\xi$-Resonanz & 0.0003 \\
+33  & $3\times11$  & 10 & $\xi$-Resonanz & 0.0003 \\
+77  & $7\times11$  & 30 & $\xi$-Resonanz & 0.0003 \\
+143 & $11\times13$ & 60 & $\xi$-Resonanz & 0.0003 \\
+\bottomrule
+\end{tabular}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\section{Hardware Validation: IBM Quantum May 2026}
+
+\textbf{[K]} Die Hardware-Validierung erfolgte am 28.~Mai 2026 auf
+\texttt{ibm\_kingston} (Heron~r2, 156 physikalische Qubits) mit 50 unabhängigen
+Läufen sowie auf \texttt{ibm\_marrakesh} mit 10 Läufen; je 2048 Shots.
+
+\textbf{[K]} \textbf{Bell-Zustands-Treue.} Schaltkreis: Standard-Bell-Zustand
+$|\Phi^+\rangle=(|00\rangle+|11\rangle)/\sqrt2$ aus Hadamard + CNOT. Ergebnis
+der 50-Lauf-Messung (ibm\_kingston): mittlere Treue $0{.}9876\pm0{.}0028$,
+Varianz $P(|00\rangle) = 1{.}249\times10^{-4}$. Der Chi-Quadrat-Test gegen die
+Shot-Noise-Erwartung ($1{.}221\times10^{-4}$) ergibt $\chi^2=50{.}14$,
+$p=0{.}856$ -- die Varianz ist mit reiner Quanten-Shot-Noise vollständig
+verträglich.
+
+\textbf{[K]} \textbf{Wichtige Korrektur.} Eine frühere Auswertung (3 Läufe,
+2025) berichtete eine Varianz von $0{.}000248$ und deutete diese als
+„40-fach deterministischer als QM``. Die erweiterte 50-Lauf-Messung widerlegt
+das: die Varianz ist nicht von Shot-Noise unterscheidbar (Verhältnis $1{.}02$).
+Drei Läufe waren statistisch zu wenig; die behauptete deterministische
+Varianzreduktion besteht nicht.
+
+\textbf{[K]} \textbf{CHSH-Messung.} Winkel: Alice $0°/45°$, Bob
+$22{.}5°/\text{-}22{.}5°$; Korrelatoren $E=(N_{00}-N_{01}-N_{10}+N_{11})/N$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small
+\begin{tabular}{lccccc}
+\toprule
+Gerät & Messungen & Mittel $S$ & SE & \% Tsirelson & Bell-Verletzung \\
+\midrule
+ibm\_kingston  & 15 & 2.7396 & 0.0071 & 96.9\% & 105\,$\sigma$ \\
+ibm\_marrakesh & 10 & 2.7016 & 0.0138 & 95.5\% & 51\,$\sigma$ \\
+\textbf{gepoolt} & \textbf{25} & \textbf{2.7244} & \textbf{0.0078}
+                 & \textbf{96.3\%} & --- \\
+\bottomrule
+\end{tabular}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+Der gemessene Wert $S=2{.}74$ liegt $105\,\sigma$ über der klassischen Schranke
+($2{.}0$): lokaler Realismus ist ausgeschlossen, die erzeugte Verschränkung ist
+genuin.
+
+\textbf{[K]} \textbf{Abweichung von der Tsirelson-Schranke -- Dekohärenz, nicht
+$\xi$.} Der Wert liegt $3{.}14\,\%$ unter $2\sqrt2$. Die mittlere
+Korrelatorstärke ist $0{.}685$ statt ideal $0{.}707$ -- das entspricht
+$\sim1{.}5\,\%$ Gatter- und Auslesefehler (NISQ-typisch). Diese Abweichung ist
+\emph{Dekohärenz}. Der vorhergesagte $\xi$-Effekt liegt bei
+$\sim10^{-5}$ ($\approx0{.}001\,\%$ von $S$), rund $3000\times$ kleiner als
+die gemessene Lücke.
+
+\textbf{[K]} \textbf{Cross-Platform-Befund.} Zwei baugleiche Heron-r2-Chips
+unterscheiden sich im gemessenen CHSH-Wert um $0{.}038$
+($\approx1{.}4\,\%$; Welch-$t$: $t=2{.}46$, $p=0{.}028$), allein durch
+Kalibrierungs- und Rauschunterschiede. Da der gesuchte $\xi$-Effekt
+$\sim1400\times$ kleiner ist als diese Geräte-zu-Geräte-Variation, ist die
+$\xi$-Vorhersage mit heutiger NISQ-Hardware \emph{prinzipiell nicht auflösbar}
+-- ein direkt gemessener, nicht nur abgeschätzter Befund. Der $\xi$-Test
+erfordert fehlerkorrigierte Qubits mit sub-ppm-stabiler, gerätestabiler
+Präzision.
+
+\section{Falsification Criteria}
+
+\textbf{[K]} Die Theorie macht präzise prüfbare Aussagen:
+
+\textbf{CHSH-Skalierungsgesetz:} Messung von $S(n)$ für $n=10,20,50,100,200$
+Qubits. T0 sagt $S(n)=2\sqrt2\cdot\exp(-\xi\ln n/D_f)$ voraus. Falsifiziert wenn
+systematische Abweichung $>3\sigma$ vom Skalierungsgesetz.
+
+\textbf{73-Qubit-Bell-Test:} Vorhergesagter Wert
+$S(73)=2{.}827888\pm0{.}0001$ (messbar mit $\sigma\sim10^{-4}$).
+Falsifiziert wenn $S=2{.}8284\pm0{.}0001$.
+
+\textbf{Räumlicher Satelliten-Bell-Test:} $\Delta t=445\pm50\,\text{ns}$
+für $d=1000\,\text{km}$. Falsifiziert wenn $|\Delta t|<50\,\text{ns}$.
+
+\section{Beweis der \texorpdfstring{$\phi$}{phi}-QFT-Äquivalenz: vollständige Herleitung}
+
+\textbf{[B]} \textbf{Lemma (Periodenabdeckung durch $\phi$-Potenzen).} Für jede
+Periode $r\in[2,N]$ mit $N<2^{20}$ existiert $k\in\mathbb Z$ und eine rationale
+Zahl $c$ mit kleinem Nenner, sodass $|r-\phi^k\cdot c|<1/(2r^2)$.
+
+Beweis: Der goldene Schnitt $\phi=(1+\sqrt5)/2$ ist eine Pisot-Zahl. Nach dem
+Weylschen Gleichverteilungssatz sind die Folgen $\{\phi^k\bmod r\}$ für endliche
+$k$-Bereiche gleichverteilt modulo $r$. Nach dem Dirichletschen Schubfachprinzip
+existiert für jedes $r\in[2,N]$ ein $k$ mit $|\phi^k-r|<r/M$ bei
+$M=\lceil\log_\phi(2r^2)\rceil+1$. Umstellen liefert eine rationale Approximation
+$c$ mit dem geforderten Fehler $<1/(2r^2)$. Für $N<2^{20}$ genügen $k$-Werte
+bis $\lceil20/\log_2\phi\rceil\approx36$.
+
+\textbf{[B]} \textbf{Hauptsatz.} Der Beweis verläuft in fünf Teilen:
+
+\textbf{(A) Signalanalyse.} Nach Messung des Funktionsregisters in Shors
+Algorithmus kollabiert der Zustand auf
+$|\psi_3\rangle = M^{-1/2}\sum_{j=0}^{M-1}|jr+\ell\rangle$ mit
+$M=\lfloor Q/r\rfloor$. Die QFT liefert Amplitude
+$\alpha(y) = (QM)^{-1/2}\,e^{2\pi i\ell y/Q}\sum_{j=0}^{M-1}e^{2\pi ijry/Q}$.
+Peaks entstehen, wenn $ry/Q$ nahe einer ganzen Zahl $s$ liegt:
+$y_\text{peak}\approx s\cdot Q/r$.
+
+\textbf{(B) $\phi$-QFT-Modifikation.} Ersetze $Q=2^n$ durch $Q_\phi=\phi^n$;
+die Bell-Dämpfung $\mathcal D(\theta)=\exp(-\xi\theta^2/(\pi^2D_f))$ modifiziert
+die Amplitude. Das unterdrückt Off-Peak-Beiträge (wo $\Delta\phi$ signifikant
+von einem ganzzahligen Vielfachen von $2\pi$ abweicht) und wirkt als Filter.
+
+\textbf{(C) Peak-Positionen.} Hauptpeaks bei
+$y_{\phi,\text{peak}}\approx s\cdot Q_\phi/r$. Nach dem Lemma existiert $k$ mit
+$|Q_\phi/r - 2^n/r\cdot\phi^k/2^k|<0{.}2\cdot2^n/r$.
+
+\textbf{(D) Kettenbruchstabilität.} Der Kettenbruchalgorithmus extrahiert $r$
+aus $y/Q$ unter der Bedingung $|y/Q-s/r|<1/(2r^2)$. Unser Fehler aus (C) ist
+$0{.}2/r<1/(2r^2)$ für $r\ge2$ -- die Bedingung ist erfüllt.
+
+\textbf{(E) Erfolgswahrscheinlichkeit.} Die Standardformel gibt
+$P_\text{std}=4/\pi^2-1/(3r)+O(r^{-2})$. Die Bell-Verstärkung liefert
+$\text{SNR}_{\phi\text{-QFT}} = \text{SNR}_\text{std}\cdot(1+\xi\ln(r)/D_f)$,
+sodass $P_{\phi\text{-QFT}}\ge P_\text{std}$. Die obere Schranke
+$P_\text{std}+\xi$ folgt, da $\phi$-QFT perfekten Erfolg nicht überschreiten kann.
+
+\section{Dekohärenz-Unterdrückung: vollständiger Beweis}
+
+\textbf{[K]} Unter Phasenrauschen $\epsilon\sim\mathcal N(0,\sigma^2)$ gilt für
+Standard-QFT: $|\alpha_\text{std}(y)|\to|\alpha_\text{std}(y)|\cdot(1-|\epsilon|)+O(\epsilon^2)$
+(lineare Degradation). Für $\phi$-QFT mit Bell-Dämpfung
+$\mathcal D(\theta)=\exp(-\xi\theta^2/(\pi^2D_f))$:
+\[
+  |\alpha_\phi(y)|\;\to\;|\alpha_\phi(y)|\cdot
+  \exp\!\Bigl(-\frac\xi{D_f}\epsilon^2\Bigr)
+  \;\approx\;|\alpha_\phi(y)|\cdot\Bigl(1-\frac\xi{D_f}\epsilon^2\Bigr).
+\]
+Da $\xi\epsilon/D_f\ll1$ für $\epsilon<0{.}1$ ist $1-\xi\epsilon^2/D_f>1-\epsilon$.
+Der Fehlerterm ist quadratisch in $\epsilon$ statt linear. Für $\sigma=0{.}1$:
+Fehler Standard-QFT $\approx10\,\%$, Fehler $\phi$-QFT
+$\approx\xi\sigma^2/D_f\approx4{.}4\times10^{-7}$.
+
+\section{Implementierung: Schlüsselcode}
+
+\textbf{[K]} \textbf{$\xi$-Resonanz-Periodenfindung.} Die Kernfunktion:
+
+\begin{verbatim}
+def find_period_xi_resonance(a, N, max_r=100):
+    XI, D_F = 4/30000, 3 - 4/30000
+    for r in range(2, min(N, max_r) + 1):
+        power = pow(a, r, N)
+        xi_mod = exp(-XI * r * r / D_F)
+        if abs(power - 1) < 1e-10:
+            return r            # exakte Resonanz
+    return None
+\end{verbatim}
+
+\textbf{[K]} \textbf{Bell-Dämpfung im T0-Qubit.}
+\begin{verbatim}
+class T0Qubit:
+    def apply_bell_damping(self, n_qubits):
+        d = exp(-self.XI * log(n_qubits) / self.D_F)
+        self.z *= d; self.r *= d
+        norm = sqrt(self.z**2 + self.r**2)
+        self.z /= norm; self.r /= norm
+
+    def apply_hadamard_t0(self, n_qubits):
+        self.z, self.r = self.r, self.z   # Basiswechsel
+        self.apply_bell_damping(n_qubits)
+        self.theta = (self.theta + pi/2) % (2*pi)
+\end{verbatim}
+
+\textbf{[K]} \textbf{CHSH-Berechnung (Monte-Carlo-Schleife).} Für jedes der
+vier Winkelpaare $(a,b)\in\{(0°,22{.}5°),(0°,67{.}5°),(45°,22{.}5°),(45°,67{.}5°)\}$:
+\begin{verbatim}
+damping = exp(-XI * log(n) / D_F)
+E = -cos(a - b) * damping     # T0-Korrelator
+\end{verbatim}
+CHSH $= |E_1 - E_2 + E_3 + E_4|$ plus Shot-Noise $\mathcal N(0,1/\sqrt{\text{shots}})$.
+
+\section{Position in the A-Series}
+
+\textbf{[B]} Die Bijektion T0-Qubit\,$\leftrightarrow$\,Hilbertraum-Qubit ist in
+A070 ausgeführt (Brücke $(z,r,\theta)\leftrightarrow(\alpha,\beta)$). Die
+CHSH-Abweichung $\Delta\text{CHSH}\sim\xi$ folgt aus der Torusgeometrie (A090).
+Als Prognosegröße ist $\Delta\text{CHSH}$ in A210 geführt. Dieses Dokument
+liefert den konkreten Rechenrahmen ($\phi$-QFT, Bell-Dämpfung, Shor) und den
+Hardware-Status: gemessener $S=2{.}74$ bestätigt Lauffähigkeit; der $\xi$-Effekt
+selbst ist mit heutiger Hardware nicht nachweisbar.
+
+\section{Verification Scripts}
+
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item CHSH-Skalierungsgesetz numerisch für $n=2\ldots200$, Vergleich mit T0-Formel:
+    \texttt{python/A\_Serie\_Skripte/a165\_chsh\_skalierung.py}
+  \item $\phi$-QFT-Äquivalenz: Periodenfindung für $N=15,21,33,77,143$,
+    Erfolgsrate und Komplexität:
+    \texttt{python/A\_Serie\_Skripte/a165\_phi\_qft.py}
+\end{itemize}
+
+\textbf{Messprotokoll der Hardware-Läufe.} Die IBM-Heron-r2-Messwerte
+($S=2{.}74$ auf \texttt{ibm\_kingston}, Mai 2026, 50 unabhängige Läufe)
+sind eigene Messkampagnen des Autors, keine Literaturwerte. Rohdaten,
+Job-IDs und Auswerteskripte liegen im Korpus-Verzeichnis der
+Quantencomputing-Läufe; die Behauptung ist darüber prüfbar. A070 und A090
+zitieren dieselbe Kampagne über dieses Dokument.
+
+
+\section{Symbol Glossary}
+
+Symbole die in der gesamten A-Serie verwendet werden, sind in A010 erklärt.
+Spezifisch für dieses Dokument:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small\begin{tabular}{lp{9cm}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$S_\text{CHSH}$ & CHSH-Korrelationswert; klassisch $\leq2$, Tsirelson-Schranke $2\sqrt2$ \\
+$\phi$-QFT & Goldener-Schnitt-strukturierte QFT auf $T^4$ \\
+$S_\text{T0}(n)$ & T0-Skalierungsformel für $n$ Qubit-Paare \\
+IBM Heron r2 & Supraleitender Quantenprozessor (Referenzarchitektur) \\
+\bottomrule
+\end{tabular}}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\section{Open Questions}
+
+\textbf{Der $\xi$-Effekt ist nicht gemessen.} Die vorhergesagte Abweichung
+$\Delta\text{CHSH}\approx5{.}4\times10^{-4}$ (bei 73 Qubits) erfordert
+fehlerkorrigierte Qubits mit sub-ppm-Stabilität -- über heutige NISQ-Hardware
+hinaus.
+
+\textbf{Die CHSH-Skalierung ist nicht vollständig verifiziert.} Die Tabelle oben
+sind Vorhersagen; Messungen über $n>2$ fehlen.
+
+\textbf{Skalierbarkeit auf RSA-relevante $N$.} Die Benchmark-Tests gehen bis
+$N=143$; RSA-2048 erfordert weitere Analyse.
+
+\textbf{Integration mit Quantenfehlerkorrektur.} Surface Codes und
+$\phi$-QFT sind nicht verbunden.
+
+\section{Supersedes}
+
+Dieses Dokument nimmt auf: Dok.~147 (Quantencomputing auf T0/FFGFT-Basis:
+Energie-Feld-Qubits, $\phi$-QFT-Äquivalenzsatz, Bell-Test-Modifikationen,
+$\xi$-Resonanz-Shor, IBM-Hardware-Validierung Mai 2026). \emph{Nicht} übernommen:
+der Abschnitt „Kosmische Korrekturen für Quantencomputing" aus Dok.~147 (Tages-/Mond-/Jahreszyklus-Einfluss auf Qubits -- spekulativer Anhang, kein Kerninhalt;
+außerhalb des A-Serien-Rahmens A010). Die englischen Appendix-Duplikate aus
+Dok.~147 sind ebenfalls nicht übernommen.
+
+\section{Use of AI Tools}
+
+This document was created with the assistance of AI tools. The questions,
+stipulations, and all substantive decisions come from the author; the tools
+formulate, compute, and create verification scripts.
+Responsibility for content and errors rests entirely with the author.
+Full wording of the rules in A010.

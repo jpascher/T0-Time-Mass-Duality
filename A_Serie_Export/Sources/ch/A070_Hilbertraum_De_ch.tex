@@ -1,0 +1,775 @@
+\section{Worum es geht}
+
+\textbf{[SETZUNG]} Dieses Dokument formuliert die \emph{vollständige
+Übersetzbarkeit} zwischen dem FFGFT-Modenformalismus und der
+Standard-Hilbert\-raum-Quantenmechanik. Die Übersetzung ist keine Approximation
+und keine Spezialisierung, sondern eine \textbf{bijektive Strukturaussage}: jede
+QM-Rechnung ist in FFGFT-Sprache abbildbar, und jede FFGFT-Aussage über
+Quantensysteme ist in Hilbertraum-Sprache reproduzierbar.
+
+\textbf{Schichthinweis.} Dieses Dokument enthält neben den algebraischen
+Brücken~[B] und geometrischen Kernaussagen~[K] einen erheblichen Anteil an
+konzeptuellen und ontologischen Einordnungen~[S]. Die [S]-Aussagen betreffen
+Interpretationsfragen (Born-Regel, Determinismus, Bloch-Sphären-Stellung) --
+sie sind korrekt markiert, aber der Leser sollte wissen: das Verhältnis ist
+hier K~:~S~$\approx$~1~:~5. Der gesicherte Kern ist eng; der Rest ist Einordnung.
+
+Das ist kein Mangel -- Einordnungen gehören in ein Brückendokument. Aber
+Brücke und Kern sind nicht dasselbe.
+
+Das ist die methodische Pointe: FFGFT \emph{ersetzt} die Quantenmechanik nicht,
+sondern \emph{erweitert} sie. Beide Formalismen liefern dieselben messbaren Ergebnisse -- bis auf eine $\xi$-Korrektur der Ordnung $10^{-5}$, die
+gegenwärtig unter dem NISQ-Rauschen liegt (A160). Sie unterscheiden sich nur in
+der ontologischen Lesart einiger Grundbegriffe. Wer mit Hilbertraum-Werkzeugen
+rechnet, kann das weiter tun; die Übersetzungstabelle unten ist die Brücke.
+
+Der kanonische Hilbertraum der vollen Theorie ist
+\[
+  \boxed{\;\mathcal{H} = L^2(T^4)\otimes\mathbb{C}^3\;}
+\]
+-- quadratintegrable Funktionen auf dem 4-Torus, getensort mit dem
+dreielementigen $Z_3$-Faserraum (A030). Dieses Dokument baut ihn in zwei
+Richtungen auf: \emph{abwärts} (FFGFT $\to$ Standard-Hilbertraum, mit
+Reduktionen) und \emph{aufwärts} (welche Erweiterungen der Standard-Hilbertraum
+braucht, um die volle FFGFT nativ zu tragen).
+
+\section{Wo wir uns geometrisch befinden}
+
+\textbf{[B]} Bevor die Übersetzungstabellen kommen, das geometrische Bild. Die
+volle FFGFT-Geometrie ist der 4-Torus $T^4 = T^3\times S^1$ (A030): drei
+räumliche Wicklungsrichtungen und eine zeitliche. Für ein einzelnes Qubit -- ein
+Zwei-Niveau-System zu fester Zeit, ohne Massendynamik -- sind die meisten dieser
+Richtungen inaktiv. Es bleiben zwei Drehfreiheitsgrade: einer für die Lage
+zwischen $|0\rangle$ und $|1\rangle$ (das wird $z$), einer für die Phase (das
+wird $\theta$). Ihr natürlicher Raum ist der 2-Torus $T^2 = S^1\times S^1$.
+
+Zieht man den einen Hauptradius groß, wird $T^2$ lokal zum Zylinder
+$\mathbb{R}\times S^1$: eine Schleife ist aufgeschnitten, $z$ wird eine
+\emph{lineare} Achse. Zieht man dann die beiden Pole zu Punkten zusammen, wird
+der Zylinder zur Bloch-Sphäre $S^2$ der Standard-QM. So entsteht eine Hierarchie
+von Reduktionen:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small
+\begin{tabular}{lcl}
+\toprule
+\textbf{Geometrie} & \textbf{Dim.} & \textbf{Verwendung} \\
+\midrule
+4-Torus $T^4$ & 4 & volle FFGFT (Massen, $\alpha$) \\
+3-Torus $T^3$ & 3 & Modenraum bei fester Zeit \\
+2-Torus $T^2$ & 2 & Einzelqubit, ohne Reduktion \\
+Zylinder $\mathbb{R}\times S^1$ & 2 & Limes $R\to\infty$, lokale Näherung \\
+Bloch-Sphäre $S^2$ & 2 & Pole zusammengezogen, Standard-QM \\
+\bottomrule
+\end{tabular}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\textbf{[B]} \textbf{Was die Reduktionen kosten -- und wo der Verlust wirklich
+sitzt.} Jede Stufe verliert etwas: $T^4\to T^3$ die Zeit-Wicklung und damit die
+Massen; $T^3\to T^2$ eine räumliche Wicklung und damit die dritte Generation;
+$T^2\to$ Zylinder \emph{eine kompakte Schleife} -- die schwächste Reduktion, und
+genau hier sitzt der fraktale Korrekturfaktor $K_{\text{frak}} = 1-100\xi
+\approx 0{,}9867$ (A040): $K_{\text{frak}}$ ist die Erinnerung des Zylinders an
+seine Torus-Herkunft. Der Verlust ist dabei \emph{nicht} die spätere
+SI-Umrechnung: die dualitätstragende Dekompaktifizierung $S^1_m\to\mathbb{R}_t$
+($\tilde T\cdot m=1$, A060/A090) ist ein mode-erhaltendes Embedding und
+verlustfrei; die Kompaktheit überlebt als diskretes Spektrum und als
+physikalische Observable (Revival-Zeit, CHSH$\sim\xi$). Verlustbehaftet sind die
+\emph{Rückrichtung} $\mathbb{R}\to S^1$, die räumlichen Projektionen und -- für
+eine Auslesung -- das endliche, nichtperiodische Messfenster.
+
+Die Übersetzungstabellen unten gelten für den \emph{Qubit-Sektor}, also die
+unteren drei Zeilen. Die volle $T^4$-Geometrie liegt eine Stufe höher und
+liefert, was reine Hilbertraum-QM nicht liefern kann: die Werte der
+Eingabeparameter.
+
+\section{Zustände: die bijektive Brücke}
+
+\textbf{[B]} In der Standard-QM ist ein Qubit ein Vektor in $\mathbb{C}^2$:
+\[
+  |\psi\rangle = \alpha|0\rangle + \beta|1\rangle,
+  \qquad |\alpha|^2 + |\beta|^2 = 1,\qquad \alpha,\beta\in\mathbb{C}.
+\]
+In FFGFT ist dasselbe Qubit ein Punkt $(z,r,\theta)$ auf dem Zylinder/Torus:
+\[
+  z\in[-1,1],\quad r\in[0,1],\quad \theta\in[0,2\pi),\qquad z^2+r^2=1,
+\]
+mit $z$ als Projektion auf die Berechnungsachse, $r$ als radialer
+Superpositionsamplitude, $\theta$ als Phase. Beide Darstellungen sind durch eine
+Brücke verknüpft:
+\[
+  \boxed{\;
+  \alpha = \sqrt{\tfrac{1+z}{2}}\,e^{i\theta/2},
+  \qquad
+  \beta = \sqrt{\tfrac{1-z}{2}}\,e^{-i\theta/2}\;}
+\]
+und umgekehrt $z = |\alpha|^2-|\beta|^2$, $r = 2|\alpha\beta|$,
+$\theta = \arg(\alpha)-\arg(\beta)$. Die Konsistenz ist unmittelbar:
+$|\alpha|^2+|\beta|^2 = \tfrac{1+z}{2}+\tfrac{1-z}{2}=1$ und
+$z^2+r^2 = (|\alpha|^2-|\beta|^2)^2 + 4|\alpha|^2|\beta|^2 = 1$; $|0\rangle$
+entspricht $(1,0,*)$, $|1\rangle$ entspricht $(-1,0,*)$.
+
+\textbf{[S]} Der konzeptuelle Unterschied: in der QM ist $|\alpha|^2$ eine
+\emph{Wahrscheinlichkeit} (Born-Regel), in FFGFT ist $r^2 = 1-z^2$ eine
+\emph{Energiedichte} der radialen Konfiguration. Numerisch fallen beide bei
+großer Statistik zusammen; FFGFT ist ein deterministisches geometrisches Modell,
+dessen statistische Ergebnisse mit der Born-Regel übereinstimmen.
+
+\section{Operatoren: Pauli-Matrizen als Drehungen}
+
+\textbf{[B]} Die drei Pauli-Matrizen erzeugen alle Ein-Qubit-Operationen, mit der
+Algebra $\sigma_i\sigma_j = \delta_{ij}\mathbb{1} + i\epsilon_{ijk}\sigma_k$. Auf
+dem Bloch-Zylinder entsprechen sie drei geometrischen Rotationen: $\sigma_z$ der
+Phasenrotation $\theta\to\theta+\pi$, $\sigma_x$ einer $(z,r)$-Drehung um $\pi$
+(Bit-Flip), $\sigma_y$ der orthogonalen Drehung mit Phasenkippung.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+{\small
+\begin{tabular}{lcl}
+\toprule
+\textbf{Operator} & \textbf{Hilbertraum-Matrix} & \textbf{FFGFT-Geometrie} \\
+\midrule
+$\sigma_z$ & $\begin{pmatrix}1&0\\0&-1\end{pmatrix}$ & Phasenrotation $\theta\to\theta+\pi$ \\
+$\sigma_x$ & $\begin{pmatrix}0&1\\1&0\end{pmatrix}$ & $(z,r)$-Drehung um $\pi K_{\text{frak}}$ \\
+$\sigma_y$ & $\begin{pmatrix}0&-i\\i&0\end{pmatrix}$ & Drehung mit Phasenkippung \\
+$H$ & $\tfrac{1}{\sqrt2}\begin{pmatrix}1&1\\1&-1\end{pmatrix}$ & vertausche $z\leftrightarrow r$, $\theta\to\theta+\pi/2$ \\
+$T$ & $\begin{pmatrix}1&0\\0&e^{i\pi/4}\end{pmatrix}$ & Phasenrotation $\theta\to\theta+\pi/4$ \\
+\bottomrule
+\end{tabular}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\textbf{[K]} Die \emph{einzige} FFGFT-spezifische Abweichung ist der Faktor
+$K_{\text{frak}}\approx0{,}9867$ in der $\sigma_x$-Drehung. Er folgt aus der
+fraktalen Dimension $D_f = 3-\xi$ (A040) und ist eine testbare Vorhersage: alle
+$\pi$-Gatter weichen systematisch um $\Delta\approx0{,}013\,\%$ vom idealen Wert
+ab. Im Hilbertraum-Formalismus wäre das eine ad-hoc-Korrektur, die als
+Hardware-Rauschen eingebaut werden müsste; in FFGFT folgt sie aus der Geometrie.
+
+\section{Gatter und Universalität}
+
+\textbf{[B]} Jedes unitäre Ein-Qubit-Gatter $U\in U(2)$ ist eine
+Bloch-Drehung,
+\[
+  U = e^{i\alpha}R_{\hat n}(\phi)
+    = e^{i\alpha}\bigl(\cos(\phi/2)\,\mathbb{1} - i\sin(\phi/2)\,\hat n\cdot\vec\sigma\bigr),
+\]
+in FFGFT die Drehung des $(z,r,\theta)$-Punkts um die Achse $\hat n$ um $\phi$.
+Das CNOT-Gatter übersetzt sich als geometrische Konditionierung: \emph{wenn
+$z_A=-1$ (Kontroll-Qubit auf $|1\rangle$), führe Bit-Flip auf Qubit B aus} --
+topologisch eine Verkettung zweier Zylinder (Verschränkung). Da die
+universelle Menge $\{H,T,\text{CNOT}\}$ (Solovay--Kitaev) vollständig
+geometrisch darstellbar ist, ist FFGFT \emph{universell für Quantenberechnung}:
+es gibt keine QM-Aussage, die nicht in FFGFT formulierbar wäre.
+
+\section{Tensorprodukte, Bell-Zustände, CHSH}
+
+\textbf{[B]} Für $n$ Qubits ist der Hilbertraum
+$\mathcal{H}_n = \bigotimes_{i=1}^n\mathbb{C}^2$ mit Dimension $2^n$. In FFGFT
+entsprechen $n$ Qubits $n$ Mode-Konfigurationen $(z_i,r_i,\theta_i)$ auf einer
+gemeinsamen Torus-Geometrie; Verschränkung ist eine \emph{topologische
+Verbindung} -- Knoten, die nicht auf Produktform reduzierbar sind. Der Bell-Zustand
+$|\Phi^+\rangle = \tfrac{1}{\sqrt2}(|00\rangle+|11\rangle)$ ist eine topologisch
+verbundene Zylinderkonfiguration. Beide Formalismen reproduzieren das
+exponentielle Wachstum $\dim = 2^n$ mit $2\cdot2^n-2$ reellen Parametern.
+
+\textbf{[K]} \textbf{CHSH-Vorhersage.} Standard-QM gibt die Tsirelson-Schranke
+$|\langle\text{CHSH}\rangle|\le 2\sqrt2$. FFGFT sagt eine kleine, geometrisch aus
+$\xi/(2\pi)$ folgende Abweichung $\Delta\text{CHSH}\approx10^{-5}$ voraus -- die
+\emph{elementare} Abweichung pro Messung. Sie liegt unter der heutigen
+Hardware-Rauschschwelle und ist eine offene Aufgabe für Hochpräzisions-Bell-Tests
+(A160/A210). Davon zu unterscheiden ist der kumulative Wert bei vielen Messungen;
+die beiden Größen sind nicht direkt vergleichbar.
+
+\section{Messung als Polübergang}
+
+\textbf{[S]} In der Standard-QM liefert eine Messung in der Berechnungsbasis den
+Wert $0$ mit Wahrscheinlichkeit $|\alpha|^2$, mit Kollaps auf $|0\rangle$ bzw.\
+$|1\rangle$. In FFGFT ist Messung \emph{kein} probabilistischer Kollaps, sondern
+eine geometrische Wechselwirkung, die den $(z,r,\theta)$-Punkt auf das
+nächstgelegene stabile Extrem ($z=+1$ oder $z=-1$) treibt -- eine
+deterministische Bewegung im Modenraum, die aber wegen der unbekannten Phase
+$\theta$ statistisch von Born-Regel-Verhalten ununterscheidbar ist. Bei großer
+Statistik gilt
+\[
+  P_{\text{FFGFT}}(z=+1) = \tfrac{1+z}{2} = |\alpha|^2 = P_{\text{QM}}(0).
+\]
+Die statistischen Ergebnisse sind identisch; der Bell-Test-Streit über lokalen
+Realismus löst sich geometrisch auf, weil die Verschränkung als topologische
+Verbindung, nicht als nicht-lokale Korrelation dargestellt wird.
+
+\section{Unitäre Evolution: Schrödinger als Niederenergielimit}
+
+\textbf{[B]} Die QM-Zeitentwicklung $i\hbar\,\partial_t|\psi\rangle = H|\psi\rangle$
+ist in FFGFT die deterministische Bewegung der Mode-Konfiguration
+$\varphi_{n,l,j}$ auf $T^3\times\mathbb{R}$. Die FFGFT-Mode-Gleichung reduziert
+sich im Niederenergielimit ($E\ll E_\xi$) auf die Schrödinger-Gleichung:
+\[
+  i\hbar\,\frac{\partial\varphi_{n,l,j}}{\partial t}
+  \;\xrightarrow{E\ll E_\xi}\;
+  -\frac{\hbar^2}{2m}\nabla^2\varphi_{n,l,j} + V\varphi_{n,l,j}.
+\]
+Bei höheren Energien treten $\xi$-Korrekturen auf, die im
+Hilbertraum-Formalismus als Hamilton-Modifikationen erscheinen.
+
+\section{Was übersetzbar ist und was FFGFT-spezifisch bleibt}
+
+\textbf{[B]} \emph{Alle} Hilbertraum-Aussagen sind in FFGFT abbildbar: Zustände,
+Operatoren, Gatter (mit oder ohne $K_{\text{frak}}$), Tensorprodukte,
+Verschränkung, Bell-/GHZ-Zustände, Messung, unitäre Evolution, Algorithmen
+(Shor, Grover, VQE). Und umgekehrt: die $(z,r,\theta)$-Konfiguration entspricht
+eindeutig dem $(\alpha,\beta)$-Vektor, geometrische Drehungen den unitären
+Operatoren, topologische Verschränkungen den verschränkten Hilbertraum-Vektoren.
+Jede Berechnung in einem Formalismus ist im anderen durchführbar, mit identischem
+Ergebnis.
+
+\textbf{[K]} Die Übersetzbarkeit gilt für \emph{Aussagen über Quantensysteme},
+nicht für die \emph{Eingabewerte}. Im Hilbertraum erscheinen $\xi$, die
+Fermionenmassen, $\alpha$ und $K_{\text{frak}}$ als externe Eingaben; in FFGFT
+folgen sie aus der Geometrie ($\xi$ als Setzung A020; die Massen aus
+$m_i = r_i\,\xi^{p_i}v$, A100/A110; $\alpha$ aus A130; $K_{\text{frak}}$ aus
+A040). Das ist die strukturelle Asymmetrie: der Hilbertraum hat alle Werkzeuge
+für QM-Rechnungen, aber keine Erklärung für die Eingabewerte; FFGFT liefert
+beides aus einer Geometrie. In diesem Sinn ist die QM eine Untermenge von FFGFT
+-- eingeschränkt auf die Frage \emph{wie} sich Systeme verhalten, ohne die Frage
+\emph{warum} die Konstanten diese Werte haben.
+
+\section{Operationale Äquivalenz und interpretative Divergenz}
+
+\textbf{[S]} Die vollständige Übersetzbarkeit darf nicht als ontologische
+Identität gelesen werden. \emph{Operational} stimmen FFGFT und Standard-QM bis
+auf $\xi$-Korrekturen in jedem messbaren Ergebnis überein. \emph{Interpretativ}
+weichen sie an Stellen ab, an denen die Standardlesart Aussagen trifft, die in
+FFGFT als Artefakte der gewählten Trägerannahmen erscheinen. Der Grenzübergang
+$\xi\to0$ reproduziert die \emph{Zahlen} der Standard-QM, nicht notwendig ihre
+ontologische Lesart. Drei Punkte innerhalb der QM:
+
+\begin{itemize}[leftmargin=2em,itemsep=3pt,topsep=3pt]
+  \item \textbf{Born-Regel als irreduzibler Zufall.} Standardlesart: $|\psi|^2$
+    als ontologische Wahrscheinlichkeit, der Ausgang fundamental zufällig.
+    FFGFT-Lesart: dieselbe Verteilung, aber aus deterministischer
+    Polübergangs-Dynamik auf $T^4$; die Stochastizität entsteht beim
+    Mess-Apparat, nicht im Naturprozess. Operational identisch.
+  \item \textbf{Nicht-Lokalität als ontologische Eigenschaft.} Standardlesart der
+    Bell-Korrelationen: Fernwirkung im $\mathbb{R}^3$. FFGFT-Lesart:
+    Verschränkung ist eine topologische Verbindung auf $T^4$ -- geometrische
+    Nähe in einer geschlossenen Geometrie, nicht Fernwirkung im offenen Raum
+    (A160). Ergebnisse identisch, ontologische Lesart strukturell verschieden.
+  \item \textbf{$\hbar$ als ontologische Primitive.} Standardlesart: $\hbar$ ist
+    eine fundamentale Naturkonstante. FFGFT-Lesart: $\hbar$ ist ein
+    SI-Konversionsfaktor zwischen Energie- und Zeitmaßen, der aus der
+    Abschlussbedingung auf $T^4$ folgt (A080/A085). Numerisch identisch,
+    ontologisch abgeleitet.
+\end{itemize}
+
+\textbf{[S]} Zwei weitere Divergenzen -- Raumzeit als gegebene Bühne
+\emph{versus} aus der $T^4$-Identifikationsgeometrie abgeleitet, und
+Singularitäten als physikalische Endpunkte \emph{versus} Endpunkte des
+Trägermodells -- berühren Fragen, die die A-Serie bewusst nicht führt (A010);
+die Grundlängen-Frage steht in A210,
+die native Zeit-Energie-Reziprozität in A060. Hier genügt: die Übersetzbarkeit
+ist \emph{operational}, nicht ontologisch. Wer nur mit den Zahlen rechnet, kann
+die Differenz ignorieren -- die Ergebnisse bleiben dieselben.
+
+\section{Die vier Erweiterungen: der Hilbertraum aufwärts}
+
+\textbf{[B]} Die Abwärts-Übersetzung verliert bei jeder Reduktion eine
+Strukturschicht. Die umgekehrte Frage lautet: welche Erweiterungen muss man dem
+Standard-Hilbertraum \emph{hinzufügen}, damit er die volle FFGFT nativ trägt?
+Bemerkenswert ist, dass jede Erweiterung einer etablierten mathematischen
+Struktur entspricht -- FFGFT erfindet keine neue Mathematik, sondern ist deren
+spezifische Kombination.
+
+\textbf{Erweiterung 1 -- deformierte Algebra $SU_q(2)$.} Die isotrope
+$SU(2)$-Algebra $[\sigma_i,\sigma_j]=2i\epsilon_{ijk}\sigma_k$ wird in FFGFT
+anisotrop: $\sigma_x^{\text{FFGFT}} = K_{\text{frak}}\,\sigma_x$, während
+$\sigma_y,\sigma_z$ ungestört bleiben. Das ist die $q$-Deformation
+(Drinfeld--Jimbo 1985) mit
+\[
+  \boxed{\;q = e^{i\pi(1-K_{\text{frak}})} = e^{i\pi\cdot100\xi} = e^{i\pi/75}
+        \approx 0{,}999 + 0{,}042\,i\;}
+\]
+Die Deformationsphase ist klein ($\pi/75\approx0{,}042$ rad), aber strukturell
+signifikant: sie bricht die Kugelsymmetrie zu einer achsenausgezeichneten
+Algebra -- die Erinnerung des Zylinders an den Torus. Kosten: der Hilbertraum
+bleibt $\mathbb{C}^2$, die $2\times2$-Matrizen bleiben; nur die Strukturkonstanten
+ändern sich. Folge: alle $\pi$-Gatter weichen um $0{,}013\,\%$ ab (testbar).
+
+\textbf{Erweiterung 2 -- zyklische Wicklungs-Quantenzahl.} Der Zylinder hat eine
+kompakte Schleife; der 2-Torus hat zwei. Um die zweite zu repräsentieren, trägt
+der Hilbertraum eine Quantenzahl $n\in\mathbb{Z}$: aus
+$|\psi\rangle = \alpha|0\rangle+\beta|1\rangle$ wird
+$|\psi;n\rangle = \alpha|0;n\rangle+\beta|1;n\rangle$, und
+\[
+  \boxed{\;\mathcal{H}^{T^2}_{\text{FFGFT}} = \bigoplus_{n\in\mathbb{Z}}\mathbb{C}^2_n\;}
+\]
+ein abzählbar unendlich-dimensionaler Raum. Die Wicklungsanregungen haben Energie
+$E_n\sim n^2\hbar^2/(mR^2)$; bei niedrigen Energien ist nur $n=0$ besetzt und der
+Raum reduziert sich effektiv auf $\mathbb{C}^2$ -- die Standard-Bloch-Sphäre. Das
+mathematische Vorbild sind Wicklungs-Zustände kompakter Dimensionen
+(Stringtheorie, Kac--Moody-Levels).
+
+\textbf{Erweiterung 3 -- Bündelstruktur statt Tensorprodukt.} In der Standard-QM
+ist ein Spin-$\tfrac12$-Teilchen $\mathcal{H} = L^2(\mathbb{R}^3)\otimes\mathbb{C}^2$
+mit $[L_i,S_j]=0$; Spin-Bahn-Kopplung $H_{\text{SO}}=\xi(r)\,\vec L\cdot\vec S$
+muss als Zusatzterm mit freiem Parameter eingeführt werden. In FFGFT entstehen
+Ort \emph{und} Spin aus Wicklungen auf demselben $T^3$; der korrekte Hilbertraum
+ist \emph{kein} Tensorprodukt, sondern der Schnittraum eines Spinorbündels,
+\[
+  \boxed{\;\mathcal{H}^{T^3}_{\text{FFGFT}} = L^2(T^3, S)\;}
+\]
+mit $[L_i,S_j]\neq0$ (Korrekturen $\sim\xi$). Die Spin-Bahn-Kopplung ist damit
+eine \emph{geometrische} Eigenschaft des Bündels, kein freier Parameter -- das
+$Z^4\alpha^2$-Verhalten schwerer Atome folgt aus der Wicklungs-Topologie. Das
+Pauli-Prinzip wird geometrisch. Vorbild: Standard-Differentialgeometrie
+(Spinorbündel).
+
+\textbf{Erweiterung 4 -- zeitliche Wicklung $k_t$.} In der Standard-QM ist die
+Zeit eine kontinuierliche lineare Achse mit $E=\hbar\omega$. In FFGFT ist sie eine
+kompakte Wicklungsrichtung mit $k_t\in\mathbb{Z}$ und
+\[
+  \boxed{\;E = \hbar f(k_t)\;}
+\]
+für eine periodische Funktion $f$; im niedrigsten Sektor $E\approx\hbar\omega$.
+Die zentrale Aussage: die \emph{Masse} einer Mode ist ihre
+$k_t$-Wicklungsenergie, $m_i c^2 = \hbar f(k_t^{(i)})$, was mit der Yukawa-Form
+$m_i = r_i\,\xi^{p_i}v$ (A100) alle Fermionenmassen aus den
+Wicklungstupeln liefert. Der volle Hilbertraum wird $L^2(T^4, S)$, die
+Schrödinger-Gleichung eine Mode-Gleichung $\mathcal{D}_{T^4}\varphi = E\varphi$
+mit einem Dirac-artigen Operator auf $T^4$. Vorbild: kompakte Extradimensionen
+(Kaluza 1921, Klein 1926) -- hier zeitlich statt räumlich und geometrisch
+festgelegt statt frei.
+
+\section{Die strukturelle Pointe: bekannte Mathematik, neue Kombination}
+
+\textbf{[B]} Jede der vier Erweiterungen entspricht einer wohlbekannten Struktur:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+{\small
+\begin{tabular}{clc}
+\toprule
+\textbf{Erw.} & \textbf{Mathematik} & \textbf{Etabliert seit} \\
+\midrule
+1 & Quantengruppen $SU_q(2)$ & Drinfeld/Jimbo 1985 \\
+2 & Wicklungs-Anregungen & Stringtheorie, Kac--Moody \\
+3 & Spinorbündel & Differentialgeometrie 1950er \\
+4 & Kompakte Extradimension & Kaluza 1921, Klein 1926 \\
+\bottomrule
+\end{tabular}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+Keine dieser Strukturen ist neu. Was FFGFT spezifisch macht, ist die
+\textbf{Kombination}: alle vier gemeinsam, mit einer einzigen geometrischen
+Begründung ($T^4$ und $\xi$). Keine andere Theorie tut das -- Quantengruppen
+werden nicht durch Raumzeit-Geometrie begründet, die Stringtheorie braucht 10/11
+Dimensionen und liefert die SM-Massen nicht parameterfrei, Kaluza-Klein-Varianten
+liefern nicht alle Massen aus einer kompakten Dimension.
+
+\section{Der volle Hilbertraum}
+
+\textbf{[B]} Mit allen vier Erweiterungen erhält man eine vollständige
+FFGFT-äquivalente Formulierung. In der kanonischen A-Serien-Schreibweise ist der
+Grundraum
+\[
+  \mathcal{H} = L^2(T^4)\otimes\mathbb{C}^3,
+\]
+wobei der $\mathbb{C}^3$-Faktor die dreielementige $Z_3$-Identifikation trägt
+(A030); die volle Formulierung ergänzt ihn um das Spinorbündel $S$ und die
+deformierte $SU_q(2)$-Algebra. In dieser Sprache sind die FFGFT-Ergebnisse direkt
+aus der Hilbertraum-Struktur ableitbar: die Massen aus den $k_t$-Wicklungen
+(A100), $\alpha$ aus einer Eigenwert-Relation (A130), die Spin-Bahn-Kopplung aus
+der Bündelstruktur, die $K_{\text{frak}}$-Korrekturen aus der
+Quantengruppen-Deformation (A040).
+
+\textbf{[K]} Auf demselben Raum wirkt der Massenoperator als $Z_3$-Zirkulant; aus
+seiner Diagonalisierung folgen die Koide-Bedingung $Q=2/3$ und der Winkel
+$\theta=2/9$. Diese Rechnung ist \emph{nicht} hier geführt, sondern gehört
+sachlich in den Leptonsektor: der Operator und seine Diagonalisierung stehen in
+A110, der Winkel $\theta=2/9$ in A120. Dieses Dokument stellt nur den Raum
+bereit, auf dem sie wirken.
+
+\section{Quantum Graphity als skizzierte Untermenge}
+
+\textbf{[S]} Dieselbe Untermengen-Strategie -- Bloch-Sphäre $\subset$ FFGFT durch
+Reduktion -- lässt sich auf eine \emph{andere} etablierte, publizierte
+Quantengravitations-Theorie anwenden: \emph{Quantum Graphity} (Konopka,
+Markopoulou, Severini, Smolin; \emph{Phys.~Rev.~D}~77, 104029, 2008;
+arXiv:0801.0861) -- ein hintergrund-unabhängiges Modell, in dem Raum und
+Geometrie aus einem dynamischen gewichteten Graphen emergieren. Es ist
+mathematisch klar definiert und ein konkretes Vergleichsobjekt. Es ist ein
+Vergleich mit etablierter Physik, kein tragendes Argument von FFGFT; und -- das
+ist der entscheidende Unterschied zur Hilbertraum-Bijektion oben -- die Reduktion
+ist \emph{nicht durchgeführt}, sondern eine Hypothese. Daher die durchgehende
+$[S]$-Markierung.
+
+\subsection*{Quantum Graphity in Kürze}
+
+\textbf{[S]} Die Grundannahmen des Modells:
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item \textbf{Vollständiger Graph $K_N$:} Auf $N\gg1$ Vertices sind \emph{alle}
+    Vertex-Paare durch Kanten verbunden; $K_N$ hat $\binom{N}{2}$ Kanten.
+  \item \textbf{Kanten-Hilbertraum:} jeder Kante $e_{ab}$ ist ein
+    $\mathcal H_{\text{edge}} = \mathrm{span}\{|0\rangle,|1\rangle\}$ zugeordnet
+    -- ein fermionischer Oszillator (äquivalent: ein Qubit); \enquote{aus} bzw.\
+    \enquote{an}.
+  \item \textbf{Gesamt-Hilbertraum:}
+    $\mathcal H_{\text{total}} = \bigotimes_{a<b}\mathcal H_{\text{edge}}$, das
+    Tensorprodukt über alle Kanten.
+  \item \textbf{Adjazenz-Operator:} $N_{ab} = a^\dagger_{ab}a_{ab}$ ist die
+    quantenmechanische Adjazenzmatrix; die aktiven Kanten bilden einen
+    Subgraphen von $K_N$.
+  \item \textbf{Hamilton und Phasenübergang:} mehrere permutationsinvariante
+    Terme ($H_V$ Valenz, $H_B$ Cycles, $\dots$) steuern einen Phasenübergang. Die
+    Hochtemperaturphase ist voll $S_N$-symmetrisch (kein Lokalitätsbegriff); die
+    Tieftemperaturphase bricht zur Translationssymmetrie und lässt einen
+    regulären Subgraphen emergieren -- im Standardfall hexagonal, $3$-regulär.
+  \item \textbf{Materie-Erweiterung:} mit zusätzlichen $(j,m)$-Etiketten
+    ($j=0,1$, $m\in\{-j,\dots,j\}$) emergiert über String-Net-Kondensation
+    (Levin--Wen) eine $U(1)$-Eichtheorie.
+\end{itemize}
+Was Quantum Graphity \emph{nicht} liefert: Fermionenmassen, $\alpha$, die
+SM-Materiestruktur. Es liefert das Skelett \enquote{wie Geometrie aus diskreter
+Mikrostruktur emergiert}, plus eine emergente $U(1)$.
+
+\subsection*{Fünf Reduktionsschritte}
+
+\textbf{[S]} Wo die Bloch-Sphäre durch \emph{geometrische} Reduktion aus $T^4$
+entsteht, entsteht das Quantum-Graphity-Skelett durch eine \emph{strukturelle}:
+
+\textbf{[S]} \textbf{Reduktion 1 -- Kontinuum zu Diskret.} In FFGFT ist die
+Vollgeometrie ein glatter 4-Torus; die Moden $\varphi_{n,l,j}$ sind glatte
+Funktionen. In Quantum Graphity gibt es keine glatte Mannigfaltigkeit, nur den
+diskreten $K_N$. Die Diskretisierung \emph{wäre} als Triangulierung des $T^4$ zu
+skizzieren (bei feinem Gitter $N\to\infty$ sollte der Graph gegen die
+Mannigfaltigkeit konvergieren) -- das ist eine Skizze, kein durchgeführter
+Beweis. Verloren geht die Differentialgeometrie: die Mode-Gleichung
+$\mathcal D_{T^4}\varphi = E\varphi$ hat im diskreten Bild kein direktes Pendant,
+sondern wird zu einer Hamiltonschen Update-Regel auf den Kanten.
+
+\textbf{[S]} \textbf{Reduktion 2 -- Topologie vergessen.} Der 4-Torus hat eine
+spezifische Topologie (vier kompakte Schleifen mit Wicklungszahl $\in\mathbb Z$),
+und diese ist Teil der physikalischen Aussage. Quantum Graphity beginnt mit dem
+\emph{vollständigen} Graphen $K_N$ -- maximale Konnektivität, keine Topologie;
+erst der Phasenübergang lässt eine niedrigdimensionale Topologie emergieren. Aus
+FFGFT-Sicht entspricht $K_N$ einem \emph{Vergessen} der $T^4$-Topologie: streift
+man die Lokalitätsinformation eines lokalen Triangulierungsgraphen ab, erhält man
+$K_N$. Verloren geht die Lokalität -- in FFGFT gegeben, in Quantum Graphity ein
+Emergenz-Phänomen der Tieftemperaturphase. Das ist kein Widerspruch, sondern ein
+Unterschied der Beschreibungsebene: in FFGFT ist die Geometrie bereits gewählt,
+in Quantum Graphity wird die Wahl dem System überlassen.
+
+\textbf{[S]} \textbf{Reduktion 3 -- Wicklungen zu Spin-Etiketten.} In FFGFT sind
+die Wicklungszahlen $(n_x,n_y,n_z,k_t)$ physikalisch interpretiert:
+$(n_x,n_y,n_z)$ kodieren Position und Drehimpuls, $k_t$ trägt die Massenenergie
+($mc^2=\hbar f(k_t)$), bestimmte Tupel ergeben spezifische SM-Teilchen. In
+Quantum Graphity tragen die Kanten im Grundmodell nur $n_{ab}\in\{0,1\}$; in der
+erweiterten Version $(j,m)$-Etiketten mit der Drehimpulsalgebra
+$[M^+,M^-]=M$, $[M,M^\pm]=\pm M^\pm$. Die Reduktion ist das \emph{Vergessen der
+physikalischen Bedeutung} der Wicklungszahlen. Verloren geht die Verbindung zum
+Standardmodell: in FFGFT folgt aus der Wicklungsstruktur die Massenformel
+$m_i=r_i\xi^{p_i}v$ und damit alle 12 Fermionenmassen; in Quantum Graphity gibt
+es keinen Mechanismus, der $(j,m)$-Werte mit Massen verknüpft.
+
+\textbf{[S]} \textbf{Reduktion 4 -- Geometrieparameter zu Phasenparameter.} In
+FFGFT ist $\xi = 4/30000$ nicht frei, sondern geometrisch fixiert (A020/A040). In
+Quantum Graphity gibt es einen ganzen Satz \emph{freier} Kopplungen
+$g_V,g_B,g_C,g_D,g_\pm$ und $v_0$; sie bestimmen, wo der Phasenübergang liegt und
+welcher Subgraph herauskommt ($v_0=3$ ergibt hexagonal). Die Reduktion ist die
+Vervielfachung und Verallgemeinerung der Parameter. Verloren geht die
+Aussagekraft: in FFGFT folgen alle SM-Konstanten aus dem einen $\xi$; ersetzt man
+es durch freie Kopplungen, kann man das Phasendiagramm bestimmen, aber nicht die
+Werte physikalischer Konstanten. Die Pointe: Quantum Graphity zeigt, dass eine
+Familie von Parametern für eine reiche emergente Geometrie genügt; FFGFT zeigt
+zusätzlich, dass alle diese Parameter durch eine einzige geometrische Größe
+festgelegt werden können.
+
+\textbf{[S]} \textbf{Reduktion 5 -- Materiesektor abwerfen.} In FFGFT folgen aus
+den Wicklungszahlen alle 12 Fermionenmassen, $\alpha=\xi E_0^2$, die
+Higgs-Selbstkopplung und die Spin-Bahn-Konstanten -- der Materiesektor ist
+integraler Teil der Geometrie. In Quantum Graphity gibt es im Grundmodell keine
+Materie; in der erweiterten Version emergiert ein $U(1)$-Eichfeld (Levin--Wen),
+und die String-Net-Anregungen tragen eine Masse $\propto g_C$ -- aber als freier
+Parameter, nicht aus geometrischer Quelle. Verloren geht alles, was FFGFT zur
+Erklärung der SM-Massen und -Kopplungen liefert. Erhalten bleibt die emergente
+$U(1)$-Eichtheorie -- die einzige Zeile, die exakt korrespondiert.
+
+\subsection*{Die Übersetzung Zeile für Zeile}
+
+\textbf{[S]}
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+{\small
+\begin{tabular}{lll}
+\toprule
+\textbf{FFGFT-Struktur} & \textbf{Quantum-Graphity-Pendant} & \textbf{Reduktion} \\
+\midrule
+4D-Torus $T^4$ & vollständiger Graph $K_N$ & Diskretisierung + Topologievergessen \\
+Wicklungen $(n_x,n_y,n_z,k_t)$ & Besetzung $n_{ab}$, erw.\ $(j,m)$ & Bedeutung verloren \\
+Moden $\varphi_{n,l,j}$ & Kantenzustände $|0\rangle,|1\rangle$ & glatt $\to$ diskret \\
+$\xi=4/30000$ (eine Konstante) & $g_V,\dots,g_\pm,v_0$ (frei) & Aussagekraft verloren \\
+Niederenergie-Glättung zu $T^4$ & Tieftemperatur: hexagonal $3$-regulär & dasselbe Prinzip \\
+emergente $U(1)$ (EM-Wicklung) & emergente $U(1)$ (Levin--Wen, nur erw.) & echte Korrespondenz \\
+12 Fermionenmassen & --- & Pendant fehlt \\
+$\alpha=\xi E_0^2$ & --- & Pendant fehlt \\
+Spin-Bahn-Konstanten & --- & Pendant fehlt \\
+\bottomrule
+\end{tabular}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\textbf{[S]} Von den Zeilen ist genau \emph{eine} eine echte Korrespondenz
+(emergente $U(1)$ aus Mikrostruktur, in Quantum Graphity nur in der erweiterten
+Version); eine ist eine strukturelle Parallele (Niederenergie-Glättung zur
+geordneten Geometrie -- dasselbe Grundprinzip); der Rest sind
+Reduktionsverluste. Alle SM-spezifischen Größen haben kein Quantum-Graphity-Pendant.
+
+\subsection*{Was bleibt, was verloren geht}
+
+\textbf{[S]} Verloren gehen über die fünf Schritte: Differentialgeometrie,
+Lokalität als gegebene Struktur, die physikalische Bedeutung der Wicklungszahlen,
+die Parameter-Spezifizität und der gesamte Materiesektor. Erhalten bleibt das
+\emph{Geometrie-Emergenz-Schema}: in FFGFT emergiert die Geometrie aus der
+Mode-Konfiguration im Niederenergielimit, in Quantum Graphity aus dem
+Phasenübergang. Beide teilen dieselbe methodische Position -- Geometrie ist nicht
+gegeben, sondern emergent; FFGFT spezifiziert zusätzlich \emph{welche} ($T^4$) und
+\emph{warum} (der eine Parameter $\xi$).
+
+\subsection*{Methodische Position}
+
+\textbf{[S]} Die Bloch-Sphäre ist $\subset$ FFGFT durch \emph{geometrische}
+Reduktion (Polkontraktion, Schleifen-Aufschneidung); Quantum Graphity ist
+$\subset$ FFGFT durch \emph{strukturelle} Reduktion (Diskretisierung,
+Topologievergessen, Materieabwurf). Diese Untermengen-Strategie ist ehrlich (keine
+Behauptung einer exakten Übersetzung, wo nur eine partielle möglich ist),
+positioniert FFGFT als das umfassendere Framework (Quantum Graphity als
+Spezialfall, kein Konkurrent) und verbindet FFGFT mit etablierter Forschung
+(dasselbe Grundprogramm wie Loop-Quantengravitation, kausale dynamische
+Triangulierung, Wolfram-Hypergraphen).
+
+\textbf{[S]} Im Verhältnis zu den beiden Übersetzungen oben: die
+Hilbertraum-Bijektion ist \emph{durchgeführt} (die konkrete Brücke
+$\alpha=\sqrt{(1+z)/2}\,e^{i\theta/2}$); die vier Erweiterungen sind
+\emph{etabliert} (Drinfeld--Jimbo 1985, Spinorbündel, Kaluza--Klein 1921); die
+Quantum-Graphity-Reduktion ist \emph{skizziert}, nicht durchgeführt. FFGFT
+enthält die Hilbertraum-QM nachweislich als Untermenge und die
+diskreten-Geometrie-Programme \emph{plausibel} als Spezialfall, sofern die
+Triangulierungs-Reduktion tatsächlich durchführbar ist.
+
+\subsection*{Status: die Reduktion ist korrekt partiell}
+
+\textbf{[S]} Die Aussage \enquote{Quantum Graphity $\subset$ FFGFT} ist eine
+\emph{partielle} Reduktion -- und das ist die richtige Form, kein Mangel. Quantum
+Graphity ist ein partielles FFGFT-Skelett: die emergente Geometrie-Komponente
+\emph{ohne} die Materie-Spezifizität. Die Unvollständigkeit sitzt vollständig auf
+der Quantum-Graphity-Seite -- QG fehlt, was FFGFT hat (die 12 Fermionenmassen,
+$\alpha$, der Materiesektor) --, \emph{nicht} auf der FFGFT-Seite: FFGFT fehlt
+nichts, was QG hat; die emergente $U(1)$ und das Geometrie-Emergenz-Schema sind
+vorhanden. Genau darum \emph{darf und muss} die Entsprechung partiell bleiben:
+eine \emph{vollständige} Entsprechung QG\,$\leftrightarrow$\,FFGFT würde
+bedeuten, dass FFGFT nicht größer ist als QG -- dann wäre FFGFT selbst so
+unvollständig wie QG. Die Partialität ist die Bedingung dafür, dass FFGFT das
+reichere Framework ist, kein Defizit, das zu schließen wäre.
+
+\textbf{[S]} Davon zu trennen ist die \emph{mathematische Strenge} der
+Reduktions\emph{konstruktion}. Die konzeptuelle Aussage -- dasselbe Grundprogramm
+\enquote{emergente Geometrie aus diskreter Mikrostruktur}, geteilt mit
+Loop-Quantengravitation, kausaler dynamischer Triangulierung und
+Wolfram-Hypergraphen -- steht; die \emph{explizite} Abbildung ist skizziert, nicht
+in jedem Schritt ausgeführt. Drei Sätze wären für eine rigorose Konstruktion des
+(ohnehin partiellen) Embeddings nötig: ein Konvergenz-Beweis (dass eine
+$T^4$-Triangulierung mit $N\to\infty$ die Moden $\varphi_{n,l,j}$ approximiert),
+ein Hamilton-Übersetzungssatz ($\mathcal D_{T^4}$ gegen die Graphity-Hamiltonkette
+$H_V+H_B+\cdots$) und ein Rückgewinnungs-Satz (dass die Tieftemperaturphase ein
+effektives $T^4$ liefert). Diese betreffen die Strenge der \emph{Skizze} --
+\emph{nicht} die Gültigkeit und \emph{nicht} die Vollständigkeit der
+Untermengen-Beziehung, die konzeptuell geklärt ist und deren Partialität, wie
+oben gesagt, gerade richtig ist. Der Tetraeder-Faktor $4/3$ in $\xi = 4/30000$
+ist dabei eine interne FFGFT-Aussage (A030/A040), keine Behauptung über
+Übersetzbarkeit zu Spin-Foam-Modellen.
+
+\subsection*{Aussagekraft: Hilbertraum-QM gegen Quantum Graphity}
+
+\textbf{[S]} Die beiden Reduktionen -- FFGFT$\to$Hilbertraum-QM und
+FFGFT$\to$Quantum Graphity -- unterscheiden sich nicht nur in den Schritten,
+sondern in der \emph{Aussagekraft} der erreichten Theorie. Die Hilbertraum-QM ist
+mathematisch reif und vollständig: sie beschreibt Materie vollständig, liefert
+präzise quantitative Aussagen (Atomspektren, Streuamplituden, Gatter-Operationen),
+ist experimentell überwältigend bestätigt, nimmt alle drei Eichgruppen
+$SU(3)\times SU(2)\times U(1)$ auf und hat ein Jahrhundert Entwicklung hinter
+sich. Die Bijektion zu ihr ist eine Brücke zwischen zwei reifen Theorien mit
+kleinem, quantifizierbarem Verlust ($K_{\text{frak}}$, $\Delta\text{CHSH}\approx10^{-5}$).
+
+\textbf{[S]} Quantum Graphity ist demgegenüber ein \emph{Programm}: Materie ist im
+Grundmodell nicht beschrieben (in der erweiterten Version nur $(j,m)$ ohne
+Massenspezifizität), die Aussagen sind qualitativ, es gibt keine direkte
+experimentelle Bestätigung (Planck-Skala), nur eine Eichgruppe emergiert, und die
+Forschungsgemeinschaft ist klein.
+
+\textbf{[S]}
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+{\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Aspekt} & \textbf{Hilbertraum-QM} & \textbf{Quantum Graphity} \\
+\midrule
+Materie-Sektor & vollständig beschrieben & nicht vorhanden (Grundmodell) \\
+Massen & externe Yukawa-Parameter & nicht vorhanden \\
+Eichtheorien & $SU(3)\!\times\!SU(2)\!\times\!U(1)$ & nur $U(1)$ (erw.) \\
+Aussagen & präzise quantitativ & qualitativ \\
+Experiment & überwältigend bestätigt & keine direkte \\
+Mathematische Reife & ein Jahrhundert & jung \\
+Verlust gegenüber FFGFT & klein, quantifizierbar & massiv \\
+\bottomrule
+\end{tabular}
+}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\textbf{[S]} Die Asymmetrie zeigt FFGFTs Verhältnis zu zwei Theorie-Klassen:
+gegenüber der Hilbertraum-QM muss FFGFT eine große, etablierte Theorie respektieren
+-- und tut es, mit voller Übersetzbarkeit und kleinen Korrekturen (Beweis der
+Konsistenz mit bekannter Physik); gegenüber Quantum Graphity enthält FFGFT ein
+kleines, programmatisches Modell als Spezialfall (Beleg der methodischen
+Verwandtschaft mit anderen Quantengravitations-Programmen, ohne deren
+Beschränkungen zu übernehmen). Quantum Graphity ist damit \emph{nicht falsch},
+sondern \emph{wenig}: FFGFT teilt ihr Grundprogramm, geht aber weit darüber hinaus
+-- eine spezifische Geometrie, ein Parameter, und daraus alle SM-Konstanten. FFGFT
+ist groß genug, um die Hilbertraum-QM zu enthalten, und spezifisch genug, um
+Quantum Graphity zu erweitern.
+
+\section{Prüfskripte}
+
+\begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
+  \item Bijektive Brücke $(z,r,\theta)\leftrightarrow(\alpha,\beta)$: numerische
+    Gegenprobe der Identitäten $|\alpha|^2+|\beta|^2=1$ und $z^2+r^2=1$ über
+    Zufallszustände, samt Operator-Übersetzung Pauli\,$\leftrightarrow$\,Drehung:
+    \texttt{python/A\_Serie\_Skripte/a070\_tensorfaktor.py}
+  \item $q$-Deformation und Faktorstruktur: $q = e^{i\pi/75}$, Limes $q\to1$,
+    und der Tensorfaktor $L^2(T^4)\otimes\mathbb{C}^3$:
+    \texttt{python/A\_Serie\_Skripte/a070\_zirkulant\_dft.py}
+\end{itemize}
+
+\section{Feldtheorie: Moden, Lagrangian, Schrödinger-Limes}
+
+\textbf{[B]} Die vollständige Feldtheorie des Hilbertraums -- explizite
+Modefunktionen $\phi_{n,l,j}$, freier Lagrangian $\mathcal L_0$, Brückenformel
+Lagrangian\,$\leftrightarrow$\,Moden-Operator, Dirac-Linie und Schrödinger-Limes
+-- ist in A075 ausgeführt. Hier stehen nur die Schlüsselformeln, die für den
+Anschluss an den Hilbertraum nötig sind.
+
+\textbf{[B]} \textbf{Modefunktionen.} Eigenfunktionen des d'Alembertians auf
+$T^3\times\mathbb R$:
+\[
+  \phi_{n,l,j}(t,\mathbf x)
+  = \frac{1}{\sqrt V}\,
+    e^{i\mathbf k_{n,l}\cdot\mathbf x}\cdot
+    Y_{l,j}(\vartheta,\varphi)\cdot
+    e^{-im_{n,l,j}\,t},
+  \qquad \Box\,\phi_{n,l,j} = -m_{n,l,j}^2\,\phi_{n,l,j}.
+\]
+
+\textbf{[B]} \textbf{Brückenformel.} Lagrangian und Moden-Operator beschreiben
+dieselbe Physik (Herleitung in sechs Schritten: A075):
+\[
+  \int\tfrac12(\partial\,\delta m)^2\,d^4x
+  = \tfrac12\langle\psi|\Phi^2|\psi\rangle,
+  \qquad \Phi = \sum_i m_i P_i.
+\]
+Die Masse entsteht nicht als Lagrangian-Parameter, sondern als Eigenwert des
+Moden-Operators.
+
+\textbf{[B]} \textbf{Schrödinger-Limes.} Die Phasengleichung des Vakuumfelds
+reduziert sich im nicht-relativistischen Grenzfall auf
+\[
+  i\hbar\,\partial_t\psi = -\tfrac{\hbar^2}{2m}\nabla^2\psi + V\psi
+  \qquad (\psi\propto\sqrt\rho\,e^{i\theta}),
+\]
+kein offener Punkt, sondern ausgeführter Niederenergielimit (A075). Die Dirac-Linie
+($\partial^2\Delta m=0$, Clifford-Algebra-Basis) und das Nichtabschluss-Theorem
+für Modenprodukte stehen ebenfalls in A075.
+
+\textbf{[K]} \textbf{Die periodische Funktion $f(k_t)$.} Die Massen folgen aus
+$k_t$-Wicklungen über $m_ic^2=\hbar f(k_t^{(i)})$; die explizite Form von $f$
+wird durch die Massenformel $m_i=r_i\,\xi^{p_i}v$ (A100) und die geometrische
+Folge der Lepton-Exponenten $(p_e,p_\mu,p_\tau)=(3/2,1,2/3)$ mit Verhältnis
+$2/3$ konkret -- kein freier Parameter, Folge der Torus-Topologie (A075).
+
+
+\section{Zeichenerklärung}
+
+Symbole die in der gesamten A-Serie verwendet werden, sind in A010 erklärt.
+Spezifisch für dieses Dokument:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small\begin{tabular}{lp{9cm}}
+\toprule
+Symbol & Bedeutung \\
+\midrule
+$q = e^{i\pi/75}$ & Deformationsparameter der Drinfeld--Jimbo-Quantengruppe;
+  folgt aus $q = e^{i\pi\cdot100\xi}$ mit $\xi=4/30000$ \\
+$U_q(\mathfrak{su}(2))$ & $q$-deformierte $\mathfrak{su}(2)$-Algebra \\
+$[n]_q$ & $q$-Zahl: $[n]_q = (q^n-q^{-n})/(q-q^{-1})$ \\
+$\sigma_x,\sigma_y,\sigma_z$ & Pauli-Matrizen (Spin-Operatoren) \\
+$S_\text{CHSH}$ & CHSH-Wert, theoretisches Maximum $2\sqrt2\approx2{,}828$ \\
+\bottomrule
+\end{tabular}}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\section{Was offen bleibt}
+
+\textbf{Die $\Delta\text{CHSH}\sim10^{-5}$-Abweichung ist berechnet, nicht
+gemessen.} Die CHSH-Skalierungsformel
+$\text{CHSH}^{\text{T0}}(n)=2\sqrt2\cdot\exp(-\xi\ln n/D_f)$ ist in A165
+vollständig hergeleitet; der Rechenrahmen ($\phi$-QFT, Bell-Dämpfung, T0-Shor)
+und der Hardware-Status stehen dort. Die IBM-Heron-r2-Messung (Mai 2026) bestätigt
+Bell-Verletzung ($S=2{,}74$, 96{,}9\,\% der Tsirelson-Schranke), aber die
+Geräte-zu-Geräte-Variation ($\sim1{,}4\,\%$) übersteigt den $\xi$-Effekt
+($\sim0{,}001\,\%$) um Faktor $\sim1400$ -- mit heutiger NISQ-Hardware prinzipiell
+nicht auflösbar (A165). Als Prognosegröße mit Falsifikationskriterien steht
+$\Delta\text{CHSH}$ in A210.
+
+\textbf{Die vollständige Feldtheorie -- Lagrangian, Brückenformel,
+Dirac/Schrödinger -- steht in A075.} Hier in A070 sind nur die Schlüsselformeln
+für den Hilbertraum-Anschluss geführt. Die offenen Punkte der Feldtheorie selbst
+(vollständige Form von $\Delta\mathcal L_\text{Torus}$, Hopf-Algebra für
+Wechselwirkungen, Feynman-Regeln) sind in A075 benannt.
+
+\textbf{Top-Quark, Down-Typ-Quarks und Quark-$r_i$-Tiefenstruktur sind
+ungeklärt.} Die Lepton-Exponenten und Up-Typ-Quarks (bis Charm) folgen der
+geometrischen $2/3$-Folge (A075/A100); das Top-Quark ($p_t=-1/3$, kein bekannter
+geometrischer Grund) und die Down-Typ-arithmetische Schrittweite bleiben offen
+(A150).
+
+\section{Ersetzt}
+
+Dieses Dokument nimmt auf: Dok.~230 (Übersetzbarkeit FFGFT\,$\leftrightarrow$\,Hilbertraum-QM,
+Bijektion, Operatoren, Gatter, Messung, interpretative Divergenz), Dok.~231 (die
+vier Hilbertraum-Erweiterungen), Dok.~232 (Quantum Graphity als skizzierte
+Untermenge) sowie den Rahmenteil von Dok.~282 (der Hilbertraum explizit).
+Eingearbeitet: R41 (Verortung der Verluste: die Typ-I-Dekompaktifizierung ist
+verlustfrei, verlustbehaftet sind Rückrichtung, räumliche Projektion und
+Messfenster). \emph{Nicht} übernommen: der Massenoperator-/Koide-Teil von
+Dok.~282 gehört sachlich nach A110; der HLV/CP-Vergleichsteil von Dok.~282 bleibt
+als IPI-Rahmenvergleich eigenständig (A240). Der Quantum-Graphity-Vergleich ist
+demgegenüber ein Vergleich mit etablierter Physik und steht daher hier -- als
+$[S]$-Skizze markiert.
+
+\section{Verwendung von KI-Werkzeugen}
+
+Dieses Dokument ist unter Verwendung KI-gestützter Werkzeuge entstanden. Die
+Fragestellungen, die Setzungen und alle inhaltlichen Entscheidungen stammen vom
+Autor; die Werkzeuge formulieren aus, rechnen nach und erstellen Prüfskripte.
+Die Verantwortung für Inhalt und Fehler liegt vollständig beim Autor. Der
+ausführliche Wortlaut steht in A010.
