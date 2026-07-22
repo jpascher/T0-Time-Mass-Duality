@@ -54,6 +54,41 @@ what is input and what follows is always declared explicitly.
 
 ---
 
+
+## The A-Series — Canonical Edition
+
+The **A-Series** is the topic-ordered, fully auditable edition of FFGFT:
+43 documents, every statement carrying an explicit epistemic layer marker.
+
+| Marker | Meaning |
+|--------|---------|
+| **[STIPULATION]** | Axiom — declared, not derived |
+| **[K]** | Core — derived from ξ, numerically verified |
+| **[B]** | Bridge — algebraically proved |
+| **[S]** | Sketch — plausible, not fully executed |
+
+```
+Block 0  A010–A095   Foundation: stipulations, geometry, units, time, Hilbert space
+Block 1  A100–A192   Sectors: leptons, constants, gravitation, QM, Standard Model
+Block 2  A200–A250   Method: layers, falsifiability, open points, reference table
+Block 3  A260–A267   Extensions: Casimir, scale hierarchy, Dirac, unit checks
+```
+
+**New in the A-Series (July 2026):**
+
+- **A095** — Chirality: g_R = 0 proved algebraically [B] from the torus projector P₊
+- **A192** — Gauge sector: U(1)_EM from flux quantisation, SU(3)_C from linking
+  number — both [B] from torus topology
+- **A060** — Native time–energy reciprocity T·E = 1 replaces the earlier
+  Heisenberg-based singularity argument (register entry R50)
+- **A130** — Higgs-EFT 2.3 % deviation structurally explained
+- **A160** — CHSH prefactor ξ/(2π) geometrically derived [B]
+
+All 43 documents with verification scripts:
+**[A_Serie_Export/](A_Serie_Export/)** · **[A_SERIE_README.md](A_Serie_Export/A_SERIE_README.md)**
+
+---
+
 ## Quantum Sector
 
 | Result | Document |
@@ -124,21 +159,6 @@ theorem).
 Reproducibility: `2/python/Dok292_Skripte/` (lepton check, parts A–L),
 `2/python/Dok291_Skripte/` (θ=2/9 mechanism scripts),
 `2/python/Dok293_Skripte/` (icosahedral redistribution, p₀=2/9 exact + robustness).
-
-### Relation to HLV (external, secondary)
-
-FFGFT and HLV (Marcel Krüger, Information Physics Institute) share the same
-φ-icosahedral object, on which θ=2/9 is an invariant; because FFGFT holds the
-absolute scale (reference point E₀) and HLV does not, the test direction is
-one-sided, FFGFT→HLV, without adopting HLV's own formulations
-([Doc. 294](2/pdf/294_HLV_Pruefrichtung_En.pdf)). The earlier blind,
-symmetrically pre-registered check of whether θ=2/9 is forced by HLV's
-BD17A holonomy mechanism came out **negative** (BLOCKED) — the anticipated
-direction, since a flat holonomy cannot carry a transcendental angle as a
-topological invariant; this concerns the external framework, not FFGFT's own
-results. The structural comparison documents
-([Doc. 282–286](2/pdf/282_FFGFT_HLV_CP_Teilbarkeit_En.pdf)) and the verdict
-record (`2/python/Dok291_Skripte/`) are retained for completeness.
 
 ### Internal representations and computational routes
 
@@ -228,34 +248,36 @@ A complete list of all ~289 documents with short description and direct PDF link
 ```
 T0-Time-Mass-Duality/
 ├── 2/
-│   ├── pdf/                   # Standalone A4 documents, DE/EN pairs
-│   ├── html/                  # Interactive tools
-│   ├── python/                # Reproducibility scripts, one folder per document
-│   │   ├── Dok023_230_Skripte/        # Bell / Hilbert space
-│   │   ├── Dok263_Skripte/            # Fractal holography
-│   │   ├── Dok267_268_Skripte/        # CMB peaks
-│   │   ├── Dok271_274_Skripte/        # HLV comparison
-│   │   ├── Dok275_Skripte/            # ξ→φ recursion (v2/v3/v4)
-│   │   ├── ... (further DokNNN_Skripte/)
-│   │   └── Werkzeuge_Skripte/         # general tools
-│   ├── Sources/               # LaTeX sources
-│   │   ├── ch/                # Chapter sources (*_De/En_ch.tex)
-│   │   ├── wr_standalone_A4/  # Standalone document wrappers
-│   │   ├── wr_books/          # Book wrappers (5 volumes × 3 formats)
-│   │   └── pri-end/           # Shared preambles
-│   ├── fonts/                 # bundled fonts (Inter, JetBrains Mono, Libertinus Math)
-│   └── setup_build_env.sh     # set up the LaTeX build environment (LuaLaTeX)
-├── books/                     # KDP-ready PDFs (5 vols × 2 langs × 3 formats)
-├── rsa/                       # RSA factorisation demos
+│   └── pdf/                   # ~100 standalone A4 PDFs (selected key documents, De+En)
+├── A_Serie_Export/            # A-Series canonical edition (43 docs × 2 languages)
+│   ├── Sources/
+│   │   ├── ch/                # 86 source files (43 De + 43 En, *_ch.tex)
+│   │   ├── pri-end/           # 3 preamble files
+│   │   └── wr_standalone_A4/  # 86 wrappers (43 De + 43 En)
+│   ├── pdf/                   # 86 PDFs (43 De + 43 En, A???_*.pdf)
+│   ├── python/
+│   │   └── A_Serie_Skripte/   # 44 verification scripts
+│   ├── A_SERIE_README.md
+│   ├── A_SERIE_CHANGELOG.md
+│   └── A_SERIE_WORKFLOW.md
+├── Sources/                   # Recent LaTeX sources (latest documents)
+│   ├── ch/                    # Chapter sources (*_De/En_ch.tex)
+│   └── wr_standalone_A4/      # Standalone wrappers + PDFs
+├── B18-sicherung/             # Archive / backup
+├── Mails_Forscher_T0/         # Research correspondence
+├── rsa/                       # RSA factorisation demos and signal tools
 ├── sig/                       # Signal analysis tools
 ├── 000_FFGFT_Changelog_De.md
+├── DOCUMENTS.md               # complete document index
+├── RELEASE_NOTES_v1_2_3.md
+├── RELEASE_NOTES_v1_2_3_de.md
 ├── README_de.md
 └── README.md
 ```
 
-LaTeX structure: wrappers in `2/Sources/wr_standalone_A4/` and `2/Sources/wr_books/`
-reference preambles from `2/Sources/pri-end/`. Chapter content in
-`2/Sources/ch/` as `NNN_..._De/En_ch.tex`.
+LaTeX: chapter sources in `Sources/ch/` as `NNN_..._De/En_ch.tex`;
+wrappers in `Sources/wr_standalone_A4/`. A-Series fully compiled in
+`A_Serie_Export/`.
 
 ---
 
