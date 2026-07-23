@@ -40,7 +40,7 @@ Alle wesentlichen Änderungen dieser Serie. Format: Datum · Dokument · Inhalt.
   Vorwärts-Herleitung des Baryon-Kandidaten (A155).
 
 ### Register (Dok. 190, append-only)
-- **R61** (Eintragstext in `Dok190_R61/R61_Dok190_Eintrag.tex`, zum
+- **R62** (Eintragstext in `Dok190_R62/ (De+En)`, zum
   Einfügen nach R60): Altkorpus-Dok. 005, Proton-Beispielrechnung —
   Anker der Formelzeile ist π²/2 (Vol B⁴), nicht m_μ; Fehlfaktor 46,672
   = (π²/2)/m_μ auf 0,07 %. Reparierte Zeile schließt mit unveränderten
@@ -55,7 +55,7 @@ Alle wesentlichen Änderungen dieser Serie. Format: Datum · Dokument · Inhalt.
 - `python/A_Serie_Skripte/a270_z3_sektoren.py` — Schlüsselrelation,
   k*/100, Fixpunkte (numerisch), Z₃-Eigenbasis (numerisch),
   Sektor-Tabelle, Monte-Carlo, Spezifität.
-- `python/Dok190_Skripte/r61_baryon_anker.py` — Diagnose, Reparatur,
+- `python/Dok190_Skripte/r62_baryon_anker.py` — Diagnose, Reparatur,
   Dimensionsbilanz, Sekundärbefund.
 
 ### Build

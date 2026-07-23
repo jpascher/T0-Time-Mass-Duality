@@ -30,8 +30,8 @@ Sources/
 pdf/                   90 PDFs (45 De + 45 En)
 python/
   A_Serie_Skripte/     46 Prüfskripte (.py)
-  Dok190_Skripte/       1 Prüfskript zu Registereintrag R61
-Dok190_R61/             1 Eintragstext R61 für Dok. 190 (nach R60 einfügen)
+  Dok190_Skripte/       1 Prüfskript zu Registereintrag R62
+Dok190_R62/             1 Eintragstext R62 für Dok. 190 (nach R61 einfügen; De+En)
 README.md
 CHANGELOG.md
 ```
@@ -152,7 +152,7 @@ Block 3  A260–A267   Erweiterungen
   (K_frak⁻³⁶ ≈ 16/π², gestützt durch k*/100); Sektor-Tabelle
   Lepton +0 / Meson +1 / Baryon +2 topologisch fixiert; Confinement als
   Fixpunkt-Bedingung; Koide/A150-Konsistenz; Baryon-Stufe als Vorhersage
-- **R61** (Registereintrag für Dok. 190, Text in Dok190_R61/):
+- **R62** (Registereintrag für Dok. 190, Text in Dok190_R62/):
   Altkorpus-005-Protonrechnung — Anker π²/2 statt m_μ; reparierte Zeile
   schließt auf +0,05 %; Aufspaltung QZ·K_corr unterbestimmt
 - 3 neue Prüfskripte, alle Assertions bestanden
