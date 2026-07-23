@@ -1,8 +1,8 @@
 # FFGFT A-Serie — Fraktale Feldgeometrische Fundamentaltheorie / T0 Zeit-Masse-Dualität
 
 **Autor:** Johann Pascher (ORCID: 0009-0000-6518-4064)  
-**Version:** 1.0 (2026-07-22)  
-**Zenodo DOI:** 10.5281/zenodo.20117635  
+**Version:** 1.1 (2026-07-23)  
+**Zenodo DOI:** 10.5281/zenodo.21496379  
 **Sprachen:** Deutsch (kanonisch) · Englisch (parallele Fassung)
 
 ---
@@ -102,6 +102,16 @@ Block 3  A260–A267   Erweiterungen
 | **[B]** | Brücke — algebraisch bewiesen |
 | **[S]** | Skizze — plausibel, nicht vollständig ausgeführt |
 
+Die Marker [K] und [B] sind interne Zustandsangaben des Anspruchs, keine
+externen Zertifizierungen. Keiner der beiden begründet für sich empirische
+Wahrheit, externe physikalische Gültigkeit oder eine eindeutige Ontologie.
+
+Der Anspruch der Serie lautet: **Jede berechenbare Aussage ist unabhängig
+ausführbar und nachprüfbar, und jede substanzielle Aussage trägt einen
+explizit deklarierten epistemischen Status.** *(Formulierung nach Stefaan
+Vossen, 2026 — ersetzt die frühere Kurzform „Alles ist überprüfbar",
+die mehr behauptete, als die Skripte leisten.)*
+
 ---
 
 ## Drei Setzungen (A020)
@@ -195,8 +205,8 @@ Preambles werden aus `../pri-end/` geladen.
 ## Zitieren
 
 ```
-Pascher, J. (2026). FFGFT A-Serie v1.0 (2026-07-22).
-Zenodo. https://doi.org/10.5281/zenodo.20117635
+Pascher, J. (2026). FFGFT A-Serie v1.1 (2026-07-23).
+Zenodo. https://doi.org/10.5281/zenodo.21496379
 ```
 
 ---

@@ -4,6 +4,19 @@ Alle wesentlichen Änderungen dieser Serie. Format: Datum · Dokument · Inhalt.
 
 ---
 
+## v1.1 — 2026-07-23 (Korpus-Release v1.2.5)
+
+Anlass: Rückmeldung S. Vossen (E-Mail, 2026-07-23), beide Punkte als
+Korrekturen angenommen (Antwort 2026-07-23).
+
+| Nr. | Dokument | Inhalt |
+|-----|----------|--------|
+| CL-01 | README, Zenodo | Kurzform „Alles ist überprüfbar / Everything is verifiable" ersetzt durch: „Jede berechenbare Aussage ist unabhängig ausführbar und nachprüfbar, und jede substanzielle Aussage trägt einen explizit deklarierten epistemischen Status." Grund: Skripte verifizieren Berechenbarkeit — nicht Setzungen, nicht die physikalische Lesart einer Brücke, nicht empirische Adäquatheit. Formulierung: S. Vossen. |
+| CL-02 | A010 §6 | Ergänzt [SETZUNG]: [K] und [B] sind interne Claim-State-Marker, keine externen Zertifizierungen; keiner begründet für sich empirische Wahrheit, externe physikalische Gültigkeit oder eindeutige Ontologie. (De + En) |
+| CL-03 | A_SERIE_README | DOI in Header und Zitierempfehlung von 10.5281/zenodo.20117635 (v1.1.0-Altbestand) auf kanonischen Record 10.5281/zenodo.21496379 korrigiert; Zenodo-Beschreibung angeglichen („DOI pending" entfernt). Fundmeldung: S. Vossen. |
+
+---
+
 ## v1.0 — 2026-07-22
 
 ### Neu: Vollständige A-Serie (43 Dokumente)
