@@ -58,7 +58,7 @@ what is input and what follows is always declared explicitly.
 ## The A-Series — Canonical Edition
 
 The **A-Series** is the topic-ordered, fully auditable edition of FFGFT:
-43 documents, every statement carrying an explicit epistemic layer marker.
+45 documents, every statement carrying an explicit epistemic layer marker.
 
 | Marker | Meaning |
 |--------|---------|
@@ -84,7 +84,7 @@ Block 3  A260–A267   Extensions: Casimir, scale hierarchy, Dirac, unit checks
 - **A130** — Higgs-EFT 2.3 % deviation structurally explained
 - **A160** — CHSH prefactor ξ/(2π) geometrically derived [B]
 
-All 43 documents with verification scripts:
+All 45 documents with verification scripts:
 **[A_Serie_Export/](A_Serie_Export/)** · **[A_SERIE_README.md](A_Serie_Export/A_SERIE_README.md)**
 
 ---
@@ -249,7 +249,7 @@ A complete list of all ~289 documents with short description and direct PDF link
 T0-Time-Mass-Duality/
 ├── 2/
 │   └── pdf/                   # ~100 standalone A4 PDFs (selected key documents, De+En)
-├── A_Serie_Export/            # A-Series canonical edition (43 docs × 2 languages)
+├── A_Serie_Export/            # A-Series canonical edition (45 docs × 2 languages)
 │   ├── Sources/
 │   │   ├── ch/                # 86 source files (43 De + 43 En, *_ch.tex)
 │   │   ├── pri-end/           # 3 preamble files

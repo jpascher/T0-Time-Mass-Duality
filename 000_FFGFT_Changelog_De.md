@@ -2458,3 +2458,66 @@ Nachtrag zur v1.2.3-Reihe (die Juli-Dokumente 298–302 sind in der README-Versi
 - **Dok. 306 erweitert (4) — „Und dazwischen: eine Projektion, keine Struktur":** Die Anordnung der Systeme auf einer gemeinsamen Achse (von maximaler zu minimaler Massenkonzentration) ist eine **Außenbetrachtung** — sie setzt einen Standpunkt voraus, den FFGFT nicht kennt. T·m = 1 gilt **je System**; es gibt kein gemeinsames T, gegen das aufgetragen werden könnte. Schärfer: **Wir projizieren uns in die Mitte.** Die Achse entsteht mit dem Betrachter als Nullpunkt; die Mitte ist keine Entdeckung, sondern eine Setzung, und sie bleibt unbemerkt, weil der Setzende und der Verortete dasselbe sind. Die Ränder erscheinen deshalb als „extrem" — *extrem* heißt hier *fern*, nicht *ausgezeichnet*. **Die intrinsische Zeit bleibt unberührt:** Für ein Elektron ist ohne Belang, wo ein Außenstehender es einträgt — seine Windung ist dieselbe im Labor wie nahe einem Horizont (T = 1/m, m ist dasselbe). Auch die „langsamste Zeit" am Horizont ist eine Aussage über den *Vergleich*, nicht über das *Erleben*. Die Projektion ist damit **Werkzeug, nicht Struktur**: ohne gemeinsame Achse ließe sich nichts vergleichen. Dieselbe Bewegung, die die Frage nach t=0 und die Singularität auflöste — jetzt auf die **Skala selbst** angewandt; zugleich die schärfste Form der Selbstbezüglichkeit (Dok. 248): der Gedanke, der die Ordnung entwirft, **verortet sich, indem er ordnet**.
 
 - **Dok. 306 erweitert (5) — „Skalen, nicht Summen" + Abbildung:** **Präzisierung:** T₀ und E_max sind **Skalen**, keine Schranken für Gesamtheiten. T₀ ist das minimale Zeit*inkrement*, E_max die maximale Energie **pro fundamentaler Zelle** bzw. pro elementarer Anregung — ein **Cutoff**, und ein Cutoff begrenzt eine einzelne Mode, nie eine Summe. Die Gesamtenergie eines zusammengesetzten Systems darf beliebig groß sein (viele Zellen, nicht dichtere). „Das T der Erde" ist keine wohlgestellte Größe; ħ/(Mc²) für eine Sternmasse ist eine **Fehlanwendung**. Entsprechend betrifft die Schwarzloch-Aussage die **Konzentration**, nicht die Masse: am Horizont erreicht die *lokale* Dichte den Zellen-Cutoff, die **Gesamtmasse bleibt unbeschränkt**. — **Neue Abbildung** (Abb. „306_hyperbel"): T·E = 1 doppelt-logarithmisch = **Gerade der Steigung −1**. Alle elementaren Anregungen (Elektron, Myon, Proton, Top, Planck) liegen exakt darauf — keine ist ausgezeichnet, die Gerade hat **keine Mitte**. Ausgezeichnet ist genau **ein** Punkt: der **Endpunkt** (T₀, E_max) = (ξ·t_P, E_P/ξ), an dem die Kurve *aufhört*. Am anderen Ende **Asymptote** — nie erreicht. Die Ränder sind also **verschiedenartig**: links ein erreichter Endpunkt, rechts eine unerreichbare Grenze.
+
+## 43. Update (22. Juli 2026) — A-Serie: kanonische Fassung, 43 Dokumente (v1.2.4)
+
+Einführung der **A-Serie** — der sachgeordneten, vollständig auditierbaren Fassung
+der FFGFT. 43 Dokumente, jede Aussage mit expliziter Schichtmarkierung
+([SETZUNG] / [K] / [B] / [S]); jede berechenbare Aussage hat ein Prüfskript.
+Alle Dateien in `A_Serie_Export/`.
+
+### Drei inhaltliche Fortschritte
+
+**A095 (neu) — Chiralität g_R = 0 algebraisch bewiesen [B]:**
+Der Fourier-Projektor P₊ auf dem kompakten Torus annihiliert den |1,−1⟩-Windungs-
+zustand. Sein Kern ist nicht-trivial; g_R = ⟨0|H|0⟩ = 0 folgt direkt — kein freier
+Parameter, keine zusätzliche Annahme jenseits der Torus-Geometrie. War [S], jetzt [B].
+Prüfskript: `a095_torus_chiralitaet.py`.
+
+**A192 (neu) — Eichsektor aus Torus-Topologie [B]:**
+- U(1)_EM: Flussquantisierung Φ = n·h/e erzwingt die Aharonov-Bohm-Phase.
+- SU(3)_C: drei Fäden mit Verschlingungszahl 3 → dim(su(3)) = 8 geometrisch bewiesen.
+- SU(2)_L: aus der chiralen Projektion (A095).
+Offene Kante: kovariante Ableitungen D_μ noch nicht explizit ausgeschrieben.
+Prüfskript: `a192_eichsektor.py`.
+
+**A060 aktualisiert — native T·E = 1 ersetzt Heisenberg-Argument (R50):**
+Die Konklusion (kein singulärer Anfang) ist unverändert; die Herleitung ist jetzt
+vollständig nativ: T·m = 1, also T·E = 1; E → ∞ ⟺ T → 0; aber d₁ = 100ξ₁ = 1/75
+setzt eine endliche Untergrenze für T → E ist nach oben beschränkt. Dok. 025/063
+sind für diesen Punkt nicht mehr maßgeblich.
+
+### Weitere A-Serien-Korrekturen (Dok. 190-Einträge)
+
+**R57 — A015:** Forderung nach rein geometrischer Ableitung von ξ aufgelöst. ξ ist
+Fundamentalparameter; fünf Plausibilitätsgründe deklariert (Quarte 4/3, fraktale
+Abweichung, Skalierung, Primfaktorstruktur, Musiktheorie).
+
+**R58 — A142:** Gravitationsquantisierung nicht gefordert. G = ξ²/(4m_char) ist
+intrinsisch aus der Torus-Geometrie; eine separate Quantengravitation entsteht nicht.
+
+**R59 — A130:** Higgs-EFT-Abweichung 2,3 % strukturell erklärt [S]: SI-Werte
+schemaabhängig (1-Loop), fraktale Korrekturen in v nicht trennbar.
+ξ_EFT/K_frak^(3/2) ≈ 1,330×10⁻⁴; Rest 0,3 %.
+
+**R60 — A160:** CHSH-Vorfaktor ξ/(2π) geometrisch hergeleitet [B]: 2π = Kreisumfang
+des Einheitskreises, natürliche Umrechnung Torus-Phase → Messwinkel. Kumulative
+Formel CHSH(n) = 2√2·exp(−ξ ln n/D_f) ebenfalls [B].
+
+### Schicht-Anhebungen in der A-Serie
+
+| Punkt | Vorher | Jetzt | Dokument |
+|-------|--------|-------|----------|
+| g_R = 0 (Chiralität) | [S] | [B] | A095 |
+| U(1)_EM aus Torus | offen | [B] | A192 |
+| SU(3)_C aus Torus | offen | [B] | A192 |
+| SU(2)_L aus Projektion | [S] | [B] | A095 |
+| CHSH-Vorfaktor ξ/(2π) | unbegründet | [B] | A160 |
+| Kum. CHSH-Formel | unbegründet | [B] | A160 |
+| T·E = 1 nativ | geliehen (Heisenberg) | [K] | A060 |
+| Higgs-EFT 2,3 % | offen | [S] | A130 |
+
+- Build: LuaLaTeX je 3 Durchläufe (TOC); 43 De + 43 En PDFs, 0 Fehler,
+  0 fehlende Glyphen. Alle PDFs in `A_Serie_Export/pdf/`, Quellen in
+  `A_Serie_Export/Sources/`, Prüfskripte in
+  `A_Serie_Export/python/A_Serie_Skripte/` (44 Skripte).

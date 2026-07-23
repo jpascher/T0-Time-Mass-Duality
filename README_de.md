@@ -60,7 +60,7 @@ was Eingabe ist, was folgt, ist immer klar deklariert.
 ## Die A-Serie — Kanonische Fassung
 
 Die **A-Serie** ist die sachgeordnete, vollständig auditierbare Fassung der FFGFT:
-43 Dokumente, jede Aussage mit expliziter Schichtmarkierung.
+45 Dokumente, jede Aussage mit expliziter Schichtmarkierung.
 
 | Marke | Bedeutung |
 |-------|-----------|
@@ -86,7 +86,7 @@ Block 3  A260–A267   Erweiterungen: Casimir, Skalenhierarchie, Dirac, Einheite
 - **A130** — Higgs-EFT-Abweichung 2,3 % strukturell erklärt
 - **A160** — CHSH-Vorfaktor ξ/(2π) geometrisch hergeleitet [B]
 
-Alle 43 Dokumente mit Prüfskripten:
+Alle 45 Dokumente mit Prüfskripten:
 **[A_Serie_Export/](A_Serie_Export/)** · **[A_SERIE_README.md](A_Serie_Export/A_SERIE_README.md)**
 
 ---

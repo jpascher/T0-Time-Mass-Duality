@@ -2,7 +2,7 @@
 
 **Autor:** Johann Pascher (ORCID: 0009-0000-6518-4064)  
 **Version:** 1.1 (2026-07-23)  
-**Zenodo DOI:** 10.5281/zenodo.21496379  
+**Zenodo DOI:** 10.5281/zenodo.20117635  
 **Sprachen:** Deutsch (kanonisch) · Englisch (parallele Fassung)
 
 ---
@@ -10,7 +10,7 @@
 ## Was ist die A-Serie?
 
 Die A-Serie ist die kanonische, sachgeordnete Fassung der FFGFT. Sie fasst mehr
-als 300 Altdokumente in 43 thematisch geordneten Dokumenten zusammen — ein Thema
+als 300 Altdokumente in 45 thematisch geordneten Dokumenten zusammen — ein Thema
 an einem Ort, jede Aussage mit Schichtstatus markiert, alle Korrekturen
 eingearbeitet.
 
@@ -24,19 +24,21 @@ will, was die Theorie heute behauptet.
 
 ```
 Sources/
-  ch/                  86 Quelltexte (43 De + 43 En, *_ch.tex)
+  ch/                  90 Quelltexte (45 De + 45 En, *_ch.tex)
   pri-end/              3 Preamble-Dateien
-  wr_standalone_A4/    86 Wrapper (43 De + 43 En, kompilierfertig)
-pdf/                   86 PDFs (43 De + 43 En)
+  wr_standalone_A4/    90 Wrapper (45 De + 45 En, kompilierfertig)
+pdf/                   90 PDFs (45 De + 45 En)
 python/
-  A_Serie_Skripte/     44 Prüfskripte (.py)
+  A_Serie_Skripte/     46 Prüfskripte (.py)
+  Dok190_Skripte/       1 Prüfskript zu Registereintrag R61
+Dok190_R61/             1 Eintragstext R61 für Dok. 190 (nach R60 einfügen)
 README.md
 CHANGELOG.md
 ```
 
 ---
 
-## Blockstruktur (43 Dokumente)
+## Blockstruktur (45 Dokumente)
 
 ```
 Block 0  A010–A095   Grundlage
@@ -66,6 +68,7 @@ Block 1  A100–A192   Sektoren
          A142 Gravitationsdynamik: Zeitfeld-Lagrange
          A145 Gravitationskonstante G = ξ²/(4m_char)
          A150 Quarks und Neutrinos
+         A155 Meson-Massen und Baryon-Kandidat (neu v1.1)
          A160 Quantenmechanik auf T⁴: Bell als Topologie
          A165 Bell-Tests und Hardware (IBM Heron r2, Mai 2026)
          A180 Information: Windungsquant Δw = 1
@@ -89,6 +92,7 @@ Block 3  A260–A267   Erweiterungen
          A265 Rotverschiebung: statisch, achromatisch
          A266 Einheitenprüfung und SI-Rückrechnung
          A267 Stipulation α = 1
+         A270 Z₃-Sektor-Struktur und Hadron-Massenkorrektur (neu v1.1)
 ```
 
 ---
@@ -101,16 +105,6 @@ Block 3  A260–A267   Erweiterungen
 | **[K]** | Kern — aus ξ hergeleitet, numerisch geprüft |
 | **[B]** | Brücke — algebraisch bewiesen |
 | **[S]** | Skizze — plausibel, nicht vollständig ausgeführt |
-
-Die Marker [K] und [B] sind interne Zustandsangaben des Anspruchs, keine
-externen Zertifizierungen. Keiner der beiden begründet für sich empirische
-Wahrheit, externe physikalische Gültigkeit oder eine eindeutige Ontologie.
-
-Der Anspruch der Serie lautet: **Jede berechenbare Aussage ist unabhängig
-ausführbar und nachprüfbar, und jede substanzielle Aussage trägt einen
-explizit deklarierten epistemischen Status.** *(Formulierung nach Stefaan
-Vossen, 2026 — ersetzt die frühere Kurzform „Alles ist überprüfbar",
-die mehr behauptete, als die Skripte leisten.)*
 
 ---
 
@@ -147,7 +141,25 @@ die mehr behauptete, als die Skripte leisten.)*
 
 ---
 
-## Neu in dieser Fassung (2026-07)
+## Neu in v1.1 (2026-07-23)
+
+- **A155** (neu): Meson-Massen und Baryon-Kandidat — additiver Ansatz mit
+  Geltungsbereichs-Beweis; Pion-Anker n_eff(π⁰)=37,79; GMOR-Prüfung;
+  [S]-Kandidaten B ≈ 8Λ·K_frak⁻³⁷ und geometrische Proton-Formel
+  m_p = (π³/12)·N_c(1+α_s)·e^(−3ξ/4)·Λ/2 (Δ=+0,21 %); Strukturfund
+  16π³/(π³/12) = 192 (Weyl-Verbindung zur Higgs-Formel)
+- **A270** (neu): Z₃-Sektor-Struktur — Bulk-Exponent 36
+  (K_frak⁻³⁶ ≈ 16/π², gestützt durch k*/100); Sektor-Tabelle
+  Lepton +0 / Meson +1 / Baryon +2 topologisch fixiert; Confinement als
+  Fixpunkt-Bedingung; Koide/A150-Konsistenz; Baryon-Stufe als Vorhersage
+- **R61** (Registereintrag für Dok. 190, Text in Dok190_R61/):
+  Altkorpus-005-Protonrechnung — Anker π²/2 statt m_μ; reparierte Zeile
+  schließt auf +0,05 %; Aufspaltung QZ·K_corr unterbestimmt
+- 3 neue Prüfskripte, alle Assertions bestanden
+
+---
+
+## Neu in v1.0 (2026-07-22)
 
 - **A095** (neu): g_R = 0 auf [B] angehoben; Torus-Projektor P₊
 - **A192** (neu): U(1) und SU(3) aus Torus-Topologie [B]
@@ -205,8 +217,8 @@ Preambles werden aus `../pri-end/` geladen.
 ## Zitieren
 
 ```
-Pascher, J. (2026). FFGFT A-Serie v1.1 (2026-07-23).
-Zenodo. https://doi.org/10.5281/zenodo.21496379
+Pascher, J. (2026). FFGFT A-Serie v1.0 (2026-07-22).
+Zenodo. https://doi.org/10.5281/zenodo.20117635
 ```
 
 ---
