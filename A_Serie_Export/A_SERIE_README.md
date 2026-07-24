@@ -155,6 +155,8 @@ Block 3  A260–A267   Erweiterungen
 - **R62** (Registereintrag für Dok. 190, Text in Dok190_R62/):
   Altkorpus-005-Protonrechnung — Anker π²/2 statt m_μ; reparierte Zeile
   schließt auf +0,05 %; Aufspaltung QZ·K_corr unterbestimmt
+- **A230** aktualisiert: offener Punkt „T̃·m=1 für Verbundsysteme"
+  aufgenommen (benannt von J. T. Guevara Calderón, mit Attribution)
 - 3 neue Prüfskripte, alle Assertions bestanden
 
 ---

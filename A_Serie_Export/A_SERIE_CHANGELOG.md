@@ -49,6 +49,12 @@ Alle wesentlichen Änderungen dieser Serie. Format: Datum · Dokument · Inhalt.
   Aufspaltung QZ·K_corr unterbestimmt; geometrischer Kandidat π/6 in
   A155 §Baryon-Kandidat. Quelldokumente nicht revidiert (vgl. R50).
 
+### Aktualisiert
+- **A230** (De+En): Neuer offener Punkt „Geltungsbereich von T̃·m=1 für
+  Verbundsysteme" (Subsystemgrenzen, Erhaltung unter Komposition nicht
+  formalisiert) — benannt von J. T. Guevara Calderón (Block-Review der
+  A-Serie v1.0, Juli 2026); mit Attribution aufgenommen.
+
 ### Prüfskripte (alle Assertions bestanden)
 - `python/A_Serie_Skripte/a155_meson.py` — Geltungsbereich, Pion-Anker,
   GMOR, 8Λ·K⁻³⁷-Kandidat, Proton-Kandidat, 192-Identität.
