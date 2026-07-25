@@ -1,0 +1,578 @@
+%% A282_Die_Rechenkugel_De.tex
+%% FFGFT A-Serie -- A282: Die Rechenkugel
+%% Autor: Johann Pascher  --  ORCID 0009-0000-6518-4064
+%% Sprache: Deutsch  --  Engine: LuaLaTeX
+%% Prüfskript: a282_rechenkugel.py (Checks 1--11)
+
+\documentclass[11pt,a4paper]{article}
+
+% ---- Engine: LuaLaTeX ----
+\usepackage{fontspec}
+\usepackage{mathtools}
+\usepackage{unicode-math}
+\usepackage{polyglossia}
+\setmainlanguage{german}
+
+\usepackage{microtype}
+\emergencystretch=3.5em
+\tolerance=2500
+\hbadness=3000
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage[a4paper,margin=2.6cm,headsep=1.1em,headheight=22pt]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{needspace}
+\usepackage{tocloft}
+
+% ---- Fonts ----
+\setmainfont{Inter}[
+  Scale=1.02,
+  Ligatures=TeX ]
+\setsansfont{Inter}[Scale=MatchLowercase,Ligatures=TeX]
+\setmonofont{JetBrains Mono}[Scale=0.88]
+\setmathfont{Libertinus Math}
+
+% ---- Colours ----
+\definecolor{accent}{HTML}{1F3A5F}
+\definecolor{accent2}{HTML}{6A4E2E}
+\definecolor{rulecol}{HTML}{B9C2CE}
+\definecolor{linknav}{HTML}{2C5F8A}
+\definecolor{linkcite}{HTML}{7A5C2E}
+
+% ---- Schichtmarkierungen (A-Serie) ----
+\definecolor{laySet}{HTML}{7A2E2E}
+\definecolor{layK}{HTML}{1D5C3A}
+\definecolor{layB}{HTML}{1F3A5F}
+\definecolor{layS}{HTML}{6A4E2E}
+\definecolor{layH}{HTML}{5A2E6A}
+
+\newcommand{\LS}{\textcolor{laySet}{\textbf{\footnotesize\textsf{[SETZUNG]}}}\,}
+\newcommand{\LK}{\textcolor{layK}{\textbf{\footnotesize\textsf{[K]}}}\,}
+\newcommand{\LB}{\textcolor{layB}{\textbf{\footnotesize\textsf{[B]}}}\,}
+\newcommand{\LSk}{\textcolor{layS}{\textbf{\footnotesize\textsf{[S]}}}\,}
+\newcommand{\LH}{\textcolor{layH}{\textbf{\footnotesize\textsf{[H]}}}\,}
+
+\newcommand{\pruef}[1]{{\small\itshape(Prüfskript, #1)}}
+
+% ---- Hyperref ----
+\usepackage[
+  colorlinks=true,
+  linkcolor=linknav,
+  citecolor=linkcite,
+  urlcolor=linknav,
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  pdfstartview=FitH ]{hyperref}
+\hypersetup{
+  pdftitle={Die Rechenkugel (A282)},
+  pdfauthor={Johann Pascher},
+  pdfsubject={Token-Rechnen als Grenzfall der Landauer-Buchhaltung},
+  pdfkeywords={Landauer, Abakus, Token, Phasenraum, Wärmebad, FFGFT, A282}
+}
+
+% ---- Section styling ----
+\titleformat{\section}
+  {\color{accent}\normalfont\Large\bfseries}
+  {\color{accent2}\thesection}{0.7em}{}
+\titleformat{\subsection}
+  {\color{accent}\normalfont\large\bfseries}
+  {\color{accent2}\thesubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{1.6\baselineskip}{0.7\baselineskip}
+\titlespacing*{\subsection}{0pt}{1.1\baselineskip}{0.4\baselineskip}
+
+% ---- Headers ----
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{rulecol}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[L]{\footnotesize\color{accent}\itshape FFGFT $\cdot$ A282 $\cdot$ Die Rechenkugel}
+\fancyhead[R]{\footnotesize\color{accent2}\thepage}
+
+% ---- TOC look ----
+\renewcommand{\cftsecfont}{\normalfont}
+\renewcommand{\cftsecpagefont}{\normalfont}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftbeforesecskip}{3pt}
+
+\setlength{\parskip}{0.35em}
+\setlength{\parindent}{0pt}
+\linespread{1.06}
+
+\begin{document}
+
+% ===================== TITEL =====================
+\begin{titlepage}
+\centering
+\vspace*{2.2cm}
+{\color{rulecol}\rule{0.5\textwidth}{0.6pt}}\\[1.4cm]
+{\color{accent}\Huge\bfseries Die Rechenkugel\par}
+\vspace{1.0cm}
+{\large\itshape Token-Rechnen als Grenzfall\\ der Landauer-Buchhaltung\par}
+\vspace{0.6cm}
+{\color{accent2}\rule{0.28\textwidth}{0.4pt}}\\[1.0cm]
+{\large FFGFT A-Serie $\cdot$ A282\par}
+\vspace{0.4cm}
+{\normalsize Drittes Stück zu A280 (Buchhaltung) und A281 (Textkritik)\par}
+\vfill
+{\large Johann Pascher\par}
+\vspace{0.3cm}
+{\footnotesize ORCID: 0009-0000-6518-4064\par}
+\vspace{0.2cm}
+{\footnotesize Juli 2026\par}
+\vspace{1.4cm}
+{\color{rulecol}\rule{0.5\textwidth}{0.6pt}}
+\vspace*{1.5cm}
+\end{titlepage}
+
+% ===================== TOC =====================
+\tableofcontents
+\thispagestyle{fancy}
+\clearpage
+
+% ===================== KURZFASSUNG =====================
+\begingroup\small\noindent
+\textbf{Kurzfassung.} Rechnen mit Marken --- Abakuskugeln, Muscheln, Münzen ---
+ist der Grenzfall, an dem sich Landauers Argument in seine zwei Hälften zerlegen
+lässt. Die \emph{Buchhaltung} gilt dort exakt und ist zum ersten Mal sichtbar: Der
+Vorrat, aus dem die Marken kommen und in den sie zurückfließen, ist ein Bad, auf
+das man zeigen kann. Die \emph{thermische Umrechnung} $\Delta S \to Q = T\Delta S$
+gilt dort nicht: Eine Abakuskugel kostet beim Verschieben rund $5\cdot10^{15}$ mal
+die Landauer-Grenze, ihr Positions-Bit trägt $4\cdot10^{-23}$ ihrer eigenen
+thermischen Entropie, und ihre Positionsbarriere liegt bei $3{,}6\cdot10^{15}\,kT$.
+Damit fällt der Token-Rechner unter genau den Vorbehalt, den Landauer selbst
+formuliert und die Rezeption fallen gelassen hat (A281): Die gezählten Zustände
+sind kein thermisches Ensemble. Daraus folgt eine Ordnung, die der Intuition
+zuwiderläuft: \textbf{Sichtbarkeit der Struktur und Bindekraft der Zahl laufen
+gegenläufig.} Je primitiver der Träger, desto klarer die Buchhaltung und desto
+irrelevanter die Schranke. Der Grenzübergang zurück ist stetig --- schrumpft die
+Marke, bis ihre Barriere gegen $kT$ geht, wird sie zur Brownschen Rechenkugel, und
+das ist Béruts Kolloid.
+\par\endgroup
+
+\bigskip
+
+\begingroup\small\noindent
+\textbf{Schichtmarkierungen.} \LS deklarierter Ausgangspunkt ---
+\LB algebraisch/mathematisch aus deklarierten Grundlagen abgeleitet ---
+\LK empirisch geprüft bzw.\ aus Primärquellen belegt ---
+\LSk Plausibilitätsskizze ---
+\LH offene Forschungsfrage.
+\par\endgroup
+
+\bigskip
+
+\begingroup\small\noindent
+\textbf{Prüfskript.} \texttt{a282\_rechenkugel.py} (Checks 1--11). Sämtliche
+Zahlen dieses Dokuments sind dort mit Assertions hinterlegt; die
+Parameterwahlen sind im Skript als Setzungen ausgewiesen und frei änderbar.
+\par\endgroup
+
+\bigskip
+
+% ===================== 1 =====================
+\section{Der Vorrat als sichtbares Bad}
+
+A280 arbeitet mit dem Weltmeer: Ein Glas wird eingeschüttet, das Volumen
+verschwindet nicht, aber niemand holt es zurück. Das Bild ist richtig und hat
+einen Nachteil --- man muss das Bad erschließen. Niemand sieht die $10^{23}$
+Freiheitsgrade, in die das Bit-Volumen kippt.
+
+\LS Beim Rechnen mit Marken ist das anders. Ein Abakus, ein Muschelhaufen, eine
+Kasse mit Münzen: Neben dem Arbeitsbereich liegt ein \textbf{Vorrat}. Aus ihm
+kommen die Marken, in ihn fließen sie zurück. Der Vorrat ist ein Bad, auf das man
+zeigen kann.
+
+\begin{center}
+\begin{minipage}{0.80\textwidth}
+\ttfamily\small
+\begin{tabbing}
+\ Arbeitsbereich\ \ \ \ \ \ \ \ \ \ \=\ Vorrat (Bad)\\[0.3em]
++-----------------+\>+-------------------------+\\
+|\ o\ o\ .\ o\ .\ .\ o\ .\ |\>|\ o o o o o o o o o o o o |\\
+|\ .\ o\ o\ .\ o\ o\ .\ o\ |\ \ ---\textgreater\ \>|\ o o o o o o o o o o o o |\\
++-----------------+\>+-------------------------+\\
+\ W = 2\^{}N Konfig.\>\ Marken erhalten, Lage gemischt
+\end{tabbing}
+\end{minipage}
+\end{center}
+
+\LB Die Struktur ist Zug um Zug dieselbe wie in A280:
+
+\begin{itemize}[leftmargin=1.4em,itemsep=0.3em]
+  \item \textbf{Gebiet.} Eine Marke auf Position links und dieselbe Marke auf
+        Position rechts sind zwei unterscheidbare Makro-Gebiete.
+  \item \textbf{Gebietsreduktion.} Das Zurücksetzen des Rechenbretts bildet alle
+        Konfigurationen auf eine ab --- alle Marken im Vorrat. Nicht-bijektiv,
+        genau wie $\{A,B\}\to Z$.
+  \item \textbf{Erhaltung.} Keine Marke verschwindet. Sie verteilen sich auf eine
+        Lage, aus der die vorherige Konfiguration nicht mehr ablesbar ist. Das ist
+        das Liouville-Analogon --- und es ist hier buchstäblich abzählbar.
+  \item \textbf{Inhaltsneutralität.} Der Vorrat weiß nicht, ob eine Marke einen
+        Schuldposten, eine Fünf oder gar nichts bedeutet hat. Er nimmt sie gleich
+        auf.
+\end{itemize}
+
+\LB Bargeld mit Münzen und einer Kasse ist dieselbe Figur, und die Doppelbedeutung
+des Wortes „Buchhaltung“ ist hier keine Metapher mehr: Kassenbestand und
+Phasenraum-Buchhaltung haben dieselbe Form. Der Tauschhandel ist der Fall ohne
+Marken --- dort gibt es keinen Vorrat und entsprechend keine Gebietsreduktion,
+sondern nur bijektiven Austausch.
+
+% ===================== 2 =====================
+\section{Die Buchhaltung gilt exakt}
+
+\LB Für $N$ Marken mit je zwei Positionen gilt vor dem Rücksetzen
+$W_{\text{vorher}} = 2^N$ und danach $W_{\text{nachher}} = 1$, also
+\begin{equation}
+  \frac{\Delta S}{k_B} \;=\; \ln\frac{W_{\text{vorher}}}{W_{\text{nachher}}}
+  \;=\; N \ln 2 .
+  \label{eq:kombinatorik}
+\end{equation}
+
+Das ist exakt und trägerunabhängig \pruef{Check 10}. Es gilt für Kugeln, für
+Muscheln, für Transistoren, für Kolloide. Nichts an
+Gleichung~\eqref{eq:kombinatorik} verlangt, dass die Marke klein, leicht oder
+thermisch bewegt sei. Die Zählung ist Kombinatorik über Gebiete --- genau das,
+was A280 als das Primäre ausweist.
+
+\LB Bis hierher ist der Token-Rechner ein vollständiges Modell der
+Landauer-Buchhaltung, und zwar ein besseres als jedes andere, weil man jeden
+Schritt sehen kann.
+
+% ===================== 3 =====================
+\section{Die Schranke gilt nicht}
+
+\LS Für die folgenden Zahlen werden gesetzt: Abakuskugel der Masse
+$m = 0{,}5$\,g, Verschiebeweg $d = 1$\,cm, Reibungszahl $\mu = 0{,}3$,
+Umgebungstemperatur $T = 300$\,K, molare Masse $100$\,g/mol und molare Entropie
+$50$\,J/(mol$\cdot$K) für einen Festkörper. Alle Setzungen sind im Prüfskript
+markiert und änderbar; die Größenordnungen hängen nicht an ihrer genauen Wahl.
+
+\LB \textbf{Die Arbeit je Kugelverschiebung.} Gleitreibung liefert
+$W = \mu\,m\,g\,d = 1{,}47\cdot10^{-5}$\,J \pruef{Check 2}. Die Landauer-Grenze
+bei 300\,K beträgt $k_B T \ln 2 = 2{,}87\cdot10^{-21}$\,J \pruef{Check 1}. Das
+Verhältnis ist
+\begin{equation}
+  \frac{W_{\text{Kugel}}}{k_B T \ln 2} \;\approx\; 5{,}1\cdot10^{15}
+  \qquad \text{\pruef{Check 3}} .
+\end{equation}
+
+\subsection{Das Skalenband}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Träger} & \textbf{Kosten je Schaltvorgang} & \textbf{Vielfaches von $k_BT\ln 2$} \\
+\midrule
+Kolloid, quasistatisch [B4][B5] & ${\sim}3\cdot10^{-21}$\,J & 1--10 \\
+CMOS-Transistor (A280) & $10^{-17}$--$10^{-16}$\,J & $3{,}5\cdot10^{3}$ -- $3{,}5\cdot10^{4}$ \\
+Abakuskugel & $1{,}5\cdot10^{-5}$\,J & $5{,}1\cdot10^{15}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\LB Zwischen Kugel und CMOS liegen rund \textbf{elf Dekaden} \pruef{Check 5}. Die
+Ordnung ist damit die umgekehrte der naheliegenden Vermutung: Landauer bindet
+nicht am primitiven Ende, sondern am kleinen. Je gröber der Träger, desto weiter
+liegt die Schranke unter dem tatsächlichen Aufwand.
+
+\subsection{Warum die Kugel nichts zahlt}
+
+Zwei Zahlen erklären den Befund, und beide betreffen die Kugel selbst, nicht die
+Buchhaltung.
+
+\LB \textbf{Erstens: Das Positions-Bit ist verschwindend gegen die Eigenentropie
+der Kugel.} Eine Kugel von 0,5\,g trägt bei den obigen Setzungen eine Entropie von
+$0{,}25$\,J/K, also $1{,}8\cdot10^{22}\,k_B$ \pruef{Check 6}. Das Positions-Bit
+trägt $\ln 2 = 0{,}69\,k_B$. Sein Anteil ist
+\begin{equation}
+  \frac{\ln 2}{S_{\text{Kugel}}/k_B} \;\approx\; 3{,}8\cdot10^{-23}
+  \qquad \text{\pruef{Check 7}} .
+\end{equation}
+Beim Verschieben ändert sich am thermisch zugänglichen Phasenraum praktisch
+nichts. Die Gebietsreduktion findet in einer Koordinate statt, die von den
+$10^{22}$ thermischen Freiheitsgraden der Kugel abgekoppelt ist.
+
+\LB \textbf{Zweitens: Die Positionsbarriere ist thermisch unüberwindlich.} Sie
+beträgt $3{,}6\cdot10^{15}\,k_BT$ \pruef{Check 8}. Eine Arrhenius-Lebensdauer
+$\propto \exp(3{,}6\cdot10^{15})$ ist numerisch nicht darstellbar. Es gibt keine
+thermische Umbesetzung zwischen „links“ und „rechts“, also auch kein
+Gleichgewichtsensemble über diese beiden Zustände.
+
+\LB Damit ist die Kugel der Extremfall der Zeile „emergente Zweiwertigkeit“ aus
+A280: Die Zwei ist eine Einteilung, die einem Quasikontinuum von $10^{22}$
+Mikrozuständen aufgelegt wird, und sie überlebt nicht deshalb, weil sie
+fundamental wäre, sondern weil die Barriere absurd hoch ist.
+
+% ===================== 4 =====================
+\section{Die zwei Hälften von Landauers Argument}
+\label{sec:zweihaelften}
+
+\LB Der Token-Rechner leistet damit etwas, was kein anderes Modell so sauber
+leistet: Er trennt die beiden Schritte, aus denen Landauers Argument besteht, und
+zeigt, dass sie unabhängig sind.
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.16\textwidth}p{0.36\textwidth}p{0.40\textwidth}@{}}
+\toprule
+\textbf{Schritt} & \textbf{Aussage} & \textbf{Voraussetzung} \\
+\midrule
+Kombinatorik & $\Delta S = k_B \ln(W_{\text{v}}/W_{\text{n}})$ &
+Gebiete sind unterscheidbar und abzählbar \\
+Umrechnung & $Q = T\,\Delta S$ &
+die gezählten Zustände sind thermisch besetzt \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\LB Der erste Schritt gilt für die Kugel exakt. Der zweite gilt für sie
+überhaupt nicht. Die übliche Darstellung führt beide in einem Zug aus und macht
+die zweite Voraussetzung damit unsichtbar. Erst wenn ein Träger sie maximal
+verletzt, tritt sie hervor.
+
+\begin{quote}
+\LB Landauers Schranke ist nicht die Aussage „Gebietsreduktion kostet“. Sie ist
+die Aussage „Gebietsreduktion \emph{in thermisch besetzten Zuständen} kostet“.
+Der Zusatz ist nicht kosmetisch --- er trägt die ganze Umrechnung.
+\end{quote}
+
+\LB Das schärft A280 an einer Stelle nach, an der es genauer sein muss. A280
+§6 verlangt für klassische Systeme Unterscheidbarkeit \emph{oberhalb} der
+thermischen Auflösungsgrenze. Das ist die Bedingung dafür, dass zwei Gebiete als
+zwei zählen. Es ist \emph{nicht} die Bedingung dafür, dass ihre Reduktion Wärme
+kostet --- dafür braucht es zusätzlich, dass die Barriere \emph{nicht} beliebig
+weit oberhalb $k_BT$ liegt. Beide Bedingungen zeigen in entgegengesetzte
+Richtungen, und dazwischen liegt das schmale Band, in dem Landauer bindet.
+
+% ===================== 5 =====================
+\section{Landauers eigener Vorbehalt}
+
+\LK Der Befund ist keine Neuentdeckung, sondern der Extremfall einer
+Einschränkung, die Landauer 1961 selbst formuliert hat: Seine Rücksetz-Operation
+wurde auf ein thermisches Gleichgewichts-Ensemble angewandt; für nicht
+thermalisierte Information gilt die Rechnung nicht unmittelbar [B1]. A281
+dokumentiert die Passage und weist nach, dass die Rezeption sie fallen gelassen
+hat.
+
+\LB Beim Abakus ist der Vorbehalt maximal verletzt, und zwar auf zwei Weisen
+zugleich:
+
+\begin{enumerate}[leftmargin=1.6em,itemsep=0.3em]
+  \item \textbf{Kein thermisches Ensemble.} Die Verteilung über „links“ und
+        „rechts“ entsteht nicht durch thermische Besetzung, sondern durch die
+        Hand, die die Kugel gesetzt hat.
+  \item \textbf{Vollständiges Wissen.} Wer die Kugeln gesetzt hat, kennt die
+        Konfiguration. In der Rückkopplungsschranke (A281) ist damit
+        $I = \ln 2$ pro Marke und
+        \begin{equation}
+          Q_{\min} \;=\; k_B T\,(\ln 2 - I) \;=\; 0
+          \qquad \text{\pruef{Check 11}} .
+        \end{equation}
+\end{enumerate}
+
+\LB Thermodynamisch kostet das Rücksetzen eines bekannten Abakus also nichts. Was
+es kostet, ist Reibung --- und die ist eine Ingenieursgröße ohne untere
+Naturschranke, beliebig verkleinerbar durch bessere Lager.
+
+% ===================== 6 =====================
+\section{Der Grenzübergang: die Brownsche Rechenkugel}
+
+\LB Der Übergang zurück in Landauers Geltungsbereich ist stetig und lässt sich
+ausrechnen. Setzt man die Positionsbarriere gleich $k_BT$, so folgt für die
+kritische Markenmasse
+\begin{equation}
+  \mu\,m\,g\,d \;=\; k_B T
+  \quad\Longrightarrow\quad
+  m_{\text{krit}} \;=\; \frac{k_B T}{\mu\,g\,d} \;\approx\; 1{,}4\cdot10^{-19}\,\text{kg}
+  \qquad \text{\pruef{Check 9}} .
+\end{equation}
+
+\LK Zum Vergleich: Ein Silika-Kolloid von 2\,\textmu m Durchmesser wiegt
+$8{,}4\cdot10^{-15}$\,kg, also rund $6\cdot10^{4}$ mal mehr \pruef{Check 9}. Es
+hält seine Position aber nicht durch Reibung, sondern durch eine optische Falle,
+und deren Barrierenhöhe ist auf wenige $k_BT$ einstellbar. Genau das macht es zur
+Brownschen Rechenkugel --- und genau deshalb ist Béruts Aufbau [B4] der einzige,
+in dem die Schranke tatsächlich bindet.
+
+\begin{quote}
+\LB Béruts Kolloid ist kein Modell des Bits. Es ist eine Abakuskugel, die klein
+genug ist, dass das Bad sie schiebt.
+\end{quote}
+
+\LB Damit schließt sich die Reihe: Muschel, Münze, Abakuskugel, Transistor,
+Kolloid. Es ist eine Skala, kein Sprung. Was sich entlang der Skala ändert, ist
+nicht die Buchhaltung --- sie ist überall dieselbe --- sondern das Verhältnis der
+Positionsbarriere zu $k_BT$.
+
+% ===================== 7 =====================
+\section{Zwei Achsen, gegenläufig}
+
+\LB Daraus folgt die Ordnung, die dem Dokument seinen Ertrag gibt:
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Träger} & \textbf{Sichtbarkeit der Struktur} & \textbf{Bindekraft der Schranke} \\
+\midrule
+Abakus, Muscheln, Münzen & vollständig (Bad zeigbar) & keine ($10^{15}$ darüber) \\
+CMOS & gering (Bad ist das Gitter) & schwach ($10^{4}$ darüber) \\
+Kolloid in optischer Falle & keine (Bad nicht trennbar) & voll (Faktor 1--10) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{quote}
+\LB Auf der primitivsten Ebene ist die Buchhaltung maximal sichtbar und die
+Schranke maximal irrelevant. Sichtbarkeit der Struktur und Bindekraft der Zahl
+sind zwei verschiedene Achsen, und sie laufen gegenläufig.
+\end{quote}
+
+\LB Das erklärt zugleich, warum die Anschauung in dieser Sache regelmäßig in die
+Irre führt. Wer sich Landauer plausibel machen will, greift zum groben Bild ---
+zur Kugel, zur Schublade, zum Glas Wasser --- und landet damit genau dort, wo die
+Schranke nichts mehr bedeutet. Das Bild trägt die Struktur und verliert die Zahl.
+
+% ===================== 8 =====================
+\section{Der Markenvorrat als eigene Kostenkategorie}
+
+\LB Ein Punkt bleibt, den die thermodynamische Buchhaltung nicht erfasst und der
+am Token-Rechner besonders deutlich wird: \textbf{Ohne Marken kann nicht gerechnet
+werden.} Der Vorrat ist eine erschöpfbare Ressource. Ein Abakus mit zu wenigen
+Kugeln rechnet nicht langsamer, sondern gar nicht.
+
+\LB Das ist eine \emph{Materialschranke}, keine thermodynamische. Sie hat keine
+Untergrenze in $k_BT$, sie hat eine Untergrenze in der Stückzahl. Sie ist
+verwandt mit dem, was A280 §7.3 aufmacht --- der Rechner zahlt dafür, dass er
+existiert, nicht nur dafür, dass er rechnet ---, aber sie ist nicht dasselbe: Dort
+geht es um einen laufenden Entropiestrom, hier um einen stehenden Bestand.
+
+\LSk Beim Halbleiter fällt diese Kategorie aus dem Blick, weil der Vorrat in
+Silizium eingegossen ist: Die Gebiete werden bei der Fertigung angelegt und nicht
+im Betrieb entnommen. Der Bestand ist da, also wird er nicht gezählt. Am Abakus
+ist er sichtbar, weil man ihn aufbrauchen kann.
+
+\LH \textbf{Offene Frage.} Ob sich Bestand und Strom in einer gemeinsamen
+Buchhaltung führen lassen --- Marken\-vorrat und Entropiestrom als zwei Bilanzen
+eines Rechners --- ist offen. Die Frage ist dieselbe wie am Ende von A281, von
+der Materialseite gestellt.
+
+% ===================== 9 =====================
+\section{Einordnung im Korpus}
+
+\LB Die drei Stücke verhalten sich zueinander so:
+
+\begin{itemize}[leftmargin=1.4em,itemsep=0.3em]
+  \item \textbf{A280} führt die Buchhaltung: Gebiet, Gebietsreduktion, Liouville,
+        Bad, Schranke. Physikalischer Kern.
+  \item \textbf{A281} führt die Textkritik: was Landauer 1961 tatsächlich beweist,
+        sein eigener Ensemble-Vorbehalt, die Rezeptionsgeschichte, die Sprache.
+  \item \textbf{A282} führt den Grenzfall vor, an dem beide Befunde zusammenlaufen
+        und sichtbar werden: Der Token-Rechner erfüllt A280s Buchhaltung exakt und
+        verletzt A281s Ensemble-Bedingung maximal.
+\end{itemize}
+
+\LB Die Wörterbuch-Zuordnung aus A281 §1.1 gilt unverändert. In der Sprache dieses
+Dokuments: Marke $=$ Träger $=$ Gebiet; Vorrat $=$ Bad; Rücksetzen des
+Rechenbretts $=$ Träger-Operation $=$ Gebietsreduktion.
+
+\LB \textbf{FFGFT-Berührung: keine.} Wie A280 und A281 lebt auch dieses Dokument
+auf der Ebene der statistischen Mechanik; das $\xi$-Schema wird nicht berührt.
+
+% ===================== 10 =====================
+\section{Schichtstatus-Zusammenfassung}
+
+\begin{center}
+\small
+\begin{longtable}{@{}p{0.72\textwidth}l@{}}
+\toprule
+\textbf{Aussage} & \textbf{Status} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Aussage} & \textbf{Status} \\
+\midrule
+\endhead
+Der Markenvorrat ist ein zeigbares Bad-Analogon & \LS \\
+Parameter der Abakuskugel (Masse, Weg, Reibung, $T$) & \LS \\
+Rücksetzen des Rechenbretts ist eine nicht-bijektive Gebietsabbildung & \LB \\
+Marken bleiben erhalten (Liouville-Analogon) & \LB \\
+$\Delta S/k_B = N\ln 2$, trägerunabhängig exakt & \LB \\
+$k_BT\ln 2 = 2{,}87\cdot10^{-21}$\,J bei 300\,K & \LK \\
+Kugelverschiebung $1{,}47\cdot10^{-5}$\,J & \LB \\
+Kugel $\approx 5{,}1\cdot10^{15}\times$ Landauer & \LB \\
+Skalenband Kolloid / CMOS / Kugel & \LK \\
+Elf Dekaden zwischen Kugel und CMOS & \LB \\
+Eigenentropie der Kugel $1{,}8\cdot10^{22}\,k_B$ & \LB \\
+Positions-Bit $= 3{,}8\cdot10^{-23}$ der Eigenentropie & \LB \\
+Positionsbarriere $3{,}6\cdot10^{15}\,k_BT$ & \LB \\
+Kombinatorik und thermische Umrechnung sind unabhängig & \LB \\
+Die Umrechnung setzt thermisch besetzte Zustände voraus & \LB \\
+Landauers Ensemble-Vorbehalt (Originalstelle) & \LK \\
+Bekannter Abakus: $I=\ln 2$, also $Q_{\min}=0$ & \LB \\
+Kritische Markenmasse $1{,}4\cdot10^{-19}$\,kg & \LB \\
+Silika-Kolloid 2\,\textmu m: $8{,}4\cdot10^{-15}$\,kg & \LK \\
+Béruts Kolloid als Brownsche Rechenkugel & \LB \\
+Sichtbarkeit und Bindekraft laufen gegenläufig & \LB \\
+Markenvorrat als Materialschranke & \LB \\
+Warum die Kategorie beim Halbleiter aus dem Blick fällt & \LSk \\
+Gemeinsame Bilanz von Bestand und Strom & \LH \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\textbf{Bilanz:} 15$\times$ \LB $\cdot$ 4$\times$ \LK $\cdot$ 2$\times$ \LS
+$\cdot$ 1$\times$ \LSk $\cdot$ 1$\times$ \LH $=$ 23 Einträge.
+
+% ===================== BELEGE =====================
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Belege}
+\section*{Belege}
+
+\begingroup
+\small
+\begin{description}[leftmargin=3.2em,style=sameline,itemsep=0.3em]
+
+\item[{[B1]}] R. Landauer, \emph{Irreversibility and Heat Generation in the
+Computing Process}, IBM J.\ Res.\ Dev.\ \textbf{5}, 183 (1961).
+
+\item[{[B2]}] Liouville-Theorem: Standardresultat der Hamiltonschen Mechanik;
+z.\,B.\ Landau/Lifschitz, \emph{Mechanik}, §46.
+
+\item[{[B3]}] C.~H. Bennett, \emph{The Thermodynamics of Computation --- a
+Review}, Int.\ J.\ Theor.\ Phys.\ \textbf{21}, 905 (1982).
+
+\item[{[B4]}] A. Bérut et al., \emph{Experimental verification of Landauer's
+principle}, Nature \textbf{483}, 187 (2012).
+
+\item[{[B5]}] Y. Jun, M. Gavrilov, J. Bechhoefer, \emph{High-Precision Test of
+Landauer's Principle in a Feedback Trap}, Phys.\ Rev.\ Lett.\ \textbf{113},
+190601 (2014).
+
+\item[{[B6]}] T. Sagawa und M. Ueda, \emph{Nonequilibrium Thermodynamics of
+Feedback Control}, Phys.\ Rev.\ E \textbf{85}, 021104 (2012).
+
+\item[{[B7]}] Semiklassische Zustandszählung $\Gamma/h^f$ und Entropie von
+Festkörpern: Standard; z.\,B.\ Landau/Lifschitz, \emph{Statistische Physik}, §7
+und §64.
+
+\item[{[B8]}] CODATA-Werte 2018; $k_B = 1{,}380649\cdot10^{-23}$\,J/K seit der
+SI-Revision 2019 exakt definiert.
+
+\end{description}
+\endgroup
+
+\vspace{1em}
+\noindent
+{\small\itshape Die Zahlenwerte dieses Dokuments stammen aus dem Prüfskript
+\texttt{a282\_rechenkugel.py}; die dort gesetzten Parameter sind Modellwahlen und
+keine Messwerte. Die Größenordnungen sind gegen ihre Variation unempfindlich.}
+
+\end{document}

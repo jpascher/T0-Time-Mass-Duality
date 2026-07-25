@@ -1,0 +1,1256 @@
+%% A280_Landauer_Phasenraum_Buchhaltung_De.tex
+%% FFGFT A-Serie -- A280: Landauer und die Phasenraum-Buchhaltung
+%% Autor: Johann Pascher  --  ORCID 0009-0000-6518-4064
+%% Sprache: Deutsch  --  Engine: LuaLaTeX
+%% Quelle: Arbeitsnotiz "Landauer_Phasenraum_Buchhaltung_final.md", 24. Juli 2026
+
+\documentclass[11pt,a4paper]{article}
+
+% ---- Engine: LuaLaTeX ----
+\usepackage{fontspec}
+\usepackage{mathtools}
+\usepackage{unicode-math}
+\usepackage{polyglossia}
+\setmainlanguage{german}
+
+\usepackage{microtype}
+\emergencystretch=3.5em
+\tolerance=2500
+\hbadness=3000
+
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage[a4paper,margin=2.6cm,headsep=1.1em,headheight=22pt]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{needspace}
+\usepackage{tocloft}
+
+% ---- Fonts ----
+\setmainfont{Inter}[
+  Scale=1.02,
+  Ligatures=TeX ]
+\setsansfont{Inter}[Scale=MatchLowercase,Ligatures=TeX]
+\setmonofont{JetBrains Mono}[Scale=0.88]
+\setmathfont{Libertinus Math}
+
+% ---- Colours ----
+\definecolor{accent}{HTML}{1F3A5F}     % deep slate blue
+\definecolor{accent2}{HTML}{6A4E2E}    % muted bronze
+\definecolor{rulecol}{HTML}{B9C2CE}
+\definecolor{linknav}{HTML}{2C5F8A}
+\definecolor{linkcite}{HTML}{7A5C2E}
+
+% ---- Schichtmarkierungen (A-Serie) ----
+\definecolor{laySet}{HTML}{7A2E2E}
+\definecolor{layK}{HTML}{1D5C3A}
+\definecolor{layB}{HTML}{1F3A5F}
+\definecolor{layS}{HTML}{6A4E2E}
+\definecolor{layH}{HTML}{5A2E6A}
+
+\newcommand{\LS}{\textcolor{laySet}{\textbf{\footnotesize\textsf{[SETZUNG]}}}\,}
+\newcommand{\LK}{\textcolor{layK}{\textbf{\footnotesize\textsf{[K]}}}\,}
+\newcommand{\LB}{\textcolor{layB}{\textbf{\footnotesize\textsf{[B]}}}\,}
+\newcommand{\LSk}{\textcolor{layS}{\textbf{\footnotesize\textsf{[S]}}}\,}
+\newcommand{\LH}{\textcolor{layH}{\textbf{\footnotesize\textsf{[H]}}}\,}
+
+\newcommand{\pruef}[1]{{\small\itshape(Prüfskript, #1)}}
+
+% ---- Hyperref ----
+\usepackage[
+  colorlinks=true,
+  linkcolor=linknav,
+  citecolor=linkcite,
+  urlcolor=linknav,
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  pdfstartview=FitH ]{hyperref}
+\hypersetup{
+  pdftitle={Landauer und die Phasenraum-Buchhaltung (A280)},
+  pdfauthor={Johann Pascher},
+  pdfsubject={Statistische Mechanik --- Landauer-Grenze, Phasenraum, Gebietsreduktion},
+  pdfkeywords={Landauer, Liouville, Phasenraum, Entropie, Gebietsreduktion, FFGFT, A280}
+}
+
+% ---- Section styling ----
+\titleformat{\section}
+  {\color{accent}\normalfont\Large\bfseries}
+  {\color{accent2}\thesection}{0.7em}{}
+\titleformat{\subsection}
+  {\color{accent}\normalfont\large\bfseries}
+  {\color{accent2}\thesubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{1.6\baselineskip}{0.7\baselineskip}
+\titlespacing*{\subsection}{0pt}{1.1\baselineskip}{0.4\baselineskip}
+
+% ---- Headers ----
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{rulecol}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[L]{\footnotesize\color{accent}\itshape FFGFT $\cdot$ A280 $\cdot$ Landauer und die Phasenraum-Buchhaltung}
+\fancyhead[R]{\footnotesize\color{accent2}\thepage}
+
+% ---- TOC look ----
+\renewcommand{\cftsecfont}{\normalfont}
+\renewcommand{\cftsecpagefont}{\normalfont}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftbeforesecskip}{3pt}
+
+\setlength{\parskip}{0.35em}
+\setlength{\parindent}{0pt}
+\linespread{1.06}
+
+\begin{document}
+
+% ===================== TITEL =====================
+\begin{titlepage}
+\centering
+\vspace*{2.2cm}
+{\color{rulecol}\rule{0.5\textwidth}{0.6pt}}\\[1.4cm]
+{\color{accent}\Huge\bfseries Landauer und die\\[0.3em] Phasenraum-Buchhaltung\par}
+\vspace{1.0cm}
+{\large\itshape Warum Gebietsreduktion prinzipiell Wärme kostet\\ --- und warum der Inhalt egal ist\par}
+\vspace{0.6cm}
+{\color{accent2}\rule{0.28\textwidth}{0.4pt}}\\[1.0cm]
+{\large FFGFT A-Serie $\cdot$ A280\par}
+\vspace{0.5cm}
+{\normalsize Standalone-Fassung mit Schichtmarkierungen, Prüfskript-Bezug\\ und vollständiger Quellenliste\par}
+\vfill
+{\large Johann Pascher\par}
+\vspace{0.3cm}
+{\footnotesize ORCID: 0009-0000-6518-4064\par}
+\vspace{0.2cm}
+{\footnotesize Juli 2026\par}
+\vspace{1.4cm}
+{\color{rulecol}\rule{0.5\textwidth}{0.6pt}}
+\vspace*{1.5cm}
+\end{titlepage}
+
+% ===================== TOC =====================
+\tableofcontents
+\thispagestyle{fancy}
+\clearpage
+
+% ===================== KURZFASSUNG =====================
+\begingroup\small\noindent
+\textbf{Kurzfassung.} Die Landauer-Grenze wird hier nicht als Aussage über
+\emph{Information} entwickelt, sondern als Aussage über \emph{Gebiete im
+Phasenraum}. Ein physikalisches System belegt ein Gebiet; eine Abbildung, die
+mehrere Ausgangsgebiete auf ein Zielgebiet reduziert, verkleinert dieses
+Volumen; der Satz von Liouville verbietet Volumenschrumpfung im abgeschlossenen
+System; also muss ein Bad das Volumen übernehmen, und der Preis ist Wärme
+$Q \ge k_B T \ln(W_{\text{v}}/W_{\text{n}})$ --- mit $\ln 2$ nur als
+Binär-Spezialfall. Gezählt wird nach Unterscheidbarkeit (Orthogonalität), nicht
+nach Energie; die absolute Grund-Diskretisierung liefert $h^f$. Daraus folgt
+unmittelbar die Inhaltsneutralität: die Thermodynamik zählt Gebiete und liest
+sie nicht. Drei Ebenen werden strikt getrennt --- Konstruktion (Ingenieur),
+Zustandsübergang (Takt), Beschreibung (Programm) ---, und daraus folgt, dass ein
+realer Rechner nicht diskret Bits löscht, sondern einen kontinuierlichen
+Entropiestrom trägt (DRAM-Refresh, Qubit-Dekohärenz). Der epistemische Vorbehalt
+wird ausdrücklich gebucht: nicht messbar heißt nicht nicht vorhanden --- Landauer
+gilt wegen der Mechanik (Liouville), nicht wegen Unwissenheit; die
+Irreversibilität ist statistisch, nicht ontologisch absolut. \emph{Berührung mit
+dem $\xi$-Schema der FFGFT: keine} --- die Landauer-Buchhaltung lebt auf der
+Ebene der statistischen Mechanik (eigene Ebene, eigene Buchhaltung).
+\par\endgroup
+
+\bigskip
+
+\begingroup\small\noindent
+\textbf{Schichtmarkierungen.} \LS deklarierter Ausgangspunkt ---
+\LB algebraisch/mathematisch aus deklarierten Grundlagen abgeleitet ---
+\LK empirisch geprüft bzw.\ aus Primärquellen belegt ---
+\LSk Plausibilitätsskizze ---
+\LH offene Forschungsfrage (Erweiterung des A-Serien-Schemas, siehe
+Anhang~\ref{sec:korr}, Punkt~6).
+\par\endgroup
+
+\bigskip
+
+\begingroup\small\noindent
+\textbf{Prüfskript.} \texttt{landauer\_pruefskript.py} (Checks 1--10). Alle
+numerischen Aussagen dieses Dokuments sind dort mit Assertions hinterlegt.
+Check~7: Zustandszahl im Kolloid-Gebiet; Check~8: Analogfall mit deklariertem
+$\delta x$.
+\par\endgroup
+
+\bigskip
+
+% ===================== 1 =====================
+\section{Das Gebiet kommt zuerst}
+
+Zwei Gläser stehen auf einem Tisch --- Gebiet A und Gebiet B. Daneben das
+Weltmeer. Man schüttet eines der Gläser in das Meer. Das Glasvolumen verschwindet
+nicht --- es verteilt sich auf 1,4 Milliarden Kubikkilometer. Dieses Bild trägt
+das ganze Dokument: Es gibt keine verschwindende Information, keine vernichteten
+Bits --- nur eine Gebietsreduktion, die einen messbaren Preis hat.
+
+\LS \textbf{Ein physikalisches System belegt ein Gebiet im Phasenraum.} Dieses
+Gebiet hat eine Größe --- messbar in Einheiten von $h^f$ (Abschnitt~\ref{sec:zaehlbasis}).
+Es existiert unabhängig davon, wie man es benennt, einteilt oder beschreibt. Das
+ist der physikalische Ausgangspunkt. Alles andere kommt danach.
+
+\LB \textbf{Beschreibungen kommen von außen.} Wenn man entscheidet, das Gebiet in
+zwei Teilgebiete einzuteilen und diese „A“ und „B“ zu nennen und das Zielgebiet
+„Z“, hat man eine Beschreibung der Gebietsreduktion eingeführt. Nennt man sie
+stattdessen „0“, „1“ und „0“ (traditionelle Notation), entsteht die Verwechslung
+mit logischen Bits --- diese Konvention verdeckt, dass „0“ sowohl Ausgangsgebiet
+als auch Zielgebiet bezeichnet, und suggeriert einen Informationsinhalt, wo keiner
+ist. Wenn man feiner einteilt --- in 1000 Zonen ---, hat man ${\sim}10$ logische
+Bit eingeführt. Wenn man nur eine Zahl zwischen 0 und 1 zuordnet, hat man einen
+analogen Wert eingeführt. Die Physik erzwingt keine dieser Entscheidungen. Das
+Gebiet ist in allen Fällen dasselbe physikalische Gebiet.
+
+Die Begriffe „Bit“, „Byte“, „Qubit“, „analoger Wert“ sind Bezeichnungen für
+Beschreibungsentscheidungen --- nicht für physikalische Objekte. Sie teilen das
+Gebiet ein, sie erschaffen es nicht.
+
+\subsection{Das Landauer-Bit ist Hardware --- nicht Information}
+
+\LB Das wird regelmäßig verwechselt. Klarstellung in einem Absatz: Ein
+Landauer-Bit ist ein physikalisches Gebiet mit zwei stabilen Makrozuständen ---
+ein Transistor, ein Kondensator, eine Leiterbahn, die hoch oder niedrig liegt. Ein
+Bus-Bit ist dasselbe: ein physikalisches Gebiet mit zwei stabilen Makrozuständen,
+eingebettet in eine parallele Hardware-Architektur. Eine Speicherzelle ist
+dasselbe. Die drei sind strukturell identisch. Die Thermodynamik behandelt alle
+drei gleich:
+\[
+  Q \;\ge\; k_B\,T\,\ln\!\left(\frac{W_{A+B}}{W_Z}\right)
+\]
+--- unabhängig davon, ob das Gebiet „Landauer-Bit“, „Bus-Bit“ oder
+„Speicherzelle“ heißt.
+
+\textbf{Die Hardware ist festgelegt, bevor gerechnet wird. Sie ändert sich nicht
+durch das, was man mit ihr rechnet.} Ein 64-Bit-Bus hat 64 physikalische Gebiete
+--- vor der Rechnung, während der Rechnung, nach der Rechnung. Was die Rechnung
+mit diesen Gebieten macht --- welche Abbildungen sie ausführt, welche Gebiete auf
+welche Zielgebiete reduziert werden --- ist eine logische Beschreibung dieser
+physikalischen Vorgänge. Die Beschreibung existiert nicht in der Hardware; sie ist
+eine externe Interpretation.
+
+Der Informationsgehalt eines Bits --- ob es „wahr“ oder „falsch“ bedeutet, ob es
+zu einem korrekten Rechenschritt gehört, ob es überhaupt gelesen wird --- ist eine
+Entscheidung auf der Beschreibungsebene. Die Thermodynamik kennt diese Ebene
+nicht. Sie kennt nur: Gebiet A und Gebiet B existieren; nach der Gebietsreduktion
+existiert Zielgebiet Z; $W_Z \le W_{A+B}$; das Bad nimmt den Unterschied auf.
+
+\subsection{Drei Ebenen --- strikt getrennt}
+
+\LB \textbf{Ebene 1 --- Konstruktion.} Der Ingenieur entscheidet beim Chip-Design,
+welche Gebietsoperationen existieren --- bijektiv oder nicht-bijektiv. Das ist in
+Silizium gegossen, unveränderlich während des Betriebs, vor jeder Rechnung. Diese
+Entscheidung legt die thermodynamische Kostenstruktur fest --- nicht die Rechnung,
+nicht das Programm.
+
+\LB \textbf{Ebene 2 --- Zustandsübergang im laufenden Betrieb.} Sobald der Rechner
+läuft, finden Zustandsübergänge taktweise statt --- gleichmäßig, mit der
+Taktfrequenz, unabhängig davon, was berechnet wird. Landauer-Kosten fallen dabei
+nur bei \textbf{nicht-bijektiven} Gebietsabbildungen an --- wenn ein Bauteil durch
+seinen physikalischen Aufbau mehrere Eingangsgebiete auf ein Zielgebiet Z
+reduziert. Das ist durch die Hardware-Architektur festgelegt, nicht durch eine
+Rechenoperation. Ein Transistor, der von Gebiet A nach Gebiet B kippt, führt eine
+bijektive Abbildung aus --- kein Volumenverlust, keine Landauer-Kosten. Was die
+Beschreibungsebene danach mit dem Zustand des Bauteils macht, ist thermodynamisch
+irrelevant.
+
+\textbf{Die Landauer-Kosten laufen mit der Taktfrequenz, praktisch konstant,
+solange der Rechner läuft} --- weil die nicht-bijektiven Gebietsabbildungen durch
+den Konstrukteur festgelegt sind und mit jedem Taktzyklus anfallen. Die
+CPU-Auslastung sagt wenig darüber aus: Sie misst, wie viele Taktzyklen für
+Berechnungen auf der Beschreibungsebene genutzt werden --- aber im Leerlauf laufen
+die Taktübergänge weiterhin durch. Der thermodynamische Unterschied zwischen hoher
+und niedriger Auslastung ist gering, solange keine physikalischen Teile
+tatsächlich abgeschaltet werden. Clock Gating, Power Gating --- das sind
+Hardware-Entscheidungen auf Ebene~1, keine Programm-Entscheidungen. Die Hardware
+bestimmt --- nicht das Programm.
+
+\LB \textbf{Ebene 3 --- Beschreibung.} Das Programm, die Rechnung, eine
+KI-Steuerung können entscheiden, welche Hardware genutzt wird --- Teile
+abschalten, Routen wählen, bestimmen, dass für ein bestimmtes Ergebnis die volle
+Bitbreite nicht benötigt wird. Das hat nichts mit Landauer zu tun. Es ist
+Ressourcenmanagement auf der Beschreibungsebene. Die thermodynamischen Kosten der
+genutzten Hardware fallen trotzdem an --- festgelegt durch Konstruktion und
+Schaltmoment, unabhängig davon, was die Beschreibungsebene mit den Ergebnissen
+macht.
+
+\subsection{Wie viel steckt in einem physikalischen Gebiet?}
+
+\LK Ein Kolloid-Teilchen in einer 1-\textmu m-Falle enthält physikalisch rund
+$\mathbf{7{,}9\cdot10^{9}}$ \textbf{orthogonale Quantenzustände}
+\pruef{Check 7}. Nennt man grob zwei Zonen „links“ und „rechts“, beschreibt man
+dieses Gebiet mit 1 logischem Bit. Teilt man es in 1000 Zonen, beschreibt man
+dasselbe Gebiet mit ${\sim}10$ logischen Bit. Das physikalische Gebiet ist in
+beiden Fällen identisch --- die Beschreibungstiefe ist eine Wahl des Beobachters.
+
+\LB \textbf{Die Kosten des Löschens hängen am Gebiet, nicht an der Beschreibung.}
+Die Formel lautet
+\[
+  \boxed{\;Q \;\ge\; k_B\,T\,\ln\!\left(\frac{W_{\text{vorher}}}{W_{\text{nachher}}}\right)\;}
+\]
+$W_{\text{vorher}}$ und $W_{\text{nachher}}$ sind physikalische Gebietsgrößen in
+Einheiten von $h^f$. Wie man dieses Verhältnis benennt --- ob als „1 Bit löschen“
+oder „Faktor 2 Reduktion“ --- ändert nichts an der Physik.
+
+\LK \textbf{Der analoge Fall zeigt das besonders klar --- und zugleich seine
+Komplexität.} Wie viele unterscheidbare Zustände ein analoges Signal enthält,
+hängt von mehreren Faktoren ab, die alle physikalisch sind: von der Bandbreite
+$B$, der Temperatur $T$ und dem Widerstand $R$ (Johnson-Nyquist-Rauschen,
+$U_{\text{rms}} = \sqrt{4 k_B T R B}$ [B20]), von der Empfindlichkeit der
+Messtechnik, vom Signal-Rausch-Abstand des konkreten Systems und von weiteren
+externen Störquellen. Es gibt keine universelle Auflösungsgrenze für analoge
+Signale --- sie ist eine Systemeigenschaft, keine Naturkonstante.
+
+Was sich aber allgemein sagen lässt: Wenn die Auflösungsgrenze durch das
+thermische Rauschen des Bades selbst gesetzt wird (der physikalisch tiefste Fall),
+dann gilt das bereits in Abschnitt~\ref{sec:zaehlbasis} formulierte Prinzip:
+Dasselbe Bad, das die Löschkosten kassiert, begrenzt die Stufung des analogen
+Signals. Die Gebietsanzahl $W = L/\delta x$ und die Löschkosten $k_B T \ln W$
+skalieren mit derselben Temperaturgröße --- die Buchhaltung ist selbstkonsistent.
+Wie viele logische Bit man dem analogen Gebiet zuschreibt, ist davon unabhängig
+und bleibt eine Beschreibungsentscheidung \pruef{Check 8: Illustrationsbeispiel
+mit deklariertem $\delta x$}.
+
+\subsection{Shannon und Boltzmann sind verschiedene Buchführungen}
+
+\LB [B18][B19] Shannon beschreibt, wie viel Unsicherheit eine \emph{Beschreibung}
+trägt: $H = -\sum_i p_i \log_2 p_i$ --- eine Größe über Beschreibungen. Boltzmann
+beschreibt, wie groß ein \emph{physikalisches Gebiet} ist: $S = k_B \ln W$ ---
+eine Größe über Gebiete. Die beiden sind nur dann identisch, wenn man die
+Beschreibung exakt auf die physikalischen Mikrozustände abbildet und diese
+gleichverteilt sind. In jedem anderen Fall --- grobe Einteilung, ungleiche
+Besetzung, kontinuierliche Systeme --- sind sie verschiedene Dinge mit
+verschiedenen Einheiten.
+
+\LK \textbf{Was Landauer 1961 wirklich sagte} [B1]: Er schrieb ausdrücklich
+„logically irreversible“ --- logisch irreversibel, nicht physikalisch
+irreversibel. Er meinte: eine Abbildung, bei der verschiedene logische
+Eingangszustände auf denselben logischen Ausgangszustand führen. Das ist eine
+Aussage über Beschreibungen.
+
+\LB \textbf{Und deshalb ist sie für sich genommen keine physikalische Bedingung.}
+Hinreichend für die Wärmeproduktion ist allein die \textbf{Nicht-Bijektivität der
+Gebietsabbildung}: dass mehrere Ausgangsgebiete auf ein kleineres Zielgebiet
+fallen. „Operation“ ist an dieser Stelle das falsche Wort --- eine Operation ist
+eine Beschreibung, und Beschreibungen kosten nichts. Mit der Gebietsabbildung
+fällt die logische Irreversibilität nur unter einer zusätzlichen, ausdrücklich zu
+deklarierenden Realisierungsannahme zusammen: dass die logischen Marken auf
+disjunkte physikalische Gebiete abgebildet sind und beim Übergang kein Gebiet
+mitgeführt wird. Ist diese Annahme verletzt, trägt die logische Irreversibilität
+nichts --- Bennett [B3] führt jede logisch irreversible Funktion als Folge
+bijektiver Gebietsabbildungen aus, ohne Untergrenze
+(Abschnitt~\ref{sec:gebietsop}). Und umgekehrt kostet jede nicht-bijektive
+Gebietsabbildung, ob sie überhaupt als Operation beschrieben wird oder nicht.
+Jeder physikalisch irreversible Prozess produziert Wärme, unabhängig davon, ob er
+als „logisch irreversibel“ beschrieben wird; das ist genau der Punkt von
+Abschnitt~\ref{sec:immer}. Die Physik unter der Beschreibung kann sehr viel
+reicher sein als die Beschreibung selbst.
+
+\LB \textbf{Der Fehler der Standarddarstellung} ist damit: Sie behandelt die
+Beschreibungseinheit --- das Bit --- so, als wäre sie eine physikalische
+Mindestgröße. Das ist sie nicht. Eine physikalische Mindestgröße gibt es: $h^f$.
+Aber sie hat nichts mit Bits zu tun. Das Gebiet kommt zuerst; wie viele Bits man
+ihm zuschreibt, ist eine nachträgliche Entscheidung.
+
+% ===================== 2 =====================
+\section{Die eine Idee, aus der alles folgt}
+
+Ein Bit ist physikalisch: zwei \textbf{unterscheidbare} Zustände eines Systems.
+Zwei Mulden für ein Teilchen, zwei Magnetisierungsrichtungen, zwei Spannungspegel.
+Entscheidend ist nur: Das System kann in Zustand „0“ oder „1“ sein, und man kann
+beide auseinanderhalten.
+
+\textbf{Gebietsreduktion: Egal, in welchem Gebiet --- A oder B --- das System
+vorher war, nachher ist es im Zielgebiet Z.} Das Zielgebiet Z ist frei wählbar;
+was zählt, ist ausschließlich das Verhältnis $W_{A+B}/W_Z$.
+
+\begin{center}
+\begin{minipage}{0.42\textwidth}
+\ttfamily\small
+\begin{tabbing}
+\ \ \ \ A \ ---+\\
+\ \ \ \ \ \ \ \ \ \ +--->\ \ Z\\
+\ \ \ \ B \ ---+
+\end{tabbing}
+\end{minipage}
+\end{center}
+
+Zwei Gebiete werden auf eines reduziert --- das Zielgebiet Z. Diese Abbildung ist
+\textbf{nicht umkehrbar}: Wer nur das Zielgebiet kennt, kann nicht rekonstruieren,
+in welchem Ausgangsgebiet das System war. Genau das --- und nichts anderes ---
+erzeugt die Kosten (Abschnitt~\ref{sec:liouville}).
+
+% ===================== 3 =====================
+\section{Was „Phasenraum“ hier bedeutet}
+
+Der Phasenraum ist der Raum aller möglichen Mikrozustände (alle Orte und Impulse
+aller Teilchen). Ein Makrozustand wie „Gebiet A“ ist darin kein Punkt, sondern ein
+\textbf{Gebiet}: viele Mikrozustände (thermisches Zittern in der linken Mulde ---
+jede Zitterlage zählt als „0“).
+
+\LS Die Boltzmann-Entropie misst dieses Gebiet:
+\[
+  S \;=\; k_B \ln W
+\]
+$W$ = Phasenraumvolumen des Gebiets. Entropie ist hier ein \textbf{Maß für die
+Größe des Aufenthaltsgebiets} --- nichts Mystisches.
+
+\begin{center}
+\begin{minipage}{0.75\textwidth}
+\ttfamily\small
+\begin{tabbing}
+Phasenraum vorher:\ \ \ \ \ \ \ \=Phasenraum nachher:\\[0.3em]
++-------+-------+\>+-------+-------+\\
+|\ \ \ \ \ \ \ |\ \ \ \ \ \ \ |\>|\ \ \ \ \ \ \ |\ \ \ \ \ \ \ |\\
+|\ \ A\ \ \ \ |\ \ B\ \ \ \ |\ \ -->\ \>|\ \ Z\ \ \ \ | leer\ \ |\\
+|\ \ \ \ \ \ \ |\ \ \ \ \ \ \ |\>|\ \ \ \ \ \ \ |\ \ \ \ \ \ \ |\\
++-------+-------+\>+-------+-------+\\
+\ Volumen: 2W0 (A+B)\>\ Volumen: W0 (nur Z)
+\end{tabbing}
+\end{minipage}
+\end{center}
+
+\LB Löschen halbiert das zugängliche Volumen:
+\[
+  \Delta S_{\text{Gebiet}} \;=\; -\,k_B \ln 2
+\]
+Reine Buchhaltung über Gebietsgrößen --- kein Modell, keine Hardware.
+(Verallgemeinerung auf $N$ Stufen und Nicht-Gleichverteilung:
+Abschnitt~\ref{sec:zaehlbasis}.)
+
+% ===================== 4 =====================
+\section{Warum das nicht gratis geht: Liouville}
+\label{sec:liouville}
+
+Die mikroskopische Dynamik (klassisch Hamiltonsch, quantenmechanisch unitär) hat
+eine harte Eigenschaft, den \textbf{Satz von Liouville} [B2]:
+
+\begin{quote}
+\LB Die Zeitentwicklung eines abgeschlossenen Systems \textbf{erhält das
+Phasenraumvolumen}. Verformen, verschieben, verwirbeln --- ja. Schrumpfen --- nie.
+\end{quote}
+
+Präzisierung: Liouville gilt exakt nur für das abgeschlossene System \emph{ohne}
+Bad. Für das Teilsystem „Bit“ allein --- nach Kopplung ans Bad --- gilt es nicht
+mehr. Abgeschlossen ist nur das Gesamtsystem Bit${}+{}$Bad; für dieses bleibt das
+Gesamtvolumen erhalten, während das Bit-Teilgebiet sich auf Kosten des Bad-Gebiets
+verkleinern darf.
+
+Anschaulich: Der Phasenraumfluss ist eine \textbf{inkompressible Flüssigkeit}. Ein
+Tintenklecks im Wasser lässt sich beliebig verzerren; sein Volumen bleibt.
+
+Damit schnappt die Falle zu:
+\begin{itemize}[leftmargin=1.4em,itemsep=0.2em]
+  \item Löschen \textbf{verlangt}: $2W_0 \to W_0$ (Halbierung, Abschnitt~3).
+  \item Liouville \textbf{verbietet}: Volumenschrumpfung im abgeschlossenen System.
+\end{itemize}
+
+\LB \textbf{Folgerung: Ein abgeschlossenes System kann nicht löschen.} Kein
+Ingenieursproblem --- ein Satz. Der einzige Ausweg: Das System darf nicht
+abgeschlossen sein. Das Volumen muss irgendwohin --- ins Bad
+(Abschnitt~\ref{sec:bad}).
+
+% ===================== 5 =====================
+\section{Das Bad als Volumen-Empfänger}
+\label{sec:bad}
+
+Koppelt man das Bit an ein Wärmebad, gilt Liouville für das \textbf{Gesamtsystem}
+Bit${}+{}$Bad. Soll das Bit-Gebiet auf die Hälfte schrumpfen
+(Gleichverteilungsfall: beide Gebiete gleich groß), muss das Bad-Gebiet sich
+mindestens \textbf{verdoppeln}. Im allgemeinen Fall gilt
+$\Delta S_{\text{Bad}} \ge -\Delta S_{\text{Bit}}$ (zweiter Hauptsatz); die
+Verallgemeinerung auf $\ln(W_{\text{vorher}}/W_{\text{nachher}})$ folgt in
+Abschnitt~\ref{sec:zaehlbasis}:
+\[
+  \Delta S_{\text{Bad}} \;\ge\; +\,k_B \ln 2
+\]
+
+Ein Bad bei Temperatur $T$ vergrößert sein Gebiet durch Energieaufnahme; die
+Grundbeziehung $dS = \delta Q/T$ übersetzt das in Wärme:
+\[
+  \LB\quad Q \;\ge\; T\,\Delta S_{\text{Bad}} \;=\; k_B\,T \ln 2
+\]
+
+Das ist die Landauer-Grenze [B1][B3]:
+
+\begin{quote}
+\textbf{Liouville (Volumen bleibt) $+$ Buchhaltung (Bit-Gebiet halbiert)
+$\Rightarrow$ Bad-Gebiet verdoppelt $\Rightarrow$ Wärme $\ge k_B T \ln 2$ ins
+Bad.}
+\end{quote}
+
+Bei 300\,K: $k_B T \ln 2 \approx 2{,}87\cdot10^{-21}$\,J pro Bit
+\pruef{Check 1}.
+
+Direkt ablesbar die zwei Bedingungen:
+\begin{enumerate}[leftmargin=1.6em,itemsep=0.2em]
+  \item \textbf{Ohne Bad keine Löschung} --- es gibt keinen anderen
+        Volumen-Empfänger (Abschnitt~\ref{sec:liouville}).
+  \item \textbf{Gleichheit nur quasistatisch} --- jede endliche Geschwindigkeit
+        erzeugt Zusatzdissipation $W \approx k_B T \ln 2 + B/\tau$ [B4][B5]
+        (Abschnitt~\ref{sec:experimente}).
+\end{enumerate}
+
+% ===================== 6 =====================
+\section{Warum eigentlich 2? --- Die Zählbasis}
+\label{sec:zaehlbasis}
+
+Die Binarität ist \textbf{Konvention, nicht Physik}. Allgemein:
+\[
+  Q \;\ge\; k_B\,T\,\ln\!\left(\frac{W_{\text{vorher}}}{W_{\text{nachher}}}\right)
+\]
+--- ein Verhältnis von Gebietsgrößen. $N$ Stufen auf eine gelöscht: $\ln N$
+\pruef{Check 4}. Die $\ln 2$ ist der Informatik-Spezialfall.
+
+\LB \textbf{Was zählt als Stufe? Nicht die Energie.} Energieniveaus taugen nicht
+als Zählbasis: Sie können entartet sein oder ungleiche Sprünge haben, ohne dass
+sich die Zählung ändert. Das Kriterium ist \textbf{Unterscheidbarkeit}: Zwei
+Zustände zählen getrennt, wenn sie im Prinzip fehlerfrei auseinanderzuhalten sind.
+Für \textbf{Quantensysteme} heißt das Orthogonalität im Hilbertraum; für
+\textbf{klassische Systeme} heißt es Unterscheidbarkeit innerhalb der durch das
+Bad gesetzten thermischen Auflösungsgrenze --- d.\,h.\ der Abstand der Zustände
+muss größer sein als die thermischen Fluktuationen. Ein Bit kann in zwei
+entarteten Zuständen gleicher Energie liegen --- ideal sogar: Halten kostet dann
+nichts, nur Vergessen. Niveau-Abstände wirken nur indirekt, über die thermischen
+Besetzungswahrscheinlichkeiten. Die eigentliche Währung ist daher die Gibbs-Form
+[B6]
+\[
+  S \;=\; -\,k_B \sum_i p_i \ln p_i
+\]
+mit $\ln N$ als Spezialfall der Gleichverteilung. Ungleich gestufte, ungleich
+besetzte Systeme tragen automatisch weniger Entropie \pruef{Checks 5--6}.
+
+\LB \textbf{Die Grund-Diskretisierung existiert --- und ist $h^f$.} Klassisch hat
+das Phasenraumvolumen Einheiten; $W$ ist nur bis auf eine willkürliche Zellgröße
+definiert. Die Buchhaltung stört das nicht, weil nur Differenzen eingehen --- die
+Zelle kürzt sich. Die Quantenmechanik setzt die Zelle absolut: Die Zahl
+orthogonaler Zustände in einem Gebiet $\Gamma$ eines Systems mit $f$
+Freiheitsgraden ist
+\[
+  N_{\max} \;=\; \Gamma / h^f \qquad \text{[B7]}
+\]
+\pruef{Check 7: Kolloid in 1-\textmu m-Falle, rund $7{,}9\cdot10^{9}$ orthogonale
+Zustände --- die „2“ des Experiments ist grob gewählt, nicht fundamental}.
+
+\subsection{Fundamentale vs.\ emergente Zweiwertigkeit}
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.20\textwidth}p{0.30\textwidth}p{0.38\textwidth}@{}}
+\toprule
+ & \textbf{Spin-½} & \textbf{Kolloid in Doppelmulde} \\
+\midrule
+Herkunft der 2 & fundamental: Hilbertraum $\mathbb{C}^2$ & emergent: 2 metastabile Makro-Gebiete \\
+Gültigkeit & immer & nur solange Barriere $\gg k_B T$ auf der Prozesszeitskala \\
+darunter & nichts --- keine feinere Stufung & Quasikontinuum von Mikrozuständen \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Der quasi-analoge Fall}
+
+Ein Wert im Bereich $L$ mit Auflösung $\delta x$ trägt $\ln(L/\delta x)$ Stufen;
+Gebietsreduktion kostet $k_B T \ln(L/\delta x)$ \pruef{Check 8}. $\delta x$ ist
+nicht frei: Das Badrauschen setzt es --- dasselbe Bad, das die Löschkosten
+kassiert, begrenzt die Stufung. Kein Analog-Trick führt an der Grenze vorbei.
+
+% ===================== 7 =====================
+\section{Warum der Inhalt egal ist}
+\label{sec:inhalt}
+
+Die gesamte Rechnung hat an \textbf{keiner Stelle} gefragt, welche Bedeutung
+Gebiet A oder B trägt, ob das Bit in einer korrekten Rechnung steht oder nicht, ob
+es als „wahr“ oder „falsch“ interpretiert wird. Eingegangen ist ausschließlich:
+\textbf{wie viele} unterscheidbare Gebiete vorher, \textbf{wie viele} nachher.
+
+Die Thermodynamik zählt Gebiete; sie liest sie nicht. Gebiet A und Gebiet B sind
+physikalisch gleichwertig --- die Physik kennt keine bevorzugte Richtung, und das
+Zielgebiet Z ist frei wählbar. Welche Bedeutung man ihnen gibt („wahr“/„falsch“,
+0/1, hoch/niedrig), ist eine Entscheidung außerhalb der Thermodynamik:
+
+\begin{quote}
+\LB \textbf{Gebietsreduktion kostet für jede Belegung identisch --- unabhängig
+davon, wie man die Gebiete interpretiert.} Es gibt keinen thermodynamischen
+Inhalts- oder Wahrheitsdetektor.
+\end{quote}
+
+In derselben Sprache: Eine nicht-terminierende Berechnung dissipiert unbegrenzt
+Energie und hat dabei keinen Wahrheitswert. Energieumsatz und semantische
+Gültigkeit liegen auf verschiedenen Ebenen --- Phasenraum-Buchhaltung hier,
+Repräsentation dort. Kategorientrennung: physikalische Gültigkeit
+(Hardware-Ebene) vs.\ repräsentationale Gültigkeit (Inhaltsebene).
+
+\subsection{Hardware und Rechenoperation sind verschiedene Dinge}
+
+Ein grundlegender Denkfehler in der Standarddarstellung von Landauer: Die Hardware
+wird als Abbild der Rechenoperation behandelt --- als ob der physikalische Apparat
+nur dann existiert und nur dann thermodynamisch wirksam ist, wenn gerade eine
+logische Operation ausgeführt wird. Das stimmt nicht.
+
+\LB \textbf{Die Hardware ist nicht die Rechenoperation.} Ein 64-Bit-Prozessor ist
+ein physikalisches System mit 64-Bit-Zustandsraum. Dieser Zustandsraum existiert
+unabhängig davon, ob gerade eine sinnvolle Operation läuft, ob das Ergebnis 1 Bit
+oder 64 Bit braucht, welche Bedeutung das Ergebnis trägt, ob jemand das Ergebnis
+liest oder nicht. Die Hardware ist keine Abstraktion --- sie ist Silizium,
+Leitungen, Felder, Kondensatoren, die kontinuierlich mit ihrer Umgebung
+wechselwirken.
+
+\LB \textbf{Die Rechenoperation ist eine Abstraktion über der Hardware.} Sie
+beschreibt, was der Programmierer oder Mathematiker sieht --- Eingabe, Ausgabe,
+Funktion. Die Hardware kennt diese Abstraktion nicht. Sie kennt nur
+Zustandsübergänge, Ladungsverschiebungen, Wärmeabgaben.
+
+\textbf{Die Konsequenz für Landauer.} Wenn man fragt „was kostet das Löschen eines
+Bits“, nimmt man die Abstraktion als Ausgangspunkt und sucht die thermodynamischen
+Kosten der logischen Operation. Das ist eine legitime Frage --- aber sie verfehlt
+die Physik des realen Systems. Der reale Rechner produziert Entropie
+kontinuierlich, unabhängig von der logischen Abstraktion, die gerade auf ihm
+läuft.
+
+\subsection{Dieselbe Aussage von der Hardware-Seite}
+
+Die Aussage aus Abschnitt~\ref{sec:inhalt} --- die Thermodynamik liest keinen
+Inhalt --- lässt sich unabhängig von der Buchhaltung direkt aus der physikalischen
+Struktur des Rechners herleiten.
+
+\LB \textbf{Der Rechner schrumpft nicht.} Ein 64-Bit-Prozessor hat vor und nach
+jeder Operation gleich viele Transistoren, gleich viele Leitungen, gleich viele
+Freiheitsgrade. Der Phasenraum der Hardware bleibt konstant --- $2^{64}$ mögliche
+Zustände vorher, $2^{64}$ nachher. Das Ergebnis braucht vielleicht 1 Bit; der
+Apparat, der es produziert hat, ist trotzdem gleich groß geblieben.
+
+\LB \textbf{Was wirklich ins Bad geht, ist die Korrelation.} Die logische
+Abbildung ist viele-zu-eins: viele verschiedene Eingangszustände landen auf
+demselben Ausgang. Die 63 weggeworfenen Bits sind logisch weg, aber physikalisch
+steckt ihre Spur noch irgendwo in den Transistorzuständen --- nur nicht mehr aus
+dem Ergebnis rekonstruierbar. Genau diese Nicht-Rekonstruierbarkeit, die
+Korrelation zwischen Eingang und Ausgang, die im Ergebnis nicht mehr steckt, geht
+als Wärme ans Gitter. Nicht das Silizium, sondern das Vergessen der Korrelation.
+
+\LB \textbf{Der Vergessensvorgang ist inhaltsneutral.} Ein Prozessor, der
+$2+2=4$ berechnet, und einer, der $2+2=5$ berechnet, schalten dieselbe Anzahl
+Transistoren, werfen dieselbe Bitbreite weg und zahlen dieselbe thermodynamische
+Rechnung ans Bad. Die Physik unterscheidet die beiden nicht. Ein Ergebnis in
+Gebiet A kostet dasselbe wie eines in Gebiet B --- die Physik unterscheidet die
+Gebiete nicht.
+
+Das ist keine neue Behauptung --- es ist eine Herleitung von unten. Landauers
+Abstraktion „Gebietsreduktion kostet, Inhalt egal“ folgt aus der konkreten Physik
+des Rechners, ohne Formel. Die Buchhaltung in Abschnitt~\ref{sec:inhalt} und die
+Hardware-Struktur hier kommen auf verschiedenen Wegen zur selben Aussage.
+
+\subsection{Der Rechner rechnet immer}
+\label{sec:immer}
+
+Ein physikalischer Rechner hört nicht auf zu rechnen, wenn er auf ein Ergebnis
+wartet. Die Taktfrequenz läuft, die Transistoren schalten, das Netzteil liefert
+Strom --- kontinuierlich, unabhängig davon, ob gerade „nützliche“ Arbeit
+passiert. Ein Idle-Prozessor rechnet Leerschleifen. Ein wartender Server schickt
+Keepalive-Pakete. Ein Betriebssystem pollt Interrupts. Es gibt keinen Zustand
+„Rechner rechnet nicht“, solange er eingeschaltet ist.
+
+Das bedeutet: Der Vergessensvorgang läuft \textbf{immer}. Die thermodynamische
+Rechnung --- Korrelationsverlust, Wärme ans Gitter --- hört nicht auf, egal ob das
+Ergebnis gebraucht wird oder nicht, egal welche Bedeutung es trägt.
+
+Das verschärft Landauers Formulierung zur Irrelevanz in der Praxis. Er isoliert
+einen einzelnen diskreten Gebietsreduktions-Vorgang --- „Gebietsreduktion kostet
+$k_B T \ln 2$“. Die Realität ist ein \textbf{kontinuierlicher Strom} von
+Zustandsübergängen, Korrelationsverlusten und Wärmeabgaben, drei Milliarden Mal
+pro Sekunde bei einem modernen Prozessor, ohne Pause.
+
+\textbf{Konkretes Beispiel: Dynamisches RAM.} Ein DRAM-Bit ist ein Kondensator,
+der Ladung hält. Aber Kondensatoren verlieren Ladung durch Leckströme ---
+kontinuierlich, unaufhaltsam. Deshalb muss jede DRAM-Zelle alle 32--64
+Millisekunden \textbf{aufgefrischt} werden: Der Refresh-Vorgang liest den Zustand
+und schreibt ihn zurück. Das passiert taktweise, automatisch, für jede der
+Milliarden Zellen --- egal ob die Daten gerade gebraucht werden, egal welche
+Bedeutung sie tragen, egal ob das Programm gerade schläft.
+
+Das ist kein Nebeneffekt --- das ist die physikalische Natur des Systems. Der
+DRAM-Refresh ist \textbf{kein} Gebietsreduktions-Vorgang im Landauer-Sinne; er ist
+ein Erhaltungsvorgang, und seine direkten Kosten sind primär Ingenieurskosten
+(Leckströme, Umladung). Aber der Grund, warum er überhaupt stattfinden muss, ist
+thermodynamisch: Der Kondensator koppelt permanent ans Wärmebad. Die Ladung ---
+das physikalische Gebiet „Bit geladen“ --- wird durch die thermische Kopplung
+kontinuierlich in Richtung des gemeinsamen Gleichgewichts gedrängt. Das ist eine
+permanente, unaufhörliche Wechselwirkung mit dem Bad, unabhängig davon, ob gerade
+eine logische Operation stattfindet. Der Refresh ist die technische Antwort auf
+diese thermodynamische Wirklichkeit --- er renormiert das Gebiet zurück, weil das
+Bad es permanent verwischt.
+
+Aber das ist noch nicht der ganze Punkt. Der Refresh \textbf{selbst} ist keine
+passive Reaktion --- er erfordert aktive Rechenarbeit: Ein Zähler muss laufen, die
+Adresse der nächsten zu refreshenden Zeile muss berechnet werden, ein
+Timing-Signal muss erzeugt werden, der Speicherbus muss gesperrt werden, der
+Leseverstärker muss aktiviert werden. Das ist echte Rechenarbeit --- mit echten
+Zustandsübergängen, echten Korrelationsverlusten, echtem Entropiestrom ins Bad.
+Und der Speicher-Controller gibt dafür in einer Bank mit 8192 Zeilen und 64\,ms
+Refresh-Intervall rund $1{,}3\cdot10^{5}$ Refresh-Befehle pro Sekunde aus --- ohne
+Unterbrechung, völlig unabhängig davon, ob das laufende Programm gerade etwas
+berechnet oder schläft.
+
+Das ist der eigentliche Punkt: Nicht der Refresh-Vorgang selbst ist
+Landauer-relevant im Sinne einzelner Bit-Löschungen, sondern die Tatsache, dass
+\textbf{der Rechner laufend rechnen muss, um seinen eigenen Zustand zu erhalten}
+--- Refresh-Zähler, Takt-Generatoren, Watchdog-Timer,
+Betriebssystem-Scheduler, Speicher-Controller. Das ist eine permanente
+Eigenberechnung, die nichts mit dem Nutzprogramm zu tun hat. Die Thermodynamik
+dieser Eigenberechnung beschreibt Landauer nicht, weil er einzelne Operationen
+betrachtete; es ist eine zusätzliche, fundamentalere Kostenkategorie:
+\textbf{Der Rechner zahlt Entropie dafür, dass er existiert --- nicht nur dafür,
+dass er rechnet.}
+
+\LK Eine DRAM-Zelle, die eine Stunde lang „nichts tut“, hat in dieser Stunde
+trotzdem rund $1{,}12\cdot10^{5}$ Refresh-Zyklen durchlaufen (bei 32\,ms
+Intervall; bei 64\,ms rund $5{,}6\cdot10^{4}$) und dabei kontinuierlich Entropie
+produziert. Die gespeicherte Information war die ganze Zeit dieselbe --- aber die
+thermodynamische Rechnung lief durch.
+
+Das ist der physikalische Rechner, wie er wirklich ist: kein Automat, der diskret
+Bits löscht, sondern ein System, das kontinuierlich gegen den thermodynamischen
+Zerfall ankämpft und dafür bezahlt. Die Frage lautet daher nicht: Wie viel kostet
+die Gebietsreduktion? Sondern: Wie groß ist der kontinuierliche Entropiestrom
+eines physikalischen Rechners als Funktion seiner Taktfrequenz, seiner Bitbreite
+und seiner logischen Irreversibilität --- unabhängig davon, was er gerade
+berechnet?
+
+Das ist eine offene Frage. Fredkin, Toffoli und Landauer selbst haben darüber
+nachgedacht [B3][B13]. Die Standarddarstellung setzt immer noch am einzelnen
+Bit-Gebietsreduktions-Vorgang an, weil das handhabbar ist. Das ist eine
+Abstraktion, die die Physik des realen Rechners verfehlt: Der Rechner ist kein
+Automat, der auf Befehl einzelne Bits löscht --- er ist ein physikalisches System,
+das kontinuierlich Entropie produziert, ob man hinschaut oder nicht, ob das
+Ergebnis stimmt oder nicht.
+
+\subsection{Quantencomputer: Dekohärenz als kontinuierlicher Entropiestrom}
+
+Beim Quantencomputer gilt dasselbe Prinzip wie beim DRAM --- der physikalische
+Apparat kämpft kontinuierlich gegen den thermodynamischen Zerfall --- aber die
+Physik ist unerbittlicher.
+
+\textbf{Was Dekohärenz ist.} Ein Qubit in Superposition hat eine Phasenbeziehung
+zu seiner Umgebung. Jede kleinste Wechselwirkung --- ein Phonon, ein Photon, eine
+Magnetfeldfluktuation --- verändert diese Phase. Das Qubit verliert seine
+Quantennatur nicht, weil Information vernichtet wird, sondern weil die Korrelation
+zwischen Qubit und Umgebung ins Bad verteilt wird. Wieder Liouville: Das Volumen
+bleibt erhalten, aber es verteilt sich auf Qubit-plus-Umgebung-Korrelationen, die
+niemand mehr kontrolliert.
+
+\textbf{Die Verschärfung gegenüber DRAM.} Beim klassischen DRAM kann man
+refreshen --- Zustand lesen, zurückschreiben, kostet thermodynamisch,
+funktioniert, weil 0 und 1 robust sind. Beim Qubit ist das prinzipiell unmöglich:
+Eine Messung kollabiert die Superposition. Einen unbekannten Quantenzustand kann
+man weder kopieren (No-Cloning-Theorem [B14]) noch messen, ohne ihn zu verändern.
+Refresh im klassischen Sinne gibt es nicht.
+
+Was es stattdessen gibt: \textbf{Quantenfehlerkorrektur} [B15]. Aber die ist
+thermodynamisch noch teurer als DRAM-Refresh --- sie braucht 100--1000
+physikalische Qubits pro logischem Qubit, kontinuierliche Syndrom-Messungen und
+klassische Korrekturoperationen. Das alles läuft durch, taktweise, für jedes
+logische Qubit, auch wenn gerade keine Gate-Operation stattfindet.
+
+\LK \textbf{Dekohärenzzeit als DRAM-Analogon.} Ein supraleitendes Qubit hat
+typisch $T_2 \sim 100\,\text{\textmu s}$ [B16] --- danach ist die
+Phaseninformation im Bad verteilt. Das ist rund 640-mal kürzer als ein
+DRAM-Refresh-Intervall von 64\,ms, aber qualitativ anders: Der DRAM verliert
+Information langsam und stetig, das Qubit verliert sie exponentiell schnell, und
+die „Information“, die verloren geht, ist nicht ein Bit, sondern eine
+kontinuierliche komplexe Amplitude über einem hochdimensionalen Hilbertraum (in
+der Praxis durch $h^f$ begrenzt, Abschnitt~\ref{sec:zaehlbasis}).
+
+\textbf{Der Entropiestrom beim Quantencomputer.} Beim klassischen Rechner ist der
+kontinuierliche Entropiestrom durch Taktfrequenz und Bitbreite bestimmt. Beim
+Quantencomputer kommt ein zusätzlicher Term dazu: der dekohärenz-induzierte
+Entropiestrom, der proportional zur Anzahl der Qubits und umgekehrt proportional
+zu $T_2$ läuft --- unabhängig davon, ob gerade ein Gate ausgeführt wird oder
+nicht. Ein wartender Quantencomputer produziert Entropie aggressiver als ein
+wartender klassischer Rechner, weil die Quantennatur selbst gegen die Umgebung
+ankämpft.
+
+\textbf{Dekohärenz ist keine Gebietsreduktion im Landauer-Sinne} --- sie ist ein
+Verlust von Quantenkorrelationen. Aber thermodynamisch zahlt sie denselben Preis:
+Die Korrelation geht ins Bad, das Bad nimmt das Volumen auf. Der entscheidende
+Unterschied zum DRAM: Beim DRAM kann man die Information zurückgewinnen
+(Refresh), beim Qubit nicht (No-Cloning-Theorem [B14]). Dekohärenz und
+Landauer-Löschen sind verschiedene Prozesse mit demselben thermodynamischen
+Mechanismus.
+
+\textbf{Inhaltsneutral wie immer.} Dekohärenz unterscheidet nicht zwischen einem
+Qubit, das einen bestimmten Quantenzustand trägt, und einem, das einen anderen
+trägt. Sie zerstört beide gleich schnell. Der thermodynamische Preis des
+Quanten-Rechnens hängt nicht am Inhalt --- er hängt an der Physik des Systems.
+
+\LH \textbf{Offene Frage.} Beim klassischen Rechner ist der kontinuierliche
+Entropiestrom im Prinzip durch reversible Logik reduzierbar
+(Abschnitt~\ref{sec:gebietsop}). Beim Quantencomputer ist das fundamentaler
+begrenzt: Ob es einen prinzipiellen Minimalpreis für das Aufrechterhalten von
+Quantenkohärenz gibt --- unabhängig von der Güte der Fehlerkorrektur --- ist eine
+offene Frage der Quantenthermodynamik [B17].
+
+% ===================== 8 =====================
+\section{Gebietsoperationen --- volumenerhaltend oder volumenverkleinernd}
+\label{sec:gebietsop}
+
+Jede physikalische Zustandsänderung ist eine \textbf{Abbildung zwischen
+Phasenraumgebieten}. Die thermodynamisch entscheidende Frage ist ausschließlich:
+Erhält die Abbildung das Gebietsvolumen, oder verkleinert sie es?
+
+Ob diese Abbildung zu einer „Rechnung“ gehört, ob sie als logische Operation
+beschrieben wird, ob jemand sie als sinnvoll bezeichnet --- das ist für die
+Thermodynamik vollständig irrelevant.
+
+\LB \textbf{Volumenerhaltende Abbildungen} --- das Gebiet wird umgeformt, nicht
+verkleinert. Liouville gilt. Keine thermodynamische Untergrenze:
+
+\begin{center}
+\begin{minipage}{0.75\textwidth}
+\ttfamily\small
+A --->\ B\ \ \ \ (bijektiv: jedes Eingangsgebiet auf ein eigenes Ausgangsgebiet)\\
+B --->\ A
+\end{minipage}
+\end{center}
+
+Traditionell heißen solche Abbildungen „reversible Gatter“ (NOT, CNOT, Toffoli)
+--- physikalisch sind es \textbf{bijektive Gebietsabbildungen}. Ob sie Teil einer
+Rechnung sind oder nicht, ist irrelevant.
+
+\LB \textbf{Volumenverkleinernde Abbildungen} --- mehrere Eingangsgebiete landen
+auf demselben Zielgebiet Z. Volumen schrumpft. Das Bad muss den Unterschied
+aufnehmen. Thermodynamische Untergrenze:
+
+\begin{center}
+\begin{minipage}{0.75\textwidth}
+\ttfamily\small
+AA ---+\\
+AB ---+---> Z\ \ \ \ \ \ 4 Eingangsgebiete -> 2 Ausgangsgebiete\\
+BA ---+\ \ \ \ \ \ \ \ \ \ \ \ \ Volumen schrumpft => das Bad zahlt\\
+BB -------> Z
+\end{minipage}
+\end{center}
+
+Traditionell heißen solche Abbildungen „irreversible Gatter“ (AND, OR, ERASE) ---
+physikalisch sind es \textbf{nicht-bijektive Gebietsabbildungen}. Wieder: ob sie
+Teil einer Rechnung sind oder nicht, ist irrelevant.
+
+\LB \textbf{Bennett} [B3] hat gezeigt, dass jede Folge von Gebietsabbildungen im
+Prinzip als reine Folge volumenerhaltender Abbildungen ausgeführt werden kann ---
+Zwischenzustände werden mitgeführt und am Ende reversibel freigegeben. Die
+thermodynamischen Kosten fallen nicht bei den Zwischenschritten an, sondern
+ausschließlich beim endgültigen Verzicht auf Gebiete:
+
+\begin{quote}
+\LB \textbf{Die Untergrenze klebt nicht an der Abbildung, sondern am Verzicht auf
+Gebiete --- am Vergessen.}
+\end{quote}
+
+% ===================== 9 =====================
+\section{Die Buchhaltung in einer Tabelle}
+
+\begin{center}
+\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Schritt} & \textbf{Bit-Gebiet} & \textbf{Bad-Gebiet} & \textbf{Gesamt (Liouville [B2])} \\
+\midrule
+vorher & $2W_0$ & $W_{\text{Bad}}$ & $2W_0 \cdot W_{\text{Bad}}$ \\
+Reduktion auf Z & $W_Z \le W_0$ & ? & muss $\ge 2W_0 W_{\text{Bad}}$ bleiben \\
+also & $W_Z$ & $\ge 2\,W_{\text{Bad}}$ & erhalten (ja) \\
+Preis & $\Delta S = -k_B \ln\frac{W_{\text{v}}}{W_Z}$ & $\Delta S \ge +k_B \ln\frac{W_{\text{v}}}{W_Z}$ & $Q \ge k_B T \ln\frac{W_{\text{v}}}{W_Z}$ ins Bad \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ===================== 10 =====================
+\section{Die Experimente und ihre Grenzen}
+\label{sec:experimente}
+
+\textbf{Das Bild.} Zwei Gläser stehen auf einem Tisch --- Gebiet A und Gebiet B.
+Daneben das Weltmeer. Gebietsreduktion heißt: Eines der Gläser wird ins Weltmeer
+geschüttet. Das Glasvolumen verschwindet nicht --- es verteilt sich auf 1,4
+Milliarden Kubikkilometer. Liouville ist erfüllt: Kein Tropfen geht verloren.
+
+Aber: Welches Glas es war --- A oder B --- ist im Rauschen des Ozeans so fein
+verteilt, dass kein reales Instrument es je wieder herauslösen kann. Nicht weil
+die Information vernichtet wäre (sie steckt in jeder Strömung, jedem
+Temperaturgradienten), sondern weil die Auflösungsgrenze jedes realen Beobachters
+zehn Größenordnungen unter dem Signal liegt.
+
+Und: Das Meer kann danach unter denselben äußeren Bedingungen nicht dieselbe
+Darstellungskapazität für die zwei Gläser bieten. Es kann sie nicht mehr separat
+zeigen --- das Zielgebiet Z ist kleiner als $A+B$. Das ist nicht Unwissenheit; das
+ist eine physikalische Tatsache über Gebietsgrößen.
+
+Der Preis des Einschüttens: $Q \ge k_B T \ln 2$. Nicht wegen Unwissenheit ---
+weil das Meer das Volumen aufnehmen musste und dafür Wärme floss.
+
+\subsection{Die Größenordnungen}
+
+\LK \pruef{Checks 2--3} Ein realer CMOS-Schaltvorgang liegt bei
+${\sim}10^{-17}$--$10^{-16}$\,J --- vier bis fünf Größenordnungen über Landauer.
+Alle Bit-Löschungen der Welt zusammen hätten Landauer-Kosten im Watt- bis
+Kilowatt-Bereich (je nach Ansatz der globalen Löschrate, im Skript deklariert);
+tatsächlich verbrauchen Rechenzentren einige zehn Gigawatt [B8] --- Faktor
+$10^{7}$--$10^{10}$. In jeder realen Maschine ist die Grenze unsichtbar; sie ist
+Naturgesetz-Untergrenze, der Rest ist Ingenieursverlust
+($CV^2$-Umladung, Leckströme, Datentransport).
+
+\LK \textbf{Das Weltmeer-Bild.} Das Bit-Volumen, das bei der Gebietsreduktion ins
+Bad kippt, steht in einem so extremen Missverhältnis zum Bad (1 Freiheitsgrad
+gegen $10^{23}$), dass es \textbf{unterhalb der Auflösungsgrenze} jedes realen
+Instruments liegt. Das Bad nimmt das Volumen auf --- Liouville ist erfüllt ---
+aber kein Messgerät kann das Signal noch vom Rauschen des Bades trennen. Nicht
+weil das Instrument unvollkommen wäre, sondern weil die Struktur des Systems
+selbst die Auflösungsgrenze setzt.
+
+\subsection{Epistemisch vs.\ ontologisch --- ein notwendiger Vorbehalt}
+
+\LB Nicht messbar heißt nicht nicht vorhanden. Die Mikrozustände des Bades nach
+der Gebietsreduktion existieren alle noch; jedes Teilchen hat einen genauen Ort
+und Impuls; die Information, welches Ausgangsgebiet (A oder B) das System hatte,
+steckt noch in den Korrelationen --- Liouville garantiert das ausdrücklich. Das
+Bad hat das Volumen aufgenommen, nicht vernichtet.
+
+Landauer gilt \textbf{nicht, weil} Information ontologisch vernichtet wird. Es
+gilt, \textbf{weil} das Bad das Volumen aufnehmen muss (Liouville) --- das ist
+eine Aussage über die Mechanik, nicht über Wissen oder Wahrnehmung. Ein realer
+Beobachter kann die im Bad verteilten Korrelationen nicht auflösen, aber das ist
+die epistemische Seite; die thermodynamische Seite (Wärmefluss) folgt aus
+Liouville allein.
+
+\LB \textbf{Was aber ontologisch wahr ist:} Ein kleineres Gebiet kann unter
+denselben Bedingungen weniger Zustände tragen als ein größeres. Nach der
+Gebietsreduktion $\{A,B\} \to Z$ gilt $W_Z \le W_{A+B}/2$ --- das Zielgebiet ist
+höchstens halb so groß wie das Ausgangsgebiet. Es kann daher unter denselben
+äußeren Bedingungen (selbe Temperatur, selber Druck, selbe Kopplung ans Bad) nicht
+dieselbe Menge an unterscheidbaren Zuständen tragen wie vorher. Das ist keine
+Unwissenheit des Beobachters, sondern eine physikalische Tatsache über
+Gebietsgrößen. Wer nach der Gebietsreduktion unter denselben Bedingungen dasselbe
+darstellen will wie vorher, braucht ein anderes --- größeres --- physikalisches
+System.
+
+Die Korrelationen, die im Bad verteilt sind, sind real. Sie sind nur so fein
+verteilt, dass kein Beobachter mit endlichen Mitteln und unter denselben
+Bedingungen sie rekonstruieren kann. Das ist der Übergang vom ontologischen zum
+epistemischen: Das Gebiet ist kleiner (ontologisch), und seine Rekonstruktion
+würde ein Bad-großes Wissen erfordern (epistemisch).
+
+\LK \textbf{Maxwells Dämon [B12] und Bennetts Auflösung [B3].} Ein Wesen, das alle
+$10^{23}$ Mikrozustände des Bades kennt --- ein Laplace-Dämon ---, könnte das Bit
+in Gedanken zurückverfolgen. Für ihn wäre Löschen reversibel und würde nichts
+kosten. Maxwells Dämon zeigt genau das: Ein Beobachter mit vollständigem
+Mikrozustandswissen kann Entropie scheinbar ohne Kosten verringern. Bennetts
+Auflösung 1982 [B3]: Der Dämon muss seine \textbf{Messnotizen löschen}, um einen
+neuen Zyklus zu beginnen --- und genau das kostet $k_B T \ln 2$. Der eigentliche
+Ort der Entropieproduktion ist das Löschen der Notizen, nicht die Messung selbst.
+Damit bleibt der zweite Hauptsatz erhalten, aber die Begründung ist präziser:
+nicht „Information geht verloren“, sondern „Gebietsreduktion von Information
+erzeugt Entropie“.
+
+Zusammengefasst: Landauer ist \textbf{ontologisch} durch Liouville begründet. Die
+\textbf{Irreversibilität} ist statistisch, nicht ontologisch absolut --- für einen
+Dämon mit vollständigem Wissen wäre sie aufhebbar. Für jeden realen Beobachter ist
+die Auflösungsgrenze jedoch so tief unter dem Signal, dass die statistische
+Irreversibilität praktisch absolut ist. Beides muss gesagt werden.
+
+\subsection{Die Einzelteilchen-Experimente}
+
+Bérut et al.\ 2012 [B4] (Kolloid in optischer Doppelmulde, Zykluszeiten
+10--40\,s), Jun/Gavrilov/Bechhoefer 2014 [B5] (Feedback-Falle, höhere Präzision).
+Beide nähern sich der Grenze und bestätigen die $1/\tau$-Form der
+Zusatzdissipation \pruef{Check 9}. Sie arbeiten im quasistatischen Grenzfall ---
+kleinstes mögliches Bad, extrem langsame Prozesse ---, um überhaupt in die Nähe
+der Grenze zu kommen. Ein realer Rechner löscht Bits in einer Nanosekunde ins
+Weltmeer, im Sturm: Die Verwirbelung dominiert alles, die Grenze liegt zehn
+Größenordnungen tiefer als der Lärm.
+
+\textbf{Drei deklarierte Skepsis-Punkte} (Einwände gegen die Beweiskraft der
+Experimente, nicht gegen das Prinzip --- das Prinzip hängt an
+Abschnitt~\ref{sec:liouville}):
+
+\begin{enumerate}[leftmargin=1.6em,itemsep=0.25em]
+  \item \textbf{Extrapolation:} Bestätigt wird ein Limes ($\tau\to\infty$), den
+        kein Experiment betritt; die Grenze wird als Asymptote gefittet.
+  \item \textbf{Signal $\approx$ Rauschen:} $k_B T \ln 2$ liegt in der
+        Größenordnung der thermischen Fluktuation einer Einzelmessung; das
+        Resultat existiert nur als Ensemble-Mittel; manche Einzelzyklen
+        „gewinnen“ Energie.
+  \item \textbf{Erfolgsquote:} Die Protokolle löschen mit ${\sim}90$--95\,\%
+        Zuverlässigkeit; die Verbuchung fehlgeschlagener Löschungen geht in die
+        Bilanz ein.
+\end{enumerate}
+
+\LK \textbf{Feedback-Erweiterung.} Mit Messung und Rückkopplung gilt der
+verallgemeinerte zweite Hauptsatz $W_{\text{ext}} \le -\Delta F + k_B T\,I$
+(Sagawa--Ueda [B9]), experimentell bestätigt [B10][B11]. Information ist in der
+Buchhaltung eine Ressource mit Energie-Wechselkurs $k_B T$ pro nat
+\pruef{Check 10}.
+
+% ===================== 11 =====================
+\section{Anschluss an offene Fragen (intern)}
+
+\begin{itemize}[leftmargin=1.4em,itemsep=0.35em]
+  \item \textbf{Feedback-Buchhaltung in schnellen Systemen:} Rechenoperationen bei
+        ${\sim}$ns-Zeitskalen liegen zehn Größenordnungen vom getesteten
+        quasistatischen Regime entfernt; dort dominiert der $B/\tau$-Term alles.
+        Wer in schnellen rekurrenten Systemen ein Landauer-artiges Residual messen
+        will, muss den Sagawa-Ueda-Term $k_B T\,I$ [B9] explizit ins konventionelle
+        Budget aufnehmen, bevor ein Residual als neu gelten kann --- sonst misst
+        man Feedback-Thermodynamik, nicht neue Physik.
+  \item \textbf{FFGFT-Berührung: keine.} Die Landauer-Buchhaltung lebt auf der
+        Ebene der statistischen Mechanik; das $\xi$-Schema wird nicht berührt
+        (eigene Ebene, eigene Buchhaltung --- P20/P39-analog).
+\end{itemize}
+
+% ===================== 12 =====================
+\section{Kurzfassung in fünf Sätzen}
+
+Gebietsreduktion verkleinert das Phasenraumgebiet des Systems; Liouville verbietet
+Volumenschrumpfung in abgeschlossenen Systemen; also muss ein Bad das Volumen
+übernehmen, und der Preis ist Wärme
+$\ge k_B T \ln(W_{\text{v}}/W_{\text{n}})$ --- die $\ln 2$ nur als
+Binär-Spezialfall. Gezählt wird nach Unterscheidbarkeit (Orthogonalität), nicht
+nach Energie; die absolute Grund-Diskretisierung liefert $h^f$, alles Gröbere ist
+emergente Zählung auf gewählter Ebene. Nicht messbar heißt nicht nicht vorhanden:
+Die Mikrozustände des Bades existieren alle noch, die Information über das
+gelöschte Bit steckt in Korrelationen --- Landauer gilt wegen der Mechanik
+(Liouville), nicht wegen Unwissenheit; die Irreversibilität ist statistisch, nicht
+ontologisch absolut (Maxwells Dämon, Bennetts Auflösung). Die Buchhaltung zählt
+Gebiete und liest keine Inhalte --- jede Gebietsbelegung kostet identisch. Real
+wird die Grenze nie erreicht, weil jede endliche Geschwindigkeit
+Zusatzdissipation erzeugt, die um Größenordnungen dominiert --- das Bit kippt ins
+Weltmeer im Sturm, die Auflösungsgrenze des Bades liegt zehn Größenordnungen über
+der Landauer-Grenze.
+
+% ===================== 13 =====================
+\section{Schichtstatus-Zusammenfassung}
+
+Die folgende Tabelle ist eine \emph{Auswahl} der tragenden Aussagen; im Fließtext
+sind weitere Stellen markiert.
+
+\begin{center}
+\small
+\begin{longtable}{@{}p{0.72\textwidth}l@{}}
+\toprule
+\textbf{Aussage} & \textbf{Status} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Aussage} & \textbf{Status} \\
+\midrule
+\endhead
+Bit $\ne$ physikalisches Gebiet (Shannon vs.\ Boltzmann) & \LB \\
+$S = k_B \ln W$ als Ausgangspunkt & \LS \\
+Gebietsreduktion $\{A,B\}\to Z$ (Physik, keine Beschreibung) & \LS \\
+Gebietsreduktion $\Rightarrow \Delta S = -k_B \ln(W_{A+B}/W_Z)$ & \LB \\
+Liouville-Theorem & \LB \\
+Hinreichend ist die Nicht-Bijektivität der Gebietsabbildung, nicht die logische Irreversibilität & \LB \\
+Abgeschlossenes System kann nicht löschen & \LB \\
+Landauer-Grenze $Q \ge k_B T \ln 2$ & \LB \\
+Numerischer Wert $2{,}87\cdot10^{-21}$\,J bei 300\,K & \LK \\
+Zählbasis $=$ Orthogonalität, nicht Energie & \LB \\
+$h^f$ als Grund-Diskretisierung & \LB \\
+Gibbs-Form als allgemeine Entropie & \LS \\
+Inhalt (wahr/falsch) geht nicht in die Rechnung ein & \LB \\
+Hardware $\ne$ Rechenoperation & \LB \\
+Rechner schrumpft nicht & \LB \\
+Korrelation ins Bad (nicht Silizium) & \LB \\
+Vergessensvorgang inhaltsneutral & \LB \\
+DRAM ${\sim}1{,}12\cdot10^{5}$ Refresh-Zyklen pro Stunde (32\,ms) & \LK \\
+No-Cloning-Theorem & \LB \\
+$T_2 \sim 100\,\text{\textmu s}$ supraleitende Qubits & \LK \\
+Minimalpreis Kohärenzerhaltung & \LH \\
+Volumenerhaltende Abbildungen: keine Untergrenze & \LB \\
+Volumenverkleinernde Abbildungen: das Bad zahlt & \LB \\
+Epistemisch vs.\ ontologisch: Korrelationen bleiben & \LB \\
+Sagawa-Ueda-Term $k_B T\,I$ & \LK \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\textbf{Bilanz der Tabelle:} 17$\times$ \LB (algebraisch/mathematisch aus
+deklarierten Grundlagen) $\cdot$ 4$\times$ \LK (empirisch geprüft bzw.\
+Primärquellen) $\cdot$ 3$\times$ \LS (deklarierte Ausgangspunkte) $\cdot$
+1$\times$ \LH (offene Forschungsfrage) $=$ 25 Einträge.
+
+% ===================== ANHANG KORREKTUREN =====================
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Anhang: Korrekturen gegenüber der Arbeitsnotiz}
+\section*{Anhang: Korrekturen gegenüber der Arbeitsnotiz}
+\label{sec:korr}
+
+Diese A-Serien-Fassung folgt der Arbeitsnotiz vom 24.~Juli 2026 inhaltlich
+vollständig. Die folgenden Punkte wurden dabei geändert und sind hier offen
+ausgewiesen, damit die Änderungen prüfbar bleiben.
+
+\begin{enumerate}[leftmargin=1.6em,itemsep=0.4em]
+  \item \textbf{Zustandszahl im Kolloid-Gebiet vereinheitlicht.} Die Notiz nannte
+        an einer Stelle $7{,}9\cdot10^{9}$ und an anderer ${\approx}10^{5}$
+        orthogonale Zustände, beide unter Berufung auf Check~7. Hier steht
+        durchgehend $7{,}9\cdot10^{9}$. \emph{Zu prüfen:} welcher Wert im
+        Prüfskript tatsächlich steht.
+  \item \textbf{Dekohärenzzeit vs.\ Refresh-Intervall.} Die Notiz gab
+        $T_2 \sim 100\,\text{\textmu s}$ als „siebenmal kürzer“ als 64\,ms an;
+        korrekt sind rund 640-mal. Korrigiert.
+  \item \textbf{DRAM-Raten getrennt.} Die Notiz mischte ${\sim}15{.}000$
+        Refresh-Vorgänge pro Sekunde mit ${\sim}112{.}000$ Zyklen pro Stunde und
+        Zelle; beides zusammen ist um Faktor $10^{3}$ inkonsistent. Hier
+        getrennt: pro Zelle rund $1{,}12\cdot10^{5}$ Zyklen pro Stunde bei
+        32\,ms Intervall (bei 64\,ms rund $5{,}6\cdot10^{4}$); der Controller
+        gibt bei 8192 Zeilen und 64\,ms rund $1{,}3\cdot10^{5}$ Refresh-Befehle
+        pro Sekunde und Bank aus.
+  \item \textbf{Schichtbilanz korrigiert.} Die Notiz zählte
+        15$\times$\,[B] und 8$\times$\,[K]; die Tabelle enthält tatsächlich
+        16$\times$\,[B] und 4$\times$\,[K] bei 24 Einträgen (mit dem
+        Zusatzeintrag aus Punkt~11 jetzt 17$\times$\,[B] bei 25 Einträgen). Ausgezählt und
+        korrigiert; zugleich als \emph{Auswahl} deklariert, da im Fließtext
+        weitere Stellen markiert sind.
+  \item \textbf{Quellenliste ergänzt.} [B11], [B12], [B13] und [B20] waren im Text
+        zitiert, aber nicht aufgeführt; der Eintrag [B17] enthielt versehentlich
+        die Texte von [B13] (Fredkin/Toffoli) und [B12] (Maxwells Dämon). Alle
+        vier ergänzt, [B17] bereinigt. Die rekonstruierten Einträge sind in der
+        Quellenliste als solche markiert und vor der Veröffentlichung gegen die
+        Arbeitsunterlagen zu prüfen.
+  \item \textbf{Marker [H].} Das A-Serien-Schema kennt [SETZUNG], [K], [B] und
+        [S]. Die Notiz verwendet zusätzlich [H] für „offene Forschungsfrage“.
+        Hier beibehalten und in der Legende deklariert --- \emph{offen}, ob [H]
+        ins Schema aufgenommen oder die Stelle nach [S] überführt wird.
+  \item \textbf{Reihenfolge.} Die Notiz führte die Abschnitte 6c vor 6b. Hier in
+        die logische Reihenfolge gebracht (Hardware $\ne$ Rechenoperation, dann
+        Hardware-Seite, dann Dauerbetrieb, dann Quantencomputer) und als
+        Unterabschnitte von Abschnitt~\ref{sec:inhalt} geführt.
+  \item \textbf{Abbildungen.} Die Kasten- und Pfeildiagramme der Notiz verwendeten
+        Unicode-Zeichnungszeichen; hier in reines ASCII gesetzt, damit der Bau
+        glyphfrei bleibt. Inhalt unverändert.
+  \item \textbf{Fehlender Absatzkopf.} Der Absatz zu den Größenordnungen
+        (CMOS, Rechenzentren) begann in der Notiz ohne Kopf; hier als
+        Unterabschnitt „Die Größenordnungen“ mit \LK gefasst.
+  \item \textbf{Sprachliches.} Einzelne Grammatikfehler stillschweigend
+        korrigiert (u.\,a.\ „das Informationsgehalt“, „Magnetfeldfluktuiation“,
+        „was kostet das Gebietsreduktion“).
+  \item \textbf{„Operation“ durch „Gebietsabbildung“ ersetzt (Landauer-Absatz).}
+        Die Notiz schrieb: die logische Irreversibilität sei „eine hinreichende
+        Bedingung für Wärmeproduktion bei einer bestimmten Klasse von
+        \emph{Operationen}“. Das widerspricht dem eigenen Programm des Dokuments
+        --- eine Operation ist eine Beschreibung, und Beschreibungen kosten
+        nichts. Hinreichend ist allein die Nicht-Bijektivität der
+        \emph{Gebietsabbildung}. Zugleich ist die Aussage schärfer gefasst: mit
+        der Gebietsabbildung fällt die logische Irreversibilität nur unter einer
+        deklarierten Realisierungsannahme zusammen (disjunkte Gebiete, kein
+        mitgeführtes Gebiet); ohne sie trägt sie nichts, weil Bennett jede logisch
+        irreversible Funktion bijektiv ausführt. Der Absatz war zudem
+        durchgehend \LK markiert, obwohl nur die Landauer-Zitatstelle eine
+        Primärquellen-Aussage ist; die abgeleitete Hälfte trägt jetzt \LB. Ein
+        entsprechender Eintrag ist in die Schichtstatus-Tabelle aufgenommen.
+\end{enumerate}
+
+\textbf{Nicht geändert:} sämtliche physikalischen Aussagen, die Schichtzuordnungen
+der einzelnen Stellen, die Formeln, die Argumentationsführung und der Befund
+„FFGFT-Berührung: keine“.
+
+% ===================== BELEGE =====================
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Belege}
+\section*{Belege}
+
+\begingroup
+\small
+\begin{description}[leftmargin=3.2em,style=sameline,itemsep=0.3em]
+
+\item[{[B1]}] R. Landauer, \emph{Irreversibility and Heat Generation in the
+Computing Process}, IBM J.\ Res.\ Dev.\ \textbf{5}, 183 (1961).
+
+\item[{[B2]}] Liouville-Theorem: Standardresultat der Hamiltonschen Mechanik;
+z.\,B.\ Landau/Lifschitz, \emph{Mechanik}, §46; quantenmechanisches Gegenstück:
+Unitarität der Zeitentwicklung.
+
+\item[{[B3]}] C.~H. Bennett, \emph{The Thermodynamics of Computation --- a
+Review}, Int.\ J.\ Theor.\ Phys.\ \textbf{21}, 905 (1982); ders., \emph{Notes on
+Landauer's principle}, Stud.\ Hist.\ Phil.\ Mod.\ Phys.\ \textbf{34}, 501 (2003).
+
+\item[{[B4]}] A. Bérut et al., \emph{Experimental verification of Landauer's
+principle}, Nature \textbf{483}, 187 (2012).
+
+\item[{[B5]}] Y. Jun, M. Gavrilov, J. Bechhoefer, \emph{High-Precision Test of
+Landauer's Principle in a Feedback Trap}, Phys.\ Rev.\ Lett.\ \textbf{113},
+190601 (2014).
+
+\item[{[B6]}] Gibbs-/Shannon-Entropie: Standard; z.\,B.\ E.~T. Jaynes,
+\emph{Information Theory and Statistical Mechanics}, Phys.\ Rev.\ \textbf{106},
+620 (1957).
+
+\item[{[B7]}] Semiklassische Zustandszählung $\Gamma/h^f$: Standard; z.\,B.\
+Landau/Lifschitz, \emph{Statistische Physik}, §7.
+
+\item[{[B8]}] Rechenzentrums-Energieverbrauch: IEA-Berichte 2024/25,
+Größenordnung mehrere hundert TWh/Jahr weltweit ($\approx$ einige zehn GW
+Dauerleistung). Zahl dient nur dem Größenordnungsvergleich.
+
+\item[{[B9]}] T. Sagawa, M. Ueda, \emph{Second Law of Thermodynamics with
+Discrete Quantum Feedback Control}, Phys.\ Rev.\ Lett.\ \textbf{100}, 080403
+(2008); dies., \emph{Generalized Jarzynski Equality under Nonequilibrium Feedback
+Control}, Phys.\ Rev.\ Lett.\ \textbf{104}, 090602 (2010).
+
+\item[{[B10]}] S. Toyabe et al., \emph{Experimental demonstration of
+information-to-energy conversion}, Nature Physics \textbf{6}, 988 (2010).
+
+\item[{[B11]}] \emph{(rekonstruiert)} J.~V. Koski et al., \emph{Experimental
+observation of the role of mutual information in the nonequilibrium dynamics of a
+Maxwell demon}, Phys.\ Rev.\ Lett.\ \textbf{113}, 030601 (2014).
+
+\item[{[B12]}] \emph{(rekonstruiert)} Maxwells Dämon --- Ursprung des
+Gedankenexperiments: J.~C. Maxwell, \emph{Theory of Heat}, Longmans (1871);
+Standarddarstellung in H.~S. Leff und A.~F. Rex (Hrsg.), \emph{Maxwell's Demon 2},
+IOP Publishing (2003).
+
+\item[{[B13]}] \emph{(rekonstruiert)} E. Fredkin und T. Toffoli, \emph{Conservative
+Logic}, Int.\ J.\ Theor.\ Phys.\ \textbf{21}, 219 (1982) --- reversible Gatter und
+die Frage des kontinuierlichen Entropiestroms physikalischer Rechner.
+
+\item[{[B14]}] W.~K. Wootters und W.~H. Zurek, \emph{A single quantum cannot be
+cloned}, Nature \textbf{299}, 802 (1982) --- No-Cloning-Theorem.
+
+\item[{[B15]}] P.~W. Shor, \emph{Scheme for reducing decoherence in quantum
+computer memory}, Phys.\ Rev.\ A \textbf{52}, R2493 (1995); A.~M. Steane,
+\emph{Error correcting codes in quantum theory}, Phys.\ Rev.\ Lett.\ \textbf{77},
+793 (1996) --- Quantenfehlerkorrektur.
+
+\item[{[B16]}] F. Arute et al.\ (Google AI Quantum), \emph{Quantum supremacy using
+a programmable superconducting processor}, Nature \textbf{574}, 505 (2019) ---
+typische $T_2$-Zeiten supraleitender Qubits ${\sim}100\,\text{\textmu s}$.
+
+\item[{[B17]}] M. Esposito und C. Van den Broeck, \emph{Three faces of the second
+law: I.\ Master equation formulation}, Phys.\ Rev.\ E \textbf{82}, 011143 (2010);
+P. Kammerlander und J. Anders, \emph{Coherence and measurement in quantum
+thermodynamics}, Sci.\ Rep.\ \textbf{6}, 22174 (2016) --- Quantenthermodynamik und
+Minimalpreis der Kohärenzerhaltung.
+
+\item[{[B18]}] C.~E. Shannon, \emph{A Mathematical Theory of Communication}, Bell
+System Technical Journal \textbf{27}, 379 (1948) --- Definition des Bit als
+$\log_2$ der unterscheidbaren Zustände; explizit informationstheoretisch, nicht
+thermodynamisch.
+
+\item[{[B19]}] E.~T. Jaynes, \emph{Information Theory and Statistical Mechanics},
+Phys.\ Rev.\ \textbf{106}, 620 (1957) --- Verbindung Shannon-Entropie zu
+Boltzmann: gilt exakt nur bei Gleichverteilung über physikalische Mikrozustände;
+bei grob gewählter logischer Auflösung nicht.
+
+\item[{[B20]}] \emph{(rekonstruiert)} Johnson-Nyquist-Rauschen: J.~B. Johnson,
+\emph{Thermal Agitation of Electricity in Conductors}, Phys.\ Rev.\ \textbf{32},
+97 (1928); H. Nyquist, \emph{Thermal Agitation of Electric Charge in Conductors},
+Phys.\ Rev.\ \textbf{32}, 110 (1928).
+
+\end{description}
+\endgroup
+
+\vspace{1em}
+\noindent
+{\small\itshape Die als \emph{(rekonstruiert)} markierten Einträge fehlten in der
+Arbeitsnotiz und wurden aus dem Zitationskontext ergänzt; sie sind vor der
+Veröffentlichung gegen die Arbeitsunterlagen zu prüfen.}
+
+\end{document}
