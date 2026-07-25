@@ -4,6 +4,51 @@ Alle wesentlichen Änderungen dieser Serie. Format: Datum · Dokument · Inhalt.
 
 ---
 
+## v1.3 — 2026-07-25
+
+### Neu: A272 Träger und Information (De + En, je 12/11 S.)
+
+- **A272** Träger und Information / Carrier and Information — Textkritik zu A271.
+  Was Landauer 1961 beweist, ist eine untere Schranke für Träger-Operationen an
+  einem thermischen Gleichgewichts-Ensemble, keine universelle Aussage über
+  abstrakte Information. Satz 1 (Mehrfachrealisierung): einem Informationsbit kann
+  keine Energie zugeordnet werden, nur seinem Träger. Satz 2: eine rein
+  interpretative Löschung verkleinert den Träger-Zustandsraum nicht. Ausdrücklich
+  als Zuständigkeitsbefund gefasst, nicht als Widerlegung. Landauers eigener
+  Ensemble-Vorbehalt dokumentiert; Rezeptionsgeschichte (Lairez, Norton,
+  Earman/Norton, Hemmo/Shenker); Sprachkritik der Digitaltechnik; Hypostasierung
+  als Deutungsrahmen [S]. Rückkopplungsschranke Q_min = kT(ln2 − I) mit I
+  dimensionslos in nat. Verbindliches Wörterbuch A271 ↔ A272 (Gebiet = Träger,
+  Beschreibung = Information). Kein eigenes Prüfskript.
+
+### Neu: A273 Die Rechenkugel (De + En, je 10/9 S.)
+
+- **A273** Die Rechenkugel / The Reckoning Bead — Token-Rechnen (Abakus, Muscheln,
+  Münzen) als Grenzfall, an dem Landauers Argument in zwei unabhängige Hälften
+  zerfällt. Die Buchhaltung gilt exakt und trägerunabhängig (ΔS/k_B = N·ln2); die
+  thermische Umrechnung ΔS → Q = T·ΔS gilt dort nicht (Kugelverschiebung
+  5,1·10¹⁵ × Landauer, Positions-Bit 3,8·10⁻²³ der Eigenentropie, Barriere
+  3,6·10¹⁵ k_B·T). Der Token-Rechner fällt unter Landauers eigenen
+  Ensemble-Vorbehalt. Zwei Böden: thermisch k_B·T und quantengeometrisch ħc/L,
+  maßgeblich ist der größere (Schnitt bei 7,6 µm bei 300 K; Qubit hf/k_B·T = 24).
+  Sichtbarkeit der Struktur und Bindekraft der Zahl laufen gegenläufig.
+  Markenvorrat als eigene Kostenkategorie [S]. Prüfskript a273_rechenkugel.py
+  (Checks 1–14, alle BESTANDEN).
+
+### Geändert
+
+- **A271** überarbeitet: hinreichend für die Wärmeproduktion ist die
+  Nicht-Bijektivität der Gebietsabbildung, nicht die logische Irreversibilität
+  (Realisierungsannahme ausgewiesen, Bennett-Bezug ergänzt); numerische Angaben
+  vereinheitlicht; Quellenapparat vervollständigt; Prüfskript-Verweis auf
+  a271_landauer.py korrigiert.
+- Neuer Schichtmarker **[Q] — Quelle: korpusexterne Primärquelle oder Messwert**.
+  [K] (Kern, aus ξ hergeleitet) kommt in A271–A273 nicht vor, da diese Dokumente
+  FFGFT-Berührung: keine deklarieren.
+- Blockstruktur: Block 3 jetzt A260–A273; Serie auf 47 Dokumente.
+
+---
+
 ## v1.2 — 2026-07-25
 
 ### Neu: A271 Landauer und die Phasenraum-Buchhaltung (De + En, je 18 S.)

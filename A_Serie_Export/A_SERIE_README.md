@@ -1,7 +1,7 @@
 # FFGFT A-Serie — Fraktale Feldgeometrische Fundamentaltheorie / T0 Zeit-Masse-Dualität
 
 **Autor:** Johann Pascher (ORCID: 0009-0000-6518-4064)  
-**Version:** 1.0 (2026-07-22)  
+**Version:** 1.3 (2026-07-25)  
 **Zenodo DOI:** 10.5281/zenodo.20117635  
 **Sprachen:** Deutsch (kanonisch) · Englisch (parallele Fassung)
 
@@ -10,7 +10,7 @@
 ## Was ist die A-Serie?
 
 Die A-Serie ist die kanonische, sachgeordnete Fassung der FFGFT. Sie fasst mehr
-als 300 Altdokumente in 45 thematisch geordneten Dokumenten zusammen — ein Thema
+als 300 Altdokumente in 47 thematisch geordneten Dokumenten zusammen — ein Thema
 an einem Ort, jede Aussage mit Schichtstatus markiert, alle Korrekturen
 eingearbeitet.
 
@@ -24,19 +24,19 @@ will, was die Theorie heute behauptet.
 
 ```
 Sources/
-  ch/                  90 Quelltexte (45 De + 45 En, *_ch.tex)
+  ch/                  94 Quelltexte (47 De + 47 En, *_ch.tex)
   pri-end/              3 Preamble-Dateien
-  wr_standalone_A4/    90 Wrapper (45 De + 45 En, kompilierfertig)
-pdf/                   90 PDFs (45 De + 45 En)
+  wr_standalone_A4/    94 Wrapper (47 De + 47 En, kompilierfertig)
+pdf/                   94 PDFs (47 De + 47 En)
 python/
-  A_Serie_Skripte/     46 Prüfskripte (.py)
+  A_Serie_Skripte/     47 Prüfskripte (.py)
 README.md
 CHANGELOG.md
 ```
 
 ---
 
-## Blockstruktur (45 Dokumente)
+## Blockstruktur (47 Dokumente)
 
 ```
 Block 0  A010–A095   Grundlage
@@ -80,7 +80,7 @@ Block 2  A200–A250   Methodik und Bilanz
          A240 Abgrenzung: SM, GR, externe Rahmen
          A250 Verweistabelle: A-Serie und Altbestand
 
-Block 3  A260–A271   Erweiterungen
+Block 3  A260–A273   Erweiterungen
          A260 Casimir-Effekt
          A261 Skalenhierarchie: ξ → Massen → α → E₀
          A262 c-Konvention: E = mc² = E = m
@@ -91,6 +91,8 @@ Block 3  A260–A271   Erweiterungen
          A267 Stipulation α = 1
          A270 Z₃-Sektor-Struktur und Hadron-Massenkorrektur
          A271 Landauer und die Phasenraum-Buchhaltung
+         A272 Träger und Information
+         A273 Die Rechenkugel
 ```
 
 ---
@@ -181,7 +183,7 @@ Vollständige Zuordnung: A250.
 ## Prüfskripte
 
 ```
-python/A_Serie_Skripte/a???_*.py   (46 Skripte)
+python/A_Serie_Skripte/a???_*.py   (47 Skripte)
 ```
 
 Ausführung mit Python 3.10+. Alle Kernaussagen liefern `BESTANDEN`.
