@@ -58,7 +58,7 @@ what is input and what follows is always declared explicitly.
 ## The A-Series — Canonical Edition
 
 The **A-Series** is the topic-ordered, fully auditable edition of FFGFT:
-45 documents, every statement carrying an explicit epistemic layer marker.
+47 documents, every statement carrying an explicit epistemic layer marker.
 
 | Marker | Meaning |
 |--------|---------|
@@ -66,19 +66,18 @@ The **A-Series** is the topic-ordered, fully auditable edition of FFGFT:
 | **[K]** | Core — derived from ξ, numerically verified |
 | **[B]** | Bridge — algebraically proved |
 | **[S]** | Sketch — plausible, not fully executed |
+| **[Q]** | Source — external primary source or measured value |
 
 ```
 Block 0  A010–A095   Foundation: stipulations, geometry, units, time, Hilbert space
 Block 1  A100–A192   Sectors: leptons, constants, gravitation, QM, Standard Model
 Block 2  A200–A250   Method: layers, falsifiability, open points, reference table
-Block 3  A260–A271   Extensions: Casimir, scale hierarchy, Dirac, unit checks, Landauer
+Block 3  A260–A273   Extensions: Casimir, scale hierarchy, Dirac, unit checks,
+                     Z₃ sector, thermodynamics of computation
 ```
 
 **New in the A-Series (July 2026):**
 
-- **A271** — Landauer and the Phase-Space Accounting: misreading as question, Landauer's original text as answer; "circuit connections" as the key sentence; energy belongs to the hardware element, not the bit; dynamics as vehicle; realisation-dependence (spin/DRAM/domain); qubit lower bound [H]. Verification script a271_landauer.py (Checks 1–10, all PASSED).
-- **A270** — Z₃-Sector Structure and Hadron Mass Correction [new v1.1]
-- **A155** — Meson Masses and Baryon Candidate [new v1.1]
 - **A095** — Chirality: g_R = 0 proved algebraically [B] from the torus projector P₊
 - **A192** — Gauge sector: U(1)_EM from flux quantisation, SU(3)_C from linking
   number — both [B] from torus topology
@@ -86,8 +85,15 @@ Block 3  A260–A271   Extensions: Casimir, scale hierarchy, Dirac, unit checks,
   Heisenberg-based singularity argument (register entry R50)
 - **A130** — Higgs-EFT 2.3 % deviation structurally explained
 - **A160** — CHSH prefactor ξ/(2π) geometrically derived [B]
+- **A271** — Landauer and phase-space accounting: the thermodynamic bound attaches
+  to the region in phase space, not to the description; what is sufficient is the
+  non-bijectivity of the region map [B]
+- **A272** — Carrier and information: Landauer's proof holds for carrier operations
+  over an equilibrium ensemble, not for abstract information
+- **A273** — The reckoning bead: token computation separates accounting from thermal
+  conversion; check script with 14 checks
 
-All 43 documents with verification scripts:
+All 47 documents with verification scripts:
 **[A_Serie_Export/](A_Serie_Export/)** · **[A_SERIE_README.md](A_Serie_Export/A_SERIE_README.md)**
 
 ---
@@ -254,12 +260,12 @@ T0-Time-Mass-Duality/
 │   └── pdf/                   # ~100 standalone A4 PDFs (selected key documents, De+En)
 ├── A_Serie_Export/            # A-Series canonical edition (43 docs × 2 languages)
 │   ├── Sources/
-│   │   ├── ch/                # 90 source files (45 De + 45 En, *_ch.tex)
+│   │   ├── ch/                # 86 source files (43 De + 43 En, *_ch.tex)
 │   │   ├── pri-end/           # 3 preamble files
-│   │   └── wr_standalone_A4/  # 90 wrappers (45 De + 45 En)
-│   ├── pdf/                   # 90 PDFs (45 De + 45 En, A???_*.pdf)
+│   │   └── wr_standalone_A4/  # 86 wrappers (43 De + 43 En)
+│   ├── pdf/                   # 86 PDFs (43 De + 43 En, A???_*.pdf)
 │   ├── python/
-│   │   └── A_Serie_Skripte/   # 46 verification scripts
+│   │   └── A_Serie_Skripte/   # 44 verification scripts
 │   ├── A_SERIE_README.md
 │   ├── A_SERIE_CHANGELOG.md
 │   └── A_SERIE_WORKFLOW.md

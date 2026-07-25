@@ -60,7 +60,7 @@ was Eingabe ist, was folgt, ist immer klar deklariert.
 ## Die A-Serie — Kanonische Fassung
 
 Die **A-Serie** ist die sachgeordnete, vollständig auditierbare Fassung der FFGFT:
-45 Dokumente, jede Aussage mit expliziter Schichtmarkierung.
+47 Dokumente, jede Aussage mit expliziter Schichtmarkierung.
 
 | Marke | Bedeutung |
 |-------|-----------|
@@ -68,18 +68,18 @@ Die **A-Serie** ist die sachgeordnete, vollständig auditierbare Fassung der FFG
 | **[K]** | Kern — aus ξ hergeleitet, numerisch geprüft |
 | **[B]** | Brücke — algebraisch bewiesen |
 | **[S]** | Skizze — plausibel, nicht vollständig ausgeführt |
+| **[Q]** | Quelle — korpusexterne Primärquelle oder Messwert |
 
 ```
 Block 0  A010–A095   Grundlage: Setzungen, Geometrie, Einheiten, Zeit, Hilbertraum
 Block 1  A100–A192   Sektoren: Leptonen, Konstanten, Gravitation, QM, Standardmodell
 Block 2  A200–A250   Methodik: Schichten, Falsifizierbarkeit, offene Punkte
-Block 3  A260–A271   Erweiterungen: Casimir, Skalenhierarchie, Dirac, Einheitenprüfung, Landauer
+Block 3  A260–A273   Erweiterungen: Casimir, Skalenhierarchie, Dirac, Einheitenprüfung,
+                     Z₃-Sektor, Thermodynamik der Berechnung
 ```
 
 **Neu in der A-Serie (Juli 2026):**
 
-- **A271** — Landauer und die Phasenraum-Buchhaltung: Fehlinterpretation als Fragestellung, Landauers Originaltext als Antwort; „circuit connections" als Kernsatz; Energie gehört dem Hardware-Element, nicht dem Bit; Prüfskript a271_landauer.py (Checks 1–10, alle BESTANDEN).
-- **A270** — Z₃-Sektor-Struktur und Hadron-Massenkorrektur [neu v1.1]
 - **A095** — Chiralität: g_R = 0 algebraisch bewiesen [B] aus dem Torus-Projektor P₊
 - **A192** — Eichsektor: U(1)_EM aus Flussquantisierung, SU(3)_C aus Verschlingungszahl
   — beide [B] aus Torus-Topologie
@@ -87,8 +87,15 @@ Block 3  A260–A271   Erweiterungen: Casimir, Skalenhierarchie, Dirac, Einheite
   Heisenberg-basierte Argument (Registereintrag R50)
 - **A130** — Higgs-EFT-Abweichung 2,3 % strukturell erklärt
 - **A160** — CHSH-Vorfaktor ξ/(2π) geometrisch hergeleitet [B]
+- **A271** — Landauer und die Phasenraum-Buchhaltung: die thermodynamische Schranke
+  hängt am Gebiet im Phasenraum, nicht an der Beschreibung; hinreichend ist die
+  Nicht-Bijektivität der Gebietsabbildung [B]
+- **A272** — Träger und Information: Landauers Beweis gilt für Träger-Operationen an
+  einem Gleichgewichts-Ensemble, nicht für abstrakte Information
+- **A273** — Die Rechenkugel: Token-Rechnen trennt Buchhaltung und thermische
+  Umrechnung; Prüfskript mit 14 Checks
 
-Alle 43 Dokumente mit Prüfskripten:
+Alle 47 Dokumente mit Prüfskripten:
 **[A_Serie_Export/](A_Serie_Export/)** · **[A_SERIE_README.md](A_Serie_Export/A_SERIE_README.md)**
 
 ---
@@ -259,14 +266,14 @@ Eine vollständige Liste aller ~289 Dokumente mit Kurzinfo und direktem PDF-Link
 T0-Time-Mass-Duality/
 ├── 2/
 │   └── pdf/                   # ~100 Einzeldokumente A4 (Schlüsseldokumente, De+En)
-├── A_Serie_Export/            # A-Serie kanonische Fassung (43 Docs × 2 Sprachen)
+├── A_Serie_Export/            # A-Serie kanonische Fassung (47 Docs × 2 Sprachen)
 │   ├── Sources/
-│   │   ├── ch/                # 90 Quelltexte (45 De + 45 En, *_ch.tex)
+│   │   ├── ch/                # 94 Quelltexte (47 De + 47 En, *_ch.tex)
 │   │   ├── pri-end/           # 3 Preamble-Dateien
-│   │   └── wr_standalone_A4/  # 90 Wrapper (45 De + 45 En)
-│   ├── pdf/                   # 86 PDFs (43 De + 43 En, A???_*.pdf)
+│   │   └── wr_standalone_A4/  # 94 Wrapper (47 De + 47 En)
+│   ├── pdf/                   # 94 PDFs (47 De + 47 En, A???_*.pdf)
 │   ├── python/
-│   │   └── A_Serie_Skripte/   # 46 Prüfskripte
+│   │   └── A_Serie_Skripte/   # 47 Prüfskripte
 │   ├── A_SERIE_README.md
 │   ├── A_SERIE_CHANGELOG.md
 │   └── A_SERIE_WORKFLOW.md
@@ -329,6 +336,8 @@ Zusätzliche Einzelausgaben: *FFGFT Narrativ — Das Kosmische Gehirn*,
 
 | Version | DOI | Schwerpunkt |
 |---------|-----|-------------|
+| v1.2.5 | *(DOI beim Zenodo-Upload)* | **A-Serie Block 3 erweitert — Thermodynamik der Berechnung.** **A271:** die thermodynamische Schranke hängt am Gebiet im Phasenraum, nicht an der Beschreibung — Liouville ⇒ das Bad übernimmt das Volumen ⇒ Q ≥ k_B·T·ln(W_v/W_n), ln2 nur Binär-Spezialfall; Zählbasis Unterscheidbarkeit, Grund-Diskretisierung h^f; Inhaltsneutralität (kein thermodynamischer Wahrheitsdetektor); hinreichend ist die Nicht-Bijektivität der Gebietsabbildung, nicht die logische Irreversibilität; der reale Rechner trägt einen kontinuierlichen Entropiestrom statt diskreter Bit-Löschungen. **A272:** Landauers Beweis gilt für Träger-Operationen an einem Gleichgewichts-Ensemble, nicht für abstrakte Information — sein eigener Ensemble-Vorbehalt, die Rezeptionsgeschichte, die Sprachkritik der Digitaltechnik und die Hypostasierung als Deutungsrahmen [S]; Wörterbuch A271 ↔ A272. **A273:** Token-Rechnen trennt die zwei Hälften des Arguments — die Buchhaltung gilt exakt und trägerunabhängig, die thermische Umrechnung verlangt zusätzlich thermisch besetzte Zustände; thermischer und quantengeometrischer Boden (k_B·T bzw. ħc/L), maßgeblich ist der größere; Sichtbarkeit der Struktur und Bindekraft der Zahl laufen gegenläufig. Neuer Schichtmarker **[Q]** für korpusexterne Quellen |
+| v1.2.4 | *(DOI beim Zenodo-Upload)* | A-Serie kanonische Fassung: 45 Dokumente mit Schichtmarkierungen, A095/A192/A060/A130/A160, Z₃-Sektor (A270) |
 | v1.2.3 | [21396624](https://doi.org/10.5281/zenodo.21396624) | **Dok. 301 — der Umkehrtest:** fundamental ⟺ umkehrbar; Information ist der AUSGANG eines Comparators, das Bit die ultimative irreversible Reduktion, Landauer kT ln2 diese Irreversibilität; drei Ebenen von Information (Bit / Beschreibung / absolute Identität); reflexiver Schluss — zeitliche & topologische Randlosigkeit als Folgerungen, die Realisten-Setzung und der „Wort-Reflex“ als über-die-Mathematik-hinaus markiert (P35). **Dok. 302 — Elementarzellen, Ein-Bit-Kapazität und Partitionsinvarianz (eine spektrale Antwort):** die minimale Informationseinheit ist das topologische Windungsquant Δw=1 (π₁(T⁴)≅ℤ⁴, skalenuniversell, Dok. 257); ln2 ist der thermodynamische Schatten (E_bit=ħc/L, Landauer ein Spezialfall); Fläche als fundamentale Bit-Definition ausgeschlossen (∂T⁴=∅, verlustbehaftete Projektionsfläche); Vier-Kategorien-Governance-Bilanz — deklarierte Annahme / Definition (Bit≙Δw=1) / abgeleitet / empirisch / benannte Setzung. **Dok. 303 — repräsentationale Identität über Rollenwechsel:** eine Definition identifiziert ein Objekt, Governance bewahrt seine Identität über spätere Übergänge; ein Fünfer-Erhaltungs-Nachweis (bewahren / projizieren / transformieren / substituieren / überbrücken) verhindert stille Rollendrift zwischen unabhängig entwickelten Rahmen. **Dok. 304 — der Gedächtnis-Reflex:** erlebte Zeit setzt Zeit voraus, statt sie zu erzeugen (Gegenstück des Wort-Reflexes); Zeit ist D(k)=Σ100ξ_n→ln(1+k/75), fundamental, und die Akkumulations-gegen-Kern-Grenze sitzt in der Zeit, nicht im Gedächtnis; ein Messausschnitt ist bezuglos und die scheinbare Gleichförmigkeit der Zeit ein Linearisierungs-Artefakt mit verifizierter Fehlergröße e=x−ln(1+x) (skaleninvariant 1−ln2), wobei die Linearisierung in der Projektion sitzt, nicht in der Messung; der Rückschluss von Messung auf Ursache ist durch eine holografische Verwaschung begrenzt; ein eigener Provenance-Abschnitt zieht die Brücke zu einem externen operationalen Mτ/MB als eingeschränkten, optionalen Kandidaten (Kategorie B), symmetrisch, mit namentlicher Provenance, ohne durchgeführten Benchmark (P35). **Dok. 305 — der Krümmungstreue-Diskriminator:** bei gleicher Reichweite kann eine Reichweiten-Metrik einen krümmungstreuen (log-Spiral-) nicht von einem gleichförmigen Akkumulator trennen, das e-Kriterium schon — Selbstähnlichkeit D(2k)−D(k)→ln2, Ganghöhen-Zerfall 1/n, Skalen-Ratio→e (proven, skript-verifiziert); keine kognitive-MB-Spezifität etabliert (restricted, Kategorie B). **Dok. 306 — native Zeit-Energie-Reziprozität:** die Heisenberg-gestützte Begründung für die Abwesenheit einer kosmischen Anfangssingularität (Dok. 025/063) wird *ersetzt*, nicht widerlegt — drei Mängel benannt (invertierte Implikation: endliches Δt liefert eine *endliche* Schranke, nicht ΔE→∞; Anwendungsfehler: die Energie-Zeit-Unschärfe ist nicht kanonisch, ihr Δt ist eine Änderungszeit einer Observablen, kein kosmisches Alter; Stilbruch gegenüber dem Ledger). Die ersetzende Kette ist nativ: T·m = 1, also T·E = 1 (Gleichung, keine Ungleichung) ⇒ E→∞ ⟺ T→0; FFGFTs Zeit besitzt jedoch ein minimales Inkrement d₁ = 100ξ₁ = 1/75, festgelegt durch ξ — E ist nach oben beschränkt, eine unendliche Dichte strukturell ausgeschlossen. Dazu die Randfrage: ∂T⁴ = ∅ — „was war bei t=0?" setzt einen Rand voraus, den ein kompakter Torus nicht hat; die Frage ist falsch gestellt, nicht falsch beantwortet. Außerdem **Dok. 190 R48** — die Provenance-Revision von Dok. 304 registriert — sowie **R49/R50** — das Spiral-Zeit-Vokabular bei Erstnennung zitiert (Dok. 304), und die Ersetzung des Heisenberg-Imports registriert, mit Dok. 025/063 als für diesen Punkt nicht mehr maßgeblich gekennzeichnet · **Dok. 307 — Zeit im Zustandsraum oder daneben:** ob die Zeit eine Richtung *im* Zustandsraum ist oder ein Parameter *daneben* — derselbe Operator-Formalismus, andere Verortung; die Leptonmassen in drei ineinander übersetzbaren Darstellungen (Quantenzahlen + fraktale Korrektur K_frak / Yukawa-Leiter / Z₃-Zirkulant-Koide mit θ=2/9), die dimensionslosen Verhältnisse exakt, nur der SI-Schritt trägt Korrekturen; die Zeit diskret (d₁=100ξ=1/75, Dok. 306) und dennoch ein gemeinsamer Grundtakt, weil die Moden in exakter Relation stehen (Harmonische, keine freien Uhren); kosmologischer Sektor bewusst ausgeschlossen; A4-Standalone mit vollständiger Bibliographie. Außerdem **Dok. 190 R54** — N₀ (Leiter-Grundeinheit ≈38,6) ist keine Grundeinheit der Theorie, sondern ein leiter-interner offener Faktor, und die Diskretheit aus Dok. 306 impliziert über die exakten Mode-Relationen einen gemeinsamen Grundtakt |
 | v1.2.2 | [21266963](https://doi.org/10.5281/zenodo.21266963) | FFGFT-interne Klärungen: Standardmodell als dekompaktifizierte Projektion der kompakten T⁴-Struktur (Dok. 298); der fraktale Korrekturfaktor **K_frak = 1 − 100ξ = 74/75** aus dem Schließungs-Komma der 75-Windung gelesen, mit dem Anker Dok. 133 (RG-Lauf, m_e/m_μ-Konsistenz) — das Komma re-exprimiert 100ξ, leitet sie nicht ab (Dok. 300); ι-Einbettungsprotokoll mit abgeleitetem Zeugen (BLP-Rückfluss 5,125), Zeitsektor **zugelassen, nicht erzwungen** (Dok. 299). HLV nachrangig, Prüfrichtung FFGFT→HLV |
 | v1.2.1 | [21203746](https://doi.org/10.5281/zenodo.21203746) | FFGFT-interne Klärung der Zeit-Windung: die log-Spirale mit Verhältnis e (Dok. 295) liegt gleichwertig auch als Hilbertraum-Gedächtniskern vor (Dok. 283, auf der verlustfreien Bijektion H = L²(T⁴)⊗ℂ³, Dok. 230/282) — die Hilbertraum-Übersetzung beschreibt auch die Zeit; mehrere gleichwertige Wege zum selben Ergebnis (Darstellungs-Robustheit, keine zusätzliche Evidenz, P35). Dazu Dok. 296: Zeit, Offenheit und Invarianz — narrativer Überblick über Beobachter/Skala-Struktur, Skalenfolge als Projektionswechsel, Übergänge/Anomalien, offene Zeitstruktur (kein Anfang, kein Ende). Dazu Dok. 297: HLV als mögliche Untermenge — Kandidat-Notiz; Markov-Grenzfall/Hard-Reset-Kern als Einbettungskandidat für Marcels U₃; Akkumulation als eigentliche Gedächtnisleistung |

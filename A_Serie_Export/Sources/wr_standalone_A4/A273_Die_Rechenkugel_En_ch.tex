@@ -1,0 +1,508 @@
+% A273 -- The Reckoning Bead
+% Johann Pascher -- ORCID 0009-0000-6518-4064
+% Kapitelquelle zur A-Serie; Wrapper: wr_standalone_A4/A273_Die_Rechenkugel_En.tex
+
+\providecommand{\qedsq}{\raisebox{0.03em}{\framebox[0.62em]{\rule{0pt}{0.42em}}}}
+% ===================== ABSTRACT =====================
+\begingroup\small\noindent
+\textbf{Abstract.} Computing with tokens --- abacus beads, shells, coins --- is
+the limiting case in which Landauer's argument comes apart into its two halves.
+The \emph{accounting} holds there exactly and is for once visible: the stock from
+which the tokens come and into which they flow back is a bath one can point at.
+The \emph{thermal conversion} $\Delta S \to Q = T\Delta S$ does not hold there: an
+abacus bead costs about $5\times10^{15}$ times the Landauer bound to move, its
+positional bit carries $4\times10^{-23}$ of its own thermal entropy, and its
+positional barrier stands at $3.6\times10^{15}\,kT$. The token computer therefore
+falls squarely under the very restriction Landauer himself stated and the
+reception dropped (A272): the counted states are not a thermal ensemble. From
+this follows an ordering that runs against intuition: \textbf{visibility of the
+structure and binding force of the number run in opposite directions.} The cruder
+the carrier, the clearer the accounting and the more irrelevant the bound. The
+passage back is continuous --- shrink the token until its barrier approaches
+$kT$ and it becomes a Brownian reckoning bead, which is Bérut's colloid.
+\par\endgroup
+
+\bigskip
+
+\begingroup\small\noindent
+\textbf{Layer markings.} \textbf{[SETZUNG]} declared starting point (German corpus token:
+[SETZUNG]) --- \textbf{[B]} derived algebraically/mathematically from declared foundations
+--- \textbf{[Q]} source --- external primary source or measured value --- \textbf{[S]}
+plausibility sketch --- \textbf{[H]} open research question.
+
+\par\endgroup
+
+\bigskip
+
+\begingroup\small\noindent
+\textbf{Check script.} \texttt{a273\_rechenkugel.py} (checks 1--14). Every number
+in this document is backed there by assertions; the parameter choices are marked
+in the script as stipulations and can be varied freely.
+\par\endgroup
+
+\bigskip
+
+% ===================== 1 =====================
+\section{The stock as a visible bath}
+
+A271 works with the world ocean: a glass is poured in, the volume does not vanish,
+but nobody gets it back. The image is correct and has one drawback --- the bath
+has to be inferred. Nobody sees the $10^{23}$ degrees of freedom into which the
+bit volume tips.
+
+\textbf{[SETZUNG]} With token computation this is different. An abacus, a heap of shells, a till
+with coins: next to the working area there lies a \textbf{stock}. The tokens come
+from it and flow back into it. The stock is a bath one can point at.
+
+\begin{center}
+\begin{minipage}{0.80\textwidth}
+\ttfamily\small
+\begin{tabbing}
+\ Working area\ \ \ \ \ \ \ \ \ \ \ \=\ Stock (bath)\\[0.3em]
++-----------------+\>+-------------------------+\\
+|\ o\ o\ .\ o\ .\ .\ o\ .\ |\>|\ o o o o o o o o o o o o |\\
+|\ .\ o\ o\ .\ o\ o\ .\ o\ |\ \ ---\textgreater\ \>|\ o o o o o o o o o o o o |\\
++-----------------+\>+-------------------------+\\
+\ W = 2\^{}N config.\>\ tokens conserved, arrangement mixed
+\end{tabbing}
+\end{minipage}
+\end{center}
+
+\textbf{[B]} The structure is step for step the same as in A271:
+
+\begin{itemize}[leftmargin=1.4em,itemsep=0.3em]
+  \item \textbf{Region.} A token in the left position and the same token in the
+        right position are two distinguishable macro-regions.
+  \item \textbf{Region reduction.} Clearing the board maps all configurations onto
+        one --- all tokens in the stock. Non-bijective, exactly like
+        $\{A,B\}\to Z$.
+  \item \textbf{Conservation.} No token vanishes. They spread into an arrangement
+        from which the previous configuration can no longer be read off. That is
+        the Liouville analogue --- and here it is literally countable.
+  \item \textbf{Content neutrality.} The stock does not know whether a token stood
+        for a debit, for a five, or for nothing. It absorbs it the same way.
+\end{itemize}
+
+\textbf{[B]} Cash with coins and a till is the same figure, and the double meaning of the
+word “accounting” stops being a metaphor here: the balance of a till and
+phase-space accounting have the same form. Barter is the case without tokens ---
+there is no stock there and correspondingly no region reduction, only bijective
+exchange.
+
+% ===================== 2 =====================
+\section{The accounting holds exactly}
+
+\textbf{[B]} For $N$ tokens with two positions each, before clearing
+$W_{\text{before}} = 2^N$ and after $W_{\text{after}} = 1$, hence
+\begin{equation}
+  \frac{\Delta S}{k_B} \;=\; \ln\frac{W_{\text{before}}}{W_{\text{after}}}
+  \;=\; N \ln 2 .
+  \label{eq:combinatorics}
+\end{equation}
+
+This is exact and carrier-independent \emph{(check script, check 10)}. It holds for beads, for
+shells, for transistors, for colloids. Nothing in
+equation~\eqref{eq:combinatorics} demands that the token be small, light, or
+thermally driven. The count is combinatorics over regions --- exactly what A271
+identifies as primary.
+
+\textbf{[B]} Up to this point the token computer is a complete model of Landauer
+accounting, and a better one than any other, because every step can be seen.
+
+% ===================== 3 =====================
+\section{The bound does not hold}
+
+\textbf{[SETZUNG]} For the following numbers it is stipulated: an abacus bead of mass
+$m = 0.5$\,g, a displacement $d = 1$\,cm, a friction coefficient $\mu = 0.3$, an
+ambient temperature $T = 300$\,K, a molar mass of $100$\,g/mol and a molar entropy
+of $50$\,J/(mol$\cdot$K) for a solid. All stipulations are marked in the check
+script and can be changed; the orders of magnitude do not depend on their precise
+values.
+
+\textbf{[B]} \textbf{The work per bead displacement.} Sliding friction gives
+$W = \mu\,m\,g\,d = 1.47\times10^{-5}$\,J \emph{(check script, check 2)}. The Landauer bound at
+300\,K is $k_B T \ln 2 = 2.87\times10^{-21}$\,J \emph{(check script, check 1)}. The ratio is
+\begin{equation}
+  \frac{W_{\text{bead}}}{k_B T \ln 2} \;\approx\; 5.1\times10^{15}
+  \qquad \text{\emph{(check script, check 3)}} .
+\end{equation}
+
+\subsection{The scale band}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Carrier} & \textbf{Cost per switching event} & \textbf{Multiple of $k_BT\ln 2$} \\
+\midrule
+colloid, quasistatic [B4][B5] & ${\sim}3\times10^{-21}$\,J & 1--10 \\
+CMOS transistor (A271) & $10^{-17}$--$10^{-16}$\,J & $3.5\times10^{3}$ -- $3.5\times10^{4}$ \\
+abacus bead & $1.5\times10^{-5}$\,J & $5.1\times10^{15}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{[B]} Between bead and CMOS lie roughly \textbf{eleven decades} \emph{(check script, check 5)}. The
+ordering is thus the reverse of the obvious conjecture: Landauer binds not at the
+primitive end but at the small one. The cruder the carrier, the further the bound
+lies below the actual expenditure.
+
+\subsection{Why the bead pays nothing}
+
+Two numbers account for the finding, and both concern the bead itself, not the
+accounting.
+
+\textbf{[B]} \textbf{First: the positional bit is vanishing against the bead's own
+entropy.} A bead of 0.5\,g carries, under the stipulations above, an entropy of
+$0.25$\,J/K, that is $1.8\times10^{22}\,k_B$ \emph{(check script, check 6)}. The positional bit
+carries $\ln 2 = 0.69\,k_B$. Its share is
+\begin{equation}
+  \frac{\ln 2}{S_{\text{bead}}/k_B} \;\approx\; 3.8\times10^{-23}
+  \qquad \text{\emph{(check script, check 7)}} .
+\end{equation}
+Moving the bead changes essentially nothing in the thermally accessible phase
+space. The region reduction takes place in a coordinate decoupled from the bead's
+$10^{22}$ thermal degrees of freedom.
+
+\textbf{[B]} \textbf{Second: the positional barrier is thermally insurmountable.} It stands
+at $3.6\times10^{15}\,k_BT$ \emph{(check script, check 8)}. An Arrhenius lifetime
+$\propto \exp(3.6\times10^{15})$ is not numerically representable. There is no
+thermal transfer between “left” and “right”, and therefore no equilibrium ensemble
+over those two states.
+
+\textbf{[B]} The bead is thus the extreme case of the row “emergent two-valuedness” in
+A271: the two is a partition imposed on a quasi-continuum of $10^{22}$
+microstates, and it survives not because it is fundamental but because the barrier
+is absurdly high.
+
+% ===================== 4 =====================
+\section{The two halves of Landauer's argument}
+\label{sec:twohalves}
+
+\textbf{[B]} The token computer thereby does something no other model does as cleanly: it
+separates the two steps of which Landauer's argument consists, and shows that they
+are independent.
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.16\textwidth}p{0.36\textwidth}p{0.40\textwidth}@{}}
+\toprule
+\textbf{Step} & \textbf{Statement} & \textbf{Presupposition} \\
+\midrule
+combinatorics & $\Delta S = k_B \ln(W_{\text{b}}/W_{\text{a}})$ &
+regions are distinguishable and countable \\
+conversion & $Q = T\,\Delta S$ &
+the counted states are thermally occupied \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{[B]} The first step holds exactly for the bead. The second does not hold for it at
+all. The usual presentation runs the two together in one move and thereby makes
+the second presupposition invisible. Only when a carrier violates it maximally
+does it come into view.
+
+\begin{quote}
+\textbf{[B]} Landauer's bound is not the statement “region reduction costs”. It is the
+statement “region reduction \emph{in thermally occupied states} costs”. The
+qualifier is not cosmetic --- it carries the whole conversion.
+\end{quote}
+
+\textbf{[B]} This sharpens A271 at a place where it needs to be more precise. A271 §6
+requires, for classical systems, distinguishability \emph{above} the thermal
+resolution limit. That is the condition for two regions to count as two. It is
+\emph{not} the condition for their reduction to cost heat --- for that one
+additionally needs the barrier \emph{not} to lie arbitrarily far above $k_BT$.
+The two conditions point in opposite directions, and between them lies the narrow
+band in which Landauer binds.
+
+% ===================== 5 =====================
+\section{Landauer's own restriction}
+
+\textbf{[Q]} The finding is not a new discovery but the extreme case of a restriction
+Landauer stated himself in 1961: his reset operation was applied to a thermal
+equilibrium ensemble; for information not yet thermalised the calculation does not
+apply directly [B1]. A272 documents the passage and shows that the reception
+dropped it.
+
+\textbf{[B]} With the abacus the restriction is maximally violated, and in two ways at
+once:
+
+\begin{enumerate}[leftmargin=1.6em,itemsep=0.3em]
+  \item \textbf{No thermal ensemble.} The distribution over “left” and “right”
+        does not arise from thermal occupation but from the hand that placed the
+        bead.
+  \item \textbf{Complete knowledge.} Whoever placed the beads knows the
+        configuration. In the feedback bound (A272) this makes $I = \ln 2$ per
+        token and
+        \begin{equation}
+          Q_{\min} \;=\; k_B T\,(\ln 2 - I) \;=\; 0
+          \qquad \text{\emph{(check script, check 11)}} .
+        \end{equation}
+\end{enumerate}
+
+\textbf{[B]} Thermodynamically, then, clearing a known abacus costs nothing. What it does
+cost is friction --- and friction is an engineering quantity with no lower bound
+in nature, reducible at will by better bearings.
+
+% ===================== 6 =====================
+\section{The passage back: the Brownian reckoning bead}
+
+\textbf{[B]} The passage back into Landauer's domain of validity is continuous and can be
+computed. Setting the positional barrier equal to $k_BT$ gives, for the critical
+token mass,
+\begin{equation}
+  \mu\,m\,g\,d \;=\; k_B T
+  \quad\Longrightarrow\quad
+  m_{\text{crit}} \;=\; \frac{k_B T}{\mu\,g\,d} \;\approx\; 1.4\times10^{-19}\,\text{kg}
+  \qquad \text{\emph{(check script, check 9)}} .
+\end{equation}
+
+\textbf{[B]} For comparison: a silica colloid of 2\,\textmu m diameter weighs
+$8.4\times10^{-15}$\,kg, roughly $6\times10^{4}$ times more \emph{(check script, check 9)}. But
+it holds its position not by friction, rather by an optical trap, and the height
+of that barrier is adjustable down to a few $k_BT$. That is exactly what makes it
+a Brownian reckoning bead --- and exactly why Bérut's apparatus [B4] is the only
+one in which the bound actually binds.
+
+\begin{quote}
+\textbf{[B]} Bérut's colloid is not a model of the bit. It is an abacus bead small enough
+for the bath to push it.
+\end{quote}
+
+\textbf{[B]} The series thereby closes: shell, coin, abacus bead, transistor, colloid. It
+is a scale, not a jump. What changes along the scale is not the accounting --- it
+is the same everywhere --- but the ratio of the positional barrier to $k_BT$.
+
+% ===================== 7 =====================
+\section{Two axes, running opposite}
+
+\textbf{[B]} From this follows the ordering that gives the document its yield:
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Carrier} & \textbf{Visibility of the structure} & \textbf{Binding force of the bound} \\
+\midrule
+abacus, shells, coins & complete (bath can be pointed at) & none ($10^{15}$ above) \\
+CMOS & slight (bath is the lattice) & weak ($10^{4}$ above) \\
+colloid in an optical trap & none (bath not separable) & full (factor 1--10) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{quote}
+\textbf{[B]} At the most primitive level the accounting is maximally visible and the bound
+maximally irrelevant. Visibility of the structure and binding force of the number
+are two different axes, and they run in opposite directions.
+\end{quote}
+
+\textbf{[B]} This also explains why intuition regularly misleads in this matter. Anyone
+wanting to make Landauer plausible reaches for the coarse image --- the bead, the
+drawer, the glass of water --- and thereby lands exactly where the bound has
+ceased to mean anything. The image carries the structure and loses the number.
+
+% ===================== 7b =====================
+\section{Two floors: $\hbar c/L$ and $k_BT$}
+\label{sec:twofloors}
+
+\textbf{[B]} The thermal floor $k_BT$ is not the only one. There is a second,
+quantum-geometric floor: $\hbar c/L$, the energy of a mode of extension $L$. Both
+limit how finely a state can be pinned down at all --- but they are of different
+origin, and the larger of the two governs.
+
+\textbf{[B]} \textbf{The quantum-geometric floor $\hbar c/L$} is the energy of a mode of
+extension $L$. It applies to massless or field-like carriers --- photon, winding
+mode --- and is temperature-independent. It says how finely a state can be pinned
+down at all at a given extension.
+
+\textbf{[B]} \textbf{The thermal floor $k_BT$} applies wherever a carrier couples to a
+bath. It says how deep a well must be to hold against fluctuations --- and it is
+what decides about Landauer.
+
+\textbf{[B]} \textbf{The larger of the two governs.} This sorts the cases:
+
+\begin{itemize}[leftmargin=1.4em,itemsep=0.3em]
+  \item \textbf{Massive mechanical carriers.} For bead and colloid, $\hbar c/L$ is
+        not the relevant quantum scale at all; the relevant one would be
+        $\hbar^2/(2mL^2)$, and that amounts to $3\times10^{-41}\,k_BT$ for the
+        abacus bead and $2\times10^{-22}\,k_BT$ for Bérut's colloid
+        \emph{(check script, check 12)}. The quantum-geometric floor lies so far beneath
+        everything here that only the thermal floor counts --- the criterion of
+        this document is the whole story there.
+  \item \textbf{Field-like carriers.} There $\hbar c/L$ carries. At 300\,K the two
+        floors cross at $L = \hbar c/(k_BT) = 7.6\,$\textmu m \emph{(check script, check 13)};
+        below that length the quantum-geometric floor dominates, above it the
+        thermal one.
+  \item \textbf{The qubit} is the case in which the quantum-geometric floor
+        exceeds the thermal one: $hf/k_BT = 24$ at 5\,GHz and 10\,mK
+        \emph{(check script, check 14)}. That is exactly why it behaves quantum-mechanically at
+        all --- and exactly why it lies close enough to the thermal band to need
+        error correction.
+\end{itemize}
+
+\textbf{[B]} Landauer therefore binds where the thermal floor leads \emph{and} the barrier
+lies within a few $k_BT$. Where the quantum-geometric floor leads, $k_BT\ln 2$ is
+not the relevant quantity. In that sense, but only in that sense, the bound is a
+special case: it holds for a class of carriers, not for all of them.
+
+% ===================== 8 =====================
+\section{The token stock as a cost category of its own}
+
+\textbf{[B]} One point remains that thermodynamic accounting does not capture and that
+becomes especially clear with the token computer: \textbf{without tokens one
+cannot compute.} The stock is an exhaustible resource. An abacus with too few
+beads does not compute more slowly; it does not compute at all.
+
+\textbf{[B]} This is a \emph{material bound}, not a thermodynamic one. It has no lower
+limit in $k_BT$; it has a lower limit in the number of items. It is related to
+what A271 §7.3 opens up --- the computer pays for existing, not only for computing
+--- but it is not the same thing: there the subject is a running entropy current,
+here a standing inventory.
+
+\textbf{[S]} With semiconductors this category drops out of view, because the stock is
+cast in silicon: the regions are laid down in fabrication and not drawn during
+operation. The inventory is there, so it is not counted. On the abacus it is
+visible, because it can be used up.
+
+\textbf{[H]} \textbf{Open question.} Whether inventory and current can be carried in a
+single ledger --- token stock and entropy current as two balances of one computer
+--- is open. The question is the same as the one at the end of A272, posed from
+the material side.
+
+% ===================== 9 =====================
+\section{Placement in the corpus}
+
+\textbf{[B]} The three pieces stand to one another as follows:
+
+\begin{itemize}[leftmargin=1.4em,itemsep=0.3em]
+  \item \textbf{A271} does the accounting: region, region reduction, Liouville,
+        bath, bound. The physical core.
+  \item \textbf{A272} does the textual criticism: what Landauer proved in 1961,
+        his own ensemble restriction, the reception history, the language.
+  \item \textbf{A273} exhibits the limiting case at which both findings converge
+        and become visible: the token computer satisfies A271's accounting exactly
+        and violates A272's ensemble condition maximally.
+\end{itemize}
+
+\textbf{[B]} The dictionary of A272 §1.1 applies unchanged. In the language of this
+document: token $=$ carrier $=$ region; stock $=$ bath; clearing the board $=$
+carrier operation $=$ region reduction.
+
+\textbf{[B]} \textbf{Contact with FFGFT: none.} Like A271 and A272, this document lives at
+the level of statistical mechanics; the $\xi$ scheme is untouched.
+
+% ===================== 10 =====================
+\section{Layer-status summary}
+
+\begin{center}
+\small
+\begin{longtable}{@{}p{0.72\textwidth}l@{}}
+\toprule
+\textbf{Statement} & \textbf{Status} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Statement} & \textbf{Status} \\
+\midrule
+\endhead
+The token stock is a bath analogue one can point at & \textbf{[SETZUNG]} \\
+Parameters of the abacus bead (mass, distance, friction, $T$) & \textbf{[SETZUNG]} \\
+Clearing the board is a non-bijective region map & \textbf{[B]} \\
+Tokens are conserved (Liouville analogue) & \textbf{[B]} \\
+$\Delta S/k_B = N\ln 2$, exact and carrier-independent & \textbf{[B]} \\
+$k_BT\ln 2 = 2.87\times10^{-21}$\,J at 300\,K & \textbf{[B]} \\
+Bead displacement $1.47\times10^{-5}$\,J & \textbf{[B]} \\
+Bead $\approx 5.1\times10^{15}\times$ Landauer & \textbf{[B]} \\
+Scale band colloid / CMOS / bead & \textbf{[Q]} \\
+Eleven decades between bead and CMOS & \textbf{[B]} \\
+Bead's own entropy $1.8\times10^{22}\,k_B$ & \textbf{[B]} \\
+Positional bit $= 3.8\times10^{-23}$ of that entropy & \textbf{[B]} \\
+Positional barrier $3.6\times10^{15}\,k_BT$ & \textbf{[B]} \\
+Combinatorics and thermal conversion are independent & \textbf{[B]} \\
+The conversion presupposes thermally occupied states & \textbf{[B]} \\
+Landauer's ensemble restriction (original passage) & \textbf{[Q]} \\
+Known abacus: $I=\ln 2$, hence $Q_{\min}=0$ & \textbf{[B]} \\
+Critical token mass $1.4\times10^{-19}$\,kg & \textbf{[B]} \\
+Silica colloid 2\,\textmu m: $8.4\times10^{-15}$\,kg & \textbf{[B]} \\
+Bérut's colloid as a Brownian reckoning bead & \textbf{[B]} \\
+Visibility and binding force run in opposite directions & \textbf{[B]} \\
+Token stock as a material bound & \textbf{[B]} \\
+Why the category drops out of view with semiconductors & \textbf{[S]} \\
+A single ledger for inventory and current & \textbf{[H]} \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\textbf{Balance:} 17$\times$ \textbf{[B]} $\cdot$ 2$\times$ \textbf{[Q]} $\cdot$ 2$\times$ \textbf{[SETZUNG]}
+$\cdot$ 1$\times$ \textbf{[S]} $\cdot$ 1$\times$ \textbf{[H]} $=$ 23 entries.
+
+% ===================== SOURCES =====================
+% ===================== CONVENTION =====================
+\section{Use of AI tools}
+
+This document was produced with the aid of AI-assisted tools. The questions, the
+stipulations and all decisions of content are the author's; the tools draft the
+prose, check the arithmetic and produce the verification scripts. Responsibility
+for content and for errors rests entirely with the author. The full wording is
+given in A010.
+
+\section{Check script}
+
+\begin{itemize}
+  \item \texttt{python/A\_Serie\_Skripte/a273\_rechenkugel.py} (checks 1--14)
+\end{itemize}
+
+\section{What remains open}
+
+Whether inventory and current can be carried in a single ledger --- token stock
+and entropy current as two balances of one computer --- is open.
+
+\section{Supersedes}
+
+This document has no direct counterpart in the older corpus; it works out the
+limiting case for A271 and A272.
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Sources}
+\section*{Sources}
+
+\begingroup
+\small
+\begin{description}[leftmargin=3.2em,style=sameline,itemsep=0.3em]
+
+\item[{[B1]}] R. Landauer, \emph{Irreversibility and Heat Generation in the
+Computing Process}, IBM J.\ Res.\ Dev.\ \textbf{5}, 183 (1961).
+
+\item[{[B2]}] Liouville's theorem: standard result of Hamiltonian mechanics;
+e.g.\ Landau/Lifshitz, \emph{Mechanics}, §46.
+
+\item[{[B3]}] C.~H. Bennett, \emph{The Thermodynamics of Computation --- a
+Review}, Int.\ J.\ Theor.\ Phys.\ \textbf{21}, 905 (1982).
+
+\item[{[B4]}] A. Bérut et al., \emph{Experimental verification of Landauer's
+principle}, Nature \textbf{483}, 187 (2012).
+
+\item[{[B5]}] Y. Jun, M. Gavrilov, J. Bechhoefer, \emph{High-Precision Test of
+Landauer's Principle in a Feedback Trap}, Phys.\ Rev.\ Lett.\ \textbf{113},
+190601 (2014).
+
+\item[{[B6]}] T. Sagawa and M. Ueda, \emph{Nonequilibrium Thermodynamics of
+Feedback Control}, Phys.\ Rev.\ E \textbf{85}, 021104 (2012).
+
+\item[{[B7]}] Semiclassical state counting $\Gamma/h^f$ and the entropy of
+solids: standard; e.g.\ Landau/Lifshitz, \emph{Statistical Physics}, §7 and §64.
+
+\item[{[B8]}] CODATA 2018 values; $k_B = 1.380649\times10^{-23}$\,J/K exactly
+defined since the SI revision of 2019.
+
+\end{description}
+\endgroup
+
+\vspace{1em}
+\noindent
+{\small\itshape The numerical values in this document come from the check script
+\texttt{a273\_rechenkugel.py}; the parameters set there are model choices, not
+measured values. The orders of magnitude are insensitive to their variation.}
