@@ -4,68 +4,21 @@ Alle wesentlichen Änderungen dieser Serie. Format: Datum · Dokument · Inhalt.
 
 ---
 
-## v1.1 — 2026-07-23
+## v1.2 — 2026-07-25
 
-### Neu: Zwei Dokumente (45 De + 45 En)
+### Neu: A271 Landauer und die Phasenraum-Buchhaltung (De + En, je 18 S.)
 
-**Block 1 — Sektoren**
-- **A155 Meson-Massen und Baryon-Kandidat** (De+En, je 6 S.) — Eigenständiger
-  additiver Ansatz m_M = Σm_q + Λ_QCD·K_frak^n_eff mit Geltungsbereichs-Beweis
-  (Formeigenschaft: nur Bindung < Λ_QCD; Pionen drin, K/η/ρ/ω strukturell
-  draußen). Pion-Anker: n_eff(π⁰)=37,79, n_eff(π±)=36,62 — verankert die
-  Meson-Stufe 36+1 aus A270. GMOR-Prüfung: B_π≈B_K (chirale Konsistenz);
-  [S]-Kandidat B ≈ 8·Λ·K_frak⁻³⁷ (zentral 0,02 %, P35: Quarkmassen-Schema
-  trägt Präzision nicht). Baryon-Kandidat [S]: vollständig geometrische
-  Proton-Formel m_p = (π³/12)·N_c(1+α_s)·e^(−3ξ/4)·Λ/2 (Δ=+0,21 %,
-  absorbierbar in α_s/Λ); jeder Faktor gedeutet (Vol(B⁴)=π²/2,
-  η_sc=π/6, Farbe, ξ-Dämpfung, Skala). Strukturfund:
-  16π³/(π³/12) = 192 = D4-Weyl-Ordnung — Proton-Geometrie und
-  Higgs-Formel (Dok. 190 K1) im exakten Weyl-Verhältnis. Alle externen
-  Eingaben (Λ_QCD, Quarkmassen) explizit als [SETZUNG] deklariert;
-  kein Bezug auf Altdokument 005.
+- **A271** Landauer und die Phasenraum-Buchhaltung / Landauer and the Phase-Space Accounting —
+  Fehlinterpretation als Fragestellung, Landauers Originaltext als Antwort;
+  Kernsatz §1: „circuit connections", nicht Daten, bestimmen Thermodynamik;
+  Energie gehört dem Hardware-Element (nicht dem Bit); Dynamik als Vehikel;
+  Realisierungsabhängigkeit (Spin / DRAM / Magnetdomäne) mit Landauer-Beleg;
+  Qubit-Untergrenze als offene Frage [H]; drei wörtliche Zitate aus
+  Landauer 1961 mit §-Nachweis. Prüfskript a271_landauer.py (Checks 1–10).
 
-**Block 3 — Erweiterungen**
-- **A270 Z₃-Sektor-Struktur und Hadron-Massenkorrektur** (De+En, je 6 S.) —
-  Bulk-Exponent 36: Schlüsselrelation K_frak⁻³⁶ ≈ 16/π² (Δ=0,010 %),
-  unabhängig gestützt durch k*/100=36,09 (Dok. 275); Monte-Carlo-Statistik
-  (Trefferrate 1,5 %; Spezifität: einziger Treffer unter 21 Konstanten).
-  Orbifold-Struktur [B]: 3 Fixpunkte, Z₃-Eigenbasis (1, ω, ω²);
-  Confinement topologisch erzwungen (Fixpunkt-Bedingung x=y=z),
-  Leptonen frei. Sektor-Tabelle [H]: Lepton 36+0, Meson 36+1, Baryon
-  36+2 — topologisch fixiert (|Z₃|−1=2). Meson-Stufe am Pion empirisch
-  verankert (A155). Koide-Konsistenz: Zirkulant (A110) als Algebra des
-  ungetwisteten Sektors liefert Kandidaten für den Grund des
-  A150-Befunds („Zirkulant-Ebene hat kein Gegenstück"). Baryon-Stufe
-  als Vorhersage (K_frak⁻³⁸ = 1,6654), Test wartet auf
-  Vorwärts-Herleitung des Baryon-Kandidaten (A155).
+### Korrekturen
 
-### Register (Dok. 190, append-only)
-- **R62** (Eintragstext in `Dok190_R62/ (De+En)`, zum
-  Einfügen nach R60): Altkorpus-Dok. 005, Proton-Beispielrechnung —
-  Anker der Formelzeile ist π²/2 (Vol B⁴), nicht m_μ; Fehlfaktor 46,672
-  = (π²/2)/m_μ auf 0,07 %. Reparierte Zeile schließt mit unveränderten
-  Druckwerten auf +0,05 % (PDG) bei geschlossener Dimensionsbilanz.
-  Sekundärbefund: Druckwert K_corr=0,985 ≠ Formelwert 0,9605 (2,5 %).
-  Aufspaltung QZ·K_corr unterbestimmt; geometrischer Kandidat π/6 in
-  A155 §Baryon-Kandidat. Quelldokumente nicht revidiert (vgl. R50).
-
-### Aktualisiert
-- **A230** (De+En): Neuer offener Punkt „Geltungsbereich von T̃·m=1 für
-  Verbundsysteme" (Subsystemgrenzen, Erhaltung unter Komposition nicht
-  formalisiert) — benannt von J. T. Guevara Calderón (Block-Review der
-  A-Serie v1.0, Juli 2026); mit Attribution aufgenommen.
-
-### Prüfskripte (alle Assertions bestanden)
-- `python/A_Serie_Skripte/a155_meson.py` — Geltungsbereich, Pion-Anker,
-  GMOR, 8Λ·K⁻³⁷-Kandidat, Proton-Kandidat, 192-Identität.
-- `python/A_Serie_Skripte/a270_z3_sektoren.py` — Schlüsselrelation,
-  k*/100, Fixpunkte (numerisch), Z₃-Eigenbasis (numerisch),
-  Sektor-Tabelle, Monte-Carlo, Spezifität.
-- `python/Dok190_Skripte/r62_baryon_anker.py` — Diagnose, Reparatur,
-  Dimensionsbilanz, Sekundärbefund.
-
-### Build
-- LuaLaTeX je 3 Durchläufe; 4 neue PDFs (2 De + 2 En), 0 Fehler.
+- Doppelnummerierung behoben: A270 = Z₃-Sektor (Altstand), A271 = Landauer (neu)
 
 ---
 

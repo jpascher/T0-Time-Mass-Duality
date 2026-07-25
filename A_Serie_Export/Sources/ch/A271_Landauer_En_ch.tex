@@ -1,0 +1,1054 @@
+% A270 — Landauer and the Phase-Space Accounting
+% Why erasing information necessarily costs heat — and why the content doesn't matter
+% Standalone document; no A-series back-reference required
+
+\section{Use of AI Tools}
+
+This document was created with the assistance of AI tools. The questions posed,
+the stipulations, and all substantive decisions originate with the author; the
+tools formulate, compute, and produce verification scripts. Responsibility for
+content and errors rests entirely with the author. The full statement appears in
+A010.
+
+\section{Question and Answer}
+
+\textbf{The widespread misreading.} Landauer's principle is commonly read as
+follows: erasing one bit costs at least $k_B T \ln 2$ --- because information
+has energy, because a bit carries a physical minimum price, because entropy
+and information are the same thing. From this it follows: the more information
+is processed, the more energy it costs; whoever computes frugally pays less;
+whoever erases a lot pays more. This reading is standard in large parts of
+computer science, cognitive science, and popular physics.
+
+\textbf{What Landauer actually wrote \cite{B1}.} The decisive sentence
+appears in §~1, before any entropy calculation begins:
+\begin{quote}
+\textit{``In most instances a computer pushes information around in a
+manner that is \emph{independent of the exact data} which are being
+handled, and is only a function of the
+\emph{physical circuit connections}.''}
+\end{quote}
+\hfill\cite{B1}, §~1
+
+And the naive energy argument --- ``a degree of freedom carries $kT$ of
+thermal energy, therefore a bit costs $kT$'' --- he dismisses immediately
+afterwards himself:
+\begin{quote}
+\textit{``This argument does \emph{not make it clear} that the signal
+energy must actually be dissipated.''}
+\end{quote}
+\hfill\cite{B1}, §~1
+
+The thermodynamic accounting depends on the \emph{circuit connections}
+--- the wiring, the construction of the computer --- not on the data, not
+on the program, not on the content of the bits. No energy can be assigned
+to an information bit; energy dissipates in the hardware element that is
+clocked, because the wiring switches it. That is Landauer's actual
+statement.
+
+\textbf{Why it is so often misread.} Landauer writes for engineers who
+know computer architecture. ``Degree of freedom associated with the
+information'' means in technical English: the component that serves to
+store information. Anyone reading without that background hears:
+information has a degree of freedom, therefore an energy. That is
+precisely the misunderstanding Landauer wanted to refute.
+
+\textbf{[B] The central conclusion.} The Landauer formula yields no
+energy quantity for information --- not even when applied to the physical
+bit. It gives the price of a region reduction of a \emph{concrete
+component} under \emph{concrete conditions} (quasi-static, uniform
+distribution, two-state system with specific switching kinetics). Which
+component, which kinetics, which conditions --- that is determined by the
+\emph{physical circuit connections}, not by the bit. The same logical
+operation on different hardware costs different amounts. The qubit shows:
+even ``one bit'' is not an unambiguous physical unit. The formula
+describes physics --- but not the physics of information; the physics of
+hardware elements that are clocked.
+
+\textbf{What this document does.} It exposes the phase-space accounting
+behind Landauer's argument --- region reduction, Liouville, bath as
+volume receiver --- and shows at every step: the accounting counts regions
+of physical elements; it reads no content.
+
+\textbf{[STIPULATION]} A physical system occupies a region in phase space. This
+region has a size --- measurable in units of $hf$
+(Section~\ref{sec:land-zaehlbasis-en}). It exists independently of how one
+names, subdivides, or describes it. That is the physical starting point.
+Everything else comes afterwards.
+
+\textbf{[B]} Descriptions come from outside. If one decides to divide the region
+into two sub-regions and call them ``A'' and ``B'', with target region ``Z'',
+one has introduced a description of the region reduction. Calling them instead
+``0'', ``1'' and ``0'' (traditional notation) creates the confusion with logical
+bits --- this convention obscures that ``0'' designates both the source region and
+the target region, and suggests an information content where there is none. If
+one divides more finely --- into 1000 zones --- one has introduced approximately
+10 logical bits. If one assigns only a number between 0 and~1, one has introduced
+an analogue value. Physics forces none of these decisions. The region is the same
+physical region in all cases.
+
+The terms ``bit'', ``byte'', ``qubit'', ``analogue value'' are labels for
+description decisions --- not for physical objects. They subdivide the region;
+they do not create it.
+
+\textbf{[B]} The Landauer bit is hardware --- not information. This is regularly
+confused. Clarification in one paragraph:
+
+A Landauer bit is a physical region with two stable macro-states --- a transistor,
+a capacitor, a wire that sits high or low. A bus bit is the same: a physical
+region with two stable macro-states, embedded in a parallel hardware architecture.
+A memory cell is the same. The three are structurally identical. Thermodynamics
+treats all three equally: $Q \geq k_B \cdot T \cdot \ln(W_{A+B}/W_Z)$ ---
+regardless of whether the region is called ``Landauer bit'', ``bus bit'', or
+``memory cell''.
+
+\textbf{The hardware is fixed before any computation. It does not change through
+what one computes with it.} A 64-bit bus has 64 physical regions --- before the
+computation, during the computation, after the computation. What the computation
+does with these regions --- which mappings it executes, which regions are reduced
+to which target regions --- is a logical description of these physical processes.
+The description does not exist in the hardware; it is an external interpretation.
+
+The information content of a bit --- whether it means ``true'' or ``false'',
+whether it belongs to a correct computation step, whether it is read at all ---
+is a decision at the description level. Thermodynamics does not know this level.
+It only knows: region~A and region~B exist; after the region reduction, target
+region~Z exists; $W_Z \leq W_{A+B}$; the bath absorbs the difference.
+
+\textbf{[B]} Three levels --- strictly separated:
+
+\textbf{Level~1 --- Construction.} The engineer decides during chip design which
+region operations exist --- bijective or non-bijective. This is cast in silicon,
+invariant during operation, before any computation. This decision fixes the
+thermodynamic cost structure --- not the computation, not the program.
+
+\textbf{Level~2 --- State transitions during operation.} Once the computer runs,
+state transitions occur clock-cycle by clock-cycle --- uniformly, at the clock
+frequency, regardless of what is being computed. Landauer costs arise only for
+\emph{non-bijective} region mappings --- when a component reduces multiple input
+regions to one target region~Z through its physical construction. This is fixed
+by the hardware architecture, not by any computation operation. A transistor
+flipping from region~A to region~B executes a bijective mapping --- no volume
+loss, no Landauer costs. What the description level does afterwards with the
+component's state is thermodynamically irrelevant.
+
+\textbf{The Landauer costs run at clock frequency, practically constant, as long
+as the computer runs} --- because the non-bijective region mappings are fixed by
+the designer and occur with every clock cycle. CPU utilisation says little about
+this: it measures how many clock cycles are used for computations at the
+description level --- but at idle, clock transitions continue to run through. The
+thermodynamic difference between high and low utilisation is small, as long as no
+physical parts are actually switched off. Clock gating, power gating --- those are
+hardware decisions at Level~1, not program decisions. The hardware determines ---
+not the program. Landauer states this explicitly in §~1 \cite{B1}:
+\begin{quote}
+\textit{``In most instances a computer pushes information around in a
+manner that is \emph{independent of the exact data} which are being
+handled, and is only a function of the \emph{physical circuit
+connections}.''}
+\end{quote}
+\hfill\cite{B1}, §~1
+
+The clocking couples the elements to the bath and sets the switching
+kinetics in motion --- but it does not change which elements are
+bijectively or non-bijectively connected. That is fixed by the wiring,
+before every clock cycle, independent of what is being computed.
+
+\textbf{[B]} From this it follows directly: no energy can be assigned
+to an information bit --- only to the hardware element that is clocked.
+The energy dissipates because the element switches, not because the bit
+carries a particular content, has a truth value, or is read at all. The
+element switches because the wiring prescribes it --- independent of the
+data. The thermodynamic accounting is blind to content; it knows only
+the element and its switching state.
+
+\textbf{[K]} Why the paper is so often misunderstood. Landauer writes
+from the perspective of an engineer who understands computer
+architecture. He immediately dismisses the naive energy argument ---
+``a binary device must have at least one degree of freedom associated
+with the information; classically a degree of freedom is associated
+with $kT$ of thermal energy'' --- himself:
+\begin{quote}
+\textit{``This argument does \emph{not make it clear} that the signal
+energy must actually be dissipated.''}
+\end{quote}
+\hfill\cite{B1}, §~1
+
+And he establishes that his Class-1 devices can hold information
+\emph{without} dissipation --- dissipation arises only
+\emph{when switching} \cite{B1}, §~2. Anyone with a background in
+computer engineering reads this immediately correctly: the degree of
+freedom belongs to the physical component, not to the bit as an
+abstract object. Anyone reading without that background confuses
+``degree of freedom associated with the information'' with an energy
+assignment to the information itself --- and arrives at precisely the
+misunderstanding that Landauer was trying to refute.
+
+\textbf{Level~3 --- Description.} The program, the computation, an AI controller
+can decide which hardware is used --- switch parts off, choose routes, determine
+that the full bit-width is not needed for a given result. This has absolutely
+nothing to do with Landauer. It is resource management at the description level.
+The thermodynamic costs of the hardware used still arise --- fixed by construction
+and switching moment, regardless of what the description level does with the
+results.
+
+\textbf{[K]} How much is inside a physical region? A colloidal particle in a
+1-\textmu m trap contains physically around $7.9 \cdot 10^9$ orthogonal quantum
+states (\texttt{landauer\_pruefskript.py}, Check~7). Calling two zones roughly
+``left'' and ``right'' describes this region with 1~logical bit. Dividing it into
+1000 zones describes the same region with $\approx 10$ logical bits. The physical
+region is identical in both cases --- the description depth is an observer's
+choice.
+
+\textbf{[B]} The cost of erasure depends on the region, not on the description.
+The formula is:
+\begin{equation}
+  Q \geq k_B \cdot T \cdot \ln\!\left(\frac{W_{\text{before}}}{W_{\text{after}}}\right)
+\end{equation}
+$W_{\text{before}}$ and $W_{\text{after}}$ are physical region sizes in units of
+$hf$. How one names this ratio --- whether as ``erasing 1~bit'' or ``factor-2
+reduction'' --- changes nothing in the physics.
+
+\textbf{[K]} The analogue case makes this particularly clear --- and at the same
+time shows its complexity. How many distinguishable states an analogue signal
+contains depends on several factors, all physical: the bandwidth $B$, the
+temperature $T$ and the resistance $R$ (Johnson--Nyquist noise:
+$U_{\mathrm{rms}} = \sqrt{4k_B T R B}$ \cite{B20}), the sensitivity of the
+measurement technique, the signal-to-noise ratio of the concrete system, and
+further external sources. There is no universal resolution limit for analogue
+signals --- it is a system property, not a natural constant.
+
+What can be said in general: when the resolution limit is set by the thermal
+noise of the bath itself (the physically deepest case), the principle already
+formulated in Section~\ref{sec:land-zaehlbasis-en} applies: the same bath that
+collects the erasure costs limits the grading of the analogue signal. The region
+count $W = L/\delta x$ and the erasure costs $k_B T \ln W$ scale with the same
+temperature --- the accounting is self-consistent. How many logical bits one
+assigns to the analogue region is independent of this and remains a description
+decision (Check~8: illustration with declared $\delta x$).
+
+\textbf{[B]} Shannon and Boltzmann are different bookkeeping systems \cite{B18,B19}.
+Shannon describes how much uncertainty a description carries:
+$H = -\sum_i p_i \log_2 p_i$ --- a quantity about descriptions. Boltzmann
+describes how large a physical region is: $S = k_B \ln W$ --- a quantity about
+regions. The two are identical only when the description maps exactly onto the
+physical micro-states and these are uniformly distributed. In any other case ---
+coarse division, unequal occupation, continuous systems --- they are different
+things with different units.
+
+\textbf{[K]} \textbf{[K]} What Landauer actually said in 1961 --- in the original:
+\begin{quote}
+\textit{``It is argued that computing machines inevitably involve devices
+which perform logical functions that do not have a single-valued inverse.
+This logical irreversibility is associated with physical irreversibility
+and requires a minimal heat generation, per machine cycle, typically of
+the order of $kT$ for each irreversible function.''}
+\end{quote}
+\hfill\cite{B1}, Abstract
+
+And in §~3 he specifies:
+\begin{quote}
+\textit{``We shall call a device \emph{logically irreversible} if the
+output of a device does not uniquely define the inputs.''}
+\end{quote}
+\hfill\cite{B1}, §~3
+
+Landauer speaks throughout of \emph{devices} --- physical hardware
+components --- and of \emph{logical functions} as their operations.
+He means a hardware property: a mapping in which different physical
+input states lead to the same physical output state --- a many-to-one
+mapping of the states of the information-bearing system. This is a
+statement about the \emph{physical structure of the operation itself},
+not about an external description decision. Landauer does not draw this
+separation: he understands logical irreversibility as a physical property
+of the hardware --- bijective or non-bijective --- that exists regardless
+of how one names or interprets the states. Logical irreversibility is a
+\emph{sufficient} condition for heat production in a certain class of
+operations --- not the only one. Every physically irreversible process
+produces heat, regardless of whether it is described as ``logically
+irreversible''; that is exactly the point of
+Section~\ref{sec:land-rechnet-immer-en}.\textbf{[B]} The error of the standard presentation is thus: it treats the
+description unit --- the bit --- as if it were a physical minimum size. It is not.
+A physical minimum size does exist: $hf$. But it has nothing to do with bits. The
+region comes first; how many bits one ascribes to it is a subsequent decision.
+
+% -----------------------------------------------------------------------
+\section{The One Idea from Which Everything Follows}
+\label{sec:land-eine-idee-en}
+
+A bit is physical: two \emph{distinguishable} states of a system. Two wells for
+a particle, two magnetisation directions, two voltage levels. What matters is
+only: the system can be in state ``0'' or ``1'', and one can tell them apart.
+
+\textbf{Region reduction:} Regardless of which region --- A or B --- the system
+was in before, afterwards it is in target region~Z. The target region~Z is freely
+choosable; what counts is exclusively the ratio $W_{A+B}/W_Z$.
+
+\begin{center}
+\begin{tabular}{ccc}
+  A & $\longrightarrow$ & \\
+  & $\searrow$ & Z \\
+  B & $\longrightarrow$ & \\
+\end{tabular}
+\end{center}
+
+Two regions are reduced to one --- the target region~Z. This mapping is
+\emph{not reversible}: knowing only the target region, one cannot reconstruct
+which source region the system was in. That --- and nothing else --- generates
+the cost (Section~\ref{sec:land-liouville-en}).
+
+% -----------------------------------------------------------------------
+\section{What ``Phase Space'' Means Here}
+\label{sec:land-phasenraum-en}
+
+Phase space is the space of all possible micro-states (all positions and momenta
+of all particles). A macro-state such as ``region~A'' is not a point in this
+space but a \emph{region}: many micro-states (thermal jitter in the left well ---
+each jitter position counts as ``0'').
+
+\textbf{[STIPULATION]} The Boltzmann entropy measures this region:
+\begin{equation}
+  S = k_B \cdot \ln W
+\end{equation}
+$W$ = phase-space volume of the region. Entropy here is a \textbf{measure of the
+size of the occupied region} --- nothing mysterious.
+
+\begin{center}
+\begin{tabular}{ccc}
+  Phase space before: & & Phase space after: \\[4pt]
+  \begin{tabular}{|c|c|}
+    \hline
+    A & B \\
+    \hline
+  \end{tabular}
+  & $\Longrightarrow$ &
+  \begin{tabular}{|c|c|}
+    \hline
+    Z & empty \\
+    \hline
+  \end{tabular} \\[6pt]
+  Volume: $2W_0$ ($A+B$) & & Volume: $W_0$ (only $Z$)
+\end{tabular}
+\end{center}
+
+\textbf{[B]} Erasure halves the accessible volume:
+\begin{equation}
+  \Delta S_{\text{region}} = -k_B \cdot \ln 2
+\end{equation}
+Pure volume accounting: $\Delta S$ follows solely from the ratio of
+the physical region sizes $W_0$ --- the same result for every transistor,
+every capacitor, every other hardware that executes a region reduction.
+(Generalisation to $N$ levels and non-uniform distributions:
+Section~\ref{sec:land-zaehlbasis-en}.)
+
+% -----------------------------------------------------------------------
+\section{Why It Is Not Free: Liouville}
+\label{sec:land-liouville-en}
+
+The microscopic dynamics (classically Hamiltonian, quantum-mechanically unitary)
+has a hard property, \textbf{Liouville's theorem} \cite{B2}:
+
+\textbf{[B]} The time evolution of a closed system \emph{preserves the phase-space
+volume}. Deform, shift, stir --- yes. Shrink --- never.
+
+Clarification: Liouville holds exactly only for the closed system \emph{without}
+a bath. For the sub-system ``bit'' alone --- after coupling to the bath --- it no
+longer holds. What is closed is only the total system bit + bath; for this, the
+total volume is preserved, while the bit sub-region may shrink at the expense of
+the bath region.
+
+Intuitively: the phase-space flow is an \emph{incompressible fluid}. An ink drop
+in water can be deformed arbitrarily; its volume remains.
+
+The trap closes:
+\begin{itemize}
+  \item Erasure \emph{requires}: $2W_0 \to W_0$ (halving).
+  \item Liouville \emph{forbids}: volume shrinkage in the closed system.
+\end{itemize}
+
+\textbf{[B]} Consequence: a closed system cannot erase. Not an engineering
+problem --- a theorem. The only way out: the system must not be closed. The volume
+must go somewhere --- into the bath (Section~\ref{sec:land-bad-en}).
+
+% -----------------------------------------------------------------------
+\section{The Bath as Volume Receiver}
+\label{sec:land-bad-en}
+
+When the bit is coupled to a heat bath, Liouville holds for the \emph{total
+system} bit + bath. If the bit region is to shrink by half (uniform case: both
+regions equally large), the bath region must at least \emph{double}. In the
+general case $\Delta S_{\text{bath}} \geq -\Delta S_{\text{bit}}$ (second law);
+the generalisation to $\ln(W_{\text{before}}/W_{\text{after}})$ follows in
+Section~\ref{sec:land-zaehlbasis-en}:
+\begin{equation}
+  \Delta S_{\text{bath}} \geq +k_B \cdot \ln 2
+\end{equation}
+A bath at temperature $T$ enlarges its region by absorbing energy; the
+fundamental relation $\mathrm{d}S = \delta Q/T$ translates this into heat:
+
+\textbf{[B]}
+\begin{equation}
+  Q \geq T \cdot \Delta S_{\text{bath}} = k_B \cdot T \cdot \ln 2
+\end{equation}
+This is the \textbf{Landauer bound} \cite{B1,B3}:
+
+Liouville (volume preserved) + accounting (bit region halved) $\Rightarrow$
+bath region doubled $\Rightarrow$ heat $\geq k_B T \ln 2$ into the bath.
+
+At 300~K: $k_B T \ln 2 \approx 2.87 \cdot 10^{-21}~\text{J}$ per bit
+(Check~1).
+
+Two conditions directly readable:
+\begin{itemize}
+  \item \textbf{No erasure without a bath} --- there is no other volume receiver.
+  \item \textbf{Equality only quasi-statically} --- any finite speed generates
+    additional dissipation $W \approx k_B T \ln 2 + B/\tau$ \cite{B4,B5}.
+\end{itemize}
+
+% -----------------------------------------------------------------------
+\section{Why 2? --- The Counting Basis}
+\label{sec:land-zaehlbasis-en}
+
+Binariness is \emph{convention, not physics}. In general:
+\begin{equation}
+  Q \geq k_B \cdot T \cdot \ln\!\left(\frac{W_{\text{before}}}{W_{\text{after}}}\right)
+\end{equation}
+--- a ratio of region sizes. $N$ levels reduced to one: $\ln N$ (Check~4). The
+$\ln 2$ is the computer-science special case.
+
+\textbf{[B]} What counts as a level? Not energy. Energy levels are not a valid
+counting basis: they can be degenerate or have unequal spacings without changing
+the count. The criterion is \emph{distinguishability}: two states count
+separately when they can in principle be told apart without error. For
+\emph{quantum systems} this means orthogonality in Hilbert space; for
+\emph{classical systems} it means distinguishability within the thermal resolution
+limit set by the bath. A bit can lie in two degenerate states of equal energy ---
+ideally even: holding costs nothing then, only forgetting. Level spacings act
+only indirectly, via thermal occupation probabilities. The proper currency is
+therefore the Gibbs form \cite{B6}:
+\begin{equation}
+  S = -k_B \cdot \sum_i p_i \ln p_i
+\end{equation}
+with $\ln N$ as the special case of uniform distribution. Unequally spaced,
+unequally occupied systems automatically carry less entropy (Checks 5--6).
+
+\textbf{[B]} The fundamental discretisation exists --- and it is $hf$. Classically
+the phase-space volume has units; $W$ is defined only up to an arbitrary cell
+size. The accounting is undisturbed by this, since only differences enter ---
+the cell cancels. Quantum mechanics sets the cell absolutely: the number of
+orthogonal states in a region $\Gamma$ of a system with $f$ degrees of freedom
+is
+\begin{equation}
+  N_{\max} = \Gamma / h^f \quad \text{\cite{B7}}
+\end{equation}
+(Check~7: colloid in 1-\textmu m trap $\approx 7.7 \cdot 10^9$
+orthogonal positional states in the 1D position space --- the ``2'' of the
+experiment is a coarse choice, not fundamental.)
+
+\begin{table}[h]
+\centering
+\caption{Fundamental vs.\ emergent two-valuedness}
+\begin{tabular}{lll}
+\toprule
+ & Spin-$\frac{1}{2}$ & Colloid in double well \\
+\midrule
+Origin of the 2 & fundamental: Hilbert space $\mathbb{C}^2$ & emergent: 2 metastable macro-regions \\
+Validity & always & only while barrier $\gg k_B T$ \\
+below that & nothing & quasi-continuum of micro-states \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{The quasi-analogue case.} A value in range $L$ with resolution $\delta x$
+carries $\ln(L/\delta x)$ levels; region reduction costs $k_B T \ln(L/\delta x)$
+(Check~8). $\delta x$ is not free: the bath noise sets it --- the same bath that
+collects the erasure costs limits the grading. No analogue trick bypasses the
+bound.
+
+% -----------------------------------------------------------------------
+\section{Why the Content Does Not Matter}
+\label{sec:land-inhalt-en}
+
+The entire calculation has at \emph{no point} asked what meaning region~A or~B
+carries, whether the bit belongs to a correct computation or not, whether it is
+interpreted as ``true'' or ``false''. Only this entered: \emph{how many}
+distinguishable regions before, \emph{how many} after.
+
+Thermodynamics counts regions; it does not read them. Region~A and region~B are
+physically equivalent --- physics knows no preferred direction, and the target
+region~Z is freely choosable.
+
+\textbf{[B]} Region reduction costs identically for every assignment ---
+regardless of how one interprets the regions. There is no thermodynamic content
+or truth detector.
+
+In the same language: a non-terminating computation dissipates energy without
+bound and has no truth value during this process. Energy turnover and semantic
+validity lie on different levels --- phase-space accounting here, representation
+there. Category separation: physical validity (hardware level) vs.\
+representational validity (content level).
+
+% -----------------------------------------------------------------------
+\section{The Same Statement from the Hardware Side}
+\label{sec:land-hardware-seite-en}
+
+The statement from Section~\ref{sec:land-inhalt-en} --- thermodynamics reads no
+content --- can be derived independently of the accounting directly from the
+physical structure of the computer.
+
+\textbf{[B]} The computer does not shrink. A 64-bit processor has the same number
+of transistors, the same number of wires, the same number of degrees of freedom
+before and after every operation. The phase space of the hardware remains
+constant --- $2^{64}$ possible states before, $2^{64}$ after. The result may
+need only 1~bit; the apparatus that produced it is nevertheless just as large.
+
+\textbf{[B]} What actually goes into the bath is the correlation. The logical
+mapping is many-to-one: many different input states land on the same output.
+Landauer calls this in §~4 \cite{B1} the physical \emph{many-into-one} mapping
+and states:
+\begin{quote}
+\textit{``Hence the physical `many into one' mapping, which is the source
+of the entropy change, need not happen in full detail during the machine
+cycle which performed the logical function. But it must eventually take
+place, and this is all that is relevant for the heat generation argument.''}
+\end{quote}
+\hfill\cite{B1}, §~4
+
+The language of correlations comes from Bennett \cite{B3}: the 63 discarded
+bits are logically gone, but physically the transistors --- the elements in
+Landauer's sense --- still carry the trace of which input states set them;
+only this trace is no longer reconstructible from the result. Landauer calls
+this \cite{B1}, Summary, the \emph{``unnecessary details of the computer's
+past history''} --- meaning the states of the elements that led to the result,
+not a temporal sequence. Precisely what is non-reconstructible goes as heat
+to the lattice. Not the silicon, but the elements that have forgotten which
+inputs they had.
+
+\textbf{[K]} The entropy accounting alone is not sufficient --- Landauer
+needs the dynamics as the vehicle. In the Summary \cite{B1} he states
+this explicitly:
+\begin{quote}
+\textit{``The information-bearing degrees of freedom of a computer
+\emph{interact} with the thermal reservoir represented by the remaining
+degrees of freedom. This interaction plays two roles. First of all, it
+acts as a sink for the energy dissipation involved in the computation.
+[\ldots] Secondly, the interaction acts as a source of noise causing
+errors.''}
+\end{quote}
+\hfill\cite{B1}, Summary
+
+The coupling of the information-bearing degrees of freedom to the heat
+bath is the physical mechanism --- without switching kinetics there is no
+heat flow, regardless of what the region accounting says. That is why
+Landauer devotes §~5 to a detailed analysis of the switching kinetics:
+relaxation time $\tau_0$, switching time $\tau_s$, Boltzmann error.
+Thermodynamics gives the lower bound; dynamics is the vehicle that
+enforces it.
+
+\textbf{[B]} The forgetting process is content-neutral. A processor computing
+$2+2=4$ and one computing $2+2=5$ switch the same number of transistors, discard
+the same bit-width, and pay the same thermodynamic bill to the bath. Physics does
+not distinguish the two. A result in region~A costs the same as one in region~B
+--- physics does not distinguish the regions.
+
+% -----------------------------------------------------------------------
+\section{Hardware and Computation Are Different Things}
+\label{sec:land-hardware-op-en}
+
+A fundamental error in the standard Landauer presentation: the hardware is treated
+as an image of the computation --- as if the physical apparatus only exists and is
+only thermodynamically active when a logical operation is being executed. This is
+wrong.
+
+\textbf{[B]} The hardware is not the computation. A 64-bit processor is a
+physical system with a 64-bit state space. This state space exists regardless of
+whether a meaningful operation is running, whether the result needs 1~bit or
+64~bits, what meaning the result carries, whether anyone reads the result or not.
+The hardware is not an abstraction --- it is silicon, wires, fields, capacitors,
+continuously interacting with their environment.
+
+\textbf{[B]} The computation is an abstraction over the hardware. It describes
+what the programmer or mathematician sees --- input, output, function. The
+hardware does not know this abstraction. It knows only state transitions, charge
+displacements, heat dissipation.
+
+\textbf{The consequence for Landauer.} When one asks ``what does erasing a bit
+cost'', one takes the abstraction as the starting point and looks for the
+thermodynamic costs of the logical operation. That is a legitimate question ---
+but it misses the physics of the real system. The real computer produces entropy
+continuously, independent of the logical abstraction currently running on it.
+
+% -----------------------------------------------------------------------
+\section{The Computer Always Computes}
+\label{sec:land-rechnet-immer-en}
+
+A physical computer does not stop computing when it waits for a result. The clock
+frequency runs, the transistors switch, the power supply delivers current ---
+continuously, regardless of whether ``useful'' work is happening. An idle
+processor runs empty loops. A waiting server sends keepalive packets. An operating
+system polls interrupts. There is no state ``computer is not computing'' while it
+is switched on.
+
+This means: the forgetting process from Section~\ref{sec:land-hardware-op-en}
+runs \emph{always}. The thermodynamic bill --- correlation loss, heat to the
+lattice --- does not stop, regardless of whether the result is needed or not.
+
+This sharpens Landauer's formulation. He isolates a single discrete event ---
+``region reduction costs $k_B T \ln 2$''. The reality is a \emph{continuous
+stream} of state transitions, correlation losses, and heat dissipations, 3~billion
+times per second in a modern processor, without pause.
+
+\textbf{Concrete example: Dynamic RAM.} A DRAM bit is a capacitor holding charge.
+But capacitors lose charge through leakage currents --- continuously, unstoppably.
+Therefore every DRAM cell must be \emph{refreshed} every 32--64~milliseconds: the
+refresh operation reads the state and writes it back. This happens clock-cycle by
+clock-cycle, automatically, for each of the billions of cells --- regardless of
+whether the data are currently needed, what meaning they carry, whether the
+program is sleeping.
+
+This is not a side effect --- it is the physical nature of the system. The
+DRAM refresh is \emph{not} a region reduction in the Landauer sense; it is a
+maintenance operation, and its direct costs are primarily engineering costs
+(leakage currents, recharging). But the reason it must happen at all is
+thermodynamic: the capacitor couples permanently to the heat bath.
+
+But that is not the whole point. The refresh \emph{itself} is not a passive
+reaction --- it requires active computation: a counter must run, the address of the
+next row to refresh must be computed, a timing signal must be generated, the
+memory bus must be locked, the sense amplifier must be activated. That is real
+computation --- with real state transitions, real correlation losses, real entropy
+flow into the bath. And this happens 15,000~times per second, for each memory
+bank, without interruption.
+
+\textbf{The computer pays entropy to exist --- not only to compute.} A DRAM that
+``does nothing'' for one hour has nonetheless undergone $\approx 112{,}000$
+refresh cycles per cell during that hour and produced entropy continuously. The
+stored information was the same throughout --- but the thermodynamic bill ran
+through.
+
+% -----------------------------------------------------------------------
+\section{Quantum Computers: Decoherence as Continuous Entropy Flow}
+\label{sec:land-quanten-en}
+
+For the quantum computer the same principle applies as for DRAM --- the physical
+apparatus continuously fights thermodynamic decay --- but the physics is more
+relentless.
+
+\textbf{What decoherence is.} A qubit in superposition has a phase relationship
+to its environment. Every smallest interaction --- a phonon, a photon, a magnetic
+field fluctuation --- changes this phase. The qubit does not lose its quantum
+nature because information is destroyed, but because the correlation between qubit
+and environment is distributed into the bath. Again Liouville: the volume is
+preserved, but it distributes over qubit-plus-environment correlations that no one
+controls any more.
+
+\textbf{The aggravation compared to DRAM.} For the classical DRAM one can refresh
+--- read state, write back, costs thermodynamically, works, because 0 and~1 are
+robust. For the qubit this is in principle impossible: a measurement collapses the
+superposition. An unknown quantum state can neither be copied (no-cloning theorem
+\cite{B14}) nor measured without changing it. Refresh in the classical sense does
+not exist.
+
+What does exist: \emph{quantum error correction} \cite{B15}. But this is
+thermodynamically even more expensive than DRAM refresh --- it needs 100--1000
+physical qubits per logical qubit, continuous syndrome measurements and classical
+correction operations. All of this runs through, clock-cycle by clock-cycle, for
+each logical qubit, even when no gate operation is being executed.
+
+\textbf{Decoherence time as DRAM analogue.} A superconducting qubit typically has
+$T_2 \approx 100~\mu\text{s}$ \cite{B16} --- after that, the phase information is
+distributed in the bath. That is seven times shorter than a DRAM refresh interval
+(64~ms), but qualitatively different: DRAM loses information slowly and steadily,
+the qubit loses it exponentially fast.
+
+\textbf{Content-neutral as always.} Decoherence does not distinguish between a
+qubit carrying a correct quantum state and one carrying a different region. It
+destroys both equally fast. The thermodynamic price of quantum computing does not
+depend on the content --- it depends on the physics of the system.
+
+\textbf{[H]} Open question. Whether there is a minimal price in principle for
+maintaining quantum coherence --- independent of the quality of error correction
+--- is an open question of quantum thermodynamics \cite{B17}.
+
+% -----------------------------------------------------------------------
+\section{Region Operations --- Volume-Preserving or Volume-Reducing}
+\label{sec:land-gebietsop-en}
+
+Every physical state change is a \textbf{mapping between phase-space regions}.
+The thermodynamically decisive question is exclusively: does the mapping preserve
+the region volume, or does it reduce it? Whether this mapping belongs to a
+``computation'', whether it is described as a logical operation, whether anyone
+considers it meaningful --- that is completely irrelevant for thermodynamics.
+
+\textbf{[B]} Volume-preserving mappings --- the region is reshaped, not reduced.
+Liouville holds. No thermodynamic lower bound. Traditionally such mappings are
+called ``reversible gates'' (NOT, CNOT, Toffoli) --- physically they are
+\emph{bijective region mappings}. Whether they are part of a computation or not is
+irrelevant.
+
+\textbf{[B]} Volume-reducing mappings --- multiple input regions land on the same
+target region~Z. Volume shrinks. The bath must absorb the difference.
+Traditionally called ``irreversible gates'' (AND, OR, ERASE) --- physically
+\emph{non-bijective region mappings}. Again: whether part of a computation or not
+is irrelevant.
+
+\textbf{[B]} Bennett \cite{B3} showed that any sequence of region mappings can in
+principle be executed as a pure sequence of volume-preserving mappings ---
+intermediate states are carried along and reversibly released at the end. The
+thermodynamic costs arise not at the intermediate steps, but exclusively at the
+final relinquishment of regions:
+
+\textbf{[B]} The lower bound attaches not to the mapping, but to the relinquishment
+of regions --- to the forgetting.
+
+% -----------------------------------------------------------------------
+\section{The Accounting in a Table}
+\label{sec:land-tabelle-en}
+
+\begin{table}[h]
+\centering
+\caption{Phase-space accounting for region reduction}
+\begin{tabular}{llll}
+\toprule
+Step & Bit region & Bath region & Total (Liouville) \\
+\midrule
+before & $2W_0$ & $W_{\text{bath}}$ & $2W_0 \cdot W_{\text{bath}}$ \\
+reduction to Z & $W_Z \leq W_0$ & ? & must $\geq 2W_0 W_{\text{bath}}$ remain \\
+therefore & $W_Z$ & $\geq 2 W_{\text{bath}}$ & preserved $\checkmark$ \\
+price & $\Delta S = -k_B \ln(W_v/W_Z)$ & $\Delta S \geq +k_B \ln(W_v/W_Z)$ & $Q \geq k_B T \ln(W_v/W_Z)$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% -----------------------------------------------------------------------
+\section{The Experiments and Their Limits}
+\label{sec:land-experimente-en}
+
+\textbf{The image.} Two glasses stand on a table --- region~A and region~B. Next
+to them, the ocean. Region reduction means: one glass is poured into the ocean.
+The glass volume does not disappear --- it disperses across 1.4~billion cubic
+kilometres. Liouville is satisfied: not a drop is lost.
+
+But: which glass it was --- A or~B --- is distributed so finely in the ocean's
+noise that no real instrument can ever separate it out again. Not because the
+information is destroyed (it is encoded in every current, every temperature
+gradient). But because the resolution limit of every real observer lies ten
+orders of magnitude below the signal.
+
+And: the ocean cannot afterwards under the same external conditions provide the
+same representation capacity for the two glasses. It can no longer show them
+separately --- the target region~Z is smaller than $A+B$. That is not ignorance;
+it is a physical fact about region sizes.
+
+The price of pouring: $Q \geq k_B T \ln 2$. Not due to ignorance --- because the
+ocean had to absorb the volume and heat flowed for this.
+
+(Check~2--3): Real CMOS switching event
+$\approx 10^{-17}$--$10^{-16}~\text{J}$ --- four to five orders of magnitude
+above Landauer. All bit erasures in the world together would have Landauer costs
+in the watt-to-kilowatt range; data centres actually consume tens of gigawatts
+\cite{B8} --- factor $10^7$--$10^{10}$. In every real machine the bound is
+invisible; it is the natural-law lower bound, the rest is engineering loss
+(CV$^2$-recharging, leakage currents, data transport).
+
+\textbf{[K]} The lower bound is universal --- but how far the real
+dissipation lies above it depends fundamentally on the physical
+realisation of the bit. This is not a weakness of the theory but
+Landauer's own statement \cite{B1}, Summary:
+\begin{quote}
+\textit{``Actual devices which are far from minimal in size and operate
+at high speeds will be likely to require a much larger energy dissipation
+to serve the purpose of erasing the unnecessary details of the
+computer's past history.''}
+\end{quote}
+\hfill\cite{B1}, Summary
+
+Three examples show the range:
+\begin{itemize}
+  \item \textbf{Single spin} --- one single degree of freedom, coupling
+    to the phonon bath via spin-lattice relaxation, barrier set by
+    Zeeman splitting. The realisation is closest to the bound.
+  \item \textbf{DRAM capacitor} --- $\sim 10^{10}$ electrons jointly
+    realise one bit. Leakage current is continuous; refresh costs
+    dominate the Landauer bound by many orders of magnitude. The
+    realisation determines the distance to the bound.
+  \item \textbf{Magnetic domain} --- collective state of
+    $\sim 10^6$~spins. Domain wall motion as switching mechanism.
+    The bound $k_B T \ln 2$ holds as a lower limit; actual costs
+    depend on domain geometry and wall mobility.
+\end{itemize}
+The claim ``$k_B T \ln 2$ per bit'' describes the \emph{lower bound}
+of a single region reduction in the quasi-static limit --- not the real
+dissipation of any concrete system. How much a real bit costs depends
+on the wiring, geometry, and switching kinetics of the component ---
+exactly what Landauer in §~1 calls the \emph{physical circuit
+connections}.
+
+\textbf{[H]} The actual lower bound is hard to pin down. The
+$k_BT\ln 2$ holds for the classical two-state region reduction ---
+but whether that is the smallest possible physical realisation of a
+bit remains open. The qubit demonstrates this: it uses the same
+physical degree of freedom as a classical spin
+($\mathcal{H} = \mathbb{C}^2$), but carries a continuous complex
+amplitude --- more than 1 classical bit in the same physical structure.
+What counts as the ``minimal realisation of a bit'' depends on how
+one counts bits --- and that is a description decision, not a physical
+boundary. Whether there is an absolute thermodynamic lower bound
+\emph{below} $k_BT\ln 2$ is an open question.
+
+\textbf{[K]} The ocean image. The bit volume that tips into the bath during region
+reduction stands in such an extreme disproportion to the bath (1~degree of freedom
+against $10^{23}$) that it lies \emph{below the resolution limit} of every real
+instrument. The bath absorbs the volume --- Liouville is satisfied --- but no
+measuring instrument can separate the signal from the bath's noise any more.
+
+\textbf{[B]} Epistemic vs.\ ontological --- a necessary caveat. Not measurable
+does not mean non-existent. The micro-states of the bath after the region
+reduction all still exist; every particle has a precise position and momentum; the
+information about which source region the system was in still resides in the
+correlations --- Liouville guarantees this explicitly. The bath has absorbed the
+volume, not destroyed it.
+
+Landauer holds \emph{not because} information is ontologically destroyed. It holds
+\emph{because} the bath must absorb the volume (Liouville) --- that is a statement
+about the mechanics, not about knowledge or perception.
+
+\textbf{[K]} Maxwell's demon \cite{B12} and Bennett's resolution \cite{B3}. A
+being knowing all $10^{23}$ micro-states of the bath --- a Laplace demon --- could
+trace the bit back in thought. Bennett's resolution 1982: the demon must
+\emph{erase its measurement notes} to begin a new cycle --- and that costs exactly
+$k_B T \ln 2$. The actual site of entropy production is the erasure of the notes,
+not the measurement itself.
+
+\textbf{The single-particle experiments}: Bérut et al.\ 2012 \cite{B4} (colloid
+in optical double well, cycle times 10--40~s), Jun/Gavrilov/Bechhoefer 2014
+\cite{B5} (feedback trap, higher precision). Both approach the bound and confirm
+the $1/\tau$ form of the additional dissipation (Check~9).
+
+\textbf{Three declared scepticism points:}
+\begin{enumerate}
+  \item \textbf{Extrapolation}: what is confirmed is a limit ($\tau \to \infty$)
+    that no experiment enters; the bound is fitted as an asymptote.
+  \item \textbf{Signal $\approx$ noise}: $k_B T \ln 2$ lies in the order of
+    magnitude of the thermal fluctuation of a single measurement; the result
+    exists only as an ensemble average.
+  \item \textbf{Success rate}: the protocols erase with 90--95\,\% reliability;
+    the accounting of failed erasures enters the balance.
+\end{enumerate}
+
+\textbf{Feedback extension}: with measurement + feedback the generalised second
+law $W_{\text{ext}} \leq -\Delta F + k_B T I$ (Sagawa--Ueda \cite{B9}),
+experimentally confirmed \cite{B10,B11}. Information is a resource in the
+accounting with energy exchange rate $k_B T$ per nat (Check~10).
+
+% -----------------------------------------------------------------------
+\section{Connection to Open Questions (Internal)}
+\label{sec:land-offen-en}
+
+\begin{itemize}
+  \item \textbf{Feedback accounting in fast systems}: computation operations at
+    ns time scales lie ten orders of magnitude from the tested quasi-static
+    regime; there the $B/\tau$ term dominates everything. Anyone wanting to
+    measure a Landauer-like residual in fast recurrent systems must include the
+    Sagawa--Ueda term $k_B T I$ \cite{B9} explicitly in the conventional budget
+    before a residual can count as new --- otherwise one measures feedback
+    thermodynamics, not new physics.
+  \item \textbf{FFGFT contact}: none. The Landauer accounting lives at the level
+    of statistical mechanics; the $\xi$-scheme is not touched (its own level,
+    its own accounting --- P20/P39-analogue).
+\end{itemize}
+
+% -----------------------------------------------------------------------
+\section{Summary in Five Sentences}
+\label{sec:land-kurz-en}
+
+Region reduction shrinks the phase-space region of the system; Liouville forbids
+volume shrinkage in closed systems; therefore a bath must absorb the volume, and
+the price is heat $\geq k_B T \ln(W_v/W_n)$ --- the $\ln 2$ only as the binary
+special case. Counting is by distinguishability (orthogonality), not by energy;
+the absolute fundamental discretisation yields $hf$, everything coarser is
+emergent counting at a chosen level. Not measurable does not mean non-existent:
+the micro-states of the bath all still exist, the information about the erased bit
+resides in correlations --- Landauer holds because of the mechanics (Liouville),
+not because of ignorance; the irreversibility is statistical, not ontologically
+absolute. The accounting counts regions and reads no contents --- every assignment
+costs identically. In practice the bound is never reached, because any finite
+speed generates additional dissipation that dominates by orders of magnitude.
+
+% -----------------------------------------------------------------------
+\section{Layer Status Summary}
+\label{sec:land-schicht-en}
+
+\begin{table}[h]
+\centering
+\caption{Layer status of statements}
+\begin{tabular}{ll}
+\toprule
+Statement & Status \\
+\midrule
+Bit $\neq$ physical region (Shannon vs.\ Boltzmann) & {[B]} \\
+$S = k_B \ln W$ as starting point & {[STIPULATION]} \\
+Region reduction $\{A,B\} \to Z$ & {[STIPULATION]} \\
+Region reduction $\Rightarrow \Delta S = -k_B \ln(W_{A+B}/W_Z)$ & {[B]} \\
+Liouville theorem & {[B]} \\
+Closed system cannot erase & {[B]} \\
+Landauer bound $Q \geq k_B T \ln 2$ & {[B]} \\
+Numerical value $2.87 \cdot 10^{-21}~\text{J}$ at 300~K & {[K]} \\
+Counting basis = orthogonality, not energy & {[B]} \\
+$hf$ as fundamental discretisation & {[B]} \\
+Gibbs form as general entropy & {[STIPULATION]} \\
+Content does not enter the accounting & {[B]} \\
+Hardware $\neq$ computation & {[B]} \\
+Computer does not shrink & {[B]} \\
+Correlation into bath (not silicon) & {[B]} \\
+Forgetting process content-neutral & {[B]} \\
+DRAM 112,000 refreshes/h & {[K]} \\
+No-cloning theorem & {[B]} \\
+$T_2 \approx 100~\mu\text{s}$ superconducting qubits & {[K]} \\
+Minimal price for coherence maintenance & {[H]} \\
+Volume-preserving mappings: no lower bound & {[B]} \\
+Volume-reducing mappings: bath pays & {[B]} \\
+Epistemic vs.\ ontological: correlations remain & {[B]} \\
+Sagawa--Ueda term $k_B T I$ & {[K]} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+15$\times$ [B] $\cdot$ 8$\times$ [K] $\cdot$ 3$\times$ [STIPULATION] $\cdot$
+1$\times$ [H]
+
+% -----------------------------------------------------------------------
+\section{Verification Scripts}
+\label{sec:land-pruef-en}
+
+\begin{itemize}
+  \item \texttt{python/A\_Serie\_Skripte/a270\_landauer.py}
+    (Checks 1--10)
+\end{itemize}
+
+% -----------------------------------------------------------------------
+\section{Open Questions}
+\label{sec:land-was-offen-en}
+
+\textbf{First.} Whether there is a minimal price in principle for maintaining
+quantum coherence --- independent of the quality of error correction --- is an
+open question of quantum thermodynamics [H].
+
+\textbf{Second.} The question of the continuous entropy flow of a physical
+computer as a function of its clock frequency, its bit-width, and its logical
+irreversibility is not conclusively treated in the literature.
+
+% -----------------------------------------------------------------------
+\section{Supersedes}
+\label{sec:land-ersetzt-en}
+
+This document has no direct legacy counterpart; it is a standalone working
+document on Landauer accounting and phase-space analysis.
+
+% -----------------------------------------------------------------------
+\section{References}
+\label{sec:land-belege-en}
+
+\begin{thebibliography}{99}
+
+\bibitem{B1}
+R.~Landauer,
+\textit{Irreversibility and Heat Generation in the Computing Process},
+IBM J.~Res.~Dev.\ \textbf{5}, 183 (1961).
+
+\bibitem{B2}
+Liouville's theorem: standard result of Hamiltonian mechanics;
+e.g.\ Landau/Lifshitz, \textit{Mechanics}, \S~46;
+quantum-mechanical counterpart: unitarity of time evolution.
+
+\bibitem{B3}
+C.\,H.~Bennett,
+\textit{The Thermodynamics of Computation --- a Review},
+Int.~J.~Theor.~Phys.\ \textbf{21}, 905 (1982);
+idem, \textit{Notes on Landauer's principle},
+Stud.~Hist.~Phil.~Mod.~Phys.\ \textbf{34}, 501 (2003).
+
+\bibitem{B4}
+A.~Bérut et~al.,
+\textit{Experimental verification of Landauer's principle},
+Nature \textbf{483}, 187 (2012).
+
+\bibitem{B5}
+Y.~Jun, M.~Gavrilov, J.~Bechhoefer,
+\textit{High-Precision Test of Landauer's Principle in a Feedback Trap},
+Phys.~Rev.~Lett.\ \textbf{113}, 190601 (2014).
+
+\bibitem{B6}
+E.\,T.~Jaynes,
+\textit{Information Theory and Statistical Mechanics},
+Phys.~Rev.\ \textbf{106}, 620 (1957).
+
+\bibitem{B7}
+Semi-classical state counting $\Gamma/h^f$: standard;
+e.g.\ Landau/Lifshitz, \textit{Statistical Physics}, \S~7.
+
+\bibitem{B8}
+Data centre energy consumption: IEA reports 2024/25,
+order of magnitude several hundred TWh/year worldwide
+($\approx$ tens of GW continuous power).
+Figure serves only for order-of-magnitude comparison.
+
+\bibitem{B9}
+T.~Sagawa, M.~Ueda,
+\textit{Second Law of Thermodynamics with Discrete Quantum Feedback Control},
+Phys.~Rev.~Lett.\ \textbf{100}, 080403 (2008);
+\textit{Generalized Jarzynski Equality under Nonequilibrium Feedback Control},
+Phys.~Rev.~Lett.\ \textbf{104}, 090602 (2010).
+
+\bibitem{B10}
+S.~Toyabe et~al.,
+\textit{Experimental demonstration of information-to-energy conversion},
+Nature Physics \textbf{6}, 988 (2010).
+
+\bibitem{B12}
+J.\,C.~Maxwell, \textit{Theory of Heat} (1871) --- origin of the thought
+experiment; standard presentation in H.\,S.~Leff and A.\,F.~Rex (eds.),
+\textit{Maxwell's Demon~2}, IOP Publishing (2003).
+
+\bibitem{B14}
+W.\,K.~Wootters and W.\,H.~Zurek,
+\textit{A single quantum cannot be cloned},
+Nature \textbf{299}, 802 (1982) --- no-cloning theorem.
+
+\bibitem{B15}
+P.\,W.~Shor,
+\textit{Scheme for reducing decoherence in quantum computer memory},
+Phys.~Rev.~A \textbf{52}, R2493 (1995);
+A.\,M.~Steane,
+\textit{Error correcting codes in quantum theory},
+Phys.~Rev.~Lett.\ \textbf{77}, 793 (1996).
+
+\bibitem{B16}
+F.~Arute et~al.\ (Google AI Quantum),
+\textit{Quantum supremacy using a programmable superconducting processor},
+Nature \textbf{574}, 505 (2019) --- typical $T_2$ times of superconducting
+qubits $\approx 100~\mu\text{s}$.
+
+\bibitem{B17}
+M.~Esposito and C.~Van den Broeck,
+\textit{Three faces of the second law: I.\ Master equation formulation},
+Phys.~Rev.~E \textbf{82}, 011143 (2010);
+P.~Kammerlander and J.~Anders,
+\textit{Coherence and measurement in quantum thermodynamics},
+Sci.~Rep.\ \textbf{6}, 22174 (2016).
+
+\bibitem{B18}
+C.\,E.~Shannon,
+\textit{A Mathematical Theory of Communication},
+Bell System Technical Journal \textbf{27}, 379 (1948).
+
+\bibitem{B19}
+E.\,T.~Jaynes,
+\textit{Information Theory and Statistical Mechanics},
+Phys.~Rev.\ \textbf{106}, 620 (1957).
+
+\bibitem{B20}
+Johnson--Nyquist noise: standard result;
+e.g.\ Kittel/Kroemer, \textit{Thermal Physics}, ch.~4.
+
+\end{thebibliography}

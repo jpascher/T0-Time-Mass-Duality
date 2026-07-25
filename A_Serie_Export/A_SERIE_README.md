@@ -1,7 +1,7 @@
 # FFGFT A-Serie — Fraktale Feldgeometrische Fundamentaltheorie / T0 Zeit-Masse-Dualität
 
 **Autor:** Johann Pascher (ORCID: 0009-0000-6518-4064)  
-**Version:** 1.1 (2026-07-23)  
+**Version:** 1.0 (2026-07-22)  
 **Zenodo DOI:** 10.5281/zenodo.20117635  
 **Sprachen:** Deutsch (kanonisch) · Englisch (parallele Fassung)
 
@@ -30,8 +30,6 @@ Sources/
 pdf/                   90 PDFs (45 De + 45 En)
 python/
   A_Serie_Skripte/     46 Prüfskripte (.py)
-  Dok190_Skripte/       1 Prüfskript zu Registereintrag R62
-Dok190_R62/             1 Eintragstext R62 für Dok. 190 (nach R61 einfügen; De+En)
 README.md
 CHANGELOG.md
 ```
@@ -68,7 +66,6 @@ Block 1  A100–A192   Sektoren
          A142 Gravitationsdynamik: Zeitfeld-Lagrange
          A145 Gravitationskonstante G = ξ²/(4m_char)
          A150 Quarks und Neutrinos
-         A155 Meson-Massen und Baryon-Kandidat (neu v1.1)
          A160 Quantenmechanik auf T⁴: Bell als Topologie
          A165 Bell-Tests und Hardware (IBM Heron r2, Mai 2026)
          A180 Information: Windungsquant Δw = 1
@@ -83,7 +80,7 @@ Block 2  A200–A250   Methodik und Bilanz
          A240 Abgrenzung: SM, GR, externe Rahmen
          A250 Verweistabelle: A-Serie und Altbestand
 
-Block 3  A260–A267   Erweiterungen
+Block 3  A260–A271   Erweiterungen
          A260 Casimir-Effekt
          A261 Skalenhierarchie: ξ → Massen → α → E₀
          A262 c-Konvention: E = mc² = E = m
@@ -92,7 +89,8 @@ Block 3  A260–A267   Erweiterungen
          A265 Rotverschiebung: statisch, achromatisch
          A266 Einheitenprüfung und SI-Rückrechnung
          A267 Stipulation α = 1
-         A270 Z₃-Sektor-Struktur und Hadron-Massenkorrektur (neu v1.1)
+         A270 Z₃-Sektor-Struktur und Hadron-Massenkorrektur
+         A271 Landauer und die Phasenraum-Buchhaltung
 ```
 
 ---
@@ -141,27 +139,12 @@ Block 3  A260–A267   Erweiterungen
 
 ---
 
-## Neu in v1.1 (2026-07-23)
+## Neu in v1.2 (2026-07-25)
 
-- **A155** (neu): Meson-Massen und Baryon-Kandidat — additiver Ansatz mit
-  Geltungsbereichs-Beweis; Pion-Anker n_eff(π⁰)=37,79; GMOR-Prüfung;
-  [S]-Kandidaten B ≈ 8Λ·K_frak⁻³⁷ und geometrische Proton-Formel
-  m_p = (π³/12)·N_c(1+α_s)·e^(−3ξ/4)·Λ/2 (Δ=+0,21 %); Strukturfund
-  16π³/(π³/12) = 192 (Weyl-Verbindung zur Higgs-Formel)
-- **A270** (neu): Z₃-Sektor-Struktur — Bulk-Exponent 36
-  (K_frak⁻³⁶ ≈ 16/π², gestützt durch k*/100); Sektor-Tabelle
-  Lepton +0 / Meson +1 / Baryon +2 topologisch fixiert; Confinement als
-  Fixpunkt-Bedingung; Koide/A150-Konsistenz; Baryon-Stufe als Vorhersage
-- **R62** (Registereintrag für Dok. 190, Text in Dok190_R62/):
-  Altkorpus-005-Protonrechnung — Anker π²/2 statt m_μ; reparierte Zeile
-  schließt auf +0,05 %; Aufspaltung QZ·K_corr unterbestimmt
-- **A230** aktualisiert: offener Punkt „T̃·m=1 für Verbundsysteme"
-  aufgenommen (benannt von J. T. Guevara Calderón, mit Attribution)
-- 3 neue Prüfskripte, alle Assertions bestanden
+- **A271** (neu): Landauer und die Phasenraum-Buchhaltung — Fehlinterpretation als Fragestellung, Landauers Originaltext als Antwort; „circuit connections" als Kernsatz; Energie gehört dem Hardware-Element, nicht dem Bit; Dynamik als Vehikel; Realisierungsabhängigkeit (Spin/DRAM/Domäne); Qubit-Untergrenze [H]. Prüfskript a271_landauer.py (Checks 1–10, alle BESTANDEN).
+- **A270** (neu v1.1): Z₃-Sektor-Struktur und Hadron-Massenkorrektur
 
----
-
-## Neu in v1.0 (2026-07-22)
+## Neu in v1.0/v1.1 (2026-07)
 
 - **A095** (neu): g_R = 0 auf [B] angehoben; Torus-Projektor P₊
 - **A192** (neu): U(1) und SU(3) aus Torus-Topologie [B]
@@ -171,7 +154,7 @@ Block 3  A260–A267   Erweiterungen
 - **A230**: Geschlossene Punkte explizit verzeichnet
 - **A240/A250**: Eichsektor-Status aktualisiert
 - **A010**: Neuer Abschnitt eigenständige Altbestand-Dokumente
-- Alle 43 En-Wrapper-Titel auf Englisch korrigiert
+- Alle 45 En-Wrapper-Titel auf Englisch korrigiert
 - KI-Abschnitt in A010 an den Anfang verschoben
 
 ---
@@ -198,7 +181,7 @@ Vollständige Zuordnung: A250.
 ## Prüfskripte
 
 ```
-python/A_Serie_Skripte/a???_*.py   (44 Skripte)
+python/A_Serie_Skripte/a???_*.py   (46 Skripte)
 ```
 
 Ausführung mit Python 3.10+. Alle Kernaussagen liefern `BESTANDEN`.

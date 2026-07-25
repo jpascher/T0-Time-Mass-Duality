@@ -73,11 +73,13 @@ Die **A-Serie** ist die sachgeordnete, vollständig auditierbare Fassung der FFG
 Block 0  A010–A095   Grundlage: Setzungen, Geometrie, Einheiten, Zeit, Hilbertraum
 Block 1  A100–A192   Sektoren: Leptonen, Konstanten, Gravitation, QM, Standardmodell
 Block 2  A200–A250   Methodik: Schichten, Falsifizierbarkeit, offene Punkte
-Block 3  A260–A267   Erweiterungen: Casimir, Skalenhierarchie, Dirac, Einheitenprüfung
+Block 3  A260–A271   Erweiterungen: Casimir, Skalenhierarchie, Dirac, Einheitenprüfung, Landauer
 ```
 
 **Neu in der A-Serie (Juli 2026):**
 
+- **A271** — Landauer und die Phasenraum-Buchhaltung: Fehlinterpretation als Fragestellung, Landauers Originaltext als Antwort; „circuit connections" als Kernsatz; Energie gehört dem Hardware-Element, nicht dem Bit; Prüfskript a271_landauer.py (Checks 1–10, alle BESTANDEN).
+- **A270** — Z₃-Sektor-Struktur und Hadron-Massenkorrektur [neu v1.1]
 - **A095** — Chiralität: g_R = 0 algebraisch bewiesen [B] aus dem Torus-Projektor P₊
 - **A192** — Eichsektor: U(1)_EM aus Flussquantisierung, SU(3)_C aus Verschlingungszahl
   — beide [B] aus Torus-Topologie
@@ -86,7 +88,7 @@ Block 3  A260–A267   Erweiterungen: Casimir, Skalenhierarchie, Dirac, Einheite
 - **A130** — Higgs-EFT-Abweichung 2,3 % strukturell erklärt
 - **A160** — CHSH-Vorfaktor ξ/(2π) geometrisch hergeleitet [B]
 
-Alle 45 Dokumente mit Prüfskripten:
+Alle 43 Dokumente mit Prüfskripten:
 **[A_Serie_Export/](A_Serie_Export/)** · **[A_SERIE_README.md](A_Serie_Export/A_SERIE_README.md)**
 
 ---
@@ -259,12 +261,12 @@ T0-Time-Mass-Duality/
 │   └── pdf/                   # ~100 Einzeldokumente A4 (Schlüsseldokumente, De+En)
 ├── A_Serie_Export/            # A-Serie kanonische Fassung (43 Docs × 2 Sprachen)
 │   ├── Sources/
-│   │   ├── ch/                # 86 Quelltexte (43 De + 43 En, *_ch.tex)
+│   │   ├── ch/                # 90 Quelltexte (45 De + 45 En, *_ch.tex)
 │   │   ├── pri-end/           # 3 Preamble-Dateien
-│   │   └── wr_standalone_A4/  # 86 Wrapper (43 De + 43 En)
+│   │   └── wr_standalone_A4/  # 90 Wrapper (45 De + 45 En)
 │   ├── pdf/                   # 86 PDFs (43 De + 43 En, A???_*.pdf)
 │   ├── python/
-│   │   └── A_Serie_Skripte/   # 44 Prüfskripte
+│   │   └── A_Serie_Skripte/   # 46 Prüfskripte
 │   ├── A_SERIE_README.md
 │   ├── A_SERIE_CHANGELOG.md
 │   └── A_SERIE_WORKFLOW.md

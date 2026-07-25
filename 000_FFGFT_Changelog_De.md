@@ -2521,3 +2521,63 @@ Formel CHSH(n) = 2√2·exp(−ξ ln n/D_f) ebenfalls [B].
   0 fehlende Glyphen. Alle PDFs in `A_Serie_Export/pdf/`, Quellen in
   `A_Serie_Export/Sources/`, Prüfskripte in
   `A_Serie_Export/python/A_Serie_Skripte/` (44 Skripte).
+
+## 44. Update (23. Juli 2026) — A-Serie v1.1: A155, A270 und Korrekturregister R62
+
+### Neue A-Serie-Dokumente
+
+**A155 (neu) — Meson-Massen und Baryon-Kandidat:**
+Additiver Ansatz mit Geltungsbereichs-Beweis; Pion-Anker n_eff(π⁰)=37,79;
+GMOR-Prüfung B_π≈B_K (chirale Konsistenz); [S]-Kandidaten
+B ≈ 8Λ·K_frak⁻³⁷ und geometrische Proton-Formel
+m_p = (π³/12)·N_c(1+α_s)·e^(−3ξ/4)·Λ/2 (Δ=+0,21 %);
+Strukturfund 16π³/(π³/12) = 192 (Weyl-Verbindung zur Higgs-Formel).
+
+**A270 (neu) — Z₃-Sektor-Struktur und Hadron-Massenkorrektur:**
+Bulk-Exponent 36: Schlüsselrelation K_frak⁻³⁶ ≈ 16/π² (Δ=0,010 %),
+unabhängig gestützt durch k*/100=36,09 (Dok. 275); Monte-Carlo-Statistik
+(Trefferrate 1,5 %; Spezifität: einziger Treffer unter 21 Konstanten).
+Orbifold-Struktur [B]: 3 Fixpunkte, Z₃-Eigenbasis (1, ω, ω²);
+Confinement topologisch erzwungen (Fixpunkt-Bedingung x=y=z),
+Meson-Stufe 36+1 aus A270. GMOR-Prüfung: B_π≈B_K (chirale Konsistenz);
+Sektor-Tabelle: Lepton +0 / Meson +1 / Baryon +2 topologisch fixiert.
+
+### Korrekturregister
+
+**R62 (neu in Dok. 190)** — Altkorpus-005-Protonrechnung: Anker π²/2 statt m_μ;
+reparierte Zeile schließt auf +0,05 %; Aufspaltung QZ·K_corr unterbestimmt.
+
+- Build: 45 De + 45 En PDFs, 0 Fehler. Prüfskripte (44).
+
+## 45. Update (25. Juli 2026) — A-Serie v1.2.6: A271 Landauer, Nummerierungskorrektur
+
+### Nummerierungskorrektur
+
+Doppelnummerierung behoben: A270 = Z₃-Sektor-Struktur (v1.1, unverändert).
+Das neue Landauer-Dokument erhält die Nummer **A271**.
+
+### Neues A-Serie-Dokument
+
+**A271 — Landauer und die Phasenraum-Buchhaltung (De + En, je 18 S.):**
+Fehlinterpretation als Fragestellung, Landauers Originaltext als Antwort.
+Kernsatz §1 (wörtlich):
+*„a computer pushes information around in a manner that is independent
+of the exact data which are being handled, and is only a function of
+the physical circuit connections."*
+Und Landauers eigene Verwerfung des naiven Energiearguments:
+*„This argument does not make it clear that the signal energy must
+actually be dissipated."*
+
+Folgerung: Einem Informationsbit kann keine Energie zugewiesen werden —
+auch nicht dem physischen Bit. Energie dissipiert im Hardware-Element das
+getaktet wird, weil die Verdrahtung es schaltet.
+Weitere Inhalte: Dynamik als Vehikel (Summary-Zitat); many-into-one mapping
+(§4-Zitat); Realisierungsabhängigkeit (Spin / DRAM / Magnetdomäne) mit
+Landauer-Beleg (Summary); Qubit-Untergrenze als offene Frage [H].
+Drei wörtliche Zitate aus Landauer 1961 mit §-Nachweis.
+
+Prüfskript: `a271_landauer.py` (Checks 1–10, alle BESTANDEN).
+Schichtstatus: 15× [B] · 8× [K] · 3× [SETZUNG] · 1× [H].
+
+- Build: 45 De + 45 En PDFs (90 gesamt), 0 Fehler. Prüfskripte (46).
+
