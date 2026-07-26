@@ -196,7 +196,7 @@ types (Doc. 270): Type I preserves mode structure, Type II is lossy,
 Type III is bijective (Hilbert representation). This classification
 closes a family of pseudo-paradoxes about dimensional reduction.
 
-The **correction register** (Doc. 190, K1–K4, P1–P43) records every
+The **correction register** (Doc. 190, K1–K6, P1–P44) records every
 correction and refinement with date and status. Nothing is silently
 overwritten. Errors in earlier script versions are archived as
 documented error states, not deleted.
@@ -290,11 +290,33 @@ wrappers in `Sources/wr_standalone_A4/`. A-Series fully compiled in
 
 ---
 
+
+## Doc. 307 — Λ as a Reading Artefact (July 2026, DE+EN)
+
+Two cores, computed and proved:
+
+**Two-Halves Synthesis [K]:** Einstein 1911 (time dilation only): α = 0.875″ — half.
+GR 1915: α = 1.750″ — time and space curvature each one half.
+In FFGFT, T̃·m=1 (time half) and fractal path elongation (space half, Doc. 182)
+are **complementary halves** of the same deflection — each exactly 0.875″, together
+exactly 1.750″. Consequence of K3 area invariance: γ_PPN = 1 exactly (Cassini passed).
+
+**Dark-Sector Ontology [K]:** Λ is a reading artefact — determined only from
+degenerate data, no independent anchor, becomes objectless under a reading change.
+Dark matter is not an artefact — reading-independent evidence (rotation curves,
+Bullet Cluster). P44 programme A/B/C fully computed:
+- Stage A: a₀ = cH₀/(2π) from ξ¹⁰ chain, 14% deviation from RAR
+- Stage B: factor-2 gate (each 0.875″); K3 sole survivor, γ_PPN=1 exactly
+- Stage C: Bullet passed (peak 10 kpc from galaxies); DDO 154 ratio 0.998
+
+Verification: `2/Dok307_Skripte/ffgft_307_p36_stufe*.py` (5 scripts, no free parameters).
+Documents: [DE](2/307_Lambda_Lesart_Artefakt_De.pdf) · [EN](2/307_Lambda_Reading_Artefact_En.pdf)
+
 ## Correction Register & Changelog
 
 The **correction register** [Doc. 190](2/pdf/190_T0_Korrekturen_De.pdf)
 documents every correction and refinement with date, status, and
-affected documents — K1–K4 (errors) and P1–P43 (refinements).
+affected documents — K1–K6 (corrections) and P1–P44 (refinements/programme).
 Nothing is silently overwritten.
 
 The **changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)

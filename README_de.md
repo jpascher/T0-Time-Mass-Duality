@@ -203,7 +203,7 @@ Die Reduktion T⁴ → T⁰ erfolgt in drei klar getrennten Operationstypen
 Typ III ist bijektiv (Hilbert-Darstellung). Diese Klassifikation beendet
 eine Familie von Pseudoparadoxen über Dimensionsreduktion.
 
-Das **Korrekturregister** (Dok. 190, K1–K4, P1–P43) dokumentiert
+Das **Korrekturregister** (Dok. 190, K1–K6, P1–P44) dokumentiert
 jede Korrektur und Präzisierung mit Datum und Status. Nichts wird
 still überschrieben. Fehler in früheren Skriptversionen sind als
 dokumentierte Fehlerstände im Archiv, nicht gelöscht.
@@ -298,11 +298,33 @@ Wrapper in `Sources/wr_standalone_A4/`. A-Serie vollständig kompiliert in
 
 ---
 
+
+## Dok. 307 — Λ als Lesart-Artefakt (Juli 2026, DE+EN)
+
+Zwei Kerne, gerechnet und bewiesen:
+
+**Zwei-Hälften-Synthese [K]:** Einstein 1911 (nur Zeitdilatation): α = 0,875″ — die Hälfte.
+ART 1915: α = 1,750″ — Zeit- und Raumkrümmung je eine Hälfte.
+In FFGFT sind T̃·m=1 (Zeithälfte) und fraktale Wegverlängerung (Raumhälfte, Dok. 182)
+**komplementäre Hälften** derselben Ablenkung — je exakt 0,875″, zusammen 1,750″.
+Konsequenz der K3-Flächeninvarianz: γ_PPN = 1 exakt (Cassini bestanden).
+
+**Ontologie des dunklen Sektors [K]:** Λ ist ein Lesart-Artefakt — nur aus entarteten
+Daten bestimmt, kein unabhängiger Anker, beim Lesartwechsel gegenstandslos.
+Dunkle Materie ist kein Artefakt — lesartunabhängige Belege (Rotationskurven, Bullet Cluster).
+P44-Programm A/B/C vollständig gerechnet:
+- Stufe A: a₀ = cH₀/(2π) aus ξ¹⁰-Kette, 14% Abweichung vom RAR-Wert
+- Stufe B: Faktor-2-Tor (je 0,875″); K3 einziger Überlebender, γ_PPN=1 exakt
+- Stufe C: Bullet-Cluster bestanden (Peak 10 kpc von Galaxien); DDO 154 ratio 0,998
+
+Prüfskripte: `2/Dok307_Skripte/ffgft_307_p36_stufe*.py` (5 Skripte, keine freien Parameter).
+Dokumente: [DE](2/307_Lambda_Lesart_Artefakt_De.pdf) · [EN](2/307_Lambda_Reading_Artefact_En.pdf)
+
 ## Korrekturregister & Changelog
 
 Das **Korrekturregister** [Dok. 190](2/pdf/190_T0_Korrekturen_De.pdf)
 dokumentiert jede Korrektur und Präzisierung mit Datum, Status und
-betroffenen Dokumenten — K1–K4 (Fehler) und P1–P43 (Präzisierungen).
+betroffenen Dokumenten — K1–K6 (Korrekturen) und P1–P44 (Präzisierungen/Programme).
 Nichts wird still überschrieben.
 
 Der **Changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)

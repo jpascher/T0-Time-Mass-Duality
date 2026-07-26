@@ -2531,3 +2531,58 @@ Formel CHSH(n) = 2√2·exp(−ξ ln n/D_f) ebenfalls [B].
   0 fehlende Glyphen. Alle PDFs in `A_Serie_Export/pdf/`, Quellen in
   `A_Serie_Export/Sources/`, Prüfskripte in
   `A_Serie_Export/python/A_Serie_Skripte/` (44 Skripte).
+
+## 44. Update (26. Juli 2026) — Dok. 307 (neu, DE+EN), Dok. 190 P44/R44, Zeichenerklärung
+
+### Dok. 307 — Λ als Lesart-Artefakt (neu, DE+EN, je ~15 S.)
+
+Neues Standarddokument (nicht A-Serie; Kosmologie-Bezug + externe Dok-Referenzen).
+Zwei Kerne:
+
+**Kern 1 — Zwei-Hälften-Synthese:**
+Einstein 1911 (nur Zeitdilatation): α = 0,875″ — die Hälfte.
+Einstein 1915 (ART): α = 1,750″ — Zeit- und Raumkrümmung je eine Hälfte.
+In FFGFT sind T̃·m=1 (Zeithälfte) und fraktale Wegverlängerung (Raumhälfte)
+**komplementäre Hälften** derselben Ablenkung — je exakt 0,875″, zusammen 1,750″.
+Konsequenz der K3-Flächeninvarianz: γ_PPN = 1 exakt (Cassini bestanden).
+FFGFT erklärt, warum Einstein 1911 die Hälfte fehlte.
+
+**Kern 2 — Ontologie-Status des dunklen Sektors:**
+Λ als Lesart-Artefakt (alle drei Bedingungen erfüllt): nur aus entarteten Daten
+bestimmt, kein unabhängiger Anker, beim Lesartwechsel gegenstandslos.
+Dunkle Materie ist kein Artefakt — lesartunabhängige Belege (Rotationskurven,
+Gravitationslinsen, Bullet Cluster).
+
+**P44 Programm A/B/C (vollständig gerechnet):**
+- Stufe A [K]: a₀ = cH₀/(2π) = 1,033×10⁻¹⁰ m/s² aus ξ¹⁰-Kette (K6), 14% Abw.
+- Stufe B [K]: Faktor-2-Tor (je 0,875″); K3 einziger Überlebender, γ_PPN=1 exakt
+- Stufe C [K]: Bullet-Cluster bestanden (Peak 10 kpc von Galaxien, M_gal/M_gas=10);
+  Rotationskurven: DDO 154 ratio 0,998; NGC 3198/MW ratio ∼0,80 (M_b-Unsicherheit)
+  μ-Grenzwerte begründet, Interpolationsform Setzung (P44-B offen)
+
+Verifikationsskripte in `2/Dok307_Skripte/` (5 Skripte, keine freien Parameter):
+`ffgft_307_p36_stufe[A/B1/B2/C1/C2]_*.py`
+
+### Dok. 190 — P44 (DE) / R44 (EN)
+
+Neuer Tabelleneintrag in DE (`190_T0_Korrekturen_De_ch.tex`) und EN
+(`190_T0_Korrekturen_En_ch.tex`): MOND/Rotationskurven/Bullet A/B/C,
+Stufen gerechnet, alle Ergebnisse, Skriptnamen.
+Statuszeile: **P1–P44** (DE), **R1–R44** (EN), Stand 26. Juli 2026.
+
+### Zeichenerklärung in Dok. 190 (DE+EN) und Dok. 307 (DE+EN)
+
+Neu: explizite Legende [K]/[S]/[SETZUNG] (DE) bzw. [K]/[S]/[POSIT] (EN)
+mit Erklärung der P/K/R-Nummern — erstmals in Dok. 190 und Dok. 307.
+
+### Dateien
+
+```
+2/307_Lambda_Lesart_Artefakt_De.tex/pdf          neu
+2/307_Lambda_Reading_Artefact_En.tex/pdf         neu
+2/190_T0_Korrekturen_De.pdf                      aktualisiert (P44)
+2/190_T0_Korrekturen_En.pdf                      aktualisiert (R44)
+2/Sources/ch/190_T0_Korrekturen_De_ch.tex        P44 + Zeichenerklärung
+2/Sources/ch/190_T0_Korrekturen_En_ch.tex        R44 + Legend
+2/Dok307_Skripte/README.md + 5 × .py             neu
+```
