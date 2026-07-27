@@ -4,6 +4,35 @@ Alle wesentlichen Änderungen dieser Serie. Format: Datum · Dokument · Inhalt.
 
 ---
 
+## v1.4 — 2026-07-27
+
+### Dokumentenzählung korrigiert: 47 → 48
+
+- **A155 (Meson-Sektor)** war in der Blockstruktur des README nicht gelistet,
+  obwohl PDF, Quelltexte (De + En) und Prüfskript (`a155_meson.py`) vorhanden
+  und vollwertiger Teil von Block 1 sind. A155 ist jetzt in der Blockstruktur
+  (nach A150) ergänzt; die kanonische Zählung steht auf **48 Dokumenten**
+  (96 PDFs De + En, 48 Prüfskripte).
+- Keine inhaltliche Änderung an den Dokumenten selbst — reine Korrektur einer
+  Zählungs- und Listungslücke im README.
+
+### Ausgeschlossen aus dem kanonischen Stand
+
+- **A280 / A281 / A282** (Doppel-Nummerierung der Thermodynamik-Trilogie
+  Landauer / Träger und Information / Rechenkugel) sind Altstände der unter
+  A271 / A272 / A273 kanonisch geführten Trilogie. Sie besitzen keine eigenen
+  Quelltexte (nur PDFs) und sind nicht Teil des kanonischen Objekts. Ebenso
+  entfällt das verirrte `a282_rechenkugel.py` (Dublette von `a273_rechenkugel.py`).
+
+### Release
+
+- v1.4 wird als eigenständiges Zenodo-Release deponiert (eigene Versions-DOI
+  unter der Konzept-DOI 10.5281/zenodo.20117635). Das eingefrorene Objekt umfasst
+  die 48 kanonischen Dokumente A010–A273, README, CHANGELOG, WORKFLOW und die
+  48 Prüfskripte.
+
+---
+
 ## v1.3 — 2026-07-25
 
 ### Neu: A272 Träger und Information (De + En, je 12/11 S.)

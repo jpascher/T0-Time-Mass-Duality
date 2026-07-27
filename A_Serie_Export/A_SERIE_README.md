@@ -1,8 +1,8 @@
 # FFGFT A-Serie — Fraktale Feldgeometrische Fundamentaltheorie / T0 Zeit-Masse-Dualität
 
 **Autor:** Johann Pascher (ORCID: 0009-0000-6518-4064)  
-**Version:** 1.3 (2026-07-25)  
-**Zenodo DOI:** 10.5281/zenodo.20117635  
+**Version:** 1.4 (2026-07-27)  
+**Zenodo DOI (Konzept, alle Versionen):** 10.5281/zenodo.20117635 — v1.4 erhält beim Deposit eine eigene Versions-DOI.  
 **Sprachen:** Deutsch (kanonisch) · Englisch (parallele Fassung)
 
 ---
@@ -10,7 +10,7 @@
 ## Was ist die A-Serie?
 
 Die A-Serie ist die kanonische, sachgeordnete Fassung der FFGFT. Sie fasst mehr
-als 300 Altdokumente in 47 thematisch geordneten Dokumenten zusammen — ein Thema
+als 300 Altdokumente in 48 thematisch geordneten Dokumenten zusammen — ein Thema
 an einem Ort, jede Aussage mit Schichtstatus markiert, alle Korrekturen
 eingearbeitet.
 
@@ -24,19 +24,19 @@ will, was die Theorie heute behauptet.
 
 ```
 Sources/
-  ch/                  94 Quelltexte (47 De + 47 En, *_ch.tex)
+  ch/                  96 Quelltexte (48 De + 48 En, *_ch.tex)
   pri-end/              3 Preamble-Dateien
-  wr_standalone_A4/    94 Wrapper (47 De + 47 En, kompilierfertig)
-pdf/                   94 PDFs (47 De + 47 En)
+  wr_standalone_A4/    96 Wrapper (48 De + 48 En, kompilierfertig)
+pdf/                   96 PDFs (48 De + 48 En)
 python/
-  A_Serie_Skripte/     47 Prüfskripte (.py)
+  A_Serie_Skripte/     48 Prüfskripte (.py)
 README.md
 CHANGELOG.md
 ```
 
 ---
 
-## Blockstruktur (47 Dokumente)
+## Blockstruktur (48 Dokumente)
 
 ```
 Block 0  A010–A095   Grundlage
@@ -66,6 +66,7 @@ Block 1  A100–A192   Sektoren
          A142 Gravitationsdynamik: Zeitfeld-Lagrange
          A145 Gravitationskonstante G = ξ²/(4m_char)
          A150 Quarks und Neutrinos
+         A155 Meson-Sektor
          A160 Quantenmechanik auf T⁴: Bell als Topologie
          A165 Bell-Tests und Hardware (IBM Heron r2, Mai 2026)
          A180 Information: Windungsquant Δw = 1
@@ -183,7 +184,7 @@ Vollständige Zuordnung: A250.
 ## Prüfskripte
 
 ```
-python/A_Serie_Skripte/a???_*.py   (47 Skripte)
+python/A_Serie_Skripte/a???_*.py   (48 Skripte)
 ```
 
 Ausführung mit Python 3.10+. Alle Kernaussagen liefern `BESTANDEN`.
