@@ -291,32 +291,46 @@ wrappers in `Sources/wr_standalone_A4/`. A-Series fully compiled in
 ---
 
 
-## Doc. 307 — Λ as a Reading Artefact (July 2026, DE+EN)
+## Docs. 308–309 — Cosmic Sector and Scale-Anchor Problem (July 2026, DE+EN)
 
-Two cores, computed and proved:
+### Doc. 308 — The Cosmic Sector of FFGFT
 
-**Two-Halves Synthesis [K]:** Einstein 1911 (time dilation only): α = 0.875″ — half.
-GR 1915: α = 1.750″ — time and space curvature each one half.
-In FFGFT, T̃·m=1 (time half) and fractal path elongation (space half, Doc. 182)
-are **complementary halves** of the same deflection — each exactly 0.875″, together
-exactly 1.750″. Consequence of K3 area invariance: γ_PPN = 1 exactly (Cassini passed).
+Completely rewritten. Three cores, computed and proved:
 
-**Dark-Sector Ontology [K]:** Λ is a reading artefact — determined only from
-degenerate data, no independent anchor, becomes objectless under a reading change.
-Dark matter is not an artefact — reading-independent evidence (rotation curves,
-Bullet Cluster). P44 programme A/B/C fully computed:
-- Stage A: a₀ = cH₀/(2π) from ξ¹⁰ chain, 14% deviation from RAR
-- Stage B: factor-2 gate (each 0.875″); K3 sole survivor, γ_PPN=1 exactly
-- Stage C: Bullet passed (peak 10 kpc from galaxies); DDO 154 ratio 0.998
+**Redshift [K]:** Static universe, 1+z = e^(ξx), achromatic (all wavelengths same factor).
+Degeneracy of SNe/BAO/CMB data between expansion and static reading (Doc. 267).
+Λ (dark energy): reading artefact — all three conditions met, no reading-independent referent.
 
-Verification: `2/Dok307_Skripte/ffgft_307_p36_stufe*.py` (5 scripts, no free parameters).
-Documents: [DE](2/307_Lambda_Lesart_Artefakt_De.pdf) · [EN](2/307_Lambda_Reading_Artefact_En.pdf)
+**Two-Halves Synthesis [K]:** K3 area invariance: T̃·m=1 (time half) and fractal path elongation
+(space half) are complementary halves — each 0.875″, together 1.750″. γ_PPN=1 exactly (Cassini passed).
+The same K3 structure carries the inertia transition: time cycle + space cycle = 4πR_H.
+
+**Inertia regime [K]/[S]:** Force law a=√(a_N²+a_N·a₀), no free parameter.
+a₀ = c²ξ¹⁰/(4λ̄ₑ) = 1.033×10⁻¹⁰ m/s² from ξ¹⁰ chain + Unruh + K3 cycles.
+Note: a₀ is the **inertia transition scale** (T̃·m=1 + Unruh), not a gravitational parameter.
+DDO 154 ratio 1.001; Bullet Cluster peak 10 kpc from galaxies.
+Dark matter: "a regime, not a substance" — findings real, no particles required.
+
+Verification: `2/Dok308_Skripte/ffgft_308_p44_stufe*.py` (4 scripts, no free parameters).
+Documents: [DE](2/pdf/308_Lambda_Lesart_Artefakt_De.pdf) · [EN](2/pdf/308_Lambda_Lesart_Artefakt_En.pdf)
+
+### Doc. 309 — The Scale-Anchor Problem
+
+New document (not A-series). 9 pages DE+EN.
+
+Both theories need a scale anchor — but differently:
+- **ΛCDM:** ~6 free parameters, H₀ measured circularly (4-rung distance ladder), fine-tuning 10¹²³.
+- **FFGFT:** ξ structure [K], magnitude 5⁴ [POSIT, P33]. Exponent 10 in H₀=(π/2)·c·ξ¹⁰/λ̄ₑ is the actual fit [POSIT, P20].
+- **Inheritance (newly identified):** Exponent 10 calibrated to H₀_ΛCDM → FFGFT inherits the systematics of the expansion reading.
+- **Cross-anchoring:** ξ¹⁰ reproduces both H₀ and a₀ — not expected from a pure H₀ fit.
+
+Documents: [DE](2/pdf/309_Skalenanker_LCDM_FFGFT_De.pdf) · [EN](2/pdf/309_Skalenanker_LCDM_FFGFT_En.pdf)
 
 ## Correction Register & Changelog
 
 The **correction register** [Doc. 190](2/pdf/190_T0_Korrekturen_De.pdf)
 documents every correction and refinement with date, status, and
-affected documents — K1–K6 (corrections) and P1–P44 (refinements/programme).
+affected documents — K1–K6 (corrections) and P1–P43 (refinements/programme, as of 22 July 2026).
 Nothing is silently overwritten.
 
 The **changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)

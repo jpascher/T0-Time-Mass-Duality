@@ -2534,7 +2534,7 @@ Formel CHSH(n) = 2√2·exp(−ξ ln n/D_f) ebenfalls [B].
 
 ## 44. Update (26. Juli 2026) — Dok. 307 (neu, DE+EN), Dok. 190 P44/R44, Zeichenerklärung
 
-### Dok. 307 — Λ als Lesart-Artefakt (neu, DE+EN, je ~15 S.)
+### Dok. 308 — Λ als Lesart-Artefakt (neu, DE+EN, je ~15 S.)
 
 Neues Standarddokument (nicht A-Serie; Kosmologie-Bezug + externe Dok-Referenzen).
 Zwei Kerne:
@@ -2560,8 +2560,8 @@ Gravitationslinsen, Bullet Cluster).
   Rotationskurven: DDO 154 ratio 0,998; NGC 3198/MW ratio ∼0,80 (M_b-Unsicherheit)
   μ-Grenzwerte begründet, Interpolationsform Setzung (P44-B offen)
 
-Verifikationsskripte in `2/Dok307_Skripte/` (5 Skripte, keine freien Parameter):
-`ffgft_307_p36_stufe[A/B1/B2/C1/C2]_*.py`
+Verifikationsskripte in `2/Dok308_Skripte/` (5 Skripte, keine freien Parameter):
+`ffgft_308_p36_stufe[A/B1/B2/C1/C2]_*.py`
 
 ### Dok. 190 — P44 (DE) / R44 (EN)
 
@@ -2578,11 +2578,77 @@ mit Erklärung der P/K/R-Nummern — erstmals in Dok. 190 und Dok. 307.
 ### Dateien
 
 ```
-2/307_Lambda_Lesart_Artefakt_De.tex/pdf          neu
-2/307_Lambda_Reading_Artefact_En.tex/pdf         neu
+2/308_Lambda_Lesart_Artefakt_De.tex/pdf          neu
+2/308_Lambda_Reading_Artefact_En.tex/pdf         neu
 2/190_T0_Korrekturen_De.pdf                      aktualisiert (P44)
 2/190_T0_Korrekturen_En.pdf                      aktualisiert (R44)
 2/Sources/ch/190_T0_Korrekturen_De_ch.tex        P44 + Zeichenerklärung
 2/Sources/ch/190_T0_Korrekturen_En_ch.tex        R44 + Legend
-2/Dok307_Skripte/README.md + 5 × .py             neu
+2/Dok308_Skripte/README.md + 5 × .py             neu
 ```
+
+## 45. Update (27. Juli 2026) — Dok. 308 (Neufassung), Dok. 309 (neu), Dok. 190 Rücknahme P44
+
+### Dok. 308 — Der kosmische Sektor der FFGFT (vollständig neu, DE+EN, je 11 S.)
+
+Vollständig neu geschrieben (3 Iterationen in dieser Session). Neuer Titel und Struktur:
+„Der kosmische Sektor der FFGFT: Rotverschiebung, dunkler Sektor und geometrische Gravitation"
+
+**Drei Kerne:**
+
+1. Statisches Universum / Rotverschiebung: 1+z = e^(ξx), achromatisch [K];
+   Entartung SNe/BAO/CMB (Dok. 267); Λ als Lesart-Artefakt [K].
+
+2. Geometrische Gravitation — Zwei-Hälften-Synthese: K3-Flächeninvarianz,
+   0,875″ + 0,875″ = 1,750″, γ_PPN=1 exakt [K]. Dieselbe Struktur → 4πR_H
+   → a_bg → a_0 [K]/[S].
+
+3. Dunkler Sektor: DE gegenstandslos beim Lesartwechsel; DM „ein Regime, kein Stoff";
+   Kraftgesetz a=√(a_N²+a_N·a_0) aus T̃·m=1 + Unruh + K3, kein freier Parameter.
+   DDO 154 ratio 1,001; Bullet Cluster bestanden [K].
+
+**Terminologiekorrektur:** a_0 durchgehend als „Übergangsskala des Trägheitsregimes"
+bezeichnet (nicht Gravitationsparameter). G~ξ² (Dok. 012), a_0~ξ¹⁰ — verschiedene
+Mechanismen. Korrigiert in: Konventionen (DE+EN), Abschnittstitel (DE+EN),
+Querverankerungstabelle Dok. 309.
+
+**Skripte:** 4 Skripte in 2/Dok308_Skripte/ (p36→p44 umbenannt,
+ffgft_308_p44_stufeA_a0_kette.py neu).
+
+### Dok. 309 — Das Skalenanker-Problem: ΛCDM und FFGFT im Vergleich (neu, DE+EN, je 9 S.)
+
+Neue Arbeitsnotiz (nicht A-Serie). Inhalt:
+
+- SI seit 2019: alle Einheiten auf ν_Cs zurückführbar, kein physikalisch
+  ausgezeichneter erster Anker. Dimensionslose Formulierung H_0/ν_e = (π/2)·ξ¹⁰.
+- ΛCDM: ~6 freie Parameter, H_0 zirkulär (4-stufige Leiter), Feinabstimmung 10^123.
+- FFGFT: ξ-Struktur [K] (P33), Magnitude 5^4 [SETZUNG]; Exponent 10 ist der
+  eigentliche Fit [SETZUNG, P20] — nicht ξ selbst.
+- Vererbungsproblem (neu benannt): n=10 an H_0_ΛCDM kalibriert → FFGFT erbt
+  die Systematik der Expansionslesart. Ausweg: lesartunabhängige Herleitung
+  aus T^4-Geometrie — bisher nicht geleistet.
+- Querverankerung: ξ^10 reproduziert H_0 und a_0 — nicht bei reinem H_0-Fit erwartet.
+
+Dateien:
+```
+2/Sources/wr_standalone_A4/309_Skalenanker_LCDM_FFGFT_De.tex  neu
+2/Sources/wr_standalone_A4/309_Skalenanker_LCDM_FFGFT_En.tex  neu
+2/Sources/ch/309_Skalenanker_LCDM_FFGFT_De_ch.tex             neu
+2/Sources/ch/309_Skalenanker_LCDM_FFGFT_En_ch.tex             neu
+2/pdf/309_Skalenanker_LCDM_FFGFT_De.pdf                       neu
+2/pdf/309_Skalenanker_LCDM_FFGFT_En.pdf                       neu
+2/309_Skalenanker_LCDM_FFGFT.md                               Arbeitsnotiz
+```
+
+### Dok. 190 — Rücknahme P44/R44, Zeichenerklärung bleibt
+
+P44 (DE) und R44 (EN) aus Dok. 190 zurückgenommen — Dok. 308 noch nicht released,
+kein Registereintrag auf unveröffentlichtes Dokument. Status: P1–P43 / R1–R43,
+Stand 22. Juli 2026.
+
+Zeichenerklärung [K]/[S]/[SETZUNG] in der Vorbemerkung bleibt (unabhängig von Dok. 308).
+
+### README.md (EN) und README_de.md aktualisiert
+
+Dok-308-Abschnitt ersetzt durch Dok. 308+309 (neue Titel, korrekte a_0-Bezeichnung,
+Dok. 309 neu eingetragen). P44-Referenz im Korrekturregister-Hinweis auf P43 korrigiert.

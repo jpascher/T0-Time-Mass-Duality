@@ -299,32 +299,49 @@ Wrapper in `Sources/wr_standalone_A4/`. A-Serie vollständig kompiliert in
 ---
 
 
-## Dok. 307 — Λ als Lesart-Artefakt (Juli 2026, DE+EN)
+## Dok. 308 und 309 — Kosmischer Sektor und Skalenanker-Problem (Juli 2026, DE+EN)
 
-Zwei Kerne, gerechnet und bewiesen:
+### Dok. 308 — Der kosmische Sektor der FFGFT
 
-**Zwei-Hälften-Synthese [K]:** Einstein 1911 (nur Zeitdilatation): α = 0,875″ — die Hälfte.
-ART 1915: α = 1,750″ — Zeit- und Raumkrümmung je eine Hälfte.
-In FFGFT sind T̃·m=1 (Zeithälfte) und fraktale Wegverlängerung (Raumhälfte, Dok. 182)
-**komplementäre Hälften** derselben Ablenkung — je exakt 0,875″, zusammen 1,750″.
-Konsequenz der K3-Flächeninvarianz: γ_PPN = 1 exakt (Cassini bestanden).
+Vollständig neu geschrieben. Drei Kerne, gerechnet und bewiesen:
 
-**Ontologie des dunklen Sektors [K]:** Λ ist ein Lesart-Artefakt — nur aus entarteten
-Daten bestimmt, kein unabhängiger Anker, beim Lesartwechsel gegenstandslos.
-Dunkle Materie ist kein Artefakt — lesartunabhängige Belege (Rotationskurven, Bullet Cluster).
-P44-Programm A/B/C vollständig gerechnet:
-- Stufe A: a₀ = cH₀/(2π) aus ξ¹⁰-Kette, 14% Abweichung vom RAR-Wert
-- Stufe B: Faktor-2-Tor (je 0,875″); K3 einziger Überlebender, γ_PPN=1 exakt
-- Stufe C: Bullet-Cluster bestanden (Peak 10 kpc von Galaxien); DDO 154 ratio 0,998
+**Rotverschiebung [K]:** Statisches Universum, 1+z = e^(ξx), achromatisch.
+Entartung der SNe/BAO/CMB-Daten zwischen Expansions- und statischer Lesart (Dok. 267).
+Λ (dunkle Energie): Lesart-Artefakt — alle drei Bedingungen erfüllt.
 
-Prüfskripte: `2/Dok307_Skripte/ffgft_307_p36_stufe*.py` (5 Skripte, keine freien Parameter).
-Dokumente: [DE](2/307_Lambda_Lesart_Artefakt_De.pdf) · [EN](2/307_Lambda_Reading_Artefact_En.pdf)
+**Zwei-Hälften-Synthese [K]:** K3-Flächeninvarianz: T̃·m=1 (Zeithälfte) und fraktale
+Wegverlängerung (Raumhälfte) sind komplementäre Hälften — je 0,875″, zusammen 1,750″.
+γ_PPN = 1 exakt (Cassini bestanden). Dieselbe K3-Struktur trägt den Trägheitsübergang:
+Zeitzyklus + Raumzyklus = 4πR_H.
+
+**Trägheitsregime [K]/[S]:** Kraftgesetz a=√(a_N²+a_N·a₀), kein freier Parameter.
+a₀ = c²ξ¹⁰/(4λ̄ₑ) = 1,033×10⁻¹⁰ m/s² aus ξ¹⁰-Kette + Unruh + K3-Zyklen.
+Hinweis: a₀ ist die **Übergangsskala des Trägheitsregimes** (T̃·m=1 + Unruh),
+kein Gravitationsparameter (G ~ ξ², Dok. 012).
+DDO 154 ratio 1,001; Bullet Cluster Peak 10 kpc von Galaxien.
+Dunkle Materie: „ein Regime, kein Stoff" — Befunde real, keine Teilchen nötig.
+
+Verifikation: `2/Dok308_Skripte/ffgft_308_p44_stufe*.py` (4 Skripte, keine freien Parameter).
+Dokumente: [DE](2/pdf/308_Lambda_Lesart_Artefakt_De.pdf) · [EN](2/pdf/308_Lambda_Lesart_Artefakt_En.pdf)
+
+### Dok. 309 — Das Skalenanker-Problem
+
+Neues Dokument (nicht A-Serie). 9 Seiten DE+EN.
+
+Beide Theorien brauchen einen Skalenanker — aber verschieden:
+- **ΛCDM:** ~6 freie Parameter, H₀ zirkulär gemessen (4-stufige Leiter), Feinabstimmung 10¹²³.
+- **FFGFT:** ξ-Struktur [K], Magnitude 5⁴ [SETZUNG, P33]. Exponent 10 in H₀=(π/2)·c·ξ¹⁰/λ̄ₑ ist der eigentliche Fit [SETZUNG, P20].
+- **Vererbung (neu benannt):** Exponent 10 an H₀_ΛCDM kalibriert → FFGFT erbt die Systematik der Expansionslesart.
+- **Querverankerung:** ξ¹⁰ reproduziert H₀ und a₀ — bei reinem H₀-Fit nicht erwartet.
+
+Dokumente: [DE](2/pdf/309_Skalenanker_LCDM_FFGFT_De.pdf) · [EN](2/pdf/309_Skalenanker_LCDM_FFGFT_En.pdf)
+
 
 ## Korrekturregister & Changelog
 
 Das **Korrekturregister** [Dok. 190](2/pdf/190_T0_Korrekturen_De.pdf)
 dokumentiert jede Korrektur und Präzisierung mit Datum, Status und
-betroffenen Dokumenten — K1–K6 (Korrekturen) und P1–P44 (Präzisierungen/Programme).
+betroffenen Dokumenten — K1–K6 (Korrekturen) und P1–P43 (Präzisierungen/Programme, Stand 22. Juli 2026).
 Nichts wird still überschrieben.
 
 Der **Changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)
