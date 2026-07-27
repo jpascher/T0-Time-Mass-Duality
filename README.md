@@ -291,7 +291,7 @@ wrappers in `Sources/wr_standalone_A4/`. A-Series fully compiled in
 ---
 
 
-## Docs. 308–309 — Cosmic Sector and Scale-Anchor Problem (July 2026, DE+EN)
+## Docs. 308–310 — Cosmic Sector, Scale-Anchor Problem, Resonance Geometry (July 2026, DE+EN)
 
 ### Doc. 308 — The Cosmic Sector of FFGFT
 
@@ -325,6 +325,20 @@ Both theories need a scale anchor — but differently:
 - **Cross-anchoring:** ξ¹⁰ reproduces both H₀ and a₀ — not expected from a pure H₀ fit.
 
 Documents: [DE](2/pdf/309_Skalenanker_LCDM_FFGFT_De.pdf) · [EN](2/pdf/309_Skalenanker_LCDM_FFGFT_En.pdf)
+
+### Doc. 310 — Resonance Geometry as the Overarching Reference
+
+New document (not A-series). 13 pages DE+EN.
+
+Answers the "ξ is fitted to the masses, hence circular" objection by correcting the hierarchy:
+- **Overarching:** the geometry that possesses resonances — dimensionless, fixes all ratios.
+- **Anchor:** a single measured value (one mass in SI) — carries no structure, only the scale (the tuning pitch, not the music).
+- **Three [K] statements:** Koide Q=2/3 (from three masses, no ξ); the generation ladder as geometric sequence with ratio q=2/3 (same value as Koide Q); the harmonic prefactors 4/3, 16/5, 25/9. All verifiable against the measured masses.
+- **π factors are geometry, not loops:** 16π³ = S²·2S³ (sphere surfaces of the T⁴ boundary); μ₀=4π×10⁻⁷ separates geometry (S²) from unit; in natural units μ₀,ε₀ vanish, and with α=1 (charge redefined, e=1) only ξ remains.
+- **Mixing QM and RT is legitimate:** ℏ,c are both unit bridges; T·m=1 is the mixing itself; the conflict is interpretational, not formal (Doc. 230).
+
+Verification: `2/Dok310_Skripte/ffgft_310_*.py` (4 scripts, no free parameters).
+Documents: [DE](2/pdf/310_Resonanzgeometrie_Referenz_De.pdf) · [EN](2/pdf/310_Resonanzgeometrie_Referenz_En.pdf)
 
 ## Correction Register & Changelog
 

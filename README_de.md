@@ -299,7 +299,7 @@ Wrapper in `Sources/wr_standalone_A4/`. A-Serie vollständig kompiliert in
 ---
 
 
-## Dok. 308 und 309 — Kosmischer Sektor und Skalenanker-Problem (Juli 2026, DE+EN)
+## Dok. 308, 309 und 310 — Kosmischer Sektor, Skalenanker-Problem und Resonanzgeometrie (Juli 2026, DE+EN)
 
 ### Dok. 308 — Der kosmische Sektor der FFGFT
 
@@ -335,6 +335,21 @@ Beide Theorien brauchen einen Skalenanker — aber verschieden:
 - **Querverankerung:** ξ¹⁰ reproduziert H₀ und a₀ — bei reinem H₀-Fit nicht erwartet.
 
 Dokumente: [DE](2/pdf/309_Skalenanker_LCDM_FFGFT_De.pdf) · [EN](2/pdf/309_Skalenanker_LCDM_FFGFT_En.pdf)
+
+
+### Dok. 310 — Die Resonanzgeometrie als übergeordnete Referenz
+
+Neues Dokument (nicht A-Serie). 13 Seiten DE+EN.
+
+Beantwortet den Vorwurf „ξ ist an die Massen angepasst, also zirkulär" durch Korrektur der Hierarchie:
+- **Übergeordnet:** die Geometrie, die Resonanzen besitzt — dimensionslos, legt alle Verhältnisse fest.
+- **Anker:** ein einziger Messwert (eine Masse in SI) — trägt keine Struktur, nur die Skala (der Kammerton, nicht die Musik).
+- **Drei [K]-Aussagen:** Koide Q=2/3 (aus drei Massen, ohne ξ); die Generationsleiter als geometrische Folge mit Verhältnis q=2/3 (derselbe Wert wie Koide Q); die harmonischen Vorfaktoren 4/3, 16/5, 25/9. Alle an den gemessenen Massen nachprüfbar.
+- **π-Faktoren sind Geometrie, keine Schleifen:** 16π³ = S²·2S³ (Sphären-Oberflächen der T⁴-Randgeometrie); μ₀=4π×10⁻⁷ trennt Geometrie (S²) von Einheit; in natürlichen Einheiten verschwinden μ₀,ε₀, und mit α=1 (Ladung umdefiniert, e=1) bleibt nur ξ.
+- **QM und RT zu vermengen ist berechtigt:** ℏ,c sind beide Einheiten-Brücken; T·m=1 ist selbst die Vermengung; der Konflikt ist Interpretations-, kein Formalismuskonflikt (Dok. 230).
+
+Verifikation: `2/Dok310_Skripte/ffgft_310_*.py` (4 Skripte, keine freien Parameter).
+Dokumente: [DE](2/pdf/310_Resonanzgeometrie_Referenz_De.pdf) · [EN](2/pdf/310_Resonanzgeometrie_Referenz_En.pdf)
 
 
 ## Korrekturregister & Changelog
