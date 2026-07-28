@@ -882,29 +882,27 @@
         return true;
       }
 
-      pureT0PeriodFinding(a) {
+      findOrder(a) {
+        // Multiplikative Ordnung: kleinstes r mit a^r = 1 mod N.
         const maxPeriod = Math.min(this.rsaN, 75000);
-        const periods = [];
+        let order = null;
+        const res = [];   // nur Diagnose, geht in die Auswahl nicht ein
 
         for (let r = 1; r < maxPeriod; r++) {
           if (this.modPow(a, r, this.rsaN) === 1) {
+            if (order === null) order = r;
             const omega = 2 * Math.PI / r;
-            const E1 = 1.0, E2 = 1.0, r12 = Math.max(1, r);
-            const ECorr = this.xi * (E1 * E2) / (r12 * r12);
-            const baseResonance = Math.exp(-((omega - Math.PI) * (omega - Math.PI)) / (4 * Math.abs(this.xi)));
-            const totalResonance = baseResonance * Math.pow(1 + ECorr, 2.5);
-            
-            periods.push([r, totalResonance]);
-            
-            if (periods.length > 800) break;
+            const ECorr = this.xi / (Math.max(1, r) * Math.max(1, r));
+            const base = Math.exp(-((omega - Math.PI) * (omega - Math.PI)) / (4 * Math.abs(this.xi)));
+            res.push(base * Math.pow(1 + ECorr, 2.5));
+            if (res.length > 800) break;
           }
         }
 
-        if (periods.length > 0) {
-          const best = periods.reduce((max, current) => current[1] > max[1] ? current : max);
-          return { period: best[0], resonance: best[1] };
-        }
-        return null;
+        if (order === null) return null;
+        return { period: order,
+                 resNonzero: res.filter(x => x > 0).length,
+                 resTotal: res.length };
       }
 
       extractFactorsPureT0(a, r) {
@@ -997,19 +995,20 @@
           };
         }
 
-        // T0-Phase
-        const periodResult = this.pureT0PeriodFinding(a);
+        // Ordnungssuche
+        const periodResult = this.findOrder(a);
         if (periodResult) {
           const factors = this.extractFactorsPureT0(a, periodResult.period);
           if (factors && factors.length >= 2 && factors[0] * factors[1] === this.rsaN) {
             this.t0SuccessCount++;
-            this.lastSuccessMethod = 'pure_t0_physics';
+            this.lastSuccessMethod = 'order_finding';
             return {
               success: true,
-              method: 'pure_t0_physics',
+              method: 'order_finding',
               factors: factors,
               period: periodResult.period,
-              resonance: periodResult.resonance,
+              resNonzero: periodResult.resNonzero,
+              resTotal: periodResult.resTotal,
               base: a,
               time: (Date.now() - startTime) / 1000,
               xiParameter: this.xi
@@ -1140,10 +1139,10 @@
         if (result.resonance) appendResult(lang, `  Resonanz / Resonance: ${result.resonance.toFixed(6)}`);
         appendResult(lang, `  Zeit / Time: ${duration.toFixed(3)}s`);
         
-        if (result.method === 'pure_t0_physics') {
-          appendResult(lang, `\n🎉 PURE T0-PHYSIK ERFOLG! / PURE T0-PHYSICS SUCCESS!`);
-          appendResult(lang, `  Keine klassischen Fallback-Methoden verwendet`);
-          appendResult(lang, `  No classical fallback methods used`);
+        if (result.method === 'order_finding') {
+          appendResult(lang, `\nOrdnungssuche erfolgreich / order finding succeeded`);
+          appendResult(lang, `  Kein klassischer Fallback verwendet; ξ-Resonanz ungleich 0 bei ${result.resNonzero} von ${result.resTotal} Kandidaten`);
+          appendResult(lang, `  No classical fallback used; ξ resonance non-zero for ${result.resNonzero} of ${result.resTotal} candidates`);
         } else if (result.method === 'classical_fallback') {
           appendResult(lang, `\n⚠️ Klassischer Fallback verwendet / Classical fallback used`);
           appendResult(lang, `  T0-Phase schlug fehl, Trial Division erfolgreich`);
@@ -1562,8 +1561,8 @@
         }
         
         // Methoden-Bonus
-        if (result.method === 'pure_t0_physics') {
-          score += 25; // Bonus für echte T0-Physik
+        if (result.method === 'order_finding') {
+          score += 25; // Bonus fuer den Ordnungssuche-Weg (statt Fallback)
         } else if (result.method === 'gcd_shortcut') {
           score += 10; // Geringer Bonus für Shortcuts
         }
@@ -1610,7 +1609,7 @@
         bonus += Math.max(0, 5 - duration * 10);
       } else if (rsaNumber > 10000) {
         // Große Zahlen: Erfolg wichtiger als Geschwindigkeit
-        if (method === 'pure_t0_physics') bonus += 15;
+        if (method === 'order_finding') bonus += 15;
       }
       
       // Spezielle Zahlen

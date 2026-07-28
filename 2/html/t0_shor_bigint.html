@@ -99,8 +99,8 @@
   <div class="row">
     <label>ξ-Parameter</label>
     <select id="xiMode">
-      <option value="canonical">Kanonisch: 4/30000 ≈ 1.333×10⁻⁴</option>
-      <option value="auto">Adaptiv (N-abhängig)</option>
+      <option value="canonical">Kanonisch: 4/30000 ≈ 1.333×10⁻⁴ (Diagnose)</option>
+      <option value="auto">Adaptiv, N-abhängig (Diagnose)</option>
       <option value="custom">Benutzerdefiniert</option>
     </select>
     <input type="text" id="xiCustom" value="1.333e-4" placeholder="ξ Wert"
@@ -137,11 +137,18 @@
 </div>
 
 <div class="note">
-  <strong>Methodologie:</strong> Die T0-Periodensuche scannt r = 1 … max_r und bewertet
-  jeden Treffer (a^r ≡ 1 mod N) mit der ξ-Resonanzformel
-  ω = 2π/r, Resonanz = exp(−(ω−π)²/(4|ξ|)). Die Periode mit höchster Resonanz
-  wird gewählt. Verglichen wird mit klassischem Trial Division bis √N.
-  Alle Modular-Arithmetik exakt via BigInt.
+  <strong>Methodologie:</strong> Gesucht wird die multiplikative Ordnung: das
+  kleinste r mit a^r ≡ 1 (mod N). Das ist klassische Ordnungssuche, gefolgt von
+  der Shor-Extraktion über ggT(a^{r/2} ± 1, N). Verglichen wird mit Trial
+  Division bis √N. Alle Modular-Arithmetik exakt via BigInt.
+  <br><br>
+  <strong>Zur ξ-Resonanz:</strong> Die Formel ω = 2π/r,
+  Resonanz = exp(−(ω−π)²/(4|ξ|)) wird weiterhin ausgewertet, geht aber in die
+  Auswahl nicht ein — sie kann es nicht. Für r ≥ 2 ist |ω−π| = π(1−2/r) streng
+  monoton wachsend in r, die Resonanz also streng monoton fallend; eine monotone
+  Funktion verschiebt kein Maximum, unabhängig vom Wert von ξ. Für jedes hier
+  anwählbare ξ unterläuft der Ausdruck zusätzlich auf exakt 0,0 für alle r ≠ 2.
+  Die Anzeige „ξ-Resonanz ungleich 0 bei n von m Kandidaten“ macht das sichtbar.
 </div>
 
 </div>
@@ -218,22 +225,25 @@ function getXi() {
 
 // ─── T0-Periodensuche (BigInt-exakt) ────────────────────────────────────
 
-function t0FindPeriod(a, N, maxR, xi) {
+function findOrder(a, N, maxR, xi) {
+  // Multiplikative Ordnung: kleinstes r mit a^r = 1 mod N.
   const aN = BigInt(a), NN = BigInt(N);
-  let best = null, bestRes = -1;
-  let count = 0;
+  let order = null, count = 0;
+  const res = [];   // nur zur Anzeige, geht in die Auswahl nicht ein
 
   for (let r = 1; r <= maxR; r++) {
     if (modPow(aN, BigInt(r), NN) === 1n) {
-      // ξ-Resonanzbewertung
+      if (order === null) order = r;
       const omega = 2 * Math.PI / r;
-      const resonance = Math.exp(-((omega - Math.PI)**2) / (4 * Math.abs(xi)));
-      if (resonance > bestRes) { bestRes = resonance; best = r; }
+      res.push(Math.exp(-((omega - Math.PI)**2) / (4 * Math.abs(xi))));
       count++;
-      if (count >= 1000) break; // Nicht endlos sammeln
+      if (count >= 1000) break;
     }
   }
-  return best ? { period: best, resonance: bestRes, candidates: count } : null;
+  if (order === null) return null;
+  const nonzero = res.filter(x => x > 0).length;
+  return { period: order, candidates: count,
+           resNonzero: nonzero, resTotal: res.length };
 }
 
 function extractFactors(a, r, N) {
@@ -321,13 +331,15 @@ function factorize(N_str, a_input, maxR, xi) {
     return result;
   }
 
-  // 5. T0-Periodensuche
-  const periodRes = t0FindPeriod(a, Nnum, maxR, xi);
+  // 5. Ordnungssuche
+  const periodRes = findOrder(a, Nnum, maxR, xi);
   if (periodRes) {
     const factors = extractFactors(a, periodRes.period, Nnum);
     if (factors) {
-      result.method = 't0_period'; result.factors = factors;
-      result.period = periodRes.period; result.resonance = periodRes.resonance;
+      result.method = 'order_finding'; result.factors = factors;
+      result.period = periodRes.period;
+      result.resNonzero = periodRes.resNonzero;
+      result.resTotal = periodRes.resTotal;
       result.time = performance.now() - t0;
       return result;
     }
@@ -382,11 +394,12 @@ function formatResult(r) {
   const fs = r.factors.map(f => f.toString()).join(' × ');
   const check = r.factors[0] * r.factors[1] === BigInt(r.N) ? '✓' : '✗FEHLER';
   let extra = '';
-  if (r.method === 't0_period')
-    extra = ` | Basis=${r.base}, r=${r.period}, Res=${r.resonance.toExponential(2)}`;
+  if (r.method === 'order_finding')
+    extra = ` | Basis=${r.base}, Ordnung r=${r.period}` +
+            ` | ξ-Resonanz ungleich 0 bei ${r.resNonzero} von ${r.resTotal} Kandidaten`;
   if (r.method === 'classic_fallback') extra = ' <span class="warn">[klassischer Fallback]</span>';
   if (r.method === 'gcd_shortcut')     extra = ' [GCD-Abkürzung]';
-  const cls = r.method === 't0_period' ? 'ok' :
+  const cls = r.method === 'order_finding' ? 'ok' :
               r.method === 'classic_fallback' ? 'warn' : 'inf';
   return `<span class="${cls}">${check} N=${r.N} = ${fs} (${r.method})${extra} [${timeStr}]</span>`;
 }

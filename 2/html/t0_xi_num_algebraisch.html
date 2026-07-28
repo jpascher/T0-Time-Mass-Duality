@@ -511,8 +511,36 @@ async function runComparison(){
     return Math.abs(Math.log10(c.center)-Math.log10(best))<0.3;
   });
 
+  // Reichweitenpruefung des Kriteriums, bevor das Ergebnis gedeutet wird.
+  // xi_num = lcm(p-1,q-1)/(p*q) < 1/2 fuer JEDES Semiprim. Das naechst-
+  // gelegene Fenster (N=0, xi^0=1) beginnt bei 10^-0.3 = 0.5012, das
+  // naechste (N=1) endet bei 10^(log10(xi)+0.3). Liegt der erreichbare
+  // Bereich vollstaendig dazwischen, kann das Kriterium nicht ansprechen.
+  const winLo = Math.pow(10, -0.3);
+  const winHi = Math.pow(10, Math.log10(ffgftLevels[1]) + 0.3);
+  const erreichbar = { lo: Math.min(...xiAll), hi: Math.max(...xiAll) };
+  const testTot = erreichbar.hi < winLo && erreichbar.lo > winHi;
+
+  logLine('logC', `<br>Reichweite des Kriteriums:`);
+  logLine('logC', `  ξ_num liegt in [${erreichbar.lo.toExponential(3)}; ${erreichbar.hi.toExponential(3)}]`
+    + ` — obere Schranke 1/2, da ξ_num = lcm(p−1,q−1)/(pq)`);
+  logLine('logC', `  N=0-Fenster beginnt bei ${winLo.toFixed(4)}, N=1-Fenster endet bei ${winHi.toExponential(3)}`);
+  logLine('logC', testTot
+    ? `  → der erreichbare Bereich liegt vollständig in der Lücke: das Kriterium kann nicht ansprechen`
+    : `  → der erreichbare Bereich überlappt mit mindestens einem Fenster: das Kriterium ist anwendbar`);
+
   let verdict, vtext;
-  if(matches.length>=2){
+  if(testTot){
+    verdict='neutral';
+    vtext=`Der Test ist in diesem Wertebereich nicht aussagekräftig.
+    ξ_num = lcm(p−1,q−1)/(pq) ist für jedes Semiprim kleiner als 1/2, während das
+    nächstgelegene Toleranzfenster erst bei 10^−0,3 = 0,5012 beginnt und das nächste
+    bei ${winHi.toExponential(3)} endet. Der gesamte erreichbare Bereich liegt in der Lücke,
+    ein Treffer ist also unabhängig von den Daten ausgeschlossen. Ein Negativergebnis
+    ist deshalb keine Aussage über die Stufenhypothese, sondern eine Eigenschaft des
+    Testaufbaus. Eine belastbare Prüfung bräuchte ein Kriterium, dessen Fenster den
+    erreichbaren Bereich schneidet.`;
+  } else if(matches.length>=2){
     verdict='confirm';
     vtext=`✓ ${matches.length} ξ_num-Cluster liegen nahe an FFGFT-Stufenwerten.
     Zahlenraum und physikalischer Raum teilen möglicherweise analoge Resonanzstrukturen —
@@ -522,8 +550,7 @@ async function runComparison(){
     vtext=`≈ 1 Cluster nahe einer FFGFT-Stufe — Zufall nicht ausgeschlossen. Mehr Stichproben nötig.`;
   } else {
     verdict='neutral';
-    vtext=`≈ Keine klare Entsprechung zu FFGFT-Stufen gefunden. Die Strukturen sind verschieden — 
-    wie erwartet: Zahlenraum ≠ physikalischer 3D-Raum.`;
+    vtext=`≈ Keine klare Entsprechung zu FFGFT-Stufen gefunden — bei anwendbarem Kriterium.`;
   }
   document.getElementById('resultC').innerHTML=`<div class="result-box ${verdict}">${vtext}</div>`;
   btn.disabled=false;

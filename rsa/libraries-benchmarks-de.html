@@ -311,8 +311,8 @@
           <ul class="feature-list">
             <li><span class="feature-icon">✓</span>Adaptive ξ-Parameter (1/50, 1/100, 1/1000, 1/42)</li>
             <li><span class="feature-icon">✓</span>Rationale Arithmetik mit Fraction</li>
-            <li><span class="feature-icon">✓</span>Periodenbewertung und Resonanzberechnung</li>
-            <li><span class="feature-icon">✓</span>83.8% Erfolgsquote bei Semiprimes</li>
+            <li><span class="feature-icon">✓</span>Ordnungssuche: kleinstes r mit a^r ≡ 1 (mod N)</li>
+            <li><span class="feature-icon">✓</span>Erfolg abhängig davon, ob die Ordnung innerhalb der Suchgrenze liegt</li>
             <li><span class="feature-icon">✓</span>Deterministische Ergebnisse</li>
           </ul>
         </div>
@@ -396,17 +396,17 @@
         </thead>
         <tbody>
           <tr>
-            <td><strong>T0 Optimiert</strong></td>
-            <td>Periodenfindung</td>
+            <td><strong>Ordnungssuche</strong></td>
+            <td>kleinstes r mit a^r ≡ 1 (mod N)</td>
             <td class="good-performance">0.0025s</td>
-            <td class="good-performance">83.8%</td>
+            <td class="moderate-performance">abhängig von der Ordnung</td>
             <td class="good-performance">O(1)</td>
           </tr>
           <tr>
-            <td><strong>Harmonic Hierarchisch</strong></td>
-            <td>Verhältnissuche</td>
+            <td><strong>Harmonic-Bibliothek</strong></td>
+            <td>Probedivision, danach harmonische Benennung</td>
             <td class="good-performance">0.8ms</td>
-            <td class="good-performance">97.1%</td>
+            <td class="good-performance">100%</td>
             <td class="good-performance">O(log n)</td>
           </tr>
           <tr>
@@ -458,10 +458,10 @@
       <p><strong>T0 Period Finding:</strong></p>
       
       <div class="method-signature">
-# T0 Periodenfindung mit adaptiven ξ-Strategien
-from t0_period_finding import RelativeT0
+# Ordnungssuche (BSGS und lineare Suche, rationale Arithmetik)
+from t0_rational_optimized import T0RationalSimulatorOptimized
 
-t0 = RelativeT0()
+t0 = T0RationalSimulatorOptimized(N)
 result = t0.factorize(1643) # Automatische ξ-Auswahl
 print(f"Faktoren: {result['factors']}")
 print(f"ξ-Strategie: {result['method_specific']['xi_strategy']}")
@@ -519,14 +519,14 @@ def calculate_cents_deviation(ratio1, ratio2):
       
       <div class="code-example">
 # Beispiel: Vollständiger Workflow mit beiden Ansätzen
-from t0_period_finding import RelativeT0
+from t0_rational_optimized import T0RationalSimulatorOptimized
 from optimized_harmonic_lib import OptimizedHarmonicFactorizer
 
 def analyze_number(n):
   """Analysiere Zahl mit beiden Ansätzen"""
   
   # T0 Periodenfindung
-  t0 = RelativeT0()
+  t0 = T0RationalSimulatorOptimized(N)
   t0_result = t0.factorize(n)
   
   # Harmonische Faktorisierung
