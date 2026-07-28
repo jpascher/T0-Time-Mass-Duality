@@ -1,6 +1,6 @@
 # T0 Zeit-Masse-Dualität · FFGFT
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21496379.svg)](https://doi.org/10.5281/zenodo.21496379)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21628364.svg)](https://doi.org/10.5281/zenodo.21628364)
 
 **FFGFT — Fraktale Feldgeometrische Fundamentaltheorie** zeigt:
 Alle Konstanten des Standardmodells folgen aus einem einzigen
@@ -234,7 +234,7 @@ ist aber prinzipiell messbar (Dok. 230).
 |-----------|------|
 | 🔬 Interaktives Portal | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo v1.2.4 | [DOI 10.5281/zenodo.21496379](https://doi.org/10.5281/zenodo.21496379) (löst v1.2.3 · [21396624](https://doi.org/10.5281/zenodo.21396624) ab) |
+| 📦 Zenodo v1.2.7 | [DOI 10.5281/zenodo.21628364](https://doi.org/10.5281/zenodo.21628364) (löst v1.2.6 · [21562813](https://doi.org/10.5281/zenodo.21562813) ab) |
 | 🎵 Spotify | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
