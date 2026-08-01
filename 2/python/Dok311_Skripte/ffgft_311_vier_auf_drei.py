@@ -64,3 +64,11 @@ print("== Ikosaeder ==")
 print(f"  |Ecke| = sqrt(1+phi^2)    = {math.sqrt(1+PHI**2):.7f}")
 print(f"  Umkugel/Kante             = {math.sqrt(1+PHI**2)/2:.7f}")
 print(f"  sqrt(phi*sqrt5)/2         = {math.sqrt(PHI*math.sqrt(5))/2:.7f}")
+
+print()
+print("== Schaerfe der Zuordnung: Nachbar-Exponenten 34..38 ==")
+for n in range(34, 39):
+    v = (75/74)**n
+    print(f"  n = {n}   (75/74)^n = {v:.6f}   gegen 16/pi^2: "
+          f"{(v/(16/math.pi**2)-1)*100:+.3f} %")
+print("  Fenster mit zwei Raendern: nur n = 36 trifft; Nachbarn ~100x weiter.")

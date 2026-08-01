@@ -180,3 +180,31 @@ print()
 print("  Unberuehrt bleibt in jedem Fall: eine Vorwaerts-Herleitung,")
 print("  WARUM eine Rekursionstiefe einer Packungsdichte entsprechen")
 print("  sollte, liegt nicht vor (A270, P35).")
+
+
+# ---------------------------------------------------------------------
+trennlinie("7. NACHTRAG -- ist die Basis 74/75 besonders?")
+
+print("  Pruefung aller Basen m/(m+1) fuer m = 2..400, je mit dem")
+print("  naechstliegenden ganzen Exponenten gegen 16/pi^2.")
+print("  (Aus NOTIZ_K36_Beruehrungspunkt, Abschnitt 2; hier reproduziert.)")
+print()
+res = []
+for m in range(2, 401):
+    Km = m / (m + 1)
+    n = round(math.log(A4) / math.log(1 / Km))
+    if n < 1:
+        continue
+    res.append((abs(Km**-n - A4) / A4, m))
+res.sort()
+treffer = sum(1 for e, m in res if e < 1e-4)
+rang = [m for e, m in res].index(74) + 1
+print(f"  Basen mit Treffer besser als 0,010 %   : {treffer}")
+print(f"  Erwartungswert bei reinem Zufall       : ~16")
+print(f"  Rang von 74/75                         : {rang} von {len(res)}")
+print()
+print("  Beobachtet 17, erwartet 16, Rang 17: die Nachbarschaft ist genau")
+print("  so dicht besetzt, wie sie es ohne jede Struktur waere. Der")
+print("  0,010-%-Treffer der Basis 74/75 ist fuer sich KEIN Signal --")
+print("  dasselbe Ergebnis wie bei der xi-Glaette in Basis 30.")
+print("  Traegend bleibt allein die Frage der Vorwaerts-Herleitung (P35).")
