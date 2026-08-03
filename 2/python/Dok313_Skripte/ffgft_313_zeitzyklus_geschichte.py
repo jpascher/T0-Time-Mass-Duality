@@ -137,6 +137,41 @@ print(">>> GW-Hintergruende stammen vom Antipoden selbst. Eine")
 print(">>> nicht-monotone Signatur dort (Umkehr des Massenlaufs)")
 print(">>> waere die prinzipielle Pruefflaeche fuer die Schliessung.")
 
+# ---------------------------------------------------------------
+# R5 — Die Antipoden-Bedingung invertiert: Omega_m-Vorhersage
+# ---------------------------------------------------------------
+print("\n--- R5: Antipoden-Bedingung als Vorhersage [S->pruefbar] ---")
+def eta_H0(Om):
+    OLx = 1 - Om - OR
+    z = np.concatenate([np.linspace(0,1090,200000),
+                        np.logspace(np.log10(1090.001),9,200000)])
+    E = np.sqrt(Om*(1+z)**3 + OR*(1+z)**4 + OLx)
+    return np.trapezoid(1/E, z)
+print(f"eta0*H0/c (Om=0.315, Planck) = {eta_H0(0.315):.4f}  vs pi = {pi:.4f}")
+# Bisektion: eta0*H0/c = pi
+lo, hi = 0.2, 0.5
+for _ in range(60):
+    mid = 0.5*(lo+hi)
+    if eta_H0(mid) > pi: lo = mid
+    else: hi = mid
+Om_star = 0.5*(lo+hi)
+OL_star = 1 - Om_star - OR
+print(f"Bedingung eta0 = pi*R_H exakt  ->  Omega_m* = {Om_star:.4f}")
+print(f"  Planck: 0.315 +/- 0.007  ->  Abstand {(Om_star-0.315)/0.007:+.1f} sigma")
+print(f"  Omega_L* = {OL_star:.4f}  ->  kappa* = 3*Omega_L* = {3*OL_star:.3f}")
+print(f"  gemessen (Dok 312, Pflicht B): kappa = 2.12  ->  Abw. "
+      f"{(3*OL_star-2.119)/2.119*100:+.1f} %")
+print("Gegenprobe (keine Zirkelrechnung): kappa=2.119 -> Om=0.294")
+print(f"  -> eta0*H0/c = {eta_H0(0.294):.4f} != pi: echte 4%-Spannung.")
+print(">>> Pflicht B und die Antipoden-Koinzidenz verschmelzen zu")
+print(">>> EINER Bedingung; Om* = 0.325 ist falsifizierbar (DESI/Euclid).")
+# T0-Offenheit (R61-Disziplin: kein Fit)
+kT0_me = 1.380649e-23*2.7255/(9.1093837015e-31*C**2)
+import math
+print(f"\nOffen: k_B T0/(m_e c^2) = {kT0_me:.3e}; log_xi = "
+      f"{math.log(kT0_me)/math.log(XI):.2f} — keine ganze xi-Potenz:")
+print("T0 (Antipoden-Temperatur / Photon-Baryon-Entropie) unangebunden.")
+
 print("\n=== Fazit ===")
 print("R1 Beobachtbare Geschichte = ein Halbzyklus (auf 2%) [K|P20]")
 print("R2 Endpunktsteigung sqrt(Omega_r)~0.01: glatte gerade")
@@ -144,3 +179,5 @@ print("   Schliessung um den Antipoden auf 1% erfuellt [K]")
 print("R3 Periodizitaet = Randbedingung, nicht Dynamik; grob-")
 print("   koernige Entropie-Schliessung offen — Kern von D(ii) [K]")
 print("R4 Pruefflaechen: C-nu-B/GW vom Antipoden [S]")
+print("R5 Antipoden-Bedingung invertiert: Omega_m* = 0.325 (+1.4 sigma");
+print("   zu Planck), kappa* = 2.03 (Kandidat fuer Pflicht B); T0 offen")
