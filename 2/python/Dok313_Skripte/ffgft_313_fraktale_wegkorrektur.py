@@ -131,6 +131,28 @@ print("Winkelgroessen (4,2'-Dipolversatz, Matched Circles):")
 print("  dimensionslos, ebenengleich -> UNVERAENDERT")
 print("Entropie/Hawking (Kap. D, E): keine Lichtwege -> UNVERAENDERT")
 
+
+print("\n" + "="*62)
+print("6. KEINE UNENDLICHKEITEN, KEINE NULL: DIE UNTERGRENZE")
+print("="*62)
+HBAR=1.054571817e-34; ME=9.1093837015e-31
+E_min=HBAR*H0; m_min=E_min/C**2
+print(f"Energiequant des Zyklus: hbar H0 = {E_min:.3e} J")
+print(f"  m_min = hbar H0/c^2 = {m_min:.3e} kg")
+print(f"  hbar H0/(m_e c^2) = {E_min/(ME*C**2):.4e} = (pi/2) xi^10 "
+      f"= {(pi/2)*XI**10:.4e}")
+zmax = 1/((pi/2)*XI**10)
+print(f"  -> 1+z_max = m_e/m_min = {zmax:.3e}  (endlich!)")
+print(f"Beitrag zum Lichtweg jenseits z=1e9: "
+      f"{1/(np.sqrt(OR)*1e9):.2e} R_H -> numerisch irrelevant,")
+print( "begrifflich entscheidend: kein 'z gegen unendlich'.")
+print("Folgen: (a) Massen laufen nicht gegen null -> Singularitaet")
+print("        durch Quantisierung ausgeschlossen, nicht nur falsch")
+print("        gestellt; (b) EINE Skala setzt beide Grenzen:")
+print("        Lambda*=1/R_H^2 oben, hbar H0 unten; (c) Poincare")
+print("        SETZT endlichen Phasenraum voraus — die Endlichkeit")
+print("        ist Voraussetzung der Schliessung, nicht ihr Hindernis.")
+
 print("\n" + "="*62)
 print("FAZIT")
 print("="*62)
