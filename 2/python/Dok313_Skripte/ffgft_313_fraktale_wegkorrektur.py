@@ -167,3 +167,42 @@ print(f"Streuwand wandert auf {(chi_rec*K/pi-1)*100:+.2f} %: "
 print(f"Topologieschranke {pi/(chi_rec*K):.3f}: vertraeglicher mit den")
 print("Nullresultaten, ABER die Matched-Circle-Signatur entfaellt.")
 print("Verbleibende Pruefsignatur: C-nu-B/GW-Nichtmonotonie am Antipoden.")
+
+# ---------------------------------------------------------------
+# 7. DIE KETTE: Omega_m allein aus xi (zirkelfrei)
+# ---------------------------------------------------------------
+print("\n" + "="*62)
+print("7. DIE KETTE: Omega_m ALLEIN AUS XI")
+print("="*62)
+KB=1.380649e-23; E_C=1.602176634e-19
+h_=H0*3.0856775814913673e22/1e5
+T0_theo=(16/9)*XI*E_C/KB
+print(f"(1) H_0 = (pi/2) c xi^10/lambda_e      -> h = {h_:.4f}")
+print(f"(2) k_B T_0 = (16/9) xi [eV] (Dok 061) -> T_0 = {T0_theo:.4f} K")
+print(f"    gemessen 2.7255 K -> +{(T0_theo/2.7255-1)*100:.2f} %")
+Or_t=4.15e-5*(T0_theo/2.7255)**4/h_**2
+Or_m=4.15e-5/h_**2
+print(f"(3) Omega_r(T_0)                       -> {Or_t:.5e}")
+print(f"(4) K_frak = 1-100 xi                  -> {K:.5f}")
+def _int(Om,Orr):
+    z=np.concatenate([np.linspace(0,1090,200000),
+                      np.logspace(np.log10(1090.001),12,300000)])
+    return np.trapezoid(1/np.sqrt(Om*(1+z)**3+Orr*(1+z)**4+1-Om-Orr), z)
+def _solve(Orr):
+    lo,hi=0.20,0.50
+    for _ in range(70):
+        m=0.5*(lo+hi)
+        if _int(m,Orr)>pi/K: lo=m
+        else: hi=m
+    return 0.5*(lo+hi)
+Om_t=_solve(Or_t); Om_m=_solve(Or_m)
+print(f"(5) Integral dz/E = pi/K = {pi/K:.4f}")
+print(f"    -> Omega_m* = {Om_t:.4f}  (mit hergeleitetem T_0)")
+print(f"    -> Omega_m* = {Om_m:.4f}  (mit gemessenem T_0)")
+print(f"    Planck 0.315+-0.007: {(Om_t-0.315)/0.007:+.2f} sigma bzw. "
+      f"{(Om_m-0.315)/0.007:+.2f} sigma")
+print(f"    T_0-Fehler von 0.92 % schlaegt mit {abs(Om_t-Om_m):.4f} durch")
+print("KEIN ZIRKEL: T_0 stammt aus der Atomskala (061), nicht aus")
+print("der Kosmologie. Kein Schritt enthaelt einen Omega_m-Fit.")
+print("Konventionell bleiben: eV (Schritt 2), E(z)-Form (Schritt 5),")
+print("lambda_e als Kammerton (Schritt 1).")
