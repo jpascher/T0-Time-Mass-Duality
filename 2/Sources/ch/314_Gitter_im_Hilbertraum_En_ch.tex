@@ -1,0 +1,832 @@
+\maketitle
+\tableofcontents
+
+% ============================================================
+\chapter*{Doc.~314 -- The Lattice in Hilbert Space}
+\addcontentsline{toc}{chapter}{Doc.~314 -- The Lattice in Hilbert Space}
+% ============================================================
+
+\section*{What this is about}
+
+FFGFT computes geometrically on T$^4$ with the D4 lattice and
+quantum-mechanically on $\mathcal{H} = L^2(\text{T}^4)\otimes
+\mathbb{C}^3$ (Docs.~230/282). The transition raises an obvious
+question: \emph{do the lattices become flat?} Does anything remain of
+kissing number~24, packing density and triality, or is every lattice
+the same in Hilbert space?
+
+The answer: the torus is flat anyway -- curvature was never the
+difference -- and the lattice structure is not lost but
+\textbf{migrates into the spectrum and into the fibre}. This document
+computes that through (three scripts, Ch.~J) and finds:
+
+\begin{enumerate}
+  \item \textbf{The spectrum separates what curvature does not
+        [K]:} Z$^4$ starts at $|k|^2 = 1$ with degeneracy~8, D4 at
+        $|k|^2 = 2$ with degeneracy~24; odd norms are entirely
+        absent for D4. The first excitation carries exactly
+        $24 = 12+12$ -- FCC half and winding half separately
+        addressable.
+  \item \textbf{Triality is built in, not attached [K]:}
+        $|\text{Aut}(D4)| = 1152 = |W(F_4)|$, the quotient to
+        $W(D4)$ is $6 = |S_3|$; among the 80 order-3 elements, 16
+        generate exactly the T$^4/Z_3$ orbifold with
+        $|\det(1-A)| = 9$ fixed points and act on every mode orbit
+        as a $\mathbb{C}^3$ circulant.
+  \item \textbf{A negative finding with theorem character [K]:} $5$
+        does not divide $1152 = 2^7\cdot3^2$, so $\text{Aut}(D4)$
+        contains \emph{no} element of order~5. The fivefold rotation
+        from which $\theta = 2/9$ arises (Doc.~293) is in principle
+        incompatible with the lattice -- the phase belongs to a
+        different layer.
+  \item \textbf{The doubling is nevertheless prepared [K]:}
+        $24 = 8\times3 = 4\times6$; four disjoint six-blocks with
+        exactly the $C_3$ content that $3\oplus3'$ requires.
+\end{enumerate}
+
+Not part of the A-series; status: working document. References:
+Docs.~230/282 ($\mathcal{H} = L^2(\text{T}^4)\otimes\mathbb{C}^3$),
+285 (doubling $6 = 3\oplus3'$), 291 (channel analysis), 293
+($\theta = 2/9$ icosahedral), 311 (Four onto Three, $24 = 12+12$).
+
+% ============================================================
+\section*{Reader's guide: the thread of the argument}
+% ============================================================
+
+\textbf{The question.} In Hilbert space the lattice becomes the
+index set of the Fourier modes. It is then no longer a sphere
+packing -- in that sense every lattice becomes \enquote{flat}. The
+question is whether the information disappears with it.
+
+\textbf{The answer in one line.} \emph{Geometry $\to$ spectrum $+$
+fibre.} The degeneracies of the Laplacian are the theta series of
+the lattice; the kissing number becomes the degeneracy of the first
+excitation; triality becomes the orbifold and fibre structure.
+
+\textbf{What follows.} First, two flat tori are distinguishable by
+their spectra (Ch.~B). Second, the $\tilde T\cdot m = 1$ structure
+becomes spectrally readable when $R_4 \ne R_{123}$, and the level
+ordering changes at exactly two root radii (Ch.~C). Third, the
+$Z_3$ need not be imposed -- it is a lattice symmetry (Ch.~E).
+
+\textbf{The boundary, drawn cleanly.} Fivefold symmetry is
+impossible on the lattice (Ch.~F). This does not hit the doubling,
+because that lives on the \emph{fibre} and the interface of the two
+levels is exactly $C_3$ -- occupied by triality (Ch.~G). And the
+container structure holds on \emph{every} shell, so it cannot
+distinguish one (Ch.~H) -- the same pattern-versus-occupation logic
+as in Doc.~293.
+
+\textbf{The caveat.} The computation uses the smooth Laplacian,
+i.e.\ $D_f = 4$ exactly. All numbers are therefore \emph{bare};
+Ch.~I separates what that costs: counts and ratios stay invariant,
+absolute energies carry $-1.33\,\%$, and whether the degeneracies
+split under the fractal perturbation has not been computed.
+
+\medskip
+\noindent\textbf{In one sentence:} in Hilbert space the lattice
+becomes flat but not inconsequential -- what geometry carried is
+carried by spectrum and fibre, and the division of labour between
+them is exactly determinable, as long as the smooth approximation is
+booked as such.
+
+% ============================================================
+\section*{Notation}
+% ============================================================
+
+The table explains the symbols of this document. Quantities
+appearing only once are introduced there.
+
+\textbf{Note on notation.} In lattice theory $\Lambda$ is the usual
+symbol for a lattice (Conway/Sloane). In the FFGFT corpus, however,
+$\Lambda$ is taken -- as the cosmological constant, in
+$\Lambda$CDM, and in particular as the closure scale
+$\Lambda^{*} = 1/R_H^2$ (Doc.~312). This document therefore uses
+$\Gamma$ throughout for the lattice and $\Gamma^{*}$ for the dual
+lattice. Likewise $L^{*}$ is \emph{not} used here, since in
+Doc.~312 it denotes the cycle length; the torus edge lengths are
+called $R_{123}$ and $R_4$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small\setlength\tabcolsep{5pt}
+\begin{longtable}{lp{9.6cm}}
+\toprule
+\textbf{Symbol} & \textbf{Meaning} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Symbol} & \textbf{Meaning} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\multicolumn{2}{l}{\textit{Lattice and torus}} \\
+$\Gamma$ & lattice in $\mathbb{R}^4$; defines the torus
+  T$^4 = \mathbb{R}^4/\Gamma$ (instead of the $\Lambda$ customary
+  in the lattice literature, see note on notation) \\
+$\Gamma^{*}$ & dual lattice; carries the admissible wave vectors
+  of the Fourier modes \\
+$D4$ & root lattice $D_4$: all integer $k$ with $\sum k_i$ even;
+  kissing number 24 \\
+$\text{Z}^4$ & cubic lattice $\mathbb{Z}^4$; kissing number 8,
+  exactly self-dual \\
+$D4^{*}$ & dual D4 lattice; again a D4 lattice up to scaling \\
+$R_{123}$, $R_4$ & radii of the three spatial directions and of the
+  fourth direction \\
+$r$ & radius ratio $r = R_4/R_{123}$ (dimensionless) \\
+\midrule
+\multicolumn{2}{l}{\textit{Spectrum}} \\
+$k$ & wave vector (mode index), $k \in \Gamma^{*}$ \\
+$k_4$ & fourth component of $k$; $k_4 = 0$ separates the FCC half
+  from the winding half \\
+$|k|^2$ & norm; also the eigenvalue of the Laplacian on the
+  isotropic torus \\
+$E(k)$ & eigenvalue under anisotropy,
+  $E = k_1^2+k_2^2+k_3^2+(k_4/r)^2$ \\
+$N(n)$ & degeneracy of the shell $|k|^2 = n$; coefficient of the
+  theta series \\
+$\theta_{D4}$ & theta series of the D4 lattice,
+  $\theta_{D4} = (\theta_3^4+\theta_4^4)/2$ \\
+$\theta(t)$ & heat-kernel theta function,
+  $\theta(t) = \sum_k e^{-t|k|^2}$ \\
+$\zeta_M(s)$ & Epstein zeta function of the lattice $M$;
+  $s = -1/2$ is the Casimir point \\
+\midrule
+\multicolumn{2}{l}{\textit{Symmetries}} \\
+$\text{Aut}(\Gamma)$ & automorphism group of the lattice
+  (length-preserving self-maps) \\
+$W(F_4)$, $W(D4)$ & Weyl groups; $|W(F_4)| = 1152$,
+  $|W(D4)| = 192$ \\
+$A$ & element of order 3 in $\text{Aut}(D4)$; half-integral, hence
+  computed exactly via $2A$ \\
+$\det(1-A)$ & determinant; $|\det(1-A)| = 9$ counts the orbifold
+  fixed points \\
+$Z_3$, $C_3$ & cyclic group of order 3 (triality resp.\ fibre
+  action) \\
+$S_3$, $A_5$ & symmetric group on 3 elements; alternating group on
+  5 elements (icosahedral) \\
+$\omega$ & third root of unity, $\omega = e^{2\pi i/3}$;
+  phase $+120^\circ$ \\
+$\chi_0,\chi_1,\chi_2$ & the three $Z_3$ characters; index the
+  orbifold sectors \\
+\midrule
+\multicolumn{2}{l}{\textit{Hilbert space and fibre}} \\
+$\mathcal{H}$ & state space,
+  $\mathcal{H} = L^2(\text{T}^4)\otimes\mathbb{C}^3$
+  (Docs.~230/282) \\
+$\mathbb{C}^3$ & fibre over each point; carries the $Z_3$
+  structure \\
+$3$, $3'$ & the two triplets of the doubling $6 = 3\oplus3'$
+  (Doc.~285) \\
+$\varphi$ & golden ratio, $\varphi = (1+\sqrt5)/2$; occurs only in
+  the $A_5$ layer \\
+$\theta = 2/9$ & phase share from Doc.~293; not a lattice invariant
+  (Ch.~F) \\
+\midrule
+\multicolumn{2}{l}{\textit{FFGFT references}} \\
+$\xi = 4/30000$ & geometric fundamental constant of FFGFT \\
+$\tilde T\cdot m = 1$ & time-mass relation; readable in the
+  spectrum as the splitting at $r \ne 1$ \\
+\midrule
+\multicolumn{2}{l}{\textit{Status labels}} \\
+{}[K] & core derivation: computed and controlled \\
+{}[S] & structural statement: consistent but not derived \\
+theorem & mathematically proven, not merely checked numerically \\
+boundary & explicitly booked limitation of scope \\
+\end{longtable}
+}
+\end{center}
+
+% ============================================================
+\chapter{The starting position: flatness is not the difference}
+% ============================================================
+
+The torus T$^4 = \mathbb{R}^4/\Gamma$ is \emph{always} flat,
+whatever lattice $\Gamma$ defines it. The D4 torus and the Z$^4$
+torus both have zero curvature. The difference lies not in curvature
+but in lattice structure: kissing number $24$ against $8$, packing
+density $\pi^2/16$ against $\pi^2/32$.
+
+On passing to $\mathcal{H} = L^2(\text{T}^4)$ the lattice becomes
+the \textbf{index set of the Fourier modes}: the basis consists of
+plane waves $e^{ik\cdot x}$, and the admissible $k$ lie on the dual
+lattice $\Gamma^{*}$. In this sense every lattice becomes flat in
+Hilbert space -- it is no longer a sphere packing in space but a
+point lattice of quantum numbers.
+
+\textbf{The geometry is not lost; it migrates.} The Laplacian has
+eigenvalues $|k|^2$, and the degeneracy of each eigenvalue is the
+number of lattice vectors of that length -- the theta series of the
+lattice. The 24 shortest D4 vectors become the 24-fold degeneracy of
+the first excitation, and the decomposition $24 = 12+12$ of Doc.~311
+(FCC neighbours plus winding neighbours) remains exactly readable as
+a $k_4$ split.
+
+Two anchors keep this translation stable:
+
+\begin{enumerate}
+  \item \textbf{D4 is self-dual up to scaling} -- $D4^{*}$ is again a
+        D4 lattice. The Fourier transform does not lead out of the
+        family. (Z$^4$ is exactly self-dual.)
+  \item \textbf{The fibre changes nothing about the lattice.} In
+        $\mathcal{H} = L^2(\text{T}^4)\otimes\mathbb{C}^3$ the
+        $\mathbb{C}^3$ fibre hangs at every point and carries the
+        $Z_3$ structure; the mode lattice remains $\Gamma^{*}$.
+\end{enumerate}
+
+\begin{equation}
+  \boxed{\;\text{geometry}\;\longrightarrow\;
+  \text{spectrum}\;+\;\text{fibre}\;}
+\end{equation}
+
+% ============================================================
+\chapter{The spectrum separates what curvature does not [K]}
+% ============================================================
+
+Complete shell count up to $|k|^2 = 12$:
+
+\begin{center}
+\begin{tabular}{rrrc}
+\toprule
+Norm $|k|^2$ & Z$^4$ & D4 & D4 split ($k_4{=}0$ / $k_4{\ne}0$) \\
+\midrule
+$1$ & $8$ & $0$ & --- \\
+$2$ & $24$ & $24$ & $12$ / $12$ \\
+$3$ & $32$ & $0$ & --- \\
+$4$ & $24$ & $24$ & $6$ / $18$ \\
+$5$ & $48$ & $0$ & --- \\
+$6$ & $96$ & $96$ & $24$ / $72$ \\
+$7$ & $64$ & $0$ & --- \\
+$8$ & $24$ & $24$ & $12$ / $12$ \\
+$9$ & $104$ & $0$ & --- \\
+$10$ & $144$ & $144$ & $24$ / $120$ \\
+$11$ & $96$ & $0$ & --- \\
+$12$ & $96$ & $96$ & $8$ / $88$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Three readings:
+
+\textbf{(i)~Two flat tori are spectrally distinguishable.} Z$^4$
+starts at norm~1 with degeneracy~8, D4 at norm~2 with degeneracy~24.
+For D4 the odd norms are \emph{entirely} absent -- the parity
+condition $\sum k_i$ even excludes them. What curvature does not
+distinguish, the spectrum distinguishes at once.
+
+\textbf{(ii)~Independent control passed.} The D4 series
+$24, 24, 96, 24, 144, 96 \dots$ is the known theta series
+$\theta_{D4} = (\theta_3^4 + \theta_4^4)/2$; the script reproduces
+it coefficient by coefficient.
+
+\textbf{(iii)~The $12+12$ decomposition is spectrally
+addressable.} The first excitation carries exactly twelve modes with
+$k_4 = 0$ (the spatial FCC half) and twelve with $k_4 \ne 0$ (the
+winding half). On higher shells the split is asymmetric ($6/18$ at
+norm~4, $8/88$ at norm~12): \textbf{the $12/12$ symmetry is a
+property of the first shell, not a general theorem.} This must be
+booked explicitly -- Doc.~311 argues with $24 = 12+12$, and that
+statement holds exactly where it is made.
+
+% ============================================================
+\chapter{Anisotropy: where the time-mass relation becomes readable [K]}
+% ============================================================
+
+If the fourth direction is compactified with a different radius
+($r = R_4/R_{123}$, eigenvalue
+$E(k) = k_1^2+k_2^2+k_3^2+(k_4/r)^2$), the first shell splits:
+
+\begin{center}
+\begin{tabular}{rll}
+\toprule
+$r$ & $E$ (winding, 12 modes) & $E$ (FCC, 12 modes) \\
+\midrule
+$1.0$ & $2.000$ & $2.000$ (degenerate: 24) \\
+$1.1$ & $1.826$ & $2.000$ \\
+$1.5$ & $1.444$ & $2.000$ \\
+$2.0$ & $1.250$ & $2.000$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The FCC modes stay fixed at $E = 2$, the winding modes follow
+exactly
+\begin{equation}
+  E_\text{winding} = 1 + \frac{1}{r^2},
+  \qquad
+  \Delta = 1 - \frac{1}{r^2}.
+\end{equation}
+The splitting is a direct measure of the radius ratio -- \textbf{the
+place where the $\tilde T\cdot m = 1$ structure becomes readable in
+the spectrum}: mass direction and spatial directions carry different
+excitation energies as soon as they have different lengths.
+
+\section{The crossing map is discrete and short}
+
+All levels have the form $E = a + b/r^2$ with integer $a, b$. In the
+range $1 < r \le 2.5$, among all levels up to norm~8 there are
+\textbf{exactly two} crossing radii:
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+$r = \sqrt{2}$ & pure winding $(0,0,0,\pm2)$ crosses the FCC-12 \\
+$r = \sqrt{3}$ & pure winding crosses the winding-12 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The level sequence therefore does not change continuously and
+chaotically but at two distinguished root radii. Any ordering
+statement about the lowest excitations falls into exactly three
+regimes: $r < \sqrt2$, $\sqrt2 < r < \sqrt3$, $r > \sqrt3$. Beyond
+$\sqrt3$ the \emph{ground tone} of the spectrum is a pure winding
+(at $r = 2$: $E = 1.00$ with 2 modes before $1.25$ with 12 before
+$2.00$ with 12).
+
+% ============================================================
+\chapter{Reorganisations: three levels and one boundary}
+% ============================================================
+
+Flat lattices can be reorganised -- on three levels that cost very
+different things.
+
+\textbf{Change of basis (free).} Any unimodular transformation from
+$GL(4,\mathbb{Z})$ describes the same point lattice with different
+generators. The spectrum does not change at all. Pure bookkeeping.
+
+\textbf{Lattice symmetries (free, structure-bearing).}
+Reorganisations mapping the lattice onto itself -- this is where the
+central finding sits, Ch.~E.
+
+\textbf{Rebuilding into another lattice (costs physics).} Discretely
+via glue vectors along the chain
+\begin{equation}
+  D4 \;\subset\; \text{Z}^4 \;\subset\; D4^{*}
+  \qquad\text{(index 2 each)},
+\end{equation}
+or continuously by deformation in the moduli space
+$GL(4,\mathbb{R})/(O(4)\times GL(4,\mathbb{Z}))$. Each step shifts
+degeneracies; D4 is a distinguished point there (kissing number 24,
+provably unbeatable in 4D).
+
+\textbf{The boundary of the spectral statement.} From dimension~4 on
+there exist pairs of flat tori that are \emph{isospectral but not
+isometric} (Schiemann). The general theorem \enquote{the spectrum
+determines the lattice} is \emph{false} in 4D. Uncritical for D4
+itself -- kissing number 24 characterises it uniquely -- but it must
+not be booked as a rule.
+
+% ============================================================
+\chapter{Triality is built in, not attached [K]}
+% ============================================================
+
+\section{Computed on the lattice}
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+$|\text{Aut}(D4)|$ & $1152 = |W(F_4)|$ \\
+$|\text{Aut}(\text{Z}^4)|$ & $384 = 2^4\cdot4!$ \\
+$|\text{Aut}(D4)|/|W(D4)|$ & $1152/192 = 6 = |S_3|$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Both orders were determined by brute-force enumeration of all basis
+tuples with identical Gram matrix and match the known values. The
+quotient $6 = |S_3|$ establishes triality \emph{directly on the
+lattice automorphism group}, not merely on the Dynkin diagram: D4 is
+the only lattice of the $D_n$ family with three equivalent Dynkin
+arms; for $D5, D6, \dots$ the outer symmetry shrinks to $Z_2$.
+
+\section{The 80 order-3 elements in three classes}
+
+Computed exactly (the triality elements are \emph{half-integral} --
+the glue-vector mixture $(\frac12,\frac12,\frac12,\frac12)$ enters;
+rounding to integers destroys them, hence the computation uses
+$2A$):
+
+\begin{center}
+\begin{tabular}{lrl}
+\toprule
+Class & Count & Character \\
+\midrule
+trace $-2$, half-integral & $16$ & fixed-point free in
+  $\mathbb{R}^4$; eigenvalues $\{\omega,\bar\omega\}$ twice \\
+trace $1$, integral & $32$ & fixed plane in $\mathbb{R}^4$,
+  free on the 24 minimal vectors \\
+trace $1$, half-integral & $32$ & 6 fixed vectors $+$ 6 triple
+  orbits \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Two consequences}
+
+\textbf{(a)~The orbifold is a lattice symmetry, not an extra
+assumption.} For each of the 16 elements with trace $-2$ one has
+exactly
+\begin{equation}
+  |\det(1-A)| = 9,
+\end{equation}
+so the quotient T$^4/\langle A\rangle$ is a $Z_3$ orbifold with
+\emph{exactly 9 fixed points} -- the standard number $3^2$. All nine
+lie at third-coordinates. \textbf{The T$^4/Z_3$ structure need not
+be imposed; it is already present in D4.}
+
+\textbf{(b)~On every mode orbit the $Z_3$ acts as a circulant.} The
+unitary action on $L^2(\text{T}^4)$ permutes the three plane waves
+of a triple orbit cyclically; the permutation matrix has eigenvalues
+$\{1,\omega,\omega^2\}$, phases $0^\circ$, $+120^\circ$,
+$-120^\circ$ -- \emph{structurally exactly the circulant
+diagonalisation of the $\mathbb{C}^3$ fibre} (Doc.~291). The first
+shell provides eight copies: $24 = 8\times3
+= 8\times(\chi_0\oplus\chi_1\oplus\chi_2)$.
+
+% ============================================================
+\chapter{The negative finding: 5 does not divide 1152 [K]}
+% ============================================================
+
+The order distribution in $\text{Aut}(D4)$, determined exactly:
+
+\begin{center}
+\begin{tabular}{lrrrrrrr}
+\toprule
+Order & $1$ & $2$ & $3$ & $4$ & $6$ & $8$ & $12$ \\
+\midrule
+Count & $1$ & $139$ & $80$ & $228$ & $464$ & $144$ & $96$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Total $1152$. \textbf{Order 5: zero elements} -- and that is not a
+computational result but a theorem: $1152 = 2^7\cdot3^2$, and $5$
+does not divide it (Lagrange).
+
+\textbf{Consequence for $\theta = 2/9$.} The fivefold rotation
+$R_5$, from which $p_0 = |\langle v_0|R_5 v_e\rangle|^2 = 2/9$
+follows (Doc.~293), is \emph{in principle} incompatible with the D4
+lattice structure. The test was additionally carried out directly:
+all invariants of the linear lattice action at the nine orbifold
+fixed points ($x\!\cdot\!x$, $k\!\cdot\!x$, $x\!\cdot\!y$, all mod 1
+in exact rational arithmetic) have denominator spectrum
+$\{1,2,3,6\}$ -- \textbf{no ninths}. Notably, $x\!\cdot\!y$ is a
+multiple of one ninth, but the numerators are always divisible by 3;
+the D4 geometry \emph{suppresses} ninths at the first level.
+
+\textbf{What this means -- and what it does not.} $2/9$ is not an
+invariant of the lattice action. This does not devalue Doc.~293 but
+delimits it: the phase belongs to a layer \emph{above} the lattice
+(the $A_5$ structure), the lattice carries the $Z_3$. The division
+of labour is thereby exactly named rather than surmised.
+
+% ============================================================
+\chapter{The doubling is nevertheless prepared [K]}
+% ============================================================
+
+Does the negative finding contradict the doubling $6 = 3\oplus3'$ of
+Doc.~285? No -- in three specifiable stages.
+
+\textbf{(1)~The prohibition hits the wrong level.} $5\nmid1152$
+forbids order-5 \emph{lattice automorphisms}. The doubling lives on
+the \textbf{fibre} ($\mathbb{C}^3\to\mathbb{C}^6$); $A_5$ is nowhere
+required as a spatial symmetry. The compatibility condition is only
+that the interface of the two levels exists -- and that is exactly
+determinable: element orders in $A_5$ are $\{1,2,3,5\}$, in
+$\text{Aut}(D4)$ they are $\{1,2,3,4,6,8,12\}$; the intersection is
+$\{1,2,3\}$, canonically $C_3$. \textbf{And exactly that is provided
+by triality.} The interface is not merely permitted, it is the only
+possible one -- and it is occupied.
+
+\textbf{(2)~The lattice prepares the doubling.} The central
+involution $-1 \in \text{Aut}(D4)$ commutes with the triality $Z_3$
+and pairs the eight triple orbits of the first shell into
+\textbf{four disjoint pairs}. No orbit is self-paired, provably:
+$-k = A^j k$ would require eigenvalue $-1$ for an element of
+order~3 -- impossible. Hence
+\begin{equation}
+  24 \;=\; 8\times3 \;=\; 4\times6
+  \qquad\text{(orbit $\oplus$ mirror orbit).}
+\end{equation}
+Each six-block carries under $C_3$ the character content
+$2\times(\chi_0\oplus\chi_1\oplus\chi_2)$ -- exactly the restriction
+of $3\oplus3'$. The first excitation shell provides four ready
+containers.
+
+\textbf{(3)~The boundary, cleanly booked.} The \emph{labelling} --
+which factor is $3$ and which $3'$ -- is lattice-blind. The $A_5$
+characters of the two triplets differ only on the 5-classes
+($\varphi$ against $1-\varphi$); on the 3-class both are zero and
+the $C_3$ restrictions are identical. The distinction hangs exactly
+on the structure that does not exist in the lattice -- fully
+consistent with Ch.~F.
+
+\textbf{Balance:} the lattice provides containers and $C_3$ content,
+the $A_5$ layer provides the $3/3'$ labels, $\varphi$ and the
+fivefold -- and hence $2/9$.
+
+% ============================================================
+\chapter{Anchor-free results [K]}
+% ============================================================
+
+All quantities below are dimensionless -- ratios, counts,
+congruences. No Kammerton, no SI scale enters.
+
+\section{Two congruence theorems for the D4 theta series}
+
+All complete shells up to norm~120 checked:
+\begin{equation}
+  N(n) \equiv 0 \pmod 3
+  \qquad\text{and}\qquad
+  N(n) \equiv 0 \pmod 6
+  \qquad\text{without exception.}
+\end{equation}
+Both are theorems, not empirics: the triality $Z_3$ is fixed-point
+free on $\Gamma\setminus\{0\}$ (eigenvalues $\omega,\bar\omega$ --
+no eigenvalue 1), so \emph{every} shell decomposes into triple
+orbits; together with the $-1$ pairing without self-pairing, into
+six-blocks.
+
+\section{Character-resolved T$^4/Z_3$ spectrum}
+
+Consequence: exact equidistribution on every shell.
+
+\begin{center}
+\begin{tabular}{rrrrr}
+\toprule
+Norm & $N(D4)$ & $\chi_0$ & $\chi_1$ & $\chi_2$ \\
+\midrule
+$2$ & $24$ & $8$ & $8$ & $8$ \\
+$4$ & $24$ & $8$ & $8$ & $8$ \\
+$6$ & $96$ & $32$ & $32$ & $32$ \\
+$10$ & $144$ & $48$ & $48$ & $48$ \\
+$14$ & $192$ & $64$ & $64$ & $64$ \\
+$18$ & $312$ & $104$ & $104$ & $104$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The invariant sector of the orbifold ($\chi_0$) has exactly $N(n)/3$
+states per shell; the $Z_3$ projection costs no asymmetry on any
+shell.
+
+\textbf{Honest consequence.} Equidistribution and six-containers are
+\emph{not} a distinction of the first shell but a theorem for all.
+\textbf{The structure is everywhere -- and therefore cannot select
+anything.} This is exactly the pattern-versus-occupation logic of
+Doc.~293: the pattern is present scale-invariantly; which shell is
+physically occupied is decided by something else.
+
+\section{Casimir: the densest lattice loses}
+
+$\zeta$-regularised vacuum energy of a scalar field,
+$E = \pi\,\zeta_M(-1/2)$, both tori normalised to covolume~1
+(Epstein zeta via the Riemann split representation, verified three
+times -- against direct summation at $s = 4, 5$ and against the
+closed form
+$Z_{\text{Z}^4}(s) = 8(1-4^{1-s})\zeta(s)\zeta(s-1)$, agreement to
+25 digits):
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+ & $\zeta_M(-1/2)$ & $E = \pi\zeta_M(-1/2)$ \\
+\midrule
+Z$^4$ torus & $-0.2966893$ & $-0.9320768$ \\
+D4 torus & $-0.2764778$ & $-0.8685805$ \\
+\midrule
+Difference & & $+0.0634963$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{The Z$^4$ torus lies lower.} The reason is the spectral gap:
+at equal volume the densest lattice D4 has the \emph{largest} first
+eigenfrequency ($\sqrt2$ against $1$) and hence the \emph{less}
+negative zero-point energy. Notable is the reversal of ordering: for
+$s > 0$ D4 minimises the Epstein zeta (the known extremality of the
+densest lattice), at $s = 0$ all lattices agree
+($\zeta(0) = -1$ universally), and at $s = -1/2$ the ordering is
+inverted.
+
+\textbf{Interpretation boundary, booked:} this holds for the scalar,
+periodic field. Different field content or different boundary
+conditions can change the sign of the preference --
+\enquote{nature chooses Z$^4$} does \emph{not} follow.
+
+\section{Heat kernel: the observability limit quantified}
+
+For both tori $t^2\theta(t) \to 1$ (identical Weyl term at equal
+volume); the lattice difference is exponentially small:
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+$t$ & relative difference \\
+\midrule
+$0.5$ & $1.2\times10^{-2}$ \\
+$0.2$ & $1.2\times10^{-6}$ \\
+$0.1$ & $1.8\times10^{-13}$ \\
+$0.05$ & $4.1\times10^{-27}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Any observable resting only on the leading heat-kernel
+coefficients is lattice-blind.} The D4/Z$^4$ difference sits
+exclusively in the exponentially suppressed theta-series fine
+structure -- or directly in the spectral gap.
+
+% ============================================================
+\chapter{What is still bare here [K]/open}
+% ============================================================
+
+This document computes with the \emph{smooth} Laplacian on
+$\text{T}^4 = \mathbb{R}^4/\Gamma$, i.e.\ with $D_f = 4$ exactly.
+FFGFT, however, carries the fractal dimension $D_f = 4-\xi$ and the
+factor $K_\text{frak} = 1-100\xi$ (A040). All numbers here are
+therefore \textbf{bare} -- in the same sense in which $E_0$ was bare
+before the clarification in register~R72. The consequence falls into
+three very unequal parts.
+
+\section{Untouched: everything anchor-free}
+
+By the assignment rule (register~R70, Doc.~313), $K_\text{frak}$
+applies to absolute quantities and cancels for ratios of the same
+level. Untouched therefore:
+
+\begin{itemize}
+  \item all \textbf{counts} -- $24$, $8$, $N(n)$, $8\times3$,
+        $4\times6$: integer combinatorics, no length;
+  \item the \textbf{congruences} $N(n)\equiv0 \bmod 3$ and
+        $\bmod\,6$: group theory, no metric content;
+  \item the \textbf{character split} $N/3$ per sector;
+  \item all \textbf{ratios} $E/E_\text{min}$ and the crossing radii
+        $\sqrt2$, $\sqrt3$ -- structure over structure, the factor
+        cancels.
+\end{itemize}
+
+\noindent This is the real reason why Ch.~H is called
+\enquote{anchor-free results}: those statements are
+fractal-invariant.
+
+\section{One factor: all absolute energies}
+
+With an anchor, $E = \hbar H_0\,|k|$ (ground mode $= \hbar H_0$, see
+Ch.~B together with Doc.~312). These values are bare and carry the
+factor:
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+ & bare & with $K_\text{frak}$ \\
+\midrule
+first D4 shell ($|k| = \sqrt2$) & $3.230\times10^{-52}$~J &
+  $3.187\times10^{-52}$~J \\
+pure winding ($|k| = 2$) & $4.567\times10^{-52}$~J &
+  $4.507\times10^{-52}$~J \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Throughout $-1.33\,\%$. The same holds for the Casimir
+energies of Ch.~H and for the spectral gap itself. Bookkeeping,
+settled; not structurally interesting.
+
+\section{Open: the operator, not the conversion}
+
+The third part cannot be settled by multiplication. At
+$D_f = 4-\xi$ the operator is \emph{no longer a smooth Laplacian} --
+and exact symmetry is precisely what carries the degeneracies. A
+fractal perturbation breaks it:
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+Perturbation strength & $\Delta E/E$ & $\Delta E$ at
+  $E = \hbar H_0$ \\
+\midrule
+$O(\xi)$ & $1.3\times10^{-4}$ & $3.0\times10^{-56}$~J \\
+$O(100\xi) = 1-K_\text{frak}$ & $1.3\times10^{-2}$ &
+  $3.0\times10^{-54}$~J \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent \textbf{The 24-fold degeneracy would then no longer be a
+degeneracy but a multiplet with fine structure.} Which
+sub-multiplets it decomposes into is decided by the \emph{symmetry
+of the perturbation}:
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Perturbation respects & Splitting of the first shell \\
+\midrule
+triality ($Z_3$) and $-1$ & $24$ stays together \\
+only $Z_3$ & $8$ triple orbits stay together \\
+only $-1$ & $4$ six-blocks (Ch.~G) \\
+neither & up to $24$ individual levels \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{This has not been computed.} It would be the natural
+continuation of this document and no large calculation --
+first-order perturbation theory on a finite matrix, no Boltzmann
+apparatus. Until then: the spectrum of this document is the
+\emph{smooth approximation}, and the container structure is only as
+stable under perturbation as the symmetry that carries it.
+
+% ============================================================
+\chapter{Status overview}
+% ============================================================
+
+{\small
+\begin{longtable}{lp{6.4cm}l}
+\toprule
+Statement & Content & Status \\
+\midrule
+\endfirsthead
+\toprule
+Statement & Content & Status \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Translation & geometry $\to$ spectrum $+$ fibre; lattice becomes
+  mode index, degeneracies $=$ theta series & [K] \\
+Distinguishability & Z$^4$ from norm 1 (8), D4 from norm 2 (24);
+  odd norms empty for D4 & [K] \\
+$12+12$ & first shell exactly FCC $+$ winding; higher shells
+  asymmetric ($6/18$, $8/88$) & [K] \\
+Anisotropy & $E_\text{wind} = 1 + 1/r^2$; crossings only at
+  $r = \sqrt2$ and $\sqrt3$; three regimes & [K] \\
+Triality & $|\text{Aut}(D4)| = 1152$, quotient $6 = |S_3|$;
+  80 order-3 elements in three classes & [K] \\
+Orbifold & 16 elements with $|\det(1-A)| = 9$: T$^4/Z_3$ is a
+  lattice symmetry, not an extra assumption & [K] \\
+Circulant & $Z_3$ acts on every triple orbit with
+  $\{1,\omega,\omega^2\}$ $=$ $\mathbb{C}^3$ fibre structure & [K] \\
+$5 \nmid 1152$ & no order-5 automorphisms; $2/9$ is not a lattice
+  invariant (denominators $\{1,2,3,6\}$) & [K] theorem \\
+Doubling & interface $A_5 \cap \text{Aut}(D4) = C_3$, occupied;
+  $24 = 4\times6$ as containers & [K] \\
+Labelling & $3$ versus $3'$ is lattice-blind (difference only on
+  5-classes) & [K] boundary \\
+Congruences & $N(n) \equiv 0 \bmod 3$ and $\bmod 6$ on all 60
+  shells checked, with proof ground & [K] theorem \\
+Selection & containers and equidistribution are generic --
+  the structure cannot distinguish any shell & [K] \\
+Casimir & $E(\text{Z}^4) = -0.9321$ against
+  $E(D4) = -0.8686$; ordering reversed relative to $s>0$
+  & [K], field-content dependent \\
+Heat kernel & Weyl term identical, difference $4\times10^{-27}$ at
+  $t = 0.05$: leading order is lattice-blind & [K] \\
+Spectral theorem & \enquote{spectrum determines lattice} false in 4D
+  (Schiemann); uncritical for D4, but not a rule & [K] boundary \\
+Fractal status & counts/ratios invariant; absolute energies
+  $-1.33\,\%$; degeneracy splitting uncomputed & [K]/open \\
+\end{longtable}
+}
+
+\medskip
+\noindent\textbf{Balance:} in Hilbert space the lattice becomes flat
+but not inconsequential. The kissing number becomes the degeneracy,
+triality becomes the orbifold and the fibre, the radius ratio
+becomes the level splitting. What the lattice does \emph{not} carry
+-- fivefold symmetry and hence $\varphi$ and $2/9$ -- is determined
+just as exactly as what it does carry. And the container structure
+is generic: it provides, it does not select.
+
+% ============================================================
+\chapter{Check scripts}
+% ============================================================
+
+Three scripts, all deterministic, all controls passed:
+
+\begin{itemize}
+  \item \texttt{d4\_skript\_1\_spektrum\_deformation.py} --
+        theta series D4/Z$^4$, $k_4$ split, deformation $r$, exact
+        crossing radii (standard library only).
+  \item \texttt{d4\_skript\_2\_trialitaet\_orbifold\_phasen.py} --
+        $\text{Aut}(D4) = 1152$, order-3 classification (computed
+        exactly with $2A$), $|\det(1-A)| = 9$, circulant, phase test
+        $2/9$, order distribution, $24 = 4\times6$ (numpy).
+  \item \texttt{d4\_skript\_3\_schalen\_casimir.py} --
+        shell theorems, Epstein zeta at $s = -1/2$, heat kernel
+        (numpy, mpmath).
+\end{itemize}
+
+Controls against known values: $\theta_{D4}$, $|W(F_4)| = 1152$,
+$2^4\cdot4! = 384$, $|W(D4)| = 192$, orbifold fixed-point count
+$3^2 = 9$, Jacobi identity for $Z_{\text{Z}^4}$.
+
+\medskip
+\noindent\textbf{Registration:} entry into Doc.~190 will be done
+separately, should the delimitation against Doc.~293 be booked
+there.
+
+\end{document}
