@@ -206,3 +206,57 @@ print("KEIN ZIRKEL: T_0 stammt aus der Atomskala (061), nicht aus")
 print("der Kosmologie. Kein Schritt enthaelt einen Omega_m-Fit.")
 print("Konventionell bleiben: eV (Schritt 2), E(z)-Form (Schritt 5),")
 print("lambda_e als Kammerton (Schritt 1).")
+
+# ---------------------------------------------------------------
+# 8. ANHANG: die drei H_0-Schreibweisen und der Peak-Test (R73)
+# ---------------------------------------------------------------
+print("\n" + "="*62)
+print("8. DREI H_0-SCHREIBWEISEN + PEAK-INVARIANZ")
+print("="*62)
+KB=1.380649e-23; HBAR=1.054571817e-34; T0M=2.7255
+ME_C2=8.1871057769e-14; MPC=3.0856775814913673e22
+L_xi=(15*XI/pi**2)**0.25*HBAR*C/(KB*T0M)
+R_ratio=ME_C2/(KB*T0M)
+H_A=(pi/2)*C*XI**10/LAM_E
+H_B=C/L_xi*(pi/2)*(15/pi**2)**0.25*R_ratio*XI**(41/4)
+me_eV=0.51099895e6; E0_eV=7.398e6; hbar_eV=6.582119569e-16
+H_C=E0_eV*XI**(41/4)/hbar_eV
+print(f"A (xi^10, lambda_e): {H_A*MPC/1000:.3f} km/s/Mpc")
+print(f"B (xi^41/4, L_xi)  : {H_B*MPC/1000:.3f}  -> B/A = {H_B/H_A:.6f}")
+print(f"C (xi^41/4, E_0)   : {H_C*MPC/1000:.3f}  -> C/A = "
+      f"{(E0_eV/me_eV)*XI**0.25/(pi/2):.5f}")
+print(f"L_xi = {L_xi*1e6:.2f} um; m_ec^2/(k_B T_CMB) = {R_ratio:.4e}")
+print("A und B sind algebraisch identisch: L_xi traegt xi^(1/4),")
+print("beim Einsetzen kuerzen sich xi^(1/4), (15/pi^2)^(1/4) UND")
+print("das Verhaeltnis m_ec^2/(k_B T_CMB) vollstaendig heraus.")
+print(f"C weicht um {((E0_eV/me_eV)*XI**0.25/(pi/2)-1)*100:.2f} % ab;")
+print(f"Gleichsetzung verlangt pi/2 = (E_0/m_ec^2) xi^(1/4) = "
+      f"{(E0_eV/me_eV)*XI**0.25:.5f} statt {pi/2:.5f}.")
+print("\nPeak-Invarianz: l_1 = pi D_A/r_s ist Weg/Weg -> K_frak kuerzt.")
+print(f"Haette K nur auf D_A gewirkt: Verschiebung {(1/K-1)*100:.2f} % "
+      f"= {220*(1/K-1):.1f} Multipole gegen Messgenauigkeit +-0.5.")
+
+# ---------------------------------------------------------------
+# 9. pi/2 IST KEIN VORFAKTOR: L* = 4 lambda_e / xi^10
+# ---------------------------------------------------------------
+print("\n" + "="*62)
+print("9. DIE ZYKLENLAENGE IST VORFAKTORFREI")
+print("="*62)
+print(f"L*/lambda_e   = {L_STAR/LAM_E:.6e}")
+print(f"4/xi^10       = {4/XI**10:.6e}")
+print(f"Verhaeltnis   = {(L_STAR/LAM_E)/(4/XI**10):.10f}")
+print("-> L* = 4 lambda_e/xi^10 EXAKT. Das pi/2 in")
+print("   H_0 = (pi/2) c xi^10/lambda_e ist die Umrechnung")
+print("   H_0 = 2 pi c/L*, kein Vorfaktor.")
+ME=0.51099895; MMU=105.6583755; E0M=7.398
+print(f"\n026-Kette in derselben Sprache: statt 4 verlangt sie")
+print(f"   4*(E_0/m_ec^2)*xi^(1/4)/(pi/2) = "
+      f"{4*(E0M/ME)*XI**0.25/(pi/2):.4f} Kammertoene")
+print(f"   -> ganze Zahl gegen krumme: die Abweichung sitzt in 026.")
+print("\nE_0-Wege: nackt vs. fraktal korrigiert")
+import math
+E1=math.sqrt(ME*MMU)
+print(f"   sqrt(m_e m_mu)      = {E1:.5f} MeV")
+print(f"   /sqrt(K_frak)       = {E1/math.sqrt(K):.5f} MeV  (A130 Weg 2: 7.398)")
+print(f"   -> K aus beiden: {(E1/E0M)**2:.6f}, n = {(1-(E1/E0M)**2)/XI:.2f}")
+print("   dritte unabhaengige K_frak-Bestimmung, im R67-Intervall.")
