@@ -1,0 +1,579 @@
+% 315_Kfrak_Form_De_ch.tex -- Kapitelinhalt Dok. 315
+% Die Form von K_frak: additiv oder multiplikativ?
+% Mit dem Kontrollfall der Eulerschen Musikspirale (5/7-Limit).
+
+\section{Worum es geht}
+
+Der fraktale Korrekturfaktor tritt im Korpus in der additiven Form auf,
+\[
+  K_\text{frak}^{\,\text{add}} \;=\; 1 - 100\,\xi \;=\; \frac{74}{75}
+  \;=\; 0{,}98\overline{6},
+\]
+w\"ahrend eine multiplikativ-kumulative Form denkbar w\"are:
+\[
+  K_\text{frak}^{\,\text{mul}} \;=\; (1-\xi)^{100} \;=\; 0{,}9867543\ldots
+\]
+Der relative Abstand der beiden Formen betr\"agt $8{,}88\cdot10^{-5}$. Der
+Korpus best\"atigt den \emph{Wert} $74/75$ mehrfach unabh\"angig (A040, A130,
+A270); ob damit auch die \emph{Form} -- additiv gegen multiplikativ --
+diskriminiert ist, war bislang ungepr\"uft. Dieses Dokument holt die Pr\"ufung
+nach und beantwortet drei Fragen: Welche Korpus-Stelle kann die Formen
+aufl\"osen? Was ergibt die Nachrechnung der dabei auftretenden offenen
+Identit\"aten? Und -- als Strukturfrage -- \emph{warum} sollte die eine Form
+die richtige sein?
+
+Als Kontrollfall dient die Eulersche Musikspirale. Sie ist das klassische
+Beispiel eines Zyklus, der \emph{nie} schlie\ss t, und liefert damit die
+Gegenprobe zum $\xi$-Zyklus, der nach $75$ Uml\"aufen \emph{exakt} schlie\ss t.
+Der Vergleich der beiden F\"alle stellt am Ende die begriffliche Achse, an der
+die Formfrage h\"angt: eingerollte gegen ausgerollte Beschreibung.
+
+\textbf{Vorab-Kl\"arung (Kategorienfehler vermeiden):} Der Wert $74/75$ ist per
+A040-Herleitung \textbf{[K]}; die Frage dieses Dokuments betrifft
+ausschlie\ss lich, ob unabh\"angige Zeugen die additive gegen die
+multiplikative Form \emph{messen} k\"onnen -- also den Status der Form als
+gemessene statt nur hergeleitete Aussage.
+
+\section{Kontrollfall I: die Eulersche Spirale schlie\ss t nie}
+
+\subsection{Das Unm\"oglichkeitsargument}
+
+\textbf{[Q]} Eulers Tonnetz (\emph{Tentamen novae theoriae musicae}, 1739)
+spannt die Intervalle der reinen Stimmung als Gitter aus Quinten ($3/2$) und
+gro\ss en Terzen ($5/4$) auf; die Oktave ($2$) ist herausdividiert. Die Frage
+\enquote{nach wie vielen Wiederholungen schlie\ss t die Spirale?} hat eine
+exakte Antwort: \emph{nie}. Ein Schluss verlangte
+\[
+  2^{x}\cdot 3^{y}\cdot 5^{z} = 1
+  \qquad\text{mit ganzzahligen } (x,y,z)\neq(0,0,0),
+\]
+was der Eindeutigkeit der Primfaktorzerlegung widerspricht. \"Aquivalent:
+$\log 2$, $\log 3$, $\log 5$ sind \"uber $\mathbb{Q}$ linear unabh\"angig. Die
+Bahn liegt dicht auf dem Oktavkreis, trifft ihren Ausgangspunkt aber nie.
+
+\subsection{Beinahe-Schl\"usse im 5-Limit}
+
+\textbf{[Q]} Was es stattdessen gibt, sind Beinahe-Schl\"usse, deren
+Fehlbetrag jeweils ein benanntes Komma ist:
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+Weg auf dem Tonnetz & Restfehler (Komma) & Verh\"altnis & Cent \\
+\midrule
+8 Quinten $+$ 1 gr.~Terz vs.\ 5 Oktaven & \textbf{Schisma} & $32805/32768$ & $\approx 1{,}95$ \\
+4 Quinten vs.\ Terz $+$ 2 Oktaven & syntonisches Komma & $81/80$ & $\approx 21{,}51$ \\
+12 Quinten vs.\ 7 Oktaven & pythagoreisches Komma & $531441/524288$ & $\approx 23{,}46$ \\
+3 gr.~Terzen vs.\ 1 Oktave & kleine Di\"esis & $128/125$ & $\approx 41{,}06$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Der praktisch beste Schluss im 5-Limit ist das Schisma ($\approx 2$ Cent,
+unter der H\"orschwelle); der bekannteste ist der Quintenzirkel nach $12$
+Quinten mit dem pythagoreischen Komma als Rest.
+
+\subsection{Beinahe-Schl\"usse im 7-Limit (Skriptergebnis)}
+
+\textbf{[K]} Nimmt man die Naturseptime $7/4$ als dritte Achse hinzu
+(Gitter $\mathbb{Z}^3$ aus $3,5,7$), gilt dasselbe
+Unm\"oglichkeitsargument. Die systematische Suche
+(\texttt{euler\_spirale\_7limit.py}, exakte Bruchrechnung, Suchraum
+$|b|\le 12$ Quinten, $|c|\le 6$ Terzen, $|d|\le 4$ Septimen; eine Assertion
+best\"atigt mit, dass nie ein exakter Schluss auftritt) liefert
+Beinahe-Schl\"usse, die eine Gr\"o\ss enordnung besser sind als alles im
+5-Limit:
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+Cent & Komma & Weg $3^{b}\,5^{c}\,7^{d}$ & Name \\
+\midrule
+$0{,}325$ & $250047/250000$ & $b=-6,\ c=6,\ d=-3$ & Landscape-Komma \\
+$0{,}396$ & $4375/4374$ & $b=-7,\ c=4,\ d=1$ & \textbf{Ragisma} \\
+$0{,}721$ & $2401/2400$ & $b=-1,\ c=-2,\ d=4$ & Breedsma \\
+$1{,}954$ & $32805/32768$ & $b=-8,\ c=-1,\ d=0$ & Schisma (5-Limit, Vergleich) \\
+$5{,}758$ & $5120/5103$ & $b=-6,\ c=1,\ d=-1$ & Hemifamity \\
+$7{,}712$ & $225/224$ & $b=-2,\ c=-2,\ d=1$ & septimales Kleisma \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Das Ragisma ist der einfachste Sub-Cent-Schluss ($7$ Quinten abw\"arts,
+$4$ Terzen und $1$ Septime aufw\"arts verfehlen den Ausgangspunkt um
+$0{,}4$ Cent); das gr\"obere 7-Limit-Gegenst\"uck zum syntonischen Komma ist
+das Archytas-Komma $64/63$ ($\approx 27$ Cent). Mehr Primachsen machen das
+Gitter dichter -- die Spirale kommt sich selbst schneller nahe, schlie\ss t
+aber prinzipiell nie.
+
+\subsection{Wie man die Spirale doch schlie\ss t: Temperierung}
+
+\textbf{[B]} Ein Schluss entsteht erst, wenn man Kommas \emph{wegtemperiert},
+also k\"unstlich zu $1$ erkl\"art. Die zw\"olfstufige gleichstufige Temperatur
+setzt die Quinte per Dekret auf exakt $7/12$ der Oktave -- sie
+\emph{rationalisiert} die Schrittweite, und erst dadurch schlie\ss t der
+Quintenzirkel. Der geschlossene Zirkel ist keine Eigenschaft der reinen
+Intervalle, sondern ein Artefakt der Rationalisierung. Dieser Satz wird in
+Abschnitt~\ref{sec:eingerollt} tragend.
+
+\section{Kontrollfall II: der Xi-Zyklus schlie\ss t exakt}
+
+\textbf{[B]} Der $\xi$-Zyklus steht auf der anderen Seite derselben
+Dichotomie. Die Schrittweite ist
+\[
+  100\,\xi = \frac{400}{30000} = \frac{1}{75}
+  \qquad\text{-- exakt rational,}
+\]
+weil $\xi = 4/30000$ eine rationale Setzung ist (A020). Ein Schritt von
+$1/75$ eines Zyklus schlie\ss t nach genau $75$ Wiederholungen ohne Rest;
+$K_\text{frak} = 1 - 1/75 = 74/75$ ist der geschlossene Weg minus ein
+Segment (A040, A050). Das ist die allgemeine Torus-Dichotomie: rationale
+Windungszahl $\Rightarrow$ geschlossene Bahn; irrationale $\Rightarrow$
+dichte, nie schlie\ss ende Bahn.
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+ & Musikspirale (5/7-Limit) & $\xi$-Zyklus (FFGFT) \\
+\midrule
+Schrittweite & $\log_2(3/2),\ \log_2(5/4),\ldots$ irrational & $1/75$ rational \\
+Grund & Primzahlen mult.\ unabh\"angig & $\xi$ rational gesetzt \\
+Verhalten & dicht, trifft sich nie & schlie\ss t exakt nach 75 \\
+\enquote{Fast-Schluss} & Kommas (Schisma, Ragisma, \ldots) & entf\"allt \\
+Verifikation & nur numerisch (Cent) & exakte Bruchrechnung \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die Schlie\ss ung nach $75$ ist also kein numerischer Zufall, sondern
+direkte Folge der Rationalit\"at von $\xi$ -- dieselbe Rationalisierung, die
+in der Musik erst die Temperierung nachtr\"aglich erzwingt, ist im Rahmen
+von Anfang an gesetzt.
+
+\section{Die Formfrage}
+\label{sec:formfrage}
+
+\textbf{[B]} Die beiden Formen sind bis zur ersten Ordnung identisch; ihr
+gesamter Unterschied ist der zweite Binomialterm:
+\[
+  (1-\xi)^{100} = 1 - 100\xi + \binom{100}{2}\xi^2 - \ldots,
+  \qquad
+  K^{\text{mul}} - K^{\text{add}} = 4950\,\xi^2 - O(\xi^3)
+  = 8{,}76\cdot10^{-5}.
+\]
+Numerisch verifiziert: der Binomialterm $4950\xi^2 = 8{,}8\cdot10^{-5}$
+deckt $99{,}6\,\%$ des vollen Abstands; der Rest sind h\"ohere Terme. Eine
+Korpus-Stelle kann die Form nur entscheiden, wenn ihre eigene Unsicherheit
+kleiner ist als dieser Abstand -- bei Potenz-Stellen: kleiner als der
+entsprechend verst\"arkte Abstand.
+
+\section{Drei Zeugen}
+\label{sec:zeugen}
+
+\subsection{Zeuge A: die Zwei-Routen-Messung (A130)}
+
+\textbf{[K]} A130 bestimmt die Skala $E_0$ auf zwei voneinander
+unabh\"angigen, $\alpha$-freien Wegen: Weg~1 als geometrisches Mittel
+$E_0 = \sqrt{m_e m_\mu}$, Weg~2 als Konstruktion
+$E_0^2 = 4\sqrt2\,m_\mu\,\xi^{-p}$ ohne $m_e$. Ihr Verh\"altnis
+\emph{misst} $K_\text{frak}$, ohne den Faktor zu benutzen:
+\[
+  K_\text{mess} = \bigl(E_0^{(2)}/E_0^{(1)}\bigr)^{-2}.
+\]
+
+\textbf{[B]} Zwei Sch\"arfungen gegen\"uber A130. Erstens k\"urzt sich
+$m_\mu$ im Verh\"altnis vollst\"andig heraus; $K_\text{mess}$ h\"angt nur an
+$m_e$ (CODATA, $3\cdot10^{-10}$), $\xi$, dem Pr\"afaktor $4\sqrt2$ und dem
+Exponenten $p$. Zweitens ist der Hebel des Exponenten
+$\mathrm dK/K = |\ln\xi|\cdot\mathrm dp \approx 8{,}92\cdot\mathrm dp$:
+damit Zeuge~A den Formabstand aufl\"ost, muss $p$ auf besser als
+$1\cdot10^{-5}$ bekannt sein.
+
+\textbf{[K]} Befund:
+
+\begin{center}
+\begin{tabular}{lllll}
+\toprule
+Annahme \"uber $p$ & $K_\text{mess}$ & Res.\ additiv & Res.\ multipl. & Urteil \\
+\midrule
+$p=-0{,}2679$ (Literal, 4~St.) & $0{,}986220$ & $4{,}5\cdot10^{-4}$ & $5{,}4\cdot10^{-4}$ & keine Formaussage \\
+$p=-(2-\sqrt3)$ exakt & $0{,}9866533$ & $\mathbf{1{,}36\cdot10^{-5}}$ & $1{,}02\cdot10^{-4}$ & \textbf{7{,}5:1 additiv} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Das vierstellige Zahlenliteral $p=-0{,}2679$ (so steht es im
+Pr\"ufskript zu A130) l\"ost nicht auf: seine Rundung
+($\pm5\cdot10^{-5} \to \pm4{,}5\cdot10^{-4}$ auf $K$) \"ubersteigt den
+Formabstand um das F\"unffache. Die Identit\"at $p = -(2-\sqrt3)$ w\"urde
+scharf aufl\"osen -- sie ist im Korpus aber bisher weder deklariert noch
+hergeleitet. Ihre Nachrechnung folgt in Abschnitt~\ref{sec:pident}.
+
+\textbf{[K] Registerlage (R72, eingearbeitet 3.~August 2026):} Das
+Register bucht die beiden $E_0$-Werte inzwischen nicht mehr als zwei
+unabh\"angige Bestimmungen, sondern als \emph{denselben Wert nackt und
+fraktal korrigiert} ($7{,}348$ nackt, $7{,}398$ $\alpha$-verankert;
+Verh\"altnis $1/\sqrt{K_\text{frak}}$ nach der A040-Regel). Aus dem
+Verh\"altnis folgt eine Bestimmung des \emph{Exponenten}:
+$n = 101{,}3$, neben $n = 100\pm2$ (R67) und $n = 100{,}27$
+(Sektorleiter A270). In dieser $n$-Sprache lautet die Formfrage: additiv
+$K = 1-n\xi$ gegen multiplikativ $(1-\xi)^{n}$ unterscheiden sich um
+$\Delta n_\text{eff} = n(n-1)\xi/2 \approx 0{,}66$ -- keine der drei
+$n$-Bestimmungen erreicht diese Sch\"arfe derzeit. Die R72-Lesart
+schw\"acht damit die \enquote{Messungs}-Rahmung von Zeuge~A zus\"atzlich:
+Was bleibt, ist die exakte $q^{*}$-Bestimmung von
+Abschnitt~\ref{sec:pident}, deren Diskriminierung an der
+$p$-Identit\"at h\"angt.
+
+\subsection{Zeuge B: die Hochpotenz-Stelle (A270)}
+
+\textbf{[K]} A270 f\"uhrt die Identit\"at
+$K_\text{frak}^{-36} \approx 16/\pi^2$ mit dokumentierter
+\"Ubereinstimmung $0{,}010\,\%$. Der Exponent $36$ verst\"arkt den
+Formabstand auf $36\cdot8{,}9\cdot10^{-5} = 0{,}32\,\%$ -- weit oberhalb
+dieser Toleranz. Damit ist die Stelle aufl\"osungsf\"ahig:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Ausdruck & Wert & rel.\ Abw.\ von $16/\pi^2 = 1{,}6211389$ \\
+\midrule
+$(74/75)^{-36}$ (additiv) & $1{,}6213007$ & $\mathbf{+1{,}0\cdot10^{-4}}$ \\
+$\bigl((1-\xi)^{100}\bigr)^{-36}$ (multipl.) & $1{,}6161261$ & $-3{,}1\cdot10^{-3}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Urteil: 31:1 zugunsten additiv} -- bedingt durch die Annahme, dass
+$16/\pi^2$ die richtige Referenz ist. Diese ist in A270 als Koinzidenz
+ohne Vorw\"artsherleitung gef\"uhrt (P35), aber Monte-Carlo-abgesichert.
+
+\textbf{[K] Aufwertung der Referenz durch Dok.~314:} Die Konstante ist
+korpus-nativ identifizierbar. $\pi^2/16$ ist die
+\emph{Packungsdichte des D4-Gitters} (Dok.~314: \enquote{Kusszahl $24$
+gegen $8$, Packungsdichte $\pi^2/16$ gegen $\pi^2/32$}) -- also gilt
+\[
+  \frac{16}{\pi^2} \;=\; \frac{1}{\Delta(\mathrm{D4})}.
+\]
+Die A270-Identit\"at liest sich damit als
+$K_\text{frak}^{-36} = 1/\Delta(\mathrm{D4})$: Der Kehrwert der
+Packungsdichte genau des Gitters, dessen Struktur Dok.~314 im
+Hilbertraum verifiziert. Die Referenz ist damit keine freischwebende
+sch\"one Zahl mehr, sondern eine Gitterinvariante des Rahmens; P35
+verengt sich von \enquote{woher die Konstante?} auf \enquote{warum der
+Exponent $36$ an die Packungsdichte koppelt}. Die Bedingung von
+Zeuge~B wird dadurch deutlich schw\"acher, verschwindet aber nicht.
+
+\subsection{Zeuge C: die Potenzform (A040)}
+
+\textbf{[K]} Die Potenzform $(D_f^\text{eff}/3)^{D_f^\text{eff}/2}$ mit
+$D_f^\text{eff} = 2{,}973$ ergibt $0{,}986651$: Residuum additiv
+$1{,}6\cdot10^{-5}$, multiplikativ $1{,}0\cdot10^{-4}$ -- tendiert
+additiv. Die vierstellige Rundung von $D_f^\text{eff}$
+($\pm2{,}5\cdot10^{-4}$ auf $K$) \"ubersteigt jedoch den Formabstand:
+kein eigenst\"andiger Zeuge, aber konsistent mit A.
+
+\section{Nachrechnung der p-Identit\"at}
+\label{sec:pident}
+
+\textbf{[K]} Da sich $m_\mu$ k\"urzt, l\"asst sich der Exponent $q=-p$
+\emph{exakt} aus der jeweils angenommenen $K$-Form zur\"uckrechnen
+(Fehlerboden aus $m_e$: $\mathrm dq \approx 3\cdot10^{-11}$):
+\[
+  q^{*}(K) = \frac{\ln\!\bigl(m_e/(K\cdot4\sqrt2)\bigr)}{\ln\xi},
+  \qquad
+  \begin{aligned}
+    q^{*}_\text{add} &= 0{,}267950715 && (K=74/75),\\
+    q^{*}_\text{mul} &= 0{,}267960667 && (K=(1-\xi)^{100}),\\
+    2-\sqrt3 &= 0{,}267949192 && (= \tan15^{\circ} = 1/(2+\sqrt3)).
+  \end{aligned}
+\]
+
+\textbf{[K]} \emph{Asymmetrie.} $2-\sqrt3$ liegt $7{,}5\times$ n\"aher an
+$q^{*}_\text{add}$. Ein fairer Scan von $175$ verschiedenen geschlossenen
+Ausdr\"ucken -- quadratische Irrationalit\"aten $(a+b\sqrt d)/c$ mit
+$|a|,|b|\le9$, $c\le12$, $d\in\{2,3,5,6,7,10\}$, dazu
+$\pi$-, $e$- und $\ln$-Formen -- findet im $\pm3\cdot10^{-6}$-Fenster um
+$q^{*}_\text{add}$ \emph{ausschlie\ss lich} $2-\sqrt3$, um
+$q^{*}_\text{mul}$ \emph{keinen einzigen Kandidaten}. Falls der wahre
+Exponent \"uberhaupt eine einfache geschlossene Form hat, ist nur die
+additive Lesart damit vertr\"aglich.
+
+\textbf{[K]} \emph{Signifikanz.} Die Wahrscheinlichkeit, dass ein
+zuf\"alliger Punkt $\le1{,}5\cdot10^{-6}$ an \emph{irgendeinem} Kandidaten
+des Feldes liegt, betr\"agt $\approx1{,}3\,\%$; an einem so niederkomplexen
+wie $2-\sqrt3$ (dem einzigen im Fenster) $\approx10^{-4}$. Die N\"ahe hat
+damit dasselbe statistische Gewicht wie die Monte-Carlo-Absicherung von
+$16/\pi^2$ in A270. Ein Beweis ist sie nicht; die $e^2$-Warnung aus A130
+(N\"ahe allein ist kein Argument) gilt unver\"andert.
+
+\textbf{[K]} \emph{Realer Rest.} Auch $q^{*}_\text{add}$ trifft $2-\sqrt3$
+nicht exakt: Rest $+1{,}52\cdot10^{-6}$ in $q$, entsprechend
+$1{,}36\cdot10^{-5}$ auf $K$- und $m_e$-Ebene ($\approx 7$~eV in $m_e$)
+-- Faktor $\sim45\,000$ \"uber dem Messfehlerboden, also real. Der
+Kettenbruch $q^{*}_\text{add} = [0;3,1,2,1,2,1,2,1,2,12,369]$ folgt neun
+Terme lang dem periodischen Muster von $2-\sqrt3 = [0;3,\overline{1,2}]$
+und bricht dann aus; das ist automatische Folge der N\"ahe, kein
+Zusatzbeleg, best\"atigt aber: $q^{*}_\text{add}$ ist numerisch eine winzig
+gest\"orte quadratische Irrationalit\"at, keine eigene einfache Zahl.
+
+\textbf{[K]} \emph{Kein Korrekturterm gefunden.} Die systematische Suche
+nach $q = (2-\sqrt3) + c\cdot F(\xi)$ \"uber zehn Theorie-Familien
+($\xi$, $\xi^2$, $(100\xi)^2$, $(100\xi)^3$, $\xi\ln(1/\xi)$,
+$\xi^{3/2}$, $\xi/\ln(1/\xi)$, $\ln(75/74)$, $\ln^2(75/74)$,
+$(2-\sqrt3)\xi$) liefert f\"ur kein $F$ einen einfachen Koeffizienten
+$c$ (kleiner Bruch oder benannte Konstante); ebenso wenig existiert im
+Kandidatenfeld ein alternativer exakter Exponent. Der Rest bleibt als
+offener Posten stehen -- er ist genau die Stelle, die A130 als
+\enquote{Test der Polmasse gegen die Geometrie} anspricht; als
+Gr\"o\ss enordnungshinweis: $7$~eV liegt im Bereich von
+QED-Selbstenergie-Differenzen zwischen Massendefinitionen.
+
+\textbf{[B]} \emph{Austauschbarkeit.} $q$-Rest und Pr\"afaktor-Abweichung
+sind ein Freiheitsgrad in zwei Schreibweisen; die Konstruktion fixiert
+nur das Produkt $4\sqrt2\cdot\xi^{q}$. Erzwingt man $q=2-\sqrt3$ exakt,
+m\"usste der Pr\"afaktor $5{,}6567774$ statt $4\sqrt2 = 5{,}6568542$
+betragen ($-1{,}36\cdot10^{-5}$); auch daf\"ur wurde keine geschlossene
+Form gefunden.
+
+\section{Eingerollt und ausgerollt: warum die additive Form einen Grund hat}
+\label{sec:eingerollt}
+
+Die Abschnitte \ref{sec:zeugen}--\ref{sec:pident} behandeln die Formfrage
+als Messproblem. Dieser Abschnitt behandelt sie als
+\emph{Strukturproblem}: Die beiden Formen sind nicht zwei willk\"urliche
+Rechenans\"atze, sondern die exakten Buchhaltungen \emph{zweier
+verschiedener Darstellungen derselben Geometrie}. Die Formfrage wird
+damit zu einer pr\"azisen physikalischen Frage: In welcher Dom\"ane ist
+die Korrektur exakt definiert -- eingerollt oder ausgerollt?
+
+\subsection{Die beiden Dom\"anen}
+
+\textbf{[B]} \emph{Eingerollt (T$^4$, Windungsbild).} Auf dem kompakten
+Zyklus ist die nat\"urliche Gr\"o\ss e die Phase bzw.\ Bogenl\"ange, und
+Phasen \emph{addieren} sich. Eine Korrektur, die jede Windung um das
+Segment $\varepsilon$ verk\"urzt, summiert \"uber $N$ Windungen linear.
+Die Schlie\ss ungsbedingung aus A040,
+\[
+  75\,(1-\varepsilon) = 74 \quad\Rightarrow\quad \varepsilon = \tfrac1{75}
+  = 100\xi,
+\]
+ist in dieser Dom\"ane \emph{exakt} -- als Buchhaltungsidentit\"at der
+Windung, nicht als N\"aherung: $75$ verk\"urzte Uml\"aufe schlie\ss en
+genau dann, wenn insgesamt ein voller Umlauf fehlt. Die additive Form
+$K = 1-100\xi$ ist also keine Linearisierung von irgendetwas; sie ist die
+native, geschlossene Buchhaltung der eingerollten Geometrie -- in exakter
+Bruchrechnung darstellbar, weil $\xi$ rational ist.
+
+\textbf{[B]} \emph{Ausgerollt (Skalenfluss, Messdom\"ane).} Rollt man den
+Zyklus in die Skalenrichtung aus, wird aus der Windungsz\"ahlung ein Lauf
+\"uber Gr\"o\ss enordnungen (der RG-Lauf aus A040, $\sim17$ Dekaden). In
+dieser Darstellung wirken Korrekturen stufenweise auf Amplituden, und
+stufenweise Amplitudenkorrekturen komponieren multiplikativ:
+$(1-\xi)^{100}\approx e^{-100\xi}$. W\"are die ausgerollte Beschreibung
+fundamental, w\"are \emph{diese} Form exakt und die additive nur ihre
+erste Ordnung.
+
+\subsection{Der Formabstand ist der \"Ubersetzungsfehler}
+
+\textbf{[B]} Nach Abschnitt~\ref{sec:formfrage} ist der gesamte
+Formabstand der Binomialterm zweiter Ordnung, $4950\xi^2$. Er ist damit
+nichts anderes als der Fehler der \"Ubersetzung zwischen den Dom\"anen in
+zweiter Ordnung. Die Formfrage lautet scharf: Welche Dom\"ane tr\"agt die
+exakte Definition, welche die N\"aherung? Genau das -- und nur das --
+messen die Zeugen A und B.
+
+\subsection{Die Euler-Parallele macht die Zuordnung eindeutig}
+
+\textbf{[B]} Die Musikspirale liefert den Kontrollfall, in dem die
+Dom\"anenzuordnung \emph{unstrittig} ist -- weil dort gemessen wird. Was
+Ohr und Messger\"at erreichen, sind Frequenzen, also Gr\"o\ss en der
+ausgerollten Skalendom\"ane; Intervalle komponieren dort multiplikativ
+($3/2\cdot3/2\cdot\ldots$), und erst der Logarithmus rollt sie auf den
+Oktavkreis -- wobei die Irrationalit\"at hereinkommt und die
+Schlie\ss ung prinzipiell verhindert. Der $\xi$-Zyklus ist umgekehrt in
+der eingerollten Dom\"ane \emph{definiert}: von vornherein eine
+Kreisstruktur mit rationaler Windungszahl, ohne zwei multiplikativ
+definierte Objekte, die erst logarithmisch vergleichbar gemacht werden
+m\"ussten.
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+ & Musik (Euler) & FFGFT ($\xi$-Zyklus) \\
+\midrule
+Messgr\"o\ss e & Frequenz (ausgerollt) & --- (eingerollt definiert) \\
+Komposition & Intervalle multiplizieren & Windungsphasen addieren \\
+Br\"ucke zum Kreis & Logarithmus (erzwungen) & keine n\"otig \\
+Schrittweite & $\log_2(3/2)$ irrational & $1/75$ rational \\
+Schlie\ss ung & nie (nur Kommas) & exakt nach 75 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die Zuordnung ist vollst\"andig: multiplikative Komposition geh\"ort zur
+ausgerollten Mess-/Skalendom\"ane, additive Komposition zur eingerollten
+Windungsdom\"ane.
+
+\subsection{Der Korpus enth\"alt die Gabelung bereits: Fall B gegen Fall C}
+
+\textbf{[K]} Die Zuordnung steht nicht neben dem Korpus, sondern in ihm.
+Die Schlie\ss ungsgabelung (Dok.~295/313, zitiert in Dok.~314) f\"uhrt
+drei F\"alle: Fall~A ($d=0$, Schlie\ss ung nach einem Umlauf), Fall~B
+($\xi$ eingefroren: rationale Rotationszahl $1-d = 74/75$, wegen
+$\gcd(74,75)=1$ Schlie\ss ung nach genau $75$ Uml\"aufen) und Fall~C
+($\xi$ l\"auft \"uber die Rekursion: \enquote{der kumulierte Defekt wird
+logarithmisch und die Windung zur \"aquiangularen Spirale} -- keine
+Schlie\ss ung). Das ist exakt die Formfrage als Physik: Fall~B
+\emph{ist} die additive Buchhaltung (linearer Defekt, rationale
+Windung, exakter Schluss), Fall~C \emph{ist} die
+multiplikativ-logarithmische Komposition -- und die \"aquianguläre
+Spirale ist dasselbe mathematische Bild wie die Euler-Spirale aus
+Kontrollfall~I. Die beiden Formen von $K_\text{frak}$ sind also die
+Buchhaltungen der beiden Gabel\"aste; die Frage \enquote{additiv oder
+multiplikativ?} ist die Frage, welcher Ast die Korrektur tr\"agt.
+
+Dok.~314 (Kap.~D2) pr\"azisiert zus\"atzlich die Dom\"anengrenze in der
+hier verwendeten Terminologie: \emph{Im eingerollten Zustand gibt es
+keine fraktalen Defekte; der Defekt $d = 100\xi$ akkumuliert nur
+ausgerollt}, und $K_\text{frak}$ ist \emph{eine Eigenschaft der
+Durchquerung}, die \"uber die Br\"uckenkonstanten ($E_0$, $v$)
+hereinkommt, nicht \"uber den lokalen Operator. Die additive Form ist
+danach die Buchhaltung der \emph{geschlossenen} Durchquerung mit
+eingefrorenem $\xi$ (Fall~B); die multiplikative w\"are die Buchhaltung
+der \emph{laufenden} Akkumulation (Fall~C). Alle
+Korpus-Verwendungen von $K_\text{frak}$ (A040-Regel, R70-Zuordnung,
+R72) buchen Fall~B.
+
+\subsection{Was die Zeugen dann bedeuten}
+
+\textbf{[B]} In dieser Lesart messen die Zeugen A und B nicht ein
+Rechendetail, sondern die Dom\"anenzugeh\"origkeit der Korrektur -- und
+sie antworten \"ubereinstimmend: Die exakte Buchhaltung ist die
+\emph{eingerollte}. Die multiplikative Form ist die N\"aherung, die ein
+Beobachter der ausgerollten Skalenerz\"ahlung naiv ansetzen w\"urde --
+richtig in erster Ordnung, falsch ab $4950\xi^2$.
+
+Das l\"ost zugleich die scheinbare Spannung innerhalb von A040 auf: Das
+Dokument enth\"alt beides -- das Schlie\ss ungskomma (eingerollte, exakte
+Lesart) und den kumulativen RG-Lauf (ausgerollte Herleitung des Faktors
+$100$). Beide sind konsistent, weil sie in erster Ordnung
+\"ubereinstimmen; exakt ist nach Zeugenlage die eingerollte. Der RG-Lauf
+leitet her, \emph{warum} die Korrektur die Gr\"o\ss e $100\xi$ hat; die
+Windungsgeometrie legt fest, \emph{wie} sie komponiert. Das naive
+RG-Argument f\"ur die multiplikative Form wird damit eingeordnet statt
+widerlegt: Es ist das korrekte Argument der ausgerollten Dom\"ane -- und
+diese ist nach Zeugenlage nicht die definierende.
+
+\subsection{Anschluss an die Grundarchitektur}
+
+\textbf{[B]} Die Zuordnung \enquote{eingerollt $=$ exakt} ist keine
+Ad-hoc-Rettung der additiven Form, sondern deckungsgleich mit der
+Grundarchitektur des Rahmens: Die kompakte Geometrie (T$^4$, rationale
+$\xi$-Setzung) ist prim\"ar; Skalenfluss-Erz\"ahlungen sind abgeleitete
+Beschreibungen. Dass die exakte Arithmetik des Korpus durchg\"angig mit
+Br\"uchen arbeitet, ist dieselbe Aussage in methodischer Form: Exakte
+Br\"uche existieren nur in der eingerollten Dom\"ane -- die ausgerollte
+kennt nur N\"aherungen mit $\xi^2$-Resten. Insofern \emph{muss} ein
+konsistent eingerollt gebauter Rahmen die additive Form tragen; f\"ande
+die Messung multiplikativ, w\"are nicht nur $K_\text{frak}$ betroffen,
+sondern die Primatsbehauptung der Geometrie selbst.
+
+\section{Status und Falsifikationslinie}
+
+\begin{keyresult}[Buchungsstand]
+$K_\text{frak} = 1-100\xi = 74/75$: Wert \textbf{[K]} (A040). Form
+additiv: \textbf{[B]}, zweifach bedingt-best\"atigt -- Bedingung~1
+($p$-Identit\"at $2-\sqrt3$) unver\"andert offen; Bedingung~2
+($16/\pi^2$-Referenz) durch Dok.~314 wesentlich geschw\"acht, da
+$16/\pi^2 = 1/\Delta(\mathrm{D4})$ korpus-nativ identifiziert ist und
+nur die Kopplung an den Exponenten~$36$ offen bleibt (P35 verengt).
+Strukturell ist die additive Form die Buchhaltung des Gabelasts
+Fall~B (eingefrorenes $\xi$, rationale Windung), den alle
+Korpus-Verwendungen buchen; die multiplikative Alternative
+$(1-\xi)^{100}$ ist die Buchhaltung des Spiral-Asts Fall~C, wird von
+beiden bedingten Zeugen konsistent disfavorisiert und von keinem
+gest\"utzt.
+\end{keyresult}
+
+\textbf{[B]} \emph{Warum trotzdem nicht [K]-gemessen:} Jede der beiden
+scharfen Diskriminierungen h\"angt an einer noch offenen Voraussetzung --
+Zeuge~A an der Herleitung der Identit\"at $p=-(2-\sqrt3)$ (mit realem
+Rest $1{,}5\cdot10^{-6}$), Zeuge~B am Status von $16/\pi^2$ als Referenz
+(P35). F\"allt \emph{eine} der beiden Voraussetzungen sp\"ater als richtig
+heraus, wird die Formaussage unbedingt. Umgekehrt bleibt die
+multiplikative Form logisch m\"oglich, solange beide Voraussetzungen
+offen sind: Dann w\"aren die $16/\pi^2$-N\"ahe und die $2-\sqrt3$-N\"ahe
+zwei unabh\"angige Zuf\"alle -- und das naive RG-Argument der ausgerollten
+Dom\"ane h\"atte recht behalten.
+
+\textbf{[B]} \emph{Falsifikationslinie.} Unbedingt entscheidbar w\"are die
+Frage an einer Stelle, wo $K$ in hoher Potenz gegen eine \emph{Messung}
+statt gegen eine Koinzidenz-Konstante steht. Der Kandidat steht bereits
+im Korpus: die Baryon-Vorhersage aus A270 (Sektor-Exponent $+2$, also
+$K^{38}$-Niveau, Formabstand dort $\approx0{,}34\,\%$). Eine
+Baryon-Massenpr\"ufung mit besserer Genauigkeit entschiede additiv gegen
+multiplikativ ohne Bedingungen -- und testete zugleich die
+Dom\"anenzuordnung aus Abschnitt~\ref{sec:eingerollt}: Fiele sie
+multiplikativ aus, w\"are nicht nur die Formwahl korrigiert, sondern die
+Korrektur lebte in der Skalendom\"ane, gegen die Windungslesart des
+Schlie\ss ungskommas. Das Strukturargument erh\"oht also den Einsatz; es
+bindet die Formfrage an die Primatsfrage.
+
+\section{Offene Punkte}
+
+\begin{itemize}
+  \item \textbf{P-315-1:} Herleitung oder Deklaration der Identit\"at
+    $p=-(2-\sqrt3)$ in A130/Weg~2 (derzeit nur vierstelliges
+    Zahlenliteral im Pr\"ufskript). $2-\sqrt3=\tan15^{\circ}$ hat
+    plausible geometrische Anmutung (Zw\"olftel-Winkel), aber keine
+    Korpus-Herleitung. Nach R72 ist dies der einzige Weg, Zeuge~A
+    aufl\"osungsf\"ahig zu machen.
+  \item \textbf{P-315-2:} Der reale Rest $1{,}36\cdot10^{-5}$ auf
+    $K$/$m_e$-Ebene ($\approx7$~eV): Korrekturterm der Theorie,
+    Polmassen-Effekt oder Hinweis auf eine andere exakte
+    Schlie\ss form? Keine der zehn gepr\"uften $F(\xi)$-Familien liefert
+    einen einfachen Koeffizienten. Konsistent mit R72: die
+    $n$-Bestimmung aus dem $E_0$-Verh\"altnis ($101{,}3$) liegt \"uber
+    $100$; der \"Uberschuss ist derselbe Posten.
+  \item \textbf{P35 (verengt durch Dok.~314):} Mit
+    $16/\pi^2 = 1/\Delta(\mathrm{D4})$ ist die Konstante als
+    D4-Packungsdichte-Kehrwert identifiziert; offen bleibt die
+    Vorw\"artsherleitung der Kopplung
+    $K_\text{frak}^{-36} = 1/\Delta(\mathrm{D4})$, insbesondere die
+    Rolle des Bulk-Exponenten~$36$.
+  \item \textbf{P-315-3 ($n$-Sch\"arfe):} In $n$-Sprache erfordert die
+    Formdiskriminierung $\Delta n \le 0{,}66$
+    ($= n(n-1)\xi/2$). Die drei $n$-Wege aus R72
+    ($101{,}3$; $100\pm2$; $100{,}27$) erreichen das nicht; die
+    Sektorleiter ($100{,}27$) ist der aussichtsreichste Kandidat f\"ur
+    eine Sch\"arfung.
+  \item \textbf{Pr\"azisierung A040:} $D_f^\text{eff}$ mit mehr Stellen
+    angeben (ben\"otigt: besser als $\pm1\cdot10^{-4}$), damit Zeuge~C
+    aufl\"osungsf\"ahig wird.
+  \item \textbf{Baryon-Stelle (A270):} Massenpr\"ufung auf
+    $K^{38}$-Niveau als unbedingter Formtest -- zugleich Test der
+    Gabelzuordnung Fall~B/C.
+\end{itemize}
+
+\section{Verifikation}
+
+Alle Zahlen dieses Dokuments sind durch vier Skripte reproduzierbar
+(reine Standardbibliothek; exakte Bruchrechnung, wo m\"oglich):
+
+\begin{itemize}
+  \item \texttt{python/315\_Skripte/euler\_spirale\_7limit.py} --
+    Komma-Suche im 5/7-Limit, exakt; Assertion gegen exakten Schluss.
+  \item \texttt{python/315\_Skripte/pruefrechnung\_kfrak\_form.py} --
+    Zeugen A/B/C mit Urteilslogik (Unsicherheit gegen wirksamen,
+    ggf.\ verst\"arkten Formabstand).
+  \item \texttt{python/315\_Skripte/pruefrechnung\_p\_identitaet.py} --
+    exakte $q^{*}$-Bestimmung, Fairness-Scan, Rest- und
+    Pr\"afaktor-Gegenprobe.
+  \item \texttt{python/315\_Skripte/pruefrechnung\_rest\_0p1xi.py} --
+    Korrekturterm-Familien, Kandidatenstatistik
+    (Zufallserwartung), Kettenbruch-Diagnose.
+\end{itemize}
+
+Eingaben: $\xi=4/30000$ exakt; $m_e = 0{,}51099895069$~MeV,
+$m_\mu = 105{,}6583755$~MeV (CODATA~2022).
