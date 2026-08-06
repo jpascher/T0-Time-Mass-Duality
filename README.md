@@ -413,11 +413,54 @@ Documents: [DE](2/pdf/313_Kein_Anfang_De.pdf) · [EN](2/pdf/313_Kein_Anfang_En.p
 
 ---
 
+## Doc. 315 — The Form of K_frak: Additive or Multiplicative? (August 2026, DE+EN)
+
+Working document (not A-series). 10 pages DE / 10 EN, four verification
+scripts (standard library only, exact fraction arithmetic).
+
+The corpus confirms the **value** K_frak = 1 − 100ξ = 74/75 several
+times independently (A040, A130, A270); whether this also
+discriminates the **form** — additive against multiplicative
+(1 − ξ)¹⁰⁰ — had remained unexamined. The two forms differ by exactly
+the second binomial term 4950ξ² ≈ 8.9×10⁻⁵.
+
+- **Control case Euler's musical spiral (5/7-limit):** exact closure is
+  impossible (prime factorisation); best near-closures are the schisma
+  (1.95 cents, 5-limit) and the ragisma 4375/4374 (0.40 cents,
+  7-limit). Closure only through temperament = rationalising the step
+  — precisely the rationality the ξ cycle (1/75, gcd(74,75) = 1)
+  carries from the outset.
+- **Three witnesses:** the A130 two-route ratio discriminates 7.5:1
+  additive, conditional on the undeclared identity p = −(2−√3)
+  (P-315-1, real residual ≈ 7 eV in m_e → P-315-2); the A270
+  high-power location K⁻³⁶ ≈ 16/π² discriminates **31:1 additive**,
+  with the reference upgraded via Doc. 314: **16/π² = 1/Δ(D4)**, the
+  reciprocal D4 packing density (P35 narrowed to the coupling of the
+  bulk exponent 36); the A040 power form tends additive but cannot
+  resolve.
+- **Structural argument:** the additive form is the exact winding
+  bookkeeping of the rolled-up domain; the multiplicative one is the
+  stepwise composition of the unrolled scale domain. Tied to the
+  closure fork (Docs. 295/313/314): case B (frozen ξ) *is* the
+  additive bookkeeping, case C (running ξ, equiangular spiral) *is*
+  the multiplicative–logarithmic one — the Euler spiral is case C's
+  picture.
+- **Status:** value [K]; form additive [B], twice conditionally
+  confirmed; the multiplicative alternative is consistently
+  disfavoured by both conditional witnesses and supported by none.
+  Unconditional decision line: the A270 baryon location (K³⁸ level,
+  form distance 0.34 %).
+
+Verification: `2/python/315_Skripte/` (4 scripts).
+Documents: [DE](2/pdf/315_Kfrak_Form_De.pdf) · [EN](2/pdf/315_Kfrak_Form_En.pdf)
+
+---
+
 ## Correction Register & Changelog
 
 The **correction register** [Doc. 190](2/pdf/190_T0_Korrekturen_De.pdf)
 documents every correction and refinement with date, status, and
-affected documents — K1–K7 (corrections) and R1–R74 (refinements/programme, as of 5 August 2026).
+affected documents — K1–K7 (corrections) and R1–R74 (refinements/programme, as of 6 August 2026).
 Nothing is silently overwritten.
 
 The **changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)

@@ -426,11 +426,54 @@ Dokumente: [DE](2/pdf/313_Kein_Anfang_De.pdf) · [EN](2/pdf/313_Kein_Anfang_En.p
 
 ---
 
+## Dok. 315 — Die Form von K_frak: additiv oder multiplikativ? (August 2026, DE+EN)
+
+Arbeitsdokument (nicht A-Serie). 10 Seiten DE / 10 EN, vier
+Prüfskripte (reine Standardbibliothek, exakte Bruchrechnung).
+
+Der Korpus bestätigt den **Wert** K_frak = 1 − 100ξ = 74/75 mehrfach
+unabhängig (A040, A130, A270); ob damit auch die **Form** — additiv
+gegen multiplikativ (1 − ξ)¹⁰⁰ — diskriminiert ist, war ungeprüft.
+Die beiden Formen unterscheiden sich um exakt den zweiten
+Binomialterm 4950ξ² ≈ 8,9×10⁻⁵.
+
+- **Kontrollfall Eulersche Musikspirale (5/7-Limit):** exakter Schluss
+  unmöglich (Primfaktorzerlegung); beste Beinahe-Schlüsse sind das
+  Schisma (1,95 Cent, 5-Limit) und das Ragisma 4375/4374 (0,40 Cent,
+  7-Limit). Schließung nur durch Temperierung = Rationalisierung der
+  Schrittweite — genau die Rationalität, die der ξ-Zyklus (1/75,
+  ggT(74,75) = 1) von Anfang an trägt.
+- **Drei Zeugen:** Das A130-Zwei-Routen-Verhältnis diskriminiert 7,5:1
+  additiv, bedingt durch die nicht deklarierte Identität p = −(2−√3)
+  (P-315-1, realer Rest ≈ 7 eV in m_e → P-315-2); die
+  A270-Hochpotenz-Stelle K⁻³⁶ ≈ 16/π² diskriminiert **31:1 additiv**,
+  mit per Dok. 314 aufgewerteter Referenz: **16/π² = 1/Δ(D4)**, der
+  Kehrwert der D4-Packungsdichte (P35 verengt auf die Kopplung des
+  Bulk-Exponenten 36); die A040-Potenzform tendiert additiv, kann aber
+  nicht auflösen.
+- **Strukturargument:** Die additive Form ist die exakte
+  Windungsbuchhaltung der eingerollten Domäne; die multiplikative die
+  Stufenkomposition der ausgerollten Skalendomäne. Angebunden an die
+  Schließungsgabelung (Dok. 295/313/314): Fall B (ξ eingefroren) *ist*
+  die additive Buchhaltung, Fall C (ξ läuft, äquianguläre Spirale)
+  *ist* die multiplikativ-logarithmische — die Euler-Spirale ist das
+  Bild von Fall C.
+- **Status:** Wert [K]; Form additiv [B], zweifach bedingt-bestätigt;
+  die multiplikative Alternative wird von beiden bedingten Zeugen
+  konsistent disfavorisiert und von keinem gestützt. Unbedingte
+  Entscheidungslinie: die A270-Baryon-Stelle (K³⁸-Niveau,
+  Formabstand 0,34 %).
+
+Verifikation: `2/python/315_Skripte/` (4 Skripte).
+Dokumente: [DE](2/pdf/315_Kfrak_Form_De.pdf) · [EN](2/pdf/315_Kfrak_Form_En.pdf)
+
+---
+
 ## Korrekturregister & Changelog
 
 Das **Korrekturregister** [Dok. 190](2/pdf/190_T0_Korrekturen_De.pdf)
 dokumentiert jede Korrektur und Präzisierung mit Datum, Status und
-betroffenen Dokumenten — K1–K7 (Korrekturen) und R1–R74 (Präzisierungen/Programme, Stand 5. August 2026).
+betroffenen Dokumenten — K1–K7 (Korrekturen) und R1–R74 (Präzisierungen/Programme, Stand 6. August 2026).
 Nichts wird still überschrieben.
 
 Der **Changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)
