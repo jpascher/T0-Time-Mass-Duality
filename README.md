@@ -226,7 +226,7 @@ measurable (Doc. 230).
 |----------|------|
 | 🔬 Interactive Portal | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo v1.2.7 | [DOI 10.5281/zenodo.21628364](https://doi.org/10.5281/zenodo.21628364) (supersedes v1.2.6 · [21562813](https://doi.org/10.5281/zenodo.21562813)) |
+| 📦 Zenodo v1.2.8 | DOI to be added on publication (supersedes v1.2.7 · [21628364](https://doi.org/10.5281/zenodo.21628364)) |
 | 🎵 Spotify | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
@@ -340,11 +340,84 @@ Answers the "ξ is fitted to the masses, hence circular" objection by correcting
 Verification: `2/Dok310_Skripte/ffgft_310_*.py` (4 scripts, no free parameters).
 Documents: [DE](2/pdf/310_Resonanzgeometrie_Referenz_De.pdf) · [EN](2/pdf/310_Resonanzgeometrie_Referenz_En.pdf)
 
+## Docs. 313 and 314 — Time Cycle and Lattice in Hilbert Space (August 2026, DE+EN)
+
+### Doc. 314 — Lattice in Hilbert Space
+
+Working document (not A-series). 26 pages DE / 25 EN, four verification
+scripts.
+
+What becomes of the D4 lattice under translation into Hilbert space:
+the kissing number becomes the degeneracy, triality becomes the
+orbifold and the fibre, the radius ratio becomes the level splitting.
+
+- **Lattice theorems [K]:** |Aut(D4)| = 1152 = |W(F4)|, quotient over
+  W(D4) is 6 = |S₃| (triality at the lattice, not only at the Dynkin
+  diagram); the trace-(−2) class satisfies |det(1−A)| = 9 → **the
+  T⁴/Z₃ orbifold with 9 fixed points is a lattice symmetry of D4**,
+  not an added assumption; on every triple orbit the Z₃ acts as a
+  ℂ³ circulant with {1, ω, ω²}.
+- **A boundary, as a theorem [K]:** Aut(D4) has **no elements of order
+  5** — 1152 = 2⁷·3², and 5 does not divide it (Lagrange). The
+  fivefold symmetry that generates θ = 2/9 (Doc. 293) is incompatible
+  with the D4 lattice structure. The phase test confirms it
+  numerically: all invariants have denominator spectrum {1, 2, 3, 6};
+  2/9 does not occur.
+- **The doubling is admissible and prepared [K]:** the intersection of
+  element orders of A₅ and Aut(D4) is {1, 2, 3} — the only possible
+  interface is C₃, and triality occupies it. The −1 involution pairs
+  the 8 triple orbits without fixed points: **24 = 8×3 = 4×6**, four
+  ready containers with exactly the C₃ content that 3⊕3′ requires.
+  What is excluded is not 2/9 but only its derivation *from* lattice
+  invariants.
+- **Time from the mass circle [K]:** λ₄·m = 2π is the de Broglie
+  relation along the mass direction (a place relation, always exact);
+  in time, T_osc·m = 2π/γ ≤ 2π, and for mass mixtures ≥ 2π by Jensen —
+  exact only for the resting, sharp mode.
+- **Rolled up versus unrolled [K]:** winding numbers are topological
+  and fractal corrections require accumulation — the closure fork of
+  Docs. 313/295 is therefore **spectrally invisible**, and
+  D_f^space = 3 − ξ (local, 6.7×10⁻⁵) must be kept apart from
+  K_frak = 1 − 100ξ (cumulative across the RG run, 1.33 %). Bare are
+  only the SI absolute values via the anchor, not the rolled-up
+  spectrum.
+- **Casimir [K]:** the Z⁴ torus lies lower than the D4 torus
+  (−0.932 versus −0.869 at covolume 1) — the densest lattice loses,
+  because it has the largest spectral gap.
+
+Verification: `2/python/Dok314_Skripte/` (4 scripts + README, all
+target values as assertions).
+Documents: [DE](2/pdf/314_Gitter_im_Hilbertraum_De.pdf) · [EN](2/pdf/314_Gitter_im_Hilbertraum_En.pdf)
+
+### Doc. 313 — No Beginning (revised)
+
+Two corrections (π/half turn as a condensate from Doc. 295;
+gcd(74,75) = 1 as the reason closure occurs at exactly 75) and two
+extensions:
+
+- **Reach (F.4) [K]:** the usual backward extrapolation
+  T(z) = T₀(1+z) presupposes *one* continuous thermodynamic chain —
+  precisely the coarse-grained chaining that D(ii) leaves open. In the
+  place reading, an early epoch has its own locally fixed equilibrium.
+  The corpus demonstrates this on itself: T₀ is obtained structurally
+  from ξ, not extrapolated. The Ω_m* chain is unaffected.
+- **Robustness [K]:** criterion — no scale bridge, no duration, same
+  level. Robust are counts (1152, 24, 9) and same-level ratios
+  (α, m_μ/m_e, Koide Q). **The BBN observables are not**, including
+  Y_p: T_f is not measured but follows from the model, and t/τ_n is a
+  duration. Counter-check: the same classification applies to ΛCDM
+  equally (Doc. 267, "none is circle-free").
+
+Verification: `2/python/Dok313_Skripte/ffgft_bbn_skaleninvarianz.py`
+Documents: [DE](2/pdf/313_Kein_Anfang_De.pdf) · [EN](2/pdf/313_Kein_Anfang_En.pdf)
+
+---
+
 ## Correction Register & Changelog
 
 The **correction register** [Doc. 190](2/pdf/190_T0_Korrekturen_De.pdf)
 documents every correction and refinement with date, status, and
-affected documents — K1–K6 (corrections) and P1–P43 (refinements/programme, as of 22 July 2026).
+affected documents — K1–K7 (corrections) and R1–R73 (refinements/programme, as of 3 August 2026).
 Nothing is silently overwritten.
 
 The **changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)
@@ -377,7 +450,7 @@ Additional standalone editions: *FFGFT Narrative — The Cosmic Brain*,
 ## Version History
 
 The full version history with DOIs is given in the release notes:
-**[RELEASE_NOTES_v1_2_5.md](RELEASE_NOTES_v1_2_5.md)** · change log:
+**[RELEASE_NOTES_v1_2_8_de.md](RELEASE_NOTES_v1_2_8_de.md)** · change log:
 **[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**
 
 ---

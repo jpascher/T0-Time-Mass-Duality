@@ -234,7 +234,7 @@ ist aber prinzipiell messbar (Dok. 230).
 |-----------|------|
 | 🔬 Interaktives Portal | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo v1.2.7 | [DOI 10.5281/zenodo.21628364](https://doi.org/10.5281/zenodo.21628364) (löst v1.2.6 · [21562813](https://doi.org/10.5281/zenodo.21562813) ab) |
+| 📦 Zenodo v1.2.8 | DOI wird bei Veröffentlichung eingetragen (löst v1.2.7 · [21628364](https://doi.org/10.5281/zenodo.21628364) ab) |
 | 🎵 Spotify | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
@@ -352,11 +352,85 @@ Verifikation: `2/Dok310_Skripte/ffgft_310_*.py` (4 Skripte, keine freien Paramet
 Dokumente: [DE](2/pdf/310_Resonanzgeometrie_Referenz_De.pdf) · [EN](2/pdf/310_Resonanzgeometrie_Referenz_En.pdf)
 
 
+## Dok. 313 und 314 — Zeitzyklus und Gitter im Hilbertraum (August 2026, DE+EN)
+
+### Dok. 314 — Gitter im Hilbertraum
+
+Arbeitsdokument (nicht A-Serie). 26 Seiten DE / 25 EN, vier Prüfskripte.
+
+Was aus dem D4-Gitter wird, wenn man in den Hilbertraum übersetzt:
+die Kusszahl wird zur Entartung, die Trialität zum Orbifold und zur
+Faser, das Radienverhältnis zur Niveauaufspaltung.
+
+- **Gittersätze [K]:** |Aut(D4)| = 1152 = |W(F4)|, Quotient zu W(D4)
+  ist 6 = |S₃| (Trialität am Gitter, nicht nur am Dynkin-Diagramm);
+  die Spur-(−2)-Klasse erfüllt |det(1−A)| = 9 → **der T⁴/Z₃-Orbifold
+  mit 9 Fixpunkten ist eine Gittersymmetrie von D4**, keine
+  Zusatzannahme; auf jedem Dreierorbit wirkt die Z₃ als ℂ³-Zirkulant
+  mit {1, ω, ω²}.
+- **Grenze, als Satz [K]:** Aut(D4) hat **null Elemente der Ordnung 5**
+  — 1152 = 2⁷·3², und 5 teilt das nicht (Lagrange). Die
+  5-fach-Symmetrie, die θ = 2/9 erzeugt (Dok. 293), ist mit der
+  D4-Gitterstruktur unverträglich. Der Phasen-Test bestätigt es
+  numerisch: alle Invarianten haben Nennerspektrum {1, 2, 3, 6}, 2/9
+  kommt nicht vor.
+- **Die Verdopplung ist zulässig und vorbereitet [K]:** Der Schnitt der
+  Elementordnungen von A₅ und Aut(D4) ist {1, 2, 3} — die einzig
+  mögliche Schnittstelle ist C₃, und die ist durch die Trialität
+  besetzt. Die −1-Involution paart die 8 Dreierorbits fixpunktfrei:
+  **24 = 8×3 = 4×6**, vier fertige Container mit genau dem C₃-Inhalt,
+  den 3⊕3′ verlangt. Ausgeschlossen ist nicht 2/9, sondern nur seine
+  Herleitung *aus* Gitterinvarianten.
+- **Zeit aus dem Massenkreis [K]:** λ₄·m = 2π ist die de-Broglie-Relation
+  auf der Massenrichtung (Ort-Relation, immer exakt); zeitlich gilt
+  T_osc·m = 2π/γ ≤ 2π, im Massengemisch nach Jensen ≥ 2π — exakt nur
+  für die ruhende, scharfe Mode.
+- **Eingerollt gegen ausgerollt [K]:** Wicklungszahlen sind topologisch,
+  fraktale Korrekturen brauchen Akkumulation — die
+  Schließungsgabelung aus Dok. 313/295 ist damit **spektral
+  unsichtbar**, und D_f^Raum = 3 − ξ (lokal, 6,7×10⁻⁵) ist von
+  K_frak = 1 − 100ξ (kumulativ über den RG-Lauf, 1,33 %) zu trennen.
+  Nackt sind nur SI-Absolutwerte über den Anker, nicht das
+  eingerollte Spektrum.
+- **Casimir [K]:** Der Z⁴-Torus liegt tiefer als der D4-Torus
+  (−0,932 gegen −0,869 bei Kovolumen 1) — das dichteste Gitter
+  verliert, weil es die größte Spektrallücke hat.
+
+Verifikation: `2/python/Dok314_Skripte/` (4 Skripte + README, alle
+Sollwerte als Assertions).
+Dokumente: [DE](2/pdf/314_Gitter_im_Hilbertraum_De.pdf) · [EN](2/pdf/314_Gitter_im_Hilbertraum_En.pdf)
+
+### Dok. 313 — Kein Anfang (überarbeitet)
+
+Zwei Korrekturen (π/Halbdrehung als Kondensat aus Dok. 295;
+ggT(74,75) = 1 als Begründung der Schließung bei genau 75) und zwei
+Erweiterungen:
+
+- **Reichweite (F.4) [K]:** Die übliche Rückwärtsextrapolation
+  T(z) = T₀(1+z) setzt *eine* durchgehende thermodynamische Kette
+  voraus — genau die grobkörnige Verkettung, die nach D(ii) offen ist.
+  In der Ortslesart hat eine frühe Epoche ein eigenes, lokal
+  bestimmtes Gleichgewicht. Der Korpus zeigt das an sich selbst: T₀
+  wird strukturell aus ξ gewonnen, nicht extrapoliert. Die
+  Ω_m*-Kette ist davon unberührt.
+- **Belastbarkeit [K]:** Kriterium — keine Skalenbrücke, keine Dauer,
+  gleiche Ebene. Belastbar sind Zählungen (1152, 24, 9) und
+  Verhältnisse gleicher Ebene (α, m_μ/m_e, Koide Q). **Die
+  BBN-Observablen gehören nicht dazu**, auch Y_p nicht: T_f ist nicht
+  gemessen, sondern folgt aus dem Modell, und t/τ_n ist eine Dauer.
+  Gegenprobe: dieselbe Klassifikation trifft ΛCDM genauso (Dok. 267,
+  „keiner ist zirkelfrei").
+
+Verifikation: `2/python/Dok313_Skripte/ffgft_bbn_skaleninvarianz.py`
+Dokumente: [DE](2/pdf/313_Kein_Anfang_De.pdf) · [EN](2/pdf/313_Kein_Anfang_En.pdf)
+
+---
+
 ## Korrekturregister & Changelog
 
 Das **Korrekturregister** [Dok. 190](2/pdf/190_T0_Korrekturen_De.pdf)
 dokumentiert jede Korrektur und Präzisierung mit Datum, Status und
-betroffenen Dokumenten — K1–K6 (Korrekturen) und P1–P43 (Präzisierungen/Programme, Stand 22. Juli 2026).
+betroffenen Dokumenten — K1–K7 (Korrekturen) und R1–R73 (Präzisierungen/Programme, Stand 3. August 2026).
 Nichts wird still überschrieben.
 
 Der **Changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)
@@ -389,7 +463,7 @@ Zusätzliche Einzelausgaben: *FFGFT Narrativ — Das Kosmische Gehirn*,
 ## Versionshistorie
 
 Die vollständige Versionshistorie mit DOIs steht in den Release Notes:
-**[RELEASE_NOTES_v1_2_5_de.md](RELEASE_NOTES_v1_2_5_de.md)** · Änderungsprotokoll:
+**[RELEASE_NOTES_v1_2_8_de.md](RELEASE_NOTES_v1_2_8_de.md)** · Änderungsprotokoll:
 **[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**
 
 ---

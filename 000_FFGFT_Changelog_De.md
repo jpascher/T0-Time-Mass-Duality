@@ -29,7 +29,7 @@
 
 **Zusätzliches Skript** `ffgft_bbn_skaleninvarianz.py` (Skalenexponenten unter Massenskalierung als Einheitenwechsel; Y_p-Sensitivität; ξ-Drift als einzige verbleibende Bruchstelle, parametrisiert nach p = dln(Q/T_f)/dln ξ; Schranke |p| < 0,011 bei n ≈ 75 aus der 1-%-Messgenauigkeit von Y_p). Ausdrücklich als **Nicht-Befund** gebucht: G = ξ²/(4m_char) (Dok. 012) und α = ξE₀² (Dok. 011) sind **aus ξ abgeleitet**, keine unabhängigen Skalen — ihre SI-Werte brauchen Verankerung, und Verankerung ist Umrechnung, nicht Anpassung (A040/R72). Sie taugen daher nicht als eigenständige Bruchstellen.
 
-**Registerkandidaten für Dok. 190** (noch nicht eingetragen): an Dok. 313 die π/Halbdrehungs-Korrektur und die ggT-Begründung als **Korrekturen**; Reichweite und Belastbarkeitsklassifikation als **Erweiterungen**.
+**Kein Registereintrag:** Dok. 313 und 314 sind aktuelle Dokumente desselben Zyklus — Korrekturen und Erweiterungen sind direkt eingearbeitet. Dok. 190 nimmt ausschließlich Einträge auf, die **ältere**, bereits ausgelieferte Dokumente präzisieren (vgl. die Vorbemerkung zu R68–R73); hier ist keines betroffen.
 
 ## 3. August 2026 — Dok. 312 „Die Abschlussskala" + Dok. 313 „Kein Anfang" (DE+EN) + R68–R71
 
