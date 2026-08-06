@@ -1,10 +1,14 @@
 # Release Notes — v1.2.8 (August 2026)
 
-**DOI:** *(wird bei Veröffentlichung eingetragen)* — ersetzt v1.2.7 ([10.5281/zenodo.21628364](https://doi.org/10.5281/zenodo.21628364))
+**DOI:** [10.5281/zenodo.21821995](https://doi.org/10.5281/zenodo.21821995)
 
-Laufende Korrekturen: **[2/pdf/190_T0_Korrekturen_De.pdf](2/pdf/190_T0_Korrekturen_De.pdf)**  
-Änderungsprotokoll: **[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**  
-A-Serie-Protokoll: **[A_Serie_Export/A_SERIE_CHANGELOG.md](A_Serie_Export/A_SERIE_CHANGELOG.md)**
+Diese Auslieferung ersetzt inhaltlich **v1.2.6**;
+**v1.2.7** ([21628364](https://doi.org/10.5281/zenodo.21628364)) war
+ein reiner Archiv-Neuupload ohne inhaltliche Änderung.
+
+Laufende Korrekturen: **[2/pdf/190_T0_Korrekturen_De.pdf](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/190_T0_Korrekturen_De.pdf)**
+Änderungsprotokoll: **[000_FFGFT_Changelog_De.md](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/000_FFGFT_Changelog_De.md)**
+A-Serie-Protokoll: **[A_Serie_Export/A_SERIE_CHANGELOG.md](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/A_Serie_Export/A_SERIE_CHANGELOG.md)**
 
 ---
 
@@ -18,170 +22,332 @@ und Masse sind invers gekoppelt.
 
 ---
 
-## Neu in v1.2.8
+## Überblick
 
-Zwei Dokumente des kosmologisch-geometrischen Blocks überarbeitet.
-Keine Änderung an der A-Serie, keine Änderung an ξ oder an einer
+Seit v1.2.6 sind **sieben neue Korpusdokumente** hinzugekommen
+(Dok. 308 bis 314, je DE+EN) sowie **zwei A-Serie-Dokumente**
+(A272, A273). Das Korrekturregister ist auf **R74** gewachsen.
+Schwerpunkt ist der kosmologisch-geometrische Block: kosmischer
+Sektor, Skalenanker, Resonanzgeometrie, die Reduktion von vier auf
+drei Raumdimensionen, die Abschlussskala Λ\*, die thermische
+Geschichte auf dem Zeitzyklus und das D4-Gitter im Hilbertraum.
+
+Keine Änderung an ξ, an der Grundrelation oder an einer
 Ableitungskette.
-
-### Dok. 314 „Gitter im Hilbertraum" — erweitert (DE 26 / EN 25 S.)
-
-Das Dokument ist jetzt **eigenständig**: sämtliche Rückbezüge auf
-frühere Fassungen sind entfernt. Die Änderungshistorie lebt in der
-Git-Historie und im Changelog, nicht im Dokument.
-
-**Die Störungsrechnung ist ausgeführt** (Kap. J.3, Status von „offen"
-auf **[K]**). Multiplettgrößen folgen den **Irrep-Dimensionen** der
-respektierten Symmetrie, nicht den Orbits:
-
-| Störung respektiert | Aufspaltung der 24 |
-|---|---|
-| volle Aut(D4) | 9 + 8 + 4 + 2 + 1 |
-| Trialität (Z₃) | 8×1 + 8×2 |
-| nur −1 / nichts | 24×1 |
-
-Grund: Jede ortsabhängige Störung bricht die **Translations**invarianz
-— und die trug die 24er-Entartung, nicht die Punktsymmetrie. Z₃ ist
-abelsch, alle Irreps eindimensional; die Dubletts sind die
-antiunitäre χ₁/χ₂-Paarung. Je drei unabhängige Seeds pro
-Symmetrieklasse, Ergebnis seedunabhängig.
-
-**Neues Kapitel D1 „Zeit aus dem Massenkreis" [K].** T_k = 2πR₄/k₄
-ist eine **Bogenlänge**, also ein Ort-Intervall — λ₄·m = 2π ist die
-**de-Broglie-Relation** auf der Massenrichtung, keine Zeitaussage.
-Dauer entsteht erst in der ausgerollten Koordinate
-t = w·2πR₄ + x₄ (Umlaufzahl plus Ort auf dem Zyklus). Drei Aussagen
-in drei Richtungen:
-
-| Ablesung | Relation | Gleichheit bei |
-|---|---|---|
-| Ort (de Broglie) | = 2π | immer |
-| Zeit, bewegte Mode | = 2π/γ ≤ 2π | p_Raum = 0 |
-| Massengemisch (Jensen) | ≥ 2π | scharfe Schale |
-
-Exakt wird die Relation nur für die **ruhende, scharfe** Mode; Bewegung
-drückt das Produkt herunter, Massenstreuung hebt es an.
-
-**Neues Kapitel D2 „Die Schließungsgabelung ist spektral unsichtbar"
-[K].** Im eingerollten Zustand gibt es **keine fraktalen Korrekturen**:
-Eindeutigkeit der Mode erzwingt k₄ ∈ ℤ, eine Wicklungszahl ist
-topologisch und hat keinen Platz für 1/75. Korrekturen brauchen
-Akkumulation, und akkumulieren kann nur ein durchlaufener Weg. Die
-naheliegende Twist-Lesart (Scherk–Schwarz, k₄ → k₄ + 1/75) ist damit
-**falsch**. Folge: die Fälle A/B/C aus Dok. 313/295 lassen das
-Modenspektrum unberührt, und die Kapitel E–H sind
-**fallunabhängig**.
-
-**Kapitel J neu gefasst: „Was hier noch nackt ist — und was nicht"
-[K].** D_f und K_frak sind **verschiedene Dinge** (Dok. 133):
-
-| Größe | Charakter | Wirkung |
-|---|---|---|
-| D_f^Raum = 3 − ξ | lokal | 6,67 × 10⁻⁵ |
-| K_frak = 1 − 100ξ | kumulativ (RG-Lauf) | 1,33 × 10⁻² |
-
-Verhältnis exakt 200. Zwei Klarstellungen: der Korpus kennt keine
-Größe D_f = 4 − ξ (Dok. 133 definiert die **räumliche** Dimension
-3 − ξ; auch der Exponent 3/2 in K_frak^{3/2} ist die halbe
-**Raum**dimension), und O(100ξ) scheidet als Störungsstärke aus, weil
-eine kumulative Größe nicht auf einen lokalen Operator gehört. Die
-Störung liegt damit **zwei Größenordnungen unter** dem, was eine
-Abschätzung über K_frak ergäbe. **Bilanz: nackt sind nur die
-SI-Absolutwerte, und zwar über den Anker, nicht über den Operator** —
-Entartungen, Verhältnisse, Kongruenzen, Container sowie Casimir- und
-Wärmekern-Verhältnisse sind nicht nackt, sondern korrekt.
-
-**Verifikation:** `2/python/Dok314_Skripte/` — vier Skripte mit
-README, alle Sollwerte als Assertions, deterministisch:
-`d4_skript_1_spektrum_deformation.py` (Thetareihen, 24 = 12+12,
-exakte Kreuzungskarte r = √2 und √3),
-`d4_skript_2_trialitaet_orbifold_phasen.py` (|Aut(D4)| = 1152,
-5 ∤ 1152, |det(1−A)| = 9, Zirkulant, Nennerspektrum {1,2,3,6} ohne
-2/9, 24 = 4×6),
-`d4_skript_3_schalen_casimir.py` (Schalensätze, Epstein-Zeta bei
-s = −1/2 mit doppelter Verifikation, Wärmekern),
-`d4_skript_4_stoerung_reziprozitaet.py` (Störungsmultipletts,
-Reziprozität).
-
-### Dok. 313 „Kein Anfang" — zwei Korrekturen, zwei Erweiterungen (DE 25 / EN 24 S.)
-
-**Korrektur 1 (π gegen 2π).** Beim Kondensieren aus Dok. 295 war eine
-Qualifikation verlorengegangen: 313 schrieb „eine Windung, die pro
-**Umlauf um 2π** vorrücken sollte, rückt nur um **π·K_frak** vor" —
-das mischt zwei Bezugsgrößen und liest sich wie ein Defekt von ~50 %,
-während gleich darauf d = 1/75 steht. Dok. 295 hat die
-**Halbdrehung**. Nach dem Wortlaut von 295 korrigiert, mit
-Quellenangabe; der Übergang zu Umlauf-Einheiten ist jetzt explizit.
-
-**Korrektur 2 (ggT).** „Die 75 fällt exakt heraus" war behauptet, nicht
-begründet. Ergänzt: **ggT(74, 75) = 1**, also ist das kleinste n mit
-n·74/75 ∈ ℤ genau n = 75 — die Schließung tritt nicht früher ein.
-
-**Erweiterung 1 — Abschnitt F.4 „Reichweite: Gleichgewichte an anderen
-Orten des Zyklus" [K].** Die übliche Rückwärtsextrapolation
-T(z) = T₀(1+z) setzt **eine** durchgehende thermodynamische Kette
-voraus — genau die grobkörnige Verkettung, die nach D(ii) offen ist.
-In der Ortslesart ist eine frühe Epoche kein früherer Zustand
-desselben Systems, sondern eine Stelle mit anderer lokaler Struktur
-(kleinere Massen, langsamere Uhren) und einem eigenen, lokal
-bestimmten Gleichgewicht. Der Korpus zeigt das an sich selbst: T₀ wird
-nicht extrapoliert, sondern strukturell aus ξ gewonnen
-(k_BT₀ = (16/9)ξ, Dok. 061). **Abgrenzung:** Die Ω_m*-Kette läuft über
-ξ, H₀ und K_frak, nicht über adiabatische Rückrechnung, und ist
-unberührt.
-
-**Erweiterung 2 — „Welche Größen bleiben dann aussagekräftig?" [K].**
-Kriterium dreiteilig: **keine Skalenbrücke, keine Dauer, gleiche
-Ebene.**
-
-| Klasse | Beispiele | Status |
-|---|---|---|
-| Zählungen | \|Aut(D4)\| = 1152, Kusszahl 24, 9 Fixpunkte | exakt; Sätze, keine Messungen |
-| Verhältnisse gleicher Ebene | α, m_μ/m_e, Koide Q | belastbar; testbar auf 10⁻¹⁰ bis 10⁻⁵ |
-| mit Skalenbrücke | E₀, G, H₀, T₀, absolute Massen | nur mit Anker; Verhältnisse daraus wieder frei (A040) |
-| Zahl- und Dauergrößen | η, Fensterdauern, Zeitspannen | nicht übertragbar |
-
-**Alle drei BBN-Observablen fallen in die unteren beiden Klassen —
-auch Y_p:** Es hängt zwar an den dimensionslosen Größen Q/T_f und
-t/τ_n, aber T_f ist **nicht gemessen** (folgt aus einer Ratengleichung
-mit H, also aus dem kosmologischen Modell), und t/τ_n enthält eine
-**Dauer**. Das Kürzungsargument ist eine **Implikation**, keine
-Prüffläche. **Folge für die ⁷Li-Position:** Die Korpusbuchung
-(Dok. 025/063, Nukleosynthese ohne feste Zeitschranke) bleibt
-konsistent, ist aber **keine quantitative Vorhersage**. **Gegenprobe:**
-Dieselbe Klassifikation trifft ΛCDM genauso — Dok. 267 hält bereits
-fest: „keiner ist zirkelfrei". Die Klassifikation entlastet FFGFT
-nicht, sie stellt beide Seiten unter dasselbe Kriterium.
-
-**Verifikation:** `2/python/Dok313_Skripte/ffgft_bbn_skaleninvarianz.py`
-— Skalenexponenten unter Massenskalierung (als Einheitenwechsel
-eingeordnet), Y_p-Sensitivität, ξ-Drift als einzige verbleibende
-Bruchstelle, parametrisiert nach p = dln(Q/T_f)/dln ξ. Ausdrücklich als
-**Nicht-Befund** gebucht: G = ξ²/(4 m_char) (Dok. 012) und
-α = ξE₀² (Dok. 011) sind aus ξ **abgeleitet**, keine unabhängigen
-Skalen — ihre SI-Werte brauchen Verankerung, und Verankerung ist
-Umrechnung, nicht Anpassung (A040, R72). Sie taugen daher nicht als
-eigenständige Bruchstellen.
 
 ---
 
-## Kein Registereintrag nötig
+## A-Serie: zwei neue Dokumente
 
-Dok. 313 und 314 sind **aktuelle** Dokumente desselben Zyklus; ihre
-Korrekturen und Erweiterungen sind direkt eingearbeitet. Das
-Korrekturregister (Dok. 190) nimmt ausschließlich Einträge auf, die
-**ältere**, bereits ausgelieferte Dokumente präzisieren — hier ist
-keines betroffen. Die Änderungshistorie steht im Changelog und in der
-Git-Historie.
+**A272 „Träger und Information"** — Textkritik. Was Landauer 1961
+beweist, ist eine untere Schranke für **Träger-Operationen** an einem
+thermischen Gleichgewichts-Ensemble, keine universelle Aussage über
+abstrakte Information. Satz 1 (Mehrfachrealisierung): einem
+Informationsbit kann keine Energie zugeordnet werden, nur seinem
+Träger. Satz 2: eine rein interpretative Löschung verkleinert den
+Träger-Zustandsraum nicht. Ausdrücklich als Zuständigkeitsbefund
+gefasst, nicht als Widerlegung. Verbindliches Wörterbuch A271 ↔ A272:
+Gebiet = Träger, Beschreibung = Information, Gebietsreduktion =
+Träger-Operation, Nicht-Bijektivität = Verkleinerung des
+Träger-Zustandsraums.
+
+**A273 „Die Rechenkugel"** — Token-Rechnen trennt Buchhaltung und
+thermische Umrechnung; Prüfskript mit 14 Checks.
+
+Beide deklarieren **FFGFT-Berührung: keine** — sie leben auf der Ebene
+der statistischen Mechanik, das ξ-Schema wird nicht berührt. Neuer
+Schichtmarker **[Q]** (Quelle: korpusexterne Primärquelle oder
+Messwert).
+
+---
+
+## Dok. 308 „Der kosmische Sektor der FFGFT" (DE+EN je 11 S.)
+
+Vollständig neu geschrieben. Drei Kerne:
+
+**Rotverschiebung [K]:** Statisches Universum, 1+z = e^(ξx),
+achromatisch. Λ (dunkle Energie) als Lesart-Artefakt — alle drei
+Bedingungen erfüllt.
+
+**Zwei-Hälften-Synthese [K]:** K3-Flächeninvarianz — T̃·m = 1
+(Zeithälfte) und fraktale Wegverlängerung (Raumhälfte) sind
+komplementäre Hälften, je 0,875″, zusammen 1,750″. γ_PPN = 1 exakt
+(Cassini bestanden).
+
+**Trägheitsregime [K]/[S]:** a = √(a_N² + a_N·a₀), kein freier
+Parameter; a₀ = c²ξ¹⁰/(4λ̄ₑ) = 1,033×10⁻¹⁰ m/s². a₀ ist die
+**Übergangsskala des Trägheitsregimes**, kein Gravitationsparameter
+(G ~ ξ², a₀ ~ ξ¹⁰ — verschiedene Mechanismen). DDO 154 ratio 1,001;
+Bullet Cluster Peak 10 kpc. Dunkle Materie: „ein Regime, kein Stoff".
+
+Verifikation: `2/Dok308_Skripte/` (4 Skripte, keine freien Parameter).
+
+---
+
+## Dok. 309 „Das Skalenanker-Problem: ΛCDM und FFGFT" (DE+EN je 9 S.)
+
+Arbeitsnotiz. SI ist seit 2019 auf einen konventionellen Anker
+zurückführbar; nur dimensionslose Verhältnisse sind wirklich
+festgelegt. ΛCDM: ~6 freie Parameter, H₀ zirkulär über eine
+vierstufige Leiter. FFGFT: nicht ξ ist der Fit, sondern der
+**Exponent 10** in H₀ = (π/2)·c·ξ¹⁰/λ̄ₑ.
+
+**Vererbungsproblem (neu benannt):** Der Exponent 10 ist an H₀_ΛCDM
+kalibriert, FFGFT erbt damit die Systematik der Expansionslesart; eine
+lesartunabhängige Herleitung aus der T⁴-Geometrie ist nicht geleistet
+(P20/P33). Querverankerung: ξ¹⁰ reproduziert H₀ **und** a₀.
+
+---
+
+## Dok. 310 „Die Resonanzgeometrie als übergeordnete Referenz" (DE+EN je 13 S.)
+
+Beantwortet den Zirkularitätsvorwurf durch Korrektur der Hierarchie:
+Übergeordnet ist die Geometrie mit ihren Resonanzen (dimensionslos,
+legt alle Verhältnisse fest); der Messwert ist nur der **Kammerton**
+— Anker in SI, trägt keine Struktur.
+
+Drei [K]-Aussagen, alle an den gemessenen Massen nachprüfbar: Koide
+Q = 2/3 aus drei Massen ohne ξ; die Generationsleiter als
+geometrische Folge mit Verhältnis q = 2/3 (derselbe Wert wie Koide Q);
+die harmonischen Vorfaktoren 4/3, 16/5, 25/9.
+
+**π-Faktoren sind Sphären-Geometrie, keine Schleifen:** 16π³ = S²·2S³
+(T⁴-Randgeometrie); die frühere Version 64π⁴ zählte exakt eine
+2-Sphäre zu viel. In natürlichen Einheiten verschwinden μ₀ und ε₀;
+mit α = 1 bleibt nur ξ.
+
+Verifikation: `2/Dok310_Skripte/` (4 Skripte).
+
+---
+
+## Dok. 311 „Vier auf drei" (DE+EN je 22 S.)
+
+Arbeitsnotiz (nicht A-Serie). Wie kommt ein 4D-Gitter auf drei
+Raumdimensionen? Drei Wege (kompaktifizieren / projizieren /
+vierte-ist-kein-Raum) mit Kostenbilanz; Weg 1 und 3 sind einzeln
+unvollständig und werden durch T̃·m = 1 geschlossen.
+
+**Zerfallsbefund:** D4 muss nicht reduziert werden, es zerfällt
+selbst — 24 = 12 + 12. Die zwölf Vektoren mit x₄ = 0 sind exakt die
+FCC-Kusszahl 12 (Kuboktaeder als Nachbarschaftsfigur des Raums,
+Kepler/Hales-Einzigkeit); die übrigen zwölf sind je sechs
+Wicklungsnachbarn pro Umlaufrichtung. Das ist die Gitterform von
+T⁴ = T³ × S¹_m — die Aufteilung fällt heraus, statt hineingelegt zu
+werden.
+
+**Kennzahlen-Folge:** Wer räumlich mit 24 rechnet, behauptet implizit
+vier Raumdimensionen. Die K⁻³⁶-Prüfung bestätigt: die 4D-Dichte
+gehört hinein (Exponent 35,9926), die 3D-Dichte scheidet aus (22,38).
+
+Verifikation: `2/python/Dok311_Skripte/ffgft_311_vier_auf_drei.py`.
+
+---
+
+## Dok. 312 „Die Abschlussskala" (DE 31 / EN 29 S., 5 Prüfskripte)
+
+Die Λ-Funktion erhält einen Träger: **Λ\* := 1/R_H² = (π/2)²ξ²⁰/λ̄ₑ² =
+5,218×10⁻⁵³ m⁻²**, kein neuer Parameter, dimensionslos
+Λ\*λ̄ₑ² = (π/2)²ξ²⁰.
+
+**Das 10¹²³-Problem ist aufgelöst:** Λ\*l_P² = 10⁻¹²¹·⁸⁷ zerfällt in
+ξ²⁰ (−77,5 dex) · (l_P/λ̄ₑ)² (−44,8) · (π/2)² (+0,4) — die
+Feinabstimmung reduziert sich **vollständig auf P20**.
+
+**Weichenstellung:** Die Einstein-Gleichungen werden voll übernommen
+(Lovelock erzwingt die Form inklusive Λ-Term); modellabhängig ist die
+ΛCDM-Trias {Λ-Fit, FLRW-Anwendung, Expansionsdeutung von z}, nicht
+die Gleichung. Preis: die Eddington-Stabilitätsfrage greift und wird
+nicht umgangen — Anhang C1 rechnet das Windungs-Impuls-Gleichgewicht.
+Neues bedingtes Label **[K|P20]**.
+
+Weitere Kapitel: Zeit in den Feldgleichungen (ADM, Wheeler-DeWitt);
+Statik der Relation (Okun/Selivanov/Telegdi; Wetterich 2013:
+Expansion ≡ Massenlauf, Rahmenwahl statt Messung); Denken in
+Lichtwegen mit drei harten Grenzen bei c; **kompakte Zeitrichtung**
+(τ_c = 2π/H₀ = 91,9 Gyr, Quant exakt ħH₀; KMS → Gibbons-Hawking ohne
+Horizont; Unruh → a = cH₀ exakt); Relativbewegung und
+Torus-Ruhesystem (CMB-Dipol als exakte v/c-Ablesung); Einstein-Epilog
+(vier Gründe, warum er T̃·m = 1 nicht sah).
+
+Verifikation: `2/python/Dok312_Skripte/` (5 Skripte).
+
+---
+
+## Dok. 313 „Kein Anfang: Die thermische Geschichte auf dem Zeitzyklus" (DE 25 / EN 24 S., 4 Prüfskripte)
+
+Beantwortet Pflicht D(ii) aus Dok. 312.
+
+**Antipoden-Befund [K|P20]:** Die gesamte beobachtbare Geschichte
+füllt **einen Halbzyklus** — mit fraktaler Wegkorrektur sitzt der
+Partikelhorizont auf 0,14 % am Antipoden. Der „Urknall" ist ein
+**Ort** auf dem Zyklus (Region kleinster Massen, langsamster Uhren),
+kein Ereignis.
+
+**Untergrenze:** E_min = ħH₀ = 2,28×10⁻⁵² J; ħH₀/(mₑc²) = (π/2)ξ¹⁰
+exakt → endliches z_max = 3,59×10³⁸, kein „z→∞". Die Singularität ist
+durch Quantisierung **ausgeschlossen**, nicht nur falsch gestellt.
+
+**Entropie-Hindernis [K]:** Poincaré-Diskrepanz 10¹⁰⁴ dex im
+Exponenten → Periodizität ist Randbedingung, nicht Dynamik;
+feinkörnig zulässig, grobkörnige Schließung offen — der präzisierte
+harte Kern von D(ii).
+
+**Ω_m-Kette allein aus ξ [K|P20×E]:** H₀ → T₀ → Ω_r →
+Antipoden-Bedingung → **Ω_m\* = 0,3136** gegen Planck 0,315 ± 0,007
+(−0,19σ); kein Schritt enthält einen an Ω_m angepassten Parameter.
+Überbestimmung: Teilchensektor 0,3136 gegen kosmischen Sektor 0,3139.
+
+**Gabelung (nach Dok. 295):** Der Defekt d = 100ξ = 1/75 je Umlauf
+lässt drei Fälle für die ausgerollte Zeit zu — A (d = 0, Schließung
+nach einem Umlauf, 91,9 Gyr), B (ξ eingefroren, Schließung nach 75
+Umläufen, 6892 Gyr), C (ξ läuft, keine Schließung, Log-Spirale). Fall
+B folgt aus der rationalen Rotationszahl 74/75; da ggT(74, 75) = 1,
+schließt die Bahn nach **genau** 75 Umläufen.
+
+**Abschnitt F.4 „Reichweite" [K]:** Die übliche Rückwärtsextrapolation
+T(z) = T₀(1+z) setzt *eine* durchgehende thermodynamische Kette
+voraus — genau die grobkörnige Verkettung, die offen ist. In der
+Ortslesart ist eine frühe Epoche kein früherer Zustand desselben
+Systems, sondern eine Stelle mit anderer lokaler Struktur und einem
+eigenen, lokal bestimmten Gleichgewicht. Der Korpus zeigt das an sich
+selbst: T₀ wird strukturell aus ξ gewonnen (k_BT₀ = (16/9)ξ), nicht
+extrapoliert. Die Ω_m\*-Kette ist unberührt.
+
+**Belastbarkeit [K]:** Kriterium dreiteilig — keine Skalenbrücke,
+keine Dauer, gleiche Ebene. Vier Klassen:
+
+1. **Zählungen** — Ordnung von Aut(D4) = 1152, Kusszahl 24,
+   9 Fixpunkte. Exakt; Sätze, keine Messungen.
+2. **Verhältnisse gleicher Ebene** — α, m_μ/m_e, Koide Q. Belastbar;
+   testbar auf 10⁻¹⁰ bis 10⁻⁵.
+3. **Mit Skalenbrücke** — E₀, G, H₀, T₀, absolute Massen. Nur mit
+   Anker; Verhältnisse daraus wieder frei (A040).
+4. **Zahl- und Dauergrößen** — η, Fensterdauern, Zeitspannen. Nicht
+   übertragbar.
+
+Alle drei BBN-Observablen fallen in die unteren beiden Klassen —
+auch Y_p: Es hängt zwar an den dimensionslosen Größen Q/T_f und
+t/τ_n, aber T_f ist **nicht gemessen** (folgt aus einer
+Ratengleichung mit H, also aus dem kosmologischen Modell), und t/τ_n
+enthält eine **Dauer**. Das Kürzungsargument ist eine Implikation,
+keine Prüffläche. Gegenprobe: dieselbe Klassifikation trifft ΛCDM
+genauso (Dok. 267: „keiner ist zirkelfrei").
+
+Verifikation: `2/python/Dok313_Skripte/` — darunter
+`ffgft_bbn_skaleninvarianz.py`. Ausdrücklich als **Nicht-Befund**
+gebucht: G = ξ²/(4 m_char) und α = ξE₀² sind aus ξ **abgeleitet**,
+keine unabhängigen Skalen; ihre SI-Werte brauchen Verankerung, und
+Verankerung ist Umrechnung, nicht Anpassung (A040, R72).
+
+---
+
+## Dok. 314 „Gitter im Hilbertraum" (DE 26 / EN 25 S., 4 Prüfskripte)
+
+Was aus dem D4-Gitter wird, wenn man in den Hilbertraum übersetzt:
+die Kusszahl wird zur Entartung, die Trialität zum Orbifold und zur
+Faser, das Radienverhältnis zur Niveauaufspaltung.
+
+**Gittersätze [K]:** Die Ordnung von Aut(D4) ist 1152 = Ordnung von
+W(F4), der Quotient über W(D4) ist 6 = Ordnung von S₃ — die Trialität
+steht damit am Gitter, nicht nur am Dynkin-Diagramm. Die
+Spur-(−2)-Klasse erfüllt: Betrag von det(1−A) = 9. **Der
+T⁴/Z₃-Orbifold mit 9 Fixpunkten ist eine Gittersymmetrie von D4**,
+keine Zusatzannahme. Auf jedem Dreierorbit wirkt die Z₃ als
+ℂ³-Zirkulant mit {1, ω, ω²}.
+
+**Eine Grenze, als Satz [K]:** Aut(D4) hat **null Elemente der
+Ordnung 5** — 1152 = 2⁷·3², und 5 teilt das nicht (Lagrange). Die
+5-fach-Symmetrie, die θ = 2/9 erzeugt (Dok. 293), ist mit der
+D4-Gitterstruktur unverträglich. Der Phasen-Test bestätigt es
+numerisch: alle Invarianten haben Nennerspektrum {1, 2, 3, 6};
+2/9 kommt nicht vor.
+
+**Die Verdopplung ist zulässig und vorbereitet [K]:** Der Schnitt der
+Elementordnungen von A₅ und Aut(D4) ist {1, 2, 3} — die einzig
+mögliche Schnittstelle ist C₃, und die ist durch die Trialität
+besetzt. Die −1-Involution paart die 8 Dreierorbits fixpunktfrei:
+**24 = 8×3 = 4×6**, vier fertige Container mit genau dem C₃-Inhalt,
+den 3⊕3′ verlangt. Ausgeschlossen ist nicht 2/9, sondern nur seine
+Herleitung *aus* Gitterinvarianten.
+
+**Störungsrechnung [K]:** Multiplettgrößen folgen den
+**Irrep-Dimensionen** der respektierten Symmetrie, nicht den Orbits:
+
+- volle Aut(D4) → 9 + 8 + 4 + 2 + 1
+- Trialität (Z₃) → 8×1 + 8×2
+- nur −1, oder nichts davon → 24×1
+
+Grund: Jede ortsabhängige Störung bricht die
+**Translations**invarianz — und die trug die 24er-Entartung, nicht die
+Punktsymmetrie.
+
+**Zeit aus dem Massenkreis [K]:** T_k = 2πR₄/k₄ ist eine
+**Bogenlänge**, also ein Ort-Intervall — λ₄·m = 2π ist die
+**de-Broglie-Relation** auf der Massenrichtung, keine Zeitaussage.
+Dauer entsteht erst in der ausgerollten Koordinate
+t = w·2πR₄ + x₄. Drei Ablesungen:
+
+- Ort (de Broglie): = 2π — immer
+- Zeit, bewegte Mode: = 2π/γ ≤ 2π — Gleichheit bei p_Raum = 0
+- Massengemisch (Jensen): ≥ 2π — Gleichheit bei scharfer Schale
+
+Exakt wird die Relation nur für die **ruhende, scharfe** Mode.
+
+**Eingerollt gegen ausgerollt [K]:** Wicklungszahlen sind
+topologisch; fraktale Korrekturen brauchen Akkumulation, und
+akkumulieren kann nur ein durchlaufener Weg. Die
+Schließungsgabelung aus Dok. 313/295 ist damit **spektral
+unsichtbar**, und die Kapitel E–H sind fallunabhängig. Ebenso zu
+trennen sind D_f^Raum = 3 − ξ (lokal, Wirkung 6,67×10⁻⁵) und
+K_frak = 1 − 100ξ (kumulativ über den RG-Lauf, 1,33×10⁻²) —
+Verhältnis exakt 200. Nackt sind nur die SI-Absolutwerte, und zwar
+über den Anker, nicht über den Operator.
+
+**Casimir [K]:** Der Z⁴-Torus liegt tiefer als der D4-Torus
+(−0,932 gegen −0,869 bei Kovolumen 1) — das dichteste Gitter
+verliert, weil es die größte Spektrallücke hat.
+
+Verifikation: `2/python/Dok314_Skripte/` — vier Skripte mit README,
+alle Sollwerte als Assertions.
+
+---
+
+## Korrekturregister: R67 bis R74
+
+**R67** — Der Faktor 100 in K_frak = 1−100ξ ist ein aus dem RG-Lauf
+gemittelter Wert mit einer nirgends bezifferten Genauigkeit von etwa
+**±2**; betrifft A040, A270 und Dok. 133. Fortpflanzung ±0,027 % auf
+absolute Werte, Verhältnisse per Konstruktion unberührt.
+
+**R68–R73** — Präzisierungen aus der Arbeit an Dok. 312/313:
+Λ\* als Träger der Λ-Funktion und volle Übernahme der Feldgleichungen
+(279/308); a₀ über die kompakte Zeitrichtung (308); T₀-Skalenlücke
+und Notationskollision (061/A085); Seitenwahl in der Hubble-Spannung
+(309); E₀-Zahlenwert nackt gegen fraktal korrigiert, womit K_frak
+**überbestimmt** ist — drei unabhängige Wege ergeben n = 100±2,
+101,3 und 100,27 (A010/A080/A265/A130); H₀-Schreibweisen und der
+Exponent 41/4, mit der Auflösung **L\* = 4·λ̄ₑ/ξ¹⁰** exakt auf zehn
+Stellen (026/279).
+
+**R74 (neu)** — Dok. 025 und 063 führen das Lithiumproblem in einer
+Tabelle, deren dritte Spalte mit **„T0-Lösung"** überschrieben ist;
+der Eintrag lautet „Nukleosynthese über unbegrenzte Zeit". Die
+Anspruchsstufe ist eine zu hoch: Der Mechanismus setzt an der
+Fensterdauer an und ist konsistent, aber aus „keine feste
+Zeitschranke" folgt **kein Zahlenwert** für ⁷Li/H —
+Mechanismus-Skizze, keine quantitative Ableitung. Nach der
+Belastbarkeitsklassifikation (Dok. 313, F.4) gehört ⁷Li/H zu den
+Zahl- und Dauergrößen; die Faktor-3-Diskrepanz ist folglich auch kein
+sauberer Test *gegen* ΛCDM. Dieselbe Prüfung ergab, dass **kein
+weiteres älteres Dokument** BBN-Observable als bestandenen Test führt.
+Quelldokumente unverändert (append-only).
 
 ---
 
 ## Statistik (v1.2.8)
 
-| | Anzahl |
-|---|---|
-| A-Serie-Dokumente (DE + EN) | 48 × 2 = 96 (unverändert) |
-| überarbeitete Dokumente | 2 (313, 314) × 2 Sprachen |
-| neue Prüfskripte | 2 (`d4_skript_4_…`, `ffgft_bbn_skaleninvarianz`) |
-| neue READMEs | 1 (`python/Dok314_Skripte/README.md`) |
-| Korrekturregister | K1–K7, R1–R73 |
+- A-Serie-Dokumente (DE + EN): 47 × 2 = 94
+- Neue Korpusdokumente seit v1.2.6: 7 (Dok. 308–314) × 2 Sprachen
+- Neue A-Serie-Dokumente seit v1.2.6: 2 (A272, A273)
+- Korrekturregister: K1–K7, R1–R74
+- Schichtmarker: [SETZUNG] / [K] / [B] / [S] / [Q] / [H]; neu [K|P20]

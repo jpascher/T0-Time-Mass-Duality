@@ -1,6 +1,6 @@
 # T0 Zeit-Masse-Dualität · FFGFT
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21628364.svg)](https://doi.org/10.5281/zenodo.21628364)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21821995.svg)](https://doi.org/10.5281/zenodo.21821995)
 
 **FFGFT — Fraktale Feldgeometrische Fundamentaltheorie** zeigt:
 Alle Konstanten des Standardmodells folgen aus einem einzigen
@@ -234,7 +234,7 @@ ist aber prinzipiell messbar (Dok. 230).
 |-----------|------|
 | 🔬 Interaktives Portal | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo v1.2.8 | DOI wird bei Veröffentlichung eingetragen (löst v1.2.7 · [21628364](https://doi.org/10.5281/zenodo.21628364) ab) |
+| 📦 Zenodo v1.2.8 | [DOI 10.5281/zenodo.21821995](https://doi.org/10.5281/zenodo.21821995) (löst v1.2.7 · [21628364](https://doi.org/10.5281/zenodo.21628364) ab) |
 | 🎵 Spotify | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
@@ -430,7 +430,7 @@ Dokumente: [DE](2/pdf/313_Kein_Anfang_De.pdf) · [EN](2/pdf/313_Kein_Anfang_En.p
 
 Das **Korrekturregister** [Dok. 190](2/pdf/190_T0_Korrekturen_De.pdf)
 dokumentiert jede Korrektur und Präzisierung mit Datum, Status und
-betroffenen Dokumenten — K1–K7 (Korrekturen) und R1–R73 (Präzisierungen/Programme, Stand 3. August 2026).
+betroffenen Dokumenten — K1–K7 (Korrekturen) und R1–R74 (Präzisierungen/Programme, Stand 5. August 2026).
 Nichts wird still überschrieben.
 
 Der **Changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)

@@ -1,6 +1,6 @@
 # T0 Time-Mass Duality · FFGFT
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21628364.svg)](https://doi.org/10.5281/zenodo.21628364)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21821995.svg)](https://doi.org/10.5281/zenodo.21821995)
 
 **FFGFT — Fundamental Fractal-Geometric Field Theory** shows:
 all Standard Model constants follow from a single dimensionless
@@ -226,7 +226,7 @@ measurable (Doc. 230).
 |----------|------|
 | 🔬 Interactive Portal | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo v1.2.8 | DOI to be added on publication (supersedes v1.2.7 · [21628364](https://doi.org/10.5281/zenodo.21628364)) |
+| 📦 Zenodo v1.2.8 | [DOI 10.5281/zenodo.21821995](https://doi.org/10.5281/zenodo.21821995) (supersedes v1.2.7 · [21628364](https://doi.org/10.5281/zenodo.21628364)) |
 | 🎵 Spotify | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
@@ -417,7 +417,7 @@ Documents: [DE](2/pdf/313_Kein_Anfang_De.pdf) · [EN](2/pdf/313_Kein_Anfang_En.p
 
 The **correction register** [Doc. 190](2/pdf/190_T0_Korrekturen_De.pdf)
 documents every correction and refinement with date, status, and
-affected documents — K1–K7 (corrections) and R1–R73 (refinements/programme, as of 3 August 2026).
+affected documents — K1–K7 (corrections) and R1–R74 (refinements/programme, as of 5 August 2026).
 Nothing is silently overwritten.
 
 The **changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)
@@ -450,7 +450,7 @@ Additional standalone editions: *FFGFT Narrative — The Cosmic Brain*,
 ## Version History
 
 The full version history with DOIs is given in the release notes:
-**[RELEASE_NOTES_v1_2_8_de.md](RELEASE_NOTES_v1_2_8_de.md)** · change log:
+**[RELEASE_NOTES_v1_2_8.md](RELEASE_NOTES_v1_2_8.md)** · change log:
 **[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**
 
 ---
