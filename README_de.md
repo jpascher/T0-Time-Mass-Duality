@@ -1,6 +1,6 @@
 # T0 Zeit-Masse-Dualität · FFGFT
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21821995.svg)](https://doi.org/10.5281/zenodo.21821995)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21821995.svg)](https://doi.org/10.5281/zenodo.21821995) <!-- v1.3.0 DOI wird vergeben -->
 
 **FFGFT — Fraktale Feldgeometrische Fundamentaltheorie** zeigt:
 Alle Konstanten des Standardmodells folgen aus einem einzigen
@@ -234,7 +234,7 @@ ist aber prinzipiell messbar (Dok. 230).
 |-----------|------|
 | 🔬 Interaktives Portal | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo v1.2.8 | [DOI 10.5281/zenodo.21821995](https://doi.org/10.5281/zenodo.21821995) (löst v1.2.7 · [21628364](https://doi.org/10.5281/zenodo.21628364) ab) |
+| 📦 Zenodo v1.3.0 | DOI *wird vergeben* (löst v1.2.9 · [21821995](https://doi.org/10.5281/zenodo.21821995) ab) |
 | 🎵 Spotify | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
@@ -251,11 +251,11 @@ Eine vollständige Liste aller ~289 Dokumente mit Kurzinfo und direktem PDF-Link
 
 | Schritt | Dokument |
 |---------|----------|
-| 1. Überblick | [013_T0_SI_De.pdf](2/pdf/013_T0_SI_De.pdf) |
-| 2. Interaktiv | [T0 Parameter Explorer](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
-| 3. Feldtheorie | [202_FFGFT_Feldtheorie_Gesamt_De.pdf](2/pdf/202_FFGFT_Feldtheorie_Gesamt_De.pdf) |
-| 4. Hilbertraum | [230_Hilbertraum_Uebersetzung_De.pdf](2/pdf/230_Hilbertraum_Uebersetzung_De.pdf) |
-| 5. Alltagssprache | [205_FFGFT_Narrativ_De.pdf](2/pdf/205_FFGFT_Narrativ_De.pdf) |
+| 1. Alltagssprache | [205_FFGFT_Narrativ_De.pdf](2/pdf/205_FFGFT_Narrativ_De.pdf) — **empfohlener Einstieg** |
+| 2. Überblick | [013_T0_SI_De.pdf](2/pdf/013_T0_SI_De.pdf) |
+| 3. Interaktiv | [T0 Parameter Explorer](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
+| 4. Feldtheorie | [202_FFGFT_Feldtheorie_Gesamt_De.pdf](2/pdf/202_FFGFT_Feldtheorie_Gesamt_De.pdf) |
+| 5. Hilbertraum | [230_Hilbertraum_Uebersetzung_De.pdf](2/pdf/230_Hilbertraum_Uebersetzung_De.pdf) |
 | 6. Python | `2/python/authentic_t0_quantum.py` |
 
 ---
@@ -286,6 +286,8 @@ T0-Time-Mass-Duality/
 ├── sig/                       # Signalanalyse-Tools
 ├── 000_FFGFT_Changelog_De.md
 ├── DOCUMENTS.md               # vollständiges Dokumentenverzeichnis
+├── RELEASE_NOTES_v1_3_0.md
+├── RELEASE_NOTES_v1_3_0_de.md
 ├── RELEASE_NOTES_v1_2_3.md
 ├── RELEASE_NOTES_v1_2_3_de.md
 ├── README_de.md
@@ -299,173 +301,25 @@ Wrapper in `Sources/wr_standalone_A4/`. A-Serie vollständig kompiliert in
 ---
 
 
-## Dok. 308, 309 und 310 — Kosmischer Sektor, Skalenanker-Problem und Resonanzgeometrie (Juli 2026, DE+EN)
+## Aktueller Stand — vorläufiger Abschluss
 
-### Dok. 308 — Der kosmische Sektor der FFGFT
+Der FFGFT-Korpus hat einen natürlichen Ruhepunkt erreicht. Die
+Kernherleitungskette ist vollständig: ξ → Leptonsektor, α, G,
+kosmologischer Sektor. Alle Ergebnisse sind durch Python-Skripte mit
+exakter Arithmetik verifiziert. Der Korrekturmechanismus (Dok. 190,
+append-only) bleibt aktiv; kein Quelldokument wird verändert.
 
-Vollständig neu geschrieben. Drei Kerne, gerechnet und bewiesen:
+Die jüngsten Dokumente (308–315) schließen offene Fragen im
+kosmologischen Sektor (Abschlussskala Λ*, Zeitzyklus, Ω_m*-Kette),
+im Hilbertraum (D4-Gitter, 24 = 12 + 12) und zur Form der fraktalen
+Korrektur K_frak (additiv, zweifach bedingt bestätigt). Details stehen
+im Changelog.
 
-**Rotverschiebung [K]:** Statisches Universum, 1+z = e^(ξx), achromatisch.
-Entartung der SNe/BAO/CMB-Daten zwischen Expansions- und statischer Lesart (Dok. 267).
-Λ (dunkle Energie): Lesart-Artefakt — alle drei Bedingungen erfüllt.
+**Einstieg:** [Dok. 205 — FFGFT in Alltagssprache](2/pdf/205_FFGFT_Narrativ_De.pdf)
+(14 Seiten, kein mathematischer Hintergrund erforderlich).
 
-**Zwei-Hälften-Synthese [K]:** K3-Flächeninvarianz: T̃·m=1 (Zeithälfte) und fraktale
-Wegverlängerung (Raumhälfte) sind komplementäre Hälften — je 0,875″, zusammen 1,750″.
-γ_PPN = 1 exakt (Cassini bestanden). Dieselbe K3-Struktur trägt den Trägheitsübergang:
-Zeitzyklus + Raumzyklus = 4πR_H.
-
-**Trägheitsregime [K]/[S]:** Kraftgesetz a=√(a_N²+a_N·a₀), kein freier Parameter.
-a₀ = c²ξ¹⁰/(4λ̄ₑ) = 1,033×10⁻¹⁰ m/s² aus ξ¹⁰-Kette + Unruh + K3-Zyklen.
-Hinweis: a₀ ist die **Übergangsskala des Trägheitsregimes** (T̃·m=1 + Unruh),
-kein Gravitationsparameter (G ~ ξ², Dok. 012).
-DDO 154 ratio 1,001; Bullet Cluster Peak 10 kpc von Galaxien.
-Dunkle Materie: „ein Regime, kein Stoff" — Befunde real, keine Teilchen nötig.
-
-Verifikation: `2/Dok308_Skripte/ffgft_308_p44_stufe*.py` (4 Skripte, keine freien Parameter).
-Dokumente: [DE](2/pdf/308_Lambda_Lesart_Artefakt_De.pdf) · [EN](2/pdf/308_Lambda_Lesart_Artefakt_En.pdf)
-
-### Dok. 309 — Das Skalenanker-Problem
-
-Neues Dokument (nicht A-Serie). 9 Seiten DE+EN.
-
-Beide Theorien brauchen einen Skalenanker — aber verschieden:
-- **ΛCDM:** ~6 freie Parameter, H₀ zirkulär gemessen (4-stufige Leiter), Feinabstimmung 10¹²³.
-- **FFGFT:** ξ-Struktur [K], Magnitude 5⁴ [SETZUNG, P33]. Exponent 10 in H₀=(π/2)·c·ξ¹⁰/λ̄ₑ ist der eigentliche Fit [SETZUNG, P20].
-- **Vererbung (neu benannt):** Exponent 10 an H₀_ΛCDM kalibriert → FFGFT erbt die Systematik der Expansionslesart.
-- **Querverankerung:** ξ¹⁰ reproduziert H₀ und a₀ — bei reinem H₀-Fit nicht erwartet.
-
-Dokumente: [DE](2/pdf/309_Skalenanker_LCDM_FFGFT_De.pdf) · [EN](2/pdf/309_Skalenanker_LCDM_FFGFT_En.pdf)
-
-
-### Dok. 310 — Die Resonanzgeometrie als übergeordnete Referenz
-
-Neues Dokument (nicht A-Serie). 13 Seiten DE+EN.
-
-Beantwortet den Vorwurf „ξ ist an die Massen angepasst, also zirkulär" durch Korrektur der Hierarchie:
-- **Übergeordnet:** die Geometrie, die Resonanzen besitzt — dimensionslos, legt alle Verhältnisse fest.
-- **Anker:** ein einziger Messwert (eine Masse in SI) — trägt keine Struktur, nur die Skala (der Kammerton, nicht die Musik).
-- **Drei [K]-Aussagen:** Koide Q=2/3 (aus drei Massen, ohne ξ); die Generationsleiter als geometrische Folge mit Verhältnis q=2/3 (derselbe Wert wie Koide Q); die harmonischen Vorfaktoren 4/3, 16/5, 25/9. Alle an den gemessenen Massen nachprüfbar.
-- **π-Faktoren sind Geometrie, keine Schleifen:** 16π³ = S²·2S³ (Sphären-Oberflächen der T⁴-Randgeometrie); μ₀=4π×10⁻⁷ trennt Geometrie (S²) von Einheit; in natürlichen Einheiten verschwinden μ₀,ε₀, und mit α=1 (Ladung umdefiniert, e=1) bleibt nur ξ.
-- **QM und RT zu vermengen ist berechtigt:** ℏ,c sind beide Einheiten-Brücken; T·m=1 ist selbst die Vermengung; der Konflikt ist Interpretations-, kein Formalismuskonflikt (Dok. 230).
-
-Verifikation: `2/Dok310_Skripte/ffgft_310_*.py` (4 Skripte, keine freien Parameter).
-Dokumente: [DE](2/pdf/310_Resonanzgeometrie_Referenz_De.pdf) · [EN](2/pdf/310_Resonanzgeometrie_Referenz_En.pdf)
-
-
-## Dok. 313 und 314 — Zeitzyklus und Gitter im Hilbertraum (August 2026, DE+EN)
-
-### Dok. 314 — Gitter im Hilbertraum
-
-Arbeitsdokument (nicht A-Serie). 26 Seiten DE / 25 EN, vier Prüfskripte.
-
-Was aus dem D4-Gitter wird, wenn man in den Hilbertraum übersetzt:
-die Kusszahl wird zur Entartung, die Trialität zum Orbifold und zur
-Faser, das Radienverhältnis zur Niveauaufspaltung.
-
-- **Gittersätze [K]:** |Aut(D4)| = 1152 = |W(F4)|, Quotient zu W(D4)
-  ist 6 = |S₃| (Trialität am Gitter, nicht nur am Dynkin-Diagramm);
-  die Spur-(−2)-Klasse erfüllt |det(1−A)| = 9 → **der T⁴/Z₃-Orbifold
-  mit 9 Fixpunkten ist eine Gittersymmetrie von D4**, keine
-  Zusatzannahme; auf jedem Dreierorbit wirkt die Z₃ als ℂ³-Zirkulant
-  mit {1, ω, ω²}.
-- **Grenze, als Satz [K]:** Aut(D4) hat **null Elemente der Ordnung 5**
-  — 1152 = 2⁷·3², und 5 teilt das nicht (Lagrange). Die
-  5-fach-Symmetrie, die θ = 2/9 erzeugt (Dok. 293), ist mit der
-  D4-Gitterstruktur unverträglich. Der Phasen-Test bestätigt es
-  numerisch: alle Invarianten haben Nennerspektrum {1, 2, 3, 6}, 2/9
-  kommt nicht vor.
-- **Die Verdopplung ist zulässig und vorbereitet [K]:** Der Schnitt der
-  Elementordnungen von A₅ und Aut(D4) ist {1, 2, 3} — die einzig
-  mögliche Schnittstelle ist C₃, und die ist durch die Trialität
-  besetzt. Die −1-Involution paart die 8 Dreierorbits fixpunktfrei:
-  **24 = 8×3 = 4×6**, vier fertige Container mit genau dem C₃-Inhalt,
-  den 3⊕3′ verlangt. Ausgeschlossen ist nicht 2/9, sondern nur seine
-  Herleitung *aus* Gitterinvarianten.
-- **Zeit aus dem Massenkreis [K]:** λ₄·m = 2π ist die de-Broglie-Relation
-  auf der Massenrichtung (Ort-Relation, immer exakt); zeitlich gilt
-  T_osc·m = 2π/γ ≤ 2π, im Massengemisch nach Jensen ≥ 2π — exakt nur
-  für die ruhende, scharfe Mode.
-- **Eingerollt gegen ausgerollt [K]:** Wicklungszahlen sind topologisch,
-  fraktale Korrekturen brauchen Akkumulation — die
-  Schließungsgabelung aus Dok. 313/295 ist damit **spektral
-  unsichtbar**, und D_f^Raum = 3 − ξ (lokal, 6,7×10⁻⁵) ist von
-  K_frak = 1 − 100ξ (kumulativ über den RG-Lauf, 1,33 %) zu trennen.
-  Nackt sind nur SI-Absolutwerte über den Anker, nicht das
-  eingerollte Spektrum.
-- **Casimir [K]:** Der Z⁴-Torus liegt tiefer als der D4-Torus
-  (−0,932 gegen −0,869 bei Kovolumen 1) — das dichteste Gitter
-  verliert, weil es die größte Spektrallücke hat.
-
-Verifikation: `2/python/Dok314_Skripte/` (4 Skripte + README, alle
-Sollwerte als Assertions).
-Dokumente: [DE](2/pdf/314_Gitter_im_Hilbertraum_De.pdf) · [EN](2/pdf/314_Gitter_im_Hilbertraum_En.pdf)
-
-### Dok. 313 — Kein Anfang (überarbeitet)
-
-Zwei Korrekturen (π/Halbdrehung als Kondensat aus Dok. 295;
-ggT(74,75) = 1 als Begründung der Schließung bei genau 75) und zwei
-Erweiterungen:
-
-- **Reichweite (F.4) [K]:** Die übliche Rückwärtsextrapolation
-  T(z) = T₀(1+z) setzt *eine* durchgehende thermodynamische Kette
-  voraus — genau die grobkörnige Verkettung, die nach D(ii) offen ist.
-  In der Ortslesart hat eine frühe Epoche ein eigenes, lokal
-  bestimmtes Gleichgewicht. Der Korpus zeigt das an sich selbst: T₀
-  wird strukturell aus ξ gewonnen, nicht extrapoliert. Die
-  Ω_m*-Kette ist davon unberührt.
-- **Belastbarkeit [K]:** Kriterium — keine Skalenbrücke, keine Dauer,
-  gleiche Ebene. Belastbar sind Zählungen (1152, 24, 9) und
-  Verhältnisse gleicher Ebene (α, m_μ/m_e, Koide Q). **Die
-  BBN-Observablen gehören nicht dazu**, auch Y_p nicht: T_f ist nicht
-  gemessen, sondern folgt aus dem Modell, und t/τ_n ist eine Dauer.
-  Gegenprobe: dieselbe Klassifikation trifft ΛCDM genauso (Dok. 267,
-  „keiner ist zirkelfrei").
-
-Verifikation: `2/python/Dok313_Skripte/ffgft_bbn_skaleninvarianz.py`
-Dokumente: [DE](2/pdf/313_Kein_Anfang_De.pdf) · [EN](2/pdf/313_Kein_Anfang_En.pdf)
-
----
-
-## Dok. 315 — Die Form von K_frak: additiv oder multiplikativ? (August 2026, DE+EN)
-
-Arbeitsdokument (nicht A-Serie). 10 Seiten DE / 10 EN, vier
-Prüfskripte (reine Standardbibliothek, exakte Bruchrechnung).
-
-Der Korpus bestätigt den **Wert** K_frak = 1 − 100ξ = 74/75 mehrfach
-unabhängig (A040, A130, A270); ob damit auch die **Form** — additiv
-gegen multiplikativ (1 − ξ)¹⁰⁰ — diskriminiert ist, war ungeprüft.
-Die beiden Formen unterscheiden sich um exakt den zweiten
-Binomialterm 4950ξ² ≈ 8,9×10⁻⁵.
-
-- **Kontrollfall Eulersche Musikspirale (5/7-Limit):** exakter Schluss
-  unmöglich (Primfaktorzerlegung); beste Beinahe-Schlüsse sind das
-  Schisma (1,95 Cent, 5-Limit) und das Ragisma 4375/4374 (0,40 Cent,
-  7-Limit). Schließung nur durch Temperierung = Rationalisierung der
-  Schrittweite — genau die Rationalität, die der ξ-Zyklus (1/75,
-  ggT(74,75) = 1) von Anfang an trägt.
-- **Drei Zeugen:** Das A130-Zwei-Routen-Verhältnis diskriminiert 7,5:1
-  additiv, bedingt durch die nicht deklarierte Identität p = −(2−√3)
-  (P-315-1, realer Rest ≈ 7 eV in m_e → P-315-2); die
-  A270-Hochpotenz-Stelle K⁻³⁶ ≈ 16/π² diskriminiert **31:1 additiv**,
-  mit per Dok. 314 aufgewerteter Referenz: **16/π² = 1/Δ(D4)**, der
-  Kehrwert der D4-Packungsdichte (P35 verengt auf die Kopplung des
-  Bulk-Exponenten 36); die A040-Potenzform tendiert additiv, kann aber
-  nicht auflösen.
-- **Strukturargument:** Die additive Form ist die exakte
-  Windungsbuchhaltung der eingerollten Domäne; die multiplikative die
-  Stufenkomposition der ausgerollten Skalendomäne. Angebunden an die
-  Schließungsgabelung (Dok. 295/313/314): Fall B (ξ eingefroren) *ist*
-  die additive Buchhaltung, Fall C (ξ läuft, äquianguläre Spirale)
-  *ist* die multiplikativ-logarithmische — die Euler-Spirale ist das
-  Bild von Fall C.
-- **Status:** Wert [K]; Form additiv [B], zweifach bedingt-bestätigt;
-  die multiplikative Alternative wird von beiden bedingten Zeugen
-  konsistent disfavorisiert und von keinem gestützt. Unbedingte
-  Entscheidungslinie: die A270-Baryon-Stelle (K³⁸-Niveau,
-  Formabstand 0,34 %).
-
-Verifikation: `2/python/315_Skripte/` (4 Skripte).
-Dokumente: [DE](2/pdf/315_Kfrak_Form_De.pdf) · [EN](2/pdf/315_Kfrak_Form_En.pdf)
+**Offener Falsifikationstest:** m_τ = 1776,97 MeV — Entscheidung durch
+Belle-II.
 
 ---
 
@@ -473,19 +327,19 @@ Dokumente: [DE](2/pdf/315_Kfrak_Form_De.pdf) · [EN](2/pdf/315_Kfrak_Form_En.pdf
 
 Das **Korrekturregister** [Dok. 190](2/pdf/190_T0_Korrekturen_De.pdf)
 dokumentiert jede Korrektur und Präzisierung mit Datum, Status und
-betroffenen Dokumenten — K1–K7 (Korrekturen) und R1–R74 (Präzisierungen/Programme, Stand 6. August 2026).
-Nichts wird still überschrieben.
+betroffenen Dokumenten — K1–K7 (Korrekturen) und R1–R74
+(Präzisierungen, Stand August 2026). Nichts wird still überschrieben.
 
 Der **Changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)
-protokolliert alle laufenden Änderungen am Korpus chronologisch.
+erfasst alle laufenden Änderungen chronologisch.
 
 ---
 
 ## Bücher (Amazon KDP)
 
-Die FFGFT-Buchserie ist als **Fünf-Band-Serie** auf Amazon KDP erhältlich —
+Die FFGFT-Buchreihe ist auf Amazon KDP als **fünfbändige Serie** erhältlich —
 in drei Formaten (Kindle eBook / Taschenbuch 8,5×11 / Hardcover 8,25×11)
-jeweils auf Deutsch und Englisch (30 PDFs gesamt).
+auf Deutsch und Englisch (30 PDFs insgesamt).
 
 | Band | Inhalt | Dok. |
 |------|--------|------|
@@ -493,20 +347,16 @@ jeweils auf Deutsch und Englisch (30 PDFs gesamt).
 | Teil 2 | Lagrangian, QFT, QM-Tests | 36 |
 | Teil 3 | Kosmologie, Bewusstsein | 35 |
 | Teil 4 | Frühe Erweiterungen (bis Dok. 184) | 37 |
-| Teil 5 | Schichten, Hilbertraum-Brücke, jüngste Klärungen | 37 |
+| Teil 5 | Schichten, Hilbert-Brücke, neueste Klärungen | 37 |
 
 PDF-Versionen aller Bände auch im Repository unter `books/`.
-
-Zusätzliche Einzelausgaben: *FFGFT Narrativ — Das Kosmische Gehirn*,
-*T0 Anwendungen — Sieben Rätsel der Physik*,
-*Von α=1 zur vollständigen Physik* (in `2/tex-n/completed/`).
 
 ---
 
 ## Versionshistorie
 
 Die vollständige Versionshistorie mit DOIs steht in den Release Notes:
-**[RELEASE_NOTES_v1_2_8_de.md](RELEASE_NOTES_v1_2_8_de.md)** · Änderungsprotokoll:
+**[RELEASE_NOTES_v1_3_0_de.md](RELEASE_NOTES_v1_3_0_de.md)** · Änderungsprotokoll:
 **[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**
 
 ---
@@ -515,5 +365,5 @@ Die vollständige Versionshistorie mit DOIs steht in den Release Notes:
 
 © 2025–2026 Johann Pascher · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
-*Bestätigte Ergebnisse sind im Korpus dokumentiert; offene Vorhersagen
-bedürfen experimenteller Überprüfung.*
+*Etablierte Ergebnisse sind im Korpus dokumentiert; offene Vorhersagen
+unterliegen der experimentellen Verifikation.*
