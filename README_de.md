@@ -253,6 +253,7 @@ Eine vollständige Liste aller ~289 Dokumente mit Kurzinfo und direktem PDF-Link
 |---------|----------|
 | 1. Alltagssprache | [205_FFGFT_Narrativ_De.pdf](2/pdf/205_FFGFT_Narrativ_De.pdf) — **empfohlener Einstieg** |
 | 2. Thermodynamik-Überblick | [A283_Thermodynamik_FFGFT_De.pdf](A_Serie_Export/Sources/wr_standalone_A4/A283_Thermodynamik_FFGFT_De.pdf) — A-Serie-Synthese |
+| 3. Messung & Probabilismus | [A284_Messung_Projektion_De.pdf](A_Serie_Export/Sources/wr_standalone_A4/A284_Messung_Projektion_De.pdf) — Feldlaufzeit, Bell, offene Frage |
 | 3. Überblick | [013_T0_SI_De.pdf](2/pdf/013_T0_SI_De.pdf) |
 | 3. Interaktiv | [T0 Parameter Explorer](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 4. Feldtheorie | [202_FFGFT_Feldtheorie_Gesamt_De.pdf](2/pdf/202_FFGFT_Feldtheorie_Gesamt_De.pdf) |
