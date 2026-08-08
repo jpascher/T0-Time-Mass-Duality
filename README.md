@@ -244,7 +244,8 @@ A complete list of all ~289 documents with short description and direct PDF link
 | Step | Document |
 |------|----------|
 | 1. Plain language | [205_FFGFT_Narrativ_En.pdf](2/pdf/205_FFGFT_Narrativ_En.pdf) — **recommended entry point** |
-| 2. Overview | [013_T0_SI_En.pdf](2/pdf/013_T0_SI_En.pdf) |
+| 2. Thermodynamics overview | [A283_Thermodynamics_FFGFT_En.pdf](A_Serie_Export/Sources/wr_standalone_A4/A283_Thermodynamics_FFGFT_En.pdf) — A-series synthesis |
+| 3. Overview | [013_T0_SI_En.pdf](2/pdf/013_T0_SI_En.pdf) |
 | 3. Interactive | [T0 Parameter Explorer](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 4. Field theory | [202_FFGFT_Feldtheorie_Gesamt_En.pdf](2/pdf/202_FFGFT_Feldtheorie_Gesamt_En.pdf) |
 | 5. Hilbert space | [230_Hilbertraum_Uebersetzung_En.pdf](2/pdf/230_Hilbertraum_Uebersetzung_En.pdf) |
@@ -309,6 +310,11 @@ Details are in the changelog.
 
 **Entry point:** [Doc. 205 — FFGFT in Plain Language](2/pdf/205_FFGFT_Narrativ_En.pdf)
 (13 pages, no mathematical background required).
+
+**Thermodynamics synthesis:** [A283 — Thermodynamics in FFGFT](A_Serie_Export/Sources/wr_standalone_A4/A283_Thermodynamics_FFGFT_En.pdf)
+(11 pages, DE+EN) — collects all thermodynamic results, the double cutoff
+$L_0 \Rightarrow E_\text{max}$ / $L^* \Rightarrow E_\text{min}$, the fractal
+inward refinement picture, and the two-model closing remark.
 
 **Open falsification test:** m_τ = 1776.97 MeV — to be decided by
 Belle-II.

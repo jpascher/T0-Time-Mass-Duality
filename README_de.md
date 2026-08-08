@@ -252,7 +252,8 @@ Eine vollständige Liste aller ~289 Dokumente mit Kurzinfo und direktem PDF-Link
 | Schritt | Dokument |
 |---------|----------|
 | 1. Alltagssprache | [205_FFGFT_Narrativ_De.pdf](2/pdf/205_FFGFT_Narrativ_De.pdf) — **empfohlener Einstieg** |
-| 2. Überblick | [013_T0_SI_De.pdf](2/pdf/013_T0_SI_De.pdf) |
+| 2. Thermodynamik-Überblick | [A283_Thermodynamik_FFGFT_De.pdf](A_Serie_Export/Sources/wr_standalone_A4/A283_Thermodynamik_FFGFT_De.pdf) — A-Serie-Synthese |
+| 3. Überblick | [013_T0_SI_De.pdf](2/pdf/013_T0_SI_De.pdf) |
 | 3. Interaktiv | [T0 Parameter Explorer](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 4. Feldtheorie | [202_FFGFT_Feldtheorie_Gesamt_De.pdf](2/pdf/202_FFGFT_Feldtheorie_Gesamt_De.pdf) |
 | 5. Hilbertraum | [230_Hilbertraum_Uebersetzung_De.pdf](2/pdf/230_Hilbertraum_Uebersetzung_De.pdf) |
@@ -317,6 +318,11 @@ im Changelog.
 
 **Einstieg:** [Dok. 205 — FFGFT in Alltagssprache](2/pdf/205_FFGFT_Narrativ_De.pdf)
 (14 Seiten, kein mathematischer Hintergrund erforderlich).
+
+**Thermodynamik-Synthese:** [A283 — Thermodynamik in der FFGFT](A_Serie_Export/Sources/wr_standalone_A4/A283_Thermodynamik_FFGFT_De.pdf)
+(11 Seiten, DE+EN) — fasst alle thermodynamischen Resultate zusammen: Doppel-Cutoff
+$L_0 \Rightarrow E_\text{max}$ / $L^* \Rightarrow E_\text{min}$, fraktale
+Verfeinerung nach innen, Abschlussbemerkung zu den zwei entgegengesetzten Modellen.
 
 **Offener Falsifikationstest:** m_τ = 1776,97 MeV — Entscheidung durch
 Belle-II.
