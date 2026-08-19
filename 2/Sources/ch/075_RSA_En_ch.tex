@@ -1,257 +1,294 @@
-\section*{Abstract}
-		This document provides a comprehensive mathematical analysis of the RSA encryption algorithm. We examine the underlying number theory, implementation details, security considerations, and computational complexity. The analysis includes proofs of correctness, discussions of common attacks, and optimization techniques for practical implementations.
+% 075_RSA_En_ch.tex -- chapter content Doc. 075 EN
+% RSA and Period Finding: Foundations, Resonance Formulation, Limits
+% Unified version August 2026 (R75)
 
-	
-	
-	\section{Introduction to RSA Cryptography}
-	
-	The RSA algorithm, named after Rivest, Shamir, and Adleman (1977), is one of the first practical public-key cryptosystems and is widely used for secure data transmission.
-	
-	\subsection{Mathematical Foundation}
-	
-	RSA is based on the computational difficulty of factoring large integers and the properties of modular arithmetic.
-	
-	\subsection{Key Generation}
-	
-	The RSA key generation process involves the following steps:
-	
-	\begin{enumerate}
-		\item Choose two distinct prime numbers $p$ and $q$
-		\item Compute $n = p \cdot q$
-		\item Compute Euler's totient function: $\varphi(n) = (p-1)(q-1)$
-		\item Choose an integer $e$ such that $1 < e < \varphi(n)$ and $\gcd(e, \varphi(n)) = 1$
-		\item Compute $d$ such that $d \cdot e \equiv 1 \pmod{\varphi(n)}$
-	\end{enumerate}
-	
-	\subsection{Encryption and Decryption}
-	
-	For a message $M$ represented as an integer with $0 \leq M < n$:
-	
-	\textbf{Encryption}: $C \equiv M^e \pmod{n}$
-	
-	\textbf{Decryption}: $M \equiv C^d \pmod{n}$
-	
-	\section{Mathematical Proofs}
-	
-	\subsection{Correctness Proof}
-	
-	Using Euler's theorem and the Chinese Remainder Theorem, we can prove:
-	
-	\begin{theorem}[RSA Correctness]
-		For any message $M$ with $0 \leq M < n$ and $\gcd(M, n) = 1$, the RSA encryption and decryption satisfy:
-		\[
-		(M^e)^d \equiv M \pmod{n}
-		\]
-	\end{theorem}
-	
-	\begin{proof}
-		Since $ed \equiv 1 \pmod{\varphi(n)}$, we have $ed = 1 + k\varphi(n)$ for some integer $k$.
-		
-		By Euler's theorem, if $\gcd(M, n) = 1$, then $M^{\varphi(n)} \equiv 1 \pmod{n}$.
-		
-		Therefore:
-		\[
-		C^d \equiv (M^e)^d \equiv M^{ed} \equiv M^{1 + k\varphi(n)} \equiv M \cdot (M^{\varphi(n)})^k \equiv M \cdot 1^k \equiv M \pmod{n}
-		\]
-		
-		For the case where $\gcd(M, n) \neq 1$, the Chinese Remainder Theorem ensures the result still holds.
-	\end{proof}
-	
-	\section{Implementation Details}
-	
-	\subsection{Modular Exponentiation}
-	
-	Efficient modular exponentiation is crucial for RSA performance. The square-and-multiply algorithm provides $O(\log e)$ complexity:
-	
-	\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Algorithm: Modular Exponentiation]
-		\textbf{Function} ModExp($base$, $exponent$, $modulus$):
-		\begin{enumerate}
-			\item $result \gets 1$
-			\item $base \gets base \bmod modulus$
-			\item \textbf{while} $exponent > 0$:
-			\begin{enumerate}
-				\item \textbf{if} $exponent \bmod 2 = 1$:
-				\begin{enumerate}
-					\item $result \gets (result \times base) \bmod modulus$
-				\end{enumerate}
-				\item $exponent \gets \lfloor exponent / 2 \rfloor$
-				\item $base \gets (base \times base) \bmod modulus$
-			\end{enumerate}
-			\item \textbf{return} $result$
-		\end{enumerate}
-	\end{tcolorbox}
-	
-	\subsection{Prime Generation}
-	
-	Generating large primes is essential for RSA security:
-	
-	\begin{itemize}
-		\item Use probabilistic primality tests (Miller-Rabin)
-		\item Ensure $p$ and $q$ are of similar bit length
-		\item Avoid primes with special forms that are easier to factor
-	\end{itemize}
-	
-	\section{Security Analysis}
-	
-	\subsection{Common Attacks}
-	
-	\begin{table}[htbp]
-		\centering
-		\adjustbox{max width=\textwidth}{%
-\begin{tabular}{lp{8cm}}
-			\toprule
-			\textbf{Attack Type} & \textbf{Description} \\
-			\midrule
-			Factorization & Attempt to factor $n$ into $p$ and $q$ \\
-			Small $e$ attacks & When $e$ is too small, certain messages can be recovered \\
-			Timing attacks & Measure computation time to deduce secret information \\
-			Side-channel attacks & Use power consumption, electromagnetic leaks, etc. \\
-			\bottomrule
-		\end{tabular}%
-}
-		\caption{Common attacks on RSA}
-	\end{table}
-	
-	\subsection{Security Recommendations}
-	
-	\begin{enumerate}
-		\item Use key sizes of at least 2048 bits (3072 or 4096 for long-term security)
-		\item Use proper padding schemes (OAEP)
-		\item Implement constant-time algorithms to prevent timing attacks
-		\item Regularly update cryptographic libraries
-	\end{enumerate}
-	
-	\section{Performance Analysis}
-	
-	\subsection{Computational Complexity}
-	
-	\begin{table}[htbp]
-		\centering
-		\adjustbox{max width=\textwidth}{%
+\section*{Summary}
+
+This document treats the RSA procedure in two parts. Part~I presents
+the number-theoretic foundations and security analysis. Part~II
+examines the attack surface via period finding as a resonance problem
+and determines its carriers and limits: the resonance description is
+correct -- period finding is a spectral problem -- but its generators
+are the \textbf{primes}, not an adjustable parameter.
+
+\begin{keyresult}[Two separate parameters]
+This document uses two quantities that must not be confused:
+\begin{itemize}
+  \item $\xi = 4/30000$ -- the FFGFT geometry parameter. Fixed, not
+    adjustable, with no operational connection to factorisation.
+  \item $\sigma$ -- a numerical grid parameter of the search algorithms
+    (values such as $1/42$, $1/100$, $1/1000$). A sampling quantity,
+    not a physical one.
+\end{itemize}
+\end{keyresult}
+
+%-------------------------------------------------------------------
+\part*{Part I: The RSA Procedure}
+%-------------------------------------------------------------------
+
+\section{Introduction to RSA Cryptography}
+
+The RSA algorithm (Rivest, Shamir, Adleman 1977) is one of the first
+practical public-key cryptosystems and is widely used for secure data
+transmission.
+
+\subsection{Mathematical Foundation}
+
+RSA is based on the computational difficulty of factoring large integers
+and the properties of modular arithmetic.
+
+\subsection{Key Generation}
+
+\begin{enumerate}
+  \item Choose two distinct prime numbers $p$ and $q$.
+  \item Compute $n = p \cdot q$.
+  \item Compute Euler's totient: $\varphi(n) = (p-1)(q-1)$.
+  \item Choose $e$ with $1 < e < \varphi(n)$ and $\gcd(e,\varphi(n))=1$.
+  \item Compute $d$ with $d \cdot e \equiv 1 \pmod{\varphi(n)}$.
+\end{enumerate}
+
+The public key is $(n,e)$, the private key $(n,d)$.
+
+\subsection{Encryption and Decryption}
+
+For a message $M$ with $0 \le M < n$:
+\begin{align}
+  C &\equiv M^e \pmod n \qquad \text{(encryption)}, \\
+  M &\equiv C^d \pmod n \qquad \text{(decryption)}.
+\end{align}
+
+\section{Mathematical Proofs}
+
+\subsection{Correctness Proof}
+
+\begin{theorem}[RSA Correctness]
+For any message $M$ with $0 \le M < n$ and $\gcd(M,n)=1$:
+$(M^e)^d \equiv M \pmod n$.
+\end{theorem}
+\begin{proof}
+From $ed \equiv 1 \pmod{\varphi(n)}$ follows $ed = 1+k\varphi(n)$.
+By Euler's theorem $M^{\varphi(n)} \equiv 1 \pmod n$, so
+\[
+  C^d \equiv M^{ed} \equiv M^{1+k\varphi(n)} \equiv
+  M\cdot(M^{\varphi(n)})^k \equiv M \pmod n.
+\]
+For $\gcd(M,n)\neq 1$ the Chinese Remainder Theorem gives the same.
+\end{proof}
+
+\section{Implementation}
+
+\subsection{Modular Exponentiation}
+
+Efficient modular exponentiation by square-and-multiply:
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,
+  title=Algorithm: Modular Exponentiation]
+\textbf{Function} ModExp($base$, $exponent$, $modulus$):
+\begin{enumerate}
+  \item $result \gets 1$; $base \gets base \bmod modulus$
+  \item \textbf{while} $exponent > 0$:
+  \begin{enumerate}
+    \item \textbf{if} $exponent \bmod 2 = 1$:
+      $result \gets (result \times base) \bmod modulus$
+    \item $exponent \gets \lfloor exponent/2 \rfloor$;
+      $base \gets (base \times base) \bmod modulus$
+  \end{enumerate}
+  \item \textbf{return} $result$
+\end{enumerate}
+\end{tcolorbox}
+
+\subsection{Prime Generation}
+
+\begin{itemize}
+  \item Probabilistic primality tests (Miller-Rabin).
+  \item $p$ and $q$ of similar bit length.
+  \item Avoid special forms that are easier to factor.
+\end{itemize}
+
+\section{Security Analysis}
+
+\subsection{Common Attacks}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Attack & Description \\
+\midrule
+Factorisation & Factor $n$ into $p$ and $q$ \\
+Small $e$ & Certain messages recoverable \\
+Timing attacks & Deduce secret from computation time \\
+Side-channel & Power, electromagnetic leaks \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Recommendations}
+
+\begin{enumerate}
+  \item Key sizes $\ge 2048$ bit (3072 or 4096 for long-term security).
+  \item Padding scheme OAEP.
+  \item Constant-time implementations.
+  \item Regular updates to cryptographic libraries.
+\end{enumerate}
+
+\section{Performance Analysis}
+
+\begin{center}
 \begin{tabular}{lcc}
-			\toprule
-			\textbf{Operation} & \textbf{Complexity} & \textbf{Typical time (2048-bit)} \\
-			\midrule
-			Key generation & $O(k^3)$ & 1-10 seconds \\
-			Encryption & $O(k^2)$ & < 1 ms \\
-			Decryption & $O(k^3)$ & 10-100 ms \\
-			\bottomrule
-		\end{tabular}%
-}
-		\caption{Computational complexity of RSA operations}
-	\end{table}
-	
-	\subsection{Optimization Techniques}
-	
-	\begin{itemize}
-		\item Use Chinese Remainder Theorem for faster decryption
-		\item Implement windowing methods for exponentiation
-		\item Use hardware acceleration (AES-NI, etc.)
-	\end{itemize}
-	
-	\section{Mathematical Extensions}
-	
-	\subsection{RSA with Multiple Primes}
-	
-	Instead of two primes, use $k$ primes: $n = p_1 p_2 \cdots p_k$
-	
-	Advantages:
-	\begin{itemize}
-		\item Faster decryption using multi-prime CRT
-		\item Same security with smaller total modulus
-	\end{itemize}
-	
-	\subsection{Blinding Techniques}
-	
-	To prevent timing attacks:
-	\[
-	C' = C \cdot r^e \pmod{n}
-	\]
-	\[
-	M' = (C')^d \pmod{n}
-	\]
-	\[
-	M = M' \cdot r^{-1} \pmod{n}
-	\]
-	
-	\section{Practical Considerations}
-	
-	\subsection{Key Management}
-	
-	\begin{itemize}
-		\item Secure storage of private keys
-		\item Regular key rotation
-		\item Certificate management
-	\end{itemize}
-	
-	\subsection{Compliance Standards}
-	
-	\begin{itemize}
-		\item FIPS 140-2/3 for government use
-		\item Common Criteria evaluation
-		\item Industry-specific regulations
-	\end{itemize}
-	
-	\section{Conclusion}
-	
-	RSA remains a fundamental public-key cryptosystem despite the emergence of newer algorithms. Its security relies on the hardness of integer factorization, which remains computationally infeasible for properly chosen key sizes.
-	
-	\subsection{Future Directions}
-	
-	\begin{itemize}
-		\item Post-quantum cryptography alternatives
-		\item Homomorphic encryption extensions
-		\item Improved side-channel resistance
-	\end{itemize}
-	
-	\appendix
-	
-	\section{Appendix A: Mathematical Background}
-	
-	\subsection{Euler's Theorem}
-	
-	For any integers $a$ and $n$ with $\gcd(a, n) = 1$:
-	\[
-	a^{\varphi(n)} \equiv 1 \pmod{n}
-	\]
-	
-	\subsection{Chinese Remainder Theorem}
-	
-	If $n_1, n_2, \ldots, n_k$ are pairwise coprime, then the system of congruences:
-	\begin{align*}
-		x &\equiv a_1 \pmod{n_1} \\
-		x &\equiv a_2 \pmod{n_2} \\
-		&\vdots \\
-		x &\equiv a_k \pmod{n_k}
-	\end{align*}
-	has a unique solution modulo $N = n_1 n_2 \cdots n_k$.
-	
-	\section{Appendix B: Sample Code}
-	
-	\begin{verbatim}
-		# Simple RSA implementation in Python
-		import random
-		from math import gcd
-		
-		def generate_keypair(bits=1024):
-		p = generate_prime(bits//2)
-		q = generate_prime(bits//2)
-		n = p * q
-		phi = (p-1) * (q-1)
-		
-		e = 65537
-		d = modinv(e, phi)
-		
-		return ((e, n), (d, n))
-		
-		def encrypt(pk, plaintext):
-		key, n = pk
-		cipher = pow(plaintext, key, n)
-		return cipher
-		
-		def decrypt(pk, ciphertext):
-		key, n = pk
-		plain = pow(ciphertext, key, n)
-		return plain
-	\end{verbatim}
-	
+\toprule
+Operation & Complexity & Typical time (2048 bit) \\
+\midrule
+Key generation & $O(k^3)$ & 1--10 seconds \\
+Encryption & $O(k^2)$ & $<$ 1 ms \\
+Decryption & $O(k^3)$ & 10--100 ms \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Optimisations}
+
+\begin{itemize}
+  \item Chinese Remainder Theorem for faster decryption.
+  \item Windowing methods for exponentiation.
+  \item Hardware acceleration.
+\end{itemize}
+
+\section{Extensions}
+
+\subsection{Multi-Prime RSA}
+
+$n = p_1 p_2 \cdots p_k$: faster decryption via multi-prime CRT.
+
+\subsection{Blinding}
+
+Protection against timing attacks:
+\[
+  C' = C \cdot r^e \pmod n, \quad
+  M' = (C')^d \pmod n, \quad
+  M = M' \cdot r^{-1} \pmod n.
+\]
+
+%-------------------------------------------------------------------
+\part*{Part II: Period Finding as a Resonance Problem}
+%-------------------------------------------------------------------
+
+\section{The arithmetic foundation}
+
+Factorisation of $n=pq$ reduces to period search. For random $a$ with
+$\gcd(a,n)=1$ the period $r$ satisfies $a^r \equiv 1 \pmod n$. If $r$
+is even and $a^{r/2} \not\equiv -1 \pmod n$ then $\gcd(a^{r/2}\pm1,n)$
+yields the factors.
+
+\textbf{[K]} The period $r$ always divides $\lambda(n)=\mathrm{lcm}
+(p-1,q-1)$. It is an arithmetic quantity, not determined by a choosable
+parameter.
+
+\section{The spectral formulation}
+
+\subsection{Why period finding is a resonance problem}
+
+The sequence $f(x)=a^x \bmod n$ is periodic with period $r$. Its
+Fourier transform has sharp maxima at $k/r$. Period search is formally
+spectral analysis.
+
+\subsection{Primes as generators}
+
+\textbf{[K]} The resonance structure rests on primes -- measured by the
+bicoherence test on 2469 Riemann zeros (Doc.~316, August 2026): coupling
+at prime powers ($b^2=0.76$--$0.85$), none at composites
+($b^2=0.018$--$0.025$), contrast factor 30--50.
+
+\subsection{What the grid parameter $\sigma$ achieves}
+
+\textbf{[X]} All $\sigma$ values have composite denominators and form
+mixed points without their own resonance line. Their function is that of
+a sampling grid.
+
+\section{Topology: winding number instead of frequency ratio}
+
+\textbf{[K]} For closed trajectories the winding number $W=\log_2(r)$
+decides, not $r$. Pure fifth: $W=0.5850$ (irrational) $\to$ open.
+Tempered: $W=7/12$ (rational) $\to$ closed after 12 steps. Closure is
+an artefact of rationalisation.
+
+\section{Structural scaling limit}
+
+\subsection{The Weyl obstruction}
+
+\textbf{[K]} The Laplace spectrum of every compact manifold grows as
+$N(\lambda)\sim C_d\lambda^{d/2}$; the arithmetic counting density as
+$N(T)\sim T\ln T$ -- not a power. A compact resonance space cannot carry
+a spectrum of density $T\ln T$.
+
+\textbf{Delimitation.} This obstruction does not apply to Shor's
+algorithm. Shor seeks one period of one concrete number (finite task,
+$2n+3$ qubits). What limits Shor at large $n$ is the gate count
+($\sim n^3$) and error-correction overhead -- a \emph{resource limit}.
+
+\subsection{The precision barrier}
+
+For sharp separation at $r \approx n$ a resolution $\Delta f \approx
+f_0/n^2$ is needed -- at RSA sizes below any available number
+representation.
+
+\section{Comparison of methods}
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+Method & Principle & Closure & Limit \\
+\midrule
+Trial division & Division & Discrete arithmetic & $O(\sqrt{n})$ \\
+Pollard $\rho$ & Cycle detection & Birthday paradox & $O(n^{1/4})$ \\
+Resonance filter & Spectral search & Rationalised grid & $O(n)$ \\
+Shor's QFT & Quantum interference & Discrete phase &
+  resource limit \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Preparation (modular exponentiation) accounts for approximately
+\textbf{95\,\%} of the gate cost; the QFT for only 5\,\%
+(Doc.~176, August 2026).
+
+\textbf{[X]} A general exponential quantum advantage is not established.
+
+\section{What the Fourier transform achieves}
+
+\textbf{[K]} The Fourier transform is a \emph{projection}: it translates
+a representation without generating new information. Measured on the
+Riemann zeros (Doc.~316): peaks at $\ln 2,\ln 3,\ln 5,\ln 7,\ln 11,
+\ln 13$ where information is present; no peaks at composite arguments.
+
+\section{Balance}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Statement & Status \\
+\midrule
+RSA correctness (Euler, CRT) & \textbf{[K]} proved \\
+Period finding is a spectral problem & \textbf{[K]} \\
+Primes are the generators & \textbf{[K]} measured by bicoherence \\
+Winding number decides closure & \textbf{[K]} \\
+Preparation $\approx 95\,\%$ of gate cost & \textbf{[K]} \\
+$\sigma$ grids generate resonances & \textbf{[X]} sampling artefact \\
+$\xi=4/30000$ contributes to factorisation & \textbf{[X]} geometry \\
+Classical period search $O((\log n)^3)$ & \textbf{[X]} refuted \\
+Weyl obstruction limits Shor & \textbf{[X]} resource limit \\
+Fourier transform generates information & \textbf{[X]} projection \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Verification}
+
+Scripts in \texttt{2/python/Shor\_Skripte/} (standard library,
+assertions, seed 20780458): \texttt{s1\_periodensuche.py},
+\texttt{s2\_grenzen.py}, \texttt{s3\_thermik\_zustandsraum.py}.
+
+\section{Relation to the corpus}
+
+Doc.~316 (August 2026): Weyl obstruction, bicoherence test, winding
+number, Fourier transform as projection. Revision declared under R75
+in Doc.~190.

@@ -1,170 +1,241 @@
 % 075_RSA_De_ch.tex -- Kapitelinhalt Dok. 075
-% Periodenfindung als Resonanzproblem: Reichweite und strukturelle Grenzen
-% Vollständige Neufassung August 2026 (R75)
+% RSA und Periodenfindung: Grundlagen, Resonanzformulierung, Grenzen
+% Einheitliche Fassung August 2026 (R75)
 
-\section{Periodenfindung als Resonanzproblem}
+\section*{Zusammenfassung}
 
-\subsection*{Zusammenfassung}
-
-Dieses Dokument untersucht die Ganzzahlfaktorisierung als Periodenfindungsproblem
-und fragt, welche Resonanzstrukturen dabei tatsächlich tragen. Das Ergebnis ist
-zweiteilig: Die Resonanzbeschreibung ist sachlich richtig -- Periodenfindung
-\emph{ist} ein spektrales Problem --, aber ihre Träger sind die \textbf{Primzahlen},
-nicht ein einstellbarer Kopplungsparameter. Die Skalierungsgrenze bei großen
-Zahlen ist keine bloße Rechengenauigkeitsfrage, sondern folgt aus der
-Weyl-Obstruktion auf Satzebene.
+Dieses Dokument behandelt das RSA-Verfahren in zwei Teilen. Teil~I legt
+die zahlentheoretischen Grundlagen und die Sicherheitsanalyse dar.
+Teil~II untersucht die Angreifbarkeit über Periodenfindung als
+Resonanzproblem und bestimmt deren Träger und Grenzen: Die
+Resonanzbeschreibung ist richtig -- Periodenfindung ist ein spektrales
+Problem --, aber ihre Generatoren sind die \textbf{Primzahlen}, nicht
+ein einstellbarer Parameter.
 
 \begin{keyresult}[Zwei getrennte Parameter]
-Dieses Dokument verwendet zwei Größen, die \emph{nicht} verwechselt werden dürfen:
+Dieses Dokument verwendet zwei Größen, die nicht verwechselt werden
+dürfen:
 \begin{itemize}
-  \item $\xi = 4/30000$ -- der Geometrieparameter der FFGFT. Fest, nicht
-    einstellbar, ohne operationalen Bezug zur Faktorisierung.
-  \item $\sigma$ -- ein numerischer Rasterparameter der hier untersuchten
-    Suchalgorithmen (Werte wie $1/42$, $1/100$, $1/1000$). Reine Heuristik,
+  \item $\xi = 4/30000$ -- der Geometrieparameter der FFGFT. Fest,
+    nicht einstellbar, ohne operationalen Bezug zur Faktorisierung.
+  \item $\sigma$ -- ein numerischer Rasterparameter der untersuchten
+    Suchalgorithmen (Werte wie $1/42$, $1/100$, $1/1000$). Abtastgröße,
     keine physikalische Größe.
 \end{itemize}
-Frühere Fassungen dieses Dokuments verwendeten für beide dasselbe Symbol. Die
-Trennung ist wesentlich: $\sigma$ ist ein Suchraster, $\xi$ ist Geometrie.
 \end{keyresult}
 
-\section{Periodenfindung: die arithmetische Grundlage}
+%-------------------------------------------------------------------
+\part*{Teil I: Das RSA-Verfahren}
+%-------------------------------------------------------------------
 
-Die Faktorisierung von $N = p \cdot q$ lässt sich auf die Periodensuche
-zurückführen. Für ein zufälliges $a$ mit $\gcd(a,N) = 1$ ist die Periode $r$
-definiert durch
-\begin{equation}
-  a^r \equiv 1 \pmod N.
-\end{equation}
-Ist $r$ gerade und $a^{r/2} \not\equiv -1 \pmod N$, so liefern
-$\gcd(a^{r/2} \pm 1, N)$ die Faktoren. Die Faktorisierung reduziert sich damit
-vollständig auf die Bestimmung von $r$.
+\section{Einführung in die RSA-Kryptographie}
 
-\textbf{[K]} Die Periode $r$ teilt stets $\lambda(N) = \mathrm{lcm}(p-1, q-1)$
-(Carmichael-Funktion). Sie ist eine \emph{arithmetische} Größe, festgelegt durch
-die Struktur von $p-1$ und $q-1$ -- nicht durch einen wählbaren Parameter.
+Der RSA-Algorithmus (Rivest, Shamir, Adleman 1977) ist eines der ersten
+praktischen Public-Key-Kryptosysteme und wird für sichere
+Datenübertragung eingesetzt.
+
+\subsection{Mathematische Grundlage}
+
+RSA beruht auf der rechnerischen Schwierigkeit der Faktorisierung großer
+ganzer Zahlen und den Eigenschaften der modularen Arithmetik.
+
+\subsection{Schlüsselerzeugung}
+
+\begin{enumerate}
+  \item Wähle zwei verschiedene Primzahlen $p$ und $q$.
+  \item Berechne $n = p \cdot q$.
+  \item Berechne $\varphi(n) = (p-1)(q-1)$.
+  \item Wähle $e$ mit $1 < e < \varphi(n)$ und $\gcd(e, \varphi(n))=1$.
+  \item Bestimme $d$ mit $d \cdot e \equiv 1 \pmod{\varphi(n)}$.
+\end{enumerate}
+
+Der öffentliche Schlüssel ist $(n,e)$, der private $(n,d)$.
+
+\subsection{Ver- und Entschlüsselung}
+
+Für eine Nachricht $M$ mit $0 \le M < n$:
+\begin{align}
+  C &\equiv M^e \pmod n \qquad \text{(Verschlüsselung)}, \\
+  M &\equiv C^d \pmod n \qquad \text{(Entschlüsselung)}.
+\end{align}
+
+\section{Mathematische Beweise}
+
+\subsection{Korrektheitsbeweis}
+
+\begin{theorem}[RSA-Korrektheit]
+Für jede Nachricht $M$ mit $0 \le M < n$ und $\gcd(M,n)=1$ gilt
+$(M^e)^d \equiv M \pmod n$.
+\end{theorem}
+\begin{proof}
+Aus $ed \equiv 1 \pmod{\varphi(n)}$ folgt $ed = 1+k\varphi(n)$.
+Nach dem Satz von Euler gilt $M^{\varphi(n)} \equiv 1 \pmod n$, also
+\[
+  C^d \equiv M^{ed} \equiv M^{1+k\varphi(n)} \equiv
+  M \cdot (M^{\varphi(n)})^k \equiv M \pmod n.
+\]
+Für $\gcd(M,n) \neq 1$ liefert der chinesische Restsatz dasselbe.
+\end{proof}
+
+\section{Implementierung}
+
+\subsection{Modulare Exponentiation}
+
+Effiziente modulare Exponentiation durch Square-and-Multiply:
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,
+  title=Algorithmus: Modulare Exponentiation]
+\textbf{Funktion} ModExp($basis$, $exponent$, $modul$):
+\begin{enumerate}
+  \item $erg \gets 1$; $basis \gets basis \bmod modul$
+  \item \textbf{solange} $exponent > 0$:
+  \begin{enumerate}
+    \item \textbf{falls} $exponent \bmod 2 = 1$:
+      $erg \gets (erg \times basis) \bmod modul$
+    \item $exponent \gets \lfloor exponent/2 \rfloor$;
+      $basis \gets (basis \times basis) \bmod modul$
+  \end{enumerate}
+  \item \textbf{return} $erg$
+\end{enumerate}
+\end{tcolorbox}
+
+\subsection{Primzahlerzeugung}
+
+\begin{itemize}
+  \item Probabilistische Primzahltests (Miller-Rabin).
+  \item $p$ und $q$ ähnliche Bitlänge.
+  \item Spezialformen vermeiden, die leichter faktorisierbar sind.
+\end{itemize}
+
+\section{Sicherheitsanalyse}
+
+\subsection{Angriffsarten}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Angriff & Beschreibung \\
+\midrule
+Faktorisierung & Zerlegung von $n$ in $p$ und $q$ \\
+Kleine Exponenten & Bei kleinem $e$ rekonstruierbar \\
+Zeitangriffe & Rückschluss aus Rechenzeit \\
+Seitenkanäle & Stromverbrauch, EM-Strahlung \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Empfehlungen}
+
+\begin{enumerate}
+  \item Schlüssellängen $\ge 2048$ Bit (3072 oder 4096 langfristig).
+  \item Auffüllverfahren OAEP.
+  \item Laufzeitkonstante Implementierungen.
+  \item Regelmäßige Aktualisierung kryptographischer Bibliotheken.
+\end{enumerate}
+
+\section{Leistungsanalyse}
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Operation & Komplexität & Typische Zeit (2048 Bit) \\
+\midrule
+Schlüsselerzeugung & $O(k^3)$ & 1--10 Sekunden \\
+Verschlüsselung & $O(k^2)$ & $<$ 1 ms \\
+Entschlüsselung & $O(k^3)$ & 10--100 ms \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Optimierungen}
+
+\begin{itemize}
+  \item Chinesischer Restsatz für schnellere Entschlüsselung.
+  \item Fenstermethoden für die Exponentiation.
+  \item Hardware-Beschleunigung.
+\end{itemize}
+
+\section{Erweiterungen}
+
+\subsection{Multi-Primzahl-RSA}
+
+Statt zwei Primzahlen: $n = p_1 p_2 \cdots p_k$. Vorteil: schnellere
+Entschlüsselung durch Multi-Primzahl-CRT.
+
+\subsection{Blinding}
+
+Schutz gegen Zeitangriffe:
+\[
+  C' = C \cdot r^e \pmod n, \qquad
+  M' = (C')^d \pmod n, \qquad
+  M = M' \cdot r^{-1} \pmod n.
+\]
+
+%-------------------------------------------------------------------
+\part*{Teil II: Periodenfindung als Resonanzproblem}
+%-------------------------------------------------------------------
+
+\section{Die arithmetische Grundlage}
+
+Die Faktorisierung von $n = pq$ lässt sich auf die Periodensuche
+zurückführen. Für ein zufälliges $a$ mit $\gcd(a,n) = 1$ ist die
+Periode $r$ definiert durch $a^r \equiv 1 \pmod n$. Ist $r$ gerade
+und $a^{r/2} \not\equiv -1 \pmod n$, so liefern $\gcd(a^{r/2}\pm1,n)$
+die Faktoren.
+
+\textbf{[K]} Die Periode $r$ teilt stets $\lambda(n)=\mathrm{lcm}(p-1,
+q-1)$. Sie ist eine arithmetische Größe, nicht durch einen wählbaren
+Parameter bestimmt.
 
 \section{Die spektrale Formulierung}
 
 \subsection{Warum Periodenfindung ein Resonanzproblem ist}
 
-Die Folge $f(x) = a^x \bmod N$ ist periodisch mit Periode $r$. Ihre
-Fouriertransformierte hat scharfe Maxima bei den Frequenzen $k/r$. Damit ist die
-Periodensuche formal identisch mit einer Spektralanalyse: Man sucht die
-Frequenz, bei der die Folge konstruktiv interferiert.
-
-Diese Beschreibung ist sachlich korrekt und trägt sowohl klassische Verfahren
-als auch Shors Algorithmus. Entscheidend ist die Frage, \emph{welche} Struktur
-die Resonanzen erzeugt.
+Die Folge $f(x)=a^x \bmod n$ ist periodisch mit Periode $r$. Ihre
+Fouriertransformierte hat scharfe Maxima bei $k/r$. Die Periodensuche
+ist formal eine Spektralanalyse.
 
 \subsection{Primzahlen als Generatoren}
 
-\textbf{[K]} Die Resonanzstruktur beruht auf Primzahlen. Das ist nicht
-Analogie, sondern gemessen: Der Bikohärenztest an 2469 Riemann-Nullstellen
-(Dok.~316, August 2026) zeigt Phasenkopplung genau bei Primzahlpotenzen
-($b^2 = 0{,}76$--$0{,}85$) und keine bei zusammengesetzten Zahlen
-($b^2 = 0{,}018$--$0{,}025$) -- ein Kontrast von Faktor 30 bis 50.
-
-Der Grund liegt im Euler-Produkt:
-\begin{equation}
-  \zeta(s) = \prod_p \frac{1}{1 - p^{-s}},
-  \qquad
-  \log \zeta(s) = \sum_{p,k} \frac{1}{k}\,p^{-ks}.
-\end{equation}
-Jede Primzahl steht für sich; es gibt keine Mischterme zwischen verschiedenen
-Primzahlen. Das duale Längenspektrum enthält daher nur $k \ln p$ --
-Logarithmen \emph{einzelner} Primzahlen.
-
-Ein physikalisches Gegenstück liefert die Naturtonreihe: In der Reihe $n f_0$
-führen genau die Primzahl-Ordnungen neue Klangqualitäten ein;
-$4 = 2\cdot2$, $6 = 2\cdot3$, $9 = 3\cdot3$ sind Kombinationen bereits
-vorhandener Achsen.
+\textbf{[K]} Die Resonanzstruktur beruht auf Primzahlen -- gemessen
+durch den Bikohärenztest an 2469 Riemann-Nullstellen (Dok.~316,
+August 2026): Kopplung bei Primzahlpotenzen ($b^2 = 0{,}76$--$0{,}85$),
+keine bei zusammengesetzten Zahlen ($b^2 = 0{,}018$--$0{,}025$),
+Kontrast Faktor 30--50.
 
 \subsection{Was der Rasterparameter $\sigma$ leistet}
 
-\textbf{[X]} Die in älteren Implementierungen verwendeten Werte
-$\sigma \in \{1/42,\, 1/100,\, 1/1000,\, 1/100000\}$ sind numerische
-Suchraster. Sie erzeugen keine neuen Eigenfrequenzen und keine
-Kopplungslinien im Spektrum. Da alle diese Werte zusammengesetzte Zahlen im
-Nenner haben, bilden sie nach dem Bikohärenzbefund \emph{Mischpunkte} ohne
-eigene Resonanzlinie.
-
-Ihre Funktion ist die eines Abtast- und Filterrasters: Sie bestimmen, in
-welchen Schritten der Suchraum durchlaufen wird. Das ist eine
-implementierungstechnische Wahl, keine physikalische Aussage. Unterschiedliche
-Erfolgsraten zwischen den Rasterweiten sind Artefakte der Abtastung.
+\textbf{[X]} Alle $\sigma$-Werte haben zusammengesetzte Nenner und
+bilden Mischpunkte ohne eigene Resonanzlinie. Ihre Funktion ist die
+eines Abtastrasters.
 
 \section{Topologie: Windungszahl statt Frequenzverhältnis}
 
-\textbf{[K]} Für geschlossene Trajektorien im Phasenraum entscheidet die
-\emph{logarithmische Windungszahl}
-\begin{equation}
-  W = \log_2(r),
-\end{equation}
-nicht das Frequenzverhältnis $r$ selbst. Die Unterscheidung ist wesentlich und
-wird häufig übersehen:
-
-\begin{center}
-\begin{tabular}{llll}
-\toprule
-Fall & Verhältnis $r$ & Windungszahl $W$ & Bahn \\
-\midrule
-Reine Quinte & $3/2$ (rational) & $0{,}584963$ (irrational) & offen \\
-Temperierte Quinte & $2^{7/12}$ (irrational) & $7/12$ (rational) & geschlossen \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-Zwölf reine Quinten, oktavreduziert, enden bei $1{,}013643$ -- der Rest ist das
-pythagoreische Komma ($23{,}46$~Cent). Zwölf temperierte Quinten enden exakt
-bei $1$.
-
-\textbf{Folge für Resonanzverfahren:} Eine ungedämpfte Resonanz auf reinen
-Zahlenverhältnissen schließt sich nicht von selbst. Geschlossene Resonanzpunkte
-erfordern ein diskretes, rationalisiertes Phasenraster -- die Schließung ist
-ein Artefakt der Diskretisierung, nicht eine Eigenschaft der Arithmetik.
+\textbf{[K]} Für geschlossene Trajektorien entscheidet die Windungszahl
+$W = \log_2(r)$, nicht $r$ selbst. Reine Quinte: $W = 0{,}5850$
+(irrational) $\to$ offen. Temperierte: $W = 7/12$ (rational)
+$\to$ geschlossen nach 12 Schritten. Schließung ist ein Artefakt der
+Rationalisierung.
 
 \section{Strukturelle Skalierungsgrenze}
 
 \subsection{Die Weyl-Obstruktion}
 
-\textbf{[K]} Nach dem Weyl-Gesetz wächst das Laplace-Spektrum \emph{jeder}
-kompakten Mannigfaltigkeit nach einem Potenzgesetz:
-\begin{equation}
-  N(\lambda) \sim C_d \cdot \mathrm{Vol} \cdot \lambda^{d/2}.
-\end{equation}
-Krümmung, Rand und Orbifold-Punkte ändern nur niedrigere Ordnungen.
+\textbf{[K]} Das Laplace-Spektrum jeder kompakten Mannigfaltigkeit
+wächst nach $N(\lambda) \sim C_d\lambda^{d/2}$; die arithmetische
+Zähldichte nach $N(T) \sim T\ln T$ -- keine Potenz. Ein kompakter
+Resonanzraum kann ein Spektrum der Dichte $T\ln T$ nicht tragen.
 
-Die arithmetische Zähldichte wächst dagegen nach Riemann-von Mangoldt
-(bewiesen):
-\begin{equation}
-  N(T) = \frac{T}{2\pi}\ln\frac{T}{2\pi} - \frac{T}{2\pi} + \frac78 + O(1/T).
-\end{equation}
-
-$T \ln T$ ist keine Potenz. Der lokale Exponent
-$\mathrm{d}\ln N / \mathrm{d}\ln T = 1 + 1/\ln(T/2\pi)$ ist nie konstant.
-
-\begin{keyresult}[Grenze auf Satzebene]
-Ein kompakter Resonanzraum -- gleich welcher Dimension, Krümmung oder
-Diskretisierung -- kann ein Spektrum der Dichte $T\ln T$ prinzipiell nicht
-tragen. Er trägt endlich viele Moden; die arithmetische Dichte wächst
-schneller.
-\end{keyresult}
-
-\textbf{Folge für die Faktorisierung:} Das Versagen resonanzbasierter
-Verfahren bei kryptographisch relevanten Bitgrößen ist nicht allein eine Frage
-der Fließkommagenauigkeit. Es ist eine strukturelle Grenze: Die Zahl der
-benötigten unterscheidbaren Moden wächst schneller, als ein endlicher
-Resonanzraum sie bereitstellen kann.
+\textbf{Abgrenzung.} Diese Obstruktion trifft nicht Shors Algorithmus.
+Shor sucht eine Periode einer konkreten Zahl (endliche Aufgabe, $2n+3$
+Qubits). Was Shor bei großen $n$ begrenzt, ist die Gatterzahl
+($\sim n^3$) und der Fehlerkorrektur-Overhead -- eine
+\emph{Ressourcengrenze}.
 
 \subsection{Die Präzisionsbarriere}
 
-Zusätzlich zur strukturellen Grenze besteht eine praktische. Für eine scharfe
-Trennung benachbarter Perioden bei $r \approx N$ ist eine Frequenzauflösung
-\begin{equation}
-  \Delta f_{\text{erf}} \approx \frac{f_0}{N^2}
-\end{equation}
-erforderlich. Für RSA-relevante $N$ (2048 Bit) liegt das weit unterhalb jeder
-verfügbaren Zahlendarstellung.
+Für scharfe Trennung bei $r \approx n$ ist $\Delta f \approx f_0/n^2$
+nötig -- bei RSA-Größen unterhalb jeder verfügbaren Zahldarstellung.
 
 \section{Vergleich der Verfahren}
 
@@ -173,44 +244,28 @@ verfügbaren Zahlendarstellung.
 \toprule
 Verfahren & Prinzip & Schließungsbedingung & Grenze \\
 \midrule
-Probeteilung & Direkte Division & Diskrete Arithmetik & $O(\sqrt{N})$ \\
-Pollard $\rho$ & Zyklensuche & Geburtstagsparadoxon & $O(N^{1/4})$ \\
-Resonanzfilter & Spektralsuche & Rationalisiertes Raster & Weyl-Obstruktion \\
-Shors QFT & Quanteninterferenz & Diskrete Phase & siehe unten \\
+Probeteilung & Division & Diskrete Arithmetik & $O(\sqrt{n})$ \\
+Pollard $\rho$ & Zyklensuche & Geburtstagsparadoxon & $O(n^{1/4})$ \\
+Resonanzfilter & Spektralsuche & Rationalisiertes Raster & $O(n)$ \\
+Shors QFT & Quanteninterferenz & Diskrete Phase &
+  Ressourcengrenze \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\textbf{Zu Shors Algorithmus.} Er zerfällt in zwei Teile. Die Auswertung von
-$f(x) = a^x \bmod N$ ist klassische Arithmetik und benötigt eine Gatterzahl,
-die mit der Bitgröße wächst. Die anschließende Quanten-Fouriertransformation
-findet die Periode in den bereits präparierten Zuständen. Auf Quantenhardware
-erreicht das Verfahren theoretisch $O((\log N)^3)$; praktisch limitiert die
-Zustandspräparation.
+Die Aufbereitung (modulare Exponentiation) macht etwa \textbf{95\,\%}
+der Gatterkosten aus; die QFT nur 5\,\% (Dok.~176, August 2026).
 
-\textbf{[X]} Ein allgemeiner exponentieller Vorteil von Quantenrechnern
-gegenüber klassischen Verfahren ist nicht nachgewiesen. Shor ist ein
-spezifisches Problem mit theoretischem Quantenvorteil, kein Beleg für einen
-generellen.
+\textbf{[X]} Ein allgemeiner exponentieller Quantenvorteil ist nicht
+nachgewiesen.
 
 \section{Was die Fouriertransformation leistet}
 
-\textbf{[K]} Eine Fouriertransformation -- klassisch, optisch oder als QFT --
-ist eine \emph{Projektion}. Sie übersetzt eine Darstellung in eine andere und
-erzeugt dabei keine neue Information. Was in den Eingangsdaten nicht enthalten
-ist, erscheint nicht in der Ausgabe.
-
-Das ist an den Riemann-Nullstellen direkt gemessen (Dok.~316): Die
-Fouriertransformierte zeigt Peaks bei $\ln 2, \ln 3, \ln 5, \ln 7, \ln 11,
-\ln 13$ -- weil diese Information über das Euler-Produkt bereits in den
-Nullstellen steckt. Sie zeigt keinen Peak bei zusammengesetzten Argumenten.
-
-\textbf{Folge:} Ein spektrales Verfahren kann die Periode \emph{finden}, wenn
-sie in den präparierten Daten vorhanden ist. Es kann sie nicht \emph{erzeugen}.
-Die Beschaffung der Eingangsdaten -- die modulare Exponentiation -- bleibt der
-limitierende Schritt und macht etwa \textbf{95\,\%} der gesamten
-Gatterkosten aus; die eigentliche Fouriertransformation nur rund 5\,\%
-(Dok.~176, August 2026).
+\textbf{[K]} Die Fouriertransformation ist eine \emph{Projektion}: Sie
+übersetzt eine Darstellung, erzeugt aber keine neue Information.
+Gemessen an den Riemann-Nullstellen (Dok.~316): Peaks bei
+$\ln 2,\ln 3,\ln 5,\ln 7,\ln 11,\ln 13$, weil dort Information
+vorhanden ist; keine Peaks bei zusammengesetzten Argumenten.
 
 \section{Bilanz}
 
@@ -219,44 +274,28 @@ Gatterkosten aus; die eigentliche Fouriertransformation nur rund 5\,\%
 \toprule
 Aussage & Status \\
 \midrule
+RSA-Korrektheit (Euler, CRT) & \textbf{[K]} bewiesen \\
 Periodenfindung ist ein Spektralproblem & \textbf{[K]} \\
-Primzahlen sind die Generatoren der Resonanzstruktur & \textbf{[K]} bikohärenzgemessen \\
-Windungszahl entscheidet über Schließung, nicht $r$ & \textbf{[K]} \\
-Skalierungsgrenze folgt aus der Weyl-Obstruktion & \textbf{[K]} Satzebene \\
-$\sigma$-Raster erzeugen physikalische Resonanzen & \textbf{[X]} numerische Heuristik \\
-$\xi = 4/30000$ trägt zur Faktorisierung bei & \textbf{[X]} Geometrieparameter \\
-Allgemeiner Quantenvorteil bei Faktorisierung & \textbf{[X]} nicht nachgewiesen \\
-Fouriertransformation erzeugt arithmetische Information & \textbf{[X]} Projektion \\
+Primzahlen sind die Generatoren & \textbf{[K]} bikohärenzgemessen \\
+Windungszahl entscheidet über Schließung & \textbf{[K]} \\
+Aufbereitung $\approx 95\,\%$ der Gatterkosten & \textbf{[K]} \\
+$\sigma$-Raster erzeugen Resonanzen & \textbf{[X]} Abtastartefakt \\
+$\xi=4/30000$ trägt zur Faktorisierung bei & \textbf{[X]} Geometrieparameter \\
+Klassische Periodensuche $O((\log n)^3)$ & \textbf{[X]} widerlegt \\
+Weyl-Obstruktion limitiert Shor & \textbf{[X]} Ressourcengrenze \\
+Fouriertransformation erzeugt Information & \textbf{[X]} Projektion \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\textbf{Der tragende Satz.} Die Resonanzbeschreibung der Periodenfindung ist
-richtig, aber ihre Träger sind die Primzahlen. Ein einstellbares Suchraster
-erzeugt keine Resonanzen, sondern tastet einen Suchraum ab. Und die
-Skalierungsgrenze ist nicht technisch, sondern strukturell: Ein kompakter
-Resonanzraum kann die arithmetische Dichte nicht tragen.
+\section{Verifikation}
+
+Skripte in \texttt{2/python/Shor\_Skripte/} (Standardbibliothek,
+Assertions, Seed 20780458): \texttt{s1\_periodensuche.py},
+\texttt{s2\_grenzen.py}, \texttt{s3\_thermik\_zustandsraum.py}.
 
 \section{Bezug zum Korpus}
 
-Die hier verwendeten Befunde stammen aus Dok.~316 (FFGFT und die Riemannsche
-Zeta-Funktion, August 2026): die Weyl-Obstruktion, der Bikohärenztest, die
-Unterscheidung Windungszahl/Frequenzverhältnis und die Einordnung der
-Fouriertransformation als Projektion. Die Überarbeitung dieses Dokuments ist
+Dok.~316 (August 2026): Weyl-Obstruktion, Bikohärenztest,
+Windungszahl, Fouriertransformation als Projektion. Überarbeitung
 unter R75 in Dok.~190 deklariert.
-
-\section{Verifikation}
-
-Die Aussagen sind durch zwei Skripte reproduzierbar (reine
-Standardbibliothek, Sollwerte als Assertions, Seed 20780458):
-
-\begin{itemize}
-  \item \texttt{s1\_periodensuche.py} -- Korrektheit der Periodenfindung
-    (sieben Semiprimzahlen vollständig faktorisiert), Skalierungsmessung
-    über die mittlere multiplikative Ordnung (Wachstumsexponent $0{,}95$,
-    also praktisch $O(N)$), Primfaktorzerlegung aller $\sigma$-Nenner,
-    Vergleich mit Probeteilung und Pollard~$\rho$.
-  \item \texttt{s2\_grenzen.py} -- Weyl-Obstruktion gegen äquidistantes
-    Register, Abgrenzung von Shors Aufgabe, Ressourcenabschätzung für
-    RSA-Größen, Windungszahl-Probe.
-\end{itemize}
