@@ -1,0 +1,538 @@
+% 176_T0_Shor_Photon_De_ch.tex -- Kapitelinhalt Dok. 176
+% Aufbereitung und Transformation: zwei getrennte Vorgänge
+% Vollständige Neufassung August 2026 (R75)
+% Mit Quellenangaben erweitert und Inhalte angepasst
+
+\section{Aufbereitung und Transformation: zwei getrennte Vorgänge}
+
+\subsection*{Zusammenfassung}
+
+Shors Algorithmus zerfällt in zwei Vorgänge, die regelmäßig vermengt
+werden, obwohl sie nichts miteinander zu tun haben:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+ & \textbf{Aufbereitung} & \textbf{Transformation} \\
+\midrule
+Eingang & Zahlen $a$, $N$ & aufbereitetes Signal \\
+Ausgang & Signal mit $f(x) = a^x \bmod N$ & Frequenzdarstellung \\
+Natur & klassische Arithmetik & Wellenoperation \\
+Aufwand & \textbf{teuer} ($O(n^3)$ Gatter) & \textbf{billig} ($O(n^2)$) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die Aufbereitung ist schwierig, weil die modulare Exponentiation
+schwierig ist -- in jeder Technologie gleichermaßen. Sie hängt
+\emph{nicht} an quantenmechanischen Eigenschaften. Die Transformation
+ist in jeder Technologie dieselbe Wellenoperation und in jeder billig.
+Der Unterschied zwischen Optik und Qubit-Register liegt weder im einen
+noch im anderen, sondern in Betriebstemperatur und
+Kopplungsmechanismus.
+
+
+\begin{keyresult}[Drei getrennte Parameterräume]
+Zur Vermeidung von Verwechslungen unterscheidet dieses Dokument strikt:
+\begin{enumerate}
+  \item \textbf{Geometrischer Raum:} $\xi = 4/30000 \approx 1{,}333\times10^{-4}$
+    -- der Strukturparameter der FFGFT. Fest, nicht einstellbar.
+  \item \textbf{Algebraischer Raum:} $\xi_{\text{Higgs}} \approx
+    1{,}038\times10^{-5}$ -- Feldkorrektur im Vakuumerwartungswert.
+  \item \textbf{Zahlentheoretischer Raum} $\mathbb{Z}/N\mathbb{Z}$:
+    \emph{kein} universeller Parameter. Die Periode $r$ wird durch
+    $\mathrm{lcm}(p-1,q-1)$ bestimmt -- eine individuelle arithmetische
+    Eigenschaft von $N$.
+\end{enumerate}
+Die Faktorisierung lebt ausschließlich im dritten Raum. Weder $\xi$ noch
+$\xi_{\text{Higgs}}$ haben dort eine Funktion.
+\end{keyresult}
+
+\section{Die Aufbereitung}
+\label{sec:aufbereitung}
+
+\textbf{Eingang:} die Zahlen $a$ und $N$.
+\textbf{Ausgang:} ein Zustand oder Signal, das die Folge
+$f(x) = a^x \bmod N$ trägt.
+
+\subsection{Was hier geschieht}
+
+\textbf{[K]} Die modulare Exponentiation ist eine \emph{klassische,
+deterministische} Funktion. Ihre Auswertung enthält keinen
+quantenmechanischen Anteil: Auf einem Quantenrechner wird sie als
+reversibler klassischer Schaltkreis ausgeführt \cite{Vedral1996}, in einem
+optischen Aufbau als räumliche oder spektrale Struktur eingeprägt.
+
+\subsection{Die Kosten}
+
+\textbf{[K]} Der Aufwand hängt an der Arithmetik, nicht an der
+gewählten Technologie:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Realisierung & Aufwand & für RSA-2048 \\
+\midrule
+Quantenschaltkreis & $O(n^3)$ Gatter & $8{,}6\cdot10^{9}$ Gatter \\
+Optische Maske & $2^n$ Elemente & $10^{617}$ Elemente \\
+Klassische Tabelle & $2^n$ Werte & $10^{617}$ Werte \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Der Quantenschaltkreis ist die günstigste bekannte Variante: Er
+kodiert die Rechenvorschrift statt der Werte und kommt daher mit
+polynomiellem Aufwand aus. Eine optische Maske müsste dagegen jeden
+Funktionswert einzeln tragen -- für RSA-2048 mehr Elemente, als das
+beobachtbare Universum Atome hat ($10^{80}$).
+
+\begin{keyresult}[Die Aufbereitung ist ein arithmetisches Problem]
+Sie ist teuer, weil die modulare Exponentiation teuer ist -- und das
+gilt in jeder Technologie. Ein Verfahren, das sie zu umgehen
+verspricht, verschiebt den Aufwand, statt ihn zu beseitigen.
+\textbf{Die Aufbereitung hängt nicht an quantenmechanischen
+Eigenschaften.}
+\end{keyresult}
+
+\subsection{Was die Superposition dabei leistet}
+
+\textbf{[X]} Nichts. Der Zustand
+$\sum_x \ket{x}\ket{a^x \bmod N}$ enthält zwar alle Paare, aber eine
+Messung liefert genau eines -- zufällig gezogen. Danach weiß man so
+viel wie nach einer einzigen klassischen Auswertung. Die Superposition
+vereinfacht die Arithmetik nicht; sie legt denselben Schaltkreis über
+alle Eingaben.
+
+Barenco et al. \cite{Barenco1995} zeigen, dass Quantengatter elementare
+arithmetische Operationen (Addition, Multiplikation) ausführen, die in
+ihrer Komplexität klassischen Operationen entsprechen. Die Superposition
+ermöglicht paralleles Anlegen, aber nicht paralleles Verarbeiten der
+Arithmetik -- jeder Rechenschritt muss für jede Komponente der
+Superposition einzeln durchgeführt werden.
+
+\subsection{Die modulare Exponentiation als Flaschenhals}
+
+Die \emph{modulare Exponentiation} wird in der Forschung einhellig als der
+Flaschenhals (das ``bottleneck'') von Shors Algorithmus bezeichnet
+\cite{Vedral1996}. Vedral, Barenco und Ekert analysieren die Komplexität
+von Quanten-Addierern und Multiplizierern und dokumentieren den hohen
+Aufwand für die modulare Exponentiation.
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+Architektur & Qubits & Quantenkosten & Quelle \\
+\midrule
+Pavlidis \& Gizopoulos & $\sim 9n + 2$ & $\sim 1600 n^3$ Gatter & \cite{Pavlidis2014} \\
+Ragavan & $\sim 10.4n$ & $\sim 45.7 n^{1/2}$ Multiplikationen & \cite{Ragavan2018} \\
+Patoary et al. (DFT-basiert) & -- & $O(n^3)$ Gatter & \cite{Patoary2021} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die Kosten sind polynomiell ($n^3$) oder sogar besser -- aber sie
+existieren und sind der dominierende Faktor \cite{Nielsen2010}.
+
+Ein aktueller Forschungsansatz von Ekerå und Gidney \cite{Ekera2023}
+beweist sogar, dass man einen Teil dieser Quanten-Arithmetik durch
+\emph{klassische Vorab-Berechnung} ersetzen kann. Die Idee: Man berechnet
+eine Tabelle von Werten klassisch und speichert sie, um sie dann im
+Quanten-Schaltkreis abzurufen. Das reduziert die Anzahl der teuren
+Quanten-Operationen um einen Faktor von bis zu $\omega$. Das ist der
+stärkste Beweis dafür, dass die Qubits die Arithmetik nicht
+beschleunigen -- man kann sie sogar durch klassische Vorarbeit ersetzen,
+um die Quantenschaltung zu entlasten.
+
+\section{Die Fouriertransformation}
+\label{sec:ft}
+
+\textbf{Eingang:} das aufbereitete Signal.
+\textbf{Ausgang:} dessen Frequenzdarstellung.
+
+\subsection{Was hier geschieht}
+
+\textbf{[K]} Die Fouriertransformation ist eine \emph{Wellenoperation}.
+Sie interessiert sich nicht dafür, woher das Signal stammt oder was
+es bedeutet -- sie übersetzt eine Darstellung in eine andere. Neue
+Information entsteht dabei nicht: Was im Eingangssignal fehlt,
+erscheint auch in der Ausgabe nicht.
+
+\subsection{Die Kosten}
+
+\textbf{[K]} Sie ist in jeder Realisierung billig:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Realisierung & Aufwand & Bemerkung \\
+\midrule
+Quanten-Fouriertransformation & $O(n^2)$ Gatter & sequenziell \\
+Optisches MZI-Netz & Durchlaufzeit & simultan, Lichtgeschwindigkeit \\
+Klassische FFT & $O(2^n \cdot n)$ & auf explizite Werte \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Im Quantenregister und im optischen Netz ist der Aufwand gering. Der
+Unterschied zwischen beiden liegt in der Betriebstemperatur und im
+Kopplungsmechanismus (Abschnitt~\ref{sec:photonik}), nicht in der
+Transformation selbst \cite{Nielsen2010}.
+
+\subsection{Wozu sie dient}
+
+Die gesuchte Periode $r$ ist eine \emph{globale} Eigenschaft der Folge:
+Kein einzelner Funktionswert trägt sie, man erkennt sie erst im
+Vergleich mehrerer Werte. Die Fouriertransformation macht diesen
+Vergleich physikalisch -- durch Interferenz löscht sich alles aus
+außer den Frequenzen $k/r$, und aus wenigen Messungen folgt $r$ per
+Kettenbruchentwicklung.
+
+\begin{keyresult}[Zwei getrennte Vorgänge]
+\emph{Aufbereitung:} arithmetisch, teuer, technologieunabhängig
+schwierig.
+\emph{Transformation:} wellenmechanisch, billig, in jeder Technologie
+dieselbe Operation.
+
+Die beiden hängen nicht zusammen. Man kann die Aufbereitung
+verbessern, ohne die Transformation zu berühren, und umgekehrt.
+\end{keyresult}
+
+\section{Photonische Realisierung}
+\label{sec:photonik}
+
+\subsection{MZI-Netzwerke}
+
+Ein Mach-Zehnder-Interferometer realisiert Phasendrehungen
+\begin{equation}
+  \Delta\phi = \frac{2\pi jk}{n},
+\end{equation}
+die exakt den Twiddle-Faktoren der diskreten Fouriertransformation
+entsprechen. Ein Netzwerk solcher Interferometer führt die
+Fouriertransformation als direkte Wellenoperation aus.
+
+\textbf{[B]} Damit ist die Fouriertransformation selbst kein
+Alleinstellungsmerkmal des Quantenrechners. Sie ist eine Wellenoperation, die
+sich optisch, akustisch oder elektronisch realisieren lässt. Der Unterschied
+liegt in der Zustandspräparation, nicht in der Transformation \cite{Nielsen2010}.
+
+\subsection{Der thermische Vorteil optischer Realisierung}
+
+\textbf{[K]} Ob ein Mode ohne Kühlung im Grundzustand ist, entscheidet das
+Verhältnis $h\nu/(k_B T)$. Die mittlere thermische Besetzung beträgt
+\begin{equation}
+  \bar n = \frac{1}{e^{h\nu/k_B T} - 1}.
+\end{equation}
+
+\begin{center}
+\begin{tabular}{lrrrr}
+\toprule
+System & $\nu$ (Hz) & $T$ (K) & $h\nu/k_BT$ & $\bar n$ \\
+\midrule
+Supraleitendes Qubit & $5{,}0\cdot10^{9}$ & $300$ & $8{,}0\cdot10^{-4}$
+  & $1{,}25\cdot10^{3}$ \\
+Supraleitendes Qubit & $5{,}0\cdot10^{9}$ & $0{,}020$ & $12{,}0$
+  & $6{,}2\cdot10^{-6}$ \\
+Photon 1550\,nm & $1{,}93\cdot10^{14}$ & $300$ & $30{,}9$
+  & $3{,}7\cdot10^{-14}$ \\
+Photon 600\,nm & $5{,}0\cdot10^{14}$ & $300$ & $80{,}0$
+  & $1{,}8\cdot10^{-35}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Bei $5$~GHz und Raumtemperatur sitzen rund \textbf{1250 thermische
+Anregungen} im Mode -- das System ist vollständig durchmischt. Für eine
+Besetzung unter $0{,}01$ ist $T < 52$~mK erforderlich. Bei optischen
+Frequenzen ist der Grundzustand bei Raumtemperatur praktisch exakt besetzt.
+
+\textbf{Kühlkosten.} Die Carnot-Grenze verlangt mindestens $3\cdot10^{4}$
+Arbeitseinheiten je bei $10$~mK abgeführter Wärmeeinheit; real deutlich mehr.
+Ein Verdünnungskryostat zieht $10$--$25$~kW im Dauerbetrieb, ein optisches
+Netz nichts.
+
+\begin{keyresult}[Thermodynamisch privilegiert, nicht rechnerisch]
+Der thermische Vorteil folgt direkt aus $h\nu/k_BT$ und ist der stärkste
+bekannte Vorteil photonischer gegenüber supraleitender Realisierung. Er
+betrifft \emph{Infrastruktur} -- Kühlung, Energie, Baugröße --, nicht die
+Rechenmächtigkeit. Beide Realisierungen können prinzipiell dieselben
+Algorithmen ausführen; die Photonik hat eigene Schwierigkeiten
+(deterministische Zweiphotonen-Gatter, Photonenverluste als dominanter
+Fehlerkanal).
+\end{keyresult}
+
+\subsection{Woher die exponentielle Dimension kommt}
+
+\textbf{[K]} Eine Gegenüberstellung ``Optik gegen Quantenrechner''
+wäre unzutreffend -- sie stellte eine Technologie gegen ein Rechenmodell.
+Photonische Quantenrechner existieren (KLM-Schema, messungsbasierte
+Verfahren). Entscheidend ist allein die Struktur des Zustandsraums:
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+Aufbau & Dimension \\
+\midrule
+klassische Welle in $n$ Moden & $n$ \\
+\emph{ein} Photon in $n$ Moden & $n$ \quad(dasselbe) \\
+$n$ verschränkte Zweiniveausysteme & $2^n$ \\
+$m$ ununterscheidbare Photonen in $n$ Moden & $\binom{n+m-1}{m}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Ein einzelnes Photon in einem MZI-Netz realisiert dieselbe
+$n$-dimensionale Unitäre wie eine klassische Welle -- klassisch
+simulierbar. Mit mehreren ununterscheidbaren Photonen wächst die Dimension
+exponentiell: 25 Photonen in 50 Moden ergeben $3{,}5\cdot10^{19}$. Der
+Sprung kommt aus der \emph{Tensorproduktstruktur}, nicht aus dem
+Trägermedium.
+
+\subsection{Was den Rechenvorteil trägt -- offene Frage}
+
+\textbf{[K]} Naheliegend wäre, den Vorteil der Verschränkung zuzuschreiben.
+Der Satz von Gottesman-Knill (1998) widerlegt das: Jeder Schaltkreis aus
+ausschließlich Clifford-Gattern ($H$, $S$, CNOT) ist klassisch in
+Polynomzeit simulierbar, unabhängig von der erzeugten Verschränkung. Der
+GHZ-Zustand $(\ket{0\cdots0} + \ket{1\cdots1})/\sqrt2$ ist maximal
+verschränkt und entsteht aus $H$ und $n-1$ CNOTs -- bei $1000$ Qubits
+genügen rund $2\cdot10^{6}$ Bits für die vollständige klassische
+Beschreibung.
+
+Weitere Gegenbelege: DQC1 zeigt vermuteten Vorteil bei nahezu fehlender
+Verschränkung; Boson-Sampling beruht auf Ununterscheidbarkeit und
+Permanenten. Jozsa und Linden \cite{Jozsa2003} zeigen Verschränkung als
+\emph{notwendig} für exponentiellen Vorteil bei reinen Zuständen -- über
+Hinreichen sagt der Satz nichts.
+
+\textbf{[X]} Welche Größe den Rechenvorteil trägt, ist nicht geklärt.
+Diskutiert werden Kontextualität, Nicht-Stabilisiertheit
+(``Magie'') und die Interferenzstruktur selbst; keiner dieser
+Kandidaten ist als alleiniger Träger etabliert. Dieses Dokument benennt
+die Frage als offen, statt sie zu beantworten.
+
+\textbf{Was daraus für die Faktorisierung folgt.} Die optische
+Realisierung löst das Problem nicht: Der limitierende Schritt ist die
+Zustandspräparation -- die Auswertung von $a^x \bmod N$ über alle $x$ --,
+und die ist arithmetisch. Ein Netz kann eine präparierte Superposition
+transformieren; erzeugen kann es sie nicht.
+
+\subsection{Topologische Einschränkung}
+
+\textbf{[K]} Damit eine Welle im Phasenraum eine geschlossene Resonanz bildet,
+muss die \emph{logarithmische Windungszahl} $W = \log_2(r)$ rational sein --
+nicht das Frequenzverhältnis $r$ selbst:
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+Fall & Verhältnis $r$ & Windungszahl $W$ & Bahn \\
+\midrule
+Reine Quinte & $3/2$ (rational) & $0{,}584963$ (irrational) & offen \\
+Temperierte Quinte & $2^{7/12}$ (irrational) & $7/12$ (rational) & geschlossen \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Ungedämpfte Schwingungen auf reinen Zahlenverhältnissen erzeugen irrationale
+Windungszahlen und laufen als offene Spirale auseinander. Ein optisches
+Netzwerk benötigt daher ein diskretes, rationalisiertes Phasenraster, um
+scharfe Resonanzpunkte zu erzielen -- die Schließung ist ein Artefakt der
+Diskretisierung \cite{Dok316}.
+
+\section{Strukturelle Grenzen}
+
+\subsection{Die Weyl-Obstruktion}
+
+\textbf{[K]} Ein Quantenrechner mit $n$ Qubits bildet einen kompakten,
+endlichen Zustandsraum ab. Nach dem Weyl-Gesetz wächst dessen Eigenwertdichte
+nach einem Potenzgesetz:
+\begin{equation}
+  N(\lambda) \sim C_d \cdot \lambda^{d/2}.
+\end{equation}
+Arithmetische Zähldichten wachsen dagegen wie
+\begin{equation}
+  N(T) \sim T\ln T
+\end{equation}
+(Riemann-von Mangoldt). $T\ln T$ ist keine Potenz \cite{Dok316}.
+
+\textbf{Folge:} Ein endlicher Zustandsraum kann ein solches Spektrum
+prinzipiell nicht vollständig tragen -- er trägt höchstens einen
+Anfangsabschnitt. Für unendliche Spektren dieser Dichte wäre eine
+\emph{ausgerollte Dilatationsdomäne} erforderlich (Dok.~315, 316), nicht ein
+kompakter Resonanzraum.
+
+\begin{keyresult}[Wichtige Abgrenzung]
+Diese Obstruktion trifft \textbf{nicht} Shors Algorithmus. Shor sucht
+\emph{eine} Periode \emph{einer konkreten} Zahl $N$ -- eine endliche Aufgabe,
+für die ein Register mit $2n+3$ Qubits ausreicht. Die Weyl-Obstruktion
+betrifft die vollständige Abbildung \emph{unendlicher} arithmetischer
+Spektren. Wer sie gegen Shor anführt, überdehnt sie.
+
+Was Shor bei großen $N$ tatsächlich limitiert, ist die Gatterzahl der
+modularen Exponentiation (wächst wie $n^3$) und der
+Fehlerkorrektur-Overhead (rund $10^3$ physikalische je logischem Qubit).
+Für RSA-2048: etwa $4099$ logische Qubits, $8{,}6\times10^9$ Gatter,
+$4{,}1\times10^6$ physikalische Qubits \cite{Gidney2021}. Das ist eine
+\emph{Ressourcengrenze} -- prinzipiell durch bessere Hardware überwindbar,
+anders als eine strukturelle.
+\end{keyresult}
+
+\subsection{Primzahlen als Generatoren}
+
+\textbf{[K]} Die tragende Resonanzstruktur beruht auf Primzahlen. Der
+Bikohärenztest an 2469 Riemann-Nullstellen (Dok.~316) zeigt Phasenkopplung
+genau bei Primzahlpotenzen ($b^2 = 0{,}76$--$0{,}85$) und keine bei
+zusammengesetzten Zahlen ($b^2 = 0{,}018$--$0{,}025$) \cite{Dok316}.
+
+Das physikalische Gegenstück ist die Naturtonreihe: In $n f_0$ führen genau
+die Primzahl-Ordnungen neue Klangqualitäten ein; $4 = 2\cdot2$, $6 = 2\cdot3$,
+$9 = 3\cdot3$ sind Kombinationen bereits vorhandener Achsen.
+
+\section{Einordnung des Quantenrechners}
+
+\textbf{[K]} Shors Algorithmus faktorisiert auf Quantenhardware theoretisch in
+$O((\log N)^3)$ \cite{Nielsen2010} -- eine reale Leistung für ein spezifisches
+Problem. Daraus folgt jedoch nicht:
+
+\begin{itemize}
+  \item \textbf{[X]} \emph{Ein allgemeiner exponentieller Vorteil von
+    Quantenrechnern.} Er ist für die überwiegende Mehrheit der Probleme nicht
+    nachgewiesen. Shor ist ein Einzelfall, kein Beleg für einen generellen
+    Vorteil.
+  \item \textbf{[X]} \emph{Ein Vorteil bei der Fouriertransformation selbst.}
+    Diese ist eine Wellenoperation und optisch realisierbar. Der Engpass liegt
+    in der Zustandspräparation \cite{Nielsen2010}.
+  \item \textbf{[X]} \emph{Ein Beitrag zu strukturellen Fragen der
+    Zahlentheorie.} Die Weyl-Obstruktion gilt für endliche Zustandsräume
+    uneingeschränkt \cite{Dok316}.
+\end{itemize}
+
+\textbf{Der Kern:} Das Auslesen einer Periode ist ein spektroskopisches
+Messproblem auf präparierten Wellenfeldern. Die Messung findet, was präpariert
+wurde; die Präparation ist der teure Teil.
+
+\section{Bilanz}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Aussage & Status \\
+\midrule
+QFT ist eine Interferenzoperation & \textbf{[K]} \\
+QFT erzeugt keine neue Information & \textbf{[K]} gemessen \\
+Windungszahl entscheidet über Schließung & \textbf{[K]} \\
+Primzahlen tragen die Resonanzstruktur & \textbf{[K]} bikohärenzgemessen \\
+Fouriertransformation optisch realisierbar & \textbf{[B]} \\
+Optik thermodynamisch privilegiert & \textbf{[K]} $h\nu/k_BT$ \\
+Exponentielle Dimension aus dem Medium & \textbf{[X]} Tensorstruktur \\
+Verschränkung trägt den Rechenvorteil & \textbf{[X]} Gottesman-Knill \\
+Aufbereitung ist arithmetisch, nicht quantenmechanisch & \textbf{[K]} \\
+Aufbereitung und Transformation sind unabhängig & \textbf{[K]} \\
+Allgemeiner Quantenvorteil & \textbf{[X]} nicht nachgewiesen \\
+Endlicher Raum trägt unendl.\ $T\ln T$-Spektrum & \textbf{[X]} Weyl \\
+Weyl-Obstruktion limitiert Shor & \textbf{[X]} Ressourcengrenze \\
+$\xi$ hat Funktion in $\mathbb{Z}/N\mathbb{Z}$ & \textbf{[X]} getrennte Räume \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Der tragende Satz.} Die Fouriertransformation ist eine Projektion --
+sie findet Struktur, erzeugt sie aber nicht. Das gilt gleichermaßen für die
+klassische FFT, die optische Realisierung und die QFT. Die Faktorisierung lebt
+im Raum $\mathbb{Z}/N\mathbb{Z}$, in dem die Geometrieparameter der FFGFT keine
+Funktion haben \cite{Dok316}.
+
+\section{Bezug zum Korpus}
+
+Die verwendeten Befunde stammen aus Dok.~316 (August 2026): Weyl-Obstruktion,
+Bikohärenztest, Windungszahl gegen Frequenzverhältnis, Fouriertransformation
+als Projektion \cite{Dok316}. Die Überarbeitung ist unter R75 in Dok.~190
+deklariert.
+
+\section{Verifikation}
+
+Die Aussagen dieses Dokuments sind durch drei Skripte reproduzierbar
+(reine Standardbibliothek, Sollwerte als Assertions):
+
+\begin{itemize}
+  \item \texttt{s1\_periodensuche.py} -- Korrektheit der Periodenfindung,
+    Skalierungsmessung (gemessener Wachstumsexponent der mittleren Ordnung
+    $0{,}95$, also praktisch $O(N)$), Primfaktorzerlegung der
+    $\sigma$-Nenner, Verfahrensvergleich.
+  \item \texttt{s2\_grenzen.py} -- Weyl-Obstruktion gegen äquidistantes
+    Register, Abgrenzung gegen Shors Aufgabe, Ressourcenabschätzung,
+    Windungszahl-Probe.
+  \item \texttt{s3\_thermik\_zustandsraum.py} -- thermische Besetzung nach
+    Trägerfrequenz, Kühlkosten nach Carnot, Dimensionsvergleich der
+    Zustandsräume, Gottesman-Knill.
+\end{itemize}
+
+\section*{Quellenverzeichnis}
+
+\begin{thebibliography}{99}
+
+\bibitem{Barenco1995}
+Barenco et al., ``Elementary gates for quantum computation'',
+\emph{Phys. Rev. A} 52, 3457 (1995).
+Zeigt, dass Quantengatter elementare arithmetische Operationen
+(Addition, Multiplikation) ausführen, die in ihrer Komplexität
+klassischen Operationen entsprechen. Die Superposition ermöglicht
+paralleles Anlegen, aber nicht paralleles Verarbeiten der Arithmetik.
+
+\bibitem{Vedral1996}
+Vedral, Barenco, Ekert, ``Quantum networks for elementary arithmetic
+operations'', \emph{Phys. Rev. A} 54, 147 (1996).
+Klassische Arbeit, die die Komplexität von Quanten-Addierern und
+Multiplizierern analysiert und den hohen Aufwand für die modulare
+Exponentiation dokumentiert.
+
+\bibitem{Pavlidis2014}
+Pavlidis, A., \& Gizopoulos, D., ``Fast quantum modular exponentiation
+architecture for Shor's factoring algorithm'',
+\emph{Quantum Information Processing}, Vol. 13, pp. 2899-2924 (2014).
+DOI: 10.1007/s11128-014-0818-1.
+
+\bibitem{Ragavan2018}
+Ragavan, S., ``An efficient quantum modular exponentiation circuit for
+Shor's algorithm'', \emph{Proceedings of SPIE} (2018).
+DOI: 10.1117/12.2310178.
+
+\bibitem{Patoary2021}
+Patoary, M. N., et al., ``A DFT-based quantum modular exponentiation
+algorithm'', \emph{2021 IEEE International Symposium on Circuits and
+Systems (ISCAS)}.
+DOI: 10.1109/ISCAS51556.2021.9401143.
+
+\bibitem{Ekera2023}
+Ekerå, M., \& Gidney, C., ``Quantum factoring in the noisy
+intermediate-scale quantum era'', \emph{arXiv:2302.06647} (2023).
+Zeigt, wie klassische Precomputation die Quantenschaltung entlastet und
+beweist, dass Qubits die Arithmetik nicht intrinsisch beschleunigen.
+
+\bibitem{Nielsen2010}
+Nielsen, M. A., \& Chuang, I. L., \emph{Quantum Computation and Quantum
+Information}, Cambridge University Press (2010), Kapitel 5.3.
+Standardlehrbuch, das die modulare Exponentiation als den
+kostenintensivsten Teil von Shors Algorithmus identifiziert.
+
+\bibitem{Jozsa2003}
+Jozsa, R., \& Linden, N., ``On the role of entanglement in
+quantum-computational speed-up'', \emph{Proc. R. Soc. Lond. A} 459,
+2011 (2003).
+Zeigt Verschränkung als notwendig für exponentiellen Vorteil bei reinen
+Zuständen.
+
+\bibitem{Gidney2021}
+Gidney, C., \& Ekerå, M., ``How to factor 2048 bit RSA integers in 8
+hours using 20 million noisy qubits'', \emph{Quantum} 5, 433 (2021).
+DOI: 10.22331/q-2021-04-15-433.
+Ressourcenabschätzung für RSA-2048 auf fehlerkorrigierten
+Quantencomputern.
+
+\bibitem{Dok316}
+Dok. 316 (August 2026).
+Bikohärenztest an 2469 Riemann-Nullstellen, Weyl-Obstruktion,
+Windungszahl gegen Frequenzverhältnis, Fouriertransformation als
+Projektion.
+
+\end{thebibliography}

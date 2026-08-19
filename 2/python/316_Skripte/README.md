@@ -11,6 +11,8 @@ Standard library only, target values as assertions, seed 20780458.
 | `z4_epstein_casimir.py` | Faktorisierung gegen Direktsumme; Casimir-Symmetriepunkt | [K] verifiziert |
 | `z5_zellbedingung_kritik.py` | Zerfall des Zellarguments in drei Stufen | [X] Rücknahme |
 | `z6_tonnetz_weil.py` | ξ als Tonnetz-Punkt; Fourier-Nachweis des Weil-Längenspektrums, Auflösungsgrenze | [X] Summe, keine Länge |
+| `z12_gitterfaktor_waermekern.py` | Jacobis Vier-Quadrate-Satz als Herkunft von (1−4^{1−s}); Schalenbesetzung D4 vs. Z⁴ | [K] Z-2 und Z-3 geklärt |
+| `z11_alphorn.py` | Naturtonreihe: Primzahlen als Generatoren, Amplitudenabfall als Tenney-Analogon, Windungszahl vs. Frequenzverhältnis, Cent-Buchhaltung | [K] physikalischer Beleg |
 | `z10_kommatest.py` | Hat der P-315-2-Rest Kommastruktur? Glattheitstest mit Kontrollprobe | [X] kein Komma |
 | `z9_limit_einschluss.py` | Fünf Lesarten der Limit-Einschließung; Ragisma und Archytas-Komma als Näherungsfehler | [X] nur genähert/temperiert |
 | `z8_bikohaerenz.py` | Nullstellen per Riemann-Siegel (2469 bis t=3000), Bikohärenz mit Phasenrandomisierung, Positiv-/Negativkontrollen | [K] Mischterme gemessen, Z-4 geschlossen |
@@ -21,7 +23,8 @@ Ausführen / run:
     for f in z1_weyl_obstruktion z2_zellbedingung z3_randbedingung_test \
              z4_epstein_casimir z5_zellbedingung_kritik z6_tonnetz_weil \
              z7_gewichtung_unmoeglich z8_bikohaerenz \
-             z9_limit_einschluss z10_kommatest; do
+             z9_limit_einschluss z10_kommatest z11_alphorn \
+             z12_gitterfaktor_waermekern; do
         python3 $f.py
     done
 

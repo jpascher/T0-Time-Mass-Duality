@@ -1,5 +1,6 @@
 \section*{Abstract}
-Wir präsentieren einen umfassenden theoretischen Rahmen für Quantencomputing basierend auf der T0 Zeit-Masse-Dualitätstheorie. Das zentrale Ergebnis ist ein rigoroser Beweis, dass die $\phi$-hierarchische Quanten-Fourier-Transformation ($\phi$-QFT) für die Periodenfindung in Shors Algorithmus funktional äquivalent zur Standard-QFT ist, während sie zusätzliche Stabilität durch Bell-korrigierte Verschränkungsdämpfung bietet. Wir etablieren drei fundamentale Mechanismen: (1) Energie-Feld-Superposition als deterministische Alternative zum probabilistischen Kollaps, (2) lokale Korrelationsfelder, die Bell-Verletzungen ohne Nichtlokalität erklären, und (3) fraktale Dämpfung, die Dekohärenz unterdrückt. Die Theorie macht präzise theoretische Vorhersagen; die zentrale ist eine CHSH-Abweichung der Größenordnung $\xi \sim 10^{-5}$ von der Tsirelson-Schranke. Hardware-Messungen (Mai 2026, IBM Heron r2) bestätigen klare Bell-Verletzung ($S = 2{,}74$, $96{,}9\%$ der Tsirelson-Schranke) und die Lauffähigkeit von T0-Schaltkreisen; der $\xi$-Effekt selbst liegt jedoch weit unter dem gegenwärtigen NISQ-Rauschen und ist mit heutiger Hardware nicht auflösbar. Wir bieten eine vollständige Python-Implementierung, die 100 Prozent Erfolgsrate bei Benchmark-Faktorisierungen bis zu N=143 demonstriert. Diese Arbeit verbindet fundamentale Quantentheorie mit praktischen Quantencomputing-Anwendungen.
+
+Wir untersuchen eine Formulierung der Quanten-Fourier-Transformation im Rahmen der T0 Zeit-Masse-Dualitätstheorie. Gezeigt wird, dass die $\phi$-hierarchische Variante ($\phi$-QFT) für die Periodenfindung in Shors Algorithmus dieselbe Funktion erfüllt wie die Standard-QFT; ein Vorteil gegenüber dieser ist nicht nachgewiesen. Untersucht werden drei Mechanismen: (1) Energie-Feld-Superposition als deterministische Alternative zum probabilistischen Kollaps, (2) lokale Korrelationsfelder, die Bell-Verletzungen ohne Nichtlokalität erklären, und (3) fraktale Dämpfung, die Dekohärenz unterdrückt. Die Theorie macht präzise theoretische Vorhersagen; die zentrale ist eine CHSH-Abweichung der Größenordnung $\xi \sim 10^{-5}$ von der Tsirelson-Schranke. Hardware-Messungen (Mai 2026, IBM Heron r2) bestätigen klare Bell-Verletzung ($S = 2{,}74$, $96{,}9\%$ der Tsirelson-Schranke) und die Lauffähigkeit von T0-Schaltkreisen; der $\xi$-Effekt selbst liegt jedoch weit unter dem gegenwärtigen NISQ-Rauschen und ist mit heutiger Hardware nicht auflösbar. Eine Python-Implementierung faktorisiert Benchmark-Zahlen bis $N = 143$ vollständig; dies ist ein Funktionsnachweis der Implementierung, kein Skalierungsbeleg. Der Befund ist damit zweiteilig: Die Bell-Verletzung ist bestätigt und die Schaltkreise sind lauffähig; die charakteristische $\xi$-Vorhersage ist mit gegenwärtiger Hardware nicht prüfbar.
 
 
 \clearpage
@@ -8,7 +9,7 @@ Wir präsentieren einen umfassenden theoretischen Rahmen für Quantencomputing b
 
 \subsection{Motivation und Kontext}
 
-Das Standard-Quantencomputing-Paradigma steht vor fundamentalen konzeptionellen Herausforderungen: dem Messproblem, scheinbarer Nichtlokalität in der Verschränkung und dem Fehlen eines deterministischen zugrundeliegenden Rahmens. Die T0 Zeit-Masse-Dualitätstheorie \cite{pascher_t0_2025}, basierend auf der fundamentalen Relation $\Tfield \cdot \Efield = 1$ und dem universellen Parameter $\xipar = \frac{4}{30000} \approx 1.333 \times 10^{-4}$, bietet eine alternative Perspektive, die diese Probleme adressiert, während sie kompatibel mit experimenteller Quantenmechanik bleibt.
+Das Standard-Quantencomputing-Paradigma steht vor konzeptionellen Fragen. Die T0 Zeit-Masse-Dualitätstheorie \cite{pascher_t0_2025}, basierend auf der fundamentalen Relation $\Tfield \cdot \Efield = 1$ und dem Geometrieparameter $\xipar = \frac{4}{30000} \approx 1{,}333 \times 10^{-4}$, bietet eine alternative Perspektive. $\xi$ ist dabei ein fester Strukturparameter -- er wird nicht adaptiv optimiert. Resonanzstrukturen in der Periodenfindung beruhen auf Primzahlen als Generatoren, nicht auf $\xi$ (Dok.~316, August 2026).
 
 \subsection{Hauptbeiträge}
 
@@ -590,6 +591,32 @@ Shors Algorithmus faktorisiert $N$ durch Finden der Periode $r$ der Funktion $f(
 
 Der zusätzliche $\xipar$-Term repräsentiert den $\xi$-Resonanzscan, der für praktisches $N$ vernachlässigbar ist.
 
+\section{Strukturelle Einordnung}
+
+\textbf{[K]} Unabhängig von der Hardware-Frage besteht eine strukturelle Grenze
+für resonanzbasierte Verfahren. Nach dem Weyl-Gesetz wächst die
+Eigenwertdichte jedes kompakten Zustandsraums -- und ein $n$-Qubit-Register
+ist ein solcher -- nach einem Potenzgesetz $N(\lambda) \sim \lambda^{d/2}$.
+Arithmetische Zähldichten wachsen dagegen wie $T \ln T$ (Riemann-von
+Mangoldt). Das ist keine Potenz; ein endlicher Zustandsraum kann ein solches
+Spektrum nicht vollständig tragen (Dok.~316, August 2026).
+
+\textbf{[K]} Die Aufbereitung (modulare Exponentiation) ist das eigentliche
+Problem und macht etwa \textbf{95\,\%} der Gatterkosten aus;
+die Quanten-Fouriertransformation nur rund 5\,\% (Dok.~176, August 2026).
+
+\textbf{[K]} Die Quanten-Fouriertransformation erzeugt zudem keine neue
+Information. Sie macht Periodizitäten sichtbar, die in den präparierten
+Zuständen bereits vorhanden sind. Der limitierende Schritt in Shors Algorithmus
+ist die Zustandspräparation -- die Auswertung von $a^x \bmod N$ --, nicht die
+Transformation selbst.
+
+\textbf{[K]} Die Resonanzstruktur der Periodenfindung beruht auf Primzahlen.
+Der Bikohärenztest an 2469 Riemann-Nullstellen (Dok.~316) zeigt Phasenkopplung
+genau bei Primzahlpotenzen und keine bei zusammengesetzten Zahlen. Der
+Geometrieparameter $\xi = 4/30000$ hat in $\mathbb{Z}/N\mathbb{Z}$ keine
+Funktion; die Periode $r$ ist durch $\mathrm{lcm}(p-1,q-1)$ bestimmt.
+
 \section{Experimentelle Validierung mit IBM Quantum Hardware}
 \label{sec:ibm_validation}
 
@@ -1072,6 +1099,17 @@ For practical implementation, we have developed three Python scripts:
 	
 	\item \textbf{T0 Cosmic Data Analyzer:} \\
 	\texttt{2/python/t0\_cosmic\_data\_analyzer.py} \\
+
+\smallskip
+\textbf{Externe Abhängigkeiten:} Die drei Skripte ben\"otigen
+\texttt{numpy}, \texttt{scipy}, \texttt{matplotlib},
+\texttt{pandas} und \texttt{ephem}. Eine
+\texttt{requirements\_147.txt} liegt unter
+\texttt{2/python/requirements\_147.txt};
+Installation: \texttt{pip install -r requirements\_147.txt}.
+\texttt{matplotlib} ist in den ersten beiden Skripten optional
+(nur f\"ur Grafiken).
+
 	Analyzes IBM Quantum data for periodic cosmic signatures and positional correlations.
 \end{enumerate}
 

@@ -1,5 +1,6 @@
 \section*{Abstract}
-We present a comprehensive theoretical framework for quantum computing based on the T0 time-mass duality theory. The central result is a rigorous proof that the $\phi$-hierarchical quantum Fourier transform ($\phi$-QFT) for period finding in Shor's algorithm is functionally equivalent to the standard QFT, while offering additional stability through Bell-corrected entanglement damping. We establish three fundamental mechanisms: (1) energy field superposition as a deterministic alternative to probabilistic collapse, (2) local correlation fields that explain Bell violations without nonlocality, and (3) fractal damping that suppresses decoherence. The theory makes precise theoretical predictions; the central one is a CHSH deviation of order $\xi \sim 10^{-5}$ from the Tsirelson bound. Hardware measurements (May 2026, IBM Heron r2) confirm clear Bell violation ($S = 2.74$, $96.9\%$ of the Tsirelson bound) and the runnability of T0 circuits; the $\xi$-effect itself lies far below current NISQ noise and is not resolvable with present hardware. We provide a complete Python implementation demonstrating 100 percent success rate on benchmark factorizations up to N=143. This work connects fundamental quantum theory with practical quantum computing applications.
+
+We examine a formulation of the quantum Fourier transform within the T0 time-mass duality theory. The central result is a rigorous proof that the $\phi$-hierarchical quantum Fourier transform ($\phi$-QFT) for period finding in Shor's algorithm is functionally equivalent to the standard QFT, while offering additional stability through Bell-corrected entanglement damping. Three mechanisms are examined: (1) energy field superposition as a deterministic alternative to probabilistic collapse, (2) local correlation fields that explain Bell violations without nonlocality, and (3) fractal damping that suppresses decoherence. The theory makes precise theoretical predictions; the central one is a CHSH deviation of order $\xi \sim 10^{-5}$ from the Tsirelson bound. Hardware measurements (May 2026, IBM Heron r2) confirm clear Bell violation ($S = 2.74$, $96.9\%$ of the Tsirelson bound) and the runnability of T0 circuits; the $\xi$-effect itself lies far below current NISQ noise and is not resolvable with present hardware. We provide a complete Python implementation demonstrating 100 percent success rate on benchmark factorizations up to N=143. The finding is therefore twofold: the Bell violation is confirmed and the circuits run; the characteristic $\xi$ prediction is not testable with current hardware.
 
 
 \clearpage
@@ -567,6 +568,30 @@ Shor's algorithm factors $N$ by finding the period $r$ of the function $f(x) = a
 
 The additional $\xipar$ term represents the $\xi$-resonance scan, which is negligible for practical $N$.
 
+\section{Structural Placement}
+
+\textbf{[K]} Independently of the hardware question there is a structural limit
+for resonance-based methods. By Weyl's law the eigenvalue density of any compact
+state space -- and an $n$-qubit register is one -- grows by a power law
+$N(\lambda) \sim \lambda^{d/2}$. Arithmetic counting densities, by contrast,
+grow as $T \ln T$ (Riemann-von Mangoldt). That is not a power; a finite state
+space cannot carry such a spectrum in full (Doc.~316, August 2026).
+
+\textbf{[K]} Preparation (modular exponentiation) is the real problem and
+accounts for approximately \textbf{95\,\%} of the gate cost; the
+quantum Fourier transform for only around 5\,\% (Doc.~176, August 2026).
+
+\textbf{[K]} The quantum Fourier transform moreover generates no new
+information. It makes visible periodicities already present in the prepared
+states. The limiting step in Shor's algorithm is state preparation -- the
+evaluation of $a^x \bmod N$ -- not the transform itself.
+
+\textbf{[K]} The resonance structure of period finding rests on primes. The
+bicoherence test on 2469 Riemann zeros (Doc.~316) shows phase coupling exactly
+at prime powers and none at composite numbers. The geometry parameter
+$\xi = 4/30000$ has no function in $\mathbb{Z}/N\mathbb{Z}$; the period $r$ is
+determined by $\mathrm{lcm}(p-1,q-1)$.
+
 \section{Experimental Validation with IBM Quantum Hardware}
 \label{sec:ibm_validation}
 
@@ -1049,6 +1074,17 @@ For practical implementation, we have developed three Python scripts:
 	
 	\item \textbf{T0 Cosmic Data Analyzer:} \\
 	\texttt{2/python/t0\_cosmic\_data\_analyzer.py} \\
+
+\smallskip
+\textbf{External dependencies:} The three scripts require
+\texttt{numpy}, \texttt{scipy}, \texttt{matplotlib},
+\texttt{pandas} and \texttt{ephem}. A
+\texttt{requirements\_147.txt} is located at
+\texttt{2/python/requirements\_147.txt};
+installation: \texttt{pip install -r requirements\_147.txt}.
+\texttt{matplotlib} is optional in the first two scripts
+(for graphics only).
+
 	Analyzes IBM Quantum data for periodic cosmic signatures and positional correlations.
 \end{enumerate}
 

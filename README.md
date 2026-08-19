@@ -1,6 +1,6 @@
 # T0 Time-Mass Duality · FFGFT
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21821995.svg)](https://doi.org/10.5281/zenodo.21821995) <!-- v1.3.0 DOI to be assigned -->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21821995.svg)](https://doi.org/10.5281/zenodo.21821995)
 
 **FFGFT — Fundamental Fractal-Geometric Field Theory** shows:
 all Standard Model constants follow from a single dimensionless
@@ -226,7 +226,7 @@ measurable (Doc. 230).
 |----------|------|
 | 🔬 Interactive Portal | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo v1.3.0 | DOI *to be assigned* (supersedes v1.2.9 · [21821995](https://doi.org/10.5281/zenodo.21821995)) |
+| 📦 Zenodo v1.2.8 | [DOI 10.5281/zenodo.21821995](https://doi.org/10.5281/zenodo.21821995) (supersedes v1.2.7 · [21628364](https://doi.org/10.5281/zenodo.21628364)) |
 | 🎵 Spotify | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
@@ -243,13 +243,11 @@ A complete list of all ~289 documents with short description and direct PDF link
 
 | Step | Document |
 |------|----------|
-| 1. Plain language | [205_FFGFT_Narrativ_En.pdf](2/pdf/205_FFGFT_Narrativ_En.pdf) — **recommended entry point** |
-| 2. Thermodynamics overview | [A283_Thermodynamik_FFGFT_En.pdf](A_Serie_Export/Sources/wr_standalone_A4/A283_Thermodynamik_FFGFT_En.pdf) — A-series synthesis |
-| 3. Measurement & probabilism | [A284_Messung_Projektion_En.pdf](A_Serie_Export/Sources/wr_standalone_A4/A284_Messung_Projektion_En.pdf) — field vs. path travel time, Bell |
-| 3. Overview | [013_T0_SI_En.pdf](2/pdf/013_T0_SI_En.pdf) |
-| 3. Interactive | [T0 Parameter Explorer](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
-| 4. Field theory | [202_FFGFT_Feldtheorie_Gesamt_En.pdf](2/pdf/202_FFGFT_Feldtheorie_Gesamt_En.pdf) |
-| 5. Hilbert space | [230_Hilbertraum_Uebersetzung_En.pdf](2/pdf/230_Hilbertraum_Uebersetzung_En.pdf) |
+| 1. Overview | [013_T0_SI_En.pdf](2/pdf/013_T0_SI_En.pdf) |
+| 2. Interactive | [T0 Parameter Explorer](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
+| 3. Field theory | [202_FFGFT_Feldtheorie_Gesamt_En.pdf](2/pdf/202_FFGFT_Feldtheorie_Gesamt_En.pdf) |
+| 4. Hilbert space | [230_Hilbertraum_Uebersetzung_En.pdf](2/pdf/230_Hilbertraum_Uebersetzung_En.pdf) |
+| 5. Plain language | [205_FFGFT_Narrativ_En.pdf](2/pdf/205_FFGFT_Narrativ_En.pdf) |
 | 6. Python | `2/python/authentic_t0_quantum.py` |
 
 ---
@@ -280,8 +278,6 @@ T0-Time-Mass-Duality/
 ├── sig/                       # Signal analysis tools
 ├── 000_FFGFT_Changelog_De.md
 ├── DOCUMENTS.md               # complete document index
-├── RELEASE_NOTES_v1_3_0.md
-├── RELEASE_NOTES_v1_3_0_de.md
 ├── RELEASE_NOTES_v1_2_3.md
 ├── RELEASE_NOTES_v1_2_3_de.md
 ├── README_de.md
@@ -295,39 +291,239 @@ wrappers in `Sources/wr_standalone_A4/`. A-Series fully compiled in
 ---
 
 
-## Current State — provisional closure
+## Docs. 308–310 — Cosmic Sector, Scale-Anchor Problem, Resonance Geometry (July 2026, DE+EN)
 
-The FFGFT corpus has reached a natural resting point. The core
-derivation chain is complete: ξ → lepton sector, α, G, cosmological
-sector. All results are verified by Python scripts with exact arithmetic.
-The correction mechanism (Doc. 190, append-only) remains active; no
-source document is ever modified.
+### Doc. 308 — The Cosmic Sector of FFGFT
 
-The most recent documents (308–315) close open questions in the
-cosmological sector (closure scale Λ*, time cycle, Ω_m* chain), in
-Hilbert space (D4 lattice, 24 = 12 + 12), and on the form of the
-fractal correction K_frak (additive, twice conditionally confirmed).
-Details are in the changelog.
+Completely rewritten. Three cores, computed and proved:
 
-**Entry point:** [Doc. 205 — FFGFT in Plain Language](2/pdf/205_FFGFT_Narrativ_En.pdf)
-(13 pages, no mathematical background required).
+**Redshift [K]:** Static universe, 1+z = e^(ξx), achromatic (all wavelengths same factor).
+Degeneracy of SNe/BAO/CMB data between expansion and static reading (Doc. 267).
+Λ (dark energy): reading artefact — all three conditions met, no reading-independent referent.
 
-**Thermodynamics synthesis:** [A283 — Thermodynamics in FFGFT](A_Serie_Export/Sources/wr_standalone_A4/A283_Thermodynamik_FFGFT_En.pdf)
-(11 pages, DE+EN) — collects all thermodynamic results, the double cutoff
-$L_0 \Rightarrow E_\text{max}$ / $L^* \Rightarrow E_\text{min}$, the fractal
-inward refinement picture, and the two-model closing remark.
+**Two-Halves Synthesis [K]:** K3 area invariance: T̃·m=1 (time half) and fractal path elongation
+(space half) are complementary halves — each 0.875″, together 1.750″. γ_PPN=1 exactly (Cassini passed).
+The same K3 structure carries the inertia transition: time cycle + space cycle = 4πR_H.
 
-**Open falsification test:** m_τ = 1776.97 MeV — to be decided by
-Belle-II.
+**Inertia regime [K]/[S]:** Force law a=√(a_N²+a_N·a₀), no free parameter.
+a₀ = c²ξ¹⁰/(4λ̄ₑ) = 1.033×10⁻¹⁰ m/s² from ξ¹⁰ chain + Unruh + K3 cycles.
+Note: a₀ is the **inertia transition scale** (T̃·m=1 + Unruh), not a gravitational parameter.
+DDO 154 ratio 1.001; Bullet Cluster peak 10 kpc from galaxies.
+Dark matter: "a regime, not a substance" — findings real, no particles required.
+
+Verification: `2/Dok308_Skripte/ffgft_308_p44_stufe*.py` (4 scripts, no free parameters).
+Documents: [DE](2/pdf/308_Lambda_Lesart_Artefakt_De.pdf) · [EN](2/pdf/308_Lambda_Lesart_Artefakt_En.pdf)
+
+### Doc. 309 — The Scale-Anchor Problem
+
+New document (not A-series). 9 pages DE+EN.
+
+Both theories need a scale anchor — but differently:
+- **ΛCDM:** ~6 free parameters, H₀ measured circularly (4-rung distance ladder), fine-tuning 10¹²³.
+- **FFGFT:** ξ structure [K], magnitude 5⁴ [POSIT, P33]. Exponent 10 in H₀=(π/2)·c·ξ¹⁰/λ̄ₑ is the actual fit [POSIT, P20].
+- **Inheritance (newly identified):** Exponent 10 calibrated to H₀_ΛCDM → FFGFT inherits the systematics of the expansion reading.
+- **Cross-anchoring:** ξ¹⁰ reproduces both H₀ and a₀ — not expected from a pure H₀ fit.
+
+Documents: [DE](2/pdf/309_Skalenanker_LCDM_FFGFT_De.pdf) · [EN](2/pdf/309_Skalenanker_LCDM_FFGFT_En.pdf)
+
+### Doc. 310 — Resonance Geometry as the Overarching Reference
+
+New document (not A-series). 13 pages DE+EN.
+
+Answers the "ξ is fitted to the masses, hence circular" objection by correcting the hierarchy:
+- **Overarching:** the geometry that possesses resonances — dimensionless, fixes all ratios.
+- **Anchor:** a single measured value (one mass in SI) — carries no structure, only the scale (the tuning pitch, not the music).
+- **Three [K] statements:** Koide Q=2/3 (from three masses, no ξ); the generation ladder as geometric sequence with ratio q=2/3 (same value as Koide Q); the harmonic prefactors 4/3, 16/5, 25/9. All verifiable against the measured masses.
+- **π factors are geometry, not loops:** 16π³ = S²·2S³ (sphere surfaces of the T⁴ boundary); μ₀=4π×10⁻⁷ separates geometry (S²) from unit; in natural units μ₀,ε₀ vanish, and with α=1 (charge redefined, e=1) only ξ remains.
+- **Mixing QM and RT is legitimate:** ℏ,c are both unit bridges; T·m=1 is the mixing itself; the conflict is interpretational, not formal (Doc. 230).
+
+Verification: `2/Dok310_Skripte/ffgft_310_*.py` (4 scripts, no free parameters).
+Documents: [DE](2/pdf/310_Resonanzgeometrie_Referenz_De.pdf) · [EN](2/pdf/310_Resonanzgeometrie_Referenz_En.pdf)
+
+## Docs. 311 and 312 — Four onto Three, and the Closure Scale (August 2026, DE+EN)
+
+Working notes (not A-series), each with a verification script.
+
+### Doc. 311 — Four onto Three
+
+A lattice in ℝ⁴ has four equivalent directions; measurement happens in three.
+The note works through the three possible routes (compactifying, projecting,
+indexing), compares their costs and condenses them into **two conditions**: is
+the assignment forced by a structure or set by the observer? And is the lost
+positional information caught by a conserved index? Both conditions are applied
+to three cases — the framework's own construction, generic projection
+constructions, and string theory.
+
+Verification: `2/python/ffgft_311_vier_auf_drei.py`.
+Documents: [DE](2/pdf/311_Vier_auf_Drei_De.pdf) · [EN](2/pdf/311_Vier_auf_Drei_En.pdf)
+
+### Doc. 312 — The Closure Scale
+
+The cosmological constant Λ sets the large-scale curvature scale in the field
+equations. FFGFT needs that function too — but as a **derived quantity**:
+Λ* := 1/R_H² with R_H = (2/π)·λ̄ₑ/ξ¹⁰.
+
+- The dimensionless form Λ*·λ̄ₑ² = (π/2)²·ξ²⁰ is a pure number; the SI reference
+  sits entirely in the reference pitch λ̄ₑ (Doc. 310).
+- The 10¹²³ fine-tuning problem decomposes **structurally**: ~122 decades =
+  77.5 (from ξ²⁰) + 44.8 (from (l_P/λ̄ₑ)²) − 0.4 (order 1). A fine-tuning
+  question becomes the structural question "why rung 10 of the ξ ladder?".
+- The inheritance from Doc. 309 stands unchanged: as long as the exponent 10 is
+  not derived forwards (P20), Λ* is **[K] conditional** — correct by
+  construction, not by derivation.
+
+Documents: [DE](2/pdf/312_Abschlussskala_De.pdf) · [EN](2/pdf/312_Abschlussskala_En.pdf)
+
+---
+
+## Docs. 313 and 314 — Time Cycle and Lattice in Hilbert Space (August 2026, DE+EN)
+
+### Doc. 314 — Lattice in Hilbert Space
+
+Working document (not A-series). 26 pages DE / 25 EN, four verification
+scripts.
+
+What becomes of the D4 lattice under translation into Hilbert space:
+the kissing number becomes the degeneracy, triality becomes the
+orbifold and the fibre, the radius ratio becomes the level splitting.
+
+- **Lattice theorems [K]:** |Aut(D4)| = 1152 = |W(F4)|, quotient over
+  W(D4) is 6 = |S₃| (triality at the lattice, not only at the Dynkin
+  diagram); the trace-(−2) class satisfies |det(1−A)| = 9 → **the
+  T⁴/Z₃ orbifold with 9 fixed points is a lattice symmetry of D4**,
+  not an added assumption; on every triple orbit the Z₃ acts as a
+  ℂ³ circulant with {1, ω, ω²}.
+- **A boundary, as a theorem [K]:** Aut(D4) has **no elements of order
+  5** — 1152 = 2⁷·3², and 5 does not divide it (Lagrange). The
+  fivefold symmetry that generates θ = 2/9 (Doc. 293) is incompatible
+  with the D4 lattice structure. The phase test confirms it
+  numerically: all invariants have denominator spectrum {1, 2, 3, 6};
+  2/9 does not occur.
+- **The doubling is admissible and prepared [K]:** the intersection of
+  element orders of A₅ and Aut(D4) is {1, 2, 3} — the only possible
+  interface is C₃, and triality occupies it. The −1 involution pairs
+  the 8 triple orbits without fixed points: **24 = 8×3 = 4×6**, four
+  ready containers with exactly the C₃ content that 3⊕3′ requires.
+  What is excluded is not 2/9 but only its derivation *from* lattice
+  invariants.
+- **Time from the mass circle [K]:** λ₄·m = 2π is the de Broglie
+  relation along the mass direction (a place relation, always exact);
+  in time, T_osc·m = 2π/γ ≤ 2π, and for mass mixtures ≥ 2π by Jensen —
+  exact only for the resting, sharp mode.
+- **Rolled up versus unrolled [K]:** winding numbers are topological
+  and fractal corrections require accumulation — the closure fork of
+  Docs. 313/295 is therefore **spectrally invisible**, and
+  D_f^space = 3 − ξ (local, 6.7×10⁻⁵) must be kept apart from
+  K_frak = 1 − 100ξ (cumulative across the RG run, 1.33 %). Bare are
+  only the SI absolute values via the anchor, not the rolled-up
+  spectrum.
+- **Casimir [K]:** the Z⁴ torus lies lower than the D4 torus
+  (−0.932 versus −0.869 at covolume 1) — the densest lattice loses,
+  because it has the largest spectral gap.
+
+Verification: `2/python/Dok314_Skripte/` (4 scripts + README, all
+target values as assertions).
+Documents: [DE](2/pdf/314_Gitter_im_Hilbertraum_De.pdf) · [EN](2/pdf/314_Gitter_im_Hilbertraum_En.pdf)
+
+### Doc. 313 — No Beginning (revised)
+
+Two corrections (π/half turn as a condensate from Doc. 295;
+gcd(74,75) = 1 as the reason closure occurs at exactly 75) and two
+extensions:
+
+- **Reach (F.4) [K]:** the usual backward extrapolation
+  T(z) = T₀(1+z) presupposes *one* continuous thermodynamic chain —
+  precisely the coarse-grained chaining that D(ii) leaves open. In the
+  place reading, an early epoch has its own locally fixed equilibrium.
+  The corpus demonstrates this on itself: T₀ is obtained structurally
+  from ξ, not extrapolated. The Ω_m* chain is unaffected.
+- **Robustness [K]:** criterion — no scale bridge, no duration, same
+  level. Robust are counts (1152, 24, 9) and same-level ratios
+  (α, m_μ/m_e, Koide Q). **The BBN observables are not**, including
+  Y_p: T_f is not measured but follows from the model, and t/τ_n is a
+  duration. Counter-check: the same classification applies to ΛCDM
+  equally (Doc. 267, "none is circle-free").
+
+Verification: `2/python/Dok313_Skripte/ffgft_bbn_skaleninvarianz.py`
+Documents: [DE](2/pdf/313_Kein_Anfang_De.pdf) · [EN](2/pdf/313_Kein_Anfang_En.pdf)
+
+---
+
+## Doc. 315 — The Form of K_frak: Additive or Multiplicative? (August 2026, DE+EN)
+
+Working document (not A-series). 10 pages DE/EN, four verification scripts.
+
+The corpus confirms the **value** K_frak = 1 − 100ξ = 74/75 several times
+independently (A040, A130, A270); whether this also discriminates the **form** —
+additive against multiplicative (1 − ξ)¹⁰⁰ — had remained unexamined. The two
+forms differ by exactly the second binomial term 4950ξ² ≈ 8.9×10⁻⁵.
+
+- **Control case Euler's musical spiral (5/7-limit):** exact closure is
+  impossible; the best near-closures are the schisma (1.95 cents) and the ragisma
+  4375/4374 (0.40 cents). Closure only through tempering = rationalising the
+  step — precisely the rationality the ξ cycle (1/75, gcd(74,75) = 1) carries
+  from the outset.
+- **Three witnesses:** the A130 two-route ratio discriminates 7.5:1 additive,
+  conditional on the undeclared identity p = −(2−√3) (P-315-1, real residual
+  ≈ 7 eV → P-315-2); the A270 high-power location K⁻³⁶ ≈ 16/π² discriminates
+  **31:1 additive**, with the reference upgraded via Doc. 314 to
+  **16/π² = 1/Δ(D4)** (P35 narrowed); the A040 power form tends additive but
+  cannot resolve.
+- **Structural argument:** the additive form is the exact winding bookkeeping of
+  the rolled-up domain, the multiplicative one the stepwise composition of the
+  unrolled domain. Tied to the closure fork (Docs. 295/313/314): case B (frozen ξ)
+  *is* the additive bookkeeping, case C (running ξ, equiangular spiral) *is* the
+  multiplicative–logarithmic one.
+- **Status:** value [K]; form additive [B], twice conditionally confirmed.
+  Unconditional decision line: the A270 baryon location (K³⁸ level, form distance
+  0.34 %).
+
+Verification: `2/python/315_Skripte/` (4 scripts).
+Documents: [DE](2/pdf/315_Kfrak_Form_De.pdf) · [EN](2/pdf/315_Kfrak_Form_En.pdf)
+
+---
+
+## Doc. 316 — FFGFT and the Riemann Zeta Function (August 2026, DE+EN)
+
+Working document (not A-series). 23 pages DE/EN, twelve verification scripts.
+
+**The Riemann hypothesis is an arithmetic matter; the torus and ξ contribute
+nothing to its solution.** The result is predominantly negative — six approaches
+are excluded with reasons given. Four positive findings stand alongside: two
+identities of the framework and two measurements on the prime structure.
+
+- **Two identities [K]:** the Riemann zeta is a *factor* of the torus spectral
+  zeta, Z_{Z⁴}(s) = 8(1−4^{1−s})·ζ(s)·ζ(s−1); and the Casimir point s = −1/2 lies
+  with its mirror s = 3/2 symmetric to the critical line.
+- **The decisive obstruction [X]:** Weyl gives N(λ) ~ λ^(d/2) for *every* compact
+  manifold, Riemann-von Mangoldt gives N(T) ~ T·ln T. No d fits — the entire
+  branch "deform T⁴/Z₃ suitably" is settled at theorem level.
+- **Cross terms measured [K]:** a bicoherence test on 2469 self-computed zeros
+  (Riemann-Siegel) confirms in six of six controls: coupling exactly at prime
+  powers (b² = 0.76–0.85), none at composite numbers (b² = 0.018–0.025), a
+  contrast of factor 30 to 50. ln(1/ξ) = 2ln2+ln3+4ln5 leads to the composite
+  number 7500 and can therefore carry none.
+- **Physical evidence [K]:** the harmonic series of an alphorn shows the same
+  structure — exactly the prime orders introduce new tonal qualities, while
+  4 = 2·2 and 6 = 2·3 are combinations. The amplitude decay ~1/n corresponds to
+  Tenney height.
+- **Limit inclusion:** the 5-limit does not contain the higher ones — unless
+  approximation, resolution or tempering is allowed to count. The approximation
+  error to ln7 is exactly the ragisma; at the measurement's peak width the
+  approximation is indistinguishable from ln7, but amplitude-weighted it is too
+  light by a factor 3.9·10⁵.
+
+Verification: `2/python/316_Skripte/` (12 scripts, standard library only). All items raised (Z-1 to Z-4) are decided.
+Documents: [DE](2/pdf/316_Riemann_Zeta_De.pdf) · [EN](2/pdf/316_Riemann_Zeta_En.pdf)
 
 ---
 
 ## Correction Register & Changelog
 
-The **correction register** [Doc. 190](2/pdf/190_T0_Korrekturen_En.pdf)
+The **correction register** [Doc. 190](2/pdf/190_T0_Korrekturen_De.pdf)
 documents every correction and refinement with date, status, and
-affected documents — K1–K7 (corrections) and R1–R74 (refinements,
-as of August 2026). Nothing is silently overwritten.
+affected documents — K1–K7 (corrections) and R1–R74 (refinements/programme, as of 6 August 2026).
+Nothing is silently overwritten.
 
 The **changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)
 records all running changes to the corpus chronologically.
@@ -342,20 +538,24 @@ in both German and English (30 PDFs total).
 
 | Volume | Content | Docs |
 |--------|---------|------|
-| Part 1 | Foundations, ξ, constants, units | 40 |
-| Part 2 | Lagrangian, QFT, QM tests | 36 |
-| Part 3 | Cosmology, consciousness | 35 |
-| Part 4 | Early extensions (up to Doc. 184) | 37 |
-| Part 5 | Layers, Hilbert bridge, recent clarifications | 37 |
+| Teil 1 | Foundations, ξ, constants, units | 40 |
+| Teil 2 | Lagrangian, QFT, QM tests | 36 |
+| Teil 3 | Cosmology, consciousness | 35 |
+| Teil 4 | Early extensions (up to Doc. 184) | 37 |
+| Teil 5 | Layers, Hilbert bridge, recent clarifications | 37 |
 
 PDF versions of all volumes also in the repository under `books/`.
+
+Additional standalone editions: *FFGFT Narrative — The Cosmic Brain*,
+*T0 Applications — Seven Mysteries of Physics*,
+*From α=1 to Complete Physics* (in `2/tex-n/completed/`).
 
 ---
 
 ## Version History
 
 The full version history with DOIs is given in the release notes:
-**[RELEASE_NOTES_v1_3_0.md](RELEASE_NOTES_v1_3_0.md)** · change log:
+**[RELEASE_NOTES_v1_2_8.md](RELEASE_NOTES_v1_2_8.md)** · change log:
 **[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**
 
 ---
