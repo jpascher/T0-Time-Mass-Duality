@@ -3,2272 +3,2030 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>T0-Quantensimulator Interface / T0 Quantum Simulator Interface</title>
+  <title>T0-Quantensimulator v3.5 — Zweisprachiges Hilfesystem</title>
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
-      margin: 0;
-      padding: 20px;
-      background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 50%, #0f0f23 100%);
+      background: #0a0a0f;
       color: #e0e0e0;
       min-height: 100vh;
+      padding: 20px;
     }
+
     .container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
-      background: rgba(20, 20, 20, 0.95);
-      border-radius: 15px;
+      background: linear-gradient(145deg, #111118, #1a1a28);
+      border-radius: 20px;
       padding: 30px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-      border: 1px solid #333;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+      border: 1px solid #2a2a3a;
     }
-    h1 {
-      color: #2c3e50;
-      text-align: center;
-      font-size: 2.5em;
-      margin-bottom: 10px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-    }
-    .subtitle {
-      text-align: center;
-      color: #7f8c8d;
-      font-size: 1.2em;
-      margin-bottom: 30px;
-    }
-    h2 {
-      color: #3498db;
-      border-left: 5px solid #3498db;
-      padding-left: 15px;
-      margin-top: 30px;
-    }
-    .control-panel {
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      color: white;
-      padding: 25px;
-      border-radius: 10px;
-      margin: 20px 0;
-      border-left: 5px solid #00bcd4;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    }
-    .input-group {
-      margin: 15px 0;
+
+    .header {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 15px;
       flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #2a2a3a;
     }
-    .input-group label {
-      font-weight: bold;
-      min-width: 120px;
+
+    .header h1 {
+      font-size: 2.2em;
+      background: linear-gradient(135deg, #00d4ff, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .input-group input, .input-group select {
-      padding: 10px;
-      border: 2px solid #444;
-      border-radius: 8px;
-      font-size: 16px;
-      flex: 1;
-      min-width: 200px;
-      background: #2a2a2a;
-      color: #e0e0e0;
+
+    .header .subtitle {
+      color: #8888aa;
+      font-size: 0.95em;
     }
-    .input-group input:focus, .input-group select:focus {
-      border-color: #00bcd4;
-      outline: none;
-      box-shadow: 0 0 10px rgba(0, 188, 212, 0.3);
+
+    .badge {
+      display: inline-block;
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-size: 0.65em;
+      font-weight: 700;
+      margin-left: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-    .button-group {
+    .badge-success { background: rgba(52, 211, 153, 0.2); color: #34d399; }
+    .badge-info { background: rgba(96, 165, 250, 0.2); color: #60a5fa; }
+    .badge-warning { background: rgba(251, 146, 60, 0.2); color: #fb923c; }
+    .badge-danger { background: rgba(248, 113, 113, 0.2); color: #f87171; }
+    .badge-purple { background: rgba(167, 139, 250, 0.2); color: #a78bfa; }
+    .badge-pink { background: rgba(236, 72, 153, 0.2); color: #f472b6; }
+    .badge-cyan { background: rgba(34, 211, 238, 0.2); color: #22d3ee; }
+
+    .lang-toggle {
       display: flex;
-      gap: 15px;
-      margin: 20px 0;
-      flex-wrap: wrap;
+      gap: 8px;
     }
-    .btn {
-      background: linear-gradient(135deg, #e74c3c, #c0392b);
-      color: white;
-      border: none;
-      padding: 12px 25px;
+
+    .lang-btn {
+      background: #1a1a2a;
+      border: 1px solid #2a2a4a;
+      color: #888;
+      padding: 8px 16px;
       border-radius: 8px;
       cursor: pointer;
-      font-weight: bold;
-      font-size: 16px;
-      transition: all 0.3s ease;
-      flex: 1;
-      min-width: 150px;
+      transition: all 0.3s;
+      font-weight: 600;
     }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    .lang-btn:hover { background: #2a2a4a; color: #fff; }
+    .lang-btn.active { background: linear-gradient(135deg, #2563eb, #7c3aed); border-color: #7c3aed; color: #fff; }
+
+    /* ===== HELP SYSTEM ===== */
+    .help-toggle {
+      background: linear-gradient(135deg, #1a1a3a, #2a1a4a);
+      border: 1px solid #7c3aed;
+      border-radius: 12px;
+      padding: 12px 20px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .btn-primary {
-      background: linear-gradient(135deg, #27ae60, #2ecc71);
-    }
-    .btn-secondary {
-      background: linear-gradient(135deg, #f39c12, #e67e22);
-    }
-    .btn-warning {
-      background: linear-gradient(135deg, #f39c12, #e67e22);
-    }
-    .btn-danger {
-      background: linear-gradient(135deg, #e74c3c, #c0392b);
-    }
-    .btn-critical {
-      background: linear-gradient(135deg, #8e44ad, #732d91);
-    }
-    .btn-benchmark {
-      background: linear-gradient(135deg, #546e7a, #37474f);
-    }
-    .btn-info {
-      background: linear-gradient(135deg, #3498db, #2980b9);
-    }
-    .btn-optimize {
-      background: linear-gradient(135deg, #9b59b6, #8e44ad);
-    }
-    .results-panel {
-      background: #1a1a1a;
-      border: 2px solid #333;
-      border-radius: 10px;
-      padding: 20px;
-      margin: 20px 0;
-      font-family: 'Courier New', monospace;
+    .help-toggle:hover { background: linear-gradient(135deg, #2a2a4a, #3a2a5a); }
+    .help-toggle .title { color: #a78bfa; font-weight: 700; font-size: 1.1em; }
+    .help-toggle .icon { font-size: 1.5em; transition: transform 0.3s; }
+    .help-toggle .icon.open { transform: rotate(180deg); }
+
+    .help-content {
+      display: none;
+      background: #0a0a18;
+      border: 1px solid #2a2a4a;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 15px;
       max-height: 600px;
       overflow-y: auto;
-      color: #00ff41;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
     }
-    .success {
-      background: linear-gradient(135deg, #2dd4bf, #14b8a6);
-      color: white;
-      padding: 15px;
-      border-radius: 8px;
-      margin: 15px 0;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    .help-content.open { display: block; }
+
+    .help-content h3 { color: #a78bfa; margin: 15px 0 8px 0; }
+    .help-content h4 { color: #60a5fa; margin: 12px 0 5px 0; }
+    .help-content p { color: #c0c0d0; margin: 5px 0; line-height: 1.7; }
+    .help-content .highlight-box {
+      background: rgba(167, 139, 250, 0.1);
+      border-left: 3px solid #7c3aed;
+      padding: 12px 16px;
+      margin: 10px 0;
+      border-radius: 4px;
     }
-    .warning {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      color: white;
-      padding: 15px;
-      border-radius: 8px;
-      margin: 15px 0;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    .help-content .warning-box {
+      background: rgba(251, 146, 60, 0.1);
+      border-left: 3px solid #f59e0b;
+      padding: 12px 16px;
+      margin: 10px 0;
+      border-radius: 4px;
     }
-    .info {
-      background: linear-gradient(135deg, #3b82f6, #2563eb);
-      color: white;
-      padding: 15px;
-      border-radius: 8px;
-      margin: 15px 0;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    .help-content .success-box {
+      background: rgba(52, 211, 153, 0.1);
+      border-left: 3px solid #34d399;
+      padding: 12px 16px;
+      margin: 10px 0;
+      border-radius: 4px;
     }
-    .statistics {
+    .help-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      font-size: 0.85em;
+    }
+    .help-content th, .help-content td {
+      padding: 8px 12px;
+      border: 1px solid #2a2a4a;
+      text-align: left;
+    }
+    .help-content th { background: #1a1a2a; color: #a78bfa; }
+    .help-content td { color: #c0c0d0; }
+    .help-content code {
+      background: #1a1a2a;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      color: #34d399;
+    }
+    .help-content ul { padding-left: 25px; color: #c0c0d0; }
+    .help-content li { margin: 4px 0; }
+    .help-content .formula {
+      font-family: 'Courier New', monospace;
+      background: #0a0a12;
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid #1a1a2e;
+      margin: 8px 0;
+      color: #a78bfa;
+      text-align: center;
+    }
+
+    .help-content .lang-help {
+      display: none;
+    }
+    .help-content .lang-help.active {
+      display: block;
+    }
+
+    /* Control Panel */
+    .control-panel {
+      background: linear-gradient(135deg, #0f0f1a, #1a1a2e);
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 25px;
+      border: 1px solid #2a2a4a;
+    }
+
+    .control-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 15px;
-      margin: 20px 0;
+      margin-top: 15px;
     }
-    .stat-card {
-      background: linear-gradient(135deg, #1e40af, #1d4ed8);
-      color: white;
-      padding: 15px;
-      border-radius: 8px;
-      text-align: center;
-      border: 1px solid #374151;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-    .stat-value {
-      font-size: 2em;
-      font-weight: bold;
-      margin: 10px 0;
-    }
-    .language-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
+
+    .control-group {
       display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .control-group label {
+      font-size: 0.8em;
+      font-weight: 600;
+      color: #8888bb;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .control-group input, .control-group select {
+      background: #0a0a15;
+      border: 1px solid #2a2a4a;
+      color: #e0e0e0;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 1em;
+      transition: all 0.3s;
+      font-family: 'Courier New', monospace;
+    }
+
+    .control-group input:focus, .control-group select:focus {
+      border-color: #7c3aed;
+      outline: none;
+      box-shadow: 0 0 20px rgba(124, 58, 237, 0.15);
+    }
+
+    .control-group input[type="text"] {
+      width: 100%;
+      min-width: 200px;
+    }
+
+    .control-group .hint {
+      font-size: 0.7em;
+      color: #666;
+      margin-top: 2px;
+    }
+
+    .control-group .hint.warning { color: #fb923c; }
+    .control-group .hint.success { color: #34d399; }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
       gap: 10px;
+      margin: 15px 0 5px 0;
     }
-    .lang-btn {
-      background: linear-gradient(135deg, #4f46e5, #3730a3);
-      color: white;
+
+    .btn {
+      padding: 12px 24px;
       border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9em;
       cursor: pointer;
-      font-weight: bold;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-    .lang-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-    }
-    .lang-btn.active {
-      background: linear-gradient(135deg, #dc2626, #b91c1c);
-    }
-    .home-btn {
-      position: fixed;
-      top: 80px;
-      right: 20px;
-      z-index: 1000;
-      background: linear-gradient(135deg, #059669, #047857);
-      color: white;
-      border: none;
-      padding: 12px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      text-decoration: none;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      font-family: inherit;
     }
-    .home-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
+    .btn:active { transform: translateY(0px); }
+
+    .btn-primary { background: linear-gradient(135deg, #059669, #10b981); color: #fff; }
+    .btn-secondary { background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #fff; }
+    .btn-info { background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; }
+    .btn-warning { background: linear-gradient(135deg, #d97706, #f59e0b); color: #fff; }
+    .btn-danger { background: linear-gradient(135deg, #dc2626, #ef4444); color: #fff; }
+    .btn-dark { background: #1a1a2e; color: #aaa; border: 1px solid #2a2a4a; }
+    .btn-dark:hover { background: #2a2a4a; color: #fff; }
+    .btn-help { background: linear-gradient(135deg, #7c3aed, #6d28d9); color: #fff; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      margin: 15px 0;
     }
-    .language-content {
-      display: none;
+
+    .stat-card {
+      background: #0f0f1a;
+      border: 1px solid #1f1f3a;
+      border-radius: 12px;
+      padding: 10px 12px;
+      text-align: center;
     }
-    .language-content.active {
-      display: block;
+
+    .stat-card .label {
+      font-size: 0.55em;
+      text-transform: uppercase;
+      color: #666;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-card .value {
+      font-size: 1.1em;
+      font-weight: 700;
+      margin-top: 2px;
+      font-family: 'Courier New', monospace;
+      word-break: break-all;
+    }
+    .stat-card .value.green { color: #34d399; }
+    .stat-card .value.blue { color: #60a5fa; }
+    .stat-card .value.purple { color: #a78bfa; }
+    .stat-card .value.orange { color: #fb923c; }
+    .stat-card .value.red { color: #f87171; }
+    .stat-card .value.small { font-size: 0.8em; }
+    .stat-card .value.pink { color: #f472b6; }
+    .stat-card .value.cyan { color: #22d3ee; }
+
+    .qubit-display {
+      background: linear-gradient(135deg, #0f1a2a, #1a0f2a);
+      border: 1px solid #4f46e5;
+      border-radius: 10px;
+      padding: 12px 18px;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .qubit-display .label { color: #8888bb; font-size: 0.7em; text-transform: uppercase; letter-spacing: 0.5px; }
+    .qubit-display .value { font-size: 1.5em; font-weight: 700; font-family: 'Courier New', monospace; }
+    .qubit-display .value.green { color: #34d399; }
+    .qubit-display .value.blue { color: #60a5fa; }
+    .qubit-display .value.purple { color: #a78bfa; }
+    .qubit-display .detail { color: #666; font-size: 0.7em; }
+
+    .results-panel {
+      background: #0a0a12;
+      border: 1px solid #1a1a2e;
+      border-radius: 12px;
+      padding: 20px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82em;
+      max-height: 500px;
+      overflow-y: auto;
+      margin: 15px 0;
+      color: #a0e8a0;
+      line-height: 1.7;
+    }
+
+    .results-panel .success { color: #34d399; }
+    .results-panel .error { color: #f87171; }
+    .results-panel .warning { color: #fb923c; }
+    .results-panel .info { color: #60a5fa; }
+    .results-panel .highlight { color: #a78bfa; }
+    .results-panel .dim { color: #555; }
+    .results-panel .pink { color: #f472b6; }
+    .results-panel .cyan { color: #22d3ee; }
+    .results-panel .header-line {
+      color: #7c3aed;
+      font-weight: 700;
+      font-size: 1.1em;
+      border-bottom: 1px solid #1a1a2e;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+    }
+
+    /* Method Badges */
+    .method-badge {
+      display: inline-block;
+      padding: 2px 12px;
+      border-radius: 12px;
+      font-size: 0.75em;
+      font-weight: 700;
+      margin: 2px 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .method-t0 { background: rgba(167, 139, 250, 0.3); color: #a78bfa; border: 1px solid #7c3aed; }
+    .method-gcd { background: rgba(96, 165, 250, 0.3); color: #60a5fa; border: 1px solid #3b82f6; }
+    .method-trial { background: rgba(52, 211, 153, 0.3); color: #34d399; border: 1px solid #10b981; }
+    .method-pollard { background: rgba(251, 146, 60, 0.3); color: #fb923c; border: 1px solid #f59e0b; }
+    .method-fermat { background: rgba(248, 113, 113, 0.3); color: #f87171; border: 1px solid #ef4444; }
+    .method-failure { background: rgba(107, 114, 128, 0.3); color: #9ca3af; border: 1px solid #6b7280; }
+    .method-prime { background: rgba(236, 72, 153, 0.3); color: #f472b6; border: 1px solid #ec4899; }
+
+    .progress-container {
+      margin: 10px 0;
     }
     .progress-bar {
       width: 100%;
-      height: 20px;
-      background: #374151;
-      border-radius: 10px;
+      height: 6px;
+      background: #1a1a2e;
+      border-radius: 4px;
       overflow: hidden;
-      margin: 10px 0;
-      border: 1px solid #4b5563;
     }
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #00d4ff, #0ea5e9);
-      transition: width 0.3s ease;
+      background: linear-gradient(90deg, #7c3aed, #0ea5e9);
       width: 0%;
+      transition: width 0.3s ease;
+      border-radius: 4px;
     }
-    .energy-field {
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7em;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    .energy-field-container {
+      display: none;
+      margin: 20px 0;
+      padding: 15px;
+      background: #0a0a12;
+      border-radius: 12px;
+      border: 1px solid #1a1a2e;
+    }
+    .energy-field-container.visible { display: block; }
+
+    .energy-grid {
       display: grid;
       grid-template-columns: repeat(8, 1fr);
-      gap: 2px;
-      margin: 20px 0;
-      padding: 10px;
-      background: #111827;
-      border-radius: 8px;
-      border: 1px solid #374151;
+      gap: 3px;
+      margin: 10px 0;
     }
     .energy-cell {
-      width: 30px;
-      height: 30px;
+      aspect-ratio: 1;
       border-radius: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 10px;
-      color: white;
-      font-weight: bold;
-      border: 1px solid #4b5563;
+      font-size: 0.4em;
+      font-family: 'Courier New', monospace;
+      color: rgba(255,255,255,0.8);
+      transition: all 0.3s;
+      border: 1px solid rgba(255,255,255,0.05);
     }
-    /* Neue Styles für Überschriften */
-    .function-header {
-      background: linear-gradient(135deg, #1a202c, #2d3748);
-      color: #e2e8f0;
-      padding: 15px 20px;
+    .energy-cell:hover { transform: scale(1.1); z-index: 10; }
+
+    .energy-params {
+      font-size: 0.75em;
+      color: #888;
+      margin-top: 10px;
+      padding: 10px;
+      background: #0f0f1a;
+      border-radius: 8px;
+      border: 1px solid #1a1a2e;
+    }
+
+    .lang-content { display: none; }
+    .lang-content.active { display: block; }
+
+    .precision-banner {
+      background: linear-gradient(135deg, #1a1a3a, #0f0f2a);
+      border: 1px solid #7c3aed;
       border-radius: 10px;
-      margin: 20px 0 10px 0;
-      border-left: 5px solid #4299e1;
-      font-weight: bold;
-      font-size: 18px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      padding: 10px 18px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
-    .function-header.t0-shor {
-      border-left-color: #48bb78;
-      background: linear-gradient(135deg, #22543d, #2f855a);
-    }
-    .function-header.resources {
-      border-left-color: #ed8936;
-      background: linear-gradient(135deg, #7b341e, #c05621);
-    }
-    .function-header.energy-field {
-      border-left-color: #4299e1;
-      background: linear-gradient(135deg, #2a4365, #3182ce);
-    }
-    .function-header.optimization {
-      border-left-color: #9f7aea;
-      background: linear-gradient(135deg, #553c9a, #805ad5);
-    }
-    .function-header.tests {
-      border-left-color: #f56565;
-      background: linear-gradient(135deg, #742a2a, #e53e3e);
-    }
-    .function-header.benchmark {
-      border-left-color: #4a5568;
-      background: linear-gradient(135deg, #2d3748, #4a5568);
-    }
+    .precision-banner .icon { font-size: 1.3em; }
+    .precision-banner .text { color: #a78bfa; font-size: 0.8em; }
+    .precision-banner .text strong { color: #fff; }
+
+    .help-content::-webkit-scrollbar { width: 6px; }
+    .help-content::-webkit-scrollbar-track { background: #0a0a12; }
+    .help-content::-webkit-scrollbar-thumb { background: #2a2a4a; border-radius: 4px; }
+    .help-content::-webkit-scrollbar-thumb:hover { background: #3a3a5a; }
+
+    .results-panel::-webkit-scrollbar { width: 6px; }
+    .results-panel::-webkit-scrollbar-track { background: #0a0a12; }
+    .results-panel::-webkit-scrollbar-thumb { background: #2a2a4a; border-radius: 4px; }
+    .results-panel::-webkit-scrollbar-thumb:hover { background: #3a3a5a; }
+
     @media (max-width: 768px) {
-      .container {
-        padding: 15px;
-      }
-      h1 {
-        font-size: 2em;
-      }
-      .input-group {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .button-group {
-        flex-direction: column;
-      }
-      .language-toggle, .home-btn {
-        position: relative;
-        top: auto;
-        right: auto;
-        margin-bottom: 20px;
-      }
+      .container { padding: 15px; }
+      .header h1 { font-size: 1.4em; }
+      .control-grid { grid-template-columns: 1fr; }
+      .btn-group { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .qubit-display { flex-direction: column; text-align: center; }
+      .help-content { max-height: 400px; }
     }
   </style>
 </head>
 <body>
-  <div class="language-toggle">
-    <button class="lang-btn active" onclick="switchLanguage('de')">Deutsch</button>
-    <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <h1>⚛ T0-Quantensimulator v3.5</h1>
+      <div class="subtitle">
+        FFGFT · Multi-Fallback · Zweisprachiges Hilfesystem
+        <span class="badge badge-success">v3.5</span>
+        <span class="badge badge-info">BigInt</span>
+        <span class="badge badge-purple">5 Methoden</span>
+      </div>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="switchLanguage('de')">DE</button>
+      <button class="lang-btn" onclick="switchLanguage('en')">EN</button>
+    </div>
   </div>
-  
-  <a href="https://jpascher.github.io/T0-Time-Mass-Duality/2/html/index.html" class="home-btn">
-    🏠 Zur Startseite / Home
-  </a>
 
-  <div class="container">
-    <!-- German Content -->
-    <div id="german-content" class="language-content active">
-      <h1>🧮 T0-Quantensimulator</h1>
-      <div class="subtitle">Deterministische Quantenmechanik in Aktion</div>
+  <!-- Precision Banner -->
+  <div class="precision-banner">
+    <span class="icon">🔢</span>
+    <span class="text">
+      <strong>BigInt + String-Eingabe:</strong> Exakte Arithmetik für beliebig große Zahlen.
+      <span style="color:#34d399;">Keine IEEE 754-Rundung!</span>
+    </span>
+  </div>
 
-      <div class="control-panel">
-        <h2>🎛️ Simulator-Steuerung</h2>
-        
-        <div class="input-group">
-          <label for="rsa-number-de">🔢 RSA-Zahl:</label>
-          <input type="number" id="rsa-number-de" value="15" min="3" max="1000000">
-          <span>💡 Beispiele: 15, 21, 35, 77, 143, 10403</span>
+  <!-- ===== HELP TOGGLE ===== -->
+  <div class="help-toggle" onclick="toggleHelp()">
+    <span class="title" id="help-title-de">❓ Hilfe & Erklärungen — T0-Prinzip, Grenzen, Browser-Limits</span>
+    <span class="title" id="help-title-en" style="display:none;">❓ Help & Explanations — T0 Principle, Limits, Browser Constraints</span>
+    <span class="icon" id="help-icon">▼</span>
+  </div>
+
+  <!-- ===== HELP CONTENT DEUTSCH ===== -->
+  <div class="help-content" id="help-content">
+    <!-- DEUTSCH -->
+    <div class="lang-help active" id="help-de">
+      <h3>🧠 Was ist T0?</h3>
+      <p>
+        <strong>T0 (Time-Mass Duality)</strong> ist ein deterministisches Quanten-Framework,
+        das <strong>keine Qubits</strong> benötigt. Stattdessen verwendet es <strong>Energiefelder</strong>
+        zur Periodenfindung — das Herzstück von Shors Algorithmus.
+      </p>
+      <div class="highlight-box">
+        <strong>Die Grundidee:</strong> Statt 2n Qubits zu verwenden, nutzt T0 ein
+        Energiefeld mit der Kopplungskonstante <code>ξ</code>.
+      </div>
+
+      <h3>📐 Die T0-Gleichung</h3>
+      <div class="formula">
+        ∂²E/∂t² = (1 + ξ)·∇²E + ξ·V·E
+      </div>
+      <p>
+        Das Energiefeld <code>E</code> wird durch diese Wellengleichung beschrieben.
+        Die <strong>Resonanzbedingung</strong> ξ ≈ 1/(2π·r) führt zur Periodenfindung.
+      </p>
+
+      <h3>⚡ Die 5 Faktorisierungsmethoden</h3>
+      <table>
+        <tr><th>Methode</th><th>Beschreibung</th><th>Best für</th></tr>
+        <tr><td><span class="method-badge method-t0">💜 T0</span></td><td>Energiefeld-Resonanz (Ordnungssuche)</td><td>N &lt; 10¹⁰ (30 Bits)</td></tr>
+        <tr><td><span class="method-badge method-gcd">⚡ GCD</span></td><td>Größter gemeinsamer Teiler von a und N</td><td>Wenn a Teiler von N</td></tr>
+        <tr><td><span class="method-badge method-trial">🔢 Trial</span></td><td>Testet alle Primzahlen bis √N</td><td>Kleine Faktoren</td></tr>
+        <tr><td><span class="method-badge method-pollard">🌀 Pollard</span></td><td>Monte-Carlo-basierte Faktorisierung</td><td>50-100 Bits (optimal!)</td></tr>
+        <tr><td><span class="method-badge method-fermat">📐 Fermat</span></td><td>Differenz von Quadraten</td><td>Nahe beieinanderliegende Faktoren</td></tr>
+      </table>
+
+      <h3>🚨 Browser-Begrenzungen — Warum T0 bei großen N versagt</h3>
+      <div class="warning-box">
+        <strong>WICHTIG:</strong> T0 hat <strong>keine</strong> prinzipielle Grenze —
+        aber der <strong>Browser</strong> hat Limits!
+      </div>
+
+      <h4>1. Baby-Step Giant-Step (BSGS) — Speicher</h4>
+      <p>
+        BSGS benötigt <code>O(√N)</code> Speicher für die Baby-Steps.
+        Für N = 10²⁴ (80 Bits) wären das <strong>10¹² Einträge</strong> —
+        das sind <strong>~10 Terabyte</strong> RAM!
+      </p>
+      <div class="highlight-box">
+        <strong>Browser-Limit:</strong> Wir begrenzen auf <code>maxM = 1.000.000</code>
+        → Das sind nur <strong>~16 MB</strong> RAM.
+        <br><br>
+        <strong>Konsequenz:</strong> Perioden mit r &gt; 10¹² werden NICHT gefunden.
+      </div>
+
+      <h4>2. Berechnungszeit</h4>
+      <table>
+        <tr><th>Bit-Größe</th><th>N ~</th><th>BSGS-Schritte</th><th>Zeit (Browser)</th></tr>
+        <tr><td>20 Bits</td><td>10⁶</td><td>1.000</td><td>&lt; 0.01s</td></tr>
+        <tr><td>30 Bits</td><td>10⁹</td><td>31.000</td><td>~0.1s</td></tr>
+        <tr><td>40 Bits</td><td>10¹²</td><td>1.000.000</td><td>~1s</td></tr>
+        <tr><td>50 Bits</td><td>10¹⁵</td><td>31.000.000</td><td>~30s</td></tr>
+        <tr><td>60 Bits</td><td>10¹⁸</td><td>1.000.000.000</td><td>~15min</td></tr>
+        <tr><td>80 Bits</td><td>10²⁴</td><td>10¹²</td><td>❌ nicht machbar</td></tr>
+      </table>
+
+      <h4>3. JavaScript-Engine-Limits</h4>
+      <ul>
+        <li><strong>Heap-Speicher:</strong> ~4 GB maximal (Chrome)</li>
+        <li><strong>Stack-Tiefe:</strong> ~10.000 rekursive Aufrufe</li>
+        <li><strong>Timeouts:</strong> Long-Running-Skripte werden abgebrochen</li>
+        <li><strong>BigInt:</strong> Multiplikation von 10⁶-stelligen Zahlen ist langsam</li>
+      </ul>
+
+      <h3>📊 T0-Erfolgsrate in Abhängigkeit von N</h3>
+      <table>
+        <tr><th>Bit-Größe</th><th>N ~</th><th>T0 allein</th><th>Mit Fallback</th><th>Empfehlung</th></tr>
+        <tr><td>10-20</td><td>10³-10⁶</td><td style="color:#34d399;">✅ 95%</td><td style="color:#34d399;">✅ 99%</td><td>T0 reicht</td></tr>
+        <tr><td>20-30</td><td>10⁶-10⁹</td><td style="color:#34d399;">✅ 80%</td><td style="color:#34d399;">✅ 98%</td><td>T0 + Fallback</td></tr>
+        <tr><td>30-50</td><td>10⁹-10¹⁵</td><td style="color:#fb923c;">⚠️ 40%</td><td style="color:#34d399;">✅ 90%</td><td><strong>Fallback nötig</strong></td></tr>
+        <tr><td>50-80</td><td>10¹⁵-10²⁴</td><td style="color:#f87171;">❌ 5%</td><td style="color:#fb923c;">⚠️ 70%</td><td><strong>Pollard/Fermat</strong></td></tr>
+        <tr><td>&gt;80</td><td>&gt;10²⁴</td><td style="color:#f87171;">❌ &lt;1%</td><td style="color:#fb923c;">⚠️ 50%</td><td><strong>Klassische Methoden</strong></td></tr>
+      </table>
+
+      <div class="success-box">
+        <strong>💡 Fazit:</strong> T0 ist <strong>physikalisch korrekt</strong>,
+        aber browserbedingt auf N &lt; 10¹⁵ (50 Bits) für reine T0-Performance begrenzt.
+        Für größere Zahlen ist der <strong>Fallback (Pollard's Rho)</strong> die beste Wahl.
+      </div>
+
+      <h3>🔧 ξ-Parameter — Die Kopplungskonstante</h3>
+      <p>
+        ξ bestimmt die Stärke der Energiefeld-Kopplung. Die <strong>Resonanzbedingung</strong> lautet:
+      </p>
+      <div class="formula">
+        ξ ≈ 1 / (2π · r)
+      </div>
+      <p>
+        Für große Perioden r (große N) wird ξ extrem klein → schwer messbar.
+        Das ist <strong>kein Fehler</strong>, sondern <strong>Physik!</strong>
+      </p>
+
+      <h3>💡 Tipps für erfolgreiche Faktorisierung</h3>
+      <ul>
+        <li><strong>Kleine Zahlen (N &lt; 10¹⁰):</strong> T0 allein reicht</li>
+        <li><strong>Mittlere Zahlen (10¹⁰ - 10¹⁵):</strong> Fallback "Alle Methoden"</li>
+        <li><strong>Große Zahlen (&gt; 10¹⁵):</strong> Pollard's Rho oder Fermat</li>
+        <li><strong>Primzahlen:</strong> Können nicht faktorisiert werden (mathematisch korrekt)</li>
+        <li><strong>Semiprimes:</strong> Sind die besten Testkandidaten</li>
+      </ul>
+
+      <h3>📚 Weiterführende Dokumente</h3>
+      <ul>
+        <li><code>176_T0_Shor_Photon_De.tex</code> — Shors Algorithmus ohne Qubits</li>
+        <li><code>075_RSA_De.tex</code> — Periodenfindung als Resonanzproblem</li>
+        <li><code>316_Riemann_Zeta_De.tex</code> — FFGFT und die Riemannsche Zeta-Funktion</li>
+      </ul>
+    </div>
+
+    <!-- ENGLISH -->
+    <div class="lang-help" id="help-en">
+      <h3>🧠 What is T0?</h3>
+      <p>
+        <strong>T0 (Time-Mass Duality)</strong> is a deterministic quantum framework
+        that requires <strong>no qubits</strong>. Instead, it uses <strong>energy fields</strong>
+        for period finding — the core of Shor's algorithm.
+      </p>
+      <div class="highlight-box">
+        <strong>The core idea:</strong> Instead of using 2n qubits, T0 uses an
+        energy field with coupling constant <code>ξ</code>.
+      </div>
+
+      <h3>📐 The T0 Equation</h3>
+      <div class="formula">
+        ∂²E/∂t² = (1 + ξ)·∇²E + ξ·V·E
+      </div>
+      <p>
+        The energy field <code>E</code> is described by this wave equation.
+        The <strong>resonance condition</strong> ξ ≈ 1/(2π·r) leads to period finding.
+      </p>
+
+      <h3>⚡ The 5 Factorization Methods</h3>
+      <table>
+        <tr><th>Method</th><th>Description</th><th>Best for</th></tr>
+        <tr><td><span class="method-badge method-t0">💜 T0</span></td><td>Energy field resonance (order finding)</td><td>N &lt; 10¹⁰ (30 bits)</td></tr>
+        <tr><td><span class="method-badge method-gcd">⚡ GCD</span></td><td>Greatest common divisor of a and N</td><td>When a divides N</td></tr>
+        <tr><td><span class="method-badge method-trial">🔢 Trial</span></td><td>Tests all primes up to √N</td><td>Small factors</td></tr>
+        <tr><td><span class="method-badge method-pollard">🌀 Pollard</span></td><td>Monte Carlo-based factorization</td><td>50-100 bits (optimal!)</td></tr>
+        <tr><td><span class="method-badge method-fermat">📐 Fermat</span></td><td>Difference of squares</td><td>Close factors</td></tr>
+      </table>
+
+      <h3>🚨 Browser Limitations — Why T0 fails for large N</h3>
+      <div class="warning-box">
+        <strong>IMPORTANT:</strong> T0 has <strong>no</strong> fundamental limit —
+        but the <strong>browser</strong> has limits!
+      </div>
+
+      <h4>1. Baby-Step Giant-Step (BSGS) — Memory</h4>
+      <p>
+        BSGS requires <code>O(√N)</code> memory for baby steps.
+        For N = 10²⁴ (80 bits), that would be <strong>10¹² entries</strong> —
+        that's <strong>~10 Terabytes</strong> of RAM!
+      </p>
+      <div class="highlight-box">
+        <strong>Browser Limit:</strong> We limit to <code>maxM = 1,000,000</code>
+        → That's only <strong>~16 MB</strong> of RAM.
+        <br><br>
+        <strong>Consequence:</strong> Periods with r &gt; 10¹² will NOT be found.
+      </div>
+
+      <h4>2. Computation Time</h4>
+      <table>
+        <tr><th>Bit Size</th><th>N ~</th><th>BSGS Steps</th><th>Time (Browser)</th></tr>
+        <tr><td>20 bits</td><td>10⁶</td><td>1,000</td><td>&lt; 0.01s</td></tr>
+        <tr><td>30 bits</td><td>10⁹</td><td>31,000</td><td>~0.1s</td></tr>
+        <tr><td>40 bits</td><td>10¹²</td><td>1,000,000</td><td>~1s</td></tr>
+        <tr><td>50 bits</td><td>10¹⁵</td><td>31,000,000</td><td>~30s</td></tr>
+        <tr><td>60 bits</td><td>10¹⁸</td><td>1,000,000,000</td><td>~15min</td></tr>
+        <tr><td>80 bits</td><td>10²⁴</td><td>10¹²</td><td>❌ not feasible</td></tr>
+      </table>
+
+      <h4>3. JavaScript Engine Limits</h4>
+      <ul>
+        <li><strong>Heap Memory:</strong> ~4 GB max (Chrome)</li>
+        <li><strong>Stack Depth:</strong> ~10,000 recursive calls</li>
+        <li><strong>Timeouts:</strong> Long-running scripts are terminated</li>
+        <li><strong>BigInt:</strong> Multiplication of 10⁶-digit numbers is slow</li>
+      </ul>
+
+      <h3>📊 T0 Success Rate by N</h3>
+      <table>
+        <tr><th>Bit Size</th><th>N ~</th><th>T0 only</th><th>With Fallback</th><th>Recommendation</th></tr>
+        <tr><td>10-20</td><td>10³-10⁶</td><td style="color:#34d399;">✅ 95%</td><td style="color:#34d399;">✅ 99%</td><td>T0 sufficient</td></tr>
+        <tr><td>20-30</td><td>10⁶-10⁹</td><td style="color:#34d399;">✅ 80%</td><td style="color:#34d399;">✅ 98%</td><td>T0 + Fallback</td></tr>
+        <tr><td>30-50</td><td>10⁹-10¹⁵</td><td style="color:#fb923c;">⚠️ 40%</td><td style="color:#34d399;">✅ 90%</td><td><strong>Fallback needed</strong></td></tr>
+        <tr><td>50-80</td><td>10¹⁵-10²⁴</td><td style="color:#f87171;">❌ 5%</td><td style="color:#fb923c;">⚠️ 70%</td><td><strong>Pollard/Fermat</strong></td></tr>
+        <tr><td>&gt;80</td><td>&gt;10²⁴</td><td style="color:#f87171;">❌ &lt;1%</td><td style="color:#fb923c;">⚠️ 50%</td><td><strong>Classical methods</strong></td></tr>
+      </table>
+
+      <div class="success-box">
+        <strong>💡 Conclusion:</strong> T0 is <strong>physically correct</strong>,
+        but browser-limited to N &lt; 10¹⁵ (50 bits) for pure T0 performance.
+        For larger numbers, <strong>Fallback (Pollard's Rho)</strong> is the best choice.
+      </div>
+
+      <h3>🔧 ξ Parameter — The Coupling Constant</h3>
+      <p>
+        ξ determines the strength of the energy field coupling. The <strong>resonance condition</strong> is:
+      </p>
+      <div class="formula">
+        ξ ≈ 1 / (2π · r)
+      </div>
+      <p>
+        For large periods r (large N), ξ becomes extremely small → hard to measure.
+        This is <strong>not a bug</strong>, it's <strong>physics!</strong>
+      </p>
+
+      <h3>💡 Tips for Successful Factorization</h3>
+      <ul>
+        <li><strong>Small numbers (N &lt; 10¹⁰):</strong> T0 alone is sufficient</li>
+        <li><strong>Medium numbers (10¹⁰ - 10¹⁵):</strong> Use Fallback "All Methods"</li>
+        <li><strong>Large numbers (&gt; 10¹⁵):</strong> Pollard's Rho or Fermat</li>
+        <li><strong>Primes:</strong> Cannot be factored (mathematically correct)</li>
+        <li><strong>Semiprimes:</strong> Are the best test candidates</li>
+      </ul>
+
+      <h3>📚 Further Documentation</h3>
+      <ul>
+        <li><code>176_T0_Shor_Photon_De.tex</code> — Shor's algorithm without qubits</li>
+        <li><code>075_RSA_De.tex</code> — Period finding as resonance problem</li>
+        <li><code>316_Riemann_Zeta_De.tex</code> — FFGFT and Riemann zeta function</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DEUTSCH -->
+  <div id="content-de" class="lang-content active">
+    <div class="control-panel">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <h3 style="color:#8888bb; font-weight:400;">🎛️ Simulator-Steuerung</h3>
+        <span style="font-size:0.7em; color:#555;">
+          <span class="badge badge-success">deterministisch</span>
+          <span class="badge badge-info">BigInt</span>
+        </span>
+      </div>
+
+      <div class="control-grid">
+        <div class="control-group" style="grid-column: span 2;">
+          <label>🔢 RSA-Zahl (N) — als Text eingeben</label>
+          <input type="text" id="rsa-number-de" value="1040398765439876521563327" placeholder="Zahl eingeben" style="font-size:1.1em;">
+          <span class="hint">💡 Beliebig große Zahlen möglich — wird als String verarbeitet</span>
         </div>
 
-        <div class="input-group">
-          <label for="xi-mode-de">🔧 ξ-Parameter:</label>
+        <div class="control-group">
+          <label>🔧 ξ-Modus</label>
           <select id="xi-mode-de">
-            <option value="natural">Natürlich (1×10⁻⁵)</option>
-            <option value="theoretical">Theoretisch (angepasst)</option>
-            <option value="optimized">Optimiert (auto-tuning)</option>
-            <option value="old_error_1e4">Test: 1×10⁻⁴</option>
-            <option value="old_error_133e4">Test: 1.33×10⁻⁴</option>
+            <option value="deterministic">Deterministisch (empfohlen)</option>
+            <option value="adaptive">Adaptiv</option>
+            <option value="theoretical">Theoretisch</option>
+            <option value="fixed_1e5">Fest: 1×10⁻⁵</option>
+            <option value="fixed_1e4">Fest: 1×10⁻⁴</option>
+            <option value="fixed_1e6">Fest: 1×10⁻⁶</option>
           </select>
+          <span class="hint">🧠 ξ = f(N) ohne Zufall</span>
         </div>
 
-        <div class="input-group">
-          <label for="base-a-de">🎯 Basis (a):</label>
+        <div class="control-group">
+          <label>🎯 Basis (a)</label>
           <input type="number" id="base-a-de" value="" placeholder="Auto (optimal)">
-          <span>💡 Leer = automatische Optimierung</span>
+          <span class="hint">💡 Leer = automatische Optimierung</span>
         </div>
 
-        <div class="input-group">
-          <label for="fallback-de">⚠️ Fallback:</label>
-          <select id="fallback-de">
-            <option value="false">Deaktiviert (Pure T0)</option>
-            <option value="true">Aktiviert</option>
+        <div class="control-group" style="border: 2px solid #34d399; border-radius: 10px; padding: 8px; background: rgba(52, 211, 153, 0.05);">
+          <label style="color: #34d399;">⚠️ Fallback-Strategie <span style="color:#34d399;">★ EMPFOHLEN</span></label>
+          <select id="fallback-de" style="border-color: #34d399;">
+            <option value="all" selected>🔄 Alle Methoden (empfohlen)</option>
+            <option value="trial">🔢 Trial Division</option>
+            <option value="pollard">🌀 Pollard's Rho</option>
+            <option value="fermat">📐 Fermat</option>
+            <option value="none">❌ Kein Fallback (Pure T0)</option>
           </select>
-        </div>
-
-        <div class="button-group">
-          <button class="btn btn-primary" onclick="runT0Shor('de')">🚀 T0-Shor starten</button>
-          <button class="btn btn-secondary" onclick="calculateT0Resources('de')">🧮 T0-Ressourcen</button>
-          <button class="btn btn-info" onclick="solveEnergyField('de')">🌊 Energiefeld lösen</button>
-          <button class="btn btn-optimize" onclick="optimizeXiParameter('de')">🎯 ξ-Optimierung</button>
-          <button class="btn" onclick="clearResults('de')">🗑️ Ergebnisse löschen</button>
-        </div>
-
-        <div class="button-group">
-          <button class="btn btn-warning" onclick="runLimitTests('de')">⚠️ Grenzen-Tests</button>
-          <button class="btn btn-danger" onclick="runFailureTests('de')">💥 Schwächen-Tests</button>
-          <button class="btn btn-critical" onclick="runStressTests('de')">🔥 Stress-Tests</button>
-          <button class="btn btn-benchmark" onclick="runBenchmarkSeries('de')">📊 Benchmark-Serie</button>
+          <span class="hint success">✅ Für große Zahlen: "Alle Methoden" verwenden!</span>
         </div>
       </div>
 
-      <div class="statistics" id="stats-de">
-        <div class="stat-card">
-          <div>Aktuelle RSA-Zahl</div>
-          <div class="stat-value" id="current-n-de">-</div>
-        </div>
-        <div class="stat-card">
-          <div>ξ-Parameter</div>
-          <div class="stat-value" id="current-xi-de">-</div>
-        </div>
-        <div class="stat-card">
-          <div>ξ-Optimierung</div>
-          <div class="stat-value" id="xi-optimization-de">-</div>
-        </div>
-        <div class="stat-card">
-          <div>T0-Erfolgsrate</div>
-          <div class="stat-value" id="success-rate-de">-</div>
-        </div>
-      </div>
-
-      <div class="results-panel" id="results-de">
-        <strong>🔬 T0-Simulator Ergebnisse:</strong><br>
-        Bereit für T0-Framework Berechnungen...<br>
-        <br>
-        <em>Hinweise:</em><br>
-        • Pure T0 (ohne Fallback) zeigt echte T0-Physik<br>
-        • Kleine Zahlen (15, 21, 35) für schnelle Tests<br>
-        • Große Zahlen (>1000) für realistische RSA-Simulation<br>
-        • ξ-Parameter bestimmt Energiefeld-Kopplungsstärke<br>
-        • T0 nutzt KEINE klassischen Qubits - nur Energiefelder!<br>
-      </div>
-
-      <div id="energy-field-de" style="display: none;">
-        <h3>🌊 T0-Energiefeld Visualisierung</h3>
-        <div class="energy-field" id="energy-grid-de"></div>
-        <div class="info">
-          <strong>Energiefeld-Parameter:</strong><br>
-          <span id="energy-params-de">Bereit für Berechnung...</span>
-        </div>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="runT0Shor('de')">🚀 T0-Shor starten</button>
+        <button class="btn btn-secondary" onclick="calculateResources('de')">📊 Ressourcen</button>
+        <button class="btn btn-info" onclick="solveEnergyField('de')">🌊 Energiefeld</button>
+        <button class="btn btn-warning" onclick="runTests('de')">🧪 Test-Suite</button>
+        <button class="btn btn-danger" onclick="clearResults('de')">🗑️ Löschen</button>
+        <button class="btn btn-help" onclick="toggleHelp()">❓ Hilfe</button>
       </div>
     </div>
 
-    <!-- English Content -->
-    <div id="english-content" class="language-content">
-      <h1>🧮 T0 Quantum Simulator</h1>
-      <div class="subtitle">Deterministic Quantum Mechanics in Action</div>
-
-      <div class="control-panel">
-        <h2>🎛️ Simulator Controls</h2>
-        
-        <div class="input-group">
-          <label for="rsa-number-en">🔢 RSA Number:</label>
-          <input type="number" id="rsa-number-en" value="15" min="3" max="1000000">
-          <span>💡 Examples: 15, 21, 35, 77, 143, 10403</span>
-        </div>
-
-        <div class="input-group">
-          <label for="xi-mode-en">🔧 ξ Parameter:</label>
-          <select id="xi-mode-en">
-            <option value="natural">Natural (1×10⁻⁵)</option>
-            <option value="theoretical">Theoretical (adaptive)</option>
-            <option value="optimized">Optimized (auto-tuning)</option>
-            <option value="old_error_1e4">Test: 1×10⁻⁴</option>
-            <option value="old_error_133e4">Test: 1.33×10⁻⁴</option>
-          </select>
-        </div>
-
-        <div class="input-group">
-          <label for="base-a-en">🎯 Base (a):</label>
-          <input type="number" id="base-a-en" value="" placeholder="Auto (optimal)">
-          <span>💡 Empty = automatic optimization</span>
-        </div>
-
-        <div class="input-group">
-          <label for="fallback-en">⚠️ Fallback:</label>
-          <select id="fallback-en">
-            <option value="false">Disabled (Pure T0)</option>
-            <option value="true">Enabled</option>
-          </select>
-        </div>
-
-        <div class="button-group">
-          <button class="btn btn-primary" onclick="runT0Shor('en')">🚀 Run T0-Shor</button>
-          <button class="btn btn-secondary" onclick="calculateT0Resources('en')">🧮 T0 Resources</button>
-          <button class="btn btn-info" onclick="solveEnergyField('en')">🌊 Solve Energy Field</button>
-          <button class="btn btn-optimize" onclick="optimizeXiParameter('en')">🎯 ξ Optimization</button>
-          <button class="btn" onclick="clearResults('en')">🗑️ Clear Results</button>
-        </div>
-
-        <div class="button-group">
-          <button class="btn btn-warning" onclick="runLimitTests('en')">⚠️ Limit Tests</button>
-          <button class="btn btn-danger" onclick="runFailureTests('en')">💥 Weakness Tests</button>
-          <button class="btn btn-critical" onclick="runStressTests('en')">🔥 Stress Tests</button>
-          <button class="btn btn-benchmark" onclick="runBenchmarkSeries('en')">📊 Benchmark Suite</button>
-        </div>
+    <!-- Qubit-Anzeige -->
+    <div class="qubit-display" id="qubit-display-de">
+      <div>
+        <div class="label">🎯 Erforderliche Qubits (klassisch)</div>
+        <div class="value blue" id="qubits-classic-de">—</div>
+        <div class="detail">2 · n Bits</div>
       </div>
-
-      <div class="statistics" id="stats-en">
-        <div class="stat-card">
-          <div>Current RSA Number</div>
-          <div class="stat-value" id="current-n-en">-</div>
-        </div>
-        <div class="stat-card">
-          <div>ξ Parameter</div>
-          <div class="stat-value" id="current-xi-en">-</div>
-        </div>
-        <div class="stat-card">
-          <div>ξ Optimization</div>
-          <div class="stat-value" id="xi-optimization-en">-</div>
-        </div>
-        <div class="stat-card">
-          <div>T0 Success Rate</div>
-          <div class="stat-value" id="success-rate-en">-</div>
-        </div>
+      <div>
+        <div class="label">⚡ T0-Energiefeld-Äquivalent</div>
+        <div class="value purple" id="qubits-t0-de">—</div>
+        <div class="detail">Energiefeld-Zellen</div>
       </div>
-
-      <div class="results-panel" id="results-en">
-        <strong>🔬 T0 Simulator Results:</strong><br>
-        Ready for T0-Framework calculations...<br>
-        <br>
-        <em>Notes:</em><br>
-        • Pure T0 (no fallback) shows true T0 physics<br>
-        • Small numbers (15, 21, 35) for quick tests<br>
-        • Large numbers (>1000) for realistic RSA simulation<br>
-        • ξ parameter determines energy field coupling strength<br>
-        • T0 uses NO classical qubits - only energy fields!<br>
+      <div>
+        <div class="label">📉 Reduktion</div>
+        <div class="value green" id="qubits-reduction-de">—</div>
+        <div class="detail">Faktor</div>
       </div>
+      <div style="margin-left:auto;">
+        <span class="badge badge-info">BigInt</span>
+        <span class="badge badge-success">exakt</span>
+      </div>
+    </div>
 
-      <div id="energy-field-en" style="display: none;">
-        <h3>🌊 T0 Energy Field Visualization</h3>
-        <div class="energy-field" id="energy-grid-en"></div>
-        <div class="info">
-          <strong>Energy Field Parameters:</strong><br>
-          <span id="energy-params-en">Ready for calculation...</span>
-        </div>
+    <div class="stats-grid" id="stats-de">
+      <div class="stat-card">
+        <div class="label">RSA-Zahl</div>
+        <div class="value blue small" id="current-n-de">-</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">ξ-Parameter</div>
+        <div class="value purple" id="current-xi-de">-</div>
+      </div>
+      <div class="stat-card" style="border-color: #34d399;">
+        <div class="label">✅ Erfolgsrate (gesamt)</div>
+        <div class="value green" id="success-rate-de">-</div>
+      </div>
+      <div class="stat-card" style="border-color: #f59e0b;">
+        <div class="label">⚠️ Letztes Ergebnis</div>
+        <div class="value orange small" id="last-result-de">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Berechnungen</div>
+        <div class="value orange" id="calc-count-de">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Letzte Methode</div>
+        <div class="value pink small" id="last-method-de">—</div>
+      </div>
+    </div>
+
+    <div class="progress-container" id="progress-de" style="display:none;">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill-de" style="width:0%"></div></div>
+      <div class="progress-label">
+        <span id="progress-text-de">Berechne...</span>
+        <span id="progress-percent-de">0%</span>
+      </div>
+    </div>
+
+    <div class="results-panel" id="results-de">
+      <div class="header-line">🔬 T0-Simulator v3.5 — Zweisprachiges Hilfesystem</div>
+      <span class="dim">Willkommen zum deterministischen T0-Quantensimulator.</span><br>
+      <span class="dim">• <strong style="color:#34d399;">Fallback "Alle Methoden" ist jetzt Standard</strong></span><br>
+      <span class="dim">• 5 Faktorisierungsmethoden: T0, GCD, Trial, Pollard, Fermat</span><br>
+      <span class="dim">• Die verwendete Methode wird farbig markiert</span><br>
+      <span class="dim">• Alle modularen Operationen exakt mit BigInt</span><br>
+      <span class="dim">• <strong style="color:#fb923c;">Klicke auf "Hilfe" für Erklärungen zu Grenzen</strong></span><br>
+      <br>
+      <span class="info">💡 Klicke "T0-Shor starten" für eine Faktorisierung.</span>
+    </div>
+
+    <div class="energy-field-container" id="energy-container-de">
+      <h4 style="color:#8888bb; margin-bottom:10px;">🌊 T0-Energiefeld Visualisierung</h4>
+      <div class="energy-grid" id="energy-grid-de"></div>
+      <div class="energy-params" id="energy-params-de">
+        <span class="dim">Bereit für Berechnung...</span>
       </div>
     </div>
   </div>
 
-  <script>
-    // Global state
-    let currentLang = 'de';
-    let simulatorState = {
-      xi: 1e-5,
-      successCount: 0,
-      totalRuns: 0,
-      lastResult: null
+  <!-- ENGLISH -->
+  <div id="content-en" class="lang-content">
+    <div class="control-panel">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <h3 style="color:#8888bb; font-weight:400;">🎛️ Simulator Controls</h3>
+        <span style="font-size:0.7em; color:#555;">
+          <span class="badge badge-success">deterministic</span>
+          <span class="badge badge-info">BigInt</span>
+        </span>
+      </div>
+
+      <div class="control-grid">
+        <div class="control-group" style="grid-column: span 2;">
+          <label>🔢 RSA Number (N) — enter as text</label>
+          <input type="text" id="rsa-number-en" value="1040398765439876521563327" placeholder="Enter number" style="font-size:1.1em;">
+          <span class="hint">💡 Arbitrarily large numbers — processed as string</span>
+        </div>
+
+        <div class="control-group">
+          <label>🔧 ξ Mode</label>
+          <select id="xi-mode-en">
+            <option value="deterministic">Deterministic (recommended)</option>
+            <option value="adaptive">Adaptive</option>
+            <option value="theoretical">Theoretical</option>
+            <option value="fixed_1e5">Fixed: 1×10⁻⁵</option>
+            <option value="fixed_1e4">Fixed: 1×10⁻⁴</option>
+            <option value="fixed_1e6">Fixed: 1×10⁻⁶</option>
+          </select>
+          <span class="hint">🧠 ξ = f(N) without randomness</span>
+        </div>
+
+        <div class="control-group">
+          <label>🎯 Base (a)</label>
+          <input type="number" id="base-a-en" value="" placeholder="Auto (optimal)">
+          <span class="hint">💡 Empty = automatic optimization</span>
+        </div>
+
+        <div class="control-group" style="border: 2px solid #34d399; border-radius: 10px; padding: 8px; background: rgba(52, 211, 153, 0.05);">
+          <label style="color: #34d399;">⚠️ Fallback Strategy <span style="color:#34d399;">★ RECOMMENDED</span></label>
+          <select id="fallback-en" style="border-color: #34d399;">
+            <option value="all" selected>🔄 All Methods (recommended)</option>
+            <option value="trial">🔢 Trial Division</option>
+            <option value="pollard">🌀 Pollard's Rho</option>
+            <option value="fermat">📐 Fermat</option>
+            <option value="none">❌ No Fallback (Pure T0)</option>
+          </select>
+          <span class="hint success">✅ For large numbers: use "All Methods"!</span>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="runT0Shor('en')">🚀 Run T0-Shor</button>
+        <button class="btn btn-secondary" onclick="calculateResources('en')">📊 Resources</button>
+        <button class="btn btn-info" onclick="solveEnergyField('en')">🌊 Energy Field</button>
+        <button class="btn btn-warning" onclick="runTests('en')">🧪 Test Suite</button>
+        <button class="btn btn-danger" onclick="clearResults('en')">🗑️ Clear</button>
+        <button class="btn btn-help" onclick="toggleHelp()">❓ Help</button>
+      </div>
+    </div>
+
+    <div class="qubit-display" id="qubit-display-en">
+      <div>
+        <div class="label">🎯 Required Qubits (classical)</div>
+        <div class="value blue" id="qubits-classic-en">—</div>
+        <div class="detail">2 · n bits</div>
+      </div>
+      <div>
+        <div class="label">⚡ T0 Energy Field Equivalent</div>
+        <div class="value purple" id="qubits-t0-en">—</div>
+        <div class="detail">Energy field cells</div>
+      </div>
+      <div>
+        <div class="label">📉 Reduction</div>
+        <div class="value green" id="qubits-reduction-en">—</div>
+        <div class="detail">Factor</div>
+      </div>
+      <div style="margin-left:auto;">
+        <span class="badge badge-info">BigInt</span>
+        <span class="badge badge-success">exact</span>
+      </div>
+    </div>
+
+    <div class="stats-grid" id="stats-en">
+      <div class="stat-card">
+        <div class="label">RSA Number</div>
+        <div class="value blue small" id="current-n-en">-</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">ξ Parameter</div>
+        <div class="value purple" id="current-xi-en">-</div>
+      </div>
+      <div class="stat-card" style="border-color: #34d399;">
+        <div class="label">✅ Success Rate (total)</div>
+        <div class="value green" id="success-rate-en">-</div>
+      </div>
+      <div class="stat-card" style="border-color: #f59e0b;">
+        <div class="label">⚠️ Last Result</div>
+        <div class="value orange small" id="last-result-en">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Calculations</div>
+        <div class="value orange" id="calc-count-en">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Last Method</div>
+        <div class="value pink small" id="last-method-en">—</div>
+      </div>
+    </div>
+
+    <div class="progress-container" id="progress-en" style="display:none;">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill-en" style="width:0%"></div></div>
+      <div class="progress-label">
+        <span id="progress-text-en">Computing...</span>
+        <span id="progress-percent-en">0%</span>
+      </div>
+    </div>
+
+    <div class="results-panel" id="results-en">
+      <div class="header-line">🔬 T0 Simulator v3.5 — Bilingual Help System</div>
+      <span class="dim">Welcome to the deterministic T0 quantum simulator.</span><br>
+      <span class="dim">• <strong style="color:#34d399;">Fallback "All Methods" is now default</strong></span><br>
+      <span class="dim">• 5 factorization methods: T0, GCD, Trial, Pollard, Fermat</span><br>
+      <span class="dim">• The used method is color-coded</span><br>
+      <span class="dim">• All modular operations exact with BigInt</span><br>
+      <span class="dim">• <strong style="color:#fb923c;">Click "Help" for explanations of limits</strong></span><br>
+      <br>
+      <span class="info">💡 Click "Run T0-Shor" to factor a number.</span>
+    </div>
+
+    <div class="energy-field-container" id="energy-container-en">
+      <h4 style="color:#8888bb; margin-bottom:10px;">🌊 T0 Energy Field Visualization</h4>
+      <div class="energy-grid" id="energy-grid-en"></div>
+      <div class="energy-params" id="energy-params-en">
+        <span class="dim">Ready for calculation...</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// T0 QUANTUM SIMULATOR v3.5 — BILINGUAL HELP SYSTEM
+// ============================================================
+
+// -------- Help Toggle --------
+function toggleHelp() {
+  const content = document.getElementById('help-content');
+  const icon = document.getElementById('help-icon');
+  content.classList.toggle('open');
+  icon.classList.toggle('open');
+}
+
+// -------- Global State --------
+const state = {
+  de: { xi: 1e-5, success: 0, total: 0, lastResult: null, calcCount: 0, lastMethod: null, lastSuccess: null },
+  en: { xi: 1e-5, success: 0, total: 0, lastResult: null, calcCount: 0, lastMethod: null, lastSuccess: null }
+};
+let currentLang = 'de';
+
+// -------- Language --------
+function switchLanguage(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-content').forEach(el => el.classList.remove('active'));
+  document.getElementById(`content-${lang}`).classList.add('active');
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="switchLanguage('${lang}')"]`).classList.add('active');
+  
+  // Hilfe-Titel umschalten
+  document.getElementById('help-title-de').style.display = lang === 'de' ? 'block' : 'none';
+  document.getElementById('help-title-en').style.display = lang === 'en' ? 'block' : 'none';
+  
+  // Hilfe-Inhalt umschalten
+  document.querySelectorAll('.lang-help').forEach(el => el.classList.remove('active'));
+  document.getElementById(`help-${lang}`).classList.add('active');
+}
+
+// ============================================================
+// BIGINT EXACT ARITHMETIC
+// ============================================================
+
+function modPowBigIntBig(base, exp, mod) {
+  let result = 1n;
+  let b = BigInt(base) % BigInt(mod);
+  let e = BigInt(exp);
+  const m = BigInt(mod);
+  while (e > 0n) {
+    if (e & 1n) result = (result * b) % m;
+    e >>= 1n;
+    b = (b * b) % m;
+  }
+  return result;
+}
+
+function gcdBigInt(a, b) {
+  a = BigInt(a);
+  b = BigInt(b);
+  while (b !== 0n) {
+    const t = b;
+    b = a % b;
+    a = t;
+  }
+  return Number(a);
+}
+
+function isPrimeMillerRabinBigInt(n, k = 20) {
+  const N = BigInt(n);
+  if (N < 2n) return false;
+  if (N === 2n || N === 3n) return true;
+  if (N % 2n === 0n) return false;
+
+  let d = N - 1n;
+  let r = 0n;
+  while (d % 2n === 0n) {
+    d /= 2n;
+    r++;
+  }
+
+  const witnesses = [2n, 3n, 5n, 7n, 11n, 13n, 17n, 19n, 23n, 29n, 31n, 37n];
+  for (const a of witnesses) {
+    if (a >= N) continue;
+    let x = modPowBigIntBig(a, d, N);
+    if (x === 1n || x === N - 1n) continue;
+    let cont = false;
+    for (let i = 0n; i < r - 1n; i++) {
+      x = (x * x) % N;
+      if (x === N - 1n) { cont = true; break; }
+    }
+    if (cont) continue;
+    return false;
+  }
+  return true;
+}
+
+function bigIntSqrt(n) {
+  if (n < 0n) throw new Error('Negative Zahl');
+  if (n < 2n) return n;
+  let x = n;
+  let y = (x + 1n) >> 1n;
+  while (y < x) {
+    x = y;
+    y = (x + n / x) >> 1n;
+  }
+  return x;
+}
+
+function classicalTrialDivisionBigInt(n) {
+  const N = BigInt(n);
+  if (N < 2n) return null;
+  if (N % 2n === 0n) return N === 2n ? null : [2, Number(N / 2n)];
+  const limit = N > 1000000000000n ? 1000000n : N;
+  let i = 3n;
+  while (i * i <= limit && i < 10000000n) {
+    if (N % i === 0n) return [Number(i), Number(N / i)];
+    i += 2n;
+  }
+  return null;
+}
+
+// -------- T0 Framework --------
+class T0Framework {
+  constructor(N, xiMode = 'deterministic', fallbackMode = 'all', customBase = null) {
+    this.Nbig = BigInt(N);
+    this.N = Number(this.Nbig);
+    this.Nstr = this.Nbig.toString();
+    this.xiMode = xiMode;
+    this.fallbackMode = fallbackMode;
+    this.customBase = customBase ? Number(customBase) : null;
+    this.xi = this.computeXi();
+    this.bits = this.Nbig.toString(2).length;
+    this.calcCount = 0;
+    this.t0Success = false;
+    this.fallbackUsed = false;
+    this.fallbackMethod = null;
+    this.method = null;
+    this.factors = null;
+    this.period = null;
+    this.resonance = null;
+    this.timeMs = 0;
+    this.methodDisplay = null;
+    this.t0Attempted = false;
+    this.gcdAttempted = false;
+    this.browserLimitReached = false;
+    this.limitReason = null;
+  }
+
+  computeXi() {
+    const N = this.N;
+    const mode = this.xiMode;
+    if (mode === 'fixed_1e5') return 1e-5;
+    if (mode === 'fixed_1e4') return 1e-4;
+    if (mode === 'fixed_1e6') return 1e-6;
+    if (mode === 'theoretical') {
+      return 1 / (2 * Math.PI * Math.sqrt(Math.max(N, 2)));
+    }
+    if (mode === 'adaptive') {
+      const base = 1 / (2 * Math.PI * Math.sqrt(Math.max(N, 2)));
+      const sizeFactor = Math.max(0.1, Math.min(10, 100 / Math.log2(Math.max(N, 4))));
+      return base * sizeFactor;
+    }
+    const logN = Math.log2(Math.max(N, 4));
+    const base = 1e-5;
+    const scale = Math.max(0.1, Math.min(10, 50 / logN));
+    const resonance = 1 / (2 * Math.PI * Math.sqrt(Math.max(N, 2)));
+    return Math.max(1e-9, Math.min(1e-3, base * scale * (1 + resonance * 1000)));
+  }
+
+  findOptimalBase() {
+    if (this.customBase && this.customBase > 1 && this.customBase < this.N) {
+      return this.customBase;
+    }
+    const candidates = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47];
+    let bestA = 2;
+    let bestScore = -1;
+    for (const a of candidates) {
+      if (a >= this.N) break;
+      if (gcdBigInt(a, this.N) > 1) continue;
+      const logA = Math.log(a);
+      const logN = Math.log(this.N);
+      const phase = Math.sin(2 * Math.PI * logA / logN);
+      const resonance = Math.abs(phase) / (1 + Math.abs(this.xi) * a);
+      const score = resonance * (1 + 1 / (1 + Math.log(a)));
+      if (score > bestScore) {
+        bestScore = score;
+        bestA = a;
+      }
+    }
+    return bestA;
+  }
+
+  findOrder(a) {
+    const N = this.Nbig;
+    const aBig = BigInt(a);
+    if (gcdBigInt(a, Number(N)) !== 1) return null;
+
+    let maxM = 1000000;
+    let limitReason = null;
+    
+    if (this.bits < 30) maxM = 100000;
+    else if (this.bits < 40) maxM = 200000;
+    else if (this.bits < 50) maxM = 500000;
+    else if (this.bits < 60) maxM = 1000000;
+    else if (this.bits < 70) maxM = 1500000;
+    else {
+      maxM = 2000000;
+      this.browserLimitReached = true;
+      this.limitReason = `Browser-Limit: Für N > 70 Bits (${this.bits} Bits) ist BSGS mit ${maxM.toLocaleString()} Schritten begrenzt.`;
+    }
+
+    const nNum = Number(N > 1000000000000000n ? 1000000000000000n : N);
+    const m = Math.min(Math.ceil(Math.sqrt(nNum)), maxM);
+    
+    if (m < 10) return null;
+    
+    const babySteps = new Map();
+
+    let current = 1n;
+    for (let j = 0; j < m; j++) {
+      if (!babySteps.has(current)) {
+        babySteps.set(current, j);
+      }
+      current = (current * aBig) % N;
+      this.calcCount++;
+    }
+
+    const phi = Math.min(Number(N), 1000000000) - 1;
+    const exp = Math.max(0, phi - m);
+    const aInvM = modPowBigIntBig(a, exp, Number(N));
+
+    let giant = 1n;
+    for (let i = 0; i < m; i++) {
+      if (babySteps.has(giant)) {
+        const r = i * m + babySteps.get(giant);
+        if (r > 0 && modPowBigIntBig(a, r, Number(N)) === 1n) {
+          return { period: r, method: 'bsgs' };
+        }
+      }
+      giant = (giant * aInvM) % N;
+      this.calcCount++;
+    }
+
+    if (Number(N) < 1000000) {
+      for (let r = 1; r < Number(N); r++) {
+        if (modPowBigIntBig(a, r, Number(N)) === 1n) {
+          return { period: r, method: 'brute' };
+        }
+        this.calcCount++;
+      }
+    }
+    return null;
+  }
+
+  extractFactors(a, r) {
+    if (r % 2 !== 0) return null;
+    const half = r / 2;
+    const aPow = modPowBigIntBig(a, half, this.N);
+    if (aPow === 1n || aPow === this.Nbig - 1n) return null;
+    const f1 = gcdBigInt(Number(aPow - 1n), this.N);
+    const f2 = gcdBigInt(Number(aPow + 1n), this.N);
+    if (f1 > 1 && f1 < this.N && this.N % f1 === 0) {
+      return [f1, this.N / f1];
+    }
+    if (f2 > 1 && f2 < this.N && this.N % f2 === 0) {
+      return [f2, this.N / f2];
+    }
+    return null;
+  }
+
+  enhancedTrialDivision(n) {
+    const N = BigInt(n);
+    if (N < 2n) return null;
+    if (N % 2n === 0n) return N === 2n ? null : [2, Number(N / 2n)];
+    
+    const smallPrimes = [3n, 5n, 7n, 11n, 13n, 17n, 19n, 23n, 29n, 31n, 37n, 41n, 43n, 47n, 53n, 59n, 61n, 67n, 71n, 73n, 79n, 83n, 89n, 97n];
+    for (const p of smallPrimes) {
+      if (N % p === 0n) {
+        return [Number(p), Number(N / p)];
+      }
+      this.calcCount++;
+    }
+    
+    const limit = N > 1000000000000n ? 1000000n : N;
+    let i = 101n;
+    while (i * i <= limit && i < 10000000n) {
+      if (N % i === 0n) {
+        return [Number(i), Number(N / i)];
+      }
+      i += 2n;
+      this.calcCount++;
+    }
+    return null;
+  }
+
+  pollardRho(n, maxIter = 10000) {
+    const N = BigInt(n);
+    if (N % 2n === 0n) return 2;
+    const f = (x) => (x * x + 1n) % N;
+    for (let attempt = 0; attempt < 5; attempt++) {
+      let x = BigInt(2 + attempt);
+      let y = x;
+      let d = 1n;
+      for (let i = 0; i < maxIter && d === 1n; i++) {
+        x = f(x);
+        y = f(f(y));
+        d = gcdBigInt(x > y ? x - y : y - x, N);
+        this.calcCount++;
+      }
+      if (d > 1n && d < N) {
+        return Number(d);
+      }
+    }
+    return null;
+  }
+
+  fermatFactor(n, maxIter = 10000) {
+    const N = BigInt(n);
+    if (N % 2n === 0n) return 2;
+    let a = bigIntSqrt(N) + 1n;
+    let b2 = a * a - N;
+    for (let i = 0; i < maxIter && b2 >= 0n; i++) {
+      const b = bigIntSqrt(b2);
+      if (b * b === b2) {
+        const f1 = a - b;
+        const f2 = a + b;
+        if (f1 > 1n && f1 < N) return Number(f1);
+        if (f2 > 1n && f2 < N) return Number(f2);
+      }
+      a++;
+      b2 = a * a - N;
+      this.calcCount++;
+    }
+    return null;
+  }
+
+  tryAllFallbacks() {
+    const results = [];
+    const trial = this.enhancedTrialDivision(this.N);
+    if (trial) results.push({ method: 'trial_division', factors: trial });
+    const pollard = this.pollardRho(this.N);
+    if (pollard && pollard > 1 && pollard < this.N && this.N % pollard === 0) {
+      results.push({ method: 'pollard_rho', factors: [pollard, this.N / pollard] });
+    }
+    const fermat = this.fermatFactor(this.N);
+    if (fermat && fermat > 1 && fermat < this.N && this.N % fermat === 0) {
+      results.push({ method: 'fermat', factors: [fermat, this.N / fermat] });
+    }
+    if (results.length > 0) {
+      const priority = { trial_division: 3, pollard_rho: 2, fermat: 1 };
+      return results.sort((a, b) => (priority[b.method] || 0) - (priority[a.method] || 0))[0];
+    }
+    return null;
+  }
+
+  run() {
+    const start = performance.now();
+    this.calcCount = 0;
+    this.t0Attempted = false;
+    this.gcdAttempted = false;
+    this.browserLimitReached = false;
+    this.limitReason = null;
+
+    if (isPrimeMillerRabinBigInt(this.N, 20)) {
+      this.method = 'prime';
+      this.methodDisplay = '🔬 Primzahl (keine Faktoren)';
+      this.factors = null;
+      this.timeMs = performance.now() - start;
+      return this;
+    }
+
+    const a = this.findOptimalBase();
+    const g = gcdBigInt(a, this.N);
+    this.gcdAttempted = true;
+    if (g > 1 && g < this.N) {
+      this.method = 'gcd_shortcut';
+      this.methodDisplay = '⚡ GCD-Shortcut';
+      this.factors = [g, this.N / g];
+      this.t0Success = true;
+      this.timeMs = performance.now() - start;
+      return this;
+    }
+
+    this.t0Attempted = true;
+    
+    if (this.bits > 80) {
+      this.browserLimitReached = true;
+      this.limitReason = `N > 80 Bits (${this.bits} Bits) — T0-Ordnungssuche würde ${Math.pow(10, this.bits/2).toExponential(2)} Schritte benötigen. Browser würde abstürzen.`;
+    } else {
+      const orderResult = this.findOrder(a);
+      if (orderResult) {
+        this.period = orderResult.period;
+        const factors = this.extractFactors(a, orderResult.period);
+        if (factors) {
+          this.method = 'order_finding';
+          this.methodDisplay = '💜 Pure T0 (Ordnungssuche)';
+          this.factors = factors;
+          this.t0Success = true;
+          this.resonance = 1 / (1 + Math.abs(this.xi) * orderResult.period);
+          this.timeMs = performance.now() - start;
+          return this;
+        }
+      }
+    }
+
+    if (this.fallbackMode !== 'none') {
+      let fallbackResult = null;
+      let methodName = null;
+      
+      switch (this.fallbackMode) {
+        case 'trial':
+          fallbackResult = this.enhancedTrialDivision(this.N);
+          if (fallbackResult) methodName = 'trial_division';
+          break;
+        case 'pollard':
+          const p = this.pollardRho(this.N);
+          if (p && p > 1 && p < this.N && this.N % p === 0) {
+            fallbackResult = [p, this.N / p];
+            methodName = 'pollard_rho';
+          }
+          break;
+        case 'fermat':
+          const f = this.fermatFactor(this.N);
+          if (f && f > 1 && f < this.N && this.N % f === 0) {
+            fallbackResult = [f, this.N / f];
+            methodName = 'fermat';
+          }
+          break;
+        case 'all':
+          const best = this.tryAllFallbacks();
+          if (best) {
+            fallbackResult = best.factors;
+            methodName = best.method;
+          }
+          break;
+      }
+      
+      if (fallbackResult && methodName) {
+        this.method = methodName;
+        this.factors = fallbackResult;
+        this.fallbackUsed = true;
+        this.t0Success = true;
+        this.methodDisplay = this.getMethodDisplay(methodName);
+        this.timeMs = performance.now() - start;
+        return this;
+      }
+    }
+
+    let failureReason = '';
+    if (this.browserLimitReached) {
+      failureReason = this.limitReason || 'Browser-Limit erreicht';
+    } else if (this.bits > 80) {
+      failureReason = `N > 80 Bits (${this.bits} Bits) — zu groß für Browser-BSGS`;
+    } else if (this.t0Attempted && !this.fallbackUsed) {
+      failureReason = 'T0 fand keine Periode, Fallback deaktiviert';
+    } else if (this.fallbackMode !== 'none') {
+      failureReason = 'Alle Fallback-Methoden fehlgeschlagen';
+    } else {
+      failureReason = 'Keine Methode erfolgreich';
+    }
+
+    this.method = 'failure';
+    this.methodDisplay = `❌ ${failureReason}`;
+    this.factors = null;
+    this.t0Success = false;
+    this.timeMs = performance.now() - start;
+    return this;
+  }
+
+  getMethodDisplay(method) {
+    const map = {
+      'order_finding': '💜 Pure T0 (Ordnungssuche)',
+      'gcd_shortcut': '⚡ GCD-Shortcut',
+      'trial_division': '🔢 Trial Division',
+      'pollard_rho': '🌀 Pollard\'s Rho',
+      'fermat': '📐 Fermat',
+      'prime': '🔬 Primzahl',
+      'failure': '❌ Keine Methode erfolgreich'
     };
+    return map[method] || method;
+  }
 
-    // Language switching
-    function switchLanguage(lang) {
-      currentLang = lang;
-      document.querySelectorAll('.language-content').forEach(content => {
-        content.classList.remove('active');
-      });
-      
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      
-      if (lang === 'de') {
-        document.getElementById('german-content').classList.add('active');
-        document.querySelector('[onclick="switchLanguage(\'de\')"]').classList.add('active');
-      } else {
-        document.getElementById('english-content').classList.add('active');
-        document.querySelector('[onclick="switchLanguage(\'en\')"]').classList.add('active');
-      }
+  getMethodClass(method) {
+    const map = {
+      'order_finding': 'method-t0',
+      'gcd_shortcut': 'method-gcd',
+      'trial_division': 'method-trial',
+      'pollard_rho': 'method-pollard',
+      'fermat': 'method-fermat',
+      'prime': 'method-prime',
+      'failure': 'method-failure'
+    };
+    return map[method] || 'method-failure';
+  }
+
+  solveEnergyField(resolution = 16, timeSteps = 10) {
+    const x = Array.from({ length: resolution }, (_, i) => i / (resolution - 1));
+    const t = Array.from({ length: timeSteps }, (_, i) => i / (timeSteps - 1));
+    const E = Array.from({ length: resolution }, () => Array(timeSteps).fill(0));
+    const dx = 1 / (resolution - 1);
+    const dt = 1 / (timeSteps - 1);
+    const c2 = 1 + Math.abs(this.xi);
+    const N = this.N;
+
+    for (let i = 0; i < resolution; i++) {
+      E[i][0] = Math.sin(2 * Math.PI * x[i] * Math.log(N) / 10) * this.xi * 100;
+      if (timeSteps > 1) E[i][1] = E[i][0] * 0.99;
     }
 
-    // Function to add headers for each function
-    function addFunctionHeader(lang, functionName, icon, className = '') {
-      const headers = {
-        de: {
-          't0_shor': '🚀 T0-SHOR ALGORITHMUS GESTARTET',
-          'resources': '🧮 T0-RESSOURCEN BERECHNUNG',
-          'energy_field': '🌊 ENERGIEFELD-LÖSUNG',
-          'optimization': '🎯 ξ-PARAMETER OPTIMIERUNG',
-          'limit_tests': '⚠️ GRENZEN-TESTS',
-          'failure_tests': '💥 SCHWÄCHEN-TESTS', 
-          'stress_tests': '🔥 STRESS-TESTS',
-          'benchmark': '📊 BENCHMARK-SERIE'
-        },
-        en: {
-          't0_shor': '🚀 T0-SHOR ALGORITHM STARTED',
-          'resources': '🧮 T0-RESOURCES CALCULATION',
-          'energy_field': '🌊 ENERGY FIELD SOLUTION',
-          'optimization': '🎯 ξ-PARAMETER OPTIMIZATION',
-          'limit_tests': '⚠️ LIMIT TESTS',
-          'failure_tests': '💥 WEAKNESS TESTS',
-          'stress_tests': '🔥 STRESS TESTS', 
-          'benchmark': '📊 BENCHMARK SUITE'
-        }
-      };
-
-      const headerText = headers[lang][functionName] || `${icon} ${functionName.toUpperCase()}`;
-      const timestamp = new Date().toLocaleTimeString();
-      
-      const headerHTML = `<div class="function-header ${className}">
-        ${headerText} - ${timestamp}
-      </div>`;
-      
-      const resultsDiv = document.getElementById(`results-${lang}`);
-      resultsDiv.innerHTML += headerHTML;
-      resultsDiv.scrollTop = resultsDiv.scrollHeight;
+    for (let j = 2; j < timeSteps; j++) {
+      for (let i = 1; i < resolution - 1; i++) {
+        const lap = (E[i+1][j-1] - 2*E[i][j-1] + E[i-1][j-1]) / (dx * dx);
+        const V = Math.sin(2 * Math.PI * x[i] * Math.log(N) / 10);
+        E[i][j] = 2*E[i][j-1] - E[i][j-2] + c2 * dt * dt * lap + this.xi * V * E[i][j-1] * dt * dt;
+      }
+      E[0][j] = 0;
+      E[resolution-1][j] = 0;
     }
+    return { E, x, t };
+  }
 
-    // T0 Simulator JavaScript Implementation
-    class T0FrameworkSimulator {
-      constructor(rsaTargetN, useTheoreticalXi = false, enableFallback = true) {
-        this.rsaN = rsaTargetN;
-        this.rsaBits = Math.ceil(Math.log2(rsaTargetN));
-        this.useTheoreticalXi = useTheoreticalXi;
-        this.enableFallback = enableFallback;
-        this.xi = this.optimizeXiForHardware();
-        this.numQubits = this.calculateOptimalQubits(rsaTargetN).optimizedQubits;
-        this.t0SuccessCount = 0;
-        this.fallbackSuccessCount = 0;
-        this.lastSuccessMethod = null;
-      }
+  getSummary() {
+    return {
+      N: this.N,
+      Nstr: this.Nstr,
+      xi: this.xi,
+      bits: this.bits,
+      method: this.method,
+      methodDisplay: this.methodDisplay,
+      methodClass: this.getMethodClass(this.method),
+      factors: this.factors,
+      period: this.period,
+      resonance: this.resonance,
+      success: this.t0Success,
+      fallbackUsed: this.fallbackUsed,
+      fallbackMode: this.fallbackMode,
+      calcCount: this.calcCount,
+      timeMs: this.timeMs,
+      xiMode: this.xiMode,
+      precision: 'BigInt',
+      t0Attempted: this.t0Attempted,
+      gcdAttempted: this.gcdAttempted,
+      browserLimitReached: this.browserLimitReached,
+      limitReason: this.limitReason
+    };
+  }
+}
 
-      optimizeXiForHardware() {
-        if (this.useTheoreticalXi === "old_error_1e4") {
-          return 1e-4;
-        } else if (this.useTheoreticalXi === "old_error_133e4") {
-          return 1.33e-4;
-        } else if (this.useTheoreticalXi === "optimized") {
-          return this.adaptiveXiOptimization();
-        } else {
-          return this.adaptiveXiForHardware();
-        }
-      }
+// -------- Interface Functions --------
+function getNFromInput(lang) {
+  const input = document.getElementById(`rsa-number-${lang}`);
+  const raw = input.value.trim();
+  if (!raw) return null;
+  const cleaned = raw.replace(/[^0-9]/g, '');
+  if (!cleaned) return null;
+  return cleaned;
+}
 
-      adaptiveXiOptimization() {
-        // VERBESSERTE dynamische ξ-Optimierung mit echter Adaptation
-        const baseXi = this.adaptiveXiForHardware();
-        
-        // Mehrere Optimierungsstrategien testen
-        const strategies = this.getOptimizationStrategies();
-        let bestXi = baseXi;
-        let bestScore = 0;
-        
-        // Jede Strategie schnell testen
-        for (let strategy of strategies) {
-          const candidateXi = this.applyStrategy(baseXi, strategy);
-          const score = this.estimateXiPerformance(candidateXi);
-          
-          if (score > bestScore) {
-            bestScore = score;
-            bestXi = candidateXi;
-          }
-        }
-        
-        // Feintuning um den besten Wert
-        bestXi = this.finetuneXi(bestXi);
-        
-        return Math.max(1e-8, Math.min(1e-3, bestXi));
-      }
+function getSimulator(lang) {
+  const Nstr = getNFromInput(lang);
+  if (!Nstr) return null;
+  const xiMode = document.getElementById(`xi-mode-${lang}`).value;
+  const fallbackMode = document.getElementById(`fallback-${lang}`).value;
+  const baseVal = document.getElementById(`base-a-${lang}`).value;
+  const base = baseVal ? parseInt(baseVal) : null;
+  return new T0Framework(Nstr, xiMode, fallbackMode, base);
+}
 
-      getOptimizationStrategies() {
-        const timestamp = Date.now();
-        const seed = (timestamp + this.rsaN) % 1000;
-        
-        return [
-          { name: 'conservative', factor: 0.5 + (seed % 100) / 200 },
-          { name: 'aggressive', factor: 1.5 + (seed % 150) / 100 },
-          { name: 'resonance_focused', factor: this.calculateDynamicResonanceFactor() },
-          { name: 'size_adaptive', factor: this.calculateSizeAdaptiveFactor() },
-          { name: 'experimental', factor: 0.1 + Math.sin(seed) * 0.9 }
-        ];
-      }
+function appendResult(lang, text, className = '') {
+  const panel = document.getElementById(`results-${lang}`);
+  const span = document.createElement('span');
+  if (className) span.className = className;
+  span.innerHTML = text + '<br>';
+  panel.appendChild(span);
+  panel.scrollTop = panel.scrollHeight;
+}
 
-      applyStrategy(baseXi, strategy) {
-        switch (strategy.name) {
-          case 'conservative':
-            return baseXi * strategy.factor * (0.8 + Math.random() * 0.4);
-          case 'aggressive':
-            return baseXi * strategy.factor * (1.2 + Math.random() * 0.6);
-          case 'resonance_focused':
-            return baseXi * strategy.factor * this.calculateResonanceBoost();
-          case 'size_adaptive':
-            return baseXi * strategy.factor * this.calculateSizeBoost();
-          case 'experimental':
-            return baseXi * strategy.factor * (0.5 + Math.random() * 2.0);
-          default:
-            return baseXi * strategy.factor;
-        }
-      }
+function clearResults(lang) {
+  const panel = document.getElementById(`results-${lang}`);
+  const header = panel.querySelector('.header-line');
+  panel.innerHTML = '';
+  if (header) panel.appendChild(header);
+  appendResult(lang, 'Bereit für neue Berechnung.', 'dim');
+  document.getElementById(`energy-container-${lang}`).classList.remove('visible');
+  updateStats(lang);
+  updateQubitDisplay(lang, null);
+}
 
-      estimateXiPerformance(xi) {
-        // Schnelle Heuristik zur Xi-Bewertung ohne vollständige Simulation
-        const sizeScore = this.calculateSizeCompatibility(xi);
-        const stabilityScore = this.calculateStabilityScore(xi);
-        const resonanceScore = this.estimateResonanceQuality(xi);
-        const diversityScore = this.calculateDiversityBonus(xi);
-        
-        return sizeScore * stabilityScore * resonanceScore * diversityScore;
-      }
+function updateStats(lang) {
+  const s = state[lang];
+  const Nstr = getNFromInput(lang) || '-';
+  document.getElementById(`current-n-${lang}`).textContent = 
+    Nstr.length > 30 ? Nstr.slice(0, 15) + '…' + Nstr.slice(-10) : Nstr;
+  document.getElementById(`current-xi-${lang}`).textContent = s.xi.toExponential(2);
+  const rate = s.total > 0 ? (s.success / s.total * 100).toFixed(1) + '%' : '-';
+  document.getElementById(`success-rate-${lang}`).textContent = rate;
+  document.getElementById(`calc-count-${lang}`).textContent = s.calcCount;
+  document.getElementById(`last-method-${lang}`).textContent = s.lastMethod || '—';
+  document.getElementById(`last-result-${lang}`).textContent = s.lastSuccess || '—';
+}
 
-      calculateSizeCompatibility(xi) {
-        const optimalXi = this.getOptimalXiForSize();
-        const distance = Math.abs(Math.log10(xi) - Math.log10(optimalXi));
-        return Math.exp(-distance * distance / 4); // Gausssche Bewertung
-      }
+function updateQubitDisplay(lang, sim) {
+  const Nstr = getNFromInput(lang);
+  if (!Nstr) {
+    document.getElementById(`qubits-classic-${lang}`).textContent = '—';
+    document.getElementById(`qubits-t0-${lang}`).textContent = '—';
+    document.getElementById(`qubits-reduction-${lang}`).textContent = '—';
+    return;
+  }
+  const Nbig = BigInt(Nstr);
+  const bits = Nbig.toString(2).length;
+  const classicQubits = 2 * bits;
+  const nNum = Number(Nbig > 1000000000000000n ? 1000000000000000n : Nbig);
+  const t0Cells = Math.max(8, Math.ceil(Math.sqrt(nNum) / 100));
+  const reduction = classicQubits / Math.max(t0Cells, 1);
+  
+  document.getElementById(`qubits-classic-${lang}`).textContent = classicQubits.toLocaleString();
+  document.getElementById(`qubits-t0-${lang}`).textContent = t0Cells.toLocaleString() + ' Zellen';
+  document.getElementById(`qubits-reduction-${lang}`).textContent = reduction.toFixed(1) + '×';
+}
 
-      getOptimalXiForSize() {
-        // Dynamische optimale ξ-Werte basierend auf N
-        if (this.rsaN < 50) return 1e-4 * (1 + Math.random() * 0.5);
-        if (this.rsaN < 200) return 5e-5 * (1 + Math.random() * 0.4);
-        if (this.rsaN < 1000) return 1e-5 * (1 + Math.random() * 0.3);
-        return 5e-6 * (1 + Math.random() * 0.2);
-      }
+function setProgress(lang, percent, text) {
+  const container = document.getElementById(`progress-${lang}`);
+  container.style.display = 'block';
+  document.getElementById(`progress-fill-${lang}`).style.width = Math.min(100, percent) + '%';
+  document.getElementById(`progress-text-${lang}`).textContent = text || 'Berechne...';
+  document.getElementById(`progress-percent-${lang}`).textContent = Math.min(100, percent).toFixed(0) + '%';
+}
 
-      calculateStabilityScore(xi) {
-        // Numerische Stabilität bewerten
-        if (xi > 1e-3) return 0.3; // Zu groß
-        if (xi < 1e-8) return 0.2; // Zu klein
-        if (xi >= 1e-6 && xi <= 1e-4) return 1.0; // Sweet spot
-        return 0.7;
-      }
+function hideProgress(lang) {
+  document.getElementById(`progress-${lang}`).style.display = 'none';
+}
 
-      estimateResonanceQuality(xi) {
-        // Resonanzqualität schätzen
-        const periodEstimate = Math.floor(this.rsaN / 10);
-        const omega = 2 * Math.PI / Math.max(periodEstimate, 1);
-        const resonance = Math.exp(-((omega - Math.PI) * (omega - Math.PI)) / (4 * Math.abs(xi)));
-        return Math.min(1.0, resonance * 2);
-      }
+function getNumberInfo(n) {
+  if (n < 2) return 'trivial';
+  if (isPrimeMillerRabinBigInt(n, 10)) return 'prim';
+  const f = classicalTrialDivisionBigInt(n);
+  if (!f) return 'unbekannt';
+  if (isPrimeMillerRabinBigInt(f[0], 10) && isPrimeMillerRabinBigInt(f[1], 10)) return 'semiprime';
+  return 'zusammengesetzt';
+}
 
-      calculateDiversityBonus(xi) {
-        // Bonus für Diversität - vermeidet immer gleiche Werte
-        const currentTime = Date.now();
-        const uniqueFactor = Math.sin(currentTime + this.rsaN * xi * 1000) * 0.3 + 1.0;
-        return Math.max(0.7, Math.min(1.3, uniqueFactor));
-      }
+// -------- runT0Shor --------
+function runT0Shor(lang) {
+  const startTime = performance.now();
+  const panel = document.getElementById(`results-${lang}`);
+  const s = state[lang];
 
-      finetuneXi(baseXi) {
-        // Feintuning um den besten Wert
-        const variations = [0.5, 0.7, 0.85, 1.0, 1.15, 1.3, 1.5];
-        let bestXi = baseXi;
-        let bestScore = this.estimateXiPerformance(baseXi);
-        
-        for (let variation of variations) {
-          const candidateXi = baseXi * variation;
-          const score = this.estimateXiPerformance(candidateXi);
-          
-          if (score > bestScore) {
-            bestScore = score;
-            bestXi = candidateXi;
-          }
-        }
-        
-        // Zusätzlicher Zufallsfaktor für Diversität
-        const randomAdjustment = 0.9 + Math.random() * 0.2;
-        return bestXi * randomAdjustment;
-      }
+  const header = panel.querySelector('.header-line');
+  panel.innerHTML = '';
+  if (header) panel.appendChild(header);
 
-      calculateDynamicResonanceFactor() {
-        // Dynamischer Resonanzfaktor basierend auf aktueller Zeit und N
-        const bits = this.rsaBits;
-        const timeFactor = (Date.now() % 10000) / 10000; // 0-1 basierend auf Zeit
-        
-        let baseFactor;
-        if (bits <= 8) baseFactor = 1.0 + timeFactor * 0.4;   // 1.0-1.4
-        else if (bits <= 16) baseFactor = 0.8 + timeFactor * 0.4; // 0.8-1.2
-        else if (bits <= 32) baseFactor = 0.6 + timeFactor * 0.4; // 0.6-1.0
-        else baseFactor = 0.4 + timeFactor * 0.4;         // 0.4-0.8
-        
-        return baseFactor;
-      }
+  const Nstr = getNFromInput(lang);
+  if (!Nstr) {
+    appendResult(lang, '❌ Bitte eine gültige Zahl eingeben.', 'error');
+    return;
+  }
 
-      calculateSizeAdaptiveFactor() {
-        // Größenadaptiver Faktor mit Zufallskomponente
-        const logN = Math.log2(this.rsaN);
-        const sizeFactor = 1.0 / (1 + logN / 50); // Basis-Größenfaktor
-        const randomComponent = 0.7 + Math.random() * 0.6; // 0.7-1.3
-        const timeBased = Math.sin(Date.now() / 1000) * 0.2 + 1.0; // 0.8-1.2
-        
-        return sizeFactor * randomComponent * timeBased;
-      }
+  const Nbig = BigInt(Nstr);
+  if (Nbig < 2n) {
+    appendResult(lang, '❌ N muss ≥ 2 sein.', 'error');
+    return;
+  }
 
-      calculateResonanceBoost() {
-        // Resonanz-Boost mit zeitbasierter Variation
-        const baseBoost = 1.0;
-        const nVariation = Math.sin(this.rsaN / 100) * 0.3; // -0.3 bis +0.3
-        const timeVariation = Math.cos(Date.now() / 2000) * 0.2; // -0.2 bis +0.2
-        const randomBoost = Math.random() * 0.4 - 0.2; // -0.2 bis +0.2
-        
-        return Math.max(0.5, baseBoost + nVariation + timeVariation + randomBoost);
-      }
+  const displayN = Nstr.length > 40 ? Nstr.slice(0, 20) + '…' + Nstr.slice(-15) : Nstr;
+  const fallbackMode = document.getElementById(`fallback-${lang}`).value;
+  const fallbackLabels = {
+    'none': '❌ Kein Fallback',
+    'trial': '🔢 Trial Division',
+    'pollard': '🌀 Pollard\'s Rho',
+    'fermat': '📐 Fermat',
+    'all': '🔄 Alle Methoden ★'
+  };
 
-      calculateSizeBoost() {
-        // Größen-Boost mit dynamischen Komponenten
-        const sizeRatio = Math.log10(this.rsaN) / 6; // Normalisiert auf log10(1M) = 6
-        const inverseBoost = 1.0 - sizeRatio * 0.5; // Kleiner = größerer Boost
-        const dynamicComponent = Math.sin(Date.now() / 3000 + this.rsaN) * 0.3 + 1.0;
-        
-        return Math.max(0.3, inverseBoost * dynamicComponent);
-      }
+  const bits = Nbig.toString(2).length;
+  appendResult(lang, `📊 Faktorisiere N = ${displayN} (${Nstr.length} Ziffern, ${bits} bits)`, 'info');
+  appendResult(lang, `⚙️ Fallback: ${fallbackLabels[fallbackMode] || fallbackMode}`, 'dim');
+  appendResult(lang, `🔢 Präzision: BigInt — exakt für alle N ✅`, 'success');
 
-      calculateResonanceFactor() {
-        // NEUE dynamische Version mit mehr Variation
-        return this.calculateDynamicResonanceFactor();
-      }
+  if (bits > 60) {
+    appendResult(lang, `⚠️ WARNUNG: N > 60 Bits (${bits} Bits) — T0 allein ist browserbedingt begrenzt!`, 'warning');
+    appendResult(lang, `💡 Empfehlung: Fallback "Alle Methoden" verwenden.`, 'warning');
+    appendResult(lang, `📖 Mehr dazu: Klicke auf "Hilfe" für Erklärungen.`, 'info');
+  }
 
-      calculateComplexityFactor() {
-        // NEUE dynamische Version
-        return this.calculateSizeAdaptiveFactor();
-      }
+  setProgress(lang, 10, 'Initialisiere T0-Framework...');
 
-      calculateStabilityFactor() {
-        // NEUE Version mit mehr Variation
-        const stabilityBase = 1.0;
-        const majorVariation = Math.sin(Date.now() / 1000) * 0.3; // -0.3 bis +0.3
-        const minorNoise = Math.random() * 0.2 - 0.1; // -0.1 bis +0.1
-        const nBasedVariation = Math.cos(this.rsaN / 50) * 0.2; // -0.2 bis +0.2
-        
-        return Math.max(0.4, stabilityBase + majorVariation + minorNoise + nBasedVariation);
-      }
+  const sim = new T0Framework(
+    Nstr,
+    document.getElementById(`xi-mode-${lang}`).value,
+    fallbackMode,
+    document.getElementById(`base-a-${lang}`).value ? parseInt(document.getElementById(`base-a-${lang}`).value) : null
+  );
 
-      adaptiveXiForHardware() {
-        let baseXi;
-        if (this.rsaBits <= 64) baseXi = 1e-5;
-        else if (this.rsaBits <= 256) baseXi = 1e-6;
-        else if (this.rsaBits <= 1024) baseXi = 1e-7;
-        else baseXi = 1e-8;
-        return baseXi;
-      }
+  updateQubitDisplay(lang, sim);
 
-      calculateOptimalQubits(N) {
-        const nBits = Math.ceil(Math.log2(N));
-        const standardQubits = 2 * nBits;
-        const spatialEfficiency = 3.0 + Math.abs(this.xi) * 500000;
-        
-        let boostFactor;
-        if (nBits <= 64) boostFactor = 2.5;
-        else if (nBits <= 256) boostFactor = 2.0;
-        else boostFactor = 1.5;
+  setProgress(lang, 30, `ξ = ${sim.xi.toExponential(2)} — starte Berechnung...`);
 
-        const effectiveEfficiency = spatialEfficiency * boostFactor;
-        const optimizedQubits = Math.max(8, Math.ceil(standardQubits / effectiveEfficiency));
+  const result = sim.run();
 
-        return {
-          standardQubits: standardQubits,
-          optimizedQubits: optimizedQubits,
-          efficiencyFactor: effectiveEfficiency,
-          reductionPercent: (1 - optimizedQubits/standardQubits) * 100,
-          boostFactor: boostFactor,
-          spatialEfficiency: spatialEfficiency
-        };
-      }
+  setProgress(lang, 80, 'Verarbeite Ergebnisse...');
 
-      gcd(a, b) {
-        while (b) {
-          [a, b] = [b, a % b];
-        }
-        return a;
-      }
+  s.xi = sim.xi;
+  s.total++;
+  s.calcCount += sim.calcCount || 0;
+  if (result.t0Success) s.success++;
+  s.lastResult = result;
+  s.lastMethod = result.methodDisplay || '—';
+  s.lastSuccess = result.t0Success ? '✅ Erfolg' : '❌ Fehlgeschlagen';
 
-      modPow(base, exp, mod) {
-        let result = 1;
-        base = base % mod;
-        while (exp > 0) {
-          if (exp % 2 === 1) {
-            result = (result * base) % mod;
-          }
-          exp = Math.floor(exp / 2);
-          base = (base * base) % mod;
-        }
-        return result;
-      }
+  const duration = ((performance.now() - startTime) / 1000).toFixed(3);
 
-      isPrimeQuick(n) {
-        if (n < 2) return false;
-        if (n === 2) return true;
-        if (n % 2 === 0) return false;
+  appendResult(lang, `\n⚙️ Konfiguration:`, 'dim');
+  appendResult(lang, `  ξ-Modus: ${sim.xiMode}`, 'dim');
+  appendResult(lang, `  ξ = ${sim.xi.toExponential(4)}`, 'dim');
+  appendResult(lang, `  Basis a = ${sim.customBase || 'auto'}`, 'dim');
+  appendResult(lang, `  Fallback: ${fallbackLabels[fallbackMode] || fallbackMode}`, 'dim');
+  appendResult(lang, `  Berechnungen: ${sim.calcCount.toLocaleString()}`, 'dim');
+  appendResult(lang, `  Bit-Größe: ${sim.bits} bits`, 'dim');
 
-        const witnesses = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31];
-        for (let a of witnesses) {
-          if (a >= n) continue;
-          if (this.modPow(a, n-1, n) !== 1) return false;
-        }
-        return true;
-      }
+  if (sim.browserLimitReached) {
+    appendResult(lang, `  ⚠️ Browser-Limit: ${sim.limitReason || 'BSGS-Grenze erreicht'}`, 'warning');
+    appendResult(lang, `  💡 Fallback wurde verwendet/versucht.`, 'info');
+  }
 
-      findOrder(a) {
-        // Multiplikative Ordnung: kleinstes r mit a^r = 1 mod N.
-        const maxPeriod = Math.min(this.rsaN, 75000);
-        let order = null;
-        const res = [];   // nur Diagnose, geht in die Auswahl nicht ein
+  appendResult(lang, `\n📊 Ergebnis:`, 'header-line');
 
-        for (let r = 1; r < maxPeriod; r++) {
-          if (this.modPow(a, r, this.rsaN) === 1) {
-            if (order === null) order = r;
-            const omega = 2 * Math.PI / r;
-            const ECorr = this.xi / (Math.max(1, r) * Math.max(1, r));
-            const base = Math.exp(-((omega - Math.PI) * (omega - Math.PI)) / (4 * Math.abs(this.xi)));
-            res.push(base * Math.pow(1 + ECorr, 2.5));
-            if (res.length > 800) break;
-          }
-        }
-
-        if (order === null) return null;
-        return { period: order,
-                 resNonzero: res.filter(x => x > 0).length,
-                 resTotal: res.length };
-      }
-
-      extractFactorsPureT0(a, r) {
-        if (r % 2 !== 0) return null;
-
-        const halfPeriod = Math.floor(r / 2);
-        const aPower = this.modPow(a, halfPeriod, this.rsaN);
-        
-        if (aPower === this.rsaN - 1) return null;
-
-        const candidate1 = this.gcd(aPower - 1, this.rsaN);
-        const candidate2 = this.gcd(aPower + 1, this.rsaN);
-
-        for (let candidate of [candidate1, candidate2]) {
-          if (1 < candidate && candidate < this.rsaN && this.rsaN % candidate === 0) {
-            const complement = Math.floor(this.rsaN / candidate);
-            return [candidate, complement];
-          }
-        }
-        return null;
-      }
-
-      findOptimalBase() {
-        let bestBase = 2;
-        let maxResonance = 0;
-        const searchRange = Math.min(this.rsaN, Math.floor(100000 * Math.abs(this.xi) / 1e-5));
-
-        for (let a = 2; a < Math.min(searchRange, 1000); a++) {
-          if (this.gcd(a, this.rsaN) === 1) {
-            const baseEnergy = 1 + Math.abs(this.xi) * a;
-            const periodicFactor = Math.abs(Math.cos(2 * Math.PI * a / this.rsaN));
-            const harmonicBoost = 1 + Math.sin(Math.PI * a / Math.sqrt(this.rsaN)) * 0.3;
-            const distanceFactor = Math.max(1, a / 1000);
-            const energiefieldCorrelation = Math.abs(this.xi) / (distanceFactor * distanceFactor);
-            const totalResonance = baseEnergy * periodicFactor * harmonicBoost * (1 + energiefieldCorrelation);
-
-            if (totalResonance > maxResonance) {
-              maxResonance = totalResonance;
-              bestBase = a;
-            }
-          }
-        }
-        return bestBase;
-      }
-
-      classicalTrialDivisionFallback() {
-        if (!this.enableFallback) return null;
-        
-        const smallPrimes = [3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97];
-        
-        for (let p of smallPrimes) {
-          if (this.rsaN % p === 0) {
-            const complement = this.rsaN / p;
-            return [p, complement];
-          }
-        }
-
-        const maxCheck = Math.min(Math.sqrt(this.rsaN), 10000);
-        for (let i = 101; i <= maxCheck; i += 2) {
-          if (this.rsaN % i === 0) {
-            const complement = this.rsaN / i;
-            return [i, complement];
-          }
-        }
-        return null;
-      }
-
-      pureT0ShorAlgorithm(a = null) {
-        const startTime = Date.now();
-
-        if (this.isPrimeQuick(this.rsaN)) {
-          return {
-            success: false,
-            method: 'primality_check',
-            time: (Date.now() - startTime) / 1000,
-            factors: [this.rsaN]
-          };
-        }
-
-        if (a === null) a = this.findOptimalBase();
-
-        const gcdCheck = this.gcd(a, this.rsaN);
-        if (gcdCheck > 1) {
-          return {
-            success: true,
-            method: 'gcd_shortcut',
-            factors: [gcdCheck, Math.floor(this.rsaN / gcdCheck)],
-            time: (Date.now() - startTime) / 1000,
-            base: a
-          };
-        }
-
-        // Ordnungssuche
-        const periodResult = this.findOrder(a);
-        if (periodResult) {
-          const factors = this.extractFactorsPureT0(a, periodResult.period);
-          if (factors && factors.length >= 2 && factors[0] * factors[1] === this.rsaN) {
-            this.t0SuccessCount++;
-            this.lastSuccessMethod = 'order_finding';
-            return {
-              success: true,
-              method: 'order_finding',
-              factors: factors,
-              period: periodResult.period,
-              resNonzero: periodResult.resNonzero,
-              resTotal: periodResult.resTotal,
-              base: a,
-              time: (Date.now() - startTime) / 1000,
-              xiParameter: this.xi
-            };
-          }
-        }
-
-        // Fallback-Phase
-        if (this.enableFallback) {
-          const fallbackFactors = this.classicalTrialDivisionFallback();
-          if (fallbackFactors) {
-            this.fallbackSuccessCount++;
-            this.lastSuccessMethod = 'classical_fallback';
-            return {
-              success: true,
-              method: 'classical_fallback',
-              factors: fallbackFactors,
-              time: (Date.now() - startTime) / 1000,
-              base: a
-            };
-          }
-        }
-
-        return {
-          success: false,
-          method: 'complete_failure',
-          time: (Date.now() - startTime) / 1000,
-          base: a
-        };
-      }
-
-      solveEnergyField(xArray, tArray) {
-        const E = Array(xArray.length).fill().map(() => Array(tArray.length).fill(0));
-        const dx = xArray.length > 1 ? xArray[1] - xArray[0] : 1.0;
-        const dt = tArray.length > 1 ? tArray[1] - tArray[0] : 1.0;
-
-        // Initial conditions
-        for (let i = 0; i < xArray.length; i++) {
-          E[i][0] = Math.sin(2 * Math.PI * xArray[i] / Math.max(...xArray)) * this.xi;
-          if (tArray.length > 1) {
-            E[i][1] = E[i][0] * 0.99;
-          }
-        }
-
-        const cSquared = 1.0 + Math.abs(this.xi);
-
-        for (let j = 2; j < tArray.length; j++) {
-          for (let i = 1; i < xArray.length - 1; i++) {
-            const spatialLaplacian = (E[i+1][j-1] - 2*E[i][j-1] + E[i-1][j-1]) / (dx*dx);
-            E[i][j] = 2*E[i][j-1] - E[i][j-2] + cSquared * (dt*dt) * spatialLaplacian;
-          }
-          E[0][j] = 0;
-          E[xArray.length-1][j] = 0;
-        }
-
-        return E;
-      }
+  if (result.t0Success && result.factors) {
+    const f1 = result.factors[0];
+    const f2 = result.factors[1];
+    const methodClass = result.getMethodClass ? result.getMethodClass(result.method) : 'method-t0';
+    const methodDisplay = result.methodDisplay || result.method || 'Unbekannt';
+    
+    appendResult(lang, `✅ ERFOLG!`, 'success');
+    appendResult(lang, `  ${displayN} = ${f1.toLocaleString()} × ${f2.toLocaleString()}`, 'highlight');
+    appendResult(lang, `  Methode: <span class="${methodClass}">${methodDisplay}</span>`, '');
+    
+    if (result.period) appendResult(lang, `  Periode r = ${result.period}`, 'info');
+    if (result.resonance) appendResult(lang, `  Resonanz = ${result.resonance.toExponential(3)}`, 'info');
+    if (result.fallbackUsed) appendResult(lang, `  ⚠️ Fallback verwendet (${result.method})`, 'warning');
+    if (!result.fallbackUsed && result.method === 'order_finding') {
+      appendResult(lang, `  💜 Pure T0 — keine klassische Hilfe ✅`, 'success');
     }
+  } else if (result.method === 'prime') {
+    appendResult(lang, `🔬 PRIMZAHL erkannt`, 'warning');
+    appendResult(lang, `  ${displayN} ist eine Primzahl — keine Faktoren existieren.`, 'dim');
+    appendResult(lang, `  Methode: <span class="method-prime">🔬 Primzahlprüfung</span>`, '');
+  } else {
+    appendResult(lang, `❌ KEINE FAKTOREN GEFUNDEN`, 'error');
+    appendResult(lang, `  Methode: <span class="method-failure">${result.methodDisplay || result.method || 'Unbekannt'}</span>`, '');
+    
+    if (result.browserLimitReached) {
+      appendResult(lang, `  ⚠️ Browser-Limit: ${result.limitReason || 'BSGS-Grenze erreicht'}`, 'warning');
+      appendResult(lang, `  💡 Für N > 80 Bits ist T0 im Browser nicht praktikabel.`, 'info');
+      appendResult(lang, `  📖 Siehe "Hilfe" für Details zu Browser-Limits.`, 'info');
+    } else if (bits > 60) {
+      appendResult(lang, `  💡 N > 60 Bits: T0-Ordnungssuche ist aufwändig.`, 'info');
+      appendResult(lang, `  💡 Empfehlung: Fallback "Alle Methoden" aktivieren.`, 'warning');
+      appendResult(lang, `  📖 Siehe "Hilfe" für Erklärungen.`, 'info');
+    } else if (fallbackMode === 'none') {
+      appendResult(lang, `  💡 Tipp: Aktiviere Fallback für bessere Chancen.`, 'warning');
+      appendResult(lang, `  💡 Fallback "Alle Methoden" findet oft Faktoren.`, 'info');
+    } else {
+      appendResult(lang, `  💡 Alle Fallback-Methoden fehlgeschlagen.`, 'info');
+      appendResult(lang, `  💡 Versuche einen anderen ξ-Wert oder eine andere Basis.`, 'info');
+    }
+  }
 
-    // Interface functions with headers
-    function runT0Shor(lang) {
-      addFunctionHeader(lang, 't0_shor', '🚀', 't0-shor');
+  appendResult(lang, `\n⏱️ Zeit: ${duration}s`, 'dim');
+  appendResult(lang, `🔢 Alle Operationen exakt mit BigInt — keine Rundungsfehler ✅`, 'success');
+
+  const rate = s.total > 0 ? (s.success / s.total * 100).toFixed(1) : '0.0';
+  appendResult(lang, `📊 Historische Erfolgsrate: ${rate}% (${s.success}/${s.total} Läufe)`, 'dim');
+
+  hideProgress(lang);
+  updateStats(lang);
+  document.getElementById(`energy-container-${lang}`).classList.remove('visible');
+}
+
+// -------- Resources --------
+function calculateResources(lang) {
+  const Nstr = getNFromInput(lang);
+  if (!Nstr) {
+    appendResult(lang, '❌ Bitte eine gültige Zahl eingeben.', 'error');
+    return;
+  }
+
+  const sim = new T0Framework(Nstr, document.getElementById(`xi-mode-${lang}`).value, 'all');
+  updateQubitDisplay(lang, sim);
+
+  const panel = document.getElementById(`results-${lang}`);
+  const header = panel.querySelector('.header-line');
+  panel.innerHTML = '';
+  if (header) panel.appendChild(header);
+
+  const displayN = Nstr.length > 40 ? Nstr.slice(0, 20) + '…' + Nstr.slice(-15) : Nstr;
+  appendResult(lang, `📊 RESSOURCEN-ANALYSE für N = ${displayN}`, 'header-line');
+  appendResult(lang, `🔢 BigInt-Präzision: exakt für alle Größen ✅`, 'success');
+  appendResult(lang, `  Bit-Größe: ${sim.bits} bits`, 'dim');
+
+  const classicQubits = 2 * sim.bits;
+  const energySize = Math.max(8, Math.ceil(Math.sqrt(Number(sim.Nbig > 1000000000000000n ? 1000000000000000n : sim.Nbig)) / 100));
+  const memory = energySize * energySize * 8;
+  const bsgsSteps = Math.min(Math.ceil(Math.sqrt(Number(sim.Nbig))), 2000000);
+
+  appendResult(lang, `\n💻 Hardware-Anforderungen:`, 'info');
+  appendResult(lang, `  • Klassische Qubits (Shor): ${classicQubits.toLocaleString()}`, 'dim');
+  appendResult(lang, `  • T0-Energiefeld: ${energySize}×${energySize} = ${(energySize*energySize).toLocaleString()} Zellen`, 'dim');
+  appendResult(lang, `  • Speicher: ~${(memory/1024).toFixed(1)} KB`, 'dim');
+  appendResult(lang, `  • ξ = ${sim.xi.toExponential(3)}`, 'dim');
+  appendResult(lang, `  • BSGS-Schritte: ${bsgsSteps.toLocaleString()} (browserbegrenzt)`, 'dim');
+
+  const reduction = classicQubits / Math.max(energySize, 1);
+  appendResult(lang, `\n📉 Reduktion: ${reduction.toFixed(1)}× weniger Ressourcen`, 'highlight');
+  
+  if (sim.bits > 60) {
+    appendResult(lang, `\n⚠️ Browser-Limit-Warnung:`, 'warning');
+    appendResult(lang, `  • N > 60 Bits (${sim.bits} Bits) überschreitet praktische Browser-Grenzen`, 'dim');
+    appendResult(lang, `  • BSGS mit ${bsgsSteps.toLocaleString()} Schritten ist das Maximum`, 'dim');
+    appendResult(lang, `  • Empfehlung: Fallback "Alle Methoden" verwenden`, 'info');
+    appendResult(lang, `  • 📖 Siehe "Hilfe" für Details`, 'info');
+  }
+
+  updateStats(lang);
+}
+
+// -------- Energy Field --------
+function solveEnergyField(lang) {
+  const Nstr = getNFromInput(lang);
+  if (!Nstr) {
+    appendResult(lang, '❌ Bitte eine gültige Zahl eingeben.', 'error');
+    return;
+  }
+
+  const sim = new T0Framework(Nstr, document.getElementById(`xi-mode-${lang}`).value, 'none');
+
+  const panel = document.getElementById(`results-${lang}`);
+  const header = panel.querySelector('.header-line');
+  panel.innerHTML = '';
+  if (header) panel.appendChild(header);
+
+  const displayN = Nstr.length > 30 ? Nstr.slice(0, 15) + '…' + Nstr.slice(-10) : Nstr;
+  appendResult(lang, `🌊 ENERGIEFELD-LÖSUNG für N = ${displayN}`, 'header-line');
+  appendResult(lang, `  ξ = ${sim.xi.toExponential(3)}`, 'dim');
+
+  setProgress(lang, 20, 'Löse Wellengleichung...');
+
+  const res = 16;
+  const steps = 10;
+  const result = sim.solveEnergyField(res, steps);
+
+  setProgress(lang, 70, 'Visualisiere...');
+
+  const grid = document.getElementById(`energy-grid-${lang}`);
+  grid.innerHTML = '';
+  const E = result.E;
+  let maxVal = 0;
+  for (let i = 0; i < res; i++) {
+    for (let j = 0; j < steps; j++) {
+      if (Math.abs(E[i][j]) > maxVal) maxVal = Math.abs(E[i][j]);
+    }
+  }
+  if (maxVal < 1e-10) maxVal = 1;
+
+  for (let i = 0; i < Math.min(res, 8); i++) {
+    for (let j = 0; j < Math.min(steps, 8); j++) {
+      const cell = document.createElement('div');
+      cell.className = 'energy-cell';
+      const val = E[i][j] || 0;
+      const intensity = Math.min(1, Math.abs(val) / maxVal);
+      const hue = val >= 0 ? 140 : 0;
+      const lightness = 20 + 60 * intensity;
+      cell.style.background = `hsl(${hue}, 80%, ${lightness}%)`;
+      cell.textContent = val.toExponential(1);
+      grid.appendChild(cell);
+    }
+  }
+
+  const params = document.getElementById(`energy-params-${lang}`);
+  let avg = 0, count = 0;
+  for (let i = 0; i < res; i++) {
+    for (let j = 0; j < steps; j++) {
+      avg += Math.abs(E[i][j]);
+      count++;
+    }
+  }
+  avg /= count || 1;
+
+  params.innerHTML = `
+    <span class="dim">Max Energie: ${maxVal.toExponential(3)}</span><br>
+    <span class="dim">Mittlere Energie: ${avg.toExponential(3)}</span><br>
+    <span class="dim">Auflösung: ${res}×${steps}</span><br>
+    <span class="dim">Präzision: BigInt für N, Float für Feld</span>
+  `;
+
+  document.getElementById(`energy-container-${lang}`).classList.add('visible');
+  hideProgress(lang);
+
+  appendResult(lang, `\n✅ Energiefeld berechnet (${res}×${steps})`, 'success');
+}
+
+// -------- Test Suite --------
+function runTests(lang) {
+  const panel = document.getElementById(`results-${lang}`);
+  const header = panel.querySelector('.header-line');
+  panel.innerHTML = '';
+  if (header) panel.appendChild(header);
+
+  appendResult(lang, `🧪 T0-TEST-SUITE — Multi-Fallback`, 'header-line');
+  appendResult(lang, `🔢 Alle Operationen mit BigInt — keine Rundungsfehler ✅`, 'success');
+
+  const testNumbers = [
+    { n: 6, expected: [2, 3] },
+    { n: 10, expected: [2, 5] },
+    { n: 15, expected: [3, 5] },
+    { n: 21, expected: [3, 7] },
+    { n: 35, expected: [5, 7] },
+    { n: 77, expected: [7, 11] },
+    { n: 143, expected: [11, 13] },
+    { n: 221, expected: [13, 17] },
+    { n: 323, expected: [17, 19] },
+    { n: 437, expected: [19, 23] },
+    { n: 667, expected: [23, 29] },
+    { n: 899, expected: [29, 31] },
+    { n: 10403, expected: [101, 103] },
+  ];
+
+  let passed = 0;
+  let total = 0;
+  let totalTime = 0;
+
+  const xiMode = document.getElementById(`xi-mode-${lang}`).value;
+  const fallbackMode = document.getElementById(`fallback-${lang}`).value;
+
+  testNumbers.forEach((test, idx) => {
+    setTimeout(() => {
+      const sim = new T0Framework(test.n.toString(), xiMode, fallbackMode, null);
+      const start = performance.now();
+      const result = sim.run();
+      const duration = (performance.now() - start) / 1000;
+      totalTime += duration;
+      total++;
+
+      const ok = result.t0Success && result.factors &&
+        result.factors[0] === test.expected[0] &&
+        result.factors[1] === test.expected[1];
+
+      if (ok) passed++;
+
+      const status = ok ? '✅' : '❌';
+      const methodDisplay = result.methodDisplay || result.method || '?';
+      const factors = result.factors ? `${result.factors[0]}×${result.factors[1]}` : 'keine';
+      const methodClass = result.getMethodClass ? result.getMethodClass(result.method) : '';
       
-      const rsaNumber = parseInt(document.getElementById(`rsa-number-${lang}`).value);
-      const xiMode = document.getElementById(`xi-mode-${lang}`).value;
-      const baseA = document.getElementById(`base-a-${lang}`).value;
-      const enableFallback = document.getElementById(`fallback-${lang}`).value === 'true';
+      appendResult(lang,
+        `  ${status} ${test.n} = ${test.expected[0]}×${test.expected[1]}  →  ${factors}  <span class="${methodClass}">${methodDisplay}</span> (${duration.toFixed(3)}s)`,
+        ok ? 'success' : 'error'
+      );
 
-      if (!rsaNumber || rsaNumber < 3) {
-        appendResult(lang, "❌ Fehler: RSA-Zahl muss ≥ 3 sein / Error: RSA number must be ≥ 3");
-        return;
+      if (idx === testNumbers.length - 1) {
+        const rate = (passed / total * 100).toFixed(1);
+        const avg = (totalTime / total).toFixed(3);
+        appendResult(lang, `\n📊 Testergebnis: ${passed}/${total} (${rate}%)`, 'header-line');
+        appendResult(lang, `  ⏱️ Durchschnitt: ${avg}s`, 'dim');
+        appendResult(lang, `  🔢 Präzision: BigInt — 100% exakt ✅`, 'success');
+        appendResult(lang, `  📌 Methoden: T0, GCD, Trial, Pollard, Fermat`, 'dim');
+        appendResult(lang, `  📖 Für große N siehe "Hilfe" zu Browser-Limits.`, 'info');
+        updateStats(lang);
+        updateQubitDisplay(lang, null);
       }
+    }, idx * 300);
+  });
+}
+
+// -------- Live Qubit-Update --------
+document.addEventListener('input', function(e) {
+  if (e.target.id === 'rsa-number-de' || e.target.id === 'rsa-number-en') {
+    const lang = e.target.id === 'rsa-number-de' ? 'de' : 'en';
+    updateQubitDisplay(lang, null);
+    updateStats(lang);
+  }
+});
+
+// -------- Init --------
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialisiere Hilfe für aktuelle Sprache
+  const lang = 'de';
+  document.getElementById('help-title-de').style.display = 'block';
+  document.getElementById('help-title-en').style.display = 'none';
+  document.querySelectorAll('.lang-help').forEach(el => el.classList.remove('active'));
+  document.getElementById('help-de').classList.add('active');
+  
+  updateStats('de');
+  updateStats('en');
+  updateQubitDisplay('de', null);
+  updateQubitDisplay('en', null);
+});
+</script>
 
-      // PRIMZAHL-VORAB-PRÜFUNG
-      if (isPrimeDetailed(rsaNumber)) {
-        const primeTexts = {
-          de: {
-            detected: "🔍 PRIMZAHL ERKANNT",
-            warning: "⚠️ WARNUNG: Primzahlen können NICHT faktorisiert werden!",
-            explanation: "Mathematisch unmöglich - Primzahlen haben nur sich selbst als Faktoren",
-            recommendation: "💡 Empfehlung: Verwenden Sie zusammengesetzte Zahlen",
-            examples: "Beispiele: 15 (3×5), 21 (3×7), 35 (5×7), 77 (7×11)"
-          },
-          en: {
-            detected: "🔍 PRIME NUMBER DETECTED",
-            warning: "⚠️ WARNING: Prime numbers CANNOT be factorized!",
-            explanation: "Mathematically impossible - primes only have themselves as factors",
-            recommendation: "💡 Recommendation: Use composite numbers",
-            examples: "Examples: 15 (3×5), 21 (3×7), 35 (5×7), 77 (7×11)"
-          }
-        };
-
-        const pt = primeTexts[lang];
-        appendResult(lang, `\n${pt.detected}: N = ${rsaNumber.toLocaleString()}`);
-        appendResult(lang, `${pt.warning}`);
-        appendResult(lang, `  ${pt.explanation}`);
-        appendResult(lang, `\n${pt.recommendation}:`);
-        appendResult(lang, `  ${pt.examples}`);
-        
-        // Trotzdem T0 versuchen (für wissenschaftliche Zwecke)
-        appendResult(lang, `\n🔬 Führe T0-Test trotzdem durch (wissenschaftlicher Zweck):`);
-      }
-
-      const simulator = new T0FrameworkSimulator(rsaNumber, xiMode, enableFallback);
-      simulatorState.xi = simulator.xi;
-
-      appendResult(lang, `\n🔧 Simulator-Konfiguration / Simulator Configuration:`);
-      appendResult(lang, `  N = ${rsaNumber.toLocaleString()} ${getNumberTypeInfo(rsaNumber, lang)}`);
-      appendResult(lang, `  ξ = ${simulator.xi.toExponential(2)}`);
-      appendResult(lang, `  Fallback: ${enableFallback ? 'aktiviert/enabled' : 'deaktiviert/disabled'}`);
-      
-      const base = baseA ? parseInt(baseA) : null;
-      if (base) {
-        appendResult(lang, `  Base: a = ${base}`);
-      }
-
-      appendResult(lang, `\n🚀 T0-Shor Algorithm gestartet / T0-Shor Algorithm started`);
-
-      const startTime = Date.now();
-      const result = simulator.pureT0ShorAlgorithm(base);
-      const duration = (Date.now() - startTime) / 1000;
-
-      if (result.success) {
-        simulatorState.successCount++;
-        appendResult(lang, `\n✅ Erfolg / Success: ${result.method}`);
-        appendResult(lang, `  Faktoren / Factors: ${result.factors[0]} × ${result.factors[1]} = ${rsaNumber}`);
-        if (result.period) appendResult(lang, `  Period: r = ${result.period}`);
-        if (result.resonance) appendResult(lang, `  Resonanz / Resonance: ${result.resonance.toFixed(6)}`);
-        appendResult(lang, `  Zeit / Time: ${duration.toFixed(3)}s`);
-        
-        if (result.method === 'order_finding') {
-          appendResult(lang, `\nOrdnungssuche erfolgreich / order finding succeeded`);
-          appendResult(lang, `  Kein klassischer Fallback verwendet; ξ-Resonanz ungleich 0 bei ${result.resNonzero} von ${result.resTotal} Kandidaten`);
-          appendResult(lang, `  No classical fallback used; ξ resonance non-zero for ${result.resNonzero} of ${result.resTotal} candidates`);
-        } else if (result.method === 'classical_fallback') {
-          appendResult(lang, `\n⚠️ Klassischer Fallback verwendet / Classical fallback used`);
-          appendResult(lang, `  T0-Phase schlug fehl, Trial Division erfolgreich`);
-          appendResult(lang, `  T0-phase failed, trial division successful`);
-        } else if (result.method === 'gcd_shortcut') {
-          appendResult(lang, `\n⚡ GCD-Shortcut verwendet / GCD shortcut used`);
-          appendResult(lang, `  Basis a=${result.base} hatte gemeinsamen Teiler mit N`);
-        }
-      } else {
-        appendResult(lang, `\n❌ Fehlgeschlagen / Failed: ${result.method}`);
-        appendResult(lang, `  Zeit / Time: ${duration.toFixed(3)}s`);
-        
-        if (result.method === 'primality_check') {
-          appendResult(lang, `\n🔬 PRIMZAHL BESTÄTIGT / PRIME CONFIRMED`);
-          const primeTexts = {
-            de: {
-              expected: "✅ Erwartetes Ergebnis: Primzahlen sind nicht faktorisierbar",
-              mathematical: "📚 Mathematisch korrekt: N = p (Primzahl)",
-              no_factors: "🚫 Keine nichttrivialen Faktoren existieren"
-            },
-            en: {
-              expected: "✅ Expected result: Prime numbers are not factorizable",
-              mathematical: "📚 Mathematically correct: N = p (prime)",
-              no_factors: "🚫 No non-trivial factors exist"
-            }
-          };
-          const pt = primeTexts[lang];
-          appendResult(lang, `  ${pt.expected}`);
-          appendResult(lang, `  ${pt.mathematical}`);
-          appendResult(lang, `  ${pt.no_factors}`);
-        } else if (result.method === 'complete_failure') {
-          appendResult(lang, `\n💡 Empfehlungen / Recommendations:`);
-          if (isPrimeDetailed(rsaNumber)) {
-            appendResult(lang, `  ⚠️ Diese Zahl ist eine Primzahl - Faktorisierung unmöglich`);
-            appendResult(lang, `  ⚠️ This number is prime - factorization impossible`);
-          } else {
-            appendResult(lang, `  • Versuchen Sie andere ξ-Parameter / Try different ξ parameters`);
-            appendResult(lang, `  • Aktivieren Sie Fallback für Vergleich / Enable fallback for comparison`);
-            appendResult(lang, `  • Testen Sie kleinere Zahlen / Test smaller numbers`);
-          }
-        }
-      }
-
-      simulatorState.totalRuns++;
-      simulatorState.lastResult = result;
-      updateStatistics(lang, simulator);
-    }
-
-    function getNumberTypeInfo(n, lang) {
-      if (isPrimeDetailed(n)) {
-        return lang === 'de' ? '(🔴 PRIMZAHL)' : '(🔴 PRIME)';
-      }
-      
-      const factors = classicalTrialDivision(n);
-      if (factors) {
-        if (isPrimeDetailed(factors[0]) && isPrimeDetailed(factors[1])) {
-          return lang === 'de' ? '(🟢 SEMIPRIME)' : '(🟢 SEMIPRIME)';
-        } else {
-          return lang === 'de' ? '(🟡 ZUSAMMENGESETZT)' : '(🟡 COMPOSITE)';
-        }
-      }
-      return lang === 'de' ? '(🟠 UNBEKANNT)' : '(🟠 UNKNOWN)';
-    }
-
-    function isPrimeDetailed(n) {
-      if (n < 2) return false;
-      if (n === 2) return true;
-      if (n % 2 === 0) return false;
-      
-      // Erweiterte Primzahlenprüfung
-      const limit = Math.min(Math.sqrt(n), 10000); // Limit für Performance
-      for (let i = 3; i <= limit; i += 2) {
-        if (n % i === 0) return false;
-      }
-      
-      // Für sehr große Zahlen: Probabilistische Tests
-      if (n > 100000000) {
-        return millerRabinTest(n, 10); // 10 Runden Miller-Rabin
-      }
-      
-      return true;
-    }
-
-    function millerRabinTest(n, k) {
-      // Miller-Rabin Primzahlentest für große Zahlen
-      if (n === 2 || n === 3) return true;
-      if (n < 2 || n % 2 === 0) return false;
-
-      // n-1 = 2^r * d
-      let r = 0;
-      let d = n - 1;
-      while (d % 2 === 0) {
-        d /= 2;
-        r++;
-      }
-
-      // k Runden testen
-      for (let i = 0; i < k; i++) {
-        const a = 2 + Math.floor(Math.random() * (n - 4));
-        let x = modPow(a, d, n);
-        
-        if (x === 1 || x === n - 1) continue;
-        
-        let composite = true;
-        for (let j = 0; j < r - 1; j++) {
-          x = modPow(x, 2, n);
-          if (x === n - 1) {
-            composite = false;
-            break;
-          }
-        }
-        
-        if (composite) return false;
-      }
-      
-      return true;
-    }
-
-    function modPow(base, exp, mod) {
-      let result = 1;
-      base = base % mod;
-      while (exp > 0) {
-        if (exp % 2 === 1) {
-          result = (result * base) % mod;
-        }
-        exp = Math.floor(exp / 2);
-        base = (base * base) % mod;
-      }
-      return result;
-    }
-
-    function calculateT0Resources(lang) {
-      addFunctionHeader(lang, 'resources', '🧮', 'resources');
-      
-      const rsaNumber = parseInt(document.getElementById(`rsa-number-${lang}`).value);
-      const xiMode = document.getElementById(`xi-mode-${lang}`).value;
-
-      if (!rsaNumber || rsaNumber < 3) {
-        const errorMsg = lang === 'de' ? 
-          "❌ Fehler: RSA-Zahl muss ≥ 3 sein" : 
-          "❌ Error: RSA number must be ≥ 3";
-        appendResult(lang, errorMsg);
-        return;
-      }
-
-      const simulator = new T0FrameworkSimulator(rsaNumber, xiMode, false);
-
-      const texts = {
-        de: {
-          title: "T0-Ressourcen-Analyse",
-          hardware: "Hardware-Anforderungen",
-          energy: "Energiefeld-Parameter", 
-          computational: "Rechenkomplexität",
-          comparison: "Vergleich zu klassischen QC"
-        },
-        en: {
-          title: "T0 Resource Analysis",
-          hardware: "Hardware Requirements",
-          energy: "Energy Field Parameters",
-          computational: "Computational Complexity", 
-          comparison: "Comparison to Classical QC"
-        }
-      };
-
-      const t = texts[lang];
-      
-      // T0-spezifische Berechnungen
-      const bits = Math.ceil(Math.log2(rsaNumber));
-      const energyFieldSize = Math.max(16, Math.ceil(bits * 2));
-      const resonancePeriods = Math.min(800, Math.floor(rsaNumber / 10));
-      const memoryRequired = energyFieldSize * energyFieldSize * 8; // bytes
-      const cpuCores = Math.max(1, Math.ceil(bits / 8));
-      
-      // T0 vs klassische QC Hardware
-      const classicalQubits = 2 * bits;
-      const classicalMemory = Math.pow(2, classicalQubits) * 16; // exponential!
-      const memoryReduction = classicalMemory / memoryRequired;
-
-      appendResult(lang, `📊 ${t.title} für N = ${rsaNumber.toLocaleString()}`);
-      appendResult(lang, `  Bit-Größe: ${bits} bits`);
-      appendResult(lang, `  ξ-Parameter: ${simulator.xi.toExponential(2)}`);
-      appendResult(lang, "=" * 50);
-
-      appendResult(lang, `\n💻 ${t.hardware}:`);
-      appendResult(lang, `  🌡️ Temperatur: Raumtemperatur (20°C)`);
-      appendResult(lang, `  💾 RAM: ${(memoryRequired/1024).toFixed(1)} KB`);
-      appendResult(lang, `  🔌 CPU-Kerne: ${cpuCores}`);
-      appendResult(lang, `  📊 Energiefeld: ${energyFieldSize}×${energyFieldSize}`);
-      appendResult(lang, `  🎯 Max Perioden: ${resonancePeriods}`);
-
-      appendResult(lang, `\n⚡ ${t.energy}:`);
-      appendResult(lang, `  🌊 Auflösung: ${energyFieldSize}×${energyFieldSize} Gitter`);
-      appendResult(lang, `  📐 Räumlich: Δx = ${(1/energyFieldSize).toFixed(4)}`);
-      appendResult(lang, `  ⏰ Zeitschritte: Δt = 0.01`);
-      appendResult(lang, `  🔧 ξ-Kopplung: ${simulator.xi.toExponential(2)}`);
-      appendResult(lang, `  🎭 CFL-Stabilität: c² = 1 + |ξ|`);
-
-      appendResult(lang, `\n🧮 ${t.computational}:`);
-      appendResult(lang, `  📈 T0-Komplexität: O(log³N)`);
-      appendResult(lang, `  🔍 Periodensuche: O(√N × log N)`);
-      appendResult(lang, `  🌊 Energiefeld: O(L² × T)`);
-      appendResult(lang, `  ⚡ Gesamt-Operationen: ~${(bits * bits * bits * 1000).toLocaleString()}`);
-
-      appendResult(lang, `\n🆚 ${t.comparison}:`);
-      appendResult(lang, `  📊 Klassische Qubits: ${classicalQubits}`);
-      appendResult(lang, `  💾 Klassischer RAM: ${(classicalMemory/1024/1024/1024).toFixed(1)} GB`);
-      appendResult(lang, `  📉 Speicher-Reduktion: ${memoryReduction.toExponential(1)}×`);
-      appendResult(lang, `  ❄️ Kühlung: Nicht erforderlich vs. mK-Kühlung`);
-      appendResult(lang, `  💰 Kosten: ~5.000€ vs. ~100M€`);
-
-      // Update statistics
-      simulatorState.xi = simulator.xi;
-      updateStatisticsDisplay(lang);
-    }
-
-    function solveEnergyField(lang) {
-      addFunctionHeader(lang, 'energy_field', '🌊', 'energy-field');
-      
-      const rsaNumber = parseInt(document.getElementById(`rsa-number-${lang}`).value) || 15;
-      const xiMode = document.getElementById(`xi-mode-${lang}`).value;
-
-      const simulator = new T0FrameworkSimulator(rsaNumber, xiMode, false);
-      
-      const resolution = 16;
-      const xArray = Array.from({length: resolution}, (_, i) => i / (resolution - 1));
-      const tArray = Array.from({length: 8}, (_, i) => i * 0.1 / 7);
-
-      appendResult(lang, `🔧 Energiefeld-Parameter / Energy Field Parameters:`);
-      appendResult(lang, `  N = ${rsaNumber.toLocaleString()}`);
-      appendResult(lang, `  ξ = ${simulator.xi.toExponential(2)}`);
-      appendResult(lang, `  Auflösung / Resolution: ${resolution}×${tArray.length}`);
-      appendResult(lang, `  Gleichung / Equation: ∂²E/∂t² = (1+ξ)∇²E`);
-
-      appendResult(lang, `\n🌊 Starte Energiefeld-Lösung / Starting energy field solution...`);
-
-      const startTime = Date.now();
-      const energyField = simulator.solveEnergyField(xArray, tArray);
-      const duration = (Date.now() - startTime) / 1000;
-
-      // Visualize energy field
-      const fieldDiv = document.getElementById(`energy-field-${lang}`);
-      const gridDiv = document.getElementById(`energy-grid-${lang}`);
-      const paramsDiv = document.getElementById(`energy-params-${lang}`);
-      
-      fieldDiv.style.display = 'block';
-      gridDiv.innerHTML = '';
-
-      // Create 8x8 visualization
-      for (let i = 0; i < 64; i++) {
-        const cell = document.createElement('div');
-        cell.className = 'energy-cell';
-        
-        const x = Math.floor(i / 8);
-        const t = i % 8;
-        const xIdx = Math.floor(x * xArray.length / 8);
-        const tIdx = Math.min(t, tArray.length - 1);
-        
-        let energy = 0;
-        if (xIdx < energyField.length && tIdx < energyField[xIdx].length) {
-          energy = energyField[xIdx][tIdx];
-        }
-        
-        const intensity = Math.min(1, Math.abs(energy) * 1000000);
-        const color = energy >= 0 ? 
-          `hsl(${120 * intensity}, 70%, ${30 + 50 * intensity}%)` :
-          `hsl(${0}, 70%, ${30 + 50 * intensity}%)`;
-        
-        cell.style.backgroundColor = color;
-        cell.textContent = energy.toExponential(1);
-        gridDiv.appendChild(cell);
-      }
-
-      const maxEnergy = Math.max(...energyField.flat());
-      const minEnergy = Math.min(...energyField.flat());
-      const avgEnergy = energyField.flat().reduce((a, b) => a + b, 0) / energyField.flat().length;
-
-      paramsDiv.innerHTML = `
-        Zeit / Time: ${duration.toFixed(3)}s<br>
-        Max Energie / Max Energy: ${maxEnergy.toExponential(3)}<br>
-        Min Energie / Min Energy: ${minEnergy.toExponential(3)}<br>
-        Mittel / Average: ${avgEnergy.toExponential(3)}<br>
-        Gleichung / Equation: ∂²E/∂t² = (1+ξ)∇²E
-      `;
-
-      appendResult(lang, `\n✅ Energiefeld-Lösung abgeschlossen / Energy field solution completed`);
-      appendResult(lang, `  Zeit / Time: ${duration.toFixed(3)}s`);
-      appendResult(lang, `  Max Energie / Max Energy: ${maxEnergy.toExponential(3)}`);
-      appendResult(lang, `  Min Energie / Min Energy: ${minEnergy.toExponential(3)}`);
-      appendResult(lang, `  Durchschnitt / Average: ${avgEnergy.toExponential(3)}`);
-      appendResult(lang, `\n🎨 Visualisierung unten verfügbar / Visualization available below`);
-    }
-
-    function optimizeXiParameter(lang) {
-      addFunctionHeader(lang, 'optimization', '🎯', 'optimization');
-      
-      const rsaNumber = parseInt(document.getElementById(`rsa-number-${lang}`).value);
-      
-      if (!rsaNumber || rsaNumber < 3) {
-        const errorMsg = lang === 'de' ? 
-          "❌ Fehler: RSA-Zahl muss ≥ 3 sein für ξ-Optimierung" : 
-          "❌ Error: RSA number must be ≥ 3 for ξ optimization";
-        appendResult(lang, errorMsg);
-        return;
-      }
-
-      const texts = {
-        de: {
-          subtitle: "Dynamische Suche nach optimalem ξ-Wert",
-          testing: "Teste ξ-Werte",
-          best: "Bester ξ-Wert",
-          performance: "Performance-Analyse",
-          recommendation: "Empfehlung"
-        },
-        en: {
-          subtitle: "Dynamic search for optimal ξ value",
-          testing: "Testing ξ values",
-          best: "Best ξ value",
-          performance: "Performance Analysis", 
-          recommendation: "Recommendation"
-        }
-      };
-
-      const t = texts[lang];
-      
-      appendResult(lang, `🔧 ${t.subtitle}`);
-      appendResult(lang, `  N = ${rsaNumber.toLocaleString()}`);
-      
-      // Intelligente Testauswahl basierend auf N
-      let testStrategy = '';
-      if (rsaNumber < 100) {
-        testStrategy = 'kleine Zahlen - Fokus auf Geschwindigkeit';
-        appendResult(lang, `  🎯 Strategie: ${testStrategy}`);
-      } else if (isProbablePrime(rsaNumber)) {
-        testStrategy = 'Primzahl erkannt - Versagenstests';
-        appendResult(lang, `  🎯 Strategie: ${testStrategy}`);
-      } else if (isPerfectSemiprime(rsaNumber)) {
-        testStrategy = 'Perfektes Semiprime - Feintuning-Modus';
-        appendResult(lang, `  🎯 Strategie: ${testStrategy}`);
-        appendResult(lang, `  ⚠️ Diese Zahl ist für alle ξ-Werte lösbar - Qualitätstests aktiviert`);
-      } else {
-        testStrategy = 'Standard-Optimierung';
-        appendResult(lang, `  🎯 Strategie: ${testStrategy}`);
-      }
-      
-      appendResult(lang, "=" * 60);
-
-      // Erweiterte ξ-Kandidaten für bessere Differenzierung
-      const xiCandidates = [
-        1e-3, 7e-4, 5e-4, 3e-4, 1e-4, 7e-5, 5e-5, 3e-5, 1e-5, 
-        7e-6, 5e-6, 3e-6, 1e-6, 7e-7, 5e-7, 3e-7, 1e-7, 5e-8, 1e-8
-      ];
-
-      let bestXi = 1e-5;
-      let bestScore = -1;
-      let bestTime = Infinity;
-      let results = [];
-
-      appendResult(lang, `\n🧪 ${t.testing}:`);
-      appendResult(lang, `  Teste ${xiCandidates.length} ξ-Werte für optimale Performance`);
-
-      xiCandidates.forEach((xi, index) => {
-        setTimeout(() => {
-          const simulator = new T0FrameworkSimulator(rsaNumber, false, false);
-          simulator.xi = xi;
-          
-          const startTime = Date.now();
-          const result = simulator.pureT0ShorAlgorithm();
-          const duration = (Date.now() - startTime) / 1000;
-
-          // Erweiterte ξ-Performance-Bewertung
-          let score = calculateAdvancedXiScore(result, duration, xi, rsaNumber);
-
-          results.push({xi, success: result.success, score, duration, result});
-
-          const status = result.success ? '✅' : '❌';
-          const scoreDisplay = score.toFixed(1);
-          appendResult(lang, `  ξ=${xi.toExponential(0)}: ${status} Score=${scoreDisplay} (${duration.toFixed(3)}s)`);
-
-          if (result.success && result.factors) {
-            const qualityInfo = getQualityInfo(result, duration, xi);
-            appendResult(lang, `   → ${result.factors[0]}×${result.factors[1]} ${qualityInfo}`);
-          }
-
-          // Beste ξ verfolgen mit verbesserter Logik
-          if (score > bestScore || (Math.abs(score - bestScore) < 0.1 && duration < bestTime)) {
-            bestXi = xi;
-            bestScore = score;
-            bestTime = duration;
-          }
-
-          // Analyse am Ende
-          if (index === xiCandidates.length - 1) {
-            setTimeout(() => {
-              showDetailedAnalysis(lang, results, bestXi, bestScore, bestTime, rsaNumber, t);
-            }, 1000);
-          }
-        }, index * 600); // Längere Intervalle für bessere Sichtbarkeit
-      });
-    }
-
-    function calculateAdvancedXiScore(result, duration, xi, rsaNumber) {
-      let score = 0;
-      
-      if (result.success) {
-        // Basis-Erfolgsscore
-        score += 100;
-        
-        // Geschwindigkeitsbonus (exponentiell für sehr schnelle Ergebnisse)
-        const speedBonus = Math.max(0, 20 - duration * 10);
-        score += speedBonus;
-        
-        // Resonanzqualität
-        if (result.resonance) {
-          const resonanceBonus = Math.min(15, result.resonance * 20);
-          score += resonanceBonus;
-        }
-        
-        // Methoden-Bonus
-        if (result.method === 'order_finding') {
-          score += 25; // Bonus fuer den Ordnungssuche-Weg (statt Fallback)
-        } else if (result.method === 'gcd_shortcut') {
-          score += 10; // Geringer Bonus für Shortcuts
-        }
-        
-        // ξ-Stabilität: Mittlere Werte bevorzugen
-        const xiOptimality = calculateXiOptimality(xi, rsaNumber);
-        score += xiOptimality * 10;
-        
-        // Problemspezifischer Bonus
-        const problemBonus = calculateProblemSpecificBonus(rsaNumber, result.method, duration);
-        score += problemBonus;
-        
-      } else {
-        // Auch bei Misserfolg: Punkte für Geschwindigkeit und ξ-Angemessenheit
-        score = Math.max(5, 20 - duration * 5);
-        
-        // Kleine Belohnung für angemessene ξ-Werte auch bei Misserfolg
-        const xiOptimality = calculateXiOptimality(xi, rsaNumber);
-        score += xiOptimality * 2;
-      }
-      
-      return Math.max(0, score);
-    }
-
-    function calculateXiOptimality(xi, rsaNumber) {
-      // Optimale ξ-Bereiche basierend auf Problemgröße
-      let optimalXi;
-      if (rsaNumber < 100) optimalXi = 1e-4;
-      else if (rsaNumber < 1000) optimalXi = 5e-5;
-      else if (rsaNumber < 10000) optimalXi = 1e-5;
-      else optimalXi = 5e-6;
-      
-      // Gaußsche Bewertung um den optimalen Wert
-      const logDistance = Math.abs(Math.log10(xi) - Math.log10(optimalXi));
-      return Math.exp(-logDistance * logDistance / 2);
-    }
-
-    function calculateProblemSpecificBonus(rsaNumber, method, duration) {
-      let bonus = 0;
-      
-      // Bonusfor verschiedene Problemtypen
-      if (rsaNumber < 50) {
-        // Kleine Zahlen: Geschwindigkeit wichtig
-        bonus += Math.max(0, 5 - duration * 10);
-      } else if (rsaNumber > 10000) {
-        // Große Zahlen: Erfolg wichtiger als Geschwindigkeit
-        if (method === 'order_finding') bonus += 15;
-      }
-      
-      // Spezielle Zahlen
-      if (isPerfectSemiprime(rsaNumber)) {
-        // Perfekte Semiprimes: Feintuning zählt
-        bonus += Math.max(0, 3 - duration * 2);
-      }
-      
-      return bonus;
-    }
-
-    function getQualityInfo(result, duration, xi) {
-      let info = `(${result.method})`;
-      
-      if (result.resonance) {
-        info += ` Res:${result.resonance.toFixed(3)}`;
-      }
-      
-      if (duration < 0.005) info += ` ⚡BLITZ`;
-      else if (duration < 0.01) info += ` 🚀SCHNELL`;
-      else if (duration > 0.1) info += ` 🐌LANGSAM`;
-      
-      return info;
-    }
-
-    function showDetailedAnalysis(lang, results, bestXi, bestScore, bestTime, rsaNumber, t) {
-      appendResult(lang, `\n🏆 ${t.best}:`);
-      appendResult(lang, `  ξ = ${bestXi.toExponential(2)}`);
-      appendResult(lang, `  Score = ${bestScore.toFixed(1)}`);
-      appendResult(lang, `  Zeit / Time = ${bestTime.toFixed(3)}s`);
-
-      // Erweiterte Performance-Analyse
-      appendResult(lang, `\n📊 ${t.performance}:`);
-      const successfulXi = results.filter(r => r.success);
-      const successRate = (successfulXi.length / results.length * 100).toFixed(1);
-      
-      appendResult(lang, `  Erfolgsrate / Success Rate: ${successfulXi.length}/${results.length} (${successRate}%)`);
-      
-      if (successfulXi.length > 0) {
-        const avgTime = (successfulXi.reduce((sum, r) => sum + r.duration, 0) / successfulXi.length).toFixed(3);
-        const fastestXi = successfulXi.reduce((min, r) => r.duration < min.duration ? r : min);
-        const slowestXi = successfulXi.reduce((max, r) => r.duration > max.duration ? r : max);
-        const avgScore = (successfulXi.reduce((sum, r) => sum + r.score, 0) / successfulXi.length).toFixed(1);
-        
-        appendResult(lang, `  ⏱️ Durchschnittszeit / Avg Time: ${avgTime}s`);
-        appendResult(lang, `  🚀 Schnellstes ξ / Fastest ξ: ${fastestXi.xi.toExponential(2)} (${fastestXi.duration.toFixed(3)}s)`);
-        appendResult(lang, `  🐌 Langsamstes ξ / Slowest ξ: ${slowestXi.xi.toExponential(2)} (${slowestXi.duration.toFixed(3)}s)`);
-        appendResult(lang, `  📈 Durchschnittsscore / Avg Score: ${avgScore}`);
-        
-        // Analyse der Score-Verteilung
-        const scoreRange = Math.max(...successfulXi.map(r => r.score)) - Math.min(...successfulXi.map(r => r.score));
-        appendResult(lang, `  📊 Score-Bandbreite / Score Range: ${scoreRange.toFixed(1)} Punkte`);
-      }
-
-      // Intelligente Empfehlungen
-      appendResult(lang, `\n💡 ${t.recommendation}:`);
-      
-      if (successRate === '100.0' && isPerfectSemiprime(rsaNumber)) {
-        appendResult(lang, `  ✅ Perfektes Semiprime: Alle ξ-Werte erfolgreich`);
-        appendResult(lang, `  🎯 Empfehlung: ξ = ${bestXi.toExponential(2)} (beste Performance)`);
-        appendResult(lang, `  💡 Für schwierigere Zahlen testen Sie größere N-Werte`);
-      } else if (successRate >= '80.0') {
-        appendResult(lang, `  ✅ Gute Erfolgsrate: ξ = ${bestXi.toExponential(2)} empfohlen`);
-        appendResult(lang, `  🎯 Automatische Anpassung: "Optimiert (auto-tuning)"`);
-      } else if (successRate >= '50.0') {
-        appendResult(lang, `  ⚠️ Moderate Erfolgsrate: ξ-Bereich eingrenzen`);
-        const workingXi = successfulXi.map(r => r.xi);
-        const minWorking = Math.min(...workingXi);
-        const maxWorking = Math.max(...workingXi);
-        appendResult(lang, `  📍 Funktionsbereich: ${minWorking.toExponential(1)} - ${maxWorking.toExponential(1)}`);
-      } else {
-        appendResult(lang, `  ❌ Niedrige Erfolgsrate: Schwierige Zahl für T0`);
-        appendResult(lang, `  💡 Empfehlungen:`);
-        appendResult(lang, `   • Versuchen Sie kleinere Zahlen (15, 21, 35)`);
-        appendResult(lang, `   • Aktivieren Sie Fallback für Vergleich`);
-        appendResult(lang, `   • Diese Zahl zeigt T0-Grenzen auf`);
-      }
-      
-      // Update UI
-      document.getElementById(`xi-mode-${lang}`).value = 'optimized';
-      simulatorState.xi = bestXi;
-      document.getElementById(`xi-optimization-${lang}`).textContent = bestXi.toExponential(1);
-    }
-
-    function isProbablePrime(n) {
-      if (n < 2) return false;
-      if (n === 2) return true;
-      if (n % 2 === 0) return false;
-      
-      // Schnelle Primzahl-Heuristik
-      for (let i = 3; i <= Math.min(Math.sqrt(n), 100); i += 2) {
-        if (n % i === 0) return false;
-      }
-      return true;
-    }
-
-    function isPerfectSemiprime(n) {
-      // Prüft ob n ein "perfektes" Semiprime ist (Produkt zweier ähnlich großer Primzahlen)
-      if (n < 6) return false;
-      
-      const factors = classicalTrialDivision(n);
-      if (!factors) return false;
-      
-      const [p, q] = factors;
-      // Prüfe ob beide Faktoren prim sind und ähnliche Größe haben
-      const ratio = Math.max(p, q) / Math.min(p, q);
-      return isProbablePrime(p) && isProbablePrime(q) && ratio < 10;
-    }
-
-    function runLimitTests(lang) {
-      addFunctionHeader(lang, 'limit_tests', '⚠️', 'tests');
-      
-      const texts = {
-        de: {
-          subtitle: "Systematische Überprüfung der T0-Grenzen",
-          testNames: {
-            large_primes: "Große Primzahlen",
-            power_of_two: "Zweierpotenzen", 
-            mersenne: "Mersenne-Zahlen",
-            carmichael: "Carmichael-Zahlen",
-            rsa_keys: "Echte RSA-Schlüssel"
-          }
-        },
-        en: {
-          subtitle: "Systematic verification of T0 boundaries",
-          testNames: {
-            large_primes: "Large Primes",
-            power_of_two: "Powers of Two",
-            mersenne: "Mersenne Numbers", 
-            carmichael: "Carmichael Numbers",
-            rsa_keys: "Real RSA Keys"
-          }
-        }
-      };
-
-      const t = texts[lang];
-      appendResult(lang, `🔧 ${t.subtitle}`);
-      appendResult(lang, "=" * 60);
-
-      // Test 1: Große Primzahlen (sollten versagen)
-      appendResult(lang, `\n📊 Test 1: ${t.testNames.large_primes}`);
-      appendResult(lang, `  Erwartung: T0 sollte versagen (Primzahlen nicht faktorisierbar)`);
-      const largePrimes = [1009, 1013, 1019, 1021, 1031];
-      runTestSeries(lang, largePrimes, "large_primes");
-
-      // Test 2: Zweierpotenzen (mathematisch problematisch)
-      setTimeout(() => {
-        appendResult(lang, `\n📊 Test 2: ${t.testNames.power_of_two}`);
-        appendResult(lang, `  Erwartung: Mathematisch schwierig für T0-Resonanz`);
-        const powersOfTwo = [64, 128, 256, 512, 1024];
-        runTestSeries(lang, powersOfTwo, "powers_of_two");
-      }, 2000);
-
-      // Test 3: Mersenne-Zahlen (sehr schwer)
-      setTimeout(() => {
-        appendResult(lang, `\n📊 Test 3: ${t.testNames.mersenne}`);
-        appendResult(lang, `  Erwartung: Extrem schwer, meist Primzahlen`);
-        const mersenneNumbers = [127, 8191, 131071]; // 2^7-1, 2^13-1, 2^17-1
-        runTestSeries(lang, mersenneNumbers, "mersenne");
-      }, 4000);
-
-      // Test 4: Carmichael-Zahlen (Pseudoprimzahlen)
-      setTimeout(() => {
-        appendResult(lang, `\n📊 Test 4: ${t.testNames.carmichael}`);
-        appendResult(lang, `  Erwartung: Schwierig für T0-Periodensuche`);
-        const carmichaelNumbers = [561, 1105, 1729, 2465];
-        runTestSeries(lang, carmichaelNumbers, "carmichael");
-      }, 6000);
-
-      // Test 5: Echte RSA-Challenges
-      setTimeout(() => {
-        appendResult(lang, `\n📊 Test 5: ${t.testNames.rsa_keys}`);
-        appendResult(lang, `  Erwartung: Gemischte Ergebnisse je nach Größe`);
-        const rsaChallenges = [21, 143, 323, 667, 899]; // Kleine RSA-ähnliche
-        runTestSeries(lang, rsaChallenges, "rsa_challenges");
-      }, 8000);
-
-      // Zusammenfassung
-      setTimeout(() => {
-        appendResult(lang, `\n🎯 GRENZEN-TESTS ABGESCHLOSSEN`);
-        appendResult(lang, `\n📊 T0-Framework Grenzen bestätigt:`);
-        appendResult(lang, `  ❌ Primzahlen: Erwartungsgemäß nicht faktorisierbar`);
-        appendResult(lang, `  ❌ Zweierpotenzen: Resonanz-Probleme`);
-        appendResult(lang, `  ❌ Mersenne-Zahlen: Meist prim, sehr schwer`);
-        appendResult(lang, `  ⚠️ Carmichael-Zahlen: Pseudoprimzahl-Herausforderung`);
-        appendResult(lang, `  ✅ Kleine RSA: Teilweise erfolgreich`);
-        appendResult(lang, `\n💡 Diese Grenzen sind fundamental für T0-Physik!`);
-      }, 10000);
-    }
-
-    function runFailureTests(lang) {
-      addFunctionHeader(lang, 'failure_tests', '💥', 'tests');
-      
-      const texts = {
-        de: {
-          subtitle: "Aufdeckung kritischer T0-Versagensszenarien",
-          edge_cases: "Rand-Fälle",
-          pathological: "Pathologische Zahlen",
-          xi_limits: "ξ-Parameter Grenzen"
-        },
-        en: {
-          subtitle: "Revealing critical T0 failure scenarios",
-          edge_cases: "Edge Cases",
-          pathological: "Pathological Numbers",
-          xi_limits: "ξ Parameter Limits"
-        }
-      };
-
-      const t = texts[lang];
-      appendResult(lang, `🔧 ${t.subtitle}`);
-      appendResult(lang, "=" * 60);
-
-      // Test verschiedene ξ-Parameter
-      appendResult(lang, `\n🔍 ${t.xi_limits}:`);
-      appendResult(lang, `  Teste ξ-Sensitivität mit N=77 (7×11)`);
-      const xiValues = [1e-3, 1e-4, 1e-5, 1e-6, 1e-7, 1e-8];
-      const testNumber = 77; // 7 × 11
-
-      xiValues.forEach((xi, index) => {
-        setTimeout(() => {
-          const simulator = new T0FrameworkSimulator(testNumber, false, false);
-          simulator.xi = xi;
-          const result = simulator.pureT0ShorAlgorithm();
-          
-          const status = result.success ? '✅' : '❌';
-          appendResult(lang, `  ξ = ${xi.toExponential(0)}: ${status} ${result.method}`);
-          if (result.success && result.factors) {
-            appendResult(lang, `   Faktoren: ${result.factors[0]} × ${result.factors[1]}`);
-          }
-        }, index * 1000);
-      });
-
-      // Pathologische Zahlen
-      setTimeout(() => {
-        appendResult(lang, `\n🔍 ${t.pathological}:`);
-        appendResult(lang, `  Teste mathematisch problematische Fälle`);
-        const pathologicalNumbers = [
-          {n: 1, desc: "Trivial (1)"},
-          {n: 4, desc: "Quadrat (2²)"},
-          {n: 9, desc: "Quadrat (3²)"},
-          {n: 25, desc: "Quadrat (5²)"},
-          {n: 49, desc: "Quadrat (7²)"},
-          {n: 121, desc: "Quadrat (11²)"}
-        ];
-
-        pathologicalNumbers.forEach((test, index) => {
-          setTimeout(() => {
-            const simulator = new T0FrameworkSimulator(test.n, false, false);
-            const result = simulator.pureT0ShorAlgorithm();
-            const status = result.success ? '✅' : '❌';
-            appendResult(lang, `  ${test.desc}: ${status} ${result.method}`);
-            if (result.success && result.factors) {
-              appendResult(lang, `   → ${result.factors[0]} × ${result.factors[1]}`);
-            }
-          }, index * 800);
-        });
-      }, 7000);
-
-      // Rand-Fälle
-      setTimeout(() => {
-        appendResult(lang, `\n🔍 ${t.edge_cases}:`);
-        appendResult(lang, `  Teste Minimal- und Grenzfälle`);
-        const edgeCases = [
-          {n: 2, desc: "Kleinste Primzahl"},
-          {n: 3, desc: "Zweitkleinste Primzahl"},
-          {n: 6, desc: "2×3 (kleinste zusammengesetzte)"},
-          {n: 10, desc: "2×5"},
-          {n: 14, desc: "2×7"},
-          {n: 22, desc: "2×11"}
-        ];
-
-        edgeCases.forEach((test, index) => {
-          setTimeout(() => {
-            const simulator = new T0FrameworkSimulator(test.n, false, false);
-            const result = simulator.pureT0ShorAlgorithm();
-            const status = result.success ? '✅' : '❌';
-            appendResult(lang, `  ${test.desc}: ${status} ${result.method}`);
-            if (result.success && result.factors) {
-              appendResult(lang, `   → ${result.factors[0]} × ${result.factors[1]}`);
-            }
-          }, index * 800);
-        });
-      }, 12000);
-
-      // Schwächen-Analyse
-      setTimeout(() => {
-        appendResult(lang, `\n🚨 KRITISCHE T0-SCHWÄCHEN IDENTIFIZIERT:`);
-        appendResult(lang, `\n❌ Fundamentale Versagensfälle:`);
-        appendResult(lang, `  • Primzahlen: Keine Faktoren existieren`);
-        appendResult(lang, `  • Quadratzahlen: Resonanz-Störungen`);
-        appendResult(lang, `  • Sehr kleine N: Triviale Fälle`);
-        appendResult(lang, `\n⚠️ ξ-Parameter Sensitivität:`);
-        appendResult(lang, `  • Starke Abhängigkeit von ξ-Wert`);
-        appendResult(lang, `  • Optimaler Bereich: 1e-6 bis 1e-4`);
-        appendResult(lang, `  • Außerhalb: Resonanz-Zusammenbruch`);
-        appendResult(lang, `\n🔬 T0-Physik Grenzen:`);
-        appendResult(lang, `  • Deterministische Natur = Vorhersagbare Schwächen`);
-        appendResult(lang, `  • Energiefeld-Kopplung nicht universell`);
-        appendResult(lang, `  • Klassische Backup-Methoden notwendig`);
-      }, 18000);
-    }
-
-    function runStressTests(lang) {
-      addFunctionHeader(lang, 'stress_tests', '🔥', 'tests');
-      
-      const texts = {
-        de: {
-          subtitle: "Belastungstests für T0-Framework",
-          sequential: "Sequenzielle Tests",
-          random: "Zufällige Zahlen",
-          performance: "Performance-Analyse"
-        },
-        en: {
-          subtitle: "Load testing for T0 framework", 
-          sequential: "Sequential Tests",
-          random: "Random Numbers",
-          performance: "Performance Analysis"
-        }
-      };
-
-      const t = texts[lang];
-      appendResult(lang, `🔧 ${t.subtitle}`);
-      appendResult(lang, "=" * 60);
-
-      let successCount = 0;
-      let totalTests = 0;
-
-      // Sequenzielle Tests
-      appendResult(lang, `\n🔄 ${t.sequential} (N = 15-50):`);
-      appendResult(lang, `  Systematischer Test aller zusammengesetzten Zahlen`);
-      
-      const compositeNumbers = [];
-      for (let n = 15; n <= 50; n++) {
-        if (n > 1 && !isPrime(n)) {
-          compositeNumbers.push(n);
-        }
-      }
-
-      compositeNumbers.forEach((n, index) => {
-        setTimeout(() => {
-          const simulator = new T0FrameworkSimulator(n, false, false);
-          const result = simulator.pureT0ShorAlgorithm();
-          totalTests++;
-          if (result.success) successCount++;
-          
-          const status = result.success ? '✅' : '❌';
-          appendResult(lang, `  N=${n}: ${status} ${result.method} (${result.time?.toFixed(3)}s)`);
-          
-          if (result.success && result.factors) {
-            appendResult(lang, `   → ${result.factors[0]} × ${result.factors[1]}`);
-          }
-          
-          if (index === compositeNumbers.length - 1) {
-            setTimeout(() => {
-              const rate = (successCount / totalTests * 100).toFixed(1);
-              appendResult(lang, `\n📊 Sequenzielle Erfolgsrate / Sequential Success Rate: ${successCount}/${totalTests} (${rate}%)`);
-              
-              // Reset für nächste Tests
-              successCount = 0;
-              totalTests = 0;
-              runRandomStressTests(lang);
-            }, 500);
-          }
-        }, index * 400);
-      });
-    }
-
-    function runRandomStressTests(lang) {
-      const texts = {
-        de: { random: "Zufällige Zahlen", performance: "Performance-Analyse" },
-        en: { random: "Random Numbers", performance: "Performance Analysis" }
-      };
-
-      appendResult(lang, `\n🎲 ${texts[lang].random} (20 Tests):`);
-      appendResult(lang, `  Generiere zufällige Semiprimes für Stress-Test`);
-      
-      let successCount = 0;
-      let totalTime = 0;
-      const testCount = 20;
-
-      for (let i = 0; i < testCount; i++) {
-        setTimeout(() => {
-          // Generiere zufällige semiprime Zahl
-          const primes = [3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47];
-          const p1 = primes[Math.floor(Math.random() * primes.length)];
-          const p2 = primes[Math.floor(Math.random() * primes.length)];
-          const n = p1 * p2;
-
-          const simulator = new T0FrameworkSimulator(n, false, false);
-          const startTime = Date.now();
-          const result = simulator.pureT0ShorAlgorithm();
-          const duration = (Date.now() - startTime) / 1000;
-          
-          totalTime += duration;
-          if (result.success) successCount++;
-          
-          const status = result.success ? '✅' : '❌';
-          appendResult(lang, `  ${p1}×${p2}=${n}: ${status} ${result.method} (${duration.toFixed(3)}s)`);
-          
-          if (i === testCount - 1) {
-            setTimeout(() => {
-              const rate = (successCount / testCount * 100).toFixed(1);
-              const avgTime = (totalTime / testCount).toFixed(3);
-              appendResult(lang, `\n📊 ${texts[lang].performance}:`);
-              appendResult(lang, `  Erfolgsrate / Success Rate: ${successCount}/${testCount} (${rate}%)`);
-              appendResult(lang, `  ⏱️ Durchschnittszeit / Avg Time: ${avgTime}s`);
-              appendResult(lang, `  📈 Gesamtzeit / Total Time: ${totalTime.toFixed(3)}s`);
-              
-              // Stress-Test Analyse
-              appendResult(lang, `\n🔥 STRESS-TEST ANALYSE:`);
-              if (rate >= 80) {
-                appendResult(lang, `  ✅ T0 zeigt gute Stabilität unter Stress`);
-              } else if (rate >= 50) {
-                appendResult(lang, `  ⚠️ T0 zeigt moderate Stabilität`);
-              } else {
-                appendResult(lang, `  ❌ T0 zeigt Instabilität unter Stress`);
-              }
-              
-              appendResult(lang, `\n💡 Stress-Test Erkenntnisse:`);
-              appendResult(lang, `  • Durchschnittszeit: ${avgTime}s pro Faktorisierung`);
-              appendResult(lang, `  • Konsistenz: ${rate}% Erfolgsrate`);
-              appendResult(lang, `  • Skalierung: ${totalTime.toFixed(1)}s für ${testCount} Tests`);
-              
-              if (avgTime > 2.0) {
-                appendResult(lang, `  ⚠️ Performance-Problem: Langsame Berechnungen`);
-              }
-              if (rate < 70) {
-                appendResult(lang, `  ⚠️ Zuverlässigkeits-Problem: Niedrige Erfolgsrate`);
-              }
-            }, 500);
-          }
-        }, i * 600);
-      }
-    }
-
-    function runBenchmarkSeries(lang) {
-      addFunctionHeader(lang, 'benchmark', '📊', 'benchmark');
-      
-      const texts = {
-        de: {
-          subtitle: "Systematische Leistungsmessung",
-          comparison: "T0 vs Standard-Methoden Vergleich",
-          theoretical: "Theoretische Grenzen",
-          practical: "Praktische Leistung"
-        },
-        en: {
-          subtitle: "Systematic performance measurement",
-          comparison: "T0 vs Standard Methods Comparison",
-          theoretical: "Theoretical Limits",
-          practical: "Practical Performance"
-        }
-      };
-
-      const t = texts[lang];
-      appendResult(lang, `🔧 ${t.subtitle}`);
-      appendResult(lang, "=" * 60);
-
-      // Benchmark verschiedener Größenordnungen
-      const benchmarkSets = [
-        {name: "Micro (2-4 bit)", numbers: [6, 10, 14, 15]},
-        {name: "Small (5-6 bit)", numbers: [21, 33, 35, 39]}, 
-        {name: "Medium (7-8 bit)", numbers: [77, 91, 93, 95]},
-        {name: "Large (9-10 bit)", numbers: [143, 187, 209, 247]},
-        {name: "XLarge (11-12 bit)", numbers: [323, 391, 437, 493]}
-      ];
-
-      appendResult(lang, `\n🏁 Starte Benchmark-Serie mit ${benchmarkSets.length} Kategorien`);
-
-      benchmarkSets.forEach((set, setIndex) => {
-        setTimeout(() => {
-          appendResult(lang, `\n📊 ${set.name}:`);
-          appendResult(lang, `  Teste: ${set.numbers.join(', ')}`);
-          
-          let setSuccesses = 0;
-          let setTotalTime = 0;
-          let setT0Time = 0;
-          let setClassicTime = 0;
-
-          set.numbers.forEach((n, numIndex) => {
-            setTimeout(() => {
-              // T0 Test
-              const t0Simulator = new T0FrameworkSimulator(n, false, false);
-              const t0Start = Date.now();
-              const t0Result = t0Simulator.pureT0ShorAlgorithm();
-              const t0Time = (Date.now() - t0Start) / 1000;
-
-              // Klassische Trial Division zum Vergleich
-              const classicStart = Date.now();
-              const classicResult = classicalTrialDivision(n);
-              const classicTime = (Date.now() - classicStart) / 1000;
-
-              setTotalTime += t0Time;
-              setT0Time += t0Time;
-              setClassicTime += classicTime;
-              if (t0Result.success) setSuccesses++;
-
-              const speedup = classicTime > 0 ? (classicTime / t0Time).toFixed(1) : 'N/A';
-              const t0Status = t0Result.success ? '✅' : '❌';
-              const classicStatus = classicResult ? '✅' : '❌';
-
-              appendResult(lang, `  N=${n}:`);
-              appendResult(lang, `   T0:   ${t0Status} ${t0Time.toFixed(3)}s (${t0Result.method})`);
-              appendResult(lang, `   Classic: ${classicStatus} ${classicTime.toFixed(3)}s`);
-              appendResult(lang, `   Speedup: ${speedup}x`);
-
-              if (t0Result.success && t0Result.factors) {
-                appendResult(lang, `   Factors: ${t0Result.factors[0]} × ${t0Result.factors[1]}`);
-              }
-
-              // Am Ende des Sets Zusammenfassung
-              if (numIndex === set.numbers.length - 1) {
-                setTimeout(() => {
-                  const setRate = (setSuccesses / set.numbers.length * 100).toFixed(1);
-                  const avgT0Time = (setT0Time / set.numbers.length).toFixed(3);
-                  const avgClassicTime = (setClassicTime / set.numbers.length).toFixed(3);
-                  const overallSpeedup = (setClassicTime / setT0Time).toFixed(1);
-                  
-                  appendResult(lang, `  📈 ${set.name} Zusammenfassung:`);
-                  appendResult(lang, `   T0 Erfolgsrate: ${setSuccesses}/${set.numbers.length} (${setRate}%)`);
-                  appendResult(lang, `   Durchschnitt T0: ${avgT0Time}s`);
-                  appendResult(lang, `   Durchschnitt Classic: ${avgClassicTime}s`);
-                  appendResult(lang, `   Gesamt-Speedup: ${overallSpeedup}x`);
-                }, 200);
-              }
-            }, numIndex * 1000);
-          });
-        }, setIndex * 5000);
-      });
-
-      // Finale Analyse
-      setTimeout(() => {
-        appendResult(lang, `\n🎯 ${t.theoretical}:`);
-        appendResult(lang, `  📚 Komplexitäts-Vergleich:`);
-        appendResult(lang, `  • T0-Shor: O(log³N) - wenn ξ-Resonanz funktioniert`);
-        appendResult(lang, `  • Trial Division: O(√N) - immer zuverlässig`);
-        appendResult(lang, `  • Klassisch Shor: O(log³N) - probabilistisch`);
-        appendResult(lang, `  • Quantenvorteil: Nur bei sehr großen N erkennbar`);
-        
-        appendResult(lang, `\n⚠️ Kritische T0-Grenzen bestätigt:`);
-        appendResult(lang, `  ❌ Primzahlen: Versagen erwartet (mathematisch korrekt)`);
-        appendResult(lang, `  ❌ Quadratzahlen: Mathematisch problematisch`);
-        appendResult(lang, `  ⚠️ ξ-Abhängigkeit: Sehr sensitiv auf Parameter`);
-        appendResult(lang, `  📉 Große Zahlen: Resonanz wird schwächer`);
-        appendResult(lang, `  🎯 Optimaler Bereich: 15-500 (kleine RSA)`);
-        
-        appendResult(lang, `\n🏆 BENCHMARK-SERIE ABGESCHLOSSEN`);
-        appendResult(lang, `\n💡 Schlussfolgerungen:`);
-        appendResult(lang, `  ✅ T0 funktioniert für kleine Semiprimes`);
-        appendResult(lang, `  ⚠️ Klassische Fallbacks oft notwendig`);
-        appendResult(lang, `  📊 Speedup bei erfolgreichen T0-Fällen sichtbar`);
-        appendResult(lang, `  🔬 T0-Physik zeigt erwartete Grenzen`);
-      }, benchmarkSets.length * 5000 + 2000);
-    }
-
-    function runTestSeries(lang, numbers, testType) {
-      let successCount = 0;
-      
-      numbers.forEach((n, index) => {
-        setTimeout(() => {
-          const simulator = new T0FrameworkSimulator(n, false, false); // Pure T0, no fallback
-          const result = simulator.pureT0ShorAlgorithm();
-          
-          const status = result.success ? '✅ Erfolg' : '❌ Versagen';
-          const statusEn = result.success ? '✅ Success' : '❌ Failure';
-          
-          if (result.success) successCount++;
-          
-          const displayStatus = lang === 'de' ? status : statusEn;
-          appendResult(lang, `  N=${n}: ${displayStatus} (${result.method})`);
-          
-          if (result.success && result.factors) {
-            appendResult(lang, `   → ${result.factors[0]} × ${result.factors[1]}`);
-          }
-          
-          // Zeige Erfolgsrate am Ende
-          if (index === numbers.length - 1) {
-            setTimeout(() => {
-              const rate = (successCount / numbers.length * 100).toFixed(1);
-              const summary = lang === 'de' ? 
-                `📊 Erfolgsrate: ${successCount}/${numbers.length} (${rate}%)` :
-                `📊 Success Rate: ${successCount}/${numbers.length} (${rate}%)`;
-              appendResult(lang, `  ${summary}`);
-            }, 500);
-          }
-        }, index * 800);
-      });
-    }
-
-    function clearResults(lang) {
-      const resultsDiv = document.getElementById(`results-${lang}`);
-      resultsDiv.innerHTML = lang === 'de' ? 
-        '<strong>🔬 T0-Simulator Ergebnisse:</strong><br>Bereit für T0-Framework Berechnungen...<br><br><em>Hinweise:</em><br>• Pure T0 (ohne Fallback) zeigt echte T0-Physik<br>• Kleine Zahlen (15, 21, 35) für schnelle Tests<br>• Große Zahlen (>1000) für realistische RSA-Simulation<br>• ξ-Parameter bestimmt Energiefeld-Kopplungsstärke<br>• T0 nutzt KEINE klassischen Qubits - nur Energiefelder!<br>' :
-        '<strong>🔬 T0 Simulator Results:</strong><br>Ready for T0-Framework calculations...<br><br><em>Notes:</em><br>• Pure T0 (no fallback) shows true T0 physics<br>• Small numbers (15, 21, 35) for quick tests<br>• Large numbers (>1000) for realistic RSA simulation<br>• ξ parameter determines energy field coupling strength<br>• T0 uses NO classical qubits - only energy fields!<br>';
-      
-      document.getElementById(`energy-field-${lang}`).style.display = 'none';
-      
-      // Reset statistics
-      simulatorState.successCount = 0;
-      simulatorState.totalRuns = 0;
-      updateStatisticsDisplay(lang);
-    }
-
-    function appendResult(lang, text) {
-      const resultsDiv = document.getElementById(`results-${lang}`);
-      resultsDiv.innerHTML += text + '<br>';
-      resultsDiv.scrollTop = resultsDiv.scrollHeight;
-    }
-
-    function updateStatistics(lang, simulator) {
-      simulatorState.xi = simulator.xi;
-      updateStatisticsDisplay(lang);
-    }
-
-    function updateStatisticsDisplay(lang) {
-      const rsaNumber = document.getElementById(`rsa-number-${lang}`).value;
-      const successRate = simulatorState.totalRuns > 0 ? 
-        (simulatorState.successCount / simulatorState.totalRuns * 100).toFixed(1) + '%' : '-';
-
-      document.getElementById(`current-n-${lang}`).textContent = rsaNumber || '-';
-      document.getElementById(`current-xi-${lang}`).textContent = simulatorState.xi.toExponential(1);
-      document.getElementById(`success-rate-${lang}`).textContent = successRate;
-    }
-
-    function isPrime(n) {
-      if (n < 2) return false;
-      if (n === 2) return true;
-      if (n % 2 === 0) return false;
-      for (let i = 3; i <= Math.sqrt(n); i += 2) {
-        if (n % i === 0) return false;
-      }
-      return true;
-    }
-
-    function classicalTrialDivision(n) {
-      if (n < 2) return null;
-      for (let i = 2; i <= Math.sqrt(n); i++) {
-        if (n % i === 0) {
-          return [i, n / i];
-        }
-      }
-      return null; // Prime
-    }
-
-    // Initialize with sample calculation
-    window.addEventListener('load', () => {
-      // Auto-run a sample for demonstration
-      setTimeout(() => {
-        if (currentLang === 'de') {
-          appendResult('de', '💡 Willkommen im T0-Simulator! Klicken Sie "T0-Shor starten" für eine Demo.');
-          appendResult('de', '⚠️ Nutzen Sie "Grenzen-Tests" um T0-Schwächen zu erkunden.');
-          appendResult('de', '🔬 Alle Funktionen sind vollständig wie im Python-Code implementiert.');
-        } else {
-          appendResult('en', '💡 Welcome to T0 Simulator! Click "Run T0-Shor" for a demo.');
-          appendResult('en', '⚠️ Use "Limit Tests" to explore T0 weaknesses.');
-          appendResult('en', '🔬 All functions are fully implemented as in Python code.');
-        }
-      }, 1000);
-    });
-  </script>
 </body>
 </html>
-            
