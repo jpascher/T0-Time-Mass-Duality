@@ -1,92 +1,68 @@
 # Release Notes — v1.3.0 (August 2026)
 
-**DOI:** *to be assigned on Zenodo publication*
+**DOI:** Zenodo-Upload ausstehend — ersetzt v1.2.8
 
-Running corrections: **[2/pdf/190_T0_Korrekturen_En.pdf](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/190_T0_Korrekturen_En.pdf)**
-Change log: **[000_FFGFT_Changelog_De.md](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/000_FFGFT_Changelog_De.md)**
-
----
-
-**FFGFT — Fundamental Fractal-Geometric Field Theory** shows: all Standard
-Model constants follow from a single dimensionless parameter **ξ = 4/30000**
-on a compact 4D torus T⁴. The foundational relation is **T̃ · m = 1**.
-
-**Author:** Johann Pascher · ORCID 0009-0000-6518-4064
+Laufendes Korrekturverzeichnis: **2/pdf/190_T0_Korrekturen_De.pdf**  
+Changelog: **000_FFGFT_Changelog_De.md**
 
 ---
 
-## Overview
+## Neue Dokumente
 
-Two new corpus documents since the previous release, both working documents
-outside the A-series, both with verification scripts in pure standard library.
-No change to ξ, to the foundational relation, or to any derivation chain.
+### Dok. 317 — Topologischer Ursprung der Leptonen-Generationen: KSAU und FFGFT (DE+EN, je 7 S.)
 
----
+Vergleichs- und Synthesedokument zwischen der KSAU-Theorie (Knot-Synchronization-Adhesion Unified Theory, Zenodo 2026) und FFGFT. Enthält:
 
-## Doc. 315 — The Form of K_frak (new)
+- **Vollständige Quantenzahltabellen** $(n_\theta, n_\phi, r_i, p_i)$ für alle sechs Leptonen (geladene + Neutrinos)
+- **KSAU-Knotenstruktur:** $3_1$ (Trefoil/Elektron), $6_3$ (amphicheiral/Myon), $7_1$ (Torusknoten/Tau) mit Seifert-Genus, Alexander-Polynom-Span, Möbius-Energie-Status
+- **Strukturelle Entsprechung** KSAU ↔ FFGFT: Generations-Skalierung, Symmetrie-Pivot, chirale Projektion
+- **Torus-Knoten-Brückentheorem** [S]
+- **Mathematische Präzisierungen:** Blatt et al. (2025, arXiv:2512.02998) beweisen kritische Punkte der Möbius-Energie in Torus-Knoten-Klassen; exakte analytische $E(K)$-Werte für $3_1$, $6_3$, $7_1$ nicht bekannt (nur numerisch, Kim & Kusner 1993)
+- **Literatureinordnung:** Jeon et al. (2024, arXiv:2407.11731) behandelt Knotensolitonen für Baryon-Asymmetrie, kein Bezug zu Leptonenmassen; Avrin (2012, *Symmetry* MDPI, peer-reviewed) korrekt zitiert
+- **Statusmarker** in Synthesetabelle und KSAU-Warnblock: FFGFT-Seite [K]/[B], KSAU-Knotenzuordnung [S]/[SETZUNG]
 
-Examines for the first time whether the corpus discriminates the *form* of the
-fractal correction — additive 1 − 100ξ = 74/75 against multiplicative
-(1 − ξ)¹⁰⁰ — rather than merely its value. The two differ by exactly the second
-binomial term, 4950ξ² ≈ 8.9×10⁻⁵.
-
-- **Control case:** Euler's musical spiral. Exact closure is impossible by
-  prime factorisation; the best near-closures are the schisma (1.95 cents) and,
-  in the 7-limit, the ragisma 4375/4374 (0.40 cents). Closure arises only
-  through tempering — rationalisation of the step size.
-- **Three witnesses:** the A130 two-route ratio discriminates 7.5:1 additive
-  (conditional on the undeclared identity p = −(2−√3), leaving a real residual
-  of ≈ 7 eV in m_e); the A270 high-power location K⁻³⁶ ≈ 16/π² discriminates
-  **31:1 additive**, with the reference upgraded via Doc. 314 to
-  **16/π² = 1/Δ(D4)**, the reciprocal D4 packing density.
-- **Structural argument:** the additive form is the exact winding bookkeeping of
-  the rolled-up domain; the multiplicative one is the stepwise composition of
-  the unrolled scale domain. Tied to the closure fork of Docs. 295/313/314.
-- **Status:** value [K]; form additive [B], twice conditionally confirmed.
-  Unconditional decision line: the A270 baryon location (K³⁸ level).
-
-New open items: P-315-1 (derivation of p = −(2−√3)), P-315-2 (the ≈ 7 eV
-residual), P-315-3 (n sharpness, Δn ≤ 0.66 required). P35 narrowed.
-
-Documents: [DE](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/315_Kfrak_Form_De.pdf) · [EN](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/315_Kfrak_Form_En.pdf)
+**Dok. 006 DE+EN** ergänzt: Unterabschnitt „Wicklungszahlen und topologische Zuordnung" mit vollständiger $(n_\theta, n_\phi)$-Tabelle und Verweis auf Dok. 317.
 
 ---
 
-## Doc. 316 — FFGFT and the Riemann Zeta Function (new)
+### Dok. 318 — Geltungsbereich der Masseableitungen in FFGFT (DE+EN, je 8 S.)
 
-**The Riemann hypothesis is an arithmetic matter; the torus and ξ contribute
-nothing to its solution.** The result is predominantly negative — six
-approaches are excluded with reasons given — with four positive findings
-alongside: two identities of the framework and two measurements on the prime
-structure.
+Explizite Grenzziehung des $\xi$-Ableitungsrahmens. Enthält:
 
-- **Two identities [K]:** the Riemann zeta is a *factor* of the torus spectral
-  zeta, Z_{Z⁴}(s) = 8(1−4^{1−s})·ζ(s)·ζ(s−1), confirmed against the direct sum
-  to 10⁻⁷–10⁻¹²; and the Casimir point s = −1/2 lies with its functional mirror
-  s = 3/2 symmetric to the critical line.
-- **The decisive obstruction [X]:** Weyl's law gives N(λ) ~ λ^(d/2) for *every*
-  compact Riemannian manifold; Riemann-von Mangoldt gives N(T) ~ T·ln T. The
-  local exponent is never constant. There is therefore no compact manifold of
-  any dimension or curvature whose Laplace spectrum is the zeros — the entire
-  branch "deform T⁴/Z₃ suitably" is settled at theorem level.
-- **Cross terms measured [K]:** a bicoherence test with Monte Carlo phase
-  randomisation on 2469 self-computed zeros (Riemann-Siegel, up to t = 3000)
-  confirms in six of six controls: coupling at prime powers (b² = 0.76–0.85),
-  none at composite numbers (b² = 0.018–0.025), contrast factor 30 to 50.
-- **Physical evidence [K]:** the harmonic series of a valveless wind instrument
-  shows the same generator structure — prime orders introduce new tonal
-  qualities, composites are combinations; amplitude decay ~1/n corresponds to
-  Tenney height.
-- **Why ξ cannot help:** ξ = 1/(2²·3·5⁴) is a Tonnetz point with coordinates
-  (−2,−1,−4). The Weil length spectrum contains only logarithms of *single*
-  primes; ln(1/ξ) is a sum of lengths, not a length. The exclusion is
-  structural, not one of magnitude — it would hold unchanged if ξ were of
-  order 1.
+- **Physikalische Begründung** aus der vollständigen Energierelation $E^2 = (m_0 c^2)^2 + (pc)^2$: masselose Gluonen tragen 99% der Protonmasse als Bewegungsenergie
+- **Eingerollt vs. ausgerollt** (Dok. 311): Quark-Ruhemassen = eingerollte Moden (Yukawa, $\xi$-Ableitbar); Gluonenenergie = ausgerollte Moden (QCD-Dynamik, offene Brücke)
+- **Geltungsbereichstabelle:** Leptonen [K], Neutrinos [S], Quark-Ruhemassen [S], Hadronen gesamt: offene Brücke, $m_p/m_e$: nicht beansprucht
+- **$K_\text{frak}$ als Interface-Faktor:** tritt beim Übergang $m^\text{bare} \to m^\text{SI}$ auf, kürzt sich in Massenverhältnissen heraus (Dok. 012); kein QCD-Beitrag
+- **Drei Szenarien für die QCD-Brücke** [S]: Orbifold-Geometrie ($\Lambda_\text{QCD} = v\cdot\xi^{1/3}$, Dok. 041 als erster Schritt), Spuranomalie auf Torus-QFT (Khanna et al. 2014), Hadronsektor mit SM-Inputs (Dok. 005, aktueller Stand)
+- **$\alpha_s$ und laufende Kopplung:** Dok. 160 leitet $\alpha_s(m_\tau) = 3\xi^{1/4} \approx 0{,}322$ geometrisch ab [K]; Dok. 005 verwendet $\alpha_s(M_Z) = 0{,}118$ als SM-Input — konsistente verschiedene Skalen; RGE-Brücke innerhalb FFGFT offen [S]
+- **Frühe Dokumente (Dok. 001–041):** Strukturskizzen in natürlichen Einheiten, keine SI-Präzisionsableitungen (R77)
+- **Zeichenerklärung** ($M_Z$, $\Lambda_\text{QCD}$, $\alpha_s(\mu)$, $D$, $y_e$, RGE, $K_\text{frak}$, $m^\text{bare}$, $m^\text{SI}$)
 
-All items raised are decided: Z-1 in the negative, Z-4 closed by the bicoherence
-test, Z-2 clarified (the lattice factor is the Dirichlet signature of Jacobi's
-four-square theorem, its ladder of zeros has no bearing on the framework), and
-Z-3 void (the D4/Z⁴ difference is a parity condition — D4 occupies only even
-norms).
+---
 
-Documents: [DE](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/316_Riemann_Zeta_De.pdf) · [EN](https://github.com/jpascher/T0-Time-Mass-Duality/blob/main/2/pdf/316_Riemann_Zeta_En.pdf)
+## R75 — Neufassung der Shor-/Quantencomputing-Dokumente
+
+Deklariert 17.–20. August 2026. Betrifft Dok. 024, 034, 075, 076, 147, 173, 176, 190, 006.
+
+Kernkorrekturen: $\xi$/$\sigma$-Parametertrennung, Aufbereitung ≠ Transformation (95%/5% Gatterkosten), Weyl-Obstruktion als universelle Grenze (nicht FFGFT-spezifisch), Fouriertransformation als Projektion, Gottesman-Knill offen.
+
+**Dok. 075 DE+EN** (je 10 S.): vereinigt — Teil I RSA-Grundlagen, Teil II Periodenfindung als Resonanzproblem.
+
+Prüfskripte: `2/python/Shor_Skripte/s1_periodensuche.py`, `s2_grenzen.py`, `s3_thermik_zustandsraum.py`  
+Abhängigkeiten: `2/python/requirements_147.txt` (numpy, scipy, matplotlib, pandas, ephem)
+
+---
+
+## Register-Einträge R76–R78 in Dok. 190
+
+**R76** — Geltungsbereich der Masseableitungen: Leptonen [K], Hadronsektor offene Brücke, $m_p/m_e$ nicht beansprucht.
+
+**R77** — Einordnung früher Kopplungskonstanten-Formeln (Dok. 041): Strukturskizzen in natürlichen Einheiten, keine SI-Präzisionsableitungen. $\xi^{-1/3} = 9{,}65$ (natürliche Einheiten) ≠ $\alpha_s(M_Z) = 0{,}118$ (SI). Status: [S].
+
+**R78** — $\alpha_s$ und laufende Kopplung: $\alpha_s(m_\tau) \approx 0{,}33$ und $\alpha_s(M_Z) \approx 0{,}118$ sind verschiedene Werte derselben laufenden Kopplung. Dok. 160: $3\xi^{1/4}$ bei $m_\tau$ [K]. RGE-Brücke zu $M_Z$ offen [S].
+
+---
+
+## HTML-Simulator
+
+`t0_Shore_simulator.html`: alle T0-Bezeichnungen durch FFGFT ersetzt; $\xi \to \sigma$ in Formeln und Anzeigetexten; Weyl-Obstruktion als universelle Grenze; $M_Z$-Erklärung.

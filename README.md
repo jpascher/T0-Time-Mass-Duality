@@ -1,6 +1,7 @@
 # T0 Time-Mass Duality · FFGFT
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21821995.svg)](https://doi.org/10.5281/zenodo.21821995)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21821995.svg)](https://doi.org/10.5281/zenodo.21821995)  
+**Version: v1.3.0** (20 August 2026) — DOI pending, supersedes v1.3.0
 
 **FFGFT — Fundamental Fractal-Geometric Field Theory** shows:
 all Standard Model constants follow from a single dimensionless
@@ -226,7 +227,7 @@ measurable (Doc. 230).
 |----------|------|
 | 🔬 Interactive Portal | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo v1.2.8 | [DOI 10.5281/zenodo.21821995](https://doi.org/10.5281/zenodo.21821995) (supersedes v1.2.7 · [21628364](https://doi.org/10.5281/zenodo.21628364)) |
+| 📦 Zenodo v1.3.0 | [DOI 10.5281/zenodo.21821995](https://doi.org/10.5281/zenodo.21821995) (supersedes v1.2.7 · [21628364](https://doi.org/10.5281/zenodo.21628364)) |
 | 🎵 Spotify | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
@@ -340,42 +341,6 @@ Answers the "ξ is fitted to the masses, hence circular" objection by correcting
 Verification: `2/Dok310_Skripte/ffgft_310_*.py` (4 scripts, no free parameters).
 Documents: [DE](2/pdf/310_Resonanzgeometrie_Referenz_De.pdf) · [EN](2/pdf/310_Resonanzgeometrie_Referenz_En.pdf)
 
-## Docs. 311 and 312 — Four onto Three, and the Closure Scale (August 2026, DE+EN)
-
-Working notes (not A-series), each with a verification script.
-
-### Doc. 311 — Four onto Three
-
-A lattice in ℝ⁴ has four equivalent directions; measurement happens in three.
-The note works through the three possible routes (compactifying, projecting,
-indexing), compares their costs and condenses them into **two conditions**: is
-the assignment forced by a structure or set by the observer? And is the lost
-positional information caught by a conserved index? Both conditions are applied
-to three cases — the framework's own construction, generic projection
-constructions, and string theory.
-
-Verification: `2/python/ffgft_311_vier_auf_drei.py`.
-Documents: [DE](2/pdf/311_Vier_auf_Drei_De.pdf) · [EN](2/pdf/311_Vier_auf_Drei_En.pdf)
-
-### Doc. 312 — The Closure Scale
-
-The cosmological constant Λ sets the large-scale curvature scale in the field
-equations. FFGFT needs that function too — but as a **derived quantity**:
-Λ* := 1/R_H² with R_H = (2/π)·λ̄ₑ/ξ¹⁰.
-
-- The dimensionless form Λ*·λ̄ₑ² = (π/2)²·ξ²⁰ is a pure number; the SI reference
-  sits entirely in the reference pitch λ̄ₑ (Doc. 310).
-- The 10¹²³ fine-tuning problem decomposes **structurally**: ~122 decades =
-  77.5 (from ξ²⁰) + 44.8 (from (l_P/λ̄ₑ)²) − 0.4 (order 1). A fine-tuning
-  question becomes the structural question "why rung 10 of the ξ ladder?".
-- The inheritance from Doc. 309 stands unchanged: as long as the exponent 10 is
-  not derived forwards (P20), Λ* is **[K] conditional** — correct by
-  construction, not by derivation.
-
-Documents: [DE](2/pdf/312_Abschlussskala_De.pdf) · [EN](2/pdf/312_Abschlussskala_En.pdf)
-
----
-
 ## Docs. 313 and 314 — Time Cycle and Lattice in Hilbert Space (August 2026, DE+EN)
 
 ### Doc. 314 — Lattice in Hilbert Space
@@ -449,80 +414,11 @@ Documents: [DE](2/pdf/313_Kein_Anfang_De.pdf) · [EN](2/pdf/313_Kein_Anfang_En.p
 
 ---
 
-## Doc. 315 — The Form of K_frak: Additive or Multiplicative? (August 2026, DE+EN)
-
-Working document (not A-series). 10 pages DE/EN, four verification scripts.
-
-The corpus confirms the **value** K_frak = 1 − 100ξ = 74/75 several times
-independently (A040, A130, A270); whether this also discriminates the **form** —
-additive against multiplicative (1 − ξ)¹⁰⁰ — had remained unexamined. The two
-forms differ by exactly the second binomial term 4950ξ² ≈ 8.9×10⁻⁵.
-
-- **Control case Euler's musical spiral (5/7-limit):** exact closure is
-  impossible; the best near-closures are the schisma (1.95 cents) and the ragisma
-  4375/4374 (0.40 cents). Closure only through tempering = rationalising the
-  step — precisely the rationality the ξ cycle (1/75, gcd(74,75) = 1) carries
-  from the outset.
-- **Three witnesses:** the A130 two-route ratio discriminates 7.5:1 additive,
-  conditional on the undeclared identity p = −(2−√3) (P-315-1, real residual
-  ≈ 7 eV → P-315-2); the A270 high-power location K⁻³⁶ ≈ 16/π² discriminates
-  **31:1 additive**, with the reference upgraded via Doc. 314 to
-  **16/π² = 1/Δ(D4)** (P35 narrowed); the A040 power form tends additive but
-  cannot resolve.
-- **Structural argument:** the additive form is the exact winding bookkeeping of
-  the rolled-up domain, the multiplicative one the stepwise composition of the
-  unrolled domain. Tied to the closure fork (Docs. 295/313/314): case B (frozen ξ)
-  *is* the additive bookkeeping, case C (running ξ, equiangular spiral) *is* the
-  multiplicative–logarithmic one.
-- **Status:** value [K]; form additive [B], twice conditionally confirmed.
-  Unconditional decision line: the A270 baryon location (K³⁸ level, form distance
-  0.34 %).
-
-Verification: `2/python/315_Skripte/` (4 scripts).
-Documents: [DE](2/pdf/315_Kfrak_Form_De.pdf) · [EN](2/pdf/315_Kfrak_Form_En.pdf)
-
----
-
-## Doc. 316 — FFGFT and the Riemann Zeta Function (August 2026, DE+EN)
-
-Working document (not A-series). 23 pages DE/EN, twelve verification scripts.
-
-**The Riemann hypothesis is an arithmetic matter; the torus and ξ contribute
-nothing to its solution.** The result is predominantly negative — six approaches
-are excluded with reasons given. Four positive findings stand alongside: two
-identities of the framework and two measurements on the prime structure.
-
-- **Two identities [K]:** the Riemann zeta is a *factor* of the torus spectral
-  zeta, Z_{Z⁴}(s) = 8(1−4^{1−s})·ζ(s)·ζ(s−1); and the Casimir point s = −1/2 lies
-  with its mirror s = 3/2 symmetric to the critical line.
-- **The decisive obstruction [X]:** Weyl gives N(λ) ~ λ^(d/2) for *every* compact
-  manifold, Riemann-von Mangoldt gives N(T) ~ T·ln T. No d fits — the entire
-  branch "deform T⁴/Z₃ suitably" is settled at theorem level.
-- **Cross terms measured [K]:** a bicoherence test on 2469 self-computed zeros
-  (Riemann-Siegel) confirms in six of six controls: coupling exactly at prime
-  powers (b² = 0.76–0.85), none at composite numbers (b² = 0.018–0.025), a
-  contrast of factor 30 to 50. ln(1/ξ) = 2ln2+ln3+4ln5 leads to the composite
-  number 7500 and can therefore carry none.
-- **Physical evidence [K]:** the harmonic series of an alphorn shows the same
-  structure — exactly the prime orders introduce new tonal qualities, while
-  4 = 2·2 and 6 = 2·3 are combinations. The amplitude decay ~1/n corresponds to
-  Tenney height.
-- **Limit inclusion:** the 5-limit does not contain the higher ones — unless
-  approximation, resolution or tempering is allowed to count. The approximation
-  error to ln7 is exactly the ragisma; at the measurement's peak width the
-  approximation is indistinguishable from ln7, but amplitude-weighted it is too
-  light by a factor 3.9·10⁵.
-
-Verification: `2/python/316_Skripte/` (12 scripts, standard library only). All items raised (Z-1 to Z-4) are decided.
-Documents: [DE](2/pdf/316_Riemann_Zeta_De.pdf) · [EN](2/pdf/316_Riemann_Zeta_En.pdf)
-
----
-
 ## Correction Register & Changelog
 
 The **correction register** [Doc. 190](2/pdf/190_T0_Korrekturen_De.pdf)
 documents every correction and refinement with date, status, and
-affected documents — K1–K7 (corrections) and R1–R74 (refinements/programme, as of 6 August 2026).
+affected documents — K1–K7 (corrections) and R1–R74 (refinements/programme, as of 5 August 2026).
 Nothing is silently overwritten.
 
 The **changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)
@@ -559,6 +455,43 @@ The full version history with DOIs is given in the release notes:
 **[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**
 
 ---
+
+
+## New Documents — v1.3.0 (August 2026)
+
+### Doc. 317 — Topological Origin of Lepton Generations (DE+EN, 7 pp. each)
+
+Comparison and synthesis: KSAU theory ↔ FFGFT. Complete quantum number tables
+$(n_\theta, n_\phi, r_i, p_i)$ for all six leptons. Knot structure $3_1$/$6_3$/$7_1$,
+Möbius energy status, torus-knot bridge theorem. Status markers: FFGFT side [K]/[B],
+KSAU [S]/[SETZUNG].  
+→ [DE](2/pdf/317_KSAU_FFGFT_Leptonen_De.pdf) · [EN](2/pdf/317_KSAU_FFGFT_Leptonen_En.pdf)
+
+### Doc. 318 — Scope of Mass Derivations (DE+EN, 8 pp. each)
+
+Explicit boundary: lepton rest masses [K], hadron masses open bridge,
+$m_p/m_e$ not claimed. Rolled-up/unrolled (Doc. 311) as structural reason.
+$K_\text{frak}$ as interface factor. $\alpha_s(m_\tau) = 3\xi^{1/4}$ [K]
+(Doc. 160) vs. $\alpha_s(M_Z) = 0.118$ as SM input. List of symbols.  
+→ [DE](2/pdf/318_Masseableitung_Geltungsbereich_De.pdf) · [EN](2/pdf/318_Masseableitung_Geltungsbereich_En.pdf)
+
+## Corrections Register — v1.3.0
+
+**R75** (17–20 Aug.): Shor/quantum computing documents rewritten.
+$\xi$/$\sigma$ separation, preparation ≠ transformation (95%/5%),
+Weyl obstruction universal, Fourier transform as projection.
+Docs. 024, 034, 075, 076, 147, 173, 176, 190, 006.
+
+**R76** (20 Aug.): Scope of mass derivations. → Doc. 318
+
+**R77** (20 Aug.): Doc. 041 — structural sketches in natural units,
+not SI precision derivations. $\xi^{-1/3} = 9.65$ (nat.) ≠
+$\alpha_s(M_Z) = 0.118$ (SI). Status: [S].
+
+**R78** (20 Aug.): $\alpha_s$ is a running coupling.
+$\alpha_s(m_\tau) \approx 0.33$ and $\alpha_s(M_Z) \approx 0.118$ —
+different values of the same constant. RGE bridge open [S].
+
 
 ## License
 
