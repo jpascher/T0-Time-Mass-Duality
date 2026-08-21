@@ -493,6 +493,18 @@ $\alpha_s(m_\tau) \approx 0.33$ and $\alpha_s(M_Z) \approx 0.118$ —
 different values of the same constant. RGE bridge open [S].
 
 
+
+### Doc. 319 — The Proton as a Vibrating Torus (DE+EN, 6 pp. each)
+
+Geometric description of the proton as a vibrating torus
+$T^4/\mathbb{Z}_3$. Confinement is relational (Doc. 248): the photon
+appears free because we are in the same system; the gluon appears
+confined because we face the proton-torus subsector from outside. For
+$m=0$ locally always $E=pc$ — pure energy (Doc. 312). Gluon:
+non-localisable $\mathbb{Z}_3/SU(3)$ field mode, standing wave, not a particle.  
+→ [DE](2/pdf/319_Proton_Torus_De.pdf) · [EN](2/pdf/319_Proton_Torus_En.pdf)
+
+
 ## License
 
 © 2025–2026 Johann Pascher · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)

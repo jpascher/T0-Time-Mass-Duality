@@ -506,6 +506,18 @@ $\alpha_s(m_\tau) \approx 0{,}33$ und $\alpha_s(M_Z) \approx 0{,}118$ —
 verschiedene Werte derselben Konstante. RGE-Brücke offen [S].
 
 
+
+### Dok. 319 — Das Proton als schwingender Torus (DE+EN, je 6 S.)
+
+Geometrische Beschreibung des Protons als schwingender Torus
+$T^4/\mathbb{Z}_3$. Einschluss ist relational (Dok. 248): Photon erscheint
+frei weil wir im selben System sitzen; Gluon erscheint gebunden weil wir
+dem Proton-Torus von außen gegenüberstehen. Für $m=0$ gilt lokal immer
+$E=pc$ — reine Energie (Dok. 312). Gluon: nicht-lokalisierbare
+$\mathbb{Z}_3/SU(3)$-Feldmode, stehende Welle, nicht Teilchen.  
+→ [DE](2/pdf/319_Proton_Torus_De.pdf) · [EN](2/pdf/319_Proton_Torus_En.pdf)
+
+
 ## Lizenz
 
 © 2025–2026 Johann Pascher · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)

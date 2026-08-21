@@ -66,3 +66,23 @@ Abhängigkeiten: `2/python/requirements_147.txt` (numpy, scipy, matplotlib, pand
 ## HTML-Simulator
 
 `t0_Shore_simulator.html`: alle T0-Bezeichnungen durch FFGFT ersetzt; $\xi \to \sigma$ in Formeln und Anzeigetexten; Weyl-Obstruktion als universelle Grenze; $M_Z$-Erklärung.
+
+---
+
+## Dok. 319 — Das Proton als schwingender Torus (21. August 2026, DE+EN, je 6 S.)
+
+Geometrische Beschreibung des Protons in der FFGFT. Vor Fertigstellung
+systematische Diskussion aller Statusmarkierungen aus dem Korpus.
+
+**Aus Korpus-Recherche neu als [K] belegt:**
+- Fermion-Statistik aus D4-Trialität (halbzahlige Elemente, Dok. 314)
+- Diskretes Spektrum auf $\mathbb{Z}_3$-Faser, nicht auf ausgerollter Achse (Dok. 285)
+- Einschluss ist relational: wir beschreiben immer von innen (Dok. 248)
+- Für $m=0$: $d\tau=0$ exakt, kein Ruhesystem; lokal immer $E=pc$ (Dok. 312)
+- Photon und Gluon: beide masselose Feldmoden, keine Teilchen (Dok. 049)
+
+**Gluon [S]:** $\mathbb{Z}_3/SU(3)$-Feldmode, stehende Welle im Proton-Torus,
+nicht lokalisierbar, 8 Gluonmoden = 8 $SU(3)_c$-Generatoren (Dok. 145).
+
+**Offene Fragen [S]:** $SU(3)_c$-Emergenz, Photon/Gluon-Sektortrennung,
+$\Lambda_\text{QCD}$, RGE-Brücke, formale Randbedingungen auf $T^4/\mathbb{Z}_3$.
