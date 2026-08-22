@@ -518,6 +518,55 @@ $\mathbb{Z}_3/SU(3)$-Feldmode, stehende Welle, nicht Teilchen.
 → [DE](2/pdf/319_Proton_Torus_De.pdf) · [EN](2/pdf/319_Proton_Torus_En.pdf)
 
 
+
+
+### Dok. 320 — Ausführliche Feldgeometrische Spektraltheorie (DE+EN, 12/8 S.)
+
+Schritt-für-Schritt-Herleitung aller Leptonmassen und Neutrinospektren aus ξ.
+Elektronmasse 0,511 MeV (<0,1 %), Myon 104,96 MeV (−0,66 %), Tau 1783,5 MeV (+0,38 %).
+Neutrinomassen aus Orbifold-Fixpunkten; Δm²₂₁ = 8,16×10⁻⁵ eV² (+8,3 %) [K],
+Δm²₃₂ = 1,90×10⁻³ eV² (−22 %) [S offen].  
+→ [DE](2/pdf/320_Spektraltheorie_De.pdf) · [EN](2/pdf/320_Spektraltheorie_En.pdf)
+
+### Dok. 321 — Algebraische Herleitung der SU(3)_c-Eichstruktur (DE+EN, 11/8 S.)
+
+Schließt die in Dok. 319/320/322 als [S] offene Brücke. Acht Gell-Mann-Operatoren aus
+drei ℤ₃-Eigensektoren von L²(T⁴): 𝔰𝔲(3)-Kommutatorrelationen bewiesen [B].
+N_c = 3 algebraisch notwendig. Confinement = Trialitäts-Selektion T_R = 0.
+U(1)_Y aus vierter Torus-Richtung [B]. SU(2)_L aus ℤ₂-Paarung [B].
+sin²θ_W|_GUT = 3/8 aus Spurformel [B].  
+→ [DE](2/pdf/321_SU3_Z3_Emergenz_De.pdf) · [EN](2/pdf/321_SU3_Z3_Emergenz_En.pdf)
+
+### Dok. 322 — Spektraltheorie und Hilbertraum-Abbildung (DE+EN, 12/8 S.)
+
+Mathematisches Fundament der FFGFT-Spektraltheorie. ξ = λ_min(F̂_D4) als Spektralwert [K].
+Zustandsraum H_FFGFT = H_geom ⊗ H_spin ⊗ H_flavor. Fraktales Maß mit 100-facher
+Rekursion; D_f = 3 − ξ [K]. Fixpunkt-Randbedingungen begründen Neutrino-Lokalisierung [K].
+Offen: vollständiger Selbstadjungiertheits-Beweis für F̂ [S].  
+→ [DE](2/pdf/322_Spektraltheorie_Hilbert_De.pdf) · [EN](2/pdf/322_Spektraltheorie_Hilbert_En.pdf)
+
+### Dok. 323 — Herleitung des Weinberg-Winkels bei M_Z (DE+EN, 8/5 S.)
+
+Schließt die in R78 als [S] deklarierte RGE-Brücke. Vollständige 1-loop-Herleitung:
+sin²θ_W(M_Z) = 3/8 − (55 α_em)/(24π) [ln(m_Pl/M_Z) + (19/12) ln ξ] = 0,2308
+(PDG: 0,2312, −0,19 %) [K]. GUT-Skala M_GUT = m_Pl · ξ^(19/12) = 8,94×10¹² GeV.
+Exponent p = 19/12 = p_e + 1/(4N_c) geometrisch begründet.  
+→ [DE](2/pdf/323_Weinberg_Winkel_RGE_De.pdf) · [EN](2/pdf/323_Weinberg_Winkel_RGE_En.pdf)
+
+## Korrekturen und Register — v1.3.0 (Fortsetzung, 22. Aug.)
+
+**R79** (22. Aug.): SU(3)_c-Emergenz aus ℤ₃-Trialität [B]. → Dok. 321
+
+**R80** (22. Aug.): SU(2)_L, U(1)_Y, sin²θ_W|_GUT = 3/8 [B]. → Dok. 321
+
+**R81** (22. Aug.): Weinberg-Winkel sin²θ_W(M_Z) = 0,2308 [K], −0,19 %. Schließt R78. → Dok. 323
+
+**R82** (22. Aug.): Hilbertraum-Einbettung, Fixpunkt-Randbedingungen [K]. → Dok. 322
+
+**R83** (22. Aug.): Statusbilanz — 8 Brücken geschlossen; verbleibend offen: Δm²₃₂ (−22 %),
+Selbstadjungiertheit F̂, 2-loop α_s, m_Pl und α_em aus ξ, Quark-Sektor.
+
+
 ## Lizenz
 
 © 2025–2026 Johann Pascher · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)

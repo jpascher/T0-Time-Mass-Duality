@@ -505,6 +505,55 @@ non-localisable $\mathbb{Z}_3/SU(3)$ field mode, standing wave, not a particle.
 → [DE](2/pdf/319_Proton_Torus_De.pdf) · [EN](2/pdf/319_Proton_Torus_En.pdf)
 
 
+
+
+### Doc. 320 — Detailed Field-Geometric Spectral Theory (DE+EN, 12/8 pp.)
+
+Step-by-step derivation of all lepton masses and neutrino spectra from ξ.
+Electron mass 0.511 MeV (<0.1 %), muon 104.96 MeV (−0.66 %), tau 1783.5 MeV (+0.38 %).
+Neutrino masses from orbifold fixed points; Δm²₂₁ = 8.16×10⁻⁵ eV² (+8.3 %) [K],
+Δm²₃₂ = 1.90×10⁻³ eV² (−22 %) [S open].  
+→ [DE](2/pdf/320_Spektraltheorie_De.pdf) · [EN](2/pdf/320_Spektraltheorie_En.pdf)
+
+### Doc. 321 — Algebraic Derivation of the SU(3)_c Gauge Structure (DE+EN, 11/8 pp.)
+
+Closes the open bridge [S] of Docs. 319/320/322. Eight Gell-Mann operators from
+three ℤ₃ eigensectors of L²(T⁴): su(3) commutation relations proved [B].
+N_c = 3 algebraically necessary. Confinement = triality selection T_R = 0.
+U(1)_Y from 4th torus direction [B]. SU(2)_L from ℤ₂ pairing [B].
+sin²θ_W|_GUT = 3/8 from trace formula [B].  
+→ [DE](2/pdf/321_SU3_Z3_Emergenz_De.pdf) · [EN](2/pdf/321_SU3_Z3_Emergenz_En.pdf)
+
+### Doc. 322 — Spectral Theory and Hilbert-Space Embedding (DE+EN, 12/8 pp.)
+
+Mathematical foundation of FFGFT spectral theory. ξ = λ_min(F̂_D4) as spectral value [K].
+State space H_FFGFT = H_geom ⊗ H_spin ⊗ H_flavor. Fractal measure with 100-fold
+recursion; D_f = 3 − ξ [K]. Fixed-point boundary conditions ground neutrino
+localisation [K]. Open: full self-adjointness proof for F̂ [S].  
+→ [DE](2/pdf/322_Spektraltheorie_Hilbert_De.pdf) · [EN](2/pdf/322_Spektraltheorie_Hilbert_En.pdf)
+
+### Doc. 323 — Derivation of the Weinberg Angle at M_Z (DE+EN, 8/5 pp.)
+
+Closes the RGE bridge declared [S] in R78. Complete 1-loop derivation:
+sin²θ_W(M_Z) = 3/8 − (55 α_em)/(24π) [ln(m_Pl/M_Z) + (19/12) ln ξ] = 0.2308
+(PDG: 0.2312, −0.19 %) [K]. GUT scale M_GUT = m_Pl · ξ^(19/12) = 8.94×10¹² GeV.
+Exponent p = 19/12 = p_e + 1/(4N_c) geometrically grounded.  
+→ [DE](2/pdf/323_Weinberg_Winkel_RGE_De.pdf) · [EN](2/pdf/323_Weinberg_Winkel_RGE_En.pdf)
+
+## Corrections Register — v1.3.0 (continued, 22 Aug.)
+
+**R79** (22 Aug.): SU(3)_c emergence from ℤ₃ triality [B]. → Doc. 321
+
+**R80** (22 Aug.): SU(2)_L, U(1)_Y, sin²θ_W|_GUT = 3/8 [B]. → Doc. 321
+
+**R81** (22 Aug.): Weinberg angle sin²θ_W(M_Z) = 0.2308 [K], −0.19 %. Closes R78. → Doc. 323
+
+**R82** (22 Aug.): Hilbert-space embedding, fixed-point boundary conditions [K]. → Doc. 322
+
+**R83** (22 Aug.): Status update — 8 bridges closed; remaining open: Δm²₃₂ (−22 %), 
+self-adjointness of F̂, 2-loop α_s, m_Pl and α_em from ξ, quark sector.
+
+
 ## License
 
 © 2025–2026 Johann Pascher · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)

@@ -2863,3 +2863,128 @@ RGE-Brücke $\alpha_s(m_\tau)\to\alpha_s(M_Z)$, formale Randbedingungen auf $T^4
 
 Korpusverweise: Dok. 003, 049, 080, 145, 156, 248, 270, 285, 291, 311, 312, 314, 318.
 
+
+---
+
+## Nachtrag v1.3.0 — Eichgruppen-Herleitung und Weinberg-Winkel (22. August 2026)
+
+**Neue Dokumente (DE+EN je):** Dok. 320, 321, 322, 323  
+**Aktualisiert:** Dok. 319 (Statusmarker), Dok. 190 (R79–R83)
+
+---
+
+### Dok. 320 — Ausführliche Feldgeometrische Spektraltheorie (22. August 2026, DE+EN, je 12/8 S.)
+
+Vollständige Schritt-für-Schritt-Herleitung aller Leptonmassen und Neutrinospektren aus ξ = 4/30000 und der T⁴/ℤ₃-Topologie. Numerisch verifiziert durch `320_verify.py`.
+
+**Geladene Leptonen [K]:**
+- $m_e = 0{,}511$ MeV ($< 0{,}1\,\%$): $(n_\theta, n_\phi) = (3,2)$, $p_e = 3/2$
+- $m_\mu = 104{,}96$ MeV ($-0{,}66\,\%$): $(5,4)$, $p_\mu = 1$
+- $m_\tau = 1783{,}5$ MeV ($+0{,}38\,\%$): $(9,5)$, $p_\tau = 2/3$
+- Parameterfreie Verhältnisse $m_\mu/m_e$, $m_\tau/m_\mu$, $m_\tau/m_e$ hergeleitet
+
+**Neutrinos [K/S]:**
+- $m_{\nu_1} = 0{,}976$ meV (Fixpunkt $F_2$, $p = 9/4$)
+- $m_{\nu_2} = 9{,}084$ meV (Fixpunkt $F_5$, $p = 2$)
+- $m_{\nu_3} = 44{,}51$ meV (Fixpunkt $F_7$, $p = 9/5$)
+- $\Delta m_{21}^2 = 8{,}16\times10^{-5}$ eV² ($+8{,}3\,\%$) [K]
+- $\Delta m_{32}^2 = 1{,}90\times10^{-3}$ eV² ($-22\,\%$) [S offen]
+- $\sum m_\nu = 54{,}57$ meV $< 0{,}12$ eV ✓
+
+Prüfskript: `python/Dok320_321_322_Skripte/320_verify.py`  
+→ [DE](2/pdf/320_Spektraltheorie_De.pdf) · [EN](2/pdf/320_Spektraltheorie_En.pdf)
+
+---
+
+### Dok. 321 — Algebraische Herleitung der SU(3)_c-Eichstruktur (22. August 2026, DE+EN, je 11/8 S.)
+
+Schließt die in Dok. 319, 320, 322 als [S] offene Brücke der SU(3)_c-Emergenz.
+
+**Hauptresultate [B]:**
+- Drei ℤ₃-Projektoren $P_k$ auf $L^2(T^4)$: algebraisch konstruiert und bewiesen (Idempotenz, Orthogonalität, Vollständigkeit)
+- Acht Gell-Mann-Operatoren aus den drei Eigensektoren $\mathcal{H}_0, \mathcal{H}_1, \mathcal{H}_2$: $\mathfrak{su}(3)$-Kommutatorrelationen mit kanonischen Strukturkonstanten bewiesen
+- $N_c = 3$ algebraisch notwendig (Ordnung der ℤ₃-Gruppe), nicht gesetzt
+- Confinement = Trialitäts-Selektion $T_R = 0$ (algebraische Form von Dok. 049)
+- $\alpha_s(m_\tau) = 3\xi^{1/4}$ (Dok. 160) vollständig parameterfrei
+- $U(1)_Y$ aus vierter Torus-Richtung $T^1$ [B]
+- $SU(2)_L$ aus ℤ₂-Paarung $\mathcal{H}_1\leftrightarrow\mathcal{H}_2$ [B]
+- $\sin^2\theta_W|_{\rm GUT} = 3/8$ aus Spurformel der fünf Orbifold-Zustände [B]
+
+Prüfskript: `python/Dok320_321_322_Skripte/321_verify.py` (50+ Assertions)  
+→ [DE](2/pdf/321_SU3_Z3_Emergenz_De.pdf) · [EN](2/pdf/321_SU3_Z3_Emergenz_En.pdf)
+
+---
+
+### Dok. 322 — Spektraltheorie und Hilbertraum-Abbildung der FFGFT-Tori (22. August 2026, DE+EN, je 12/8 S.)
+
+Mathematisches Fundament der FFGFT-Spektraltheorie.
+
+**Kernresultate [K]:**
+- $\xi = \lambda_{\min}(\hat{F}_{D_4})$: Geometrieparameter als kleinster Eigenwert des $D_4$-Sub-Operators
+- Zustandsraum $\mathcal{H}_{\rm FFGFT} = \mathcal{H}_{\rm geom}\otimes\mathcal{H}_{\rm spin}\otimes\mathcal{H}_{\rm flavor}$
+- Fraktales Maß mit 100-facher Rekursion; fraktale Dimension $D_f = 3 - \xi$
+- Fixpunkt-Randbedingungen $\psi_\chi(x_0+y) = \chi\cdot\psi_\chi(x_0+g_*(y))$ [K]
+- Verallgemeinerte Fourier-Transformation (GFT), MASA-Basis [K]
+- Gell-Mann-Matrizen aus Orbifold-Moden: [B] (Dok. 321)
+
+Offen [S]: vollständiger Selbstadjungiertheits-Beweis für $\hat{F}$.  
+→ [DE](2/pdf/322_Spektraltheorie_Hilbert_De.pdf) · [EN](2/pdf/322_Spektraltheorie_Hilbert_En.pdf)
+
+---
+
+### Dok. 323 — Herleitung des Weinberg-Winkels bei M_Z (22. August 2026, DE+EN, je 8/5 S.)
+
+Schließt die in R78 und Dok. 321 als [S] deklarierte RGE-Brücke.
+
+**Hauptresultat [K]:**
+
+$$\sin^2\theta_W(M_Z) = \frac{3}{8} - \frac{55\,\alpha_{\rm em}(M_Z)}{24\pi}\left[\ln\frac{m_{\rm Pl}}{M_Z} + \frac{19}{12}\ln\xi\right] = 0{,}2308$$
+
+PDG: $0{,}2312$. Abweichung: $-0{,}19\,\%$.
+
+- $M_{\rm GUT} = m_{\rm Pl}\cdot\xi^{19/12} = 8{,}94\times10^{12}$ GeV [K]
+- $p = 19/12 = p_e + 1/(4N_c) = 3/2 + 1/12$ geometrisch begründet
+- $\alpha_s(M_Z) = 0{,}1265$ aus 1-loop-RGE [K] (+7,1 %, bekannter 1-loop-Fehler)
+- Verbleibende externe Eingaben: $m_{\rm Pl}$ und $\alpha_{\rm em}(M_Z)$ [S offen]
+
+Prüfskript: `python/Dok320_321_322_Skripte/323_verify.py`  
+→ [DE](2/pdf/323_Weinberg_Winkel_RGE_De.pdf) · [EN](2/pdf/323_Weinberg_Winkel_RGE_En.pdf)
+
+---
+
+### R79–R83 in Dok. 190 (22. August 2026)
+
+**R79** — SU(3)_c-Emergenz aus ℤ₃-Trialität [B] (Dok. 321). Schließt [S] aus Dok. 319/320/322.
+
+**R80** — $SU(2)_L$, $U(1)_Y$, $\sin^2\theta_W|_{\rm GUT} = 3/8$ [B] (Dok. 321).
+
+**R81** — Weinberg-Winkel $\sin^2\theta_W(M_Z) = 0{,}2308$ [K] (Dok. 323). Schließt R78.
+
+**R82** — Hilbertraum-Einbettung, Fixpunkt-Randbedingungen [K] (Dok. 322).
+
+**R83** — Statusbilanz: 8 geschlossene Brücken, verbleibende offene Punkte.
+
+### Aktualisierte Dokumente
+
+- **Dok. 319** (Proton als Torus): [S]-Markierungen für SU(3)_c und Fixpunkte auf [B]/[K] aktualisiert.
+
+### Statusbilanz (geschlossene Brücken)
+
+| Brücke | vorher | nachher | Dok. |
+|--------|--------|---------|------|
+| $SU(3)_c$-Emergenz | [S] | [B] | 321 |
+| $N_c=3$ | [S] | [B] | 321 |
+| $SU(2)_L$, $U(1)_Y$ | [S] | [B] | 321 |
+| $\sin^2\theta_W\big|_{\rm GUT}=3/8$ | [S] | [B] | 321 |
+| $\sin^2\theta_W(M_Z)$ | [S] | [K] $-0{,}19\,\%$ | 323 |
+| RGE-Brücke (R78) | [S] | [K] | 323 |
+| Fixpunkt-Randbedingungen | [S] | [K] | 322 |
+| Gell-Mann aus Orbifold | [S] | [B] | 321 |
+
+### Verbleibende offene Brücken
+
+- $\Delta m_{32}^2$ ($-22\,\%$) [S]
+- Selbstadjungiertheit $\hat{F}$ [S]
+- 2-loop $\alpha_s$ [S]
+- $m_{\rm Pl}$, $\alpha_{\rm em}$ aus $\xi$ [S]
+- Quark-Sektor / Hadronen (Dok. 318)
