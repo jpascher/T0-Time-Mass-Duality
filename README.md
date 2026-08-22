@@ -450,8 +450,7 @@ Additional standalone editions: *FFGFT Narrative — The Cosmic Brain*,
 
 ## Version History
 
-The full version history with DOIs is given in the release notes:
-**[RELEASE_NOTES_v1_2_8.md](RELEASE_NOTES_v1_2_8.md)** · change log:
+The full version history with DOIs is given in the change log:
 **[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**
 
 ---
@@ -475,7 +474,7 @@ $K_\text{frak}$ as interface factor. $\alpha_s(m_\tau) = 3\xi^{1/4}$ [K]
 (Doc. 160) vs. $\alpha_s(M_Z) = 0.118$ as SM input. List of symbols.  
 → [DE](2/pdf/318_Masseableitung_Geltungsbereich_De.pdf) · [EN](2/pdf/318_Masseableitung_Geltungsbereich_En.pdf)
 
-## Corrections Register — v1.3.0
+## Corrections Register — v1.3.1
 
 **R75** (17–20 Aug.): Shor/quantum computing documents rewritten.
 $\xi$/$\sigma$ separation, preparation ≠ transformation (95%/5%),

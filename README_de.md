@@ -488,7 +488,7 @@ Grund. $K_\text{frak}$ als Interface-Faktor. $\alpha_s(m_\tau) = 3\xi^{1/4}$ [K]
 (Dok. 160) vs. $\alpha_s(M_Z) = 0{,}118$ als SM-Input. Zeichenerklärung.  
 → [DE](2/pdf/318_Masseableitung_Geltungsbereich_De.pdf) · [EN](2/pdf/318_Masseableitung_Geltungsbereich_En.pdf)
 
-## Korrekturen und Register — v1.3.0
+## Korrekturen und Register — v1.3.1
 
 **R75** (17.–20. Aug.): Shor-/Quantencomputing-Dokumente neu geschrieben.
 $\xi$/$\sigma$-Parametertrennung, Aufbereitung ≠ Transformation (95%/5%),
