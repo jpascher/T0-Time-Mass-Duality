@@ -1,7 +1,7 @@
 # T0 Zeit-Masse-Dualität · FFGFT
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21821995.svg)](https://doi.org/10.5281/zenodo.21821995)  
-**Version: v1.3.0** (20. August 2026) — DOI ausstehend, ersetzt v1.3.0
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17390357.svg)](https://doi.org/10.5281/zenodo.17390357)
+**Version: v1.3.1** (20. August 2026) — DOI ausstehend, ersetzt v1.3.0
 
 **FFGFT — Fraktale Feldgeometrische Fundamentaltheorie** zeigt:
 Alle Konstanten des Standardmodells folgen aus einem einzigen
