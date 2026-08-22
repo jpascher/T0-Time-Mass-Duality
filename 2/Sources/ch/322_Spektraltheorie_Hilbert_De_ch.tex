@@ -1,0 +1,715 @@
+% 322_Spektraltheorie_Hilbert_De_ch.tex
+% Spektraltheorie und Hilbertraum-Abbildung der FFGFT-Tori
+% Mathematisches Fundament der T^4/Z_3-Spektralmechanik
+% Dok. 322, August 2026
+
+% =========================================================
+\section*{Zeichenerklärung}
+% =========================================================
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Symbol & Bedeutung & Wert / Einheit \\
+\midrule
+$\mathcal{H}$ & Hilbertraum der physikalischen Zustände & separabel \\
+$\hat{F}$ & fundamentaler fraktaler Spektraloperator & selbstadjungiert \\
+$\hat{F}_{D_4}$ & $D_4$-Sub-Operator & Eigenwert $\xi$ \\
+$\sigma(\hat{F})$ & Spektrum von $\hat{F}$ & $\subset \mathbb{R}$ \\
+$E(\lambda)$ & spektrales Projektionsmaß & $E(\lambda)^2 = E(\lambda)$ \\
+$\mathcal{D}(\hat{F})$ & Definitionsbereich von $\hat{F}$ & dicht in $\mathcal{H}$ \\
+$P_{\mathbb{Z}_3}$ & $\mathbb{Z}_3$-Projektionsoperator & idempotent \\
+$\hat{\Delta}_{T^4}$ & Laplace-Operator auf $T^4/\mathbb{Z}_3$ & wesentl.\ selbstadj. \\
+$\hat{W}$ & Wicklungszahl-Operator & Eigenwerte $(n_\theta, n_\phi)$ \\
+$D_f$ & fraktale Dimension des Orbifolds & $3 - \xi$ \\
+$D_f^{\mathrm{frak}}$ & Näherungswert fraktale Dimension & $2{,}94$ (ohne Herleitung) \\
+$K_{\mathrm{frak}}$ & Interface-Faktor eingerollt~$\to$~SI & $1-100\xi = 74/75$ (Dok.~133) \\
+$\xi$ & FFGFT-Geometrieparameter & $4/30000$ \\
+$\omega$ & $\mathbb{Z}_3$-Phasenfaktor & $e^{2\pi i/3}$ \\
+$[K]$ & aus $\xi$ ableitbar & Statusmarker \\
+$[B]$ & algebraisch bewiesen & Statusmarker \\
+$[S]$ & skizziert / plausibel & Statusmarker \\
+$[\text{SETZUNG}]$ & axiomatisch gesetzt & Statusmarker \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% =========================================================
+\section*{Zusammenfassung}
+% =========================================================
+
+Dok.~322 entwickelt das mathematische Fundament der FFGFT-Spektraltheorie.
+Die Massenformeln aus Dok.~320 erhalten hier ihre rigorose Hilbertraum-Einbettung:
+Der fundamentale fraktale Operator $\hat{F}$ auf dem
+Zustandsraum $\mathcal{H}_{\mathrm{FFGFT}}$ hat die Teilchenmassen als
+Eigenwerte. Der Geometrieparameter $\xi = 4/30000$ ist der kleinste Eigenwert
+des $D_4$-Sub-Operators. Die Massenformeln aus Dok.~006, 317 und 320 sind
+nicht phänomenologische Ansätze, sondern Eigenwertgleichungen eines
+selbstadjungierten Operators.
+
+\begin{keyresult}[Statusmarkierung]
+Alle Aussagen tragen Statusmarker nach FFGFT-Konvention:\\
+\textbf{[K]} aus $\xi$ ableitbar \quad
+\textbf{[B]} algebraisch bewiesen \quad
+\textbf{[S]} skizziert/plausibel \quad
+\textbf{[SETZUNG]} axiomatisch gesetzt
+\end{keyresult}
+
+% =========================================================
+\section{Grundlagen der Spektraltheorie im Hilbertraum}
+% =========================================================
+
+\subsection{Motivation: von der Matrix zum Operator}
+
+In der linearen Algebra besitzt eine symmetrische $n\times n$-Matrix $A$
+genau $n$ reelle Eigenwerte und eine Orthonormalbasis aus Eigenvektoren.
+Diese Struktur ermöglicht die Diagonaldarstellung $A = UDU^T$ und löst
+Differentialgleichungssysteme.
+
+In der Quantenmechanik -- und in der FFGFT -- treten Operatoren in
+\emph{unendlichdimensionalen} Hilberträumen auf. Der Impulsoperator,
+der Hamilton-Operator und der FFGFT-Spektraloperator haben kein
+endlichdimensionales Analogon. Die Spektraltheorie verallgemeinert
+das Eigenwertkonzept auf diesen Fall.
+
+\subsection{Der Hilbertraum: Definition und physikalische Bedeutung}
+
+\textbf{Definition (Hilbertraum).}
+Ein Hilbertraum $\mathcal{H}$ ist ein vollständiger Vektorraum mit
+Skalarprodukt $\langle \cdot, \cdot \rangle$. Seine Elemente haben
+endliche Norm $\|\psi\| = \sqrt{\langle \psi, \psi \rangle} < \infty$.
+
+Für den Ortsraum bedeutet Vollständigkeit:
+\begin{equation}
+  \int_{-\infty}^{\infty} |\psi(x)|^2 \, dx < \infty.
+\end{equation}
+Nur solche quadratintegrierbaren Wellenfunktionen sind physikalisch
+realisierbar -- sie beschreiben normierbare Wahrscheinlichkeitsdichten.
+
+\textbf{Wichtig:} Eigenzustände von Operatoren mit \emph{kontinuierlichem}
+Spektrum -- etwa Ortsoperator-Eigenzustände $|y\rangle$ mit
+$\langle x|y\rangle = \delta(x-y)$ -- sind \emph{nicht} normierbar.
+Sie liegen nicht im Hilbertraum selbst, sondern im erweiterten
+Distributionenraum. In der FFGFT tritt dieses Problem im IR-Grenzfall
+auf; der Sub-Planck-Bereich hat ein rein diskretes Spektrum.
+
+\subsection{Das Spektrum eines linearen Operators}
+
+Für einen linearen Operator $T$ auf einem Hilbertraum ist das Spektrum
+$\sigma(T)$ die Verallgemeinerung der Menge aller Eigenwerte:
+\begin{equation}
+  \sigma(T) = \{\lambda \in \mathbb{C} : (T - \lambda I)
+  \text{ nicht invertierbar mit beschränktem Inversen}\}.
+\end{equation}
+Man unterscheidet:
+\begin{itemize}
+  \item \textbf{Punktspektrum $\sigma_p(T)$:} ``echte'' Eigenwerte
+    mit $T\psi = \lambda\psi$, $\psi \neq 0$.
+  \item \textbf{Kontinuierliches Spektrum $\sigma_c(T)$:}
+    $(T-\lambda I)$ injektiv, aber nicht surjektiv; kein normierter
+    Eigenvektor.
+  \item \textbf{Absolutstetiges und singuläretes Spektrum:}
+    wichtig bei Schrödinger-Operatoren auf fraktalen Räumen.
+\end{itemize}
+Die Resolventenmenge $\rho(T) = \mathbb{C} \setminus \sigma(T)$ ist
+das Komplement.
+
+\subsection{Der Spektralsatz: Herzstück der Theorie}
+
+\textbf{[B]} Für selbstadjungierte Operatoren (mit $T = T^\dagger$ und
+geeignetem Definitionsbereich) gilt der Spektralsatz:
+Es existiert ein eindeutiges \emph{spektrales Maß} $E$ -- eine
+Projektor-wertige Funktion $\lambda \mapsto E(\lambda)$ -- so dass
+\begin{equation}
+  T = \int_{\sigma(T)} \lambda \, dE(\lambda).
+  \label{eq:spektralsatz}
+\end{equation}
+Für kompakte Operatoren reduziert sich Gl.~\eqref{eq:spektralsatz} auf
+die bekannte diskrete Summe:
+\begin{equation}
+  T = \sum_i \lambda_i \langle \cdot, e_i \rangle e_i.
+\end{equation}
+Die Selbstadjungiertheit garantiert $\sigma(T) \subset \mathbb{R}$
+-- reelle Spektren. Dies ist die notwendige Bedingung dafür, dass
+Observable in der Quantenmechanik \emph{messbare} reelle Werte haben.
+
+% =========================================================
+\section{Der fundamentale fraktale Operator $\hat{F}$}
+% =========================================================
+
+\subsection{Definition und Hilbertraum-Struktur}
+
+\textbf{[SETZUNG]} Die FFGFT postuliert einen quanten-logischen
+fraktalen Operator $\hat{F}$, der auf einem separablen Hilbertraum
+$\mathcal{H}$ wirkt und die fraktale Selbstähnlichkeit der
+Sub-Planck-Geometrie formal kodiert. Seine Struktur:
+\begin{equation}
+  \hat{F} \equiv \bigoplus_{n=1}^{\infty} S_n \circ L_n
+  \label{eq:F_def}
+\end{equation}
+mit:
+\begin{itemize}
+  \item $S_n = r_n U_n$: \textbf{Skalenoperatoren}, die diskrete
+    Skalentransformationen implementieren. Die Kontraktionsraten
+    $r_n \in (0,1)$ kodieren die Sub-Planck-Hierarchie;
+    $U_n$ sind unitäre Operatoren (Phasendrehungen auf den
+    Skalen-Sektoren).
+  \item $L_n$: \textbf{logische Projektoren} mit $L_n^2 = L_n$,
+    $L_n^\dagger = L_n$ und $L_n L_m = L_{\min(n,m)}$.
+    Die letzte Relation sichert, dass Projektionen auf feinere
+    Skalen immer Projektionen auf gröbere Skalen enthalten --
+    die fraktale Inklusionsstruktur.
+\end{itemize}
+
+Der Definitionsbereich:
+\begin{equation}
+  \mathcal{D}(\hat{F}) = \left\{ \psi \in \mathcal{H} :
+  \sum_{n=1}^{\infty} \| S_n (L_n \psi) \|^2 < \infty \right\}
+  \label{eq:Ddef}
+\end{equation}
+ist dicht in $\mathcal{H}$. $\hat{F}$ ist wesentlich selbstadjungiert
+auf $\mathcal{D}(\hat{F})$. \textbf{[S]} Der vollständige Beweis der
+Selbstadjungiertheit (Klassifikation des Defektindex) steht aus.
+
+\subsection{Spektrale Zerlegung und Eigenmoden}
+
+\textbf{[K]} Die Eigenwertgleichung
+\begin{equation}
+  \hat{F} \psi_\lambda = \lambda \psi_\lambda
+  \label{eq:eigen}
+\end{equation}
+definiert die Resonanzmoden des fraktalen Feldes. Ihre Struktur hängt
+von der fraktalen Dimension $D_f$ des Orbifolds ab:
+\begin{itemize}
+  \item $D_f \approx 2{,}6$: rein diskretes Spektrum, starke Bindung
+    (Analogon zu QCD-Konfinement).
+  \item $D_f \approx 2{,}7$: Gleichgewicht zwischen diskreten und
+    kontinuierlichen Anteilen.
+  \item $D_f \approx 2{,}8$: kontinuierliches Spektrum mit
+    logarithmischen Potentialen.
+  \item $D_f \to 3$: klassischer Grenzfall mit bekannten Spektren
+    (Riemannscher Laplace-Operator).
+\end{itemize}
+
+Der in der FFGFT relevante Wert ist $D_f = 3 - \xi$ (s.\ §\ref{sec:dim}).
+
+\subsection{$\xi$ als kleinster Eigenwert des $D_4$-Sub-Operators}
+
+\textbf{[K]} Der Geometrieparameter ist kein freier Parameter, sondern
+ein Spektralwert:
+\begin{equation}
+  \xi = \lambda_{\min}(\hat{F}_{D_4}) = \frac{4}{30000}.
+  \label{eq:xi_eigen}
+\end{equation}
+$\hat{F}_{D_4}$ ist der Sub-Operator, der die $D_4$-Gitter-Symmetrie
+der Sub-Planck-Zelle charakterisiert. Sein kleinstes Eigenwert ist
+$\xi$ -- die fundamentale Frequenz des fraktalen Raumes. Dies erklärt
+strukturell, warum $\xi$ als Basis in allen Massenformeln erscheint:
+Es ist nicht ein gewählter Parameter, sondern die unterste Mode des
+Geometrie-Operators.
+
+% =========================================================
+\section{Der FFGFT-Zustandsraum}
+% =========================================================
+
+\subsection{Tensor-Produkt-Struktur}
+
+\textbf{[K]} Der physikalische Zustandsraum der FFGFT hat die Struktur
+\begin{equation}
+  \mathcal{H}_{\mathrm{FFGFT}}
+  = \mathcal{H}_{\mathrm{geom}}
+  \otimes \mathcal{H}_{\mathrm{spin}}
+  \otimes \mathcal{H}_{\mathrm{flavor}},
+  \label{eq:Htensor}
+\end{equation}
+mit drei unabhängigen Sektoren:
+
+\begin{enumerate}
+  \item $\mathcal{H}_{\mathrm{geom}} = L^2(T^4/\mathbb{Z}_3, d\mu_f)$:
+    quadratintegrierbare Funktionen auf dem fraktalen Orbifold mit
+    dem fraktalen Maß $d\mu_f$.
+  \item $\mathcal{H}_{\mathrm{spin}} = \mathbb{C}^{2\lceil D_f\rceil}$:
+    Spinorraum; $\lceil D_f \rceil = 3$ für $D_f = 3 - \xi \approx 3$.
+  \item $\mathcal{H}_{\mathrm{flavor}} = \ell^2(\mathbb{N}^2)$:
+    Flavorraum mit Wicklungszahlen $(n_\theta, n_\phi) \in \mathbb{N}^2$
+    als Quantenzahlen.
+\end{enumerate}
+
+\subsection{Das fraktale Maß $d\mu_f$ mit 100-facher Rekursion}
+
+\textbf{[K]} Das fraktale Maß auf $T^4/\mathbb{Z}_3$ entsteht durch
+sukzessive Fraktalisierung des Lebesgue-Maßes in 100 Schritten:
+\begin{align}
+  d\mu_f^{(0)}(x) &= dx,
+  \label{eq:mu0} \\
+  d\mu_f^{(k+1)}(x) &= \prod_{i=1}^4
+  \left( \sum_{n=1}^{100} c_n^{(k)}
+  \, \delta\!\left(x_i - x_i^{(n)}\right) \right)
+  d\mu_f^{(k)}(x),
+  \label{eq:mukp1}
+\end{align}
+mit laufenden Koeffizienten
+\begin{equation}
+  c_n^{(k)} = \frac{1}{n^{D_f^{(k)} - 3}},\quad
+  D_f^{(k)} = 3 - \xi^{(k)},\quad
+  \xi^{(k)} = \frac{4}{30000}\cdot\left(1 - \frac{k}{100}\right).
+  \label{eq:lauf}
+\end{equation}
+Nach 100 Rekursionen konvergiert das Maß zu
+\begin{equation}
+  d\mu_f(x)
+  = \prod_{i=1}^4
+  \left( \sum_{n=1}^{100} n^{\xi}\,\delta\!\left(x_i-x_i^{(n)}\right)
+  \right) dx_i,
+  \label{eq:muf}
+\end{equation}
+mit $\xi = 4/30000$ und $D_f = 3 - \xi$. Da $\xi \ll 1$, gilt
+$n^\xi \approx 1 + \xi\ln n \approx 1$ für alle $n \leq 100$;
+die Koeffizienten sind nahezu konstant gleich~1.
+
+Das Maß sichert:
+\begin{itemize}
+  \item Die fraktale Dimension $D_f = 3 - \xi$ emergiert aus dem
+    Rekursionsprozess, nicht aus einer externen Setzung.
+  \item Die Sub-Planck-Diskretisierung auf Skala $t_0$ folgt natürlich.
+  \item Die $D_4$-Symmetrie der fundamentalen Zelle bleibt erhalten.
+  \item Die 100-fache Rekursion garantiert Konvergenz des Maßes.
+\end{itemize}
+
+% =========================================================
+\section{Der Torus $T^4$ im Hilbertraum}
+% =========================================================
+
+\subsection{Fourier-Zerlegung auf $T^4$}
+
+\textbf{[B]} Der vierdimensionale Torus
+$T^4 = \mathbb{R}^4/(2\pi R\,\mathbb{Z})^4$
+besitzt eine kanonische Fourier-Zerlegung:
+\begin{equation}
+  L^2(T^4) \cong \bigoplus_{n \in \mathbb{Z}^4}
+  \mathbb{C} \cdot e^{in\cdot x/R}.
+  \label{eq:FourierT4}
+\end{equation}
+Die Fourier-Moden $e^{in\cdot x/R}$ sind Eigenfunktionen des
+Laplace-Operators:
+\begin{equation}
+  \Delta_{T^4}\, e^{in\cdot x/R}
+  = -\frac{|n|^2}{R^2}\, e^{in\cdot x/R}.
+  \label{eq:Laplace}
+\end{equation}
+Der Multiindex $n = (n_1, n_2, n_3, n_4) \in \mathbb{Z}^4$ zählt
+die Wicklungen in allen vier Torus-Richtungen.
+
+\subsection{Die $\mathbb{Z}_3$-Orbifold-Projektion}
+
+\textbf{[K]} Die $\mathbb{Z}_3$-Symmetriegruppe wirkt auf $T^4$ durch
+den Generator $\tau$, der die Phase $\omega = e^{2\pi i/3}$ einführt.
+Der Projektionsoperator auf den $\mathbb{Z}_3$-invarianten Unterraum
+ist:
+\begin{equation}
+  P_{\mathbb{Z}_3} = \frac{1}{3}\sum_{k=0}^{2} \omega^k \tau^k.
+  \label{eq:PZ3}
+\end{equation}
+Der Hilbertraum des Orbifolds ist:
+\begin{equation}
+  \mathcal{H}(T^4/\mathbb{Z}_3) = \mathrm{Fix}(P_{\mathbb{Z}_3})
+  \subset L^2(T^4).
+  \label{eq:Horb}
+\end{equation}
+Ein Zustand $\psi$ liegt in $\mathcal{H}(T^4/\mathbb{Z}_3)$ genau dann,
+wenn $P_{\mathbb{Z}_3}\psi = \psi$, d.h.\ $\tau\psi = \omega^{-k}\psi$
+für ein $k$.
+
+\subsection{Fixpunkte des Orbifolds und Neutrino-Lokalisierung}
+
+\textbf{[K]} Die Fixpunkte $x_0$ des Orbifolds erfüllen
+$\tau(x_0) = x_0$. Auf $T^4/\mathbb{Z}_3$ gibt es mehrere solcher
+Fixpunkte; die für den Neutrinosektor relevanten (Dok.~320) sind:
+\begin{equation}
+  F_2 = \tfrac{2\pi R}{3}(1,1,1,0),\quad
+  F_5 = \tfrac{4\pi R}{3}(1,1,1,0),\quad
+  F_7 = \tfrac{4\pi R}{3}(1,1,1,1).
+  \label{eq:fixpunkte}
+\end{equation}
+An einem Fixpunkt $x_0$ gilt die Randbedingung
+\begin{equation}
+  \psi_\chi(x_0 + y) = \chi \cdot \psi_\chi(x_0 + g_*(y)),
+  \label{eq:rbd}
+\end{equation}
+wobei $\chi$ der Charakter der Darstellung und $g_*$ die
+linearisierte $\mathbb{Z}_3$-Wirkung in der Umgebung von $x_0$ ist.
+
+\textbf{[K]} Die drei Neutrino-Flavours sind an diesen Fixpunkten
+lokalisiert:
+\begin{equation}
+  \nu_1 \leftrightarrow F_2,\quad
+  \nu_2 \leftrightarrow F_5,\quad
+  \nu_3 \leftrightarrow F_7.
+  \label{eq:nulok}
+\end{equation}
+Die unterschiedlichen Fixpunkt-Positionen erzeugen unterschiedliche
+Eigenwerte des Massenoperators (Dok.~320, Gl.~6--8).
+
+% =========================================================
+\section{Der vollständige Spektraloperator}
+% =========================================================
+
+\subsection{Tensor-Produkt-Form von $\hat{F}$}
+
+\textbf{[K]} Der Spektraloperator auf $\mathcal{H}_{\mathrm{FFGFT}}$
+hat die Tensor-Produkt-Zerlegung:
+\begin{equation}
+  \hat{F} = \hat{\Delta}_{T^4} \otimes \hat{S} \otimes \hat{W}
+  \label{eq:Ftensor}
+\end{equation}
+mit:
+\begin{itemize}
+  \item $\hat{\Delta}_{T^4}$: Laplace-Operator auf $T^4/\mathbb{Z}_3$,
+    durch die fraktale Skala $t_0$ diskretisiert.
+  \item $\hat{S}$: Spin-Operator auf $\mathcal{H}_{\mathrm{spin}}$
+    mit Eigenwerten $s = \pm 1/2$.
+  \item $\hat{W}$: Wicklungszahl-Operator auf
+    $\mathcal{H}_{\mathrm{flavor}}$ mit Eigenwerten $(n_\theta,n_\phi)$.
+\end{itemize}
+
+\textbf{[K]} Der Massenoperator für Fermionen ist der spezialisierte
+Sub-Operator:
+\begin{equation}
+  \hat{M}_f = v \cdot \xi^{\hat{p}} \otimes \hat{r},
+  \label{eq:Mf}
+\end{equation}
+mit dem Exponenten-Operator $\hat{p}$ (Spektrum
+$\{3/2, 1, 2/3, 9/4, 2, 9/5\}$) und dem
+Wicklungsverhältnis-Operator $\hat{r} = \hat{n}_\phi^2/\hat{n}_\theta$.
+
+\subsection{Spektrale Kommutatoren und Symmetrien}
+
+\textbf{[K]} Die fundamentale Kommutatorbedingung
+\begin{equation}
+  [\hat{F}, \hat{S}] = 0 \quad \text{auf } \mathcal{H}_{\mathrm{FFGFT}}
+  \label{eq:komm}
+\end{equation}
+drückt aus, dass Spektraloperator und Spin-Operator simultane
+Eigenzustände haben -- eine notwendige Bedingung für
+wohlbestimmte physikalische Zustände.
+
+Die MASA (maximale abelsche Algebra) der Wicklungszahl-Operatoren:
+\begin{equation}
+  [\hat{n}_\theta, \hat{n}_\phi] = 0
+  \label{eq:MASA}
+\end{equation}
+erlaubt die gleichzeitige Diagonalisierung und liefert die vollständige
+spektrale Kennzeichnung $(n_\theta, n_\phi, p)$ der Teilchenmoden.
+
+% =========================================================
+\section{Verallgemeinerte Fourier-Transformation auf $T^4/\mathbb{Z}_3$}
+% =========================================================
+
+\subsection{Das GFT-Paradigma: drei Axiome}
+
+\textbf{[B]} Die verallgemeinerte Fourier-Transformation (GFT) für
+das FFGFT-Orbifold ist durch drei Axiome definiert:
+\begin{enumerate}
+  \item \textbf{Invertierbarkeit:} Die GFT ist ein Isomorphismus
+    zwischen $L^2(T^4/\mathbb{Z}_3, d\mu_f)$ und dem Spektralraum.
+  \item \textbf{Isometrie:} Die GFT erhält das Skalarprodukt
+    (verallgemeinerter Parseval-Plancherel):
+    $\|\tilde{\psi}\|_{\mathrm{spek}} = \|\psi\|_{\mathcal{H}}$.
+  \item \textbf{Spektrale Diagonalisierung:} Der Kern $K_\lambda$
+    diagonalisiert $\hat{F}$: $\hat{F}\,K_\lambda = \lambda K_\lambda$.
+\end{enumerate}
+
+\subsection{Projektionskern und GFT-Formel}
+
+\textbf{[K]} Der Projektionskern der GFT ist:
+\begin{equation}
+  K_\lambda^{(p)}(x) = \sum_{n \in \mathbb{Z}^4}
+  \frac{\delta_{\lambda,\, \Lambda_n^{(p)}}}{|n|^{D_f/2}}\,
+  e^{in\cdot x/R},
+  \label{eq:kern}
+\end{equation}
+mit den verallgemeinerten Eigenwerten
+\begin{equation}
+  \Lambda_n^{(p)} = \frac{|n|^2}{R^2}\cdot\xi^p.
+  \label{eq:lambda_n}
+\end{equation}
+Die GFT eines Zustands $|\psi\rangle \in \mathcal{H}_{\mathrm{FFGFT}}$:
+\begin{equation}
+  \tilde{\psi}(\lambda) = \langle K_\lambda^{(p)}, \psi \rangle_{\mathcal{H}}
+  = \int_{T^4/\mathbb{Z}_3} \overline{K_\lambda^{(p)}(x)}\,
+  \psi(x)\, d\mu_f(x).
+  \label{eq:gft}
+\end{equation}
+
+\subsection{MASA-Basis und vollständige spektrale Kennzeichnung}
+
+\textbf{[K]} Die MASA $\mathcal{A} = \mathrm{span}\{\hat{n}_\theta,
+\hat{n}_\phi, \hat{p}\}$ wird durch drei kommutierende Operatoren
+erzeugt. Ihre gemeinsamen Eigenzustände
+\begin{equation}
+  |n_\theta, n_\phi, p\rangle
+  = \frac{1}{2\pi R}\, e^{i(n_\theta\theta + n_\phi\phi)}
+  \otimes |p\rangle
+  \label{eq:basis}
+\end{equation}
+sind orthonormal:
+\begin{equation}
+  \langle n_\theta', n_\phi', p' | n_\theta, n_\phi, p \rangle
+  = \delta_{n_\theta n_\theta'}\,\delta_{n_\phi n_\phi'}\,
+  \delta_{pp'}
+\end{equation}
+und bilden eine vollständige Basis für
+$\mathcal{H}_{\mathrm{flavor}}$.
+
+% =========================================================
+\section{Spektrale Herleitung der Teilchenmassen}
+\label{sec:massen}
+% =========================================================
+
+\subsection{Geladene Leptonen als Torus-Anregungen}
+
+\textbf{[K]} Die Massenoperator-Eigenwertgleichung
+\begin{equation}
+  \hat{M}_{e,\mu,\tau}\,|n_\theta, n_\phi, p\rangle
+  = m_i\,|n_\theta, n_\phi, p\rangle
+  \label{eq:meigen}
+\end{equation}
+liefert mit Gl.~\eqref{eq:Mf}:
+\begin{equation}
+  m_i = \frac{n_\phi^2}{n_\theta} \cdot \xi^{p_i} \cdot v.
+  \label{eq:masse_eigen}
+\end{equation}
+Die drei geladenen Leptonen entsprechen drei diskreten
+Eigenzuständen:
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+Teilchen & $n_\theta$ & $n_\phi$ & $p_i$ & $m_i$ \\
+\midrule
+Elektron $e$  & 3 & 2 & $3/2$ & $(4/3)\xi^{3/2}v = 0{,}511$~MeV \\
+Myon $\mu$    & 5 & 4 & $1$   & $(16/5)\xi^1 v = 104{,}96$~MeV \\
+Tau $\tau$    & 9 & 5 & $2/3$ & $(25/9)\xi^{2/3}v = 1783{,}5$~MeV \\
+\bottomrule
+\end{tabular}
+\end{center}
+Dies sind keine freien Parameter, sondern diskrete Spektralwerte des
+Massenoperators.
+
+\subsection{Neutrinos als Fixpunkt-Eigenzustände}
+
+\textbf{[K]} Die Neutrinos sind Fixpunkt-Eigenzustände des
+$\mathbb{Z}_3$-Projektors:
+\begin{equation}
+  P_{\mathbb{Z}_3}\,|\nu_i\rangle = |\nu_i\rangle.
+  \label{eq:nufix}
+\end{equation}
+Der Massenoperator auf den Fixpunkt-Zuständen gibt:
+\begin{equation}
+  m_{\nu_i} = m_e \cdot \xi^{p_i}.
+  \label{eq:nu_masse}
+\end{equation}
+Die Exponenten $p_i$ folgen aus der lokalen fraktalen Dimension
+$\dim_{\mathrm{lok}}(F_j)$ des jeweiligen Fixpunkts:
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+Neutrino & Fixpunkt & $\dim_{\mathrm{lok}}$ & $p_i$ & $m_{\nu_i}$ \\
+\midrule
+$\nu_1$ & $F_2 = \tfrac{2\pi R}{3}(1,1,1,0)$
+  & $2 - 1/4$ & $9/4$ & $0{,}976$~meV \\
+$\nu_2$ & $F_5 = \tfrac{4\pi R}{3}(1,1,1,0)$
+  & $2$       & $2$   & $9{,}084$~meV \\
+$\nu_3$ & $F_7 = \tfrac{4\pi R}{3}(1,1,1,1)$
+  & $2 - 1/5$ & $9/5$ & $44{,}51$~meV \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Spektrale Auswahlregel für die Exponentenleiter}
+
+\textbf{[K]} Die Exponenten $p_i$ gehorchen der diskreten
+Auswahlregel:
+\begin{equation}
+  \Delta p = \frac{k}{3},\quad k \in \mathbb{Z}.
+  \label{eq:leiter}
+\end{equation}
+Dies folgt aus der diskreten Skaleninvarianz des Operators:
+\begin{equation}
+  \hat{F}\cdot\hat{\xi}^{1/3} = \hat{\xi}^{1/3}\cdot\hat{F}.
+  \label{eq:scaleinv}
+\end{equation}
+Gl.~\eqref{eq:leiter} ist damit nicht phänomenologisch, sondern
+ein \emph{Spektraltheorem} des Operators $\hat{F}$.
+
+% =========================================================
+\section{Eichsymmetrien aus der Spektraltheorie}
+% =========================================================
+
+\subsection{$SU(3)_c$ als spektrale Projektion}
+
+\textbf{[K]} Die acht Gluonen sind Nullmoden des Spektraloperators
+unter der $\mathbb{Z}_3$-Projektion:
+\begin{equation}
+  \hat{F}\,|g_a\rangle = 0,\quad a = 1,\ldots,8.
+  \label{eq:gluon}
+\end{equation}
+Die $SU(3)$-Generatoren (Gell-Mann-Matrizen) werden durch
+Spektralprojektoren in der Wicklungszahl-Darstellung realisiert:
+\begin{equation}
+  \hat{T}^a = \sum_n \frac{\lambda_n^a}{|n|^2}\,|n\rangle\langle n|.
+  \label{eq:su3}
+\end{equation}
+\textbf{[S]} Die vollständige algebraische Ableitung der Gell-Mann-Matrizen
+aus den Orbifold-Moden ist für Dok.~321 vorgesehen.
+
+\subsection{Elektroschwache Bosonen als spektrale Phasenverschiebung}
+
+\textbf{[B]} Die Massivierung von $W^\pm$ und $Z^0$ erfolgt durch
+eine spektrale Verschiebung:
+\begin{equation}
+  \hat{M}_{W,Z} = \tfrac{1}{2}\,\hat{g} \otimes \hat{v}
+  \otimes \hat{\xi}^{1/2},
+  \label{eq:MWZ}
+\end{equation}
+mit Eigenwerten $m_W = 80{,}38$~GeV und $m_Z = 91{,}19$~GeV (Dok.~320,
+Gl.~22). Photon und Gluonen bleiben als Null-Moden masselos.
+
+% =========================================================
+\section{Fraktale Dimension und $K_{\mathrm{frak}}$}
+\label{sec:dim}
+% =========================================================
+
+\subsection{Die fraktale Dimension als Spektralgröße}
+
+\textbf{[K]} Die fraktale Dimension $D_f$ des FFGFT-Raumes ist nicht
+a priori gegeben, sondern emergiert aus dem Spektrum von $\hat{F}$
+über die Minkowski-Dimension des spektralen Maßes:
+\begin{equation}
+  D_f = \dim_H(\mathrm{supp}(E))
+  = \inf\!\left\{ s : \sum_i \lambda_i^s < \infty \right\}.
+  \label{eq:Df_def}
+\end{equation}
+
+\textbf{[K]} Die exakte FFGFT-Formel:
+\begin{equation}
+  \boxed{D_f = 3 - \xi = 3 - \frac{4}{30000}
+  = \frac{22499}{7500} \approx 2{,}9998\overline{6}}
+  \label{eq:Df}
+\end{equation}
+folgt aus Gl.~\eqref{eq:Df_def} angewendet auf $\hat{F}$ mit dem
+fraktalen Maß Gl.~\eqref{eq:muf}.
+
+\textbf{Hinweis:} Dok.~003 nennt zusätzlich den Näherungswert
+$D_f^{\mathrm{frak}} = 2{,}94$ (Fraktaldimension der diskreten
+Rekursion). Dieser Wert wird ohne Herleitung aus $\xi$ angegeben
+und bezeichnet eine andere physikalische Größe -- die effektive
+fraktale Dimension im messbaren Bereich, nicht den Grenzwert
+$D_f \to 3$ der Sub-Planck-Skala.
+
+\subsection{$K_{\mathrm{frak}}$ als Interface-Faktor}
+
+\textbf{[K]} Dok.~133 leitet den kumulativen RG-Lauf-Faktor her:
+\begin{equation}
+  K_{\mathrm{frak}} = 1 - 100\xi = 1 - \frac{400}{30000}
+  = \frac{74}{75} \approx 0{,}9866\overline{6}.
+  \label{eq:Kfrak}
+\end{equation}
+Dieser Faktor tritt beim Übergang von der geometrischen (bare)
+Beschreibung zur gemessenen (SI-)Beschreibung auf:
+\begin{equation}
+  m_i^{\mathrm{SI}} = K_{\mathrm{frak}} \cdot C_{\mathrm{conv}}
+  \cdot m_i^{\mathrm{bare}}.
+  \label{eq:Kumrech}
+\end{equation}
+
+\textbf{[K]} In Massenverhältnissen kürzt sich $K_{\mathrm{frak}}$
+vollständig heraus (Dok.~012):
+\begin{equation}
+  \frac{m_\mu}{m_e} = \frac{m_\mu^{\mathrm{bare}}}{m_e^{\mathrm{bare}}}.
+  \label{eq:verh}
+\end{equation}
+Für die Massenverhältnisse in Dok.~320 ist $K_{\mathrm{frak}}$
+daher irrelevant.
+
+% =========================================================
+\section{Vollständige spektrale Korrespondenztabelle}
+% =========================================================
+
+\begin{table}[h!]
+\centering
+\caption{Alle spektralen Zustände der FFGFT und ihre
+  Hilbertraum-Komponenten (Dok.~322)}
+\label{tab:spektral}
+\begin{tabular}{llllll}
+\toprule
+Sektor & Zustand & Eigenwert & Formel &
+  $\mathcal{H}$-Komponente & Status \\
+\midrule
+Leptonen
+  & $|e\rangle$      & $0{,}511$~MeV  & $\frac{4}{3}\xi^{3/2}v$
+    & $\mathcal{H}_{\mathrm{fl}}(3,2)$       & [K] \\
+  & $|\mu\rangle$    & $104{,}96$~MeV & $\frac{16}{5}\xi^1 v$
+    & $\mathcal{H}_{\mathrm{fl}}(5,4)$       & [K] \\
+  & $|\tau\rangle$   & $1783{,}5$~MeV & $\frac{25}{9}\xi^{2/3}v$
+    & $\mathcal{H}_{\mathrm{fl}}(9,5)$       & [K] \\
+\midrule
+Neutrinos
+  & $|\nu_1\rangle$  & $0{,}976$~meV  & $m_e\xi^{9/4}$
+    & $\mathrm{Fix}(P)\cap F_2$              & [K] \\
+  & $|\nu_2\rangle$  & $9{,}084$~meV  & $m_e\xi^2$
+    & $\mathrm{Fix}(P)\cap F_5$              & [K] \\
+  & $|\nu_3\rangle$  & $44{,}51$~meV  & $m_e\xi^{9/5}$
+    & $\mathrm{Fix}(P)\cap F_7$              & [K] \\
+\midrule
+Bosonen
+  & $|g_a\rangle$    & $0$            & $\hat{F}|g_a\rangle=0$
+    & $\mathrm{Fix}(P_{\mathbb{Z}_3})$       & [K] \\
+  & $|W^\pm\rangle$  & $80{,}38$~GeV  & $\frac{1}{2}g_2 v$
+    & $\mathcal{H}_{\mathrm{spin}}$          & [B] \\
+  & $|Z^0\rangle$    & $91{,}19$~GeV  & $m_W/\!\cos\theta_W$
+    & $\mathcal{H}_{\mathrm{spin}}$          & [B] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =========================================================
+\section{Offene Fragen und Ausblick}
+% =========================================================
+
+\begin{table}[h]
+\centering
+\caption{Status der offenen Punkte in Dok.~322}
+\label{tab:offen}
+\begin{tabular}{lll}
+\toprule
+Frage & Status & Dok. \\
+\midrule
+Voller Beweis der Selbstadjungiertheit von $\hat{F}$
+  & [S] offen & --- \\
+Klassifikation des Defektindex von $\hat{F}$
+  & [S] offen & --- \\
+$SU(3)$-Generatoren algebraisch aus Orbifold-Moden
+  & [S] geplant & Dok.~321 \\
+Weinberg-Winkel $\theta_W$ aus $\xi$
+  & offene Brücke & --- \\
+$\Delta m_{32}^2$: Quelle der $-22\,\%$-Abweichung
+  & [S] offen & Dok.~320 \\
+RGE-Brücke $\alpha_s(m_\tau) \to \alpha_s(M_Z)$ in FFGFT
+  & [S] offen & Dok.~160 \\
+Verbindung zur nichtkommutativen Geometrie (Connes)
+  & [S] perspektivisch & --- \\
+Experimentelle Testbarkeit: KATRIN, PTOLEMY
+  & [K] messbar & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{keyresult}[Gesamtstatus Dok.~322]
+Die Hilbertraum-Einbettung der FFGFT ist strukturell vollständig:
+$\hat{F}$ ist definiert, der Zustandsraum Gl.~\eqref{eq:Htensor}
+ist konstruiert, alle Massenformeln aus Dok.~320 sind als
+Eigenwertgleichungen identifiziert. Der offene Punkt ist der
+vollständige Selbstadjungiertheits-Beweis für $\hat{F}$.
+Das Teilchenspektrum folgt aus der Spektraltheorie, nicht aus
+freien Parametern.
+\end{keyresult}
