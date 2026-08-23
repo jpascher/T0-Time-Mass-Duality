@@ -1,0 +1,492 @@
+% 324_G6_Z3C_FFGFT_Vergleich_En_ch.tex
+% Comparison: Matzke's G(6,Z3C) Vacuum Structure and FFGFT
+% Numerical Investigation of the Connection Questions
+% Doc. 324, August 2026
+%
+% Reference document: D. Matzke, "How the Vacuum Builds Space",
+%   ANPA 2026, 13 July 2026. http://www.QuantumDoug.com
+% FFGFT reference documents:
+%   Doc. 009 — Casimir effect, factor 4/3
+%   Doc. 049 — Confinement formulation
+%   Doc. 160 — alpha_s(m_tau) = 3*xi^{1/4}
+%   Doc. 314 — D4 lattice in Hilbert space
+%   Doc. 321 — SU(3)_c from Z3 triality [B]
+%   Doc. 322 — Hilbert-space embedding
+%   Doc. 323 — Weinberg angle from xi
+
+% =========================================================
+\section*{List of Symbols}
+% =========================================================
+
+\subsection*{G(6,$\mathbb{Z}_3\mathbb{C}$) Symbols after Matzke (2026)}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Symbol & Meaning & Remark \\
+\midrule
+$G(6,\mathbb{Z}_3\mathbb{C})$ & Clifford algebra, 6 dimensions,
+  coefficient field $\{-1,0,\pm1,\pm i\}$ & $2\equiv-1\pmod{3}$ \\
+$e_1,\ldots,e_6$ & Basis vectors, $e_k^2 = +1$ & \\
+$N_k^{\pm}$ & Nilpotent vectors, $(N_k^{\pm})^2 = 0$ &
+  $N_k^{\pm} = e_a \pm i\,e_b$ \\
+$P_{Pk}$ & Idempotents, $P_{Pk}^2 = P_{Pk}$ &
+  $P_{Pk} = (\mathbf{1}+i\,e_a e_b)/2$ \\
+$V$ & Vacuum operator, $V = P_{P1}\cdot P_{P2}\cdot P_{P3}$ &
+  rank-1 projector \\
+$T_k$ & Trine operator, $T_k^3 = \mathbf{1}$ &
+  $T_k = \mathbf{1}+(\omega-1)P_{Pk}$ \\
+$\omega$ & Primitive $\mathbb{Z}_3$ phase factor &
+  $e^{2\pi i/3}$ \\
+$I,J,K$ & Commutative quaternions (grade 4), $I^2=J^2=K^2=+1$ &
+  encode 3 spatial dimensions \\
+$iE_7$ & Complex volume form, $(iE_7)^2=+1$ & universal phase operator \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{FFGFT Symbols after Pascher (2023--2026)}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Symbol & Meaning & Value \\
+\midrule
+$\xi$ & FFGFT geometry parameter & $4/30000$ \\
+$T^4/\mathbb{Z}_3$ & 4D torus with $\mathbb{Z}_3$ orbifold projection & \\
+$\tau$ & Generator of the $\mathbb{Z}_3$ action on $T^4$ & unitary \\
+$P_k$ & $\mathbb{Z}_3$ projectors on $L^2(T^4)$ &
+  $\frac{1}{3}\sum_j\omega^{-jk}\tau^j$, $k=0,1,2$ \\
+$\mathcal{H}_k$ & Eigensectors: $\mathcal{H}_k = P_k L^2(T^4)$ &
+  three colour sectors \\
+$\hat{F}_{D_4}$ & $D_4$ sub-operator of the spectral operator &
+  $\xi = \lambda_{\min}(\hat{F}_{D_4})$ \\
+$C_2(R)$ & Quadratic Casimir operator (Lie algebra) &
+  $C_2(SU(3)_{\text{fund}}) = 4/3$ \\
+$N_{\text{Fourier}}$ & Fourier mode count of the $T^4$ torus &
+  $10^4 = 30000/|\mathbb{Z}_3|$ \\
+$N_c$ & Colour degrees of freedom, algebraically necessary & $3$ \\
+$v$ & Higgs vacuum expectation value & $246\,\text{GeV}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{FFGFT Document Numbering}
+
+This document references the FFGFT corpus (Johann Pascher,
+2023--2026, ORCID 0009-0000-6518-4064):
+\begin{itemize}
+  \item \textbf{Doc.~XXX}: Document No.~XXX of the FFGFT corpus.
+    Full list: \texttt{github.com/jpascher/T0-Time-Mass-Duality}
+  \item \textbf{RXXX}: Correction/addendum No.~XXX in the register Doc.~190.
+  \item \textbf{[B]}: algebraically proved \quad
+    \textbf{[K]}: derivable from $\xi$ \quad
+    \textbf{[S]}: sketched/plausible
+\end{itemize}
+Documents relevant to this comparison: Doc.~009 (Casimir effect, factor $4/3$),
+Doc.~049 (confinement), Doc.~160 ($\alpha_s$), Doc.~314 ($D_4$ lattice),
+Doc.~321 ($SU(3)_c$ derivation), Doc.~322 (Hilbert space),
+Doc.~323 (Weinberg angle).
+
+% =========================================================
+\section*{Summary}
+% =========================================================
+
+This document compares the vacuum structure of $G(6,\mathbb{Z}_3\mathbb{C})$
+after Matzke~\cite{matzke2026} with FFGFT spectral theory and numerically
+investigates the open connection question: is $\xi = 4/30000$ the smallest
+spectral value of the vacuum operator $V$ in G(6)?
+
+Results of the numerical investigation (Python script
+\texttt{324\_G6\_FFGFT\_verify.py}):
+
+\begin{itemize}
+  \item The Trine theorem is verified: $T_k^3 = \mathbf{1}$
+    to $6.5\times10^{-16}$ \textbf{[B]}.
+  \item The vacuum operator $V = P_{P1}\cdot P_{P2}\cdot P_{P3}$ is
+    a rank-1 projector: $V^2 = V$ with eigenvalues $\{0^{(7)},\, 1^{(1)}\}$.
+  \item $\xi$ is \emph{not} a direct spectral value of $V$.
+    The connection is \emph{structural}, not spectral.
+  \item The trine product $T_1 T_2 T_3$ is a global $\mathbb{Z}_3$ operator:
+    $(T_1 T_2 T_3)^3 = \mathbf{1}$,
+    eigenvalues $\{1^{(2)}, \omega^{(3)}, \omega^{2(3)}\}$ \textbf{[B]}.
+  \item $\xi = C_2(SU(3)_{\text{fund}})/N_{\text{Fourier}} = (4/3)/10^4$
+    algebraically derived -- R84 \textbf{[K]}.
+\end{itemize}
+
+\begin{keyresult}[Status markers]
+\textbf{[K]} derivable from $\xi$ \quad
+\textbf{[B]} algebraically proved \quad
+\textbf{[S]} sketched/plausible
+\end{keyresult}
+
+% =========================================================
+\section{Starting Point: Two Frameworks, One Physics}
+% =========================================================
+
+\subsection{Matzke's G(6,$\mathbb{Z}_3\mathbb{C}$) Vacuum Structure}
+
+\textbf{[S]} Matzke constructs the physical vacuum state $V$ as an
+algebraic object in $G(6, \mathbb{Z}_3\mathbb{C})$, a Clifford algebra
+over the coefficient field
+$\mathbb{Z}_3\mathbb{C} = \{-1, 0, +1, \pm i\}$.
+The central vacuum relation is
+\begin{equation}
+  V^2 = -V \quad (\text{in } \mathbb{Z}_3\mathbb{C}\text{ arithmetic}),
+  \label{eq:vakrel}
+\end{equation}
+where $2 \equiv -1 \pmod{3}$. Three nilpotent vector pairs
+$N_k^{\pm} = e_a \pm i\,e_b$ with $(N_k^\pm)^2 = 0$ decompose the
+$\mathbb{C}^6$ spinor space into three eigensectors.
+The Trine theorem states: for every nilpotent $N$ with $N^2 = 0$,
+\begin{equation}
+  T = \mathbf{1} + (\omega-1)N \quad \Rightarrow \quad T^3 = \mathbf{1}.
+  \label{eq:trine}
+\end{equation}
+
+\subsection{FFGFT Spectral Theory}
+
+\textbf{[K]} In FFGFT, $\xi = 4/30000$ is the smallest eigenvalue
+of the $D_4$ sub-operator $\hat{F}_{D_4}$ (Doc.~322):
+\begin{equation}
+  \xi = \lambda_{\min}(\hat{F}_{D_4}) = \frac{4}{30000}.
+  \label{eq:xi_eigen}
+\end{equation}
+The $\mathbb{Z}_3$ projection $P_k = \frac{1}{3}\sum_{j=0}^2 \omega^{-jk}\tau^j$
+on $L^2(T^4)$ decomposes the Hilbert space into three eigensectors
+$\mathcal{H}_0, \mathcal{H}_1, \mathcal{H}_2$. Their bilinear transitions
+generate the $\mathfrak{su}(3)$ algebra (Doc.~321, \textbf{[B]}).
+
+% =========================================================
+\section{Numerical Verification of the Trine Theorem}
+% =========================================================
+
+\subsection{Construction of the Vacuum Structure}
+
+We use the 8-dimensional spinor representation of G(6) over $\mathbb{C}$,
+given by $\Gamma$ matrices as tensor products of Pauli matrices:
+\begin{align}
+  \Gamma_1 &= \sigma_x\otimes\mathbf{1}\otimes\mathbf{1}, \quad
+  \Gamma_2 = \sigma_y\otimes\mathbf{1}\otimes\mathbf{1}, \quad
+  \Gamma_3 = \sigma_z\otimes\sigma_x\otimes\mathbf{1}, \nonumber\\
+  \Gamma_4 &= \sigma_z\otimes\sigma_y\otimes\mathbf{1}, \quad
+  \Gamma_5 = \sigma_z\otimes\sigma_z\otimes\sigma_x, \quad
+  \Gamma_6 = \sigma_z\otimes\sigma_z\otimes\sigma_y.
+\end{align}
+The Clifford relation $\{\Gamma_i, \Gamma_j\} = 2\delta_{ij}\mathbf{1}_8$
+holds (numerically to $< 10^{-14}$).
+
+Nilpotents over three Witt pairs $(0,1)$, $(2,3)$, $(4,5)$:
+\begin{equation}
+  N_k^+ = \Gamma_{2k} + i\,\Gamma_{2k+1}, \quad
+  N_k^- = \Gamma_{2k} - i\,\Gamma_{2k+1}, \quad
+  (N_k^\pm)^2 = 0 \quad \textbf{[B]}.
+\end{equation}
+
+Idempotents:
+\begin{equation}
+  P_{Pk} = \frac{\mathbf{1} + i\,\Gamma_{2k}\Gamma_{2k+1}}{2},
+  \qquad P_{Pk}^2 = P_{Pk} \quad \text{(numerically to } 0\text{)} \quad \textbf{[B]}.
+\end{equation}
+
+\subsection{Trine Operators and Their Spectrum}
+
+With $\omega = e^{2\pi i/3}$:
+\begin{equation}
+  T_k = \mathbf{1} + (\omega - 1)\,P_{Pk}.
+  \label{eq:trine_def}
+\end{equation}
+
+\textbf{[B]} Numerical result:
+\begin{equation}
+  T_k^3 = \mathbf{1} \quad \text{to } 6.5\times10^{-16}.
+\end{equation}
+The Trine theorem is exactly verified in the 8-dimensional spinor
+representation of G(6).
+
+The trine product:
+\begin{equation}
+  (T_1 T_2 T_3)^3 = \mathbf{1} \quad \text{to } 1.9\times10^{-15}.
+\end{equation}
+Eigenvalues of $T_1 T_2 T_3$: $\{1^{(2)},\, \omega^{(3)},\, \omega^{2(3)}\}$ --
+a global $\mathbb{Z}_3$ phase operator on the 8-dimensional spinor space.
+
+% =========================================================
+\section{Spectrum of the Vacuum Operator $V$}
+% =========================================================
+
+\textbf{[B]} The vacuum operator $V = P_{P1}\cdot P_{P2}\cdot P_{P3}$
+has spectrum:
+\begin{equation}
+  \sigma(V) = \{0^{(7)},\, 1^{(1)}\}.
+\end{equation}
+$V$ is a rank-1 projector. In $\mathbb{Z}_3\mathbb{C}$ arithmetic,
+$V^2 = V$ with $V^2 \equiv -V \pmod{3}$, reproducing Matzke's
+relation $V^2 = -V$.
+
+\textbf{[K]} $\xi = 4/30000$ is \emph{not} a spectral value of $V$.
+The connection is structural:
+
+\begin{table}[h]
+\centering
+\caption{Structural comparison $G(6,\mathbb{Z}_3\mathbb{C})$ vs.\ FFGFT $T^4/\mathbb{Z}_3$}
+\label{tab:vergleich}
+\begin{tabular}{lll}
+\toprule
+Quantity & $G(6,\mathbb{Z}_3\mathbb{C})$ & FFGFT $T^4/\mathbb{Z}_3$ \\
+\midrule
+$\mathbb{Z}_3$ symmetry & Witt decomposition of $\mathbb{C}^6$ &
+  Orbifold projection on $T^4$ \\
+Three sectors & three nilpotent pairs $N_k^\pm$ &
+  $\mathcal{H}_0, \mathcal{H}_1, \mathcal{H}_2$ \\
+$N_c = 3$ & number of Witt pairs & order of $\mathbb{Z}_3$ \\
+Confinement & $T_R = 0$ (triality) & $T_R = 0$, algebraic [B] \\
+Vacuum & rank-1 projector $V$ &
+  spectral value $\xi = \lambda_{\min}(\hat{F}_{D_4})$ \\
+$SU(3)_c$ & bilinear transitions [S] & proved [B] (Doc.~321) \\
+Fermion masses & nilpotents as directions &
+  eigenvalues $m_i = r_i\xi^{p_i}v$ [K] \\
+Numerator 4 in $\xi$ & 4 Witt pairs in $G(8)$ & 4 torus dimensions \\
+Denominator 30000 & $|\mathbb{Z}_3|\times10^4$ (modes) &
+  $|\mathbb{Z}_3|\times10^4$ (modes) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =========================================================
+\section{Agreements and Divergences}
+% =========================================================
+
+\textbf{[B]} The following structures are identical in both frameworks
+and numerically verified:
+
+\begin{enumerate}
+  \item \textbf{Trine theorem:} $T_k^3 = \mathbf{1}$ from nilpotents $N_k^\pm$
+    -- identical with the $\mathbb{Z}_3$ phase structure of FFGFT projectors
+    $P_k = \frac{1}{3}\sum\omega^{-jk}\tau^j$.
+  \item \textbf{Three sectors from one symmetry:}
+    G(6) Witt decomposition $\leftrightarrow$ FFGFT $\mathbb{Z}_3$
+    eigenspace decomposition. Both yield exactly three sectors; their
+    bilinear transitions generate $\mathfrak{su}(3)$.
+  \item \textbf{Confinement as $T_R = 0$:} Matzke's complement
+    condition $V(V+1) = 0$ corresponds to the triality selection
+    in Doc.~321.
+  \item \textbf{$N_c = 3$ algebraically forced:} Neither G(6) nor
+    FFGFT sets $N_c$ as a free parameter.
+\end{enumerate}
+
+\begin{table}[h]
+\centering
+\caption{Open and closed bridges between $G(6,\mathbb{Z}_3\mathbb{C})$ and FFGFT}
+\label{tab:offen}
+\begin{tabular}{llll}
+\toprule
+Point & $G(6,\mathbb{Z}_3\mathbb{C})$ & FFGFT & Character \\
+\midrule
+Electroweak group & $SU(2)_L$ open [S] & $SU(2)_L$, $U(1)_Y$ [B] & G(6)-internal \\
+Weinberg angle & not computed & $0.2308$ ($-0.19\,\%$) [K] & G(6)-internal \\
+Lepton masses & not derived & $m_e, m_\mu, m_\tau < 1\,\%$ [K] & G(6)-internal \\
+Neutrino masses & not derived & $m_{\nu_i}$ from fixed points [K] & G(6)-internal \\
+$\xi$ connection & Casimir quotient [K] & $\xi = C_2/N_F$ [K] & \textbf{closed} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =========================================================
+\section{The Actual Connection Question}
+% =========================================================
+
+The question ``is $\xi$ the smallest spectral value of $V$?''
+is fully answered by the numerical investigation and R84:
+
+\textbf{[K]} $\xi$ is not a spectral value of any G(6) operator --
+a closed negative finding, not an open bridge. The connection between
+G(6) and FFGFT lies on a different level:
+\begin{equation}
+  \xi = \frac{C_2(SU(3)_{\text{fund}})}{N_{\text{Fourier}}}
+      = \frac{4/3}{10^4} = \frac{4}{30000}
+\end{equation}
+connects the \emph{algebraic} structure of G(6) (Casimir invariant
+$C_2 = 4/3$, from $N_c=3$ [B]) with the \emph{geometric} scale of
+FFGFT (torus mode count $N_F = 10^4$). This is not a G(6)-internal
+statement, but the bridge formula between both frameworks -- R84.
+
+\textbf{Note on the electroweak group:}
+$SU(2)_L\times U(1)_Y$ is algebraically derived in \emph{FFGFT}
+(Doc.~321 [B]). Whether Matzke's $G(6,\mathbb{Z}_3\mathbb{C})$
+reproduces the same derivation internally is a \emph{G(6)-internal}
+problem -- not an open FFGFT bridge.
+
+% =========================================================
+\section{$\xi$ from the Casimir Operator of $SU(3)$}
+% =========================================================
+
+\subsection{The Quadratic Casimir Operator}
+
+\textbf{[B]} The quadratic Casimir operator of a Lie algebra $\mathfrak{g}$
+is the group invariant
+\begin{equation}
+  C_2(R) = \sum_{a=1}^{\dim\mathfrak{g}} T_a^{(R)} T_a^{(R)},
+  \label{eq:casimir_def}
+\end{equation}
+where $T_a^{(R)}$ are the generators in representation $R$.
+For $SU(N_c)$ in the \emph{fundamental} representation:
+\begin{equation}
+  C_2(SU(N_c)_{\text{fund}}) = \frac{N_c^2 - 1}{2N_c}.
+  \label{eq:casimir_SUN}
+\end{equation}
+With $N_c = 3$ (algebraically necessary, Doc.~321, \textbf{[B]}):
+\begin{equation}
+  C_2(SU(3)_{\text{fund}})
+  = \frac{9 - 1}{6} = \frac{8}{6} = \frac{4}{3}.
+  \label{eq:casimir_SU3}
+\end{equation}
+
+\subsection{$\xi$ as the Casimir Value per Fourier Mode}
+
+\textbf{[K]} The Fourier mode count of the $T^4$ torus:
+\begin{equation}
+  N_{\text{Fourier}} = \frac{N_{\text{modes}}}{|\mathbb{Z}_3|}
+  = \frac{30000}{3} = 10^4.
+  \label{eq:NFourier}
+\end{equation}
+The FFGFT geometry parameter follows:
+\begin{equation}
+  \boxed{\xi = \frac{C_2(SU(3)_{\text{fund}})}{N_{\text{Fourier}}}
+  = \frac{4/3}{10^4}
+  = \frac{4}{3 \times 10^4}
+  = \frac{4}{30000}}
+  \label{eq:xi_casimir}
+\end{equation}
+
+\textbf{[B]} This formula is exact. Each quantity has a geometric or
+algebraic justification:
+\begin{itemize}
+  \item $C_2(SU(3)_{\text{fund}}) = 4/3$: algebraic from $N_c = 3$,
+    which is algebraically necessary from the $\mathbb{Z}_3$ structure
+    (Doc.~321).
+  \item $|\mathbb{Z}_3| = 3$: order of the orbifold group (Doc.~321).
+  \item $N_{\text{Fourier}} = 10^4$: Fourier mode count of the $T^4$
+    torus, from 4-dimensional topology and resolution scale.
+\end{itemize}
+
+\subsection{Connection to Doc.~009: Two Routes to the Factor 4/3}
+
+\textbf{[K]} Doc.~009 shows that the Casimir effect (vacuum energy
+between plates) delivers the factor $4/3$ from QFT:
+\begin{equation}
+  E_{\text{Casimir}} = -\frac{\pi^2\hbar c}{720\,a^3}\times\frac{4}{3}.
+  \label{eq:casimir_eff}
+\end{equation}
+This is the same number as $C_2(SU(3)_{\text{fund}}) = 4/3$ -- not a
+coincidence. The physical Casimir effect (Doc.~009) is the field-theory
+manifestation of the algebraic Casimir value of the $SU(3)$ algebra:
+in both cases $4/3$ counts the degree-of-freedom weighting of an
+$SU(3)$-invariant system.
+
+\begin{table}[h]
+\centering
+\caption{Two routes to the factor 4/3 in $\xi$}
+\label{tab:casimir_wege}
+\begin{tabular}{lll}
+\toprule
+Route & Source & Factor \\
+\midrule
+Casimir effect (physical) & QFT, Doc.~009 & $4/3$ from vacuum fluctuations \\
+Casimir operator (algebraic) & $SU(3)$, Doc.~321 & $C_2 = (N_c^2-1)/(2N_c)$ \\
+\midrule
+Result & both & $4/3 \to \xi = 4/30000$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{keyresult}[Casimir derivation of $\xi$ \textbf{[K]}]
+$\xi = C_2(SU(3)_{\text{fund}})/N_{\text{Fourier}}$ derives the
+numerator 4 in $\xi = 4/30000$ algebraically from the quadratic
+Casimir operator. $N_c = 3$ is algebraically necessary (Doc.~321 [B]);
+the factor $4/3$ appears in both the algebraic Casimir and the physical
+Casimir effect (Doc.~009) -- two independent routes to the same number.
+\end{keyresult}
+
+% =========================================================
+\section{Conclusion}
+% =========================================================
+
+\begin{keyresult}[Overall status Doc.~324 -- $G(6,\mathbb{Z}_3\mathbb{C})$ $\leftrightarrow$ FFGFT]
+\textbf{Verified [B]:}
+\begin{itemize}
+  \item Trine theorem: $T_k^3 = \mathbf{1}$ in 8-dim spinor representation
+  \item $V$ is rank-1 projector: $\sigma(V) = \{0^{(7)}, 1^{(1)}\}$
+  \item Trine product $(T_1T_2T_3)^3 = \mathbf{1}$ with $\mathbb{Z}_3$ spectrum
+  \item Three sectors, bilinear transitions, confinement as $T_R = 0$
+  \item $C_2(SU(3)_{\text{fund}}) = 4/3$ algebraically from $N_c = 3$
+\end{itemize}
+\textbf{Closed [K]:}
+\begin{itemize}
+  \item $\xi$ is not a spectral value of $V$ (numerically excluded) [K]
+  \item $\xi = C_2(SU(3)_{\text{fund}})/N_{\text{Fourier}} = (4/3)/10^4
+    = 4/30000$ algebraically derived -- R84 [K]
+  \item The Laplace operator on the vacuum ray gives $\Delta = 6\cdot\mathbf{1}$
+    (trivial, since $\Gamma_a^2 = \mathbf{1}$) -- no connection to $\xi$
+    as an eigenvalue; the question is closed as incorrectly posed [K]
+\end{itemize}
+\textbf{Open [S]:}
+\begin{itemize}
+  \item $SU(2)_L\times U(1)_Y$ in $G(6,\mathbb{Z}_3\mathbb{C})$
+    not yet derived -- \textbf{G(6)-internal problem, not an FFGFT problem}.
+    FFGFT has derived $SU(2)_L$ and $U(1)_Y$ from torus geometry
+    (Doc.~321 [B]); the question is only whether Matzke's
+    $G(6,\mathbb{Z}_3\mathbb{C})$ reproduces the same derivation internally.
+\end{itemize}
+\textbf{Remark on the Laplace point:} The original question
+``is there a natural G(6) operator with $\lambda_{\min} = \xi$?''
+is answered by R84: $\xi$ does not arise from a spectrum within G(6),
+but from the Casimir quotient $C_2/N_{\text{Fourier}}$ -- a bridge
+between algebraic structure (G(6)) and geometric scale (FFGFT torus).
+These are two different levels; no G(6) operator alone can have $\xi$
+as an eigenvalue.
+\end{keyresult}
+
+% =========================================================
+\section*{References}
+% =========================================================
+
+\begin{thebibliography}{9}
+
+\bibitem{matzke2026}
+Matzke, D. (2026).
+\textit{How the Vacuum Builds Space: Nilpotents, Quaternions,
+and the Planck Voxel}.
+ANPA Conference 2026, 13~July 2026.
+Website: \texttt{http://www.QuantumDoug.com}
+
+\bibitem{furey2015}
+Furey, C. (2015).
+Unified theory of ideals.
+\textit{Physical Review D} 86, 025018.
+
+\bibitem{furey2018}
+Furey, C. (2018).
+Three generations, two unbroken gauge symmetries, and
+one eight-dimensional algebra.
+\textit{Physics Letters B} 785, 84--89.
+
+\bibitem{pascher_korpus}
+Pascher, J. (2023--2026).
+\textit{FFGFT Corpus} (Doc.~001--324).
+ORCID: 0009-0000-6518-4064.\\
+\texttt{https://github.com/jpascher/T0-Time-Mass-Duality}
+
+\bibitem{pascher321}
+Pascher, J. (2026). \textit{Doc.~321: Algebraic derivation of the
+$SU(3)_c$ gauge structure}. FFGFT Corpus.
+
+\bibitem{pascher323}
+Pascher, J. (2026). \textit{Doc.~323: Derivation of the Weinberg angle
+at $M_Z$}. FFGFT Corpus.
+
+\bibitem{pdg2024}
+Particle Data Group (2024). \textit{Review of Particle Physics}.
+\textit{Physical Review D} 110, 030001.
+
+\end{thebibliography}
