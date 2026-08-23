@@ -1,7 +1,7 @@
 # T0 Zeit-Masse-Dualität · FFGFT
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17390357.svg)](https://doi.org/10.5281/zenodo.17390357)
-**Version: v1.3.1** (20. August 2026) — DOI ausstehend, ersetzt v1.3.0
+**Version: v1.3.2** (23. August 2026) — DOI ausstehend, ersetzt v1.3.1
 
 **FFGFT — Fraktale Feldgeometrische Fundamentaltheorie** zeigt:
 Alle Konstanten des Standardmodells folgen aus einem einzigen
@@ -49,6 +49,7 @@ was Eingabe ist, was folgt, ist immer klar deklariert.
 | Lagrangian mit T̃·m=1; Feynman-Regeln | [Dok. 019](2/pdf/019_T0_lagrndian_De.pdf) |
 | Leptonmassen aus rationalen Invarianten r_i, p_i | [Dok. 006](2/pdf/006_T0_Teilchenmassen_De.pdf) / [046](2/pdf/046_Teilchenmassen_De.pdf) |
 | Koide-Skalar Q_FFGFT = 0,6677 (berechnet, nicht gefittet) | [Dok. 258](2/pdf/258_Koide_2-3_De.pdf) / [259](2/pdf/259_Koide_Kreuzterme_De.pdf) |
+| Hawking-Mechanismus: Quant = Bit der Horizontskala | [Dok. 325](2/pdf/325_Hawking_FFGFT_De.pdf) |
 | α⁻¹ = 137,036 aus D_f = 3 − ξ | [Dok. 011](2/pdf/011_T0_Feinstruktur_De.pdf) / [043](2/pdf/043_ResolvingTheConstantsAlfa_De.pdf) |
 | SI-Brücke: alle Konstanten aus ξ | [Dok. 013](2/pdf/013_T0_SI_De.pdf) |
 | E = mc² = E = m: Einheiten-Identität | [Dok. 077](2/pdf/077_E-mc2_De.pdf) |
@@ -464,11 +465,44 @@ Zusätzliche Einzelausgaben: *FFGFT Narrativ — Das Kosmische Gehirn*,
 ## Versionshistorie
 
 Die vollständige Versionshistorie mit DOIs steht in den Release Notes:
-**[RELEASE_NOTES_v1_2_8_de.md](RELEASE_NOTES_v1_2_8_de.md)** · Änderungsprotokoll:
+**[RELEASE_NOTES_v1_3_2_de.md](RELEASE_NOTES_v1_3_2_de.md)** · Änderungsprotokoll:
 **[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**
 
 ---
 
+
+## Neue Dokumente — v1.3.2 (23. August 2026)
+
+### Dok. 324 — G(6,ℤ₃C)-Vakuumstruktur und FFGFT (DE+EN, je 8 S.)
+
+Numerische Untersuchung der Verbindungsfragen zu Matzkes G(6,ℤ₃C)-Framework.
+Trine-Theorem [B], Vakuumoperator als Rang-1-Projektor [B], ξ kein Spektralwert [K]
+(R84), Casimir-Herleitung ξ = C₂(SU(3)_fund)/N_Fourier = (4/3)/10⁴ [K].  
+→ [DE](2/pdf/324_G6_Z3C_FFGFT_Vergleich_De.pdf) · [EN](2/pdf/324_G6_Z3C_FFGFT_Vergleich_En.pdf)
+
+### Dok. 325 — Der FFGFT-Hawking-Mechanismus (DE+EN, je 7 S.)
+
+Schließt die Emissionsseite von Dok. 313 Kap. G aus FFGFT-eigenen Bausteinen (R85).
+KMS-Temperatur aus T̃·m=1 [K]; **k_B·T_H = ħc/(4π·r_s) = E_bit(Horizontskala)** exakt [K]
+— das Hawking-Quant ist das systemabhängige Bit, kein universeller Bitwert nötig;
+ℤ₃-Selektion T_R = 0 mit Absorption P_jP_k = 0 [B]; masseloser Träger n₄ = 0 [K];
+Sektorpaar-Kodierung log₂3 Bit/Quant [B]; kein Informationsparadoxon (Unitarität,
+Dok. 322). Offen [S]: Graukörper-Faktoren, Fixpunkt-Rückreaktion.  
+→ [DE](2/pdf/325_Hawking_FFGFT_De.pdf) · [EN](2/pdf/325_Hawking_FFGFT_En.pdf)
+
+### Dok. 326 — Schwarze Löcher aus Hyperbits und aus FFGFT (DE+EN, je 10 S.)
+
+Vergleich mit Matzkes Hyperbit-Framework — Schwerpunkt Landauer und Bitwerte.
+Konvergenzen: Fermion-Generation = algebraische Grundeinheit, N_c = 3 erzwungen,
+r_s ohne ART. Divergenz: universeller Bitwert [SETZUNG] vs. systemabhängige
+Bit-Energie E_bit = ħc/L [K]. T_H(Matzke)/T_H(KMS) = 1,000000 — der universelle
+Bitwert ist eine Umparametrisierung. n_thresh = 6,41 als universelle Zahl: [X].  
+→ [DE](2/pdf/326_Matzke_FFGFT_Vergleich_De.pdf) · [EN](2/pdf/326_Matzke_FFGFT_Vergleich_En.pdf)
+
+**Korrekturen:** R84 (Casimir-Herleitung von ξ), R85 (Hawking-Mechanismus [S]→[K]/[B]).
+Prüfskripte: 69 Assertions, alle OK. Details: [RELEASE_NOTES_v1_3_2_de.md](RELEASE_NOTES_v1_3_2_de.md)
+
+---
 
 ## Neue Dokumente — v1.3.0 (August 2026)
 

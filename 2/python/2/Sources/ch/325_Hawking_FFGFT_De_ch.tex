@@ -1,0 +1,359 @@
+% 325_Hawking_FFGFT_De_ch.tex
+% Dok. 325, FFGFT-Korpus, August 2026 — Kapitel-Datei
+% Wird von Sources/wr_standalone_A4/325_Hawking_FFGFT_De.tex eingebunden.
+
+% --- Dokumentlokale Makros (kollisionssicher) ---
+\providecommand{\K}{}\renewcommand{\K}{\textbf{[K]}}
+\providecommand{\B}{}\renewcommand{\B}{\textbf{[B]}}
+\renewcommand{\S}{\textbf{[S]}}
+\providecommand{\Q}{}\renewcommand{\Q}{\textbf{[Q]}}
+\providecommand{\X}{}\renewcommand{\X}{\textbf{[X]}}
+\providecommand{\SETZ}{}\renewcommand{\SETZ}{\textbf{[SETZUNG]}}
+\providecommand{\lP}{}\renewcommand{\lP}{\ell_{\mathrm{P}}}
+\providecommand{\mP}{}\renewcommand{\mP}{m_{\mathrm{P}}}
+\providecommand{\TP}{}\renewcommand{\TP}{T_{\mathrm{P}}}
+\renewcommand{\TH}{T_{\mathrm{H}}}
+\providecommand{\rs}{}\renewcommand{\rs}{r_{\mathrm{s}}}
+\providecommand{\SBH}{}\renewcommand{\SBH}{S_{\mathrm{BH}}}
+\providecommand{\xig}{}\renewcommand{\xig}{\xi}
+\providecommand{\Tmass}{}\renewcommand{\Tmass}{\widetilde{T}}
+\providecommand{\Ebit}{}\renewcommand{\Ebit}{E_{\mathrm{bit}}}
+% --- Farbboxen ---
+\definecolor{ffgftblue}{RGB}{30,90,160}
+\definecolor{matzkegreen}{RGB}{0,120,60}
+\definecolor{converge}{RGB}{160,60,0}
+\definecolor{diverge}{RGB}{140,0,40}
+\definecolor{warn}{RGB}{100,0,120}
+\tcbset{
+  base/.style={breakable,enhanced,boxrule=0.6pt,arc=3pt,
+    fonttitle=\bfseries\small,coltitle=white,top=4pt,bottom=4pt,left=6pt,right=6pt},
+  ffgftbox/.style={base,colback=blue!5,colframe=ffgftblue,colbacktitle=ffgftblue},
+  matzbox/.style={base,colback=green!5,colframe=matzkegreen,colbacktitle=matzkegreen},
+  convbox/.style={base,colback=orange!8,colframe=converge,colbacktitle=converge},
+  divbox/.style={base,colback=red!6,colframe=diverge,colbacktitle=diverge},
+  warnbox/.style={base,colback=violet!6,colframe=warn,colbacktitle=warn}
+}
+
+\section*{Zusammenfassung}
+
+Dok.\ 313 (Kap.\ G) legte den thermodynamischen Rahmen der Hawking-Strahlung
+in FFGFT: eine KMS-Regel temperiert Unruh, Gibbons–Hawking und Schwarze
+Löcher gemeinsam \K, das Membranbild erhält sein Thermometer \S, die
+Familienleiter trifft den Kosmos bei $\rs = R_H/2$ \S.
+Offen blieb der \emph{mikroskopische Emissionsmechanismus}:
+welche Moden entkommen, was das Quant trägt, warum Massives zurückfällt.
+Dieses Dokument arbeitet ihn aus FFGFT-eigenen Bausteinen vollständig aus:
+
+\begin{enumerate}
+  \item \textbf{Temperatur}: Die KMS-Regel $T = \hbar/(k_B\tau)$ mit der
+    Membran-Periode $\tau = 8\pi GM/c^3$ folgt aus $\Tmass\cdot m = 1$
+    (Uhrenstauchung an der Membran, Dok.\ 313 G.2). \K
+  \item \textbf{Quant}: Das Hawking-Quant ist das Bit der Skala $4\pi\rs$:
+    $k_B\TH = \hbar c/(4\pi\rs)$ exakt — die systemabhängige Bit-Energie
+    $\Ebit = \hbar c/L$ (Dok.\ 257) ausgewertet an der Horizontskala.
+    Ein universeller Bitwert wird nirgends benötigt. \K
+  \item \textbf{Selektion}: Emittierbar sind nur Trialitäts-0-Moden
+    ($T_R = 0$). Confinement (Dok.\ 321) und Hawking-Selektion sind
+    \emph{ein} Prinzip; die Absorption des Partnerquants ist die
+    $\mathbb{Z}_3$-Projektor-Orthogonalität $P_jP_k = 0$. \B
+  \item \textbf{Träger}: Der masselose Träger ist die $n_4 = 0$-Torusmode
+    (räumliche Windung ohne Massenkreis-Windung). Massive Moden
+    ($n_4 \neq 0$) haben endliches $\Tmass$ und fallen zurück. \K
+  \item \textbf{Information}: Das emittierte Quant trägt das Sektorpaar
+    $(k, -k)$ als orthogonal lesbare Quantenzahl ($\log_2 3$ Bit) —
+    plus die thermische 1-nat-Flächenbuchung. Feinkörnige Entropie bleibt
+    konstant (Unitarität, Dok.\ 322). Kein Informationsparadoxon. \K
+\end{enumerate}
+
+Zwei Prüfskripte, alle Assertions bestanden:
+\texttt{325\_hawking\_ffgft\_mechanismus.py} (thermodynamische Kette),
+\texttt{325\_hawking\_z3\_selektion.py} ($\mathbb{Z}_3$-Algebra).
+
+
+
+% ============================================================
+\section{Ausgangslage: was Dok.\ 313 offen ließ}
+
+Dok.\ 313 Kap.\ G etablierte drei Resultate: (a) die eine KMS-Regel
+$T = \hbar/(k_B\tau)$ für Unruh, Gibbons–Hawking und Schwarze Löcher \K;
+(b) das Membran-Thermometer aus $\Tmass\cdot m = 1$ \S; (c) die
+Familienleiter bis zum Kosmos ($\rs = R_H/2$ exakt) \S. Ebenso die
+Grenze: Verdampfung ist für stellare und supermassive Löcher 56 bzw.\ 83
+Größenordnungen zu langsam für den Zeitzyklus — Hawking verschärft die
+grobkörnige Entropiefrage D(ii), löst sie nicht \K.
+
+Was fehlte, war die \emph{Mikrostruktur} der Emission:
+\begin{itemize}
+  \item Welche Moden des $T^4/\mathbb{Z}_3$-Spektrums können den
+    Horizont verlassen — und welches Prinzip selektiert sie?
+  \item Was ist das emittierte Quant, und in welcher Beziehung steht
+    seine Energie zur Informationseinheit des Rahmens (Dok.\ 257)?
+  \item Warum fallen massive Quanten zurück — als Folge der Geometrie,
+    nicht als Zusatzannahme?
+  \item Wie ist die Informationserhaltung mikroskopisch realisiert?
+\end{itemize}
+Diese vier Fragen werden hier beantwortet — jede aus einem bereits
+etablierten FFGFT-Baustein: $\Tmass\cdot m = 1$ (Dok.\ 077, 180),
+systemabhängige Bit-Energie (Dok.\ 257, 302, A271–A273),
+$\mathbb{Z}_3$-Trialität (Dok.\ 321), Unitarität des Spektraloperators
+(Dok.\ 322).
+
+% ============================================================
+\section{Baustein 1: Die KMS-Temperatur aus \texorpdfstring{$\Tmass\cdot m = 1$}{T*m=1}}
+
+Wo die lokale Zeitstruktur periodisch ist mit Periode $\tau$,
+liest ein Beobachter Temperatur ab:
+\begin{equation}
+  T = \frac{\hbar}{k_B\,\tau}
+  \label{eq:kms}
+\end{equation}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+  \toprule
+  System & Periode $\tau$ & $T = \hbar/(k_B\tau)$ \\
+  \midrule
+  Kosmos (kompakte Zeit) & $2\pi/H_0 = \num{2.9e18}$ s & $\num{2.66e-30}$ K \\
+  Schwarzes Loch ($M_\odot$) & $8\pi GM/c^3 = \num{1.24e-4}$ s & $\num{6.17e-8}$ K \\
+  Unruh ($a = g$) & $2\pi c/a = \num{1.9e8}$ s & $\num{3.98e-20}$ K \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+Die Membran-Periode $\tau = 8\pi GM/c^3$ ist keine Zusatzannahme,
+sondern folgt aus der Zeit-Masse-Dualität: die Masse staucht die
+Zeitstruktur ($\Tmass\cdot m = 1$ — je näher der Membran, desto langsamer
+die Uhren), und an der Membran wird die lokale Zeitstruktur periodisch
+mit genau dieser Periode (Dok.\ 313 G.2). \K
+
+Damit ist die Temperatur nicht das Ergebnis einer Bogoliubov-Rechnung
+auf gekrümmtem Hintergrund, sondern eine Ableseregel der
+Uhrenlandkarte — dieselbe Regel für alle drei Systeme.
+
+% ============================================================
+\section{Baustein 2: Das Hawking-Quant als systemabhängiges Bit}
+
+Der zentrale neue Befund dieses Dokuments. Die systemabhängige
+Bit-Energie der FFGFT (Dok.\ 257) lautet $\Ebit(L) = \hbar c/L$.
+Ausgewertet an der Horizontskala:
+
+\begin{tcolorbox}[ffgftbox, title={Kernresultat \K}]
+  \begin{equation}
+    k_B \TH \;=\; \frac{\hbar c}{4\pi \rs}
+    \;=\; \Ebit\!\left(L = 4\pi\rs\right)
+  \end{equation}
+  Das thermische Hawking-Quant \emph{ist} das Bit der Skala
+  $L = 4\pi\rs$ (doppelter Horizontumfang).
+  Numerisch exakt (Skript 1): $\hbar c/(k_B\TH) = 4\pi\rs$ auf
+  Maschinengenauigkeit.
+\end{tcolorbox}
+
+Die Systemabhängigkeit der Bitwerte (Dok.\ 257, 302, A271–A273)
+ist damit kein Hindernis für die Hawking-Physik, sondern
+\emph{ihre Erklärung}: die Hawking-Temperatur ist die Bit-Temperatur
+der Horizontskala. Ein universeller Bitwert — etwa eine feste
+Bit-Masse aus einer Landauer-Auswertung bei Planck-Temperatur —
+wird an keiner Stelle benötigt; jedes System trägt seine eigene
+Bit-Energie, und die des Schwarzen Lochs an seinem Horizont ist
+exakt $k_B\TH$.
+
+\subsection{Flächenbilanz}
+
+Emission eines Quants der Energie $k_B\TH$ trägt nach Clausius
+genau $\dd S = E/(T\cdot k_B) = 1$ nat, also
+\begin{equation}
+  \dd A = -4\lP^2 \quad\text{pro nat}
+\end{equation}
+(Skript 1). Der Flächenverlust pro Emission folgt damit aus
+Bekenstein $+$ Clausius allein — ohne weitere geometrische Annahmen. \B
+
+% ============================================================
+\section{Baustein 3: \texorpdfstring{$\mathbb{Z}_3$}{Z3}-Trialitätsselektion}
+
+Der algebraische Kern des Mechanismus. Der Horizont trägt die
+$\mathbb{Z}_3$-Orbifold-Struktur von $T^4/\mathbb{Z}_3$ (Dok.\ 321, 322).
+Die drei $\mathbb{Z}_3$-Projektoren
+\begin{equation}
+  P_k = \frac{1}{3}\sum_{j=0}^{2}\omega^{-jk}\,\tau^j,
+  \qquad \omega = e^{2\pi i/3}
+\end{equation}
+sind vollständig, idempotent und orthogonal (Skript 2):
+\begin{equation}
+  P_0 + P_1 + P_2 = \mathbb{1},\qquad
+  P_j P_k = \delta_{jk}P_j.
+\end{equation}
+
+\begin{tcolorbox}[ffgftbox, title={Die Absorption \B}]
+  Das einfallende Partnerquant löscht das Horizont-Voxel genau dann,
+  wenn es im orthogonalen $\mathbb{Z}_3$-Sektor liegt:
+  \begin{equation}
+    P_j\,\bigl(P_k\,\psi\bigr) = 0 \quad (j \neq k)
+  \end{equation}
+  — exakt, kein Tunneln (Skript 2: $\|P_2(P_1\psi)\| < 10^{-15}$).
+  Die Paarerzeugung an der Membran trennt ein $(k,-k)$-Sektorpaar;
+  der einwärts fallende Partner wird durch die Projektor-Orthogonalität
+  absorbiert, der auswärts laufende entkommt, sofern er die
+  Trialitätsbedingung erfüllt.
+\end{tcolorbox}
+
+\subsection{Wer entkommt: \texorpdfstring{$T_R = 0$}{TR=0}}
+
+Die Trialität einer Mode ist ihre $\mathbb{Z}_3$-Ladung $k$.
+Emittierbar (asymptotisch frei) sind nur Kombinationen mit
+$T_R = \sum k_i \equiv 0 \pmod 3$:
+
+\begin{center}
+\small
+\begin{tabular}{@{}lcc@{}}
+  \toprule
+  Kombination & $T_R$ & emittierbar \\
+  \midrule
+  Einzelmode $k=0$ (Photon-Analogon) & 0 & ja \\
+  Einzelmode $k=1$ (Quark) & 1 & nein \\
+  Bilinear $(1,2)$ (Meson) & 0 & ja \\
+  Bilinear $(1,1)$ & 2 & nein \\
+  Trilinear $(1,1,1)$ (Baryon) & 0 & ja \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\begin{tcolorbox}[ffgftbox, title={Confinement $=$ Hawking-Selektion \B}]
+  Dok.\ 321 identifizierte Confinement als Trialitätsselektion $T_R = 0$.
+  Dasselbe Prinzip wirkt am Horizont: nur farblose Objekte entkommen.
+  Confinement und Hawking-Selektion sind \emph{ein} Prinzip
+  der $\mathbb{Z}_3$-Struktur — nicht zwei.
+  Die $\mathbb{Z}_3$-Ladung ist bei jeder Emission exakt erhalten
+  (Skript 2).
+\end{tcolorbox}
+
+% ============================================================
+\section{Baustein 4: Der masselose Träger}
+
+Auf $T^4 = T^3_{\mathrm{Raum}}\times S^1_m$ trägt die Masse einer Mode
+die Windung $n_4$ auf dem Massenkreis ($\Tmass\cdot m = 1$).
+Der emittierbare Träger ist die Mode mit
+\begin{equation}
+  n_4 = 0:\qquad \text{räumliche Windung ohne Massenwindung.}
+\end{equation}
+Ein massives Quant ($n_4 \neq 0$) hat endliches $\Tmass$; in der
+gestauchten Uhrenlandkarte an der Membran (Dok.\ 313 G.2) fällt es
+zurück — als Folge der Geometrie, nicht als Zusatzannahme.
+Bei $|n_i| \leq 1$ existieren $3^3 - 1 = 26$ masselose
+Nachbarmoden gegen $54$ massive (Skript 2). \K
+
+Das Hawking-Spektrum besteht damit aus $n_4 = 0$-Moden mit $T_R = 0$:
+masselos, farblos, thermisch bei $\TH$ — die photonartigen Freiheitsgrade
+des Torus.
+
+% ============================================================
+\section{Baustein 5: Informationserhaltung}
+
+\subsection{Was das Quant trägt}
+
+Das emittierte $T_R = 0$-Quant trägt das \emph{Sektorpaar} $(k, -k)$
+als innere Quantenzahl. Die drei möglichen Paarzustände sind exakt
+orthogonal (Gram-Matrix $= \mathbb{1}_3$, Skript 2) — welcher Sektor
+entnommen wurde, ist am Quant lesbar:
+$\log_2 3 \approx 1{,}585$ Bit Sektorinformation pro Quant,
+zusätzlich zur thermischen 1-nat-Flächenbuchung.
+
+\subsection{Feinkörnige Konstanz}
+
+Dok.\ 313 G.5 formulierte es als \enquote{zwei Sprachen, eine Aussage}:
+lokal korreliert die Strahlung mit der fraktalen Membranstruktur
+($S_{\mathrm{BH}}(M_\odot) = \num{1.05e77}\,k_B$ an Korrelationen —
+nichts geht verloren); global ist die feinkörnige Entropie unter
+unitärer Evolution konstant (Unitarität des Spektraloperators,
+Dok.\ 322 \K). Kein Informationsparadoxon: die Membran ist ein
+Uhrenlandkarten-Objekt, kein kausaler Abgrund.
+
+% ============================================================
+\section{Die FFGFT-Korrektur und ihre Grenzen}
+
+Dok.\ 313 gibt die fraktale Korrektur der Hawking-Leistung:
+\begin{equation}
+  P = P_{\mathrm{std}}\,\bigl(1 - \xi\ln(M/\mP)\bigr),
+\end{equation}
+numerisch 0{,}60\,\% (PBH $10^{12}$ kg) bis 1{,}44\,\% (SMBH $10^9\,M_\odot$)
+— Skript 1. Sie ändert an den Verdampfungsbefunden nichts:
+nur primordiale Löcher unterhalb
+\begin{equation}
+  M_* = \left(\frac{\tau_c\,\hbar\,c^4}{5120\,\pi\,G^2}\right)^{1/3}
+      = \num{3.3e11}\ \mathrm{kg}
+\end{equation}
+schließen via Hawking innerhalb eines Zeitzyklus $\tau_c = 91{,}9$ Gyr.
+Die Sonne ist 56, ein SMBH 83 Größenordnungen zu langsam
+(Skript 1) — Hawking verschärft die grobkörnige Entropiefrage
+D(ii), löst sie nicht (Dok.\ 313 G.4). \K
+
+Die Familienleiter läuft dabei bruchlos bis zum Kosmos:
+$\TH = T_{\mathrm{GH}}$ verlangt $M = c^3/(4GH_0) = \num{4.66e52}$ kg
+mit $\rs = R_H/2$ exakt (Skript 1). \K
+
+\begin{tcolorbox}[warnbox, title={Einordnung des Bit-Befunds}]
+  $k_B\TH = \Ebit(4\pi\rs)$ zeigt: die Hawking-Physik lässt sich
+  vollständig mit der systemabhängigen Bit-Energie formulieren.
+  Jede Konstruktion, die stattdessen einen universellen Bitwert
+  ansetzt (etwa eine feste Bit-Masse aus $k_B T\ln 2$ bei einer
+  privilegierten Temperatur), fügt eine Parametrisierung hinzu,
+  die für die Temperaturphysik nicht benötigt wird — konsistent
+  mit A271–A273: Landauers Schranke ist eine Aussage über
+  Träger-Operationen, nicht über abstrakte Information.
+\end{tcolorbox}
+
+% ============================================================
+\section{Statusübersicht}
+
+\begin{center}
+\begin{tabular}{@{}lc@{}}
+  \toprule
+  \textbf{Element} & \textbf{Status} \\
+  \midrule
+  KMS-Regel temperiert Unruh/GH/BH gemeinsam & \K\ (Dok.\ 313) \\
+  Membran-Periode aus $\Tmass\cdot m = 1$ & \K \\
+  $k_B\TH = \Ebit(4\pi\rs)$ — Quant $=$ Horizont-Bit & \K\ (neu) \\
+  Flächenquant $-4\lP^2$/nat aus Bekenstein$+$Clausius & \B\ (neu) \\
+  $\mathbb{Z}_3$-Absorption $P_jP_k = 0$ & \B\ (neu) \\
+  $T_R=0$-Selektion; Confinement $=$ Hawking-Selektion & \B\ (neu) \\
+  Träger $= n_4$-freie Torusmode & \K\ (neu) \\
+  Sektorinfo $\log_2 3$ Bit orthogonal lesbar & \B\ (neu) \\
+  Informationserhalt (Membran $+$ Unitarität) & \K\ (313/322) \\
+  FFGFT-Leistungskorrektur 0{,}6–1{,}4\,\% & \K\ (313) \\
+  Graukörper-Faktoren, Modenspektrum-Detail & \S\ (offen) \\
+  Rückreaktion auf Orbifold-Fixpunkte & \S\ (offen) \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+Der Hawking-Mechanismus steht damit in FFGFT auf \K/\B; offen bleiben
+allein die Graukörper-Faktoren (Standard-QFT-Rechnung auf FFGFT-Hintergrund)
+und die Rückreaktion der Emission auf die Orbifold-Fixpunktstruktur.
+
+\section*{Prüfskripte}
+
+\begin{itemize}
+  \item \texttt{python/Dok325\_Skripte/325\_hawking\_ffgft\_mechanismus.py} —
+    thermodynamische Kette: KMS, Membran-Thermometer, Horizont-Bit,
+    Flächenbilanz, Korrektur, Verdampfung, Familienleiter,
+    Informationsseite.
+  \item \texttt{python/Dok325\_Skripte/325\_hawking\_z3\_selektion.py} —
+    $\mathbb{Z}_3$-Algebra: Projektoren, Absorption, Trialitätsselektion,
+    Ladungserhaltung, Sektorinformation, Masselosigkeit.
+\end{itemize}
+
+\section*{Literatur}
+
+\begin{enumerate}
+  \item J.\ Pascher, Dok.\ 313 \textit{Kein Anfang}, Kap.\ G (Hawking auf dem Zeitzyklus), FFGFT-Korpus, 2026.
+  \item J.\ Pascher, Dok.\ 321 \textit{SU(3)$_c$ aus $\mathbb{Z}_3$-Trialität}, FFGFT-Korpus, 2026.
+  \item J.\ Pascher, Dok.\ 322 \textit{Spektraltheorie und Hilbertraum-Einbettung}, FFGFT-Korpus, 2026.
+  \item J.\ Pascher, Dok.\ 257, 302, A271–A273 (Bit-Energie, Landauer), FFGFT-Korpus.
+  \item J.\ Pascher, Dok.\ 180 \textit{Derivation of $L_0$}, FFGFT-Korpus, 2026.
+  \item S.\ W.\ Hawking, Commun.\ Math.\ Phys.\ \textbf{43}, 199, 1975.
+  \item J.\ Bekenstein, Phys.\ Rev.\ D \textbf{7}, 2333, 1973.
+  \item W.\ G.\ Unruh, Phys.\ Rev.\ D \textbf{14}, 870, 1976.
+\end{enumerate}
+
+\vspace{6pt}\noindent\small
+\textcopyright\ 2026 Johann Pascher · \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}

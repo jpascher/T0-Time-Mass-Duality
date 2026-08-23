@@ -2988,3 +2988,86 @@ Prüfskript: `python/Dok320_321_322_Skripte/323_verify.py`
 - 2-loop $\alpha_s$ [S]
 - $m_{\rm Pl}$, $\alpha_{\rm em}$ aus $\xi$ [S]
 - Quark-Sektor / Hadronen (Dok. 318)
+
+---
+
+### Dok. 324 — G(6,ℤ₃C)-Vakuumstruktur und FFGFT: Numerische Untersuchung (23. August 2026, DE+EN, je 8 S.)
+
+Vergleich von Matzkes G(6,ℤ₃C)-Vakuumstruktur mit der FFGFT-Spektraltheorie. Untersucht die Verbindungsfrage: Ist ξ = 4/30000 der kleinste Spektralwert des Vakuumoperators V in G(6)?
+
+**Hauptresultate:**
+
+- **Trine-Theorem [B]:** $T_k^3 = 1$ in 8-dim. Spinordarstellung numerisch verifiziert ($\delta < 6{,}5\times10^{-16}$).
+- **Vakuumoperator V [B]:** $V = PP_1\cdot PP_2\cdot PP_3$ ist Rang-1-Projektor mit Spektrum $\{0^{(7)}, 1^{(1)}\}$, $V^2 = V$, $\mathrm{Spur}(V) = 1$.
+- **ξ kein Spektralwert [K]:** ξ ist kein Eigenwert irgendeines G(6)-Operators — abgeschlossener negativer Befund (R84).
+- **Casimir-Herleitung von ξ [K]:**
+$$\xi = \frac{C_2(SU(3)_{\rm fund})}{N_{\rm Fourier}} = \frac{4/3}{10^4} = \frac{4}{30000}$$
+  $C_2 = (N_c^2-1)/(2N_c) = 4/3$ aus $N_c=3$ [B] (Dok. 321); $N_{\rm Fourier} = 10^4$ aus $T^4$-Topologie. Verbindung zu Dok. 009: physikalischer Casimir-Effekt und algebraischer Casimir-Operator liefern unabhängig denselben Faktor 4/3 → ξ.
+- **Trine-Produkt [B]:** $(T_1 T_2 T_3)^3 = I$, Spektrum $\{1^{(2)}, \omega^{(3)}, \omega^{2(3)}\}$ — globaler ℤ₃-Operator.
+
+**Status nach Dok. 324:**
+
+| Frage | Ergebnis |
+|-------|----------|
+| ξ als Spektralwert von V? | [K] Nein — R84 abgeschlossen |
+| Trine-Theorem | [B] Verifiziert |
+| Casimir-Verbindung ξ = C₂/N_F | [K] Algebraisch hergeleitet |
+| SU(2)_L × U(1)_Y in G(6,ℤ₃C) | [S] G(6)-internes Problem, kein FFGFT-Problem |
+
+**Referenz:** D. Matzke, *How the Vacuum Builds Space: Nilpotents, Quaternions, and the Planck Voxel*, ANPA 2026; D. Matzke, *Black Holes from Hyperbits*, IPI 2026.
+
+Prüfskript: `python/Dok320_321_322_Skripte/324_G6_FFGFT_verify.py` (16 Assertions, alle OK)  
+→ [DE](2/pdf/324_G6_Z3C_FFGFT_Vergleich_De.pdf) · [EN](2/pdf/324_G6_Z3C_FFGFT_Vergleich_En.pdf)
+
+---
+
+### R84 in Dok. 190 (23. August 2026)
+
+**R84** — ξ = C₂(SU(3)_fund)/N_Fourier = (4/3)/10⁴ = 4/30000 [K] (Dok. 324). ξ ist kein Spektralwert eines G(6)-Operators; die Verbindung zwischen G(6,ℤ₃C) und FFGFT liegt im Casimir-Quotienten, nicht im Spektrum.
+
+---
+
+### Dok. 325 — Der FFGFT-Hawking-Mechanismus (23. August 2026, DE+EN, je 7 S.)
+
+Vollständige Ausarbeitung des Hawking-Mechanismus aus FFGFT-eigenen Bausteinen — Schließung der in Dok. 313 Kap. G offen gebliebenen Mikrostruktur der Emission. Matzke-frei; verwendet ausschließlich T̃·m=1 (Dok. 077/180), systemabhängige Bit-Energie (Dok. 257/302, A271–A273), ℤ₃-Trialität (Dok. 321) und Unitarität (Dok. 322).
+
+**Die fünf Bausteine:**
+
+- **Temperatur [K]:** KMS-Regel $T = \hbar/(k_B\tau)$ mit Membran-Periode $\tau = 8\pi GM/c^3$ aus T̃·m=1 — ein Prinzip für Unruh, Gibbons-Hawking und Schwarze Löcher (Dok. 313 G).
+- **Quant [K] (neu):** $k_B T_H = \hbar c/(4\pi r_s) = E_{\rm bit}(L = 4\pi r_s)$ exakt — das Hawking-Quant ist das systemabhängige Bit der Horizontskala. Ein universeller Bitwert wird nirgends benötigt.
+- **Selektion [B]:** Nur Trialitäts-0-Moden ($T_R = 0$) entkommen; Absorption des Partnerquants = ℤ₃-Projektor-Orthogonalität $P_jP_k = 0$ (exakt, kein Tunneln). Confinement (Dok. 321) und Hawking-Selektion sind ein Prinzip.
+- **Träger [K]:** Masseloser Träger = $n_4{=}0$-Torusmode (räumliche Windung ohne Massenkreis-Windung); massive Moden fallen zurück (Uhrenstauchung, Dok. 313 G.2).
+- **Information [K]/[B]:** Sektorpaar $(k,-k)$ orthogonal lesbar (log₂3 ≈ 1,585 Bit/Quant) plus thermische 1-nat-Flächenbuchung ($-4\ell_P^2$/nat aus Bekenstein+Clausius); feinkörnige Entropie konstant (Unitarität, Dok. 322). Kein Informationsparadoxon.
+
+Zusätzlich verifiziert: FFGFT-Leistungskorrektur $(1-\xi\ln(M/m_P))$ = 0,6–1,4 %; $M_* = 3{,}3\times10^{11}$ kg; Familienleiter $r_s = R_H/2$ exakt bei $M = 4{,}66\times10^{52}$ kg.
+
+**Offen [S]:** Graukörper-Faktoren; Rückreaktion auf Orbifold-Fixpunkte.
+
+Prüfskripte: `python/Dok325_Skripte/325_hawking_ffgft_mechanismus.py` (18 Assertions), `325_hawking_z3_selektion.py` (20 Assertions) — alle OK.  
+→ [DE](2/pdf/325_Hawking_FFGFT_De.pdf) · [EN](2/pdf/325_Hawking_FFGFT_En.pdf)
+
+---
+
+### Dok. 326 — Schwarze Löcher aus Hyperbits und aus FFGFT (23. August 2026, DE+EN, je 10 S.)
+
+Vergleich von Matzkes Hyperbit-Framework („Black Holes from Hyperbits", IPI 2026) mit FFGFT — Schwerpunkt: Landauer-Prinzip, Bitwerte und systemabhängige Bit-Energie. Trägt alle Matzke-Bezüge; zitiert Dok. 325 als bestehendes [K]/[B]-Resultat.
+
+**Kernbefund:** Der tiefste Unterschied beider Frameworks ist die Bitwert-Grundlegung — universell (Matzke: $m_{\rm bit} = m_P\ln 2/(2\pi)$ aus Landauer bei $T_P$) vs. systemabhängig (FFGFT: $E_{\rm bit} = \hbar c/L$, Dok. 257).
+
+**Drei FFGFT-Einwände gegen die Landauer-Brücke** (aus A271–A273, Dok. 302):
+1. Landauer gilt für Träger-Operationen an einem thermischen Ensemble, nicht für abstrakte Information.
+2. Die Bit-Energie ist skalenspezifisch; $k_BT\ln2$ ist der Spezialfall einer Skala und Badtemperatur.
+3. Matzkes Stabilitätsschwelle $n_{\rm thresh} = 6{,}41$ hängt an der Setzung $T = T_P$ — bei systemabhängiger Bit-Energie wäre sie systemabhängig [X als universelle Zahl].
+
+**Konvergenzen [B]:** Fermion-Generation = algebraische Grundeinheit ($\rm Cl(6)$ = 3 Witt-Paare ↔ ℤ₃-Orbifold-Sektoren); $N_c = 3$ erzwungen; $r_s$ ohne ART; Ablehnung 3D→2D-Holographie; beide Hawking-Mechanismen strukturell exakt korrespondierend ($P_k^+\cdot V_s = 0$ ↔ $P_jP_k = 0$; masseloses $V$ ↔ $n_4{=}0$-Mode; Voxel-Orientierung ↔ Sektorpaar).
+
+**Numerisch:** $T_H$(Matzke-Route)/$T_H$(KMS) = 1,000000 — Matzkes universeller Bitwert ist eine Umparametrisierung der KMS-Relation, keine unabhängige physikalische Eingabe (Dok. 325).
+
+Prüfskript: `python/Dok326_Skripte/326_Matzke_FFGFT_verify.py` (15 Assertions, alle OK)  
+→ [DE](2/pdf/326_Matzke_FFGFT_Vergleich_De.pdf) · [EN](2/pdf/326_Matzke_FFGFT_Vergleich_En.pdf)
+
+---
+
+### R85 in Dok. 190 (23. August 2026)
+
+**R85** — Hawking-Mechanismus mikroskopisch geschlossen [K]/[B] (Dok. 325). Die in Dok. 313 Kap. G als [S] geführte Emissionsseite (Membran-Thermometer, Selektion, Träger, Informationskodierung) ist durch Dok. 325 auf [K]/[B] gehoben: $k_BT_H = E_{\rm bit}(4\pi r_s)$ [K]; ℤ₃-Selektion $T_R = 0$ mit $P_jP_k = 0$ [B]; Träger $n_4{=}0$ [K]; Sektorpaar-Kodierung [B]. Offen bleiben Graukörper-Faktoren und Fixpunkt-Rückreaktion [S].

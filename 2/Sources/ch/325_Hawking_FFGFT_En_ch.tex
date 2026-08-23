@@ -1,0 +1,350 @@
+% 325_Hawking_FFGFT_En_ch.tex
+% Doc. 325, FFGFT corpus, August 2026 — chapter file
+% Included by Sources/wr_standalone_A4/325_Hawking_FFGFT_En.tex
+
+% --- Document-local macros (collision-safe) ---
+\providecommand{\K}{}\renewcommand{\K}{\textbf{[K]}}
+\providecommand{\B}{}\renewcommand{\B}{\textbf{[B]}}
+\renewcommand{\S}{\textbf{[S]}}
+\providecommand{\Q}{}\renewcommand{\Q}{\textbf{[Q]}}
+\providecommand{\X}{}\renewcommand{\X}{\textbf{[X]}}
+\providecommand{\SETZ}{}\renewcommand{\SETZ}{\textbf{[POSTULATE]}}
+\providecommand{\lP}{}\renewcommand{\lP}{\ell_{\mathrm{P}}}
+\providecommand{\mP}{}\renewcommand{\mP}{m_{\mathrm{P}}}
+\providecommand{\TP}{}\renewcommand{\TP}{T_{\mathrm{P}}}
+\renewcommand{\TH}{T_{\mathrm{H}}}
+\providecommand{\rs}{}\renewcommand{\rs}{r_{\mathrm{s}}}
+\providecommand{\SBH}{}\renewcommand{\SBH}{S_{\mathrm{BH}}}
+\providecommand{\Tmass}{}\renewcommand{\Tmass}{\widetilde{T}}
+\providecommand{\Ebit}{}\renewcommand{\Ebit}{E_{\mathrm{bit}}}
+% --- Colour boxes ---
+\definecolor{ffgftblue}{RGB}{30,90,160}
+\definecolor{warn}{RGB}{100,0,120}
+\tcbset{
+  base/.style={breakable,enhanced,boxrule=0.6pt,arc=3pt,
+    fonttitle=\bfseries\small,coltitle=white,top=4pt,bottom=4pt,left=6pt,right=6pt},
+  ffgftbox/.style={base,colback=blue!5,colframe=ffgftblue,colbacktitle=ffgftblue},
+  warnbox/.style={base,colback=violet!6,colframe=warn,colbacktitle=warn}
+}
+
+\section*{Abstract}
+
+Doc.\ 313 (Ch.\ G) established the thermodynamic frame of Hawking
+radiation in FFGFT: a single KMS rule tempers Unruh, Gibbons--Hawking
+and black holes jointly \K, the membrane picture receives its
+thermometer \S, and the family ladder reaches the cosmos at
+$\rs = R_H/2$ \S. What remained open was the \emph{microscopic
+emission mechanism}: which modes escape, what the quantum carries,
+why massive quanta fall back. This document works it out completely
+from FFGFT-native building blocks:
+
+\begin{enumerate}
+  \item \textbf{Temperature}: The KMS rule $T = \hbar/(k_B\tau)$ with
+    membrane period $\tau = 8\pi GM/c^3$ follows from $\Tmass\cdot m = 1$
+    (clock compression at the membrane, Doc.\ 313 G.2). \K
+  \item \textbf{Quantum}: The Hawking quantum is the bit of scale $4\pi\rs$:
+    $k_B\TH = \hbar c/(4\pi\rs)$ exactly — the system-dependent bit energy
+    $\Ebit = \hbar c/L$ (Doc.\ 257) evaluated at the horizon scale.
+    No universal bit value is needed anywhere. \K
+  \item \textbf{Selection}: Only triality-0 modes ($T_R = 0$) can be
+    emitted. Confinement (Doc.\ 321) and Hawking selection are
+    \emph{one} principle; absorption of the partner quantum is the
+    $\mathbb{Z}_3$ projector orthogonality $P_jP_k = 0$. \B
+  \item \textbf{Carrier}: The massless carrier is the $n_4 = 0$ torus mode
+    (spatial winding without mass-circle winding). Massive modes
+    ($n_4 \neq 0$) have finite $\Tmass$ and fall back. \K
+  \item \textbf{Information}: The emitted quantum carries the sector pair
+    $(k, -k)$ as an orthogonally readable quantum number ($\log_2 3$ bits) —
+    plus the thermal 1-nat area bookkeeping. Fine-grained entropy remains
+    constant (unitarity, Doc.\ 322). No information paradox. \K
+\end{enumerate}
+
+Two verification scripts, all assertions passed:
+\texttt{325\_hawking\_ffgft\_mechanismus.py} (thermodynamic chain),
+\texttt{325\_hawking\_z3\_selektion.py} ($\mathbb{Z}_3$ algebra).
+
+% ============================================================
+\section{Starting point: what Doc.\ 313 left open}
+
+Doc.\ 313 Ch.\ G established three results: (a) the single KMS rule
+$T = \hbar/(k_B\tau)$ for Unruh, Gibbons--Hawking and black holes \K;
+(b) the membrane thermometer from $\Tmass\cdot m = 1$ \S; (c) the
+family ladder up to the cosmos ($\rs = R_H/2$ exactly) \S. Likewise
+the limit: evaporation is 56 (stellar) resp.\ 83 (supermassive) orders
+of magnitude too slow for the time cycle — Hawking sharpens the
+coarse-grained entropy question D(ii), it does not solve it \K.
+
+What was missing was the \emph{microstructure} of emission:
+\begin{itemize}
+  \item Which modes of the $T^4/\mathbb{Z}_3$ spectrum can leave the
+    horizon — and which principle selects them?
+  \item What is the emitted quantum, and how is its energy related to
+    the information unit of the framework (Doc.\ 257)?
+  \item Why do massive quanta fall back — as a consequence of the
+    geometry, not as an extra assumption?
+  \item How is information conservation realized microscopically?
+\end{itemize}
+These four questions are answered here — each from an already
+established FFGFT building block: $\Tmass\cdot m = 1$ (Docs.\ 077, 180),
+system-dependent bit energy (Docs.\ 257, 302, A271--A273),
+$\mathbb{Z}_3$ triality (Doc.\ 321), unitarity of the spectral operator
+(Doc.\ 322).
+
+% ============================================================
+\section{Building block 1: the KMS temperature from \texorpdfstring{$\Tmass\cdot m = 1$}{T*m=1}}
+
+Wherever the local time structure is periodic with period $\tau$,
+an observer reads off temperature:
+\begin{equation}
+  T = \frac{\hbar}{k_B\,\tau}
+  \label{eq:kms}
+\end{equation}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+  \toprule
+  System & Period $\tau$ & $T = \hbar/(k_B\tau)$ \\
+  \midrule
+  Cosmos (compact time) & $2\pi/H_0 = \num{2.9e18}$ s & $\num{2.66e-30}$ K \\
+  Black hole ($M_\odot$) & $8\pi GM/c^3 = \num{1.24e-4}$ s & $\num{6.17e-8}$ K \\
+  Unruh ($a = g$) & $2\pi c/a = \num{1.9e8}$ s & $\num{3.98e-20}$ K \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+The membrane period $\tau = 8\pi GM/c^3$ is not an extra assumption
+but follows from time-mass duality: mass compresses the time structure
+($\Tmass\cdot m = 1$ — the closer to the membrane, the slower the
+clocks), and at the membrane the local time structure becomes periodic
+with exactly this period (Doc.\ 313 G.2). \K
+
+The temperature is thus not the result of a Bogoliubov computation on
+a curved background, but a read-off rule of the clock map — the same
+rule for all three systems.
+
+% ============================================================
+\section{Building block 2: the Hawking quantum as a system-dependent bit}
+
+The central new result of this document. The system-dependent bit
+energy of FFGFT (Doc.\ 257) reads $\Ebit(L) = \hbar c/L$.
+Evaluated at the horizon scale:
+
+\begin{tcolorbox}[ffgftbox, title={Core result \K}]
+  \begin{equation}
+    k_B \TH \;=\; \frac{\hbar c}{4\pi \rs}
+    \;=\; \Ebit\!\left(L = 4\pi\rs\right)
+  \end{equation}
+  The thermal Hawking quantum \emph{is} the bit of scale
+  $L = 4\pi\rs$ (twice the horizon circumference).
+  Numerically exact (script 1): $\hbar c/(k_B\TH) = 4\pi\rs$ to
+  machine precision.
+\end{tcolorbox}
+
+The system dependence of bit values (Docs.\ 257, 302, A271--A273)
+is therefore no obstacle to Hawking physics but \emph{its explanation}:
+the Hawking temperature is the bit temperature of the horizon scale.
+A universal bit value — say, a fixed bit mass from a Landauer
+evaluation at the Planck temperature — is needed nowhere; every system
+carries its own bit energy, and that of the black hole at its horizon
+is exactly $k_B\TH$.
+
+\subsection{Area bookkeeping}
+
+Emission of a quantum of energy $k_B\TH$ carries, by Clausius,
+exactly $\dd S = E/(T\cdot k_B) = 1$ nat, hence
+\begin{equation}
+  \dd A = -4\lP^2 \quad\text{per nat}
+\end{equation}
+(script 1). The area loss per emission thus follows from
+Bekenstein $+$ Clausius alone — no further geometric assumptions. \B
+
+% ============================================================
+\section{Building block 3: \texorpdfstring{$\mathbb{Z}_3$}{Z3} triality selection}
+
+The algebraic core of the mechanism. The horizon carries the
+$\mathbb{Z}_3$ orbifold structure of $T^4/\mathbb{Z}_3$ (Docs.\ 321, 322).
+The three $\mathbb{Z}_3$ projectors
+\begin{equation}
+  P_k = \frac{1}{3}\sum_{j=0}^{2}\omega^{-jk}\,\tau^j,
+  \qquad \omega = e^{2\pi i/3}
+\end{equation}
+are complete, idempotent and orthogonal (script 2):
+\begin{equation}
+  P_0 + P_1 + P_2 = \mathbb{1},\qquad
+  P_j P_k = \delta_{jk}P_j.
+\end{equation}
+
+\begin{tcolorbox}[ffgftbox, title={Absorption \B}]
+  The infalling partner quantum erases the horizon voxel exactly when
+  it lies in the orthogonal $\mathbb{Z}_3$ sector:
+  \begin{equation}
+    P_j\,\bigl(P_k\,\psi\bigr) = 0 \quad (j \neq k)
+  \end{equation}
+  — exact, no tunnelling (script 2: $\|P_2(P_1\psi)\| < 10^{-15}$).
+  Pair creation at the membrane separates a $(k,-k)$ sector pair;
+  the inward-falling partner is absorbed by projector orthogonality,
+  the outward-running one escapes provided it satisfies the triality
+  condition.
+\end{tcolorbox}
+
+\subsection{Who escapes: \texorpdfstring{$T_R = 0$}{TR=0}}
+
+The triality of a mode is its $\mathbb{Z}_3$ charge $k$.
+Emittable (asymptotically free) are only combinations with
+$T_R = \sum k_i \equiv 0 \pmod 3$:
+
+\begin{center}
+\small
+\begin{tabular}{@{}lcc@{}}
+  \toprule
+  Combination & $T_R$ & emittable \\
+  \midrule
+  Single mode $k=0$ (photon analogue) & 0 & yes \\
+  Single mode $k=1$ (quark) & 1 & no \\
+  Bilinear $(1,2)$ (meson) & 0 & yes \\
+  Bilinear $(1,1)$ & 2 & no \\
+  Trilinear $(1,1,1)$ (baryon) & 0 & yes \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\begin{tcolorbox}[ffgftbox, title={Confinement $=$ Hawking selection \B}]
+  Doc.\ 321 identified confinement as triality selection $T_R = 0$.
+  The same principle acts at the horizon: only colourless objects
+  escape. Confinement and Hawking selection are \emph{one} principle
+  of the $\mathbb{Z}_3$ structure — not two.
+  The $\mathbb{Z}_3$ charge is exactly conserved in every emission
+  (script 2).
+\end{tcolorbox}
+
+% ============================================================
+\section{Building block 4: the massless carrier}
+
+On $T^4 = T^3_{\mathrm{space}}\times S^1_m$ the mass of a mode is
+carried by the winding $n_4$ on the mass circle ($\Tmass\cdot m = 1$).
+The emittable carrier is the mode with
+\begin{equation}
+  n_4 = 0:\qquad \text{spatial winding without mass winding.}
+\end{equation}
+A massive quantum ($n_4 \neq 0$) has finite $\Tmass$; in the
+compressed clock map at the membrane (Doc.\ 313 G.2) it falls back —
+as a consequence of the geometry, not as an extra assumption.
+For $|n_i| \leq 1$ there are $3^3 - 1 = 26$ massless neighbouring
+modes against $54$ massive ones (script 2). \K
+
+The Hawking spectrum thus consists of $n_4 = 0$ modes with $T_R = 0$:
+massless, colourless, thermal at $\TH$ — the photon-like degrees of
+freedom of the torus.
+
+% ============================================================
+\section{Building block 5: information conservation}
+
+\subsection{What the quantum carries}
+
+The emitted $T_R = 0$ quantum carries the \emph{sector pair} $(k, -k)$
+as an internal quantum number. The three possible pair states are
+exactly orthogonal (Gram matrix $= \mathbb{1}_3$, script 2) — which
+sector was withdrawn is readable from the quantum:
+$\log_2 3 \approx 1.585$ bits of sector information per quantum,
+in addition to the thermal 1-nat area bookkeeping.
+
+\subsection{Fine-grained constancy}
+
+Doc.\ 313 G.5 phrased it as \enquote{two languages, one statement}:
+locally, the radiation is correlated with the fractal membrane
+structure ($S_{\mathrm{BH}}(M_\odot) = \num{1.05e77}\,k_B$ of
+correlations — nothing is lost); globally, fine-grained entropy is
+constant under unitary evolution (unitarity of the spectral operator,
+Doc.\ 322 \K). No information paradox: the membrane is a clock-map
+object, not a causal abyss.
+
+% ============================================================
+\section{The FFGFT correction and its limits}
+
+Doc.\ 313 gives the fractal correction of the Hawking power:
+\begin{equation}
+  P = P_{\mathrm{std}}\,\bigl(1 - \xi\ln(M/\mP)\bigr),
+\end{equation}
+numerically 0.60\,\% (PBH $10^{12}$ kg) to 1.44\,\% (SMBH $10^9\,M_\odot$)
+— script 1. It does not change the evaporation findings:
+only primordial holes below
+\begin{equation}
+  M_* = \left(\frac{\tau_c\,\hbar\,c^4}{5120\,\pi\,G^2}\right)^{1/3}
+      = \num{3.3e11}\ \mathrm{kg}
+\end{equation}
+close via Hawking within one time cycle $\tau_c = 91.9$ Gyr.
+The Sun is 56, an SMBH 83 orders of magnitude too slow
+(script 1) — Hawking sharpens the coarse-grained entropy question
+D(ii), it does not solve it (Doc.\ 313 G.4). \K
+
+The family ladder runs seamlessly up to the cosmos:
+$\TH = T_{\mathrm{GH}}$ requires $M = c^3/(4GH_0) = \num{4.66e52}$ kg
+with $\rs = R_H/2$ exactly (script 1). \K
+
+\begin{tcolorbox}[warnbox, title={Placement of the bit result}]
+  $k_B\TH = \Ebit(4\pi\rs)$ shows: Hawking physics can be formulated
+  entirely with the system-dependent bit energy. Any construction that
+  instead postulates a universal bit value (say, a fixed bit mass from
+  $k_B T\ln 2$ at a privileged temperature) adds a parametrization
+  that the temperature physics does not require — consistent with
+  A271--A273: Landauer's bound is a statement about carrier
+  operations, not about abstract information.
+\end{tcolorbox}
+
+% ============================================================
+\section{Status overview}
+
+\begin{center}
+\begin{tabular}{@{}lc@{}}
+  \toprule
+  \textbf{Element} & \textbf{Status} \\
+  \midrule
+  KMS rule tempers Unruh/GH/BH jointly & \K\ (Doc.\ 313) \\
+  Membrane period from $\Tmass\cdot m = 1$ & \K \\
+  $k_B\TH = \Ebit(4\pi\rs)$ — quantum $=$ horizon bit & \K\ (new) \\
+  Area quantum $-4\lP^2$/nat from Bekenstein$+$Clausius & \B\ (new) \\
+  $\mathbb{Z}_3$ absorption $P_jP_k = 0$ & \B\ (new) \\
+  $T_R=0$ selection; confinement $=$ Hawking selection & \B\ (new) \\
+  Carrier $=$ $n_4$-free torus mode & \K\ (new) \\
+  Sector info $\log_2 3$ bits orthogonally readable & \B\ (new) \\
+  Information conservation (membrane $+$ unitarity) & \K\ (313/322) \\
+  FFGFT power correction 0.6--1.4\,\% & \K\ (313) \\
+  Greybody factors, mode-spectrum detail & \S\ (open) \\
+  Back-reaction on orbifold fixed points & \S\ (open) \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+The Hawking mechanism in FFGFT thus stands at \K/\B; open remain only
+the greybody factors (standard QFT computation on the FFGFT background)
+and the back-reaction of the emission on the orbifold fixed-point
+structure.
+
+\section*{Verification scripts}
+
+\begin{itemize}
+  \item \texttt{python/Dok325\_Skripte/325\_hawking\_ffgft\_mechanismus.py} —
+    thermodynamic chain: KMS, membrane thermometer, horizon bit,
+    area bookkeeping, correction, evaporation, family ladder,
+    information side.
+  \item \texttt{python/Dok325\_Skripte/325\_hawking\_z3\_selektion.py} —
+    $\mathbb{Z}_3$ algebra: projectors, absorption, triality selection,
+    charge conservation, sector information, masslessness.
+\end{itemize}
+
+\section*{References}
+
+\begin{enumerate}
+  \item J.\ Pascher, Doc.\ 313 \textit{No Beginning}, Ch.\ G (Hawking on the time cycle), FFGFT corpus, 2026.
+  \item J.\ Pascher, Doc.\ 321 \textit{SU(3)$_c$ from $\mathbb{Z}_3$ triality}, FFGFT corpus, 2026.
+  \item J.\ Pascher, Doc.\ 322 \textit{Spectral theory and Hilbert-space embedding}, FFGFT corpus, 2026.
+  \item J.\ Pascher, Docs.\ 257, 302, A271--A273 (bit energy, Landauer), FFGFT corpus.
+  \item J.\ Pascher, Doc.\ 180 \textit{Derivation of $L_0$}, FFGFT corpus, 2026.
+  \item S.\ W.\ Hawking, Commun.\ Math.\ Phys.\ \textbf{43}, 199, 1975.
+  \item J.\ Bekenstein, Phys.\ Rev.\ D \textbf{7}, 2333, 1973.
+  \item W.\ G.\ Unruh, Phys.\ Rev.\ D \textbf{14}, 870, 1976.
+\end{enumerate}
+
+\vspace{6pt}\noindent\small
+\textcopyright\ 2026 Johann Pascher · \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}

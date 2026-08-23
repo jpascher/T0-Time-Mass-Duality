@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21821995.svg)](https://doi.org/10.5281/zenodo.21821995)  
 
-**Version: v1.3.1** (20. August 2026) — DOI ausstehend, ersetzt v1.3.0
+**Version: v1.3.2** (23 August 2026) — DOI pending, supersedes v1.3.1
 
 **FFGFT — Fundamental Fractal-Geometric Field Theory** shows:
 all Standard Model constants follow from a single dimensionless
@@ -48,6 +48,7 @@ what is input and what follows is always declared explicitly.
 | Lagrangian with T̃·m=1; Feynman rules | [Doc. 019](2/pdf/019_T0_lagrndian_En.pdf) |
 | Lepton masses from rational invariants r_i, p_i | [Doc. 006](2/pdf/006_T0_Teilchenmassen_En.pdf) / [046](2/pdf/046_Teilchenmassen_En.pdf) |
 | Koide scalar Q_FFGFT = 0.6677 (computed, not fitted) | [Doc. 258](2/pdf/258_Koide_2-3_En.pdf) / [259](2/pdf/259_Koide_Kreuzterme_En.pdf) |
+| Hawking mechanism: quantum = bit of the horizon scale | [Doc. 325](2/pdf/325_Hawking_FFGFT_En.pdf) |
 | α⁻¹ = 137.036 from D_f = 3 − ξ | [Doc. 011](2/pdf/011_T0_Feinstruktur_En.pdf) / [043](2/pdf/043_ResolvingTheConstantsAlfa_En.pdf) |
 | SI bridge: all constants from ξ | [Doc. 013](2/pdf/013_T0_SI_En.pdf) |
 | E = mc² = E = m: unit identity | [Doc. 077](2/pdf/077_E-mc2_En.pdf) |
@@ -456,6 +457,40 @@ The full version history with DOIs is given in the change log:
 
 ---
 
+
+## New documents — v1.3.2 (23 August 2026)
+
+### Doc. 324 — G(6,ℤ₃C) vacuum structure and FFGFT (DE+EN, 8 pp. each)
+
+Numerical investigation of the connection questions to Matzke's G(6,ℤ₃C)
+framework. Trine theorem [B], vacuum operator as rank-1 projector [B],
+ξ not a spectral value [K] (R84), Casimir derivation
+ξ = C₂(SU(3)_fund)/N_Fourier = (4/3)/10⁴ [K].  
+→ [DE](2/pdf/324_G6_Z3C_FFGFT_Vergleich_De.pdf) · [EN](2/pdf/324_G6_Z3C_FFGFT_Vergleich_En.pdf)
+
+### Doc. 325 — The FFGFT Hawking Mechanism (DE+EN, 7 pp. each)
+
+Closes the emission side of Doc. 313 Ch. G from FFGFT-native building blocks (R85).
+KMS temperature from T̃·m=1 [K]; **k_B·T_H = ħc/(4π·r_s) = E_bit(horizon scale)**
+exactly [K] — the Hawking quantum is the system-dependent bit, no universal bit
+value needed; ℤ₃ selection T_R = 0 with absorption P_jP_k = 0 [B]; massless
+carrier n₄ = 0 [K]; sector-pair encoding log₂3 bits/quantum [B]; no information
+paradox (unitarity, Doc. 322). Open [S]: greybody factors, fixed-point back-reaction.  
+→ [DE](2/pdf/325_Hawking_FFGFT_De.pdf) · [EN](2/pdf/325_Hawking_FFGFT_En.pdf)
+
+### Doc. 326 — Black Holes from Hyperbits and from FFGFT (DE+EN, 10 pp. each)
+
+Comparison with Matzke's hyperbit framework — focus on Landauer and bit values.
+Convergences: fermion generation = algebraic base unit, N_c = 3 enforced,
+r_s without GR. Divergence: universal bit value [POSTULATE] vs. system-dependent
+bit energy E_bit = ħc/L [K]. T_H(Matzke)/T_H(KMS) = 1.000000 — the universal bit
+value is a reparametrization. n_thresh = 6.41 as a universal number: [X].  
+→ [DE](2/pdf/326_Matzke_FFGFT_Vergleich_De.pdf) · [EN](2/pdf/326_Matzke_FFGFT_Vergleich_En.pdf)
+
+**Corrections:** R84 (Casimir derivation of ξ), R85 (Hawking mechanism [S]→[K]/[B]).
+Verification scripts: 69 assertions, all passing. Details: [RELEASE_NOTES_v1_3_2.md](RELEASE_NOTES_v1_3_2.md)
+
+---
 
 ## New Documents — v1.3.0 (August 2026)
 
