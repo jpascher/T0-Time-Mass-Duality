@@ -484,6 +484,18 @@ for every entry. Append-only principle unchanged (R50).
 → Compact: [DE](2/pdf/190_T0_Korrekturen_De.pdf) · [EN](2/pdf/190_T0_Korrekturen_En.pdf)
 · Archive: [DE](2/pdf/190_T0_Korrekturen_Archiv_De.pdf) · [EN](2/pdf/190_T0_Korrekturen_Archiv_En.pdf)
 
+### Doc. 329 — Is the stability threshold n_thresh universal? (DE+EN, 7 pp. each)
+
+**No** (R88). The collapse condition Compton = Schwarzschild is free of any bit
+value (M_coll = m_P/√2, purely geometric [B]); with E_bit(L) = ħc/L one obtains
+exactly **n_thresh(L) = L/(√2·ℓ_P)** — linear in the scale, range 4.6×10²⁹
+across the corpus scales [B]. Matzke's value 6.41 corresponds exactly to
+**L = 2πℓ_P/ln2 = 9.0647 ℓ_P**: the "universal" bit value is the FFGFT bit
+energy at about nine Planck lengths [B]. As a universal number negatively
+closed [X]. Untouched: Compton = Schwarzschild, r_s without field equations,
+and the Cl(6) structure [B].  
+→ [DE](2/pdf/329_nthresh_Skalenanalyse_De.pdf) · [EN](2/pdf/329_nthresh_Skalenanalyse_En.pdf)
+
 ### Docs. 320 + 322 — Δm²₃₂: numerical values corrected (R87)
 
 The evaluation of ξ^(9/5) in Doc. 320 was faulty (8.717×10⁻⁸ instead of 1.059×10⁻⁷).
@@ -502,8 +514,8 @@ comparisons: geometry as bookkeeping over distinguishability, the three falling 
 of Cl(6), Schwarzschild without the Einstein equations — and where the elegance is
 paid for (n_thresh = 6.41 hangs on the postulate T = T_P).
 
-**Corrections:** R86 (self-adjointness [S]→[B], R82 removed); R87 (Δm²₃₂: numerical
-values in 320/322 corrected, +16.0 %). Verification scripts: 100 assertions, all passing.
+**Corrections:** R86 (self-adjointness [S]→[B], R82 removed); R87 (Δm²₃₂: numerical values in
+320/322 corrected, +16.0 %); R88 (n_thresh scale-dependent, Matzke's scale reconstructed). Verification scripts: 112 assertions, all passing.
 Details: [RELEASE_NOTES_v1_3_3.md](RELEASE_NOTES_v1_3_3.md)
 
 ---

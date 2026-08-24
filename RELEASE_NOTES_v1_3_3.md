@@ -133,7 +133,7 @@ paid for.
 - **Numerically:** T_H(Matzke)/T_H(KMS) = 1.000000 — the universal bit value is
   a reparametrization of the KMS relation, not an independent physical input.
 - Matzke's stability threshold n_thresh = 6.41 as a universal number: [X]
-  (hangs on the postulate T = T_P).
+  (settled numerically in Doc. 329, R88).
 
 Verification script: 15 assertions.
 
@@ -165,6 +165,44 @@ both now stand at **[B], Doc. 327**.
 
 → [DE](2/pdf/327_Selbstadjungiertheit_F_De.pdf) · [EN](2/pdf/327_Selbstadjungiertheit_F_En.pdf)
 
+
+### Doc. 329 — Is the stability threshold n_thresh universal? (DE+EN, 7 pp. each)
+
+Settles numerically the question booked as [S] in Doc. 326 (R88).
+**Answer: no.**
+
+The scale-independent core stands: Compton = Schwarzschild yields
+M_coll = m_P/√2 purely geometrically, without bits, Landauer, or a
+temperature [B]. Everything non-geometric in n_thresh = M_coll/m_bit sits
+in the denominator.
+
+With E_bit(L) = ħc/L (Doc. 257) one obtains exactly
+
+    n_thresh(L) = L / (√2 · ℓ_P)
+
+— linear in the scale, not an invariant number [B]. Across the scales of the
+corpus (L₀ = ξℓ_P to 1 nm) the value varies by a factor of 4.6×10²⁹.
+
+**Matzke's scale is reconstructible:** L = 2πℓ_P/ln2 = 9.0647 ℓ_P, and there
+the formula returns exactly 6.4097 [B]. The "universal" bit value *is* the
+FFGFT bit energy at about nine Planck lengths.
+
+Sensitivity: a 10 % temperature deviation shifts n_thresh by 10 % and flips
+the stability claim — at 1.1·T_KMS one gets n_thresh = 5.83 < 6.000, putting
+Cl(6) above the threshold.
+
+Side finding: the temperature is not T_P but the KMS temperature T_P/(2π) —
+the same 2π that generates the Hawking temperature in Doc. 325 *without* a
+bit value.
+
+Untouched [B]: Compton = Schwarzschild, r_s without field equations, the
+Cl(6) structure, the Hawking correspondences.
+
+Verification script: 12 assertions.
+
+→ [DE](2/pdf/329_nthresh_Skalenanalyse_De.pdf) · [EN](2/pdf/329_nthresh_Skalenanalyse_En.pdf)
+
+---
 
 ## Corrected documents
 
@@ -217,7 +255,7 @@ revised. New entries will henceforth be written directly in the compact register
 
 ---
 
-## Corrections — R84 to R87
+## Corrections — R84 to R88
 
 **R84** (Aug. 23): ξ = C₂(SU(3)_fund)/N_Fourier = (4/3)/10⁴ = 4/30000 [K]
 (Doc. 324). ξ is not a spectral value of any G(6) operator; the connection between
@@ -245,6 +283,12 @@ m_ν3 = 54.11 meV, Δm²₃₂ = 2.846×10⁻³ eV² (+16.0 % vs. NuFIT 5.3),
 fixed-point assignment. The remaining deviation stays [S]; the most promising
 candidate is a mixing term F₅–F₇.
 
+**R88** (Aug. 24): n_thresh is scale-dependent; Matzke's scale reconstructed
+[B] (Doc. 329). n_thresh(L) = L/(√2·ℓ_P); Matzke's value corresponds to
+L = 2πℓ_P/ln2 = 9.0647 ℓ_P. As a universal number negatively closed [X].
+Untouched: Compton = Schwarzschild, r_s without field equations, Cl(6)
+structure [B].
+
 ---
 
 ## Verification scripts
@@ -263,13 +307,15 @@ candidate is a mixing term F₅–F₇.
 `python/Dok326_Skripte/`:
 - `326_Matzke_FFGFT_verify.py` — bit values, stability threshold, Bekenstein,
   Weinberg angle, T_H equivalence (15)
+- `326_nthresh_skalenabhaengigkeit.py` — Matzke's chain, collapse mass,
+  n_thresh(L), scale reconstruction, temperature sensitivity (12)
 
 `python/Dok327_Skripte/`:
 - `327_selbstadjungiertheit_F_verify.py` — filtration lemma, diagonal form,
   boundedness, ℤ₃ symmetry with counter-example, deficiency indices, fractal
   measure, ℤ₃ restriction, χ-twists, λ_min stability (21)
 
-Total: 100 assertions, all passing.
+Total: 112 assertions, all passing.
 
 ## Bridges closed in this release
 
@@ -289,6 +335,8 @@ Total: 100 assertions, all passing.
 | Fractal measure and self-adjointness | open | **[B]** preserves it | 327 |
 | χ-twist classes self-adjoint | open | **[B]** all three | 327 |
 | Δm²₃₂: numerical values corrected | −22 % | **+16.0 %** [K] | 320/322 |
+| n_thresh: universal or scale-dependent? | [S] | **[B]** scale-dependent | 329 |
+| n_thresh = 6.41 as a universal number | open | **[X]** negatively closed | 329 |
 
 ## Remaining open bridges
 

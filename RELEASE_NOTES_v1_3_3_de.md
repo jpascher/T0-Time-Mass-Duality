@@ -137,7 +137,7 @@ der Schwarzschild-Radius ohne Einstein-Gleichungen, die
   ist eine Umparametrisierung der KMS-Relation, keine unabhängige
   physikalische Eingabe.
 - Matzkes Stabilitätsschwelle n_thresh = 6,41 als universelle Zahl: [X]
-  (hängt an der Setzung T = T_P).
+  (in Dok. 329 numerisch entschieden, R88).
 
 Prüfskript: 15 Assertionen.
 
@@ -169,6 +169,41 @@ beide stehen jetzt auf **[B], Dok. 327**.
 
 → [DE](2/pdf/327_Selbstadjungiertheit_F_De.pdf) · [EN](2/pdf/327_Selbstadjungiertheit_F_En.pdf)
 
+
+### Dok. 329 — Ist die Stabilitätsschwelle n_thresh universell? (DE+EN, je 7 S.)
+
+Entscheidet die in Dok. 326 als [S] geführte Frage numerisch (R88).
+**Antwort: nein.**
+
+Der skalenunabhängige Kern bleibt: Compton = Schwarzschild liefert
+M_coll = m_P/√2 rein geometrisch, ohne Bits, Landauer oder Temperatur [B].
+Alles Nichtgeometrische an n_thresh = M_coll/m_bit steckt im Nenner.
+
+Mit E_bit(L) = ħc/L (Dok. 257) folgt exakt
+
+    n_thresh(L) = L / (√2 · ℓ_P)
+
+— linear in der Skala, kein invarianter Zahlenwert [B]. Über die Skalen des
+Korpus (L₀ = ξℓ_P bis 1 nm) variiert der Wert um Faktor 4,6×10²⁹.
+
+**Matzkes Skala ist rekonstruierbar:** L = 2πℓ_P/ln2 = 9,0647 ℓ_P, und dort
+gibt die Formel exakt 6,4097 zurück [B]. Der „universelle" Bitwert *ist* die
+FFGFT-Bit-Energie bei rund neun Plancklängen.
+
+Empfindlichkeit: 10 % Temperaturabweichung verschiebt n_thresh um 10 % und
+kippt die Stabilitätsaussage — bei 1,1·T_KMS wäre n_thresh = 5,83 < 6,000,
+Cl(6) läge oberhalb der Schwelle.
+
+Nebenbefund: Die Temperatur ist nicht T_P, sondern die KMS-Temperatur
+T_P/(2π) — dasselbe 2π, das in Dok. 325 die Hawking-Temperatur *ohne*
+Bitwert erzeugt.
+
+Unberührt [B]: Compton = Schwarzschild, r_s ohne Feldgleichungen,
+Cl(6)-Struktur, die Hawking-Korrespondenzen.
+
+Prüfskript: 12 Assertionen.
+
+→ [DE](2/pdf/329_nthresh_Skalenanalyse_De.pdf) · [EN](2/pdf/329_nthresh_Skalenanalyse_En.pdf)
 
 ---
 
@@ -223,7 +258,7 @@ revidiert. Neue Einträge werden künftig direkt im Kompakt-Register ausgeführt
 
 ---
 
-## Korrekturen — R84 bis R87
+## Korrekturen — R84 bis R88
 
 **R84** (23. Aug.): ξ = C₂(SU(3)_fund)/N_Fourier = (4/3)/10⁴ = 4/30000 [K]
 (Dok. 324). ξ ist kein Spektralwert eines G(6)-Operators; die Verbindung
@@ -252,6 +287,11 @@ m_ν3 = 54,11 meV, Δm²₃₂ = 2,846×10⁻³ eV² (+16,0 % vs. NuFIT 5.3),
 Die verbleibende Abweichung bleibt [S]; aussichtsreichster Kandidat ist ein
 Mischungsterm F₅–F₇.
 
+**R88** (24. Aug.): n_thresh ist skalenabhängig; Matzkes Skala rekonstruiert
+[B] (Dok. 329). n_thresh(L) = L/(√2·ℓ_P); Matzkes Wert entspricht
+L = 2πℓ_P/ln2 = 9,0647 ℓ_P. Als universelle Zahl abgeschlossen negativ [X].
+Unberührt: Compton = Schwarzschild, r_s ohne Feldgleichungen, Cl(6)-Struktur [B].
+
 ---
 
 ## Prüfskripte
@@ -270,13 +310,15 @@ Mischungsterm F₅–F₇.
 `python/Dok326_Skripte/`:
 - `326_Matzke_FFGFT_verify.py` — Bitwerte, Stabilitätsschwelle, Bekenstein,
   Weinberg-Winkel, T_H-Äquivalenz (15)
+- `326_nthresh_skalenabhaengigkeit.py` — Matzkes Kette, Kollapsmasse,
+  n_thresh(L), Skalenrekonstruktion, Temperaturempfindlichkeit (12)
 
 `python/Dok327_Skripte/`:
 - `327_selbstadjungiertheit_F_verify.py` — Filtrierungs-Lemma, Diagonalform,
   Beschränktheit, ℤ₃-Symmetrie mit Gegenprobe, Defektindizes, fraktales Maß,
   ℤ₃-Restriktion, χ-Twists, λ_min-Stabilität (21)
 
-Gesamt: 100 Assertionen, alle bestanden.
+Gesamt: 112 Assertionen, alle bestanden.
 
 ## Geschlossene Brücken in diesem Release
 
@@ -296,6 +338,8 @@ Gesamt: 100 Assertionen, alle bestanden.
 | Fraktales Maß und Selbstadjungiertheit | offen | **[B]** erhält sie | 327 |
 | χ-Twist-Klassen selbstadjungiert | offen | **[B]** alle drei | 327 |
 | Δm²₃₂: Zahlenwerte korrigiert | −22 % | **+16,0 %** [K] | 320/322 |
+| n_thresh: universell oder skalenabhängig? | [S] | **[B]** skalenabhängig | 329 |
+| n_thresh = 6,41 als universelle Zahl | offen | **[X]** negativ abgeschlossen | 329 |
 
 ## Verbleibende offene Brücken
 

@@ -1,0 +1,351 @@
+% 329_nthresh_Skalenanalyse_En_ch.tex
+% Doc. 329, FFGFT corpus, August 2026 — chapter file
+% Scale analysis of the stability threshold n_thresh
+
+% --- Local macros ---
+\providecommand{\K}{}\renewcommand{\K}{\textbf{[K]}}
+\providecommand{\B}{}\renewcommand{\B}{\textbf{[B]}}
+\renewcommand{\S}{\textbf{[S]}}
+\providecommand{\X}{}\renewcommand{\X}{\textbf{[X]}}
+\providecommand{\lP}{}\renewcommand{\lP}{\ell_{\mathrm{P}}}
+\providecommand{\mP}{}\renewcommand{\mP}{m_{\mathrm{P}}}
+\providecommand{\TP}{}\renewcommand{\TP}{T_{\mathrm{P}}}
+\providecommand{\Ebit}{}\renewcommand{\Ebit}{E_{\mathrm{bit}}}
+\providecommand{\mbit}{}\renewcommand{\mbit}{m_{\mathrm{bit}}}
+\providecommand{\nthr}{}\renewcommand{\nthr}{n_{\mathrm{thresh}}}
+\providecommand{\Mcoll}{}\renewcommand{\Mcoll}{M_{\mathrm{coll}}}
+
+\definecolor{ffgftblue}{RGB}{30,90,160}
+\definecolor{proofgreen}{RGB}{0,110,50}
+\definecolor{warnviolet}{RGB}{100,0,120}
+\tcbset{
+  base/.style={breakable,enhanced,boxrule=0.6pt,arc=3pt,
+    fonttitle=\bfseries\small,coltitle=white,top=4pt,bottom=4pt,left=6pt,right=6pt},
+  ffgftbox/.style={base,colback=blue!5,colframe=ffgftblue,colbacktitle=ffgftblue},
+  proofbox/.style={base,colback=green!5,colframe=proofgreen,colbacktitle=proofgreen},
+  warnbox/.style={base,colback=violet!6,colframe=warnviolet,colbacktitle=warnviolet}
+}
+
+% ============================================================
+\section*{Abstract}
+
+Douglas Matzke's hyperbit framework (IPI 2026) derives a stability
+threshold
+\begin{equation}
+  \nthr = \frac{2\pi}{\sqrt{2}\,\ln 2} = 6.4097~\text{bits}
+\end{equation}
+and reads it as a universal number: $\mathrm{Cl}(6)$ carries $6.000$~bits
+and thus sits $0.41$~bits below the collapse threshold -- matter is stable
+because the smallest fermion algebra just barely fails to collapse.
+Doc.~326 raised the suspicion that this number hangs on the choice of a
+particular temperature. This document tests that numerically and settles it.
+
+\begin{tcolorbox}[ffgftbox, title={Main result \B}]
+  With the system-dependent bit energy of FFGFT
+  $\Ebit(L) = \hbar c/L$ (Doc.~257) one obtains exactly
+  \begin{equation}
+    \nthr(L) = \frac{L}{\sqrt{2}\,\lP}
+    \label{eq:main}
+  \end{equation}
+  -- \textbf{linear in the scale}, not an invariant number.
+  Matzke's $6.41$ corresponds exactly to the scale
+  \begin{equation}
+    L_{\mathrm{Matzke}} = \frac{2\pi\,\lP}{\ln 2} = 9.0647\,\lP .
+  \end{equation}
+  The \enquote{universal} bit value \emph{is} the FFGFT bit energy,
+  evaluated at about nine Planck lengths.
+  The universality is a concealed choice of scale.
+\end{tcolorbox}
+
+What remains \emph{untouched} is the robust core of Matzke's argument:
+the collapse condition Compton~$=$~Schwarzschild yields
+$\Mcoll = \mP/\sqrt{2}$ purely geometrically -- without any reference to
+bits, Landauer, or a temperature. That part stands independently \B.
+
+Verification script: \texttt{326\_nthresh\_skalenabhaengigkeit.py} --
+12 assertions, all passed.
+
+% ============================================================
+\section{The question}
+
+Doc.~326 works out the central divergence between Matzke's framework and
+FFGFT: universal vs.\ system-dependent bit values.
+The suspicion formulated there was that Matzke's stability threshold
+\enquote{hangs on the postulate $T = \TP$} and would itself be
+system-dependent under a system-dependent bit energy -- classified as \S.
+
+This question is numerically decidable, and completely so:
+one recomputes Matzke's chain, extracts the scale-independent parts,
+replaces the bit value by the FFGFT bit energy, and sees whether a
+constant remains.
+
+% ============================================================
+\section{Matzke's chain}
+
+\subsection{The Landauer bridge}
+
+The temperature used is not the Planck temperature itself but the
+\textbf{KMS temperature} of the Planck scale:
+\begin{equation}
+  T_{\mathrm{KMS}} = \frac{\TP}{2\pi} = 2.2549\times10^{31}~\mathrm{K}.
+\end{equation}
+The $2\pi$ comes from the KMS periodicity -- the same one that generates
+the Hawking and Unruh temperatures in Doc.~325.
+Landauer at this temperature:
+\begin{equation}
+  \Ebit = k_B T_{\mathrm{KMS}} \ln 2
+  \quad\Longrightarrow\quad
+  \mbit = \frac{\mP \ln 2}{2\pi} = 0.1103\,\mP .
+\end{equation}
+Numerically reproduced (script~[1], ratio $1.000000000$). \B
+
+\subsection{The collapse condition}
+
+Compton wavelength equal to Schwarzschild radius:
+\begin{equation}
+  \frac{\hbar}{Mc} = \frac{2GM}{c^2}
+  \quad\Longrightarrow\quad
+  \Mcoll = \sqrt{\frac{\hbar c}{2G}} = \frac{\mP}{\sqrt{2}}
+         = 1.5390\times10^{-8}~\mathrm{kg}.
+\end{equation}
+
+\begin{tcolorbox}[proofbox, title={The scale-independent core \B}]
+  $\Mcoll = \mP/\sqrt{2}$ contains \textbf{no bit value}.
+  The collapse condition is purely geometric and identical under any
+  bit interpretation. Numerical check:
+  $\nthr \cdot \mbit = \Mcoll$ to nine digits (script~[2]).
+\end{tcolorbox}
+
+\subsection{The threshold}
+
+\begin{equation}
+  \nthr = \frac{\Mcoll}{\mbit}
+        = \frac{\mP/\sqrt{2}}{\mP\ln 2/(2\pi)}
+        = \frac{2\pi}{\sqrt{2}\,\ln 2}
+        = 6.4097 .
+\end{equation}
+
+The number is thus a \emph{quotient} of a geometric numerator and a
+posited denominator. Everything about it that is not geometric sits in
+the bit value.
+
+% ============================================================
+\section{The same computation with system-dependent bit energy}
+
+Instead of a universal bit value, FFGFT posits (Doc.~257, A271--A273):
+\begin{equation}
+  \Ebit(L) = \frac{\hbar c}{L}
+  \quad\Longrightarrow\quad
+  \mbit(L) = \frac{\hbar}{cL}.
+\end{equation}
+Inserted into $\nthr = \Mcoll/\mbit$:
+\begin{equation}
+  \nthr(L) = \frac{\mP}{\sqrt{2}} \cdot \frac{cL}{\hbar}
+           = \frac{L}{\sqrt{2}\,\lP},
+\end{equation}
+since $\lP = \hbar/(c\,\mP)$. Numerically confirmed for
+$L \in \{1, 5, 10\}\,\lP$ to machine precision (script~[3]). \B
+
+\begin{tcolorbox}[warnbox, title={What follows}]
+  $\nthr$ is a \textbf{linear function of the scale}, not a constant.
+  It has no distinguished value as long as no scale is distinguished.
+  The question \enquote{how many bits until collapse?} is unanswerable
+  without specifying the scale -- it is underdetermined.
+\end{tcolorbox}
+
+\subsection{Matzke's implicit scale}
+
+Solving $\mbit = \hbar/(cL)$ for $L$ and inserting Matzke's bit value:
+\begin{equation}
+  L_{\mathrm{Matzke}} = \frac{\hbar}{c\,\mbit}
+                      = \frac{2\pi\,\lP}{\ln 2}
+                      = 9.0647\,\lP
+                      = 1.4651\times10^{-34}~\mathrm{m}.
+\end{equation}
+And indeed Eq.~\eqref{eq:main} returns $\nthr = 6.4097$ at this scale --
+exactly Matzke's value (script~[4]). \B
+
+\begin{tcolorbox}[ffgftbox, title={Core finding}]
+  Matzke's universal bit value is the FFGFT bit energy
+  $\Ebit = \hbar c/L$, evaluated at $L = 2\pi\lP/\ln 2$.
+  Both frameworks compute with the same quantity; the difference is that
+  FFGFT carries the scale along as a free parameter, whereas Matzke fixes
+  one particular scale and calls the result universal.
+\end{tcolorbox}
+
+% ============================================================
+\section{Numerical range}
+
+$\nthr$ at the scales of the corpus (script~[5]):
+
+\begin{center}
+\small
+\begin{tabular}{@{}llr@{}}
+  \toprule
+  \textbf{Scale} & $L$ [m] & $\nthr$ \\
+  \midrule
+  $L_0 = \xi\lP$ (FFGFT minimal scale, Doc.~180) & $2.155\times10^{-39}$ & $9.43\times10^{-5}$ \\
+  $\lP$ (Planck length)                           & $1.616\times10^{-35}$ & $0.7071$ \\
+  $2\pi\lP/\ln 2$ (Matzke's implicit scale)       & $1.465\times10^{-34}$ & $\mathbf{6.4097}$ \\
+  $1$~fm (nuclear physics)                        & $1.000\times10^{-15}$ & $4.38\times10^{19}$ \\
+  $L_e = \hbar c/E_0$ (Doc.~257)                  & $2.685\times10^{-14}$ & $1.17\times10^{21}$ \\
+  $1$~nm (atomic physics)                         & $1.000\times10^{-9}$  & $4.38\times10^{25}$ \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+Range across these scales: a factor of $4.64\times10^{29}$.
+A quantity varying over 29 orders of magnitude is not a constant. \B
+
+\subsection{Sensitivity to the temperature choice}
+
+Equivalently, the dependence can be expressed via the posited temperature
+(script~[6]); $\nthr$ scales exactly inversely with it:
+
+\begin{center}
+\small
+\begin{tabular}{@{}lrr@{}}
+  \toprule
+  Posited temperature & $\mbit/\mP$ & $\nthr$ \\
+  \midrule
+  $0.5\,T_{\mathrm{KMS}}$ & $0.0552$ & $12.82$ \\
+  $0.9\,T_{\mathrm{KMS}}$ & $0.0993$ & $7.12$ \\
+  $1.0\,T_{\mathrm{KMS}}$ & $0.1103$ & $\mathbf{6.41}$ \\
+  $1.1\,T_{\mathrm{KMS}}$ & $0.1213$ & $5.83$ \\
+  $2.0\,T_{\mathrm{KMS}}$ & $0.2206$ & $3.20$ \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+A deviation of just $10\,\%$ in the posited temperature shifts $\nthr$ by
+$10\,\%$ -- and thereby moves $\mathrm{Cl}(6)$ from $0.41$~bits below the
+threshold to $1.12$~bits above it (at $1.1\,T_{\mathrm{KMS}}$:
+$\nthr = 5.83 < 6.000$). The stability claim flips.
+
+% ============================================================
+\section{Placement}
+
+\subsection{What falls}
+
+The reading of $\nthr = 6.41$ as a \emph{fundamental number} of the
+universe. It is the quotient of a geometric quantity and a posited bit
+value; the postulate is a choice of scale, and across scales the result
+varies by 29 orders of magnitude. The statement
+\enquote{$\mathrm{Cl}(6)$ lies $0.41$~bits below the threshold} holds
+only at $L = 9.06\,\lP$ and does not survive beyond it. \X
+
+\subsection{What stands}
+
+Considerably more than the criticism might suggest:
+
+\begin{itemize}
+  \item $\Mcoll = \mP/\sqrt{2}$ from Compton~$=$~Schwarzschild -- purely
+    geometric, independent of any bit interpretation \B.
+  \item The Schwarzschild radius without field equations: Matzke's
+    Novel Result \#1 is untouched by this analysis \B.
+  \item $\mathrm{Cl}(6)$ as a fermion generation (Furey), the three
+    falling out, the algebraic structure as a whole \B.
+  \item The Hawking mechanism as an algebraic picture -- the structural
+    correspondences to FFGFT are exact (Doc.~326).
+\end{itemize}
+
+\subsection{Consequence for FFGFT}
+
+The analysis is not merely a refutation; it supports the FFGFT position
+of Doc.~257 and A271--A273 from the outside.
+If a framework that explicitly posits a universal bit value can be
+reconstructed as the evaluation of the scale-dependent formula
+$\Ebit = \hbar c/L$ at one particular scale, then scale dependence is
+not the special case but the general form.
+
+This fits with Doc.~325: there the Hawking temperature is derivable
+without a universal bit value ($k_B T_H = \Ebit(4\pi r_s)$ exactly), and
+the numerical check in Doc.~326 gave
+$T_H(\text{Matzke})/T_H(\text{KMS}) = 1.000000$.
+Both findings say the same thing: the universal bit value is a
+reparametrization, not an independent physical input.
+
+Worth noting is the origin of the $2\pi$ in Matzke's bit value:
+it comes from the KMS periodicity, i.e.\ from exactly the relation that
+generates the Hawking temperature in Doc.~325 \emph{without} a bit value.
+
+% ============================================================
+\section{Status summary}
+
+\begin{center}
+\begin{tabular}{@{}lc@{}}
+  \toprule
+  \textbf{Statement} & \textbf{Status} \\
+  \midrule
+  $\mbit = \mP\ln 2/(2\pi)$ from Landauer at $\TP/(2\pi)$ reproduced & \B \\
+  $\Mcoll = \mP/\sqrt{2}$ purely geometric, bit-value free & \B \\
+  $\nthr(L) = L/(\sqrt{2}\lP)$ -- linear in the scale & \B \\
+  Matzke's scale: $L = 2\pi\lP/\ln 2 = 9.0647\,\lP$ & \B \\
+  Range across corpus scales: factor $4.6\times10^{29}$ & \B \\
+  $\nthr \propto 1/T$ -- a $10\,\%$ temperature error flips the claim & \B \\
+  \midrule
+  $\nthr = 6.41$ as a universal number & \X \\
+  Compton~$=$~Schwarzschild, $\mathrm{Cl}(6)$ structure, $r_s$ without GR & \B\ (untouched) \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{Proposed register entry R88}
+
+\textbf{R88 -- $\nthr$ is scale-dependent; Matzke's scale reconstructed
+(August 2026):}
+Doc.~329 settles numerically the question booked as \S\ in Doc.~326.
+The collapse condition Compton~$=$~Schwarzschild yields
+$\Mcoll = \mP/\sqrt{2}$ purely geometrically and free of any bit value \B.
+With the system-dependent bit energy $\Ebit(L) = \hbar c/L$ (Doc.~257)
+one obtains exactly $\nthr(L) = L/(\sqrt{2}\lP)$ -- linear in the scale \B.
+Matzke's value $6.4097$ corresponds exactly to
+$L = 2\pi\lP/\ln 2 = 9.0647\,\lP$ \B; the \enquote{universal} bit value is
+the FFGFT bit energy at that scale.
+Across the scales of the corpus $\nthr$ varies by a factor of
+$4.6\times10^{29}$; a $10\,\%$ temperature deviation flips the stability
+claim for $\mathrm{Cl}(6)$. Hence $\nthr = 6.41$ as a universal number is
+negatively closed \X.
+Untouched: Compton~$=$~Schwarzschild, the Schwarzschild radius without
+field equations, and the $\mathrm{Cl}(6)$ structure \B.
+Verification script: \texttt{326\_nthresh\_skalenabhaengigkeit.py} (12 assertions).\\
+\emph{Declared 24 August 2026}
+
+% ============================================================
+\section*{Relation to the corpus}
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+  \toprule
+  \textbf{Building block} & \textbf{Doc.} \\
+  \midrule
+  Bit energy $\Ebit = \hbar c/L$, information unit $\Delta w = 1$ & 257 \\
+  Landauer as carrier operation, not abstract information & A271--A273 \\
+  Elementary cells, bit capacity, partition invariance & 302 \\
+  $\lP$, $\mP$, $L_0 = \xi\lP$ & 180 \\
+  KMS relation, $k_BT_H = \Ebit(4\pi r_s)$ & 325 \\
+  Matzke comparison, bit-value divergence & 326 \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\section*{References}
+
+\begin{enumerate}
+  \item D.~Matzke, \textit{Black Holes from Hyperbits},
+    IPI Annual Conference, August 2026.
+  \item J.~Pascher, Doc.~326 \textit{Black Holes from Hyperbits and from
+    FFGFT}, FFGFT corpus, 2026.
+  \item J.~Pascher, Doc.~325 \textit{The FFGFT Hawking Mechanism},
+    FFGFT corpus, 2026.
+  \item J.~Pascher, Docs.~257, 302, A271--A273 (bit energy, Landauer),
+    FFGFT corpus.
+  \item J.~Pascher, Doc.~180 \textit{Derivation of $L_0$},
+    FFGFT corpus, 2026.
+  \item R.~Landauer, IBM J.\ Res.\ Dev.\ \textbf{5}, 183, 1961.
+\end{enumerate}
+
+\vspace{6pt}\noindent\small
+\textcopyright\ 2026 Johann Pascher ·
+\href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}

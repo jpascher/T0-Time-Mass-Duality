@@ -1,0 +1,353 @@
+% 329_nthresh_Skalenanalyse_De_ch.tex
+% Dok. 329, FFGFT-Korpus, August 2026 — Kapitel-Datei
+% Skalenanalyse der Stabilitätsschwelle n_thresh
+
+% --- Lokale Makros ---
+\providecommand{\K}{}\renewcommand{\K}{\textbf{[K]}}
+\providecommand{\B}{}\renewcommand{\B}{\textbf{[B]}}
+\renewcommand{\S}{\textbf{[S]}}
+\providecommand{\X}{}\renewcommand{\X}{\textbf{[X]}}
+\providecommand{\lP}{}\renewcommand{\lP}{\ell_{\mathrm{P}}}
+\providecommand{\mP}{}\renewcommand{\mP}{m_{\mathrm{P}}}
+\providecommand{\TP}{}\renewcommand{\TP}{T_{\mathrm{P}}}
+\providecommand{\Ebit}{}\renewcommand{\Ebit}{E_{\mathrm{bit}}}
+\providecommand{\mbit}{}\renewcommand{\mbit}{m_{\mathrm{bit}}}
+\providecommand{\nthr}{}\renewcommand{\nthr}{n_{\mathrm{thresh}}}
+\providecommand{\Mcoll}{}\renewcommand{\Mcoll}{M_{\mathrm{coll}}}
+
+\definecolor{ffgftblue}{RGB}{30,90,160}
+\definecolor{proofgreen}{RGB}{0,110,50}
+\definecolor{warnviolet}{RGB}{100,0,120}
+\tcbset{
+  base/.style={breakable,enhanced,boxrule=0.6pt,arc=3pt,
+    fonttitle=\bfseries\small,coltitle=white,top=4pt,bottom=4pt,left=6pt,right=6pt},
+  ffgftbox/.style={base,colback=blue!5,colframe=ffgftblue,colbacktitle=ffgftblue},
+  proofbox/.style={base,colback=green!5,colframe=proofgreen,colbacktitle=proofgreen},
+  warnbox/.style={base,colback=violet!6,colframe=warnviolet,colbacktitle=warnviolet}
+}
+
+% ============================================================
+\section*{Zusammenfassung}
+
+Douglas Matzkes Hyperbit-Framework (IPI 2026) leitet eine
+Stabilitätsschwelle
+\begin{equation}
+  \nthr = \frac{2\pi}{\sqrt{2}\,\ln 2} = 6{,}4097~\text{Bit}
+\end{equation}
+her und deutet sie als universelle Zahl: $\mathrm{Cl}(6)$ trägt
+$6{,}000$~Bit und liegt damit $0{,}41$~Bit unterhalb der Kollapsschwelle --
+Materie ist stabil, weil die kleinste Fermion-Algebra gerade eben nicht
+kollabiert. Dok.~326 hatte den Verdacht formuliert, dass diese Zahl an
+der Setzung einer bestimmten Temperatur hängt. Dieses Dokument prüft das
+numerisch und beantwortet es abschließend.
+
+\begin{tcolorbox}[ffgftbox, title={Hauptresultat \B}]
+  Mit der systemabhängigen Bit-Energie der FFGFT
+  $\Ebit(L) = \hbar c/L$ (Dok.~257) folgt exakt
+  \begin{equation}
+    \nthr(L) = \frac{L}{\sqrt{2}\,\lP}
+    \label{eq:main}
+  \end{equation}
+  -- \textbf{linear in der Skala}, kein invarianter Zahlenwert.
+  Matzkes $6{,}41$ entspricht exakt der Skala
+  \begin{equation}
+    L_{\mathrm{Matzke}} = \frac{2\pi\,\lP}{\ln 2} = 9{,}0647\,\lP .
+  \end{equation}
+  Der \enquote{universelle} Bitwert \emph{ist} die FFGFT-Bit-Energie,
+  ausgewertet bei rund neun Plancklängen.
+  Die Universalität ist eine verdeckte Skalenwahl.
+\end{tcolorbox}
+
+Was dabei \emph{unangetastet} bleibt, ist der belastbare Kern von Matzkes
+Argument: Die Kollapsbedingung Compton~$=$~Schwarzschild ergibt
+$\Mcoll = \mP/\sqrt{2}$ rein geometrisch -- ohne jeden Bezug auf Bits,
+Landauer oder eine Temperatur. Dieser Teil steht unabhängig \B.
+
+Prüfskript: \texttt{326\_nthresh\_skalenabhaengigkeit.py} --
+12 Assertionen, alle bestanden.
+
+% ============================================================
+\section{Die Frage}
+
+Dok.~326 arbeitet die zentrale Divergenz zwischen Matzkes Framework und
+FFGFT heraus: universelle vs.\ systemabhängige Bitwerte.
+Der dort formulierte Verdacht lautete, dass Matzkes Stabilitätsschwelle
+\enquote{an der Setzung $T = \TP$ hängt} und bei systemabhängiger
+Bit-Energie selbst systemabhängig wäre -- eingestuft als \S.
+
+Diese Frage ist numerisch entscheidbar, und zwar vollständig:
+Man rechnet Matzkes Kette nach, extrahiert die skalenunabhängigen
+Anteile, ersetzt den Bitwert durch die FFGFT-Bit-Energie und sieht,
+ob eine Konstante übrig bleibt.
+
+% ============================================================
+\section{Matzkes Kette}
+
+\subsection{Die Landauer-Brücke}
+
+Die angesetzte Temperatur ist nicht die Plancktemperatur selbst,
+sondern die \textbf{KMS-Temperatur} der Planckskala:
+\begin{equation}
+  T_{\mathrm{KMS}} = \frac{\TP}{2\pi} = 2{,}2549\times10^{31}~\mathrm{K}.
+\end{equation}
+Das $2\pi$ stammt aus der KMS-Periodizität -- derselben, die in
+Dok.~325 die Hawking- und Unruh-Temperatur erzeugt.
+Landauer bei dieser Temperatur:
+\begin{equation}
+  \Ebit = k_B T_{\mathrm{KMS}} \ln 2
+  \quad\Longrightarrow\quad
+  \mbit = \frac{\mP \ln 2}{2\pi} = 0{,}1103\,\mP .
+\end{equation}
+Numerisch reproduziert (Skript~[1], Verhältnis $1{,}000000000$). \B
+
+\subsection{Die Kollapsbedingung}
+
+Compton-Wellenlänge gleich Schwarzschild-Radius:
+\begin{equation}
+  \frac{\hbar}{Mc} = \frac{2GM}{c^2}
+  \quad\Longrightarrow\quad
+  \Mcoll = \sqrt{\frac{\hbar c}{2G}} = \frac{\mP}{\sqrt{2}}
+         = 1{,}5390\times10^{-8}~\mathrm{kg}.
+\end{equation}
+
+\begin{tcolorbox}[proofbox, title={Der skalenunabhängige Kern \B}]
+  $\Mcoll = \mP/\sqrt{2}$ enthält \textbf{keinen Bitwert}.
+  Die Kollapsbedingung ist rein geometrisch und in jeder
+  Bit-Interpretation dieselbe. Numerische Gegenprobe:
+  $\nthr \cdot \mbit = \Mcoll$ auf neun Stellen (Skript~[2]).
+\end{tcolorbox}
+
+\subsection{Die Schwelle}
+
+\begin{equation}
+  \nthr = \frac{\Mcoll}{\mbit}
+        = \frac{\mP/\sqrt{2}}{\mP\ln 2/(2\pi)}
+        = \frac{2\pi}{\sqrt{2}\,\ln 2}
+        = 6{,}4097 .
+\end{equation}
+
+Die Zahl ist damit ein \emph{Quotient} aus einem geometrischen Zähler
+und einem gesetzten Nenner. Alles, was an ihr nicht geometrisch ist,
+steckt im Bitwert.
+
+% ============================================================
+\section{Dieselbe Rechnung mit systemabhängiger Bit-Energie}
+
+FFGFT setzt statt eines universellen Bitwerts (Dok.~257, A271--A273):
+\begin{equation}
+  \Ebit(L) = \frac{\hbar c}{L}
+  \quad\Longrightarrow\quad
+  \mbit(L) = \frac{\hbar}{cL}.
+\end{equation}
+Eingesetzt in $\nthr = \Mcoll/\mbit$:
+\begin{equation}
+  \nthr(L) = \frac{\mP}{\sqrt{2}} \cdot \frac{cL}{\hbar}
+           = \frac{L}{\sqrt{2}\,\lP},
+\end{equation}
+da $\lP = \hbar/(c\,\mP)$. Numerisch bestätigt für
+$L \in \{1, 5, 10\}\,\lP$ auf Maschinengenauigkeit (Skript~[3]). \B
+
+\begin{tcolorbox}[warnbox, title={Was daraus folgt}]
+  $\nthr$ ist eine \textbf{lineare Funktion der Skala}, keine Konstante.
+  Sie hat keinen ausgezeichneten Wert, solange keine Skala ausgezeichnet
+  ist. Die Frage \enquote{wie viele Bit bis zum Kollaps?} ist ohne
+  Angabe der Skala nicht beantwortbar -- sie ist unterbestimmt.
+\end{tcolorbox}
+
+\subsection{Matzkes implizite Skala}
+
+Löst man $\mbit = \hbar/(cL)$ nach $L$ auf und setzt Matzkes Bitwert ein:
+\begin{equation}
+  L_{\mathrm{Matzke}} = \frac{\hbar}{c\,\mbit}
+                      = \frac{2\pi\,\lP}{\ln 2}
+                      = 9{,}0647\,\lP
+                      = 1{,}4651\times10^{-34}~\mathrm{m}.
+\end{equation}
+Und in der Tat gibt Gl.~\eqref{eq:main} bei dieser Skala
+$\nthr = 6{,}4097$ zurück -- exakt Matzkes Wert (Skript~[4]). \B
+
+\begin{tcolorbox}[ffgftbox, title={Kernbefund}]
+  Matzkes universeller Bitwert ist die FFGFT-Bit-Energie
+  $\Ebit = \hbar c/L$, ausgewertet bei $L = 2\pi\lP/\ln 2$.
+  Beide Frameworks rechnen mit derselben Größe; der Unterschied ist,
+  dass FFGFT die Skala als freien Parameter mitführt, während Matzke
+  eine bestimmte Skala fixiert und das Ergebnis universell nennt.
+\end{tcolorbox}
+
+% ============================================================
+\section{Numerische Spannweite}
+
+$\nthr$ an den Skalen des Korpus (Skript~[5]):
+
+\begin{center}
+\small
+\begin{tabular}{@{}llr@{}}
+  \toprule
+  \textbf{Skala} & $L$ [m] & $\nthr$ \\
+  \midrule
+  $L_0 = \xi\lP$ (FFGFT-Minimalskala, Dok.~180) & $2{,}155\times10^{-39}$ & $9{,}43\times10^{-5}$ \\
+  $\lP$ (Plancklänge)                            & $1{,}616\times10^{-35}$ & $0{,}7071$ \\
+  $2\pi\lP/\ln 2$ (Matzkes implizite Skala)      & $1{,}465\times10^{-34}$ & $\mathbf{6{,}4097}$ \\
+  $1$~fm (Kernphysik)                            & $1{,}000\times10^{-15}$ & $4{,}38\times10^{19}$ \\
+  $L_e = \hbar c/E_0$ (Dok.~257)                 & $2{,}685\times10^{-14}$ & $1{,}17\times10^{21}$ \\
+  $1$~nm (Atomphysik)                            & $1{,}000\times10^{-9}$  & $4{,}38\times10^{25}$ \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+Spannweite über diese Skalen: Faktor $4{,}64\times10^{29}$.
+Eine Größe, die über 29 Größenordnungen variiert, ist keine Konstante. \B
+
+\subsection{Empfindlichkeit gegen die Temperaturwahl}
+
+Gleichwertig lässt sich die Abhängigkeit über die angesetzte Temperatur
+ausdrücken (Skript~[6]); $\nthr$ skaliert exakt invers zu ihr:
+
+\begin{center}
+\small
+\begin{tabular}{@{}lrr@{}}
+  \toprule
+  Angesetzte Temperatur & $\mbit/\mP$ & $\nthr$ \\
+  \midrule
+  $0{,}5\,T_{\mathrm{KMS}}$ & $0{,}0552$ & $12{,}82$ \\
+  $0{,}9\,T_{\mathrm{KMS}}$ & $0{,}0993$ & $7{,}12$ \\
+  $1{,}0\,T_{\mathrm{KMS}}$ & $0{,}1103$ & $\mathbf{6{,}41}$ \\
+  $1{,}1\,T_{\mathrm{KMS}}$ & $0{,}1213$ & $5{,}83$ \\
+  $2{,}0\,T_{\mathrm{KMS}}$ & $0{,}2206$ & $3{,}20$ \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+Bereits eine Abweichung von $10\,\%$ in der angesetzten Temperatur
+verschiebt $\nthr$ um $10\,\%$ -- und damit $\mathrm{Cl}(6)$ von
+$0{,}41$~Bit unterhalb der Schwelle auf $1{,}12$~Bit oberhalb
+(bei $1{,}1\,T_{\mathrm{KMS}}$: $\nthr = 5{,}83 < 6{,}000$).
+Die Stabilitätsaussage kippt.
+
+% ============================================================
+\section{Einordnung}
+
+\subsection{Was fällt}
+
+Die Deutung von $\nthr = 6{,}41$ als \emph{fundamentale Zahl} des
+Universums. Sie ist der Quotient aus einer geometrischen Größe und einem
+gesetzten Bitwert; die Setzung ist eine Skalenwahl, und über die Skalen
+variiert das Ergebnis um 29 Größenordnungen. Die Aussage
+\enquote{$\mathrm{Cl}(6)$ liegt $0{,}41$~Bit unter der Schwelle}
+gilt nur bei $L = 9{,}06\,\lP$ und hat keinen Bestand darüber hinaus. \X
+
+\subsection{Was bleibt}
+
+Erheblich mehr, als die Kritik vermuten lässt:
+
+\begin{itemize}
+  \item $\Mcoll = \mP/\sqrt{2}$ aus Compton~$=$~Schwarzschild -- rein
+    geometrisch, unabhängig von jeder Bit-Interpretation \B.
+  \item Der Schwarzschild-Radius ohne Feldgleichungen: Matzkes
+    Novel Result \#1 ist von dieser Analyse unberührt \B.
+  \item $\mathrm{Cl}(6)$ als Fermion-Generation (Furey), das
+    Herausfallen der Drei, die algebraische Struktur insgesamt \B.
+  \item Der Hawking-Mechanismus als algebraisches Bild -- die
+    strukturellen Korrespondenzen zu FFGFT sind exakt (Dok.~326).
+\end{itemize}
+
+\subsection{Konsequenz für FFGFT}
+
+Die Analyse ist keine bloße Widerlegung; sie stützt die
+FFGFT-Position aus Dok.~257 und A271--A273 von außen.
+Wenn ein Framework, das explizit einen universellen Bitwert ansetzt,
+sich als Auswertung der skalenabhängigen Formel $\Ebit = \hbar c/L$
+bei einer bestimmten Skala rekonstruieren lässt, dann ist die
+Skalenabhängigkeit nicht der Sonderfall, sondern die allgemeine Form.
+
+Das fügt sich zu Dok.~325: Dort ist die Hawking-Temperatur ohne
+universellen Bitwert herleitbar
+($k_B T_H = \Ebit(4\pi r_s)$ exakt), und die numerische Gegenprobe
+in Dok.~326 ergab $T_H(\text{Matzke})/T_H(\text{KMS}) = 1{,}000000$.
+Beide Befunde sagen dasselbe: Der universelle Bitwert ist eine
+Umparametrisierung, keine unabhängige physikalische Eingabe.
+
+Bemerkenswert ist dabei die Herkunft des $2\pi$ in Matzkes Bitwert:
+Es stammt aus der KMS-Periodizität, also aus genau der Relation, die
+in Dok.~325 die Hawking-Temperatur \emph{ohne} Bitwert erzeugt.
+
+% ============================================================
+\section{Statusbilanz}
+
+\begin{center}
+\begin{tabular}{@{}lc@{}}
+  \toprule
+  \textbf{Aussage} & \textbf{Status} \\
+  \midrule
+  $\mbit = \mP\ln 2/(2\pi)$ aus Landauer bei $\TP/(2\pi)$ reproduziert & \B \\
+  $\Mcoll = \mP/\sqrt{2}$ rein geometrisch, bitwertfrei & \B \\
+  $\nthr(L) = L/(\sqrt{2}\lP)$ -- linear in der Skala & \B \\
+  Matzkes Skala: $L = 2\pi\lP/\ln 2 = 9{,}0647\,\lP$ & \B \\
+  Spannweite über Korpus-Skalen: Faktor $4{,}6\times10^{29}$ & \B \\
+  $\nthr \propto 1/T$ -- $10\,\%$ Temperaturfehler kippt die Aussage & \B \\
+  \midrule
+  $\nthr = 6{,}41$ als universelle Zahl & \X \\
+  Compton~$=$~Schwarzschild, $\mathrm{Cl}(6)$-Struktur, $r_s$ ohne ART & \B\ (unberührt) \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{Vorgeschlagener Registereintrag R88}
+
+\textbf{R88 -- $\nthr$ ist skalenabhängig; Matzkes Skala rekonstruiert
+(August 2026):}
+Dok.~329 entscheidet die in Dok.~326 als \S\ geführte Frage numerisch.
+Die Kollapsbedingung Compton~$=$~Schwarzschild liefert
+$\Mcoll = \mP/\sqrt{2}$ rein geometrisch und bitwertfrei \B.
+Mit der systemabhängigen Bit-Energie $\Ebit(L) = \hbar c/L$ (Dok.~257)
+folgt exakt $\nthr(L) = L/(\sqrt{2}\lP)$ -- linear in der Skala \B.
+Matzkes Wert $6{,}4097$ entspricht exakt
+$L = 2\pi\lP/\ln 2 = 9{,}0647\,\lP$ \B; der \enquote{universelle}
+Bitwert ist die FFGFT-Bit-Energie bei dieser Skala.
+Über die Skalen des Korpus variiert $\nthr$ um Faktor $4{,}6\times10^{29}$;
+eine Temperaturabweichung von $10\,\%$ kippt die Stabilitätsaussage für
+$\mathrm{Cl}(6)$. Damit ist $\nthr = 6{,}41$ als universelle Zahl
+abgeschlossen negativ \X.
+Unberührt bleiben Compton~$=$~Schwarzschild, der Schwarzschild-Radius
+ohne Feldgleichungen und die $\mathrm{Cl}(6)$-Struktur \B.
+Prüfskript: \texttt{326\_nthresh\_skalenabhaengigkeit.py} (12 Assertionen).\\
+\emph{Deklariert 24.~August 2026}
+
+% ============================================================
+\section*{Bezug zum Korpus}
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+  \toprule
+  \textbf{Baustein} & \textbf{Dok.} \\
+  \midrule
+  Bit-Energie $\Ebit = \hbar c/L$, Informationseinheit $\Delta w = 1$ & 257 \\
+  Landauer als Träger-Operation, nicht abstrakte Information & A271--A273 \\
+  Elementarzellen, Bitkapazität, Partitionsinvarianz & 302 \\
+  $\lP$, $\mP$, $L_0 = \xi\lP$ & 180 \\
+  KMS-Relation, $k_BT_H = \Ebit(4\pi r_s)$ & 325 \\
+  Matzke-Vergleich, Bitwert-Divergenz & 326 \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Literatur}
+
+\begin{enumerate}
+  \item D.~Matzke, \textit{Black Holes from Hyperbits},
+    IPI Annual Conference, August 2026.
+  \item J.~Pascher, Dok.~326 \textit{Schwarze Löcher aus Hyperbits und
+    aus FFGFT}, FFGFT-Korpus, 2026.
+  \item J.~Pascher, Dok.~325 \textit{Der FFGFT-Hawking-Mechanismus},
+    FFGFT-Korpus, 2026.
+  \item J.~Pascher, Dok.~257, 302, A271--A273 (Bit-Energie, Landauer),
+    FFGFT-Korpus.
+  \item J.~Pascher, Dok.~180 \textit{Herleitung von $L_0$},
+    FFGFT-Korpus, 2026.
+  \item R.~Landauer, IBM J.\ Res.\ Dev.\ \textbf{5}, 183, 1961.
+\end{enumerate}
+
+\vspace{6pt}\noindent\small
+\textcopyright\ 2026 Johann Pascher ·
+\href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}

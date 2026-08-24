@@ -3149,3 +3149,44 @@ Prüfskript: `python/Dok320_321_322_Skripte/320_dm32_neutrino_verify.py` (10 Ass
 ### R87 in Dok. 190 (23. August 2026)
 
 **R87** — $\Delta m_{32}^2$: korrigierte Zahlenwerte und Kandidatenanalyse [K]. Dok. 320 und 322 auf die richtigen Werte gebracht; die verbleibende +16,0 %-Abweichung bleibt offene Brücke [S] mit dem Mischungsterm $F_5$–$F_7$ als aussichtsreichstem Kandidaten.
+
+---
+
+### Dok. 329 — Ist die Stabilitätsschwelle n_thresh universell? (24. August 2026, DE+EN, je 7 S.)
+
+Numerische Entscheidung der in Dok. 326 als [S] geführten Frage. **Antwort: nein — n_thresh ist skalenabhängig, und Matzkes Skala lässt sich exakt rekonstruieren.**
+
+**Der skalenunabhängige Kern bleibt.** Die Kollapsbedingung Compton = Schwarzschild liefert $M_{\text{coll}} = m_P/\sqrt{2} = 1{,}539\times10^{-8}$ kg rein geometrisch — ohne jeden Bezug auf Bits, Landauer oder eine Temperatur [B]. Alles Nichtgeometrische an $n_{\text{thresh}} = M_{\text{coll}}/m_{\text{bit}}$ steckt im Nenner.
+
+**Das Hauptresultat.** Mit der systemabhängigen Bit-Energie $E_{\text{bit}}(L) = \hbar c/L$ (Dok. 257) folgt exakt
+
+$$n_{\text{thresh}}(L) = \frac{L}{\sqrt{2}\,\ell_P}$$
+
+— linear in der Skala, kein invarianter Zahlenwert [B]. Über die Skalen des Korpus ($L_0 = \xi\ell_P$ bis 1 nm) variiert der Wert um Faktor $4{,}6\times10^{29}$.
+
+**Matzkes implizite Skala.** Löst man $m_{\text{bit}} = \hbar/(cL)$ nach $L$ auf:
+
+$$L_{\text{Matzke}} = \frac{2\pi\,\ell_P}{\ln 2} = 9{,}0647\,\ell_P$$
+
+und dort gibt die Formel exakt 6,4097 zurück [B]. Der „universelle" Bitwert **ist** die FFGFT-Bit-Energie bei rund neun Plancklängen — die Universalität ist eine verdeckte Skalenwahl.
+
+**Empfindlichkeit.** Eine Temperaturabweichung von 10 % verschiebt n_thresh um 10 % und kippt damit die Stabilitätsaussage: bei $1{,}1\,T_{\text{KMS}}$ ist $n_{\text{thresh}} = 5{,}83 < 6{,}000$, Cl(6) läge dann *oberhalb* der Schwelle.
+
+**Nebenbefund:** Die angesetzte Temperatur ist nicht $T_P$, sondern die KMS-Temperatur $T_P/(2\pi)$. Das 2π stammt aus derselben KMS-Periodizität, die in Dok. 325 die Hawking-Temperatur *ohne* Bitwert erzeugt.
+
+**Unberührt bleiben** [B]: Compton = Schwarzschild, der Schwarzschild-Radius ohne Feldgleichungen (Matzkes Novel Result #1), die Cl(6)-Struktur als Fermion-Generation, die strukturellen Korrespondenzen der Hawking-Mechanismen.
+
+Prüfskript: `python/Dok326_Skripte/326_nthresh_skalenabhaengigkeit.py` (12 Assertionen, alle OK)  
+→ [DE](2/pdf/329_nthresh_Skalenanalyse_De.pdf) · [EN](2/pdf/329_nthresh_Skalenanalyse_En.pdf)
+
+---
+
+### Dok. 326 — angepasst an Dok. 329 (24. August 2026)
+
+Die Box „Offene Brücke — systemabhängige Schwelle?" ist ersetzt durch „Entschieden: die Schwelle ist skalenabhängig [B]" mit dem korrekten Resultat $n_{\text{thresh}}(L) = L/(\sqrt{2}\ell_P)$ (die frühere Formel in dieser Box war ungenau). Statusbilanz und Offene-Brücken-Abschnitt entsprechend nachgezogen; n_thresh als universelle Zahl ist dort jetzt [X].
+
+---
+
+### R88 in Dok. 190 (24. August 2026)
+
+**R88** — n_thresh ist skalenabhängig; Matzkes Skala rekonstruiert. $n_{\text{thresh}}(L) = L/(\sqrt{2}\ell_P)$ [B]; Matzkes Wert entspricht $L = 2\pi\ell_P/\ln 2$ [B]. Als universelle Zahl abgeschlossen negativ [X]. Compton = Schwarzschild, $r_s$ ohne Feldgleichungen und die Cl(6)-Struktur bleiben unberührt [B].

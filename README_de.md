@@ -497,6 +497,18 @@ Eintrag die vollständige Begründung. Append-only-Prinzip unverändert (R50).
 → Kompakt: [DE](2/pdf/190_T0_Korrekturen_De.pdf) · [EN](2/pdf/190_T0_Korrekturen_En.pdf)
 · Archiv: [DE](2/pdf/190_T0_Korrekturen_Archiv_De.pdf) · [EN](2/pdf/190_T0_Korrekturen_Archiv_En.pdf)
 
+### Dok. 329 — Ist die Stabilitätsschwelle n_thresh universell? (DE+EN, je 7 S.)
+
+**Nein** (R88). Die Kollapsbedingung Compton = Schwarzschild ist bitwertfrei
+(M_coll = m_P/√2, rein geometrisch [B]); mit E_bit(L) = ħc/L folgt exakt
+**n_thresh(L) = L/(√2·ℓ_P)** — linear in der Skala, Spannweite 4,6×10²⁹ über
+die Korpus-Skalen [B]. Matzkes Wert 6,41 entspricht exakt
+**L = 2πℓ_P/ln2 = 9,0647 ℓ_P**: der „universelle" Bitwert ist die
+FFGFT-Bit-Energie bei rund neun Plancklängen [B]. Als universelle Zahl
+abgeschlossen negativ [X]. Unberührt bleiben Compton = Schwarzschild,
+r_s ohne Feldgleichungen und die Cl(6)-Struktur [B].  
+→ [DE](2/pdf/329_nthresh_Skalenanalyse_De.pdf) · [EN](2/pdf/329_nthresh_Skalenanalyse_En.pdf)
+
 ### Dok. 320 + 322 — Δm²₃₂: Zahlenwerte korrigiert (R87)
 
 Die Auswertung von ξ^(9/5) in Dok. 320 war fehlerhaft (8,717×10⁻⁸ statt 1,059×10⁻⁷).
@@ -515,8 +527,8 @@ Vergleichen: Geometrie als Buchhaltung über Unterscheidbarkeit, das Herausfalle
 der Drei aus Cl(6), Schwarzschild ohne Einstein-Gleichungen — und wo die Eleganz
 erkauft ist (n_thresh = 6,41 hängt an der Setzung T = T_P).
 
-**Korrekturen:** R86 (Selbstadjungiertheit [S]→[B], R82 gestrichen); R87 (Δm²₃₂:
-Zahlenwerte in 320/322 korrigiert, +16,0 %). Prüfskripte: 100 Assertionen, alle OK.
+**Korrekturen:** R86 (Selbstadjungiertheit [S]→[B], R82 gestrichen); R87 (Δm²₃₂: Zahlenwerte in 320/322
+korrigiert, +16,0 %); R88 (n_thresh skalenabhängig, Matzkes Skala rekonstruiert). Prüfskripte: 112 Assertionen, alle OK.
 Details: [RELEASE_NOTES_v1_3_3_de.md](RELEASE_NOTES_v1_3_3_de.md)
 
 ---
