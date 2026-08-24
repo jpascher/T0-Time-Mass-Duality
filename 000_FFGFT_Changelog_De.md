@@ -3071,3 +3071,81 @@ Prüfskript: `python/Dok326_Skripte/326_Matzke_FFGFT_verify.py` (15 Assertions, 
 ### R85 in Dok. 190 (23. August 2026)
 
 **R85** — Hawking-Mechanismus mikroskopisch geschlossen [K]/[B] (Dok. 325). Die in Dok. 313 Kap. G als [S] geführte Emissionsseite (Membran-Thermometer, Selektion, Träger, Informationskodierung) ist durch Dok. 325 auf [K]/[B] gehoben: $k_BT_H = E_{\rm bit}(4\pi r_s)$ [K]; ℤ₃-Selektion $T_R = 0$ mit $P_jP_k = 0$ [B]; Träger $n_4{=}0$ [K]; Sektorpaar-Kodierung [B]. Offen bleiben Graukörper-Faktoren und Fixpunkt-Rückreaktion [S].
+
+---
+
+### Dok. 327 — Selbstadjungiertheit des fundamentalen fraktalen Operators F̂ (23. August 2026, DE+EN, je 6 S.)
+
+Schließt die in R82 als [S] deklarierte Lücke aus Dok. 322 **vollständig ohne Restfälle**. Der Beweis kommt ohne neue Axiome aus — er liest aus bestehenden Korpus-Resultaten ab, was gebraucht wird.
+
+**Der Kernpunkt:** Die Defektindex-Frage tritt unter FFGFT-Strukturen gar nicht auf. Da $L_0 = \xi\cdot\ell_P$ (Dok. 180 [K]) die Skalenleiter endlich macht, ist $\sum r_n < \infty$ keine Zusatzbedingung, sondern von $L_0$ garantiert. Die $\bigoplus_{n=1}^\infty$-Notation in Dok. 322 ist funktionalanalytische Konvention, keine physikalische Unendlichkeit — **es gibt keine Unendlichkeiten in FFGFT**.
+
+**Beweiskette:**
+- **Lemma 1 [B]:** Die Dok.-322-Axiome ($L_nL_m = L_{\min}$) sind exakt die einer Skalen-Filtrierung.
+- **Satz 2 [B]:** Blockdiagonalform $\hat F|_{\mathcal H_k} = \varphi_k\cdot\mathbb{1}$; endliche Stufenzahl ⟹ $\|\hat F\| \le \sum r_n < \infty$, also beschränkt mit $\mathcal D(\hat F) = \mathcal H$.
+- **Satz 3 [B]:** Die Symmetrie $\hat F = \hat F^\dagger$ folgt aus der ℤ₃-Paarung $(k,-k)$ mit $\theta_{n,-k} = -\theta_{n,k}$ ($e^{i\theta}+e^{-i\theta} = 2\cos\theta$) — **dieselbe Paarung, die in Dok. 325 die Hawking-Sektorinformation trägt**. Gegenprobe im Skript: eine ungepaarte Phase ergibt $\|\hat F-\hat F^\dagger\| \approx 0{,}02$.
+- **Korollar 4 [B]:** Beschränkt + symmetrisch ⟹ selbstadjungiert; Defektindizes $(0,0)$; genau eine Realisierung, keine Erweiterungswahl.
+- **Satz 5 [B]:** Fraktales Maß (endliche 100er-Rekursion ⟹ $0 < c \le w \le C$) wirkt als unitäre Äquivalenz und erhält die Selbstadjungiertheit.
+- **Satz 6 [B]:** ℤ₃-Restriktion ($[\hat F, P_0] = 0$) und alle drei χ-Twist-Klassen ($\chi^3=1$) bleiben selbstadjungiert.
+- **Korollar 7 [B]:** $\xi = \lambda_{\min}(\hat F_{D_4})$ ist via Min-Max wohldefiniert und trunkierungsstabil.
+
+Prüfskript: `python/Dok327_Skripte/327_selbstadjungiertheit_F_verify.py` (21 Assertionen, alle bestanden)  
+→ [DE](2/pdf/327_Selbstadjungiertheit_F_De.pdf) · [EN](2/pdf/327_Selbstadjungiertheit_F_En.pdf)
+
+**Dok. 322 nachgezogen:** Die Statustabelle führte „Voller Beweis der Selbstadjungiertheit von F̂" und „Klassifikation des Defektindex" noch als [S] offen; beide stehen jetzt auf **[B] ausgeführt, Dok. 327**. Ebenso die Definitionsstelle (F̂ ist selbstadjungiert, Defektindizes (0,0)) und die Schlussfolgerung („Der offene Punkt ist der vollständige Selbstadjungiertheits-Beweis" → ξ = λ_min(F̂_D4) ist als Spektralwert wohldefiniert).
+
+
+---
+
+### Dok. 190 — Umbau zu Kompakt-Register plus Archiv (23. August 2026)
+
+Das Korrekturregister ist umgebaut, weil es mit 86 Einträgen und 69 Seiten als Arbeitsinstrument unhandlich geworden war.
+
+- **Dok. 190-Archiv** (DE 69 S. / EN 58 S.): die bisherige ausführliche Fassung, eingefroren mit Archiv-Vermerk. Enthält für jeden Eintrag die vollständige Begründung, die fehlerhaften und korrekten Ausdrücke im Wortlaut sowie alle Nachträge.
+- **Dok. 190 neu** (DE 10 S. / EN 8 S.): Registertabelle mit **allen 86 Einträgen** (K1–K7 bzw. C1–C7, P1–P44, R41–R86) — Nummer, betroffene Dokumente, Gegenstand in Kurzform, mit Verweis aufs Archiv. Abschließend der konsolidierte Abschnitt „Aktuell offene Brücken".
+
+Das append-only-Prinzip bleibt unverändert (vgl. R50): Quelldokumente werden nicht revidiert. Neue Einträge werden künftig direkt im Kompakt-Register ausgeführt.
+
+→ Kompakt: [DE](2/pdf/190_T0_Korrekturen_De.pdf) · [EN](2/pdf/190_T0_Korrekturen_En.pdf) · Archiv: [DE](2/pdf/190_T0_Korrekturen_Archiv_De.pdf) · [EN](2/pdf/190_T0_Korrekturen_Archiv_En.pdf)
+
+---
+
+### Dok. 326 — Erweiterung um narrative Einordnung (23. August 2026, DE+EN, je 11 S.)
+
+Neuer Abschnitt 2 „Warum Matzkes Algebra so einfach wirkt", vor den technischen Vergleichen: Herkunft des ästhetischen Reizes des Hyperbit-Zugangs — Geometrie als Buchhaltung über Unterscheidbarkeit ($e_i^2 = +1$), das Herausfallen der Drei aus Cl(6), der Schwarzschild-Radius ohne Einstein-Gleichungen, die 0,41-Bit-Stabilitätsgeschichte — und, im selben Zug, wo die Eleganz erkauft ist: die Zahl 6,41 hängt an der Setzung $T = T_P$, während Landauer für thermische Träger-Ensembles gilt (A271–A273). Die Einordnung steht bewusst vor der Detailkritik.
+
+---
+
+### R86 in Dok. 190 (23. August 2026)
+
+**R86** — Selbstadjungiertheit von F̂ vollständig geschlossen [B] (Dok. 327). Die Endlichkeit der Skalenleiter ist durch $L_0 = \xi\cdot\ell_P$ garantiert; die Symmetrie folgt aus der ℤ₃-Paarung; Defektindizes $(0,0)$; $\xi = \lambda_{\min}(\hat F_{D_4})$ wohldefiniert. Keine Restfälle. R82 ist damit aus der Liste offener Brücken gestrichen.
+
+---
+
+### Dok. 320 + 322 — Δm²₃₂: Zahlenwerte korrigiert, Kandidatenanalyse ergänzt (23. August 2026)
+
+Die Auswertung von $\xi^{9/5}$ in Dok. 320 war fehlerhaft ($8{,}717\times10^{-8}$ statt $1{,}059\times10^{-7}$). Die Massenformel $m_{\nu_i} = m_e\,\xi^{p_i}$ und die Exponenten $p_i \in \{9/4,\,2,\,9/5\}$ waren stets korrekt — betroffen war ausschließlich die ausgerechnete Zahl für $\nu_3$. Dok. 320 und die zwei Tabellenzeilen in Dok. 322, die den Wert übernommen hatten, sind auf die richtigen Werte gebracht:
+
+| | vorher | jetzt |
+|---|---|---|
+| $m_{\nu_3}$ | 44,51 meV | **54,11 meV** |
+| $\Delta m_{32}^2$ | $1{,}90\times10^{-3}$ eV² | **$2{,}846\times10^{-3}$ eV²** |
+| Abweichung vs. NuFIT 5.3 | −22 % | **+16,0 %** |
+| $\sum m_\nu$ | 54,57 meV | 64,17 meV (weiterhin < 120 meV ✓) |
+
+Unberührt: $m_{\nu_1}$, $m_{\nu_2}$, $\Delta m_{21}^2$ (+8,3 %) und die Fixpunkt-Zuordnung.
+
+Die Abweichung bleibt [S], hat aber jetzt dasselbe Vorzeichen wie die solare (+8,3 %) und etwa die doppelte Größe — das deutet auf eine gemeinsame Ursache statt auf zwei unabhängige Probleme. Dok. 320 wurde deshalb um eine **Kandidatenanalyse** erweitert:
+
+- **$K_{\text{frak}}$ am Fixpunkt $F_7$** (Dok. 315): $F_7$ ist der einzige Fixpunkt in voller $(1,1,1,1)$-Richtung, trägt also eine Massenkreis-Komponente. Mit $K_{\text{frak}} = 74/75$ folgt +12,9 % — Verbesserung, aber unzureichend.
+- **Mischungsterm $F_5$–$F_7$**: Die Fixpunkte sind nicht vollständig orthogonal; ein Off-Diagonal-Term hätte das richtige Vorzeichen. Erfordert die vollständige Massenmatrix — der aussichtsreichste Kandidat.
+- **Anderer Exponent** — unwahrscheinlich: Der benötigte Wert $p_3 = 1{,}8081$ liegt nur 0,45 % über $9/5$; kein rationaler Bruch mit kleinen Zählern liegt näher.
+
+Prüfskript: `python/Dok320_321_322_Skripte/320_dm32_neutrino_verify.py` (10 Assertionen, alle OK)  
+→ [DE](2/pdf/320_Spektraltheorie_De.pdf) · [EN](2/pdf/320_Spektraltheorie_En.pdf)
+
+---
+
+### R87 in Dok. 190 (23. August 2026)
+
+**R87** — $\Delta m_{32}^2$: korrigierte Zahlenwerte und Kandidatenanalyse [K]. Dok. 320 und 322 auf die richtigen Werte gebracht; die verbleibende +16,0 %-Abweichung bleibt offene Brücke [S] mit dem Mischungsterm $F_5$–$F_7$ als aussichtsreichstem Kandidaten.

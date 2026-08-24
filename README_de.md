@@ -1,7 +1,7 @@
 # T0 Zeit-Masse-Dualität · FFGFT
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17390357.svg)](https://doi.org/10.5281/zenodo.17390357)
-**Version: v1.3.2** (23. August 2026) — DOI ausstehend, ersetzt v1.3.1
+**Version: v1.3.3** (23. August 2026) — DOI ausstehend, ersetzt v1.3.2
 
 **FFGFT — Fraktale Feldgeometrische Fundamentaltheorie** zeigt:
 Alle Konstanten des Standardmodells folgen aus einem einzigen
@@ -50,6 +50,7 @@ was Eingabe ist, was folgt, ist immer klar deklariert.
 | Leptonmassen aus rationalen Invarianten r_i, p_i | [Dok. 006](2/pdf/006_T0_Teilchenmassen_De.pdf) / [046](2/pdf/046_Teilchenmassen_De.pdf) |
 | Koide-Skalar Q_FFGFT = 0,6677 (berechnet, nicht gefittet) | [Dok. 258](2/pdf/258_Koide_2-3_De.pdf) / [259](2/pdf/259_Koide_Kreuzterme_De.pdf) |
 | Hawking-Mechanismus: Quant = Bit der Horizontskala | [Dok. 325](2/pdf/325_Hawking_FFGFT_De.pdf) |
+| Selbstadjungiertheit von F̂ — ξ = λ_min wohldefiniert | [Dok. 327](2/pdf/327_Selbstadjungiertheit_F_De.pdf) |
 | α⁻¹ = 137,036 aus D_f = 3 − ξ | [Dok. 011](2/pdf/011_T0_Feinstruktur_De.pdf) / [043](2/pdf/043_ResolvingTheConstantsAlfa_De.pdf) |
 | SI-Brücke: alle Konstanten aus ξ | [Dok. 013](2/pdf/013_T0_SI_De.pdf) |
 | E = mc² = E = m: Einheiten-Identität | [Dok. 077](2/pdf/077_E-mc2_De.pdf) |
@@ -465,11 +466,60 @@ Zusätzliche Einzelausgaben: *FFGFT Narrativ — Das Kosmische Gehirn*,
 ## Versionshistorie
 
 Die vollständige Versionshistorie mit DOIs steht in den Release Notes:
-**[RELEASE_NOTES_v1_3_2_de.md](RELEASE_NOTES_v1_3_2_de.md)** · Änderungsprotokoll:
+**[RELEASE_NOTES_v1_3_3_de.md](RELEASE_NOTES_v1_3_3_de.md)** · Änderungsprotokoll:
 **[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**
 
 ---
 
+
+## Neue Dokumente — v1.3.3 (23. August 2026)
+
+### Dok. 327 — Selbstadjungiertheit des fraktalen Operators F̂ (DE+EN, je 6 S.)
+
+Schließt die seit Dok. 322 offene R82-Lücke **vollständig ohne Restfälle** (R86).
+Die Defektindex-Frage tritt gar nicht auf: L₀ = ξ·ℓ_P (Dok. 180 [K]) macht die
+Skalenleiter endlich, also ist F̂ beschränkt mit D(F̂) = H — **es gibt keine
+Unendlichkeiten in FFGFT**. Die Symmetrie F̂ = F̂† folgt aus der ℤ₃-Paarung (k,−k),
+derselben, die in Dok. 325 die Hawking-Sektorinformation trägt [B].
+Defektindizes (0,0), genau eine Realisierung [B]; fraktales Maß, ℤ₃-Restriktion
+und alle drei χ-Twist-Klassen erhalten die Selbstadjungiertheit [B];
+**ξ = λ_min(F̂_D4) wohldefiniert und trunkierungsstabil** [B].
+Prüfskript: 21 Assertionen.  
+→ [DE](2/pdf/327_Selbstadjungiertheit_F_De.pdf) · [EN](2/pdf/327_Selbstadjungiertheit_F_En.pdf)
+
+### Dok. 190 — Umbau zu Kompakt-Register plus Archiv
+
+Das Register mit 86 Einträgen war unhandlich geworden. Neu: **Kompakt-Register**
+(DE 10 S. / EN 8 S.) mit Registertabelle aller Einträge (K/C, P, R41–R86) und dem
+konsolidierten Abschnitt „Aktuell offene Brücken"; die ausführliche Fassung ist als
+**Dok. 190-Archiv** (DE 69 S. / EN 58 S.) eingefroren und enthält weiterhin für jeden
+Eintrag die vollständige Begründung. Append-only-Prinzip unverändert (R50).  
+→ Kompakt: [DE](2/pdf/190_T0_Korrekturen_De.pdf) · [EN](2/pdf/190_T0_Korrekturen_En.pdf)
+· Archiv: [DE](2/pdf/190_T0_Korrekturen_Archiv_De.pdf) · [EN](2/pdf/190_T0_Korrekturen_Archiv_En.pdf)
+
+### Dok. 320 + 322 — Δm²₃₂: Zahlenwerte korrigiert (R87)
+
+Die Auswertung von ξ^(9/5) in Dok. 320 war fehlerhaft (8,717×10⁻⁸ statt 1,059×10⁻⁷).
+Massenformel und Exponenten waren stets korrekt — betroffen war nur die Zahl für ν₃.
+Korrigiert: **m_ν3 = 54,11 meV**, **Δm²₃₂ = 2,846×10⁻³ eV² (+16,0 % statt −22 %)**,
+Σm_ν = 64,17 meV (weiterhin im Planck-Limit) [K]. Unberührt: m_ν1, m_ν2, Δm²₂₁,
+Fixpunkt-Zuordnung. Dok. 320 zugleich um eine **Kandidatenanalyse** erweitert
+(K_frak an F₇: +12,9 %; Mischungsterm F₅–F₇: aussichtsreichster Kandidat;
+alternative Exponenten: unwahrscheinlich). Δm²₃₂ bleibt [S].  
+→ [DE](2/pdf/320_Spektraltheorie_De.pdf) · [EN](2/pdf/320_Spektraltheorie_En.pdf)
+
+### Dok. 326 — erweitert um narrative Einordnung (DE+EN, je 11 S.)
+
+Neuer Abschnitt „Warum Matzkes Algebra so einfach wirkt" vor den technischen
+Vergleichen: Geometrie als Buchhaltung über Unterscheidbarkeit, das Herausfallen
+der Drei aus Cl(6), Schwarzschild ohne Einstein-Gleichungen — und wo die Eleganz
+erkauft ist (n_thresh = 6,41 hängt an der Setzung T = T_P).
+
+**Korrekturen:** R86 (Selbstadjungiertheit [S]→[B], R82 gestrichen); R87 (Δm²₃₂:
+Zahlenwerte in 320/322 korrigiert, +16,0 %). Prüfskripte: 100 Assertionen, alle OK.
+Details: [RELEASE_NOTES_v1_3_3_de.md](RELEASE_NOTES_v1_3_3_de.md)
+
+---
 
 ## Neue Dokumente — v1.3.2 (23. August 2026)
 

@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21821995.svg)](https://doi.org/10.5281/zenodo.21821995)  
 
-**Version: v1.3.2** (23 August 2026) — DOI pending, supersedes v1.3.1
+**Version: v1.3.3** (23 August 2026) — DOI pending, supersedes v1.3.2
 
 **FFGFT — Fundamental Fractal-Geometric Field Theory** shows:
 all Standard Model constants follow from a single dimensionless
@@ -49,6 +49,7 @@ what is input and what follows is always declared explicitly.
 | Lepton masses from rational invariants r_i, p_i | [Doc. 006](2/pdf/006_T0_Teilchenmassen_En.pdf) / [046](2/pdf/046_Teilchenmassen_En.pdf) |
 | Koide scalar Q_FFGFT = 0.6677 (computed, not fitted) | [Doc. 258](2/pdf/258_Koide_2-3_En.pdf) / [259](2/pdf/259_Koide_Kreuzterme_En.pdf) |
 | Hawking mechanism: quantum = bit of the horizon scale | [Doc. 325](2/pdf/325_Hawking_FFGFT_En.pdf) |
+| Self-adjointness of F̂ — ξ = λ_min well-defined | [Doc. 327](2/pdf/327_Selbstadjungiertheit_F_En.pdf) |
 | α⁻¹ = 137.036 from D_f = 3 − ξ | [Doc. 011](2/pdf/011_T0_Feinstruktur_En.pdf) / [043](2/pdf/043_ResolvingTheConstantsAlfa_En.pdf) |
 | SI bridge: all constants from ξ | [Doc. 013](2/pdf/013_T0_SI_En.pdf) |
 | E = mc² = E = m: unit identity | [Doc. 077](2/pdf/077_E-mc2_En.pdf) |
@@ -458,6 +459,55 @@ The full version history with DOIs is given in the change log:
 ---
 
 
+## New documents — v1.3.3 (23 August 2026)
+
+### Doc. 327 — Self-adjointness of the fractal operator F̂ (DE+EN, 6 pp. each)
+
+Closes the R82 gap open since Doc. 322 **completely, with no remaining cases** (R86).
+The deficiency-index question does not arise at all: L₀ = ξ·ℓ_P (Doc. 180 [K]) makes
+the scale ladder finite, so F̂ is bounded with D(F̂) = H — **there are no infinities
+in FFGFT**. The symmetry F̂ = F̂† follows from the ℤ₃ pairing (k,−k), the same one
+that carries the Hawking sector information in Doc. 325 [B].
+Deficiency indices (0,0), exactly one realisation [B]; fractal measure, ℤ₃
+restriction and all three χ-twist classes preserve self-adjointness [B];
+**ξ = λ_min(F̂_D4) well-defined and truncation-stable** [B].
+Verification script: 21 assertions.  
+→ [DE](2/pdf/327_Selbstadjungiertheit_F_De.pdf) · [EN](2/pdf/327_Selbstadjungiertheit_F_En.pdf)
+
+### Doc. 190 — restructured into compact register plus archive
+
+With 86 entries the register had become unwieldy. New: **compact register**
+(DE 10 pp. / EN 8 pp.) with a register table of all entries (C/K, P, R41–R86) and the
+consolidated section "Currently open bridges"; the extended edition is frozen as
+**Doc. 190-Archive** (DE 69 pp. / EN 58 pp.) and still contains the full justification
+for every entry. Append-only principle unchanged (R50).  
+→ Compact: [DE](2/pdf/190_T0_Korrekturen_De.pdf) · [EN](2/pdf/190_T0_Korrekturen_En.pdf)
+· Archive: [DE](2/pdf/190_T0_Korrekturen_Archiv_De.pdf) · [EN](2/pdf/190_T0_Korrekturen_Archiv_En.pdf)
+
+### Docs. 320 + 322 — Δm²₃₂: numerical values corrected (R87)
+
+The evaluation of ξ^(9/5) in Doc. 320 was faulty (8.717×10⁻⁸ instead of 1.059×10⁻⁷).
+The mass formula and exponents were always correct — only the number for ν₃ was
+affected. Corrected: **m_ν3 = 54.11 meV**, **Δm²₃₂ = 2.846×10⁻³ eV² (+16.0 % instead
+of −22 %)**, Σm_ν = 64.17 meV (still within the Planck limit) [K]. Unaffected:
+m_ν1, m_ν2, Δm²₂₁, fixed-point assignment. Doc. 320 was at the same time extended by
+a **candidate analysis** (K_frak at F₇: +12.9 %; mixing term F₅–F₇: most promising;
+alternative exponents: unlikely). Δm²₃₂ remains [S].  
+→ [DE](2/pdf/320_Spektraltheorie_De.pdf) · [EN](2/pdf/320_Spektraltheorie_En.pdf)
+
+### Doc. 326 — extended with narrative placement (DE+EN, 11 pp. each)
+
+New section "Why Matzke's algebra looks so simple" ahead of the technical
+comparisons: geometry as bookkeeping over distinguishability, the three falling out
+of Cl(6), Schwarzschild without the Einstein equations — and where the elegance is
+paid for (n_thresh = 6.41 hangs on the postulate T = T_P).
+
+**Corrections:** R86 (self-adjointness [S]→[B], R82 removed); R87 (Δm²₃₂: numerical
+values in 320/322 corrected, +16.0 %). Verification scripts: 100 assertions, all passing.
+Details: [RELEASE_NOTES_v1_3_3.md](RELEASE_NOTES_v1_3_3.md)
+
+---
+
 ## New documents — v1.3.2 (23 August 2026)
 
 ### Doc. 324 — G(6,ℤ₃C) vacuum structure and FFGFT (DE+EN, 8 pp. each)
@@ -488,7 +538,7 @@ value is a reparametrization. n_thresh = 6.41 as a universal number: [X].
 → [DE](2/pdf/326_Matzke_FFGFT_Vergleich_De.pdf) · [EN](2/pdf/326_Matzke_FFGFT_Vergleich_En.pdf)
 
 **Corrections:** R84 (Casimir derivation of ξ), R85 (Hawking mechanism [S]→[K]/[B]).
-Verification scripts: 69 assertions, all passing. Details: [RELEASE_NOTES_v1_3_2.md](RELEASE_NOTES_v1_3_2.md)
+Verification scripts: 69 assertions, all passing. Details: [RELEASE_NOTES_v1_3_3.md](RELEASE_NOTES_v1_3_3.md)
 
 ---
 
