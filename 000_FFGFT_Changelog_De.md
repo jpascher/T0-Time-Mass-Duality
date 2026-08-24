@@ -3179,6 +3179,14 @@ und dort gibt die Formel exakt 6,4097 zurück [B]. Der „universelle" Bitwert *
 Prüfskript: `python/Dok326_Skripte/326_nthresh_skalenabhaengigkeit.py` (12 Assertionen, alle OK)  
 → [DE](2/pdf/329_nthresh_Skalenanalyse_De.pdf) · [EN](2/pdf/329_nthresh_Skalenanalyse_En.pdf)
 
+**Abschnitt „It from bit — mit Auflösungstiefe":** Das Dokument schließt mit einer versöhnenden Einordnung. In der Digitaltechnik hat „16 Bit" ohne Angabe der Quantisierung keine Bedeutung; $E_{\text{bit}} = \hbar c/L$ ist genau das — die **Auflösungstiefe** einer Skala, nicht ein Gewicht pro Bit. Wheelers *it from bit* wird damit nicht widerlegt, sondern um den fehlenden Parameter ergänzt. Matzkes fester Bitwert ist in dieser Lesart die Festlegung einer *Wortbreite* ($L = 2\pi\ell_P/\ln 2$) — legitim, solange man sie nicht für eine Naturkonstante hält. Zwei FFGFT-spezifische Zusätze: (a) die Auflösung ist nach unten begrenzt ($L_0 = \xi\ell_P$, das Gegenstück zum kleinsten Quantisierungsschritt — daraus folgt in Dok. 327 die Beschränktheit von F̂); (b) **die Regeln sind skaleninvariant, nur die Werte nicht** — T̃·m = 1, die KMS-Regel, $\Delta w = 1$ und die Trialitätsselektion gelten auf jeder Skala unverändert, analog zu laufenden Kopplungen, wo der Wert $\alpha_s(\mu)$ läuft, die Callan-Symanzik-Gleichung aber nicht.
+
+**Ergänzt: Abschnitt „Warum ℓ_P keine willkürliche Skala ist".** Nimmt den naheliegenden Gegeneinwand vorweg — mache ich nicht dasselbe wie Matzke, wenn ich einen Boden bei ξ·ℓ_P setze? Die Antwort ist asymmetrisch: Matzkes Skala stammt aus einer Landauer-Auswertung ohne unabhängige Begründung (*gewählt*), ℓ_P dagegen ist die Skala, an der die Geometrie umkippt, und folgt in FFGFT aus ξ über G = ξ²/(4m_e) (*abgeleitet*) — die Kette läuft von der Algebra zur Länge.
+
+**Zugleich offengelegt (R89):** Der letzte Schritt ist schwächer als die vorangehenden. Der Exponent 1 in L₀ = ξ¹·ℓ_P ist in Dok. 180 durch die ξ-Skalierung des Kopplungsterms motiviert, nicht hergeleitet [S]. Und die in Dok. 190 (Präzisierung 4) als Konsistenzprüfung geführte Schwarzschild-Aussage — ein Objekt mit M₀ = ξm_P/2 hätte Radius L₀ — ist eine **Identität**: aus r_s = 2GM/c² und ℓ_P = Gm_P/c² folgt sie für jedes ξ und jeden Exponenten [B]. Sie testet nichts. Ohne Folgen für Dok. 327: Die Beschränktheit von F̂ verlangt nur einen endlichen Boden, nicht dessen Wert.
+
+
+
 ---
 
 ### Dok. 326 — angepasst an Dok. 329 (24. August 2026)
@@ -3190,3 +3198,27 @@ Die Box „Offene Brücke — systemabhängige Schwelle?" ist ersetzt durch „E
 ### R88 in Dok. 190 (24. August 2026)
 
 **R88** — n_thresh ist skalenabhängig; Matzkes Skala rekonstruiert. $n_{\text{thresh}}(L) = L/(\sqrt{2}\ell_P)$ [B]; Matzkes Wert entspricht $L = 2\pi\ell_P/\ln 2$ [B]. Als universelle Zahl abgeschlossen negativ [X]. Compton = Schwarzschild, $r_s$ ohne Feldgleichungen und die Cl(6)-Struktur bleiben unberührt [B].
+
+---
+
+### R89 in Dok. 190 (24. August 2026)
+
+**R89** — Schwarzschild-Probe für L₀ ist eine Identität [B] (Dok. 329). Die Aussage aus Präzisierung 4 testet weder ξ noch den Exponenten in L₀ = ξ·ℓ_P; die Einstufung als „Probe" ist zu hoch gegriffen. Der Exponent selbst ist in Dok. 180 motiviert, nicht hergeleitet [S] — neu in der Liste offener Brücken. Ohne Folgen für R86.
+
+---
+
+### R89–R92 in Dok. 190 — Analyse der Zeitfeld-Mediatormasse (24. August 2026)
+
+Anlass war die Frage, ob der Exponent in $L_0 = \xi\cdot\ell_P$ hergeleitet oder nur argumentiert ist. Die Durchsicht der Lagrangian-Dokumente (019, 180, 201) sowie von 032 und 250 ergab vier getrennte Befunde.
+
+**R89 — eine Struktur, sektorabhängige Basismasse [B].** Der Korpus verwendet $m_T$ mit stark verschiedenen Werten; das ist kein Widerspruch. Alle folgen $m_T = M_{\text{Basis}}/\xi$, woraus für die Reichweite des massiven Zeitfelds $\hbar/(m_Tc) = \xi\cdot\lambda_C(M_{\text{Basis}})$ folgt — universelle Form, sektorabhängiger Wert, **strukturgleich mit $E_{\text{bit}} = \hbar c/L$**. Leptonsektor ($M = m_e$): 5,220 GeV, Reichweite $3{,}78\times10^{-17}$ m (Dok. 032, dort selbst *effektive* Torsionsmasse genannt). Fundamentaler Sektor ($M = m_P$): $m_T = 7500\,m_P$, Reichweite $= L_0$ exakt.
+
+**R90 — der Exponent ist hergeleitet [B].** Aus $m_T \sim \xi^{-1}$ und $\lambda_C \sim 1/m$ folgt Reichweite $\sim \xi^1$ zwingend. $L_0$ ist die Compton-Reichweite des Mediators; das erklärt zugleich, *warum* ein Boden existiert — weil der Mediator massiv ist. Kein Postulat, sondern Propagatorphysik. Offen bleibt allein die Basismasse $m_P$ des fundamentalen Sektors [S].
+
+**R91 — λ ist eine Basismasse, nicht der Higgs-Quartic [K].** Die Beschriftung „Higgs-Kopplungsparameter" in Dok. 019/201 ist irreführend: dimensional muss λ eine Masse sein; λ_h läuft unter der RGE und ist ein Niederenergie-Parameter; als dimensionsloser Faktor gedeutet verfehlt er $L_0$ um Faktor 7,75.
+
+**R92 — zwei Zuordnungsfehler [B].** Dok. 250 schreibt „$m_T = \xi/\ell$" — das ist die *Kopplung* $g_T = \xi m_\ell$, nicht die Mediatormasse; zudem steht dort $(\partial m)^2$ statt $(\Delta m)^2$. Und die Schwarzschild-„Probe" für $L_0$ in Dok. 190 (Präzisierung 4) ist eine **Identität**, die für jedes ξ und jeden Exponenten gilt — sie testet nichts.
+
+Dok. 329 ist entsprechend nachgezogen: Die Box „Offener Punkt: der Exponent im Boden" ist ersetzt durch „Der Boden folgt aus dem Lagrangian [B]".
+
+Prüfskript: `python/Dok180_Skripte/180_mT_struktur_L0_verify.py` (17 Assertionen, alle OK)

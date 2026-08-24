@@ -200,6 +200,34 @@ Cl(6) structure, the Hawking correspondences.
 
 Verification script: 12 assertions.
 
+The document closes with a conciliatory placement
+("It from bit — with resolution depth"): E_bit = ħc/L is the **resolution
+depth** of a scale, just as "16 bits" in digital technology acquires meaning
+only with the quantisation. Matzke's fixed bit value is then the fixing of a
+word width, not an error. Two FFGFT additions: the resolution is bounded from
+below (L₀ = ξℓ_P), and **the rules are scale-invariant, only the values are
+not** — T̃·m = 1, the KMS rule, Δw = 1 and T_R = 0 hold at every scale,
+analogously to running couplings.
+
+A further section ("Why ℓ_P is not an arbitrary scale") anticipates the
+counter-objection and at the same time exposes an open point (**R89**):
+the exponent 1 in L₀ = ξ·ℓ_P is motivated, not derived [S], and the
+Schwarzschild "check" from Doc. 190 is an identity that tests nothing [B].
+Without consequences for Doc. 327 — boundedness only requires a finite floor.
+
+**R89–R92 (time-field mediator mass):** Review of the Lagrangian documents
+showed that the exponent in L₀ = ξ·ℓ_P is **derived** [B]: from
+m_T = M_base/ξ the range follows as ξ·λ_C(M_base); in the fundamental sector
+(M = m_P) exactly L₀. This also answers why a floor exists at all — because
+the mediator is massive. The same rule resolves the apparently contradictory
+m_T values in the corpus (lepton sector: 5.22 GeV).
+Additionally corrected: λ is a base mass, not the Higgs quartic [K]; Doc. 250
+confuses coupling and mediator mass; the Schwarzschild "check" for L₀ is an
+identity [B]. Verification script: 17 assertions.
+
+
+
+
 → [DE](2/pdf/329_nthresh_Skalenanalyse_De.pdf) · [EN](2/pdf/329_nthresh_Skalenanalyse_En.pdf)
 
 ---
@@ -255,7 +283,7 @@ revised. New entries will henceforth be written directly in the compact register
 
 ---
 
-## Corrections — R84 to R88
+## Corrections — R84 to R92
 
 **R84** (Aug. 23): ξ = C₂(SU(3)_fund)/N_Fourier = (4/3)/10⁴ = 4/30000 [K]
 (Doc. 324). ξ is not a spectral value of any G(6) operator; the connection between
@@ -315,7 +343,7 @@ structure [B].
   boundedness, ℤ₃ symmetry with counter-example, deficiency indices, fractal
   measure, ℤ₃ restriction, χ-twists, λ_min stability (21)
 
-Total: 112 assertions, all passing.
+Total: 129 assertions, all passing.
 
 ## Bridges closed in this release
 

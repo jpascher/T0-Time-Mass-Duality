@@ -203,6 +203,34 @@ Cl(6)-Struktur, die Hawking-Korrespondenzen.
 
 Prüfskript: 12 Assertionen.
 
+Abschließend ordnet das Dokument den Befund versöhnend ein
+(„It from bit — mit Auflösungstiefe"): E_bit = ħc/L ist die
+**Auflösungstiefe** einer Skala, so wie „16 Bit" in der Digitaltechnik erst
+mit der Quantisierung Bedeutung bekommt. Matzkes fester Bitwert ist dann die
+Festlegung einer Wortbreite, nicht ein Irrtum. Zwei FFGFT-Zusätze: die
+Auflösung ist nach unten begrenzt (L₀ = ξℓ_P), und **die Regeln sind
+skaleninvariant, nur die Werte nicht** — T̃·m = 1, KMS-Regel, Δw = 1 und
+T_R = 0 gelten auf jeder Skala, analog zu laufenden Kopplungen.
+
+Ein weiterer Abschnitt („Warum ℓ_P keine willkürliche Skala ist") nimmt den
+Gegeneinwand vorweg und legt zugleich einen offenen Punkt offen (**R89**):
+Der Exponent 1 in L₀ = ξ·ℓ_P ist motiviert, nicht hergeleitet [S], und die
+Schwarzschild-„Probe" aus Dok. 190 ist eine Identität, die nichts testet [B].
+Ohne Folgen für Dok. 327 — Beschränktheit verlangt nur einen endlichen Boden.
+
+**R89–R92 (Zeitfeld-Mediatormasse):** Die Durchsicht der Lagrangian-Dokumente
+ergab, dass der Exponent in L₀ = ξ·ℓ_P **hergeleitet** ist [B]: Aus
+m_T = M_Basis/ξ folgt die Reichweite ξ·λ_C(M_Basis); im fundamentalen Sektor
+(M = m_P) exakt L₀. Damit ist auch beantwortet, warum ein Boden existiert —
+weil der Mediator massiv ist. Dieselbe Regel löst die scheinbar
+widersprüchlichen m_T-Werte im Korpus auf (Leptonsektor: 5,22 GeV).
+Zusätzlich korrigiert: λ ist eine Basismasse, nicht der Higgs-Quartic [K];
+Dok. 250 verwechselt Kopplung und Mediatormasse; die Schwarzschild-„Probe"
+für L₀ ist eine Identität [B]. Prüfskript: 17 Assertionen.
+
+
+
+
 → [DE](2/pdf/329_nthresh_Skalenanalyse_De.pdf) · [EN](2/pdf/329_nthresh_Skalenanalyse_En.pdf)
 
 ---
@@ -258,7 +286,7 @@ revidiert. Neue Einträge werden künftig direkt im Kompakt-Register ausgeführt
 
 ---
 
-## Korrekturen — R84 bis R88
+## Korrekturen — R84 bis R92
 
 **R84** (23. Aug.): ξ = C₂(SU(3)_fund)/N_Fourier = (4/3)/10⁴ = 4/30000 [K]
 (Dok. 324). ξ ist kein Spektralwert eines G(6)-Operators; die Verbindung
@@ -318,7 +346,7 @@ Unberührt: Compton = Schwarzschild, r_s ohne Feldgleichungen, Cl(6)-Struktur [B
   Beschränktheit, ℤ₃-Symmetrie mit Gegenprobe, Defektindizes, fraktales Maß,
   ℤ₃-Restriktion, χ-Twists, λ_min-Stabilität (21)
 
-Gesamt: 112 Assertionen, alle bestanden.
+Gesamt: 129 Assertionen, alle bestanden.
 
 ## Geschlossene Brücken in diesem Release
 
