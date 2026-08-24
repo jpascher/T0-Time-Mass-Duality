@@ -1,0 +1,305 @@
+% 328_Kopplungsregime_Resonanz_En_ch.tex
+% Doc. 328, FFGFT corpus, August 2026 — chapter file
+% Coupling Regimes, Resonance, and Synchronisation
+
+% --- Local macros ---
+\providecommand{\K}{}\renewcommand{\K}{\textbf{[K]}}
+\providecommand{\B}{}\renewcommand{\B}{\textbf{[B]}}
+\renewcommand{\S}{\textbf{[S]}}
+\providecommand{\SET}{}\renewcommand{\SET}{\textbf{[AXIOM]}}
+\providecommand{\E}{}\renewcommand{\E}{\textbf{[E]}}
+\providecommand{\kk}{k_{\mathrm{crit}}}
+\providecommand{\kmix}{\kappa_{\mathrm{mix}}}
+\providecommand{\Keff}{K_{\mathrm{eff}}}
+\providecommand{\xipar}{\xi}
+
+\definecolor{ffgftblue}{RGB}{30,90,160}
+\definecolor{proofgreen}{RGB}{0,110,50}
+\definecolor{warnviolet}{RGB}{100,0,130}
+\definecolor{etabliert}{RGB}{0,80,120}
+\tcbset{
+  base/.style={breakable,enhanced,boxrule=0.6pt,arc=3pt,
+    fonttitle=\bfseries\small,coltitle=white,top=4pt,bottom=4pt,left=6pt,right=6pt},
+  ffgftbox/.style={base,colback=blue!5,colframe=ffgftblue,colbacktitle=ffgftblue},
+  proofbox/.style={base,colback=green!5,colframe=proofgreen,colbacktitle=proofgreen},
+  warnbox/.style={base,colback=violet!6,colframe=violet!60!black,colbacktitle=violet!60!black},
+  etabliertbox/.style={base,colback=cyan!5,colframe=etabliert,colbacktitle=etabliert}
+}
+
+% ============================================================
+\section*{Abstract}
+
+Communications engineering has a quantitative three-way classification of coupling
+regimes (undercritical, critical, overcritical) relative to the damping of the
+coupled subsystems. This document shows that this classification is an overlooked
+structural principle: the same mathematical structure recurs in quantum optics,
+particle physics, and synchronisation theory. The connection to FFGFT is established
+through ten verification scripts with explicit symbolic and numerical results.
+
+\medskip
+\noindent\textbf{Main results:}
+\begin{itemize}
+  \item \B\ Dictionary two-circuit $\leftrightarrow$ 2$\times$2 mixing (Hermitian +
+    non-Hermitian, exceptional point $g_{\mathrm{EP}} = |\gamma_1-\gamma_2|/4$)
+  \item \B\ Exact duality $D^2+V^2=1$ for all pure pointers; measurement transition
+    as one-parameter continuum $\kappa = d/(2\sigma)$
+  \item \K\ $\kmix(\theta_W)$ derived from $\xi$ by composition (Doc.\,323);
+    screening negative (no simple constant)
+  \item \B\ GST texture $H_{12}=\sqrt{m_1 m_2}$ proven symbolically (Doc.\,041 formulas)
+  \item \K\ $\Keff = 2\pi\xi \approx 8.4\times10^{-4}$ from Doc.\,007/008;
+    $\varphi$ quantitatively outside all Arnold tongues
+  \item Four check-points identified in Doc.\,041 (author decision required)
+\end{itemize}
+
+% ============================================================
+\section{Motivation and Thesis}
+
+Theoretical physics treats couplings primarily via the magnitude of coupling constants.
+Communications engineering, by contrast, has an older and structurally richer
+classification: couplings are judged not absolutely but \emph{relative to the damping
+of the coupled subsystems}. This yields a three-way split — undercritical, critical,
+overcritical — distinguishing not merely quantitative shifts but \textbf{qualitative
+changes of spectral structure}.
+
+\begin{tcolorbox}[ffgftbox,title={Thesis}]
+This regime classification is an overlooked ordering principle. It recurs in quantum
+optics (strong coupling), particle physics (mixing, avoided crossing), and
+synchronisation theory (Kuramoto threshold, Arnold tongues) under different names.
+For FFGFT, in which particles are resonance states, it provides the natural language
+for when one state becomes two — and which frequency ratios lock or remain stably
+incommensurate.
+\end{tcolorbox}
+
+% ============================================================
+\section{The Two-Circuit Formalism \E}
+
+Two resonators with eigenfrequencies $\omega_1$, $\omega_2$, quality factors $Q_1$, $Q_2$
+and coupling coefficient $k$. Reference quantity: \textbf{critical coupling}
+\begin{equation}
+  \kk = \frac{1}{\sqrt{Q_1 \cdot Q_2}}.
+\end{equation}
+Normalised coupling factor $\kappa = k/\kk = k\cdot Q$ (symmetric case):
+
+\begin{itemize}
+  \item \textbf{Undercritical} ($\kappa < 1$): single peak at $\omega_0$; incomplete energy transfer.
+  \item \textbf{Critical} ($\kappa = 1$): maximally flat pass-band (Butterworth); optimal power transfer.
+  \item \textbf{Overcritical} ($\kappa > 1$): two peaks at
+    $\omega_\pm \approx \omega_0\!\left(1 \pm \tfrac{1}{2}\sqrt{k^2-\kk^2}\right)$.
+\end{itemize}
+
+\begin{tcolorbox}[etabliertbox,title={Two structural statements \E}]
+\textbf{(2.1)} Coupling shifts frequencies before splitting them (frequency pulling);
+the ``bare'' eigenfrequency is in principle unobservable.\\[2pt]
+\textbf{(2.2)} The threshold is a ratio: whether a system splits depends on $k$
+relative to the loss rates, not on $k$ alone.
+\end{tcolorbox}
+
+\noindent Numerically verified by \texttt{pruef\_328\_2\_bandfilter.py}:
+peak formula to $<10^{-5}$ relative, Butterworth curvature exactly zero at $\kappa=1$.
+
+% ============================================================
+\section{Recurrence in Quantum Physics \E}
+
+The correspondence is mathematically exact, not merely analogical:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Communications eng.} & \textbf{Quantum physics} & \textbf{Condition}\\
+\midrule
+Overcrit. peak splitting & Rabi splitting, avoided crossing & $g > (\kappa_c+\gamma)/2$\\
+Critical coupling & Critical coupling (resonator QED) & coupling $=$ loss rate\\
+Frequency pulling & Mass/energy renormalisation, Lamb shift & coupling to continuum\\
+Envelope interference & $\rho$–$\omega$ mixing & two poles, shared channel\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{Measurement as Coupling — the $\kappa$-Continuum \B}
+
+Every measurement couples the readout system to the object. Complete decoupling
+$\equiv$ zero information flow.
+
+\subsection{Symbolic Proof (von Neumann pointer model)}
+
+System $a|+\rangle + b|-\rangle$, Gaussian pointer of width $\sigma$, shift $\pm d/2$;
+coupling parameter $\kappa \equiv d/(2\sigma)$. Exact results:
+
+\begin{tcolorbox}[proofbox,title={Exact duality — \B\ (Scripts 5 and 9A)}]
+\begin{align}
+  V(\kappa) &= \langle\phi_+|\phi_-\rangle = e^{-\kappa^2/2}
+    \quad\text{(back-action / residual coherence)},\\
+  D(\kappa) &= \sqrt{1 - e^{-\kappa^2}}
+    \quad\text{(Helstrom distinguishability)},\\
+  \boldsymbol{D^2 + V^2} &= \boldsymbol{1}
+    \quad\text{for \emph{every} pure pointer.}
+\end{align}
+Limits: $\kappa\to0$: $(V,D)=(1,0)$; $\kappa\to\infty$: $(V,D)=(0,1)$.\\
+Weak regime: $D\approx\kappa$ (linear), $1-V\approx\kappa^2/2$ (quadratic).
+\end{tcolorbox}
+
+\begin{tcolorbox}[warnbox,title={Not closable — \SET}]
+``Every measurement apparatus reduces to a pointer model'' is a physical model
+assumption, not provable, only falsifiable. Declared as \SET\ (model framework).
+\end{tcolorbox}
+
+All quantities $V,D,\kappa$ reside on the state-transition level of the A271
+three-level separation (hardware / state transition / description).
+
+% ============================================================
+\section{Synchronisation and Locking \E}
+
+\subsection{Adler Equation}
+$\dot{\phi} = \Delta\omega - \varepsilon\sin\phi$. Lock-in precisely for $|\Delta\omega|\le\varepsilon$;
+lock range $\propto$ coupling $\varepsilon$. Verified numerically
+(\texttt{pruef\_328\_3\_einrasten.py}, deviation $<0.1\,\%$).
+
+\subsection{Kuramoto Model}
+Below the critical coupling $K_c$ the ensemble remains incoherent ($r=0$);
+above $K_c$ the order parameter $r\propto\sqrt{K-K_c}$ grows continuously —
+a second-order phase transition. This is \textbf{not} a three-way split in the
+sense of Sec.\,2: the Kuramoto transition separates two structural regimes
+(disorder / growing order), not three. The closer parallel to the band-filter
+three-way classification is the Adler model (Sec.\,5.1): there the lock-range
+threshold is exactly the coupling amplitude, sharing the same threshold structure
+as the band-filter critical coupling.
+
+\subsection{Noise Minimum}
+The locked state exports entropy and is the least noisy available state —
+the foundation of every frequency synthesis (PLL).
+
+\subsection{Thermodynamic Clarification}
+Phase locking occurs exclusively in open, driven, dissipative systems. ``Natural
+systems tend toward an optimum, not toward uniform distribution'' holds for
+nonequilibrium steady states; the second law remains intact.
+
+% ============================================================
+\section{Arnold Tongues, KAM, and the Golden Ratio}
+
+\subsection{Qualitative stability \E}
+Tongue widths $\Delta\Omega(p/q)\propto K^q$ (Script 9B: slope 1.98 for $q=2$,
+2.69 for $q=3$). The most irrationally approximable ratio is $\varphi=[1;1,1,\ldots]$
+(KAM). Connects to Doc.\,172/188/275 of the corpus.
+
+\subsection{Quantitative FFGFT connection \K}
+From Doc.\,008: $m(n)=m_0 e^{\xi n}$, coupling term $g\sim\xi\omega$, hence
+$g/\omega=\xi$ ($n$-independent). Effective $K$ in the circle map:
+\begin{equation}
+  \Keff = 2\pi\xi \approx 8.4\times10^{-4}.
+\end{equation}
+The $\xi^2$ suppression (Doc.\,007: $\sigma_\nu\sim\xi_0^2 G_F$) corresponds to the
+$K^2$ term in the tongue width. At $\Keff\ll1$:
+$\Delta\Omega(1/2)\approx 5.6\times10^{-8}$.
+$\varphi$ lies entirely outside every tongue. \K\ (Orbifold derivation outstanding.)
+
+% ============================================================
+\section{Mixing Angles as Coupling Grades — Largely Closed}
+
+\subsection{Dictionary two-circuit $\leftrightarrow$ 2$\times$2 mixing \B}
+
+Hermitian case (Script 1):
+\begin{equation}
+  \lambda_\pm = \tfrac{H_{11}+H_{22}}{2} \pm
+  \sqrt{\!\left(\tfrac{H_{11}-H_{22}}{2}\right)^2+H_{12}^2},\quad
+  \tan 2\theta = \frac{2H_{12}}{H_{11}-H_{22}}.
+\end{equation}
+
+Non-Hermitian extension (Script 8, exceptional point):
+\begin{equation}
+  g_{\mathrm{EP}} = \frac{|\gamma_1-\gamma_2|}{4}.
+\end{equation}
+For $g<g_{\mathrm{EP}}$: only widths split (undercritical);
+for $g>g_{\mathrm{EP}}$: frequencies split (Rabi, overcritical).
+\textbf{Band-filter $\kk$ and cavity-QED ``strong coupling'' are special cases of
+this EP condition.} \B
+
+\begin{center}
+\small
+\begin{tabular}{llll}
+\toprule
+\textbf{Angle} & $\theta$ [°] & $\sin^2\!\theta$ & $\kmix = \tan 2\theta$\\
+\midrule
+$\theta_W$ (Doc.\,323: $\sin^2\theta_W=0.2308$) & 28.71 & 0.2308 & 1.57\\
+Cabibbo $\theta_C$ ($|V_{us}|=0.22452$, Doc.\,041) & 12.98 & 0.050 & 0.49\\
+CKM $\theta_{13}$ ($|V_{ub}|=0.00365$) & 0.21 & $\approx0$ & 0.007\\
+PMNS $\theta_{12}$ (Doc.\,041: 33.44°) & 33.44 & 0.304 & 2.34\\
+PMNS $\theta_{23}$ (Doc.\,041: 49.2°) & 49.2 & 0.573 & $-6.77$\\
+PMNS $\theta_{13}$ (Doc.\,041: 8.57°) & 8.57 & 0.022 & 0.31\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{$\xi$-Level: $\theta_W$ sector closed \K}
+
+$\sin^2\theta_W=0.2308$ derived from $\xi$ in Doc.\,323 \K. Hence
+$\kmix(\theta_W)=1.5652$ is $\xi$-derived by composition. Screening against 11
+candidate constants: no hit (closest: $e/\!\sqrt{3}$, $2.7\times10^{-3}$).
+
+\subsection{GST texture and $H_{12}$ \B}
+
+Doc.-041 formulas of type $\theta=\arcsin\!\sqrt{m_1/m_2}$ are exactly the
+Gatto–Sartori–Tonin texture (Script 7):
+\begin{equation}
+  M = \begin{pmatrix}0 & \sqrt{m_1 m_2}\\ \sqrt{m_1 m_2} & m_2-m_1\end{pmatrix},
+  \quad \text{eigenvalues}\;\{-m_1,m_2\},\quad \tan\theta=\sqrt{m_1/m_2}.
+\end{equation}
+$H_{12}=\sqrt{m_1 m_2}$ (geometric mean of masses). \B
+
+\subsection{Four check-points from Doc.\,041}
+
+\begin{tcolorbox}[warnbox,title={Check-points for Doc.\,190 — author decision required}]
+(i)~$\delta_{\rm CKM}=\arcsin(2\sqrt{2}\sqrt{\xi}/3)$ gives $0.011\,\mathrm{rad}$
+    vs.\ $1.20\,\mathrm{rad}$; candidate: $\arcsin(2\sqrt{2}/3)=1.231\,\mathrm{rad}$.\\
+(ii)~$\theta_{13}=\arcsin(\xi^{1/3})$ gives $2.93°$ vs.\ $8.57°$;
+    candidate: $\arcsin((25\xi)^{1/3})=8.59°$.\\
+(iii)~$|V_{us}|$ with Doc.\,006 masses: $5.4\,\%$ discrepancy.\\
+(iv)~Doc.\,007 $\leftrightarrow$ Doc.\,041 tension already declared as
+    \texttt{\string\begin\{warning\}} and \texttt{\string\begin\{speculation\}} in the source.
+\end{tcolorbox}
+
+% ============================================================
+\section{Delimitation}
+
+\begin{tcolorbox}[warnbox,title={Delimitation from resonance-as-vocabulary}]
+Schepis (IPI Letters 3(2) 2025; ICIP-2026) uses resonance as connecting vocabulary
+without computable quantities. This document takes the opposite direction: every
+bridge is verified by a script and carries a definite status marker. Observers appear
+only as read-out sub-circuits; no consciousness vocabulary.
+\end{tcolorbox}
+
+% ============================================================
+\section{Closability Balance}
+
+\begin{tabular}{lp{9.5cm}}
+\toprule
+\textbf{Bridge} & \textbf{Status}\\
+\midrule
+R-new-b & \B\ Hermitian + non-Hermitian (EP), complete\\
+R-new-c & \K\ for $\theta_W$ (composition); \B\ GST texture; four check-points open\\
+R-new-d & \B\ Duality $D^2+V^2=1$, all pure pointers\\
+R-new-a (qual.) & \B\ $K^q$ hierarchy, $\varphi$ quantitatively outside tongues\\
+R-new-a (quant.) & \K\ $\Keff=2\pi\xi$ from Doc.\,007/008; orbifold derivation outstanding\\
+\SET & Reducibility measurement $\to$ pointer; in principle unprovable\\
+\bottomrule
+\end{tabular}
+
+% ============================================================
+\section{Verification Scripts}
+
+\begin{tabular}{lll}
+\toprule
+\textbf{Script} & \textbf{Content} & \textbf{Result}\\
+\midrule
+pruef\_328\_1 & Dictionary, sympy & \B\\
+pruef\_328\_2 & Band-filter regimes, numpy & \E\ confirmed\\
+pruef\_328\_3 & Adler, Arnold tongues & \E\ confirmed\\
+pruef\_328\_4 & $\kmix$ table & Finding\\
+pruef\_328\_5 & Measurement $\kappa$, $D^2+V^2$ & \B\\
+pruef\_328\_6 & $\xi$-composition, screening & \K\\
+pruef\_328\_7 & GST texture, corpus check & \B, check-points\\
+pruef\_328\_8 & EP, non-Hermitian & \B\\
+pruef\_328\_9 & Pure pointers, $K^q$ & \B\\
+pruef\_328\_10 & $\Keff=2\pi\xi$ & \K\\
+\bottomrule
+\end{tabular}
