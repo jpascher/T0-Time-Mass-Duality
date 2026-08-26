@@ -1,0 +1,140 @@
+"""
+Pruefung von Marcels Einwand (26.08.2026, dritte Mail) gegen R97:
+
+Behauptung: "H^1-Zugehoerigkeit garantiert die Existenz einer schwachen
+Ableitung in L^2, aber nicht klassische punktweise Differenzierbarkeit
+oder C^1-Regularitaet." Daher sei die R97-Formulierung "differentiability
+requires a C^1 representative OR membership in a Sobolev space such as
+H^1" zu unpraezise/zu weit gefasst.
+
+Frage: Ist Marcels Punkt in 1D (der hier relevante Fall: Funktionen auf
+R_t bzw. S^1_m, EINE reelle Variable t) korrekt, oder uebersieht er den
+Sobolev-Einbettungssatz, der in 1D H^1 SEHR WOHL klassische punktweise
+Differenzierbarkeit fast ueberall und eine STETIGE (nicht notwendig C^1)
+Repraesentante liefert?
+"""
+
+import numpy as np
+import sympy as sp
+
+print("=" * 72)
+print("PRUEFUNG 1: Was genau garantiert H^1(I) fuer ein Intervall I in R")
+print("  (bzw. periodisch H^1(S^1_m))? -- Sobolev-Einbettungssatz in 1D")
+print("=" * 72)
+
+print("""
+Der Sobolev-Einbettungssatz (Morrey/Sobolev, Spezialfall n=1) besagt:
+
+    H^1(I) = W^{1,2}(I)  bettet STETIG ein in  C^{0,1/2}(I)  (Hoelder-1/2)
+
+fuer ein beschraenktes Intervall I in R (bzw. den Kreis S^1_m, der
+kompakt ist). Das ist ein STANDARDRESULTAT der Funktionalanalysis
+(siehe z.B. Adams, "Sobolev Spaces", Theorem 4.12, Fall n=1, oder
+Brezis, "Functional Analysis, Sobolev Spaces and PDEs", Theorem 8.8).
+
+Konkret: JEDES Element von H^1(I) besitzt einen STETIGEN Repraesentanten
+(sogar Hoelder-1/2-stetig), und dieser Repraesentant ist absolut stetig
+mit
+
+    f(y) - f(x) = Integral_x^y f'(t) dt
+
+fuer die schwache Ableitung f' in L^2(I). Insbesondere ist f DANN
+PUNKTWEISE AUSWERTBAR (klar, da stetig) UND fast ueberall klassisch
+differenzierbar im Sinne von Lebesgue (absolut stetige Funktionen sind
+nach dem Hauptsatz der Differential- und Integralrechnung fuer Lebesgue-
+Integrale fast ueberall klassisch differenzierbar, mit Ableitung gleich
+der schwachen Ableitung f' fast ueberall).
+""")
+
+# Konkretes Gegenbeispiel/Beispiel zur Illustration: H^1-Funktion, die
+# NICHT C^1 ist, aber dennoch punktweise auswertbar UND fast ueberall
+# klassisch differenzierbar ist.
+t = sp.symbols('t', real=True)
+
+# f(t) = |t| auf [-1,1] ist NICHT C^1 (Knick bei 0), aber liegt in H^1:
+# f' = sign(t) in L^2([-1,1]) (beschraenkt, also erst recht L^2).
+f_abs = sp.Abs(t)
+print("Beispiel: f(t) = |t| auf [-1,1].")
+print(f"  f ist NICHT C^1 (Ableitung springt bei t=0 von -1 auf +1).")
+print(f"  Schwache Ableitung f'(t) = sign(t), beschraenkt, also in L^2([-1,1]).")
+print(f"  => f liegt in H^1([-1,1]), ABER f ist NICHT C^1.")
+print(f"  UND DENNOCH: f ist ueberall auf [-1,1] STETIG auswertbar,")
+print(f"  und f ist AUSSER bei t=0 (einer Nullmenge) klassisch")
+print(f"  differenzierbar -- exakt die Situation, die der Sobolev-")
+print(f"  Einbettungssatz in 1D fuer H^1 garantiert.")
+
+print()
+print("=" * 72)
+print("PRUEFUNG 2: Ist Marcels Formulierung fuer ALLGEMEINE Dimension n")
+print("  richtig, aber fuer den hier vorliegenden Fall n=1 zu pessimistisch?")
+print("=" * 72)
+
+print("""
+Marcels Aussage ("H^1 gibt nur eine schwache Ableitung in L^2, keine
+punktweise Differenzierbarkeit") ist KORREKT fuer n >= 2 (z.B. H^1(R^2)
+bettet NICHT stetig ein -- es gibt H^1-Funktionen auf einer 2D-Scheibe,
+die unbeschraenkt sind, siehe das Standardbeispiel f(x)=log(log(1/|x|))
+nahe dem Ursprung). Fuer n>=2 ist sein Einwand vollkommen richtig.
+
+ABER: Der hier relevante Fall ist n=1 (Funktionen einer reellen
+Variablen t, auf S^1_m bzw. R_t via Pullback) -- und in n=1 gilt der
+Sobolev-Einbettungssatz mit dem STAERKEREN Ergebnis (stetige, sogar
+Hoelder-stetige Einbettung), das im mehrdimensionalen Fall NICHT gilt.
+Marcels Einwand generalisiert also einen fuer hoehere Dimension
+korrekten Fakt in eine Dimension, in der die schwaechere Aussage nicht
+mehr die volle Wahrheit ist.
+""")
+
+print("=" * 72)
+print("PRUEFUNG 3: War die urspruengliche R97-Formulierung ('C^1 ODER H^1')")
+print("  demnach eher zu STRENG oder eher zu UNPRAEZISE?")
+print("=" * 72)
+
+print("""
+Die urspruengliche R97-Formulierung sagte sinngemaess: 'Differenzierbarkeit
+braucht C^1 oder Sobolev H^1.' Das ist in 1D nicht falsch, aber leicht
+unpraezise formuliert, weil es H^1 als GLEICHRANGIGE Alternative zu C^1
+neben stellt, ohne zu sagen, dass H^1 (in 1D) sogar eine STETIGE
+Repraesentante UND fast-ueberall-klassische Differenzierbarkeit liefert
+-- also strukturell zwischen 'nur schwache Ableitung' (Marcels Lesart)
+und 'C^1' liegt, aber naeher an 'ausreichend fuer klassische
+Differenzierbarkeit fast ueberall' als Marcel suggeriert.
+
+Marcels vorgeschlagene Ersetzung ('H^1 provides [nur] a weak derivative
+in L^2') ist fuer den 1D-Fall zu SCHWACH/zu PESSIMISTISCH -- sie
+unterschlaegt den Sobolev-Einbettungssatz und suggeriert, H^1 liefere
+KEINE punktweise Differenzierbarkeit, waehrend es sie (fast ueberall)
+TATSAECHLICH liefert, dank der 1D-Einbettung.
+""")
+
+print("=" * 72)
+print("FAZIT")
+print("=" * 72)
+print("""
+Johanns Verdacht ist BERECHTIGT: Marcels dritte Praezisierung ist fuer
+den allgemeinen (hoeherdimensionalen) Fall korrekt, aber fuer den hier
+vorliegenden 1D-Fall (Funktionen einer Variablen t auf S^1_m / R_t) zu
+pessimistisch. Der Sobolev-Einbettungssatz in 1D garantiert:
+
+  H^1(I) (I beschraenktes Intervall oder S^1_m)
+    ==> stetiger, sogar Hoelder-1/2-stetiger Repraesentant
+    ==> absolut stetig
+    ==> fast ueberall klassisch differenzierbar, mit Ableitung = f' f.ue.
+
+Marcels vorgeschlagene Formulierung sollte NICHT direkt uebernommen
+werden. Eine korrekte Formulierung waere:
+
+  "Pointwise evaluation requires a sufficiently regular representative.
+   In one dimension (functions of a single variable t, as here),
+   membership in H^1 already suffices: the Sobolev embedding
+   H^1(I) -> C^{0,1/2}(I) provides a continuous, even Hoelder-1/2
+   representative that is absolutely continuous and hence classically
+   differentiable almost everywhere, with derivative equal to the weak
+   derivative a.e. Full C^1 regularity is a strictly stronger, separate
+   condition (continuous, not just a.e.-defined, derivative)."
+
+Dies ist WEDER Marcels urspruengliche Formulierung NOCH die vorherige
+R97-Formulierung exakt, sondern praeziser als beide: es erklaert, warum
+H^1 in 1D bereits (fast ueberall) klassische Differenzierbarkeit liefert
+-- ein Punkt, den Marcels neuester Vorschlag unterschlaegt.
+""")
