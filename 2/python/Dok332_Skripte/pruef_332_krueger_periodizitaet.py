@@ -173,3 +173,37 @@ print("""
    erzeugt. Das bleibt außerhalb des Gegenstands von Dok. 332 und dieses
    Skripts.
 """)
+
+print()
+print("=" * 70)
+print("NACHTRAG (26.08.2026, Krueger-Praezisierung zu Abschnitt 2.1):")
+print("Punktweise Auswertung/Differenzierbarkeit ist keine Eigenschaft")
+print("von rohen L^2-Elementen, sondern braucht einen regulaeren")
+print("Repraesentanten.")
+print("=" * 70)
+print("""
+L^2(S^1_m) (und ebenso Per_{R_m}(R_t) mit Pro-Periode-Norm) besteht aus
+AEQUIVALENZKLASSEN fast-ueberall-gleicher Funktionen. Zwei Funktionen,
+die sich nur auf einer Nullmenge unterscheiden, sind im selben L^2-
+Element -- 'der Funktionswert an einem festen Punkt t' ist fuer ein
+allgemeines L^2-Element schlicht NICHT WOHLDEFINIERT, unabhaengig davon,
+ob man auf S^1_m bleibt oder den Pullback nach R_t macht.
+
+Punktweise Auswertung und erst recht Differenzierbarkeit brauchen:
+  - einen KONKRETEN Repraesentanten der Aequivalenzklasse, UND
+  - zusaetzliche Regularitaet dieses Repraesentanten (z.B. C^0 fuer
+    Auswertung, C^1 oder ein Sobolev-Raum H^1/H^s fuer Differenzier-
+    barkeit).
+
+Der Pullback Phi=p* aendert daran nichts: Er liefert einen NICHTKOMPAKTEN
+KOORDINATENBEREICH R_t, auf dem HINREICHEND REGULAERE periodische
+Repraesentanten ausgewertet und abgeleitet werden koennen -- das ist ein
+Gewinn an Koordinatenstruktur, keine Eigenschaft, die aus der blossen
+L^2-Zugehoerigkeit folgt.
+
+KORREKTUR fuer Dok. 332, Abschnitt 2.1: Die Formulierung 'f ist an jedem
+Punkt t in R ... auswertbar, ableitbar' muss przisiert werden zu 'ein
+hinreichend regulaerer Repraesentant von f ist an jedem Punkt t in R
+auswertbar/ableitbar' -- die Eigenschaft gehoert dem Repraesentanten,
+nicht dem blossen L^2-Element.
+""")
