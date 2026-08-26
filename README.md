@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21821995.svg)](https://doi.org/10.5281/zenodo.21821995)  
 
-**Version: v1.3.3** (23 August 2026) — DOI pending, supersedes v1.3.2
+**Version: v1.3.4** (26 August 2026) — DOI pending, supersedes v1.3.3
 
 **FFGFT — Fundamental Fractal-Geometric Field Theory** shows:
 all Standard Model constants follow from a single dimensionless
@@ -280,7 +280,8 @@ T0-Time-Mass-Duality/
 ├── Mails_Forscher_T0/         # Research correspondence
 ├── rsa/                       # RSA factorisation demos and signal tools
 ├── sig/                       # Signal analysis tools
-├── 000_FFGFT_Changelog_De.md
+├── 001_FFGFT_Changelog_De.md  # current (from v1.3.4)
+├── 000_FFGFT_Changelog_De.md  # archive up to v1.3.3 (frozen)
 ├── DOCUMENTS.md               # complete document index
 ├── RELEASE_NOTES_v1_2_3.md
 ├── RELEASE_NOTES_v1_2_3_de.md
@@ -424,7 +425,9 @@ documents every correction and refinement with date, status, and
 affected documents — K1–K7 (corrections) and R1–R74 (refinements/programme, as of 5 August 2026).
 Nothing is silently overwritten.
 
-The **changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)
+The **changelog** [`001_FFGFT_Changelog_De.md`](001_FFGFT_Changelog_De.md)
+records all ongoing corpus changes (from v1.3.4 onwards).
+Earlier entries up to v1.3.3: [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md) (frozen).
 records all running changes to the corpus chronologically.
 
 ---
@@ -454,7 +457,7 @@ Additional standalone editions: *FFGFT Narrative — The Cosmic Brain*,
 ## Version History
 
 The full version history with DOIs is given in the change log:
-**[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**
+**[001_FFGFT_Changelog_De.md](001_FFGFT_Changelog_De.md)**
 
 ---
 
@@ -551,6 +554,65 @@ value is a reparametrization. n_thresh = 6.41 as a universal number: [X].
 
 **Corrections:** R84 (Casimir derivation of ξ), R85 (Hawking mechanism [S]→[K]/[B]).
 Verification scripts: 69 assertions, all passing. Details: [RELEASE_NOTES_v1_3_3.md](RELEASE_NOTES_v1_3_3.md)
+
+---
+
+## New Documents — v1.3.4 (26 August 2026)
+
+### Doc. 328 — Coupling Regimes, Resonance and Synchronisation (DE+EN, ~12 pp. each)
+
+Communications-engineering classification (undercritical / critical / overcritical,
+relative to system damping) as a structural ordering principle. The same threefold
+structure recurs in quantum optics (strong coupling), particle physics (mixing,
+avoided crossing) and synchronisation theory (Kuramoto threshold, Arnold tongues).
+For FFGFT it provides the natural language for particles as resonance states.
+
+Key results: [B] two-resonator ↔ 2×2-mixing dictionary (exceptional point
+g_EP = |γ₁−γ₂|/4); [B] duality D²+V²=1 for all pure pointers; [K] κ_mix(θ_W)
+derived from ξ via Doc. 323 (screening: negative, no simple constant);
+[B] GST texture H₁₂=√(m₁m₂) proved symbolically; [K] K_eff = 2πξ ≈ 8.4×10⁻⁴;
+four unresolved points in Doc. 041 flagged (author decision required).
+New marker [E] introduced for established external formalisms not yet
+corpus-approved as [K]/[B]. Ten verification scripts.
+→ [DE](2/pdf/328_Kopplungsregime_Resonanz_De.pdf) · [EN](2/pdf/328_Kopplungsregime_Resonanz_En.pdf)
+
+### Doc. 330 — Three Operations from T⁴ to Observation Space (DE+EN, ~14 pp. each)
+
+Consolidates the Type-I/II/III classification (Doc. 270) and demarcates FFGFT
+from discrete emergence models. HLV (Krüger, August 2026) serves as a case study;
+the four structural problems of discrete lattice models do not arise in FFGFT
+because T⁴ is compact and geometrically complete.
+
+Type I [B]: S¹_m → ℝ_t via T̃·m=1, information-preserving (function pullback p*).
+Type II: D3→D2→D1 geometric projection, lossy, irreversible.
+Type III [K]/[B]: T⁴ ↔ H bijective, lossless.
+T⁴ intrinsically flat [K]: K=0 pointwise via metric descent (R95).
+D₄ specificity test [S]: adversarial test against matched comparison carriers — open.
+
+Register entries: R93 [B] S_BH(M_coll)=2π nat = n_thresh(Matzke) in bits;
+R94 [B] I_sector/I_thermal = log₂3 for all M; R95 two wording refinements after
+external review (flatness [B], Type-I pullback [B], D₄ specificity [S]).
+→ [DE](2/pdf/330_Operationen_T4_Abgrenzung_De.pdf) · [EN](2/pdf/330_Operationen_T4_Abgrenzung_En.pdf)
+
+### Doc. 332 — Two Paths from Discrete to Continuum (26 Aug 2026, DE+EN, ~16 pp. each)
+
+General comparative essay (not an original FFGFT proof text; [K]/[B]/[S] markers
+used as neutral highlighting only). References and comments on Krüger's preprint
+(Zenodo DOI 10.5281/zenodo.22105698). Two strategies contrasted:
+
+1. Regge/chain-complex strategy: category error blocked by explicit lemmas;
+   Hodge positivity [B]; continuum limit via Mosco convergence *postulated*
+   (not proved).
+2. Canonical function pullback (FFGFT): continuum as pullback along a fixed
+   covering projection; Per_{Rm}(ℝ_t) ≅ L²(S¹_m) isometrically [B] (R96).
+
+R96 [B]/[K] (after second Krüger feedback, 26 Aug 2026): Per_{Rm}(ℝ_t) with
+per-period norm is isometrically isomorphic to L²(S¹_m), NOT to L²(ℝ_t) —
+pullback remains a change of representation, not a new sector [B].
+Nash–Kuiper attribution in Doc. 330/R95(i) corrected: Nash–Kuiper is an existence
+theorem for C¹ embeddings, not a C² non-embeddability claim [K].
+Verification script: `pruef_332_krueger_periodizitaet.py`.
+→ [DE](2/pdf/332_Kontinuumskonstruktionen_De.pdf) · [EN](2/pdf/332_Kontinuumskonstruktionen_En.pdf)
 
 ---
 

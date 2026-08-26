@@ -1,7 +1,7 @@
 # T0 Zeit-Masse-Dualität · FFGFT
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17390357.svg)](https://doi.org/10.5281/zenodo.17390357)
-**Version: v1.3.3** (23. August 2026) — DOI ausstehend, ersetzt v1.3.2
+**Version: v1.3.4** (26. August 2026) — DOI ausstehend, ersetzt v1.3.3
 
 **FFGFT — Fraktale Feldgeometrische Fundamentaltheorie** zeigt:
 Alle Konstanten des Standardmodells folgen aus einem einzigen
@@ -287,7 +287,8 @@ T0-Time-Mass-Duality/
 ├── Mails_Forscher_T0/         # Forschungskorrespondenz
 ├── rsa/                       # RSA-Faktorisierungsdemos und Signalwerkzeuge
 ├── sig/                       # Signalanalyse-Tools
-├── 000_FFGFT_Changelog_De.md
+├── 001_FFGFT_Changelog_De.md  # laufend (ab v1.3.4)
+├── 000_FFGFT_Changelog_De.md  # Archiv bis v1.3.3 (eingefroren)
 ├── DOCUMENTS.md               # vollständiges Dokumentenverzeichnis
 ├── RELEASE_NOTES_v1_2_3.md
 ├── RELEASE_NOTES_v1_2_3_de.md
@@ -436,8 +437,9 @@ dokumentiert jede Korrektur und Präzisierung mit Datum, Status und
 betroffenen Dokumenten — K1–K7 (Korrekturen) und R1–R74 (Präzisierungen/Programme, Stand 5. August 2026).
 Nichts wird still überschrieben.
 
-Der **Changelog** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)
-protokolliert alle laufenden Änderungen am Korpus chronologisch.
+Der **Changelog** [`001_FFGFT_Changelog_De.md`](001_FFGFT_Changelog_De.md)
+protokolliert alle laufenden Änderungen am Korpus chronologisch (ab v1.3.4).
+Ältere Einträge bis v1.3.3: [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md) (eingefroren).
 
 ---
 
@@ -467,10 +469,82 @@ Zusätzliche Einzelausgaben: *FFGFT Narrativ — Das Kosmische Gehirn*,
 
 Die vollständige Versionshistorie mit DOIs steht in den Release Notes:
 **[RELEASE_NOTES_v1_3_3_de.md](RELEASE_NOTES_v1_3_3_de.md)** · Änderungsprotokoll:
-**[000_FFGFT_Changelog_De.md](000_FFGFT_Changelog_De.md)**
+**[001_FFGFT_Changelog_De.md](001_FFGFT_Changelog_De.md)**
 
 ---
 
+
+## Neue Dokumente — v1.3.4 (26. August 2026)
+
+### Dok. 328 — Kopplungsregime, Resonanz und Synchronisation (DE+EN, je ~12 S.)
+
+Nachrichtentechnische Klassifikation als Strukturprinzip. Die Dreiteilung
+unterkritisch / kritisch / überkritisch (relativ zu den Systemdämpfungen) kehrt
+in Quantenoptik, Teilchenphysik und Synchronisationstheorie unter verschiedenen
+Namen wieder und ist für FFGFT die natürliche Sprache für Resonanzzustände als
+Teilchen.
+
+- **Wörterbuch Zweikreis ↔ 2×2-Mischung [B]:** hermitesch + nicht-hermitesch;
+  Ausnahmepunkt g_EP = |γ₁−γ₂|/4.
+- **Dualität D²+V²=1 [B]:** gilt für alle reinen Zeiger; Messübergang als
+  Ein-Parameter-Kontinuum κ = d/(2σ).
+- **κ_mix(θ_W) [K]:** ξ-abgeleitet durch Komposition (Dok. 323);
+  Screening negativ (keine einfache Konstante).
+- **GST-Textur H₁₂=√(m₁m₂) [B]:** symbolisch bewiesen aus Dok.-041-Formeln.
+- **K_eff = 2πξ ≈ 8,4×10⁻⁴ [K]:** aus Dok. 007/008; φ quantitativ außerhalb
+  aller Arnold-Zungen.
+- Vier Prüfpunkte in Dok. 041 identifiziert (Autorenentscheidung erforderlich).
+
+Neu: [E]-Marker eingeführt (etablierte externe Formalismen, noch ohne
+Korpus-Freigabe als [K]/[B]).
+Zehn Prüfskripte.
+→ [DE](2/pdf/328_Kopplungsregime_Resonanz_De.pdf) · [EN](2/pdf/328_Kopplungsregime_Resonanz_En.pdf)
+
+### Dok. 330 — Drei Operationen von T⁴ zum Beobachtraum (DE+EN, je ~14 S.)
+
+Konsolidiert die Typ-I/II/III-Klassifikation (Dok. 270) und grenzt FFGFT
+gegenüber diskreten Emergenzmodellen ab. HLV nach Krüger (August 2026)
+dient als Fallstudie; die vier strukturellen Probleme diskreter Modelle
+(Überlappungen, fehlende Operator-Spezifität, offener Kontinuumslimes,
+Kategorienfehler) treten in FFGFT nicht auf, weil T⁴ kompakt und
+geometrisch vollständig ist.
+
+- **Typ I [B]:** Dualitäts-Dekompaktifizierung S¹_m → ℝ_t via T̃·m=1;
+  informationserhaltend (Funktionen-Pullback p*).
+- **Typ II:** geometrische Projektion D3→D2→D1; verlustbehaftet, nicht reversibel;
+  holographische Projektion als D3→D2-Schritt identifiziert.
+- **Typ III [K]/[B]:** repräsentationale Übersetzung T⁴ ↔ H bijektiv, verlustfrei.
+- **T⁴ intrinsisch flach [K]:** K=0 punktweise via Metrik-Abstieg (R95).
+- **D₄-Spezifitätstest [S]:** adversarieller Test gegen angepasste
+  Vergleichsträger — offen (R95).
+
+Korrekturen/Register: R93 (S_BH(M_coll)=2π nat = n_thresh(Matzke) in Bit [B]);
+R94 (I_Sektor/I_thermisch = log₂3 für alle M [B]); R95 (Flachheit [B],
+Typ-I-Pullback [B], D₄-Spezifität [S]); R96 (Per_{Rm}(ℝ_t) ≅ L²(S¹_m),
+nicht L²(ℝ_t) — Pullback ist Darstellungswechsel, kein neuer Sektor [B];
+Nash–Kuiper-Zuschreibung korrigiert [K]).
+→ [DE](2/pdf/330_Operationen_T4_Abgrenzung_De.pdf) · [EN](2/pdf/330_Operationen_T4_Abgrenzung_En.pdf)
+
+### Dok. 332 — Zwei Wege vom Diskreten zum Kontinuum (26. Aug. 2026, DE+EN, je ~16 S.)
+
+Allgemeiner Vergleichsaufsatz (kein originärer FFGFT-Beweistext;
+[K]/[B]/[S]-Marker nur als neutrale Hervorhebung). Referiert und
+kommentiert Krügers Preprint (Zenodo DOI 10.5281/zenodo.22105698).
+Gegenüberstellung zweier Strategien für den Übergang Diskret → Kontinuum:
+
+1. **Regge/Kettenkomplex-Strategie:** Kategorienfehler durch explizite
+   Lemmata blockiert; Kontinuumslimes über Mosco-Konvergenz *postuliert*
+   (nicht bewiesen).
+2. **Kanonischer Funktionen-Pullback (FFGFT):** Kontinuum als Pullback
+   entlang fester Überlagerungsprojektion; Per_{Rm}(ℝ_t) ≅ L²(S¹_m)
+   isometrisch [B] (R96).
+
+Zweite Krüger-Rückmeldung (26. Aug. 2026) als Präzisierungsabsatz
+eingearbeitet (R96); Nash–Kuiper-Zuschreibung korrigiert.
+Prüfskript: `pruef_332_krueger_periodizitaet.py`.
+→ [DE](2/pdf/332_Kontinuumskonstruktionen_De.pdf) · [EN](2/pdf/332_Kontinuumskonstruktionen_En.pdf)
+
+---
 
 ## Neue Dokumente — v1.3.3 (23. August 2026)
 
