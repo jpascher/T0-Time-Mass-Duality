@@ -119,3 +119,36 @@ Dok. 332 auf kurzen Querverweis zurückgebaut.
 
 ---
 
+### Dok. 334 — Superposition ohne Zeit (DE+EN, 6/5 S.)
+
+Eigenständiges FFGFT-Dokument (27. Aug. 2026). Fokus: was bedeutet
+die Abwesenheit des Zeitoperators in der QM konkret für
+Superposition, Verschränkung und Kollaps?
+
+**§1 Klassische Vorgeschichte:**
+Newton, Coulomb, Hamilton — alle instantan, $t$ externer Parameter.
+Pauli hat nur explizit gemacht was klassisch stillschweigend war.
+
+**Verborgene Inkonsistenz:** Zustand $\psi(t)$ ist instantan,
+aber probabilistische Auswertung $|\psi(t)|^2$ braucht echte
+Zeit. Der Formalismus ist instantan, seine Verifikation zeitlich
+ausgedehnt — diese Spannung fehlt im Formalismus.
+
+**Superposition doppelt zeitlos:** kein intrinsisches „Wann",
+keine Verifikation ohne Zeitaufwand; jede Messung kollabiert
+die Superposition.
+
+**Kollaps ohne Dauer** im QM-Formalismus.
+
+**Pauli-Theorem** greift nicht für kompaktes $\tilde{T}$.
+
+**FFGFT-Auflösung:** $\tilde{T}_i=1/m_i$ gibt jeder Mode
+intrinsische Zeitskala; modenübergreifend inkompatible
+$\tilde{T}_i\neq\tilde{T}_j$.
+
+Verweise: Dok. 174, 285, 306, 307, 333.
+
+**R99 [B]/[K]:** Superposition ohne Zeit — Dok. 334
+
+---
+
