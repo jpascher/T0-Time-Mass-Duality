@@ -7,6 +7,28 @@ Neue Einträge werden hier oben eingefügt (neueste zuerst).
 
 ---
 
+## 27. August 2026 — Dok. 324 Korrektur · Register R97
+
+### Dok. 324 — Vakuumoperator-Korrektur (De+En)
+
+Nach Doug Matzkes Einwand (IPI-Mail 26. Aug. 2026) und numerischer Prüfung
+durch `pruef_324_vakuum_involution.py` (22 Assertions):
+
+Matzkes Vakuumoperator ist **R97 [B]:**
+
+    V = N₁⁺N₂⁺N₃⁺N₁⁻N₂⁻N₃⁻ = −64 · (Pn1·Pn2·Pn3)
+
+In ℤ₃ℂ-Arithmetik: −64 ≡ −1 (mod 3), also V² ≡ −V (Involution).
+
+Dok. 324 hatte irrtümlich das Pp-Produkt Pp1·Pp2·Pp3 (komplementärer
+Teilchen-Sektor, anderer Strahl: |⟨vac_V|vac_Pp⟩| = 0) als Matzkes V
+behandelt. Korrekturen in De+En: Symboltabelle, Konstruktionsabschnitt,
+Spektrumssektion, Vergleichstabelle, Gesamtstatus-Box.
+
+Unverändert korrekt [B]: Trine-Theorem T_k³ = I · ξ kein Spektralwert.
+
+---
+
 ## 26. August 2026 — v1.3.4: Dok. 328, 330, 332 · Register R93–R96
 
 ### Dok. 328 — Kopplungsregime, Resonanz und Synchronisation (DE+EN, je ~12 S.)
