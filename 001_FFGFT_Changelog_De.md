@@ -87,3 +87,35 @@ Prüfskript: `pruef_332_krueger_periodizitaet.py`
 
 ---
 
+### Dok. 333 — K_frak, Ausrollen und die T̃·m-Dualität (DE+EN, je 5 S.)
+
+Eigenständiges FFGFT-Dokument (27. Aug. 2026). Klärt zwei im Korpus
+bisher vermischte Bedeutungen von „Ausrollen" und bindet die Rekursion
+zwingend an die T̃·m-Dualität.
+
+**Typ I (Messakt, verlustbehaftet):** bisheriger Korpus-Sprachgebrauch
+(Dok. 285): S¹_m → ℝ_t, Windungszahl verworfen — Brücke zur Beobachtung.
+
+**Typ III (Pullback, verlustfrei):** kanonischer Funktionen-Pullback
+L²(S¹_m) ≅ Per_{Rm}(ℝ_t) (Dok. 332/R96) — reiner Koordinatenwechsel,
+m und t rollen gemeinsam, kein Informationsverlust [B].
+
+**K_frak am Pullback:** nicht beteiligt. Sitzt in der Wahl von
+R_m = ℏ/(m·c²) über die Massenformel; sichtbar erst beim SI-Übergang
+über Brückenkonstanten E₀, v (Dok. 314/R72) [B].
+
+**Rekursion zwingend aus T̃·m=1:** Jede Massenänderung erzwingt
+Zeitänderung → ξ_{n+1} = ξ_n(1−100·ξ_n) (Dok. 295/146).
+Fall B (stabil, K_frak=74/75) = Projektion von Fall C
+(laufende Rekursion, Log-Spirale) auf statische Näherung [B].
+Fall A (K_frak=1) strukturell ausgeschlossen [B].
+
+Dok. 332 auf kurzen Querverweis zurückgebaut.
+
+**R97 [B]:** Vakuumoperator-Korrektur Matzke/Dok. 324 (26. Aug. 2026)
+(bereits in Dok. 190 eingetragen)
+
+**R98 [B]:** Zwei Ausroll-Bedeutungen + Rekursionsbindung (Dok. 333)
+
+---
+
