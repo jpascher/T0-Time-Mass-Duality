@@ -1,7 +1,7 @@
 # T0 Zeit-Masse-Dualität · FFGFT
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17390357.svg)](https://doi.org/10.5281/zenodo.17390357)
-**Version: v1.3.4** (26. August 2026) — DOI ausstehend, ersetzt v1.3.3
+**Version: v1.3.5** (28. August 2026) — DOI ausstehend, ersetzt v1.3.4
 
 **FFGFT — Fraktale Feldgeometrische Fundamentaltheorie** zeigt:
 Alle Konstanten des Standardmodells folgen aus einem einzigen
@@ -52,6 +52,9 @@ was Eingabe ist, was folgt, ist immer klar deklariert.
 | Hawking-Mechanismus: Quant = Bit der Horizontskala | [Dok. 325](2/pdf/325_Hawking_FFGFT_De.pdf) |
 | Selbstadjungiertheit von F̂ — ξ = λ_min wohldefiniert | [Dok. 327](2/pdf/327_Selbstadjungiertheit_F_De.pdf) |
 | α⁻¹ = 137,036 aus D_f = 3 − ξ | [Dok. 011](2/pdf/011_T0_Feinstruktur_De.pdf) / [043](2/pdf/043_ResolvingTheConstantsAlfa_De.pdf) |
+| ξ als Galois-Zahl: (r_μ/r_e)²/ξ = \|GF(9)*\|²·5²·\|GF(27)\| = 43200 | [Dok. 317](2/pdf/317_KSAU_FFGFT_Leptonen_De.pdf) / [336](2/pdf/336_GF9_FFGFT_Bruecke_De.pdf) / [338](2/pdf/338_Galois_Massen_FFGFT_De.pdf) |
+| 1/α = 3700/27 aus Galois-Ordnungen (7,6 ppm, kein ξ, kein v, kein m_e) | [Dok. 338](2/pdf/338_Galois_Massen_FFGFT_De.pdf) |
+| FFGFT↔GALG: T_Planck als legitime SI-Schnittstelle; Zeitemergenz | [Dok. 337](2/pdf/337_Zeit_Emergenz_FFGFT_GALG_De.pdf) |
 | SI-Brücke: alle Konstanten aus ξ | [Dok. 013](2/pdf/013_T0_SI_De.pdf) |
 | E = mc² = E = m: Einheiten-Identität | [Dok. 077](2/pdf/077_E-mc2_De.pdf) |
 | Natürliche Einheiten, statisch und korrekturfrei | [Dok. 261](2/pdf/261_NatEinheiten_Statisch_De.pdf) |

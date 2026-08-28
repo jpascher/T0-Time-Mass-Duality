@@ -3231,3 +3231,46 @@ Anlass war die Frage, ob der Exponent in $L_0 = \xi\cdot\ell_P$ hergeleitet oder
 Dok. 329 ist entsprechend nachgezogen: Die Box „Offener Punkt: der Exponent im Boden" ist ersetzt durch „Der Boden folgt aus dem Lagrangian [B]".
 
 Prüfskript: `python/Dok180_Skripte/180_mT_struktur_L0_verify.py` (17 Assertionen, alle OK)
+
+---
+
+### Dok. 336, 337, 338 — Galois-Brücke FFGFT↔GALG (28. August 2026)
+
+**Dok. 337** — Zwei Präzisierungsvorschläge an Doug Matzke (GALG):
+Vorschlag 1: Zeitentstehung durch Dekompaktifizierung ∥ GALG-Co-Exclusion (drei-Schicht-Struktur).
+Vorschlag 2: Hyperbit $e_i^2=+1$ ist G-frei; $T_\text{Planck}$ ist die legitime und unvermeidliche SI-Schnittstelle — kein Tautologie-Vorwurf, sondern Präzisierung des Geltungsbereichs „parameterfreie Ableitung".
+→ [DE](2/pdf/337_Zeit_Emergenz_FFGFT_GALG_De.pdf) · [EN](2/pdf/337_Zeit_Emergenz_FFGFT_GALG_En.pdf)
+
+**Dok. 336** (§6 neu) — ξ als Galois-Zahl:
+Kernidentität: $(r_\mu/r_e)^2/\xi = |\text{GF}(9)^*|^2 \cdot 5^2 \cdot |\text{GF}(27)| = 43200$ [K]
+→ [DE](2/pdf/336_GF9_FFGFT_Bruecke_De.pdf) · [EN](2/pdf/336_GF9_FFGFT_Bruecke_En.pdf)
+
+**Dok. 317** (§xi-Galois neu) — Wicklungszahlen vollständig aus GF$(3^n)$ [K]:
+$n_{\theta,1}=3=\text{char}$, $n_{\phi,1}=2=|\text{GF}(3)^*|$,
+$n_{\theta,2}=5=\text{min.Prim}(|\text{GF}(81)^*|)$, $n_{\phi,2}=4=\varphi(5)$,
+$n_{\theta,3}=9$, $n_{\phi,3}=5$. Rekursion: $n_{\theta,g}=n_{\theta,g-1}+n_{\phi,g-1}$.
+→ [DE](2/pdf/317_KSAU_FFGFT_Leptonen_De.pdf) · [EN](2/pdf/317_KSAU_FFGFT_Leptonen_En.pdf)
+
+**Dok. 338** (neu) — Masseberechnungen und Galois-Gegenüberstellung [K]:
+
+| Ergebnis | FFGFT | Galois | Status |
+|---|---|---|---|
+| $(m_\mu/m_e)^2$ | $(r_\mu/r_e)^2/\xi = 43200$ | $8^2\cdot25\cdot27=43200$ | [K] identisch |
+| $\xi$ | $4/30000$ | folgt aus Identität | [K] |
+| $1/\alpha$ | $\xi\cdot E_0^2/K_\text{frak}$ | $3700/27=137{,}037$ (7,6 ppm) | [K] |
+
+Neue Beobachtung: $m_e\cdot m_\mu = 54 = |\text{GF}(3)^*|\cdot|\text{GF}(27)|$ MeV² (0,016\%).
+$|\text{GF}(27)|=27$ kürzt sich heraus — $1/\alpha=3700/27$ ohne $\xi$, ohne $v$, ohne $m_e$ als expliziten Eingang.
+Fraktal-rekursive Korrekturen erklären die 0,52\% bei Massenverhältnissen;
+$K_\text{frak}=74/75$ gesichert durch $\alpha^{-1}=137,06$ (Dok. 070).
+→ [DE](2/pdf/338_Galois_Massen_FFGFT_De.pdf) · [EN](2/pdf/338_Galois_Massen_FFGFT_En.pdf)
+
+Prüfskripte: `pruef_330_galois_massenverhaeltnis.py`, `pruef_331_xi_aus_galois.py`, `pruef_332_alpha_galois.py`
+
+---
+
+### R100, R101 in Dok. 190 (28. August 2026)
+
+**R100** — ξ als Galois-Zahl [K]. Die Kernidentität $(r_\mu/r_e)^2/\xi = |\text{GF}(9)^*|^2\cdot5^2\cdot|\text{GF}(27)|=43200$ leitet $\xi=4/30000$ aus GF$(3^n)$-Gruppenordnungen und Torus-Wicklungszahlen ab — ohne freie Parameter. Alle sechs Wicklungszahlen $(n_{\theta,g}, n_{\phi,g})$ sind Galois-Ordnungen oder deren Euler-$\varphi$-Werte.
+
+**R101** — $1/\alpha=3700/27$ aus Galois [K]. Zwei Identitäten ($\xi$-Herleitung + $m_e m_\mu=2\cdot27$ MeV²) in $\alpha=\xi E_0^2/K_\text{frak}$ eingesetzt; $|\text{GF}(27)|=27$ kürzt sich heraus. Abweichung 7,6 ppm. Kein $\xi$, kein $v$, kein $m_e$ als expliziter Eingang — nur MeV als SI-Brücke (Dok. 338, pruef\_332).

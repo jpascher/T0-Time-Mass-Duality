@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21821995.svg)](https://doi.org/10.5281/zenodo.21821995)  
 
-**Version: v1.3.4** (26 August 2026) — DOI pending, supersedes v1.3.3
+**Version: v1.3.5** (28 August 2026) — DOI pending, supersedes v1.3.4
 
 **FFGFT — Fundamental Fractal-Geometric Field Theory** shows:
 all Standard Model constants follow from a single dimensionless
@@ -51,6 +51,9 @@ what is input and what follows is always declared explicitly.
 | Hawking mechanism: quantum = bit of the horizon scale | [Doc. 325](2/pdf/325_Hawking_FFGFT_En.pdf) |
 | Self-adjointness of F̂ — ξ = λ_min well-defined | [Doc. 327](2/pdf/327_Selbstadjungiertheit_F_En.pdf) |
 | α⁻¹ = 137.036 from D_f = 3 − ξ | [Doc. 011](2/pdf/011_T0_Feinstruktur_En.pdf) / [043](2/pdf/043_ResolvingTheConstantsAlfa_En.pdf) |
+| ξ as Galois number: (r_μ/r_e)²/ξ = \|GF(9)*\|²·5²·\|GF(27)\| = 43200 | [Doc. 317](2/pdf/317_KSAU_FFGFT_Leptonen_En.pdf) / [336](2/pdf/336_GF9_FFGFT_Bruecke_En.pdf) / [338](2/pdf/338_Galois_Massen_FFGFT_En.pdf) |
+| 1/α = 3700/27 from Galois orders (7.6 ppm, no ξ, no v, no m_e) | [Doc. 338](2/pdf/338_Galois_Massen_FFGFT_En.pdf) |
+| FFGFT↔GALG: T_Planck as legitimate SI interface; time emergence | [Doc. 337](2/pdf/337_Zeit_Emergenz_FFGFT_GALG_En.pdf) |
 | SI bridge: all constants from ξ | [Doc. 013](2/pdf/013_T0_SI_En.pdf) |
 | E = mc² = E = m: unit identity | [Doc. 077](2/pdf/077_E-mc2_En.pdf) |
 | Natural units, static and correction-free | [Doc. 261](2/pdf/261_NatEinheiten_Statisch_En.pdf) |

@@ -152,3 +152,24 @@ Verweise: Dok. 174, 285, 306, 307, 333.
 
 ---
 
+### R100 — ξ als Galois-Zahl [K] (28. August 2026)
+
+**Kernidentität** (pruef_331):
+$(r_\mu/r_e)^2/\xi = |\text{GF}(9)^*|^2\cdot5^2\cdot|\text{GF}(27)| = 43200$
+
+Wicklungszahlen vollständig aus GF$(3^n)$: $n_{\theta,1}=3=\text{char}$, $n_{\phi,1}=2=|\text{GF}(3)^*|$, $n_{\theta,2}=5=\text{min.Prim}(|\text{GF}(81)^*|)$, $n_{\phi,2}=4=\varphi(5)$, $n_{\theta,3}=9$, $n_{\phi,3}=5$. Rekursion: $n_{\theta,g}=n_{\theta,g-1}+n_{\phi,g-1}$. ξ = 4/30000 folgt algebraisch. Dok. 317 (§xi-Galois), 336 (§6), 338.
+
+---
+
+### R101 — 1/α = 3700/27 aus Galois [K] (28. August 2026)
+
+**Neue Beobachtung** (pruef_332): $m_e\cdot m_\mu = 54 = |\text{GF}(3)^*|\cdot|\text{GF}(27)|$ MeV² (0,016\%; nicht empirisch — Dok. 011 leitet $E_0=\sqrt{m_e m_\mu}$ geometrisch her).
+
+Einsetzen in $\alpha=\xi E_0^2/K_\text{frak}$: $|\text{GF}(27)|=27$ kürzt sich heraus.
+
+$$1/\alpha = 3700/27 = 137{,}037\quad(\text{Abw. 7,6 ppm})$$
+
+Kein ξ, kein $v$, kein $m_e$ als expliziter Eingang. Einzige SI-Brücke: MeV. Dok. 338.
+
+---
+
