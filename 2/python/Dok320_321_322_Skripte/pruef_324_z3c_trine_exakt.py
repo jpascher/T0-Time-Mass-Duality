@@ -113,7 +113,7 @@ I8 = np.eye(8, dtype=int)
 # Einfachere Alternative: Alle Rechnungen über ℤ, am Ende mod 3 für Exaktheit
 
 # Tatsächlich: Die Gamma-Matrizen enthalten komplexe Einträge
-# Wir können sie über (ℤ/3ℤ)[i] = GF(9) darstellen
+# Wir können sie über (ℤ/3ℤ)[i] = Z3C_sym darstellen
 # Aber für die Trine-Identität reicht der Binomialkoeffizient-Beweis (Teil A)
 
 # Daher: Direkter Test über Integer-Matrizen nach Multiplikation mit 2
@@ -156,7 +156,7 @@ for k in range(3):
 
 print("\n[B3] Trine mod 3 — ganzzahliger Test:")
 print("  T_k = I + (ω-1)·Pp_k")
-print("  In GF(3): ω-1 ≡ ω-1 (lebt in GF(9), da ω irr. über GF(3))")
+print("  In GF(3): ω-1 ≡ ω-1 (lebt in Z3C_sym, da ω irr. über GF(3))")
 print("  Der algebraische Beweis aus Teil A gilt für T = 1+N, N=Pp_k:")
 print("  T³ = (I+N)³ = I [exakt, da C(3,1)=C(3,2)=3≡0 und N³→0]")
 
@@ -227,7 +227,7 @@ print(f"\n[C2] Was ℤ₃ℂ für FFGFT-Berechnungen präzisiert:")
 print("  [B] T_k³ = 1  [algebraisch, nicht nur numerisch]")
 print("  [B] V² ≡ -V in GF(3)  [-64 ≡ -1 mod 3]")
 print("  [B] Nilpotenz ap_k² = 0  [strukturell exakt]")
-print("  [K] ℤ₃-Trialitätsselektion  [Verbindung zu GF(9)-Struktur]")
+print("  [K] ℤ₃-Trialitätsselektion  [Verbindung zu Z3C_sym-Struktur]")
 print("  [S] Ladungsformel Q = N/3  [braucht ℚ, nicht GF(3)]")
 
 print(f"\n{banner}")
