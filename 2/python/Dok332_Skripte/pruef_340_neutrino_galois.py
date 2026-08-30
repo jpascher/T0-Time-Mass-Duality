@@ -127,5 +127,20 @@ print(f"  Konsistenz:                 {konsistenz*100:.1f}%  [OK]")
 
 print()
 print("=" * 65)
-print("ALLE 12 ASSERTIONS BESTANDEN")
+# ersetzt durch Assertion 13
+
+print()
+print("ASSERTION 13: theta_13 aus Galois-Formel (25*xi)^(1/3) [K]")
+xi = 1/7500
+val25 = (25*xi)**(1/3)
+s13sq_galois = val25**2
+s13sq_exp = 0.0220
+err = abs(s13sq_galois - s13sq_exp)/s13sq_exp
+assert err < 0.02, f"theta_13 Galois Abw {err*100:.1f}% > 2%"
+print(f"  sin²(theta_13) = (25*xi)^(2/3) = (1/300)^(2/3) = {s13sq_galois:.5f}")
+print(f"  Gemessen: {s13sq_exp:.4f}")
+print(f"  Abweichung: {err*100:.1f}%  [OK]")
+print()
+print("=" * 65)
+print("ALLE 13 ASSERTIONS BESTANDEN")
 print("=" * 65)
