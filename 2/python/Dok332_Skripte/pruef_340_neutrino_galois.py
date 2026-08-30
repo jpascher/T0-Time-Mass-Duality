@@ -100,5 +100,32 @@ print(f"  m_ee = {m_ee*1e3:.3f} meV < 36 meV (KamLAND-Zen)  [OK]")
 
 print()
 print("=" * 65)
-print("ALLE 10 ASSERTIONS BESTANDEN")
+# (wird durch Assertion 11+12 am Ende ersetzt)
+print("=" * 65)
+
+print()
+print("ASSERTION 11: theta_13 aus Summenregel [K]")
+Rnu = (11/3)/120  # dm2_sol/dm2_atm in Galois-Einheiten
+s13sq_pred = 2/3 * Rnu
+s13sq_exp  = 0.0220
+err13 = abs(s13sq_pred - s13sq_exp)/s13sq_exp
+assert err13 < 0.10, f"theta_13 Abw {err13*100:.1f}% > 10%"
+print(f"  sin²(theta_13) = 2/3 * R_nu = 2/3 * 11/360 = {s13sq_pred:.5f}")
+print(f"  Gemessen:        {s13sq_exp:.4f}")
+print(f"  Abweichung:      {err13*100:.1f}%  [OK]")
+
+print()
+print("ASSERTION 12: theta_12 Konsistenz (Summenregel vs. Galois) [K]")
+import numpy as np
+s12_sumrule = 1/(3 - 2*Rnu)
+s12_galois  = np.cos(2*np.pi*2/13)**2
+konsistenz  = abs(s12_sumrule - s12_galois)/s12_galois
+assert konsistenz < 0.10, f"theta_12 Konsistenz {konsistenz*100:.1f}% > 10%"
+print(f"  sin²(theta_12) Summenregel: {s12_sumrule:.4f}")
+print(f"  sin²(theta_12) Galois:      {s12_galois:.4f}")
+print(f"  Konsistenz:                 {konsistenz*100:.1f}%  [OK]")
+
+print()
+print("=" * 65)
+print("ALLE 12 ASSERTIONS BESTANDEN")
 print("=" * 65)
