@@ -1,7 +1,7 @@
 # T0 Zeit-Masse-Dualität · FFGFT
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17390357.svg)](https://doi.org/10.5281/zenodo.17390357)
-**Version: v1.3.5** (28. August 2026) — DOI ausstehend, ersetzt v1.3.4
+**Version: v1.3.6** (30. August 2026) — ersetzt v1.3.5
 
 **FFGFT — Fraktale Feldgeometrische Fundamentaltheorie** zeigt:
 Alle Konstanten des Standardmodells folgen aus einem einzigen
@@ -548,6 +548,46 @@ Prüfskript: `pruef_332_krueger_periodizitaet.py`.
 → [DE](2/pdf/332_Kontinuumskonstruktionen_De.pdf) · [EN](2/pdf/332_Kontinuumskonstruktionen_En.pdf)
 
 ---
+
+---
+
+## Neue Dokumente — v1.3.6 (30. August 2026)
+
+### Dok. 339 — Frobenius-Trennung massiv/masselos in GF(27)* (DE+EN, je 10 S.)
+
+Die multiplikative Gruppe GF(27)* ≅ ℤ₂₆ ≅ ℤ₂ × ℤ₁₃ zerfällt unter dem Frobenius-
+Automorphismus φ: x ↦ x³ in zwei Fixpunkte {+1,−1} (massiver Sektor, ℤ₂,
+Teilchen/Antiteilchen) und acht Dreier-Orbits (masseloser Sektor, 8 Gluonen,
+adjungierte SU(3)-Darstellung). Der Fixkörper GF(3)* liefert den U(1)-Sektor (Photon).
+Orbit₄ = 2⁻¹·Orbit₁ in ℤ₁₃ [B]; konforme Skalierung k↦3k im Typ-III-Pullback [K].
+Prüfskript: `pruef_339_frobenius.py` (6/6 Assertions).  
+→ [DE](2/pdf/339_Frobenius_Trennung_De.pdf) · [EN](2/pdf/339_Frobenius_Trennung_En.pdf)
+
+### Dok. 340 — Neutrino-Massenhierarchie aus GF(27)* (DE+EN, je 9 S.)
+
+Beide gemessenen Δm²-Werte folgen aus der Zahl 11 = max({7,8,11}), dem maximalen
+Element des vierten Frobenius-Orbits in ℤ₁₃:
+
+- **Δm²_atm = 120·m_ν² = (11²−1)·m_ν² = 2.476×10⁻³ eV²** (Abw. 1.0 %) [K]
+- **Δm²_sol = (11/3)·m_ν² = (|ℤ₁₃|−2)/3·m_ν² = 7.565×10⁻⁵ eV²** (Abw. 0.46 %) [B]
+- Orbit₄ = 2⁻¹·Orbit₁ in ℤ₁₃ [B]; Orbit₃ {4,10,12} selbstinvers → Majorana-Charakter;
+  Σ(Orbit₃) = 26 = |GF(27)*| [B]
+- Neutrinomassen (normale Hierarchie): m₁ = 4.54 meV, m₃ = 9.81 meV, m₂ = 49.96 meV;
+  Σmᵢ = 64.3 meV < 120 meV (Planck 2018) [K]
+- Kohärente Venting-Amplitude **p_vent = 5/24 = |A₅:A₄| / Kissing(D₄)**, algebraisch
+  bewiesen via Branching-Rule ρ₄↓_A₄ = ρ₃^A₄ ⊕ ρ₁^A₄ [B]
+- SICC-Venting-Formel ≡ Standard-Oszillationsformel (kein freier Parameter) [K]
+- Mischungswinkel aus Orbit-2-Elementen: cos²(2π·2/13) ≈ sin²θ₁₂ (5.1 %),
+  cos²(2π·5/13) ≈ sin²θ₂₃ (2.8 %) [K]
+- m_ee ≈ 7.1 meV < 36 meV (KamLAND-Zen) [K]
+
+**Falsifizierbare Vorhersagen:** (1) m₁=4.54, m₃=9.81, m₂=49.96 meV — testbar via
+CMB-S4, Euclid; (2) Δm²_atm/Δm²_sol = 32.73 (gemessen: 33.20); (3) Sterile Neutrinos
+(falls existent) sind Majorana mit m_min = 4·m_ν = 18.2 meV — testbar via IceCube,
+SBN (Fermilab), BEST.  
+Prüfskript: `pruef_340_neutrino_galois.py` (10/10 Assertions).  
+→ [DE](2/pdf/340_Neutrino_Galois_De.pdf) · [EN](2/pdf/340_Neutrino_Galois_En.pdf)
+
 
 ## Neue Dokumente — v1.3.3 (23. August 2026)
 

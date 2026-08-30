@@ -173,3 +173,58 @@ Kein ξ, kein $v$, kein $m_e$ als expliziter Eingang. Einzige SI-Brücke: MeV. D
 
 ---
 
+### Dok. 339 — Frobenius-Trennung massiv/masselos in GF(27)* (DE+EN, 10 S.)
+
+Eigenständiges FFGFT-Dokument (29. Aug. 2026). Frobenius-Zerlegung
+$GF(27)^*\cong\mathbb{Z}_{26}\cong\mathbb{Z}_2\times\mathbb{Z}_{13}$:
+
+**§1 Ausgangspunkt:** GF(27)* = Z₂₆ unter φ: x ↦ x³. Zwei Fixpunkte
+{+1,−1} = massiver ℤ₂-Sektor. Acht Dreier-Orbits = 8 Gluonen.
+
+**Kernresultat [B]:** Orbit₄ = 2⁻¹·Orbit₁ in ℤ₁₃:
+{7,8,11} = 7·{1,3,9} (mod 13). Orbits 2 und 4 algebraisch invers
+(2⁻¹=7, 7⁻¹=2). Fixkörper GF(3)* = Photon (U(1)).
+
+**Konforme Skalierung [K]:** k↦3k im Typ-III-Pullback-Bild.
+Skalen: E_max = E_P/ξ (dichter Pol), E_H ≈ 1.4×10⁻³³ eV (dünner Pol).
+
+Prüfskript: pruef_339_frobenius.py (6/6 Assertions).
+
+**R102 [B]:** Frobenius-Trennung massiv/masselos — Dok. 339
+
+---
+
+### Dok. 340 — Neutrino-Massenhierarchie aus GF(27)* (DE+EN, 9 S.)
+
+Eigenständiges FFGFT-Dokument (30. Aug. 2026). Beide gemessenen
+Δm²-Werte aus der Zahl 11 = max({7,8,11}) = 4. Frobenius-Orbit in ℤ₁₃:
+
+**Algebraisch bewiesen [B]:**
+- Orbit₄ = 2⁻¹·Orbit₁: {7,8,11} = 7·{1,3,9} (mod 13)
+- Orbit₂ ↔ Orbit₄ invers: 2⁻¹=7, 7⁻¹=2
+- Δm²_sol = (|ℤ₁₃|−2)/3 · m_ν² = 11/3 · m_ν² (Abw. 0.46 %)
+- Orbit₃ = {4,10,12} selbstinvers → Majorana; Σ(Orbit₃) = 26 = |GF(27)*|
+- Branching-Rule ρ₄↓_A₄ = ρ₃^A₄ ⊕ ρ₁^A₄ → W-Richtung A₄-invariant
+- p_vent = |A₅:A₄| / Kissing(D₄) = 5/24
+
+**Konsistent [K]:**
+- Δm²_atm = (11²−1)·m_ν² = 120·m_ν² (Abw. 1.0 %)
+- Dreigeneration-Schema (normale Hierarchie):
+  m₁ = 4.54 meV (D4, 4D), m₃ = 9.81 meV (E6, 6D), m₂ = 49.96 meV (E8, 8D)
+- Σmᵢ = 64.3 meV < 120 meV (Planck 2018)
+- cos²(2π·2/13) ≈ sin²θ₁₂ (5.1 %), cos²(2π·5/13) ≈ sin²θ₂₃ (2.8 %)
+- δ_CP ≈ −π/2 mit k=10 aus Orbit₃ (Abw. 6.9°)
+- m_ee = 7.1 meV < 36 meV (KamLAND-Zen)
+- SICC-Venting-Formel (p=5/24, κ=12·m_ν) ≡ Standard-Oszillationsformel
+
+**Falsifizierbare Vorhersagen:**
+1. Neutrinomassen 4.54, 9.81, 49.96 meV (CMB-S4, Euclid)
+2. Ratio Δm²_atm/Δm²_sol = 32.73 (gemessen: 33.20)
+3. Sterile Neutrinos (Majorana): m_min = 4·m_ν = 18.2 meV (IceCube, SBN, BEST)
+
+Prüfskript: pruef_340_neutrino_galois.py (10/10 Assertions).
+
+**R103 [B]+[K]:** Neutrino-Massenhierarchie aus GF(27)* — Dok. 340
+
+---
+
