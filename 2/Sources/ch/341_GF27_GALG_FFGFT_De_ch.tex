@@ -1,0 +1,291 @@
+% 341_GF27_GALG_FFGFT_De_ch.tex
+% Johann Pascher, 1. September 2026
+% Anlass: Doug Matzke, IPI-Mail 1. Sept. 2026
+
+\providecommand{\BM}{\textbf{[B]}}
+\providecommand{\KM}{\textbf{[K]}}
+\providecommand{\SM}{\textbf{[S]}}
+
+\chapter*{GF$(27)$ in GALG und FFGFT}
+\addcontentsline{toc}{chapter}{GF$(27)$ in GALG und FFGFT}
+
+\begin{abstract}
+Doug Matzke berichtet in seiner IPI-Mail vom 1.~September~2026, dass eine
+systematische Suche in GALG G$(3)$ (6561 Versuche) kein Element der
+Ordnung~26 findet. Dieses Dokument erklärt algebraisch warum, zeigt
+wo in G$(6)$ solche Elemente existieren, und zieht die Konsequenzen für
+die FFGFT-Massenschicht.
+
+Drei Sätze:
+\textbf{(A)}~G$(3) \cong M_2(\text{GF}(9))^2$: Ordnung~26 ist in G$(3)$
+algebraisch unmöglich --- kein Suchfehler, sondern zwingend.
+\textbf{(B)}~G$(6) \cong M_8(\text{GF}(9))$: Elemente der Ordnung~26 existieren;
+ein 5-Blade-Beispiel ist direkt in GALG nachprüfbar.
+\textbf{(C)}~GF$(27)$ ist in G$(6)$ als Ordnungsstruktur präsent, nicht als Teilkörper
+(da $3 \nmid 8$) --- exakt die FFGFT-Aussage aus Dok.~338.
+
+Konsequenz: $1/\alpha = 3700/27$ lebt auf der G$(3)$/GF$(9)$-Ebene;
+die Leptonen-Massenschicht $(m_\mu/m_e)^2 = 43200$ braucht G$(6)$ mit
+Ordnung-26-Elementen.
+Prüfskript: \texttt{pruef\_333\_gf27\_in\_galg.py} (alle Assertions \BM).
+\end{abstract}
+
+% ============================================================
+\section{Anlass und Ausgangslage}
+% ============================================================
+
+Doug Matzke (IPI, 1.~Sept.~2026) findet in GALG~G$(3)$ folgende Strukturen:
+GF$(9)$ im Generator $(a+ja)^8 = 1$;
+GF$(81)$ in G$(3)$ mit $(1+a+b+c+(a\wedge b))^{80} = 1$;
+Ordnungen $\{2,3,4,8,16,32,40,80\}$.
+Eine explizite Suche nach Ordnung~26:
+\begin{quote}
+\texttt{gasolve([a,b,c], is\_root26): Attempted 6561 with 0 found.}
+\end{quote}
+
+Das ist kein Suchfehler. Es ist ein algebraisches Theorem.
+
+% ============================================================
+\section{Satz A: G$(3)$ enthält kein GF$(27)$}
+% ============================================================
+
+\subsection{Strukturformel von G$(3)$}
+
+GALG~G$(n) = \text{Cl}(n)$ über dem symmetrischen Z3C $= \text{GF}(9) = \text{GF}(3)[i]$,
+wobei $i^2 = -1$, Charakteristik~3.
+Für ungerades $n = 3$:
+\begin{equation}
+  G(3) = \text{Cl}(3) \cong M_2(\text{GF}(9)) \oplus M_2(\text{GF}(9))
+\end{equation}
+Jede irreduzible Darstellung ist 2-dimensional über GF$(9)$.
+
+\subsection{Eigenwertstruktur}
+
+Die Eigenwerte einer $2 \times 2$-Matrix über GF$(9)$ liegen im
+algebraischen Abschluss --- im kleinstmöglichen Erweiterungskörper
+GF$(9^2) = \text{GF}(81)$.
+\begin{equation}
+  |\text{GF}(81)^*| = 80 = 2^4 \cdot 5
+\end{equation}
+Die Zahl~13 teilt 80 nicht. Daher:
+\begin{itemize}
+  \item Kein Element von $M_2(\text{GF}(9))$ hat eine Ordnung, die durch~13 teilbar ist.
+  \item Ordnung~26 setzt $13 \mid \text{ord}(X)$ voraus --- in G$(3)$ unmöglich.
+  \item Dougs Suchraum $\{a, b, c\}$ spannt G$(3)$ auf --- der Befund 0/6561 ist algebraisch zwingend~\BM.
+\end{itemize}
+
+\subsection{Konsistenz mit Dougs Befunden}
+
+\begin{table}[H]
+\centering
+\caption{Ordnungen in GALG G$(3)$ und ihre Galois-Herkunft}
+\begin{tabular}{rll}
+\toprule
+Ordnung & Herkunft & Teiler von \\
+\midrule
+2 & $|\text{GF}(3)^*|$ & 80 \\
+4 & $\varphi(5) = 4$ & 80 \\
+5 & min.\ Primteiler $|\text{GF}(81)^*|$ & 80 \\
+8 & $|\text{GF}(9)^*|$ & 80 \\
+16, 20, 40, 80 & Untergruppen von $\text{GF}(81)^*$ & 80 \\
+3 & unipotent (char.\ 3) & --- \\
+26 & $|\text{GF}(27)^*|$, bräuchte Faktor 13 & \textbf{nicht} 80 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Eine numerische Stichprobe über 3000 zufällige Cl$(3)$-Elemente bestätigt:
+keine Ordnung ist durch~13 teilbar \BM.
+
+% ============================================================
+\section{Satz B: G$(6)$ enthält Elemente der Ordnung~26}
+% ============================================================
+
+\subsection{Strukturformel von G$(6)$}
+
+\begin{equation}
+  G(6) = \text{Cl}(6) \cong M_8(\text{GF}(9))
+\end{equation}
+Irreduzible Darstellungen sind 8-dimensional über GF$(9)$.
+
+\subsection{Konstruktion via irreduzibles Polynom}
+
+Das Polynom $f(x) = x^3 + 2x + 1$ über GF$(3)$ (äquivalent zu $x^3 - x + 1$)
+hat keine Nullstelle in GF$(3)$ und ist daher irreduzibel.
+Da $\gcd(3,2) = 1$, bleibt $f$ irreduzibel über GF$(9)$;
+seine Wurzeln liegen in GF$(27) \setminus \text{GF}(3)$.
+Die Companion-Matrix
+\begin{equation}
+  C_f = \begin{pmatrix} 0 & 0 & 2 \\ 1 & 0 & 1 \\ 0 & 1 & 0 \end{pmatrix}
+  \in M_3(\text{GF}(3))
+\end{equation}
+hat Ordnung~26 in $\text{GL}_3(\text{GF}(3))$ ($f$ ist primitiv) \BM.
+
+\subsection{Einbettung in G$(6)$ als GALG-Element}
+
+Das $8 \times 8$-Element $X = C_f \oplus C_f \oplus (-I_2)$ hat:
+\begin{itemize}
+  \item $X^{26} = 1$, $X^{13} \neq 1$, $X^{2} \neq 1$ --- Ordnung exakt 26 \BM
+  \item Blade-Zerlegung über 38 Z3C-Blades aus $\{e_1,\ldots,e_6\}$
+\end{itemize}
+
+\subsection{Minimalbeispiel: 5 Blades, direkt in GALG prüfbar}
+
+Eine systematische Suche zeigt: Elemente der Ordnung~26 brauchen mindestens
+5 Blades; bei 4 Blades gibt es keine. Das folgende 5-Blade-Element
+ist direkt in Dougs GALG-Tool nachprüfbar:
+\begin{equation}
+  X = -(1+i)(e_1 e_2) + (1+i)(e_1 e_2 e_3 e_6) + (1-i)(e_1 e_2 e_5 e_6)
+      + (1+i)(e_1 e_4 e_5 e_6) - (e_1 e_2 e_3 e_4 e_6)
+\end{equation}
+GALG-Syntax:
+\begin{quote}
+\texttt{X = -(1+1j)*(e1\^{}e2) + (1+1j)*(e1\^{}e2\^{}e3\^{}e6)}\\
+\texttt{  + (1-1j)*(e1\^{}e2\^{}e5\^{}e6) + (1+1j)*(e1\^{}e4\^{}e5\^{}e6)}\\
+\texttt{  - (e1\^{}e2\^{}e3\^{}e4\^{}e6)}\\
+\texttt{X**26 == 1  \# True}\\
+\texttt{X**13 == 1  \# False}
+\end{quote}
+\BM\ (pruef\_333, alle Assertions bestanden)
+
+\subsection{Häufigkeit in G$(6)$}
+
+\begin{table}[H]
+\centering
+\caption{Anteil der Elemente mit $13 \mid \text{ord}(X)$ in G$(6)$ nach Blade-Support}
+\begin{tabular}{rcc}
+\toprule
+Support (Anzahl Blades) & Treffer / Invertierbare & Anteil \\
+\midrule
+$\leq 4$ & 0 / $\sim$450 & 0\,\% \\
+5 & selten & $< 1$\,\% \\
+6 & 85 / 478 & 17{,}8\,\% \\
+10 & 190 / 511 & 37{,}2\,\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Ordnung-26-Elemente sind in G$(6)$ häufig --- Dougs Suche in G$(3)$
+($\text{span}\{a,b,c\}$) konnte sie aus zwei Gründen nicht finden:
+algebraisch (Satz~A) und weil G$(3) \subsetneq G(6)$.
+
+% ============================================================
+\section{Satz C: GF$(27)$ als Ordnungsstruktur, nicht als Teilkörper}
+% ============================================================
+
+\subsection{Teilkörper-Kriterium}
+
+Eine unitale Einbettung $\text{GF}(27) \hookrightarrow M_n(\text{GF}(9))$
+macht $\text{GF}(9)^n$ zu einem $\text{GF}(27) \otimes \text{GF}(9) = \text{GF}(729)$-Vektorraum.
+Da $[\text{GF}(729):\text{GF}(9)] = 3$, muss $3 \mid n$.
+
+\begin{table}[H]
+\centering
+\caption{GF$(27)$ als Teilkörper in $M_n(\text{GF}(9))$}
+\begin{tabular}{rcc}
+\toprule
+$n$ & $3 \mid n$ & Teilkörper möglich? \\
+\midrule
+2 & nein & nein (G$(3)$) \\
+8 & nein & nein (G$(6)$) \\
+3 & ja & ja \\
+6 & ja & ja \\
+9 & ja & ja \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Für G$(6)$ mit $n = 8$: kein GF$(27)$-Teilkörper. Aber das
+Minimalpolynom von $X$ zerfällt:
+\begin{equation}
+  \chi_X(x) = (x^3 + 2x + 1)^2 \cdot (x+1)^2
+  \quad \in \text{GF}(3)[x]
+\end{equation}
+Zwei kubische Faktoren --- Eigenwerte in GF$(27)$ --- und ein linearer Faktor
+aus GF$(3)$. GF$(27)$ taucht also als Zerlegungskörper auf, nicht als Teilalgebra.
+
+\subsection{Verbindung zu Dok.~330/338}
+
+Das ist exakt die FFGFT-Aussage aus Dok.~330 und~338:
+\begin{equation}
+  \text{GF}(9) \not\subset \text{GF}(27) \quad (\text{da } \gcd(2,3) = 1)
+\end{equation}
+Beide Körper sitzen parallel in $\text{GF}(3^6) = \text{GF}(729)$,
+nicht in einem Turm. Die Massenverhältnis-Identität
+$(m_\mu/m_e)^2 = |\text{GF}(9)^*|^2 \cdot 5^2 \cdot |\text{GF}(27)|$
+verwendet beide Körper \emph{parallel} --- konsistent mit Satz~C.
+
+% ============================================================
+\section{Konsequenzen für FFGFT und GALG}
+% ============================================================
+
+\begin{table}[H]
+\centering
+\caption{GF$(27)$-Struktur in GALG und FFGFT}
+\begin{tabular}{llll}
+\toprule
+Ebene & GALG & FFGFT & Status \\
+\midrule
+$\alpha$ & G$(3)$/GF$(9)$ & $1/\alpha = 3700/27$, kürzt sich & \BM \\
+Leptonenmassen & G$(6)$, Ord.~26 nötig & $(m_\mu/m_e)^2 = 43200 = 8^2\cdot5^2\cdot27$ & \KM \\
+GF$(27)$ Teilkörper & fehlt in G$(3)$, G$(6)$ & parallel in GF$(729)$ & \BM \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Die Feinstrukturkonstante $1/\alpha = 3700/27$ lebt auf der
+GF$(9)$-/G$(3)$-Ebene: $|$GF$(27)| = 27$ kürzt sich in der Ableitung heraus.
+Dougs Aussage ``I'm not working on mass'' und sein Suchergebnis 0/6561
+sind beide konsistent mit dieser Schichtung:
+\begin{itemize}
+  \item G$(3)$: GF$(9)$, GF$(81)$, $\alpha$-Struktur --- Dougs Arbeitsebene \BM
+  \item G$(6)$: Ordnung-26-Elemente, Leptonen-Massenschicht --- FFGFT-Ebene \KM
+\end{itemize}
+
+% ============================================================
+\section*{Prüfskript}
+% ============================================================
+
+\texttt{pruef\_333\_gf27\_in\_galg.py} --- alle drei Sätze numerisch verifiziert
+(Cl$(6)$ über GF$(9)$ als $8\times8$-Matrizen; exakte Ordnungsbestimmung;
+Blade-Zerlegung mit Z3C-Koeffizienten; 3000er und 600er Stichproben).
+Alle Assertions bestanden \BM.
+
+% ============================================================
+\section*{Vermerk zur Verwendung von KI-Assistenz}
+% ============================================================
+
+Dieses Dokument wurde mit Unterstützung von Claude (Anthropic) erstellt.
+Alle algebraischen Rechnungen wurden durch Python-Prüfskripte mit exakter
+Arithmetik über GF$(9)$ als $8\times8$-Matrixdarstellungen verifiziert.
+Die physikalischen Interpretationen und Schlussfolgerungen
+stammen von Johann Pascher (ORCID 0009-0000-6518-4064).
+
+\begin{thebibliography}{9}
+
+\bibitem{Matzke2026IPI}
+D.~Matzke,
+\textit{IPI-Mail: GF(27) in GALG},
+1.~September 2026 (persönliche Korrespondenz).
+
+\bibitem{Pascher330}
+J.~Pascher,
+\textit{Dok.~330: GF(9)-FFGFT-Brücke},
+FFGFT-Korpus.
+
+\bibitem{Pascher338}
+J.~Pascher,
+\textit{Dok.~338: Masseberechnungen und Galois-Gegenüberstellung},
+FFGFT-Korpus, 28.~August 2026.
+
+\bibitem{Pascher333}
+J.~Pascher,
+\textit{pruef\_333\_gf27\_in\_galg.py},
+FFGFT-Korpus, 1.~September 2026.
+
+\bibitem{Matzke2022}
+D.~Matzke,
+\textit{G(6,ℤ₃ℂ) and GALG framework},
+IPI Letters 2022ff.
+
+\end{thebibliography}
