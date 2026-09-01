@@ -27,8 +27,69 @@ ein 5-Blade-Beispiel ist direkt in GALG nachprüfbar.
 Konsequenz: $1/\alpha = 3700/27$ lebt auf der G$(3)$/GF$(9)$-Ebene;
 die Leptonen-Massenschicht $(m_\mu/m_e)^2 = 43200$ braucht G$(6)$ mit
 Ordnung-26-Elementen.
-Prüfskript: \texttt{pruef\_333\_gf27\_in\_galg.py} (alle Assertions \BM).
+Prüfskript: \texttt{pruef\_341\_gf27\_in\_galg.py} (alle Assertions \BM).
 \end{abstract}
+
+% ============================================================
+\section{Hintergrund und Notation}
+% ============================================================
+
+Dieser Abschnitt führt die nötigen algebraischen Grundbegriffe ein.
+Für Spezialisten überspringbar.
+
+\subsection*{Statuszeichen}
+
+Dieses Dokument verwendet die im FFGFT-Korpus üblichen Statusmarkierungen:
+\begin{itemize}
+  \item \textbf{[K]} — \emph{Konfirmiert}: algebraisch oder numerisch vollständig bewiesen,
+        alle Assertions im Prüfskript bestanden.
+  \item \textbf{[B]} — \emph{Belegt}: numerisch gesichert durch Stichproben oder
+        explizite Konstruktion; analytischer Beweis vorhanden oder trivial.
+  \item \textbf{[S]} — \emph{Spekulativ}: Hinweis oder Vermutung, noch nicht vollständig bewiesen.
+\end{itemize}
+
+\subsection*{Galois-Körper GF$(p^n)$}
+
+Ein \emph{Galois-Körper} GF$(p^n)$ ist der eindeutige endliche Körper mit $p^n$ Elementen,
+wobei $p$ prim (die \emph{Charakteristik}) und $n \geq 1$.
+Seine multiplikative Gruppe GF$(p^n)^* = \text{GF}(p^n) \setminus \{0\}$
+ist zyklisch der Ordnung $p^n - 1$.
+\begin{itemize}
+  \item GF$(3)$: die ganzen Zahlen $\{0,1,2\}$ modulo~3. Gruppenordnung~$2$.
+  \item GF$(9) = \text{GF}(3^2)$: Elemente $a + bi$ mit $a,b \in \{0,1,2\}$
+        und $i^2 = -1 \equiv 2$. Gruppenordnung~$8$. Das ist Matzkes Z3C.
+  \item GF$(27) = \text{GF}(3^3)$: 27 Elemente, Gruppenordnung~$26 = 2 \cdot 13$.
+  \item GF$(81) = \text{GF}(3^4)$: 81 Elemente, Gruppenordnung~$80 = 2^4 \cdot 5$.
+\end{itemize}
+Die \emph{Ordnung} eines Elements $x$ ist das kleinste positive $k$
+mit $x^k = 1$. Jede Elementordnung teilt die Gruppenordnung (Lagrange).
+
+\subsection*{Clifford-Algebra Cl$(n)$ und GALG G$(n)$}
+
+Die Clifford-Algebra Cl$(n)$ wird erzeugt von $n$ Basisvektoren $e_1,\ldots,e_n$
+mit $e_i^2 = +1$ (Hyperbits) und $e_i e_j = -e_j e_i$ für $i \neq j$.
+Ein \emph{Blade} des Grades $r$ ist ein Produkt $e_{i_1} \cdots e_{i_r}$;
+alle $2^n$ Blades bilden eine Basis.
+GALG G$(n)$ ist Cl$(n)$ über GF$(9) = \text{Z3C}$ (jedes Blade trägt einen
+Z3C-Koeffizienten). Als Matrixalgebra:
+$\text{Cl}(3) \cong M_2(\text{GF}(9))^2$ und $\text{Cl}(6) \cong M_8(\text{GF}(9))$.
+
+\subsection*{Warum GF$(27)$ und Ordnung~26?}
+
+Das Leptonen-Massenverhältnis $(m_\mu/m_e)^2 = 43200 = 8^2 \cdot 5^2 \cdot 27$
+enthält $27 = |\text{GF}(27)|$ (Dok.~338).
+Die Gruppe GF$(27)^*$ hat Ordnung~$26 = 2 \cdot 13$.
+Ein Element der Ordnung~26 in einer Algebra erzeugt eine Kopie von GF$(27)^*$.
+Dougs Suche nach Ordnung-26-Elementen ist deshalb ein direkter Test
+ob GF$(27)$-Struktur in G$(3)$ vorhanden ist.
+
+\subsection*{Companion-Matrix}
+
+Die Companion-Matrix eines normierten Polynoms $f(x) = x^n + a_{n-1}x^{n-1} + \cdots + a_0$
+ist die $n \times n$-Matrix mit Einsen auf der Subdiagonale und den
+Koeffizienten $-a_0, \ldots, -a_{n-1}$ in der letzten Spalte.
+Ihr charakteristisches Polynom ist $f(x)$; ihre Ordnung in $\text{GL}_n$
+ist die multiplikative Ordnung der Wurzeln von $f$.
 
 % ============================================================
 \section{Anlass und Ausgangslage}
@@ -37,13 +98,19 @@ Prüfskript: \texttt{pruef\_333\_gf27\_in\_galg.py} (alle Assertions \BM).
 Doug Matzke (IPI, 1.~Sept.~2026) findet in GALG~G$(3)$ folgende Strukturen:
 GF$(9)$ im Generator $(a+ja)^8 = 1$;
 GF$(81)$ in G$(3)$ mit $(1+a+b+c+(a\wedge b))^{80} = 1$;
-Ordnungen $\{2,3,4,8,16,32,40,80\}$.
-Eine explizite Suche nach Ordnung~26:
+Ordnungen $\{2,3,4,8,16,32,40,80\}$ --- alle teilen $80 = |\text{GF}(81)^*|$,
+konsistent mit Cl$(3) \cong M_2(\text{GF}(9))^2$ wo Eigenwerte in GF$(81)$ liegen.
+
+Eine explizite Suche nach Ordnung~26 (die GF$(27)^*$-Struktur signalisieren würde):
 \begin{quote}
 \texttt{gasolve([a,b,c], is\_root26): Attempted 6561 with 0 found.}
 \end{quote}
+$6561 = 3^8$ Versuche --- auf dieser Tiefe vollständig.
 
-Das ist kein Suchfehler. Es ist ein algebraisches Theorem.
+Das ist kein Suchfehler. Es ist ein algebraisches Theorem: Ordnung~26 erfordert
+den Primfaktor~13, und~13 taucht in $80 = |\text{GF}(81)^*|$ nicht auf.
+Die folgenden Abschnitte beweisen das präzise und zeigen wo
+GF$(27)$-Struktur tatsächlich existiert --- in G$(6)$, nicht in G$(3)$.
 
 % ============================================================
 \section{Satz A: G$(3)$ enthält kein GF$(27)$}
@@ -130,6 +197,7 @@ Das $8 \times 8$-Element $X = C_f \oplus C_f \oplus (-I_2)$ hat:
 \end{itemize}
 
 \subsection{Minimalbeispiel: 5 Blades, direkt in GALG prüfbar}
+\label{sec:minimal}
 
 Eine systematische Suche zeigt: Elemente der Ordnung~26 brauchen mindestens
 5 Blades; bei 4 Blades gibt es keine. Das folgende 5-Blade-Element
@@ -146,7 +214,7 @@ GALG-Syntax:
 \texttt{X**26 == 1  \# True}\\
 \texttt{X**13 == 1  \# False}
 \end{quote}
-\BM\ (pruef\_333, alle Assertions bestanden)
+\BM\ (pruef\_341, alle Assertions bestanden)
 
 \subsection{Häufigkeit in G$(6)$}
 
@@ -243,10 +311,88 @@ sind beide konsistent mit dieser Schichtung:
 \end{itemize}
 
 % ============================================================
+\section*{Anhang: Für den Leser ohne Algebra-Hintergrund}
+\addcontentsline{toc}{section}{Anhang: Für den Leser ohne Algebra-Hintergrund}
+% ============================================================
+
+Dieser Anhang erklärt die Kernideen in Alltagssprache, ohne Vorkenntnisse vorauszusetzen.
+
+\subsection*{Was ist ein endlicher Körper?}
+
+Ein Körper ist eine Zahlenmenge in der man addieren, subtrahieren, multiplizieren und
+dividieren kann (außer durch Null). Die vertrauten Beispiele sind die reellen Zahlen
+$\mathbb{R}$ und die rationalen Zahlen $\mathbb{Q}$.
+
+Ein \emph{endlicher} Körper hat nur endlich viele Elemente.
+Das klingt seltsam, funktioniert aber: man rechnet ``modulo'' einer Primzahl $p$,
+d.h.\ man wirft alle Vielfachen von $p$ weg.
+Beispiel GF$(3)$: die Zahlen $\{0, 1, 2\}$ mit der Regel $1+2 = 0$ (statt 3),
+$2+2 = 1$ (statt 4), usw.
+
+\subsection*{Was bedeutet GF$(p^n)$ und GF$(p^n)^*$?}
+
+GF$(p^n)$ ist der eindeutige endliche Körper mit genau $p^n$ Elementen.
+\begin{itemize}
+  \item GF$(3)$: 3 Elemente $\{0,1,2\}$
+  \item GF$(9)$: 9 Elemente (Matzkes Z3C — Paare $(a,b)$ mit $a,b \in \{0,1,2\}$
+        und einer imagin{\"a}ren Einheit $i$ mit $i^2 = -1$)
+  \item GF$(27)$: 27 Elemente
+  \item GF$(81)$: 81 Elemente
+\end{itemize}
+
+Der \emph{Stern} GF$(p^n)^*$ bezeichnet die Menge aller Elemente \emph{außer der Null}.
+Das ist wie bei den ganzen Zahlen: $\mathbb{Z}$ enthält alle ganzen Zahlen,
+$\mathbb{Z}^* = \{..., -2, -1, +1, +2, ...\}$ enthält alle außer der Null.
+In einem endlichen Körper GF$(p^n)$ hat GF$(p^n)^*$ genau $p^n - 1$ Elemente:
+\begin{equation*}
+  |\text{GF}(27)| = 27 \qquad |\text{GF}(27)^*| = 26
+\end{equation*}
+
+\subsection*{Was ist eine Gruppenordnung und warum teilt sie alles?}
+
+In GF$(p^n)^*$ gibt es immer ein Element $g$ (einen ``Generator'') so dass
+$g, g^2, g^3, \ldots, g^{p^n-1} = 1$ alle $p^n - 1$ Elemente der Gruppe durchläuft
+(zyklische Gruppe). Die \emph{Ordnung} eines Elements $x$ ist das kleinste $k$ mit $x^k = 1$.
+
+Der Satz von Lagrange sagt: die Ordnung jedes Elements \emph{teilt} die Gruppenordnung $p^n - 1$.
+Das ist wie bei einem Uhrzeiger: ein Zeiger der alle 4 Stunden zurückkehrt kann nicht
+auf einer 6-Stunden-Uhr enden (4 teilt 6 nicht).
+
+Konkret:
+\begin{itemize}
+  \item GF$(81)^*$ hat Ordnung $80 = 2^4 \cdot 5$. Die Primteiler sind 2 und 5.
+        Kein Element kann Ordnung 26 haben, denn 26 = 2·\textbf{13}, und 13 teilt 80 nicht.
+  \item GF$(27)^*$ hat Ordnung $26 = 2 \cdot 13$. Hier gibt es Elemente der Ordnung 13 und 26.
+\end{itemize}
+
+\subsection*{Warum taucht GF$(27)$ in den Leptonenmassen auf?}
+
+Das Massenverhältnis $(m_\mu/m_e)^2 = 43200 = 8^2 \cdot 25 \cdot 27$.
+Die Zahl 27 ist $|\text{GF}(27)|$ --- die Gesamtgröße des Körpers (mit Null).
+Die Zahl 8 ist $|\text{GF}(9)^*|$ --- die Gruppenordnung von GF$(9)$.
+Diese Zahlen tauchen auf weil die FFGFT-Wicklungszahlen (die Torusmoden)
+algebraisch mit diesen Körpern zusammenhängen --- die Galois-Struktur
+klassifiziert welche Schwingungsmoden auf dem T$^4$-Torus auftreten können.
+
+\subsection*{Warum findet Doug kein GF$(27)$ in G$(3)$?}
+
+GALG G$(3)$ ist eine Algebra über GF$(9)$ mit $2\times2$-Matrizen.
+Die Eigenwerte solcher Matrizen liegen in GF$(81)$.
+GF$(81)^*$ hat Ordnung 80 --- und 13 teilt 80 nicht.
+Deshalb kann kein Element von G$(3)$ die Ordnung 26 haben.
+GF$(27)^*$ hätte Ordnung 26 --- es gibt schlicht keinen Platz für es in G$(3)$.
+
+In G$(6)$ mit $8\times8$-Matrizen ist der Spielraum größer:
+die möglichen Ordnungen sind Teiler von $|\text{GL}_8(\text{GF}(9))|$,
+und 26 ist dabei vertreten.
+Ein konkretes Beispiel mit nur 5 Blades ist in §\ref{sec:minimal} angegeben
+und direkt in GALG prüfbar.
+
+% ============================================================
 \section*{Prüfskript}
 % ============================================================
 
-\texttt{pruef\_333\_gf27\_in\_galg.py} --- alle drei Sätze numerisch verifiziert
+\texttt{pruef\_341\_gf27\_in\_galg.py} --- alle drei Sätze numerisch verifiziert
 (Cl$(6)$ über GF$(9)$ als $8\times8$-Matrizen; exakte Ordnungsbestimmung;
 Blade-Zerlegung mit Z3C-Koeffizienten; 3000er und 600er Stichproben).
 Alle Assertions bestanden \BM.
@@ -280,12 +426,12 @@ FFGFT-Korpus, 28.~August 2026.
 
 \bibitem{Pascher333}
 J.~Pascher,
-\textit{pruef\_333\_gf27\_in\_galg.py},
+\textit{pruef\_341\_gf27\_in\_galg.py},
 FFGFT-Korpus, 1.~September 2026.
 
 \bibitem{Matzke2022}
 D.~Matzke,
-\textit{G(6,ℤ₃ℂ) and GALG framework},
+\textit{G(6,$\mathbb{Z}_3\mathbb{C}$) and GALG framework},
 IPI Letters 2022ff.
 
 \end{thebibliography}
