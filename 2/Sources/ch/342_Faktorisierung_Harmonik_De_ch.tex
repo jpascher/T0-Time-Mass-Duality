@@ -1,0 +1,332 @@
+% 342_Faktorisierung_Harmonik_De_ch.tex
+% Johann Pascher, 2. September 2026
+% Anlass: Fortsetzung von Dok. 341 — Faktorisierungsklassen und Primzahl-Harmonik
+
+\providecommand{\BM}{\textbf{[B]}}
+\providecommand{\KM}{\textbf{[K]}}
+\providecommand{\SM}{\textbf{[S]}}
+
+\chapter*{Faktorisierungsklassen in G$(6)$ und die Harmonik der Primzahlen}
+\addcontentsline{toc}{chapter}{Faktorisierungsklassen in G$(6)$ und die Harmonik der Primzahlen}
+
+\begin{abstract}
+Dok.~341 zeigt, dass GF$(27)$ in G$(6)$ als Ordnungsstruktur über das
+charakteristische Polynom $\chi_X = (x^3+2x+1)^2(x+1)^2$ eintritt. Dieses Dokument
+untersucht, welche weiteren Faktorisierungen $\chi$ in G$(6) \cong M_8(\text{GF}(9))$
+zulässt, und zeigt, dass dieselbe Faktorisierungsregel die harmonischen Muster
+der Primzahlen (Dok.~057, Dok.~159) ordnet.
+
+Vier Ergebnisse:
+\textbf{(A)}~Über GF$(3)$ gibt es acht irreduzible kubische Polynome, vier davon
+primitiv (Ordnung~26) und vier von Ordnung~13; sie erzeugen fünf
+Faktorisierungsklassen von $\chi$ in G$(6)$ \BM.
+\textbf{(B)}~Eine Primzahl~$p$ tritt in $|\text{GF}(3^k)^*|$ genau bei
+$k = \text{ord}_p(3)$ ein; die harmonischen Primen treten in der Reihenfolge
+$13\,(k{=}3)$, $5\,(k{=}4)$, $11\,(k{=}5)$, $7\,(k{=}6)$ ein, danach nur noch
+große Primen \BM.
+\textbf{(C)}~Elementordnungen in G$(6)$ sind Partitionen von~8 mit kgV-Regel
+--- die algebraische Form eines Akkords aus Obertönen \BM.
+\textbf{(D)}~Ab $k \geq 4$ ist der Galois-Raster feiner als die fraktal-rekursive
+Korrektur ($1{,}05\,\%$, Dok.~338); Galois-Produkte sind dann von höheren
+Torus-Moden statistisch nicht mehr unterscheidbar. Das ist kein Widerspruch,
+sondern die algebraische Form der Modenkonvergenz aus Dok.~159 \BM.
+
+Negativbefund: Der Tau-Sektor ist bei $0{,}05\,\%$ kein Galois-Produkt \SM.
+Prüfskripte: \texttt{pruef\_342\_faktorisierung\_primzahlen.py},
+\texttt{pruef\_342b\_hoehere\_harmonien.py},
+\texttt{pruef\_342c\_dichte\_hoehere\_harmonien.py}.
+\end{abstract}
+
+% ============================================================
+\section{Ausgangslage: algebraisch gleich geometrisch}
+% ============================================================
+
+\subsection*{Statuszeichen}
+
+Dieses Dokument verwendet die im FFGFT-Korpus üblichen Statusmarkierungen:
+\begin{itemize}
+  \item \textbf{[K]} — \emph{Konfirmiert}: algebraisch oder numerisch vollständig bewiesen,
+        alle Assertions im Prüfskript bestanden; direkt aus $\xi$ oder einer korpusgesicherten
+        Ableitung hergeleitet.
+  \item \textbf{[B]} — \emph{Belegt}: numerisch gesichert durch Stichproben oder
+        explizite Konstruktion; analytischer Beweis vorhanden oder trivial.
+  \item \textbf{[S]} — \emph{Spekulativ}: Hinweis oder Vermutung, noch nicht vollständig bewiesen.
+\end{itemize}
+
+Dok.~338 und Dok.~341 haben gezeigt, dass Massenverhältnisse aus
+Torus-Wicklungszahlen $(r_i, p_i)$ und aus Galois-Gruppenordnungen dieselbe
+Zahl ergeben: $(m_\mu/m_e)^2 = 43200 = |\text{GF}(9)^*|^2 \cdot 5^2 \cdot |\text{GF}(27)|$.
+Die Frage, ob die geometrische Fassung (Vektoren auf $T^4$) ,,genauer`` sei als die
+algebraische, ist falsch gestellt: Wicklungszahlen auf $S^1$ und Elemente von
+GF$(3^k)$ sind beides ganzzahlige, exakte Objekte. Die Brücke ist der
+Frobenius-Automorphismus $g \mapsto g^3$ auf GF$(3^k)$, der die $\mathbb{Z}_3$-Rotation
+des Orbifolds $T^4/\mathbb{Z}_3$ darstellt (Dok.~314, Dok.~336).
+
+Der algebraische Zugang hat jedoch einen methodischen Vorteil: Faktorisierung von
+Polynomen ist systematisch aufzählbar, geometrische Suche nicht. Dieses Dokument
+nutzt diesen Vorteil.
+
+% ============================================================
+\section{Satz A: Faktorisierungsklassen in G$(6)$}
+% ============================================================
+
+\subsection{Irreduzible kubische Polynome über GF$(3)$}
+
+Ein monisches kubisches Polynom über GF$(3)$ ist irreduzibel genau dann, wenn es
+keine Nullstelle in $\{0,1,2\}$ hat. Es gibt acht solche Polynome; ihre
+Companion-Matrizen haben in $\text{GL}_3(\text{GF}(3))$ die Ordnung~26 oder~13 \BM:
+
+\begin{table}[H]
+\centering
+\caption{Irreduzible kubische Polynome über GF$(3)$ und ihre Ordnung}
+\begin{tabular}{llc}
+\toprule
+Bezeichnung & Polynom & Ordnung \\
+\midrule
+$f_1$ & $x^3 + 2x + 1$ & 26 \\
+$f_2$ & $x^3 + 2x^2 + 1$ & 26 \\
+$f_3$ & $x^3 + 2x^2 + x + 1$ & 26 \\
+$f_4$ & $x^3 + x^2 + 2x + 1$ & 26 \\
+\midrule
+$g_1$ & $x^3 + 2x + 2$ & 13 \\
+$g_2$ & $x^3 + x^2 + 2$ & 13 \\
+$g_3$ & $x^3 + x^2 + x + 2$ & 13 \\
+$g_4$ & $x^3 + 2x^2 + 2x + 2$ & 13 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Die Zahl vier ist zwingend: primitive Elemente in GF$(27)^*$ gibt es
+$\varphi(26) = 12$, in Frobenius-Orbits der Länge~3, also $12/3 = 4$
+Minimalpolynome. Dok.~341 verwendet $f_1$.
+
+\subsection{Die fünf Klassen}
+
+In G$(6) \cong M_8(\text{GF}(9))$ zerfällt $\chi$ über GF$(3)$ in Faktoren, deren
+Grade sich zu~8 summieren. Mit kubischen und linearen Faktoren ergeben sich
+fünf Klassen \BM:
+
+\begin{table}[H]
+\centering
+\caption{$\chi$-Faktorisierungsklassen mit GF$(27)$-Anteil in G$(6)$}
+\begin{tabular}{llcc}
+\toprule
+Typ & $\chi(x)$ & Anzahl & Ordnung \\
+\midrule
+Dok.-341-Typ & $f_i^{\,2}\,(x{+}1)^2$ & 4 & 26 \\
+Gemischt-primitiv & $f_i\, f_j\,(x{+}1)^2$, $i \neq j$ & 6 & 26 \\
+Ordnung-13-Typ & $g_i^{\,2}\,(x{+}1)^2$ & 4 & 13 \\
+Primitiv$\times$13 & $f_i\, g_j\,(x{+}1)^2$ & 16 & 26 \\
+Dünn & $f_i\,(x{+}1)^5$ & 4 & 26 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Die vier primitiven Polynome sind die vier Frobenius-Konjugationsklassen
+$\{g, g^3, g^9\}$, $\{g^5, g^{15}, g^{45}\}$, $\{g^7, g^{21}, g^{63}\}$,
+$\{g^{11}, g^{33}, g^{99}\}$ eines Erzeugers~$g$ von GF$(27)^*$. Die Zuordnung
+der Leptonen zu $f_1$ in Dok.~341 ist eine Wahl innerhalb dieser Klasse; ob
+$f_2, f_3, f_4$ weitere Massenschichten tragen, bleibt offen \SM.
+
+% ============================================================
+\section{Satz B: Eintrittsregel der harmonischen Primzahlen}
+% ============================================================
+
+Dok.~057 beschreibt Primzahlen als elementare relationale Schritte:
+$2$ Oktave, $3$ Quinte, $5$ große Terz, $7$ Naturseptime, $11$ Undezime,
+$13$ Tredezime. Ein $p$-limit-System lässt Primzahlen bis~$p$ als Intervallbausteine zu.
+
+\begin{table}[H]
+\centering
+\caption{Ordnung von GF$(3^k)^*$ und Eintritt neuer Primzahlen}
+\begin{tabular}{rrlll}
+\toprule
+$k$ & $|\text{GF}(3^k)^*|$ & Primfaktoren & neu & Harmonik \\
+\midrule
+1 & 2 & $2$ & 2 & Oktave \\
+2 & 8 & $2^3$ & --- & GF$(9)$, Matzkes $\mathbb{Z}_3\mathbb{C}$ \\
+3 & 26 & $2 \cdot 13$ & 13 & Tredezime; Leptonen (Dok.~338) \\
+4 & 80 & $2^4 \cdot 5$ & 5 & Große Terz; Dougs G$(3)$-Ordnungen \\
+5 & 242 & $2 \cdot 11^2$ & 11 & Undezime; Neutrinos (Dok.~340) \\
+6 & 728 & $2^3 \cdot 7 \cdot 13$ & 7 & Septime; mit 13 auf einem Träger \\
+7 & 2186 & $2 \cdot 1093$ & 1093 & keine kleine Harmonik mehr \\
+8 & 6560 & $2^5 \cdot 5 \cdot 41$ & 41 & --- \\
+12 & 531440 & $2^4 \cdot 5 \cdot 7 \cdot 13 \cdot 73$ & 73 & alle vier vereint \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Eintrittsregel} \BM: Eine Primzahl $p \neq 3$ teilt $3^k - 1$ genau dann,
+wenn $\text{ord}_p(3) \mid k$; sie tritt also erstmals bei $k = \text{ord}_p(3)$ ein.
+Daraus folgt die Reihenfolge $13, 5, 11, 7$ für $k = 3, 4, 5, 6$. Alle vier
+harmonischen Primen oberhalb von~3 treten zwischen $k=3$ und $k=6$ ein; ab $k=7$
+erscheinen nur noch Primen $\geq 41$ (mit $1093$ als Wieferich-Primzahl bei $k=7$).
+
+Das ist der algebraische Grund, warum die praktisch relevante Harmonik beim
+13-limit endet, und warum der FFGFT-Korpus bislang mit den Primzahlen
+$\{2, 3, 5, 7, 11, 13\}$ auskommt. Die Neutrino-Elf aus Dok.~340
+($\Delta m^2_\text{atm} = (11^2 - 1)\, m_\nu^2$) sitzt bei $k = 5$; das war im
+Korpus noch nicht verortet.
+
+$\mathbb{Z}_3$-Kompatibilität: Für $p \equiv 1 \pmod 3$ ist $\mathbb{Z}_3 \subset \text{GF}(p)^*$.
+Das gilt für $7$ und $13$, nicht für $2, 5, 11$. Die beiden $\mathbb{Z}_3$-kompatiblen
+Primen sind genau jene, die in Dok.~289 (Top-Quark) und Dok.~338/341 (Leptonen)
+als Strukturzahlen auftreten \BM.
+
+% ============================================================
+\section{Satz C: Akkorde als Partitionen von~8}
+% ============================================================
+
+Für halbeinfaches $X \in M_8(\text{GF}(9))$ mit $\chi$ über GF$(3)$ zerlegt in
+Faktoren der Grade $d_1 + \cdots + d_r = 8$ liegen die Eigenwerte in GF$(3^{d_i})$,
+und $\text{ord}(X)$ teilt $\text{kgV}(3^{d_i} - 1)$ \BM. Eine Partition von~8 ist
+damit die algebraische Form eines Akkords aus Obertönen~$k \in \{d_i\}$, die
+Ordnung ist die gemeinsame Periode.
+
+\begin{table}[H]
+\centering
+\caption{Partitionen von~8 und maximale halbeinfache Ordnung}
+\begin{tabular}{lrl}
+\toprule
+Partition & kgV$(3^{d_i}{-}1)$ & Lesart \\
+\midrule
+$(3,3,1,1)$ & 26 & reiner GF$(27)$-Akkord (Dok.~341) \\
+$(3,3,2)$ & 104 & $= 2^3 \cdot 13$: GF$(9)$ mit GF$(27)$ \\
+$(4,3,1)$ & 1040 & $= 2^4 \cdot 5 \cdot 13$: Terz mit Tredezime \\
+$(6,2)$, $(6,1,1)$ & 728 & $= 2^3 \cdot 7 \cdot 13$: Septime mit Tredezime \\
+$(5,3)$ & 3146 & $= 2 \cdot 11^2 \cdot 13$: Undezime mit Tredezime \\
+$(8)$ & 6560 & $= 2^5 \cdot 5 \cdot 41$: größtmöglich \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Die Anzahl irreduzibler bzw.\ primitiver Polynome vom Grad~$k$ über GF$(3)$
+wächst schnell (Möbius-Formel): Grad~3: $8/4$, Grad~4: $18/8$, Grad~6: $116/48$,
+Grad~8: $810/320$. Der Raum möglicher Akkorde ist also groß --- was unmittelbar
+zur Frage der Trennschärfe führt.
+
+% ============================================================
+\section{Satz D: Trennschärfe und die Grenze der Galois-Schicht}
+% ============================================================
+
+\subsection{Dichte der Galois-Produkte}
+
+Bildet man alle Produkte aus bis zu drei Bausteinen $\{3^k, 3^k - 1, \text{Primteiler}\}$
+für $k \leq k_\text{max}$ mit Exponenten $\{-1, 1, 2\}$, so fällt der mittlere
+logarithmische Abstand benachbarter Werte im Fenster $10 < x < 10^4$ wie folgt \BM:
+
+\begin{table}[H]
+\centering
+\caption{Mittlerer log-Abstand der Galois-Produkte}
+\begin{tabular}{rrrr}
+\toprule
+$k_\text{max}$ & Werte im Fenster & mittl.\ Abstand & erw.\ Zufallstreffer bei $0{,}5\,\%$ \\
+\midrule
+2 & 54 & $12{,}8\,\%$ & 0{,}08 \\
+3 & 218 & $3{,}17\,\%$ & 0{,}32 \\
+4 & 650 & $1{,}06\,\%$ & 0{,}94 \\
+5 & 1423 & $0{,}49\,\%$ & 2{,}06 \\
+6 & 2503 & $0{,}28\,\%$ & 3{,}62 \\
+8 & 5311 & $0{,}13\,\%$ & 7{,}69 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Ab $k_\text{max} \approx 5$ ist die Produktmenge dichter als $0{,}5\,\%$: jede Zahl
+wird ,,getroffen``. Ein Kontrolltest bestätigt das: Bei $k_\text{max} = 6$ haben
+zehn physikalische Massenverhältnisse im Mittel 2{,}9 Treffer, zweihundert
+Zufallszahlen 3{,}7. Die Trefferrate liegt auf Zufallsniveau \BM.
+
+\subsection{Die Schwelle: Galois-Raster gegen fraktale Korrektur}
+
+Dok.~338 beziffert die fraktal-rekursive Korrektur höherer Wicklungsordnung
+zwischen bare-Wert und Messwert auf $1{,}05\,\%$ für $(m_\mu/m_e)^2$. Der
+Galois-Raster ist bis $k = 3$ gröber als das Doppelte dieser Korrektur
+($3{,}17\,\% > 2{,}10\,\%$) und damit diskriminierend; ab $k = 4$ liegt er darunter
+($1{,}06\,\% < 2{,}10\,\%$) \BM.
+
+\textbf{Folgerung.} Die exakte Galois-Schicht endet strukturell dort, wo die
+fraktale Korrektur beginnt. Bis GF$(27)$ ist die Algebra exakt, und die
+$1\,\%$ ist Korrektur höherer Moden; darüber ist die Algebra selbst feiner als die
+Korrektur und geht in den höheren Wicklungsmoden auf. Galois-Produkte mit
+$k \geq 4$ sind von höheren Torus-Moden statistisch nicht mehr unterscheidbar.
+
+Das ist kein Widerspruch. Es ist derselbe Mechanismus wie in der Obertonreihe:
+das Intervall $(n{+}1) : n$ schrumpft von 1200~Cent ($n=1$) über 105~Cent ($n=16$)
+auf unter 5~Cent bei $n \approx 250$, die Reihe wird quasi-kontinuierlich.
+Dok.~159 beschreibt genau diese Modenkonvergenz auf dem fraktalen Torus; hier
+liegt ihre algebraische Form vor.
+
+\subsection{Methodische Regel}
+
+\begin{itemize}
+  \item $k \leq 3$ (GF$(3)$, GF$(9)$, GF$(27)$): Identitätsschicht. Ein Treffer
+        mit wenigen Bausteinen ist signifikant und darf \KM/\BM\ tragen, wenn er
+        geometrisch aus $\xi$ begründet ist (wie $43200$ in Dok.~338).
+  \item $k = 4$ (GF$(81)$, 5-limit): Übergangsbereich; nur mit Zusatzbegründung.
+  \item $k \geq 5$: Kein Status aus Produktsuche. Eine Beziehung gilt hier nur,
+        wenn sie aus $\xi$ geometrisch abgeleitet ist.
+\end{itemize}
+
+% ============================================================
+\section{Negativbefund: Tau-Sektor}
+% ============================================================
+
+Bei einer Toleranz von $0{,}05\,\%$ ist keines der Verhältnisse $m_\tau/m_\mu$,
+$m_\tau/m_e$ oder ihrer Quadrate ein Produkt aus bis zu drei Galois-Bausteinen
+mit $k \leq 6$ \SM. Treffer bei $0{,}5\,\%$ existieren (etwa $7 \cdot 11^2/3$ für
+$(m_\tau/m_\mu)^2$ mit $0{,}17\,\%$), liegen aber nach Satz~D auf Zufallsniveau.
+Das Tau-Verhältnis bleibt im Korpus über die Wicklungszahlen (Dok.~258, Dok.~310)
+begründet, nicht über eine Galois-Identität.
+
+% ============================================================
+\section{Zusammenfassung}
+% ============================================================
+
+\begin{table}[H]
+\centering
+\caption{Ergebnisse und Status}
+\begin{tabular}{lll}
+\toprule
+Ergebnis & Inhalt & Status \\
+\midrule
+A & 8 irreduzible kubische Polynome, 4 primitiv; 5 $\chi$-Klassen & \BM \\
+B & Eintrittsregel $k = \text{ord}_p(3)$; Reihenfolge $13, 5, 11, 7$ & \BM \\
+B$'$ & $7, 13$ sind $\mathbb{Z}_3$-kompatibel ($p \equiv 1 \bmod 3$) & \BM \\
+C & Akkorde $=$ Partitionen von~8, Ordnung $=$ kgV & \BM \\
+D & Galois-Raster $< 2 \times$ fraktale Korrektur ab $k=4$ & \BM \\
+D$'$ & Trefferrate physikalisch $=$ zufällig bei $k \geq 5$ & \BM \\
+--- & Tau-Sektor kein Galois-Produkt bei $0{,}05\,\%$ & \SM \\
+--- & Physik der Klassen $f_2, f_3, f_4$ & \SM \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ============================================================
+\section*{Prüfskripte}
+% ============================================================
+
+Verzeichnis \texttt{2/python/Dok342\_Skripte/}, Wrapper \texttt{run\_all\_342.sh}:
+\begin{itemize}
+  \item \texttt{pruef\_342\_faktorisierung\_primzahlen.py} --- Satz~A, $p$-limit-Zuordnung
+  \item \texttt{pruef\_342b\_hoehere\_harmonien.py} --- Sätze~B, C; Produktsuche mit Look-elsewhere-Hinweis; Koide
+  \item \texttt{pruef\_342c\_dichte\_hoehere\_harmonien.py} --- Satz~D; Dichte, Zufallskontrolle, Obertonanalogon, Schwelle
+\end{itemize}
+Alle Assertions bestanden.
+
+% ============================================================
+\section*{Vermerk zur Verwendung von KI-Assistenz}
+% ============================================================
+
+Dieses Dokument wurde mit Unterstützung von Claude (Anthropic) erstellt.
+Alle Zählungen und Ordnungsbestimmungen sind durch Python-Prüfskripte mit
+exakter Arithmetik verifiziert. Die physikalischen Interpretationen und
+Schlussfolgerungen stammen von Johann Pascher (ORCID 0009-0000-6518-4064).
+
+\begin{thebibliography}{9}
+\bibitem{P057} J.~Pascher, \textit{Dok.~057: Relationales Zahlensystem}, FFGFT-Korpus.
+\bibitem{P159} J.~Pascher, \textit{Dok.~159: Harmonische Struktur des Torus}, FFGFT-Korpus.
+\bibitem{P338} J.~Pascher, \textit{Dok.~338: Masseberechnungen und Galois-Gegenüberstellung}, FFGFT-Korpus, 28.~August 2026.
+\bibitem{P340} J.~Pascher, \textit{Dok.~340: Neutrino-Massenhierarchie aus GF$(27)^*$}, FFGFT-Korpus, 30.~August 2026.
+\bibitem{P341} J.~Pascher, \textit{Dok.~341: GF$(27)$ in GALG und FFGFT}, FFGFT-Korpus, 1.~September 2026.
+\end{thebibliography}

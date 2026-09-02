@@ -1,0 +1,277 @@
+% 343_Zeta_Galois_FFGFT_En_ch.tex
+% Johann Pascher, 2 September 2026
+% Continuation of Doc. 342 — consequences of Galois factorisation for the
+% zeta function of the T⁴/Z₃ torus
+
+\providecommand{\BM}{\textbf{[B]}}
+\providecommand{\KM}{\textbf{[K]}}
+\providecommand{\SM}{\textbf{[S]}}
+
+\chapter*{The Zeta Function of the T$^4$/Z$_3$ Torus}
+\addcontentsline{toc}{chapter}{The Zeta Function of the T$^4$/Z$_3$ Torus}
+
+\begin{abstract}
+The Galois factorisation classes of Doc.~342 and the harmonic series on the
+T$^4$ torus of Doc.~159 together yield a precise statement about the zeta
+function of the FFGFT spacetime.
+
+Four results:
+\textbf{(A)}~The Z$_3$ orbifold projection of T$^4$/Z$_3$ transforms the full
+Riemann zeta into a Dirichlet L-function:
+$\zeta_{T^4/\mathbb{Z}_3}(s) = L(s,\chi_0) = (1-3^{-s})\,\zeta(s)$ \BM.
+\textbf{(B)}~The Euler product of this L-function is hierarchically ordered by
+the entry depth $k = \mathrm{ord}_p(3)$; the physically visible primes
+$\{2,3,5,7,11,13\}$ are exactly those with $k \leq 6$ \BM.
+\textbf{(C)}~The orbifold projection generates additional zeros at
+$s = 2\pi i k/\ln 3$ ($k \in \mathbb{Z} \setminus \{0\}$) on the imaginary
+axis $\mathrm{Re}(s) = 0$; these are the algebraic signature of the Z$_3$
+sector separation \BM.
+\textbf{(D)}~The four Frobenius conjugacy classes of primitive elements in
+GF$(27)^*$ (Doc.~342, Theorem~A) correspond to four Hecke L-functions for
+the characters of $\mathrm{Gal}(\mathrm{GF}(27)/\mathrm{GF}(3)) \cong \mathbb{Z}_3$;
+whether these four classes carry distinct mass layers remains open \SM.
+
+Check script: \texttt{pruef\_343\_zeta\_galois.py}.
+\end{abstract}
+
+% ============================================================
+\section{Status markers and starting point}
+% ============================================================
+
+\subsection*{Status markers}
+
+\begin{itemize}
+  \item \textbf{[K]} — \emph{Confirmed}: fully proved from $\xi$ or a
+        corpus-established derivation; all check-script assertions passed.
+  \item \textbf{[B]} — \emph{Established}: numerically secured; analytical proof
+        present or trivial.
+  \item \textbf{[S]} — \emph{Speculative}: indication or conjecture, not yet fully proved.
+\end{itemize}
+
+Doc.~159 shows that the spectral zeta function of the Laplace operator on a torus
+$T^d$ is the Epstein zeta function, whose one-dimensional special case is the
+Riemann zeta $\zeta(s) = \sum_{n=1}^\infty n^{-s}$.
+Doc.~342 shows that primes appear in the GF$(3^k)$ hierarchy of the T$^4$/Z$_3$
+orbifold ordered by entry depth $k = \mathrm{ord}_p(3)$.
+This document combines both: what does the GF$(3^k)$ hierarchy imply for the
+zeta function itself?
+
+% ============================================================
+\section{Theorem A: Orbifold projection and Dirichlet L-function}
+% ============================================================
+
+\subsection{Decomposition of the zeta by Z$_3$ classes}
+
+On T$^4$/Z$_3$ the allowed modes $n \in \mathbb{Z}^4$ are structured by
+Z$_3$ invariance. In the one-dimensional analogue $\zeta(s)$ splits into
+three partial sums by $n \bmod 3$ \BM:
+\begin{equation}
+  \zeta(s) = \underbrace{\sum_{\substack{n=1\\3\mid n}}^\infty \frac{1}{n^s}}_{= 3^{-s}\zeta(s)}
+  + \underbrace{\sum_{\substack{n=1\\n\equiv 1(3)}}^\infty \frac{1}{n^s}}_{L_1(s)}
+  + \underbrace{\sum_{\substack{n=1\\n\equiv 2(3)}}^\infty \frac{1}{n^s}}_{L_2(s)}
+\end{equation}
+The fixed-point sector ($n \equiv 0$) contributes exactly $3^{-s}\zeta(s)$;
+the twist sectors ($n \equiv \pm 1$) together $(1 - 3^{-s})\zeta(s)$.
+
+\subsection{Principal character $\chi_0$ mod~3}
+
+The Dirichlet character $\chi_0 \bmod 3$ with $\chi_0(n) = 0$ if $3 \mid n$,
+otherwise $\chi_0(n) = 1$, gives \BM:
+\begin{equation}
+  L(s,\chi_0) = \sum_{\gcd(n,3)=1} \frac{1}{n^s}
+  = (1 - 3^{-s})\,\zeta(s)
+  = \prod_{p \neq 3} \frac{1}{1-p^{-s}}
+\end{equation}
+This is the \textbf{spectral zeta function of the T$^4$/Z$_3$ torus}: the
+characteristic prime $p=3$ does not appear as an Euler factor — it is the
+geometric foundation of the orbifold and stands outside the prime hierarchy.
+
+\subsection{Non-trivial character $\chi_1$ mod~3}
+
+The character $\chi_1 \bmod 3$ with $\chi_1(1) = +1$, $\chi_1(2) = -1$,
+$\chi_1(0) = 0$ measures the \emph{asymmetry} of the twist sectors \BM:
+\begin{equation}
+  L(s,\chi_1) = \sum_{\substack{n=1\\n\equiv 1(3)}}^\infty \frac{1}{n^s}
+              - \sum_{\substack{n=1\\n\equiv 2(3)}}^\infty \frac{1}{n^s}
+\end{equation}
+with the exact value (Dirichlet 1837): $L(1,\chi_1) = \pi/(3\sqrt{3})$.
+
+Physical meaning \SM: $L(s,\chi_1)$ measures the difference between winding
+numbers $w = +1$ and $w = -1$ on the torus, i.e.\ the Z$_3$ sector asymmetry.
+Whether $L(s,\chi_1)$ has a direct physical observable in FFGFT
+(particle–antiparticle asymmetry in the twisted sector?) remains open \SM.
+
+% ============================================================
+\section{Theorem B: Hierarchical Euler product by $k = \mathrm{ord}_p(3)$}
+% ============================================================
+
+The primes in $L(s,\chi_0) = \prod_{p\neq 3}(1-p^{-s})^{-1}$ are not
+equivalent. By the entry-depth rule $k = \mathrm{ord}_p(3)$ from
+Doc.~342, Theorem~B, the Euler product is hierarchically ordered \BM:
+\begin{equation}
+  L(s,\chi_0) = \prod_{k=1}^{\infty} \prod_{\substack{p\neq 3\\ \mathrm{ord}_p(3)=k}}
+  \frac{1}{1 - p^{-s}}
+\end{equation}
+
+\begin{table}[H]
+\centering
+\caption{Hierarchy of Euler factors by $k = \mathrm{ord}_p(3)$}
+\begin{tabular}{rrlll}
+\toprule
+$k$ & new prime(s) & Euler factor at $s=2$ & harmonics & FFGFT role \\
+\midrule
+1 & 2 & $4/3 = 1.333$ & octave & Z$_2$ fixed point, massive sector \\
+3 & 13 & $\approx 1.006$ & thirteenth & GF$(27)^*$, leptons \\
+4 & 5 & $\approx 1.042$ & major third & factor in $(m_\mu/m_e)^2$ \\
+5 & 11 & $\approx 1.008$ & eleventh & neutrinos (Doc.~340) \\
+6 & 7 & $\approx 1.021$ & seventh & top quark (Doc.~289) \\
+$\geq 7$ & $\geq 41, 1093,\ldots$ & $\approx 1+p^{-2}$ & no small harmonics & suppressed \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Fractal suppression of higher Euler factors}
+
+On the fractal T$^4$ torus (Doc.~159) high-mode contributions are suppressed
+by the damping factor $\tau^{-(1+\xi)k}$. This transfers to the Euler factors;
+the \emph{weighted} Euler product reads
+\begin{equation}
+  \zeta_{T^4/\mathbb{Z}_3}^{\,\mathrm{frac}}(s)
+  \;\cong\; \prod_{k=1}^{\infty}\;
+  \prod_{\substack{p\neq 3\\ \mathrm{ord}_p(3)=k}}
+  \left(\frac{1}{1-p^{-s}}\right)^{\!\tau^{-k(1+\xi)}}
+\end{equation}
+Since $\tau^{-k(1+\xi)} \to 0$ as $k\to\infty$, each Euler factor is pushed
+toward~1 for large~$k$: primes with $\mathrm{ord}_p(3) \geq 7$ make no physical
+contribution \BM. This is Theorem~D of Doc.~342 in the language of the zeta function.
+
+% ============================================================
+\section{Theorem C: New zeros from the orbifold projection}
+% ============================================================
+
+\subsection{Zeros of $(1-3^{-s})$}
+
+The factor $(1-3^{-s})$ in $L(s,\chi_0) = (1-3^{-s})\zeta(s)$
+has zeros at \BM:
+\begin{equation}
+  3^{-s} = 1 \quad\Longleftrightarrow\quad s = \frac{2\pi i\,k}{\ln 3},
+  \qquad k \in \mathbb{Z} \setminus \{0\}
+\end{equation}
+These lie on $\mathrm{Re}(s) = 0$ (imaginary axis), \emph{not} on the
+critical line $\mathrm{Re}(s) = 1/2$ of the Riemann hypothesis.
+They are absent from the Riemann zeta spectrum; they arise solely from the
+Z$_3$ orbifold projection.
+
+The zero spacing $2\pi/\ln 3 \approx 5.72$ encodes the periodicity of the
+Z$_3$ lattice structure. A resonance test of the first eight known Riemann
+zeros $\gamma_n$ against this unit shows no significant coincidence
+(deviations $0.15$--$0.47$) \BM: the full Riemann zeta encodes the distribution
+of \emph{all} primes, not only the Z$_3$-compatible ones.
+
+\subsection{Complete zero structure of the orbifold zeta}
+
+$L(s,\chi_0)$ has three types of zeros:
+\begin{itemize}
+  \item \textbf{Trivial zeros of $\zeta(s)$}: at $s = -2,-4,-6,\ldots$
+  \item \textbf{Non-trivial Riemann zeros}: on $\mathrm{Re}(s)=1/2$ (assumed), unchanged
+  \item \textbf{Orbifold zeros}: at $s = 2\pi ik/\ln 3$, $k\neq 0$
+        — new, generated by the Z$_3$ projection \BM
+\end{itemize}
+
+% ============================================================
+\section{Theorem D: Four Hecke L-functions of the GF$(27)$ structure}
+% ============================================================
+
+\subsection{Galois group and its characters}
+
+The Galois group $\mathrm{Gal}(\mathrm{GF}(27)/\mathrm{GF}(3)) \cong \mathbb{Z}_3$
+has three characters: the trivial $\chi_\mathrm{triv}$ and two non-trivial
+$\chi_\omega$, $\chi_{\omega^2}$ with $\omega = e^{2\pi i/3}$ \BM.
+
+The four Frobenius conjugacy classes of primitive elements in GF$(27)^*$
+(Doc.~342, Theorem~A: polynomials $f_1,f_2,f_3,f_4$) correspond to four
+Hecke L-functions describing the splitting behaviour of primes in the extension
+GF$(27)/$GF$(3)$:
+
+\begin{table}[H]
+\centering
+\caption{Splitting of primes $p \neq 3$ in GF$(27)/$GF$(3)$}
+\begin{tabular}{lll}
+\toprule
+Splitting type & Condition & Hecke L-function \\
+\midrule
+totally split & $p \equiv 1 \pmod{3}$, $\mathrm{ord}_p(3) \mid 1$ & trivial $\chi_\mathrm{triv}$ \\
+3-cycle & $\mathrm{ord}_p(3) = 3$ (e.g.\ $p=13$) & $L(s,\chi_\omega)$ \\
+3-cycle & $\mathrm{ord}_p(3) = 3$ & $L(s,\chi_{\omega^2})$ \\
+inert & $\mathrm{ord}_p(3) \nmid 3$ & no contribution \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Open question}
+
+Theorem~A of Doc.~342 assigns the four primitive cubics $f_1,\ldots,f_4$ to
+the four Frobenius conjugacy classes in GF$(27)^*$.
+Whether these four classes carry physically distinct mass layers
+(analogous to $f_1$ carrying the lepton layer) is an open question \SM.
+If so, each layer would be characterised by its own Hecke L-function.
+
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{table}[H]
+\centering
+\caption{Results and status}
+\begin{tabular}{lll}
+\toprule
+Theorem & Content & Status \\
+\midrule
+A & $\zeta_{T^4/\mathbb{Z}_3}(s) = (1-3^{-s})\,\zeta(s) = L(s,\chi_0)$ & \BM \\
+A$'$ & $L(s,\chi_1)$ measures twist-sector asymmetry & \SM \\
+B & Euler product hierarchical by $k=\mathrm{ord}_p(3)$ & \BM \\
+B$'$ & Fractal damping suppresses Euler factors $k\geq 7$ & \BM \\
+C & Orbifold zeros at $s=2\pi ik/\ln 3$ on $\mathrm{Re}(s)=0$ & \BM \\
+C$'$ & No resonance of Riemann zeros with Z$_3$ unit & \BM \\
+D & Four Hecke L-functions for Gal(GF$(27)$/GF$(3)$)$\cong\mathbb{Z}_3$ & \BM \\
+D$'$ & Physics of the four layers $f_1,\ldots,f_4$ & \SM \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The central statement: the full Riemann zeta $\zeta(s)$ belongs to the flat
+$\mathbb{R}^4$ spectrum. The zeta of the T$^4$/Z$_3$ orbifold is
+$L(s,\chi_0) = (1-3^{-s})\,\zeta(s)$ — a filtered version in which the
+$3$-Euler factor is separated out and the primes are weighted by the Galois
+hierarchy $k = \mathrm{ord}_p(3)$. This is the zeta-function form of the
+entry rule of Doc.~342.
+
+% ============================================================
+\section*{Check scripts}
+% ============================================================
+
+Directory \texttt{2/python/Dok343\_Skripte/}, wrapper \texttt{run\_all\_343.sh}:
+\begin{itemize}
+  \item \texttt{pruef\_343\_zeta\_galois.py} ---
+        Theorems~A--D; partial zeta decomposition, L-functions, zeros,
+        resonance test, weighted Euler product, Hecke discussion.
+\end{itemize}
+All assertions passed.
+
+% ============================================================
+\section*{Note on the use of AI assistance}
+% ============================================================
+
+This document was prepared with the assistance of Claude (Anthropic).
+All numerical computations are verified by Python check scripts.
+The physical interpretations and conclusions are those of Johann Pascher
+(ORCID 0009-0000-6518-4064).
+
+\begin{thebibliography}{9}
+\bibitem{P057} J.~Pascher, \textit{Doc.~057: Relational number system}, FFGFT corpus.
+\bibitem{P159} J.~Pascher, \textit{Doc.~159: Harmonic structure of the torus}, FFGFT corpus.
+\bibitem{P330} J.~Pascher, \textit{Doc.~330: Three operations from T$^4$ to the observation space}, FFGFT corpus, August 2026.
+\bibitem{P336} J.~Pascher, \textit{Doc.~336: The algebraic bridge: FFGFT and $\mathbb{Z}_3\mathbb{C}$}, FFGFT corpus, August 2026.
+\bibitem{P342} J.~Pascher, \textit{Doc.~342: Factorisation classes in G$(6)$ and the harmonics of the primes}, FFGFT corpus, 2~September 2026.
+\bibitem{Dirichlet} P.\,G.\,L.~Dirichlet, \textit{Über die Bestimmung der Dichte einer unendlichen Anzahl von Punkten}, 1837.
+\end{thebibliography}

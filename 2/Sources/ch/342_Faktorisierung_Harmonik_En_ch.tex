@@ -1,0 +1,328 @@
+% 342_Faktorisierung_Harmonik_En_ch.tex
+% Johann Pascher, 2 September 2026
+% Continuation of Doc. 341 — factorisation classes and prime-number harmonics
+
+\providecommand{\BM}{\textbf{[B]}}
+\providecommand{\KM}{\textbf{[K]}}
+\providecommand{\SM}{\textbf{[S]}}
+
+\chapter*{Factorisation Classes in G$(6)$ and the Harmonics of the Primes}
+\addcontentsline{toc}{chapter}{Factorisation Classes in G$(6)$ and the Harmonics of the Primes}
+
+\begin{abstract}
+Doc.~341 shows that GF$(27)$ enters G$(6)$ as an order structure through the
+characteristic polynomial $\chi_X = (x^3+2x+1)^2(x+1)^2$. This document asks which
+further factorisations $\chi$ admits in G$(6) \cong M_8(\text{GF}(9))$, and shows
+that the same factorisation rule organises the harmonic patterns of the primes
+(Doc.~057, Doc.~159).
+
+Four results:
+\textbf{(A)}~Over GF$(3)$ there are eight irreducible cubic polynomials, four of them
+primitive (order~26) and four of order~13; they generate five factorisation classes
+of $\chi$ in G$(6)$ \BM.
+\textbf{(B)}~A prime~$p$ enters $|\text{GF}(3^k)^*|$ exactly at $k = \text{ord}_p(3)$;
+the harmonic primes enter in the order $13\,(k{=}3)$, $5\,(k{=}4)$, $11\,(k{=}5)$,
+$7\,(k{=}6)$, after which only large primes appear \BM.
+\textbf{(C)}~Element orders in G$(6)$ are partitions of~8 with an lcm rule ---
+the algebraic form of a chord of overtones \BM.
+\textbf{(D)}~From $k \geq 4$ on, the Galois grid is finer than the fractal-recursive
+correction ($1.05\,\%$, Doc.~338); Galois products then become statistically
+indistinguishable from higher torus modes. This is not a contradiction but the
+algebraic form of the mode convergence of Doc.~159 \BM.
+
+Negative result: the tau sector is not a Galois product at $0.05\,\%$ \SM.
+Check scripts: \texttt{pruef\_342\_faktorisierung\_primzahlen.py},
+\texttt{pruef\_342b\_hoehere\_harmonien.py},
+\texttt{pruef\_342c\_dichte\_hoehere\_harmonien.py}.
+\end{abstract}
+
+% ============================================================
+\section{Starting point: algebraic equals geometric}
+% ============================================================
+
+\subsection*{Status markers}
+
+This document uses the standard FFGFT corpus status markers:
+\begin{itemize}
+  \item \textbf{[K]} — \emph{Confirmed}: algebraically or numerically fully proved,
+        all assertions in the check script passed; derived directly from $\xi$ or a
+        corpus-established derivation.
+  \item \textbf{[B]} — \emph{Established}: numerically secured by sampling or explicit
+        construction; analytical proof present or trivial.
+  \item \textbf{[S]} — \emph{Speculative}: indication or conjecture, not yet fully proved.
+\end{itemize}
+
+Docs.~338 and~341 showed that mass ratios from torus winding numbers $(r_i, p_i)$
+and from Galois group orders yield the same number:
+$(m_\mu/m_e)^2 = 43200 = |\text{GF}(9)^*|^2 \cdot 5^2 \cdot |\text{GF}(27)|$.
+The question whether the geometric formulation (vectors on $T^4$) is ``more precise''
+than the algebraic one is ill-posed: winding numbers on $S^1$ and elements of
+GF$(3^k)$ are both integer, exact objects. The bridge is the Frobenius automorphism
+$g \mapsto g^3$ on GF$(3^k)$, which represents the $\mathbb{Z}_3$ rotation of the
+orbifold $T^4/\mathbb{Z}_3$ (Doc.~314, Doc.~336).
+
+The algebraic route has one methodological advantage: polynomial factorisation can
+be enumerated systematically, geometric search cannot. This document exploits that.
+
+% ============================================================
+\section{Theorem A: Factorisation classes in G$(6)$}
+% ============================================================
+
+\subsection{Irreducible cubic polynomials over GF$(3)$}
+
+A monic cubic over GF$(3)$ is irreducible iff it has no root in $\{0,1,2\}$.
+There are eight such polynomials; their companion matrices have order~26 or~13
+in $\text{GL}_3(\text{GF}(3))$ \BM:
+
+\begin{table}[H]
+\centering
+\caption{Irreducible cubics over GF$(3)$ and their order}
+\begin{tabular}{llc}
+\toprule
+Label & Polynomial & Order \\
+\midrule
+$f_1$ & $x^3 + 2x + 1$ & 26 \\
+$f_2$ & $x^3 + 2x^2 + 1$ & 26 \\
+$f_3$ & $x^3 + 2x^2 + x + 1$ & 26 \\
+$f_4$ & $x^3 + x^2 + 2x + 1$ & 26 \\
+\midrule
+$g_1$ & $x^3 + 2x + 2$ & 13 \\
+$g_2$ & $x^3 + x^2 + 2$ & 13 \\
+$g_3$ & $x^3 + x^2 + x + 2$ & 13 \\
+$g_4$ & $x^3 + 2x^2 + 2x + 2$ & 13 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The number four is forced: GF$(27)^*$ has $\varphi(26) = 12$ primitive elements
+in Frobenius orbits of length~3, hence $12/3 = 4$ minimal polynomials.
+Doc.~341 uses $f_1$.
+
+\subsection{The five classes}
+
+In G$(6) \cong M_8(\text{GF}(9))$, $\chi$ splits over GF$(3)$ into factors whose
+degrees sum to~8. With cubic and linear factors this gives five classes \BM:
+
+\begin{table}[H]
+\centering
+\caption{$\chi$ factorisation classes with GF$(27)$ content in G$(6)$}
+\begin{tabular}{llcc}
+\toprule
+Type & $\chi(x)$ & Count & Order \\
+\midrule
+Doc.-341 type & $f_i^{\,2}\,(x{+}1)^2$ & 4 & 26 \\
+Mixed primitive & $f_i\, f_j\,(x{+}1)^2$, $i \neq j$ & 6 & 26 \\
+Order-13 type & $g_i^{\,2}\,(x{+}1)^2$ & 4 & 13 \\
+Primitive$\times$13 & $f_i\, g_j\,(x{+}1)^2$ & 16 & 26 \\
+Thin & $f_i\,(x{+}1)^5$ & 4 & 26 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The four primitive polynomials are the four Frobenius conjugacy classes
+$\{g, g^3, g^9\}$, $\{g^5, g^{15}, g^{45}\}$, $\{g^7, g^{21}, g^{63}\}$,
+$\{g^{11}, g^{33}, g^{99}\}$ of a generator~$g$ of GF$(27)^*$. Assigning the
+leptons to $f_1$ in Doc.~341 is a choice within this class; whether
+$f_2, f_3, f_4$ carry further mass layers remains open \SM.
+
+% ============================================================
+\section{Theorem B: Entry rule of the harmonic primes}
+% ============================================================
+
+Doc.~057 describes primes as elementary relational steps: $2$ octave, $3$ fifth,
+$5$ major third, $7$ natural seventh, $11$ eleventh, $13$ thirteenth.
+A $p$-limit system admits primes up to~$p$ as interval building blocks.
+
+\begin{table}[H]
+\centering
+\caption{Order of GF$(3^k)^*$ and entry of new primes}
+\begin{tabular}{rrlll}
+\toprule
+$k$ & $|\text{GF}(3^k)^*|$ & prime factors & new & harmonics \\
+\midrule
+1 & 2 & $2$ & 2 & octave \\
+2 & 8 & $2^3$ & --- & GF$(9)$, Matzke's $\mathbb{Z}_3\mathbb{C}$ \\
+3 & 26 & $2 \cdot 13$ & 13 & thirteenth; leptons (Doc.~338) \\
+4 & 80 & $2^4 \cdot 5$ & 5 & major third; Doug's G$(3)$ orders \\
+5 & 242 & $2 \cdot 11^2$ & 11 & eleventh; neutrinos (Doc.~340) \\
+6 & 728 & $2^3 \cdot 7 \cdot 13$ & 7 & seventh; with 13 on one carrier \\
+7 & 2186 & $2 \cdot 1093$ & 1093 & no small harmonics left \\
+8 & 6560 & $2^5 \cdot 5 \cdot 41$ & 41 & --- \\
+12 & 531440 & $2^4 \cdot 5 \cdot 7 \cdot 13 \cdot 73$ & 73 & all four united \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Entry rule} \BM: A prime $p \neq 3$ divides $3^k - 1$ iff
+$\text{ord}_p(3) \mid k$; it therefore first enters at $k = \text{ord}_p(3)$.
+This yields the order $13, 5, 11, 7$ for $k = 3, 4, 5, 6$. All four harmonic primes
+above~3 enter between $k=3$ and $k=6$; from $k=7$ on, only primes $\geq 41$ appear
+(with $1093$, a Wieferich prime, at $k=7$).
+
+This is the algebraic reason why practically relevant harmonics end at the
+13-limit, and why the FFGFT corpus has so far needed only the primes
+$\{2, 3, 5, 7, 11, 13\}$. The neutrino eleven of Doc.~340
+($\Delta m^2_\text{atm} = (11^2 - 1)\, m_\nu^2$) sits at $k = 5$; this had not
+been located in the corpus before.
+
+$\mathbb{Z}_3$ compatibility: for $p \equiv 1 \pmod 3$, $\mathbb{Z}_3 \subset \text{GF}(p)^*$.
+This holds for $7$ and $13$, not for $2, 5, 11$. The two $\mathbb{Z}_3$-compatible
+primes are exactly those that appear as structural numbers in Doc.~289 (top quark)
+and Docs.~338/341 (leptons) \BM.
+
+% ============================================================
+\section{Theorem C: Chords as partitions of~8}
+% ============================================================
+
+For semisimple $X \in M_8(\text{GF}(9))$ with $\chi$ split over GF$(3)$ into factors
+of degrees $d_1 + \cdots + d_r = 8$, the eigenvalues lie in GF$(3^{d_i})$ and
+$\text{ord}(X)$ divides $\text{lcm}(3^{d_i} - 1)$ \BM. A partition of~8 is thus the
+algebraic form of a chord of overtones $k \in \{d_i\}$; the order is the common period.
+
+\begin{table}[H]
+\centering
+\caption{Partitions of~8 and maximal semisimple order}
+\begin{tabular}{lrl}
+\toprule
+Partition & lcm$(3^{d_i}{-}1)$ & reading \\
+\midrule
+$(3,3,1,1)$ & 26 & pure GF$(27)$ chord (Doc.~341) \\
+$(3,3,2)$ & 104 & $= 2^3 \cdot 13$: GF$(9)$ with GF$(27)$ \\
+$(4,3,1)$ & 1040 & $= 2^4 \cdot 5 \cdot 13$: third with thirteenth \\
+$(6,2)$, $(6,1,1)$ & 728 & $= 2^3 \cdot 7 \cdot 13$: seventh with thirteenth \\
+$(5,3)$ & 3146 & $= 2 \cdot 11^2 \cdot 13$: eleventh with thirteenth \\
+$(8)$ & 6560 & $= 2^5 \cdot 5 \cdot 41$: maximal \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The number of irreducible resp.\ primitive polynomials of degree~$k$ over GF$(3)$
+grows quickly (Möbius formula): degree~3: $8/4$, degree~4: $18/8$, degree~6:
+$116/48$, degree~8: $810/320$. The space of possible chords is therefore large ---
+which leads directly to the question of discriminating power.
+
+% ============================================================
+\section{Theorem D: Discriminating power and the boundary of the Galois layer}
+% ============================================================
+
+\subsection{Density of Galois products}
+
+Forming all products of up to three building blocks
+$\{3^k, 3^k - 1, \text{prime divisors}\}$ for $k \leq k_\text{max}$ with exponents
+$\{-1, 1, 2\}$, the mean logarithmic spacing of neighbouring values in the window
+$10 < x < 10^4$ drops as follows \BM:
+
+\begin{table}[H]
+\centering
+\caption{Mean log spacing of Galois products}
+\begin{tabular}{rrrr}
+\toprule
+$k_\text{max}$ & values in window & mean spacing & expected chance hits at $0.5\,\%$ \\
+\midrule
+2 & 54 & $12.8\,\%$ & 0.08 \\
+3 & 218 & $3.17\,\%$ & 0.32 \\
+4 & 650 & $1.06\,\%$ & 0.94 \\
+5 & 1423 & $0.49\,\%$ & 2.06 \\
+6 & 2503 & $0.28\,\%$ & 3.62 \\
+8 & 5311 & $0.13\,\%$ & 7.69 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+From $k_\text{max} \approx 5$ on, the product set is denser than $0.5\,\%$: every
+number is ``hit''. A control test confirms this: at $k_\text{max} = 6$, ten physical
+mass ratios have 2.9 hits on average, two hundred random numbers 3.7. The hit rate
+is at chance level \BM.
+
+\subsection{The threshold: Galois grid versus fractal correction}
+
+Doc.~338 quantifies the fractal-recursive higher-winding correction between bare
+value and measurement at $1.05\,\%$ for $(m_\mu/m_e)^2$. The Galois grid is coarser
+than twice this correction up to $k = 3$ ($3.17\,\% > 2.10\,\%$) and hence
+discriminating; from $k = 4$ on it lies below ($1.06\,\% < 2.10\,\%$) \BM.
+
+\textbf{Consequence.} The exact Galois layer ends structurally where the fractal
+correction begins. Up to GF$(27)$ the algebra is exact and the $1\,\%$ is a
+higher-mode correction; above that, the algebra itself is finer than the correction
+and dissolves into the higher winding modes. Galois products with $k \geq 4$ are
+statistically indistinguishable from higher torus modes.
+
+This is not a contradiction. It is the same mechanism as in the overtone series:
+the interval $(n{+}1) : n$ shrinks from 1200~cents ($n=1$) via 105~cents ($n=16$)
+to below 5~cents at $n \approx 250$; the series becomes quasi-continuous. Doc.~159
+describes exactly this mode convergence on the fractal torus; here it appears in
+algebraic form.
+
+\subsection{Methodological rule}
+
+\begin{itemize}
+  \item $k \leq 3$ (GF$(3)$, GF$(9)$, GF$(27)$): identity layer. A hit with few
+        building blocks is significant and may carry \KM/\BM\ if grounded
+        geometrically in $\xi$ (as $43200$ in Doc.~338).
+  \item $k = 4$ (GF$(81)$, 5-limit): transition region; only with additional
+        justification.
+  \item $k \geq 5$: no status from product search. A relation holds here only if
+        derived geometrically from $\xi$.
+\end{itemize}
+
+% ============================================================
+\section{Negative result: tau sector}
+% ============================================================
+
+At a tolerance of $0.05\,\%$, none of the ratios $m_\tau/m_\mu$, $m_\tau/m_e$ or
+their squares is a product of up to three Galois building blocks with $k \leq 6$
+\SM. Hits at $0.5\,\%$ exist (e.g.\ $7 \cdot 11^2/3$ for $(m_\tau/m_\mu)^2$ at
+$0.17\,\%$) but lie at chance level by Theorem~D. The tau ratio remains grounded in
+the corpus through winding numbers (Doc.~258, Doc.~310), not through a Galois identity.
+
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{table}[H]
+\centering
+\caption{Results and status}
+\begin{tabular}{lll}
+\toprule
+Result & Content & Status \\
+\midrule
+A & 8 irreducible cubics, 4 primitive; 5 $\chi$ classes & \BM \\
+B & entry rule $k = \text{ord}_p(3)$; order $13, 5, 11, 7$ & \BM \\
+B$'$ & $7, 13$ are $\mathbb{Z}_3$-compatible ($p \equiv 1 \bmod 3$) & \BM \\
+C & chords $=$ partitions of~8, order $=$ lcm & \BM \\
+D & Galois grid $< 2 \times$ fractal correction from $k=4$ & \BM \\
+D$'$ & hit rate physical $=$ random for $k \geq 5$ & \BM \\
+--- & tau sector no Galois product at $0.05\,\%$ & \SM \\
+--- & physics of the classes $f_2, f_3, f_4$ & \SM \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ============================================================
+\section*{Check scripts}
+% ============================================================
+
+Directory \texttt{2/python/Dok342\_Skripte/}, wrapper \texttt{run\_all\_342.sh}:
+\begin{itemize}
+  \item \texttt{pruef\_342\_faktorisierung\_primzahlen.py} --- Theorem~A, $p$-limit assignment
+  \item \texttt{pruef\_342b\_hoehere\_harmonien.py} --- Theorems~B, C; product search with look-elsewhere note; Koide
+  \item \texttt{pruef\_342c\_dichte\_hoehere\_harmonien.py} --- Theorem~D; density, random control, overtone analogue, threshold
+\end{itemize}
+All assertions passed.
+
+% ============================================================
+\section*{Note on the use of AI assistance}
+% ============================================================
+
+This document was prepared with the assistance of Claude (Anthropic). All counts
+and order determinations are verified by Python check scripts with exact
+arithmetic. The physical interpretations and conclusions are those of
+Johann Pascher (ORCID 0009-0000-6518-4064).
+
+\begin{thebibliography}{9}
+\bibitem{P057} J.~Pascher, \textit{Doc.~057: Relational number system}, FFGFT corpus.
+\bibitem{P159} J.~Pascher, \textit{Doc.~159: Harmonic structure of the torus}, FFGFT corpus.
+\bibitem{P338} J.~Pascher, \textit{Doc.~338: Mass calculations and Galois comparison}, FFGFT corpus, 28~August 2026.
+\bibitem{P340} J.~Pascher, \textit{Doc.~340: Neutrino mass hierarchy from GF$(27)^*$}, FFGFT corpus, 30~August 2026.
+\bibitem{P341} J.~Pascher, \textit{Doc.~341: GF$(27)$ in GALG and FFGFT}, FFGFT corpus, 1~September 2026.
+\end{thebibliography}
