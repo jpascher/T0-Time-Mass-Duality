@@ -1,7 +1,7 @@
 # T0 Zeit-Masse-Dualität · FFGFT
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17390357.svg)](https://doi.org/10.5281/zenodo.17390357)
-**Version: v1.3.6** (30. August 2026) — ersetzt v1.3.5
+**Version: v1.3.6** (2. September 2026) — ersetzt v1.3.5
 
 **FFGFT — Fraktale Feldgeometrische Fundamentaltheorie** zeigt:
 Alle Konstanten des Standardmodells folgen aus einem einzigen
@@ -55,6 +55,7 @@ was Eingabe ist, was folgt, ist immer klar deklariert.
 | ξ als Galois-Zahl: (r_μ/r_e)²/ξ = \|GF(9)*\|²·5²·\|GF(27)\| = 43200 | [Dok. 317](2/pdf/317_KSAU_FFGFT_Leptonen_De.pdf) / [336](2/pdf/336_GF9_FFGFT_Bruecke_De.pdf) / [338](2/pdf/338_Galois_Massen_FFGFT_De.pdf) |
 | 1/α = 3700/27 aus Galois-Ordnungen (7,6 ppm, kein ξ, kein v, kein m_e) | [Dok. 338](2/pdf/338_Galois_Massen_FFGFT_De.pdf) |
 | FFGFT↔GALG: T_Planck als legitime SI-Schnittstelle; Zeitemergenz | [Dok. 337](2/pdf/337_Zeit_Emergenz_FFGFT_GALG_De.pdf) |
+| GF(27) in GALG: G(3) ohne GF(27) [B]; Ordnung-26-Elemente in G(6) [B]; Vakuum = Frobenius-Trennung [B] | [Dok. 341](2/pdf/341_GF27_GALG_FFGFT_De.pdf) |
 | SI-Brücke: alle Konstanten aus ξ | [Dok. 013](2/pdf/013_T0_SI_De.pdf) |
 | E = mc² = E = m: Einheiten-Identität | [Dok. 077](2/pdf/077_E-mc2_De.pdf) |
 | Natürliche Einheiten, statisch und korrekturfrei | [Dok. 261](2/pdf/261_NatEinheiten_Statisch_De.pdf) |
@@ -240,7 +241,7 @@ ist aber prinzipiell messbar (Dok. 230).
 |-----------|------|
 | 🔬 Interaktives Portal | [huggingface.co/spaces/jpascher/T0-FFGFT-Portal](https://huggingface.co/spaces/jpascher/T0-FFGFT-Portal) |
 | 📁 GitHub Pages | [jpascher.github.io/T0-Time-Mass-Duality](https://jpascher.github.io/T0-Time-Mass-Duality/) |
-| 📦 Zenodo v1.3.0 | [DOI 10.5281/zenodo.21821995](https://doi.org/10.5281/zenodo.21821995) (löst v1.2.7 · [21628364](https://doi.org/10.5281/zenodo.21628364) ab) |
+| 📦 Zenodo v1.3.5 | [DOI 10.5281/zenodo.22180969](https://doi.org/10.5281/zenodo.22180969) (löst v1.3.4 ab) |
 | 🎵 Spotify | [T0 Podcast](https://creators.spotify.com/pod/show/0PwnOIqjFepxA7NQ5i3fwR/episodes) |
 | 📺 YouTube | [@Time-MassDuality](https://www.youtube.com/@Time-MassDuality) |
 
@@ -587,6 +588,30 @@ CMB-S4, Euclid; (2) Δm²_atm/Δm²_sol = 32.73 (gemessen: 33.20); (3) Sterile N
 SBN (Fermilab), BEST.  
 Prüfskript: `pruef_340_neutrino_galois.py` (10/10 Assertions).  
 → [DE](2/pdf/340_Neutrino_Galois_De.pdf) · [EN](2/pdf/340_Neutrino_Galois_En.pdf)
+
+### Dok. 341 — GF(27) in GALG: algebraische Brücke FFGFT↔GALG (DE+EN, je 8 S.)
+
+Algebraischer Vergleich FFGFT ↔ Matzkes GALG-Framework (IPI-Austausch August 2026).
+
+- **Satz A [B]:** G(3) ≅ M₂(GF(9)) ⊕ M₂(GF(9)) — 13 ∤ |GF(81)*| = 80, daher
+  ist GF(27)-Struktur in G(3) algebraisch ausgeschlossen. Dougs „Attempted 6561 with 0 found"
+  ist strukturell erzwungen, kein Suchfehler.
+- **Satz B [B]:** In G(6) ≅ M₈(GF(9)) existieren Elemente der Ordnung 26 = |GF(27)*|.
+  Konstruktion via Begleitmatrix von f(x)=x³+2x+1 über GF(3). Konkretes 5-Blade-Element
+  in GALG-Notation angegeben (direkt nachprüfbar). Ordnung-26-Elemente bei ≥5 Blades,
+  ~18–37% der invertierbaren Elemente mit ≥6 Blades.
+- **Satz C [B]:** GF(27) bettet als Teilkörper in M_n(GF(9)) genau dann ein wenn 3|n.
+  Da G(3)→n=2 und G(6)→n=8: kein GF(27)-Teilkörper in G(3) oder G(6).
+- **Vakuumstruktur [B]:** GALG-Witt-Paar-Vakua unter ℤ₃ stimmen exakt mit der
+  FFGFT-Frobenius-Trennung (Dok. 339) überein: gerade Vakua = ℤ₃-Fixpunkte,
+  ungerade = ℤ₃-Dreier-Orbit; Bilaterale = Gluon-Sektorwechsler.
+- **Konsequenz:** α formulierbar auf G(3)/GF(9)-Ebene; Leptonmassen brauchen G(6)
+  mit Ordnung-26-Elementen. Dougs „not working on mass" konsistent mit dieser Trennung.
+
+Prüfskripte: `pruef_341_gf27_in_galg.py` (6/6 [B]), `pruef_341_vakuum_witt_z3.py` (7/7 [B]),
+`pruef_342_vakuum_witt_z3.py` (7/7 [B]).  
+→ [DE](2/pdf/341_GF27_GALG_FFGFT_De.pdf) · [EN](2/pdf/341_GF27_GALG_FFGFT_En.pdf)
+
 
 
 ## Neue Dokumente — v1.3.3 (23. August 2026)
