@@ -269,7 +269,8 @@ print("""
    Bedeutung — z.B. als Sektor-Asymmetrie zwischen n≡+1 und n≡-1 (mod 3)?
    Das wären Wicklungspaare mit entgegengesetztem Z₃-Charakter.
 
-7. Die Verbindung zu den Frobenius-Konjugationsklassen (4 primitive Polynome):
-   Entsprechen diese vier Klassen vier verschiedenen L-Funktionen mod 27?
-   (L-Funktionen zu den Charakteren der Galois-Gruppe Gal(GF(27)/GF(3))≅Z₃)
+7. Die Frobenius-Konjugationsklassen (4 primitive Polynome):
+   [korrigiert in pruef_343b] Der Galois-Charakter trennt sie NICHT; die
+   Sektorpaarung k↔−k reduziert 4 → 2 Klassen. Offen bleibt nur, ob die
+   zweite Klasse {f1,f4} physikalisch realisiert ist.
 """)

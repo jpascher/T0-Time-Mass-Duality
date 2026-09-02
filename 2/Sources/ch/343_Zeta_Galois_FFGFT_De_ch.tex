@@ -27,12 +27,19 @@ mit $k \leq 6$ \BM.
 $s = 2\pi i k/\ln 3$ ($k \in \mathbb{Z} \setminus \{0\}$) auf der
 imaginären Achse $\mathrm{Re}(s) = 0$; diese sind die algebraische
 Signatur der Z$_3$-Sektortrennung \BM.
-\textbf{(D)}~Den vier Frobenius-Konjugationsklassen primitiver Elemente
-in GF$(27)^*$ (Dok.~342, Satz~A) entsprechen vier Hecke-L-Funktionen
-zu den Charakteren von $\mathrm{Gal}(\mathrm{GF}(27)/\mathrm{GF}(3)) \cong \mathbb{Z}_3$;
-ob diese vier Klassen verschiedene Massenschichten tragen, ist offen \SM.
+\textbf{(D)}~Die vier Frobenius-Konjugationsklassen primitiver Elemente
+in GF$(27)^*$ (Dok.~342, Satz~A) werden durch die FFGFT-Sektorpaarung
+$k \leftrightarrow -k$ (Dok.~336; auf GF$(27)^*$: $x \mapsto x^{-1}$) zu
+\emph{zwei} Klassen gepaart, $f_1 \leftrightarrow f_4$ und $f_2 \leftrightarrow f_3$;
+die Negation $x \mapsto -x = x^{13}\,x$ koppelt jede primitive Klasse an genau
+eine Ordnung-13-Klasse \BM. Der Galois-Charakter von
+$\mathrm{Gal}(\mathrm{GF}(27)/\mathrm{GF}(3)) \cong \mathbb{Z}_3$ unterscheidet
+die Klassen nicht; die Unterscheidung liegt in $(\mathbb{Z}/26)^*/\langle 3\rangle \cong \mathbb{Z}_4$.
+Ob neben der Leptonenschicht genau eine zweite GF$(27)^*$-Schicht physikalisch
+realisiert ist, bleibt offen \SM.
 
-Prüfskript: \texttt{pruef\_343\_zeta\_galois.py}.
+Prüfskripte: \texttt{pruef\_343\_zeta\_galois.py},
+\texttt{pruef\_343b\_klassen\_symmetrie.py}.
 \end{abstract}
 
 % ============================================================
@@ -219,46 +226,73 @@ $L(s,\chi_0)$ hat drei Typen von Nullstellen:
 \end{itemize}
 
 % ============================================================
-\section{Satz D: Vier Hecke-L-Funktionen der GF$(27)$-Struktur}
+\section{Satz D: Die vier Klassen unter der Sektorpaarung}
 % ============================================================
 
-\subsection{Galois-Gruppe und ihre Charaktere}
+\subsection{Der Galois-Charakter unterscheidet die Klassen nicht}
 
-Die Galois-Gruppe $\mathrm{Gal}(\mathrm{GF}(27)/\mathrm{GF}(3)) \cong \mathbb{Z}_3$
-hat drei Charaktere: den trivialen $\chi_\mathrm{triv}$ und zwei nicht-triviale
-$\chi_\omega$, $\chi_{\omega^2}$ mit $\omega = e^{2\pi i/3}$ \BM.
+Die Galois-Gruppe $\mathrm{Gal}(\mathrm{GF}(27)/\mathrm{GF}(3)) = \langle F \rangle \cong \mathbb{Z}_3$
+mit $F\colon x \mapsto x^3$ hat drei Charaktere $\chi_j(F) = \omega^j$, $j = 0,1,2$.
+Alle vier primitiven Klassen $f_1, \ldots, f_4$ aus Dok.~342 sind \emph{reguläre}
+$F$-Orbits der Länge~3: $F$ wirkt auf jedem als Dreierzyklus, und der zugehörige
+Charakter ist für alle vier derselbe. Der Galois-Charakter trennt die Klassen
+also nicht \BM.
 
-Den vier Frobenius-Konjugationsklassen primitiver Elemente in GF$(27)^*$
-(Dok.~342, Satz~A: Polynome $f_1, f_2, f_3, f_4$) entsprechen vier
-Hecke-L-Funktionen, die das Splitting-Verhalten von Primzahlen in der
-Körpererweiterung GF$(27)/$GF$(3)$ beschreiben:
+Die Unterscheidung liegt im diskreten Logarithmus: Mit einem Erzeuger $x$ von
+GF$(27)^*$ ist jede Klasse ein Orbit $\{x^k, x^{3k}, x^{9k}\}$ mit $\gcd(k,26)=1$,
+also eine Nebenklasse von $\langle 3\rangle = \{1,3,9\}$ in
+$(\mathbb{Z}/26)^* \cong \mathbb{Z}_{12}$. Es gibt $12/3 = 4$ Nebenklassen \BM:
 
 \begin{table}[H]
 \centering
-\caption{Splitting von Primzahlen $p \neq 3$ in GF$(27)/$GF$(3)$}
-\begin{tabular}{lll}
+\caption{Die vier primitiven Klassen als Nebenklassen von $\langle 3\rangle$ in $(\mathbb{Z}/26)^*$
+  (Basis $x^3 + 2x + 1 = 0$)}
+\begin{tabular}{llll}
 \toprule
-Splitting-Typ & Bedingung & Hecke-L-Funktion \\
+Klasse & Minimalpolynom & Exponenten $k$ & Rolle \\
 \midrule
-vollständig zerfällt & $p \equiv 1 \pmod{3}$, $\mathrm{ord}_p(3) \mid 1$ & trivial $\chi_\mathrm{triv}$ \\
-Dreier-Zyklus & $\mathrm{ord}_p(3) = 3$ (z.\,B.\ $p=13$) & $L(s,\chi_\omega)$ \\
-Dreier-Zyklus & $\mathrm{ord}_p(3) = 3$ & $L(s,\chi_{\omega^2})$ \\
-inert & $\mathrm{ord}_p(3) \nmid 3$ & kein Beitrag \\
+$f_2$ & $x^3 + 2x + 1$ & $\{1, 3, 9\}$ & Dok.~341, Leptonenschicht \\
+$f_3$ & $x^3 + 2x^2 + 1$ & $\{17, 23, 25\}$ & $= f_2^{-1}$ \\
+$f_1$ & $x^3 + 2x^2 + x + 1$ & $\{5, 15, 19\}$ & \\
+$f_4$ & $x^3 + x^2 + 2x + 1$ & $\{7, 11, 21\}$ & $= f_1^{-1}$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
+Die Faktorgruppe $(\mathbb{Z}/26)^*/\langle 3\rangle \cong \mathbb{Z}_4$ ist zyklisch;
+die Inversion $k \mapsto -k$ ist ihr Element der Ordnung~2.
+
+\subsection{Sektorpaarung reduziert vier auf zwei}
+
+Dok.~336 identifiziert die FFGFT-Sektorpaarung $k \leftrightarrow -k$ mit dem
+Frobenius-Automorphismus; auf der Ebene der Elemente von GF$(27)^*$ ist sie die
+Inversion $x \mapsto x^{-1} = x^{25}$. Sie permutiert die Klassen als \BM
+\begin{equation}
+  f_1 \longleftrightarrow f_4, \qquad f_2 \longleftrightarrow f_3 .
+\end{equation}
+Ist die Sektorpaarung eine Symmetrie der Massenschicht --- im Korpus ist sie das ---,
+so gibt es nicht vier, sondern \textbf{zwei} physikalisch unterscheidbare
+GF$(27)^*$-Schichten: $\{f_2, f_3\}$ (Leptonen, Dok.~341) und $\{f_1, f_4\}$.
+
+\subsection{Negation koppelt Ordnung 26 an Ordnung 13}
+
+Wegen $-1 = x^{13}$ in GF$(27)$ bildet $x \mapsto -x$ jedes Element der Ordnung~26
+auf ein Element der Ordnung~13 ab und umgekehrt. Die vier Ordnung-13-Klassen
+$g_1, \ldots, g_4$ aus Dok.~342 sind daher keine eigenständige Struktur, sondern
+die Vorzeichenpartner der primitiven Klassen \BM:
+\begin{equation}
+  f_1 \leftrightarrow g_1, \quad f_2 \leftrightarrow g_3, \quad
+  f_3 \leftrightarrow g_2, \quad f_4 \leftrightarrow g_4 .
+\end{equation}
+Der in Dok.~342 als offen geführte Kandidat einer ,,Sub-Leptonen-Struktur``
+aus den Ordnung-13-Polynomen entfällt damit.
+
 \subsection{Offene Frage}
 
-Das Resultat aus Dok.~342 (Satz~A) ordnet die vier primitiven kubischen Polynome
-$f_1, \ldots, f_4$ den vier Frobenius-Konjugationsklassen in GF$(27)^*$ zu.
-Ob diese vier Klassen physikalisch verschiedene Massenschichten tragen
-(analog dazu, wie $f_1$ die Leptonenschicht trägt), ist eine offene Frage \SM.
-
-Falls ja, wäre jede Schicht durch ihre eigene Hecke-L-Funktion charakterisiert.
-Die Schicht zu $\chi_\mathrm{triv}$ würde vollständig-zerfallende Primzahlen
-($p \equiv 1 \bmod 3$, also $p = 7, 13, 19, \ldots$) bündeln;
-die Schicht zu $\chi_\omega$ jene mit Dreier-Zyklen ($p = 13$ bei $k=3$).
+Die Reduktion $4 \to 2$ verschärft die Frage aus Dok.~342: Nicht ,,tragen
+$f_2, f_3, f_4$ weitere Schichten``, sondern ,,gibt es neben der Leptonenschicht
+$\{f_2, f_3\}$ genau eine zweite GF$(27)^*$-Schicht $\{f_1, f_4\}$, und welche
+Teilchen tragen sie?`` Das bleibt offen \SM.
 
 % ============================================================
 \section{Zusammenfassung}
@@ -277,8 +311,10 @@ B & Euler-Produkt hierarchisch nach $k=\mathrm{ord}_p(3)$ & \BM \\
 B$'$ & Fraktale Dämpfung unterdrückt Euler-Faktoren $k\geq 7$ & \BM \\
 C & Orbifold-Nullstellen bei $s = 2\pi ik/\ln 3$ auf $\mathrm{Re}(s)=0$ & \BM \\
 C$'$ & Keine Resonanz Riemann-Nullstellen mit Z$_3$-Einheit & \BM \\
-D & Vier Hecke-L-Funktionen zu Gal(GF$(27)$/GF$(3)$)$\cong\mathbb{Z}_3$ & \BM \\
-D$'$ & Physik der vier Schichten $f_1,\ldots,f_4$ & \SM \\
+D & Galois-Charakter trennt nicht; Klassen $=(\mathbb{Z}/26)^*/\langle 3\rangle\cong\mathbb{Z}_4$ & \BM \\
+D$'$ & Sektorpaarung $k\leftrightarrow -k$: $f_1\leftrightarrow f_4$, $f_2\leftrightarrow f_3$ --- 4 Klassen $\to$ 2 & \BM \\
+D$''$ & Negation koppelt Ordnung 26 an 13; keine Sub-Leptonen-Schicht & \BM \\
+D$'''$ & Zweite Schicht $\{f_1,f_4\}$ physikalisch realisiert? & \SM \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -298,7 +334,11 @@ Verzeichnis \texttt{2/python/Dok343\_Skripte/}, Wrapper \texttt{run\_all\_343.sh
 \begin{itemize}
   \item \texttt{pruef\_343\_zeta\_galois.py} ---
         Sätze~A--D; partielle Zeta-Zerlegung, L-Funktionen, Nullstellen,
-        Resonanztest, gewichtetes Euler-Produkt, Hecke-Diskussion.
+        Resonanztest, gewichtetes Euler-Produkt.
+  \item \texttt{pruef\_343b\_klassen\_symmetrie.py} ---
+        Satz~D; Frobenius-Klassen in GF$(27)^*$ explizit, Wirkung von Inversion
+        und Negation, Nebenklassen von $\langle 3\rangle$ in $(\mathbb{Z}/26)^*$,
+        exakte Werte $L(s,\chi_1)$.
 \end{itemize}
 Alle Assertions bestanden.
 
