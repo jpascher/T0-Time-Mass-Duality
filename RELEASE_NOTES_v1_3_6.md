@@ -202,12 +202,14 @@ Scripts by folder:
 
 ## Verification scripts (new in this release)
 
-`python/Dok341_Skripte/`:
+`2/python/Dok341_Skripte/`:
 - `pruef_341_gf27_in_galg.py` — GF(27) structure in GALG G(3)/G(6); Theorems A–C; order-26 elements (6 [B] assertions)
 - `pruef_341_vakuum_witt_z3.py` — Witt-pair vacuum, triality, ℤ₃ separation, bilaterals (7 [B] assertions)
 
-`python/Dok342_Skripte/`:
+`2/python/Dok342_Skripte/`:
 - `pruef_342_vakuum_witt_z3.py` — independent verification of vacuum structure (7 [B] assertions)
+
+Note: `pruef_341_gf27_in_galg.py` and `pruef_342_vakuum_witt_z3.py` are also present in `2/python/Dok320_321_322_Skripte/`.
 
 ---
 

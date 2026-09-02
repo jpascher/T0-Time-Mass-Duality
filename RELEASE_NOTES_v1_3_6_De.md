@@ -189,11 +189,15 @@ Dokumente: 317, 321, 323, 324, 336, 337, 338, 339, 340, 341 (Galois-Kern)
 
 ## Prüfskripte (neu in dieser Version)
 
-`python/Dok341_Skripte/`:
+`2/python/Dok320_321_322_Skripte/` (auch hier verfügbar):
+- `pruef_341_gf27_in_galg.py` — GF(27)-Struktur in GALG G(3)/G(6); Sätze A–C; Ordnung-26-Elemente (6 [B] Assertionen)
+- `pruef_342_vakuum_witt_z3.py` — Unabhängige Verifikation der Vakuumstruktur (7 [B] Assertionen)
+
+`2/python/Dok341_Skripte/`:
 - `pruef_341_gf27_in_galg.py` — GF(27)-Struktur in GALG G(3)/G(6); Sätze A–C; Ordnung-26-Elemente (6 [B] Assertionen)
 - `pruef_341_vakuum_witt_z3.py` — Witt-Paar-Vakuum, Triality, ℤ₃-Trennung, Bilaterale (7 [B] Assertionen)
 
-`python/Dok342_Skripte/`:
+`2/python/Dok342_Skripte/`:
 - `pruef_342_vakuum_witt_z3.py` — Unabhängige Verifikation der Vakuumstruktur (7 [B] Assertionen)
 
 ---
