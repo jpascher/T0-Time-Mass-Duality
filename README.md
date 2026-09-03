@@ -1,7 +1,7 @@
 # T0 Time-Mass Duality · FFGFT
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17390357.svg)](https://doi.org/10.5281/zenodo.17390357)
-**Version: v1.3.6** (2 September 2026) — supersedes v1.3.5
+**Version: v1.3.7** (3 September 2026) — supersedes v1.3.6
 
 **FFGFT — Fundamental Fractal-Geometric Field Theory** shows:
 All Standard Model constants follow from a single dimensionless
@@ -52,6 +52,8 @@ what is input, what follows, is always clearly declared.
 | ξ as Galois number: (r_μ/r_e)²/ξ = \|GF(9)*\|²·5²·\|GF(27)\| = 43200 | [Dok. 317](2/pdf/317_KSAU_FFGFT_Leptonen_En.pdf) / [336](2/pdf/336_GF9_FFGFT_Bruecke_En.pdf) / [338](2/pdf/338_Galois_Massen_FFGFT_En.pdf) |
 | 1/α = 3700/27 from Galois group orders (7.6 ppm, no ξ, no v, no m_e) | [Dok. 338](2/pdf/338_Galois_Massen_FFGFT_En.pdf) |
 | FFGFT↔GALG: T_Planck as legitimate SI interface; time emergence | [Dok. 337](2/pdf/337_Zeit_Emergenz_FFGFT_GALG_En.pdf) |
+| Harmonic primes {5,7,11,13} forced by 3^k−1; p=13 unique prime with ord=3 worldwide [B] | [Doc. 342](2/pdf/342_Faktorisierung_Harmonik_En.pdf) / [343](2/pdf/343_Zeta_Galois_FFGFT_En.pdf) |
+| ζ_{T⁴/Z₃}(s)=(1−3⁻ˢ)ζ(s); Euler factor threshold p*≈9.76 = 7-limit; ξ as resolution floor [B] | [Doc. 343](2/pdf/343_Zeta_Galois_FFGFT_En.pdf) |
 | SI bridge: all constants from ξ | [Dok. 013](2/pdf/013_T0_SI_En.pdf) |
 | E = mc² = E = m: unit identity | [Dok. 077](2/pdf/077_E-mc2_En.pdf) |
 | Natural units, static and correction-free | [Dok. 261](2/pdf/261_NatEinheiten_Statisch_En.pdf) |
@@ -547,6 +549,27 @@ Prüfskript: `pruef_332_krueger_periodizitaet.py`.
 ---
 
 ---
+
+
+## New documents — v1.3.7 (3 September 2026)
+
+### Doc. 342 — Factorisation classes in G(6) and the harmonics of primes (DE+EN, 10/9 pp.)
+
+8 irreducible cubic polynomials over GF(3); prime entry rule k=ord_p(3);
+p=13 worldwide unique prime with k=3 [B]; {5,7,11,13} uniquely forced by 3^k−1 [B].
+→ [DE](2/pdf/342_Faktorisierung_Harmonik_De.pdf) · [EN](2/pdf/342_Faktorisierung_Harmonik_En.pdf)
+
+### Doc. 343 — The zeta function of the T⁴/Z₃ torus (DE+EN, 18/17 pp.)
+
+ζ_{T⁴/Z₃}(s)=(1−3⁻ˢ)ζ(s); Euler factor threshold p*≈9.76 = 7-limit; ξ as resolution floor;
+coupling tripartition (Farey vs. Arnold); quantum computers/photonics = analogue computers with
+QM precision, curve at N=21 since 2012 [X]; Doc. 186 preliminary note.
+→ [DE](2/pdf/343_Zeta_Galois_FFGFT_De.pdf) · [EN](2/pdf/343_Zeta_Galois_FFGFT_En.pdf)
+
+### Doc. 186 — Rename and corrections
+
+Schema `_De`/`_En` added; preliminary note: locking [B], Fibonacci [B], B-meson [X].
+→ [DE](2/pdf/186_FFGFT_Photonik_Analyse_De.pdf) · [EN](2/pdf/186_FFGFT_Photonik_Analyse_En.pdf)
 
 ## New documents — v1.3.6 (2 September 2026)
 

@@ -3269,6 +3269,87 @@ Prüfskripte: `pruef_330_galois_massenverhaeltnis.py`, `pruef_331_xi_aus_galois.
 
 ---
 
+---
+
+## Dok. 342–343 und Korrekturen (3. September 2026)
+
+### Dok. 342 — Faktorisierungsklassen in G(6) und die Harmonik der Primzahlen (DE+EN, je 10/9 S.)
+
+8 irreduzible kubische Polynome über GF(3): 4 primitiv (Ord. 26), 4 Ord. 13; 5 χ-Klassen.
+Primzahl-Eintrittsregel k = ord_p(3): p=13 weltweit einzige Primzahl mit k=3 [B]; {5,7,11,13}
+durch Primfaktoren von 3^k−1 (k=3..6) eindeutig erzwungen, keine zweite je Klasse [B].
+p≡1 mod 3 (7, 13) Z₃-kompatibel. Methodische Regel: k≤3 Identitätsschicht, k≥5 kein Status
+aus Produktsuche.
+→ [DE](2/pdf/342_Faktorisierung_Harmonik_De.pdf) · [EN](2/pdf/342_Faktorisierung_Harmonik_En.pdf)
+
+Prüfskripte: `pruef_342_faktorisierung_primzahlen.py`, `pruef_342b_hoehere_harmonien.py`,
+`pruef_342c_dichte_hoehere_harmonien.py` (2/python/Dok342_Skripte/)
+
+### Dok. 343 — Die Zeta-Funktion des T⁴/Z₃-Torus (DE+EN, 18/17 S.)
+
+Sätze A–I′ (alle Berechnungen in 2/python/Dok343_Skripte/):
+
+| Satz | Inhalt | Status |
+|------|--------|--------|
+| A | ζ_{T⁴/Z₃}(s) = (1−3⁻ˢ)ζ(s) = L(s,χ₀) mod 3 | [B] |
+| B | Euler-Produkt hierarchisch nach k=ord_p(3); fraktale Dämpfung unterdrückt k≥7 | [B] |
+| C | Orbifold-Nullstellen bei s=2πik/ln3; keine Resonanz der Riemann-Nullstellen | [B] |
+| D | Sektorpaarung k↔−k → 4 Klassen auf 2 reduziert; keine Sub-Leptonen-Schicht | [B] |
+| E | p=13 einzige Primzahl mit ord_p(3)=3 weltweit; Primen durch 3^k−1 erzwungen | [B] |
+| F | Euler-Faktor-Schwelle p*≈9,76 (s=2) = 7-limit; Produktdichte ab p_max≈30 auf Zufallsniveau | [B] |
+| G | Kopplungs-Dreiteilung gleich, Gesetz verschieden: Arnold K^q vs. Farey 1/q² | [B] |
+| G′ | ξ als Auflösungsboden; Schwellentabelle über 5 Stufen (1,05%/100ξ/ξ/1/Q_TFLN/ξ²) | [B/S] |
+| G″ | FFGFT dynamisch tief unterkritisch (K_eff=2πξ); Diskretheit topologisch, nicht dynamisch | [B] |
+| H | 1,05% ≈ 100ξ: Grenze k≈3 ist die einer fraktalen Stufe | [B] |
+| I | N_max≈1/ε für Resonanz-Faktorisierer (13–26 Bit); klassisch: Zählgrenze | [B] |
+| I′ | Quantenrechner/Photonik rechnen nicht digital; physischer Apparat = Analogrechner mit QM-Präzision; Kurve seit 2012 bei N=21 | [S]/[X] |
+
+Klartext-Abschnitte: Dichte Harmonische (ab k≈3–4 nicht unterscheidbar); Synthese/Analyse/
+Faktorisierung/Kopplung (Farey-Q_c=π/√6ε≈12,5 bei 1,05%).
+→ [DE](2/pdf/343_Zeta_Galois_FFGFT_De.pdf) · [EN](2/pdf/343_Zeta_Galois_FFGFT_En.pdf)
+
+### Korrekturen und Kalibrierungen (3. September 2026)
+
+**Dok. 186 (FFGFT-Photonik-Analyse)** — Vorbemerkungskasten eingefügt; Umbenennung auf
+Korpus-Schema `_De`/`_En`; Doppel-maketitle behoben. Prüfskript `pruef_343e_dok186_check.py`:
+- [B] TFLN Q>10⁶ löst ξ (Q>7500 nötig), nicht ξ²
+- [B] Sweet-Spot-Leiter 6,24/2,38 GHz intern konsistent (φ², 0,1% Abw.)
+- [B] Korrektur Abschn. 4.2 „Einrasten": φ^{−k}-Verhältnisse stabil WEIL nicht einrasten (KAM, Dok. 328 [K])
+- [B] Korrektur Abschn. 4.1 Fibonacci-Bed.: r_μ=16/5, 16∉F; Zähler Oktavpotenzen 2^n, Nenner GF(3^k)-Primzahlen
+- [X] Korrektur Abschn. 8.2 B-Meson: α=ξ als Ratenmodifikation braucht 9×10⁸ Ereignisse für 4σ; LHCb hat O(10³–10⁴); Kategorienfehler Phase↔Rate
+- Präzisierung: 50 GHz nicht auf Sweet-Spot-Leiter; ~174. goldene Subharmonische
+
+**RSA-Programme (rsa/):**
+- `harmonic-factorization-de/en.html`: Umbenennung in „Harmonische Klassifikation von
+  Faktorverhältnissen"; 97%-Quote ist Überdeckungseffekt (±50 Cent = 92% der Oktave), kein
+  Strukturbefund; Verweis Dok. 343 Klartext II
+- `t0_factorization_demo.html`: Rendering-Bug behoben (Regex mit leerer Alternative);
+  ξ-Hinweis (K_eff=2πξ, Arnold-Zunge 5,6·10⁻⁸); Ordnungssuche iterativ
+
+**Signalanalyse-Programme (sig/):**
+- `xi_harmonic_analysis_demo.html`: War Attrappe (Math.random, FFT fest codiert 8/12/6).
+  Ersetzt durch echte normierte Autokorrelation + Radix-2-FFT (Hann-Fenster), node-getestet
+- `xi_oscilloscope_spectrum-basis.html`: ξ-Gewichtung mit fest codierter Referenz 50 Samples
+  neutralisiert (return 1); Modus „Autokorrelation"
+- `xi_harmonic_documentation.md`: Einordnungsbox (4 Punkte: ξ-Filter verwarf Oktave/Quinte;
+  „keine FFT" kosmetisch per Wiener–Chintschin; verwendetes ξ ≠ FFGFT-ξ)
+
+**Kernbefund:** Autokorrelation liefert gemeinsame Periode (ggT), FFT die Teiltöne —
+verschiedener Gegenstand, gleiche Auflösungsgrenze.
+
+---
+
+### R104, R105 in Dok. 190 (3. September 2026)
+
+**R104** — Primzahlerzwingung durch GF(3^k) [B]. Die physikalischen Primen {5,7,11,13}
+sind durch die Primfaktorzerlegungen von 3^k−1 (k=3,4,5,6) vollständig und eindeutig
+erzwungen; p=13 ist die weltweit einzige Primzahl mit ord_p(3)=3. (Dok. 342–343)
+
+**R105** — ξ als Auflösungsboden [B/S]. Die Grenze k≈3–4 aus Satz F gilt für ε=1,05%
+(eine fraktale Stufe, ≈100ξ); bei ε=ξ (Torusmoden-Linienbreite) bleibt der Galois-Raster
+bis k≥8 trennscharf und p*≈87. Photonische Hardware (Q>10⁶) löst ξ, nicht ξ². (Dok. 343 G′)
+
+
 ### R100, R101 in Dok. 190 (28. August 2026)
 
 **R100** — ξ als Galois-Zahl [K]. Die Kernidentität $(r_\mu/r_e)^2/\xi = |\text{GF}(9)^*|^2\cdot5^2\cdot|\text{GF}(27)|=43200$ leitet $\xi=4/30000$ aus GF$(3^n)$-Gruppenordnungen und Torus-Wicklungszahlen ab — ohne freie Parameter. Alle sechs Wicklungszahlen $(n_{\theta,g}, n_{\phi,g})$ sind Galois-Ordnungen oder deren Euler-$\varphi$-Werte.

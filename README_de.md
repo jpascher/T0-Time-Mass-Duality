@@ -1,7 +1,7 @@
 # T0 Zeit-Masse-Dualität · FFGFT
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17390357.svg)](https://doi.org/10.5281/zenodo.17390357)
-**Version: v1.3.6** (2. September 2026) — ersetzt v1.3.5
+**Version: v1.3.7** (3. September 2026) — ersetzt v1.3.6
 
 **FFGFT — Fraktale Feldgeometrische Fundamentaltheorie** zeigt:
 Alle Konstanten des Standardmodells folgen aus einem einzigen
@@ -56,6 +56,8 @@ was Eingabe ist, was folgt, ist immer klar deklariert.
 | 1/α = 3700/27 aus Galois-Ordnungen (7,6 ppm, kein ξ, kein v, kein m_e) | [Dok. 338](2/pdf/338_Galois_Massen_FFGFT_De.pdf) |
 | FFGFT↔GALG: T_Planck als legitime SI-Schnittstelle; Zeitemergenz | [Dok. 337](2/pdf/337_Zeit_Emergenz_FFGFT_GALG_De.pdf) |
 | GF(27) in GALG: G(3) ohne GF(27) [B]; Ordnung-26-Elemente in G(6) [B]; Vakuum = Frobenius-Trennung [B] | [Dok. 341](2/pdf/341_GF27_GALG_FFGFT_De.pdf) |
+| Harmonische Primen {5,7,11,13} durch 3^k−1 erzwungen; p=13 einzige Primzahl mit ord=3 weltweit [B] | [Dok. 342](2/pdf/342_Faktorisierung_Harmonik_De.pdf) / [343](2/pdf/343_Zeta_Galois_FFGFT_De.pdf) |
+| ζ_{T⁴/Z₃}(s)=(1−3⁻ˢ)ζ(s); Euler-Faktor-Schwelle p*≈9,76 = 7-limit; ξ als Auflösungsboden [B] | [Dok. 343](2/pdf/343_Zeta_Galois_FFGFT_De.pdf) |
 | SI-Brücke: alle Konstanten aus ξ | [Dok. 013](2/pdf/013_T0_SI_De.pdf) |
 | E = mc² = E = m: Einheiten-Identität | [Dok. 077](2/pdf/077_E-mc2_De.pdf) |
 | Natürliche Einheiten, statisch und korrekturfrei | [Dok. 261](2/pdf/261_NatEinheiten_Statisch_De.pdf) |
@@ -551,6 +553,27 @@ Prüfskript: `pruef_332_krueger_periodizitaet.py`.
 ---
 
 ---
+
+
+## Neue Dokumente — v1.3.7 (3. September 2026)
+
+### Dok. 342 — Faktorisierungsklassen in G(6) und die Harmonik der Primzahlen (DE+EN, je 10/9 S.)
+
+8 irreduzible kubische Polynome über GF(3); Primzahl-Eintrittsregel k=ord_p(3);
+p=13 weltweit einzige Primzahl mit k=3 [B]; {5,7,11,13} eindeutig durch 3^k−1 erzwungen [B].
+→ [DE](2/pdf/342_Faktorisierung_Harmonik_De.pdf) · [EN](2/pdf/342_Faktorisierung_Harmonik_En.pdf)
+
+### Dok. 343 — Die Zeta-Funktion des T⁴/Z₃-Torus (DE+EN, 18/17 S.)
+
+ζ_{T⁴/Z₃}(s)=(1−3⁻ˢ)ζ(s); Euler-Faktor-Schwelle p*≈9,76 = 7-limit; ξ als Auflösungsboden;
+Kopplungs-Dreiteilung (Farey vs. Arnold); Quantenrechner/Photonik = Analogrechner mit
+QM-Präzision, Kurve seit 2012 bei N=21 [X]; Dok. 186 Vorbemerkungskasten.
+→ [DE](2/pdf/343_Zeta_Galois_FFGFT_De.pdf) · [EN](2/pdf/343_Zeta_Galois_FFGFT_En.pdf)
+
+### Dok. 186 — Umbenennung und Korrekturen
+
+Schema `_De`/`_En` ergänzt; Vorbemerkungskasten: Einrasten [B], Fibonacci [B], B-Meson [X].
+→ [DE](2/pdf/186_FFGFT_Photonik_Analyse_De.pdf) · [EN](2/pdf/186_FFGFT_Photonik_Analyse_En.pdf)
 
 ## Neue Dokumente — v1.3.6 (30. August 2026)
 
