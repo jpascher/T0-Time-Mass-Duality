@@ -1,0 +1,140 @@
+% 344_Furey_GALG_FFGFT_De_ch.tex
+% Johann Pascher, 3. September 2026
+% Anlass: Mail Doug Matzke (IPI, 3. Sept. 2026) — Furey-Fermionen, N_k-Idempotente, Su[0]=Vss[0]
+
+\providecommand{\BM}{\textbf{[B]}}
+\providecommand{\KM}{\textbf{[K]}}
+\providecommand{\SM}{\textbf{[S]}}
+\providecommand{\XM}{\textbf{[X]}}
+
+\chapter*{Furey-Fermionen in GALG und FFGFT: N-Operator, Tripotente und Neutrino-Vakuum-Identit\"at}
+\addcontentsline{toc}{chapter}{Furey-Fermionen in GALG und FFGFT}
+
+\section*{Abstract}
+
+Doug Matzke teilt in seiner IPI-Mail vom 3.~September 2026 konkrete GALG-Ergebnisse zu
+Furey-Fermionen in Cl$(6)$: vollst\"andige Up/Down-Fermionsets Su/Sd, Idempotente $N_1,N_2,N_3$,
+Tripotent $N$, jE7-Projektor und Grade-1+Grade-5-Konstruktion. Das st\"arkste Einzelresultat:
+$\mathrm{Su}[0] = \mathrm{Vss}[0]$ exakt --- das Neutrino ist der niedrigste Vakuumzustand
+\BM. Satz~F zeigt: die Tripotent-Eigenschaft f\"ur gerade Vakua und die Frobenius-Fixpunkt-Eigenschaft
+(Dok.~339) sind dieselbe Zerlegung aus verschiedenen Richtungen \BM.
+Die Elektron-Ausnahme beim jE7-Projektor ist das bekannte Furey-Problem \SM.
+
+\section{Ausgangslage und Dougs Ergebnisse}
+
+Doug Matzke hat Fureys Konstruktion in seinem GALG-Tool nachgebaut und erh\"alt
+ein vollst\"andiges Fermionspektrum \"uber Cl$(6)$:
+
+\begin{table}[H]
+\centering
+\caption{Furey-Fermionen in GALG Cl$(6)$ (Matzke, 3.~September 2026)}
+\begin{tabular}{cll}
+\toprule
+Index & Su (Up-Fermionen) & Sd (Down-Fermionen) \\
+\midrule
+0 & Neutrino & Anti-Neutrino \\
+1--3 & anti-dn-Quark (rot, gr\"un, blau) & dn-Quark (rot, gr\"un, blau) \\
+4--6 & up-Quark (rot, gr\"un, blau) & anti-up-Quark (rot, gr\"un, blau) \\
+7 & Positron & Elektron \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Der Zahlenoperator $N = N_1+N_2+N_3$ mit Witt-Paaren
+$B_1 = -i(e_4{\wedge}e_5)$, $B_2 = -i(e_1{\wedge}e_3)$, $B_3 = -i(e_2{\wedge}e_6)$ und
+$N_k = -1 + (-i\,B_k)$ liefert die Ladungsquantenzahlen:
+\[
+  N(\mathrm{Su}) = [0,1,1,1,2,2,2,3], \qquad
+  N(\mathrm{Sd}) = [0,-1,-1,-1,-2,-2,-2,-3].
+\]
+
+\section{Satz A --- $N_k$ sind Idempotente in Charakteristik~3}
+
+$N_k = -1 + (-i\,B_k)$ mit $B_k^2 = -1$ (Witt-Paar-Eigenschaft):
+\begin{align}
+N_k^2 &= 1 + 2i\,B_k + i^2\,B_k^2
+       = 1 + 2i\,B_k + (-1)(-1)
+       = 2 + 2i\,B_k
+       \equiv -1 + (-i\,B_k) \pmod{3}
+       = N_k. \quad \BM
+\end{align}
+Die Summe verliert ihren Skalaranteil: $-3 \equiv 0$ in Char.~3, also
+$N_1+N_2+N_3 = -3 + (-i)\sum B_k \equiv (-i)\sum B_k = N$.
+Dougs Ausgabe best\"atigt: $N$ hat keinen skalaren Term.
+
+\section{Satz B --- $N$ ist ein Tripotent}
+
+Kreuzterme $N_k N_j$ ($k\neq j$) sind reine Grad-4-Elemente. Deshalb:
+$N^2 = \sum N_k^2 + [\text{Grad-4}] = N + [\text{Grad-4}]$; der Grad-4-Teil
+ist ein weiteres Idempotent; $N^3 = N^2 \cdot N = N$ \BM.
+Dougs Ausgabe: \texttt{N**3 = N}, \texttt{N**4 = N**2} --- exakt wie vorhergesagt.
+
+\section{Satz C --- $\mathrm{Su}[0] = \mathrm{Vss}[0]$: Neutrino ist das Vakuum}
+
+Dougs Ausgabe: \texttt{Su[0] == Vss[0]: True} und \texttt{(1+N)*(1+jE7) == Vss[0]: True}.
+
+Das Neutrino ist exakt der niedrigste Vakuumzustand in der GALG/Furey-Konstruktion \BM.
+
+\textbf{FFGFT-Korrespondenz \BM.} In FFGFT liegt $\nu_1$ im Orbit $O_1 = \{1,3,9\}$
+des Erzeugers von GF$(27)^*$ --- algebraisch das einfachste Objekt der Struktur.
+Dass GALG/Furey und FFGFT dasselbe Teilchen unabh\"angig an den algebraisch einfachsten
+Platz setzen, ist ein Konvergenzbefund zweier Frameworks.
+
+\section{Satz D --- sigma-Implementierung}
+
+$\sigma:\; e_1 \to e_2 \to e_4 \to e_1$, $e_3 \to e_6 \to e_5 \to e_3$;
+in Python: \texttt{\{1:2, 2:4, 4:1, 3:6, 6:5, 5:3\}}, zwei 3-Zyklen, $\sigma^3=\mathrm{id}$ \BM.
+Dok.~341 enth\"alt diese Formel. Dougs \texttt{all\_g1\_g5good} ist die $\sigma$-invariante
+Summe $\sum_k \mathrm{ap}_k$, was die Vss-Vertr\"aglichkeit erkl\"art.
+
+\section{Satz E --- jE7 und $N_k$ als Projektoren; Elektron-Ausnahme}
+
+$jE7$ und $N_k$ sind \"aquivalente Projektoren auf Up/Down-Sektoren \BM.
+F\"ur Sd[7] (Elektron) versagt die Gleichung $F \cdot jE7 = -F$ wie auch $F \cdot N_k = F$.
+Dies ist das bekannte Furey-Problem: das Elektron ist das einzige Teilchen in Sd ohne
+Su-Gegenst\"uck mit denselben Witt-Paar-Quantenzahlen.
+
+\textbf{Verbindung zu FFGFT \SM.} Elektron in Dirac-Schicht $\{f_3,f_4\}$,
+Neutrino in Majorana-Schicht $\{f_1,f_2\}$ (Dok.~343, Satz~D$'''$). Ob dieselbe
+algebraische Wurzel vorliegt, ist offen.
+
+\section{Satz F --- Tripotent-Eigenschaft der geraden Vakua}
+
+$(V_k + P)^2 = -V_k$, $(V_k+P)^3 = V_k$ f\"ur $k \in \{0,2,4\}$ \BM;
+f\"ur $k \in \{1,3,5\}$ kein Kollaps (L\"ange 32) \BM.
+Diese Zerlegung stimmt exakt mit der Frobenius-Fixpunkt/Orbit-Zerlegung aus Dok.~339 \"uberein ---
+zwei unabh\"angige Herleitungen derselben Trennung.
+
+\section{Zusammenfassung}
+
+\begin{table}[H]
+\centering
+\caption{Ergebnisse Dok.~344}
+\begin{tabular}{lll}
+\toprule
+Satz & Inhalt & Status \\
+\midrule
+A & $N_k^2 = N_k$, Char-3-Beweis & \BM \\
+B & $N^3 = N$, Tripotent & \BM \\
+C & Su[0] = Vss[0]: Neutrino = Vakuum; FFGFT-Korrespondenz & \BM \\
+D & sigma $=$ \{1:2,2:4,4:1,3:6,6:5,5:3\}, zwei 3-Zyklen & \BM \\
+E & jE7 $\equiv$ $N_k$; Elektron-Ausnahme (Furey-Problem) & \BM/\SM \\
+F & Tripotent gerade Vakua = Frobenius-Fixpunkte (Dok.~339) & \BM \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Offene Frage \SM:} Gemeinsame Wurzel der Elektron-Inkonsistenz in GALG/Furey
+und der Majorana/Dirac-Schicht in FFGFT (Dok.~343, Satz~D$'''$).
+
+\section*{Pr\"ufskript}
+\texttt{pruef\_344\_furey\_galg.py} --- 6 S\"atze, alle Assertions bestanden.
+
+\begin{thebibliography}{9}
+\bibitem{Furey2016} C.~Furey, \textit{Standard Model Physics from an Algebra?}, Ph.D.\ Thesis,
+Univ.\ of Waterloo (2016).
+\bibitem{Matzke2026} D.~Matzke, IPI-Mail vom 3.~September 2026 (GALG-Furey-Ergebnisse).
+\bibitem{P339} J.~Pascher, \textit{Dok.~339: Frobenius-Trennung}, FFGFT-Korpus (Aug.\ 2026).
+\bibitem{P341} J.~Pascher, \textit{Dok.~341: GF(27) in GALG und FFGFT}, FFGFT-Korpus (Sept.\ 2026).
+\bibitem{P343} J.~Pascher, \textit{Dok.~343: Zeta-Funktion des T$^4$/Z$_3$-Torus}, FFGFT-Korpus (Sept.\ 2026).
+\end{thebibliography}
