@@ -1,6 +1,18 @@
 # ξ-Harmonische Signal-Analyse - Vollständige Dokumentation
 
-## Wie die revolutionäre Herangehensweise funktioniert
+> ## ⚠️ Einordnung (Nachtrag September 2026, Dok. 343)
+>
+> Diese Dokumentation beschreibt den ursprünglichen Ansatz. Bei der Prüfung im Zuge von Dok. 342/343 (Faktorisierungsklassen, Zeta-Funktion, Kopplungsregime) haben sich vier Punkte ergeben, die den Text unten relativieren:
+>
+> 1. **`xi_harmonic_analysis_demo.html` war eine Oberflächen-Attrappe.** `calculateT0Analysis` erzeugte die „gefundenen Perioden" mit `Math.random()`, der FFT-Vergleich zeigte fest codierte Zahlen (8/12/6). Die Analysefunktionen sind seit September 2026 durch echte Autokorrelation und eine echte FFT ersetzt.
+> 2. **Die ξ-Bewertungsformel verwarf die Harmonischen.** Mit `score = 1/(1+|(ω−2π)²/4ξ|)`, ω = 2π·ref/test, ξ = 1/100 und Schwelle 0,01 erhält die Oktave 0,004 und die Quinte 0,009 — beide werden verworfen. Akzeptiert werden nur Perioden zwischen 0,76 und 1,46 der Referenz, also Beinahe-Duplikate des Grundtons. Im Oszilloskop war die Referenz zudem fest 50 Samples, ohne Bezug zum Signal. Die ξ-Gewichtung ist in beiden Programmen entfernt.
+> 3. **„Keine FFT" ist kosmetisch.** Nach Wiener–Chintschin ist die Autokorrelation die Rücktransformation von |FFT|². Beide haben dieselbe Auflösungsgrenze (Periode auf ±1 Sample, relativ 1/p ≙ FFT-Bin-Breite). Die Behauptungen „keine Artefakte" und „adaptive Auflösung" unten sind nicht haltbar. Was die Autokorrelation tatsächlich anders liefert: die **gemeinsame Periode** (Akkord 220/275/330 Hz → 55 Hz = ggT), während die FFT die **Teiltöne** liefert. Das ist ein Unterschied im Gegenstand, nicht in der Leistung.
+> 4. **Der ξ-Parameter hier ist nicht das FFGFT-ξ.** Verwendet wurden 1/42 … 1/1000; das FFGFT-ξ ist 4/30000 ≈ 1,33·10⁻⁴ und bezeichnet eine Kopplung, die dynamisch fünf Größenordnungen zu schwach ist, um irgendetwas einzurasten (K_eff = 2πξ, Arnold-Zunge Δ(1/2) ≈ 5,6·10⁻⁸, Dok. 328/343). „Derselbe ξ-Parameter" unten trifft nicht zu.
+>
+> Ausführlich: Dok. 343, Abschnitte „Im Klartext" und „Im Klartext II" (Synthese unbegrenzt, Analyse auflösungsbegrenzt; Kopplung: Dreiteilung gleich, Gesetz verschieden).
+
+
+## Wie der ursprüngliche Ansatz gedacht war (historische Fassung)
 
 ---
 
@@ -47,7 +59,7 @@ Die ξ-harmonische Signal-Analyse basiert auf einem revolutionären Ansatz:
 
 ## 🔢 Von T0-Zahlentheorie zu Signalen
 
-### **Die brillante Analogie**
+### **Die Analogie (siehe Einordnung oben)**
 
 Die T0-Methode für Zahlen-Faktorisierung wird 1:1 auf Signale übertragen:
 
@@ -564,7 +576,7 @@ harmonic_analysis = {
 
 ---
 
-## ⚡ Vorteile gegenüber FFT
+## ⚡ Vorteile gegenüber FFT (historische Behauptungen — siehe Einordnung oben, Punkt 3)
 
 ### **Konzeptuelle Vorteile:**
 

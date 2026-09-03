@@ -634,7 +634,7 @@
 <body>
   <div class="header">
     <h1>🔬 ξ-Oszilloskop mit Spektrum-Analyzer</h1>
-    <p>ξ-Harmonic Analyzer v2.0 • Autokorrelations-basiert • Harmonik-Analyse • FFT-Spektrum • Real-time</p>
+    <p>Autokorrelations-Analyzer v2.1 • Periodensuche im Zeitbereich (≡ |FFT|²) • Harmonik-Analyse • FFT-Spektrum • Real-time<br><small style="color:#8a6d00">Nachtrag Sept. 2026: ξ-Gewichtung entfernt — sie war eine feste Referenz von 50 Samples ohne Bezug zum Signal (Dok. 343).</small></p>
   </div>
 
   <div class="status-display" id="statusDisplay">
@@ -675,7 +675,7 @@
           <div class="canvas-controls">
             <div class="mode-selector">
               <button class="mode-btn spectrum-mode-btn active" id="fftModeBtn" data-spectrum="fft">FFT</button>
-              <button class="mode-btn spectrum-mode-btn" id="xiModeBtn" data-spectrum="xi">ξ-Harmonic</button>
+              <button class="mode-btn spectrum-mode-btn" id="xiModeBtn" data-spectrum="xi">Autokorrelation</button>
               <button class="mode-btn spectrum-mode-btn" id="waterfallModeBtn" data-spectrum="waterfall">Waterfall</button>
             </div>
             <div class="control-item">
@@ -1018,7 +1018,7 @@
         <h3 class="section-title">⚙️ ξ-FFT Engine Settings</h3>
         
         <div class="control-item-full">
-          <label>🔍 ξ-Parameter</label>
+          <label>🔍 ξ-Parameter (ohne Wirkung — s. Nachtrag)</label>
           <input type="range" class="slider" id="xiValueSlider" 
               min="0.001" max="0.1" step="0.001" value="0.01">
           <div class="slider-value" id="xiValueDisplay">0.01</div>
@@ -1303,11 +1303,16 @@
       }
       
       evaluateXiHarmonicScore(period) {
-        // ξ-Bewertung für harmonische Analyse
-        const omega = 2 * Math.PI / period;
-        const targetOmega = 2 * Math.PI / 50; // Referenz-Periode
-        const diff = Math.abs(omega - targetOmega);
-        return Math.exp(-diff * diff / (2 * this.config.xiValue));
+        // Nachtrag Sept. 2026 (Dok. 343): Die fruehere Bewertung
+        //   exp(-(2π/p - 2π/50)² / 2ξ)
+        // war eine Gauss-Glocke um eine FEST codierte Referenzperiode von 50 Samples,
+        // unabhaengig vom Signal -- kein Resonanzkriterium, sondern ein Tiefpass-
+        // Kippfaktor, der kurze Perioden daempfte (ξ=0.01: p=10 → 0.00, p=20 → 0.17).
+        // Sie waehlte keine Harmonischen aus. Die Periodenbewertung stuetzt sich jetzt
+        // allein auf die normierte Autokorrelation (≡ |FFT|² ruecktransformiert,
+        // Wiener–Chintschin). Der ξ-Regler bleibt aus Kompatibilitaet erhalten,
+        // hat aber keinen Einfluss auf das Ergebnis.
+        return 1;
       }
       
       calculateXiHarmonicRatios(periods) {

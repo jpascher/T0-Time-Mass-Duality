@@ -1734,10 +1734,15 @@
       buttons.forEach(button => {
         button.disabled = running;
         if (running) {
-          const originalText = button.textContent;
-          if (originalText.includes('🧪') || originalText.includes('🚀') || originalText.includes('🔬') || originalText.includes('')) {
-            button.textContent = originalText.replace(/🧪|🚀|🔬|/g, '⏳');
-          }
+          if (!button.dataset.originalText) button.dataset.originalText = button.textContent;
+          // Nur das fuehrende Emoji ersetzen; die fruehere Regex /🧪|🚀|🔬|/g hatte eine leere
+          // Alternative und setzte ⏳ zwischen jedes Zeichen.
+          button.textContent = button.dataset.originalText.replace(/^\s*(🧪|🚀|🔬)/u, '⏳');
+        } else {
+          // Wiederherstellen in der aktuell gewaehlten Sprache
+          const restored = button.getAttribute('data-' + currentLanguage) || button.dataset.originalText;
+          if (restored) button.textContent = restored;
+          delete button.dataset.originalText;
         }
       });
     }

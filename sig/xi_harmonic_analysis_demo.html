@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ξ-FFT Harmonische Signal-Analyse Demo</title>
+  <title>Harmonische Signal-Analyse Demo (Autokorrelation vs. FFT)</title>
   <style>
     :root {
       --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -313,7 +313,7 @@
       <span class="xi-symbol">ξ</span>
       Harmonische Signal-Analyse
     </h1>
-    <p>T0-Prinzip für Signale • Direkte Periodensuche ohne FFT • Logarithmische Harmonik</p>
+    <p>Zeitbereichs-Periodensuche per Autokorrelation • echter FFT-Vergleich • Logarithmische Harmonik<br><small style="color:#8a6d00">Nachtrag Sept. 2026: Analysefunktionen ersetzt — frühere Fassung zeigte Zufallsdaten; ξ hat keinen Einfluss auf das Ergebnis (Dok. 343).</small></p>
   </div>
 
   <div class="container">
@@ -914,139 +914,118 @@ ${Object.entries(activeHarmonics).map(([key, h]) => `  • ${h.name} (${h.ratio}
       return activeHarmonics;
     }
 
+    // ===== ECHTE ANALYSE (Nachtrag Sept. 2026, Dok. 343) =====
+    // Frueher erzeugte diese Funktion die "gefundenen Perioden" mit Math.random().
+    // Jetzt: normierte Autokorrelation ueber Perioden 4..maxPeriod (Zeitbereich).
+    // Nach Wiener-Chintschin ist das die Ruecktransformation von |FFT|^2 --
+    // gleiche Aufloesung (dp = 1 Sample, relativ 1/p) wie die FFT-Bin-Breite.
+    // Die fruehere xi-Bewertung (Gauss um eine Referenzperiode) wird nicht mehr
+    // als Filter benutzt: mit xi=1/100 verwarf sie Oktave (Score 0.004) und Quinte
+    // (0.009) unter der Schwelle 0.01 -- genau die Harmonischen, die gesucht sind.
+    function autocorrPeriodicity(signal, period, maxSamples) {
+      const n = Math.min(signal.length, maxSamples || 8192);
+      if (n < 2 * period) return 0;
+      let c = 0, n1 = 0, n2 = 0;
+      for (let i = 0; i + period < n; i++) {
+        const a = signal[i], b = signal[i + period];
+        c += a * b; n1 += a * a; n2 += b * b;
+      }
+      if (n1 === 0 || n2 === 0) return 0;
+      return Math.max(0, c / Math.sqrt(n1 * n2));
+    }
+
+    function findPeriodsAutocorr(signal, threshold, maxPeriod) {
+      const found = [];
+      let prev2 = 0, prev1 = 0;
+      const ac = new Float64Array(maxPeriod + 2);
+      for (let p = 2; p <= maxPeriod; p++) ac[p] = autocorrPeriodicity(signal, p);
+      // lokale Maxima der Autokorrelation ueber der Schwelle = Perioden-Kandidaten
+      for (let p = 3; p < maxPeriod; p++) {
+        if (ac[p] > threshold && ac[p] >= ac[p - 1] && ac[p] >= ac[p + 1]) {
+          // parabolische Verfeinerung um +-1 Sample (Aufloesungsgrenze bleibt 1/p)
+          const d = 0.5 * (ac[p - 1] - ac[p + 1]) / (ac[p - 1] - 2 * ac[p] + ac[p + 1] || 1);
+          const pr = p + (isFinite(d) ? Math.max(-0.5, Math.min(0.5, d)) : 0);
+          found.push({ samples: pr, freq: sampleRate / pr, strength: ac[p] });
+        }
+      }
+      return found.sort((x, y) => y.strength - x.strength);
+    }
+
     function calculateT0Analysis(xiProfile, periodThreshold, xiThreshold) {
-      // Simuliere echte T0-Analyse basierend auf Parametern
       const profile = xiProfiles[xiProfile];
       const baseFreq = parseFloat(document.getElementById('frequency').value) || 220;
-      
-      // Anzahl gefundener Perioden hängt von Thresholds ab
-      const periodCount = Math.max(3, Math.floor((1 - periodThreshold) * 12 + (1 - xiThreshold * 100) * 8));
-      
+      const maxPeriod = Math.min(2000, Math.floor(currentSignal.length / 3));
+      const all = findPeriodsAutocorr(currentSignal, periodThreshold, maxPeriod);
+      // Vielfache der Grundperiode (2p, 3p, ...) sind in der Autokorrelation ebenfalls
+      // Maxima; nur die kuerzeste Periode je Familie behalten.
+      // Kandidaten nach Periode aufsteigend durchgehen: die kuerzeste Periode einer
+      // Familie kommt zuerst, ihre Vielfachen werden danach verworfen.
+      const strong = all.filter(c => c.strength >= 0.5 * all[0].strength).sort((x, y) => x.samples - y.samples);
       const periods = [];
-      const frequencies = [];
-      const strengths = [];
-      
-      // Generiere Perioden basierend auf ξ-Profil
-      for (let i = 0; i < periodCount; i++) {
-        let freq;
-        if (profile.factor < 100) { // Harmonisch
-          freq = baseFreq * (i + 1) * (0.8 + Math.random() * 0.4);
-        } else { // Komplex/Mikrotonal
-          freq = baseFreq * (0.5 + Math.random() * 3);
-        }
-        
-        const samples = Math.floor(sampleRate / freq);
-        const strength = Math.max(0.1, (1 - i * 0.1) * (1 - xiThreshold * 10) + Math.random() * 0.2);
-        
-        periods.push({
-          freq: freq,
-          samples: samples,
-          strength: strength
-        });
-        
-        frequencies.push(freq);
-        strengths.push(strength);
+      for (const c of strong) {
+        const dup = periods.some(k => { const r = c.samples / k.samples; return r > 1.5 && Math.abs(r - Math.round(r)) < 0.03; });
+        if (!dup) periods.push(c);
+        if (periods.length >= 8) break;
       }
-      
-      // Sortiere nach Stärke
-      periods.sort((a, b) => b.strength - a.strength);
-      
-      // Berechne Verhältnisse
+      periods.sort((x, y) => y.strength - x.strength);
+      const frequencies = periods.map(p => p.freq);
+      const strengths = periods.map(p => p.strength);
       const ratios = [];
-      for (let i = 0; i < Math.min(4, periods.length); i++) {
+      for (let i = 0; i < Math.min(4, periods.length); i++)
         for (let j = i + 1; j < Math.min(4, periods.length); j++) {
-          const high = Math.max(periods[i].freq, periods[j].freq);
-          const low = Math.min(periods[i].freq, periods[j].freq);
-          const ratio = high / low;
-          
-          ratios.push({
-            high: high,
-            low: low,
-            ratio: ratio,
-            name: classifyRatio(ratio)
-          });
+          const high = Math.max(periods[i].freq, periods[j].freq), low = Math.min(periods[i].freq, periods[j].freq);
+          ratios.push({ high, low, ratio: high / low, name: classifyRatio(high / low) });
         }
-      }
-      
-      // Berechne Komplexität basierend auf Profil
-      const complexity = profile.factor > 500 ? 0.4 + Math.random() * 0.3 : 
-               profile.factor > 100 ? 0.2 + Math.random() * 0.2 : 
-               0.05 + Math.random() * 0.15;
-      
+      // Komplexitaet = Anteil der Autokorrelations-Energie ausserhalb der staerksten Periode
+      const top = strengths[0] || 0;
+      const complexity = strengths.length > 1 ? 1 - top / strengths.reduce((a, b) => a + b, 0) : 0;
       return {
-        periods: periods,
-        frequencies: frequencies,
-        strengths: strengths,
-        ratios: ratios,
-        strongestPeriod: periods[0]?.samples || 200,
+        periods, frequencies, strengths, ratios,
+        strongestPeriod: periods[0] ? periods[0].samples.toFixed(1) : '-',
         dominantFreq: periods[0]?.freq || baseFreq,
-        complexity: complexity,
-        quality: complexity < 0.2 ? 'Exzellent' : complexity < 0.4 ? 'Gut' : 'Mittel',
-        harmonicHints: ratios.filter(r => r.name.includes('~')).length,
-        complexityLevel: complexity < 0.2 ? 'Niedrig' : complexity < 0.4 ? 'Mittel' : 'Hoch'
+        complexity,
+        quality: top > 0.9 ? 'Exzellent' : top > 0.6 ? 'Gut' : 'Mittel',
+        harmonicHints: ratios.filter(r => r.name.startsWith('~')).length,
+        complexityLevel: complexity < 0.2 ? 'Niedrig' : complexity < 0.5 ? 'Mittel' : 'Hoch',
+        note: 'Autokorrelation (= |FFT|^2 rücktransformiert); ξ-Profil "' + profile.name + '" hat auf das Ergebnis keinen Einfluss (Dok. 343).'
       };
     }
 
     function calculateResonanceAnalysis(activeHarmonics, xiProfile) {
+      // Frueher: 70 % Zufallstreffer. Jetzt: fuer jedes aktive Intervall wird geprueft,
+      // ob die Autokorrelation bei Grundperiode/ratio ein Maximum ueber der Schwelle hat.
       const baseFreq = parseFloat(document.getElementById('frequency').value) || 220;
-      const harmonicCount = Object.keys(activeHarmonics).length;
-      
-      // Simuliere Resonanz basierend auf aktiven Harmonien
+      const thr = parseFloat(document.getElementById('periodThreshold').value) || 0.3;
+      const maxPeriod = Math.min(2000, Math.floor(currentSignal.length / 3));
+      const base = findPeriodsAutocorr(currentSignal, thr, maxPeriod)[0];
+      const p0 = base ? base.samples : sampleRate / baseFreq;
       const peaks = [];
       const categories = { Perfect: 0, Consonant: 0, Dissonant: 0 };
-      
-      Object.entries(activeHarmonics).forEach(([key, harmonic], index) => {
-        if (Math.random() > 0.3) { // 70% Chance für Treffer
-          const freq = baseFreq * harmonic.ratio * (0.95 + Math.random() * 0.1);
-          peaks.push({
-            freq: freq,
-            name: harmonic.name,
-            category: harmonic.category
-          });
+      Object.entries(activeHarmonics).forEach(([key, harmonic]) => {
+        const p = p0 / harmonic.ratio;
+        if (p < 3) return;
+        const pi = Math.round(p);
+        const st = Math.max(autocorrPeriodicity(currentSignal, pi - 1), autocorrPeriodicity(currentSignal, pi), autocorrPeriodicity(currentSignal, pi + 1));
+        if (st > thr) {
+          peaks.push({ freq: sampleRate / p, name: harmonic.name, category: harmonic.category, strength: st });
           categories[harmonic.category]++;
         }
       });
-      
-      const matches = peaks.length;
-      const total = harmonicCount;
+      const matches = peaks.length, total = Object.keys(activeHarmonics).length || 1;
       const purity = Math.round((matches / total) * 100);
-      
-      // Dominante Kategorie
-      const dominantCategory = Object.entries(categories)
-        .reduce((a, b) => categories[a[0]] > categories[b[0]] ? a : b)[0];
-      
-      // Instrumenten-Klassifikation
-      const harmonicRatio = purity / 100;
+      const dominantCategory = Object.entries(categories).reduce((x, y) => categories[x[0]] >= categories[y[0]] ? x : y)[0];
       let instrumentType, reasoning;
-      
-      if (harmonicRatio > 0.8) {
-        instrumentType = 'Tonal (Piano/Gitarre)';
-        reasoning = 'Starke harmonische Struktur deutet auf Saiteninstrument hin';
-      } else if (harmonicRatio > 0.5) {
-        instrumentType = 'Semi-tonal (Bläser)';
-        reasoning = 'Moderate Harmonik typisch für Blasinstrumente';
-      } else {
-        instrumentType = 'Perkussiv (Schlagzeug)';
-        reasoning = 'Komplexe Struktur charakteristisch für Perkussion';
-      }
-      
+      if (purity > 80) { instrumentType = 'Tonal (Piano/Gitarre)'; reasoning = 'Viele aktive Intervalle im Signal nachweisbar'; }
+      else if (purity > 50) { instrumentType = 'Semi-tonal (Bläser)'; reasoning = 'Teil der aktiven Intervalle nachweisbar'; }
+      else { instrumentType = 'Perkussiv / inharmonisch'; reasoning = 'Wenige aktive Intervalle nachweisbar'; }
       return {
-        matches: matches,
-        total: total,
-        purity: purity,
-        peaks: peaks.slice(0, 6),
-        dominantCategory: dominantCategory,
+        matches, total, purity, peaks: peaks.slice(0, 6), dominantCategory,
         quality: purity > 80 ? 'Exzellent' : purity > 60 ? 'Gut' : 'Mittel',
-        modes: {
-          fundamental: categories.Perfect,
-          overtones: categories.Consonant,
-          subharmonics: Math.max(0, total - matches),
-          complex: categories.Dissonant
-        },
-        instrumentType: instrumentType,
-        reasoning: reasoning,
+        modes: { fundamental: categories.Perfect, overtones: categories.Consonant, subharmonics: Math.max(0, total - matches), complex: categories.Dissonant },
+        instrumentType, reasoning,
         categoryStats: `Perfect:${categories.Perfect}, Consonant:${categories.Consonant}, Dissonant:${categories.Dissonant}`,
-        categories: categories
+        categories,
+        note: 'Hinweis: Die Toleranz der Intervall-Klassifikation bestimmt die Trefferquote (Überdeckungseffekt, Dok. 343 Klartext II).'
       };
     }
 
@@ -1079,221 +1058,72 @@ ${Object.entries(activeHarmonics).map(([key, h]) => `  • ${h.name} (${h.ratio}
       }, 500);
     }
 
-    function compareFFT() {
-      if (!currentSignal) {
-        updateStatus('⚠️ Erst Signal generieren!', 'warning');
-        return;
-      }
-      
-      updateStatus('📊 Starte FFT-Vergleich...', 'info');
-      updateProgress(25);
-      
-      // Sofort Analysis Chart plotten
-      plotAnalysisChart('fft_compare');
-      updateProgress(75);
-      
-      setTimeout(() => {
-        updateProgress(100);
-        updateStatus('✅ FFT-Vergleich: T0=8, FFT=12, Gemeinsam=6', 'success');
-      }, 500);
-    }
-
-    function plotAnalysisChart(analysisType, data = null) {
-      const canvas = document.getElementById('analysisChart');
-      if (!canvas) return;
-      
-      const ctx = canvas.getContext('2d');
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      const width = canvas.width;
-      const height = canvas.height;
-      
-      // Titel
-      ctx.fillStyle = '#333';
-      ctx.font = 'bold 16px Arial';
-      ctx.textAlign = 'center';
-      
-      switch (analysisType) {
-        case 't0':
-          ctx.fillText('T0-Periodensuche Ergebnisse', width/2, 30);
-          plotT0Results(ctx, width, height, data);
-          break;
-        case 'resonance':
-          ctx.fillText('Harmonische Resonanz-Analyse', width/2, 30);
-          plotResonanceResults(ctx, width, height, data);
-          break;
-        case 'microtonal':
-          ctx.fillText('Mikro-tonale Intervall-Analyse', width/2, 30);
-          plotMicrotonalResults(ctx, width, height, data);
-          break;
-        case 'fft_compare':
-          ctx.fillText('T0 vs FFT Methoden-Vergleich', width/2, 30);
-          plotFFTComparison(ctx, width, height, data);
-          break;
-      }
-    }
-
-    function plotT0Results(ctx, width, height, data) {
-      // Verwende echte Daten falls verfügbar, sonst Demo-Daten
-      const frequencies = data ? data.frequencies : [220.5, 440.25, 330.75, 661.5, 275.0, 495.0, 183.3, 367.5];
-      const strengths = data ? data.strengths : [0.85, 0.62, 0.46, 0.35, 0.28, 0.22, 0.18, 0.15];
-      
-      const barWidth = (width - 100) / frequencies.length;
-      const maxStrength = Math.max(...strengths);
-      
-      // Zeige Parameter-Einfluss
-      const xiProfile = document.getElementById('xiProfile').value;
-      const periodThreshold = document.getElementById('periodThreshold').value;
-      
-      // Parameter-Info
-      ctx.fillStyle = '#666';
-      ctx.font = '12px Arial';
-      ctx.textAlign = 'left';
-      ctx.fillText(`ξ-Profil: ${xiProfiles[xiProfile].name} | Threshold: ${periodThreshold}`, 10, height - 10);
-      
-      // Balkendiagramm
-      for (let i = 0; i < frequencies.length; i++) {
-        const barHeight = (strengths[i] / maxStrength) * (height - 100);
-        const x = 50 + i * barWidth;
-        const y = height - 50 - barHeight;
-        
-        // Farbverlauf basierend auf ξ-Profil
-        let hue;
-        if (xiProfile === 'harmonic') {
-          hue = (strengths[i] / maxStrength) * 120; // Grün für harmonisch
-        } else if (xiProfile === 'complex') {
-          hue = 240 + (strengths[i] / maxStrength) * 60; // Blau-Violett für komplex
-        } else {
-          hue = 30 + (strengths[i] / maxStrength) * 90; // Gelb-Orange für universal/mikrotonal
-        }
-        
-        ctx.fillStyle = `hsl(${hue}, 70%, 50%)`;
-        ctx.fillRect(x, y, barWidth - 5, barHeight);
-        
-        // Frequenz-Label
-        ctx.fillStyle = '#333';
-        ctx.font = '10px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText(`${frequencies[i].toFixed(1)}Hz`, x + barWidth/2, height - 35);
-        
-        // Stärke-Wert
-        ctx.fillText(strengths[i].toFixed(2), x + barWidth/2, y - 5);
-      }
-      
-      // Achsenbeschriftung
-      ctx.fillStyle = '#333';
-      ctx.font = '12px Arial';
-      ctx.textAlign = 'center';
-      ctx.fillText('Frequenz (Hz)', width/2, height - 20);
-      
-      ctx.save();
-      ctx.translate(15, height/2);
-      ctx.rotate(-Math.PI/2);
-      ctx.fillText('Periodenstärke', 0, 0);
-      ctx.restore();
-    }
-
-    function plotResonanceResults(ctx, width, height, data) {
-      // Verwende echte Daten falls verfügbar
-      const activeHarmonics = getActiveHarmonics();
-      const categories = data ? data.categories : { Perfect: 3, Consonant: 3, Dissonant: 1 };
-      const categoryNames = Object.keys(categories);
-      const counts = Object.values(categories);
-      const colors = ['#ff4444', '#ff8800', '#ffcc00', '#8844ff'];
-      
-      // Zeige aktive Harmonien Info
-      ctx.fillStyle = '#666';
-      ctx.font = '12px Arial';
-      ctx.textAlign = 'left';
-      ctx.fillText(`Aktive Harmonien: ${Object.keys(activeHarmonics).length}/10`, 10, height - 10);
-      
-      // Pie Chart
-      const centerX = width / 2;
-      const centerY = height / 2;
-      const radius = Math.min(width, height) / 4;
-      
-      let currentAngle = 0;
-      const total = counts.reduce((a, b) => a + b, 0);
-      
-      if (total > 0) {
-        for (let i = 0; i < categoryNames.length; i++) {
-          const count = counts[i];
-          if (count > 0) {
-            const sliceAngle = (count / total) * 2 * Math.PI;
-            
-            ctx.fillStyle = colors[i];
-            ctx.beginPath();
-            ctx.moveTo(centerX, centerY);
-            ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
-            ctx.closePath();
-            ctx.fill();
-            
-            // Label
-            const labelAngle = currentAngle + sliceAngle / 2;
-            const labelX = centerX + Math.cos(labelAngle) * (radius + 30);
-            const labelY = centerY + Math.sin(labelAngle) * (radius + 30);
-            
-            ctx.fillStyle = '#333';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText(`${categoryNames[i]}(${count})`, labelX, labelY);
-            
-            currentAngle += sliceAngle;
+    // Radix-2 FFT (in-place), reelles Signal -> Betragsspektrum
+    function fftMagnitude(signal) {
+      let n = 1; while (n * 2 <= signal.length && n < 65536) n *= 2;
+      const re = new Float64Array(n), im = new Float64Array(n);
+      for (let i = 0; i < n; i++) { const w = 0.5 - 0.5 * Math.cos(2 * Math.PI * i / n); re[i] = signal[i] * w; } // Hann
+      for (let i = 1, j = 0; i < n; i++) { let bit = n >> 1; for (; j & bit; bit >>= 1) j ^= bit; j ^= bit; if (i < j) { [re[i], re[j]] = [re[j], re[i]]; } }
+      for (let len = 2; len <= n; len <<= 1) {
+        const ang = -2 * Math.PI / len, wr = Math.cos(ang), wi = Math.sin(ang);
+        for (let i = 0; i < n; i += len) {
+          let cr = 1, ci = 0;
+          for (let j = 0; j < len / 2; j++) {
+            const ur = re[i + j], ui = im[i + j];
+            const vr = re[i + j + len / 2] * cr - im[i + j + len / 2] * ci;
+            const vi = re[i + j + len / 2] * ci + im[i + j + len / 2] * cr;
+            re[i + j] = ur + vr; im[i + j] = ui + vi; re[i + j + len / 2] = ur - vr; im[i + j + len / 2] = ui - vi;
+            const t = cr * wr - ci * wi; ci = cr * wi + ci * wr; cr = t;
           }
         }
-      } else {
-        // Keine Daten
-        ctx.fillStyle = '#ccc';
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-        ctx.fill();
-        
-        ctx.fillStyle = '#333';
-        ctx.font = '14px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText('Keine harmonischen', centerX, centerY - 5);
-        ctx.fillText('Treffer gefunden', centerX, centerY + 15);
       }
+      const mag = new Float64Array(n / 2);
+      for (let k = 0; k < n / 2; k++) mag[k] = Math.hypot(re[k], im[k]);
+      return { mag, binHz: sampleRate / n };
     }
 
-    function plotMicrotonalResults(ctx, width, height) {
-      // Demo-Daten für Mikrotonal-Analyse
-      const intervals = [200, 386, 498, 702, 884, 1088, 1200];
-      const deviations = [2, -5, 8, -2, 12, -8, 0];
-      
-      const barWidth = (width - 100) / intervals.length;
-      
-      // Cent-Abweichungen
-      for (let i = 0; i < intervals.length; i++) {
-        const deviation = deviations[i];
-        const barHeight = Math.abs(deviation) * 3;
-        const x = 50 + i * barWidth;
-        const y = height/2 - (deviation > 0 ? barHeight : 0);
-        
-        ctx.fillStyle = deviation > 0 ? '#ff6b6b' : '#4ecdc4';
-        ctx.fillRect(x, y, barWidth - 5, Math.abs(barHeight));
-        
-        // Cent-Label
-        ctx.fillStyle = '#333';
-        ctx.font = '10px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText(`${intervals[i]}¢`, x + barWidth/2, height - 20);
-        ctx.fillText(`${deviation > 0 ? '+' : ''}${deviation}¢`, x + barWidth/2, y - 5);
-      }
-      
-      // Null-Linie
-      ctx.strokeStyle = '#333';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(50, height/2);
-      ctx.lineTo(width - 50, height/2);
-      ctx.stroke();
+    function fftPeaks(signal, maxPeaks) {
+      const { mag, binHz } = fftMagnitude(signal);
+      let m = 0; for (const v of mag) m = Math.max(m, v);
+      const peaks = [];
+      for (let k = 2; k < mag.length - 1; k++)
+        if (mag[k] > 0.05 * m && mag[k] > mag[k - 1] && mag[k] >= mag[k + 1]) {
+          const d = 0.5 * (mag[k - 1] - mag[k + 1]) / (mag[k - 1] - 2 * mag[k] + mag[k + 1]);
+          peaks.push({ freq: (k + (isFinite(d) ? d : 0)) * binHz, strength: mag[k] / m });
+        }
+      return peaks.sort((x, y) => y.strength - x.strength).slice(0, maxPeaks);
+    }
+
+    let lastFFTComparison = null;
+    function compareFFT() {
+      if (!currentSignal) { updateStatus('⚠️ Erst Signal generieren!', 'warning'); return; }
+      updateStatus('📊 Starte FFT-Vergleich (echte Berechnung)...', 'info');
+      updateProgress(25);
+      const thr = parseFloat(document.getElementById('periodThreshold').value) || 0.3;
+      const maxPeriod = Math.min(2000, Math.floor(currentSignal.length / 3));
+      const t0 = findPeriodsAutocorr(currentSignal, thr, maxPeriod).slice(0, 12).map(p => p.freq);
+      const fft = fftPeaks(currentSignal, 12).map(p => p.freq);
+      // gemeinsam = relative Abweichung < 2 %
+      const common = t0.filter(f => fft.some(g => Math.abs(f - g) / g < 0.02)).length;
+      lastFFTComparison = { t0: t0.length, fft: fft.length, common, t0u: t0.length - common, fftu: fft.length - common, t0f: t0, fftf: fft };
+      plotAnalysisChart('fft_compare');
+      updateProgress(100);
+      updateStatus(`✅ FFT-Vergleich: Autokorrelation=${t0.length}, FFT=${fft.length}, Gemeinsam=${common}`, 'success');
+      document.getElementById('textOutput').textContent =
+        '=== AUTOKORRELATION vs FFT (echte Berechnung) ===\n\n' +
+        'Autokorrelations-Peaks (Hz): ' + t0.map(f => f.toFixed(1)).join(', ') + '\n' +
+        'FFT-Peaks (Hz):              ' + fft.map(f => f.toFixed(1)).join(', ') + '\n\n' +
+        'Gemeinsam (<2 %): ' + common + '\n\n' +
+        'Einordnung: Autokorrelation und FFT sind über Wiener–Chintschin dasselbe Objekt\n' +
+        '(Autokorrelation = Rücktransformation von |FFT|²). Unterschiede in den Peaks kommen\n' +
+        'von Fensterung und davon, dass die Autokorrelation Vielfache der Grundperiode zeigt.\n' +
+        'Die Auflösung ist in beiden Fällen durch die Signallänge begrenzt (Dok. 343, Klartext II).';
     }
 
     function plotFFTComparison(ctx, width, height) {
-      // Demo-Daten für FFT-Vergleich
-      const methods = ['T0 Peaks', 'FFT Peaks', 'Gemeinsame', 'T0 Unique', 'FFT Unique'];
-      const values = [8, 12, 6, 2, 6];
+      const c = lastFFTComparison || { t0: 0, fft: 0, common: 0, t0u: 0, fftu: 0 };
+      const methods = ['Autokorr. Peaks', 'FFT Peaks', 'Gemeinsame', 'nur Autokorr.', 'nur FFT'];
+      const values = [c.t0, c.fft, c.common, c.t0u, c.fftu];
       const colors = ['#667eea', '#764ba2', '#4facfe', '#f093fb', '#f5576c'];
       
       const barWidth = (width - 100) / methods.length;
