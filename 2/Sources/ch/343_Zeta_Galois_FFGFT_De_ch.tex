@@ -45,7 +45,10 @@ $p=13$ ist die weltweit einzige Primzahl mit $\mathrm{ord}_p(3)=3$ \BM.
 \textbf{(F)}~Die Euler-Faktor-Schwelle bei $p^*\approx9{,}76$ ($s=2$) markiert
 das 7-limit exakt; ab $p_\mathrm{max}\approx30$ liegt die Galois-Produktdichte
 auf Zufallsniveau; die Weyl-Obstruktion (Dok.~316) zeigt, dass die Grenze
-nicht im Werkzeug liegt — auch kein Quantencomputer beliebiger Größe umgeht sie \BM.
+nicht im Werkzeug liegt; Shors Schaltkreismodell ist digital und davon nicht betroffen, der physische
+Apparat aber ein Resonanzsystem, das den Resonanzgrenzen unterliegt, solange das
+Schwellentheorem bei Skalierung nicht demonstriert ist \SM; empirisch ist kein
+Quantenvorteil nachgewiesen [X].
 
 Prüfskripte: \texttt{pruef\_343\_zeta\_galois.py},
 \texttt{pruef\_343b\_klassen\_symmetrie.py},
@@ -453,7 +456,8 @@ voraus, dass die gesuchte Struktur bereits vorhanden ist.
 Damit stehen physikalische Grenze ($p^* \approx 9{,}76$, Satz~F.1) und
 mathematische Grenze (Weyl-Obstruktion, Satz~F.3) im selben Bild:
 Ab einem bestimmten Punkt ist die Primzahlstruktur im Rauschen verborgen,
-und kein Werkzeug — auch kein beliebig großer Quantencomputer — holt sie heraus.
+und kein analoges Werkzeug holt sie heraus; Shors Algorithmus ist als Modell digital,
+als Apparat ein Resonator --- und damit bis zum Beweis des Gegenteils ebenfalls gebunden (Satz~G$'$).
 
 % ============================================================
 \section{Im Klartext: Was die Grenze bedeutet}
@@ -682,6 +686,148 @@ Wicklungszahlen ($r_\mu = 16/5$, $16 \notin F$) und die B-Meson-Deutung
 ($\alpha=\xi$ bräuchte $9\times10^8$ Ereignisse für $4\sigma$); Dok.~186 trägt
 seit dem 3.~September 2026 einen entsprechenden Vorbemerkungskasten.
 
+\subsection{Folge für die Faktorisierung: $N_\mathrm{max} \approx 1/\varepsilon$}
+
+Ein resonanzbasierter Faktorisierer muss die Periode $r$ von $r{+}1$ trennen
+(Auflösung $1/r$) bzw.\ nach der Präzisionsbarriere aus Dok.~075
+($\Delta f \approx f_0/n^2$) den Faktor $n$ isolieren (Auflösung $1/n^2$).
+Der Auflösungsboden $\varepsilon$ deckelt ihn daher bei $N_\mathrm{max}\approx 1/\varepsilon$ \BM:
+
+\begin{table}[H]
+\centering
+\caption{Auflösungsboden und Deckel eines resonanzbasierten Faktorisierers}
+\begin{tabular}{lrrrr}
+\toprule
+$\varepsilon$ & Faktoren bis $n_\mathrm{max}$ & Zahlen bis $N_\mathrm{max}$ & Bits \\
+\midrule
+$1{,}05\,\%$ (eine fraktale Stufe) & 10 & 95 & 7 \\
+$\xi$ & 87 & $7{,}5\times10^{3}$ & 13 \\
+$1/Q_\mathrm{TFLN}$ & $10^3$ & $10^{6}$ & 20 \\
+$\xi^2$ & $7{,}5\times10^3$ & $5{,}6\times10^{7}$ & 26 \\
+RSA-2048 & --- & bräuchte $\varepsilon\approx2^{-1024}$ & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Das $p^*\approx 87$ aus der Schwellentabelle \emph{ist} die Faktorisierungsaussage:
+Ein Resonanzverfahren auf dem $\xi$-Boden trennt Faktoren bis etwa $87$. Selbst
+mit $\xi^2$ sind es 26~Bit --- Probeteilung erledigt das in Millisekunden.
+Was sich mit dem $\xi$-Boden verschiebt, ist die Galois-Schicht der Physik
+($k\approx3\to k\geq8$), nicht die Faktorisierung: Die Physik gewinnt
+Trennschärfe bei Massenverhältnissen, die Zahlentheorie gewinnt nichts, weil
+ihre Zahlen keine $\xi$-Skala tragen (Dok.~075).
+
+\subsection{Warum klassische Verfahren weiter reichen: Zustand gegen Prozess}
+
+Klassische Verfahren lösen nichts auf --- sie zählen. $a^r \bmod N = 1$ ist wahr
+oder falsch; es gibt kein $\varepsilon$. Jedes Bit ist ein $\mathbb{Z}_2$-Zustand,
+im Korpus eine Wicklungszahl auf T$^4$ (Dok.~247): ein \emph{Zustand}, der ohne
+Energie existiert und nach jedem Rechenschritt neu auf $0$ oder $1$ geschwellt
+wird. Das ist die topologische Diskretheit aus Satz~G$''$. Ein Resonanzverfahren
+trägt seine Information dagegen als \emph{Prozess} --- Phase, Frequenz --- und
+hat keinen Zustand, auf den es zurückschwellen könnte; der Boden $\varepsilon$
+bleibt ihm erhalten. Der Preis der Exaktheit ist die Aufzählung:
+
+\begin{table}[H]
+\centering
+\caption{Klassische Grenzen sind Zählgrenzen (Operationen), keine Auflösungsgrenzen}
+\begin{tabular}{rrrrl}
+\toprule
+Bits & Probeteilung $\sqrt N$ & Pollard-$\rho$ $N^{1/4}$ & NFS & \\
+\midrule
+13 & 90 & 10 & $9\times10^{2}$ & Resonanzdeckel bei $\xi$ \\
+26 & $8\times10^3$ & 90 & $3\times10^{4}$ & Resonanzdeckel bei $\xi^2$ \\
+512 & $10^{77}$ & $3\times10^{38}$ & $2\times10^{19}$ & Stunden \\
+2048 & --- & $3\times10^{154}$ & $1{,}5\times10^{35}$ & $5\times10^{12}$ Jahre bei $10^{15}$ op/s \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Zur Energie: Landauers Grenze $k_BT\ln 2$ gilt im Korpus unverändert und ohne
+$\xi$-Modifikation (Dok.~184), aber \emph{nur für die Löschung} eines Bits
+(Dok.~247); Dok.~255 leitet sie als eingefrorene Energie einer minimalen
+Windungsdifferenz $\Delta w=1$ aus der T$^4$-Geometrie her. Sie deckelt die
+Dissipation pro irreversiblem Schritt, nicht die Zahl der Rechenschritte;
+reversible Schritte sind ausgenommen. Die klassische Wand ist deshalb die Zeit,
+nicht die Energie \BM.
+
+Die beiden Verfahrenstypen sind dual: \textbf{Exaktheit kostet Aufzählung,
+Auflösung kostet Präzision.} Resonanz hat konstante Kosten pro Kandidat und
+einen Boden bei $1/\varepsilon$; Zählung hat keinen Boden und Kosten, die
+subexponentiell mit $N$ wachsen. Beides sind Grenzen; die Zählgrenze liegt
+nur um Hunderte Größenordnungen weiter außen. Dok.~316 sagt es allgemein: Die
+arithmetische Struktur lässt sich nicht in ein Kontinuum projizieren, ohne
+Information zu verlieren.
+
+
+\subsection{Quantenrechner: der empirische Maßstab}
+
+Das Schaltkreismodell von Shors Algorithmus ist digital und von der
+Weyl-Obstruktion (Satz~F) nicht betroffen: Die QFT läuft über $\mathbb{Z}_Q$,
+$Q=2^{2n}$, mit gleichabständigen Eigenfrequenzen und linearer Zähldichte
+$N(\lambda)\propto\lambda$; die Zahlentheorie steckt in der Periode $r$ von
+$a^x \bmod N$, nicht im Spektrum \BM. Das gilt für das Modell.
+
+Der physische Apparat ist ein Analogrechner mit quantenmechanischer Präzision.
+Ein Qubit ist ein Zweiniveau-Resonator, jedes Gatter ein resonanter Antrieb,
+ein Photon eine Mode mit kontinuierlicher Phase. Quantenfehlerkorrektur misst
+nicht den Qubit-Zustand selbst, sondern Syndrome über viele Runden; der logische
+Qubit-Zustand bleibt eine kontinuierliche Superposition, das Dekodieren ist ein
+probabilistisches Schätzproblem auf dem Syndromgraphen. Das ist kein
+Zurückschwellen auf Bit-Ebene, sondern Mittelung über viele Messungen ---
+dasselbe Grundproblem wie beim klassischen Analogrechner: ob die Mittelung den
+analogen Fehlerboden unter die Nutzgrenze drückt. Das Substrat ist gleichgültig
+--- Photonik, Ionen, Supraleiter unterscheiden sich nur im Fehlerkanal. Die
+photonischen Operationen in Dok.~186 (analoge Matrixfaltung, Resonator-Einrasten)
+liegen mit $\varepsilon = 1/Q \approx 10^{-6}$ bei $N_\mathrm{max}\approx10^{6}$
+(20~Bit, Satz~G$'$).
+
+Die Frage ist dieselbe wie beim Analogrechner: ob die Mittelung skaliert. Der
+Korpus hat keinen Mechanismus, der einen physischen Resonator von den
+Resonanzgrenzen befreit (Dok.~034: $\xi$-Effekte unter dem Rauschen; Dok.~162:
+$100\xi$-Dämpfung pro Gatter, Charakter offen). Die Behauptung des
+Schwellentheorems ist \SM\ --- jede Bedingung einzeln demonstriert, das Produkt
+bei Skalierung nicht. Entschieden wird es nicht in der Theorie, sondern auf der
+Faktorisierungskurve.
+
+\begin{table}[H]
+\centering
+\caption{Faktorisierung mit Shors Algorithmus gegen klassische Rekorde und Bausteine (Stand September 2026)}
+\begin{tabular}{llll}
+\toprule
+Jahr & Shor auf Hardware & klassisch (NFS) & Bausteine \\
+\midrule
+2001 & $N=15$ & --- & --- \\
+2012 & $N=21$ (mit Vorwissen) & --- & --- \\
+2019 & Versuch $N=35$ gescheitert & --- & --- \\
+2020 & --- & RSA-250 (829~Bit) & --- \\
+2024 & --- & --- & Fehlerkorrektur unter Schwelle (Google Willow) \\
+2025 & --- & --- & 48 logische Qubits (Quantinuum Helios) \\
+2026 & --- & --- & 94 logische Qubits $<10^{-4}$; logische QFT (12 log.\ Qubits) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Die größere ,,Quantenrekorde`` ($56\,153$, $4\,088\,459$, $2{,}6\times10^{14}$,
+$1{,}1\times10^{12}$) betreffen Zahlen mit Spezialstruktur (Faktoren, die sich
+in wenigen Bits unterscheiden), gelöst mit Annealing oder QAOA nach klassischer
+Vorverarbeitung; Gutmann und Neuhaus (IACR ePrint 2025/1237) haben sie
+sämtlich mit einem VIC-20 von 1981, einem Abakus und einem Hund repliziert.
+Der größte \emph{simulierte} Shor-Lauf (39~Bit) lief klassisch auf 2048 GPUs.
+
+Die Shor-Kurve steht seit 2012 bei $N=21$; die klassische Kurve bei 829~Bit.
+Der Maßstab ist daher empirisch: \textbf{Ein Vorteil muss auf der
+Shor-Faktorisierungskurve sichtbar werden, nicht auf Komponenten-Benchmarks.}
+Das ist die Korpusposition aus Dok.~075 --- \textbf{[X]} kein allgemeiner
+exponentieller Quantenvorteil nachgewiesen --- und sie ist im September 2026
+unverändert gültig. Die theoretische Möglichkeit (Shor polynomial; Weyl greift nicht; ob eine
+andere physikalische Obstruktion existiert, ist offen) bleibt \SM, keine [X];
+ihre Beweislast liegt beim Experiment.
+Auflösungsboden (G$'$), Zählgrenze (Zustand/Prozess) und Ressourcengrenze
+(Shor) sind drei verschiedene Deckel; für die Faktorisierung wirkt heute
+allein der dritte, und er ist bislang nicht durchbrochen.
+
+
 % ============================================================
 \section{Zusammenfassung}
 % ============================================================
@@ -716,6 +862,8 @@ H & $1{,}05\,\%$ (Dok.~338) $\approx 100\xi$ (Dok.~162): Grenze $k\approx3$ ist 
 H$'$ & Bei $\varepsilon=\xi$: $Q_c\approx111$, $p^*\approx87$, Galois trennscharf bis $k\geq8$ & \BM \\
 H$''$ & TFLN $Q>10^6$ löst $\xi$, nicht $\xi^2$; $\xi$ = Auflösungsboden, kein Auswahlkriterium & \BM \\
 H$'''$ & Abziehbarkeit der $100\xi$-Stufe; Dok.~186: Einrasten/Fibonacci/B-Meson widerlegt & \SM \\
+I & Resonanz-Faktorisierer gedeckelt bei $N_\mathrm{max}\approx1/\varepsilon$ (13--26 Bit); klassisch: Zählgrenze, Landauer nur Löschung & \BM \\
+I$'$ & Schaltkreismodell digital (Weyl greift nicht); physischer Apparat = Resonator, unterliegt $\varepsilon$/Weyl bis Schwellentheorem demonstriert \SM; Kurve seit 2012 bei $N=21$ & [X] \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -771,6 +919,9 @@ Johann Pascher (ORCID 0009-0000-6518-4064).
 \bibitem{P034} J.~Pascher, \textit{Dok.~034: T0-Formalismus und QM-Optimierung}, FFGFT-Korpus.
 \bibitem{P162} J.~Pascher, \textit{Dok.~162: T0-Optimierungsstrategien im Vergleich}, FFGFT-Korpus.
 \bibitem{P186} J.~Pascher, \textit{Dok.~186: FFGFT-Photonik-Analyse}, FFGFT-Korpus (mit Vorbemerkung vom 3.~September 2026).
+\bibitem{P184} J.~Pascher, \textit{Dok.~184: Das p-Bit in der FFGFT}, FFGFT-Korpus.
+\bibitem{P247} J.~Pascher, \textit{Dok.~247: Information als Zustand und als Prozess}, FFGFT-Korpus.
+\bibitem{P255} J.~Pascher, \textit{Dok.~255: Informationskinetik --- Landauer und Vopson aus der T$^4$-Geometrie}, FFGFT-Korpus.
 \bibitem{P328} J.~Pascher, \textit{Dok.~328: Kopplungsregime, Resonanz und Synchronisation}, FFGFT-Korpus, August~2026.
 \bibitem{P330} J.~Pascher, \textit{Dok.~330: Drei Operationen von T$^4$ zum Beobachtraum}, FFGFT-Korpus, August 2026.
 \bibitem{P336} J.~Pascher, \textit{Dok.~336: Die algebraische Brücke: FFGFT und $\mathbb{Z}_3\mathbb{C}$}, FFGFT-Korpus, August 2026.
@@ -778,5 +929,7 @@ Johann Pascher (ORCID 0009-0000-6518-4064).
 \bibitem{P147} J.~Pascher, \textit{Dok.~147: Quantencomputing und T0-Zeit-Masse-Dualität}, FFGFT-Korpus, August~2026.
 \bibitem{P316} J.~Pascher, \textit{Dok.~316: FFGFT und die Riemannsche Zeta-Funktion}, FFGFT-Korpus, August~2026.
 \bibitem{P342} J.~Pascher, \textit{Dok.~342: Faktorisierungsklassen in G$(6)$ und die Harmonik der Primzahlen}, FFGFT-Korpus, 2.~September 2026.
+\bibitem{Gutmann2025} P.~Gutmann, S.~Neuhaus, \textit{Replication of Quantum Factorisation Records with an 8-bit Home Computer, an Abacus, and a Dog}, IACR ePrint 2025/1237.
+\bibitem{Gidney2019} C.~Gidney, M.~Ekerå, \textit{How to factor 2048 bit RSA integers in 8 hours using 20 million noisy qubits}, arXiv:1905.09749; C.~Gidney (2025), Ressourcenschätzung $<10^6$ Qubits.
 \bibitem{Dirichlet} P.\,G.\,L.~Dirichlet, \textit{Über die Bestimmung der Dichte einer unendlichen Anzahl von Punkten}, 1837.
 \end{thebibliography}
