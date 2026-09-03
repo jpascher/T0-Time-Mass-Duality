@@ -579,34 +579,43 @@ Die multiplikative Gruppe GF(27)* ≅ ℤ₂₆ ≅ ℤ₂ × ℤ₁₃ zerfäll
 Automorphismus φ: x ↦ x³ in zwei Fixpunkte {+1,−1} (massiver Sektor, ℤ₂,
 Teilchen/Antiteilchen) und acht Dreier-Orbits (masseloser Sektor, 8 Gluonen,
 adjungierte SU(3)-Darstellung). Der Fixkörper GF(3)* liefert den U(1)-Sektor (Photon).
-Orbit₄ = 2⁻¹·Orbit₁ in ℤ₁₃ [B]; konforme Skalierung k↦3k im Typ-III-Pullback [K].
-Prüfskript: `pruef_339_frobenius.py` (6/6 Assertions).  
+Orbit₄ = 2⁻¹·Orbit₁ in ℤ₁₃ [B]; conformal scaling k↦3k in the type-III pullback [K].
+Check script: `pruef_339_frobenius.py` (6/6 assertions).  
 → [DE](2/pdf/339_Frobenius_Trennung_En.pdf) · [EN](2/pdf/339_Frobenius_Trennung_En.pdf)
 
 ### Doc. 340 — Neutrino mass hierarchy from GF(27)* (DE+EN, 9 pp. each)
 
-Beide gemessenen Δm²-Werte folgen aus der Zahl 11 = max({7,8,11}), dem maximalen
-Element des vierten Frobenius-Orbits in ℤ₁₃:
+Both measured Δm² values follow from 11 = max({7,8,11}), the maximum element
+of the fourth Frobenius orbit in ℤ₁₃:
 
-- **Δm²_atm = 120·m_ν² = (11²−1)·m_ν² = 2.476×10⁻³ eV²** (Abw. 1.0 %) [K]
-- **Δm²_sol = (11/3)·m_ν² = (|ℤ₁₃|−2)/3·m_ν² = 7.565×10⁻⁵ eV²** (Abw. 0.46 %) [B]
-- Orbit₄ = 2⁻¹·Orbit₁ in ℤ₁₃ [B]; Orbit₃ {4,10,12} selbstinvers → Majorana-Charakter;
-  Σ(Orbit₃) = 26 = |GF(27)*| [B]
-- Neutrinomassen (normale Hierarchie): m₁ = 4.54 meV, m₃ = 9.81 meV, m₂ = 49.96 meV;
-  Σmᵢ = 64.3 meV < 120 meV (Planck 2018) [K]
-- Kohärente Venting-Amplitude **p_vent = 5/24 = |A₅:A₄| / Kissing(D₄)**, algebraisch
-  bewiesen via Branching-Rule ρ₄↓_A₄ = ρ₃^A₄ ⊕ ρ₁^A₄ [B]
-- SICC-Venting-Formel ≡ Standard-Oszillationsformel (kein freier Parameter) [K]
-- Mischungswinkel aus Orbit-2-Elementen: cos²(2π·2/13) ≈ sin²θ₁₂ (5.1 %),
-  cos²(2π·5/13) ≈ sin²θ₂₃ (2.8 %) [K]
-- m_ee ≈ 7.1 meV < 36 meV (KamLAND-Zen) [K]
+- **Δm²_atm = (11²−1)·m_ν² = 2.476×10⁻³ eV²** (dev. 1.0 %) [K]
+- **Δm²_sol = (11/3)·m_ν² = 7.565×10⁻⁵ eV²** (dev. 0.46 %) [B]
+- Orbit₃ {4,10,12} self-inverse → Majorana character; Σ(Orbit₃) = 26 = |GF(27)*| [B]
+- Neutrino masses (normal hierarchy): m₁=4.54 meV, m₃=9.81 meV, m₂=49.96 meV [K]
+- Venting amplitude p_vent = 5/24 proven algebraically; SICC formula ≡ standard
+  oscillation formula (no free parameter) [K]
 
-**Falsifizierbare Vorhersagen:** (1) m₁=4.54, m₃=9.81, m₂=49.96 meV — testbar via
-CMB-S4, Euclid; (2) Δm²_atm/Δm²_sol = 32.73 (gemessen: 33.20); (3) Sterile Neutrinos
-(falls existent) sind Majorana mit m_min = 4·m_ν = 18.2 meV — testbar via IceCube,
-SBN (Fermilab), BEST.  
-Prüfskript: `pruef_340_neutrino_galois.py` (10/10 Assertions).  
+**Falsifiable predictions:** m₁=4.54, m₃=9.81, m₂=49.96 meV (CMB-S4, Euclid);
+Δm²_atm/Δm²_sol = 32.73.  
+Check script: `pruef_340_neutrino_galois.py` (10/10 assertions).  
 → [DE](2/pdf/340_Neutrino_Galois_En.pdf) · [EN](2/pdf/340_Neutrino_Galois_En.pdf)
+
+### Doc. 341 — GF(27) in GALG: algebraic bridge FFGFT↔GALG (DE+EN, 8 pp. each)
+
+Algebraic comparison FFGFT ↔ Matzke's GALG framework (IPI exchange August 2026).
+
+- **Theorem A [B]:** G(3) ≅ M₂(GF(9)) ⊕ M₂(GF(9)) — 13 ∤ |GF(81)*| = 80, so
+  GF(27) structure is algebraically excluded in G(3). Doug's "Attempted 6561 with 0 found"
+  confirms this directly.
+- **Theorem B [B]:** G(6) ≅ M₈(GF(9)) — the 5-blade example has order 26; GF(27)
+  acts as an order structure via GF(3^k)*, not as a subfield (3 ∤ 8). Explicit
+  order-26 element constructed.
+- **Theorem C [B]:** The six vacuum candidates Vss[0..5] split into Z₃-fixed points
+  (even indices → massive sector) and Z₃-orbits (odd indices → massless sector),
+  agreeing with the Frobenius separation of Doc. 339.
+Check scripts: `pruef_341_gf27_in_galg.py`, `pruef_341_vakuum_witt_z3.py`  
+→ [DE](2/pdf/341_GF27_GALG_FFGFT_De.pdf) · [EN](2/pdf/341_GF27_GALG_FFGFT_En.pdf)
+
 
 
 ## New documents — v1.3.3 (23 August 2026)
