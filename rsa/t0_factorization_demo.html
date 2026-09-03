@@ -583,7 +583,7 @@
         </div>
       </div>
       <div class="examined-banner">
-        <span data-en="ξ-Werte im Vergleich: das Ergebnis haengt von ξ nicht ab" data-de="ξ-Werte im Vergleich: das Ergebnis haengt von ξ nicht ab">ξ-Werte im Vergleich: das Ergebnis haengt von ξ nicht ab</span>
+        <span data-en="ξ-Werte im Vergleich: das Ergebnis haengt von ξ nicht ab (Begruendung: Dok. 343, Klartext II)" data-de="ξ-Werte im Vergleich: das Ergebnis haengt von ξ nicht ab (Begruendung: Dok. 343, Klartext II)">ξ-Werte im Vergleich: das Ergebnis haengt von ξ nicht ab (Begruendung: Dok. 343, Klartext II)</span>
       </div>
       <p data-en="Interactive comparison of factorisation methods: trial division, Fermat, Pollard rho, Pollard p-1 and order finding" data-de="Interaktiver Vergleich von Faktorisierungsverfahren: Probedivision, Fermat, Pollard-Rho, Pollard p-1 und Ordnungssuche">Interactive comparison of factorisation methods: trial division, Fermat, Pollard rho, Pollard p-1 and order finding</p>
       
@@ -972,6 +972,13 @@
       // er stand in einer streng monoton fallenden Funktion von r und kann das
       // Maximum nicht verschieben. Die Resonanzwerte werden mitgezaehlt, damit
       // sichtbar bleibt, wie viele davon ueberhaupt von null verschieden sind.
+      // Warum (Dok. 343, Klartext II): Einrasten auf ein Verhaeltnis geschieht in
+      // Arnold-Zungen der Breite ~K^q. Mit K_eff = 2*pi*xi ~ 8.4e-4 (Dok. 328) ist
+      // die breiteste Zunge Delta(1/2) ~ 5.6e-8 -- fuenf Groessenordnungen unter der
+      // fraktalen Korrektur (1.05 %). Die Kopplung ist zu schwach, um eine Ordnung
+      // auszuwaehlen; die Ordnung r wird deshalb gesucht, nicht 'gehoert'.
+      // Aufwand O(r) hier; Pollard-rho bleibt mit O(n^(1/4)) das staerkste Verfahren
+      // dieser Seite. Ein Resonanzfilter kann das nicht unterbieten (Weyl, Dok. 316).
       _resonanz(r, xi) {
         const omega = 2 * Math.PI / r;
         return Math.exp(-((omega - Math.PI) ** 2) / (4 * Math.abs(xi)));
@@ -984,12 +991,13 @@
           if (g > 1 && g < n)
             return { it, factors: [g, n / g].sort((x, y) => x - y),
                      order: null, grund: 'gemeinsamer Teiler mit der Basis' };
-          let order = null;
+          let order = null, ar = 1;
           for (let r = 1; r <= 75000; r++) {
             it++;
             if (it % 4096 === 0 && performance.now() > deadline)
               return { it, factors: null, order: letzteOrdnung, grund: 'Zeitgrenze erreicht' };
-            if (this._modPow(a, r, n) === 1) { order = r; break; }
+            ar = this._modMul(ar, a, n);            // a^r iterativ: O(1) je Schritt statt O(log n)
+            if (ar === 1) { order = r; break; }
           }
           if (order === null) { grund = 'keine Ordnung innerhalb der Suchgrenze'; continue; }
           letzteOrdnung = order;
@@ -1628,8 +1636,8 @@
                 ? `${ms.res_at_order.toExponential(2)} ${currentLanguage === 'en' ? 'at r' : 'bei r'}=${ms.order}, ${ms.res_at_two.toExponential(2)} ${currentLanguage === 'en' ? 'at r=2' : 'bei r=2'}`
                 : '-'}<br>
             <em>${currentLanguage === 'en'
-                ? 'the resonance decreases monotonically in r; its maximum is at r=2 for every ξ and does not select the order'
-                : 'die Resonanz fällt monoton in r; ihr Maximum liegt für jedes ξ bei r=2 und wählt die Ordnung nicht aus'}</em>
+                ? 'the resonance decreases monotonically in r; its maximum is at r=2 for every ξ and does not select the order (coupling K<sub>eff</sub>=2πξ ≈ 8·10⁻⁴ is too weak to lock: Arnold tongue Δ(1/2) ≈ 6·10⁻⁸, Doc. 343)'
+                : 'die Resonanz fällt monoton in r; ihr Maximum liegt für jedes ξ bei r=2 und wählt die Ordnung nicht aus (Kopplung K<sub>eff</sub>=2πξ ≈ 8·10⁻⁴ ist zu schwach zum Einrasten: Arnold-Zunge Δ(1/2) ≈ 6·10⁻⁸, Dok. 343)'}</em>
             ${ms.grund ? `<br>${currentLanguage === 'en' ? 'Failure' : 'Fehlschlag'}: ${ms.grund}` : ''}
           </div>
         `;
