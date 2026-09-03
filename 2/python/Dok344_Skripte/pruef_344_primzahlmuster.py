@@ -90,9 +90,6 @@ def build_products(p_max):
                 if 1<v<1e8: vals.add(round(math.log(v),9))
     return sorted(vals)
 
-targets = {"43200":43200,"m_mu/m_e":mmu/me if (mmu:=105.6583755) else 0,
-           "(m_mu/me)²":(105.6583755/0.51099895)**2}
-# erneut klarer
 me,mmu=0.51099895,105.6583755
 targets={"43200":43200,"m_mu/m_e":mmu/me,"(m_mu/me)^2":(mmu/me)**2}
 
