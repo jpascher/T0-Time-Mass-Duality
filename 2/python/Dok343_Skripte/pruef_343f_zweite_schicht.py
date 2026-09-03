@@ -79,4 +79,20 @@ Deutung [S]:
   O1↔O3 unter k→−k ist algebraisch die Seesaw-Paarung aktiv↔steril. Dok. 340: m_min = 4 m_ν.
 Korrektur: Dok. 341 legt für Leptonen nur Ordnung 26 fest, keine Klasse.
 """)
+
+print("="*66); print("Aufloesung: Majorana/Dirac der aktiven Neutrinos (Dok. 340)"); print("="*66)
+print("Dok. 340: nu1 in O1 (Majorana), nu2 in O3 (Majorana), nu3 in O4 (Dirac).")
+print("Kein Widerspruch zu 343: der quadratische Charakter bestimmt die Eigenschaft")
+print("des Feldes -- ein Neutrino IN einem Majorana-Orbit IST Majorana, eines in")
+print("einem Dirac-Orbit IST Dirac. Alle drei aktiven Neutrinos sind besetzt.")
+print("Kein leerer Platz, kein steriles Neutrino aus dieser Algebra. [B]")
+import math
+mnu=4.54e-3
+mv=[mnu, (14/3)**0.5*mnu, 11*mnu]
+print(f"nu1(O1,Majorana): {mv[0]*1000:.2f} ueV")
+print(f"nu2(O3,Majorana): {mv[1]*1000:.2f} ueV")
+print(f"nu3(O4,Dirac):    {mv[2]*1000:.2f} ueV")
+print(f"Vorhersage [B]: nu3 hat keine Majorana-Phase.")
+print(f"m_ee nur von nu1,nu2: |m_ee| <= {(mv[0]+mv[1])*1000:.2f} meV (Dok.340: 7.1 meV)")
+print("IH staerker ausgeschlossen, weil nu3-Beitrag wegfaellt.")
 print("Alle Assertions bestanden.")
