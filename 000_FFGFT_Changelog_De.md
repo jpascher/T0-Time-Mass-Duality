@@ -3271,6 +3271,17 @@ Prüfskripte: `pruef_330_galois_massenverhaeltnis.py`, `pruef_331_xi_aus_galois.
 
 ---
 
+---
+
+## Bereinigung: a-Wrapper entfernt (3. September 2026)
+
+Die zehn Standalone-Wrapper `006a`, `060a`, `144a`, `170a`, `186a` (De/En) banden Original-PDFs aus
+`2/Sources/pdf_originals/` ein, das nie eingecheckt wurde. Ein automatischer Build am 1. Juni 2026
+(Commit 5e3f01b8) überschrieb alle zehn PDFs mit dem leeren `\includepdf`-Ergebnis (4755 Bytes,
+1 Seite). Auf Anweisung gelöscht: alle zehn `.tex`-Wrapper und `.pdf`-Dateien. Die Inhalte sind
+in den Hauptdokumenten (006, 060, 144, 170, 186) bzw. der Git-History erhalten.
+
+
 ## Dok. 342–343 und Korrekturen (3. September 2026)
 
 ### Dok. 342 — Faktorisierungsklassen in G(6) und die Harmonik der Primzahlen (DE+EN, je 10/9 S.)
@@ -3295,6 +3306,7 @@ Sätze A–I′ (alle Berechnungen in 2/python/Dok343_Skripte/):
 | B | Euler-Produkt hierarchisch nach k=ord_p(3); fraktale Dämpfung unterdrückt k≥7 | [B] |
 | C | Orbifold-Nullstellen bei s=2πik/ln3; keine Resonanz der Riemann-Nullstellen | [B] |
 | D | Sektorpaarung k↔−k → 4 Klassen auf 2 reduziert; keine Sub-Leptonen-Schicht | [B] |
+| D‴ | {f₁,f₂} Majorana-Schicht (Neutrinos; f₂=O₃ aktiv nach Dok. 340, f₁=O₁ offen — Profil steriler Neutrinos), {f₃,f₄} Dirac-Schicht (geladene Leptonen); Negation fᵢ↔gᵢ | [B]/[S] |
 | E | p=13 einzige Primzahl mit ord_p(3)=3 weltweit; Primen durch 3^k−1 erzwungen | [B] |
 | F | Euler-Faktor-Schwelle p*≈9,76 (s=2) = 7-limit; Produktdichte ab p_max≈30 auf Zufallsniveau | [B] |
 | G | Kopplungs-Dreiteilung gleich, Gesetz verschieden: Arnold K^q vs. Farey 1/q² | [B] |
@@ -3309,6 +3321,8 @@ Faktorisierung/Kopplung (Farey-Q_c=π/√6ε≈12,5 bei 1,05%).
 → [DE](2/pdf/343_Zeta_Galois_FFGFT_De.pdf) · [EN](2/pdf/343_Zeta_Galois_FFGFT_En.pdf)
 
 ### Korrekturen und Kalibrierungen (3. September 2026)
+
+**Dok. 340 (Neutrino-Galois)** — direkt überarbeitet (R108): ν₃ in Orbit 4 als Dirac-Neutrino; m_ee ohne m₃-Term, Obergrenze 14,4 meV; Vorhersage „sterile Neutrinos“ ersetzt durch „ν₃ Dirac, IH stärker ausgeschlossen“.
 
 **Dok. 186 (FFGFT-Photonik-Analyse)** — Vorbemerkungskasten eingefügt; Umbenennung auf
 Korpus-Schema `_De`/`_En`; Doppel-maketitle behoben. Prüfskript `pruef_343e_dok186_check.py`:
@@ -3339,15 +3353,30 @@ verschiedener Gegenstand, gleiche Auflösungsgrenze.
 
 ---
 
-### R104, R105 in Dok. 190 (3. September 2026)
+### R106–R109 in Dok. 190 (3. September 2026)
 
-**R104** — Primzahlerzwingung durch GF(3^k) [B]. Die physikalischen Primen {5,7,11,13}
+**R106** — Primzahlerzwingung durch GF(3^k) [B]. Die physikalischen Primen {5,7,11,13}
 sind durch die Primfaktorzerlegungen von 3^k−1 (k=3,4,5,6) vollständig und eindeutig
 erzwungen; p=13 ist die weltweit einzige Primzahl mit ord_p(3)=3. (Dok. 342–343)
 
-**R105** — ξ als Auflösungsboden [B/S]. Die Grenze k≈3–4 aus Satz F gilt für ε=1,05%
+**R107** — ξ als Auflösungsboden [B/S]. Die Grenze k≈3–4 aus Satz F gilt für ε=1,05%
 (eine fraktale Stufe, ≈100ξ); bei ε=ξ (Torusmoden-Linienbreite) bleibt der Galois-Raster
 bis k≥8 trennscharf und p*≈87. Photonische Hardware (Q>10⁶) löst ξ, nicht ξ². (Dok. 343 G′)
+
+**R108** — Dirac/Majorana-Zerlegung der GF(27)*-Klassen [B]. Sektorpaarung k↦−k und
+Majorana-Kriterium k↦k⁻¹ mod 13 (Dok. 340) zerlegen die vier primitiven Klassen deckungsgleich:
+{f₁,f₂} (Orbits O₁,O₃ = quadratische Reste mod 13) Majorana, {f₃,f₄} (O₂,O₄) Dirac (geladene Leptonen).
+Nummerierung vereinheitlicht nach der Polynomtabelle von Dok. 342 (Sektorpaarung f₁↔f₂, f₃↔f₄;
+Negation fᵢ↔gᵢ); Exponentenliste in Dok. 342 korrigiert. Folge für Dok. 340: ν₁∈O₁, ν₂∈O₃ Majorana,
+ν₃∈O₄ Dirac-Neutrino [B] — keine Majorana-Phase, m_ee nur aus ν₁,ν₂ (≤14,4 meV), IH stärker
+ausgeschlossen; sterile Neutrinos entfallen als eigene Vorhersage. Dok. 340 direkt überarbeitet.
+(Dok. 343 D‴, pruef_343f)
+
+**R109** — Neutrinoteil von Dok. 006 nicht tragfähig [X]. Die „direkte Methode“ E=1/ξᵢ ist keine
+Rechnung (inverse Hierarchie, dimensionslos; MeV-Werte daneben sind Messwerte). Die Neutrinomassen
+9,1/1,9/18,0 meV folgen aus drei unverträglichen Vorschriften; p_ντ=25/9 ist r_τ in der
+Exponentenspalte. Yukawa-Methode für geladene Leptonen/Quarks bleibt gültig. R105-[K] für Dok. 006
+eingeschränkt auf rᵢ, pᵢ und Yukawa. Maßgeblich für Neutrinos: Dok. 340. (Dok. 343 D‴)
 
 
 ### R100, R101 in Dok. 190 (28. August 2026)
@@ -3355,3 +3384,23 @@ bis k≥8 trennscharf und p*≈87. Photonische Hardware (Q>10⁶) löst ξ, nich
 **R100** — ξ als Galois-Zahl [K]. Die Kernidentität $(r_\mu/r_e)^2/\xi = |\text{GF}(9)^*|^2\cdot5^2\cdot|\text{GF}(27)|=43200$ leitet $\xi=4/30000$ aus GF$(3^n)$-Gruppenordnungen und Torus-Wicklungszahlen ab — ohne freie Parameter. Alle sechs Wicklungszahlen $(n_{\theta,g}, n_{\phi,g})$ sind Galois-Ordnungen oder deren Euler-$\varphi$-Werte.
 
 **R101** — $1/\alpha=3700/27$ aus Galois [K]. Zwei Identitäten ($\xi$-Herleitung + $m_e m_\mu=2\cdot27$ MeV²) in $\alpha=\xi E_0^2/K_\text{frak}$ eingesetzt; $|\text{GF}(27)|=27$ kürzt sich heraus. Abweichung 7,6 ppm. Kein $\xi$, kein $v$, kein $m_e$ als expliziter Eingang — nur MeV als SI-Brücke (Dok. 338, pruef\_332).
+
+## Dok. 344–348 und Korrekturen (4. September 2026)
+
+### Neue Dokumente
+
+**Dok. 344** — Furey-Fermionen in GALG und FFGFT (DE+EN, je 8/7 S.) — Su[0]=Vss[0] exakt: Neutrino = Vakuumzustand des Clifford-Fock-Raums [B]. N_k-Idempotente, Tripotente Vakua, jE7-Projektor. Satz H: Sektorpaarung k↦−k hat keinen Fixpunkt unter primitiven Klassen → alle Neutrinos Dirac [B/S]. nEXO (5–20 meV) entscheidet. Prüfskript: pruef_344_furey_galg.py.
+
+**Dok. 345** — FFGFT im Literaturvergleich (DE+EN, 8/6 S.) — Systematischer Vergleich mit Furey 2015, Dixon 1994, Froggatt-Nielsen 1979, Todorov/Dubois-Violette, Koide, Seesaw. Froggatt-Nielsen: ε^{q_i} frei vs. ξ^{p_i} erzwungen [K]. Nach Dok. 346/347 beim Ladungsinhalt mit Furey/Dixon gleichauf. 14 Literaturbelege geprüft am 4. September 2026.
+
+**Dok. 346** — Ladungsquantisierung aus GF(27)* (DE+EN, 7/6 S.) — Zwei Galois-Eigenschaften klassifizieren alle SM-Fermionen ohne freie Parameter [B]: (1) Quadratischer Rest mod 13 ↔ elektrisch neutral; (2) N mod 3 ↔ Farbladung. Verbotene Kombination QR+Triplett algebraisch erzwungen. Legendre-Symbol (k/13) liefert Q ∈ {0,±1/3,±2/3,±1} [B]. Prüfskript: pruef_346_ladungsquantisierung.py.
+
+**Dok. 347** — Gell-Mann-Nishijima aus der Galois-Struktur (DE+EN, 7/6 S.) — Q = I₃ + Y/2 algebraisch hergeleitet [B]: Y = −1 + (4/3)·NQR aus Legendre-Symbol (Dok. 346), I₃ = ±1/2 aus jE7-Projektor (Dok. 344). Alle vier Fermionladungen {0, −1, +2/3, −1/3} exakt, kein freier Parameter. Satz E [S] aus Dok. 346 geschlossen. Offen [S]: SU(2)_L-Chiralität (braucht Cl(6)-Brücke); CKM-Mischungswinkel (Permutationsmatrix [B], Winkel offen). Prüfskript: pruef_347_gell_mann.py.
+
+**Dok. 348** — Generationenstruktur und Kopplungsmatrix aus GF(27) (DE+EN, 7/6 S.) — Nullstellen-Orbits der irreduziblen Polynome f₁–f₄ sind echte Frobenius-Orbits; drei Elemente = drei Generationen [B]. Spur-Bilinearform Tr_{GF(27)/GF(3)}(g^{k+j}): f₃×f₄ (geladene Leptonen × Quarks) = Permutationsmatrix, Gen.2↔Gen.3-Tausch algebraisch erzwungen [B]. f₁×f₃ (Neutrinos × geladene Leptonen): Einträge 1/√2 [B], konsistent mit großen PMNS-Winkeln. CKM-Komplexität: δ_CP ≈ 68° nicht aus GF(27)* herleitbar (ℤ₃-Phasen geben 120°); als Phasenanker verwendbar wie v = 246 GeV. Prüfskript: pruef_348_ckm.py.
+
+### R110–R111 in Dok. 190 (4. September 2026)
+
+**R110** — Nachtragkästen zu ν₃ Dirac-Neutrino (Dok. 343 Satz D‴, R108): Dok. 320 (Spektraltheorie) und Dok. 022 (QFT-ML-Addendum) mit Hinweisen versehen, dass die Galois-Algebra von Dok. 340/343 maßgeblich ist.
+
+**R111** — Ladungsquantisierung, Gell-Mann-Nishijima und Generationenstruktur aus GF(27)* [B] (Dok. 344–348, 4. September 2026). Vollständige SM-Fermion-Klassifikation aus zwei Galois-Eigenschaften; Q = I₃ + Y/2 algebraisch hergeleitet; Permutationsmatrix und 1/√2-Kopplungsstruktur aus Spur-Bilinearform; CKM-Komplexität analysiert. Prüfskripte: pruef_346, pruef_347, pruef_348, alle Assertions bestanden. Offene Brücken Ladungsquantisierung und Gell-Mann-Nishijima geschlossen.
