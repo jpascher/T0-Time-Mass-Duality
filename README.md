@@ -1,7 +1,7 @@
 # T0 Time-Mass Duality · FFGFT
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17390357.svg)](https://doi.org/10.5281/zenodo.17390357)
-**Version: v1.3.7** (3 September 2026) — supersedes v1.3.6
+**Version: v1.3.8** (4 September 2026) — supersedes v1.3.7
 
 **FFGFT — Fundamental Fractal-Geometric Field Theory** shows:
 All Standard Model constants follow from a single dimensionless
@@ -54,6 +54,9 @@ what is input, what follows, is always clearly declared.
 | FFGFT↔GALG: T_Planck as legitimate SI interface; time emergence | [Dok. 337](2/pdf/337_Zeit_Emergenz_FFGFT_GALG_En.pdf) |
 | Harmonic primes {5,7,11,13} forced by 3^k−1; p=13 unique prime with ord=3 worldwide [B] | [Doc. 342](2/pdf/342_Faktorisierung_Harmonik_En.pdf) / [343](2/pdf/343_Zeta_Galois_FFGFT_En.pdf) |
 | ζ_{T⁴/Z₃}(s)=(1−3⁻ˢ)ζ(s); Euler factor threshold p*≈9.76 = 7-limit; ξ as resolution floor [B] | [Doc. 343](2/pdf/343_Zeta_Galois_FFGFT_En.pdf) |
+| Fermion charge quantisation from Legendre symbol mod 13; Q∈{0,±1/3,±2/3,±1} forced [B] | [Doc. 346](2/pdf/346_Ladungsquantisierung_Galois_En.pdf) |
+| Gell-Mann–Nishijima Q=I₃+Y/2 from jE7 projector and Legendre symbol [B] | [Doc. 347](2/pdf/347_Gell_Mann_Nishijima_Galois_En.pdf) |
+| Coupling matrix f₃×f₄ = permutation matrix; f₁×f₃ entries 1/√2; 3 generations from Frobenius [B] | [Doc. 348](2/pdf/348_Generationen_Orbits_En.pdf) |
 | SI bridge: all constants from ξ | [Dok. 013](2/pdf/013_T0_SI_En.pdf) |
 | E = mc² = E = m: unit identity | [Dok. 077](2/pdf/077_E-mc2_En.pdf) |
 | Natural units, static and correction-free | [Dok. 261](2/pdf/261_NatEinheiten_Statisch_En.pdf) |
@@ -550,6 +553,62 @@ Prüfskript: `pruef_332_krueger_periodizitaet.py`.
 
 ---
 
+
+---
+
+
+## New documents — v1.3.8 (4 September 2026)
+
+### Doc. 344 — Furey fermions in GALG and FFGFT (DE+EN, 8/7 pp.)
+
+Convergence of FFGFT and Matzke's GALG on the same algebraic object.
+Su[0] = Vss[0] exactly: neutrino = vacuum state of Clifford-Fock space [B].
+N_k idempotents, tripotent vacua, jE7 projector. Theorem H: sector pairing
+k↦−k has no fixed points among primitive classes → all neutrinos Dirac [B/S].
+nEXO (5–20 meV) decides.
+Check script: `pruef_344_furey_galg.py`.
+→ [DE](2/pdf/344_Furey_GALG_FFGFT_De.pdf) · [EN](2/pdf/344_Furey_GALG_FFGFT_En.pdf)
+
+### Doc. 345 — FFGFT in literature comparison (DE+EN, 8/6 pp.)
+
+Systematic comparison with Furey 2015, Dixon 1994, Froggatt-Nielsen 1979,
+Todorov/Dubois-Violette, Koide, Seesaw. At charge content now equal with Furey/Dixon
+after Docs. 346/347. Froggatt-Nielsen: same hierarchy principle (ε^{q_i} vs ξ^{p_i}),
+but FFGFT forces exponents from Galois group orders [K]. All 14 literature references
+verified 4 September 2026 against arXiv, INSPIRE, APS.
+→ [DE](2/pdf/345_FFGFT_Literaturvergleich_De.pdf) · [EN](2/pdf/345_FFGFT_Literaturvergleich_En.pdf)
+
+### Doc. 346 — Charge quantisation from GF(27)* (DE+EN, 7/6 pp.)
+
+Two Galois properties classify all Standard Model fermions without free parameters:
+(1) Quadratic residue mod 13 ↔ electric neutrality [B]; (2) N mod 3 ↔ colour charge [B].
+Combination: QR+singlet = neutrino; NQR+singlet = charged lepton; NQR+triplet = quark;
+QR+triplet = forbidden (no coloured neutral fermion). Legendre symbol (k/13) gives
+charge quantisation Q ∈ {0,±1/3,±2/3,±1} from algebra alone [B].
+Check script: `pruef_346_ladungsquantisierung.py`.
+→ [DE](2/pdf/346_Ladungsquantisierung_Galois_De.pdf) · [EN](2/pdf/346_Ladungsquantisierung_Galois_En.pdf)
+
+### Doc. 347 — Gell-Mann–Nishijima from Galois structure (DE+EN, 7/6 pp.)
+
+Q = I₃ + Y/2 algebraically derived [B]:
+Y = −1 + (4/3)·NQR from Legendre symbol (Doc. 346); I₃ = ±1/2 from jE7 projector (Doc. 344).
+All four fermion charges {0, −1, +2/3, −1/3} exact, no free parameters.
+Theorem E [S] of Doc. 346 closed. Open: SU(2)_L chirality (needs Cl(6) bridge);
+CKM mixing angles (permutation matrix established [B], angles [S]).
+Check script: `pruef_347_gell_mann.py`.
+→ [DE](2/pdf/347_Gell_Mann_Nishijima_Galois_De.pdf) · [EN](2/pdf/347_Gell_Mann_Nishijima_Galois_En.pdf)
+
+### Doc. 348 — Generation structure and coupling matrix from GF(27) (DE+EN, 7/6 pp.)
+
+Root orbits of irreducible polynomials f₁–f₄ are genuine Frobenius orbits;
+three elements = three generations [B]. Trace bilinear form
+Tr_{GF(27)/GF(3)}(g^{k+j}) gives coupling structure:
+f₃×f₄ (charged leptons × quarks) = permutation matrix [B]; Gen.2↔Gen.3 swap forced.
+f₁×f₃ (neutrinos × charged leptons): 1/√2 weights [B]; consistent with large PMNS angles.
+CKM complexity analysed: CP phase δ_CP ≈ 68° not derivable from GF(27)* (ℤ₃ phases give 120°);
+usable as phase anchor (same status as v = 246 GeV).
+Check script: `pruef_348_ckm.py`.
+→ [DE](2/pdf/348_Generationen_Orbits_De.pdf) · [EN](2/pdf/348_Generationen_Orbits_En.pdf)
 
 ## New documents — v1.3.7 (3 September 2026)
 
