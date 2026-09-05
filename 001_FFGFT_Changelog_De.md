@@ -6,6 +6,21 @@
 Neue Einträge werden hier oben eingefügt (neueste zuerst).
 
 ---
+---
+
+## 5. September 2026 — Dok. 006 Sprachkorrektur v (R112)
+
+### Dok. 006 — v = 246 GeV präzisiert (De+En)
+
+Zwei Stellen in Dok. 006 ergänzt (R112):
+
+- Zeile „wobei v = 246 GeV der Higgs-Vakuumerwartungswert ist" →
+  Zusatz: „(SM-Definition: v ≡ (√2·G_F)^(−1/2); kein unabhängiges Observable, Dok. 351/R112)"
+- Zeile „Wir verwenden v = 246 GeV" →
+  Zusatz: „(SM-Definition aus G_F, Dok. 351/R112)"
+
+Keine Zahlenänderung. Dok. 231 und 344 waren bereits korrekt formuliert.
+
 
 ## 5. September 2026 — Dok. 351, R112, R113
 
