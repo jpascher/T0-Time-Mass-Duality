@@ -103,51 +103,52 @@ print("Alle Assertionen bestanden. [PASS]")
 
 # ──────────────────────────────────────────────────────────────────────────────
 # ABSCHNITT 2: Reste in Einheiten von ξ — SI-Projektions-Ordnung
+# ────────
+# ──────────────────────────────────────────────────────────────────────────────
+# ABSCHNITT 3: Reale σ-Abstände mit Eides-korrigierter Unsicherheit
 # ──────────────────────────────────────────────────────────────────────────────
 
 print()
 print(SEP)
-print("RESTE IN EINHEITEN VON ξ — SI-PROJEKTIONS-ORDNUNG")
-print("Dok. 085/306/333: SI-Projektion S¹_m → ℝ_t trägt Fehler der Ordnung ξ")
+print("REALE σ-ABSTÄNDE MIT EIDES-KORRIGIERTER UNSICHERHEIT")
+print("CODATA σ_rel(mμ/mₑ) = 2.18e-8; real ≈ 1.16e-7 (Eides 2026 + α-Spannung)")
 print(SEP)
 
-xi = Fraction(4, 30000)
-xi_pct = float(xi) * 100   # ξ als Prozentzahl
+s_rel_ratio_codata = 2.18e-8
+s_rel_ratio_real   = 1.16e-7   # Eides + α-Spannung Rb/Cs
 
-rest_prod_pct = float((PDG_prod - GALOIS_PROD) / GALOIS_PROD * 100)
-rest_sq_pct   = float((PDG_sq   - GALOIS_SQ)   / GALOIS_SQ   * 100)
+# (mμ/mₑ)² σ
+diff_sq = abs(float(PDG_sq - GALOIS_SQ))
+sigma_sq_codata = diff_sq / (float(PDG_sq) * 2 * s_rel_ratio_codata)
+sigma_sq_real   = diff_sq / (float(PDG_sq) * 2 * s_rel_ratio_real)
 
-n_xi_prod = rest_prod_pct / xi_pct
-n_xi_sq   = rest_sq_pct   / xi_pct
+# Produkt σ
+m_e_val = float(m_e); m_mu_val = float(m_mu)
+s_me = 1.5e-10
+s_mmu_codata = 2.3e-6
+s_mmu_real   = m_mu_val * s_rel_ratio_real
+import math as _math
+s_prod_codata = _math.sqrt((m_mu_val*s_me)**2 + (m_e_val*s_mmu_codata)**2)
+s_prod_real   = _math.sqrt((m_mu_val*s_me)**2 + (m_e_val*s_mmu_real)**2)
+diff_prod = abs(float(PDG_prod - GALOIS_PROD))
+sigma_prod_codata = diff_prod / s_prod_codata
+sigma_prod_real   = diff_prod / s_prod_real
 
-print(f"\nξ                        = {float(xi):.8f}  =  {xi_pct:.6f}%")
-print(f"100·ξ (fraktal-rekursiv) = {float(100*xi):.6f}  =  {100*xi_pct:.4f}%")
-print()
-print(f"Rest  mₑ·mμ  vs. 54:     {rest_prod_pct:+.6f}%  =  {n_xi_prod:+.2f}·ξ")
-print(f"Rest (mμ/mₑ)² vs. 43200: {rest_sq_pct:+.6f}%  =  {n_xi_sq:+.2f}·ξ")
-print()
-print("Erwartete Ordnungen (Dok. 085/306/333):")
-print(f"  SI-Projektion:          Ordnung  ξ   =  {xi_pct:.6f}%")
-print(f"  Fraktal-rekursiv:       Ordnung 100ξ =  {100*xi_pct:.4f}%")
-print()
-
-# Assertion: Produktrest in Ordnung ξ (0.5 bis 5 × ξ)
-assert 0.3 < abs(n_xi_prod) < 5.0, \
-    f"Produktrest {n_xi_prod:.2f}·ξ nicht in erwarteter Ordnung ξ"
-print(f"mₑ·mμ Rest ≈ {n_xi_prod:.2f}·ξ  → Ordnung ξ (SI-Projektions-Approximation)  [PASS]")
-
-# Assertion: Quadratrest NICHT in Ordnung ξ sondern viel größer
-assert abs(n_xi_sq) > 20, \
-    f"Quadratrest {n_xi_sq:.2f}·ξ unerwartet klein"
-print(f"(mμ/mₑ)² Rest ≈ {n_xi_sq:.1f}·ξ  → höhere Ordnung, nicht reine SI-Projektion  [PASS]")
+print(f"\n{'Vergleich':<25} {'CODATA-σ':>12} {'Real-σ (Eides)':>16} {'Faktor'}")
+print("-"*60)
+print(f"{'(mμ/mₑ)² vs. 43200':<25} {sigma_sq_codata:>12.0f} {sigma_sq_real:>16.0f} {sigma_sq_codata/sigma_sq_real:.1f}×")
+print(f"{'mₑ·mμ vs. 54 MeV²':<25} {sigma_prod_codata:>12.0f} {sigma_prod_real:>16.0f} {sigma_prod_codata/sigma_prod_real:.1f}×")
 
 print()
 print("INTERPRETATION:")
-print("  Das Produkt mₑ·mμ = 54 MeV² ist die Galois-Identität deren Rest")
-print("  in der Größenordnung ξ liegt — genau der SI-Projektions-Approximation")
-print("  aus Dok. 085/306/333 entsprechend. Der Rest 0.016% ≈ 1.2·ξ ist damit")
-print("  strukturell erklärbar als Übergangs-Approximation S¹_m → ℝ_t.")
-print("  Der quadratische Rest (mμ/mₑ)² ≈ 78·ξ liegt in höherer Ordnung")
-print("  (fraktal-rekursive Korrektur, Dok. 295/146/338).")
+print("  CODATA überschätzt die Präzision von mμ/mₑ um Faktor 5-6 (Eides 2026).")
+print("  Mit realer Unsicherheit:")
+print(f"    (mμ/mₑ)² Rest: {sigma_sq_real:.0f}σ  statt {sigma_sq_codata:.0f}σ  — immer noch physikalisch")
+print(f"    mₑ·mμ Rest:    {sigma_prod_real:.0f}σ  statt {sigma_prod_codata:.0f}σ  — immer noch physikalisch")
+print("  Beide Reste bleiben weit außerhalb jeder Messtoleranz.")
+print("  Die σ-Zahl ist 5× kleiner — der physikalische Befund ist derselbe.")
+
+assert sigma_sq_real > 1000, f"(mμ/mₑ)² Rest {sigma_sq_real:.0f}σ — unerwartet klein"
+assert sigma_prod_real > 100, f"Produkt-Rest {sigma_prod_real:.0f}σ — unerwartet klein"
 print(f"\n{SEP}")
 print("Alle Assertionen bestanden. [PASS]")
