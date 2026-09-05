@@ -7,6 +7,60 @@ Neue Einträge werden hier oben eingefügt (neueste zuerst).
 
 ---
 
+## 5. September 2026 — Dok. 351, R112, R113
+
+### Dok. 351 — Modellabhängigkeit der PDG-Vergleichswerte (DE+EN, je ~8 S.)
+
+Untersuchung wie die PDG-Vergleichswerte entstehen: Rohobservable, Theorieformeln,
+irrationale Faktoren. Alle 21 Primärquellen am 5.9.2026 verifiziert.
+
+**Hauptbefunde:**
+
+- **mμ/mₑ** stammt allein aus der Myonium-HFS (LAMPF 1999, Liu et al.); Extraktion über
+  ν_F ∝ α² — der Anker enthält α implizit. CODATA unterschätzt die Theorieunsicherheit
+  laut Eides (2026) um Faktor 5–10 (271–515 Hz statt 51 Hz). Absolut: ±0,010 auf
+  (mμ/mₑ)² = 42753 — das Residuum 447 bleibt 45 000σ.
+- **α:** Rb (Morel 2020) und Cs (Parker 2018) widersprechen sich um >5σ;
+  CODATA-Mittel 137,035 999 177 deckt keine der Messungen ab.
+- **v = 246 GeV** wird nie gemessen: v ≡ (√2·G_F)^(−1/2) ist eine SM-Definition
+  (Higgs-Mechanismus). Faktoren 192π³ und √2 in den Extraktionsformeln sind irrationale
+  SM-Konventionen, nicht Messwerte.
+- **G_F:** Δq = −0,44 % Theoriekorrektur; hadronische VP mit 4,7σ CMD-3-Spannung.
+- **mτ:** zwei Methoden (Schwellenscan BESIII 1776,91; Pseudomasse Belle II 1777,09
+  mit m_ντ = 0), PDG-Mittel 1776,93(9); FFGFT 1776,97 liegt 0,4σ — nicht entschieden.
+- **Rest (mμ/mₑ)² = 446,9:** Exakte Rechnung zeigt 240 000σ der CODATA-Unsicherheit.
+  Kein Messfehler erklärt ihn — er ist physikalisch (fraktal-rekursive Korrektur
+  ~100ξ + Projektionsapproximation S¹_m→ℝ_t).
+- **Fehlerakkumulation:** Schon bei mμ ergeben drei Rechenwege drei verschiedene Reste
+  (+0,52 %, −0,15 %, +1,37 %). Buchführungsregel: jede Vorhersage nennt Anker, Schritte,
+  Korrekturen, Extraktionsmethode.
+
+Anhang: Tabelle aller betroffenen Ableitungsketten — kein Zahlenwert ändert sich.
+
+### R112 [Q] — v = 246 GeV ist SM-Definition, keine Messung (5. Sept. 2026)
+
+v ≡ (√2·G_F)^(−1/2) folgt aus dem SM-Higgs-Mechanismus. Gemessen ist nur τ_μ;
+G_F wird daraus über τ_μ⁻¹ = G_F²mμ⁵/(192π³)·(1+Δq) mit Sirlin-Absorption
+elektroschwacher Korrekturen extrahiert. Irrationale Faktoren 192π³ und √2 stammen
+aus der SM-Formulierung.
+
+**Sprachkorrektur korpusweit:** „v = 246 GeV (gemessen)" → „v = 246 GeV (SM-Definition aus G_F)"
+Betrifft: Dok. 006, 319, R104.
+
+**Neuer offener Punkt [S]:** τ_μ direkt aus FFGFT, ohne Umweg über G_F und v —
+einziger konventionsfreier Test des schwachen Sektors.
+
+### R113 [Q] — Anker mμ/mₑ QED-abhängig; Vergleichswerte nicht theoriefrei (5. Sept. 2026)
+
+mμ/mₑ ist QED-abhängig (ν_F ∝ α²; Eides 2026: CODATA unterschätzt Theorieunsicherheit
+5–10×). α hat keine eindeutigen Messwert unter 1 ppb (Rb/Cs 5σ-Spannung). mτ: zwei
+Methoden, PDG-Mittel 1776,93(9), FFGFT 0,4σ. Exakte Rechnung: Rest (mμ/mₑ)² = 240 000σ
+ist physikalisch. Sprachkorrektur: „modellunabhängig gemessen" → „modellärmster
+verfügbarer Wert". Buchführungsregel für alle Vorhersagen.
+
+Nächste freie Registernummer: R114.
+
+
 ## 1. September 2026 — Dok. 341, R105, Galois-Bündel v2
 
 ### Dok. 341 — GF(27) in GALG: algebraische Brücke FFGFT↔GALG (DE+EN)
