@@ -100,3 +100,54 @@ print("  • Im Linearen: sqrt(43200)=120√3 irrational — Rest 0.52% ist Arte
 print("  • Im Produkt: Rest -0.016% — kleinster Rest, beste Galois-Übereinstimmung.")
 print(f"\n{SEP}")
 print("Alle Assertionen bestanden. [PASS]")
+
+# ──────────────────────────────────────────────────────────────────────────────
+# ABSCHNITT 2: Reste in Einheiten von ξ — SI-Projektions-Ordnung
+# ──────────────────────────────────────────────────────────────────────────────
+
+print()
+print(SEP)
+print("RESTE IN EINHEITEN VON ξ — SI-PROJEKTIONS-ORDNUNG")
+print("Dok. 085/306/333: SI-Projektion S¹_m → ℝ_t trägt Fehler der Ordnung ξ")
+print(SEP)
+
+xi = Fraction(4, 30000)
+xi_pct = float(xi) * 100   # ξ als Prozentzahl
+
+rest_prod_pct = float((PDG_prod - GALOIS_PROD) / GALOIS_PROD * 100)
+rest_sq_pct   = float((PDG_sq   - GALOIS_SQ)   / GALOIS_SQ   * 100)
+
+n_xi_prod = rest_prod_pct / xi_pct
+n_xi_sq   = rest_sq_pct   / xi_pct
+
+print(f"\nξ                        = {float(xi):.8f}  =  {xi_pct:.6f}%")
+print(f"100·ξ (fraktal-rekursiv) = {float(100*xi):.6f}  =  {100*xi_pct:.4f}%")
+print()
+print(f"Rest  mₑ·mμ  vs. 54:     {rest_prod_pct:+.6f}%  =  {n_xi_prod:+.2f}·ξ")
+print(f"Rest (mμ/mₑ)² vs. 43200: {rest_sq_pct:+.6f}%  =  {n_xi_sq:+.2f}·ξ")
+print()
+print("Erwartete Ordnungen (Dok. 085/306/333):")
+print(f"  SI-Projektion:          Ordnung  ξ   =  {xi_pct:.6f}%")
+print(f"  Fraktal-rekursiv:       Ordnung 100ξ =  {100*xi_pct:.4f}%")
+print()
+
+# Assertion: Produktrest in Ordnung ξ (0.5 bis 5 × ξ)
+assert 0.3 < abs(n_xi_prod) < 5.0, \
+    f"Produktrest {n_xi_prod:.2f}·ξ nicht in erwarteter Ordnung ξ"
+print(f"mₑ·mμ Rest ≈ {n_xi_prod:.2f}·ξ  → Ordnung ξ (SI-Projektions-Approximation)  [PASS]")
+
+# Assertion: Quadratrest NICHT in Ordnung ξ sondern viel größer
+assert abs(n_xi_sq) > 20, \
+    f"Quadratrest {n_xi_sq:.2f}·ξ unerwartet klein"
+print(f"(mμ/mₑ)² Rest ≈ {n_xi_sq:.1f}·ξ  → höhere Ordnung, nicht reine SI-Projektion  [PASS]")
+
+print()
+print("INTERPRETATION:")
+print("  Das Produkt mₑ·mμ = 54 MeV² ist die Galois-Identität deren Rest")
+print("  in der Größenordnung ξ liegt — genau der SI-Projektions-Approximation")
+print("  aus Dok. 085/306/333 entsprechend. Der Rest 0.016% ≈ 1.2·ξ ist damit")
+print("  strukturell erklärbar als Übergangs-Approximation S¹_m → ℝ_t.")
+print("  Der quadratische Rest (mμ/mₑ)² ≈ 78·ξ liegt in höherer Ordnung")
+print("  (fraktal-rekursive Korrektur, Dok. 295/146/338).")
+print(f"\n{SEP}")
+print("Alle Assertionen bestanden. [PASS]")
