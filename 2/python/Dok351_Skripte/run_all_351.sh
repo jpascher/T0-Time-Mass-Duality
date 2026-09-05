@@ -5,3 +5,4 @@ echo "=== Dok. 351 Prüfskripte ==="
 python3 pruef_351_rationale_vergleiche.py
 echo ""
 echo "=== Fertig ==="
+python3 pruef_351_generationsdifferenz.py
