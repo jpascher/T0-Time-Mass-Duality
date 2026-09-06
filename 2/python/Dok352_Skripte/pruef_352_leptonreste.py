@@ -113,7 +113,7 @@ dc_F, th_F = dc_theta(r['tau']*xi**p['tau'], r['e']*xi**p['e'], r['mu']*xi**p['m
 check("d/c PDG",   dc_P, 1.41420, tol=0.00002)
 check("d/c FFGFT", dc_F, 1.41649, tol=0.0005)
 check("theta PDG   [rad]", th_P, 0.22223, tol=0.00005)
-check("theta FFGFT [rad]", th_F, 0.22154, tol=0.001)
+check("theta FFGFT [rad]", th_F, 0.22099, tol=0.0001)
 check("theta A110=2/9 [rad]", 2/9, 0.22222, tol=0.00005)
 check("d/c-sqrt2 PDG   [×xi]", (dc_P-math.sqrt(2))/xi, -0.098, tol=0.005)
 check("d/c-sqrt2 FFGFT [×xi]", (dc_F-math.sqrt(2))/xi, +17.09, tol=0.1)
