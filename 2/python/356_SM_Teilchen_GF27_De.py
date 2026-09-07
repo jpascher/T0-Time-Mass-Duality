@@ -44,7 +44,7 @@ def arc_fill(cx, cy, r_out, r_in, a1_deg, a2_deg, col):
     p.close()
     rgb(col); c.drawPath(p, stroke=0, fill=1)
 
-def fermion(cx, cy, sym, q, yv, orbit_col, gen3=False,
+def fermion(cx, cy, sym, q, yv, yr, orbit_col, gen3=False,
             nu_right=False, color_ring=False):
     # Radien von innen nach außen (physikalisch korrekt):
     # Innenkreis: weiß
@@ -78,12 +78,15 @@ def fermion(cx, cy, sym, q, yv, orbit_col, gen3=False,
     dr = tuple(max(0, x-0.3) for x in orbit_col)
     srgb(dr); c.setLineWidth(1.5); c.circle(cx, cy, Ro, stroke=1, fill=0)
 
-    # 6. Text
+    # 6. Text im Innenkreis: Symbol + Q
     c.setFillColorRGB(0.05,0.05,0.05)
     c.setFont("Inter-Bold", 14); c.drawCentredString(cx, cy+5, sym)
     c.setFont("Helvetica", 8)
-    c.drawCentredString(cx, cy-5,  f"Q={q}")
-    c.drawCentredString(cx, cy-14, f"Y={yv}")
+    c.drawCentredString(cx, cy-6,  f"Q={q}")
+    # YL/YR links neben dem Kreis
+    lx = cx - Ro - 52
+    c.drawString(lx, cy+3,  f"YL={yv}")
+    c.drawString(lx, cy-8,  f"YR={yr}")
 
     # 7. Gen3 — gestrichelt ganz außen
     if gen3:
@@ -137,21 +140,21 @@ c.drawCentredString(LBL_W+FW/2, ROW3+R+PAD+6, "SU(2)L-Dublett = Sd-Sektor [B] Do
 
 # Teilchen
 parts = [
-    (0,ROW1,"ν",  "0",   "-1",  BLUE_DARK, False,True, False),
-    (1,ROW1,"νμ", "0",   "-1",  BLUE_MID,  False,True, False),
-    (2,ROW1,"ντ", "0",   "-1",  BLUE_DARK, True, True, False),
-    (0,ROW2,"e",  "-1",  "-1",  BLUE_DARK, False,False,False),
-    (1,ROW2,"μ",  "-1",  "-1",  BLUE_MID,  False,False,False),
-    (2,ROW2,"τ",  "-1",  "-1",  BLUE_DARK, True, False,False),
-    (0,ROW3,"u",  "+2/3","+1/3",GREEN_DARK,False,False,True),
-    (1,ROW3,"c",  "+2/3","+1/3",GREEN_MID, False,False,True),
-    (2,ROW3,"t",  "+2/3","+1/3",GREEN_DARK,True, False,True),
-    (0,ROW4,"d",  "-1/3","+1/3",GREEN_DARK,False,False,True),
-    (1,ROW4,"s",  "-1/3","+1/3",GREEN_MID, False,False,True),
-    (2,ROW4,"b",  "-1/3","+1/3",GREEN_DARK,True, False,True),
+    (0,ROW1,"ν",  "0",   "-1",  "—",    BLUE_DARK, False,True, False),
+    (1,ROW1,"νμ", "0",   "-1",  "—",    BLUE_MID,  False,True, False),
+    (2,ROW1,"ντ", "0",   "-1",  "—",    BLUE_DARK, True, True, False),
+    (0,ROW2,"e",  "-1",  "-1",  "-2",   BLUE_DARK, False,False,False),
+    (1,ROW2,"μ",  "-1",  "-1",  "-2",   BLUE_MID,  False,False,False),
+    (2,ROW2,"τ",  "-1",  "-1",  "-2",   BLUE_DARK, True, False,False),
+    (0,ROW3,"u",  "+2/3","+1/3","+4/3", GREEN_DARK,False,False,True),
+    (1,ROW3,"c",  "+2/3","+1/3","+4/3", GREEN_MID, False,False,True),
+    (2,ROW3,"t",  "+2/3","+1/3","+4/3", GREEN_DARK,True, False,True),
+    (0,ROW4,"d",  "-1/3","+1/3","-2/3", GREEN_DARK,False,False,True),
+    (1,ROW4,"s",  "-1/3","+1/3","-2/3", GREEN_MID, False,False,True),
+    (2,ROW4,"b",  "-1/3","+1/3","-2/3", GREEN_DARK,True, False,True),
 ]
-for (col,ry,sym,q,yv,col_,g3,nur,cr) in parts:
-    fermion(LBL_W+(col+0.5)*COL_W, ry, sym, q, yv, col_, g3, nur, cr)
+for (col,ry,sym,q,yl,yr,col_,g3,nur,cr) in parts:
+    fermion(LBL_W+(col+0.5)*COL_W, ry, sym, q, yl, yr, col_, g3, nur, cr)
 
 # Rechtes Panel
 RX = LBL_W+FW+6; LW2 = RHS_W-10
