@@ -354,3 +354,75 @@ Verweis auf Dok.~353 eingetragen.
 
 **Offen bleibt:** Dynamische Ableitung der fallenden $\varepsilon_i$-Struktur
 (R113-Brücke) **[S]**.
+
+---
+
+## 7. September 2026 — Dok. 354, 355, 356, 357: Higgs/SSB und SM-Übersichtsblätter
+
+### Dok. 354 — Higgs-Mechanismus und Zeit-Masse-Dualität (De/En, 9/8 S.)
+
+Zusammenfassung: drei offene Punkte aus früheren Dokumenten werden
+als **[K]** bzw. **[B]** geschlossen.
+
+**[S1] Kopplungskonstanten $g_s$, $g_w$, $e$ aus $\xi$** → **[K]**:
+$\alpha_s(m_\tau) = 3\cdot\xi^{1/4} = 0{,}3224$;
+$\sin^2\theta_W(M_Z) = 0{,}2308$ (RGE, Dok.~323);
+$\alpha_\text{EM} = \xi\cdot(E_0/\text{MeV})^2$ (Dok.~011, A130).
+
+**[S2] SSB $SU(2)_L\times U(1)_Y\to U(1)_\text{EM}$** → **[B]** (Dok.~355):
+drei Galois-Bausteine algebraisch erzwungen.
+
+**[S3] CKM/PMNS-Winkel vollständig** bleibt **[S]**: Struktur belegt
+(Dok.~348 Sätze B,C), Zahlenwerte offen.
+
+**Neu in 354:** Verweis auf Dok.~356 (SM-Teilchendiagramm) und
+Dok.~357 (Belegstatus) für den vollständigen Quantenzahl-Überblick.
+
+**Register 190:** R116 (Dok.~356/357) eingetragen.
+
+---
+
+### Dok. 355 — SSB $SU(2)_L\times U(1)_Y\to U(1)_\text{EM}$ aus $T^4/Z_3$ (De/En, 6 S.)
+
+Drei algebraisch belegte Bausteine schließen die SSB-Ableitung:
+
+1. $\tilde{T}\cdot m=1$ erzwingt $\langle\Phi\rangle\neq 0$ **[B]**
+2. $Z_3$-Galois-Struktur erzwingt $Q_\text{vak}=0$: QR $\iff$ elektrisch neutral (Dok.~346 Satz A) **[B]**
+3. $Q=0$-Vakuum lässt $U(1)_\text{EM}$ überleben: Gell-Mann-Nishijima (Dok.~347 Satz C) **[B]**
+
+**Prüfskript:** `python/Dok355_Skripte/pruef_355_ssb.py`.
+
+**Offen bleibt [S]:** CKM/PMNS-Winkelwerte (Dok.~348 Satz D);
+Kandidat GF$(3^6)$ = GF$(729)$, $728=8\times7\times13$ (R115).
+
+---
+
+### Dok. 356 — SM-Teilchendiagramm aus GF$(27)^*$ (Querformat A4, De/En)
+
+Übersichtsblatt: alle 12 SM-Fermionen als konzentrische Ringdiagramme,
+geordnet nach 3 Generationen und 4 Sektoren (Neutrinos, gel. Leptonen,
+Up-Quarks, Down-Quarks).
+
+**Ringstruktur von innen nach außen** (physikalisch motiviert):
+weißer Innenkreis (Symbol, $Q$, $Y$);
+Farbring $r/g/b$ nur Quarks (Confinement — Gluonen schließen Farbe ein) **[B]**;
+Mittelring Chiralität (violett = $S_d$ = linkshändig, orange = $S_u$ = rechtshändig) **[B]**;
+Außenring Galois-Orbit-Farbe (4 Orbits) **[B]**;
+rot gestrichelt = SU$(2)_L$-Dublett;
+schwarz gestrichelt = Generation 3.
+
+**Erzeugung:** Python/ReportLab (`python/356_SM_Teilchen_GF27_De.py`,
+`python/356_SM_Teilchen_GF27_En.py`).
+
+---
+
+### Dok. 357 — Belegstatus der SM-Quantenzahlen aus GF$(27)^*$ (Querformat A4, De/En)
+
+Belegtabelle zu Dok.~356: alle 12 Quantenzahlen mit Status **[B]**/**[K]**/**[S]**/**[X]**
+und Quellenangabe. Koide-Amplitude $d/c=\sqrt{2}$ als **[B]** eingetragen
+(7.~September 2026, vormals **[S]**, Dok.~353).
+
+**Offen [S]:** Generations-Zuordnung (Reihenfolge); CKM/PMNS-Winkel vollständig.
+
+**Experimentell [X]:** Higgs-Boson $H^0$ (Mechanismus in FFGFT durch $\tilde{T}\cdot m=1$
+ersetzt, Dok.~019).
