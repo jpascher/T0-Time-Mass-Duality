@@ -321,3 +321,36 @@ CMB-Relationen unberührt. Dokument für DE/DM-Teil vorgemerkt.
 Ausdrücke „$X = \xi^N$" sind für sich allein aussagelos. Nicht-trivial ist
 nur, was geometrisch vorwärts hergeleitet ist. Exponenten ohne Vorwärtsableitung
 sind als **[S]** einzustufen, nicht als **[K]**.
+
+---
+
+## 7. September 2026 — Dok. 353: Koide-Amplitude $d/c = \sqrt{2}$ [B]
+
+### Dok. 353 — Koide-Amplitude aus $T^4/Z_3$-Geometrie (De, 5 S.)
+
+Die offene Brücke $d/c = \sqrt{2}$ aus Dok.~352 §8 und dem Register Dok.~190
+ist auf Status **[B]** gehoben.
+
+**Herleitung:** Die $Z_3$-Gleichverteilungsbedingung der $T^4/Z_3$-Geometrie
+erzwingt, dass jedes Element eines Orbits an genau zwei von drei Elementen
+des anderen Orbits koppelt. Die $\ell^2$-Normierung dieser Kopplung auf Eins
+ergibt das Gewicht $1/\sqrt{2}$ pro Verbindung. Im $Z_3$-Zirkulant-Massenoperator
+erscheint dieses Gewicht als $d/c = \sqrt{2}$.
+
+**Verbindung:** Die Galois-Kopplungsmatrix $M^{(13)}$ aus Dok.~348 Satz~C
+(Spur-Bilinearform GF$(27)^*$) hat normierte Einträge
+$|M^{(13)}_{ij}|_{\rm norm} = 1/\sqrt{2}$ — dieselbe algebraische Aussage
+in der Galois-Sprache **[B]**.
+
+**Numerisch:** PDG erfüllt $d/c = \sqrt{2}$ auf $0{,}10\cdot\xi$; bare
+FFGFT-Massen weichen um $+17\cdot\xi$ ab, vollständig erklärt durch
+die $\varepsilon_i$-Korrekturen (Dok.~352 §9, $101\,\%$) **[K]**.
+
+**Prüfskript:** `python/Dok353_Skripte/pruef_353_koide_amplitude.py`
+(8/8 Assertions).
+
+**Register 190:** Eintrag zu $d/c = \sqrt{2}$ von [S] auf [B] gehoben,
+Verweis auf Dok.~353 eingetragen.
+
+**Offen bleibt:** Dynamische Ableitung der fallenden $\varepsilon_i$-Struktur
+(R113-Brücke) **[S]**.
