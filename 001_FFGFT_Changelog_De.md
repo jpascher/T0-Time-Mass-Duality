@@ -226,3 +226,98 @@ $1/\alpha = 3700/27 = 137{,}037$ (Abw. 7,6 ppm). Kein ξ, kein $v$, kein $m_e$.
 **R103 [B]+[K]:** Neutrino-Massenhierarchie aus GF(27)* — Dok. 340
 
 ---
+
+---
+
+## 7. September 2026 — Dok. 190 Neufassung; Nachträge 006, 041, 309
+
+### Dok. 190 — Reines Korrekturregister (Neufassung)
+
+Das Korrekturregister wurde strukturell bereinigt. Die bisherige Fassung
+(23. August 2026, Einträge R86–R114, K-041) ist als **Dok. 190-Archiv-2**
+eingefroren (`190_T0_Korrekturen_Archiv2_De`). Das ältere Archiv-1 (bis R85)
+bleibt unverändert.
+
+**Neue Struktur Dok. 190:** Jeder Eintrag enthält genau zwei Informationen:
+(1) die Korrektur/Präzisierung in Kurzform und (2) in welchem Dokument
+die Korrektur bereits umgesetzt ist. Herleitungen, Prüfskript-Ergebnisse
+und Statusmeldungen gehören in die Zieldokumente, nicht ins Register.
+
+**Vollständige Einträge K1–K7, P1–P44, R41–R114, K-041-a/b/c** in der
+Registertabelle mit 4 Spalten (Nr. / Betrifft / Gegenstand / Umgesetzt in).
+
+**Neue Dateinamen:**
+- `190_T0_Korrekturen_De_ch_NEU.tex` / `190_T0_Korrekturen_De_NEU.tex` — aktuelles Register
+- `190_T0_Korrekturen_Archiv2_De_ch.tex` / `190_T0_Korrekturen_Archiv2_De.tex` — Archiv-2
+
+### Nachträge in bestehende Dokumente (append-only, Originale unverändert)
+
+**Dok. 006** — Nachträge R105 und R109:
+- **R105** (Marker-Zertifizierung): Wicklungszahlen $r_i$, Exponenten $p_i$ und
+  die Yukawa-Methode $m_i = r_i\xi^{p_i}v$ für geladene Leptonen und Quarks: **[K]**.
+  Dok. 006 entstand vor Einführung des Marker-Systems.
+- **R109** (Einschränkung): Neutrinoteil von Dok. 006 nicht tragfähig **[X]**.
+  Die „direkte Methode" $E_i = 1/\xi_i$ ist keine Rechnung; Neutrinomassen
+  folgen aus drei unverträglichen Vorschriften. R105-[K] gilt nur für $r_i$,
+  $p_i$ und Yukawa — nicht für den Neutrinoteil. Maßgeblich für Neutrinos: Dok. 340.
+
+**Dok. 041** — Nachträge K-041-a/b/c und R77:
+- **K-041-a**: $\delta_\text{CKM} = \arcsin(2\sqrt{2}\cdot\sqrt{\xi}/3)$ ergibt
+  0,011 rad; Tabellenwert 1,20 rad. Kandidat: $\arcsin(2\sqrt{2}/3) = 1,231$ rad
+  (Faktor $\sqrt{\xi}$ vermutlich Satzfehler). Autorenkontrolle erforderlich.
+- **K-041-b**: $\theta_{13} = \arcsin(\xi^{1/3})$ ergibt 2,93°; Tabellenwert 8,57°.
+  Kandidat: Argument $1/300 = 25\xi$ ergibt 8,59°. Autorenkontrolle erforderlich.
+- **K-041-c**: $|V_{us}|$-Formel ergibt 0,2124; Tabellenwert 0,22452 (Δ = 5,4 %).
+  Mögliche Ursache: abweichende Massen oder $f_\text{Cab}$-Definition. Autorenkontrolle.
+- **R77**: Frühe Kopplungskonstanten-Formeln in Dok. 041 als Vorstufen eingeordnet;
+  maßgeblich sind Dok. 160, 318 und die Galois-Reihe (Dok. 336–348).
+
+**Dok. 309** — Nachtrag R71:
+- **R71** (Verschärfung Hubble-Spannung): Die Tabelleneintragung „strukturell absent"
+  bedeutet nicht, dass FFGFT die Hubble-Spannung erklärt, sondern dass das Modell
+  nur einen $H_0$-Wert kennt (den kalibrierten). FFGFT kann die Spannung weder
+  reproduzieren noch auflösen — korrekte Einordnung: „nicht modellierbar",
+  kein Erklärungsanspruch.
+
+### PDFs neu erstellt
+
+| Datei | Seiten | Anmerkung |
+|---|---|---|
+| `190_T0_Korrekturen_De.pdf` | 10 | Neues Register (ersetzt alte 21-S.-Fassung) |
+| `190_T0_Korrekturen_Archiv2_De.pdf` | 21 | Archiv-2, eingefroren |
+| `006_T0_Teilchenmassen_De.pdf` | 18 | Mit R105+R109-Nachtrag |
+| `041_parameterherleitung_De.pdf` | 29 | Mit K-041+R77-Nachtrag |
+| `309_Skalenanker_LCDM_FFGFT_De.pdf` | 9 | Mit R71-Nachtrag |
+
+---
+
+## 7. September 2026 — Nachträge R61, R91, P1, P17, P35
+
+Weitere Nachträge in bestehende Dokumente (append-only, Originale unverändert).
+Anlass: Korrekturen waren nur im Archiv deklariert, aber in keinem aktiven
+Dokument des Korpus sichtbar.
+
+**Dok. 174, 175 — R61: $\xi_\text{Higgs}$ zurückgezogen**
+$\xi_\text{Higgs} \approx 1{,}038\times10^{-5}$ ist zurückgezogen.
+Die Zwei-Räume-Doktrin ist Rationalisierung nach datengetriebener Auswahl,
+keine unabhängige Begründung. Kanonisch gilt ausschließlich $\xi_0 = 4/30000$.
+
+**Dok. 019, 201 — R91: $\lambda$ in $m_T = \lambda/\xi$ ist Basismasse**
+Die Bezeichnung als „Higgs-Kopplungsparameter" ist irreführend: $\lambda$ muss
+dimensional eine Masse sein; der Higgs-Quartic $\lambda_h$ ist dimensionslos
+und RGE-abhängig. Korrekt: $m_T = M_\text{Basis}/\xi$, sektorabhängige Basismasse.
+
+**Dok. 116, 158 — P1: Zwei Genauigkeitsangaben**
+$\Delta Q < 0{,}00003\,\%$ (interne Rechnung) und $0{,}001\,\%$ (externe Darstellung
+mit Messgenauigkeit der Eingangsmassen) beschreiben verschiedene Kontexte —
+beide korrekt.
+
+**Dok. 028 — P17: DE/DM-Relation zirkulär**
+Die Relation ergibt für jeden Wert von $\xi$ das Verhältnis $2{,}5$ — algebraische
+Identität, keine Vorhersage. MOND: $\xi^{1/4}$ hergeleitet, Konstante $K_M$ frei.
+CMB-Relationen unberührt. Dokument für DE/DM-Teil vorgemerkt.
+
+**Dok. 182, 250 — P35: $\xi^N$-Trivialität**
+Ausdrücke „$X = \xi^N$" sind für sich allein aussagelos. Nicht-trivial ist
+nur, was geometrisch vorwärts hergeleitet ist. Exponenten ohne Vorwärtsableitung
+sind als **[S]** einzustufen, nicht als **[K]**.
