@@ -659,7 +659,7 @@ of the fourth Frobenius orbit in ℤ₁₃:
 Check script: `pruef_340_neutrino_galois.py` (10/10 assertions).  
 → [DE](2/pdf/340_Neutrino_Galois_En.pdf) · [EN](2/pdf/340_Neutrino_Galois_En.pdf)
 
-### Doc. 341 — GF(27) in GALG: algebraic bridge FFGFT↔GALG (DE+EN, 8 pp. each)
+### Doc. 341 — GF(27) in GALG: algebraic bridge FFGFT↔GALG (DE+EN, 14 pp. each)
 
 Algebraic comparison FFGFT ↔ Matzke's GALG framework (IPI exchange August 2026).
 
@@ -672,7 +672,8 @@ Algebraic comparison FFGFT ↔ Matzke's GALG framework (IPI exchange August 2026
 - **Theorem C [B]:** The six vacuum candidates Vss[0..5] split into Z₃-fixed points
   (even indices → massive sector) and Z₃-orbits (odd indices → massless sector),
   agreeing with the Frobenius separation of Doc. 339.
-Check scripts: `pruef_341_gf27_in_galg.py`, `pruef_341_vakuum_witt_z3.py`  
+§6 (8 Sept.): entry order of primes ord_p(3); no root7 with Z3C coefficients, order-7 element over GF(9) (X₇, and compact Y²⁶); X²⁷=X ⟺ spectrum ⊂ GF(27); coefficient purity; E₇ convention (R115).  
+Check scripts: `pruef_341_gf27_in_galg.py`, `pruef_341_vakuum_witt_z3.py`, `pruef_341_primordnung.py`, `pruef_341_root7_gf9.py`, `pruef_341_r26_rein_p27.py`  
 → [DE](2/pdf/341_GF27_GALG_FFGFT_De.pdf) · [EN](2/pdf/341_GF27_GALG_FFGFT_En.pdf)
 
 

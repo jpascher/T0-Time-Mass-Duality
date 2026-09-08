@@ -65,6 +65,22 @@ Betrifft: Dok. 006, 319, R104.
 **Neuer offener Punkt [S]:** τ_μ direkt aus FFGFT, ohne Umweg über G_F und v —
 einziger konventionsfreier Test des schwachen Sektors.
 
+### R115 — Höhere Einheitswurzeln in GALG G(6), Koeffizientenreinheit, E₇-Konvention (8. Sept. 2026)
+
+**Dok. 341 §6 (neu), Dok. 355 (Korrektur):**
+
+- Eintrittsskala k = ord_p(3): 13 (k=3), 5 (4), 11 (5), 7 (6). In keinem GF(3^k)* gibt es Ordnung 3 — Tripotente sind Matrix-, nie Körperelemente **[K]**.
+- Keine 7te Einheitswurzel mit Z3C-Koeffizienten (7 ∤ 8; cos(2π/7) ∉ GF(3^k)); Euler-Form cos θ + B sin θ ist kein GALG-Element **[K]**. Ordnung-7-Element über GF(9): X₇ = C_Φ₇ ⊕ I₂ (47 Blades, rein) **[K]**; kompakt Y (6 reine Blades, ord 182 = 2·7·13), X = Y²⁶ (10 Blades) **[B]**.
+- X²⁷ = X ⟺ Spektrum ⊂ GF(27) („p27"); Körperturm X³=X ⊂ X⁹=X ⊂ X²⁷=X ⊂ X⁷²⁹=X **[K]**.
+- 1+j = Generator von GF(9)*; Reinheitsforderung physikalisch, nicht algebraisch, erfüllbar (reines root26, 5 Blades) **[B]**.
+- GALG-Konvention E₇ = −(e₁…e₆) erklärt p27-Befund für X₇ **[K]**.
+- **Dok. 355:** „Phasen k·360°/7" von [B] auf **[S]** — Charakteristik 3 kennt keine Winkel.
+
+Prüfskripte: `pruef_341_primordnung.py`, `pruef_341_root7_gf9.py`, `pruef_341_r26_rein_p27.py` (alle Assertions bestanden).
+→ [DE](2/pdf/341_GF27_GALG_FFGFT_De.pdf) · [EN](2/pdf/341_GF27_GALG_FFGFT_En.pdf)
+
+---
+
 ### R113 [Q] — Anker mμ/mₑ QED-abhängig; Vergleichswerte nicht theoriefrei (5. Sept. 2026)
 
 mμ/mₑ ist QED-abhängig (ν_F ∝ α²; Eides 2026: CODATA unterschätzt Theorieunsicherheit

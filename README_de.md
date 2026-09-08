@@ -671,7 +671,7 @@ SBN (Fermilab), BEST.
 Prüfskript: `pruef_340_neutrino_galois.py` (10/10 Assertions).  
 → [DE](2/pdf/340_Neutrino_Galois_De.pdf) · [EN](2/pdf/340_Neutrino_Galois_En.pdf)
 
-### Dok. 341 — GF(27) in GALG: algebraische Brücke FFGFT↔GALG (DE+EN, je 8 S.)
+### Dok. 341 — GF(27) in GALG: algebraische Brücke FFGFT↔GALG (DE+EN, je 14 S.)
 
 Algebraischer Vergleich FFGFT ↔ Matzkes GALG-Framework (IPI-Austausch August 2026).
 
@@ -690,7 +690,8 @@ Algebraischer Vergleich FFGFT ↔ Matzkes GALG-Framework (IPI-Austausch August 2
 - **Konsequenz:** α formulierbar auf G(3)/GF(9)-Ebene; Leptonmassen brauchen G(6)
   mit Ordnung-26-Elementen. Dougs „not working on mass" konsistent mit dieser Trennung.
 
-Prüfskripte: `pruef_341_gf27_in_galg.py` (6/6 [B]), `pruef_341_vakuum_witt_z3.py` (7/7 [B]),
+§6 (8. Sept.): Eintrittsskala der Primzahlen ord_p(3); kein root7 mit Z3C-Koeffizienten, Ordnung-7-Element über GF(9) (X₇, kompakt Y²⁶); X²⁷=X ⟺ Spektrum ⊂ GF(27); Koeffizientenreinheit; E₇-Konvention (R115).  
+Prüfskripte: `pruef_341_gf27_in_galg.py`, `pruef_341_vakuum_witt_z3.py`, `pruef_341_primordnung.py`, `pruef_341_root7_gf9.py`, `pruef_341_r26_rein_p27.py`  
 `pruef_342_vakuum_witt_z3.py` (7/7 [B]).  
 → [DE](2/pdf/341_GF27_GALG_FFGFT_De.pdf) · [EN](2/pdf/341_GF27_GALG_FFGFT_En.pdf)
 

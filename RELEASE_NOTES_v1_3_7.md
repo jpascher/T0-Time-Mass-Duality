@@ -1,0 +1,191 @@
+# Release Notes — v1.3.7 (8 September 2026)
+
+**DOI:** to be assigned on Zenodo publication — supersedes v1.3.6
+Running corrections: **[2/pdf/190_T0_Korrekturen_De.pdf](2/pdf/190_T0_Korrekturen_De.pdf)**
+Archived register: **[2/pdf/190_T0_Korrekturen_Archiv_De.pdf](2/pdf/190_T0_Korrekturen_Archiv_De.pdf)**
+Change log: **[001_FFGFT_Changelog_De.md](001_FFGFT_Changelog_De.md)**
+
+**FFGFT — Fundamental Fractal-Geometric Field Theory** shows: all Standard Model
+constants follow from a single dimensionless parameter **ξ = 4/30000** on a compact
+4D torus T⁴. The foundational relation is **T̃ · m = 1** — intrinsic time and mass
+are inversely coupled.
+
+**Author:** Johann Pascher · ORCID 0009-0000-6518-4064
+
+---
+
+## Overview
+
+This release adds Docs. 342–360: completion of the Galois SM classification
+(three algebraic closures, full SM particle diagram), two synthesis documents
+on harmonics and AI limits, and the first HRV experiments applying FFGFT to
+physiological frequency analysis. Registers R106–R119 added.
+
+---
+
+## New documents since v1.3.6
+
+### Doc. 342 — Factorisation classes and harmonic primes in GF(27)* (DE+EN)
+Four irreducible cubic polynomials over GF(3) yield five factorisation classes.
+Theorem B [B]: harmonic primes p enter the GF(3^k) hierarchy at depth k = ord_p(3):
+13 (k=3), 5 (k=4), 11 (k=5), 7 (k=6). Theorem C [B]: chords = partitions of 8.
+Theorem D [B]: discriminability threshold p* ≈ 9.76. Negative result: tau sector.
+
+### Doc. 343 — Zeta function, Galois hierarchy, and resolution floor (DE+EN)
+Orbifold projection of Riemann zeta via Z₃-characters → Dirichlet L-functions [B].
+Hierarchical Euler product by entry depth k [B]. Resolution floor 100ξ ≈ 1.33%
+as fractal step [B] (Theorem G'). Farey denominator height Q_c ≈ 11.1.
+Structural computation limit: Weyl obstruction [B].
+
+### Doc. 344 — Furey fermions in GALG and FFGFT (DE+EN)
+Su[0] = Vss[0]: neutrino = vacuum of Clifford-Fock space [B].
+Sector pairing k↦−k has no fixed points → all neutrinos Dirac [B/S]. nEXO decides.
+
+### Doc. 345 — FFGFT in literature comparison (DE+EN)
+Froggatt-Nielsen: same hierarchy principle, exponents forced from Galois group orders [K].
+After Docs. 346/347: equal to Furey/Dixon at charge content.
+
+### Doc. 346 — Charge quantisation from GF(27)* (DE+EN)
+Two Galois properties classify all SM fermions [B]:
+QR mod 13 ↔ electric neutrality; N mod 3 ↔ colour charge.
+Q ∈ {0, ±1/3, ±2/3, ±1} from Legendre symbol [B].
+
+### Doc. 347 — Gell-Mann–Nishijima from Galois (DE+EN)
+Q = I₃ + Y/2 algebraically derived [B]: Y from Legendre symbol (Doc. 346),
+I₃ from jE₇ projector (Doc. 344). All four fermion charges exact. Doc. 346
+Theorem E [S] closed.
+
+### Doc. 348 — Generation structure and coupling matrix from GF(27) (DE+EN)
+Root orbits of f₁–f₄ are genuine Frobenius orbits; 3 elements = 3 generations [B].
+f₃×f₄ = permutation matrix [B]; Gen.2↔Gen.3 swap forced.
+f₁×f₃: entries 1/√2 [B], consistent with large PMNS angles.
+CKM complexity: δ_CP ≈ 68° usable as phase anchor.
+
+### Doc. 349 — SU(2)_L doublet structure from Cl(6) (DE+EN)
+Su = even grades = right-handed; Sd = odd grades = left-handed [B].
+ν_R structurally absent [B/S]. Doc. 348 Theorem D closed.
+
+### Doc. 350 — Black holes and time-mass duality (DE+EN)
+Hawking radiation from T̃·m=1 geometry [B/K].
+
+### Doc. 351 — PDG model dependence (DE+EN)
+PDG values carry model assumptions; FFGFT derivations use primary data [K].
+
+### Doc. 352 — Lepton residuals (DE+EN)
+Residual analysis of charged lepton masses after Galois projection [K].
+
+### Doc. 353 — Koide amplitude d/c = √2 [B] (DE+EN)
+Previously [S]. Z₃ equidistribution on T⁴/Z₃ forces d/c = √2, equivalent to
+Koide Q = 2/3. Trace bilinear form GF(27)*/GF(3): entries 1/√2 at all non-zero
+positions. PDG values confirm within 0.10·ξ [K]. Script 8/8.
+
+### Doc. 354 — Higgs mechanism and time-mass duality (DE+EN)
+Three previously open points resolved: coupling constants g_s, g_w, e from ξ [K];
+SSB derivation [B] (Doc. 355); CKM/PMNS angle values remain [S].
+Note: the remaining [S] (mixing angle values) does not affect lepton mass derivations,
+which are complete independently via Doc. 006 [K] and Doc. 353 [B].
+
+### Doc. 355 — SSB SU(2)_L × U(1)_Y → U(1)_EM from T⁴/Z₃ (DE+EN)
+Three Galois building blocks close the derivation [B]:
+(a) T̃·m=1 forces ⟨Φ⟩≠0; (b) Z₃ structure forces Q_vac=0 (Doc. 346 Theorem A);
+(c) Q=0 vacuum leaves U(1)_EM invariant (Doc. 347 Theorem C).
+The μ²<0 of the SM is not a free input — it is a consequence. Script passes.
+
+### Doc. 356 — SM particle diagram from GF(27)* (DE+EN, landscape A4)
+All 12 SM fermions as concentric ring diagrams. Ring order (inside out):
+white inner circle (symbol, Q; Y_L / Y_R shown left of circle); colour ring r/g/b
+(quarks only, innermost — gluons confine colour) [B]; middle ring chirality
+(violet Sd = left-handed, orange Su = right-handed) [B]; outer ring Galois orbit
+colour (4 orbits, Doc. 348) [B]; red dashed box = SU(2)_L doublet pair;
+black dashed circle = Generation 3. Generated by Python/ReportLab.
+This diagram represents algebraic objects — not an ontological or spatial picture
+of particles.
+
+### Doc. 357 — SM quantum number certificate table (DE+EN, landscape A4)
+Certificate status [B]/[K]/[S]/[X] for all SM quantum numbers with Galois origin.
+Koide amplitude d/c=√2 updated to [B] (formerly [S]).
+
+### Doc. 358 — Harmonics and algebraic structure: why the same mathematics (DE+EN)
+Theorem A [B]: no comma in a finite field; comma and K_frak are embedding errors,
+not Galois properties — algebraic reason for Doc. 333. Corollary A' [K]: comma·K_frak
+≈ 1 (Doc. 060) = two measurements of the same embedding error.
+Theorem B [B]: all nine Yukawa coefficients (Doc. 006) have prime factors in
+{2,3,5,7,11,13}; the two non-5-limit exceptions of Doc. 060 (Strange: 13=k=3,
+Top: 7=k=6) are resolved in the Galois reading.
+Observation C [S]: three twelves (Tonnetz quotient, |(Z/13)*|, Farey Q_c) from
+three different mechanisms — observation, not theorem.
+Theorem D [B]: harmonics and Galois classification are two representations of the
+character spectrum of T⁴/Z₃ — not an analogy. Script 22/22.
+
+### Doc. 359 — AI-based pattern recognition and algebraic limits of frequency
+analysis (DE+EN)
+Theorem A [B]: HRV band limits VLF/LF/HF algebraically forced (5-limit constants),
+not empirical choices. Theorem B [B/L]: resolution limit 100ξ ≈ 1.33% appears
+empirically in AI-HRV models as overfitting threshold. Theorem C [B/S]: G-CNNs
+for finite GF(3^k) architecturally missing — identified literature gap.
+Theorem D [B]: the admissibility criterion (prime factors ⊆ {2,3,5,7,11,13}) is not
+PAC-learnable from finite data (Gold 1967). Architecture sketch [S].
+Script 14/14. Literature: Raissi et al. 2024, Finzi 2022, Gupta et al. 2024,
+Villanueva et al. 2026, Task Force 1996, Gold 1967.
+
+### Doc. 360 — Galois-informed HRV analysis: implementation and negative
+validation (DE+EN)
+Module `galois_hrv_preprocess.py`: complete pipeline (Galois projection,
+resolution filter 100ξ, HRV band limits as constants, orbit type k=1..6,
+Arnold tongue width as stability metric).
+
+**BIDMC-01** [L] (Pimentel et al. 2017, PhysioNet): ICU patient, 88y, 8 min PPG-ECG.
+0/3 ratios 5-limit; VLF not resolvable (too short); DFA α ≈ 0.5 (white noise).
+
+**Fantasia** [L] (Gold et al. 2002, PhysioNet): 5 young + 5 old healthy subjects,
+~120 min rest, spontaneous breathing. LF-peak CV 11–33% >> 1.33%;
+5-limit LF/HF 4/10 (40%, not significant over null model); no group difference jung/alt.
+
+**Structural finding** [B]: at spontaneous breathing, HF = respiratory frequency
+(variable). LF/HF is the ratio of two independent physiological control loops —
+not a fixed Galois ratio. Galois test not assessable at spontaneous breathing.
+
+**Next step** [S]: Polar H10 chest strap, 10 min at 6 breaths/min metronome
+(Lehrer & Gevirtz resonance frequency protocol). Analysis script
+`polar_h10_analyse.py` ready for CSV upload.
+
+---
+
+## Register
+R106–R119 added to Doc. 190 (De+En): covers Docs. 342–360.
+
+---
+
+## Bridges closed in this release
+| Bridge | before | after | Doc. |
+|--------|--------|-------|------|
+| Koide amplitude d/c=√2 | [S] | [B] | 353 |
+| SSB SU(2)_L×U(1)_Y→U(1)_EM | [S] | [B] | 355 |
+| Coupling constants g_s, g_w, e from ξ | [S] | [K] | 354 |
+| SU(2)_L doublet from Cl(6) | [S] | [B] | 349 |
+| All SM fermion quantum numbers from GF(27)* | partial | complete | 356/357 |
+| Harmonics = Galois (two representations) | analogy | identity [B] | 358 |
+| HRV band limits algebraically forced | empirical | [B] | 359 |
+
+---
+
+## Remaining open bridges
+| Bridge | Status |
+|--------|--------|
+| CKM/PMNS angle values (numerical) | [S] (Doc. 348 Theorem D); GF(3⁶)=GF(729) candidate |
+| Galois-informed HRV: resonance frequency protocol | [S] (Polar H10 self-test pending) |
+| Generation assignment (ordering) | [S] (Doc. 346) |
+| m_Pl and α_em(M_Z) from ξ | [S] |
+| Quark/hadron sector | open (Doc. 318, R76) |
+| CMB peaks {1,6,14,26}; \|n\|²=30 | open (P29/P31) |
+| Δm²₃₂ mixing term F₅–F₇ | [S] |
+
+---
+
+## Entry point for new readers
+Doc. 205 "FFGFT in Simple Language" (DE+EN, 13–14 pages) remains the recommended
+entry point. The SM particle diagram (Doc. 356) gives a visual overview of the
+Galois classification.
+
+## What has not changed
+ξ, T̃·m=1, and all derivation chains from v1.3.6 are unchanged.

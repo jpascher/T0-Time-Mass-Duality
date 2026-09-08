@@ -382,6 +382,99 @@ $-\text{Vss}[0] = 2\cdot\text{Vss}[0]$ is idempotent over GF$(9)$;
 $\text{Vss}[0]$ projects onto the $N=0$ sector (vacuum $+$ fully occupied state).
 
 % ============================================================
+\section{Higher Roots of Unity: root7, p27 Projectors, Coefficient Purity}
+% ============================================================
+
+Doug's follow-up questions (IPI, 4--7~Sept.~2026) concern 7th roots of unity,
+projectors with $X^{27}=X$, and a structural objection to the order-26 element.
+Verified in \texttt{pruef\_341\_primordnung.py},
+\texttt{pruef\_341\_root7\_gf9.py}, \texttt{pruef\_341\_r26\_rein\_p27.py}.
+
+\subsection{Entry Order of Primes}
+
+The smallest $k$ with $p \mid 3^k-1$ (i.e.\ $k=\mathrm{ord}_p(3)$) gives the
+first field GF$(3^k)$ in which $p$-th roots of unity exist~\KM:
+\begin{center}
+\begin{tabular}{rcl}
+\toprule
+$p$ & $k$ & $|\text{GF}(3^k)^*|$ \\
+\midrule
+13 & 3 & $26 = 2\cdot13$ \\
+5  & 4 & $80 = 2^4\cdot5$ \\
+11 & 5 & $242 = 2\cdot11^2$ \\
+7  & 6 & $728 = 2^3\cdot7\cdot13$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Within G$(3)$ (eigenvalues in GF$(81)$) root5 is indeed the first odd-prime root;
+globally 13 enters before 5. In no GF$(3^k)^*$ is there an element of order~3,
+since $3^k-1 \equiv 2 \pmod 3$ for all $k$: tripotents $t^3=t$ with $t\neq0,\pm1$
+are a matrix phenomenon, never a field phenomenon~\KM.
+
+\subsection{root7 Exists Only in GF$(9)$-Arithmetic}
+
+$7 \nmid |\text{GF}(9)^*| = 8$, and $7 \mid 3^k-1$ first at $k=6$.
+A genuine complex 7th root of unity has coefficients in $\mathbb{Q}(e^{2\pi i/7})$
+(degree~6 over $\mathbb{Q}$); $\cos(2\pi/7)$ has minimal polynomial $8x^3+4x^2-4x-1$
+and lies neither in $\mathbb{Q}(i)$ nor in GF$(9)$. Constructions of the form
+$\cos\theta + B\sin\theta$ (Euler form over $\mathbb{R}$) are therefore not GALG elements~\KM.
+
+What does exist is an order-7 element in G$(6)$ over GF$(9)$:
+$\Phi_7(x)=x^6+\cdots+1$ is irreducible over GF$(3)$; its companion matrix $C$
+has order~7 in $\mathrm{GL}_6(\text{GF}(3))$, and $X_7 = C\oplus I_2 \in M_8(\text{GF}(9))$
+has order~7 with 47 blades over all grades, all coefficients in $\{\pm1,\pm i\}$~\KM.
+A compact alternative: take any $Y$ with $7 \mid \mathrm{ord}(Y)$ and set
+$X=Y^{\mathrm{ord}(Y)/7}$. Example~\BM:
+\begin{quote}\small
+\texttt{Y = (1j)*(e1\^{}e2\^{}e3) - (e1\^{}e3\^{}e6) + (e2\^{}e3\^{}e4) - (e2\^{}e4\^{}e6)}\\
+\texttt{\ \ \ \ - (1j)*(e4\^{}e5\^{}e6) - (e1\^{}e2\^{}e4\^{}e5)}\\
+\texttt{ord(Y) = 182 = 2*7*13;\ \ X = Y**26;\ \ X**7 == 1,\ X != 1}
+\end{quote}
+$X$ has 10 blades, all coefficients pure ($\pm1$ or $\pm i$).
+
+\subsection{p27 Projectors as a Field-Tower Hierarchy}
+
+Since $x^{27}-x=\prod_{a\in\text{GF}(27)}(x-a)$, the condition $X^{27}=X$ holds
+exactly when $X$ is semisimple with spectrum in GF$(27)$. This generalises
+tripotents ($X^3=X$, spectrum in GF$(3)$) along the field tower~\KM:
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+ & $X^3\!=\!X$ & $X^9\!=\!X$ & $X^{27}\!=\!X$ & $X^{81}\!=\!X$ & $X^{729}\!=\!X$ \\
+\midrule
+$N$ (tripotent) & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+$r_{26}$ (order 26) & -- & -- & \checkmark & -- & \checkmark \\
+$X_7$ (order 7) & -- & -- & -- & -- & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{center}
+Doug's ``power-of-27 projector'' is thus precisely: spectrum in GF$(27)$.
+$X_7$ needs GF$(729)$ because $7 \nmid 26$.
+
+\subsection{Coefficient Purity and the Order-26 Element}
+
+Doug objects that $r_{26}$ contains $-(1+j)(e_1e_2)$, mixing $e_1e_2$ (square $-1$)
+with $j\,e_1e_2$ (square $+1$), which he reads as two signature choices.
+Algebraically, $1+j$ is simply the generator of GF$(9)^*$ (order~8, norm~$-1$) ---
+Doug's own $(a+ja)^8=1$ --- so $-(1+j)B$ is scalar times blade. The objection is a
+\emph{physical} purity requirement: each blade coefficient in $\{\pm1\}$ or $\{\pm j\}$,
+never $a+bj$ with $a,b\neq0$. That requirement is satisfiable~\BM: about 2.5\,\% of
+random 5-blade elements with pure coefficients have order exactly~26, e.g.
+\begin{quote}\small
+\texttt{X = (1j)*e3 + (1j)*(e2\^{}e5) + (1j)*(e3\^{}e6) + (e4\^{}e6) + (e3\^{}e5\^{}e6)}\\
+\texttt{X**26 == 1,\ \ X**13 != 1}
+\end{quote}
+$X_7$ above is already pure (no mixed coefficient).
+
+\subsection{A Convention Note: the Sign of $E_7$}
+
+GALG defines $E_7 = -(e_1\wedge\cdots\wedge e_6)$. An element transmitted with a
+term ``$(+i)\,E_7$'' meaning $+i\,e_1\cdots e_6$ is read in GALG as $-i\,e_1\cdots e_6$.
+For $X_7$ this sign flip yields a non-invertible element with $X^{27}=X$ and no
+$X^n=1$ --- exactly the behaviour Doug observed~\KM. With Doug's $E_7$ the last term
+of $X_7$ must be entered as \texttt{(-1j)*E7}.
+
+% ============================================================
 \section{Consequences for FFGFT and GALG}
 % ============================================================
 
@@ -493,6 +586,15 @@ verifiable in GALG.
 (Cl$(6)$ over GF$(9)$ as $8\times8$ matrices; exact order determination;
 blade decomposition with Z3C coefficients; samples of 3000 and 600 elements).
 All assertions passed~\BM.
+
+\texttt{pruef\_341\_primordnung.py} --- entry order of primes $\mathrm{ord}_p(3)$;
+$3^k-1\equiv2\pmod 3$ (no field tripotents); trine-product counterexample in $M_2(\text{GF}(3))$.
+
+\texttt{pruef\_341\_root7\_gf9.py} --- non-existence of root7 with Z3C coefficients;
+order-7 element $X_7=C_{\Phi_7}\oplus I_2$ over GF$(9)$; contrast with $\cos\theta+B\sin\theta$.
+
+\texttt{pruef\_341\_r26\_rein\_p27.py} --- $1+j$ as GF$(9)^*$ generator; pure-coefficient
+root26; $X^q=X\Leftrightarrow$ spectrum in GF$(q)$; $E_7$ sign discrepancy; compact root7 $Y^{26}$.
 
 \texttt{pruef\_341\_vakuum\_witt\_z3.py} --- Vacuum structure verified:
 constructor identity, Witt pairs, $N$ eigenvalues, $\mathbb{Z}_3$ separation

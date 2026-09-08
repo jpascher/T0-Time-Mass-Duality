@@ -370,6 +370,100 @@ $-\text{Vss}[0] = 2\cdot\text{Vss}[0]$ ist idempotent über GF$(9)$;
 $\text{Vss}[0]$ projiziert auf den $N=0$-Sektor (Vakuum + Vollzustand).
 
 % ============================================================
+\section{Höhere Einheitswurzeln: root7, p27-Projektoren, Koeffizientenreinheit}
+% ============================================================
+
+Dougs Folgefragen (IPI, 4.--7.~Sept.~2026) betreffen 7te Einheitswurzeln,
+Projektoren mit $X^{27}=X$ und einen strukturellen Einwand gegen das Ordnung-26-Element.
+Verifiziert in \texttt{pruef\_341\_primordnung.py},
+\texttt{pruef\_341\_root7\_gf9.py}, \texttt{pruef\_341\_r26\_rein\_p27.py}.
+
+\subsection{Eintrittsskala der Primzahlen}
+
+Das kleinste $k$ mit $p \mid 3^k-1$ (also $k=\mathrm{ord}_p(3)$) gibt den ersten
+Körper GF$(3^k)$ an, in dem $p$-te Einheitswurzeln existieren~\KM:
+\begin{center}
+\begin{tabular}{rcl}
+\toprule
+$p$ & $k$ & $|\text{GF}(3^k)^*|$ \\
+\midrule
+13 & 3 & $26 = 2\cdot13$ \\
+5  & 4 & $80 = 2^4\cdot5$ \\
+11 & 5 & $242 = 2\cdot11^2$ \\
+7  & 6 & $728 = 2^3\cdot7\cdot13$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Innerhalb von G$(3)$ (Eigenwerte in GF$(81)$) ist root5 tatsächlich die erste
+ungerade Primzahlwurzel; global tritt 13 vor 5 ein. In keinem GF$(3^k)^*$ gibt es
+ein Element der Ordnung~3, da $3^k-1 \equiv 2 \pmod 3$ für alle $k$: Tripotente
+$t^3=t$ mit $t\neq0,\pm1$ sind ein Matrix-, nie ein Körperphänomen~\KM.
+
+\subsection{root7 existiert nur in GF$(9)$-Arithmetik}
+
+$7 \nmid |\text{GF}(9)^*| = 8$, und $7 \mid 3^k-1$ erstmals bei $k=6$.
+Eine echte komplexe 7te Einheitswurzel hat Koeffizienten in $\mathbb{Q}(e^{2\pi i/7})$
+(Grad~6 über $\mathbb{Q}$); $\cos(2\pi/7)$ hat das Minimalpolynom $8x^3+4x^2-4x-1$
+und liegt weder in $\mathbb{Q}(i)$ noch in GF$(9)$. Konstruktionen der Form
+$\cos\theta + B\sin\theta$ (Euler-Form über $\mathbb{R}$) sind daher keine GALG-Elemente~\KM.
+
+Was existiert, ist ein Ordnung-7-Element in G$(6)$ über GF$(9)$:
+$\Phi_7(x)=x^6+\cdots+1$ ist irreduzibel über GF$(3)$; die Companion-Matrix $C$
+hat Ordnung~7 in $\mathrm{GL}_6(\text{GF}(3))$, und $X_7 = C\oplus I_2 \in M_8(\text{GF}(9))$
+hat Ordnung~7 mit 47 Blades über alle Grade, alle Koeffizienten in $\{\pm1,\pm i\}$~\KM.
+Kompakte Alternative: beliebiges $Y$ mit $7 \mid \mathrm{ord}(Y)$ und
+$X=Y^{\mathrm{ord}(Y)/7}$. Beispiel~\BM:
+\begin{quote}\small
+\texttt{Y = (1j)*(e1\^{}e2\^{}e3) - (e1\^{}e3\^{}e6) + (e2\^{}e3\^{}e4) - (e2\^{}e4\^{}e6)}\\
+\texttt{\ \ \ \ - (1j)*(e4\^{}e5\^{}e6) - (e1\^{}e2\^{}e4\^{}e5)}\\
+\texttt{ord(Y) = 182 = 2*7*13;\ \ X = Y**26;\ \ X**7 == 1,\ X != 1}
+\end{quote}
+$X$ hat 10 Blades, alle Koeffizienten rein ($\pm1$ oder $\pm i$).
+
+\subsection{p27-Projektoren als Körperturm-Hierarchie}
+
+Wegen $x^{27}-x=\prod_{a\in\text{GF}(27)}(x-a)$ gilt $X^{27}=X$ genau dann, wenn
+$X$ halbeinfach mit Spektrum in GF$(27)$ ist. Das verallgemeinert die Tripotenten
+($X^3=X$, Spektrum in GF$(3)$) entlang des Körperturms~\KM:
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+ & $X^3\!=\!X$ & $X^9\!=\!X$ & $X^{27}\!=\!X$ & $X^{81}\!=\!X$ & $X^{729}\!=\!X$ \\
+\midrule
+$N$ (Tripotent) & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+$r_{26}$ (Ordnung 26) & -- & -- & \checkmark & -- & \checkmark \\
+$X_7$ (Ordnung 7) & -- & -- & -- & -- & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{center}
+Dougs „power-of-27 projector'' ist damit exakt: Spektrum in GF$(27)$.
+$X_7$ braucht GF$(729)$, weil $7 \nmid 26$.
+
+\subsection{Koeffizientenreinheit und das Ordnung-26-Element}
+
+Doug wendet ein, $r_{26}$ enthalte $-(1+j)(e_1e_2)$ und mische damit $e_1e_2$
+(Quadrat $-1$) mit $j\,e_1e_2$ (Quadrat $+1$) --- zwei Signaturwahlen.
+Algebraisch ist $1+j$ schlicht der Generator von GF$(9)^*$ (Ordnung~8, Norm~$-1$) ---
+Dougs eigenes $(a+ja)^8=1$ --- also ist $-(1+j)B$ Skalar mal Blade. Der Einwand ist
+eine \emph{physikalische} Reinheitsforderung: jeder Blade-Koeffizient in $\{\pm1\}$
+oder $\{\pm j\}$, nie $a+bj$ mit $a,b\neq0$. Diese Forderung ist erfüllbar~\BM:
+etwa 2,5\,\% zufälliger 5-Blade-Elemente mit reinen Koeffizienten haben Ordnung
+exakt~26, z.\,B.
+\begin{quote}\small
+\texttt{X = (1j)*e3 + (1j)*(e2\^{}e5) + (1j)*(e3\^{}e6) + (e4\^{}e6) + (e3\^{}e5\^{}e6)}\\
+\texttt{X**26 == 1,\ \ X**13 != 1}
+\end{quote}
+$X_7$ oben ist bereits rein (kein gemischter Koeffizient).
+
+\subsection{Konventionshinweis: das Vorzeichen von $E_7$}
+
+GALG definiert $E_7 = -(e_1\wedge\cdots\wedge e_6)$. Ein Element, das mit einem Term
+„$(+i)\,E_7$'' im Sinne von $+i\,e_1\cdots e_6$ übermittelt wird, liest GALG als
+$-i\,e_1\cdots e_6$. Für $X_7$ liefert dieser Vorzeichenwechsel ein nicht-invertierbares
+Element mit $X^{27}=X$ und keinem $X^n=1$ --- exakt Dougs Beobachtung~\KM.
+Mit Dougs $E_7$ muss der letzte Term von $X_7$ als \texttt{(-1j)*E7} eingegeben werden.
+
+% ============================================================
 \section{Konsequenzen für FFGFT und GALG}
 % ============================================================
 
@@ -510,6 +604,15 @@ Diese Ergebnisse sind in Dok.~344 dokumentiert.
 (Cl$(6)$ über GF$(9)$ als $8\times8$-Matrizen; exakte Ordnungsbestimmung;
 Blade-Zerlegung mit Z3C-Koeffizienten; 3000er und 600er Stichproben).
 Alle Assertions bestanden \BM.
+
+\texttt{pruef\_341\_primordnung.py} --- Eintrittsskala der Primzahlen $\mathrm{ord}_p(3)$;
+$3^k-1\equiv2\pmod 3$ (keine Körper-Tripotente); Trine-Produkt-Gegenbeispiel in $M_2(\text{GF}(3))$.
+
+\texttt{pruef\_341\_root7\_gf9.py} --- Nichtexistenz von root7 mit Z3C-Koeffizienten;
+Ordnung-7-Element $X_7=C_{\Phi_7}\oplus I_2$ über GF$(9)$; Abgrenzung zu $\cos\theta+B\sin\theta$.
+
+\texttt{pruef\_341\_r26\_rein\_p27.py} --- $1+j$ als GF$(9)^*$-Generator; root26 mit reinen
+Koeffizienten; $X^q=X\Leftrightarrow$ Spektrum in GF$(q)$; $E_7$-Vorzeichendiskrepanz; kompaktes root7 $Y^{26}$.
 
 \texttt{pruef\_341\_vakuum\_witt\_z3.py} --- Vakuum-Struktur verifiziert:
 Konstruktor-Identität, Witt-Paare, $N$-Eigenwerte, $\mathbb{Z}_3$-Trennung
