@@ -1,0 +1,215 @@
+% 360_HRV_Galois_Experiment_De_ch.tex
+% Johann Pascher, 8. September 2026
+% Galois-informierte HRV-Analyse: Implementierung und Negativ-Validierung
+\providecommand{\BM}{\textbf{[B]}}
+\providecommand{\KM}{\textbf{[K]}}
+\providecommand{\SM}{\textbf{[S]}}
+\providecommand{\XM}{\textbf{[X]}}
+\providecommand{\LM}{\textbf{[L]}}
+
+\phantomsection
+\addcontentsline{toc}{chapter}{%
+  Galois-informierte HRV-Analyse --- Implementierung und Negativ-Validierung}
+
+\section*{Statuszeichen}
+\begin{center}
+\begin{tabular}{@{}lp{10.5cm}@{}}
+\textbf{[B]} & \emph{Belegt} --- algebraisch bewiesen. \\[3pt]
+\textbf{[K]} & \emph{Konfirmiert} --- numerisch geprüft. \\[3pt]
+\textbf{[S]} & \emph{Spekulativ} --- offen. \\[3pt]
+\textbf{[L]} & \emph{Literaturbeleg} --- externer Primärnachweis. \\
+\end{tabular}
+\end{center}
+
+\section*{Abstract}
+
+Dok.~358 und 359 liefern die algebraische Begründung für einen
+Galois-informierten Ansatz in der HRV-Frequenzanalyse. Dieses
+Dokument implementiert den Ansatz als Python-Modul und validiert
+ihn an zwei öffentlichen EKG-Datensätzen. Das Ergebnis ist eine
+\emph{Negativ-Validierung} mit klarem strukturellen Grund.
+
+\textbf{Ergebnisse:}
+\begin{enumerate}
+\item \textbf{Modul} \KM: \texttt{galois\_hrv\_preprocess.py} —
+  vollständige Pipeline: Galois-Projektion, Auflösungsfilter
+  $100\xi\approx1{,}33\,\%$, HRV-Bandgrenzen als Konstanten,
+  Orbit-Typ-Klassifikation, Arnold-Zungenbreite.
+\item \textbf{BIDMC-01} \LM: ICU-Patient, 88~J., 8~min PPG-EKG,
+  Pimentel et al.\ 2017. Ergebnis: 0/3 Verhältnisse 5-Limit,
+  LF/VLF nicht auflösbar (zu kurz). Struktureller Grund: Aufnahme
+  zu kurz für VLF, DFA $\alpha\approx0{,}5$ (weißes Rauschen,
+  fraktale Regulation verloren).
+\item \textbf{Fantasia} \LM: 5 junge + 5 alte Gesunde, je $\approx120$~min
+  Ruhe, spontane Atmung, Gold et al.\ 2002. Ergebnis: LF-Peak-CV
+  11--33\,\% $\gg$ 1{,}33\,\%, 5-Limit LF/HF 4/10 (40\,\%),
+  kein Gruppenunterschied jung/alt.
+\item \textbf{Struktureller Grund} \BM: Bei spontaner Atmung ist
+  $\text{HF} = \text{Atemfrequenz}$ (variabel). LF/HF ist das
+  Verhältnis zweier unabhängiger Regelkreise und kein festes
+  Galois-Verhältnis.
+\item \textbf{Nächster Schritt} \SM: Kontrollierte Atmung 6/min
+  (Resonanzfrequenz-Protokoll, Lehrer \& Gevirtz 2014) mit
+  Polar H10 Brustgurt.
+\end{enumerate}
+
+% ============================================================
+\section{Galois-HRV-Preprocessing-Modul}
+% ============================================================
+
+\texttt{galois\_hrv\_preprocess.py} implementiert (Dok.~359 §5):
+
+\begin{description}
+\item[Galois-Raster] 901 rationale Verhältnisse $p/q$ mit Primfaktoren
+  $\subseteq\{2,3,5,7,11,13\}$ bis Nenner 60.
+\item[Auflösungsfilter] $\Delta f/f \geq 100\xi \approx 1{,}33\,\%$
+  (Farey-$Q_c\approx11$, Dok.~343).
+\item[HRV-Bandgrenzen] VLF: $[0,\,\tfrac{1}{25}]$~Hz, LF: $[\tfrac{1}{25},\,\tfrac{3}{20}]$~Hz,
+  HF: $[\tfrac{3}{20},\,\tfrac{2}{5}]$~Hz --- 5-Limit-Konstanten \BM\ (Dok.~359 Satz~A).
+\item[Galois-Projektion] LF/HF $\mapsto$ nächstes $p/q$ im Raster.
+\item[Orbit-Typ] Galois-Tiefe $k=\mathrm{ord}_p(3)$ der Primfaktoren
+  (Dok.~343, 358).
+\item[Stabilität] Arnold-Zungenbreite $\approx 2/(p+q)$ (Dok.~328).
+\item[Pipeline] \texttt{hrv\_galois\_pipeline(rr\_ms)} --- ein Funktionsaufruf.
+\end{description}
+
+% ============================================================
+\section{Negativ-Validierung I: BIDMC-01}
+% ============================================================
+
+\textbf{Datensatz:} BIDMC PPG and Respiration Dataset v1.0.0,
+Record 01 \LM\,\cite{Pimentel2017}.
+88~J., m., MICU, 8~min, 125~Hz PPG+Respiration.
+
+\textbf{Ergebnis:} 0/3 Frequenzverhältnisse erfüllen das 5-Limit-Kriterium
+(Welch und Lomb-Scargle). VLF nicht auflösbar (Aufnahmedauer 8~min $<$ 15~min
+Minimum für VLF). DFA $\alpha_1=0{,}50$, $\alpha_2=0{,}45$ --- weißes Rauschen;
+bei Gesunden $\approx1{,}0$.
+
+\textbf{Warum:}
+\begin{enumerate}
+\item Zu kurz für VLF ($<15$~min).
+\item ICU-Patient: fraktale Regulation weitgehend verloren.
+\item HF-Peak = gemessene Atemfrequenz (0{,}328~Hz = RESP-Kanal 0{,}336~Hz).
+\item Messunsicherheit Welch vs.\ Lomb-Scargle: $\pm2\,\%$ $>$ FFGFT-Grenze
+  1{,}33\,\%.
+\end{enumerate}
+
+% ============================================================
+\section{Negativ-Validierung II: Fantasia}
+% ============================================================
+
+\textbf{Datensatz:} PhysioNet Fantasia Database v1.0.0
+\LM\,\cite{Gold2002}. 5 jung (f1y01--05, 21--34~J.) + 5 alt
+(f2o01--05, 68--85~J.), je $\approx120$~min Ruhe, 250~Hz EKG,
+spontane Atmung. Annotationsdateien (.ecg), CC-BY 4.0.
+
+\textbf{Methodik:} wfdb-Annotationen, Welch 10-min-Fenster,
+Zero-Padding $\times4$, parabolische Peak-Interpolation,
+LF-Stabilität über 6 $\times$ 5-min-Segmente.
+
+\begin{center}
+\begin{tabular}{@{}lrrrrrrrl@{}}
+\toprule
+Rec & $n_\text{RR}$ & LF~Hz & CV\,\% & LF/HF & $p/q$ & $k$ & 5-Lim & Arnold \\
+\midrule
+f1y01 & 8707 & 0{,}109 & 11{,}5 & 0{,}438 & $7/16$ & 6 & N & 0{,}087 \\
+f1y02 & 6919 & 0{,}085 & 33{,}0 & 0{,}867 & $13/15$ & 4 & N & 0{,}071 \\
+f1y03 & 7641 & 0{,}100 & 13{,}7 & 4{,}219 & $4$ & 1 & J & 0{,}400 \\
+f1y04 & 5232 & 0{,}078 & 30{,}9 & 1{,}060 & $35/33$ & 6 & N & 0{,}029 \\
+f1y05 & 6943 & 0{,}068 & 16{,}5 & 2{,}993 & $3$ & 1 & J & 0{,}500 \\
+\midrule
+f2o01 & 7045 & 0{,}067 & 25{,}6 & 1{,}494 & $3/2$ & 1 & J & 0{,}400 \\
+f2o02 & 6327 & 0{,}052 & 14{,}4 & 0{,}864 & $45/52$ & 4 & N & 0{,}021 \\
+f2o03 & 6478 & 0{,}055 & 22{,}0 & 0{,}841 & $21/25$ & 6 & N & 0{,}043 \\
+f2o04 & 6849 & 0{,}065 & 32{,}2 & 0{,}719 & $28/39$ & 6 & N & 0{,}030 \\
+f2o05 & 8334 & 0{,}049 & 11{,}4 & 1{,}873 & $15/8$ & 4 & J & 0{,}087 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Statistische Tests (Mann-Whitney~U):} Alle Gruppenunterschiede
+jung vs.\ alt n.s.\ ($p>0{,}40$).
+
+\textbf{Befunde:}
+\begin{itemize}
+\item LF-Peak-Stabilität: 0/10 Records stabil ($\text{CV}>1{,}33\,\%$).
+\item 5-Limit LF/HF: 4/10 (40\,\%) --- nicht signifikant über
+  Zufallserwartung ($\approx30\text{--}40\,\%$).
+\item Kein Gruppenunterschied jung/alt (auch bei $n=5$ nicht ausreichend).
+\end{itemize}
+
+% ============================================================
+\section{Struktureller Grund und Konsequenz}
+% ============================================================
+
+\begin{quote}
+\textbf{Befund.} \BM\ Bei spontaner Atmung ist HF = Atemfrequenz
+(variabel 0{,}15--0{,}40~Hz). LF/HF ist das Verhältnis zweier
+unabhängiger physiologischer Regelkreise (Barorezeptor~/ Atmung)
+und konvergiert nicht gegen ein festes Galois-Verhältnis.
+Der Galois-Test ist bei spontaner Atmung strukturell nicht prüfbar.
+\end{quote}
+
+\textbf{Nächster Schritt \SM:} Kontrollierte Atmung bei 6~Zügen/min
+(0{,}10~Hz = LF-Resonanzfrequenz). Dann fallen HF und LF zusammen;
+das System kann einrasten (Arnold-Zunge breit) oder nicht.
+Das ist der Lehrer-\&-Gevirtz-Effekt \LM\,\cite{Lehrer2014},
+physiologisch gut belegt.
+
+\textbf{Empfohlenes Setup:}
+\begin{itemize}
+\item Polar H10 Brustgurt (1~ms RR-Auflösung, $\approx90$~€).
+\item 5~min Eingewöhnung, 10~min bei 6/min Metronom.
+\item Export via Elite HRV oder Kubios HRV (CSV).
+\item Analyse mit \texttt{galois\_hrv\_preprocess.py}.
+\end{itemize}
+
+% ============================================================
+\section{Zusammenfassung}
+% ============================================================
+
+\begin{center}
+\begin{tabular}{@{}lp{9cm}l@{}}
+\toprule
+Ergebnis & Aussage & Status \\
+\midrule
+Modul & \texttt{galois\_hrv\_preprocess.py} funktioniert & \KM \\
+BIDMC-01 & Negativ: zu kurz, ICU, kein Galois-Signal & \LM \\
+Fantasia & Negativ: spontane Atmung, LF wandert & \LM \\
+Grund & HF = Atmung bei Spontanatmung & \BM \\
+Nächstes & 6/min-Atemprotokoll mit Polar H10 & \SM \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Literatur}
+
+\begin{description}[leftmargin=2em,labelwidth=1.8em]
+\item[{[Pim17]}] Pimentel et al.\ (2017). BIDMC PPG and Respiration Dataset.
+  PhysioNet. \url{https://physionet.org/content/bidmc/1.0.0/}
+\item[{[Gol02]}] Gold et al.\ (2002). Fantasia Database. PhysioNet.
+  \url{https://physionet.org/content/fantasia/1.0.0/}
+\item[{[Leh14]}] Lehrer \& Gevirtz (2014). Heart rate variability biofeedback.
+  \emph{Front.\ Psychol.}\ 5:756.
+\item[{[TF96]}] Task Force ESC/NASPE (1996). Heart rate variability.
+  \emph{Eur.\ Heart J.}\ 17, 354--381.
+\end{description}
+
+\section*{Skripte}
+
+\texttt{2/python/Dok360\_Skripte/}:
+\texttt{galois\_hrv\_preprocess.py},
+\texttt{fantasia\_galois\_analyse.py},
+\texttt{orbit\_experiment\_synthetic.py},
+\texttt{01\_rpeaks\_bidmc01.py},
+\texttt{02\_welch\_5limit.py},
+\texttt{03\_lombscargle\_dfa.py}.
+Fantasia-Daten: f1y01--05, f2o01--05 (.ecg/.hea, CC-BY~4.0).
+
+\section*{Vermerk zur Verwendung von KI-Assistenz}
+
+Bei der Erstellung dieses Dokuments wurde KI-Assistenz (Claude, Anthropic)
+für Formulierung, LaTeX-Satz und Analyse-Skripte verwendet.
+Die inhaltlichen Aussagen und die Verantwortung für den Text
+liegen beim Autor.

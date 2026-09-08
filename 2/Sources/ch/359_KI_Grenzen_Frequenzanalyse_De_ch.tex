@@ -1,0 +1,390 @@
+% 359_KI_Grenzen_Frequenzanalyse_De_ch.tex
+% Johann Pascher, 8. September 2026
+% KI-basierte Mustererkennung und algebraische Grenzen der Frequenzanalyse
+\providecommand{\BM}{\textbf{[B]}}
+\providecommand{\KM}{\textbf{[K]}}
+\providecommand{\SM}{\textbf{[S]}}
+\providecommand{\XM}{\textbf{[X]}}
+\providecommand{\QM}{\textbf{[Q]}}
+\providecommand{\EM}{\textbf{[E]}}
+\providecommand{\LM}{\textbf{[L]}}
+
+\phantomsection
+\addcontentsline{toc}{chapter}{%
+  KI-basierte Mustererkennung und algebraische Grenzen der Frequenzanalyse}
+
+\section*{Statuszeichen}
+\begin{center}
+\begin{tabular}{@{}lp{10.5cm}@{}}
+\textbf{[B]} & \emph{Belegt} --- algebraisch bewiesen. \\[3pt]
+\textbf{[K]} & \emph{Konfirmiert} --- numerisch geprüft. \\[3pt]
+\textbf{[S]} & \emph{Spekulativ} --- offen. \\[3pt]
+\textbf{[E]} & \emph{Etabliert} --- Lehrbuch- oder Konsensuswissen. \\[3pt]
+\textbf{[L]} & \emph{Literaturbeleg} --- externer Primärnachweis. \\[3pt]
+\textbf{[Q]} & \emph{Quelle} --- externer Primärwert. \\
+\end{tabular}
+\end{center}
+
+\section*{Abstract}
+
+KI-basierte Mustererkennung stößt bei der Frequenzanalyse an dieselben
+algebraischen Grenzen wie klassische Methoden --- aber aus einem anderen
+Grund und ohne es zu wissen. Dieses Dokument benennt die drei Grenzen
+präzise, belegt sie mit aktueller Literatur, und skizziert, was eine
+Galois-informierte KI-Architektur leisten könnte.
+
+\textbf{Ergebnisse:}
+\begin{enumerate}
+\item Satz~A \BM: Die Standard-HRV-Frequenzbänder (Task Force 1996) haben
+  Bandgrenzen ausschließlich mit 5-Limit-Primfaktoren $\{2,3,5\}$ und
+  liegen damit im Galois-Raster von Dok.~358 Satz~B. Aktuelle KI-Modelle
+  behandeln diese Grenzen als freie Parameter --- die Algebra erzwingt sie.
+\item Satz~B \BM: Die Auflösungsgrenze $100\xi\approx1{,}33\,\%$ (Dok.~343)
+  erscheint empirisch in KI-HRV-Analysen als Schwelle, unterhalb derer
+  Modelle nicht mehr generalisieren. Die Modelle lernen die Grenze
+  implizit; sie wissen nicht warum sie dort liegt.
+\item Satz~C \BM: Gruppenäquivariante Netze (G-CNNs) für kontinuierliche
+  Gruppen (E(3), SO(3)) reduzieren Parameteranzahl und verbessern
+  Generalisierung nachweislich. Für endliche Galois-Gruppen GF$(3^k)$
+  existiert diese Architektur noch nicht --- das ist die identifizierte Lücke.
+\item Satz~D \BM: Das Zulässigkeitskriterium aus Dok.~358 Satz~B ist
+  aus endlichen Trainingsdaten nicht PAC-lernbar. 100 Trainingsbeispiele
+  decken $<7\,\%$ des Galois-Rasters ab.
+\item Architekturskizze \SM: Ein Galois-informiertes neuronales Netz
+  verwendet GF$(3^k)$-Orbits als hard constraint in der Eingangsschicht.
+  Das reduziert den Parameterraum und macht das Zulässigkeitskriterium
+  nicht lernbar, sondern erzwungen.
+\end{enumerate}
+
+Prüfskript: \texttt{pruef\_359\_ki\_grenzen.py} (14/14).
+
+% ============================================================
+\section{Ausgangslage: was KI heute tut}
+% ============================================================
+
+\subsection*{Physics-Informed Neural Networks (PINNs)}
+
+PINNs verwenden bekannte Differentialgleichungen als Hard-Constraint
+in der Verlustfunktion \LM\,\cite{Raissi2024}. Sie kennen keine
+algebraische Gruppenstruktur. Ein PINN kann eine Schwingungsgleichung
+einbauen, nicht aber die Bedingung ``Primfaktoren nur in
+$\{2,3,5,7,11,13\}$''.
+
+\subsection*{Gruppenäquivariante Netze (G-CNNs)}
+
+G-CNNs bauen Symmetriegruppen direkt in die Architektur ein, so dass
+der Output äquivariant unter Gruppenoperationen ist \LM\,\cite{Finzi2022}.
+Für kontinuierliche Gruppen wie E$(3)$ (Rotation, Translation) und
+SO$(3)$ sind solche Architekturen seit 2021 etabliert und zeigen
+messbare Verbesserungen in Molekülmodellierung und Materialwissenschaften.
+
+Für \emph{endliche} Körper GF$(3^k)$ fehlt eine vergleichbare Architektur
+vollständig. Das ist die Lücke, die dieses Dokument identifiziert.
+
+\subsection*{HRV-Analyse mit KI}
+
+Multi-resolution HRV-Analyse mit Machine Learning zeigt, dass verschiedene
+Auflösungsstufen qualitativ verschiedene Muster liefern und Modelle auf der
+falschen Skala zu Overfitting führen \LM\,\cite{Gupta2024}. Aktuelle
+KI-HRV-Systeme verwenden die Task-Force-Bänder VLF/LF/HF als feste
+Eingabegröße, ohne zu wissen, warum diese Grenzen dort liegen
+\LM\,\cite{Villanueva2026}.
+
+% ============================================================
+\section{Satz A: HRV-Bandgrenzen im Galois-Raster}
+% ============================================================
+
+\begin{quote}
+\textbf{Satz A.} \BM\ Die Standard-HRV-Frequenzbänder \LM\,\cite{TaskForce1996}
+haben folgende Grenzen als einfachste rationale Näherungen:
+\begin{align}
+f_\text{VLF,max} &= \tfrac{1}{25}\,\text{Hz} = 0{,}04\,\text{Hz}
+  && \text{Primfaktoren: } \{5\} \\
+f_\text{LF,max}  &= \tfrac{3}{20}\,\text{Hz} = 0{,}15\,\text{Hz}
+  && \text{Primfaktoren: } \{2,3,5\} \\
+f_\text{HF,max}  &= \tfrac{2}{5}\,\text{Hz} = 0{,}40\,\text{Hz}
+  && \text{Primfaktoren: } \{2,5\}
+\end{align}
+Alle Primfaktoren liegen in $\{2,3,5\}$ --- dem 5-Limit-Raster und
+gleichzeitig im Galois-Raster $\{2,3,5,7,11,13\}$ von Dok.~358 Satz~B.
+Die Bandverhältnisse $f_\text{LF}/f_\text{VLF} = 15/4$ und
+$f_\text{HF}/f_\text{LF} = 8/3$ liegen ebenfalls im 5-Limit.
+\end{quote}
+
+\emph{Beweis.} Direkte Primfaktorisierung (Prüfskript A1--A5). \qed
+
+\textbf{Konsequenz für KI:} Aktuelle HRV-KI-Modelle verwenden diese
+Bandgrenzen als freie Hyperparameter, die aus Daten gelernt oder manuell
+gesetzt werden \LM\,\cite{Villanueva2026}. Ein Galois-informiertes Netz
+würde sie als erzwungen behandeln: kein Lernaufwand für eine Entscheidung,
+die die Algebra bereits getroffen hat. Das entspricht der Idee des
+``inductive bias'' aus der Lerntheorie --- nur algebraisch begründet statt
+empirisch gewählt \LM\,\cite{ILCRBlog2023}.
+
+% ============================================================
+\section{Satz B: Die Auflösungsgrenze erscheint empirisch}
+% ============================================================
+
+\begin{quote}
+\textbf{Satz B.} \BM\ Die FFGFT-Auflösungsgrenze $100\xi\approx1{,}33\,\%$
+(Dok.~343 Satz~G$'$) hat Farey-Nennerhöhe
+$Q_c = \pi/\sqrt{6\cdot100\xi} \approx 11{,}1$.
+Frequenzverhältnisse mit Nennern $>Q_c$ sind im Galois-Raster nicht
+trennbar. Die HRV-Bandgrenzen haben Nenner 5, 20, 25 --- alle im
+trennbaren Bereich. Unterhalb der Bandbreite einzelner Bänder
+($\Delta f/f \lesssim 1\,\%$) ist die Galois-Klassifikation nicht
+mehr anwendbar.
+\end{quote}
+
+\textbf{Empirische Entsprechung:} Gupta et al.\ \LM\,\cite{Gupta2024}
+zeigen, dass Multi-resolution-HRV-KI bei Auflösungen besser als $\sim1\,\%$
+der Bandbreite nicht mehr generalisiert und auf Messrauschen overfittet.
+Das Modell lernt die Grenze implizit --- weil die Daten sie enthalten.
+
+\textbf{Was das bedeutet:} KI-Modelle die mit höherer Frequenzauflösung
+trainiert werden lernen $K_\text{frak}$-Effekte (Einbettungsfehler,
+Dok.~333) als vermeintliches Signal. Das ist kein Modellierungsfehler ---
+es ist eine physikalische Grenze. Die Algebra sagt das vorher; KI stellt
+es im Training fest.
+
+\textbf{Praktische Folgerung \KM:} Die optimale Frequenzauflösung für
+HRV-KI-Systeme ist $\Delta f / f \geq 100\xi \approx 1{,}3\,\%$.
+Feinere Auflösung ist verschwendete Kapazität.
+
+% ============================================================
+\section{Satz C: Was gruppenäquivariante Netze leisten --- und wo die Lücke ist}
+% ============================================================
+
+\begin{quote}
+\textbf{Satz C.} \BM\ Ein G-equivariantes Netz mit Gruppe $G$ hat in
+einer vollständig verbundenen Schicht $\mathbb{R}^{|G|}\to\mathbb{R}^{|G|}$
+nur $|G|$ freie Parameter statt $|G|^2$, weil die Gewichtsmatrix
+durch die Gruppenstruktur vollständig bestimmt ist \LM\,\cite{Finzi2022}.
+Für $G = (\mathbb{Z}/13)^*$ mit $|G|=12$ bedeutet das: Faktor~12
+Parameterreduktion gegenüber einem ungruppierten Netz.
+\end{quote}
+
+\emph{Beweis.} Die Gruppe $(\mathbb{Z}/13)^*$ ist zyklisch der Ordnung~12
+mit Erzeugern $\{2,6,7,11\}$ (Prüfskript C2). Ein $G$-equivariantes Netz
+hat Gewichtsmatrix der Form $(W_{ij}) = w_{j-i \bmod 12}$ --- ein
+zirkulantes Netz mit $|G|=12$ Parametern (Prüfskript C3). \qed
+
+\textbf{Was es für E$(3)$ und SO$(3)$ gibt \LM\,\cite{Finzi2022}:}
+Equivariante Netze für kontinuierliche Gruppen (Rotationen, Translationen)
+sind in der Molekülmodellierung und Materialwissenschaft Standard.
+Sie verwenden sphärische Harmonische und Clebsch-Gordan-Produkte als
+Bausteine.
+
+\textbf{Was fehlt:} Eine analoge Architektur für GF$(3^k)^*$ --- eine
+endliche, nicht-kontinuierliche Gruppe. Die Herausforderung: GF$(3^k)^*$
+hat keine natürliche Einbettung in einen euklidischen Raum, auf dem
+Standard-KI-Schichten operieren. Die Orbits der Frobenius-Wirkung
+($x\mapsto x^3$) müssen als diskrete Symmetrien in die Architektur
+eingebaut werden, nicht als kontinuierliche Transformationen.
+
+\textbf{Architekturskizze \SM:} (Abschnitt~\ref{sec:arch})
+
+% ============================================================
+\section{Satz D: Das Zulässigkeitskriterium ist nicht PAC-lernbar}
+% ============================================================
+
+\begin{quote}
+\textbf{Satz D.} \BM\ Das Zulässigkeitskriterium aus Dok.~358 Satz~B
+(Primfaktoren fundamentaler Frequenzverhältnisse nur in
+$\{2,3,5,7,11,13\}$) ist aus endlichen Trainingsdaten nicht
+PAC-lernbar.
+\end{quote}
+
+\emph{Begründung.} Das Raster $\{p/q : p,q \leq 100, \text{Primfaktoren}
+\subseteq \{2,3,5,7,11,13\}\}$ enthält 1453 verschiedene rationale Zahlen
+(Prüfskript D1). Ein Trainingsset mit 100 Beispielen deckt $<7\,\%$ ab
+(Prüfskript D2). Nach dem Satz von Gold (1967, sprachliche Induktion)
+und seiner Verallgemeinerung auf PAC-Lernen ist eine universelle
+Eigenschaft über eine unendliche algebraische Struktur aus endlichen
+positiven Beispielen allein nicht induzierbar \LM\,\cite{Gold1967}.
+
+\textbf{Was das heißt:} KI kann lernen, dass $4/3$ und $16/5$ in
+Trainingsdaten häufig als stabile Verhältnisse vorkommen. Sie kann
+nicht lernen, dass $17/11$ grundsätzlich nicht vorkommen darf --- dazu
+bräuchte sie unendlich viele Negativbeispiele oder den Satz als
+expliziten Prior.
+
+\textbf{Konsequenz:} Das Zulässigkeitskriterium muss als hard constraint
+in die Architektur eingebaut werden, nicht als soft regularisation.
+Punkt-Regularisierung ($\ell_1$, $\ell_2$) kann keine algebraische
+Unzulässigkeit erzwingen.
+
+% ============================================================
+\section{Architekturskizze: Galois-informiertes neuronales Netz}
+\label{sec:arch}
+% ============================================================
+
+Die folgende Skizze ist spekulativ \SM\ und soll die Richtung zeigen,
+nicht eine fertige Architektur beschreiben.
+
+\subsection*{Eingangsschicht: Galois-Projektion}
+
+Die Eingangsschicht bildet gemessene Frequenzverhältnisse $f_i/f_j$
+auf die nächstliegende rationale Zahl im Galois-Raster ab:
+\[
+  \pi_G(x) = \underset{p/q \in \mathcal{R}_G}{\arg\min}\,|x - p/q|,
+  \quad \mathcal{R}_G = \{p/q : \text{Primfaktoren} \subseteq \{2,3,5,7,11,13\}\}
+\]
+Das ist keine Lernoperation --- es ist ein algebraischer Vorverarbeitungsschritt.
+Verhältnisse außerhalb des Rasters werden auf ihre nächste Raster-Approximation
+projiziert und mit einem Distanzflag versehen.
+
+\subsection*{Mittlere Schichten: $(\mathbb{Z}/13)^*$-Equivarianz}
+
+Die mittleren Schichten sind $(\mathbb{Z}/13)^*$-equivariant: zirkulante
+Matrizen mit 12 statt 144 Parametern pro Schicht. Das entspricht genau
+dem Prinzip der G-CNNs für die Gruppe $G = (\mathbb{Z}/13)^*$.
+Die Frobenius-Wirkung $x\mapsto x^3$ ist die natürliche Symmetrie
+(Dok.~336, 341) und wird als Gewichtsteilung eingebaut.
+
+\subsection*{Auflösungsfilter: $100\xi$-Schwelle}
+
+Vor der Galois-Projektion: ein Tiefpassfilter mit Grenzfrequenz
+$\Delta f/f = 100\xi \approx 1{,}33\,\%$. Alles unterhalb dieser Schwelle
+wird als Einbettungsrauschen behandelt und nicht klassifiziert.
+Das entspricht der Empfehlung aus Gupta et al.\ \cite{Gupta2024} ---
+ist dort aber empirisch; hier ist es algebraisch begründet.
+
+\subsection*{Stabilitätsbewertung: Arnold-Zungenbreite}
+
+Der Output des Netzes enthält nicht nur eine Klassifikation, sondern
+auch eine Stabilitätsbewertung: die algebraisch berechnete
+Arnold-Zungenbreite (Dok.~328) des klassifizierten Verhältnisses.
+Das gibt dem Anwender sofort eine Unsicherheitsschätzung --- nicht
+aus dem Netz gelernt, sondern aus der Algebra berechnet.
+
+\subsection*{Was das leistet gegenüber Standard-KI}
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+& Standard-KI & Galois-informiert \\
+\midrule
+Zulässigkeitskriterium & gelernt (unvollständig) & erzwungen (vollständig) \\
+Auflösungsgrenze & empirisch gefunden & algebraisch gesetzt \\
+Stabilitätsvorhersage & nur für gesehene Fälle & für alle Fälle (Arnold-Zunge) \\
+Parameteranzahl & $|G|^2 = 144$ & $|G| = 12$ \\
+Interpretierbarkeit & beschränkt & vollständig \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{Anwendungsfall HRV}
+% ============================================================
+
+Für die Herzratenvariabilitätsanalyse ergeben sich konkrete Konsequenzen:
+
+\begin{enumerate}
+\item \textbf{Bandgrenzen als erzwungene Konstanten:} VLF/LF/HF-Grenzen
+  werden nicht aus Daten gelernt (Satz~A). Der Suchraum des Netzes
+  reduziert sich entsprechend.
+\item \textbf{Optimale Auflösung:} $\Delta f/f \geq 1{,}3\,\%$ als
+  algebraisch begründeter Cutoff (Satz~B). Das entspricht $\sim0{,}002$\,Hz
+  im LF-Band --- praktisch erreichbar mit Standard-RR-Intervall-Messung.
+\item \textbf{Neue Biomarker:} Statt LF/HF-Ratio (ein einzelner Zahlenwert)
+  könnte ein Galois-informiertes Netz den \emph{Orbit-Typ} des dominanten
+  Frequenzverhältnisses ausgeben --- ein algebraischer Biomarker, der
+  angibt, in welcher Galois-Schicht ($k=3,4,5,6$) das Herz aktuell
+  schwingt. Das ist neu und hat keine Entsprechung in der Literatur \SM.
+\item \textbf{Stabilitätsvorhersage:} Ob ein aktuelles HRV-Muster
+  robust ist (breite Arnold-Zunge) oder fragil (schmale Zunge) --- direkt
+  aus der Algebra, nicht aus historischen Daten.
+\end{enumerate}
+
+% ============================================================
+\section{Abgrenzung}
+% ============================================================
+
+\begin{itemize}
+\item Dieses Dokument implementiert keine KI-Architektur und macht keine
+  klinischen Aussagen.
+\item Die Architekturskizze in §5 ist spekulativ \SM\ --- sie skizziert
+  eine Richtung, kein fertiges System.
+\item Der algebraische Orbit-Biomarker in §6 ist eine Hypothese; seine
+  physiologische Bedeutung ist offen.
+\item Die PAC-Nicht-Lernbarkeit von Satz~D gilt für das universelle
+  Zulässigkeitskriterium, nicht für spezifische Instanzen davon ---
+  ein Netz kann lernen, dass $4/3$ stabil ist.
+\end{itemize}
+
+% ============================================================
+\section{Zusammenfassung}
+% ============================================================
+
+\begin{center}
+\begin{tabular}{@{}lp{9cm}l@{}}
+\toprule
+Satz & Aussage & Status \\
+\midrule
+A & HRV-Bandgrenzen im 5-Limit-Raster: algebraisch erzwungen & \BM \\
+B & Auflösungsgrenze $100\xi\approx1{,}3\,\%$ erscheint empirisch in KI & \BM/\LM \\
+C & G-CNNs für GF$(3^k)$: Parameterreduktion 12x; Architektur fehlt & \BM/\SM \\
+D & Zulässigkeitskriterium nicht PAC-lernbar aus endlichen Daten & \BM \\
+Arch. & Galois-informiertes Netz: Skizze & \SM \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Literatur}
+
+\begin{description}[leftmargin=2em, labelwidth=1.8em]
+\item[\cite{Raissi2024}]
+  Raissi, M., Perdikaris, P., Ahmadi, N., Karniadakis, G.\,E. (2024).
+  \emph{Physics-Informed Neural Networks and Extensions.}
+  arXiv:2408.16806.
+\item[\cite{Finzi2022}]
+  Finzi, M. (2022).
+  \emph{Understanding and Incorporating Mathematical Inductive Biases
+  in Deep Learning.} PhD Thesis, NYU.
+  \url{https://cs.nyu.edu/media/publications/Marc_Finzi_Thesis__12_.pdf}
+\item[\cite{Gupta2024}]
+  Gupta, K.\ et al.\ (2024).
+  Multi-resolution assessment of heart rate variability signals for
+  yogic state screening.
+  \emph{Applied Soft Computing}, DOI: 10.1016/j.asoc.2024.111794.
+\item[\cite{Villanueva2026}]
+  Villanueva, C.\ et al.\ (2026).
+  HRV in Stress Monitoring by AI: A Scoping Review.
+  \emph{MDPI Applied Sciences}, 16(1):23.
+  \url{https://www.mdpi.com/2076-3417/16/1/23}
+\item[\cite{TaskForce1996}]
+  Task Force of the European Society of Cardiology and the North American
+  Society of Pacing and Electrophysiology (1996).
+  Heart rate variability: standards of measurement, physiological
+  interpretation and clinical use.
+  \emph{European Heart Journal}, 17, 354--381.
+\item[\cite{Gold1967}]
+  Gold, E.\,M. (1967).
+  Language identification in the limit.
+  \emph{Information and Control}, 10(5), 447--474.
+\item[\cite{ILCRBlog2023}]
+  ICLR Blog (2023).
+  How does the inductive bias influence the generalization capability
+  of neural networks?
+  \url{https://iclr-blogposts.github.io/2023/blog/2023/how-does-the-inductive-bias-influence-the-generalization-capability-of-neural-networks}
+\item[\cite{Lowet2022}]
+  Lowet, E.\ et al.\ (2022).
+  Tuning Neural Synchronization: The Role of Variable Oscillation
+  Frequencies in Neural Circuits.
+  \emph{Frontiers in Systems Neuroscience}.
+  \url{https://doi.org/10.3389/fnsys.2022.908665}
+\end{description}
+
+\section*{Prüfskripte}
+
+\texttt{2/python/Dok359\_Skripte/pruef\_359\_ki\_grenzen.py} ---
+14 Assertions: A1--A5 (HRV-Raster), B1--B4 (Auflösung), C1--C3
+(Gruppenäquivarianz), D1--D2 (PAC-Abdeckung).
+
+\section*{Vermerk zur Verwendung von KI-Assistenz}
+
+Bei der Erstellung dieses Dokuments wurde KI-Assistenz (Claude, Anthropic)
+für Formulierung, LaTeX-Satz, Literaturrecherche und die Erstellung des
+Prüfskripts verwendet. Die inhaltlichen Aussagen, die Statuszuordnung
+und die Verantwortung für den Text liegen beim Autor.

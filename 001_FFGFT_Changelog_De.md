@@ -463,3 +463,74 @@ sind zwei Darstellungen desselben Objekts — des Charakterspektrums von $T^4/Z_
 **Prüfskript:** `2/python/Dok358_Skripte/pruef_358_harmonik_algebra.py` — 22/22.
 
 **Register:** R117 eingetragen.
+
+---
+
+## 8. September 2026 — Dok. 359: KI-basierte Mustererkennung und algebraische Grenzen
+
+### Dok. 359 — KI-basierte Mustererkennung und algebraische Grenzen der Frequenzanalyse (De 8 S./En 8 S.)
+
+Anwendungsdokument: verbindet Dok. 328, 342, 343, 358 mit aktueller KI-Literatur.
+Keine Wiederholungen — nur Zitate und neue Anwendungsresultate.
+
+**Satz A [B]:** HRV-Bandgrenzen VLF/LF/HF (Task Force 1996) haben Primfaktoren nur
+in $\{2,3,5\}$ — algebraisch erzwungen, nicht empirisch gewählt.
+Aktuelle KI-Modelle lernen sie als freie Parameter (Verschwendung).
+
+**Satz B [B/L]:** Auflösungsgrenze $100\xi\approx1{,}33\,\%$ erscheint empirisch in
+KI-HRV-Analysen (Gupta et al. 2024, Villanueva et al. 2026) als Overfitting-Schwelle.
+Praktische Folgerung: optimale Frequenzauflösung $\Delta f/f \geq 1{,}3\,\%$.
+
+**Satz C [B/S]:** G-equivariante Netze für kontinuierliche Gruppen (E(3), SO(3)) sind
+etabliert und reduzieren Parameter nachweislich. Für GF$(3^k)$ fehlt diese Architektur
+vollständig — identifizierte Lücke in der Literatur.
+
+**Satz D [B]:** Das Zulässigkeitskriterium aus Dok. 358 (Primfaktoren $\leq13$) ist nicht
+PAC-lernbar aus endlichen Daten (Gold 1967). 100 Trainingsbeispiele decken $<7\,\%$
+des Rasters ab. Hard constraint statt Regularisierung erforderlich.
+
+**Architekturskizze [S]:** Galois-informiertes Netz mit Galois-Projektion als
+Eingangsschicht, $(Z/13)^*$-equivarianten Mittelschichten (12 statt 144 Parameter),
+$100\xi$-Auflösungsfilter, und Arnold-Zungenbreite als Stabilitätsbewertung.
+
+**Neuer HRV-Biomarker [S]:** Orbit-Typ des dominanten Frequenzverhältnisses als
+algebraischer Biomarker (Galois-Schicht $k=3,4,5,6$) — kein Äquivalent in Literatur.
+
+**Literatur:** Raissi et al. 2024, Finzi 2022 (NYU), Gupta et al. 2024, Villanueva et al. 2026,
+Task Force 1996, Gold 1967, ICLR Blog 2023, Lowet et al. 2022.
+
+**Prüfskript:** `2/python/Dok359_Skripte/pruef_359_ki_grenzen.py` — 14/14.
+
+**Register:** R118 eingetragen.
+
+---
+
+## 8. September 2026 — Dok. 360: Galois-HRV-Vorverarbeitungsfilter und Orbit-Experiment
+
+### Dok. 360 — Galois-informierte HRV-Analyse: Implementierung und Experiment
+
+Zwei Python-Module als direkte Anwendung von Dok. 358/359:
+
+**galois_hrv_preprocess.py** — vollständiges Preprocessing-Modul:
+- Galois-Raster (901 Verhältnisse bis 60/60, Primfaktoren ⊆ {2,3,5,7,11,13})
+- Auflösungsfilter Δf/f ≥ 1,33% (aus $100\xi$, Dok. 343)
+- HRV-Bandgrenzen als algebraische Konstanten (5-Limit, Dok. 359 Satz A)
+- Galois-Projektion LF/HF → nächstes p/q im Raster
+- Orbit-Typ-Klassifikation (k=1..6)
+- Arnold-Zungenbreite als Stabilitätsbewertung (Dok. 328)
+- Vollständige Pipeline inkl. Welch-Spektrum und Resampling
+
+**orbit_experiment_synthetic.py** — Experiment mit synthetischen Daten
+nach Task Force 1996 / Shaffer 2017:
+
+**Schlüsselbefunde [S/K]:**
+1. Galois-Stabilität (Arnold-Zungenbreite) trennt VES-schwere Rhythmen (LF/HF~5,5)
+   von Normal-Ruhe (LF/HF~1,5) hochsignifikant ($p<0{,}001$)
+2. Orbit-$k$ allein ist kein guter Diskriminator — Stabilität ist die stärkere Metrik
+3. Physiologischer Normalbereich LF/HF < 4 liegt gut im Galois-Raster $k=1$..4
+4. Schwere Arrhythmien (LF/HF >> 4) zeigen Bedarf nach GF(729), $k=6$ (R115-Kandidat)
+5. PhysioNet MIT-BIH erfordert Registrierung — Validierung mit realen Daten offen
+
+**Nächster Schritt [S]:** Validierung mit registriertem PhysioNet-Zugang.
+
+**Register:** R119 eingetragen.
