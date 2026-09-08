@@ -1,0 +1,357 @@
+% 358_Harmonik_Algebra_De_ch.tex
+% Johann Pascher, 8. September 2026
+% Harmonik und algebraische Struktur: warum dieselbe Mathematik — und was das bringt
+\providecommand{\BM}{\textbf{[B]}}
+\providecommand{\KM}{\textbf{[K]}}
+\providecommand{\SM}{\textbf{[S]}}
+\providecommand{\XM}{\textbf{[X]}}
+\providecommand{\QM}{\textbf{[Q]}}
+\providecommand{\EM}{\textbf{[E]}}
+
+\phantomsection
+\addcontentsline{toc}{chapter}{%
+  Harmonik und algebraische Struktur --- warum dieselbe Mathematik}
+
+\section*{Statuszeichen}
+\begin{center}
+\begin{tabular}{@{}lp{10.5cm}@{}}
+\textbf{[K]} & \emph{Konfirmiert} --- numerisch geprüft. \\[3pt]
+\textbf{[B]} & \emph{Belegt} --- algebraisch bewiesen. \\[3pt]
+\textbf{[S]} & \emph{Spekulativ} --- offen. \\[3pt]
+\textbf{[E]} & \emph{Etabliert} --- Lehrbuchmathematik, nicht FFGFT-spezifisch. \\[3pt]
+\textbf{[Q]} & \emph{Quelle} --- externer Primärwert. \\
+\end{tabular}
+\end{center}
+
+\section*{Abstract}
+
+Der Korpus beschreibt harmonische Strukturen an mehreren Stellen mit der
+Algebra endlicher Körper: Kommas und fraktale Korrektur (Dok.~060),
+Obertöne als Torusspektrum (Dok.~159), Eintrittsregel der harmonischen
+Primzahlen und Akkorde als Partitionen (Dok.~342), Zeta-Hierarchie und
+Auflösungsboden (Dok.~343), Konsonanz als Kopplungsgeometrie (Dok.~328).
+Dieses Dokument wiederholt diese Ergebnisse nicht. Es beantwortet zwei
+Fragen, die dort offen bleiben: \emph{Warum} beschreibt dieselbe
+Mathematik beide Gegenstände --- und \emph{was bringt} das.
+
+\textbf{Ergebnisse:}
+\begin{enumerate}
+\item Satz~A \BM: Im endlichen Körper schließt jeder ``Quintenzirkel''
+  exakt; ein Komma ist unmöglich. Das Komma der Musik und die fraktale
+  Korrektur $K_\text{frak}$ sind daher keine Eigenschaften der
+  Galois-Struktur, sondern der Einbettung ins Kontinuum. Das erklärt,
+  warum $K_\text{frak}$ im Korpus erst beim SI-Übergang sichtbar wird
+  (Dok.~333).
+\item Satz~B \BM: Die beiden Ausnahmen der 5-Limit-Lesart von Dok.~060
+  (Strange mit Primzahl 13, Top mit Primzahl 7) sind in der Galois-Lesart
+  keine Ausnahmen: 13 und 7 sind die harmonischen Primen der Tiefe $k=3$
+  und $k=6$ (Dok.~343 Satz~E). Alle neun Yukawa-Koeffizienten liegen im
+  Galois-Raster $\{2,3,5,7,11,13\}$; die Primzahl 11 ($k=5$) tritt nicht auf.
+\item Beobachtung~C \SM: Drei Zwölfen fallen zusammen --- die
+  zwölfstufige Temperierung als Quotient des Tonnetzes durch zwei Kommas,
+  $|(\mathbb{Z}/13)^*|=12$ als Trägergruppe der vier Fermionsektoren,
+  und die Farey-Nennerhöhe $Q_c\approx11$--$12{,}5$ bei Komma-Auflösung.
+  Die Mechanismen sind verschieden; die Übereinstimmung der Ordnung ist
+  eine Beobachtung, kein Satz.
+\item Satz~D \BM: Die Antwort auf die Warum-Frage: $\tilde{T}\cdot m=1$
+  macht Massenverhältnisse zu Periodenverhältnissen; Periodenverhältnisse
+  sind Charaktere zyklischer Gruppen; die $Z_3$-Reduktion macht daraus
+  Arithmetik in GF$(3^k)$. Harmonik und Galois-Klassifikation sind nicht
+  analog, sondern zwei Darstellungen desselben Objekts.
+\end{enumerate}
+
+Prüfskript: \texttt{pruef\_358\_harmonik\_algebra.py} (22/22).
+
+% ============================================================
+\section{Ausgangslage: was der Korpus bereits sagt}
+% ============================================================
+
+Die folgende Tabelle ordnet die bestehenden Ergebnisse zu und wird im
+Weiteren nur zitiert.
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Harmonik & Algebra / FFGFT & Dok. \\
+\midrule
+Obertonreihe $f, 2f, 3f,\dots$ & Laplace-Spektrum auf $S^1$, $T^d$ & 159 \\
+Pythagoreisches Komma $+1{,}364\,\%$ & $K_\text{frak}=1-100\xi$, $-1{,}333\,\%$ & 060, 133 \\
+5-Limit-Verhältnisse & Yukawa-Koeffizienten $r_i$ & 006, 060 \\
+Quintenzirkel & Torus-Topologie, Wicklungszahlen & 060, 189 \\
+Temperierung & Renormierung / $K_\text{frak}$ & 060 \\
+Konsonanz $\leftrightarrow$ Nennerhöhe & Farey-Höhe $Q_c$, Arnold-Zungen & 328, 343 \\
+Harmonische Primen $5,7,11,13$ & Eintrittstiefe $k=\mathrm{ord}_p(3)$ & 342, 343 \\
+Akkorde & Partitionen von 8 in G$(6)$ & 342 \\
+7-Limit als Hörgrenze & Euler-Faktor-Schwelle $p^*\approx9{,}76$ & 343 \\
+Auflösungsgrenze $\approx1\,\%$ & $100\xi$ als fraktale Stufe & 343 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Offen bleibt in allen genannten Dokumenten die Frage, warum diese
+Zuordnung überhaupt trägt --- ob sie Analogie ist oder Identität.
+
+% ============================================================
+\section{Satz A: Im endlichen Körper gibt es kein Komma}
+% ============================================================
+
+\begin{quote}
+\textbf{Satz A.} \BM\ Sei $q=3^k$. In GF$(q)^*$ hat jedes Element
+endliche Ordnung, die $q-1$ teilt. Jede von einem Element $g$ erzeugte
+Kette $g, g^2, g^3,\dots$ kehrt exakt zu $1$ zurück. Ein Komma ---
+ein Rest nach einem fast geschlossenen Umlauf --- ist in GF$(q)^*$
+unmöglich. In $\mathbb{Q}^*$ dagegen ist keine Quintenkette
+schließbar: $3^a=2^b$ hat keine Lösung $a,b>0$.
+\end{quote}
+
+\emph{Beweis.} Der erste Teil ist der Satz von Lagrange für die zyklische
+Gruppe GF$(q)^*$ \EM. Der zweite Teil ist die Eindeutigkeit der
+Primfaktorzerlegung in $\mathbb{Z}$ \EM. \qed
+
+Der Inhalt liegt nicht im Beweis, sondern in der Konsequenz für den
+Korpus. Dok.~060 stellt das pythagoreische Komma $(3/2)^{12}/2^7$ und
+$K_\text{frak}=1-100\xi$ nebeneinander und findet die fast exakte
+Aufhebung $1{,}00013$. Satz~A sagt, \emph{wo} beide Größen leben: in
+$\mathbb{Q}^*$ bzw.\ $\mathbb{R}$, nicht in GF$(27)^*$. Die
+Galois-Struktur selbst kennt keinen Rest; alle Umläufe schließen. Der
+Rest entsteht erst, wenn die endliche Struktur auf die Zahlengerade
+abgebildet wird --- beim Übergang von Wicklungszahlen zu gemessenen
+Massen in SI-Einheiten.
+
+Das ist genau die Position von Dok.~333: $K_\text{frak}$ ist am
+verlustfreien Pullback nicht beteiligt, sitzt in $R_m$ und wird erst
+beim SI-Übergang sichtbar. Satz~A liefert dafür den algebraischen Grund.
+Und es ist die Position von Dok.~343 Satz~G$'$: die $1{,}05\,\%$ sind
+eine fraktale Stufe der Einbettung, keine Eigenschaft des Galois-Rasters.
+
+\textbf{Folgerung A$'$} \KM: Die Aufhebung Komma$\cdot K_\text{frak}\approx1$
+aus Dok.~060 ist damit keine Koinzidenz zweier unabhängiger Systeme,
+sondern zwei Messungen desselben Einbettungsfehlers --- einmal vom
+Verhältnis $3/2$ aus, einmal vom Verhältnis $4/3$ (Elektron-Koeffizient,
+Dok.~006) aus. Die Restdifferenz von $0{,}22$~Cent ist die Differenz
+der beiden Ausgangsverhältnisse, nicht eine dritte Korrektur.
+
+% ============================================================
+\section{Satz B: Die Ausnahmen der 5-Limit-Lesart sind Galois-Primen}
+% ============================================================
+
+Dok.~060 Tab.~2 klassifiziert die neun Yukawa-Koeffizienten aus Dok.~006:
+sieben sind 5-Limit ($2,3,5$), zwei nicht --- Strange $26/9$ trägt die
+Primzahl 13, Top $1/28$ trägt die Primzahl 7. Dok.~060 markiert beide
+als Ausnahmen ohne musikalische Deutung.
+
+Dok.~343 Satz~E zeigt unabhängig davon: Die Primzahl $p$ tritt in der
+GF$(3^k)$-Hierarchie genau bei $k=\mathrm{ord}_p(3)$ ein, und für $k\le6$
+sind das ausschließlich $13\,(k=3)$, $5\,(k=4)$, $11\,(k=5)$, $7\,(k=6)$.
+
+\begin{quote}
+\textbf{Satz B.} \BM\ Alle neun Yukawa-Koeffizienten aus Dok.~006 haben
+Primfaktoren ausschließlich in $\{2,3,5,7,11,13\}$. Die beiden
+Nicht-5-Limit-Koeffizienten tragen genau die Primen der Galois-Tiefen
+$k=3$ (Strange: 13) und $k=6$ (Top: 7). Die Primzahl 11 ($k=5$) tritt
+in keinem Koeffizienten auf.
+\end{quote}
+
+\emph{Beweis.} Direkte Faktorisierung der neun Brüche
+(Prüfskript B1--B5). \qed
+
+Drei Bemerkungen:
+
+\begin{enumerate}
+\item Die 5-Limit-Lesart der Musik ist die Galois-Lesart bis zur Tiefe
+  $k=4$ (Primen $2,3,5$; die Primzahl 13 tritt zwar schon bei $k=3$ ein,
+  aber als Gruppenordnung $|Z_{13}|$, nicht als Koeffizient). Was in der
+  Musik als ``jenseits des 5-Limit'' erscheint, ist algebraisch die
+  nächste Schicht. Die Ausnahmen von Dok.~060 sind damit aufgehoben.
+\item Strange trägt die Primzahl 13 --- dieselbe Tiefe $k=3$, die die
+  Leptonen-Orbits trägt (GF$(27)^*\cong Z_2\times Z_{13}$, Dok.~339).
+  Top trägt 7 und braucht $k=6$, also GF$(729)$ --- genau den Kandidaten,
+  den R115 für die CKM/PMNS-Winkel benennt.
+\item Ob die Quark-Koeffizienten geometrisch oder kalibriert sind, bleibt
+  nach Dok.~289 offen \SM. Satz~B sagt nur: \emph{falls} sie geometrisch
+  sind, liegen sie im richtigen Raster. Das ist eine Verträglichkeit,
+  kein Beleg.
+\end{enumerate}
+
+\textbf{Falsifizierbare Konsequenz} \KM: Ein fundamentaler
+Massenkoeffizient mit einem Primfaktor $>13$ (oder mit 11) wäre mit
+Dok.~343 Satz~E unverträglich. Die Vorhersage ist prüfbar an jedem
+künftig hergeleiteten Koeffizienten.
+
+% ============================================================
+\section{Beobachtung C: Drei Zwölfen}
+% ============================================================
+
+Drei Größen der Ordnung 12 treten auf, aus drei verschiedenen Mechanismen:
+
+\begin{enumerate}
+\item \textbf{Temperierung.} Das 5-Limit-Tonnetz ist das freie Gitter
+  $\mathbb{Z}^2$ in den Exponenten von 3 und 5 (modulo Oktave). Die
+  zwölfstufige Temperierung ist der Quotient nach syntonischem Komma
+  $81/80\,\widehat{=}\,(4,-1)$ und Diesis $128/125\,\widehat{=}\,(0,-3)$:
+  \[
+    \bigl|\mathbb{Z}^2/\langle(4,-1),(0,-3)\rangle\bigr| = |\det| = 12 .
+  \]
+  Die 12 entsteht durch \emph{Quotientenbildung} eines torsionsfreien
+  Gitters \EM.
+\item \textbf{Galois.} $|(\mathbb{Z}/13)^*|=12$; das Element 3 hat
+  darin Ordnung 3 (Dok.~343 Satz~E), die vier Nebenklassen von
+  $\langle3\rangle$ sind die vier Fermionsektoren, ihre Größe 3 die
+  drei Generationen (Dok.~343 Satz~D, Dok.~348). Die 12 ist hier
+  \emph{intrinsische Torsion}: die Gruppe ist zyklisch, kein Quotient nötig.
+\item \textbf{Auflösung.} Die Farey-Nennerhöhe $Q_c=\pi/\sqrt{6\varepsilon}$
+  (Dok.~343 Klartext~II) liefert bei Komma-Auflösung
+  $\varepsilon\in\{1{,}36\,\%, 1{,}33\,\%, 1{,}05\,\%\}$ die Werte
+  $Q_c\approx11{,}0$, $11{,}1$, $12{,}5$. Nenner oberhalb $\approx12$ sind
+  bei dieser Auflösung nicht unterscheidbar.
+\end{enumerate}
+
+\begin{quote}
+\textbf{Beobachtung C.} \SM\ Die drei Zwölfen entstammen drei
+verschiedenen Mechanismen (Quotient, Torsion, Auflösungsgrenze). Dass
+sie in der Ordnung übereinstimmen, ist eine Beobachtung. Ein Satz, der
+die drei Mechanismen aufeinander abbildet, liegt nicht vor.
+\end{quote}
+
+Ein Hinweis, der die Beobachtung stützt, ohne sie zu beweisen: Die
+zwölfstufige Temperierung ist nicht Konvention, sondern die kleinste
+Quotientenbildung, bei der $3^{12}\approx2^{19}$ auf Komma-Genauigkeit
+schließt --- also die kleinste Ordnung, bei der das freie Gitter die
+Torsion des endlichen Körpers \emph{nachahmt}. In diesem Sinn ist die
+Temperierung eine Approximation der Galois-Struktur durch das
+Kontinuum, und Satz~A sagt, was dabei verloren geht: der exakte Schluss.
+
+% ============================================================
+\section{Satz D: Warum dieselbe Mathematik}
+% ============================================================
+
+Die Frage, ob die Zuordnung der Tabelle in §1 Analogie oder Identität ist,
+hat eine präzise Antwort in drei Schritten, die alle im Korpus belegt sind:
+
+\begin{enumerate}
+\item $\tilde{T}\cdot m=1$ (Dok.~003, 010): Masse ist inverse Periode.
+  Ein Massenverhältnis $m_i/m_j$ ist ein Periodenverhältnis
+  $\tilde{T}_j/\tilde{T}_i$ --- also ein Frequenzverhältnis. Das ist keine
+  Metapher, sondern die Definition der Größe.
+\item Frequenzverhältnisse auf einer periodischen Struktur sind
+  Charaktere der zyklischen Gruppe $S^1$; auf $T^4$ sind sie das
+  Wicklungsgitter $\mathbb{Z}^4$ (Dok.~159, 189). Die Obertonreihe ist
+  das Charakterspektrum von $S^1$; das Massenspektrum ist das
+  Charakterspektrum von $T^4$.
+\item Die $Z_3$-Orbifoldwirkung und die Reduktion mod~3 (Dok.~336
+  Ring-Homomorphismus $\varphi(N)=N\bmod3$, Dok.~341) bilden das
+  Wicklungsgitter auf GF$(3^k)$ ab. Die Frobenius-Wirkung $x\mapsto x^3$
+  ist die Sektorpaarung $k\leftrightarrow-k$ (Dok.~336 Hauptergebnis).
+\end{enumerate}
+
+\begin{quote}
+\textbf{Satz D.} \BM\ Harmonische Analyse eines Massenspektrums und
+Galois-Klassifikation in GF$(3^k)$ sind zwei Darstellungen desselben
+Objekts --- des Charakterspektrums von $T^4/Z_3$. Die erste Darstellung
+liest es in $\mathbb{Q}^*\subset\mathbb{R}$ (Frequenzverhältnisse), die
+zweite in GF$(3^k)^*$ (Orbits). Der Übergang zwischen beiden ist die
+Reduktion mod~3 in einer Richtung und die Einbettung ins Kontinuum in
+der anderen; Satz~A beschreibt, was die Einbettung hinzufügt (das Komma),
+Dok.~333 beschreibt, was die Reduktion wegnimmt (nichts --- der Pullback
+ist verlustfrei).
+\end{quote}
+
+\emph{Beweis.} Verkettung der drei zitierten Schritte; kein neuer
+Beweisschritt. \qed
+
+Die Zuordnung in §1 ist damit keine Analogie. Sie ist die Übersetzungstabelle
+zwischen zwei Darstellungen.
+
+% ============================================================
+\section{Was die Zusammenhänge bringen}
+% ============================================================
+
+Die Frage ``was bringt uns das'' hat fünf Antworten, jede mit einem
+konkreten Korpus-Ertrag:
+
+\begin{description}
+
+\item[1. Ein Zulässigkeitskriterium statt Kurvenanpassung.]
+  Welche Primzahlen in einem fundamentalen Verhältnis überhaupt
+  auftreten dürfen, ist algebraisch festgelegt (Dok.~343 Satz~E). Satz~B
+  wendet das auf Dok.~006 an und findet alle neun Koeffizienten im
+  Raster. Ein Fit hätte das nicht garantiert; die Algebra erzwingt es.
+
+\item[2. Eine eingebaute Auflösungsgrenze.]
+  Die Harmonik weiß seit Jahrhunderten, dass Konsonanz bei etwa 7-Limit
+  endet. Dok.~343 Satz~F gibt dafür die Zahl ($p^*\approx9{,}76$), Satz~G$'$
+  den Grund ($100\xi$). Für die Massenspektroskopie heißt das: Verhältnisse
+  mit Nennern $\gtrsim12$ sind nicht von Zufallsprodukten unterscheidbar
+  (Dok.~342 Satz~D). Die Harmonik liefert die Intuition, die Algebra die
+  Grenze, und beide verhindern Überinterpretation --- den Look-elsewhere-Fehler.
+
+\item[3. Einen Grund für die Existenz von Kommas.]
+  Satz~A: Das Komma ist der Preis der Einbettung. $K_\text{frak}$ ist
+  kein Zusatzparameter, sondern die notwendige Differenz zwischen dem
+  exakten Schluss in GF$(27)^*$ und der Zahlengerade. Dok.~060 hatte die
+  Übereinstimmung gefunden; Satz~A sagt, warum sie kein Zufall ist.
+
+\item[4. Eine physikalische Lesart für Konsonanz.]
+  Dok.~328 zeigt Mischungswinkel als Kopplungsgrade und Arnold-Zungen
+  als Stabilitätsbereiche. Konsonanz ist in dieser Lesart keine
+  Ästhetik, sondern die Breite einer Arnold-Zunge --- und umgekehrt sind
+  die Mischungswinkel des Standardmodells ``Intervalle'' mit
+  bestimmbarer Konsonanz. Das ist die Richtung, in der die CKM/PMNS-Werte
+  (R115, \SM) anzugehen sind: nicht als Zahlen, sondern als Nennerhöhen.
+
+\item[5. Eine Denkhilfe, die trägt.]
+  Das Euler-Tonnetz war der praktische Vorläufer von $\xi$ (Dok.~060, 009).
+  Satz~D sagt, warum der Vorläufer tragfähig war: Er war keine Analogie,
+  sondern bereits die Kontinuums-Darstellung des Objekts, das die
+  Galois-Darstellung später exakt gemacht hat. Wer im Tonnetz denkt,
+  denkt in $T^4/Z_3$ --- mit Komma.
+
+\end{description}
+
+% ============================================================
+\section{Abgrenzung}
+% ============================================================
+
+\begin{itemize}
+\item Dieses Dokument leitet keine Massen her und ändert keinen
+  Zahlenwert im Korpus.
+\item Beobachtung~C ist als \SM\ markiert und bleibt es, bis ein Satz die
+  drei Mechanismen verbindet.
+\item Die Quark-Koeffizienten bleiben nach Dok.~289 Kalibrierungswerte;
+  Satz~B stellt Verträglichkeit fest, keine Herkunft.
+\item Die Verbindung zur Hörphysiologie (warum das Ohr bei 7-Limit
+  aufhört) ist nicht Gegenstand; Dok.~343 Satz~F behandelt die
+  mathematische Grenze, nicht die biologische.
+\end{itemize}
+
+% ============================================================
+\section{Zusammenfassung}
+% ============================================================
+
+\begin{center}
+\begin{tabular}{@{}lp{9cm}l@{}}
+\toprule
+Satz & Aussage & Status \\
+\midrule
+A & Im endlichen Körper kein Komma; Komma = Einbettungsfehler & \BM \\
+A$'$ & Komma$\cdot K_\text{frak}\approx1$ = zwei Messungen desselben Fehlers & \KM \\
+B & Alle neun Yukawa-Koeffizienten im Galois-Raster; 13, 7 keine Ausnahmen & \BM \\
+C & Drei Zwölfen (Quotient / Torsion / Auflösung) & \SM \\
+D & Harmonik und Galois: zwei Darstellungen eines Objekts & \BM \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Prüfskripte}
+
+\texttt{2/python/Dok358\_Skripte/pruef\_358\_harmonik\_algebra.py} ---
+22 Assertions: A1 (GF$(3^k)^*$ explizit, $k=1..6$), A2 ($\mathbb{Q}^*$),
+A3 (Komma/$K_\text{frak}$), B1--B5 (Primfaktoren der neun Koeffizienten),
+C1--C4 (drei Zwölfen), D1--D2 (Limit-Grenzen).
+
+\section*{Vermerk zur Verwendung von KI-Assistenz}
+
+Bei der Erstellung dieses Dokuments wurde KI-Assistenz (Claude, Anthropic)
+für Formulierung, LaTeX-Satz und die Erstellung des Prüfskripts
+verwendet. Die inhaltlichen Aussagen, die Statuszuordnung und die
+Verantwortung für den Text liegen beim Autor.

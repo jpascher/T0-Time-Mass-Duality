@@ -426,3 +426,40 @@ und Quellenangabe. Koide-Amplitude $d/c=\sqrt{2}$ als **[B]** eingetragen
 
 **Experimentell [X]:** Higgs-Boson $H^0$ (Mechanismus in FFGFT durch $\tilde{T}\cdot m=1$
 ersetzt, Dok.~019).
+
+---
+
+## 8. September 2026 — Dok. 358: Harmonik und algebraische Struktur
+
+### Dok. 358 — Harmonik und algebraische Struktur: warum dieselbe Mathematik (De 7 S./En 6 S.)
+
+Brücken- und Synthesedokument zu Dok. 060, 159, 328, 333, 336, 341, 342, 343.
+Keine Wiederholungen — nur Zitate und vier neue Ergebnisse.
+
+**Satz A [B]:** Im endlichen Körper schließt jeder Umlauf exakt; ein Komma ist
+strukturell unmöglich. Das pythagoreische Komma und $K_\text{frak}$ sind nicht
+Eigenschaften der Galois-Struktur, sondern des Übergangs ins Kontinuum.
+Liefert den algebraischen Grund für Dok. 333 (K_frak erst beim SI-Übergang sichtbar).
+
+**Folgerung A' [K]:** Komma $\cdot K_\text{frak} \approx 1$ (Dok. 060) sind
+zwei Messungen desselben Einbettungsfehlers, keine unabhängige Koinzidenz.
+
+**Satz B [B]:** Alle neun Yukawa-Koeffizienten (Dok. 006) haben Primfaktoren
+ausschließlich in $\{2,3,5,7,11,13\}$. Die zwei Ausnahmen der 5-Limit-Lesart
+von Dok. 060 (Strange: 13, Top: 7) sind in der Galois-Lesart keine Ausnahmen —
+sie tragen genau die harmonischen Primen der Tiefen $k=3$ und $k=6$ (Dok. 343 E).
+Die Primzahl 11 ($k=5$) tritt in keinem Koeffizienten auf.
+Falsifizierbare Konsequenz: jeder künftig hergeleitete Koeffizient muss im Raster liegen.
+
+**Beobachtung C [S]:** Drei Größen der Ordnung 12 aus drei verschiedenen Mechanismen
+(Tonnetz-Quotient $|\mathbb{Z}^2/\langle(4,-1),(0,-3)\rangle|=12$;
+$|(\mathbb{Z}/13)^*|=12$; Farey-$Q_c \approx 11$–$12{,}5$) — ausdrücklich nur Beobachtung.
+
+**Satz D [B]:** Die Warum-Antwort: $\tilde{T}\cdot m=1$ macht Massenverhältnisse
+zu Periodenverhältnissen (Charakteren zyklischer Gruppen); die $Z_3$-Reduktion
+bildet das Wicklungsgitter auf GF$(3^k)$ ab. Harmonik und Galois-Klassifikation
+sind zwei Darstellungen desselben Objekts — des Charakterspektrums von $T^4/Z_3$.
+
+**Prüfskript:** `2/python/Dok358_Skripte/pruef_358_harmonik_algebra.py` — 22/22.
+
+**Register:** R117 eingetragen.
