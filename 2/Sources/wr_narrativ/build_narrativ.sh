@@ -8,6 +8,7 @@ for lang in De En; do
     lualatex -interaction=nonstopmode FFGFT_Narrativ_${lang}.tex
     lualatex -interaction=nonstopmode FFGFT_Narrativ_${lang}.tex
     cp FFGFT_Narrativ_${lang}.pdf ../../pdf/
+    cp FFGFT_Narrativ_${lang}.pdf pdf/
     echo "    -> ../../pdf/FFGFT_Narrativ_${lang}.pdf"
 done
 echo ">>> Fertig."
