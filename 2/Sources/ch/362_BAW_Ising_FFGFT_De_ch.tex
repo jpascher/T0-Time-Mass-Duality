@@ -1,0 +1,311 @@
+% 362_BAW_Ising_FFGFT_De_ch.tex
+% Johann Pascher, 12. Sept. 2026
+% Die BAW-Ising-Maschine (Vadde et al., Commun. Phys. 9:290, 2026)
+% als Resonanzrechner im Sinne der FFGFT
+
+\providecommand{\BM}{\textbf{[B]}}
+\providecommand{\KM}{\textbf{[K]}}
+\providecommand{\SM}{\textbf{[S]}}
+\providecommand{\SetzM}{\textbf{[SETZUNG]}}
+\providecommand{\QM}{\textbf{[Q]}}
+
+\chapter*{Die BAW-Ising-Maschine als Resonanzrechner}
+\addcontentsline{toc}{chapter}{Die BAW-Ising-Maschine als Resonanzrechner}
+
+\begin{abstract}
+Vadde, Ovcharov, González, Khymyn, Litvinenko und Åkerman (Commun.\
+Phys.~9:290, 8.~September 2026, Open Access) stellen eine
+zeitmultiplexte Ising-Maschine mit 2048 Spins auf zwei Quarz-Volumen\-schall\-wellen-%
+Verzögerungsleitungen vor. Dieses Dokument liest die Arbeit als
+Fallstudie der FFGFT-Einordnung von Resonanzrechnern (Dok.~173, 328, 343):
+Spins als Phasenzustände eines Ringoszillators, Barkhausen-Bedingung als
+Wicklungsquantisierung, parametrische $\mathbb{Z}_2$-Selektion, Kopplungsregime
+mit Chaosschwelle, und -- quantitativ am deutlichsten -- ein Auflösungsboden:
+Näherungslösungen zu 99,9\,\% werden zuverlässig gefunden, exakte Lösungen
+($E=0$) mit wachsender Problemgröße nicht mehr. Alle Zitate wörtlich \QM.
+Status der Einordnungen: \SM.
+\end{abstract}
+
+% ============================================================
+\section*{Statusmarkierungen}
+% ============================================================
+\begin{center}
+\begin{tabular}{@{}lp{10cm}@{}}
+\textbf{[B]} & Algebraisch bewiesen. \\[3pt]
+\textbf{[K]} & Numerisch bestätigt. \\[3pt]
+\textbf{[S]} & Strukturell plausibel, physikalische Identifikation offen. \\[3pt]
+\textbf{[Q]} & Aus der Quelle (Vadde et al.) übernommen, wörtlich zitiert. \\[3pt]
+\textbf{[SETZUNG]} & Axiomatische Setzung. \\
+\end{tabular}
+\end{center}
+
+\noindent Alle wörtlichen Zitate stammen aus Vadde et al.\ (2026), Open Access
+unter CC-BY~4.0; Abschnittsangaben beziehen sich auf die dortige Gliederung.
+
+% ============================================================
+\section{Die Quelle: Was Vadde et al.\ bauen}
+% ============================================================
+
+\subsection{Architektur}
+
+\begin{quote}\QM
+\enquote{We use two serially connected 20.5 MHz, 707~$\mu$s bulk acoustic
+wave delay lines supporting 2048 spins. Our design provides all-to-all
+connectivity with 15-bit coupling resolution and finds approximate MAX-CUT
+solutions in 341~ms.} (Abstract)
+\end{quote}
+Die Spins sind keine Teilchen, sondern Phasen zirkulierender RF-Pulse:
+\begin{quote}\QM
+\enquote{The spin states $+1$ and $-1$ are encoded in the relative phase of
+the pulses, with bistable phases achieved by phase-binarizing the
+propagating RF pulses using a phase-sensitive amplifier (PSA).}
+(Abschnitt \emph{Design})
+\end{quote}
+
+\subsection{Der Ringoszillator und die Barkhausen-Bedingung}
+
+\begin{quote}\QM
+\enquote{The BAW delay line, together with linear amplifiers and the PSA,
+forms a multi-physics ring oscillator. The key step of the design is to
+establish a stable circulation of RF pulses within this loop. This requires
+satisfying the Barkhausen stability criteria: the loop gain must be larger
+than one, and the total phase shift around the loop must be an integer
+multiple of $2\pi$.} (Abschnitt \emph{Design})
+\end{quote}
+
+\subsection{Parametrische Binarisierung}
+
+\begin{quote}\QM
+\enquote{The PSA further narrows the stability criteria to only those
+signals with either phase 0 or $\pi$ relative to the pumping signal that is
+twice the reference frequency.} (Abschnitt \emph{Design})
+\end{quote}
+
+\subsection{Mindestzyklen und Pulsdauer}
+
+\begin{quote}\QM
+\enquote{Due to the resonance mechanism underlying phase-sensitive
+amplification, a minimum of 5--10 cycles per pulse is required, setting a
+lower bound on the pulse duration to $\sim$250--500~ns. This constraint
+dominates and effectively determines the pulse period.}
+(Abschnitt \emph{Design})
+\end{quote}
+
+\subsection{Kopplungsstärke und Chaosgrenze}
+
+\begin{quote}\QM
+\enquote{The amplitude of the coupling signal can be tuned using the
+potentiometer of the DAC, allowing an additional control to ensure the
+injected signal remains within 5--30\,\% of the circulating RF signal and
+does not overpower it, avoiding chaotization of the oscillatory circuit.}
+(Abschnitt \emph{Design})
+\end{quote}
+\begin{quote}\QM
+\enquote{The performance of BAWIM depends on the coupling strength, and
+there exists an optimal coupling strength depending on the problem
+instance.} (Abschnitt \emph{Performance})
+\end{quote}
+
+\subsection{Näherung gegen Exaktheit}
+
+MAX-CUT:
+\begin{quote}\QM
+\enquote{Here, we observe that BAWIM attains up to 95\,\% of HbSB's best
+performance in terms of Ising energy, and up to 99.99\,\% in terms of the
+MAX-CUT score.} (Abschnitt \emph{Dependence on the edge density})
+\end{quote}
+Number Partitioning:
+\begin{quote}\QM
+\enquote{Here, the exact solution corresponds to a difference of 0, while
+the 99.9\,\% approximate solution indicates that the difference is less than
+0.1\,\% of the maximum possible value [\ldots]. In all cases, BAWIM
+outperforms the HbSB algorithm, achieving a 100\,\% success rate in most
+instances when considering the 99.9\,\% approximate solution.}
+(Abschnitt \emph{Number partitioning})
+\end{quote}
+Die zugehörige Abbildung~5(b) zeigt, was der Text nicht ausspricht: Die
+Kurve \enquote{BAWIM Exact} fällt von etwa 90\,\% Erfolg bei 32 Zahlen auf
+nahe null bei 2048 Zahlen, während \enquote{BAWIM 99.9\,\%} über den
+gesamten Bereich bei 100\,\% bleibt.
+
+Sudoku:
+\begin{quote}\QM
+\enquote{Notably, even when the Ising energy approaches the ground state,
+the Sudoku solution remains far from correct. [\ldots] Sudoku requires
+exact constraint satisfaction; therefore, a near-ground-state Ising energy
+may still correspond to an invalid solution.} (Abschnitt \emph{Sudoku})
+\end{quote}
+
+\subsection{Thermische Stabilität}
+
+\begin{quote}\QM
+\enquote{In contrast, our BAWIM exhibits a temperature coefficient of phase
+accumulation of only 780~deg/$^\circ$C, which is $2.21\times10^4$ times
+lower than that of the CIM.} (Abschnitt \emph{Comparison with CIMs})
+\end{quote}
+
+% ============================================================
+\section{Einordnung 1: Ising-Maschine = Resonator (Dok.~173)}
+% ============================================================
+
+Dok.~173 §\emph{The Arc Closes} sagt über die kohärente Ising-Maschine:
+\enquote{This resonator also has discrete states: it oscillates in either one
+or the other phase -- spin-up or spin-down, zero or one. The excitation is
+analogue -- continuous laser light, continuously adjustable coupling
+strengths. The state is discrete.} Und in der Schlussfolgerung:
+\enquote{An Ising machine is a resonator. All discrete from inside. All
+analogue from outside.}
+
+Die BAWIM ist diese Beschreibung in Reinform -- ohne Photonik, ohne
+Kryogenik. Die Zustände sind Phasen 0 und $\pi$; die Anregung ist ein
+kontinuierlicher RF-Träger; die Kopplung ist ein analoger Strom mit
+15-bit-Auflösung. Der Spin ist kein Objekt, sondern eine Phasenlage. \SM
+
+% ============================================================
+\section{Einordnung 2: Barkhausen als Wicklungsquantisierung (Dok.~314)}
+% ============================================================
+
+Die Barkhausen-Bedingung \enquote{integer multiple of $2\pi$} ist eine
+Windungszahl: Nur Zustände, bei denen die akkumulierte Phase um die
+geschlossene Schleife $2\pi n$, $n\in\mathbb{Z}$, beträgt, zirkulieren
+stabil. \BM\ (Dok.~314, Ch.~D2): \enquote{winding numbers are topological};
+die Modenstruktur auf $T^4$ ist durch ganzzahlige Wicklung um jeden Zyklus
+festgelegt.
+
+Der Ringoszillator ist ein $S^1$ -- ein einzelner Zyklus. Die Barkhausen-%
+Bedingung ist die Wicklungsquantisierung auf diesem $S^1$. Die BAWIM
+realisiert damit technisch, was FFGFT für $T^4$ setzt: Zustände existieren
+nur auf ganzzahligen Wicklungen. \SM
+
+% ============================================================
+\section{Einordnung 3: Parametrische $\mathbb{Z}_2$-Selektion (Dok.~339)}
+% ============================================================
+
+Die PSA wird bei $2\omega$ gepumpt und lässt nur die Phasen $0$ und $\pi$
+durch. Das ist eine Periodenverdopplung: Der Zustandsraum $S^1$ der Phase
+wird auf zwei Punkte $\{0,\pi\}\cong\{+1,-1\}$ reduziert.
+
+\BM\ (Dok.~339, §3.1): Die Fixpunkte $\{+1,-1\}$ des Frobenius auf
+$GF(27)^*$ sind der massive $\mathbb{Z}_2$-Sektor. \BM\ (Dok.~336): Die
+Normklassen $\{+1,-1\}$ trennen leicht/schwer.
+
+Die parametrische Selektion der BAWIM ist eine technische Realisierung
+derselben Zweiteilung: Aus einem kontinuierlichen Phasenraum werden
+genau zwei Fixpunkte herausgefiltert. Dass es \emph{zwei} sind und nicht
+drei, liegt am Pumpen bei $2\omega$; ein Pumpen bei $3\omega$ ergäbe eine
+$\mathbb{Z}_3$-Selektion $\{0,2\pi/3,4\pi/3\}$ -- die Potts-Maschine, die
+Whitehead et al.\ (Ref.~12 in Vadde et al.) mit CMOS gebaut haben. \SM
+
+% ============================================================
+\section{Einordnung 4: Kopplungsregime mit Chaosschwelle (Dok.~328)}
+% ============================================================
+
+Dok.~328 behandelt Kopplungsregime gekoppelter Oszillatoren: Adler-Modell,
+Synchronisation, Phase-Locking, und die Grenze, jenseits derer die Kopplung
+den Oszillator zerstört. Die BAWIM setzt genau diese Grenze operativ:
+Einspeisung auf 5--30\,\% des zirkulierenden Signals, \enquote{avoiding
+chaotization}.
+
+Die Existenz einer \emph{optimalen} Kopplungsstärke pro Probleminstanz
+(Suppl.\ Note~5) ist der Adler-Sweet-Spot: zu schwach -- keine
+Synchronisation, das System bleibt in Zufallszuständen; zu stark --
+Chaotisierung, die Phasenbinarisierung bricht zusammen. Dazwischen liegt
+das Fenster, in dem die Oszillatorbank ins Energieminimum fällt. \SM
+
+% ============================================================
+\section{Einordnung 5: Der Auflösungsboden (Dok.~343 §G$'$)}
+% ============================================================
+
+Dies ist die quantitativ deutlichste Einordnung. Dok.~343 §G$'$ formuliert:
+Ein resonanzbasierter Rechner ist gedeckelt bei $N_{\max}\approx1/\varepsilon$,
+wobei $\varepsilon$ die Kopplungstoleranz ist; er findet Minima bis zur
+Toleranz, aber nicht die exakte Null. \BM
+
+Die BAWIM zeigt dieses Verhalten in drei Ausprägungen:
+
+\paragraph{MAX-CUT.} 95\,\% der Ising-Energie, 99,99\,\% des Schnittwerts.
+Das Optimum wird bis auf Bruchteile eines Prozents erreicht -- aber nicht
+exakt.
+
+\paragraph{Number Partitioning.} Die Differenz $E=|\sum_{A}a_i-\sum_{B}a_i|$
+wird auf $<0{,}1\,\%$ der Gesamtsumme gebracht, mit 100\,\% Erfolg. Die
+\emph{exakte} Partition $E=0$ dagegen wird bei 32 Zahlen noch zu $\sim$90\,\%
+gefunden, bei 2048 Zahlen praktisch nie (Abb.~5b). Die Kopplungsauflösung
+ist 15~bit; die Zahlen liegen bei $\le178$; die Gesamtsumme bei 2048 Zahlen
+liegt bei $\sim1{,}8\times10^5$. Eine Toleranz von 0,1\,\% entspricht
+$\sim180$ -- das ist die Größenordnung einer einzelnen Zahl. Die Maschine
+löst das Problem bis auf ein Element, nicht bis auf null.
+
+\paragraph{Sudoku.} Bei 99,42\,\% der Grundzustandsenergie ist die Lösung
+noch ungültig. Sudoku ist ein Constraint-Satisfaction-Problem: Es gibt kein
+\enquote{fast richtig}. Vadde et al.\ nennen es selbst: \enquote{a
+near-ground-state Ising energy may still correspond to an invalid solution.}
+Dass die BAWIM das Sudoku dennoch löst, liegt an der Kleinheit des Problems
+(729 Spins) und daran, dass die Grundzustandsenergie hier ein isoliertes
+Minimum ist; HbSB scheitert am selben Problem.
+
+\paragraph{Die Einordnung.} Alle drei Befunde sind konsistent mit
+Dok.~343: Der Resonanzrechner ist ein Analogrechner mit Auflösungsboden.
+Er ist \emph{nicht} schlechter als ein digitaler Algorithmus -- er ist bei
+Näherungen besser (NPP 99,9\,\%: BAWIM schlägt HbSB durchgehend). Er ist
+\emph{anders}: Er findet die Umgebung des Minimums, nicht den Punkt. Für
+Optimierung ist das die richtige Aufgabe; für exakte Arithmetik nicht. \SM
+
+% ============================================================
+\section{Was nicht übereinstimmt}
+% ============================================================
+
+\paragraph{Klassisch, nicht quantenmechanisch.} Die BAWIM ist ein
+klassischer RF-Ringoszillator bei Raumtemperatur. Sie beansprucht keinen
+Quantenvorteil und erhebt keinen. Die FFGFT-Einordnungen betreffen die
+Resonatorstruktur, nicht Quantenkohärenz.
+
+\paragraph{Ein Zyklus, nicht vier.} Der Ringoszillator ist $S^1$; $T^4$
+hat vier unabhängige Zyklen. Die Wicklungsparallele (Einordnung~2) gilt für
+einen Zyklus; die $T^4$-spezifischen Aussagen (Fixpunkte, $\mathbb{Z}_3$-%
+Trialität, Massenzuordnung) haben in der BAWIM kein Gegenstück.
+
+\paragraph{Benchmark-Vorbehalt.} Vadde et al.\ betonen zweimal, dass
+weder für HbSB noch für BAWIM eine Parameteroptimierung durchgeführt
+wurde. Die quantitativen Vergleiche (341~ms gegen 102~ms; NPP-Erfolgsraten)
+sind daher Momentaufnahmen. Die \emph{qualitative} Struktur -- Näherung
+zuverlässig, Exaktheit skalenabhängig -- ist davon nicht betroffen.
+
+\paragraph{Der Auflösungsboden ist hier technisch, nicht fundamental.}
+Die 15-bit-Kopplungsauflösung ist eine Wahl der Elektronik (AD9708 DAC),
+kein Naturgesetz. Dok.~343 §G$'$ spricht von $\varepsilon=\xi$ als
+natürlichem Boden; die BAWIM liegt mit $2^{-15}\approx3\times10^{-5}$
+zufällig in derselben Größenordnung wie $\xi=1{,}33\times10^{-4}$, ohne
+dass hier ein Zusammenhang behauptet wird.
+
+% ============================================================
+\section{Zusammenfassung}
+% ============================================================
+
+\begin{center}
+\begin{tabular}{p{4.4cm}p{4.4cm}p{2.6cm}l}
+\toprule
+BAWIM (Vadde et al.) & FFGFT & Dok. & Status \\
+\midrule
+Spin = Phase 0/$\pi$ eines Pulses & Ising-Maschine = Resonator & 173 & \SM \\
+Barkhausen: Phase $=2\pi n$ & Wicklungsquantisierung auf $S^1$ & 314 & \SM \\
+PSA bei $2\omega$: $\{0,\pi\}$ & $\mathbb{Z}_2$-Fixpunkte $\{+1,-1\}$ & 339, 336 & \SM \\
+Kopplung 5--30\,\%, Chaosgrenze & Adler-Regime, Kopplungsschwelle & 328 & \SM \\
+99,9\,\% ja, exakt nein & Auflösungsboden $N_{\max}\approx1/\varepsilon$ & 343 §G$'$ & \SM \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die BAWIM ist der bislang klarste veröffentlichte Fall eines
+Resonanzrechners im Sinne von Dok.~173/343: thermisch stabil, ohne
+Nachselektion, ohne Kryogenik, mit reproduzierbaren Näherungslösungen und
+einem messbaren Auflösungsboden bei exakten Lösungen. Sie bestätigt die
+FFGFT-Einordnung nicht als Theorie, sondern als Klassifikation: Was
+resoniert, findet Minima -- und findet sie bis zur Toleranz.
+
+\paragraph{Quelldokument.} Vadde,~V.; Ovcharov,~R.; González,~V.~H.;
+Khymyn,~R.; Litvinenko,~A.; Åkerman,~J.: \textit{A 2048-spin bulk acoustic
+wave Ising machine for number partitioning and Sudoku.}
+Commun.\ Phys.~\textbf{9}, 290 (2026). DOI: 10.1038/s42005-026-02846-7.
+Open Access, CC-BY~4.0. Eingegangen 2.~März 2026, angenommen
+20.~August 2026, veröffentlicht 8.~September 2026.
