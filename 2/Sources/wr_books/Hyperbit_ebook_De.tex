@@ -1,0 +1,344 @@
+\documentclass[11pt,twoside,openright]{book}
+
+% --- Core (wie Matrix-Buch) ---
+\RequirePackage{fontspec}
+\usepackage[provide=*,ngerman]{babel}
+\usepackage{csquotes}
+\usepackage{microtype}
+\usepackage{seqsplit}
+
+% --- Fonts: exakt wie Matrix-Buch ---
+\setmainfont{Inter}[
+  Scale=1.02,
+  UprightFont=*-Regular,
+  BoldFont=*-Bold,
+  ItalicFont=*-Italic,
+  BoldItalicFont=*-BoldItalic,
+  Ligatures=TeX
+]
+\setsansfont{Inter}[
+  Scale=MatchLowercase,
+  Ligatures=TeX
+]
+\setmonofont{JetBrains Mono}[
+  Scale=0.78
+]
+
+% --- Zeilenumbruch für schmale 6x9-Seiten (wie Matrix-Buch) ---
+\sloppy
+\emergencystretch=3em
+\setlength{\parskip}{0.3ex plus 0.2ex minus 0.1ex}
+\tolerance=1500
+\hyphenpenalty=300
+\frenchspacing
+\clubpenalty=10000
+\widowpenalty=10000
+
+% Explizite Trennungen für problematische Wörter
+\hyphenation{Pha-sen-raum-Buch-hal-tung Pha-sen-raum Land-auer
+  In-for-ma-ti-ons-ein-heit Zu-stands-räu-me Ther-mo-dy-na-mik
+  Un-ter-schei-bar-keit Geo-me-trie Hy-per-bit Bi-jek-ti-vi-tät
+  Li-ou-ville Ent-ro-pie-strom Kol-loid Dä-ko-hä-renz
+  Pha-sen-raum-vo-lu-men Ei-gen-schaf-ten Pro-jek-ti-on
+  In-for-ma-ti-ons-phy-sik Quan-ten-me-cha-nik}
+
+% --- Kindle 6x9 ---
+\usepackage[
+  paperwidth=6in,
+  paperheight=9in,
+  inner=20mm,
+  outer=15mm,
+  top=20mm,
+  bottom=18mm,
+  headheight=15pt
+]{geometry}
+
+% --- Mathematik (wie Primärdokumente) ---
+\usepackage{mathtools}
+\RequirePackage{unicode-math}
+\setmathfont{Libertinus Math}[Scale=1.0]
+\usepackage{amsmath,amsfonts,amsthm}
+
+% --- Tabellen ---
+\usepackage{booktabs,array,longtable,tabularx}
+
+% --- Grafik ---
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+
+% --- Farben ---
+\usepackage[table,xcdraw]{xcolor}
+\definecolor{ffgftblue}{RGB}{30,90,160}
+\definecolor{matzkegreen}{RGB}{0,120,60}
+\definecolor{landauerred}{RGB}{160,40,20}
+
+% --- tcolorbox ---
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+% Farben
+\definecolor{ffgftblue}{RGB}{30,90,160}
+\definecolor{matzkegreen}{RGB}{0,120,60}
+\definecolor{landauerred}{RGB}{160,40,20}
+
+% Box-Definitionen wie im Narrativ-Buch und Dok. 326
+\newtcolorbox{ffgftbox}[1][FFGFT]{
+  breakable,enhanced,boxrule=0.6pt,arc=3pt,
+  fonttitle=\bfseries\small,coltitle=white,
+  top=4pt,bottom=4pt,left=6pt,right=6pt,
+  colback=blue!5,colframe=ffgftblue,colbacktitle=ffgftblue,title={#1}}
+\newtcolorbox{matzbox}[1][Matzke/Hyperbit]{
+  breakable,enhanced,boxrule=0.6pt,arc=3pt,
+  fonttitle=\bfseries\small,coltitle=white,
+  top=4pt,bottom=4pt,left=6pt,right=6pt,
+  colback=green!5,colframe=matzkegreen,colbacktitle=matzkegreen,title={#1}}
+\newtcolorbox{landbox}[1][Landauer-Grenze]{
+  breakable,enhanced,boxrule=0.6pt,arc=3pt,
+  fonttitle=\bfseries\small,coltitle=white,
+  top=4pt,bottom=4pt,left=6pt,right=6pt,
+  colback=red!5,colframe=landauerred,colbacktitle=landauerred,title={#1}}
+\newtcolorbox{merkbox}[1][Zum Merken]{
+  breakable,enhanced,boxrule=0.6pt,arc=3pt,
+  fonttitle=\bfseries\small,coltitle=white,
+  top=4pt,bottom=4pt,left=6pt,right=6pt,
+  colback=yellow!10,colframe=orange!70!black,colbacktitle=orange!70!black,title={#1}}
+\newtcolorbox{keyresult}[1][Kernresultat]{
+  breakable,enhanced,boxrule=0.6pt,arc=3pt,
+  fonttitle=\bfseries\small,coltitle=white,
+  top=4pt,bottom=4pt,left=6pt,right=6pt,
+  colback=green!6,colframe=green!40!black,colbacktitle=green!40!black,title={#1}}
+
+% --- Theorem-Umgebungen ---
+\theoremstyle{plain}
+\newtheorem{theorem}{Satz}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+% --- tocloft: TOC-Formatierung identisch zum Matrix/Narrativ-Buch ---
+\usepackage{tocloft}
+\setcounter{tocdepth}{1}
+\renewcommand{\cftchapfont}{\footnotesize\color{black}}
+\renewcommand{\cftsecfont}{\scriptsize\color{blue}}
+\renewcommand{\cftchappagefont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\scriptsize\color{blue}}
+\renewcommand{\cfttoctitlefont}{\normalsize\bfseries\color{blue}}
+\setlength{\cftchapindent}{0em}
+\setlength{\cftsecindent}{1em}
+\setlength{\cftsecnumwidth}{2.5em}
+\setlength{\cftbeforechapskip}{0.5em}
+\setlength{\cftbeforesecskip}{0.2em}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+% --- Epigraph ---
+\usepackage{epigraph}
+\setlength{\epigraphwidth}{0.85\textwidth}
+\renewcommand{\epigraphflush}{center}
+
+% --- Links ---
+\usepackage[
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  citecolor=green!50!black,
+  urlcolor=blue!70!black,
+  breaklinks=true,
+  bookmarksnumbered=true,
+  unicode=true,
+  pdflang=de
+]{hyperref}
+\usepackage{xurl}
+\usepackage{bookmark}
+
+% --- Kopf-/Fußzeile ---
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\itshape\nouppercase{\leftmark}}
+\fancyhead[RO]{\small\itshape\nouppercase{\rightmark}}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+% --- Kapitelformat: exakt wie Matrix-Buch ---
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\large\bfseries}
+  {\chaptertitlename\ \thechapter}{8pt}{\normalsize\bfseries\raggedright}
+\titlespacing*{\chapter}{0pt}{-15pt}{15pt}
+\titleformat{\section}{\normalfont\normalsize\bfseries}{\thesection}{0.8em}{}
+
+% --- Schichtmarkierungen: inline, scriptsize, grau — exakt wie im Narrativ-Buch ---
+\newcommand{\status}[1]{\penalty10000\,{\scriptsize\textcolor{gray!60}{[#1]}}}
+\newcommand{\SETZ}{\status{SETZUNG}}
+\newcommand{\BB}{\status{B}}
+\newcommand{\QQ}{\status{Q}}
+\newcommand{\Skizze}{\status{S}}
+\newcommand{\HH}{\status{H}}
+\newcommand{\KK}{\status{K}}
+
+% QED-Symbol (wie in allen Primärdokumenten)
+\providecommand{\qedsq}{\raisebox{0.03em}{\framebox[0.62em]{\rule{0pt}{0.42em}}}}
+
+% Toleranz wie im Narrativ-Buch
+\raggedbottom
+\allowdisplaybreaks
+\hfuzz=5pt
+\vfuzz=5pt
+
+% Narrative Erklärungsumgebung — exakt wie im Narrativ-Buch
+\newenvironment{laierspur}{%
+  \par\vspace{4pt}%
+  \noindent\small\itshape\color{blue!60!black}%
+  \textbf{Intuition:}\enspace\ignorespaces}{%
+  \par\vspace{4pt}\normalsize\normalfont\normalcolor}
+
+% --- FFGFT-Makros ---
+\newcommand{\xsi}{\xi}
+\newcommand{\lP}{\ell_{\mathrm{P}}}
+\newcommand{\mP}{m_{\mathrm{P}}}
+\newcommand{\tP}{t_{\mathrm{P}}}
+\newcommand{\TP}{T_{\mathrm{P}}}
+\newcommand{\Ebit}{E_{\mathrm{bit}}}
+\newcommand{\mbit}{m_{\mathrm{bit}}}
+
+\usepackage{siunitx}
+\sisetup{locale=DE,output-decimal-marker={,}}
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=*,topsep=2pt,itemsep=2pt}
+
+% ============================================================
+\begin{document}
+
+\begin{titlepage}
+\centering\vspace*{1.5cm}
+{\Huge\bfseries\color{blue!70!black}
+  Bits, Hyperbits und Landauer}\\[0.6cm]
+{\Large\bfseries\color{blue!40!black}
+  Informationsphysik im Rahmen der FFGFT}\\[1cm]
+{\LARGE\itshape Fundamentale Fraktale Geometrische\\[0.2cm]
+  Feldtheorie (T0-Zeit-Masse-Dualität)}\\[0.5cm]
+{\large\itshape Landauer, Hyperbit und Skalenanker}\\[2cm]
+{\large Johann Pascher}\\[0.3cm]
+{\normalsize ORCID: 0009-0000-6518-4064}\\[0.3cm]
+{\normalsize\url{https://github.com/jpascher/T0-Time-Mass-Duality}}\\[1.5cm]
+{\normalsize September 2026}
+\vfill{\small Version 1.0 --- Kindle-Edition, Deutsche Fassung}
+\end{titlepage}
+
+\thispagestyle{empty}
+\vspace*{0.3\textheight}
+\begin{center}
+\itshape\large
+Für alle, die das Bit\\
+nicht für selbstverständlich halten.
+\end{center}
+\vfill
+
+\tableofcontents
+
+\chapter*{Vorwort}
+\addcontentsline{toc}{chapter}{Vorwort}
+\input{ch/ch00_vorwort}
+
+\mainmatter
+
+\part{Das Fundament: Was ist ein Bit?}
+
+\chapter{Das Bit als physikalisches Objekt}
+\input{ch/ch01_bit_physik}
+
+\chapter[Geometrie oder Information?]{Geometrie oder Information? ---\\
+FFGFT im Informationsformalismus}
+\input{ch/ch01b_geometrie_vs_information}
+
+\chapter[Landauer und die Phasenraum-Buchhaltung]{Landauer und die\\
+Phasenraum-Buchhaltung}
+\input{ch/ch02_landauer}
+
+\chapter[Zustand vs.\ Prozess]{Zustand vs.\ Prozess ---\\
+Information ist nicht Energie}
+\input{ch/ch02b_zustand_vs_prozess}
+
+\chapter[Träger und Information]{Träger und Information ---\\
+eine notwendige Trennung}
+\input{ch/ch03_traeger_information}
+
+\part{Das Hyperbit: Geometrie aus Unterscheidbarkeit}
+
+\chapter{Die Hyperbit-Idee nach Matzke}
+\input{ch/ch04_hyperbit_matzke}
+
+\chapter{Das p-Bit --- zwischen Bit und Qubit}
+\input{ch/ch05_pbit}
+
+\chapter[Spin, Qubit und Zustandsräume]{Spin, Qubit und Zustandsräume\\
+in der FFGFT}
+\input{ch/ch06_qubit_zustandsraum}
+
+\part{Landauer in der FFGFT}
+
+\chapter{Informationseinheit und Skala}
+\label{ch:informationseinheit_skala}
+\input{ch/ch07_informationseinheit_skala}
+
+\chapter[Landauer-Grenze: Phasenraum, nicht Semantik]{Landauer-Grenze:\\
+Phasenraum, nicht Semantik}
+\input{ch/ch08_landauer_phasenraum}
+
+\chapter[Information als eingefrorene Energie]{Information als\\
+topologisch eingefrorene Energie}
+\input{ch/ch08b_information_als_energie}
+
+\chapter{Thermodynamik und FFGFT}
+\input{ch/ch09_thermodynamik_ffgft}
+
+\part{Vergleich und Einordnung}
+
+\chapter[Hyperbit vs.\ FFGFT]{Hyperbit vs.\ FFGFT:\\
+ein struktureller Vergleich}
+\label{ch:vergleich_matzke_ffgft}
+\input{ch/ch10_vergleich_matzke_ffgft}
+
+\chapter[Zeit im Zustandsraum]{Zeit im Zustandsraum oder daneben ---\\
+Herkunft der Massen-Moden}
+\input{ch/ch10c_zeit_im_zustandsraum}
+
+\chapter[Hawking und das Informationsparadoxon]{Hawking und das\\
+Informationsparadoxon in der FFGFT}
+\input{ch/ch10b_hawking_information}
+
+\chapter{Information, Messung und Projektion}
+\input{ch/ch11_messung_projektion}
+
+\chapter{Die Rechenkugel}
+\input{ch/ch12_rechenkugel}
+
+\part{Das größere Bild}
+
+\chapter[xi aus der Galois-Algebra]{$\xi$ aus der Galois-Algebra ---\\
+keine freie Konstante}
+\input{ch/ch13b_xi_aus_galois}
+
+\chapter[Alles ist Information]{Alles ist Information --- aber welche?}
+\input{ch/ch13_alles_information}
+
+\chapter{Offene Fragen und Forschungslinien}
+\input{ch/ch14_offene_fragen}
+
+\backmatter
+
+\appendix
+\part*{Anhänge}
+\addcontentsline{toc}{part}{Anhänge}
+
+\chapter{Schichtmarkierungen und Konventionen}
+\input{ch/app_konventionen}
+
+\chapter{Quelldokumente}
+\input{ch/app_quelldokumente}
+
+\chapter{Literatur}
+\input{ch/app_literatur}
+
+\chapter{Verwendung von KI-Werkzeugen}
+\input{ch/app_ki_hinweis}
+
+\end{document}
