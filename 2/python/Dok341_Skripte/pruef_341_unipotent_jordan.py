@@ -30,6 +30,9 @@ ERGEBNISSE:
     Maximale unipotente Ordnung in M_n(GF(9)) = kleinste 3-Potenz ≥ n:
     M_8 → 9, M_16 → 27, M_32 → 81, M_128 → 243, M_256 → 729 (= Cl(16)).
     Zudem: 729 hat mit GF(729) nichts zu tun — |GF(729)*| = 728.
+(F) Aus Dougs r182=Y selbst: Y hat auf dem 2-dim Rest den doppelten Eigenwert +1,
+    Zentralisator dim 10 über GF(9) ⊃ M_2 → nilpotentes M (40 reine Blades),
+    [M,Y]=0, M²=0, U=1+M, U³=1: r273 = U·Y², r546 = U·Y in G(6) [K].
 (E) Dougs Zählungen 32/80 und 72/182 = φ(80) = 32, φ(182) = 72 [K]:
     Anzahl der Generatoren (primitiven Wurzeln) der zyklischen Gruppe ⟨X⟩.
 
@@ -189,5 +192,99 @@ print("    ist φ(n): X^m ist Generator ⟺ gcd(m,n)=1.  [K]")
 print("  Ring ⟨X⟩ = {X^0,…,X^(n-1)} ≅ Z_n; das 'Spektrum' im engeren Sinn ist die")
 print("  Eigenwertmenge von X (⊂ GF(3^k)), nicht die Potenzmenge — beides hängt zusammen,")
 print("  ist aber nicht dasselbe.")
+
+# ============================================================
+print(); print("="*66); print("(F) r273/r546 aus Dougs r182 selbst, in G(6): nilpotentes M mit [M,Y]=0"); print("="*66)
+def nullspace_mod3(A):
+    A=np.array(A,dtype=np.int64)%3; m,n=A.shape; piv=[]; r=0
+    for c in range(n):
+        p=None
+        for i in range(r,m):
+            if A[i,c]%3: p=i;break
+        if p is None: continue
+        A[[r,p]]=A[[p,r]]; inv=1 if A[r,c]==1 else 2; A[r]=(A[r]*inv)%3
+        for i in range(m):
+            if i!=r and A[i,c]: A[i]=(A[i]-A[i,c]*A[r])%3
+        piv.append(c); r+=1
+        if r==m: break
+    free=[c for c in range(n) if c not in piv]; vecs=[]
+    for f in free:
+        v=np.zeros(n,dtype=np.int64); v[f]=1
+        for i,c in enumerate(piv): v[c]=(-A[i,f])%3
+        vecs.append(v)
+    return vecs
+
+Y=build([((0,1,2),(0,1)),((0,2,5),(2,0)),((1,2,3),(1,0)),((1,3,5),(2,0)),((3,4,5),(0,2)),((0,1,3,4),(2,0))])
+assert order_m9(Y)==182
+# Eigenwert λ ∈ GF(9) mit dim ker(Y-λ) = 2 finden
+def rank_mod3(A):
+    A=np.array(A,dtype=np.int64)%3; m,n=A.shape; r=0
+    for c in range(n):
+        p=None
+        for i in range(r,m):
+            if A[i,c]%3: p=i;break
+        if p is None: continue
+        A[[r,p]]=A[[p,r]]; inv=1 if A[r,c]==1 else 2; A[r]=(A[r]*inv)%3
+        for i in range(m):
+            if i!=r and A[i,c]: A[i]=(A[i]-A[i,c]*A[r])%3
+        r+=1
+        if r==m: break
+    return r
+def real_rep(X):  # GF(9) 8x8 -> GF(3) 16x16
+    return np.block([[X.re,(3-X.im)%3],[X.im,X.re]])%3
+lam=None
+for a in range(3):
+    for b in range(3):
+        if (a,b)==(0,0): continue
+        D=Y - I8.scal(a,b)
+        k=16-rank_mod3(real_rep(D))
+        if k==4: lam=(a,b); break
+    if lam: break
+print(f"  doppelter Eigenwert von Y in GF(9): λ = {fc(lam)}  (Kern-Dim 2 über GF(9))")
+# Kern v1,v2 und Y-invariantes Komplement W = Bild(Y-λ)  (halbeinfach: V = ker ⊕ im)
+D=Y - I8.scal(*lam)
+Rr=real_rep(D)
+ker=nullspace_mod3(Rr)          # 4 Vektoren über GF(3) = 2 über GF(9)
+# Wähle v1 = ker[0], v2 = ker[1]·? — brauche GF(9)-unabhängig: v und j·v sind GF(3)-unabhängig aber GF(9)-abhängig.
+# j·v in Realdarstellung: (re,im)->( -im, re )
+def jmul(v): return np.concatenate([(3-v[8:])%3, v[:8]])
+v1=ker[0]
+# finde v2 ∈ ker nicht in span_GF9{v1} = span_GF3{v1, j v1}
+for cand in ker[1:]:
+    if rank_mod3(np.array([v1,jmul(v1),cand]))==3: v2=cand; break
+# M soll: v2 -> v1, v1 -> 0, W -> 0.  M als 16x16 GF(3)-Matrix, GF(9)-linear: M(jv)=jM(v).
+# Setze M auf Basis {v1, jv1, v2, jv2, W-Basis(12 Vektoren)}: Bilder {0,0,v1,jv1,0...}
+Wcols=[Rr[:,i] for i in range(16)]           # Spalten von (Y-λ) spannen Bild auf
+B=[v1,jmul(v1),v2,jmul(v2)]
+for w in Wcols:
+    if rank_mod3(np.array(B+[w]))==len(B)+1: B.append(w)
+    if len(B)==16: break
+Bm=np.array(B).T%3
+images=np.array([np.zeros(16,int),np.zeros(16,int),v1,jmul(v1)]+[np.zeros(16,int)]*12).T%3
+# M = images · B^{-1}  (mod 3)
+Bs=sp.Matrix(Bm.tolist()); Binv=np.array(Bs.inv_mod(3).tolist(),dtype=np.int64)%3
+Mreal=(images@Binv)%3
+Mm=M9(Mreal[:8,:8], Mreal[8:,:8])
+assert (Mm@Y - Y@Mm).is_zero(), "M kommutiert nicht"
+assert (Mm@Mm).is_zero() and not Mm.is_zero()
+U=I8+Mm
+assert mpow(U,3)==I8
+X273=U@mpow(Y,2); X546=U@Y
+o273=order_m9(X273); o546=order_m9(X546)
+print(f"  M nilpotent (M²=0), [M,Y]=0 ✓;  U=1+M, U³=1 ✓")
+print(f"  r273 = U·r182**2 : ord {o273};   r546 = U·r182 : ord {o546}   — beides in G(6) aus DOUGS r182")
+assert o273==273 and o546==546
+def py(c): return {(1,0):"",(2,0):"-",(0,1):"(1j)*",(0,2):"(-1j)*"}[c]
+def galgpy(X):
+    out=[]
+    for S,c in sorted(coeffs(X).items(),key=lambda t:(len(t[0]),t[0])):
+        bl="1" if not S else "("+"^".join(f"e{i+1}" for i in S)+")"
+        t=py(c)+bl; out.append(t if t.startswith("-") else "+"+t)
+    return " ".join(out)
+print(f"\n  M ({len(coeffs(Mm))} blades):")
+print("  M = "+galgpy(Mm))
+print(f"\n  Gemischte Koeffizienten in M: {sum(1 for c in coeffs(Mm).values() if c[0] and c[1])}")
+print("  GALG check:  M*M == 0;  M*r182 == r182*M;  U = 1+M;  U**3 == 1;")
+print("               r273 = U*r182**2; r273**273 == 1; r546 = U*r182; r546**546 == 1")
 
 print("\nAlle Assertions bestanden.")
