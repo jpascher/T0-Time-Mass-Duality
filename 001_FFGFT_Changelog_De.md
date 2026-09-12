@@ -75,6 +75,7 @@ einziger konventionsfreier Test des schwachen Sektors.
 - 1+j = Generator von GF(9)*; Reinheitsforderung physikalisch, nicht algebraisch, erfüllbar (reines root26, 5 Blades) **[B]**.
 - GALG-Konvention E₇ = −(e₁…e₆) erklärt p27-Befund für X₇ **[K]**.
 - **Dok. 355:** „Phasen k·360°/7" von [B] auf **[S]** — Charakteristik 3 kennt keine Winkel.
+- **Nachtrag 12. Sept. (Jordan-Zerlegung):** Ordnung-3-Elemente sind unipotent (N²=0, (1+N)³=1), nie halbeinfach. ord(X) = ord(S)·ord(U): r273, r546, r2184 existieren in G(6) (6-dim Block ⊕ Jordan-Block J₂) — keine 9 Erzeuger nötig **[K]**. r729 = 3⁶ ist rein unipotent und in G(6) unmöglich (max. unipotente Ordnung in M₈ ist 9; 729 erst ab M₂₅₆ = Cl(16)); 729 hat nichts mit GF(729) zu tun (|GF(729)*| = 728) **[K]**. Dougs Zählungen 32/80, 72/182 = φ(80), φ(182) **[K]**. Prüfskript `pruef_341_unipotent_jordan.py`.
 
 Prüfskripte: `pruef_341_primordnung.py`, `pruef_341_root7_gf9.py`, `pruef_341_r26_rein_p27.py` (alle Assertions bestanden).
 → [DE](2/pdf/341_GF27_GALG_FFGFT_De.pdf) · [EN](2/pdf/341_GF27_GALG_FFGFT_En.pdf)
