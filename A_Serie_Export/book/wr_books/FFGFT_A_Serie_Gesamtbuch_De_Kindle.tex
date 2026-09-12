@@ -1,0 +1,311 @@
+% =============================================================================
+% FFGFT A-Serie — Gesamtbuch (Deutsch) — KDP Print 6"×9"
+% Autor: Johann Pascher  ORCID 0009-0000-6518-4064
+% Engine: LuaLaTeX  — 3× kompilieren
+%
+% WICHTIG: \RequirePackage{geometry} ZUERST, damit die A4-Preamble
+%          geometry nicht mit a4paper überschreiben kann.
+% =============================================================================
+
+\documentclass[11pt,twoside,openright]{book}
+
+% ── Geometry ZUERST: exakt 6"×9" in pt, unveränderlich ──────────────────────
+% KDP-Anforderung für 414 Seiten: Bundsteg ≥ 0.625" (45pt), wir nehmen 0.75"
+\input{../pri-end/T0_preamble_Kindle_De}
+% ^ Kindle-eigene Preamble: identisch zur Standalone-Preamble,
+%   aber mit exakter 6"×9"-Geometry statt A4. Kein Option-Clash.
+
+\input{../pri-end/T0_preamble_patches.tex}
+
+% ── headwidth nach Preamble-Initialisierung korrigieren ─────────────────────
+\AtBeginDocument{%
+  \setlength{\headwidth}{\textwidth}%
+}
+
+% ── Schriftgröße Math etwas kompakter für schmalere Seite ────────────────────
+\setmathfont{Libertinus Math}[Scale=0.97]
+
+% ── Zeilenumbruch-Toleranz (Kindle/Print: aggressiver) ──────────────────────
+\tolerance      = 4000
+\pretolerance   = 200
+\emergencystretch = 4em
+\hbadness       = 10000
+\hfuzz          = 3pt
+\sloppy
+
+% ── Kopf-/Fußzeile ──────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hrule width\headwidth height\headrulewidth}
+% Twoside: Kopf auf Außenseite (LE = left-even, RO = right-odd)
+\fancyhead[LE]{\footnotesize\textsc{Eine Zahl erklärt alles}}
+\fancyhead[RO]{\footnotesize\nouppercase{\leftmark}}
+\fancyhead[LO,RE]{}
+% Seitenzahl außen
+\fancyfoot[LE,RO]{\small\thepage}
+\fancyfoot[C]{}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[LE,RO]{\small\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+% ── Kapitelformat ─────────────────────────────────────────────────────────────
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\large\bfseries\color{t0blue}}
+  {\color{t0orange}\chaptertitlename\ \thechapter}{8pt}{\Large}
+\titlespacing*{\chapter}{0pt}{15pt}{20pt}
+
+\titleformat{\part}[display]
+  {\normalfont\Large\bfseries\centering\color{t0blue}}
+  {\color{t0orange}\partname\ \thepart}{14pt}{\Large\centering}
+
+% ── A280-Schichtmarkierungen ──────────────────────────────────────────────────
+\definecolor{laySet}{HTML}{7A2E2E}
+\definecolor{layK}  {HTML}{1D5C3A}
+\definecolor{layB}  {HTML}{1F3A5F}
+\definecolor{layS}  {HTML}{6A4E2E}
+\definecolor{layH}  {HTML}{5A2E6A}
+\providecommand{\LS} {\textcolor{laySet}{\textbf{\footnotesize\textsf{[SETZUNG]}}}\,}
+\providecommand{\LK} {\textcolor{layK}  {\textbf{\footnotesize\textsf{[K]}}}\,}
+\providecommand{\LB} {\textcolor{layB}  {\textbf{\footnotesize\textsf{[B]}}}\,}
+\providecommand{\LSk}{\textcolor{layS}  {\textbf{\footnotesize\textsf{[S]}}}\,}
+\providecommand{\LH} {\textcolor{layH}  {\textbf{\footnotesize\textsf{[H]}}}\,}
+\providecommand{\pruef}[1]{{\small\itshape(Prüfskript, #1)}}
+
+% ── TOC ───────────────────────────────────────────────────────────────────────
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{3}
+
+% ── PDF-Metadaten ─────────────────────────────────────────────────────────────
+\hypersetup{
+  pdftitle   = {Eine Zahl erklärt alles -- FFGFT A-Serie},
+  pdfauthor  = {Johann Pascher},
+  pdfsubject = {Fundamentale Fraktale Geometrische Feldtheorie, T0 Zeit-Masse-Dualität},
+  pdfkeywords= {FFGFT, T0, xi, Leptonmassen, Feinstrukturkonstante, Gravitation},
+  pdflang    = de,
+}
+
+% =============================================================================
+\begin{document}
+
+% ── Titelseite ────────────────────────────────────────────────────────────────
+\begin{titlepage}
+\centering
+\vspace*{1.6cm}
+{\color{t0blue}\rule{\textwidth}{2pt}}\\[1.2cm]
+{\Huge\bfseries\color{t0blue} Eine Zahl erklärt alles}\\[0.7cm]
+{\large\color{t0orange}\itshape
+  Wie $\xi = 4/30000$ Leptonmassen,\\[0.2em]
+  Feinstrukturkonstante und Gravitation erzeugt
+}\\[1.1cm]
+{\color{t0blue}\rule{0.55\textwidth}{0.8pt}}\\[1.0cm]
+{\normalsize\color{black}
+  Fundamentale Fraktale Geometrische Feldtheorie (FFGFT)\\[0.2em]
+  A-Serie · Kanonische Fassung · 48 Dokumente
+}\\[1.2cm]
+{\color{t0blue}\rule{0.55\textwidth}{0.8pt}}\\[1.0cm]
+{\large Johann Pascher}\\[0.3cm]
+{\small ORCID: 0009-0000-6518-4064 · Linz, Österreich}\\[0.2cm]
+{\small Version 1.4 · 2026}\\[0.4cm]
+{\small DOI: 10.5281/zenodo.20117635}\\[1.2cm]
+{\color{t0blue}\rule{\textwidth}{2pt}}
+\end{titlepage}
+
+% ── Impressum ─────────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\vspace*{\fill}
+{\small
+\noindent\textbf{Impressum}\\[0.4em]
+\textbf{Autor:} Johann Pascher, Linz, Österreich\\
+\textbf{ORCID:} 0009-0000-6518-4064\\
+\textbf{GitHub:} github.com/jpascher/T0-Time-Mass-Duality\\
+\textbf{DOI:} 10.5281/zenodo.20117635\\[0.7em]
+\textbf{Schichtmarkierungen:}\\[0.3em]
+\begin{tabular}{@{}ll@{}}
+{[SETZUNG]} & Axiom, nicht hergeleitet \\[2pt]
+{[K]} & aus $\xi$ hergeleitet, numerisch geprüft \\[2pt]
+{[B]} & algebraisch bewiesen \\[2pt]
+{[S]} & Plausibilitätsskizze \\
+\end{tabular}\\[0.7em]
+\textit{Verantwortung für Inhalt und Fehler: vollständig beim Autor.}
+}
+\clearpage
+
+% ── Inhaltsverzeichnis ────────────────────────────────────────────────────────
+\tableofcontents
+\clearpage
+
+% =============================================================================
+\part{Grundlage}
+
+\chapter[A010 · Zweck und Aufbau]{A010 · Zweck, Aufbau und Lesart der A-Serie}
+\input{../ch/A010_Zweck_Aufbau_De_ch}
+
+\chapter[A015 · Ursprung von $\xi$]{A015 · Der Ursprung von $\xi$}
+\input{../ch/A015_Xi_Ursprung_De_ch}
+
+\chapter[A020 · Die drei Setzungen]{A020 · Die drei Setzungen}
+\input{../ch/A020_Setzungen_De_ch}
+
+\chapter[A030 · Kompakte Geometrie $T^4/Z_3$]{A030 · Kompakte Geometrie $T^4/Z_3$}
+\input{../ch/A030_Kompakte_Geometrie_De_ch}
+
+\chapter[A040 · Fraktale Korrektur]{A040 · Fraktale Korrektur $D_f = 3{-}\xi$}
+\input{../ch/A040_Fraktale_Korrektur_De_ch}
+
+\chapter[A050 · Rekursion und Nichtschließung]{A050 · Rekursion und Nichtschließung}
+\input{../ch/A050_Rekursion_De_ch}
+
+\chapter[A060 · Zeit: Dualität und Grundtakt]{A060 · Zeit: Dualität und Grundtakt}
+\input{../ch/A060_Zeit_De_ch}
+
+\chapter[A070 · Hilbertraum-Brücke]{A070 · Hilbertraum-Brücke}
+\input{../ch/A070_Hilbertraum_De_ch}
+
+\chapter[A075 · Feldtheorie]{A075 · Feldtheorie: Modefunktionen und Lagrangian}
+\input{../ch/A075_Feldtheorie_De_ch}
+
+\chapter[A080 · Einheiten und Buchhaltung]{A080 · Einheiten und Buchhaltung}
+\input{../ch/A080_Einheiten_De_ch}
+
+\chapter[A085 · Natürliche Einheiten]{A085 · Natürliche Einheiten}
+\input{../ch/A085_Natuerliche_Einheiten_De_ch}
+
+\chapter[A090 · Projektionskette $T^4\to T^0$]{A090 · Projektionskette $T^4\to T^0$}
+\input{../ch/A090_Projektionskette_De_ch}
+
+\chapter[A095 · Torus-Chiralität]{A095 · Torus-Chiralität und $g_R=0$}
+\input{../ch/A095_Torus_Chiralitaet_De_ch}
+
+% =============================================================================
+\part{Sektoren}
+
+\chapter[A100 · Leptonsektor]{A100 · Leptonsektor I: die $\xi$-Leiter}
+\input{../ch/A100_Leptonleiter_De_ch}
+
+\chapter[A105 · Leiter-Grundeinheit $N_0$]{A105 · Leiter-Grundeinheit $N_0$}
+\input{../ch/A105_N0_De_ch}
+
+\chapter[A110 · Zirkulant und Koide]{A110 · Zirkulant und Koide: $Q=2/3$}
+\input{../ch/A110_Zirkulant_Koide_De_ch}
+
+\chapter[A120 · $\theta = 2/9$]{A120 · $\theta=2/9$: Ort, Status und Grenze}
+\input{../ch/A120_Theta_De_ch}
+
+\chapter[A130 · Feinstrukturkonstante]{A130 · Feinstrukturkonstante $\alpha$}
+\input{../ch/A130_Feinstruktur_De_ch}
+
+\chapter[A135 · Was auf Eins gesetzt werden kann]{A135 · Was auf Eins gesetzt werden kann}
+\input{../ch/A135_Eins_nicht_grundlegend_De_ch}
+
+\chapter[A138 · Anomale magnetische Momente]{A138 · Anomale magnetische Momente}
+\input{../ch/A138_g2_De_ch}
+
+\chapter[A140 · Gravitation: $G$ als Brücke]{A140 · Gravitation: $G$ als Brücke}
+\input{../ch/A140_Gravitation_De_ch}
+
+\chapter[A142 · Gravitationsdynamik]{A142 · Gravitationsdynamik: Zeitfeld-Lagrange}
+\input{../ch/A142_Gravitation_Lagrange_De_ch}
+
+\chapter[A145 · Gravitationskonstante]{A145 · Gravitationskonstante $G$}
+\input{../ch/A145_Gravitationskonstante_De_ch}
+
+\chapter[A150 · Quarks und Neutrinos]{A150 · Quarks und Neutrinos}
+\input{../ch/A150_Quarks_Neutrinos_De_ch}
+
+\chapter[A155 · Meson-Sektor]{A155 · Meson-Sektor}
+\input{../ch/A155_Meson_Sektor_De_ch}
+
+\chapter[A160 · Quantenmechanik auf $T^4$]{A160 · Quantenmechanik auf $T^4$}
+\input{../ch/A160_Quantenmechanik_De_ch}
+
+\chapter[A165 · Bell-Tests und Hardware]{A165 · Bell-Tests und Hardware}
+\input{../ch/A165_Bell_Hardware_De_ch}
+
+\chapter[A180 · Information]{A180 · Information: Windungsquant $\Delta w=1$}
+\input{../ch/A180_Information_De_ch}
+
+\chapter[A190 · Standardmodell als Projektion]{A190 · Standardmodell als Projektion}
+\input{../ch/A190_Standardmodell_De_ch}
+
+\chapter[A192 · Eichsektor]{A192 · Eichsektor: Torus-Topologie}
+\input{../ch/A192_Eichsektor_De_ch}
+
+% =============================================================================
+\part{Methodik und Bilanz}
+
+\chapter[A200 · Ordnung ohne Rangordnung]{A200 · Ordnung ohne Rangordnung}
+\input{../ch/A200_Ordnung_De_ch}
+
+\chapter[A210 · Falsifizierbarkeit]{A210 · Falsifizierbarkeit}
+\input{../ch/A210_Falsifizierbarkeit_De_ch}
+
+\chapter[A220 · Toleranzmaßstab]{A220 · Toleranzmaßstab}
+\input{../ch/A220_Toleranzmassstab_De_ch}
+
+\chapter[A230 · Offene Punkte]{A230 · Offene Punkte}
+\input{../ch/A230_Offene_Punkte_De_ch}
+
+\chapter[A240 · Abgrenzung]{A240 · Abgrenzung}
+\input{../ch/A240_Abgrenzung_De_ch}
+
+\chapter[A250 · Verweistabelle]{A250 · Verweistabelle}
+\input{../ch/A250_Verweistabelle_De_ch}
+
+% =============================================================================
+\part{Erweiterungen}
+
+\chapter[A260 · Casimir-Effekt]{A260 · Casimir-Effekt in FFGFT}
+\input{../ch/A260_Casimir_De_ch}
+
+\chapter[A261 · Skalenhierarchie]{A261 · Skalenhierarchie}
+\input{../ch/A261_Skalenhierarchie_De_ch}
+
+\chapter[A262 · $c$-Konvention]{A262 · $c$-Konvention: $E=m$}
+\input{../ch/A262_c_Konvention_De_ch}
+
+\chapter[A263 · Dirac-Gleichung]{A263 · Dirac-Gleichung in FFGFT}
+\input{../ch/A263_Dirac_De_ch}
+
+\chapter[A264 · Strukturelle Asymmetrien]{A264 · Strukturelle Asymmetrien}
+\input{../ch/A264_Asymmetrie_De_ch}
+
+\chapter[A265 · Rotverschiebung]{A265 · Rotverschiebung: statisch, achromatisch}
+\input{../ch/A265_Rotverschiebung_De_ch}
+
+\chapter[A266 · Einheitenprüfung]{A266 · Einheitenprüfung und SI-Rückrechnung}
+\input{../ch/A266_Einheitenpruefung_De_ch}
+
+\chapter[A267 · Stipulation $\alpha=1$]{A267 · Stipulation $\alpha=1$}
+\input{../ch/A267_Alpha_Eins_De_ch}
+
+\chapter[A270 · $Z_3$-Sektor-Struktur]{A270 · $Z_3$-Sektor-Struktur}
+\input{../ch/A270_Z3_Sektoren_De_ch}
+
+\chapter[A271 · Landauer und Phasenraum]{A271 · Landauer und Phasenraum-Buchhaltung}
+\input{../ch/A271_Landauer_De_ch}
+
+\chapter[A272 · Träger und Information]{A272 · Träger und Information}
+\input{../ch/A272_Traeger_und_Information_De_ch}
+
+\chapter[A273 · Die Rechenkugel]{A273 · Die Rechenkugel}
+\input{../ch/A273_Die_Rechenkugel_De_ch}
+
+% =============================================================================
+\part{Neue Erweiterungen}
+
+\chapter[A280 · Phasenraum-Buchhaltung (erweitert)]{A280 · Landauer: Phasenraum-Buchhaltung}
+\input{../ch/A280_Landauer_Phasenraum_Buchhaltung_De_ch}
+
+\chapter[A283 · Thermodynamik in der FFGFT]{A283 · Thermodynamik in der FFGFT}
+\input{../ch/A283_Thermodynamik_FFGFT_De_ch}
+
+\chapter[A284 · Messung, Projektion, Probabilismus]{A284 · Messung, Projektion und Probabilismus}
+\input{../ch/A284_Messung_Projektion_De_ch}
+
+% =============================================================================
+\end{document}
