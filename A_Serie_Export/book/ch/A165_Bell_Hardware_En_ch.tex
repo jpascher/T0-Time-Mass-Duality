@@ -1,162 +1,160 @@
 \section{Purpose}
 
-\textbf{[STIPULATION]} Dieses Dokument entwickelt den Quantencomputing-Rahmen der
-FFGFT: Energie-Feld-Qubits, die $\phi$-hierarchische Quanten-Fourier-Transformation
-($\phi$-QFT), Bell-Test-Modifikationen mit der CHSH-Skalierungsformel
-$\text{CHSH}^{\text{T0}}(n) = 2\sqrt{2}\cdot\exp(-\xi\ln(n)/D_f)$ und die
-Hardware-Validierung auf IBM-Quantencomputern (Mai 2026). Das Dokument liefert
-den Nachweis, dass T0-Schaltkreise auf Produktionshardware lauffähig sind und
-Bell-Verletzung zeigen ($S=2{.}74$, $96{.}9\,\%$ der Tsirelson-Schranke), während
-der $\xi$-Effekt selbst mit heutiger NISQ-Hardware nicht auflösbar ist.
+\textbf{[STIPULATION]} This document develops the quantum-computing framework of
+FFGFT: energy-field qubits, the $\phi$-hierarchical quantum Fourier transform
+($\phi$-QFT), Bell-test modifications with the CHSH scaling formula
+$\text{CHSH}^{\text{T0}}(n) = 2\sqrt{2}\cdot\exp(-\xi\ln(n)/D_f)$, and the
+hardware validation on IBM quantum computers (May 2026). The document provides
+evidence that T0 circuits are executable on production hardware and show Bell
+violation ($S=2{.}74$, $96{.}9\,\%$ of the Tsirelson bound), while the $\xi$
+effect itself is not resolvable with today's NISQ hardware.
 
-\section{Energie-Feld-Qubits und die T0-Darstellung}
+\section{Energy-Field Qubits and the T0 Representation}
 
-\textbf{[B]} Standard-Qubits werden als komplexe Vektoren
-$\alpha|0\rangle+\beta|1\rangle\in\mathbb{C}^2$ im Hilbertraum dargestellt. T0
-verwendet stattdessen Zylinderkoordinaten $(z,r,\theta)$:
+\textbf{[B]} Standard qubits are represented as complex vectors
+$\alpha|0\rangle+\beta|1\rangle\in\mathbb{C}^2$ in Hilbert space. T0 instead
+uses cylindrical coordinates $(z,r,\theta)$:
 
 \begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
-  \item $z\in[-1,1]$: Projektion auf die Berechnungsachse ($z=+1
+  \item $z\in[-1,1]$: projection onto the computation axis ($z=+1
         \Leftrightarrow|0\rangle$, $z=-1\Leftrightarrow|1\rangle$)
-  \item $r\in[0,1]$: Superpositionsamplitude (radialer Abstand), $z^2+r^2=1$
-  \item $\theta\in[0,2\pi)$: Phase (Azimutwinkel)
+  \item $r\in[0,1]$: superposition amplitude (radial distance), $z^2+r^2=1$
+  \item $\theta\in[0,2\pi)$: phase (azimuthal angle)
 \end{itemize}
 
-\textbf{[S]} Der entscheidende konzeptionelle Wechsel: $r^2$ ist keine
-Wahrscheinlichkeit, sondern repräsentiert \emph{Energiedichte} des
-Superpositionszustands. Das ermöglicht deterministische Evolution bei
-Beibehaltung quantenmechanischer Interferenz. Die Verbindung zur Standardform ist
-dieselbe Brücke wie in A070: $\alpha=\sqrt{(1+z)/2}\,e^{i\theta/2}$.
+\textbf{[S]} The decisive conceptual shift: $r^2$ is not a probability but
+represents the \emph{energy density} of the superposition state. This permits
+deterministic evolution while retaining quantum-mechanical interference. The
+connection to standard form is the same bridge as in A070:
+$\alpha=\sqrt{(1+z)/2}\,e^{i\theta/2}$.
 
-\textbf{[B]} Die zylindrische Darstellung ist für atomare Systeme ($R/r\gg1$) die
-Näherung der vollständigen Torusgeometrie. Für Protonen-Skalensysteme ist das
-Seitenverhältnis $R/r\sim2{.}5\times10^{18}$ -- die Näherung ist im Grenzfall
-exakt. Numerische Vergleiche zylindrischer und toroidaler Berechnungen weichen
-für $R/r>10^{12}$ um weniger als $0{.}02\,\%$ voneinander ab.
+\textbf{[B]} The cylindrical representation is, for atomic systems ($R/r\gg1$),
+the approximation of the full torus geometry. For proton-scale systems the aspect
+ratio is $R/r\sim2{.}5\times10^{18}$ -- the approximation is exact in the limit.
+Numerical comparisons of cylindrical and toroidal calculations deviate by less
+than $0{.}02\,\%$ for $R/r>10^{12}$.
 
-\textbf{[K]} Das modifizierte Hadamard-Gatter mit Bell-Dämpfung für ein $n$-Qubit-System:
+\textbf{[K]} The modified Hadamard gate with Bell damping for an $n$-qubit system:
 \[
   H_{\text{T0}}^{(n)}:\; (z,r,\theta)\;\mapsto\;
   \bigl(r\cdot e^{-\xi\ln(n)/D_f},\;z\cdot e^{-\xi\ln(n)/D_f},\;
   \theta+\tfrac\pi2\bigr).
 \]
-Die Transformation $(z,r)\to(r,z)$ implementiert den Basiswechsel; der
-Dämpfungsfaktor $\exp(-\xi\ln(n)/D_f)$ stabilisiert die Multi-Qubit-Verschränkung.
+The transform $(z,r)\to(r,z)$ implements the basis change; the damping factor
+$\exp(-\xi\ln(n)/D_f)$ stabilises the multi-qubit entanglement.
 
-\section{Die \texorpdfstring{$\phi$}{phi}-hierarchische QFT}
+\section{The \texorpdfstring{$\phi$}{phi}-Hierarchical QFT}
 
-\textbf{[B]} Die $\phi$-hierarchische QFT wendet Phasen $2\pi/\phi^k$ statt
-$2\pi/2^k$ an, mit $\phi=(1+\sqrt5)/2$:
+\textbf{[B]} The $\phi$-hierarchical QFT applies phases $2\pi/\phi^k$ instead
+of $2\pi/2^k$, with $\phi=(1+\sqrt5)/2$:
 \[
   \phi\text{-QFT}:\;|x\rangle\;\mapsto\;
   \frac{1}{\sqrt{Q_\phi}}\sum_{y=0}^{Q_\phi-1} e^{2\pi i xy/Q_\phi}|y\rangle,
   \qquad Q_\phi=\phi^n.
 \]
 
-\textbf{[B]} \textbf{Äquivalenzsatz.} Für Shors Algorithmus zur Faktorisierung
-von $N<2^{20}$ mit Fehlerwahrscheinlichkeit $\delta<10^{-6}$ gilt:
+\textbf{[B]} \textbf{Equivalence theorem.} For Shor's algorithm for factoring
+$N<2^{20}$ with error probability $\delta<10^{-6}$:
 \begin{align}
   &P_{\text{success}}(\text{Standard-QFT}) \notag\\
   &\quad\le\;P_{\text{success}}(\phi\text{-QFT}) \notag\\
   &\quad\le\;P_{\text{success}}(\text{Standard-QFT}) + \xi. \notag
 \end{align}
-Der Beweis verläuft in drei Schritten: (1) Für jede Periode $r\in[2,N]$
-existiert $k\in\mathbb Z$ mit $|r-\phi^k\cdot c|<1/(2r^2)$ für eine rationale
-Zahl $c$ mit kleinem Nenner (Weylscher Gleichverteilungssatz, Dirichlet-Schubfach).
-(2) Diese Störung erfüllt die Kettenbruchstabilität
-$|y/Q-s/r|<1/(2r^2)$. (3) Die Bell-Dämpfung erhöht das Signal-zu-Rausch-Verhältnis:
+The proof proceeds in three steps: (1) For every period $r\in[2,N]$ there exists
+$k\in\mathbb Z$ with $|r-\phi^k\cdot c|<1/(2r^2)$ for a rational number $c$ with
+small denominator (Weyl equidistribution theorem, Dirichlet pigeonhole). (2) This
+perturbation satisfies the continued-fraction stability
+$|y/Q-s/r|<1/(2r^2)$. (3) Bell damping increases the signal-to-noise ratio:
 $\text{SNR}_{\phi\text{-QFT}} = \text{SNR}_\text{std}\cdot(1+\xi\ln(r)/D_f)$,
-was $P_{\phi\text{-QFT}}\ge P_\text{std}$ sichert.
+ensuring $P_{\phi\text{-QFT}}\ge P_\text{std}$.
 
-\textbf{[K]} \textbf{Dekohärenzunterdrückung.} Unter Phasenrauschen
-$\epsilon\cdot\sigma_z$ mit $\epsilon\sim\mathcal N(0,\sigma^2)$ gilt für
+\textbf{[K]} \textbf{Decoherence suppression.} Under phase noise
+$\epsilon\cdot\sigma_z$ with $\epsilon\sim\mathcal N(0,\sigma^2)$, for
 $\epsilon<0{.}1$:
 \[
   \text{Fidelity}_{\phi\text{-QFT}}
   = \text{Fidelity}_\text{std}\cdot\exp\!\bigl(\xi\epsilon^2/D_f\bigr)
   > \text{Fidelity}_\text{std}.
 \]
-Der Fehlerterm ist quadratisch in $\epsilon$ statt linear -- das ist der
-strukturelle Stabilitätsvorteil.
+The error term is quadratic in $\epsilon$ instead of linear -- this is the
+structural stability advantage.
 
 \section{Bell-Test Modifications and CHSH Scaling}
 
-\textbf{[K]} Die T0-modifizierte Bell-Korrelation für zwei Qubits mit Messwinkeln
-$a$ und $b$:
+\textbf{[K]} The T0-modified Bell correlation for two qubits with measurement
+angles $a$ and $b$:
 \[
   E^{\text{T0}}(a,b) = -\cos(a-b)\cdot(1-\xi\cdot f(n,l,j)),
 \]
-mit $f(n,l,j)=(n/\phi)^l\cdot(1+\xi j/\pi)$. Für photon-ähnliche Qubits
+with $f(n,l,j)=(n/\phi)^l\cdot(1+\xi j/\pi)$. For photon-like qubits
 ($n=1,l=0,j=1$): $f\approx1{.}000042$.
 
-\textbf{[K]} \textbf{CHSH-Skalierungsformel.} Für $n$ verschränkte Qubits:
+\textbf{[K]} \textbf{CHSH scaling formula.} For $n$ entangled qubits:
 \[
   \boxed{\;\text{CHSH}^{\text{T0}}(n)
   = 2\sqrt2\cdot\exp\!\Bigl(-\frac{\xi\ln n}{D_f}\Bigr)\;}
 \]
-Die Ableitung: Mit T0-Modifikation und $n$-Qubit-Bell-Dämpfung gilt
-$E_i^{\text{T0}}\approx E_i^{\text{QM}}\cdot(1-\xi\ln n/D_f)$; Summation über
-die vier CHSH-Terme liefert die Formel. Für 73 Qubits:
+Derivation: With T0 modification and $n$-qubit Bell damping,
+$E_i^{\text{T0}}\approx E_i^{\text{QM}}\cdot(1-\xi\ln n/D_f)$; summing over
+the four CHSH terms gives the formula. For 73 qubits:
 $\text{CHSH}^{\text{T0}}(73) = 2{.}828427\cdot e^{-\xi\cdot4{.}290/D_f}
-= 2{.}827888$, Abweichung $\Delta=5{.}39\times10^{-4}$.
+= 2{.}827888$, deviation $\Delta=5{.}39\times10^{-4}$.
 
 \begin{center}
 \renewcommand{\arraystretch}{1.3}
 {\small
 \begin{tabular}{rcccc}
 \toprule
-$n$ Qubits & QM CHSH & T0 CHSH & $\Delta$ & Testbar \\
+$n$ qubits & QM CHSH & T0 CHSH & $\Delta$ & Testable \\
 \midrule
-10  & 2.828427 & 2.828138 & $1{.}0\times10^{-3}$ & Ja \\
-20  & 2.828427 & 2.828051 & $1{.}3\times10^{-3}$ & Ja \\
-50  & 2.828427 & 2.827935 & $1{.}7\times10^{-3}$ & Ja \\
-73  & 2.828427 & 2.827888 & $1{.}9\times10^{-3}$ & Ja \\
-100 & 2.828427 & 2.827848 & $2{.}1\times10^{-3}$ & Ja \\
+10  & 2.828427 & 2.828138 & $1{.}0\times10^{-3}$ & Yes \\
+20  & 2.828427 & 2.828051 & $1{.}3\times10^{-3}$ & Yes \\
+50  & 2.828427 & 2.827935 & $1{.}7\times10^{-3}$ & Yes \\
+73  & 2.828427 & 2.827888 & $1{.}9\times10^{-3}$ & Yes \\
+100 & 2.828427 & 2.827848 & $2{.}1\times10^{-3}$ & Yes \\
 \bottomrule
 \end{tabular}
 }
 \renewcommand{\arraystretch}{1.0}
 \end{center}
 
-\textbf{[K]} \textbf{Räumliche Korrelationsverzögerung.} Für Bell-Tests über Distanz
-$d$ sagt T0 eine messbare Verzögerung voraus:
+\textbf{[K]} \textbf{Spatial correlation delay.} For Bell tests over distance
+$d$, T0 predicts a measurable delay:
 \[
   \Delta t = \xi\cdot\frac{d}{c}.
 \]
-Das Korrelationsfeld propagiert kausal; $\xi$ führt eine Phasenverzögerung ein.
-Für $d=1000\,\text{km}$: $\Delta t\approx445\,\text{ns}$ (messbar mit Atomuhren,
-Präzision $\sim10\,\text{ns}$).
+The correlation field propagates causally; $\xi$ introduces a phase delay.
+For $d=1000\,\text{km}$: $\Delta t\approx445\,\text{ns}$ (measurable with atomic
+clocks, precision $\sim10\,\text{ns}$).
 
 \section{Application: T0-Shor Algorithm}
 
-\textbf{[B]} T0-Shor ergänzt den Standardalgorithmus um zwei Suchstufen: (1)
-\textbf{$\xi$-Resonanz-Scan}: Für $r\in[2,\min(N,100)]$ wird
-$a^r\bmod N$ berechnet und die Resonanzstärke
-$\xi_\text{mod}/(\lvert a^r-1\rvert+1)$ mit $\xi_\text{mod}=e^{-\xi r^2/D_f}$
-ausgewertet; bei $a^r\equiv1\pmod N$ wird $r$ direkt zurückgegeben. (2)
-\textbf{$\phi$-Hierarchiesuche}: Teste $r=\text{round}(\phi^k)$ für
-$k\in[0,20]$.
+\textbf{[B]} T0-Shor supplements the standard algorithm with two search stages:
+(1) \textbf{$\xi$-resonance scan}: For $r\in[2,\min(N,100)]$, compute
+$a^r\bmod N$ and evaluate the resonance strength
+$\xi_\text{mod}/(|a^r-1|+1)$ with $\xi_\text{mod}=e^{-\xi r^2/D_f}$;
+if $a^r\equiv1\pmod N$, return $r$ directly. (2) \textbf{$\phi$-hierarchy
+search}: Test $r=\text{round}(\phi^k)$ for $k\in[0,20]$.
 
-\textbf{[K]} \textbf{Komplexität.} Der $\xi$-Scan hat Kosten
-$O(\min(\sqrt N,100)\cdot\log^2N)$; die $\phi$-Suche $O(\log N\cdot\log^2N)$.
-Die Gesamtkomplexität bleibt $O(\log^3N)$ -- der Zusatzterm
-$O(\xi\log N)$ ist für praktisches $N$ vernachlässigbar.
+\textbf{[K]} \textbf{Complexity.} The $\xi$ scan has cost
+$O(\min(\sqrt N,100)\cdot\log^2N)$; the $\phi$ search $O(\log N\cdot\log^2N)$.
+Total complexity remains $O(\log^3N)$ -- the additional term
+$O(\xi\log N)$ is negligible for practical $N$.
 
-\textbf{[K]} \textbf{Benchmark-Ergebnisse} (Python-Implementierung,
-100\,\% Erfolgsrate):
+\textbf{[K]} \textbf{Benchmark results} (Python implementation, 100\,\% success rate):
 
 \begin{center}
 \renewcommand{\arraystretch}{1.3}
 {\small
 \begin{tabular}{rccccc}
 \toprule
-$N$ & Faktoren & Periode $r$ & Methode & Zeit (s) \\
+$N$ & Factors & Period $r$ & Method & Time (s) \\
 \midrule
-15  & $3\times5$   &  4 & $\xi$-Resonanz & 0.033 \\
-21  & $3\times7$   &  2 & $\xi$-Resonanz & 0.0003 \\
-33  & $3\times11$  & 10 & $\xi$-Resonanz & 0.0003 \\
-77  & $7\times11$  & 30 & $\xi$-Resonanz & 0.0003 \\
-143 & $11\times13$ & 60 & $\xi$-Resonanz & 0.0003 \\
+15  & $3\times5$   &  4 & $\xi$-resonance & 0.033 \\
+21  & $3\times7$   &  2 & $\xi$-resonance & 0.0003 \\
+33  & $3\times11$  & 10 & $\xi$-resonance & 0.0003 \\
+77  & $7\times11$  & 30 & $\xi$-resonance & 0.0003 \\
+143 & $11\times13$ & 60 & $\xi$-resonance & 0.0003 \\
 \bottomrule
 \end{tabular}
 }
@@ -165,38 +163,36 @@ $N$ & Faktoren & Periode $r$ & Methode & Zeit (s) \\
 
 \section{Hardware Validation: IBM Quantum May 2026}
 
-\textbf{[K]} Die Hardware-Validierung erfolgte am 28.~Mai 2026 auf
-\texttt{ibm\_kingston} (Heron~r2, 156 physikalische Qubits) mit 50 unabhängigen
-Läufen sowie auf \texttt{ibm\_marrakesh} mit 10 Läufen; je 2048 Shots.
+\textbf{[K]} Hardware validation was carried out on 28 May 2026 on
+\texttt{ibm\_kingston} (Heron~r2, 156 physical qubits) with 50 independent
+runs and on \texttt{ibm\_marrakesh} with 10 runs; 2048 shots each.
 
-\textbf{[K]} \textbf{Bell-Zustands-Treue.} Schaltkreis: Standard-Bell-Zustand
-$|\Phi^+\rangle=(|00\rangle+|11\rangle)/\sqrt2$ aus Hadamard + CNOT. Ergebnis
-der 50-Lauf-Messung (ibm\_kingston): mittlere Treue $0{.}9876\pm0{.}0028$,
-Varianz $P(|00\rangle) = 1{.}249\times10^{-4}$. Der Chi-Quadrat-Test gegen die
-Shot-Noise-Erwartung ($1{.}221\times10^{-4}$) ergibt $\chi^2=50{.}14$,
-$p=0{.}856$ -- die Varianz ist mit reiner Quanten-Shot-Noise vollständig
-verträglich.
+\textbf{[K]} \textbf{Bell-state fidelity.} Circuit: standard Bell state
+$|\Phi^+\rangle=(|00\rangle+|11\rangle)/\sqrt2$ from Hadamard + CNOT. Result of
+the 50-run measurement (ibm\_kingston): mean fidelity $0{.}9876\pm0{.}0028$,
+variance $P(|00\rangle) = 1{.}249\times10^{-4}$. The chi-squared test against the
+shot-noise expectation ($1{.}221\times10^{-4}$) gives $\chi^2=50{.}14$,
+$p=0{.}856$ -- the variance is fully consistent with pure quantum shot noise.
 
-\textbf{[K]} \textbf{Wichtige Korrektur.} Eine frühere Auswertung (3 Läufe,
-2025) berichtete eine Varianz von $0{.}000248$ und deutete diese als
-„40-fach deterministischer als QM``. Die erweiterte 50-Lauf-Messung widerlegt
-das: die Varianz ist nicht von Shot-Noise unterscheidbar (Verhältnis $1{.}02$).
-Drei Läufe waren statistisch zu wenig; die behauptete deterministische
-Varianzreduktion besteht nicht.
+\textbf{[K]} \textbf{Important correction.} An earlier evaluation (3 runs, 2025)
+reported a variance of $0{.}000248$ and interpreted this as ``40 times more
+deterministic than QM''. The extended 50-run measurement refutes this: the variance
+is indistinguishable from shot noise (ratio $1{.}02$). Three runs were statistically
+insufficient; the claimed deterministic variance reduction does not hold.
 
-\textbf{[K]} \textbf{CHSH-Messung.} Winkel: Alice $0°/45°$, Bob
-$22{.}5°/\text{-}22{.}5°$; Korrelatoren $E=(N_{00}-N_{01}-N_{10}+N_{11})/N$.
+\textbf{[K]} \textbf{CHSH measurement.} Angles: Alice $0°/45°$, Bob
+$22{.}5°/{-}22{.}5°$; correlators $E=(N_{00}-N_{01}-N_{10}+N_{11})/N$.
 
 \begin{center}
 \renewcommand{\arraystretch}{1.3}
 {\small
 \begin{tabular}{lccccc}
 \toprule
-Gerät & Messungen & Mittel $S$ & SE & \% Tsirelson & Bell-Verletzung \\
+Device & Runs & Mean $S$ & SE & \% Tsirelson & Bell violation \\
 \midrule
 ibm\_kingston  & 15 & 2.7396 & 0.0071 & 96.9\% & 105\,$\sigma$ \\
 ibm\_marrakesh & 10 & 2.7016 & 0.0138 & 95.5\% & 51\,$\sigma$ \\
-\textbf{gepoolt} & \textbf{25} & \textbf{2.7244} & \textbf{0.0078}
+\textbf{Pooled} & \textbf{25} & \textbf{2.7244} & \textbf{0.0078}
                  & \textbf{96.3\%} & --- \\
 \bottomrule
 \end{tabular}
@@ -204,105 +200,101 @@ ibm\_marrakesh & 10 & 2.7016 & 0.0138 & 95.5\% & 51\,$\sigma$ \\
 \renewcommand{\arraystretch}{1.0}
 \end{center}
 
-Der gemessene Wert $S=2{.}74$ liegt $105\,\sigma$ über der klassischen Schranke
-($2{.}0$): lokaler Realismus ist ausgeschlossen, die erzeugte Verschränkung ist
-genuin.
+The measured value $S=2{.}74$ lies $105\,\sigma$ above the classical bound ($2{.}0$):
+local realism is excluded; the generated entanglement is genuine.
 
-\textbf{[K]} \textbf{Abweichung von der Tsirelson-Schranke -- Dekohärenz, nicht
-$\xi$.} Der Wert liegt $3{.}14\,\%$ unter $2\sqrt2$. Die mittlere
-Korrelatorstärke ist $0{.}685$ statt ideal $0{.}707$ -- das entspricht
-$\sim1{.}5\,\%$ Gatter- und Auslesefehler (NISQ-typisch). Diese Abweichung ist
-\emph{Dekohärenz}. Der vorhergesagte $\xi$-Effekt liegt bei
-$\sim10^{-5}$ ($\approx0{.}001\,\%$ von $S$), rund $3000\times$ kleiner als
-die gemessene Lücke.
+\textbf{[K]} \textbf{Deviation from the Tsirelson bound -- decoherence, not $\xi$.}
+The value lies $3{.}14\,\%$ below $2\sqrt2$. The mean correlator strength is
+$0{.}685$ instead of ideal $0{.}707$ -- corresponding to $\sim1{.}5\,\%$ gate and
+readout error (typical for NISQ). This deviation is \emph{decoherence}. The
+predicted $\xi$ effect lies at $\sim10^{-5}$ ($\approx0{.}001\,\%$ of $S$), roughly
+$3000\times$ smaller than the measured gap.
 
-\textbf{[K]} \textbf{Cross-Platform-Befund.} Zwei baugleiche Heron-r2-Chips
-unterscheiden sich im gemessenen CHSH-Wert um $0{.}038$
-($\approx1{.}4\,\%$; Welch-$t$: $t=2{.}46$, $p=0{.}028$), allein durch
-Kalibrierungs- und Rauschunterschiede. Da der gesuchte $\xi$-Effekt
-$\sim1400\times$ kleiner ist als diese Geräte-zu-Geräte-Variation, ist die
-$\xi$-Vorhersage mit heutiger NISQ-Hardware \emph{prinzipiell nicht auflösbar}
--- ein direkt gemessener, nicht nur abgeschätzter Befund. Der $\xi$-Test
-erfordert fehlerkorrigierte Qubits mit sub-ppm-stabiler, gerätestabiler
-Präzision.
+\textbf{[K]} \textbf{Cross-platform finding.} Two identically built Heron-r2 chips
+differ in the measured CHSH value by $0{.}038$ ($\approx1{.}4\,\%$; Welch-$t$:
+$t=2{.}46$, $p=0{.}028$), due solely to calibration and noise differences. Since
+the sought $\xi$ effect is $\sim1400\times$ smaller than this device-to-device
+variation, the $\xi$ prediction is \emph{in principle not resolvable} with today's
+NISQ hardware -- a directly measured, not merely estimated, finding. The $\xi$
+test requires error-corrected qubits with sub-ppm stable, device-stable precision.
 
 \section{Falsification Criteria}
 
-\textbf{[K]} Die Theorie macht präzise prüfbare Aussagen:
+\textbf{[K]} The theory makes precisely testable statements:
 
-\textbf{CHSH-Skalierungsgesetz:} Messung von $S(n)$ für $n=10,20,50,100,200$
-Qubits. T0 sagt $S(n)=2\sqrt2\cdot\exp(-\xi\ln n/D_f)$ voraus. Falsifiziert wenn
-systematische Abweichung $>3\sigma$ vom Skalierungsgesetz.
+\textbf{CHSH scaling law:} Measurement of $S(n)$ for $n=10,20,50,100,200$ qubits.
+T0 predicts $S(n)=2\sqrt2\cdot\exp(-\xi\ln n/D_f)$. Falsified if systematic
+deviation $>3\sigma$ from the scaling law.
 
-\textbf{73-Qubit-Bell-Test:} Vorhergesagter Wert
-$S(73)=2{.}827888\pm0{.}0001$ (messbar mit $\sigma\sim10^{-4}$).
-Falsifiziert wenn $S=2{.}8284\pm0{.}0001$.
+\textbf{73-qubit Bell test:} Predicted value
+$S(73)=2{.}827888\pm0{.}0001$ (measurable with $\sigma\sim10^{-4}$).
+Falsified if $S=2{.}8284\pm0{.}0001$.
 
-\textbf{Räumlicher Satelliten-Bell-Test:} $\Delta t=445\pm50\,\text{ns}$
-für $d=1000\,\text{km}$. Falsifiziert wenn $|\Delta t|<50\,\text{ns}$.
+\textbf{Spatial satellite Bell test:} $\Delta t=445\pm50\,\text{ns}$
+for $d=1000\,\text{km}$. Falsified if $|\Delta t|<50\,\text{ns}$.
 
-\section{Beweis der \texorpdfstring{$\phi$}{phi}-QFT-Äquivalenz: vollständige Herleitung}
+\section{Proof of \texorpdfstring{$\phi$}{phi}-QFT Equivalence: Complete Derivation}
 
-\textbf{[B]} \textbf{Lemma (Periodenabdeckung durch $\phi$-Potenzen).} Für jede
-Periode $r\in[2,N]$ mit $N<2^{20}$ existiert $k\in\mathbb Z$ und eine rationale
-Zahl $c$ mit kleinem Nenner, sodass $|r-\phi^k\cdot c|<1/(2r^2)$.
+\textbf{[B]} \textbf{Lemma (Period coverage by $\phi$-powers).} For every period
+$r\in[2,N]$ with $N<2^{20}$ there exist $k\in\mathbb Z$ and a rational number $c$
+with small denominator such that $|r-\phi^k\cdot c|<1/(2r^2)$.
 
-Beweis: Der goldene Schnitt $\phi=(1+\sqrt5)/2$ ist eine Pisot-Zahl. Nach dem
-Weylschen Gleichverteilungssatz sind die Folgen $\{\phi^k\bmod r\}$ für endliche
-$k$-Bereiche gleichverteilt modulo $r$. Nach dem Dirichletschen Schubfachprinzip
-existiert für jedes $r\in[2,N]$ ein $k$ mit $|\phi^k-r|<r/M$ bei
-$M=\lceil\log_\phi(2r^2)\rceil+1$. Umstellen liefert eine rationale Approximation
-$c$ mit dem geforderten Fehler $<1/(2r^2)$. Für $N<2^{20}$ genügen $k$-Werte
-bis $\lceil20/\log_2\phi\rceil\approx36$.
+Proof: The golden ratio $\phi=(1+\sqrt5)/2$ is a Pisot number. By Weyl's
+equidistribution theorem, the sequences $\{\phi^k\bmod r\}$ are equidistributed
+modulo $r$ for finite $k$ ranges. By Dirichlet's pigeonhole principle, for every
+$r\in[2,N]$ there exists $k$ with $|\phi^k-r|<r/M$ for
+$M=\lceil\log_\phi(2r^2)\rceil+1$. Rearranging gives a rational approximation $c$
+with the required error $<1/(2r^2)$. For $N<2^{20}$, $k$ values up to
+$\lceil20/\log_2\phi\rceil\approx36$ suffice.
 
-\textbf{[B]} \textbf{Hauptsatz.} Der Beweis verläuft in fünf Teilen:
+\textbf{[B]} \textbf{Main theorem.} The proof proceeds in five parts:
 
-\textbf{(A) Signalanalyse.} Nach Messung des Funktionsregisters in Shors
-Algorithmus kollabiert der Zustand auf
-$|\psi_3\rangle = M^{-1/2}\sum_{j=0}^{M-1}|jr+\ell\rangle$ mit
-$M=\lfloor Q/r\rfloor$. Die QFT liefert Amplitude
+\textbf{(A) Signal analysis.} After measuring the function register in Shor's
+algorithm the state collapses to
+$|\psi_3\rangle = M^{-1/2}\sum_{j=0}^{M-1}|jr+\ell\rangle$ with
+$M=\lfloor Q/r\rfloor$. The QFT gives amplitude
 $\alpha(y) = (QM)^{-1/2}\,e^{2\pi i\ell y/Q}\sum_{j=0}^{M-1}e^{2\pi ijry/Q}$.
-Peaks entstehen, wenn $ry/Q$ nahe einer ganzen Zahl $s$ liegt:
+Peaks arise when $ry/Q$ is close to an integer $s$:
 $y_\text{peak}\approx s\cdot Q/r$.
 
-\textbf{(B) $\phi$-QFT-Modifikation.} Ersetze $Q=2^n$ durch $Q_\phi=\phi^n$;
-die Bell-Dämpfung $\mathcal D(\theta)=\exp(-\xi\theta^2/(\pi^2D_f))$ modifiziert
-die Amplitude. Das unterdrückt Off-Peak-Beiträge (wo $\Delta\phi$ signifikant
-von einem ganzzahligen Vielfachen von $2\pi$ abweicht) und wirkt als Filter.
+\textbf{(B) $\phi$-QFT modification.} Replace $Q=2^n$ by $Q_\phi=\phi^n$; the
+Bell damping $\mathcal D(\theta)=\exp(-\xi\theta^2/(\pi^2D_f))$ modifies the
+amplitude. This suppresses off-peak contributions (where $\Delta\phi$ significantly
+departs from an integer multiple of $2\pi$) and acts as a filter.
 
-\textbf{(C) Peak-Positionen.} Hauptpeaks bei
-$y_{\phi,\text{peak}}\approx s\cdot Q_\phi/r$. Nach dem Lemma existiert $k$ mit
+\textbf{(C) Peak positions.} Main peaks at
+$y_{\phi,\text{peak}}\approx s\cdot Q_\phi/r$. By the Lemma there exists $k$ with
 $|Q_\phi/r - 2^n/r\cdot\phi^k/2^k|<0{.}2\cdot2^n/r$.
 
-\textbf{(D) Kettenbruchstabilität.} Der Kettenbruchalgorithmus extrahiert $r$
-aus $y/Q$ unter der Bedingung $|y/Q-s/r|<1/(2r^2)$. Unser Fehler aus (C) ist
-$0{.}2/r<1/(2r^2)$ für $r\ge2$ -- die Bedingung ist erfüllt.
+\textbf{(D) Continued-fraction stability.} The continued-fraction algorithm
+extracts $r$ from $y/Q$ under the condition $|y/Q-s/r|<1/(2r^2)$. Our error
+from (C) is $0{.}2/r<1/(2r^2)$ for $r\ge2$ -- the condition is satisfied.
 
-\textbf{(E) Erfolgswahrscheinlichkeit.} Die Standardformel gibt
-$P_\text{std}=4/\pi^2-1/(3r)+O(r^{-2})$. Die Bell-Verstärkung liefert
+\textbf{(E) Success probability.} The standard formula gives
+$P_\text{std}=4/\pi^2-1/(3r)+O(r^{-2})$. Bell amplification gives
 $\text{SNR}_{\phi\text{-QFT}} = \text{SNR}_\text{std}\cdot(1+\xi\ln(r)/D_f)$,
-sodass $P_{\phi\text{-QFT}}\ge P_\text{std}$. Die obere Schranke
-$P_\text{std}+\xi$ folgt, da $\phi$-QFT perfekten Erfolg nicht überschreiten kann.
+so $P_{\phi\text{-QFT}}\ge P_\text{std}$. The upper bound $P_\text{std}+\xi$
+follows since $\phi$-QFT cannot exceed perfect success.
 
-\section{Dekohärenz-Unterdrückung: vollständiger Beweis}
+\section{Decoherence Suppression: Complete Proof}
 
-\textbf{[K]} Unter Phasenrauschen $\epsilon\sim\mathcal N(0,\sigma^2)$ gilt für
+\textbf{[K]} Under phase noise $\epsilon\sim\mathcal N(0,\sigma^2)$, for
 Standard-QFT: $|\alpha_\text{std}(y)|\to|\alpha_\text{std}(y)|\cdot(1-|\epsilon|)+O(\epsilon^2)$
-(lineare Degradation). Für $\phi$-QFT mit Bell-Dämpfung
+(linear degradation). For $\phi$-QFT with Bell damping
 $\mathcal D(\theta)=\exp(-\xi\theta^2/(\pi^2D_f))$:
 \[
   |\alpha_\phi(y)|\;\to\;|\alpha_\phi(y)|\cdot
   \exp\!\Bigl(-\frac\xi{D_f}\epsilon^2\Bigr)
   \;\approx\;|\alpha_\phi(y)|\cdot\Bigl(1-\frac\xi{D_f}\epsilon^2\Bigr).
 \]
-Da $\xi\epsilon/D_f\ll1$ für $\epsilon<0{.}1$ ist $1-\xi\epsilon^2/D_f>1-\epsilon$.
-Der Fehlerterm ist quadratisch in $\epsilon$ statt linear. Für $\sigma=0{.}1$:
-Fehler Standard-QFT $\approx10\,\%$, Fehler $\phi$-QFT
+Since $\xi\epsilon/D_f\ll1$ for $\epsilon<0{.}1$, we have $1-\xi\epsilon^2/D_f>1-\epsilon$.
+The error term is quadratic in $\epsilon$ instead of linear. For $\sigma=0{.}1$:
+error standard-QFT $\approx10\,\%$, error $\phi$-QFT
 $\approx\xi\sigma^2/D_f\approx4{.}4\times10^{-7}$.
 
-\section{Implementierung: Schlüsselcode}
+\section{Implementation: Key Code}
 
-\textbf{[K]} \textbf{$\xi$-Resonanz-Periodenfindung.} Die Kernfunktion:
+\textbf{[K]} \textbf{$\xi$-resonance period finding.} The core function:
 
 \begin{verbatim}
 def find_period_xi_resonance(a, N, max_r=100):
@@ -311,11 +303,11 @@ def find_period_xi_resonance(a, N, max_r=100):
         power = pow(a, r, N)
         xi_mod = exp(-XI * r * r / D_F)
         if abs(power - 1) < 1e-10:
-            return r            # exakte Resonanz
+            return r            # exact resonance
     return None
 \end{verbatim}
 
-\textbf{[K]} \textbf{Bell-Dämpfung im T0-Qubit.}
+\textbf{[K]} \textbf{Bell damping in T0 qubit.}
 \begin{verbatim}
 class T0Qubit:
     def apply_bell_damping(self, n_qubits):
@@ -331,46 +323,45 @@ class T0Qubit:
         self.theta = (self.theta + pi/2) % (2*pi)
 \end{verbatim}
 
-\textbf{[K]} \textbf{CHSH-Berechnung (Monte-Carlo-Schleife).} Für jedes der
-vier Winkelpaare $(a,b)\in\{(0°,22{.}5°),(0°,67{.}5°),(45°,22{.}5°),(45°,67{.}5°)\}$:
+\textbf{[K]} \textbf{CHSH calculation (Monte-Carlo loop).} For each of the four
+angle pairs $(a,b)\in\{(0°,22{.}5°),(0°,67{.}5°),(45°,22{.}5°),(45°,67{.}5°)\}$:
 \begin{verbatim}
 damping = exp(-XI * log(n) / D_F)
-E = -cos(a - b) * damping     # T0-Korrelator
+E = -cos(a - b) * damping     # T0 correlator
 \end{verbatim}
-CHSH $= |E_1 - E_2 + E_3 + E_4|$ plus Shot-Noise $\mathcal N(0,1/\sqrt{\text{shots}})$.
+CHSH $= |E_1 - E_2 + E_3 + E_4|$ plus shot noise $\mathcal N(0,1/\sqrt{\text{shots}})$.
 
 \section{Position in the A-Series}
 
-\textbf{[B]} Die Bijektion T0-Qubit\,$\leftrightarrow$\,Hilbertraum-Qubit ist in
-A070 ausgeführt (Brücke $(z,r,\theta)\leftrightarrow(\alpha,\beta)$). Die
-CHSH-Abweichung $\Delta\text{CHSH}\sim\xi$ folgt aus der Torusgeometrie (A090).
-Als Prognosegröße ist $\Delta\text{CHSH}$ in A210 geführt. Dieses Dokument
-liefert den konkreten Rechenrahmen ($\phi$-QFT, Bell-Dämpfung, Shor) und den
-Hardware-Status: gemessener $S=2{.}74$ bestätigt Lauffähigkeit; der $\xi$-Effekt
-selbst ist mit heutiger Hardware nicht nachweisbar.
+\textbf{[B]} The bijection T0-qubit$\leftrightarrow$Hilbert-space-qubit is carried
+out in A070 (bridge $(z,r,\theta)\leftrightarrow(\alpha,\beta)$). The CHSH
+deviation $\Delta\text{CHSH}\sim\xi$ follows from the torus geometry (A090). As
+a prediction quantity, $\Delta\text{CHSH}$ is listed in A210. This document
+provides the concrete computational framework ($\phi$-QFT, Bell damping, Shor)
+and the hardware status: measured $S=2{.}74$ confirms executability; the $\xi$
+effect itself is not detectable with today's hardware.
 
 \section{Verification Scripts}
 
 \begin{itemize}[leftmargin=2em,itemsep=2pt,topsep=2pt]
-  \item CHSH-Skalierungsgesetz numerisch für $n=2\ldots200$, Vergleich mit T0-Formel:
-    \texttt{python/A\_Serie\_Skripte/a165\_chsh\_skalierung.py}
-  \item $\phi$-QFT-Äquivalenz: Periodenfindung für $N=15,21,33,77,143$,
-    Erfolgsrate und Komplexität:
-    \texttt{python/A\_Serie\_Skripte/a165\_phi\_qft.py}
+  \item CHSH scaling law numerically for $n=2\ldots200$, comparison with T0 formula:
+    \path{python/A_Serie_Skripte/a165_chsh_skalierung.py}
+  \item $\phi$-QFT equivalence: period finding for $N=15,21,33,77,143$,
+    success rate and complexity:
+    \path{python/A_Serie_Skripte/a165_phi_qft.py}
 \end{itemize}
 
-\textbf{Messprotokoll der Hardware-Läufe.} Die IBM-Heron-r2-Messwerte
-($S=2{.}74$ auf \texttt{ibm\_kingston}, Mai 2026, 50 unabhängige Läufe)
-sind eigene Messkampagnen des Autors, keine Literaturwerte. Rohdaten,
-Job-IDs und Auswerteskripte liegen im Korpus-Verzeichnis der
-Quantencomputing-Läufe; die Behauptung ist darüber prüfbar. A070 und A090
-zitieren dieselbe Kampagne über dieses Dokument.
-
+\textbf{Measurement protocol for hardware runs.} The IBM Heron-r2 measurements
+($S=2{.}74$ on \texttt{ibm\_kingston}, May 2026, 50 independent runs) are the
+author's own measurement campaigns, not literature values. Raw data, job IDs and
+evaluation scripts are in the corpus directory for quantum-computing runs; the
+claim is verifiable from there. A070 and A090 cite the same campaign via this
+document.
 
 \section{Symbol Glossary}
 
-Symbole die in der gesamten A-Serie verwendet werden, sind in A010 erklärt.
-Spezifisch für dieses Dokument:
+Symbols used throughout the A-Series are explained in A010.
+Specific to this document:
 
 \begin{center}
 \renewcommand{\arraystretch}{1.3}
@@ -378,10 +369,10 @@ Spezifisch für dieses Dokument:
 \toprule
 Symbol & Meaning \\
 \midrule
-$S_\text{CHSH}$ & CHSH-Korrelationswert; klassisch $\leq2$, Tsirelson-Schranke $2\sqrt2$ \\
-$\phi$-QFT & Goldener-Schnitt-strukturierte QFT auf $T^4$ \\
-$S_\text{T0}(n)$ & T0-Skalierungsformel für $n$ Qubit-Paare \\
-IBM Heron r2 & Supraleitender Quantenprozessor (Referenzarchitektur) \\
+$S_\text{CHSH}$ & CHSH correlation value; classical $\leq2$, Tsirelson bound $2\sqrt2$ \\
+$\phi$-QFT & Golden-ratio-structured QFT on $T^4$ \\
+$S_\text{T0}(n)$ & T0 scaling formula for $n$ qubit pairs \\
+IBM Heron r2 & Superconducting quantum processor (reference architecture) \\
 \bottomrule
 \end{tabular}}
 \renewcommand{\arraystretch}{1.0}
@@ -389,28 +380,28 @@ IBM Heron r2 & Supraleitender Quantenprozessor (Referenzarchitektur) \\
 
 \section{Open Questions}
 
-\textbf{Der $\xi$-Effekt ist nicht gemessen.} Die vorhergesagte Abweichung
-$\Delta\text{CHSH}\approx5{.}4\times10^{-4}$ (bei 73 Qubits) erfordert
-fehlerkorrigierte Qubits mit sub-ppm-Stabilität -- über heutige NISQ-Hardware
-hinaus.
+\textbf{The $\xi$ effect is not measured.} The predicted deviation
+$\Delta\text{CHSH}\approx5{.}4\times10^{-4}$ (at 73 qubits) requires error-corrected
+qubits with sub-ppm stability -- beyond today's NISQ hardware.
 
-\textbf{Die CHSH-Skalierung ist nicht vollständig verifiziert.} Die Tabelle oben
-sind Vorhersagen; Messungen über $n>2$ fehlen.
+\textbf{The CHSH scaling is not fully verified.} The table above contains
+predictions; measurements beyond $n>2$ are missing.
 
-\textbf{Skalierbarkeit auf RSA-relevante $N$.} Die Benchmark-Tests gehen bis
-$N=143$; RSA-2048 erfordert weitere Analyse.
+\textbf{Scalability to RSA-relevant $N$.} Benchmark tests go up to $N=143$; RSA-2048
+requires further analysis.
 
-\textbf{Integration mit Quantenfehlerkorrektur.} Surface Codes und
-$\phi$-QFT sind nicht verbunden.
+\textbf{Integration with quantum error correction.} Surface codes and $\phi$-QFT
+are not connected.
 
 \section{Supersedes}
 
-Dieses Dokument nimmt auf: Dok.~147 (Quantencomputing auf T0/FFGFT-Basis:
-Energie-Feld-Qubits, $\phi$-QFT-Äquivalenzsatz, Bell-Test-Modifikationen,
-$\xi$-Resonanz-Shor, IBM-Hardware-Validierung Mai 2026). \emph{Nicht} übernommen:
-der Abschnitt „Kosmische Korrekturen für Quantencomputing" aus Dok.~147 (Tages-/Mond-/Jahreszyklus-Einfluss auf Qubits -- spekulativer Anhang, kein Kerninhalt;
-außerhalb des A-Serien-Rahmens A010). Die englischen Appendix-Duplikate aus
-Dok.~147 sind ebenfalls nicht übernommen.
+This document subsumes: Doc.~147 (quantum computing on T0/FFGFT basis:
+energy-field qubits, $\phi$-QFT equivalence theorem, Bell-test modifications,
+$\xi$-resonance-Shor, IBM hardware validation May 2026). \emph{Not} adopted:
+the section ``Cosmic corrections for quantum computing'' from Doc.~147 (daily/lunar/
+annual cycle effects on qubits -- speculative appendix, not core content;
+outside the A-series framework A010). The English appendix duplicates from
+Doc.~147 are also not adopted.
 
 \section{Use of AI Tools}
 
