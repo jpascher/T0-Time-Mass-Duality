@@ -15,7 +15,7 @@ are inversely coupled.
 
 ## Overview
 
-This release brings two new books to Amazon Kindle, substantially extends Doc. 341
+This release brings three new books to Amazon Kindle, substantially extends Doc. 341
 (algebraic bridge FFGFT↔GALG) through a productive exchange with Doug Matzke,
 and adds three new documents (Docs. 361–363). No algebraic results from Docs. 342–360
 are changed; one downgrade (Doc. 355 heptagonal phases [B]→[S]) and one correction
@@ -25,15 +25,27 @@ are changed; one downgrade (Doc. 355 heptagonal phases [B]→[S]) and one correc
 
 ## New books on Amazon Kindle
 
+Three new books have appeared on Amazon Kindle (eBook, paperback, hardcover)
+in all markets since v1.3.8:
+
 ### Bits, Hyperbits and Landauer (DE+EN, 93 pp. each)
 
-Available as Kindle eBook, paperback and hardcover on Amazon KDP (all markets).
-The book compares the information physics of Matzke's Hyperbit framework with FFGFT
+Compares the information physics of Matzke's Hyperbit framework with FFGFT
 and develops the Landauer bound thermodynamically.
 Core statement: an information bit cannot be assigned any energy — only its carrier can.
 In the Hyperbit framework the 6 generators in G(6) are the carrier;
-in FFGFT it is the winding mode on the T⁴/Z₃ torus.
+in FFGFT it is the winding mode on the T4/Z3 torus.
 
+### Beyond the Matrix / Jenseits der Matrix (DE+EN+JA)
+
+The narrative companion to FFGFT — accessible presentation of the theory without
+formulas, for a broad audience. Published in three languages (German, English, Japanese).
+
+### FFGFT A-Series Complete Volume (DE+EN)
+
+The complete canonical edition of FFGFT in one volume — all 47 A-Series documents,
+thematically ordered and fully auditable. Kindle edition of the complete work
+previously available only in the repository.
 ---
 
 ## New and extended documents since v1.3.8
@@ -50,7 +62,7 @@ Neutrino = Vss[0], bilateral sector-changers as gluon role.
 order-7 element X₇ = C_Φ₇ ⊕ I₂ in G(6), compact: Y (6 blades, ord 182=2·7·13),
 X = Y²⁶ [K/B]. X²⁷=X ⟺ spectrum ⊂ GF(27): field-tower N→r₂₆→X₇ [K].
 Coefficient purity: root26 with pure coefficients (5 blades) [B].
-E�� convention: E₇=−(e₁…e₆) explains Matzke's p27 finding [K].
+E�� convention: E₇=−(e₁…e₆) explains Matzke's p27 finding [K].
 Jordan decomposition X=S·U: r₂₇₃, r₅₄₆, r₂₁₈₄ in G(6) via 6-dim block ⊕ J₂ [K].
 r₇₂₉ only from Cl(16)=M₂₅₆; unrelated to GF(729) [K].
 Euler's φ: φ(80)=32, φ(182)=72 [K].

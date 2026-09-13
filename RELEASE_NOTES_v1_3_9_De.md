@@ -26,14 +26,27 @@ sind enthalten.
 
 ## Neue Bücher auf Amazon Kindle
 
+Drei neue Bücher sind seit v1.3.8 auf Amazon Kindle (eBook, Taschenbuch, Hardcover)
+in allen Märkten erschienen:
+
 ### Bits, Hyperbits und Landauer (De+En, je 93 S.)
 
-Als Kindle-eBook, Taschenbuch und Hardcover auf Amazon KDP verfügbar (alle Märkte).
-Das Buch vergleicht die Informationsphysik von Matzkes Hyperbit-Framework mit der FFGFT
+Vergleicht die Informationsphysik von Matzkes Hyperbit-Framework mit der FFGFT
 und entwickelt die Landauer-Grenze thermodynamisch.
 Kernaussage: einem Informationsbit kann keine Energie zugewiesen werden — nur seinem Träger.
 Im Hyperbit-Framework sind die 6 Generatoren in G(6) der Träger;
 in FFGFT ist es die Wicklungsmode auf dem T4/Z3-Torus.
+
+### Jenseits der Matrix / Beyond the Matrix (De+En+Ja)
+
+Das Narrativ-Buch zur FFGFT — zugängliche Darstellung der Theorie ohne Formeln,
+für ein breites Publikum. Erscheint dreisprachig (Deutsch, Englisch, Japanisch).
+
+### FFGFT A-Serie Gesamtbuch (De+En)
+
+Die vollständige kanonische Ausgabe der FFGFT in einem Band — alle 47 Dokumente
+der A-Serie, thematisch geordnet und vollständig auditierbar. Kindle-Ausgabe
+des bisher nur im Repository verfügbaren Gesamtwerks.
 
 ---
 
