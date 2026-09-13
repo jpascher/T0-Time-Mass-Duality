@@ -691,7 +691,7 @@ Algebraischer Vergleich FFGFT ↔ Matzkes GALG-Framework (IPI-Austausch August 2
   mit Ordnung-26-Elementen. Dougs „not working on mass" konsistent mit dieser Trennung.
 
 §6 (8. Sept.): Eintrittsskala der Primzahlen ord_p(3); kein root7 mit Z3C-Koeffizienten, Ordnung-7-Element über GF(9) (X₇, kompakt Y²⁶); X²⁷=X ⟺ Spektrum ⊂ GF(27); Koeffizientenreinheit; E₇-Konvention (R115).  
-Prüfskripte: `pruef_341_gf27_in_galg.py`, `pruef_341_vakuum_witt_z3.py`, `pruef_341_primordnung.py`, `pruef_341_root7_gf9.py`, `pruef_341_r26_rein_p27.py`  
+Prüfskripte: `pruef_341_gf27_in_galg.py`, `pruef_341_vakuum_witt_z3.py`, `pruef_341_primordnung.py`, `pruef_341_root7_gf9.py`, `pruef_341_r26_rein_p27.py`, `pruef_341_unipotent_jordan.py`  
 `pruef_342_vakuum_witt_z3.py` (7/7 [B]).  
 → [DE](2/pdf/341_GF27_GALG_FFGFT_De.pdf) · [EN](2/pdf/341_GF27_GALG_FFGFT_En.pdf)
 

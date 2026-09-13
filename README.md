@@ -673,7 +673,7 @@ Algebraic comparison FFGFT ↔ Matzke's GALG framework (IPI exchange August 2026
   (even indices → massive sector) and Z₃-orbits (odd indices → massless sector),
   agreeing with the Frobenius separation of Doc. 339.
 §6 (8 Sept.): entry order of primes ord_p(3); no root7 with Z3C coefficients, order-7 element over GF(9) (X₇, and compact Y²⁶); X²⁷=X ⟺ spectrum ⊂ GF(27); coefficient purity; E₇ convention (R115).  
-Check scripts: `pruef_341_gf27_in_galg.py`, `pruef_341_vakuum_witt_z3.py`, `pruef_341_primordnung.py`, `pruef_341_root7_gf9.py`, `pruef_341_r26_rein_p27.py`  
+Check scripts: `pruef_341_gf27_in_galg.py`, `pruef_341_vakuum_witt_z3.py`, `pruef_341_primordnung.py`, `pruef_341_root7_gf9.py`, `pruef_341_r26_rein_p27.py`, `pruef_341_unipotent_jordan.py`  
 → [DE](2/pdf/341_GF27_GALG_FFGFT_De.pdf) · [EN](2/pdf/341_GF27_GALG_FFGFT_En.pdf)
 
 
