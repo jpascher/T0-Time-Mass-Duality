@@ -230,6 +230,21 @@ check("Inversion: f1↔f2 und f3↔f4",
                 frozenset({frozenset({5,15,19}), frozenset({7,11,21})})})
 
 # ============================================================
+# L4: Z₃-Wirkung liegt in SU(2) → A₂-Punkte, keine echte Obstruktion
+# ============================================================
+print("\n--- L4: Z₃-Wirkung {ω,ω²} auf ℂ² liegt in SU(2) (Dok. 330) ---")
+import cmath
+w = cmath.exp(2j*cmath.pi/3)
+A = [[w, 0], [0, w**2]]            # Eigenwerte nach Dok. 330
+detA = A[0][0]*A[1][1]
+check("det A = 1 (Wirkung in SU(2), krepante Auflösung möglich)", abs(detA-1) < 1e-12, f"det={detA}")
+# Lefschetz-Fixpunktformel auf T⁴ = ℂ²/Λ: |det(1−A)| über ℂ, quadriert für reelle 4×4
+det1A = (1-A[0][0])*(1-A[1][1])
+check("|det(1−A)|² = 9 Fixpunkte (Dok. 330, B1)", abs(abs(det1A)**2 - 9) < 1e-9, f"got {abs(det1A)**2}")
+check("A³ = 1 (Ordnung 3)", abs(A[0][0]**3-1) < 1e-12 and abs(A[1][1]**3-1) < 1e-12)
+check("Spur A = −1 (Konjugationsklasse von Ordnung 3 in SU(2))", abs((A[0][0]+A[1][1]) + 1) < 1e-12)
+
+# ============================================================
 print(f"\n{'='*50}")
 print(f"Ergebnis: {PASS} OK, {FAIL} FAIL")
 sys.exit(FAIL)
