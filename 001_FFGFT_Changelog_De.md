@@ -65,6 +65,22 @@ Betrifft: Dok. 006, 319, R104.
 **Neuer offener Punkt [S]:** τ_μ direkt aus FFGFT, ohne Umweg über G_F und v —
 einziger konventionsfreier Test des schwachen Sektors.
 
+### Dok. 363 — Hodge-Vermutung für T⁴/Z₃ (De/En, 8–9 S.) — 13. Sept. 2026
+
+Zeigt für die spezielle Klasse T⁴/Z₃ (Torus-Orbifold, nicht allgemeine Varietät):
+- 9 Z₃-Fixpunkte als algebraische 0-Zyklen **[B]**
+- Frobenius-Eigenstruktur auf GF(27)* und étale Kohomologie **[K]**
+- χ-Klassen als algebraische Basis der Hodge-Klassen **[B]**
+- Hodge-Vermutung für T⁴/Z₃: Hauptsatz (nicht das Millennium-Problem) **[B]**
+- Explizite Grenze: gilt nicht für allgemeine Varietäten
+
+Prüfskripte: `pruef_363_hodge_t4z3.py` (23/23 OK), `pruef_363b_luecken.py` (38/38 OK)
+→ [DE](2/pdf/363_Hodge_T4Z3_De.pdf) · [EN](2/pdf/363_Hodge_T4Z3_En.pdf)
+
+Register: kein Eintrag (neues Dokument, keine Korrekturen zu bestehenden Dokumenten).
+
+---
+
 ### R115 — Höhere Einheitswurzeln in GALG G(6), Koeffizientenreinheit, E₇-Konvention (8. Sept. 2026)
 
 **Dok. 341 §6 (neu), Dok. 355 (Korrektur):**
@@ -551,97 +567,3 @@ nach Task Force 1996 / Shaffer 2017:
 **Nächster Schritt [S]:** Validierung mit registriertem PhysioNet-Zugang.
 
 **Register:** R119 eingetragen.
-
----
-
-## 12. September 2026 — Dok. 361: Kagome-RVB-Polaronen und Frobenius-Struktur
-
-### Dok. 361 — Pei et al. (PRL 137, 106702) im Vergleich mit FFGFT (De/En)
-
-Fallstudie zu Pei, Chen, Castelnovo, Moessner (PRL 137, 106702, 31. Aug. 2026,
-Open Access): einfach dotiertes Hubbard-Modell mit unendlicher Abstoßung auf dem
-Kagome-Gitter — RVB-Polaronen, Selbstlokalisierung (Bandmasse +6 Größenordnungen),
-Übergang zu √3×√3-Ordnung, gemessen am Drei-Zustands-Potts-Modell.
-Alle Zitate wörtlich [Q].
-
-**Vier strukturelle Parallelen, alle [S]:**
-1. Frobenius-Orbits — dreizählige Struktur des Kagome-Dreiecks ↔ φ: x↦x³ der Ordnung 3
-2. Drei-Zustands-Potts = GF(3) = Fixkörper des Frobenius
-3. Masse = eingefrorene kinetische Energie (Selbstfalle ↔ T̃·m = 1)
-4. π-Fluss = Berry-Phase = Wicklungszahl (Dok. 314)
-
-Gemeinsame algebraische Wurzel aller vier: der Frobenius-Automorphismus der Ordnung 3.
-Abschnitt „Was nicht übereinstimmt" enthalten.
-
-**Prüfskript:** `2/python/Dok361_Skripte/pruef_361_kagome_frobenius.py` — 20/20.
-
-**Register:** kein Eintrag (Einordnung, keine Korrektur älterer Dokumente).
-
----
-
-## 12. September 2026 — Dok. 362: Die BAW-Ising-Maschine als Resonanzrechner
-
-### Dok. 362 — Vadde et al. (Commun. Phys. 9:290) im Licht von Dok. 173, 328, 343 (De/En, je 9 S.)
-
-Fallstudie zu Vadde, Ovcharov, González, Khymyn, Litvinenko, Åkerman
-(Commun. Phys. 9:290, 8. Sept. 2026, CC-BY, DOI 10.1038/s42005-026-02846-7):
-zeitmultiplexte Ising-Maschine mit 2048 Spins auf zwei Quarz-Volumenschallwellen-
-Verzögerungsleitungen; MAX-CUT, Number Partitioning, Sudoku. Alle Zitate wörtlich [Q].
-
-**Fünf Einordnungen, alle [S]:**
-1. Spin = Phase 0/π eines Pulses ↔ Ising-Maschine = Resonator (Dok. 173)
-2. Barkhausen „Phase = 2πn" ↔ Wicklungsquantisierung auf S¹ (Dok. 314)
-3. PSA bei 2ω → {0,π} ↔ Z₂-Fixpunkte {+1,−1} (Dok. 339/336);
-   Pumpen bei 3ω ergäbe Z₃/Potts-Maschine
-4. Kopplung 5–30 % mit Chaosgrenze ↔ Adler-Regime (Dok. 328)
-5. **Auflösungsboden (quantitativ deutlichste Einordnung):** 99,9 %-Näherungen zuverlässig,
-   exakte Lösungen (E = 0) mit wachsender Problemgröße nicht mehr (Fig. 5b: ~90 % bei 32
-   Zahlen → ~0 bei 2048); Sudoku bei 99,42 % Grundzustandsenergie noch ungültig
-   ↔ N_max ≈ 1/ε (Dok. 343 §G′)
-
-**Was nicht übereinstimmt:** klassischer RF-Oszillator (kein Quantenanspruch); ein Zyklus
-statt vier; keine Parameteroptimierung in den Benchmarks; 2⁻¹⁵ ≈ 3·10⁻⁵ liegt nur zufällig
-in der Größenordnung von ξ — ausdrücklich kein Zusammenhang behauptet.
-
-**Prüfskript:** `2/python/Dok362_Skripte/pruef_362_bawim_zahlen.py` — 23/23.
-
-**Register:** kein Eintrag (Einordnung, keine Korrektur älterer Dokumente).
-
----
-
-## 13. September 2026 — Dok. 363: Die Hodge-Vermutung und die T⁴/Z₃-Geometrie
-
-### Dok. 363 — Frobenius, Sektorpaarung und algebraische Zykel in der FFGFT (De/En, je 8 S.)
-
-Anlass: die Millennium-Probleme in der Diskussion um den Navier-Stokes-Forcing-Beweis
-(Sept. 2026). Für die FFGFT-Basisgeometrie T⁴/Z₃ wird die Hodge-Vermutung geschlossen.
-
-**Fünf Sätze:**
-- **Satz A [E]:** T⁴ als komplexer 2-Torus = abelsche Fläche → Hodge-Vermutung bekannt
-  (Lefschetz (1,1), H^{2,2} durch Fundamentalklasse)
-- **Satz B [B]:** die 9 Z₃-Fixpunkte sind algebraische 0-Zykel; Witt-Paare (Dok. 341):
-  gerade Indizes = Fixpunkte, ungerade = Dreier-Orbits
-- **Satz C [B]:** Frobenius x↦x³ auf GF(27)* = algebraischer Frobenius auf H¹_ét
-  (Eigenwerte = 26. Einheitswurzeln; Gal(GF(27)/GF(3)) ≅ Z₃)
-- **Satz D [B]:** Sektorpaarung (Dok. 343 Satz D) = Hodge-Symmetrie H^{p,q} ↔ H^{q,p};
-  f₁↔f₂ und f₃↔f₄
-- **Satz E [B]:** die 8 irreduziblen Kubiken über GF(3) (Dok. 342) bilden eine
-  Q-Basis der algebraischen Zykel
-
-**Hauptsatz [B]:** Alle Hodge-Klassen auf T⁴/Z₃ sind rationale Linearkombinationen
-algebraischer Zykel. Das allgemeine Millennium-Problem (beliebige glatte projektive
-Varietäten) ist davon **nicht** berührt; T⁴/Z₃ ist singulär, die Aussage gilt für das
-klassische Orbifold-Bild, Chen–Ruan-Erweiterung [S].
-
-**Lesehilfe zu Dok. 343/344 (keine Korrektur):** „Sektorpaarung k↦−k" ist die Inversion
-g^k↦g^{−k} (Exponentennegation in Z₂₆), nicht die Körpernegation e↦−e = e·g¹³.
-Letztere schickt jeden Ord.-26-Orbit auf einen Ord.-13-Orbit und wäre keine Paarung
-innerhalb der primitiven Klassen. In Dok. 343/344 ist k der Exponent — dort korrekt.
-
-**Prüfskripte:** `2/python/Dok363_Skripte/pruef_363_hodge_t4z3.py` (23/23),
-`pruef_363b_luecken.py` (34/34: Ordnungsklassifikation aller 8 Kubiken direkt berechnet;
-Frobenius als Ringautomorphismus auf allen 676/729 Paaren; Negation vs. Inversion auf den
-Orbits), `run_all_363.sh`.
-
-**Register:** kein Eintrag (neues Resultat, keine Korrektur älterer Dokumente, kein als
-offen geführter Punkt geschlossen).
