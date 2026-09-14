@@ -652,3 +652,20 @@ nach Task Force 1996 / Shaffer 2017:
 **Nächster Schritt [S]:** Validierung mit registriertem PhysioNet-Zugang.
 
 **Register:** R119 eingetragen.
+
+## 14. September 2026 — Dok. 364: Der Ikosaeder-Träger und das D₄-Gitter
+
+### Dok. 364 — Galois-Struktur, Reduktion modulo 3 und die Verdopplung 3⊕3′: ein exakter Vergleich mit T⁴/Z₃ (De/En, je 9 Seiten)
+
+Anlass: ein auf der IPI-Liste vorgestelltes Trägermodell (Zwölf-Port-Ikosaeder, Symmetriegruppe A₅, lokale Mittelungsregel auf 30 Nähten, Reproduzierbarkeitspaket in exakter rationaler Arithmetik). Vergleichsdokument, keine Stellungnahme zu den physikalischen Ansprüchen des externen Modells.
+
+**Ergebnisse:**
+1. Spektrum des Trägers **[B]**: Laplace {0, 5−√5 (×3), 6 (×5), 5+√5 (×3)}, Spektralkörper ℚ(√5); die Galois-Konjugation √5↦−√5 vertauscht die Spektralprojektoren T₁↔T₂, nur der 6D-Block T₁⊕T₂ ist ℚ-rational — die Verdopplung 6 = 3⊕3′ aus Dok. 285 als Galois-Unteilbarkeit; C₃-Restriktion 4+4+4 (Dok. 293).
+2. Reduktion mod 3 **[B]**: ℤ[φ]/(3) = GF(9) (3 träge), Galois-Konjugation wird Frobenius x↦x³ (φ³ = 1−φ in GF(9)); A₅ → GL₃(GF(9)) treu und absolut irreduzibel, A₅ ⊄ GL₂(GF(9)) (vollständige Suche) — G(3)/G(6)-Schwelle wie Ord. 26 in Dok. 341 **[S]**.
+3. A₅ gegen Aut(D₄) **[B]/[X]**: Aut(D₄) = 1152 mit Ordnungsverteilung aus Dok. 314 reproduziert, 16 Orbifold-Erzeugende; 5 ∤ 1152, A₅ gitterunverträglich; gemeinsamer Kern ist die Tetraedergruppe A₄ (ganzzahlige A₅-Elemente), Ports = A₄-Torsor, A₄ ⊂ W(D₄); Ports = halbe D₄-Erstschale als Z₃-Modul (24 = 12+12, Dok. 314).
+4. Negativbefund **[X]**: die Port-Z₃ ist nie eine der 16 Orbifold-Z₃ — 0 von 1120 orbifold-stabilen 12-Hälften kuboktaedrisch oder ikosaedrisch (Satz: stabilisierte Normale ⇒ Fixvektor). Nebenbefund 256 Tight-Frames in ℝ⁴ mit √13-Spektrum.
+5. Eichzuordnung des externen Modells u(1)⊕su(2)⊕su(3) auf A⊕T₁⊕(T₂⊕H) darstellungstheoretisch konsistent **[E]**; Lie-Struktur und eindimensionales Zentrum sind dort Axiom **[S]**. Spiegellage zur FFGFT (su(3) [B] Dok. 321, su(2) [S] Dok. 324).
+
+**Prüfskripte:** `2/python/Dok364_Skripte/` — `spectrum_icosahedral_carrier.py`, `galois_z3_icosahedral_carrier.py`, `zphi_mod3_a5.py`, `a5_vs_d4.py`, Sammellauf `run_all_364.sh` (4/4 bestanden; Nahtliste des externen Pakets optional, sonst kanonischer Ikosaeder).
+
+**Register:** kein Eintrag.

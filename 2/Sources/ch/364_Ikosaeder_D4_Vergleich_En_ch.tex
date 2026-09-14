@@ -1,0 +1,383 @@
+% 364_Ikosaeder_D4_Vergleich_En_ch.tex
+% Johann Pascher, 14 Sept. 2026
+% The icosahedral carrier and the D4 lattice: Galois structure, reduction mod 3 and the doubling 3+3'
+
+\providecommand{\BM}{\textbf{[B]}}
+\providecommand{\KM}{\textbf{[K]}}
+\providecommand{\SM}{\textbf{[S]}}
+\providecommand{\SetzM}{\textbf{[POSIT]}}
+\providecommand{\QM}{\textbf{[Q]}}
+\providecommand{\EM}{\textbf{[E]}}
+\providecommand{\XM}{\textbf{[X]}}
+
+\chapter*{The Icosahedral Carrier and the D\textsubscript{4} Lattice}
+\addcontentsline{toc}{chapter}{The Icosahedral Carrier and the D₄ Lattice}
+
+\begin{abstract}
+An externally proposed carrier model for emergent physics uses a
+twelve-port icosahedron with symmetry group $A_5$ and a local averaging
+repair rule on its thirty edges. This document compares that carrier
+exactly with the FFGFT geometry $T^4/\mathbb{Z}_3$ on the $D_4$ lattice.
+Four verification scripts establish: (i)~the carrier spectrum lies in
+$\mathbb{Q}(\sqrt5)$, and the Galois conjugation $\sqrt5\mapsto-\sqrt5$
+exchanges the two three-dimensional $A_5$ blocks $3\leftrightarrow3'$ as
+spectral projectors, so that over $\mathbb{Q}$ only the 6D block exists --
+the doubling $6=3\oplus3'$ of Dok.~285; (ii)~the reduction
+$\mathbb{Z}[\varphi]/(3)=GF(9)$ turns this Galois conjugation into the
+Frobenius $x\mapsto x^3$ of the FFGFT ground field; (iii)~$A_5$ acts
+faithfully and absolutely irreducibly on $GF(9)^3$ but not on $GF(9)^2$,
+hence not in $G(3)$ but in $G(6)$ -- the same threshold as the lepton
+order~26 in Dok.~341; (iv)~$A_5$ is incompatible with the $D_4$ lattice
+($5\nmid1152$, Dok.~314); the common core is the tetrahedral group $A_4$,
+which acts simply transitively on the twelve ports, and the port
+$\mathbb{Z}_3$ is provably never one of the sixteen orbifold generators of
+$T^4/\mathbb{Z}_3$. The gauge assignment of the external model
+($u(1)\oplus su(2)\oplus su(3)$ on $1\oplus3\oplus(3'\oplus5)$) is
+representation-theoretically consistent; its Lie structure is an axiom
+there, not a consequence of the icosahedron.
+\end{abstract}
+
+% ============================================================
+\section*{Status markers}
+% ============================================================
+\begin{center}
+\begin{tabular}{@{}lp{10cm}@{}}
+\textbf{[B]} & Algebraically proven (verification script, exact arithmetic). \\[3pt]
+\textbf{[K]} & Numerically confirmed. \\[3pt]
+\textbf{[S]} & Structurally plausible, physical identification open. \\[3pt]
+\textbf{[E]} & Established external mathematics. \\[3pt]
+\textbf{[X]} & Checked and negative. \\
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{Orientation: geometry, algebra, and what a field is here}
+% ============================================================
+
+FFGFT has two layers that must not be confused.
+
+\paragraph{The geometry} is a torus. The carrier is $T^4$ with the $D_4$
+lattice (kissing number~24, Dok.~314), and the physics sits in the
+\emph{modes} of this torus: the winding numbers of the plane waves living
+on it. The built-in $\mathbb{Z}_3$ symmetry of the lattice turns it into
+the orbifold $T^4/\mathbb{Z}_3$ with nine fixed points. What a particle is,
+which mass it carries, which sector it belongs to -- these are statements
+about modes and their $\mathbb{Z}_3$ orbits.
+
+\paragraph{The algebra} consists of finite fields: $GF(9)$ as ground
+field, $GF(27)$ with its 26 units in eight three-orbits, both sitting in
+parallel inside $GF(729)$ (Dok.~338, 341). The Frobenius $x\mapsto x^3$ is
+the Galois group of these fields, and the sector pairing
+$k\leftrightarrow-k$ is its action.
+
+\paragraph{How the layers connect.} The fields \emph{are} not the modes.
+They are the eigenvalue fields, splitting fields and coefficient fields in
+which the mode operators live, and they decide which modes \emph{can
+exist}: a mode is an element order in a matrix algebra over $GF(3^k)$, and
+Lagrange permits only orders dividing the group order $|GF(3^k)^*|$. That
+is why order~5 exists in $G(3)$ ($5\mid80$) while order~26 appears only in
+$G(6)$ ($13\nmid80$, Dok.~341). In short: \emph{the geometry supplies the
+modes; the Galois structure of the fields says which of them are
+admissible.} The fields are mode-conditioned in exactly this sense -- they
+are called up by the modes, not the other way round.
+
+\paragraph{Why this organises the comparison.} OPH has the same two-layer
+structure with different entries: the geometry is a sphere of icosahedra,
+the modes are the blocks of the port space under $A_5$, and the algebra is
+the number field $\mathbb{Q}(\sqrt5)$ with its Galois group
+$\sqrt5\mapsto-\sqrt5$. There too the Galois structure decides which modes
+exist over the ground field: over $\mathbb{Q}$ only the 6D block, never a
+single triplet. The comparison in this document is therefore a comparison
+of the \emph{algebras that classify the modes} -- and the two algebras
+touch exactly once: in the reduction modulo~3, which maps
+$\mathbb{Q}(\sqrt5)$ onto $GF(9)$ and the Galois conjugation onto the
+Frobenius (Theorem~\ref{thm:frob}). The geometries, by contrast, touch only
+in the tetrahedral group and part at the five-fold symmetry
+(Section~\ref{sec:d4}).
+
+% ============================================================
+\section{Occasion and scope}
+% ============================================================
+
+In September 2026 a carrier model was presented on the IPI list (Observer
+Patch Holography, hereafter \emph{OPH}) whose hardware is a finite network
+of twelve-port icosahedra and whose software is a single local rule: on
+each of the thirty edges (\emph{seams}) the two port readings are replaced
+by their arithmetic mean. The author supplied a reproducibility bundle in
+exact rational arithmetic (300 updates, seeds 7 and 11, an independent
+verifier).
+
+This document takes no position on the physical claims of OPH. It answers
+three narrow, exactly checkable questions:
+\begin{enumerate}[nosep]
+\item What is the structure of the carrier spectrum, and what does its
+      Galois group imply for the distinguishability of the two
+      three-dimensional blocks?
+\item How does $\mathbb{Q}(\sqrt5)$ relate to the FFGFT ground field $GF(9)$?
+\item Which part of the icosahedral group $A_5$ is compatible with the
+      $D_4$ lattice and the orbifold $T^4/\mathbb{Z}_3$?
+\end{enumerate}
+The FFGFT reference points are the doubling $6=3\oplus3'$ (Dok.~285), the
+embedding $C_3<A_5$ (Dok.~293), the negative result $5\nmid|{\rm Aut}(D_4)|$
+(Dok.~314) and the $G(3)/G(6)$ threshold (Dok.~341).
+
+% ============================================================
+\section{The spectrum of the icosahedral carrier}
+% ============================================================
+
+\begin{theorem}[Spectrum, \BM]\label{thm:spektrum}
+Let $A$ be the adjacency matrix of the icosahedral graph (12 vertices,
+30 edges, 5-regular) and $L=5I-A$ its Laplacian. Then
+\[
+  \operatorname{spec}(A)=\{5^{(1)},\ \sqrt5^{(3)},\ -1^{(5)},\ -\sqrt5^{(3)}\},\qquad
+  \operatorname{spec}(L)=\{0^{(1)},\ (5-\sqrt5)^{(3)},\ 6^{(5)},\ (5+\sqrt5)^{(3)}\}.
+\]
+The only rational non-trivial Laplacian eigenvalue is $6$ (multiplicity~5).
+The field generated by the spectrum is $\mathbb{Q}(\sqrt5)$, of degree~2.
+\end{theorem}
+
+\begin{proof}
+Script \texttt{spectrum\_icosahedral\_carrier.py}, SymPy, exact; the seam
+list is taken from the OPH bundle, alternatively from the canonical
+vertices $(0,\pm1,\pm\varphi)$ cyclically. The script also replays the 300
+updates of seed~7 in rational arithmetic and reproduces the centered
+residual recorded in the bundle exactly.
+\end{proof}
+
+The multiplicities $(1,3,5,3)$ are the dimensions of the irreducible
+$A_5$ representations $A\oplus T_1\oplus H\oplus T_2$ (icosahedral-group
+notation; $H$ is five-dimensional, $T_1,T_2$ are the two inequivalent
+triplets). On a five-fold rotation $g_5$ they carry the character values
+\[
+  \chi_{T_1}(g_5)=\varphi,\qquad \chi_{T_2}(g_5)=1-\varphi,\qquad
+  \chi_{T_1}+\chi_{T_2}=1 .
+\]
+
+\begin{remark}[Damping rates, \BM]
+The expected action of a random single-seam update is $E[M]=I-L/60$ with
+block eigenvalues $(55+\sqrt5)/60\approx0.954$ on $T_1$, $9/10$ on $H$ and
+$(55-\sqrt5)/60\approx0.879$ on $T_2$. $T_1$ is the slowest block; its
+distance to $T_2$ is $\sqrt5/30$ (ratio $\approx1.085$). This is a
+statement about rates, not a symmetry selection.
+\end{remark}
+
+% ============================================================
+\section[Galois conjugation and the doubling 6 = 3 + 3']{Galois conjugation and the doubling $6=3\oplus3'$}
+% ============================================================
+
+\begin{theorem}[Galois exchanges $T_1\leftrightarrow T_2$, \BM]\label{thm:galois}
+Let $P_{T_1},P_{T_2},P_A,P_H$ be the spectral projectors of $L$
+(polynomials in $L$ with coefficients in $\mathbb{Q}(\sqrt5)$). The Galois
+automorphism $\sigma:\sqrt5\mapsto-\sqrt5$ of $\mathbb{Q}(\sqrt5)$ acts
+entrywise as
+\[
+  \sigma(P_{T_1})=P_{T_2},\qquad \sigma(P_{T_2})=P_{T_1},\qquad
+  \sigma(P_A)=P_A,\qquad \sigma(P_H)=P_H .
+\]
+The projector $P_{T_1}+P_{T_2}$ is $\mathbb{Q}$-rational; $P_{T_1}$ and
+$P_{T_2}$ separately are not. The minimal polynomial of the $T_1$
+eigenvalue over $\mathbb{Q}$ is $x^2-10x+20$ with roots $5\mp\sqrt5$.
+\end{theorem}
+
+\begin{proof}
+Script \texttt{galois\_z3\_icosahedral\_carrier.py}. The projectors are
+built as Lagrange polynomials in $L$; the exchange is checked by
+substituting $\sqrt5\to-\sqrt5$ and comparing matrices.
+\end{proof}
+
+\begin{corollary}[Indivisibility over $\mathbb{Q}$, \BM]\label{cor:sechs}
+Every $A_5$-invariant structure on the port space that is defined over
+$\mathbb{Q}$ -- a lattice, an integer character, exact rational repair
+arithmetic -- sees $T_1\oplus T_2$ as \emph{one} six-dimensional block.
+The choice \enquote{$T_1$ is space} is a choice of the sign of $\sqrt5$,
+not a derivation.
+\end{corollary}
+
+This is the theorem behind Dok.~285: there the doubling $6=3\oplus3'$ is
+the answer to the crystallographic restriction (no icosahedral lattice in
+three dimensions, but one in six). Here the same statement appears as
+Galois indivisibility. OPH's proposal that the three-dimensional continuum
+is the dense projection of \enquote{integer frames built from port labels}
+is the quasicrystal projection $\mathbb{Z}^6\to\mathbb{R}^3$; Dok.~285
+describes the cause, OPH the image.
+
+\begin{theorem}[Restriction to $C_3<A_5$, \BM]\label{thm:c3}
+Under a three-fold rotation $g_3\in A_5$ the port space splits into
+$\mathbb{Z}_3$ eigenspaces of dimensions $4+4+4$; blockwise
+\[
+  A\to 1,\qquad T_1\to 1\oplus\omega\oplus\omega^2,\qquad
+  T_2\to 1\oplus\omega\oplus\omega^2,\qquad H\to 1\oplus2\omega\oplus2\omega^2 .
+\]
+The trivial part has dimension~4, the non-trivial part dimension~8.
+\end{theorem}
+
+This is the $C_3$-in-$A_5$ embedding of Dok.~293 in character form. The
+non-trivial part (dimension~8) is, as an abstract $\mathbb{Z}_3$-module,
+two copies of the orbifold representation on $\mathbb{R}^4$; whether more
+than representation theory is contained in this is settled negatively in
+Section~\ref{sec:d4}.
+
+% ============================================================
+\section[{Reduction modulo 3: Z[phi]/(3) = GF(9)}]{Reduction modulo 3: $\mathbb{Z}[\varphi]/(3)=GF(9)$}
+% ============================================================
+
+\begin{theorem}[Inert prime, \EM/\BM]\label{thm:inert}
+$x^2-x-1$ is irreducible over $GF(3)$ ($5\equiv2$ is not a square
+modulo~3). Hence $3$ is inert in $\mathbb{Q}(\sqrt5)$ and
+$\mathbb{Z}[\varphi]/(3)\cong GF(9)$.
+\end{theorem}
+
+\begin{theorem}[Galois becomes Frobenius, \BM]\label{thm:frob}
+Under the reduction of Theorem~\ref{thm:inert} the Galois conjugation
+$\varphi\mapsto1-\varphi$ becomes the Frobenius $x\mapsto x^3$ of $GF(9)$:
+in $GF(9)$ one has exactly $\varphi^3=1-\varphi$.
+\end{theorem}
+
+\begin{proof}
+$\varphi^2=\varphi+1$, hence $\varphi^3=2\varphi+1\equiv1-\varphi\pmod3$.
+Script \texttt{zphi\_mod3\_a5.py}, sections (1)--(2).
+\end{proof}
+
+Thus the FFGFT sector pairing (Frobenius on $GF(27)^*$, Dok.~343/363) and
+the exchange $T_1\leftrightarrow T_2$ of the icosahedral carrier are not
+merely analogous: modulo~3 they are the same map.
+
+\begin{theorem}[$A_5$ over $GF(9)$, \BM]\label{thm:a5gf9}
+The sixty rotation matrices of the icosahedron (entries in
+$\tfrac12\mathbb{Z}[\varphi]$) reduce modulo~3 to sixty distinct matrices in
+$GL_3(GF(9))$ spanning all of $M_3(GF(9))$: the reduction is faithful and
+absolutely irreducible. Entrywise Frobenius of the reduced $T_1$ matrices
+yields exactly the reduced $T_2$ matrices. By contrast $GL_2(GF(9))$
+(order 5760, searched exhaustively) contains no $(2,3,5)$-generated
+subgroup of order~60: $A_5$ does not embed in $GL_2(GF(9))$.
+\end{theorem}
+
+\begin{corollary}[The $G(3)/G(6)$ threshold, \SM]
+With $G(3)\cong M_2(GF(9))^2$ and $G(6)\cong M_8(GF(9))$ (Dok.~341), $A_5$
+is not in the unit group of $G(3)$ but is in that of $G(6)$. This is the
+same threshold at which Dok.~341 finds the lepton order~26. The reasons
+are formally different (Brauer degrees $\{1,3,3,4\}$ of $A_5$ in
+characteristic~3 versus Lagrange in $GF(81)^*$); whether the coincidence
+has substance remains open.
+\end{corollary}
+
+% ============================================================
+\section[A5 versus Aut(D4)]{$A_5$ versus ${\rm Aut}(D_4)$}\label{sec:d4}
+% ============================================================
+
+\begin{theorem}[Reproduction of Dok.~314, \BM]\label{thm:aut}
+The automorphism group of the $D_4$ root system, recomputed from the 24
+roots, has order $1152$ with order distribution
+$(1,2,3,4,6,8,12)\mapsto(1,139,80,228,464,144,96)$ and no element of
+order~5. Among the 80 elements of order~3 exactly 16 are fixed-point-free
+on $\mathbb{R}^4$ ($|\det(1-A)|=9$); each acts freely on the 24 roots
+(eight orbits of three).
+\end{theorem}
+
+\begin{corollary}[\XM]
+$A_5$ acts on no $D_4$ lattice: $5\nmid1152$. The symmetry group of OPH
+and the FFGFT lattice structure are incompatible as wholes.
+\end{corollary}
+
+\begin{theorem}[The common core is $A_4$, \BM]\label{thm:a4}
+The elements of $A_5$ whose matrices in the model $(0,\pm1,\pm\varphi)$
+are integral (no $\varphi$) form the tetrahedral group $A_4$ (orders
+$1,2,3$ with counts $1,3,8$). $A_4$ acts simply transitively on the twelve
+ports -- the port set is an $A_4$-torsor -- and embeds as
+$\operatorname{diag}(M,1)$ in $W(D_4)<{\rm Aut}(D_4)$.
+\end{theorem}
+
+This sharpens Dok.~285 (\enquote{$C_3<A_5$}): not only the three-fold
+symmetry but the whole tetrahedral group of order~12 -- the port count --
+is lattice-compatible; only the five-fold symmetry drops out.
+
+\begin{theorem}[Ports as half the first shell, \BM]
+Every three-fold rotation of $A_5$ acts freely on the twelve ports (four
+orbits of three). As a $\mathbb{Z}_3$-module the port space is
+$4\cdot\mathbb{Z}[\mathbb{Z}_3]$, the first $D_4$ shell is
+$8\cdot\mathbb{Z}[\mathbb{Z}_3]$: the ports are one half of
+\enquote{$24=12+12$} from Dok.~314.
+\end{theorem}
+
+\begin{theorem}[The port $\mathbb{Z}_3$ is not an orbifold $\mathbb{Z}_3$, \XM]\label{thm:neg}
+The three-fold rotation permuting the ports is a rotation of $\mathbb{R}^3$
+and fixes an axis; as $\operatorname{diag}(M,1)$ it fixes a line in
+$\mathbb{R}^4$ and is therefore one of the $80-16=64$ non-orbifold elements
+of order~3. This is not an artefact of the embedding: for each of the 16
+orbifold generators and each of the 70 choices of four of its eight root
+orbits (1120 $\mathbb{Z}_3$-stable twelve-element halves) it was checked
+whether the twelve roots form a cuboctahedron ($D_3$ half) or carry the
+icosahedral graph on some inner-product class. Neither ever occurs.
+\end{theorem}
+
+\begin{proof}
+A $\mathbb{Z}_3$ stabilising a $D_3$ half stabilises its normal up to sign,
+hence exactly for order~3; it has a fixed vector and is not an orbifold
+generator. Script \texttt{a5\_vs\_d4.py}, sections (E)--(F).
+\end{proof}
+
+\begin{remark}[Side result, \KM]
+256 of the 1120 orbifold-stable twelve-element halves are tight frames in
+$\mathbb{R}^4$ (Gram eigenvalue~6 with multiplicity~4, the 4D counterpart
+of the OPH relation $G^2=4G$ for the port vectors). Their graph spectra
+contain $\sqrt{13}$, not $\sqrt5$; the stabiliser has order~18 and is not
+transitive. They carry no port structure.
+\end{remark}
+
+% ============================================================
+\section{The OPH gauge assignment}
+% ============================================================
+
+OPH assigns to the port module the Lie algebra $u(1)\oplus su(2)\oplus su(3)$:
+$u(1)$ on $A$, $su(2)$ on $T_1$, $su(3)$ on $T_2\oplus H$.
+
+\begin{theorem}[Consistency of the assignment, \EM]
+$A_5$ sits in $SO(3)\subset SU(3)$ via $T_2$. The adjoint of $su(3)$ is
+$3\otimes\bar3-1$; under $SO(3)$ it splits as $3\oplus5$, under $A_5$ with
+the $T_2$ embedding as $T_2\oplus H$ ($\Lambda^2T_2=T_2$,
+$\operatorname{Sym}^2T_2=1\oplus H$). Likewise the adjoint of $su(2)$
+under the $T_1$ embedding is $T_1$. The restriction of
+$u(1)\oplus su(2)\oplus su(3)$ to $A_5$ is therefore exactly
+$A\oplus T_1\oplus T_2\oplus H$.
+\end{theorem}
+
+\begin{remark}[What is axiom, \SM]
+The assignment presupposes that the reversible port response is a
+twelve-dimensional Lie algebra on which $A_5$ acts by inner automorphisms,
+with centre exactly the $A_5$-fixed line. Given that, $11=8+3$ is the only
+decomposition into dimensions of compact simple algebras. Without the
+centre assumption, e.g.\ $u(1)^3\oplus su(2)^3$ also has dimension~12.
+The correct statement is therefore \enquote{$A_5$ plus the response axiom
+forces the Lie type}, not \enquote{$A_5$ forces the Lie type}.
+\end{remark}
+
+FFGFT is in the mirror situation: $su(3)$ follows from the $\mathbb{Z}_3$
+triality on $T^4$ \BM\ (Dok.~321), $su(2)$ is open \SM\ (Dok.~324). In OPH
+$T_1$ is clean and $8=T_2\oplus H$ is the axiomatic step.
+
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{center}
+\begin{tabular}{@{}lllp{4.6cm}@{}}
+\toprule
+ & OPH & FFGFT & Link \\
+\midrule
+Field & $\mathbb{Q}(\sqrt5)$ & $GF(9)$, $GF(27)\parallel GF(729)$ & $\mathbb{Z}[\varphi]/(3)=GF(9)$; Galois $\to$ Frobenius \BM \\[2pt]
+Group & $A_5$ & ${\rm Aut}(D_4)$, $\mathbb{Z}_3$ & $A_5\not\subset{\rm Aut}(D_4)$; core $A_4$ (= 12 ports) \BM \\[2pt]
+$3\oplus3'$ & $T_1$ space, $T_2$ colour & 6D lattice (Dok.~285) & indivisible over $\mathbb{Q}$ \BM \\[2pt]
+$\mathbb{Z}_3$ orbits & 4 free on 12 & 8 free on 24 & ports = half the first shell \BM \\[2pt]
+Port $\mathbb{Z}_3$ & axis in $\mathbb{R}^3$ & orbifold fixed-point-free & never conjugate \XM \\[2pt]
+$G(3)/G(6)$ & $A_5\not\subset GL_2(GF(9))$, $\subset GL_3$ & order~26 only in $G(6)$ & same threshold \SM \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Verification scripts.} \texttt{2/python/Dok364\_Skripte/}:
+\texttt{spectrum\_icosahedral\_carrier.py},
+\texttt{galois\_z3\_icosahedral\_carrier.py},
+\texttt{zphi\_mod3\_a5.py}, \texttt{a5\_vs\_d4.py}; batch run
+\texttt{run\_all\_364.sh}. The seam list of the external bundle is read if
+present; otherwise the canonical icosahedron is used. No register entry:
+no earlier document is corrected.
