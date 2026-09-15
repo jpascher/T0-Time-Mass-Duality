@@ -657,7 +657,7 @@ nach Task Force 1996 / Shaffer 2017:
 
 ### Dok. 364 — Galois-Struktur, Reduktion modulo 3 und die Verdopplung 3⊕3′: ein exakter Vergleich mit T⁴/Z₃ (De/En, je 10 Seiten)
 
-Anlass: ein auf der IPI-Liste vorgestelltes Trägermodell (Zwölf-Port-Ikosaeder, Symmetriegruppe A₅, lokale Mittelungsregel auf 30 Nähten, Reproduzierbarkeitspaket in exakter rationaler Arithmetik). Vergleichsdokument, keine Stellungnahme zu den physikalischen Ansprüchen des externen Modells.
+Enthält keine neue Mathematik: alle Sätze sind Lehrbuchstoff [E], hier exakt am konkreten Träger nachgeprüft ([E]/[B]); Bem. 4.3 (archimedische Auswahl) und die Zentrumsherleitung in Bem. 7.2 stammen vom Autor des externen Modells (persönliche Mitteilung 15.9.2026, im Dokument so zugeschrieben). Anlass: ein auf der IPI-Liste vorgestelltes Trägermodell (Zwölf-Port-Ikosaeder, Symmetriegruppe A₅, lokale Mittelungsregel auf 30 Nähten, Reproduzierbarkeitspaket in exakter rationaler Arithmetik). Vergleichsdokument, keine Stellungnahme zu den physikalischen Ansprüchen des externen Modells.
 
 **Ergebnisse:**
 1. Spektrum des Trägers **[B]**: Laplace {0, 5−√5 (×3), 6 (×5), 5+√5 (×3)}, Spektralkörper ℚ(√5); die Galois-Konjugation √5↦−√5 vertauscht die Spektralprojektoren T₁↔T₂, nur der 6D-Block T₁⊕T₂ ist ℚ-rational — die Verdopplung 6 = 3⊕3′ aus Dok. 285 als Galois-Unteilbarkeit an den endlichen Stellen; die Auswahl des langsamen Tripletts als Raum geschieht an der archimedischen Stelle (rationale Iteration wählt die reelle Rate 0,9100, Nachbarsummen ±√5 v — Bem. 3.3, nach Rückmeldung des Autors des externen Modells ergänzt); C₃-Restriktion 4+4+4 (Dok. 293).
