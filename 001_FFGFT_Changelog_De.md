@@ -23,6 +23,31 @@ Zwei Stellen in Dok. 006 ergänzt (R112):
 Keine Zahlenänderung. Dok. 231 und 344 waren bereits korrekt formuliert.
 
 
+
+# FFGFT Changelog — laufend ab v1.3.4
+
+**Grundlage:** Dok. 190 (Korrekturregister)  
+**Archiv bis v1.3.3:** [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md)
+
+Neue Einträge werden hier oben eingefügt (neueste zuerst).
+
+---
+---
+
+## 5. September 2026 — Dok. 006 Sprachkorrektur v (R112)
+
+### Dok. 006 — v = 246 GeV präzisiert (De+En)
+
+Zwei Stellen in Dok. 006 ergänzt (R112):
+
+- Zeile „wobei v = 246 GeV der Higgs-Vakuumerwartungswert ist" →
+  Zusatz: „(SM-Definition: v ≡ (√2·G_F)^(−1/2); kein unabhängiges Observable, Dok. 351/R112)"
+- Zeile „Wir verwenden v = 246 GeV" →
+  Zusatz: „(SM-Definition aus G_F, Dok. 351/R112)"
+
+Keine Zahlenänderung. Dok. 231 und 344 waren bereits korrekt formuliert.
+
+
 ## 12. September 2026 — Dok. 361: Kagome-RVB-Polaronen und Frobenius-Struktur
 
 ### Dok. 361 — Pei et al. (PRL 137, 106702) im Vergleich mit FFGFT (De/En)
@@ -75,6 +100,32 @@ in der Größenordnung von ξ — ausdrücklich kein Zusammenhang behauptet.
 **Prüfskript:** `2/python/Dok362_Skripte/pruef_362_bawim_zahlen.py` — 23/23.
 
 **Register:** kein Eintrag (Einordnung, keine Korrektur älterer Dokumente).
+
+---
+
+## 15. September 2026 — Dok. 364: Der Ikosaeder-Träger und das D₄-Gitter
+### Dok. 364 — Vergleich Ikosaeder-Träger (Dok. 011) mit D₄-Gitter und Galois-Struktur (De/En, je 14 S.)
+
+Vergleicht den Ikosaeder-Träger aus Dok. 011 mit dem D₄-Wurzelgitter und der Galois-Struktur GF(9)/GF(27):
+Fünffach-Symmetrie (A₅ ↔ φ-Spektrum) vs. Dreifach-Symmetrie (Z₃ ↔ Galois-Frobenius) als komplementäre
+Mechanismen. A₅ bettet nicht in GL₂(GF(9)) ein, aber in G(6) via 3-dim-Reduktion [K].
+Prüfskripte: a5_vs_d4, galois_z3_icosahedral_carrier, phasen_einheitswurzeln, spectrum_icosahedral_carrier,
+zphi_mod3_a5 — alle Assertions bestanden.
+→ [DE](2/pdf/364_Ikosaeder_D4_Vergleich_De.pdf) · [EN](2/pdf/364_Ikosaeder_D4_Vergleich_En.pdf)
+
+Register: kein Eintrag (neues Dokument, keine Korrekturen zu bestehenden Dokumenten).
+
+---
+
+## 15. September 2026 — Dok. 365: Das Fundament der FFGFT in vier Schichten
+### Dok. 365 — Grundformel, elektromagnetischer Sektor, Skalierungsparameter und algebraische Bestätigungen (De/En, je 10 S.)
+
+Kompakte Zusammenfassung des FFGFT-Fundaments in vier Schichten:
+(1) Grundformel T̃·m = 1, (2) elektromagnetischer Sektor (1/α = 3700/27),
+(3) Skalierungsparameter ξ = 4/30000, (4) algebraische Bestätigungen (GF(9)/GF(27)).
+→ [DE](2/pdf/365_Fundament_FFGFT_De.pdf) · [EN](2/pdf/365_Fundament_FFGFT_En.pdf)
+
+Register: kein Eintrag (neues Dokument, Zusammenfassung ohne neue Korrekturen).
 
 ---
 
@@ -652,21 +703,3 @@ nach Task Force 1996 / Shaffer 2017:
 **Nächster Schritt [S]:** Validierung mit registriertem PhysioNet-Zugang.
 
 **Register:** R119 eingetragen.
-
-## 14. September 2026 — Dok. 364: Der Ikosaeder-Träger und das D₄-Gitter
-
-### Dok. 364 — Galois-Struktur, Reduktion modulo 3 und die Verdopplung 3⊕3′: ein exakter Vergleich mit T⁴/Z₃ (De/En, je 10 Seiten)
-
-Enthält keine neue Mathematik: alle Sätze sind Lehrbuchstoff [E], hier exakt am konkreten Träger nachgeprüft ([E]/[B]); Bem. 4.3 (archimedische Auswahl) und die Zentrumsherleitung in Bem. 7.2 stammen vom Autor des externen Modells (persönliche Mitteilung 15.9.2026, im Dokument so zugeschrieben). Anlass: ein auf der IPI-Liste vorgestelltes Trägermodell (Zwölf-Port-Ikosaeder, Symmetriegruppe A₅, lokale Mittelungsregel auf 30 Nähten, Reproduzierbarkeitspaket in exakter rationaler Arithmetik). Vergleichsdokument, keine Stellungnahme zu den physikalischen Ansprüchen des externen Modells.
-
-**Ergebnisse:**
-1. Spektrum des Trägers **[B]**: Laplace {0, 5−√5 (×3), 6 (×5), 5+√5 (×3)}, Spektralkörper ℚ(√5); die Galois-Konjugation √5↦−√5 vertauscht die Spektralprojektoren T₁↔T₂, nur der 6D-Block T₁⊕T₂ ist ℚ-rational — die Verdopplung 6 = 3⊕3′ aus Dok. 285 als Galois-Unteilbarkeit an den endlichen Stellen; die Auswahl des langsamen Tripletts als Raum geschieht an der archimedischen Stelle (rationale Iteration wählt die reelle Rate 0,9100, Nachbarsummen ±√5 v — Bem. 3.3, nach Rückmeldung des Autors des externen Modells ergänzt); C₃-Restriktion 4+4+4 (Dok. 293).
-2. Reduktion mod 3 **[B]**: ℤ[φ]/(3) = GF(9) (3 träge), Galois-Konjugation wird Frobenius x↦x³ (φ³ = 1−φ in GF(9)); A₅ → GL₃(GF(9)) treu und absolut irreduzibel, A₅ ⊄ GL₂(GF(9)) (vollständige Suche) — G(3)/G(6)-Schwelle wie Ord. 26 in Dok. 341 **[S]**.
-3. A₅ gegen Aut(D₄) **[B]/[X]**: Aut(D₄) = 1152 mit Ordnungsverteilung aus Dok. 314 reproduziert, 16 Orbifold-Erzeugende; 5 ∤ 1152, A₅ gitterunverträglich; gemeinsamer Kern ist die Tetraedergruppe A₄ (ganzzahlige A₅-Elemente), Ports = A₄-Torsor, A₄ ⊂ W(D₄); Ports = halbe D₄-Erstschale als Z₃-Modul (24 = 12+12, Dok. 314).
-4. Negativbefund **[X]**: die Port-Z₃ ist nie eine der 16 Orbifold-Z₃ — 0 von 1120 orbifold-stabilen 12-Hälften kuboktaedrisch oder ikosaedrisch (Satz: stabilisierte Normale ⇒ Fixvektor). Nebenbefund 256 Tight-Frames in ℝ⁴ mit √13-Spektrum.
-5. Nachtrag §8 „Phasen als Einheitswurzeln" **[B]**: φ mod 3 primitiv in GF(9)* (Ord. 8); Fünfzähligkeit nur als ζ₅ in GF(81) (5 | 80), Ord. 26 erst in GF(729) (13 | 728); in Char. 3 keine primitive dritte Einheitswurzel, Z₃ wirkt unipotent — Gitterkanal (Z₃) und Phasenkanal (5-zählig, φ) sind komplementär, die Primzahl 3 entscheidet; Erweiterungsgrad 2 ↔ Verdopplung (Dok. 285), Grad 3 ↔ Trialität (Dok. 341).
-6. Eichzuordnung des externen Modells u(1)⊕su(2)⊕su(3) auf A⊕T₁⊕(T₂⊕H) darstellungstheoretisch konsistent **[E]**; Lie-Struktur (A1) und innere A₅-Wirkung (A2) sind dort Axiome **[S]**, das eindimensionale Zentrum folgt aus (A2) (Fixdimensionsargument gegen su(2)⁴; Gegenbeispiel u(1)³⊕su(2)³ scheitert an (A2) und am Galois-Satz). Spiegellage zur FFGFT (su(3) [B] Dok. 321, su(2) [S] Dok. 324).
-
-**Prüfskripte:** `2/python/Dok364_Skripte/` — `spectrum_icosahedral_carrier.py`, `galois_z3_icosahedral_carrier.py`, `zphi_mod3_a5.py`, `a5_vs_d4.py`, `phasen_einheitswurzeln.py`, Sammellauf `run_all_364.sh` (5/5 bestanden; Nahtliste des externen Pakets optional, sonst kanonischer Ikosaeder).
-
-**Register:** kein Eintrag.
