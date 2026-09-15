@@ -1,0 +1,443 @@
+% QMB_n08_qubit_formalismus.tex — Kapitel 8: Qubit-Formalismus
+% Inhaltliche Grundlage: Dok. 175 (März 2026), Dok. 034, Dok. 230; eigene Darstellung
+\chapter{Mehr als zwei Zustände: das Qubit geometrisch}
+\label{ch:qubit}
+
+\section{Was steckt zwischen $|0\rangle$ und $|1\rangle$?}
+
+Spin-up und Spin-down sind zwei Punkte. Zwei Punkte sind eindeutig
+beschriftet --- ein Bit Information. Aber ein Qubit ist kein Bit. Die
+eigentliche Kraft des Qubits liegt nicht darin, dass es $|0\rangle$
+\emph{oder} $|1\rangle$ sein kann; das kann eine klassische Münze auch.
+Sie liegt darin, dass es beides in einem kontinuierlichen Verhältnis
+überlagern kann:
+\begin{equation}
+  |\psi\rangle = \cos\tfrac{\theta}{2}\,|0\rangle
+  + e^{i\phi}\sin\tfrac{\theta}{2}\,|1\rangle.
+\end{equation}
+Zwei Parameter, der Mischungswinkel $\theta\in[0,\pi]$ und die relative
+Phase $\phi\in[0,2\pi)$, parametrieren eine Kugeloberfläche: die
+Bloch-Kugel. Auf ihr gibt es unendlich viele Punkte --- nicht nur die
+Pole $|0\rangle$ und $|1\rangle$, sondern den gesamten Äquator, alle
+Breitenkreise, jeden Punkt dazwischen. Jeder ist ein gültiger,
+physikalisch unterscheidbarer Zustand.
+
+\begin{keypoint}[Ein Qubit kodiert nicht 2 Zustände, sondern unendlich viele]
+Die zwei klassischen Pole sind Sonderfälle einer kontinuierlichen
+Familie. Was ein Qubit vom Bit unterscheidet, ist nicht die Zahl der
+diskreten Zustände, sondern die kontinuierliche Geometrie des
+Zustandsraums. Das Auslesen koppelt an die Konfiguration und treibt sie
+in den nächstgelegenen stabilen Extremzustand. Das Ergebnis ist in
+FFGFT-Sicht deterministisch --- es hängt vom genauen Ausgangszustand
+ab, den wir vor der Messung nicht vollständig kennen. Die Zustände
+selbst sind diskret; die Kontinuität liegt im Phasenraum \emph{vor}
+der Messung.
+\end{keypoint}
+
+\section{Der zylindrische Phasenraum}
+
+Die Bloch-Kugel ist die Standarddarstellung. Die FFGFT hat eine
+physikalisch direktere Alternative: den zylindrischen Phasenraum mit
+drei Koordinaten $(z,r,\theta)$. Dabei ist $z\in[-1,+1]$ die Höhe
+entlang der Zylinderachse --- der Anteil der Torsionskonfiguration in
+Richtung $|0\rangle$ gegenüber $|1\rangle$; $r\in[0,1]$ der Radius im
+Querschnitt --- die Stärke der intermediären Torsion, also wie weit der
+Zustand von beiden Polen entfernt ist; $\theta\in[0,2\pi)$ der
+Azimutwinkel --- die relative Phase zwischen den Basiskomponenten. Die
+Beziehung zur Bloch-Kugel ist direkt: $z = \cos\theta_{\mathrm{Bloch}}$,
+$r = |\sin\theta_{\mathrm{Bloch}}|$; die formale Brücke steht in
+Kapitel~\ref{ch:hilbert}.
+
+Der Zylinder ist kein geometrisches Schönheitsmittel: Er macht
+Gatteroperationen zu geometrischen Transformationen im Realraum.
+
+\begin{center}
+\small\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lp{2.4cm}p{4.2cm}}
+\toprule
+\textbf{Gatter} & \textbf{Matrix} & \textbf{Zylindertransformation} \\
+\midrule
+Hadamard $H$ & $\frac{1}{\sqrt2}\begin{pmatrix}1&1\\1&-1\end{pmatrix}$ & $z\leftrightarrow r$ vertauschen, Phase um $\pi/2$ drehen: bewegt Pol auf Äquator \\
+Phase $Z$ & $\begin{pmatrix}1&0\\0&-1\end{pmatrix}$ & $\pi$ zur Phase $\theta$ addieren: Rotation um die Zylinderachse \\
+Bit-Flip $X$ & $\begin{pmatrix}0&1\\1&0\end{pmatrix}$ & $(z,r)$-Drehung um $\alpha = \pi K_{\mathrm{frak}}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Im zylindrischen Formalismus ist jede Gatteroperation eine geometrische
+Transformation des Torsionsvektors. Das Hadamard-Gatter dreht keine
+Matrix --- es kippt die Konfiguration von der Längsachse auf die
+Transversalebene. Das $Z$-Gatter rotiert die Windung um ihre eigene
+Achse. Der Faktor $K_{\mathrm{frak}}$ im $X$-Gatter ist kein nachträglich
+eingefügter Korrekturfaktor; er folgt aus der fraktalen
+Raumzeitgeometrie und bedeutet: Jede Qubit-Rotation ist leicht kleiner
+als $\pi$, weil die Raumzeit selbst minimal von der flachen Geometrie
+abweicht. Das ist eine prüfbare Vorhersage: Alle $\pi$-Gatter sollten
+systematisch um $\Delta\alpha\approx0{,}013\,\%$ vom idealen Wert
+abweichen.\status{S}
+
+\section{Quantenregister: exponentielles Wachstum durch Kombination}
+
+Ein einzelnes Qubit hat unendlich viele Zwischenzustände, liefert beim
+Auslesen aber immer einen der zwei Pole. Die eigentliche Stärke kommt
+durch Kombination.
+
+\textbf{Produktzustände: additive Klassik.} Zwei unabhängige Qubits
+haben zusammen vier Basiszustände. Der allgemeine Zustand ohne
+Verschränkung ist $(\alpha_A|0\rangle+\beta_A|1\rangle)\otimes
+(\alpha_B|0\rangle+\beta_B|1\rangle)$ --- zwei getrennte Bloch-Kugeln,
+kein Gewinn über zwei unabhängige Qubits. Der Zustandsraum ist additiv:
+$2+2 = 4$ Parameter.
+
+\textbf{Verschränkte Zustände: multiplikatives Wachstum.} Sobald die
+Qubits verschränkt sind, kann der gemeinsame Zustand nicht mehr als
+Produkt geschrieben werden. Der allgemeine Zweiqubitzustand
+\begin{equation}
+  |\Psi\rangle = \alpha|00\rangle+\beta|01\rangle+\gamma|10\rangle+\delta|11\rangle
+\end{equation}
+braucht vier komplexe Amplituden, also $2\cdot4-2 = 6$ reelle Parameter.
+Verschränkte Qubits tragen gemeinsame Information, die in keinem der
+Einzelqubits steckt. Für $n$ Qubits wächst der Hilbertraum exponentiell,
+$d(n) = 2^n$, mit $2\cdot2^n-2$ reellen Parametern:
+
+\begin{center}
+\small
+\begin{tabular}{rrrl}
+\toprule
+$n$ Qubits & Basiszustände & Reelle Parameter & Klassisch \\
+\midrule
+1 & 2 & 2 & 1 Bit \\
+2 & 4 & 6 & 2 Bits \\
+3 & 8 & 14 & 3 Bits \\
+10 & 1024 & 2046 & 10 Bits \\
+50 & $10^{15}$ & $2\times10^{15}$ & 50 Bits \\
+300 & $10^{90}$ & $2\times10^{90}$ & $\approx$ Atome im Universum \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Das ist der eigentliche Quantenvorteil: Nicht ein einzelnes Qubit ist
+mächtig, sondern das kollektive Wachstum eines verschränkten Registers.
+
+\textbf{Bell-Zustände.} Die vier maximal verschränkten
+Zweiqubitzustände bilden eine Orthonormalbasis des verschränkten
+Unterraums:
+\begin{align}
+  |\Phi^\pm\rangle &= \tfrac{1}{\sqrt2}(|00\rangle\pm|11\rangle),\\
+  |\Psi^\pm\rangle &= \tfrac{1}{\sqrt2}(|01\rangle\pm|10\rangle).
+\end{align}
+Misst man Qubit~A, ist das Ergebnis von Qubit~B festgelegt, egal wie
+weit entfernt. Im FFGFT-Bild ist ein Bell-Zustand keine Fernwirkung
+zwischen zwei Qubits, sondern eine topologisch verbundene
+Torsionskonfiguration über zwei Resonatoren: Beide teilen einen
+gemeinsamen Torsionsknoten, dessen Auflösung bei jeder lokalen Messung
+beide Enden zugleich bestimmt. Das ist kein Signal mit
+Überlichtgeschwindigkeit, sondern ein gemeinsamer geometrischer Zustand,
+der bei der Präparation etabliert wurde (Kapitel~\ref{ch:verschraenkung}).
+Die frühere Dämpfungsformel für die Bell-Korrelation, die den CHSH-Wert
+um $\sim10^{-4}$ absenkte, ist durch die Zwei-Observablen-Lesart aus
+Kapitel~\ref{ch:chsh_exp} ersetzt.
+
+\textbf{Hardware-Validierung.} Die FFGFT-Vorhersagen für Bell-Zustände
+wurden auf IBM Brisbane und IBM Sherbrooke (je 127 Qubits, Heavy-Hex-
+Gitter) geprüft: Bell-Zustands-Fidelität $97{,}17\,\%$; FFGFT-Algorithmus
+und Standard-QM stimmen innerhalb der Messgenauigkeit überein;
+Wiederholvarianz $10^{-4}$ bis $10^{-3}$; Abweichungen in $P(00)$ und
+$P(11)$ von $1$--$5\,\%$ sind Hardware-Rauschen.\status{K} Die
+$\xi$-Abweichung von der idealen Bell-Korrelation liegt unterhalb der
+Rauschschwelle und konnte nicht isoliert werden. Der vollständige
+Python-Code ist im Repositorium verfügbar.
+
+\section{Drei Wege zu mehr Zuständen}
+
+Aus der Resonatorphysik ergeben sich drei grundlegend verschiedene
+Strategien, mehr als zwei Zustände zu kodieren:
+
+\begin{center}
+\small\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{p{1.6cm}p{2.3cm}p{1.6cm}p{2.5cm}}
+\toprule
+\textbf{Strategie} & \textbf{Mehr Zustände durch} & \textbf{Wachstum} & \textbf{FFGFT-Bedeutung} \\
+\midrule
+Superposition (1 Qubit) & kontinuierliche Überlagerung & $\infty$, aber 1 Bit bei Messung & intermediäre Torsion \\
+Register ($n$ Qubits) & Verschränkung & $2^n$ & topologisch verbundene Knoten \\
+Qudit ($d>2$) & höhere Niveaus, Orbitale & $d$ pro Objekt & $d$ stabile Konfigurationen in einem Resonator \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Keine Strategie dominiert überall. Registerverschränkung skaliert am
+stärksten, braucht aber $n$ physische Objekte und fehlerkorrigierte
+Verschränkungsoperationen. Qudit-Kodierung gewinnt Information pro Objekt
+($\log_2d>1$); zwei Ququarts ($d = 4$) tragen $4^2 = 16$ Zustände, vier
+Qubits $2^4 = 16$ --- mathematisch äquivalent, physikalisch verschieden
+robust. Superposition ist immer da: Sie ist die Grundlage der
+Interferenz, der eigentlichen Triebkraft von Quantenalgorithmen.
+
+\section{Quanteninterferenz: warum Superposition nützlich ist}
+
+Superposition allein wäre eine bloße Überlagerung; das Auslesen lieferte
+immer einen der zwei Pole. Was Superposition zur Ressource macht, ist die
+Interferenz: Amplituden können sich konstruktiv verstärken oder
+destruktiv auslöschen, je nach Phase.\status{E} Das ist das Prinzip
+hinter allen nützlichen Quantenalgorithmen: Man präpariert das Register
+in einer gleichmäßigen Zwischentorsion über alle Eingaben (Hadamard);
+wendet eine Funktion an, die die Phasen der richtigen Antworten erhöht
+und die der falschen erniedrigt; lässt Interferenz die falschen
+Antworten in instabile Konfigurationen treiben und die richtige in eine
+stabile; und das Auslesen treibt das System in den nächsten stabilen
+Pol, der nach der Interferenz mit überwältigender Häufigkeit der
+gesuchten Antwort entspricht. Ohne Interferenz: Monte Carlo. Mit
+Interferenz: Grover ($\sqrt N$ statt $N$ Schritte), Shor (Faktorisierung
+in polynomialer Zeit).
+
+In der FFGFT ist die Phase keine abstrakte komplexe Zahl, sondern die
+Rotationsstellung der intermediären Torsionskonfiguration. Konstruktive
+Interferenz: Zwei Torsionsphasen liegen gleich und verstärken sich zu
+einer geometrisch stabileren Konfiguration. Destruktive Interferenz:
+Zwei entgegengesetzte Phasen löschen sich aus; die resultierende
+Konfiguration hat keinen stabilen geometrischen Anker und wird beim
+Auslesen nicht angesteuert. Ein Quantenalgorithmus ist in dieser
+Sprache eine Folge von Torsionsrotationen, die die Phasenkonfiguration
+des Registers so ausrichtet, dass die gesuchte Antwort in einer stabilen
+Konfiguration endet.
+
+\begin{laierspur}
+Wasserwellen, die sich treffen, verstärken sich, wenn Berg auf Berg
+trifft, und löschen sich aus, wenn Berg auf Tal trifft. Ein
+Quantenrechner steuert Wahrscheinlichkeiten wie Wellen: Er lässt die
+richtigen Antworten wachsen und die falschen verschwinden. Das geht nur,
+weil Quantenzustände eine Phase haben, die klassischen Bits fehlt.
+\end{laierspur}
+
+\section{QND-Messung: Auslesen ohne Zerstören}
+
+Die Auslesewechselwirkung treibt die intermediäre Konfiguration in
+einen Pol --- für invasive Messverfahren. Es gibt eine Klasse von
+Verfahren, die diesen Schritt nicht vollziehen: die
+Quanten-Nichtdemolitionsmessung (QND). Sie liest eine Observable $\hat A$
+aus, ohne den Eigenzustand zu verändern; die formale Bedingung ist
+$[\hat A,\hat H_{\mathrm{Messung}}] = 0$.\status{E} Praktisch: Derselbe
+Zustand kann wiederholt gemessen werden und liefert jedes Mal dasselbe
+Ergebnis.
+
+Das wichtigste Beispiel ist die Faraday- oder Kerr-Rotation: Ein linear
+polarisierter Laserstrahl passiert den Quantenpunkt ohne Absorption und
+dreht seine Polarisationsebene um $\theta_F\propto S_z$. Kein Photon wird
+absorbiert, kein Energieübertrag in die Spinmode, der Spinzustand ist
+vor und nach der Messung identisch.
+
+\textbf{QND als empirischer Beleg für Determinismus.} Das Argument ist
+direkt: Die Faraday-Rotation misst $S_z$ ohne den Zustand zu verändern;
+wiederholte Messungen liefern immer dasselbe Ergebnis; also hatte der
+Zustand diesen Wert vor jeder Messung, definit, nicht als abstrakte
+Superposition, die erst durch Messung Realität wird. In der FFGFT ist
+die Faraday-Rotation zustandserhaltend, weil eine stabile
+Torsionskonfiguration durch eine dispersive, nichtresonante Kopplung
+nicht aus ihrem Zustand getrieben werden kann. Das Photon sieht die
+Torsion --- es dreht seine Polarisation entsprechend ---, überträgt aber
+keine Energie, weil es nicht resonant ist.\status{S}
+
+\begin{center}
+\small\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{p{2.4cm}p{3cm}p{2.8cm}}
+\toprule
+\textbf{Verfahren} & \textbf{Wechselwirkung} & \textbf{Zustand danach} \\
+\midrule
+Resonante Fluoreszenz & Photon absorbiert, regt Übergang an & verändert \\
+Spin-zu-Ladungs-Konversion & Elektron tunnelt aus dem Resonator & zerstört \\
+Faraday/Kerr & Photon passiert dispersiv & unverändert: QND \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die Standardlesart, der Zustand existiere erst durch Messung, ist mit
+QND-Messungen schwer vereinbar. In der FFGFT ist die
+Torsionskonfiguration eine geometrische Realität: stabil, definit,
+präexistent. Die Messung liest sie ab; sie erschafft sie nicht.
+
+\textbf{Grenzen der QND.} QND ist möglich für Observablen, die mit dem
+Messoperator kommutieren, typisch $S_z$. Eine intermediäre Konfiguration
+--- ein Zustand, der kein $S_z$-Eigenzustand ist --- wird durch eine
+$S_z$-QND-Messung in einen Eigenzustand getrieben, deterministisch
+abhängig vom Ausgangszustand; die Zwischentorsion ist danach weg.
+
+\section{Die Potentiallandschaft}
+
+Das vollständige Bild der Qubit-Zustände ist eine Potentiallandschaft
+mit zwei stabilen Minima und einem Sattel dazwischen. Das Minimum
+$|\uparrow\rangle$ ist eine stabile Konfiguration, tief genug, dass
+schwache Kopplungen den Zustand nicht herausheben --- QND möglich. Das
+Minimum $|\downarrow\rangle$ ist spiegelbildlich gleich tief. Der Abhang
+ist die intermediäre Torsion: Die Phase bestimmt, wie weit der Zustand
+von welchem Minimum entfernt ist; kein echtes Minimum, metastabil auf
+der Kohärenzzeit $T_2$. Jeder Punkt dazwischen ist ein geometrisch
+definierter Zustand, kontinuierlich parametriert, diskret in den
+Endpunkten.
+
+Die Auslesestärke entscheidet: Ein Zustand im stabilen Minimum bleibt
+bei schwacher Kopplung (QND) und kann bei starker Kopplung herausgehoben
+werden (invasiv). Ein Zustand auf dem Abhang rollt schon bei schwacher
+Kopplung ins nächste Minimum --- welches, bestimmt die genaue Phase,
+epistemisch unbekannt, deterministisch; bei starker Kopplung dasselbe,
+nur schneller.
+
+Die entscheidende Einsicht: Es gibt keine prinzipielle Grenze zwischen
+\enquote{QND-möglich} und \enquote{QND-unmöglich}, nur stabilere und
+weniger stabile Zustände in einer kontinuierlichen Landschaft. Der
+Sprung in die Endposition ist nicht zufällig: Ein Zustand nahe
+$|\uparrow\rangle$ landet in $|\uparrow\rangle$, einer nahe
+$|\downarrow\rangle$ in $|\downarrow\rangle$, einer auf dem Sattel
+abhängig von der feinen Phase. Die scheinbare Zufälligkeit der
+Standard-QM ist die epistemische Unkenntnis dieser Phase. Das Bild gilt
+für alle $d$ Niveaus eines Qudits: $d$ Minima mit $d-1$ Sattelpunkten.
+
+\section{Zwei Ebenen der $\xi$-Hierarchie: Spin-Qubit und photonischer Resonator}
+
+Die bisherigen Abschnitte haben das Qubit am Spin-Qubit entwickelt ---
+einem Elektron in einem Nanometerkäfig. Es gibt eine qualitativ andere
+Realisierungsklasse: den photonischen Resonator. Beide erzwingen
+diskrete Zustände durch Geometrie, sitzen aber auf verschiedenen Stufen
+der $\xi$-Hierarchie, mit Konsequenzen für Temperatur, Stabilität und
+die Art der Information.
+
+\textbf{Spin-Qubit: minimaler Resonator auf Stufe $N\approx8$.} Ein
+einzelnes Elektron, ein Energieniveau, zwei Orientierungen. Der Abstand
+der Spinzustände in einem typischen Feld von 1\,T ist
+$\Delta E_Z = g^*\mu_BB\approx0{,}1$--$1$\,meV; die thermische Energie
+bei Raumtemperatur ist $k_BT = 26$\,meV. Also $\Delta E_Z\ll k_BT$:
+Thermisches Rauschen wirft das System ständig aus dem Minimum. Tiefe
+Temperaturen unter 1\,K sind nicht optional, sondern zwingend --- nicht
+um Superposition zu erhalten, sondern um überhaupt in einem der Minima
+zu bleiben.
+
+\textbf{Photonischer Resonator: kollektive Geometrie auf Stufe
+$N\approx9$--$10$.} Ein Wellenleiter aus Lithiumniobat, ein
+Mach-Zehnder-Interferometer, ein Ringresonator --- Resonatoren aus
+$10^{18}$ bis $10^{23}$ Atomen in Gitterordnung. Der Resonator ist nicht
+ein einzelnes Teilchen, sondern die makroskopische Geometrie des ganzen
+Kristalls; das Photon gehört der kollektiven Mode. Die Diskretheit kommt
+aus den Randbedingungen der makroskopischen Geometrie. Die Energie eines
+optischen Photons ist $1$--$2$\,eV, also $E/k_BT\approx40$: Thermisches
+Rauschen kann keine optischen Photonen erzeugen. Photonik funktioniert
+bei Raumtemperatur nicht, weil sie robuster gebaut ist, sondern weil
+sie auf einer höheren $\xi$-Stufe operiert: Die geometrische Robustheit
+ist durch den Einkristall mit $10^{23}$ Gitterplätzen gegeben, die
+thermische durch die eV-Skala --- vier Größenordnungen Abstand.
+
+\textbf{Nicht auf zwei Zustände beschränkt.} In einem Mach-Zehnder-
+Interferometer läuft das Photon durch zwei Pfade mit kontinuierlich
+einstellbarer Phase; das Interferenzergebnis $\cos^2(\phi/2)$ ist eine
+kontinuierliche Übertragungsfunktion. Ein photonischer Resonator kann
+beide Modi betreiben: digital mit $\phi\in\{0,\pi\}$ und Transmission
+1 oder 0, oder analog mit kontinuierlicher Phase --- unendlich viele
+Zwischenzustände, alle bei Raumtemperatur stabil. Beim Spin-Qubit liegt
+die analoge Information in einem thermisch instabilen Zwischenzustand,
+$T_2$ bricht bei Raumtemperatur in Nanosekunden zusammen; beim
+photonischen Resonator liegt sie in der Phase des Photons, und die ist
+thermisch stabil.
+
+\begin{center}
+\small\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{p{2.6cm}p{2.8cm}p{3cm}}
+\toprule
+ & \textbf{Spin-Qubit} & \textbf{Photonischer Resonator} \\
+\midrule
+$\xi$-Stufe & $N\approx8$ (nm) & $N\approx9$--10 ($\mu$m--mm) \\
+Resonator & 1 Elektron im Käfig & $10^{18}$--$10^{23}$ Atome kollektiv \\
+Energieskala & $0{,}1$--1\,meV & 1--2\,eV \\
+$\Delta E/k_BT$(300\,K) & $0{,}004$--$0{,}04$ & $\approx40$ \\
+Kühlung nötig? & ja, $T<1$\,K & nein \\
+Analoge Zustände & fragil ($T_2\sim$ns) & stabil \\
+Diskretheit aus & Confinement (1 Teilchen) & Modengeometrie \\
+Typische Anwendung & digitales Qubit & analoge Signalverarbeitung, photonisches Rechnen \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Spin-Qubit und photonischer Resonator sind in der FFGFT keine
+grundlegend verschiedenen Systeme, sondern Resonatoren auf verschiedenen
+Stufen derselben Skalierungsleiter. Jede Stufe trägt die Energie um den
+Faktor $1/\xi\approx7500$ höher als die vorherige; von meV (Stufe 8) zu
+eV (Stufe 9--10) ist der Faktor $10^3$--$10^4$, konsistent mit der
+Skalierung.\status{S} Das erklärt auch, warum biologische Systeme
+photonische Mechanismen (Photosynthese, Vogelnavigation) und keine
+Spin-Qubits für Quanteneffekte nutzen: Die Natur arbeitet auf der
+thermisch robusten Stufe.
+
+\section{Die analoge Auflösungsgrenze}
+
+Der photonische Resonator ist thermisch robust, aber nur, solange man
+nicht zu fein auflöst. Wer analoge Zwischenwerte unterscheiden will,
+teilt den Energieraum in $N$ Stufen mit $\Delta E_{\mathrm{Stufe}} =
+E_{\mathrm{Photon}}/N$, und die Bedingung $\Delta E_{\mathrm{Stufe}}\gg
+k_BT$ ergibt $N\ll E_{\mathrm{Photon}}/k_BT$. Bei Raumtemperatur und
+optischen Photonen: $N_{\max}\approx40$, entsprechend
+$\log_2 40\approx5{,}3$\,Bit pro Photon. Das photonische System entkommt
+dem thermischen Problem nicht --- es verschiebt es auf eine feinere
+Skala. Mehr Auflösung erfordert Kühlung oder eine noch höhere
+Energieskala.
+
+Das ist die älteste Ingenieursweisheit der Nachrichtentechnik,
+geometrisch begründet: Die Hochfrequenztechnik klettert seit hundert
+Jahren dieselbe Hierarchie hoch. Bei jeder Frequenzstufe verbessert sich
+das Signal-Rausch-Verhältnis, weil $E/k_BT$ mit jeder Stufe wächst.
+
+\begin{center}
+\footnotesize\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{2.2cm}p{1.3cm}p{1.6cm}p{1.2cm}p{2.9cm}}
+\toprule
+\textbf{Technologie} & \textbf{Frequenz} & \textbf{$E/k_BT$} & \textbf{$N$-Stufe} & \textbf{Regime} \\
+\midrule
+AM-Rundfunk & 1\,MHz & $1{,}5\times10^{-7}$ & $\approx5{,}5$ & thermisch dominiert \\
+UKW & 100\,MHz & $1{,}5\times10^{-5}$ & $\approx6{,}4$ & rauschbegrenzt \\
+Mikrowelle & 10\,GHz & $1{,}5\times10^{-3}$ & $\approx7{,}3$ & beherrschbar \\
+5G/mmWave & 30\,GHz & $5\times10^{-3}$ & $\approx7{,}5$ & Übergang \\
+THz & 1\,THz & $0{,}15$ & $\approx7{,}8$ & $E\sim k_BT$: schwierig \\
+Nahinfrarot & 200\,THz & 31 & $\approx8{,}8$ & thermisch robust \\
+Glasfaser & 300\,THz & 46 & $\approx9{,}0$ & $N_{\max}\approx46$ \\
+UV & 1000\,THz & 154 & $\approx9{,}4$ & $N_{\max}\approx150$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Von $N = 6$ (AM) nach $N = 9$ (Optik) überbrücken drei Stufen den Faktor
+$(1/\xi)^3\approx4\times10^{11}$; tatsächlich liegt die Glasfaserfrequenz
+$10^8$-fach über AM-Rundfunk. Die Glasfaser ist in diesem Bild keine
+neue Technologie, sondern die Fortsetzung desselben Trends auf die
+nächste Stufe. Und die Auflösungsgrenze gilt auf jeder Stufe: Wer bei
+optischen Wellenlängen mehr als 40 analoge Stufen auflösen will, muss
+kühlen --- wie der Radioingenieur 1930 seinen Empfänger abschirmte. Die
+universelle Grenze lautet
+\begin{equation}
+  N_{\max}(T,N_\xi)\approx\frac{E_0\,(1/\xi)^{N_\xi-N_0}}{k_BT}.
+\end{equation}
+
+\textbf{Oberhalb der Optik.} Die Optik ist nicht das Ende der Leiter,
+aber das Ende der nutzbaren Zone für geführte photonische Übertragung.
+Im nahen UV (3--10\,eV, $N\approx9{,}3$) beginnt Photoionisation: Der
+Resonator wird durch sein eigenes Signal beschädigt. Bei weichem Röntgen
+(100\,eV--1\,keV, $N\approx10$) nähert sich die Wellenlänge dem
+Gitterabstand, Bragg-Streuung an einzelnen Gitterebenen, die
+Wellenleitung bricht zusammen. Bei hartem Röntgen fliegt das Photon
+durch die Gitterlücken, Materie wird teils transparent, es gibt keinen
+Brechungsindex und keinen Resonator. Bei Gammaenergien wechselwirkt das
+Photon nur noch mit Atomkernen --- eine andere $\xi$-Stufe. Oberhalb
+1\,MeV ($N\approx11{,}3$) setzt Paarerzeugung ein: die natürliche
+Obergrenze. In der FFGFT gibt es keine Kanonenkugeln und keine Wellen als
+getrennte Konzepte, nur Torsionskonfigurationen auf verschiedenen Skalen;
+Wellenleitung ist eine Skalenresonanz zweier Torsionsmuster, des
+Kristalls auf Stufe 7--8 und des Photons auf Stufe 9, und sie bricht
+zusammen, wenn die Skalen inkompatibel werden.
+
+\begin{keypoint}[Was dieses Kapitel festhält]
+Das Qubit ist eine Mode im zylindrischen Phasenraum; Gatter sind
+Torsionsrotationen; Register wachsen exponentiell durch topologische
+Verbindung; Interferenz ist Phasenüberlagerung von Torsionen; QND-Messung
+belegt die Präexistenz stabiler Pole; die Potentiallandschaft macht den
+Messausgang deterministisch bei epistemisch unbekannter Phase. Spin-Qubit
+und Photonik sind Resonatoren auf verschiedenen $\xi$-Stufen, und die
+thermische Auflösungsgrenze gilt auf jeder Stufe gleich.
+\end{keypoint}
+
+\quelle{Dok.~175 (Qubit-Zustandsräume, März 2026), Dok.~034 (zylindrischer Formalismus), Dok.~173 (Resonatorbedingungen), Dok.~174 (Torsion, Faraday-Auslese), Dok.~230}

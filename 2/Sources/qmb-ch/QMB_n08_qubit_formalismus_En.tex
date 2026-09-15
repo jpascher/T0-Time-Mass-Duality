@@ -1,0 +1,428 @@
+% QMB_n08_qubit_formalismus.tex — Chapter 8: Qubit Formalism
+% Substantive basis: Doc. 175 (March 2026), Doc. 034, Doc. 230; own presentation
+\chapter{More Than Two States: The Qubit Geometrically}
+\label{ch:qubit}
+
+\section{What Lies Between $|0\rangle$ and $|1\rangle$?}
+
+Spin-up and spin-down are two points. Two points are uniquely
+labeled --- one bit of information. But a qubit is not a bit. The
+actual power of the qubit lies not in the fact that it can be $|0\rangle$
+\emph{or} $|1\rangle$; a classical coin can do that too.
+It lies in the fact that it can superpose both in a continuous ratio:
+\begin{equation}
+  |\psi\rangle = \cos\tfrac{\theta}{2}\,|0\rangle
+  + e^{i\phi}\sin\tfrac{\theta}{2}\,|1\rangle.
+\end{equation}
+Two parameters, the mixing angle $\theta\in[0,\pi]$ and the relative
+phase $\phi\in[0,2\pi)$, parameterize a spherical surface: the
+Bloch sphere. On it there are infinitely many points --- not only the
+poles $|0\rangle$ and $|1\rangle$, but the entire equator, all
+latitude circles, every point in between. Each is a valid,
+physically distinguishable state.
+
+\begin{keypoint}[A qubit encodes not 2 states, but infinitely many]
+The two classical poles are special cases of a continuous
+family. What distinguishes a qubit from a bit is not the number of
+discrete states, but the continuous geometry of the
+state space. Readout couples to the configuration and drives it
+into the nearest stable extremal state. The result is, in the FFGFT view, deterministic --- it depends on the exact initial state,
+which we do not fully know before the measurement. The states
+themselves are discrete; the continuity lies in the phase space \emph{before}
+the measurement.
+\end{keypoint}
+
+\section{The Cylindrical Phase Space}
+
+The Bloch sphere is the standard representation. The FFGFT has a
+physically more direct alternative: the cylindrical phase space with
+three coordinates $(z,r,\theta)$. Here $z\in[-1,+1]$ is the height
+along the cylinder axis --- the proportion of the torsion configuration in
+the direction of $|0\rangle$ versus $|1\rangle$; $r\in[0,1]$ the radius in the
+cross-section --- the strength of the intermediate torsion, i.e., how far the
+state is from both poles; $\theta\in[0,2\pi)$ the azimuthal angle
+--- the relative phase between the basis components. The
+relationship to the Bloch sphere is direct: $z = \cos\theta_{\mathrm{Bloch}}$,
+$r = |\sin\theta_{\mathrm{Bloch}}|$; the formal bridge is in
+Chapter~\ref{ch:hilbert}.
+
+The cylinder is not a geometric aesthetic device: It makes
+gate operations into geometric transformations in real space.
+
+\begin{center}
+\small\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lp{2.4cm}p{4.2cm}}
+\toprule
+\textbf{Gate} & \textbf{Matrix} & \textbf{Cylinder Transformation} \\
+\midrule
+Hadamard $H$ & $\frac{1}{\sqrt2}\begin{pmatrix}1&1\\1&-1\end{pmatrix}$ & Swap $z\leftrightarrow r$, rotate phase by $\pi/2$: moves pole to equator \\
+Phase $Z$ & $\begin{pmatrix}1&0\\0&-1\end{pmatrix}$ & Add $\pi$ to phase $\theta$: rotation about the cylinder axis \\
+Bit-Flip $X$ & $\begin{pmatrix}0&1\\1&0\end{pmatrix}$ & $(z,r)$ rotation by $\alpha = \pi K_{\mathrm{frak}}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+In the cylindrical formalism, every gate operation is a geometric
+transformation of the torsion vector. The Hadamard gate does not rotate a
+matrix --- it tilts the configuration from the longitudinal axis onto the
+transverse plane. The $Z$ gate rotates the winding about its own
+axis. The factor $K_{\mathrm{frak}}$ in the $X$ gate is not a subsequently
+inserted correction factor; it follows from the fractal
+space-time geometry and means: Every qubit rotation is slightly smaller
+than $\pi$, because space-time itself deviates minimally from flat geometry. This is a testable prediction: All $\pi$ gates should
+systematically deviate from the ideal value by $\Delta\alpha\approx0{,}013\,\%$.\status{S}
+
+\section{Quantum Registers: Exponential Growth Through Combination}
+
+A single qubit has infinitely many intermediate states, but on
+readout always yields one of the two poles. The actual power comes
+through combination.
+
+\textbf{Product states: additive classical.} Two independent qubits
+together have four basis states. The general state without
+entanglement is $(\alpha_A|0\rangle+\beta_A|1\rangle)\otimes
+(\alpha_B|0\rangle+\beta_B|1\rangle)$ --- two separate Bloch spheres,
+no gain over two independent qubits. The state space is additive:
+$2+2 = 4$ parameters.
+
+\textbf{Entangled states: multiplicative growth.} As soon as the
+qubits are entangled, the joint state can no longer be written as a
+product. The general two-qubit state
+\begin{equation}
+  |\Psi\rangle = \alpha|00\rangle+\beta|01\rangle+\gamma|10\rangle+\delta|11\rangle
+\end{equation}
+requires four complex amplitudes, i.e., $2\cdot4-2 = 6$ real parameters.
+Entangled qubits carry joint information that is in none of the
+individual qubits. For $n$ qubits the Hilbert space grows exponentially,
+$d(n) = 2^n$, with $2\cdot2^n-2$ real parameters:
+
+\begin{center}
+\small
+\begin{tabular}{rrrl}
+\toprule
+$n$ Qubits & Basis States & Real Parameters & Classical \\
+\midrule
+1 & 2 & 2 & 1 Bit \\
+2 & 4 & 6 & 2 Bits \\
+3 & 8 & 14 & 3 Bits \\
+10 & 1024 & 2046 & 10 Bits \\
+50 & $10^{15}$ & $2\times10^{15}$ & 50 Bits \\
+300 & $10^{90}$ & $2\times10^{90}$ & $\approx$ atoms in the universe \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+That is the actual quantum advantage: Not a single qubit is
+powerful, but the collective growth of an entangled register.
+
+\textbf{Bell states.} The four maximally entangled
+two-qubit states form an orthonormal basis of the entangled
+subspace:
+\begin{align}
+  |\Phi^\pm\rangle &= \tfrac{1}{\sqrt2}(|00\rangle\pm|11\rangle),\\
+  |\Psi^\pm\rangle &= \tfrac{1}{\sqrt2}(|01\rangle\pm|10\rangle).
+\end{align}
+If one measures qubit~A, the result of qubit~B is determined, no matter how
+far away. In the FFGFT picture, a Bell state is not action at a distance
+between two qubits, but a topologically connected
+torsion configuration across two resonators: Both share a
+common torsion knot, whose resolution upon any local measurement determines
+both ends simultaneously. This is not a signal with
+superluminal speed, but a common geometric state
+that was established during preparation (Chapter~\ref{ch:verschraenkung}).
+The earlier damping formula for the Bell correlation, which lowered the CHSH value
+by $\sim10^{-4}$, is replaced by the two-observable reading from
+Chapter~\ref{ch:chsh_exp}.
+
+\textbf{Hardware validation.} The FFGFT predictions for Bell states
+were tested on IBM Brisbane and IBM Sherbrooke (127 qubits each, Heavy-Hex
+lattice): Bell state fidelity $97{,}17\,\%$; FFGFT algorithm
+and standard QM agree within measurement accuracy;
+repeat variance $10^{-4}$ to $10^{-3}$; deviations in $P(00)$ and
+$P(11)$ of $1$--$5\,\%$ are hardware noise.\status{K} The
+$\xi$ deviation from the ideal Bell correlation lies below the
+noise threshold and could not be isolated. The complete
+Python code is available in the repository.
+
+\section{Three Ways to More States}
+
+From resonator physics, three fundamentally different
+strategies emerge to encode more than two states:
+
+\begin{center}
+\small\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{p{1.6cm}p{2.3cm}p{1.6cm}p{2.5cm}}
+\toprule
+\textbf{Strategy} & \textbf{More States Through} & \textbf{Growth} & \textbf{FFGFT Meaning} \\
+\midrule
+Superposition (1 qubit) & continuous superposition & $\infty$, but 1 bit on measurement & intermediate torsion \\
+Register ($n$ qubits) & entanglement & $2^n$ & topologically connected knots \\
+Qudit ($d>2$) & higher levels, orbitals & $d$ per object & $d$ stable configurations in one resonator \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+No strategy dominates everywhere. Register entanglement scales most
+strongly, but requires $n$ physical objects and error-corrected
+entanglement operations. Qudit encoding gains information per object
+($\log_2d>1$); two ququarts ($d = 4$) carry $4^2 = 16$ states, four
+qubits $2^4 = 16$ --- mathematically equivalent, physically differently
+robust. Superposition is always there: It is the basis of
+interference, the actual driving force of quantum algorithms.
+
+\section{Quantum Interference: Why Superposition Is Useful}
+
+Superposition alone would be a mere superposition; readout would always
+yield one of the two poles. What makes superposition a resource is
+interference: Amplitudes can reinforce constructively or
+cancel destructively, depending on phase.\status{E} This is the principle
+behind all useful quantum algorithms: One prepares the register
+in a uniform intermediate torsion over all inputs (Hadamard);
+applies a function that increases the phases of the correct answers
+and decreases those of the wrong ones; lets interference drive the wrong
+answers into unstable configurations and the correct one into a
+stable one; and readout drives the system into the nearest stable
+pole, which after the interference corresponds with overwhelming frequency to the
+sought answer. Without interference: Monte Carlo. With
+interference: Grover ($\sqrt N$ instead of $N$ steps), Shor (factorization
+in polynomial time).
+
+In the FFGFT, the phase is not an abstract complex number, but the
+rotational position of the intermediate torsion configuration. Constructive
+interference: Two torsion phases lie equal and reinforce each other into a
+geometrically more stable configuration. Destructive interference:
+Two opposite phases cancel each other out; the resulting
+configuration has no stable geometric anchor and is not
+driven on readout. A quantum algorithm is, in this language, a sequence of torsion rotations that align the phase configuration
+of the register so that the sought answer ends in a stable
+configuration.
+
+\begin{laierspur}
+Water waves that meet reinforce each other when crest meets crest,
+and cancel each other out when crest meets trough. A
+quantum computer controls probabilities like waves: It lets the
+correct answers grow and the wrong ones disappear. This only works
+because quantum states have a phase that classical bits lack.
+\end{laierspur}
+
+\section{QND Measurement: Readout Without Destroying}
+
+The readout interaction drives the intermediate configuration into
+a pole --- for invasive measurement methods. There is a class of
+methods that do not perform this step: the
+quantum non-demolition measurement (QND). It reads out an observable $\hat A$
+without changing the eigenstate; the formal condition is
+$[\hat A,\hat H_{\mathrm{measurement}}] = 0$.\status{E} Practically: The same
+state can be measured repeatedly and yields the same
+result each time.
+
+The most important example is Faraday or Kerr rotation: A linearly
+polarized laser beam passes through the quantum dot without absorption and rotates its polarization plane by $\theta_F\propto S_z$. No photon is
+absorbed, no energy transfer into the spin mode; the spin state is
+identical before and after the measurement.
+
+\textbf{QND as empirical evidence for determinism.} The argument is
+direct: The Faraday rotation measures $S_z$ without changing the state;
+repeated measurements yield the same result every time; therefore
+the state had this value before every measurement, definitely, not as an abstract
+superposition that only becomes reality through measurement. In the FFGFT, the Faraday rotation is state-preserving because a stable
+torsion configuration cannot be driven out of its state by a dispersive, non-resonant coupling. The photon sees the
+torsion --- it rotates its polarization accordingly --- but transfers no energy, because it is not resonant.\status{S}
+
+\begin{center}
+\small\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{p{2.4cm}p{3cm}p{2.8cm}}
+\toprule
+\textbf{Method} & \textbf{Interaction} & \textbf{State After} \\
+\midrule
+Resonant fluorescence & Photon absorbed, excites transition & changed \\
+Spin-to-charge conversion & Electron tunnels out of the resonator & destroyed \\
+Faraday/Kerr & Photon passes dispersively & unchanged: QND \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The standard reading, that the state only exists through measurement, is difficult to reconcile with QND measurements. In the FFGFT, the
+torsion configuration is a geometric reality: stable, definite,
+pre-existent. Measurement reads it off; it does not create it.
+
+\textbf{Limits of QND.} QND is possible for observables that commute with the
+measurement operator, typically $S_z$. An intermediate configuration
+--- a state that is not an $S_z$ eigenstate --- is driven into an eigenstate by an
+$S_z$ QND measurement, deterministically depending on the initial
+state; the intermediate torsion is then gone.
+
+\section{The Potential Landscape}
+
+The complete picture of qubit states is a potential landscape
+with two stable minima and a saddle in between. The minimum
+$|\uparrow\rangle$ is a stable configuration, deep enough that
+weak couplings cannot lift the state out of it --- QND possible. The
+minimum $|\downarrow\rangle$ is mirror-symmetrically equally deep. The slope
+is the intermediate torsion: The phase determines how far the state is
+from which minimum; not a true minimum, metastable on
+the coherence time $T_2$. Every point in between is a geometrically
+defined state, continuously parameterized, discrete in the
+endpoints.
+
+The readout strength decides: A state in the stable minimum remains
+under weak coupling (QND) and can be lifted out under strong coupling
+(invasive). A state on the slope rolls into the nearest minimum even under weak
+coupling --- which one, the exact phase determines,
+epistemically unknown, deterministic; under strong coupling the same,
+only faster.
+
+The crucial insight: There is no principled boundary between
+\enquote{QND possible} and \enquote{QND impossible}, only more stable and
+less stable states in a continuous landscape. The jump into the final position is not
+random: A state near $|\uparrow\rangle$ lands in $|\uparrow\rangle$, one near
+$|\downarrow\rangle$ in $|\downarrow\rangle$, one on the saddle
+depending on the fine phase. The apparent randomness of the
+standard QM is the epistemic ignorance of this phase. The picture holds
+for all $d$ levels of a qudit: $d$ minima with $d-1$ saddle points.
+
+\section{Two Levels of the $\xi$ Hierarchy: Spin Qubit and Photonic Resonator}
+
+The previous sections developed the qubit on the spin qubit ---
+an electron in a nanometer cage. There is a qualitatively different
+realization class: the photonic resonator. Both enforce discrete
+states through geometry, but sit on different levels
+of the $\xi$ hierarchy, with consequences for temperature, stability, and
+the nature of information.
+
+\textbf{Spin qubit: minimal resonator at level $N\approx8$.} A
+single electron, one energy level, two orientations. The separation
+of the spin states in a typical field of 1\,T is
+$\Delta E_Z = g^*\mu_BB\approx0{,}1$--$1$\,meV; the thermal energy
+at room temperature is $k_BT = 26$\,meV. Thus $\Delta E_Z\ll k_BT$:
+Thermal noise constantly throws the system out of the minimum. Deep
+temperatures below 1\,K are not optional, but mandatory --- not
+to preserve superposition, but to remain in one of the minima at all.
+
+\textbf{Photonic resonator: collective geometry at level
+$N\approx9$--$10$.} A waveguide of lithium niobate, a
+Mach-Zehnder interferometer, a ring resonator --- resonators of
+$10^{18}$ to $10^{23}$ atoms in lattice order. The resonator is not
+a single particle, but the macroscopic geometry of the entire
+crystal; the photon belongs to the collective mode. The discreteness comes
+from the boundary conditions of the macroscopic geometry. The energy of an
+optical photon is $1$--$2$\,eV, thus $E/k_BT\approx40$: Thermal
+noise cannot create optical photons. Photonics works
+at room temperature not because it is built more robustly, but because
+it operates on a higher $\xi$ level: The geometric robustness
+is given by the single crystal with $10^{23}$ lattice sites, the thermal by the eV scale --- four orders of magnitude apart.
+
+\textbf{Not limited to two states.} In a Mach-Zehnder
+interferometer, the photon runs through two paths with continuously
+adjustable phase; the interference result $\cos^2(\phi/2)$ is a
+continuous transfer function. A photonic resonator can operate both modes:
+digital with $\phi\in\{0,\pi\}$ and transmission
+1 or 0, or analog with continuous phase --- infinitely many
+intermediate states, all stable at room temperature. In the spin qubit,
+the analogous information lies in a thermally unstable intermediate state,
+$T_2$ collapses in nanoseconds at room temperature; in the
+photonic resonator, it lies in the phase of the photon, and that is
+thermally stable.
+
+\begin{center}
+\small\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{p{2.6cm}p{2.8cm}p{3cm}}
+\toprule
+ & \textbf{Spin Qubit} & \textbf{Photonic Resonator} \\
+\midrule
+$\xi$ level & $N\approx8$ (nm) & $N\approx9$--10 ($\mu$m--mm) \\
+Resonator & 1 electron in cage & $10^{18}$--$10^{23}$ atoms collective \\
+Energy scale & $0{,}1$--1\,meV & 1--2\,eV \\
+$\Delta E/k_BT$(300\,K) & $0{,}004$--$0{,}04$ & $\approx40$ \\
+Cooling needed? & yes, $T<1$\,K & no \\
+Analog states & fragile ($T_2\sim$ns) & stable \\
+Discreteness from & confinement (1 particle) & mode geometry \\
+Typical application & digital qubit & analog signal processing, photonic computing \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Spin qubit and photonic resonator are, in the FFGFT, not
+fundamentally different systems, but resonators at different
+levels of the same scaling ladder. Each level carries the energy by the
+factor $1/\xi\approx7500$ higher than the previous one; from meV (level 8) to
+eV (level 9--10) the factor is $10^3$--$10^4$, consistent with the
+scaling.\status{S} This also explains why biological systems
+use photonic mechanisms (photosynthesis, bird navigation) and no
+spin qubits for quantum effects: Nature works on the
+thermally robust level.
+
+\section{The Analog Resolution Limit}
+
+The photonic resonator is thermally robust, but only as long as one
+does not resolve too finely. Anyone who wants to distinguish analog intermediate values
+divides the energy space into $N$ levels with $\Delta E_{\mathrm{level}} =
+E_{\mathrm{photon}}/N$, and the condition $\Delta E_{\mathrm{level}}\gg
+k_BT$ yields $N\ll E_{\mathrm{photon}}/k_BT$. At room temperature and
+optical photons: $N_{\max}\approx40$, corresponding to
+$\log_2 40\approx5{,}3$\,bit per photon. The photonic system does not escape
+the thermal problem --- it shifts it to a finer
+scale. More resolution requires cooling or an even higher
+energy scale.
+
+This is the oldest engineering wisdom of communications engineering,
+geometrically grounded: High-frequency technology has been climbing the same
+hierarchy for a hundred years. At each frequency level, the signal-to-noise
+ratio improves because $E/k_BT$ grows with each level.
+
+\begin{center}
+\footnotesize\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{2.2cm}p{1.3cm}p{1.6cm}p{1.2cm}p{2.9cm}}
+\toprule
+\textbf{Technology} & \textbf{Frequency} & \textbf{$E/k_BT$} & \textbf{$N$-Level} & \textbf{Regime} \\
+\midrule
+AM radio & 1\,MHz & $1{,}5\times10^{-7}$ & $\approx5{,}5$ & thermally dominated \\
+FM & 100\,MHz & $1{,}5\times10^{-5}$ & $\approx6{,}4$ & noise-limited \\
+Microwave & 10\,GHz & $1{,}5\times10^{-3}$ & $\approx7{,}3$ & manageable \\
+5G/mmWave & 30\,GHz & $5\times10^{-3}$ & $\approx7{,}5$ & transition \\
+THz & 1\,THz & $0{,}15$ & $\approx7{,}8$ & $E\sim k_BT$: difficult \\
+Near-infrared & 200\,THz & 31 & $\approx8{,}8$ & thermally robust \\
+Fiber optic & 300\,THz & 46 & $\approx9{,}0$ & $N_{\max}\approx46$ \\
+UV & 1000\,THz & 154 & $\approx9{,}4$ & $N_{\max}\approx150$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+From $N = 6$ (AM) to $N = 9$ (optics), three levels bridge the factor
+$(1/\xi)^3\approx4\times10^{11}$; in fact, the fiber optic frequency is
+$10^8$-fold above AM radio. The fiber optic is, in this picture, not a
+new technology, but the continuation of the same trend to the
+next level. And the resolution limit applies at every level: Anyone who wants to resolve more than 40 analog levels at optical wavelengths must cool --- as the radio engineer in 1930 shielded his receiver. The
+universal limit reads
+\begin{equation}
+  N_{\max}(T,N_\xi)\approx\frac{E_0\,(1/\xi)^{N_\xi-N_0}}{k_BT}.
+\end{equation}
+
+\textbf{Above optics.} Optics is not the end of the ladder,
+but the end of the usable zone for guided photonic transmission.
+In the near UV (3--10\,eV, $N\approx9{,}3$) photoionization begins: The
+resonator is damaged by its own signal. At soft X-rays
+(100\,eV--1\,keV, $N\approx10$) the wavelength approaches the
+lattice spacing, Bragg scattering at individual lattice planes, the
+waveguiding collapses. At hard X-rays, the photon
+flies through the lattice gaps, matter becomes partially transparent, there is no
+refractive index and no resonator. At gamma energies, the
+photon interacts only with atomic nuclei --- another $\xi$ level. Above
+1\,MeV ($N\approx11{,}3$) pair production sets in: the natural
+upper limit. In the FFGFT there are no cannonballs and no waves as
+separate concepts, only torsion configurations at various scales;
+waveguiding is a scale resonance of two torsion patterns, the
+crystal at level 7--8 and the photon at level 9, and it breaks down
+when the scales become incompatible.
+
+\begin{keypoint}[What This Chapter Holds]
+The qubit is a mode in the cylindrical phase space; gates are
+torsion rotations; registers grow exponentially through topological
+connection; interference is phase superposition of torsions; QND measurement
+evidences the pre-existence of stable poles; the potential landscape makes the
+measurement outcome deterministic with epistemically unknown phase. Spin qubit
+and photonics are resonators at different $\xi$ levels, and the
+thermal resolution limit applies equally at every level.
+\end{keypoint}
+
+\quelle{Doc.~175 (Qubit state spaces, March 2026), Doc.~034 (cylindrical formalism), Doc.~173 (resonator conditions), Doc.~174 (torsion, Faraday readout), Doc.~230}

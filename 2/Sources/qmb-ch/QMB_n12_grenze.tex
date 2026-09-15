@@ -1,0 +1,101 @@
+% QMB_n12_grenze.tex — Kapitel 12: Grenzen des Quantenrechnens
+% Inhaltliche Grundlage: Dok. 075, 076, 147, 316, 343; eigene Darstellung
+\chapter{Grenzen des Quantenrechnens: RSA, Weyl und der Auflösungsboden}
+\label{ch:grenze}
+
+\section{Was Quantencomputer leisten und was nicht}
+
+Dieses Kapitel zieht drei Grenzen, die der Korpus mit Begründung
+festlegt. Sie sind keine spekulativen Einschränkungen, sondern
+Konsequenzen mathematischer Sätze oder empirischer Befunde.
+
+\section{Grenze 1: RSA-Faktorisierung und der arithmetische Träger}
+
+RSA (Rivest, Shamir, Adleman 1977) beruht auf der Schwierigkeit der
+Faktorisierung großer Semiprimzahlen $N = p\cdot q$. Shors Algorithmus
+löst das Problem in polynomialer Zeit --- in Prinzip. Die Frage ist, was
+der Geometrieparameter $\xi$ dabei leisten kann.
+
+Das Ergebnis des Korpus ist klar: \textbf{$\xi$ hat in $\mathbb{Z}/N\mathbb{Z}$
+keine Funktion.}\status{K} Die Periode $r$ der modularen Potenzfunktion
+$f(x) = a^x\bmod N$ ist durch $r = \mathrm{lcm}(p-1,q-1)$ bestimmt ---
+eine individuelle arithmetische Eigenschaft von $N$, nicht ein
+geometrischer Parameter. Shors Algorithmus nutzt diese Periodenstruktur;
+sie ist eine Eigenschaft der Primzahlen, nicht der FFGFT-Geometrie.
+
+Die Tests in Dok.~075 und Dok.~076 verwenden Rasterparameter $\sigma$
+mit Werten wie $1/42$, $1/100$, $1/1000$ für Periodensuchverfahren.
+Diese Größen sind numerische Abtastweiten, keine physikalischen
+Parameter; sie dürfen nicht mit $\xi = 4/30000$ gleichgesetzt werden.
+Das Resonanzbild ist prinzipiell richtig --- Periodenfindung ist ein
+spektrales Problem ---, aber die Generatoren der Periode sind die
+Primzahlen, nicht ein einstellbarer Geometrieparameter.
+
+Ein Vorteil gegenüber klassischen Algorithmen muss auf der
+Shor-Faktorisierungskurve sichtbar werden: Der Fehlerkorrektur-
+Schwellenwert muss für relevante Schlüssellängen (2048 Bit) gehalten
+werden; die Aufbereitung muss in Superposition ausgeführt werden; ein
+RSA-relevantes $N$ muss erfolgreich faktorisiert werden. Nichts davon
+ist Stand 2026 realisiert.\status{X}
+
+\section{Grenze 2: Weyl-Obstruktion und Zähldichte}
+
+Der Weyl-Satz bestimmt, wie viele Eigenwerte ein kompakter Zustandsraum
+unterhalb einer Schranke $\lambda$ haben kann:
+$N(\lambda)\sim C\cdot\lambda^{d/2}$
+--- ein Potenzgesetz in der Dimension $d$.\status{K}
+
+Die Primzahlfunktion $\pi(T)$ und die Riemannschen Nullstellen wachsen
+dagegen wie $T\ln T$ --- keine Potenz, sondern quasi-logarithmisch. Das
+bedeutet: Ein endlicher kompakter Zustandsraum (ein $n$-Qubit-Register
+ist ein solcher) kann ein solches Spektrum nicht vollständig tragen.
+Die Weyl-Obstruktion schließt drei geometrische Zugänge zur
+Riemann-Hypothese aus:\status{K} keine kompakte Geometrie kann
+$T\ln T$-Wachstum aus einem Laplace-Spektrum liefern; $\xi$ verschiebt
+die kritische Linie nicht; die $\xi$-Leiter diskretisiert die
+Nullstellen nicht.
+
+Shors Schaltkreismodell ist digital und von der Weyl-Grenze direkt nicht
+betroffen. Aber ein physikalischer Quantencomputer ist ein Resonanzsystem;
+solange das Schwellentheorem für relevante Skalierungen nicht demonstriert
+ist, liegt er innerhalb der Resonanzgrenzen.\status{S}
+
+\section{Grenze 3: Der Auflösungsboden}
+
+Die $\xi$-Korrektur zu Bell-Korrelationen liegt bei $\Delta\mathrm{CHSH}
+\approx\xi/(2\pi)\approx2\times10^{-5}$ pro Messung.\status{S} Das ist
+der Auflösungsboden: Unterhalb dieser Schwelle ist keine FFGFT-spezifische
+Abweichung von der Standard-QM messbar. Alle NISQ-Prozessoren (NISQ =
+Noisy Intermediate-Scale Quantum) operieren mit physikalischen Fehlerraten
+$\sim10^{-2}$, drei Größenordnungen über dem $\xi$-Signal.
+
+Das bedeutet für den Quantenrechner: Die $\xi$-Korrekturen zu Algorithmen
+--- Bell-Dämpfung in Shor, modifizierte Gatterwinkel durch $K_{\mathrm{frak}}$
+--- sind unter NISQ-Rauschen begraben.\status{K} Weder eine Verlangsamung
+noch eine Beschleunigung von Quantenalgorithmen durch $\xi$ ist mit
+aktueller Hardware messbar. Das ist kein Misserfolg, sondern eine
+Präzisionsaussage.
+
+Zukünftige Hochpräzisions-Bell-Tests (schlupflochfrei, Detektions-
+effizienz $>99\,\%$, optische Plattform) könnten die Grenze erreichen.
+Das photonische System (Kapitel~\ref{ch:hardware}) ist der natürliche
+Kandidat.
+
+\section{Was bleibt}
+
+Von den vier Parallelstrukturen zwischen FFGFT und Quantenalgorithmen
+bleiben nach dieser Grenzziehung:
+
+Die Übersetzbarkeit (Kapitel~\ref{ch:hilbert}) ist vollständig und
+symmetrisch. Jede QM-Rechnung ist in FFGFT formulierbar; jede FFGFT-Aussage
+über Quantensysteme ist in der QM abbildbar. Das ist keine Einschränkung,
+sondern eine Stärke: Praktiker können ihren vertrauten Formalismus
+behalten.
+
+Der Mehrwert der FFGFT liegt nicht in anderen algorithmischen Ergebnissen,
+sondern in der Herkunft der Eingabewerte: Massen, Kopplungen und
+$\alpha$ aus derselben Geometrie, die den Quantenformalismus trägt. Das
+ist die strukturelle Asymmetrie, die Kapitel~\ref{ch:hilbert} festgehalten
+hat.
+
+\quelle{Dok.~075 (RSA-Verfahren), Dok.~076 (RSA-Periodentests), Dok.~147 §8 (IBM-Validierung), Dok.~316 (Riemann, Weyl-Grenze), Dok.~343 (Auflösungsboden)}

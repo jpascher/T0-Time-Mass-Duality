@@ -1,0 +1,189 @@
+% QMB_n09_algorithmen.tex — Kapitel 9: Quantenalgorithmen
+% Inhaltliche Grundlage: Dok. 073, 147, 176, 316, 343; eigene Darstellung
+\chapter{Quantenalgorithmen: Deutsch, Grover, Shor und die Grenzen der Periode}
+\label{ch:algorithmen}
+
+\section{Die vier Standardalgorithmen}
+
+Vier Algorithmen bilden das Lehrstück der Quantenrechnung. Sie zeigen,
+was Quanteninterferenz leisten kann und was sie nicht leisten kann.
+
+\subsection*{Deutsch: ein Bit in einer Abfrage}
+
+Der Deutsch-Algorithmus beantwortet die Frage, ob eine unbekannte
+Funktion $f:\{0,1\}\to\{0,1\}$ konstant oder balanciert ist, mit einer
+einzigen Abfrage --- klassisch braucht man zwei.
+
+In der Standard-QM: Man präpariert $|0\rangle$, wendet Hadamard an,
+fragt das Orakel $U_f$ ab, wendet Hadamard an und misst. Ergebnis $0$:
+konstant; Ergebnis $1$: balanciert. Der Trick ist das Phasenkickback:
+$U_f|x\rangle = (-1)^{f(x)}|x\rangle$. Das Hadamard danach macht die
+globale Phasendifferenz sichtbar.
+
+In der FFGFT: Dieselbe Sequenz auf dem zylindrischen Phasenraum. Das
+Orakel dreht die Phase des Torsionsvektors; Hadamard vertauscht $z$ und
+$r$ und dreht um $\pi/2$. Das Messresultat ist identisch. Es gibt keinen
+algorithmischen Unterschied --- nur der konzeptuelle Rahmen ist ein
+anderer: Die Phase ist keine abstrakte komplexe Zahl, sondern die
+Rotationsstellung der Torsionskonfiguration.\status{K}
+
+\subsection*{Grover: Suche in $\sqrt N$ Schritten}
+
+Grover sucht in einer unsortierten Datenbank mit $N$ Einträgen in $O(\sqrt N)$
+Schritten statt $O(N)$ klassisch. Der Mechanismus: Man präpariert das
+Register in einer gleichmäßigen Superposition aller $N$ Einträge,
+markiert den gesuchten Eintrag durch Phasenkickback
+($U_\mathrm{Grover}:|x\rangle\to(-1)^{\delta_{x,x_0}}|x\rangle$) und
+spiegelt dann an der gleichmäßigen Superposition (Inversionsspiegel um
+den Mittelwert). Jeder Grover-Schritt erhöht die Amplitude des gesuchten
+Eintrags auf Kosten aller anderen. Nach $\pi/4\cdot\sqrt N$ Schritten
+ist die Wahrscheinlichkeit des richtigen Eintrags nahe 1.
+
+FFGFT-Einordnung: Grover-Iterationen sind in der FFGFT eine Folge von
+Torsionsrotationen, die die Phase des gesuchten Eintrags systematisch
+ausrichten. Die anderen Einträge landen in instabilen Konfigurationen;
+die Auslesewechselwirkung treibt das System deterministisch in den
+ausgerichteten Pol.\status{K} Die Vorhersagen sind identisch mit der
+Standard-QM.
+
+\subsection*{Shor: Faktorisierung in polynomialer Zeit}
+
+Shors Algorithmus faktorisiert $N$ durch Periodenfindung. Sei $a$ mit
+$\gcd(a,N) = 1$; die Funktion $f(x) = a^x\bmod N$ ist periodisch mit
+Periode $r$. Die Quantenfouriertransformation (QFT) macht die Periode in
+den Messwahrscheinlichkeiten sichtbar; die Kettenbruchnäherung extrahiert
+$r$ aus dem Messwert. Aus $r$ folgen die Faktoren über $\gcd(a^{r/2}\pm1, N)$.
+
+Zentrale Aussage des Korpus: Der Algorithmus zerfällt in zwei Vorgänge,
+die nichts miteinander zu tun haben:\status{K}
+
+\begin{center}
+\small
+\begin{tabular}{p{2cm}p{3cm}p{3cm}}
+\toprule
+ & \textbf{Aufbereitung} & \textbf{Transformation} \\
+\midrule
+Aufgabe & Modulare Exponentiation $a^x\bmod N$ & Periodenextraktion \\
+Natur & arithmetisches Problem & Wellenoperation (Interferenz) \\
+Aufwand & teuer ($O(n^3)$ Gatter) & billig ($O(n^2)$ Gatter) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die Aufbereitung macht $\approx95\,\%$ der Gatterkosten aus; die QFT nur
+$\approx5\,\%$.\status{K} Shor spezifizierte nur den klassischen Prozess
+$(a,1)\to(a,a^x\bmod N)$ --- die Implementierung der modularen
+Exponentiation in Superposition ist das eigentliche Ingenieusproblem und
+hängt nicht an quantenmechanischen Eigenschaften.
+
+\section{$\phi$-QFT und Äquivalenzsatz}
+
+Dok.~147 entwickelt eine alternative Fouriertransformation, die Phasen
+$2\pi/\varphi^k$ statt $2\pi/2^k$ verwendet, wobei $\varphi$ der
+Goldene Schnitt ist:
+\begin{equation}
+  \phi\text{-QFT}:|x\rangle\mapsto\frac{1}{\sqrt{Q_\varphi}}\sum_{y=0}^{Q_\varphi-1}e^{2\pi ixy/Q_\varphi}|y\rangle,
+\end{equation}
+mit $Q_\varphi = \varphi^n$ statt $Q = 2^n$.
+
+\textbf{Hauptsatz:} Für Shors Algorithmus zur Faktorisierung von
+$N < 2^{20}$ mit Fehlerwahrscheinlichkeit $\delta < 10^{-6}$ gilt:\status{K}
+\begin{equation}
+  P_{\mathrm{success}}(\text{Standard-QFT})\le P_{\mathrm{success}}(\phi\text{-QFT})\le P_{\mathrm{success}}(\text{Standard-QFT})+\xi.
+\end{equation}
+Die $\phi$-QFT ist zur Standard-QFT äquivalent, mit einer maximalen
+Abweichung von $\xi\approx1{,}3\times10^{-4}$ --- vernachlässigbar.
+Der Äquivalenzsatz zeigt: $\xi$ hat in $\mathbb{Z}/N\mathbb{Z}$ keine
+strukturelle Funktion. Die Periode $r$ ist durch $\mathrm{lcm}(p-1,q-1)$
+bestimmt, eine individuelle arithmetische Eigenschaft von $N$, nicht ein
+universeller geometrischer Parameter.
+
+\section{Die strukturellen Grenzen der Periode}
+
+Drei Grenzen setzen dem, was Quantenalgorithmen leisten können, präzise
+Schranken.
+
+\textbf{1. Weyl-Gesetz und Zähldichte.}\status{K} Die Eigenwertdichte
+jedes kompakten Zustandsraums wächst nach einem Potenzgesetz
+$N(\lambda)\sim\lambda^{d/2}$. Die Primzahlzählfunktion $\pi(T)$ und die
+Riemannschen Nullstellen wachsen dagegen wie $T\ln T$. Das ist keine
+Potenz. Ein endlicher Zustandsraum kann ein solches Spektrum nicht
+vollständig tragen. Die Weyl-Obstruktion: Ein $n$-Qubit-Register ist ein
+kompakter Zustandsraum; arithmetische Zähldichten wachsen schneller als
+jede kompakte Geometrie erlaubt.
+
+\textbf{2. Aufbereitung als Flaschenhals.}\status{K} Die QFT macht
+Periodizitäten sichtbar, die in den präparierten Zuständen bereits
+vorhanden sind. Der limitierende Schritt ist die Zustandspräparation
+--- die Auswertung von $a^x\bmod N$ --- nicht die Transformation selbst.
+Kein geometrischer Parameter $\xi$ kann die arithmetische Komplexität
+der Aufbereitung reduzieren: Sie ist eine Funktion der Primstruktur von
+$N$, nicht der Geometrie des Trägers.
+
+\textbf{3. Kein Quantenvorteil für RSA (Stand 2026).}\status{X} Ein
+Vorteil muss auf der Shor-Faktorisierungskurve sichtbar werden: Der
+Schwellenwert der Fehlerkorrektur muss demonstriert und gehalten werden;
+die Aufbereitung muss in Superposition ausgeführt werden; das Ergebnis
+muss mit RSA-relevanten Schlüssellängen (2048 Bit) repliziert werden.
+Nichts davon ist Stand 2026 realisiert. Google Willow unterschreitet
+zwar den Fehlerkorrektur-Schwellenwert für logische Qubits --- aber in
+einem Regime weit unterhalb der für Shor nötigen Skalierung.
+
+\section{Riemann-Zeta und FFGFT-Träger}
+
+Dok.~316 und Dok.~343 klären die Beziehung zwischen der Riemann-Zeta
+und dem FFGFT-Träger.
+
+\textbf{Die Riemann-Zeta als Faktor der Torus-Spektral-Zeta.}\status{K}
+Die geschlossene Form der $\mathbb{Z}^4$-Spektral-Zeta lautet:
+\begin{equation}
+  Z_{\mathbb{Z}^4}(s) = 8\,(1-4^{1-s})\,\zeta(s)\,\zeta(s-1).
+\end{equation}
+Das ist eine Identität. Die Nullstellen der Torus-Spektral-Zeta haben
+drei Quellen: die Riemannschen Nullstellen (aus $\zeta(s)$), ihre
+Verschobenen (aus $\zeta(s-1)$) und die Pol-Null $s = 1$. Die
+Riemann-Hypothese ist damit eine Aussage über ein geometrisches Objekt
+des Rahmens --- aber eine, die die Geometrie nicht beantworten kann:
+Der Torus kann die Nullstellen als Faktor tragen, aber nicht erzeugen.
+
+\textbf{$\mathbb{Z}_3$-Orbifold-Projektion.}\status{B} Die
+$Z_3$-Projektion von $T^4/\mathbb{Z}_3$ transformiert die volle
+Riemann-Zeta in eine Dirichlet-$L$-Funktion:
+\begin{equation}
+  \zeta_{T^4/\mathbb{Z}_3}(s) = L(s,\chi_0) = (1-3^{-s})\,\zeta(s).
+\end{equation}
+Das Euler-Produkt dieser $L$-Funktion ist nach der Eintrittstiefe
+$k = \mathrm{ord}_p(3)$ hierarchisch geordnet; die physikalisch
+sichtbaren Primzahlen $\{2,3,5,7,11,13\}$ sind genau jene mit $k\le6$.
+
+\textbf{Galois-Struktur und Neutrinos.}\status{B} Die vier
+Frobenius-Konjugationsklassen primitiver Elemente in $\mathrm{GF}(27)^*$
+werden durch die FFGFT-Sektorpaarung $k\leftrightarrow-k$ zu zwei Klassen
+gepaart: $\{f_3,f_4\}$ (Dirac, geladene Leptonen) und $\{f_1,f_2\}$
+(Majorana, $\nu_1,\nu_2$ aktiv; $\nu_3$ in Dirac-Orbit $O_4$). Vorhersage:
+$\nu_3$ hat keine Majorana-Phase.
+
+\textbf{Weyl-Grenze.}\status{K} Keine kompakte Geometrie kann die
+Nullstellen der Riemann-Zeta als Spektrum tragen. Die Nullstellendichte
+$N(T)\sim T\ln T$ verlangt eine Dilatationsstruktur --- die ausgerollte
+Domäne. Die Geometrie zeigt die Adresse an, liefert aber nicht die Antwort.
+Drei naheliegende geometrische Zugänge sind ausgeschlossen: Keine
+kompakte Geometrie liefert das $T\ln T$-Wachstum; $\xi$ verschiebt die
+kritische Linie nicht; die $\xi$-Leiter diskretisiert die Nullstellen nicht.
+
+\section{Experimentelle Validierung}
+
+IBM Kingston (28. Mai 2026), 50 unabhängige Läufe, 2048 Shots pro Lauf:
+Bell-Zustands-Fidelität $0{,}9876\pm0{,}0028$. Die Wiederholbarkeitsvarianz
+ist statistisch verträglich mit gewöhnlichem Quanten-Shot-Noise (Verhältnis
+beobachtete/erwartete Varianz: $1{,}02$). Eine frühere Auswertung von 3
+Läufen hatte fälschlicherweise $40\times$ Determinismus gegenüber der QM
+berichtet; das war Stichproben-Artefakt.\status{K}
+
+Die $\xi$-Korrektur an CHSH-Werten liegt bei $\Delta\sim10^{-5}$ pro
+Messung, weit unter NISQ-Rauschen. Die häufig zitierten kumulativen
+Werte für $N = 73$ Qubits (Dok.~022 und Dok.~147) und die elementare
+Abweichung $\xi/(2\pi)$ sind nicht direkt vergleichbar und dürfen nicht
+gleichgesetzt werden (Kapitel~\ref{ch:chsh_exp}).
+
+\quelle{Dok.~073 (Algorithmen in T0, 2025), Dok.~147 §3 ($\phi$-QFT-Äquivalenz), §4 (Bell-Tests), §5 (Shor), §8 (IBM-Validierung, Mai 2026), Dok.~176 (Aufbereitung vs.\ Transformation), Dok.~316 (Riemann, Weyl), Dok.~343 (Zeta-Galois)}

@@ -1,0 +1,178 @@
+% QMB_n09_algorithmen.tex — Chapter 9: Quantum Algorithms
+% Substantive basis: Doc. 073, 147, 176, 316, 343; own presentation
+\chapter{Quantum Algorithms: Deutsch, Grover, Shor and the Limits of the Period}
+\label{ch:algorithmen}
+
+\section{The Four Standard Algorithms}
+
+Four algorithms form the textbook lesson of quantum computing. They show
+what quantum interference can achieve and what it cannot achieve.
+
+\subsection*{Deutsch: One Bit in One Query}
+
+The Deutsch algorithm answers the question of whether an unknown
+function $f:\{0,1\}\to\{0,1\}$ is constant or balanced, with a single
+query --- classically one needs two.
+
+In standard QM: One prepares $|0\rangle$, applies Hadamard, queries the oracle $U_f$, applies Hadamard, and measures. Result $0$:
+constant; result $1$: balanced. The trick is phase kickback:
+$U_f|x\rangle = (-1)^{f(x)}|x\rangle$. The Hadamard afterwards makes the
+global phase difference visible.
+
+In the FFGFT: The same sequence on the cylindrical phase space. The
+oracle rotates the phase of the torsion vector; Hadamard swaps $z$ and
+$r$ and rotates by $\pi/2$. The measurement result is identical. There is no
+algorithmic difference --- only the conceptual framework is a
+different one: The phase is not an abstract complex number, but the
+rotational position of the torsion configuration.\status{K}
+
+\subsection*{Grover: Search in $\sqrt N$ Steps}
+
+Grover searches an unsorted database with $N$ entries in $O(\sqrt N)$
+steps instead of $O(N)$ classically. The mechanism: One prepares the
+register in a uniform superposition of all $N$ entries,
+marks the sought entry by phase kickback
+($U_\mathrm{Grover}:|x\rangle\to(-1)^{\delta_{x,x_0}}|x\rangle$) and
+then reflects about the uniform superposition (inversion about
+the mean). Each Grover step increases the amplitude of the sought
+entry at the expense of all others. After $\pi/4\cdot\sqrt N$ steps,
+the probability of the correct entry is near 1.
+
+FFGFT classification: Grover iterations are, in the FFGFT, a sequence of
+torsion rotations that systematically align the phase of the sought entry. The other entries land in unstable configurations;
+the readout interaction drives the system deterministically into the
+aligned pole.\status{K} The predictions are identical to
+standard QM.
+
+\subsection*{Shor: Factorization in Polynomial Time}
+
+Shor's algorithm factors $N$ through period finding. Let $a$ with
+$\gcd(a,N) = 1$; the function $f(x) = a^x\bmod N$ is periodic with
+period $r$. The quantum Fourier transform (QFT) makes the period visible in
+the measurement probabilities; continued fraction approximation extracts
+$r$ from the measurement value. From $r$ the factors follow via $\gcd(a^{r/2}\pm1, N)$.
+
+Central statement of the corpus: The algorithm decomposes into two processes
+that have nothing to do with each other:\status{K}
+
+\begin{center}
+\small
+\begin{tabular}{p{2cm}p{3cm}p{3cm}}
+\toprule
+ & \textbf{Preparation} & \textbf{Transformation} \\
+\midrule
+Task & Modular exponentiation $a^x\bmod N$ & Period extraction \\
+Nature & arithmetic problem & wave operation (interference) \\
+Cost & expensive ($O(n^3)$ gates) & cheap ($O(n^2)$ gates) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The preparation accounts for $\approx95\,\%$ of the gate costs; the QFT only
+$\approx5\,\%$.\status{K} Shor specified only the classical process
+$(a,1)\to(a,a^x\bmod N)$ --- the implementation of modular
+exponentiation in superposition is the actual engineering problem and
+does not depend on quantum mechanical properties.
+
+\section{$\phi$-QFT and Equivalence Theorem}
+
+Doc.~147 develops an alternative Fourier transform that uses phases
+$2\pi/\varphi^k$ instead of $2\pi/2^k$, where $\varphi$ is the
+golden ratio:
+\begin{equation}
+  \phi\text{-QFT}:|x\rangle\mapsto\frac{1}{\sqrt{Q_\varphi}}\sum_{y=0}^{Q_\varphi-1}e^{2\pi ixy/Q_\varphi}|y\rangle,
+\end{equation}
+with $Q_\varphi = \varphi^n$ instead of $Q = 2^n$.
+
+\textbf{Main theorem:} For Shor's algorithm for factorizing
+$N < 2^{20}$ with error probability $\delta < 10^{-6}$:\status{K}
+\begin{equation}
+  P_{\mathrm{success}}(\text{Standard-QFT})\le P_{\mathrm{success}}(\phi\text{-QFT})\le P_{\mathrm{success}}(\text{Standard-QFT})+\xi.
+\end{equation}
+The $\phi$-QFT is equivalent to the standard QFT, with a maximum
+deviation of $\xi\approx1{,}3\times10^{-4}$ --- negligible.
+The equivalence theorem shows: $\xi$ has no structural function in $\mathbb{Z}/N\mathbb{Z}$. The period $r$ is determined by $\mathrm{lcm}(p-1,q-1)$,
+an individual arithmetic property of $N$, not a
+universal geometric parameter.
+
+\section{The Structural Limits of the Period}
+
+Three limits set precise bounds on what quantum algorithms can achieve.
+
+\textbf{1. Weyl law and counting density.}\status{K} The eigenvalue density
+of every compact state space grows according to a power law
+$N(\lambda)\sim\lambda^{d/2}$. The prime counting function $\pi(T)$ and the
+Riemann zeros grow like $T\ln T$. That is not a
+power. A finite state space cannot fully carry such a spectrum. The Weyl
+obstruction: An $n$-qubit register is a compact state space; arithmetic counting densities grow faster than any compact geometry allows.
+
+\textbf{2. Preparation as bottleneck.}\status{K} The QFT makes
+periodicities visible that are already present in the prepared states. The limiting step is state preparation
+--- the evaluation of $a^x\bmod N$ --- not the transformation itself.
+No geometric parameter $\xi$ can reduce the arithmetic complexity
+of the preparation: It is a function of the prime structure of
+$N$, not of the geometry of the carrier.
+
+\textbf{3. No quantum advantage for RSA (as of 2026).}\status{X} An
+advantage must become visible on the Shor factorization curve: The threshold of error correction must be demonstrated and maintained;
+the preparation must be executed in superposition; the result
+must be replicated with RSA-relevant key lengths (2048 bit).
+None of this is realized as of 2026. Google Willow does surpass the error correction threshold for logical qubits --- but in
+a regime far below the scaling necessary for Shor.
+
+\section{Riemann Zeta and FFGFT Carrier}
+
+Doc.~316 and Doc.~343 clarify the relationship between the Riemann zeta
+and the FFGFT carrier.
+
+\textbf{The Riemann zeta as a factor of the torus spectral zeta.}\status{K}
+The closed form of the $\mathbb{Z}^4$ spectral zeta is:
+\begin{equation}
+  Z_{\mathbb{Z}^4}(s) = 8\,(1-4^{1-s})\,\zeta(s)\,\zeta(s-1).
+\end{equation}
+This is an identity. The zeros of the torus spectral zeta have
+three sources: the Riemann zeros (from $\zeta(s)$), their shifted ones (from $\zeta(s-1)$) and the pole-zero $s = 1$. The
+Riemann hypothesis is thus a statement about a geometric object
+of the framework --- but one that the geometry cannot answer:
+The torus can carry the zeros as a factor, but cannot generate them.
+
+\textbf{$\mathbb{Z}_3$ orbifold projection.}\status{B} The
+$\mathbb{Z}_3$ projection of $T^4/\mathbb{Z}_3$ transforms the full
+Riemann zeta into a Dirichlet $L$-function:
+\begin{equation}
+  \zeta_{T^4/\mathbb{Z}_3}(s) = L(s,\chi_0) = (1-3^{-s})\,\zeta(s).
+\end{equation}
+The Euler product of this $L$-function is hierarchically ordered according to the entry depth
+$k = \mathrm{ord}_p(3)$; the physically
+visible primes $\{2,3,5,7,11,13\}$ are exactly those with $k\le6$.
+
+\textbf{Galois structure and neutrinos.}\status{B} The four
+Frobenius conjugacy classes of primitive elements in $\mathrm{GF}(27)^*$
+are paired by the FFGFT sector pairing $k\leftrightarrow-k$ into two classes:
+$\{f_3,f_4\}$ (Dirac, charged leptons) and $\{f_1,f_2\}$
+(Majorana, $\nu_1,\nu_2$ active; $\nu_3$ in Dirac orbit $O_4$). Prediction:
+$\nu_3$ has no Majorana phase.
+
+\textbf{Weyl limit.}\status{K} No compact geometry can
+carry the zeros of the Riemann zeta as a spectrum. The zero density
+$N(T)\sim T\ln T$ demands a dilatation structure --- the unrolled
+domain. The geometry shows the address, but does not provide the answer.
+Three obvious geometric approaches are excluded: No
+compact geometry provides the $T\ln T$ growth; $\xi$ does not shift the
+critical line; the $\xi$ ladder does not discretize the zeros.
+
+\section{Experimental Validation}
+
+IBM Kingston (May 28, 2026), 50 independent runs, 2048 shots per run:
+Bell state fidelity $0{,}9876\pm0{,}0028$. The repeatability variance
+is statistically compatible with ordinary quantum shot noise (ratio
+observed/expected variance: $1{,}02$). An earlier evaluation of 3
+runs had erroneously reported $40\times$ determinism relative to QM; that was a sampling artifact.\status{K}
+
+The $\xi$ correction to CHSH values is $\Delta\sim10^{-5}$ per
+measurement, far below NISQ noise. The frequently cited cumulative
+values for $N = 73$ qubits (Doc.~022 and Doc.~147) and the elementary
+deviation $\xi/(2\pi)$ are not directly comparable and must not be
+equated (Chapter~\ref{ch:chsh_exp}).
+
+\quelle{Doc.~073 (Algorithms in T0, 2025), Doc.~147 §3 ($\phi$-QFT equivalence), §4 (Bell tests), §5 (Shor), §8 (IBM validation, May 2026), Doc.~176 (Preparation vs.\ transformation), Doc.~316 (Riemann, Weyl), Doc.~343 (Zeta Galois)}

@@ -1,0 +1,209 @@
+% QMB_n11_hardware.tex — Kapitel 11: Hardware
+% Inhaltliche Grundlage: Dok. 083, 161, 183, 184; eigene Darstellung
+\chapter{Hardware: Coherent Ising Machine, Google Willow, p-Bit, Photonenchip}
+\label{ch:hardware}
+
+\section{Coherent Ising Machine: Optimierung als physikalische Relaxation}
+
+Die Coherent Ising Machine (CIM) ist ein optischer Analogcomputer, der
+kombinatorische Optimierungsprobleme durch physikalische Relaxation in
+den Grundzustand eines Ising-Hamiltonians löst. Das fundamentale Prinzip:
+Das System \emph{fällt} in seine Lösung, es berechnet sie nicht.
+
+\subsection*{Der Ising-Hamiltonian als universelle Optimierungssprache}
+
+Jedes NP-harte kombinatorische Problem lässt sich als Minimierung des
+Ising-Hamiltonians formulieren:
+\begin{equation}
+  H_{\mathrm{Ising}} = -\tfrac12\sum_{i\ne j}J_{ij}\sigma_i\sigma_j
+  - \sum_i h_i\sigma_i,
+\end{equation}
+wobei $J_{ij}$ die Kopplungsstärken und $h_i$ externe Felder sind.
+Der Grundzustand --- die Spin-Konfiguration mit minimalem $H_{\mathrm{Ising}}$
+--- entspricht der optimalen Lösung. Die Abbildung ist exakt, keine
+Approximation: Travelling Salesman, MaxCut, Portfolio-Optimierung,
+Proteinstrukturvorhersage, RSA-Faktorisierung sind sämtlich als
+Ising-Minimierung formulierbar.
+
+\subsection*{Physikalische Implementierung}
+
+Die CIM implementiert das Ising-Modell durch ein Netzwerk zeitgemulti-
+plexter degenerierter optischer parametrischer Oszillatoren (DOPO):
+Spin $+1$ ist ein Laserpuls mit Phase $0°$, Spin $-1$ ein Puls mit
+Phase $180°$; die Kopplungen $J_{ij}$ werden durch elektronisches
+Feedback realisiert. Das System entwickelt sich deterministisch gemäß
+den Feldgleichungen des parametrischen Oszillators und findet dabei mit
+hoher Wahrscheinlichkeit den Grundzustand. Bis zu 100\,000 optische
+Spins sind realisiert (Stand 2024).\status{E}
+
+Eine CIM scheint stochastisch zu suchen; verschiedene Läufe liefern
+manchmal verschiedene Lösungen. Aber physikalisch folgt das System
+\emph{deterministisch} den Feldgleichungen. Die scheinbare Zufälligkeit
+ist ausschließlich Unkenntnis über die genauen Anfangsbedingungen des
+Quantenvakuums --- eine direkte Parallele zur FFGFT-Messung.
+
+\subsection*{Sechs Strukturelle Parallelen zur FFGFT}
+
+Zwischen CIM und FFGFT lassen sich sechs Parallelen identifizieren:
+
+\textbf{Parallele 1: Determinismus hinter scheinbarer Stochastik.} In
+der CIM ist die Lösung physikalisch erzwungen; in der FFGFT ist das
+Messergebnis durch die Feldkonfiguration geometrisch bestimmt. Beide
+ersetzen fundamentalen Probabilismus durch versteckten Determinismus.
+
+\textbf{Parallele 2: Grundzustand als geometrisches Minimum.} Die CIM
+relaxiert in das Energieminimum des Ising-Hamiltonians; die FFGFT
+beschreibt das Universum als im Grundzustand seiner eigenen Geometrie
+mit $\xi = 4/30000$. Optimierung ist Relaxation, nicht Iteration.
+
+\textbf{Parallele 3: Qubit-Struktur.} CIM-Spin $\pm1$ ist die Phase
+des Laserpulses; FFGFT-Qubit $|\tilde T_\uparrow,m_\downarrow\rangle$
+und $|\tilde T_\downarrow,m_\uparrow\rangle$ ist durch $\tilde T\cdot m = 1$
+intrinsisch erzwungen. Der FFGFT-Spin muss nicht extern auf $\pm1$
+begrenzt werden; er ist es durch die Geometrie.
+
+\textbf{Parallele 4: Die Kopplungsmatrix.} In der klassischen CIM sind
+$J_{ij}$ extern programmiert; in einer FFGFT-basierten Ising-Maschine
+würden sie geometrisch aus dem Zeitfeld emergieren:
+$J_{ij}^{(\mathrm{FFGFT})} = \int\tilde T_i\cdot\tilde T_j\cdot G(x_i,x_j)\,d^3x$.
+Das bedeutet: keine Kodierungsfehler möglich, da die Kopplungen reale
+physikalische Wechselwirkungen wären.\status{S}
+
+\textbf{Parallele 5: Fraktale Korrektur als Annealing.} Der Korrekturfaktor
+$K_{\mathrm{frak}}^{3/2}$ spielt in der FFGFT die analoge Rolle des
+Annealing-Temperaturparameters: Er verhindert, dass das System in einem
+lokalen Minimum der geometrischen Energie verbleibt.
+
+\textbf{Parallele 6: Toroidale Topologie.} Die FFGFT beschreibt den
+Träger als $T^4/\mathbb{Z}_3$. Toroidale Randbedingungen hätten für
+eine physikalische Ising-Maschine einen Vorteil: kein Randproblem, alle
+Spins haben gleich viele Nachbarn, natürliche Implementierung
+translationsinvarianter Kopplungen.
+
+\section{Google Willow: topologische Fehlerkorrektur und Selbstmessung}
+
+Googles Willow-Quantenprozessor erzielte 2024 und 2025 drei Durchbrüche,
+die aus FFGFT-Sicht besondere Bedeutung haben.
+
+\subsection*{Fehlerkorrektur unter dem Schwellenwert (Dezember 2024)}
+
+Willow (105 supraleitende Transmon-Qubits, $\sim10$\,mK) zeigt erstmals,
+dass die logische Fehlerrate exponentiell sinkt, wenn die Code-Distanz
+$d$ erhöht wird.\status{E} Ein $d = 7$-Block erzielt eine Fehlerrate um
+Faktor $2{,}14$ unter dem $d = 5$-Block. Physikalische Einzel-Qubit-
+Fehlerraten liegen bei $0{,}05\,\%$ --- halb so viel wie auf dem
+Vorgänger Sycamore. Die Fehlerkorrektur basiert auf einem Surface Code
+mit topologisch geschützten logischen Qubits.
+
+FFGFT-Einordnung: Mehr physische Qubits reduzieren den logischen Fehler
+exponentiell --- das ist der experimentelle Beleg, dass topologisch stabile
+Konfigurationen im Quantensystem existieren und erreichbar sind, nicht
+durch externe Rauschunterdrückung, sondern durch geometrische Ordnung.
+Das ist die Richtung, auf die die FFGFT mit ihren Modenklassen des
+$D_4$-Gitters zeigt (Kapitel~\ref{ch:gitter}).\status{S}
+
+\subsection*{Floquet topologische Ordnung (September 2025)}
+
+Will et al.\ realisierten auf Willow eine Floquet-topologisch geordnete
+Phase --- eine Quantenphase, die im thermischen Gleichgewicht verboten
+ist, aber unter periodischem äußerem Antrieb entsteht.\status{E} Auf bis
+zu 58 Qubits entstanden: chirale Kantenmoden (Informationsausbreitung in
+ausgezeichneter Richtung), anyonische Anregungen (e-Anyonen werden zu
+m-Anyonen und umgekehrt), und ein interferometrisch messbarer
+topologischer Bulk-Invariant.
+
+FFGFT-Einordnung: Die nicht-gleichgewichtliche Ordnung trägt eine
+$\mathbb{Z}_2$-Symmetrie auf dem zweidimensionalen Gitter --- strukturell
+verwandt mit der $\mathbb{Z}_3$-Trialität des FFGFT-Trägers, aber nicht
+identisch (Dimension, Symmetriegruppe und Trägergeometrie verschieden).
+Die Floquet-topologische Ordnung ist ein experimentelles Analogon der
+Modenstruktur auf $T^4/\mathbb{Z}_3$.\status{S}
+
+\subsection*{Quantum Echoes (Oktober 2025)}
+
+Out-of-Time-Order-Korrelatoren (OTOC) auf Willow zeigen harmonische
+Ausbreitung von Quanteninformation durch konstruktive Interferenz --- ein
+Echo-Muster, das periodisch zurückkehrt. FFGFT-Einordnung: Im
+Torusformalismus sind Moden auf einer geschlossenen Geometrie
+definiert; Informationsausbreitung kehrt zur Quelle zurück --- das Echo
+ist eine Konsequenz der Kompaktheit, nicht ein Zufall.
+
+\section{Das p-Bit: zwischen Bit und Qubit}
+
+Das p-Bit (probabilistisches Bit) besetzt den Zwischenbereich zwischen
+dem klassischen Bit (tiefe Potenzialsenke, $U\gg k_BT$, stabil über
+Jahre) und dem Qubit (metastabile Superposition, $U\ll k_BT$, zerfällt in
+Pikosekunden bis Millisekunden). Es ist eine magnetische Nanostruktur auf
+der geometrischen Skala $L_8\approx22$\,nm, bei der die Torsionsbarriere
+thermisch überwindbar wird.
+
+\subsection*{Physikalische Grundlage}
+
+Die Energiebarriere ist die Stoner-Wohlfarth-Energie $U = K_u\cdot V$,
+mit der magnetischen Anisotropieenergie $K_u$ und dem Volumen $V$. Das
+Schaltverhalten folgt dem Néel-Arrhenius-Gesetz:
+$\tau = \tau_0\exp(U/k_BT)$. Bei 22\,nm und Raumtemperatur liegt $\tau$
+im Bereich von Mikrosekunden bis Millisekunden --- kein stabiles Bit,
+aber auch kein kohärentes Qubit.
+
+Die FFGFT-Einordnung: Das Schaltverhalten ist deterministisch auf der
+sub-Planck-Zeitskala $t_0 = t_P/7500\approx3{,}6\times10^{-47}$\,s;
+was als thermische Stochastizität erscheint, ist die makroskopisch
+unaufgelöste Abtastung dieser deterministischen Dynamik. Die scheinbare
+Zufälligkeit ist epistemisch, nicht ontologisch.\status{S}
+
+\subsection*{Rekonfigurierbare Funktion}
+
+Durch Wahl der magnetischen Vorspannung kann dasselbe p-Bit als
+stochastischer Schalter, als erzwungener Schalter oder als analoger
+Komparator betrieben werden. Das macht p-Bits zu Bausteinen für
+probabilistische Schaltkreise (p-Bits-Netzwerke), die wie Boltzmann-
+Maschinen trainiert werden können und NP-harte Probleme ähnlich wie CIMs
+durch physikalische Relaxation angehen.
+
+FFGFT-Einordnung: Das p-Bit ist kein Quantenobjekt (kein kohärenter
+Überlagerungszustand), sondern eine thermisch fluktuierende klassische
+Mode. Im Torusformalismus entspricht es einer Mode, deren Phase $\theta$
+durch thermisches Rauschen vollständig randomisiert ist --- der Grenzfall
+maximaler Dekohärenz auf dem Träger.
+
+\subsection*{Warum 22 nm: die geometrische Schwelle}
+
+Die kritische Größe für ein p-Bit bei Raumtemperatur entspricht der
+FFGFT-Stufe $N = 8{,}00$, also $L_8\approx22$\,nm. Das ist dieselbe
+Schwelle, bei der klassische Transistoren 2012 die Quantengrenze
+erreichten (Kapitel~\ref{ch:spin}). Drei unabhängige Phänomene konvergieren
+auf dieselbe geometrische Skala: Transistorgrenze, exzitonischer
+Bohr-Radius, p-Bit-Schwelle.\status{S}
+
+\section{Photonenchip: Raumtemperatur-Quantenphotonik}
+
+Chinas CHIPX/Touring-Quantum-Chip (2025) ist ein monolithischer
+6-Zoll-Dünnfilm-Lithiumniobat (TFLN)-Wafer mit über 1000 optischen
+Komponenten. Kerndaten: $1000\times$-Speedup für parallele Tasks,
+$100\times$ geringerer Energieverbrauch, stabil bei Raumtemperatur,
+$12000$ Wafer pro Jahr Produktion.\status{E}
+
+\textbf{Warum Raumtemperatur funktioniert:} Optische Photonen haben
+$E\approx1$--2\,eV; $E/k_BT(300\,\text{K})\approx40$. Thermisches
+Rauschen kann keine optischen Photonen erzeugen; das System sitzt weit
+unterhalb der thermischen Schwelle (Kapitel~\ref{ch:qubit}). Der TFLN-
+Einkristall mit $\sim10^{23}$ Gitterplätzen ist geometrisch extrem
+robust.\status{K}
+
+\textbf{FFGFT-Einordnung:} Masselose Moden (Photonen) sind in der FFGFT
+Dreier-Orbits in $GF(27)^*$ --- strukturell von den massiven Fermionen
+(Fixpunkte $\{+1,-1\}$) getrennt (Frobenius-Trennung, Dok.~339).\status{B}
+Die photonische Plattform eignet sich für schlupflochfreie Bell-Tests und
+ist damit der natürliche Prüfstand für die $\xi$-Abweichung
+$\Delta\mathrm{CHSH}\approx\xi/(2\pi)\approx2\times10^{-5}$ --- wenn
+Detektionseffizienz und Kohärenzzeiten ausreichen.
+
+\textbf{Vorgeschlagene FFGFT-Optimierungen:} Drei Ansätze sind konzeptuell
+skizziert, alle noch nicht realisiert: (1) Topogie-Compiler, der
+topologische Qubit-Platzierung nach der $D_4$-Gitterstruktur vornimmt
+und SWAP-Gatter um 30--50\,\% reduzieren könnte; (2) harmonische Resonanz
+mit Qubit-Frequenzen auf $\xi$-Vielfachen; (3) Zeitfeld-Modulation zur
+aktiven Kohärenzerhaltung. Status: [S] für alle drei.
+
+\quelle{Dok.~083 (Photonenchip 2025), Dok.~161 (Coherent Ising Machine), Dok.~183 (Google Willow, April 2026), Dok.~184 (p-Bit), Dok.~339 (Frobenius-Trennung), Dok.~343 (Auflösungsboden)}
