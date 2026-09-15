@@ -171,6 +171,61 @@ Drei naheliegende geometrische Zugänge sind ausgeschlossen: Keine
 kompakte Geometrie liefert das $T\ln T$-Wachstum; $\xi$ verschiebt die
 kritische Linie nicht; die $\xi$-Leiter diskretisiert die Nullstellen nicht.
 
+\section{Klassischer PC versus Quantenrechner}
+
+\textbf{Deterministischer Einzeldurchlauf.}\status{K}
+Die FFGFT-Zustandsabbildung $(z,r,\theta)\leftrightarrow(\alpha,\beta)$
+ist bijektiv (Kapitel~\ref{ch:hilbertraum}). Daraus folgt: Alle
+algorithmischen Schritte --- Periodenfindung, Faktorextraktion,
+Gatteroperationen --- sind auf dem PC in einem einzigen Durchlauf
+vollständig bestimmt. Kein Wiederholen, keine Shot-Mittelung, keine
+Statistik. Der IBM-Kingston-Vergleich brauchte auf der QC-Seite
+50~Läufe à 2048~Shots, weil der QC probabilistisch misst; die
+FFGFT-Simulation am PC: ein einziger Lauf, identisches Ergebnis.
+
+\textbf{Aufbereitung: PC schneller als QC.}\status{K}
+Die modulare Exponentiation $a^x\bmod N$ ist auf dem PC direktes
+klassisches Rechnen ohne Overhead. Der Quantenschaltkreis für
+dieselbe Aufgabe ist durch Reversibilität, Uncomputation und
+Toffoli-Gatter nachweislich \emph{teurer} als die klassische
+Implementierung (Dok.~176). Shor hat die Aufbereitung in
+Superposition nicht spezifiziert; sie ist und bleibt ein
+arithmetisches Problem in jeder Technologie gleich aufwändig.
+
+\textbf{Klassische Verfahren übertreffen die Periodensuche.}\status{K}
+Die FFGFT-Periodensuche sequenziell: $O(N)$, gemessener
+Wachstumsexponent der mittleren Ordnung $0{,}95$. Pollard~$\rho$
+braucht 3--7 Schritte für dieselbe Aufgabe, Probeteilung 58--180.
+Die klassische Resonanzsuche scheitert zudem doppelt: $O(N)$
+Schritte \emph{und} eine Frequenzauflösung von $1/N^2$, die bei
+RSA-Größen unterhalb jeder Zahlendarstellung liegt
+(\texttt{s1\_periodensuche.py}, Dok.~176).
+
+\textbf{Verschränkung trägt den Rechenvorteil nicht.}\status{K}
+Gottesman-Knill (1998): Jeder Clifford-Schaltkreis ($H$, $S$,
+CNOT) ist klassisch in Polynomzeit simulierbar --- unabhängig von
+der erzeugten Verschränkung. Ein GHZ-Zustand mit $n = 1000$
+Qubits ist maximal verschränkt und braucht klassisch nur $2n^2$
+Bits Speicher. Was den Quantenvorteil trägt, ist ungeklärt;
+Kontextualität und Nicht-Stabilisiertheit sind Kandidaten, keiner
+ist etabliert.
+
+\textbf{Die einzige Ausnahme: QFT in Superposition.}\status{K}
+Der einzige echte Quantenvorteil liegt ausschließlich darin,
+dass die QFT die Periode über alle $x$ gleichzeitig in
+Superposition ausliest --- $O((\log N)^3)$ statt $O(N)$. Das
+kann ein klassischer PC nicht replizieren. Dies ist die
+\emph{einzige} Stelle, an der der QC schneller wäre.
+
+\textbf{Derzeit nicht erreichbar.}\status{K}
+Für RSA-2048 wären $4{,}1\times10^6$ physikalische Qubits und
+$8{,}6\times10^9$ Gatter nötig --- eine Ressourcengrenze,
+prinzipiell überwindbar, aber Stand~2026 um Größenordnungen
+nicht erreicht. Google~Willow unterschreitet den
+Fehlerkorrektur-Schwellenwert für logische Qubits, liegt aber
+weit unterhalb der für Shor nötigen Skalierung. Die QFT-Ausnahme
+existiert theoretisch; sie ist praktisch irrelevant.
+
 \section{Experimentelle Validierung}
 
 IBM Kingston (28. Mai 2026), 50 unabhängige Läufe, 2048 Shots pro Lauf:
