@@ -7,13 +7,21 @@ Two exact statements about the icosahedral port module P = A + T1 + T2 + H:
       three-dimensional blocks T1 <-> T2 (Laplacian eigenvalues 5-sqrt5 <-> 5+sqrt5)
       and fixes A and H. Hence no structure defined over Q (a lattice, an
       integer character, exact rational repair arithmetic) can distinguish
-      T1 from T2. Choosing T1 as "space" is a choice of the sign of sqrt5.
-      The sum T1 + T2 is the only 6-dimensional A5-submodule with integer
-      character; this is the "doubling" 6 = 3 + 3' of FFGFT Dok. 285.
+      T1 from T2 as a symmetry statement. T1 + T2 is the only 6-dimensional
+      A5-submodule with integer character that contains a triplet (1 + H is
+      the other one); this is the "doubling" 6 = 3 + 3' of FFGFT Dok. 285.
+      The selection of T1 happens at the archimedean place: see section 6.
 
   (2) Restricting to a 3-fold rotation C3 < A5 (Dok. 293, C3-in-A5 embedding)
       the port space splits into Z3-eigenspaces of dimensions 4 + 4 + 4, with
       blockwise A -> 1, T1 -> 1+w+w^2, T2 -> 1+w+w^2, H -> 1+2w+2w^2.
+
+  (3) The dynamics lives in R, not in abstract Q: the five seam neighbours of
+      a port sum to +sqrt5 v (nearest neighbours), the thirty second
+      neighbours (great icosahedron) to -sqrt5 v, and a rational iteration of
+      I - L/60 on a rational vector has centered-norm ratios converging to the
+      real value ((55+sqrt5)/60)^2, never to its conjugate. The slow triplet
+      is selected by the rates at the archimedean place.
 
 Reads the seam list from native_trace.json (ipi_native_baseline_2026-09-14)
 or falls back to the canonical icosahedron. All arithmetic exact (sympy).
@@ -181,5 +189,34 @@ for name in ("A", "T1", "T2", "H"):
     assert got == expected[name], (name, got)
     print("  ", name, "| C3 ->", got)
 print("Trivial Z3 part: dim 4; non-trivial part: dim 8.")
+
+# ----------------------------------------------------------------------
+# 6. the selection happens at the archimedean place
+# ----------------------------------------------------------------------
+verts = []
+for s1, s2 in itertools.product((1, -1), repeat=2):
+    verts += [(0, s1, s2 * phi), (s1, s2 * phi, 0), (s2 * phi, 0, s1)]
+Vm = sp.Matrix(verts)                                       # 12 x 3
+d2 = lambda i, j: sp.simplify(sum((a - b) ** 2 for a, b in zip(verts[i], verts[j])))
+A1 = sp.Matrix(n, n, lambda i, j: 1 if i != j and d2(i, j) == 4 else 0)            # edges
+A2 = sp.Matrix(n, n, lambda i, j: 1 if i != j and sp.simplify(d2(i, j) - 4 * phi**2) == 0 else 0)  # second neighbours
+assert sum(A1) == 60 and sum(A2) == 60
+assert (A1 * Vm - s5 * Vm).applyfunc(sp.simplify) == sp.zeros(n, 3)
+assert (A2 * Vm + s5 * Vm).applyfunc(sp.simplify) == sp.zeros(n, 3)
+print("Nearest neighbours sum to +sqrt5 v, second neighbours (great icosahedron) to -sqrt5 v")
+# rational iteration of I - L/60 (L from the canonical embedding, isomorphic to the trace graph)
+Lc = 5 * sp.eye(n) - A1
+M = sp.eye(n) - Lc / 60
+v = sp.Matrix([sp.Rational(k + 1) for k in range(n)])
+def centered(x): t = sum(x); return sum(e**2 for e in x) - t**2 / n
+prev = centered(v)
+for k in range(1, 61):
+    v = M * v; c = centered(v)
+    ratio = c / prev; prev = c
+target, conj = ((55 + s5) / 60) ** 2, ((55 - s5) / 60) ** 2
+assert abs(float(ratio) - float(target)) < 1e-4 and abs(float(ratio) - float(conj)) > 0.1
+print("Rational iteration of I - L/60: centered-norm ratio after 60 steps = %.6f -> ((55+sqrt5)/60)^2 = %.6f, not %.6f"
+      % (float(ratio), float(target), float(conj)))
+print("=> the slow triplet is selected by the real rates (archimedean place); the sign of sqrt5 is fixed by the dynamics")
 
 print("ALL CHECKS PASSED")
