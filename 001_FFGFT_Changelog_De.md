@@ -8,6 +8,33 @@ Neue Einträge werden hier oben eingefügt (neueste zuerst).
 ---
 ---
 
+## 15. September 2026 — v1.4.0: Quantenmechanik ist deterministisch (QMB-Buch)
+### QMB — *Quantenmechanik ist deterministisch / Quantum Mechanics is Deterministic* (De 107 S. / En 105 S.)
+
+Narrativ-Buch zur geometrischen Lesart der Quantenmechanik durch FFGFT.
+4 Teile, 15 Kapitel, 3 Anhänge. DOI: https://doi.org/10.5281/zenodo.22739112
+
+**Hauptergebnisse:**
+- Deterministischer Einzeldurchlauf: Alle Quanten-Logikbausteine (Gatter, Deutsch, Grover,
+  Bell, Periodenfindung) auf PC in einem einzigen deterministischen Lauf realisierbar **[K]**
+- PC schneller als QC — Ausnahme: QFT in Superposition (theoretischer Vorteil O((log N)³)) **[K]**
+- Bijektive Zustandsbrücke (z,r,θ)↔(α,β) vollständig verifiziert **[K]**
+- Mathematik-Analogie für Instantanität: T̃·m=1 als lokale Zwangsbedingung, kein Signal **[K]**
+- CHSH-Auflösungsboden Δ_CHSH = ξ/(2π) ≈ 2×10⁻⁵ pro Messung **[K/S]**
+
+**Klarstellungen (keine Korrekturen an bestehenden Dokumenten):**
+- Frühere 40×-Determinismus-Meldung zurückgezogen (Stichproben-Artefakt)
+- CHSH-Auflösungsboden ≠ kumulative Formel Dok. 022/147 (nicht vergleichbar)
+- Weyl-Obstruktion gilt nicht für Shors endliche Aufgabe
+- IBM-Kingston-Test: Konsistenzprüfung, kein Nachweis
+
+Prüfskripte: 10×`QMB_Skripte/pruef_*.py` — alle Assertions bestanden.
+→ [DE](2/pdf/FFGFT_QM_Bell_QC_De.pdf) · [EN](2/pdf/FFGFT_QM_Bell_QC_En.pdf)
+
+Register: kein Eintrag (neues Buch, keine Korrekturen zu bestehenden Dokumenten).
+
+---
+
 ## 5. September 2026 — Dok. 006 Sprachkorrektur v (R112)
 
 ### Dok. 006 — v = 246 GeV präzisiert (De+En)
