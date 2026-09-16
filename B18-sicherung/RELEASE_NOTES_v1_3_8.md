@@ -1,6 +1,6 @@
 # Release Notes — v1.3.8 (10 September 2026)
 
-**DOI:** to be assigned on Zenodo publication — supersedes v1.3.7
+**DOI:** https://doi.org/10.5281/zenodo.22695407
 Running corrections: **[2/pdf/190_T0_Korrekturen_De.pdf](2/pdf/190_T0_Korrekturen_De.pdf)**
 Change log: **[001_FFGFT_Changelog_De.md](001_FFGFT_Changelog_De.md)**
 
@@ -95,7 +95,7 @@ Key contributions in manuscript beyond Doc. 360:
 - **Data availability statement**, funding statement, conflict of interest
   declaration, AI assistance declaration (COPE-compliant), author biography.
 
-Status: ready for submission pending Zenodo DOI for v1.3.7.
+Status: ready for submission DOI: 10.5281/zenodo.22695407
 
 ---
 

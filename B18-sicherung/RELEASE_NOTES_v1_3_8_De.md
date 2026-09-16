@@ -1,6 +1,6 @@
 # Release Notes — v1.3.8 (10. September 2026)
 
-**DOI:** wird bei Zenodo-Publikation vergeben — ersetzt v1.3.7
+**DOI:** https://doi.org/10.5281/zenodo.22695407
 Laufende Korrekturen: **[2/pdf/190_T0_Korrekturen_De.pdf](2/pdf/190_T0_Korrekturen_De.pdf)**
 Änderungsprotokoll: **[001_FFGFT_Changelog_De.md](001_FFGFT_Changelog_De.md)**
 
@@ -95,7 +95,7 @@ Wesentliche Beiträge im Manuskript über Dok. 360 hinaus:
 - Datenverfügbarkeitserklärung, Fördernachweis, Interessenkonflikt-Erklärung,
   KI-Assistenz-Erklärung (COPE-konform), Autorenbiografie.
 
-Status: einreichungsbereit ausstehend Zenodo-DOI für v1.3.7.
+Status: einreichungsbereit DOI: 10.5281/zenodo.22695407
 
 ---
 
