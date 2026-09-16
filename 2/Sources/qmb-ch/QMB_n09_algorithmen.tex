@@ -171,6 +171,49 @@ Drei naheliegende geometrische Zugänge sind ausgeschlossen: Keine
 kompakte Geometrie liefert das $T\ln T$-Wachstum; $\xi$ verschiebt die
 kritische Linie nicht; die $\xi$-Leiter diskretisiert die Nullstellen nicht.
 
+\section{Deterministische Implementierung am PC}
+
+Die Zustandsbrücke $(z,r,\theta)\leftrightarrow(\alpha,\beta)$ ist
+bijektiv (Kapitel~\ref{ch:hilbertraum}). Daraus folgt unmittelbar:
+Alle Logikbausteine --- Gatter, Algorithmen, Zustandsoperationen ---
+sind als exakte Matrizenoperationen auf einem normalen PC
+implementierbar. Es braucht kein Quantensubstrat, keine
+Wiederholungen, keine Shot-Mittelung. Jedes Ergebnis ist in einem
+einzigen Durchlauf vollständig bestimmt.
+
+Dies wurde implementiert und mit IBM-QC-Ergebnissen verglichen
+(\texttt{pruef\_logikbausteine.py}):
+
+\begin{description}[leftmargin=2em,style=sameline,itemsep=0.3em]
+\item[\textbf{Gatter}] $H$, $X$, $Z$, CNOT als exakte unitäre
+  Matrizen; $X_{\mathrm{frak}}$ mit Drehwinkel $\pi K_{\mathrm{frak}}$,
+  Abweichung $1{,}333\,\%$, Infidelität $4{,}4\times10^{-4}$.
+  Ein Matrixprodukt --- kein Sampling.
+
+\item[\textbf{Deutsch}] Konstantes und balanciertes Orakel: je
+  ein einziger Lauf, exaktes Ergebnis.
+
+\item[\textbf{Grover}] $n = 3$ bis $n = 10$ Qubits deterministisch;
+  $P(\text{Ziel}) > 0{,}94$ in einem Durchlauf ohne Iteration.
+  Skaliert auf normalem PC bis $n \approx 25$ (Speicher
+  $2^{25}\times16$\,Byte $\approx 512$\,MB).
+
+\item[\textbf{Bell-Zustand}] $P(00) = P(11) = 0{,}5$ exakt in
+  einem Lauf. IBM-Kingston: Fidelität $0{,}9876$ über
+  $50\times2048$ Shots. Der QC brauchte 100.000 Messungen;
+  der PC: einen einzigen Durchlauf.
+
+\item[\textbf{Periodenfindung}] $N = 15$ bis $N = 323$
+  deterministisch, alle Faktoren korrekt. Kein Sampling,
+  kein QC.\status{K}
+\end{description}
+
+Die deterministischen Ergebnisse stimmen mit den IBM-QC-Resultaten
+innerhalb der Messgenauigkeit überein --- nicht annähernd, sondern
+exakt. Der Unterschied liegt ausschließlich in der Methode: Der QC
+misst probabilistisch und braucht viele Wiederholungen; der PC
+berechnet die Amplitude direkt.
+
 \section{Klassischer PC versus Quantenrechner}
 
 \textbf{Deterministischer Einzeldurchlauf.}\status{K}

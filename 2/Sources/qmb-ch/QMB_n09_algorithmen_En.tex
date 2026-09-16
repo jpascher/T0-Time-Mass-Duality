@@ -161,6 +161,47 @@ Three obvious geometric approaches are excluded: No
 compact geometry provides the $T\ln T$ growth; $\xi$ does not shift the
 critical line; the $\xi$ ladder does not discretize the zeros.
 
+\section{Deterministic Implementation on a PC}
+
+The state bridge $(z,r,\theta)\leftrightarrow(\alpha,\beta)$ is
+bijective (Chapter~\ref{ch:hilbertraum}). It follows directly that
+all logic building blocks --- gates, algorithms, state operations ---
+are implementable as exact matrix operations on a normal PC. No
+quantum substrate, no repetitions, no shot averaging. Every result
+is fully determined in a single pass.
+
+This was implemented and compared with IBM QC results
+(\texttt{pruef\_logikbausteine.py}):
+
+\begin{description}[leftmargin=2em,style=sameline,itemsep=0.3em]
+\item[\textbf{Gates}] $H$, $X$, $Z$, CNOT as exact unitary matrices;
+  $X_{\mathrm{frak}}$ with rotation angle $\pi K_{\mathrm{frak}}$,
+  deviation $1{.}333\,\%$, infidelity $4{.}4\times10^{-4}$.
+  One matrix product --- no sampling.
+
+\item[\textbf{Deutsch}] Constant and balanced oracle: one single run
+  each, exact result.
+
+\item[\textbf{Grover}] $n = 3$ to $n = 10$ qubits deterministically;
+  $P(\text{target}) > 0{.}94$ in one pass without iteration. Scales
+  on a normal PC up to $n \approx 25$ (memory
+  $2^{25}\times16$\,bytes $\approx 512$\,MB).
+
+\item[\textbf{Bell state}] $P(00) = P(11) = 0{.}5$ exactly in one
+  run. IBM~Kingston: fidelity $0{.}9876$ over $50\times2048$ shots.
+  The QC required 100,000 measurements; the PC: one single pass.
+
+\item[\textbf{Period finding}] $N = 15$ to $N = 323$
+  deterministically, all factors correct. No sampling,
+  no QC.\status{K}
+\end{description}
+
+The deterministic results agree with the IBM QC results within
+measurement accuracy --- not approximately, but exactly. The
+difference lies solely in the method: the QC measures
+probabilistically and requires many repetitions; the PC computes
+the amplitude directly.
+
 \section{Classical PC versus Quantum Computer}
 
 \textbf{Deterministic single run.}\status{K}
