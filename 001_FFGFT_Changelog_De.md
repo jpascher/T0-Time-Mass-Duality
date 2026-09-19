@@ -561,3 +561,78 @@ nach Task Force 1996 / Shaffer 2017:
 **Nächster Schritt [S]:** Validierung mit registriertem PhysioNet-Zugang.
 
 **Register:** R119 eingetragen.
+
+---
+
+## 19. September 2026 — Dok. 366: Felder in der FFGFT: Energie, Fluss und Geometrie
+
+### Dok. 366 — Felder in der FFGFT: Energie, Fluss und Geometrie (De, 9 Seiten)
+
+Anlass: Goubau-Leitungsexperiment (Einzel-Draht-Energieübertragung) als Ausgangspunkt
+für die FFGFT-Feldstruktur.
+
+**Inhalt:**
+
+**§1 Ausgangspunkt.** Strom braucht Rückpfad — konventionelles Bild. Das Goubau-Experiment
+(G.~Goubau, 1950) widerlegt es auf der Feldebene: Energie fließt im Feld um den Draht,
+nicht im Draht selbst. [Q/E]
+
+**§2 Poynting-Vektor als primäre Beschreibung.** $\mathbf{S}=\mathbf{E}\times\mathbf{H}$;
+über den Leitungsquerschnitt integriert ergibt sich exakt $P=V\cdot I$ (kein
+Näherungsargument, Konsequenz der Maxwell-Gleichungen). [E]
+
+**§3 Goubau-Leitung: Felder ohne Rückleiter.** Feldkonfiguration, Dielektrikum als
+Brechungsmedium (hält Feldlinien am Draht), Kegelübergang als Impedanzanpassung
+(50~Ω → ~300~Ω). Historische Verlustangabe: 6~dB/Meile → ~25~% Leistung.
+$I^2R$-Verluste zeigen: Strom fließt im Draht; beide Bilder beschreiben dieselbe
+Physik. [E/Q]
+
+**§4 FFGFT-Einheiten.** Mit $c=\hbar=\alpha=1$ (Dok.~011, 365 Schicht~2):
+$I=m$, $V=E$, $P=E\cdot m$ — exakt aus $\tilde{T}\cdot m=1$.
+Maxwell-Gleichungen ohne Vorfaktoren. [K]
+
+**§5 Feldlinien auf $T^4/\mathbb{Z}_3$.** Wicklungszahlen $(n_\theta,n_\varphi)$
+als topologische Invarianten; klassifizieren Moden und bestimmen Massenskalen
+über $\tilde{T}\cdot m=1$. Feldlinien-Umschnappen in der G-line als makroskopisches
+Beispiel für lokale Energiefluss-Optimierung. [B/S]
+
+**§6 Dualitätstabelle.** Feld-Sicht (Poynting) und Strom-Sicht (Ohm) sind
+reziproke Projektionen — Analogon zur Zeit-Masse-Dualität. Reaktive Leistung
+entspricht nicht-propagierenden Fourier-Moden unterhalb der Spektrallücke. [S]
+
+**§7 Exakte Identität.** Poynting-Satz hergeleitet; in FFGFT-Einheiten:
+$P=E\cdot m$ strukturell aus Grundformel. [K]
+
+**Prüfskript:** `2/python/Dok366_Skripte/pruef_366_felder_ffgft.py` — 14/14.
+
+**Register:** kein Eintrag (neues Dokument, keine Korrektur älterer Dokumente).
+
+---
+
+## 18. September 2026 — Populärwissenschaftliches Buch: Dunkle Materie — eine Illusion
+
+### Buch De/En — Dunkle Materie — eine Illusion / Dark Matter — an Illusion (6×9 in, ~20/18 Seiten)
+
+Populärwissenschaftliches Kindle/Taschenbuch-Format (6×9 in), 10 Kapitel De / En.
+Dateien: `2/Sources/wr_narrativ/FFGFT_Dunkle_Materie_De/En.tex`,
+PDFs unter `2/Sources/wr_narrativ/pdf/`.
+
+**Kapitelstruktur (De):**
+1. Das Rätsel der flachen Kurven (Vera Rubin, Rotationskurven)
+2. Was Newton wirklich sagt — und wo er aufhört
+3. Die Grundrelation: Zeit und Masse als Kehrwerte ($\tilde{T}\cdot m=1$)
+4. Die Übergangsskala $a_0$ — eine Grenze aus erster Ableitung
+5. Der Test: DDO 154 und die Milchstraße
+6. Der Bullet Cluster — das scheinbar stärkste Argument
+7. Dunkle Energie — ein Konstrukt der falschen Lesart
+8. Was die Daten wirklich entscheiden können
+9. Eine ehrliche Bilanz
+10. Was weitergeht
+
+**Kernposition:** Rotationskurven folgen aus $\tilde{T}\cdot m=1$ im Trägheitsregime
+($a \ll a_0$) ohne dunkle Materie als Substanz; $a_0$ ist keine freie
+Anpassungsgröße sondern folgt aus der FFGFT-Grundstruktur. Bullet Cluster
+und Gravitationslinsen werden als Argumente für dunkle Materie kritisch
+eingeordnet — kein schließender Beweis.
+
+**Register:** kein Eintrag (neues Dokument, keine Korrektur älterer Dokumente).

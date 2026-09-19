@@ -1,0 +1,1455 @@
+% 366_Feldstruktur_FFGFT_En_ch.tex
+% Johann Pascher, 19 September 2026
+% Fields in FFGFT: Energy, Flux and Geometry
+
+\providecommand{\BM}{\textbf{[B]}}
+\providecommand{\KM}{\textbf{[K]}}
+\providecommand{\SM}{\textbf{[S]}}
+\providecommand{\SetzM}{\textbf{[POSIT]}}
+\providecommand{\QM}{\textbf{[Q]}}
+\providecommand{\EM}{\textbf{[E]}}
+\providecommand{\XM}{\textbf{[X]}}
+
+\chapter*{Fields in FFGFT: Energy, Flux and Geometry}
+\addcontentsline{toc}{chapter}{Fields in FFGFT: Energy, Flux and Geometry}
+
+\begin{abstract}
+This document develops a unified approach to the field structure of FFGFT,
+starting from an unexpected experimental result and ending at the orbital
+resonances of the planets. The entry point is deliberately concrete: the
+Goubau line experiment --- energy transport along a single wire without
+a return conductor --- forces the question of where energy actually flows
+to be taken seriously. The answer has been fully present in classical field
+theory since Poynting (1884); it is regularly obscured in introductory
+courses, however, by the useful but simplified picture of current and
+return path.
+
+The goal is not to claim new physics. The goal is to make visible that
+antenna engineering, atomic physics, crystallography and celestial mechanics
+all realise structurally the same principle: the geometry of the carrier
+determines the permitted coupling angles. Coupling between two field systems
+is only possible where their mode structures are compatible. Incompatible
+modes do not couple --- regardless of the field strength.
+
+In FFGFT this connection is not an analogy but a consequence of the
+fundamental equation $\tilde{T}\cdot m = 1$ on the compact carrier
+$T^4/\mathbb{Z}_3$. The winding numbers $(n_\theta, n_\varphi)$ on this
+carrier are the topological invariants behind the selection rules of atomic
+physics, the Bragg conditions of crystallography and the integer orbital
+resonances of celestial mechanics. In FFGFT units ($c=\hbar=\alpha=1$):
+$I=m$, $V=E$, $P=E\cdot m$ --- exactly, not approximately.
+
+Antenna engineering serves as the guide because it is the most mature
+practical application of electromagnetic field theory: the coupling
+conditions are not abstract there but codified in standards, measurement
+protocols and commercial simulators. What is known there as the Friis
+equation, impedance matching and array factor appears in atomic physics
+as a selection rule, in the crystal as the Bragg condition and in the
+solar system as the Laplace resonance --- the same structure, different carriers.
+\end{abstract}
+
+% ============================================================
+\section*{What this document explains --- and what it does not}
+\addcontentsline{toc}{section}{What this document explains --- and what it does not}
+
+Four questions are addressed, developed in this order:
+
+\textbf{1. Where does energy flow?} Not in the conductor, but in the field
+around it. The Goubau experiment forces this answer experimentally; the
+Poynting vector delivers it mathematically exactly. Current and voltage
+are projections, not primary quantities (\S\,1--3).
+
+\textbf{2. What does an antenna do to the field?} It actively reshapes
+it --- in transmission by imposing boundary conditions, in reception by
+acting as a selective mode filter. Passive in a field it scatters; in
+near-field proximity two antennas mutually deform each other. This is
+not superposition but mutual deformation of mode structures (\S\,4--9).
+
+\textbf{3. What is a particle in this picture?} A stable field node ---
+a localised mode concentration on the carrier. The near field of the
+particle is the Coulomb field; the far field arises only under
+acceleration or a state transition. The selection rules of atomic
+physics are the mode-compatibility conditions of this node (\S\,10).
+
+\textbf{4. Does the principle hold on all scales?} Yes --- from the
+antenna through the atom and the crystal to the planetary orbits. The
+coupling condition is always the same: integer phase compatibility of
+the mode spectra. The scale changes; the structure of the condition
+does not (\S\,11).
+
+What this document does \emph{not} explain: why the carrier is
+$T^4/\mathbb{Z}_3$ (that is \SetzM\ in Doc.~365); why $\xi = 4/30\,000$
+(that follows from Galois group orders, Doc.~338/365); how concrete
+masses follow from mode compatibility (Doc.~314, 317--323). Those
+documents are the sources cited here. This document is the approach
+from the concrete to the structural.
+
+\vspace{0.5em}
+\noindent
+\textit{Reading note:} Readers familiar with antenna engineering may skim
+\S\,1--3 and enter at \S\,4. Those who know the FFGFT background will find
+the connection to mode structure in \S\,5, \S\,10 and \S\,11.
+
+% ============================================================
+\section*{List of symbols}
+\addcontentsline{toc}{section}{List of symbols}
+
+\medskip
+\textbf{Epistemic markers:}
+\begin{tabular}{@{}ll@{}}
+\textbf{[B]} & algebraically proven (Python script, exact arithmetic) \\
+\textbf{[K]} & numerically confirmed \\
+\textbf{[S]} & structurally plausible, identification open \\
+\textbf{[POSIT]} & motivated input, not derived \\
+\textbf{[E]} & established external mathematics or physics \\
+\textbf{[X]} & checked and negative \\
+\end{tabular}
+
+\medskip
+\begin{longtable}{@{}lp{11cm}@{}}
+\toprule
+\textbf{Symbol} & \textbf{Meaning} \\
+\midrule
+\multicolumn{2}{l}{\textit{Fields and energy}} \\
+$F^{\mu\nu}$ & electromagnetic field strength tensor \\
+$\mathbf{E}, \mathbf{B}$ & electric and magnetic field \\
+$\mathbf{H}$ & magnetic field strength ($\mathbf{H} = \mathbf{B}/\mu_0$ in vacuum) \\
+$\mathbf{S} = \mathbf{E}\times\mathbf{H}$ & Poynting vector (energy flux density, W/m$^2$) \\
+$j^\nu$ & electromagnetic four-current \\
+$u$ & electromagnetic energy density \\
+$\varepsilon_0,\,\mu_0$ & permittivity of free space, permeability of free space \\
+$\lambda$ & wavelength ($\lambda = c/f$) \\
+$\omega = 2\pi f$ & angular frequency \\
+$k = 2\pi/\lambda$ & wave number \\
+$\theta$ & elevation angle (radiation pattern) or glancing angle (Bragg) \\
+$\psi$ & polarisation mismatch angle between transmit and receive antenna \\
+\midrule
+\multicolumn{2}{l}{\textit{FFGFT quantities}} \\
+$\tilde{T}$ & intrinsic time scale; $\tilde{T} \cdot m = 1$ \\
+$\xi = 4/30\,000$ & dimensionless scaling parameter of FFGFT \\
+$T^4/\mathbb{Z}_3$ & compact orbifold carrier of FFGFT \\
+$(n_\theta, n_\varphi)$ & winding numbers of a field mode on $T^4$; topological invariants \\
+\midrule
+\multicolumn{2}{l}{\textit{Antenna engineering}} \\
+$R_\mathrm{rad}$ & radiation resistance (resistance the antenna presents for radiated power) \\
+$G$ & antenna gain (relative to isotropic radiator) \\
+$D$ & directivity (gain without losses) \\
+$A_\mathrm{eff}$ & effective aperture; $A_\mathrm{eff} = (\lambda^2/4\pi)\,G$ \\
+$\eta_A$ & aperture efficiency ($0 < \eta_A \leq 1$) \\
+$G_T, G_R$ & gain of transmit and receive antenna (Friis equation) \\
+$\Delta\theta_{3\,\mathrm{dB}}$ & half-power beamwidth of main lobe \\
+$Z_\mathrm{ant}$ & input impedance of the antenna \\
+$X_\mathrm{ant}$ & reactance (imaginary part of $Z_\mathrm{ant}$) \\
+$\phi_n$ & feed phase of the $n$-th element in a phased array \\
+$AF(\theta)$ & array factor (interference pattern of the phased array) \\
+$\varepsilon_r$ & relative permittivity (dielectric constant) \\
+$\varepsilon_\mathrm{eff}$ & effective permittivity of a microstrip line \\
+$\Delta L$ & fringe correction of the patch antenna length \\
+$k_\mathrm{SPP}$ & wave number of a surface plasmon polariton \\
+$\varepsilon_m, \varepsilon_d$ & (complex) permittivity of metal and dielectric (SPP) \\
+\midrule
+\multicolumn{2}{l}{\textit{Atomic physics and scales}} \\
+$\hbar$ & reduced Planck constant \\
+$\alpha \approx 1/137$ & fine-structure constant; in FFGFT units $\alpha = 1$ \\
+$n, l, m$ & principal, orbital angular momentum, and magnetic quantum numbers \\
+$E_n$ & energy levels of the hydrogen atom; $E_n = -13.6\,\mathrm{eV}/n^2$ \\
+$r_e \approx 2.82\,\mathrm{fm}$ & classical electron radius \\
+$\lambda_C = \hbar/m_e c$ & Compton wavelength of the electron (${\approx}386\,\mathrm{fm}$) \\
+$a_0 \approx 52\,917\,\mathrm{fm}$ & Bohr radius \\
+$\sigma_T$ & Thomson cross-section; $\sigma_T = \tfrac{8\pi}{3}r_e^2$ \\
+$S_{AB}$ & overlap integral of two atomic orbitals $\psi_A$, $\psi_B$ \\
+$Q$ & normal coordinate of a molecular vibration \\
+$\vec{\mu}$ & electric dipole moment of a molecule \\
+$d$ & lattice plane spacing in a crystal (Bragg condition) \\
+$n_1, n_2, n_3$ & mean motions (orbital frequencies) of the Galilean moons \\
+\bottomrule
+\end{longtable}
+
+% ============================================================
+\section{Starting point: fields or current?}
+% ============================================================
+
+Every introductory course on electricity emphasises the principle: current
+needs a return path. Electrons leaving one conductor must return on the
+other. This picture is entirely correct for technical purposes --- it
+describes circuits precisely. It conceals a deeper question, however:
+where does the energy actually flow?
+
+The Goubau experiment \QM\ (G.~Goubau, 1950) demonstrates the answer
+experimentally. A high-frequency signal source (${\sim}900\,\mathrm{MHz}$)
+feeds a single isolated wire via a conical transition (launcher). At the
+other end an identical cone (catcher) converts the signal back into a
+coaxial line. Between the two cones there is no second conductor, no return
+path in the classical sense --- yet the arrangement transfers the signal
+with low losses \cite{Goubau1950}.
+
+A physical interruption of the field (for instance a hand placed over the
+wire) immediately interrupts the transfer. The energy flows in the field
+around the wire, not in the wire itself.
+
+% ============================================================
+\section{The Poynting vector as the primary description}
+% ============================================================
+
+The energy flux density of electromagnetic fields is the Poynting vector
+\cite{Stratton1941,Griffiths1999}:
+\[
+  \mathbf{S} = \mathbf{E} \times \mathbf{H}.
+\]
+Its direction (right-hand rule: $\mathbf{E} \to \mathbf{H}$, thumb in the
+direction of flux) indicates where energy is transported. The flux density
+integrated over the cross-section of a cable gives exactly the electrical
+power \EM:
+\[
+  P = \oint_A \mathbf{S} \cdot d\mathbf{A} = V \cdot I.
+\]
+This is not an approximation, not a coincidence --- it is an exact identity
+\cite{Griffiths1999}. Current and voltage are macroscopic projections of the
+field process, not the primary carriers of energy.
+
+\paragraph{Consequence.}
+For a coaxial line the $\mathbf{E}$ field lines run radially from the inner
+conductor to the outer shield; the $\mathbf{H}$ field lines form concentric
+rings. The cross product $\mathbf{E}\times\mathbf{H}$ points axially ---
+along the line. Energy flows in the dielectric between inner and outer
+conductor, not in the copper.
+
+% ============================================================
+\section{The Goubau line: fields without a return conductor}
+% ============================================================
+
+The Goubau line (G-line) has no outer conductor. The field configuration
+differs from the coaxial line only gradually when measured close enough to
+the wire \EM.
+
+\subsection*{Field configuration}
+
+A voltage pulse propagating on the wire creates alternating positive and
+negative potential regions along the conductor. The electric field lines
+run between these regions --- not from wire to return conductor, but from
+one section of the wire to the next. The dielectric (the red PVC insulation)
+slows the propagation of the fields and bends the field lines towards the
+wire axis, just as glass bends light rays \cite{Goubau1950,Harms1907}.
+This mechanism keeps the fields close to the wire --- it is not cosmetic
+but physically necessary for practical operation.
+
+\subsection*{The cone transition as impedance matching}
+
+The cones (launcher / catcher) match the wave impedance of the coaxial
+line ($50\,\Omega$) to the characteristic impedance of the G-line
+(typically a few $100\,\Omega$) \EM. Inside the cone the field lines
+expand from the coaxial pattern to the G-line pattern. At the opening of
+the cone the field lines snap and attach to the wire. The return path for
+the current in the coaxial cable is provided by the displacement currents
+inside the cone --- the complex fields in the cone supply exactly the right
+forces to drive electrons in the outer surface.
+
+\subsection*{Losses}
+
+Because current flows in the wire, $I^2 R$ losses occur --- exactly as in
+a conventional two-wire line. This shows: the G-line is not a pure
+waveguide problem. The energy flux has a field component (Poynting) and a
+conduction component (Ohm); both describe the same physics from different
+perspectives.
+
+% ============================================================
+\section{FFGFT units: current is mass, voltage is energy}
+% ============================================================
+
+In FFGFT units ($c = \hbar = \alpha = 1$, Doc.~011; Doc.~365 Layer~2)
+electromagnetic quantities simplify to geometric expressions in mass and
+time \KM:
+\begin{align*}
+  e &= 1 \quad \text{(elementary charge dimensionless)},\\
+  V &= E/e = E \quad \text{(voltage = energy)},\\
+  I &= e/T = 1/T = m \quad \text{(current = mass, via }\tilde{T}\cdot m=1\text{)}.
+\end{align*}
+The power equation then reads:
+\[
+  P = V \cdot I = E \cdot m,
+\]
+a relation that follows directly from the fundamental equation
+$\tilde{T}\cdot m=1$ (Doc.~365 Layer~1) \KM.
+
+\paragraph{Maxwell equations in FFGFT units.}
+In FFGFT units (Doc.~365 \S\,2) the Maxwell equations take the form:
+\[
+  \partial_\mu F^{\mu\nu} = j^\nu, \qquad \partial_{[\mu}F_{\nu\rho]}=0.
+\]
+No prefactors, no coupling constants other than $j^\nu$ as a geometric
+object. The coupling is absorbed in the unit choice, not eliminated; the
+physical content is identical to the SI system.
+
+% ============================================================
+\section{Field lines as geometric objects on $T^4/\mathbb{Z}_3$}
+% ============================================================
+
+In FFGFT the physical carrier is the compact orbifold $T^4/\mathbb{Z}_3$
+(Doc.~365 Layer~1) \SetzM. Fields are sections of vector bundles over this
+carrier; their periodicity conditions enforce discrete mode spectra.
+
+\subsection*{Field lines and winding numbers}
+
+On a torus $T^4$ non-trivial field configurations have topological
+invariants --- winding numbers $(n_\theta, n_\varphi)$ that record how many
+times a field line traverses the torus in each direction (Doc.~314;
+Doc.~247) \BM. These winding numbers classify the modes and determine ---
+via $\tilde{T}\cdot m=1$ --- the mass scale of the respective sector. A
+field line in this description is not an auxiliary construct but a
+topological object with physical relevance.
+
+\subsection*{Field lines in the G-line context}
+
+The behaviour of field lines in the Goubau line --- expansion in the cone,
+snapping at the opening, attachment to the wire --- is from this perspective
+a macroscopic example of the energy-flux minimisation principle. At every
+position and time the flux chooses the path that keeps the Poynting vector
+consistent with the carrier. This is not mysterious behaviour but the
+continuum version of topological optimisation on $T^4/\mathbb{Z}_3$.
+
+\subsection*{Field shape and carrier: no one-to-one correspondence}
+
+The fundamental equation $\tilde{T}\cdot m=1$ says nothing about the
+\emph{shape} of a field in space. It specifies which mass scales belong
+to which time scales --- not how the field looks geometrically. The compact
+carrier $T^4/\mathbb{Z}_3$ is the topology that prescribes the permitted
+boundary conditions; the actual field configurations on and around this
+carrier are different from it and variously deformed depending on the
+situation.
+
+A comparison clarifies this: the length of a guitar string determines the
+permitted frequency spectrum --- but the sound wave in the surrounding
+space is not string-shaped. Equally, $T^4/\mathbb{Z}_3$ enforces the mode
+spectrum; what appears as a field in the three-dimensional observation space
+is a projection of it, depending on the concrete boundary conditions,
+the ambient geometry and the mode occupation. Close to the conductor the
+G-line field is cylindrical, further away elliptically deformed, at
+inhomogeneities asymmetric --- none of this is torus-shaped. The torus is
+the internal geometric carrier, not the shape of the field.
+
+\subsection*{Interaction: carrier determines permitted coupling angles}
+
+When two fields from different carriers overlap in space, their interaction
+is not simple superposition. Each field carries its own mode structure,
+fixed by the winding numbers $(n_\theta, n_\varphi)$ of its carrier.
+Coupling is only possible where the phase conditions of both mode spectra
+are compatible --- where the winding numbers fit together as integers. The
+geometry of the carrier thus determines the \emph{angles} of interaction:
+under which phase relations energy transfer occurs and under which it does
+not \SM.
+
+This is worked out quantitatively in the corpus: the Galois lattice
+condition from Doc.~328 (coupling regimes) and Doc.~343~\S\,G$'$ specifies
+that coupling is only effective at frequency ratios in the Galois lattice
+$\{2,3,5,7,11,13\}$; the resolution floor $100\xi$ is the sharpest bound
+below which two modes are no longer distinguishable as separate. The
+apparently free shape of a field in space is the result of these
+compatibility conditions, projected onto the observation space \SM.
+
+% ============================================================
+\section{Antenna engineering as mature field theory}
+% ============================================================
+
+Antenna engineering is the most mature practical application of
+electromagnetic field theory. Decades of measurements, standards and
+calculation procedures are available; the coupling conditions are not
+abstract but anchored in handbooks, measurement protocols and commercial
+simulators. It is precisely for this reason the most suitable introduction
+to the general principle: the geometry of the carrier determines the
+permitted coupling angles.
+
+\subsection*{Fundamental quantities and their field interpretation}
+
+Every antenna is a transducer between a guided wave (coaxial cable,
+waveguide) and a free wave in space. The decisive quantities are \EM:
+
+\begin{itemize}[nosep]
+\item \textbf{Radiation resistance} $R_\mathrm{rad}$: The resistance the
+  antenna presents to the guided wave because it radiates energy into space.
+  For the half-wave dipole: $R_\mathrm{rad} \approx 73.1\,\Omega$.
+  In FFGFT units ($I=m$, $V=E$): $R_\mathrm{rad} = P/I^2 = E/m$.
+  The radiation resistance is thus an energy-per-mass relation --- a direct
+  echo of $\tilde{T}\cdot m=1$ \SM.
+
+\item \textbf{Gain} $G$ and \textbf{directivity} $D$: Gain gives the factor
+  by which the radiation intensity in the main direction exceeds that of an
+  isotropic radiator. It is a pure field-geometry problem: how do the phase
+  conditions of the carrier (antenna length, element spacing, feed phase)
+  concentrate the Poynting vector in a preferred direction? For the half-wave
+  dipole: $D = 1.64$ (2.15\,dBi).
+
+\item \textbf{Effective aperture} $A_\mathrm{eff}$: The area from which a
+  receiving antenna draws energy. Relation to gain \EM:
+  \[
+    A_\mathrm{eff} = \frac{\lambda^2}{4\pi}\,G.
+  \]
+  This formula is pure field geometry: wavelength and gain determine the
+  effective area, not the physical size of the antenna.
+\end{itemize}
+
+\subsection*{Friis transmission equation: coupling of two carriers}
+
+The Friis equation describes energy transfer between two antennas in free
+space \cite{Friis1946,Balanis2016}:
+\[
+  \frac{P_R}{P_T} = G_T\,G_R\left(\frac{\lambda}{4\pi r}\right)^2
+  \cos^2\psi,
+\]
+where $P_T$ is the transmitted, $P_R$ the received power, $G_T, G_R$ the
+gains of transmit and receive antennas, $r$ the distance and $\psi$ the
+polarisation mismatch angle.
+
+Every factor of this equation corresponds to a compatibility condition
+between the carriers:
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Factor} & \textbf{Physical meaning} & \textbf{FFGFT correspondence} \\
+\midrule
+$G_T$ & focussing of transmit carrier & mode geometry of source field \\
+$G_R$ & focussing of receive carrier & mode geometry of receive field \\
+$(\lambda/4\pi r)^2$ & free-space attenuation & geometric propagation factor \\
+$\cos^2\psi$ & polarisation overlap & winding-direction compatibility \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The $\cos^2\psi$ factor is the most direct expression of the principle: at
+orthogonal polarisation ($\psi=90°$) transfer is zero --- not because of
+absorption or loss but because the mode geometries are incompatible. No
+transmitter of arbitrary power overcomes this. This is identical to the
+statement about winding numbers: if they do not match, no energy transfer
+occurs \SM.
+
+\subsection*{Impedance matching as a phase condition}
+
+For an antenna to radiate at maximum efficiency its input impedance must
+be the complex conjugate of the source impedance (conjugate matching) \EM:
+\[
+  Z_\mathrm{ant} = R_\mathrm{rad} + jX_\mathrm{ant}, \qquad
+  Z_\mathrm{src} = R_\mathrm{src} - jX_\mathrm{ant}.
+\]
+The imaginary part --- the reactance --- measures stored field energy near
+the antenna (near field, reactive power). If it is not compensated, energy
+oscillates between source and antenna near field without being radiated.
+This is the same phenomenon as the reactive power on the G-line (\S\,3):
+energy pulses in the near field without net transport.
+
+For the G-line the cone transition was the matching structure
+($50\,\Omega$ to ${\sim}300\,\Omega$); for antennas this is handled by
+$\lambda/4$ transformers, baluns or matching networks. The mechanism is
+structurally identical: transition between two mode spectra through
+geometrically enforced phase condition.
+
+\subsection*{Antenna types as mode geometries}
+
+Different antenna types realise different mode geometries. Each type is
+an independent carrier with a characteristic mode spectrum; the radiation
+pattern in the far field is the projection of this spectrum onto the
+observation space.
+
+% -----------------------------------------------------------
+\paragraph{1. Short dipole ($\ell \ll \lambda$).}
+
+The short dipole is the simplest limiting case: a straight conductor whose
+length is far below the wavelength. The current distribution is
+approximately triangular; the far field is analytically exact \EM:
+\[
+  E_\theta \propto \frac{I_0\,\ell}{\lambda r}\,\sin\theta,
+  \qquad
+  F(\theta) = \sin^2\theta.
+\]
+The radiation pattern $F(\theta) = \sin^2\theta$ is a torus shape around
+the dipole axis: maximum radiation perpendicular to the axis
+($\theta = 90°$), zero along the axis ($\theta = 0°, 180°$). Directivity
+$D = 1.5$ (1.76\,dBi). Radiation resistance:
+\[
+  R_\mathrm{rad} = 80\pi^2\left(\frac{\ell}{\lambda}\right)^2 \approx 790\,\Omega
+  \cdot \left(\frac{\ell}{\lambda}\right)^2.
+\]
+For $\ell = 0.1\lambda$: $R_\mathrm{rad} \approx 7.9\,\Omega$ --- very low,
+hence severe mismatch to $50\,\Omega$ systems. The mode structure is simple:
+a single electric dipole mode whose winding geometry enforces the torus
+shape of the radiation pattern.
+
+% -----------------------------------------------------------
+\paragraph{2. Half-wave dipole ($\ell = \lambda/2$).}
+
+The half-wave dipole is the most important reference radiator in antenna
+engineering. The current distribution is sinusoidal; the radiation pattern
+is slightly narrower than the short dipole \EM:
+\[
+  F(\theta) = \frac{\cos^2\!\left(\frac{\pi}{2}\cos\theta\right)}{\sin^2\theta}.
+\]
+Directivity $D = 1.64$ (2.15\,dBi). Radiation resistance
+$R_\mathrm{rad} = 73.1\,\Omega$ --- nearly ideal for $50\,\Omega$ or
+$75\,\Omega$ coaxial cable (mismatch $< 2.5:1$ without matching network).
+The half-wave resonance condition ($\ell = \lambda/2$) enforces exactly
+the phase relationship at which radiation resistance and feed resistance
+enter a real ratio: the imaginary part of the input impedance vanishes
+at resonance. This is an integer mode-compatibility condition --- the
+length must be a half-integer multiple of the wavelength.
+
+% -----------------------------------------------------------
+\paragraph{3. Monopole ($\ell = \lambda/4$) over ground plane.}
+
+A quarter-wave monopole over an infinitely extended conducting plane is
+equivalent to the half-wave dipole by image theory: the ground plane
+supplies the mirror image. The radiation pattern is the lower hemisphere
+of the dipole torus, reflected upward; all radiated power concentrates in
+the upper half-space \EM:
+\[
+  D_\mathrm{mono} = 2\,D_\mathrm{dipole} = 3.28 \quad (5.15\,\mathrm{dBi}).
+\]
+Radiation resistance $R_\mathrm{rad} = 36.6\,\Omega$ (half that of the
+dipole, since only half the space). Practical implementations: car antenna,
+mobile mast \cite{Balanis2016}. The gain increase over the dipole arises not
+from more input power but from the geometric mirroring condition ---
+doubling the solid angle contributing to radiation is a pure mode-geometry
+question.
+
+% -----------------------------------------------------------
+\paragraph{4. Yagi--Uda antenna.}
+
+The Yagi--Uda antenna consists of a driven dipole (radiator), a slightly
+longer passive reflector and a series of shorter passive directors
+\cite{Yagi1928,Balanis2016}. All parasitic elements are excited by induction;
+their length determines the phase of the induced current:
+\begin{itemize}[nosep]
+  \item Reflector ($\ell \approx 0.5\lambda + 5\,\%$): capacitive,
+    re-radiates with phase lag $\Rightarrow$ cancellation to the rear.
+  \item Directors ($\ell \approx 0.5\lambda - 5\,\%$): inductive,
+    re-radiate with phase lead $\Rightarrow$ constructive interference
+    forward.
+\end{itemize}
+Gain as a function of the number of directors $n$ (rule of thumb) \EM:
+\[
+  G \approx 10\log_{10}(0.8\,n + 1)\;\mathrm{dBd}
+  \quad (n = \text{number of directors}).
+\]
+Example values: 3 directors $\Rightarrow G \approx 7\,\mathrm{dBd}$,
+10 directors $\Rightarrow G \approx 10\,\mathrm{dBd}$.
+The half-power beamwidth (in the $E$ plane) is approximately:
+\[
+  \Delta\theta_{3\,\mathrm{dB}} \approx \frac{52°}{\sqrt{G_\mathrm{lin}}},
+\]
+where $G_\mathrm{lin}$ is the linear gain factor. The radiation pattern
+narrows with increasing element count --- the carrier becomes more selective
+in its coupling angles.
+
+% -----------------------------------------------------------
+\paragraph{5. Horn antenna.}
+
+The horn antenna is the transition from waveguide to free space. The
+waveguide supports a discrete mode structure (TE$_{10}$ fundamental mode
+for rectangular waveguide); the horn adiabatically expands this mode into
+a plane wave in the far field \cite{Balanis2016,Pozar2012}. The half-power
+beamwidth depends directly on the aperture dimensions:
+\[
+  \Delta\theta_{E} \approx 56°\,\frac{\lambda}{a}, \qquad
+  \Delta\theta_{H} \approx 67°\,\frac{\lambda}{b},
+\]
+where $a$ is the $E$-plane aperture and $b$ the $H$-plane aperture.
+Gain of a pyramidal horn with aperture $A = a \times b$:
+\[
+  G = \eta_A\,\frac{4\pi A}{\lambda^2}, \qquad \eta_A \approx 0.5\text{--}0.7.
+\]
+The aperture efficiency $\eta_A < 1$ arises from the non-uniform phase
+distribution in the aperture (spherical rather than plane wave at the
+horn mouth). This is directly the mode incompatibility between waveguide
+near field and far-field plane wave: the better the phase matching (flatter
+aperture), the higher $\eta_A$.
+
+% -----------------------------------------------------------
+\paragraph{6. Parabolic antenna.}
+
+A parabolic antenna of diameter $D$ and focal length $f$ focuses incident
+microwaves at the focus. In transmission a primary radiator at the focus
+converts a spherical wave into a plane wavefront at the aperture plane.
+The far field is the Fourier transform of this aperture distribution \EM.
+For a circular, uniformly illuminated aperture:
+\[
+  F(\theta) = \left[\frac{2\,J_1(\pi D\sin\theta/\lambda)}
+                        {\pi D\sin\theta/\lambda}\right]^2,
+\]
+where $J_1$ is the first-order Bessel function \cite{Balanis2016}. Gain
+and half-power beamwidth:
+\[
+  G = \eta_A\,\frac{\pi^2 D^2}{\lambda^2}, \qquad
+  \Delta\theta_{3\,\mathrm{dB}} \approx 70°\,\frac{\lambda}{D}.
+\]
+For a 3-m parabolic antenna at 10\,GHz ($\lambda = 3\,\mathrm{cm}$):
+$G \approx 10^4$ (40\,dBi), $\Delta\theta \approx 0.7°$. The Bessel
+function in the radiation pattern is not an approximation but the exact
+consequence of the circular symmetry of the aperture: the mode geometry
+(circle) completely determines the coupling pattern in the far field.
+
+% -----------------------------------------------------------
+\paragraph{7. Patch antenna (microstrip).}
+
+A rectangular patch antenna of length $L$ and width $W$ over a ground
+plane (dielectric $\varepsilon_r$, thickness $h$) resonates when $L$
+equals half an effective wavelength \cite{Pozar2012,Balanis2016}:
+\[
+  L = \frac{\lambda}{2\sqrt{\varepsilon_\mathrm{eff}}} - 2\Delta L,
+\]
+where $\varepsilon_\mathrm{eff}$ is the effective permittivity and
+$\Delta L$ the fringe correction:
+\[
+  \varepsilon_\mathrm{eff} = \frac{\varepsilon_r+1}{2}
+    + \frac{\varepsilon_r-1}{2}\left(1 + \frac{12h}{W}\right)^{-1/2}.
+\]
+The radiation pattern is broadside in the $H$ plane (no focussing), narrow
+in the $E$ plane; typical gain 5--8\,dBi. The permitted modes are
+completely determined by geometry and material ($L$, $W$, $h$,
+$\varepsilon_r$) --- no free parameters. Coupling to an external wave is
+only possible when its polarisation and angle of incidence are compatible
+with the resonance mode of the patch. Cross-polarisation isolation
+($> 30\,\mathrm{dB}$) shows: orthogonal polarisation practically does
+not couple, even when the frequency matches exactly.
+
+% -----------------------------------------------------------
+\paragraph{8. Phased array.}
+
+A phased array consists of $N$ identical radiators with individually
+controlled feed phase $\phi_n$. The array pattern is the product of the
+element radiation pattern $F_\mathrm{elem}(\theta)$ and the array factor
+\cite{Mailloux2017,Balanis2016}:
+\[
+  AF(\theta) = \sum_{n=0}^{N-1} \exp\!\left[j\left(n\,kd\cos\theta + \phi_n\right)\right],
+\]
+where $k = 2\pi/\lambda$ is the wave number and $d$ the element spacing.
+By choosing $\phi_n = -n\,kd\cos\theta_0$ the main beam steers to angle
+$\theta_0$ --- electronic beam steering without mechanical movement. Gain
+for $N$ elements with spacing $d = \lambda/2$:
+\[
+  G_\mathrm{array} = N \cdot G_\mathrm{elem}.
+\]
+The phased array is the purest example of the coupling-angle principle:
+the feed phases $\phi_n$ are integer multiples of a basic phase step ---
+they determine under which angle constructive interference occurs. Every
+other angle combination gives destructive interference. In FFGFT language:
+the $\phi_n$ are discrete winding phase values; the array factor selects
+the compatible coupling angles \SM.
+
+% -----------------------------------------------------------
+\paragraph{Summary table.}
+
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Type} & \textbf{Gain} & \textbf{$\Delta\theta_{3\,\mathrm{dB}}$}
+             & \textbf{Mode geometry} \\
+\midrule
+Short dipole     & 1.76\,dBi  & $90°$         & electric dipole mode \\
+Half-wave dipole & 2.15\,dBi & $78°$          & resonance $\ell=\lambda/2$ \\
+Monopole ($\lambda/4$) & 5.15\,dBi & $46°$    & image mode over ground \\
+Yagi (5 dir.)   & ${\approx}12\,\mathrm{dBd}$ & ${\approx}30°$ & interference array \\
+Horn antenna    & 15--25\,dBi & $3°$--$15°$  & TE$_{10}$ aperture mode \\
+Parabolic ($D=3\,\mathrm{m}$, 10\,GHz) & 40\,dBi & $0.7°$ & Fourier aperture \\
+Patch           & 5--8\,dBi  & $60°$--$120°$ & resonance mode in dielectric \\
+Phased array ($N$) & $N \cdot G_\mathrm{elem}$ & $\propto 1/\sqrt{N}$ & phase-steered array \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+In every case: the physical geometry of the antenna determines the permitted
+mode spectrum; what appears in the far field as a radiation pattern is the
+projection of this spectrum onto the observation space. No antenna type
+transfers energy at angles that contradict its mode geometry --- not
+approximately but structurally. This is the technically mature, quantitatively
+anchored form of the principle formulated in FFGFT as winding-number
+compatibility \SM.
+
+\subsection*{Reciprocity: transmitter and receiver as dual descriptions}
+
+The reciprocity principle of antenna engineering states: gain, radiation
+pattern and impedance of an antenna are identical in transmit and receive
+mode \cite{Balanis2016,Griffiths1999}. This symmetry is not coincidental ---
+it reflects the time-reversal symmetry of the Maxwell equations, and with it
+the duality of field source and field sink. In FFGFT language: transmitter
+and receiver are reciprocal projections of the same field process, just as
+$\tilde{T}$ and $m$ are reciprocal representations of the same object \SM.
+
+% ============================================================
+\section{Multiple field carriers in space: boundary conditions, coupling and apparent superposition}
+% ============================================================
+
+The superposition principle of classical field theory states: in a linear
+medium the fields of independent sources add linearly. Each partial field
+propagates as if the other were not present. This is an excellent
+approximation for widely separated, weakly coupling sources --- and it
+works very well in practice. It conceals, however, what physically actually
+occurs.
+
+\subsection*{The total field as the consistent solution of all boundary conditions}
+
+Every object in a field --- an antenna, a conductor, a dielectric, an atom
+--- is itself a field carrier with its own mode structure. It imposes
+boundary conditions: the tangential components of the electric field must
+vanish at every conducting surface; the normal components of flux density
+must be continuous across interfaces \EM. The total field is not the sum of
+the partial fields --- it is the unique consistent field satisfying all
+boundary conditions simultaneously.
+
+Superposition is the approximation that arises when the boundary conditions
+of individual objects are spatially far enough apart not to influence each
+other. As soon as objects enter near-field range, this approximation breaks
+down --- not gradually but structurally.
+
+\subsection*{Near field: where boundary conditions collide}
+
+The near-field zone of an antenna extends to roughly $r < 2D^2/\lambda$
+(Fraunhofer boundary), where $D$ is the antenna size \EM. In this zone
+the field cannot be described as a plane wave; it contains reactive
+components (stored field energy oscillating back and forth without being
+radiated). Bringing a second antenna into this zone causes the following:
+
+\begin{itemize}[nosep]
+\item The input impedance of both antennas changes --- the resonance
+  frequency shifts, the radiation resistance changes. This is not field
+  addition but mutual deformation of the mode structures.
+\item The radiation pattern of each antenna changes because the boundary
+  condition of the other deforms the field distribution in the shared
+  near space.
+\item Energy can be transferred directly between near fields --- without
+  radiation into the far field. This is the principle of inductive coupling
+  (transformer, Qi charging), capacitive coupling and resonant near-field
+  coupling (Kurs et al.\ 2007 \cite{Kurs2007}, wireless transfer over metres).
+\end{itemize}
+
+\subsection*{Mutual coupling in antenna arrays}
+
+In a phased array with element spacing $d < \lambda$ the mutual coupling
+is not negligible \cite{Mailloux2017,Pozar2012}. The input impedance of the
+$n$-th element depends on all others:
+\[
+  Z_{nn}^{\mathrm{active}} = Z_{nn}^{\mathrm{isolated}}
+  + \sum_{m \neq n} Z_{nm}\,\frac{I_m}{I_n},
+\]
+where $Z_{nm}$ is the mutual impedance between elements $n$ and $m$. The
+overall behaviour of the array is only describable by solving the complete
+system of equations --- not by addition of single-element fields. In
+practice mutual coupling is compensated by optimising element geometry and
+feed phases; it is a design problem that industry solves with full
+electromagnetic simulators (MoM, FEM, FDTD).
+
+\subsection*{Cavity resonator: the total field as an eigenmode}
+
+A metal cavity allows only discrete resonance frequencies determined by
+its geometry \cite{Pozar2012,Griffiths1999}. For a rectangular cavity
+of dimensions $a \times b \times c$:
+\[
+  f_{mnp} = \frac{c}{2}\sqrt{\left(\frac{m}{a}\right)^2
+    + \left(\frac{n}{b}\right)^2 + \left(\frac{p}{c}\right)^2}.
+\]
+Placing an object inside the cavity --- a dielectric block, a conductor,
+biological tissue --- shifts all resonance frequencies. The entire mode
+spectrum of the cavity changes, not only the modes that directly touch the
+object. The total field is the eigenmode of the composite system (cavity
++ object), not the sum of the empty-cavity eigenmode and a scattered field.
+This shift is measurable and exploited in microwave dielectric spectroscopy
+(cavity perturbation method).
+
+\subsection*{Faraday cage: boundary conditions extinguish a field}
+
+The Faraday cage is the most extreme case: a closed conducting shell
+enforces vanishing tangential electric field on its inner surface. The
+external field continues unchanged; the internal field is forced to zero
+\EM. The total field is the unique solution of the Maxwell equations with
+this boundary condition --- not superposition but cancellation through
+enforced compatibility.
+
+Incomplete shielding (gaps, finite conductivity) shows the principle in
+attenuated form: fields penetrate but only with mode geometries permitted
+by the gap geometry. A slot of width $w$ allows fields with $\lambda > 2w$
+to pass through strongly attenuated (cut-off condition of the slot
+waveguide). This is again mode compatibility: only fields whose wavelength
+is compatible with the slot geometry couple through.
+
+\subsection*{Plasmons: field and matter inseparable}
+
+At the interface between metal and dielectric, surface plasmon polaritons
+(SPP) arise --- coupled modes of electromagnetic field and collective
+electron oscillation \cite{Maier2007}. The dispersion relation is:
+\[
+  k_\mathrm{SPP} = \frac{\omega}{c}\sqrt{\frac{\varepsilon_m\,\varepsilon_d}
+    {\varepsilon_m + \varepsilon_d}},
+\]
+where $\varepsilon_m$ is the (complex) permittivity of the metal and
+$\varepsilon_d$ that of the dielectric. The SPP is neither pure
+electromagnetic field nor pure charge carrier oscillation --- it is a
+joint mode of both carriers. Superposition would be meaningless: the
+field exists only in coupling with matter.
+
+This is the sharpest available evidence that ``multiple fields in space''
+are not independent objects. The mode structure of the total system is
+the physical reality; decomposition into partial fields is a computational
+method that works under certain conditions.
+
+\subsection*{FFGFT interpretation: one field, many projections}
+
+In FFGFT there is only one field on the carrier $T^4/\mathbb{Z}_3$
+\SetzM. What appears as ``multiple fields'' are projections of different
+mode groups onto the observation space. The apparent superposition is a
+representational question.
+
+When two objects with different mode structures interact, the result is not
+the sum of their fields but the joint eigenmode of the composite carrier
+--- determined by the compatibility of the winding numbers of both carriers.
+This is the same principle that appears in antenna engineering as mutual
+coupling, in cavity physics as cavity perturbation and in nanophotonics
+as plasmon coupling \SM.
+
+The complexity of field interaction is therefore not a complication that
+sufficient computational effort can remove --- it is the direct consequence
+of every carrier imposing boundary conditions on the total field. The more
+carriers in space, the more simultaneously required compatibility conditions,
+the more complex the total field. This is not superposition --- this is
+geometry.
+
+% ============================================================
+\section{Particles as field nodes: near and far field at localised field structures}
+% ============================================================
+
+In classical physics a particle is an object that \emph{has} a field ---
+the charge generates the Coulomb field, the mass generates the gravitational
+field. In FFGFT this description is inverted: a particle is a stable,
+localised field configuration --- a node in the global field on the carrier
+$T^4/\mathbb{Z}_3$ \SetzM. Mass is not an intrinsic property of the node
+but follows from the fundamental equation $\tilde{T}\cdot m=1$: the time
+scale of the field configuration determines the mass (Doc.~365 Layer~1,
+Doc.~124) \KM.
+
+This inversion has direct consequences for the structure of the field around
+a particle --- and it makes the connection to antenna engineering visible.
+
+\subsection*{Stationary particle: pure near field}
+
+A stationary point charge $e$ generates the Coulomb field \EM:
+\[
+  \mathbf{E}(r) = \frac{e}{4\pi\varepsilon_0}\,\frac{\hat{r}}{r^2},
+  \qquad
+  \mathbf{B} = 0.
+\]
+In FFGFT units ($e=1$, $4\pi\varepsilon_0=1$): $V(r) = -1/r$
+\cite{PascherDok365}. This field falls off as $1/r^2$ (field strength) or
+$1/r$ (potential), carries no energy into the far field and is fully
+reactive --- identical to the near field of a stationary antenna. The
+Poynting vector $\mathbf{S} = \mathbf{E}\times\mathbf{H}$ is zero for a
+stationary charge: no energy flux, only stored field energy in the node
+structure.
+
+The Coulomb field is the near field of the particle. It deforms the space
+around the node, imposing boundary conditions on all other fields in its
+vicinity --- exactly as a passive antenna deforms the field in its
+surroundings without transmitting.
+
+\subsection*{Accelerated particle: near field and radiated far field}
+
+As soon as the charge is accelerated, a far field arises --- a detaching
+electromagnetic wave. The Larmor formula gives the radiated power
+\cite{Jackson1999,Griffiths1999}:
+\[
+  P = \frac{e^2 a^2}{6\pi\varepsilon_0 c^3}
+    = \frac{2}{3}\,\frac{e^2 a^2}{c^3}
+  \quad \text{(in Gaussian units)},
+\]
+where $a$ is the acceleration. In FFGFT units ($c=e=1$):
+$P = \frac{2}{3}a^2$.
+
+The far field falls off as $1/r$ (not $1/r^2$), permanently transports
+energy away and is propagating --- identical to the far field of a driven
+antenna. The boundary between near and far field lies at $r \sim \lambda/2\pi$
+(transition zone), where $\lambda = c/f$ and $f$ is the characteristic
+frequency of the acceleration.
+
+This is the antenna principle at the particle level:
+\begin{itemize}[nosep]
+  \item Stationary charge = undriven antenna: near field only, no radiation.
+  \item Uniformly moving charge = antenna on direct current: no alternating
+    current, no radiation (Cherenkov radiation is a special case for $v > c/n$).
+  \item Accelerated charge = driven antenna: near field plus radiated far
+    field, power $\propto a^2$.
+\end{itemize}
+
+\subsection*{Atomic transition: quantised far field}
+
+In the atom the permitted node structures are discrete through the quantum
+numbers $(n, l, m)$ --- these are the permitted modes of the Coulomb
+potential, i.e.\ the eigenmodes of the atomic carrier. A transition between
+two states is a change in node structure; a photon is emitted --- the
+radiated far field carries away a discrete energy $\Delta E = \hbar\omega$.
+The selection rules \cite{CohenTannoudji1977,Griffiths1995}:
+\[
+  \Delta l = \pm 1, \qquad \Delta m = 0,\pm 1
+\]
+are compatibility conditions: only transitions in which the change of mode
+geometry is compatible with the geometry of a dipole photon are permitted.
+Quadrupole and higher transitions ($\Delta l = \pm 2$) are possible but
+suppressed by a factor $\alpha^2 \approx 10^{-4}$ --- because the mode
+compatibility is poorer.
+
+In FFGFT language: the winding numbers of the initial and final state must
+differ by exactly the winding numbers of a photon. The selection rules are
+not postulated but follow from the geometry of the carrier \SM.
+
+\subsection*{The ``size'' of a particle: extent of the node}
+
+A particle as field node has no sharp geometric boundary. The ``size'' is
+the spatial extent of the node structure, i.e.\ the region where the near
+field dominates over the background field. For the electron these are the
+classical electron radius \EM:
+\[
+  r_e = \frac{e^2}{4\pi\varepsilon_0 m_e c^2} \approx 2.82\,\mathrm{fm},
+\]
+the Compton wavelength $\lambda_C = \hbar/m_e c \approx 386\,\mathrm{fm}$
+and the Bohr radius $a_0 \approx 52\,917\,\mathrm{fm}$. These three lengths
+are not arbitrary but linked through $\alpha$ \cite{Jackson1999,PascherDok365}:
+\[
+  r_e = \alpha\,\lambda_C / 2\pi = \alpha^2 a_0.
+\]
+In FFGFT units ($\alpha=1$) these three lengths collapse to one --- the
+hierarchy arises only through the SI embedding via $\xi$ (Doc.~365
+Layer~3) \KM.
+
+The node is therefore not point-like --- it has a structure extending over
+several length scales. What appears as a ``point'' is the projection of
+this structure onto a measurement coarse enough not to resolve the inner
+structure.
+
+\subsection*{Comparison table: antenna and particle}
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Property} & \textbf{Antenna} & \textbf{Particle (node)} \\
+\midrule
+Near field & reactive, $E\propto 1/r^2$--$1/r^3$ & Coulomb field $E\propto 1/r^2$ \\
+Far field & radiated wave, $E\propto 1/r$ & photon under acceleration \\
+Radiation & only on current change & only under acceleration/transition \\
+Mode structure & antenna geometry & quantum numbers $(n,l,m)$ \\
+Selection rule & impedance compatibility & $\Delta l=\pm1$, $\Delta m=0,\pm1$ \\
+``Size'' & physical dimension & node extent $r_e,\lambda_C,a_0$ \\
+Stationary & no far field & no far field (Coulomb only) \\
+Passive in field & scattering, shadowing & polarisability, cross-section \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Cross-section as a measure of node coupling}
+
+A particle in an external field scatters the incoming wave --- it deforms
+the field in its vicinity, exactly like a passive conductor. The Thomson
+cross-section of the electron \cite{Jackson1999}:
+\[
+  \sigma_T = \frac{8\pi}{3}r_e^2 \approx 6.65\times 10^{-29}\,\mathrm{m}^2
+\]
+is the effective area from which the electron draws energy from the
+incoming field and re-emits it. This is directly analogous to the effective
+aperture $A_\mathrm{eff}$ of a receiving antenna (\S\,8):
+\[
+  A_\mathrm{eff} = \frac{\lambda^2}{4\pi}G
+  \quad \longleftrightarrow \quad
+  \sigma_T = \frac{8\pi}{3}r_e^2.
+\]
+In both cases the effective area is not the geometric size of the object
+but the result of mode compatibility between incoming field and node
+structure. For photons with $\hbar\omega \gg m_e c^2$, Compton scattering
+applies --- the node structure of the electron can no longer be described
+as point-like and the cross-section falls with increasing energy.
+
+\subsection*{FFGFT interpretation: node as local mode concentration}
+
+In FFGFT a particle is a local concentration of modes on the carrier
+$T^4/\mathbb{Z}_3$ --- a location where specific winding numbers
+$(n_\theta, n_\varphi)$ are occupied and the field locally assumes a
+stable, non-trivial configuration \SetzM. The near field of the particle
+is the immediate vicinity of this node in the carrier, projected onto the
+observation space; the far field is the radiation arising when the node
+changes its mode occupation.
+
+The boundary between near and far field is therefore not a sharp line but
+the transition between the region where the node structure dominates the
+field and the region where the field propagates as a free wave. This
+transition lies at $r\sim\lambda_C$ for relativistic descriptions and at
+$r\sim a_0$ for atomic transitions --- both are structural length scales
+of the node, not free parameters \SM.
+
+% ============================================================
+\section{Scale-invariance of the coupling condition: atoms, elements and planetary orbits}
+% ============================================================
+
+The principle from \S\,8--10 --- geometry of the carrier determines
+permitted coupling angles, coupling only under mode compatibility --- is not
+restricted to antennas or individual particles. It holds on all physical
+scales. The scale changes; the structure of the condition remains identical.
+Doc.~242 (scale ladder) elaborated this connection at the cosmological
+level; here it is developed starting from antenna engineering.
+
+\subsection*{Atoms: discrete modes in the Coulomb potential}
+
+The Schr\"odinger equation in the Coulomb potential has discrete eigenmodes,
+classified by quantum numbers $(n, l, m)$ \cite{Griffiths1995,CohenTannoudji1977}:
+\[
+  E_n = -\frac{m_e e^4}{2\hbar^2 n^2} = -\frac{13.6\,\mathrm{eV}}{n^2}.
+\]
+This is nothing other than the resonance condition of a carrier: the carrier
+is the Coulomb potential (spherically symmetric, $V\propto -1/r$); the
+permitted modes are the solutions with integer $n$. The atom is a cavity
+resonator with spherical geometry --- the electron node can only assume
+certain standing wave configurations, just as the TE$_{mn}$ modes in a
+metal cavity (\S\,9).
+
+The selection rules $\Delta l = \pm 1$, $\Delta m = 0,\pm 1$ (\S\,10) are
+the impedance-matching conditions of this resonator: a dipole photon ($l=1$)
+couples only to transitions in which the change of node geometry is
+compatible with a dipole mode. A quadrupole photon ($l=2$) couples with
+$\Delta l = \pm 2$ but more weakly by $\alpha^2$ --- because the mode
+overlap efficiency is smaller, identical to the aperture efficiency
+$\eta_A < 1$ of a horn antenna.
+
+\subsection*{Periodic table: mode classification of a many-body system}
+
+The shell structure of the periodic table --- $1s^2\,2s^2\,2p^6\,3s^2\ldots$
+--- is a classification by mode geometries of the effective central
+potential \EM:
+\[
+  \text{Shell } n: \quad 2n^2 \text{ places}
+  \quad (s, p, d, f \text{ with spin}).
+\]
+Each sub-shell ($s, p, d, f$) has a different orbital angular momentum $l$
+and thus a different spatial mode geometry. Chemical bonding arises through
+coupling of the boundary modes of two atoms: when the outermost occupied
+orbitals (HOMO/LUMO) have compatible geometry --- sufficient spatial
+overlap, compatible symmetry --- a covalent bond forms. The overlap integral
+\[
+  S_{AB} = \int \psi_A^*(\mathbf{r})\,\psi_B(\mathbf{r})\,d^3r
+\]
+is the direct quantum-mechanical analogue of the polarisation factor
+$\cos^2\psi$ in the Friis equation (\S\,8): $S_{AB}=0$ means no coupling,
+regardless of the energy of the atoms.
+
+The noble gases (closed shells, $S_{AB}\approx 0$ for all bonding partners)
+are the quantum-mechanical analogue of orthogonal polarisation: no energy
+transfer because no mode compatibility.
+
+\subsection*{Crystal lattice: the Bragg condition as compatibility condition}
+
+In a crystal the atoms form a periodic lattice of lattice constant $a$.
+An electromagnetic wave (X-ray, neutrons, electrons) is coherently reflected
+only when the Bragg condition is met \cite{Kittel2005,Ashcroft1976}:
+\[
+  2d\sin\theta = n\lambda, \quad n \in \mathbb{Z},
+\]
+where $d$ is the lattice plane spacing and $\theta$ the glancing angle.
+This is an integer phase condition: the path-length difference between
+partial waves reflected at successive lattice planes must be an integer
+multiple of the wavelength. Only then do amplitudes add constructively ---
+identical to the phased-array condition (\S\,8):
+\[
+  \phi_n = -n\,kd\cos\theta_0.
+\]
+The crystal lattice is a natural phased array with fixed element spacing
+$d$. Bragg reflection selects exactly the angles of incidence at which mode
+compatibility holds; all other angles give destructive interference. In
+FFGFT the reciprocal lattice vectors $\mathbf{G}$ correspond to the
+permitted winding vectors of the carrier; Bragg reflection is the
+macroscopic manifestation of the quantisation condition on the torus \SM.
+
+\subsection*{Molecular vibrations: infrared activity as a selection rule}
+
+A molecular vibrational mode is infrared-active (absorbs IR radiation) only
+when it produces a change in the electric dipole moment
+\cite{Atkins2010,Wilson1955}:
+\[
+  \left(\frac{\partial \vec{\mu}}{\partial Q}\right)_{Q=0} \neq 0,
+\]
+where $Q$ is the normal coordinate of the vibration. This is the
+impedance-matching condition between photon (dipole radiation) and
+vibrational mode: only when the vibration has a dipole geometry does it
+couple to a dipole photon. Symmetric stretching vibrations (as in N$_2$
+or O$_2$) do not change the dipole moment --- they are IR-inactive but
+Raman-active (coupling to quadrupole photons). This explains why N$_2$
+and O$_2$ are not greenhouse gases: their vibrational modes are mode-incompatible
+with IR dipole radiation.
+
+\subsection*{Planetary orbits: integer resonances in the gravitational field}
+
+The gravitational field of the sun is the carrier of the planetary system.
+Its modes are the Kepler orbits, classified by the orbital parameters
+$(a, e, i)$. When two planets are near an integer resonance $p:q$
+($p, q \in \mathbb{Z}$), small gravitational perturbations accumulate
+coherently over many revolutions (Doc.~242) \cite{PascherDok242,Murray1999}.
+The Laplace resonance of the Galilean moons is the most famous example
+\cite{Murray1999,Peale1979}:
+\[
+  \frac{T_\mathrm{Io}}{T_\mathrm{Europa}} \approx \frac{1}{2},
+  \qquad
+  \frac{T_\mathrm{Europa}}{T_\mathrm{Ganymede}} \approx \frac{1}{2},
+  \qquad
+  n_\mathrm{Io} - 3n_\mathrm{Europa} + 2n_\mathrm{Ganymede} = 0
+\]
+(exact relation of the mean motions $n = 2\pi/T$). This relation is not
+a coincidence: it is a stable configuration because at exact resonance the
+mutual perturbations cause no secular energy input, only periodic. The
+system has an attractor at the integer resonance --- identical to the
+attractor of an Arnold tongue in nonlinear dynamics (Doc.~328
+\S\,coupling regimes) \KM.
+
+Further examples:
+\begin{itemize}[nosep]
+  \item Jupiter/Saturn: $5:2$ resonance (``great inequality'',
+    known since Laplace 1785) \QM.
+  \item Neptune/Pluto: $3:2$ resonance (Plutinos) \QM.
+  \item Kirkwood gaps in the asteroid belt: gaps at resonances $1:3$,
+    $1:4$ with Jupiter (destructive resonance, not stabilising) \QM.
+  \item Saturn's rings: gaps (Cassini Division) at $2:1$ resonance
+    with Mimas \QM.
+\end{itemize}
+
+The coupling condition is the same as in antenna engineering: integer phase
+compatibility. The carrier differs (gravitational rather than electromagnetic
+field); the structure of the condition is identical.
+
+\subsection*{Summary table: coupling condition on all scales}
+
+\begin{center}
+\begin{tabular}{@{}lllll@{}}
+\toprule
+\textbf{Scale} & \textbf{Carrier} & \textbf{Coupling condition}
+  & \textbf{Example} & \textbf{Analogue} \\
+\midrule
+Antenna & radiator geometry & $\cos^2\psi$, impedance
+  & dipole/Yagi & Friis equation \\
+Atom & Coulomb potential & $\Delta l=\pm1$
+  & H lines & selection rule \\
+Molecule & eff.\ potential & $\partial\mu/\partial Q \neq 0$
+  & IR activity & dipole coupling \\
+Crystal & lattice periodicity & $2d\sin\theta=n\lambda$
+  & Bragg reflection & phased array \\
+Periodic table & shell structure & overlap $S_{AB}$
+  & covalence & aperture overlap \\
+Mol.\ bond & orbital geometry & symmetry compatibility
+  & HOMO/LUMO & mode overlap \\
+Planets & gravitational field & $p\,n_1 = q\,n_2$
+  & Laplace resonance & Arnold tongue \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{The common principle}
+
+All rows of the table describe the same thing: a system has a carrier with
+a mode spectrum; coupling to another system is only possible where the mode
+spectra are compatible; incompatible modes do not couple, regardless of the
+strength of the fields involved.
+
+The technical maturity of antenna engineering --- decades of measurements,
+standardised procedures, commercial simulators --- makes it the most
+tangible realisation of this principle. Atomic mechanics, solid-state
+physics and celestial mechanics are the same principle on different carriers.
+In FFGFT the common carrier is $T^4/\mathbb{Z}_3$; the coupling conditions
+on all scales are projections of winding-number compatibility onto the
+respective observation space \SM.
+
+% ============================================================
+\section{Duality: field and particle, energy and current}
+% ============================================================
+
+FFGFT treats time--mass duality as a fundamental principle (fundamental
+equation $\tilde{T}\cdot m=1$, Doc.~365) \SetzM. The same duality appears
+in electromagnetic field theory:
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Field view} & & \textbf{Current view} \\
+\midrule
+Poynting vector $\mathbf{S} = \mathbf{E}\times\mathbf{H}$ & $\longleftrightarrow$ & $P = V \cdot I$ \\
+Field energy in dielectric & $\longleftrightarrow$ & $I^2 R$ Joule loss \\
+Evanescent wave outside & $\longleftrightarrow$ & reactive power \\
+Winding number (topological) & $\longleftrightarrow$ & mass (dynamical) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+In none of these pairs is one side ``more fundamental'' than the other ---
+they describe the same field process from different projections. This is
+the precise analogue of time--mass duality in FFGFT: $\tilde{T}$ and $m$
+are reciprocal representations of the same object, not two different
+quantities \KM.
+
+\subsection*{Reactive power and evanescent fields}
+
+On the G-line energy pulses back and forth in the periphery of the wire
+field --- energy flux alternates direction in step with the field. This is
+reactive power in AC circuit theory, or --- stated optically --- the
+evanescent field on the shadow side of a totally reflecting interface \EM.
+In FFGFT this behaviour corresponds to the non-propagating part of the
+Fourier modes on $T^4/\mathbb{Z}_3$: modes below the spectral gap
+(Doc.~314 \S\,H) carry no net energy but structure the spectrum \SM.
+
+% ============================================================
+\section{Exact agreement: Poynting integral and power formula}
+% ============================================================
+
+It is instructive to understand the exactness of this identity, because it
+is regularly presented in courses as an ``approximate agreement'' or a
+``plausibility argument''. Poynting's theorem states \EM:
+\[
+  \frac{\partial u}{\partial t} + \nabla \cdot \mathbf{S} = -\mathbf{j}\cdot\mathbf{E},
+\]
+where $u = \frac{1}{2}(\varepsilon_0 E^2 + \mu_0^{-1}B^2)$ is the
+electromagnetic energy density. Integration over the volume of the cable
+with the corresponding boundary conditions yields exactly $P = V \cdot I$
+--- the only prerequisite is the validity of the Maxwell equations.
+
+In FFGFT units (without $\varepsilon_0, \mu_0, e$) the identity reduces to:
+\[
+  P = E \cdot m,
+\]
+which follows immediately from $V = E$, $I = m$ and the fundamental
+equation $\tilde{T}\cdot m=1$ \KM. The exactness is structural, not a
+numerical coincidence.
+
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{enumerate}[nosep]
+\item \textbf{Primary localisation.} Energy flows in the fields
+  ($\mathbf{S} = \mathbf{E}\times\mathbf{H}$), not in the conductor.
+  Voltage and current are macroscopic projections of the same field
+  process \EM.
+
+\item \textbf{Geometric objects.} Field lines on the carrier
+  $T^4/\mathbb{Z}_3$ are topological objects with winding numbers; they
+  classify modes and determine mass scales via $\tilde{T}\cdot m=1$ \BM.
+
+\item \textbf{FFGFT units.} With $c=\hbar=\alpha=1$: $I=m$, $V=E$,
+  $P=E\cdot m$ --- exactly, not approximately. The Maxwell equations
+  carry no prefactors \KM.
+
+\item \textbf{G-line as illustration.} The Goubau experiment demonstrates
+  macroscopically that energy transport without an explicit return conductor
+  is possible because the transport occurs in the field. The cone transition
+  corresponds to impedance matching; field lines locally optimise energy
+  flux \EM.
+
+\item \textbf{Duality.} Field view and current view are reciprocal
+  projections --- no pair is more fundamental. This mirrors the time--mass
+  duality $\tilde{T}\cdot m=1$ at the level of classical fields \SM.
+\end{enumerate}
+
+\section*{References}
+\addcontentsline{toc}{section}{References}
+
+\begin{thebibliography}{99}
+
+% --- Electromagnetism and antenna engineering ---
+
+\bibitem{Goubau1950}
+G.~Goubau,
+\textit{Surface waves and their application to transmission lines},
+J.~Appl.~Phys.\ \textbf{21} (1950) 1119--1128.
+Foundational work on single-wire wave guidance; cone transition,
+field configuration, loss measurement of 6~dB/mile.
+
+\bibitem{Harms1907}
+F.~Harms,
+\textit{Elektromagnetische Wellen an einem Draht mit isolierender
+zylindrischer H\"ulle},
+Ann.~Phys.\ \textbf{23} (1907) 44--60.
+First analysis of the dielectric as a field-guiding layer; precursor
+of the Goubau line.
+
+\bibitem{Stratton1941}
+J.~A.~Stratton,
+\textit{Electromagnetic Theory},
+McGraw-Hill, New York, 1941.
+Standard reference for the Poynting theorem (Ch.~2), boundary conditions,
+field energy.
+
+\bibitem{Griffiths1999}
+D.~J.~Griffiths,
+\textit{Introduction to Electrodynamics},
+3rd ed., Prentice Hall, 1999.
+Poynting vector, Larmor formula, radiation resistance, reciprocity;
+accessible derivation of all standard results used in \S\,2--5.
+
+\bibitem{Jackson1999}
+J.~D.~Jackson,
+\textit{Classical Electrodynamics},
+3rd ed., Wiley, 1999.
+Larmor formula (Ch.~14), Thomson cross-section (Ch.~14.8), classical
+electron radius, Compton wavelength; canonical reference.
+
+\bibitem{Balanis2016}
+C.~A.~Balanis,
+\textit{Antenna Theory: Analysis and Design},
+4th ed., Wiley, 2016.
+Standard text: radiation patterns, gain, radiation resistance, short dipole,
+half-wave dipole, monopole, Yagi--Uda, horn, parabolic, patch, phased array,
+Friis equation, reciprocity theorem.
+
+\bibitem{Friis1946}
+H.~T.~Friis,
+\textit{A note on a simple transmission formula},
+Proc.~IRE \textbf{34} (1946) 254--256.
+Original paper on the link budget equation;
+``\textit{The received power is [\ldots] proportional to the product of the
+transmitting and receiving gains.}''
+
+\bibitem{Yagi1928}
+H.~Yagi,
+\textit{Beam transmission of ultra short waves},
+Proc.~IRE \textbf{16} (1928) 715--741.
+Original Yagi--Uda paper; reflector and director principle;
+gain through phase interference of passive elements.
+
+\bibitem{Pozar2012}
+D.~M.~Pozar,
+\textit{Microwave Engineering},
+4th ed., Wiley, 2012.
+Cavity resonator (Ch.~6), patch antenna (Ch.~14), horn antenna,
+waveguide modes, impedance matching, Smith chart, cavity perturbation.
+
+\bibitem{Mailloux2017}
+R.~J.~Mailloux,
+\textit{Phased Array Antenna Handbook},
+3rd ed., Artech House, 2017.
+Array factor, beam steering, mutual coupling, active impedance matrix,
+grating-lobe condition; quantitative treatment of all array phenomena.
+
+\bibitem{Maier2007}
+S.~A.~Maier,
+\textit{Plasmonics: Fundamentals and Applications},
+Springer, 2007.
+Surface plasmon polaritons, dispersion relation (Ch.~2), coupling condition,
+near-field enhancement; standard text of nanophotonics.
+
+\bibitem{Kurs2007}
+A.~Kurs, A.~Karalis, R.~Moffatt, J.~D.~Joannopoulos,
+P.~Fisher, M.~Solja\v{c}i\'{c},
+\textit{Wireless power transfer via strongly coupled magnetic resonances},
+Science \textbf{317} (2007) 83--86.
+Resonant near-field coupling over 2~m with 40\,\% efficiency;
+``\textit{The transfer is mediated by the overlap of the near fields.}''
+Direct evidence for energy transfer without radiation through mode
+compatibility.
+
+% --- Quantum mechanics and atomic physics ---
+
+\bibitem{Griffiths1995}
+D.~J.~Griffiths,
+\textit{Introduction to Quantum Mechanics},
+Prentice Hall, 1995.
+Hydrogen atom, quantum numbers, selection rules $\Delta l=\pm1$,
+$\Delta m=0,\pm1$ (Ch.~9); overlap integral and bonding theory (Ch.~7).
+
+\bibitem{CohenTannoudji1977}
+C.~Cohen-Tannoudji, B.~Diu, F.~Lalo\"e,
+\textit{Quantum Mechanics}, 2~vols.,
+Wiley, 1977.
+Selection rules (Ch.~XIII), dipole approximation, quadrupole suppression
+$\sim\alpha^2$; canonical reference for atomic transitions.
+
+% --- Solid-state physics ---
+
+\bibitem{Kittel2005}
+C.~Kittel,
+\textit{Introduction to Solid State Physics},
+8th ed., Wiley, 2005.
+Bragg condition (Ch.~2), reciprocal lattice, Brillouin zone, lattice
+dynamics; standard solid-state text.
+
+\bibitem{Ashcroft1976}
+N.~W.~Ashcroft, N.~D.~Mermin,
+\textit{Solid State Physics},
+Holt, Rinehart and Winston, 1976.
+Bragg scattering, phased-array analogy of reciprocal lattice (Ch.~6),
+electron bands; advanced reference.
+
+% --- Molecular physics ---
+
+\bibitem{Atkins2010}
+P.~Atkins, J.~de~Paula,
+\textit{Physical Chemistry},
+9th ed., Oxford University Press, 2010.
+IR activity condition $\partial\vec{\mu}/\partial Q\neq0$ (Ch.~13),
+Raman activity, symmetry selection rules; standard physical chemistry text.
+
+\bibitem{Wilson1955}
+E.~B.~Wilson, J.~C.~Decius, P.~C.~Cross,
+\textit{Molecular Vibrations},
+McGraw-Hill, 1955.
+Normal coordinates, selection rules, group theory of vibrational modes;
+classic original reference.
+
+% --- Celestial mechanics ---
+
+\bibitem{Murray1999}
+C.~D.~Murray, S.~F.~Dermott,
+\textit{Solar System Dynamics},
+Cambridge University Press, 1999.
+Orbital resonances (Ch.~8), Laplace resonance Io/Europa/Ganymede,
+Kirkwood gaps, Cassini Division, Arnold tongues in celestial mechanics;
+authoritative modern reference.
+
+\bibitem{Peale1979}
+S.~J.~Peale, P.~Cassen, R.~T.~Reynolds,
+\textit{Melting of Io by tidal dissipation},
+Science \textbf{203} (1979) 892--894.
+Laplace resonance as the cause of tidal heating of Io;
+``\textit{The forced eccentricity [\ldots] results from the Laplace relation
+$n_1 - 3n_2 + 2n_3 = 0$.}'' Spectacular prediction before Voyager~1 arrival.
+
+% --- FFGFT corpus (interlinks) ---
+
+\bibitem{PascherDok365}
+J.~Pascher,
+\textit{Doc.~365: The Foundation of FFGFT in Four Layers ---
+fundamental equation, electromagnetic sector, scaling parameter and
+algebraic confirmations},
+FFGFT corpus, Zenodo (2026).
+Layer~1 ($\tilde{T}\cdot m=1$), Layer~2 (FFGFT units, $I=m$, $V=E$,
+Maxwell without prefactors), Layer~3 ($\xi=4/30000$).
+
+\bibitem{PascherDok314}
+J.~Pascher,
+\textit{Doc.~314: Lattice in Hilbert Space},
+FFGFT corpus, Zenodo (2026).
+Fourier modes on $T^4/\mathbb{Z}_3$, winding numbers as topological
+invariants, shell count to norm~120, spectral gap.
+
+\bibitem{PascherDok328}
+J.~Pascher,
+\textit{Doc.~328: Coupling regimes, resonance and synchronisation},
+FFGFT corpus, Zenodo (2026).
+Galois lattice condition, Arnold tongues, Adler model, $K_\mathrm{eff}=2\pi\xi$,
+coupling threshold; direct connection to orbital resonances and mutual coupling.
+
+\bibitem{PascherDok242}
+J.~Pascher,
+\textit{Doc.~242: Scale ladder --- interscale couplings in FFGFT},
+FFGFT corpus, Zenodo (2026).
+Planetary orbit argument, Laplace resonance as structural principle,
+scale separation as historical convention, not physical necessity.
+
+\bibitem{PascherDok124}
+J.~Pascher,
+\textit{Doc.~124: Charge as geometric projection},
+FFGFT corpus, Zenodo (2026).
+Charge as emergent projection of geometric patterns; particles as field
+configurations, not intrinsic point properties.
+
+\bibitem{PascherDok343}
+J.~Pascher,
+\textit{Doc.~343: The zeta function of the $T^4/\mathbb{Z}_3$ torus},
+FFGFT corpus, Zenodo (2026).
+Resolution floor $100\xi$, Galois lattice, Farey critical denominator
+height; quantitative bound on mode distinguishability.
+
+\end{thebibliography}
