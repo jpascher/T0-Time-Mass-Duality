@@ -636,3 +636,63 @@ und Gravitationslinsen werden als Argumente für dunkle Materie kritisch
 eingeordnet — kein schließender Beweis.
 
 **Register:** kein Eintrag (neues Dokument, keine Korrektur älterer Dokumente).
+
+---
+
+## 19. September 2026 — Dok. 367: Warum θ = p₀ = 2/9
+
+### Dok. 367 — Wahrscheinlichkeit und Phase als zwei Lesarten eines Quotienten (De/En, je 7 Seiten)
+
+Schließt die in Dok. 293 offen gelassene Frage, *warum* der Koide-Winkel θ = 2/9
+(Dok. 292) und die ikosaedrische Übergangswahrscheinlichkeit p₀ = |⟨v₀|R₅ vₑ⟩|² = 2/9
+(Dok. 293) auf dieselbe rationale Zahl treffen.
+
+**Kernaussage [B]/[K]:** Beide Größen sind derselbe Quotient
+2/3² = (Anzahl nicht-trivialer ℤ₃-Moden) / (ℤ₃-Ordnung)².
+p₀ liest ihn als Wahrscheinlichkeit (Betragsquadrat der normierten Amplitude
+|⟨v₀|R₅ vₑ⟩| = √2/3), θ als Phase (Anteil des Operatorraums ℂ³⊗ℂ³ mit 3² = 9
+Einträgen). Der Zusammenhang ist θ = |A|² = p₀ — nicht θ = |A| und nicht
+θ = arg A — d. h. die Struktur der Born-Regel [E]. Damit ist der Konvergenzbefund
+aus Dok. 293 erklärt: die Zahl gehört der ℤ₃-Struktur, nicht der Darstellung.
+
+**Offen [S]:** der Mechanismus, der die Umverteilungsgewichte
+(2/9, (5−3φ)/9, (2+3φ)/9) an die konkreten Massenverhältnisse m_μ/m_e, m_τ/m_e
+bindet — bleibt die offene Kante von Dok. 293.
+
+**Prüfskript:** `2/python/Dok367_Skripte/pruef_367_phase_wahrscheinlichkeit.py`
+(mpmath, 40 Stellen) — 18/18 PASS.
+
+**Register:** kein Eintrag (neues Dokument; Dok. 293 wird ergänzt, nicht korrigiert).
+
+---
+
+## 19. September 2026 — Dok. 368: Von p₀,p₁,p₂ zu Leptonmassen
+
+### Dok. 368 — φ-Skelett und Galois-Korrekturfaktoren (De/En, je 8 Seiten)
+
+Untersucht den direkten Weg von den ikosaedrischen Umverteilungsgewichten
+(Dok. 293) zu den Leptonmassen-Verhältnissen, ohne explizit über θ oder die
+Koide-Kosinus-Formel zu gehen.
+
+**Exakte algebraische Identitäten [B] — neu gegenüber bisherigem Korpus:**
+- p₁/p₂ = φ⁸ (in Dok. 293 nicht identifiziert)
+- p₀/p₂ = 2φ⁴ (neu)
+- p₁/p₀ = φ⁴/2 (neu)
+- 3√pⱼ ∈ {√2, φ², 1/φ²} — das φ-Skelett der Massen, rein aus A₅-Geometrie
+
+**Approximative Massenverbindungen [K] — erste Verbindung Dok. 293 ↔ Dok. 338:**
+- m_τ/m_e ≈ 74 × φ⁸ = 74 × p₁/p₂ (0.03%)
+- m_μ/m_e ≈ 30 × φ⁴ = 15 × p₀/p₂ (0.56%)
+- ε ≈ 27ξ/12 (0.49%), alle Faktoren Galois-nativ aus Dok. 338
+Beide Näherungen fundamental begrenzt: cos(2/9) transzendent.
+
+**Grenze des analytischen Beweiswegs [S]:** Prüfversuch über FFGFT-Formel
+(25/12)·ξ^(-5/6) ergibt c_bare − c_frak = 1.72 ≠ 27/12 = 2.25 (23% Diskrepanz).
+Ursache: ξ^(-5/6) entwickelt sich in ξ^(1/6), nicht ξ. Status bleibt [S].
+
+**Galois-Verbindung [S]:** Faktor 74 = 2×37 tritt in Dok. 338 als K_frak-Faktor
+der Feinstrukturkonstante auf — dieselbe Galois-Schicht, verschiedene Rollen.
+
+**Prüfskript:** `2/python/Dok368_Skripte/pruef_368_p_massen.py` — 18/18 PASS.
+
+**Register:** kein Eintrag (neue Ergebnisse, keine Korrektur älterer Dokumente).
