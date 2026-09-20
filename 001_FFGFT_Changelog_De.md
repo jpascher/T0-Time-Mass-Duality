@@ -755,7 +755,7 @@ Eingang, Ausgang, Genauigkeit gegen PDG 2024, epistemischer Status.
 
 ## 20. September 2026 — Dok. 370: Warum das Ikosaeder
 
-### Dok. 370 — Drei, Fünf und das Nicht-Kommutieren (De/En, je 9 Seiten)
+### Dok. 370 — Drei, Fünf und das Nicht-Kommutieren (De 10 / En 9 Seiten)
 
 Erklärungsdokument, rechnet nichts Neues. Erzählt, was Dok. 285, 293, 367, 368
 zusammen bedeuten: FFGFT bringt eine ℤ₃ mit; φ ist die Zahl der Fünf; A₅ ist die
@@ -783,7 +783,7 @@ Schärfung aus dem IPI-Audit: ikosaedrische ℤ₃ (Spur 0, nicht-zentral) ≠
 Orbifold-ℤ₃ (ω·𝟙, zentral). Nur die nicht-zentrale kann gemischt werden — das
 Nicht-Vertauschen ist die Signatur, die FFGFT von einem Orbifold unterscheidet.
 
-Offen [S]: Galois-Faktoren (74 aus GF(3¹⁸), nicht aus A₅); fraktale Korrektur.
+Abschnitt „Was offen bleibt" neu (20. Sept.): (1) Negatives Ergebnis: ζ₃₇ ∈ GF(3¹⁸), ζ₅ ∈ GF(81), und 4 ∤ 18 — die ikosaedrische Phase und die K_frak-Phase liegen in unverträglichen Erweiterungen; das Ikosaeder erklärt 37 nicht [B]. Grad 18 = 2·3² = Kompositum GF(9)·GF(3⁹); neue Primzahlen dort 19 und 37; warum 37 statt 19 offen [S]. (2) Fraktale Korrektur in Lesart B (Koide fundamental) hergeleitet als Abstand Kosinus–Potenzgesetz (R121). (3) Verbleibende offene Kante: Ikosaeder-Phasen (GF(81)) und Galois-Ordnungen (GF(3ⁿ)) berühren sich nur in GF(9) = φ; ob sie eine gemeinsame Wurzel haben, offen [S].
 
 **Prüfskript:** keines (alle Zahlen aus 293/367/368 bereits geprüft; 5/9 und Spur φ
 in Sitzung numerisch verifiziert).
