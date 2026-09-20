@@ -718,3 +718,33 @@ werden kann — die naive „gleiche ℤ₃"-Brücke ist strukturell geschlossen
 
 **Prüfskript:** unverändert (`pruef_367_phase_wahrscheinlichkeit.py`, 18/18 PASS).
 **Register:** kein Eintrag (Ergänzung, keine Korrektur).
+
+---
+
+## 20. September 2026 — Dok. 369: Vier Wege zu den Leptonmassen
+
+### Dok. 369 — Bestandsaufnahme (De/En, je 8 Seiten)
+
+Stellt die vier im Korpus vorhandenen Zugänge zu den geladenen Leptonmassen nebeneinander:
+Eingang, Ausgang, Genauigkeit gegen PDG 2024, epistemischer Status.
+
+| Weg | Dok. | Ausgang | m_μ/m_e | m_τ/m_e |
+|---|---|---|---|---|
+| 1 T0-Leiter (r_i, p_i, ξ, v) | 006/338/352 | absolute Massen | 0.52 % | 1.56 % |
+| 2 Koide, θ = |⟨v₀\|R₅\|vₑ⟩|² | 292/367 | Verhältnisse | 0.001 % | 0.003 % |
+| 3 Galois GF(3ⁿ) | 338 | 2 Constraints | 0.52 % / 0.016 % | — |
+| 4 φ-Skelett p₁/p₂ = φ⁸ | 368 | Verhältnisse | 0.55 % | 0.027 % (0.003 % mit ξ-Korr.) |
+
+**Befunde:**
+- Zwei Genauigkeitsklassen: Prozent (Wege 1, 3, 4a) und 10⁻³ % (Wege 2, 4b); letztere innerhalb PDG-Unsicherheit von m_τ.
+- Weg 2 ist der einzige parameterfreie und präziseste; Weg 1 der einzige mit absoluten Massen.
+- Weg 1 und Weg 3 geben für m_μ/m_e dieselbe Zahl 207.846 = √43200 — eine Route in zwei Sprachen.
+- Gemeinsame offene Kante [S]: die fraktal-rekursive Korrektur (117ξ in Weg 1, 27ξ/12 in Weg 4, in cos(2/9) bei Weg 2) ist gemessen, nicht hergeleitet.
+- Hinweis: Dok. 352 nutzt m_τ = 1776.86 (→ 117.4ξ); PDG 2024 gibt 1776.93 (→ 117.1ξ).
+
+- Weg 5 (neu, Abschn. 4): Koide-Skala M = Σm/6 aus der T0-Leiter: M_bare = 314.82 MeV, Abw. 0.31 %, Korrektur +23.1ξ = gewichtete Summe der drei Einzelkorrekturen (τ-dominiert). M ist keine unabhängige Skala; keine Galois-native Einzelform M = c·ξ^p·v (Summe dreier ξ-Potenzen). Ausdrückliche Warnung vor Zahlenspielen (81√15 trifft 0.044 %, ist aber einer von zwölf Zufallstreffern ohne Korpus-Motivation).
+
+- Narrative Schlusssektion „Was der Korpus zeigt" (Abschn. 5): die zwei Genauigkeitsklassen sind keine Qualitätsstufen der Theorie, sondern die Grenze zwischen dem, was FFGFT aus sich heraus sagt (dimensionslose Verhältnisse, 10⁻³ %, parameterfrei) und dem, wofür sie einen externen Anker braucht (absolute Werte in MeV, Prozentniveau, ein deklarierter Anker v). FFGFT sagt die Form des Spektrums voraus, nicht seine Größe.
+
+**Prüfskript:** `2/python/Dok369_Skripte/pruef_369_vier_wege.py` — 25/25 PASS.
+**Register:** kein Eintrag (Bestandsaufnahme, keine Korrektur).
