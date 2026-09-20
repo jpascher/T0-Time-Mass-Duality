@@ -1,13 +1,13 @@
 # „Die Zahl, die niemand erklärte" / „The Number That Nobody Explained" — KDP-Ausgaben
 
-Eingereicht am 20. September 2026. Ikosaeder-Buch (Koide-Formel, ξ = 4/30 000, T⁴-Träger).
+Eingereicht am 20. September 2026, seit 20. September 2026 live. Ikosaeder-Buch (Koide-Formel, ξ = 4/30 000, T⁴-Träger).
 
 | Ausgabe | Titel | Preis | ISBN / ASIN |
 |---|---|---|---|
 | Kindle eBook De | Die Zahl, die niemand erklärte: Wie das Ikosaeder das älteste Rätsel der Leptonphysik löst | 5,99 € (Amazon.de) | ASIN B0HKGDVZWC |
 | Kindle eBook En | The Number That Nobody Explained: How the Icosahedron Solves the Oldest Riddle of Lepton Physics | 5,99 $ (Amazon.com) | ASIN B0HKGDRQM7 |
-| Taschenbuch De | wie oben | 12,99 € | ISBN 9798175855396 |
-| Taschenbuch En | wie oben | 12,99 $ | kostenlose KDP-ISBN, siehe Taschenbuchinhalt bei KDP |
+| Taschenbuch De | wie oben | 12,99 € | ISBN 9798175855396, ASIN B0HKGHB7Z4 |
+| Taschenbuch En | wie oben | 12,99 $ | ISBN 9798175853859, ASIN B0HKGS23SN |
 
 Taschenbuch-Einstellungen: 6 × 9 Zoll, schwarz-weiß mit weißem Papier, kein Beschnitt, matt.
 Seiten: De 75 (Rücken 0,1712 in bei 76), En 73 (Rücken 0,1666 in bei 74) — kein Rückentext, da unter 79 Seiten.
