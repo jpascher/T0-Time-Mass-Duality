@@ -723,7 +723,7 @@ werden kann — die naive „gleiche ℤ₃"-Brücke ist strukturell geschlossen
 
 ## 20. September 2026 — Dok. 369: Vier Wege zu den Leptonmassen
 
-### Dok. 369 — Bestandsaufnahme (De/En, je 8 Seiten)
+### Dok. 369 — Bestandsaufnahme (De/En, je 9 Seiten)
 
 Stellt die vier im Korpus vorhandenen Zugänge zu den geladenen Leptonmassen nebeneinander:
 Eingang, Ausgang, Genauigkeit gegen PDG 2024, epistemischer Status.
@@ -744,7 +744,47 @@ Eingang, Ausgang, Genauigkeit gegen PDG 2024, epistemischer Status.
 
 - Weg 5 (neu, Abschn. 4): Koide-Skala M = Σm/6 aus der T0-Leiter: M_bare = 314.82 MeV, Abw. 0.31 %, Korrektur +23.1ξ = gewichtete Summe der drei Einzelkorrekturen (τ-dominiert). M ist keine unabhängige Skala; keine Galois-native Einzelform M = c·ξ^p·v (Summe dreier ξ-Potenzen). Ausdrückliche Warnung vor Zahlenspielen (81√15 trifft 0.044 %, ist aber einer von zwölf Zufallstreffern ohne Korpus-Motivation).
 
+- Nachtrag (20. Sept., Abschn. 4 „Zwei Lesarten der Korrektur"): Dok. 352 §10 (Lesart A: T0 fundamental, ε_i aus QED/SI-Projektion, R113-Brücke offen) neben Lesart B (Dok. 367: Koide fundamental, T0 = rationale Näherung, ε_i = Abstand Kosinus–Potenzgesetz ohne QED [K]). Beide geben dieselben Zahlen; B ist sparsamer, ihre offene Frage ist zahlentheoretisch (warum GF(3ⁿ)-Wicklungszahlen), nicht QED. → Register R121.
+
 - Narrative Schlusssektion „Was der Korpus zeigt" (Abschn. 5): die zwei Genauigkeitsklassen sind keine Qualitätsstufen der Theorie, sondern die Grenze zwischen dem, was FFGFT aus sich heraus sagt (dimensionslose Verhältnisse, 10⁻³ %, parameterfrei) und dem, wofür sie einen externen Anker braucht (absolute Werte in MeV, Prozentniveau, ein deklarierter Anker v). FFGFT sagt die Form des Spektrums voraus, nicht seine Größe.
 
 **Prüfskript:** `2/python/Dok369_Skripte/pruef_369_vier_wege.py` — 25/25 PASS.
-**Register:** kein Eintrag (Bestandsaufnahme, keine Korrektur).
+**Register:** R121 (Dok. 352 §10: offener Punkt ε_i-Herkunft in Lesart B beantwortet, R113-Brücke nur noch in Lesart A nötig).
+
+---
+
+## 20. September 2026 — Dok. 370: Warum das Ikosaeder
+
+### Dok. 370 — Drei, Fünf und das Nicht-Kommutieren (De/En, je 9 Seiten)
+
+Erklärungsdokument, rechnet nichts Neues. Erzählt, was Dok. 285, 293, 367, 368
+zusammen bedeuten: FFGFT bringt eine ℤ₃ mit; φ ist die Zahl der Fünf; A₅ ist die
+kleinste Gruppe, in der Drei und Fünf koexistieren ohne zu vertauschen. Die
+FFGFT-ℤ₃ (Permutation C₃, Achse (1,1,1)) ist ohne Umdeutung eine 3-fach-Drehung
+des Ikosaeders. Weil R₅ nicht mit C₃ vertauscht, mischt R₅ die Fourier-Moden;
+die Mischungsgewichte haben eine rationale Komponente (2/9 = Koide-Phase) und zwei
+φ-Komponenten (Skelett der Massenverhältnisse).
+
+Einstieg über die Beobachtung (Koide-Formel, θ = 2/9 empirisch — warum?), dann Struktur.
+
+**Neu gegenüber Korpus [K]:** die vollständige 3×3-Matrix |⟨v_j|R₅|v_k⟩|² (alle Zeilen/Spalten summieren zu 1); insbesondere die Zeile der symmetrischen Mode:
+|⟨v₀|R₅|v_k⟩|² = (5, 2, 2)/9 — Amplituden (√5, √2, √2)/3, und 5+2+2 = 3².
+Die Fünf des Ikosaeders und die Drei von FFGFT in einer Zeile. Spur R₅ = φ.
+
+Neuer Abschnitt 5 „Wo das Ikosaeder wohnt: ausgerollt, nicht kompakt" (Verweise 285, 314, 364):
+das Ikosaeder wirkt auf dem ausgerollten ℝ³ (T⁴ → ℝ³×S¹), nicht auf dem kompakten T⁴ mit D₄ —
+dort ist A₅ unverträglich (5 ∤ 1152). Die Fünf tritt in FFGFT nicht als Gittersymmetrie ein,
+sondern als Phase ζ₅ ∈ GF(81) (5 | 80); die Drei muss Gitter sein, weil in Charakteristik 3
+keine primitive dritte Einheitswurzel existiert. Beide treffen sich im Körper, nicht in der
+Geometrie. Die 364-Aussagen (φ⁴ = −1 in GF(9), 5 ∤ 1152, 5 | 80, x³−1 = (x−1)³ mod 3) in
+Sitzung mit sympy verifiziert.
+
+Schärfung aus dem IPI-Audit: ikosaedrische ℤ₃ (Spur 0, nicht-zentral) ≠
+Orbifold-ℤ₃ (ω·𝟙, zentral). Nur die nicht-zentrale kann gemischt werden — das
+Nicht-Vertauschen ist die Signatur, die FFGFT von einem Orbifold unterscheidet.
+
+Offen [S]: Galois-Faktoren (74 aus GF(3¹⁸), nicht aus A₅); fraktale Korrektur.
+
+**Prüfskript:** keines (alle Zahlen aus 293/367/368 bereits geprüft; 5/9 und Spur φ
+in Sitzung numerisch verifiziert).
+**Register:** kein Eintrag (Erklärungsdokument).
