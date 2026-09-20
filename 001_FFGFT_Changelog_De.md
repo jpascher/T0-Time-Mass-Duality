@@ -696,3 +696,25 @@ der Feinstrukturkonstante auf — dieselbe Galois-Schicht, verschiedene Rollen.
 **Prüfskript:** `2/python/Dok368_Skripte/pruef_368_p_massen.py` — 18/18 PASS.
 
 **Register:** kein Eintrag (neue Ergebnisse, keine Korrektur älterer Dokumente).
+
+---
+
+## 20. September 2026 — Dok. 367 (Nachtrag): Externe Parallele [E]
+
+### Dok. 367 — Ergänzung „Externe Parallele" im Abschnitt „Zur Sprache" (De/En, weiterhin 9 Seiten)
+
+Neuer Absatz nach dem Sprachhinweis: derselbe Quotient 2/3² tritt unabhängig in der
+konformen Feldtheorie von ℤ₃-Orbifolds auf — die beiden Twist-Felder haben konforme
+Gewichte h_k = k(3−k)/(2·3²) = 1/9, also h₁+h₂ = 2/9 (Dixon–Friedan–Martinec–Shenker 1987) [E].
+Gleiches Zählmuster (nicht-triviale ℤ₃-Sektoren über |ℤ₃|²), aber ausdrücklich ein
+*anderes* Objekt: Summe konformer Dimensionen statt Betragsquadrat einer Projektion;
+zentrale ℤ₃-Wirkung ω·𝟙 statt zyklischer Permutation C₃ ∈ A₅. Die Parallele belegt
+nur, dass 2/3² eine ℤ₃-strukturelle Zählgröße ist — keine Identifikation behauptet.
+
+Hintergrund: der Befund ergab sich beim IPI-Audit einer vorgeschlagenen
+A₅→SO(6)-Brücke (Prüfskripte unter `2/python/IPI_Audits/`). Dort zeigte sich zugleich,
+dass A₅ (triviales Zentrum) in keiner treuen Darstellung auf das zentrale ω·𝟙 abgebildet
+werden kann — die naive „gleiche ℤ₃"-Brücke ist strukturell geschlossen.
+
+**Prüfskript:** unverändert (`pruef_367_phase_wahrscheinlichkeit.py`, 18/18 PASS).
+**Register:** kein Eintrag (Ergänzung, keine Korrektur).
