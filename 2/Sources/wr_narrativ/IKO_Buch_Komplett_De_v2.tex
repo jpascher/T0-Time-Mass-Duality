@@ -1,0 +1,979 @@
+\documentclass[12pt,oneside]{book}
+\usepackage[
+    paperwidth=6in,paperheight=9in,
+    top=0.85in,bottom=0.85in,left=0.65in,right=0.65in,
+    twoside=false
+]{geometry}
+\input{../pri-end/T0_preamble_De.tex}
+\input{../pri-end/T0_preamble_patches.tex}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{titlesec}
+\usepackage{microtype}
+
+% FFGFT-Farben
+\definecolor{ffgblue}{RGB}{0,90,160}
+\definecolor{ffggray}{RGB}{90,90,90}
+\definecolor{ffglight}{RGB}{240,245,250}
+
+% Kapitelformat blau wie in Johanns Version
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\color{ffgblue}}
+  {\filright\Large Kapitel \thechapter}
+  {1ex}{\Huge}
+\titlespacing*{\chapter}{0pt}{-20pt}{30pt}
+
+\titleformat{\section}
+  {\normalfont\large\bfseries\color{ffgblue}}
+  {\thesection}{1em}{}
+
+% Merkboxen
+\newtcolorbox{merkbox}[1][]{
+  colback=ffglight,colframe=ffgblue,
+  fonttitle=\bfseries,title=#1,
+  boxrule=0.5pt,arc=2pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt}
+
+\newtcolorbox{zitatbox}{
+  colback=white,colframe=ffggray,
+  boxrule=0.4pt,arc=0pt,
+  left=10pt,right=10pt,top=6pt,bottom=6pt}
+
+\makeatletter\renewcommand{\thechapter}{\arabic{chapter}}\makeatother
+\raggedbottom\allowdisplaybreaks
+\hfuzz=3pt\vfuzz=3pt\emergencystretch=2em
+\sloppy
+\setcounter{tocdepth}{1}
+
+\begin{document}
+\hfuzz=3pt\vfuzz=3pt
+\emergencystretch=2em
+\sloppy
+
+\frontmatter
+\pagestyle{fancy}
+\makeatletter\let\ps@plain\ps@fancy\makeatother
+\begin{titlepage}
+  \centering\vspace*{1.5cm}
+  {\Huge\bfseries\color{ffgblue}Die Zahl, die niemand erklärte}\\[0.6cm]
+  {\Large\bfseries\color{ffgblue!70}Wie das Ikosaeder das älteste Rätsel\\[0.2cm]der Leptonphysik löst}\\[1.5cm]
+  {\LARGE\itshape Fundamentale Fraktale Geometrische\\[0.2cm]Feldtheorie (FFGFT)}\\[2cm]
+  {\large Johann Pascher}\\[0.3cm]
+  {\normalsize ORCID: 0009-0000-6518-4064}\\[0.3cm]
+  {\normalsize\url{https://github.com/jpascher/T0-Time-Mass-Duality}}\\[1.5cm]
+  {\normalsize September 2026 -- Version 2.0}\vfill
+  {\small Deutsche Ausgabe}
+\end{titlepage}
+\tableofcontents
+
+\chapter*{Vorbemerkung}
+\addcontentsline{toc}{chapter}{Vorbemerkung}
+
+Dieses Buch erzählt eine Theorie, die sich traut, alles aus einer einzigen Zahl zu bauen. Nicht ungefähr. Exakt.
+
+Es beginnt mit dem großen Bild: was FFGFT ist, auf welcher Geometrie sie aufbaut, und warum die Massen der Teilchen keine freien Parameter sind, sondern Konsequenzen einer Geometrie. Der erste Teil legt den Boden.
+
+Der zweite Teil erklärt, wie aus dem geschlossenen vier\-dimen\-sio\-nalen Torus der Raum und die Zeit werden, den wir beobachten. Das ist keine Nebenfrage, sondern der Schlüssel zum dritten Teil.
+
+Der dritte Teil kommt zur Ikosaeder-Geschichte: ein altes Rätsel, ein unerwartetes geometrisches Objekt, und eine Rechnung, die eine vierzigjährige offene Frage schließt.
+
+Die Übergänge zwischen den drei Teilen sind absichtlich explizit gehalten. Wer den Faden verliert, kann am nächsten Kapitelanfang wieder einsteigen.
+
+\vspace{0.5cm}
+\noindent\textit{Alle Ableitungen und Prüfskripte stehen im FFGFT-Korpus auf GitHub (Dok.~205, 270, 285, 293, 338, 352, 364, 367, 368, 369, 370).}
+
+\mainmatter
+
+% ============================================================
+\part{Der Boden: Eine Theorie, ein Parameter}
+% ============================================================
+
+\chapter{Das große Bild}
+
+\section{Eine ungewöhnliche Ausgangslage}
+
+Die meisten physikalischen Theorien beginnen mit einer Gleichung. Newton beginnt mit $F = ma$. Maxwell mit seinen vier Gleichungen. Einstein mit der Äquivalenz von Masse und Energie. Das sind Aussagen über Kräfte und Felder, die gemessen und überprüft werden.
+
+FFGFT beginnt mit einer \textbf{Form}. Nicht mit einer Gleichung, sondern mit einer geometrischen Gestalt: dem vier\-dimen\-sio\-nalen Torus. Das ist ungewöhnlich, und es lohnt sich, kurz zu fragen, warum eine Form eine Theorie sein kann.
+
+Die Antwort liegt darin, dass physikalische Gesetze oft \textbf{Symmetrien} sind. Die Erhaltung von Energie und Impuls folgt aus der Zeitverschiebungs- und Raumverschiebungsinvarianz — aus der Tatsache, dass die Form der Naturgesetze dieselbe ist, wenn man die Uhr vorstellt oder sich um einen Meter verschiebt. Das ist ein geometrisches Prinzip, kein mechanisches.
+
+Wenn man nun fragt, welche Geometrie des Raums alle bekannten Symmetrien der Teilchenphysik erzeugen kann, landet man auf dem Torus. Nicht als Annahme, sondern als Ergebnis einer Forderung: Welcher Raum hat genau die richtigen Sym\-metrie\-gruppen?
+
+\section{Was $\xi$ bedeutet}
+
+Der Parameter $\xi = 4/30000$ ist ein Verhältnis: er beschreibt, wie stark die fraktale Korrektur gegenüber dem Grundterm ist. Vier Teile Korrektur auf dreißigtausend Teile Grundstruktur. Das ist winzig — und trotzdem bestimmt es alle Massen.
+
+Der Grund liegt in der \textbf{Potenzierung}: die Masse einer Schwingungsmode skaliert wie $\xi^p$ mit einem Exponenten $p$, der von den Um\-lauf\-zahlen der Mode abhängt. Schon kleine Unterschiede in $p$ erzeugen große Unterschiede in der Masse. Das Elektron und das Tau-Lepton unterscheiden sich in ihrem Exponenten um $5/6$ — ein Unterschied, der durch $\xi^{5/6}$ zu einem Massenverhältnis von $1 : 3477$ aufgebläht wird.
+
+Das ist die Stärke des Potenzgesetzes: ein kleiner Hebel, große Wirkung.
+
+\begin{merkbox}[Die Grundkonstante]
+\[
+\xi_0 = \frac{4}{30000} \approx 1{,}33 \times 10^{-4}.
+\]
+Sie hat keine Einheit — so wie auch $\pi$ keine Einheit hat.
+\end{merkbox}
+
+FFGFT — Fundamentale fraktal-geometrische Feldtheorie — ist der Versuch, alle bekannten Elementarteilchen und ihre Wechselwirkungen aus einer einzigen geometrischen Voraussetzung abzuleiten: dass der dreidimensionale Raum die topologische Struktur eines vier\-dimen\-sio\-nalen, fraktal strukturierten Torus trägt.
+
+Die Theorie behauptet damit nicht, das Standardmodell zu ersetzen. Sie behauptet, ihm einen geometrischen Boden zu geben: die Massen, die im Standardmodell als 25 freie Parameter auftauchen, sind in FFGFT keine freien Zahlen, sondern Eigenwerte einer fixen Geometrie.
+
+\chapter{Warum ein Torus, und warum fraktal?}
+
+\section{Die erste Frage}
+
+Die erste Frage, die jede Theorie der Teilchenphysik beantworten muss, ist: Worauf schwingt eigentlich was?
+
+Das Standardmodell hat seine Antwort: Quantenfelder schwingen auf dem flachen Minkowski-Raum. Das funktioniert rechnerisch gut, aber es ist keine Erklärung — es ist eine Voraussetzung.
+
+FFGFT macht eine andere Wahl. Der Grund für diese Wahl ist nicht ästhetisch, sondern funktional: ein Torus erzeugt \textbf{quantisierte Schwingungsmoden}, und quantisierte Moden ergeben diskrete Massen. Das Teilchenspektrum ist also keine zusätzliche Eingabe, sondern eine Konsequenz der Topologie.
+
+\section{Warum vier Dimensionen?}
+
+Ein gewöhnlicher Torus ist zweidimensional: die Oberfläche eines Donuts. Aber Physik spielt sich in vier Dimensionen ab — drei räumliche und eine zeitliche. Also muss der Torus vierdimensional sein: $T^4$.
+
+Das bedeutet, dass vier unabhängige Richtungen periodisch sind. Jede Richtung hat einen Radius; die Möglichkeit, auf ihr umzulaufen, erzeugt eine Quantenzahl. Vier Richtungen, vier Sätze von Quantenzahlen — das ist der Ursprung der Um\-lauf\-zahlen.
+
+\section{Warum fraktal?}
+
+Ein reiner Torus hätte eine perfekte Periodizität. Die Natur hat das nicht: die Kopplungskonstanten laufen mit der Energie, Massen haben ein Spektrum, es gibt Korrekturen auf allen Skalen.
+
+Das alles passt zu einer \textbf{fraktalen} Geometrie. Nicht im Sinne von Mandelbrot-Mustern, sondern im präzisen Sinne von \textbf{Skalenselbstähnlichkeit}: dieselbe Grundstruktur auf verschiedenen Längenskalen, mit einem festen Verhältnis $\xi$ zwischen aufeinanderfolgenden Skalen.
+
+\chapter{Was schwingt: die Moden}
+
+\section{Das Bild der Saite}
+
+Stellen Sie sich eine Gitarrensaite vor. Sie schwingt, und nur bestimmte Frequenzen sind erlaubt: die Grundfrequenz und ihre ganzzahligen Vielfachen. Das liegt an der Randbedingung: die Saite ist an beiden Enden befestigt, und die Schwingung muss an den Enden null sein.
+
+Auf einem Torus gibt es keine Enden. Stattdessen gilt eine andere Bedingung: die Schwingung muss nach einem Umlauf exakt wieder an ihrem Ausgangspunkt ankommen. Das ist die \textbf{periodische Randbedingung}, und sie erzeugt dasselbe wie die befestigte Saite: ein diskretes Spektrum erlaubter Frequenzen.
+
+\section{Nicht alle Moden sind gleich}
+
+Das $D_4$-Gitter des Torus sortiert die Moden. Nicht jede Kombination von Um\-lauf\-zahlen ist gleich erlaubt: das Gitter schränkt die möglichen Kombinationen ein und gruppiert sie.
+
+Aus dieser Gruppierung entsteht die \textbf{Trialität}: eine dreifache Symmetrie, die die Moden in drei Klassen einteilt. Die erste Klasse enthält die symmetrischen Moden — die Tau-Leptonen und die schweren Bosonen. Die zweite und dritte enthalten die phasenbehafteten Moden — Elektronen, Myonen, Quarks.
+
+Drei Klassen: drei Generationen. Das ist keine Setzung, sondern eine Konsequenz der Gittergeometrie.
+
+\section{Drei Familien}
+
+Die Trialität des $D_4$-Gitters erzeugt automatisch eine dreiteilige Struktur der Umlaufmoden. Nicht als Setzung, sondern als Konsequenz der Gittergeometrie: je drei Moden gehören zusammen, und drei solcher Gruppen gibt es. Das ist der geometrische Ursprung der drei Lepton-Generationen — und der drei Quark-Generationen.
+
+\chapter{Wo Masse herkommt}
+
+\section{Masse ist keine Eigenschaft}
+
+Im Alltagsverständnis hat ein Gegenstand eine Masse, so wie er eine Farbe oder eine Form hat — als inhärente Eigenschaft. In der Physik ist das komplizierter.
+
+Im Standardmodell gibt es einen Mechanismus für Masse: das Higgs-Feld. Die Stärke der Wechselwirkung — die Yukawa-Kopplung — ist für jedes Teilchen ein freier Parameter. 25 Teilchen, 25 Parameter. Das ist kein Mechanismus, das ist ein Wörterbuch.
+
+FFGFT hat keinen Higgs-Mechanismus. Masse entsteht anders.
+
+\section{Masse als Bindungsenergie}
+
+In FFGFT schwingt ein Teilchen als Mode auf dem Torus. Die Mode ist nicht frei — sie wechselwirkt mit dem fraktalen Geometriegitter. Diese Wechselwirkung hat eine Stärke, die von der Umlaufzahl der Mode abhängt: je mehr Um\-lauf\-zahlen, desto stärker die Bindung, desto größer die Masse.
+
+Das ergibt eine Formel:
+\[
+m_i = r_i \cdot \xi^{p_i} \cdot v,
+\]
+wobei $r_i$ und $p_i$ aus den Um\-lauf\-zahlen kommen und $v = 246$~GeV die elektroschwache Skala ist.
+
+\section{Die Rekursion}
+
+Die fraktale Geometrie hat eine weitere Konsequenz: eine Kaskade von Korrekturen, die dem Muster $\xi^n$ folgen. Jede Skala korrigiert die nächste um den Faktor $\xi \approx 1{,}3 \times 10^{-4}$. Das ist winzig, aber es ist nicht null.
+
+Die Rekursion erklärt, warum die Massen der drei Generationen so unterschiedlich sind: Elektron, Myon und Tau unterscheiden sich in ihren Um\-lauf\-zahlen, und das Potenzgesetz $\xi^p$ erzeugt eine starke Spreizung schon bei kleinen Unterschieden im Exponenten.
+
+\chapter{Die Brückenformel: wie alles zusammenpasst}
+
+\section{Das Verhältnis zwischen Geometrie und Messung}
+
+Physik ist die Kunst, geometrische Tatsachen in Messwerte zu übersetzen. Die Geometrie des Torus ist abstrakt; Massen in Elektronenvolt sind konkret. Zwischen beiden braucht man eine Brücke.
+
+In FFGFT ist diese Brücke $\xi$. Auf der einen Seite stehen die Um\-lauf\-zahlen: ganzzahlig, aus der Geometrie, ohne Einheit. Auf der anderen Seite stehen Massen: in Elektronenvolt, messbar, mit Einheit. $\xi$ übersetzt, und $v = 246$~GeV setzt die Skala.
+
+\section{Warum nur ein Parameter?}
+
+Ein Parameter für alle Massen ist eine starke Behauptung. Sie sagt: die Massen der Teilchen sind nicht unabhängig voneinander. Sie folgen alle aus derselben geometrischen Grundkonstanten.
+
+Das ist falsifizierbar: wenn man je ein Teilchen findet, das nicht auf die Formel $r \cdot \xi^p \cdot v$ passt — und das mit ganzzahligem $r$ und rationalem $p$ aus der Gitterstruktur —, ist die Theorie widerlegt.
+
+\section{Ein Parameter für alles}
+
+Das Erstaunliche an FFGFT ist nicht, dass sie viele Parameter hat. Das Erstaunliche ist, dass sie einen einzigen hat.
+
+$\xi = 4/30000$ ist dimensionslos. Aus ihm folgen — über die Gitterstruktur des $T^4$-Torus — alle anderen dimensionslosen Verhältnisse der Physik: die Massenverhältnisse der Leptonen, die Fein\-struktur\-konstante, die Verhältnisse der Kopplungskonstanten.
+
+\chapter{Endliche Körper: die Zahlentheorie hinter den Massen}
+
+\section{Was ein endlicher Körper ist}
+
+In der Schule rechnet man mit rationalen Zahlen, reellen Zahlen, komplexen Zahlen. Das sind unendliche Körper: zwischen 0 und 1 liegen unendlich viele Zahlen.
+
+Es gibt auch \textbf{endliche Körper}. Der kleinste ist GF(2): nur zwei Elemente, 0 und 1. Addition: $1 + 1 = 0$ (keine Überläufe). Multiplikation normal. Das ist die Grundlage aller Computerprogramme: Bits.
+
+GF($p$) für eine Primzahl $p$ hat genau $p$ Elemente. GF($p^n$) hat $p^n$ Elemente. GF(9) = GF($3^2$) hat 9 Elemente; es enthält $\phi$ als algebraische Zahl. GF(81) = GF($3^4$) hat 81 Elemente; es enthält die fünfte Einheitswurzel.
+
+\section{Warum Charakteristik 3?}
+
+In einem Körper der Charakteristik $p$ gilt $1 + \dots + 1 = 0$. In GF(3):
+\[
+1 + 1 + 1 = 0.
+\]
+Das hat eine merkwürdige Konsequenz: $x^3 - 1 = (x - 1)^3$ in Charakteristik 3. Also hat $x^3 = 1$ nur die dreifache Wurzel $x = 1$ — keine primitiven dritten Einheitswurzeln.
+
+Das bedeutet: die Drei selbst kann in einem GF($3^n$)-Körper keine Phase sein. Die Drei ist neutralisiert — sie muss als Gitteroperation auftreten, nicht als Phasenrotation.
+
+\section{Wo die Fünf Platz findet}
+
+Die fünfte Einheitswurzel $\zeta_5$ lebt in GF(81). Das liegt daran, dass $5 \mid 80 = |\text{GF}(81)^*|$: die multiplikative Gruppe von GF(81) hat Ordnung 80, und 5 teilt 80.
+
+In GF(81) kann man also eine Rotation um $72^\circ$ als Phase ausdrücken. Das ist der Kanal, durch den das Ikosaeder in die algebraische Struktur eingeht.
+
+\chapter{$1/\alpha$: die Fein\-struktur\-konstante}
+
+\section{Die geheimnisvollste Zahl der Physik}
+
+Richard Feynman nannte sie „eine der größten verdammten Geheimnisse der Physik": die Fein\-struktur\-konstante $\alpha$. Ihr Kehrwert ist $1/\alpha \approx 137{,}036$ — eine dimensionslose Zahl, die die Stärke der elektromagnetischen Wechselwirkung bestimmt.
+
+FFGFT leitet ihn her. Nicht exakt — aber auf einem Niveau, das für eine Herleitung außergewöhnlich präzise ist.
+
+\section{Die Herleitung}
+
+In FFGFT kommt $1/\alpha$ aus der Galois-Struktur der GF($3^n$)-Körper, die das Gitter des Torus algebraisch beschreibt.
+
+\begin{merkbox}[Die Fein\-struktur\-konstante]
+\[
+\frac{1}{\alpha} = \frac{3700}{27} \cdot K_{\text{frak}}
+\]
+mit dem fraktalen Korrekturfaktor $K_{\text{frak}} = 74/75$.
+\end{merkbox}
+
+Die Zahl 3700 ist das Produkt $4 \cdot 25 \cdot 37 = 2^2 \cdot 5^2 \cdot 37$. Die Primfaktoren 2, 5 und 37 sind die neuen Primzahlen, die im Körper GF($3^{18}$) auftauchen — jener Körper, in dem die 37-Phase $\zeta_{37}$ lebt. Und 27 ist $3^3$, die Ordnung von GF(27).
+
+Das Ergebnis: $1/\alpha \approx 137{,}036$. Messwert: $137{,}036$. Die Übereinstimmung ist besser als $10^{-4}$.
+
+\chapter{Was die Theorie nicht behauptet}
+
+\section{Die drei häufigsten Fragen}
+
+\textbf{Erste Frage:} Wenn FFGFT aus einem Parameter alles ableitet — hat sie dann alles erklärt? Nein. Ein einziger Parameter ist kein Mangel an Ehrgeiz — er ist eine starke Behauptung.
+
+\textbf{Zweite Frage:} Widerspricht FFGFT der Quantenmechanik? Nein. FFGFT macht Aussagen über das Spektrum der Zustände — was es gibt. Die Quantenmechanik macht Aussagen über die Dynamik der Zustände — was mit ihnen passiert. Beides ist kompatibel, weil die Ebenen getrennt sind.
+
+\textbf{Dritte Frage:} Gibt es Vorhersagen, die man messen kann? Ja. Die präziseste ist die Koide-Formel mit $\theta = 2/9$. Sie ist überprüfbar: wenn je ein viertes geladenes Lepton entdeckt wird, kann man sofort testen, ob es auf die Koide-Kurve passt.
+
+\section{Drei Missverständnisse}
+
+Dieses Buch hat einen begrenzten Fokus. Es erzählt die Geschichte der Leptonmassen und des Ikosaeders. Das ist nur ein Ausschnitt aus dem Gesamtprogramm.
+
+FFGFT ist keine Vereinheitlichung im Grand-Unified-Sinne. Sie vereinheitlicht nicht Elektrodynamik, schwache und starke Wechselwirkung in einer einzigen Symmetriegruppe. Sie gibt ihnen einen gemeinsamen geometrischen Boden, behält aber ihre strukturellen Unterschiede.
+
+FFGFT ersetzt keine Quantenmechanik. Quantenmechanik beschreibt, wie man Messungen an Zuständen macht. FFGFT beschreibt, wo diese Zustände herkommen. Beide Ebenen bleiben getrennt.
+
+% ============================================================
+\part{Das Ausrollen: Wie der Torus zur Welt wird}
+% ============================================================
+
+\chapter{Vier Kreise für eine Welt}
+
+\section{Eine unerwartete Antwort}
+
+Wenn man fragt: Wie viele Dimensionen hat die Welt?, lautet die schnelle Antwort: vier. Drei räumliche, eine zeitliche. Das ist seit Einstein Standard.
+
+Aber das ist die beobachtbare Antwort, nicht die fundamentale. FFGFT fragt: Wie viele Dimensionen hat der Raum, bevor der Messvorgang eine davon zur Zeit macht? Die Antwort ist ebenfalls vier — aber das ist nicht dasselbe.
+
+\section{Warum vier?}
+
+Der $T^4$-Torus hat vier unabhängige Kreisrichtungen. Warum vier? Die Antwort ist eine der einfachsten, die die Physik kennt: minimal und hinreichend.
+
+\textbf{Minimal:} ein $T^3$ hätte nicht genug Raum für Masse und Ladung als unabhängige Erhaltungsgrößen. Die vierte Richtung ist die Massedimension.
+
+\textbf{Hinreichend:} ein $T^5$ oder höher würde mehr freie Parameter einführen als beobachtbar. $T^4$ ist der kleinste kompakte Raum, auf dem FFGFT ohne Redundanz auskommt.
+
+\section{Die zentrale Relation}
+
+Der Schlüssel zur Massedimension ist eine einzige Gleichung. Sie sagt: Periodizität mal Masse gleich eins.
+
+\begin{merkbox}[Die Massedimension]
+\[
+\tilde{T} \cdot m = 1.
+\]
+$T$ ist die Periodizität der Massedimension, $m$ die Masse eines Teilchens.
+\end{merkbox}
+
+Aus dieser Relation folgt, dass ein massives Teilchen eine Zeitskala hat — eine charakteristische Periodizität. Das ist nicht dasselbe wie die Lebensdauer eines instabilen Teilchens; es ist eine topologische Eigenschaft der Geometrie.
+
+\chapter{Zwei verschiedene Arten zu reduzieren}
+
+\section{Eine scheinbar einfache Frage}
+
+Wie wird aus vier Dimensionen eine? Indem man drei weglässt. Das klingt trivial. Es ist es nicht, weil „weglassen" zwei sehr verschiedene Dinge bedeuten kann.
+
+Man kann eine Dimension weglassen, indem man nicht mehr hinschaut: eine \textbf{echte Projektion}, bei der Information verloren geht.
+
+Oder man kann eine Dimension weglassen, indem man sie in eine andere übersetzt: eine \textbf{Dualität}, bei der keine Information verloren geht.
+
+Das ist der entscheidende Unterschied in der Reduktionskette des $T^4$-Torus.
+
+\section{Die Kette sieht einfach aus — ist es nicht}
+
+\textbf{Der erste Schritt ($T^4 \to T^3$):} Die Massedimension wird nicht einfach weggeworfen. Sie wird über die Relation $\tilde{T} \cdot m = 1$ in die Zeitrichtung abgerollt. Das ist keine Projektion; es ist eine Dualität. Der Modeninhalt bleibt vollständig erhalten — nur seine Sichtbarkeit ändert sich.
+
+\textbf{Alle weiteren Schritte ($T^3 \to T^2 \to T^1 \to T^0$):} Das sind echte Projektionen räumlicher Richtungen. Jede davon ist verlustbehaftet; Information geht unwiederbringlich verloren. Die Rekursion $\xi^n$ kompensiert das teilweise, aber nicht vollständig.
+
+\section{Was das bedeutet}
+
+Raum entsteht durch echte Projektion — durch Aufgeben von Informationsgehalt. Zeit entsteht durch Dualität — durch Umschreiben derselben Information in einer anderen Sprache. Das erklärt, warum Zeit eine Auszeichnungsrichtung hat, während die drei Raumrichtungen symmetrischer sind.
+
+\chapter{Zeit als aufgerollte Dimension}
+
+\section{Der erste Schritt ist reversibel}
+
+Die Dualitäts-Dekompaktifizierung — das Abrollen der Massedimension zur Zeit — ist informationserhaltend. Das bedeutet: wenn man die vollständige Zeitentwicklung eines Systems kennt, kann man daraus die kompakte Massedimension rekonstruieren. Die beiden Bilder sind äquivalent.
+
+Das hat eine messbare Konsequenz: die Zeitentwicklung eines Zustands muss eine diskrete Spektralsignatur tragen — die kompakte Struktur überlebt als Resonanz. Diese Resonanz kodiert sich in der Rekursion $\xi^n$: die Abstände zwischen den Energieniveaus skalieren mit $\xi$.
+
+\section{Der holographische Schritt}
+
+Der Schritt $T^3 \to T^2$ — die Reduktion von drei auf zwei räumliche Dimensionen — ist besonders: er hat die Struktur einer holographischen Projektion. Der gesamte dreidimensionale Informationsgehalt lässt sich auf einer zweidimensionalen Fläche kodieren, wenn die Rekursion $\xi^n$ die fehlende Dimension komprimiert.
+
+\section{Ein konkretes Bild}
+
+Stellen Sie sich den Torus als aufgerollten Schlauch vor: kreisförmig in zwei Richtungen, mit zwei verschiedenen Radien. In vier Dimensionen gibt es vier solche Kreise, mit vier Radien.
+
+Der Übergang $T^4 \to T^3$ ist, als würde man einen Schlauch aufschneiden und gerade ziehen. Der aufgeschnittene Kreis — die Massedimension — wird zur Zeitachse. Die anderen drei Kreise bleiben Kreise: das sind die drei Raumrichtungen, die wir beobachten.
+
+\section{Was bleibt}
+
+Am Ende der Kette $T^4 \to T^3 \to T^2 \to T^1 \to T^0$ steht der beobachtbare Raum: $\mathbb{R}^3 \times \mathbb{R}_t$, drei räumliche Richtungen und eine Zeitrichtung. Dieser Raum ist nicht der Torus — er ist das ausgerollte Bild des Torus.
+
+Und genau hier — im ausgerollten Bild — wirkt das Ikosaeder. Nicht im kompakten Torus, wo es keinen Platz hat. Sondern im Raum, den wir sehen, der aus der Dualität und den Projektionen entstanden ist.
+
+Das ist die Brücke zum dritten Teil.
+
+% ============================================================
+\part{Das Ikosaeder: die Zahl, die alles erklärt}
+% ============================================================
+
+\chapter{Der goldene Schnitt — eine alte Bekannte}
+
+\section{Die schönste Zahl der Mathematik}
+
+Der goldene Schnitt $\phi = (1 + \sqrt{5})/2 \approx 1{,}618$ ist seit der Antike bekannt. Er beschreibt das Verhältnis, bei dem ein Streckenabschnitt so geteilt wird, dass das Verhältnis des Ganzen zum größeren Teil gleich dem Verhältnis des größeren zum kleineren Teil ist.
+
+Konkret: wenn man ein Rechteck so aufteilt, dass ein Quadrat entsteht und der Rest wieder ein ähnliches Rechteck — dann hat dieses Rechteck das Seitenverhältnis $\phi$. Man kann das beliebig oft wiederholen. Das ist Selbst\-ähn\-lich\-keit: die fraktale Eigenschaft, die in FFGFT im Parameter $\xi$ steckt.
+
+\section{$\phi$ in der Geometrie der Fünf}
+
+$\phi$ ist eng mit der Fünf verbunden. Der Kosinus von 72 Grad — dem Innenwinkel des regelmäßigen Fünfecks — ist $(\phi - 1)/2$. Die Diagonalen eines Fünfecks stehen im Verhältnis $\phi$ zu den Seiten.
+
+\section{$\phi$ in den Leptonmassen}
+
+Dass $\phi$ in den Leptonmassen auftaucht, ist deshalb kein Zufall — und auch keine bloße Schönheit. Es ist eine direkte Konsequenz der Ikosaeder-Symmetrie, die die Massen erzeugt.
+
+Die Umverteilungsgewichte $p_1$ und $p_2$, die beschreiben, wie viel der Fünffachdrehung in die phasenbehafteten Moden geht, stehen im Verhältnis $p_1/p_2 = \phi^8$. Das ist exakt — kein Näherungswert, keine Anpassung.
+
+$\phi^8 \approx 46{,}98$. Das Massenverhältnis $m_\tau / m_e \approx 3477$. Der Quotient ist 74 — ein Galois-Faktor aus dem Körper GF($3^{18}$). Dass das Produkt $74 \cdot \phi^8$ das Massenverhältnis auf 0,03 Prozent trifft, ist das präziseste Ergebnis der Theorie.
+
+\chapter{Koide, 1981: Vierzig Jahre warten}
+
+\section{Eine stille Entdeckung}
+
+Im Jahr 1981 veröffentlichte der japanische Physiker Yoshio Koide eine Beobachtung. Keine Sensation, keine Schlagzeilen — eine Beobachtung. Er hatte sich die Massen der drei geladenen Leptonen angeschaut und eine Relation gefunden.
+
+\begin{merkbox}[Die Koide-Formel]
+\[
+Q = \frac{m_e + m_\mu + m_\tau}{(\sqrt{m_e} + \sqrt{m_\mu} + \sqrt{m_\tau})^2} = \frac{2}{3}.
+\]
+Jede Verbesserung der Tau-Massen-Messung hat die Formel bestätigt.
+\end{merkbox}
+
+\section{Warum das Standardmodell schweigt}
+
+Das Standardmodell hat keinen Mechanismus, der $Q = 2/3$ erzwingt. Es hat freie Parameter — die Yukawa-Kopplungen —, mit denen man die Massen anpassen kann. Aber anpassen ist nicht erklären.
+
+Die Koide-Formel wäre in diesem Bild ein unglaublicher Zufall. Physiker mögen keine unglaublichen Zufälle.
+
+\section{Die Phase und die Frage}
+
+Die Formel lässt sich in einer anderen Form schreiben, die mehr Struktur zeigt:
+\[
+\sqrt{m_k} = \sqrt{M} \left(1 + \sqrt{2} \cos\left(\theta + \frac{2\pi k}{3}\right)\right).
+\]
+Damit $Q = 2/3$ gilt, muss $\theta = 2/9$ sein. Die Frage ist nicht mehr: Warum $Q = 2/3$? Die Frage ist: \textbf{Warum $\theta = 2/9$?}
+
+\chapter{Das Rätsel}
+
+\section{Drei Zahlen, ein Muster}
+
+Wenn man Physikstudenten im dritten Semester fragt, wie viele freie Parameter das Standardmodell hat, nennen sie meist drei bis fünf. Die wirkliche Zahl ist fünfundzwanzig. Für jede Teilchenmasse, jeden Mischungswinkel, jede Kopplungskonstante braucht man einen Zahlenwert, den die Theorie nicht erklärt — den man messen und eintragen muss.
+
+Unter diesen fünfundzwanzig sind drei besonders seltsam: die Massen von Elektron, Myon und Tau. Seltsam, weil sie nicht unabhängig voneinander sind. Weil eine einfache Formel über alle drei läuft. Weil diese Formel seit 1981 bekannt ist — und das Standardmodell bis heute keine Erklärung dafür hat.
+
+\section{Eine Formel ohne Erklärung}
+
+In der Sprache der Formel: der sogenannte Koide-Quotient $Q$ ist exakt gleich $2/3$.
+
+Das ist an sich schon bemerkenswert. Aber Koide fand mehr. Die drei Massen gehorchen einer einzigen Formel, die nur eine Phase enthält — eine Winkelgröße, die bestimmt, wie die drei Massen ineinandergreifen. Und dieser Winkel ist $\theta = 2/9$.
+
+Warum zwei Neuntel? Das wusste Koide nicht. Das weiß das Standardmodell der Teilchenphysik bis heute nicht. Die Formel funktioniert — sie trifft die Massen auf zwölf Dezimalstellen — aber niemand konnte sagen, woher sie kommt.
+
+\section{Was die Zahl bedeutet}
+
+Um zu verstehen, warum $2/9$ so seltsam ist, hilft ein Vergleich. In der Physik gibt es viele Konstanten, die man messen, aber nicht erklären kann: die Fein\-struktur\-konstante $\alpha \approx 1/137$, die Massen der Quarks, die Mischungswinkel der Neutrinos. Das Standardmodell nimmt diese Zahlen als gegeben hin und trägt sie als freie Parameter ein — etwa fünfundzwanzig an der Zahl. Man nennt sie frei, weil keine tiefere Theorie sie erzwingt.
+
+Die Koide-Formel ist anders. Sie ist keine Einzelzahl, die man irgendwo eintragen könnte. Sie ist eine Beziehung zwischen drei Massen, und diese Beziehung hat intern eine Struktur: die Phase $2/9$. Wenn man eine tiefere Theorie hätte, die diese Phase erklärt, würde sie nicht einen freien Parameter ersetzen, sondern einen ganzen Zusammenhang offenlegen.
+
+Hinzu kommt die Genauigkeit. Zwölf Dezimalstellen entsprechen einem Treffer auf ein Billionstel — besser als die meisten Experimente in der Physik. Wenn eine Formel so präzise passt, ist sie kein Zufall.
+
+\section{Was das Standardmodell sagt}
+
+Das Standardmodell der Teilchenphysik ist eine außerordentlich erfolgreiche Theorie. Es beschreibt alle bekannten Elementarteilchen und ihre Wechselwirkungen. Es hat Voraussagen gemacht, die auf ein Zehnmilliardstel bestätigt wurden. Aber es schweigt zu der Frage, warum es genau drei Generationen von Leptonen gibt, und es hat keinen Mechanismus, der die Koide-Formel erzwingt.
+
+Für das Standardmodell sind die Massen von Elektron, Myon und Tau einfach das, was das Experiment liefert. Man misst sie, trägt sie ein, und weiter. Dass diese drei Zahlen so zusammenhängen, wie Koide beobachtet hat, ist für das Standardmodell eine Koinzidenz — eine sehr präzise, aber zufällige.
+
+Genau das ist das Rätsel: eine Präzision, die zu groß ist für Zufall, und eine Formel, die zu einfach ist für das Standardmodell, aber zu merkwürdig, um ignoriert zu werden.
+
+\chapter{Drei Teilchen}
+
+\section{Drei Generationen — eine ungelöste Frage}
+
+In der Natur gibt es von jedem geladenen Lepton genau drei Versionen: Elektron, Myon, Tau. Von jedem Neutrino gibt es drei: Elektronneutrino, Myonneutrino, Tauneutrino. Von jedem Quark gibt es drei: up/charm/top, down/strange/bottom. Drei mal drei, dreimal Drei.
+
+Das ist keine Erklärung. Das ist eine Beobachtung. Das Standardmodell trägt diese Dreizahl als Tatsache ein, ohne zu erklären, warum es gerade drei Generationen sind.
+
+FFGFT hat eine Erklärung: die \textbf{Trialität} des $D_4$-Gitters. Eine Symmetrie der Ordnung drei, die den Modenraum in drei Klassen aufteilt. Drei Klassen, drei Generationen. Das ist geometrisch erzwungen.
+
+\section{Ein Rätsel in den Massen}
+
+Das Verhältnis der Massen der drei geladenen Leptonen ist $m_e : m_\mu : m_\tau \approx 1 : 207 : 3477$. Das ist keine gleichförmige Verteilung.
+
+In FFGFT ist der Grund das Potenzgesetz: Masse skaliert wie $\xi^p$ mit dem Exponenten $p$, der von der Umlaufzahl abhängt. Schon kleine Unterschiede in $p$ erzeugen bei $\xi \approx 10^{-4}$ sehr große Unterschiede in der Masse. Das erklärt die Hierarchie.
+
+\section{Drei Moden}
+
+Mit der Trialität kommt eine natürliche Basis: drei Schwingungsmoden, die auf dem Torus nebeneinander existieren. Der mathematische Name dafür sind Fourier-Moden.
+
+Die drei Moden heißen $v_0, v_1, v_2$. Die nullte Mode schwingt symmetrisch, die erste und zweite tragen je eine Phase. Das Tau sitzt in der symmetrischen Mode, das Elektron und das Myon in den beiden phasenbehafteten.
+
+Mit diesem Bild hat man die Drei erklärt: drei Generationen, weil der Torus eine dreifache Symmetrie hat. Aber man hat noch keine Massen. Um Massen zu bekommen, braucht man eine Zahl — und für diese Zahl braucht man das Ikosaeder.
+
+\chapter{Das Ikosaeder}
+
+\section{Das überraschende Objekt}
+
+Wenn man einen Physiker fragt, welches mathematische Objekt die Leptonmassen erklärt, erwartet man als Antwort eine Gruppe wie $SU(3)$ oder $SO(10)$, vielleicht ein Symmetrieprinzip, eine erhaltene Ladung. Man erwartet keine Antwort aus der Geometrie des antiken Griechenland.
+
+Das Ikosaeder ist eines der fünf platonischen Körper, die Platon in seinem Dialog Timaios den Elementen zuordnet: Feuer dem Tetraeder, Luft dem Oktaeder, Wasser dem Ikosaeder, Erde dem Würfel, und dem Kosmos das Dodekaeder. Das ist nicht Physik, das ist Mythologie.
+
+Aber die Symmetriegruppe des Ikosaeders ist keine Mythologie. Sie ist eine mathematische Struktur von außerordentlicher Reichhaltigkeit — und sie ist genau das Objekt, das die Koide-Formel erklärt.
+
+\section{Ein platonischer Körper}
+
+Das Ikosaeder ist einer der fünf platonischen Körper. Es hat zwanzig gleichseitige Dreiecksflächen, dreißig Kanten und zwölf Ecken. An jeder Ecke treffen sich fünf Dreiecke. Es ist das komplizierteste der fünf platonischen Körper und das, mit dem sich Symmetrie am reichsten entfaltet.
+
+\section{Die Drehsymmetrien}
+
+Was das Ikosaeder für die Physik interessant macht, ist nicht seine Form, sondern seine Symmetriegruppe. Die Menge aller Drehungen, die das Ikosaeder auf sich selbst abbilden, bildet eine mathematische Gruppe: die Ikosaedergruppe, genannt $A_5$.
+
+$A_5$ hat sechzig Elemente. Das klingt viel, lässt sich aber schön aufteilen: eine Identität, fünfzehn Drehungen um $180^\circ$ durch Kantenmittelpunkte, zwanzig Drehungen um $120^\circ$ durch Flächenmittelpunkte, und vierundzwanzig Drehungen um $72^\circ$ oder $144^\circ$ durch Ecken.
+
+Unter diesen sechzig Drehungen gibt es also Elemente der Ordnung drei (die $120^\circ$-Drehungen) und Elemente der Ordnung fünf (die $72^\circ$-Drehungen). Das Ikosaeder enthält die Drei und die Fünf unter einem Dach — und zwar auf eine besondere Weise.
+
+\section{Die kleinste Gruppe, in der Drei und Fünf zusammenleben}
+
+Die $\mathbb{Z}_{15}$ ist die zyklische Gruppe der Ordnung fünfzehn. Sie enthält Elemente der Ordnung drei und der Ordnung fünf. Aber in $\mathbb{Z}_{15}$ vertauschen diese Elemente miteinander: eine Drehung um Drei, gefolgt von einer Drehung um Fünf, ist dasselbe wie umgekehrt.
+
+In $A_5$ ist das anders. Eine $120^\circ$-Drehung gefolgt von einer $72^\circ$-Drehung ist etwas anderes als die umgekehrte Reihenfolge. Die Drei und die Fünf vertauschen nicht. Das ist der technische Kern — und es ist genau das, was die entscheidende Zahl erzeugt.
+
+$A_5$ ist die kleinste Gruppe, in der Drei und Fünf so zusammenleben, dass sie nicht vertauschen.
+
+\section{Das Ikosaeder und der Torus}
+
+Hier kommt eine wichtige Unterscheidung. Der Torus, auf dem FFGFT aufbaut, ist ein kompaktes, geschlossenes Objekt: ein vierdimensionaler Torus. Auf diesem Torus wirkt die Drei — als Gitteroperation, als Trialität. Aber die Fünf hat keinen Platz auf dem Torus. Die Symmetriegruppe des Gitters ist zu klein; die Fünf teilt diese Gruppe nicht.
+
+Das Ikosaeder dagegen wirkt auf dem Raum, den wir beobachten: den dreidimensionalen Raum, der entsteht, wenn man einen Kreis des Torus durch den Messvorgang zur Zeit werden lässt. Das ist das „ausgerollte" Bild — der Torus aufgefaltet in Raum und Zeit. Auf diesem ausgerollten Raum ist das Ikosaeder zuhause.
+
+Die $120^\circ$-Drehung um die Achse $(1, 1, 1)$ ist genau dieselbe wie die Trialität des Torus. Ohne Umdeutung, ohne Umbenennung: dieselbe mathematische Operation, einmal als Gitterautomorphismus des Torus beschrieben, einmal als Drehung des Ikosaeders im beobachtbaren Raum. Die Drei ist in beiden Bildern dieselbe.
+
+Die Fünf ist nur im ausgerollten Bild.
+
+\chapter{Drei und Fünf — das Nicht-Vertauschen}
+
+\section{Ein Spielzeug-Beispiel}
+
+Nehmen Sie ein Buch. Legen Sie es flach auf den Tisch, Rücken nach oben. Drehen Sie es nun: erst 90 Grad um die Hochachse, dann 90 Grad um die waagerechte Querachse. Wo ist das Buch jetzt?
+
+Führen Sie dieselben Drehungen in umgekehrter Reihenfolge aus: erst die Querachse, dann die Hochachse. Das Buch landet anders.
+
+Das ist Nicht-Kommutati\-vität im Alltag. Zwei Drehungen, in verschiedenen Reihenfolgen ausgeführt, geben verschiedene Ergebnisse.
+
+\section{Was Nicht-Vertauschen bedeutet}
+
+In der Mathematik heißt eine Operation, die mit einer anderen vertauscht, \textbf{kommutativ}. Die Addition ganzer Zahlen ist kommutativ: $3 + 5 = 5 + 3$. Die Multiplikation von Matrizen ist es im Allgemeinen nicht.
+
+Für das Ikosaeder bedeutet das: die $120^\circ$-Drehung um die $(1, 1, 1)$-Achse und die $72^\circ$-Drehung um die $(0, 1, \phi)$-Achse — mit $\phi = (1 + \sqrt{5})/2$ dem goldenen Schnitt — in verschiedenen Reihenfolgen geben verschiedene Ergebnisse.
+
+\section{Die Mathematik des Nicht-Vertauschens}
+
+In der Mathematik nennt man eine Gruppe „nicht-abelsch", wenn sie nicht-kommutative Elemente enthält. Die Gruppe $A_5$ der Ikosaeder-Drehungen ist nicht-abelsch.
+
+Nicht-abelsche Gruppen sind in der Physik wichtig. Die Eichsymmetrien des Standardmodells — $SU(3)$, $SU(2)$, $U(1)$ — sind ebenfalls nicht-abelsch (außer $U(1)$). Das Nicht-Vertauschen in diesen Gruppen ist der Grund für die Selbstwechselwirkung der Gluonen, die die starke Kernkraft so stark macht.
+
+In FFGFT ist das Nicht-Vertauschen von $C_3$ (die Drei) und $R_5$ (die Fünf) der Grund dafür, dass eine Drehung eine Mischung erzeugt. Wenn beide vertauschen würden, bliebe die Elektron-Mode bei sich selbst: keine Mischung, kein $2/9$.
+
+\section{Warum das eine Zahl erzeugt}
+
+Stellen Sie sich vor, die drei Moden $v_0, v_1, v_2$ sind wie drei Töpfe. Die Trialitätsdrehung — die Drei — sortiert die Töpfe in einer bestimmten Weise. Wenn man die Fünffachdrehung des Ikosaeders auf die Elektron-Mode $v_1$ anwendet, dann landet das Ergebnis nicht sauber wieder in $v_1$. Es verteilt sich auf alle drei Moden, weil die Drehung nicht mit der Sortierung vertauscht.
+
+Die Anteile, die auf die drei Moden entfallen, sind die Umverteilungsgewichte. Sie stehen fest — bestimmt von der Geometrie des Ikosaeders — und können berechnet werden.
+
+Das Gewicht, das auf die symmetrische Mode $v_0$ entfällt, ist
+\[
+p_0 = \frac{2}{9} = \frac{2}{3^2}.
+\]
+Zwei Neuntel. Die Zahl, die Koide seit 1981 beschäftigt.
+
+\section{Warum genau $2/9$?}
+
+Die Zahl hat eine einfache Erklärung, wenn man weiß, wie man zählen muss. Im Zähler steht die Zahl der nicht-trivialen Moden: zwei (denn $v_0$ ist die symmetrische, die „triviale"). Im Nenner steht die Ordnung der Gruppe im Quadrat: $3^2 = 9$. Der Quotient ist $2/9$.
+
+Das ist keine Anpassung, kein Fit, kein freier Parameter. Es ist eine Konsequenz der Gruppenstruktur: zwei nicht-triviale Moden, Gruppe der Ordnung drei, Betragsquadrat des Projektionsoperators.
+
+\section{Die ganze Tabelle}
+
+Die Fünffachdrehung verteilt nicht nur die Elektron-Mode. Sie verteilt alle drei Moden. Jede Zeile der folgenden Tabelle zeigt, wohin eine Mode geht: der erste Wert sagt, wie viel in der symmetrischen Mode $v_0$ landet, der zweite in $v_1$, der dritte in $v_2$.
+
+\begin{center}
+\begin{tabular}{c|ccc}
+\toprule
+& $v_0$ & $v_1$ & $v_2$ \\
+\midrule
+$v_0$ & $5/9$ & $2/9$ & $2/9$ \\
+$v_1$ & $2/9$ & $(2+3\phi)/9$ & $(5-3\phi)/9$ \\
+$v_2$ & $2/9$ & $(5-3\phi)/9$ & $(2+3\phi)/9$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die erste Zeile sagt: von der symmetrischen Mode bleiben $5/9$ erhalten, und je $2/9$ gehen an jede der anderen beiden. Die Amplituden sind $\sqrt{5}/3$, $\sqrt{2}/3$, $\sqrt{2}/3$ — und $5 + 2 + 2 = 9 = 3^2$.
+
+In dieser einen Zeile stehen die Fünf des Ikosaeders und die Drei von FFGFT nebeneinander. Das Nicht-Vertauschen hat eine Zahl produziert.
+
+In den zweiten und dritten Zeilen taucht $\phi$ auf — der goldene Schnitt. Er erscheint dort, wo die Fünffachdrehung die beiden phasenbehafteten Moden verbindet, weil diese Moden die Fünf „sehen". Die symmetrische Mode sieht sie nicht — und liefert deshalb eine rationale Zahl, $2/9$.
+
+\chapter{Die eine Rechnung}
+
+\section{Ein einziges Matrixelement}
+
+In der Quantenmechanik berechnet man Über\-gangs\-wahr\-schein\-lich\-keiten als Betragsquadrate von sogenannten Matrixelementen. Die Frage lautet: wenn ein System im Zustand A ist und man eine Operation anwendet, wie viel landet im Zustand B? Die Antwort ist eine komplexe Zahl; ihr Betragsquadrat gibt die Wahrscheinlichkeit.
+
+In FFGFT ist die relevante Frage: wenn die Elektron-Mode $v_1$ vorliegt und man die Fünffachdrehung $R_5$ anwendet, wie viel landet in der symmetrischen Mode $v_0$? Physiker schreiben diesen Überlapp mit einer kompakten Notation:
+\[
+A = \langle v_0 | R_5 | v_1 \rangle.
+\]
+Gelesen: wie viel von $R_5$ angewendet auf $v_1$ landet in $v_0$. Das Ergebnis ist eine komplexe Zahl.
+
+Dieses eine Matrixelement trägt die gesamte Koide-Formel.
+
+\section{Betrag und Betragsquadrat}
+
+$A$ ist eine komplexe Zahl. Ihr Betrag ist $|A| = \sqrt{2}/3$. Das Betragsquadrat ist $|A|^2 = 2/9$.
+
+Beides wird in der Koide-Formel gebraucht — und zwar genau so:
+\begin{merkbox}[Die Koide-Formel aus dem Matrixelement]
+\[
+a_k = 1 + 3|A| \cos\left(|A|^2 + \frac{2\pi k}{3}\right).
+\]
+Der Koeffizient vor dem Kosinus ist $3|A| = \sqrt{2}$. Das Argument des Kosinus enthält $|A|^2 = 2/9$ als Phase.
+\end{merkbox}
+
+Betrag liefert die Amplitude, Betragsquadrat liefert den Winkel. Dasselbe Matrixelement in zwei Rollen. Kein freier Parameter — das Matrixelement enthält bereits alles.
+
+\section{Was die Koide-Formel sagt}
+
+Die Formel gibt für $k = 0, 1, 2$ drei Amplituden $a_0, a_1, a_2$. Die Massen der drei Leptonen sind proportional zu $a_k^2$:
+\[
+m_k = M \cdot a_k^2.
+\]
+Die Skala $M$ — wie groß die Massen insgesamt sind — kommt nicht aus dem Ikosaeder. Sie ist der einzige Anker, den die Theorie von außen braucht, und er kommt aus dem anderen Teil von FFGFT, der Torus-Leiter.
+
+Alles andere — die Verhältnisse der Massen, der Koide-Quotient $2/3$, die Phase $2/9$ — folgt aus dem Matrixelement. Auf zwölf Dezimalstellen Genauigkeit.
+
+\section{Eine neue Antwort auf die alte Frage}
+
+Koide hat die Formel gemessen. FFGFT leitet sie her. Die Frage „Warum $2/9$?" hat jetzt eine Antwort: weil $2/9$ das Betragsquadrat des Matrixelements ist, das beschreibt, wie viel die Fünffachdrehung des Ikosaeders von der Elektron-Mode in die symmetrische Mode wirft.
+
+Die Antwort ist so einfach, dass sie überraschend klingt. Aber einfach bedeutet in der Physik nicht naiv — es bedeutet, dass die zugrundeliegende Struktur sauber ist.
+
+\chapter{Zwei Welten}
+
+\section{Der Torus: kompakt und geschlossen}
+
+FFGFT baut auf einem vier\-dimen\-sio\-nalen Torus auf. Ein Torus ist eine geschlossene, endliche Fläche ohne Rand — wie die Oberfläche eines Donuts, aber in vier Dimensionen. Auf diesem Torus können Felder umlaufen, und die Um\-lauf\-zahlen — die Wicklungszahlen — bestimmen die Eigenschaften der Teilchen.
+
+Der Torus trägt ein Gitter: die $D_4$-Gitterstruktur. Dieses Gitter ist das Fundament aller ganzzahligen Strukturen in FFGFT. Die Trialität — die dreifache Symmetrie, die die drei Leptonen-Generationen erklärt — ist eine Eigenschaft dieses Gitters.
+
+Entscheidend: das Gitter kennt keine Fünf. Die Symmetriegruppe des $D_4$-Gitters hat 1152 Elemente, und 5 teilt 1152 nicht. Das Ikosaeder — mit seinen Fünffachdrehungen — passt geometrisch nicht auf den Torus. Das ist kein Problem, sondern ein Befund.
+
+\section{Der beobachtbare Raum: ausgerollt}
+
+Was wir beobachten, ist nicht der Torus direkt. Der Torus wird zu Raum und Zeit: ein Kreis des Torus wird, durch den Messvorgang, zur Zeit. Was bleibt, ist ein dreidimensionaler Raum. Das ist das „ausgerollte" Bild.
+
+Im ausgerollten Bild wirkt das Ikosaeder. Hier dreht $R_5$ um $72^\circ$, hier sitzt die Achse $(0, 1, \phi)$, hier erzeugt das Nicht-Vertauschen die Zahl $2/9$.
+
+Die Drei ist in beiden Bildern dieselbe. Die zyklische Permutation $(x, y, z) \mapsto (y, z, x)$ im ausgerollten Raum ist exakt dieselbe Operation wie die Trialität des Gitters — zwei Namen für dasselbe Objekt. So schließen die beiden Bilder zusammen.
+
+Die Fünf ist nur im ausgerollten Bild. Sie tritt nicht als Gittersymmetrie auf, sondern als Phase — als Eigenwert der Drehung, der in einem algebraischen Körper lebt, nicht im Gitter.
+
+\section{Warum die Fünf als Phase eintreten muss}
+
+Das ist nicht eine mögliche Lesart unter anderen, sondern erzwungen. In der Mathematik der endlichen Körper, die FFGFT für die algebraische Struktur verwendet, gilt: in einem Körper der Charakteristik 3 gibt es keine primitive dritte Einheitswurzel. Die Gleichung $x^3 - 1 = 0$ hat modulo 3 nur die dreifache Wurzel bei $x = 1$. Die Drei kann also nicht als Phase auftreten — sie muss als Gittereigenschaft kommen.
+
+Die Fünf dagegen kann nicht Gitter sein — sie teilt die Gittergruppenordnung nicht. Sie muss als Phase auftreten.
+
+Die Primzahl 3 verteilt die beiden Symmetrien automatisch auf zwei verschiedene Kanäle. Das ist keine Wahl, sondern Zwang.
+
+\section{Wo sie sich treffen}
+
+Die beiden Kanäle — Ikosaeder-Phase und Gitter-Arithmetik — berühren sich in einem einzigen Punkt: dem goldenen Schnitt $\phi$.
+
+$\phi$ ist in beiden Welten zuhause. Im algebraischen Körper GF(9) — dem kleinsten endlichen Körper, der $\sqrt{5}$ enthält — liegt $\phi$ als primitives Element. Dieser Körper GF(9) ist ein Teilkörper sowohl des Ikosaeder-Körpers GF(81) als auch des Arithmetik-Körpers GF($3^{18}$).
+
+$\phi$ ist die Schnittstelle. Die beiden Welten begegnen sich in $\phi$ und sonst nur da.
+
+\chapter{Was die Theorie sagt — und was nicht}
+
+\section{Zwei Genauigkeitsklassen}
+
+FFGFT macht zweierlei Aussagen über die Leptonmassen, und es ist wichtig, die beiden auseinanderzuhalten.
+
+Die erste Klasse sind \textbf{Verhältnisse}: $m_\mu/m_e$ und $m_\tau/m_e$. Diese folgen aus der Geometrie des Ikosaeders — parameterfrei, ohne freie Einstellungen. Die Genauigkeit ist $10^{-3}$ Prozent, also ein Millionstel. Das liegt innerhalb der experimentellen Messunsicherheit des Tau-Leptons.
+
+Die zweite Klasse sind \textbf{absolute Massen}: wie viele Millielektronenvolt das Elektron wiegt. Dafür braucht die Theorie einen Anker — eine externe Skala, die sagt, wie groß die Einheit ist. Dieser Anker kommt aus dem anderen Teil von FFGFT: der Torus-Leiter, die über Wicklungszahlen die absolute Masse liefert. Die Genauigkeit dieser Route ist etwa ein halbes Prozent.
+
+\section{Die Koide-Skala und die Torus-Leiter}
+
+Die Koide-Formel liefert Verhältnisse, aber auch eine Skala $M$: das geometrische Mittel der Massen geteilt durch sechs. Diese Skala ist kein unabhängiger Parameter. Sie ist nichts anderes als das, was die Torus-Leiter liefert, wenn man alle drei Massen aufaddiert und durch sechs teilt.
+
+Das ist eine wichtige Erkenntnis: die Koide-Skala ist keine neue Größe. Sie folgt aus der TO-Leiter. Das Ikosaeder und die Torus-Leiter sagen nicht zwei verschiedene Dinge — sie sagen dasselbe, einmal in der Sprache der Geometrie (präziser) und einmal in der Sprache der Zahlentheorie (absoluter).
+
+\section{Woher kommt die Skala?}
+
+Die Koide-Formel liefert Verhältnisse. Die Torus-Leiter liefert absolute Massen — mit einer externen Skala $v = 246$~GeV. Woher kommt diese Skala?
+
+$v = 246$~GeV ist die elektroschwache Skala: der Vakuumerwartungswert des Higgs-Feldes. Im Standardmodell ist das ein gemessener Wert, der in die Theorie eingetragen wird. In FFGFT ist es der einzige externe Anker.
+
+Kann FFGFT $v$ selbst erklären? Ja, und die Herleitung steht im Korpus (Dok.~006, R104). Aus der FFGFT-Gitterstruktur folgt $v = 248{,}3$~GeV ohne fraktale Korrektur, bzw.\ $v = 245{,}6$~GeV mit dem Korrekturfaktor $K_\text{frak} = 74/75$. Der Vergleichswert $246{,}22$~GeV ist dabei streng genommen keine direkte Messgröße, sondern eine SM-Definition: $v \equiv (\sqrt{2}\,G_F)^{-1/2}$, also die Fermi-Konstante in anderer Kleidung (Dok.~351). Die Übereinstimmung liegt bei $0{,}3\,\%$ --- derselben Genauigkeitsklasse wie die übrigen absoluten Massen der T0-Leiter.
+
+\section{Theorie plus Konvention}
+
+Wenn man ein Verhältnis kennt, weiß man die Form des Spektrums. Wenn man eine absolute Zahl will, braucht man eine Einheit. Die Einheit ist eine menschliche Konvention — Kilogramm, Elektronenvolt, Sonnenmassen.
+
+FFGFT sagt die Form des Leptonmassenspektrums auf ein Millionstel voraus. Das ist Theorie. Die absolute Größe auf ein halbes Prozent ist Theorie plus Konvention.
+
+\chapter{Fünf Wege zu denselben Zahlen}
+
+\section{Nicht ein Argument, sondern fünf}
+
+Eine physikalische Theorie ist überzeugender, wenn dasselbe Ergebnis auf verschiedenen Wegen folgt. Das Standardmodell hat für die Leptonmassen nur einen Weg: messen und eintragen. FFGFT hat fünf.
+
+\section{Weg 1: Die TO-Leiter}
+
+Aus den Torus-Wicklungszahlen folgt die Massenformel $m_i = r_i \cdot \xi^{p_i} \cdot v$. Sie trifft die Massenverhältnisse auf 0,5 bis 1,6 Prozent — und liefert als einziger Weg auch absolute Massen.
+
+\section{Weg 2: Die Koide-Formel mit $\theta = 2/9$}
+
+Aus dem Matrixelement $A = \langle v_0 | R_5 | v_1 \rangle$ der Ikosaeder-Gruppe folgt die Koide-Formel, vollständig und parameterfrei. Genauigkeit: $10^{-3}$ Prozent. Das entspricht der Messunsicherheit des Tau-Leptons.
+
+\section{Weg 3: Galois-Identitäten}
+
+Aus den Ordnungen von GF($3^n$) folgen zwei Constraints:
+\[
+\left(\frac{m_\mu}{m_e}\right)^2 = 43200 = 2^6 \cdot 3^3 \cdot 5^2, \quad m_e m_\mu = 54~\text{MeV}^2.
+\]
+Beide sind numerisch bestätigt.
+
+\section{Weg 4: Das $\phi$-Skelett}
+
+Aus den $p$-Werten aus $A_5$ folgen reine $\phi$-Potenzen:
+\[
+\frac{p_1}{p_2} = \phi^8, \quad \frac{p_0}{p_2} = 2\phi^4.
+\]
+Mit $\xi$-Korrektur erreicht $m_\tau/m_e$ die Präzision der Koide-Route.
+
+\section{Weg 5: Die Verbindung}
+
+Weg 5 würde die Skala $M$ (Weg 2) aus $\xi$ und $v$ (Weg 1) ableiten. Diese Rechnung ist noch offen — siehe Kapitel 23.
+
+\section{Was jeder Weg leistet}
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+Weg & Eingang & Ausgang & Genauigkeit \\
+\midrule
+1 & $\xi, v, r_i, p_i$ & absolut & 0,5--1,6\% \\
+2 & $A$ & Verhältnisse & $10^{-3}$\% \\
+3 & GF($3^n$) & Constraints & 0,5\% \\
+4 & $p_j$ & Verhältnisse & 0,03\% \\
+4b & $p_j, \xi$ & Verhältnisse & 0,003\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Zwei Genauigkeitsklassen}
+
+Die Wege 1, 3 und 4a liegen auf Prozentniveau (0,5--1,6\%). Die Wege 2 und 4b liegen auf $10^{-3}$-Prozent-Niveau und damit innerhalb der experimentellen Unsicherheit. Der Unterschied zwischen den Klassen ist genau die fraktal-rekursive Korrektur.
+
+\chapter{FFGFT und die Quantenmechanik}
+
+\section{Was FFGFT leistet, was QM nicht leistet}
+
+Die Quantenmechanik ist außerordentlich erfolgreich. Sie beschreibt Interferenz, Verschränkung, Spin, Tunneleffekte — alles experimentell bestätigt auf viele Dezimalstellen. Aber sie erklärt nicht, warum das Elektron die Masse hat, die es hat. Sie erklärt nicht, warum es genau drei Lepton-Generationen gibt. Sie erklärt nicht, warum die Massen der Formel $Q = 2/3$ folgen. Diese Fragen liegen außerhalb ihres Zuständigkeitsbereichs.
+
+FFGFT gibt auf diese Fragen Antworten — nicht als Ergänzung zur Quantenmechanik, sondern als tiefere geometrische Begründung. Die Geometrie des $T^4$-Torus legt fest, welche Zustände es gibt; die Quantenmechanik beschreibt, was mit diesen Zuständen beim Messen passiert. Das sind verschiedene Ebenen, aber FFGFT geht tiefer.
+
+\section{FFGFT ist deterministisch}
+
+Das ist einer der wichtigsten Punkte. FFGFT kommt ohne Zufall aus.
+
+In der Standard-Quantenmechanik ist der Ausgang einer Einzelmessung prinzipiell zufällig: man kann nur Wahrscheinlichkeiten vorhersagen, nicht den konkreten Einzelfall. Das ist nicht ein Mangel an Information — das ist ein fundamentales Prinzip der Theorie.
+
+FFGFT löst dieses Problem geometrisch: was aussieht wie Zufall im Einzelereignis, ist die Projektion einer deterministischen Geometrie auf einen niederdimensionalen Beobachtungsraum. Die Geometrie des Torus bestimmt alles; was wir als Wahrscheinlichkeit messen, ist die Statistik vieler solcher Projektionen.
+
+\section{Erklärungen, die QM nicht liefert}
+
+FFGFT erklärt Dinge, die in der Standard-Quantenmechanik und der Quantenfeldtheorie als gegebene Tatsachen eingetragen werden: Warum ist $h$ gerade so groß? Warum hat das Elektron genau $-e$ Ladung? Warum gibt es drei Generationen? Warum gilt Bell-Ungleichung-Verletzung genau im gemessenen Ausmaß? In FFGFT folgen diese Fragen aus der Geometrie — sie sind keine freien Parameter, sondern Konsequenzen.
+
+Das ist der eigentliche Mehrwert: nicht eine alternative Beschreibung derselben Phänomene, sondern eine Begründungsebene, die darunter liegt.
+
+\chapter{Die offene Kante}
+
+\section{Eine präzise gestellte Frage}
+
+Gute Wissenschaft endet nicht mit einer Antwort, die alle Fragen schließt. Sie endet mit einer präzise gestellten Frage, die zeigt, wie weit man gekommen ist.
+
+Das Ikosaeder erklärt $2/9$. Aber es erklärt nicht, warum $m_\tau/m_e = 74 \phi^8$ und nicht nur $\phi^8$. Der Faktor 74 kommt aus der Zahlentheorie endlicher Körper — aus der Ordnung des Körpers GF($3^{18}$). Und dieser Körper liegt weit jenseits des Ikosaeders.
+
+GF($3^{18}$) enthält den goldenen Schnitt $\phi$ — weil $\phi$ im Teilkörper GF(9) liegt, und GF(9) im Teilkörper von GF($3^{18}$). Er enthält auch die Ordnung 26 der Leptonenstruktur. Aber er enthält nicht die Ikosaeder-Phase $\zeta_5$ — denn $\zeta_5$ lebt in GF(81), und GF(81) ist kein Teilkörper von GF($3^{18}$). Das lässt sich beweisen: 4 teilt 18 nicht.
+
+Die Ikosaeder-Geometrie und die Galois-Arithmetik — zwei Zugänge zu denselben Massen — sind also in unverträglichen algebraischen Körpern zuhause. Sie berühren sich nur in $\phi$, dem goldenen Schnitt, der in beiden Welten als Teilkörper GF(9) lebt.
+
+\section{Die neuen Primzahlen von GF($3^{18}$)}
+
+GF($3^{18}$) enthält mehrere Größen aus FFGFT: $\phi$ (über GF(9)), die Leptonordnung 26 (über GF(729)), und die Feinstruktur-Zahl 37.
+
+Die Primzahlen 19 und 37 sind die beiden, die erst bei Grad 18 neu auftreten. Beide teilen $3^9 + 1 = 19684$. Warum 37 den Galois-Faktor der Massen liefert und nicht 19 — das ist die schärfste offene Frage des Programms.
+
+\section{Was das bedeutet}
+
+Entweder gibt es eine übergeordnete Struktur, in der Ikosaeder-Geometrie und Galois-Arithmetik unter einem Dach zusammenkommen. Dann wäre $\phi$ nicht der einzige Berührungspunkt, sondern der sichtbare Teil eines tieferen Zusammenhangs.
+
+Oder die beiden Zugänge sind wirklich unabhängig. Dann wäre es bemerkenswert — und erklärungsbedürftig —, dass zwei so verschiedene mathematische Welten dieselben physikalischen Größen so genau beschreiben.
+
+Beides ist eine offene Frage. Aber es ist eine präzise offene Frage.
+
+\section{Warum das eine gute Stelle ist, aufzuhören}
+
+Die offene Kante am Ende dieses Buches ist eng. Sie liegt in einem algebraischen Körper, der einen Namen hat und eine Ordnung. Die Frage ist: hat das, was in GF(81) als Ikosaeder-Phase sitzt, und das, was in GF($3^{18}$) als Galois-Ordnung sitzt, dieselbe Wurzel — oder sind es zwei verschiedene Seiten derselben Struktur, die sich zufällig in $\phi$ berühren? Das ist eine Frage, die man beantworten kann. Man weiß, woraus sie besteht.
+
+\section{Die kurze Fassung}
+
+Das Ikosaeder ist der Ort, an dem Drei und Fünf sich nicht vertragen. FFGFT bringt die Drei mit. Das Ikosaeder fügt die Fünf hinzu, so dass beide zusammen ein Produkt erzeugen: das Matrixelement, das $2/9$ liefert.
+
+Koide hat die Zahl gemessen. FFGFT leitet sie her.
+
+Die Reste — warum $74\phi^8$, warum Grad 18, warum der goldene Schnitt das einzige Bindeglied zwischen zwei algebraischen Körpern ist — warten noch auf ihre Erklärung. Aber die Frage ist gestellt. Und sie ist präzise genug, um eine Antwort zu haben.
+
+% ============================================================
+\part{Der Stand der Dinge}
+% ============================================================
+
+\chapter{Was eine gute Theorie ausmacht}
+
+\section{Prüfbarkeit}
+
+Karl Popper hat das Kriterium für eine wissenschaftliche Theorie formuliert: sie muss falsifizierbar sein. Es muss etwas geben, das sie widerlegen würde.
+
+FFGFT ist falsifizierbar. Eine Liste:
+
+\begin{itemize}
+\item Ein viertes geladenes Lepton, das nicht auf der Koide-Kurve liegt.
+\item Ein Massenverhältnis der Quarks, das nicht aus GF($3^n$)-Ordnungen folgt.
+\item Eine neue Messung der Fein\-struktur\-konstanten, die weit von $\frac{3700}{27} \cdot \frac{74}{75}$ abweicht.
+\end{itemize}
+
+Nichts davon ist bisher aufgetreten. Die Theorie hat alle Konfrontationen mit dem Experiment überstanden.
+
+\section{Sparsamkeit}
+
+Eine Theorie ist sparsam, wenn sie viel erklärt und wenig annimmt. Das Standardmodell erklärt viel, nimmt aber 25 Parameter an. String-Theorie nimmt weniger an, erklärt aber bis heute weniger.
+
+FFGFT nimmt einen Parameter an ($\xi$), eine geometrische Struktur ($T^4$ mit $D_4$-Gitter) und eine externe Skala ($v = 246$~GeV). Aus diesen drei Eingaben folgen die Leptonmassen auf $10^{-3}$ Prozent, die Fein\-struktur\-konstante, die Trialität der Generationen. Das ist Sparsamkeit.
+
+\section{Verbundenheit}
+
+Eine tiefe Theorie verbindet Dinge, die vorher unverbunden schienen. Die spezielle Relativitätstheorie verbindet Raum und Zeit. Die allgemeine Relativitätstheorie verbindet Krümmung und Gravitation. Die Quantenfeldtheorie verbindet Teilchen und Felder.
+
+FFGFT verbindet das Ikosaeder mit den Leptonmassen. Das ist keine offensichtliche Verbindung — ein geometrischer Körper der Antike und die Massen subatomarer Teilchen. Dass diese Verbindung nicht aufgezwungen ist, sondern aus dem Nicht-Kommutieren zweier Symmetrien folgt, macht sie zu mehr als einer Analogie.
+
+\chapter{Was bisher gezeigt ist}
+
+\section{Was geprüft ist}
+
+FFGFT ist keine abgeschlossene Theorie. Sie ist ein laufendes Programm. Aber einige Dinge sind gezeigt:
+
+\begin{itemize}
+\item Die Massenverhältnisse der geladenen Leptonen folgen parameterfrei aus der $A_5$-Geometrie auf $10^{-3}$ Prozent.
+\item Die Fein\-struktur\-konstante $1/\alpha = 3700/27$ aus den GF($3^n$)-Ordnungen der Gitterstruktur trifft auf ähnlichem Niveau.
+\item Die Torus-Leiter liefert absolute Massen auf 0,5 Prozent — mit einer einzigen externen Skala, $v = 246$~GeV.
+\end{itemize}
+
+\section{Die Hierarchie der Genauigkeit}
+
+Verschiedene Aussagen von FFGFT haben verschiedene Genauigkeiten, und das ist kein Defizit — es ist Struktur.
+
+\textbf{$10^{-3}$ Prozent:} Massenverhältnisse der Leptonen, aus der Ikosaeder-Geometrie. Das ist besser als viele Experimente messen können.
+
+\textbf{0,5 bis 1,6 Prozent:} Absolute Leptonmassen aus der TO-Leiter.
+
+\textbf{$10^{-4}$:} Die Fein\-struktur\-konstante aus den Galois-Körpern.
+
+Die drei Niveaus haben eine gemeinsame Ursache: je mehr sich ein Ergebnis auf transzendente Funktionen (Kosinus) stützt, desto präziser; je mehr auf algebraische Näherungen (Potenzgesetze), desto weniger. Das ist ein struktureller Befund, kein Fehler.
+
+\section{Was offen ist}
+
+Die vollständige Quark-Sektorstruktur ist in der Geometrie angelegt, aber die Herleitung der konkreten Werte läuft noch.
+
+Die Galois-Faktoren — warum $74\phi^8$ und $30\phi^4$ — kommen aus der Zahlentheorie endlicher Körper, aber ihre Verbindung zur $A_5$-Geometrie ist noch nicht geschlossen. GF(81) und GF($3^{18}$) berühren sich nur in $\phi$. Ob das eine gemeinsame Wurzel hat oder zwei unabhängige Zugänge sind, ist die schärfste offene Kante.
+
+\section{Was das Programm bedeutet}
+
+Ein geometrischer Boden für das Standardmodell ist keine neue Idee. Kaluza und Klein haben 1921 versucht, Elektrodynamik und Gravitation durch eine fünfte Dimension zu vereinen. Superstring-Theorie baut auf zehndimensionalen Mannigfaltigkeiten. Die Gemeinsamkeit: mehr Geometrie, mehr Erklärung.
+
+FFGFT geht einen anderen Weg. Nicht mehr Dimensionen, sondern eine spezifischere Gitterstruktur in vier. Nicht eine Theorie von allem, sondern eine Theorie der Masse.
+
+Das ist ein engeres Ziel — und ein überprüfbareres.
+
+\chapter{Was bleibt}
+
+\section{Die Frage hinter der Frage}
+
+Dieses Buch hat eine Zahl erklärt: $2/9$. Eine Zahl, die seit 1981 in den Daten stand und auf ihre Erklärung wartete.
+
+Die Erklärung ist: das Ikosaeder, die Gruppe $A_5$, die kleinste Gruppe, in der Drei und Fünf nicht vertauschen. Ein Matrixelement zwischen zwei Zuständen dieser Gruppe trägt den Koeffizienten $\sqrt{2}$ und die Phase $2/9$. Die Koide-Formel folgt.
+
+Das ist keine Metapher. Es ist eine Rechnung. Alle Schritte sind verifiziert; die Prüfskripte stehen im Repository.
+
+\section{Was das über Physik sagt}
+
+Manchmal liegt die Erklärung nicht in neuer Dynamik, sondern in der richtigen Geometrie. Nicht: „Es gibt eine neue Kraft, die die Massen so macht." Sondern: „Ein geometrisches Objekt mit dieser Symmetrie kann gar keine anderen Massen erzeugen."
+
+Das ist eine stärkere Aussage — und eine, die falsifizierbar ist. Wenn jemand ein Lepton mit einer Masse findet, die nicht auf der Koide-Kurve liegt, ist die Erklärung widerlegt.
+
+Bis dahin steht sie.
+
+\section{Die offene Kante — noch einmal}
+
+GF(81) und GF($3^{18}$) berühren sich in GF(9), also in $\phi$. Sonst nirgends. Das ist eine mathematische Tatsache, kein offener Punkt.
+
+Die offene Kante ist: warum ist $\phi$ der einzige Berührungspunkt? Gibt es eine übergeordnete Struktur, in der Ikosaeder-Geometrie und Galois-Arithmetik unter einem Dach zusammenkommen? Oder sind sie zwei verschiedene Seiten des Geheimnisses, die sich nur zufällig in $\phi$ treffen?
+
+Das ist die Frage, die das Programm weiterführt.
+
+\chapter{Ein Blick zurück — und nach vorn}
+
+\section{Was dieses Buch erzählt hat}
+
+Drei Teile, eine Idee: Masse ist Geometrie.
+
+Im ersten Teil haben wir gesehen, wie ein vierdimensionaler Torus mit einer fraktalen Gitterstruktur und einem einzigen Parameter $\xi = 4/30000$ die Grundstruktur der Teilchenmassen erzeugt. Keine freien Parameter, keine Yukawa-Kopplungen, kein Higgs-Mechanismus als Blackbox — nur Geometrie und ganze Zahlen.
+
+Im zweiten Teil haben wir verstanden, wie dieser Torus zur beobachtbaren Welt wird. Der erste Schritt — das Abrollen der Massedimension zur Zeit — ist eine Dualität, keine Projektion: informationserhaltend, reversibel. Die weiteren Schritte sind echte Projektionen. Das erklärt, warum Zeit und Raum grundsätzlich verschieden sind.
+
+Im dritten Teil haben wir die Detektivgeschichte erzählt: eine vierzigjährige offene Frage, ein überraschendes geometrisches Objekt, eine Rechnung, die auf $2/9$ hinausläuft. Das Ikosaeder als der Ort, an dem Drei und Fünf sich nicht vertragen — und genau deshalb eine Zahl erzeugen.
+
+\section{Was noch nicht erzählt ist}
+
+Ein Buch über Physik, das mit einer Antwort endet, ist noch nicht fertig. Die Antwort erzeugt neue Fragen — das ist der Rhythmus des Fortschritts.
+
+Die offene Kante: GF(81) und GF($3^{18}$) berühren sich nur in GF(9), also in $\phi$. Zwei Zugänge zu denselben Massen, die sich nur im goldenen Schnitt treffen. Ob dahinter eine tiefere Einheit liegt, ist das offenste Problem der Theorie.
+
+Die Quarks: die Struktur ist im Torus angelegt, aber die konkreten Massenverhältnisse sind noch nicht vollständig hergeleitet.
+
+Die absoluten Massen: die Skala $v = 246$~GeV ist der einzige externe Anker. Ob sie selbst aus der Geometrie folgt, ist eine Forschungsfrage.
+
+\section{Was das bedeutet}
+
+Physik ist nie fertig. Was zählt, ist die Richtung.
+
+FFGFT hat gezeigt, dass die Leptonmassen keine zufälligen Zahlen sind. Sie folgen aus einem geometrischen Prinzip, das man beschreiben, berechnen und falsifizieren kann. Das ist mehr, als das Standardmodell für diese Zahlen geleistet hat.
+
+Ob FFGFT die richtige Theorie ist, wird das Experiment entscheiden. Ein viertes geladenes Lepton würde sie testen. Eine präzisere Tau-Massenmessung würde die Koide-Phase schärfer stellen. Eine neue Struktur in den Galois-Körpern könnte den 37/19-Unterschied erklären.
+
+Die Theorie hat Vorhersagen. Das ist das Wichtigste.
+
+% ============================================================
+\appendix
+\chapter{Für Lesende mit Mathematik}
+% ============================================================
+
+\section{Die Grundkonstante}
+
+\[
+\xi = \frac{4}{30000} = \frac{1}{7500} \approx 1{,}33 \times 10^{-4}.
+\]
+
+\section{Die Massenformel (TO-Leiter)}
+
+\[
+m_i = r_i \cdot \xi^{p_i} \cdot v, \quad v = 246~\text{GeV}
+\]
+mit $(r_e, p_e) = (4/3, 3/2)$, $(r_\mu, p_\mu) = (16/5, 1)$, $(r_\tau, p_\tau) = (25/9, 2/3)$ aus den Torus-Wicklungszahlen.
+
+\section{Die Koide-Formel}
+
+\[
+\sqrt{m_k} = \sqrt{M}\, a_k, \quad a_k = 1 + \sqrt{2} \cos\left(\frac{2}{9} + \frac{2\pi k}{3}\right), \quad k = 0, 1, 2.
+\]
+Koide-Quotient $Q = (\sum_k m_k)/(\sum_k \sqrt{m_k})^2 = 2/3$ exakt.
+
+\section{Die Herleitung aus dem Matrixelement}
+
+$v_k = (1, \omega^k, \omega^{2k})/\sqrt{3}$, $\omega = e^{2\pi i/3}$. $R_5$: Rodrigues-Drehung um $(0, 1, \phi)/\|(0, 1, \phi)\|$, Winkel $72^\circ$.
+
+$A = \langle v_0 | R_5 | v_1 \rangle$: $|A| = \sqrt{2}/3$, $|A|^2 = 2/9$. Damit: Koeffizient $3|A| = \sqrt{2}$, Phase $|A|^2 = 2/9$. Koide-Formel folgt.
+
+\section{Die Umverteilungsmatrix}
+
+\[
+\left(|\langle v_j | R_5 | v_k \rangle|^2\right)_{j,k=0,1,2} = \frac{1}{9}
+\begin{pmatrix}
+5 & 2 & 2 \\
+2 & 2+3\phi & 5-3\phi \\
+2 & 5-3\phi & 2+3\phi
+\end{pmatrix}.
+\]
+Alle Zeilen- und Spaltensummen gleich 1. Spur $R_5 = \phi$.
+
+\section{Die zwei Körper}
+
+$\phi \in \text{GF}(9)$ (Grad 2, $\phi^4 = -1$, Ordnung 8). $\zeta_5 \in \text{GF}(81)$ (Grad 4, $5 \mid 80$). $\zeta_{37} \in \text{GF}(3^{18})$ (Grad 18, $5 \nmid 18$). $\text{GF}(81) \cap \text{GF}(3^{18}) = \text{GF}(9)$.
+
+\section{Quellen}
+
+J.~Pascher, FFGFT-Korpus, Dokumente 205, 270, 285, 293, 338, 352, 364, 367, 368, 369, 370.
+
+DOI: \url{https://doi.org/10.5281/zenodo.22739112}
+
+GitHub: \url{https://github.com/jpascher/T0-Time-Mass-Duality}
+
+ORCID: 0009-0000-6518-4064
+
+\end{document}

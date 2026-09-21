@@ -788,3 +788,54 @@ Abschnitt „Was offen bleibt" neu (20. Sept.): (1) Negatives Ergebnis: ζ₃₇
 **Prüfskript:** keines (alle Zahlen aus 293/367/368 bereits geprüft; 5/9 und Spur φ
 in Sitzung numerisch verifiziert).
 **Register:** kein Eintrag (Erklärungsdokument).
+
+---
+
+## 20. September 2026 — IKO-Buch: Warum das Ikosaeder (populärwissenschaftlich)
+
+### Buch — Drei, Fünf und das Geheimnis der Leptonmassen (De, 23 Seiten, 6×9 Zoll)
+
+Populärwissenschaftliches Buch in 8 Kapiteln + Prolog + Anhang. Narrativ-Format,
+Kindle-kompatibles 6×9-Zoll-Layout. Kein neues FFGFT-Ergebnis; Erzählung der
+Befunde aus Dok. 285, 293, 338, 352, 364, 367, 368, 369, 370.
+
+Kapitelstruktur: Prolog (die Zahl 2/9), Kap. 1 Das Rätsel (Koide 1981),
+Kap. 2 Drei Teilchen (ℤ₃ / Trialität), Kap. 3 Das Ikosaeder (A₅, Drei und Fünf),
+Kap. 4 Das Nicht-Vertauschen (Mischung, Tabelle (5,2,2)/9),
+Kap. 5 Die eine Rechnung (Matrixelement, Koide-Formel),
+Kap. 6 Zwei Welten (Torus kompakt vs. ausgerollt, Phasenkanal),
+Kap. 7 Was die Theorie sagt — und was nicht (Verhältnisse vs. absolute Werte),
+Kap. 8 Die offene Kante (GF(81) ⊄ GF(3¹⁸), φ als einzige Berührung),
+Anhang (vollständige Formeln, Quellen).
+
+**Quelldatei:** `2/Sources/ch/IKO_Buch_De_ch.tex` (Kapitel), `2/Sources/wr_narrativ/IKO_Buch_De.tex` (Wrapper).
+**Prüfskript:** keines (alle Zahlen aus Prüfskripten der Quell-Dokumente).
+**Register:** kein Eintrag.
+
+---
+
+## 21. September 2026 — Dok. 371: Der Faktor 4/3
+
+### Dok. 371 — Kugelvolumen, Casimir-Operatoren, elektromagnetische Masse, das Tripel (3,4,5) und ξ (De/En, 9 Seiten)
+
+Erweiterungsdokument zu den drei bestehenden Begründungen des Faktors 4/3 in
+ξ = 4/3·10⁻⁴ (Dok. 006, 205, 324). Zwei neue Vorkommen:
+- Der seit Abraham (1902)/Lorentz (1904) ungeklärte Faktor 4/3 der
+  elektromagnetischen Elektronenmasse ist ein Dreidimensionalitäts-Effekt:
+  4/3 = 2·(1 − 1/3), weil jede Feldkomponente ein Drittel der Energie trägt [E][B].
+  Sitzt in derselben Größe, die in FFGFT als 1/ξ auftritt [S].
+- C₂(SU(2)) = 3/4 und C₂(SU(3)) = 4/3 sind Kehrwerte; N = 2 ist der einzige
+  Fall mit C₂(N)·C₂(N+1) = 1 [B]. Beide Werte sind Elektron-Invarianten
+  (Spin, Masse) [S].
+- Tripel (3,4,5): Berggren-Wurzel, einziges rechtwinkliges Dreieck in
+  arithmetischer Folge, Inkreisradius 1, (2+i)² = 3+4i [B]; trägt das
+  Kehrwertpaar als tan α = 4/3, cot α = 3/4.
+- Enthalpiefaktor (u+p)/u = 4/3 bei p = u/3 (Photonengas, von Laue) als
+  weiteres 3D-Vorkommen [E].
+- Winkel arctan(4/3) = 53,13°: fehlt unter den kürzesten Vektoren von D₃/D₄ [X],
+  tritt aber auf der Schale |v|² = 10 auf ((3,1,0,0), (1,3,0,0)), weil
+  D₂ = (1+i)ℤ[i] und (1+i)(2±i) = 1+3i, 3+i [B]. Rolle dieser Schale in der
+  FFGFT offen [S]. Berggren-Matrizen ∈ O(2,1;ℤ) [E].
+
+**Prüfskript:** 2/python/Dok371_Skripte/ffgft_371_faktor_vier_drittel.py — 28/28 PASS
+**Register:** kein Eintrag.
