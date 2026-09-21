@@ -844,7 +844,7 @@ Erweiterungsdokument zu den drei bestehenden Begründungen des Faktors 4/3 in
 
 ## 21. September 2026 — Dok. 372: Das Matrixelement-Prinzip
 
-### Dok. 372 — Das Matrixelement-Prinzip und seine Reichweite (De, 9 Seiten)
+### Dok. 372 — Das Matrixelement-Prinzip und seine Reichweite (De, 10 Seiten)
 
 Was aus |⟨v₀|R₅|v₁⟩|² = 2/9 über die Leptonmassen hinaus folgt.
 - Reichweitensatz [B]: A₅ erzeugt in der ℤ₃-Modenbasis genau acht
@@ -868,7 +868,23 @@ Was aus |⟨v₀|R₅|v₁⟩|² = 2/9 über die Leptonmassen hinaus folgt.
   (12 Werte zu dicht). Arbeitsteilung: GF(27)* trägt Massen und
   Dirac/Majorana, A₅ trägt θ₂₃ und mit ξ θ₁₃; θ₁₂ bleibt offen [S].
   Nachtrag in Dok. 340 De/En.
+- Quarks [X]: kompakte Leiter mit hergeleiteten pᵢ (Dok. 189: p = d_akt/3,
+  Top −1/3 inverse Windung) und ξ-/K_frak-Gewichtung (Dok. 133, 005),
+  ~1,2 % ohne freie Parameter; rᵢ angesetzt (n_φ²/(n_θ·n_c), Dok. 189),
+  im Galois-Raster [B]. Q_up 0,85–0,89, Q_down 0,72–0,75 auf allen Skalen
+  (PDG, M_Z, m_t, GUT) — mit A₅-Ausrollen (Q = 2/3 exakt) unverträglich;
+  drei strukturelle Gründe; GF(729) als Einstieg [S]. Higgs steht in der
+  p-Leiter bei p = 0 (Dok. 189), Vorfaktor r_h = 0,508 fehlt.
+- Eichbosonen: v, α, sin²θ_W vorhanden [K]; M_W, M_Z bis auf Δr; Photon und
+  acht Gluonen masselos [B] (Dok. 320/321/339).
+- Higgs-Masse nicht hergeleitet [X]: Dok. 041 v·ξ^(1/4) liefert 26 GeV, nicht
+  125; Λ_QCD = v·ξ^(1/3) liefert 12,6 GeV, nicht 200 MeV; Dok. 005
+  m_t·φ·(1+ξD_f) braucht D_f ≈ −4100 (Fit). Nicht in der Achtermenge.
+  Systematische Suche (17 Verhältnisse × 268 Zahlen): Treffer auf
+  Zufallsniveau [X]; einziger strukturierter Kandidat M_Z : m_h : m_t =
+  1 : 11/8 : (11/8)², m_h ≈ √(m_t·M_Z) (0,2 %, 1,6σ), 11 und 8 Galois-Größen,
+  nachträglich ausgewählt [S].
 - Matrixelement-Prinzip als allgemeine Hypothese formuliert [S].
 
-**Prüfskript:** 2/python/Dok372_Skripte/pruef_372_matrixelement.py — 26/26 PASS
-**Register:** kein Eintrag.
+**Prüfskript:** 2/python/Dok372_Skripte/pruef_372_matrixelement.py — 45/45 PASS
+**Register:** R122 (Higgs-Masse und Λ_QCD in Dok. 041/005 nicht haltbar [X]; offene Brücke).

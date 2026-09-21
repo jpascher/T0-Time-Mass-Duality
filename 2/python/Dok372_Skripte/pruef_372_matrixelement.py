@@ -149,5 +149,65 @@ hits13=sum(1 for v in SM.values() if min(abs(s-v)/v for s in S13)<0.07)
 check("P23 Dok.-340-Menge: ≥5 von 7 SM-Werten <7% (zu dicht)", bool(hits13>=5), True)
 hitsA5=sum(1 for v in SM.values() if min(abs(s-v)/v for s in spec if s>0)<0.013)
 check("P24 A5-Achtermenge: genau 3 Treffer <1.3%", mp.mpf(hitsA5), mp.mpf(3))
+print(f"\nTeil 3: {PASS} PASS / {FAIL} FAIL")
+
+# ============================================================
+# TEIL 4: Quarks und Higgs
+# ============================================================
+print("\n=== TEIL 4: QUARKS UND HIGGS ===")
+import math
+def Qk(m): return sum(m)/sum(math.sqrt(x) for x in m)**2
+Qup=Qk([2.16e-3,1.27,172.7]); Qdn=Qk([4.67e-3,0.0934,4.18])
+check("P25 Q_up ≈ 0.85 (PDG-nah)", bool(abs(Qup-0.849)<0.01), True)
+check("P26 Q_down ≈ 0.73", bool(abs(Qdn-0.730)<0.01), True)
+# A5-Mechanismus erzwingt Q=2/3 exakt; Quark-Q weichen >9% ab
+check("P27 |Q_up-2/3|/Q > 20% und |Q_down-2/3|/Q > 8%", bool(abs(Qup-2/3)/Qup>0.20 and abs(Qdn-2/3)/Qdn>0.08), True)
+xi_f=4/30000; v=246.22; phi_f=(1+5**.5)/2; mt=172.69; mh=125.1
+check("P28 Dok.041: v·ξ^(1/4) ≠ 125 (liefert ~26 GeV)", bool(abs(v*xi_f**0.25-26.46)<0.1), True)
+check("P29 Dok.041: v·ξ^(1/3) ≠ 0.2 GeV (liefert ~12.6 GeV)", bool(abs(v*xi_f**(1/3)-12.58)<0.1), True)
+Df=(mh/(mt*phi_f)-1)/xi_f
+check("P30 Dok.005: m_t·φ·(1+ξD_f)=125 erfordert |D_f|>4000", bool(abs(Df)>4000), True)
+# Higgs-Verhältnisse nicht in Achtermenge
+for name,val in [("P31 m_h/v=0.508 nicht im Spektrum (>5%)",mh/v),("P32 m_h²/v²=0.258 nicht im Spektrum (>5%)",(mh/v)**2)]:
+    d=min(abs(s-val)/val for s in spec if s>0)
+    check(name, bool(d>0.05), True)
+print(f"\nTeil 4: {PASS} PASS / {FAIL} FAIL")
+
+# ============================================================
+# TEIL 5: Higgs — systematische Suche (Look-elsewhere)
+# ============================================================
+print("\n=== TEIL 5: HIGGS-SUCHE ===")
+from fractions import Fraction
+mh=125.20; MW=80.3692; MZ=91.1880; mt=172.57; vv=246.22
+lib={}
+for q in range(1,13):
+    for pp in range(1,4*q):
+        f=Fraction(pp,q)
+        if f.denominator==q: lib[f"{pp}/{q}"]=pp/q
+for n in range(-6,7):
+    if n:
+        for k,s in [(1,""),(0.5,"/2"),(2,"2·"),(1/3,"/3"),(3,"3·")]: lib[f"{s}φ^{n}"]=k*fphi**n
+for k in range(1,7): lib[f"1/|GF(3^{k})*|"]=1/(3**k-1); lib[f"|GF(3^{k})*|"]=3**k-1
+for nm,val in [("√2",2**.5),("√3",3**.5),("√5",5**.5),("√(7/9)",(7/9)**.5),("1/√2",2**-.5),("1/√3",3**-.5),("π/2",math.pi/2),("e",math.e),("ln2",math.log(2)),("1+100ξ",1+100*xi_f),("74/75",74/75),("p1",(2+3*fphi)/9),("p2",(5-3*fphi)/9)]:
+    lib[nm]=val
+tests=[mh/vv,mh/MZ,mh/MW,mh/mt,mt/mh,(mh/vv)**2,mh**2/(MW**2+MZ**2),mh**2/(mt*MZ),mh**2/(mt*MW),mh/(MW+MZ),(mt-mh)/mh,mh/math.sqrt(MW*MZ),(mt+MZ+MW)/mh,mh**2/(vv**2*2/9),2*mh/vv,(2*mh/vv)**2,mh/vv/(1/137.036)**.5]
+def nhits(tol): return sum(1 for t in tests for lv in lib.values() if lv>0 and abs(t-lv)/t<tol)
+h5,h2=nhits(0.005),nhits(0.002)
+print(f"    Bibliothek {len(lib)}, Tests {len(tests)}: Treffer <0.5%: {h5}, <0.2%: {h2}")
+check("P33 Treffer <0.5% ≤ Zufallserwartung (~14)", bool(h5<=16), True)
+check("P34 Treffer <0.2% ≤ Zufallserwartung (~6)", bool(h2<=8), True)
+check("P35 m_h/M_Z ≈ 11/8 (<0.2%)", bool(abs(mh/MZ-11/8)/(11/8)<0.002), True)
+check("P36 m_t/m_h ≈ 11/8 (<0.3%)", bool(abs(mt/mh-11/8)/(11/8)<0.003), True)
+check("P37 m_h ≈ √(m_t·M_Z) (<0.25%)", bool(abs(mh-(mt*MZ)**.5)/mh<0.0025), True)
+check("P38 m_h = v/2 schlechter als 1.5%", bool(abs(2*mh/vv-1)>0.015), True)
+print(f"\nTeil 5: {PASS} PASS / {FAIL} FAIL")
+
+# ============================================================
+# TEIL 6: Skalenabhängigkeit Quark-Q
+# ============================================================
+print("\n=== TEIL 6: QUARK-Q ÜBER SKALEN ===")
+for lbl,up,dn in [("PDG",[2.16e-3,1.27,172.7],[4.67e-3,0.0934,4.18]),("M_Z",[1.27e-3,0.619,171.7],[2.9e-3,0.055,2.89]),("m_t",[1.22e-3,0.59,162.9],[2.76e-3,0.052,2.75]),("GUT",[0.5e-3,0.24,74],[1.1e-3,0.022,1.0])]:
+    check(f"P39-{lbl} Q_up∈[0.84,0.90], Q_down∈[0.71,0.76]", bool(0.84<Qk(up)<0.90 and 0.71<Qk(dn)<0.76), True)
+check("P40 Dok.189: Higgs bei p=0, r_h=m_h/v≈0.51", bool(abs(125.2/246.22-0.508)<0.002), True)
 print(f"\n{'='*45}")
 print(f"GESAMT (alle Teile): {PASS} PASS / {FAIL} FAIL")
