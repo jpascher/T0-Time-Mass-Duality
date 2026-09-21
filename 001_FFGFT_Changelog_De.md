@@ -844,7 +844,7 @@ Erweiterungsdokument zu den drei bestehenden Begründungen des Faktors 4/3 in
 
 ## 21. September 2026 — Dok. 372: Das Matrixelement-Prinzip
 
-### Dok. 372 — Das Matrixelement-Prinzip und seine Reichweite (De, 11 Seiten)
+### Dok. 372 — Das Matrixelement-Prinzip und seine Reichweite (De/En, je 12 Seiten)
 
 Was aus |⟨v₀|R₅|v₁⟩|² = 2/9 über die Leptonmassen hinaus folgt.
 - Reichweitensatz [B]: A₅ erzeugt in der ℤ₃-Modenbasis genau acht
@@ -897,7 +897,7 @@ Was aus |⟨v₀|R₅|v₁⟩|² = 2/9 über die Leptonmassen hinaus folgt.
 
 ## 21. September 2026 — Dok. 373: Yukawa-Mechanismus
 
-### Dok. 373 — Der Yukawa-Mechanismus als Konsequenz von T̃·m=1 (De, 11 Seiten)
+### Dok. 373 — Der Yukawa-Mechanismus als Konsequenz von T̃·m=1 (De/En, je 11 Seiten)
 
 Die massenproportionale Kopplung aller Fermionen ans Higgs-Boson (experimenteller
 Fingerabdruck der Higgs-Entdeckung) folgt aus der FFGFT-Grundrelation T̃·m=1
