@@ -839,3 +839,31 @@ Erweiterungsdokument zu den drei bestehenden Begründungen des Faktors 4/3 in
 
 **Prüfskript:** 2/python/Dok371_Skripte/ffgft_371_faktor_vier_drittel.py — 28/28 PASS
 **Register:** kein Eintrag.
+
+---
+
+## 21. September 2026 — Dok. 372: Das Matrixelement-Prinzip
+
+### Dok. 372 — Das Matrixelement-Prinzip und seine Reichweite (De, 8 Seiten)
+
+Was aus |⟨v₀|R₅|v₁⟩|² = 2/9 über die Leptonmassen hinaus folgt.
+- Reichweitensatz [B]: A₅ erzeugt in der ℤ₃-Modenbasis genau acht
+  Matrixelement-Betragsquadrate {0, (5−3φ)/9, 1/9, 2/9, 4/9, 5/9, (2+3φ)/9, 1};
+  alle Nenner 9 = |ℤ₃|².
+- Leptonen [B]: Koide-Phase, Gewichte, φ-Skelett (p₁/p₂=φ⁸, p₀/p₂=2φ⁴), 4/3=2Q.
+- Weinberg-Winkel [K]: on-shell 1−M_W²/M_Z² = 2/9 auf 0,4 % (Weltmittel 3,8σ,
+  CDF 1,4σ); Vorhersage M_W = M_Z·√(7/9) = 80,420 GeV. Ersetzt den Kandidaten
+  1/4 (8 %) aus Dok. 336; das MS-bar-Ergebnis 0,2308 aus Dok. 323 bleibt als
+  Skalenfluss-Beschreibung im anderen Schema bestehen; Identität beider
+  Beschreibungen offen [S].
+- Atmosphärische Mischung [K]: sin²θ₂₃ ∈ {4/9, 5/9}; Oktant-Ambiguität der
+  Daten = Ambiguität 4/9 ↔ 5/9; Vorhersage |sin²θ₂₃ − 1/2| = 1/18, maximale
+  Mischung ausgeschlossen; PDG 0,558 trifft 5/9 auf 0,1σ.
+- Cabibbo [S]: λ auf 1,2 % (4,1σ) bei 2/9; nicht identifiziert (Dok. 041
+  hat eigene Herleitung).
+- Negativ [X]: sin²θ₁₂, sin²θ₁₃, α_s liegen nicht in der Achtermenge —
+  durch ein einzelnes A₅-Matrixelement nicht erreichbar.
+- Matrixelement-Prinzip als allgemeine Hypothese formuliert [S].
+
+**Prüfskript:** 2/python/Dok372_Skripte/pruef_372_matrixelement.py — 21/21 PASS
+**Register:** kein Eintrag.
