@@ -129,6 +129,25 @@ for name,val,thr in [("P17 sin²θ12=0.307 nicht im Spektrum (>5%)",0.307,5),
     d=min(abs(s-val)/val*100 for s in spec if s>0)
     check(name, bool(d>thr), True)
 
+print(f"\nTeil 2: {PASS} PASS / {FAIL} FAIL")
+
+# ============================================================
+# TEIL 3: Abgleich mit Dok. 340
+# ============================================================
+print("\n=== TEIL 3: ABGLEICH DOK. 340 ===")
+import sympy as sp
+x=sp.symbols('x')
+mp13=sp.minimal_polynomial(sp.cos(2*sp.pi/13), x)
+check("P20 Grad Minimalpolynom cos(2π/13) = 6", mp.mpf(sp.degree(mp13,x)), mp.mpf(6))
+c5=mp.cos(2*mp.pi*5/13)**2
+check("P21 cos²(10π/13) ≠ 5/9 (Differenz > 1e-3)", bool(abs(c5-mp.mpf(5)/9)>1e-3), True)
+check("P22 cos²(10π/13) und 5/9 innerhalb 1%", bool(abs(c5-mp.mpf(5)/9)/(mp.mpf(5)/9)<0.01), True)
+# Look-elsewhere: Menge aus Dok. 340 (12 Werte) trifft ≥5 von 7 SM-Parametern <7%
+S13=[float(mp.cos(2*mp.pi*k/13)**2) for k in range(1,7)]; S13+= [1-v for v in S13]
+SM={"θ12":0.307,"θ23":0.558,"θ23NO":0.470,"θ13":0.0222,"θW":0.2232,"λ":0.225,"αs":0.118}
+hits13=sum(1 for v in SM.values() if min(abs(s-v)/v for s in S13)<0.07)
+check("P23 Dok.-340-Menge: ≥5 von 7 SM-Werten <7% (zu dicht)", bool(hits13>=5), True)
+hitsA5=sum(1 for v in SM.values() if min(abs(s-v)/v for s in spec if s>0)<0.013)
+check("P24 A5-Achtermenge: genau 3 Treffer <1.3%", mp.mpf(hitsA5), mp.mpf(3))
 print(f"\n{'='*45}")
-print(f"GESAMT: {PASS} PASS / {FAIL} FAIL")
-if FAIL==0: print("ALLE PRÜFUNGEN BESTANDEN")
+print(f"GESAMT (alle Teile): {PASS} PASS / {FAIL} FAIL")

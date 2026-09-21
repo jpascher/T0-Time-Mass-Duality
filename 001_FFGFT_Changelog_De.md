@@ -844,7 +844,7 @@ Erweiterungsdokument zu den drei bestehenden Begründungen des Faktors 4/3 in
 
 ## 21. September 2026 — Dok. 372: Das Matrixelement-Prinzip
 
-### Dok. 372 — Das Matrixelement-Prinzip und seine Reichweite (De, 8 Seiten)
+### Dok. 372 — Das Matrixelement-Prinzip und seine Reichweite (De, 9 Seiten)
 
 Was aus |⟨v₀|R₅|v₁⟩|² = 2/9 über die Leptonmassen hinaus folgt.
 - Reichweitensatz [B]: A₅ erzeugt in der ℤ₃-Modenbasis genau acht
@@ -863,7 +863,12 @@ Was aus |⟨v₀|R₅|v₁⟩|² = 2/9 über die Leptonmassen hinaus folgt.
   hat eigene Herleitung).
 - Negativ [X]: sin²θ₁₂, sin²θ₁₃, α_s liegen nicht in der Achtermenge —
   durch ein einzelnes A₅-Matrixelement nicht erreichbar.
+- Abgleich mit Dok. 340 [B]: cos²(10π/13) ≠ 5/9 (Grad 6 gegen rational,
+  nur numerisch nah); die cos²(2πk/13)-Lesungen sind Größenordnungen
+  (12 Werte zu dicht). Arbeitsteilung: GF(27)* trägt Massen und
+  Dirac/Majorana, A₅ trägt θ₂₃ und mit ξ θ₁₃; θ₁₂ bleibt offen [S].
+  Nachtrag in Dok. 340 De/En.
 - Matrixelement-Prinzip als allgemeine Hypothese formuliert [S].
 
-**Prüfskript:** 2/python/Dok372_Skripte/pruef_372_matrixelement.py — 21/21 PASS
+**Prüfskript:** 2/python/Dok372_Skripte/pruef_372_matrixelement.py — 26/26 PASS
 **Register:** kein Eintrag.
