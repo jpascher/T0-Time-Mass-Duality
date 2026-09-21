@@ -844,7 +844,7 @@ Erweiterungsdokument zu den drei bestehenden Begründungen des Faktors 4/3 in
 
 ## 21. September 2026 — Dok. 372: Das Matrixelement-Prinzip
 
-### Dok. 372 — Das Matrixelement-Prinzip und seine Reichweite (De, 10 Seiten)
+### Dok. 372 — Das Matrixelement-Prinzip und seine Reichweite (De, 11 Seiten)
 
 Was aus |⟨v₀|R₅|v₁⟩|² = 2/9 über die Leptonmassen hinaus folgt.
 - Reichweitensatz [B]: A₅ erzeugt in der ℤ₃-Modenbasis genau acht
@@ -887,4 +887,45 @@ Was aus |⟨v₀|R₅|v₁⟩|² = 2/9 über die Leptonmassen hinaus folgt.
 - Matrixelement-Prinzip als allgemeine Hypothese formuliert [S].
 
 **Prüfskript:** 2/python/Dok372_Skripte/pruef_372_matrixelement.py — 45/45 PASS
+- §4 Hadronen: Q·n=1 algebraische Identität für entartete Multipletts [B] —
+  Leptonen brechen sie (Q=2/3 statt 1/3, Faktor 2 ist A₅-Signatur); GMO-
+  Aufspaltung konsistent mit m_s(Galois) [K]; Λ_QCD nicht aus ξ-Leiter
+  ableitbar (p≈0,79, kein Leiterbruch) [X]. Ehrliche Grenze benannt.
 **Register:** R122 (Higgs-Masse und Λ_QCD in Dok. 041/005 nicht haltbar [X]; offene Brücke).
+
+---
+
+## 21. September 2026 — Dok. 373: Yukawa-Mechanismus
+
+### Dok. 373 — Der Yukawa-Mechanismus als Konsequenz von T̃·m=1 (De, 9 Seiten)
+
+Die massenproportionale Kopplung aller Fermionen ans Higgs-Boson (experimenteller
+Fingerabdruck der Higgs-Entdeckung) folgt aus der FFGFT-Grundrelation T̃·m=1
+unter räumlicher Fluktuation der Gitterskala v→v+h(x):
+- y_i = r_i·ξ^{p_i} ist direkte Umschreibung der Torus-Topologie, keine freie Annahme [B]
+- m_i(x) = m₀·(1+h/v) → L ⊃ -(m_i/v)·ψ̄ψ·h für alle i simultan [B]
+- Yukawa-Vertex mit y_i = m_i/v folgt als Konsequenz, nicht als Parameter [B]
+- Das Higgs-Teilchen h(x) ist das Schwingungsquant der Gitterskala (nicht
+  eigenständiges Skalarfeld); Higgs-Potential und m_h bleiben offen [S] (R122)
+- Vergleichstabelle SM vs. FFGFT
+
+- §5: 11/8-Kette M_Z:m_h:m_t = 1:11/8:(11/8)² [K]: m_h = M_Z·11/8 = 125,383 GeV
+  (0,15 %), m_t = M_Z·(11/8)² (0,10 %), M_W = M_Z·√(7/9) (0,06 %); 11 ∈
+  GF(27)*-Orbit {7,11,21}, 8 = |GF(9)*|, sin²θ_W = 2/9 — alle Galois-Größen;
+  V(h) ausstehend [S], R122 bleibt offen.
+
+- §6 Spurregel [K]: M_W² + M_Z² + m_h² = v²/2 auf 0,45 %; Higgs-Teilchen =
+  Reststeifigkeit des Gitters, m_h = √(v²/2 − 16/9·M_Z²) = 124,6 GeV.
+  Begründet [B]: Spur unter Kopplung erhalten (Weinberg-Mischung = Drehung),
+  leeres Vakuum → keine Eigensteifigkeit, W± eine komplexe Mode (Dok. 042/053),
+  Faktor 1/2 aus kanonischer Normierung der komplexen Gitteramplitude.
+  Mit 2/9 und 11/8: M_Z²/v² = 288/2113 → M_Z, M_W, m_h allein aus v auf
+  0,17–0,31 % (Baumgraphen-Niveau); λ durch 4g²/7 + 2λ = 1/2 festgelegt.
+  Fermionseite: Spurregel gilt nur für Gittermoden (W, Z, h); y_t = 1
+  verworfen [X] (unbegründet, +1,2 %; Top-Masse schemaabhängig, Pol/MS-bar
+  5,8 %); Top über m_t = (11/8)²·M_Z [K]. Genauigkeitsordnung: v-freie
+  Polmassen-Verhältnisse 0,06–0,15 %, Relationen mit v 0,45 %; Rest der
+  Spurregel vermutlich aus der SM-Definition von v (R112) [S].
+
+**Prüfskript:** 2/python/Dok373_Skripte/pruef_373_yukawa.py — 35/35 PASS
+**Register:** R122 aktualisiert (Higgs-Masse: Kandidaten über Galois-Kette und Spurregel; Λ_QCD bleibt offen).
