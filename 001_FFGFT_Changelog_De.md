@@ -897,7 +897,7 @@ Was aus |⟨v₀|R₅|v₁⟩|² = 2/9 über die Leptonmassen hinaus folgt.
 
 ## 21. September 2026 — Dok. 373: Yukawa-Mechanismus
 
-### Dok. 373 — Der Yukawa-Mechanismus als Konsequenz von T̃·m=1 (De, 9 Seiten)
+### Dok. 373 — Der Yukawa-Mechanismus als Konsequenz von T̃·m=1 (De, 10 Seiten)
 
 Die massenproportionale Kopplung aller Fermionen ans Higgs-Boson (experimenteller
 Fingerabdruck der Higgs-Entdeckung) folgt aus der FFGFT-Grundrelation T̃·m=1
@@ -926,6 +926,11 @@ unter räumlicher Fluktuation der Gitterskala v→v+h(x):
   5,8 %); Top über m_t = (11/8)²·M_Z [K]. Genauigkeitsordnung: v-freie
   Polmassen-Verhältnisse 0,06–0,15 %, Relationen mit v 0,45 %; Rest der
   Spurregel vermutlich aus der SM-Definition von v (R112) [S].
+
+- §7 Bestandsaufnahme des Teilchenzoos (Stand 21. Sept. 2026): Tabelle aller
+  Sektoren mit bester Herleitung, Quelldokument und Status; Ordnungsprinzip
+  (freie Moden und Gittermoden genau, Eingeschlossenes schemaabhängig,
+  Galois-Verhältnisse genauer als v-Relationen); Liste der offenen Punkte.
 
 **Prüfskript:** 2/python/Dok373_Skripte/pruef_373_yukawa.py — 35/35 PASS
 **Register:** R122 aktualisiert (Higgs-Masse: Kandidaten über Galois-Kette und Spurregel; Λ_QCD bleibt offen).
