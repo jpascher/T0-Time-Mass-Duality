@@ -897,7 +897,7 @@ Was aus |⟨v₀|R₅|v₁⟩|² = 2/9 über die Leptonmassen hinaus folgt.
 
 ## 21. September 2026 — Dok. 373: Yukawa-Mechanismus
 
-### Dok. 373 — Der Yukawa-Mechanismus als Konsequenz von T̃·m=1 (De, 10 Seiten)
+### Dok. 373 — Der Yukawa-Mechanismus als Konsequenz von T̃·m=1 (De, 11 Seiten)
 
 Die massenproportionale Kopplung aller Fermionen ans Higgs-Boson (experimenteller
 Fingerabdruck der Higgs-Entdeckung) folgt aus der FFGFT-Grundrelation T̃·m=1
