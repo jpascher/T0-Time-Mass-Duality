@@ -934,3 +934,29 @@ unter räumlicher Fluktuation der Gitterskala v→v+h(x):
 
 **Prüfskript:** 2/python/Dok373_Skripte/pruef_373_yukawa.py — 35/35 PASS
 **Register:** R122 aktualisiert (Higgs-Masse: Kandidaten über Galois-Kette und Spurregel; Λ_QCD bleibt offen).
+
+---
+
+## 22. September 2026 — Dok. 374: Gemeinsamer Anker
+
+### Dok. 374 — Brückengleichungen zu Observer Patch Holography und die elektroschwache Skala als Treffpunkt (De/En, je 8 Seiten)
+
+Anlass: OPH-Tracking-Eintrag #740 (Länge und Takt folgen nicht aus den OPH-Updates).
+OPH-Größen als zitierte Eingänge eines Fremdrahmens [Q]; kosmischer Sektor ausgeklammert (P39).
+- B1: OPH-Zellenenergie = FFGFT-Bitenergie E_bit = ħc/L an der Zellkante √P·ℓ_P [B]
+- B2: Kollapsschwelle (Dok. 329) an der Zellkante n_thr = √(P/2), Grenze P = 2, OPH darunter [B];
+  unabhängig vom offenen Hadronenteil
+- B3: Zellentakt T̃ = √P·t_P aus T̃·m=1 [B]; Anbindung an Laboruhr möglich, auf OPH-Seite
+  noch nicht ausgeführt [S] (in FFGFT folgt sie aus T̃ = 1/m)
+- B4: L_cell/L_0 = √P/ξ ≈ 9578 [K]
+- Treffpunkt v: OPH v/E_star [Q, bedingt] × FFGFT m_e/v = (4/3)ξ^(3/2) [K] ergibt m_e/E_P
+  auf −0,93 %; ein einziger SI-Anker legt beide Rahmen fest
+- Referenzenergie E_star: OPH-Energieeinheit (Planck-Energie = 1 im Code), physikalisch per Uhr
+  festzulegen; nicht reduzierte E_P auf 0,16 % [K], reduzierte um √(8π) ausgeschlossen;
+  Empfindlichkeit π/(2α_U²) ≈ 929 macht 0,16 % zu enger Bedingung an α_U [B]; Lesart E_star = E_P [S]
+- Zwei Wege zu m_e/E_P: eigene FFGFT-Kette ξ → G → ℓ_P → E_P (Dok. 012/013/180) auf +0,002 % [K];
+  Aufteilung C_dim·C_conv in Dok. 180 gleichwertig; Genauigkeit je Rechenweg verschieden,
+  Abweichungen je einer bekannten Stelle zugeordnet (bare-Leptonrest, Lesart E_star = E_P)
+
+**Prüfskript:** 2/python/Dok374_Skripte/pruef_374_anker.py — 27/27 PASS
+**Register:** kein Eintrag.
