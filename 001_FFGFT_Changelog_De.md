@@ -980,3 +980,24 @@ und erreicht E_P über die eigene Kette — v/E_P ist damit eine zweite, unabhä
 
 **Prüfskript:** 2/python/Dok375_Skripte/pruef_375_hierarchie.py — 11/11 PASS
 **Register:** kein Eintrag.
+
+---
+
+## 22. September 2026 — Dok. 376: Der Koeffizient 8π und der Status von Issue 740
+
+### Dok. 376 — Ein abgeleiteter Koeffizient auf OPH-Seite und die Rücknahme einer Aussage aus Dok. 374 (De/En, je 6 Seiten)
+
+Anlass: Der OPH-Autor hat auf Johanns Frage (G oder 8πG) ein Theorem vorgelegt und den Stand von
+Issue 740 ausführlicher dargestellt.
+- Theorem [Q]: zwei Beobachter mit verschiedener Spannung erzwingen κ = b·L²/q; mit b = 2π
+  (modularer Fluss) und q = 1/4 (Flächengesetz) folgt κ = 8π·L² und G = L² [K]
+- Folge: E_star = ħc/L ist die nicht reduzierte Planck-Energie [B]; reduzierte Lesart um √(8π)
+  daneben, also andere Normierung, keine Einheitenwahl
+- Rücknahme: Die Aussage in Dok. 374, Issue 740 sei unter der Lesart E_star = E_P geschlossen,
+  wird zurückgenommen [X]; Längenidentität, Takt und Matching-Faktor bleiben auf OPH-Seite offen [Q].
+  Brückengleichungen B1–B4 und absolute Skala über die FFGFT-Kette bleiben gültig
+- Matching-Faktoren beider Rahmen: OPH v_F/v_Quelle = 0,9984 (0,16 %, offen),
+  FFGFT v_F/v(ξ) = 0,98912 (1,10 %, bare-Rest der Leiter, Dok. 352/375) [K]
+
+**Prüfskript:** 2/python/Dok376_Skripte/pruef_376_koeffizient.py — 9/9 PASS
+**Register:** R124 (Rücknahme der Issue-740-Aussage in Dok. 374).
