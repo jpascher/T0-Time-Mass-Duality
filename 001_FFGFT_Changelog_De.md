@@ -939,7 +939,7 @@ unter räumlicher Fluktuation der Gitterskala v→v+h(x):
 
 ## 22. September 2026 — Dok. 374: Gemeinsamer Anker
 
-### Dok. 374 — Brückengleichungen zu Observer Patch Holography und die elektroschwache Skala als Treffpunkt (De/En, je 8 Seiten)
+### Dok. 374 — Brückengleichungen zu Observer Patch Holography und die elektroschwache Skala als Treffpunkt (De/En, 9/8 Seiten)
 
 Anlass: OPH-Tracking-Eintrag #740 (Länge und Takt folgen nicht aus den OPH-Updates).
 OPH-Größen als zitierte Eingänge eines Fremdrahmens [Q]; kosmischer Sektor ausgeklammert (P39).
@@ -957,6 +957,26 @@ OPH-Größen als zitierte Eingänge eines Fremdrahmens [Q]; kosmischer Sektor au
 - Zwei Wege zu m_e/E_P: eigene FFGFT-Kette ξ → G → ℓ_P → E_P (Dok. 012/013/180) auf +0,002 % [K];
   Aufteilung C_dim·C_conv in Dok. 180 gleichwertig; Genauigkeit je Rechenweg verschieden,
   Abweichungen je einer bekannten Stelle zugeordnet (bare-Leptonrest, Lesart E_star = E_P)
+- #740 unter der Lesart E_star = E_P geschlossen [S]: L_cell = √P·ℓ_P = 2,064·10⁻³⁵ m,
+  T̃_cell = √P·t_P = 6,885·10⁻⁴⁴ s [K]; Laboruhr auf OPH-Seite als Prüfung, nicht als Lücke
 
-**Prüfskript:** 2/python/Dok374_Skripte/pruef_374_anker.py — 27/27 PASS
+**Prüfskript:** 2/python/Dok374_Skripte/pruef_374_anker.py — 30/30 PASS
+**Register:** kein Eintrag.
+
+---
+
+## 22. September 2026 — Dok. 375: Die Hierarchie v/E_P
+
+### Dok. 375 — Zwei Herleitungen im Vergleich: FFGFT und Observer Patch Holography (De/En, je 6 Seiten)
+
+Anlass: Dok. 374 kombinierte m_e/v (FFGFT) mit v/E_star (OPH); FFGFT leitet v aber selbst ab (R104)
+und erreicht E_P über die eigene Kette — v/E_P ist damit eine zweite, unabhängige Herleitung.
+- FFGFT: v = m_e/((4/3)ξ^(3/2)) = 248,93 GeV; E_P über G = ξ²/(4m_e)·C_conv·K_frak;
+  v/E_P = 2,0389·10⁻¹⁷ (+1,10 % gegen SM-v aus G_F) [K]
+- Abweichung vollständig der bare-Rest der Leptonleiter (Dok. 352); Planck-Kette < 10⁻⁴ [K]
+- OPH Theorem A: v/E_star = 2,0200·10⁻¹⁷ (+0,16 %) [Q], bedingt; Abstand der Herleitungen 0,93 %
+- Empfindlichkeit: FFGFT ∂ln v/∂ln ξ = −3/2 [B], OPH π/(2α_U²) ≈ 929 in α_U
+- FFGFT-Eintrag für die gehashte Vergleichstabelle mit Weg und SHA-256 (84fac85f…)
+
+**Prüfskript:** 2/python/Dok375_Skripte/pruef_375_hierarchie.py — 11/11 PASS
 **Register:** kein Eintrag.
