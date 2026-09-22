@@ -89,4 +89,10 @@ chk("D4 Empfindlichkeit d ln(v/E)/d alpha_U = pi/(2 alpha_U^2)", abs(sens-929) <
 pred = exp(sens*(aU_src-aU_pub))*sqrt(P_pub/P_src)
 chk("D5 Empfindlichkeit erklärt Zweigdifferenz", abs(pred-h_src/h_pub) < mpf("1e-6"), f"{F(pred-1):.2e} vs {F(h_src/h_pub-1):.2e}")
 
+print("--- E  #740: absolute Länge und Takt über die FFGFT-Kette (Lesart E_star = E_P) ---")
+L_abs = sqrt(P_pub)*lP; t_abs = L_abs/c
+chk("E1 L_cell = sqrt(P) l_P absolut", abs(L_abs/mpf("2.0642e-35")-1) < mpf("1e-3"), f"{F(L_abs):.4e} m")
+chk("E2 T~_cell = sqrt(P) t_P absolut", abs(t_abs/mpf("6.8855e-44")-1) < mpf("1e-3"), f"{F(t_abs):.4e} s")
+chk("E3 Taktverhältnis = Massenverhältnis (T~ = hbar/E)", abs((hbar/(E_P_GeV*1e9*eV/sqrt(P_pub)))/(sqrt(P_pub)*sqrt(hbar*G/c**5))-1) < mpf("1e-10"))
+
 print(f"\n{ok}/{n} PASS")

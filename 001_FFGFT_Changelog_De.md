@@ -957,8 +957,9 @@ OPH-Größen als zitierte Eingänge eines Fremdrahmens [Q]; kosmischer Sektor au
 - Zwei Wege zu m_e/E_P: eigene FFGFT-Kette ξ → G → ℓ_P → E_P (Dok. 012/013/180) auf +0,002 % [K];
   Aufteilung C_dim·C_conv in Dok. 180 gleichwertig; Genauigkeit je Rechenweg verschieden,
   Abweichungen je einer bekannten Stelle zugeordnet (bare-Leptonrest, Lesart E_star = E_P)
-- #740 unter der Lesart E_star = E_P geschlossen [S]: L_cell = √P·ℓ_P = 2,064·10⁻³⁵ m,
-  T̃_cell = √P·t_P = 6,885·10⁻⁴⁴ s [K]; Laboruhr auf OPH-Seite als Prüfung, nicht als Lücke
+- Länge und Takt absolut über die FFGFT-Kette: L_cell = √P·ℓ_P = 2,064·10⁻³⁵ m,
+  T̃_cell = √P·t_P = 6,885·10⁻⁴⁴ s [K]; Koeffizient der Lesart auf OPH-Seite abgeleitet,
+  Issue 740 als ganzer dort offen (nachgeführt am 22.9., siehe Dok. 376)
 
 **Prüfskript:** 2/python/Dok374_Skripte/pruef_374_anker.py — 30/30 PASS
 **Register:** kein Eintrag.
@@ -994,7 +995,7 @@ Issue 740 ausführlicher dargestellt.
 - Folge: E_star = ħc/L ist die nicht reduzierte Planck-Energie [B]; reduzierte Lesart um √(8π)
   daneben, also andere Normierung, keine Einheitenwahl
 - Rücknahme: Die Aussage in Dok. 374, Issue 740 sei unter der Lesart E_star = E_P geschlossen,
-  wird zurückgenommen [X]; Längenidentität, Takt und Matching-Faktor bleiben auf OPH-Seite offen [Q].
+  ist zurückgenommen und in Dok. 374 direkt korrigiert [X]; Längenidentität, Takt und Matching-Faktor bleiben auf OPH-Seite offen [Q].
   Brückengleichungen B1–B4 und absolute Skala über die FFGFT-Kette bleiben gültig
 - Matching-Faktoren beider Rahmen: OPH v_F/v_Quelle = 0,9984 (0,16 %, offen),
   FFGFT v_F/v(ξ) = 0,98912 (1,10 %, bare-Rest der Leiter, Dok. 352/375) [K]
