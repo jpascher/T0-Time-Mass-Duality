@@ -50,4 +50,9 @@ g = np.exp(1j*1.234); a2, b2 = g*a, g*b
 check("globale Phase faellt heraus (S^3 -> S^2)",
       np.isclose(abs(a2)**2-abs(b2)**2, abs(a)**2-abs(b)**2) and
       np.isclose(np.angle(a2/b2), np.angle(a/b)))
+# 7 Determinismus: A(z,lam)=sgn(z-lam) ist fuer festes lam eindeutig, Mittel = Born
+lam = rng.uniform(-1, 1, 400000); z0 = 0.37
+A = np.sign(z0 - lam)
+check("Einzelausgang deterministisch, Mittel <A> = z", abs(A.mean() - z0) < 0.006
+      and np.array_equal(np.sign(z0 - lam[:5]), np.sign(z0 - lam[:5])))
 print(f"{ok}/{n}")
