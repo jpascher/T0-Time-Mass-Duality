@@ -7,7 +7,7 @@
 | 000 | Introduction to Volume 1 | [PDF](2/pdf/000_Einleitung_Teil1_En.pdf) |
 | 000 | Introduction to Volume 2 | [PDF](2/pdf/000_Einleitung_Teil2_En.pdf) |
 | 000 | Introduction to Volume 3 | [PDF](2/pdf/000_Einleitung_Teil3_En.pdf) |
-| 001 | T0-Theory: A Unified Physics from a Single Number Comprehensive Summary of the Document Collection, Umfassende Zusammenfassung der Dokumentensammlung | [PDF](2/pdf/001_T0_Book_Abstract_En.pdf) |
+| 001 | T0-Theory: A Unified Physics from a Single Number Comprehensive Summary of the Document Collection | [PDF](2/pdf/001_T0_Book_Abstract_En.pdf) |
 | 001a | T0-Theory: A Unified Physics from a Single Number Comprehensive Summary of the Document Collection | [PDF](2/pdf/001a_T0_Book_Abstract_En.pdf) |
 | 001b | Introduction | [PDF](2/pdf/001b_T0_Introduction_En.pdf) |
 | 002 | T0 Theory: A Unified Physics from a Single Number Summary of the Document Collection | [PDF](2/pdf/002_reise_En.pdf) |
@@ -75,7 +75,7 @@
 | 067 | From Time Dilation to Mass Variation | [PDF](2/pdf/067_MathZeitMasseLagrange_En.pdf) |
 | 068 | Conceptual Comparison of Unified Natural Units and Extended Standard Model | [PDF](2/pdf/068_T0vsESM_ConceptualAnalysis_En.pdf) |
 | 069 | The T0-Model: Time-Energy Duality and Geometric Rest Mass (Energy-Based Version) | [PDF](2/pdf/069_Zeit-konstant_En.pdf) |
-| 070 | Zur mathematischen Struktur der T0-Theorie: — Warum Zahlenverhältnisse nicht direkt gekürzt werden dürfen | [PDF](2/pdf/070_Mathematische_struktur_En.pdf) |
+| 070 | On the Mathematical Structure of the T0 Theory: — Why Numerical Ratios Must Not Be Directly Simplified | [PDF](2/pdf/070_Mathematische_struktur_En.pdf) |
 | 073 | T0 Deterministic Quantum Computing: Complete Analysis of Important Algorithms | [PDF](2/pdf/073_QM-testen_En.pdf) |
 | 074 | T0 Theory vs Bell's Theorem | [PDF](2/pdf/074_NoGo_En.pdf) |
 | 075 | RSA and Period Finding: — Foundations, Resonance Formulation, Limits | [PDF](2/pdf/075_RSA_En.pdf) |
@@ -106,7 +106,7 @@
 | 132 | Extension: Fractal Duality in the T0 Theory – Beyond Constant Time | [PDF](2/pdf/132_T0_Fraktale_Dualitaet_En.pdf) |
 | 133 | T0-Theory: The Fractal Correction – Complete Derivation and Multiple Perspectives | [PDF](2/pdf/133_Fraktale_Korrektur_Herleitung_En.pdf) |
 | 134 | Unit Conventions and the Speed of Light c E=mc² vs. E=m: Two Equivalent Perspectives Natural Units, SI Units, and the T0 Viewpoint | [PDF](2/pdf/134_Einheitenkonventionen_c_Geschwindigkeit_En.pdf) |
-| 137 | Das verborgene Geheimnis von 1/137 | [PDF](2/pdf/137_En.pdf) |
+| 137 | The Hidden Secret of 1/137 | [PDF](2/pdf/137_En.pdf) |
 | 140 | Detailed Analysis: John F. Donoghue's Theories and the Fundamental Fractal-Geometric Field Theory (FFGFT) in the T0 Theory | [PDF](2/pdf/140_T0_CMB_Donoghue_Analyse_En.pdf) |
 | 141 | Fractal Spacetime and its Implications in Quantum Gravity | [PDF](2/pdf/141_Renormierung_En.pdf) |
 | 142 | Attosecond Prediction of Quantum Entanglement Formation as Supporting Evidence for the T_0-Time-Mass-Duality Theory | [PDF](2/pdf/142_Experimet-verschraenkung_En.pdf) |
@@ -116,7 +116,7 @@
 | 146 | The Universe as an Open and Closed Resonator Simultaneously: — Computable Consequences for BZ Reactions, Mandelbrot Fractals, and Turing Patterns | [PDF](2/pdf/146_turing_En.pdf) |
 | 147 | Quantum Computing in the T0 Framework: Theoretical Foundations and Experimental Predictions Proof of -QFT Equivalence with Bell-Corrected Entanglement | [PDF](2/pdf/147_quantum_computing_En.pdf) |
 | 148 | T0 Projection onto Scramblon Physics: A Quantitative Bridge between Geometric Spacetime Correction and Quantum Many-Body Chaos | [PDF](2/pdf/148_T0_scramblons_En.pdf) |
-| 149 | Anomale magnetische Momente in der FFGFT-Theorie Geometrische Herleitung aus der Zeit-Masse-Dualität — Rein geometrische Formeln und präzise Verhnältnis-Vorheir | [PDF](2/pdf/149_FFGFT-torsion_En.pdf) |
+| 149 | Anomalous Magnetic Moments in FFGFT Geometric Derivation from the Time–Mass Duality — Purely Geometric Formulas and Precise Ratio Predictions | [PDF](2/pdf/149_FFGFT-torsion_En.pdf) |
 | 150 | Compatibility Analysis of T0 Dimension Formulations Unification of 4D Torsion Crystal and Fractal Dimension Documents 149, 018, and 145 Compared | [PDF](2/pdf/150_kompatiblitaet_En.pdf) |
 | 152 | Ontological Reality and Narrative Structure of T0 Theory From Fundamental Structure to Observable Physics Hierarchical Levels of Physical Reality | [PDF](2/pdf/152_ontologische-ord_En.pdf) |
 | 153 | Ontological Hierarchy of Energy Reduction The Levels of Fundamental Reality in Natural Units From Time-Mass Duality to Universal Energy Field | [PDF](2/pdf/153_energie-reduktion-on_En.pdf) |
@@ -150,7 +150,7 @@
 | 181 | Justification of the 4D Torus Geometry — and Derivation of L_0 as the Smallest Stable Winding — Johann Pascher March 2026 — https://github.com/jpascher/T0-Time- | [PDF](2/pdf/181_T0_Torus_Begruendung_En.pdf) |
 | 182 | Maximal Size of the Universe from — Schwarzschild Radius, Hubble Scale and the Complete Scale Hierarchy — Johann Pascher March 2026 — https://github.com/jpasche | [PDF](2/pdf/182_T0_Universum_Maximalskala_En.pdf) |
 | 183 | T0 Theory: Google Willow and the Physics of Self-Measurement — What Quantum Computers Really Measure When They Observe Themselves | [PDF](2/pdf/183_T0_Willow_Selbstmessung_En.pdf) |
-| 184 | Das p-Bit als geometrischer Kipppunkt — Von der -Längenhierarchie zur Torsionsbarriere — und die Auflösung der stochastischen Interpretation — Johann Pascher Ap | [PDF](2/pdf/184_p-bit_En.pdf) |
+| 184 | The p-Bit as a Geometric Tipping Point — From the Length Hierarchy to the Torsion Barrier — and the Resolution of the Stochastic Interpretation — Johann Pascher | [PDF](2/pdf/184_p-bit_En.pdf) |
 | 185 | T0 Theory: Document 185 — Time as the Embedding Price of Mathematics — Factorisation, Quantum Computers, and the Physical Limit of RSA Decomposition | [PDF](2/pdf/185_T0_Zeit_Einbettungspreis_En.pdf) |
 | 186 | FFGFT Analytics: Mathematical Foundations | [PDF](2/pdf/186_FFGFT_Photonik_Analyse_En.pdf) |
 | 186 | FFGFT Analytics: Mathematical Foundations | [PDF](2/pdf/186_FFGFT_Photonik_En.pdf) |
@@ -167,7 +167,7 @@
 | 201 | Adapted Dynamic Vacuum Field Theory (DVFT) Fully Grounded in T0 Time-Mass Duality Theory | [PDF](2/pdf/201_FFGFT-alles_En.pdf) |
 | 202 | FFGFT Field Theory: Comprehensive Presentation — Torus modes, Lagrangian, mode operator | [PDF](2/pdf/202_FFGFT_Feldtheorie_Gesamt_En.pdf) |
 | 203 | 203 R Operator En | [PDF](2/pdf/203_R_Operator_En.pdf) |
-| 204 | 204 Fraktale Randbedingung En | [PDF](2/pdf/204_Fraktale_Randbedingung_En.pdf) |
+| 204 | 204 Fractal Boundary Condition | [PDF](2/pdf/204_Fraktale_Randbedingung_En.pdf) |
 | 205 | 205 FFGFT Narrativ En | [PDF](2/pdf/205_FFGFT_Narrativ_En.pdf) |
 | 206 | dok206 dreieck matrix reduktion En | [PDF](2/pdf/206_dreieck_matrix_reduktion_En.pdf) |
 | 207 | dok207 bewusstsein bruecken En | [PDF](2/pdf/207_bewusstsein_bruecken_En.pdf) |
@@ -284,7 +284,7 @@
 | 346 | Charge Quantisation from GF(27)^*: — Electric Charge and Colour Algebraically Forced | [PDF](2/pdf/346_Ladungsquantisierung_Galois_En.pdf) |
 | 347 | Gell-Mann–Nishijima from the Galois Structure: — Q = I_3 + Y/2 algebraically derived | [PDF](2/pdf/347_Gell_Mann_Nishijima_Galois_En.pdf) |
 | 348 | Generation Structure and Coupling Matrix from GF(27): — Trace Bilinear Form, Orbit Assignment, and CKM Complexity | [PDF](2/pdf/348_Generationen_Orbits_En.pdf) |
-| 349 | SU(2)_L-Chiralität aus der Galois-Struktur: — Su/Sd-Trennung und Cl(6)-Gradparität | [PDF](2/pdf/349_SU2L_Chiralitaet_Galois_En.pdf) |
+| 349 | SU(2)_L Chirality from the Galois Structure: — Su/Sd Separation and Cl(6) Grade Parity | [PDF](2/pdf/349_SU2L_Chiralitaet_Galois_En.pdf) |
 | 350 | Black Holes and Time-Mass Duality: — Covariance of G, Evaporation Sequence, and the Neutrino as Final State | [PDF](2/pdf/350_Schwarze_Loecher_Dualitaet_En.pdf) |
 | 351 | Model Dependence of PDG Comparison Values: — How Empirical Values Arise, Where Theory and Irrational Factors Enter, and What This Means for FFGFT Residuals | [PDF](2/pdf/351_PDG_Modellabhaengigkeit_En.pdf) |
 | 352 | Lepton Residuals: Lepton Ladder, Galois and Koide Compared — How Empirical Values Arise, Where Theory and Irrational Factors Enter, and What This Means for FFGF | [PDF](2/pdf/352_Leptonreste_En.pdf) |

@@ -1,6 +1,6 @@
 % 360_HRV_Galois_Experiment_En_ch.tex
-% Johann Pascher, 8. September 2026
-% Galois-informierte HRV-Analyse: Implementation and Negative Validation
+% Johann Pascher, 8 September 2026
+% Galois-informed HRV analysis: implementation and negative validation
 \providecommand{\BM}{\textbf{[B]}}
 \providecommand{\KM}{\textbf{[K]}}
 \providecommand{\SM}{\textbf{[S]}}
@@ -17,60 +17,60 @@
 \textbf{[B]} & \emph{Proved} --- algebraically proved. \\[3pt]
 \textbf{[K]} & \emph{Confirmed} --- numerically verified. \\[3pt]
 \textbf{[S]} & \emph{Speculative} --- open. \\[3pt]
-\textbf{[L]} & \emph{Referencese reference} --- external primary reference. \\
+\textbf{[L]} & \emph{Literature evidence} --- external primary source. \\
 \end{tabular}
 \end{center}
 
 \section*{Abstract}
 
-Dok.~358 und 359 liefern die algebraische Begründung für einen
-Galois-informierten Ansatz in der HRV-Frequenzanalyse. Dieses
-Dokument implementiert den Ansatz als Python-Module und validiert
-ihn an zwei öffentlichen EKG-Datensätzen. Das Result ist eine
-\emph{Negativ-Validierung} mit klarem strukturellen Reason.
+Docs.~358 and 359 provide the algebraic justification for a
+Galois-informed approach to HRV frequency analysis. The present
+document implements this approach as a Python module and validates
+it on two public ECG datasets. The outcome is a
+\emph{negative validation} with a clear structural reason.
 
-\textbf{Resultse:}
+\textbf{Results:}
 \begin{enumerate}
-\item \textbf{Module} \KM: \texttt{galois\_hrv\_preprocess.py} —
-  vollständige Pipeline: Galois projection, Resolution filter
-  $100\xi\approx1{,}33\,\%$, HRV-Bandgrenzen als Konstanten,
-  Orbit type-Klassifikation, Arnold-Zungenbreite.
-\item \textbf{BIDMC-01} \LM: ICU-Patient, 88~J., 8~min PPG-EKG,
-  Pimentel et al.\ 2017. Result: 0/3 Verhältnisse 5-Limit,
-  LF/VLF nicht auflösbar (zu kurz). Structural reason: Aufnahme
-  zu kurz für VLF, DFA $\alpha\approx0{,}5$ (weißes Rauschen,
-  fraktale Regulation verloren).
-\item \textbf{Fantasia} \LM: 5 junge + 5 alte Gesunde, je $\approx120$~min
-  Ruhe, spontane Atmung, Gold et al.\ 2002. Result: LF-Peak-CV
-  11--33\,\% $\gg$ 1{,}33\,\%, 5-Limit LF/HF 4/10 (40\,\%),
-  kein Gruppenunterschied jung/alt.
-\item \textbf{Structural reason} \BM: Bei spontaner Atmung ist
-  $\text{HF} = \text{Atemfrequenz}$ (variabel). LF/HF ist das
-  Verhältnis zweier unabhängiger Regelkreise und kein festes
-  Galois-Verhältnis.
-\item \textbf{Next step} \SM: Kontrollierte Atmung 6/min
-  (Resonanzfrequenz-Protokoll, Lehrer \& Gevirtz 2014) mit
+\item \textbf{Module} \KM: \texttt{galois\_hrv\_preprocess.py} ---
+  complete pipeline: Galois projection, resolution filter
+  $100\xi\approx1.33\,\%$, HRV band limits as constants,
+  orbit-type classification, Arnold tongue width.
+\item \textbf{BIDMC-01} \LM: ICU patient, 88~y, 8~min PPG/ECG,
+  Pimentel et al.\ 2017. Result: 0/3 ratios 5-limit,
+  LF/VLF not resolvable (too short). Structural reason: recording
+  too short for VLF, DFA $\alpha\approx0.5$ (white noise,
+  fractal regulation lost).
+\item \textbf{Fantasia} \LM: 5 young + 5 elderly healthy subjects,
+  each $\approx120$~min at rest, spontaneous breathing, Gold et al.\ 2002.
+  Result: LF peak CV 11--33\,\% $\gg$ 1.33\,\%, 5-limit LF/HF 4/10 (40\,\%),
+  no group difference young/elderly.
+\item \textbf{Structural reason} \BM: Under spontaneous breathing,
+  $\text{HF} = \text{respiratory rate}$ (variable). LF/HF is the
+  ratio of two independent control loops and not a fixed
+  Galois ratio.
+\item \textbf{Next step} \SM: Controlled breathing at 6/min
+  (resonance-frequency protocol, Lehrer \& Gevirtz 2014) with a
   Polar H10 chest strap.
 \end{enumerate}
 
 % ============================================================
-\section{Galois-HRV Preprocessing Modulee}
+\section{Galois-HRV Preprocessing Module}
 % ============================================================
 
-\texttt{galois\_hrv\_preprocess.py} implementiert (Dok.~359 §5):
+\texttt{galois\_hrv\_preprocess.py} implements (Doc.~359 §5):
 
 \begin{description}
-\item[Galois-grid] 901 rationale Verhältnisse $p/q$ mit Primfaktoren
-  $\subseteq\{2,3,5,7,11,13\}$ bis Nenner 60.
-\item[Resolution filter] $\Delta f/f \geq 100\xi \approx 1{,}33\,\%$
-  (Farey-$Q_c\approx11$, Dok.~343).
-\item[HRV-Bandgrenzen] VLF: $[0,\,\tfrac{1}{25}]$~Hz, LF: $[\tfrac{1}{25},\,\tfrac{3}{20}]$~Hz,
-  HF: $[\tfrac{3}{20},\,\tfrac{2}{5}]$~Hz --- 5-Limit-Konstanten \BM\ (Dok.~359 Satz~A).
-\item[Galois projection] LF/HF $\mapsto$ nächstes $p/q$ im grid.
-\item[Orbit type] Galois-Tiefe $k=\mathrm{ord}_p(3)$ der Primfaktoren
-  (Dok.~343, 358).
-\item[Stability] Arnold-Zungenbreite $\approx 2/(p+q)$ (Dok.~328).
-\item[Pipeline] \texttt{hrv\_galois\_pipeline(rr\_ms)} --- one function call.
+\item[Galois grid] 901 rational ratios $p/q$ with prime factors
+  $\subseteq\{2,3,5,7,11,13\}$ up to denominator 60.
+\item[Resolution filter] $\Delta f/f \geq 100\xi \approx 1.33\,\%$
+  (Farey $Q_c\approx11$, Doc.~343).
+\item[HRV band limits] VLF: $[0,\,\tfrac{1}{25}]$~Hz, LF: $[\tfrac{1}{25},\,\tfrac{3}{20}]$~Hz,
+  HF: $[\tfrac{3}{20},\,\tfrac{2}{5}]$~Hz --- 5-limit constants \BM\ (Doc.~359 Theorem~A).
+\item[Galois projection] LF/HF $\mapsto$ nearest $p/q$ in the grid.
+\item[Orbit type] Galois depth $k=\mathrm{ord}_p(3)$ of the prime factors
+  (Docs.~343, 358).
+\item[Stability] Arnold tongue width $\approx 2/(p+q)$ (Doc.~328).
+\item[Pipeline] \texttt{hrv\_galois\_pipeline(rr\_ms)} --- a single function call.
 \end{description}
 
 % ============================================================
@@ -79,20 +79,20 @@ ihn an zwei öffentlichen EKG-Datensätzen. Das Result ist eine
 
 \textbf{Dataset:} BIDMC PPG and Respiration Dataset v1.0.0,
 Record 01 \LM\,\cite{Pimentel2017}.
-88~J., m., MICU, 8~min, 125~Hz PPG+Respiration.
+88~y, male, MICU, 8~min, 125~Hz PPG + respiration.
 
-\textbf{Result:} 0/3 Frequenzverhältnisse erfüllen das 5-Limit-Kriterium
-(Welch und Lomb-Scargle). VLF nicht auflösbar (Aufnahmedauer 8~min $<$ 15~min
-Minimum für VLF). DFA $\alpha_1=0{,}50$, $\alpha_2=0{,}45$ --- weißes Rauschen;
-bei Gesunden $\approx1{,}0$.
+\textbf{Result:} 0/3 frequency ratios satisfy the 5-limit criterion
+(Welch and Lomb--Scargle). VLF not resolvable (recording length 8~min $<$ 15~min
+minimum for VLF). DFA $\alpha_1=0.50$, $\alpha_2=0.45$ --- white noise;
+in healthy subjects $\approx1.0$.
 
-\textbf{Warum:}
+\textbf{Why:}
 \begin{enumerate}
-\item Zu kurz für VLF ($<15$~min).
-\item ICU-Patient: fraktale Regulation weitgehend verloren.
-\item HF-Peak = gemessene Atemfrequenz (0{,}328~Hz = RESP-Kanal 0{,}336~Hz).
-\item Messunsicherheit Welch vs.\ Lomb-Scargle: $\pm2\,\%$ $>$ FFGFT-Grenze
-  1{,}33\,\%.
+\item Too short for VLF ($<15$~min).
+\item ICU patient: fractal regulation largely lost.
+\item HF peak = measured respiratory rate (0.328~Hz vs.\ RESP channel 0.336~Hz).
+\item Measurement uncertainty Welch vs.\ Lomb--Scargle: $\pm2\,\%$ $>$ FFGFT limit
+  1.33\,\%.
 \end{enumerate}
 
 % ============================================================
@@ -100,43 +100,43 @@ bei Gesunden $\approx1{,}0$.
 % ============================================================
 
 \textbf{Dataset:} PhysioNet Fantasia Database v1.0.0
-\LM\,\cite{Gold2002}. 5 jung (f1y01--05, 21--34~J.) + 5 alt
-(f2o01--05, 68--85~J.), je $\approx120$~min Ruhe, 250~Hz EKG,
-spontane Atmung. Annotationsdateien (.ecg), CC-BY 4.0.
+\LM\,\cite{Gold2002}. 5 young (f1y01--05, 21--34~y) + 5 elderly
+(f2o01--05, 68--85~y), each $\approx120$~min at rest, 250~Hz ECG,
+spontaneous breathing. Annotation files (.ecg), CC-BY 4.0.
 
-\textbf{Methods:} wfdb-Annotationen, Welch 10-min-Fenster,
-Zero-Padding $\times4$, parabolische Peak-Interpolation,
-LF-Stability über 6 $\times$ 5-min-Segmente.
+\textbf{Methods:} wfdb annotations, Welch with 10-min windows,
+zero padding $\times4$, parabolic peak interpolation,
+LF stability over 6 $\times$ 5-min segments.
 
 \begin{center}
 \begin{tabular}{@{}lrrrrrrrl@{}}
 \toprule
 Rec & $n_\text{RR}$ & LF~Hz & CV\,\% & LF/HF & $p/q$ & $k$ & 5-Lim & Arnold \\
 \midrule
-f1y01 & 8707 & 0{,}109 & 11{,}5 & 0{,}438 & $7/16$ & 6 & N & 0{,}087 \\
-f1y02 & 6919 & 0{,}085 & 33{,}0 & 0{,}867 & $13/15$ & 4 & N & 0{,}071 \\
-f1y03 & 7641 & 0{,}100 & 13{,}7 & 4{,}219 & $4$ & 1 & J & 0{,}400 \\
-f1y04 & 5232 & 0{,}078 & 30{,}9 & 1{,}060 & $35/33$ & 6 & N & 0{,}029 \\
-f1y05 & 6943 & 0{,}068 & 16{,}5 & 2{,}993 & $3$ & 1 & J & 0{,}500 \\
+f1y01 & 8707 & 0.109 & 11.5 & 0.438 & $7/16$ & 6 & N & 0.087 \\
+f1y02 & 6919 & 0.085 & 33.0 & 0.867 & $13/15$ & 4 & N & 0.071 \\
+f1y03 & 7641 & 0.100 & 13.7 & 4.219 & $4$ & 1 & Y & 0.400 \\
+f1y04 & 5232 & 0.078 & 30.9 & 1.060 & $35/33$ & 6 & N & 0.029 \\
+f1y05 & 6943 & 0.068 & 16.5 & 2.993 & $3$ & 1 & Y & 0.500 \\
 \midrule
-f2o01 & 7045 & 0{,}067 & 25{,}6 & 1{,}494 & $3/2$ & 1 & J & 0{,}400 \\
-f2o02 & 6327 & 0{,}052 & 14{,}4 & 0{,}864 & $45/52$ & 4 & N & 0{,}021 \\
-f2o03 & 6478 & 0{,}055 & 22{,}0 & 0{,}841 & $21/25$ & 6 & N & 0{,}043 \\
-f2o04 & 6849 & 0{,}065 & 32{,}2 & 0{,}719 & $28/39$ & 6 & N & 0{,}030 \\
-f2o05 & 8334 & 0{,}049 & 11{,}4 & 1{,}873 & $15/8$ & 4 & J & 0{,}087 \\
+f2o01 & 7045 & 0.067 & 25.6 & 1.494 & $3/2$ & 1 & Y & 0.400 \\
+f2o02 & 6327 & 0.052 & 14.4 & 0.864 & $45/52$ & 4 & N & 0.021 \\
+f2o03 & 6478 & 0.055 & 22.0 & 0.841 & $21/25$ & 6 & N & 0.043 \\
+f2o04 & 6849 & 0.065 & 32.2 & 0.719 & $28/39$ & 6 & N & 0.030 \\
+f2o05 & 8334 & 0.049 & 11.4 & 1.873 & $15/8$ & 4 & Y & 0.087 \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\textbf{Statistische Tests (Mann-Whitney~U):} Alle Gruppenunterschiede
-jung vs.\ alt n.s.\ ($p>0{,}40$).
+\textbf{Statistical tests (Mann--Whitney~U):} All group differences
+young vs.\ elderly are n.s.\ ($p>0.40$).
 
 \textbf{Findings:}
 \begin{itemize}
-\item LF-Peak-Stability: 0/10 Records stabil ($\text{CV}>1{,}33\,\%$).
-\item 5-Limit LF/HF: 4/10 (40\,\%) --- nicht signifikant über
-  Zufallserwartung ($\approx30\text{--}40\,\%$).
-\item Kein Gruppenunterschied jung/alt (auch bei $n=5$ nicht ausreichend).
+\item LF peak stability: 0/10 records stable ($\text{CV}>1.33\,\%$).
+\item 5-limit LF/HF: 4/10 (40\,\%) --- not significantly above
+  chance expectation ($\approx30\text{--}40\,\%$).
+\item No group difference young/elderly (and $n=5$ would not suffice anyway).
 \end{itemize}
 
 % ============================================================
@@ -144,41 +144,131 @@ jung vs.\ alt n.s.\ ($p>0{,}40$).
 % ============================================================
 
 \begin{quote}
-\textbf{Befund.} \BM\ Bei spontaner Atmung ist HF = Atemfrequenz
-(variabel 0{,}15--0{,}40~Hz). LF/HF ist das Verhältnis zweier
-unabhängiger physiologischer Regelkreise (Barorezeptor~/ Atmung)
-und konvergiert nicht gegen ein festes Galois-Verhältnis.
-Der Galois-Test ist bei spontaner Atmung strukturell nicht prüfbar.
+\textbf{Finding.} \BM\ Under spontaneous breathing, HF = respiratory rate
+(variable, 0.15--0.40~Hz). LF/HF is the ratio of two
+independent physiological control loops (baroreceptor~/ respiration)
+and does not converge to a fixed Galois ratio.
+Under spontaneous breathing the Galois test is structurally untestable.
 \end{quote}
 
-\textbf{Next step \SM:} Kontrollierte Atmung bei 6~breaths/min
-(0{,}10~Hz = LF-Resonanzfrequenz). Dann fallen HF und LF zusammen;
-das System kann einrasten (Arnold-Zunge breit) oder nicht.
-Das ist der Lehrer-\&-Gevirtz-Effekt \LM\,\cite{Lehrer2014},
-physiologisch gut belegt.
+\textbf{Next step \SM:} Controlled breathing at 6~breaths/min
+(0.10~Hz = LF resonance frequency). HF and LF then coincide;
+the system may lock in (broad Arnold tongue) or it may not.
+This is the Lehrer--Gevirtz effect \LM\,\cite{Lehrer2014},
+which is physiologically well established.
 
 \textbf{Recommended setup:}
 \begin{itemize}
-\item Polar H10 chest strap (1~ms RR-Auflösung, $\approx90$~€).
-\item 5~min acclimatisation, 10~min bei 6/min Metronom.
-\item Export via Elite HRV oder Kubios HRV (CSV).
-\item Analyse mit \texttt{galois\_hrv\_preprocess.py}.
+\item Polar H10 chest strap (1~ms RR resolution, $\approx90$~€).
+\item 5~min acclimatisation, 10~min at 6/min with a metronome.
+\item Export via Elite HRV or Kubios HRV (CSV).
+\item Analysis with \texttt{galois\_hrv\_preprocess.py}.
 \end{itemize}
 
 % ============================================================
+% ============================================================
+
+% ============================================================
+\section{Breathing-Rate Scan: Results after Artefact Correction (10 September 2026)}
+% ============================================================
+
+\textbf{Protocol:} Polar H10 ECG chest strap, 130~Hz, seated, each ~5--6~min,
+metronome click = phase change (4~bpm $\to$ 2/min; 8~bpm $\to$ 4/min;
+10~bpm $\to$ 5/min; 12~bpm $\to$ 6/min).
+R-peak detection with artefact filtering (median $\pm30\,\%$).
+
+\begin{center}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Condition & Breaths/min & LF~Hz & RMSSD~ms & Artefacts \\
+\midrule
+Spontaneous (supine) & 12.6 & 0.073 & 33.6 & 0 \\
+4/min & 4.0 & 0.105 & 33.6 & 0 \\
+2/min Rec.\,1 & 2.0 & 0.071 & 27.7 & 2 \\
+2/min Rec.\,2 & 2.0 & 0.075 & 30.5 & 0 \\
+5/min Rec.\,1 & 5.1 & 0.144 & 29.5 & 2 \\
+\textbf{5/min Rec.\,2} & \textbf{5.0} & \textbf{0.132} & \textbf{39.9} & \textbf{0} \\
+6/min & 6.0 & 0.040 & 36.1 & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Finding 1 --- No RMSSD resonance effect:}
+After artefact cleaning, RMSSD lies between 27 and 40~ms in all
+conditions --- no significant difference.
+The earlier RMSSD maximum at 5/min (67.2~ms) was an
+R-peak detection artefact (2 missed beats caused by amplitude modulation
+of the ECG during slow breathing, $|\Delta\text{RR}|_\text{max}=662$~ms).
+
+\textbf{Finding 2 --- The LF peak moves with the breathing rate:}
+The LF peak shifts with the breathing rate (0.040--0.144~Hz),
+but shows no stable resonance in the classical sense ($n=1$).
+At 2/min the LF peak lies close to the spontaneous value (0.073~Hz) ---
+at very slow breathing the baroreceptor eigenfrequency dominates.
+
+\textbf{Galois:} LF/HF hits the grid at 5/min ($88/35$, 0.02~\%),
+6/min ($39/35$, 0.06~\%) and spontaneous ($56/45$, 0.14~\%) --- all with $k=6$.
+In no condition does LF coincide with the breathing rate.
+
+\textbf{Methodological lessons:} Artefact filtering is mandatory under
+controlled breathing. Short recordings ($n=1$) permit no statistical
+conclusions --- all findings are exploratory.
+
+\section{Validation III: Polar H10 Self-Test (10 September 2026)}
+% ============================================================
+
+\textbf{Device:} Polar H10 ECG chest strap, firmware 4.2.0, JSONL export
+via Polar Sensor Recording (Android). Spontaneous breathing, supine,
+21.9~min, 1517 RR intervals.
+
+\begin{center}
+\begin{tabular}{@{}lrl@{}}
+\toprule
+Parameter & Value & Assessment \\
+\midrule
+HR & 69.2~bpm & Normal at rest \\
+RMSSD & 36.3~ms & Good for 75~y (Fantasia elderly: 20--35~ms) \\
+SDNN & 53.8~ms & Normal \\
+Breathing rate & 12.6/min & Spontaneous \\
+LF peak & 0.073~Hz & Below norm ($\approx$0.10~Hz) \\
+LF/HF & 1.2427 & $\to$ Galois $56/45$, distance 0.14~\% \\
+LF CV & 10.55~\% & $\gg$ 1.33~\% (unstable) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Finding:} Confirms the Fantasia negative validation. The LF CV of
+10.55~\% lies within the range of the Fantasia subjects (11--33~\%).
+LF/HF lies in the Galois grid (distance 0.14~\%), but with orbit depth
+$k=6$ (prime~7, GF$(729)$, R115) and low Arnold stability (0.020).
+
+\textbf{Positive finding:} An RMSSD of 36.3~ms is very good for 75~y ---
+clearly above the mean of the Fantasia ``elderly'' group (20--35~ms).
+Data quality of the Polar H10: flawless.
+
+\textbf{Note on the individual resonance frequency:} The LF peak at 0.073~Hz
+(below the norm of 0.10~Hz) suggests that the individual
+resonance frequency may lie at 4--5/min rather than at 6/min.
+The individual protocol (testing rates of 4--8/min step by step)
+would clarify this --- Lehrer \& Gevirtz (2014) describe the
+determination procedure.
+
 \section{Summary}
 % ============================================================
 
 \begin{center}
 \begin{tabular}{@{}lp{9cm}l@{}}
 \toprule
-Result & Aussage & Status \\
+Result & Statement & Status \\
 \midrule
-Module & \texttt{galois\_hrv\_preprocess.py} funktioniert & \KM \\
-BIDMC-01 & Negativ: zu kurz, ICU, kein Galois-Signal & \LM \\
-Fantasia & Negativ: spontane Atmung, LF wandert & \LM \\
-Reason & HF = Atmung bei Spontanatmung & \BM \\
-Next & 6/min-Atemprotokoll mit Polar H10 & \SM \\
+Module & \texttt{galois\_hrv\_preprocess.py} works & \KM \\
+BIDMC-01 & Negative: too short, ICU, no Galois signal & \LM \\
+Fantasia & Negative: spontaneous breathing, LF CV 11--33\,\% & \LM \\
+H10 self-test & Negative: LF CV 10.55\,\%, confirms Fantasia & \KM \\
+Breathing scan & No RMSSD resonance effect after artefact correction & \KM \\
+Galois & LF/HF at 5/min: $88/35$ (0.02\,\%), $k=6$ & \KM \\
+Reason & HF = respiration; LF moves; no coincidence of LF and breathing rate & \BM \\
+Next & Longer recordings ($\geq15$~min), $n>5$ & \SM \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -198,18 +288,18 @@ Next & 6/min-Atemprotokoll mit Polar H10 & \SM \\
 
 \section*{Scripts}
 
-\texttt{2/python/Dok360\_Scripts/}:
+\texttt{2/python/Dok360\_Skripte/}:
 \texttt{galois\_hrv\_preprocess.py},
 \texttt{fantasia\_galois\_analyse.py},
 \texttt{orbit\_experiment\_synthetic.py},
 \texttt{01\_rpeaks\_bidmc01.py},
 \texttt{02\_welch\_5limit.py},
 \texttt{03\_lombscargle\_dfa.py}.
-Fantasia-Daten: f1y01--05, f2o01--05 (.ecg/.hea, CC-BY~4.0).
+Fantasia data: f1y01--05, f2o01--05 (.ecg/.hea, CC-BY~4.0).
 
 \section*{Note on the use of AI assistance}
 
-Bei der Erstellung dieses Dokuments wurde KI-Assistenz (Claude, Anthropic)
-für Formulierung, LaTeX-Satz und Analyse-Scripts verwendet.
-Die inhaltlichen Aussagen und die Verantwortung für den Text
-liegen beim Autor.
+AI assistance (Claude, Anthropic) was used in preparing this document
+for wording, LaTeX typesetting and analysis scripts.
+The substantive statements and the responsibility for the text
+rest with the author.
