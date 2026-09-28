@@ -231,12 +231,32 @@ zugelassene Ausgänge.
 
 Explizit ausgewiesen und prüfbar:
 
-- **Casimir-Effekt** ([Dok. 220](2/pdf/220_Casimir_De.pdf)): modifizierte Kraft bei Sub-Planck-Abständen
+- **Casimir-Effekt** ([Dok. 220](2/ipi/220_Casimir_Falsifikation_De.pdf)): modifizierte Kraft bei Sub-Planck-Abständen
 - **Kosmologische Rotverschiebung** ([Dok. 221](2/ipi/221_Redshift_Falsifikation_De.pdf)): Frequenzsignaturen mit metrischer Expansion entartet; ein statisches Bild mit T̃·m = 1 ist nicht ausgeschlossen (Dok. 267, R128)
-- **Lithium-Problem** ([Dok. 222](2/pdf/222_Lithium_De.pdf)): primordiale Häufigkeiten aus FFGFT-Kernphysik
+- **Lithium-Problem** ([Dok. 222](2/ipi/222_Lithium_Falsifikation_De.pdf)): primordiale Häufigkeiten aus FFGFT-Kernphysik
 
 ΔCHSH ~ ξ ≈ 10⁻⁴ liegt unterhalb des aktuellen NISQ-Rauschens,
 ist aber prinzipiell messbar (Dok. 230).
+
+---
+
+## Wo die FFGFT derzeit steht (Stand R129, 28. September 2026)
+
+Statusmarker: **[K]** aus ξ berechnet und mit Daten verglichen · **[B]** algebraisch bewiesen · **[S]** skizziert/offen · **[X]** ausgeschlossen. Vollständige Liste der offenen Brücken: [Dok. 190](2/pdf/190_T0_Korrekturen_De.pdf).
+
+| Sektor | Stand | Offener Punkt |
+|---|---|---|
+| Feinstrukturkonstante | 1/α = 3700/27, 7,6 ppm **[K]** | — |
+| Geladene Leptonen | Massen aus ξ und Wicklungszahlen **[K]**; Koide-Phase θ = 2/9 **[B]** | Ursache der generationsabhängigen Reste εᵢ (Lesart A) **[S]** |
+| Neutrinos | Hierarchie, Δm²_atm, Δm²_sol auf 1-%-Niveau **[K]**; θ₂₃, θ₁₃ **[K]** | θ₁₂ **[S]** |
+| Elektroschwach | Weinberg-Winkel on-shell 2/9, 0,4 % **[K]** | τ_μ direkt, ohne G_F und v **[S]** |
+| Higgs | Spurregel M_W² + M_Z² + m_h² = v²/2 ergibt m_h ≈ 124,7 GeV (0,5 %) **[K]** | Frage der Genauigkeit: der Rest von 0,5 %, vermutlich aus der Definition von v **[S]** |
+| Quarks | alle sechs Massen mit rationalen rᵢ, pᵢ auf 0,1–2 % reproduziert, innerhalb der Messunsicherheit (Dok. 006, `2/python/calc_De.py`); alle neun Yukawa-Koeffizienten im Galois-Raster {2,3,5,7,11,13} **[B]** | keine Frage der Genauigkeit (leichte Quarkmassen sind selbst nur auf einige % bekannt), sondern des Status: **erzwungen oder gewählt?** Alle Teilchen sind Wicklungsmoden auf T⁴ (Dok. 210), die explizite Zuordnung (n_θ, n_φ) mit r = n_φ²/n_θ gibt es bisher aber nur für Leptonen. Die Quantenzahlen (n, l, j) aller Fermionen (Dok. 006/046, R129) legen Generation und pᵢ fest, die Quark-rᵢ aber nicht; für Quarks gibt es nur den Ansatz mit Farbfaktor n_c = 3 (Dok. 189) **[S]** |
+| QCD-Skala | Λ_QCD nicht aus der ξ-Leiter ableitbar **[X]** | — |
+| Fundament | T⁴/Z₃-Geometrie als **[SETZUNG]**, Selbstadjungiertheit von F̂ **[B]** | Basismasse M_Basis = m_P **[S]**; adversarieller D₄-Spezifitätstest **[S]** |
+| Kosmischer Sektor | bewusst ausgeklammert (P39); Frequenzsignaturen mit Expansion entartet, statisches Bild nicht ausgeschlossen (R128) | Exponent 41/4 (P20), CMB-Peak-Muster (P29–P31), leichte Elemente ⁴He und D **[S]** |
+
+**Zusammengefasst:** Wo die Geometrie die Zahlen festlegt (α, Leptonen, Neutrinos, Weinberg-Winkel, Higgs-Spurregel), betreffen die offenen Fragen die letzten Promille bis Prozent. Der Quarksektor ist der entscheidende offene Punkt, und dort geht es um die Herleitung, nicht um die Genauigkeit.
 
 ---
 

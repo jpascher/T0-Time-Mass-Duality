@@ -227,12 +227,32 @@ zugelassene Ausgänge.
 
 Explicitly declared and verifiable:
 
-- **Casimir effect** ([Dok. 220](2/pdf/220_Casimir_En.pdf)): modified force at sub-Planck distances
+- **Casimir effect** ([Dok. 220](2/ipi/220_Casimir_Falsifikation_En.pdf)): modified force at sub-Planck distances
 - **Cosmological redshift** ([Dok. 221](2/ipi/221_Redshift_Falsifikation_En.pdf)): frequency signatures degenerate with metric expansion; a static picture with T̃·m = 1 is not excluded (Dok. 267, R128)
-- **Lithium problem** ([Dok. 222](2/pdf/222_Lithium_En.pdf)): primordial abundances from FFGFT nuclear physics
+- **Lithium problem** ([Dok. 222](2/ipi/222_Lithium_Falsifikation_En.pdf)): primordial abundances from FFGFT nuclear physics
 
 ΔCHSH ~ ξ ≈ 10⁻⁴ is below current NISQ noise,
 but measurable in principle (Dok. 230).
+
+---
+
+## Where FFGFT stands (as of R129, 28 September 2026)
+
+Status markers: **[K]** computed from ξ and compared with data · **[B]** algebraically proved · **[S]** sketched/open · **[X]** ruled out. Full list of open bridges: [Doc. 190](2/pdf/190_T0_Korrekturen_En.pdf).
+
+| Sector | Status | Remaining open point |
+|---|---|---|
+| Fine-structure constant | 1/α = 3700/27, 7.6 ppm **[K]** | — |
+| Charged leptons | masses from ξ and winding numbers **[K]**; Koide phase θ = 2/9 **[B]** | cause of the generation-dependent residuals εᵢ (Reading A) **[S]** |
+| Neutrinos | hierarchy, Δm²_atm, Δm²_sol at the 1 % level **[K]**; θ₂₃, θ₁₃ **[K]** | θ₁₂ **[S]** |
+| Electroweak | on-shell Weinberg angle 2/9, 0.4 % **[K]** | τ_μ directly, without G_F and v **[S]** |
+| Higgs | trace rule M_W² + M_Z² + m_h² = v²/2 gives m_h ≈ 124.7 GeV (0.5 %) **[K]** | a question of precision: the 0.5 % residual, probably from the definition of v **[S]** |
+| Quarks | all six masses reproduced with rational rᵢ, pᵢ to 0.1–2 %, within measurement uncertainty (Doc. 006, `2/python/calc_De.py`); all nine Yukawa coefficients lie in the Galois grid {2,3,5,7,11,13} **[B]** | not a question of precision (light-quark masses are themselves known only to a few %), but of status: **forced or selected?** All particles are winding modes on T⁴ (Doc. 210), but the explicit assignment (n_θ, n_φ) with r = n_φ²/n_θ exists so far only for leptons. The quantum numbers (n, l, j) of all fermions (Doc. 006/046, R129) fix generation and pᵢ, but not the quark rᵢ; for quarks there is only the ansatz with colour factor n_c = 3 (Doc. 189) **[S]** |
+| QCD scale | Λ_QCD not derivable from the ξ ladder **[X]** | — |
+| Foundation | T⁴/Z₃ geometry as **[SETZUNG]**, self-adjointness of F̂ **[B]** | base mass M_basis = m_P **[S]**; adversarial D₄ specificity test **[S]** |
+| Cosmic sector | deliberately bracketed (P39); frequency signatures degenerate with expansion, a static picture is not excluded (R128) | exponent 41/4 (P20), CMB peak pattern (P29–P31), light elements ⁴He and D **[S]** |
+
+**Summary:** Where the geometry fixes the numbers (α, leptons, neutrinos, Weinberg angle, Higgs trace rule), the open questions concern the last per-mille to per-cent. The quark sector is the decisive open point, and there the question is derivation, not accuracy.
 
 ---
 
@@ -700,8 +720,8 @@ The register with 86 entries had become unwieldy. New: **compact register**
 konsolidierten Abschnitt „Aktuell offene Brücken"; die ausführliche Fassung ist als
 **Dok. 190-Archiv** (DE 69 S. / EN 58 S.) eingefroren und enthält weiterhin für jeden
 Eintrag die vollständige Begründung. Append-only-Prinzip unverändert (R50).  
-→ Kompakt: [DE](2/pdf/190_T0_Korrekturen_En.pdf) · [EN](2/pdf/190_T0_Korrekturen_En.pdf)
-· Archive: [DE](2/pdf/190_T0_Korrekturen_Archiv_En.pdf) · [EN](2/pdf/190_T0_Korrekturen_Archiv_En.pdf)
+→ Kompakt: [DE](2/pdf/190_T0_Korrekturen_De.pdf) · [EN](2/pdf/190_T0_Korrekturen_En.pdf)
+· Archive: [DE](2/pdf/190_T0_Korrekturen_Archiv_De.pdf) · [EN](2/pdf/190_T0_Korrekturen_Archiv_En.pdf)
 
 ### Doc. 329 — Is the stability threshold n_thresh universal? (DE+EN, 7 pp. each)
 
