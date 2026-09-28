@@ -1002,3 +1002,24 @@ Issue 740 ausführlicher dargestellt.
 
 **Prüfskript:** 2/python/Dok376_Skripte/pruef_376_koeffizient.py — 9/9 PASS
 **Register:** R124 (Rücknahme der Issue-740-Aussage in Dok. 374).
+
+---
+
+## 28. September 2026 — Dok. 378: Begutachtung unter heutigen Bedingungen
+
+### Dok. 378 — Was im IPI-Austausch, in der Dot-Theory-Governance und in der FFGFT-Buchführung bereits vorliegt und was davon für ein Regelwerk verwertbar ist (De/En, je 12 Seiten)
+
+Anlass: Diskussion, wie ein Peer-Review-Regelwerk an heutige Verhältnisse anzupassen ist
+(Korpusumfang, unabhängige Forscher, Sprachmodelle, Mustersuche-Verdacht, Vereinfachung und Vorurteil).
+- Ausgangslage: vier stille Voraussetzungen des klassischen Verfahrens, keine trägt heute allgemein
+- Bestand: FFGFT-Statusmarker, Dok. 190, Prüfskripte/Nulltests, Negativbefunde (342, 361, 276), P35;
+  Dot-Theory-Governance (Dok. 272: Lexicon/OAP/Matrix/FAH, O0/O2); CIL (Prinzipien 3, 6, 7, 8;
+  Geltungsbereich an der Stelle der Herleitung); F O R M v1.0 (R = Residual); FER-Rekursion;
+  Audit-Praxis (Hash-Freeze, Status wird vergeben, Reihenfolge deklarieren→einfrieren→implementieren→
+  prüfen, Invarianten aus Block II, Rollentrennung, versiegelte Vorab-Vorhersage); Untaugliches
+- Vorschlag: zehn Bausteine B1–B10 und gestufte Prüftiefe (Einstieg / Objekt / Tiefe)
+- Grenzen: Aufwand, knappe neutrale Prüfer, Anerkennung, Vorurteil, Deutungshoheit gegen Prüfbefund
+- Keine physikalischen Aussagen; methodische Bestandsaufnahme mit Vorschlagscharakter
+
+**Prüfskript:** 2/python/Dok378_Skripte/pruef_378_verweise.py — 25/25 PASS
+**Register:** kein Eintrag.
