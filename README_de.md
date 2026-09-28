@@ -232,7 +232,7 @@ zugelassene Ausgänge.
 Explizit ausgewiesen und prüfbar:
 
 - **Casimir-Effekt** ([Dok. 220](2/pdf/220_Casimir_De.pdf)): modifizierte Kraft bei Sub-Planck-Abständen
-- **Kosmologische Rotverschiebung** ([Dok. 221](2/pdf/221_Rotverschiebung_De.pdf)): Unterschied zur metrischen Expansion bei hohen z
+- **Kosmologische Rotverschiebung** ([Dok. 221](2/ipi/221_Redshift_Falsifikation_De.pdf)): Frequenzsignaturen mit metrischer Expansion entartet; ein statisches Bild mit T̃·m = 1 ist nicht ausgeschlossen (Dok. 267, R128)
 - **Lithium-Problem** ([Dok. 222](2/pdf/222_Lithium_De.pdf)): primordiale Häufigkeiten aus FFGFT-Kernphysik
 
 ΔCHSH ~ ξ ≈ 10⁻⁴ liegt unterhalb des aktuellen NISQ-Rauschens,

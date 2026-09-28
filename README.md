@@ -228,7 +228,7 @@ zugelassene Ausgänge.
 Explicitly declared and verifiable:
 
 - **Casimir effect** ([Dok. 220](2/pdf/220_Casimir_En.pdf)): modified force at sub-Planck distances
-- **Cosmological redshift** ([Dok. 221](2/pdf/221_Rotverschiebung_En.pdf)): difference from metric expansion at high z
+- **Cosmological redshift** ([Dok. 221](2/ipi/221_Redshift_Falsifikation_En.pdf)): frequency signatures degenerate with metric expansion; a static picture with T̃·m = 1 is not excluded (Dok. 267, R128)
 - **Lithium problem** ([Dok. 222](2/pdf/222_Lithium_En.pdf)): primordial abundances from FFGFT nuclear physics
 
 ΔCHSH ~ ξ ≈ 10⁻⁴ is below current NISQ noise,
