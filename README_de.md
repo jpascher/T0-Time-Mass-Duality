@@ -266,8 +266,7 @@ Die vollständige Liste der offenen Brücken führt [Dok. 190](2/pdf/190_T0_Korr
 
 ## Alle Dokumente
 
-Eine vollständige Liste aller ~289 Dokumente mit Kurzinfo und direktem PDF-Link:
-**[DOCUMENTS_de.md](DOCUMENTS_de.md)**
+**[DOCUMENTS_de.md](DOCUMENTS_de.md)** listet alle nummerierten Dokumente mit Titel und PDF-Link, derzeit rund 300 (Dok. 000–378, nicht jede Nummer ist belegt). Die Liste wird aus den vorhandenen PDFs erzeugt und veraltet daher nicht mehr von selbst: nach neuen Dokumenten genügt `python3 2/python/Werkzeuge/erzeuge_dokumentenliste.py` aus der Repo-Wurzel.
 
 ---
 

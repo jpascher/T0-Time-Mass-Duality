@@ -262,8 +262,7 @@ The full list of open bridges is kept in [Doc. 190](2/pdf/190_T0_Korrekturen_En.
 
 ## All documents
 
-A complete list of all ~289 documents with brief info and direct PDF link:
-**[DOCUMENTS.md](DOCUMENTS.md)**
+**[DOCUMENTS.md](DOCUMENTS.md)** lists all numbered documents with title and PDF link, currently about 300 (Doc. 000–378; not every number is used). The list is generated from the existing PDFs and therefore no longer goes stale on its own: after new documents, run `python3 2/python/Werkzeuge/erzeuge_dokumentenliste.py` from the repository root.
 
 ---
 
