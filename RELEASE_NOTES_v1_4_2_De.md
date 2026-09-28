@@ -1,6 +1,6 @@
-# Release Notes — v1.4.1 (28. September 2026)
+# Release Notes — v1.4.2 (28. September 2026)
 
-**DOI:** wird bei der Zenodo-Veröffentlichung vergeben — ersetzt v1.4.0 (https://doi.org/10.5281/zenodo.22790191)
+**DOI:** wird bei der Zenodo-Veröffentlichung vergeben — ersetzt v1.4.1
 Laufende Korrekturen: **[2/pdf/190_T0_Korrekturen_De.pdf](2/pdf/190_T0_Korrekturen_De.pdf)**
 Änderungsprotokoll: **[001_FFGFT_Changelog_De.md](001_FFGFT_Changelog_De.md)**
 
@@ -14,6 +14,8 @@ Zeit und Masse sind invers gekoppelt.
 ---
 
 ## Überblick
+
+**v1.4.2 ersetzt v1.4.1 ohne neue Dokumente; korrigiert wurden die englischen Übersetzungen mehrerer Dokumente.** Die folgenden Vermerke sind die von v1.4.1.
 
 Diese Version fasst die Arbeit vom 18. bis 28. September 2026 zusammen: dreizehn neue
 Dokumente (Dok. 366–378), drei neue populärwissenschaftliche Bücher und sieben

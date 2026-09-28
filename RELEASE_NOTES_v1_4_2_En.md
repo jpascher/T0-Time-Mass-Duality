@@ -1,6 +1,6 @@
-# Release Notes — v1.4.1 (28 September 2026)
+# Release Notes — v1.4.2 (28 September 2026)
 
-**DOI:** assigned upon Zenodo release — supersedes v1.4.0 (https://doi.org/10.5281/zenodo.22790191)
+**DOI:** assigned upon Zenodo release — supersedes v1.4.1
 Running corrections: **[2/pdf/190_T0_Korrekturen_De.pdf](2/pdf/190_T0_Korrekturen_De.pdf)**
 Change log: **[001_FFGFT_Changelog_De.md](001_FFGFT_Changelog_De.md)**
 
@@ -14,6 +14,8 @@ are inversely coupled.
 ---
 
 ## Overview
+
+**v1.4.2 supersedes v1.4.1 without new documents; the English translations of several documents have been corrected.** The notes below are those of v1.4.1.
 
 This release collects the work from 18 to 28 September 2026: thirteen new documents
 (Docs. 366–378), three new popular-science books, and seven register entries
