@@ -1005,6 +1005,27 @@ Issue 740 ausführlicher dargestellt.
 
 ---
 
+## 23. September 2026 — Dok. 377: Schnittstellen der FFGFT zu anderen Rahmen
+
+### Dok. 377 — Vergleichs- und Brückendokumente, Berührungspunkte und überschneidende Größen (De/En, je 6 Seiten)
+
+Übersichtsdokument, rechnet nichts Neues; fasst die vorhandenen Vergleichs- und Brückenarbeiten
+zusammen und dient als Vorlage für eine Vergleichstabelle nach außen.
+- Elf Rahmen mit Dokumenten: HLV (271, 272, 276, 282, 283, 285, 294, 297), OPH (364, 374, 375, 376),
+  Hyperbit/Z₃C (324, 326, 336), XYLATIC (252), RA/PMT (269), Vopson (251), Matsas (105),
+  ΛCDM (309), Kagome (361), SM-Lagrangedichte (049), Literatur (345); UIFT nur in 013/257 berührt
+- Sieben überschneidende Größen mit Weg und Abweichung: α⁻¹ = 3700/27 (+7,6 ppm), sin²θ_W = 2/9
+  (−0,52 %), λ_CKM = ξ^(1/6) (+0,46 %), v/E_P (+1,10 %), E_bit = ħc/L, Dimension 3+1, kosmischer
+  Sektor ausgeklammert [K]
+- Nur α⁻¹ und v/E_P werden von mehr als einem Rahmen beziffert; der Hadronsektor kommt in keinem
+  Vergleich vor
+- Brückenkriterium aus Dok. 283 als Maßstab übernommen
+
+**Prüfskript:** 2/python/Dok377_Skripte/pruef_377_schnittstellen.py — 20/20 PASS
+**Register:** kein Eintrag.
+
+---
+
 ## 28. September 2026 — Dok. 378: Begutachtung unter heutigen Bedingungen
 
 ### Dok. 378 — Was im IPI-Austausch, in der Dot-Theory-Governance und in der FFGFT-Buchführung bereits vorliegt und was davon für ein Regelwerk verwertbar ist (De/En, je 12 Seiten)
