@@ -242,21 +242,13 @@ ist aber prinzipiell messbar (Dok. 230).
 
 ## Wo die FFGFT derzeit steht (Stand R129, 28. September 2026)
 
-Statusmarker: **[K]** aus ξ berechnet und mit Daten verglichen · **[B]** algebraisch bewiesen · **[S]** skizziert/offen · **[X]** ausgeschlossen. Vollständige Liste der offenen Brücken: [Dok. 190](2/pdf/190_T0_Korrekturen_De.pdf).
+**Wo die Geometrie die Zahlen festlegt, geht es nur noch um Genauigkeit.** Die Feinstrukturkonstante (1/α = 3700/27, 7,6 ppm), die geladenen Leptonen, die Neutrino-Hierarchie und der Weinberg-Winkel (2/9 on-shell, 0,4 %) folgen aus ξ und der T⁴/Z₃-Geometrie. Beim Higgs ist es ebenso: Die Spurregel M_W² + M_Z² + m_h² = v²/2 (Dok. 373) liefert mit gemessenem W, Z und v m_h ≈ 124,7 GeV gegenüber gemessenen 125,2 GeV. Größenordnung und Wert sind getroffen; offen ist nur der Rest von 0,5 %, der vermutlich an der Definition von v hängt (R112).
 
-| Sektor | Stand | Offener Punkt |
-|---|---|---|
-| Feinstrukturkonstante | 1/α = 3700/27, 7,6 ppm **[K]** | — |
-| Geladene Leptonen | Massen aus ξ und Wicklungszahlen **[K]**; Koide-Phase θ = 2/9 **[B]** | Ursache der generationsabhängigen Reste εᵢ (Lesart A) **[S]** |
-| Neutrinos | Hierarchie, Δm²_atm, Δm²_sol auf 1-%-Niveau **[K]**; θ₂₃, θ₁₃ **[K]** | θ₁₂ **[S]** |
-| Elektroschwach | Weinberg-Winkel on-shell 2/9, 0,4 % **[K]** | τ_μ direkt, ohne G_F und v **[S]** |
-| Higgs | Spurregel M_W² + M_Z² + m_h² = v²/2 ergibt m_h ≈ 124,7 GeV (0,5 %) **[K]** | Frage der Genauigkeit: der Rest von 0,5 %, vermutlich aus der Definition von v **[S]** |
-| Quarks | alle sechs Massen mit rationalen rᵢ, pᵢ auf 0,1–2 % reproduziert, innerhalb der Messunsicherheit (Dok. 006, `2/python/calc_De.py`); alle neun Yukawa-Koeffizienten im Galois-Raster {2,3,5,7,11,13} **[B]** | keine Frage der Genauigkeit (leichte Quarkmassen sind selbst nur auf einige % bekannt), sondern des Status: **erzwungen oder gewählt?** Alle Teilchen sind Wicklungsmoden auf T⁴ (Dok. 210), die explizite Zuordnung (n_θ, n_φ) mit r = n_φ²/n_θ gibt es bisher aber nur für Leptonen. Die Quantenzahlen (n, l, j) aller Fermionen (Dok. 006/046, R129) legen Generation und pᵢ fest, die Quark-rᵢ aber nicht; für Quarks gibt es nur den Ansatz mit Farbfaktor n_c = 3 (Dok. 189) **[S]** |
-| QCD-Skala | Λ_QCD nicht aus der ξ-Leiter ableitbar **[X]** | — |
-| Fundament | T⁴/Z₃-Geometrie als **[SETZUNG]**, Selbstadjungiertheit von F̂ **[B]** | Basismasse M_Basis = m_P **[S]**; adversarieller D₄-Spezifitätstest **[S]** |
-| Kosmischer Sektor | bewusst ausgeklammert (P39); Frequenzsignaturen mit Expansion entartet, statisches Bild nicht ausgeschlossen (R128) | Exponent 41/4 (P20), CMB-Peak-Muster (P29–P31), leichte Elemente ⁴He und D **[S]** |
+**Bei den Quarks lautet die Frage nicht „wie genau?“, sondern „erzwungen oder gewählt?“.** Die Werte werden getroffen: Alle sechs Massen folgen aus rationalen Koeffizienten rᵢ, pᵢ auf 0,1–2 % (Dok. 006, `2/python/calc_De.py`), und alle Yukawa-Koeffizienten liegen im Galois-Raster {2, 3, 5, 7, 11, 13} (Dok. 358). Genauer lässt sich dort gar nicht prüfen, denn die Quarkmassen selbst sind nur auf einige Prozent bekannt und hängen von Schema und Skala ab. Offen ist deshalb der Status der Koeffizienten. Bei den Leptonen sind sie durch Wicklungszahlen und Galois-Rekursion festgelegt. Bei den Quarks legen die Quantenzahlen (n, l, j) aus Dok. 006/046 nur Generation und Exponent fest, nicht den Vorfaktor rᵢ (R129), und für die Wicklungszahlen gibt es bisher nur einen Ansatz mit Farbfaktor (Dok. 189). Solange das so ist, bleibt offen, ob die Quark-rᵢ aus der Geometrie folgen oder aus einem Raster gewählt sind, das bei einigen Prozent Toleranz dicht genug ist. Das ist die größte offene Frage der FFGFT.
 
-**Zusammengefasst:** Wo die Geometrie die Zahlen festlegt (α, Leptonen, Neutrinos, Weinberg-Winkel, Higgs-Spurregel), betreffen die offenen Fragen die letzten Promille bis Prozent. Der Quarksektor ist der entscheidende offene Punkt, und dort geht es um die Herleitung, nicht um die Genauigkeit.
+**Der kosmische Sektor ist bewusst ausgeklammert (P39).** Rotverschiebung, Lichtkurvendehnung, Tolman-Test und T(z) werden alle über Frequenzverhältnisse gemessen und sind wegen T̃·m = 1 mit der Expansion entartet; ein statisches Universum ist dadurch nicht ausgeschlossen (R128). Was dort offen bleibt, sind dimensionslose Größen, die sich nicht umdeuten lassen: die Häufigkeiten von ⁴He und D und das Muster der CMB-Peaks.
+
+Die vollständige Liste der offenen Brücken führt [Dok. 190](2/pdf/190_T0_Korrekturen_De.pdf).
 
 ---
 

@@ -238,21 +238,13 @@ but measurable in principle (Dok. 230).
 
 ## Where FFGFT stands (as of R129, 28 September 2026)
 
-Status markers: **[K]** computed from ξ and compared with data · **[B]** algebraically proved · **[S]** sketched/open · **[X]** ruled out. Full list of open bridges: [Doc. 190](2/pdf/190_T0_Korrekturen_En.pdf).
+**Where the geometry fixes the numbers, only precision remains open.** The fine-structure constant (1/α = 3700/27, 7.6 ppm), the charged leptons, the neutrino hierarchy and the Weinberg angle (2/9 on-shell, 0.4 %) follow from ξ and the T⁴/Z₃ geometry. The Higgs is the same: the trace rule M_W² + M_Z² + m_h² = v²/2 (Doc. 373) gives, with measured W, Z and v, m_h ≈ 124.7 GeV against the measured 125.2 GeV. Order of magnitude and value are hit; only the 0.5 % residual is open, probably tied to the definition of v (R112).
 
-| Sector | Status | Remaining open point |
-|---|---|---|
-| Fine-structure constant | 1/α = 3700/27, 7.6 ppm **[K]** | — |
-| Charged leptons | masses from ξ and winding numbers **[K]**; Koide phase θ = 2/9 **[B]** | cause of the generation-dependent residuals εᵢ (Reading A) **[S]** |
-| Neutrinos | hierarchy, Δm²_atm, Δm²_sol at the 1 % level **[K]**; θ₂₃, θ₁₃ **[K]** | θ₁₂ **[S]** |
-| Electroweak | on-shell Weinberg angle 2/9, 0.4 % **[K]** | τ_μ directly, without G_F and v **[S]** |
-| Higgs | trace rule M_W² + M_Z² + m_h² = v²/2 gives m_h ≈ 124.7 GeV (0.5 %) **[K]** | a question of precision: the 0.5 % residual, probably from the definition of v **[S]** |
-| Quarks | all six masses reproduced with rational rᵢ, pᵢ to 0.1–2 %, within measurement uncertainty (Doc. 006, `2/python/calc_De.py`); all nine Yukawa coefficients lie in the Galois grid {2,3,5,7,11,13} **[B]** | not a question of precision (light-quark masses are themselves known only to a few %), but of status: **forced or selected?** All particles are winding modes on T⁴ (Doc. 210), but the explicit assignment (n_θ, n_φ) with r = n_φ²/n_θ exists so far only for leptons. The quantum numbers (n, l, j) of all fermions (Doc. 006/046, R129) fix generation and pᵢ, but not the quark rᵢ; for quarks there is only the ansatz with colour factor n_c = 3 (Doc. 189) **[S]** |
-| QCD scale | Λ_QCD not derivable from the ξ ladder **[X]** | — |
-| Foundation | T⁴/Z₃ geometry as **[SETZUNG]**, self-adjointness of F̂ **[B]** | base mass M_basis = m_P **[S]**; adversarial D₄ specificity test **[S]** |
-| Cosmic sector | deliberately bracketed (P39); frequency signatures degenerate with expansion, a static picture is not excluded (R128) | exponent 41/4 (P20), CMB peak pattern (P29–P31), light elements ⁴He and D **[S]** |
+**For the quarks the question is not "how precise?" but "forced or selected?".** The values are hit: all six masses follow from rational coefficients rᵢ, pᵢ to 0.1–2 % (Doc. 006, `2/python/calc_De.py`), and all Yukawa coefficients lie in the Galois grid {2, 3, 5, 7, 11, 13} (Doc. 358). A sharper test is not possible there, because the quark masses themselves are known only to a few per cent and depend on scheme and scale. What is open is therefore the status of the coefficients. For the leptons they are fixed by winding numbers and the Galois recursion. For the quarks, the quantum numbers (n, l, j) in Doc. 006/046 fix only generation and exponent, not the prefactor rᵢ (R129), and for the winding numbers there is so far only an ansatz with a colour factor (Doc. 189). As long as this holds, it remains open whether the quark rᵢ follow from the geometry or are selected from a grid that is dense enough at a few per cent tolerance. This is the largest open question of FFGFT.
 
-**Summary:** Where the geometry fixes the numbers (α, leptons, neutrinos, Weinberg angle, Higgs trace rule), the open questions concern the last per-mille to per-cent. The quark sector is the decisive open point, and there the question is derivation, not accuracy.
+**The cosmic sector is deliberately bracketed (P39).** Redshift, light-curve stretching, the Tolman test and T(z) are all measured as frequency ratios and, because of T̃·m = 1, are degenerate with expansion; a static universe is therefore not excluded (R128). What remains open there are dimensionless quantities that cannot be reinterpreted: the abundances of ⁴He and D and the pattern of the CMB peaks.
+
+The full list of open bridges is kept in [Doc. 190](2/pdf/190_T0_Korrekturen_En.pdf).
 
 ---
 
