@@ -1,6 +1,6 @@
 # FFGFT — Document list
 
-302 numbered documents (English versions), generated automatically on 2026-09-29 from the PDFs in `2/pdf/` and `2/ipi/` with `2/python/Werkzeuge/erzeuge_dokumentenliste.py`. Corrections to individual documents are kept in the register, Doc. 190.
+303 numbered documents (English versions), generated automatically on 2026-09-29 from the PDFs in `2/pdf/` and `2/ipi/` with `2/python/Werkzeuge/erzeuge_dokumentenliste.py`. Corrections to individual documents are kept in the register, Doc. 190.
 
 | Doc. | Title | PDF |
 |---|---|---|
@@ -314,3 +314,4 @@
 | 378 | Peer Review under Present Conditions — What already exists in the IPI exchange, in Dot Theory governance and in the FFGFT record-keeping, and what of it can be  | [PDF](2/pdf/378_Begutachtung_heute_En.pdf) |
 | 379 | The Acoustic Plenum and the Photon — Lien (2026) in the light of Docs. 267, 290, 340, A265 and R128 | [PDF](2/pdf/379_Lien_Plenum_Photon_En.pdf) |
 | 380 | Why D_4 — Specificity of the carrier against matched comparison lattices (R95) | [PDF](2/pdf/380_D4_Spezifitaet_En.pdf) |
+| 381 | The Running Recursion Summed Exactly — Telescoping product, second order and one-loop reading for Docs. 295 and 333 | [PDF](2/pdf/381_Rekursion_Summation_En.pdf) |

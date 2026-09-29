@@ -1,0 +1,196 @@
+% 381_Rekursion_Summation_En_ch.tex
+% Johann Pascher, 29 Sept. 2026
+% The recursion xi_{n+1} = xi_n (1 - 100 xi_n): exact summation,
+% second order and one-loop reading
+
+\providecommand{\BM}{\textbf{[B]}}
+\providecommand{\KM}{\textbf{[K]}}
+\providecommand{\SM}{\textbf{[S]}}
+
+\chapter*{The Running Recursion Summed Exactly}
+\addcontentsline{toc}{chapter}{The Running Recursion Summed Exactly}
+
+\begin{abstract}
+The recursion $\xi_{n+1}=\xi_n(1-100\,\xi_n)$ (Doc.~295, 333) is the bookkeeping of
+the fractal correction in the running case. Doc.~295 derives its continuum behaviour
+$\xi_n\approx1/(100(n+75))$ and the logarithmic defect $D(n)\approx\ln(1+n/75)$.
+This document adds four statements. First, the product of all correction factors
+telescopes exactly to $\xi_n/\xi_0$ \BM. Second, a logarithmic second-order term
+improves the continuum approximation by a factor of 50 to 700 \KM. Third, the
+multiplicative and additive bookkeeping differ by a fixed amount $\psi'(75)/2$, and
+the bounded constant $\approx0.0134$ between mass and time defect found numerically
+in Doc.~295 is $\psi'(75)=\sum_{k\ge0}(k+75)^{-2}$ \KM. Fourth, the recursion has the
+form of a one-loop running, whose coefficient, however, is fixed only together with
+a step convention \SM.
+\end{abstract}
+
+% ============================================================
+\section*{Status markers}
+% ============================================================
+\begin{center}
+\begin{tabular}{@{}lp{10cm}@{}}
+\textbf{[B]} & Algebraically proved. \\[3pt]
+\textbf{[K]} & Numerically confirmed (verification script, 120 digits). \\[3pt]
+\textbf{[S]} & Structurally plausible, open. \\
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{Starting point}
+% ============================================================
+
+With $\xi_0=4/30000=1/7500$ one has $100\,\xi_0=1/75$ and the single step
+$K_\text{frak}=1-100\,\xi_0=74/75$. In the frozen case this factor stays constant;
+in the running case (Case~C, Doc.~333) it changes with every step according to
+\begin{equation}
+  \xi_{n+1}=\xi_n\,(1-100\,\xi_n). \label{eq:rek}
+\end{equation}
+Doc.~295 shows that this turns into a logarithmic spiral with ratio $e$. The
+following sections compute how accurate the approximations used there are, and
+give in closed form the quantities that appear there only numerically or
+approximately.
+
+% ============================================================
+\section{The product telescopes}
+% ============================================================
+
+From Eq.~\eqref{eq:rek} it follows that $1-100\,\xi_k=\xi_{k+1}/\xi_k$. The product
+of all correction factors therefore cancels down to the last and the first term:
+\begin{equation}
+  \prod_{k=0}^{n-1}\bigl(1-100\,\xi_k\bigr)=\frac{\xi_n}{\xi_0}. \label{eq:tele}
+\end{equation}
+This is an exact identity \BM, confirmed in rational arithmetic for $n=1$ to $12$
+\KM. The total accumulated fractal correction after $n$ steps is thus simply the
+ratio of the last to the first $\xi$; it need not be multiplied step by step. With
+the continuum form from Doc.~295 one obtains $\prod\approx75/(n+75)$, accurate to
+$0.007\,\%$ at $n=10^5$ \KM.
+
+% ============================================================
+\section{Continuum at second order}
+% ============================================================
+
+With $u_n=1/\xi_n$, Eq.~\eqref{eq:rek} reads exactly
+$u_{n+1}=u_n+100+100^2/(u_n-100)$. Doc.~295 keeps only the step $+100$ and obtains
+$u_n\approx100(n+75)$. Including the next term $100^2/u_n\approx100/(n+75)$, it sums
+to a logarithm:
+\begin{equation}
+  \frac{1}{\xi_n}\;\approx\;100\,(n+75)+100\,\ln\frac{n+75}{75}. \label{eq:zweite}
+\end{equation}
+Against the exact recursion (up to $n=10^5$, 120 digits) \KM:
+
+\begin{center}
+\begin{tabular}{rcc}
+\toprule
+$n$ & 1st order (Doc.~295) & 2nd order, Eq.~\eqref{eq:zweite} \\
+\midrule
+1 & $0.018\,\%$ & $0.0004\,\%$ \\
+10 & $0.15\,\%$ & $0.003\,\%$ \\
+100 & $0.49\,\%$ (maximum) & $0.005\,\%$ \\
+$10^4$ & $0.049\,\%$ & $0.00007\,\%$ \\
+$10^5$ & $0.0072\,\%$ & $0.000007\,\%$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The approximation of Doc.~295 therefore never deviates by more than $0.5\,\%$ from
+the exact value; its statements (logarithmic spiral, ratio $e$, pole at $n=-75$)
+are unaffected. The second order is 50 to 700 times more accurate and is
+recommended wherever values of the running recursion are used numerically.
+
+% ============================================================
+\section{Multiplicative and additive: a fixed difference}
+% ============================================================
+
+Doc.~295 carries the accumulated defect additively, $D(n)=\sum_k100\,\xi_k$. The
+multiplicative bookkeeping is $-\ln\prod_k(1-100\,\xi_k)$. Because
+$-\ln(1-x)=x+x^2/2+\dots$ it is always larger \KM, and the difference does not grow
+with $n$ but tends to the sum of the second-order terms:
+\begin{equation}
+  -\ln\prod_{k}\bigl(1-100\,\xi_k\bigr)-D(n)\;\longrightarrow\;
+  \sum_{k\ge0}\frac{1}{2\,(k+75)^2}=\frac{\psi'(75)}{2}=0.00671 \quad\KM.
+\end{equation}
+The two bookkeepings are therefore equivalent up to a fixed amount that can be
+given in closed form. The gap between the multiplicative form $(1-\xi)^{100}$ and
+$74/75$, which Doc.~333 describes as the difference between frozen and running
+recursion, is a term of the same second-order kind.
+
+\paragraph{The bounded constant from Doc.~295.}
+Doc.~295 finds numerically that the accumulated defects of the mass side and the
+time side ($d_\text{mass}=1/(1-100\,\xi_n)-1$, $d_\text{time}=100\,\xi_n$) differ
+only by a bounded constant $\approx0.0134$. Their difference per step is
+$(100\,\xi_n)^2/(1-100\,\xi_n)$, and the sum tends to
+\begin{equation}
+  \sum_{k\ge0}\frac{1}{(k+75)^2}=\psi'(75)=0.013423 \qquad\KM,
+\end{equation}
+to $6\times10^{-5}$ relative. The constant is therefore not an accident of the
+simulation but the trigamma function at $75=1/(100\,\xi_0)$, exactly twice the
+difference between multiplicative and additive bookkeeping.
+
+% ============================================================
+\section{The one-loop reading}
+% ============================================================
+
+In the continuum, Eq.~\eqref{eq:rek} becomes $d\xi/dn=-100\,\xi^2$ with the solution
+$\xi(n)=\xi_0/(1+100\,n\,\xi_0)$. This is the form of a one-loop running of a
+coupling, as it holds for instance for $\alpha_s$. The form is unique; the
+coefficient is not. If one step corresponds to a scale factor $s$, then
+$d\xi/d\ln\mu=-(100/\ln s)\,\xi^2$ \KM:
+
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+Step convention & $b=100/\ln s$ \\
+\midrule
+Factor $e$ (spiral ratio, Doc.~295) & 100 \\
+Factor 2 (usual RG convention) & 144 \\
+Factor $3/2$ ($q=2/3$, Doc.~275) & 247 \\
+Factor 10 (decade) & 43 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The identification with a $\beta$ function is therefore a statement only once a
+step convention is fixed \SM. The spiral of Doc.~295 suggests the factor $e$,
+because it scales by $e$ per precession turn; Doc.~275 works internally with
+$q=2/3$. Which convention carries physical meaning is open.
+
+% ============================================================
+\section{Single step and power form}
+% ============================================================
+
+The single step $74/75$ can also be written in the power form $(D_f/3)^{D_f/2}$
+(A040). With $D_f=2.973$ it gives $0.9866508$ against $74/75=0.9866667$, i.e.\ to
+$2\times10^{-5}$ \KM. Exact agreement requires $D_f^\text{eff}=2.973032$. Both forms
+are equivalent; the linear form $1-100\,\xi_0$ is the one the recursion computes
+with.
+
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{center}
+\begin{tabular}{>{\raggedright\arraybackslash}p{6.2cm}>{\raggedright\arraybackslash}p{5.0cm}l}
+\toprule
+Statement & Result & Status \\
+\midrule
+Telescoping product, Eq.~\eqref{eq:tele} & exactly $\xi_n/\xi_0$ & \BM \\
+Second order, Eq.~\eqref{eq:zweite} & 50 to 700 times more accurate than Doc.~295 & \KM \\
+Multiplicative minus additive & $\psi'(75)/2=0.00671$ & \KM \\
+Bounded constant from Doc.~295 & $\psi'(75)=0.013423$ & \KM \\
+One-loop form & unique; coefficient depends on convention & \SM \\
+Power form A040 & $D_f^\text{eff}=2.973032$ & \KM \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Doc.~295 remains valid in all its statements; its approximations are quantified
+here and extended by the second order. What remains open is which step convention
+underlies the one-loop reading physically, and, when several corrections run at
+the same time, whether they overlap. For the latter, the inclusion--exclusion rule
+of cluster expansions is the natural tool: the contribution of a level is its value
+minus what its sublevels already contain \SM.
+
+\paragraph{Verification script.} \texttt{2/python/Dok381\_Skripte/pruef\_381\_rekursion\_ansaetze.py}
+(14/14): exact recursion in rational arithmetic and with 120 digits up to $n=10^5$,
+telescoping product, both continuum orders, defect and product, constant from
+Doc.~295, power form, step conventions.

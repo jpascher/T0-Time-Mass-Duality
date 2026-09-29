@@ -1,0 +1,200 @@
+% 381_Rekursion_Summation_De_ch.tex
+% Johann Pascher, 29. Sept. 2026
+% Die Rekursion xi_{n+1} = xi_n (1 - 100 xi_n): exakte Summation,
+% zweite Ordnung und Ein-Schleifen-Lesart
+
+\providecommand{\BM}{\textbf{[B]}}
+\providecommand{\KM}{\textbf{[K]}}
+\providecommand{\SM}{\textbf{[S]}}
+
+\chapter*{Die laufende Rekursion exakt aufsummiert}
+\addcontentsline{toc}{chapter}{Die laufende Rekursion exakt aufsummiert}
+
+\begin{abstract}
+Die Rekursion $\xi_{n+1}=\xi_n(1-100\,\xi_n)$ (Dok.~295, 333) ist die Buchhaltung
+der fraktalen Korrektur im laufenden Fall. Dok.~295 leitet ihren Kontinuumsverlauf
+$\xi_n\approx1/(100(n+75))$ und den logarithmischen Defekt $D(n)\approx\ln(1+n/75)$
+her. Dieses Dokument ergänzt vier Aussagen. Erstens teleskopiert das Produkt aller
+Korrekturfaktoren exakt zu $\xi_n/\xi_0$ \BM. Zweitens verbessert ein logarithmischer
+Term zweiter Ordnung die Kontinuumsnäherung um den Faktor 50 bis 700 \KM. Drittens
+sind multiplikative und additive Buchhaltung um einen festen Betrag $\psi'(75)/2$
+verschieden, und die in Dok.~295 numerisch gefundene beschränkte Konstante
+$\approx0{,}0134$ zwischen Masse- und Zeitdefekt ist $\psi'(75)=\sum_{k\ge0}(k+75)^{-2}$
+\KM. Viertens hat die Rekursion die Form eines Ein-Schleifen-Laufs, dessen
+Koeffizient allerdings erst mit einer Schrittkonvention festliegt \SM.
+\end{abstract}
+
+% ============================================================
+\section*{Statusmarkierungen}
+% ============================================================
+\begin{center}
+\begin{tabular}{@{}lp{10cm}@{}}
+\textbf{[B]} & Algebraisch bewiesen. \\[3pt]
+\textbf{[K]} & Numerisch bestätigt (Prüfskript, 120 Stellen). \\[3pt]
+\textbf{[S]} & Strukturell plausibel, offen. \\
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{Ausgangslage}
+% ============================================================
+
+Mit $\xi_0=4/30000=1/7500$ ist $100\,\xi_0=1/75$ und der Einzelschritt
+$K_\text{frak}=1-100\,\xi_0=74/75$. Im eingefrorenen Fall bleibt dieser Faktor
+konstant; im laufenden Fall (Fall~C, Dok.~333) ändert er sich mit jedem Schritt
+nach
+\begin{equation}
+  \xi_{n+1}=\xi_n\,(1-100\,\xi_n). \label{eq:rek}
+\end{equation}
+Dok.~295 zeigt, dass daraus eine logarithmische Spirale mit Verhältnis $e$ wird.
+Die folgenden Abschnitte berechnen, wie genau die dort verwendeten Näherungen
+sind, und geben die Größen, die dort nur numerisch oder genähert stehen, in
+geschlossener Form an.
+
+% ============================================================
+\section{Das Produkt teleskopiert}
+% ============================================================
+
+Aus Gl.~\eqref{eq:rek} folgt $1-100\,\xi_k=\xi_{k+1}/\xi_k$. Das Produkt aller
+Korrekturfaktoren kürzt sich daher bis auf das letzte und das erste Glied:
+\begin{equation}
+  \prod_{k=0}^{n-1}\bigl(1-100\,\xi_k\bigr)=\frac{\xi_n}{\xi_0}. \label{eq:tele}
+\end{equation}
+Das ist eine exakte Identität \BM, in Bruchrechnung für $n=1$ bis $12$ bestätigt
+\KM. Die gesamte aufgelaufene fraktale Korrektur nach $n$ Stufen ist damit einfach
+das Verhältnis aus letztem und erstem $\xi$; man muss sie nicht Stufe für Stufe
+multiplizieren. Mit der Kontinuumsform aus Dok.~295 ergibt sich
+$\prod\approx75/(n+75)$, bei $n=10^5$ auf $0{,}007\,\%$ genau \KM.
+
+% ============================================================
+\section{Kontinuum zweiter Ordnung}
+% ============================================================
+
+Mit $u_n=1/\xi_n$ lautet Gl.~\eqref{eq:rek} exakt
+$u_{n+1}=u_n+100+100^2/(u_n-100)$. Dok.~295 behält nur den Schritt $+100$ und
+erhält $u_n\approx100(n+75)$. Nimmt man den nächsten Term $100^2/u_n\approx100/(n+75)$
+mit, so summiert er sich zu einem Logarithmus:
+\begin{equation}
+  \frac{1}{\xi_n}\;\approx\;100\,(n+75)+100\,\ln\frac{n+75}{75}. \label{eq:zweite}
+\end{equation}
+Gegen die exakte Rekursion (bis $n=10^5$, 120 Stellen) \KM:
+
+\begin{center}
+\begin{tabular}{rcc}
+\toprule
+$n$ & 1.~Ordnung (Dok.~295) & 2.~Ordnung, Gl.~\eqref{eq:zweite} \\
+\midrule
+1 & $0{,}018\,\%$ & $0{,}0004\,\%$ \\
+10 & $0{,}15\,\%$ & $0{,}003\,\%$ \\
+100 & $0{,}49\,\%$ (Maximum) & $0{,}005\,\%$ \\
+$10^4$ & $0{,}049\,\%$ & $0{,}00007\,\%$ \\
+$10^5$ & $0{,}0072\,\%$ & $0{,}000007\,\%$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die Näherung aus Dok.~295 liegt also nie mehr als $0{,}5\,\%$ neben dem exakten
+Wert; ihre Aussagen (logarithmische Spirale, Verhältnis $e$, Pol bei $n=-75$)
+bleiben davon unberührt. Die zweite Ordnung ist um den Faktor 50 bis 700 genauer
+und empfiehlt sich überall, wo Werte der laufenden Rekursion zahlenmäßig
+weiterverwendet werden.
+
+% ============================================================
+\section{Multiplikativ und additiv: ein fester Unterschied}
+% ============================================================
+
+Dok.~295 führt den aufgelaufenen Defekt additiv, $D(n)=\sum_k100\,\xi_k$. Die
+multiplikative Buchhaltung ist $-\ln\prod_k(1-100\,\xi_k)$. Wegen
+$-\ln(1-x)=x+x^2/2+\dots$ ist sie stets größer \KM, und die Differenz wächst nicht
+mit $n$, sondern strebt gegen die Summe der Glieder zweiter Ordnung:
+\begin{equation}
+  -\ln\prod_{k}\bigl(1-100\,\xi_k\bigr)-D(n)\;\longrightarrow\;
+  \sum_{k\ge0}\frac{1}{2\,(k+75)^2}=\frac{\psi'(75)}{2}=0{,}00671 \quad\KM.
+\end{equation}
+Beide Buchhaltungen sind damit gleichwertig bis auf einen festen, geschlossen
+angebbaren Betrag. Der Abstand zwischen der multiplikativen Form $(1-\xi)^{100}$ und
+$74/75$, den Dok.~333 als Unterschied zwischen eingefrorener und laufender Rekursion
+beschreibt, ist dieselbe Art von Glied zweiter Ordnung.
+
+\paragraph{Die beschränkte Konstante aus Dok.~295.}
+Dok.~295 findet numerisch, dass sich die kumulierten Defekte der Masse- und der
+Zeitseite ($d_\text{Masse}=1/(1-100\,\xi_n)-1$, $d_\text{Zeit}=100\,\xi_n$) nur um
+eine beschränkte Konstante $\approx0{,}0134$ unterscheiden. Ihre Differenz je
+Schritt ist $(100\,\xi_n)^2/(1-100\,\xi_n)$, und die Summe strebt gegen
+\begin{equation}
+  \sum_{k\ge0}\frac{1}{(k+75)^2}=\psi'(75)=0{,}013423 \qquad\KM,
+\end{equation}
+auf $6\times10^{-5}$ relativ. Die Konstante ist damit keine Zufallszahl der
+Simulation, sondern die Trigamma-Funktion an der Stelle $75=1/(100\,\xi_0)$,
+genau doppelt so groß wie der Unterschied zwischen multiplikativer und additiver
+Buchhaltung.
+
+% ============================================================
+\section{Die Ein-Schleifen-Lesart}
+% ============================================================
+
+Im Kontinuum wird Gl.~\eqref{eq:rek} zu $d\xi/dn=-100\,\xi^2$ mit der Lösung
+$\xi(n)=\xi_0/(1+100\,n\,\xi_0)$. Das ist die Form eines Ein-Schleifen-Laufs einer
+Kopplung, wie sie etwa für $\alpha_s$ gilt. Die Form ist eindeutig; der
+Koeffizient ist es nicht. Entspricht ein Schritt einem Skalenfaktor $s$, so wird
+$d\xi/d\ln\mu=-(100/\ln s)\,\xi^2$ \KM:
+
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+Schrittkonvention & $b=100/\ln s$ \\
+\midrule
+Faktor $e$ (Spiralverhältnis, Dok.~295) & 100 \\
+Faktor 2 (übliche RG-Konvention) & 144 \\
+Faktor $3/2$ ($q=2/3$, Dok.~275) & 247 \\
+Faktor 10 (Dekade) & 43 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die Zuordnung zu einer $\beta$-Funktion ist daher erst mit einer festgelegten
+Schrittkonvention eine Aussage \SM. Die Spirale aus Dok.~295 legt den Faktor $e$
+nahe, weil sie je Präzessionsrunde um $e$ skaliert; Dok.~275 arbeitet intern mit
+$q=2/3$. Welche Konvention physikalisch trägt, ist offen.
+
+% ============================================================
+\section{Einzelschritt und Potenzform}
+% ============================================================
+
+Der Einzelschritt $74/75$ lässt sich auch in der Potenzform $(D_f/3)^{D_f/2}$
+schreiben (A040). Mit $D_f=2{,}973$ ergibt sie $0{,}9866508$ gegen
+$74/75=0{,}9866667$, also auf $2\times10^{-5}$ \KM. Exakte Übereinstimmung verlangt
+$D_f^\text{eff}=2{,}973032$. Beide Formen sind gleichwertig; die lineare Form
+$1-100\,\xi_0$ ist die, mit der die Rekursion rechnet.
+
+% ============================================================
+\section{Zusammenfassung}
+% ============================================================
+
+\begin{center}
+\begin{tabular}{>{\raggedright\arraybackslash}p{6.2cm}>{\raggedright\arraybackslash}p{5.0cm}l}
+\toprule
+Aussage & Ergebnis & Status \\
+\midrule
+Teleskopprodukt, Gl.~\eqref{eq:tele} & exakt $\xi_n/\xi_0$ & \BM \\
+Zweite Ordnung, Gl.~\eqref{eq:zweite} & 50- bis 700-mal genauer als Dok.~295 & \KM \\
+Multiplikativ minus additiv & $\psi'(75)/2=0{,}00671$ & \KM \\
+Beschränkte Konstante aus Dok.~295 & $\psi'(75)=0{,}013423$ & \KM \\
+Ein-Schleifen-Form & eindeutig; Koeffizient konventionsabhängig & \SM \\
+Potenzform A040 & $D_f^\text{eff}=2{,}973032$ & \KM \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Dok.~295 bleibt in allen Aussagen gültig; seine Näherungen sind hier beziffert und
+um die zweite Ordnung ergänzt. Offen bleibt, welche Schrittkonvention der
+Ein-Schleifen-Lesart physikalisch zugrunde liegt, und, wenn mehrere Korrekturen
+gleichzeitig laufen, ob sie sich überschneiden. Für Letzteres ist die
+Inklusion–Exklusion der Cluster-Entwicklungen das naheliegende Werkzeug: Der
+Beitrag einer Ebene ist ihr Wert abzüglich dessen, was ihre Unterebenen bereits
+enthalten \SM.
+
+\paragraph{Prüfskript.} \texttt{2/python/Dok381\_Skripte/pruef\_381\_rekursion\_ansaetze.py}
+(14/14): exakte Rekursion in Bruchrechnung und mit 120 Stellen bis $n=10^5$,
+Teleskopprodukt, beide Kontinuumsordnungen, Defekt und Produkt, Konstante aus
+Dok.~295, Potenzform, Schrittkonventionen.

@@ -1,6 +1,6 @@
 # FFGFT — Dokumentenliste
 
-303 nummerierte Dokumente (deutsche Fassungen), automatisch erzeugt am 2026-09-29 aus den PDFs in `2/pdf/` und `2/ipi/` mit `2/python/Werkzeuge/erzeuge_dokumentenliste.py`. Korrekturen zu einzelnen Dokumenten stehen im Register Dok. 190.
+304 nummerierte Dokumente (deutsche Fassungen), automatisch erzeugt am 2026-09-29 aus den PDFs in `2/pdf/` und `2/ipi/` mit `2/python/Werkzeuge/erzeuge_dokumentenliste.py`. Korrekturen zu einzelnen Dokumenten stehen im Register Dok. 190.
 
 | Dok. | Titel | PDF |
 |---|---|---|
@@ -316,3 +316,4 @@
 | 378 | Begutachtung unter heutigen Bedingungen — Was im IPI-Austausch, in der Dot-Theory-Governance und in der FFGFT-Buchführung bereits vorliegt und was davon für ein | [PDF](2/pdf/378_Begutachtung_heute_De.pdf) |
 | 379 | Das akustische Plenum und das Photon — Lien (2026) im Licht von Dok. 267, 290, 340, A265 und R128 | [PDF](2/pdf/379_Lien_Plenum_Photon_De.pdf) |
 | 380 | Warum D_4 — Spezifität des Trägers gegen angepasste Vergleichsgitter (R95) | [PDF](2/pdf/380_D4_Spezifitaet_De.pdf) |
+| 381 | Die laufende Rekursion exakt aufsummiert — Teleskopprodukt, zweite Ordnung und Ein-Schleifen-Lesart zu Dok. 295 und 333 | [PDF](2/pdf/381_Rekursion_Summation_De.pdf) |

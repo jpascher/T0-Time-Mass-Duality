@@ -1080,3 +1080,22 @@ Anlass: offene Brücke R95 (adversarieller D₄-Spezifitätstest nach GAE-Logik)
 
 **Prüfskript:** 2/python/Dok380_Skripte/pruef_380_d4_spezifitaet.py — 13/13 PASS
 **Register:** kein Eintrag.
+
+---
+
+## 29. September 2026 — Dok. 381: Die laufende Rekursion exakt aufsummiert
+
+### Dok. 381 — Teleskopprodukt, zweite Ordnung und Ein-Schleifen-Lesart zu Dok. 295 und 333 (De/En, je 7 Seiten)
+
+Anlass: Frage nach der gegenseitigen Beeinflussung von Rekursionen und fraktaler Korrektur, Vergleich mit Cluster-Entwicklungen (Buchheit, GZL/EpsteinLib).
+- Teleskopprodukt ∏(1 − 100ξ_k) = ξ_n/ξ_0 exakt [B], in Bruchrechnung für n = 1..12 bestätigt [K]
+- Kontinuum zweiter Ordnung 1/ξ_n ≈ 100(n+75) + 100·ln((n+75)/75): 50- bis 700-mal genauer als die erste Ordnung aus Dok. 295 (max. 0,49 % bei n ≈ 100) [K]
+- Multiplikative minus additive Buchhaltung → ψ′(75)/2 = 0,00671 [K]
+- Beschränkte Konstante ≈ 0,0134 zwischen Masse- und Zeitdefekt aus Dok. 295 = ψ′(75) = Σ(k+75)⁻² [K]
+- Ein-Schleifen-Form dξ/dn = −100ξ² eindeutig, Koeffizient b = 100/ln s konventionsabhängig (e: 100, 2: 144, 3/2: 247, Dekade: 43) [S]
+- Potenzform A040: D_f^eff = 2,973032 für exakt 74/75 [K]
+- Offen: physikalische Schrittkonvention; Überschneidung gleichzeitig laufender Korrekturen (Inklusion–Exklusion) [S]
+- Dok. 295 bleibt in allen Aussagen gültig
+
+**Prüfskript:** 2/python/Dok381_Skripte/pruef_381_rekursion_ansaetze.py — 14/14 PASS
+**Register:** kein Eintrag.
