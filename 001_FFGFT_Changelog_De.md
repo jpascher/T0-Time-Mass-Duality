@@ -1099,3 +1099,19 @@ Anlass: Frage nach der gegenseitigen Beeinflussung von Rekursionen und fraktaler
 
 **Prüfskript:** 2/python/Dok381_Skripte/pruef_381_rekursion_ansaetze.py — 14/14 PASS
 **Register:** kein Eintrag.
+
+---
+
+## 29. September 2026 — Dok. 382: Myon g−2: Stand 2025
+
+### Dok. 382 — Fermilab-Endergebnis, White Paper 2025 und Einordnung der FFGFT-Aussagen (De/En, je 8 Seiten)
+
+Nachfolgedokument zum Stand der Myon-g−2-Anomalie; die betroffenen älteren Dokumente verweisen darauf.
+- Weltmittel 2025 (E821 + E989) 116 592 071,5(14,5)·10⁻¹¹, White Paper 2025 (HVP aus Gitter-QCD) 116 592 033(62)·10⁻¹¹; Differenz 38(63)·10⁻¹¹ ≈ 0,6σ statt 251(59)·10⁻¹¹ ≈ 4,2σ (2021); geändert hat sich die SM-Rechnung, der Messwert nur um ≈ 10·10⁻¹¹ [K]
+- Typ (a), T0-Zusatzbeitrag Δa_μ = 251·10⁻¹¹ als Erklärung der Anomalie (Dok. 019, 030, 033, 049, 053, 059, 070, 081, 095; A138): überholt, läge heute ≈ 3,4σ über der Differenz [K]; Spielraum für einen Zusatzbeitrag bei 2σ etwa −88 bis +164·10⁻¹¹ [K]; ein T0-Beitrag dieser Größe ist nicht hergeleitet [S]
+- Tragende Verhältnis-Linie (Dok. 018 Rev. 12, 158, A138) nicht betroffen: Δa(τ−μ)/Δa(μ−e) = f^{1/3} − 1 = 18,57, Brücke Δa(τ−e)/Δa(μ−e) = (144/125)·m_τ/m_μ = 19,37 [K]; Absolutwert durch Verankerung an gemessenem a_e, a_μ: a_τ = 1,2811·10⁻³ (Stand 2025), besser als die direkte Formel 1,2454·10⁻³ [K]; Anker a_μ − a_e seit 2021 praktisch unverändert [K]; 1,04·10⁻⁴ über dem SM-Wert, heutige Schranken rund 600-mal weiter, offen bis zur Messung [S]
+- Direkte Absolutformeln (K_frak^{3/2}): a_e 0,014 %, a_μ −0,15 % – kein Präzisionsvergleich auf 10⁻⁹-Niveau; die direkte Differenz 4π/f^{5/3} liegt 30 % unter der gemessenen, was den verankerten Weg begründet [K]; der Vergleich mit der „Myon-Diskrepanz“ in A138 ist gegenstandslos
+- Hinweis nach dem Abstract in Dok. 019, 030, 033, 049, 053, 059, 070, 081, 095 und A138 (De/En)
+
+**Prüfskript:** 2/python/Dok382_Skripte/pruef_382_myon_g2_stand.py — 21/21 PASS
+**Register:** R133 (Myon-g−2-Anomalie in den älteren Dokumenten überholt).

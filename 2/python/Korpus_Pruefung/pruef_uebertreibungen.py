@@ -9,12 +9,14 @@ belegt sein, "exakt" kann eine exakte Rechnung meinen. Das Skript sortiert nur v
 
 Aufruf aus der Repo-Wurzel:  python3 2/python/Korpus_Pruefung/pruef_uebertreibungen.py
 Ausgabe: uebertreibungen_treffer.csv (jede Stelle) und uebertreibungen_dokumente.csv
-         (Rangliste der Dokumente) im aktuellen Verzeichnis.
+         (Rangliste der Dokumente) im aktuellen Verzeichnis oder in einem als
+         erstes Argument angegebenen Verzeichnis.
 """
 import csv
 import glob
 import os
 import re
+import sys
 
 QUELLEN = sorted(glob.glob("2/Sources/ch/*_De_ch.tex") + glob.glob("2/ipi/*_De_ch.tex")
                  + glob.glob("A_Serie_Export/Sources/ch/*_De_ch.tex"))
@@ -74,6 +76,8 @@ def textzeilen(pfad):
 
 
 def main():
+    ziel = sys.argv[1] if len(sys.argv) > 1 else "."
+    os.makedirs(ziel, exist_ok=True)
     treffer, dok = [], {}
     for pfad in QUELLEN:
         name = os.path.basename(pfad).replace("_De_ch.tex", "")
@@ -91,12 +95,12 @@ def main():
                     score += g
                     kat[k] = kat.get(k, 0) + 1
         dok[name] = (score, zeilen, kat)
-    with open("uebertreibungen_treffer.csv", "w", newline="", encoding="utf-8") as f:
+    with open(os.path.join(ziel, "uebertreibungen_treffer.csv"), "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f, delimiter=";")
         w.writerow(["Dokument", "Zeile", "Kategorie", "Gewicht", "Fund", "Kontext"])
         w.writerows(sorted(treffer, key=lambda t: (t[0], t[1])))
     rang = sorted(dok.items(), key=lambda kv: -kv[1][0])
-    with open("uebertreibungen_dokumente.csv", "w", newline="", encoding="utf-8") as f:
+    with open(os.path.join(ziel, "uebertreibungen_dokumente.csv"), "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f, delimiter=";")
         w.writerow(["Dokument", "Punkte", "Punkte je 100 Zeilen", "Zeilen",
                     "A Werbesprache", "B Gewissheit", "C Abwertung", "D Rhetorik"])

@@ -317,3 +317,4 @@
 | 379 | Das akustische Plenum und das Photon — Lien (2026) im Licht von Dok. 267, 290, 340, A265 und R128 | [PDF](2/pdf/379_Lien_Plenum_Photon_De.pdf) |
 | 380 | Warum D_4 — Spezifität des Trägers gegen angepasste Vergleichsgitter (R95) | [PDF](2/pdf/380_D4_Spezifitaet_De.pdf) |
 | 381 | Die laufende Rekursion exakt aufsummiert — Teleskopprodukt, zweite Ordnung und Ein-Schleifen-Lesart zu Dok. 295 und 333 | [PDF](2/pdf/381_Rekursion_Summation_De.pdf) |
+| 382 | Myon g−2: Stand 2025 — Fermilab-Endergebnis, White Paper 2025 und Einordnung der FFGFT-Aussagen | [PDF](2/pdf/382_Myon_g2_Stand2025_De.pdf) |
