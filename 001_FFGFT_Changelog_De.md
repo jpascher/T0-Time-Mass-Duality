@@ -1114,4 +1114,4 @@ Nachfolgedokument zum Stand der Myon-g−2-Anomalie; die betroffenen älteren Do
 - Hinweis nach dem Abstract in Dok. 019, 030, 033, 049, 053, 059, 070, 081, 095 und A138 (De/En)
 
 **Prüfskript:** 2/python/Dok382_Skripte/pruef_382_myon_g2_stand.py — 21/21 PASS
-**Register:** R133 (Myon-g−2-Anomalie in den älteren Dokumenten überholt).
+**Register:** kein Eintrag (Hinweise direkt in den betroffenen Dokumenten).
