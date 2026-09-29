@@ -21,7 +21,7 @@ v = xi**2 * c**3 / hbar
 print(f"  xi^2 c^3/hbar = {v:.3e}  [m kg^-1 s^-2]  (G hat m^3 kg^-1 s^-2; es fehlt Länge^2)")
 L = math.sqrt(G_codata * hbar / (xi**2 * c**3))
 print(f"  nötige Länge L mit G = (xi L)^2 c^3/hbar: L = {L:.4e} m = l_P/xi = {lP/xi:.4e} m")
-print(f"  l_P^2 c^3/hbar = {lP**2*c**3/hbar:.5e} (Identität, Definition von l_P)")
+print(f"  l_P^2 c^3/hbar = {lP**2*c**3/hbar:.5e} (prüft die Dimension; l_P ist über G definiert)")
 print(f"  natürlich: G = xi^2 verlangt Energieskala E mit G = xi^2/E^2: E = xi*E_P = {xi*EP/1e3:.4e} GeV")
 for name, m in (("Elektron", me), ("Proton", 938.272)):
     print(f"  alpha_G({name}) = G m^2/(hbar c) = {(m/EP)**2:.3e}   gegen xi^2 = {xi**2:.3e}")
@@ -35,7 +35,7 @@ Estar = g0 / (G_codata / U)
 print(f"  fehlende Energieskala E* = (xi^2/4m_e)/G_nat = {Estar:.4e} MeV = xi^2 E_P^2/(4 m_e) = {xi**2*EP**2/(4*me):.4e} MeV")
 Cconv_noetig = G_codata / (g0 * K)
 print(f"  C_conv, damit G stimmt: {Cconv_noetig:.4e} (Dok. 012: 7,783e-3)")
-print(f"  C_conv = U * 4 m_e/(xi^2 E_P^2 K) = {U*4*me/(xi**2*EP**2*K):.4e}  -> enthält E_P, also G")
+print(f"  C_conv = U * 4 m_e/(xi^2 E_P^2 K) = {U*4*me/(xi**2*EP**2*K):.4e}  -> SI-Umrechnung von G (legt die SI-Zahl fest)")
 print(f"  reine Einheitenumrechnung hbar c^5/MeV^2 = {U:.3e}; Verhältnis C_conv/U = {7.783e-3/U:.3e}")
 print(f"  C_conv ~ c^3/hbar (Dok. 127): c^3/hbar = {c**3/hbar:.3e}")
 Gf = g0 * 7.783e-3 * K
