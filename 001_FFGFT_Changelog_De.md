@@ -1044,3 +1044,22 @@ Anlass: Diskussion, wie ein Peer-Review-Regelwerk an heutige Verhältnisse anzup
 
 **Prüfskript:** 2/python/Dok378_Skripte/pruef_378_verweise.py — 25/25 PASS
 **Register:** kein Eintrag.
+
+---
+
+## 29. September 2026 — Dok. 379: Das akustische Plenum und das Photon
+
+### Dok. 379 — Lien (2026) im Licht von Dok. 267, 290, 340, A265 und R128 (De/En, je 8 Seiten)
+
+Anlass: Zenodo-Arbeit von C. C. Lien („Electromagnetic Illusion“, DOI 10.5281/zenodo.21800087), die den Raum als kompressibles Superfluid deutet und Elektron, Myon, Tau, Neutrino und Photon daraus ableiten will. Fallstudie mit Prüfskript.
+- Nachrechnung: alle sechs Zahlenangaben reproduzierbar [K]
+- Elektron aus 2π·α⁻⁴·k_BT_CMB/h: +1,84 %, rund 88 σ neben dem Messwert; Nulltest: dieselbe Formelfamilie (546 Formeln) trifft 61 % zufälliger Zielwerte ebenso gut — nicht signifikant [X]
+- Leptonformel ist Baruts Formel (PRL 42, 1251, 1979) unverändert [B]; n = 3 ergäbe ein geladenes Lepton bei 10,3 GeV, ausgeschlossen [X]
+- Neutrino m_ν = k_BT_CMB = 0,235 meV unverträglich mit Δm²_atm [X]; Dok. 340 erfüllt die Bedingung [K]
+- Rotverschiebung durch Dämpfung: Dämpfung ändert die Amplitude, nicht die Frequenz [K]; ∝ f² wäre chromatisch [X]; FFGFT: achromatische (1+z)-Dehnung aus T̃·m = 1 (Dok. 312, A265, R128)
+- Photon als Längs- plus Querwelle ergäbe drei statt zwei Freiheitsgrade [X]; FFGFT-Photon exakt masselos, reiner Phasenanker (Dok. 290)
+- Gemeinsamer Anker m_ec²/k_BT_CMB (A265): Liens Kandidat schließt P20 nicht [S]
+- Übereinstimmung nur im Ausgangspunkt (stationärer Hintergrund, keine Singularitäten); ρ_E zirkulär über r_e
+
+**Prüfskript:** 2/python/Dok379_Skripte/pruef_379_lien_photon.py — 20/20 PASS
+**Register:** kein Eintrag.

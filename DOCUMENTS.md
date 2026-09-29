@@ -1,6 +1,6 @@
 # FFGFT — Document list
 
-300 numbered documents (English versions), generated automatically on 2026-09-28 from the PDFs in `2/pdf/` and `2/ipi/` with `2/python/Werkzeuge/erzeuge_dokumentenliste.py`. Corrections to individual documents are kept in the register, Doc. 190.
+301 numbered documents (English versions), generated automatically on 2026-09-29 from the PDFs in `2/pdf/` and `2/ipi/` with `2/python/Werkzeuge/erzeuge_dokumentenliste.py`. Corrections to individual documents are kept in the register, Doc. 190.
 
 | Doc. | Title | PDF |
 |---|---|---|
@@ -312,3 +312,4 @@
 | 376 | The Coefficient 8 and the Status of Issue 740 — A derived coefficient on the OPH side and the withdrawal of a statement in Doc. 374 | [PDF](2/pdf/376_Koeffizient_8pi_740_En.pdf) |
 | 377 | Interfaces of FFGFT to Other Frameworks — Comparison and bridge documents, points of contact and overlapping quantities | [PDF](2/pdf/377_Schnittstellen_FFGFT_En.pdf) |
 | 378 | Peer Review under Present Conditions — What already exists in the IPI exchange, in Dot Theory governance and in the FFGFT record-keeping, and what of it can be  | [PDF](2/pdf/378_Begutachtung_heute_En.pdf) |
+| 379 | The Acoustic Plenum and the Photon — Lien (2026) in the light of Docs. 267, 290, 340, A265 and R128 | [PDF](2/pdf/379_Lien_Plenum_Photon_En.pdf) |
