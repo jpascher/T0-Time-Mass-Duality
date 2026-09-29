@@ -318,3 +318,4 @@
 | 380 | Warum D_4 — Spezifität des Trägers gegen angepasste Vergleichsgitter (R95) | [PDF](2/pdf/380_D4_Spezifitaet_De.pdf) |
 | 381 | Die laufende Rekursion exakt aufsummiert — Teleskopprodukt, zweite Ordnung und Ein-Schleifen-Lesart zu Dok. 295 und 333 | [PDF](2/pdf/381_Rekursion_Summation_De.pdf) |
 | 382 | Myon g−2: Stand 2025 — Fermilab-Endergebnis, White Paper 2025 und Einordnung der FFGFT-Aussagen | [PDF](2/pdf/382_Myon_g2_Stand2025_De.pdf) |
+| 383 | Massen und Planck-Skala ohne v — eine Kette, ein Anker | [PDF](2/pdf/383_Ein_Anker_ohne_v_De.pdf) |

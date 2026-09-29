@@ -316,3 +316,4 @@
 | 380 | Why D_4 — Specificity of the carrier against matched comparison lattices (R95) | [PDF](2/pdf/380_D4_Spezifitaet_En.pdf) |
 | 381 | The Running Recursion Summed Exactly — Telescoping product, second order and one-loop reading for Docs. 295 and 333 | [PDF](2/pdf/381_Rekursion_Summation_En.pdf) |
 | 382 | Muon g−2: Status 2025 — Fermilab final result, White Paper 2025 and assessment of the FFGFT statements | [PDF](2/pdf/382_Myon_g2_Stand2025_En.pdf) |
+| 383 | Masses and Planck scale without v — one chain, one anchor | [PDF](2/pdf/383_Ein_Anker_ohne_v_En.pdf) |

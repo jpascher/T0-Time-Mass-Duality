@@ -1115,3 +1115,20 @@ Nachfolgedokument zum Stand der Myon-g−2-Anomalie; die betroffenen älteren Do
 
 **Prüfskript:** 2/python/Dok382_Skripte/pruef_382_myon_g2_stand.py — 21/21 PASS
 **Register:** kein Eintrag (Hinweise direkt in den betroffenen Dokumenten).
+
+---
+
+## 29. September 2026 — Dok. 383: Massen und Planck-Skala ohne v
+
+### Dok. 383 — Eine Kette, ein Anker (De/En, je 8 Seiten)
+
+Anlass: Frage, ob sich Planck-Länge und Massen aus ξ allein mit nur einem Anker herleiten lassen; v ist Zwischengröße und lässt sich auflösen.
+- Beziehung aus Dok. 149: v = E_P/(f⁴·(π/2)·10) ⇔ v/E_P = ξ⁴/(5π) [B]; = 2,0120·10⁻¹⁷, −0,23 % gegen Messung, dimensionslos, ohne Anker [K]; Faktor 10 motivierte Setzung, nicht hergeleitet [S]
+- Dok. 149 rechnet mit f = 7491,91 → 246,71 GeV; mit f = 7500 → 245,65 GeV [K]
+- Massen ohne v: m_i = r_i/(5π)·ξ^{p_i+4}·E_P [B]; e 4/(15π)ξ^{11/2}E_P = 0,5043 MeV (−1,32 %), μ 16/(25π)ξ⁵E_P = 104,81 MeV (−0,80 %), τ 5/(9π)ξ^{14/3}E_P = 1780,9 MeV (+0,23 %) [K]
+- Ein Anker m_e → E_P = 1,2372·10¹⁹ GeV (+1,34 %), G = ħc⁵/E_P² = 6,4995·10⁻¹¹ (−2,6 %), ℓ_P = 1,5950·10⁻³⁵ m, L₀ = ξℓ_P = 2,1266·10⁻³⁹ m [K]; Ankerwahl frei: μ → E_P +0,81 %, τ → −0,23 %, v → +0,23 % [K]; Streuung = bare-Rest der Leiter
+- C_conv bleibt SI-Umrechnung von G (enthält den Messwert von G); die Ein-Anker-Kette entspricht C_conv = 7,58·10⁻³ statt 7,783·10⁻³ [K]; Weg von Dok. 375 (2,0389·10⁻¹⁷) und direkter Wert unterscheiden sich um genau den Elektronrest (Faktor 1,0134) [K]
+- Vermerke (29. Sept. 2026) in Dok. 149 (Hinweis bei v; Tippfehler f⁴ = 3,155 → 3,150·10¹⁵, ρ_4D 3869 → 3875 GeV korrigiert), Dok. 150 (Formel für v in Tabelle und Gleichung korrigiert), Dok. 180 (ℓ_P-Wert ist Messwert als Anker; Ein-Anker-Wert), Dok. 375 (v/E_P direkt = ξ⁴/(5π)), jeweils De/En
+
+**Prüfskript:** 2/python/Dok383_Skripte/pruef_383_ein_anker.py — 20/20 PASS
+**Register:** kein Eintrag (Korrekturen und Hinweise direkt in den betroffenen Dokumenten).
