@@ -1063,3 +1063,20 @@ Anlass: Zenodo-Arbeit von C. C. Lien („Electromagnetic Illusion“, DOI 10.528
 
 **Prüfskript:** 2/python/Dok379_Skripte/pruef_379_lien_photon.py — 20/20 PASS
 **Register:** kein Eintrag.
+
+---
+
+## 29. September 2026 — Dok. 380: Warum D₄
+
+### Dok. 380 — Spezifität des Trägers gegen angepasste Vergleichsgitter (R95) (De/En, je 7 Seiten)
+
+Anlass: offene Brücke R95 (adversarieller D₄-Spezifitätstest nach GAE-Logik); Werkzeug: EpsteinLib (Buchheit, Busse, Gutendorf, arXiv:2412.16317).
+- Vergleichsträger bei gleichem Volumen der Grundmasche: ℤ⁴ (Gewinner im HLV-Audit), A₄, A₂⊕A₂, D₄, Zufallsgitter
+- K1 fixpunktfreie ℤ₃ mit 9 Fixpunkten (Korpusbedingung, Dok. 330): ℤ⁴ und A₄ ausgeschlossen, A₂⊕A₂ und D₄ verträglich [K]
+- Klassifikation: |Aut(D₄)| = 1152, davon 80 der Ordnung 3 — 64 mit 2D-Fixraum (darunter die Dynkin-Trialität), 16 fixpunktfrei mit 9 Fixpunkten = die 16 Elemente aus Dok. 330 [K]
+- K2 Kusszahl D₄ 24, A₄ 20, A₂⊕A₂ 12, ℤ⁴ 8 — nur Konsistenz, da 24 in Dok. 340 verwendet [K]
+- K3 Gitterenergie (Epstein-Zeta, ν = 5, 6, 8), einziges FFGFT-unabhängiges Kriterium: D₄ jeweils minimal; keines von 600 Zufallsgittern darunter; 200/200 Störungen erhöhen die Energie [K]; bewiesen nur lokale Optimalität (Sarnak–Strömbergsson 2006) [Q], globale Minimalität in 4D offene Vermutung
+- Ergebnis: D₄ als Träger besser motiviert, bleibt motivierte Setzung; R95 nicht geschlossen, Operatortest offen [S]
+
+**Prüfskript:** 2/python/Dok380_Skripte/pruef_380_d4_spezifitaet.py — 13/13 PASS
+**Register:** kein Eintrag.
