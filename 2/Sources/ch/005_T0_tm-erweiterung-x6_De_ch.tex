@@ -1,3 +1,16 @@
+\begin{tcolorbox}[colback=red!3!white,colframe=red!50!black,boxrule=0.8pt,title={Korrekturhinweise},fonttitle=\bfseries]
+\textbf{Korrekturen aus der Rechenprüfung (30.~Sept.~2026).} Die folgenden Stellen sind im Text korrigiert bzw. vermerkt; jede trägt dort einen datierten Hinweis mit dem vorherigen Wert:
+\begin{itemize}
+\item Methode~1: Die hingeschriebene Formel $m_i = K_{\text{frak}}/\xi_i \times C_{\text{conv}}$ lieferte die Tabellenwerte nicht (Myon $0.0073$~MeV statt $104.96$~MeV, $m_\mu/m_e = 1/207$). Ersetzt durch die Formel, die \texttt{calc\_De.py} tatsächlich rechnet: $m = r\,\xi^p\,v$. Tau $1.712 \to 1.7834$~GeV ($-3.64\,\% \to +0.37\,\%$). Die Leptonverhältnisse sind damit $\frac{12}{5}\xi^{-1/2}$ und $\frac{125}{144}\xi^{-1/3}$ wie in Dok.~352.
+\item Methode~2, Proton: Der Anker der Formelzeile ist $\pi^2/2$, nicht $m_\mu$ (Dok.~190, R62); mit $m_\mu$ ergab die Zeile $20.1$~MeV, mit $\pi^2/2$ ergeben die unveränderten Faktoren $0.93878$~GeV ($+0.05\,\%$), und die Dimension schließt. Up-Quark: Die hingeschriebene Zeile ergibt $0.0235$~MeV statt $2.271$~MeV; ein einzelner Ankerfehler wie beim Proton ist nicht erkennbar. Die Dimensionsaussage ist präzisiert.
+\item Higgs: $m_t\,\phi\,(1+\xi D_f)$ ergibt $279.6$~GeV; keine tragfähige Herleitung (R122); Kandidat $m_h = M_Z \cdot 11/8 = 125.38$~GeV (Dok.~373).
+\item Neutrinos: Werte waren als GeV beschriftet, sind aber MeV-Werte ($\sum m_\nu = 0.0585$~eV); SI-Werte entsprechend $10^{-40}$--$10^{-37}$~kg statt $10^{-46}$~kg.
+\item 4.~Generation: $m_\tau\,\phi = 2.9$~GeV statt TeV.
+\item UV-Integral: divergiert auch für $D_f = 3-\xi$.
+\item ML-Abschnitt: Mittelwerte (2.34\,\%, Quarks 1.92\,\%) passen zu keiner gezeigten Tabelle; Test-/Trainings-Loss vertauscht; Strange-Referenzwert vereinheitlicht (0.0934~GeV).
+\end{itemize}
+\end{tcolorbox}
+
 \section*{Abstract}
 		Die T0-Zeit-Masse-Dualitätstheorie bietet zwei komplementäre Methoden zur Berechnung von Teilchenmassen aus ersten Prinzipien. Die direkte geometrische Methode zeigt die fundamentale Reinheit der Theorie und erreicht für geladene Leptonen eine Genauigkeit von bis zu 1.18\%. Die erweiterte fraktale Methode integriert QCD-Dynamik und erreicht für alle Teilchenklassen (Leptonen, Quarks, Baryonen, Bosonen) eine durchschnittliche Genauigkeit von ca. 1.2\% ohne freie Parameter. Mit Machine-Learning-Kalibrierung an Lattice-QCD-Daten (FLAG 2024) werden Abweichungen unter 3\% für über 90\% aller bekannten Teilchen erreicht. Alle Massen werden zu SI-Einheiten (kg) konvertiert. Dieses Dokument präsentiert beide Methoden systematisch, erklärt ihre Komplementarität und zeigt die schrittweise Evolution von reiner Geometrie zu praktisch anwendbarer Theorie. Die präsentierten direkten Werte wurden durch das Skript \texttt{calc\_De.py} berechnet.
 
@@ -43,81 +56,61 @@
 	
 	Die fundamentale Massenformel für geladene Leptonen lautet:
 	\begin{equation}
-		\boxed{m_i = \frac{K_{\text{frak}}}{\xi_i} \times C_{\text{conv}}}
+		\boxed{m_i = r_i \cdot \xi^{p_i} \cdot v}
 		\label{eq:t0_direct_mass}
 	\end{equation}
 	
 	wobei:
 	\begin{itemize}
-		\item $\xi_i = \xi_0 \times f(n_i, l_i, j_i)$ der teilchenspezifische geometrische Faktor ist
-		\item $\xi_0 = \frac{4}{30000} \approx 1.333 \times 10^{-4}$ die universelle geometrische Konstante ist
-		\item $K_{\text{frak}} = 0.986$ fraktale Raumzeitkorrekturen berücksichtigt
-		\item $C_{\text{conv}} = 6.813 \times 10^{-5}$ MeV/(nat. Einh.) der Einheitenumrechnungsfaktor ist
-		\item $(n, l, j)$ Quantenzahlen sind, die die Resonanzstruktur bestimmen
+		\item $\xi = \frac{4}{30000} \approx 1.333 \times 10^{-4}$ die universelle geometrische Konstante ist
+		\item $r_i$ ein exakter rationaler Vorfaktor und $p_i$ ein exakter rationaler Exponent des Teilchens ist
+		\item $v = 246$~GeV die Higgs-Skala ist (Anker für die Umrechnung in GeV)
 	\end{itemize}
 	
-	\subsubsection{Quantenzahlen-Zuordnung für geladene Leptonen}
-	
-	Jedes Lepton erhält Quantenzahlen $(n, l, j)$, die seine Position im T0-Energiefeld bestimmen:
+	\subsubsection{Parameter der geladenen Leptonen}
 	
 	\begin{table}[h]
 		\centering
 		\adjustbox{max width=\textwidth}{%
-\begin{tabular}{lcccc}
+\begin{tabular}{lccc}
 			\toprule
-			\textbf{Teilchen} & \textbf{$n$} & \textbf{$l$} & \textbf{$j$} & \textbf{$f(n,l,j)$} \\
+			\textbf{Teilchen} & \textbf{$r$} & \textbf{$p$} & \textbf{$r\,\xi^p$} \\
 			\midrule
-			Elektron & 1 & 0 & 1/2 & 1 \\
-			Myon & 2 & 1 & 1/2 & 207 \\
-			Tau & 3 & 2 & 1/2 & 12.3 \\
+			Elektron & 4/3 & 3/2 & $2.0528 \times 10^{-6}$ \\
+			Myon & 16/5 & 1 & $4.2667 \times 10^{-4}$ \\
+			Tau & 25/9 & 2/3 & $7.2498 \times 10^{-3}$ \\
 			\bottomrule
 		\end{tabular}%
 }
-		\caption{T0-Quantenzahlen für geladene Leptonen (korrigiert)}
+		\caption{Parameter $r$, $p$ der geladenen Leptonen (aus \texttt{calc\_De.py})}
 		\label{tab:lepton_qn_direkt}
 	\end{table}
 	
 	\subsubsection{Theoretische Berechnung: Elektronmasse}
 	
-	\textbf{Schritt 1: Geometrische Konfiguration}
-	\begin{itemize}
-		\item Quantenzahlen: $n=1, l=0, j=1/2$ (Grundzustand)
-		\item Geometrischer Faktor: $f(1,0,1/2) = 1$
-		\item $\xi_e = \xi_0 \times 1 = \frac{4}{30000} \approx 1.333 \times 10^{-4}$
-	\end{itemize}
-	
-	\textbf{Schritt 2: Massenberechnung (Direkte Methode)}
 	\begin{align}
-		m_e^{\text{T0}} &= \frac{K_{\text{frak}}}{\xi_e} \times C_{\text{conv}} \\
-		&= \frac{0.986}{4/30000 \times 10^{0}} \times 6.813 \times 10^{-5} \text{ MeV} \\
-		&= 7395.0 \times 6.813 \times 10^{-5} \text{ MeV} \\
+		m_e^{\text{T0}} &= \frac{4}{3} \cdot \xi^{3/2} \cdot v \\
+		&= \frac{4}{3} \cdot 1.5396 \times 10^{-6} \cdot 246 \text{ GeV} \\
+		&= 2.0528 \times 10^{-6} \cdot 246 \text{ GeV} \\
 		&= 0.000505 \text{ GeV}
 	\end{align}
 	
-	\textbf{Experimenteller Wert:} $0.000511$ GeV $\rightarrow$ \textbf{Abweichung: 1.18\%}. SI: $9.009 \times 10^{-31}$ kg.
+	\textbf{Experimenteller Wert:} $0.000511$ GeV $\rightarrow$ \textbf{Abweichung: $-1.18$\%}. SI: $9.002 \times 10^{-31}$ kg.
 	
 	\subsubsection{Theoretische Berechnung: Myonmasse}
 	
-	\textbf{Schritt 1: Geometrische Konfiguration}
-	\begin{itemize}
-		\item Quantenzahlen: $n=2, l=1, j=1/2$ (erste Anregung)
-		\item Geometrischer Faktor: $f(2,1,1/2) = 207$
-		\item $\xi_\mu = \xi_0 \times 207 = 2.76 \times 10^{-2}$
-	\end{itemize}
-	
-	\textbf{Schritt 2: Massenberechnung (Direkte Methode)}
 	\begin{align}
-		m_\mu^{\text{T0}} &= \frac{K_{\text{frak}}}{\xi_\mu} \times C_{\text{conv}} \\
-		&= \frac{0.986 \times 3}{2.76 \times 10^{-2}} \times 6.813 \times 10^{-5} \text{ MeV} \\
-		&= 107.1 \times 6.813 \times 10^{-5} \text{ MeV} \\
+		m_\mu^{\text{T0}} &= \frac{16}{5} \cdot \xi \cdot v \\
+		&= \frac{16}{5} \cdot 1.3333 \times 10^{-4} \cdot 246 \text{ GeV} \\
+		&= 4.2667 \times 10^{-4} \cdot 246 \text{ GeV} \\
 		&= 0.104960 \text{ GeV}
 	\end{align}
 	
-	\textbf{Experimenteller Wert:} $0.105658$ GeV $\rightarrow$ \textbf{Abweichung: 0.66\%}. SI: $1.871 \times 10^{-28}$ kg.
+	\textbf{Experimenteller Wert:} $0.105658$ GeV $\rightarrow$ \textbf{Abweichung: $-0.66$\%}. SI: $1.871 \times 10^{-28}$ kg.
 	
 	\subsubsection{Übereinstimmung mit experimentellen Daten für Leptonen}
 	
-	Die berechneten Massen zeigen ausgezeichnete Übereinstimmung mit Messwerten (inkl. SI):
+	Die berechneten Massen zeigen gute Übereinstimmung mit Messwerten (inkl. SI):
 	
 	\begin{table}[h]
 		\centering
@@ -126,11 +119,11 @@
 			\toprule
 			\textbf{Teilchen} & \textbf{T0-Vorhersage (GeV)} & \textbf{SI (kg)} & \textbf{Experiment (GeV)} & \textbf{Exp. SI (kg)} & \textbf{Abweichung} \\
 			\midrule
-			Elektron & 0.000505 & $9.009 \times 10^{-31}$ & 0.000511 & $9.109 \times 10^{-31}$ & 1.18\% \\
-			Myon & 0.104960 & $1.871 \times 10^{-28}$ & 0.105658 & $1.883 \times 10^{-28}$ & 0.66\% \\
-			Tau & 1.712 & $3.052 \times 10^{-27}$ & 1.777 & $3.167 \times 10^{-27}$ & 3.64\% \\
+			Elektron & 0.000505 & $9.002 \times 10^{-31}$ & 0.000511 & $9.109 \times 10^{-31}$ & $-1.18$\% \\
+			Myon & 0.104960 & $1.871 \times 10^{-28}$ & 0.105658 & $1.883 \times 10^{-28}$ & $-0.66$\% \\
+			Tau & 1.7834 & $3.179 \times 10^{-27}$ & 1.777 & $3.167 \times 10^{-27}$ & $+0.37$\% \\
 			\midrule
-			\textbf{Durchschnitt} & --- & --- & --- & --- & \textbf{1.83\%} \\
+			\textbf{Durchschnitt} & --- & --- & --- & --- & \textbf{0.74\%} \\
 			\bottomrule
 		\end{tabular}}
 		\caption{Vergleich der T0-Vorhersagen mit experimentellen Werten für geladene Leptonen (Werte aus \texttt{calc\_De.py})}
@@ -139,18 +132,21 @@
 	
 	\subsubsection{Massenverhältnis und geometrischer Ursprung}
 	
-	Das Myon-Elektron-Massenverhältnis ergibt sich direkt aus den geometrischen Faktoren:
-	\begin{equation}
-		\frac{m_\mu}{m_e} = \frac{\xi_e}{\xi_\mu} = \frac{1}{207}
-	\end{equation}
+	Die Massenverhältnisse hängen nur von $\xi$ und den rationalen Parametern ab; der Anker $v$ fällt heraus:
+	\begin{align}
+		\frac{m_\mu}{m_e} &= \frac{16/5}{4/3}\,\xi^{1-3/2} = \frac{12}{5}\,\xi^{-1/2} = 207.85 \\
+		\frac{m_\tau}{m_\mu} &= \frac{25/9}{16/5}\,\xi^{2/3-1} = \frac{125}{144}\,\xi^{-1/3} = 16.99
+	\end{align}
 	
 	Numerische Auswertung:
 	\begin{align}
-		\frac{m_\mu^{\text{T0}}}{m_e^{\text{T0}}} &= \frac{0.104960}{0.000505} \approx 207.84 \\
+		\frac{m_\mu^{\text{T0}}}{m_e^{\text{T0}}} &= \frac{0.104960}{0.000505} \approx 207.8 \\
 		\frac{m_\mu^{\text{exp}}}{m_e^{\text{exp}}} &= \frac{0.105658}{0.000511} \approx 206.77
 	\end{align}
 	
-	Die Abweichung im Massenverhältnis reflektiert die interne Konsistenz des T0-Rahmens.
+	Das Verhältnis liegt $0.52\,\%$ über dem Messwert. Es sind dieselben Verhältnisse wie in der Leptonleiter (Dok.~352), dort als bare-Verhältnisse mit den generationsabhängigen Resten zur Pol-Masse.
+	
+	\textit{(Korrigiert am 30.~Sept.~2026: vorher stand hier die Formel $m_i = K_{\text{frak}}/\xi_i \times C_{\text{conv}}$ mit $\xi_i = \xi_0\,f(n,l,j)$, $f_e = 1$, $f_\mu = 207$, $f_\tau = 12.3$, $K_{\text{frak}} = 0.986$, $C_{\text{conv}} = 6.813 \times 10^{-5}$~MeV. Sie liefert die Tabellenwerte nicht: $7395.0 \times 6.813 \times 10^{-5} = 0.5038$~MeV beim Elektron, $107.2 \times 6.813 \times 10^{-5}$~MeV $= 0.0073$~MeV beim Myon (dazu ein Faktor~3, der in der Formel nicht vorkommt), und $m_\mu/m_e = \xi_e/\xi_\mu = 1/207$. Die Werte $0.000505$ und $0.104960$~GeV stammen aus \texttt{calc\_De.py}, das $m = r\,\xi^p\,v$ rechnet. Der Tau-Wert war $1.712$~GeV ($-3.64\,\%$) aus einer älteren Skriptfassung mit $r_\tau = 8/3$; das aktuelle Skript verwendet $r_\tau = 25/9$.)}
 
 	\subsection{Methode 2: Erweiterte fraktale Formel mit QCD-Integration}
 	
@@ -305,7 +301,9 @@
 		&\approx 0.002271 \text{ GeV} = 2.271 \text{ MeV}
 	\end{align}
 	
-	\textbf{Experimenteller Wert (PDG 2024):} $2.270$ MeV $\rightarrow$ \textbf{Abweichung: 0.04\%}. SI: $4.05 \times 10^{-30}$ kg.
+	\textbf{Referenzwert:} $2.27$ MeV (älterer Stand; PDG 2024: $2.16$ MeV) $\rightarrow$ \textbf{Abweichung: 0.04\%}. SI: $4.05 \times 10^{-30}$ kg.
+	
+	\textit{(Vermerk vom 30.~Sept.~2026: Das hingeschriebene Produkt ergibt $2.352 \times 10^{-5}$~GeV $= 0.0235$~MeV, nicht $2.271$~MeV (Fehlfaktor $96.6$). Anders als beim Proton (Anker $\pi^2/2$, Dok.~190, R62) lässt sich der Fehlfaktor keinem einzelnen Symbol zuordnen; nötig wäre ein Anker von $10.20$~GeV. Die Kette schließt in dieser Form nicht. Der Wert $2.271$~MeV steht ebenso in Tabelle~\ref{tab:mlvorhersagen}. Die Yukawa-Form $m = r\,\xi^p\,v$ mit $r = 6$, $p = 3/2$ aus \texttt{calc\_De.py} ergibt $2.272$~MeV ($+0.11\,\%$ gegen $2.27$~MeV).)}
 	
 	\subsubsection{Beispielrechnung: Proton (uud)}
 	
@@ -322,24 +320,31 @@
 	
 	\textbf{Gesamtberechnung:}
 	\begin{align}
-		m_p^{\text{T0}} &= m_\mu \cdot K_{\text{corr}} \cdot QZ \cdot RG \cdot D_{\text{baryon}} \cdot f_{\text{NN}} \\
-		&\approx 0.105658 \cdot 0.985 \cdot 0.532 \cdot 1.00007 \cdot 0.363 \cdot 1.00002 \\
-		&\approx 0.938100 \text{ GeV}
+		m_p^{\text{T0}} &= \frac{\pi^2}{2} \cdot K_{\text{corr}} \cdot QZ \cdot RG \cdot D_{\text{baryon}} \cdot f_{\text{NN}} \\
+		&\approx 4.9348 \cdot 0.985 \cdot 0.532 \cdot 1.00007 \cdot 0.363 \cdot 1.00002 \\
+		&\approx 0.93878 \text{ GeV}
 	\end{align}
 	
-	\textbf{Experimenteller Wert:} $0.938272$ GeV $\rightarrow$ \textbf{Abweichung: 0.02\%}. SI: $1.673 \times 10^{-27}$ kg.
+	\textbf{Experimenteller Wert:} $0.938272$ GeV $\rightarrow$ \textbf{Abweichung: $+0.05$\%}. SI: $1.674 \times 10^{-27}$ kg.
+
+	Der Anker $\pi^2/2$ ist dimensionslos; die Masseneinheit trägt allein $D_{\text{baryon}}$ über $0.5\,\Lambda_{\text{QCD}}$.
+
+	\textit{(Korrigiert am 30.~Sept.~2026: vorher stand in der Formelzeile $m_\mu$ als Anker und als Ergebnis $0.938100$~GeV ($0.02\,\%$). Mit $m_\mu$ ergibt die Zeile $0.0201$~GeV und hat die Dimension GeV$^2$. Der Fehlfaktor $46.67$ ist $(\pi^2/2)/m_\mu = 46.70$; mit dem Anker $\pi^2/2$ ergeben die unveränderten Faktoren $0.93878$~GeV. Siehe Dok.~190, R62, dort auch der Sekundärbefund: der Wert $K_{\text{corr}} = 0.985$ passt nicht zur Formel für $K_{\text{corr}}$, die $0.9605$ ergibt.)}
 
 	\subsection{Erweiterungen der T0-Theorie}
 	
 	\begin{enumerate}
-		\item \textbf{Neutrinos:} $m_{\nu_e}^{\text{T0}} \approx 9.95 \times 10^{-11}$ GeV, $m_{\nu_\mu}^{\text{T0}} \approx 8.48 \times 10^{-9}$ GeV, $m_{\nu_\tau}^{\text{T0}} \approx 4.99 \times 10^{-8}$ GeV. Summe: $\sum m_\nu \approx 0.058$ eV (testbar mit DESI, Euclid); große Unsicherheiten aufgrund experimenteller Grenzen. SI: $\sim 10^{-46}$ kg.
+		\item \textbf{Neutrinos:} $m_{\nu_e}^{\text{T0}} \approx 9.95 \times 10^{-5}$ eV, $m_{\nu_\mu}^{\text{T0}} \approx 8.48 \times 10^{-3}$ eV, $m_{\nu_\tau}^{\text{T0}} \approx 4.99 \times 10^{-2}$ eV. Summe: $\sum m_\nu \approx 0.0585$ eV (testbar mit DESI, Euclid); große Unsicherheiten aufgrund experimenteller Grenzen. SI: $1.8 \times 10^{-40}$ bis $8.9 \times 10^{-38}$ kg.
+		
+		\textit{(Korrigiert am 30.~Sept.~2026: vorher $9.95 \times 10^{-11}$, $8.48 \times 10^{-9}$, $4.99 \times 10^{-8}$~GeV und SI $\sim 10^{-46}$~kg. In GeV wäre die Summe $58.5$~eV; die Zahlen sind MeV-Werte und ergeben in eV die angegebene Summe. Ebenso korrigiert in den Tabellen~\ref{tab:mlvorhersagen} und im Anhang.)}
 		
 		\item \textbf{Schwere Quarks:} Präzisions-Bottom-Masse bei LHCb
 		
 		\item \textbf{Neue Teilchen:} Falls eine 4. Generation existiert, sagt T0 vorher:
 		\begin{equation}
-			m_{l_4}^{\text{T0}} \approx m_\tau \cdot \phi^{(4-3)} \cdot \text{(Korrekturen)} \approx 2.9 \text{ TeV}
+			m_{l_4}^{\text{T0}} \approx m_\tau \cdot \phi^{(4-3)} \cdot \text{(Korrekturen)} \approx 2.9 \text{ GeV}
 		\end{equation}
+		\textit{(Korrigiert am 30.~Sept.~2026: vorher \enquote{$\approx 2.9$ TeV}; $1.777 \times 1.618 = 2.875$~GeV. Ein geladenes Lepton bei $2.9$~GeV ist durch LEP ausgeschlossen (Grenze um $100$~GeV); die Formel ist in dieser Form keine tragfähige Vorhersage.)}
 	\end{enumerate}
 	
 	\subsection{Theoretische Konsistenz und Renormierung}
@@ -352,15 +357,17 @@
 		\frac{m_i(\mu)}{m_j(\mu)} = \frac{m_i(\mu_0)}{m_j(\mu_0)} \cdot \left[1 + \mathcal{O}\left(\alpha_s \log\frac{\mu}{\mu_0}\right)\right]
 	\end{equation}
 	
-	Die geometrischen Faktoren $f(n,l,j)$ und $\xi_0$ sind skaleninvariant, während QCD-Korrekturen in $D_{\text{quark}}$ die Skalenvariationen korrekt erfassen.
+	Die Parameter $r_i$, $p_i$ und $\xi$ sind skaleninvariant, während QCD-Korrekturen in $D_{\text{quark}}$ die Skalenvariationen korrekt erfassen.
 	
 	\subsubsection{UV-Vollständigkeit}
 	
 	Die fraktale Dimension $D_f < 3$ führt zu natürlicher UV-Regularisierung:
 	
 	\begin{equation}
-		\int_0^\Lambda k^{D_f-1} dk = \frac{\Lambda^{D_f}}{D_f} \quad \text{(konvergent für } D_f < 3\text{)}
+		\int_0^\Lambda k^{D_f-1} dk = \frac{\Lambda^{D_f}}{D_f}
 	\end{equation}
+	
+	\textit{(Korrigiert am 30.~Sept.~2026: vorher mit dem Zusatz \enquote{konvergent für $D_f < 3$}. Für $\Lambda \to \infty$ divergiert das Integral für jedes $D_f > 0$; $D_f = 3 - \xi$ ändert das UV-Verhalten praktisch nicht. Eine UV-Regularisierung folgt aus diesem Integral nicht.)}
 	
 	Dies löst das Hierarchie-Problem ohne Feinabstimmung: Leichte Teilchen entstehen natürlich durch $\xi^{\text{gen}}$-Suppression.
 	
@@ -410,6 +417,8 @@
 	- Mittlere relative Abweichung: \textbf{2.34\%} (gesamtes Dataset)
 	- Segmentierte Genauigkeit: Ohne Neutrinos 1.89\%, Quarks 1.92\%, Leptonen 0.09\%
 	
+	\textit{(Vermerk vom 30.~Sept.~2026: Aus Tabelle~\ref{tab:mlvorhersagen} ergeben sich im Mittel $0.17\,\%$ (ohne Neutrinos $0.13\,\%$, Quarks $0.20\,\%$, Leptonen $0.09\,\%$); die Angaben $2.34\,\%$, $1.89\,\%$ und $1.92\,\%$ passen zu keiner der gezeigten Tabellen. Der Trainings-Loss $2.67$ passt nicht zum letzten Epochenwert $2.7890$.)}
+	
 	\begin{table}[h]
 		\centering
 		\small
@@ -432,9 +441,9 @@
 			Proton & 0.93827 & 0.938100 & $1.673 \times 10^{-27}$ & $1.673 \times 10^{-27}$ & 0.02 \\
 			Neutron & 0.93957 & 0.939570 & $1.676 \times 10^{-27}$ & $1.676 \times 10^{-27}$ & 0.00 \\
 			\midrule
-			$\nu_e$ & 1.00e-10 & 9.95e-11 & $1.775 \times 10^{-46}$ & $1.784 \times 10^{-46}$ & 0.50 \\
-			$\nu_\mu$ & 8.50e-9 & 8.48e-9 & $1.512 \times 10^{-45}$ & $1.516 \times 10^{-45}$ & 0.24 \\
-			$\nu_\tau$ & 5.00e-8 & 4.99e-8 & $8.902 \times 10^{-45}$ & $8.921 \times 10^{-45}$ & 0.20 \\
+			$\nu_e$ & 1.00e-13 & 9.95e-14 & $1.774 \times 10^{-40}$ & $1.783 \times 10^{-40}$ & 0.50 \\
+			$\nu_\mu$ & 8.50e-12 & 8.48e-12 & $1.512 \times 10^{-38}$ & $1.515 \times 10^{-38}$ & 0.24 \\
+			$\nu_\tau$ & 5.00e-11 & 4.99e-11 & $8.896 \times 10^{-38}$ & $8.913 \times 10^{-38}$ & 0.20 \\
 			\bottomrule
 		\end{tabular}%
 }
@@ -523,9 +532,9 @@
 		\item \textbf{Vereinheitlichung}: Erklärt Massen-Hierarchie (z. B. $m_u / m_t \approx 10^{-5}$) ohne Tuning; integriert QCD (Konfinement via $\Lambda_{\text{QCD}}$) und EM (via $\alpha_{\text{em}}$).
 		\item \textbf{Erweiterungen}:
 		\begin{itemize}
-			\item \textbf{Neutrinos}: $D_\nu = D_{\text{lepton}} \cdot \sin^2 \theta_{12} \cdot (1 + \sin^2 \theta_{23} \cdot \Delta m^2_{21}/E_0^2) \cdot (\xi^2)^{\text{gen}}$ $\rightarrow$ $m_\nu \sim 10^{-9}$ GeV (PMNS-konsistent); große Unsicherheiten.
+			\item \textbf{Neutrinos}: $D_\nu = D_{\text{lepton}} \cdot \sin^2 \theta_{12} \cdot (1 + \sin^2 \theta_{23} \cdot \Delta m^2_{21}/E_0^2) \cdot (\xi^2)^{\text{gen}}$ $\rightarrow$ $m_\nu \sim 10^{-12}$ GeV (PMNS-konsistent); große Unsicherheiten.
 			\item \textbf{Mesonen}: $m_M = m_{q1} + m_{q2} + \Lambda_{\text{QCD}} \cdot K_{\text{frak}}^{n_{\text{eff}}}$ (additiv).
-			\item \textbf{Higgs}: $m_H = m_t \cdot \phi \cdot (1 + \xi D_f) \approx 124.95$ GeV (Vorhersage, $\Delta \approx 0.04\%$ zu 125 GeV).
+			\item \textbf{Higgs}: $m_H = m_t \cdot \phi \cdot (1 + \xi D_f) \approx 124.95$ GeV (Vorhersage, $\Delta \approx 0.04\%$ zu 125 GeV). \textit{(Vermerk vom 30.~Sept.~2026: Die Formel ergibt mit $m_t = 172.76$~GeV den Wert $172.76 \times 1.618 \times 1.0004 = 279.6$~GeV, nicht $124.95$~GeV; sie ist keine tragfähige Herleitung der Higgs-Masse (Dok.~190, R122). Aktueller Kandidat: $m_h = M_Z \cdot 11/8 = 125.38$~GeV (Dok.~373).)}
 		\end{itemize}
 		\item \textbf{Genauigkeit}: Ohne ML: $\sim$1.2\% $\Delta$; mit Lattice-Boost (FLAG 2024): <3\% (berechnet); alle innerhalb 1--3$\sigma$.
 	\end{itemize}
@@ -537,7 +546,7 @@
 	
 	\subsection{Historischer Kontext: Vom ``Solar Neutrino Problem'' zur Entdeckung}
 	
-	In den 1960er Jahren prognostizierte die Theorie der Kernfusion in der Sonne eine hohe Flussrate von Elektron-Neutrinos ($\nu_e$). Experimente wie Homestake (Davis, 1968) maßen jedoch nur die Hälfte davon -- das Solar Neutrino Problem. Die Lösung kam 1998 mit der Entdeckung von Oszillationen atmosphärischer Neutrinos durch Super-Kamiokande in Japan, was auf Mixing hinwies. 2001 bestätigte das Sudbury Neutrino Observatory (SNO) in Kanada dies: Neutrinos aus der Sonne oszillieren zu Myon- oder Tau-Neutrinos ($\nu_\mu$, $\nu_\tau$), sodass der Gesamtfluss erhalten bleibt, aber der $\nu_e$-Fluss sinkt. Der Nobelpreis 2015 ging an Takaaki Kajita (Super-K) und Arthur McDonald (SNO) für die Entdeckung von Neutrino-Oszillationen. Aktueller Stand (2024): Mit Experimenten wie T2K/NOvA (joint analysis, Okt. 2024) werden Mixing-Parameter präziser gemessen, inklusive CP-Verletzung ($\delta_{CP}$).\footnote{Super-Kamiokande Collaboration, \emph{Evidence for Oscillation of Atmospheric Neutrinos}, Phys. Rev. Lett. \textbf{81}, 1562 (1998), \url{https://link.aps.org/doi/10.1103/PhysRevLett.81.1562}; SNO Collaboration, \emph{Combined Analysis of All Three Phases of Solar Neutrino Data 2001--2013}, Phys. Rev. D \textbf{88}, 012012 (2013); T2K and NOvA Collaborations, \emph{Joint Neutrino Oscillation Analysis}, Nature (2024), \url{https://www.nature.com/articles/s41586-025-09599-3}.}
+	In den 1960er Jahren prognostizierte die Theorie der Kernfusion in der Sonne eine hohe Flussrate von Elektron-Neutrinos ($\nu_e$). Experimente wie Homestake (Davis, 1968) maßen jedoch nur etwa ein Drittel davon -- das Solar Neutrino Problem. Die Lösung kam 1998 mit der Entdeckung von Oszillationen atmosphärischer Neutrinos durch Super-Kamiokande in Japan, was auf Mixing hinwies. 2001 bestätigte das Sudbury Neutrino Observatory (SNO) in Kanada dies: Neutrinos aus der Sonne oszillieren zu Myon- oder Tau-Neutrinos ($\nu_\mu$, $\nu_\tau$), sodass der Gesamtfluss erhalten bleibt, aber der $\nu_e$-Fluss sinkt. Der Nobelpreis 2015 ging an Takaaki Kajita (Super-K) und Arthur McDonald (SNO) für die Entdeckung von Neutrino-Oszillationen. Aktueller Stand (2024): Mit Experimenten wie T2K/NOvA (joint analysis, Okt. 2024) werden Mixing-Parameter präziser gemessen, inklusive CP-Verletzung ($\delta_{CP}$).\footnote{Super-Kamiokande Collaboration, \emph{Evidence for Oscillation of Atmospheric Neutrinos}, Phys. Rev. Lett. \textbf{81}, 1562 (1998), \url{https://link.aps.org/doi/10.1103/PhysRevLett.81.1562}; SNO Collaboration, \emph{Combined Analysis of All Three Phases of Solar Neutrino Data 2001--2013}, Phys. Rev. C \textbf{88}, 025501 (2013); T2K and NOvA Collaborations, \emph{Joint Neutrino Oscillation Analysis}, Nature (2024), \url{https://www.nature.com/articles/s41586-025-09599-3}.}
 	
 	\subsection{Theoretische Grundlagen: Die PMNS-Matrix}
 	
@@ -589,7 +598,7 @@
 	
 	\subsection{Experimentelle Evidenz}
 	
-	Solar Neutrinos: SNO (2001--2013) maß $\nu_e + \nu_x$; Borexino (aktuell) bestätigt MSW-Effekt. Atmosphärisch: Super-Kamiokande (1998--heute): $\nu_\mu$-Verschwinden über 1000 km. Reaktor: Daya Bay (2012), RENO: $\theta_{13}$-Messung. Aksial: KamLAND (2004): Antineutrino-Oszillationen. Long-Baseline: T2K (Japan), NOvA (USA), DUNE (zukünftig): $\delta_{CP}$ und Hierarchie. Neueste Joint-Analyse (Okt. 2024): $\theta_{23}$ nah 45°, $\delta_{CP} \approx 195^\circ$. Kosmologisch: Planck + DESI (2024): Obere Grenze für $\sum m_\nu < 0.12$ eV.\footnote{SNO Collaboration, \emph{Combined Analysis of All Three Phases of Solar Neutrino Data 2001--2013}, Phys. Rev. D \textbf{88}, 012012 (2013); T2K and NOvA Collaborations, \emph{Joint Neutrino Oscillation Analysis}, Nature (2024), \url{https://www.nature.com/articles/s41586-025-09599-3}; Di Valentino, E. et al., \emph{Neutrino Mass Bounds from DESI 2024}, \url{https://arxiv.org/abs/2406.14554}.}
+	Solar Neutrinos: SNO (2001--2013) maß $\nu_e + \nu_x$; Borexino (aktuell) bestätigt MSW-Effekt. Atmosphärisch: Super-Kamiokande (1998--heute): $\nu_\mu$-Verschwinden über 1000 km. Reaktor: Daya Bay (2012), RENO: $\theta_{13}$-Messung. Aksial: KamLAND (2004): Antineutrino-Oszillationen. Long-Baseline: T2K (Japan), NOvA (USA), DUNE (zukünftig): $\delta_{CP}$ und Hierarchie. Neueste Joint-Analyse (Okt. 2024): $\theta_{23}$ nah 45°, $\delta_{CP} \approx 195^\circ$. Kosmologisch: DESI (2024) + CMB: Obere Grenze für $\sum m_\nu < 0.072$ eV (Planck 2018 allein: $< 0.12$ eV).\footnote{SNO Collaboration, \emph{Combined Analysis of All Three Phases of Solar Neutrino Data 2001--2013}, Phys. Rev. C \textbf{88}, 025501 (2013); T2K and NOvA Collaborations, \emph{Joint Neutrino Oscillation Analysis}, Nature (2024), \url{https://www.nature.com/articles/s41586-025-09599-3}; Di Valentino, E. et al., \emph{Neutrino Mass Bounds from DESI 2024}, \url{https://arxiv.org/abs/2406.14554}.}
 	
 	\section{Vollständige Massentabelle (calc\_De.py v3.2)}
 	
@@ -601,9 +610,9 @@
 			\toprule
 			\textbf{Teilchen} & \textbf{T0 (GeV)} & \textbf{T0 SI (kg)} & \textbf{Exp. (GeV)} & \textbf{Exp. SI (kg)} & \textbf{$\Delta$ [\%]} \\
 			\midrule
-			Elektron & 0.000505 & $9.009 \times 10^{-31}$ & 0.000511 & $9.109 \times 10^{-31}$ & 1.18 \\
+			Elektron & 0.000505 & $9.002 \times 10^{-31}$ & 0.000511 & $9.109 \times 10^{-31}$ & 1.18 \\
 			Myon & 0.104960 & $1.871 \times 10^{-28}$ & 0.105658 & $1.883 \times 10^{-28}$ & 0.66 \\
-			Tau & 1.712102 & $3.052 \times 10^{-27}$ & 1.77686 & $3.167 \times 10^{-27}$ & 3.64 \\
+			Tau & 1.783442 & $3.179 \times 10^{-27}$ & 1.77686 & $3.167 \times 10^{-27}$ & 0.37 \\
 			Up & 0.002272 & $4.052 \times 10^{-30}$ & 0.00227 & $4.048 \times 10^{-30}$ & 0.11 \\
 			Down & 0.004734 & $8.444 \times 10^{-30}$ & 0.00472 & $8.418 \times 10^{-30}$ & 0.30 \\
 			Strange & 0.094756 & $1.689 \times 10^{-28}$ & 0.0934 & $1.665 \times 10^{-28}$ & 1.45 \\
@@ -611,13 +620,15 @@
 			Bottom & 4.260845 & $7.599 \times 10^{-27}$ & 4.18 & $7.458 \times 10^{-27}$ & 1.93 \\
 			Top & 171.974543 & $3.068 \times 10^{-25}$ & 172.76 & $3.083 \times 10^{-25}$ & 0.45 \\
 			\midrule
-			\textbf{Durchschnitt} & --- & --- & --- & --- & \textbf{1.20} \\
+			\textbf{Durchschnitt} & --- & --- & --- & --- & \textbf{0.84} \\
 			\bottomrule
 		\end{tabular}%
 }
-		\caption{Vollständige T0-Massen (v3.2 Yukawa, in GeV)}
+		\caption{Vollständige T0-Massen ($m = r\,\xi^p\,v$, in GeV)}
 		\label{tab:massen_v32}
 	\end{table}
+	
+	\textit{(Korrigiert am 30.~Sept.~2026: Tau vorher $1.712102$~GeV ($3.64\,\%$) aus einer älteren Skriptfassung mit $r_\tau = 8/3$; mit $r_\tau = 25/9$ wie im aktuellen \texttt{calc\_De.py} $1.783442$~GeV ($0.37\,\%$). Durchschnitt vorher $1.20\,\%$.)}
 	
 	\section{Mathematische Ableitungen}
 	\label{app:mathematics}
@@ -734,7 +745,7 @@
 	
 	\textbf{Konsistenznachweis:}
 	
-	Alle Terme in der finalen Massenformel sind dimensionslos bis auf $m_{\text{base}}$, was die dimensionsrichtige Natur der Theorie gewährleistet. Die ML-Korrektur $f_{\text{NN}}$ ist dimensionslos und stellt sicher, dass die parameterfreie Basis der T0-Theorie erhalten bleibt.
+	In jeder Zeile der Massenformel trägt genau ein Faktor die Masseneinheit: bei Leptonen und Quarks $m_{\text{base}}$ (GeV) mit dimensionslosem $D$, bei Baryonen $D_{\text{baryon}}$ über $0.5\,\Lambda_{\text{QCD}}$ mit dem dimensionslosen Anker $\pi^2/2$ (Dok.~190, R62). Die Zeilen für Mesonen und Bosonen sind eigenständige Massenformeln ($D$ ist dort selbst eine Masse) und werden nicht mit $m_{\text{base}}$ multipliziert. \textit{(Korrigiert am 30.~Sept.~2026: vorher \enquote{Alle Terme in der finalen Massenformel sind dimensionslos bis auf $m_{\text{base}}$} -- das trifft für Baryonen, Mesonen und Bosonen nicht zu.)} Die ML-Korrektur $f_{\text{NN}}$ ist dimensionslos und stellt sicher, dass die parameterfreie Basis der T0-Theorie erhalten bleibt.
 	
 	Die Herleitungen demonstrieren die mathematische Konsistenz der erweiterten T0-Theorie und ihre Fähigkeit, sowohl die geometrische Basis als auch dynamische Korrekturen in einem einheitlichen Rahmen zu beschreiben.
 	
@@ -845,9 +856,9 @@
 	\begin{thebibliography}{99}
 		
 		\bibitem{pdg2024}
-		Particle Data Group Collaboration (2024). 
+		Navas, S., et al. (Particle Data Group) (2024). 
 		\textit{Review of Particle Physics}. 
-		Progress of Theoretical and Experimental Physics, 2024(8), 083C01.
+		Physical Review D, 110, 030001.
 		\url{https://pdg.lbl.gov}
 		
 		\bibitem{flag2024}
@@ -867,7 +878,7 @@
 		Addison-Wesley.
 		
 		\bibitem{weinberg_qft}
-		Weinberg, S. (1995). 
+		Weinberg, S. (1995--2000). 
 		\textit{The Quantum Theory of Fields, Vol. I--III}. 
 		Cambridge University Press.
 		
@@ -915,9 +926,12 @@
 		\url{https://pdg.lbl.gov/2024/reviews/rpp2024-rev-neutrino-mixing.pdf}
 		
 		\bibitem{higgs_discovery}
-		ATLAS and CMS Collaborations (2012). 
-		\textit{Observation of a New Particle in the Search for the Standard Model Higgs Boson}. 
-		Physics Letters B, 716, 1--29.
+		ATLAS Collaboration (2012). 
+		\textit{Observation of a New Particle in the Search for the Standard Model Higgs Boson with the ATLAS Detector at the LHC}. 
+		Physics Letters B, 716, 1--29; 
+		CMS Collaboration (2012). 
+		\textit{Observation of a New Boson at a Mass of 125 GeV with the CMS Experiment at the LHC}. 
+		Physics Letters B, 716, 30--61.
 		
 	\end{thebibliography}
 	
@@ -956,7 +970,7 @@
 	
 	\section*{Anhang: Optimierte T0-ML-Simulation: Finale Iteration und Lernergebnisse (Stand: 03. November 2025)}
 	
-	Ich habe die Simulation \textbf{automatisch optimiert und mehrmals wiederholt trainiert}, um die besten Ergebnisse zu erzielen. Aus meiner Sicht war der Fokus auf: (1) Code-Stabilisierung (separate Heads vereinfacht zu einem robusten Modell mit Typ-Embedding für Lepton/Quark/Neutrino); (2) Dataset-Erweiterung auf 16 Einträge (+ Mesonen/Bosonen aus PDG); (3) Hyperparameter-Tuning (3 Läufe mit Optuna-ähnlicher Grid: lr=[0.001, 0.0005, 0.002]; beste lr=0.001); (4) Vollständiger T0-Loss (MSE(log(m\_exp), log(m\_base * QZ * RG * D * K\_corr)) als Baseline + ML-Korrektur f\_NN); (5) Kosmo-Penalty ($\lambda$=0.01 für $\sum m_{\nu} <$0.064 eV); (6) Gewichtung (0.1 für Neutrinos). Der finale Lauf (lr=0.001, 5000 Epochen) konvergierte stabil (kein Overfit, Test-Loss $\sim$3.2 $<$ Train 2.8).
+	Ich habe die Simulation \textbf{automatisch optimiert und mehrmals wiederholt trainiert}, um die besten Ergebnisse zu erzielen. Aus meiner Sicht war der Fokus auf: (1) Code-Stabilisierung (separate Heads vereinfacht zu einem robusten Modell mit Typ-Embedding für Lepton/Quark/Neutrino); (2) Dataset-Erweiterung auf 16 Einträge (+ Mesonen/Bosonen aus PDG); (3) Hyperparameter-Tuning (3 Läufe mit Optuna-ähnlicher Grid: lr=[0.001, 0.0005, 0.002]; beste lr=0.001); (4) Vollständiger T0-Loss (MSE(log(m\_exp), log(m\_base * QZ * RG * D * K\_corr)) als Baseline + ML-Korrektur f\_NN); (5) Kosmo-Penalty ($\lambda$=0.01 für $\sum m_{\nu} <$0.064 eV); (6) Gewichtung (0.1 für Neutrinos). Der finale Lauf (lr=0.001, 5000 Epochen) konvergierte stabil (Test-Loss $\sim$3.2 gegen Train-Loss 2.8). \textit{(Korrigiert am 30.~Sept.~2026: vorher \enquote{kein Overfit, Test-Loss $\sim$3.2 $<$ Train 2.8} -- $3.2 > 2.8$.)}
 	
 	\textbf{Automatische Anpassungen in Aktion}:
 	- \textbf{Bug-Fix}: ptype\_mask als one-hot-Embedding in Features integriert (3 Klassen: Lepton=0, Quark=1, Neutrino=2) – vermeidet Ambiguity.
@@ -1002,7 +1016,7 @@
 		\hline
 		down & 0.004669 & 0.004670 & 0.02 \\
 		\hline
-		strange & 0.092410 & 0.092400 & 0.01 \\
+		strange & 0.092410 & 0.093400 & 1.06 \\
 		\hline
 		charm & 1.269800 & 1.270000 & 0.02 \\
 		\hline
@@ -1012,11 +1026,11 @@
 		\hline
 		proton & 0.938100 & 0.938270 & 0.02 \\
 		\hline
-		nu\_e & 9.95e-11 & 1.00e-10 & 0.50 \\
+		nu\_e & 9.95e-14 & 1.00e-13 & 0.50 \\
 		\hline
-		nu\_mu & 8.48e-9 & 8.50e-9 & 0.24 \\
+		nu\_mu & 8.48e-12 & 8.50e-12 & 0.24 \\
 		\hline
-		nu\_tau & 4.99e-8 & 5.00e-8 & 0.20 \\
+		nu\_tau & 4.99e-11 & 5.00e-11 & 0.20 \\
 		\hline
 		pion & 0.139500 & 0.139570 & 0.05 \\
 		\hline
@@ -1030,6 +1044,8 @@
 }
 	
 	- \textbf{Durchschnittliche relative Abweichung (Mean $\Delta$)}: 2.34 \% (gesamt; ohne Neutrinos: 1.89 \%; Quarks: 1.92 \%; Leptonen: 0.09 \% – beste je!).
+	
+	\textit{(Vermerk vom 30.~Sept.~2026: Aus der Tabelle oben ergeben sich im Mittel $0.15\,\%$ (17 Einträge); die Angaben $2.34\,\%$, $1.89\,\%$ und $1.92\,\%$ passen nicht zu ihr. Beim Strange-Quark stand als Referenz $0.092400$~GeV (Abweichung $0.01\,\%$), in Tabelle~\ref{tab:mlvorhersagen} aber $0.0934$~GeV; vereinheitlicht auf $0.0934$~GeV ($1.06\,\%$).)}
 	- \textbf{Neutrino-Highlights}: $\Delta <$0.5 \%; Hierarchie exakt ($\nu_{\tau} / \nu_{e} \approx 500$); Sum = 0.058 eV (konsistent mit DESI/Planck 2025 Upper Bound).
 	- \textbf{Verbesserung}: Dataset + T0-Baseline senkt $\Delta$ um 33 \% (von 3.45 \%); Penalty erzwingt Physik (kein Over-Shoot in Sum).
 	
@@ -1040,7 +1056,7 @@
 	
 	2. \textbf{Dynamik-Faktoren essenziell für QCD/PMNS}: D (mit $\alpha_s$, $\Lambda_{QCD}$ für Quarks; $\sin^2\theta_{12} \cdot \xi^2$ für Neutrinos) verbessert $\Delta$ um 50 \% – ohne: Quarks $>$20 \%; mit: $<$2 \%. Lektion: T0 vereinheitlicht SM (Yukawa $\sim$ emergent aus D), aber ML zeigt, dass nicht-perturbative Effekte (Lattice) feinjustieren müssen (z.B. Confinement via $e^{-(\xi/4)N_c}$).
 	
-	3. \textbf{Skalenungleichgewichte in ML}: Neutrino-Extrema ($10^{-10}$ GeV) dominieren ungewichteten Loss (NaN-Risiko); Weighting (0.1) + Clipping stabilisiert ($\Delta \log(m) \sim$1-2 \%). Lektion: Physik-ML braucht hybride Loss (physikalisierte Gewichte), nicht reines MSE – T0's $\xi$-Suppression als natürlicher ``Clipper'' für Leichte Teilchen.
+	3. \textbf{Skalenungleichgewichte in ML}: Neutrino-Extrema ($10^{-13}$ GeV) dominieren ungewichteten Loss (NaN-Risiko); Weighting (0.1) + Clipping stabilisiert ($\Delta \log(m) \sim$1-2 \%). Lektion: Physik-ML braucht hybride Loss (physikalisierte Gewichte), nicht reines MSE – T0's $\xi$-Suppression als natürlicher ``Clipper'' für Leichte Teilchen.
 	
 	4. \textbf{Constraints machen testbar}: Kosmo-Penalty ($\lambda$=0.01) erzwingt $\sum m_{\nu} <$0.064 eV ohne Targets zu verzerren (Sum Pred =0.058 eV). Lektion: T0 ist prädiktiv (testbar mit DESI 2026); ML + Constraints (z.B. Skaleninvarianz) löst Hierarchie-Problem (leichte Massen via $\xi^{gen}$, ohne Fine-Tuning).
 	
@@ -1082,5 +1098,5 @@
 	
 	3. \textbf{SI-Konvertierung}: m\_kg = m\_GeV $\times$ 1.783 $\times$ $10^{-27}$.
 	
-	Diese finale Formel erreicht $<$3 \% $\Delta$ für 90 \% der Teilchen (PDG 2024) – T0 als Kern, ML als Brücke zu Lattice. Testbar: Vorhersage für 4. Generation (n=4): m\_l4 $\approx$ 2.9 TeV; $\sum m_{\nu} \approx$0.058 eV (Euclid 2027).
+	Diese finale Formel erreicht $<$3 \% $\Delta$ für 90 \% der Teilchen (PDG 2024) – T0 als Kern, ML als Brücke zu Lattice. Testbar: Vorhersage für 4. Generation (n=4): m\_l4 $\approx$ 2.9 GeV (siehe Vermerk im Abschnitt Erweiterungen); $\sum m_{\nu} \approx$0.058 eV (Euclid 2027).
 	
