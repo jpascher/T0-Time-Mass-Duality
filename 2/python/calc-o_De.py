@@ -403,8 +403,8 @@ class T0VereinigterRechner:
     KORRIGIERTE DIMENSIONSANALYSE:
     - T0-Formel: G = ξ²/(4m) ergibt zunächst [E⁻¹] 
     - Physikalisches G_nat benötigt [E⁻²]
-    - Umrechnungsfaktor 3.521×10⁻² [E⁻²] korrigiert die Dimension
-    - SI-Umrechnung: 2.843×10⁻⁵ [m³·kg⁻¹·s⁻²] ← KORRIGIERT!
+    - Umrechnungsfaktor 3.47222×10⁻² [E⁻²] korrigiert die Dimension
+    - SI-Umrechnung: 2.88294×10⁻⁵ [m³·kg⁻¹·s⁻²] ← KORRIGIERT!
     - T0-Fundamentalformel: ξ = 2√(G·m) → G = ξ²/(4m)
     """
     if hasattr(self, '_level2_erledigt'):
@@ -416,12 +416,12 @@ class T0VereinigterRechner:
     
     # KORREKTUR: Expliziter Umrechnungsfaktor für [E⁻²]
     # Dieser Faktor stammt aus der T0-Theorie und korrigiert die Dimension
-    umrechnungsfaktor_nat = 3.521e-2 # [E⁻²] - aus T0-Geometrie abgeleitet
+    umrechnungsfaktor_nat = 3.47222e-2 # [E⁻²] - aus T0-Geometrie abgeleitet
     G_nat = G_t0_dimensionless * umrechnungsfaktor_nat # Jetzt [E⁻²]
     
     # SI-Umrechnung mit korrektem dimensionalen Faktor
-    # KORRIGIERT: 2.843×10⁻⁵ [m³·kg⁻¹·s⁻²] statt [m³·kg¹·s⁻⁶]
-    SI_umrechnungsfaktor = 2.843e-5 # [m³·kg⁻¹·s⁻²] ← KORRIGIERT!
+    # KORRIGIERT: 2.88294×10⁻⁵ [m³·kg⁻¹·s⁻²] statt [m³·kg¹·s⁻⁶]
+    SI_umrechnungsfaktor = 2.88294e-5 # [m³·kg⁻¹·s⁻²] ← KORRIGIERT!
     G_SI_aus_t0 = G_nat * SI_umrechnungsfaktor
     
     # ALTERNATIVE: Elegante direkte Berechnung (zur Verifikation)
@@ -1028,8 +1028,8 @@ class T0VereinigterRechner:
       f.write("-" * 60 + "\n")
       f.write("Kernbeziehung: ξ = 2√(G·m) → G = ξ²/(4m)\n")
       f.write("Dimensionsanalyse: [ξ²]/[m] = [1]/[E] = [E⁻¹] → Korrektur für [E⁻²]\n")
-      f.write("Korrektur: G_nat = (ξ²/4m) × 3.521×10⁻² [E⁻²]\n")
-      f.write("SI-Umrechnung: G_SI = G_nat × 2.843×10⁻⁵ [m³·kg⁻¹·s⁻²] ← KORRIGIERT!\n\n")
+      f.write("Korrektur: G_nat = (ξ²/4m) × 3.47222×10⁻² [E⁻²]\n")
+      f.write("SI-Umrechnung: G_SI = G_nat × 2.88294×10⁻⁵ [m³·kg⁻¹·s⁻²] ← KORRIGIERT!\n\n")
       
       # GRAVITATIONSKONSTANTEN-DETAILS
       f.write("GRAVITATIONSKONSTANTEN-BERECHNUNG (v3.2 KORRIGIERT):\n")

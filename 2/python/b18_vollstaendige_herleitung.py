@@ -288,8 +288,8 @@ print("-"*80)
 
 m_char = xi / 2
 G_nat = xi / 2
-umrechnungsfaktor_E2 = 3.521e-2
-k_umrechnung = 2.843e-5
+umrechnungsfaktor_E2 = 3.47222e-2
+k_umrechnung = 2.88294e-5
 G_formel2 = G_nat * umrechnungsfaktor_E2 * k_umrechnung
 
 print(f"""

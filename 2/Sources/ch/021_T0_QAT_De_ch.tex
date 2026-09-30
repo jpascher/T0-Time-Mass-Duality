@@ -1,5 +1,13 @@
+\begin{tcolorbox}[colback=red!3!white,colframe=red!50!black,boxrule=0.8pt,title={Korrekturhinweise},fonttitle=\bfseries]
+\textbf{Korrekturen aus der Rechenprüfung (30.~Sept.~2026).} Die folgenden Stellen sind im Text korrigiert bzw. vermerkt; jede trägt dort einen datierten Hinweis mit dem vorherigen Wert:
+\begin{itemize}
+\item Interpretation der Tabelle: Die Drop-Werte ($2{,}935914$; $1{,}435758$; $51\,\%$) stimmen. Die bessere Robustheit gilt aber nur relativ -- absolut hat T0-QAT in beiden Spalten den größeren Fehler ($9{,}50$ statt $0{,}32$ in voller Präzision, $10{,}94$ statt $3{,}25$ quantisiert, Faktor $3{,}4$).
+\item \enquote{Ohne empirisches Tuning}: Die Rauschamplitude ist $\xi \cdot 80000 = 10{,}67$ mit einem frei gewählten, datensatzspezifischen Skalierungsfaktor; $\xi$ legt die Amplitude nicht allein fest. $\xi$ selbst bleibt aus der Theorie hergeleitet.
+\end{itemize}
+\end{tcolorbox}
+
 \section*{Abstract}
-		This document presents experimental validation of $\xi$-aware quantization-aware training, where $\xi = \frac{4}{3} \times 10^{-4}$ is derived from fundamental physical principles in the T0-Theory (Time-Mass Duality). Our preliminary results demonstrate improved robustness to quantization noise compared to standard approaches, providing a physics-informed method for enhancing AI efficiency through principled noise regularization.
+		Dieses Dokument stellt eine experimentelle Erprobung von $\xi$-bewusstem Quantization-aware Training vor, wobei $\xi = \frac{4}{3} \times 10^{-4}$ aus den physikalischen Grundprinzipien der T0-Theorie (Zeit-Masse-Dualität) hergeleitet ist. Die vorläufigen Ergebnisse zeigen einen relativ geringeren Leistungsabfall unter Quantisierungsrauschen als der Standardansatz, bei absolut höherem Fehler; die Rauschamplitude enthält zusätzlich einen datensatzspezifischen Skalierungsfaktor. \textit{(Korrigiert am 30.~Sept.~2026: vorher \enquote{verbesserte Robustheit gegenüber Standardansätzen} und \enquote{prinzipielle Rauschregularisierung} -- siehe Abschnitt Interpretation.)}
 
 	
 	
@@ -57,8 +65,8 @@
 			\toprule
 			\textbf{Methode} & \textbf{Volle Präzision} & \textbf{Quantisiert} & \textbf{Drop} \\
 			\midrule
-			Standard QAT & 0.318700 & 3.254614 & 2.935914 \\
-			T0-QAT ($\xi$-aware) & 9.501066 & 10.936824 & 1.435758 \\
+			Standard QAT & 0{,}318700 & 3{,}254614 & 2{,}935914 \\
+			T0-QAT ($\xi$-aware) & 9{,}501066 & 10{,}936824 & 1{,}435758 \\
 			\bottomrule
 		\end{tabular}%
 }
@@ -71,10 +79,12 @@
 	Die experimentellen Ergebnisse demonstrieren:
 	
 	\begin{itemize}
-		\item \textbf{Verbesserte Robustheit:} T0-QAT zeigt signifikant reduzierte Leistungsverschlechterung unter Quantisierungsrauschen (51\% Reduktion im Performance-Drop)
-		\item \textbf{Rauschresilienz:} Mit $\xi$-aware Rauschen trainierte Modelle lernen, Präzisionsvariationen in niedrigeren Bits zu ignorieren
-		\item \textbf{Physikalische Fundierung:} Der theoretisch abgeleitete $\xi$-Parameter bietet effektive Regularisierung ohne empirisches Tuning
+		\item \textbf{Relativ geringerer Drop:} T0-QAT zeigt eine um 51\,\% kleinere Leistungsverschlechterung durch die Quantisierung ($1{,}44$ statt $2{,}94$)
+		\item \textbf{Absolut höherer Fehler:} In beiden Spalten liegt der Fehler von T0-QAT über dem Standardansatz ($9{,}50$ statt $0{,}32$ in voller Präzision, $10{,}94$ statt $3{,}25$ quantisiert, Faktor $3{,}4$)
+		\item \textbf{Rauschresilienz:} Mit $\xi$-aware Rauschen trainierte Modelle reagieren weniger empfindlich auf Präzisionsvariationen in niedrigeren Bits
+		\item \textbf{Rolle von $\xi$:} Die eingesetzte Rauschamplitude ist $\xi \cdot 80000 = 10{,}67$; der Skalierungsfaktor $80000$ ist datensatzspezifisch gewählt, $\xi$ legt die Amplitude also nicht allein fest
 	\end{itemize}
+	\textit{(Korrigiert am 30.~Sept.~2026: vorher \enquote{Verbesserte Robustheit: signifikant reduzierte Leistungsverschlechterung} ohne Hinweis auf den absolut höheren Fehler, und \enquote{effektive Regularisierung ohne empirisches Tuning} -- der Code verwendet \texttt{xi\_scaling = 80000.0}.)}
 	
 	\section{Implementierung}
 	
@@ -139,7 +149,7 @@
 		noisy_b = bias + noise_b
 		
 		pred = model(x, noisy_w, noisy_b)
-		loss = criterion(pred, y)
+		loss = F.mse_loss(pred, y)
 		loss.backward()
 		optimizer.step()
 		
@@ -150,7 +160,7 @@
 	
 	\subsection{Theoretische Implikationen}
 	
-	Der Erfolg von T0-QAT suggeriert, dass fundamentale physikalische Prinzipien AI-Optimierungsstrategien informieren können. Die $\xi$-Konstante bietet:
+	Der relativ geringere Drop von T0-QAT ist ein Anlass zu prüfen, ob physikalische Prinzipien AI-Optimierungsstrategien informieren können; ein Beleg ist er bei absolut höherem Fehler und frei gewähltem Skalierungsfaktor noch nicht. Die $\xi$-Konstante könnte bieten:
 	
 	\begin{itemize}
 		\item \textbf{Prinzipielle Regularisierung:} Physikalisch-basierte Alternative zu empirischen Methoden
@@ -161,7 +171,7 @@
 	\subsection{Praktische Anwendungen}
 	
 	\begin{itemize}
-		\item \textbf{Low-Precision Inference:} INT4/INT3/INT2 Deployment mit erhaltener Genauigkeit
+		\item \textbf{Low-Precision Inference:} INT4/INT3/INT2 Deployment (noch nicht getestet)
 		\item \textbf{Edge AI:} Ressourcenbeschränktes Model Deployment
 		\item \textbf{Quantum-Classical Interface:} Brückenschlag zwischen Quantenrauschmodellen und klassischer AI
 	\end{itemize}

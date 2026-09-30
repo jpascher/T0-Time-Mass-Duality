@@ -135,8 +135,8 @@ WICHTIG:
 
 m_char = xi / 2
 G_nat = xi / 2
-k_umrechnung = 2.843e-5 # [m³ kg⁻¹ s⁻²] / [E⁻²], aus T0
-umrechnungsfaktor_E2 = 3.521e-2 # [E⁻²] / [dimensionslos]
+k_umrechnung = 2.88294e-5 # [m³ kg⁻¹ s⁻²] / [E⁻²], aus T0
+umrechnungsfaktor_E2 = 3.47222e-2 # [E⁻²] / [dimensionslos]
 
 G_formula2 = G_nat * umrechnungsfaktor_E2 * k_umrechnung
 

@@ -39,8 +39,9 @@ def main():
     print("   E_char = E0 * (4/3)^2 * pi/sqrt2 * K_frak")
     print("          = %.2f * %.4f * %.4f * %.4f = %.3f"
           % (E0, R_f, g_geo, KFRAK, E_char))
-    print("   Zielwert 28.4 -> Abweichung %+.2f %%" % (100*(E_char-28.4)/28.4))
-    g3 = im_bereich("E_char nahe 28.4 (Struktur %.1f)" % E_char, E_char, 28.4,
+    print("   Einheitlich verwendet: E_char = %.1f (seit 30.9.2026; vorher 28.4)" % E_char)
+    print("   E_char hebt sich in G auf (1/E_char in G_nat, *E_char in der SI-Umrechnung) -> kein Rest in G")
+    g3 = im_bereich("E_char nahe 28.8 (Struktur %.1f)" % E_char, E_char, 28.8,
                     faktor=1.3)
     ok = ok and g3
 
@@ -56,9 +57,9 @@ def main():
     print("\nPRUEFUNG 4  Skalenhierarchie E0 << E_char << E_T0")
     E_T0 = 1/XI
     print("   E0     = %8.2f MeV  (elektromagnetisch)" % E0)
-    print("   E_char = %8.2f      (Gravitations-Ankopplung)" % 28.4)
+    print("   E_char = %8.2f      (Gravitations-Ankopplung)" % E_char)
     print("   E_T0   = %8.2f      (= 1/xi, fundamental)" % E_T0)
-    g4 = E0 < 28.4 < E_T0
+    g4 = E0 < E_char < E_T0
     ok = ok and g4
     print("   Hierarchie E0 << E_char << E_T0 :",
           "im richtigen Bereich" if g4 else "AUSSERHALB")
@@ -80,38 +81,20 @@ def main():
           % (G_rueck, abs(G_rueck / G_codata - 1)))
     g_exakt = identitaet("G_SI exakt aus Skala rueckrechenbar", G_rueck, G_codata)
     ok = ok and g_exakt
-    print("   -> exakt, kein freier Parameter. Die 0.5% betreffen NUR die")
-    print("      geschlossene Form von E_char, nicht die Rueckrechnung selbst.")
+    print("   -> exakt, kein freier Parameter.")
 
-    print("\nIST DER 0.5%-REST EIN MESSEFFEKT?  (nein -- Gegenprobe)")
-    rel_u_G  = 0.00015e-11 / 6.67430e-11         # CODATA-Unsicherheit
-    scatter  = (6.67555e-11 - 6.67191e-11) / 6.67430e-11  # Big-G-Streuung
-    rest = 0.005                                  # ~0.5% Theorie-Rest
-    print("   Theorie-Rest G           : %.3f %%" % (100*rest))
-    print("   G-Messunsicherheit CODATA: %.4f %%  -> Rest ist %.0fx groesser"
-          % (100*rel_u_G, rest/rel_u_G))
-    print("   G-Streuung (Experimente) : %.4f %%  -> Rest ist %.0fx groesser"
-          % (100*scatter, rest/scatter))
-    print("   Eingaenge (E0 ~1e-8, K_frak abgeleitet, Geometrie exakt): tragen nichts")
-    g_mess = (rest > 2*scatter) and (rest > 10*rel_u_G)  # Rest uebersteigt beide klar
-    print("   -> Messunsicherheit erklaert den Rest NICHT:",
-          "bestaetigt (Rest ist strukturell)" if g_mess else "unklar")
-    ok = ok and g_mess
-
-
-    print("\nKOENNTE EINE SM-ANNAHME DEN REST TRAGEN?  (Massenschema, Ordnung)")
-    alpha = 1/137.036
-    schema = alpha/math.pi                 # Pol vs laufend, ~0.23%/Masse
-    potenz = 1.5 + 0.5                      # G ~ 1/(m_e^1.5 m_mu^0.5)
-    effekt = potenz*schema
-    print("   Pol-vs-laufend je Masse : %.3f %% (Ordnung alpha/pi)" % (100*schema))
-    print("   G-Massenpotenz          : %.1f" % potenz)
-    print("   -> auf G fortgepflanzt  : %.2f %%  (Rest ~0.5%%: gleiche Ordnung)"
-          % (100*effekt))
-    print("   VERSCHRAENKT, aber KEINE Schliessung: Vorzeichen+Koeffizient")
-    print("   verlangen eine Vorwaertsrechnung; Ordnung != Herleitung.")
-    g_schema = abs(100*effekt - 0.5) < 0.5   # nur: gleiche Groessenordnung
-    ok = ok and g_schema
+    print("\nHEBT SICH E_char IN G AUF?  (Stand 30.9.2026: kein Rest in G)")
+    xi = XI; C_conv = 7.783e-3; K = 0.986
+    werte = []
+    for Ec in (28.4, E_char, 50.0):
+        G_kette = xi**2/(4*ME) * (1/Ec) * C_conv * K * Ec   # Dok. 012, Schritt 1-3
+        werte.append(G_kette)
+        print("   E_char = %6.2f -> G_SI = %.6e" % (Ec, G_kette))
+    g_kuerz = max(werte)/min(werte) - 1 < 1e-12
+    print("   -> E_char kuerzt sich; G_SI = %.4e (%+.4f %% zu CODATA)"
+          % (werte[1], 100*(werte[1]/6.67430e-11 - 1)))
+    print("   -> die fruehere Abweichung E_char-Zerlegung gegen 28.4 (1.5 %) ist KEIN Rest in G")
+    ok = ok and g_kuerz
 
     print("\nEINS-TEST (A135) und Kleidungsvergleich zu alpha")
     print("   G = c = hbar = 1 in Planck-Einheiten -> setzbar -> Konvention")

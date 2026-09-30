@@ -63,7 +63,7 @@ print("--- C  FFGFT-eigene Kette xi -> G -> l_P -> E_P (Dok. 012/013/180) ---")
 C_conv = mpf("7.783e-3"); K_frak = mpf("0.986"); me_MeV = mpf("0.511")
 G_T0 = xi**2/(4*me_MeV)*C_conv*K_frak
 chk("C1 G = xi^2/(4 m_e) C_conv K_frak", abs(G_T0/G-1) < mpf("1e-4"), f"{F(G_T0):.5e}, {F(100*(G_T0/G-1)):+.4f} %")
-C_dim = 1/mpf("28.4"); C_conv_split = C_conv/C_dim
+C_dim = 1/mpf("28.8"); C_conv_split = C_conv/C_dim
 chk("C2 Aufteilung C_dim*C_conv (Dok. 180) gleichwertig", abs(xi**2/(4*me_MeV)*C_dim*C_conv_split*K_frak/G_T0-1) < mpf("1e-30"))
 lP = sqrt(hbar*G_T0/c**3)
 chk("C3 l_P aus der Kette", abs(lP/mpf("1.616255e-35")-1) < mpf("1e-4"), f"{F(lP):.5e} m, L_0={F(xi*lP):.4e} m")

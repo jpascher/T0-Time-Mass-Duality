@@ -347,9 +347,9 @@ class T0ComprehensiveVerification:
     xi_val = float(self.xi)
     m_char = xi_val / 2 # Characteristic mass
     G_t0_base = xi_val / 2 # Dimensionless
-    faktor_nat = 3.521e-2 # Natural units factor (fixed)
+    faktor_nat = 3.47222e-2 # Natural units factor (fixed)
     G_nat = G_t0_base * faktor_nat
-    faktor_SI = 2.843e-5 # SI conversion (fixed)
+    faktor_SI = 2.88294e-5 # SI conversion (fixed)
     G_SI = G_nat * faktor_SI
     
     error_G = abs(G_SI - self.G_exp) / self.G_exp * 100
