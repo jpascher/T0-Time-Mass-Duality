@@ -13,11 +13,15 @@ Checks 1-10:
   5  Gibbs-Entropie Gleichverteilung: S = k_B*ln(N)
   6  Gibbs-Entropie ungleiche Verteilung: S < k_B*ln(N)
   7  Kolloid in 1-um-Falle: N_1D = sqrt(2pi*m*k_B*T/h^2) * L ~ 7.7e9
-  8  Quasi-analoger Fall: ln(L/delta_x) Stufen, Kosten k_B*T*ln(L/delta_x)
+  8  Quasi-analoger Fall: L/delta_x Stufen, Entropie ln(L/delta_x) in k_B,
+     Kosten k_B*T*ln(L/delta_x)
   9  Zusatzdissipation 1/tau-Form: W = k_B*T*ln2 + B/tau
  10  Sagawa-Ueda: Information als Ressource, Wechselkurs k_B*T pro nat
 
 Alle Konstanten deklariert, keine freien Parameter.
+
+Aktualisiert am 1.10.2026: Punkt 8 korrigiert -- Zahl der Stufen ist L/delta_x,
+ihr Logarithmus ist die Entropie in k_B; Rechnung unveraendert (vgl. Dok. A271).
 """
 
 import math

@@ -12,7 +12,7 @@ Eine Korpus-Stelle diskriminiert nur, wenn ihre eigene Unsicherheit
 KLEINER als dieser Abstand ist -- sonst liegt beides im Toleranzbereich.
 
 Geprueft werden die drei im Korpus genannten Zeugen:
-  TEST A  A130: Zwei-Routen-Messung  K_mess = (E0_Weg2 / E0_Weg1)^-2
+  TEST A  A130: von alpha verlangtes K = xi*m_e*m_mu/alpha
   TEST B  A270: Hochpotenz-Identitaet K^-36 ~ 16/pi^2 (Verstaerker x36)
   TEST C  A040: Potenzform (D_eff/3)^(D_eff/2) mit D_eff = 2.973
 
@@ -70,42 +70,25 @@ print(f"relativer Formabstand = {GAP:+.3e}   (Schwelle fuer jede Pruefstelle)")
 
 # ---------------------------------------------------------------- TEST A
 print("\n" + "-" * 74)
-print("TEST A  (A130): Zwei-Routen-Messung von K_frak")
+print("TEST A  (A130): alpha legt K_frak fest")
 print("-" * 74)
-print("  Weg 1: E0 = sqrt(m_e * m_mu)          (nur Messmassen)")
-print("  Weg 2: E0^2 = 4*sqrt(2)*m_mu / xi^p   (p aus Korpus-Skript: -0.2679)")
-E0_1 = math.sqrt(ME * MMU)
-
-def K_mess(p):
-    E0_2 = math.sqrt(4 * math.sqrt(2) * MMU * XI ** (-p))
-    return (E0_2 / E0_1) ** (-2)
-
-P_KORPUS = -0.2679                    # wie in a130_alpha_kette.py
-P_EXAKT  = -(2 - math.sqrt(3))        # Kandidat: 2-sqrt(3) = 0.26794919...
-
-for label, p in (("p = -0.2679 (Korpus-Literal, 4 Stellen)", P_KORPUS),
-                 ("p = -(2-sqrt3) = -0.26794919... (Kandidat)", P_EXAKT)):
-    Km = K_mess(p)
-    print(f"\n  Variante: {label}")
-    print(f"   K_mess = {Km:.8f}")
-    r_add = Km / K_ADD - 1.0
-    r_mul = Km / K_MUL - 1.0
-    # Unsicherheitsbudget:
-    #  (a) Massen: K haengt ueber E0_1 von sqrt(me*mmu) ab -> dK/K = d(me*mmu)/(me*mmu)
-    u_mass = ME_REL + MMU_REL         # ~2e-8, vernachlaessigbar
-    #  (b) p selbst: dK/K = |ln xi| * dp.  Rundung 4 Stellen -> dp = 5e-5
-    dlnxi = abs(math.log(XI))
-    u_p = dlnxi * (5e-5 if p == P_KORPUS else 0.0)
-    u = u_mass + u_p
-    print(f"   Unsicherheitsbudget: Massen {u_mass:.1e}"
-          + (f", p-Rundung {u_p:.1e} (|ln xi|*5e-5)" if u_p else ", p exakt gesetzt"))
-    urteil("A", r_add, r_mul, u if u > 0 else u_mass)
-
-print("\n  Empfindlichkeit: dK/K = |ln xi| * dp = %.2f * dp" % dlnxi)
-print("  -> Damit Test A den Formabstand (8.9e-5) aufloest, muss p auf")
-print("     besser als dp = %.1e bekannt sein (>= 6 Stellen)." % (abs(GAP)/dlnxi))
-print("  -> OFFEN: Der Korpus gibt p nur als 4-stelliges Literal an. Ist")
-print("     p = -(2-sqrt3) exakt [herzuleiten], diskriminiert Test A scharf.")
+print("  Weg 1: E0 = sqrt(m_e m_mu)            (nackt)")
+print("  Weg 2: E0 = sqrt(m_e m_mu / K_frak)   (fraktal korrigiert, R72)")
+print("  (30.9.2026: die fruehere Formel E0^2 = 4*sqrt2*m_mu/xi^p ist entfernt --")
+print("   p war an 7.398 angepasst; sie setzt m_e/MeV = 4*sqrt2*K*xi^q, eine")
+print("   reine Zahl gleich einer Energie in MeV, also einheitenabhaengig.)")
+ALPHA = 1 / 137.035999177
+ALPHA_REL = 1.1e-10
+Km = XI * ME * MMU / ALPHA            # das von alpha verlangte K_frak
+print(f"\n   K_verlangt = xi*m_e*m_mu/alpha = {Km:.8f}")
+r_add = Km / K_ADD - 1.0
+r_mul = Km / K_MUL - 1.0
+u = ME_REL + MMU_REL + ALPHA_REL
+urteil("A", r_add, r_mul, u)
+print("   Beide Residuen (1.7e-4 bzw. 2.6e-4) liegen weit ueber dem Formabstand")
+print("   8.9e-5; der Rest der alpha-Stelle ist selbst groesser als der")
+print("   Formabstand. Keine Formaussage aus Test A.")
+dlnxi = abs(math.log(XI))
 
 # ---------------------------------------------------------------- TEST B
 print("\n" + "-" * 74)
@@ -147,13 +130,10 @@ print("\n" + "=" * 74)
 print("GESAMTFAZIT")
 print("=" * 74)
 print("""\
- A (A130, p = -0.2679 wie im Korpus): KEINE Formaussage -- die 4-stellige
-    p-Rundung verschmiert die Messung (4.5e-4) staerker als der
-    Formabstand (8.9e-5).
- A (A130, p = -(2-sqrt3) exakt):     diskriminiert ZUGUNSTEN ADDITIV,
-    Residuen 1.4e-5 vs 1.0e-4 (7.5:1). BEDINGUNG: die exakte Identitaet
-    p = -(2-sqrt3) muss im Korpus erst hergeleitet/deklariert werden --
-    derzeit steht dort nur das Zahlenliteral. PRUEFAUFTRAG P-neu.
+ A (A130, alpha verlangt K = 0.98650): keine Formaussage -- Residuen
+    1.7e-4 (additiv) und 2.6e-4 (multiplikativ), beide ueber dem
+    Formabstand 8.9e-5. (Die fruehere Variante mit p = -(2-sqrt3) ist
+    mit der Weg-2-Formel entfernt.)
  B (A270, ^-36 vs 16/pi^2):          diskriminiert ZUGUNSTEN ADDITIV,
     Residuen 1.0e-4 vs 3.1e-3 (31:1) -- der x36-Verstaerker macht den
     Formabstand zu 0.32%. BEDINGUNG: gilt nur unter der Referenz-Annahme
@@ -163,9 +143,7 @@ print("""\
     4-stellig, Unsicherheit 2.5e-4 > 8.9e-5); tendiert additiv (1.6e-5
     vs 1.0e-4), reicht aber nicht als eigenstaendiger Zeuge.
 
- ERGEBNIS: Beide belastbaren Diskriminierungen (A-exakt, B) zeigen in
- dieselbe Richtung -- ADDITIV, also 1-100xi = 74/75 -- aber jede haengt an
- einer noch offenen Voraussetzung (p-Identitaet bzw. 16/pi^2-Referenz).
- Unbedingt diskriminiert ist die Form damit NOCH NICHT; sie ist zweifach
- bedingt-bestaetigt. Sauberer Status: [B] mit zwei benannten Bedingungen,
- nicht [K]-gemessen. Kandidat fuer Registereintrag in Dok. 190.""")
+ ERGEBNIS: Belastbar diskriminiert nur B -- ADDITIV, also 1-100xi = 74/75 --
+ und nur unter der 16/pi^2-Referenz-Annahme. A und C sind nicht aufloesungsfaehig
+ (C tendiert additiv). Status: [B], einfach bedingt-bestaetigt, nicht
+ [K]-gemessen.""")

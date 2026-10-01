@@ -3,27 +3,33 @@
 """a220_toleranzmassstab.py -- Pruefskript zu A220.
 Ordnet die Vergleichszahlen der Serie in vier Genauigkeitsklassen, mit
 Messgenauigkeit und Bestimmungstoleranz; Gegenprobe zur Scheingenauigkeit.
-Standardbibliothek."""
+Standardbibliothek.
+Aktualisiert am 1.10.2026: Tabelle korrigiert -- alpha -0,017 % (Weg 2) / +0,0005 %
+(Anker E0=7,398) statt der verworfenen 0,24 %; G +0,003 % (ueber C_conv, R141),
+die 1,5 % nur fuer die Zerlegung von E_char; Q-2/3 ~2-3e-6 (vgl. Dok. A220 bzw.
+Dok. 190, R141)."""
 
 
 def main():
     ok = True
     print("DIE VIER GENAUIGKEITSKLASSEN\n" + "="*66)
-    print("%-22s %-10s %-12s %-12s" %
+    print("%-26s %-10s %-12s %-12s" %
           ("Groesse", "Abw.", "Messgenau.", "Bestimmung"))
     print("-"*66)
     faelle = [
-        ("Q = 2/3 (A110)",        "6e-6",   "7e-6",   "exakt",   1),
+        ("Q = 2/3 (A110, A270)",  "2-3e-6", "7e-6",   "exakt",   1),
         ("theta(mu/e) (A110)",    "1.8e-7", "1e-9",   "exakt",   1),
         ("m_mu/m_e Leiter (A100)","0.52 %", "1e-9",   "~1 %",    2),
         ("m_tau/m_mu Leiter",     "1.04 %", "7e-5",   "~1 %",    2),
-        ("alpha SI (A130)",       "0.24 %", "1e-10",  "Buchh.",  3),
-        ("G / E_char (A145)",     "1.5 %",  "1e-5",   "Buchh.",  3),
+        ("alpha SI Weg 2 (A130)", "-0.017 %", "1e-10", "Buchh.",  3),
+        ("alpha SI Anker E0=7.398", "+0.0005 %", "1e-10", "Buchh.", 3),
+        ("G ueber C_conv (R141)", "+0.003 %", "1e-5",  "Buchh.",  3),
+        ("E_char-Zerlegung (A145)", "1.5 %", "--",    "Buchh.",  3),
         ("Neutrinomassen (A150)", "--",     "offen",  "offen",   4),
         ("Quarkmassen (A150)",    "--",     "schema", "schema",  4),
     ]
     for name, abw, mess, best, klasse in faelle:
-        print("%-22s %-10s %-12s %-12s [Klasse %d]"
+        print("%-26s %-10s %-12s %-12s [Klasse %d]"
               % (name, abw, mess, best, klasse))
 
     print("\nLESEREGEL je Klasse:")

@@ -15,6 +15,11 @@ Ebenen:
   F  Brueckenkonstanten je Lepton (P40: nur Verhaeltnisse exakt): v_eff, r_eff
   G  Invertierungen: m_tau fuer Q=2/3 exakt bzw. theta=2/9 exakt
   H  K_frak-Gegenprobe der Leiter-Abweichungen
+
+Aktualisiert am 1.10.2026: m_tau auf PDG 2024 (1776.93 +- 0.09 MeV) umgestellt
+(PDG-2022-Wert 1776.86 +- 0.12 nur noch als Vergleich); B2-Text, Testschaerfe
+in I) und sigma-Angaben in L) aus den Daten berechnet statt hart kodiert (vgl. Dok. 292, Vermerk
+vom 30.9.2026).
 """
 import numpy as np
 np.random.seed(20780458)
@@ -22,7 +27,8 @@ np.random.seed(20780458)
 # ---- PDG-Eingaben (MeV) ----
 m_e,  s_e  = 0.51099895069, 1.6e-10
 m_mu, s_mu = 105.6583755,   2.3e-6
-m_ta, s_ta = 1776.86,       0.12          # PDG; Empfindlichkeit unten ausgewiesen
+m_ta, s_ta = 1776.93,       0.09          # PDG 2024; Empfindlichkeit unten ausgewiesen
+m_ta22, s_ta22 = 1776.86,   0.12          # PDG 2022 (frueherer Stand, nur Vergleich)
 
 xi   = 4/30000
 v    = 246.22e3                            # MeV (Higgs-VEV)
@@ -47,6 +53,10 @@ Q = koide(m_e,m_mu,m_ta)
 dQ = abs(koide(m_e,m_mu,m_ta+s_ta)-koide(m_e,m_mu,m_ta-s_ta))/2
 print(f"   Q = {Q:.9f}  ±{dQ:.7f}   (2/3 = {2/3:.9f})")
 print(f"   Q - 2/3 = {Q-2/3:+.3e}  ->  {(Q-2/3)/dQ:+.2f} sigma vom Exaktwert")
+Q22 = koide(m_e,m_mu,m_ta22)
+dQ22 = abs(koide(m_e,m_mu,m_ta22+s_ta22)-koide(m_e,m_mu,m_ta22-s_ta22))/2
+print(f"   (Vergleich PDG 2022, m_tau=1776.86(12): Q-2/3 = {Q22-2/3:+.3e} -> {(Q22-2/3)/dQ22:+.2f} sigma)")
+assert abs((Q-2/3)/dQ) < 0.6 and abs((Q22-2/3)/dQ22) > 0.8   # PDG 2024: ~-0.43 sigma
 
 print("\nB) BRANNEN/ZIRKULANT-FIT (alle zyklischen Zuordnungen)")
 best=None
@@ -81,7 +91,7 @@ R_mue = m_mu/m_e
 th_mue=_b(lambda t: fmue(t)-R_mue, lo,hi)
 print(f"   theta(mu/e) = {th_mue:.10f};  |theta-2/9| = {abs(th_mue-2/9):.3e}")
 print("   (reproduziert Dok 282: ~1.8e-7, sieben signifikante Stellen; die")
-print("    Restdifferenz ist NICHT unabhaengig, sondern dieselbe ~0.9-sigma-")
+print(f"    Restdifferenz ist NICHT unabhaengig, sondern dieselbe ~{abs((Q-2/3)/dQ):.1f}-sigma-")
 print("    tau-Spannung wie in A/G -- bei frei flottierendem r via Q verschwindet sie.)")
 
 print("\nC) KONSISTENZ Q <-> r:  r(Q) = sqrt(6Q-2)")
@@ -201,8 +211,10 @@ for lbl,dev,srel in [("mu/e",Rmue_l/R_mue-1,sR1/R1),("tau/mu",Rtamu_l/R_tamu-1,s
 print("   -> Leiter-Residuen sind theorieseitig (P40), nicht datenlimitiert;")
 print("      die Messpraezision hat die Leiter um 1e2..1e5 ueberholt.")
 print("\n   Testschaerfe der m_tau-Vorhersage (dicke Richtung):")
-for st in (0.12,0.05,0.02):
-    print(f"     sigma(m_tau)={st}: |1776.968-1776.86|/sigma = {0.108/st:.1f} sigma")
+dmt = abs(mt_pred-m_ta)
+for st in (0.12,0.09,0.05,0.02):
+    print(f"     sigma(m_tau)={st}: |{mt_pred:.3f}-{m_ta}|/sigma = {dmt/st:.1f} sigma")
+assert abs((mt_pred-m_ta)/s_ta) < 0.6   # PDG 2024: ~+0.43 sigma (PDG 2022: ~+0.9)
 
 print("\n"+"="*74)
 print("J) ALPHA AUS DEN LEPTONMASSEN (Dok 011: alpha^-1 = 7500/E0^2 * K_frak)")
@@ -257,17 +269,19 @@ raws={"mu/e":((12/5)*xi**-0.5, m_mu/m_e, 1),
       "tau/e":((25/12)*xi**(-5/6), m_ta/m_e, 3)}
 # gemeinsames N0 (Mittel der Einzelschaetzungen)
 N0=np.mean([(1-meas/raw)/(g*xi) for raw,meas,g in raws.values()])
+ksig={}
 print(f"   gemeinsames N0 = {N0:.3f}")
 print(f"   {'Stelle':8s} {'roh %':>9s} {'roh sig':>10s} {'korr %':>10s} {'korr sig':>10s}")
 for lbl,(raw,meas,g) in raws.items():
     dr=raw/meas-1
     corr=raw*(1-g*N0*xi)
     dc=corr/meas-1
+    ksig[lbl]=abs(dc)/sr[lbl]
     print(f"   {lbl:8s} {100*dr:+8.3f} {abs(dr)/sr[lbl]:10.1e} {100*dc:+9.4f} {abs(dc)/sr[lbl]:10.1e}")
-print("   -> tau/mu, tau/e fallen IN die Toleranz (<1 sigma); mu/e bleibt bei")
-print("      ~1.5e3 sigma, weil es 500x praeziser gemessen ist. ABER (P42):")
+print(f"   -> tau/mu, tau/e fallen auf ~1 sigma ({ksig['tau/mu']:.2f} bzw. {ksig['tau/e']:.2f}); mu/e bleibt bei")
+print(f"      ~{ksig['mu/e']:.1e} sigma, weil es 500x praeziser gemessen ist. ABER (P42):")
 print("      mu/e ist im referenzierten Modus der ANKER -> faellt aus der Bilanz,")
-print("      die 1500 sigma sind nur im referenzfreien Modus ueberhaupt eine Aussage.")
+print("      diese sigma-Zahl ist nur im referenzfreien Modus ueberhaupt eine Aussage.")
 print()
 print("   Zirkulant vs Leiter fuer mu/e (verschiedene Schichten, nicht mischen):")
 k=np.arange(3); sth=1+np.sqrt(2)*np.cos(2/9+2*np.pi*k/3); mth=sth**2
@@ -277,4 +291,4 @@ print(f"     -> Zirkulant traegt die Praezision (1e-5), Leiter die Groessenordnu
 print()
 print("   FAZIT Toleranz: referenziert steht eine scharfe Pruefung (m_tau, Zirkulant);")
 print("   referenzfrei bringt N_g die Leiter von ~1% auf ~5e-3% (Faktor ~300), tau-")
-print("   Stellen in Toleranz, Rest sitzt in der 1:2:3-Feinabweichung (~1-2%) und N0.")
+print("   Stellen bei ~1 sigma, Rest sitzt in der 1:2:3-Feinabweichung (~1-2%) und N0.")

@@ -1,3 +1,12 @@
+\begin{tcolorbox}[colback=red!3!white,colframe=red!50!black,boxrule=0.8pt,title={Korrekturhinweise},fonttitle=\bfseries]
+\textbf{Korrekturen aus der Rechenprüfung (30.~Sept.~2026).} Die folgenden Stellen sind im Text korrigiert bzw. vermerkt; jede trägt dort einen datierten Hinweis mit dem vorherigen Wert:
+\begin{itemize}
+\item Exakte Lösung für $\xi > 0$: \enquote{Oszillationen (dämpfend)} $\to$ ungedämpfte Oszillationen $\cos/\sin(\sqrt{\xi}\,t)$.
+\item Non-perturbatives $z$ aus dem abgedruckten Code: $1{,}457\times10^{-27} \to 1{,}056\times10^{-2}$ ($= \sqrt{\xi}\sin(100\sqrt{\xi})$).
+\item Standardabweichung $0{,}00$ \enquote{perfekte Unabhängigkeit}: vermerkt -- der Code setzt für alle Frequenzen denselben Wert ein, die Frequenz geht nicht in die Rechnung ein; kein Test der Frequenzunabhängigkeit.
+\end{itemize}
+\end{tcolorbox}
+
 \section*{Abstract}
 		Dieses Dokument präsentiert eine ausführliche Nachrechnung und Erklärung der Frequenzunabhängigkeit der Rotverschiebung in der T0-Theorie. Durch non-perturbative Methoden und numerische Integration der Feldgleichungen wird demonstriert, dass die scheinbare frequenzabhängigkeit in perturbativen Rechnungen ein Artefakt der Approximationsmethode ist. Die theoretisch vorhergesagte Unabhängigkeit wird robust bestätigt, was T0 konsistent für kosmologische Modelle macht.
 
@@ -34,7 +43,7 @@
 	\begin{itemize}
 		\item Gleichung: $\frac{d^2 E}{dt^2} + \xi E = 0$ (räumlich homogen, für oszillierende Modi).
 		\item Lösung: $ E(t) = C_1 e^{-t \sqrt{-\xi}} + C_2 e^{t \sqrt{-\xi}} $.
-		\item Für realen $\xi >0$: Oszillationen (dämpfend), $z = \int \delta E  dt$ -- konstant über $\nu$, da Modi entkoppelt.
+		\item Für realen $\xi >0$: Oszillationen (ungedämpft) \textit{(Korrigiert am 30.~Sept.~2026: vorher \enquote{dämpfend} -- $E'' + \xi E = 0$ hat für $\xi > 0$ die Lösungen $\cos(\sqrt{\xi}\,t)$ und $\sin(\sqrt{\xi}\,t)$ mit konstanter Amplitude; die angegebene Exponentialform mit $\sqrt{-\xi}$ ist dieselbe Lösung in komplexer Schreibweise.)}, $z = \int \delta E  dt$ -- konstant über $\nu$, da Modi entkoppelt.
 	\end{itemize}
 	
 	\textbf{Bedeutung}: Non-perturbativ ist $E(t)$ exakt exponentiell/oszillierend, $z$ als Phasenintegral unabhängig von $\nu$ (keine Kopplung in exakter Lösung).
@@ -89,9 +98,11 @@
 	\begin{itemize}
 		\item Exakte non-perturbative Lösung:  
 		$E(t) = C_1 e^{-t\sqrt{-\xi}} + C_2 e^{t\sqrt{-\xi}}$
-		\item Non-perturbatives z: $1.457 \times 10^{-27}$ (konstant)
-		\item z für verschiedene Frequenzen: $[1.457\times 10^{-27}, 1.457\times 10^{-27}, 1.457\times 10^{-27}]$
+		\item Non-perturbatives z: $1.056 \times 10^{-2}$ (konstant)
+		\item z für verschiedene Frequenzen: $[1.056\times 10^{-2}, 1.056\times 10^{-2}, 1.056\times 10^{-2}]$
+		\textit{(Korrigiert am 30.~Sept.~2026: vorher $1{,}457\times10^{-27}$ -- der abgedruckte Code mit $E(0)=1$, $\dot E(0)=0$, $t\in[0,100]$ liefert $\xi\int_0^{100}\cos(\sqrt{\xi}\,t)\,dt = \sqrt{\xi}\,\sin(100\sqrt{\xi}) = 1{,}056\times10^{-2}$, numerisch mit odeint/Trapezregel bestätigt.)}
 		\item Standardabweichung: $0.00$ (perfekte Unabhängigkeit)
+		\textit{(Vermerk vom 30.~Sept.~2026: Der Code setzt \texttt{z\_per\_frequency = np.full\_like(frequencies, z)}; die Frequenz geht in keine Rechnung ein, die Standardabweichung $0$ ist daher durch die Konstruktion vorgegeben und kein Test der Frequenzunabhängigkeit. Das gilt ebenso für die Aussage unten, die numerische Integration bestätige die Konstanz bei extremen Frequenzvariationen.)}
 	\end{itemize}
 	
 	\textbf{Erklärung der Non-Perturbativen Rechnung:}

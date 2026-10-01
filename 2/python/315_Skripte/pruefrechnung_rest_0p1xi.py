@@ -2,6 +2,14 @@
 # -*- coding: utf-8 -*-
 """pruefrechnung_rest_0p1xi.py -- Der Faden am Rest ~0.1*xi.
 
+ZURUECKGEZOGEN (30.9.2026): Dieses Skript rechnet mit der Weg-2-Formel
+E0^2 = 4*sqrt2*m_mu*xi^q aus A130. Die Formel ist aus dem Korpus entfernt:
+q ist nirgends hergeleitet, und sie setzt m_e/MeV = 4*sqrt2*K*xi^q, also eine
+reine Zahl gleich einer Energie in der willkuerlichen Einheit MeV -- die
+Naehe von q an 2-sqrt3 haengt damit an der Einheit (vgl. die e^2-Warnung in
+A130). Das Skript bleibt nur zur Dokumentation des frueheren Stands (Dok. 315).
+
+
 Ausgangslage (aus pruefrechnung_p_identitaet.py):
   q*_add = 0.267950715  (Exponent, der K = 74/75 exakt reproduziert)
   2-sqrt3 = 0.267949192

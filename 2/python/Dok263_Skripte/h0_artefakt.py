@@ -12,11 +12,23 @@ import numpy as np
 # Hubble-ENERGIE E_H und dann via hbar*c (SI-Faktor) zur Laenge R_H. In nat.
 # Einheiten sind Laenge und Energie dual; der Fehler der naiven Form ist die
 # Skalenwahl (L_0 statt R_H), nicht die Energie-Laengen-Dualitaet.
+#
+# Aktualisiert am 1.10.2026: E0-Formel korrigiert (sqrt(m_e m_mu) = 7.348 MeV;
+# der Korpuswert 7.398 MeV ist sqrt(m_e m_mu / K_frak)), E0 wird jetzt daraus
+# berechnet und geprueft; Vorbehaltsatz "-1.9 % starkes Konsistenzargument"
+# durch die R137/P39-Einstufung ersetzt (H0 aus xi nicht gedeckt, ueber den
+# Exponenten 41/4 kalibriert, nicht hergeleitet) (vgl. Dok. 263 bzw. Dok. 190,
+# R72/R137).
 # ============================================================================
 
 # --- FFGFT-Grundgroessen (alle aus Dok 182) ---
 xi   = 4/30000.0
-E0   = 7.398e6          # eV = sqrt(m_e * m_mu)  (charakteristische T0-Energie)
+m_e  = 0.51099895e6     # eV
+m_mu = 105.6583755e6    # eV
+K_frak = 1 - 100*xi     # = 74/75 (Dok 133)
+E0_nackt = np.sqrt(m_e*m_mu)            # = 7.348 MeV
+E0   = np.sqrt(m_e*m_mu/K_frak)         # = 7.398 MeV (charakteristische T0-Energie)
+assert abs(E0_nackt/1e6 - 7.348) < 0.001 and abs(E0/1e6 - 7.398) < 0.001
 exp_H= 41/4             # Exponent -- laut Dok 182/026 NOCH NICHT voll hergeleitet
 hbar = 6.582e-16        # eV*s
 c    = 2.998e8          # m/s
@@ -27,7 +39,7 @@ print("="*70)
 print("H_0 als Artefakt der fraktalen Wegverlaengerung (Dok 026/182)")
 print("="*70)
 print(f"xi = {xi:.6e}")
-print(f"E0 = sqrt(m_e*m_mu) = {E0/1e6:.3f} MeV\n")
+print(f"E0 = sqrt(m_e*m_mu/K_frak) = {E0/1e6:.3f} MeV   (sqrt(m_e*m_mu) = {E0_nackt/1e6:.3f} MeV)\n")
 
 # --- Hubble-Energie und H_0 ---
 E_H = E0 * xi**exp_H
@@ -75,7 +87,7 @@ L0 = xi * lP        # = xi*lP  (Dok 182), NICHT lP/xi
 hbarc_eVm = 1.973e-7   # eV*m  (SI-Umrechnungsfaktor hbar*c)
 print(f"   L_0 = xi*lP = {L0:.3e} m   (Sub-Planck-Granulierung)")
 print(f"   R_H = hbar c/E_H = {hbar*c/E_H:.3e} m   (kosmologische Skala)")
-print(f"   R_H/L0 = {(hbar*c/E_H)/L0:.3e}   (folgt allein aus xi)")
+print(f"   R_H/L0 = {(hbar*c/E_H)/L0:.3e}   (aus xi, E0 und dem gesetzten Exponenten 41/4)")
 print("""   Der Fehler ist NICHT 'Energie vs. Laenge': in nat. Einheiten
    (hbar=c=1) sind beide dual, der Uebergang zu SI-Metern ist genau der
    Faktor hbar*c = 1.973e-7 eV*m. Der Fehler ist die SKALENWAHL -- die
@@ -86,10 +98,10 @@ print("""   Der Fehler ist NICHT 'Energie vs. Laenge': in nat. Einheiten
    die Laengen-Darstellung (R_H) ueberfuehrt.""")
 
 print("\n" + "="*70)
-print("EHRLICHER VORBEHALT (Dok 182/026 markieren das selbst):")
-print("  Der Exponent 41/4 folgt laut Korpus aus der RG-/Skalenfluss-Struktur")
-print("  des xi-Feldes ueber kosmologische Skalen, ist aber NOCH NICHT voll")
-print("  aus der xi-Feldtheorie hergeleitet. Die -1.9%-Uebereinstimmung ist")
-print("  ein starkes Konsistenzargument, KEINE abgeschlossene Ableitung.")
+print("EHRLICHER VORBEHALT (Dok 182/026; Einstufung R137 iii, P16, P39):")
+print("  Der Exponent 41/4 ist NICHT aus der xi-Feldtheorie hergeleitet (offen).")
+print("  H_0 folgt damit NICHT aus xi; die Skala ist ueber 41/4 kalibriert, nicht")
+print("  hergeleitet. Die Naehe zum Messwert ist daher kein Konsistenzargument.")
+print("  Der kosmische Sektor (H_0/Lambda) bleibt bewusst ausgeklammert (P39).")
 print("  -> H_0^T0 ist Reduktionsschicht, nicht Kern-Ergebnis.")
 print("="*70)

@@ -7,7 +7,13 @@ Aussage: T2(Exziton CdSe-QD) ~ 10 ps
 Differenz: 9 Größenordnungen.
 FFGFT: xi_Higgs ≈ 1.038e-5; zwei Hierarchiestufen = xi_Higgs^2
 log10(xi_Higgs^(-2)) = 2 * log10(1/xi_Higgs) = 2 * 4.984 = 9.97 GO
-Übereinstimmung mit beobachteten 9 GO: [K]
+Übereinstimmung mit beobachteten 9 GO: nur [S] -- xi_Higgs ist als datengetrieben
+ausgewählt zurückgezogen (R61); im QM-Sektor gibt es derzeit keine mit heutiger
+Hardware prüfbare FFGFT-Abweichung (R142). [S] = Hypothese, kein Beleg.
+
+Aktualisiert am 1.10.2026: Statusmarker der GO-Übereinstimmung und der Schlusszeile
+[K] -> [S], Hinweis "xi_Higgs zurückgezogen (R61)" ergänzt; Rechnung unverändert
+(vgl. QMB_n10 bzw. Dok. 190, R61, R142).
 """
 
 import numpy as np
@@ -27,14 +33,14 @@ print(f"xi_Higgs          = {xi_Higgs:.3e}")
 print(f"T2 Exziton        = {T2_exziton:.1e} s  (10 ps)")
 print(f"T2 Spin-Si        = {T2_spin_si:.1e} s  (10 ms)")
 print(f"Gemessene GO      = {GO_gemessen:.2f}")
-print(f"FFGFT-Vorhersage  = {GO_ffgft:.4f}  (2 * log10(1/xi_Higgs))")
+print(f"FFGFT-Wert [S]    = {GO_ffgft:.4f}  (2 * log10(1/xi_Higgs); xi_Higgs zurückgezogen, R61)")
 
 errors = 0
 toleranz = 1.5   # ±1.5 Größenordnungen (Buch: "übereinstimmend")
 
 delta = abs(GO_ffgft - GO_gemessen)
 if delta < toleranz:
-    print(f"\n[K] Abweichung = {delta:.3f} GO < {toleranz} GO  OK")
+    print(f"\n[S] Abweichung = {delta:.3f} GO < {toleranz} GO  OK (numerische Nähe; xi_Higgs zurückgezogen, R61)")
 else:
     print(f"\nFEHLER: Abweichung = {delta:.3f} GO >= {toleranz} GO")
     errors += 1
@@ -58,6 +64,6 @@ for name, T1, T2, mech in systeme:
 
 print("\n" + "=" * 60)
 if errors == 0:
-    print("Alle Checks bestanden [K]")
+    print("Alle Checks bestanden (GO-Aussage [S]: xi_Higgs zurückgezogen, R61; R142)")
 else:
     print(f"{errors} FEHLER")

@@ -5,7 +5,7 @@ VERIFIKATION z_* — unabhaengige Nachrechnung der eingereichten Skripte
 ================================================================================
 
 Prueft die Behauptung z_* ~ 1103 aus ffgft_z_star_sigma_from_xi.py und der
-DeepSeek/Gemini-Dokumentation.
+zugehoerigen externen Dokumentation.
 
 Methode: Jeder Schritt einzeln, keine Uebernahme der Skript-Ergebnisse.
 Nur SI-CODATA-Konstanten + xi = 1/7500.
@@ -13,6 +13,9 @@ Nur SI-CODATA-Konstanten + xi = 1/7500.
 Ergebnis (Vorwegnahme): z_* = 875 mit konsistenter Geometrie.
 Der Wert 1103 erfordert einen frei gewaehlten Exponenten 8.55, der NICHT
 aus xi folgt.
+
+Aktualisiert am 1.10.2026: Nennung anderer KI-Systeme neutral ersetzt
+("externe Dokumentation"); Rechnung unveraendert (vgl. Dok. 267/268).
 ================================================================================
 """
 import math
@@ -75,9 +78,9 @@ for name, m_eV in [("gemessen", m_e_gemessen), ("FFGFT", m_e_ffgft)]:
     print(f"    Aufloesung B (1+z=ratio^(1/ln))   : z_* = {z_B:.1f}")
     print()
 
-# --- Was die DeepSeek-Doku rechnet: Exponent 8.55 statt ln(1/xi) ---
+# --- Was die externe Doku rechnet: Exponent 8.55 statt ln(1/xi) ---
 print("="*72)
-print("Was die DeepSeek/Gemini-Dokumentation behauptet (z_* = 1103):")
+print("Was die externe Dokumentation behauptet (z_* = 1103):")
 print("="*72)
 lam = lambda_compton(m_e_gemessen)
 ratio = lam / L0

@@ -15,6 +15,12 @@ ZUORDNUNGSREGEL (aus A040 [B] + Dok. 311 eingerollt/ausgerollt):
            (dimensionslos, ebenengleich)
 
 Kontrolltest: chi_rec/eta_0 muss unveraendert bleiben.
+
+Aktualisiert am 1.10.2026: Abschnitt 9 -- Label 'A130 Weg 2: 7.398' durch
+sqrt(alpha/xi) = 7.398 ersetzt; der Vergleich legt K_frak ueber alpha fest und ist
+keine alpha-freie/unabhaengige Bestimmung (geprueft). Abschnitt 7 -- 'allein aus xi',
+'hergeleitet', 'KEIN ZIRKEL' auf einheitenabhaengige T_0-Relation abgeschwaecht
+(vgl. Dok. 313 bzw. Dok. 190, R135/R137).
 """
 
 import numpy as np
@@ -169,16 +175,17 @@ print("Nullresultaten, ABER die Matched-Circle-Signatur entfaellt.")
 print("Verbleibende Pruefsignatur: C-nu-B/GW-Nichtmonotonie am Antipoden.")
 
 # ---------------------------------------------------------------
-# 7. DIE KETTE: Omega_m allein aus xi (zirkelfrei)
+# 7. DIE KETTE: Omega_m mit einheitenabhaengiger T_0-Relation (R137)
 # ---------------------------------------------------------------
 print("\n" + "="*62)
-print("7. DIE KETTE: Omega_m ALLEIN AUS XI")
+print("7. DIE KETTE: Omega_m MIT EINHEITENABHAENGIGER T_0-RELATION (R137)")
 print("="*62)
 KB=1.380649e-23; E_C=1.602176634e-19
 h_=H0*3.0856775814913673e22/1e5
 T0_theo=(16/9)*XI*E_C/KB
 print(f"(1) H_0 = (pi/2) c xi^10/lambda_e      -> h = {h_:.4f}")
 print(f"(2) k_B T_0 = (16/9) xi [eV] (Dok 061) -> T_0 = {T0_theo:.4f} K")
+print("    (einheitenabhaengige Uebereinstimmung ueber das eV, keine Herleitung; R137)")
 print(f"    gemessen 2.7255 K -> +{(T0_theo/2.7255-1)*100:.2f} %")
 Or_t=4.15e-5*(T0_theo/2.7255)**4/h_**2
 Or_m=4.15e-5/h_**2
@@ -197,13 +204,15 @@ def _solve(Orr):
     return 0.5*(lo+hi)
 Om_t=_solve(Or_t); Om_m=_solve(Or_m)
 print(f"(5) Integral dz/E = pi/K = {pi/K:.4f}")
-print(f"    -> Omega_m* = {Om_t:.4f}  (mit hergeleitetem T_0)")
+print(f"    -> Omega_m* = {Om_t:.4f}  (mit T_0 aus (16/9) xi [eV])")
 print(f"    -> Omega_m* = {Om_m:.4f}  (mit gemessenem T_0)")
 print(f"    Planck 0.315+-0.007: {(Om_t-0.315)/0.007:+.2f} sigma bzw. "
       f"{(Om_m-0.315)/0.007:+.2f} sigma")
 print(f"    T_0-Fehler von 0.92 % schlaegt mit {abs(Om_t-Om_m):.4f} durch")
-print("KEIN ZIRKEL: T_0 stammt aus der Atomskala (061), nicht aus")
-print("der Kosmologie. Kein Schritt enthaelt einen Omega_m-Fit.")
+print("Einstufung (R137): die T_0-Relation (16/9) xi [eV] ist eine einheiten-")
+print("abhaengige Uebereinstimmung, keine Herleitung; Omega_m folgt damit nicht")
+print("allein aus xi. Kein Schritt enthaelt einen Omega_m-Fit.")
+assert abs(Om_t-Om_m) < 0.01   # T_0-Relation vs. gemessenes T_0 nur Nebeneffekt
 print("Konventionell bleiben: eV (Schritt 2), E(z)-Form (Schritt 5),")
 print("lambda_e als Kammerton (Schritt 1).")
 
@@ -257,6 +266,11 @@ print("\nE_0-Wege: nackt vs. fraktal korrigiert")
 import math
 E1=math.sqrt(ME*MMU)
 print(f"   sqrt(m_e m_mu)      = {E1:.5f} MeV")
-print(f"   /sqrt(K_frak)       = {E1/math.sqrt(K):.5f} MeV  (A130 Weg 2: 7.398)")
+ALPHA=7.2973525693e-3
+E0A=math.sqrt(ALPHA/XI)
+print(f"   /sqrt(K_frak)       = {E1/math.sqrt(K):.5f} MeV  (sqrt(alpha/xi) = {E0A:.3f})")
 print(f"   -> K aus beiden: {(E1/E0M)**2:.6f}, n = {(1-(E1/E0M)**2)/XI:.2f}")
-print("   dritte unabhaengige K_frak-Bestimmung, im R67-Intervall.")
+print("   K_frak aus dem Vergleich mit alpha (R135), keine alpha-freie Bestimmung:")
+print(f"   (E1/sqrt(alpha/xi))^2 = xi m_e m_mu/alpha = {XI*ME*MMU/ALPHA:.6f}")
+assert abs(E0A-E0M) < 5e-4 and abs((E1/E0A)**2 - XI*ME*MMU/ALPHA) < 1e-12
+assert abs((E1/E0A)**2 - (1-100*XI)) < 2e-4

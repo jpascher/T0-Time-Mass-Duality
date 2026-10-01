@@ -8,8 +8,9 @@ Die Laengenskala im CMB-Messprozess: was wirklich gemessen wird
 Gehoert zu Dok. 267 (Kosmologische Entartung), Abschnitt
 "Absolute Skala: R_H aus xi".
 
-Die Frage: Die Peak-VERHAELTNISSE folgen aus der T4-Geometrie (kein
-freier Parameter). Die absolute POSITION ell_1 ~ 220 braucht eine
+Die Frage: Die Peak-VERHAELTNISSE werden in Dok. 268 mit der T4-Geometrie
+verglichen (Retrodiktion: Faktor 3 gesetzt, Peak-Selektion offen, R139).
+Die absolute POSITION ell_1 ~ 220 braucht eine
 Laengenskala. Was wird im Messprozess eigentlich festgelegt -- und
 was bleibt extern (P20)?
 
@@ -19,6 +20,13 @@ nicht H0 allein. Das Isolieren von H0 (bzw. R_H) braucht eine
 extern festgelegte Laenge -- den externen Parameter P20.
 
 Nur SI-CODATA-Konstanten + xi = 1/7500.
+
+Aktualisiert am 1.10.2026: TEIL 1 und Befund 1 auf "R_H/H0 ueber den Exponenten
+41/4 kalibriert, nicht aus xi hergeleitet" (P20/P39, R137 iii) umgestellt;
+E0-Formel korrigiert auf sqrt(m_e m_mu / K_frak) (R72/R135); Befund 3 und Kopf-
+text auf R139-Stand (Faktor 3 Setzung, Peak-Selektion offen, Verhaeltnisse
+keine parameterfreie Folge der T4-Geometrie) (vgl. Dok. 267/268 bzw. Dok. 190,
+R137/R139).
 ================================================================================
 """
 import math
@@ -44,22 +52,31 @@ print("="*72)
 print("Die Laengenskala im CMB-Messprozess")
 print("="*72)
 print(f"xi = 1/7500 = {xi:.6e}")
-print(f"H0 = {H0_kms_Mpc} km/s/Mpc (FFGFT, aus xi via Exponent 41/4)")
+print(f"H0 = {H0_kms_Mpc} km/s/Mpc (FFGFT-Referenz, kalibriert ueber Exponent 41/4)")
 print(f"R_H = c/H0 = {R_H/Mpc:.0f} Mpc = {R_H:.3e} m")
 print()
 
 # ---------------------------------------------------------------------------
 # TEIL 1: R_H aus xi -- die FFGFT-interne Skala (Dok. 182)
 # ---------------------------------------------------------------------------
-print("TEIL 1: R_H aus xi (Dok. 182) -- kein freier Parameter")
+print("TEIL 1: R_H kalibriert ueber 41/4 (Dok. 182; P20/P39) -- nicht aus xi hergeleitet")
 print("-"*72)
-print("  xi -> E_0 = sqrt(m_e m_mu) -> E_H = E_0 xi^(41/4) -> R_H = hbar c/E_H")
+print("  xi -> E_0 = sqrt(m_e m_mu / K_frak) -> E_H = E_0 xi^(41/4) -> R_H = hbar c/E_H")
+# Kontrolle der Kette (E0 mit K_frak, R72/R135)
+m_e_eV, m_mu_eV = 0.51099895e6, 105.6583755e6
+K_frak = 1 - 100*xi
+E_0 = math.sqrt(m_e_eV*m_mu_eV/K_frak)
+E_H = E_0 * xi**(41/4)
+H0_kette = E_H*eV/hbar * Mpc/1000
+print(f"  Kontrolle: E_0 = {E_0/1e6:.3f} MeV, E_H = {E_H:.4e} eV, H0 = {H0_kette:.2f} km/s/Mpc")
+assert abs(E_0/1e6 - 7.398) < 0.001 and abs(H0_kette - H0_kms_Mpc) < 0.05
 print(f"  Ergebnis: R_H = {R_H/Mpc:.0f} Mpc, H0 = {H0_kms_Mpc} km/s/Mpc")
 print("  R_H ist zugleich der Schwarzschild-Radius der Gesamtmasse M_U")
 print("  des statischen Universums (interne Konsistenz, Dok. 190 P4).")
 print()
 print("  ABER: der Exponent 41/4 ist NICHT aus der T4-Geometrie")
-print("        hergeleitet (P20). Das ist die eine externe Eingabe.")
+print("        hergeleitet (P20). H0 bzw. R_H folgen daher NICHT aus xi,")
+print("        sondern sind kalibriert (R137 iii, P39).")
 print()
 
 # ---------------------------------------------------------------------------
@@ -115,9 +132,9 @@ print("="*72)
 print("BEFUND")
 print("="*72)
 print(f"""
-1. R_H ist in FFGFT aus xi bestimmt (R_H = {R_H/Mpc:.0f} Mpc, H0 = {H0_kms_Mpc}),
-   aber ueber den Exponenten 41/4, der selbst nicht aus der T4-Geometrie
-   folgt (P20). Das ist die eine externe Eingabe.
+1. R_H ist in FFGFT ueber den Exponenten 41/4 kalibriert (R_H = {R_H/Mpc:.0f} Mpc,
+   H0 = {H0_kms_Mpc}), nicht aus xi hergeleitet: 41/4 folgt nicht aus der
+   T4-Geometrie (P20/P39, R137 iii). Das ist die eine externe Eingabe.
 
 2. Der gemessene Grundton-Winkel theta_1 = pi/A ~ {theta_1_deg:.2f} Grad legt nur
    das Produkt H0*L_res = {prod/1000:.0f} km/s fest -- nicht H0 und nicht L_res
@@ -125,9 +142,10 @@ print(f"""
 
 3. Um H0 (bzw. R_H) zu isolieren, muss eine absolute Laenge extern
    gesetzt werden. Das ist der externe Parameter P20. Die Peak-
-   VERHAELTNISSE bleiben davon unberuehrt -- sie folgen aus der
-   T4-Geometrie ohne jeden freien Parameter.
+   VERHAELTNISSE bleiben davon unberuehrt; ihr Vergleich mit der
+   T4-Geometrie ist eine Retrodiktion -- der Faktor 3 ist eine Setzung,
+   die Peak-Selektion ist offen (R139 i).
 
-Bezug: Dok. 267 (kosmologische Entartung), Dok. 182 (R_H aus xi),
+Bezug: Dok. 267 (kosmologische Entartung), Dok. 182 (R_H ueber 41/4),
        Dok. 190 (P20 absolute Skala als externe Eingabe).
 """)

@@ -4,7 +4,20 @@ calc-resonanz-leiter.py
 T0 / FFGFT  –  Vollständige Resonanz-Leiter aller bekannten Teilchen
 Basierend auf Dok. 006, 186 (Korrektur K2)
 
-Geminis Idee (Fraction-Arithmetik) wird hier konsequent umgesetzt:
+Aktualisiert am 1.10.2026: Tabelle als illustrativ gekennzeichnet (r_i/p_i sind
+Setzungen bzw. an Messwerte angepasst, Charm-/Top-Exponenten folgen nicht aus der
+Regel; Übereinstimmungen sind keine Belege), Fazit "konsistent ... 1-4%" ersetzt,
+Neutrino-Werte als reine Rechenwerte gekennzeichnet (keine Messung), Kopfzeile
+"Δp = 1/3" korrigiert (p = 1/2 liegt nicht im 1/3-Raster), Nennung einer anderen
+KI neutral ersetzt (vgl. Dok. 189 bzw. Dok. 190, R138).
+
+Hinweis (R138): Die Präzisionstabelle unten ist eine Illustration der Leiter-
+Struktur, kein Beleg. Die r_i und p_i sind Setzungen (P6, P9), teilweise an die
+Messwerte angepasst; die Abweichungen in der Spalte "Abw.%" sind daher keine
+Vorhersagegüte. Gültig bleibt nur die Leiter als Struktur mit einem deklarierten
+Referenzpunkt (P42).
+
+Ein Vorschlag aus externer Prüfung (Fraction-Arithmetik) wird hier umgesetzt:
   - Alle r-Vorfaktoren als exakte Brüche
   - Alle p-Exponenten als exakte Brüche
   - Masse = r * xi^p * v  (Yukawa-Formel)
@@ -42,7 +55,8 @@ def main():
 
     # ------------------------------------------------------------------
     # Alle Teilchen: (Name, r als Fraction, p als Fraction, Exp.[eV])
-    # Exponenten p-Struktur: Schrittweite 1/3  (3 Raumdimensionen)
+    # Exponenten p: Setzungen; kein einheitliches 1/3-Raster (p = 1/2 bei Bottom,
+    # Charm-/Top-Exponent nicht aus der Regel, R138)
     # ------------------------------------------------------------------
     teilchen = [
         # --- Leptonen ---
@@ -53,9 +67,10 @@ def main():
         # --- Neutrinos: p_eff = p_lepton + 2 (doppelte xi-Unterdrückung) ---
         # m_nu_i = r_i * xi^2 * m_e  =>  effektiv p = 3/2 + 2 - 3/2 = 2 auf m_e-Basis
         # Formel hier: m_nu_i = r_nu_i * xi^2 * m_e  separat
-        ("nu_e",       Fraction(1,  1),   None,            None,         "9.08 meV"),
-        ("nu_mu",      Fraction(16, 5),   None,            None,         "29.07 meV"),
-        ("nu_tau",     Fraction(25, 9),   None,            None,         "25.23 meV"),
+        # Spalte "m_Exp." enthält hier KEINEN Messwert, sondern den eigenen Rechenwert
+        ("nu_e",       Fraction(1,  1),   None,            None,         "Rechenwert"),
+        ("nu_mu",      Fraction(16, 5),   None,            None,         "Rechenwert"),
+        ("nu_tau",     Fraction(25, 9),   None,            None,         "Rechenwert"),
 
         # --- Quarks ---
         ("Up",         Fraction(6,  1),   Fraction(3, 2),  2200000,      "2.2 MeV"),
@@ -82,16 +97,18 @@ def main():
           f"{'m_T0 [eV]':<18} {'m_Exp.':<15} {'Abw.%'}")
     print("-" * 75)
 
+    abw_liste = []
     for name, r, p, m_exp_eV, m_exp_str in teilchen:
         if p is None:
             # Neutrino
             m_t0 = nu_massen[name]
             p_str = "xi²·m_e"
-            abw = ""
+            abw = "(keine Messung)"
         else:
             m_t0 = mass_eV(r, p, xi, float(v))
             p_str = str(p)
             if m_exp_eV:
+                abw_liste.append(abs((m_t0 - m_exp_eV) / m_exp_eV * 100))
                 abw = f"{(m_t0 - m_exp_eV) / m_exp_eV * 100:+.2f}%"
             else:
                 abw = "—"
@@ -118,7 +135,7 @@ def main():
     # Exponent-Struktur: zeige die p-Leiter
     # ------------------------------------------------------------------
     print(f"\n{'=' * 75}")
-    print("EXPONENT-STRUKTUR  (Schrittweite Δp = 1/3)")
+    print("EXPONENT-STRUKTUR  (gesetzte p-Werte; Schritte 1/3 bzw. 1/2, kein einheitliches Raster)")
     print("-" * 75)
     print(f"{'p-Wert':<12} {'Dezimal':<12} {'Teilchen'}")
     print("-" * 75)
@@ -136,7 +153,7 @@ def main():
         print(f"{p_str:<12} {dez:<12} {', '.join(namen)}")
 
     # ------------------------------------------------------------------
-    # Geminis Stabilitäts-Check  (korrekt implementiert)
+    # Stabilitäts-Check  (Vorschlag aus externer Prüfung)
     # ------------------------------------------------------------------
     print(f"\n{'=' * 75}")
     print("STABILITÄTS-CHECK  (Verhältnisbasiert, Bruch-Arithmetik)")
@@ -159,13 +176,19 @@ def main():
     # ------------------------------------------------------------------
     # Zusammenfassung
     # ------------------------------------------------------------------
+    max_abw = max(abw_liste)
+    # Prüfung: Neutrino-Werte sind per Konstruktion r*xi^2*m_e (Identität, kein Messwert)
+    for nm, r_nu in [("nu_e", Fraction(1, 1)), ("nu_mu", Fraction(16, 5)), ("nu_tau", Fraction(25, 9))]:
+        assert abs(nu_massen[nm] - float(r_nu * xi * xi) * m_e_eV) < 1e-15
     print(f"\n{'=' * 75}")
     print("FAZIT")
     print(f"  xi = {xi}  =  {float(xi):.6e}")
     print(f"  Alle 12 Teilchen verwenden exakte r-Brüche.")
-    print(f"  Exponenten p: von -1/3 (Top) bis 3/2 (Elektron), Δp = 1/3")
-    print(f"  Neutrinos: eigene Klasse mit doppelter xi-Unterdrückung (xi^2·m_e)")
-    print(f"  Alle Massen konsistent mit PDG-Werten innerhalb ~1-4%")
+    print(f"  Exponenten p: von -1/3 (Top) bis 3/2 (Elektron), gesetzt (Schritte 1/3 bzw. 1/2)")
+    print(f"  Neutrinos: eigene Klasse mit doppelter xi-Unterdrückung (xi^2·m_e);")
+    print(f"    die Neutrino-Werte sind Rechenwerte, kein Messvergleich")
+    print(f"  Abweichungen zu PDG: max. |Abw.| = {max_abw:.2f}% -- illustrativ, kein Beleg:")
+    print(f"    r_i/p_i sind Setzungen bzw. an Messwerte angepasst (R138, P6, P9)")
     print("=" * 75)
 
 if __name__ == "__main__":

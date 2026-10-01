@@ -1,4 +1,9 @@
-"""A261 Prüfskript: Skalenhierarchie xi -> Massen -> E0 -> alpha."""
+"""A261 Prüfskript: Skalenhierarchie xi -> Massen -> E0 -> alpha.
+
+Aktualisiert am 1.10.2026: E0=7,398 MeV wird nicht mehr hart als "xi-Weg" gesetzt,
+sondern als E0_geom/sqrt(K_frak) berechnet (fraktal korrigiertes Mittel, A130 Weg 2);
+der fruehere xi-Weg ist entfernt (vgl. Dok. A261 bzw. Dok. 190, R72).
+"""
 import math
 
 xi = 4/30000
@@ -11,10 +16,11 @@ print("=== A261: Skalenhierarchie ===")
 # 1. E0 = sqrt(m_e * m_mu) — geometrisches Mittel
 E0_geom = math.sqrt(m_e * m_mu)
 print(f"E0 (geometr. Mittel) = sqrt({m_e}*{m_mu}) = {E0_geom:.4f} MeV")
-# E0 xi-Weg: 7.398 MeV (aus alpha-Bedingung)
-E0_xi = 7.398
-print(f"E0 (xi-Weg, A130)    = {E0_xi:.4f} MeV")
-print(f"Differenz: {abs(E0_geom-E0_xi)/E0_xi*100:.2f}% (durch K_frak erklärt)")
+# E0 fraktal korrigiert: E0_geom/sqrt(K_frak) (A130 Weg 2, R72)
+E0_xi = E0_geom / math.sqrt(K_frak)
+print(f"E0 (fraktal korrigiert, A130 Weg 2, R72) = E0_geom/sqrt(K_frak) = {E0_xi:.4f} MeV")
+assert abs(E0_xi - 7.398) < 0.001
+print(f"Differenz: {abs(E0_geom-E0_xi)/E0_xi*100:.2f}% (= 1/sqrt(K_frak), per Konstruktion)")
 
 # 2. alpha = xi * (E0/1MeV)^2
 alpha_berechnet = xi * E0_xi**2

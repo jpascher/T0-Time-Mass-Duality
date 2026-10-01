@@ -21,6 +21,15 @@ This is a methodological audit, not a fit.
 
 Reference (FFGFT): Doc. 190 standing caution -- H0, z, Omega are
 LCDM pipeline outputs, not model-neutral observables.
+
+Aktualisiert am 1.10.2026: FFGFT-Einstufungen auf den Stand R135-R138 gebracht --
+EXAMPLE 1: T_CMB = (16/9) xi ist eine einheitenabhaengige Uebereinstimmung (Zahl
+erst in eV), keine geometrische Vorhersage (R137 i; Pruefung ergaenzt);
+H0-Abschnitt: E0 = sqrt(m_e m_mu / K_frak) = 7.398 MeV (sqrt(m_e m_mu) = 7.348),
+H0 ueber den Exponenten 41/4 kalibriert, nicht hergeleitet (R137 iii, P39);
+Schlussvergleich: Casimir/CMB ist Identitaet (R136), alpha Eigenschaft des
+Ankers E0 (R135), Leiter-Praezision kein Beleg (R138); Nennung einer anderen KI
+neutral ersetzt (vgl. Dok. 268 bzw. Dok. 190, R135-R138).
 """
 
 import math
@@ -94,20 +103,23 @@ What requires LCDM:
   k_B (Boltzmann constant) -- that is pure SI, no model needed.
   BUT: interpreting T_CMB as the 'temperature of the universe today'
   requires assuming a homogeneous, isotropic FLRW background.
-  In a static universe (FFGFT), T_CMB is a geometric ratio, not
-  a dynamical temperature tied to an expansion history.
+  In a static universe (FFGFT), T_CMB is not a dynamical temperature
+  tied to an expansion history.
 
 Numbers:
   T_CMB (Planck 2018, LCDM extraction) = {2.72548:.5f} K
   T_CMB as eV                          = {T_CMB_raw_eV:.6e} eV
-  FFGFT first order: (16/9) xi         = {T_FFGFT:.6e}  (dimensionless)
+  FFGFT first order: (16/9) xi         = {T_FFGFT:.6e}  (pure number)
   Ratio T_CMB_eV / (16/9)xi            = {T_CMB_raw_eV/T_FFGFT:.4f}
   Difference                           = {diff_pct:+.3f} %
+  Same comparison in meV               : ratio = {T_CMB_raw_eV*1e3/T_FFGFT:.1f}
 
-The 0.9% difference is NOT a failure of FFGFT.
-It is the difference between a LCDM-pipeline output (2.72548 K)
-and a geometric FFGFT prediction. Both are model-dependent numbers.
-There is no model-neutral 'true' CMB temperature.""")
+Classification (Doc. 190, R137 i): (16/9) xi is a pure number that matches
+the measured value only when read in the energy unit eV (in meV the ratio is
+~1000). This is a UNIT-DEPENDENT agreement, not a geometric prediction; the
+coefficient has no geometric derivation and the question is OPEN. The 0.9 %
+difference therefore neither confirms nor refutes FFGFT.""")
+assert abs(T_CMB_raw_eV/T_FFGFT - 1) < 0.01 and abs(T_CMB_raw_eV*1e3/T_FFGFT - 1) > 100
 
 # ============================================================
 # EXAMPLE 2: r_s (BAO sound horizon)
@@ -199,7 +211,7 @@ What requires LCDM (or any model):
   Fitting LCDM to Pantheon+ tests whether LCDM is self-consistent,
   not whether LCDM describes nature independently.
 
-  The Gemini script's chi2_pantheon >> 50 for LCDM was not evidence
+  An earlier external test script's chi2_pantheon >> 50 for LCDM was not evidence
   against LCDM. It was evidence that M = 0.043 was wrong -- because
   the correct M ~ -19.3 is baked into the Pantheon+ data already.
   The script was chasing its own tail.""")
@@ -225,19 +237,17 @@ For LCDM vs. its own standard datasets:
   (Kelvin, Mpc, distance moduli) is model-dependent.
 
 What FFGFT can claim:
-  - The raw observables (z, CMB peak shape, BAO angle, brightness
-    ratios) are consistent with FFGFT geometry.
   - The converted numbers (2.72548 K, 147 Mpc, Omega values) are
     LCDM-pipeline outputs. Comparing FFGFT against them is comparing
     two different model outputs, not theory against raw nature.
-  - The ~1% differences between FFGFT predictions and LCDM-extracted
-    values are in the same range as the model-dependence of the
-    extraction itself -- they cannot be used to falsify FFGFT.
+  - The ~1% agreements quoted for FFGFT are NOT evidence either:
+    T_CMB is a unit-dependent agreement (R137 i), H0 is calibrated via
+    the exponent 41/4 (R137 iii, P39), Casimir/CMB is an identity (R136).
 
 Honest summary:
   LCDM 'fits' its own pipeline outputs: tautological, not a test.
-  FFGFT predictions agree with model-independent observables at ~1%:
-  a genuine, falsifiable result from a single parameter xi = {xi:.4e}.""")
+  The FFGFT cosmological numbers are likewise no independent confirmation;
+  the cosmic sector (H0/Lambda) is deliberately left out (P39).""")
 
 print("\n" + "=" * 70)
 print("HONEST LIMITS OF THIS ANALYSIS")
@@ -248,50 +258,55 @@ print("""
      The CMB blackbody shape, BAO peak angle, and SNe brightness
      ratios are real -- and LCDM does describe them coherently.
 
-  2. FFGFT's ~1% residuals are also not proven to lie within the
-     model-dependence of the extraction. A proper test would require
+  2. FFGFT's ~1% residuals are not tests at all (unit-dependent,
+     calibrated or identities; R136/R137). A proper test would require
      model-independent reductions of the raw data -- which do not
      yet exist for all datasets.
 
   3. The Hubble tension (67.4 vs 73.0 km/s/Mpc) is the strongest
      empirical signal that the LCDM pipeline is internally strained.
-     FFGFT's H0 ~ 66.2 km/s/Mpc aligns with the low (Planck) end --
-     but both are LCDM-pipeline numbers, not raw observables.
-     The honest statement: FFGFT predicts a value consistent with
-     the CMB-pipeline H0, which itself is under tension.""")
+     FFGFT's H0 ~ 66.2 km/s/Mpc lies near the low (Planck) end --
+     but it is calibrated via the exponent 41/4, not derived from xi
+     (R137 iii, P39), so this is no prediction.""")
 
 # ============================================================
 # FFGFT POSITIVE COUNTERPART: ratio derivation vs. number match
 # ============================================================
 print("\n" + "=" * 70)
-print("FFGFT COUNTERPART: why the ratio derivation is stronger")
+print("FFGFT COUNTERPART: the H0 chain and its status")
 print("=" * 70)
 
 H0_FFGFT = 66.19   # km/s/Mpc
 H0_Planck = 67.4
 H0_SH0ES  = 73.0
+m_e_MeV, m_mu_MeV = 0.51099895, 105.6583755
+K_frak = 1 - 100*xi
+E0_bare = math.sqrt(m_e_MeV*m_mu_MeV)          # 7.348 MeV
+E0_MeV  = math.sqrt(m_e_MeV*m_mu_MeV/K_frak)   # 7.398 MeV
+assert abs(E0_bare - 7.348) < 1e-3 and abs(E0_MeV - 7.398) < 1e-3
 
 print(f"""
 LCDM has H0 as a FREE PARAMETER -- fitted to data.
-FFGFT derives H0 from a single geometric chain (no free parameters):
+FFGFT writes H0 as a chain whose exponent 41/4 is NOT derived
+(calibrated, Doc. 190 R137 iii / P39):
 
   xi = 4/30000  (geometric, from T^4 packing, Doc. 009)
     |
     v
-  E0 = sqrt(m_e * m_mu) = 7.398 MeV  (geometric mean of lepton masses)
+  E0 = sqrt(m_e * m_mu / K_frak) = {E0_MeV:.3f} MeV
+       (sqrt(m_e m_mu) = {E0_bare:.3f} MeV; K_frak = 1 - 100 xi)
     |
     v  (xi defines the scale hierarchy)
-  E_H = E0 * xi^(41/4)  = 1.412e-33 eV  (Hubble energy scale)
+  E_H = E0 * xi^(41/4)  = 1.412e-33 eV  (exponent 41/4 set, not derived)
     |
     v  (SI conversion only: hbar is a unit factor)
   H0 = E_H / hbar  = {H0_FFGFT:.2f} km/s/Mpc
 
-The SI value {H0_FFGFT:.2f} km/s/Mpc is NOT what matters.
-What matters is the STRUCTURE: H0 follows from xi and two lepton
-masses. No Omega_m, no Omega_Lambda, no expansion history.
+The chain uses no Omega_m, no Omega_Lambda, no expansion history --
+but the exponent 41/4 is a calibration, so H0 does NOT follow from xi.
 
 LCDM:  H0 = free parameter  (fitted, 6+ free parameters total)
-FFGFT: H0 = f(xi, m_e, m_mu)  (derived, 0 free parameters)
+FFGFT: H0 = f(xi, m_e, m_mu; 41/4)  (calibrated via 41/4, not derived)
 
 Comparison:
   FFGFT H0     = {H0_FFGFT:.2f} km/s/Mpc
@@ -299,10 +314,11 @@ Comparison:
   SH0ES H0     = {H0_SH0ES:.1f} km/s/Mpc  (local ladder, less model-dependent)
   Difference FFGFT vs Planck = {100*(H0_FFGFT/H0_Planck-1):+.2f}%
   
-The {100*(H0_FFGFT/H0_Planck-1):+.2f}% is not a failure -- it is a comparison of
-two model outputs. The Hubble tension ({100*(H0_SH0ES/H0_Planck-1):+.1f}% between
-Planck and SH0ES) is larger than FFGFTs deviation from Planck.
-FFGFT is not obliged to match the LCDM pipeline output exactly.""")
+The {100*(H0_FFGFT/H0_Planck-1):+.2f}% is a comparison of two model outputs and,
+because 41/4 is calibrated, neither a success nor a failure of FFGFT.
+The Hubble tension ({100*(H0_SH0ES/H0_Planck-1):+.1f}% between Planck and SH0ES)
+is larger than this difference. The cosmic sector stays outside the
+FFGFT derivations (P39).""")
 
 # ============================================================
 # CONSEQUENCES FOR ONUR / UIFT
@@ -321,7 +337,7 @@ test -- for exactly the same reasons:
      physics is wrong, but because the extraction pipeline baked
      in w = -1 at every step.
 
-  2. The Gemini script demonstrated this: even for w = -1 (LCDM),
+  2. An earlier external test script demonstrated this: even for w = -1 (LCDM),
      the chi2 was catastrophically wrong (233,552 instead of ~60).
      Not because LCDM is wrong, but because the dataset conversions
      themselves assume LCDM internally. Any non-LCDM w value would
@@ -334,10 +350,10 @@ test -- for exactly the same reasons:
      These model-independent reductions do not yet exist for full datasets.
 
 The shared position of FFGFT and UIFT:
-  Both frameworks produce predictions that differ from LCDM-pipeline
-  outputs at the ~1% level. This is BELOW the level of model-dependence
-  in the extraction pipeline itself. Neither framework can be falsified
-  -- or confirmed -- by LCDM-extracted numbers.
+  Both frameworks produce numbers that differ from LCDM-pipeline
+  outputs at the ~1% level. Neither framework can be falsified -- or
+  confirmed -- by LCDM-extracted numbers. For FFGFT these numbers are in
+  addition calibrated (H0) or unit-dependent (T_CMB), not derived (R137).
 
   The honest common ground: both should identify and target genuinely
   model-independent observables. The WBE analysis (wbe_t4_flrw.py)
@@ -350,7 +366,8 @@ print("SUMMARY")
 print("=" * 70)
 print(f"""
   LCDM:  fits its own pipeline outputs -- tautological confirmation.
-  FFGFT: derives H0, T_CMB, Casimir/CMB from xi alone -- no free params.
+  FFGFT: H0 calibrated via 41/4 (R137 iii), T_CMB unit-dependent agreement
+         (R137 i), Casimir/CMB an identity (R136) -- none derived from xi alone.
   UIFT:  w = -3/4 from WBE/Landauer -- structural, not fitted.
 
   The right comparison is not chi2 against LCDM datasets.
@@ -359,7 +376,10 @@ print(f"""
     Which raw observables does each framework predict from first principles?
 
   LCDM:  6+ free parameters, fits pre-processed data.
-  FFGFT: 1 parameter (xi), derives H0/T_CMB/alpha/lepton masses.
+  FFGFT: 1 parameter (xi) plus one SI anchor (E0); alpha agreement is a
+         property of the anchor E0, not an independent prediction (R135);
+         lepton-ladder precision tables are no evidence (R138); H0/T_CMB
+         see above (R136/R137).
   UIFT:  w = -3/4 from WBE + Landauer (no fit to cosmological data).
 
-  xi = {xi:.6e}  -- everything follows from here.""")
+  xi = {xi:.6e}  -- structural setting; cosmic sector not derived (P39).""")

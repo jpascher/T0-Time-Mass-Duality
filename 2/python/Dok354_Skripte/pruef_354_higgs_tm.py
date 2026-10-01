@@ -3,6 +3,7 @@
 pruef_354_higgs_tm.py
 Prüfskript zu Dok. 354: H0 und T~*m=1 — Neun Erkenntnisse zur Higgs-Geometrie
 Johann Pascher, 7. September 2026
+Aktualisiert am 1.10.2026: E12 nennt die CODATA-Naehe von G nur noch bedingt (<0,01 % nur mit K_frak=0,986 bzw. ueber den C_conv-Rest, mit 74/75 +0,07 %) (vgl. Dok. 354 bzw. Dok. 190, R141).
 """
 import math
 
@@ -121,13 +122,15 @@ print(f"OK E11: T_Vakuum = 1/v = {T_vacuum:.6e} GeV^-1; H0 = Fluktuation um dies
 
 # ── E12: G nicht fundamental ─────────────────────────────────────────────────
 # G = xi^2 / (4 m_e) in FFGFT nat. Einheiten (Dok. 012, 180)
-# SI-Umrechnung mit C_dim, C_conv, K_frak ergibt < 0.01% Abweichung vom CODATA
+# SI-Umrechnung mit C_dim, C_conv, K_frak: < 0.01% vom CODATA nur mit K_frak=0,986;
+# mit K_frak=74/75 +0,07 %. Die CODATA-Naehe kommt ueber den Rest in C_conv und ist
+# kein eigener Praezisionsbeleg (R141). Geprueft wird hier nur die Form aus xi.
 # Algebraischer Test: G-Formel ist korrekt strukturiert
 assert xi > 0, "xi muss positiv sein"
 assert xi == 4/30000, "xi hat falschen Wert"
 # Symbolisch: G ist abgeleitet, nicht fundamental
 G_formula_correct = (xi**2 > 0) and (4 * m_e > 0)
 assert G_formula_correct, "G-Formel strukturell falsch"
-print(f"OK E12: G = xi^2/(4 m_e) emergent; xi = {xi:.6e}; Abw. CODATA < 0.01% [K]")
+print(f"OK E12: G = xi^2/(4 m_e), Form aus xi [K]; xi = {xi:.6e}; <0,01 % nur mit K_frak=0,986 bzw. ueber C_conv-Rest (R141), mit 74/75 +0,07 %")
 
-print("\n=== Dok. 354 Pruefskript: alle 12 Erkenntnisse bestaetigt ===")
+print("\n=== Dok. 354 Pruefskript: alle 12 Pruefungen bestanden (Einstufung je Marker) ===")

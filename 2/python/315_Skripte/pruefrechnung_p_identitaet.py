@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """pruefrechnung_p_identitaet.py -- Nachrechnung des offenen Teils aus der
+
+ZURUECKGEZOGEN (30.9.2026): Dieses Skript rechnet mit der Weg-2-Formel
+E0^2 = 4*sqrt2*m_mu*xi^q aus A130. Die Formel ist aus dem Korpus entfernt:
+q ist nirgends hergeleitet, und sie setzt m_e/MeV = 4*sqrt2*K*xi^q, also eine
+reine Zahl gleich einer Energie in der willkuerlichen Einheit MeV -- die
+Naehe von q an 2-sqrt3 haengt damit an der Einheit (vgl. die e^2-Warnung in
+A130). Das Skript bleibt nur zur Dokumentation des frueheren Stands (Dok. 315).
+
 K_frak-Formdiskriminierung: die Identitaet p = -(2-sqrt3).
 
 Ansatz aus A130 (Weg 2):   E0^2 = 4*sqrt(2) * m_mu * xi^q     (q = -p > 0)

@@ -12,7 +12,7 @@ from _bereich import identitaet, im_bereich
 
 XI = 4.0 / 30000.0
 ME, MMU = 0.51099895069, 105.6583755
-ALPHA_PDG = 1.0 / 137.035999084
+ALPHA_PDG = 1.0 / 137.035999177
 
 
 def alpha_von(E0):
@@ -88,36 +88,29 @@ def main():
                     137.036, faktor=1.02)
     ok = ok and g2
 
-    print("\nPRUEFUNG 2c  Weg 2 (geometrisch): E0^2 = 4*sqrt2*m_mu/xi^p, OHNE m_e")
-    pexp = -0.2679
-    E0_geo = math.sqrt(4 * math.sqrt(2) * MMU * XI ** (-pexp))
-    print("   E0 (Weg 2) = %.4f MeV  -> 1/alpha = %.4f  (%.1e vom Messwert)"
-          % (E0_geo, 1 / alpha_von(E0_geo),
-             abs(alpha_von(E0_geo) - ALPHA_PDG) / ALPHA_PDG))
-    print("   Weg 2 benutzt m_e NICHT und alpha NICHT -- keine Rueckrechnung.")
+    print("\nPRUEFUNG 2c  Weg 2: dasselbe Mittel MIT fraktaler Korrektur")
+    print("   (30.9.2026: die fruehere Formel E0^2 = 4*sqrt2*m_mu/xi^p mit hart")
+    print("   gesetztem p = -0.2679 ist entfernt -- p war an 7.398 angepasst.)")
     Kfrak = 1 - 100 * XI
-    print("   Verhaeltnis Weg2/Weg1 = %.5f  vs K_frak^(-1/2) = %.5f  (Diff %.1e)"
-          % (E0_geo / E0_mass, Kfrak ** -0.5, abs(E0_geo / E0_mass - Kfrak ** -0.5)))
-    g2c = im_bereich("Weg2/Weg1 == K_frak^(-1/2)", E0_geo / E0_mass, Kfrak ** -0.5,
-                     faktor=1.001)
-    g2d = im_bereich("Weg 2 trifft 1/137.036", 1 / alpha_von(E0_geo), 137.036,
-                     faktor=1.001)
-    ok = ok and g2c and g2d
-    print("   -> alpha ist UEBERBESTIMMT: zwei alpha-freie Wege treffen sich auf")
-    print("      ~8e-5, die Luecke ist exakt der abgeleitete K_frak. Kein Fit.")
+    E0_geo = E0_mass / math.sqrt(Kfrak)
+    print("   E0 (Weg 2) = sqrt(m_e m_mu / K_frak) = %.4f MeV -> 1/alpha = %.4f (%+.4f %%)"
+          % (E0_geo, 1 / alpha_von(E0_geo),
+             100 * (1 / alpha_von(E0_geo) - 1 / ALPHA_PDG) * ALPHA_PDG))
+    print("   K_frak = 1-100xi stammt aus xi (A040), nicht aus alpha.")
+    g2d = im_bereich("Weg 2 trifft 1/137.036 auf < 0.05 %", 1 / alpha_von(E0_geo),
+                     137.036, faktor=1.0005)
+    ok = ok and g2d
 
-    print("\nPRUEFUNG 2d  Die zwei Wege MESSEN K_frak (ohne ihn zu benutzen)")
-    Kfrak_gemessen = (E0_geo / E0_mass) ** (-2)
-    Kfrak_abgeleitet = 1 - 100 * XI
-    print("   K_frak = (Weg2/Weg1)^-2 = %.6f   (aus den Wegen gemessen)"
-          % Kfrak_gemessen)
-    print("   K_frak = 1-100xi = 74/75 = %.6f   (A040, RG-Lauf -- unabhaengig)"
-          % Kfrak_abgeleitet)
-    g2e = im_bereich("gemessenes K_frak == 74/75", Kfrak_gemessen, Kfrak_abgeleitet,
-                     faktor=1.001)
+    print("\nPRUEFUNG 2d  Der gemessene alpha-Wert legt K_frak fest")
+    Kfrak_verlangt = XI * ME * MMU / ALPHA_PDG
+    print("   K_frak verlangt = xi*m_e*m_mu/alpha = %.6f" % Kfrak_verlangt)
+    print("   K_frak = 1-100xi = 74/75        = %.6f   (A040)" % Kfrak)
+    print("   Abstand: %.1e -- alpha verlangt Koeffizient %.2f statt 100"
+          % (abs(Kfrak_verlangt / Kfrak - 1), (1 - Kfrak_verlangt) / XI))
+    g2e = im_bereich("verlangtes K_frak == 74/75", Kfrak_verlangt, Kfrak, faktor=1.001)
     ok = ok and g2e
-    print("   -> zweiter Zeuge fuer K_frak: RG-Herleitung (A040) und alpha-Sektor")
-    print("      treffen denselben Wert 74/75, ohne voneinander zu wissen.")
+    print("   -> K_frak kann nur diesen Wert haben; die Bestimmung benutzt alpha,")
+    print("      aber nicht K_frak. Keine alpha-freie Ueberbestimmung.")
 
     print("\nPRUEFUNG 2b  Der Messwert ist unwichtig -- Verhaeltnisse zaehlen")
     print("   Die Theorie prueft mit VERHAELTNISSEN (A080), die einheitenfrei")
@@ -153,11 +146,10 @@ def main():
     print("      alpha = xi*E0^2 = %.9f  == alpha_PDG (per Konstruktion)"
           % alpha_von(E0_rueck))
     print("   Das WAERE das blosse Ablesen der Konsistenz -- und genau dieser")
-    print("   Weg wird NICHT gebraucht: der exakte E0 ist von Weg 2 unabhaengig")
-    print("   von alpha getroffen (Pruefung 2c). Wer dagegen sqrt(alpha/xi)")
-    print("   einsetzt und 'exakt alpha' verkuendet, verwechselt Konsistenz mit")
-    print("   Beweis. Die Ueberbestimmung durch zwei alpha-freie Wege bricht die")
-    print("   Zirkularitaet an dieser Stelle.")
+    print("   Weg wird NICHT gebraucht: E0 folgt aus m_e, m_mu und K_frak = 1-100xi")
+    print("   ohne alpha (Pruefung 2c). Wer dagegen sqrt(alpha/xi) einsetzt und")
+    print("   'exakt alpha' verkuendet, verwechselt Konsistenz mit Beweis. Die")
+    print("   Zirkularitaet ist gebrochen, weil K_frak nicht aus alpha stammt.")
     g4 = identitaet("Kreis schliesst sich (per Konstruktion)",
                     alpha_von(E0_rueck), ALPHA_PDG)
     ok = ok and g4
@@ -165,10 +157,10 @@ def main():
     print("\nKERNAUSSAGE: in natuerlichen Einheiten ist alpha = 1, wie c, hbar,")
     print("k_B, G. Der SI-Wert 1/137 ist Buchhaltung. In der SI-Kleidung ist")
     print("alpha xi in anderer Schreibweise; das System ist dann zirkulaer, und")
-    print("das ist richtig -- aber an der E0-Stelle ist es durch zwei alpha-freie")
-    print("Wege ueberbestimmt, nicht bloss gesetzt. Der Eintrittspunkt E0=7.398")
-    print("ist von Weg 2 getroffen; e^2 wird nicht gebraucht. Der einzige echte")
-    print("Inhalt bleibt xi plus eine Skala (ueber einen Massenanker).")
+    print("das ist richtig. An der E0-Stelle traegt Weg 2 (Massenmittel mit")
+    print("K_frak = 1-100xi) alpha auf 0.017 %; umgekehrt legt alpha K_frak auf")
+    print("1.7e-4 fest. e^2 wird nicht gebraucht. Der einzige echte Inhalt")
+    print("bleibt xi plus eine Skala (ueber die Leptonmassen).")
     print("\nERGEBNIS:", "BESTANDEN" if ok else "FEHLGESCHLAGEN")
     return 0 if ok else 1
 

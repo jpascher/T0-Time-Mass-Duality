@@ -14,11 +14,19 @@ Key results this script demonstrates:
   1. The UNIFORM (1-xi) damping is degenerate with a constant source visibility V0<1
      -> differential delta(pi)-delta(0) = 0 -> NOT observable. Chasing the absolute
      CHSH deficit measures source imperfection, not xi (on any platform).
-  2. The ANGLE-DEPENDENT deficit IS observable: measure the correlation visibility at
-     the two QM-stationary extrema theta ~ pi and theta ~ 0 and difference the deficits.
-     QM is stationary there (dE/dtheta=0) so angle drift/calibration enter at 2nd order;
-     a constant source visibility cancels; the FFGFT signal survives at order xi/D_f..xi.
-  3. Required statistics N ~ 1/signal^2 -> ~6e7..6e8 coincidence pairs (photonic-reachable).
+  2. The ANGLE-DEPENDENT deficit is in principle separable from a constant source
+     visibility: measure the correlation visibility at the two QM-stationary extrema
+     theta ~ pi and theta ~ 0 and difference the deficits. QM is stationary there
+     (dE/dtheta=0) so angle drift/calibration enter at 2nd order; a constant source
+     visibility cancels; the FFGFT signal survives at order xi/D_f..xi.
+  3. Counting statistics alone would give N ~ 1/signal^2 -> ~6e7..6e8 coincidence pairs.
+     This is a pure shot-noise estimate WITHOUT any systematics (angle-dependent
+     detector/optics visibility, drifts); it is not a feasibility statement.
+
+Aktualisiert am 1.10.2026: Punkt 2/3 umformuliert -- die N-Abschätzung ist reine
+Zählstatistik ohne Systematik, "photonic-reachable" gestrichen; der xi-Effekt bzw. die
+Abweichung von der Tsirelson-Grenze ist mit heutiger Hardware nicht auflösbar
+(vgl. Dok. 023 bzw. Dok. 190, R142/R143). Zahlenwerte unverändert.
 """
 import numpy as np
 xi = 4/30000.0
@@ -41,3 +49,5 @@ if __name__ == "__main__":
     for nm, s in [("exp  (xi/Df)", 1-float(V_exp(np.array([np.pi]))[0])),
                   ("linear (xi) ", 1-float(V_lin(np.array([np.pi]))[0]))]:
         print(f"  signal {nm} = {s:.3e}  ->  N ~ 1/s^2 ~ {1/s**2:.2e} coincidence pairs (SNR~1)")
+    print("\nNote: N is counting statistics only (no systematics). Per Dok. 023 / R142, R143")
+    print("the xi effect (deviation from the Tsirelson bound) is NOT resolvable with current hardware.")

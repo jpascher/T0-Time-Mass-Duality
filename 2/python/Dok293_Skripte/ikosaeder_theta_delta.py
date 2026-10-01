@@ -8,6 +8,14 @@ Vorwaerts, parameterfrei, KEIN 2/9 als Input. Die C3-in-A5-Einbettung (Verdopplu
 5-fold mit exakten Nenner-9-Gewichten. Der Anteil in die triviale Mode ist exakt 2/9
 -- derselbe Wert, den Koide phaenomenologisch aus den Lepton-Massen liefert.
 numpy-only, Seed 20780458. Hochpraezise Bestaetigung optional via mpmath.
+
+Der totale Leak (7-3phi)/9 ist nur KANDIDAT fuer delta: gegen Koide-delta* liegt er
+bei -0.183 %, mit der Toleranz 0.052 % (lokale Steigung, Dok 291) ~3.5 sigma --
+mit delta* nicht vertraeglich (R139). theta = 2/9 als v0-Anteil bleibt unberuehrt.
+
+Aktualisiert am 1.10.2026: delta-Zeile als 'Kandidat delta' gekennzeichnet, Abstand
+zu delta* in sigma mit Toleranz 0.052 % ausgewiesen und geprueft (~3.5 sigma, nicht
+vertraeglich) (vgl. Dok. 293 bzw. Dok. 190, R139).
 """
 import numpy as np
 np.random.seed(20780458)
@@ -35,7 +43,12 @@ print(f"  bleibt Elektron (v1) = {p[1]:.10f}   (2+3phi)/9      = {(2+3*phi)/9:.1
 print(f"  totaler Leak         = {p[0]+p[2]:.10f}   (7-3phi)/9      = {(7-3*phi)/9:.10f}")
 print("-"*66)
 print(f"  theta  = v0-Leak     = 2/9          EXAKT: {abs(p[0]-2/9)<1e-12}")
-print(f"  delta  = totaler Leak= (7-3phi)/9   (verglichen mit Koide-delta* 0.23887: {100*((p[0]+p[2])/0.238870980080-1):+.2f}%)")
+dstar, tol = 0.238870980080, 0.052          # Koide-delta*; Toleranz in % (Dok 291, lokale Steigung)
+dev = 100*((p[0]+p[2])/dstar-1)
+print(f"  Kandidat delta = totaler Leak = (7-3phi)/9 = {p[0]+p[2]:.6f}  vs Koide-delta* {dstar:.6f}: {dev:+.3f}%")
+print(f"     Toleranz {tol}% -> {abs(dev)/tol:.1f} sigma: mit delta* NICHT vertraeglich (R139)")
+assert abs(p[0]-2/9) < 1e-12 and abs(p[0]+p[2]-(7-3*phi)/9) < 1e-12
+assert 3.0 < abs(dev)/tol < 4.0, "Abstand Leak-delta* nicht ~3.5 sigma"
 print("  Alle Gewichte Nenner 9 = 3^2 -- dieselbe Z3-Struktur wie 2/9.")
 
 # --- Haertetest 1: ikosaeder-spezifisch (nicht generisch) ---

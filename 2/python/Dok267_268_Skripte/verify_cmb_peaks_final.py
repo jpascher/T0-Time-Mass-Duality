@@ -15,6 +15,13 @@ Kodimension-1-Projektion, J0-Membran) steht in:
   forward_t4_spektrum.py, naive_bessel_projektion.py, resonator_vergleich.py,
   dimension_anharmonizitaet.py, spektral_dimension.py  (Dok 268, Schritt 17).
 Dieses Skript daher als REIN ILLUSTRATIV / RETRODIKTION verstehen.
+
+Aktualisiert am 1.10.2026: Behauptung (2)/TEIL 3 korrigiert -- der Faktor 3 ist
+eine Setzung, eine Projektion auf drei Raumrichtungen kann ihn nicht erzeugen
+(k_obs^2 <= |n|^2; Pruefung ergaenzt); TEIL 4/Befund 4 und Schluss als
+Retrodiktion mit abgelesener Folge und gesetztem Faktor 3 gekennzeichnet statt
+"ohne Fit, ohne freien Parameter ... bestaetigt"; Peak-Selektion offen
+(vgl. Dok. 268 bzw. Dok. 190, R139).
 ================================================================================
 """
 """
@@ -29,13 +36,14 @@ aus dem Hauptskript uebernommen.
 
 Geprueft werden vier Behauptungen:
   (1) Die T4-Grundpeaks liegen bei |n|^2 = 1,6,14,26 (Jacobi + Bose-Einstein).
-  (2) Der Beobachter-Faktor 3 ist genau die Zahl der Raumdimensionen.
+  (2) Der Faktor 3 -- Setzung, nicht aus einer Projektion (R139 i; geprueft).
   (3) Die sichtbare Serie 3*{1,6,14,26} = {3,18,42,78} besteht aus echten
       lokalen Maxima der spektralen Dichte.
-  (4) Die Verhaeltnisse 1:2.449:3.742:5.099 treffen die CMB-Peaks auf < 2%.
+  (4) Die Verhaeltnisse 1:2.449:3.742:5.099 treffen die CMB-Peaks auf < 2%
+      (Retrodiktion: Folge abgelesen, Faktor 3 gesetzt).
 
 UND die ehrliche Abgrenzung:
-  (5) Nur die VERHAELTNISSE folgen aus der Geometrie. Die ABSOLUTE Skala
+  (5) Gegenstand sind nur die VERHAELTNISSE. Die ABSOLUTE Skala
       (ell_1 ~ 220) braucht einen externen Parameter (P20).
 
 Nur SI-CODATA-Konstanten + xi = 1/7500. Zweite, unabhaengige
@@ -130,14 +138,23 @@ print()
 # ---------------------------------------------------------------------------
 # TEIL 3: Beobachter-Faktor 3
 # ---------------------------------------------------------------------------
-print("TEIL 3: Beobachter-Faktor 3 (Behauptung 2)")
+print("TEIL 3: Faktor 3 (Behauptung 2) -- Setzung, nicht aus Projektion (R139 i)")
 print("-" * 72)
 n_sym = (1, 1, 1, 0)
 k_obs2 = sum(x * x for x in n_sym[:3])
-print(f"  symmetrischste Grundmode (1,1,1,0): k_obs^2 = {k_obs2}")
-print(f"  Faktor 3 = Zahl der Raumdimensionen D = 3 (Beobachter + Zeitentfaltung)")
-print(f"  Konsistenz mit D_f = 3 - xi = {D_f:.6f}: "
-      f"Korrektur xi/3 = {xi/3:.2e} (vernachlaessigbar)")
+print(f"  symmetrischste Grundmode (1,1,1,0): |n|^2 = 3, k_obs^2 = {k_obs2}")
+# Projektion auf drei Raumrichtungen: k_obs^2 = n1^2+n2^2+n3^2 <= |n|^2.
+# Sie kann {1,6,14,26} daher nicht auf {3,18,42,78} vergroessern.
+proj_ok = True
+for n2g in [1, 6, 14, 26]:
+    lim = int(math.isqrt(n2g))
+    kmax = max(v[0]**2 + v[1]**2 + v[2]**2
+               for v in product(range(-lim, lim + 1), repeat=4)
+               if sum(x * x for x in v) == n2g)
+    proj_ok = proj_ok and (kmax <= n2g < 3 * n2g)
+    print(f"  |n|^2={n2g:2d}: max k_obs^2 = {kmax:2d} <= {n2g:2d}  (benoetigt waere {3*n2g})")
+assert proj_ok
+print("  -> Projektion erzeugt den Faktor 3 NICHT; Faktor 3 = Setzung (R139 i).")
 print()
 
 
@@ -162,7 +179,9 @@ for i in range(4):
     dev = (ratios[i] - cmb_ratios[i]) / cmb_ratios[i] * 100
     maxdev = max(maxdev, abs(dev))
     print(f"{i+1:>5} {ratios[i]:>12.4f} {cmb_ratios[i]:>12.4f} {dev:>+11.2f}%")
-print(f"  -> maximale Abweichung {maxdev:.2f}% (< 2%), ohne Fit. Behauptung 4 bestaetigt.")
+assert maxdev < 2.0
+print(f"  -> maximale Abweichung {maxdev:.2f}% (< 2%) -- rechnerisch bestaetigt, aber")
+print(f"     Retrodiktion: Folge aus CMB abgelesen, Faktor 3 gesetzt (R139).")
 print()
 
 
@@ -188,16 +207,20 @@ print("BEFUND")
 print("=" * 72)
 print(f"""
 1. Entartung g(|n|^2) doppelt bestaetigt (direkte Zaehlung == Jacobi).
-2. Grundpeaks 6,14,26 sind echte lokale Maxima; |n|^2=1 ist Grundmode.
-3. Sichtbare Serie {{3,18,42,78}} besteht aus echten lokalen Maxima.
+2. Grundpeaks 6,14,26 sind lokale Maxima; |n|^2=1 ist Grundmode. Die
+   Maxima sind aber dicht (auch 10, 18, 22, ...); die Auswahl {{1,6,14,26}}
+   ist aus den CMB-Verhaeltnissen abgelesen -- Peak-Selektion offen.
+   Der Faktor 3 ist eine Setzung (Projektion erzeugt ihn nicht, R139 i).
+3. Sichtbare Serie {{3,18,42,78}} besteht aus lokalen Maxima.
 4. Verhaeltnisse 1:{ratios[1]:.3f}:{ratios[2]:.3f}:{ratios[3]:.3f} treffen
-   CMB auf {maxdev:.2f}% -- ohne Fit, ohne freien Parameter.
-5. NUR die Verhaeltnisse folgen aus der Geometrie. Die absolute Skala
+   CMB auf {maxdev:.2f}% -- Retrodiktion (Folge abgelesen, Faktor 3 gesetzt),
+   kein parameterfreier Beleg.
+5. Gegenstand sind nur die Verhaeltnisse. Die absolute Skala
    braucht einen externen Parameter (P20). Das ist die kosmologische
-   Entartung aus Dok. 267 -- sie betrifft die absolute Position, nicht
-   die hier verifizierten Verhaeltnisse.
+   Entartung aus Dok. 267 -- sie betrifft die absolute Position.
 
-Die Herleitung aus Dok. 268 ist in allen vier rechnerischen Punkten
-unabhaengig bestaetigt. Die offene Stelle ist die strenge C_ell-Projektion
-(P30) und die absolute Skala (P20) -- beide klar als offen markiert.
+Rechnerisch nachgeprueft sind Entartung, Maxima und Verhaeltnisse. Als
+Herleitung bestaetigt ist die Folge damit NICHT: Faktor 3 und Peak-Selektion
+sind Setzungen bzw. offen (R139 i), ebenso die strenge C_ell-Projektion
+(P30) und die absolute Skala (P20).
 """)

@@ -15,6 +15,14 @@ Kodimension-1-Projektion, J0-Membran) steht in:
   forward_t4_spektrum.py, naive_bessel_projektion.py, resonator_vergleich.py,
   dimension_anharmonizitaet.py, spektral_dimension.py  (Dok 268, Schritt 17).
 Dieses Skript daher als REIN ILLUSTRATIV / RETRODIKTION verstehen.
+
+Aktualisiert am 1.10.2026: Ausgaben an R139(i) angepasst -- der Faktor 3 ist
+eine Setzung (eine Projektion auf drei Raumrichtungen kann ihn nicht erzeugen,
+weil die projizierte Wellenzahl die volle nie uebersteigt; neue Pruefung in
+Schritt 8); die Eingangsfunktion I(r) enthaelt xi nicht ("Eingabe nur xi"
+zurueckgenommen); "ohne Fit, ohne freien Parameter" ersetzt; P30 nach
+naive_bessel_projektion.py offen, nicht "machbare Rechnung" (vgl. Dok. 268
+bzw. Dok. 190, R139).
 ================================================================================
 """
 """
@@ -31,14 +39,15 @@ Dieses Skript reproduziert die Herleitung aus Dok. 268 Schritt fuer Schritt:
              I(r) = g(r) * <N(r)> * r,  lokale Maxima bei |n|^2 = 3,6,10,14,18,...
   Schritt 3: Projektion ell proportional sqrt(|n|^2), Verhaeltnisse skalenfrei
   Schritt 4/5: dominante Grundpeaks |n|^2 = 1,6,14,26
-  Schritt 8: Beobachter in 3D + Zeitentfaltung -> Faktor 3
+  Schritt 8: Faktor 3 als SETZUNG (R139 i; Projektion erzeugt ihn nicht)
              sichtbare Serie 3*{1,6,14,26} = {3,18,42,78}
 
 Ergebnis: Verhaeltnisse 1 : 2.449 : 3.742 : 5.099
           vs. CMB        1 : 2.441 : 3.682 : 5.091   (Abweichung < 2%)
 
-Einziger Parameter: xi = 1/7500 (geometrisch, Dok. 009).
-Keine freien Parameter, kein Fit. Die ABSOLUTE Skala (ell_1 ~ 220)
+Die spektrale Dichte I(r) enthaelt xi NICHT; die Folge {1,6,14,26} ist
+aus den gemessenen Verhaeltnissen abgelesen, der Faktor 3 gesetzt
+(Retrodiktion, R139). Die ABSOLUTE Skala (ell_1 ~ 220)
 braucht hingegen einen externen Parameter (P20, Dok. 190) und ist
 NICHT Gegenstand dieses Skripts -- hier geht es nur um die Verhaeltnisse.
 ================================================================================
@@ -145,18 +154,27 @@ for n2 in grund:
 print()
 
 # ---------------------------------------------------------------------------
-# Schritt 8: Beobachter in 3D + Zeitentfaltung -> Faktor 3
-# Der Beobachter misst k_obs^2 = (n1^2+n2^2+n3^2)/L^2, nicht den vollen
-# T4-Radius. Fuer die symmetrischste Grundmode (1,1,1,0) ist n1^2+n2^2+n3^2 = 3.
-# Die sichtbare Serie ist daher 3 * {1,6,14,26} = {3,18,42,78}.
+# Schritt 8: Faktor 3 -- SETZUNG (R139 i)
+# Frueher: "Beobachter in 3D misst k_obs^2 = n1^2+n2^2+n3^2 -> Faktor 3".
+# Das traegt nicht: die projizierte Wellenzahl ist nie groesser als die volle,
+# k_obs^2 <= |n|^2. Eine Projektion kann |n|^2 = {1,6,14,26} nicht auf
+# {3,18,42,78} VERGROESSERN. Der Faktor 3 ist daher eine Setzung.
 # ---------------------------------------------------------------------------
-print("Schritt 8: Beobachter in 3D + Zeitentfaltung -> Faktor 3")
+print("Schritt 8: Faktor 3 -- Setzung, nicht aus Projektion (R139 i)")
 print("-" * 72)
-print("  Die symmetrischste Grundmode ist (1,1,1,0):")
 n_sym = (1, 1, 1, 0)
 k_obs2 = n_sym[0]**2 + n_sym[1]**2 + n_sym[2]**2
-print(f"    n = {n_sym}: k_obs^2 = n1^2+n2^2+n3^2 = {k_obs2}")
-print(f"    -> Faktor 3 = Zahl der beobachtbaren Raumdimensionen")
+print(f"    n = {n_sym}: |n|^2 = {sum(x*x for x in n_sym)}, k_obs^2 = n1^2+n2^2+n3^2 = {k_obs2}")
+# Pruefung: fuer jede Mode mit |n|^2 in {1,6,14,26} gilt k_obs^2 <= |n|^2
+for n2g in [1, 6, 14, 26]:
+    lim = int(math.isqrt(n2g))
+    kmax = 0
+    for v in product(range(-lim, lim + 1), repeat=4):
+        if sum(x * x for x in v) == n2g:
+            kmax = max(kmax, v[0]**2 + v[1]**2 + v[2]**2)
+    assert kmax <= n2g < 3 * n2g
+    print(f"    |n|^2 = {n2g:2d}: max k_obs^2 ueber alle Moden = {kmax:2d}  (<= |n|^2, nie 3*|n|^2 = {3*n2g})")
+print("    -> Die Projektion kann den Faktor 3 NICHT erzeugen; Faktor 3 = SETZUNG.")
 print()
 
 sichtbar = [3 * g for g in grund]
@@ -193,7 +211,7 @@ print(f"  FFGFT (T4): {ratio_str}")
 print(f"  CMB:        {cmb_str}")
 maxdev = max(abs((ratios[i] - cmb_ratios[i]) / cmb_ratios[i] * 100)
              for i in range(4))
-print(f"  Maximale Abweichung: {maxdev:.2f} %  (ohne freien Parameter)")
+print(f"  Maximale Abweichung: {maxdev:.2f} %  (Folge abgelesen, Faktor 3 gesetzt -- Retrodiktion)")
 print()
 
 # ---------------------------------------------------------------------------
@@ -203,24 +221,28 @@ print("=" * 72)
 print("BEFUND")
 print("=" * 72)
 print(f"""
-1. Die T4-Grundpeaks |n|^2 = 1,6,14,26 folgen aus der Jacobi-Entartung
-   g(|n|^2) und der Bose-Einstein-Statistik -- Eingabe nur xi = 1/7500.
+1. Die spektrale Dichte I(r) = g * <N> * r (Jacobi-Entartung, Bose-
+   Einstein) enthaelt xi NICHT. Ihre lokalen Maxima sind dicht
+   ({{3,6,10,14,...}}); die Folge {{1,6,14,26}} ist aus den gemessenen
+   CMB-Verhaeltnissen abgelesen (Retrodiktion). Die Peak-Selektion ist offen.
 
-2. Der Beobachter in 3D (plus Zeitentfaltung) sieht k_obs^2 =
-   (n1^2+n2^2+n3^2)/L^2. Die symmetrischste Mode liefert den Faktor 3,
-   sodass die sichtbare Serie 3*{{1,6,14,26}} = {{3,18,42,78}} entsteht.
+2. Der Faktor 3 ist eine SETZUNG (R139 i): eine Projektion auf drei
+   Raumrichtungen liefert k_obs^2 <= |n|^2 und kann {{1,6,14,26}} nicht auf
+   {{3,18,42,78}} vergroessern.
 
 3. Die Verhaeltnisse 1 : {ratios[1]:.3f} : {ratios[2]:.3f} : {ratios[3]:.3f}
    stimmen mit den CMB-Peaks 1 : {cmb_ratios[1]:.3f} : {cmb_ratios[2]:.3f} : {cmb_ratios[3]:.3f}
-   auf < {math.ceil(maxdev)}% ueberein -- ohne Fit, ohne freien Parameter.
+   auf < {math.ceil(maxdev)}% ueberein -- als Retrodiktion mit abgelesener Folge
+   und gesetztem Faktor 3, kein parameterfreier Beleg.
 
-4. NUR die Verhaeltnisse folgen aus der Geometrie. Die absolute Position
+4. Gegenstand sind nur die Verhaeltnisse (s. 1-3). Die absolute Position
    (ell_1 ~ 220) braucht einen externen Parameter (P20, Dok. 190);
    sie ist nicht Gegenstand dieses Skripts.
 
 5. Offen (P30): die strenge sphaerische Projektion der T4-Moden auf das
    Winkelleistungsspektrum C_ell mit sphaerischen Bessel-Funktionen.
-   Eine machbare Rechnung, kein prinzipielles Hindernis.
+   Die naive Bessel-Projektion (naive_bessel_projektion.py) reproduziert
+   die Peaks nicht; P30 bleibt offen.
 
 Bezug: Dok. 268 (CMB-Peaks aus T4), Dok. 267 (kosmologische Entartung),
        Dok. 190 (P14, P20, P29, P30), Dok. 025 (T_CMB aus xi).

@@ -1,3 +1,12 @@
+\begin{tcolorbox}[colback=red!3!white,colframe=red!50!black,boxrule=0.8pt,title={Correction notes},fonttitle=\bfseries]
+\textbf{Corrections from the calculation check (30~Sept.~2026).} The following places are corrected or annotated in the text; each carries a dated note with the previous value:
+\begin{itemize}
+\item Exact solution for $\xi > 0$: \enquote{oscillations (damped)} $\to$ undamped oscillations $\cos/\sin(\sqrt{\xi}\,t)$.
+\item Non-perturbative $z$ from the printed code: $1.457\times10^{-27} \to 1.056\times10^{-2}$ ($= \sqrt{\xi}\sin(100\sqrt{\xi})$).
+\item Standard deviation $0.00$ \enquote{perfect independence}: annotated -- the code assigns the same value to every frequency, the frequency does not enter the calculation; this is no test of frequency independence.
+\end{itemize}
+\end{tcolorbox}
+
 \section*{Abstract}
 		This document presents a detailed derivation and explanation of the frequency independence of redshift in the T0 theory. Using non-perturbative methods and numerical integration of the field equations, it is demonstrated that the apparent frequency dependence in perturbative calculations is an artifact of the approximation method. The theoretically predicted independence is robustly confirmed, making T0 consistent with cosmological models.
 
@@ -34,7 +43,7 @@
 	\begin{itemize}
 		\item Equation: $\frac{d^2 E}{dt^2} + \xi E = 0$ (spatially homogeneous, for oscillating modes).
 		\item Solution: $ E(t) = C_1 e^{-t \sqrt{-\xi}} + C_2 e^{t \sqrt{-\xi}} $.
-		\item For real $\xi > 0$: Oscillations (damped), $z = \int \delta E \, dt$—constant across $\nu$, as modes are decoupled.
+		\item For real $\xi > 0$: Oscillations (undamped) \textit{(Corrected on 30~Sept.~2026: previously \enquote{damped} -- for $\xi > 0$, $E'' + \xi E = 0$ has the solutions $\cos(\sqrt{\xi}\,t)$ and $\sin(\sqrt{\xi}\,t)$ with constant amplitude; the exponential form with $\sqrt{-\xi}$ given above is the same solution in complex notation.)}, $z = \int \delta E \, dt$—constant across $\nu$, as modes are decoupled.
 	\end{itemize}
 	
 	\textbf{Implication}: Non-perturbatively, $E(t)$ is exactly exponential/oscillatory, and $z$ as a phase integral is independent of $\nu$ (no coupling in the exact solution).
@@ -89,9 +98,11 @@
 	\begin{itemize}
 		\item Exact non-perturbative solution:  
 		$E(t) = C_1 e^{-t\sqrt{-\xi}} + C_2 e^{t\sqrt{-\xi}}$
-		\item Non-perturbative z: $1.457 \times 10^{-27}$ (constant)
-		\item z for different frequencies: $[1.457\times 10^{-27}, 1.457\times 10^{-27}, 1.457\times 10^{-27}]$
+		\item Non-perturbative z: $1.056 \times 10^{-2}$ (constant)
+		\item z for different frequencies: $[1.056\times 10^{-2}, 1.056\times 10^{-2}, 1.056\times 10^{-2}]$
+		\textit{(Corrected on 30~Sept.~2026: previously $1.457\times10^{-27}$ -- the printed code with $E(0)=1$, $\dot E(0)=0$, $t\in[0,100]$ gives $\xi\int_0^{100}\cos(\sqrt{\xi}\,t)\,dt = \sqrt{\xi}\,\sin(100\sqrt{\xi}) = 1.056\times10^{-2}$, confirmed numerically with odeint/trapezoidal rule.)}
 		\item Standard deviation: $0.00$ (perfect independence)
+		\textit{(Note of 30~Sept.~2026: The code sets \texttt{z\_per\_frequency = np.full\_like(frequencies, z)}; the frequency enters no calculation, so the standard deviation $0$ is fixed by construction and is no test of frequency independence. The same applies to the statement below that the numerical integration confirms constancy under extreme frequency variations.)}
 	\end{itemize}
 	
 	\textbf{Explanation of the Non-Perturbative Calculation:}

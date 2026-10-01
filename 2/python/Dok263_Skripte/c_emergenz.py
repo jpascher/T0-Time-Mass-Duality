@@ -25,6 +25,11 @@ import numpy as np
 # Dok 261), nicht emergente Substanzen und keine fraktale Geschwindigkeits-
 # Rekursion mit "Fixpunkt c" (eine solche waere zirkulaer: sie muesste c
 # in die Gleichung hineinstecken).
+#
+# Aktualisiert am 1.10.2026: G-Zeile korrigiert -- xi^2/(4m) hat Dimension
+# [E^-1], G = l_P^2 aber [E^-2]; der SI-Wert ist G = xi^2/(4 m_e) * C_conv * K_frak,
+# l_P = sqrt(G_nat) gilt nur bis auf den Faktor sqrt(C_conv K_frak); Dimensions-
+# pruefung ergaenzt (vgl. Dok. 263/189 bzw. Dok. 190, R141).
 # ============================================================================
 
 xi = 4/30000.0
@@ -39,11 +44,22 @@ print("-"*70)
 print("""  T~ * m = 1   =>  Zeit T~ = 1/m   (aus der Masse, OHNE c)
   m = E = 1/L  (in natuerlichen Einheiten dieselbe Groesse)
   => Laenge L und Zeit T~ sind IDENTISCH. Das bedeutet "c = 1".
-  Die Gravitationskonstante folgt c-frei (Dok 012/013):
-     G_nat = xi^2 / (4 m_char)
-     l_P   = sqrt(G_nat)            -- enthaelt KEIN c
+  Die FORM der Gravitationskonstante folgt c-frei (Dok 012/013):
+     G_nat = xi^2 / (4 m_char)      -- Dimension [E^-1]
+     G     = l_P^2                  -- Dimension [E^-2]  (!)
+  Die Dimensionen stimmen NICHT ueberein; der SI-Wert entsteht erst mit
+  dem Umrechnungsfaktor der Ein-Anker-Kette (Dok 383, R141):
+     G_SI  = xi^2/(4 m_e) * C_conv * K_frak
+     l_P   = sqrt(G_nat) nur bis auf sqrt(C_conv K_frak)  -- enthaelt KEIN c
      t_P   = l_P                    -- weil L == T, KEIN c noetig
 """)
+
+# Dimensionspruefung (Exponent der Energie): xi dimensionslos, m ~ E^1
+dim_G_nat = 0 - 1          # xi^2/(4m): E^-1
+dim_lP2   = 2 * (-1)       # l_P ~ E^-1  =>  l_P^2 ~ E^-2
+assert dim_G_nat == -1 and dim_lP2 == -2 and dim_G_nat != dim_lP2
+print(f"  Dimensionspruefung: [xi^2/(4m)] = E^{dim_G_nat}, [l_P^2] = E^{dim_lP2}"
+      f"  -> Faktor C_conv noetig (R141)")
 
 # Demonstration der c-Freiheit (alle Groessen als reine Zahlen / nat. Einheiten)
 # m_char hier symbolisch = 1 (reine-Verhaeltnis-Ebene); es geht um die STRUKTUR.
@@ -51,7 +67,7 @@ m_char = 1.0
 G_nat = xi**2/(4*m_char)
 l_P_nat = np.sqrt(G_nat)
 t_P_nat = l_P_nat   # L == T
-print(f"  Beispiel (m_char=1, nat. Einh.): G_nat={G_nat:.4e}, l_P=t_P={l_P_nat:.4e}")
+print(f"  Beispiel (m_char=1, nat. Einh., ohne C_conv K_frak): G_nat={G_nat:.4e}, l_P=t_P={l_P_nat:.4e}")
 print(f"  -> l_P/t_P = {l_P_nat/t_P_nat:.1f} = 1 = c  (in Layer 1 trivial, KEINE Info)")
 
 # --- UEBERGANG: Meter/Sekunde-Trennung ---
@@ -119,7 +135,8 @@ print("""  Dok 013 zeigt, dass der c-Zahlenwert konsistent als l_P/t_P aus der
   xi-Geometrie DARSTELLBAR ist ("dual: Konvention + geometrisches
   Verhaeltnis"). Das ist eine Konsistenz-Aussage, KEINE einheitenfreie
   Vorhersage von 299792458 (das kann es nicht geben -- der Wert haengt an
-  der Meter-Definition). Beide Sichten sind vertraeglich: G und die
-  Laengenskala folgen aus xi (c-frei); c ist der Faktor, der diese eine
+  der Meter-Definition). Beide Sichten sind vertraeglich: die Form von G
+  und ihre Groessenordnung folgen aus xi und dem einen Anker (c-frei; der
+  SI-Wert erst ueber C_conv, R141); c ist der Faktor, der diese eine
   Skala auf zwei getrennte Einheiten abbildet.
 """)

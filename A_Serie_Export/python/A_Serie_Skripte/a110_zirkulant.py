@@ -5,10 +5,13 @@
 Deckt ab:
   1) Yukawa-Leiter m_i = r_i xi^p_i v  -> drei Massenverhaeltnisse aus xi
      (Bereichskontrolle gegen PDG)
-  2) Koide Q aus der Leiter OHNE Koide-Eingabe (Leiter-Vorhersage 0.6677)
+  2) Koide Q aus der Leiter OHNE Koide-Eingabe (Leiter-Naeherung 0.6677)
   3) Zwei-Wege-Verschaerfung (Q=2/3 und theta=2/9) -> m_tau Vorhersage
   4) xi-Kaskade: Koide -> alpha -> G mit fallender Genauigkeit
 Standardbibliothek. Siehe A220 zu Identitaet/Bereich/Vorhersage.
+Aktualisiert am 1.10.2026: Kaskade Q (Koide) 0.00003 % -> 0.0003 % (PDG 2024,
+m_tau=1776,93; mit 1776,86: 0,0009 %), Pruefung 3 als Naeherung (0,16 %), kein
+Beleg (vgl. Dok. A110 bzw. Dok. 190, R138).
 """
 import math
 from _bereich import im_bereich, vorhersage, identitaet
@@ -101,12 +104,12 @@ def main():
     Q_ladder = koide(m["e"], m["mu"], m["tau"])
     print("   Q_Leiter = %.6f   2/3 = %.6f   Abw %.3f %%"
           % (Q_ladder, 2/3, 100*abs(Q_ladder-2/3)/(2/3)))
-    g3 = im_bereich("Q_Leiter nahe 2/3 (unabhaengige Bestaetigung)",
+    g3 = im_bereich("Q_Leiter nahe 2/3 (Naeherung, kein Beleg)",
                     Q_ladder, 2/3, faktor=1.01)
     ok = ok and g3
-    print("   -> die geometrische Leiter sagt Q von sich aus voraus; der")
-    print("      exakte Messwert 2/3 bestaetigt die Exponentenstruktur")
-    print("      auf einem unabhaengigen Weg.")
+    print("   -> Koide folgt aus der Leiter nur naeherungsweise (~0,16 %);")
+    print("      Praezisionsuebereinstimmungen der Leiter sind keine Belege")
+    print("      fuer die Exponentenstruktur (R138).")
 
     print("\nPRUEFUNG 4  Drei Wege zu 2/3 bei D=3 (Dok 258)")
     for name, val in [("1 - 1/D  (Komplement)", 1-1/3),
@@ -144,7 +147,12 @@ def main():
 
     print("\nPRUEFUNG 6  xi-Kaskade -- warum die Massen am genauesten sind")
     print("   %-16s %-22s %s" % ("Groesse", "braucht", "Genauigkeit"))
-    for g, b, acc in [("Q (Koide)", "nur Verhaeltnisse", "0.00003 %"),
+    q_abw = lambda mt: 100*abs(koide(ME, MMU, mt) - 2/3)/(2/3)
+    acc_Q = "%.4f %% (PDG 2024, m_tau=1776,93; mit %.2f: %.4f %%)" % (
+        q_abw(1776.93), MTAU, q_abw(MTAU))
+    g6 = abs(q_abw(1776.93) - 0.0003) < 0.0001
+    ok = ok and g6
+    for g, b, acc in [("Q (Koide)", "nur Verhaeltnisse", acc_Q),
                       ("alpha", "+ Energieskala E0", "0.006 %"),
                       ("G", "+ Planck-Laenge", "0.5 %")]:
         print("   %-16s %-22s %s" % (g, b, acc))

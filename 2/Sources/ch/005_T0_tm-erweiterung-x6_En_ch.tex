@@ -8,11 +8,12 @@
 \item 4th generation: $m_\tau\,\phi = 2.9$~GeV, not TeV.
 \item UV integral: diverges also for $D_f = 3-\xi$.
 \item ML section: mean values (2.34\,\%, quarks 1.92\,\%) match none of the tables shown; test/training loss inverted; strange reference value unified (0.0934~GeV).
+\item Up quark: $K_{\text{corr}} = 0.9867^{2.9998} \approx 0.9867 \to 0.9606$ (noted); mean accuracy $1.2\,\% \to 0.84\,\%$ (table after tau correction), four places.
 \end{itemize}
 \end{tcolorbox}
 
 \section*{Abstract}
-		The T0 time-mass duality theory provides two complementary methods for calculating particle masses from first principles. The direct geometric method demonstrates the fundamental purity of the theory and achieves an accuracy of up to 1.18\% for charged leptons. The extended fractal method integrates QCD dynamics and achieves an average accuracy of approximately 1.2\% for all particle classes (leptons, quarks, baryons, bosons) without free parameters. With machine learning calibration on Lattice-QCD data (FLAG 2024), deviations below 3\% are achieved for over 90\% of all known particles. All masses are converted to SI units (kg). This document systematically presents both methods, explains their complementarity, and shows the step-by-step evolution from pure geometry to practically applicable theory. The presented direct values were calculated using the script \texttt{calc\_De.py}.
+		The T0 time-mass duality theory provides two complementary methods for calculating particle masses from first principles. The direct geometric method demonstrates the fundamental purity of the theory and achieves an accuracy of up to 1.18\% for charged leptons. The extended fractal method integrates QCD dynamics and achieves an average accuracy of approximately 0.84\% \textit{(corrected on 30~Sept.~2026: previously 1.2\,\% -- after the tau correction, Table~\ref{tab:massen_v32} gives a mean of 0.84\,\%; likewise below)} for all particle classes (leptons, quarks, baryons, bosons) without free parameters. With machine learning calibration on Lattice-QCD data (FLAG 2024), deviations below 3\% are achieved for over 90\% of all known particles. All masses are converted to SI units (kg). This document systematically presents both methods, explains their complementarity, and shows the step-by-step evolution from pure geometry to practically applicable theory. The presented direct values were calculated using the script \texttt{calc\_De.py}.
 
 	
 	
@@ -279,10 +280,11 @@
 	
 	\textbf{Step 2: Calculate Correction Factors}
 	\begin{align}
-		K_{\text{corr}} &= 0.9867^{2.999867 \cdot (1 - 3.333 \times 10^{-5} \cdot 1)} \approx 0.9867 \\
+		K_{\text{corr}} &= 0.9867^{2.999867 \cdot (1 - 3.333 \times 10^{-5} \cdot 1)} \approx 0.9606 \\
 		QZ &= \left(\frac{1}{1.618}\right)^1 \cdot (1 + 0) \cdot (1 + 0) \approx 0.618 \\
 		RG &= \frac{1 + 3.333 \times 10^{-5}}{1 + 0 + 0} \approx 1.000033
 	\end{align}
+	\textit{(Corrected on 30~Sept.~2026: previously $K_{\text{corr}} \approx 0.9867$ -- $0.9867^{2.9998} = 0.9606$, the exponent is $\approx 3$; step~5 still uses $0.9867$, with which the product would be $2.6\,\%$ smaller. The chain does not close anyway, see the note at step~5.)}
 	
 	\textbf{Step 3: Quark Dynamics}
 	\begin{align}
@@ -538,7 +540,7 @@
 			\item \textbf{Mesons}: $m_M = m_{q1} + m_{q2} + \Lambda_{\text{QCD}} \cdot K_{\text{frak}}^{n_{\text{eff}}}$ (additive).
 			\item \textbf{Higgs}: $m_H = m_t \cdot \phi \cdot (1 + \xi D_f) \approx 124.95$ GeV (prediction, $\Delta \approx 0.04\%$ to 125 GeV). \textit{(Note of 30~Sept.~2026: With $m_t = 172.76$~GeV the formula gives $172.76 \times 1.618 \times 1.0004 = 279.6$~GeV, not $124.95$~GeV; it is not a viable derivation of the Higgs mass (Doc.~190, R122). Current candidate: $m_h = M_Z \cdot 11/8 = 125.38$~GeV (Doc.~373).)}
 		\end{itemize}
-		\item \textbf{Accuracy}: Without ML: $\sim$1.2\% $\Delta$; with Lattice boost (FLAG 2024): <3\% (calculated); all within 1--3$\sigma$.
+		\item \textbf{Accuracy}: Without ML: $\sim$0.84\% $\Delta$; with Lattice boost (FLAG 2024): <3\% (calculated); all within 1--3$\sigma$.
 	\end{itemize}
 	
 	\section{Neutrino Mixing: A Detailed Explanation (updated with PDG 2024)}
@@ -1041,9 +1043,9 @@
 	
 	4. \textbf{Constraints Make Testable}: Cosmo penalty ($\lambda$=0.01) enforces $\sum m_{\nu} <$0.064 eV without distorting targets (sum pred =0.058 eV). Lesson: T0 is predictive (testable with DESI 2026); ML + constraints (e.g., RG invariance) solves hierarchy problem (light masses via $\xi^{gen}$, without fine-tuning).
 	
-	5. \textbf{ML as T0 Extension}: Pure T0: $\Delta \sim$1.2 \% (calc\_De.py); +ML (calibration on FLAG/PDG): $<$2.5 \% – but ML overlearns on small dataset (overfit reduced via L2/Dropout). Lesson: T0 is ``first principles'' (parameter-free); ML adds lattice boost without losing elegance (f\_NN learns $\mathcal{O}(\alpha_s \log \mu)$-corrections).
+	5. \textbf{ML as T0 Extension}: Pure T0: $\Delta \sim$0.84 \% (calc\_De.py); +ML (calibration on FLAG/PDG): $<$2.5 \% – but ML overlearns on small dataset (overfit reduced via L2/Dropout). Lesson: T0 is ``first principles'' (parameter-free); ML adds lattice boost without losing elegance (f\_NN learns $\mathcal{O}(\alpha_s \log \mu)$-corrections).
 	
-	In summary: The iteration confirms T0's core – mass as emergent geometry phenomenon (fractal D\_f, QZ/RG) – and shows ML's role: Precision from 1.2 \% $\rightarrow$ 2.34 \% through physics constraints, but goal $<$1 \% with full dataset (FCC data 2030s).
+	In summary: The iteration confirms T0's core – mass as emergent geometry phenomenon (fractal D\_f, QZ/RG) – and shows ML's role: Precision from 0.84 \% $\rightarrow$ 2.34 \% through physics constraints, but goal $<$1 \% with full dataset (FCC data 2030s).
 	
 	\subsection*{Final Formulas of the T0 Mass Theory (after ML Optimization)}
 	The final formula combines T0's geometric basis with ML calibration and constraints – parameter-free, universal for all classes:

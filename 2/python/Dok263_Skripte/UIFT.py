@@ -6,9 +6,17 @@ FFGFT - CMB-Temperatur aus xi und die formale Bruecke zu UIFT
 WAS DIESES SKRIPT ZEIGT (und was nicht)
 ================================================================================
 
+Aktualisiert am 1.10.2026: "FFGFT-Seite vollständig verifizierbar" und "keine
+offene Lücke" durch die R137(i)-Einstufung ersetzt (T_CMB = (16/9) xi stimmt nur
+in der Einheit eV mit dem Messwert überein, einheitenabhängige Übereinstimmung,
+keine Herleitung, Frage offen); Casimir/CMB-Zusatz gestrichen (R136: Identität,
+kein Messvergleich); Vergleich mit gemessenem T_CMB (Faktor 418518) ergänzt
+(vgl. Dok. 263 bzw. Dok. 190, R136/R137).
+
 Es besteht eine BRUECKENFORMEL zwischen FFGFT und der UIFT-Groesse xi_UIFT.
-Diese Bruecke ist von der FFGFT-Seite her vollstaendig verifizierbar
-(alles folgt aus xi). Die UIFT-Seite koennen wir NICHT verifizieren -- die
+Diese Bruecke ist von der FFGFT-Seite her nachrechenbar (Rechenschritte aus
+xi); die T_CMB-Relation selbst ist aber eine einheitenabhaengige Ueberein-
+stimmung (Zahl erst in eV), keine Herleitung (R137 i). Die UIFT-Seite koennen wir NICHT verifizieren -- die
 UIFT-Formel stammt aus Onur Tekers Arbeit. Die Bruecke ist daher FORMAL,
 nicht empirisch.
 
@@ -24,9 +32,10 @@ WICHTIG -- zwei getrennte Dinge:
 Zum absoluten Kelvin-Wert (Dok. 190, Praezisierung 11):
  - erste Ordnung allein:    2.7507 K  (+0.93 % zum Planck-Wert)
  - mit K_frak (Dok 133):    2.7140 K  (-0.42 %)
- Nach Anwendung von K_frak bleibt eine Restdifferenz zum Messwert. Das ist
- KEINE offene Luecke, sondern eine normale Theorie-gegen-Messung-Abweichung
- (wie H0 ~ -1.9 %, Casimir/CMB ~ 1.3 %). Der Planck-Wert 2.72548 K ist unter
+ Nach Anwendung von K_frak bleibt eine Restdifferenz zum Messwert. Nach
+ R137(i) ist die Uebereinstimmung einheitenabhaengig (reine Zahl, erst in eV
+ mit dem Messwert vergleichbar), keine Herleitung; die Frage ist OFFEN (R70).
+ Der Planck-Wert 2.72548 K ist unter
  LambdaCDM aus dem Spektrum extrahiert -- kein modellunabhaengiger absoluter
  Referenzwert. Die Theorie muss ihn nicht exakt treffen.
  Der oft genannte Ausdruck (1 - 275/4 xi) traefe ihn numerisch exakt, ist aber
@@ -87,7 +96,8 @@ print("-" * 70)
 print(f"  erste Ordnung:        {T1_K:.4f} K   ({100*(T1_K/T_planck-1):+.3f} %)")
 print(f"  mit K_frak (Dok133):  {Tk_K:.4f} K   ({100*(Tk_K/T_planck-1):+.3f} %)")
 print(f"  Planck 2018 (LambdaCDM-extrahiert, kein absoluter Wert): {T_planck} K")
-print(f"  -> Restdifferenz = normale Theorie-Messung-Abweichung, keine offene Luecke.")
+print(f"  -> Einstufung (R137 i): einheitenabhaengige Uebereinstimmung (Zahl erst in eV),")
+print(f"     keine Herleitung; Frage offen.")
 print()
 
 # ============================================================================
@@ -119,6 +129,17 @@ print()
 print("  Die Bruecke nutzt NUR die erste Ordnung, nicht K_frak und nicht den")
 print("  absoluten Kelvin-Wert -- die 0.4%-Frage ist fuer die Bruecke irrelevant.")
 print()
+# Vergleich: Faktor 414684 entspricht k_B T_CMB = (16/9) xi eV (Dok. 263 Vermerk);
+# mit dem gemessenen T_CMB ergibt sich ein anderer Faktor.
+T_meas = 2.7255   # gerundeter Messwert wie im Vermerk Dok. 263
+kT_meas_eV = T_meas * kB / eV_J
+ratio_meas = xif / (kT_meas_eV * ln2 / m_e_c2_eV)
+print(f"  Zum Vergleich mit gemessenem T_CMB = {T_meas} K (k_B T = {kT_meas_eV:.6e} eV):")
+print(f"     xi_FFGFT/xi_UIFT = {ratio_meas:.0f}   (statt {ratio:.0f})")
+print("     -> 414684 gilt nur fuer k_B T_CMB = (16/9) xi eV, nicht fuer den Messwert.")
+assert abs(ratio - ratio_closed) < 1e-6 * ratio
+assert round(ratio) == 414684 and abs(ratio_meas - 418518) < 1
+print()
 
 # ============================================================================
 # Verifizierbarkeit: unsere Seite ja, UIFT-Seite nein
@@ -127,9 +148,10 @@ print("=" * 70)
 print("VERIFIZIERBARKEIT DER BRUECKE")
 print("=" * 70)
 print()
-print("  FFGFT-Seite (vollstaendig verifizierbar):")
+print("  FFGFT-Seite (Rechenschritte nachrechenbar; Einstufung R137 i):")
 print("    - xi = 1/7500 geometrisch")
-print("    - T_CMB(1.Ord) = (16/9) xi  (Modenzaehlung)")
+print("    - T_CMB(1.Ord) = (16/9) xi  (Modenzaehlung) -- einheitenabhaengige")
+print("      Uebereinstimmung in eV, keine Herleitung, offen")
 print("    - m_e c^2 in FFGFT aus der Leptonen-Hierarchie")
 print("    - jeder kann xi_FFGFT/xi_UIFT = 414684 nachrechnen")
 print()
@@ -138,6 +160,7 @@ print("    - die Formel xi_UIFT = k_B T_CMB ln2/(m_e c^2) stammt von Onur Teker"
 print("    - ob sie korrekt oder empirisch validiert ist, koennen wir nicht pruefen")
 print()
 print("  => Die Bruecke ist FORMAL: WENN Onurs Formel gilt UND die FFGFT-Werte")
-print("     gelten, DANN verknuepft ein fester Faktor beide xi. Verifiziert ist")
-print("     damit die FFGFT-Seite -- nicht die UIFT-Seite.")
+print("     gelten, DANN verknuepft ein fester Faktor beide xi. Nachrechenbar ist")
+print("     damit die FFGFT-Rechnung -- die T_CMB-Relation bleibt offen (R137 i),")
+print("     die UIFT-Seite ist nicht pruefbar.")
 print("=" * 70)

@@ -19,8 +19,14 @@ Zwei Dinge werden hier festgenagelt.
     natuerlicher Boden, UIFT-Wahl), T0 (kein Bad -- Grenzfall "Bad so heiss wie das
     Bit"). Invariant ist allein das Verhaeltnis Q/E0 = (T/T0)*ln2.
 
-Und: die Zahl der Fraktal-Zwischenschritte pro Hauptstufe, log2(1/xi) = log2(7500)
-~ 12.87, IST die Informationsdecke I1 pro Freiheitsgrad aus Dok 290.
+Und: die Zahl der Faktor-2-Schritte pro Hauptstufe, log2(1/xi) = log2(7500)
+~ 12.87, IST die Informationsdecke I1 pro Freiheitsgrad aus Dok 290. In
+sqrt2-Schritten gezaehlt sind es log_sqrt2(7500) = 25.7 (nicht 13: (sqrt2)^13 = 90.5);
+die Gleichsetzung mit I1 gilt nur fuer Faktor-2-Schritte.
+
+Aktualisiert am 1.10.2026: 'sqrt2-Zwischenschritte/Stufe = log2(1/xi) = I1' auf
+Faktor-2-Schritte umbenannt, log_sqrt2(7500) = 25.7 und (sqrt2)^13 = 90.5 ergaenzt und
+geprueft (vgl. Dok. 290, Vermerk vom 30.9.2026).
 
 numpy-only, seed 20780458.
 """
@@ -79,8 +85,13 @@ span = L0_bit / L0
 print(f"  Spannweite Boden..Bit-Skala:  {span:.3e}  = {np.log10(span):.1f} Dekaden (Laenge)")
 Nsub = np.log2(1/xi)
 print(f"  Fraktal-Faktor pro Hauptstufe: 1/xi = {1/xi:.0f} (Dok 146)")
-print(f"  sqrt2-Zwischenschritte/Stufe:  log2(1/xi) = log2(7500) = {Nsub:.4f}")
+Nsqrt2 = np.log(1/xi)/np.log(np.sqrt(2))
+print(f"  Faktor-2-Schritte/Stufe:       log2(1/xi) = log2(7500) = {Nsub:.4f}")
 print(f"  --> = I1 (Informationsdecke pro Freiheitsgrad, Dok 290): {Nsub:.2f} Bit")
+print(f"  sqrt2-Schritte/Stufe:          log_sqrt2(7500) = 2*log2(7500) = {Nsqrt2:.2f}")
+print(f"  (Kontrolle: (sqrt2)^13 = {np.sqrt(2)**13:.1f} != 7500; Gleichsetzung mit I1 nur fuer Faktor-2-Schritte)")
+assert abs(2**Nsub - 1/xi) < 1e-6 and abs(np.sqrt(2)**Nsqrt2 - 1/xi) < 1e-6
+assert abs(Nsqrt2 - 2*Nsub) < 1e-12 and abs(np.sqrt(2)**13 - 1/xi) > 7000
 
 print()
 print("Teil 3 -- Landauer: welche Temperatur? Die des BADES.")

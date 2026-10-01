@@ -46,6 +46,7 @@ Status: [K] numerisch gesichert
 
 Autor: Johann Pascher, ORCID 0009-0000-6518-4064
 Datum: August 2026
+Aktualisiert am 1.10.2026: Zusammenfassung nennt statt der entfernten Formel E0²=4√2·m_mu/xi^4 den fraktal korrigierten Stand E0=√(m_e·m_mu/K_frak)=7,398 MeV (vgl. Dok. 338 bzw. Dok. 190, R72).
 """
 
 import sympy as sp
@@ -221,7 +222,8 @@ print(f"""
   Status E0²=54 MeV²:
     Dok. 011 leitet E0=sqrt(m_e*m_mu) als logarithmisches Mittel
     auf der T0-Torus-Geometrie her (nicht empirisch angepasst).
-    Alternative: E0²=4*sqrt(2)*m_mu/xi^4 (Dok. 011).
+    fraktal korrigiert: E0=sqrt(m_e*m_mu/K_frak)=7,398 MeV (R72);
+    die fruehere Formel 4*sqrt(2)*m_mu/xi^4 ist entfernt (Dok. 011, 041, A130).
     Die Identifikation E0²=|GF(3)*|*|GF(27)|=54 MeV² ist ein
     neuer Galois-seitiger Ausdruck derselben Groesse [K].
 """)

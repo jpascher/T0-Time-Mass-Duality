@@ -1,3 +1,10 @@
+\begin{tcolorbox}[colback=red!3!white,colframe=red!50!black,boxrule=0.8pt,title={Correction notes},fonttitle=\bfseries]
+\textbf{Corrections from the calculation review (1~Oct.~2026).} The following passages are corrected or annotated in the text; each carries a dated note with the previous value:
+\begin{itemize}
+\item Hadamard gate: $z' = r$, $r' = z$, $\theta' = \theta + \pi/2$ $\to$ $(x,y,z) \to (z,-y,x)$ in cylindrical coordinates; resonance frequencies: 6.24/2.38~GHz $\to$ 44.7/17.1~MHz ($n = 14/15$); $\xi \sim 10^{-5} \to 1.3 \times 10^{-4}$, ratio to device scatter $1400 \to$ X-gate deviation $1.3\%$, same order as $1.4\%$.
+\end{itemize}
+\end{tcolorbox}
+
 \section*{Abstract}
 
 		This document presents a novel, alternative formalism for quantum mechanics, derived from the first principles of the T0-Theory. Standard quantum mechanics, based on linear algebra in Hilbert space, is replaced by a geometric model where quantum states are points in a cylindrical phase space and gate operations are geometric transformations. This approach provides a more intuitive physical picture and intrinsically incorporates the effects of fractal spacetime, such as the damping of interactions. We first define the formalism for single- and two-qubit operations and then derive a series of advanced optimization strategies for quantum computers, ranging from gate-level corrections to system-wide architectural improvements.
@@ -26,12 +33,13 @@
 	Gate operations are no longer matrices but functions that transform the coordinates $(z, r, \theta)$.
 	
 	\subsubsection{Hadamard Gate (H)}
-	The H-gate performs a basis change between the computational (Z) and superposition (X-Y) bases. Its transformation swaps the z-coordinate and the radius, and rotates the phase by $\pi/2$:
+	The H-gate performs a basis change between the computational (Z) and superposition (X-Y) bases. On the Bloch sphere it is a rotation by $\pi$ about the axis $(\hat{x}+\hat{z})/\sqrt{2}$, i.e. $(x,y,z) \to (z,-y,x)$; in the cylindrical coordinates ($x = r\cos\theta$, $y = r\sin\theta$) the transformation reads:
 	\begin{align*}
-		z' &= r \\
-		r' &= z \\
-		\theta' &= \theta + \pi/2
+		z' &= r \cos\theta \\
+		r' &= \sqrt{z^2 + r^2 \sin^2\theta} \\
+		\theta' &= \operatorname{atan2}(-r \sin\theta,\, z)
 	\end{align*}
+	\textit{(Corrected on 1~Oct.~2026: previously $z' = r$, $r' = z$, $\theta' = \theta + \pi/2$ -- this rule gives $H|0\rangle = (0,1,\pi/2) = |{+i}\rangle$ instead of $|+\rangle$, maps $|-\rangle$ to $z' = 1$, i.e. $|0\rangle$ instead of $|1\rangle$ ($z' = r \ge 0$ never reaches $|1\rangle$), and gives $H^2|+\rangle = |-\rangle$, so $H^2 \neq 1$. The corrected form gives $|0\rangle \leftrightarrow |+\rangle$, $|-\rangle \to |1\rangle$, $H^2 = 1$.)}
 	
 	\subsubsection{Phase Gate (Z)}
 	The Z-gate rotates the state around the Z-axis by adding $\pi$ to the phase coordinate $\theta$:
@@ -64,7 +72,7 @@
 	\begin{equation}
 		f_n = \left( \frac{\Ezero}{h} \right) \cdot \xiT^2 \cdot (\phiT^2)^{-n}
 	\end{equation}
-	For superconducting qubits, this yields primary sweet spots at approximately \textbf{6.24 GHz} ($n=14$) and \textbf{2.38 GHz} ($n=15$). Calibrating hardware to these frequencies should intrinsically reduce phase noise.
+	With $E_0 = 7.398$~MeV this yields \textbf{44.7 MHz} ($n=14$) and \textbf{17.1 MHz} ($n=15$); these values lie far below the transmon range (4--8~GHz), which only $n = 9$ (5.5~GHz) falls into. \textit{(Corrected on 1~Oct.~2026: previously ``For superconducting qubits, this yields primary sweet spots at approximately 6.24 GHz ($n=14$) and 2.38 GHz ($n=15$)'' -- $E_0/h = 1.789 \times 10^{21}$~Hz, times $\xi^2$ gives $3.18 \times 10^{13}$~Hz, times $\phi^{-28}$ gives 44.7~MHz; 6.24~GHz would require $E_0 \approx 1.03$~GeV; only the ratio $6.24/2.38 = \phi^2$ is correct.)} Calibrating hardware to these frequencies should intrinsically reduce phase noise.
 	
 	\subsection{Active Coherence Preservation via Time-Field Modulation}
 	Idle qubits are passively exposed to decoherence, which strictly limits the available computation time. The T0 solution arises from the dynamic time-field, a key element from the g-2 analysis \cite{pascher:g2_rev9}, which can be actively modulated. A high-frequency \textbf{"time-field pump"} could be used to irradiate an idle qubit. The goal is to average out the fundamental $\xiT$-noise, thereby actively preserving the qubit's coherence and moving beyond the passive $T_2$ limit.
@@ -106,8 +114,10 @@ $N(\lambda) \sim \lambda^{d/2}$. Arithmetic counting densities of the form
 $T \ln T$ (Riemann-von Mangoldt) are therefore not representable in principle
 (Doc.~316, August 2026).
 
-\textbf{[K]} The predicted $\xi$ corrections are of order $\sim 10^{-5}$.
+\textbf{[K]} The predicted corrections are set by $\xi \approx 1.3 \times 10^{-4}$;
+the X gate rotates by $\pi(1-100\xi)$, the angle error is $100\xi \approx 1.3\%$ ($0.042$~rad).
 Hardware measurements (IBM Heron r2, May 2026, Doc.~147) show a
-device-to-device variation of $1.4\%$ -- some $1400\times$ larger than the
-effect sought. The test requires error-corrected qubits with sub-ppm stable
+device-to-device variation of $1.4\%$ -- i.e. the same order of magnitude; the
+effect is absorbed by pulse calibration and cannot be separated from it.
+\textit{(Corrected on 1~Oct.~2026: previously ``$\xi$ corrections of order $\sim 10^{-5}$ \ldots{} some $1400\times$ larger than the effect sought'' -- $\xi = 1.33 \times 10^{-4}$, and $1.4\%/\xi \approx 105$, not 1400; the $10^{-5}$ from Doc.~147 refers to the CHSH effect.)} The test requires error-corrected qubits with sub-ppm stable
 precision.

@@ -240,16 +240,6 @@ Production version of the FFGFT-Shor algorithm.
 Optimised for RSA-relevant $N$, with benchmarks against
 classical trial division.
 
-#### `bell_73qubit_FIXED.py`
-Simulation of Bell states on 73-qubit systems with
-FFGFT $\xi$-damping. Corrected version (FIXED) with
-improved error handling for large registers.
-Generates `bell_73qubit_fixed_analysis.png`.
-
----
-
-### Geometry and Topology
-
 #### `toroidal_vs_cylindrical_analysis.py`
 Compares toroidal geometry (FFGFT) with cylindrical geometry
 (Standard Model approximation) for qubit state spaces (Doc. 175).
@@ -326,7 +316,6 @@ pip install numpy matplotlib pandas scipy ephem
 |--------|--------|
 | `calc_De.py` | `T0_berechnungsdaten.txt`, `T0_berechnungen.json` |
 | `T3-experimet.py` | `t3_experiment_pruefung.png` |
-| `bell_73qubit_FIXED.py` | `bell_73qubit_fixed_analysis.png` |
 | `baron.py` | `baryon_asymmetrie_pruefung.png` |
 | `koide_kfrak_test.py` | `koide_kfrak_test.png` |
 | `max-mass.py` | `max_masse_pruefung.png` |

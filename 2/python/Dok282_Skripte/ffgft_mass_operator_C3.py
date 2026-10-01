@@ -82,7 +82,11 @@ print(f"\n    Koide Q (from operator spectrum): {Q:.6f}   (2/3 = {2/3:.6f})")
 # i.e. the difference of two nearly equal numbers. Hand-rounding the cosines to
 # ~3 digits is fatal here: cos(theta+2pi/3) as -0.658 instead of -0.6786 (a 3%
 # error) turns mu_e = 0.040 into 0.069 (72% error), and since m_e = mu_e^2 this
-# flips m_mu/m_e from 207 to 63. Always evaluate at full machine precision.
+# flips m_mu/m_e from 207 to about 70 (mu_e = 0.0694, mu_mu = 0.5802 ->
+# (0.5802/0.0694)^2 = 69.8). Always evaluate at full machine precision.
+# Aktualisiert am 1.10.2026: Kommentar zur Rundungsempfindlichkeit korrigiert,
+# m_mu/m_e bei gerundetem Kosinus 63 -> ~70 (69.8); Rechnung unberuehrt
+# (vgl. Dok. 282).
 print("\n  sensitivity: m_mu/m_e is the lightest, hence the sharpest probe of theta")
 for th in [0.2200, 2/9, 0.22223, 0.2240]:
     mu = np.array([1 + r * np.cos(th + 2 * np.pi * k / 3) for k in range(3)]) ** 2

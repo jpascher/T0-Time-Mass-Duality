@@ -1,4 +1,9 @@
-"""A155: Additiver Meson-Ansatz — Geltungsbereich, Pion-Anker, GMOR."""
+"""A155: Additiver Meson-Ansatz — Geltungsbereich, Pion-Anker, GMOR.
+
+Aktualisiert am 1.10.2026: pi0 zusaetzlich mit m_u+m_d gerechnet (n_eff=39,24,
+ausserhalb 36+1); Fenster-Treffer fuer pi0 als Wahlabhaengigkeit (uubar) gekennzeichnet
+(vgl. Dok. A155, Vermerk 30.9.).
+"""
 import math
 
 xi = 4/30000
@@ -19,7 +24,7 @@ print("=== A155: Meson- und Baryon-Formeln ===")
 
 # 1. Geltungsbereich der additiven Formel: Bindung < Lambda_QCD
 print("\n1. Geltungsbereich (Bindung = m_M - Sum m_q, additiv nur < Lambda):")
-mesons = [("pi0", m_pi0, 2*m_u), ("pi+-", m_piC, m_u+m_d),
+mesons = [("pi0uu", m_pi0, 2*m_u), ("pi0ud", m_pi0, m_u+m_d), ("pi+-", m_piC, m_u+m_d),
           ("K+-", m_K, m_u+m_s), ("eta", m_eta, 2*m_s),
           ("rho", m_rho, 2*m_u), ("omega", m_omega, 2*m_u)]
 for name, mM, mq in mesons:
@@ -29,14 +34,20 @@ for name, mM, mq in mesons:
     tag = f"n_eff={n:6.2f}" if ok else "Bindung > Lambda"
     print(f"  {name:6s} Bindung={bind:.4f}  {tag}")
 
-# 2. Pion-Anker: n_eff(pi0) = 37.79, im Fenster 36+1=37
-n_pi0 = math.log((m_pi0-2*m_u)/Lambda_QCD)/math.log(K_frak)
+# 2. Pion-Anker: n_eff(pi0) haengt an der Wahl Sum m_q (Vermerk A155, 30.9.)
+n_pi0 = math.log((m_pi0-2*m_u)/Lambda_QCD)/math.log(K_frak)          # Wahl uubar
+n_pi0_ud = math.log((m_pi0-m_u-m_d)/Lambda_QCD)/math.log(K_frak)     # m_u+m_d
 n_piC = math.log((m_piC-m_u-m_d)/Lambda_QCD)/math.log(K_frak)
-print(f"\n2. Pion-Anker: n_eff(pi0)={n_pi0:.3f} (soll 37.79), n_eff(pi+-)={n_piC:.3f}")
+print(f"\n2. Pion-Anker: n_eff(pi0, 2 m_u)={n_pi0:.3f}, n_eff(pi0, m_u+m_d)={n_pi0_ud:.3f}, "
+      f"n_eff(pi+-)={n_piC:.3f}")
 assert abs(n_pi0 - 37.79) < 0.01
+assert abs(n_pi0_ud - 39.24) < 0.01
 assert abs(n_piC - 36.62) < 0.01
-# Sektor-Vorhersage-Fenster (A270): 36+1
-assert 36 < n_pi0 < 39 and 36 < n_piC < 39
+# Sektor-Fenster (A270): 36+1. pi+- liegt darin; pi0 nur bei der Wahl uubar --
+# mit m_u+m_d liegt pi0 ausserhalb. Der pi0-Treffer ist wahlabhaengig, kein Beleg.
+assert 36 < n_piC < 39
+assert 36 < n_pi0 < 39 and not (36 < n_pi0_ud < 39)
+print("   pi0 im Fenster 36+1 nur mit 2 m_u (Wahl uubar); mit m_u+m_d ausserhalb -> wahlabhaengig")
 
 # 3. GMOR: B_pi ~ B_K (chirale Konsistenz)
 B_pi = m_piC**2 / (m_u + m_d)
