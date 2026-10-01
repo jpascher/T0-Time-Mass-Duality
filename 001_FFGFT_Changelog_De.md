@@ -1132,3 +1132,22 @@ Anlass: Frage, ob sich Planck-Länge und Massen aus ξ allein mit nur einem Anke
 
 **Prüfskript:** 2/python/Dok383_Skripte/pruef_383_ein_anker.py — 20/20 PASS
 **Register:** kein Eintrag (Korrekturen und Hinweise direkt in den betroffenen Dokumenten).
+
+---
+
+## 1. Oktober 2026 — Dok. 384: FFGFT in Kurzfassung
+
+### Dok. 384 — Grundlagen, Ergebnisse und Status nach der Rechenprüfung (De/En, je 15 Seiten)
+
+Zusammenfassung des gesamten Korpus (Dok. 001–383, A-Serie) auf dem Stand nach der Nachrechnung vom 29. Sept. bis 1. Okt. 2026; jedes Ergebnis mit Formel, Zahlenwert, Vergleichswert, Status und tragenden Dokumenten.
+- Architektur: drei Grundannahmen T̃·m = 1, T⁴, ℤ₃ (R56) und D₄ als motivierte Wahl [S]; einziger Parameter ξ = 4/30000 [S]; α = 1 mit angepasstem e [Q]; kosmischer Sektor ausgeklammert (P39)
+- Grundlagen: K_frak = 74/75 Wert [K], Rest 1,7·10⁻⁴ und Form offen (R135, R139); E₀ = 7,348/7,397 MeV, α-Übereinstimmung Eigenschaft des Ankers (R135); Ein-Anker-Kette v/E_P = ξ⁴/(5π), m_i = r_i ξ^{p_i+4} E_P/(5π) [B], Ankertabelle [K]; L₀, T₀, Rekursion und Log-Spirale; F̂ selbstadjungiert auf P₀ (R145); Galois-Struktur
+- Teilchen: Leptonleiter (+0,52 %, +1,03 %) [K], r_i, p_i [S]; Koide −0,017 ξ (PDG 2024); (√2, 2/9) für m_μ/m_e 442σ [X]; v-Wege 248,3/248,9/245,6/245,65 GeV; Quarktabelle als Kodierung [S]; Neutrinos Δm² −1,0 %/+0,46 %, m_ee 6,0/0,13/0 meV; a_τ = 1,2811·10⁻³; M_W 3,8σ; m_h, m_t Kandidaten; Ladungsquantisierung [B], Hyperladung geladener Leptonen offen (R146)
+- Gravitation und Kosmos: G-Form [K], Präzision kein Beleg (R141); Schwarze Löcher (R144); Casimir-CMB Identität (R136); H₀/Λ bedingt auf P20; Galaxien
+- QM: Bell-Verletzung bleibt, ξ-Effekt nicht auflösbar (R142, R143); IBM-Messung 28. Mai 2026
+- Higgs-Geometrie als Konsistenzprüfung von ξ: ξ_EFT = m_h²/(64π³v²) = 1,30·10⁻⁴, −2,6 % (Dok. 354, A190) [K]; nur die Verkürzung auf 1/(16π³) in Dok. 320 [X] (Vermerk in Dok. 320 präzisiert)
+- Unabhängig gegengeprüft (rund 75 Aussagen); ν₃-Dirac-Zuordnung (R108) als Spannung zu Dok. 346 ausgewiesen
+- Tabellen: prüfbare Aussagen, Statusbilanz, Leseführer; Abschnitte „Was nicht mehr gilt“ und „Offene Brücken“ (Stand R146)
+
+**Prüfskript:** 2/python/Dok384_Skripte/pruef_384_zusammenfassung.py — 74/74 PASS
+**Register:** kein Eintrag.
