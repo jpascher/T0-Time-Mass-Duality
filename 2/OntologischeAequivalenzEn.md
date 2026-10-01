@@ -113,7 +113,7 @@ In the T0 model, all physical quantities derive from energy as the single fundam
 
 1. **All physical constants normalize to 1**: ℏ = c = G = k_B = 1
 2. **All coupling constants normalize to 1**: α_EM = α_W = β_T = 1
-3. **The parameter ξ** (≈ 1.33×10⁻⁴) **is fully determined** as ξ = λ_h²v²/(16π³m_h²) from Standard Model Higgs parameters
+3. **The parameter ξ** = 4/30000 (≈ 1.33×10⁻⁴) **is checked for consistency against the Standard Model Higgs parameters**: λ_h²v²/(16π³m_h²) ≈ 1.30×10⁻⁴, about 2.3 % below it. *(Corrected on 1 Oct. 2026: previously "is fully determined as ξ = λ_h²v²/(16π³m_h²) from Standard Model Higgs parameters" -- with the SM self-coupling λ_h = m_h²/(2v²) ≈ 0.129 one has λ_h²v²/(16π³m_h²) = m_h²/(64π³v²) ≈ 1.30×10⁻⁴; a consistency check, not an exact derivation, Doc. 385.)*
 4. **The κ parameter** in the gravitational potential is derived from β_T and other parameters, not independently assumed
 
 This represents a radical ontological simplification compared to the Standard Model's numerous arbitrary parameters. The T0 model eliminates the need for fine-tuning or anthropic arguments by showing that all physical parameters emerge naturally from energy as the sole fundamental dimension.
@@ -429,7 +429,7 @@ By acknowledging the possibility of ontological complementarity, we open new ave
 | α_W | Wien's displacement constant, normalized to 1 in T0 model, ≈2.82 in SI units |
 | β_T | T0 model parameter, normalized to 1 in natural units, ≈0.008 in SI units |
 | ξ | Ratio between T0 length and Planck length (ξ = r₀/l_P ≈ 1.33×10⁻⁴) |
-| λ_h | Higgs self-coupling parameter, ≈0.13 in Standard Model |
+| λ_h | Higgs self-coupling parameter, λ_h = m_h²/(2v²) ≈ 0.129 in Standard Model |
 | v | Higgs vacuum expectation value, ≈246 GeV in Standard Model |
 | m_h | Higgs mass, ≈125 GeV in Standard Model |
 | κ | Linear term coefficient in modified gravitational potential, derived from β_T |

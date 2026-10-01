@@ -111,7 +111,7 @@ Im T0-Modell leiten sich alle physikalischen Größen von der Energie als einzig
 
 1. **Alle physikalischen Konstanten normalisieren zu 1**: ℏ = c = G = k_B = 1
 2. **Alle Kopplungskonstanten normalisieren zu 1**: α_EM = α_W = β_T = 1
-3. **Der Parameter ξ** (≈ 1,33×10⁻⁴) **ist vollständig bestimmt** als ξ = λ_h²v²/(16π³m_h²) aus den Higgs-Parametern des Standardmodells
+3. **Der Parameter ξ** = 4/30000 (≈ 1,33×10⁻⁴) **wird durch die Higgs-Parameter des Standardmodells auf Konsistenz geprüft**: λ_h²v²/(16π³m_h²) ≈ 1,30×10⁻⁴, rund 2,3 % darunter. *(Korrigiert am 1. Okt. 2026: vorher „ist vollständig bestimmt als ξ = λ_h²v²/(16π³m_h²) aus den Higgs-Parametern des Standardmodells“ -- mit der SM-Selbstkopplung λ_h = m_h²/(2v²) ≈ 0,129 gilt λ_h²v²/(16π³m_h²) = m_h²/(64π³v²) ≈ 1,30×10⁻⁴; Konsistenzprüfung, keine exakte Herleitung, Dok. 385.)*
 4. **Der κ-Parameter** im Gravitationspotential wird aus β_T und anderen Parametern abgeleitet, nicht unabhängig angenommen
 
 Dies stellt eine radikale ontologische Vereinfachung im Vergleich zu den zahlreichen willkürlichen Parametern des Standardmodells dar. Das T0-Modell beseitigt die Notwendigkeit von Feinabstimmung oder anthropischen Argumenten, indem es zeigt, dass alle physikalischen Parameter natürlich aus der Energie als einziger fundamentaler Dimension hervorgehen.
@@ -427,7 +427,7 @@ Indem wir die Möglichkeit ontologischer Komplementarität anerkennen, eröffnen
 | α_W | Wiensche Verschiebungskonstante, normalisiert zu 1 im T0-Modell, ≈2,82 in SI-Einheiten |
 | β_T | T0-Modell-Parameter, normalisiert zu 1 in natürlichen Einheiten, ≈0,008 in SI-Einheiten |
 | ξ | Verhältnis zwischen T0-Länge und Planck-Länge (ξ = r₀/l_P ≈ 1,33×10⁻⁴) |
-| λ_h | Higgs-Selbstkopplungsparameter, ≈0,13 im Standardmodell |
+| λ_h | Higgs-Selbstkopplungsparameter, λ_h = m_h²/(2v²) ≈ 0,129 im Standardmodell |
 | v | Higgs-Vakuumerwartungswert, ≈246 GeV im Standardmodell |
 | m_h | Higgs-Masse, ≈125 GeV im Standardmodell |
 | κ | Koeffizient des linearen Terms im modifizierten Gravitationspotential, abgeleitet aus β_T |

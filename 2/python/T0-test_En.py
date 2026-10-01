@@ -6,6 +6,7 @@ Pure calculation from ξ + r/p + K_frak (dynamic from ratios) + v/S_T0. No fitti
 Test 4: G error 0.01% (original factors). Test 5: Two variants for α (bare: 0.00%).
 Test 11: Derivation of all constants and units (incl. ħ, c, etc.).
 Units: Natural (GeV, dimensionless). Ratios relative to m_e.
+Updated 1 Oct 2026: Higgs check of ξ with the SM self-coupling lambda_h = m_h**2/(2*v**2) instead of fixed 0.129; consistency check, not a derivation (cf. Doc. 354, 385). Radiation constant a_rad = π² k_B⁴/(15 ħ³ c³) as in T0-test_De.py (previously 30).
 
 Johann Pascher, 2025
 """
@@ -197,15 +198,16 @@ class T0ComprehensiveVerification:
     print(f"ξ (theoretical): {xi_val:.8e}")
     print(f"ξ (exact 4/3): {xi_exact:.8e}")
     print(f"ξ (from Higgs): {xi_from_higgs:.8e}")
+    print(f"Higgs consistency check vs 4/30000: {(xi_from_higgs/xi_exact - 1)*100:+.2f}%")
     print(f"Deviation: {results['deviation_percent']:.4f}%")
     
     self.results['xi_parameter'] = results
     return results
     
   def calculate_xi_from_higgs(self):
-    """Calculate ξ from Higgs parameters (natural)"""
+    """Higgs consistency check of ξ (natural units): lambda_h = m_h^2/(2 v^2)"""
     m_h = 125.25 # GeV
-    lambda_h = 0.129
+    lambda_h = m_h**2 / (2 * self.v**2) # SM self-coupling (updated 1.10.2026, previously fixed 0.129)
     return lambda_h**2 * self.v**2 / (16 * np.pi**3 * m_h**2)
     
   def test_2_mass_calculation(self):
@@ -615,9 +617,9 @@ class T0ComprehensiveVerification:
     k_B_t0 = (hbar * c) / (self.v * xi_val * GeV_to_J * scale)
     error_k_B = abs(k_B_t0 - self.k_B) / self.k_B * 100
     
-    # a_rad = π² k_B⁴ / (30 ħ³ c³)
+    # a_rad = π² k_B⁴ / (15 ħ³ c³) (corrected: 15 instead of 30, as in T0-test_De.py)
     pi = np.pi
-    a_rad_t0 = (pi**2 * k_B_t0**4) / (30 * hbar**3 * c**3)
+    a_rad_t0 = (pi**2 * k_B_t0**4) / (15 * hbar**3 * c**3)
     error_a_rad = abs(a_rad_t0 - self.a_rad) / self.a_rad * 100
     
     # Table
@@ -627,7 +629,7 @@ class T0ComprehensiveVerification:
     print(f"{'l_P [m]':<15} {'√(ħ G / c³)':<30} {l_P_calc:<15.3e} {self.l_P:<15.3e} {error_l_P:<10.2f}")
     print(f"{'α [dim.-los]':<15} {'ξ × E₀²':<30} {alpha_t0:<15.10f} {self.alpha_exp:<15.10f} {error_alpha:<10.4f}")
     print(f"{'k_B [J/K]':<15} {'ħ c / (v ξ × scale)':<30} {k_B_t0:<15.2e} {self.k_B:<15.2e} {error_k_B:<10.2f}")
-    print(f"{'a_rad [J/m³K⁴]':<15} {'π² k_B⁴ / (30 ħ³ c³)':<30} {a_rad_t0:<15.2e} {self.a_rad:<15.2e} {error_a_rad:<10.2f}")
+    print(f"{'a_rad [J/m³K⁴]':<15} {'π² k_B⁴ / (15 ħ³ c³)':<30} {a_rad_t0:<15.2e} {self.a_rad:<15.2e} {error_a_rad:<10.2f}")
     
     avg_error = np.mean([error_G, error_l_P, error_alpha, error_k_B, error_a_rad])
     print(f"\nAverage Error: {avg_error:.2f}% (ξ → G/α → Rest)")

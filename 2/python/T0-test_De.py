@@ -6,6 +6,7 @@ Pure calculation from ξ + r/p + K_frak (dynamic from ratios) + v/S_T0. No fitti
 Test 4: G error 0.01% (original factors). Test 5: Two variants for α (bare: 0.00%).
 Test 11: Derivation of all constants and units (incl. ħ, c, etc.).
 Units: Natural (GeV, dimensionless). Ratios relative to m_e.
+Aktualisiert am 1.10.2026: Higgs-Prüfung von ξ mit der SM-Selbstkopplung lambda_h = m_h**2/(2*v**2) statt fest 0.129; Konsistenzprüfung, keine Herleitung (vgl. Dok. 354, 385).
 
 Johann Pascher, 2025
 """
@@ -197,15 +198,16 @@ class T0ComprehensiveVerification:
     print(f"ξ (theoretical): {xi_val:.8e}")
     print(f"ξ (exact 4/3): {xi_exact:.8e}")
     print(f"ξ (from Higgs): {xi_from_higgs:.8e}")
+    print(f"Higgs consistency check vs 4/30000: {(xi_from_higgs/xi_exact - 1)*100:+.2f}%")
     print(f"Deviation: {results['deviation_percent']:.4f}%")
     
     self.results['xi_parameter'] = results
     return results
     
   def calculate_xi_from_higgs(self):
-    """Calculate ξ from Higgs parameters (natural)"""
+    """Higgs consistency check of ξ (natural units): lambda_h = m_h^2/(2 v^2)"""
     m_h = 125.25 # GeV
-    lambda_h = 0.129
+    lambda_h = m_h**2 / (2 * self.v**2) # SM self-coupling (updated 1.10.2026, previously fixed 0.129)
     return lambda_h**2 * self.v**2 / (16 * np.pi**3 * m_h**2)
     
   def test_2_mass_calculation(self):

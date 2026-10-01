@@ -1145,9 +1145,42 @@ Zusammenfassung des gesamten Korpus (Dok. 001–383, A-Serie) auf dem Stand nach
 - Teilchen: Leptonleiter (+0,52 %, +1,03 %) [K], r_i, p_i [S]; Koide −0,017 ξ (PDG 2024); (√2, 2/9) für m_μ/m_e 442σ [X]; v-Wege 248,3/248,9/245,6/245,65 GeV; Quarktabelle als Kodierung [S]; Neutrinos Δm² −1,0 %/+0,46 %, m_ee 6,0/0,13/0 meV; a_τ = 1,2811·10⁻³; M_W 3,8σ; m_h, m_t Kandidaten; Ladungsquantisierung [B], Hyperladung geladener Leptonen offen (R146)
 - Gravitation und Kosmos: G-Form [K], Präzision kein Beleg (R141); Schwarze Löcher (R144); Casimir-CMB Identität (R136); H₀/Λ bedingt auf P20; Galaxien
 - QM: Bell-Verletzung bleibt, ξ-Effekt nicht auflösbar (R142, R143); IBM-Messung 28. Mai 2026
-- Higgs-Geometrie als Konsistenzprüfung von ξ: ξ_EFT = m_h²/(64π³v²) = 1,30·10⁻⁴, −2,6 % (Dok. 354, A190) [K]; nur die Verkürzung auf 1/(16π³) in Dok. 320 [X] (Vermerk in Dok. 320 präzisiert)
+- Higgs-Geometrie als Konsistenzprüfung von ξ: ξ_EFT = m_h²/(64π³v²) = 1,30·10⁻⁴, rund −2,3 % mit PDG 2024 (−2,6 % nur mit gerundetem λ_h = 0,129; Dok. 354, A190, 385) [K]; nur die Verkürzung auf 1/(16π³) in Dok. 320 [X] (Vermerk in Dok. 320 präzisiert)
 - Unabhängig gegengeprüft (rund 75 Aussagen); ν₃-Dirac-Zuordnung (R108) als Spannung zu Dok. 346 ausgewiesen
 - Tabellen: prüfbare Aussagen, Statusbilanz, Leseführer; Abschnitte „Was nicht mehr gilt“ und „Offene Brücken“ (Stand R146)
 
-**Prüfskript:** 2/python/Dok384_Skripte/pruef_384_zusammenfassung.py — 74/74 PASS
+**Prüfskript:** 2/python/Dok384_Skripte/pruef_384_zusammenfassung.py — 77/77 PASS
 **Register:** kein Eintrag.
+
+---
+
+## 1. Oktober 2026 — Dok. 385: Der Higgs-Vakuum-Weg zu ξ
+
+### Dok. 385 — Herkunft, Formeln und Status einer Konsistenzprüfung (De/En, je 8 Seiten)
+
+Anlass: Der ursprüngliche Weg zu den Zusammenhängen der FFGFT lief über Vakuum und Higgs-Feld; die Formel mit ε₀ wird anhand der Versionsgeschichte (Feb. 2025 bis heute) verfolgt und nachgerechnet.
+- Formelkette 2025: 31.3. Faktor 16π³ mit r₀; 5.4. ξ = λ_h²v²/(16π³m_h²) (genannt 1,33·10⁻⁴, richtig 1,30·10⁻⁴) [B]; 6.4. Vakuumformel λ_h²v²e²/(64π⁴ε₀ħc m_h²) = 1; 18.4. Variante mit μ₀/ε₀; 25.5. ε₀ eliminiert (64π⁴ → 16π³); ab 1.6. Ableger 64π⁴ mit 1,04·10⁻⁵; 22.8.2026 Verkürzung in Dok. 320
+- Vakuumformel ausgeschrieben = ξ_EFT·α [B]; SI-Wert 9,5·10⁻⁷ [K]; mit α = 1 genau ξ_EFT [B]; 64π⁴ = 16π³·4π, das 4π aus 4πε₀
+- Heutiger Stand: ξ_EFT = m_h²/(64π³v²) = λ_h/(32π³) = 1,30·10⁻⁴, rund −2,3 % mit PDG 2024, Spanne −2,2 bis −2,4 %, −2,6 % nur mit gerundetem λ_h = 0,129 [K]; Konsistenzprüfung, Abweichung strukturell gedeutet [S] (R59)
+- Nicht tragfähig [X]: Gleichsetzung mit 1 (β_T = 0,977), μ₀/ε₀-Variante (Dimension GeV⁴, ~4·10⁵), 64π⁴-Form 1,04·10⁻⁵, Verkürzung λ_h = m_h/v auf 1/(16π³) mit Iteration (läuft gegen 0); Verwechslung y = λ_h schon in Dok. 097
+- Angeglichene Stellen (Vermerke 1. Okt. 2026): Dok. 006, 046, 049, 054, 061, 067, 068, 073, 175, 189, 310, 320, 354, A142 (De/En), Dok. 186 (Herkunft 64π⁴), OntologischeAequivalenz (De/En), T0-test (De/En) rechnet λ_h aus m_h und v (T0-test_En zusätzlich a_rad mit Faktor 15 statt 30 wie in der De-Fassung); Dok. 384 auf rund 2,3 % und Verweis auf Dok. 385
+
+**Prüfskript:** 2/python/Dok385_Skripte/pruef_385_higgs_vakuum.py — 17/17 PASS
+**Register:** kein Eintrag.
+
+---
+
+## 1. Oktober 2026 — Dok. 386: Wo α steckt
+
+### Dok. 386 — Ladungseinheit, zwei Kugeln und die Bezugsenergie (De/En, je 8 Seiten)
+
+Anlass: Die FFGFT ist in ihrer Grundform verhältnisbasiert (natürliche Einheiten, α = 1, umdefinierte Ladung, ohne fraktale Korrektur); gefragt war, wohin α bei der Umdefinition wandert und welche geometrische Bedeutung es dort hat.
+- Umdefinition: ħ = c = ε₀ = 1 → e² = 4πα; mit α = 1 ist e = √(4π), die Ladung wird über die volle Kugeloberfläche gemessen [B]; α = (e_hist/e_geo)², e_geo/e_hist = 11,706 [B]; α = 1 als Recheneinheit [Q] (A267)
+- Geometrisches Bild: α = r_e/λ_C, a₀/λ_C = 1/α; Coulomb- und Compton-Kugel des Elektrons, α = 1 lässt sie zusammenfallen [B]; dasselbe 4π wie im Faktor 64π⁴ der Vakuumformel (Dok. 385)
+- Verhältnisform der Brücke: ξE₀² = 1, also E₀² = 1/ξ = 7500 in T0-Einheiten [B]; T0-Energieeinheit √(ξ m_e m_μ) = 84,85 keV [K]
+- SI-Brücke α_SI = ξ(E₀/1 MeV)²: verlangt Bezugsenergie 0,99992 MeV (korrigiert) bzw. 0,99323 MeV = √K_frak·MeV (nackt) [K]; Eigenschaft des Ankers (R135); geometrische Bedeutung der Bezugsenergie offen [S]; 2m_e als Bezugsenergie 2,2 % daneben [X]; S_T0 = 1 MeV/c² als „Vorhersage“ zirkulär [X]
+- Lesart E₀ = 1/ξ = 7500 GeV: Quadrat fehlt, Einheit gesetzt [X]
+- Vermerke (1. Okt. 2026): Dok. 005 (Parameter, zwei Tabellenzeilen, Korrekturkasten; bisher ohne Vermerk), Dok. 032, 133, 165 (bestehende Vermerke um E₀² = 1/ξ ergänzt), Dok. 013 (S_T0 per Konstruktion; Korrekturkasten), jeweils De/En; Dok. 384 stellt die Grundform α = 1, E₀² = 1/ξ voran und nennt die Bezugsenergie (Prüfskript 77/77)
+
+**Prüfskript:** 2/python/Dok386_Skripte/pruef_386_alpha_geometrie.py — 19/19 PASS
+**Register:** kein Eintrag (Vermerke direkt in den betroffenen Dokumenten).
