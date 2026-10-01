@@ -1137,7 +1137,7 @@ Anlass: Frage, ob sich Planck-Länge und Massen aus ξ allein mit nur einem Anke
 
 ## 1. Oktober 2026 — Dok. 384: FFGFT in Kurzfassung
 
-### Dok. 384 — Grundlagen, Ergebnisse und Status nach der Rechenprüfung (De/En, je 15 Seiten)
+### Dok. 384 — Grundlagen, Ergebnisse und Status nach der Rechenprüfung (De/En, 18/17 Seiten)
 
 Zusammenfassung des gesamten Korpus (Dok. 001–383, A-Serie) auf dem Stand nach der Nachrechnung vom 29. Sept. bis 1. Okt. 2026; jedes Ergebnis mit Formel, Zahlenwert, Vergleichswert, Status und tragenden Dokumenten.
 - Architektur: drei Grundannahmen T̃·m = 1, T⁴, ℤ₃ (R56) und D₄ als motivierte Wahl [S]; einziger Parameter ξ = 4/30000 [S]; α = 1 mit angepasstem e [Q]; kosmischer Sektor ausgeklammert (P39)
@@ -1147,9 +1147,10 @@ Zusammenfassung des gesamten Korpus (Dok. 001–383, A-Serie) auf dem Stand nach
 - QM: Bell-Verletzung bleibt, ξ-Effekt nicht auflösbar (R142, R143); IBM-Messung 28. Mai 2026
 - Higgs-Geometrie als Konsistenzprüfung von ξ: ξ_EFT = m_h²/(64π³v²) = 1,30·10⁻⁴, rund −2,3 % mit PDG 2024 (−2,6 % nur mit gerundetem λ_h = 0,129; Dok. 354, A190, 385) [K]; nur die Verkürzung auf 1/(16π³) in Dok. 320 [X] (Vermerk in Dok. 320 präzisiert)
 - Unabhängig gegengeprüft (rund 75 Aussagen); ν₃-Dirac-Zuordnung (R108) als Spannung zu Dok. 346 ausgewiesen
+- Überarbeitet (1. Okt. 2026, abends): Schwerpunkt auf Verhältnisse und natürliche Einheiten. Neue Gliederung: Was FFGFT ist (zuerst „Verhältnisse in natürlichen Einheiten“) → Die Grundform (ħ = c = 1, α = 1, e = √(4π), α = r_e/λ_C, ξE₀² = 1; Dualität; ξ mit Higgs-Prüfung als Verhältnis m_h/v; Skalen als Verhältnisse L₀/ℓ_P = T₀/t_P = ξ, v/E_P = ξ⁴/(5π), m_i/E_P; Rekursion mit Rotationszahl 74/75) → Teilchen als Verhältnisse (Leiter m_i/v, Koide, Neutrino-Verhältnisse 1 : √(14/3) : 11 und Δm²_atm/Δm²_sol = 32,7 (−1,4 %), m_h/M_Z = 11/8, m_t/M_Z = (11/8)², Ladung) → Die Übersetzung in SI (ein Anker, v, K_frak nur hier, E₀ und α_SI mit Bezugsenergie, G); Tabelle der prüfbaren Aussagen getrennt nach Verhältnissen und Absolutwerten; Leseführer um A080/A085, A130/A267, 122, 385, 386 ergänzt
 - Tabellen: prüfbare Aussagen, Statusbilanz, Leseführer; Abschnitte „Was nicht mehr gilt“ und „Offene Brücken“ (Stand R146)
 
-**Prüfskript:** 2/python/Dok384_Skripte/pruef_384_zusammenfassung.py — 77/77 PASS
+**Prüfskript:** 2/python/Dok384_Skripte/pruef_384_zusammenfassung.py — 79/79 PASS
 **Register:** kein Eintrag.
 
 ---
@@ -1178,9 +1179,10 @@ Anlass: Die FFGFT ist in ihrer Grundform verhältnisbasiert (natürliche Einheit
 - Umdefinition: ħ = c = ε₀ = 1 → e² = 4πα; mit α = 1 ist e = √(4π), die Ladung wird über die volle Kugeloberfläche gemessen [B]; α = (e_hist/e_geo)², e_geo/e_hist = 11,706 [B]; α = 1 als Recheneinheit [Q] (A267)
 - Geometrisches Bild: α = r_e/λ_C, a₀/λ_C = 1/α; Coulomb- und Compton-Kugel des Elektrons, α = 1 lässt sie zusammenfallen [B]; dasselbe 4π wie im Faktor 64π⁴ der Vakuumformel (Dok. 385)
 - Verhältnisform der Brücke: ξE₀² = 1, also E₀² = 1/ξ = 7500 in T0-Einheiten [B]; T0-Energieeinheit √(ξ m_e m_μ) = 84,85 keV [K]
-- SI-Brücke α_SI = ξ(E₀/1 MeV)²: verlangt Bezugsenergie 0,99992 MeV (korrigiert) bzw. 0,99323 MeV = √K_frak·MeV (nackt) [K]; Eigenschaft des Ankers (R135); geometrische Bedeutung der Bezugsenergie offen [S]; 2m_e als Bezugsenergie 2,2 % daneben [X]; S_T0 = 1 MeV/c² als „Vorhersage“ zirkulär [X]
-- Lesart E₀ = 1/ξ = 7500 GeV: Quadrat fehlt, Einheit gesetzt [X]
-- Vermerke (1. Okt. 2026): Dok. 005 (Parameter, zwei Tabellenzeilen, Korrekturkasten; bisher ohne Vermerk), Dok. 032, 133, 165 (bestehende Vermerke um E₀² = 1/ξ ergänzt), Dok. 013 (S_T0 per Konstruktion; Korrekturkasten), jeweils De/En; Dok. 384 stellt die Grundform α = 1, E₀² = 1/ξ voran und nennt die Bezugsenergie (Prüfskript 77/77)
+- SI-Brücke α_SI = ξ(E₀/1 MeV)²: verlangt Bezugsenergie 0,99992 MeV (korrigiert) bzw. 0,99323 MeV = √K_frak·MeV (nackt) [K]; Eigenschaft des Ankers (R135)
+- Wo das MeV herkommt: 1 MeV = 10⁶ · 1,602176634·10⁻¹⁹ J, Zahlenfaktor = Zahlenwert von e aus der alten Ampere-Definition (μ₀ = 4π·10⁻⁷), also dieselbe historische Ladungseinheit, in der α steckt [Q]; Messweg m_e c² = 2 Ry/α² [B]; die SI-Brücke ist gleichbedeutend mit m_e/MeV = √(αK/(ξ m_μ/m_e)) = 0,51104 (+8·10⁻⁵) [K]; Lesart der zwei Kugeln: Compton-Kugel (nur Masse) nackt, Korrektur auf der Seite der Coulomb-Kugel bzw. der Einheit, ergibt 1 MeV bis auf 8·10⁻⁵ [S]; der Rest bleibt offen
+- Fraktale Korrektur: Der von α verlangte Faktor zwischen nacktem und korrigiertem Weg (A130) ist das Quadrat der nackten Bezugsenergie in MeV, K_α = ξ m_e m_μ α⁻¹ = 0,98650 [B], 1,7·10⁻⁴ neben 74/75 [K]; in der Grundform ξE₀² = 1 kein Korrekturfaktor; K_frak tritt im α-Sektor nur in der SI-Übersetzung auf [K] (vgl. Dok. 122), sein Wert 74/75 stammt aus der Geometrie (A040, Rotationszahl der Rekursion); dieselbe Gleichung wie A130, keine neue Messung
+- Vermerke (1. Okt. 2026), die Korrekturen stehen nur dort: Dok. 005 (E₀ = 1/ξ = 7500 GeV; Parameter, zwei Tabellenzeilen, Korrekturkasten; bisher ohne Vermerk), Dok. 032, 133, 165 (bestehende Vermerke zu E₀ = 1/ξ um E₀² = 1/ξ ergänzt), Dok. 013 (S_T0 per Konstruktion; Korrekturkasten), A130 (Lücke der beiden Wege = Quadrat der Bezugsenergie), jeweils De/En; Dok. 384 stellt die Grundform α = 1, E₀² = 1/ξ voran und nennt die Bezugsenergie (Prüfskript 79/79)
 
-**Prüfskript:** 2/python/Dok386_Skripte/pruef_386_alpha_geometrie.py — 19/19 PASS
+**Prüfskript:** 2/python/Dok386_Skripte/pruef_386_alpha_geometrie.py — 21/21 PASS
 **Register:** kein Eintrag (Vermerke direkt in den betroffenen Dokumenten).

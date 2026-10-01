@@ -56,11 +56,17 @@ check("E_ref (nackt) = E0 sqrt(xi/alpha) = 0,99323 MeV", abs(Eref_b - 0.99323) <
 check("E_ref (nackt) / 1 MeV = sqrt(K_frak) bis auf 8e-5", abs(Eref_b / math.sqrt(K) - 1) < 1e-4, f"{Eref_b/math.sqrt(K)-1:+.1e}")
 check("E_ref (korrigiert) = 0,99992 MeV", abs(Eref_k - 0.99992) < 1e-5, f"{Eref_k:.5f}")
 check("T0-Einheit / sqrt(alpha) MeV = sqrt(K_frak)-Rest", abs(unit / (math.sqrt(a)) - Eref_b) < 1e-12)
-check("2 m_e = 1,022 MeV als Bezugsenergie: 2,2 % daneben", abs(2 * me / Eref_k - 1 - 0.0221) < 0.001)
+Ry = 13.605693122990   # eV, CODATA 2022
+check("MeV = 1e6 * {e} J; m_e c^2 = 2 Ry/alpha^2 = 0,51100 MeV", abs(1e6 * e - 1.602176634e-13) < 1e-25 and abs(2 * Ry / a**2 / 1e6 - me) < 1e-7, f"{2*Ry/a**2/1e6:.8f}")
+me_rel = math.sqrt(a * K / (xi * mmu / me))
+check("m_e/MeV = sqrt(alpha K/(xi m_mu/m_e)) = 0,51104 (+8e-5, derselbe Rest)", abs(me_rel - 0.51104) < 1e-5 and abs(me_rel / me - 1 - 8.4e-5) < 0.3e-5, f"{me_rel:.6f}, {me_rel/me-1:+.1e}")
+check("Korrektur auf der Einheitenseite: E0_nackt sqrt(xi/alpha)/sqrt(K) = 0,99992 MeV", abs(Eref_b / math.sqrt(K) - Eref_k) < 1e-12 and abs(Eref_b / math.sqrt(K) - 0.99992) < 1e-5)
 
-print("\n5. Zurückgenommene Lesart E0 = 1/xi = 7500 GeV")
-check("E0 = 1/xi ergäbe xi E0^2 = 7500, nicht 1 und nicht alpha", abs(xi * (1 / xi)**2 - 7500) < 1e-9)
-check("7500 GeV / 7,397 MeV = 1,01e6", abs(7500e3 / E0k / 1.0139e6 - 1) < 1e-3)
+Kal = xi * me * mmu / a
+check("K_alpha = xi m_e m_mu / alpha = (E_ref nackt / MeV)^2 = 0,98650 (A130)", abs(Kal - Eref_b**2) < 1e-12 and abs(Kal - 0.98650) < 1e-5, f"{Kal:.5f}")
+check("K_alpha liegt 1,7e-4 neben 74/75; K kürzt sich in m_mu/m_e heraus", abs(K / Kal - 1 - 1.68e-4) < 0.05e-4 and abs((K*mmu)/(K*me) - mmu/me) < 1e-12)
+
+print("\n5. Bezug zu Dok. 385")
 check("4 pi in e^2 = 4 pi alpha ist dasselbe 4 pi wie in 64 pi^4 = 16 pi^3 4 pi (Dok. 385)", abs(64 * pi**4 / (16 * pi**3) - 4 * pi) < 1e-12)
 
 print(f"\nErgebnis: {ok}/{n} OK")
