@@ -3,6 +3,8 @@ Dok. 335 -- Pruefskript: Massegebundene Zeitskalen und Interferometrie
 FFGFT-Eigenfrequenzen aus T~*m=1 vs. Holometer/QUEST/D4-Gitter
 
 Ausfuehren: python3 pruef_335_paul_frequenzen.py
+
+Aktualisiert am 1.10.2026: R_m = hbar/(m c^2) als Zeit (Einheit s) ausgewiesen, Laenge separat als reduzierte Compton-Wellenlaenge hbar/(m c) geprueft, Dispersionskorrektur auf Compton-Skala und Frequenzluecke (Holometer 10^13.5, QUEST 10^12.2) nach korrigiertem Stand (vgl. Dok. 335, D80).
 """
 
 import numpy as np
@@ -45,12 +47,24 @@ teilchen = [
     ("Neutron",  m_n),
 ]
 
+# Referenzwerte Dok. 335 (korrigiert): reduzierte Compton-Wellenlaenge hbar/(mc)
+lambda_ref = {"Elektron": 3.862e-13, "Myon": 1.868e-15,
+              "Proton": 2.103e-16, "Neutron": 2.100e-16}
+lam_C = {}
 for name, m in teilchen:
     f_m = m * c**2 / h
-    R_m = hbar / (m * c**2)
+    R_m = hbar / (m * c**2)          # Einheit: J*s / J = s (Zeit, nicht Laenge)
+    lam = hbar / (m * c)             # Einheit: m (reduzierte Compton-Wellenlaenge)
+    lam_C[name] = lam
     assert f_m > 1e19, f"{name}: f_m zu klein"
     assert abs(f_m * R_m - hbar/h) < 1e-10, f"{name}: f_m * R_m != hbar/h"
-    print(f"  {name:10s}: f_m = {f_m:.4e} Hz,  R_m = {R_m:.4e} m  [OK]")
+    assert abs(lam - c * R_m) / lam < 1e-12, f"{name}: hbar/(mc) != c*R_m"
+    assert abs(lam / lambda_ref[name] - 1) < 1e-3, f"{name}: hbar/(mc) weicht von Dok. 335 ab"
+    print(f"  {name:10s}: f_m = {f_m:.4e} Hz,  R_m = {R_m:.4e} s,  "
+          f"hbar/(mc) = {lam:.4e} m  [OK]")
+R_n = hbar / (m_n * c**2)
+assert abs(R_n / 7.0055e-25 - 1) < 1e-4, "Neutron: R_m != 7.0055e-25 s"
+print(f"  Neutron genauer: R_m = {R_n:.5e} s  (Dok. 335: 7.0055e-25 s)  [OK]")
 
 print("\nAssertion 1 bestanden: alle Comptonfrequenzen korrekt aus T~*m=1")
 
@@ -68,12 +82,15 @@ ratio_quest = f_e / f_quest
 print(f"  f_e (Elektron-Compton):  {f_e:.4e} Hz")
 print(f"  f_c (Holometer):         {f_holo:.4e} Hz = {f_holo/1e6:.4f} MHz")
 print(f"  f_c (QUEST):             {f_quest:.4e} Hz = {f_quest/1e6:.4f} MHz")
-print(f"  f_e / f_c (Holometer) =  {ratio_holo:.3e}  (>= 10^13 erwartet)")
-print(f"  f_e / f_c (QUEST)     =  {ratio_quest:.3e}  (>= 10^12 erwartet)")
+print(f"  f_e / f_c (Holometer) =  {ratio_holo:.3e}  = 10^{np.log10(ratio_holo):.1f}")
+print(f"  f_e / f_c (QUEST)     =  {ratio_quest:.3e}  = 10^{np.log10(ratio_quest):.1f}")
 
 assert ratio_holo > 1e13, "Frequenzluecke Holometer zu klein"
-assert ratio_quest > 1e12, "Frequenzluecke QUEST zu klein"
-print("\nAssertion 2 bestanden: Frequenzluecke mindestens 13 Groessenordnungen")
+assert 1e12 < ratio_quest < 1e13, "QUEST-Luecke sollte zwischen 10^12 und 10^13 liegen"
+assert abs(np.log10(ratio_holo) - 13.5) < 0.05, "Holometer: log10 != 13.5"
+assert abs(np.log10(ratio_quest) - 12.2) < 0.05, "QUEST: log10 != 12.2"
+print("\nAssertion 2 bestanden: Frequenzluecke 12 bis 13,5 Groessenordnungen "
+      "(Holometer 10^13.5, QUEST 10^12.2)")
 
 print("\n" + "=" * 70)
 print("ASSERTION 3: D4-Gitter -- Dispersionskorrektur bei L=40m")
@@ -104,6 +121,14 @@ print(f"  k_1 (L=40m) in Gittereinheiten: k1*l_P = {k1_lat:.3e}")
 print(f"  Dispersionskorrektur (k*l_P)^2  = {korr:.3e}  (<<1 erwartet)")
 
 assert korr < 1e-70, "Dispersionskorrektur sollte < 10^-70 sein"
+
+# Compton-Skala als Gitterkonstante: a = hbar/(mc) (Laenge, nicht hbar/(mc^2))
+disp_ref = {("Elektron", L_holo): 9.2e-28, ("Elektron", L_quest): 4.3e-25,
+            ("Proton", L_holo): 2.7e-34, ("Proton", L_quest): 1.3e-31}
+for (name, L), ref in disp_ref.items():
+    val = (np.pi * lam_C[name] / L)**2
+    assert abs(val / ref - 1) < 0.05, f"{name}, L={L}: (pi a/L)^2 = {val:.2e} != {ref:.1e}"
+    print(f"  a = hbar/(mc) ({name}), L = {L:5.2f} m: (pi a/L)^2 = {val:.2e}  [OK]")
 print(f"\nAssertion 3 bestanden: D4-Korrektur ~ {korr:.1e} (unmessbar)")
 
 print("\n" + "=" * 70)

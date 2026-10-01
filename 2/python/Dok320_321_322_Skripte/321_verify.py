@@ -8,6 +8,8 @@ Gell-Mann-Matrizen und alpha_s-Formel.
 
 Ausführen:
     python3 321_verify.py
+
+Aktualisiert am 1.10.2026: §6 prüft nicht mehr k = (n1+n2+n3) mod 3, sondern die tau-Invarianz der Summe, Orbit-Eigenzustände psi_{n,k} in H_k und n1=n2=n3 nur in H_0 (vgl. Dok. 321, D44).
 """
 
 import math
@@ -140,16 +142,73 @@ chk(abs(diff) < 5.0,
 
 # -----------------------------------------------------------
 print("\n[§6: Trialität der Farbzustände]")
-# Sektor-Index k = (n1+n2+n3) mod 3
-for n_sum, expected_k, label in [
-    (0, 0, "farbneutral (Gluon)"),
-    (1, 1, "Quark"),
-    (2, 2, "Antiquark"),
-    (3, 0, "Baryon (3 Quarks, k=3≡0)"),
+# Korrigierter Stand (Dok. 321, Vermerk zu Gl. tau_fourier):
+# tau: (n1,n2,n3,n4) -> (n3,n1,n2,n4). Die Summe n1+n2+n3 ist
+# tau-invariant und legt den Sektor NICHT fest. Eigenzustaende sind
+# Orbit-Kombinationen psi_{n,k} = sum_j omega^{-jk} tau^j e_n in H_k.
+omega = np.exp(2j*np.pi/3)
+
+def tau_n(n):
+    n1, n2, n3, n4 = n
+    return (n3, n1, n2, n4)
+
+def tau_psi(psi):
+    """tau auf Linearkombination {n: Koeffizient} von Fourier-Moden."""
+    out = {}
+    for n, c in psi.items():
+        m = tau_n(n)
+        out[m] = out.get(m, 0) + c
+    return out
+
+def psi_orbit(n, k):
+    psi, m = {}, n
+    for j in range(3):
+        psi[m] = psi.get(m, 0) + omega**(-j*k)
+        m = tau_n(m)
+    return psi
+
+def is_eigen(psi, lam):
+    t = tau_psi(psi)
+    keys = set(t) | set(psi)
+    return all(abs(t.get(q, 0) - lam*psi.get(q, 0)) < 1e-12 for q in keys)
+
+def norm2(psi):
+    return sum(abs(c)**2 for c in psi.values())
+
+# (a) Summe tau-invariant -> kann omega^k nicht unterscheiden
+n0 = (1, 0, 0, 0)
+orbit = [n0, tau_n(n0), tau_n(tau_n(n0))]
+chk(all(sum(m[:3]) == 1 for m in orbit) and tau_n(orbit[2]) == n0,
+    "Orbit von (1,0,0): Summe ueberall 1, tau^3 = id (Summe tau-invariant)")
+
+# (b) Einzelne Fourier-Mode ist nur fuer n1=n2=n3 Eigenvektor (dann H_0)
+chk(not any(is_eigen({n0: 1}, omega**k) for k in range(3)),
+    "Einzelmode (1,0,0) ist kein tau-Eigenvektor")
+chk(is_eigen({(2, 2, 2, 1): 1}, 1),
+    "Mode mit n1=n2=n3 ist Eigenvektor mit Phase 1 (in H_0)")
+
+# (c) Orbit-Kombinationen psi_{n,k} liegen in H_k, je ein Zustand pro Sektor
+for n in [(1, 0, 0, 0), (2, -1, 0, 3)]:
+    for k, label in [(0, "farbneutral"), (1, "Quark"), (2, "Antiquark")]:
+        p_nk = psi_orbit(n, k)
+        chk(norm2(p_nk) > 1e-9 and is_eigen(p_nk, omega**k),
+            f"psi_(n={n[:3]},k={k}): tau psi = omega^{k} psi ({label}, H_{k})")
+
+# (d) Fuer n1=n2=n3 ueberlebt nur k=0 (Moden nur in H_0)
+nd = (1, 1, 1, 0)
+chk(norm2(psi_orbit(nd, 0)) > 1e-9 and
+    all(norm2(psi_orbit(nd, k)) < 1e-12 for k in (1, 2)),
+    "n1=n2=n3: psi_(n,1)=psi_(n,2)=0, nur H_0 besetzt")
+
+# (e) Trialitaet additiv (Produktzustaende): Phasen multiplizieren sich
+for ks, expected_k, label in [
+    ((1, 1, 1), 0, "Baryon qqq: 1+1+1=3≡0"),
+    ((1, 2), 0, "Meson q qbar: 1+2=3≡0"),
+    ((1,), 1, "Einzelquark: 1"),
 ]:
-    k = n_sum % 3
-    chk(k == expected_k,
-        f"n1+n2+n3={n_sum} -> k={k} ({label})")
+    phase = np.prod([omega**k for k in ks])
+    chk(abs(phase - omega**expected_k) < 1e-12 and sum(ks) % 3 == expected_k,
+        f"{label} (Phase omega^{expected_k})")
 
 # -----------------------------------------------------------
 print(f"\n{banner}")

@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 # ffgft_308_p36_stufeC1_bullet_cluster.py  —  Dok. 307, P36 Stufe C (1/2)
 # P36_StufeC_BulletCluster.py
+# Aktualisiert am 1.10.2026: Abstandsfehler im Gasterm behoben (rho_klump
+#   bekam sqrt(r2_gas) UND x_gas, zog Delta also zweimal ab -> Gas als Schale
+#   bei r = 250 kpc); zusaetzlicher Lauf mit baryonischen Massen
+#   (Gas ~85 % der Baryonen, M_gas/M_Sterne = 5,7) und Pruefzeilen (vgl. Dok. 308).
+#   Die 2,3e14 Msun fuer M_gal sind die Linsenmasse, nicht die Sternmasse;
+#   der Lauf damit ist zirkulaer und nur zum Vergleich beibehalten.
 #
 # Bullet-Cluster-Test: Zwei-Klumpen FE-Mesh mit T~*m=1 (K3).
 # Fragestellung: Folgt der effektive Linsenpeak der
@@ -66,8 +72,9 @@ def n_total(x, los_half=1000*kpc, Nlos=500):
         r2      = (x - x_gal)**2 + z**2
         r2_gas  = (x - x_gas)**2  + z**2
         r_tot   = np.sqrt(r2)
-        phi_gal = G * rho_klump(np.sqrt(r2),     x_gal, M_gal, r_gal) / c**2
-        phi_gas = G * rho_klump(np.sqrt(r2_gas), x_gas, M_gas, r_gas) / c**2
+        # Abstand bereits relativ zum jeweiligen Zentrum -> x0 = 0 uebergeben
+        phi_gal = G * rho_klump(np.sqrt(r2),     0.0, M_gal, r_gal) / c**2
+        phi_gas = G * rho_klump(np.sqrt(r2_gas), 0.0, M_gas, r_gas) / c**2
         sigma  += (phi_gal + phi_gas) * dz
     return sigma
 
@@ -144,8 +151,8 @@ def n_total_eq(x, los_half=1000*kpc, Nlos=500):
     for z in z_arr:
         r2      = (x - x_gal)**2 + z**2
         r2_gas  = (x - x_gas)**2  + z**2
-        phi_gal = G * rho_klump(np.sqrt(r2),     x_gal, M_gal_test, r_gal) / c**2
-        phi_gas = G * rho_klump(np.sqrt(r2_gas), x_gas, M_gas, r_gas) / c**2
+        phi_gal = G * rho_klump(np.sqrt(r2),     0.0, M_gal_test, r_gal) / c**2
+        phi_gas = G * rho_klump(np.sqrt(r2_gas), 0.0, M_gas, r_gas) / c**2
         sigma  += (phi_gal + phi_gas) * dz
     return sigma
 
@@ -159,3 +166,37 @@ if dist_g_eq < dist_gas_eq:
     print("  -> Peak folgt noch immer Galaxien (Profilbreite entscheidend)")
 else:
     print("  -> Peak liegt beim Gas: Massenverhaeltnis war entscheidend")
+
+# --- Ergaenzung 1.10.2026: baryonische Massen (vgl. Dok. 308) ---
+print()
+print("Baryonische Massen (Gas ~85 % der Baryonen, M_gas/M_Sterne = 5,7):")
+M_sterne_bar = M_gas / (0.85 / 0.15)
+def n_total_bar(x, los_half=1000*kpc, Nlos=500):
+    z_arr = np.linspace(-los_half, los_half, Nlos)
+    dz = 2 * los_half / Nlos
+    sigma = 0.0
+    for z in z_arr:
+        r2      = (x - x_gal)**2 + z**2
+        r2_gas  = (x - x_gas)**2  + z**2
+        phi_gal = G * rho_klump(np.sqrt(r2),     0.0, M_sterne_bar, r_gal) / c**2
+        phi_gas = G * rho_klump(np.sqrt(r2_gas), 0.0, M_gas, r_gas) / c**2
+        sigma  += (phi_gal + phi_gas) * dz
+    return sigma
+sigma_bar = np.array([n_total_bar(x) for x in x_arr])
+pk_bar = x_kpc[np.argmax(sigma_bar)]
+print(f"  Linsenpeak (baryonisch, momentane Kopplung): x = {pk_bar:.1f} kpc")
+print(f"  Abstand -- Galaxie: {abs(pk_bar):.1f} kpc,  Abstand -- Gas: {abs(pk_bar - Delta/kpc):.1f} kpc")
+
+_ok = []
+def _check(name, cond):
+    _ok.append(bool(cond))
+    print(("  OK   " if cond else "  FAIL ") + name)
+print()
+print("Pruefzeilen:")
+_check("Gasterm: Abstand einfach gerechnet (Peak des reinen Gasprofils bei x = Delta)",
+       abs(x_kpc[np.argmax([G*rho_klump(abs(x - x_gas), 0.0, M_gas, r_gas) for x in x_arr])] - Delta/kpc) < 1e-6)
+_check("baryonische Massen: Linsenpeak liegt naeher am Gas als an den Galaxien",
+       abs(pk_bar - Delta/kpc) < abs(pk_bar))
+_check("Bullet mit baryonischen Massen bei momentaner Kopplung NICHT bestanden (Dok. 308, Vermerk)",
+       not (abs(pk_bar) < abs(pk_bar - Delta/kpc)))
+print(f"  {sum(_ok)}/{len(_ok)} OK")

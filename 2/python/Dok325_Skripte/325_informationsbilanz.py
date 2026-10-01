@@ -2,15 +2,18 @@
 # -*- coding: utf-8 -*-
 """
 Prüfskript: Informationsbilanz der Hawking-Verdampfung — Dok. 325 §5.3
-Neue Registereinträge: R87 [B], R88 [B]
+Registereinträge: R93 [B], R94 [B] (Dok. 190)
+Aktualisiert am 1.10.2026: Prüfung 3 jetzt S_BH(M_coll) = L_Matzke/l_P und
+n_thr = S_BH/√2 statt S_BH = n_thr; Prüfung 6 jetzt Verhältnis in gleicher
+Einheit = ln 3 statt log₂3 bit/nat; Registernummern R87/R88 -> R93/R94 (vgl. Dok. 325).
 
 Prüft:
   1. r_s(M_coll) = √2·l_P  (Dok. 329 [B], geometrisch)
   2. S_BH(M_coll) = 2π nat  (exakt)
-  3. S_BH(M_coll) = n_thr(Matzke) in Bit  (Identität R87)
+  3. S_BH(M_coll) = L_Matzke/l_P in Bit, n_thr(Matzke) = S_BH/√2  (R93)
   4. Flächenquant −4·l_P² pro nat  (Dok. 325 §Baustein 2 [B])
   5. N_emit ≥ 0 für M_init > M_coll  (Monotonie)
-  6. I_Sektor/I_thermisch = log₂3 = const  (R88, massenunabhängig)
+  6. I_Sektor/I_thermisch = ln 3 = const  (gleiche Einheit; R94, massenunabhängig)
   7. Gesamtbilanz: S_init = N_emit + S_coll  (Energieerhaltung)
   8. Feinkörnige Entropie konstant (unitäre Evolution, Dok. 322 [K])
 """
@@ -53,12 +56,15 @@ check("2  S_BH(M_coll) = 2π nat",
       abs(S_coll - 2*math.pi) < 1e-9,
       f"S_coll = {S_coll:.10f}, 2π = {2*math.pi:.10f}")
 
-# ── 3. Identität R87: S_coll = n_thr(Matzke) in Bit ─────────────────────────
-n_thr_Matzke = 2*math.pi / math.log(2)          # Dok. 329: 2π/ln2 bit
+# ── 3. Identität R93: S_coll = L_Matzke/l_P in Bit, n_thr = S_coll/√2 ───────
+L_Matzke_lP  = 2*math.pi / math.log(2)                     # Dok. 329: L_Matzke/l_P
+n_thr_Matzke = 2*math.pi / (math.sqrt(2)*math.log(2))      # Dok. 329: n_thr
 S_coll_bit   = S_coll / math.log(2)
-check("3  S_BH(M_coll) [bit] = n_thr(Matzke)  [R87]",
-      abs(S_coll_bit - n_thr_Matzke) < 1e-9,
-      f"S_coll = {S_coll_bit:.6f} bit, n_thr = {n_thr_Matzke:.6f} bit")
+check("3  S_BH(M_coll) [bit] = L_Matzke/l_P, n_thr = S_BH/√2 mit √2 = r_s/l_P  [R93]",
+      abs(S_coll_bit - L_Matzke_lP) < 1e-9
+      and abs(S_coll_bit/ratio - n_thr_Matzke) < 1e-9
+      and abs(S_coll_bit - n_thr_Matzke) > 1.0,
+      f"S_coll = {S_coll_bit:.6f} bit, n_thr = {n_thr_Matzke:.6f}")
 
 # ── 4. Flächenquant −4·l_P² pro nat ─────────────────────────────────────────
 # S_BH = A/(4l_P²) → dA/dS = 4l_P² → pro −1 nat: dA = −4·l_P²
@@ -75,11 +81,12 @@ check("5  N_emit ≥ 0 für M_init > M_coll (Monotonie)",
       all_pos,
       f"geprüft für {len(test_masses)} Massen")
 
-# ── 6. Verhältnis Sektorinfo/thermisch = log₂3 = const  [R88] ───────────────
-ratio_sector = math.log2(3)    # log₂3 Bit Sektorinfo pro 1 nat thermisch
-check("6  I_Sektor/I_thermisch = log₂3 = const  [R88]",
-      abs(ratio_sector - math.log(3)/math.log(2)) < 1e-12,
-      f"log₂3 = {ratio_sector:.6f}, massenunabhängig [B]")
+# ── 6. Verhältnis Sektorinfo/thermisch = ln 3 = const  [R94] ────────────────
+# log₂3 bit Sektorinfo pro 1 nat = 1/ln2 bit thermisch -> in gleicher Einheit ln 3
+ratio_sector = math.log2(3) / (1/math.log(2))
+check("6  I_Sektor/I_thermisch = ln 3 = const (gleiche Einheit)  [R94]",
+      abs(ratio_sector - math.log(3)) < 1e-12,
+      f"ln 3 = {ratio_sector:.6f}, massenunabhängig [B]")
 
 # ── 7. Gesamtbilanz: S_init = N_emit + S_coll ────────────────────────────────
 for M_init, label in [(M_sun, "M_☉"), (1e6*M_sun, "10⁶M_☉")]:
@@ -105,7 +112,7 @@ print("\n── Physikalische Kennzahlen ─────────────
 print(f"M_coll       = {M_coll:.4e} kg  = {M_coll/mP:.4f} m_P")
 print(f"r_s(M_coll)  = {r_s(M_coll)/lP:.4f} l_P  = √2·l_P")
 print(f"S_BH(M_coll) = {S_coll:.6f} nat = 2π nat")
-print(f"             = {S_coll/math.log(2):.4f} bit = n_thr(Matzke)")
-print(f"I_S/I_T      = log₂3 = {math.log2(3):.4f}  (für jedes M)")
+print(f"             = {S_coll/math.log(2):.4f} bit = L_Matzke/l_P = √2·n_thr(Matzke)")
+print(f"I_S/I_T      = ln 3 = {math.log(3):.4f}  (gleiche Einheit, für jedes M)")
 print(f"N_emit(M_☉)  = {S_BH(M_sun)-S_coll:.4e} nat")
 print(f"I_Sektor(M_☉)= {(S_BH(M_sun)-S_coll)*math.log2(3):.4e} bit")

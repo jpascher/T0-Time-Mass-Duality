@@ -11,8 +11,10 @@ ob es einen Empfaenger gibt -- und ob K_frak ihn stellt.
 
 Pruefbare Fassung. Eine Temperierung hinterlaesst einen Rest, und dieser
 Rest ist immer ein Komma: ein Verhaeltnis GLATTER Zahlen (nur kleine
-Primfaktoren). Der Korpus kennt einen Rest -- die ~7 eV aus P-315-2,
-45000-fach ueber dem Messboden. Hat er Kommastruktur?
+Primfaktoren). Der Korpus kennt einen Rest -- den Rest 1,7e-4 zwischen
+dem von alpha ueber die beiden E0-Wege verlangten K = 0,98650 und dem
+gesetzten K_frak = 74/75 (P-315-2), etwa das 7700-fache der relativen
+Unsicherheit von m_e*m_mu/alpha. Hat er Kommastruktur?
 
   TEST A  Groessenvergleich mit bekannten Kommas
   TEST B  Glattheitstest der besten rationalen Naeherungen
@@ -20,12 +22,25 @@ Primfaktoren). Der Korpus kennt einen Rest -- die ~7 eV aus P-315-2,
   TEST D  Aufloesung statt Temperierung -- der andere Mechanismus
 
 Nur Standardbibliothek.
+
+Aktualisiert am 1.10.2026: Rest von 1,36e-5 (~7 eV, aus der am 30.9.2026
+aus Dok. 315 entfernten Weg-2-Formel) auf den heutigen P-315-2-Rest
+(74/75)/K_req - 1 = 1,684e-4 mit K_req = xi*m_e*m_mu/alpha = 0,98650
+umgestellt; Naeherungen 5941/5940, 11881/11879, 17822/17819; Fazit ohne
+die ~7 eV, verlangter Kommawert n = 101,2 statt 100 (vgl. Dok. 316).
 """
 import math
 from fractions import Fraction
 
-REST = 1.36e-5          # P-315-2, relativer Rest auf K/m_e-Ebene
 XI = 4.0 / 30000.0
+# CODATA 2018: m_e, m_mu in MeV, alpha
+M_E = 0.51099895000
+M_MU = 105.6583755
+ALPHA = 1.0 / 137.035999084
+K_REQ = XI * M_E * M_MU / ALPHA          # von alpha verlangtes K (0,98650)
+K_SET = 74.0 / 75.0                      # gesetztes K_frak = 1 - 100 xi
+REST = K_SET / K_REQ - 1.0               # P-315-2: 1,684e-4
+N_VERLANGT = (1.0 - K_REQ) / XI          # 101,2 statt 100
 
 KOMMAS = {
     "pythagoreisch 531441/524288": Fraction(531441, 524288),
@@ -64,7 +79,10 @@ if __name__ == "__main__":
     print("Z10 -- IST DIE FRAKTALE KORREKTUR EIN TEMPERIERENDES INSTRUMENT?")
     print("=" * 74)
     ziel = 1.0 + REST
-    print(f"\n   Rest aus P-315-2: {REST:.3e}   ->   Verhaeltnis {ziel:.10f}")
+    print(f"\n   K verlangt (alpha) = {K_REQ:.6f}, K_frak = 74/75 = {K_SET:.6f}")
+    print(f"   Rest aus P-315-2: {REST:.3e}   ->   Verhaeltnis {ziel:.10f}")
+    assert abs(K_REQ - 0.98650) < 5e-6, "K_req sollte 0,98650 sein"
+    assert abs(REST - 1.684e-4) < 0.005e-4, "Rest sollte 1,684e-4 sein"
 
     # ---------------------------------------------------- TEST A
     print("\nTEST A: Groessenvergleich mit bekannten Kommas")
@@ -73,9 +91,12 @@ if __name__ == "__main__":
     for n, v in sorted(KOMMAS.items(), key=lambda x: -x[1]):
         rel = float(v) - 1
         print(f"   {n:>28} {rel:12.3e} {rel/REST:22.1f}")
-    print("""   => der Rest liegt um Faktor 14 bis 1000 unter allen bekannten
-      Kommas. Das schliesst nichts aus -- Kommas gibt es in jeder
-      Groesse --, macht aber eine Zuordnung nicht von selbst plausibel.""")
+    fmin = min(float(v) - 1 for v in KOMMAS.values()) / REST
+    fmax = max(float(v) - 1 for v in KOMMAS.values()) / REST
+    print(f"""   => der Rest liegt um Faktor {fmin:.1f} bis {fmax:.0f} unter allen
+      bekannten Kommas. Das schliesst nichts aus -- Kommas gibt es in
+      jeder Groesse --, macht aber eine Zuordnung nicht von selbst
+      plausibel.""")
 
     # ---------------------------------------------------- TEST B
     print("\nTEST B: hat 1 + Rest die Struktur eines Kommas?")
@@ -85,7 +106,7 @@ if __name__ == "__main__":
    Naeherungen an 1 + Rest.""")
     print(f"\n   {'Nenner <=':>12} {'Naeherung':>22} {'Trefferguete':>13}  Urteil")
     treffer = []
-    for maxden in (10 ** 4, 10 ** 5, 10 ** 6, 10 ** 7, 10 ** 8):
+    for maxden in (6000, 12000, 18000, 10 ** 5, 10 ** 6):
         f = Fraction(ziel).limit_denominator(maxden)
         guete = abs(float(f) - ziel) / REST
         urteil = glattheitsurteil(f, ziel)
@@ -98,6 +119,11 @@ if __name__ == "__main__":
             txt = "nicht glatt"
         print(f"   {maxden:>12} {str(f):>22} {guete:12.1%}  {txt}")
     assert not treffer, "Unerwartet: der Rest zeigt Kommastruktur"
+    genannt = [Fraction(5941, 5940), Fraction(11881, 11879), Fraction(17822, 17819)]
+    for f in genannt:
+        assert f == Fraction(ziel).limit_denominator(f.denominator), f"{f} keine beste Naeherung"
+        assert not (glatt(f.numerator, 7) and glatt(f.denominator, 7)), f"{f} unerwartet glatt"
+    print("   Im Dokument genannt: 5941/5940, 11881/11879, 17822/17819 -- keine 7-Limit-glatt.")
     print("""
    => KEINE der brauchbaren Naeherungen ist glatt. Der Rest hat keine
       Kommastruktur.
@@ -152,8 +178,8 @@ if __name__ == "__main__":
    Instrument. Waere K_frak eine Temperierung, muesste sie einen
    kommaartigen Rest hinterlassen; der vorhandene Rest hat diese
    Struktur nicht (Test B, bei erwiesener Trennschaerfe in Test C).
-   Das praezisiert P-315-2: die ~7 eV sind eher Polmassen-Effekt oder
-   echter Korrekturterm als Abfall einer Rationalisierung.
+   Der Rest ist kein Abfall einer Rationalisierung; die beiden Wege
+   treffen den Kommawert 100 xi auf gut 1 % (alpha verlangt n = 101,2).
 
    [B] K_frak sitzt gleichwohl dort, wo ein Instrument saesse:
    Dok. 314 D2 fuehrt sie als Eigenschaft der DURCHQUERUNG, die ueber
@@ -172,4 +198,6 @@ if __name__ == "__main__":
    schneidet PASSIV ab: Unterscheidungen verschwinden ohne
    Rationalisierung, und die fraktale Korrektur ist daran nicht
    beteiligt.""")
+    print(f"   verlangter Kommawert: n = {N_VERLANGT:.2f} (gesetzt 100)")
+    assert abs(N_VERLANGT - 101.25) < 0.01
     print("\nAlle Checks bestanden.")

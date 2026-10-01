@@ -10,6 +10,8 @@ Kontext:
   - Frage: Wenn Matrizen-/Galois-Lösungen und geometrische Lösungen
     übereinstimmen — gelten dann dieselben Faktorisierungsregeln
     für die harmonischen Muster der Primzahlen?
+
+Aktualisiert am 1.10.2026: Klasse (g_i)²·(x+1)² hat Ordnung kgV(13,2)=26, nicht 13; Ordnung wird jetzt an der Blockmatrix berechnet und geprüft, Ordnung 13 nur mit (x+2)² (vgl. Dok. 342, D101).
 """
 
 import numpy as np
@@ -82,6 +84,21 @@ print()
 print("χ-Faktorisierungsklassen für 8×8-Matrizen (G(6)):")
 print()
 
+def blockdiag(*blocks):
+    n = sum(len(B) for B in blocks)
+    M = [[0]*n for _ in range(n)]
+    o = 0
+    for B in blocks:
+        for i in range(len(B)):
+            for j in range(len(B)):
+                M[o+i][o+j] = B[i][j]
+        o += len(B)
+    return M
+
+MINUS1 = [[2]]   # Eigenwert -1 = 2 mod 3, Faktor (x+1)
+PLUS1  = [[1]]   # Eigenwert +1, Faktor (x-1) = (x+2)
+CHECKS = []
+
 classes = []
 # (fi)² · (x+1)²
 for c0,c1,c2,name in primitives:
@@ -89,9 +106,32 @@ for c0,c1,c2,name in primitives:
 # (fi)·(fj)·(x+1)²  i<j
 for (i,(c0a,c1a,c2a,na)),(j,(c0b,c1b,c2b,nb)) in combinations(enumerate(primitives),2):
     classes.append((f"({na})·({nb})·(x+1)²", 26, "Gemischt-primitiv"))
-# (gi)² · (x+1)²  — Ordnung 13
+# (gi)² · (x+1)²  — Ordnung kgV(13,2) = 26 (halbeinfacher Vertreter;
+# korrigiert, vorher 13): (x+1)² bringt Eigenwert -1 der Ordnung 2.
 for c0,c1,c2,name in order13:
-    classes.append((f"({name})²·(x+1)²", 13, "Ord-13-Typ"))
+    Cg = companion(c0, c1, c2)
+    o_semi = elem_order(blockdiag(Cg, Cg, MINUS1, MINUS1), 3)
+    o_plus = elem_order(blockdiag(Cg, Cg, PLUS1, PLUS1), 3)
+    CHECKS.append((o_semi == 26,
+        f"ord[({name})²·(x+1)²] = {o_semi} = kgV(13,2) = 26"))
+    CHECKS.append((o_plus == 13,
+        f"ord[({name})²·(x+2)²] = {o_plus} = 13 (nur mit Eigenwert +1)"))
+    # nicht halbeinfach: Begleitmatrix von g² (Jordanblock) und von (x+1)²
+    g = [c0, c1, c2, 1]
+    g2 = [0]*7
+    for i in range(4):
+        for j in range(4):
+            g2[i+j] = (g2[i+j] + g[i]*g[j]) % 3
+    Cg2 = [[0]*6 for _ in range(6)]
+    for i in range(1, 6):
+        Cg2[i][i-1] = 1
+    for i in range(6):
+        Cg2[i][5] = (-g2[i]) % 3
+    J_m1 = [[0, (-1) % 3], [1, (-2) % 3]]   # Begleitmatrix von x²+2x+1
+    o_jord = elem_order(blockdiag(Cg2, J_m1), 3, maxk=200)
+    CHECKS.append((o_jord == 78,
+        f"ord[({name})²·(x+1)²] mit Jordanblock = {o_jord} = 78"))
+    classes.append((f"({name})²·(x+1)²", o_semi, "Ord-13-Typ"))
 # (fi)·(gi)·(x+1)²  — kgV(26,13)=26
 for (c0a,c1a,c2a,na),(c0b,c1b,c2b,nb) in iproduct(primitives[:1],order13[:1]):
     classes.append((f"({na})·({nb})·(x+1)²", 26, "Prim26×Ord13"))
@@ -101,6 +141,14 @@ for c0,c1,c2,name in primitives[:2]:
 
 for chi, ord_val, typ in classes:
     print(f"  [{typ:20s}]  ord={ord_val}  χ={chi}")
+
+print()
+print("Prüfung der Ordnungen (Dok. 342, korrigiert):")
+for ok, msg in CHECKS:
+    print(f"  [{'OK  ' if ok else 'FAIL'}] {msg}")
+n_ok = sum(ok for ok, _ in CHECKS)
+print(f"  {n_ok}/{len(CHECKS)} OK")
+assert n_ok == len(CHECKS), "Ordnungsprüfung fehlgeschlagen"
 
 print()
 print("=" * 65)
@@ -420,8 +468,8 @@ print("""
    → Mögliche nächste Massenschicht oberhalb Leptonen?
 
 6. Die 4 Ord-13-Polynome in GF(27)* (Untergruppe Z₁₃) könnten
-   Sub-Leptonen-Strukturen beschreiben.
-   → 13-limit ohne Z₂-Komponente?
+   Sub-Leptonen-Strukturen beschreiben. Mit (x+1)² hat die Klasse
+   Ordnung 26; ohne Z₂-Komponente (Ordnung 13) nur mit (x+2)².
 
 7. Gemischte χ-Klassen (f_i · f_j) mit zwei verschiedenen
    GF(27)*-Richtungen könnten Mischungszustände beschreiben.

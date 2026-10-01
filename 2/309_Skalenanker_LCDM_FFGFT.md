@@ -50,7 +50,7 @@ Seit 2019 sind sie alle exakt fixiert. Das bedeutet:
 Beispiele:
 
     1 m  = c / nu_Cs * (historischer Zahlenfaktor 9 192 631 770 / 299 792 458)
-    1 kg = h * nu_Cs^2 / c^2 * (Zahlenfaktor)
+    1 kg = h * nu_Cs / c^2 * (Zahlenfaktor)
     1 A  = e * nu_Cs * (Zahlenfaktor)
     1 K  = h * nu_Cs / k_B * (Zahlenfaktor)
 
@@ -80,9 +80,11 @@ irgendwo eine Zahl setzen. Die FFGFT-Aussage
 
 ist aequivalent zur **dimensionslosen** Aussage:
 
-    H_0 / nu_e = (pi/2) * xi^10 = 2,79e-39
+    H_0 / nu_e = pi^2 * xi^10 = 1,75e-38
 
 mit nu_e = m_e*c^2/h = 1,235e20 Hz (Elektronenfrequenz).
+
+*(Korrigiert am 1. Okt. 2026: vorher H_0/nu_e = (pi/2) * xi^10 = 2,79e-39 -- c/lambda_e = m_e*c^2/hbar = 2*pi*nu_e, also H_0/nu_e = pi^2 * xi^10; direkt 2,1655e-18 s^-1 / 1,2356e20 Hz = 1,753e-38. Gleichwertig: H_0/omega_e = (pi/2) * xi^10 = 2,79e-39 mit omega_e = m_e*c^2/hbar.)*
 
 Das Verhaeltnis H_0/nu_e ist eine reine Zahl — unabhaengig von
 Einheitenkonventionen. Der SI-Bezug steckt vollstaendig in der
@@ -210,7 +212,9 @@ die unter ΛCDM kalibriert sind.
 Der 'natuerliche' H0 aus der FFGFT-Rotverschiebungsformel
 z = exp(xi*x/lam_e) - 1 waere:
 
-    H0_natur = c * xi / lam_e ~ 3e33 km/s/Mpc  (unphysikalisch)
+    H0_natur = c * xi / lam_e ~ 3e36 km/s/Mpc  (unphysikalisch)
+
+*(Korrigiert am 1. Okt. 2026: vorher ~ 3e33 km/s/Mpc -- c*xi/lam_e = 1,035e17 s^-1 = 3,19e36 km/s/Mpc; Gegenprobe: (pi/2) * xi^9 * 3,19e36 = 66,8.)*
 
 Um ~67 km/s/Mpc zu erhalten, braucht man xi^10 statt xi^1.
 Die Rechtfertigung des Exponenten 10 ist letztlich:

@@ -12,23 +12,31 @@ Beweisstruktur (Dok. 327):
   [2] Diagonalform: unter (A1)-(A3) ist F̂|_{H_k} = φ_k·1 mit
       φ_k = Σ_{n>=k} r_n·exp(iθ_{n,k}).
   [3] Beschraenktheit: Σr_n < ∞  =>  ||F̂|| <= Σr_n, D(F̂) = H.
-  [4] Reellitaet aus Z3: θ_{n,k} = -θ_{n,-k} (Orbifold-Symmetrie)
-      =>  alle φ_k ∈ R  =>  F̂ = F̂†. Beschraenkt+symmetrisch = selbstadjungiert.
-      GEGENPROBE: ungepaarte Phase  =>  F̂ ≠ F̂†.
-  [5] Defektindizes: dim ker(F̂† ∓ i) = 0 in jeder Trunkierung.
+  [4] Z3-Paarung θ_{n,-k} = -θ_{n,k}: F̂ normal (blockdiagonal mit Skalaren);
+      φ_{-k} = conj(φ_k), wenn k und -k dieselben Stufen n tragen.
+      Auf P0 (θ ∈ {0,π}) F̂ = F̂†; auf geladenen Paaren F̂† = Z3-gespiegeltes F̂,
+      ||F̂-F̂†|| = 2|Im φ_k| != 0. Selbstadjungiert dort: Re F̂ = (F̂+F̂†)/2
+      (Kosinus-Form) -- Setzung [S].
+  [5] Defektindizes von Re F̂: dim ker((Re F̂) ∓ i) = 0 in jeder Trunkierung.
   [6] Tensorfaktor Δ_{T4}: Fourier-diagonal, reell; fraktales Mass
       dμ_f = w·dμ mit 0<c<=w<=C (endliche 100er-Rekursion):
       verallgemeinertes EW-Problem bleibt reell.
-  [7] Z3-Projektor P0 kommutiert mit F̂; Restriktion selbstadjungiert.
+  [7] Z3-Projektor P0 kommutiert mit F̂; Restriktion P0 F̂ P0 selbstadjungiert.
   [8] χ-Twist-Randbedingungen (χ³=1): unitaer implementiert,
       Spektrum in jeder Twist-Klasse reell.
-  [9] D4-Suboperator: λ_min existiert, trunkierungsstabil;
-      ξ = λ_min wohldefiniert.
+  [9] D4-Suboperator: λ_min existiert, trunkierungsstabil
+      (ξ ist im Modell als Grundmode eingesetzt, nicht hergeleitet).
 
 Ausfuehren: python3 327_selbstadjungiertheit_F_verify.py
 Benoetigt:  numpy
 
 Referenz: J. Pascher, Dok. 327 (Arbeitsfassung), Dok. 322 (R82), Dok. 314.
+
+Aktualisiert am 1.10.2026: [4] prueft jetzt Normalitaet von F̂, ||F̂-F̂†|| != 0
+auf geladenen Paaren (= 2|Im φ_k|), Hermitizitaet auf P0 und Re F̂ = (F̂+F̂†)/2
+= Kosinus-Form; die fruehere "Gegenprobe" entfaellt (gepaart und ungepaart
+gleich gross). [5] auf Re F̂ bezogen, [7] auf F̂ selbst. [9] Kommentar: ξ ist im
+Modell eingesetzt, Ausgabe "existiert, trunkierungsstabil" (vgl. Dok. 327).
 """
 
 import numpy as np
@@ -123,7 +131,7 @@ chk(norm_F <= r.sum() + 1e-12,
 # ============================================================
 # [4] Reellitaet aus Z3-Paarung; Gegenprobe
 # ============================================================
-print("\n[4] Z3-Phasensymmetrie => F̂ = F̂†; Gegenprobe ohne Symmetrie")
+print("\n[4] Z3-Paarung => F̂ normal; F̂ = F̂† auf P0; Re F̂ = Kosinus-Form")
 # Mit Z3-Symmetrie sind die Bloecke paarweise konjugiert: Spektrum von F
 # als OPERATOR auf dem Z3-symmetrischen Raum: phi_k und conj(phi_k) treten
 # als Paar auf. Selbstadjungiert ist F auf dem REELLEN Sektor: der
@@ -153,23 +161,36 @@ def build_F_paired():
 # PAARSUMME reell: e^{iθ} + e^{-iθ} = 2cosθ. Der Z3-gemittelte Operator
 # (Projektion auf den symmetrischen Sektor) ist damit exakt F_kov:
 F_kov = build_F_paired()
-chk(np.allclose(F_kov, F_kov.T.conj()),
-    "Z3-gemittelter Operator: F̂_kov = F̂_kov† exakt (Satz 3)")
+# (a) F̂ selbst (mit Z3-Paarung) ist normal, aber auf geladenen Paaren nicht hermitesch
+chk(np.allclose(F @ F.T.conj(), F.T.conj() @ F),
+    "F̂ normal: F̂F̂† = F̂†F̂ (blockdiagonal mit Skalaren, Satz 3)")
+charged = [k for k in range(N) if q[k] != 0]
+asym_ch = max(np.max(np.abs((F - F.T.conj())[starts[k]:starts[k+1], starts[k]:starts[k+1]]))
+              for k in charged)
+chk(asym_ch > 1e-3 and abs(asym_ch - 2*max(abs(phi[k].imag) for k in charged)) < 1e-12,
+    f"geladene Paare: ||F̂-F̂†|| = 2|Im φ_k| = {asym_ch:.4f} != 0 (F̂ dort nicht hermitesch)")
+# (b) Gleichstufige Paare: φ_{-k} = conj(φ_k); im Modell liegen k,-k auf verschiedenen Stufen
+phi_same_k  = sum(r[n-1]*np.exp(1j*theta[n, 0]) for n in range(1, N+1))
+phi_same_mk = sum(r[n-1]*np.exp(1j*theta[n, 1]) for n in range(1, N+1))
+chk(abs(phi_same_mk - np.conj(phi_same_k)) < 1e-14,
+    f"gleiche Stufen n fuer k,-k => φ_(-k) = conj(φ_k); Modell (versch. Stufen): |φ_2-conj φ_1| = {abs(phi[1]-np.conj(phi[0])):.4f}")
+# (c) Nullsektoren (θ ∈ {0,π}): F̂ dort selbstadjungiert
+null = [k for k in range(N) if q[k] == 0]
+chk(all(np.allclose(F[starts[k]:starts[k+1], starts[k]:starts[k+1]],
+                    F[starts[k]:starts[k+1], starts[k]:starts[k+1]].T.conj()) for k in null),
+    "Nullsektoren P0: F̂|P0 = (F̂|P0)† (Satz 3, [B] auf P0)")
+# (d) Kosinus-Form = Re F̂ = (F̂+F̂†)/2 -- anderer Operator als F̂, selbstadjungiert per Setzung
+chk(np.allclose(F_kov, (F + F.T.conj())/2) and np.allclose(F_kov, F_kov.T.conj()),
+    "Kosinus-Form F̂_kov = Re F̂ = (F̂+F̂†)/2, selbstadjungiert (Setzung [S] auf ganzem Raum)")
 ew = np.linalg.eigvalsh(F_kov)
 chk(np.all(np.abs(ew.imag) < 1e-14) if np.iscomplexobj(ew) else True,
-    f"Spektrum reell: λ ∈ [{ew.min():.6f}, {ew.max():.6f}]")
-# Gegenprobe: OHNE Z3-Paarung (eine unpaarige Phase) verletzt Symmetrie
-theta_bad = theta.copy(); theta_bad[2, 1] = 0.7  # bricht theta_2 = -theta_1
-F_bad = build_F(theta_bad)
-asym = np.max(np.abs(F_bad - F_bad.T.conj()))
-chk(asym > 1e-3,
-    f"Gegenprobe: ungepaarte Phase => ||F̂-F̂†|| = {asym:.4f} > 0 (Symmetrie ist Z3-Folge, kein Zufall)")
+    f"Spektrum von Re F̂ reell: λ ∈ [{ew.min():.6f}, {ew.max():.6f}]")
 
 # ============================================================
 # [5] Defektindizes (0,0)
 # ============================================================
-print("\n[5] Defektindizes: ker(F̂† ∓ i) = {0}")
-for s, name in [(1j, "F̂†-i"), (-1j, "F̂†+i")]:
+print("\n[5] Defektindizes von Re F̂: ker((Re F̂) ∓ i) = {0}")
+for s, name in [(1j, "Re F̂-i"), (-1j, "Re F̂+i")]:
     M = F_kov.T.conj() - s*np.eye(D)
     sv = np.linalg.svd(M, compute_uv=False)
     chk(sv.min() > 0.5,  # |Im|=1 garantiert Abstand >= 1 fuer s.a. Operator
@@ -216,9 +237,9 @@ for k in range(N):
     blk = slice(starts[k], starts[k+1])
     tau[blk, blk] = omega**q[k] * np.eye(dims[k])
 P0 = (np.eye(D) + tau + tau@tau) / 3
-chk(np.max(np.abs(F_kov@P0 - P0@F_kov)) < 1e-14, "[F̂_kov, P0] = 0")
-F_res = P0 @ F_kov @ P0
-chk(np.allclose(F_res, F_res.T.conj()), "P0·F̂·P0 selbstadjungiert (Restriktion)")
+chk(np.max(np.abs(F@P0 - P0@F)) < 1e-14, "[F̂, P0] = 0")
+F_res = P0 @ F @ P0
+chk(np.allclose(F_res, F_res.T.conj()), "P0·F̂·P0 selbstadjungiert (Restriktion auf Z3-invarianten Sektor)")
 
 # ============================================================
 # [8] χ-Twist-Randbedingungen
@@ -237,7 +258,9 @@ for j, chi in enumerate([1, omega, omega**2]):
 # [9] D4-Suboperator: λ_min wohldefiniert und trunkierungsstabil
 # ============================================================
 print("\n[9] F̂_D4: λ_min existiert, stabil unter Trunkierung")
-# D4-Modell: Operator auf D4-Gitterschale mit Grundmode xi
+# D4-Modell: Operator auf D4-Gitterschale; die Grundmode xi ist hier
+# EINGESETZT (nicht hergeleitet) -- geprueft wird nur Existenz und
+# Trunkierungsstabilitaet des Minimums (D4-Sektor im Z3-invarianten Sektor).
 def F_D4(M_trunc):
     lam_d4 = np.array([xi * (1 + n) for n in range(M_trunc)])  # Leiter ab xi
     return np.diag(lam_d4)
@@ -246,7 +269,7 @@ for M_trunc in [8, 16, 32, 64]:
     ewD = np.linalg.eigvalsh(F_D4(M_trunc))
     lmins.append(ewD.min())
 chk(all(abs(l - xi) < 1e-15 for l in lmins),
-    f"λ_min(F̂_D4) = {lmins[-1]:.8e} = ξ, unabhaengig von Trunkierung (Min-Max)")
+    f"λ_min(F̂_D4) = {lmins[-1]:.8e} existiert (ξ eingesetzt), unabhaengig von Trunkierung (Min-Max)")
 chk(lmins[0] == lmins[-1], "Trunkierungsstabil: unterste Mode bereits im kleinsten Raum")
 
 # ============================================================
@@ -259,13 +282,14 @@ else:
     print("  Beweiskette Dok. 327 (Selbstadjungiertheit F̂):")
     print("  1. Filtrierungs-Lemma: L_nL_m = L_min exakt realisiert       [B]")
     print("  2. Diagonalform + Beschraenktheit (Σr_n < ∞ => D(F̂) = H)     [B]")
-    print("  3. Z3-Paarung => Reellitaet => F̂ = F̂† (+ Gegenprobe)         [B]")
-    print("  4. Defektindizes (0,0): beschraenkt s.a. => keine Erweiterung [B]")
+    print("  3. Z3-Paarung => F̂ normal; F̂ = F̂† auf P0                    [B]")
+    print("     ganzer Raum: s.a. ist Re F̂ = (F̂+F̂†)/2 (Kosinus-Form)       [S]")
+    print("  4. Defektindizes (0,0) fuer Re F̂ bzw. F̂|P0                   [B]")
     print("  5. Fraktales Mass (endl. Rekursion) erhaelt s.a.             [B]")
     print("  6. Z3-Restriktion + χ-Twists: s.a. in jeder Klasse           [B]")
-    print("  7. ξ = λ_min(F̂_D4) wohldefiniert, trunkierungsstabil         [B]")
-    print("  => R82-Luecke vollstaendig geschlossen. Keine Restfaelle:")
-    print("     L0 = xi*lP (Dok. 180 [K]) garantiert endliche Stufenzahl;")
-    print("     Σr_n < ∞ ist von L0 garantiert, nicht zusaetzlich gefordert.")
+    print("  7. λ_min(F̂_D4) existiert, trunkierungsstabil (D4 in P0)      [B]")
+    print("  => R82-Luecke auf dem Z3-invarianten Sektor geschlossen;")
+    print("     ganzer Raum offen [S] (Re F̂ als Setzung).")
+    print("     L0 = xi*lP (Dok. 180 [K]) garantiert endliche Stufenzahl.")
 print(banner)
 sys.exit(1 if FAIL else 0)

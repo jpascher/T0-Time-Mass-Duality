@@ -8,6 +8,8 @@ Test 1: Dichte der erreichbaren Verhältnisse in log-Skala als Funktion von k_ma
 Test 2: Erwartete Zufallstreffer pro Ziel vs. tatsächliche Treffer.
 Test 3: Analogon Obertonreihe: Intervallabstand log(n+1)/n → 0.
 Test 4: Trennschärfe-Grenze k*: ab wann ist 1%-Auflösung nicht mehr diskriminierend?
+
+Aktualisiert am 1.10.2026: Obertonschwelle korrigiert — unter 7 Cent bei n ≈ 250, unter 5 Cent erst ab n ≈ 350 (n = 346); Tabelle um n = 250/346/350 und Prüfung ergänzt (vgl. Dok. 342, D103).
 """
 import math, itertools, random
 from collections import Counter
@@ -89,12 +91,23 @@ print("="*70)
 print("TEST 3: Analogon Obertonreihe — Intervallabstände verschwinden")
 print("="*70)
 print(f"{'n':>4} {'Intervall n+1:n':>16} {'Cent':>8} {'JND≈5ct?':>10}")
-for n in (1,2,3,4,5,6,8,12,16,24,32,48,64):
+for n in (1,2,3,4,5,6,8,12,16,24,32,48,64,250,346,350):
     cent=1200*math.log2((n+1)/n)
     print(f"{n:>4} {f'{n+1}:{n}':>16} {cent:>8.1f} {'unterscheidbar' if cent>5 else 'NICHT':>10}")
+cent250 = 1200*math.log2(251/250)
+n5 = next(n for n in range(1, 10000) if 1200*math.log2((n+1)/n) < 5)
+checks3 = [
+    (5 < cent250 < 7, f"n=250: {cent250:.2f} Cent — unter 7, aber noch über 5 Cent"),
+    (n5 == 346, f"erstes n mit Abstand < 5 Cent: n = {n5} (≈ 350)"),
+]
+for ok, msg in checks3:
+    print(f"  [{'OK  ' if ok else 'FAIL'}] {msg}")
+print(f"  {sum(ok for ok,_ in checks3)}/{len(checks3)} OK")
+assert all(ok for ok,_ in checks3), "Obertonschwelle falsch"
 print("""
-Ab n≈16 liegen benachbarte Obertöne unter einem Halbton (100 ct), ab n≈250
-unter der Wahrnehmungsschwelle (~5 ct). Das ist exakt derselbe Mechanismus:
+Ab n≈16 liegen benachbarte Obertöne unter einem Halbton (100 ct); unter
+7 Cent bei n≈250, unter der Wahrnehmungsschwelle (~5 ct) erst ab n≈350
+(n=346). Das ist exakt derselbe Mechanismus:
 die harmonische Reihe wird bei hohen Moden quasi-kontinuierlich (Dok.159:
 Konvergenz durch Modenunterdrückung auf dem fraktalen Torus).
 """)

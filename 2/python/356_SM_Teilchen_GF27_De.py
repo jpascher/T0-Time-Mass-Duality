@@ -1,3 +1,5 @@
+# Aktualisiert am 1.10.2026: geladene Leptonen als NQR (O4) beschriftet, Y = -1 offen; Grau = nu_R im Dirac-Fall (nach Dok. 340/R108 mind. fuer nu3 noetig) statt "absent; Dirac" (vgl. Dok. 356, 346).
+# Aktualisiert am 1.10.2026: Aussenring nach Orbit-Tabelle Dok. 346 (O1 = nu, O3 = Anti-nu [QR]; O4 = e, mu, tau, O2 = Quarks [NQR]); Titel/Fusszeile: Ladungsquantisierung [B] (Dok. 346), Hyperladung der geladenen Leptonen offen [S] (Dok. 190, R146) statt "alle Quantenzahlen algebraisch erzwungen" (vgl. Dok. 356, 346).
 from reportlab.lib.pagesizes import A4, landscape
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase import pdfmetrics
@@ -110,7 +112,7 @@ ROW1 = H-118; ROW2 = H-248; ROW3 = H-398; ROW4 = H-508
 # Titel
 c.setFont("Helvetica-Bold", 11); c.setFillColorRGB(0,0,0)
 c.drawCentredString(LBL_W+FW/2, H-12,
-    "Standardmodell-Teilchen aus GF(27)* — alle Quantenzahlen algebraisch erzwungen [B]")
+    "Standardmodell-Teilchen aus GF(27)* — Ladungsquantisierung [B], Y der gel. Leptonen offen [S]")
 c.setFont("Helvetica", 9)
 c.drawCentredString(LBL_W+FW/2, H-24,
     "FFGFT · J. Pascher 2026 · Dok. 346/347/348/349")
@@ -124,7 +126,7 @@ def rlabel(y, lines):
     for i,l in enumerate(lines): c.drawString(4, y-i*11, l)
 
 rlabel(ROW1+8,  ["Neutrinos","(QR)"])
-rlabel(ROW2+8,  ["gel. Leptonen","(QR)"])
+rlabel(ROW2+8,  ["gel. Leptonen","(NQR, O4)","Y=-1 offen"])
 rlabel(ROW3+8,  ["Up-Quarks","(NQR)"])
 rlabel(ROW4+8,  ["Down-","Quarks","(NQR)"])
 
@@ -141,16 +143,16 @@ c.drawCentredString(LBL_W+FW/2, ROW3+R+PAD+6, "SU(2)L-Dublett = Sd-Sektor [B] Do
 # Teilchen
 parts = [
     (0,ROW1,"ν",  "0",   "-1",  "—",    BLUE_DARK, False,True, False),
-    (1,ROW1,"νμ", "0",   "-1",  "—",    BLUE_MID,  False,True, False),
+    (1,ROW1,"νμ", "0",   "-1",  "—",    BLUE_DARK, False,True, False),
     (2,ROW1,"ντ", "0",   "-1",  "—",    BLUE_DARK, True, True, False),
-    (0,ROW2,"e",  "-1",  "-1",  "-2",   BLUE_DARK, False,False,False),
+    (0,ROW2,"e",  "-1",  "-1",  "-2",   BLUE_MID,  False,False,False),
     (1,ROW2,"μ",  "-1",  "-1",  "-2",   BLUE_MID,  False,False,False),
-    (2,ROW2,"τ",  "-1",  "-1",  "-2",   BLUE_DARK, True, False,False),
+    (2,ROW2,"τ",  "-1",  "-1",  "-2",   BLUE_MID,  True, False,False),
     (0,ROW3,"u",  "+2/3","+1/3","+4/3", GREEN_DARK,False,False,True),
-    (1,ROW3,"c",  "+2/3","+1/3","+4/3", GREEN_MID, False,False,True),
+    (1,ROW3,"c",  "+2/3","+1/3","+4/3", GREEN_DARK,False,False,True),
     (2,ROW3,"t",  "+2/3","+1/3","+4/3", GREEN_DARK,True, False,True),
     (0,ROW4,"d",  "-1/3","+1/3","-2/3", GREEN_DARK,False,False,True),
-    (1,ROW4,"s",  "-1/3","+1/3","-2/3", GREEN_MID, False,False,True),
+    (1,ROW4,"s",  "-1/3","+1/3","-2/3", GREEN_DARK,False,False,True),
     (2,ROW4,"b",  "-1/3","+1/3","-2/3", GREEN_DARK,True, False,True),
 ]
 for (col,ry,sym,q,yl,yr,col_,g3,nur,cr) in parts:
@@ -223,19 +225,19 @@ c.drawString(RX,HY-19,"T~·m=1 statt Higgs (Dok.019)  Exp. gesichert [X]")
 # Legende
 entries = [
     ("hdr",None,      "Außenring = Galois-Orbit:"),
-    ("dot",BLUE_DARK, "O1/O3: Gen.1/3 Leptonen (blau)"),
-    ("dot",BLUE_MID,  "O3: Gen.2 Leptonen (hellblau)"),
-    ("dot",GREEN_DARK,"O2: Gen.1/3 Quarks (petrol)"),
-    ("dot",GREEN_MID, "O4: Gen.2 Quarks (beere)"),
+    ("dot",BLUE_DARK, "O1: Neutrinos (blau) [QR]"),
+    ("txt",None,      "O3: Antineutrinos [QR], nicht gezeigt"),
+    ("dot",BLUE_MID,  "O4: gel. Leptonen (hellblau) [NQR]"),
+    ("dot",GREEN_DARK,"O2: Quarks (petrol) [NQR]"),
     ("hdr",None,      "Mittelring = Chiralität:"),
     ("dot",PURPLE,    "Links violett = Sd = linksh. [B]"),
     ("dot",ORANGE,    "Rechts orange = Su = rechtsh. [B]"),
-    ("dot",GRAY,      "Grau = νR absent; Dirac [B/S]"),
+    ("dot",GRAY,      "Grau = νR im Dirac-Fall (mind. ν3) [S]"),
     ("hdr",None,      "Farbring (nur Quarks):"),
     ("rgb",None,      "r/g/b = Farbladung [B] Dok.346"),
     ("rdash",None,    "Rot gestrichelt = SU(2)L-Dublett"),
     ("gdash",None,    "Schwarz gestrichelt = Gen.3"),
-    ("txt",None,      "[B] algebraisch bewiesen"),
+    ("txt",None,      "[B] algebraisch bewiesen  [S] offen"),
     ("txt",None,      "[K] numerisch  [X] experimentell"),
 ]
 lh=18; leg_h=20+len(entries)*lh+6; LEG_TOP=H-310
@@ -276,5 +278,5 @@ for i,(typ,col,txt) in enumerate(entries):
 
 c.setFont("Helvetica",6.5); c.setFillColorRGB(0.4,0.4,0.4)
 c.drawCentredString(W/2,10,
-    "Alle SM-Fermion-Quantenzahlen folgen aus GF(27)* ohne freie Parameter · FFGFT J. Pascher 2026")
+    "Ladungsquantisierung aus GF(27)* [B] (Dok. 346); Hyperladung der geladenen Leptonen offen [S] (Dok. 190, R146) · FFGFT J. Pascher 2026")
 c.save(); print(f"OK: {OUT}")

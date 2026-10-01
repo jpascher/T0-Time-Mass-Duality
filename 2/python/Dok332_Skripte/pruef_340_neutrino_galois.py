@@ -2,6 +2,8 @@
 """
 Dok. 340 -- Prüfskript: Neutrino-Massenhierarchie aus GF(27)*
 Ausfuehren: python3 pruef_340_neutrino_galois.py
+
+Aktualisiert am 1.10.2026: m_ee ohne nu_3-Term (nu_3 Dirac), m_ee ≈ 6,0 meV, destruktiv 0,13 meV, Obergrenze 14,4 meV; KamLAND-Zen-Grenze 28-122 meV (vgl. Dok. 340, D94; Dok. 343/344/345).
 """
 import numpy as np
 
@@ -92,11 +94,30 @@ print(f"  3*(11^2-1)/11 = {ratio_pred:.4f}")
 print(f"  Gemessen:       {ratio_exp:.4f}")
 print(f"  Abweichung:     {err_ratio*100:.2f}%  [OK]")
 
-print("\nASSERTION 10: m_ee unter KamLAND-Zen Grenze [K]")
+print("\nASSERTION 10: m_ee ohne nu_3-Beitrag, unter KamLAND-Zen Grenze [K]")
+# Zuordnung (Variablennamen oben): m_nu1 = m1 = m_nu, m_nu2 = m3 = sqrt(14/3) m_nu,
+# m_nu3 = m2 = 11 m_nu. Korrigiert: nu_3 ist Dirac (Dok. 343, Satz D''') ->
+# kein s13^2*m_nu3-Term in m_ee.
+m_nu1, m_nu2, m_nu3 = m1, m3, m2
 c12sq = 1-s12sq_exp; c13sq = 1-s13sq_exp
-m_ee = abs(c12sq*c13sq*m1 + (1-c12sq)*c13sq*m3 + s13sq_exp*m2)
-assert m_ee*1e3 < 36, f"m_ee = {m_ee*1e3:.1f} meV > 36 meV"
-print(f"  m_ee = {m_ee*1e3:.3f} meV < 36 meV (KamLAND-Zen)  [OK]")
+t1 = c12sq*c13sq*m_nu1
+t2 = s12sq_exp*c13sq*m_nu2
+m_ee     = abs(t1 + t2)          # Majorana-Phasen null
+m_ee_min = abs(t1 - t2)          # destruktive Interferenz
+m_ee_max = m_nu1 + m_nu2         # Obergrenze ohne nu_3
+t3_alt   = s13sq_exp*m_nu3       # ausgeschlossener Term (alter Stand)
+print(f"  c12^2 c13^2 m_1 = {t1*1e3:.3f} meV,  s12^2 c13^2 m_2 = {t2*1e3:.3f} meV")
+assert abs(m_nu1*1e3 - 4.54) < 0.01 and abs(m_nu2*1e3 - 9.81) < 0.01, "m_1/m_2 != 4.54/9.81 meV"
+assert abs(m_ee*1e3 - 6.02) < 0.02, f"m_ee = {m_ee*1e3:.3f} meV != 6.02 meV"
+assert abs(m_ee_min*1e3 - 0.13) < 0.01, f"m_ee,min = {m_ee_min*1e3:.3f} meV != 0.13 meV"
+assert abs(m_ee_max*1e3 - 14.4) < 0.1, f"Obergrenze {m_ee_max*1e3:.2f} meV != 14.4 meV"
+assert abs(t3_alt*1e3 - 1.10) < 0.01, "ausgeschlossener nu_3-Term != 1.10 meV"
+assert m_ee*1e3 < 28, f"m_ee = {m_ee*1e3:.1f} meV > 28 meV"
+print(f"  m_ee (ohne nu_3)     = {m_ee*1e3:.3f} meV  (Dok. 340: ≈ 6.0 meV)  [OK]")
+print(f"  m_ee,min (destruktiv) = {m_ee_min*1e3:.3f} meV  (Dok. 340: ≈ 0.13 meV)  [OK]")
+print(f"  Obergrenze m_1+m_2   = {m_ee_max*1e3:.2f} meV  (Dok. 340: 14.4 meV)  [OK]")
+print(f"  (ausgeschlossen: s13^2 m_3 = {t3_alt*1e3:.2f} meV, nu_3 Dirac)")
+print(f"  m_ee < 28-122 meV (KamLAND-Zen, NME-abhaengig)  [OK]")
 
 print()
 print("=" * 65)

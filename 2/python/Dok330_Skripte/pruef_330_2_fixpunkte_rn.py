@@ -7,6 +7,11 @@ Dok. 330 §3.2/3.3
 
 Frage 2: Fixpunkte von T⁴/Z₃ — was ist [K], was bleibt [S]?
 Frage 3: Verträglichkeit der fraktalen Gewichtung r_n mit L²(T⁴).
+
+Aktualisiert am 1.10.2026: B4 mit allgemeinem r_n ∈ (0,1) statt r_n = ξ^n
+(mit r_n = ξ^n wäre ‖F̂‖ ≤ ξ/(1−ξ) = 1,00013·ξ, keine Massenhierarchie im
+F̂-Spektrum); B5b: F̂ normal, selbstadjungiert auf dem Z₃-invarianten Sektor,
+ganzer Raum offen [S] (vgl. Dok. 330, Dok. 327 Satz 3).
 """
 
 import numpy as np
@@ -56,16 +61,26 @@ check("B3  Alle drei Z₃-Charaktere haben |χ|=1 und χ³=1 [B]",
       f"|χ| = {[f'{abs(c):.4f}' for c in chars]}")
 
 # ── B4: F̂ beschränkt auf L²(T⁴) [B] ─────────────────────────────────────────
+# Allgemeines r_n ∈ (0,1) (Dok. 322); die konkrete Wahl ist offen.
+# N ist endlich (Mindestlänge L_0 = ξ·l_P), daher ‖F̂‖ ≤ Σ r_n < N.
 xi = 4/30000
 N = 100
-r_values = [xi**n for n in range(1, N+1)]
-norm_bound = sum(r_values)
-check("B4a ‖F̂‖ ≤ Σr_n < ∞ [B] (Dok. 327)",
-      norm_bound < 1.0,
-      f"Σr_n = {norm_bound:.6e} für N={N}")
-check("B4b Alle r_n ∈ (0,1) [B]",
-      all(n * math.log(xi) < 0 for n in range(1, N+1)),
-      f"analytisch: log(r_n)=n·log(ξ)<0 für alle n; r₁={r_values[0]:.2e}")
+rng = np.random.default_rng(20261001)
+familien = {
+    "zufaellig": list(rng.uniform(1e-6, 1 - 1e-6, N)),
+    "geometrisch q=0,5": [0.5**n for n in range(1, N+1)],
+    "fast 1": [1 - 1e-3 / n for n in range(1, N+1)],
+}
+bounds = {k: sum(v) for k, v in familien.items()}
+check("B4a ‖F̂‖ ≤ Σr_n < N < ∞ für allgemeines r_n ∈ (0,1), N endlich [B] (Dok. 327)",
+      all(b < N for b in bounds.values()),
+      ", ".join(f"{k}: Σr_n={b:.4g}" for k, b in bounds.items()))
+check("B4b Testfamilien liegen in (0,1) [B]",
+      all(0 < r < 1 for v in familien.values() for r in v),
+      f"{len(familien)} Familien, je N={N}")
+# Hinweis (keine Prüfung): mit r_n = ξ^n wäre ‖F̂‖ ≤ ξ/(1−ξ)
+print(f"     Hinweis: r_n = ξ^n gäbe ‖F̂‖ ≤ ξ/(1−ξ) = {xi/(1-xi):.6e} "
+      f"= {1/(1-xi):.6f}·ξ — ξ wäre obere Spektralschranke, keine Massenhierarchie im F̂-Spektrum")
 
 # ── B5: r_n positionsunabhängig → keine lokale Translationsbrechung ───────────
 # r_n = r(n) hängt nur von der Skalenstufe n ab, nicht vom Ort x auf T⁴
@@ -74,9 +89,9 @@ check("B4b Alle r_n ∈ (0,1) [B]",
 check("B5  r_n = f(n) ist positionsunabhängig → F̂ bricht Translationsinvarianz nicht",
       True,
       "r_n hängt nur von Skalenstufe n ab, nicht vom Ort x ∈ T⁴")
-check("B5b Z₃-Paarung (k,-k) → F̂=F̂† auf flachem L²(T⁴) [B] (Dok. 327)",
+check("B5b Z₃-Paarung (k,-k) → F̂ normal; F̂=F̂† auf dem Z₃-invarianten Sektor [B], ganzer Raum [S] (Dok. 327, Satz 3)",
       True,
-      "algebraisch [B] Dok. 327 — Defektindizes (0,0)")
+      "auf geladenen Paaren ist F̂† das Z₃-gespiegelte F̂; selbstadjungiert ist dort Re F̂ (Setzung)")
 
 # ── B6: Was bleibt [S] ────────────────────────────────────────────────────────
 print("\n[S]  B6 — Rückreaktion der Hawking-Emission auf Orbifold-Fixpunkte:")
@@ -96,5 +111,5 @@ print("Statusbilanz der drei Fragen:")
 print("  Frage 1 (Haar/D4):    [B] — Maß kompatibel, D4 spektral distinkt")
 print("  Frage 2 (Fixpunkte):  [K] für 9 Fixpunkte (Lefschetz) und ν-Lok.;")
 print("                        [S] für Rückreaktion bei Verdampfung")
-print("  Frage 3 (r_n/F̂):     [B] — F̂ beschränkt + selbstadjungiert;")
+print("  Frage 3 (r_n/F̂):     [B] — F̂ beschränkt; selbstadjungiert auf Z₃-inv. Sektor;")
 print("                        r_n bricht Translationsinvarianz NICHT")
