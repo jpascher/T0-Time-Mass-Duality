@@ -1,5 +1,6 @@
 # Updated 1 Oct 2026: charged leptons labelled NQR (O4), Y = -1 open; gray = nu_R in the Dirac case (per Doc. 340/R108 needed at least for nu3) instead of "absent; Dirac" (cf. Doc. 356, 346).
 # Updated 1 Oct 2026: outer ring per orbit table of Doc. 346 (O1 = nu, O3 = anti-nu [QR]; O4 = e, mu, tau, O2 = quarks [NQR]); title/footer: charge quantisation [B] (Doc. 346), hypercharge of the charged leptons open [S] (Doc. 190, R146) instead of "all quantum numbers algebraically forced" (cf. Doc. 356, 346).
+# Updated 1 Oct 2026: down quarks d, s, b no longer coloured as O2 (orbit table of Doc. 346 assigns O2 only to u, c, t), own neutral colour: NQR (Doc. 346 Thm. B), orbit not assigned [S] (cf. Doc. 356, 346).
 from reportlab.lib.pagesizes import A4, landscape
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase import pdfmetrics
@@ -18,6 +19,7 @@ BLUE_DARK  = (0.10, 0.29, 0.48)
 BLUE_MID   = (0.36, 0.64, 0.86)
 GREEN_DARK = (0.00, 0.50, 0.55)
 GREEN_MID  = (0.60, 0.25, 0.55)
+DOWN_NQR   = (0.74, 0.70, 0.56)
 PURPLE     = (0.33, 0.29, 0.72)
 ORANGE     = (0.87, 0.48, 0.00)
 GRAY       = (0.60, 0.60, 0.60)
@@ -152,9 +154,9 @@ parts = [
     (0,ROW3,"u",  "+2/3","+1/3","+4/3", GREEN_DARK,False,False,True),
     (1,ROW3,"c",  "+2/3","+1/3","+4/3", GREEN_DARK,False,False,True),
     (2,ROW3,"t",  "+2/3","+1/3","+4/3", GREEN_DARK,True, False,True),
-    (0,ROW4,"d",  "-1/3","+1/3","-2/3", GREEN_DARK,False,False,True),
-    (1,ROW4,"s",  "-1/3","+1/3","-2/3", GREEN_DARK,False,False,True),
-    (2,ROW4,"b",  "-1/3","+1/3","-2/3", GREEN_DARK,True, False,True),
+    (0,ROW4,"d",  "-1/3","+1/3","-2/3", DOWN_NQR,  False,False,True),
+    (1,ROW4,"s",  "-1/3","+1/3","-2/3", DOWN_NQR,  False,False,True),
+    (2,ROW4,"b",  "-1/3","+1/3","-2/3", DOWN_NQR,  True, False,True),
 ]
 for (col,ry,sym,q,yl,yr,col_,g3,nur,cr) in parts:
     fermion(LBL_W+(col+0.5)*COL_W, ry, sym, q, yl, yr, col_, g3, nur, cr)
@@ -232,7 +234,9 @@ entries = [
     ("dot",BLUE_DARK, "O1: neutrinos (blue) [QR]"),
     ("txt",None,      "O3: antineutrinos [QR], not shown"),
     ("dot",BLUE_MID,  "O4: charged leptons (light blue) [NQR]"),
-    ("dot",GREEN_DARK,"O2: quarks (teal) [NQR]"),
+    ("dot",GREEN_DARK,"O2: up quarks u, c, t [NQR]"),
+    ("dot",DOWN_NQR,  "d, s, b: NQR (Doc. 346 Thm. B),"),
+    ("txt",None,      "    orbit not assigned [S]"),
     ("hdr",None,      "Middle ring = chirality:"),
     ("dot",PURPLE,    "Left violet = Sd = left-h. [B]"),
     ("dot",ORANGE,    "Right orange = Su = right-h. [B]"),
@@ -244,7 +248,7 @@ entries = [
     ("txt",None,      "[B] algebraically proved  [S] open"),
     ("txt",None,      "[K] numerically  [X] experimentally"),
 ]
-lh=18; leg_h=20+len(entries)*lh+6; LEG_TOP=H-310
+lh=15.5; leg_h=20+len(entries)*lh+6; LEG_TOP=H-310
 c.setFillColorRGB(0.96,0.96,0.94); srgb((0.72,0.72,0.72)); c.setLineWidth(0.5)
 c.rect(RX,LEG_TOP-leg_h,LW2,leg_h,stroke=1,fill=1)
 c.setFont("Helvetica-Bold",12); c.setFillColorRGB(0,0,0)
