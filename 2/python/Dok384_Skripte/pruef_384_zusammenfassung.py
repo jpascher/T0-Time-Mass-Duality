@@ -247,5 +247,44 @@ check("Shor: O(n^3) Aufbereitung gegen O(n^2) QFT, Verhältnis n; RSA-2048 n^3 =
 Tc = 8.617333262e-5 * 2.72548 / 0.51099895e6
 check("CMB-Kandidat (Dok. 388): T/m_e = (8 pi)^(1/4) xi^(5/2), +0,0025 %", abs((8*math.pi)**0.25 * xi**2.5 / Tc - 1 - 2.5e-5) < 1e-6)
 
+print("\n15. Gatter, Rauschen, Shor-Kosten (Dok. 230, 183, 176; Ergänzung 2. Okt. 2026)")
+import numpy as np
+I2 = np.eye(2); sx = np.array([[0, 1], [1, 0]], complex); sy = np.array([[0, -1j], [1j, 0]]); sz = np.diag([1, -1]).astype(complex)
+def bloch(psi):
+    return np.real([psi.conj() @ m @ psi for m in (sx, sy, sz)])
+def U(axis, th):
+    nx, ny, nz = axis
+    return np.cos(th/2)*I2 - 1j*np.sin(th/2)*(nx*sx + ny*sy + nz*sz)
+def R(axis, th):
+    k = np.array(axis); K = np.array([[0, -k[2], k[1]], [k[2], 0, -k[0]], [-k[1], k[0], 0]])
+    return np.eye(3) + np.sin(th)*K + (1 - np.cos(th))*K @ K
+rng = np.random.default_rng(384)
+good = True
+for _ in range(200):
+    v = rng.normal(size=2) + 1j*rng.normal(size=2); psi = v/np.linalg.norm(v)
+    ax = rng.normal(size=3); ax /= np.linalg.norm(ax); th = rng.uniform(0, 2*np.pi)
+    good &= np.allclose(bloch(U(ax, th) @ psi), R(ax, th) @ bloch(psi), atol=1e-12)
+check("jedes Ein-Qubit-Gatter exp(-i th n.sigma/2) = Drehung R_n(th) des Bloch-Vektors (200 Zufallsfälle)", good)
+check("Pauli-Matrizen = Drehungen um pi: sigma_x kehrt z um, sigma_z dreht die Phase um pi",
+      np.allclose(R((1, 0, 0), np.pi) @ [0, 0, 1], [0, 0, -1]) and np.allclose(R((0, 0, 1), np.pi) @ [1, 0, 0], [-1, 0, 0]))
+H = (sx + sz)/np.sqrt(2)
+check("Hadamard = Drehung um pi um (x+z)/sqrt2: z-Achse -> x-Achse", np.allclose(bloch(H @ np.array([1, 0], complex)), [1, 0, 0]))
+CNOT = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]], complex)
+t = np.array([np.cos(0.4), np.exp(0.7j)*np.sin(0.4)])
+r0 = CNOT @ np.kron([1, 0], t); r1 = CNOT @ np.kron([0, 1], t)
+check("CNOT: Steuer-z = +1 lässt das Ziel stehen, Steuer-z = -1 dreht es um pi um x (ein Lauf, keine Wiederholung)",
+      np.allclose(r0, np.kron([1, 0], t)) and np.allclose(r1, np.kron([0, 1], sx @ t)))
+N = 4096; amp = np.ones(N//2 - 1); ph = rng.uniform(0, 2*np.pi, N//2 - 1)
+spec = np.zeros(N, complex); spec[1:N//2] = amp*np.exp(1j*ph); spec[N//2+1:] = np.conj(spec[1:N//2][::-1])
+sig = np.fft.ifft(spec).real
+ac = np.correlate(sig, sig, "full")[N-1:]/np.dot(sig, sig)
+check("feste Amplituden + Zufallsphasen -> Signal ohne Korrelation (Autokorrelation |c_k| < 0,1 für k >= 1)", np.max(np.abs(ac[1:200])) < 0.1)
+back = np.fft.fft(sig)
+check("mit bekannten Phasen exakt zurückgerechnet: Amplituden und Phasen stimmen auf 1e-9", np.allclose(np.abs(back[1:N//2]), amp, atol=1e-9) and np.allclose(np.angle(back[1:N//2]*np.exp(-1j*ph)), 0, atol=1e-9))
+Nk = math.pi/(2*xi)
+check("Rauschgrenze: Phasenfehler N eps erreicht pi/2 nach N_krit = pi/(2 eps); für eps = xi 11 781 Schritte", abs(Nk - 11780.97) < 0.01)
+nb = 2048
+check("Shor-Gatteranteil der Aufbereitung n^3/(n^3+n^2) = 1 - 1/(n+1): 99,95 % bei 2048 Bit", abs(nb**3/(nb**3 + nb**2) - 0.99951) < 1e-5)
+
 print(f"\nErgebnis: {ok}/{n} OK")
 raise SystemExit(0 if ok == n else 1)
