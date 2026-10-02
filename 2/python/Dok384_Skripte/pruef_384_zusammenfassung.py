@@ -129,6 +129,13 @@ check("f^(1/3) - 1 = 18,57", abs(f ** (1/3) - 1 - 18.57) < 0.01)
 ae, amu = 1.15965218059e-3, 1.165920715e-3
 atau = ae + 144/125 * mtau/mmu * (amu - ae)
 check("a_tau = 1,2811e-3 (verankert)", abs(atau - 1.2811e-3) < 0.0002e-3, f"{atau:.5e}")
+lo, hi = 1000.0, 3000.0
+fq = lambda x: (me + mmu + x) / (math.sqrt(me) + math.sqrt(mmu) + math.sqrt(x))**2 - 2/3
+for _ in range(200):
+    mid = (lo + hi) / 2
+    lo, hi = (mid, hi) if fq(mid) < 0 else (lo, mid)
+check("m_tau aus Koide (m_e, m_mu gemessen) = 1776,97 MeV, 0,4 sigma neben 1776,93(9); Methoden BESIII/Belle II streuen 0,18 = 2 x 0,09",
+      abs(lo - 1776.969) < 0.001 and abs((lo - 1776.93)/0.09 - 0.43) < 0.01 and abs((1777.09 - 1776.91) - 2*0.09) < 1e-9, f"{lo:.3f} MeV")
 fak = (0.0046 + 0.0042) / (atau - 1.17721e-3)
 check("a_tau: CMS-2024-Schranke (-0,0042 ... 0,0046) rund 85-mal breiter als der Abstand zum SM-Wert; beide darin",
       84 < fak < 86 and -0.0042 < 1.17721e-3 < atau < 0.0046, f"Faktor {fak:.1f}")
