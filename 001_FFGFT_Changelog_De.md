@@ -1211,3 +1211,20 @@ Anlass: Alle Restabweichungen an einer Stelle festhalten, getrennt nach Grundfor
 
 **Prüfskript:** 2/python/Dok387_Skripte/pruef_387_abweichungen.py — 27/27 PASS
 **Register:** kein Eintrag (Vermerke direkt in den betroffenen Dokumenten).
+
+---
+
+## 2. Oktober 2026 — Dok. 388: Die CMB-Temperatur in der Grundform
+
+### Dok. 388 — eV-Relation, Verhältnis zur Elektronenmasse und die H₀-Formen (De/En, je 8 Seiten)
+
+Anlass: Die Casimir-CMB-Verbindung ist eine Identität, weil L_ξ nur über T_CMB festgelegt ist (R136). Alle Wege, T_CMB ohne diese Zirkularität aus ξ zu gewinnen, werden in der Grundform (natürliche Einheiten, α = 1, ein Anker m_e) gegenübergestellt.
+- eV-Relation (P11): (16/9) ξ (1 − 275ξ/4) eV trifft auf 2·10⁻⁶ [K], gilt aber nur in eV; in meV, K oder m_e liegt sie um Größenordnungen daneben; die Umdefinition von α ändert Energien nicht [B]; das eV ist gesetzt (Volt 1881, exakt seit 20. Mai 2019) [Q]; verlangter Koeffizient 68,766, 275/4 nächster Bruch mit Nenner 4; Einstufung nach R137 (i) bleibt [S]
+- Andere Bezugsenergien: u = √ξ E₀ = 84,85 keV und α² m_e geben keinen glatten Vorfaktor
+- Grundform: T_CMB/m_e = K ξ^(5/2), K = 2,23897 [K]; Kandidat K = (8π)^(1/4), +0,0025 %, 0,12σ FIRAS [S]; Zufallsprüfung über 3370 Ausdrücke: 3 Treffer, 1,6 erwartet; bei p, q ≤ 10 einziger Treffer, 0,2 erwartet
+- Folgerungen: T_CMB⁴ = 16 H₀ m_e³ [B], daraus H₀ = 66,81 ± 0,06 km/s/Mpc (1,2σ zu Planck); Ω_γ = (4096/10125) ξ [B]; L_ξ = (15/8π³)^(1/4) ξ^(−9/4) λ̄_e = 100,24 μm ohne T_CMB [K]
+- H₀-Formen: (π/2) ξ¹⁰ m_e passt (0,1σ in T), E₀ ξ^(41/4) liegt 11σ bzw. 20σ daneben [X], sofern der Kandidat gilt; keine unabhängige Bestätigung des Exponenten 10
+- Offen: Vorfaktor (8π)^(1/4), Exponent 10 und π/2 (P20), warum Ω_γ ein fester Bruchteil von ξ ist
+
+**Prüfskript:** 2/python/Dok388_Skripte/pruef_388_cmb_grundform.py — 27/27 PASS
+**Register:** kein Eintrag.
