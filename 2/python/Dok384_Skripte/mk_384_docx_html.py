@@ -3,14 +3,15 @@
 mk_384_docx_html.py -- Dok. 384: Word- und HTML-Fassung aus der LaTeX-Quelle.
 
 Erzeugt aus 2/Sources/ch/384_FFGFT_Kurzfassung_{De,En}_ch.tex
-  2/docx/384_FFGFT_Kurzfassung_{De,En}.docx   (Formeln als Word-Formeln)
   2/html/384_FFGFT_Kurzfassung_{De,En}.html   (eigenständig, Formeln als MathML)
+und mit --docx VERZ zusätzlich VERZ/384_FFGFT_Kurzfassung_{De,En}.docx
+(Formeln als Word-Formeln; Vorlage für die Google-Docs-Fassung, nicht im Repo).
 Benötigt pandoc (>= 3). Aufruf aus der Repo-Wurzel:
-  python3 2/python/Dok384_Skripte/mk_384_docx_html.py
+  python3 2/python/Dok384_Skripte/mk_384_docx_html.py [--docx VERZ]
 Der Inhalt wird nicht verändert; das Skript übersetzt nur die Layout-Makros
 (Kästen, farbige Statusmarker, Zeilenfarben) in Word- bzw. HTML-Gestaltung.
 """
-import os, re, subprocess, tempfile
+import os, re, subprocess, sys, tempfile
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 SRC = os.path.join(ROOT, '2', 'Sources', 'ch')
@@ -127,11 +128,10 @@ def prepare(tex, lang):
     return '\\documentclass{article}\n\\usepackage{amsmath,amssymb}\n\\begin{document}\n' + tex + '\n\\end{document}\n'
 
 
-def run(lang):
+def run(lang, docx_dir=None):
     m = META[lang]
     tex = open(os.path.join(SRC, f'384_FFGFT_Kurzfassung_{lang}_ch.tex'), encoding='utf-8').read()
     src = prepare(tex, lang)
-    os.makedirs(os.path.join(ROOT, '2', 'docx'), exist_ok=True)
     with tempfile.TemporaryDirectory() as td:
         p_tex = os.path.join(td, 'in.tex'); open(p_tex, 'w', encoding='utf-8').write(src)
         p_lua = os.path.join(td, 'f.lua'); open(p_lua, 'w').write(LUA)
@@ -141,14 +141,18 @@ def run(lang):
                   '-M', 'author=' + AUTHOR, '-M', 'date=' + m['date'], '-M', 'lang=' + m['lang'],
                   '-M', 'toc-title=' + m['toc'], '-M', 'abstract-title=' + m['abstract'],
                   '--number-sections']
-        out_docx = os.path.join(ROOT, '2', 'docx', f'384_FFGFT_Kurzfassung_{lang}.docx')
-        subprocess.run(common + ['-t', 'docx', '-o', out_docx], check=True)
+        if docx_dir:
+            os.makedirs(docx_dir, exist_ok=True)
+            out_docx = os.path.join(docx_dir, f'384_FFGFT_Kurzfassung_{lang}.docx')
+            subprocess.run(common + ['-t', 'docx', '-o', out_docx], check=True)
+            print('erstellt:', out_docx)
         out_html = os.path.join(ROOT, '2', 'html', f'384_FFGFT_Kurzfassung_{lang}.html')
         subprocess.run(common + ['-t', 'html5', '-s', '--mathml', '--embed-resources',
                                  '--css', p_css, '-o', out_html], check=True)
-    print('erstellt:', os.path.relpath(out_docx, ROOT), os.path.relpath(out_html, ROOT))
+    print('erstellt:', os.path.relpath(out_html, ROOT))
 
 
 if __name__ == '__main__':
+    d = sys.argv[sys.argv.index('--docx') + 1] if '--docx' in sys.argv else None
     for lang in ('De', 'En'):
-        run(lang)
+        run(lang, d)
