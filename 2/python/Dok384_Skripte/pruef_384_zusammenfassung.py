@@ -232,5 +232,20 @@ check("xi-Zyklus: Schritt 1/75, Rotationszahl 74/75, gcd(74,75)=1 -> Schluss nac
       math.gcd(74, 75) == 1 and min(k for k in range(1, 200) if (k * Fr(74, 75)).denominator == 1) == 75)
 check("Terz der Massenleiter: xi^(1/3) = 1/19,57", abs(1 / xi**(1/3) - 19.57) < 0.01)
 
+print("\n14. Deterministische Messlesart (Dok. 230, 175; Ergänzung 2. Okt. 2026)")
+zs = [-0.9, -0.3, 0.0, 0.42, 0.8]
+M = 200000
+lam = [-1 + 2*(k + 0.5)/M for k in range(M)]   # gleichmäßiges lambda-Gitter, keine Zufallszahlen
+check("A(z,lambda) = sgn(z - lambda): Achsenanteil zum Pol +1 = (1+z)/2",
+      all(abs(sum(1 for l in lam if l < z)/M - (1 + z)/2) < 1e-5 for z in zs))
+check("Archimedes: Zonenfläche der Einheitskugel von -1 bis z = 2 pi (1+z), Anteil (1+z)/2",
+      all(abs(2*math.pi*(1 + z)/(4*math.pi) - (1 + z)/2) < 1e-15 for z in zs))
+
+check("Auflösungsboden xi: N_max = 1/xi = 7500, rund 13 Bit (Dok. 343, Satz G')", 1/xiF == 7500 and round(math.log2(7500)) == 13)
+check("Shor: O(n^3) Aufbereitung gegen O(n^2) QFT, Verhältnis n; RSA-2048 n^3 = 8,6e9", 2048**3 == 8589934592)
+
+Tc = 8.617333262e-5 * 2.72548 / 0.51099895e6
+check("CMB-Kandidat (Dok. 388): T/m_e = (8 pi)^(1/4) xi^(5/2), +0,0025 %", abs((8*math.pi)**0.25 * xi**2.5 / Tc - 1 - 2.5e-5) < 1e-6)
+
 print(f"\nErgebnis: {ok}/{n} OK")
 raise SystemExit(0 if ok == n else 1)

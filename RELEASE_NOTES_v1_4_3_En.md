@@ -21,7 +21,7 @@ This release collects the work from 28 September to 2 October 2026. Its centre i
 **complete recalculation of the corpus**: all documents up to No. 300 and the A series
 were recalculated; about 235 documents now carry a correction box, and every corrected
 passage has a dated note with the previous value (R133, R140, R142). In addition there
-are **nine new documents (Docs. 379–387)**, among them the **summary of the entire
+are **ten new documents (Docs. 379–388)**, among them the **summary of the entire
 corpus (Doc. 384)**, the **A series v1.5** with the new document **A125 (φ skeleton)**,
 and twenty register entries (R128–R147).
 
@@ -58,7 +58,7 @@ register. The main consequences for the classification:
 
 ---
 
-## New documents (Docs. 379–387)
+## New documents (Docs. 379–388)
 
 | Doc. | Title | Pages De/En | Verification script |
 |------|-------|-------------|---------------------|
@@ -67,10 +67,11 @@ register. The main consequences for the classification:
 | 381 | The running recursion summed exactly | 7/7 | 14/14 |
 | 382 | Muon g−2: status 2025 | 8/8 | 21/21 |
 | 383 | Masses and Planck scale without v — one chain, one anchor | 8/8 | 20/20 |
-| 384 | FFGFT in brief — foundations, results and status after the calculation review | 21/21 | 99/99 |
+| 384 | FFGFT in brief — foundations, results and status after the calculation review | 22/22 | 104/104 |
 | 385 | The Higgs–vacuum route to ξ | 8/8 | 17/17 |
 | 386 | Where α hides — charge unit, two spheres and ξ as an area | 8/8 | 25/25 |
 | 387 | The deviations at a glance — ratios, SI translation and correction quantities | 8/8 | 27/27 |
+| 388 | The CMB temperature in the basic form — the eV relation, the ratio to the electron mass and the H₀ forms | 8/8 | 27/27 |
 
 Verification scripts in `2/python/DokNNN_Skripte/`.
 
@@ -96,6 +97,14 @@ measured value 3477.37 ± 0.18 to 3·10⁻⁵ (0.6σ) [K] — as precise as the 
 as a pure ratio without an anchor. The factors 74 and 1/45 are observed, not derived
 [S]; the 37 in 74 demonstrably does not come from the icosahedron. For m_μ/m_e there
 is no φ route at this level.
+
+### The CMB temperature in the basic form [S] (Doc. 388)
+The relation T_CMB = (16/9)ξ(1 − 275ξ/4) eV holds only in the unit eV, and the eV brings the
+electron mass along as a second anchor. In the basic form T_CMB/m_e depends on a single
+number; the candidate T_CMB/m_e = (8π)^(1/4)·ξ^(5/2) meets the FIRAS value to 0.12σ. With
+the corpus form of H₀ it follows that T_CMB⁴ = 16·H₀·m_e³, i.e. H₀ = 66.81 ± 0.06 km/s/Mpc
+from the CMB temperature, and L_ξ is fixed without the CMB. The older H₀ form with the
+exponent 41/4 is then off by 11σ. Prefactor and exponent 10 are not derived.
 
 ### Where α hides [B] (Doc. 386)
 With ħ = c = ε₀ = 1 and α = 1 one has e = √(4π); α moves into the charge unit,
@@ -196,9 +205,10 @@ and, as a dimensionless ratio, cannot be set to 1 with justification (A135).
 | Self-adjointness of F̂ on the full space | [S] (R145) |
 | Quark/hadron sector; K_had | open (Doc. 318, R76, R123) |
 | Cosmic exponent forward (P20); CMB peaks {1,6,14,26} | open (P20, P29/P31, R139) |
+| Prefactor (8π)^(1/4) of the CMB temperature | [S] (Doc. 388) |
 
 ## Entry point for new readers
-**Doc. 384 "FFGFT in Brief"** (De/En, 21 pp. each, also as HTML) is the recommended entry
+**Doc. 384 "FFGFT in Brief"** (De/En, 22 pp. each, also as HTML) is the recommended entry
 point to the current state. Doc. 205 "FFGFT in Simple Language" remains the entry point
 for lay readers; the icosahedron book *The Number That Nobody Explained* remains the
 entry point to the lepton masses.

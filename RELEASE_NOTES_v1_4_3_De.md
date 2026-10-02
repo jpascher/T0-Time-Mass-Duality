@@ -21,7 +21,7 @@ Diese Version fasst die Arbeit vom 28. September bis 2. Oktober 2026 zusammen. I
 Mittelpunkt steht die **vollständige Nachrechnung des Korpus**: Alle Dokumente bis
 Nr. 300 und die A-Serie wurden durchgerechnet, rund 235 Dokumente tragen seitdem
 einen Korrekturkasten, jede korrigierte Stelle hat einen datierten Hinweis mit dem
-vorherigen Wert (R133, R140, R142). Dazu kommen **neun neue Dokumente (Dok. 379–387)**,
+vorherigen Wert (R133, R140, R142). Dazu kommen **zehn neue Dokumente (Dok. 379–388)**,
 darunter die **Kurzfassung des gesamten Korpus (Dok. 384)**, die **A-Serie v1.5** mit
 dem neuen Dokument **A125 (φ-Skelett)** und zwanzig Registereinträge (R128–R147).
 
@@ -58,7 +58,7 @@ führen. Die wichtigsten Folgen für die Einstufung:
 
 ---
 
-## Neue Dokumente (Dok. 379–387)
+## Neue Dokumente (Dok. 379–388)
 
 | Dok. | Titel | Seiten De/En | Prüfskript |
 |------|-------|--------------|------------|
@@ -67,10 +67,11 @@ führen. Die wichtigsten Folgen für die Einstufung:
 | 381 | Die laufende Rekursion exakt aufsummiert | 7/7 | 14/14 |
 | 382 | Myon g−2: Stand 2025 | 8/8 | 21/21 |
 | 383 | Massen und Planck-Skala ohne v — eine Kette, ein Anker | 8/8 | 20/20 |
-| 384 | FFGFT in Kurzfassung — Grundlagen, Ergebnisse und Status nach der Rechenprüfung | 21/21 | 99/99 |
+| 384 | FFGFT in Kurzfassung — Grundlagen, Ergebnisse und Status nach der Rechenprüfung | 22/22 | 104/104 |
 | 385 | Der Higgs-Vakuum-Weg zu ξ | 8/8 | 17/17 |
 | 386 | Wo α steckt — Ladungseinheit, zwei Kugeln und ξ als Fläche | 8/8 | 25/25 |
 | 387 | Die Abweichungen im Überblick — Verhältnisse, SI-Übersetzung und Korrekturgrößen | 8/8 | 27/27 |
+| 388 | Die CMB-Temperatur in der Grundform — eV-Relation, Verhältnis zur Elektronenmasse und die H₀-Formen | 8/8 | 27/27 |
 
 Prüfskripte unter `2/python/DokNNN_Skripte/`.
 
@@ -96,6 +97,14 @@ p₀/p₂ = 2φ⁴ [B]. Damit trifft **m_τ/m_e = (74 + 1/45)·φ⁸ = 3477,469*
 Verhältnis ohne Anker. Die Faktoren 74 und 1/45 sind beobachtet, nicht hergeleitet
 [S]; die 37 in 74 kommt nachweislich nicht aus dem Ikosaeder. Für m_μ/m_e gibt es
 keinen φ-Weg auf diesem Niveau.
+
+### Die CMB-Temperatur in der Grundform [S] (Dok. 388)
+Die Relation T_CMB = (16/9)ξ(1 − 275ξ/4) eV trifft nur in der Einheit eV, und das eV bringt
+die Elektronenmasse als zweiten Anker mit. In der Grundform hängt T_CMB/m_e an einer
+einzigen Zahl; der Kandidat T_CMB/m_e = (8π)^(1/4)·ξ^(5/2) trifft den FIRAS-Wert auf 0,12σ.
+Mit der H₀-Form des Korpus folgt T_CMB⁴ = 16·H₀·m_e³, also H₀ = 66,81 ± 0,06 km/s/Mpc aus
+der CMB-Temperatur, und L_ξ ist ohne die CMB festgelegt. Die ältere H₀-Form mit dem
+Exponenten 41/4 liegt dann 11σ daneben. Vorfaktor und Exponent 10 sind nicht hergeleitet.
 
 ### Wo α steckt [B] (Dok. 386)
 Mit ħ = c = ε₀ = 1 und α = 1 ist e = √(4π); α wandert in die Ladungseinheit,
@@ -196,9 +205,10 @@ T·m = 1 und lässt sich als dimensionsloses Verhältnis nicht begründet auf 1 
 | Selbstadjungiertheit von F̂ auf dem ganzen Raum | [S] (R145) |
 | Quark-/Hadron-Sektor; K_had | offen (Dok. 318, R76, R123) |
 | Kosmischer Exponent vorwärts (P20); CMB-Peaks {1,6,14,26} | offen (P20, P29/P31, R139) |
+| Vorfaktor (8π)^(1/4) der CMB-Temperatur | [S] (Dok. 388) |
 
 ## Einstieg für neue Leser
-**Dok. 384 „FFGFT in Kurzfassung“** (De/En, je 21 S., auch als HTML) ist der
+**Dok. 384 „FFGFT in Kurzfassung“** (De/En, je 22 S., auch als HTML) ist der
 empfohlene Einstieg in den heutigen Stand. Dok. 205 „FFGFT in einfacher Sprache“
 bleibt der Einstieg für Laien; das Ikosaeder-Buch *Die Zahl, die niemand erklärte*
 der Einstieg in die Leptonmassen.
