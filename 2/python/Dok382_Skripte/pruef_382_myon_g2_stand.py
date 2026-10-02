@@ -89,8 +89,12 @@ check("verankerter Wert (Brücke + Messwerte) liegt 2,9 % über dem direkten -- 
 a_tau_sm = 1.17721e-3
 check("Unterschied zum SM-Wert a_tau = 1,1772e-3 etwa 1,04e-4", abs((a_tau - a_tau_sm) - 1.04e-4) < 3e-6,
       f"{a_tau - a_tau_sm:.3e}")
-check("heutige Schranken (DELPHI: -0,052 ... 0,013) sind rund 600-mal weiter als dieser Unterschied",
-      (0.013 + 0.052) / (a_tau - a_tau_sm) > 500, f"Faktor {(0.013+0.052)/(a_tau-a_tau_sm):.0f}")
+# Beste Schranke: CMS 2024 (Photon-Photon-Erzeugung von Tau-Paaren in pp-Kollisionen), -0,0042 < a_tau < 0,0046 bei 95 % CL;
+# die ältere DELPHI-Schranke (-0,052 ... 0,013) ist rund siebenmal weiter.
+cms_lo, cms_hi = -0.0042, 0.0046
+check("heutige Schranke (CMS 2024: -0,0042 ... 0,0046, 95 % CL) ist rund 85-mal weiter als dieser Unterschied; beide Werte liegen darin",
+      84 < (cms_hi - cms_lo) / (a_tau - a_tau_sm) < 86 and cms_lo < a_tau_sm < a_tau < cms_hi,
+      f"Faktor {(cms_hi-cms_lo)/(a_tau-a_tau_sm):.1f}")
 check("Modellwert Delta a(mu-e) = 4,373e-6 liegt 30 % unter dem gemessenen; die Brücke nutzt den gemessenen",
       0.28 < 1 - da_mu / d_mue < 0.32, f"{100*(1-da_mu/d_mue):.1f} %")
 

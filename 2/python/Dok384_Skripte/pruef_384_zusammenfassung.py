@@ -129,6 +129,9 @@ check("f^(1/3) - 1 = 18,57", abs(f ** (1/3) - 1 - 18.57) < 0.01)
 ae, amu = 1.15965218059e-3, 1.165920715e-3
 atau = ae + 144/125 * mtau/mmu * (amu - ae)
 check("a_tau = 1,2811e-3 (verankert)", abs(atau - 1.2811e-3) < 0.0002e-3, f"{atau:.5e}")
+fak = (0.0046 + 0.0042) / (atau - 1.17721e-3)
+check("a_tau: CMS-2024-Schranke (-0,0042 ... 0,0046) rund 85-mal breiter als der Abstand zum SM-Wert; beide darin",
+      84 < fak < 86 and -0.0042 < 1.17721e-3 < atau < 0.0046, f"Faktor {fak:.1f}")
 MZ, MW, mh, mt_ = 91.1876, 80.3692, 125.20, 172.57
 check("M_W = M_Z sqrt(7/9) = 80,42 GeV", abs(MZ * math.sqrt(7/9) - 80.42) < 0.005)
 check("m_h = 11/8 M_Z = 125,38 GeV (+0,15 %)", abs(11/8*MZ - 125.38) < 0.005 and abs(rel(11/8*MZ, mh) - 0.15) < 0.01)

@@ -67,7 +67,7 @@ register. The main consequences for the classification:
 | 381 | The running recursion summed exactly | 7/7 | 14/14 |
 | 382 | Muon g−2: status 2025 | 8/8 | 21/21 |
 | 383 | Masses and Planck scale without v — one chain, one anchor | 8/8 | 20/20 |
-| 384 | FFGFT in brief — foundations, results and status after the calculation review | 22/22 | 112/112 |
+| 384 | FFGFT in brief — foundations, results and status after the calculation review | 22/22 | 113/113 |
 | 385 | The Higgs–vacuum route to ξ | 8/8 | 17/17 |
 | 386 | Where α hides — charge unit, two spheres and ξ as an area | 8/8 | 25/25 |
 | 387 | The deviations at a glance — ratios, SI translation and correction quantities | 8/8 | 27/27 |
