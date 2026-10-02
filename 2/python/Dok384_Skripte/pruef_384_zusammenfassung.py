@@ -317,6 +317,12 @@ def dphi(k, x): return -math.sqrt(2/Lt)*(2*math.pi*k/Lt)*math.sin(2*math.pi*k*x/
 lhs = sum(0.5*sum(a*dphi(k, x) for a, k in zip(amps, modes))**2 for x in xg)*Lt/Ng
 rhs = 0.5*sum(a*a*(2*math.pi*k/Lt)**2 for a, k in zip(amps, modes))
 check("Brückenformel am Torus-Beispiel: int 1/2 (d delta_m)^2 = 1/2 sum a_i^2 m_i^2 = 1/2 <psi|Phi^2|psi>", abs(lhs/rhs - 1) < 1e-9, f"{lhs:.6f} / {rhs:.6f}")
+ts = sp.symbols('t', real=True)
+Om_ = sp.Function('Omega', positive=True)(ts); Ee, Cc = sp.symbols('E C', positive=True)
+ph_ = sp.Function('phi', real=True)(ts)
+Ps_ = Cc*Om_*sp.exp(-sp.I*ph_)
+eq_ = sp.simplify((sp.I/Om_*sp.diff(Ps_, ts) + sp.I*Ps_*sp.diff(1/Om_, ts) - Ee*Ps_)*sp.exp(sp.I*ph_)).subs(sp.Derivative(ph_, ts), Ee*Om_)
+check("A142 mit T/T0 = 1/Omega: Amplitude ~ Omega (Energiedichte), Phasenrate E*Omega (lokaler Takt, gravitative Rotverschiebung)", sp.simplify(eq_) == 0)
 check("A142: a_e-Zusatz (alpha/2pi) xi^2 I = 2,34e-10 wäre über 200-mal größer als die a_e-Übereinstimmung von rund 1e-12: ausgeschlossen",
       abs((1/137.036)/(2*math.pi)*xi**2 - 2.065e-11) < 0.005e-11 and 2.34e-10/1e-12 > 200)
 

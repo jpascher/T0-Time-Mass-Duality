@@ -67,7 +67,7 @@ register. The main consequences for the classification:
 | 381 | The running recursion summed exactly | 7/7 | 14/14 |
 | 382 | Muon g−2: status 2025 | 8/8 | 21/21 |
 | 383 | Masses and Planck scale without v — one chain, one anchor | 8/8 | 20/20 |
-| 384 | FFGFT in brief — foundations, results and status after the calculation review | 23/23 | 117/117 |
+| 384 | FFGFT in brief — foundations, results and status after the calculation review | 23/23 | 118/118 |
 | 385 | The Higgs–vacuum route to ξ | 8/8 | 17/17 |
 | 386 | Where α hides — charge unit, two spheres and ξ as an area | 8/8 | 25/25 |
 | 387 | The deviations at a glance — ratios, SI translation and correction quantities | 8/8 | 27/27 |
@@ -150,7 +150,7 @@ remains.
   incorporates Docs. 364 and 367–370.
 - **A120:** notes (the leak (7−3φ)/9 is not compatible with δ*, R139; reference to
   A125). A010, A230, A250, README and CHANGELOG updated; now 49 documents.
-- **A075, A142:** notes of 2 Oct 2026 — the SM limit is shown only for the scalar field ([K] → [S]); the modified Schrödinger equation in A142 is dimensionally inhomogeneous ([B] → [S]); the a_e addition 2.34·10⁻¹⁰ is excluded by measurement. The verification script `a142_gravitation_lagrange.py` named in A142, previously missing, has been added (12/12).
+- **A075, A142:** notes of 2 Oct 2026 — the SM limit is shown only for the scalar field ([K] → [S]); the modified Schrödinger equation in A142 is homogeneous with 𝒯/𝒯₀ = 1/Ω and already contains gravitation (phase at the local clock rate = gravitational redshift, amplitude = local energy density); the a_e addition 2.34·10⁻¹⁰ is excluded by measurement. The verification script `a142_gravitation_lagrange.py` named in A142, previously missing, has been added (14/14).
 - Since the recalculation the A series carries dated notes in the text (R140).
 
 ---

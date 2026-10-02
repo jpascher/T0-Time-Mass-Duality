@@ -3,9 +3,9 @@
 """a142_gravitation_lagrange.py -- Pruefskript zu A142 (Gravitation: Lagrange-Formulierung).
 Prueft: (1) Zeitfeld-Verbindung Gamma = (1/T) dT = -dm/m mit T = 1/m, Grenzfall T = const,
 (2) Dimensionen der Materieterme mit Omega dimensionslos, (3) die Dimensionsluecke der
-Zeitfeld-Lagrange-Dichte (Vermerk 30. Sept. 2026), (4) die modifizierte Schroedinger-Gleichung
-i T d_t Psi = H Psi ist inhomogen und gibt fuer T = 1/m nicht die Standardform
-(Vermerk 2. Okt. 2026), (5) xi aus Higgs-Matching, (6) der Zusatz a_e ~ 2,34e-10 ist durch die
+Zeitfeld-Lagrange-Dichte (Vermerk 30. Sept. 2026), (4) die modifizierte Schroedinger-Gleichung: mit
+dimensionsbehaftetem T inhomogen, mit T/T0 = 1/Omega homogen, Standardform fuer Omega = 1,
+Amplitude ~ Omega und Phasenrate E*Omega -- gravitative Rotverschiebung (Vermerk 2. Okt. 2026), (5) xi aus Higgs-Matching, (6) der Zusatz a_e ~ 2,34e-10 ist durch die
 a_e-Messung ausgeschlossen (Vermerk 2. Okt. 2026).
 Dimensionen in natuerlichen Einheiten als Energie-Exponenten. sympy + Standardbibliothek."""
 import math
@@ -44,13 +44,22 @@ print("4. Modifizierte Schroedinger-Gleichung (Vermerk 2. Okt. 2026)")
 lhs = dim_T + 1          # i T d_t Psi: [E^-1][E^1] = [E^0] (mal Psi)
 rhs = 1                  # H Psi: [E^1] (mal Psi)
 check("i T d_t Psi hat [E^0] Psi, H Psi hat [E^1] Psi: Gleichung inhomogen", lhs == 0 and rhs == 1)
-mm, H, Psi = sp.symbols('m H Psi', positive=True)
+mm, H = sp.symbols('m H', positive=True)
 t = sp.symbols('t')
 P = sp.Function('P')(t)
-eq = sp.Eq(sp.I * (1 / mm) * sp.diff(P, t), H * P)
-sol = sp.solve(eq, sp.diff(P, t))[0]
-check("Grenzfall T = 1/m konstant gibt i d_t Psi = m H Psi, nicht i d_t Psi = H Psi",
+sol = sp.solve(sp.Eq(sp.I * (1 / mm) * sp.diff(P, t), H * P), sp.diff(P, t))[0]
+check("mit dimensionsbehaftetem T = 1/m konstant: i d_t Psi = m H Psi, nicht die Standardform",
       sp.simplify(sol - (-sp.I * mm * H * P)) == 0)
+# Lesart mit dem dimensionslosen T/T0 = 1/Omega: i (1/Om) d_t Psi + i Psi d_t(1/Om) = H Psi
+Om = sp.Function('Omega', positive=True)(t); E = sp.symbols('E', real=True)
+A = sp.Function('A', positive=True)(t); ph = sp.Function('phi', real=True)(t)
+Ps = A * sp.exp(-sp.I * ph)
+eq = sp.expand((sp.I / Om * sp.diff(Ps, t) + sp.I * Ps * sp.diff(1 / Om, t) - E * Ps) * sp.exp(sp.I * ph))
+# Ansatz A = C*Omega, phi' = E*Omega loest die Gleichung
+C = sp.symbols('C', positive=True)
+chk = sp.simplify(eq.subs(A, C * Om).doit().subs(sp.Derivative(ph, t), E * Om))
+check("mit T/T0 = 1/Omega homogen; Loesung: Amplitude = C*Omega (lokale Energiedichte), Phasenrate = E*Omega (lokaler Takt)", chk == 0)
+check("fuer Omega = 1 Standardform: Amplitude konstant, Phasenrate E", sp.simplify(chk.subs(Om, 1)) == 0)
 
 print("5. xi aus Higgs-Matching")
 mh, v = 125.20, 246.21965
