@@ -44,6 +44,7 @@ ai = 1 / (xi * E0**2)
 check("alpha^-1 = 1/(xi E0^2) = 137,06", abs(ai - 137.06) < 0.01, f"{ai:.3f}")
 check("Grundform alpha = 1: xi E0^2 = 1 -> E0^2 = 1/xi = 7500 (Dok. 386)", abs(xi * (1/xi) - 1) < 1e-12 and abs(1/xi - 7500) < 1e-9)
 Eref = E0 * math.sqrt(xi * alpha_inv)
+check("Faktor 10 angepasst; mit nacktem v = 248,93 GeV: Nenner 15,501 = 5 pi K auf 2e-4 (Dok. 387)", abs(xi**4 * 1.220890e19 / (0.51099895e-3/((4/3)*xi**1.5)) / (5*math.pi*74/75) - 1) < 2e-4)
 check("SI-Bezugsenergie E0 sqrt(xi/alpha) = 0,99992 MeV (Dok. 386)", abs(Eref - 0.99992) < 1e-5, f"{Eref:.5f}")
 check("3700/27 = 137,037 (+7,6 ppm)", abs((3700/27/alpha_inv - 1) * 1e6 - 7.6) < 0.1)
 Df = 3 - xi

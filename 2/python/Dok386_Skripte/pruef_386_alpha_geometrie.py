@@ -48,6 +48,11 @@ unit = E0b / E0_T0
 check("T0-Energieeinheit = sqrt(xi m_e m_mu) = 84,85 keV", abs(unit * 1e3 - 84.846) < 0.01, f"{unit*1e3:.3f} keV")
 check("ohne Korrektur alpha^-1 = 7500/E0^2 = 138,91", abs(7500 / E0b**2 - 138.911) < 0.002, f"{7500/E0b**2:.3f}")
 
+lam_e_T0, lam_mu_T0 = 1 / (me / unit), 1 / (mmu / unit)     # Compton-Radien in T0-Einheiten
+check("Grundform: xi = lambda_e * lambda_mu (Fläche zweier Compton-Kugeln)", abs(lam_e_T0 * lam_mu_T0 - xi) < 1e-15)
+check("7500 = 100 * 75; xi_0 = 1/7500, erstes Inkrement 100 xi_0 = 1/75, Rotationszahl 74/75 = 1 - 100 xi", 100*75 == 7500 and abs(100*xi - 1/75) < 1e-15 and abs(1 - 100*xi - 74/75) < 1e-15)
+check("Myon: r_mu/lambda_mu = alpha (gleich für jedes geladene Teilchen)", abs((e**2/(4*pi*eps0*1.883531627e-28*c**2)) / (hbar/(1.883531627e-28*c)) / a - 1) < 1e-9)
+
 print("\n4. SI-Brücke und Bezugsenergie")
 E0k = math.sqrt(me * mmu / K)
 check("mit K_frak: alpha^-1 = 137,06 (+1,7e-4)", abs(1 / (xi * E0k**2) - 137.059) < 0.002 and abs(1 / (xi * E0k**2) * a - 1 - 1.68e-4) < 0.05e-4)
@@ -56,6 +61,9 @@ check("E_ref (nackt) = E0 sqrt(xi/alpha) = 0,99323 MeV", abs(Eref_b - 0.99323) <
 check("E_ref (nackt) / 1 MeV = sqrt(K_frak) bis auf 8e-5", abs(Eref_b / math.sqrt(K) - 1) < 1e-4, f"{Eref_b/math.sqrt(K)-1:+.1e}")
 check("E_ref (korrigiert) = 0,99992 MeV", abs(Eref_k - 0.99992) < 1e-5, f"{Eref_k:.5f}")
 check("T0-Einheit / sqrt(alpha) MeV = sqrt(K_frak)-Rest", abs(unit / (math.sqrt(a)) - Eref_b) < 1e-12)
+lam_mu_SI = hbar / (1.883531627e-28 * c); u = 197.3269804e-15
+area = r_e * lam_mu_SI / u**2
+check("SI: r_e lambda_mu = (xi/K)(hbar c/MeV)^2 (+1,7e-4), ohne K 1,4 % daneben", abs(area / (xi / K) - 1 - 1.68e-4) < 0.05e-4 and abs(area / xi - 1 - 0.0137) < 0.0005, f"{area/(xi/K)-1:+.1e}")
 Ry = 13.605693122990   # eV, CODATA 2022
 check("MeV = 1e6 * {e} J; m_e c^2 = 2 Ry/alpha^2 = 0,51100 MeV", abs(1e6 * e - 1.602176634e-13) < 1e-25 and abs(2 * Ry / a**2 / 1e6 - me) < 1e-7, f"{2*Ry/a**2/1e6:.8f}")
 me_rel = math.sqrt(a * K / (xi * mmu / me))

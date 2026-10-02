@@ -1145,12 +1145,12 @@ Zusammenfassung des gesamten Korpus (Dok. 001–383, A-Serie) auf dem Stand nach
 - Teilchen: Leptonleiter (+0,52 %, +1,03 %) [K], r_i, p_i [S]; Koide −0,017 ξ (PDG 2024); (√2, 2/9) für m_μ/m_e 442σ [X]; v-Wege 248,3/248,9/245,6/245,65 GeV; Quarktabelle als Kodierung [S]; Neutrinos Δm² −1,0 %/+0,46 %, m_ee 6,0/0,13/0 meV; a_τ = 1,2811·10⁻³; M_W 3,8σ; m_h, m_t Kandidaten; Ladungsquantisierung [B], Hyperladung geladener Leptonen offen (R146)
 - Gravitation und Kosmos: G-Form [K], Präzision kein Beleg (R141); Schwarze Löcher (R144); Casimir-CMB Identität (R136); H₀/Λ bedingt auf P20; Galaxien
 - QM: Bell-Verletzung bleibt, ξ-Effekt nicht auflösbar (R142, R143); IBM-Messung 28. Mai 2026
-- Higgs-Geometrie als Konsistenzprüfung von ξ: ξ_EFT = m_h²/(64π³v²) = 1,30·10⁻⁴, rund −2,3 % mit PDG 2024 (−2,6 % nur mit gerundetem λ_h = 0,129; Dok. 354, A190, 385) [K]; nur die Verkürzung auf 1/(16π³) in Dok. 320 [X] (Vermerk in Dok. 320 präzisiert)
+- Higgs-Geometrie als Konsistenzprüfung von ξ: ξ_EFT = m_h²/(64π³v²) = 1,30·10⁻⁴, rund −2,3 % mit PDG 2024 (−2,6 % nur mit gerundetem λ_h = 0,129; Dok. 354, A190, 385) [K]; die Verkürzung auf 1/(16π³) steht als Vermerk in Dok. 320
 - Unabhängig gegengeprüft (rund 75 Aussagen); ν₃-Dirac-Zuordnung (R108) als Spannung zu Dok. 346 ausgewiesen
 - Überarbeitet (1. Okt. 2026, abends): Schwerpunkt auf Verhältnisse und natürliche Einheiten. Neue Gliederung: Was FFGFT ist (zuerst „Verhältnisse in natürlichen Einheiten“) → Die Grundform (ħ = c = 1, α = 1, e = √(4π), α = r_e/λ_C, ξE₀² = 1; Dualität; ξ mit Higgs-Prüfung als Verhältnis m_h/v; Skalen als Verhältnisse L₀/ℓ_P = T₀/t_P = ξ, v/E_P = ξ⁴/(5π), m_i/E_P; Rekursion mit Rotationszahl 74/75) → Teilchen als Verhältnisse (Leiter m_i/v, Koide, Neutrino-Verhältnisse 1 : √(14/3) : 11 und Δm²_atm/Δm²_sol = 32,7 (−1,4 %), m_h/M_Z = 11/8, m_t/M_Z = (11/8)², Ladung) → Die Übersetzung in SI (ein Anker, v, K_frak nur hier, E₀ und α_SI mit Bezugsenergie, G); Tabelle der prüfbaren Aussagen getrennt nach Verhältnissen und Absolutwerten; Leseführer um A080/A085, A130/A267, 122, 385, 386 ergänzt
 - Tabellen: prüfbare Aussagen, Statusbilanz, Leseführer; Abschnitte „Was nicht mehr gilt“ und „Offene Brücken“ (Stand R146)
 
-**Prüfskript:** 2/python/Dok384_Skripte/pruef_384_zusammenfassung.py — 79/79 PASS
+**Prüfskript:** 2/python/Dok384_Skripte/pruef_384_zusammenfassung.py — 80/80 PASS
 **Register:** kein Eintrag.
 
 ---
@@ -1173,16 +1173,35 @@ Anlass: Der ursprüngliche Weg zu den Zusammenhängen der FFGFT lief über Vakuu
 
 ## 1. Oktober 2026 — Dok. 386: Wo α steckt
 
-### Dok. 386 — Ladungseinheit, zwei Kugeln und die Bezugsenergie (De/En, je 8 Seiten)
+### Dok. 386 — Ladungseinheit, zwei Kugeln und ξ als Fläche (De/En, je 8 Seiten)
 
 Anlass: Die FFGFT ist in ihrer Grundform verhältnisbasiert (natürliche Einheiten, α = 1, umdefinierte Ladung, ohne fraktale Korrektur); gefragt war, wohin α bei der Umdefinition wandert und welche geometrische Bedeutung es dort hat.
 - Umdefinition: ħ = c = ε₀ = 1 → e² = 4πα; mit α = 1 ist e = √(4π), die Ladung wird über die volle Kugeloberfläche gemessen [B]; α = (e_hist/e_geo)², e_geo/e_hist = 11,706 [B]; α = 1 als Recheneinheit [Q] (A267)
 - Geometrisches Bild: α = r_e/λ_C, a₀/λ_C = 1/α; Coulomb- und Compton-Kugel des Elektrons, α = 1 lässt sie zusammenfallen [B]; dasselbe 4π wie im Faktor 64π⁴ der Vakuumformel (Dok. 385)
-- Verhältnisform der Brücke: ξE₀² = 1, also E₀² = 1/ξ = 7500 in T0-Einheiten [B]; T0-Energieeinheit √(ξ m_e m_μ) = 84,85 keV [K]
+- Verhältnisform der Brücke: ξE₀² = 1, also E₀² = 1/ξ = 7500 in T0-Einheiten [B]; geometrisch ξ = λ_e·λ_μ = r_e·λ_μ, die Fläche der Compton-Kugeln von Elektron und Myon [B]; 7500 = 100·75 ist dieselbe Zahl wie in der Rekursion (ξ₀ = 1/7500, Rotationszahl 74/75) [B]; r : λ_C : a₀ = α : 1 : α⁻¹ für jedes geladene Teilchen [B]; T0-Energieeinheit √(ξ m_e m_μ) = 84,85 keV [K]; SI-Gegenstück r_e·λ_μ = (ξ/K)(ħc/MeV)² (+1,7·10⁻⁴) [K]
+- Gliederung: Grundform (natürliche Einheiten, Verhältnisse) vorne und ausgebaut, Übersetzung in SI als ein zusammengefasster Abschnitt
 - SI-Brücke α_SI = ξ(E₀/1 MeV)²: verlangt Bezugsenergie 0,99992 MeV (korrigiert) bzw. 0,99323 MeV = √K_frak·MeV (nackt) [K]; Eigenschaft des Ankers (R135)
 - Wo das MeV herkommt: 1 MeV = 10⁶ · 1,602176634·10⁻¹⁹ J, Zahlenfaktor = Zahlenwert von e aus der alten Ampere-Definition (μ₀ = 4π·10⁻⁷), also dieselbe historische Ladungseinheit, in der α steckt [Q]; Messweg m_e c² = 2 Ry/α² [B]; die SI-Brücke ist gleichbedeutend mit m_e/MeV = √(αK/(ξ m_μ/m_e)) = 0,51104 (+8·10⁻⁵) [K]; Lesart der zwei Kugeln: Compton-Kugel (nur Masse) nackt, Korrektur auf der Seite der Coulomb-Kugel bzw. der Einheit, ergibt 1 MeV bis auf 8·10⁻⁵ [S]; der Rest bleibt offen
 - Fraktale Korrektur: Der von α verlangte Faktor zwischen nacktem und korrigiertem Weg (A130) ist das Quadrat der nackten Bezugsenergie in MeV, K_α = ξ m_e m_μ α⁻¹ = 0,98650 [B], 1,7·10⁻⁴ neben 74/75 [K]; in der Grundform ξE₀² = 1 kein Korrekturfaktor; K_frak tritt im α-Sektor nur in der SI-Übersetzung auf [K] (vgl. Dok. 122), sein Wert 74/75 stammt aus der Geometrie (A040, Rotationszahl der Rekursion); dieselbe Gleichung wie A130, keine neue Messung
 - Vermerke (1. Okt. 2026), die Korrekturen stehen nur dort: Dok. 005 (E₀ = 1/ξ = 7500 GeV; Parameter, zwei Tabellenzeilen, Korrekturkasten; bisher ohne Vermerk), Dok. 032, 133, 165 (bestehende Vermerke zu E₀ = 1/ξ um E₀² = 1/ξ ergänzt), Dok. 013 (S_T0 per Konstruktion; Korrekturkasten), A130 (Lücke der beiden Wege = Quadrat der Bezugsenergie), jeweils De/En; Dok. 384 stellt die Grundform α = 1, E₀² = 1/ξ voran und nennt die Bezugsenergie (Prüfskript 79/79)
 
-**Prüfskript:** 2/python/Dok386_Skripte/pruef_386_alpha_geometrie.py — 21/21 PASS
+**Prüfskript:** 2/python/Dok386_Skripte/pruef_386_alpha_geometrie.py — 25/25 PASS
+**Register:** kein Eintrag (Vermerke direkt in den betroffenen Dokumenten).
+
+---
+
+## 2. Oktober 2026 — Dok. 387: Die Abweichungen im Überblick
+
+### Dok. 387 — Verhältnisse, SI-Übersetzung und Korrekturgrößen (De/En, je 8 Seiten)
+
+Anlass: Alle Restabweichungen an einer Stelle festhalten, getrennt nach Grundform (Verhältnisse in natürlichen Einheiten, α = 1) und SI-Übersetzung, jeweils mit Messwert und Unsicherheit; dazu die Korrekturgrößen und ihre Zusammenhänge.
+- Verhältnisse: m_μ/m_e +0,52 %, m_τ/m_μ +1,03 % bei Messfehlern 10⁻⁸ und 10⁻⁵, also echte Reste der Leiter [K]; Koide −0,017 ξ (0,4σ); v/E_P −0,23 %; β_T = 0,977 (Messfehler 0,18 %); Δm²-Verhältnis −1,4 % (0,5σ); θ₁₃ 0,4σ; M_W 3,8σ; m_h 1,7σ; m_t 0,6σ; λ_CKM 1,5σ
+- SI-Übersetzung: α⁻¹ +1,7·10⁻⁴ = Abstand m_e m_μ gegen 54 MeV² (Galois 3700/27 auf 7,6 ppm) [K]; Kette e −1,32 % (= K_frak − 1 bis auf 1,6·10⁻⁴), μ −0,80 %, τ +0,22 % [K]; v aus der Leiter nackt +1,10 %, mit K −0,25 %
+- β_T: schon in den frühesten Dokumenten (März/April 2025) β_T = 1 neben α = 1 mit kleiner Abweichung (r₀ ≈ ℓ_P/7519); heute 0,977, mit FFGFT-eigenem v 0,982, mit nacktem v 0,956 [K]; Rest nicht hergeleitet [S]
+- K_frak-Varianten: 74/75 einzige mit ganzer Umlaufzahl, Galois auf 7,6 ppm [K]; (1−ξ)¹⁰⁰, exp, 1/(1+100ξ) überall schlechter; 1 − ψ′(75) halbiert den α-Rest, verliert die ganze Umlaufzahl
+- Faktor 10 in v/E_P: an den Messwert angepasst (Feb. 2026); 8πG-Lesart nicht tragfähig wegen Dok. 374/376 [X]; mit nacktem v der Leiter wird er zu 10 K_frak ≈ π² [S]
+- Messgenauigkeit: für Leptonen, α, v/E_P und die SI-Kette nur minimaler Beitrag; begrenzend bei m_h, m_t, M_W, Neutrinos und Mischungswinkeln
+- Vermerke (2. Okt. 2026): Faktor 10 in Dok. 149, 150, 383, 041, 372 (De/En) und Dok. 384 auf „angepasst, mit nacktem v 10 K_frak ≈ π²“ (Dok. 387)
+
+**Prüfskript:** 2/python/Dok387_Skripte/pruef_387_abweichungen.py — 27/27 PASS
 **Register:** kein Eintrag (Vermerke direkt in den betroffenen Dokumenten).
