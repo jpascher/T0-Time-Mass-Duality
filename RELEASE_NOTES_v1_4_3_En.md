@@ -150,7 +150,7 @@ remains.
   incorporates Docs. 364 and 367–370.
 - **A120:** notes (the leak (7−3φ)/9 is not compatible with δ*, R139; reference to
   A125). A010, A230, A250, README and CHANGELOG updated; now 49 documents.
-- **A075, A142:** notes of 2 Oct 2026 — the SM limit is shown only for the scalar field ([K] → [S]); the modified Schrödinger equation in A142 is homogeneous with 𝒯/𝒯₀ = 1/Ω and already contains gravitation (phase at the local clock rate = gravitational redshift, amplitude = local energy density); the a_e addition 2.34·10⁻¹⁰ is excluded by measurement. The verification script `a142_gravitation_lagrange.py` named in A142, previously missing, has been added (14/14).
+- **A075, A142:** notes of 2 Oct 2026 — the SM limit is shown only for the scalar field ([K] → [S]); the modified Schrödinger equation in A142 is homogeneous with 𝒯/𝒯₀ = 1/Ω and already contains gravitation (phase at the local clock rate = gravitational redshift, amplitude = local energy density); the a_e addition 2.34·10⁻¹⁰ (with α = 1) or 1.7·10⁻¹² (with α/2π) is excluded by measurement. The verification script `a142_gravitation_lagrange.py` named in A142, previously missing, has been added (16/16). The older documents on the Schrödinger equation and the Lagrangian (Docs. 004, 020, 037, 067, 095, 129, 131, 202, 354) carry the same clarification as notes: gravitation without an additional field and without a graviton, visible as redshift.
 - Since the recalculation the A series carries dated notes in the text (R140).
 
 ---

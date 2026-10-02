@@ -323,8 +323,9 @@ ph_ = sp.Function('phi', real=True)(ts)
 Ps_ = Cc*Om_*sp.exp(-sp.I*ph_)
 eq_ = sp.simplify((sp.I/Om_*sp.diff(Ps_, ts) + sp.I*Ps_*sp.diff(1/Om_, ts) - Ee*Ps_)*sp.exp(sp.I*ph_)).subs(sp.Derivative(ph_, ts), Ee*Om_)
 check("A142 mit T/T0 = 1/Omega: Amplitude ~ Omega (Energiedichte), Phasenrate E*Omega (lokaler Takt, gravitative Rotverschiebung)", sp.simplify(eq_) == 0)
-check("A142: a_e-Zusatz (alpha/2pi) xi^2 I = 2,34e-10 wäre über 200-mal größer als die a_e-Übereinstimmung von rund 1e-12: ausgeschlossen",
-      abs((1/137.036)/(2*math.pi)*xi**2 - 2.065e-11) < 0.005e-11 and 2.34e-10/1e-12 > 200)
+v_a1 = xi**2/(2*math.pi)/12; v_a = (1/137.035999177)/(2*math.pi)*xi**2/12
+check("a_e-Zusatz (Dok. 067, A142): mit alpha = 1 2,36e-10, mit alpha/2pi 1,72e-12; gegen Messung minus QED +3,4(1,6)e-13 (Rb) / -10,1(2,7)e-13 (Cs) 8,6 bzw. 10 sigma: ausgeschlossen",
+      abs(v_a1 - 2.36e-10) < 0.02e-10 and abs((v_a - 3.4e-13)/1.6e-13 - 8.6) < 0.1 and abs((v_a + 10.1e-13)/2.7e-13 - 10.1) < 0.1)
 
 print(f"\nErgebnis: {ok}/{n} OK")
 raise SystemExit(0 if ok == n else 1)

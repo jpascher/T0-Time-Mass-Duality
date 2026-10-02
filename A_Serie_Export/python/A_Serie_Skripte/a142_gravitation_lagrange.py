@@ -5,8 +5,8 @@ Prueft: (1) Zeitfeld-Verbindung Gamma = (1/T) dT = -dm/m mit T = 1/m, Grenzfall 
 (2) Dimensionen der Materieterme mit Omega dimensionslos, (3) die Dimensionsluecke der
 Zeitfeld-Lagrange-Dichte (Vermerk 30. Sept. 2026), (4) die modifizierte Schroedinger-Gleichung: mit
 dimensionsbehaftetem T inhomogen, mit T/T0 = 1/Omega homogen, Standardform fuer Omega = 1,
-Amplitude ~ Omega und Phasenrate E*Omega -- gravitative Rotverschiebung (Vermerk 2. Okt. 2026), (5) xi aus Higgs-Matching, (6) der Zusatz a_e ~ 2,34e-10 ist durch die
-a_e-Messung ausgeschlossen (Vermerk 2. Okt. 2026).
+Amplitude ~ Omega und Phasenrate E*Omega -- gravitative Rotverschiebung (Vermerk 2. Okt. 2026), (5) xi aus Higgs-Matching, (6) der Zusatz a_e ~ 2,34e-10 (alpha = 1) bzw.
+1,7e-12 (alpha/2pi) ist durch die a_e-Messung ausgeschlossen (Vermerk 2. Okt. 2026).
 Dimensionen in natuerlichen Einheiten als Energie-Exponenten. sympy + Standardbibliothek."""
 import math
 import sympy as sp
@@ -70,13 +70,15 @@ check("lambda^2 v^2/(16 pi^3 m_h^2) = 1,30e-4, rund -2,3 % gegen 4/30000",
 
 print("6. a_e-Zusatz (Vermerk 2. Okt. 2026)")
 alpha = 1 / 137.035999177
-base = alpha / (2 * math.pi) * xi**2
-I_needed = 2.34e-10 / base
-check("alpha/(2 pi) xi^2 = 2,06e-11; fuer 2,34e-10 waere I_Schleife = 11,3 noetig, nicht ausgewiesen",
-      abs(base - 2.065e-11) < 0.005e-11 and abs(I_needed - 11.33) < 0.05, f"I = {I_needed:.2f}")
-agree = 1e-12   # Messung und QED-Rechnung fuer a_e stimmen auf rund 1e-12 ueberein
-check("Zusatz 2,34e-10 ist ueber 200-mal groesser als die Uebereinstimmung von a_e mit QED: ausgeschlossen",
-      2.34e-10 / agree > 200, f"Faktor {2.34e-10/agree:.0f}")
+v1 = 1 / (2 * math.pi) * xi**2 / 12
+v2 = alpha / (2 * math.pi) * xi**2 / 12
+check("2,34e-10 entsteht mit 1/(2 pi), also alpha = 1, und I = 1/12", abs(v1 - 2.36e-10) < 0.02e-10, f"{v1:.3e}")
+check("mit der physikalischen Kopplung alpha/(2 pi): 1,72e-12", abs(v2 - 1.72e-12) < 0.01e-12, f"{v2:.3e}")
+# Messung minus QED (Fan 2023; alpha aus Rb bzw. Cs): +3,4(1,6)e-13 bzw. -10,1(2,7)e-13
+sRb = (v2 - 3.4e-13) / 1.6e-13; sCs = (v2 + 10.1e-13) / 2.7e-13
+check("Zusatz 1,72e-12 liegt 8,6 sigma (Rb) bzw. 10 sigma (Cs) neben Messung minus QED: ausgeschlossen",
+      abs(sRb - 8.6) < 0.1 and abs(sCs - 10.1) < 0.1, f"{sRb:.1f} / {sCs:.1f} sigma")
+check("2,34e-10 waere ueber 200-mal groesser als die Uebereinstimmung von rund 1e-12", 2.34e-10 / 1e-12 > 200)
 
 print(f"\nERGEBNIS: {n_ok}/{n_all} BESTANDEN")
 raise SystemExit(0 if n_ok == n_all else 1)

@@ -149,7 +149,7 @@ Verhältnis-Linie für a_τ bleibt.
   schließt; nimmt Dok. 364 und 367–370 auf.
 - **A120:** Vermerke (der Leak (7−3φ)/9 ist mit δ* nicht verträglich, R139; Verweis
   auf A125). A010, A230, A250, README und CHANGELOG nachgezogen; jetzt 49 Dokumente.
-- **A075, A142:** Vermerke vom 2. Okt. 2026 — der SM-Grenzfall ist nur für das Skalarfeld gezeigt ([K] → [S]); die modifizierte Schrödinger-Gleichung in A142 ist mit 𝒯/𝒯₀ = 1/Ω homogen und enthält die Gravitation bereits (Phase im lokalen Takt = gravitative Rotverschiebung, Amplitude = lokale Energiedichte); der a_e-Zusatz 2,34·10⁻¹⁰ ist durch die Messung ausgeschlossen. Das in A142 genannte, bisher fehlende Prüfskript `a142_gravitation_lagrange.py` ist ergänzt (14/14).
+- **A075, A142:** Vermerke vom 2. Okt. 2026 — der SM-Grenzfall ist nur für das Skalarfeld gezeigt ([K] → [S]); die modifizierte Schrödinger-Gleichung in A142 ist mit 𝒯/𝒯₀ = 1/Ω homogen und enthält die Gravitation bereits (Phase im lokalen Takt = gravitative Rotverschiebung, Amplitude = lokale Energiedichte); der a_e-Zusatz 2,34·10⁻¹⁰ (mit α = 1) bzw. 1,7·10⁻¹² (mit α/2π) ist durch die Messung ausgeschlossen. Das in A142 genannte, bisher fehlende Prüfskript `a142_gravitation_lagrange.py` ist ergänzt (16/16). Dieselbe Klärung tragen als Vermerke die älteren Dokumente zur Schrödinger-Gleichung und zum Lagrangian (Dok. 004, 020, 037, 067, 095, 129, 131, 202, 354): Gravitation ohne zusätzliches Feld und ohne Graviton, sichtbar als Rotverschiebung.
 - Die A-Serie trägt seit der Rechenprüfung datierte Hinweise im Text (R140).
 
 ---
