@@ -1137,7 +1137,7 @@ Anlass: Frage, ob sich Planck-Länge und Massen aus ξ allein mit nur einem Anke
 
 ## 1. Oktober 2026 — Dok. 384: FFGFT in Kurzfassung
 
-### Dok. 384 — Grundlagen, Ergebnisse und Status nach der Rechenprüfung (De/En, 20/19 Seiten)
+### Dok. 384 — Grundlagen, Ergebnisse und Status nach der Rechenprüfung (De/En, je 21 Seiten)
 
 Zusammenfassung des gesamten Korpus (Dok. 001–383, A-Serie) auf dem Stand nach der Nachrechnung vom 29. Sept. bis 1. Okt. 2026; jedes Ergebnis mit Formel, Zahlenwert, Vergleichswert, Status und tragenden Dokumenten.
 - Architektur: drei Grundannahmen T̃·m = 1, T⁴, ℤ₃ (R56) und D₄ als motivierte Wahl [S]; einziger Parameter ξ = 4/30000 [S]; α = 1 mit angepasstem e [Q]; kosmischer Sektor ausgeklammert (P39)
@@ -1155,8 +1155,9 @@ Zusammenfassung des gesamten Korpus (Dok. 001–383, A-Serie) auf dem Stand nach
 
 - HTML-Fassung (2. Okt. 2026): 2/html/384_FFGFT_Kurzfassung_{De,En}.html (eigenständig, Formeln als MathML), erzeugt mit 2/python/Dok384_Skripte/mk_384_docx_html.py aus der LaTeX-Quelle; die Word-Fassung liegt nicht im Repo (Skript mit --docx erzeugt sie als Vorlage für Google Docs)
 - Abschnitt „Verwendung von KI-Werkzeugen“ ergänzt (De/En)
+- Erweitert (2. Okt. 2026, abends): neuer Abschnitt „Resonanz als Grundgedanke: das Eulersche Tonnetz“ (Dok. 060, 189, 310, 315, 316, 328, 343, 358): Teilchen als Schwingungsmoden, Massenverhältnisse als Periodenverhältnisse, Harmonik und Galois als zwei Darstellungen eines Objekts (358 Satz D) [B]; Messwert als Kammerton (310); 1/ξ = 7500 = 2²·3·5⁴ als Tonnetz-Punkt (−2, −1, −4) [K]; sieben von neun Yukawa-Vorfaktoren 5-Limit, Ausnahmen 13 und 7 als Galois-Primen (358 Satz B) [B]; Massenleiter als logarithmische Resonanzskala mit Terz ξ^(1/3); Komma als Einbettungsfehler, im endlichen Körper kein Komma (358 Satz A) [B], ξ-Zyklus schließt nach 75 Umläufen mit Rotationszahl 74/75 (315) [B]; Kopplungsregime (328); Grenzen der harmonischen Lesart (316, 343). Zusammenfassung, Leseführer und Fazit ergänzt; PDF und HTML neu erzeugt
 
-**Prüfskript:** 2/python/Dok384_Skripte/pruef_384_zusammenfassung.py — 93/93 PASS
+**Prüfskript:** 2/python/Dok384_Skripte/pruef_384_zusammenfassung.py — 99/99 PASS
 **Register:** kein Eintrag.
 
 ---

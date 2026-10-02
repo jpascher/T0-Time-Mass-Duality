@@ -67,7 +67,7 @@ führen. Die wichtigsten Folgen für die Einstufung:
 | 381 | Die laufende Rekursion exakt aufsummiert | 7/7 | 14/14 |
 | 382 | Myon g−2: Stand 2025 | 8/8 | 21/21 |
 | 383 | Massen und Planck-Skala ohne v — eine Kette, ein Anker | 8/8 | 20/20 |
-| 384 | FFGFT in Kurzfassung — Grundlagen, Ergebnisse und Status nach der Rechenprüfung | 20/19 | 93/93 |
+| 384 | FFGFT in Kurzfassung — Grundlagen, Ergebnisse und Status nach der Rechenprüfung | 21/21 | 99/99 |
 | 385 | Der Higgs-Vakuum-Weg zu ξ | 8/8 | 17/17 |
 | 386 | Wo α steckt — Ladungseinheit, zwei Kugeln und ξ als Fläche | 8/8 | 25/25 |
 | 387 | Die Abweichungen im Überblick — Verhältnisse, SI-Übersetzung und Korrekturgrößen | 8/8 | 27/27 |
@@ -81,7 +81,9 @@ Prüfskripte unter `2/python/DokNNN_Skripte/`.
 ### Kurzfassung des Korpus (Dok. 384)
 Der ganze Korpus (Dok. 001–387, A-Serie) auf dem Stand nach der Rechenprüfung, von
 der Grundform her aufgebaut: zuerst die Verhältnisse in natürlichen Einheiten, dann
-die Übersetzung in SI. Für jedes Ergebnis Formel, Zahlenwert, Vergleichswert, Status
+die Übersetzung in SI. Der leitende Gedanke ist Resonanz: Teilchen sind Schwingungsmoden,
+ξ ist ein Punkt im Eulerschen Tonnetz (1/ξ = 2²·3·5⁴), und die fraktale Korrektur ist das
+Komma der Einbettung ins Kontinuum. Für jedes Ergebnis Formel, Zahlenwert, Vergleichswert, Status
 und tragende Dokumente; dazu Tabellen der prüfbaren Aussagen, eine Statusbilanz, die
 offenen Brücken und ein Abschnitt „Was nicht mehr gilt“. Neu formatiert mit farbigen
 Statusmarkern und Kästen für die Kernformeln; zusätzlich als eigenständige HTML-Seite.
@@ -196,7 +198,7 @@ T·m = 1 und lässt sich als dimensionsloses Verhältnis nicht begründet auf 1 
 | Kosmischer Exponent vorwärts (P20); CMB-Peaks {1,6,14,26} | offen (P20, P29/P31, R139) |
 
 ## Einstieg für neue Leser
-**Dok. 384 „FFGFT in Kurzfassung“** (De/En, 20/19 S., auch als HTML) ist der
+**Dok. 384 „FFGFT in Kurzfassung“** (De/En, je 21 S., auch als HTML) ist der
 empfohlene Einstieg in den heutigen Stand. Dok. 205 „FFGFT in einfacher Sprache“
 bleibt der Einstieg für Laien; das Ikosaeder-Buch *Die Zahl, die niemand erklärte*
 der Einstieg in die Leptonmassen.

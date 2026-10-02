@@ -67,7 +67,7 @@ register. The main consequences for the classification:
 | 381 | The running recursion summed exactly | 7/7 | 14/14 |
 | 382 | Muon g−2: status 2025 | 8/8 | 21/21 |
 | 383 | Masses and Planck scale without v — one chain, one anchor | 8/8 | 20/20 |
-| 384 | FFGFT in brief — foundations, results and status after the calculation review | 20/19 | 93/93 |
+| 384 | FFGFT in brief — foundations, results and status after the calculation review | 21/21 | 99/99 |
 | 385 | The Higgs–vacuum route to ξ | 8/8 | 17/17 |
 | 386 | Where α hides — charge unit, two spheres and ξ as an area | 8/8 | 25/25 |
 | 387 | The deviations at a glance — ratios, SI translation and correction quantities | 8/8 | 27/27 |
@@ -81,7 +81,9 @@ Verification scripts in `2/python/DokNNN_Skripte/`.
 ### Summary of the corpus (Doc. 384)
 The whole corpus (Docs. 001–387, A series) as of the state after the recalculation,
 built up from the basic form: first the ratios in natural units, then the translation
-into SI. For every result the formula, numerical value, comparison value, status and
+into SI. The guiding idea is resonance: particles are oscillation modes, ξ is a point in
+Euler's Tonnetz (1/ξ = 2²·3·5⁴), and the fractal correction is the comma of the embedding
+into the continuum. For every result the formula, numerical value, comparison value, status and
 carrying documents; in addition tables of the testable statements, a status balance,
 the open bridges and a section "What no longer holds". Reformatted with coloured status
 markers and boxes for the core formulas; also available as a stand-alone HTML page.
@@ -196,7 +198,7 @@ and, as a dimensionless ratio, cannot be set to 1 with justification (A135).
 | Cosmic exponent forward (P20); CMB peaks {1,6,14,26} | open (P20, P29/P31, R139) |
 
 ## Entry point for new readers
-**Doc. 384 "FFGFT in Brief"** (De/En, 20/19 pp., also as HTML) is the recommended entry
+**Doc. 384 "FFGFT in Brief"** (De/En, 21 pp. each, also as HTML) is the recommended entry
 point to the current state. Doc. 205 "FFGFT in Simple Language" remains the entry point
 for lay readers; the icosahedron book *The Number That Nobody Explained* remains the
 entry point to the lepton masses.

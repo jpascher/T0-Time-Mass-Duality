@@ -210,5 +210,27 @@ check("74 = Zähler der Rotationszahl 74/75 = 1 - 100 xi", Fr(74, 75) == 1 - 100
 check("37 | 3^18 - 1, aber 4 teilt 18 nicht: GF(81) kein Teilkörper von GF(3^18)", (3**18 - 1) % 37 == 0 and 18 % 4 != 0 and min(k for k in range(1, 40) if (3**k - 1) % 37 == 0) == 18)
 check("5 teilt 80 = |GF(81)*|, aber nicht 1152 = |Aut(D4)|", 80 % 5 == 0 and 1152 % 5 != 0)
 
+print("\n13. Resonanz und Eulersches Tonnetz (Dok. 060, 189, 315, 316, 358; Ergänzung 2. Okt. 2026)")
+def pf(x):
+    d = {}; q = 2
+    while x > 1:
+        while x % q == 0: d[q] = d.get(q, 0) + 1; x //= q
+        q += 1
+    return d
+check("1/xi = 7500 = 2^2 * 3 * 5^4, Tonnetz-Punkt (-2,-1,-4)", 1/xiF == 7500 and pf(7500) == {2: 2, 3: 1, 5: 4})
+rY = {"e": Fr(4, 3), "mu": Fr(16, 5), "tau": Fr(25, 9), "u": Fr(6), "d": Fr(25, 2), "c": Fr(2), "b": Fr(3, 2), "s": Fr(26, 9), "t": Fr(1, 28)}
+primes = lambda f: set(pf(f.numerator)) | set(pf(f.denominator))
+lim5 = [k for k, f in rY.items() if primes(f) <= {2, 3, 5}]
+check("7 von 9 Yukawa-Vorfaktoren 5-Limit; Ausnahmen s (13), t (7); alle im Raster {2,3,5,7,11,13}, 11 fehlt",
+      len(lim5) == 7 and primes(rY["s"]) - {2, 3, 5} == {13} and primes(rY["t"]) - {2, 3, 5} == {7}
+      and set().union(*map(primes, rY.values())) == {2, 3, 5, 7, 13})
+check("Euler-Spirale schließt nie: 2^x 3^y 5^z = 1 nur trivial (|x|,|y|,|z| <= 30)",
+      not any(Fr(2)**x * Fr(3)**y * Fr(5)**z == 1 for x in range(-30, 31) for y in range(-30, 31) for z in range(-30, 31) if (x, y, z) != (0, 0, 0)))
+check("im endlichen Körper schließt der Zirkel: 3 hat in (Z/13)* Ordnung 3 (Orbit {1,3,9})",
+      [pow(3, k, 13) for k in range(4)] == [1, 3, 9, 1])
+check("xi-Zyklus: Schritt 1/75, Rotationszahl 74/75, gcd(74,75)=1 -> Schluss nach genau 75 Umläufen",
+      math.gcd(74, 75) == 1 and min(k for k in range(1, 200) if (k * Fr(74, 75)).denominator == 1) == 75)
+check("Terz der Massenleiter: xi^(1/3) = 1/19,57", abs(1 / xi**(1/3) - 19.57) < 0.01)
+
 print(f"\nErgebnis: {ok}/{n} OK")
 raise SystemExit(0 if ok == n else 1)
