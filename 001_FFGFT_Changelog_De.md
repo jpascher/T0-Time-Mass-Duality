@@ -1137,7 +1137,7 @@ Anlass: Frage, ob sich Planck-Länge und Massen aus ξ allein mit nur einem Anke
 
 ## 1. Oktober 2026 — Dok. 384: FFGFT in Kurzfassung
 
-### Dok. 384 — Grundlagen, Ergebnisse und Status nach der Rechenprüfung (De/En, 18/17 Seiten)
+### Dok. 384 — Grundlagen, Ergebnisse und Status nach der Rechenprüfung (De/En, je 19 Seiten)
 
 Zusammenfassung des gesamten Korpus (Dok. 001–383, A-Serie) auf dem Stand nach der Nachrechnung vom 29. Sept. bis 1. Okt. 2026; jedes Ergebnis mit Formel, Zahlenwert, Vergleichswert, Status und tragenden Dokumenten.
 - Architektur: drei Grundannahmen T̃·m = 1, T⁴, ℤ₃ (R56) und D₄ als motivierte Wahl [S]; einziger Parameter ξ = 4/30000 [S]; α = 1 mit angepasstem e [Q]; kosmischer Sektor ausgeklammert (P39)
@@ -1148,9 +1148,10 @@ Zusammenfassung des gesamten Korpus (Dok. 001–383, A-Serie) auf dem Stand nach
 - Higgs-Geometrie als Konsistenzprüfung von ξ: ξ_EFT = m_h²/(64π³v²) = 1,30·10⁻⁴, rund −2,3 % mit PDG 2024 (−2,6 % nur mit gerundetem λ_h = 0,129; Dok. 354, A190, 385) [K]; die Verkürzung auf 1/(16π³) steht als Vermerk in Dok. 320
 - Unabhängig gegengeprüft (rund 75 Aussagen); ν₃-Dirac-Zuordnung (R108) als Spannung zu Dok. 346 ausgewiesen
 - Überarbeitet (1. Okt. 2026, abends): Schwerpunkt auf Verhältnisse und natürliche Einheiten. Neue Gliederung: Was FFGFT ist (zuerst „Verhältnisse in natürlichen Einheiten“) → Die Grundform (ħ = c = 1, α = 1, e = √(4π), α = r_e/λ_C, ξE₀² = 1; Dualität; ξ mit Higgs-Prüfung als Verhältnis m_h/v; Skalen als Verhältnisse L₀/ℓ_P = T₀/t_P = ξ, v/E_P = ξ⁴/(5π), m_i/E_P; Rekursion mit Rotationszahl 74/75) → Teilchen als Verhältnisse (Leiter m_i/v, Koide, Neutrino-Verhältnisse 1 : √(14/3) : 11 und Δm²_atm/Δm²_sol = 32,7 (−1,4 %), m_h/M_Z = 11/8, m_t/M_Z = (11/8)², Ladung) → Die Übersetzung in SI (ein Anker, v, K_frak nur hier, E₀ und α_SI mit Bezugsenergie, G); Tabelle der prüfbaren Aussagen getrennt nach Verhältnissen und Absolutwerten; Leseführer um A080/A085, A130/A267, 122, 385, 386 ergänzt
-- Tabellen: prüfbare Aussagen, Statusbilanz, Leseführer; Abschnitte „Was nicht mehr gilt“ und „Offene Brücken“ (Stand R146)
+- Tabellen: prüfbare Aussagen, Statusbilanz, Leseführer; Abschnitte „Was nicht mehr gilt“ und „Offene Brücken“ (Stand R147)
+- Erweitert (2. Okt. 2026): neuer Abschnitt „Ikosaeder und goldener Schnitt: das φ-Skelett“ aus den Dokumenten über 300, die in der A-Serie noch fehlen (Dok. 293, 364, 367, 368, 370). A₅-Gewichte p₀ = θ = 2/9, p₁/p₂ = φ⁸, p₀/p₂ = 2φ⁴ [B]; m_τ/m_e = (74 + 1/45)φ⁸ = 3477,469 gegen PDG 3477,37 ± 0,18 (+3,0·10⁻⁵, 0,6σ) [K], so genau wie Koide; 74φ⁸ allein −5,3σ; Faktoren 74 und 1/45 beobachtet [S]; 37 kommt nicht aus dem Ikosaeder [B]; für m_μ/m_e kein φ-Weg auf diesem Niveau (30φ⁴ −0,55 %). Abgrenzung zur widerlegten φ-Massenleiter; Kurzfassung, prüfbare Aussagen, Statusbilanz, offene Brücken, Leseführer und Fazit ergänzt
 
-**Prüfskript:** 2/python/Dok384_Skripte/pruef_384_zusammenfassung.py — 80/80 PASS
+**Prüfskript:** 2/python/Dok384_Skripte/pruef_384_zusammenfassung.py — 93/93 PASS
 **Register:** kein Eintrag.
 
 ---

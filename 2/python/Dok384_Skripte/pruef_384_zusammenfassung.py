@@ -186,5 +186,29 @@ xpdg = 125.20**2 / (64 * pi**3 * 246.22**2)
 check("PDG 2024 (125,20/246,22): rund -2,3 % (Dok. 385)", abs(rel(xpdg, xi) + 2.28) < 0.03, f"{rel(xpdg, xi):+.2f} %")
 check("Verkürzung 1/(16 pi^3) = 15-faches von xi", abs(1/(16*pi**3)/xi - 15.12) < 0.01)
 
+print("\n12. Ikosaeder und phi-Skelett (Dok. 293, 367, 368, 370; Erweiterung 2. Okt. 2026)")
+phi = (1 + math.sqrt(5)) / 2
+p0, p1, p2 = 2/9, (2 + 3*phi)/9, (5 - 3*phi)/9
+check("p0 + p1 + p2 = 1", abs(p0 + p1 + p2 - 1) < 1e-14)
+check("p1/p2 = phi^8 exakt", abs(p1/p2 - phi**8) < 1e-9)
+check("p0/p2 = 2 phi^4 exakt", abs(p0/p2 - 2*phi**4) < 1e-10)
+check("3 sqrt(p_j) = sqrt2, phi^2, phi^-2", abs(3*math.sqrt(p0) - math.sqrt(2)) < 1e-14 and abs(3*math.sqrt(p1) - phi**2) < 1e-12 and abs(3*math.sqrt(p2) - phi**-2) < 1e-12)
+rt = mtau / me; srt = 0.09 / me
+check("PDG m_tau/m_e = 3477,37 +- 0,18", abs(rt - 3477.37) < 0.01 and abs(srt - 0.176) < 0.001, f"{rt:.3f}")
+r74 = 74 * phi**8
+check("74 phi^8 = 3476,42, -2,7e-4, -5,3 sigma", abs(r74 - 3476.42) < 0.01 and abs(r74/rt - 1 + 2.7e-4) < 0.05e-4 and abs((r74 - rt)/srt + 5.3) < 0.05)
+r45 = (74 + 1/45) * phi**8
+check("(74+1/45) phi^8 = 3477,469, +3,0e-5, 0,6 sigma", abs(r45 - 3477.469) < 0.001 and abs(r45/rt - 1 - 3.0e-5) < 0.05e-5 and abs((r45 - rt)/srt - 0.59) < 0.02, f"{r45:.4f}")
+rxi = 74 * phi**8 * (1 + 27/12*xi)
+check("74 phi^8 (1+27 xi/12) = 3477,468, +2,9e-5", abs(rxi - 3477.468) < 0.001 and abs(rxi/rt - 1 - 2.9e-5) < 0.05e-5)
+ak = [1 + math.sqrt(2)*math.cos(2/9 + 2*pi*k/3) for k in range(3)]
+rk = (ak[0]/ak[1])**2
+check("Koide theta=2/9: m_tau/m_e = 3477,473, +3,1e-5", abs(rk - 3477.473) < 0.001 and abs(rk/rt - 1 - 3.1e-5) < 0.05e-5)
+r30 = 30 * phi**4
+check("30 phi^4 = 205,62, -0,55 % gegen m_mu/m_e", abs(r30 - 205.62) < 0.005 and abs(rel(r30, mmu/me) + 0.55) < 0.01)
+check("74 = Zähler der Rotationszahl 74/75 = 1 - 100 xi", Fr(74, 75) == 1 - 100*xiF)
+check("37 | 3^18 - 1, aber 4 teilt 18 nicht: GF(81) kein Teilkörper von GF(3^18)", (3**18 - 1) % 37 == 0 and 18 % 4 != 0 and min(k for k in range(1, 40) if (3**k - 1) % 37 == 0) == 18)
+check("5 teilt 80 = |GF(81)*|, aber nicht 1152 = |Aut(D4)|", 80 % 5 == 0 and 1152 % 5 != 0)
+
 print(f"\nErgebnis: {ok}/{n} OK")
 raise SystemExit(0 if ok == n else 1)
