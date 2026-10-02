@@ -29,6 +29,8 @@ Alle wesentlichen Änderungen dieser Serie. Format: Datum · Dokument · Inhalt.
 - **A010** Block-1-Liste, **A230** neuer Residuenpunkt (Faktoren des φ-Skeletts),
   **A250** Zuordnung A125 → 364, 367, 368, 369, 370 (jeweils De + En)
 - Gesamtbuch De/En: Kapitel A125 nach A120; README auf 49 Dokumente
+- **A075** (De + En): Vermerk vom 2. Okt. 2026 — „FFGFT enthält den SM-Lagrangian als Grenzfall“ ist nur für das Skalarfeld δm gezeigt; [K] → [S]
+- **A142** (De + En): Vermerke vom 2. Okt. 2026 — modifizierte Schrödinger-Gleichung i𝒯∂ₜΨ + … = ĤΨ dimensional inhomogen, für 𝒯 = 1/m folgt i∂ₜΨ = mĤΨ, nicht die Standardform; [B] → [S]. Zusatz a_e ≈ 2,34·10⁻¹⁰ durch die Messung ausgeschlossen (Übereinstimmung Messung–QED rund 10⁻¹², verlangtes I_Schleife ≈ 11,3 nicht ausgewiesen). Das im Text genannte Prüfskript `python/A_Serie_Skripte/a142_gravitation_lagrange.py` fehlte und ist ergänzt — 12/12 BESTANDEN
 
 ---
 

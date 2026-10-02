@@ -67,7 +67,7 @@ führen. Die wichtigsten Folgen für die Einstufung:
 | 381 | Die laufende Rekursion exakt aufsummiert | 7/7 | 14/14 |
 | 382 | Myon g−2: Stand 2025 | 8/8 | 21/21 |
 | 383 | Massen und Planck-Skala ohne v — eine Kette, ein Anker | 8/8 | 20/20 |
-| 384 | FFGFT in Kurzfassung — Grundlagen, Ergebnisse und Status nach der Rechenprüfung | 23/22 | 114/114 |
+| 384 | FFGFT in Kurzfassung — Grundlagen, Ergebnisse und Status nach der Rechenprüfung | 23/23 | 117/117 |
 | 385 | Der Higgs-Vakuum-Weg zu ξ | 8/8 | 17/17 |
 | 386 | Wo α steckt — Ladungseinheit, zwei Kugeln und ξ als Fläche | 8/8 | 25/25 |
 | 387 | Die Abweichungen im Überblick — Verhältnisse, SI-Übersetzung und Korrekturgrößen | 8/8 | 27/27 |
@@ -149,6 +149,7 @@ Verhältnis-Linie für a_τ bleibt.
   schließt; nimmt Dok. 364 und 367–370 auf.
 - **A120:** Vermerke (der Leak (7−3φ)/9 ist mit δ* nicht verträglich, R139; Verweis
   auf A125). A010, A230, A250, README und CHANGELOG nachgezogen; jetzt 49 Dokumente.
+- **A075, A142:** Vermerke vom 2. Okt. 2026 — der SM-Grenzfall ist nur für das Skalarfeld gezeigt ([K] → [S]); die modifizierte Schrödinger-Gleichung in A142 ist dimensional inhomogen ([B] → [S]); der a_e-Zusatz 2,34·10⁻¹⁰ ist durch die Messung ausgeschlossen. Das in A142 genannte, bisher fehlende Prüfskript `a142_gravitation_lagrange.py` ist ergänzt (12/12).
 - Die A-Serie trägt seit der Rechenprüfung datierte Hinweise im Text (R140).
 
 ---
@@ -208,7 +209,7 @@ T·m = 1 und lässt sich als dimensionsloses Verhältnis nicht begründet auf 1 
 | Vorfaktor (8π)^(1/4) der CMB-Temperatur | [S] (Dok. 388) |
 
 ## Einstieg für neue Leser
-**Dok. 384 „FFGFT in Kurzfassung“** (De/En, 23/22 S., auch als HTML) ist der
+**Dok. 384 „FFGFT in Kurzfassung“** (De/En, je 23 S., auch als HTML) ist der
 empfohlene Einstieg in den heutigen Stand. Dok. 205 „FFGFT in einfacher Sprache“
 bleibt der Einstieg für Laien; das Ikosaeder-Buch *Die Zahl, die niemand erklärte*
 der Einstieg in die Leptonmassen.

@@ -296,5 +296,29 @@ check("Rauschgrenze: Phasenfehler N eps erreicht pi/2 nach N_krit = pi/(2 eps); 
 nb = 2048
 check("Shor-Gatteranteil der Aufbereitung n^3/(n^3+n^2) = 1 - 1/(n+1): 99,95 % bei 2048 Bit", abs(nb**3/(nb**3 + nb**2) - 0.99951) < 1e-5)
 
+print("\n16. Feldtheorie: Brückenformel und Schrödinger-Limes (A075, A070, A142; Ergänzung 2. Okt. 2026)")
+import sympy as sp
+r, rt, rx, rxx, tt, tx, txx, Vv = sp.symbols('rho rho_t rho_x rho_xx theta_t theta_x theta_xx V', real=True)
+ms = sp.symbols('m', positive=True)
+# psi = sqrt(rho) e^(i theta): psi_t/psi und psi_xx/psi aus den Ableitungen von ln psi = ln(rho)/2 + i theta
+Lt_ = rt/(2*r) + sp.I*tt                 # (ln psi)_t
+Lx_ = rx/(2*r) + sp.I*tx                 # (ln psi)_x
+Lxx_ = (rxx*r - rx**2)/(2*r**2) + sp.I*txx
+res = sp.expand(sp.I*Lt_ + (Lxx_ + Lx_**2)/(2*ms) - Vv)   # (i psi_t + psi_xx/2m - V psi)/psi
+cont = rt + (rx*tx + r*txx)/ms                           # d_t rho + d_x(rho theta_x / m)
+sq_xx_over_sq = (rxx/(2*r) - rx**2/(4*r**2))             # (sqrt rho)_xx / sqrt rho
+hj = tt + tx**2/(2*ms) + Vv - sq_xx_over_sq/(2*ms)       # Hamilton-Jacobi mit Quantenpotential
+re_, im_ = sp.expand(res).as_real_imag()
+check("Madelung: Schrödinger mit psi = sqrt(rho) e^(i theta) = Kontinuitätsgl. (Imaginärteil) + Hamilton-Jacobi mit Quantenpotential (Realteil)",
+      sp.simplify(im_ - cont/(2*r)) == 0 and sp.simplify(re_ + hj) == 0)
+Lt = 1.0; Ng = 4000; xg = [(k + 0.5)*Lt/Ng for k in range(Ng)]
+modes = [1, 2, 5]; amps = [0.7, -0.3, 1.1]
+def dphi(k, x): return -math.sqrt(2/Lt)*(2*math.pi*k/Lt)*math.sin(2*math.pi*k*x/Lt)
+lhs = sum(0.5*sum(a*dphi(k, x) for a, k in zip(amps, modes))**2 for x in xg)*Lt/Ng
+rhs = 0.5*sum(a*a*(2*math.pi*k/Lt)**2 for a, k in zip(amps, modes))
+check("Brückenformel am Torus-Beispiel: int 1/2 (d delta_m)^2 = 1/2 sum a_i^2 m_i^2 = 1/2 <psi|Phi^2|psi>", abs(lhs/rhs - 1) < 1e-9, f"{lhs:.6f} / {rhs:.6f}")
+check("A142: a_e-Zusatz (alpha/2pi) xi^2 I = 2,34e-10 wäre über 200-mal größer als die a_e-Übereinstimmung von rund 1e-12: ausgeschlossen",
+      abs((1/137.036)/(2*math.pi)*xi**2 - 2.065e-11) < 0.005e-11 and 2.34e-10/1e-12 > 200)
+
 print(f"\nErgebnis: {ok}/{n} OK")
 raise SystemExit(0 if ok == n else 1)

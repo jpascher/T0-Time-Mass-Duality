@@ -67,7 +67,7 @@ register. The main consequences for the classification:
 | 381 | The running recursion summed exactly | 7/7 | 14/14 |
 | 382 | Muon g−2: status 2025 | 8/8 | 21/21 |
 | 383 | Masses and Planck scale without v — one chain, one anchor | 8/8 | 20/20 |
-| 384 | FFGFT in brief — foundations, results and status after the calculation review | 23/22 | 114/114 |
+| 384 | FFGFT in brief — foundations, results and status after the calculation review | 23/23 | 117/117 |
 | 385 | The Higgs–vacuum route to ξ | 8/8 | 17/17 |
 | 386 | Where α hides — charge unit, two spheres and ξ as an area | 8/8 | 25/25 |
 | 387 | The deviations at a glance — ratios, SI translation and correction quantities | 8/8 | 27/27 |
@@ -150,6 +150,7 @@ remains.
   incorporates Docs. 364 and 367–370.
 - **A120:** notes (the leak (7−3φ)/9 is not compatible with δ*, R139; reference to
   A125). A010, A230, A250, README and CHANGELOG updated; now 49 documents.
+- **A075, A142:** notes of 2 Oct 2026 — the SM limit is shown only for the scalar field ([K] → [S]); the modified Schrödinger equation in A142 is dimensionally inhomogeneous ([B] → [S]); the a_e addition 2.34·10⁻¹⁰ is excluded by measurement. The verification script `a142_gravitation_lagrange.py` named in A142, previously missing, has been added (12/12).
 - Since the recalculation the A series carries dated notes in the text (R140).
 
 ---
@@ -208,7 +209,7 @@ and, as a dimensionless ratio, cannot be set to 1 with justification (A135).
 | Prefactor (8π)^(1/4) of the CMB temperature | [S] (Doc. 388) |
 
 ## Entry point for new readers
-**Doc. 384 "FFGFT in Brief"** (De/En, 23/22 pp., also as HTML) is the recommended entry
+**Doc. 384 "FFGFT in Brief"** (De/En, 23 pp. each, also as HTML) is the recommended entry
 point to the current state. Doc. 205 "FFGFT in Simple Language" remains the entry point
 for lay readers; the icosahedron book *The Number That Nobody Explained* remains the
 entry point to the lepton masses.
