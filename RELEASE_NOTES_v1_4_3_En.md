@@ -67,7 +67,7 @@ register. The main consequences for the classification:
 | 381 | The running recursion summed exactly | 7/7 | 14/14 |
 | 382 | Muon g−2: status 2025 | 8/8 | 21/21 |
 | 383 | Masses and Planck scale without v — one chain, one anchor | 8/8 | 20/20 |
-| 384 | FFGFT in brief — foundations, results and status after the calculation review | 22/22 | 114/114 |
+| 384 | FFGFT in brief — foundations, results and status after the calculation review | 23/22 | 114/114 |
 | 385 | The Higgs–vacuum route to ξ | 8/8 | 17/17 |
 | 386 | Where α hides — charge unit, two spheres and ξ as an area | 8/8 | 25/25 |
 | 387 | The deviations at a glance — ratios, SI translation and correction quantities | 8/8 | 27/27 |
@@ -208,7 +208,7 @@ and, as a dimensionless ratio, cannot be set to 1 with justification (A135).
 | Prefactor (8π)^(1/4) of the CMB temperature | [S] (Doc. 388) |
 
 ## Entry point for new readers
-**Doc. 384 "FFGFT in Brief"** (De/En, 22 pp. each, also as HTML) is the recommended entry
+**Doc. 384 "FFGFT in Brief"** (De/En, 23/22 pp., also as HTML) is the recommended entry
 point to the current state. Doc. 205 "FFGFT in Simple Language" remains the entry point
 for lay readers; the icosahedron book *The Number That Nobody Explained* remains the
 entry point to the lepton masses.

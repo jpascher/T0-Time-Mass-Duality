@@ -67,7 +67,7 @@ führen. Die wichtigsten Folgen für die Einstufung:
 | 381 | Die laufende Rekursion exakt aufsummiert | 7/7 | 14/14 |
 | 382 | Myon g−2: Stand 2025 | 8/8 | 21/21 |
 | 383 | Massen und Planck-Skala ohne v — eine Kette, ein Anker | 8/8 | 20/20 |
-| 384 | FFGFT in Kurzfassung — Grundlagen, Ergebnisse und Status nach der Rechenprüfung | 22/22 | 114/114 |
+| 384 | FFGFT in Kurzfassung — Grundlagen, Ergebnisse und Status nach der Rechenprüfung | 23/22 | 114/114 |
 | 385 | Der Higgs-Vakuum-Weg zu ξ | 8/8 | 17/17 |
 | 386 | Wo α steckt — Ladungseinheit, zwei Kugeln und ξ als Fläche | 8/8 | 25/25 |
 | 387 | Die Abweichungen im Überblick — Verhältnisse, SI-Übersetzung und Korrekturgrößen | 8/8 | 27/27 |
@@ -208,7 +208,7 @@ T·m = 1 und lässt sich als dimensionsloses Verhältnis nicht begründet auf 1 
 | Vorfaktor (8π)^(1/4) der CMB-Temperatur | [S] (Dok. 388) |
 
 ## Einstieg für neue Leser
-**Dok. 384 „FFGFT in Kurzfassung“** (De/En, je 22 S., auch als HTML) ist der
+**Dok. 384 „FFGFT in Kurzfassung“** (De/En, 23/22 S., auch als HTML) ist der
 empfohlene Einstieg in den heutigen Stand. Dok. 205 „FFGFT in einfacher Sprache“
 bleibt der Einstieg für Laien; das Ikosaeder-Buch *Die Zahl, die niemand erklärte*
 der Einstieg in die Leptonmassen.
