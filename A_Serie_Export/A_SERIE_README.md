@@ -1,7 +1,7 @@
 # FFGFT A-Serie — Fraktale Feldgeometrische Fundamentaltheorie / T0 Zeit-Masse-Dualität
 
 **Autor:** Johann Pascher (ORCID: 0009-0000-6518-4064)  
-**Version:** 1.4 (2026-07-27)  
+**Version:** 1.5 (2026-10-02)  
 **Zenodo DOI (Konzept, alle Versionen):** 10.5281/zenodo.20117635 — v1.4 erhält beim Deposit eine eigene Versions-DOI.  
 **Sprachen:** Deutsch (kanonisch) · Englisch (parallele Fassung)
 
@@ -10,7 +10,7 @@
 ## Was ist die A-Serie?
 
 Die A-Serie ist die kanonische, sachgeordnete Fassung der FFGFT. Sie fasst mehr
-als 300 Altdokumente in 48 thematisch geordneten Dokumenten zusammen — ein Thema
+als 300 Altdokumente in 49 thematisch geordneten Dokumenten zusammen — ein Thema
 an einem Ort, jede Aussage mit Schichtstatus markiert, alle Korrekturen
 eingearbeitet.
 
@@ -24,19 +24,19 @@ will, was die Theorie heute behauptet.
 
 ```
 Sources/
-  ch/                  96 Quelltexte (48 De + 48 En, *_ch.tex)
+  ch/                  98 Quelltexte (49 De + 49 En, *_ch.tex)
   pri-end/              3 Preamble-Dateien
-  wr_standalone_A4/    96 Wrapper (48 De + 48 En, kompilierfertig)
-pdf/                   96 PDFs (48 De + 48 En)
+  wr_standalone_A4/    98 Wrapper (49 De + 49 En, kompilierfertig)
+pdf/                   98 PDFs (49 De + 49 En)
 python/
-  A_Serie_Skripte/     48 Prüfskripte (.py)
+  A_Serie_Skripte/     49 Prüfskripte (.py)
 README.md
 CHANGELOG.md
 ```
 
 ---
 
-## Blockstruktur (48 Dokumente)
+## Blockstruktur (49 Dokumente)
 
 ```
 Block 0  A010–A095   Grundlage
@@ -59,6 +59,7 @@ Block 1  A100–A192   Sektoren
          A105 Leiter-Grundeinheit N₀
          A110 Zirkulant und Koide: Q = 2/3
          A120 θ = 2/9: Ort und Status
+         A125 φ-Skelett: von den Gewichten zu den Massenverhältnissen
          A130 Feinstrukturkonstante α = ξ·E₀²
          A135 Was auf Eins gesetzt werden kann
          A138 Anomale magnetische Momente g−2
@@ -184,7 +185,7 @@ Vollständige Zuordnung: A250.
 ## Prüfskripte
 
 ```
-python/A_Serie_Skripte/a???_*.py   (48 Skripte)
+python/A_Serie_Skripte/a???_*.py   (49 Skripte)
 ```
 
 Ausführung mit Python 3.10+. Alle Kernaussagen liefern `BESTANDEN`.

@@ -1153,6 +1153,8 @@ Zusammenfassung des gesamten Korpus (Dok. 001–383, A-Serie) auf dem Stand nach
 
 - Neu formatiert (2. Okt. 2026), Inhalt unverändert: farbige Statusmarker, Kernformeln in Kästen, Leitlinien, zurückgenommene Ansprüche, Lesarten von ξ, v-Wege, „Was nicht mehr gilt“ und Leitplanken als Listen bzw. Tabelle, Higgs-Prüfung und Grenzen des φ-Wegs als Kästen, Zeilenfarben in den Tabellen
 
+- Word- und HTML-Fassung (2. Okt. 2026): 2/docx/384_FFGFT_Kurzfassung_{De,En}.docx (Formeln als Word-Formeln) und 2/html/384_FFGFT_Kurzfassung_{De,En}.html (eigenständig, Formeln als MathML), erzeugt mit 2/python/Dok384_Skripte/mk_384_docx_html.py aus der LaTeX-Quelle
+
 **Prüfskript:** 2/python/Dok384_Skripte/pruef_384_zusammenfassung.py — 93/93 PASS
 **Register:** kein Eintrag.
 

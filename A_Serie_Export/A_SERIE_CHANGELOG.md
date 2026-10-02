@@ -4,6 +4,34 @@ Alle wesentlichen Änderungen dieser Serie. Format: Datum · Dokument · Inhalt.
 
 ---
 
+## v1.5 — 2026-10-02
+
+### Neu: A125 φ-Skelett (De + En)
+
+- **A125** φ-Skelett: von den Gewichten zu den Massenverhältnissen / The φ Skeleton:
+  from the Weights to the Mass Ratios. Schließt die in A120 („Drittens“) offene
+  Kante, soweit der Korpus sie heute schließt; nimmt Dok. 364, 367, 368, 369, 370 auf.
+  - Warum das Ikosaeder: A₅ kleinste Gruppe mit nicht vertauschender Drei und Fünf;
+    5 ∤ 1152 = |Aut(D₄)|, Drei als Gitter, Fünf als Phase, Begegnung in GF(81) [B]
+  - Ein Matrixelement A = ⟨v₀|R₅v_e⟩ trägt Koide: 3|A| = √2, |A|² = 2/9 [B];
+    m_τ/m_e auf 3·10⁻⁵ (0,6σ) [K]; exaktes Paar (√2, 2/9) für m_μ/m_e 442σ daneben, ausgeschlossen
+  - φ-Skelett p₁/p₂ = φ⁸, p₀/p₂ = 2φ⁴, 3√p_j ∈ {√2, φ², φ⁻²} [B]
+  - m_τ/m_e = (74 + 1/45)φ⁸ = 3477,469 gegen 3477,37 ± 0,18 (0,6σ) [K]; Faktoren 74, 1/45
+    beobachtet [S]; 37 nicht aus dem Ikosaeder (GF(81) ⊄ GF(3¹⁸)) [B]
+  - Zwei Lesarten (R121); kein φ-Weg für m_μ/m_e auf diesem Niveau (30φ⁴: −0,55 %);
+    Abgrenzung zur widerlegten φ-Massenleiter
+  - Prüfskript `python/A_Serie_Skripte/a125_phi_skelett.py` — 32/32 BESTANDEN
+
+### Angepasst
+
+- **A120** (De + En): Vermerke vom 2. Okt. 2026 — der Leak (7−3φ)/9 ist mit δ* nicht
+  verträglich (≈ 3,5σ, R139), Kandidat statt Wert; Verweis auf A125 bei der offenen Kante
+- **A010** Block-1-Liste, **A230** neuer Residuenpunkt (Faktoren des φ-Skeletts),
+  **A250** Zuordnung A125 → 364, 367, 368, 369, 370 (jeweils De + En)
+- Gesamtbuch De/En: Kapitel A125 nach A120; README auf 49 Dokumente
+
+---
+
 ## v1.4 — 2026-07-27
 
 ### Dokumentenzählung korrigiert: 47 → 48
