@@ -1302,3 +1302,47 @@ Anlass: v1.4.4 ist die letzte Fassung mit datierten Korrekturvermerken (Vermerk 
 
 **Register:** kein Eintrag.
 
+---
+
+## 6. Oktober 2026 — Bereinigung, Block 4: Dok. 243–310
+
+### Fassung ohne Korrekturvermerke (De/En)
+
+- Bereinigt (je De/En, PDFs neu): Dok. 243, 244, 245, 246, 247, 250, 251, 253, 257 (ohne PDF), 258, 259, 261, 262, 263, 267, 268, 270, 274, 276, 279, 281, 282, 284, 285, 286, 287, 288, 290, 291, 292, 293, 295, 296, 297, 299, 301, 304, 306, 307 (Quelle; PDF siehe unten), 308, 309, 310
+- Korrekturkästen, Vermerke und datierte Nachträge aufgelöst; korpusweite Korrekturen aus Dok. 190 auch ohne eigenen Vermerk angewandt (R135, R136, R137/P39, R138, R139, R141, R142, R65, R71, Dok. 382)
+- Größere Umbauten: 243 (Landauer-Vorhersage für Torus-Chips gilt nicht; Abschnitt als Analogie), 259 (Polynomabschnitt neu: Normprodukt vom Grad 72), 268 (Faktor 3 als Setzung, Retrodiktion), 291/293 (K_frak-Steigung und Leak (7−3φ)/9 nicht verträglich), 308 (Bullet Cluster offen, Spiralgalaxien offen; Lichtablenkung unverändert)
+- Wrapper 308, 309, 310 binden jetzt die Quelldatei ein (vorher veraltete Volltextkopien); Wrapper 307 ist weiterhin eine eigenständige ältere Fassung mit Literaturverzeichnis und wurde nicht umgestellt
+- Prüfskripte: 263 7/7, 267 14/14, 268 8/8, 276 3/3, 282 6/6, 285 19/19, 286 12/12, 288 5/5, 308 C1 3/3; übrige laufen fehlerfrei ohne Zählung
+
+**Register:** kein Eintrag.
+
+
+---
+
+## 6. Oktober 2026 — Bereinigung, Block 5: Dok. 311–389
+
+### Fassung ohne Korrekturvermerke (De/En)
+
+- Bereinigt (je De/En, PDFs neu): Dok. 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360, 363, 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 381, 382, 383, 384, 385, 386, 387, 388, 389
+- Korrekturkästen, Vermerke und datierte Nachträge aufgelöst; korpusweite Korrekturen aus Dok. 190 auch ohne eigenen Vermerk angewandt (R135, R136, R137/P39, R138, R139, R141, R142, R65, R71, Dok. 382)
+- Titelkorrekturen und strukturelle Fixes: Fehlende `\title`-Blöcke in Wrapper 016, 046, 116 ergänzt; fehlende `\documentclass`-Zeile in Wrapper 252 De/En ergänzt; „Revolution" aus Titeln/Überschriften entfernt (Dok. 046, 053, 062, 086, 122, 183); doppelter Titelblock und `\tableofcontents` aus Ch-Dateien 187, 188, 189 entfernt; Wrapper-Titel für 187, 188, 189 auf Volltitel gesetzt
+- Größere Umbauten: 349 (SU(2)_L-Chiralität: Sätze A neu gefasst, Sätze B–E als ungestützt markiert); Wrapper 311/312/313 sind ältere eigenständige Fassungen ohne Literatur, wurden so gemeldet
+- 384 De/En: datierter Inline-Vermerk zu $f = 1/\xi$ in Fließtext aufgelöst; Querverweise auf Vermerke in anderen Dokumenten auf normale Dokumentreferenzen umgestellt
+- 389 De/En: Querverweise auf Vermerke in Dok. 143 und A142 auf Dokumentreferenzen umgestellt
+- Vermerke zur KI-Assistenz (`\section*{Vermerk zur Verwendung von KI-Assistenz}`) bleiben als methodische Angaben erhalten — dies sind keine Korrekturschilder
+- Prüfskripte: 384 121/121, 389 34/34; 341 Z₃-Skript 9/9; übrige laufen fehlerfrei
+
+**Register:** kein Eintrag.
+
+---
+
+## 6. Oktober 2026 — Bereinigung, A-Serie: A010–A284
+
+### Fassung ohne Korrekturvermerke (De/En)
+
+- Bereinigt (je De/En, PDFs neu): A010, A015, A020, A030, A040, A050, A070, A075, A080, A110, A120, A130, A138, A142, A145, A150, A155, A165, A180, A220, A230, A250, A260, A261, A263, A264, A265, A266, A267, A270, A271, A272, A273, A280, A283, A284
+- Datierte `\textit{(Vermerk vom …)}`- und `\textit{(Korrigiert am …)}`-Inline-Notizen aufgelöst; Inhalt der Vermerke als regulärer Text integriert, Datumszeile entfernt; keine tcolorbox-Korrekturkästen in der A-Serie vorhanden
+- Inhaltliche Integrationen u. a.: A010 (E₀ als SI-Kalibrierwert, geometrisches Mittel ungeeignet), A015 (κ=7 als Zerlegungswahl, nicht erzwungen; Casimir-Bestätigung des Faktors 4/3 gestrichen), A020 (kristallographische Restriktion nur 2D/3D), A050 (Defektasymmetrie 1/75 vs. 1/74), A070 (f(k_t) als periodische Funktion der Zeitwicklung), A075 (l als Zählindex der transversalen Anregungsstufe, nicht geometrischer Betrag; ξ→0 gilt nur für Skalarfeld δm), A080 (K_frak wirkt auf α⁻¹, quadratisch im Skalenfaktor), A110 (Tabellenwerte schon korrekt im Haupttext), A120 (Leck (7−3φ)/9 ≈ 3,5σ inkompatibel mit δ*, als offener Punkt benannt), A130 (Weg-2-Formel aus A080 entfernt), A138 (f = 1/ξ = 7500 Grundwindungszahl, keine Frequenz), A142 (Maxwell konform invariant in 4D; T/T₀ statt T für Homogenität; g−2-Schleifenkorrektur durch Messung ausgeschlossen), A145 (E_char hebt sich in G auf; C_conv ist SI-Umrechnung der Ein-Anker-Kette), A150 (Up-Typ-Quarks folgen keiner rekursiven Formel; lineare Resonanzleiter mit Schrittweite 1/3), A155 (π⁰-Auswertung: Wahlabhängigkeit von n_eff als reguläre Anmerkung), A165 (6 Inline-Notizen zu Notation, Pisot/Weyl, k-Schranken, Δ-Spalte aufgelöst), A230 (κ=4 als Eintrittspunkt), A260 (3 Energiedichte-/Tabellen-Korrekturen), A261 (Skalenhierarchie, E₀, α-Kette, K_frak), A265 (H₀=ξc/ℓ integriert; Weg-2 gestrichen), A266 (G-Rückrechnung ×ℏc⁵; f als Grundwindungszahl), A283 (Ω_r 0,0096→0,0098), A284 (f(n,l,j)-Bezeichnung, Tsirelson-Klarstellung)
+- Prüfskripte: a142 18/18, a271 10/10, a273 16/16, a150 BESTANDEN, a155 BESTANDEN, a165 BESTANDEN, a180 BESTANDEN, a220 BESTANDEN, a260 BESTANDEN, a261 BESTANDEN, a263 BESTANDEN, a264–a270 BESTANDEN; Dok. 190-Abgleich: 0 Abweichungen (144/144 Einträge)
+
+**Register:** kein Eintrag.
