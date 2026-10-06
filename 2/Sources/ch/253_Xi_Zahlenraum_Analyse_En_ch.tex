@@ -1,14 +1,6 @@
 \section*{Doc.\ 253 — \texorpdfstring{$\xi$}{xi} and Number-Space Dependence in Factorisation}
 \addcontentsline{toc}{section}{Doc.\ 253 — xi and Number-Space Dependence}
 
-\begin{tcolorbox}[colback=red!3!white,colframe=red!50!black,boxrule=0.8pt,title={Correction notes},fonttitle=\bfseries]
-\textbf{Corrections from the calculation check (30~Sept.~2026).} The following places are corrected or annotated in the text; each carries a dated note with the previous value:
-\begin{itemize}
-\item Analytical approximation: $\xi_\text{num} \approx 1/(2\gcd(p-1,q-1)) \to 1/\gcd(p-1,q-1)$.
-\item Table 3.2: values doubled ($0.25$; $0.125$; $0.083$; $0.042$; $0.017$; $0.008$ $\to$ $0.5$; $0.25$; $0.167$; $0.083$; $0.033$; $0.017$); range in Section~5: $[0.008;\,0.49] \to [0.017;\,0.49]$.
-\end{itemize}
-\end{tcolorbox}
-
 \begin{abstract}
 Working document. Purpose: preservation of results from an extended investigation
 without breakthrough. The question investigated was whether the FFGFT parameter
@@ -25,6 +17,10 @@ HTML test programs, 2024--2026), the following was observed: the effectiveness
 of a global $\xi$-parameter in period-finding (Shor's algorithm) does not
 appear constant, but depends on the number space. At the same time, rounding
 errors and computational precision limits enter the results indirectly.
+The observed dependence of the effectiveness of $\xi$ on the number space is
+not a finding: in the implementations it was a hard-wired case distinction by
+bit length whose branches behave identically; there is no $\xi$-factorisation
+method distinguishable from Shor's (cf.\ Section~4).
 
 This gave rise to two questions:
 
@@ -53,7 +49,8 @@ Analytical approximation for large primes $p$, $q$:
 \xi_\text{num}(N) = \frac{\text{lcm}(p-1,\, q-1)}{p \cdot q}
 \;\approx\; \frac{1}{\gcd(p-1,\, q-1)}
 \]
-\textit{(Corrected on 30~Sept.~2026: previously $\approx 1/(2\cdot\gcd(p-1,q-1))$ -- $\text{lcm}(p-1,q-1) = (p-1)(q-1)/\gcd$, hence $\lambda/(pq) \approx 1/\gcd$; confirmed by Table~3.1: $10403$ ($\gcd = 2$) $\to 0.4902$, $9797$ ($\gcd = 4$) $\to 0.2450$.)}
+Since $\text{lcm}(p-1,q-1) = (p-1)(q-1)/\gcd(p-1,q-1)$, one has $\lambda/(pq) \approx 1/\gcd$;
+confirmed by Table~3.1: $10403$ ($\gcd = 2$) $\to 0.4902$, $9797$ ($\gcd = 4$) $\to 0.2450$.
 
 \begin{mdframed}[style=ok]
 \textbf{Key finding} (from \texttt{t0\_primzahl\_periodizitaet.html},
@@ -111,8 +108,6 @@ $\gcd$ & $\xi_\text{num}$ (analytical) & Factorisability & Example \\
 }
 \end{center}
 
-\textit{(Corrected on 30~Sept.~2026: column $\xi_\text{num}$ previously $0.25$; $0.125$; $0.083$; $0.042$; $0.017$; $0.008$ -- with $\xi_\text{num} \approx 1/\gcd$ one gets $1/2$, $1/4$, $1/6$, $1/12$, $1/30$, $1/60$.)}
-
 The number-space dependence is real — but it is classical number theory.
 Pollard's $p$-method and Lenstra's ECM exploit precisely this $\gcd$-structure.
 It is not an FFGFT-specific phenomenon.
@@ -134,9 +129,13 @@ over $N = 50$ trials).
 \end{description}
 
 \begin{mdframed}[style=warn]
-The $\xi$-resonance function in the scripts
-($\omega = 2\pi/r$, resonance $= \exp(-(\omega - \pi)^2 / (4|\xi|))$)
-is a heuristic without physical derivation. It preferentially selects $r \approx 2$
+The $\xi$-resonance function of the HTML tools
+($\omega = 2\pi/r$, resonance $= \exp(-(\omega - \pi)^2 / (4|\xi|))$;
+the Python library instead uses the Lorentzian form
+$1/(1 + |(\omega-\pi)^2/(4\xi)|)$ with the same maximum)
+is a heuristic without physical derivation. Since
+$\omega - \pi = \pi(2/r - 1)$, it is maximal at $r = 2$ for \emph{every} $\xi$:
+it selects no resonance, only the smallest even order
 — which is the most common $\gcd$-case, not a $\xi$-effect.
 \end{mdframed}
 
@@ -146,7 +145,7 @@ is a heuristic without physical derivation. It preferentially selects $r \approx
 \xi_\text{FFGFT} = \frac{4}{30000} = 1.333 \times 10^{-4}
 \;\ll\; \xi_\text{num} \in [0.017,\; 0.49]
 \]
-\textit{(Corrected on 30~Sept.~2026: previously $[0.008,\; 0.49]$ -- lower bound $1/60 = 0.017$ from the corrected Table~3.2.)}
+(lower bound $1/60 = 0.017$ from Table~3.2).
 
 The two quantities are not numerically identical and not simply related by
 a scale factor. A structural connection — for instance that $\xi_\text{num}$
@@ -173,7 +172,7 @@ Statement & Status \\
 $\xi_\text{num}(N)$ is number-space dependent & $\checkmark$ Proved \\
 The dependence is classical number theory & $\checkmark$ Proved \\
 No global $\xi$ optimises factorisation universally & $\checkmark$ Proved \\
-$\xi$-resonance heuristic favours $r \approx 2$ & $\checkmark$ Clear \\
+$\xi$-resonance heuristic is maximal at $r = 2$ for every $\xi$ & $\checkmark$ Clear \\
 Rounding errors affect effective $\xi$ & $\checkmark$ Known \\
 $\xi_\text{num}$ follows FFGFT step hierarchy & $\times$ Not proved \\
 $\xi_\text{FFGFT}$ and $\xi_\text{num}$ structurally related & $\times$ Not proved \\

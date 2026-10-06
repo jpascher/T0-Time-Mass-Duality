@@ -1261,3 +1261,44 @@ Anlass: die eingehende Frage zum Parabelflug — was das Gewicht ist, wenn es im
 
 **Prüfskript:** 2/python/Dok389_Skripte/pruef_389_parabelflug.py — 34/34 PASS
 **Register:** kein Eintrag (Vermerke direkt in den betroffenen Dokumenten).
+
+---
+
+## 6. Oktober 2026 — Bereinigung, Block 1: Dok. 001–052
+
+### Fassung ohne Korrekturvermerke (De/En)
+
+Anlass: v1.4.4 ist die letzte Fassung mit datierten Korrekturvermerken (Vermerk in Dok. 190, Vorbemerkung). Ab jetzt enthalten die Dokumente nur noch die korrigierte letzte Fassung; Nachweis der Korrekturen sind Dok. 190 und v1.4.4.
+- Bereinigt (je De/En, PDFs neu): Dok. 001, 001a, 002, 003, 004, 005, 006, 007, 008, 009, 010, 011, 012, 013, 014, 015, 016, 018 (Rev. 10, 11, 12), 019, 020, 021, 022, 023, 023a (Teil 2, Video), 023b, 024, 025, 026, 028, 030, 032, 033, 034, 035, 036, 037, 039, 040, 041, 042, 043, 044, 046, 047, 049, 051, 052
+- Korrekturkästen entfernt, Vermerke aufgelöst: Der Text trifft die korrigierte Aussage selbst; widerlegte Aussagen sind so umgeschrieben, dass nur noch steht, was gilt; Abstracts, Überschriften, Tabellen und Fazits angepasst; Registerverweise, die nur die Korrektur belegten, entfernt
+- Ältere datierte Nachträge mit aufgelöst: 006 (Neutrinoteil gekürzt, maßgeblich Dok. 340), 007 (Anschluss an Dok. 340), 024 (Kryptographie-Behauptungen gestrichen), 025 und 041 (achromatische Rotverschiebung); Stellen ohne eigenen Vermerk, die einer belegten Korrektur widersprachen, angeglichen (u. a. 018 K_frak nicht in der Leiter, 023/023a/035 kein lokaler Realismus, 013 Anker für SI-Absolutwerte); Videoverweise 023a/023b (Veritasium) und 023a Teil 2 (Richard Behiel) richtiggestellt
+- Korpusweite Prüfskripte unverändert (378: 26/26, 377: 20/20, 320/322 bestanden, Maxwell 6/8 wie vorher)
+
+**Register:** kein Eintrag.
+
+---
+
+## 6. Oktober 2026 — Bereinigung, Block 2: Dok. 053–150
+
+### Fassung ohne Korrekturvermerke (De/En)
+
+- Bereinigt (je De/En, PDFs neu): Dok. 053, 054 (nur De-PDF), 055, 056, 057, 059, 060, 061, 062, 063, 064, 066, 067, 068, 070, 073, 074, 077, 078, 080, 081, 083, 086, 089, 091, 093, 095, 097, 101, 105, 114, 116, 122, 124, 127, 129, 131, 132, 133, 134, 137, 141, 143, 144, 145, 146, 147, 148, 149, 150
+- Korrekturkästen, Vermerke, „Hinweis zum Korpusstand“ und ältere Nachträge aufgelöst; korpusweit gültige Korrekturen aus Dok. 190 auch dort angewandt, wo der Eintrag das Dokument nicht nennt: achromatische Rotverschiebung (K6; u. a. 053, 061, 063, 066, 067, 068, 081, 146), H₀ kalibriert, Form mit Exponent 10 (P39, R137, Dok. 388; 064), α als Eigenschaft des Ankers E₀ (R135; 056, 070, 086), Casimir-CMB-Verhältnis als Identität (R136; 061, 063, 086, 091), G-Präzision (R141), keine Lokalität durch die ξ-Dämpfung (R142; 074, 147), Ordnungssuche statt ξ-Resonanz (R65; 057, 147), g−2 nach Dok. 382 (u. a. 053, 059, 061, 070, 081, 095), Begründung des ewigen Universums nach Dok. 306 statt Heisenberg (R50; 061, 063)
+- Korpusweite Prüfskripte unverändert
+
+**Register:** kein Eintrag.
+
+---
+
+## 6. Oktober 2026 — Bereinigung, Block 3: Dok. 152–241
+
+### Fassung ohne Korrekturvermerke (De/En)
+
+- Bereinigt (je De/En, PDFs neu): Dok. 152, 153, 154, 155, 156, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 172, 173, 174, 175, 178, 180, 181, 182, 183, 184, 185 (Zeit-Einbettungspreis; Dialog nur De, ohne PDF), 186 (Photonik-Analyse; Korrekturen nur De, ohne PDF), 187, 188, 189, 191, 192, 193, 201, 202, 203, 204, 205, 206, 207, 210, 230, 231, 232, 241
+- Korrekturkästen, Vermerke und datierte Nachträge aufgelöst; korpusweite Korrekturen aus Dok. 190 auch ohne eigenen Vermerk angewandt: α als Eigenschaft des Ankers E₀ (R135), G-Präzision (R141), H₀ und Exponent 10 bzw. 41/4 kalibriert (P39, R137), Casimir-CMB-Identität (R136), keine Lokalität durch die ξ-Dämpfung und QND kein Determinismusbeweis (R142), ξ_Higgs kein Zweitparameter (R61), r_i als Setzungen (R138), achromatische Rotverschiebung (K6), g−2 nach Dok. 382, kein eigenes ξ-Faktorisierungsverfahren (R65)
+- Größere Umbauten: 159 (Vakuumenergie nicht durch ξ konvergent), 167 (Δn = √3 ξ^(1/2) gilt nicht; Dokument als Prüfung umformuliert, Wrapper-Untertitel angepasst), 175 (QND, IBM-Läufe, Zwei-ξ-Abschnitt), 182 (R_H als Hubble-Länge statt Größe des Universums, P36), 186/187 (f₀ = 1/t₀ statt ξ als Frequenz; B-Meson-Deutung gilt nicht)
+- Offen gemeldet, nicht geändert: Wrapper-Titel 182 („Maximale Größe des Universums aus xi“), B-Meson-Vorhersage in 187, CHSH-Form QM-5 in 202, Δp = 1/3 in 158 und 192
+- Korpusweite Prüfskripte unverändert (378: 26/26, 377: 20/20); 180: 16/16, 230: 9/9
+
+**Register:** kein Eintrag.
+

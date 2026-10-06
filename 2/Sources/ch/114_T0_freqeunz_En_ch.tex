@@ -1,15 +1,5 @@
-\begin{tcolorbox}[colback=red!3!white,colframe=red!50!black,boxrule=0.8pt,title={Correction notes},fonttitle=\bfseries]
-\textbf{Corrections from the calculation check (30~Sept.~2026).} The following places are corrected or annotated in the text; each carries a dated note with the previous value:
-\begin{itemize}
-\item Exact solution for $\xi > 0$: \enquote{oscillations (damped)} $\to$ undamped oscillations $\cos/\sin(\sqrt{\xi}\,t)$.
-\item Non-perturbative $z$ from the printed code: $1.457\times10^{-27} \to 1.056\times10^{-2}$ ($= \sqrt{\xi}\sin(100\sqrt{\xi})$).
-\item Standard deviation $0.00$ \enquote{perfect independence}: annotated -- the code assigns the same value to every frequency, the frequency does not enter the calculation; this is no test of frequency independence.
-\item (2~Oct.~2026) Notation $f$: general dependence $z = f(\Delta m)$ --- not a frequency; note in the text (Doc.~190, R147).
-\end{itemize}
-\end{tcolorbox}
-
 \section*{Abstract}
-		This document presents a detailed derivation and explanation of the frequency independence of redshift in the T0 theory. Using non-perturbative methods and numerical integration of the field equations, it is demonstrated that the apparent frequency dependence in perturbative calculations is an artifact of the approximation method. The theoretically predicted independence is robustly confirmed, making T0 consistent with cosmological models.
+		This document presents a detailed derivation and explanation of the frequency independence of redshift in the T0 theory. Using the exact (non-perturbative) solution of the field equation, it is shown that the apparent frequency dependence in perturbative calculations is an artifact of the approximation method. The numerical integration illustrates this solution; since the frequency does not enter it, it is no independent test of frequency independence. The theoretically predicted independence follows from the decoupling of the modes, making T0 consistent with cosmological models.
 
 	
 	
@@ -32,11 +22,9 @@
 			\item \textbf{Approximations}: In numerical simulations (e.g., field propagation), terms like $\xi \cdot (h\nu / E_{\mathrm{Pl}})$ appear, suggesting frequency dependence—this is a first-order approximation that ignores higher orders ($\xi^2$), where independence is restored.
 			\item \textbf{Coupling Terms}: In the T0 Lagrangian ($L = (\xi / E_{\mathrm{Pl}}^2) (\partial \delta E)^2$), the field couples to $\nu$ (via quantum modes), simulating ``dependence'' in perturbative calculations—but exactly (non-perturbatively), $z$ is constant.
 			\item \textbf{Numerical Artifacts}: Discretization (e.g., finite differences) introduces dispersion due to grid effects; this is not a T0 feature but a computational error.
-			\item \textbf{Practically}: In my formulas (e.g., from Python scripts in the repository), it may arise from variable mixing ($\nu$ in $\delta E$)—but theoretically: $z = f(\Delta m)$, independent of $\nu$.
+			\item \textbf{Practically}: In my formulas (e.g., from Python scripts in the repository), it may arise from variable mixing ($\nu$ in $\delta E$)—but theoretically: $z = f(\Delta m)$, independent of $\nu$. Here $f$ denotes a general dependence, not a frequency and not the base winding number $f = 1/\xi$; elsewhere in this document $f$ stands for a frequency.
 		\end{itemize}
 	\end{itemize}
-
-\textit{(Note of 2~Oct.~2026 on notation: here $z = f(\Delta m)$ is a general dependence, not a frequency and not the base winding number $f = 1/\xi$. Elsewhere in this document $f$ stands for a frequency. Cf.\ Doc.~190, R147.)}
 
 	\section{Non-Perturbative Solution of the T0 Field Equation}
 	
@@ -46,7 +34,7 @@
 	\begin{itemize}
 		\item Equation: $\frac{d^2 E}{dt^2} + \xi E = 0$ (spatially homogeneous, for oscillating modes).
 		\item Solution: $ E(t) = C_1 e^{-t \sqrt{-\xi}} + C_2 e^{t \sqrt{-\xi}} $.
-		\item For real $\xi > 0$: Oscillations (undamped) \textit{(Corrected on 30~Sept.~2026: previously \enquote{damped} -- for $\xi > 0$, $E'' + \xi E = 0$ has the solutions $\cos(\sqrt{\xi}\,t)$ and $\sin(\sqrt{\xi}\,t)$ with constant amplitude; the exponential form with $\sqrt{-\xi}$ given above is the same solution in complex notation.)}, $z = \int \delta E \, dt$—constant across $\nu$, as modes are decoupled.
+		\item For real $\xi > 0$: undamped oscillations $\cos(\sqrt{\xi}\,t)$ and $\sin(\sqrt{\xi}\,t)$ with constant amplitude (the exponential form with $\sqrt{-\xi}$ given above is the same solution in complex notation), $z = \int \delta E \, dt$—constant across $\nu$, as modes are decoupled.
 	\end{itemize}
 	
 	\textbf{Implication}: Non-perturbatively, $E(t)$ is exactly exponential/oscillatory, and $z$ as a phase integral is independent of $\nu$ (no coupling in the exact solution).
@@ -101,11 +89,9 @@
 	\begin{itemize}
 		\item Exact non-perturbative solution:  
 		$E(t) = C_1 e^{-t\sqrt{-\xi}} + C_2 e^{t\sqrt{-\xi}}$
-		\item Non-perturbative z: $1.056 \times 10^{-2}$ (constant)
+		\item Non-perturbative z: $1.056 \times 10^{-2}$ $\bigl(= \xi\int_0^{100}\cos(\sqrt{\xi}\,t)\,dt = \sqrt{\xi}\,\sin(100\sqrt{\xi})\bigr)$
 		\item z for different frequencies: $[1.056\times 10^{-2}, 1.056\times 10^{-2}, 1.056\times 10^{-2}]$
-		\textit{(Corrected on 30~Sept.~2026: previously $1.457\times10^{-27}$ -- the printed code with $E(0)=1$, $\dot E(0)=0$, $t\in[0,100]$ gives $\xi\int_0^{100}\cos(\sqrt{\xi}\,t)\,dt = \sqrt{\xi}\,\sin(100\sqrt{\xi}) = 1.056\times10^{-2}$, confirmed numerically with odeint/trapezoidal rule.)}
-		\item Standard deviation: $0.00$ (perfect independence)
-		\textit{(Note of 30~Sept.~2026: The code sets \texttt{z\_per\_frequency = np.full\_like(frequencies, z)}; the frequency enters no calculation, so the standard deviation $0$ is fixed by construction and is no test of frequency independence. The same applies to the statement below that the numerical integration confirms constancy under extreme frequency variations.)}
+		\item Standard deviation: $0.00$ -- fixed by construction: the code sets \texttt{z\_per\_frequency = np.full\_like(frequencies, z)}, the frequency enters no calculation; this is no test of frequency independence.
 	\end{itemize}
 	
 	\textbf{Explanation of the Non-Perturbative Calculation:}
@@ -113,7 +99,7 @@
 		\item The non-perturbative solution bypasses perturbation series and delivers the \textbf{exact} field dynamics.
 		\item $z$ as an integral over $E(t)$ is intrinsically frequency-independent.
 		\item Perturbative $\nu$-terms are artifacts of series expansion, not the underlying physics.
-		\item Numerical integration confirms: Even with extreme frequency variations, $z$ remains constant.
+		\item Numerical integration confirms the value of $z$ from the exact solution; it is no test at different frequencies, since the frequency does not enter the calculation.
 	\end{itemize}
 	
 	\section{Comparison: Perturbative vs. Non-Perturbative}
