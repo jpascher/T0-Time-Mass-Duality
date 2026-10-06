@@ -1,0 +1,112 @@
+% =============================================================================
+% T0_preamble_book_plus.tex — Ergänzung der Buch-Preamble für Bd. 6–8
+% Die neueren Einzeldokumente (ab Dok. 263) wurden für die A4-Standalone-
+% Preamble geschrieben. Diese Datei stellt die dort zusätzlich definierten
+% Elemente auch im Buchsatz bereit und kapselt dokumenteigene Titel-,
+% Inhaltsverzeichnis- und Kapitelbefehle, damit jedes Dokument genau ein
+% Buchkapitel mit genau einem Eintrag im Inhaltsverzeichnis ergibt.
+% =============================================================================
+
+\input{../pri-end/T0_preamble_book_appendixfix.tex}
+
+% Bildpfade der neueren Dokumente
+\graphicspath{{../Figuren/}{../wr_standalone_A4/}{../fig/}{../figures/}}
+
+% Farb-Aliase aus der Standalone-Preamble
+\providecolor{t0gray}{gray}{0.45}
+\colorlet{T0blue}{t0blue}
+\colorlet{T0red}{t0red}
+\colorlet{T0green}{t0green}
+\colorlet{T0orange}{t0orange}
+\colorlet{T0purple}{t0purple}
+\colorlet{T0yellow}{t0yellow}
+\colorlet{T0gray}{boxgray}
+
+% Seitenstil, den einige Dokumente aufrufen
+\fancypagestyle{firstpage}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+% Breite Tabellen auf Satzspiegel begrenzen (wie A4-Standalone)
+\BeforeBeginEnvironment{tabular}{\begin{adjustbox}{max width=\linewidth,center}}
+\AfterEndEnvironment{tabular}{\end{adjustbox}}
+
+\sloppy
+\emergencystretch=4em
+
+% Mathematik in Kapiteltiteln: lesbare PDF-Lesezeichen
+\pdfstringdefDisableCommands{%
+  \def\varphi{phi}\def\mitvarphi{phi}\def\Phi{Phi}\def\mitPhi{Phi}%
+  \def\leftrightarrow{<->}\def\Leftrightarrow{<=>}%
+  \def\hat#1{#1}\def\tilde#1{#1}\def\widetilde#1{#1}%
+  \def\mathbb#1{#1}\def\mathrm#1{#1}\def\mathcal#1{#1}\def\mathbf#1{#1}%
+  \def\text#1{#1}\def\operatorname#1{#1}%
+  \def\sqrt#1{sqrt(#1)}\def\frac#1#2{#1/#2}\def\tfrac#1#2{#1/#2}%
+  \def\textsuperscript#1{#1}\def\textsubscript#1{#1}%
+  \def\infty{inf}\def\to{->}\def\mitzeta{zeta}\def\zeta{zeta}%
+  \def\mitiota{iota}\def\iota{iota}\def\mitxi{xi}\def\mittheta{theta}%
+}
+
+% -----------------------------------------------------------------------------
+% \FFGFTdoc{<Kapiteltitel>}{<ch-Datei>}      — normales Einzeldokument
+% \FFGFTdocDemote{<Kapiteltitel>}{<ch-Datei>} — Dokument, das intern
+%      \chapter als oberste Gliederungsebene benutzt (Dok. 308–314, 335):
+%      \chapter -> \section, \section -> \subsection, \subsection -> \subsubsection
+% -----------------------------------------------------------------------------
+\makeatletter
+\let\FFGFT@origacl\addcontentsline
+\let\FFGFT@origchapter\chapter
+\let\FFGFT@origsection\section
+\let\FFGFT@origsubsection\subsection
+\let\FFGFT@origsubsubsection\subsubsection
+\def\FFGFT@chapterword{chapter}
+% Mehrere Dokumente definieren dieselben Theorem-Umgebungen selbst;
+% im Buch wird eine bereits vorhandene Umgebung stillschweigend neu angelegt.
+\let\FFGFT@orignewtheorem\newtheorem
+\def\FFGFT@nt#1#2{%
+  \expandafter\let\csname #2\endcsname\relax
+  \expandafter\let\csname end#2\endcsname\relax
+  \expandafter\let\csname c@#2\endcsname\relax
+  \FFGFT@orignewtheorem#1{#2}}
+\renewcommand\newtheorem{\@ifstar{\FFGFT@nt*}{\FFGFT@nt{}}}
+\let\FFGFT@origend\end
+\def\FFGFT@docword{document}
+\def\FFGFT@end#1{%
+  \def\FFGFT@tmp{#1}%
+  \ifx\FFGFT@tmp\FFGFT@docword
+    \endinput\expandafter\@gobble
+  \else
+    \expandafter\FFGFT@origend
+  \fi{#1}}
+\newcommand\FFGFT@neutralize{%
+  \let\maketitle\relax
+  \let\tableofcontents\relax
+  \let\listoftables\relax
+  \let\listoffigures\relax
+  \renewcommand\addcontentsline[3]{%
+    \def\FFGFT@tmp{##2}%
+    \ifx\FFGFT@tmp\FFGFT@chapterword\else\FFGFT@origacl{##1}{##2}{##3}\fi}%
+}
+\newcommand\FFGFTdoc[2]{%
+  \FFGFT@origchapter{#1}%
+  \begingroup
+    \FFGFT@neutralize
+    \renewcommand\chapter{\@ifstar{\@gobble}{\FFGFT@origsection}}%
+    \input{#2}%
+  \endgroup
+}
+\newcommand\FFGFTdocDemote[2]{%
+  \FFGFT@origchapter{#1}%
+  \begingroup
+    \FFGFT@neutralize
+    \renewcommand\chapter{\@ifstar{\@gobble}{\FFGFT@origsection}}%
+    \let\section\FFGFT@origsubsection
+    \let\subsection\FFGFT@origsubsubsection
+    % Dok. 311–314 enden mit \end{document}: dort nur die Datei beenden
+    \let\end\FFGFT@end
+    \input{#2}%
+  \endgroup
+}
+\makeatother
