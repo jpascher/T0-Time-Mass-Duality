@@ -1,6 +1,6 @@
-# Release Notes — v1.4.3 (2. Oktober 2026)
+# Release Notes — v1.4.4 (6. Oktober 2026)
 
-**DOI:** wird bei der Zenodo-Veröffentlichung vergeben — ersetzt v1.4.2
+**DOI:** wird bei der Zenodo-Veröffentlichung vergeben — ersetzt v1.4.3
 Laufende Korrekturen: **[2/pdf/190_T0_Korrekturen_De.pdf](2/pdf/190_T0_Korrekturen_De.pdf)**
 Änderungsprotokoll: **[001_FFGFT_Changelog_De.md](001_FFGFT_Changelog_De.md)**
 Kurzfassung des Korpus: **[2/pdf/384_FFGFT_Kurzfassung_De.pdf](2/pdf/384_FFGFT_Kurzfassung_De.pdf)** (auch als [HTML](2/html/384_FFGFT_Kurzfassung_De.html))
@@ -17,11 +17,11 @@ Erst die Übersetzung in SI braucht einen Messwert als Anker.
 
 ## Überblick
 
-Diese Version fasst die Arbeit vom 28. September bis 2. Oktober 2026 zusammen. Im
+Diese Version fasst die Arbeit vom 28. September bis 6. Oktober 2026 zusammen. Im
 Mittelpunkt steht die **vollständige Nachrechnung des Korpus**: Alle Dokumente bis
 Nr. 300 und die A-Serie wurden durchgerechnet, rund 235 Dokumente tragen seitdem
 einen Korrekturkasten, jede korrigierte Stelle hat einen datierten Hinweis mit dem
-vorherigen Wert (R133, R140, R142). Dazu kommen **zehn neue Dokumente (Dok. 379–388)**,
+vorherigen Wert (R133, R140, R142). Dazu kommen **elf neue Dokumente (Dok. 379–389)**,
 darunter die **Kurzfassung des gesamten Korpus (Dok. 384)**, die **A-Serie v1.5** mit
 dem neuen Dokument **A125 (φ-Skelett)** und zwanzig Registereinträge (R128–R147).
 
@@ -29,6 +29,18 @@ Die Rechenprüfung hat mehrere frühere Ansprüche zurückgenommen; sie sind in 
 im Abschnitt „Was nicht mehr gilt“ gesammelt. Grundrelation und ξ sind unverändert.
 
 ---
+
+## Neu gegenüber v1.4.3
+
+- **Dok. 389 — Parabelflug, Trägheit und die Darstellungen der Gravitation** (De/En, je
+  9 Seiten, Prüfskript 34/34); Kurzbeschreibung unter „Wichtige neue Ergebnisse“.
+- **Dok. 384:** Takt und Weg als komplementäre Hälften der Lichtablenkung (Dok. 308, 389),
+  m_char in m·G = ξ²/4, Periheldrehung, konforme Kopplung und Licht; Prüfskript 121/121.
+- **A142:** Vermerk vom 6. Okt. 2026 zur konformen Kopplung und zum Licht (18/18).
+- **Dok. 336, 341, 358:** Vermerke vom 6. Okt. 2026 — N mod 3 ist die additive Trialität,
+  nicht der Sektor-Index der Orbifoldwirkung aus Dok. 321; beide ℤ₃ sind verträglich, aber
+  verschieden. Neues Prüfskript `pruef_341_zwei_z3.py` (9/9).
+- Prüfskript zu Dok. 308 (Lichtablenkung) läuft wieder unter Python 3.11.
 
 ## Die Rechenprüfung (R133–R146)
 
@@ -58,7 +70,7 @@ führen. Die wichtigsten Folgen für die Einstufung:
 
 ---
 
-## Neue Dokumente (Dok. 379–388)
+## Neue Dokumente (Dok. 379–389)
 
 | Dok. | Titel | Seiten De/En | Prüfskript |
 |------|-------|--------------|------------|
@@ -67,11 +79,12 @@ führen. Die wichtigsten Folgen für die Einstufung:
 | 381 | Die laufende Rekursion exakt aufsummiert | 7/7 | 14/14 |
 | 382 | Myon g−2: Stand 2025 | 8/8 | 21/21 |
 | 383 | Massen und Planck-Skala ohne v — eine Kette, ein Anker | 8/8 | 20/20 |
-| 384 | FFGFT in Kurzfassung — Grundlagen, Ergebnisse und Status nach der Rechenprüfung | 23/23 | 118/118 |
+| 384 | FFGFT in Kurzfassung — Grundlagen, Ergebnisse und Status nach der Rechenprüfung | 23/23 | 121/121 |
 | 385 | Der Higgs-Vakuum-Weg zu ξ | 8/8 | 17/17 |
 | 386 | Wo α steckt — Ladungseinheit, zwei Kugeln und ξ als Fläche | 8/8 | 25/25 |
 | 387 | Die Abweichungen im Überblick — Verhältnisse, SI-Übersetzung und Korrekturgrößen | 8/8 | 27/27 |
 | 388 | Die CMB-Temperatur in der Grundform — eV-Relation, Verhältnis zur Elektronenmasse und die H₀-Formen | 8/8 | 27/27 |
+| 389 | Parabelflug, Trägheit und die Darstellungen der Gravitation | 9/9 | 34/34 |
 
 Prüfskripte unter `2/python/DokNNN_Skripte/`.
 
@@ -105,6 +118,16 @@ einzigen Zahl; der Kandidat T_CMB/m_e = (8π)^(1/4)·ξ^(5/2) trifft den FIRAS-W
 Mit der H₀-Form des Korpus folgt T_CMB⁴ = 16·H₀·m_e³, also H₀ = 66,81 ± 0,06 km/s/Mpc aus
 der CMB-Temperatur, und L_ξ ist ohne die CMB festgelegt. Die ältere H₀-Form mit dem
 Exponenten 41/4 liegt dann 11σ daneben. Vorfaktor und Exponent 10 sind nicht hergeleitet.
+
+### Parabelflug und die Darstellungen der Gravitation [B]/[K] (Dok. 389)
+Im Parabelflug verschwindet nicht die Gravitation, sondern die Gegenbahn: Der freie Fall ist die
+Bahn stationärer Phase einer Mode mit ortsabhängiger Masse, das Gewicht am Boden die Abweichung
+der Ruhe-Weltlinie davon; nur die Gezeiten bleiben. Raumkrümmung, Massenänderung und fraktale
+Wegverlängerung sind gleichwertige Modelle, keine Aussagen über das Wesen des Raumes. Für Licht
+sind Takt und Weg komplementäre Hälften (je 0,875″, zusammen 1,75″ und γ = 1, Dok. 308); die rein
+konform flache Metrik und die konforme Kopplung allein lenken Licht nicht ab. Mit der gesetzten
+logarithmischen Form ln(m/m₀) = Φ/c² folgt β = 1 und die Periheldrehung der ART. Am Horizont
+begrenzt T₀ den Vergleich mit einem fernen Bezug, nicht den freien Durchgang.
 
 ### Wo α steckt [B] (Dok. 386)
 Mit ħ = c = ε₀ = 1 und α = 1 ist e = √(4π); α wandert in die Ladungseinheit,
@@ -150,6 +173,7 @@ Verhältnis-Linie für a_τ bleibt.
 - **A120:** Vermerke (der Leak (7−3φ)/9 ist mit δ* nicht verträglich, R139; Verweis
   auf A125). A010, A230, A250, README und CHANGELOG nachgezogen; jetzt 49 Dokumente.
 - **A075, A142:** Vermerke vom 2. Okt. 2026 — der SM-Grenzfall ist nur für das Skalarfeld gezeigt ([K] → [S]); die modifizierte Schrödinger-Gleichung in A142 ist mit 𝒯/𝒯₀ = 1/Ω homogen und enthält die Gravitation bereits (Phase im lokalen Takt = gravitative Rotverschiebung, Amplitude = lokale Energiedichte); der a_e-Zusatz 2,34·10⁻¹⁰ (mit α = 1) bzw. 1,7·10⁻¹² (mit α/2π) ist durch die Messung ausgeschlossen. Das in A142 genannte, bisher fehlende Prüfskript `a142_gravitation_lagrange.py` ist ergänzt (16/16). Dieselbe Klärung tragen als Vermerke die älteren Dokumente zur Schrödinger-Gleichung und zum Lagrangian (Dok. 004, 020, 037, 067, 095, 129, 131, 202, 354): Gravitation ohne zusätzliches Feld und ohne Graviton, sichtbar als Rotverschiebung.
+- **A142:** Vermerk vom 6. Okt. 2026 — die konforme Kopplung lässt das Maxwell-Feld unberührt (in 4D konform invariant) und liefert nur den Takt; die räumliche Hälfte der Lichtablenkung kommt aus der fraktalen Wegverlängerung (A265). Prüfskript 18/18.
 - Die A-Serie trägt seit der Rechenprüfung datierte Hinweise im Text (R140).
 
 ---
@@ -215,6 +239,6 @@ bleibt der Einstieg für Laien; das Ikosaeder-Buch *Die Zahl, die niemand erklä
 der Einstieg in die Leptonmassen.
 
 ## Was sich nicht geändert hat
-ξ und T̃·m = 1 sind unverändert. Alle Ergebnisse aus v1.4.2 gelten weiter, soweit sie
+ξ und T̃·m = 1 sind unverändert. Alle Ergebnisse aus v1.4.3 gelten weiter, soweit sie
 nicht durch R128–R147 oder die Hinweise der Rechenprüfung präzisiert, eingeschränkt
 oder zurückgenommen sind.

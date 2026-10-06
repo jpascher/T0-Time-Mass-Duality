@@ -62,7 +62,7 @@ configs = [
     ("B: nur Streckung (Raumhälfte)",       0.0, 1.0),
     ("C: Takt + Streckung (K3)",            1.0, 1.0),
 ]
-print(f"  {'Konfiguration':<42} {'alpha':>8}  {'/ 1.750\"':>9}")
+print(f"  {'Konfiguration':<42} {'alpha':>8}  {'/ 1.750' + chr(34):>9}")
 print("  " + "-" * 62)
 for label, kt, ks in configs:
     alpha = trace(n_of_config(kt, ks))

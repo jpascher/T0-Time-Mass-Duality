@@ -1,6 +1,6 @@
-# Release Notes — v1.4.3 (2 October 2026)
+# Release Notes — v1.4.4 (6 October 2026)
 
-**DOI:** assigned upon Zenodo release — supersedes v1.4.2
+**DOI:** assigned upon Zenodo release — supersedes v1.4.3
 Running corrections: **[2/pdf/190_T0_Korrekturen_De.pdf](2/pdf/190_T0_Korrekturen_De.pdf)**
 Change log: **[001_FFGFT_Changelog_De.md](001_FFGFT_Changelog_De.md)**
 Summary of the corpus: **[2/pdf/384_FFGFT_Kurzfassung_En.pdf](2/pdf/384_FFGFT_Kurzfassung_En.pdf)** (also as [HTML](2/html/384_FFGFT_Kurzfassung_En.html))
@@ -17,11 +17,11 @@ into SI needs a measured value as anchor.
 
 ## Overview
 
-This release collects the work from 28 September to 2 October 2026. Its centre is the
+This release collects the work from 28 September to 6 October 2026. Its centre is the
 **complete recalculation of the corpus**: all documents up to No. 300 and the A series
 were recalculated; about 235 documents now carry a correction box, and every corrected
 passage has a dated note with the previous value (R133, R140, R142). In addition there
-are **ten new documents (Docs. 379–388)**, among them the **summary of the entire
+are **eleven new documents (Docs. 379–389)**, among them the **summary of the entire
 corpus (Doc. 384)**, the **A series v1.5** with the new document **A125 (φ skeleton)**,
 and twenty register entries (R128–R147).
 
@@ -29,6 +29,18 @@ The recalculation has withdrawn several earlier claims; they are collected in Do
 in the section "What no longer holds". The foundational relation and ξ are unchanged.
 
 ---
+
+## New since v1.4.3
+
+- **Doc. 389 — Parabolic flight, inertia and the representations of gravitation** (De/En,
+  9 pages each, verification script 34/34); short description under "Main new results".
+- **Doc. 384:** clock rate and path as complementary halves of light deflection (Docs. 308,
+  389), m_char in m·G = ξ²/4, perihelion shift, conformal coupling and light; script 121/121.
+- **A142:** note of 6 Oct 2026 on the conformal coupling and light (18/18).
+- **Docs. 336, 341, 358:** notes of 6 Oct 2026 — N mod 3 is the additive triality, not the
+  sector index of the orbifold action of Doc. 321; the two ℤ₃ are compatible but different.
+  New verification script `pruef_341_zwei_z3.py` (9/9).
+- The verification script for Doc. 308 (light deflection) runs again under Python 3.11.
 
 ## The recalculation (R133–R146)
 
@@ -58,7 +70,7 @@ register. The main consequences for the classification:
 
 ---
 
-## New documents (Docs. 379–388)
+## New documents (Docs. 379–389)
 
 | Doc. | Title | Pages De/En | Verification script |
 |------|-------|-------------|---------------------|
@@ -67,11 +79,12 @@ register. The main consequences for the classification:
 | 381 | The running recursion summed exactly | 7/7 | 14/14 |
 | 382 | Muon g−2: status 2025 | 8/8 | 21/21 |
 | 383 | Masses and Planck scale without v — one chain, one anchor | 8/8 | 20/20 |
-| 384 | FFGFT in brief — foundations, results and status after the calculation review | 23/23 | 118/118 |
+| 384 | FFGFT in brief — foundations, results and status after the calculation review | 23/23 | 121/121 |
 | 385 | The Higgs–vacuum route to ξ | 8/8 | 17/17 |
 | 386 | Where α hides — charge unit, two spheres and ξ as an area | 8/8 | 25/25 |
 | 387 | The deviations at a glance — ratios, SI translation and correction quantities | 8/8 | 27/27 |
 | 388 | The CMB temperature in the basic form — the eV relation, the ratio to the electron mass and the H₀ forms | 8/8 | 27/27 |
+| 389 | Parabolic flight, inertia and the representations of gravitation | 9/9 | 34/34 |
 
 Verification scripts in `2/python/DokNNN_Skripte/`.
 
@@ -97,6 +110,16 @@ measured value 3477.37 ± 0.18 to 3·10⁻⁵ (0.6σ) [K] — as precise as the 
 as a pure ratio without an anchor. The factors 74 and 1/45 are observed, not derived
 [S]; the 37 in 74 demonstrably does not come from the icosahedron. For m_μ/m_e there
 is no φ route at this level.
+
+### Parabolic flight and the representations of gravitation [B]/[K] (Doc. 389)
+In parabolic flight it is not gravitation that disappears but the counter-path: free fall is the
+path of stationary phase of a mode with position-dependent mass, weight on the ground is the
+deviation of the rest world line from it; only the tides remain. Space curvature, mass change and
+fractal path lengthening are equivalent models, not statements about the nature of space. For
+light, clock rate and path are complementary halves (0.875″ each, together 1.75″ and γ = 1,
+Doc. 308); the purely conformally flat metric and the conformal coupling alone do not deflect
+light. With the set logarithmic form ln(m/m₀) = Φ/c², β = 1 and the perihelion shift of GR
+follow. At the horizon T₀ limits the comparison with a distant reference, not the free crossing.
 
 ### The CMB temperature in the basic form [S] (Doc. 388)
 The relation T_CMB = (16/9)ξ(1 − 275ξ/4) eV holds only in the unit eV, and the eV brings the
@@ -151,6 +174,7 @@ remains.
 - **A120:** notes (the leak (7−3φ)/9 is not compatible with δ*, R139; reference to
   A125). A010, A230, A250, README and CHANGELOG updated; now 49 documents.
 - **A075, A142:** notes of 2 Oct 2026 — the SM limit is shown only for the scalar field ([K] → [S]); the modified Schrödinger equation in A142 is homogeneous with 𝒯/𝒯₀ = 1/Ω and already contains gravitation (phase at the local clock rate = gravitational redshift, amplitude = local energy density); the a_e addition 2.34·10⁻¹⁰ (with α = 1) or 1.7·10⁻¹² (with α/2π) is excluded by measurement. The verification script `a142_gravitation_lagrange.py` named in A142, previously missing, has been added (16/16). The older documents on the Schrödinger equation and the Lagrangian (Docs. 004, 020, 037, 067, 095, 129, 131, 202, 354) carry the same clarification as notes: gravitation without an additional field and without a graviton, visible as redshift.
+- **A142:** note of 6 Oct 2026 — the conformal coupling leaves the Maxwell field unaffected (conformally invariant in 4D) and supplies only the clock rate; the spatial half of light deflection comes from the fractal path lengthening (A265). Verification script 18/18.
 - Since the recalculation the A series carries dated notes in the text (R140).
 
 ---
@@ -215,6 +239,6 @@ for lay readers; the icosahedron book *The Number That Nobody Explained* remains
 entry point to the lepton masses.
 
 ## What has not changed
-ξ and T̃·m = 1 are unchanged. All results from v1.4.2 continue to hold insofar as they
+ξ and T̃·m = 1 are unchanged. All results from v1.4.3 continue to hold insofar as they
 are not refined, restricted or withdrawn by R128–R147 or the notes of the
 recalculation.

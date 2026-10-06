@@ -1239,3 +1239,25 @@ Anlass: Die Casimir-CMB-Verbindung ist eine Identität, weil L_ξ nur über T_CM
 
 **Prüfskript:** 2/python/Dok388_Skripte/pruef_388_cmb_grundform.py — 27/27 PASS
 **Register:** kein Eintrag.
+
+---
+
+## 6. Oktober 2026 — Dok. 389: Parabelflug, Trägheit und die Darstellungen der Gravitation
+
+### Dok. 389 — Freier Fall, Gegenbahn, Licht und Horizont in der Zeit-Masse-Dualität (De/En, je 9 Seiten)
+
+Anlass: die eingehende Frage zum Parabelflug — was das Gewicht ist, wenn es im freien Fall verschwindet — und die alternative Sicht der Gravitation als Massen- bzw. Taktänderung und fraktale Wegverlängerung statt Raumkrümmung.
+- Uhr im Potential: ω = ω₀√g₀₀, m(x) = m₀√g₀₀ ist die Killing-Energie, g₀₀ = (m/m₀)² [B]; Trägheit als Gegenbahn a_Träg = −c²∇ln λ₄ = −a_Fall [B]; Poisson für das Massenfeld ∇²ln m = 4πGρ/c², außen c²∂²ᵣln m = −2GM/r³ [B]; isotrope ART g_ij = (1−2Φ/c²)δ_ij: ℓ_koord = ℓ(1+Φ/c²), λ₄,koord = λ₄(1−Φ/c²), räumlicher Brechungsanteil −Φ/c² [B]
+- Freier Fall: L = −m(x)c²√(1−v²/c²) mit m = m₀ e^(Φ/c²) gibt a = −c²∇ln m = c²∇ln λ₄ = −∇Φ [B]; g/c² = 1,09·10⁻¹⁶ pro Meter = Uhrengang pro Meter [K]; Vorzeichen durch die Rotverschiebung festgelegt (Pound–Rebka 1,05 ± 0,10) [K]
+- Gewicht als Gegenbahn: Die Ruhe-Weltlinie ist nicht stationär, der Rest −m g muss vom Boden ausgeglichen werden; im Parabelflug entfällt die Abweichung [B]
+- Gezeiten: Hesse-Matrix von Φ, Eigenwerte (−2, 1, 1) GM/r³, nicht wegtransformierbar [B]
+- Drei Darstellungen (Raumkrümmung, Massen-/Taktänderung, fraktale Wegverlängerung) als mathematische Modelle ohne ontologische Aussage, Mischformen zulässig; für Licht Takt und Weg komplementäre Hälften: konform flach 0, nur Takt 0,875″, beide 1,751″ und γ = 1 (Dok. 308) [K]; die konforme Kopplung der Materiefelder (A142) lässt Licht unberührt [B]
+- Periheldrehung: logarithmische Form ergibt β = 1 und mit γ = 1 den ART-Wert 42,98″/Jh. [K]; lineare Form 7/6 (50,1″), Nordström −1/6; die logarithmische Form ist gesetzt [S]
+- Horizont: statischer Beobachter E/√(1−r_s/r) divergiert, T₀ schneidet bei ρ_min = 2 r_s ξ E/E_P ab; frei fallend E/2, endlich [B]; T₀ betrifft den Vergleich, nicht den Durchgang (wie Dok. 306)
+- Namensklärung M_coll = m_P/√2 gegen m_P/ξ; m_char·G = ξ²/4 (R58, A142) gegen mitlaufendes G (Dok. 350); keine eigene Quantisierung der Gravitation (R58, A142)
+- Vermerk (6. Okt. 2026) in A142 (De/En): konforme Kopplung und Licht; Prüfskript a142_gravitation_lagrange.py 18/18
+- Dok. 384 (De/En): Darstellungen mit Takt und Weg (Dok. 308, 389), m_char in m·G = ξ²/4, Lichtablenkung mit Mechanismus und Periheldrehung, konforme Kopplung und Licht; Prüfskript 121/121
+- Prüfskript ffgft_308_p36_stufeB1_faktor2_fe.py lief unter Python 3.11 nicht (Backslash im f-String), behoben; Ergebnis unverändert 0,875″ / 0,875″ / 1,750″
+
+**Prüfskript:** 2/python/Dok389_Skripte/pruef_389_parabelflug.py — 34/34 PASS
+**Register:** kein Eintrag (Vermerke direkt in den betroffenen Dokumenten).

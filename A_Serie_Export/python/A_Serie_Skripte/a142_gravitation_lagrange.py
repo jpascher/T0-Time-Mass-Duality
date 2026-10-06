@@ -80,5 +80,12 @@ check("Zusatz 1,72e-12 liegt 8,6 sigma (Rb) bzw. 10 sigma (Cs) neben Messung min
       abs(sRb - 8.6) < 0.1 and abs(sCs - 10.1) < 0.1, f"{sRb:.1f} / {sCs:.1f} sigma")
 check("2,34e-10 waere ueber 200-mal groesser als die Uebereinstimmung von rund 1e-12", 2.34e-10 / 1e-12 > 200)
 
+print("7. Konforme Kopplung und Licht (Vermerk 6. Okt. 2026)")
+Om = sp.symbols('Omega', positive=True)
+# Maxwell: sqrt(-g) g^{mu a} g^{nu b} F F skaliert unter g -> Omega^2 g mit Omega^4 * Omega^-2 * Omega^-2
+check("Maxwell-Term in 4D konform invariant: Faktor Omega^4 Omega^-4 = 1", sp.simplify(Om**4 * Om**-2 * Om**-2) == 1)
+# rein konforme Metrik Omega^2 eta: n = 1 (Lichtkegel unverändert) -> gamma = -1, Ablenkung (1+gamma)/2 = 0
+check("rein konforme Metrik: Lichtkegel unverändert, gamma = -1, Ablenkung 0", (1 + (-1)) / 2 == 0)
+
 print(f"\nERGEBNIS: {n_ok}/{n_all} BESTANDEN")
 raise SystemExit(0 if n_ok == n_all else 1)

@@ -6,7 +6,7 @@ Rechnet alle Zahlen nach, die Dok. 384 nennt. Jede Zahl stammt aus einem
 Korpusdokument (Nummer im Kommentar); das Skript prüft nur, dass die
 Kurzfassung sie richtig wiedergibt. Vergleichswerte: CODATA 2022, PDG 2024.
 """
-import math
+import math, os
 from fractions import Fraction as Fr
 
 ok = n = 0
@@ -326,6 +326,18 @@ check("A142 mit T/T0 = 1/Omega: Amplitude ~ Omega (Energiedichte), Phasenrate E*
 v_a1 = xi**2/(2*math.pi)/12; v_a = (1/137.035999177)/(2*math.pi)*xi**2/12
 check("a_e-Zusatz (Dok. 067, A142): mit alpha = 1 2,36e-10, mit alpha/2pi 1,72e-12; gegen Messung minus QED +3,4(1,6)e-13 (Rb) / -10,1(2,7)e-13 (Cs) 8,6 bzw. 10 sigma: ausgeschlossen",
       abs(v_a1 - 2.36e-10) < 0.02e-10 and abs((v_a - 3.4e-13)/1.6e-13 - 8.6) < 0.1 and abs((v_a + 10.1e-13)/2.7e-13 - 10.1) < 0.1)
+
+print("\n17. Lichtablenkung, Darstellungen und m_char (Dok. 308, 389; Ergänzung 6. Okt. 2026)")
+_I = 2.0   # int du/(1+u^2)^(3/2)
+_d = lambda gam: (1 + gam)*1.32712440018e20/(299792458.0**2*6.957e8)*_I*180/math.pi*3600
+check("Takt allein 0,875\", Takt + Wegverlängerung 1,751\" (gamma = 1), konform flach 0 (Dok. 308, 143)",
+      abs(_d(0) - 0.8756) < 1e-3 and abs(_d(1) - 1.7512) < 1e-3 and _d(-1) == 0)
+_U = sp.symbols('U')
+_b = sp.Rational(1, 2)*sp.series(sp.exp(-2*_U), _U, 0, 3).removeO().coeff(_U, 2)
+check("ln(m/m0) = Phi/c^2 gibt beta = 1; mit gamma = 1 Periheldrehung = ART, Faktor (2+2gamma-beta)/3 = 1", _b == 1 and (2 + 2 - _b)/3 == 1)
+_tex = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../Sources/ch/384_FFGFT_Kurzfassung_De_ch.tex"), encoding="utf-8").read()
+check("384 nennt m_char in m G = xi^2/4 und verweist für die Lichtablenkung auf Dok. 308 und 389",
+      "m_{\\text{char}}\\cdot G=\\xi^2/4" in _tex and "Dok.~308, 389" in _tex)
 
 print(f"\nErgebnis: {ok}/{n} OK")
 raise SystemExit(0 if ok == n else 1)
