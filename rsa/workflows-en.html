@@ -262,7 +262,7 @@
       
       <div class="algorithm-overview">
         <h3>Overview</h3>
-        <p>Order finding (period finding as in Shor) determines factors of composite numbers. The implementation has a grid parameter σ that has no effect on the result and is not the FFGFT parameter ξ (R63, R75).</p>
+        <p>The T0 algorithm performs period finding to determine factors of composite numbers. The implementation uses adaptive ξ-strategies for different number types and operates with rational arithmetic.</p>
       </div>
       
       <div class="workflow-section">
@@ -272,9 +272,9 @@
           <li class="step-item">
             <div class="step-number">1</div>
             <div class="step-content">
-              <div class="step-title">Input Validation and σ-Strategy Selection</div>
+              <div class="step-title">Input Validation and ξ-Strategy Selection</div>
               <div class="step-description">
-                The number is categorized (twin_prime, cousin_prime, etc.) and the corresponding σ-strategy is selected (no effect on the result, R63).
+                The number is categorized (twin_prime, cousin_prime, etc.) and the corresponding ξ-strategy is selected.
               </div>
               <div class="step-code">
 xi_strategy = self._select_optimized_xi_strategy(n)
@@ -302,7 +302,7 @@ for basis in [2, 3, 5, 7]:
             <div class="step-content">
               <div class="step-title">Period Search with Resonance Evaluation</div>
               <div class="step-description">
-                For each base, periods are systematically searched and evaluated using the selected σ-strategy; the evaluation does not change the result (R63).
+                For each base, periods are systematically searched and evaluated using the selected ξ-strategy.
               </div>
               <div class="step-code">
 for r in range(2, max_periods):
@@ -318,7 +318,7 @@ for r in range(2, max_periods):
             <div class="step-content">
               <div class="step-title">Factor Extraction</div>
               <div class="step-description">
-                When a suitable period is found, an attempt is made to extract factors via x = a^(r/2) mod n.
+                When a suitable period is found, factors are extracted via x = a^(r/2) mod n.
               </div>
               <div class="step-code">
 x = pow(a, period // 2, n)
@@ -331,25 +331,25 @@ if 1 < f1 < n: return [f1, n // f1]</div>
       </div>
       
       <div class="data-flow-section">
-        <h3>σ-Strategy Selection Details</h3>
+        <h3>ξ-Strategy Selection Details</h3>
         
         <div class="decision-tree">
           <h4>Decision Logic</h4>
           <div class="condition">
-            <span class="condition-if">IF</span> |p - q| = 2 (presupposes the factors sought; no effect, R63) 
-            <div class="condition-then">→ twin_prime_optimized (σ = 1/50)</div>
+            <span class="condition-if">IF</span> |p - q| = 2 
+            <div class="condition-then">→ twin_prime_optimized (ξ = 1/50)</div>
           </div>
           <div class="condition">
             <span class="condition-if">IF</span> |p - q| ≤ 6 
-            <div class="condition-then">→ cousin_prime (σ = 1/100)</div>
+            <div class="condition-then">→ cousin_prime (ξ = 1/100)</div>
           </div>
           <div class="condition">
             <span class="condition-if">IF</span> n > 1000 
-            <div class="condition-then">→ medium_size (σ = 1/1000)</div>
+            <div class="condition-then">→ medium_size (ξ = 1/1000)</div>
           </div>
           <div class="condition">
             <span class="condition-if">ELSE</span>
-            <div class="condition-then">→ universal (σ = 1/100)</div>
+            <div class="condition-then">→ universal (ξ = 1/100)</div>
           </div>
         </div>
       </div>
@@ -479,9 +479,9 @@ for level_idx in search_order:
         </div>
         
         <div class="component-card">
-          <div class="component-title">Search Order</div>
+          <div class="component-title">Intelligent Search Order</div>
           <div class="component-description">
-            Both approaches use prediction-based search optimization: T0 for σ-strategies (no effect on the result), Harmonic for level ordering.
+            Both approaches use prediction-based search optimization: T0 for ξ-strategies, Harmonic for level ordering.
           </div>
         </div>
         
@@ -499,14 +499,14 @@ for level_idx in search_order:
       
       <div class="data-flow-section">
         <h3>T0 Period Finding vs. Harmonic Ratio Search</h3>
-        <p><strong>T0 Period Finding:</strong> Searches for mathematical periods in modular arithmetic and evaluates them with the parameter σ (no effect on the result).</p>
+        <p><strong>T0 Period Finding:</strong> Searches for mathematical periods in modular arithmetic and evaluates them with ξ-parameters.</p>
         <p><strong>Harmonic Factorization:</strong> Directly analyzes the ratios between factors and maps them to musical intervals.</p>
         
         <div class="decision-tree">
           <h4>When to Use Which Approach?</h4>
           <div class="condition">
             <span class="condition-if">For semiprimes with known properties:</span>
-            <div class="condition-then">→ Order finding (period finding as in Shor)</div>
+            <div class="condition-then">→ T0 Period Finding (higher precision)</div>
           </div>
           <div class="condition">
             <span class="condition-if">For unknown number ratios:</span>

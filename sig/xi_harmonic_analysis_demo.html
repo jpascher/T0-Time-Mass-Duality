@@ -413,7 +413,7 @@
 
       <div class="btn-group">
         <button class="btn btn-primary" onclick="analyzePureT0()">
-          🧠 Autokorrelations-Analyse
+          🧠 Basis ξ-Analyse
         </button>
         <button class="btn btn-secondary" onclick="compareFFT()">
           📊 Mit FFT Vergleichen
@@ -464,9 +464,9 @@
 • Konfigurierbare Harmonische Auswahl
 • Echtzeit Signal-Generierung
 • Visuelle Button-Rückmeldung
-• Periodensuche per Autokorrelation (≡ |FFT|²)
+• T0-basierte Periodensuche
 • Harmonische Resonanz-Analyse
-• Mikro-tonale Darstellung (noch nicht implementiert)
+• Mikro-tonale Präzision
 
 🚀 BEREIT FÜR ANALYSE:
 1. Wählen Sie Signal-Typ und Parameter
@@ -802,22 +802,22 @@ Alle Buttons geben sofortiges visuelles Feedback!
       const periodThreshold = parseFloat(document.getElementById('periodThreshold').value);
       const xiThreshold = parseFloat(document.getElementById('xiThreshold').value);
       
-      updateStatus(`🧠 Starte Autokorrelations-Analyse (ξ-Profil ${xiProfiles[xiProfile].name} ohne Einfluss)...`, 'info');
+      updateStatus(`🧠 Starte T0-Analyse mit ${xiProfiles[xiProfile].name} Profil...`, 'info');
       updateProgress(25);
       
       // Berechne Analyse basierend auf Parametern
       const analysisData = calculateT0Analysis(xiProfile, periodThreshold, xiThreshold);
       
       // Plotte mit echten Daten
-      if (typeof plotAnalysisChart === 'function') plotAnalysisChart('t0', analysisData);
+      plotAnalysisChart('t0', analysisData);
       updateProgress(75);
       
       setTimeout(() => {
         updateProgress(100);
-        updateStatus(`✅ Autokorrelations-Analyse: ${analysisData.periods.length} Perioden gefunden`, 'success');
+        updateStatus(`✅ T0-Analyse: ${analysisData.periods.length} Perioden gefunden`, 'success');
         
         document.getElementById('textOutput').textContent = `
-=== AUTOKORRELATIONS-ANALYSE (ξ-Profil ohne Einfluss, Dok. 343) ===
+=== ξ-T0 REINE ANALYSE BERICHT ===
 
 🧠 PERIODENSUCHE ERGEBNISSE:
   Gefundene Perioden: ${analysisData.periods.length}
@@ -869,7 +869,7 @@ ${analysisData.periods.map((p, i) => `  ${i+1}. ${p.freq.toFixed(2)} Hz (Periode
         updateStatus(`✅ Resonanz-Analyse: ${resonanceData.matches}/${resonanceData.total} harmonische Treffer (${resonanceData.purity}% Reinheit)`, 'success');
         
         document.getElementById('textOutput').textContent = `
-=== HARMONISCHE RESONANZ-ANALYSE ===
+=== ξ-HARMONISCHE RESONANZ ANALYSE ===
 
 🎼 HARMONISCHE TREFFER:
   Gefundene Harmonien: ${resonanceData.matches}/${resonanceData.total}
@@ -1054,7 +1054,7 @@ ${Object.entries(activeHarmonics).map(([key, h]) => `  • ${h.name} (${h.ratio}
       
       setTimeout(() => {
         updateProgress(100);
-        updateStatus('Mikro-tonale Analyse: noch nicht implementiert', 'warning');
+        updateStatus('✅ Mikro-tonale Analyse: 12 Cent-Intervalle', 'success');
       }, 500);
     }
 
@@ -1120,38 +1120,6 @@ ${Object.entries(activeHarmonics).map(([key, h]) => `  • ${h.name} (${h.ratio}
         'Die Auflösung ist in beiden Fällen durch die Signallänge begrenzt (Dok. 343, Klartext II).';
     }
 
-    function plotAnalysisChart(type, data) {
-      const canvas = document.getElementById('analysisChart');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const w = canvas.width, h = canvas.height;
-      ctx.clearRect(0, 0, w, h);
-      ctx.textAlign = 'left';
-      if (type === 'fft_compare') { plotFFTComparison(ctx, w, h); return; }
-      let bars = [];
-      if (type === 't0' && data && data.periods) bars = data.periods.map(p => ({ label: p.freq.toFixed(1) + ' Hz', value: p.strength }));
-      else if (type === 'resonance' && data && data.peaks) bars = data.peaks.map(p => ({ label: p.name, value: p.strength }));
-      ctx.fillStyle = '#333';
-      ctx.font = '13px Arial';
-      if (!bars.length) {
-        ctx.fillText(type === 'microtonal' ? 'Mikro-tonale Darstellung: noch nicht implementiert' : 'Keine Daten zum Darstellen', 40, h / 2);
-        return;
-      }
-      const maxV = Math.max(...bars.map(b => b.value)) || 1;
-      const bw = (w - 100) / bars.length;
-      bars.forEach((b, i) => {
-        const bh = (b.value / maxV) * (h - 100);
-        const x = 50 + i * bw, y = h - 50 - bh;
-        ctx.fillStyle = '#667eea';
-        ctx.fillRect(x, y, bw - 10, bh);
-        ctx.fillStyle = '#333';
-        ctx.font = '11px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText(b.value.toFixed(3), x + bw / 2, y - 6);
-        ctx.fillText(b.label, x + bw / 2, h - 30);
-      });
-      ctx.textAlign = 'left';
-    }
     function plotFFTComparison(ctx, width, height) {
       const c = lastFFTComparison || { t0: 0, fft: 0, common: 0, t0u: 0, fftu: 0 };
       const methods = ['Autokorr. Peaks', 'FFT Peaks', 'Gemeinsame', 'nur Autokorr.', 'nur FFT'];

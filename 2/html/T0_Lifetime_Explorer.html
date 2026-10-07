@@ -354,7 +354,7 @@ input[type="range"]::-moz-range-thumb {
 </div>
 <header>
   <h1 id="main-title">T0 Lepton-Lebensdauer Explorer</h1>
-  <p id="main-subtitle">Interaktive Berechnung des Lebensdauerverhältnisses τ<sub>μ</sub>/τ<sub>τ</sub> mit wählbarem hadronischem Faktor (Dok. 160, R123)</p>
+  <p id="main-subtitle">Interaktive Berechnung der Lepton-Lebensdauern aus T0-Torus-Geometrie</p>
 </header>
 
 <div class="container">
@@ -394,10 +394,10 @@ input[type="range"]::-moz-range-thumb {
       <div class="presets" id="kqcd-presets">
         <button class="preset-btn" data-val="1.000">1</button>
         <button class="preset-btn" data-val="1.1050">1+α<sub>s</sub>/π</button>
-        <button class="preset-btn active" data-val="1.1520">K<sub>had</sub></button>
+        <button class="preset-btn active" data-val="1.1520">K<sub>frak</sub></button>
         <button class="preset-btn" data-val="1.2143">17/14</button>
         <button class="preset-btn" data-val="1.2222">11/9</button>
-        <button class="preset-btn" data-val="1.2365">K<sub>had</sub><sup>3/2</sup></button>
+        <button class="preset-btn" data-val="1.2365">K<sub>frak</sub><sup>3/2</sup></button>
       </div>
     </div>
 
@@ -408,7 +408,7 @@ input[type="range"]::-moz-range-thumb {
           <span>N<sub>c,eff</sub></span>
           <span class="slider-value" id="nc-val">3.000</span>
         </div>
-        <input type="range" id="nc-slider" min="2.500" max="4.000" step="0.001" value="3.165">
+        <input type="range" id="nc-slider" min="2.500" max="4.000" step="0.001" value="3.150">
       </div>
       <div class="presets" id="nc-presets">
         <button class="preset-btn" data-val="2.999867">D<sub>f</sub></button>
@@ -464,7 +464,7 @@ input[type="range"]::-moz-range-thumb {
       <strong>Formel:</strong> τ<sub>μ</sub>/τ<sub>τ</sub> = (m<sub>τ</sub>/m<sub>μ</sub>)⁵ · PS / BR<sub>e</sub><br>
       wobei BR<sub>e</sub> = 1/(1 + PS<sub>μ</sub>/PS<sub>e</sub> + R<sub>had</sub>)<br>
       und R<sub>had</sub> = N<sub>c,eff</sub> · K<sub>QCD</sub><br>
-      <span style="font-size:11px;color:var(--text2)">Dok. 160: Faktor 144/125 = K<sub>had</sub> per Scan ausgewählt; [K] mit Auswahlvorbehalt, Herleitung offen [S] (R123)</span><br><span style="font-size:10px;color:var(--text2)">[K] numerisch bestätigt · [S] Setzung oder offen</span>
+      <span style="font-size:11px;color:var(--text2)">Herleitung: Dok. 160 (T0 Lepton-Lebensdauer-Verhältnis)</span>
     </div>
   </div>
 
@@ -533,8 +533,8 @@ const xi = 4/30000;
 const f = 7500;
 const f_13 = Math.pow(f, 1/3);
 const D_f = 3 - xi;
-const K_had = 144/125; // hadronic factor of Doc. 160 (R123), not K_frak = 74/75
-const K_had_32 = Math.pow(K_had, 1.5);
+const K_frak = 144/125;
+const K_frak_32 = Math.pow(K_frak, 1.5);
 
 // Phase space function
 function phaseSpace(m_d, m_p) {
@@ -593,19 +593,18 @@ function calculate() {
   const N_c = parseFloat(ncSlider.value);
   const usePS = parseInt(psSlider.value) === 1;
   const alpha_s = getAlphaS();
-  const t = i18n[currentLang] || i18n.de;
-  const loc = currentLang === 'en' ? 'en-US' : 'de-DE';
 
   // Update display values
   document.getElementById('kqcd-val').textContent = K_QCD.toFixed(4);
   document.getElementById('nc-val').textContent = N_c.toFixed(3);
-  document.getElementById('ps-val').textContent = usePS ? t.on : t.off;
+  document.getElementById('ps-val').textContent = usePS ? 'An' : 'Aus';
   document.getElementById('xi-val').textContent = xi.toExponential(3);
   document.getElementById('f-val').textContent = f;
   document.getElementById('df-val').textContent = D_f.toFixed(6);
   document.getElementById('as-val').textContent = alpha_s.toFixed(4);
 
   // Update alpha_s detail
+  const t = i18n[currentLang] || i18n.de;
   const asNames = {
     'exp': 'Experimentell: 0.330 ± 0.02',
     'Dxi': `D·ξ^(1/4) = 3·${Math.pow(xi,0.25).toFixed(6)} = ${(3*Math.pow(xi,0.25)).toFixed(4)}`,
@@ -662,7 +661,7 @@ function calculate() {
   document.getElementById('formula-as').innerHTML = 
     `α<sub>s</sub> = ${alpha_s.toFixed(4)} (${asLabel}) → N<sub>c,eff</sub> = 3 + ${(alpha_s/2).toFixed(4)} = ${(3+alpha_s/2).toFixed(4)}`;
   document.getElementById('formula-br').innerHTML = 
-    `BR<sub>e</sub> = ${BR_e.toFixed(4)} → τ<sub>μ</sub>/τ<sub>τ</sub> = ${Math.round(R_ratio).toLocaleString(loc)}`;
+    `BR<sub>e</sub> = ${BR_e.toFixed(4)} → τ<sub>μ</sub>/τ<sub>τ</sub> = ${Math.round(R_ratio).toLocaleString('de-DE')}`;
 
   // === Additional ratios ===
   // We can also compute: 
@@ -694,35 +693,35 @@ function calculate() {
   const results = [
     {
       name: 'τ<sub>μ</sub>/τ<sub>τ</sub>',
-      ratio: t.lifetimeRatio,
-      pred: Math.round(R_ratio).toLocaleString(loc),
-      exp: Math.round(R_exp).toLocaleString(loc),
+      ratio: 'Lebensdauer-Verhältnis',
+      pred: Math.round(R_ratio).toLocaleString('de-DE'),
+      exp: Math.round(R_exp).toLocaleString('de-DE'),
       dev: dev_tau
     },
     {
       name: 'τ<sub>τ</sub>',
-      ratio: t.tauLifetime,
+      ratio: 'Tau-Lebensdauer',
       pred: tau_tau_pred.toExponential(3) + ' s',
       exp: tau_tau_exp.toExponential(3) + ' s',
       dev: -dev_tau  // inverse
     },
     {
       name: 'BR(τ→e)',
-      ratio: t.brE,
+      ratio: 'Branching Ratio e',
       pred: (BR_e * 100).toFixed(2) + '%',
       exp: (BR_e_exp * 100).toFixed(2) + '%',
       dev: dev_BR_e
     },
     {
       name: 'BR(τ→μ)',
-      ratio: t.brMu,
+      ratio: 'Branching Ratio μ',
       pred: (BR_mu_pred * 100).toFixed(2) + '%',
       exp: (BR_mu_exp * 100).toFixed(2) + '%',
       dev: dev_BR_mu
     },
     {
       name: 'BR(τ→had)',
-      ratio: t.brHad,
+      ratio: 'Branching Ratio hadr.',
       pred: (BR_had_pred * 100).toFixed(2) + '%',
       exp: '64.79%',
       dev: dev_BR_had
@@ -790,13 +789,13 @@ function calculate() {
   // Detail table
   let details = '';
   const detailData = [
-    ['m<sub>τ</sub>/m<sub>μ</sub>', r_tau_mu.toFixed(4), t.experimental],
-    ['(m<sub>τ</sub>/m<sub>μ</sub>)⁵', Math.round(r5).toLocaleString(loc), t.massExp],
-    ['PS(τ→e)', PS_tau_e.toFixed(6), t.psE],
-    ['PS(τ→μ)', PS_tau_mu.toFixed(6), t.psMu],
-    ['PS(μ→e)', PS_mu_e.toFixed(6), t.psMuon],
-    ['N<sub>c,eff</sub>', N_c.toFixed(4), t.colorFactor],
-    ['K<sub>QCD</sub>', K_QCD.toFixed(4), t.correctionFactor],
+    ['m<sub>τ</sub>/m<sub>μ</sub>', r_tau_mu.toFixed(4), 'Experimentell'],
+    ['(m<sub>τ</sub>/m<sub>μ</sub>)⁵', Math.round(r5).toLocaleString('de-DE'), 'Massenexponent'],
+    ['PS(τ→e)', PS_tau_e.toFixed(6), 'Phasenraum e-Kanal'],
+    ['PS(τ→μ)', PS_tau_mu.toFixed(6), 'Phasenraum μ-Kanal'],
+    ['PS(μ→e)', PS_mu_e.toFixed(6), 'Phasenraum Myon'],
+    ['N<sub>c,eff</sub>', N_c.toFixed(4), 'Farbfaktor'],
+    ['K<sub>QCD</sub>', K_QCD.toFixed(4), 'Korrekturfaktor'],
     ['R<sub>had</sub>', R_had.toFixed(4), `= ${N_c.toFixed(3)} × ${K_QCD.toFixed(4)}`],
     ['BR<sub>e</sub>', BR_e.toFixed(5), `1/(1+${(PS_tau_mu/PS_tau_e).toFixed(4)}+${R_had.toFixed(4)})`],
   ];
@@ -811,12 +810,12 @@ function calculate() {
   const K_needed = R_had_needed / N_c;
   
   document.getElementById('best-match-info').innerHTML = `
-    <strong>${t.forExact}</strong><br>
+    <strong>Für exakte Übereinstimmung:</strong><br>
     R<sub>had</sub> = ${R_had_needed.toFixed(4)} → K<sub>QCD</sub> = ${K_needed.toFixed(4)} (bei N<sub>c</sub> = ${N_c.toFixed(3)})<br>
-    <span style="color:var(--accent)">${t.current} K<sub>QCD</sub> = ${K_QCD.toFixed(4)} → Δ = ${((K_QCD/K_needed - 1)*100).toFixed(2)}% ${t.fromOptimum}</span><br><br>
-    <strong>${t.refValues}</strong>
-    K<sub>had</sub> = 144/125 = ${K_had.toFixed(4)} &nbsp;|&nbsp;
-    K<sub>had</sub><sup>3/2</sup> = ${K_had_32.toFixed(4)} &nbsp;|&nbsp;
+    <span style="color:var(--accent)">Aktuell: K<sub>QCD</sub> = ${K_QCD.toFixed(4)} → Δ = ${((K_QCD/K_needed - 1)*100).toFixed(2)}% vom Optimum</span><br><br>
+    <strong>Referenzwerte:</strong>
+    K<sub>frak</sub> = 144/125 = ${K_frak.toFixed(4)} &nbsp;|&nbsp;
+    K<sub>frak</sub><sup>3/2</sup> = ${K_frak_32.toFixed(4)} &nbsp;|&nbsp;
     1+α<sub>s</sub>/π = 1.1050 &nbsp;|&nbsp;
     17/14 = ${(17/14).toFixed(4)} &nbsp;|&nbsp;
     11/9 = ${(11/9).toFixed(4)}
@@ -879,7 +878,7 @@ document.querySelectorAll('#as-presets .preset-btn').forEach(btn => {
 const i18n = {
   de: {
     title: 'T0 Lepton-Lebensdauer Explorer',
-    subtitle: 'Interaktive Berechnung des Lebensdauerverhältnisses τ<sub>μ</sub>/τ<sub>τ</sub> mit wählbarem hadronischem Faktor (Dok. 160, R123)',
+    subtitle: 'Interaktive Berechnung der Lepton-Lebensdauern aus T0-Torus-Geometrie',
     t0params: 'T0 Parameter',
     corrFactor: 'Korrekturfaktor K',
     colorBasis: 'Farbfaktor Basis',
@@ -909,8 +908,7 @@ const i18n = {
     brMu: 'Branching Ratio μ',
     brHad: 'Branching Ratio hadr.',
     experimental: 'Experimentell',
-    formulaInfo: '<strong>Formel:</strong> τ<sub>μ</sub>/τ<sub>τ</sub> = (m<sub>τ</sub>/m<sub>μ</sub>)⁵ · PS / BR<sub>e</sub><br>wobei BR<sub>e</sub> = 1/(1 + PS<sub>μ</sub>/PS<sub>e</sub> + R<sub>had</sub>)<br>und R<sub>had</sub> = N<sub>c,eff</sub> · K<sub>QCD</sub><br><span style="font-size:11px;color:var(--text2)">Dok. 160: Faktor 144/125 = K<sub>had</sub> per Scan ausgewählt; [K] mit Auswahlvorbehalt, Herleitung offen [S] (R123)</span><br><span style="font-size:10px;color:var(--text2)">[K] numerisch bestätigt · [S] Setzung oder offen</span>',
-    massExp: 'Massenexponent',
+    formulaInfo: '<strong>Formel:</strong> τ<sub>μ</sub>/τ<sub>τ</sub> = (m<sub>τ</sub>/m<sub>μ</sub>)⁵ · PS / BR<sub>e</sub><br>wobei BR<sub>e</sub> = 1/(1 + PS<sub>μ</sub>/PS<sub>e</sub> + R<sub>had</sub>)<br>und R<sub>had</sub> = N<sub>c,eff</sub> · K<sub>QCD</sub><br><span style="font-size:11px;color:var(--text2)">Herleitung: Dok. 160 (T0 Lepton-Lebensdauer-Verhältnis)</span>',
     psE: 'Phasenraum e-Kanal',
     psMu: 'Phasenraum μ-Kanal',
     psMuon: 'Phasenraum Myon',
@@ -920,7 +918,7 @@ const i18n = {
   },
   en: {
     title: 'T0 Lepton Lifetime Explorer',
-    subtitle: 'Interactive calculation of the lifetime ratio τ<sub>μ</sub>/τ<sub>τ</sub> with a selectable hadronic factor (Doc. 160, R123)',
+    subtitle: 'Interactive calculation of lepton lifetimes from T0 torus geometry',
     t0params: 'T0 Parameters',
     corrFactor: 'Correction Factor K',
     colorBasis: 'Color Factor Basis',
@@ -950,8 +948,7 @@ const i18n = {
     brMu: 'Branching Ratio μ',
     brHad: 'Branching Ratio hadr.',
     experimental: 'Experimental',
-    formulaInfo: '<strong>Formula:</strong> τ<sub>μ</sub>/τ<sub>τ</sub> = (m<sub>τ</sub>/m<sub>μ</sub>)⁵ · PS / BR<sub>e</sub><br>where BR<sub>e</sub> = 1/(1 + PS<sub>μ</sub>/PS<sub>e</sub> + R<sub>had</sub>)<br>and R<sub>had</sub> = N<sub>c,eff</sub> · K<sub>QCD</sub><br><span style="font-size:11px;color:var(--text2)">Doc. 160: factor 144/125 = K<sub>had</sub> selected by scan; [K] with selection caveat, derivation open [S] (R123)</span><br><span style="font-size:10px;color:var(--text2)">[K] numerically confirmed · [S] choice or open</span>',
-    massExp: 'Mass exponent',
+    formulaInfo: '<strong>Formula:</strong> τ<sub>μ</sub>/τ<sub>τ</sub> = (m<sub>τ</sub>/m<sub>μ</sub>)⁵ · PS / BR<sub>e</sub><br>where BR<sub>e</sub> = 1/(1 + PS<sub>μ</sub>/PS<sub>e</sub> + R<sub>had</sub>)<br>and R<sub>had</sub> = N<sub>c,eff</sub> · K<sub>QCD</sub><br><span style="font-size:11px;color:var(--text2)">Derivation: Doc. 160 (T0 Lepton Lifetime Ratio)</span>',
     psE: 'Phase space e-channel',
     psMu: 'Phase space μ-channel',
     psMuon: 'Phase space muon',
@@ -970,7 +967,7 @@ function setLang(lang, btn) {
   
   const t = i18n[lang];
   document.getElementById('main-title').textContent = t.title;
-  document.getElementById('main-subtitle').innerHTML = t.subtitle;
+  document.getElementById('main-subtitle').textContent = t.subtitle;
   
   // Control group headers
   const headers = document.querySelectorAll('.control-group h3');

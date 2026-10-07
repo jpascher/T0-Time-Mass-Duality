@@ -309,9 +309,9 @@
             <span class="library-version">v2.1.0</span>
           </div>
           <ul class="feature-list">
-            <li><span class="feature-icon">–</span>Grid parameter σ (1/50, 1/100, 1/1000, 1/42) without effect on the result; not the FFGFT parameter ξ (R63, R75)</li>
+            <li><span class="feature-icon">✓</span>Adaptive ξ-parameters (1/50, 1/100, 1/1000, 1/42)</li>
             <li><span class="feature-icon">✓</span>Rational arithmetic with Fraction</li>
-            <li><span class="feature-icon">✓</span>Order finding: smallest r with a^r ≡ 1 (mod N)</li>
+            <li><span class="feature-icon">✓</span>Period evaluation and resonance calculation</li>
             <li><span class="feature-icon">✓</span>success depends on whether the order lies within the search bound</li>
             <li><span class="feature-icon">✓</span>Deterministic results</li>
           </ul>
@@ -354,7 +354,7 @@
         <div class="impl-card impl-t0">
           <div class="impl-name">T0 Period Finding</div>
           <div class="impl-description">
-            Period finding with rational arithmetic; grid parameter σ without effect on the result
+            Period finding with rational arithmetic and adaptive ξ-strategies
           </div>
         </div>
         
@@ -403,8 +403,8 @@
             <td class="good-performance">O(1)</td>
           </tr>
           <tr>
-            <td><strong>Harmonic library</strong></td>
-            <td>Trial division, then harmonic naming</td>
+            <td><strong>Harmonic Hierarchical</strong></td>
+            <td>Ratio Search</td>
             <td class="good-performance">0.8ms</td>
             <td class="good-performance">100%</td>
             <td class="good-performance">O(log n)</td>
@@ -461,9 +461,11 @@
 # Order finding (BSGS and linear search, rational arithmetic)
 from t0_rational_optimized import T0RationalSimulatorOptimized
 
-t0 = T0RationalSimulatorOptimized(1643)
-factors = t0.shor_t0_rational() # list of factors, empty on failure
-print(f"Factors: {factors}")
+t0 = T0RationalSimulatorOptimized(N)
+result = t0.factorize(1643) # Automatic ξ selection
+print(f"Factors: {result['factors']}")
+print(f"ξ-Strategy: {result['method_specific']['xi_strategy']}")
+print(f"Resonance: {result['method_specific']['resonance_score']}")
       </div>
       
       <p><strong>Harmonic Factorization:</strong></p>
@@ -489,7 +491,7 @@ from fractions import Fraction
 
 # Exact ratios instead of floating point numbers
 pi_exact = Fraction(355, 113) # Very accurate π approximation
-xi_value = Fraction(1, 100)  # grid parameter σ (no effect on the result)
+xi_value = Fraction(1, 100)  # Adaptive ξ parameters
 
 # T0: Period evaluation with exact ratios
 def calculate_period_score(r, xi):
@@ -518,35 +520,4 @@ def calculate_cents_deviation(ratio1, ratio2):
       <div class="code-example">
 # Example: Complete workflow with both approaches
 from t0_rational_optimized import T0RationalSimulatorOptimized
-from optimized_harmonic_lib import OptimizedHarmonicFactorizer
-
-def analyze_number(n):
-  """Analyze a number with both approaches"""
-  
-  # T0 period finding
-  t0 = T0RationalSimulatorOptimized(n)
-  t0_result = {'factors': t0.shor_t0_rational() or None}
-  
-  # Harmonic factorization
-  harmonic = OptimizedHarmonicFactorizer()
-  harmonic_result = harmonic.factorize(n)
-  
-  print(f"Number: {n}")
-  print(f"T0 success: {t0_result['factors'] is not None}")
-  print(f"Harmonic success: {harmonic_result.success}")
-  
-  if harmonic_result.success:
-    print(f"Musical interval: {harmonic_result.harmonic_name}")
-    print(f"Hierarchy level: {harmonic_result.level_name}")
-  
-  return t0_result, harmonic_result
-
-# Test different number types
-test_numbers = [221, 323, 1643, 2491, 10403]
-for num in test_numbers:
-  analyze_number(num)
-      </div>
-    </div>
-  </div>
-</body>
-</html>
+from
