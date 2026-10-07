@@ -71,16 +71,14 @@
 </div>
 
 <div class="hyp-box">
-  <strong>Hypothese (aus FFGFT/T0-Theorie):</strong><br>
-  Der Parameter ξ ≈ 1,333×10⁻⁴ beschreibt eine geometrische Resonanzstruktur.
-  Wenn diese Resonanz eine physikalische Bedeutung in der Zahlentheorie hat,
-  sollten Basen a die nach dem ξ-Resonanzkriterium ausgewählt werden,
-  <em>statistisch häufiger kleinere Perioden</em> erzeugen als zufällig gewählte Basen —
-  gemessen über viele zusammengesetzte Zahlen N.<br><br>
+  <strong>Nulltest:</strong><br>
+  Gepr&uuml;ft wird, ob nach einem &xi;-Resonanzkriterium ausgew&auml;hlte Basen a
+  <em>statistisch h&auml;ufiger kleinere Perioden</em> erzeugen als zuf&auml;llig gew&auml;hlte Basen.
+  Erwartet wird kein Effekt: &xi; = 4/30000 hat in &#8484;/N&#8484; keine Funktion, die Periode ist durch lcm(p&minus;1, q&minus;1) bestimmt (Dok.&nbsp;147; Dok.&nbsp;190, R63, R65).<br><br>
   <strong>Nullhypothese H₀:</strong> ξ-optimale Basen und zufällige Basen erzeugen
   Perioden gleicher Größenordnung (kein Vorteil durch ξ-Auswahl).<br>
   <strong>Alternativhypothese H₁:</strong> ξ-Basen erzeugen im Median kleinere Perioden
-  (Faktor &gt; 1,5 gegenüber Zufallsbasen über N=50 Versuche).
+  (Test A: Verhältnis &gt; 1,5 für ein N; Test B: Median-Verhältnis &gt; 1,3 und Gewinnrate &gt; 55&nbsp;% über die gewählte Anzahl N).
 </div>
 
 <!-- Test A: Einzelne N -->
@@ -224,7 +222,7 @@ function xiScore(a, N, xi) {
   const g = gcd(aN-1n, NN);
   const smoothness = g > 1n ? Number(g) / Number(NN) : 0;
   const periodicHint = Math.abs(Math.cos(2*Math.PI*a/Number(NN)));
-  const resonance = Math.exp(-((2*Math.PI/Math.max(a,1) - Math.PI)**2)/(4*xi));
+  const resonance = Math.exp(-((2*Math.PI/Math.max(a,1) - Math.PI)**2)/(4*xi)); // ACHTUNG: = 0 für alle a ≥ 3 (Unterlauf); Auswahl = kleinste Basen
   return resonance * (1 + smoothness) * (1 + periodicHint*0.3);
 }
 
@@ -354,15 +352,15 @@ async function runTestA() {
   html+='</table>';
 
   const verdict = !xiMed||!rndMed ? 'neutral' :
-                  ratio>1.5 ? 'confirm' : ratio<0.8 ? 'refute' : 'neutral';
+                  ratio>1.5 ? 'smallbase' : ratio<0.8 ? 'refute' : 'neutral';
   const verdictText = {
-    confirm: `✓ ξ-Basen fanden Perioden im Median ${ratio}× kleiner als Zufallsbasen. Hypothese gestützt.`,
+    smallbase: `ξ-Basen (= kleinste teilerfremde Basen) fanden Perioden im Median ${ratio}× kleiner als Zufallsbasen. Das ist ein Effekt der Basisgröße, kein &xi;-Effekt (die Auswahl hängt nicht von &xi; ab).`,
     neutral: `≈ Kein signifikanter Unterschied (Verhältnis=${ratio}). Hypothese weder bestätigt noch widerlegt.`,
     refute:  `✗ Zufallsbasen waren besser (Verhältnis=${ratio}). Hypothese für dieses N nicht gestützt.`
   }[verdict];
 
   document.getElementById('resultA').innerHTML =
-    `<div class="result-box result-${verdict}">${verdictText}</div>${html}`;
+    `<div class="result-box result-${verdict==='smallbase'?'neutral':verdict}">${verdictText}</div>${html}`;
   document.getElementById('tablePanel').style.display='block';
   document.getElementById('detailTable').innerHTML=html;
   btn.disabled=false;
@@ -406,7 +404,7 @@ async function runTestB() {
     const N = randComposite();
     if(!N){ ties++; continue; }
 
-    const xiBases  = pickXiBases(N, 3, xi);
+    const xiBases  = pickXiBases(N, nBases, xi);
     const rndBases = pickRandomBases(N, nBases);
 
     const xiPeriods  = xiBases.map(a=>findPeriod(a,N,maxR)).filter(r=>r!==null);
@@ -449,18 +447,18 @@ async function runTestB() {
 
   let verdict, vtext;
   if(med===null){ verdict='neutral'; vtext='Zu wenig Daten für Aussage.'; }
-  else if(med>1.3&&winRate>0.55){ verdict='confirm';
-    vtext=`✓ HYPOTHESE GESTÜTZT: ξ-Basen fanden im Median ${med.toFixed(2)}× kleinere Perioden
+  else if(med>1.3&&winRate>0.55){ verdict='neutral';
+    vtext=`Kleine Basen fanden im Median ${med.toFixed(2)}× kleinere Perioden
     (Gewinnrate ${(winRate*100).toFixed(0)}% über ${total} Fälle).
-    Das deutet auf einen statistisch messbaren ξ-Effekt hin.`; }
+    Das ist ein Effekt der Basisgröße, kein &xi;-Effekt (die Auswahl hängt nicht von &xi; ab).`; }
   else if(med<0.9&&winRate<0.4){ verdict='refute';
     vtext=`✗ HYPOTHESE NICHT GESTÜTZT: Zufallsbasen waren im Median besser
     (Verhältnis=${med.toFixed(2)}, ξ-Gewinnrate=${(winRate*100).toFixed(0)}%).`; }
   else { verdict='neutral';
     vtext=`≈ KEIN KLARER EFFEKT: Median-Verhältnis=${med.toFixed(3)},
     ξ-Gewinnrate=${(winRate*100).toFixed(0)}%.
-    Der Unterschied liegt innerhalb statistischer Schwankung.
-    Mehr Stichproben oder größere N-Bereiche nötig für klareres Bild.`; }
+    Der Unterschied liegt innerhalb statistischer Schwankung,
+    wie vom Nulltest erwartet.`; }
 
   document.getElementById('resultB').innerHTML=
     `<div class="result-box result-${verdict}">${vtext}</div>`;

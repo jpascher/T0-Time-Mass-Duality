@@ -80,7 +80,7 @@
   Die kleinstmögliche Periode r = ord_a(N) teilt λ(N).<br>
   Definiere: <strong>ξ_num(N) = λ(N) / N</strong> — dimensionslos, repräsentationsunabhängig.<br>
   Für harte Primzahlen (RSA): ξ_num ≈ 1/2 (große Periode, schwer).<br>
-  Für glatte Primzahlen: ξ_num ≪ 1 (kleine Periode, leicht).<br><br>
+  Für glatte Primzahlen (p−1 hat nur kleine Teiler) ist N über Pollard p−1 leicht zu faktorisieren; ξ_num ≈ 1/ggT(p−1, q−1) wird dabei nur kleiner, weil p−1 und q−1 mehr gemeinsame Teiler haben – die Periode selbst ist nicht klein.<br><br>
   <strong>Hypothese:</strong> Die Verteilung von ξ_num über zufällige semiprime N
   zeigt eine Resonanzstruktur — diskrete Häufungspunkte statt Gleichverteilung —
   analog zur ξ-Stufenhierarchie der FFGFT.
@@ -108,12 +108,12 @@
   <div class="row">
     <label>Anzahl semiprime N</label>
     <input type="number" id="tB_count" value="200" min="20" max="2000">
-    <label>Bitgröße der Primfaktoren</label>
+    <label>Bitgröße von N</label>
     <select id="tB_bits">
-      <option value="8">8 Bit (p,q < 256)</option>
-      <option value="12" selected>12 Bit (p,q < 4096)</option>
-      <option value="16">16 Bit (p,q < 65536)</option>
-      <option value="20">20 Bit (p,q < 1M)</option>
+      <option value="8">8 Bit (N; p,q < 16)</option>
+      <option value="12" selected>12 Bit (N; p,q < 64)</option>
+      <option value="16">16 Bit (N; p,q < 256)</option>
+      <option value="20">20 Bit (N; p,q < 1024)</option>
     </select>
   </div>
   <div class="row">
@@ -367,7 +367,7 @@ function runSingle(){
     const rRatio = minR/Number(lam);
     logLine('logA',`  r_min / λ(N) = ${rRatio.toExponential(3)}`);
     const xi_phys = 4/30000;
-    logLine('logA',`<br>  ξ_phys = ${xi_phys.toExponential(4)}  (physikalisch, 3D-Torus)`);
+    logLine('logA',`<br>  ξ_phys = ${xi_phys.toExponential(4)}  (physikalisch, Geometrieparameter der FFGFT)`);
     logLine('logA',`  ξ_num  = ${xi.toExponential(4)}  (algebraisch, Zahlenraum)`);
     logLine('logA',`  Verhältnis ξ_num/ξ_phys = ${(xi/xi_phys).toFixed(3)}`);
   }
@@ -447,9 +447,9 @@ async function runDistribution(){
   if(clusters.length>=3&&clusters.some(c=>c.count/xiValues.length>0.15)){
     verdict='confirm';
     vtext=`✓ Diskrete Häufungspunkte in der ξ_num-Verteilung gefunden (${clusters.length} Cluster).
-    Die Verteilung ist nicht gleichmäßig — sie zeigt eine Resonanzstruktur analog zu
-    diskreten Stufen. Dies unterstützt die Hypothese einer hierarchischen Struktur
-    im Zahlenraum. ${nearPhys.length>0?'Ein Cluster liegt in der Nähe von ξ_phys.':''}`;
+    Die Verteilung ist nicht gleichmäßig; die Häufungen entsprechen den diskreten Werten
+    von ggT(p−1, q−1) (ξ_num ≈ 1/2, 1/4, 1/6 …). Das ist eine elementare arithmetische
+    Eigenschaft und kein Beleg für eine ξ-Stufenstruktur. ${nearPhys.length>0?'Ein Cluster liegt in der Nähe von ξ_phys.':''}`;
   } else if(clusters.length===0){
     verdict='refute';
     vtext='✗ Keine Clusterstruktur erkannt — ξ_num ist gleichmäßig verteilt. Keine Resonanzstruktur nachweisbar.';
@@ -543,8 +543,8 @@ async function runComparison(){
   } else if(matches.length>=2){
     verdict='confirm';
     vtext=`✓ ${matches.length} ξ_num-Cluster liegen nahe an FFGFT-Stufenwerten.
-    Zahlenraum und physikalischer Raum teilen möglicherweise analoge Resonanzstrukturen —
-    nicht identisch (verschiedene Geometrien), aber strukturell ähnlich.`;
+    Die Häufungen selbst sind durch die diskreten Werte von ggT(p−1, q−1) erklärt;
+    die Nähe zu Stufenwerten ist für sich kein Beleg für eine gemeinsame Struktur.`;
   } else if(matches.length===1){
     verdict='neutral';
     vtext=`≈ 1 Cluster nahe einer FFGFT-Stufe — Zufall nicht ausgeschlossen. Mehr Stichproben nötig.`;

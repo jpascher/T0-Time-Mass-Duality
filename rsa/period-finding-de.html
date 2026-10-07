@@ -313,7 +313,7 @@
     </div>
     
     <div class="content-section">
-      <h2>🧠 Kernprinzipien der T0-Methode</h2>
+      <h2>🧠 Grundgedanken der Implementierung (Ordnungssuche wie bei Shor)</h2>
       
       <div class="approach-grid">
         <div class="approach-card">
@@ -321,7 +321,7 @@
           <div class="approach-title">Alles ist ein Verhältnis</div>
           <div class="approach-text">
             Zahlen sind nicht absolut, sondern relativ zueinander. 
-            ξ-Parameter als 1/50 oder 1/100 statt 1e-5, π als 355/113.
+            σ-Parameter als 1/50 oder 1/100 statt 1e-5, π als 355/113.
           </div>
         </div>
         
@@ -346,32 +346,32 @@
     </div>
     
     <div class="content-section">
-      <h2>⚙️ Adaptive ξ-Strategien</h2>
-      <p>T0 verwendet verschiedene ξ-Werte für verschiedene Zahlentypen:</p>
+      <h2>⚙️ Rasterparameter σ</h2>
+      <p>Die Implementierung kennt mehrere σ-Werte. Sie haben keinen Einfluss auf das Ergebnis (R63) und sind nicht der FFGFT-Parameter ξ = 4/30000 (R75):</p>
       
       <div class="xi-strategies">
         <div class="xi-card xi-twin">
           <div class="xi-value">1/50</div>
           <div>Twin Prime</div>
-          <div class="xi-label">Optimiert für Primzwillinge</div>
+          <div class="xi-label">ursprünglich für Primzwillinge gedacht; ohne Einfluss</div>
         </div>
         
         <div class="xi-card xi-universal">
           <div class="xi-value">1/100</div>
           <div>Universal</div>
-          <div class="xi-label">Funktioniert für alle Semiprimes</div>
+          <div class="xi-label">Standardwert; ohne Einfluss</div>
         </div>
         
         <div class="xi-card xi-medium">
           <div class="xi-value">1/1000</div>
           <div>Medium Size</div>
-          <div class="xi-label">Für größere Zahlen</div>
+          <div class="xi-label">für größere Zahlen gedacht; ohne Einfluss</div>
         </div>
         
         <div class="xi-card xi-special">
           <div class="xi-value">1/42</div>
           <div>Special Cases</div>
-          <div class="xi-label">Spezielle mathematische Konstanten</div>
+          <div class="xi-label">für Spezialfälle gedacht; ohne Einfluss</div>
         </div>
       </div>
     </div>
@@ -435,8 +435,8 @@
       <h2>🧮 Mathematische Formulierung</h2>
       
       <div class="formula-section">
-        <div class="formula-title">Original T0-Formel:</div>
-        <div class="formula-content">R(r) = exp(-((ω-π)²)/(4|ξ|))</div>
+        <div class="formula-title">Bewertungsformel (ohne Einfluss auf das Ergebnis, R63):</div>
+        <div class="formula-content">R(r) = exp(-((ω-π)²)/(4|σ|))</div>
         
         <div class="formula-title">Rationale T0-Implementierung:</div>
         <div class="formula-content">
@@ -465,13 +465,13 @@ def _calculate_period_evaluation_rational(self, r, N):
     </div>
     
     <div class="insight-box">
-      <h3>🎵 Musikalische Konsonanz = Mathematische Harmonie</h3>
-      <p>T0 erkennt dieselben Verhältnisse, die auch musikalisch "gut klingen":</p>
+      <h3>🎵 Musikalische Konsonanz und Faktorverhältnisse</h3>
+      <p>Das Verhältnis p/q lässt sich musikalisch benennen; für die Ordnungssuche spielt es keine Rolle:</p>
       <ul style="margin-top: 15px; padding-left: 20px;">
-        <li><strong>Reine Quinte (3:2)</strong> → p/q ≈ 1.5 → Gute T0-Performance</li>
-        <li><strong>Große Terz (5:4)</strong> → p/q ≈ 1.25 → Gute T0-Performance</li>
-        <li><strong>Goldenes Verhältnis (φ:1)</strong> → p/q ≈ 1.618 → Natürliche Harmonie</li>
-        <li><strong>Tritonus (√2:1)</strong> → p/q ≈ 1.414 → Schlechte T0-Performance (dissonant)</li>
+        <li><strong>Reine Quinte (3:2)</strong> → p/q ≈ 1.5 → kein Einfluss auf die Ordnungssuche</li>
+        <li><strong>Große Terz (5:4)</strong> → p/q ≈ 1.25 → kein Einfluss auf die Ordnungssuche</li>
+        <li><strong>Goldenes Verhältnis (φ:1)</strong> → p/q ≈ 1.618 → kein Einfluss auf die Ordnungssuche</li>
+        <li><strong>Tritonus (√2:1)</strong> → p/q ≈ 1.414 → kein Einfluss auf die Ordnungssuche</li>
       </ul>
     </div>
     
@@ -486,7 +486,7 @@ def _calculate_period_evaluation_rational(self, r, N):
 # Klassisch - FEHLERANFÄLLIG:
 bewertung1 = exp(-((2*3.14159/r - 3.14159)**2)/(4*0.00001))
 bewertung2 = exp(-((2*3.14160/r - 3.14160)**2)/(4*0.00001))
-# bewertung1 ≠ bewertung2 obwohl mathematisch gleich!
+# bewertung1 ≠ bewertung2, weil die Eingaben verschieden sind (3.14159 ≠ 3.14160)
 
 # T0 - EXAKT:
 bewertung1 = berechne_mit_verhaeltnissen(Fraction(355,113))
@@ -510,7 +510,7 @@ bewertung2 = berechne_mit_verhaeltnissen(Fraction(355,113))
         </div>
       </div>
       
-      <p>T0 funktioniert, weil es dasselbe fundamentale Ordnungsprinzip der Natur implementiert, 
+      <p>Die Ordnungssuche funktioniert aus elementarer Zahlentheorie (Satz von Euler, ggT-Extraktion wie bei Shor); sie ist kein FFGFT-eigenes Verfahren (R65) und beruft sich nicht auf ein Naturprinzip, 
       das auch Atomstrukturen, Molekülschwingungen, Kristallgitter und harmonische Oszillatoren regiert.</p>
     </div>
   </div>

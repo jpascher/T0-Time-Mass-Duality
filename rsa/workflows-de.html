@@ -262,7 +262,7 @@
       
       <div class="algorithm-overview">
         <h3>Überblick</h3>
-        <p>Der T0-Algorithmus führt Periodenfindung durch, um Faktoren von zusammengesetzten Zahlen zu ermitteln. Die Implementierung nutzt adaptive ξ-Strategien für verschiedene Zahlentypen und arbeitet mit rationaler Arithmetik.</p>
+        <p>Die Ordnungssuche (Periodenfindung wie bei Shor) ermittelt Faktoren zusammengesetzter Zahlen. Die Implementierung kennt einen Rasterparameter σ, der keinen Einfluss auf das Ergebnis hat und nicht der FFGFT-Parameter ξ ist (R63, R75).</p>
       </div>
       
       <div class="workflow-section">
@@ -272,9 +272,9 @@
           <li class="step-item">
             <div class="step-number">1</div>
             <div class="step-content">
-              <div class="step-title">Eingabevalidierung und ξ-Strategieauswahl</div>
+              <div class="step-title">Eingabevalidierung und σ-Strategieauswahl</div>
               <div class="step-description">
-                Die Zahl wird kategorisiert (twin_prime, cousin_prime, etc.) und die entsprechende ξ-Strategie gewählt.
+                Die Zahl wird kategorisiert (twin_prime, cousin_prime, etc.) und die entsprechende σ-Strategie gewählt (ohne Einfluss auf das Ergebnis, R63).
               </div>
               <div class="step-code">
 xi_strategy = self._select_optimized_xi_strategy(n)
@@ -302,7 +302,7 @@ for basis in [2, 3, 5, 7]:
             <div class="step-content">
               <div class="step-title">Periodensuche mit Resonanzbewertung</div>
               <div class="step-description">
-                Für jede Basis wird systematisch nach Perioden gesucht und diese mittels der gewählten ξ-Strategie bewertet.
+                Für jede Basis wird systematisch nach Perioden gesucht und diese mittels der gewählten σ-Strategie bewertet; die Bewertung ändert das Ergebnis nicht (R63).
               </div>
               <div class="step-code">
 for r in range(2, max_periods):
@@ -331,25 +331,25 @@ if 1 < f1 < n: return [f1, n // f1]</div>
       </div>
       
       <div class="data-flow-section">
-        <h3>ξ-Strategieauswahl im Detail</h3>
+        <h3>σ-Strategieauswahl im Detail</h3>
         
         <div class="decision-tree">
           <h4>Entscheidungslogik</h4>
           <div class="condition">
-            <span class="condition-if">WENN</span> |p - q| = 2 
-            <div class="condition-then">→ twin_prime_optimized (ξ = 1/50)</div>
+            <span class="condition-if">WENN</span> |p - q| = 2 (setzt die gesuchten Faktoren voraus; ohne Einfluss, R63) 
+            <div class="condition-then">→ twin_prime_optimized (σ = 1/50)</div>
           </div>
           <div class="condition">
             <span class="condition-if">WENN</span> |p - q| ≤ 6 
-            <div class="condition-then">→ cousin_prime (ξ = 1/100)</div>
+            <div class="condition-then">→ cousin_prime (σ = 1/100)</div>
           </div>
           <div class="condition">
             <span class="condition-if">WENN</span> n > 1000 
-            <div class="condition-then">→ medium_size (ξ = 1/1000)</div>
+            <div class="condition-then">→ medium_size (σ = 1/1000)</div>
           </div>
           <div class="condition">
             <span class="condition-if">SONST</span>
-            <div class="condition-then">→ universal (ξ = 1/100)</div>
+            <div class="condition-then">→ universal (σ = 1/100)</div>
           </div>
         </div>
       </div>
@@ -479,9 +479,9 @@ for level_idx in search_order:
         </div>
         
         <div class="component-card">
-          <div class="component-title">Intelligente Suchreihenfolge</div>
+          <div class="component-title">Suchreihenfolge</div>
           <div class="component-description">
-            Beide Ansätze verwenden vorhersagebasierte Suchoptimierung: T0 für ξ-Strategien, Harmonic für Level-Reihenfolge.
+            Beide Ansätze verwenden vorhersagebasierte Suchoptimierung: T0 für σ-Strategien (ohne Einfluss auf das Ergebnis), Harmonic für Level-Reihenfolge.
           </div>
         </div>
         
@@ -499,14 +499,14 @@ for level_idx in search_order:
       
       <div class="data-flow-section">
         <h3>T0 Periodenfindung vs. Harmonische Verhältnissuche</h3>
-        <p><strong>T0 Periodenfindung:</strong> Sucht nach mathematischen Perioden in modularer Arithmetik und bewertet diese mit ξ-Parametern.</p>
+        <p><strong>T0 Periodenfindung:</strong> Sucht nach mathematischen Perioden in modularer Arithmetik und bewertet diese mit dem Parameter σ (ohne Einfluss auf das Ergebnis).</p>
         <p><strong>Harmonische Faktorisierung:</strong> Analysiert direkt die Verhältnisse zwischen Faktoren und ordnet sie musikalischen Intervallen zu.</p>
         
         <div class="decision-tree">
           <h4>Wann welchen Ansatz verwenden?</h4>
           <div class="condition">
             <span class="condition-if">Für Semiprimes mit bekannten Eigenschaften:</span>
-            <div class="condition-then">→ T0 Periodenfindung (höhere Präzision)</div>
+            <div class="condition-then">→ Ordnungssuche (Periodenfindung wie bei Shor)</div>
           </div>
           <div class="condition">
             <span class="condition-if">Für unbekannte Zahlenverhältnisse:</span>

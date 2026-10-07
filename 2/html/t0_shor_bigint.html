@@ -58,7 +58,7 @@
 
 <h1>🔬 T0-Shor Simulator</h1>
 <div class="subtitle">
-  BigInt-korrigierte Arithmetik · ehrliche Periodizitätsmessung · Vergleich T0 vs. klassisch
+  BigInt-Arithmetik · Ordnungssuche nach Shor · Vergleich mit Probedivision
 </div>
 
 <div class="warn-box">
@@ -66,8 +66,8 @@
   <code>Number</code> (IEEE 754, 53 Bit Mantisse). Für N &gt; ~10⁷ liefert
   <code>(base * base) % mod</code> falsche Ergebnisse durch Fließkomma-Rundung.
   Schein-Perioden werden gefunden, echte Perioden übersehen.
-  <br><strong>Fix:</strong> Alle modularen Operationen laufen jetzt mit <code>BigInt</code> —
-  exakt für beliebige N.
+  <br><strong>Fix:</strong> Die modularen Operationen laufen mit <code>BigInt</code>;
+  exakt ist die Seite derzeit nur f&uuml;r N &lt; 2<sup>53</sup>, weil N an einigen Stellen noch in <code>Number</code> umgewandelt wird.
 </div>
 
 <div class="panel">
@@ -82,12 +82,12 @@
       <option value="143">143 = 11×13</option>
       <option value="10403">10403 = 101×103</option>
       <option value="1299709">1299709 (Primzahl!)</option>
-      <option value="1299721">1299721 = 1049×1239 ... nein: Primzahltest</option>
-      <option value="15480049">15480049 = 3937×3937</option>
+      <option value="1299721">1299721 (Primzahl)</option>
+      <option value="15480049">15480049 = 13×1190773</option>
       <option value="999999937">999999937 (Primzahl)</option>
       <option value="4294967291">4294967291 (Primzahl)</option>
       <option value="9999999999971">9999999999971 (Primzahl)</option>
-      <option value="100000007000000049">100000007×1000000007</option>
+      <option value="100000007700000049">100000007×1000000007 (&gt; 2^53, siehe Hinweis)</option>
     </select>
   </div>
   <div class="row">
@@ -97,13 +97,13 @@
     <input type="number" id="inputMaxR" value="100000" min="100" max="10000000">
   </div>
   <div class="row">
-    <label>ξ-Parameter</label>
+    <label>&sigma;-Parameter (nur Anzeige, ohne Wirkung)</label>
     <select id="xiMode">
-      <option value="canonical">Kanonisch: 4/30000 ≈ 1.333×10⁻⁴ (Diagnose)</option>
-      <option value="auto">Adaptiv, N-abhängig (Diagnose)</option>
+      <option value="canonical">&sigma; = 1.333×10⁻⁴ (Diagnose)</option>
+      <option value="auto">&sigma; adaptiv, N-abhängig (Diagnose)</option>
       <option value="custom">Benutzerdefiniert</option>
     </select>
-    <input type="text" id="xiCustom" value="1.333e-4" placeholder="ξ Wert"
+    <input type="text" id="xiCustom" value="1.333e-4" placeholder="σ-Wert"
            style="display:none; max-width:160px;">
   </div>
   <div class="btns">
@@ -117,7 +117,7 @@
   <div class="stat"><div class="stat-val" id="sTotal">—</div>
     <div class="stat-lbl">Gesamt Tests</div></div>
   <div class="stat"><div class="stat-val" id="sT0">—</div>
-    <div class="stat-lbl">T0-Erfolge</div></div>
+    <div class="stat-lbl">Ordnungssuche-Erfolge</div></div>
   <div class="stat"><div class="stat-val" id="sClassic">—</div>
     <div class="stat-lbl">Klass. Fallback</div></div>
   <div class="stat"><div class="stat-val" id="sAvgR">—</div>
@@ -142,13 +142,13 @@
   der Shor-Extraktion über ggT(a^{r/2} ± 1, N). Verglichen wird mit Trial
   Division bis √N. Alle Modular-Arithmetik exakt via BigInt.
   <br><br>
-  <strong>Zur ξ-Resonanz:</strong> Die Formel ω = 2π/r,
-  Resonanz = exp(−(ω−π)²/(4|ξ|)) wird weiterhin ausgewertet, geht aber in die
+  <strong>Zur σ-Resonanz:</strong> Die Formel ω = 2π/r,
+  Resonanz = exp(−(ω−π)²/(4|σ|)) wird weiterhin ausgewertet, geht aber in die
   Auswahl nicht ein — sie kann es nicht. Für r ≥ 2 ist |ω−π| = π(1−2/r) streng
   monoton wachsend in r, die Resonanz also streng monoton fallend; eine monotone
-  Funktion verschiebt kein Maximum, unabhängig vom Wert von ξ. Für jedes hier
-  anwählbare ξ unterläuft der Ausdruck zusätzlich auf exakt 0,0 für alle r ≠ 2.
-  Die Anzeige „ξ-Resonanz ungleich 0 bei n von m Kandidaten“ macht das sichtbar.
+  Funktion verschiebt kein Maximum, unabhängig vom Wert von σ. Für jedes hier
+  anwählbare σ unterläuft der Ausdruck zusätzlich auf exakt 0,0 für alle r ≠ 2.
+  Die Anzeige „σ-Resonanz ungleich 0 bei n von m Kandidaten“ macht das sichtbar.
 </div>
 
 </div>
@@ -208,7 +208,7 @@ function isPrime(n) {
   return true;
 }
 
-// ─── ξ-Wert ─────────────────────────────────────────────────────────────
+// ─── σ-Wert (Suchparameter, ohne Wirkung) ─────────────────────────────────────────────────────────────
 
 function getXi() {
   const mode = document.getElementById('xiMode').value;
@@ -223,7 +223,7 @@ function getXi() {
   return 1e-7;
 }
 
-// ─── T0-Periodensuche (BigInt-exakt) ────────────────────────────────────
+// ─── Ordnungssuche (BigInt-exakt) ────────────────────────────────────
 
 function findOrder(a, N, maxR, xi) {
   // Multiplikative Ordnung: kleinstes r mit a^r = 1 mod N.
@@ -300,6 +300,13 @@ function factorize(N_str, a_input, maxR, xi) {
   // 1. Primzahltest
   if (isPrime(N)) {
     result.method = 'prime'; result.note = 'Primzahl — keine Faktorisierung möglich';
+    result.time = performance.now() - t0;
+    return result;
+  }
+
+  // N > 2^53: Teile der Routinen rechnen mit Number; Ergebnisse wären nicht exakt
+  if (N > 9007199254740991n) {
+    result.method = 'too_large'; result.note = 'N > 2^53: diese Fassung rechnet nur bis 2^53 exakt';
     result.time = performance.now() - t0;
     return result;
   }
@@ -396,7 +403,7 @@ function formatResult(r) {
   let extra = '';
   if (r.method === 'order_finding')
     extra = ` | Basis=${r.base}, Ordnung r=${r.period}` +
-            ` | ξ-Resonanz ungleich 0 bei ${r.resNonzero} von ${r.resTotal} Kandidaten`;
+            ` | σ-Resonanz ungleich 0 bei ${r.resNonzero} von ${r.resTotal} Kandidaten`;
   if (r.method === 'classic_fallback') extra = ' <span class="warn">[klassischer Fallback]</span>';
   if (r.method === 'gcd_shortcut')     extra = ' [GCD-Abkürzung]';
   const cls = r.method === 'order_finding' ? 'ok' :
@@ -412,14 +419,14 @@ function runSingle() {
 
   if (!N_str) { log('<span class="err">Kein N eingegeben.</span>'); return; }
 
-  log(`<span class="dim">─── Faktorisiere N=${N_str}, ξ=${xi.toExponential(3)}, maxR=${maxR} ───</span>`);
+  log(`<span class="dim">─── Faktorisiere N=${N_str}, σ=${xi.toExponential(3)}, maxR=${maxR} ───</span>`);
 
   try {
     const r = factorize(N_str, a_str || null, maxR, xi);
     log(formatResult(r));
 
     stats.total++; stats.sumTime += r.time || 0;
-    if (r.method === 't0_period')       { stats.t0++;      stats.sumR += r.period; stats.trials++; }
+    if (r.method === 'order_finding')   { stats.t0++;      stats.sumR += r.period; stats.trials++; }
     if (r.method === 'classic_fallback') stats.classic++;
     updateStats();
   } catch(e) {
@@ -433,13 +440,13 @@ const BENCH_CASES = [
   {N:'15',        label:'15 = 3×5'},
   {N:'143',       label:'143 = 11×13'},
   {N:'10403',     label:'10403 = 101×103'},
-  {N:'1073741827',label:'1073741827 = 32771×32771+... (zusammengesetzt)'},
+  {N:'1073741827',label:'1073741827 (Primzahl)'},
   {N:'2147483647',label:'2147483647 (Mersenne-Primzahl!)'},
   {N:'4294967291',label:'4294967291 (Primzahl)'},
-  {N:'15480049',  label:'15480049 = 3937²'},
-  {N:'100000007000000049', label:'10^8+7 × 10^9+7 (zwei Primzahlen)'},
+  {N:'15480049',  label:'15480049 = 13×1190773'},
+  {N:'100000007700000049', label:'10^8+7 × 10^9+7 (zwei Primzahlen, > 2^53)'},
   {N:'999999999999999877', label:'~10^18 (Primzahltest)'},
-  {N:'9007199254740881',   label:'9007199254740881 = 94906249×94906249+...'},
+  {N:'9007199254740881',   label:'9007199254740881 (Primzahl, knapp unter 2^53)'},
 ];
 
 async function runBenchmark() {
@@ -447,7 +454,7 @@ async function runBenchmark() {
   const xi   = getXi();
   const rows = [];
 
-  log(`<span class="dim">─── Benchmark: ${BENCH_CASES.length} Fälle, ξ=${xi.toExponential(3)}, maxR=${maxR} ───</span>`);
+  log(`<span class="dim">─── Benchmark: ${BENCH_CASES.length} Fälle, σ=${xi.toExponential(3)}, maxR=${maxR} ───</span>`);
   document.getElementById('benchTable').innerHTML = '<span style="color:#888">Läuft...</span>';
 
   // Async um UI nicht zu blockieren
@@ -458,7 +465,7 @@ async function runBenchmark() {
       log(formatResult(res));
 
       stats.total++; stats.sumTime += res.time || 0;
-      if (res.method === 't0_period')       { stats.t0++;      stats.sumR += res.period; stats.trials++; }
+      if (res.method === 'order_finding')   { stats.t0++;      stats.sumR += res.period; stats.trials++; }
       if (res.method === 'classic_fallback') stats.classic++;
       updateStats();
 
@@ -483,7 +490,7 @@ async function runBenchmark() {
     <tr><th>N</th><th>Beschreibung</th><th>Methode</th><th>Faktoren</th>
         <th>Periode r</th><th>Zeit</th></tr>`;
   for (const row of rows) {
-    const color = row.ok ? (row.method==='t0_period' ? '#2ecc71' :
+    const color = row.ok ? (row.method==='order_finding' ? '#2ecc71' :
                             row.method==='classic_fallback' ? '#f39c12' :
                             '#5dade2') : '#e74c3c';
     html += `<tr>
@@ -499,10 +506,10 @@ async function runBenchmark() {
   document.getElementById('benchTable').innerHTML = html;
 
   // Fazit
-  const t0count = rows.filter(r=>r.method==='t0_period').length;
+  const t0count = rows.filter(r=>r.method==='order_finding').length;
   const cfcount = rows.filter(r=>r.method==='classic_fallback').length;
   const pcount  = rows.filter(r=>r.method==='prime').length;
-  log(`<span class="inf">─── Fazit: T0-Periodensuche=${t0count}, Klassisch=${cfcount}, Primzahlen=${pcount} ───</span>`);
+  log(`<span class="inf">─── Fazit: Ordnungssuche=${t0count}, Probedivision=${cfcount}, Primzahlen=${pcount} ───</span>`);
 }
 
 // ─── Hilfsfunktionen ─────────────────────────────────────────────────────

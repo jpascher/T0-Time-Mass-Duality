@@ -289,7 +289,7 @@
 </head>
 <body>
   <div class="language-switch">
-    <a href="libraries-benchmarks-en.html" class="lang-link">🇬🇧 English</a>
+    <a href="libraries_benchmarks_en.html" class="lang-link">🇬🇧 English</a>
   </div>
 
   <div class="container">
@@ -309,7 +309,7 @@
             <span class="library-version">v2.1.0</span>
           </div>
           <ul class="feature-list">
-            <li><span class="feature-icon">✓</span>Adaptive ξ-Parameter (1/50, 1/100, 1/1000, 1/42)</li>
+            <li><span class="feature-icon">–</span>Rasterparameter σ (1/50, 1/100, 1/1000, 1/42) ohne Einfluss auf das Ergebnis; nicht der FFGFT-Parameter ξ (R63, R75)</li>
             <li><span class="feature-icon">✓</span>Rationale Arithmetik mit Fraction</li>
             <li><span class="feature-icon">✓</span>Ordnungssuche: kleinstes r mit a^r ≡ 1 (mod N)</li>
             <li><span class="feature-icon">✓</span>Erfolg abhängig davon, ob die Ordnung innerhalb der Suchgrenze liegt</li>
@@ -354,7 +354,7 @@
         <div class="impl-card impl-t0">
           <div class="impl-name">T0 Period Finding</div>
           <div class="impl-description">
-            Periodenfindung mit rationaler Arithmetik und adaptiven ξ-Strategien
+            Periodenfindung mit rationaler Arithmetik; Rasterparameter σ ohne Einfluss auf das Ergebnis
           </div>
         </div>
         
@@ -461,11 +461,9 @@
 # Ordnungssuche (BSGS und lineare Suche, rationale Arithmetik)
 from t0_rational_optimized import T0RationalSimulatorOptimized
 
-t0 = T0RationalSimulatorOptimized(N)
-result = t0.factorize(1643) # Automatische ξ-Auswahl
-print(f"Faktoren: {result['factors']}")
-print(f"ξ-Strategie: {result['method_specific']['xi_strategy']}")
-print(f"Resonanz: {result['method_specific']['resonance_score']}")
+t0 = T0RationalSimulatorOptimized(1643)
+faktoren = t0.shor_t0_rational() # Liste der Faktoren, leer bei Misserfolg
+print(f"Faktoren: {faktoren}")
       </div>
       
       <p><strong>Harmonic Factorization:</strong></p>
@@ -491,7 +489,7 @@ from fractions import Fraction
 
 # Exakte Verhältnisse statt Fließkommazahlen
 pi_exact = Fraction(355, 113) # Sehr genaue π-Approximation
-xi_value = Fraction(1, 100)  # Adaptive ξ-Parameter
+xi_value = Fraction(1, 100)  # Rasterparameter σ (ohne Einfluss auf das Ergebnis)
 
 # T0: Periodenbewertung mit exakten Verhältnissen
 def calculate_period_score(r, xi):
@@ -526,8 +524,8 @@ def analyze_number(n):
   """Analysiere Zahl mit beiden Ansätzen"""
   
   # T0 Periodenfindung
-  t0 = T0RationalSimulatorOptimized(N)
-  t0_result = t0.factorize(n)
+  t0 = T0RationalSimulatorOptimized(n)
+  t0_result = {'factors': t0.shor_t0_rational() or None}
   
   # Harmonische Faktorisierung
   harmonic = OptimizedHarmonicFactorizer()
