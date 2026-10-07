@@ -56,11 +56,11 @@
 | 044 | Feinstrukturkonstante: Einheitenkonventionen | [PDF](2/pdf/044_Feinstrukturkonstante_De.pdf) |
 | 046 | Abstract | [PDF](2/pdf/046_Teilchenmassen_De.pdf) |
 | 047 | T0-Modell: Einheitliche Neutrino-Formel-Struktur | [PDF](2/pdf/047_neutrino-Formel_De.pdf) |
-| 049 | Einfache Lagrange-Revolution | [PDF](2/pdf/049_LagrandianVergleich_De.pdf) |
+| 049 | Einfacher Lagrangian: Von Standardmodell-Komplexität zu einem einfachen T0-Lagrangian | [PDF](2/pdf/049_LagrandianVergleich_De.pdf) |
 | 050 | Dirac-Gleichung in der T0-Theorie | [PDF](2/pdf/050_diracVereinfacht_De.pdf) |
 | 051 | Dirac-Gleichung in der T0-Theorie | [PDF](2/pdf/051_dirac_De.pdf) |
 | 052 | Elimination der Masse als dimensionaler Platzhalter | [PDF](2/pdf/052_EliminationOfMass_De.pdf) |
-| 053 | Reine Energie T0-Theorie: Die Verhältnis-basierte Revolution | [PDF](2/pdf/053_Elimination_Of_Mass_Dirac_Lag_De.pdf) |
+| 053 | Reine Energie T0-Theorie: Die verhältnisbasierte Formulierung | [PDF](2/pdf/053_Elimination_Of_Mass_Dirac_Lag_De.pdf) |
 | 054 | T0-Modell-Verifikation: Verhältnisbasierte vs. parameterbasierte Physik | [PDF](2/pdf/054_Elimination_Of_Mass_Dirac_Tabelle_De.pdf) |
 | 055 | Dynamische Masse von Photonen und ihre Implikationen für Nichtlokalität | [PDF](2/pdf/055_DynMassePhotonenNichtlokal_De.pdf) |
 | 056 | Universelle Ableitung aller physikalischen Konstanten aus der Feinstrukturkonstante und Planck-Länge | [PDF](2/pdf/056_universale-ableitung_De.pdf) |

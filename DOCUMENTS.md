@@ -59,7 +59,7 @@
 | 050 | Dirac Equation in T0 Theory: Introduction and Overview Clifford Algebra, Spin Topology, and Geometric Integration | [PDF](2/pdf/050_diracVereinfacht_En.pdf) |
 | 051 | Dirac Equation in T0 Theory: Geometric Integration with Time-Mass Duality Fractal Spacetime and Dynamic Mass | [PDF](2/pdf/051_dirac_En.pdf) |
 | 052 | Elimination of Mass as a Dimensional Placeholder in the T0 Model: Towards Truly Parameter-Free Physics | [PDF](2/pdf/052_EliminationOfMass_En.pdf) |
-| 053 | Pure Energy T0 Theory: The Ratio-Based Revolution From Parameter Physics to Scale Relationships Building on Simplified Dirac and Universal Lagrangian Foundation | [PDF](2/pdf/053_Elimination_Of_Mass_Dirac_Lag_En.pdf) |
+| 053 | Pure Energy T0 Theory: The Ratio-Based Formulation From Parameter Physics to Scale Relationships Building on Simplified Dirac and Universal Lagrangian Foundation | [PDF](2/pdf/053_Elimination_Of_Mass_Dirac_Lag_En.pdf) |
 | 055 | Dynamic Mass of Photons and Its Implications for Nonlocality | [PDF](2/pdf/055_DynMassePhotonenNichtlokal_En.pdf) |
 | 056 | Universal Derivation of All Physical Constants from the Fine-Structure Constant and Planck Length | [PDF](2/pdf/056_universale-ableitung_En.pdf) |
 | 057 | The Relational Number System | [PDF](2/pdf/057_RelokativesZahlensystem_En.pdf) |
@@ -87,7 +87,7 @@
 | 083 | 083 T0 Photonic Quantum Chip China | [PDF](2/pdf/083_T0_photonenchip-china_En.pdf) |
 | 084 | Introduction to the Implementation of Photonic Components on Wafers For Communications Engineers: From TFLN Wafers to 6G Integration (2024–2025) | [PDF](2/pdf/084_T0_photonenchip-umsetzung_En.pdf) |
 | 085 | Introduction to Photonic Quantum Chips for Communication Engineers | [PDF](2/pdf/085_T0_photonenchip-einfuehrung_En.pdf) |
-| 086 | T0 Theory: Document Series Overview A Revolutionary Geometric Reformulation of Physics Systematic Presentation of All 8 Core Documents | [PDF](2/pdf/086_T0_Dokumentenuebersicht_En.pdf) |
+| 086 | T0 Theory: Document Series Overview A Geometric Reformulation of Physics Systematic Presentation of All 8 Core Documents | [PDF](2/pdf/086_T0_Dokumentenuebersicht_En.pdf) |
 | 089 | The T0 Model: A Causal Theory of Conjugate Base Quantities with Applications to the Ampère Force, Longitudinal Modes, and Geometry-Dependent Scaling | [PDF](2/pdf/089_Amper_Low_En.pdf) |
 | 091 | Unification of the Casimir Effect and Cosmic Microwave Background: A Fundamental Vacuum Theory | [PDF](2/pdf/091_Casimir_En.pdf) |
 | 093 | T0 Model: Field-Theoretic Derivation of the -Parameter | [PDF](2/pdf/093_DerivationVonBeta_En.pdf) |
