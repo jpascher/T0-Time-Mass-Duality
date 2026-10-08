@@ -1,7 +1,7 @@
 # T0 Zeit-Masse-Dualität · FFGFT
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17390357.svg)](https://doi.org/10.5281/zenodo.17390357)
-**Version: v1.3.8** (4. September 2026) — ersetzt v1.3.7
+**Version: v1.4.5** (8. Oktober 2026) — ersetzt v1.4.4
 
 **FFGFT — Fraktale Feldgeometrische Fundamentaltheorie** zeigt:
 Alle Konstanten des Standardmodells folgen aus einem einzigen
@@ -240,11 +240,11 @@ ist aber prinzipiell messbar (Dok. 230).
 
 ---
 
-## Wo die FFGFT derzeit steht (Stand R129, 28. September 2026)
+## Wo die FFGFT derzeit steht (Stand R149, 8. Oktober 2026)
 
 **Wo die Geometrie die Zahlen festlegt, geht es nur noch um Genauigkeit.** Die Feinstrukturkonstante (1/α = 3700/27, 7,6 ppm), die geladenen Leptonen, die Neutrino-Hierarchie und der Weinberg-Winkel (2/9 on-shell, 0,4 %) folgen aus ξ und der T⁴/Z₃-Geometrie. Beim Higgs ist es ebenso: Die Spurregel M_W² + M_Z² + m_h² = v²/2 (Dok. 373) liefert mit gemessenem W, Z und v m_h ≈ 124,7 GeV gegenüber gemessenen 125,2 GeV. Größenordnung und Wert sind getroffen; offen ist nur der Rest von 0,5 %, der vermutlich an der Definition von v hängt (R112).
 
-**Bei den Quarks lautet die Frage nicht „wie genau?“, sondern „erzwungen oder gewählt?“.** Die Werte werden getroffen: Alle sechs Massen folgen aus rationalen Koeffizienten rᵢ, pᵢ auf 0,1–2 % (Dok. 006, `2/python/calc_De.py`), und alle Yukawa-Koeffizienten liegen im Galois-Raster {2, 3, 5, 7, 11, 13} (Dok. 358). Genauer lässt sich dort gar nicht prüfen, denn die Quarkmassen selbst sind nur auf einige Prozent bekannt und hängen von Schema und Skala ab. Offen ist deshalb der Status der Koeffizienten. Bei den Leptonen sind sie durch Wicklungszahlen und Galois-Rekursion festgelegt. Bei den Quarks legen die Quantenzahlen (n, l, j) aus Dok. 006/046 nur Generation und Exponent fest, nicht den Vorfaktor rᵢ (R129), und für die Wicklungszahlen gibt es bisher nur einen Ansatz mit Farbfaktor (Dok. 189). Solange das so ist, bleibt offen, ob die Quark-rᵢ aus der Geometrie folgen oder aus einem Raster gewählt sind, das bei einigen Prozent Toleranz dicht genug ist. Das ist die größte offene Frage der FFGFT.
+**Bei den Quarks lautet die Frage nicht „wie genau?“, sondern „erzwungen oder gewählt?“.** Die Werte werden getroffen: Alle sechs Massen folgen aus rationalen Koeffizienten rᵢ, pᵢ auf 0,3–2 % gegenüber PDG 2024, das Up-Quark auf 5 % innerhalb seiner Messunsicherheit (Dok. 006, `2/python/calc_De.py`), und alle Yukawa-Koeffizienten liegen im Galois-Raster {2, 3, 5, 7, 11, 13} (Dok. 358). Genauer lässt sich dort gar nicht prüfen, denn die Quarkmassen selbst sind nur auf einige Prozent bekannt und hängen von Schema und Skala ab. Offen ist deshalb der Status der Koeffizienten. Bei den Leptonen sind sie durch Wicklungszahlen und Galois-Rekursion festgelegt. Bei den Quarks legen die Quantenzahlen (n, l, j) aus Dok. 006/046 nur Generation und Exponent fest, nicht den Vorfaktor rᵢ (R129), und für die Wicklungszahlen gibt es bisher nur einen Ansatz mit Farbfaktor (Dok. 189). Solange das so ist, bleibt offen, ob die Quark-rᵢ aus der Geometrie folgen oder aus einem Raster gewählt sind, das bei einigen Prozent Toleranz dicht genug ist. Das ist die größte offene Frage der FFGFT.
 
 **Der kosmische Sektor ist bewusst ausgeklammert (P39).** Rotverschiebung, Lichtkurvendehnung, Tolman-Test und T(z) werden alle über Frequenzverhältnisse gemessen und sind wegen T̃·m = 1 mit der Expansion entartet; ein statisches Universum ist dadurch nicht ausgeschlossen (R128). Was dort offen bleibt, sind dimensionslose Größen, die sich nicht umdeuten lassen: die Häufigkeiten von ⁴He und D und das Muster der CMB-Peaks.
 
@@ -454,7 +454,7 @@ Dokumente: [DE](2/pdf/313_Kein_Anfang_De.pdf) · [EN](2/pdf/313_Kein_Anfang_En.p
 
 Das **Korrekturregister** [Dok. 190](2/pdf/190_T0_Korrekturen_De.pdf)
 dokumentiert jede Korrektur und Präzisierung mit Datum, Status und
-betroffenen Dokumenten — K1–K7 (Korrekturen) und R1–R74 (Präzisierungen/Programme, Stand 5. August 2026).
+betroffenen Dokumenten — K1–K7 (Korrekturen) und R1–R149 (Präzisierungen/Programme, Stand 8. Oktober 2026).
 Nichts wird still überschrieben.
 
 Der **Changelog** [`001_FFGFT_Changelog_De.md`](001_FFGFT_Changelog_De.md)
@@ -465,19 +465,24 @@ protokolliert alle laufenden Änderungen am Korpus chronologisch (ab v1.3.4).
 
 ## Bücher (Amazon KDP)
 
-Die FFGFT-Buchserie ist als **Fünf-Band-Serie** auf Amazon KDP erhältlich —
-in drei Formaten (Kindle eBook / Taschenbuch 8,5×11 / Hardcover 8,25×11)
-jeweils auf Deutsch und Englisch (30 PDFs gesamt).
+Der Korpus erscheint als **achtbändige Gesamtausgabe** „FFGFT oder T0-Theorie:
+Zeit-Masse-Dualität – Gesamtwerk“ auf Amazon KDP — jeder Band als Kindle-eBook,
+Taschenbuch (8,5 × 11 in) und Hardcover (8,25 × 11 in), auf Deutsch und Englisch.
 
-| Band | Inhalt | Dok. |
-|------|--------|------|
-| Teil 1 | Grundlagen, ξ, Konstanten, Einheiten | 40 |
-| Teil 2 | Lagrangian, QFT, QM-Tests | 36 |
-| Teil 3 | Kosmologie, Bewusstsein | 35 |
-| Teil 4 | Frühe Erweiterungen (bis Dok. 184) | 37 |
-| Teil 5 | Schichten, Hilbertraum-Brücke, jüngste Klärungen | 37 |
+| Band | Inhalt |
+|------|--------|
+| Teil 1 | Kerndokumente: T̃·m = 1, Teilchenmassen, α, g−2, G, Neutrinomassen |
+| Teil 2 | Mathematische Grundlagen und Formeln (Lagrangian, Dirac, QFT) |
+| Teil 3 | Quantenmechanik, Anwendungen und Photonik |
+| Teil 4 | Neuere Dokumente und Erweiterungen (bis Dok. 184) |
+| Teil 5 | Schichten, Hilbertraum-Brücke und jüngste Klärungen (Dok. 185–262) |
+| Teil 6 | Holografie, HLV-Brücke und die Struktur der Zeit (Dok. 263–310) |
+| Teil 7 | Gitter im Hilbertraum, Spektraltheorie und Galois-Struktur (Dok. 311–343) |
+| Teil 8 | Standardmodell aus GF(27), Leptonmassen und Schnittstellen (Dok. 344–389) |
 
-PDF-Versionen aller Bände auch im Repository unter `books/`.
+Die Innenteile liegen unter `2/pdf/buecher/`, die Umschläge unter
+`2/kdp/Gesamtserie/`. Das Korrekturregister Dok. 190 ist in den Büchern nicht
+abgedruckt; es wird laufend im Repository weitergeführt.
 
 Zusätzliche Einzelausgaben: *FFGFT Narrativ — Das Kosmische Gehirn*,
 *T0 Anwendungen — Sieben Rätsel der Physik*,
@@ -488,11 +493,19 @@ Zusätzliche Einzelausgaben: *FFGFT Narrativ — Das Kosmische Gehirn*,
 ## Versionshistorie
 
 Die vollständige Versionshistorie mit DOIs steht in den Release Notes:
-**[RELEASE_NOTES_v1_3_3_de.md](RELEASE_NOTES_v1_3_3_de.md)** · Änderungsprotokoll:
+**[RELEASE_NOTES_v1_4_5_De.md](RELEASE_NOTES_v1_4_5_De.md)** (vorher:
+[v1.4.4](RELEASE_NOTES_v1_4_4_De.md)) · Änderungsprotokoll:
 **[001_FFGFT_Changelog_De.md](001_FFGFT_Changelog_De.md)**
 
 ---
 
+## v1.4.5 (8. Oktober 2026) — Dokumente ohne Korrekturvermerke, HTML-Seiten, Gesamtausgabe
+
+v1.4.5 ist die erste Fassung ohne Korrekturvermerke: Alle Dokumente enthalten nur noch die korrigierte letzte Fassung, die Geschichte der Korrekturen steht in Dok. 190 und in v1.4.4. Dok. 006, 073 und 382 sind korrigiert (R149: Quarkvergleich mit PDG 2024, Simulationsparameter σ statt ξ_num, g−2-Werte mit k_geom aus Dok. 018); R148 bucht die übrigen Befunde der Rechenprüfung für die Dokumente über Nr. 300 nach.
+
+Alle HTML-Seiten sind auf den Stand von Dok. 384 gebracht. Der Quantensimulator ist nach der deterministischen Messregel A(z, λ) = sgn(z − λ) aus Dok. 230 neu aufgebaut, mit neuer Hilfeseite; die Shor-Werkzeuge sind als klassische Simulation der Ordnungssuche beschrieben (R65). Der Korpus liegt als achtbändige Gesamtausgabe in Deutsch und Englisch vor. Einzelheiten: [RELEASE_NOTES_v1_4_5_De.md](RELEASE_NOTES_v1_4_5_De.md).
+
+---
 
 ## Neue Dokumente — v1.3.4 (26. August 2026)
 

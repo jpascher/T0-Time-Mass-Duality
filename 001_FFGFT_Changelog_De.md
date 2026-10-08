@@ -1346,3 +1346,21 @@ Anlass: v1.4.4 ist die letzte Fassung mit datierten Korrekturvermerken (Vermerk 
 - Prüfskripte: a142 18/18, a271 10/10, a273 16/16, a150 BESTANDEN, a155 BESTANDEN, a165 BESTANDEN, a180 BESTANDEN, a220 BESTANDEN, a260 BESTANDEN, a261 BESTANDEN, a263 BESTANDEN, a264–a270 BESTANDEN; Dok. 190-Abgleich: 0 Abweichungen (144/144 Einträge)
 
 **Register:** kein Eintrag.
+
+---
+
+## 8. Oktober 2026 — v1.4.5: HTML-Seiten, deterministischer Simulator und Gesamtausgabe in acht Bänden
+
+### Release v1.4.5 — erste Fassung ohne Korrekturvermerke
+
+Anlass: Mit den Bereinigungsblöcken vom 6. Oktober enthalten alle Dokumente nur noch die korrigierte letzte Fassung. v1.4.5 fasst das mit den seither erfolgten Arbeiten zusammen; Release Notes: [`RELEASE_NOTES_v1_4_5_De.md`](RELEASE_NOTES_v1_4_5_De.md) · [`RELEASE_NOTES_v1_4_5_En.md`](RELEASE_NOTES_v1_4_5_En.md).
+
+- **Dok. 006, 073, 382** (De/En, PDFs neu): Korrekturen nach R149 — 382 mit k_geom aus Dok. 018 (Rev. 12), Verhältnis-Linie unberührt; 006 Quarkvergleich auf PDG 2024 umgestellt (wie Dok. 384), Quark-Vorfaktoren aus Messwerten **[S]**; 073 Simulationsparameter σ statt ξ_num. Prüfskript `2/python/Dok382_Skripte/pruef_382_myon_g2_stand.py` 21/21
+- **Dok. 384** (De/En, PDF und HTML neu): Registerstand R149; Prüfskript 121/121
+- **HTML-Seiten** unter `2/html/`, `rsa/`, `sig/`: auf den Korpusstand gebracht (Status wie Dok. 384, Statusmarker mit Legende, α = 1 als Heaviside-Lorentz-Einheiten); Startseite mit unveränderter Überschrift; Diagramme `rsa/diagrams/t0_framework_{de,en}.mmd` neu erzeugt
+- **Quantensimulator** `2/html/quantum_simulator_deterministic.html` neu aufgebaut nach der Messregel A(z, λ) = sgn(z − λ) aus Dok. 230; neue Hilfeseite `quantum_help_guide.html`; `step_by_step_modules_bilingual.html` überarbeitet
+- **Shor-/Faktorisierungswerkzeuge** ein zweites Mal geprüft: Rechen- und Programmfehler behoben, Beschreibung als klassische Simulation der Ordnungssuche (R65)
+- **Gesamtausgabe** (KDP, Band 1–8, De/En, Paperback und Hardcover): Innenteile von Band 1, 2, 5, 6 und 8 unter `2/pdf/buecher/` neu gebaut; Dok. 190 nicht mehr in Band 5 abgedruckt, Einleitungen von Band 5 und 6 verweisen auf das laufende Register im Repository; Umschläge Band 5 (De/En) mit neuer Rückenbreite und angepasstem Rückseitentext
+- Dok. 190-Abgleich: 0 Abweichungen (146/146 Einträge, Registerstand R149)
+
+**Register:** R148 und R149 (in Dok. 190).

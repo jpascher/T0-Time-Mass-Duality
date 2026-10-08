@@ -1,7 +1,7 @@
 # T0 Time-Mass Duality · FFGFT
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17390357.svg)](https://doi.org/10.5281/zenodo.17390357)
-**Version: v1.3.8** (4 September 2026) — supersedes v1.3.7
+**Version: v1.4.5** (8 October 2026) — supersedes v1.4.4
 
 **FFGFT — Fundamental Fractal-Geometric Field Theory** shows:
 All Standard Model constants follow from a single dimensionless
@@ -236,11 +236,11 @@ but measurable in principle (Dok. 230).
 
 ---
 
-## Where FFGFT stands (as of R129, 28 September 2026)
+## Where FFGFT stands (as of R149, 8 October 2026)
 
 **Where the geometry fixes the numbers, only precision remains open.** The fine-structure constant (1/α = 3700/27, 7.6 ppm), the charged leptons, the neutrino hierarchy and the Weinberg angle (2/9 on-shell, 0.4 %) follow from ξ and the T⁴/Z₃ geometry. The Higgs is the same: the trace rule M_W² + M_Z² + m_h² = v²/2 (Doc. 373) gives, with measured W, Z and v, m_h ≈ 124.7 GeV against the measured 125.2 GeV. Order of magnitude and value are hit; only the 0.5 % residual is open, probably tied to the definition of v (R112).
 
-**For the quarks the question is not "how precise?" but "forced or selected?".** The values are hit: all six masses follow from rational coefficients rᵢ, pᵢ to 0.1–2 % (Doc. 006, `2/python/calc_De.py`), and all Yukawa coefficients lie in the Galois grid {2, 3, 5, 7, 11, 13} (Doc. 358). A sharper test is not possible there, because the quark masses themselves are known only to a few per cent and depend on scheme and scale. What is open is therefore the status of the coefficients. For the leptons they are fixed by winding numbers and the Galois recursion. For the quarks, the quantum numbers (n, l, j) in Doc. 006/046 fix only generation and exponent, not the prefactor rᵢ (R129), and for the winding numbers there is so far only an ansatz with a colour factor (Doc. 189). As long as this holds, it remains open whether the quark rᵢ follow from the geometry or are selected from a grid that is dense enough at a few per cent tolerance. This is the largest open question of FFGFT.
+**For the quarks the question is not "how precise?" but "forced or selected?".** The values are hit: all six masses follow from rational coefficients rᵢ, pᵢ to 0.3–2 % against PDG 2024, the up quark to 5 %, within its measurement uncertainty (Doc. 006, `2/python/calc_De.py`), and all Yukawa coefficients lie in the Galois grid {2, 3, 5, 7, 11, 13} (Doc. 358). A sharper test is not possible there, because the quark masses themselves are known only to a few per cent and depend on scheme and scale. What is open is therefore the status of the coefficients. For the leptons they are fixed by winding numbers and the Galois recursion. For the quarks, the quantum numbers (n, l, j) in Doc. 006/046 fix only generation and exponent, not the prefactor rᵢ (R129), and for the winding numbers there is so far only an ansatz with a colour factor (Doc. 189). As long as this holds, it remains open whether the quark rᵢ follow from the geometry or are selected from a grid that is dense enough at a few per cent tolerance. This is the largest open question of FFGFT.
 
 **The cosmic sector is deliberately bracketed (P39).** Redshift, light-curve stretching, the Tolman test and T(z) are all measured as frequency ratios and, because of T̃·m = 1, are degenerate with expansion; a static universe is therefore not excluded (R128). What remains open there are dimensionless quantities that cannot be reinterpreted: the abundances of ⁴He and D and the pattern of the CMB peaks.
 
@@ -450,10 +450,10 @@ Documents: [DE](2/pdf/313_Kein_Anfang_En.pdf) · [EN](2/pdf/313_Kein_Anfang_En.p
 
 The **correction register** [Doc. 190](2/pdf/190_T0_Korrekturen_En.pdf)
 documents every correction and clarification with date, status and
-affected documents — K1–K7 (Korrekturen) und R1–R74 (Präzisierungen/Programme, Stand 5. August 2026).
+affected documents — K1–K7 (corrections) and R1–R149 (refinements/programmes, as of 8 October 2026).
 Nothing is silently overwritten.
 
-Der **Changelog** [`001_FFGFT_Changelog_De.md`](001_FFGFT_Changelog_De.md)
+The **changelog** [`001_FFGFT_Changelog_De.md`](001_FFGFT_Changelog_De.md)
 logs all running changes to the corpus chronologically (from v1.3.4).
 Older entries up to v1.3.3: [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De.md) (frozen).
 
@@ -461,21 +461,26 @@ Older entries up to v1.3.3: [`000_FFGFT_Changelog_De.md`](000_FFGFT_Changelog_De
 
 ## Books (Amazon KDP)
 
-The FFGFT book series is available as a **five-volume series** on Amazon KDP —
-in three formats (Kindle eBook / Paperback 8.5×11 / Hardcover 8.25×11)
-in both German and English (30 PDFs total).
+The corpus appears as the **eight-volume complete edition** "FFGFT or T0 Theory:
+Time-Mass Duality – Complete Works" on Amazon KDP — each volume as Kindle eBook,
+paperback (8.5 × 11 in) and hardcover (8.25 × 11 in), in German and English.
 
-| Volume | Content | Docs |
-|------|--------|------|
-| Part 1 | Foundations, ξ, constants, units | 40 |
-| Part 2 | Lagrangian, QFT, QM tests | 36 |
-| Part 3 | Cosmology, consciousness | 35 |
-| Part 4 | Early extensions (up to Doc. 184) | 37 |
-| Part 5 | Layers, Hilbert space bridge, recent clarifications | 37 |
+| Volume | Content |
+|--------|---------|
+| Part 1 | Core documents: T̃·m = 1, particle masses, α, g−2, G, neutrino masses |
+| Part 2 | Mathematical foundations and formulas (Lagrangian, Dirac, QFT) |
+| Part 3 | Quantum mechanics, applications and photonics |
+| Part 4 | Later documents and extensions (up to Doc. 184) |
+| Part 5 | Layers, Hilbert-space bridge and recent clarifications (Docs. 185–262) |
+| Part 6 | Holography, HLV bridge and the structure of time (Docs. 263–310) |
+| Part 7 | Lattice in Hilbert space, spectral theory and Galois structure (Docs. 311–343) |
+| Part 8 | Standard Model from GF(27), lepton masses and interfaces (Docs. 344–389) |
 
-PDF-Versionen aller Bände auch im Repository unter `books/`.
+The interior PDFs are in `2/pdf/buecher/`, the covers in `2/kdp/Gesamtserie/`. The
+correction register Doc. 190 is not printed in the books; it is maintained
+continuously in the repository.
 
-Zusätzliche Einzelausgaben: *FFGFT Narrativ — Das Kosmische Gehirn*,
+Further single editions: *FFGFT Narrativ — Das Kosmische Gehirn*,
 *T0 Anwendungen — Sieben Rätsel der Physik*,
 *Von α=1 zur vollständigen Physik* (in `2/tex-n/completed/`).
 
@@ -483,12 +488,20 @@ Zusätzliche Einzelausgaben: *FFGFT Narrativ — Das Kosmische Gehirn*,
 
 ## Version history
 
-Die vollständige Versionshistorie mit DOIs steht in den Release Notes:
-**[RELEASE_NOTES_v1_3_3.md](RELEASE_NOTES_v1_3_3.md)** · Änderungsprotokoll:
+The full version history with DOIs is in the release notes:
+**[RELEASE_NOTES_v1_4_5_En.md](RELEASE_NOTES_v1_4_5_En.md)** (previous:
+[v1.4.4](RELEASE_NOTES_v1_4_4_En.md)) · Changelog (German):
 **[001_FFGFT_Changelog_De.md](001_FFGFT_Changelog_De.md)**
 
 ---
 
+## v1.4.5 (8 October 2026) — documents without correction notes, HTML pages, complete edition
+
+v1.4.5 is the first version without correction notes: every document now contains only the corrected final text, and the history of the corrections is kept in Doc. 190 and in v1.4.4. Docs. 006, 073 and 382 were corrected (R149: quark comparison with PDG 2024, simulation parameter σ instead of ξ_num, g−2 values with k_geom from Doc. 018); R148 books the remaining findings of the computational review for the documents above No. 300.
+
+All HTML pages have been brought to the state of Doc. 384. The quantum simulator was rebuilt after the deterministic measurement rule A(z, λ) = sgn(z − λ) of Doc. 230, with a new help page; the Shor tools are described as a classical simulation of order finding (R65). The corpus is available as an eight-volume complete edition in German and English. Details: [RELEASE_NOTES_v1_4_5_En.md](RELEASE_NOTES_v1_4_5_En.md).
+
+---
 
 ## New documents — v1.3.4 (26 August 2026)
 
