@@ -76,8 +76,8 @@
      haben sie eine charakteristische Verteilung?<br>
   2. <strong>Restklassenmuster:</strong> Primzahlen mod 6, mod 30, mod 210 (Primorials) — 
      welche Restklassen werden bevorzugt?<br>
-  3. <strong>p−1 Struktur:</strong> Was ist die typische Glattheit von p−1 
-     und wie bestimmt das λ(N)?<br>
+  3. <strong>p−1 Struktur:</strong> Was ist die typische Glattheit von p−1,
+     und wie groß ist λ(N) = lcm(p−1, q−1) im Verhältnis zu N?<br>
   4. <strong>Verbindung zu λ(N):</strong> Wie hängt die Periodenstruktur von N = p·q 
      mit den Primzahlmustern zusammen?
 </div>
@@ -221,6 +221,16 @@ function median(arr){ if(!arr.length)return null;
   return s.length%2?s[m]:(s[m-1]+s[m])/2; }
 function mean(arr){ return arr.reduce((a,b)=>a+b,0)/arr.length; }
 function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
+// Ganzzahlige Eingabe prüfen; bei ungültigem Wert Meldung im Log und null
+function readNum(id, min, max, logId, name){
+  const s=document.getElementById(id).value.trim();
+  const v=/^[0-9]+$/.test(s)?Number(s):NaN;
+  if(!(v>=min&&v<=max)){
+    logLine(logId,`<span class="err">Ungültige Eingabe für „${name}“: erlaubt sind ganze Zahlen von ${min.toLocaleString()} bis ${max.toLocaleString()}.</span>`);
+    return null;
+  }
+  return v;
+}
 
 // ─── Zeichenfunktionen ────────────────────────────────────────────────────
 
@@ -307,10 +317,12 @@ function drawLine(canvasId, xvals, yvals, title, color='#5dade2', refLines=[]) {
 // ─── Test A: Primzahllücken ───────────────────────────────────────────────
 
 async function runGaps(){
-  const limit=parseInt(document.getElementById('tA_limit').value)||100000;
-  const bins=parseInt(document.getElementById('tA_bins').value)||60;
   const btn=document.getElementById('btnA');
-  btn.disabled=true; clearLog('logA');
+  clearLog('logA');
+  const limit=readNum('tA_limit',100,10000000,'logA','Primzahlen bis');
+  const bins=readNum('tA_bins',1,200,'logA','Histogram-Bins');
+  if(limit===null||bins===null) return;
+  btn.disabled=true;
 
   logLine('logA',`<span class="inf">Siebe Primzahlen bis ${limit.toLocaleString()}...</span>`);
   await sleep(0);
@@ -326,7 +338,7 @@ async function runGaps(){
 
   // Statistiken
   const med=median(gaps);
-  const maxGap=Math.max(...gaps);
+  const maxGap=gaps.reduce((m,g)=>g>m?g:m,0); // ohne Spread: bei 10^7 sonst Stack-Überlauf
   const dom=gapKeys.reduce((a,b)=>freq[a]>freq[b]?a:b);
   const div6=gapKeys.filter(g=>g%6===0).reduce((s,g)=>s+freq[g],0);
   const div6pct=(100*div6/gaps.length).toFixed(1);
@@ -343,7 +355,7 @@ async function runGaps(){
     'Häufigkeit der Primzahllücken', '#8e44ad', 6);
 
   logLine('logA',`Primzahlen bis ${limit}: ${primes.length.toLocaleString()}`);
-  logLine('logA',`Lückenverteilung (Top 15):`);
+  logLine('logA',`Lückenverteilung (die 15 kleinsten Lückenwerte):`);
   gapKeys.slice(0,15).forEach(g=>{
     const pct=(100*freq[g]/gaps.length).toFixed(1);
     const bar='█'.repeat(Math.round(freq[g]/gaps.length*40));
@@ -351,16 +363,18 @@ async function runGaps(){
   });
   logLine('logA',`<br><span class="hi">Anteil durch 6 teilbarer Lücken: ${div6pct}%</span>`);
   logLine('logA',`<span class="hi">Dominante Lücke: ${dom} — Muster: ${dom%6===0?'Vielfaches von 6':'nicht ÷6'}</span>`);
-  logLine('logA',`<br><span class="inf">Interpretation: Primzahlen mod 6 ∈ {1,5} → Differenzen ∈ {2,4,6,8,...} mit Periode 6</span>`);
+  logLine('logA',`<br><span class="inf">Interpretation: Primzahlen &gt; 3 liegen in den Restklassen 1 und 5 mod 6. Lücken, die Vielfache von 6 sind, verbinden zwei Primzahlen derselben Restklasse; Lücken ≡ 2 oder 4 (mod 6) wechseln die Klasse.</span>`);
   btn.disabled=false;
 }
 
 // ─── Test B: Restklassenmuster ────────────────────────────────────────────
 
 async function runResidues(){
-  const limit=parseInt(document.getElementById('tB_limit').value)||50000;
+  const btn=document.getElementById('btnB'); clearLog('logB');
+  const limit=readNum('tB_limit',100,10000000,'logB','Primzahlen bis');
   const mod=parseInt(document.getElementById('tB_mod').value)||30;
-  const btn=document.getElementById('btnB'); btn.disabled=true; clearLog('logB');
+  if(limit===null) return;
+  btn.disabled=true;
 
   logLine('logB',`<span class="inf">Analysiere Primzahlen bis ${limit.toLocaleString()} mod ${mod}...</span>`);
   await sleep(0);
@@ -376,6 +390,10 @@ async function runResidues(){
 
   const total=Object.values(freq).reduce((a,b)=>a+b,0);
   const expected=total/allowed.length;
+  if(total===0){
+    logLine('logB',`<span class="err">Keine Primzahlen größer als ${mod} bis ${limit.toLocaleString()}; Grenze erhöhen.</span>`);
+    btn.disabled=false; return;
+  }
 
   // Chi-Quadrat-Test auf Gleichverteilung
   const chi2=allowed.reduce((s,r)=>s+Math.pow(freq[r]-expected,2)/expected,0);
@@ -393,19 +411,23 @@ async function runResidues(){
     logLine('logB',`  mod ${mod} ≡ ${String(r).padStart(4)}: ${freq[r]} (${sign}${dev}%)`);
   });
   logLine('logB',`<br><span class="hi">χ²-Test: χ²=${chi2.toFixed(1)}, df=${dof}</span>`);
-  logLine('logB',chi2/dof<1.5
-    ? `<span class="ok">→ Nahezu gleichmäßige Verteilung (Dirichlet-Theorem bestätigt)</span>`
+  logLine('logB',expected<5
+    ? `<span class="warn">→ Erwartete Anzahl pro Klasse &lt; 5: die χ²-Näherung ist nicht verlässlich; größere Grenze wählen.</span>`
+    : chi2/dof<1.5
+    ? `<span class="ok">→ Nahezu gleichmäßige Verteilung (im Einklang mit dem Dirichletschen Primzahlsatz)</span>`
     : `<span class="warn">→ Ungleichmäßige Verteilung — Bias erkennbar</span>`);
-  logLine('logB',`<br><span class="inf">Interpretation: Primzahlen verteilen sich gleichmäßig auf alle zu ${mod} teilerfremden Restklassen (Dirichlet). Die Periode ${mod} ist eine Symmetrieperiode, keine Häufungsperiode.</span>`);
+  logLine('logB',`<br><span class="inf">Interpretation: Nach dem Dirichletschen Primzahlsatz verteilen sich die Primzahlen asymptotisch gleichmäßig auf alle zu ${mod} teilerfremden Restklassen. Die Periode ${mod} ist eine Symmetrieperiode, keine Häufungsperiode.</span>`);
   btn.disabled=false;
 }
 
 // ─── Test C: p-1 Glattheit und λ(N) ──────────────────────────────────────
 
 async function runSmooth(){
-  const limit=parseInt(document.getElementById('tC_limit').value)||10000;
-  const samples=parseInt(document.getElementById('tC_samples').value)||500;
-  const btn=document.getElementById('btnC'); btn.disabled=true; clearLog('logC');
+  const btn=document.getElementById('btnC'); clearLog('logC');
+  const limit=readNum('tC_limit',20,1000000,'logC','Primzahlen bis');
+  const samples=readNum('tC_samples',1,100000,'logC','N = p·q Stichproben');
+  if(limit===null||samples===null) return;
+  btn.disabled=true;
 
   logLine('logC',`<span class="inf">Berechne p−1 Glattheit für Primzahlen bis ${limit}...</span>`);
   await sleep(0);
@@ -450,21 +472,24 @@ async function runSmooth(){
     logLine('logC',`  lgf(p−1)=${k}: ${smoothFreq[k]}× (${(100*smoothFreq[k]/primes.length).toFixed(1)}%)`);
   });
   logLine('logC',`<br>λ(N)/N Verteilung für ${lamRatios.length} zufällige N=p·q:`);
-  logLine('logC',`  λ(N)/N < 0.1:  ${(100*small/lamRatios.length).toFixed(1)}%  (glatte Primen → kleine Periode)`);
+  logLine('logC',`  λ(N)/N < 0.1:  ${(100*small/lamRatios.length).toFixed(1)}%  (großer gemeinsamer Teiler: ggT(p−1,q−1) &gt; 10 → kleineres λ(N))`);
   logLine('logC',`  0.1–0.4:        ${(100*med2/lamRatios.length).toFixed(1)}%`);
-  logLine('logC',`  > 0.4:          ${(100*large/lamRatios.length).toFixed(1)}%  (harte Primen → große Periode)`);
+  logLine('logC',`  > 0.4:          ${(100*large/lamRatios.length).toFixed(1)}%  (ggT(p−1,q−1) = 2 → λ(N)/N knapp unter 1/2)`);
+  logLine('logC',`  <span class="dim">Es gilt λ(N)/N ≈ 1/ggT(p−1,q−1); die Glattheit von p−1 allein bestimmt λ(N) nicht.</span>`);
   logLine('logC',`  Median gcd(p−1,q−1): ${gcdMed}`);
-  logLine('logC',`<br><span class="hi">Schlüsselerkenntnis: Die Periodenstruktur von N wird vollständig durch gcd(p−1,q−1) bestimmt. Dieser Wert ist eine Eigenschaft der Primzahlen selbst — nicht des Zahlenraums.</span>`);
+  logLine('logC',`<br><span class="hi">Schlüsselerkenntnis: Die Periodenstruktur von N ist durch λ(N) = lcm(p−1,q−1) = (p−1)(q−1)/gcd(p−1,q−1) bestimmt; jede Ordnung teilt λ(N). Das ist eine Eigenschaft der Primfaktoren — nicht eines globalen Parameters.</span>`);
   btn.disabled=false;
 }
 
 // ─── Test D: Autokorrelation der Primzahllücken ───────────────────────────
 
 async function runAutocorr(){
-  const limit=parseInt(document.getElementById('tD_limit').value)||200000;
-  const maxLag=parseInt(document.getElementById('tD_lags').value)||100;
-  const btn=document.getElementById('btnD'); btn.disabled=true;
+  const btn=document.getElementById('btnD');
   clearLog('logD'); document.getElementById('resultD').innerHTML='';
+  const limit=readNum('tD_limit',1000,10000000,'logD','Primzahlen bis');
+  const maxLag=readNum('tD_lags',1,500,'logD','Autokorrelations-Lags');
+  if(limit===null||maxLag===null) return;
+  btn.disabled=true;
 
   logLine('logD',`<span class="inf">Berechne Autokorrelation der Primzahllücken bis ${limit.toLocaleString()}...</span>`);
   await sleep(0);
@@ -473,8 +498,16 @@ async function runAutocorr(){
   const gaps=[];
   for(let i=1;i<primes.length;i++) gaps.push(primes[i]-primes[i-1]);
 
+  if(gaps.length<maxLag+50){
+    logLine('logD',`<span class="err">Zu wenige Lücken (${gaps.length}) für ${maxLag} Lags; Grenze erhöhen oder weniger Lags wählen.</span>`);
+    btn.disabled=false; return;
+  }
   const mn=mean(gaps);
   const variance=gaps.reduce((s,g)=>s+(g-mn)**2,0)/gaps.length;
+  // Lückenstatistik dieses Laufs (für die Gesamtinterpretation)
+  const gfreq={}; gaps.forEach(g=>{gfreq[g]=(gfreq[g]||0)+1;});
+  const domGap=Object.keys(gfreq).map(Number).reduce((a,b)=>gfreq[a]>=gfreq[b]?a:b);
+  const pct6=(100*gaps.filter(g=>g%6===0).length/gaps.length).toFixed(1);
 
   // Autokorrelation für Lags 1..maxLag
   const acf=[];
@@ -507,28 +540,29 @@ async function runAutocorr(){
     logLine('logD',`<span class="ok">Starke positive Peaks bei: ${strongPeaks.slice(0,10).join(', ')}</span>`);
 
   // Interpretation
-  const hasPeriodic=strongPeaks.length>3;
-  const verdict=hasPeriodic?'confirm':'neutral';
-  const vtext=hasPeriodic
-    ? `✓ Die Primzahllücken zeigen signifikante Autokorrelation bei mehreren Lags — 
-       periodische Struktur nachweisbar. Die dominanten Peaks liegen bei 
-       ${strongPeaks.slice(0,5).join(', ')}.`
-    : `≈ Keine starke periodische Struktur in den Primzahllücken nachweisbar. 
-       Die Lücken verhalten sich näherungsweise wie unkorreliertes Rauschen 
-       — konsistent mit der Riemann-Hypothese (zufällige Verteilung auf der kritischen Linie).`;
+  const hasPeaks=strongPeaks.length>3;
+  const verdict='neutral';
+  const lag1=acf[0];
+  const lag1Text=`Lag 1: ACF = ${lag1.toFixed(4)} (aufeinanderfolgende Lücken sind ${lag1<0?'negativ':'positiv'} korreliert).`;
+  const vtext=hasPeaks
+    ? `Die Primzahllücken zeigen bei mehreren Lags deutliche positive Autokorrelation
+       (oberhalb der doppelten 95&nbsp;%-Schwelle, u.&nbsp;a. bei ${strongPeaks.slice(0,5).join(', ')}).
+       Das ist eine statistische Abhängigkeit zwischen Lücken; eine Periode der Primzahlfolge folgt daraus nicht. ${lag1Text}`
+    : `≈ Keine starke positive Autokorrelation in den Primzahllücken. ${lag1Text}
+       Eine klassische Periode gibt es nicht.`;
 
   document.getElementById('resultD').innerHTML=
     `<div class="result-box ${verdict}">${vtext}<br><br>
      <strong>Gesamtinterpretation:</strong><br>
      Primzahlen haben <em>keine</em> klassische Periode wie ein Signal — 
-     aber sie haben eine <strong>Symmetriestruktur</strong> (Dirichlet: 
-     Gleichverteilung auf Restklassen mod Primorial) und eine 
-     <strong>statistisch charakteristische Lückenverteilung</strong> 
-     (dominierte durch Vielfache von 6).<br><br>
-     Diese Struktur ist basissystemunabhängig und bestimmt über gcd(p−1,q−1) 
-     direkt λ(N) — und damit die Schwierigkeit der Periodensuche bei Shor.<br><br>
+     aber sie haben eine <strong>Symmetriestruktur</strong> (Dirichlet:
+     asymptotische Gleichverteilung auf die teilerfremden Restklassen mod Primorial) und eine
+     <strong>statistisch charakteristische Lückenverteilung</strong>
+     (in diesem Lauf: h&auml;ufigste einzelne L&uuml;cke ${domGap}; ${pct6}&nbsp;% der L&uuml;cken sind Vielfache von 6).<br><br>
+     Die Periodenlängen der Ordnungssuche für N = p·q bestimmt dagegen λ(N) = lcm(p−1,q−1):
+     jede Ordnung teilt λ(N), und λ(N) hängt allein von p und q ab, nicht von der Lückenstatistik.<br><br>
      <strong>Der Schlüssel liegt nicht in einem globalen ξ-Parameter, 
-     sondern in der individuellen gcd-Struktur der Primfaktoren von N.</strong>
+     sondern in der individuellen Struktur von p−1 und q−1, also in λ(N) = lcm(p−1,q−1).</strong>
      </div>`;
 
   btn.disabled=false;

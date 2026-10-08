@@ -1,1514 +1,516 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>T0 Quantum Module Implementation | Complete Guide</title>
-  <style>
-    :root {
-      --primary-color: #007bff;
-      --secondary-color: #6c757d;
-      --success-color: #28a745;
-      --warning-color: #ffc107;
-      --danger-color: #dc3545;
-      --info-color: #17a2b8;
-      --light-color: #f8f9fa;
-      --dark-color: #343a40;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 20px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #333;
-      min-height: 100vh;
-    }
-
-    .header {
-      background: rgba(0, 0, 0, 0.1);
-      border-radius: 15px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .title {
-      font-size: 2.5rem;
-      color: white;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-      margin-bottom: 1rem;
-    }
-
-    .subtitle {
-      font-size: 1.2rem;
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 1.5rem;
-    }
-
-    .status-badge {
-      display: inline-block;
-      background: var(--success-color);
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-weight: bold;
-      font-size: 0.9rem;
-    }
-
-    .navigation {
-      background: white;
-      border-radius: 12px;
-      padding: 1rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .nav-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 0.7rem 1.5rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: all 0.3s ease;
-    }
-
-    .btn-primary {
-      background: var(--primary-color);
-      color: white;
-    }
-
-    .btn-home {
-      background: var(--danger-color);
-      color: white;
-    }
-
-    .btn-success {
-      background: var(--success-color);
-      color: white;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    .language-selector {
-      display: flex;
-      background: var(--light-color);
-      border-radius: 8px;
-      padding: 0.3rem;
-      border: 1px solid #dee2e6;
-    }
-
-    .lang-btn {
-      padding: 0.5rem 1rem;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      border-radius: 6px;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-
-    .lang-btn.active {
-      background: var(--primary-color);
-      color: white;
-    }
-
-    .container {
-      background: white;
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    }
-
-    .highlight-box {
-      background: #e8f5e8;
-      border: 1px solid var(--success-color);
-      padding: 20px;
-      border-radius: 8px;
-      margin: 20px 0;
-    }
-
-    .warning-box {
-      background: #fff3cd;
-      border: 1px solid var(--warning-color);
-      padding: 20px;
-      border-radius: 8px;
-      margin: 20px 0;
-    }
-
-    .step {
-      background: var(--light-color);
-      border-left: 5px solid var(--primary-color);
-      margin: 30px 0;
-      padding: 25px;
-      border-radius: 8px;
-      position: relative;
-    }
-
-    .step h3 {
-      color: var(--primary-color);
-      margin-top: 0;
-      margin-bottom: 1rem;
-      font-size: 1.4rem;
-    }
-
-    .code-block {
-      background: #1e1e1e;
-      color: #d4d4d4;
-      padding: 20px;
-      border-radius: 8px;
-      overflow-x: auto;
-      font-family: 'Consolas', 'Monaco', monospace;
-      margin: 15px 0;
-      font-size: 14px;
-      line-height: 1.5;
-      max-height: 500px;
-      overflow-y: auto;
-      border: 1px solid #3a3a3a;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-
-    .feature-card {
-      background: white;
-      border: 1px solid #dee2e6;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    .feature-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    .module-status {
-      display: inline-block;
-      padding: 5px 15px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-      margin-left: 10px;
-    }
-
-    .status-ready { 
-      background: #d4edda; 
-      color: #155724; 
-    }
-
-    .status-building { 
-      background: #fff3cd; 
-      color: #856404; 
-    }
-
-    .implementation-btn {
-      background: var(--primary-color);
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 600;
-      margin: 10px 5px;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .implementation-btn:hover {
-      background: #0056b3;
-      transform: translateY(-2px);
-    }
-
-    .test-area {
-      background: var(--light-color);
-      border: 2px solid var(--primary-color);
-      border-radius: 15px;
-      padding: 25px;
-      margin: 30px 0;
-    }
-
-    .test-controls {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin: 15px 0;
-    }
-
-    .test-button {
-      background: var(--success-color);
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .test-button:hover {
-      background: #1e7e34;
-      transform: translateY(-2px);
-    }
-
-    .progress-container {
-      margin: 20px 0;
-    }
-
-    .progress-bar {
-      width: 100%;
-      background: #e9ecef;
-      border-radius: 10px;
-      height: 24px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--success-color), var(--info-color));
-      border-radius: 10px;
-      transition: width 0.5s ease;
-      display: flex;
-      align-items: center;
-      padding: 0 10px;
-      color: white;
-      font-weight: bold;
-      font-size: 12px;
-    }
-
-    #output {
-      background: #2d2d2d;
-      color: #f8f8f2;
-      border: 1px solid #444;
-      padding: 20px;
-      border-radius: 8px;
-      min-height: 300px;
-      max-height: 500px;
-      overflow-y: auto;
-      font-family: 'Consolas', 'Monaco', monospace;
-      white-space: pre-wrap;
-      font-size: 13px;
-      line-height: 1.4;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    @media (max-width: 768px) {
-      .navigation {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .nav-buttons {
-        justify-content: center;
-      }
-
-      .title {
-        font-size: 2rem;
-      }
-
-      .container {
-        padding: 20px;
-      }
-
-      .feature-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .test-controls {
-        justify-content: center;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schritt für Schritt: der deterministische Quantensimulator</title>
+<style>
+  :root { --bg1:#667eea; --bg2:#764ba2; --panel:rgba(30,30,50,0.95); --card:rgba(255,255,255,0.06);
+          --line:rgba(255,255,255,0.14); --acc:#4ecdc4; --acc2:#f7b731; --ok:#2ecc71; --bad:#e74c3c; --mut:#b8bfd6; }
+  * { box-sizing: border-box; }
+  body { font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; padding:16px;
+         background:linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%); color:#fff; min-height:100vh; }
+  .container { max-width:1000px; margin:0 auto; background:var(--panel); border-radius:18px; padding:26px;
+               box-shadow:0 20px 60px rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); line-height:1.62; }
+  .topbar { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+  .topbar a, .lang-btn, .dl { color:#fff; text-decoration:none; background:rgba(255,255,255,0.12); border:1px solid var(--line);
+               padding:8px 14px; border-radius:8px; cursor:pointer; font-size:14px; }
+  .lang-btn.active { background:var(--acc); color:#10202a; font-weight:bold; }
+  h1 { margin:8px 0 4px; font-size:1.7em; }
+  .subtitle { color:var(--mut); margin-bottom:16px; }
+  h2 { color:var(--acc); font-size:1.25em; margin:0 0 8px; }
+  .stage { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; margin:18px 0; }
+  .stage-num { display:inline-block; background:var(--acc); color:#10202a; font-weight:bold; border-radius:8px; padding:1px 9px; margin-right:8px; }
+  .rule { background:rgba(78,205,196,0.12); border-left:4px solid var(--acc); padding:9px 14px; border-radius:8px; margin:10px 0;
+          font-family:'Cambria Math','Times New Roman',serif; font-size:1.05em; }
+  .btn { background:linear-gradient(135deg,#4e54c8,#8f94fb); color:#fff; border:none; padding:8px 13px; border-radius:8px; cursor:pointer; font-size:14px; margin:4px 4px 0 0; }
+  .btn.alt { background:linear-gradient(135deg,#11998e,#38ef7d); color:#08241c; }
+  pre.code { background:rgba(0,0,0,0.42); border-radius:10px; padding:12px; overflow:auto; font-size:12.5px; line-height:1.45;
+             font-family:Consolas,'Courier New',monospace; display:none; max-height:520px; margin-top:10px; }
+  pre.code.open { display:block; }
+  .tblwrap { overflow-x:auto; }
+  table.tests { width:100%; border-collapse:collapse; font-size:13.5px; margin-top:10px; }
+  table.tests td, table.tests th { border-bottom:1px solid var(--line); padding:5px 6px; text-align:left; vertical-align:top; }
+  .mono { font-family:Consolas,'Courier New',monospace; }
+  .ok { color:var(--ok); font-weight:bold; } .bad { color:var(--bad); font-weight:bold; }
+  .summary { margin-top:8px; font-weight:bold; }
+  .note { color:var(--mut); font-size:0.92em; }
+  .overview { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; margin:10px 0 4px; }
+  .ov { background:rgba(0,0,0,0.25); border-radius:10px; padding:10px; font-size:0.92em; }
+  .ov b { color:var(--acc2); }
+  @media (max-width:600px) { .container { padding:14px; } }
+</style>
 </head>
 <body>
-  <!-- Header -->
-  <div class="header">
-    <h1 class="title" id="main-title">🚀 T0 Quantum Modules: Step-by-Step Implementation</h1>
-    <p class="subtitle" id="main-subtitle">Complete Guide to Building T0-Enhanced Quantum Algorithms</p>
-    <div class="status-badge" id="status-badge">✅ PRODUCTION READY</div>
-  </div>
-
-  <!-- Navigation -->
-  <div class="navigation">
-    <div class="nav-buttons">
-      <a href="../../index.html" class="btn btn-home">
-        🏠 <span id="home-text">Back to Index</span>
-      </a>
-      <button class="btn btn-primary" onclick="downloadModules()">
-        📄 <span id="download-text">Download All Modules</span>
-      </button>
-    </div>
-    
-    <div class="language-selector">
-      <button class="lang-btn active" onclick="switchLanguage('en')" id="lang-en">🇺🇸 English</button>
-      <button class="lang-btn" onclick="switchLanguage('de')" id="lang-de">🇩🇪 Deutsch</button>
+<div class="container">
+  <div class="topbar">
+    <div><a href="index.html" data-i18n="back">← Übersicht</a>
+      <a href="quantum_simulator_deterministic.html" id="simlink" data-i18n="sim">⚛️ Zum Simulator</a></div>
+    <div>
+      <button class="lang-btn active" id="btn-de" onclick="setLang('de')">Deutsch</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
     </div>
   </div>
 
-  <div class="container">
-    <!-- English Content -->
-    <div id="content-en">
-      <!-- Introduction -->
-      <div class="highlight-box">
-        <h2>🎯 Module Overview</h2>
-        <p><strong>Complete Implementation:</strong> Build advanced quantum algorithms step-by-step with T0-Theory enhancements. All modules include deterministic optimization, ξ-parameter corrections, and energy field analysis.</p>
-      </div>
+  <h1 data-i18n="title">Schritt für Schritt: der deterministische Quantensimulator</h1>
+  <div class="subtitle" data-i18n="subtitle">Wie der Simulator aufgebaut ist – mit dem echten Code und Tests, die wirklich rechnen</div>
 
-      <!-- Features Overview -->
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h4>T0 Core Simulator</h4>
-          <p>Complete quantum simulator with ξ-parameter corrections and energy field dynamics</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔍</div>
-          <h4>Quantum Algorithms</h4>
-          <p>Bell states, Deutsch, Grover search with deterministic enhancements</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🌊</div>
-          <h4>Advanced Modules</h4>
-          <p>Quantum Fourier Transform, Shor components, optimization routines</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📊</div>
-          <h4>Analysis Tools</h4>
-          <p>Energy field analysis, repeatability testing, performance benchmarks</p>
-        </div>
-      </div>
+  <p data-i18n-html="intro1">Diese Seite zerlegt den <a href="quantum_simulator_deterministic.html" style="color:#4ecdc4">Quantensimulator mit deterministischer Messung</a> in vier Stufen. Jede Stufe erklärt, was gerechnet wird, zeigt den zugehörigen Code und prüft ihn mit Tests, die beim Klick ausgeführt und mit dem erwarteten Wert verglichen werden. Der angezeigte Code ist derselbe, der im Simulator läuft; „Module herunterladen“ liefert ihn als eine Datei.</p>
+  <div class="overview">
+    <div class="ov"><b data-i18n="ov1t">1 · Zustand und Gatter</b><br><span data-i18n="ov1">Komplexe Amplituden, Ein- und Zwei-Qubit-Gatter, Zylinderkoordinaten</span></div>
+    <div class="ov"><b data-i18n="ov2t">2 · Messung nach Dok. 230</b><br><span data-i18n="ov2">A(z, λ) = sgn(z − λ): jedes Ergebnis festgelegt</span></div>
+    <div class="ov"><b data-i18n="ov3t">3 · Messreihe und Bell-Test</b><br><span data-i18n="ov3">λ-Folge, Häufigkeiten, CHSH mit ξ-Dämpfung</span></div>
+    <div class="ov"><b data-i18n="ov4t">4 · Ordnungssuche nach Shor</b><br><span data-i18n="ov4">Zählregister, Fourier-Transformation, bitweise Messung, Kettenbruch</span></div>
+  </div>
+  <button class="btn alt" onclick="runAll()" data-i18n="runall">Alle Tests ausführen</button>
+  <button class="btn" onclick="download()" data-i18n="download">Module herunterladen</button>
+  <div class="summary" id="sum-all"></div>
 
-      <!-- STAGE 1: Core T0 Simulator -->
-      <div class="step">
-        <h3>Stage 1: T0 Core Quantum Simulator <span class="module-status status-ready">✅ READY</span></h3>
-        <p><strong>Foundation:</strong> Complete T0-Theory quantum simulator with ξ-parameter corrections and energy field tracking.</p>
-        
-        <button class="implementation-btn" onclick="showImplementation('stage1')">
-          🔧 View Implementation
-        </button>
-        <button class="implementation-btn" onclick="testStage1()">
-          🧪 Test Module
-        </button>
-        
-        <div class="code-block" id="stage1-code" style="display: none;">
-// T0 Core Quantum Simulator - Complete Implementation
-const T0QuantumSimulator = {
-  // Create new T0 quantum state
-  create: (numQubits, xi = 1.0e-5) => ({
-    n: numQubits,
-    s: 1 << numQubits, // 2^n states
-    a: [1, ...Array((1 << numQubits) - 1).fill(0)], // Start in |0...0⟩
-    xi: xi, // T0 correction parameter
-    g: 0,  // Gate count
-    history: [],
-    t0_corrections: [],
-    energy_field: Array(1 << numQubits).fill(0)
-  }),
-
-  // Normalize quantum state
-  norm: (state) => {
-    const norm = Math.sqrt(state.a.reduce((sum, amp) => sum + amp * amp, 0));
-    if (norm > 1e-15) {
-      state.a = state.a.map(amp => amp / norm);
-    }
-  },
-
-  // T0-enhanced Hadamard gate
-  H: (state, qubit) => {
-    state.g++;
-    state.history.push(`H(${qubit})`);
-    state.t0_corrections.push({gate: 'H', qubit: qubit, xi: state.xi});
-    
-    const newAmps = Array(state.s).fill(0);
-    const mask = 1 << qubit;
-    const correction = 1 + state.xi;
-    const invSqrt2 = 1 / Math.sqrt(2);
-    
-    for (let i = 0; i < state.s; i++) {
-      const amp = state.a[i];
-      if (Math.abs(amp) < 1e-15) continue;
-      
-      if (i & mask) { // Qubit is |1⟩
-        newAmps[i & ~mask] += amp * invSqrt2 * correction;
-        newAmps[i] -= amp * invSqrt2 * correction;
-      } else { // Qubit is |0⟩
-        newAmps[i] += amp * invSqrt2 * correction;
-        newAmps[i | mask] += amp * invSqrt2 * correction;
-      }
-      
-      // Update T0 energy field
-      state.energy_field[i] += Math.abs(amp) * state.xi;
-    }
-    
-    state.a = newAmps;
-    T0QuantumSimulator.norm(state);
-  },
-
-  // T0-enhanced CNOT gate
-  CNOT: (state, control, target) => {
-    state.g++;
-    state.history.push(`CNOT(${control},${target})`);
-    state.t0_corrections.push({gate: 'CNOT', control: control, target: target, xi: state.xi});
-    
-    const newAmps = Array(state.s).fill(0);
-    const ctrlMask = 1 << control;
-    const targMask = 1 << target;
-    const correction = 1 + state.xi;
-    
-    for (let i = 0; i < state.s; i++) {
-      const amp = state.a[i];
-      if (Math.abs(amp) < 1e-15) continue;
-      
-      if (i & ctrlMask) { // Control is |1⟩: flip target
-        const newState = i ^ targMask;
-        newAmps[newState] += amp * correction;
-        state.energy_field[newState] += Math.abs(amp) * state.xi;
-      } else { // Control is |0⟩: no change
-        newAmps[i] += amp * correction;
-        state.energy_field[i] += Math.abs(amp) * state.xi;
-      }
-    }
-    
-    state.a = newAmps;
-    T0QuantumSimulator.norm(state);
-  },
-
-  // T0-enhanced Pauli-X gate
-  X: (state, qubit) => {
-    state.g++;
-    state.history.push(`X(${qubit})`);
-    state.t0_corrections.push({gate: 'X', qubit: qubit, xi: state.xi});
-    
-    const mask = 1 << qubit;
-    const correction = 1 + state.xi;
-    const newAmps = Array(state.s).fill(0);
-    
-    for (let i = 0; i < state.s; i++) {
-      const amp = state.a[i];
-      if (Math.abs(amp) > 1e-15) {
-        const flipped = i ^ mask;
-        newAmps[flipped] = amp * correction;
-        state.energy_field[flipped] += Math.abs(amp) * state.xi;
-      }
-    }
-    
-    state.a = newAmps;
-    T0QuantumSimulator.norm(state);
-  },
-
-  // T0-enhanced Pauli-Z gate
-  Z: (state, qubit) => {
-    state.g++;
-    state.history.push(`Z(${qubit})`);
-    state.t0_corrections.push({gate: 'Z', qubit: qubit, xi: state.xi});
-    
-    const mask = 1 << qubit;
-    const correction = 1 + state.xi;
-    
-    for (let i = 0; i < state.s; i++) {
-      if (i & mask) { // Apply phase flip to |1⟩ states
-        state.a[i] *= -1 * correction;
-        state.energy_field[i] += Math.abs(state.a[i]) * state.xi;
-      } else {
-        state.a[i] *= correction;
-      }
-    }
-  },
-
-  // Get measurement probabilities
-  probs: (state) => {
-    const probs = {};
-    for (let i = 0; i < state.s; i++) {
-      const prob = state.a[i] * state.a[i];
-      if (prob > 1e-12) {
-        const binary = i.toString(2).padStart(state.n, '0');
-        probs[binary] = prob;
-      }
-    }
-    return probs;
-  },
-
-  // Get quantum amplitudes
-  amplitudes: (state) => {
-    const amps = {};
-    for (let i = 0; i < state.s; i++) {
-      if (Math.abs(state.a[i]) > 1e-12) {
-        const binary = i.toString(2).padStart(state.n, '0');
-        amps[binary] = state.a[i];
-      }
-    }
-    return amps;
-  },
-
-  // Analyze T0 energy field
-  analyzeEnergyField: (state) => {
-    const totalEnergy = state.energy_field.reduce((sum, e) => sum + e, 0);
-    const avgEnergy = totalEnergy / state.energy_field.length;
-    const maxEnergy = Math.max(...state.energy_field);
-    
-    return {
-      total: totalEnergy,
-      average: avgEnergy,
-      maximum: maxEnergy,
-      corrections: state.t0_corrections.length,
-      distribution: state.energy_field.map(e => e / totalEnergy || 0)
-    };
-  },
-
-  // Get circuit summary
-  getCircuit: (state) => {
-    const circuit = state.history.join(' → ');
-    const t0Data = state.t0_corrections.length > 0 ? 
-      ` [T0: ${state.t0_corrections.length} corrections]` : '';
-    return circuit + t0Data;
-  }
-};
-        </div>
-      </div>
-
-      <!-- STAGE 2: Quantum Algorithms -->
-      <div class="step">
-        <h3>Stage 2: Quantum Algorithm Library <span class="module-status status-ready">✅ COMPLETE</span></h3>
-        <p><strong>Implementation:</strong> Complete suite of quantum algorithms with T0 deterministic enhancements.</p>
-        
-        <button class="implementation-btn" onclick="showImplementation('stage2')">
-          🔧 View Algorithms
-        </button>
-        <button class="implementation-btn" onclick="testStage2()">
-          🧪 Test Algorithms
-        </button>
-        
-        <div class="code-block" id="stage2-code" style="display: none;">
-// T0 Quantum Algorithm Library
-const T0Algorithms = {
-  
-  // Bell State Generation with T0 analysis
-  createBellState: (xi = 1.0e-5) => {
-    const state = T0QuantumSimulator.create(2, xi);
-    
-    // Create Bell state: (|00⟩ + |11⟩)/√2
-    T0QuantumSimulator.H(state, 0);
-    T0QuantumSimulator.CNOT(state, 0, 1);
-    
-    const probs = T0QuantumSimulator.probs(state);
-    const bellFidelity = (probs['00'] || 0) + (probs['11'] || 0);
-    
-    return {
-      state: state,
-      probabilities: probs,
-      bellFidelity: bellFidelity,
-      energyAnalysis: T0QuantumSimulator.analyzeEnergyField(state),
-      circuit: T0QuantumSimulator.getCircuit(state)
-    };
-  },
-
-  // Deutsch Algorithm with T0 deterministic advantage
-  deutschAlgorithm: (oracleType = 'constant', xi = 1.0e-5) => {
-    const state = T0QuantumSimulator.create(1, xi);
-    
-    // Step 1: Create superposition
-    T0QuantumSimulator.H(state, 0);
-    
-    // Step 2: Apply oracle
-    if (oracleType === 'balanced') {
-      T0QuantumSimulator.Z(state, 0); // Phase flip for balanced
-    }
-    
-    // Step 3: Final Hadamard
-    T0QuantumSimulator.H(state, 0);
-    
-    const probs = T0QuantumSimulator.probs(state);
-    const result = (probs['0'] || 0) > 0.5 ? 0 : 1;
-    const expected = oracleType === 'constant' ? 0 : 1;
-    
-    return {
-      oracleType: oracleType,
-      result: result,
-      expected: expected,
-      success: result === expected,
-      probabilities: probs,
-      energyAnalysis: T0QuantumSimulator.analyzeEnergyField(state),
-      circuit: T0QuantumSimulator.getCircuit(state)
-    };
-  },
-
-  // 3-Qubit Grover Search with T0 enhancement
-  groverSearch: (targetState = '101', xi = 1.0e-5) => {
-    const state = T0QuantumSimulator.create(3, xi);
-    
-    // Step 1: Create uniform superposition
-    T0QuantumSimulator.H(state, 0);
-    T0QuantumSimulator.H(state, 1);
-    T0QuantumSimulator.H(state, 2);
-    
-    // Step 2: Oracle - mark target state
-    const targetIndex = parseInt(targetState, 2);
-    state.a[targetIndex] *= -1 * (1 + xi);
-    state.history.push(`Oracle(${targetState})`);
-    state.t0_corrections.push({gate: 'Oracle', target: targetState, xi: xi});
-    
-    // Step 3: Diffusion operator
-    // H⊗H⊗H
-    T0QuantumSimulator.H(state, 0);
-    T0QuantumSimulator.H(state, 1);
-    T0QuantumSimulator.H(state, 2);
-    
-    // Flip |000⟩ phase
-    state.a[0] *= -1 * (1 + xi);
-    state.history.push('Diffusion');
-    
-    // H⊗H⊗H
-    T0QuantumSimulator.H(state, 0);
-    T0QuantumSimulator.H(state, 1);
-    T0QuantumSimulator.H(state, 2);
-    
-    const probs = T0QuantumSimulator.probs(state);
-    const targetProb = probs[targetState] || 0;
-    
-    return {
-      targetState: targetState,
-      targetProbability: targetProb,
-      allProbabilities: probs,
-      success: targetProb > 0.6,
-      amplificationFactor: targetProb / (1/8),
-      energyAnalysis: T0QuantumSimulator.analyzeEnergyField(state),
-      circuit: T0QuantumSimulator.getCircuit(state)
-    };
-  },
-
-  // GHZ State Generation
-  createGHZState: (numQubits = 3, xi = 1.0e-5) => {
-    const state = T0QuantumSimulator.create(numQubits, xi);
-    
-    // Step 1: Put first qubit in superposition
-    T0QuantumSimulator.H(state, 0);
-    
-    // Step 2: Entangle all other qubits
-    for (let i = 1; i < numQubits; i++) {
-      T0QuantumSimulator.CNOT(state, 0, i);
-    }
-    
-    const probs = T0QuantumSimulator.probs(state);
-    const allZeros = '0'.repeat(numQubits);
-    const allOnes = '1'.repeat(numQubits);
-    const ghzFidelity = (probs[allZeros] || 0) + (probs[allOnes] || 0);
-    
-    return {
-      numQubits: numQubits,
-      probabilities: probs,
-      ghzFidelity: ghzFidelity,
-      maximallyEntangled: Math.abs((probs[allZeros] || 0) - (probs[allOnes] || 0)) < 0.01,
-      energyAnalysis: T0QuantumSimulator.analyzeEnergyField(state),
-      circuit: T0QuantumSimulator.getCircuit(state)
-    };
-  },
-
-  // Quantum Fourier Transform (3-qubit)
-  quantumFourierTransform: (xi = 1.0e-5) => {
-    const state = T0QuantumSimulator.create(3, xi);
-    
-    // Initialize with some test state
-    T0QuantumSimulator.X(state, 0); // Start with |001⟩
-    
-    // QFT implementation
-    for (let i = 0; i < 3; i++) {
-      T0QuantumSimulator.H(state, i);
-      
-      // Controlled rotations (simplified for demonstration)
-      for (let j = i + 1; j < 3; j++) {
-        const angle = Math.PI / Math.pow(2, j - i);
-        // Simplified controlled rotation
-        const ctrlMask = 1 << j;
-        const targMask = 1 << i;
-        
-        for (let k = 0; k < state.s; k++) {
-          if ((k & ctrlMask) && (k & targMask)) {
-            state.a[k] *= Math.cos(angle) * (1 + xi);
-            state.energy_field[k] += Math.abs(state.a[k]) * xi;
-          }
-        }
-        
-        state.history.push(`CR(${j},${i},${angle.toFixed(3)})`);
-        state.t0_corrections.push({gate: 'CR', control: j, target: i, angle: angle, xi: xi});
-      }
-    }
-    
-    // Bit reversal (simplified)
-    const newAmps = [...state.a];
-    for (let i = 0; i < state.s; i++) {
-      let reversed = 0;
-      let temp = i;
-      for (let bit = 0; bit < state.n; bit++) {
-        reversed = (reversed << 1) | (temp & 1);
-        temp >>= 1;
-      }
-      newAmps[reversed] = state.a[i];
-    }
-    state.a = newAmps;
-    state.history.push('BitReversal');
-    
-    const probs = T0QuantumSimulator.probs(state);
-    
-    return {
-      probabilities: probs,
-      frequencyAnalysis: T0Algorithms.analyzeFrequencies(probs, 3),
-      energyAnalysis: T0QuantumSimulator.analyzeEnergyField(state),
-      circuit: T0QuantumSimulator.getCircuit(state)
-    };
-  },
-
-  // Frequency analysis for QFT
-  analyzeFrequencies: (probs, numQubits) => {
-    const frequencies = [];
-    const totalStates = Math.pow(2, numQubits);
-    
-    Object.entries(probs).forEach(([stateStr, prob]) => {
-      if (prob > 0.001) {
-        const stateInt = parseInt(stateStr, 2);
-        const frequency = stateInt / totalStates;
-        const period = frequency > 0 ? 1 / frequency : 0;
-        
-        frequencies.push({
-          measurement: stateInt,
-          binaryState: stateStr,
-          probability: prob,
-          frequency: frequency,
-          estimatedPeriod: Math.round(period)
-        });
-      }
-    });
-    
-    return frequencies.sort((a, b) => b.probability - a.probability);
-  }
-};
-        </div>
-      </div>
-
-      <!-- STAGE 3: Advanced Analysis Tools -->
-      <div class="step">
-        <h3>Stage 3: T0 Analysis & Optimization Tools <span class="module-status status-ready">✅ ADVANCED</span></h3>
-        <p><strong>Tools:</strong> Advanced analysis modules for T0 parameter studies, performance optimization, and validation testing.</p>
-        
-        <button class="implementation-btn" onclick="showImplementation('stage3')">
-          🔧 View Analysis Tools
-        </button>
-        <button class="implementation-btn" onclick="testStage3()">
-          🧪 Run Analysis
-        </button>
-        
-        <div class="code-block" id="stage3-code" style="display: none;">
-// T0 Analysis & Optimization Tools
-const T0AnalysisTools = {
-  
-  // Comprehensive T0 parameter study
-  parameterStudy: (algorithm, xiValues = [0, 1e-6, 1e-5, 1e-4]) => {
-    const results = {};
-    
-    xiValues.forEach(xi => {
-      let algorithmResult;
-      
-      switch(algorithm) {
-        case 'bell':
-          algorithmResult = T0Algorithms.createBellState(xi);
-          break;
-        case 'deutsch':
-          algorithmResult = T0Algorithms.deutschAlgorithm('balanced', xi);
-          break;
-        case 'grover':
-          algorithmResult = T0Algorithms.groverSearch('101', xi);
-          break;
-        default:
-          algorithmResult = T0Algorithms.createBellState(xi);
-      }
-      
-      results[`xi_${xi.toExponential()}`] = {
-        xi: xi,
-        result: algorithmResult,
-        energyTotal: algorithmResult.energyAnalysis.total,
-        corrections: algorithmResult.energyAnalysis.corrections
-      };
-    });
-    
-    return {
-      algorithm: algorithm,
-      xiValues: xiValues,
-      results: results,
-      analysis: T0AnalysisTools.analyzeParameterEffects(results)
-    };
-  },
-
-  // Analyze T0 parameter effects
-  analyzeParameterEffects: (parameterResults) => {
-    const effects = {};
-    const xiValues = Object.keys(parameterResults);
-    
-    // Compare energy scaling
-    const energyScaling = xiValues.map(key => ({
-      xi: parameterResults[key].xi,
-      energy: parameterResults[key].energyTotal
-    }));
-    
-    // Detect linear scaling with ξ
-    const linearScaling = energyScaling.slice(1).every((point, i) => {
-      const prevPoint = energyScaling[i];
-      const expectedRatio = point.xi / prevPoint.xi;
-      const actualRatio = point.energy / (prevPoint.energy || 1e-10);
-      return Math.abs(expectedRatio - actualRatio) < 0.1;
-    });
-    
-    return {
-      energyScaling: energyScaling,
-      linearScaling: linearScaling,
-      xiEffectsDetected: energyScaling[energyScaling.length - 1].energy > 0,
-      optimalXi: 1.0e-5 // Higgs-derived value
-    };
-  },
-
-  // Repeatability analysis
-  repeatabilityTest: (algorithm, numRuns = 10, xi = 1.0e-5) => {
-    const runs = [];
-    const observables = [];
-    
-    for (let i = 0; i < numRuns; i++) {
-      let result;
-      
-      switch(algorithm) {
-        case 'bell':
-          result = T0Algorithms.createBellState(xi);
-          observables.push(result.probabilities['00'] || 0);
-          break;
-        case 'deutsch':
-          result = T0Algorithms.deutschAlgorithm('constant', xi);
-          observables.push(result.probabilities['0'] || 0);
-          break;
-        case 'grover':
-          result = T0Algorithms.groverSearch('101', xi);
-          observables.push(result.targetProbability);
-          break;
-        default:
-          result = T0Algorithms.createBellState(xi);
-          observables.push(result.probabilities['00'] || 0);
-      }
-      
-      runs.push(result);
-    }
-    
-    // Statistical analysis
-    const mean = observables.reduce((sum, val) => sum + val, 0) / numRuns;
-    const variance = observables.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / numRuns;
-    const stdDev = Math.sqrt(variance);
-    
-    return {
-      algorithm: algorithm,
-      numRuns: numRuns,
-      xi: xi,
-      observables: observables,
-      statistics: {
-        mean: mean,
-        variance: variance,
-        standardDeviation: stdDev,
-        coefficientOfVariation: stdDev / mean * 100
-      },
-      t0Enhanced: variance < 1e-10, // T0 prediction: near-zero variance
-      runs: runs
-    };
-  },
-
-  // Performance benchmark
-  performanceBenchmark: () => {
-    const algorithms = ['bell', 'deutsch', 'grover'];
-    const benchmark = {};
-    
-    algorithms.forEach(alg => {
-      const startTime = performance.now();
-      
-      // Run algorithm multiple times
-      for (let i = 0; i < 100; i++) {
-        switch(alg) {
-          case 'bell':
-            T0Algorithms.createBellState();
-            break;
-          case 'deutsch':
-            T0Algorithms.deutschAlgorithm('balanced');
-            break;
-          case 'grover':
-            T0Algorithms.groverSearch('101');
-            break;
-        }
-      }
-      
-      const endTime = performance.now();
-      const avgTime = (endTime - startTime) / 100;
-      
-      benchmark[alg] = {
-        averageTime: avgTime,
-        operationsPerSecond: 1000 / avgTime
-      };
-    });
-    
-    return {
-      timestamp: new Date().toISOString(),
-      benchmark: benchmark,
-      totalAlgorithms: algorithms.length,
-      platform: 'JavaScript/Browser'
-    };
-  },
-
-  // Comprehensive validation suite
-  runValidationSuite: () => {
-    const validationResults = {};
-    
-    // Test 1: Bell State Validation
-    const bellTest = T0Algorithms.createBellState();
-    const bellValid = Math.abs(bellTest.bellFidelity - 1.0) < 1e-10;
-    
-    validationResults.bellState = {
-      result: bellTest,
-      validation: bellValid,
-      expected: 1.0,
-      actual: bellTest.bellFidelity
-    };
-    
-    // Test 2: Deutsch Algorithm Validation
-    const deutschConstant = T0Algorithms.deutschAlgorithm('constant');
-    const deutschBalanced = T0Algorithms.deutschAlgorithm('balanced');
-    const deutschValid = deutschConstant.success && deutschBalanced.success;
-    
-    validationResults.deutschAlgorithm = {
-      constant: deutschConstant,
-      balanced: deutschBalanced,
-      validation: deutschValid
-    };
-    
-    // Test 3: Grover Search Validation
-    const groverTest = T0Algorithms.groverSearch('110');
-    const groverValid = groverTest.success && groverTest.targetProbability > 0.6;
-    
-    validationResults.groverSearch = {
-      result: groverTest,
-      validation: groverValid,
-      targetProbability: groverTest.targetProbability
-    };
-    
-    // Test 4: T0 Parameter Effects
-    const parameterTest = T0AnalysisTools.parameterStudy('bell');
-    const parameterValid = parameterTest.analysis.xiEffectsDetected;
-    
-    validationResults.t0Parameters = {
-      result: parameterTest,
-      validation: parameterValid
-    };
-    
-    // Overall assessment
-    const validations = [bellValid, deutschValid, groverValid, parameterValid];
-    const overallValid = validations.every(v => v);
-    const successRate = validations.filter(v => v).length / validations.length;
-    
-    return {
-      timestamp: new Date().toISOString(),
-      individualTests: validationResults,
-      overallValidation: overallValid,
-      successRate: successRate,
-      summary: {
-        totalTests: validations.length,
-        passed: validations.filter(v => v).length,
-        failed: validations.filter(v => !v).length
-      }
-    };
-  }
-};
-        </div>
-      </div>
-
-      <!-- Interactive Test Laboratory -->
-      <div class="test-area">
-        <h3>🧪 Interactive Test Laboratory</h3>
-        <p>Test all T0 quantum modules with real-time analysis and validation:</p>
-        
-        <div class="test-controls">
-          <button class="test-button" onclick="runAllTests()">🚀 Run All Tests</button>
-          <button class="test-button" onclick="runParameterStudy()">📊 Parameter Study</button>
-          <button class="test-button" onclick="runRepeatabilityTest()">🔄 Repeatability Test</button>
-          <button class="test-button" onclick="runBenchmark()">⚡ Performance Benchmark</button>
-          <button class="test-button" onclick="clearOutput()">🧹 Clear Output</button>
-        </div>
-        
-        <div class="progress-container">
-          <div class="progress-bar">
-            <div class="progress-fill" id="progress" style="width: 0%;">Ready to test</div>
-          </div>
-        </div>
-        
-        <div id="output">Click "Run All Tests" to begin comprehensive T0 quantum module testing...</div>
-      </div>
-    </div>
-
-    <!-- German Content -->
-    <div id="content-de" class="hidden">
-      <!-- Einführung -->
-      <div class="highlight-box">
-        <h2>🎯 Modul-Übersicht</h2>
-        <p><strong>Komplette Implementation:</strong> Erstelle erweiterte Quantenalgorithmen Schritt-für-Schritt mit T0-Theorie-Verbesserungen. Alle Module enthalten deterministische Optimierung, ξ-Parameter-Korrekturen und Energiefeld-Analyse.</p>
-      </div>
-
-      <!-- Funktionen Übersicht -->
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h4>T0 Kern-Simulator</h4>
-          <p>Vollständiger Quantensimulator mit ξ-Parameter-Korrekturen und Energiefeld-Dynamik</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔍</div>
-          <h4>Quantenalgorithmen</h4>
-          <p>Bell-Zustände, Deutsch, Grover-Suche mit deterministischen Verbesserungen</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🌊</div>
-          <h4>Erweiterte Module</h4>
-          <p>Quantenfouriertransformation, Shor-Komponenten, Optimierungsroutinen</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📊</div>
-          <h4>Analyse-Tools</h4>
-          <p>Energiefeld-Analyse, Wiederholbarkeits-Tests, Performance-Benchmarks</p>
-        </div>
-      </div>
-
-      <!-- STUFE 1: Kern T0 Simulator -->
-      <div class="step">
-        <h3>Stufe 1: T0 Kern-Quantensimulator <span class="module-status status-ready">✅ BEREIT</span></h3>
-        <p><strong>Grundlage:</strong> Vollständiger T0-Theorie-Quantensimulator mit ξ-Parameter-Korrekturen und Energiefeld-Verfolgung.</p>
-        
-        <button class="implementation-btn" onclick="showImplementation('stage1')">
-          🔧 Implementation ansehen
-        </button>
-        <button class="implementation-btn" onclick="testStage1()">
-          🧪 Modul testen
-        </button>
-      </div>
-
-      <!-- STUFE 2: Quantenalgorithmen -->
-      <div class="step">
-        <h3>Stufe 2: Quantenalgorithmus-Bibliothek <span class="module-status status-ready">✅ VOLLSTÄNDIG</span></h3>
-        <p><strong>Implementation:</strong> Vollständige Suite von Quantenalgorithmen mit T0-deterministischen Verbesserungen.</p>
-        
-        <button class="implementation-btn" onclick="showImplementation('stage2')">
-          🔧 Algorithmen ansehen
-        </button>
-        <button class="implementation-btn" onclick="testStage2()">
-          🧪 Algorithmen testen
-        </button>
-      </div>
-
-      <!-- STUFE 3: Erweiterte Analyse-Tools -->
-      <div class="step">
-        <h3>Stufe 3: T0 Analyse & Optimierungs-Tools <span class="module-status status-ready">✅ ERWEITERT</span></h3>
-        <p><strong>Tools:</strong> Erweiterte Analyse-Module für T0-Parameter-Studien, Performance-Optimierung und Validierungs-Tests.</p>
-        
-        <button class="implementation-btn" onclick="showImplementation('stage3')">
-          🔧 Analyse-Tools ansehen
-        </button>
-        <button class="implementation-btn" onclick="testStage3()">
-          🧪 Analyse ausführen
-        </button>
-      </div>
-
-      <!-- Interaktives Test-Labor -->
-      <div class="test-area">
-        <h3>🧪 Interaktives Test-Labor</h3>
-        <p>Teste alle T0-Quantenmodule mit Echtzeit-Analyse und Validierung:</p>
-        
-        <div class="test-controls">
-          <button class="test-button" onclick="runAllTests()">🚀 Alle Tests ausführen</button>
-          <button class="test-button" onclick="runParameterStudy()">📊 Parameter-Studie</button>
-          <button class="test-button" onclick="runRepeatabilityTest()">🔄 Wiederholbarkeits-Test</button>
-          <button class="test-button" onclick="runBenchmark()">⚡ Performance-Benchmark</button>
-          <button class="test-button" onclick="clearOutput()">🧹 Ausgabe löschen</button>
-        </div>
-        
-        <div class="progress-container">
-          <div class="progress-bar">
-            <div class="progress-fill" id="progress" style="width: 0%;">Bereit zum Testen</div>
-          </div>
-        </div>
-        
-        <div id="output">Klicke "Alle Tests ausführen" um umfassende T0-Quantenmodul-Tests zu beginnen...</div>
-      </div>
-    </div>
+  <!-- Stage 1 -->
+  <div class="stage">
+    <h2><span class="stage-num">1</span><span data-i18n="s1t">Zustandsvektor und Gatter</span></h2>
+    <p data-i18n-html="s1p1">Ein Register aus n Qubits wird durch 2<sup>n</sup> komplexe Amplituden beschrieben. Qubit q entspricht dem Bit q der Basisnummer; q0 ist die letzte Stelle in |…q1q0⟩. Ein Ein-Qubit-Gatter ist eine 2×2-Matrix, die jeweils die beiden Amplituden verknüpft, die sich nur im Bit q unterscheiden. CNOT, CZ und SWAP vertauschen bzw. kehren die Vorzeichen der passenden Amplituden um. Alle Gatter sind unitär, die Norm bleibt also erhalten; einen zusätzlichen ξ-Faktor in den Gattern gibt es nicht, weil er sich bei der Normierung herauskürzen würde.</p>
+    <p data-i18n-html="s1p2">Für die Messung in Stufe 2 braucht man die Zylinderkoordinaten jedes Qubits. Sie folgen aus den Erwartungswerten der Pauli-Matrizen: z = ⟨σ<sub>z</sub>⟩ ist die Lage auf der Achse, r = √(⟨σ<sub>x</sub>⟩² + ⟨σ<sub>y</sub>⟩²) der Abstand von der Achse, θ die Phase.</p>
+    <button class="btn" onclick="toggle('c1')" data-i18n="showcode">Code anzeigen</button>
+    <button class="btn alt" onclick="runStage(1)" data-i18n="runtests">Tests ausführen</button>
+    <pre class="code" id="c1"></pre><div id="t1"></div>
   </div>
 
-  <script>
-    let currentLanguage = 'en';
-    let currentStage = 0;
-    let testResults = {};
+  <!-- Stage 2 -->
+  <div class="stage">
+    <h2><span class="stage-num">2</span><span data-i18n="s2t">Deterministische Messung nach Dok. 230</span></h2>
+    <p data-i18n-html="s2p1">In der FFGFT ist die Messung ein Polübergang: Die Messanordnung bringt eine Größe λ ∈ [−1, 1] auf der Zylinderachse mit, und der Ausgang folgt eindeutig aus der Lage z des Qubits:</p>
+    <div class="rule">A(z, λ) = sgn(z − λ) &nbsp;→&nbsp; |0⟩ <span data-i18n="for">für</span> λ &lt; z, &nbsp;|1⟩ <span data-i18n="else">sonst</span></div>
+    <p data-i18n-html="s2p2">Im Code wird z aus dem Gewicht p<sub>0</sub> aller Basiszustände mit Bit q = 0 berechnet, z = 2p<sub>0</sub> − 1. Danach werden die Amplituden des nicht erreichten Pols auf null gesetzt und der Rest neu normiert. Bei verschränkten Qubits verschiebt das die Lage z der anderen Qubits; so wirkt die topologisch verbundene Zylinderkonfiguration. Der Randfall λ = z = ±1 hat das Maß null; dort wird der Pol genommen, der Gewicht hat. Die Länge (1+z)/2 des Achsenstücks, das zu |0⟩ führt, ist genau |α|².</p>
+    <button class="btn" onclick="toggle('c2')" data-i18n="showcode">Code anzeigen</button>
+    <button class="btn alt" onclick="runStage(2)" data-i18n="runtests">Tests ausführen</button>
+    <pre class="code" id="c2"></pre><div id="t2"></div>
+  </div>
 
-    // Language switching functionality
-    function switchLanguage(lang) {
-      currentLanguage = lang;
-      
-      // Update button states
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      document.querySelector(`#lang-${lang}`).classList.add('active');
-      
-      // Show/hide content
-      document.getElementById('content-en').classList.toggle('hidden', lang !== 'en');
-      document.getElementById('content-de').classList.toggle('hidden', lang !== 'de');
-      
-      // Update navigation text
-      const translations = {
-        en: {
-          title: '🚀 T0 Quantum Modules: Step-by-Step Implementation',
-          subtitle: 'Complete Guide to Building T0-Enhanced Quantum Algorithms',
-          home: 'Back to Index',
-          download: 'Download All Modules',
-          status: '✅ PRODUCTION READY'
-        },
-        de: {
-          title: '🚀 T0-Quantenmodule: Schritt-für-Schritt Implementation',
-          subtitle: 'Komplette Anleitung für T0-erweiterte Quantenalgorithmen',
-          home: 'Zurück zum Index',
-          download: 'Alle Module herunterladen',
-          status: '✅ PRODUKTIONSBEREIT'
-        }
-      };
-      
-      document.getElementById('main-title').textContent = translations[lang].title;
-      document.getElementById('main-subtitle').textContent = translations[lang].subtitle;
-      document.getElementById('home-text').textContent = translations[lang].home;
-      document.getElementById('download-text').textContent = translations[lang].download;
-      document.getElementById('status-badge').textContent = translations[lang].status;
-      
-      document.documentElement.lang = lang;
-    }
+  <!-- Stage 3 -->
+  <div class="stage">
+    <h2><span class="stage-num">3</span><span data-i18n="s3t">Messreihe und Bell-Test</span></h2>
+    <p data-i18n-html="s3p1">Für eine Messreihe bekommt jeder Durchlauf einen festen λ-Vektor aus einer Halton-Folge: Für Qubit j wird die Basis j der Primzahlen verwendet. Die Folge ist vollständig deterministisch und füllt das Intervall gleichmäßig. Zählt man die Ergebnisse, nähern sich die Häufigkeiten |Amplitude|².</p>
+    <p data-i18n-html="s3p2">Der Bell-Test misst Φ⁺ entlang zweier Winkel je Seite. Gemessen wird in der x-z-Ebene, indem man vorher mit R<sub>y</sub>(−Winkel) dreht. λ<sub>A</sub> und λ<sub>B</sub> laufen über ein gleichmäßiges M×M-Gitter; A wird zuerst gemessen und legt die Lage von B fest. Daneben steht die Korrelation mit der ξ-Dämpfung aus Dok. 175:</p>
+    <div class="rule">E(a, b) = cos(a − b) · (1 − ξ (Δθ)²/(π² D<sub>f</sub>)), &nbsp; ξ = 4/30000, D<sub>f</sub> = 3 − ξ</div>
+    <p class="note" data-i18n="s3note">Die Dämpfung verschiebt S nur um etwa 2·10⁻⁵ und ist mit heutiger Hardware nicht auflösbar (Dok. 190, R142).</p>
+    <button class="btn" onclick="toggle('c3')" data-i18n="showcode">Code anzeigen</button>
+    <button class="btn alt" onclick="runStage(3)" data-i18n="runtests">Tests ausführen</button>
+    <pre class="code" id="c3"></pre><div id="t3"></div>
+  </div>
 
-    function updateProgress(percentage, text = '') {
-      const progressFill = document.getElementById('progress');
-      progressFill.style.width = percentage + '%';
-      progressFill.textContent = text || `${percentage}% Complete`;
-    }
-    
-    function log(message) {
-      const output = document.getElementById('output');
-      const timestamp = new Date().toLocaleTimeString();
-      output.textContent += `[${timestamp}] ${message}\n`;
-      output.scrollTop = output.scrollHeight;
-    }
-    
-    function clearOutput() {
-      document.getElementById('output').textContent = '';
-      updateProgress(0, 'Ready to test');
-    }
+  <!-- Stage 4 -->
+  <div class="stage">
+    <h2><span class="stage-num">4</span><span data-i18n="s4t">Ordnungssuche nach Shor</span></h2>
+    <p data-i18n-html="s4p1">Das Zählregister hat t = ⌈2·log₂N⌉ Qubits, Q = 2<sup>t</sup>. Nach der modularen Exponentiation fallen alle x mit gleichem Wert a<sup>x</sup> mod N in eine Klasse; die Quanten-Fourier-Transformation wird je Klasse mit einer schnellen Fourier-Transformation berechnet, und die Beiträge der Klassen addieren sich zur Verteilung P(y).</p>
+    <p data-i18n-html="s4p2">Gemessen wird das Zählregister Bit für Bit, vom höchsten an, jedes Bit nach A(z, λ) mit eigenem λ; z ergibt sich aus der Verteilung, eingeschränkt auf die schon gemessenen Bits. Aus y/Q liefert die Kettenbruchentwicklung einen Kandidaten für die Ordnung r; kleine Vielfache werden geprüft. Bei geradem r folgen die Faktoren aus ggT(a<sup>r/2</sup> ± 1, N). Das Rechenverfahren ist Shors; FFGFT-spezifisch ist nur die Messung (Dok. 190, R65).</p>
+    <button class="btn" onclick="toggle('c4')" data-i18n="showcode">Code anzeigen</button>
+    <button class="btn alt" onclick="runStage(4)" data-i18n="runtests">Tests ausführen</button>
+    <pre class="code" id="c4"></pre><div id="t4"></div>
+  </div>
 
-    function showImplementation(stage) {
-      const codeBlock = document.getElementById(`${stage}-code`);
-      if (codeBlock.style.display === 'none') {
-        codeBlock.style.display = 'block';
-      } else {
-        codeBlock.style.display = 'none';
-      }
-    }
+  <p class="note" data-i18n="footer">Quellen im Korpus: Messregel und Zylinderdarstellung Dok. 230; ξ-Dämpfung der Bell-Korrelation Dok. 175; Einordnung Dok. 190 (R65, R142, R143) und Dok. 384. Der Simulator beansprucht keinen Rechenvorteil; er zeigt die deterministische Lesart der Messung.</p>
+</div>
 
-    function testStage1() {
-      clearOutput();
-      const msg = currentLanguage === 'de' ? 
-        '🔧 Teste T0 Kern-Simulator...' :
-        '🔧 Testing T0 Core Simulator...';
-      log(msg);
-      
-      updateProgress(25, 'Testing Stage 1');
-      
-      // Test basic T0 simulator functions
-      try {
-        // Test Bell state creation
-        const successMsg = currentLanguage === 'de' ? 
-          '✅ Stufe 1 erfolgreich getestet - Alle Grundfunktionen arbeiten korrekt' :
-          '✅ Stage 1 successfully tested - All core functions working properly';
-        log(successMsg);
-        
-        const detailMsg = currentLanguage === 'de' ? 
-          '📊 T0-Simulator bereit: H, CNOT, X, Z Gatter mit ξ-Parameter-Korrekturen' :
-          '📊 T0 simulator ready: H, CNOT, X, Z gates with ξ-parameter corrections';
-        log(detailMsg);
-        
-        updateProgress(100, 'Stage 1 Complete');
-      } catch (error) {
-        const errorMsg = currentLanguage === 'de' ? 
-          '❌ Fehler in Stufe 1: ' :
-          '❌ Error in Stage 1: ';
-        log(errorMsg + error.message);
-      }
-    }
+<!-- core module: identical to the code in quantum_simulator_deterministic.html -->
+<script id="core">
+'use strict';
+const C = (re, im = 0) => ({ re, im });
+const cadd = (a, b) => C(a.re + b.re, a.im + b.im);
+const cmul = (a, b) => C(a.re * b.re - a.im * b.im, a.re * b.im + a.im * b.re);
+const cabs2 = (a) => a.re * a.re + a.im * a.im;
+const XI = 4 / 30000, DF = 3 - XI;
 
-    function testStage2() {
-      if (currentStage < 1) {
-        const errorMsg = currentLanguage === 'de' ? 
-          '⚠️ Bitte teste zuerst Stufe 1' :
-          '⚠️ Please test Stage 1 first';
-        log(errorMsg);
-        return;
-      }
-      
-      clearOutput();
-      const msg = currentLanguage === 'de' ? 
-        '🔧 Teste Quantenalgorithmus-Bibliothek...' :
-        '🔧 Testing Quantum Algorithm Library...';
-      log(msg);
-      
-      updateProgress(50, 'Testing Stage 2');
-      
-      // Test algorithms
-      const bellMsg = currentLanguage === 'de' ? 
-        '✅ Bell-Zustände: Fidelity > 99.9%' :
-        '✅ Bell States: Fidelity > 99.9%';
-      log(bellMsg);
-      
-      const deutschMsg = currentLanguage === 'de' ? 
-        '✅ Deutsch-Algorithmus: Konstant & Balanciert erfolgreich' :
-        '✅ Deutsch Algorithm: Constant & Balanced successful';
-      log(deutschMsg);
-      
-      const groverMsg = currentLanguage === 'de' ? 
-        '✅ Grover-Suche: Zielwahrscheinlichkeit > 60%' :
-        '✅ Grover Search: Target probability > 60%';
-      log(groverMsg);
-      
-      updateProgress(100, 'Stage 2 Complete');
-    }
+function zeroState(nq) { const s = new Array(1 << nq).fill(null).map(() => C(0)); s[0] = C(1); return s; }
 
-    function testStage3() {
-      clearOutput();
-      const msg = currentLanguage === 'de' ? 
-        '🔧 Teste Analyse & Optimierungs-Tools...' :
-        '🔧 Testing Analysis & Optimization Tools...';
-      log(msg);
-      
-      updateProgress(75, 'Testing Stage 3');
-      
-      const paramMsg = currentLanguage === 'de' ? 
-        '✅ Parameter-Analyse: ξ-Effekte erfolgreich detektiert' :
-        '✅ Parameter Analysis: ξ-effects successfully detected';
-      log(paramMsg);
-      
-      const repeatMsg = currentLanguage === 'de' ? 
-        '✅ Wiederholbarkeits-Test: Varianz < 1×10⁻¹⁰' :
-        '✅ Repeatability Test: Variance < 1×10⁻¹⁰';
-      log(repeatMsg);
-      
-      updateProgress(100, 'Stage 3 Complete');
-    }
+function mat(name, phiDeg) {
+  const h = 1 / Math.SQRT2, p = (phiDeg || 0) * Math.PI / 180;
+  switch (name) {
+    case 'H': return [[C(h), C(h)], [C(h), C(-h)]];
+    case 'X': return [[C(0), C(1)], [C(1), C(0)]];
+    case 'Y': return [[C(0), C(0, -1)], [C(0, 1), C(0)]];
+    case 'Z': return [[C(1), C(0)], [C(0), C(-1)]];
+    case 'S': return [[C(1), C(0)], [C(0), C(0, 1)]];
+    case 'Sdg': return [[C(1), C(0)], [C(0), C(0, -1)]];
+    case 'T': return [[C(1), C(0)], [C(0), C(Math.cos(Math.PI / 4), Math.sin(Math.PI / 4))]];
+    case 'Tdg': return [[C(1), C(0)], [C(0), C(Math.cos(Math.PI / 4), -Math.sin(Math.PI / 4))]];
+    case 'RX': return [[C(Math.cos(p / 2)), C(0, -Math.sin(p / 2))], [C(0, -Math.sin(p / 2)), C(Math.cos(p / 2))]];
+    case 'RY': return [[C(Math.cos(p / 2)), C(-Math.sin(p / 2))], [C(Math.sin(p / 2)), C(Math.cos(p / 2))]];
+    case 'RZ': return [[C(Math.cos(p / 2), -Math.sin(p / 2)), C(0)], [C(0), C(Math.cos(p / 2), Math.sin(p / 2))]];
+    case 'P': return [[C(1), C(0)], [C(0), C(Math.cos(p), Math.sin(p))]];
+  }
+  throw new Error('gate ' + name);
+}
 
-    function runAllTests() {
-      clearOutput();
-      const startMsg = currentLanguage === 'de' ? 
-        '🚀 Starte umfassende T0-Modul-Tests...\n' :
-        '🚀 Starting comprehensive T0 module tests...\n';
-      log(startMsg);
-      
-      updateProgress(10, 'Initializing');
-      
-      setTimeout(() => {
-        // Simulate comprehensive testing
-        const stages = [
-          { name: 'Core Simulator', progress: 25 },
-          { name: 'Quantum Algorithms', progress: 50 },
-          { name: 'Analysis Tools', progress: 75 },
-          { name: 'Validation Suite', progress: 100 }
-        ];
-        
-        let currentIndex = 0;
-        
-        const testStage = () => {
-          if (currentIndex < stages.length) {
-            const stage = stages[currentIndex];
-            updateProgress(stage.progress, `Testing ${stage.name}`);
-            
-            const stageMsg = currentLanguage === 'de' ? 
-              `✅ ${stage.name}: Erfolgreich getestet` :
-              `✅ ${stage.name}: Successfully tested`;
-            log(stageMsg);
-            
-            currentIndex++;
-            setTimeout(testStage, 1000);
-          } else {
-            const finalMsg = currentLanguage === 'de' ? 
-              '\n🎉 ALLE T0-MODULE ERFOLGREICH VALIDIERT!' :
-              '\n🎉 ALL T0 MODULES SUCCESSFULLY VALIDATED!';
-            log(finalMsg);
-            
-            const summaryMsg = currentLanguage === 'de' ? 
-              '📊 Zusammenfassung: Alle Tests bestanden, T0-Theorie bereit für Produktion' :
-              '📊 Summary: All tests passed, T0-Theory ready for production';
-            log(summaryMsg);
-            
-            updateProgress(100, 'All Tests Complete');
-          }
-        };
-        
-        testStage();
-      }, 500);
-    }
+function apply1(s, q, M) {
+  const out = s.slice(), bit = 1 << q;
+  for (let i = 0; i < s.length; i++) if (!(i & bit)) {
+    const a0 = s[i], a1 = s[i | bit];
+    out[i] = cadd(cmul(M[0][0], a0), cmul(M[0][1], a1));
+    out[i | bit] = cadd(cmul(M[1][0], a0), cmul(M[1][1], a1));
+  }
+  return out;
+}
 
-    function runParameterStudy() {
-      clearOutput();
-      const msg = currentLanguage === 'de' ? 
-        '📊 Führe T0-Parameter-Studie durch...' :
-        '📊 Running T0 parameter study...';
-      log(msg);
-      
-      updateProgress(0, 'Parameter Study');
-      
-      // Simulate parameter study
-      const xiValues = [0, 1e-6, 1e-5, 1e-4];
-      let progress = 0;
-      
-      xiValues.forEach((xi, index) => {
-        setTimeout(() => {
-          progress = ((index + 1) / xiValues.length) * 100;
-          updateProgress(progress, `Testing ξ = ${xi.toExponential()}`);
-          
-          const resultMsg = currentLanguage === 'de' ? 
-            `ξ = ${xi.toExponential()}: Energiefeld-Effekte ${xi > 0 ? 'detektiert' : 'nicht vorhanden'}` :
-            `ξ = ${xi.toExponential()}: Energy field effects ${xi > 0 ? 'detected' : 'absent'}`;
-          log(resultMsg);
-          
-          if (index === xiValues.length - 1) {
-            const conclusionMsg = currentLanguage === 'de' ? 
-              '\n✅ Parameter-Studie abgeschlossen: Lineare ξ-Skalierung bestätigt' :
-              '\n✅ Parameter study complete: Linear ξ-scaling confirmed';
-            log(conclusionMsg);
-          }
-        }, index * 800);
-      });
-    }
+function apply2(s, name, c, t) {
+  const out = s.slice(), bc = 1 << c, bt = 1 << t;
+  if (name === 'CNOT') { for (let i = 0; i < s.length; i++) if ((i & bc) && !(i & bt)) { out[i] = s[i | bt]; out[i | bt] = s[i]; } }
+  else if (name === 'CZ') { for (let i = 0; i < s.length; i++) if ((i & bc) && (i & bt)) out[i] = C(-s[i].re, -s[i].im); }
+  else if (name === 'SWAP') { for (let i = 0; i < s.length; i++) { const bi = (i & bc) ? 1 : 0, bj = (i & bt) ? 1 : 0; if (bi !== bj) { const j = i ^ bc ^ bt; out[i] = s[j]; } } }
+  return out;
+}
 
-    function runRepeatabilityTest() {
-      clearOutput();
-      const msg = currentLanguage === 'de' ? 
-        '🔄 Führe Wiederholbarkeits-Test durch...' :
-        '🔄 Running repeatability test...';
-      log(msg);
-      
-      updateProgress(0, 'Repeatability Test');
-      
-      // Simulate multiple runs
-      const numRuns = 10;
-      let progress = 0;
-      
-      for (let i = 0; i < numRuns; i++) {
-        setTimeout(() => {
-          progress = ((i + 1) / numRuns) * 100;
-          updateProgress(progress, `Run ${i + 1}/${numRuns}`);
-          
-          const runMsg = currentLanguage === 'de' ? 
-            `Lauf ${i + 1}: P(00) = 0.500000000 (perfekte Wiederholbarkeit)` :
-            `Run ${i + 1}: P(00) = 0.500000000 (perfect repeatability)`;
-          log(runMsg);
-          
-          if (i === numRuns - 1) {
-            const statsMsg = currentLanguage === 'de' ? 
-              '\n📊 Statistik: Varianz = 0.000000, T0-Determinismus bestätigt' :
-              '\n📊 Statistics: Variance = 0.000000, T0 determinism confirmed';
-            log(statsMsg);
-          }
-        }, i * 300);
-      }
-    }
+function bloch(s, q) {
+  const bit = 1 << q; let z = 0, x = 0, y = 0;
+  for (let i = 0; i < s.length; i++) {
+    const p = cabs2(s[i]);
+    z += (i & bit) ? -p : p;
+    if (!(i & bit)) { const a = s[i], b = s[i | bit]; // <σx> = 2 Re(a* b), <σy> = 2 Im(a* b)
+      x += 2 * (a.re * b.re + a.im * b.im); y += 2 * (a.re * b.im - a.im * b.re); }
+  }
+  return { x, y, z };
+}
 
-    function runBenchmark() {
-      clearOutput();
-      const msg = currentLanguage === 'de' ? 
-        '⚡ Führe Performance-Benchmark durch...' :
-        '⚡ Running performance benchmark...';
-      log(msg);
-      
-      updateProgress(0, 'Benchmarking');
-      
-      const algorithms = ['Bell States', 'Deutsch Algorithm', 'Grover Search'];
-      let progress = 0;
-      
-      algorithms.forEach((alg, index) => {
-        setTimeout(() => {
-          progress = ((index + 1) / algorithms.length) * 100;
-          updateProgress(progress, `Benchmarking ${alg}`);
-          
-          const time = (Math.random() * 2 + 0.5).toFixed(2);
-          const ops = (1000 / time).toFixed(0);
-          
-          const benchMsg = currentLanguage === 'de' ? 
-            `${alg}: ${time}ms Durchschnitt, ${ops} Ops/Sekunde` :
-            `${alg}: ${time}ms average, ${ops} ops/second`;
-          log(benchMsg);
-          
-          if (index === algorithms.length - 1) {
-            const summaryMsg = currentLanguage === 'de' ? 
-              '\n🎯 Benchmark abgeschlossen: Hervorragende Performance für alle Module' :
-              '\n🎯 Benchmark complete: Excellent performance across all modules';
-            log(summaryMsg);
-          }
-        }, index * 1000);
-      });
-    }
+function measureQ(s, q, lam) {
+  const bit = 1 << q; let p0 = 0;
+  for (let i = 0; i < s.length; i++) if (!(i & bit)) p0 += cabs2(s[i]);
+  const z = 2 * p0 - 1;
+  let o = (lam < z) ? 0 : 1;              // A = sgn(z − λ): +1 ↔ |0⟩
+  // boundary λ = z = ±1 (measure zero): the pole without weight cannot be reached
+  if ((o === 0 ? p0 : 1 - p0) <= 1e-15) o = 1 - o;
+  const keep = o === 0 ? p0 : 1 - p0;
+  const nrm = keep > 0 ? 1 / Math.sqrt(keep) : 0;
+  const out = s.map((a, i) => (((i & bit) ? 1 : 0) === o) ? C(a.re * nrm, a.im * nrm) : C(0));
+  return { o, z, state: out };
+}
 
-    function downloadModules() {
-      const message = currentLanguage === 'de' ? 
-        'Alle T0-Quantenmodule sind in diesem interaktiven Guide enthalten. Verwende die "Implementation ansehen" Buttons um den vollständigen Code zu sehen.\n\nFür Hardware-Integration lade den kompletten Validierungsbericht herunter.' :
-        'All T0 quantum modules are included in this interactive guide. Use the "View Implementation" buttons to see the complete code.\n\nFor hardware integration, download the complete validation report.';
-      
-      alert(message);
-    }
+const PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71];
+function halton(i, b) { let f = 1, r = 0; while (i > 0) { f /= b; r += f * (i % b); i = Math.floor(i / b); } return r; }
+const lamH = (k, j) => 2 * halton(k + 1, PRIMES[j]) - 1;
 
-    // Initialize with Stage 1 ready
-    currentStage = 1;
-    updateProgress(0, 'Ready to test');
-  </script>
+function bellE(aDeg, bDeg, M) {
+  // Φ+ on 2 qubits; measure qubit A (q0) along angle a, B (q1) along angle b in the x-z plane:
+  // rotate by RY(−angle) so that the measurement axis becomes z, then apply the deterministic rule.
+  let s = zeroState(2); s = apply1(s, 0, mat('H')); s = apply2(s, 'CNOT', 0, 1);
+  s = apply1(s, 0, mat('RY', -aDeg)); s = apply1(s, 1, mat('RY', -bDeg));
+  let sum = 0;
+  for (let i = 0; i < M; i++) {
+    const la = -1 + (2 * i + 1) / M; const rA = measureQ(s, 0, la);
+    for (let j = 0; j < M; j++) {
+      const lb = -1 + (2 * j + 1) / M; const rB = measureQ(rA.state, 1, lb);
+      sum += (rA.o === 0 ? 1 : -1) * (rB.o === 0 ? 1 : -1);
+    }
+  }
+  return sum / (M * M);
+}
+
+function gcd(a, b) { while (b) { [a, b] = [b, a % b]; } return Math.abs(a); }
+
+function modpow(b, e, m) { let r = 1; b %= m; while (e > 0) { if (e & 1) r = (r * b) % m; b = (b * b) % m; e >>= 1; } return r; }
+
+function isPrimePower(N) {
+  for (let p = 2; p <= N; p++) { if (N % p === 0) { let x = N; while (x % p === 0) x /= p; return x === 1; } }
+  return false;
+}
+
+function fft(re, im) { // in place, length power of 2
+  const L = re.length;
+  for (let i = 1, j = 0; i < L; i++) { let bit = L >> 1; for (; j & bit; bit >>= 1) j ^= bit; j ^= bit; if (i < j) { [re[i], re[j]] = [re[j], re[i]]; [im[i], im[j]] = [im[j], im[i]]; } }
+  for (let len = 2; len <= L; len <<= 1) {
+    const ang = 2 * Math.PI / len, wr = Math.cos(ang), wi = Math.sin(ang);   // sign +: QFT e^{+2πi xy/Q}
+    for (let i = 0; i < L; i += len) { let cr = 1, ci = 0;
+      for (let k = 0; k < len / 2; k++) {
+        const ur = re[i + k], ui = im[i + k], j = i + k + len / 2;
+        const vr = re[j] * cr - im[j] * ci, vi = re[j] * ci + im[j] * cr;
+        re[i + k] = ur + vr; im[i + k] = ui + vi; re[j] = ur - vr; im[j] = ui - vi;
+        const nr = cr * wr - ci * wi; ci = cr * wi + ci * wr; cr = nr; } } }
+}
+
+let shorCache = null;
+function shorDist(N, a) {
+  const key = N + ',' + a; if (shorCache && shorCache.key === key) return shorCache;
+  const t = Math.ceil(2 * Math.log2(N)), Q = 1 << t;
+  // counting register in uniform superposition, then |x>|a^x mod N>; the classes of equal f(x) are summed incoherently
+  const cls = new Map();
+  for (let x = 0, v = 1; x < Q; x++) { if (!cls.has(v)) cls.set(v, []); cls.get(v).push(x); v = (v * a) % N; }
+  const P = new Float64Array(Q);
+  for (const xs of cls.values()) {
+    const re = new Float64Array(Q), im = new Float64Array(Q);
+    for (const x of xs) re[x] = 1;
+    fft(re, im);
+    for (let y = 0; y < Q; y++) P[y] += (re[y] * re[y] + im[y] * im[y]) / (Q * Q);
+  }
+  shorCache = { key, t, Q, P };
+  return shorCache;
+}
+
+function measureRegister(P, t, lamVec) {
+  let lo = 0, size = P.length, y = 0;
+  for (let b = 0; b < t; b++) {
+    const half = size >> 1;
+    let p0 = 0, pt = 0;
+    for (let i = lo; i < lo + size; i++) { pt += P[i]; if (i < lo + half) p0 += P[i]; }
+    const z = pt > 0 ? 2 * (p0 / pt) - 1 : 1;
+    let o = (lamVec[b] < z) ? 0 : 1;
+    if ((o === 0 ? p0 : pt - p0) <= 1e-15 * Math.max(pt, 1e-300)) o = 1 - o;   // boundary λ = z = ±1
+    if (o === 1) lo += half;
+    size = half; y = (y << 1) | o;
+  }
+  return y;
+}
+
+function convergentR(y, Q, N) { // continued fraction of y/Q, largest denominator < N
+  let h1 = 1, h0 = 0, k1 = 0, k0 = 1, num = y, den = Q, r = 0;
+  while (den) {
+    const q = Math.floor(num / den); [num, den] = [den, num - q * den];
+    const h2 = q * h1 + h0, k2 = q * k1 + k0;
+    if (k2 >= N) break;
+    r = k2; h0 = h1; h1 = h2; k0 = k1; k1 = k2;
+  }
+  return r;
+}
+
+function shorRun(N, a, k) {
+  const d = shorDist(N, a);
+  const lamVec = []; for (let b = 0; b < d.t; b++) lamVec.push(lamH(k, b % PRIMES.length) * 1); // independent bases per bit
+  const y = measureRegister(d.P, d.t, lamVec);
+  const res = { y, lamVec, Q: d.Q, t: d.t };
+  if (y === 0) { res.status = 'y0'; return res; }
+  let r = convergentR(y, d.Q, N);
+  // allow small multiples of the convergent denominator (standard post-processing)
+  let rr = 0; for (let m = 1; r && m * r < N + 1 && m <= 4; m++) if (modpow(a, m * r, N) === 1) { rr = m * r; break; }
+  res.r = r; res.rr = rr;
+  if (!rr) { res.status = 'nor'; res.v = r ? modpow(a, r, N) : '–'; return res; }
+  if (rr % 2) { res.status = 'odd'; return res; }
+  const h = modpow(a, rr / 2, N);
+  if (h === N - 1) { res.status = 'triv'; return res; }
+  const p = gcd(h - 1, N), q = gcd(h + 1, N);
+  const f = (p > 1 && p < N) ? p : q;
+  if (f > 1 && f < N) { res.status = 'ok'; res.p = f; res.q = N / f; } else res.status = 'triv';
+  return res;
+}
+</script>
+<script>
+'use strict';
+const PARTS = {"complex": "const C = (re, im = 0) => ({ re, im });\nconst cadd = (a, b) => C(a.re + b.re, a.im + b.im);\nconst cmul = (a, b) => C(a.re * b.re - a.im * b.im, a.re * b.im + a.im * b.re);\nconst cabs2 = (a) => a.re * a.re + a.im * a.im;\nconst XI = 4 / 30000, DF = 3 - XI;", "zeroState": "function zeroState(nq) { const s = new Array(1 << nq).fill(null).map(() => C(0)); s[0] = C(1); return s; }", "mat": "function mat(name, phiDeg) {\n  const h = 1 / Math.SQRT2, p = (phiDeg || 0) * Math.PI / 180;\n  switch (name) {\n    case 'H': return [[C(h), C(h)], [C(h), C(-h)]];\n    case 'X': return [[C(0), C(1)], [C(1), C(0)]];\n    case 'Y': return [[C(0), C(0, -1)], [C(0, 1), C(0)]];\n    case 'Z': return [[C(1), C(0)], [C(0), C(-1)]];\n    case 'S': return [[C(1), C(0)], [C(0), C(0, 1)]];\n    case 'Sdg': return [[C(1), C(0)], [C(0), C(0, -1)]];\n    case 'T': return [[C(1), C(0)], [C(0), C(Math.cos(Math.PI / 4), Math.sin(Math.PI / 4))]];\n    case 'Tdg': return [[C(1), C(0)], [C(0), C(Math.cos(Math.PI / 4), -Math.sin(Math.PI / 4))]];\n    case 'RX': return [[C(Math.cos(p / 2)), C(0, -Math.sin(p / 2))], [C(0, -Math.sin(p / 2)), C(Math.cos(p / 2))]];\n    case 'RY': return [[C(Math.cos(p / 2)), C(-Math.sin(p / 2))], [C(Math.sin(p / 2)), C(Math.cos(p / 2))]];\n    case 'RZ': return [[C(Math.cos(p / 2), -Math.sin(p / 2)), C(0)], [C(0), C(Math.cos(p / 2), Math.sin(p / 2))]];\n    case 'P': return [[C(1), C(0)], [C(0), C(Math.cos(p), Math.sin(p))]];\n  }\n  throw new Error('gate ' + name);\n}", "apply1": "function apply1(s, q, M) {\n  const out = s.slice(), bit = 1 << q;\n  for (let i = 0; i < s.length; i++) if (!(i & bit)) {\n    const a0 = s[i], a1 = s[i | bit];\n    out[i] = cadd(cmul(M[0][0], a0), cmul(M[0][1], a1));\n    out[i | bit] = cadd(cmul(M[1][0], a0), cmul(M[1][1], a1));\n  }\n  return out;\n}", "apply2": "function apply2(s, name, c, t) {\n  const out = s.slice(), bc = 1 << c, bt = 1 << t;\n  if (name === 'CNOT') { for (let i = 0; i < s.length; i++) if ((i & bc) && !(i & bt)) { out[i] = s[i | bt]; out[i | bt] = s[i]; } }\n  else if (name === 'CZ') { for (let i = 0; i < s.length; i++) if ((i & bc) && (i & bt)) out[i] = C(-s[i].re, -s[i].im); }\n  else if (name === 'SWAP') { for (let i = 0; i < s.length; i++) { const bi = (i & bc) ? 1 : 0, bj = (i & bt) ? 1 : 0; if (bi !== bj) { const j = i ^ bc ^ bt; out[i] = s[j]; } } }\n  return out;\n}", "bloch": "function bloch(s, q) {\n  const bit = 1 << q; let z = 0, x = 0, y = 0;\n  for (let i = 0; i < s.length; i++) {\n    const p = cabs2(s[i]);\n    z += (i & bit) ? -p : p;\n    if (!(i & bit)) { const a = s[i], b = s[i | bit]; // <σx> = 2 Re(a* b), <σy> = 2 Im(a* b)\n      x += 2 * (a.re * b.re + a.im * b.im); y += 2 * (a.re * b.im - a.im * b.re); }\n  }\n  return { x, y, z };\n}", "measureQ": "function measureQ(s, q, lam) {\n  const bit = 1 << q; let p0 = 0;\n  for (let i = 0; i < s.length; i++) if (!(i & bit)) p0 += cabs2(s[i]);\n  const z = 2 * p0 - 1;\n  let o = (lam < z) ? 0 : 1;              // A = sgn(z − λ): +1 ↔ |0⟩\n  // boundary λ = z = ±1 (measure zero): the pole without weight cannot be reached\n  if ((o === 0 ? p0 : 1 - p0) <= 1e-15) o = 1 - o;\n  const keep = o === 0 ? p0 : 1 - p0;\n  const nrm = keep > 0 ? 1 / Math.sqrt(keep) : 0;\n  const out = s.map((a, i) => (((i & bit) ? 1 : 0) === o) ? C(a.re * nrm, a.im * nrm) : C(0));\n  return { o, z, state: out };\n}", "halton": "const PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71];\nfunction halton(i, b) { let f = 1, r = 0; while (i > 0) { f /= b; r += f * (i % b); i = Math.floor(i / b); } return r; }\nconst lamH = (k, j) => 2 * halton(k + 1, PRIMES[j]) - 1;", "bellE": "function bellE(aDeg, bDeg, M) {\n  // Φ+ on 2 qubits; measure qubit A (q0) along angle a, B (q1) along angle b in the x-z plane:\n  // rotate by RY(−angle) so that the measurement axis becomes z, then apply the deterministic rule.\n  let s = zeroState(2); s = apply1(s, 0, mat('H')); s = apply2(s, 'CNOT', 0, 1);\n  s = apply1(s, 0, mat('RY', -aDeg)); s = apply1(s, 1, mat('RY', -bDeg));\n  let sum = 0;\n  for (let i = 0; i < M; i++) {\n    const la = -1 + (2 * i + 1) / M; const rA = measureQ(s, 0, la);\n    for (let j = 0; j < M; j++) {\n      const lb = -1 + (2 * j + 1) / M; const rB = measureQ(rA.state, 1, lb);\n      sum += (rA.o === 0 ? 1 : -1) * (rB.o === 0 ? 1 : -1);\n    }\n  }\n  return sum / (M * M);\n}", "gcd": "function gcd(a, b) { while (b) { [a, b] = [b, a % b]; } return Math.abs(a); }", "modpow": "function modpow(b, e, m) { let r = 1; b %= m; while (e > 0) { if (e & 1) r = (r * b) % m; b = (b * b) % m; e >>= 1; } return r; }", "isPrimePower": "function isPrimePower(N) {\n  for (let p = 2; p <= N; p++) { if (N % p === 0) { let x = N; while (x % p === 0) x /= p; return x === 1; } }\n  return false;\n}", "fft": "function fft(re, im) { // in place, length power of 2\n  const L = re.length;\n  for (let i = 1, j = 0; i < L; i++) { let bit = L >> 1; for (; j & bit; bit >>= 1) j ^= bit; j ^= bit; if (i < j) { [re[i], re[j]] = [re[j], re[i]]; [im[i], im[j]] = [im[j], im[i]]; } }\n  for (let len = 2; len <= L; len <<= 1) {\n    const ang = 2 * Math.PI / len, wr = Math.cos(ang), wi = Math.sin(ang);   // sign +: QFT e^{+2πi xy/Q}\n    for (let i = 0; i < L; i += len) { let cr = 1, ci = 0;\n      for (let k = 0; k < len / 2; k++) {\n        const ur = re[i + k], ui = im[i + k], j = i + k + len / 2;\n        const vr = re[j] * cr - im[j] * ci, vi = re[j] * ci + im[j] * cr;\n        re[i + k] = ur + vr; im[i + k] = ui + vi; re[j] = ur - vr; im[j] = ui - vi;\n        const nr = cr * wr - ci * wi; ci = cr * wi + ci * wr; cr = nr; } } }\n}", "shorDist": "let shorCache = null;\nfunction shorDist(N, a) {\n  const key = N + ',' + a; if (shorCache && shorCache.key === key) return shorCache;\n  const t = Math.ceil(2 * Math.log2(N)), Q = 1 << t;\n  // counting register in uniform superposition, then |x>|a^x mod N>; the classes of equal f(x) are summed incoherently\n  const cls = new Map();\n  for (let x = 0, v = 1; x < Q; x++) { if (!cls.has(v)) cls.set(v, []); cls.get(v).push(x); v = (v * a) % N; }\n  const P = new Float64Array(Q);\n  for (const xs of cls.values()) {\n    const re = new Float64Array(Q), im = new Float64Array(Q);\n    for (const x of xs) re[x] = 1;\n    fft(re, im);\n    for (let y = 0; y < Q; y++) P[y] += (re[y] * re[y] + im[y] * im[y]) / (Q * Q);\n  }\n  shorCache = { key, t, Q, P };\n  return shorCache;\n}", "measureRegister": "function measureRegister(P, t, lamVec) {\n  let lo = 0, size = P.length, y = 0;\n  for (let b = 0; b < t; b++) {\n    const half = size >> 1;\n    let p0 = 0, pt = 0;\n    for (let i = lo; i < lo + size; i++) { pt += P[i]; if (i < lo + half) p0 += P[i]; }\n    const z = pt > 0 ? 2 * (p0 / pt) - 1 : 1;\n    let o = (lamVec[b] < z) ? 0 : 1;\n    if ((o === 0 ? p0 : pt - p0) <= 1e-15 * Math.max(pt, 1e-300)) o = 1 - o;   // boundary λ = z = ±1\n    if (o === 1) lo += half;\n    size = half; y = (y << 1) | o;\n  }\n  return y;\n}", "convergentR": "function convergentR(y, Q, N) { // continued fraction of y/Q, largest denominator < N\n  let h1 = 1, h0 = 0, k1 = 0, k0 = 1, num = y, den = Q, r = 0;\n  while (den) {\n    const q = Math.floor(num / den); [num, den] = [den, num - q * den];\n    const h2 = q * h1 + h0, k2 = q * k1 + k0;\n    if (k2 >= N) break;\n    r = k2; h0 = h1; h1 = h2; k0 = k1; k1 = k2;\n  }\n  return r;\n}", "shorRun": "function shorRun(N, a, k) {\n  const d = shorDist(N, a);\n  const lamVec = []; for (let b = 0; b < d.t; b++) lamVec.push(lamH(k, b % PRIMES.length) * 1); // independent bases per bit\n  const y = measureRegister(d.P, d.t, lamVec);\n  const res = { y, lamVec, Q: d.Q, t: d.t };\n  if (y === 0) { res.status = 'y0'; return res; }\n  let r = convergentR(y, d.Q, N);\n  // allow small multiples of the convergent denominator (standard post-processing)\n  let rr = 0; for (let m = 1; r && m * r < N + 1 && m <= 4; m++) if (modpow(a, m * r, N) === 1) { rr = m * r; break; }\n  res.r = r; res.rr = rr;\n  if (!rr) { res.status = 'nor'; res.v = r ? modpow(a, r, N) : '–'; return res; }\n  if (rr % 2) { res.status = 'odd'; return res; }\n  const h = modpow(a, rr / 2, N);\n  if (h === N - 1) { res.status = 'triv'; return res; }\n  const p = gcd(h - 1, N), q = gcd(h + 1, N);\n  const f = (p > 1 && p < N) ? p : q;\n  if (f > 1 && f < N) { res.status = 'ok'; res.p = f; res.q = N / f; } else res.status = 'triv';\n  return res;\n}"};
+const STAGES = {
+  1: ['complex', 'zeroState', 'mat', 'apply1', 'apply2', 'bloch'],
+  2: ['measureQ'],
+  3: ['halton', 'bellE', '__chsh'],
+  4: ['gcd', 'modpow', 'isPrimePower', 'fft', 'shorDist', 'measureRegister', 'convergentR', 'shorRun']
+};
+// helper used on this page for the CHSH values (the simulator computes the same in runBell)
+function chsh(a, a2, b, b2, M) {
+  const E = [[a, b], [a, b2], [a2, b], [a2, b2]].map(([x, y]) => bellE(x, y, M));
+  const Sdet = Math.abs(E[0] - E[1] + E[2] + E[3]);
+  const rad = (d) => d * Math.PI / 180;
+  const Eqm = (x, y) => Math.cos(rad(x - y));
+  const Eff = (x, y) => { const d = rad(x - y); return Math.cos(d) * (1 - XI * (d * d / (Math.PI * Math.PI)) / DF); };
+  const S = (f) => Math.abs(f(a, b) - f(a, b2) + f(a2, b) + f(a2, b2));
+  return { E, Sdet, Sqm: S(Eqm), Sff: S(Eff) };
+}
+PARTS.__chsh = chsh.toString();
+
+const I18N = {
+ de: {
+  back:'← Übersicht', sim:'⚛️ Zum Simulator', title:'Schritt für Schritt: der deterministische Quantensimulator',
+  subtitle:'Wie der Simulator aufgebaut ist – mit dem echten Code und Tests, die wirklich rechnen',
+  intro1:'Diese Seite zerlegt den <a href="quantum_simulator_deterministic.html" style="color:#4ecdc4">Quantensimulator mit deterministischer Messung</a> in vier Stufen. Jede Stufe erklärt, was gerechnet wird, zeigt den zugehörigen Code und prüft ihn mit Tests, die beim Klick ausgeführt und mit dem erwarteten Wert verglichen werden. Der angezeigte Code ist derselbe, der im Simulator läuft; „Module herunterladen“ liefert ihn als eine Datei.',
+  ov1t:'1 · Zustand und Gatter', ov1:'Komplexe Amplituden, Ein- und Zwei-Qubit-Gatter, Zylinderkoordinaten',
+  ov2t:'2 · Messung nach Dok. 230', ov2:'A(z, λ) = sgn(z − λ): jedes Ergebnis festgelegt',
+  ov3t:'3 · Messreihe und Bell-Test', ov3:'λ-Folge, Häufigkeiten, CHSH mit ξ-Dämpfung',
+  ov4t:'4 · Ordnungssuche nach Shor', ov4:'Zählregister, Fourier-Transformation, bitweise Messung, Kettenbruch',
+  runall:'Alle Tests ausführen', download:'Module herunterladen', showcode:'Code anzeigen', hidecode:'Code ausblenden', runtests:'Tests ausführen',
+  s1t:'Zustandsvektor und Gatter',
+  s1p1:'Ein Register aus n Qubits wird durch 2<sup>n</sup> komplexe Amplituden beschrieben. Qubit q entspricht dem Bit q der Basisnummer; q0 ist die letzte Stelle in |…q1q0⟩. Ein Ein-Qubit-Gatter ist eine 2×2-Matrix, die jeweils die beiden Amplituden verknüpft, die sich nur im Bit q unterscheiden. CNOT, CZ und SWAP vertauschen bzw. kehren die Vorzeichen der passenden Amplituden um. Alle Gatter sind unitär, die Norm bleibt also erhalten; einen zusätzlichen ξ-Faktor in den Gattern gibt es nicht, weil er sich bei der Normierung herauskürzen würde.',
+  s1p2:'Für die Messung in Stufe 2 braucht man die Zylinderkoordinaten jedes Qubits. Sie folgen aus den Erwartungswerten der Pauli-Matrizen: z = ⟨σ<sub>z</sub>⟩ ist die Lage auf der Achse, r = √(⟨σ<sub>x</sub>⟩² + ⟨σ<sub>y</sub>⟩²) der Abstand von der Achse, θ die Phase.',
+  s2t:'Deterministische Messung nach Dok. 230', for:'für', else:'sonst',
+  s2p1:'In der FFGFT ist die Messung ein Polübergang: Die Messanordnung bringt eine Größe λ ∈ [−1, 1] auf der Zylinderachse mit, und der Ausgang folgt eindeutig aus der Lage z des Qubits:',
+  s2p2:'Im Code wird z aus dem Gewicht p<sub>0</sub> aller Basiszustände mit Bit q = 0 berechnet, z = 2p<sub>0</sub> − 1. Danach werden die Amplituden des nicht erreichten Pols auf null gesetzt und der Rest neu normiert. Bei verschränkten Qubits verschiebt das die Lage z der anderen Qubits; so wirkt die topologisch verbundene Zylinderkonfiguration. Der Randfall λ = z = ±1 hat das Maß null; dort wird der Pol genommen, der Gewicht hat. Die Länge (1+z)/2 des Achsenstücks, das zu |0⟩ führt, ist genau |α|².',
+  s3t:'Messreihe und Bell-Test',
+  s3p1:'Für eine Messreihe bekommt jeder Durchlauf einen festen λ-Vektor aus einer Halton-Folge: Für Qubit j wird die Basis j der Primzahlen verwendet. Die Folge ist vollständig deterministisch und füllt das Intervall gleichmäßig. Zählt man die Ergebnisse, nähern sich die Häufigkeiten |Amplitude|².',
+  s3p2:'Der Bell-Test misst Φ⁺ entlang zweier Winkel je Seite. Gemessen wird in der x-z-Ebene, indem man vorher mit R<sub>y</sub>(−Winkel) dreht. λ<sub>A</sub> und λ<sub>B</sub> laufen über ein gleichmäßiges M×M-Gitter; A wird zuerst gemessen und legt die Lage von B fest. Daneben steht die Korrelation mit der ξ-Dämpfung aus Dok. 175:',
+  s3note:'Die Dämpfung verschiebt S nur um etwa 2·10⁻⁵ und ist mit heutiger Hardware nicht auflösbar (Dok. 190, R142).',
+  s4t:'Ordnungssuche nach Shor',
+  s4p1:'Das Zählregister hat t = ⌈2·log₂N⌉ Qubits, Q = 2<sup>t</sup>. Nach der modularen Exponentiation fallen alle x mit gleichem Wert a<sup>x</sup> mod N in eine Klasse; die Quanten-Fourier-Transformation wird je Klasse mit einer schnellen Fourier-Transformation berechnet, und die Beiträge der Klassen addieren sich zur Verteilung P(y).',
+  s4p2:'Gemessen wird das Zählregister Bit für Bit, vom höchsten an, jedes Bit nach A(z, λ) mit eigenem λ; z ergibt sich aus der Verteilung, eingeschränkt auf die schon gemessenen Bits. Aus y/Q liefert die Kettenbruchentwicklung einen Kandidaten für die Ordnung r; kleine Vielfache werden geprüft. Bei geradem r folgen die Faktoren aus ggT(a<sup>r/2</sup> ± 1, N). Das Rechenverfahren ist Shors; FFGFT-spezifisch ist nur die Messung (Dok. 190, R65).',
+  footer:'Quellen im Korpus: Messregel und Zylinderdarstellung Dok. 230; ξ-Dämpfung der Bell-Korrelation Dok. 175; Einordnung Dok. 190 (R65, R142, R143) und Dok. 384. Der Simulator beansprucht keinen Rechenvorteil; er zeigt die deterministische Lesart der Messung.',
+  th_test:'Test', th_exp:'erwartet', th_got:'berechnet', th_res:'Ergebnis', pass:'bestanden', fail:'nicht bestanden',
+  stage_sum:(ok,n)=>`${ok} von ${n} Tests bestanden`, all_sum:(ok,n)=>`Alle Stufen: ${ok} von ${n} Tests bestanden`,
+  t:{
+   h:'H|0⟩ = (|0⟩ + |1⟩)/√2', hth:'H·T·H|0⟩: Anteil |0⟩ = cos²(π/8)', ss:'S·S = Z (auf |+⟩)', xyz:'Y|0⟩ = i|1⟩',
+   bell:'H, CNOT → Φ⁺ = (|00⟩ + |11⟩)/√2', ry:'R_y(60°): z = cos 60°', hs:'H, S → Bloch-Vektor (0, 1, 0)', norm:'Norm nach 40 zufälligen Gattern',
+   m1:'R_y(60°), λ = 0,3 → |0⟩ (z = 0,5)', m2:'R_y(60°), λ = 0,7 → |1⟩', m3:'Φ⁺: q0 mit λ = 0,3 → |1⟩, danach z(q1) = −1',
+   m4:'Randfall λ = 1, z = 1 → |0⟩ (Pol mit Gewicht)', m5:'Zustand nach der Messung normiert', m6:'Achsenanteil (1+z)/2 = |α|² über 10 000 gleichmäßige λ',
+   s1:'Messreihe R_y(60°), 5000 Durchläufe: Häufigkeit |00⟩', s2:'Messreihe GHZ (3 Qubits), 4000 Durchläufe: nur |000⟩ und |111⟩',
+   b1:'CHSH aus 500×500 festen λ-Paaren (±8/M)', b2:'CHSH exakt (Quantenmechanik)', b3:'CHSH mit ξ-Dämpfung (Dok. 175)', b4:'Abweichung von der Tsirelson-Grenze',
+   r1:'Verteilung P(y) normiert (N = 35, a = 3)', r2:'N = 15, a = 7, λ-Index 1: y = 64, r = 4, 15 = 3 × 5', r3:'N = 21, a = 2: Ordnung r = 6, Faktoren 3 und 7',
+   r4:'N = 15, a = 7: Anteil erfolgreicher Läufe (1000) gegen exakte Wahrscheinlichkeit', r5:'Alle gemeldeten Faktoren richtig (N ≤ 51, alle a, je 10 Läufe)'
+  }
+ },
+ en: {
+  back:'← Overview', sim:'⚛️ To the simulator', title:'Step by step: the deterministic quantum simulator',
+  subtitle:'How the simulator is built – with the actual code and tests that really compute',
+  intro1:'This page breaks the <a href="quantum_simulator_deterministic.html" style="color:#4ecdc4">quantum simulator with deterministic measurement</a> into four stages. Each stage explains what is computed, shows the corresponding code and checks it with tests that run on click and are compared with the expected value. The code shown is the same code that runs in the simulator; “Download modules” provides it as a single file.',
+  ov1t:'1 · State and gates', ov1:'Complex amplitudes, one- and two-qubit gates, cylinder coordinates',
+  ov2t:'2 · Measurement according to Doc. 230', ov2:'A(z, λ) = sgn(z − λ): every outcome fixed',
+  ov3t:'3 · Measurement series and Bell test', ov3:'λ sequence, frequencies, CHSH with ξ damping',
+  ov4t:'4 · Shor order finding', ov4:'Counting register, Fourier transform, bitwise measurement, continued fraction',
+  runall:'Run all tests', download:'Download modules', showcode:'Show code', hidecode:'Hide code', runtests:'Run tests',
+  s1t:'State vector and gates',
+  s1p1:'A register of n qubits is described by 2<sup>n</sup> complex amplitudes. Qubit q corresponds to bit q of the basis index; q0 is the last digit in |…q1q0⟩. A single-qubit gate is a 2×2 matrix that combines each pair of amplitudes differing only in bit q. CNOT, CZ and SWAP swap or flip the sign of the corresponding amplitudes. All gates are unitary, so the norm is preserved; there is no additional ξ factor in the gates, because it would cancel on normalisation.',
+  s1p2:'The measurement in stage 2 needs the cylinder coordinates of each qubit. They follow from the expectation values of the Pauli matrices: z = ⟨σ<sub>z</sub>⟩ is the position on the axis, r = √(⟨σ<sub>x</sub>⟩² + ⟨σ<sub>y</sub>⟩²) the distance from the axis, θ the phase.',
+  s2t:'Deterministic measurement according to Doc. 230', for:'for', else:'otherwise',
+  s2p1:'In FFGFT, measurement is a transition to a pole: the measuring arrangement brings a quantity λ ∈ [−1, 1] on the cylinder axis, and the outcome follows uniquely from the position z of the qubit:',
+  s2p2:'In the code, z is computed from the weight p<sub>0</sub> of all basis states with bit q = 0, z = 2p<sub>0</sub> − 1. Then the amplitudes of the pole that is not reached are set to zero and the rest is renormalised. For entangled qubits this shifts the position z of the other qubits; this is how the topologically connected cylinder configuration acts. The boundary case λ = z = ±1 has measure zero; there the pole that carries weight is taken. The length (1+z)/2 of the axis segment leading to |0⟩ is exactly |α|².',
+  s3t:'Measurement series and Bell test',
+  s3p1:'In a measurement series each run gets a fixed λ vector from a Halton sequence: qubit j uses the j-th prime as its base. The sequence is fully deterministic and fills the interval uniformly. When the outcomes are counted, the frequencies approach |amplitude|².',
+  s3p2:'The Bell test measures Φ⁺ along two angles on each side. Measurement takes place in the x-z plane after a rotation R<sub>y</sub>(−angle). λ<sub>A</sub> and λ<sub>B</sub> run over a uniform M×M grid; A is measured first and fixes the position of B. Alongside is the correlation with the ξ damping of Doc. 175:',
+  s3note:'The damping shifts S by only about 2·10⁻⁵ and cannot be resolved with today’s hardware (Doc. 190, R142).',
+  s4t:'Shor order finding',
+  s4p1:'The counting register has t = ⌈2·log₂N⌉ qubits, Q = 2<sup>t</sup>. After the modular exponentiation, all x with the same value a<sup>x</sup> mod N fall into one class; the quantum Fourier transform is computed per class with a fast Fourier transform, and the contributions of the classes add up to the distribution P(y).',
+  s4p2:'The counting register is measured bit by bit, starting with the highest, each bit according to A(z, λ) with its own λ; z follows from the distribution restricted to the bits already measured. From y/Q the continued-fraction expansion yields a candidate for the order r; small multiples are checked. For even r the factors follow from gcd(a<sup>r/2</sup> ± 1, N). The computational procedure is Shor’s; only the measurement is FFGFT-specific (Doc. 190, R65).',
+  footer:'Sources in the corpus: measurement rule and cylinder representation Doc. 230; ξ damping of the Bell correlation Doc. 175; classification Doc. 190 (R65, R142, R143) and Doc. 384. The simulator claims no computational advantage; it shows the deterministic reading of measurement.',
+  th_test:'Test', th_exp:'expected', th_got:'computed', th_res:'Result', pass:'passed', fail:'failed',
+  stage_sum:(ok,n)=>`${ok} of ${n} tests passed`, all_sum:(ok,n)=>`All stages: ${ok} of ${n} tests passed`,
+  t:{
+   h:'H|0⟩ = (|0⟩ + |1⟩)/√2', hth:'H·T·H|0⟩: fraction |0⟩ = cos²(π/8)', ss:'S·S = Z (on |+⟩)', xyz:'Y|0⟩ = i|1⟩',
+   bell:'H, CNOT → Φ⁺ = (|00⟩ + |11⟩)/√2', ry:'R_y(60°): z = cos 60°', hs:'H, S → Bloch vector (0, 1, 0)', norm:'Norm after 40 random gates',
+   m1:'R_y(60°), λ = 0.3 → |0⟩ (z = 0.5)', m2:'R_y(60°), λ = 0.7 → |1⟩', m3:'Φ⁺: q0 with λ = 0.3 → |1⟩, then z(q1) = −1',
+   m4:'Boundary case λ = 1, z = 1 → |0⟩ (pole with weight)', m5:'State normalised after measurement', m6:'Axis fraction (1+z)/2 = |α|² over 10,000 uniform λ',
+   s1:'Series R_y(60°), 5000 runs: frequency of |00⟩', s2:'Series GHZ (3 qubits), 4000 runs: only |000⟩ and |111⟩',
+   b1:'CHSH from 500×500 fixed λ pairs (±8/M)', b2:'CHSH exact (quantum mechanics)', b3:'CHSH with ξ damping (Doc. 175)', b4:'Deviation from the Tsirelson bound',
+   r1:'Distribution P(y) normalised (N = 35, a = 3)', r2:'N = 15, a = 7, λ index 1: y = 64, r = 4, 15 = 3 × 5', r3:'N = 21, a = 2: order r = 6, factors 3 and 7',
+   r4:'N = 15, a = 7: fraction of successful runs (1000) against exact probability', r5:'All reported factors correct (N ≤ 51, all a, 10 runs each)'
+  }
+ }
+};
+let LANG = 'de';
+const T = (k) => I18N[LANG][k];
+const f = (x, d = 4) => (typeof x === 'number' ? x.toFixed(d) : String(x));
+
+// ---------------- tests (each returns [key, expected, computed, ok])
+function rnd(seed) { let s = seed >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
+function seq(n, ops) { let s = zeroState(n); for (const [g, q, c, phi] of ops) s = (c === undefined) ? apply1(s, q, mat(g, phi)) : apply2(s, g, c, q); return s; }
+const TESTS = {
+ 1: () => {
+   const out = []; const h = 1 / Math.SQRT2;
+   let s = seq(1, [['H', 0]]);
+   out.push(['h', `${f(h)}, ${f(h)}`, `${f(s[0].re)}, ${f(s[1].re)}`, Math.abs(s[0].re - h) < 1e-12 && Math.abs(s[1].re - h) < 1e-12 && Math.abs(s[0].im) + Math.abs(s[1].im) < 1e-12]);
+   s = seq(1, [['H', 0], ['T', 0], ['H', 0]]); const e = Math.cos(Math.PI / 8) ** 2;
+   out.push(['hth', f(e, 6), f(cabs2(s[0]), 6), Math.abs(cabs2(s[0]) - e) < 1e-12]);
+   const a = seq(1, [['H', 0], ['S', 0], ['S', 0]]), b = seq(1, [['H', 0], ['Z', 0]]);
+   out.push(['ss', '|−⟩', `${f(a[0].re)}, ${f(a[1].re)}`, a.every((x, i) => Math.abs(x.re - b[i].re) + Math.abs(x.im - b[i].im) < 1e-12)]);
+   s = seq(1, [['Y', 0]]);
+   out.push(['xyz', '0, i', `${f(s[0].re)}, ${f(s[1].re)}+${f(s[1].im)}i`, cabs2(s[0]) < 1e-15 && Math.abs(s[1].im - 1) < 1e-12]);
+   s = seq(2, [['H', 0], ['CNOT', 1, 0]]);
+   out.push(['bell', '0.5, 0, 0, 0.5', s.map(x => f(cabs2(x), 2)).join(', '), Math.abs(cabs2(s[0]) - 0.5) < 1e-12 && Math.abs(cabs2(s[3]) - 0.5) < 1e-12 && cabs2(s[1]) + cabs2(s[2]) < 1e-15]);
+   s = seq(1, [['RY', 0, undefined, 60]]);
+   out.push(['ry', '0.5', f(bloch(s, 0).z, 6), Math.abs(bloch(s, 0).z - 0.5) < 1e-12]);
+   s = seq(1, [['H', 0], ['S', 0]]); const v = bloch(s, 0);
+   out.push(['hs', '(0, 1, 0)', `(${f(v.x, 3)}, ${f(v.y, 3)}, ${f(v.z, 3)})`, Math.abs(v.x) + Math.abs(v.y - 1) + Math.abs(v.z) < 1e-12]);
+   const R = rnd(7), G = ['H', 'X', 'Y', 'Z', 'S', 'T', 'Sdg', 'Tdg', 'RX', 'RY', 'RZ', 'P'];
+   s = zeroState(4);
+   for (let i = 0; i < 40; i++) {
+     if (R() < 0.3) { const c = Math.floor(R() * 4); let t = Math.floor(R() * 4); if (t === c) t = (t + 1) % 4; s = apply2(s, ['CNOT', 'CZ', 'SWAP'][Math.floor(R() * 3)], c, t); }
+     else s = apply1(s, Math.floor(R() * 4), mat(G[Math.floor(R() * G.length)], R() * 360 - 180));
+   }
+   const nrm = s.reduce((t, x) => t + cabs2(x), 0);
+   out.push(['norm', '1', nrm.toPrecision(15), Math.abs(nrm - 1) < 1e-12]);
+   return out;
+ },
+ 2: () => {
+   const out = [];
+   const s = seq(1, [['RY', 0, undefined, 60]]);
+   let r = measureQ(s, 0, 0.3); out.push(['m1', '|0⟩', `|${r.o}⟩, z = ${f(r.z, 3)}`, r.o === 0 && Math.abs(r.z - 0.5) < 1e-12]);
+   r = measureQ(s, 0, 0.7); out.push(['m2', '|1⟩', `|${r.o}⟩`, r.o === 1]);
+   const bs = seq(2, [['H', 0], ['CNOT', 1, 0]]); r = measureQ(bs, 0, 0.3); const z1 = bloch(r.state, 1).z;
+   out.push(['m3', '|1⟩, z = −1', `|${r.o}⟩, z = ${f(z1, 3)}`, r.o === 1 && Math.abs(z1 + 1) < 1e-12]);
+   r = measureQ(zeroState(1), 0, 1); out.push(['m4', '|0⟩', `|${r.o}⟩`, r.o === 0 && Math.abs(cabs2(r.state[0]) - 1) < 1e-12]);
+   const g = seq(3, [['H', 0], ['CNOT', 1, 0], ['RY', 2, undefined, 40], ['T', 1]]); r = measureQ(g, 2, -0.2);
+   const nrm = r.state.reduce((t, x) => t + cabs2(x), 0); out.push(['m5', '1', nrm.toPrecision(15), Math.abs(nrm - 1) < 1e-12]);
+   let n0 = 0; const M = 10000; for (let i = 0; i < M; i++) if (measureQ(s, 0, -1 + (2 * i + 1) / M).o === 0) n0++;
+   out.push(['m6', f(cabs2(s[0])), f(n0 / M), Math.abs(n0 / M - cabs2(s[0])) <= 1 / M]);
+   return out;
+ },
+ 3: () => {
+   const out = [];
+   const run = (n, ops, K) => { const base = seq(n, ops), c = new Array(1 << n).fill(0);
+     for (let k = 0; k < K; k++) { let s = base, idx = 0; for (let q = 0; q < n; q++) { const r = measureQ(s, q, lamH(k, q)); s = r.state; idx |= r.o << q; } c[idx]++; } return c; };
+   let c = run(2, [['RY', 0, undefined, 60]], 5000);
+   out.push(['s1', '0.7500', f(c[0] / 5000), Math.abs(c[0] / 5000 - 0.75) < 0.002]);
+   c = run(3, [['H', 0], ['CNOT', 1, 0], ['CNOT', 2, 0]], 4000);
+   out.push(['s2', '0.5 / 0.5', `${f(c[0] / 4000, 3)} / ${f(c[7] / 4000, 3)}`, c[0] + c[7] === 4000 && Math.abs(c[0] / 4000 - 0.5) < 0.002]);
+   const R = chsh(0, 90, 45, 135, 500);
+   out.push(['b1', `2.8284 ± ${f(8 / 500)}`, f(R.Sdet), Math.abs(R.Sdet - 2 * Math.SQRT2) <= 8 / 500 && R.Sdet > 2]);
+   out.push(['b2', '2.828427', f(R.Sqm, 6), Math.abs(R.Sqm - 2 * Math.SQRT2) < 1e-12]);
+   out.push(['b3', '2.828404', f(R.Sff, 6), Math.abs(R.Sff - 2.828404) < 1e-6]);
+   out.push(['b4', '2.4e-5', (R.Sqm - R.Sff).toExponential(2), Math.abs((R.Sqm - R.Sff) - 2.36e-5) < 1e-6]);
+   return out;
+ },
+ 4: () => {
+   const out = [];
+   const d = shorDist(35, 3); const sum = Array.from(d.P).reduce((a, b) => a + b, 0);
+   out.push(['r1', '1', sum.toPrecision(12), Math.abs(sum - 1) < 1e-9]);
+   const R = shorRun(15, 7, 1);
+   out.push(['r2', 'y = 64, r = 4, 3 × 5', `y = ${R.y}, r = ${R.rr}, ${R.p} × ${R.q}`, R.y === 64 && R.rr === 4 && R.p * R.q === 15 && R.status === 'ok']);
+   let ok21 = null; for (let k = 0; k < 20 && !ok21; k++) { const x = shorRun(21, 2, k); if (x.status === 'ok') ok21 = x; }
+   out.push(['r3', 'r = 6, 3 · 7', ok21 ? `r = ${ok21.rr}, ${ok21.p} · ${ok21.q}` : '–', !!ok21 && ok21.rr === 6 && ok21.p * ok21.q === 21]);
+   const D = shorDist(15, 7); let pm = 0;
+   for (let y = 1; y < D.Q; y++) { if (D.P[y] < 1e-15) continue; const r = convergentR(y, D.Q, 15); let rr = 0;
+     for (let m = 1; r && m * r < 16 && m <= 4; m++) if (modpow(7, m * r, 15) === 1) { rr = m * r; break; }
+     if (rr && rr % 2 === 0) { const h = modpow(7, rr / 2, 15); if (h !== 14) { const p = gcd(h - 1, 15), q = gcd(h + 1, 15); const fct = (p > 1 && p < 15) ? p : q; if (fct > 1 && fct < 15) pm += D.P[y]; } } }
+   let okc = 0; for (let k = 0; k < 1000; k++) if (shorRun(15, 7, k).status === 'ok') okc++;
+   out.push(['r4', f(pm, 3), f(okc / 1000, 3), Math.abs(okc / 1000 - pm) < 0.03]);
+   let bad = 0, cnt = 0;
+   for (let N = 15; N <= 51; N += 2) { if (isPrimePower(N)) continue;
+     for (let a = 2; a < N; a++) { if (gcd(a, N) !== 1) continue;
+       for (let k = 0; k < 10; k++) { const x = shorRun(N, a, k); if (x.status === 'ok') { cnt++; if (x.p * x.q !== N || x.p <= 1 || x.q <= 1) bad++; } } } }
+   out.push(['r5', '0', `${bad} / ${cnt}`, bad === 0 && cnt > 0]);
+   return out;
+ }
+};
+const RESULTS = {};
+function runStage(i) { RESULTS[i] = TESTS[i](); renderTests(i); }
+function renderTests(i) {
+  const res = RESULTS[i]; if (!res) return;
+  let h = `<div class="tblwrap"><table class="tests"><tr><th>${T('th_test')}</th><th>${T('th_exp')}</th><th>${T('th_got')}</th><th>${T('th_res')}</th></tr>`;
+  res.forEach(([k, e, g, ok]) => h += `<tr><td>${T('t')[k]}</td><td class="mono">${e}</td><td class="mono">${g}</td><td class="${ok ? 'ok' : 'bad'}">${ok ? T('pass') : T('fail')}</td></tr>`);
+  const n = res.length, ok = res.filter(r => r[3]).length;
+  document.getElementById('t' + i).innerHTML = h + `</table></div><div class="summary ${ok === n ? 'ok' : 'bad'}">${T('stage_sum')(ok, n)}</div>`;
+  renderAll();
+}
+function runAll() { [1, 2, 3, 4].forEach(i => RESULTS[i] = TESTS[i]()); [1, 2, 3, 4].forEach(renderTests); }
+function renderAll() {
+  const done = [1, 2, 3, 4].filter(i => RESULTS[i]); if (done.length < 4) { document.getElementById('sum-all').textContent = ''; return; }
+  let n = 0, ok = 0; done.forEach(i => { n += RESULTS[i].length; ok += RESULTS[i].filter(r => r[3]).length; });
+  const el = document.getElementById('sum-all'); el.textContent = T('all_sum')(ok, n); el.className = 'summary ' + (ok === n ? 'ok' : 'bad');
+}
+function toggle(id) {
+  const el = document.getElementById(id); el.classList.toggle('open');
+  const btn = el.previousElementSibling.previousElementSibling; btn.textContent = el.classList.contains('open') ? T('hidecode') : T('showcode');
+}
+function fillCode() { for (const i of [1, 2, 3, 4]) document.getElementById('c' + i).textContent = STAGES[i].map(k => PARTS[k]).join('\n\n'); }
+function download() {
+  const header = '// FFGFT quantum simulator core (deterministic measurement according to Doc. 230)\n// Same code as in quantum_simulator_deterministic.html\n\'use strict\';\n\n';
+  const body = [1, 2, 3, 4].map(i => `// ---- stage ${i}\n` + STAGES[i].map(k => PARTS[k]).join('\n\n')).join('\n\n');
+  const blob = new Blob([header + body + '\n'], { type: 'text/javascript' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'ffgft_simulator_core.js';
+  document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 0);
+}
+function setLang(l) {
+  LANG = l; document.documentElement.lang = l;
+  document.getElementById('btn-de').classList.toggle('active', l === 'de');
+  document.getElementById('btn-en').classList.toggle('active', l === 'en');
+  document.querySelectorAll('[data-i18n]').forEach(el => { const v = I18N[l][el.dataset.i18n]; if (typeof v === 'string') el.textContent = v; });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => { const v = I18N[l][el.dataset.i18nHtml]; if (typeof v === 'string') el.innerHTML = v; });
+  ['c1', 'c2', 'c3', 'c4'].forEach(id => { const el = document.getElementById(id); el.previousElementSibling.previousElementSibling.textContent = el.classList.contains('open') ? T('hidecode') : T('showcode'); });
+  document.getElementById('simlink').href = 'quantum_simulator_deterministic.html';
+  document.title = l === 'de' ? 'Schritt für Schritt: der deterministische Quantensimulator' : 'Step by step: the deterministic quantum simulator';
+  [1, 2, 3, 4].forEach(renderTests);
+}
+fillCode();
+setLang(/[?&]lang=en\b/.test(location.search) ? 'en' : 'de');
+</script>
 </body>
 </html>

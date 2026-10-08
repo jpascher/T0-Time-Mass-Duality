@@ -66,21 +66,19 @@
 
 <h1>🔬 T0-ξ Hypothesentest</h1>
 <div class="subtitle">
-  Erzeugen ξ-optimale Basen systematisch kleinere Perioden als zufällige Basen?<br>
+  Erzeugen nach einem ξ-Kriterium ausgewählte Basen systematisch kleinere Perioden als zufällige Basen?<br>
   Alle Arithmetik exakt via BigInt · kein Float-Overflow
 </div>
 
 <div class="hyp-box">
-  <strong>Hypothese (aus FFGFT/T0-Theorie):</strong><br>
-  Der Parameter ξ ≈ 1,333×10⁻⁴ beschreibt eine geometrische Resonanzstruktur.
-  Wenn diese Resonanz eine physikalische Bedeutung in der Zahlentheorie hat,
-  sollten Basen a die nach dem ξ-Resonanzkriterium ausgewählt werden,
-  <em>statistisch häufiger kleinere Perioden</em> erzeugen als zufällig gewählte Basen —
-  gemessen über viele zusammengesetzte Zahlen N.<br><br>
-  <strong>Nullhypothese H₀:</strong> ξ-optimale Basen und zufällige Basen erzeugen
+  <strong>Nulltest:</strong><br>
+  Gepr&uuml;ft wird, ob nach einem &xi;-Resonanzkriterium ausgew&auml;hlte Basen a
+  <em>statistisch h&auml;ufiger kleinere Perioden</em> erzeugen als zuf&auml;llig gew&auml;hlte Basen.
+  Erwartet wird kein Effekt: &xi; = 4/30000 hat in &#8484;/N&#8484; keine Funktion, jede Periode teilt &lambda;(N) = lcm(p&minus;1, q&minus;1) (Dok.&nbsp;147; Dok.&nbsp;190, R63, R65).<br><br>
+  <strong>Nullhypothese H₀:</strong> nach &xi; ausgewählte Basen und zufällige Basen erzeugen
   Perioden gleicher Größenordnung (kein Vorteil durch ξ-Auswahl).<br>
   <strong>Alternativhypothese H₁:</strong> ξ-Basen erzeugen im Median kleinere Perioden
-  (Faktor &gt; 1,5 gegenüber Zufallsbasen über N=50 Versuche).
+  (Test A: Verhältnis &gt; 1,5 für ein N; Test B: Median-Verhältnis &gt; 1,3 und Gewinnrate &gt; 55&nbsp;% über die gewählte Anzahl N).
 </div>
 
 <!-- Test A: Einzelne N -->
@@ -140,11 +138,11 @@
     <div class="stat"><div class="stat-val" id="sRandWins">—</div>
       <div class="stat-lbl">Zufall kleiner</div></div>
     <div class="stat"><div class="stat-val" id="sTies">—</div>
-      <div class="stat-lbl">Gleich / kein Fund</div></div>
+      <div class="stat-lbl">Gleich / kein Fund (nicht gewertet)</div></div>
     <div class="stat"><div class="stat-val" id="sRatio">—</div>
       <div class="stat-lbl">Median-Verhältnis ξ/Rand</div></div>
     <div class="stat"><div class="stat-val" id="sWinRate">—</div>
-      <div class="stat-lbl">ξ-Gewinnrate</div></div>
+      <div class="stat-lbl">ξ-Gewinnrate (gewertete N)</div></div>
   </div>
   <canvas id="chartB" height="180"></canvas>
   <div id="resultB"></div>
@@ -208,8 +206,10 @@ function isPrime(n) {
 
 function findPeriod(a, N, maxR) {
   const aN=BigInt(a), NN=BigInt(N);
+  let x=1n;
   for (let r=1; r<=maxR; r++) {
-    if (modPow(aN,BigInt(r),NN)===1n) return r;
+    x = x*aN % NN;            // x = a^r mod N
+    if (x===1n) return r;
   }
   return null; // nicht gefunden
 }
@@ -224,7 +224,7 @@ function xiScore(a, N, xi) {
   const g = gcd(aN-1n, NN);
   const smoothness = g > 1n ? Number(g) / Number(NN) : 0;
   const periodicHint = Math.abs(Math.cos(2*Math.PI*a/Number(NN)));
-  const resonance = Math.exp(-((2*Math.PI/Math.max(a,1) - Math.PI)**2)/(4*xi));
+  const resonance = Math.exp(-((2*Math.PI/Math.max(a,1) - Math.PI)**2)/(4*xi)); // ACHTUNG: = 0 für alle a ≥ 3 (Unterlauf); Auswahl = kleinste Basen
   return resonance * (1 + smoothness) * (1 + periodicHint*0.3);
 }
 
@@ -277,18 +277,31 @@ function median(arr) {
 
 function sleep(ms) { return new Promise(r=>setTimeout(r,ms)); }
 
+// Ganzzahl aus einem Eingabefeld lesen; null bei ungültiger Eingabe
+function readInt(id, min, max) {
+  const s = document.getElementById(id).value.trim().replace(/\s/g,'');
+  if (!/^[0-9]+$/.test(s)) return null;
+  const v = Number(s);
+  return (Number.isSafeInteger(v) && v >= min && v <= max) ? v : null;
+}
+
 // ─── Test A: Basisvergleich für einzelne N ────────────────────────────────
 
 async function runTestA() {
-  const N    = parseInt(document.getElementById('tA_N').value);
-  const nBases= parseInt(document.getElementById('tA_bases').value);
-  const maxR  = parseInt(document.getElementById('tA_maxR').value);
-  const xi    = parseFloat(document.getElementById('tA_xi').value);
+  const N    = readInt('tA_N', 4, Number.MAX_SAFE_INTEGER);
+  const nBases= readInt('tA_bases', 1, 100);
+  const maxR  = readInt('tA_maxR', 1, 10000000);
+  const xiStr = document.getElementById('tA_xi').value.trim();
+  const xi    = /^[0-9.eE+-]+$/.test(xiStr) ? Number(xiStr) : NaN;
   const btn   = document.getElementById('btnA');
-  btn.disabled = true;
 
   document.getElementById('resultA').innerHTML = '';
   clearLog('logA');
+  if (N===null || nBases===null || maxR===null || !(xi>0) || !isFinite(xi)) {
+    logLine('logA','<span class="err">Ungültige Eingabe: N ganzzahlig mit 4 ≤ N < 2^53, Anzahl Zufallsbasen 1–100, Max Periode 1–10⁷, ξ eine positive Zahl.</span>');
+    return;
+  }
+  btn.disabled = true;
   logLine('logA',`<span class="inf">N=${N}, ξ=${xi.toExponential(3)}, maxR=${maxR}, ${nBases} Zufallsbasen</span>`);
 
   if (isPrime(BigInt(N))) {
@@ -310,7 +323,7 @@ async function runTestA() {
     await sleep(0);
     const r = findPeriod(a, N, maxR);
     xiPeriods.push(r);
-    rows.push({base:a, type:'ξ-optimal', r: r||'>', score: xiScore(a,N,xi).toExponential(3)});
+    rows.push({base:a, type:'ξ-Auswahl', r: r||'>'+maxR, score: xiScore(a,N,xi).toExponential(3)});
     logLine('logA', r
       ? `<span class="ok">  ξ-Basis a=${a}: r=${r}</span>`
       : `<span class="warn">  ξ-Basis a=${a}: r>${maxR} (nicht gefunden)</span>`);
@@ -324,7 +337,7 @@ async function runTestA() {
     await sleep(0);
     const r = findPeriod(a, N, maxR);
     rndPeriods.push(r);
-    rows.push({base:a, type:'Zufall', r: r||'>', score: xiScore(a,N,xi).toExponential(3)});
+    rows.push({base:a, type:'Zufall', r: r||'>'+maxR, score: xiScore(a,N,xi).toExponential(3)});
     logLine('logA', r
       ? `<span class="dim">  Zufallsbasis a=${a}: r=${r}</span>`
       : `<span class="dim">  Zufallsbasis a=${a}: r>${maxR}</span>`);
@@ -353,16 +366,17 @@ async function runTestA() {
   }
   html+='</table>';
 
-  const verdict = !xiMed||!rndMed ? 'neutral' :
-                  ratio>1.5 ? 'confirm' : ratio<0.8 ? 'refute' : 'neutral';
+  const verdict = !xiMed||!rndMed ? 'nodata' :
+                  ratio>1.5 ? 'smallbase' : ratio<0.8 ? 'refute' : 'neutral';
   const verdictText = {
-    confirm: `✓ ξ-Basen fanden Perioden im Median ${ratio}× kleiner als Zufallsbasen. Hypothese gestützt.`,
-    neutral: `≈ Kein signifikanter Unterschied (Verhältnis=${ratio}). Hypothese weder bestätigt noch widerlegt.`,
+    nodata:  `Zu wenig Daten: für mindestens eine der beiden Gruppen wurde keine Periode gefunden (N zu klein oder Max Periode zu klein).`,
+    smallbase: `ξ-Basen fanden Perioden im Median ${ratio}× kleiner als Zufallsbasen. Das ist ein Effekt der Basisauswahl, kein &xi;-Effekt: Für &xi; &lt; 3,7&middot;10⁻⁴ ist die Bewertung für alle a &ge; 3 exakt null (Unterlauf), ausgewählt werden dann die kleinsten teilerfremden Basen; unter ihnen sind Potenzen wie 4, 8, 9, deren Ordnung die von 2 bzw. 3 teilt.`,
+    neutral: `≈ Kein deutlicher Unterschied (Verhältnis=${ratio}; Schwellen 1,5 bzw. 0,8, kein Signifikanztest). Hypothese weder bestätigt noch widerlegt.`,
     refute:  `✗ Zufallsbasen waren besser (Verhältnis=${ratio}). Hypothese für dieses N nicht gestützt.`
   }[verdict];
 
   document.getElementById('resultA').innerHTML =
-    `<div class="result-box result-${verdict}">${verdictText}</div>${html}`;
+    `<div class="result-box result-${verdict==='refute'?'refute':'neutral'}">${verdictText}</div>${html}`;
   document.getElementById('tablePanel').style.display='block';
   document.getElementById('detailTable').innerHTML=html;
   btn.disabled=false;
@@ -371,16 +385,22 @@ async function runTestA() {
 // ─── Test B: Statistischer Test über viele N ──────────────────────────────
 
 async function runTestB() {
-  const count  = parseInt(document.getElementById('tB_count').value);
+  const count  = readInt('tB_count', 1, 200);
   const range  = document.getElementById('tB_range').value;
-  const nBases = parseInt(document.getElementById('tB_bases').value);
-  const maxR   = parseInt(document.getElementById('tB_maxR').value);
+  const nBases = readInt('tB_bases', 1, 50);
+  const maxR   = readInt('tB_maxR', 1, 10000000);
   const xi     = 4/30000;
   const btn    = document.getElementById('btnB');
-  btn.disabled = true;
 
   clearLog('logB');
   document.getElementById('resultB').innerHTML='';
+  for (const id of ['sN','sXiWins','sRandWins','sTies','sRatio','sWinRate']) document.getElementById(id).textContent='—';
+  drawChart([]);
+  if (count===null || nBases===null || maxR===null) {
+    logLine('logB','<span class="err">Ungültige Eingabe: Anzahl N-Werte 1–200, Zufallsbasen pro N 1–50, Max Scan-r 1–10⁷ (ganze Zahlen).</span>');
+    return;
+  }
+  btn.disabled = true;
   logLine('logB',`<span class="inf">Statistiktest: ${count} Zahlen, ${nBases} Zufallsbasen/N, ξ=${xi.toExponential(3)}</span>`);
 
   // N-Generator: zusammengesetzte Zahlen im Bereich
@@ -395,7 +415,17 @@ async function runTestB() {
     return null;
   }
 
-  let xiWins=0, rndWins=0, ties=0;
+  let xiWins=0, rndWins=0, ties=0, noData=0;
+  const showStats = (done) => {
+    document.getElementById('sN').textContent       = done;
+    document.getElementById('sXiWins').textContent  = xiWins;
+    document.getElementById('sRandWins').textContent= rndWins;
+    document.getElementById('sTies').textContent    = ties + ' / ' + noData;
+    const med = median(allRatios);
+    document.getElementById('sRatio').textContent   = med?med.toFixed(3):'—';
+    const cmp = xiWins+rndWins+ties;
+    document.getElementById('sWinRate').textContent = cmp ? (100*xiWins/cmp).toFixed(1)+'%' : '—';
+  };
   const allRatios=[];
   const chartData=[];
 
@@ -404,9 +434,9 @@ async function runTestB() {
     await sleep(0);
 
     const N = randComposite();
-    if(!N){ ties++; continue; }
+    if(!N){ noData++; showStats(i+1); continue; }
 
-    const xiBases  = pickXiBases(N, 3, xi);
+    const xiBases  = pickXiBases(N, nBases, xi);
     const rndBases = pickRandomBases(N, nBases);
 
     const xiPeriods  = xiBases.map(a=>findPeriod(a,N,maxR)).filter(r=>r!==null);
@@ -415,7 +445,7 @@ async function runTestB() {
     const xiMin  = xiPeriods.length  ? Math.min(...xiPeriods)  : null;
     const rndMin = rndPeriods.length ? Math.min(...rndPeriods) : null;
 
-    if(xiMin===null||rndMin===null){ ties++; continue; }
+    if(xiMin===null||rndMin===null){ noData++; logLine('logB',`<span class="dim">  N=${N}: keine Periode ≤ ${maxR} in mindestens einer Gruppe (nicht gewertet)</span>`); showStats(i+1); continue; }
 
     const ratio = rndMin/xiMin;
     allRatios.push(ratio);
@@ -425,16 +455,7 @@ async function runTestB() {
     else if(ratio<0.95) { rndWins++; logLine('logB',`<span class="warn">  N=${N}: Zufall besser (r=${xiMin} vs ${rndMin}, ×${ratio.toFixed(2)})</span>`); }
     else                { ties++;    logLine('logB',`<span class="dim">  N=${N}: gleichwertig (r≈${xiMin})</span>`); }
 
-    // Stats aktualisieren
-    document.getElementById('sN').textContent       = i+1;
-    document.getElementById('sXiWins').textContent  = xiWins;
-    document.getElementById('sRandWins').textContent= rndWins;
-    document.getElementById('sTies').textContent    = ties;
-    const med = median(allRatios);
-    document.getElementById('sRatio').textContent   = med?med.toFixed(3):'—';
-    const total = xiWins+rndWins+ties;
-    document.getElementById('sWinRate').textContent =
-      total ? (100*xiWins/total).toFixed(1)+'%' : '—';
+    showStats(i+1);
   }
 
   setProgress('progB',100);
@@ -444,23 +465,23 @@ async function runTestB() {
 
   // Gesamtergebnis
   const med = median(allRatios);
-  const total = xiWins+rndWins+ties;
+  const total = xiWins+rndWins+ties;          // gewertete N (ohne „kein Fund“)
   const winRate = total ? xiWins/total : 0;
 
   let verdict, vtext;
   if(med===null){ verdict='neutral'; vtext='Zu wenig Daten für Aussage.'; }
-  else if(med>1.3&&winRate>0.55){ verdict='confirm';
-    vtext=`✓ HYPOTHESE GESTÜTZT: ξ-Basen fanden im Median ${med.toFixed(2)}× kleinere Perioden
-    (Gewinnrate ${(winRate*100).toFixed(0)}% über ${total} Fälle).
-    Das deutet auf einen statistisch messbaren ξ-Effekt hin.`; }
+  else if(med>1.3&&winRate>0.55){ verdict='neutral';
+    vtext=`Kleine Basen fanden im Median ${med.toFixed(2)}× kleinere Perioden
+    (Gewinnrate ${(winRate*100).toFixed(0)}% über ${total} gewertete Fälle).
+    Das ist ein Effekt der Basisauswahl, kein &xi;-Effekt: Für &xi; &lt; 3,7&middot;10⁻⁴ ist die Bewertung für alle a &ge; 3 exakt null (Unterlauf), ausgewählt werden dann die kleinsten teilerfremden Basen; unter ihnen sind Potenzen wie 4, 8, 9, deren Ordnung die von 2 bzw. 3 teilt.`; }
   else if(med<0.9&&winRate<0.4){ verdict='refute';
     vtext=`✗ HYPOTHESE NICHT GESTÜTZT: Zufallsbasen waren im Median besser
     (Verhältnis=${med.toFixed(2)}, ξ-Gewinnrate=${(winRate*100).toFixed(0)}%).`; }
   else { verdict='neutral';
     vtext=`≈ KEIN KLARER EFFEKT: Median-Verhältnis=${med.toFixed(3)},
     ξ-Gewinnrate=${(winRate*100).toFixed(0)}%.
-    Der Unterschied liegt innerhalb statistischer Schwankung.
-    Mehr Stichproben oder größere N-Bereiche nötig für klareres Bild.`; }
+    Die Schwellen für H₁ (Median-Verhältnis &gt; 1,3 und Gewinnrate &gt; 55&nbsp;%) sind nicht erreicht,
+    wie vom Nulltest erwartet (kein Signifikanztest).`; }
 
   document.getElementById('resultB').innerHTML=
     `<div class="result-box result-${verdict}">${vtext}</div>`;

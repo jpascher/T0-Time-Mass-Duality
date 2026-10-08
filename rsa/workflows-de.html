@@ -256,123 +256,123 @@
       <h1>🔧 Algorithmus-Workflows</h1>
       <p>Schritt-für-Schritt Funktionsweise beider Ansätze</p>
     </div>
-    
+
     <div class="content-section">
-      <h2>⚡ T0 Periodenfindung - Workflow</h2>
-      
+      <h2>⚡ Ordnungssuche - Ablauf</h2>
+
       <div class="algorithm-overview">
         <h3>Überblick</h3>
-        <p>Der T0-Algorithmus führt Periodenfindung durch, um Faktoren von zusammengesetzten Zahlen zu ermitteln. Die Implementierung nutzt adaptive ξ-Strategien für verschiedene Zahlentypen und arbeitet mit rationaler Arithmetik.</p>
+        <p>Die Ordnungssuche (Periodenfindung wie bei Shor) ermittelt Faktoren zusammengesetzter Zahlen. Die Bibliothek <code>rsa/factorization_benchmark_library.py</code> kennt einen Rasterparameter σ (im Code <code>xi</code>); er hat im verwendeten Bereich keinen Einfluss auf das Ergebnis und ist nicht der FFGFT-Parameter ξ (R63, R75).</p>
       </div>
-      
+
       <div class="workflow-section">
-        <div class="workflow-title">Ablauf der T0-Faktorisierung</div>
-        
+        <div class="workflow-title">Ablauf der Ordnungssuche</div>
+
         <ul class="step-list">
           <li class="step-item">
             <div class="step-number">1</div>
             <div class="step-content">
-              <div class="step-title">Eingabevalidierung und ξ-Strategieauswahl</div>
+              <div class="step-title">Kategorisierung und σ-Wahl</div>
               <div class="step-description">
-                Die Zahl wird kategorisiert (twin_prime, cousin_prime, etc.) und die entsprechende ξ-Strategie gewählt.
+                Der Code zerlegt N per Probedivision bis 1000, ordnet es einer Kategorie zu (twin_prime, cousin_prime usw.) und wählt den zugehörigen σ-Wert. Die Kategorie setzt die Faktoren also schon voraus; σ hat keinen Einfluss auf das Ergebnis (R63).
               </div>
               <div class="step-code">
 xi_strategy = self._select_optimized_xi_strategy(n)
 xi_value = self.xi_profiles[xi_strategy]</div>
             </div>
           </li>
-          
+
           <li class="step-item">
             <div class="step-number">2</div>
             <div class="step-content">
               <div class="step-title">Triviale Faktor-Prüfung</div>
               <div class="step-description">
-                Überprüfung auf einfache Faktoren mit kleinen Primzahlen (2, 3, 5, 7) mittels GCD.
+                Überprüfung auf gemeinsame Teiler mit den kleinen Primzahlen 2, 3, 5, 7 mittels ggT.
               </div>
               <div class="step-code">
 for basis in [2, 3, 5, 7]:
-  if math.gcd(basis, n) > 1:
+  if math.gcd(basis, n) &gt; 1:
     factor = math.gcd(basis, n)
     return [factor, n // factor]</div>
             </div>
           </li>
-          
+
           <li class="step-item">
             <div class="step-number">3</div>
             <div class="step-content">
-              <div class="step-title">Periodensuche mit Resonanzbewertung</div>
+              <div class="step-title">Periodensuche mit Bewertung</div>
               <div class="step-description">
-                Für jede Basis wird systematisch nach Perioden gesucht und diese mittels der gewählten ξ-Strategie bewertet.
+                Für jede Basis a = 2, 3, 5, 7 sucht der Code das erste r &lt; min(N, 2000) mit a^r ≡ 1 (mod N), also die Ordnung. Die Bewertung mit σ liegt bei σ = 1/10 und 1/15 für jedes r über dem Schwellwert 1/1000; die Ordnung wird daher immer angenommen (R63).
               </div>
               <div class="step-code">
-for r in range(2, max_periods):
+for r in range(2, min(n, max_periods)):
   if pow(a, r, n) == 1: # Periode gefunden
-    resonance = self._calculate_resonance(r, xi_value)
-    if resonance > threshold:
-      return self._extract_factors(a, r, n)</div>
+    resonance = self._calculate_resonance_with_optimized_xi(r, xi)
+    if resonance &gt; self.threshold: # threshold = 1/1000
+      return r</div>
             </div>
           </li>
-          
+
           <li class="step-item">
             <div class="step-number">4</div>
             <div class="step-content">
               <div class="step-title">Faktor-Extraktion</div>
               <div class="step-description">
-                Bei gefundener geeigneter Periode wird versucht, über x = a^(r/2) mod n die Faktoren zu extrahieren.
+                Ist die Ordnung gerade und a^(r/2) ≢ −1 (mod N), liefert ggT(a^(r/2) ± 1, N) einen echten Teiler; sonst folgt die nächste Basis.
               </div>
               <div class="step-code">
 x = pow(a, period // 2, n)
 f1 = math.gcd(x - 1, n)
 f2 = math.gcd(x + 1, n)
-if 1 < f1 < n: return [f1, n // f1]</div>
+if 1 &lt; f1 &lt; n: return [f1, n // f1]</div>
             </div>
           </li>
         </ul>
       </div>
-      
+
       <div class="data-flow-section">
-        <h3>ξ-Strategieauswahl im Detail</h3>
-        
+        <h3>σ-Wahl im Detail</h3>
+
         <div class="decision-tree">
-          <h4>Entscheidungslogik</h4>
+          <h4>Entscheidungslogik (Faktoren p, q aus der Probedivision)</h4>
           <div class="condition">
-            <span class="condition-if">WENN</span> |p - q| = 2 
-            <div class="condition-then">→ twin_prime_optimized (ξ = 1/50)</div>
+            <span class="condition-if">WENN</span> |p - q| = 2, ≤ 6, ≤ 12 oder größer (setzt die gesuchten Faktoren voraus, R63)
+            <div class="condition-then">→ twin_prime, cousin_prime, near_twin_prime, distant_prime (σ = 1/10)</div>
           </div>
           <div class="condition">
-            <span class="condition-if">WENN</span> |p - q| ≤ 6 
-            <div class="condition-then">→ cousin_prime (ξ = 1/100)</div>
+            <span class="condition-if">WENN</span> N ∈ {1729, 2047, 4181}
+            <div class="condition-then">→ special_cases (σ = 1/10)</div>
           </div>
           <div class="condition">
-            <span class="condition-if">WENN</span> n > 1000 
-            <div class="condition-then">→ medium_size (ξ = 1/1000)</div>
+            <span class="condition-if">WENN</span> N hat mehr als 16 Bit
+            <div class="condition-then">→ large_composite (σ = 1/15)</div>
           </div>
           <div class="condition">
             <span class="condition-if">SONST</span>
-            <div class="condition-then">→ universal (ξ = 1/100)</div>
+            <div class="condition-then">→ universal (σ = 1/10)</div>
           </div>
         </div>
       </div>
     </div>
-    
+
     <div class="content-section">
-      <h2>🎼 Harmonische Faktorisierung - Workflow</h2>
-      
+      <h2>🎼 Harmonische Klassifikation - Ablauf</h2>
+
       <div class="algorithm-overview">
         <h3>Überblick</h3>
-        <p>Die harmonische Faktorisierung erkennt musikalische Intervalle in Zahlenverhältnissen. Sie verwendet hierarchische 4-Stufen-Suche mit logarithmischer Oktaven-Reduktion und Euler's Gradus Suavitatis.</p>
+        <p>Die harmonische Klassifikation (<code>rsa/optimized_harmonic_lib.py</code>) zerlegt N zuerst per Probedivision und benennt dann das Verhältnis der beiden Faktoren mit einem musikalischen Intervall. Sie verwendet eine 4-Stufen-Suche mit logarithmischer Oktaven-Reduktion; eine eigene Faktorisierung ist das nicht (Dok. 343).</p>
       </div>
-      
+
       <div class="workflow-section">
-        <div class="workflow-title">Ablauf der harmonischen Faktorisierung</div>
-        
+        <div class="workflow-title">Ablauf der harmonischen Klassifikation</div>
+
         <ul class="step-list">
           <li class="step-item">
             <div class="step-number">1</div>
             <div class="step-content">
               <div class="step-title">Faktoren finden</div>
               <div class="step-description">
-                Klassische Faktorensuche mittels Trial Division bis √n.
+                Klassische Faktorensuche mittels Probedivision bis √n.
               </div>
               <div class="step-code">
 for i in range(2, int(math.sqrt(n)) + 1):
@@ -380,7 +380,7 @@ for i in range(2, int(math.sqrt(n)) + 1):
     return (i, n // i)</div>
             </div>
           </li>
-          
+
           <li class="step-item">
             <div class="step-number">2</div>
             <div class="step-content">
@@ -390,131 +390,136 @@ for i in range(2, int(math.sqrt(n)) + 1):
               </div>
               <div class="step-code">
 ratio = max(factors) / min(factors)
-while ratio >= 2.0:
+while ratio &gt;= 2.0:
   ratio /= 2.0
   octave_shift += 1</div>
             </div>
           </li>
-          
+
           <li class="step-item">
             <div class="step-number">3</div>
             <div class="step-content">
-              <div class="step-title">Level-Vorhersage</div>
+              <div class="step-title">Stufen-Vorhersage</div>
               <div class="step-description">
-                Basierend auf maximaler Primzahl und Verhältnis-Wert wird das optimale Hierarchie-Level vorhergesagt.
+                Aus dem größeren der beiden Faktoren und dem reduzierten Verhältnis bestimmt der Code die Stufe, mit der die Stufensuche beginnt; die höhere der beiden Vorhersagen gilt.
               </div>
               <div class="step-code">
-if max_prime <= 7: level = 1 # BASIS
-elif max_prime <= 19: level = 2 # ERWEITERT
-elif max_prime <= 31: level = 3 # KOMPLEX
-else: level = 4 # ULTRA</div>
+if max_prime &lt;= 17: prime_level = 1 # BASIS
+elif max_prime &lt;= 31: prime_level = 3 # KOMPLEX
+else: prime_level = 4 # ULTRA
+if ratio &gt;= 1.85: ratio_level = 4
+elif ratio &gt;= 1.60: ratio_level = 3
+elif ratio &gt;= 1.40: ratio_level = 2
+else: ratio_level = 1
+level = max(prime_level, ratio_level)</div>
             </div>
           </li>
-          
+
           <li class="step-item">
             <div class="step-number">4</div>
             <div class="step-content">
               <div class="step-title">Hierarchische Harmoniesuche</div>
               <div class="step-description">
-                Die Harmoniestufen werden in optimaler Reihenfolge durchsucht, beginnend mit dem vorhergesagten Level.
+                Zuerst prüft der Code einen Cache häufiger Verhältnisse und sucht dann innerhalb der Toleranzgrenzen über alle Stufen. Nur wenn das nichts liefert, durchsucht er die Stufen nacheinander, beginnend mit der vorhergesagten; die Toleranz wächst je Stufe um den Faktor 1,0 / 1,1 / 1,2 / 1,3.
               </div>
               <div class="step-code">
 for level_idx in search_order:
   for ratio, interval in level.intervals:
     cents_deviation = abs(1200 * log2(target_ratio / ratio))
-    if cents_deviation <= tolerance:
+    if cents_deviation &lt;= tolerance * level.tolerance_factor:
       return SUCCESS(interval, cents_deviation)</div>
             </div>
           </li>
         </ul>
       </div>
-      
+
+      <p>Anteile je Stufe, nachgerechnet an allen 2624 Halbprimzahlen unter 10&nbsp;000 (±50 Cent); sie folgen vor allem der Zahl der Zielverhältnisse je Stufe (10, 10, 15, 30):</p>
       <div class="component-grid">
         <div class="component-card">
-          <div class="component-title">BASIS Level (95%)</div>
+          <div class="component-title">BASIS (14,9 %)</div>
           <div class="component-description">
-            Klassische musikalische Intervalle: Unison (1:1), Quinte (3:2), Quarte (4:3), große Terz (5:4), etc. Behandelt die überwiegende Mehrheit der Fälle.
+            Klassische musikalische Intervalle aus den Primzahlen 2, 3, 5: Einklang (1:1), Quinte (3:2), Quarte (4:3), große Terz (5:4) usw.
           </div>
         </div>
-        
+
         <div class="component-card">
-          <div class="component-title">ERWEITERT Level (4%)</div>
+          <div class="component-title">ERWEITERT (17,9 %)</div>
           <div class="component-description">
-            Jazz und moderne Harmonien: 11. Oberton (11:8), 13. Oberton (13:8), natürliche Septime (7:4). Für komplexere aber erkennbare Verhältnisse.
+            Jazz und moderne Harmonien: natürliche Septime (7:4), 11. Oberton (11:8), 13. Oberton (13:8) usw.
           </div>
         </div>
-        
+
         <div class="component-card">
-          <div class="component-title">KOMPLEX Level (0.9%)</div>
+          <div class="component-title">KOMPLEX (21,4 %)</div>
           <div class="component-description">
-            Spektralmusik und Mikrotonales: 29:16, 31:16, 25:16. Behandelt seltene aber mathematisch interessante Verhältnisse.
+            Spektralmusik und Mikrotonales: 29:16, 31:16, 25:16 usw.
           </div>
         </div>
-        
+
         <div class="component-card">
-          <div class="component-title">ULTRA Level (0.1%)</div>
+          <div class="component-title">ULTRA (45,8 %)</div>
           <div class="component-description">
-            Xenharmonische Experimente: 37:32, 41:32, 61:32. Für sehr große Primzahlen und experimentelle Verhältnisse.
+            Xenharmonische Verhältnisse: 37:32, 41:32, 61:32 usw.; hier landen die meisten Verhältnisse großer Primfaktoren.
           </div>
         </div>
       </div>
     </div>
-    
+
     <div class="content-section">
-      <h2>🔄 Optimierungsstrategien beider Ansätze</h2>
-      
+      <h2>🔄 Optimierungen im Code</h2>
+
       <div class="component-grid">
         <div class="component-card">
-          <div class="component-title">Mathematische Grenzen-Filterung</div>
+          <div class="component-title">Grenzen-Filterung</div>
           <div class="component-description">
-            Berechnung von Ober- und Untergrenzen für gültige Verhältnisse basierend auf Toleranz, um die Suchzeit zu reduzieren.
+            Berechnung von Ober- und Untergrenzen für gültige Verhältnisse aus der Toleranz, um die Suchzeit zu reduzieren (harmonische Bibliothek).
           </div>
         </div>
-        
+
         <div class="component-card">
           <div class="component-title">Gecachte Berechnungen</div>
           <div class="component-description">
-            LRU-Cache für häufige Oktaven-Reduktionen und logarithmische Distanz-Berechnungen mittels @lru_cache Decorator.
+            LRU-Cache für häufige Oktaven-Reduktionen und logarithmische Distanz-Berechnungen mittels @lru_cache Decorator (harmonische Bibliothek).
           </div>
         </div>
-        
+
         <div class="component-card">
-          <div class="component-title">Intelligente Suchreihenfolge</div>
+          <div class="component-title">Suchreihenfolge</div>
           <div class="component-description">
-            Beide Ansätze verwenden vorhersagebasierte Suchoptimierung: T0 für ξ-Strategien, Harmonic für Level-Reihenfolge.
+            Die harmonische Bibliothek beginnt mit der vorhergesagten Stufe. Die Ordnungssuche wählt σ nach Kategorie; das ändert das Ergebnis nicht.
           </div>
         </div>
-        
+
         <div class="component-card">
           <div class="component-title">Rationale Arithmetik</div>
           <div class="component-description">
-            Beide verwenden Fraction-basierte Berechnungen um Rundungsfehler zu vermeiden und deterministische Ergebnisse zu garantieren.
+            Die Ordnungssuche bewertet mit Fraction und ist dadurch bitgenau reproduzierbar (R65). Die harmonische Bibliothek rechnet Cent-Abstände in Gleitkomma.
           </div>
         </div>
       </div>
     </div>
-    
+
     <div class="content-section">
       <h2>🎯 Unterschiede der Ansätze</h2>
-      
+
       <div class="data-flow-section">
-        <h3>T0 Periodenfindung vs. Harmonische Verhältnissuche</h3>
-        <p><strong>T0 Periodenfindung:</strong> Sucht nach mathematischen Perioden in modularer Arithmetik und bewertet diese mit ξ-Parametern.</p>
-        <p><strong>Harmonische Faktorisierung:</strong> Analysiert direkt die Verhältnisse zwischen Faktoren und ordnet sie musikalischen Intervallen zu.</p>
-        
+        <h3>Ordnungssuche vs. harmonische Klassifikation</h3>
+        <p><strong>Ordnungssuche:</strong> Sucht die Ordnung von a modulo N und zieht daraus mit dem ggT einen Teiler; die Bewertung mit σ ändert das Ergebnis nicht.</p>
+        <p><strong>Harmonische Klassifikation:</strong> Zerlegt N per Probedivision und ordnet das Verhältnis der Faktoren einem musikalischen Intervall zu.</p>
+
         <div class="decision-tree">
           <h4>Wann welchen Ansatz verwenden?</h4>
           <div class="condition">
-            <span class="condition-if">Für Semiprimes mit bekannten Eigenschaften:</span>
-            <div class="condition-then">→ T0 Periodenfindung (höhere Präzision)</div>
+            <span class="condition-if">Um N zu zerlegen:</span>
+            <div class="condition-then">→ Ordnungssuche (Periodenfindung wie bei Shor) oder klassische Verfahren wie Pollard-Rho</div>
           </div>
           <div class="condition">
-            <span class="condition-if">Für unbekannte Zahlenverhältnisse:</span>
-            <div class="condition-then">→ Harmonische Faktorisierung (breitere Abdeckung)</div>
+            <span class="condition-if">Um das Verhältnis gefundener Faktoren zu benennen:</span>
+            <div class="condition-then">→ Harmonische Klassifikation</div>
           </div>
           <div class="condition">
-            <span class="condition-if">Für mathematische Analyse:</span>
-            <div class="condition-then">→ Beide komplementär verwenden</div>
+            <span class="condition-if">Für beides:</span>
+            <div class="condition-then">→ Erst zerlegen, dann benennen</div>
           </div>
         </div>
       </div>

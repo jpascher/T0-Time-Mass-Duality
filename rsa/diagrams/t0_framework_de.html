@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>T0-Framework Algorithmus Flussdiagramm (Deutsch) - Optimiert</title>
+  <title>Ablaufdiagramm Ordnungssuche (Deutsch)</title>
   <script src="../mermaid.min.js"></script>
   <style>
     body {
@@ -104,90 +104,81 @@
 </head>
 <body>
   <div class="container">
-    <button class="back-button" onclick="window.close()">← Fenster schließen</button>
-    <h1>🌊 T0-Framework Algorithmus Flussdiagramm (OPTIMIERT)</h1>
+    <a class="back-button" href="../t0_factorization_demo.html">← Zurück zur Demo</a>
+    
+    <h1>🌊 Ablaufdiagramm: Ordnungssuche und harmonische Klassifikation</h1>
     
     <div class="optimization-highlight">
-      <h3>BEFUND: <span class="xi-value">ξ = 1/10</span> universell optimal!</h3>
-      <p><strong>Systematische ξ-Optimierung bestätigt:</strong> Der Wert ξ = 1/10 funktioniert perfekt für alle Zahlentypen - Zwillingsprime, Cousin-Prime, spezielle Konstanten und Standard-Zahlen. Nur sehr große Zahlen (>16 Bit) verwenden leicht konservativeres ξ = 1/15.</p>
+      <h3>Hinweis: Der Rasterparameter σ (im Code <code>xi</code>) hat im verwendeten Bereich keinen Einfluss auf das Ergebnis und ist nicht der FFGFT-Parameter ξ (R63, R75).</h3>
+      <p>Das Diagramm zeigt die σ-Wahl des Codes (σ = 1/10, für Zahlen über 16 Bit σ = 1/15). Mit jedem dieser Werte werden alle Zahlentypen gleich zerlegt, weil die Ordnungssuche das Ergebnis bestimmt.</p>
     </div>
     
     <div class="info-box">
-      <h3>🔬 T0-Framework Überblick (Version 2.1 - OPTIMIERT)</h3>
-      <p>Dieses Flussdiagramm zeigt den geprüfte T0-Framework-Algorithmus mit den neuen <strong>universell optimalen ξ-Werten</strong>. Der untersuchte Befund: <strong>ξ = 1/10 funktioniert für alle wichtigen Zahlentypen!</strong> Der Algorithmus kategorisiert Zahlen intelligent nach mathematischen Eigenschaften und wählt die perfekten ξ-Parameter.</p>
+      <h3>🔬 Überblick (Bibliotheksversion 2.1)</h3>
+      <p>Das Diagramm zeigt den Ablauf der beiden Python-Bibliotheken: links die Ordnungssuche in <code>factorization_benchmark_library.py</code>, rechts die harmonische Klassifikation in <code>optimized_harmonic_lib.py</code>. Die Ordnungssuche ordnet jeder Zahlkategorie einen σ-Wert zu; die Kategorie ermittelt sie per Probedivision, die N dabei bereits zerlegt (R63).</p>
     </div>
     
     <div id="mermaidDiagram" class="mermaid">
       flowchart TD
-        A[Eingabe: N = p × q] --> B{Algorithmus-Auswahl}
+        A[Eingabe: N] --> B{Bibliothek}
+        B -->|factorization_benchmark_library| C[Ordnungssuche]
+        B -->|optimized_harmonic_lib| D[Harmonische Klassifikation]
         
-        B -->|Semiprime erkannt| C[T0-Framework Pfad]
-        B -->|Composite erkannt| D[Harmonische Faktorisierung]
-        
-        %% T0-Framework Zweig
-        C --> E{T0 Zahlen-Analyse}
-        E --> F[Zwillingsprim ξ=1/10]
-        E --> G[Cousin-Prime ξ=1/10]
-        E --> H[Universal ξ=1/10]
-        E --> I[Große Zahlen ξ=1/15]
-        
-        F --> J[T0 Generator]
+        %% Ordnungssuche
+        C --> E{"Kategorie per Probedivision bis 1000"}
+        E --> F[Zwillingsprim σ=1/10]
+        E --> G[Cousin-Prim σ=1/10]
+        E --> H[Universal σ=1/10]
+        E --> I[Große Zahlen σ=1/15]
+        F --> J["Basen a = 2, 3, 5, 7"]
         G --> J
         H --> J
         I --> J
-        
-        J --> K[GCD Prüfung]
-        K --> L{Faktor gefunden?}
-        L -->|Ja| M[T0 ERFOLG]
-        L -->|Nein| N[T0 Periodensuche]
-        N --> O{T0 Resonanz?}
-        O -->|Ja| P[T0 Faktor extrahieren]
-        O -->|Nein| Q[Nächste T0 Periode]
+        J --> K[ggT-Prüfung]
+        K --> L{Teiler gefunden?}
+        L -->|Ja| M[Faktoren gefunden]
+        L -->|Nein| N["Nächstes r mit a^r ≡ 1 mod N"]
+        N --> O{"Bewertung über 1/1000? bei σ = 1/10 immer"}
+        O -->|Ja| P["ggT von a^(r/2) ± 1 und N"]
+        O -->|Nein| Q[Nächste Periode]
         Q --> N
-        P --> R{T0 Gültig?}
+        P --> R{Echter Teiler?}
         R -->|Ja| M
-        R -->|Nein| S[T0 Timeout]
+        R -->|Nein| S["Nächste Basis bzw. kein Ergebnis"]
         
-        %% Harmonische Faktorisierung Zweig
-        D --> T[Faktor-Extraktion p,q]
+        %% Harmonische Klassifikation
+        D --> T[Faktoren p, q per Probedivision]
         T --> U[Verhältnis berechnen]
         U --> V[Oktaven-Reduktion]
         V --> W{Optimierungen aktiv?}
-        
         W -->|Ja| X[Cache-Check häufige Verhältnisse]
-        W -->|Nein| Y[Original hierarchische Suche]
-        
-        X -->|Cache Hit| Z[Sofortiges harmonisches Ergebnis]
-        X -->|Cache Miss| AA[Level-Vorhersage]
-        
-        AA --> BB[Mathematische Grenzen-Suche]
-        BB -->|Treffer| CC[Optimierter harmonischer Match]
+        W -->|Nein| Y[Hierarchische Suche ohne Optimierung]
+        X -->|Cache Hit| Z[Sofortige Zuordnung]
+        X -->|Cache Miss| AA[Stufen-Vorhersage]
+        AA --> BB[Grenzen-Suche über alle Stufen]
+        BB -->|Treffer| CC[Zuordnung aus der Grenzen-Suche]
         BB -->|Kein Treffer| DD[Hierarchische Suche]
-        
-        DD --> EE{Level 1: BASIS}
+        DD --> EE{Stufe 1: BASIS}
         EE -->|3:2, 5:4, 4:3| FF[Klassische Harmonien]
-        EE -->|Kein Match| GG{Level 2: ERWEITERT}
-        
-        GG -->|11:8, 13:8, 7:4| HH[Jazz Harmonien]
-        GG -->|Kein Match| II{Level 3: KOMPLEX}
-        
+        EE -->|Kein Treffer| GG{Stufe 2: ERWEITERT}
+        GG -->|11:8, 13:8, 7:4| HH[Jazz-Harmonien]
+        GG -->|Kein Treffer| II{Stufe 3: KOMPLEX}
         II -->|29:16, 31:16| JJ[Spektralmusik]
-        II -->|Kein Match| KK{Level 4: ULTRA}
-        
+        II -->|Kein Treffer| KK{Stufe 4: ULTRA}
         KK -->|37:32, 61:32| LL[Xenharmonische Verhältnisse]
-        KK -->|Kein Match| MM[Nicht harmonisch]
+        KK -->|Kein Treffer| MM[Kein Zielverhältnis in der Toleranz]
         
         Y --> EE
         
-        %% Erfolgreiche Ausgänge
-        Z --> NN[Harmonisches Ergebnis]
+        %% Ausgänge
+        Z --> NN[Intervallname des Faktorverhältnisses]
         CC --> NN
         FF --> NN
         HH --> NN
         JJ --> NN
         LL --> NN
         
-        M --> OO[Erfolgreiche Faktorisierung]
+        M --> OO[Ergebnis: Faktoren bzw. Intervallname]
         NN --> OO
         
         style A fill:#e1f5fe
@@ -203,21 +194,21 @@
     </div>
     
     <div class="info-box">
-      <h3>🎯 Hauptmerkmale (Version 2.1 - OPTIMIERT)</h3>
-      <p><strong>Universeller ξ=1/10 Befund:</strong> Geprüfte Entdeckung, dass ξ = 1/10 für alle wichtigen Zahlentypen optimal funktioniert!</p>
-      <p><strong>Intelligente Kategorisierung:</strong> Unterscheidung zwischen Zwillingsprimen, Cousin-Primen, nahen und entfernten Primen.</p>
-      <p><strong>Spezialfall-Behandlung:</strong> Optimierte Ansätze für mathematische Konstanten wie Ramanujan-Zahlen und Mersenne-Zahlen.</p>
-      <p><strong>Performance-Optimierungen:</strong> Schnelle GCD-Prüfung vor aufwendiger Periodensuche.</p>
+      <h3>🎯 Hauptmerkmale (Version 2.1)</h3>
+      <p><strong>Ein σ-Wert für fast alle Kategorien:</strong> σ = 1/10, über 16 Bit σ = 1/15. Dasselbe Ergebnis liefert jedes σ, bei dem der Schwellwert 1/1000 nicht greift; sehr kleine Werte wie 1/1000 oder 4/30000 verwerfen Perioden und senken die Trefferquote (R63).</p>
+      <p><strong>Kategorisierung:</strong> Zwillings-, Cousin-, nahe und entfernte Primzahlpaare; sie setzt die Faktoren voraus (R63).</p>
+      <p><strong>Spezialfälle:</strong> 1729, 2047 und 4181 erhalten eine eigene Kategorie mit demselben σ.</p>
+      <p><strong>ggT-Prüfung:</strong> Gemeinsame Teiler mit 2, 3, 5, 7 werden vor der Periodensuche abgefangen.</p>
     </div>
     
     <div class="optimization-highlight">
-      <h3>⚡ Performance-Verbesserungen</h3>
-      <p><strong>100% Erfolgsrate bei Tests:</strong> Der optimierte ξ = 1/10 Wert zeigt perfekte Performance bei allen Testzahlen.</p>
-      <p><strong>Signifikante Speedups:</strong> Bis zu 10x schneller als ursprüngliche ξ-Werte durch optimierte Resonanz-Berechnung.</p>
-      <p><strong>Erweiterte Abdeckung:</strong> Funktioniert auch für größere Zahlen mit leicht angepassten Parametern.</p>
+      <h3>⚡ Laufzeit und Erfolg</h3>
+      <p><strong>Erfolg:</strong> Von 20 Halbprimzahlen zwischen 15 und 19043 zerlegt die Bibliothek 19, davon 5 schon über den ggT mit einer Basis; das Ergebnis ist für σ = 1/10, 1/15 und 1/100 gleich (R63).</p>
+      <p><strong>Laufzeit:</strong> σ ändert im verwendeten Bereich weder Ergebnis noch Laufzeit (R63).</p>
+      <p><strong>Größere Zahlen:</strong> Die Periodensuche endet bei r &lt; 2000. Zahlen, deren Ordnungen zu allen Basen 2, 3, 5, 7 darüber liegen, werden nicht zerlegt; von 45 Halbprimzahlen mit 8 bis 32 Bit zerlegt die Bibliothek 23.</p>
     </div>
   </div>
-  
+
   <script>
     // Warten bis Mermaid geladen ist
     function initializeMermaid() {

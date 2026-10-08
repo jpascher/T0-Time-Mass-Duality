@@ -77,10 +77,10 @@
 <div class="theory-box">
   <strong>Algebraische Grundlage (basisunabhängig):</strong><br>
   Für N = p·q gilt: Carmichael-Funktion λ(N) = lcm(p−1, q−1).<br>
-  Die kleinstmögliche Periode r = ord_a(N) teilt λ(N).<br>
+  Jede Periode r = ord_N(a) (kleinstes r mit a^r ≡ 1 mod N) teilt λ(N).<br>
   Definiere: <strong>ξ_num(N) = λ(N) / N</strong> — dimensionslos, repräsentationsunabhängig.<br>
   Für harte Primzahlen (RSA): ξ_num ≈ 1/2 (große Periode, schwer).<br>
-  Für glatte Primzahlen: ξ_num ≪ 1 (kleine Periode, leicht).<br><br>
+  Allgemein gilt ξ_num ≈ 1/ggT(p−1, q−1). Für glatte Primzahlen (p−1 hat nur kleine Teiler) ist N über Pollard p−1 leicht zu faktorisieren; ξ_num wird dort kleiner, weil p−1 und q−1 oft mehr gemeinsame Teiler haben, bleibt aber von der Größenordnung 1/ggT(p−1, q−1).<br><br>
   <strong>Hypothese:</strong> Die Verteilung von ξ_num über zufällige semiprime N
   zeigt eine Resonanzstruktur — diskrete Häufungspunkte statt Gleichverteilung —
   analog zur ξ-Stufenhierarchie der FFGFT.
@@ -108,12 +108,12 @@
   <div class="row">
     <label>Anzahl semiprime N</label>
     <input type="number" id="tB_count" value="200" min="20" max="2000">
-    <label>Bitgröße der Primfaktoren</label>
+    <label>Bitgröße von N</label>
     <select id="tB_bits">
-      <option value="8">8 Bit (p,q < 256)</option>
-      <option value="12" selected>12 Bit (p,q < 4096)</option>
-      <option value="16">16 Bit (p,q < 65536)</option>
-      <option value="20">20 Bit (p,q < 1M)</option>
+      <option value="8">8 Bit (N; p,q < 16)</option>
+      <option value="12" selected>12 Bit (N; p,q < 64)</option>
+      <option value="16">16 Bit (N; p,q < 256)</option>
+      <option value="20">20 Bit (N; p,q < 1024)</option>
     </select>
   </div>
   <div class="row">
@@ -142,7 +142,7 @@
     <div class="stat"><div class="stat-val" id="sXiMax">—</div>
       <div class="stat-lbl">ξ_num Maximum</div></div>
     <div class="stat"><div class="stat-val" id="sRatioMed">—</div>
-      <div class="stat-lbl">r / λ(N) Median</div></div>
+      <div class="stat-lbl">r_a / λ(N) Median (erste 50 N)</div></div>
     <div class="stat"><div class="stat-val" id="sClusters">—</div>
       <div class="stat-lbl">Häufungspunkte</div></div>
   </div>
@@ -251,6 +251,7 @@ function makeSemiprime(bits, type) {
   let p=null, q=null;
   const hb = Math.ceil(bits/2);
   for(let i=0;i<100;i++){
+    if(type==='mixed') type = ['random','safe','smooth'][Math.floor(Math.random()*3)];
     if(type==='safe'){
       p=randSafePrime(hb); q=randSafePrime(hb);
     } else if(type==='smooth'){
@@ -295,12 +296,17 @@ function smoothness(n) {
   return largest;
 }
 
+// Ordnung r_a = ord_N(a) der ersten teilerfremden Basis a = 2, 3, … (a < 50), deren Ordnung ≤ maxR ist.
+// Das ist nicht die kleinste Ordnung über alle Basen (die wäre trivial: a = N−1 hat Ordnung 2).
 function findMinPeriod(N, maxR) {
   const NN=BigInt(N);
   for(let a=2;a<Math.min(N,50);a++){
-    if(gcd(BigInt(a),NN)!==1n) continue;
+    const aN=BigInt(a);
+    if(gcd(aN,NN)!==1n) continue;
+    let x=1n;
     for(let r=1;r<=maxR;r++){
-      if(modPow(BigInt(a),BigInt(r),NN)===1n) return r;
+      x=x*aN%NN;               // x = a^r mod N
+      if(x===1n) return {a, r};
     }
   }
   return null;
@@ -334,7 +340,10 @@ function runSingle(){
   clearLog('logA');
 
   let N,p,q;
-  try { N=parseInt(N_str); } catch(e){ logLine('logA','<span class="err">Ungültige Zahl.</span>'); return; }
+  N = /^[0-9]+$/.test(N_str) ? Number(N_str) : NaN;
+  if(!(Number.isSafeInteger(N) && N>=4)){
+    logLine('logA','<span class="err">Ungültige Eingabe: N muss eine ganze Zahl mit 4 ≤ N &lt; 2^53 sein.</span>'); return;
+  }
 
   if(isPrime(BigInt(N))){ logLine('logA','<span class="err">N ist Primzahl — brauche semiprime N = p·q</span>'); return; }
 
@@ -345,6 +354,10 @@ function runSingle(){
   }
   if(!p||!isPrime(BigInt(p))||!isPrime(BigInt(q))){
     logLine('logA','<span class="warn">N ist kein Produkt zweier Primzahlen.</span>');
+    return;
+  }
+  if(p===q){
+    logLine('logA',`<span class="warn">N = ${p}² ist ein Primzahlquadrat: dort gilt λ(N) = p(p−1), nicht lcm(p−1, q−1). Diese Seite behandelt N = p·q mit p ≠ q.</span>`);
     return;
   }
 
@@ -360,14 +373,14 @@ function runSingle(){
   logLine('logA',`  λ(N) = lcm(${p-1}, ${q-1}) = ${lam.toString()}`);
   logLine('logA',`<span class="hi">  ξ_num = λ(N)/N = ${xi.toExponential(4)}</span>`);
   logLine('logA',`  Glattheit p−1: ${smoothP} | q−1: ${smoothQ}`);
-  if(minR) logLine('logA',`<span class="ok">  Kleinste Periode gefunden: r_min = ${minR}</span>`);
-  else     logLine('logA',`<span class="warn">  Keine Periode in r ≤ ${maxR} gefunden</span>`);
+  if(minR) logLine('logA',`<span class="ok">  Ordnung der Basis a = ${minR.a} (erste teilerfremde Basis mit Ordnung ≤ ${maxR}): r_a = ${minR.r}</span>`);
+  else     logLine('logA',`<span class="warn">  Für keine Basis a &lt; 50 eine Ordnung r ≤ ${maxR} gefunden</span>`);
 
   if(minR){
-    const rRatio = minR/Number(lam);
-    logLine('logA',`  r_min / λ(N) = ${rRatio.toExponential(3)}`);
+    const rRatio = minR.r/Number(lam);
+    logLine('logA',`  r_a / λ(N) = ${rRatio.toExponential(3)}  (r_a teilt λ(N))`);
     const xi_phys = 4/30000;
-    logLine('logA',`<br>  ξ_phys = ${xi_phys.toExponential(4)}  (physikalisch, 3D-Torus)`);
+    logLine('logA',`<br>  ξ_phys = ${xi_phys.toExponential(4)}  (physikalisch, Geometrieparameter der FFGFT)`);
     logLine('logA',`  ξ_num  = ${xi.toExponential(4)}  (algebraisch, Zahlenraum)`);
     logLine('logA',`  Verhältnis ξ_num/ξ_phys = ${(xi/xi_phys).toFixed(3)}`);
   }
@@ -376,13 +389,19 @@ function runSingle(){
 // ─── Test B: Verteilungsanalyse ───────────────────────────────────────────
 
 async function runDistribution(){
-  const count=parseInt(document.getElementById('tB_count').value)||200;
+  const cS=document.getElementById('tB_count').value.trim(), mS=document.getElementById('tB_maxR').value.trim();
+  const count=/^[0-9]+$/.test(cS)?Number(cS):NaN;
   const bits=parseInt(document.getElementById('tB_bits').value)||12;
   const type=document.getElementById('tB_type').value;
-  const maxR=parseInt(document.getElementById('tB_maxR').value)||100000;
+  const maxR=/^[0-9]+$/.test(mS)?Number(mS):NaN;
   const btn=document.getElementById('btnB');
-  btn.disabled=true; clearLog('logB');
+  clearLog('logB');
   document.getElementById('resultB').innerHTML='';
+  for(const id of ['sCount','sXiMin','sXiMed','sXiMax','sRatioMed','sClusters']) document.getElementById(id).textContent='—';
+  if(!(count>=1&&count<=2000&&maxR>=1&&maxR<=10000000)){
+    logLine('logB','<span class="err">Ungültige Eingabe: Anzahl 1–2000, Max Scan-r 1–10⁷ (ganze Zahlen).</span>'); return;
+  }
+  btn.disabled=true;
 
   logLine('logB',`<span class="inf">Analysiere ${count} semiprime N (${bits}-Bit, Typ: ${type})...</span>`);
 
@@ -407,7 +426,7 @@ async function runDistribution(){
     data.push({N,p,q,lam:Number(lam),xi,sP,sQ});
 
     // Stats aktualisieren
-    document.getElementById('sCount').textContent=i+1;
+    document.getElementById('sCount').textContent=xiValues.length;
     const med=median(xiValues);
     document.getElementById('sXiMed').textContent=med?med.toExponential(3):'—';
     document.getElementById('sXiMin').textContent=Math.min(...xiValues).toExponential(3);
@@ -415,19 +434,22 @@ async function runDistribution(){
   }
 
   setProgress('progB',100);
+  if(!xiValues.length){
+    logLine('logB',`<span class="err">Für diesen Primtyp und diese Bitgröße ließ sich kein N = p·q mit p ≠ q erzeugen (z. B. gibt es mit 4 Bit nur die sichere Primzahl 11).</span>`);
+    btn.disabled=false; return;
+  }
 
   // Häufungspunkte erkennen
   const clusters=detectClusters(xiValues);
   document.getElementById('sClusters').textContent=clusters.length;
 
-  // r/λ Median
-  let rCount=0, rSum=0;
+  // r_a/λ Median (erste 50 N)
   for(const d of data.slice(0,50)){
     const r=findMinPeriod(d.N, maxR);
-    if(r){ rSum+=r/d.lam; rCount++; }
+    if(r) rRatios.push(r.r/d.lam);
   }
   document.getElementById('sRatioMed').textContent=
-    rCount>0?(rSum/rCount).toExponential(3):'—';
+    rRatios.length>0?median(rRatios).toExponential(3):'—';
 
   // Chart
   drawHistogram('chartDist', xiValues, clusters);
@@ -445,14 +467,14 @@ async function runDistribution(){
   const nearPhys=clusters.filter(c=>Math.abs(Math.log10(c.center)-Math.log10(xi_phys))<0.5);
   let verdict, vtext;
   if(clusters.length>=3&&clusters.some(c=>c.count/xiValues.length>0.15)){
-    verdict='confirm';
-    vtext=`✓ Diskrete Häufungspunkte in der ξ_num-Verteilung gefunden (${clusters.length} Cluster).
-    Die Verteilung ist nicht gleichmäßig — sie zeigt eine Resonanzstruktur analog zu
-    diskreten Stufen. Dies unterstützt die Hypothese einer hierarchischen Struktur
-    im Zahlenraum. ${nearPhys.length>0?'Ein Cluster liegt in der Nähe von ξ_phys.':''}`;
+    verdict='neutral';
+    vtext=`Diskrete Häufungspunkte in der ξ_num-Verteilung gefunden (${clusters.length} Cluster).
+    Die Verteilung ist nicht gleichmäßig; die Häufungen entsprechen den diskreten Werten
+    von ggT(p−1, q−1) (ξ_num ≈ 1/2, 1/4, 1/6 …). Das ist eine elementare arithmetische
+    Eigenschaft und kein Beleg für eine ξ-Stufenstruktur. ${nearPhys.length>0?'Ein Cluster liegt in der Nähe von ξ_phys.':''}`;
   } else if(clusters.length===0){
     verdict='refute';
-    vtext='✗ Keine Clusterstruktur erkannt — ξ_num ist gleichmäßig verteilt. Keine Resonanzstruktur nachweisbar.';
+    vtext='Keine Häufung über der Erkennungsschwelle (1,8-facher Mittelwert je Bin) — keine Resonanzstruktur nachweisbar.';
   } else {
     verdict='neutral';
     vtext=`≈ Schwache Struktur erkannt (${clusters.length} Cluster). Mehr Stichproben oder andere Primtypen könnten klareres Bild geben.`;
@@ -464,10 +486,15 @@ async function runDistribution(){
 // ─── Test C: Stufenvergleich ──────────────────────────────────────────────
 
 async function runComparison(){
-  const count=parseInt(document.getElementById('tC_count').value)||500;
+  const kS=document.getElementById('tC_count').value.trim();
+  const count=/^[0-9]+$/.test(kS)?Number(kS):NaN;
   const [b1,b2]=document.getElementById('tC_bits').value.split(',').map(Number);
   const btn=document.getElementById('btnC');
-  btn.disabled=true; clearLog('logC');
+  clearLog('logC'); document.getElementById('resultC').innerHTML='';
+  if(!(count>=1&&count<=5000)){
+    logLine('logC','<span class="err">Ungültige Eingabe: Stichprobengröße 1–5000 (ganze Zahl).</span>'); return;
+  }
+  btn.disabled=true;
 
   logLine('logC',`<span class="inf">Sammle ${count} ξ_num-Werte (${b1}–${b2} Bit)...</span>`);
 
@@ -543,8 +570,8 @@ async function runComparison(){
   } else if(matches.length>=2){
     verdict='confirm';
     vtext=`✓ ${matches.length} ξ_num-Cluster liegen nahe an FFGFT-Stufenwerten.
-    Zahlenraum und physikalischer Raum teilen möglicherweise analoge Resonanzstrukturen —
-    nicht identisch (verschiedene Geometrien), aber strukturell ähnlich.`;
+    Die Häufungen selbst sind durch die diskreten Werte von ggT(p−1, q−1) erklärt;
+    die Nähe zu Stufenwerten ist für sich kein Beleg für eine gemeinsame Struktur.`;
   } else if(matches.length===1){
     verdict='neutral';
     vtext=`≈ 1 Cluster nahe einer FFGFT-Stufe — Zufall nicht ausgeschlossen. Mehr Stichproben nötig.`;

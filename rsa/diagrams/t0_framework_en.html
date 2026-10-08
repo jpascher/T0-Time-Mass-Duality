@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>T0-Framework Algorithm Flowchart (English) - Optimized</title>
+  <title>Order Finding Flowchart (English)</title>
   <script src="../mermaid.min.js"></script>
   <style>
     body {
@@ -104,90 +104,81 @@
 </head>
 <body>
   <div class="container">
-    <button class="back-button" onclick="window.close()">← Close Window</button>
-    <h1>🌊 T0-Framework Algorithm Flowchart (OPTIMIZED)</h1>
+    <a class="back-button" href="../t0_factorization_demo.html">← Back to the Demo</a>
+    
+    <h1>🌊 Flowchart: Order Finding and Harmonic Classification</h1>
     
     <div class="optimization-highlight">
-      <h3>FINDING: <span class="xi-value">ξ = 1/10</span> universally optimal!</h3>
-      <p><strong>Systematic ξ-optimization confirmed:</strong> The value ξ = 1/10 works perfectly for all number types - twin primes, cousin primes, special constants, and standard numbers. Only very large numbers (>16 bits) use slightly more conservative ξ = 1/15.</p>
+      <h3>Note: the grid parameter σ (called <code>xi</code> in the code) has no effect on the result in the range used, and it is not the FFGFT parameter ξ (R63, R75).</h3>
+      <p>The diagram shows the σ choice of the code (σ = 1/10, for numbers above 16 bits σ = 1/15). With each of these values all number types are factorized in the same way, because order finding determines the result.</p>
     </div>
     
     <div class="info-box">
-      <h3>🔬 T0-Framework Overview (Version 2.1 - OPTIMIZED)</h3>
-      <p>This flowchart shows the examined T0-Framework algorithm with the new <strong>universally optimal ξ-values</strong>. The groundbreaking discovery: <strong>ξ = 1/10 works for all important number types!</strong> The algorithm intelligently categorizes numbers by mathematical properties and selects perfect ξ parameters.</p>
+      <h3>🔬 Overview (library version 2.1)</h3>
+      <p>The diagram shows the flow of the two Python libraries: on the left order finding in <code>factorization_benchmark_library.py</code>, on the right the harmonic classification in <code>optimized_harmonic_lib.py</code>. Order finding assigns a σ value to each number category; it determines the category by trial division, which already factorizes N (R63).</p>
     </div>
     
     <div id="mermaidDiagram" class="mermaid">
       flowchart TD
-        A[Input: N = p × q] --> B{Algorithm Selection}
+        A[Input: N] --> B{Library}
+        B -->|factorization_benchmark_library| C[Order Finding]
+        B -->|optimized_harmonic_lib| D[Harmonic Classification]
         
-        B -->|Semiprime detected| C[T0-Framework Path]
-        B -->|Composite detected| D[Harmonic Factorization]
-        
-        %% T0-Framework Branch
-        C --> E{T0 Number Analysis}
-        E --> F[Twin Prime ξ=1/10]
-        E --> G[Cousin Prime ξ=1/10]
-        E --> H[Universal ξ=1/10]
-        E --> I[Large Numbers ξ=1/15]
-        
-        F --> J[T0 Generator]
+        %% Order finding
+        C --> E{"Category by trial division up to 1000"}
+        E --> F[Twin Prime σ=1/10]
+        E --> G[Cousin Prime σ=1/10]
+        E --> H[Universal σ=1/10]
+        E --> I[Large Numbers σ=1/15]
+        F --> J["Bases a = 2, 3, 5, 7"]
         G --> J
         H --> J
         I --> J
-        
         J --> K[GCD Check]
-        K --> L{Factor Found?}
-        L -->|Yes| M[T0 SUCCESS]
-        L -->|No| N[T0 Period Search]
-        N --> O{T0 Resonance?}
-        O -->|Yes| P[T0 Extract Factor]
-        O -->|No| Q[Next T0 Period]
+        K --> L{Divisor Found?}
+        L -->|Yes| M[Factors Found]
+        L -->|No| N["Next r with a^r ≡ 1 mod N"]
+        N --> O{"Score above 1/1000? always for σ = 1/10"}
+        O -->|Yes| P["gcd of a^(r/2) ± 1 and N"]
+        O -->|No| Q[Next Period]
         Q --> N
-        P --> R{T0 Valid?}
+        P --> R{Proper Divisor?}
         R -->|Yes| M
-        R -->|No| S[T0 Timeout]
+        R -->|No| S["Next base or no result"]
         
-        %% Harmonic Factorization Branch
-        D --> T[Factor Extraction p,q]
+        %% Harmonic classification
+        D --> T[Factors p, q by trial division]
         T --> U[Calculate Ratio]
         U --> V[Octave Reduction]
         V --> W{Optimizations Active?}
-        
         W -->|Yes| X[Cache Check Frequent Ratios]
-        W -->|No| Y[Original Hierarchical Search]
-        
-        X -->|Cache Hit| Z[Immediate Harmonic Result]
+        W -->|No| Y[Hierarchical Search without Optimization]
+        X -->|Cache Hit| Z[Immediate Assignment]
         X -->|Cache Miss| AA[Level Prediction]
-        
-        AA --> BB[Mathematical Bounds Search]
-        BB -->|Hit| CC[Optimized Harmonic Match]
+        AA --> BB[Bounds Search over All Levels]
+        BB -->|Hit| CC[Assignment from Bounds Search]
         BB -->|No Hit| DD[Hierarchical Search]
-        
         DD --> EE{Level 1: BASIS}
         EE -->|3:2, 5:4, 4:3| FF[Classical Harmonies]
         EE -->|No Match| GG{Level 2: EXTENDED}
-        
         GG -->|11:8, 13:8, 7:4| HH[Jazz Harmonies]
         GG -->|No Match| II{Level 3: COMPLEX}
-        
         II -->|29:16, 31:16| JJ[Spectral Music]
         II -->|No Match| KK{Level 4: ULTRA}
-        
         KK -->|37:32, 61:32| LL[Xenharmonic Ratios]
-        KK -->|No Match| MM[Not Harmonic]
+        KK -->|No Match| MM[No Target Ratio within Tolerance]
         
         Y --> EE
         
-        %% Successful Outputs
-        Z --> NN[Harmonic Result]
+        %% Outputs
+        Z --> NN[Interval Name of the Factor Ratio]
         CC --> NN
         FF --> NN
         HH --> NN
         JJ --> NN
         LL --> NN
         
-        M --> OO[Successful Factorization]
+        M --> OO[Result: Factors or Interval Name]
         NN --> OO
         
         style A fill:#e1f5fe
@@ -203,21 +194,21 @@
     </div>
     
     <div class="info-box">
-      <h3>🎯 Key Features (Version 2.1 - OPTIMIZED)</h3>
-      <p><strong>Universal ξ=1/10 Finding:</strong> Examined discovery that ξ = 1/10 works optimally for all important number types!</p>
-      <p><strong>Intelligent Categorization:</strong> Distinction between twin primes, cousin primes, near and distant primes.</p>
-      <p><strong>Special Case Handling:</strong> Optimized approaches for mathematical constants like Ramanujan numbers and Mersenne numbers.</p>
-      <p><strong>Performance Optimizations:</strong> Fast GCD check before expensive period search.</p>
+      <h3>🎯 Key Features (Version 2.1)</h3>
+      <p><strong>One σ value for almost all categories:</strong> σ = 1/10, above 16 bits σ = 1/15. Every σ for which the threshold 1/1000 does not apply gives the same result; very small values such as 1/1000 or 4/30000 reject periods and lower the hit rate (R63).</p>
+      <p><strong>Categorization:</strong> twin, cousin, near and distant prime pairs; it presupposes the factors (R63).</p>
+      <p><strong>Special cases:</strong> 1729, 2047 and 4181 get a category of their own with the same σ.</p>
+      <p><strong>GCD check:</strong> common divisors with 2, 3, 5, 7 are caught before the period search.</p>
     </div>
     
     <div class="optimization-highlight">
-      <h3>⚡ Performance Improvements</h3>
-      <p><strong>100% Success Rate in Tests:</strong> The optimized ξ = 1/10 value shows perfect performance on all test numbers.</p>
-      <p><strong>Significant Speedups:</strong> Up to 10x faster than original ξ-values through optimized resonance calculation.</p>
-      <p><strong>Extended Coverage:</strong> Works for larger numbers with slightly adjusted parameters.</p>
+      <h3>⚡ Runtime and Success</h3>
+      <p><strong>Success:</strong> of 20 semiprimes between 15 and 19043 the library factorizes 19, 5 of them already via the gcd with a base; the result is the same for σ = 1/10, 1/15 and 1/100 (R63).</p>
+      <p><strong>Runtime:</strong> in the range used, σ changes neither result nor runtime (R63).</p>
+      <p><strong>Larger numbers:</strong> the period search stops at r &lt; 2000. Numbers whose orders for all bases 2, 3, 5, 7 lie above this are not factorized; of 45 semiprimes with 8 to 32 bits the library factorizes 23.</p>
     </div>
   </div>
-  
+
   <script>
     // Wait for Mermaid to load
     function initializeMermaid() {

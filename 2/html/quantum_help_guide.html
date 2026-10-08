@@ -1,1043 +1,203 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hybrid T0-Framework Quantum Simulator - Hilfe & Anleitung</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #333;
-      min-height: 100vh;
-      line-height: 1.6;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 20px;
-      padding: 40px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-    
-    /* Language Toggle */
-    .language-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-      display: flex;
-      gap: 10px;
-    }
-    .lang-btn {
-      background: linear-gradient(135deg, #4f46e5, #3730a3);
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-    .lang-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-    }
-    .lang-btn.active {
-      background: linear-gradient(135deg, #dc2626, #b91c1c);
-    }
-    
-    /* Language Content */
-    .language-content {
-      display: none;
-    }
-    .language-content.active {
-      display: block;
-    }
-    
-    h1 {
-      text-align: center;
-      font-size: 2.8em;
-      margin-bottom: 10px;
-      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
-      background-size: 400% 400%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradientShift 4s ease infinite;
-    }
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-    .subtitle {
-      text-align: center;
-      font-size: 1.3em;
-      color: #a0a0a0;
-      margin-bottom: 40px;
-    }
-    
-    .section {
-      background: #f8f9fa;
-      border-radius: 15px;
-      padding: 30px;
-      margin: 30px 0;
-      border-left: 5px solid #667eea;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-    .section h2 {
-      color: #667eea;
-      font-size: 1.8em;
-      margin-top: 0;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .section h3 {
-      color: #764ba2;
-      font-size: 1.3em;
-      margin-top: 25px;
-      margin-bottom: 15px;
-    }
-    .tutorial-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-      margin: 25px 0;
-    }
-    .tutorial-card {
-      background: white;
-      border-radius: 10px;
-      padding: 20px;
-      border: 2px solid #e9ecef;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-    .tutorial-card:hover {
-      border-color: #667eea;
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
-    }
-    .tutorial-card h4 {
-      color: #667eea;
-      margin-top: 0;
-      font-size: 1.2em;
-    }
-    .step-list {
-      background: #e3f2fd;
-      border-radius: 10px;
-      padding: 20px;
-      margin: 20px 0;
-    }
-    .step-list ol {
-      margin: 0;
-      padding-left: 20px;
-    }
-    .step-list li {
-      margin: 10px 0;
-      padding: 5px 0;
-    }
-    .highlight {
-      background: linear-gradient(45deg, #fff3cd, #ffeaa7);
-      padding: 15px;
-      border-radius: 8px;
-      border-left: 4px solid #f39c12;
-      margin: 15px 0;
-    }
-    .warning {
-      background: linear-gradient(45deg, #f8d7da, #f5c6cb);
-      padding: 15px;
-      border-radius: 8px;
-      border-left: 4px solid #e74c3c;
-      margin: 15px 0;
-    }
-    .success {
-      background: linear-gradient(45deg, #d4edda, #c3e6cb);
-      padding: 15px;
-      border-radius: 8px;
-      border-left: 4px solid #27ae60;
-      margin: 15px 0;
-    }
-    .info {
-      background: linear-gradient(45deg, #d1ecf1, #bee5eb);
-      padding: 15px;
-      border-radius: 8px;
-      border-left: 4px solid #17a2b8;
-      margin: 15px 0;
-    }
-    .code-block {
-      background: #2c3e50;
-      color: #ecf0f1;
-      padding: 15px;
-      border-radius: 8px;
-      font-family: 'Courier New', monospace;
-      margin: 15px 0;
-      overflow-x: auto;
-    }
-    .quantum-state {
-      font-family: 'Times New Roman', serif;
-      font-style: italic;
-      font-weight: bold;
-      color: #9b59b6;
-    }
-    .btn {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      display: inline-block;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      margin: 10px 5px;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-    }
-    .toc {
-      background: #f1f3f4;
-      border-radius: 10px;
-      padding: 20px;
-      margin: 20px 0;
-    }
-    .toc ul {
-      list-style: none;
-      padding: 0;
-    }
-    .toc li {
-      padding: 5px 0;
-    }
-    .toc a {
-      color: #667eea;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .toc a:hover {
-      text-decoration: underline;
-    }
-    .experiment-box {
-      background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
-      border: 2px dashed #27ae60;
-      border-radius: 10px;
-      padding: 20px;
-      margin: 20px 0;
-    }
-    .experiment-box h4 {
-      color: #27ae60;
-      margin-top: 0;
-    }
-    .comparison-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-      background: white;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-    .comparison-table th {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      padding: 15px;
-      text-align: left;
-    }
-    .comparison-table td {
-      padding: 12px 15px;
-      border-bottom: 1px solid #e9ecef;
-    }
-    .comparison-table tr:nth-child(even) {
-      background: #f8f9fa;
-    }
-    @media (max-width: 768px) {
-      .container { padding: 20px; }
-      .tutorial-grid { grid-template-columns: 1fr; }
-      h1 { font-size: 2.2em; }
-      .language-toggle {
-        position: relative;
-        top: auto;
-        right: auto;
-        margin-bottom: 20px;
-        justify-content: center;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hilfe zum Quantensimulator mit deterministischer Messung</title>
+<style>
+  :root { --bg1:#667eea; --bg2:#764ba2; --panel:rgba(30,30,50,0.95); --card:rgba(255,255,255,0.06);
+          --line:rgba(255,255,255,0.14); --acc:#4ecdc4; --acc2:#f7b731; --mut:#b8bfd6; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; padding:16px;
+         background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%); color:#fff; min-height:100vh; }
+  .container { max-width:920px; margin:0 auto; background:var(--panel); border-radius:18px; padding:28px;
+               box-shadow:0 20px 60px rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); line-height:1.65; }
+  .topbar { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+  .topbar a, .lang-btn { color:#fff; text-decoration:none; background:rgba(255,255,255,0.12); border:1px solid var(--line);
+               padding:8px 14px; border-radius:8px; cursor:pointer; font-size:14px; }
+  .lang-btn.active { background:var(--acc); color:#10202a; font-weight:bold; }
+  h1 { margin:8px 0 4px; font-size:1.75em; }
+  .subtitle { color:var(--mut); margin-bottom:18px; }
+  h2 { color:var(--acc); font-size:1.25em; margin:30px 0 8px; border-bottom:1px solid var(--line); padding-bottom:4px; }
+  .toc { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 18px; }
+  .toc a { color:#dfe6ff; text-decoration:none; } .toc a:hover { color:var(--acc); }
+  .toc ol { margin:6px 0; padding-left:22px; }
+  .rule { background:rgba(78,205,196,0.12); border-left:4px solid var(--acc); padding:10px 14px; border-radius:8px;
+          margin:12px 0; font-family:'Cambria Math','Times New Roman',serif; font-size:1.08em; }
+  .ex { background:rgba(247,183,49,0.10); border-left:4px solid var(--acc2); padding:10px 14px; border-radius:8px; margin:12px 0; }
+  .ex b { color:var(--acc2); }
+  .note { color:var(--mut); font-size:0.92em; }
+  code { background:rgba(0,0,0,0.35); padding:1px 5px; border-radius:4px; font-family:Consolas,'Courier New',monospace; font-size:0.92em; }
+  .lang { display:none; } .lang.active { display:block; }
+  @media (max-width:600px) { .container { padding:16px; } }
+</style>
 </head>
 <body>
-  <div class="language-toggle">
-    <button class="lang-btn active" onclick="switchLanguage('de')">Deutsch</button>
-    <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+<div class="container">
+  <div class="topbar">
+    <a href="quantum_simulator_deterministic.html" id="backlink">← Zum Simulator</a>
+    <div>
+      <button class="lang-btn active" id="btn-de" onclick="setLang('de')">Deutsch</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
+    </div>
   </div>
 
-  <div class="container">
-    <!-- German Content -->
-    <div id="german-content" class="language-content active">
-      <h1>⚛️ Hybrid T0-Framework Quantum Simulator</h1>
-      <div class="subtitle">Vollständige Anleitung für intelligenten Hybrid-Quantum-Computer mit automatischer Algorithmus-Auswahl</div>
+<!-- =============================== DEUTSCH =============================== -->
+<div class="lang active" id="lang-de" lang="de">
+  <h1>Hilfe zum Quantensimulator</h1>
+  <div class="subtitle">Qubit-Gatter, Messreihen, Bell-Test und Ordnungssuche nach Shor mit deterministischer Messung nach Dok. 230</div>
 
-      <!-- Inhaltsverzeichnis -->
-      <div class="toc">
-        <h3>📚 Inhaltsverzeichnis</h3>
-        <ul>
-          <li><a href="#basics-de">🎯 Grundlagen & Erste Schritte</a></li>
-          <li><a href="#hybrid-de">🤖 Hybrid T0-Framework</a></li>
-          <li><a href="#algorithms-de">⚛️ Algorithmus-Vergleich</a></li>
-          <li><a href="#qubits-de">🎛️ Qubit-Steuerung</a></li>
-          <li><a href="#gates-de">🚪 Quantum Gates</a></li>
-          <li><a href="#prime-de">🔍 Primzahl-Erkennung</a></li>
-          <li><a href="#experiments-de">🧪 Experimente & Tutorials</a></li>
-          <li><a href="#advanced-de">🚀 Erweiterte Konzepte</a></li>
-          <li><a href="#troubleshooting-de">🔧 Problemlösung</a></li>
-        </ul>
-      </div>
-
-      <!-- Grundlagen -->
-      <div class="section" id="basics-de">
-        <h2>🎯 Grundlagen & Erste Schritte</h2>
-        
-        <h3>Was ist der Hybrid T0-Framework Quantum Simulator?</h3>
-        <p>Unser Simulator kombiniert <strong>drei verschiedene Quantenalgorithmen</strong> in einem intelligenten System, das automatisch den besten Ansatz für jede Faktorisierungsaufgabe auswählt. Das Hybrid T0-Framework nutzt fortgeschrittene T0-Physik mit deterministischer Quantenmechanik.</p>
-
-        <div class="highlight">
-          <strong>🎮 Schnellstart:</strong> Geben Sie eine Zahl (z.B. 77) ein und klicken Sie auf "🚀 Starte Hybrid T0 Shor Algorithmus" für die beste automatische Faktorisierung!
-        </div>
-
-        <h3>Wichtige Quantenkonzepte:</h3>
-        <ul>
-          <li><strong>Hybrid T0-Framework:</strong> Intelligente Kombination aus Pure T0 und Advanced T0</li>
-          <li><strong>Primzahl-Erkennung:</strong> Automatische Erkennung nicht faktorisierbarer Zahlen</li>
-          <li><strong>Deterministische Quantenmechanik:</strong> Reproduzierbare Ergebnisse ohne Zufall</li>
-          <li><strong>Multi-Base Strategy:</strong> Verwendung mehrerer Basen für robuste Faktorisierung</li>
-          <li><strong>Qubit:</strong> Die Grundeinheit der Quanteninformation</li>
-          <li><strong>Superposition:</strong> Ein Qubit kann gleichzeitig in mehreren Zuständen existieren</li>
-          <li><strong>Verschränkung:</strong> Qubits können so verbunden werden, dass sie sich gegenseitig beeinflussen</li>
-        </ul>
-
-        <div class="step-list">
-          <h4>🚀 Erste Schritte:</h4>
-          <ol>
-            <li>Geben Sie eine Zahl zum Faktorisieren ein (empfohlen: 15, 21, 35, 77, 143)</li>
-            <li>Wählen Sie einen der vier Algorithmus-Modi</li>
-            <li>Beobachten Sie die intelligente Algorithmus-Auswahl und Performance-Analyse</li>
-            <li>Experimentieren Sie mit Primzahlen (7, 11, 13, 17, 19, 23) zur Primzahl-Erkennung</li>
-            <li>Verwenden Sie Quantum Gates für direkte Qubit-Manipulation</li>
-          </ol>
-        </div>
-      </div>
-
-      <!-- Hybrid T0-Framework -->
-      <div class="section" id="hybrid-de">
-        <h2>🤖 Hybrid T0-Framework - Intelligente Algorithmus-Auswahl</h2>
-        
-        <h3>Vier verfügbare Modi:</h3>
-        <div class="tutorial-grid">
-          <div class="tutorial-card">
-            <h4>🚀 Hybrid T0 Shor Algorithm</h4>
-            <p><strong>Empfohlener Hauptmodus</strong></p>
-            <p>Führt Pure T0 und Advanced T0 parallel aus und wählt automatisch das beste Ergebnis. Enthält Primzahl-Vorerkennung für sofortige korrekte Antworten.</p>
-            <div class="success">
-              <strong>Beste Wahl für:</strong> Alle Zahlen - optimale Ergebnisse garantiert
-            </div>
-          </div>
-          <div class="tutorial-card">
-            <h4>⚛️ Pure Quantum T0</h4>
-            <p><strong>Schneller & Einfacher Ansatz</strong></p>
-            <p>Deterministischer Algorithmus mit fester Base a=2. Sehr schnell, aber bei manchen Zahlen begrenzt. Ideal für einfache Faktorisierungen.</p>
-            <div class="info">
-              <strong>Beste Wahl für:</strong> Schnelle Tests, einfache zusammengesetzte Zahlen
-            </div>
-          </div>
-          <div class="tutorial-card">
-            <h4>🧠 Advanced T0 Framework</h4>
-            <p><strong>Robuster Multi-Base Ansatz</strong></p>
-            <p>Verwendet mehrere Basen [2,3,5,7,11,13,17,19] mit T0-Resonance Filtering. Langsamer, aber erfolgreicher bei schwierigen Zahlen.</p>
-            <div class="info">
-              <strong>Beste Wahl für:</strong> Schwierige Faktorisierungen, wissenschaftliche Analyse
-            </div>
-          </div>
-          <div class="tutorial-card">
-            <h4>📊 Algorithm Vergleich</h4>
-            <p><strong>Detaillierte Performance-Analyse</strong></p>
-            <p>Führt alle Algorithmen aus und zeigt detaillierte Vergleiche, Geschwindigkeits-Metriken und Empfehlungen.</p>
-            <div class="info">
-              <strong>Beste Wahl für:</strong> Lernzwecke, Performance-Benchmarking
-            </div>
-          </div>
-        </div>
-
-        <h3>Intelligente Entscheidungslogik des Hybrid-Systems:</h3>
-        <div class="step-list">
-          <ol>
-            <li><strong>Primzahl-Vorerkennung:</strong> Sofortige Erkennung von Primzahlen (mathematisch korrekt)</li>
-            <li><strong>Parallele Ausführung:</strong> Pure T0 und Advanced T0 laufen gleichzeitig</li>
-            <li><strong>Intelligente Auswahl:</strong>
-              <ul>
-                <li>Beide erfolgreich → Wähle schnelleren (mit 50% Toleranz)</li>
-                <li>Nur einer erfolgreich → Wähle erfolgreichen</li>
-                <li>Beide versagen → Wähle schnelleren Versuch</li>
-              </ul>
-            </li>
-            <li><strong>Transparente Berichterstattung:</strong> Vollständige Performance-Analyse aller Methoden</li>
-          </ol>
-        </div>
-      </div>
-
-      <!-- Algorithmus-Vergleich -->
-      <div class="section" id="algorithms-de">
-        <h2>⚛️ Algorithmus-Vergleich & Performance</h2>
-        
-        <h3>Detaillierte Algorithmus-Eigenschaften:</h3>
-        <table class="comparison-table">
-          <thead>
-            <tr>
-              <th>Eigenschaft</th>
-              <th>Pure Quantum T0</th>
-              <th>Advanced T0 Framework</th>
-              <th>Hybrid T0</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Erfolgsrate</strong></td>
-              <td>~67% (bei 237 Tests)</td>
-              <td>~91% (bei 237 Tests)</td>
-              <td>~95% (kombiniert)</td>
-            </tr>
-            <tr>
-              <td><strong>Durchschnittszeit</strong></td>
-              <td>0.13ms (sehr schnell)</td>
-              <td>0.89ms (6.7x langsamer)</td>
-              <td>Variable (optimal)</td>
-            </tr>
-            <tr>
-              <td><strong>Verwendete Basen</strong></td>
-              <td>Fest: a=2</td>
-              <td>Multi: [2,3,5,7,11,13,17,19]</td>
-              <td>Beide verfügbar</td>
-            </tr>
-            <tr>
-              <td><strong>Komplexität</strong></td>
-              <td>Minimal</td>
-              <td>Hoch (Resonance-Filter)</td>
-              <td>Intelligent managed</td>
-            </tr>
-            <tr>
-              <td><strong>Primzahl-Erkennung</strong></td>
-              <td>✅ Integriert</td>
-              <td>✅ Integriert</td>
-              <td>✅ Priorität 1</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="experiment-box">
-          <h4>🧪 Performance-Test Experiment</h4>
-          <ol>
-            <li>Geben Sie N=77 ein</li>
-            <li>Klicken Sie "📊 Algorithm Vergleich"</li>
-            <li>Beobachten Sie detaillierte Performance-Metriken:</li>
-            <ul>
-              <li>Pure T0: ✅ 7×11 (0.1ms) - Fixed Base a=2</li>
-              <li>Advanced T0: ✅ 7×11 (1.2ms) - Multi-Base Strategy</li>
-              <li>Hybrid Wahl: Pure Quantum T0 (schneller bei gleicher Korrektheit)</li>
-            </ul>
-          </ol>
-        </div>
-      </div>
-
-      <!-- Primzahl-Erkennung -->
-      <div class="section" id="prime-de">
-        <h2>🔍 Intelligente Primzahl-Erkennung</h2>
-        
-        <h3>Warum Primzahl-Erkennung wichtig ist:</h3>
-        <p>Primzahlen können <strong>mathematisch nicht faktorisiert werden</strong>, da sie nur durch 1 und sich selbst teilbar sind. Unser Simulator erkennt dies intelligent und gibt korrekte Antworten statt sinnloser Fehlversuche.</p>
-
-        <div class="tutorial-grid">
-          <div class="tutorial-card">
-            <h4>🔬 Deterministische Prüfung</h4>
-            <p>6k±1 Optimierung für schnelle, exakte Primzahl-Erkennung bis √N.</p>
-          </div>
-          <div class="tutorial-card">
-            <h4>🎲 Fermat-Test</h4>
-            <p>Probabilistische Bestätigung mit 95-100% Sicherheit für große Zahlen.</p>
-          </div>
-          <div class="tutorial-card">
-            <h4>🎯 Confidence-System</h4>
-            <p>Kombiniert beide Methoden für maximale Zuverlässigkeit der Primzahl-Erkennung.</p>
-          </div>
-        </div>
-
-        <h3>Beispiel-Ausgaben:</h3>
-        <div class="code-block">
-Eingabe: N=23 (Primzahl)
-🔍 Primzahl-Vorprüfung: N=23 ist eine Primzahl (100% sicher)
-💡 Primzahlen können nicht faktorisiert werden - das ist mathematisch korrekt
-✅ Hybrid T0 KORREKT: 23 ist Primzahl (keine Faktoren möglich)
-🎉 HYBRID T0-ERFOLG! Primzahl korrekt erkannt: 23 ist eine Primzahl
-</div>
-
-        <div class="code-block">
-Eingabe: N=77 (Zusammengesetzt)
-⚛️ Starte Hybrid T0 für N=77
-🔍 Vorprüfung: N=77 ist zusammengesetzt - starte Faktorisierung
-✅ Pure T0 ERFOLG: 7 × 11 = 77 (0.1ms)
-🔍 Verifikation: 7 × 11 = 77 ✓
-</div>
-
-        <div class="experiment-box">
-          <h4>🧪 Primzahl-Test Experiment</h4>
-          <p><strong>Teste diese Primzahlen:</strong> 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113</p>
-          <p><strong>Erwartung:</strong> Alle werden sofort als Primzahlen erkannt (100% Erfolgsrate)</p>
-          <p><strong>Vergleiche mit zusammengesetzten Zahlen:</strong> 15, 21, 35, 77, 143, 323</p>
-        </div>
-      </div>
-
-      <!-- Qubit-Steuerung -->
-      <div class="section" id="qubits-de">
-        <h2>🎛️ Qubit-Steuerung</h2>
-        
-        <h3>Qubit-Zustände verstehen:</h3>
-        <div class="tutorial-grid">
-          <div class="tutorial-card">
-            <h4>🔴 Zustand |0⟩</h4>
-            <p>Klassischer "Aus"-Zustand. Qubit ist definitiv in Position 0. Wahrscheinlichkeit: 100% für 0, 0% für 1.</p>
-          </div>
-          <div class="tutorial-card">
-            <h4>🟢 Zustand |1⟩</h4>
-            <p>Klassischer "An"-Zustand. Qubit ist definitiv in Position 1. Wahrscheinlichkeit: 0% für 0, 100% für 1.</p>
-          </div>
-          <div class="tutorial-card">
-            <h4>⚡ Superposition</h4>
-            <p>Quantenzustand: Qubit ist gleichzeitig 0 UND 1. Erst bei Messung "entscheidet" es sich für einen Wert.</p>
-          </div>
-        </div>
-
-        <div class="experiment-box">
-          <h4>🧪 Experiment 1: Superposition erkunden</h4>
-          <ol>
-            <li>Setzen Sie alle Qubits auf <span class="quantum-state">|0⟩</span> (Reset All)</li>
-            <li>Klicken Sie "Superposition" - alle Qubits blinken jetzt</li>
-            <li>Klicken Sie mehrmals "Measure All" - beobachten Sie die zufälligen Ergebnisse!</li>
-            <li>Jede Messung gibt verschiedene Binärzahlen zurück</li>
-          </ol>
-        </div>
-      </div>
-
-      <!-- Quantum Gates -->
-      <div class="section" id="gates-de">
-        <h2>🚪 Quantum Gates</h2>
-        
-        <p>Quantum Gates sind die "Bausteine" der Quantenberechnung. Sie transformieren Qubits mathematisch präzise.</p>
-
-        <h3>Single-Qubit Gates:</h3>
-        <div class="tutorial-grid">
-          <div class="tutorial-card">
-            <h4>H - Hadamard Gate</h4>
-            <p><strong>Funktion:</strong> Erzeugt Superposition<br>
-            <span class="quantum-state">|0⟩ → (|0⟩ + |1⟩)/√2</span><br>
-            <span class="quantum-state">|1⟩ → (|0⟩ - |1⟩)/√2</span></p>
-          </div>
-          <div class="tutorial-card">
-            <h4>X - Pauli-X Gate</h4>
-            <p><strong>Funktion:</strong> Bit-Flip (Quantum NOT)<br>
-            <span class="quantum-state">|0⟩ → |1⟩</span><br>
-            <span class="quantum-state">|1⟩ → |0⟩</span></p>
-          </div>
-          <div class="tutorial-card">
-            <h4>CNOT Gate</h4>
-            <p><strong>Funktion:</strong> Controlled NOT<br>
-            Flippt Target nur wenn Control = <span class="quantum-state">|1⟩</span><br>
-            Erzeugt Verschränkung!</p>
-          </div>
-        </div>
-
-        <div class="experiment-box">
-          <h4>🧪 Experiment 2: Bell-Zustand erzeugen</h4>
-          <ol>
-            <li>Reset All Qubits</li>
-            <li>Wählen Sie Qubit 0 als Target, klicken Sie "H (Hadamard)"</li>
-            <li>Setzen Sie Control = 0, Target = 1</li>
-            <li>Klicken Sie "CNOT Gate"</li>
-            <li><strong>Ergebnis:</strong> Verschränkter Bell-Zustand erzeugt!</li>
-          </ol>
-        </div>
-      </div>
-
-      <!-- Experimente -->
-      <div class="section" id="experiments-de">
-        <h2>🧪 Experimente & Tutorials</h2>
-
-        <div class="experiment-box">
-          <h4>Tutorial 1: Hybrid T0 Performance-Vergleich</h4>
-          <ol>
-            <li>Geben Sie N=323 ein (schwierigere Zahl)</li>
-            <li>Klicken Sie "📊 Algorithm Vergleich"</li>
-            <li>Beobachten Sie: Pure T0 vs Advanced T0 Performance</li>
-            <li>Analysieren Sie die Hybrid-Entscheidung und Begründung</li>
-            <li>Verstehen Sie warum Advanced T0 bei dieser Zahl überlegen ist</li>
-          </ol>
-        </div>
-
-        <div class="experiment-box">
-          <h4>Tutorial 2: Primzahl vs. Zusammengesetzte Zahl</h4>
-          <ol>
-            <li>Teste Primzahl: N=47 mit Hybrid T0</li>
-            <li>Beobachte sofortige Primzahl-Erkennung</li>
-            <li>Teste Zusammengesetzte: N=143 mit Hybrid T0</li>
-            <li>Vergleiche die unterschiedlichen Ausgaben und Prozesse</li>
-            <li>Verstehe den Unterschied zwischen "korrekt erkannt" und "erfolgreich faktorisiert"</li>
-          </ol>
-        </div>
-
-        <div class="experiment-box">
-          <h4>Tutorial 3: Quantum Random Generator</h4>
-          <ol>
-            <li>8 Qubits einstellen</li>
-            <li>"Superposition" klicken</li>
-            <li>"Measure All" → zufällige 8-Bit Zahl</li>
-            <li>10x wiederholen - jedes Mal anders!</li>
-          </ol>
-        </div>
-
-        <div class="experiment-box">
-          <h4>Tutorial 4: Quantum Teleportation</h4>
-          <ol>
-            <li>3 Qubits: Alice (0), Hilfs (1), Bob (2)</li>
-            <li>Alice's Qubit in Zustand setzen (X-Gate)</li>
-            <li>Bell-Paar: H auf Qubit 1, CNOT(1→2)</li>
-            <li>Alice misst: CNOT(0→1), H auf 0</li>
-            <li>Bob hat Alice's Zustand!</li>
-          </ol>
-        </div>
-      </div>
-
-      <!-- Erweiterte Konzepte -->
-      <div class="section" id="advanced-de">
-        <h2>🚀 Erweiterte Konzepte</h2>
-        
-        <h3>T0-Framework Physik:</h3>
-        <ul>
-          <li><strong>ξ-Parameter:</strong> Adaptive Optimierung basierend auf Bit-Größe (1e-5 bis 1e-8)</li>
-          <li><strong>Resonance Filtering:</strong> T0-spezifische Perioden-Bewertung</li>
-          <li><strong>Multi-Base Strategy:</strong> Robustheit durch verschiedene Basis-Ansätze</li>
-          <li><strong>Deterministische Quantenmechanik:</strong> Reproduzierbare Ergebnisse</li>
-        </ul>
-
-        <h3>Bloch-Sphere verstehen:</h3>
-        <ul>
-          <li><strong>Nord-Pol:</strong> <span class="quantum-state">|0⟩</span> Zustand</li>
-          <li><strong>Süd-Pol:</strong> <span class="quantum-state">|1⟩</span> Zustand</li>
-          <li><strong>Äquator:</strong> Superposition</li>
-        </ul>
-
-        <div class="highlight">
-          <strong>Quantum Advantage:</strong> Exponentieller Speedup - klassisch O(2^N), Quantum O(N³)!
-        </div>
-
-        <h3>Optimale Eingabewerte:</h3>
-        <div class="tutorial-grid">
-          <div class="tutorial-card">
-            <h4>🟢 Leichte Zahlen (4-8 bits)</h4>
-            <p>15, 21, 35, 55, 77, 91, 143, 187<br>
-            <strong>Empfehlung:</strong> Alle Modi funktionieren gut</p>
-          </div>
-          <div class="tutorial-card">
-            <h4>🟡 Mittlere Zahlen (9-12 bits)</h4>
-            <p>323, 437, 899, 1247, 1333<br>
-            <strong>Empfehlung:</strong> Hybrid T0 oder Advanced T0</p>
-          </div>
-          <div class="tutorial-card">
-            <h4>🔴 Schwere Zahlen (13+ bits)</h4>
-            <p>Primzahlen oder sehr große zusammengesetzte Zahlen<br>
-            <strong>Empfehlung:</strong> Nur Hybrid T0</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Problemlösung -->
-      <div class="section" id="troubleshooting-de">
-        <h2>🔧 Problemlösung & FAQ</h2>
-
-        <h3>Häufige Fragen:</h3>
-        <div class="tutorial-grid">
-          <div class="tutorial-card">
-            <h4>❓ Warum blinkt mein Qubit?</h4>
-            <p><strong>Antwort:</strong> Superposition! Das Qubit ist gleichzeitig 0 und 1. Das ist korrekt und gewünscht.</p>
-          </div>
-          <div class="tutorial-card">
-            <h4>❓ Warum findet der Algorithmus keine Faktoren?</h4>
-            <p><strong>Mögliche Gründe:</strong><br>
-            • Die Zahl ist eine Primzahl (mathematisch korrekt)<br>
-            • Pure T0 ist bei dieser Zahl begrenzt → Versuchen Sie Advanced T0<br>
-            • Sehr große/schwierige Zahl → Verwenden Sie Hybrid T0</p>
-          </div>
-          <div class="tutorial-card">
-            <h4>❓ Welcher Algorithmus ist der beste?</h4>
-            <p><strong>Antwort:</strong> Hybrid T0 Shor Algorithm - er wählt automatisch den optimalen Ansatz und hat die höchste Erfolgsrate.</p>
-          </div>
-          <div class="tutorial-card">
-            <h4>❓ Was bedeutet "Primzahl korrekt erkannt"?</h4>
-            <p><strong>Antwort:</strong> Das ist ein Erfolg! Primzahlen können mathematisch nicht faktorisiert werden. Die korrekte Erkennung ist ein positives Ergebnis.</p>
-          </div>
-        </div>
-
-        <h3>Fehlerbehebung:</h3>
-        <div class="warning">
-          <strong>Problem:</strong> "Hybrid T0-Faktorisierung fehlgeschlagen"<br>
-          <strong>Lösung:</strong> Die Zahl ist wahrscheinlich eine Primzahl oder sehr schwierig. Prüfen Sie, ob es sich um eine Primzahl handelt.
-        </div>
-
-        <div class="warning">
-          <strong>Problem:</strong> Pure T0 versagt bei zusammengesetzten Zahlen<br>
-          <strong>Lösung:</strong> Pure T0 ist bei bestimmten Zahlen begrenzt. Verwenden Sie Advanced T0 oder Hybrid T0.
-        </div>
-
-        <div class="success">
-          <strong>🎯 Beste Lernstrategie:</strong><br>
-          1. Beginnen Sie mit Hybrid T0 für alle Zahlen<br>
-          2. Verwenden Sie Algorithm Vergleich zum Lernen<br>
-          3. Testen Sie bewusst Primzahlen vs. zusammengesetzte Zahlen<br>
-          4. Experimentieren Sie mit Quantum Gates für das Verständnis<br>
-          5. Verstehen Sie die mathematischen Grundlagen
-        </div>
-
-        <h3>Empfohlene Testzahlen:</h3>
-        <div class="code-block">
-Einfache zusammengesetzte Zahlen: 15, 21, 35, 55, 77, 91, 143
-Schwierigere zusammengesetzte Zahlen: 323, 437, 899, 1247, 1333 
-Kleine Primzahlen: 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47
-Größere Primzahlen: 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103
-</div>
-      </div>
-    </div>
-
-    <!-- English Content -->
-    <div id="english-content" class="language-content">
-      <h1>⚛️ Hybrid T0-Framework Quantum Simulator</h1>
-      <div class="subtitle">Complete Guide for Intelligent Hybrid Quantum Computer with Automatic Algorithm Selection</div>
-
-      <!-- Table of Contents -->
-      <div class="toc">
-        <h3>📚 Table of Contents</h3>
-        <ul>
-          <li><a href="#basics-en">🎯 Basics & Getting Started</a></li>
-          <li><a href="#hybrid-en">🤖 Hybrid T0-Framework</a></li>
-          <li><a href="#algorithms-en">⚛️ Algorithm Comparison</a></li>
-          <li><a href="#qubits-en">🎛️ Qubit Control</a></li>
-          <li><a href="#gates-en">🚪 Quantum Gates</a></li>
-          <li><a href="#prime-en">🔍 Prime Detection</a></li>
-          <li><a href="#experiments-en">🧪 Experiments & Tutorials</a></li>
-          <li><a href="#advanced-en">🚀 Advanced Concepts</a></li>
-          <li><a href="#troubleshooting-en">🔧 Troubleshooting</a></li>
-        </ul>
-      </div>
-
-      <!-- Basics -->
-      <div class="section" id="basics-en">
-        <h2>🎯 Basics & Getting Started</h2>
-        
-        <h3>What is the Hybrid T0-Framework Quantum Simulator?</h3>
-        <p>Our simulator combines <strong>three different quantum algorithms</strong> in an intelligent system that automatically selects the best approach for each factorization task. The Hybrid T0-Framework uses advanced T0-physics with deterministic quantum mechanics.</p>
-
-        <div class="highlight">
-          <strong>🎮 Quick Start:</strong> Enter a number (e.g., 77) and click "🚀 Start Hybrid T0 Shor Algorithm" for the best automatic factorization!
-        </div>
-
-        <h3>Important Quantum Concepts:</h3>
-        <ul>
-          <li><strong>Hybrid T0-Framework:</strong> Intelligent combination of Pure T0 and Advanced T0</li>
-          <li><strong>Prime Detection:</strong> Automatic recognition of non-factorizable numbers</li>
-          <li><strong>Deterministic Quantum Mechanics:</strong> Reproducible results without randomness</li>
-          <li><strong>Multi-Base Strategy:</strong> Using multiple bases for robust factorization</li>
-          <li><strong>Qubit:</strong> Basic unit of quantum information</li>
-          <li><strong>Superposition:</strong> A qubit can exist in multiple states simultaneously</li>
-          <li><strong>Entanglement:</strong> Qubits can be connected to influence each other</li>
-        </ul>
-
-        <div class="step-list">
-          <h4>🚀 First Steps:</h4>
-          <ol>
-            <li>Enter a number to factorize (recommended: 15, 21, 35, 77, 143)</li>
-            <li>Choose one of the four algorithm modes</li>
-            <li>Observe intelligent algorithm selection and performance analysis</li>
-            <li>Experiment with prime numbers (7, 11, 13, 17, 19, 23) for prime detection</li>
-            <li>Use Quantum Gates for direct qubit manipulation</li>
-          </ol>
-        </div>
-      </div>
-
-      <!-- Hybrid T0-Framework -->
-      <div class="section" id="hybrid-en">
-        <h2>🤖 Hybrid T0-Framework - Intelligent Algorithm Selection</h2>
-        
-        <h3>Four Available Modes:</h3>
-        <div class="tutorial-grid">
-          <div class="tutorial-card">
-            <h4>🚀 Hybrid T0 Shor Algorithm</h4>
-            <p><strong>Recommended Main Mode</strong></p>
-            <p>Runs Pure T0 and Advanced T0 in parallel and automatically selects the best result. Includes prime pre-detection for immediate correct answers.</p>
-            <div class="success">
-              <strong>Best Choice for:</strong> All numbers - optimal results guaranteed
-            </div>
-          </div>
-          <div class="tutorial-card">
-            <h4>⚛️ Pure Quantum T0</h4>
-            <p><strong>Fast & Simple Approach</strong></p>
-            <p>Deterministic algorithm with fixed base a=2. Very fast, but limited for some numbers. Ideal for simple factorizations.</p>
-            <div class="info">
-              <strong>Best Choice for:</strong> Quick tests, simple composite numbers
-            </div>
-          </div>
-          <div class="tutorial-card">
-            <h4>🧠 Advanced T0 Framework</h4>
-            <p><strong>Robust Multi-Base Approach</strong></p>
-            <p>Uses multiple bases [2,3,5,7,11,13,17,19] with T0-Resonance Filtering. Slower, but more successful with difficult numbers.</p>
-            <div class="info">
-              <strong>Best Choice for:</strong> Difficult factorizations, scientific analysis
-            </div>
-          </div>
-          <div class="tutorial-card">
-            <h4>📊 Algorithm Comparison</h4>
-            <p><strong>Detailed Performance Analysis</strong></p>
-            <p>Runs all algorithms and shows detailed comparisons, speed metrics, and recommendations.</p>
-            <div class="info">
-              <strong>Best Choice for:</strong> Learning purposes, performance benchmarking
-            </div>
-          </div>
-        </div>
-
-        <h3>Intelligent Decision Logic of the Hybrid System:</h3>
-        <div class="step-list">
-          <ol>
-            <li><strong>Prime Pre-Detection:</strong> Immediate recognition of prime numbers (mathematically correct)</li>
-            <li><strong>Parallel Execution:</strong> Pure T0 and Advanced T0 run simultaneously</li>
-            <li><strong>Intelligent Selection:</strong>
-              <ul>
-                <li>Both successful → Choose faster (with 50% tolerance)</li>
-                <li>Only one successful → Choose successful one</li>
-                <li>Both fail → Choose faster attempt</li>
-              </ul>
-            </li>
-            <li><strong>Transparent Reporting:</strong> Complete performance analysis of all methods</li>
-          </ol>
-        </div>
-      </div>
-
-      <!-- Algorithm Comparison -->
-      <div class="section" id="algorithms-en">
-        <h2>⚛️ Algorithm Comparison & Performance</h2>
-        
-        <h3>Detailed Algorithm Properties:</h3>
-        <table class="comparison-table">
-          <thead>
-            <tr>
-              <th>Property</th>
-              <th>Pure Quantum T0</th>
-              <th>Advanced T0 Framework</th>
-              <th>Hybrid T0</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Success Rate</strong></td>
-              <td>~67% (237 tests)</td>
-              <td>~91% (237 tests)</td>
-              <td>~95% (combined)</td>
-            </tr>
-            <tr>
-              <td><strong>Average Time</strong></td>
-              <td>0.13ms (very fast)</td>
-              <td>0.89ms (6.7x slower)</td>
-              <td>Variable (optimal)</td>
-            </tr>
-            <tr>
-              <td><strong>Bases Used</strong></td>
-              <td>Fixed: a=2</td>
-              <td>Multi: [2,3,5,7,11,13,17,19]</td>
-              <td>Both available</td>
-            </tr>
-            <tr>
-              <td><strong>Complexity</strong></td>
-              <td>Minimal</td>
-              <td>High (Resonance Filter)</td>
-              <td>Intelligently managed</td>
-            </tr>
-            <tr>
-              <td><strong>Prime Detection</strong></td>
-              <td>✅ Integrated</td>
-              <td>✅ Integrated</td>
-              <td>✅ Priority 1</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="experiment-box">
-          <h4>🧪 Performance Test Experiment</h4>
-          <ol>
-            <li>Enter N=77</li>
-            <li>Click "📊 Algorithm Comparison"</li>
-            <li>Observe detailed performance metrics:</li>
-            <ul>
-              <li>Pure T0: ✅ 7×11 (0.1ms) - Fixed Base a=2</li>
-              <li>Advanced T0: ✅ 7×11 (1.2ms) - Multi-Base Strategy</li>
-              <li>Hybrid Choice: Pure Quantum T0 (faster with same correctness)</li>
-            </ul>
-          </ol>
-        </div>
-      </div>
-
-      <!-- Prime Detection -->
-      <div class="section" id="prime-en">
-        <h2>🔍 Intelligent Prime Detection</h2>
-        
-        <h3>Why Prime Detection is Important:</h3>
-        <p>Prime numbers <strong>mathematically cannot be factorized</strong> as they are only divisible by 1 and themselves. Our simulator intelligently recognizes this and gives correct answers instead of meaningless failed attempts.</p>
-
-        <div class="tutorial-grid">
-          <div class="tutorial-card">
-            <h4>🔬 Deterministic Check</h4>
-            <p>6k±1 optimization for fast, exact prime detection up to √N.</p>
-          </div>
-          <div class="tutorial-card">
-            <h4>🎲 Fermat Test</h4>
-            <p>Probabilistic confirmation with 95-100% certainty for large numbers.</p>
-          </div>
-          <div class="tutorial-card">
-            <h4>🎯 Confidence System</h4>
-            <p>Combines both methods for maximum reliability of prime detection.</p>
-          </div>
-        </div>
-
-        <h3>Example Outputs:</h3>
-        <div class="code-block">
-Input: N=23 (Prime)
-🔍 Prime pre-check: N=23 is a prime number (100% certain)
-💡 Prime numbers cannot be factorized - this is mathematically correct
-✅ Hybrid T0 CORRECT: 23 is prime (no factors possible)
-🎉 HYBRID T0-SUCCESS! Prime correctly detected: 23 is a prime number
-</div>
-
-        <div class="code-block">
-Input: N=77 (Composite)
-⚛️ Start Hybrid T0 for N=77
-🔍 Pre-check: N=77 is composite - start factorization
-✅ Pure T0 SUCCESS: 7 × 11 = 77 (0.1ms)
-🔍 Verification: 7 × 11 = 77 ✓
-</div>
-
-        <div class="experiment-box">
-          <h4>🧪 Prime Test Experiment</h4>
-          <p><strong>Test these primes:</strong> 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113</p>
-          <p><strong>Expectation:</strong> All will be immediately recognized as primes (100% success rate)</p>
-          <p><strong>Compare with composite numbers:</strong> 15, 21, 35, 77, 143, 323</p>
-        </div>
-      </div>
-
-      <!-- Continue with other sections in English... -->
-      <!-- [Similar structure as German content] -->
-
-      <!-- Troubleshooting -->
-      <div class="section" id="troubleshooting-en">
-        <h2>🔧 Troubleshooting & FAQ</h2>
-
-        <h3>Frequently Asked Questions:</h3>
-        <div class="tutorial-grid">
-          <div class="tutorial-card">
-            <h4>❓ Why is my qubit blinking?</h4>
-            <p><strong>Answer:</strong> Superposition! The qubit is simultaneously 0 and 1. This is correct and intended.</p>
-          </div>
-          <div class="tutorial-card">
-            <h4>❓ Why doesn't the algorithm find factors?</h4>
-            <p><strong>Possible reasons:</strong><br>
-            • The number is prime (mathematically correct)<br>
-            • Pure T0 is limited for this number → Try Advanced T0<br>
-            • Very large/difficult number → Use Hybrid T0</p>
-          </div>
-          <div class="tutorial-card">
-            <h4>❓ Which algorithm is the best?</h4>
-            <p><strong>Answer:</strong> Hybrid T0 Shor Algorithm - it automatically selects the optimal approach and has the highest success rate.</p>
-          </div>
-          <div class="tutorial-card">
-            <h4>❓ What does "prime correctly detected" mean?</h4>
-            <p><strong>Answer:</strong> This is a success! Prime numbers mathematically cannot be factorized. Correct detection is a positive result.</p>
-          </div>
-        </div>
-
-        <div class="success">
-          <strong>🎯 Best Learning Strategy:</strong><br>
-          1. Start with Hybrid T0 for all numbers<br>
-          2. Use Algorithm Comparison for learning<br>
-          3. Consciously test primes vs. composite numbers<br>
-          4. Experiment with Quantum Gates for understanding<br>
-          5. Understand the mathematical foundations
-        </div>
-      </div>
-    </div>
-
-    <div style="text-align: center; margin: 40px 0;">
-      <a href="#" onclick="history.back()" class="btn">⬅️ Zurück zum Simulator / Back to Simulator</a>
-      <a href="#basics" class="btn">📚 Nach oben / To Top</a>
-    </div>
-
-    <footer style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid #e9ecef; color: #666;">
-      <p><strong>Hybrid T0-Framework Quantum Computing Simulator</strong> • Advanced Educational Version</p>
-      <p>🎓 Developed for Students, Teachers and Quantum Enthusiasts • Features Intelligent Algorithm Selection</p>
-      <p>🤖 Hybrid T0-Framework • ⚛️ Pure Quantum T0 • 🧠 Advanced T0 • 🔍 Prime Detection • 📊 Performance Analysis</p>
-    </footer>
+  <div class="toc"><b>Inhalt</b>
+    <ol>
+      <li><a href="#de-worum">Worum es geht</a></li>
+      <li><a href="#de-regel">Die Messregel</a></li>
+      <li><a href="#de-register">Register und Zylinderkoordinaten</a></li>
+      <li><a href="#de-gatter">Gatter und Vorlagen</a></li>
+      <li><a href="#de-einzel">Einzelmessung</a></li>
+      <li><a href="#de-reihe">Messreihe</a></li>
+      <li><a href="#de-bell">Bell-Test</a></li>
+      <li><a href="#de-shor">Ordnungssuche nach Shor</a></li>
+      <li><a href="#de-einordnung">Einordnung</a></li>
+      <li><a href="#de-quellen">Quellen im Korpus</a></li>
+    </ol>
   </div>
 
-  <script>
-    // Language switching functionality
-    let currentLang = 'de';
+  <h2 id="de-worum">1. Worum es geht</h2>
+  <p>Der Simulator rechnet die üblichen Qubit-Schaltungen, misst aber nach der Regel der FFGFT: Jede Messung hat ein festgelegtes Ergebnis, das aus der Lage des Qubits und einer Größe der Messanordnung folgt. Gewürfelt wird nirgends. Die bekannten Wahrscheinlichkeiten der Quantenmechanik erscheinen trotzdem, und zwar als Anteile, sobald man viele Messungen mit gleichmäßig verteilter Messgröße zusammenzählt.</p>
+  <p>Die Seite besteht aus fünf Teilen: Register und Gatter zum Aufbau eines Zustands, Einzelmessung, Messreihe, Bell-Test und Ordnungssuche nach Shor. Jeder Teil lässt sich für sich bedienen.</p>
 
-    function switchLanguage(lang) {
-      currentLang = lang;
-      
-      // Hide all language content
-      document.querySelectorAll('.language-content').forEach(content => {
-        content.classList.remove('active');
-      });
-      
-      // Remove active class from all language buttons
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      
-      // Show selected language content
-      if (lang === 'de') {
-        document.getElementById('german-content').classList.add('active');
-        document.querySelector('[onclick="switchLanguage(\'de\')"]').classList.add('active');
-      } else {
-        document.getElementById('english-content').classList.add('active');
-        document.querySelector('[onclick="switchLanguage(\'en\')"]').classList.add('active');
-      }
-    }
+  <h2 id="de-regel">2. Die Messregel</h2>
+  <p>In der FFGFT ist ein Qubit ein Punkt (z, r, θ) auf einem Zylinder, dem lokalen Grenzfall der Torusgeometrie. Die Achsenlage z entspricht dem Erwartungswert ⟨σ<sub>z</sub>⟩. Die Messanordnung bringt eine Größe λ zwischen −1 und 1 auf derselben Achse mit. Das Ergebnis ist damit eindeutig:</p>
+  <div class="rule">A(z, λ) = sgn(z − λ) &nbsp;→&nbsp; |0⟩ für λ &lt; z, &nbsp;|1⟩ sonst</div>
+  <p>Der Teil der Achse, der zu |0⟩ führt, hat die Länge (1+z)/2. Das ist genau |α|², der Wert, den die Quantenmechanik als Wahrscheinlichkeit für |0⟩ angibt. Nach dem Satz des Archimedes entspricht diese Länge einem Flächenanteil der Bloch-Kugel; sie ist also eine geometrische Größe. Als Häufigkeit tritt sie erst auf, wenn λ über viele Messungen gleichmäßig verteilt ist.</p>
+  <p>Die Phase θ geht in die Regel nicht ein. Sie bestimmt aber, wie sich z unter den Gattern verändert, bevor gemessen wird. Im Randfall λ = z = ±1, der das Maß null hat, wird der Pol erreicht, der Gewicht hat.</p>
+  <p>Weil das Ergebnis in der Wechselwirkung zwischen Qubit und Messanordnung festgelegt wird, ist das Modell kontextuell. Das Kochen–Specker-Theorem, das nur nichtkontextuelle Modelle ausschließt, greift deshalb nicht.</p>
 
-    // Initialize with German
-    window.addEventListener('load', () => {
-      switchLanguage('de');
-    });
+  <h2 id="de-register">3. Register und Zylinderkoordinaten</h2>
+  <p>Unter „Anzahl Qubits“ wählst du 1 bis 5 Qubits. „Zurücksetzen“ bringt alle Qubits auf |0⟩ und leert die Schaltung. Qubit q0 ist die letzte Stelle im Basiszustand, also steht |01⟩ für q0 = 1 und q1 = 0.</p>
+  <p>Für jedes Qubit zeigt eine Karte die Zylinderkoordinaten: z = ⟨σ<sub>z</sub>⟩, r = √(⟨σ<sub>x</sub>⟩² + ⟨σ<sub>y</sub>⟩²) und die Phase θ. Dazu steht der Anteil (1+z)/2 für |0⟩. Ein einzelnes, unverschränktes Qubit liegt auf der Kugel, r² + z² = 1, und ist als „rein“ markiert. Ist das Qubit mit anderen verschränkt, liegt sein Punkt innerhalb der Kugel; dann steht „verbunden“ da. Beim Bell-Zustand gilt für beide Qubits z = 0 und r = 0.</p>
+  <p>Darunter steht der Zustandsvektor mit allen Basiszuständen, die Gewicht haben, ihren Amplituden und |Amplitude|².</p>
 
-    // Smooth scrolling for anchor links
-    document.addEventListener('click', function(e) {
-      if (e.target.tagName === 'A' && e.target.getAttribute('href').startsWith('#')) {
-        e.preventDefault();
-        const targetId = e.target.getAttribute('href').substring(1);
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-          targetElement.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      }
-    });
-  </script>
+  <h2 id="de-gatter">4. Gatter und Vorlagen</h2>
+  <p>Ein-Qubit-Gatter wirken auf das Ziel-Qubit: H, X, Y, Z, S, T und die inversen Gatter S† und T†. Die Drehungen R<sub>x</sub>, R<sub>y</sub>, R<sub>z</sub> und das Phasengatter P verwenden den Winkel φ in Grad. Zwei-Qubit-Gatter (CNOT, CZ, SWAP) verbinden Kontroll- und Ziel-Qubit, die verschieden sein müssen. Jedes Gatter erscheint in der Liste „Schaltung“, ebenso jede Messung.</p>
+  <p>Die Vorlagen bauen häufige Zustände in einem Schritt: alle Qubits in |+⟩, den Bell-Zustand Φ⁺, den GHZ-Zustand und R<sub>y</sub>(60°) auf Qubit 0. Eine Vorlage ersetzt die bisherige Schaltung.</p>
+  <div class="ex"><b>Beispiel:</b> Ein Qubit, dann H, T, H. Die Karte zeigt den Anteil 0,854 für |0⟩, also cos²(π/8).</div>
+
+  <h2 id="de-einzel">5. Einzelmessung</h2>
+  <p>Du wählst ein Qubit und stellst λ mit dem Regler oder im Zahlenfeld ein. Das Achsenbild zeigt, wo z liegt und wo λ steht: Links von z (türkis) führt λ zu |0⟩, rechts davon (gelb) zu |1⟩. Die Zeile darunter nennt das Ergebnis, bevor gemessen wird. „Messen“ führt die Messung aus und setzt das Qubit auf den erreichten Pol; bei verschränkten Qubits ändert sich dadurch auch die Lage der anderen.</p>
+  <p>„Alle messen“ misst die Qubits nacheinander, q0 zuerst, mit den λ-Werten aus dem Textfeld darunter. Werte außerhalb von [−1, 1] werden auf den Rand gesetzt.</p>
+  <div class="ex"><b>Beispiel:</b> Vorlage „R<sub>y</sub>(60°) auf Qubit 0“, also z = 0,5. Mit λ = 0,3 kommt |0⟩ heraus, mit λ = 0,7 kommt |1⟩ heraus. Beides steht vor dem Messen fest.</div>
+  <div class="ex"><b>Beispiel mit Verschränkung:</b> Vorlage „Bell-Zustand Φ⁺“. q0 hat z = 0; mit λ = 0,3 ergibt die Messung |1⟩. Danach hat q1 die Lage z = −1, und jede weitere Messung von q1 ergibt |1⟩.</div>
+
+  <h2 id="de-reihe">6. Messreihe</h2>
+  <p>Die Messreihe wiederholt die aktuelle Schaltung K-mal, jeweils von |0…0⟩ aus, und misst am Ende alle Qubits. Jeder Durchlauf bekommt einen eigenen, festen λ-Vektor aus einer Halton-Folge. Diese Folge ist vollständig deterministisch und füllt das Intervall gleichmäßig aus. Die Tabelle vergleicht die gezählten Häufigkeiten mit |Amplitude|²; die letzte Zeile nennt die größte Abweichung. Messungen, die in der Schaltung stehen, werden dabei nicht wiederholt; gemessen wird nur am Ende.</p>
+  <div class="ex"><b>Beispiel:</b> Vorlage „R<sub>y</sub>(60°) auf Qubit 0“, K = 5000. Ergebnis: |00⟩ mit 0,7502 gegen 0,7500, |01⟩ mit 0,2498 gegen 0,2500.</div>
+
+  <h2 id="de-bell">7. Bell-Test</h2>
+  <p>Der Bell-Test verwendet den Zustand Φ⁺ = (|00⟩ + |11⟩)/√2. Gemessen wird entlang der Winkel a und a′ für Qubit A und b und b′ für Qubit B, jeweils in der x-z-Ebene. Für jeden Durchlauf kommt ein festes Paar (λ<sub>A</sub>, λ<sub>B</sub>) aus einem gleichmäßigen Gitter mit M×M Punkten. A wird zuerst gemessen; dadurch ist die Lage von B festgelegt, bevor B gemessen wird. Das ist die topologisch verbundene Zylinderkonfiguration aus Dok. 230.</p>
+  <p>Ausgegeben werden die vier Korrelationen E und die Größe S = |E(a,b) − E(a,b′) + E(a′,b) + E(a′,b′)|. Lokale Modelle erreichen höchstens S = 2. Zum Vergleich stehen daneben der exakte Wert der Quantenmechanik und der Wert mit der ξ-Dämpfung nach Dok. 175:</p>
+  <div class="rule">E(a, b) = cos(a − b) · (1 − ξ (Δθ)²/(π² D<sub>f</sub>)), &nbsp; ξ = 4/30000, &nbsp;D<sub>f</sub> = 3 − ξ</div>
+  <p>Das Gitter bestimmt die Genauigkeit: Jedes E ist auf ±2/M genau, S auf ±8/M. Deshalb kann S aus dem Gitter etwas über dem exakten Wert liegen; mit größerem M rückt es näher heran.</p>
+  <div class="ex"><b>Beispiel (Voreinstellung):</b> a = 0°, a′ = 90°, b = 45°, b′ = 135°, M = 500. S aus dem Gitter: 2,832. Exakt: 2,828427. Mit ξ-Dämpfung: 2,828404. Die Differenz von 2,4·10⁻⁵ liegt weit unter dem Rauschen heutiger Messungen, das etwa 10⁻² beträgt.</div>
+
+  <h2 id="de-shor">8. Ordnungssuche nach Shor</h2>
+  <p>Hier läuft Shors Verfahren zur Bestimmung der Ordnung r von a modulo N: ein Zählregister mit t = ⌈2·log₂N⌉ Qubits, die modulare Exponentiation, die Quanten-Fourier-Transformation und am Ende die Kettenbruchentwicklung. Aus einem geraden r folgen die Faktoren über ggT(a<sup>r/2</sup> ± 1, N). Zulässig sind ungerade N von 15 bis 127, die keine Primzahlpotenz sind. Haben a und N schon einen gemeinsamen Teiler, meldet die Seite ihn direkt.</p>
+  <p>FFGFT-spezifisch ist nur die Messung des Zählregisters. Seine t Qubits werden Bit für Bit nach der Regel A(z, λ) gemessen, jedes mit eigenem λ aus der Halton-Folge; der „λ-Startindex k“ wählt den Vektor. Bei bekanntem k steht der Messwert y und damit der ganze Lauf vorher fest. Das Diagramm zeigt die Verteilung von y nach der Fourier-Transformation, der rote Strich den gemessenen Wert.</p>
+  <p>„100 Läufe“ geht die λ-Vektoren k bis k+99 durch und zählt, wie viele die Faktoren liefern. Dieser Anteil entspricht der Erfolgswahrscheinlichkeit von Shors Verfahren für das gewählte a.</p>
+  <div class="ex"><b>Beispiel:</b> N = 15, a = 7, k = 1. Gemessen wird y = 64 von Q = 256, der Kettenbruch liefert r = 4, und es folgt 15 = 3 × 5. Mit 100 Läufen liefern 74 die Faktoren; die exakte Erfolgswahrscheinlichkeit ist 0,75.</div>
+
+  <h2 id="de-einordnung">9. Einordnung</h2>
+  <p>Der Simulator zeigt die deterministische Lesart der Messung: Jedes einzelne Ergebnis ist festgelegt, und die bekannte Statistik entsteht als Anteil über die Messgröße λ. Er bildet damit Dok. 230 in einer Form nach, die man ausprobieren kann.</p>
+  <p>Er beansprucht keinen Rechenvorteil. Gerechnet wird auf einem gewöhnlichen Rechner mit dem vollen Zustandsvektor, dessen Größe mit 2<sup>n</sup> wächst. Bei Shor wird die Ordnung durch die Ordnungssuche bestimmt; ein eigenes, von Shor verschiedenes Faktorisierungsverfahren gibt es nicht (Dok. 190, R65). Die FFGFT ändert die Deutung der Messung, nicht ihre Statistik. Die Abweichung von der Quantenmechanik liegt in der Größenordnung von ξ und ist mit heutiger Hardware nicht auflösbar (Dok. 190, R142 und R143).</p>
+
+  <h2 id="de-quellen">10. Quellen im Korpus</h2>
+  <p>Messregel, Zylinderdarstellung und Verschränkung als verbundene Konfiguration: Dok. 230. ξ-Dämpfung der Bell-Korrelation: Dok. 175. Einordnung von Faktorisierung und Quantensektor: Dok. 190 (R65, R142, R143) und die Kurzfassung Dok. 384.</p>
+</div>
+
+<!-- =============================== ENGLISH =============================== -->
+<div class="lang" id="lang-en" lang="en">
+  <h1>Help for the quantum simulator</h1>
+  <div class="subtitle">Qubit gates, measurement series, Bell test and Shor order finding with deterministic measurement according to Doc. 230</div>
+
+  <div class="toc"><b>Contents</b>
+    <ol>
+      <li><a href="#en-about">What it is about</a></li>
+      <li><a href="#en-rule">The measurement rule</a></li>
+      <li><a href="#en-register">Register and cylinder coordinates</a></li>
+      <li><a href="#en-gates">Gates and presets</a></li>
+      <li><a href="#en-single">Single measurement</a></li>
+      <li><a href="#en-series">Measurement series</a></li>
+      <li><a href="#en-bell">Bell test</a></li>
+      <li><a href="#en-shor">Shor order finding</a></li>
+      <li><a href="#en-context">Classification</a></li>
+      <li><a href="#en-sources">Sources in the corpus</a></li>
+    </ol>
+  </div>
+
+  <h2 id="en-about">1. What it is about</h2>
+  <p>The simulator computes the usual qubit circuits, but measures according to the FFGFT rule: every measurement has a fixed outcome that follows from the position of the qubit and a quantity of the measuring arrangement. Nothing is left to chance. The familiar probabilities of quantum mechanics still appear, as fractions, once many measurements with a uniformly distributed measuring quantity are counted.</p>
+  <p>The page has five parts: register and gates to build a state, single measurement, measurement series, Bell test and Shor order finding. Each part can be used on its own.</p>
+
+  <h2 id="en-rule">2. The measurement rule</h2>
+  <p>In FFGFT a qubit is a point (z, r, θ) on a cylinder, the local limit of the torus geometry. The axial position z equals the expectation value ⟨σ<sub>z</sub>⟩. The measuring arrangement brings a quantity λ between −1 and 1 on the same axis. The outcome is then unique:</p>
+  <div class="rule">A(z, λ) = sgn(z − λ) &nbsp;→&nbsp; |0⟩ for λ &lt; z, &nbsp;|1⟩ otherwise</div>
+  <p>The part of the axis that leads to |0⟩ has length (1+z)/2. This is exactly |α|², the value that quantum mechanics gives as the probability of |0⟩. By Archimedes’ theorem this length equals an area fraction of the Bloch sphere; it is a geometric quantity. It appears as a frequency only when λ is uniformly distributed over many measurements.</p>
+  <p>The phase θ does not enter the rule. It does, however, determine how z changes under the gates before the measurement. In the boundary case λ = z = ±1, which has measure zero, the pole that carries weight is reached.</p>
+  <p>Because the outcome is fixed in the interaction between qubit and measuring arrangement, the model is contextual. The Kochen–Specker theorem, which only excludes non-contextual models, therefore does not apply.</p>
+
+  <h2 id="en-register">3. Register and cylinder coordinates</h2>
+  <p>Under “Number of qubits” you choose 1 to 5 qubits. “Reset” sets all qubits to |0⟩ and clears the circuit. Qubit q0 is the last digit of the basis state, so |01⟩ stands for q0 = 1 and q1 = 0.</p>
+  <p>For each qubit a card shows the cylinder coordinates: z = ⟨σ<sub>z</sub>⟩, r = √(⟨σ<sub>x</sub>⟩² + ⟨σ<sub>y</sub>⟩²) and the phase θ, together with the fraction (1+z)/2 for |0⟩. A single, unentangled qubit lies on the sphere, r² + z² = 1, and is marked “pure”. If the qubit is entangled with others, its point lies inside the sphere and the card says “connected”. In the Bell state both qubits have z = 0 and r = 0.</p>
+  <p>Below, the state vector lists every basis state that carries weight, with its amplitude and |amplitude|².</p>
+
+  <h2 id="en-gates">4. Gates and presets</h2>
+  <p>Single-qubit gates act on the target qubit: H, X, Y, Z, S, T and the inverse gates S† and T†. The rotations R<sub>x</sub>, R<sub>y</sub>, R<sub>z</sub> and the phase gate P use the angle φ in degrees. Two-qubit gates (CNOT, CZ, SWAP) connect control and target qubit, which must differ. Every gate appears in the “Circuit” list, and so does every measurement.</p>
+  <p>The presets build common states in one step: all qubits in |+⟩, the Bell state Φ⁺, the GHZ state and R<sub>y</sub>(60°) on qubit 0. A preset replaces the current circuit.</p>
+  <div class="ex"><b>Example:</b> One qubit, then H, T, H. The card shows the fraction 0.854 for |0⟩, that is cos²(π/8).</div>
+
+  <h2 id="en-single">5. Single measurement</h2>
+  <p>You select a qubit and set λ with the slider or in the number field. The axis picture shows where z lies and where λ stands: to the left of z (turquoise) λ leads to |0⟩, to the right (yellow) to |1⟩. The line below states the outcome before the measurement. “Measure” carries out the measurement and sets the qubit to the pole it reaches; for entangled qubits this also changes the position of the others.</p>
+  <p>“Measure all” measures the qubits one after another, q0 first, with the λ values from the text field below. Values outside [−1, 1] are set to the boundary.</p>
+  <div class="ex"><b>Example:</b> Preset “R<sub>y</sub>(60°) on qubit 0”, so z = 0.5. With λ = 0.3 the outcome is |0⟩, with λ = 0.7 it is |1⟩. Both are fixed before measuring.</div>
+  <div class="ex"><b>Example with entanglement:</b> Preset “Bell state Φ⁺”. q0 has z = 0; with λ = 0.3 the measurement gives |1⟩. Afterwards q1 has position z = −1, and every further measurement of q1 gives |1⟩.</div>
+
+  <h2 id="en-series">6. Measurement series</h2>
+  <p>The series repeats the current circuit K times, each time starting from |0…0⟩, and measures all qubits at the end. Each run gets its own fixed λ vector from a Halton sequence. This sequence is fully deterministic and fills the interval uniformly. The table compares the counted frequencies with |amplitude|²; the last line gives the largest deviation. Measurements contained in the circuit are not repeated; measurement takes place only at the end.</p>
+  <div class="ex"><b>Example:</b> Preset “R<sub>y</sub>(60°) on qubit 0”, K = 5000. Result: |00⟩ with 0.7502 against 0.7500, |01⟩ with 0.2498 against 0.2500.</div>
+
+  <h2 id="en-bell">7. Bell test</h2>
+  <p>The Bell test uses the state Φ⁺ = (|00⟩ + |11⟩)/√2. Measurements are taken along angles a and a′ for qubit A and b and b′ for qubit B, each in the x-z plane. Every run uses a fixed pair (λ<sub>A</sub>, λ<sub>B</sub>) from a uniform grid with M×M points. A is measured first; this fixes the position of B before B is measured. This is the topologically connected cylinder configuration of Doc. 230.</p>
+  <p>The output gives the four correlations E and the quantity S = |E(a,b) − E(a,b′) + E(a′,b) + E(a′,b′)|. Local models reach at most S = 2. For comparison, the exact quantum-mechanical value and the value with the ξ damping of Doc. 175 are shown alongside:</p>
+  <div class="rule">E(a, b) = cos(a − b) · (1 − ξ (Δθ)²/(π² D<sub>f</sub>)), &nbsp; ξ = 4/30000, &nbsp;D<sub>f</sub> = 3 − ξ</div>
+  <p>The grid sets the accuracy: each E is accurate to ±2/M, S to ±8/M. S from the grid can therefore lie slightly above the exact value; with larger M it moves closer.</p>
+  <div class="ex"><b>Example (default settings):</b> a = 0°, a′ = 90°, b = 45°, b′ = 135°, M = 500. S from the grid: 2.832. Exact: 2.828427. With ξ damping: 2.828404. The difference of 2.4·10⁻⁵ lies far below the noise of today’s measurements, which is about 10⁻².</div>
+
+  <h2 id="en-shor">8. Shor order finding</h2>
+  <p>This part runs Shor’s procedure for finding the order r of a modulo N: a counting register with t = ⌈2·log₂N⌉ qubits, modular exponentiation, the quantum Fourier transform and finally the continued-fraction expansion. From an even r the factors follow via gcd(a<sup>r/2</sup> ± 1, N). Allowed are odd N from 15 to 127 that are not prime powers. If a and N already share a divisor, the page reports it directly.</p>
+  <p>Only the measurement of the counting register is FFGFT-specific. Its t qubits are measured bit by bit according to the rule A(z, λ), each with its own λ from the Halton sequence; the “λ start index k” selects the vector. With known k, the measured value y and thus the whole run are fixed in advance. The chart shows the distribution of y after the Fourier transform, and the red line marks the measured value.</p>
+  <p>“100 runs” goes through the λ vectors k to k+99 and counts how many yield the factors. This fraction equals the success probability of Shor’s procedure for the chosen a.</p>
+  <div class="ex"><b>Example:</b> N = 15, a = 7, k = 1. The measurement gives y = 64 out of Q = 256, the continued fraction yields r = 4, and 15 = 3 × 5 follows. Of 100 runs, 74 yield the factors; the exact success probability is 0.75.</div>
+
+  <h2 id="en-context">9. Classification</h2>
+  <p>The simulator shows the deterministic reading of measurement: every single outcome is fixed, and the familiar statistics arise as fractions over the measuring quantity λ. It thus reproduces Doc. 230 in a form that can be tried out.</p>
+  <p>It claims no computational advantage. It runs on an ordinary computer with the full state vector, whose size grows as 2<sup>n</sup>. In Shor’s procedure the order is obtained by order finding; there is no separate factorisation method distinct from Shor’s (Doc. 190, R65). FFGFT changes the reading of the measurement, not its statistics. The deviation from quantum mechanics is of the order of ξ and cannot be resolved with today’s hardware (Doc. 190, R142 and R143).</p>
+
+  <h2 id="en-sources">10. Sources in the corpus</h2>
+  <p>Measurement rule, cylinder representation and entanglement as a connected configuration: Doc. 230. ξ damping of the Bell correlation: Doc. 175. Classification of factorisation and of the quantum sector: Doc. 190 (R65, R142, R143) and the summary Doc. 384.</p>
+</div>
+</div>
+
+<script>
+function setLang(l) {
+  document.getElementById('lang-de').classList.toggle('active', l === 'de');
+  document.getElementById('lang-en').classList.toggle('active', l === 'en');
+  document.getElementById('btn-de').classList.toggle('active', l === 'de');
+  document.getElementById('btn-en').classList.toggle('active', l === 'en');
+  document.documentElement.lang = l;
+  document.getElementById('backlink').textContent = l === 'de' ? '← Zum Simulator' : '← Back to the simulator';
+  document.title = l === 'de' ? 'Hilfe zum Quantensimulator mit deterministischer Messung' : 'Help for the quantum simulator with deterministic measurement';
+}
+if (/[?&]lang=en\b/.test(location.search)) setLang('en');
+</script>
 </body>
 </html>

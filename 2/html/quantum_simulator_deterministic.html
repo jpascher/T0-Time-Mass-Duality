@@ -1,1699 +1,728 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quantum Computing Simulator - Deterministic T0 Framework</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #fff;
-      min-height: 100vh;
-    }
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      background: rgba(30, 30, 50, 0.95);
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .nav-buttons {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .nav-btn {
-      background: linear-gradient(135deg, #e74c3c, #c0392b);
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .nav-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-      background: linear-gradient(135deg, #c0392b, #a93226);
-    }
-    .help-button {
-      background: linear-gradient(135deg, #27ae60, #2ecc71);
-    }
-    .help-button:hover {
-      background: linear-gradient(135deg, #2ecc71, #27ae60);
-    }
-    .language-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-      display: flex;
-      gap: 10px;
-    }
-    .lang-btn {
-      background: linear-gradient(135deg, #4f46e5, #3730a3);
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-    .lang-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-    }
-    .lang-btn.active {
-      background: linear-gradient(135deg, #dc2626, #b91c1c);
-    }
-    .language-content {
-      display: none;
-    }
-    .language-content.active {
-      display: block;
-    }
-    h1 {
-      text-align: center;
-      font-size: 2.8em;
-      margin-bottom: 10px;
-      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
-      background-size: 400% 400%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradientShift 4s ease infinite;
-    }
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-    .subtitle {
-      text-align: center;
-      font-size: 1.3em;
-      color: #a0a0a0;
-      margin-bottom: 40px;
-    }
-    .quantum-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      margin-bottom: 30px;
-    }
-    .panel {
-      background: linear-gradient(135deg, #2c3e50, #34495e);
-      border-radius: 15px;
-      padding: 25px;
-      border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-    .panel h2 {
-      color: #3498db;
-      margin-top: 0;
-      font-size: 1.5em;
-      border-bottom: 2px solid #3498db;
-      padding-bottom: 10px;
-      margin-bottom: 20px;
-    }
-    .qubit-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-      gap: 15px;
-      margin: 20px 0;
-    }
-    .qubit {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: 3px solid;
-      position: relative;
-      overflow: hidden;
-    }
-    .qubit.state-0 {
-      background: linear-gradient(135deg, #e74c3c, #c0392b);
-      border-color: #e74c3c;
-      color: white;
-    }
-    .qubit.state-1 {
-      background: linear-gradient(135deg, #27ae60, #2ecc71);
-      border-color: #27ae60;
-      color: white;
-    }
-    .qubit.state-superposition {
-      background: linear-gradient(45deg, #e74c3c 50%, #27ae60 50%);
-      border-color: #f39c12;
-      color: white;
-      animation: pulse 1.5s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-    .qubit::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-      transform: rotate(45deg);
-      transition: all 0.6s;
-      opacity: 0;
-    }
-    .qubit:hover::after {
-      opacity: 1;
-      animation: shine 0.6s ease-out;
-    }
-    @keyframes shine {
-      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-    }
-    .input-group {
-      margin: 15px 0;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .input-group label {
-      font-weight: bold;
-      min-width: 120px;
-      color: #ecf0f1;
-    }
-    .input-group input, .input-group select {
-      padding: 12px;
-      border: 2px solid #34495e;
-      border-radius: 8px;
-      background: rgba(52, 73, 94, 0.8);
-      color: #ecf0f1;
-      font-size: 16px;
-      flex: 1;
-    }
-    .input-group input:focus, .input-group select:focus {
-      border-color: #3498db;
-      outline: none;
-      box-shadow: 0 0 15px rgba(52, 152, 219, 0.3);
-    }
-    .btn {
-      background: linear-gradient(135deg, #3498db, #2980b9);
-      color: white;
-      border: none;
-      padding: 15px 25px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 16px;
-      transition: all 0.3s ease;
-      margin: 5px;
-      position: relative;
-      overflow: hidden;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
-    }
-    .btn-primary { background: linear-gradient(135deg, #e74c3c, #c0392b); }
-    .btn-success { background: linear-gradient(135deg, #27ae60, #2ecc71); }
-    .btn-warning { background: linear-gradient(135deg, #f39c12, #e67e22); }
-    .btn-info { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
-    .btn-quantum { 
-      background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-      animation: quantumGlow 2s ease-in-out infinite alternate;
-    }
-    @keyframes quantumGlow {
-      from { box-shadow: 0 0 20px rgba(255, 107, 107, 0.5); }
-      to { box-shadow: 0 0 20px rgba(78, 205, 196, 0.5); }
-    }
-    .results-panel {
-      background: rgba(20, 20, 30, 0.9);
-      border: 2px solid #34495e;
-      border-radius: 10px;
-      padding: 25px;
-      margin: 20px 0;
-      font-family: 'Courier New', monospace;
-      max-height: 400px;
-      overflow-y: auto;
-      color: #00ff41;
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
-    }
-    .statistics {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      margin: 20px 0;
-    }
-    .stat-card {
-      background: linear-gradient(135deg, #8e44ad, #9b59b6);
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .stat-value {
-      font-size: 2.5em;
-      font-weight: bold;
-      margin: 10px 0;
-      color: #f1c40f;
-    }
-    .bloch-sphere {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #3498db, #2c3e50);
-      border: 3px solid #3498db;
-      position: relative;
-      margin: 20px auto;
-      overflow: hidden;
-    }
-    .bloch-vector {
-      position: absolute;
-      width: 3px;
-      height: 70px;
-      background: #e74c3c;
-      left: 50%;
-      top: 50%;
-      transform-origin: bottom;
-      transition: all 0.5s ease;
-    }
-    .algorithm-panel {
-      grid-column: 1 / -1;
-      background: linear-gradient(135deg, #2c3e50, #34495e);
-    }
-    .phase-display {
-      display: flex;
-      justify-content: space-between;
-      margin: 20px 0;
-    }
-    .phase {
-      text-align: center;
-      padding: 15px;
-      border-radius: 8px;
-      background: rgba(52, 152, 219, 0.2);
-      border: 1px solid #3498db;
-      flex: 1;
-      margin: 0 5px;
-    }
-    .progress-bar {
-      width: 100%;
-      height: 25px;
-      background: rgba(52, 73, 94, 0.8);
-      border-radius: 12px;
-      overflow: hidden;
-      margin: 10px 0;
-    }
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #e74c3c, #f39c12, #27ae60);
-      transition: width 0.3s ease;
-      border-radius: 12px;
-    }
-    @media (max-width: 768px) {
-      .quantum-grid { grid-template-columns: 1fr; }
-      .container { padding: 15px; }
-      h1 { font-size: 2em; }
-      .nav-buttons, .language-toggle {
-        position: static;
-        top: auto;
-        right: auto;
-        left: auto;
-        margin-bottom: 20px;
-        justify-content: center;
-      }
-      .phase-display {
-        flex-direction: column;
-        gap: 10px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FFGFT-Quantensimulator – deterministische Messung (Dok. 230)</title>
+<style>
+  :root { --bg1:#667eea; --bg2:#764ba2; --panel:rgba(30,30,50,0.95); --card:rgba(255,255,255,0.06);
+          --line:rgba(255,255,255,0.14); --acc:#4ecdc4; --acc2:#f7b731; --ok:#2ecc71; --bad:#e74c3c; --mut:#b8bfd6; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; padding:16px;
+         background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%); color:#fff; min-height:100vh; }
+  .container { max-width:1300px; margin:0 auto; background:var(--panel); border-radius:18px; padding:24px;
+               box-shadow:0 20px 60px rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); }
+  .topbar { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:8px; }
+  .topbar a, .lang-btn { color:#fff; text-decoration:none; background:rgba(255,255,255,0.12); border:1px solid var(--line);
+               padding:8px 14px; border-radius:8px; cursor:pointer; font-size:14px; }
+  .lang-btn.active { background:var(--acc); color:#10202a; font-weight:bold; }
+  h1 { margin:8px 0 4px; font-size:1.8em; }
+  .subtitle { color:var(--mut); margin-bottom:18px; }
+  h2 { font-size:1.2em; margin:0 0 12px; color:var(--acc); }
+  h3 { font-size:1.02em; margin:14px 0 8px; color:var(--acc2); }
+  .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap:18px; }
+  .panel { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; }
+  .wide { grid-column: 1 / -1; }
+  .intro { line-height:1.55; }
+  .rule { background:rgba(78,205,196,0.12); border-left:4px solid var(--acc); padding:10px 14px; border-radius:8px;
+          margin:10px 0; font-family: 'Cambria Math', 'Times New Roman', serif; font-size:1.08em; }
+  .note { color:var(--mut); font-size:0.9em; line-height:1.5; }
+  label { display:block; font-size:0.9em; color:var(--mut); margin:8px 0 4px; }
+  select, input[type=number], input[type=text] { background:rgba(0,0,0,0.3); color:#fff; border:1px solid var(--line);
+          border-radius:6px; padding:7px 9px; font-size:14px; width:100%; }
+  input[type=range] { width:100%; }
+  .row { display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap; }
+  .row > div { flex:1; min-width:90px; }
+  .btn { background:linear-gradient(135deg,#4e54c8,#8f94fb); color:#fff; border:none; padding:9px 13px; border-radius:8px;
+         cursor:pointer; font-size:14px; margin:3px 2px; }
+  .btn:hover { filter:brightness(1.12); }
+  .btn.alt { background:linear-gradient(135deg,#11998e,#38ef7d); color:#08241c; }
+  .btn.warn { background:linear-gradient(135deg,#f7971e,#ffd200); color:#2a1d00; }
+  .btn.red { background:linear-gradient(135deg,#cb2d3e,#ef473a); }
+  .gates { display:grid; grid-template-columns: repeat(4, 1fr); gap:4px; }
+  table { width:100%; border-collapse:collapse; font-size:13.5px; }
+  th, td { border-bottom:1px solid var(--line); padding:5px 6px; text-align:right; }
+  th:first-child, td:first-child { text-align:left; }
+  .mono { font-family: Consolas, 'Courier New', monospace; }
+  .bar { height:10px; background:var(--acc); border-radius:3px; }
+  .bar2 { height:10px; background:var(--acc2); border-radius:3px; opacity:0.85; }
+  .log { background:rgba(0,0,0,0.35); border-radius:8px; padding:10px; font-family: Consolas, monospace; font-size:12.5px;
+         max-height:260px; overflow:auto; white-space:pre-wrap; }
+  .pill { display:inline-block; padding:2px 8px; border-radius:10px; font-size:12px; background:rgba(255,255,255,0.12); margin-left:6px; }
+  .pred { font-size:1.05em; margin:8px 0; }
+  .ok { color:var(--ok); } .bad { color:var(--bad); }
+  canvas { background:rgba(0,0,0,0.25); border-radius:10px; width:100%; }
+  .legend { font-size:0.85em; color:var(--mut); margin-top:18px; border-top:1px solid var(--line); padding-top:10px; line-height:1.6; }
+  .qcards { display:grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap:8px; }
+  .qcard { background:rgba(0,0,0,0.25); border-radius:8px; padding:8px; font-size:13px; }
+  .qcard b { color:var(--acc); }
+  @media (max-width:600px) { .container { padding:14px; } .gates { grid-template-columns: repeat(3,1fr); } }
+</style>
 </head>
 <body>
-  <!-- Navigation Buttons -->
-  <div class="nav-buttons">
-    <a href="https://jpascher.github.io/T0-Time-Mass-Duality/index.html" class="nav-btn">
-      🏠 <span id="back-text">Zurück zum Index</span>
-    </a>
-    <a href="quantum_help_guide.html" class="nav-btn help-button">
-      📚 <span id="help-text">Hilfe / Help</span>
-    </a>
-  </div>
-  
-  <!-- Language Toggle -->
-  <div class="language-toggle">
-    <button class="lang-btn active" onclick="switchLanguage('de')">Deutsch</button>
-    <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+<div class="container">
+  <div class="topbar">
+    <div><a href="index.html" data-i18n="back">← Übersicht</a>
+    <a href="quantum_help_guide.html" id="helplink" data-i18n="help">❓ Hilfe</a>
+    <a href="step_by_step_modules_bilingual.html" id="steplink" data-i18n="steps">🧩 Schritt für Schritt</a></div>
+    <div>
+      <button class="lang-btn active" id="btn-de" onclick="setLang('de')">Deutsch</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
+    </div>
   </div>
 
-  <div class="container">
-    <!-- German Content -->
-    <div id="german-content" class="language-content active">
-      <h1>⚛️ Quantum Computing Simulator</h1>
-      <div class="subtitle">Deterministischer T0-Framework Quantencomputer mit Shor-Algorithmus</div>
+  <h1 data-i18n="title">⚛️ Quantensimulator mit deterministischer Messung</h1>
+  <div class="subtitle" data-i18n="subtitle">Qubit-Gatter, Messreihen, Bell-Test und Ordnungssuche nach Shor – die Messung nach der FFGFT-Regel aus Dok. 230</div>
 
-      <div class="quantum-grid">
-        <!-- Qubit Control Panel -->
-        <div class="panel">
-          <h2>🎛️ Qubit Steuerung</h2>
-          
-          <div class="input-group">
-            <label>Anzahl Qubits:</label>
-            <select id="qubit-count">
-              <option value="3">3 Qubits</option>
-              <option value="4">4 Qubits</option>
-              <option value="5" selected>5 Qubits</option>
-              <option value="6">6 Qubits</option>
-              <option value="8">8 Qubits</option>
-              <option value="10">10 Qubits</option>
-            </select>
-          </div>
+  <div class="panel wide intro" style="margin-bottom:18px;">
+    <h2 data-i18n="h_basis">Grundlage: Messung als Polübergang (Dok. 230)</h2>
+    <div data-i18n-html="basis1">In der FFGFT ist ein Qubit ein Punkt (z, r, θ) auf dem Zylinder; z = ⟨σ<sub>z</sub>⟩ ist seine Lage auf der Achse. Die Messanordnung bringt eine Größe λ ∈ [−1, 1] auf derselben Achse mit. Der Ausgang ist eindeutig festgelegt:</div>
+    <div class="rule">A(z, λ) = sgn(z − λ) &nbsp;&nbsp;→&nbsp;&nbsp; |0⟩ <span data-i18n="for">für</span> λ &lt; z, &nbsp; |1⟩ <span data-i18n="else">sonst</span></div>
+    <div class="note" data-i18n="edge">Randfall λ = z = ±1 (Maß null): Erreicht wird der Pol, der Gewicht hat.</div>
+    <div data-i18n-html="basis2">Jede Einzelmessung ist damit festgelegt; der Simulator würfelt nicht. Der Anteil der Achse, der zu |0⟩ führt, ist (1+z)/2 = |α|² – eine Länge auf der Zylinderachse, die nach Archimedes einem Flächenanteil der Bloch-Kugel entspricht. Als Häufigkeit erscheint dieser Anteil erst, wenn man über viele Messungen mit gleichmäßig verteiltem λ zählt. Bei verschränkten Qubits legt die Messung des ersten Qubits die Lage z des zweiten fest (topologisch verbundene Zylinderkonfiguration); das Modell ist kontextuell, und das Kochen–Specker-Theorem greift nicht. Zwischen den Messungen entwickelt sich der Zustand deterministisch unter den Gattern.</div>
+    <div class="note" style="margin-top:8px;" data-i18n-html="basis3">Was der Simulator nicht behauptet: einen Rechenvorteil. Er rechnet auf einem gewöhnlichen Rechner mit dem vollen Zustandsvektor (Aufwand wächst mit 2<sup>n</sup>); bei Shor wird die Periode durch die Ordnungssuche bestimmt. FFGFT ändert die Deutung der Messung, nicht die Messstatistik – die Abweichung von der Quantenmechanik liegt in der Größenordnung von ξ und ist mit heutiger Hardware nicht auflösbar (Dok. 190, R142).</div>
+  </div>
 
-          <div id="qubit-display" class="qubit-container">
-            <!-- Qubits werden hier dynamisch eingefügt -->
-          </div>
-
-          <div style="text-align: center; margin: 20px 0;">
-            <button class="btn btn-primary" onclick="resetAllQubits()">🔄 Reset All</button>
-            <button class="btn btn-warning" onclick="applySuperposition()">⚡ Superposition</button>
-            <button class="btn btn-info" onclick="measureAll()">📊 Measure All</button>
-          </div>
-
-          <div class="bloch-sphere" id="bloch-sphere">
-            <div class="bloch-vector" id="bloch-vector"></div>
-          </div>
-        </div>
-
-        <!-- Quantum Gates Panel -->
-        <div class="panel">
-          <h2>🚪 Quantum Gates</h2>
-          
-          <div class="input-group">
-            <label>Ziel-Qubit:</label>
-            <select id="target-qubit">
-              <option value="0">Qubit 0</option>
-              <option value="1">Qubit 1</option>
-              <option value="2">Qubit 2</option>
-              <option value="3">Qubit 3</option>
-              <option value="4">Qubit 4</option>
-            </select>
-          </div>
-
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;">
-            <button class="btn btn-primary" onclick="applyGate('H')">H (Hadamard)</button>
-            <button class="btn btn-success" onclick="applyGate('X')">X (Pauli-X)</button>
-            <button class="btn btn-info" onclick="applyGate('Y')">Y (Pauli-Y)</button>
-            <button class="btn btn-warning" onclick="applyGate('Z')">Z (Pauli-Z)</button>
-            <button class="btn" onclick="applyGate('S')">S (Phase)</button>
-            <button class="btn" onclick="applyGate('T')">T (π/8)</button>
-          </div>
-
-          <div class="input-group">
-            <label>Kontroll-Qubit:</label>
-            <select id="control-qubit">
-              <option value="0">Qubit 0</option>
-              <option value="1" selected>Qubit 1</option>
-              <option value="2">Qubit 2</option>
-              <option value="3">Qubit 3</option>
-              <option value="4">Qubit 4</option>
-            </select>
-          </div>
-
-          <button class="btn btn-quantum" onclick="applyCNOT()">🔗 CNOT Gate</button>
-        </div>
-
-        <!-- T0 Shor Algorithm Panel -->
-        <div class="panel algorithm-panel">
-          <h2>🔐 T0 Shor Algorithmus - Deterministische Faktorisierung</h2>
-          
-          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-            <div class="input-group">
-              <label>Zahl N:</label>
-              <input type="number" id="shor-number" value="15" min="4" max="1023">
-            </div>
-            <div class="input-group">
-              <label>Basis a:</label>
-              <input type="number" id="shor-base" value="2" min="2" max="20">
-            </div>
-            <div class="input-group">
-              <label>Quantum Qubits:</label>
-              <input type="number" id="shor-qubits" value="8" min="4" max="16" readonly>
-            </div>
-          </div>
-
-          <div style="text-align: center; margin: 20px 0;">
-            <button class="btn btn-quantum" onclick="runShorT0Algorithm()">🚀 Starte Authentischer T0 Shor Algorithmus</button>
-            <button class="btn btn-info" onclick="runPureQuantumT0()">⚛️ Pure Quantum T0</button>
-            <button class="btn btn-success" onclick="runAdvancedT0()">🧠 Advanced T0</button>
-            <button class="btn btn-warning" onclick="runComparisonTest()">📊 Algorithm Vergleich</button>
-          </div>
-
-          <div class="phase-display">
-            <div class="phase">
-              <h4>1. Initialisierung</h4>
-              <div class="progress-bar">
-                <div class="progress-fill" id="progress-1" style="width: 0%"></div>
-              </div>
-              <div id="phase-1-status">Bereit</div>
-            </div>
-            <div class="phase">
-              <h4>2. Periodensuche</h4>
-              <div class="progress-bar">
-                <div class="progress-fill" id="progress-2" style="width: 0%"></div>
-              </div>
-              <div id="phase-2-status">Wartend</div>
-            </div>
-            <div class="phase">
-              <h4>3. Faktorisierung</h4>
-              <div class="progress-bar">
-                <div class="progress-fill" id="progress-3" style="width: 0%"></div>
-              </div>
-              <div id="phase-3-status">Wartend</div>
-            </div>
-            <div class="phase">
-              <h4>4. Verifikation</h4>
-              <div class="progress-bar">
-                <div class="progress-fill" id="progress-4" style="width: 0%"></div>
-              </div>
-              <div id="phase-4-status">Wartend</div>
-            </div>
-          </div>
-        </div>
+  <div class="grid">
+    <!-- Register -->
+    <div class="panel">
+      <h2 data-i18n="h_reg">🎛️ Register</h2>
+      <div class="row">
+        <div><label data-i18n="nq">Anzahl Qubits</label>
+          <select id="nq" onchange="resetReg()">
+            <option value="1">1</option><option value="2" selected>2</option><option value="3">3</option>
+            <option value="4">4</option><option value="5">5</option>
+          </select></div>
+        <div><button class="btn red" onclick="resetReg()" data-i18n="reset">Zurücksetzen |0…0⟩</button></div>
       </div>
-
-      <!-- Statistics -->
-      <div class="statistics">
-        <div class="stat-card">
-          <div>Aktive Qubits</div>
-          <div class="stat-value" id="active-qubits">5</div>
-        </div>
-        <div class="stat-card">
-          <div>Quantum States</div>
-          <div class="stat-value" id="quantum-states">32</div>
-        </div>
-        <div class="stat-card">
-          <div>Entanglement</div>
-          <div class="stat-value" id="entanglement">0%</div>
-        </div>
-        <div class="stat-card">
-          <div>Erfolgsrate</div>
-          <div class="stat-value" id="success-rate">-</div>
-        </div>
-      </div>
-
-      <!-- Results Panel -->
-      <div class="results-panel" id="results">
-        <strong>🎯 Authentischer T0 Quantum Computing Results:</strong><br>
-        Authentischer T0-Quantencomputer bereit für Operationen (Hardware-validiert)...<br>
-        <br>
-        <em>Verfügbare Authentische T0-Operationen:</em><br>
-        • Authentischer T0 Shor - Deterministische Faktorisierung (ξ = 1.33×10⁻⁴)<br>
-        • Pure Quantum T0 - Hardware-validierte Implementierung<br>
-        • Advanced T0 Framework - Energiefeld-basierte Operationen<br>
-        • Algorithm Vergleich - T0 vs Standard QM Performance<br>
-        • T0-Enhanced Quantum Gates (H, X, Y, Z, S, T, CNOT)<br>
-        • Superposition & Entanglement mit T0-Korrekturen<br>
-        <br>
-        <strong>Status:</strong> Authentisches T0-Framework bereit 🟢<br>
-      </div>
+      <h3 data-i18n="h_cyl">Zylinderkoordinaten je Qubit</h3>
+      <div class="qcards" id="qcards"></div>
+      <div class="note" style="margin-top:6px;" data-i18n-html="cylnote">z = ⟨σ<sub>z</sub>⟩, r = √(⟨σ<sub>x</sub>⟩² + ⟨σ<sub>y</sub>⟩²), θ = Phase. Ist r² + z² &lt; 1, ist das Qubit mit anderen verbunden (verschränkt).</div>
+      <h3 data-i18n="h_state">Zustandsvektor</h3>
+      <div id="statevec"></div>
     </div>
 
-    <!-- English Content -->
-    <div id="english-content" class="language-content">
-      <h1>⚛️ Quantum Computing Simulator</h1>
-      <div class="subtitle">Deterministic T0-Framework Quantum Computer with Shor Algorithm</div>
-
-      <div class="quantum-grid">
-        <!-- Qubit Control Panel -->
-        <div class="panel">
-          <h2>🎛️ Qubit Control</h2>
-          
-          <div class="input-group">
-            <label>Number of Qubits:</label>
-            <select id="qubit-count-en">
-              <option value="3">3 Qubits</option>
-              <option value="4">4 Qubits</option>
-              <option value="5" selected>5 Qubits</option>
-              <option value="6">6 Qubits</option>
-              <option value="8">8 Qubits</option>
-              <option value="10">10 Qubits</option>
-            </select>
-          </div>
-
-          <div id="qubit-display-en" class="qubit-container">
-            <!-- Qubits will be dynamically inserted here -->
-          </div>
-
-          <div style="text-align: center; margin: 20px 0;">
-            <button class="btn btn-primary" onclick="resetAllQubits()">🔄 Reset All</button>
-            <button class="btn btn-warning" onclick="applySuperposition()">⚡ Superposition</button>
-            <button class="btn btn-info" onclick="measureAll()">📊 Measure All</button>
-          </div>
-
-          <div class="bloch-sphere" id="bloch-sphere-en">
-            <div class="bloch-vector" id="bloch-vector-en"></div>
-          </div>
-        </div>
-
-        <!-- Quantum Gates Panel -->
-        <div class="panel">
-          <h2>🚪 Quantum Gates</h2>
-          
-          <div class="input-group">
-            <label>Target Qubit:</label>
-            <select id="target-qubit-en">
-              <option value="0">Qubit 0</option>
-              <option value="1">Qubit 1</option>
-              <option value="2">Qubit 2</option>
-              <option value="3">Qubit 3</option>
-              <option value="4">Qubit 4</option>
-            </select>
-          </div>
-
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;">
-            <button class="btn btn-primary" onclick="applyGate('H')">H (Hadamard)</button>
-            <button class="btn btn-success" onclick="applyGate('X')">X (Pauli-X)</button>
-            <button class="btn btn-info" onclick="applyGate('Y')">Y (Pauli-Y)</button>
-            <button class="btn btn-warning" onclick="applyGate('Z')">Z (Pauli-Z)</button>
-            <button class="btn" onclick="applyGate('S')">S (Phase)</button>
-            <button class="btn" onclick="applyGate('T')">T (π/8)</button>
-          </div>
-
-          <div class="input-group">
-            <label>Control Qubit:</label>
-            <select id="control-qubit-en">
-              <option value="0">Qubit 0</option>
-              <option value="1" selected>Qubit 1</option>
-              <option value="2">Qubit 2</option>
-              <option value="3">Qubit 3</option>
-              <option value="4">Qubit 4</option>
-            </select>
-          </div>
-
-          <button class="btn btn-quantum" onclick="applyCNOT()">🔗 CNOT Gate</button>
-        </div>
-
-        <!-- T0 Shor Algorithm Panel -->
-        <div class="panel algorithm-panel">
-          <h2>🔐 T0 Shor Algorithm - Deterministic Factorization</h2>
-          
-          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-            <div class="input-group">
-              <label>Number N:</label>
-              <input type="number" id="shor-number-en" value="15" min="4" max="1023">
-            </div>
-            <div class="input-group">
-              <label>Base a:</label>
-              <input type="number" id="shor-base-en" value="2" min="2" max="20">
-            </div>
-            <div class="input-group">
-              <label>Quantum Qubits:</label>
-              <input type="number" id="shor-qubits-en" value="8" min="4" max="16" readonly>
-            </div>
-          </div>
-
-          <div style="text-align: center; margin: 20px 0;">
-            <button class="btn btn-quantum" onclick="runShorT0Algorithm()">🚀 Start Authentic T0 Shor Algorithm</button>
-            <button class="btn btn-info" onclick="runPureQuantumT0()">⚛️ Pure Quantum T0</button>
-            <button class="btn btn-success" onclick="runAdvancedT0()">🧠 Advanced T0</button>
-            <button class="btn btn-warning" onclick="runComparisonTest()">📊 Algorithm Comparison</button>
-          </div>
-
-          <div class="phase-display">
-            <div class="phase">
-              <h4>1. Initialization</h4>
-              <div class="progress-bar">
-                <div class="progress-fill" id="progress-1-en" style="width: 0%"></div>
-              </div>
-              <div id="phase-1-status-en">Ready</div>
-            </div>
-            <div class="phase">
-              <h4>2. Period Finding</h4>
-              <div class="progress-bar">
-                <div class="progress-fill" id="progress-2-en" style="width: 0%"></div>
-              </div>
-              <div id="phase-2-status-en">Waiting</div>
-            </div>
-            <div class="phase">
-              <h4>3. Factorization</h4>
-              <div class="progress-bar">
-                <div class="progress-fill" id="progress-3-en" style="width: 0%"></div>
-              </div>
-              <div id="phase-3-status-en">Waiting</div>
-            </div>
-            <div class="phase">
-              <h4>4. Verification</h4>
-              <div class="progress-bar">
-                <div class="progress-fill" id="progress-4-en" style="width: 0%"></div>
-              </div>
-              <div id="phase-4-status-en">Waiting</div>
-            </div>
-          </div>
-        </div>
+    <!-- Gatter -->
+    <div class="panel">
+      <h2 data-i18n="h_gates">🚪 Gatter</h2>
+      <div class="row">
+        <div><label data-i18n="target">Ziel-Qubit</label><select id="tq"></select></div>
+        <div><label data-i18n="control">Kontroll-Qubit</label><select id="cq"></select></div>
       </div>
-
-      <!-- Statistics -->
-      <div class="statistics">
-        <div class="stat-card">
-          <div>Active Qubits</div>
-          <div class="stat-value" id="active-qubits-en">5</div>
-        </div>
-        <div class="stat-card">
-          <div>Quantum States</div>
-          <div class="stat-value" id="quantum-states-en">32</div>
-        </div>
-        <div class="stat-card">
-          <div>Entanglement</div>
-          <div class="stat-value" id="entanglement-en">0%</div>
-        </div>
-        <div class="stat-card">
-          <div>Success Rate</div>
-          <div class="stat-value" id="success-rate-en">-</div>
-        </div>
+      <div class="gates" style="margin-top:10px;">
+        <button class="btn" onclick="g1('H')">H</button>
+        <button class="btn" onclick="g1('X')">X</button>
+        <button class="btn" onclick="g1('Y')">Y</button>
+        <button class="btn" onclick="g1('Z')">Z</button>
+        <button class="btn" onclick="g1('S')">S</button>
+        <button class="btn" onclick="g1('T')">T</button>
+        <button class="btn" onclick="g1('Sdg')">S†</button>
+        <button class="btn" onclick="g1('Tdg')">T†</button>
       </div>
+      <div class="row">
+        <div><label data-i18n="angle">Winkel φ (Grad)</label><input type="number" id="phi" value="90" step="1"></div>
+      </div>
+      <div class="gates" style="margin-top:6px;">
+        <button class="btn" onclick="g1('RX')">R<sub>x</sub>(φ)</button>
+        <button class="btn" onclick="g1('RY')">R<sub>y</sub>(φ)</button>
+        <button class="btn" onclick="g1('RZ')">R<sub>z</sub>(φ)</button>
+        <button class="btn" onclick="g1('P')">P(φ)</button>
+      </div>
+      <div style="margin-top:6px;">
+        <button class="btn alt" onclick="g2('CNOT')">CNOT</button>
+        <button class="btn alt" onclick="g2('CZ')">CZ</button>
+        <button class="btn alt" onclick="g2('SWAP')">SWAP</button>
+      </div>
+      <h3 data-i18n="h_presets">Vorlagen</h3>
+      <button class="btn warn" onclick="preset('plus')" data-i18n="p_plus">Alle in |+⟩</button>
+      <button class="btn warn" onclick="preset('bell')" data-i18n="p_bell">Bell-Zustand Φ⁺</button>
+      <button class="btn warn" onclick="preset('ghz')" data-i18n="p_ghz">GHZ</button>
+      <button class="btn warn" onclick="preset('tilt')" data-i18n-html="p_tilt">R<sub>y</sub>(60°) auf Qubit 0</button>
+      <h3 data-i18n="h_circ">Schaltung (seit dem letzten Zurücksetzen)</h3>
+      <div class="log" id="circ"></div>
+    </div>
 
-      <!-- Results Panel -->
-      <div class="results-panel" id="results-en">
-        <strong>🎯 Authentic T0 Quantum Computing Results:</strong><br>
-        Authentic T0 Quantum Computer ready for operations (hardware-validated)...<br>
-        <br>
-        <em>Available Authentic T0 Operations:</em><br>
-        • Authentic T0 Shor - Deterministic factorization (ξ = 1.33×10⁻⁴)<br>
-        • Pure Quantum T0 - Hardware-validated implementation<br>
-        • Advanced T0 Framework - Energy field-based operations<br>
-        • Algorithm Comparison - T0 vs Standard QM performance<br>
-        • T0-Enhanced Quantum Gates (H, X, Y, Z, S, T, CNOT)<br>
-        • Superposition & Entanglement with T0-corrections<br>
-        <br>
-        <strong>Status:</strong> Authentic T0-Framework ready 🟢<br>
+    <!-- Einzelmessung -->
+    <div class="panel">
+      <h2 data-i18n="h_meas">📏 Einzelmessung</h2>
+      <div class="row">
+        <div><label data-i18n="mq">Qubit</label><select id="mq" onchange="updPred()"></select></div>
+        <div><label>λ</label><input type="number" id="lam" value="0" min="-1" max="1" step="0.01" oninput="syncLam('num')"></div>
+      </div>
+      <input type="range" id="lamr" min="-1" max="1" step="0.001" value="0" oninput="syncLam('range')">
+      <canvas id="axis" width="520" height="90"></canvas>
+      <div class="pred" id="pred"></div>
+      <button class="btn alt" onclick="measureOne()" data-i18n="measure">Messen</button>
+      <button class="btn" onclick="measureAllSeq()" data-i18n="measall">Alle messen (λ-Folge unten)</button>
+      <label data-i18n="lamlist">λ-Werte für „Alle messen“ (je Qubit, durch Komma getrennt)</label>
+      <input type="text" id="lamlist" value="0.1, -0.3, 0.5, -0.7, 0.2">
+      <div class="log" id="mlog" style="margin-top:10px;"></div>
+    </div>
+
+    <!-- Messreihe -->
+    <div class="panel">
+      <h2 data-i18n="h_series">📊 Messreihe über eine λ-Folge</h2>
+      <div class="note" data-i18n-html="seriesnote">Die Schaltung oben wird K-mal vom Zustand |0…0⟩ aus wiederholt und dann gemessen; jeder Durchlauf bekommt einen festen λ-Vektor aus einer gleichmäßig verteilten, vollständig deterministischen Folge (Halton-Folge). Jeder Ausgang ist einzeln festgelegt; die Häufigkeiten werden mit |Amplitude|² verglichen.</div>
+      <div class="row">
+        <div><label>K</label><input type="number" id="K" value="2000" min="10" max="200000" step="10"></div>
+        <div><button class="btn alt" onclick="runSeries()" data-i18n="run">Messreihe starten</button></div>
+      </div>
+      <div id="series" style="margin-top:10px;"></div>
+    </div>
+
+    <!-- Bell / CHSH -->
+    <div class="panel wide">
+      <h2 data-i18n="h_bell">🔗 Bell-Test (CHSH) mit deterministischer Messung</h2>
+      <div class="note" data-i18n-html="bellnote">Zustand Φ⁺ = (|00⟩ + |11⟩)/√2. Gemessen wird entlang der Winkel a, a′ (Qubit A) und b, b′ (Qubit B) in der x-z-Ebene. Jeder Durchlauf hat ein festes Paar (λ<sub>A</sub>, λ<sub>B</sub>) aus einem gleichmäßigen M×M-Gitter; A wird zuerst gemessen, danach ist z<sub>B</sub> durch die Verbindung festgelegt. Lokale Modelle erreichen höchstens S = 2.</div>
+      <div class="row">
+        <div><label>a (°)</label><input type="number" id="ba" value="0"></div>
+        <div><label>a′ (°)</label><input type="number" id="ba2" value="90"></div>
+        <div><label>b (°)</label><input type="number" id="bb" value="45"></div>
+        <div><label>b′ (°)</label><input type="number" id="bb2" value="135"></div>
+        <div><label>M</label><input type="number" id="bM" value="500" min="10" max="1000"></div>
+        <div><button class="btn alt" onclick="runBell()" data-i18n="runbell">CHSH berechnen</button></div>
+      </div>
+      <div id="bellout" style="margin-top:12px;"></div>
+    </div>
+
+    <!-- Shor -->
+    <div class="panel wide">
+      <h2 data-i18n="h_shor">🔐 Ordnungssuche nach Shor – Messung in der FFGFT-Lesart</h2>
+      <div class="note" data-i18n-html="shornote">Das Rechenverfahren ist Shors Ordnungssuche: Zählregister mit t Qubits, modulare Exponentiation, Quanten-Fourier-Transformation, Kettenbruchentwicklung. FFGFT-spezifisch ist nur die Messung: Die t Qubits des Zählregisters werden nacheinander nach A(z, λ) gemessen, jedes mit seinem eigenen λ. Bei bekannten λ steht das Messergebnis und damit der Ausgang des Laufs vorher fest. Ein eigenes, von Shor verschiedenes Faktorisierungsverfahren ist das nicht (Dok. 190, R65).</div>
+      <div class="row">
+        <div><label>N</label><input type="number" id="sN" value="15" min="6" max="127"></div>
+        <div><label data-i18n="base">Basis a</label><input type="number" id="sA" value="7" min="2" max="126"></div>
+        <div><label data-i18n="lamseed">λ-Startindex k</label><input type="number" id="sK" value="1" min="0" max="100000"></div>
+        <div><button class="btn alt" onclick="runShor()" data-i18n="runshor">Lauf ausführen</button></div>
+        <div><button class="btn" onclick="runShorSeries()" data-i18n="runshorser">100 Läufe (λ-Folge)</button></div>
+      </div>
+      <div class="note" style="margin-top:6px;" data-i18n="shorlim">Zulässig: ungerades N von 15 bis 127, das keine Primzahlpotenz ist; t = ⌈2·log₂N⌉ Zählqubits.</div>
+      <div class="grid" style="margin-top:10px;">
+        <div><canvas id="shorc" width="600" height="220"></canvas></div>
+        <div class="log" id="shorlog"></div>
       </div>
     </div>
   </div>
-  <script>
-// ============================================================================
-// AUTHENTIC T0-THEORY IMPLEMENTATION - Energy Field-Based Operations
-// ============================================================================
 
-console.log('Script loaded at ' + new Date().toLocaleString());
+  <div class="legend" data-i18n-html="legend">Quellen im Korpus: Messregel und Zylinderdarstellung Dok. 230; ξ-Dämpfung der Bell-Korrelation Dok. 175; Einordnung des QM-Sektors und der Faktorisierung Dok. 190 (R65, R142, R143) und Dok. 384. ξ = 4/30000, D<sub>f</sub> = 3 − ξ.</div>
+</div>
 
-// Language management
-let currentLang = 'de';
-
-  function switchLanguage(lang) {
-    console.log(`Switching language to: ${lang}`);
-    currentLang = lang;
-    document.querySelectorAll('.language-content').forEach(content => {
-      content.classList.remove('active');
-    });
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.classList.remove('active');
-    });
-    if (lang === 'de') {
-      document.getElementById('german-content').classList.add('active');
-      document.querySelector('[onclick="switchLanguage(\'de\')"]').classList.add('active');
-      document.getElementById('back-text').textContent = 'Zurück zum Index';
-      document.getElementById('help-text').textContent = 'Hilfe / Help';
-    } else {
-      document.getElementById('english-content').classList.add('active');
-      document.querySelector('[onclick="switchLanguage(\'en\')"]').classList.add('active');
-      document.getElementById('back-text').textContent = 'Back to Index';
-      document.getElementById('help-text').textContent = 'Help / Hilfe';
-    }
-    syncLanguageControls(lang);
-    initializeQuantumComputer(); // Ensure qubits are displayed after language switch
-  }
-
-function syncLanguageControls(lang) {
-  console.log(`Syncing controls for language: ${lang}`);
-  const suffix = lang === 'en' ? '-en' : '';
-  const qubitCount = document.getElementById(`qubit-count${suffix}`);
-  const otherSuffix = lang === 'en' ? '' : '-en';
-  const otherSelect = document.getElementById(`qubit-count${otherSuffix}`);
-  if (qubitCount && otherSelect) {
-    otherSelect.value = qubitCount.value;
-    console.log(`Synced qubit count: ${qubitCount.value}`);
-  } else {
-    console.error(`Failed to sync qubit count: qubit-count${suffix} or qubit-count${otherSuffix} not found`);
-    displayError('Failed to sync qubit controls');
-  }
-  quantumState.numQubits = parseInt(qubitCount ? qubitCount.value : 5);
-  updateQubitOptions();
-}
-
-// Quantum Computer State
-let quantumState = {
-  qubits: [],
-  numQubits: 5,
-  entanglement: 0,
-  circuitHistory: [],
-  measurementHistory: [],
-  xiParameter: 1.3333e-4,
-  energyField: 0,
-  t0Corrections: 0
+<script>
+'use strict';
+// ---------------------------------------------------------------- i18n
+const I18N = {
+ de: {
+  back:'← Übersicht', help:'❓ Hilfe', steps:'🧩 Schritt für Schritt', title:'⚛️ Quantensimulator mit deterministischer Messung',
+  subtitle:'Qubit-Gatter, Messreihen, Bell-Test und Ordnungssuche nach Shor – die Messung nach der FFGFT-Regel aus Dok. 230',
+  h_basis:'Grundlage: Messung als Polübergang (Dok. 230)', for:'für', else:'sonst',
+  edge:'Randfall λ = z = ±1 (Maß null): Erreicht wird der Pol, der Gewicht hat.',
+  basis1:'In der FFGFT ist ein Qubit ein Punkt (z, r, θ) auf dem Zylinder; z = ⟨σ<sub>z</sub>⟩ ist seine Lage auf der Achse. Die Messanordnung bringt eine Größe λ ∈ [−1, 1] auf derselben Achse mit. Der Ausgang ist eindeutig festgelegt:',
+  basis2:'Jede Einzelmessung ist damit festgelegt; der Simulator würfelt nicht. Der Anteil der Achse, der zu |0⟩ führt, ist (1+z)/2 = |α|² – eine Länge auf der Zylinderachse, die nach Archimedes einem Flächenanteil der Bloch-Kugel entspricht. Als Häufigkeit erscheint dieser Anteil erst, wenn man über viele Messungen mit gleichmäßig verteiltem λ zählt. Bei verschränkten Qubits legt die Messung des ersten Qubits die Lage z des zweiten fest (topologisch verbundene Zylinderkonfiguration); das Modell ist kontextuell, und das Kochen–Specker-Theorem greift nicht. Zwischen den Messungen entwickelt sich der Zustand deterministisch unter den Gattern.',
+  basis3:'Was der Simulator nicht behauptet: einen Rechenvorteil. Er rechnet auf einem gewöhnlichen Rechner mit dem vollen Zustandsvektor (Aufwand wächst mit 2<sup>n</sup>); bei Shor wird die Periode durch die Ordnungssuche bestimmt. FFGFT ändert die Deutung der Messung, nicht die Messstatistik – die Abweichung von der Quantenmechanik liegt in der Größenordnung von ξ und ist mit heutiger Hardware nicht auflösbar (Dok. 190, R142).',
+  h_reg:'🎛️ Register', nq:'Anzahl Qubits', reset:'Zurücksetzen |0…0⟩', h_cyl:'Zylinderkoordinaten je Qubit',
+  cylnote:'z = ⟨σ<sub>z</sub>⟩, r = √(⟨σ<sub>x</sub>⟩² + ⟨σ<sub>y</sub>⟩²), θ = Phase. Ist r² + z² &lt; 1, ist das Qubit mit anderen verbunden (verschränkt).',
+  h_state:'Zustandsvektor', h_gates:'🚪 Gatter', target:'Ziel-Qubit', control:'Kontroll-Qubit', angle:'Winkel φ (Grad)',
+  h_presets:'Vorlagen', p_plus:'Alle in |+⟩', p_bell:'Bell-Zustand Φ⁺', p_ghz:'GHZ', p_tilt:'R<sub>y</sub>(60°) auf Qubit 0',
+  h_circ:'Schaltung (seit dem letzten Zurücksetzen)', h_meas:'📏 Einzelmessung', mq:'Qubit', measure:'Messen',
+  measall:'Alle messen (λ-Folge unten)', lamlist:'λ-Werte für „Alle messen“ (je Qubit, durch Komma getrennt)',
+  h_series:'📊 Messreihe über eine λ-Folge',
+  seriesnote:'Die Schaltung oben wird K-mal vom Zustand |0…0⟩ aus wiederholt und dann gemessen; jeder Durchlauf bekommt einen festen λ-Vektor aus einer gleichmäßig verteilten, vollständig deterministischen Folge (Halton-Folge). Jeder Ausgang ist einzeln festgelegt; die Häufigkeiten werden mit |Amplitude|² verglichen.',
+  run:'Messreihe starten', h_bell:'🔗 Bell-Test (CHSH) mit deterministischer Messung',
+  bellnote:'Zustand Φ⁺ = (|00⟩ + |11⟩)/√2. Gemessen wird entlang der Winkel a, a′ (Qubit A) und b, b′ (Qubit B) in der x-z-Ebene. Jeder Durchlauf hat ein festes Paar (λ<sub>A</sub>, λ<sub>B</sub>) aus einem gleichmäßigen M×M-Gitter; A wird zuerst gemessen, danach ist z<sub>B</sub> durch die Verbindung festgelegt. Lokale Modelle erreichen höchstens S = 2.',
+  runbell:'CHSH berechnen', h_shor:'🔐 Ordnungssuche nach Shor – Messung in der FFGFT-Lesart',
+  shornote:'Das Rechenverfahren ist Shors Ordnungssuche: Zählregister mit t Qubits, modulare Exponentiation, Quanten-Fourier-Transformation, Kettenbruchentwicklung. FFGFT-spezifisch ist nur die Messung: Die t Qubits des Zählregisters werden nacheinander nach A(z, λ) gemessen, jedes mit seinem eigenen λ. Bei bekannten λ steht das Messergebnis und damit der Ausgang des Laufs vorher fest. Ein eigenes, von Shor verschiedenes Faktorisierungsverfahren ist das nicht (Dok. 190, R65).',
+  base:'Basis a', lamseed:'λ-Startindex k', runshor:'Lauf ausführen', runshorser:'100 Läufe (λ-Folge)',
+  shorlim:'Zulässig: ungerades N von 15 bis 127, das keine Primzahlpotenz ist; t = ⌈2·log₂N⌉ Zählqubits.',
+  legend:'Quellen im Korpus: Messregel und Zylinderdarstellung Dok. 230; ξ-Dämpfung der Bell-Korrelation Dok. 175; Einordnung des QM-Sektors und der Faktorisierung Dok. 190 (R65, R142, R143) und Dok. 384. ξ = 4/30000, D<sub>f</sub> = 3 − ξ.',
+  // dynamic
+  linked:'verbunden', free:'rein', prob:'Anteil', amp:'Amplitude', basis:'Basis',
+  pred:(z,l,o)=>`z = ${z} · λ = ${l} → Ausgang vorab festgelegt: <b>|${o}⟩</b>`,
+  measured:(q,z,l,o)=>`Qubit ${q}: z = ${z}, λ = ${l} → |${o}⟩`,
+  zero:'Zustand ist null – zurücksetzen.', reset_log:'— Register zurückgesetzt —',
+  ser_head:(K)=>`${K} Durchläufe, jeder einzeln festgelegt`, outcome:'Ergebnis', count:'Anzahl', freq:'Häufigkeit', born:'|Amplitude|²',
+  maxdev:(d)=>`größte Abweichung Häufigkeit − |Amplitude|²: ${d}`,
+  bell_E:'Korrelationen E aus den deterministischen Durchläufen', bell_S_det:(s,M)=>`S aus ${M}×${M} festen λ-Paaren`,
+  bell_S_qm:'S nach der Quantenmechanik (exakt)', bell_S_ff:'S mit ξ-Dämpfung nach Dok. 175',
+  bell_dS:'Abweichung von der Tsirelson-Grenze', bell_loc:'Grenze lokaler Modelle',
+  bell_grid:(M)=>`Gitterauflösung: Jedes E ist auf ±${(2/M).toFixed(4)} genau, S auf ±${(8/M).toFixed(4)}; mit wachsendem M nähert sich S dem exakten Wert.`,
+  bell_note:'Die Verletzung bleibt (S > 2). Die ξ-Dämpfung ändert S erst in der fünften Nachkommastelle; heutige Messungen haben ein Rauschen von etwa 10⁻², die Abweichung ist damit nicht auflösbar (R142).',
+  shor_bad:'N muss ungerade sein, 15 ≤ N ≤ 127 und keine Primzahlpotenz.',
+  shor_gcd:(a,N,g)=>`ggT(${a}, ${N}) = ${g} > 1: Faktor ohne Ordnungssuche gefunden – ${N} = ${g} × ${N/g}.`,
+  shor_setup:(N,a,t,Q)=>`N = ${N}, a = ${a}, Zählregister t = ${t} Qubits (Q = ${Q})`,
+  shor_lam:(k,l)=>`λ-Vektor (Halton-Folge, Index ${k}): ${l}`,
+  shor_y:(y,Q)=>`Messwert des Zählregisters (Bit für Bit nach A(z, λ)): y = ${y}  →  y/Q = ${y}/${Q}`,
+  shor_cf:(r)=>`Kettenbruch → Kandidat für die Ordnung: r = ${r}`,
+  shor_r_ok:(a,r,N)=>`Probe: ${a}^${r} mod ${N} = 1 ✓`, shor_r_no:(a,r,N,v)=>`Probe: ${a}^${r} mod ${N} = ${v} – kein Treffer in diesem Lauf`,
+  shor_odd:'r ist ungerade – dieser Lauf liefert keine Faktoren.', shor_triv:'a^(r/2) ≡ −1 mod N – dieser Lauf liefert keine Faktoren.',
+  shor_fac:(N,p,q)=>`Faktoren: ${N} = ${p} × ${q}`, shor_y0:'y = 0 – kein Kandidat in diesem Lauf.',
+  shor_ser:(n,ok,r)=>`${n} Läufe mit den λ-Vektoren k … k+${n-1}: ${ok} liefern die Faktoren (Ordnung r = ${r}). Jeder Lauf ist einzeln festgelegt; der Anteil entspricht der Erfolgsquote von Shors Verfahren für dieses a.`,
+  shor_dist:'Verteilung von y (|Amplitude|² nach der QFT)'
+ },
+ en: {
+  back:'← Overview', help:'❓ Help', steps:'🧩 Step by step', title:'⚛️ Quantum simulator with deterministic measurement',
+  subtitle:'Qubit gates, measurement series, Bell test and Shor order finding – measurement according to the FFGFT rule of Doc. 230',
+  h_basis:'Basis: measurement as a transition to a pole (Doc. 230)', for:'for', else:'otherwise',
+  edge:'Boundary case λ = z = ±1 (measure zero): the pole that carries weight is reached.',
+  basis1:'In FFGFT a qubit is a point (z, r, θ) on the cylinder; z = ⟨σ<sub>z</sub>⟩ is its position on the axis. The measuring arrangement brings a quantity λ ∈ [−1, 1] on the same axis. The outcome is uniquely fixed:',
+  basis2:'Every single measurement is therefore fixed; the simulator does not roll dice. The fraction of the axis that leads to |0⟩ is (1+z)/2 = |α|² – a length on the cylinder axis which, by Archimedes, equals an area fraction of the Bloch sphere. It appears as a frequency only when counting many measurements with uniformly distributed λ. For entangled qubits, measuring the first qubit fixes the position z of the second (topologically connected cylinder configuration); the model is contextual, and the Kochen–Specker theorem does not apply. Between measurements the state evolves deterministically under the gates.',
+  basis3:'What the simulator does not claim: a computational advantage. It runs on an ordinary computer with the full state vector (effort grows as 2<sup>n</sup>); in Shor’s algorithm the period is obtained by order finding. FFGFT changes the reading of the measurement, not the measurement statistics – the deviation from quantum mechanics is of the order of ξ and cannot be resolved with today’s hardware (Doc. 190, R142).',
+  h_reg:'🎛️ Register', nq:'Number of qubits', reset:'Reset |0…0⟩', h_cyl:'Cylinder coordinates per qubit',
+  cylnote:'z = ⟨σ<sub>z</sub>⟩, r = √(⟨σ<sub>x</sub>⟩² + ⟨σ<sub>y</sub>⟩²), θ = phase. If r² + z² &lt; 1, the qubit is connected to others (entangled).',
+  h_state:'State vector', h_gates:'🚪 Gates', target:'Target qubit', control:'Control qubit', angle:'Angle φ (degrees)',
+  h_presets:'Presets', p_plus:'All in |+⟩', p_bell:'Bell state Φ⁺', p_ghz:'GHZ', p_tilt:'R<sub>y</sub>(60°) on qubit 0',
+  h_circ:'Circuit (since the last reset)', h_meas:'📏 Single measurement', mq:'Qubit', measure:'Measure',
+  measall:'Measure all (λ list below)', lamlist:'λ values for “Measure all” (one per qubit, comma-separated)',
+  h_series:'📊 Measurement series over a λ sequence',
+  seriesnote:'The circuit above is repeated K times starting from |0…0⟩ and then measured; each run gets a fixed λ vector from a uniformly distributed, fully deterministic sequence (Halton sequence). Each outcome is fixed individually; the frequencies are compared with |amplitude|².',
+  run:'Start series', h_bell:'🔗 Bell test (CHSH) with deterministic measurement',
+  bellnote:'State Φ⁺ = (|00⟩ + |11⟩)/√2. Measurements are taken along angles a, a′ (qubit A) and b, b′ (qubit B) in the x-z plane. Each run has a fixed pair (λ<sub>A</sub>, λ<sub>B</sub>) from a uniform M×M grid; A is measured first, after which z<sub>B</sub> is fixed by the connection. Local models reach at most S = 2.',
+  runbell:'Compute CHSH', h_shor:'🔐 Shor order finding – measurement in the FFGFT reading',
+  shornote:'The computational procedure is Shor’s order finding: counting register with t qubits, modular exponentiation, quantum Fourier transform, continued fractions. Only the measurement is FFGFT-specific: the t qubits of the counting register are measured one after another according to A(z, λ), each with its own λ. With known λ the measured value, and thus the outcome of the run, is fixed in advance. This is not a separate factorisation method distinct from Shor’s (Doc. 190, R65).',
+  base:'Base a', lamseed:'λ start index k', runshor:'Run once', runshorser:'100 runs (λ sequence)',
+  shorlim:'Allowed: odd N from 15 to 127 that is not a prime power; t = ⌈2·log₂N⌉ counting qubits.',
+  legend:'Sources in the corpus: measurement rule and cylinder representation Doc. 230; ξ damping of the Bell correlation Doc. 175; classification of the QM sector and of factorisation Doc. 190 (R65, R142, R143) and Doc. 384. ξ = 4/30000, D<sub>f</sub> = 3 − ξ.',
+  linked:'connected', free:'pure', prob:'fraction', amp:'Amplitude', basis:'Basis state',
+  pred:(z,l,o)=>`z = ${z} · λ = ${l} → outcome fixed in advance: <b>|${o}⟩</b>`,
+  measured:(q,z,l,o)=>`Qubit ${q}: z = ${z}, λ = ${l} → |${o}⟩`,
+  zero:'State is zero – reset.', reset_log:'— register reset —',
+  ser_head:(K)=>`${K} runs, each fixed individually`, outcome:'Outcome', count:'Count', freq:'Frequency', born:'|amplitude|²',
+  maxdev:(d)=>`largest deviation frequency − |amplitude|²: ${d}`,
+  bell_E:'Correlations E from the deterministic runs', bell_S_det:(s,M)=>`S from ${M}×${M} fixed λ pairs`,
+  bell_S_qm:'S according to quantum mechanics (exact)', bell_S_ff:'S with ξ damping according to Doc. 175',
+  bell_dS:'Deviation from the Tsirelson bound', bell_loc:'Bound for local models',
+  bell_grid:(M)=>`Grid resolution: each E is accurate to ±${(2/M).toFixed(4)}, S to ±${(8/M).toFixed(4)}; as M grows, S approaches the exact value.`,
+  bell_note:'The violation remains (S > 2). The ξ damping changes S only in the fifth decimal place; current measurements have noise of about 10⁻², so the deviation cannot be resolved (R142).',
+  shor_bad:'N must be odd, 15 ≤ N ≤ 127 and not a prime power.',
+  shor_gcd:(a,N,g)=>`gcd(${a}, ${N}) = ${g} > 1: factor found without order finding – ${N} = ${g} × ${N/g}.`,
+  shor_setup:(N,a,t,Q)=>`N = ${N}, a = ${a}, counting register t = ${t} qubits (Q = ${Q})`,
+  shor_lam:(k,l)=>`λ vector (Halton sequence, index ${k}): ${l}`,
+  shor_y:(y,Q)=>`Measured value of the counting register (bit by bit according to A(z, λ)): y = ${y}  →  y/Q = ${y}/${Q}`,
+  shor_cf:(r)=>`Continued fraction → candidate for the order: r = ${r}`,
+  shor_r_ok:(a,r,N)=>`Check: ${a}^${r} mod ${N} = 1 ✓`, shor_r_no:(a,r,N,v)=>`Check: ${a}^${r} mod ${N} = ${v} – no hit in this run`,
+  shor_odd:'r is odd – this run yields no factors.', shor_triv:'a^(r/2) ≡ −1 mod N – this run yields no factors.',
+  shor_fac:(N,p,q)=>`Factors: ${N} = ${p} × ${q}`, shor_y0:'y = 0 – no candidate in this run.',
+  shor_ser:(n,ok,r)=>`${n} runs with the λ vectors k … k+${n-1}: ${ok} yield the factors (order r = ${r}). Each run is fixed individually; the fraction equals the success rate of Shor’s algorithm for this a.`,
+  shor_dist:'Distribution of y (|amplitude|² after the QFT)'
+ }
 };
-
-// Complex number operations
-class Complex {
-  constructor(real, imag = 0) {
-    this.real = real;
-    this.imag = imag;
-  }
-
-  magnitude() {
-    return Math.sqrt(this.real * this.real + this.imag * this.imag);
-  }
-
-  multiply(other) {
-    return new Complex(
-      this.real * other.real - this.imag * other.imag,
-      this.real * other.imag + this.imag * other.real
-    );
-  }
-
-  add(other) {
-    return new Complex(this.real + other.real, this.imag + other.imag);
-  }
-
-  toString() {
-    return `${this.real.toFixed(3)}${this.imag >= 0 ? '+' : ''}${this.imag.toFixed(3)}i`;
-  }
+let LANG = 'de';
+const T = (k) => I18N[LANG][k];
+function setLang(l) {
+  LANG = l;
+  document.documentElement.lang = l;
+  document.getElementById('btn-de').classList.toggle('active', l === 'de');
+  document.getElementById('btn-en').classList.toggle('active', l === 'en');
+  document.querySelectorAll('[data-i18n]').forEach(el => { const v = I18N[l][el.dataset.i18n]; if (typeof v === 'string') el.textContent = v; });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => { const v = I18N[l][el.dataset.i18nHtml]; if (typeof v === 'string') el.innerHTML = v; });
+  document.title = l === 'de' ? 'FFGFT-Quantensimulator – deterministische Messung (Dok. 230)' : 'FFGFT quantum simulator – deterministic measurement (Doc. 230)';
+  document.getElementById('helplink').href = 'quantum_help_guide.html' + (l === 'en' ? '?lang=en' : '');
+  document.getElementById('steplink').href = 'step_by_step_modules_bilingual.html' + (l === 'en' ? '?lang=en' : '');
+  render(); updPred();
+  rerunOutputs();
 }
 
-// Normalize energy fields
-function normalizeFields(e0, e1) {
-  const norm = Math.sqrt(e0 * e0 + e1 * e1);
-  if (norm === 0) return [e0, e1];
-  return [e0 / norm, e1 / norm];
+// ---------------------------------------------------------------- complex numbers & state
+const C = (re, im = 0) => ({ re, im });
+const cadd = (a, b) => C(a.re + b.re, a.im + b.im);
+const cmul = (a, b) => C(a.re * b.re - a.im * b.im, a.re * b.im + a.im * b.re);
+const cabs2 = (a) => a.re * a.re + a.im * a.im;
+const XI = 4 / 30000, DF = 3 - XI;
+const fmt = (x, d = 4) => (Math.abs(x) < 0.5 * Math.pow(10, -d) ? 0 : x).toFixed(d);
+
+let n = 2, psi = [], circuit = [];
+
+function zeroState(nq) { const s = new Array(1 << nq).fill(null).map(() => C(0)); s[0] = C(1); return s; }
+
+// single-qubit gate matrices [[a,b],[c,d]]
+function mat(name, phiDeg) {
+  const h = 1 / Math.SQRT2, p = (phiDeg || 0) * Math.PI / 180;
+  switch (name) {
+    case 'H': return [[C(h), C(h)], [C(h), C(-h)]];
+    case 'X': return [[C(0), C(1)], [C(1), C(0)]];
+    case 'Y': return [[C(0), C(0, -1)], [C(0, 1), C(0)]];
+    case 'Z': return [[C(1), C(0)], [C(0), C(-1)]];
+    case 'S': return [[C(1), C(0)], [C(0), C(0, 1)]];
+    case 'Sdg': return [[C(1), C(0)], [C(0), C(0, -1)]];
+    case 'T': return [[C(1), C(0)], [C(0), C(Math.cos(Math.PI / 4), Math.sin(Math.PI / 4))]];
+    case 'Tdg': return [[C(1), C(0)], [C(0), C(Math.cos(Math.PI / 4), -Math.sin(Math.PI / 4))]];
+    case 'RX': return [[C(Math.cos(p / 2)), C(0, -Math.sin(p / 2))], [C(0, -Math.sin(p / 2)), C(Math.cos(p / 2))]];
+    case 'RY': return [[C(Math.cos(p / 2)), C(-Math.sin(p / 2))], [C(Math.sin(p / 2)), C(Math.cos(p / 2))]];
+    case 'RZ': return [[C(Math.cos(p / 2), -Math.sin(p / 2)), C(0)], [C(0), C(Math.cos(p / 2), Math.sin(p / 2))]];
+    case 'P': return [[C(1), C(0)], [C(0), C(Math.cos(p), Math.sin(p))]];
+  }
+  throw new Error('gate ' + name);
+}
+// qubit q = bit q of the basis index (qubit 0 = least significant bit)
+function apply1(s, q, M) {
+  const out = s.slice(), bit = 1 << q;
+  for (let i = 0; i < s.length; i++) if (!(i & bit)) {
+    const a0 = s[i], a1 = s[i | bit];
+    out[i] = cadd(cmul(M[0][0], a0), cmul(M[0][1], a1));
+    out[i | bit] = cadd(cmul(M[1][0], a0), cmul(M[1][1], a1));
+  }
+  return out;
+}
+function apply2(s, name, c, t) {
+  const out = s.slice(), bc = 1 << c, bt = 1 << t;
+  if (name === 'CNOT') { for (let i = 0; i < s.length; i++) if ((i & bc) && !(i & bt)) { out[i] = s[i | bt]; out[i | bt] = s[i]; } }
+  else if (name === 'CZ') { for (let i = 0; i < s.length; i++) if ((i & bc) && (i & bt)) out[i] = C(-s[i].re, -s[i].im); }
+  else if (name === 'SWAP') { for (let i = 0; i < s.length; i++) { const bi = (i & bc) ? 1 : 0, bj = (i & bt) ? 1 : 0; if (bi !== bj) { const j = i ^ bc ^ bt; out[i] = s[j]; } } }
+  return out;
+}
+function runOp(s, op) { return op.k === 1 ? apply1(s, op.q, mat(op.g, op.phi)) : apply2(s, op.g, op.c, op.q); }
+function opText(op) {
+  if (op.k === 0) return op.txt;
+  if (op.k === 1) return (['RX', 'RY', 'RZ', 'P'].includes(op.g) ? `${op.g}(${op.phi}°)` : op.g) + ` q${op.q}`;
+  return `${op.g} q${op.c}→q${op.q}`;
 }
 
-// Normalize state vector
-function normalizeState(state) {
-  const norm = Math.sqrt(state.reduce((sum, c) => sum + c.magnitude() ** 2, 0));
-  if (norm === 0) return state;
-  return state.map(c => new Complex(c.real / norm, c.imag / norm));
+// reduced Bloch vector of qubit q
+function bloch(s, q) {
+  const bit = 1 << q; let z = 0, x = 0, y = 0;
+  for (let i = 0; i < s.length; i++) {
+    const p = cabs2(s[i]);
+    z += (i & bit) ? -p : p;
+    if (!(i & bit)) { const a = s[i], b = s[i | bit]; // <σx> = 2 Re(a* b), <σy> = 2 Im(a* b)
+      x += 2 * (a.re * b.re + a.im * b.im); y += 2 * (a.re * b.im - a.im * b.re); }
+  }
+  return { x, y, z };
 }
 
-// Display error in UI
-function displayError(message) {
-  const currentSuffix = currentLang === 'en' ? '-en' : '';
-  const resultsPanel = document.getElementById(`results${currentSuffix}`);
-  if (resultsPanel) {
-    resultsPanel.innerHTML += `<span style="color: red;">ERROR: ${message}</span><br>`;
-    resultsPanel.scrollTop = resultsPanel.scrollHeight;
-    console.error(`UI Error: ${message}`);
-  }
+// deterministic measurement of qubit q with apparatus value lambda (Dok. 230)
+function measureQ(s, q, lam) {
+  const bit = 1 << q; let p0 = 0;
+  for (let i = 0; i < s.length; i++) if (!(i & bit)) p0 += cabs2(s[i]);
+  const z = 2 * p0 - 1;
+  let o = (lam < z) ? 0 : 1;              // A = sgn(z − λ): +1 ↔ |0⟩
+  // boundary λ = z = ±1 (measure zero): the pole without weight cannot be reached
+  if ((o === 0 ? p0 : 1 - p0) <= 1e-15) o = 1 - o;
+  const keep = o === 0 ? p0 : 1 - p0;
+  const nrm = keep > 0 ? 1 / Math.sqrt(keep) : 0;
+  const out = s.map((a, i) => (((i & bit) ? 1 : 0) === o) ? C(a.re * nrm, a.im * nrm) : C(0));
+  return { o, z, state: out };
 }
 
-// Initialize quantum computer
-function initializeQuantumComputer() {
-  console.log(`Initializing quantum computer with ${quantumState.numQubits} qubits`);
-  const currentSuffix = currentLang === 'en' ? '-en' : '';
-  const qubitCount = document.getElementById(`qubit-count${currentSuffix}`);
-  const qubitDisplay = document.getElementById(`qubit-display${currentSuffix}`);
-  if (!qubitCount) {
-    console.error(`Qubit count select not found: qubit-count${currentSuffix}`);
-    displayError(`Qubit count select not found`);
-    return;
+// Halton sequence (deterministic, uniformly distributed); mapped to [-1,1]
+const PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71];
+function halton(i, b) { let f = 1, r = 0; while (i > 0) { f /= b; r += f * (i % b); i = Math.floor(i / b); } return r; }
+const lamH = (k, j) => 2 * halton(k + 1, PRIMES[j]) - 1;
+
+// ---------------------------------------------------------------- UI: register
+function fillSel(id, sel) {
+  const el = document.getElementById(id), cur = el.value;
+  el.innerHTML = '';
+  for (let q = 0; q < n; q++) { const o = document.createElement('option'); o.value = q; o.textContent = 'q' + q; el.appendChild(o); }
+  el.value = (cur !== '' && +cur < n) ? cur : sel;
+}
+function resetReg() {
+  n = +document.getElementById('nq').value;
+  psi = zeroState(n); circuit = [];
+  fillSel('tq', 0); fillSel('cq', n > 1 ? 1 : 0); fillSel('mq', 0);
+  mlog = [['reset_log']]; showLog();
+  render(); updPred();
+}
+function g1(name) {
+  const op = { k: 1, g: name, q: +document.getElementById('tq').value, phi: +document.getElementById('phi').value };
+  psi = runOp(psi, op); circuit.push(op); render(); updPred();
+}
+function g2(name) {
+  const c = +document.getElementById('cq').value, t = +document.getElementById('tq').value;
+  if (c === t || n < 2) return;
+  const op = { k: 2, g: name, c, q: t }; psi = runOp(psi, op); circuit.push(op); render(); updPred();
+}
+function preset(p) {
+  psi = zeroState(n); circuit = [];
+  const add = (op) => { psi = runOp(psi, op); circuit.push(op); };
+  if (p === 'plus') for (let q = 0; q < n; q++) add({ k: 1, g: 'H', q });
+  if (p === 'bell') { if (n < 2) { document.getElementById('nq').value = '2'; resetReg(); } add({ k: 1, g: 'H', q: 0 }); add({ k: 2, g: 'CNOT', c: 0, q: 1 }); }
+  if (p === 'ghz') { if (n < 2) { document.getElementById('nq').value = '3'; resetReg(); } add({ k: 1, g: 'H', q: 0 }); for (let q = 1; q < n; q++) add({ k: 2, g: 'CNOT', c: 0, q }); }
+  if (p === 'tilt') add({ k: 1, g: 'RY', q: 0, phi: 60 });
+  render(); updPred();
+}
+function basisLabel(i) { let s = ''; for (let q = n - 1; q >= 0; q--) s += (i >> q) & 1; return '|' + s + '⟩'; }
+function render() {
+  // qubit cards
+  const qc = document.getElementById('qcards'); qc.innerHTML = '';
+  for (let q = 0; q < n; q++) {
+    const b = bloch(psi, q), r = Math.hypot(b.x, b.y), th = Math.atan2(b.y, b.x) * 180 / Math.PI;
+    const linked = (r * r + b.z * b.z) < 1 - 1e-9;
+    const d = document.createElement('div'); d.className = 'qcard';
+    d.innerHTML = `<b>q${q}</b> <span class="pill">${linked ? T('linked') : T('free')}</span><br>z = ${fmt(b.z)}<br>r = ${fmt(r)}<br>θ = ${r > 1e-9 ? fmt(th, 1) + '°' : '–'}<br>${T('prob')} |0⟩ = ${fmt((1 + b.z) / 2)}`;
+    qc.appendChild(d);
   }
-  if (!qubitDisplay) {
-    console.error(`Qubit display container not found: qubit-display${currentSuffix}`);
-    displayError(`Qubit display container not found`);
-    return;
-  }
-  const computedStyle = window.getComputedStyle(qubitDisplay);
-  console.log(`Qubit display CSS: display=${computedStyle.display}, visibility=${computedStyle.visibility}, opacity=${computedStyle.opacity}`);
-  if (computedStyle.display === 'none' || computedStyle.visibility === 'hidden' || computedStyle.opacity === '0') {
-    console.error(`Qubit display is not visible: qubit-display${currentSuffix}`);
-    displayError(`Qubit display is not visible (check CSS)`);
-  }
-  const numQubits = parseInt(qubitCount.value) || 5;
-  quantumState.numQubits = numQubits;
-  quantumState.qubits = [];
-  for (let i = 0; i < numQubits; i++) {
-    quantumState.qubits.push({
-      state: [new Complex(1 + quantumState.xiParameter), new Complex(0)],
-      fields: [1.0, 0.0], // E_0 = 1, E_1 = 0 for |0⟩
-      phase: 0,
-      superposition: false,
-      t0Corrected: true
-    });
-  }
-  quantumState.energyField = 0;
-  quantumState.t0Corrections = 0;
-  quantumState.entanglement = 0;
-  console.log(`Qubits initialized: ${numQubits}`);
-  const displaySuccess = updateQubitDisplay();
-  if (!displaySuccess) {
-    console.error('Failed to update qubit display during initialization');
-    displayError('Failed to initialize qubit display');
-  }
-  updateQubitOptions();
-  updateStatistics();
-  const msg = currentLang === 'en' ? 
-    `🔄 Authentic T0-Quantum computer initialized with ${numQubits} qubits (ξ=${quantumState.xiParameter.toExponential(1)})` :
-    `🔄 Authentischer T0-Quantencomputer initialisiert mit ${numQubits} Qubits (ξ=${quantumState.xiParameter.toExponential(1)})`;
-  logResult(msg);
+  // state vector
+  let h = `<table><tr><th>${T('basis')}</th><th>${T('amp')}</th><th>|·|²</th><th style="width:35%"></th></tr>`;
+  psi.forEach((a, i) => { const p = cabs2(a); if (p < 1e-12) return;
+    h += `<tr><td class="mono">${basisLabel(i)}</td><td class="mono">${Math.abs(a.im) < 5e-5 ? fmt(a.re) : (Math.abs(a.re) < 5e-5 ? fmt(a.im) + 'i' : fmt(a.re) + (a.im < 0 ? ' − ' : ' + ') + fmt(Math.abs(a.im)) + 'i')}</td><td class="mono">${fmt(p)}</td><td><div class="bar" style="width:${(p * 100).toFixed(1)}%"></div></td></tr>`; });
+  document.getElementById('statevec').innerHTML = h + '</table>';
+  document.getElementById('circ').textContent = circuit.length ? circuit.map(opText).join('\n') : '—';
 }
 
-// Update qubit display
-function updateQubitDisplay() {
-  console.log('Starting updateQubitDisplay');
-  const currentSuffix = currentLang === 'en' ? '-en' : '';
-  const container = document.getElementById(`qubit-display${currentSuffix}`);
-  if (!container) {
-    console.error(`Qubit display container not found: qubit-display${currentSuffix}`);
-    displayError(`Qubit display container not found`);
-    return false;
+// ---------------------------------------------------------------- UI: single measurement
+function syncLam(src) {
+  const a = document.getElementById('lam'), b = document.getElementById('lamr');
+  let v = src === 'num' ? +a.value : +b.value; if (!isFinite(v)) v = 0; v = Math.max(-1, Math.min(1, v));
+  if (src === 'num') b.value = v; else a.value = v.toFixed(3);
+  updPred();
+}
+function updPred() {
+  if (!psi.length) return;
+  const q = +document.getElementById('mq').value || 0, lam = +document.getElementById('lam').value;
+  const z = bloch(psi, q).z, o = (lam < z) ? 0 : 1;
+  document.getElementById('pred').innerHTML = T('pred')(fmt(z), fmt(lam, 3), o);
+  drawAxis(z, lam);
+}
+function drawAxis(z, lam) {
+  const cv = document.getElementById('axis'), g = cv.getContext('2d'), W = cv.width, H = cv.height;
+  g.clearRect(0, 0, W, H);
+  const X = (v) => 30 + (v + 1) / 2 * (W - 60), y = H / 2;
+  g.fillStyle = 'rgba(78,205,196,0.35)'; g.fillRect(X(-1), y - 10, X(z) - X(-1), 20);   // λ < z → |0⟩
+  g.fillStyle = 'rgba(247,183,49,0.30)'; g.fillRect(X(z), y - 10, X(1) - X(z), 20);
+  g.strokeStyle = '#fff'; g.lineWidth = 1; g.beginPath(); g.moveTo(X(-1), y); g.lineTo(X(1), y); g.stroke();
+  g.fillStyle = '#fff'; g.font = '12px Segoe UI'; g.textAlign = 'center';
+  [-1, -0.5, 0, 0.5, 1].forEach(v => { g.fillText(v, X(v), y + 26); });
+  g.fillStyle = '#4ecdc4'; g.fillText('→ |0⟩', (X(-1) + X(z)) / 2, y - 14);
+  g.fillStyle = '#f7b731'; g.fillText('→ |1⟩', (X(z) + X(1)) / 2, y - 14);
+  g.strokeStyle = '#4ecdc4'; g.lineWidth = 3; g.beginPath(); g.moveTo(X(z), y - 16); g.lineTo(X(z), y + 16); g.stroke();
+  g.fillStyle = '#ff6b6b'; g.beginPath(); g.moveTo(X(lam), y + 12); g.lineTo(X(lam) - 6, y + 22); g.lineTo(X(lam) + 6, y + 22); g.fill();
+  g.fillStyle = '#fff'; g.fillText('z', X(z), 12); g.fillStyle = '#ff6b6b'; g.fillText('λ', X(lam), H - 4);
+}
+function measureOne() {
+  const q = +document.getElementById('mq').value, lam = +document.getElementById('lam').value;
+  const r = measureQ(psi, q, lam); psi = r.state;
+  logM(['measured', q, fmt(r.z), fmt(lam, 3), r.o]); circuit.push({ k: 0, txt: `M q${q} (λ=${fmt(lam, 3)}) → ${r.o}` });
+  render(); updPred();
+}
+function measureAllSeq() {
+  const ls = document.getElementById('lamlist').value.split(',').map(v => parseFloat(v)).filter(v => isFinite(v));
+  for (let q = 0; q < n; q++) {
+    const lam = Math.max(-1, Math.min(1, ls.length ? ls[q % ls.length] : 0));
+    const r = measureQ(psi, q, lam); psi = r.state; logM(['measured', q, fmt(r.z), fmt(lam, 3), r.o]);
   }
-  console.log(`Found qubit-display${currentSuffix}, clearing content`);
-  container.innerHTML = '';
-  const computedStyle = window.getComputedStyle(container);
-  console.log(`Qubit container CSS: display=${computedStyle.display}, visibility=${computedStyle.visibility}, opacity=${computedStyle.opacity}`);
-  if (computedStyle.display === 'none' || computedStyle.visibility === 'hidden' || computedStyle.opacity === '0') {
-    console.error(`Qubit container is not visible: qubit-display${currentSuffix}`);
-    displayError(`Qubit container is not visible (check CSS)`);
+  render(); updPred();
+}
+let mlog = [];
+function logM(entry) { mlog.push(entry); showLog(); }
+function showLog() {
+  const el = document.getElementById('mlog');
+  el.textContent = mlog.map(e => { const v = T(e[0]); return typeof v === 'function' ? v(...e.slice(1)) : v; }).join('\n');
+  el.scrollTop = el.scrollHeight;
+}
+
+// ---------------------------------------------------------------- measurement series
+let lastSeries = null;
+function prepared() { let s = zeroState(n); circuit.forEach(op => { if (op.k !== 0) s = runOp(s, op); }); return s; }
+function runSeries() {
+  const K = Math.max(10, Math.min(200000, Math.floor(+document.getElementById('K').value || 2000)));
+  const base = prepared(), counts = new Array(1 << n).fill(0);
+  for (let k = 0; k < K; k++) {
+    let s = base, idx = 0;
+    for (let q = 0; q < n; q++) { const r = measureQ(s, q, lamH(k, q)); s = r.state; idx |= (r.o << q); }
+    counts[idx]++;
   }
-  quantumState.qubits.forEach((qubit, index) => {
-    const qubitElement = document.createElement('div');
-    qubitElement.className = 'qubit';
-    qubitElement.onclick = () => toggleQubit(index);
-    const [e0, e1] = qubit.fields;
-    console.log(`Creating Qubit ${index}: E_0=${e0.toFixed(4)}, E_1=${e1.toFixed(4)}`);
-    if (e0 > 0.99) {
-      qubitElement.classList.add('state-0');
-      qubitElement.innerHTML = `Q${index}<br>|0⟩`;
-    } else if (e1 > 0.99) {
-      qubitElement.classList.add('state-1');
-      qubitElement.innerHTML = `Q${index}<br>|1⟩`;
-    } else {
-      qubitElement.classList.add('state-superposition');
-      qubitElement.innerHTML = `Q${index}<br>⚡T0`;
+  lastSeries = { K, counts, born: base.map(cabs2) };
+  showSeries();
+}
+function showSeries() {
+  if (!lastSeries) return;
+  const { K, counts, born } = lastSeries; let md = 0;
+  let h = `<div class="note">${T('ser_head')(K)}</div><table><tr><th>${T('outcome')}</th><th>${T('count')}</th><th>${T('freq')}</th><th>${T('born')}</th><th style="width:30%"></th></tr>`;
+  counts.forEach((c, i) => { const f = c / K, p = born[i]; if (c === 0 && p < 1e-12) return; md = Math.max(md, Math.abs(f - p));
+    h += `<tr><td class="mono">${basisLabel(i)}</td><td>${c}</td><td class="mono">${fmt(f)}</td><td class="mono">${fmt(p)}</td><td><div class="bar" style="width:${(f * 100).toFixed(1)}%"></div><div class="bar2" style="width:${(p * 100).toFixed(1)}%;margin-top:2px"></div></td></tr>`; });
+  h += `</table><div class="note" style="margin-top:6px">${T('maxdev')(fmt(md))}</div>`;
+  document.getElementById('series').innerHTML = h;
+}
+
+// ---------------------------------------------------------------- Bell / CHSH
+let lastBell = null;
+function bellE(aDeg, bDeg, M) {
+  // Φ+ on 2 qubits; measure qubit A (q0) along angle a, B (q1) along angle b in the x-z plane:
+  // rotate by RY(−angle) so that the measurement axis becomes z, then apply the deterministic rule.
+  let s = zeroState(2); s = apply1(s, 0, mat('H')); s = apply2(s, 'CNOT', 0, 1);
+  s = apply1(s, 0, mat('RY', -aDeg)); s = apply1(s, 1, mat('RY', -bDeg));
+  let sum = 0;
+  for (let i = 0; i < M; i++) {
+    const la = -1 + (2 * i + 1) / M; const rA = measureQ(s, 0, la);
+    for (let j = 0; j < M; j++) {
+      const lb = -1 + (2 * j + 1) / M; const rB = measureQ(rA.state, 1, lb);
+      sum += (rA.o === 0 ? 1 : -1) * (rB.o === 0 ? 1 : -1);
     }
-    container.appendChild(qubitElement);
-    console.log(`Added Qubit ${index} to qubit-display${currentSuffix}`);
-    const addedElement = container.querySelector(`.qubit:nth-child(${index + 1})`);
-    if (addedElement) {
-      console.log(`Qubit ${index} successfully added to DOM`);
-    } else {
-      console.error(`Qubit ${index} not found in DOM after adding`);
-      displayError(`Qubit ${index} failed to render`);
-    }
-  });
-  updateQubitOptions();
-  updateBlochSphere(0);
-  console.log('Finished updateQubitDisplay');
-  return true;
+  }
+  return sum / (M * M);
+}
+function runBell() {
+  const a = +document.getElementById('ba').value, a2 = +document.getElementById('ba2').value,
+        b = +document.getElementById('bb').value, b2 = +document.getElementById('bb2').value;
+  const M = Math.max(10, Math.min(1000, Math.floor(+document.getElementById('bM').value || 200)));
+  const E = [[a, b], [a, b2], [a2, b], [a2, b2]].map(([x, y]) => bellE(x, y, M));
+  const Sdet = Math.abs(E[0] - E[1] + E[2] + E[3]);
+  const rad = (d) => d * Math.PI / 180;
+  const Eqm = (x, y) => Math.cos(rad(x - y));                 // Φ+: E = cos(a − b) for measurements in the x-z plane
+  const Eff = (x, y) => { const d = rad(x - y); return Math.cos(d) * (1 - XI * (d * d / (Math.PI * Math.PI)) / DF); };
+  const Sqm = Math.abs(Eqm(a, b) - Eqm(a, b2) + Eqm(a2, b) + Eqm(a2, b2));
+  const Sff = Math.abs(Eff(a, b) - Eff(a, b2) + Eff(a2, b) + Eff(a2, b2));
+  lastBell = { a, a2, b, b2, M, E, Sdet, Sqm, Sff };
+  showBell();
+}
+function showBell() {
+  if (!lastBell) return;
+  const { a, a2, b, b2, M, E, Sdet, Sqm, Sff } = lastBell;
+  const lab = [`E(${a}°, ${b}°)`, `E(${a}°, ${b2}°)`, `E(${a2}°, ${b}°)`, `E(${a2}°, ${b2}°)`];
+  let h = `<div class="grid"><div><h3>${T('bell_E')}</h3><table>`;
+  E.forEach((e, i) => h += `<tr><td class="mono">${lab[i]}</td><td class="mono">${e.toFixed(5)}</td></tr>`);
+  h += `</table></div><div><h3>S</h3><table>
+    <tr><td>${T('bell_S_det')(0, M)}</td><td class="mono">${Sdet.toFixed(5)}</td></tr>
+    <tr><td>${T('bell_S_qm')}</td><td class="mono">${Sqm.toFixed(6)}</td></tr>
+    <tr><td>${T('bell_S_ff')}</td><td class="mono">${Sff.toFixed(6)}</td></tr>
+    <tr><td>${T('bell_dS')}</td><td class="mono">${(Sqm - Sff).toExponential(2)}</td></tr>
+    <tr><td>${T('bell_loc')}</td><td class="mono">2</td></tr></table>
+    <div class="note" style="margin-top:8px">${T('bell_grid')(M)}</div>
+    <div class="note" style="margin-top:6px">${T('bell_note')}</div></div></div>`;
+  document.getElementById('bellout').innerHTML = h;
 }
 
-function updateQubitOptions() {
-  console.log('Updating qubit options');
-  const currentSuffix = currentLang === 'en' ? '-en' : '';
-  const targetSelect = document.getElementById(`target-qubit${currentSuffix}`);
-  const controlSelect = document.getElementById(`control-qubit${currentSuffix}`);
-  if (targetSelect && controlSelect) {
-    targetSelect.innerHTML = '';
-    controlSelect.innerHTML = '';
-    for (let i = 0; i < quantumState.numQubits; i++) {
-      const option1 = document.createElement('option');
-      option1.value = i;
-      option1.textContent = `Qubit ${i}`;
-      targetSelect.appendChild(option1);
-      const option2 = document.createElement('option');
-      option2.value = i;
-      option2.textContent = `Qubit ${i}`;
-      controlSelect.appendChild(option2);
-    }
-    if (quantumState.numQubits > 1) {
-      controlSelect.selectedIndex = 1;
-    }
-    console.log(`Updated qubit options: ${quantumState.numQubits} qubits`);
-  } else {
-    console.error(`Select elements not found: target-qubit${currentSuffix} or control-qubit${currentSuffix}`);
-    displayError(`Qubit select elements not found`);
-  }
+// ---------------------------------------------------------------- Shor (order finding, deterministic measurement)
+function gcd(a, b) { while (b) { [a, b] = [b, a % b]; } return Math.abs(a); }
+function modpow(b, e, m) { let r = 1; b %= m; while (e > 0) { if (e & 1) r = (r * b) % m; b = (b * b) % m; e >>= 1; } return r; }
+function isPrimePower(N) {
+  for (let p = 2; p <= N; p++) { if (N % p === 0) { let x = N; while (x % p === 0) x /= p; return x === 1; } }
+  return false;
 }
-
-// Toggle qubit state
-function toggleQubit(index) {
-  console.log(`Toggling qubit ${index}`);
-  const qubit = quantumState.qubits[index];
-  const [e0, e1] = qubit.fields;
-  console.log(`Before toggle: Q${index} E_0=${e0.toFixed(4)}, E_1=${e1.toFixed(4)}, State=[${qubit.state[0].toString()}, ${qubit.state[1].toString()}]`);
-  if (e1 < 0.01) {
-    qubit.fields = [0.0, 1.0 * (1 + quantumState.xiParameter)];
-    qubit.state = [new Complex(0), new Complex(1 + quantumState.xiParameter)];
-    const msg = currentLang === 'en' ? 
-      `🔄 T0-Qubit ${index}: |0⟩ → |1⟩` :
-      `🔄 T0-Qubit ${index}: |0⟩ → |1⟩`;
-    logResult(msg);
-  } else {
-    qubit.fields = [1.0 * (1 + quantumState.xiParameter), 0.0];
-    qubit.state = [new Complex(1 + quantumState.xiParameter), new Complex(0)];
-    const msg = currentLang === 'en' ? 
-      `🔄 T0-Qubit ${index}: |1⟩ → |0⟩` :
-      `🔄 T0-Qubit ${index}: |1⟩ → |0⟩`;
-    logResult(msg);
-  }
-  qubit.fields = normalizeFields(qubit.fields[0], qubit.fields[1]);
-  qubit.state = normalizeState(qubit.state);
-  console.log(`After toggle: Q${index} E_0=${qubit.fields[0].toFixed(4)}, E_1=${qubit.fields[1].toFixed(4)}, State=[${qubit.state[0].toString()}, ${qubit.state[1].toString()}]`);
-  quantumState.energyField += quantumState.xiParameter;
-  quantumState.t0Corrections++;
-  updateQubitDisplay();
-  updateBlochSphere(index);
-  updateStatistics();
+function fft(re, im) { // in place, length power of 2
+  const L = re.length;
+  for (let i = 1, j = 0; i < L; i++) { let bit = L >> 1; for (; j & bit; bit >>= 1) j ^= bit; j ^= bit; if (i < j) { [re[i], re[j]] = [re[j], re[i]]; [im[i], im[j]] = [im[j], im[i]]; } }
+  for (let len = 2; len <= L; len <<= 1) {
+    const ang = 2 * Math.PI / len, wr = Math.cos(ang), wi = Math.sin(ang);   // sign +: QFT e^{+2πi xy/Q}
+    for (let i = 0; i < L; i += len) { let cr = 1, ci = 0;
+      for (let k = 0; k < len / 2; k++) {
+        const ur = re[i + k], ui = im[i + k], j = i + k + len / 2;
+        const vr = re[j] * cr - im[j] * ci, vi = re[j] * ci + im[j] * cr;
+        re[i + k] = ur + vr; im[i + k] = ui + vi; re[j] = ur - vr; im[j] = ui - vi;
+        const nr = cr * wr - ci * wi; ci = cr * wi + ci * wr; cr = nr; } } }
 }
-
-// Apply quantum gate using energy fields
-function applyGate(gateName) {
-  console.log(`Applying gate: ${gateName}`);
-  const currentSuffix = currentLang === 'en' ? '-en' : '';
-  const targetSelect = document.getElementById(`target-qubit${currentSuffix}`);
-  if (!targetSelect) {
-    console.error(`Target qubit select not found: target-qubit${currentSuffix}`);
-    displayError(`Target qubit select not found`);
-    return;
+let shorCache = null;
+function shorDist(N, a) {
+  const key = N + ',' + a; if (shorCache && shorCache.key === key) return shorCache;
+  const t = Math.ceil(2 * Math.log2(N)), Q = 1 << t;
+  // counting register in uniform superposition, then |x>|a^x mod N>; the classes of equal f(x) are summed incoherently
+  const cls = new Map();
+  for (let x = 0, v = 1; x < Q; x++) { if (!cls.has(v)) cls.set(v, []); cls.get(v).push(x); v = (v * a) % N; }
+  const P = new Float64Array(Q);
+  for (const xs of cls.values()) {
+    const re = new Float64Array(Q), im = new Float64Array(Q);
+    for (const x of xs) re[x] = 1;
+    fft(re, im);
+    for (let y = 0; y < Q; y++) P[y] += (re[y] * re[y] + im[y] * im[y]) / (Q * Q);
   }
-  const targetIndex = parseInt(targetSelect.value);
-  const qubit = quantumState.qubits[targetIndex];
-  let [e0, e1] = qubit.fields;
-  console.log(`Applying ${gateName} to Q${targetIndex}: E_0=${e0.toFixed(4)}, E_1=${e1.toFixed(4)}, State=[${qubit.state[0].toString()}, ${qubit.state[1].toString()}]`);
-  switch (gateName) {
-    case 'H':
-      e0 = e1 = 0.5 * (1 + quantumState.xiParameter);
-      qubit.state = [
-        new Complex(Math.sqrt(e0)),
-        new Complex(Math.sqrt(e1))
-      ];
-      break;
-    case 'X':
-      [e0, e1] = [e1, e0];
-      qubit.state = [
-        new Complex(Math.sqrt(e0)),
-        new Complex(Math.sqrt(e1))
-      ];
-      break;
-    case 'Y':
-      e0 = e0;
-      e1 = e1;
-      qubit.state = [
-        new Complex(0, -Math.sqrt(e1) * (1 + quantumState.xiParameter)),
-        new Complex(0, Math.sqrt(e0) * (1 + quantumState.xiParameter))
-      ];
-      break;
-    case 'Z':
-      e0 = e0;
-      e1 = e1;
-      qubit.state = [
-        new Complex(Math.sqrt(e0)),
-        new Complex(-Math.sqrt(e1))
-      ];
-      break;
-    case 'S':
-      e0 = e0;
-      e1 = e1;
-      qubit.state = [
-        new Complex(Math.sqrt(e0)),
-        new Complex(0, Math.sqrt(e1) * (1 + quantumState.xiParameter))
-      ];
-      break;
-    case 'T':
-      e0 = e0;
-      e1 = e1;
-      qubit.state = [
-        new Complex(Math.sqrt(e0)),
-        new Complex(Math.cos(Math.PI/4) * Math.sqrt(e1), Math.sin(Math.PI/4) * Math.sqrt(e1) * (1 + quantumState.xiParameter))
-      ];
-      break;
-  }
-  qubit.fields = normalizeFields(e0, e1);
-  qubit.state = normalizeState(qubit.state);
-  console.log(`After ${gateName}: Q${targetIndex} E_0=${qubit.fields[0].toFixed(4)}, E_1=${qubit.fields[1].toFixed(4)}, State=[${qubit.state[0].toString()}, ${qubit.state[1].toString()}]`);
-  quantumState.energyField += quantumState.xiParameter;
-  quantumState.t0Corrections++;
-  updateQubitDisplay();
-  updateBlochSphere(targetIndex);
-  updateStatistics();
-  const msg = currentLang === 'en' ? 
-    `🚪 T0-${gateName} gate applied to qubit ${targetIndex} (field-based)` :
-    `🚪 T0-${gateName} Gatter angewendet auf Qubit ${targetIndex} (feld-basiert)`;
-  logResult(msg);
-  quantumState.circuitHistory.push({
-    gate: `T0-${gateName}`,
-    target: targetIndex,
-    timestamp: Date.now(),
-    xiParameter: quantumState.xiParameter
-  });
+  shorCache = { key, t, Q, P };
+  return shorCache;
 }
-
-// Apply CNOT gate using energy fields
-function applyCNOT() {
-  console.log('Applying CNOT gate');
-  const currentSuffix = currentLang === 'en' ? '-en' : '';
-  const controlSelect = document.getElementById(`control-qubit${currentSuffix}`);
-  const targetSelect = document.getElementById(`target-qubit${currentSuffix}`);
-  if (!controlSelect || !targetSelect) {
-    console.error(`Select elements not found: control-qubit${currentSuffix} or target-qubit${currentSuffix}`);
-    displayError(`CNOT select elements not found`);
-    return;
+// deterministic bit-by-bit measurement of the counting register (most significant bit first), rule A(z, λ)
+function measureRegister(P, t, lamVec) {
+  let lo = 0, size = P.length, y = 0;
+  for (let b = 0; b < t; b++) {
+    const half = size >> 1;
+    let p0 = 0, pt = 0;
+    for (let i = lo; i < lo + size; i++) { pt += P[i]; if (i < lo + half) p0 += P[i]; }
+    const z = pt > 0 ? 2 * (p0 / pt) - 1 : 1;
+    let o = (lamVec[b] < z) ? 0 : 1;
+    if ((o === 0 ? p0 : pt - p0) <= 1e-15 * Math.max(pt, 1e-300)) o = 1 - o;   // boundary λ = z = ±1
+    if (o === 1) lo += half;
+    size = half; y = (y << 1) | o;
   }
-  const controlIndex = parseInt(controlSelect.value);
-  const targetIndex = parseInt(targetSelect.value);
-  if (controlIndex === targetIndex) {
-    const msg = currentLang === 'en' ? 
-      '❌ Control and target qubits must be different!' :
-      '❌ Kontroll- und Ziel-Qubit müssen unterschiedlich sein!';
-    logResult(msg);
-    console.error('CNOT error: Control and target qubits are the same');
-    return;
-  }
-  const controlQubit = quantumState.qubits[controlIndex];
-  const targetQubit = quantumState.qubits[targetIndex];
-  const [ce0, ce1] = controlQubit.fields;
-  let [te0, te1] = targetQubit.fields;
-  console.log(`Before CNOT: Control Q${controlIndex} E_0=${ce0.toFixed(4)}, E_1=${ce1.toFixed(4)}, Target Q${targetIndex} E_0=${te0.toFixed(4)}, E_1=${te1.toFixed(4)}`);
-  if (ce1 > 0.5) {
-    [te0, te1] = [te1, te0];
-  }
-  targetQubit.fields = normalizeFields(te0, te1);
-  controlQubit.fields = normalizeFields(ce0, ce1);
-  targetQubit.state = [
-    new Complex(Math.sqrt(te0)),
-    new Complex(Math.sqrt(te1))
-  ];
-  controlQubit.state = [
-    new Complex(Math.sqrt(ce0)),
-    new Complex(Math.sqrt(ce1))
-  ];
-  targetQubit.state = normalizeState(targetQubit.state);
-  controlQubit.state = normalizeState(controlQubit.state);
-  console.log(`After CNOT: Control Q${controlIndex} E_0=${controlQubit.fields[0].toFixed(4)}, E_1=${controlQubit.fields[1].toFixed(4)}, State=[${controlQubit.state[0].toString()}, ${controlQubit.state[1].toString()}]`);
-  console.log(`After CNOT: Target Q${targetIndex} E_0=${targetQubit.fields[0].toFixed(4)}, E_1=${targetQubit.fields[1].toFixed(4)}, State=[${targetQubit.state[0].toString()}, ${targetQubit.state[1].toString()}]`);
-  quantumState.entanglement = Math.min(100, quantumState.entanglement + 25 * (1 + quantumState.xiParameter));
-  quantumState.energyField += quantumState.xiParameter * 2;
-  quantumState.t0Corrections++;
-  updateQubitDisplay();
-  updateStatistics();
-  const msg = currentLang === 'en' ? 
-    `🔗 T0-CNOT gate: Control Q${controlIndex} → Target Q${targetIndex} (field-based)` :
-    `🔗 T0-CNOT Gatter: Kontroll Q${controlIndex} → Ziel Q${targetIndex} (feld-basiert)`;
-  logResult(msg);
-  quantumState.circuitHistory.push({
-    gate: 'T0-CNOT',
-    control: controlIndex,
-    target: targetIndex,
-    timestamp: Date.now(),
-    xiParameter: quantumState.xiParameter
-  });
+  return y;
 }
-
-// Apply superposition to all qubits
-function applySuperposition() {
-  console.log('Applying superposition to all qubits');
-  quantumState.qubits.forEach((qubit, index) => {
-    console.log(`Applying H to Q${index}: Before: E_0=${qubit.fields[0].toFixed(4)}, E_1=${qubit.fields[1].toFixed(4)}, State=[${qubit.state[0].toString()}, ${qubit.state[1].toString()}]`);
-    qubit.fields = [0.5 * (1 + quantumState.xiParameter), 0.5 * (1 + quantumState.xiParameter)];
-    qubit.fields = normalizeFields(qubit.fields[0], qubit.fields[1]);
-    qubit.state = [
-      new Complex(Math.sqrt(qubit.fields[0])),
-      new Complex(Math.sqrt(qubit.fields[1]))
-    ];
-    qubit.state = normalizeState(qubit.state);
-    qubit.superposition = true;
-    console.log(`After H: Q${index} E_0=${qubit.fields[0].toFixed(4)}, E_1=${qubit.fields[1].toFixed(4)}, State=[${qubit.state[0].toString()}, ${qubit.state[1].toString()}]`);
-    quantumState.energyField += quantumState.xiParameter;
-  });
-  quantumState.t0Corrections += quantumState.numQubits;
-  updateQubitDisplay();
-  updateStatistics();
-  const msg = currentLang === 'en' ? 
-    '⚡ T0-enhanced superposition applied to all qubits (field-based)' :
-    '⚡ T0-verstärkte Superposition auf alle Qubits angewendet (feld-basiert)';
-  logResult(msg);
-}
-
-// Measure all qubits
-function measureAll() {
-  console.log('Measuring all qubits');
-  const results = [];
-  quantumState.qubits.forEach((qubit, index) => {
-    const [e0, e1] = qubit.fields;
-    console.log(`Measuring Q${index}: E_0=${e0.toFixed(4)}, E_1=${e1.toFixed(4)}`);
-    const state = e0 > e1 ? 0 : 1;
-    qubit.fields = state === 0 ? [1.0 * (1 + quantumState.xiParameter), 0.0] : [0.0, 1.0 * (1 + quantumState.xiParameter)];
-    qubit.fields = normalizeFields(qubit.fields[0], qubit.fields[1]);
-    qubit.state = state === 0 ? [new Complex(1 + quantumState.xiParameter), new Complex(0)] : [new Complex(0), new Complex(1 + quantumState.xiParameter)];
-    qubit.state = normalizeState(qubit.state);
-    qubit.superposition = false;
-    results.push(state);
-    console.log(`Measured Q${index}: |${state}⟩, E_0=${qubit.fields[0].toFixed(4)}, E_1=${qubit.fields[1].toFixed(4)}, State=[${qubit.state[0].toString()}, ${qubit.state[1].toString()}]`);
-  });
-  quantumState.entanglement = 0;
-  updateQubitDisplay();
-  updateStatistics();
-  const binaryString = results.join('');
-  const decimalValue = parseInt(binaryString, 2) || 0;
-  const msg = currentLang === 'en' ? 
-    `📊 T0-Measurement: |${binaryString}⟩ = ${decimalValue} (field-based)` :
-    `📊 T0-Messung: |${binaryString}⟩ = ${decimalValue} (feld-basiert)`;
-  logResult(msg);
-  quantumState.measurementHistory.push({
-    results: results,
-    binary: binaryString,
-    decimal: decimalValue,
-    timestamp: Date.now(),
-    t0Enhanced: true
-  });
-}
-
-// Reset all qubits
-function resetAllQubits() {
-  console.log('Resetting all qubits');
-  quantumState.qubits.forEach(qubit => {
-    qubit.fields = [1.0 * (1 + quantumState.xiParameter), 0.0];
-    qubit.state = [new Complex(1 + quantumState.xiParameter), new Complex(0)];
-    qubit.phase = 0;
-    qubit.superposition = false;
-    qubit.t0Corrected = true;
-  });
-  quantumState.entanglement = 0;
-  quantumState.energyField = 0;
-  quantumState.t0Corrections = 0;
-  updateQubitDisplay();
-  updateStatistics();
-  const msg = currentLang === 'en' ? 
-    '🔄 All qubits reset to T0-corrected |0⟩ state (field-based)' :
-    '🔄 Alle Qubits zurückgesetzt zu T0-korrigiertem |0⟩ Zustand (feld-basiert)';
-  logResult(msg);
-}
-
-// Update Bloch sphere visualization
-function updateBlochSphere(qubitIndex) {
-  console.log(`Updating Bloch sphere for Q${qubitIndex}`);
-  const currentSuffix = currentLang === 'en' ? '-en' : '';
-  const qubit = quantumState.qubits[qubitIndex];
-  const e1 = qubit.fields[1];
-  const phase = Math.atan2(qubit.state[1].imag, qubit.state[1].real);
-  const vector = document.getElementById(`bloch-vector${currentSuffix}`);
-  if (vector) {
-    const angle = e1 * 180;
-    vector.style.transform = `translateX(-50%) rotate(${angle}deg)`;
-    vector.style.background = `hsl(${phase * 180 / Math.PI + 180}, 80%, 60%)`;
-    console.log(`Bloch sphere updated: angle=${angle}, phase=${phase}`);
-  } else {
-    console.error(`Bloch vector not found: pattern-vector${currentSuffix}`);
-    displayError(`Bloch vector not found`);
+function convergentR(y, Q, N) { // continued fraction of y/Q, largest denominator < N
+  let h1 = 1, h0 = 0, k1 = 0, k0 = 1, num = y, den = Q, r = 0;
+  while (den) {
+    const q = Math.floor(num / den); [num, den] = [den, num - q * den];
+    const h2 = q * h1 + h0, k2 = q * k1 + k0;
+    if (k2 >= N) break;
+    r = k2; h0 = h1; h1 = h2; k0 = k1; k1 = k2;
   }
+  return r;
 }
-
-// Update statistics
-function updateStatistics() {
-  console.log('Updating statistics');
-  const currentSuffix = currentLang === 'en' ? '-en' : '';
-  const activeQubitsEl = document.getElementById(`active-qubits${currentSuffix}`);
-  const quantumStatesEl = document.getElementById(`quantum-states${currentSuffix}`);
-  const entanglementEl = document.getElementById(`entanglement${currentSuffix}`);
-  const successRateEl = document.getElementById(`success-rate${currentSuffix}`);
-  if (activeQubitsEl) activeQubitsEl.textContent = quantumState.numQubits;
-  if (quantumStatesEl) quantumStatesEl.textContent = Math.pow(2, quantumState.numQubits);
-  if (entanglementEl) entanglementEl.textContent = Math.round(quantumState.entanglement) + '%';
-  if (quantumState.measurementHistory.length > 0 && successRateEl) {
-    successRateEl.textContent = '100%';
-  }
-  console.log(`Statistics updated: Qubits=${quantumState.numQubits}, Entanglement=${quantumState.entanglement}%`);
+function shorRun(N, a, k) {
+  const d = shorDist(N, a);
+  const lamVec = []; for (let b = 0; b < d.t; b++) lamVec.push(lamH(k, b % PRIMES.length) * 1); // independent bases per bit
+  const y = measureRegister(d.P, d.t, lamVec);
+  const res = { y, lamVec, Q: d.Q, t: d.t };
+  if (y === 0) { res.status = 'y0'; return res; }
+  let r = convergentR(y, d.Q, N);
+  // allow small multiples of the convergent denominator (standard post-processing)
+  let rr = 0; for (let m = 1; r && m * r < N + 1 && m <= 4; m++) if (modpow(a, m * r, N) === 1) { rr = m * r; break; }
+  res.r = r; res.rr = rr;
+  if (!rr) { res.status = 'nor'; res.v = r ? modpow(a, r, N) : '–'; return res; }
+  if (rr % 2) { res.status = 'odd'; return res; }
+  const h = modpow(a, rr / 2, N);
+  if (h === N - 1) { res.status = 'triv'; return res; }
+  const p = gcd(h - 1, N), q = gcd(h + 1, N);
+  const f = (p > 1 && p < N) ? p : q;
+  if (f > 1 && f < N) { res.status = 'ok'; res.p = f; res.q = N / f; } else res.status = 'triv';
+  return res;
 }
-
-// T0 Quantum Simulator
-class AuthenticT0QuantumSimulator {
-  constructor(N) {
-    this.N = N;
-    this.bits = Math.ceil(Math.log2(N));
-    this.xi = 1.3333e-4;
-  }
-
-  modPow(base, exp, mod) {
-    let result = 1;
-    base = base % mod;
-    while (exp > 0) {
-      if (exp % 2 === 1) result = (result * base) % mod;
-      exp = Math.floor(exp / 2);
-      base = (base * base) % mod;
-    }
-    return result;
-  }
-
-  gcd(a, b) {
-    while (b !== 0) [a, b] = [b, a % b];
-    return a;
-  }
-
-  factor() {
-    const a = 2;
-    const maxPeriod = Math.min(this.N, 2000);
-    for (let r = 1; r < maxPeriod; r++) {
-      if (this.modPow(a, r, this.N) === 1) {
-        if (r % 2 === 0) {
-          const correction = 1 + this.xi;
-          const mid = this.modPow(a, Math.floor(r / 2), this.N);
-          let c1 = this.gcd(mid - 1, this.N);
-          let c2 = this.gcd(mid + 1, this.N);
-          c1 = Math.floor(c1 * correction);
-          c2 = Math.floor(c2 * correction);
-          for (const c of [c1, c2]) {
-            if (1 < c && c < this.N && this.N % c === 0) {
-              return [c, Math.floor(this.N / c)];
-            }
-          }
-        }
+let lastShor = null;
+function shorInputs() {
+  const N = Math.floor(+document.getElementById('sN').value), a = Math.floor(+document.getElementById('sA').value), k = Math.max(0, Math.floor(+document.getElementById('sK').value || 0));
+  return { N, a, k };
+}
+function shorValid(N) { return Number.isInteger(N) && N >= 15 && N <= 127 && N % 2 === 1 && !isPrimePower(N); }
+function runShor() {
+  const { N, a, k } = shorInputs(); lastShor = { mode: 'one', N, a, k }; showShor();
+}
+function runShorSeries() {
+  const { N, a, k } = shorInputs(); lastShor = { mode: 'ser', N, a, k }; showShor();
+}
+function showShor() {
+  if (!lastShor) return;
+  const { mode, N, a, k } = lastShor, log = document.getElementById('shorlog');
+  if (!shorValid(N) || a < 2 || a >= N) { log.textContent = T('shor_bad'); clearShorCanvas(); return; }
+  const g = gcd(a, N);
+  if (g > 1) { log.textContent = T('shor_gcd')(a, N, g); clearShorCanvas(); return; }
+  const d = shorDist(N, a);
+  let out = [T('shor_setup')(N, a, d.t, d.Q)];
+  let r0 = 0; for (let r = 1; r <= N; r++) if (modpow(a, r, N) === 1) { r0 = r; break; }
+  if (mode === 'one') {
+    const R = shorRun(N, a, k);
+    out.push(T('shor_lam')(k, R.lamVec.map(v => v.toFixed(3)).join(', ')));
+    out.push(T('shor_y')(R.y, R.Q));
+    if (R.status === 'y0') out.push(T('shor_y0'));
+    else {
+      out.push(T('shor_cf')(R.rr || R.r || '–'));
+      if (R.status === 'nor') out.push(T('shor_r_no')(a, R.r || '–', N, R.v));
+      else {
+        out.push(T('shor_r_ok')(a, R.rr, N));
+        if (R.status === 'odd') out.push(T('shor_odd'));
+        else if (R.status === 'triv') out.push(T('shor_triv'));
+        else out.push(T('shor_fac')(N, R.p, R.q));
       }
     }
-    return [];
-  }
-
-  createT0BellState() {
-    const probs = {
-      '00': 0.5 * (1 + this.xi),
-      '11': 0.5 * (1 + this.xi)
-    };
-    const norm = Math.sqrt(probs['00']**2 + probs['11']**2);
-    probs['00'] /= norm;
-    probs['11'] /= norm;
-    return {
-      probabilities: probs,
-      fidelity: probs['00'] + probs['11'],
-      t0Enhanced: true,
-      xiParameter: this.xi,
-      hardwareValidated: true
-    };
-  }
-
-  groverSearch3Qubit(targetState) {
-    let amplitudes = Array(8).fill(1/Math.sqrt(8) * (1 + this.xi));
-    const targetIndex = parseInt(targetState, 2);
-    amplitudes[targetIndex] *= -1 * (1 + this.xi);
-    const mean = amplitudes.reduce((sum, amp) => sum + amp, 0) / 8;
-    amplitudes = amplitudes.map(amp => 2 * mean - amp);
-    const norm = Math.sqrt(amplitudes.reduce((sum, amp) => sum + amp * amp, 0));
-    amplitudes = amplitudes.map(amp => amp / norm);
-    const targetProb = amplitudes[targetIndex] * amplitudes[targetIndex];
-    return {
-      targetState: targetState,
-      targetProbability: targetProb,
-      success: targetProb > 0.6,
-      t0Enhanced: true,
-      xiParameter: this.xi
-    };
-  }
-}
-
-// Run Shor algorithm
-function runShorT0Algorithm() {
-  console.log('Starting Shor T0 Algorithm');
-  const currentSuffix = currentLang === 'en' ? '-en' : '';
-  const shorNumberInput = document.getElementById(`shor-number${currentSuffix}`);
-  if (!shorNumberInput) {
-    console.error(`Shor number input not found: shor-number${currentSuffix}`);
-    displayError(`Shor number input not found`);
-    return;
-  }
-  const N = parseInt(shorNumberInput.value);
-  const msg = currentLang === 'en' ? 
-    `🚀 Starting Authentic T0 Shor Algorithm for N=${N}` :
-    `🚀 Starte Authentischen T0 Shor Algorithmus für N=${N}`;
-  logResult(msg);
-  updateProgress(1, 25, currentLang === 'en' ? 'T0-Initialization...' : 'T0-Initialisierung...');
-  setTimeout(() => {
-    const initMsg = currentLang === 'en' ? 
-      `📊 T0-Framework: ξ-parameter active (${quantumState.xiParameter.toExponential(1)})` :
-      `📊 T0-Framework: ξ-Parameter aktiv (${quantumState.xiParameter.toExponential(1)})`;
-    logResult(initMsg);
-    updateProgress(2, 50, currentLang === 'en' ? 'T0-Enhanced Factorization...' : 'T0-verstärkte Faktorisierung...');
-    setTimeout(() => {
-      const t0Solver = new AuthenticT0QuantumSimulator(N);
-      const startTime = performance.now();
-      const factors = t0Solver.factor();
-      const elapsed = performance.now() - startTime;
-      if (factors.length >= 2) {
-        const factorMsg = currentLang === 'en' ? 
-          `🔍 Authentic T0 successful: Period finding with ξ-corrections` :
-          `🔍 Authentischer T0 erfolgreich: Periodensuche mit ξ-Korrekturen`;
-        logResult(factorMsg);
-        updateProgress(3, 75, currentLang === 'en' ? 'T0-Result Processing...' : 'T0-Ergebnis-Verarbeitung...');
-        setTimeout(() => {
-          const resultMsg = currentLang === 'en' ? 
-            `⚛️ Authentic T0-Shor Result: ${factors[0]} × ${factors[1]} = ${N}` :
-            `⚛️ Authentisches T0-Shor Ergebnis: ${factors[0]} × ${factors[1]} = ${N}`;
-          logResult(resultMsg);
-          updateProgress(4, 100, currentLang === 'en' ? 'Hardware Validation...' : 'Hardware-Validierung...');
-          setTimeout(() => {
-            if (factors[0] * factors[1] === N) {
-              const successMsg = currentLang === 'en' ? 
-                `🎉 AUTHENTIC T0-SUCCESS! Deterministic factorization: ${factors[0]} × ${factors[1]} = ${N}` :
-                `🎉 AUTHENTISCHER T0-ERFOLG! Deterministische Faktorisierung: ${factors[0]} × ${factors[1]} = ${N}`;
-              logResult(successMsg);
-              const detailsMsg = currentLang === 'en' ? 
-                `🤖 Method: Authentic T0-Theory (ξ=${t0Solver.xi.toExponential(1)})` :
-                `🤖 Methode: Authentische T0-Theorie (ξ=${t0Solver.xi.toExponential(1)})`;
-              logResult(detailsMsg);
-              const timeMsg = currentLang === 'en' ? 
-                `⚡ Execution time: ${elapsed.toFixed(1)}ms` :
-                `⚡ Ausführungszeit: ${elapsed.toFixed(1)}ms`;
-              logResult(timeMsg);
-              updateSuccessRate(100);
-            } else {
-              const failMsg = currentLang === 'en' ? 
-                `❌ T0-Verification failed` :
-                `❌ T0-Verifikation fehlgeschlagen`;
-              logResult(failMsg);
-              updateSuccessRate(0);
-            }
-            setTimeout(() => resetProgress(), 3000);
-          }, 1500);
-        }, 1500);
-      } else {
-        updateProgress(3, 100, currentLang === 'en' ? 'Prime Analysis...' : 'Primzahl-Analyse...');
-        const trialResult = trialDivision(N);
-        const isPrime = trialResult.length === 1 && trialResult[0] === N;
-        if (isPrime) {
-          const primeMsg = currentLang === 'en' ? 
-            `🔍 T0-Analysis: N=${N} is PRIME (no factors exist)` :
-            `🔍 T0-Analyse: N=${N} ist PRIMZAHL (keine Faktoren vorhanden)`;
-          logResult(primeMsg);
-          const verificationMsg = currentLang === 'en' ? 
-            `✅ Verified: ${N} is PRIME NUMBER` :
-            `✅ Bestätigt: ${N} ist PRIMZAHL`;
-          logResult(verificationMsg);
-          updateSuccessRate(100);
-        } else {
-          const failMsg = currentLang === 'en' ? 
-            `❌ Authentic T0-factorization failed for N=${N}` :
-            `❌ Authentische T0-Faktorisierung fehlgeschlagen für N=${N}`;
-          logResult(failMsg);
-          const tryMsg = currentLang === 'en' ? 
-            `💡 Try different parameters or smaller numbers` :
-            `💡 Versuchen Sie andere Parameter oder kleinere Zahlen`;
-          logResult(tryMsg);
-          updateSuccessRate(0);
-        }
-        setTimeout(() => resetProgress(), 3000);
-      }
-    }, 1500);
-  }, 1000);
-}
-
-// Pure Quantum T0
-function runPureQuantumT0() {
-  console.log('Starting Pure Quantum T0');
-  const currentSuffix = currentLang === 'en' ? '-en' : '';
-  const shorNumberInput = document.getElementById(`shor-number${currentSuffix}`);
-  if (!shorNumberInput) {
-    console.error(`Shor number input not found: shor-number${currentSuffix}`);
-    displayError(`Shor number input not found`);
-    return;
-  }
-  const N = parseInt(shorNumberInput.value);
-  const msg = currentLang === 'en' ? 
-    `⚛️ Starting Pure Quantum T0 for N=${N}` :
-    `⚛️ Starte Pure Quantum T0 für N=${N}`;
-  logResult(msg);
-  const start = performance.now();
-  const t0Solver = new AuthenticT0QuantumSimulator(N);
-  const factors = t0Solver.factor();
-  const elapsed = performance.now() - start;
-  if (factors.length >= 2) {
-    const successMsg = currentLang === 'en' ? 
-      `✅ Pure T0 SUCCESS: ${factors[0]} × ${factors[1]} = ${N} (${elapsed.toFixed(1)}ms)` :
-      `✅ Pure T0 ERFOLG: ${factors[0]} × ${factors[1]} = ${N} (${elapsed.toFixed(1)}ms)`;
-    logResult(successMsg);
-    const detailsMsg = currentLang === 'en' ? 
-      `🎯 T0-Bits required: ${t0Solver.bits}, ξ=${t0Solver.xi.toExponential(1)}` :
-      `🎯 T0-Bits benötigt: ${t0Solver.bits}, ξ=${t0Solver.xi.toExponential(1)}`;
-    logResult(detailsMsg);
-    updateSuccessRate(100);
+    drawShor(d, R.y);
   } else {
-    const failMsg = currentLang === 'en' ? 
-      `❌ Pure T0 failed for N=${N} (${elapsed.toFixed(1)}ms)` :
-      `❌ Pure T0 fehlgeschlagen für N=${N} (${elapsed.toFixed(1)}ms)`;
-    logResult(failMsg);
-    updateSuccessRate(0);
+    let ok = 0; for (let i = 0; i < 100; i++) if (shorRun(N, a, k + i).status === 'ok') ok++;
+    out.push(T('shor_ser')(100, ok, r0));
+    drawShor(d, null);
   }
+  log.textContent = out.join('\n');
+}
+function clearShorCanvas() { const cv = document.getElementById('shorc'); cv.getContext('2d').clearRect(0, 0, cv.width, cv.height); }
+function drawShor(d, ymark) {
+  const cv = document.getElementById('shorc'), g = cv.getContext('2d'), W = cv.width, H = cv.height;
+  g.clearRect(0, 0, W, H);
+  let mx = 0; for (const p of d.P) mx = Math.max(mx, p);
+  const pad = 26, w = (W - 2 * pad) / d.Q;
+  g.fillStyle = '#4ecdc4';
+  for (let y = 0; y < d.Q; y++) { const h = d.P[y] / mx * (H - 2 * pad); if (h > 0.3) g.fillRect(pad + y * w, H - pad - h, Math.max(1, w), h); }
+  if (ymark !== null) { g.strokeStyle = '#ff6b6b'; g.lineWidth = 2; g.beginPath(); g.moveTo(pad + (ymark + 0.5) * w, pad - 6); g.lineTo(pad + (ymark + 0.5) * w, H - pad); g.stroke(); }
+  g.fillStyle = '#fff'; g.font = '12px Segoe UI'; g.textAlign = 'left'; g.fillText(T('shor_dist'), pad, 14);
+  g.textAlign = 'center'; g.fillText('0', pad, H - 8); g.fillText(String(d.Q - 1), W - pad, H - 8); g.fillText('y', W / 2, H - 8);
 }
 
-// Advanced T0 Framework
-function runAdvancedT0() {
-  console.log('Starting Advanced T0 Framework');
-  const currentSuffix = currentLang === 'en' ? '-en' : '';
-  const shorNumberInput = document.getElementById(`shor-number${currentSuffix}`);
-  if (!shorNumberInput) {
-    console.error(`Shor number input not found: shor-number${currentSuffix}`);
-    displayError(`Shor number input not found`);
-    return;
-  }
-  const N = parseInt(shorNumberInput.value);
-  const msg = currentLang === 'en' ? 
-    `🧠 Starting Advanced T0 Framework for N=${N} (field-based)` :
-    `🧠 Starte Advanced T0-Framework für N=${N} (feld-basiert)`;
-  logResult(msg);
-  const t0Solver = new AuthenticT0QuantumSimulator(N);
-  const bellResult = t0Solver.createT0BellState();
-  const bellMsg = currentLang === 'en' ? 
-    `🔗 T0-Bell State: Fidelity=${bellResult.fidelity.toFixed(6)}` :
-    `🔗 T0-Bell-Zustand: Fidelity=${bellResult.fidelity.toFixed(6)}`;
-  logResult(bellMsg);
-  const groverResult = t0Solver.groverSearch3Qubit('101');
-  const groverMsg = currentLang === 'en' ? 
-    `🔍 T0-Grover Search: P(|101⟩)=${groverResult.targetProbability.toFixed(4)} ${groverResult.success ? '✅' : '❌'}` :
-    `🔍 T0-Grover-Suche: P(|101⟩)=${groverResult.targetProbability.toFixed(4)} ${groverResult.success ? '✅' : '❌'}`;
-  logResult(groverMsg);
-  const start = performance.now();
-  const factors = t0Solver.factor();
-  const elapsed = performance.now() - start;
-  if (factors.length >= 2) {
-    const successMsg = currentLang === 'en' ? 
-      `✅ Advanced T0 SUCCESS: ${factors[0]} × ${factors[1]} = ${N}` :
-      `✅ Advanced T0 ERFOLG: ${factors[0]} × ${factors[1]} = ${N}`;
-    logResult(successMsg);
-    const frameworkMsg = currentLang === 'en' ? 
-      `🧲 Full T0 validation: Bell ✅, Grover ${groverResult.success ? '✅' : '❌'}, Shor ✅` :
-      `🧲 Vollständige T0-Validierung: Bell ✅, Grover ${groverResult.success ? '✅' : '❌'}, Shor ✅`;
-    logResult(frameworkMsg);
-    const timeMsg = currentLang === 'en' ? 
-      `⚡ T0-Execution time: ${elapsed.toFixed(1)}ms` :
-      `⚡ T0-Ausführungszeit: ${elapsed.toFixed(1)}ms`;
-    logResult(timeMsg);
-    updateSuccessRate(100);
-  } else {
-    const failMsg = currentLang === 'en' ? 
-      `❌ Advanced T0 failed for N=${N} (${elapsed.toFixed(1)}ms)` :
-      `❌ Advanced T0 fehlgeschlagen für N=${N} (${elapsed.toFixed(1)}ms)`;
-    logResult(failMsg);
-    const frameworkMsg = currentLang === 'en' ? 
-      `🧲 Partial T0 validation: Bell ✅, Grover ${groverResult.success ? '✅' : '❌'}, Shor ❌` :
-      `🧲 Teilweise T0-Validierung: Bell ✅, Grover ${groverResult.success ? '✅' : '❌'}, Shor ❌`;
-    logResult(frameworkMsg);
-    updateSuccessRate(0);
-  }
-}
+function rerunOutputs() { showLog(); showSeries(); showBell(); showShor(); }
 
-// Algorithm comparison
-function runComparisonTest() {
-  console.log('Starting Algorithm Comparison');
-  const currentSuffix = currentLang === 'en' ? '-en' : '';
-  const shorNumberInput = document.getElementById(`shor-number${currentSuffix}`);
-  if (!shorNumberInput) {
-    console.error(`Shor number input not found: shor-number${currentSuffix}`);
-    displayError(`Shor number input not found`);
-    return;
-  }
-  const N = parseInt(shorNumberInput.value);
-  const msg = currentLang === 'en' ? 
-    `📊 Starting T0 vs Standard QM comparison for N=${N}` :
-    `📊 Starte T0 vs Standard QM Vergleich für N=${N}`;
-  logResult(msg);
-  const startT0 = performance.now();
-  const t0Solver = new AuthenticT0QuantumSimulator(N);
-  const t0Factors = t0Solver.factor();
-  const t0Time = performance.now() - startT0;
-  const startQM = performance.now();
-  const qmFactors = trialDivision(N);
-  const qmTime = performance.now() - startQM;
-  const t0Success = t0Factors.length >= 2 && t0Factors[0] * t0Factors[1] === N;
-  const qmSuccess = qmFactors.length >= 2 && qmFactors[0] * qmFactors[1] === N;
-  const t0Msg = currentLang === 'en' ? 
-    `⚛️ T0 Result: ${t0Success ? `${t0Factors[0]} × ${t0Factors[1]} = ${N}` : 'Failed'} (${t0Time.toFixed(1)}ms)` :
-    `⚛️ T0 Ergebnis: ${t0Success ? `${t0Factors[0]} × ${t0Factors[1]} = ${N}` : 'Fehlgeschlagen'} (${t0Time.toFixed(1)}ms)`;
-  logResult(t0Msg);
-  const qmMsg = currentLang === 'en' ? 
-    `🔢 Standard QM Result: ${qmSuccess ? `${qmFactors[0]} × ${qmFactors[1]} = ${N}` : 'Failed'} (${qmTime.toFixed(1)}ms)` :
-    `🔢 Standard QM Ergebnis: ${qmSuccess ? `${qmFactors[0]} × ${qmFactors[1]} = ${N}` : 'Fehlgeschlagen'} (${qmTime.toFixed(1)}ms)`;
-  logResult(qmMsg);
-  const comparisonMsg = currentLang === 'en' ? 
-    `📈 Performance: T0 ${t0Time.toFixed(1)}ms vs Standard QM ${qmTime.toFixed(1)}ms` :
-    `📈 Leistung: T0 ${t0Time.toFixed(1)}ms vs Standard QM ${qmTime.toFixed(1)}ms`;
-  logResult(comparisonMsg);
-  const winnerMsg = currentLang === 'en' ? 
-    `🏆 Winner: ${t0Time < qmTime && t0Success ? 'T0 Framework' : 'Standard QM'} (${((qmTime - t0Time) / qmTime * 100).toFixed(1)}% faster)` :
-    `🏆 Gewinner: ${t0Time < qmTime && t0Success ? 'T0-Framework' : 'Standard QM'} (${((qmTime - t0Time) / qmTime * 100).toFixed(1)}% schneller)`;
-  logResult(winnerMsg);
-  updateSuccessRate(t0Success ? 100 : 0);
-}
-
-// Trial division for comparison
-function trialDivision(N) {
-  console.log(`Running trial division for N=${N}`);
-  const factors = [];
-  for (let i = 2; i <= Math.sqrt(N); i++) {
-    if (N % i === 0) {
-      factors.push(i);
-      factors.push(N / i);
-      console.log(`Found factors: ${factors}`);
-      return factors;
-    }
-  }
-  console.log(`No factors found, returning [${N}]`);
-  return [N];
-}
-
-// Log results
-function logResult(message) {
-  console.log(`Logging result: ${message}`);
-  const currentSuffix = currentLang === 'en' ? '-en' : '';
-  const resultsPanel = document.getElementById(`results${currentSuffix}`);
-  if (resultsPanel) {
-    resultsPanel.innerHTML += message + '<br>';
-    resultsPanel.scrollTop = resultsPanel.scrollHeight;
-    console.log(`Result logged to results${currentSuffix}`);
-  } else {
-    console.error(`Results panel not found: results${currentSuffix}`);
-    displayError(`Results panel not found`);
-  }
-}
-
-// Update progress bars
-function updateProgress(phase, percentage, status) {
-  console.log(`Updating progress: Phase ${phase}, ${percentage}%, ${status}`);
-  const currentSuffix = currentLang === 'en' ? '-en' : '';
-  const progressBar = document.getElementById(`progress-${phase}${currentSuffix}`);
-  const statusEl = document.getElementById(`phase-${phase}-status${currentSuffix}`);
-  if (progressBar) {
-    progressBar.style.width = `${percentage}%`;
-    console.log(`Progress bar updated: progress-${phase}${currentSuffix}`);
-  } else {
-    console.error(`Progress bar not found: progress-${phase}${currentSuffix}`);
-    displayError(`Progress bar not found for phase ${phase}`);
-  }
-  if (statusEl) {
-    statusEl.textContent = status;
-    console.log(`Status updated: phase-${phase}-status${currentSuffix}`);
-  } else {
-    console.error(`Status element not found: phase-${phase}-status${currentSuffix}`);
-    displayError(`Status element not found for phase ${phase}`);
-  }
-}
-
-// Reset progress bars
-function resetProgress() {
-  console.log('Resetting progress bars');
-  const currentSuffix = currentLang === 'en' ? '-en' : '';
-  for (let i = 1; i <= 4; i++) {
-    const progressBar = document.getElementById(`progress-${i}${currentSuffix}`);
-    const statusEl = document.getElementById(`phase-${i}-status${currentSuffix}`);
-    if (progressBar) {
-      progressBar.style.width = '0%';
-      console.log(`Reset progress bar: progress-${i}${currentSuffix}`);
-    } else {
-      console.error(`Progress bar not found: progress-${i}${currentSuffix}`);
-      displayError(`Progress bar not found for phase ${i}`);
-    }
-    if (statusEl) {
-      statusEl.textContent = currentLang === 'en' ? 
-        i === 1 ? 'Ready' : 'Waiting' :
-        i === 1 ? 'Bereit' : 'Wartend';
-      console.log(`Reset status: phase-${i}-status${currentSuffix}`);
-    } else {
-      console.error(`Status element not found: phase-${i}-status${currentSuffix}`);
-      displayError(`Status element not found for phase ${i}`);
-    }
-  }
-}
-
-// Update success rate
-function updateSuccessRate(rate) {
-  console.log(`Updating success rate: ${rate}%`);
-  const currentSuffix = currentLang === 'en' ? '-en' : '';
-  const successRateEl = document.getElementById(`success-rate${currentSuffix}`);
-  if (successRateEl) {
-    successRateEl.textContent = rate + '%';
-    console.log(`Success rate updated: ${rate}%`);
-  } else {
-    console.error(`Success rate element not found: success-rate${currentSuffix}`);
-    displayError(`Success rate element not found`);
-  }
-}
-
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM fully loaded at ' + new Date().toLocaleString());
-  const germanContent = document.getElementById('german-content');
-  const englishContent = document.getElementById('english-content');
-  const qubitDisplay = document.getElementById('qubit-display');
-  const qubitDisplayEn = document.getElementById('qubit-display-en');
-  if (!germanContent || !englishContent || !qubitDisplay || !qubitDisplayEn) {
-    console.error('Critical elements missing: german-content, english-content, qubit-display, or qubit-display-en');
-    displayError('Critical elements missing: Check HTML structure');
-    return;
-  }
-  const computedStyle = window.getComputedStyle(qubitDisplay);
-  const computedStyleEn = window.getComputedStyle(qubitDisplayEn);
-  console.log(`Initial qubit-display CSS: display=${computedStyle.display}, visibility=${computedStyle.visibility}, opacity=${computedStyle.opacity}`);
-  console.log(`Initial qubit-display-en CSS: display=${computedStyleEn.display}, visibility=${computedStyleEn.visibility}, opacity=${computedStyleEn.opacity}`);
-  setTimeout(() => {
-    console.log('Initializing quantum computer after DOM load');
-    initializeQuantumComputer();
-  }, 200);
-  const suffix = currentLang === 'en' ? '-en' : '';
-  const qubitCountSelect = document.getElementById(`qubit-count${suffix}`);
-  const qubitCountSelectEn = document.getElementById('qubit-count-en');
-  if (qubitCountSelect) {
-    qubitCountSelect.addEventListener('change', () => {
-      console.log(`Qubit count changed: ${qubitCountSelect.value}`);
-      syncLanguageControls(currentLang);
-      initializeQuantumComputer();
-    });
-  } else {
-    console.error(`Qubit count select not found: qubit-count${suffix}`);
-    displayError(`Qubit count select not found`);
-  }
-  if (qubitCountSelectEn) {
-    qubitCountSelectEn.addEventListener('change', () => {
-      console.log(`Qubit count changed (EN): ${qubitCountSelectEn.value}`);
-      syncLanguageControls('en');
-      initializeQuantumComputer();
-    });
-  } else {
-    console.error('Qubit count select not found: qubit-count-en');
-    displayError('Qubit count select (EN) not found');
-  }
-});
+// ---------------------------------------------------------------- start
+resetReg();
+setLang('de');
 </script>
 </body>
 </html>

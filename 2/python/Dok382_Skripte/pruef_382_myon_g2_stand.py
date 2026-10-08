@@ -47,19 +47,19 @@ check("Spielraum (95 %) für einen Zusatzbeitrag: 38 ± 2*63 -> etwa -88 ... +16
 print("\n3. Absolutwert nach Dok. 018 (Rev. 12) gegen das Weltmittel")
 f = 7500.0
 S3 = 19.739
-k_geom = 2.224
+k_geom = 2.2236
 Kfrak = 1 - 100 * 4 / 30000
 k_eff = k_geom / Kfrak**1.5
 a_e = S3 / f / k_eff
 da_mu = 4 * math.pi / f**(5/3)
 a_mu = a_e + da_mu
 check("Delta a_fraktal = 4 pi / 7500^(5/3) = 4,373e-6", abs(da_mu - 4.373e-6) < 5e-9, f"{da_mu:.4e}")
-check("a_e(korr) = 1,1598e-3 (Dok. 018)", abs(a_e - 1.1598e-3) < 2e-7, f"{a_e:.5e}")
-check("a_mu(korr) = 1,1642e-3 (Dok. 018)", abs(a_mu - 1.1642e-3) < 2e-7, f"{a_mu:.5e}")
+check("a_e(korr) = 1,1600e-3 (Dok. 018)", abs(a_e - 1.1600e-3) < 2e-7, f"{a_e:.5e}")
+check("a_mu(korr) = 1,1644e-3 (Dok. 018)", abs(a_mu - 1.1644e-3) < 2e-7, f"{a_mu:.5e}")
 rel = (a_mu - exp_c*E11) / (exp_c*E11)
-check("Abweichung vom Weltmittel etwa -0,15 %", -0.0016 < rel < -0.0014, f"{100*rel:.3f} %")
+check("Abweichung vom Weltmittel etwa -0,13 %", -0.0014 < rel < -0.0012, f"{100*rel:.3f} %")
 absdiff = abs(a_mu - exp_c*E11) / E11
-check("Absolut etwa 170 000e-11 -- rund 700-mal größer als die frühere Anomalie von 251e-11",
+check("Absolut etwa 150 000e-11 -- rund 600-mal größer als die frühere Anomalie von 251e-11",
       500 < absdiff / d21_c < 900, f"{absdiff:.0f}e-11, Faktor {absdiff/d21_c:.0f}")
 check("in Einheiten der Messunsicherheit (14,5e-11) weit über 1000 sigma: kein Präzisionsvergleich",
       absdiff / exp_s > 1000, f"{absdiff/exp_s:.0f}")
@@ -82,9 +82,9 @@ a_tau = a_e_exp + bridge * d_mue
 check("a_tau-Vorhersage mit Stand 2025: 1,2811e-3 (Dok. 018: 1,282e-3 mit gerundetem a_e)",
       abs(a_tau - 1.2811e-3) < 5e-7, f"{a_tau:.5e}")
 a_tau_direct = a_e + 4*math.pi/f**(4/3)
-check("direkte Absolutformel a_tau(korr) = a_e(korr) + 4 pi/f^(4/3) = 1,2454e-3 (Dok. 018 Tabelle)",
-      abs(a_tau_direct - 1.2454e-3) < 2e-7, f"{a_tau_direct:.5e}")
-check("verankerter Wert (Brücke + Messwerte) liegt 2,9 % über dem direkten -- der Korpus verwendet den verankerten",
+check("direkte Absolutformel a_tau(korr) = a_e(korr) + 4 pi/f^(4/3) = 1,2456e-3 (Dok. 018 Tabelle)",
+      abs(a_tau_direct - 1.2456e-3) < 2e-7, f"{a_tau_direct:.5e}")
+check("verankerter Wert (Brücke + Messwerte) liegt 2,8 % über dem direkten -- der Korpus verwendet den verankerten",
       0.025 < a_tau/a_tau_direct - 1 < 0.032, f"{100*(a_tau/a_tau_direct-1):.2f} %")
 a_tau_sm = 1.17721e-3
 check("Unterschied zum SM-Wert a_tau = 1,1772e-3 etwa 1,04e-4", abs((a_tau - a_tau_sm) - 1.04e-4) < 3e-6,

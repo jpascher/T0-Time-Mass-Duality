@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>T0 Period Finding - Rational Arithmetic</title>
+  <title>Order Finding - Rational Arithmetic</title>
   <style>
     * {
       margin: 0;
@@ -300,92 +300,95 @@
   <div class="container">
     <div class="header">
       <a href="index.html" class="nav-back">← Back to Hub</a>
-      <h1>⚡ T0 Period Finding</h1>
-      <p>Factorization through rational arithmetic and period evaluation</p>
+      <h1>⚡ Order Finding (Period Finding)</h1>
+      <p>Factorization via the order of a modulo N, as in the classical part of Shor's algorithm</p>
     </div>
-    
+
     <div class="key-principle">
-      <div class="principle-title">The T0 Principle</div>
+      <div class="principle-title">The Principle</div>
       <div class="principle-description">
-        Period finding solves the factorization problem through mathematical period recognition: 
-        Find a period r such that a^r ≡ 1 (mod N), then extract factors via x = a^(r/2)
+        We look for the order r of a modulo N, i.e. the smallest r with a^r ≡ 1 (mod N).
+        If r is even and a^(r/2) ≢ −1 (mod N), gcd(a^(r/2) ± 1, N) yields a proper divisor of N.
+        This is the classical part of Shor's algorithm; a distinguishable T0 method does not exist (R65).
       </div>
     </div>
-    
+
     <div class="content-section">
-      <h2>🧠 Core Principles of the T0 Method</h2>
-      
+      <h2>🧠 Ideas behind the implementation</h2>
+
       <div class="approach-grid">
         <div class="approach-card">
           <div class="approach-number">1</div>
-          <div class="approach-title">Everything is a Ratio</div>
+          <div class="approach-title">Exact fractions</div>
           <div class="approach-text">
-            Numbers are not absolute, but relative to each other. 
-            ξ-parameters as 1/50 or 1/100 instead of 1e-5, π as 355/113.
+            The scoring uses Python's Fraction: σ as a fraction (e.g. 1/10), π as 355/113.
+            This makes it bit-for-bit reproducible on every platform (R65).
           </div>
         </div>
-        
+
         <div class="approach-card">
           <div class="approach-number">2</div>
-          <div class="approach-title">N is the Unit</div>
+          <div class="approach-title">N as reference</div>
           <div class="approach-text">
-            N is not a number - it is the unit. Factors are represented as 
-            p/N and q/N, everything is relative to N.
+            The presentation writes factors as shares p/N and q/N.
+            This changes nothing in the computation, which works with integers modulo N.
           </div>
         </div>
-        
+
         <div class="approach-card">
           <div class="approach-number">3</div>
-          <div class="approach-title">Period Evaluation</div>
+          <div class="approach-title">Period scoring</div>
           <div class="approach-text">
-            Ratio-based score instead of exponential function. Mathematical 
-            harmony through exact rational arithmetic.
+            Each period r receives the score 1/(1 + (ω−π)²/(4σ)) with ω = 2π/r.
+            It decreases strictly for r &gt; 2 and cannot shift the choice of the order (R63).
           </div>
         </div>
       </div>
     </div>
-    
+
     <div class="content-section">
-      <h2>⚙️ Adaptive ξ-Strategies</h2>
-      <p>T0 uses different ξ-values for different number types:</p>
-      
+      <h2>⚙️ Grid parameter σ</h2>
+      <p>The Python library <code>rsa/factorization_benchmark_library.py</code> assigns a σ value to each number category (in the code it is called <code>xi</code>). It is not the FFGFT parameter ξ = 4/30000 (R75). The code determines the category by trial division up to 1000; for all test numbers N is therefore already factorized before σ is chosen (R63).</p>
+
       <div class="xi-strategies">
         <div class="xi-card xi-twin">
-          <div class="xi-value">1/50</div>
-          <div>Twin Prime</div>
-          <div class="xi-label">Optimized for twin primes</div>
+          <div class="xi-value">1/10</div>
+          <div>All categories</div>
+          <div class="xi-label">twin, cousin, near and distant prime pairs, special cases, default</div>
         </div>
-        
+
         <div class="xi-card xi-universal">
-          <div class="xi-value">1/100</div>
-          <div>Universal</div>
-          <div class="xi-label">Works for all semiprimes</div>
+          <div class="xi-value">1/15</div>
+          <div>Large numbers</div>
+          <div class="xi-label">above 16 bits, unless another category applies</div>
         </div>
-        
+
         <div class="xi-card xi-medium">
-          <div class="xi-value">1/1000</div>
-          <div>Medium Size</div>
-          <div class="xi-label">For larger numbers</div>
+          <div class="xi-value">1/100</div>
+          <div>Comparison variant</div>
+          <div class="xi-label">t0_original_universal; same result as 1/10</div>
         </div>
-        
+
         <div class="xi-card xi-special">
-          <div class="xi-value">1/42</div>
-          <div>Special Cases</div>
-          <div class="xi-label">Special mathematical constants</div>
+          <div class="xi-value">≤ 1/1000</div>
+          <div>Control values</div>
+          <div class="xi-label">the threshold 1/1000 rejects periods; the hit rate drops</div>
         </div>
       </div>
+
+      <p style="margin-top: 15px;">Recomputed with the library on 20 semiprimes from 15 to 19043: σ = 1/10, 1/15, 1/42, 1/50, 1/100 and 10⁶ give the same 19 factorizations. σ = 1/1000 and σ = 4/30000 give only 5, all of them from the gcd with one of the bases 2, 3, 5, 7. In the range used the scoring therefore does not filter; where it filters, it lowers the hit rate (R63).</p>
     </div>
-    
+
     <div class="content-section">
       <h2>📊 Functionality and Results</h2>
-      
+
       <table class="results-table">
         <thead>
           <tr>
             <th>N</th>
             <th>Factors</th>
             <th>p/q Ratio</th>
-            <th>Time (s)</th>
+            <th>Path in the code</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -394,124 +397,116 @@
             <td>15</td>
             <td>3 × 5</td>
             <td class="ratio-value">3/5 ≈ 0.600</td>
-            <td class="time-value">0.0006</td>
+            <td class="time-value">gcd(3, N) = 3</td>
             <td class="success-icon">✓</td>
           </tr>
           <tr>
             <td>21</td>
             <td>3 × 7</td>
             <td class="ratio-value">3/7 ≈ 0.429</td>
-            <td class="time-value">0.0011</td>
+            <td class="time-value">gcd(3, N) = 3</td>
             <td class="success-icon">✓</td>
           </tr>
           <tr>
             <td>77</td>
             <td>7 × 11</td>
             <td class="ratio-value">7/11 ≈ 0.636</td>
-            <td class="time-value">0.0009</td>
+            <td class="time-value">gcd(7, N) = 7</td>
             <td class="success-icon">✓</td>
           </tr>
           <tr>
             <td>143</td>
             <td>11 × 13</td>
             <td class="ratio-value">11/13 ≈ 0.846</td>
-            <td class="time-value">0.0004</td>
+            <td class="time-value">order r = 60 for base 2</td>
             <td class="success-icon">✓</td>
           </tr>
           <tr>
             <td>323</td>
             <td>17 × 19</td>
             <td class="ratio-value">17/19 ≈ 0.895</td>
-            <td class="time-value">0.0015</td>
+            <td class="time-value">order r = 72 for base 2</td>
             <td class="success-icon">✓</td>
           </tr>
         </tbody>
       </table>
-      
-      <p><strong>Average:</strong> 0.0025s per number | <strong>Success:</strong> depends on whether the order lies within the search bound</p>
+
+      <p><strong>Success:</strong> depends on whether one of the bases 2, 3, 5, 7 has an even order r &lt; min(N, 2000) that yields a proper divisor. Of the 20 semiprimes above, 19043 = 137 × 139 fails because all orders lie above the search bound. Run times depend on the computer and are not given here.</p>
     </div>
-    
+
     <div class="content-section">
       <h2>🧮 Mathematical Formulation</h2>
-      
+
       <div class="formula-section">
-        <div class="formula-title">Original T0 Formula:</div>
-        <div class="formula-content">R(r) = exp(-((ω-π)²)/(4|ξ|))</div>
-        
-        <div class="formula-title">Rational T0 Implementation:</div>
+        <div class="formula-title">Scoring in the Python code (Lorentzian form, no effect on the result, R63):</div>
+        <div class="formula-content">R(r) = 1/(1 + (ω−π)²/(4σ)),&nbsp;&nbsp; ω = 2π/r</div>
+
+        <div class="formula-title">Scoring in the HTML tools under 2/html/ (Gaussian form):</div>
         <div class="formula-content">
-          ω = 2π/r as exact ratio<br>
-          Score = 1/(1 + |exponent|) - only ratios!
+          R(r) = exp(−(ω−π)²/(4σ))<br>
+          Both forms peak at r = 2 and decrease strictly for larger r; they do not select the order (R63).
         </div>
       </div>
-      
+
       <div class="algorithm-box">
-def _calculate_period_evaluation_rational(self, r, N):
-  # ω = 2π/r as EXACT ratio
-  omega = Fraction(2, 1) * self.pi_ratio / Fraction(r, 1)
-  
-  # Difference ω - π as EXACT ratio 
-  diff = omega - self.pi_ratio
-  
-  # Everything stays exact - not a single rounding error!
+def _calculate_resonance_with_optimized_xi(self, r, xi):
+  # xi is the grid parameter σ, not the FFGFT ξ (R75)
+  omega = Fraction(2, 1) * self.pi_fraction / Fraction(r, 1)  # ω = 2π/r, π ≈ 355/113
+  diff = omega - self.pi_fraction
   diff_squared = diff * diff
-  denominator = Fraction(4, 1) * self.xi_ratio
+  denominator = Fraction(4, 1) * xi
   exponent = -diff_squared / denominator
-  
-  # Score = 1/(1 + |exponent|) - only ratios!
   score = Fraction(1, 1) / (Fraction(1, 1) + abs(exponent))
   return score
+
+# Use: the first period r with a^r ≡ 1 (mod N) is accepted
+# as soon as score &gt; 1/1000; for σ = 1/10 this holds for every r (R63).
       </div>
     </div>
-    
+
     <div class="insight-box">
-      <h3>🎵 Musical Consonance = Mathematical Harmony</h3>
-      <p>T0 recognizes the same ratios that also sound "good" musically:</p>
+      <h3>🎵 Musical Naming of Factor Ratios</h3>
+      <p>The ratio of the factors found can be named musically (see <a href="harmonic-factorization-en.html">Harmonic Classification</a>); for order finding it plays no role:</p>
       <ul style="margin-top: 15px; padding-left: 20px;">
-        <li><strong>Perfect Fifth (3:2)</strong> → p/q ≈ 1.5 → Good T0 performance</li>
-        <li><strong>Major Third (5:4)</strong> → p/q ≈ 1.25 → Good T0 performance</li>
-        <li><strong>Golden Ratio (φ:1)</strong> → p/q ≈ 1.618 → Natural harmony</li>
-        <li><strong>Tritone (√2:1)</strong> → p/q ≈ 1.414 → Poor T0 performance (dissonant)</li>
+        <li><strong>Perfect Fifth (3:2)</strong> → p/q ≈ 1.5</li>
+        <li><strong>Major Third (5:4)</strong> → p/q ≈ 1.25</li>
+        <li><strong>Golden Ratio (φ:1)</strong> → p/q ≈ 1.618</li>
+        <li><strong>Tritone (√2:1)</strong> → p/q ≈ 1.414</li>
       </ul>
     </div>
-    
-    <div class="content-section">
-      <h2>🔧 Why T0 Computes with Ratios</h2>
-      
-      <div class="comparison-section">
-        <h3>The Rounding Error Problem</h3>
-        <p>Classical algorithms often fail due to tiny inaccuracies:</p>
-        
-        <div class="algorithm-box" style="margin: 15px 0;">
-# Classical - ERROR-PRONE:
-evaluation1 = exp(-((2*3.14159/r - 3.14159)**2)/(4*0.00001))
-evaluation2 = exp(-((2*3.14160/r - 3.14160)**2)/(4*0.00001))
-# evaluation1 ≠ evaluation2 although mathematically equal!
 
-# T0 - EXACT:
-evaluation1 = calculate_with_ratios(Fraction(355,113))
-evaluation2 = calculate_with_ratios(Fraction(355,113)) 
-# evaluation1 == evaluation2 ALWAYS! ✓
-        </div>
-      </div>
-      
-      <p><strong>Deterministic Results:</strong> With ratios, T0 is 100% reproducible on any hardware, with any compiler, with any math library.</p>
-    </div>
-    
     <div class="content-section">
-      <h2>🎯 Conclusion of T0 Period Finding</h2>
-      
-      <div class="key-principle">
-        <div class="principle-title">The Fundamental Insight</div>
-        <div class="principle-description">
-          "Never compute with inaccurate decimal numbers - always use exact ratios!"<br><br>
-          This ratio mathematics makes T0: 100% reproducible, 
-          free from rounding errors, hardware-independent and deterministically functional.
+      <h2>🔧 Why the Code Computes with Fractions</h2>
+
+      <div class="comparison-section">
+        <h3>Reproducibility of the score</h3>
+        <p>Floating-point arithmetic rounds at every step; the last digits of a score can depend on the platform and the maths library. With Fraction the code computes without rounding:</p>
+
+        <div class="algorithm-box" style="margin: 15px 0;">
+# Floating point: rounding at every step
+score = 1 / (1 + (2*math.pi/r - math.pi)**2 / (4*0.1))
+
+# Fraction: exact fractions, bit-for-bit reproducible
+pi = Fraction(355, 113)
+score = 1 / (1 + (2*pi/r - pi)**2 / (4*Fraction(1, 10)))
         </div>
       </div>
-      
-      <p>T0 works because it implements the same fundamental ordering principle of nature 
-      that also governs atomic structures, molecular vibrations, crystal lattices and harmonic oscillators.</p>
+
+      <p><strong>Reproducibility:</strong> With Fraction the score is bit-for-bit identical on any hardware (R65). π itself is approximated by 355/113. This has no influence on the factors found, because order finding computes with integers anyway.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>🎯 Conclusion</h2>
+
+      <div class="key-principle">
+        <div class="principle-title">The Core</div>
+        <div class="principle-description">
+          The factors come from order finding, i.e. from elementary number theory: Euler's theorem and gcd extraction as in Shor.<br><br>
+          Scoring and fraction arithmetic make the output reproducible but do not change the result (R63).
+        </div>
+      </div>
+
+      <p>This is not an FFGFT factorization method of its own (R65).</p>
     </div>
   </div>
 </body>

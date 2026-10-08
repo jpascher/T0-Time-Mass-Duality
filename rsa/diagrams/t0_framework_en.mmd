@@ -1,42 +1,68 @@
 flowchart TD
-    A[Input: N = p × q] --> B{Number Analysis}
-    B --> C[Twin Prime ξ=1/10]
-    B --> D[Cousin Prime ξ=1/10]
-    B --> E[Universal ξ=1/10]
-    B --> F[Large Numbers ξ=1/15]
-    
-    C --> G[T0 Generator]
-    D --> G
-    E --> G
-    F --> G
-    
-    G --> H[GCD Check]
-    H --> I{Factor Found?}
-    I -->|Yes| J[SUCCESS]
-    I -->|No| K[Period Search]
-    K --> L{Resonance?}
-    L -->|Yes| M[Extract Factor]
-    L -->|No| N[Next Period]
-    N --> K
-    M --> O{Valid?}
-    O -->|Yes| J
-    O -->|No| P[Timeout Check]
-    P --> K
-    
-    style A fill:#e1f5fe
-    style J fill:#c8e6c9
-    
-    style A fill:#e1f5fe
-    style W fill:#c8e6c9
-    style Y fill:#ffcdd2
-    style Z fill:#f3e5f5
-    style L fill:#fff3e0
-    style Q fill:#e8f5e8
-    style R fill:#c8e6c9
-    style D fill:#e8f5e8
-    style E fill:#e8f5e8
-    style F fill:#e8f5e8
-    style G fill:#e8f5e8
-    style I fill:#e8f5e8
-    style K fill:#e8f5e8
-    style J fill:#fff3e0
+  A[Input: N] --> B{Library}
+  B -->|factorization_benchmark_library| C[Order Finding]
+  B -->|optimized_harmonic_lib| D[Harmonic Classification]
+
+  %% Order finding
+  C --> E{"Category by trial division up to 1000"}
+  E --> F[Twin Prime σ=1/10]
+  E --> G[Cousin Prime σ=1/10]
+  E --> H[Universal σ=1/10]
+  E --> I[Large Numbers σ=1/15]
+  F --> J["Bases a = 2, 3, 5, 7"]
+  G --> J
+  H --> J
+  I --> J
+  J --> K[GCD Check]
+  K --> L{Divisor Found?}
+  L -->|Yes| M[Factors Found]
+  L -->|No| N["Next r with a^r ≡ 1 mod N"]
+  N --> O{"Score above 1/1000? always for σ = 1/10"}
+  O -->|Yes| P["gcd of a^(r/2) ± 1 and N"]
+  O -->|No| Q[Next Period]
+  Q --> N
+  P --> R{Proper Divisor?}
+  R -->|Yes| M
+  R -->|No| S["Next base or no result"]
+
+  %% Harmonic classification
+  D --> T[Factors p, q by trial division]
+  T --> U[Calculate Ratio]
+  U --> V[Octave Reduction]
+  V --> W{Optimizations Active?}
+  W -->|Yes| X[Cache Check Frequent Ratios]
+  W -->|No| Y[Hierarchical Search without Optimization]
+  X -->|Cache Hit| Z[Immediate Assignment]
+  X -->|Cache Miss| AA[Level Prediction]
+  AA --> BB[Bounds Search over All Levels]
+  BB -->|Hit| CC[Assignment from Bounds Search]
+  BB -->|No Hit| DD[Hierarchical Search]
+  DD --> EE{Level 1: BASIS}
+  EE -->|3:2, 5:4, 4:3| FF[Classical Harmonies]
+  EE -->|No Match| GG{Level 2: EXTENDED}
+  GG -->|11:8, 13:8, 7:4| HH[Jazz Harmonies]
+  GG -->|No Match| II{Level 3: COMPLEX}
+  II -->|29:16, 31:16| JJ[Spectral Music]
+  II -->|No Match| KK{Level 4: ULTRA}
+  KK -->|37:32, 61:32| LL[Xenharmonic Ratios]
+  KK -->|No Match| MM[No Target Ratio within Tolerance]
+
+  Y --> EE
+
+  %% Outputs
+  Z --> NN[Interval Name of the Factor Ratio]
+  CC --> NN
+  FF --> NN
+  HH --> NN
+  JJ --> NN
+  LL --> NN
+
+  M --> OO[Result: Factors or Interval Name]
+  NN --> OO
+
+  style A fill:#e1f5fe
+  style OO fill:#c8e6c9
+  style M fill:#c8e6c9
+  style NN fill:#e8f5e8
+  style MM fill:#ffcdd2
+  style S fill:#ffcdd2

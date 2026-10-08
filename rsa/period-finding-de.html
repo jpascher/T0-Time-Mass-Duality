@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>T0 Periodenfindung - Rationale Arithmetik</title>
+  <title>Ordnungssuche - Rationale Arithmetik</title>
   <style>
     * {
       margin: 0;
@@ -300,92 +300,95 @@
   <div class="container">
     <div class="header">
       <a href="index.html" class="nav-back">← Zurück zum Hub</a>
-      <h1>⚡ T0 Periodenfindung</h1>
-      <p>Faktorisierung durch rationale Arithmetik und Periodenbewertung</p>
+      <h1>⚡ Ordnungssuche (Periodenfindung)</h1>
+      <p>Faktorisierung über die Ordnung von a modulo N, wie im klassischen Teil von Shors Algorithmus</p>
     </div>
-    
+
     <div class="key-principle">
-      <div class="principle-title">Das T0-Prinzip</div>
+      <div class="principle-title">Das Prinzip</div>
       <div class="principle-description">
-        Periodenfindung löst das Faktorisierungsproblem durch mathematische Periodenerkennung: 
-        Finde eine Periode r, sodass a^r ≡ 1 (mod N), dann extrahiere Faktoren über x = a^(r/2)
+        Gesucht ist die Ordnung r von a modulo N, also das kleinste r mit a^r ≡ 1 (mod N).
+        Ist r gerade und a^(r/2) ≢ −1 (mod N), liefert ggT(a^(r/2) ± 1, N) einen echten Teiler von N.
+        Das ist der klassische Teil von Shors Algorithmus; ein davon unterscheidbares T0-Verfahren gibt es nicht (R65).
       </div>
     </div>
-    
+
     <div class="content-section">
-      <h2>🧠 Kernprinzipien der T0-Methode</h2>
-      
+      <h2>🧠 Grundgedanken der Implementierung</h2>
+
       <div class="approach-grid">
         <div class="approach-card">
           <div class="approach-number">1</div>
-          <div class="approach-title">Alles ist ein Verhältnis</div>
+          <div class="approach-title">Exakte Brüche</div>
           <div class="approach-text">
-            Zahlen sind nicht absolut, sondern relativ zueinander. 
-            ξ-Parameter als 1/50 oder 1/100 statt 1e-5, π als 355/113.
+            Die Bewertung rechnet mit Python-Fraction: σ als Bruch (z. B. 1/10), π als 355/113.
+            Dadurch ist sie auf jeder Plattform bitgenau reproduzierbar (R65).
           </div>
         </div>
-        
+
         <div class="approach-card">
           <div class="approach-number">2</div>
-          <div class="approach-title">N ist die Einheit</div>
+          <div class="approach-title">N als Bezugsgröße</div>
           <div class="approach-text">
-            N ist keine Zahl - es ist die Einheit. Faktoren werden als 
-            p/N und q/N dargestellt, alles ist relativ zu N.
+            Die Darstellung schreibt Faktoren als Anteile p/N und q/N.
+            An der Rechnung ändert das nichts; sie arbeitet mit ganzen Zahlen modulo N.
           </div>
         </div>
-        
+
         <div class="approach-card">
           <div class="approach-number">3</div>
           <div class="approach-title">Periodenbewertung</div>
           <div class="approach-text">
-            Verhältnis-Score statt Exponentialfunktion. Mathematische 
-            Harmonie durch exakte rationale Arithmetik.
+            Jede Periode r erhält die Bewertung 1/(1 + (ω−π)²/(4σ)) mit ω = 2π/r.
+            Sie fällt für r &gt; 2 streng monoton und kann die Wahl der Ordnung nicht verschieben (R63).
           </div>
         </div>
       </div>
     </div>
-    
+
     <div class="content-section">
-      <h2>⚙️ Adaptive ξ-Strategien</h2>
-      <p>T0 verwendet verschiedene ξ-Werte für verschiedene Zahlentypen:</p>
-      
+      <h2>⚙️ Rasterparameter σ</h2>
+      <p>Die Python-Bibliothek <code>rsa/factorization_benchmark_library.py</code> ordnet jeder Zahlkategorie einen σ-Wert zu (im Code heißt er <code>xi</code>). Er ist nicht der FFGFT-Parameter ξ = 4/30000 (R75). Die Kategorie bestimmt der Code per Probedivision bis 1000; damit ist N bei allen Testzahlen schon zerlegt, bevor σ gewählt wird (R63).</p>
+
       <div class="xi-strategies">
         <div class="xi-card xi-twin">
-          <div class="xi-value">1/50</div>
-          <div>Twin Prime</div>
-          <div class="xi-label">Optimiert für Primzwillinge</div>
+          <div class="xi-value">1/10</div>
+          <div>Alle Kategorien</div>
+          <div class="xi-label">Zwillings-, Cousin-, nahe und entfernte Primzahlpaare, Spezialfälle, Standard</div>
         </div>
-        
+
         <div class="xi-card xi-universal">
-          <div class="xi-value">1/100</div>
-          <div>Universal</div>
-          <div class="xi-label">Funktioniert für alle Semiprimes</div>
+          <div class="xi-value">1/15</div>
+          <div>Große Zahlen</div>
+          <div class="xi-label">über 16 Bit, sofern keine andere Kategorie greift</div>
         </div>
-        
+
         <div class="xi-card xi-medium">
-          <div class="xi-value">1/1000</div>
-          <div>Medium Size</div>
-          <div class="xi-label">Für größere Zahlen</div>
+          <div class="xi-value">1/100</div>
+          <div>Vergleichsvariante</div>
+          <div class="xi-label">t0_original_universal; gleiches Ergebnis wie 1/10</div>
         </div>
-        
+
         <div class="xi-card xi-special">
-          <div class="xi-value">1/42</div>
-          <div>Special Cases</div>
-          <div class="xi-label">Spezielle mathematische Konstanten</div>
+          <div class="xi-value">≤ 1/1000</div>
+          <div>Kontrollwerte</div>
+          <div class="xi-label">der Schwellwert 1/1000 verwirft Perioden; die Trefferquote sinkt</div>
         </div>
       </div>
+
+      <p style="margin-top: 15px;">Nachgerechnet mit der Bibliothek an 20 Halbprimzahlen von 15 bis 19043: σ = 1/10, 1/15, 1/42, 1/50, 1/100 und 10⁶ liefern dieselben 19 Zerlegungen. σ = 1/1000 und σ = 4/30000 liefern nur 5, und diese stammen alle aus dem ggT mit einer der Basen 2, 3, 5, 7. Im verwendeten Bereich filtert die Bewertung also nicht; wo sie filtert, senkt sie die Trefferquote (R63).</p>
     </div>
-    
+
     <div class="content-section">
       <h2>📊 Funktionsweise und Ergebnisse</h2>
-      
+
       <table class="results-table">
         <thead>
           <tr>
             <th>N</th>
             <th>Faktoren</th>
             <th>p/q Verhältnis</th>
-            <th>Zeit (s)</th>
+            <th>Weg im Code</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -394,124 +397,116 @@
             <td>15</td>
             <td>3 × 5</td>
             <td class="ratio-value">3/5 ≈ 0.600</td>
-            <td class="time-value">0.0006</td>
+            <td class="time-value">ggT(3, N) = 3</td>
             <td class="success-icon">✓</td>
           </tr>
           <tr>
             <td>21</td>
             <td>3 × 7</td>
             <td class="ratio-value">3/7 ≈ 0.429</td>
-            <td class="time-value">0.0011</td>
+            <td class="time-value">ggT(3, N) = 3</td>
             <td class="success-icon">✓</td>
           </tr>
           <tr>
             <td>77</td>
             <td>7 × 11</td>
             <td class="ratio-value">7/11 ≈ 0.636</td>
-            <td class="time-value">0.0009</td>
+            <td class="time-value">ggT(7, N) = 7</td>
             <td class="success-icon">✓</td>
           </tr>
           <tr>
             <td>143</td>
             <td>11 × 13</td>
             <td class="ratio-value">11/13 ≈ 0.846</td>
-            <td class="time-value">0.0004</td>
+            <td class="time-value">Ordnung r = 60 zur Basis 2</td>
             <td class="success-icon">✓</td>
           </tr>
           <tr>
             <td>323</td>
             <td>17 × 19</td>
             <td class="ratio-value">17/19 ≈ 0.895</td>
-            <td class="time-value">0.0015</td>
+            <td class="time-value">Ordnung r = 72 zur Basis 2</td>
             <td class="success-icon">✓</td>
           </tr>
         </tbody>
       </table>
-      
-      <p><strong>Durchschnitt:</strong> 0.0025s pro Zahl | <strong>Erfolg:</strong> abhängig davon, ob die Ordnung innerhalb der Suchgrenze liegt</p>
+
+      <p><strong>Erfolg:</strong> hängt davon ab, ob zu einer der Basen 2, 3, 5, 7 eine gerade Ordnung r &lt; min(N, 2000) existiert, die einen echten Teiler liefert. Von den 20 Halbprimzahlen oben scheitert 19043 = 137 × 139, weil alle Ordnungen über der Suchgrenze liegen. Laufzeiten hängen vom Rechner ab und sind hier nicht angegeben.</p>
     </div>
-    
+
     <div class="content-section">
       <h2>🧮 Mathematische Formulierung</h2>
-      
+
       <div class="formula-section">
-        <div class="formula-title">Original T0-Formel:</div>
-        <div class="formula-content">R(r) = exp(-((ω-π)²)/(4|ξ|))</div>
-        
-        <div class="formula-title">Rationale T0-Implementierung:</div>
+        <div class="formula-title">Bewertung im Python-Code (Lorentzform, ohne Einfluss auf das Ergebnis, R63):</div>
+        <div class="formula-content">R(r) = 1/(1 + (ω−π)²/(4σ)),&nbsp;&nbsp; ω = 2π/r</div>
+
+        <div class="formula-title">Bewertung in den HTML-Werkzeugen unter 2/html/ (Gaußform):</div>
         <div class="formula-content">
-          ω = 2π/r als exaktes Verhältnis<br>
-          Score = 1/(1 + |exponent|) - nur Verhältnisse!
+          R(r) = exp(−(ω−π)²/(4σ))<br>
+          Beide Formen haben ihr Maximum bei r = 2 und fallen für größere r streng monoton; die Ordnung wählen sie nicht aus (R63).
         </div>
       </div>
-      
+
       <div class="algorithm-box">
-def _calculate_period_evaluation_rational(self, r, N):
-  # ω = 2π/r als EXAKTES Verhältnis
-  omega = Fraction(2, 1) * self.pi_ratio / Fraction(r, 1)
-  
-  # Differenz ω - π als EXAKTES Verhältnis 
-  diff = omega - self.pi_ratio
-  
-  # Alles bleibt exakt - kein einziger Rundungsfehler!
+def _calculate_resonance_with_optimized_xi(self, r, xi):
+  # xi ist der Rasterparameter σ, nicht das FFGFT-ξ (R75)
+  omega = Fraction(2, 1) * self.pi_fraction / Fraction(r, 1)  # ω = 2π/r, π ≈ 355/113
+  diff = omega - self.pi_fraction
   diff_squared = diff * diff
-  denominator = Fraction(4, 1) * self.xi_ratio
+  denominator = Fraction(4, 1) * xi
   exponent = -diff_squared / denominator
-  
-  # Score = 1/(1 + |exponent|) - nur Verhältnisse!
   score = Fraction(1, 1) / (Fraction(1, 1) + abs(exponent))
   return score
+
+# Verwendung: Die erste Periode r mit a^r ≡ 1 (mod N) wird angenommen,
+# sobald score &gt; 1/1000 ist; bei σ = 1/10 gilt das für jedes r (R63).
       </div>
     </div>
-    
+
     <div class="insight-box">
-      <h3>🎵 Musikalische Konsonanz = Mathematische Harmonie</h3>
-      <p>T0 erkennt dieselben Verhältnisse, die auch musikalisch "gut klingen":</p>
+      <h3>🎵 Musikalische Benennung der Faktorverhältnisse</h3>
+      <p>Das Verhältnis der gefundenen Faktoren lässt sich musikalisch benennen (siehe <a href="harmonic-factorization-de.html">Harmonische Klassifikation</a>); für die Ordnungssuche spielt es keine Rolle:</p>
       <ul style="margin-top: 15px; padding-left: 20px;">
-        <li><strong>Reine Quinte (3:2)</strong> → p/q ≈ 1.5 → Gute T0-Performance</li>
-        <li><strong>Große Terz (5:4)</strong> → p/q ≈ 1.25 → Gute T0-Performance</li>
-        <li><strong>Goldenes Verhältnis (φ:1)</strong> → p/q ≈ 1.618 → Natürliche Harmonie</li>
-        <li><strong>Tritonus (√2:1)</strong> → p/q ≈ 1.414 → Schlechte T0-Performance (dissonant)</li>
+        <li><strong>Reine Quinte (3:2)</strong> → p/q ≈ 1.5</li>
+        <li><strong>Große Terz (5:4)</strong> → p/q ≈ 1.25</li>
+        <li><strong>Goldenes Verhältnis (φ:1)</strong> → p/q ≈ 1.618</li>
+        <li><strong>Tritonus (√2:1)</strong> → p/q ≈ 1.414</li>
       </ul>
     </div>
-    
-    <div class="content-section">
-      <h2>🔧 Warum T0 mit Verhältnissen rechnet</h2>
-      
-      <div class="comparison-section">
-        <h3>Das Rundungsfehler-Problem</h3>
-        <p>Klassische Algorithmen scheitern oft wegen winziger Ungenauigkeiten:</p>
-        
-        <div class="algorithm-box" style="margin: 15px 0;">
-# Klassisch - FEHLERANFÄLLIG:
-bewertung1 = exp(-((2*3.14159/r - 3.14159)**2)/(4*0.00001))
-bewertung2 = exp(-((2*3.14160/r - 3.14160)**2)/(4*0.00001))
-# bewertung1 ≠ bewertung2 obwohl mathematisch gleich!
 
-# T0 - EXAKT:
-bewertung1 = berechne_mit_verhaeltnissen(Fraction(355,113))
-bewertung2 = berechne_mit_verhaeltnissen(Fraction(355,113)) 
-# bewertung1 == bewertung2 IMMER! ✓
-        </div>
-      </div>
-      
-      <p><strong>Deterministische Ergebnisse:</strong> Mit Verhältnissen ist T0 100% reproduzierbar auf jeder Hardware, mit jedem Compiler, mit jeder Mathematik-Bibliothek.</p>
-    </div>
-    
     <div class="content-section">
-      <h2>🎯 Fazit der T0-Periodenfindung</h2>
-      
-      <div class="key-principle">
-        <div class="principle-title">Die fundamentale Erkenntnis</div>
-        <div class="principle-description">
-          "Rechne nie mit ungenauen Dezimalzahlen - verwende immer exakte Verhältnisse!"<br><br>
-          Diese Verhältnis-Mathematik macht T0: 100% reproduzierbar, 
-          frei von Rundungsfehlern, hardware-unabhängig und deterministisch funktional.
+      <h2>🔧 Warum der Code mit Brüchen rechnet</h2>
+
+      <div class="comparison-section">
+        <h3>Reproduzierbarkeit der Bewertung</h3>
+        <p>Gleitkommarechnung rundet in jedem Schritt; die letzten Stellen einer Bewertung können von Plattform und Mathematikbibliothek abhängen. Mit Fraction rechnet der Code ohne Rundung:</p>
+
+        <div class="algorithm-box" style="margin: 15px 0;">
+# Gleitkomma: Rundung in jedem Rechenschritt
+bewertung = 1 / (1 + (2*math.pi/r - math.pi)**2 / (4*0.1))
+
+# Fraction: exakte Brüche, bitgenau reproduzierbar
+pi = Fraction(355, 113)
+bewertung = 1 / (1 + (2*pi/r - pi)**2 / (4*Fraction(1, 10)))
         </div>
       </div>
-      
-      <p>T0 funktioniert, weil es dasselbe fundamentale Ordnungsprinzip der Natur implementiert, 
-      das auch Atomstrukturen, Molekülschwingungen, Kristallgitter und harmonische Oszillatoren regiert.</p>
+
+      <p><strong>Reproduzierbarkeit:</strong> Die Bewertung ist mit Fraction auf jeder Hardware bitgenau gleich (R65). π selbst ist dabei durch 355/113 angenähert. Auf die gefundenen Faktoren hat das keinen Einfluss, denn die Ordnungssuche rechnet ohnehin ganzzahlig.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>🎯 Fazit</h2>
+
+      <div class="key-principle">
+        <div class="principle-title">Der Kern</div>
+        <div class="principle-description">
+          Die Faktoren liefert die Ordnungssuche aus elementarer Zahlentheorie: Satz von Euler und ggT-Extraktion wie bei Shor.<br><br>
+          Bewertung und Bruchrechnung machen die Ausgabe reproduzierbar, ändern aber das Ergebnis nicht (R63).
+        </div>
+      </div>
+
+      <p>Ein FFGFT-eigenes Faktorisierungsverfahren ist das nicht (R65).</p>
     </div>
   </div>
 </body>
