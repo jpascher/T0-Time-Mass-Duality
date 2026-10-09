@@ -236,7 +236,7 @@ but measurable in principle (Dok. 230).
 
 ---
 
-## Where FFGFT stands (as of R149, 8 October 2026)
+## Where FFGFT stands (as of R150, 9 October 2026)
 
 **Where the geometry fixes the numbers, only precision remains open.** The fine-structure constant (1/α = 3700/27, 7.6 ppm), the charged leptons, the neutrino hierarchy and the Weinberg angle (2/9 on-shell, 0.4 %) follow from ξ and the T⁴/Z₃ geometry. The Higgs is the same: the trace rule M_W² + M_Z² + m_h² = v²/2 (Doc. 373) gives, with measured W, Z and v, m_h ≈ 124.7 GeV against the measured 125.2 GeV. Order of magnitude and value are hit; only the 0.5 % residual is open, probably tied to the definition of v (R112).
 
@@ -450,7 +450,7 @@ Documents: [DE](2/pdf/313_Kein_Anfang_En.pdf) · [EN](2/pdf/313_Kein_Anfang_En.p
 
 The **correction register** [Doc. 190](2/pdf/190_T0_Korrekturen_En.pdf)
 documents every correction and clarification with date, status and
-affected documents — K1–K7 (corrections) and R1–R149 (refinements/programmes, as of 8 October 2026).
+affected documents — K1–K7 (corrections) and R1–R150 (refinements/programmes, as of 9 October 2026).
 Nothing is silently overwritten.
 
 The **changelog** [`001_FFGFT_Changelog_De.md`](001_FFGFT_Changelog_De.md)

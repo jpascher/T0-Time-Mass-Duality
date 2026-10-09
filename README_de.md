@@ -240,7 +240,7 @@ ist aber prinzipiell messbar (Dok. 230).
 
 ---
 
-## Wo die FFGFT derzeit steht (Stand R149, 8. Oktober 2026)
+## Wo die FFGFT derzeit steht (Stand R150, 9. Oktober 2026)
 
 **Wo die Geometrie die Zahlen festlegt, geht es nur noch um Genauigkeit.** Die Feinstrukturkonstante (1/α = 3700/27, 7,6 ppm), die geladenen Leptonen, die Neutrino-Hierarchie und der Weinberg-Winkel (2/9 on-shell, 0,4 %) folgen aus ξ und der T⁴/Z₃-Geometrie. Beim Higgs ist es ebenso: Die Spurregel M_W² + M_Z² + m_h² = v²/2 (Dok. 373) liefert mit gemessenem W, Z und v m_h ≈ 124,7 GeV gegenüber gemessenen 125,2 GeV. Größenordnung und Wert sind getroffen; offen ist nur der Rest von 0,5 %, der vermutlich an der Definition von v hängt (R112).
 
@@ -454,7 +454,7 @@ Dokumente: [DE](2/pdf/313_Kein_Anfang_De.pdf) · [EN](2/pdf/313_Kein_Anfang_En.p
 
 Das **Korrekturregister** [Dok. 190](2/pdf/190_T0_Korrekturen_De.pdf)
 dokumentiert jede Korrektur und Präzisierung mit Datum, Status und
-betroffenen Dokumenten — K1–K7 (Korrekturen) und R1–R149 (Präzisierungen/Programme, Stand 8. Oktober 2026).
+betroffenen Dokumenten — K1–K7 (Korrekturen) und R1–R150 (Präzisierungen/Programme, Stand 9. Oktober 2026).
 Nichts wird still überschrieben.
 
 Der **Changelog** [`001_FFGFT_Changelog_De.md`](001_FFGFT_Changelog_De.md)
