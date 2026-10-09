@@ -1364,3 +1364,37 @@ Anlass: Mit den Bereinigungsblöcken vom 6. Oktober enthalten alle Dokumente nur
 - Dok. 190-Abgleich: 0 Abweichungen (146/146 Einträge, Registerstand R149)
 
 **Register:** R148 und R149 (in Dok. 190).
+
+---
+
+## 9. Oktober 2026 — Dok. 390: Lose Puzzleteile
+
+### Dok. 390 — Kaluza-Klein und andere etablierte Bausteine der Zeit-Masse-Dualität (De/En, je 11 Seiten)
+
+Anlass: die Frage im einführenden Gespräch der Website, ob $\tilde T\cdot m=1$ nicht nach Kaluza-Klein klinge, und die Frage, warum die bekannte Dualität von Masse und Zeit nicht zu Ende gedacht wurde. Das Dokument ordnet elf etablierte Bausteine ein und hält zu jedem fest, was er bereits enthielt, welches Stück fehlte und wo er sich im Korpus einfügt. Die Geschichte des Einstein-Falls steht in Dok. 312 und wird nur zitiert.
+
+Kaluza-Klein liefert die kompakte Richtung mit $m_n\propto n/R$; im Korpus ist $\tilde T\cdot m=1$ die Kaluza-Klein-Relation der zeitartigen vierten Torusrichtung ohne freien Radius und ohne zusätzlichen Turm (Dok. 330, 270, 307, 231, 311, 318). De Broglies innere Uhr und die Compton-Uhr von 2013 stehen hinter $\lambda_4\cdot m=2\pi$ (Dok. 312, 314). Die Zitterbewegung (Schrödinger, Hestenes) wird als Parallele eingeordnet, ohne Identifikation mit $S^1_m$ **[S]**. Paulis Einwand trifft eine kompakte Zeit nicht (Dok. 307, 334); die relationalen Ansätze nehmen die Zeit heraus statt hinein (Dok. 307). Wigners Masse als Casimir-Label, der Casimir-Wert $4/3$ der $SU(3)$ mit $\xi=C_2/N_{\mathrm{Fourier}}$ (Dok. 324: Formel **[B]**, Modenzahl **[K]**) und die Heaviside-Lorentz-Einheiten mit $\alpha=1$ als Einheitenwahl (Dok. 365; Übereinstimmung von 137 am Anker $E_0$, Dok. 338) bilden die zweite Gruppe. Die dritte sind Orbifold-Kompaktifizierung (Dixon–Harvey–Vafa–Witten; $T^4/\mathbb{Z}_3$ auf $D_4$ als **[SETZUNG]**, R131), endliche Körper mit Frobenius (Dok. 336, 346, 348 **[B]**, 338 **[K]**; Hyperladung offen nach R146) und die Koide-Formel ($\theta=2/9$ **[B]**, Amplitude $\sqrt2$ **[S]** nach Dok. 353, exaktes Paar für $m_\mu/m_e$ ausgeschlossen nach Dok. 369).
+
+Ergebnis: Die Teile lagen in verschiedenen Fächern, galten als Werkzeug oder Kuriosität, und zwei Weichen (Paulis Einwand, räumliche statt zeitliche Kompaktifizierung) standen falsch. Die Bausteine waren nicht Grundlage der FFGFT: Die Theorie entstand unabhängig aus $\tilde T\cdot m=1$, die Literaturstellen wurden erst nachträglich gefunden und fügen sich ein (Abschnitt „Zur Reihenfolge“). Die Abgrenzung aus Dok. 342/343 gilt: Herleitungsanspruch nur für einfache, konventionsfreie Verhältnisse; $\Lambda_{\mathrm{QCD}}$ und andere schemaabhängige Größen sind ausgenommen.
+
+Koide-Abschnitt ergänzt um die 45°-Lesart nach Foot (1994) als nachträglich gefundenes Puzzleteil; im Korpus ist das die Gleichverteilung der Massensumme auf die symmetrische Mode und das nicht-triviale Paar (Dok. 353, **[B]**). Die Amplitude $\sqrt2$ ist nach R150 in Dok. 353 und 367 als Setzung mit richtigem Wert geführt **[S]**; der frühere Widerspruch zwischen Dok. 367 und 353 ist damit bereinigt.
+
+**Prüfskript:** 2/python/Dok390_Skripte/pruef_390_puzzleteile.py — 59/59 PASS (48 Fundstellen-Prüfungen in den Kapiteldateien, 11 Zahlenwerte)
+**Register:** kein Eintrag.
+
+---
+
+## 9. Oktober 2026 — Dok. 391: Lose Puzzleteile II: Kosmologie
+
+### Dok. 391 — Rotverschiebung, Skalen und die Grenze des kosmischen Sektors (De 10 / En 9 Seiten)
+
+Anlass: Fortsetzung von Dok. 390 für die Kosmologie. Acht etablierte Bausteine werden eingeordnet, jeweils mit dem, was sie enthielten, was fehlte und wo sie sich im Korpus einfügen. Wie in Dok. 390 waren die Bausteine nicht Grundlage der FFGFT; die Literaturstellen wurden nachträglich gefunden. Anders als in der Teilchenphysik liegt der kosmische Sektor außerhalb des Herleitungsanspruchs: $H_0$ ist kalibriert, der Exponent 10 ist **[SETZUNG]** (P20), das Standardmodell leitet den Sektor ebenso wenig her (P39). Die Bausteine zeigen deshalb Lesarten, keine Herleitungen.
+
+Rotverschiebung ohne Expansion: Zwickys Ermüdung des Lichts scheiterte an der Zeitdehnung; mit $\tilde T\cdot m=1$ werden Wellenlänge und Uhrentakt gemeinsam gebucht, Zeitdehnung $(1+z)$ für alle $z$ **[B]** (R128, Dok. 312). Hoyle–Narlikar und Wetterichs Universum ohne Expansion: Äquivalenz von Expansion und Massenlauf **[K]** (Dok. 312, Entartung Dok. 267), mit der Grenze „möglich und beobachtungsgleich, nicht bewiesen richtig“. Einsteins statisches Universum und Steady State: Träger ohne Rand, „Anfang“ als Antipode des Zeitzyklus **[K]** mit P20-Kalibrierung (Dok. 313); offen bleibt die Periodizität als Randbedingung.
+
+Skalen: Diracs große Zahlen als $\xi$-Verhältnis zweier Skalen (P20, P39), im Korpus bisher nicht genannt **[S]**; Hubble-Länge als Maximalskala, kein Expansionshorizont (Dok. 182, 365); Milgroms $a_0=cH_0/(2\pi)$ **[K]** (Dok. 365) mit Querverankerung (Dok. 309) und Interpolationsformel aus der Unruh-Kopplung **[K]/[S]** (Dok. 308).
+
+Grenze: Vakuumenergie und $\Lambda$ passen bisher nicht (R136 **[S]**, R137 **[X]**; $\Lambda$ als Lesart-Artefakt nach Dok. 308). Die Hintergrundstrahlung fügt sich nur als Kandidat ein: $T_{\mathrm{CMB}}/m_e=(8\pi)^{1/4}\xi^{5/2}$ aus Dok. 388 **[S]**, Zufall nicht ausgeschlossen; $T(z)$ aus Dok. 039 **[X]**, Faktor 3 der Peak-Folge gesetzt (R139).
+
+**Prüfskript:** 2/python/Dok391_Skripte/pruef_391_kosmologie.py — 51/51 PASS (37 Fundstellen-Prüfungen in den Kapiteldateien, 14 Konsistenzprüfungen der Zahlen)
+**Register:** kein Eintrag.
