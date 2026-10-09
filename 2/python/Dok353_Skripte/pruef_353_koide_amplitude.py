@@ -52,7 +52,7 @@ print(f"OK 3: ||M^(13) Zeile||_2 = sqrt(2); normierte Eintraege = 1/sqrt(2) [B]"
 # ============================================================
 dc_from_geometry = 1 / (1/sqrt2)
 assert abs(dc_from_geometry - sqrt2) < 1e-15, "d/c aus Geometrie != sqrt(2)"
-print(f"OK 4: d/c aus Z3-Gleichverteilung = {dc_from_geometry:.8f} = sqrt(2) [B]")
+print(f"OK 4: d/c = 1/|M| = {dc_from_geometry:.8f} = sqrt(2) -- Rechnung exakt, Zuordnung d/c = 1/|M| unbegruendet [S]")
 
 # ============================================================
 # 5. Numerische Verifikation: d/c aus PDG-Massen
@@ -127,12 +127,51 @@ assert abs(Q_phys - 2/3) < 1e-12, f"Q(theta=2/9, d/c=sqrt2) != 2/3"
 print(f"OK 8: Q = 1/3 + d^2/(6c^2) theta-unabhaengig; Q(theta=2/9) = {Q_phys:.10f} [B]")
 
 # ============================================================
+# 9. Gleichverteilungs-Lesart: Q = 2/3 <=> 3c^2 = (3/2) d^2
+#    (symmetrische Mode und nicht-triviales Paar tragen gleich viel)
+# ============================================================
+for c_test in (0.3, 1.0, 2.7):
+    d_test = sqrt2 * c_test
+    th = 0.4
+    a = [c_test + d_test*math.cos(th + 2*math.pi*k/3) for k in range(3)]
+    sum_m = sum(x**2 for x in a)
+    sym, nontriv = 3*c_test**2, 1.5*d_test**2
+    assert abs(sym - nontriv) < 1e-12, "Gleichverteilung verletzt"
+    assert abs(sum_m - (sym + nontriv)) < 1e-12, "Zerlegung Summe m falsch"
+# Gegenrichtung: Gleichverteilung erzwingt d/c = sqrt(2)
+assert abs(math.sqrt(3/1.5) - sqrt2) < 1e-15
+print("OK 9: Q = 2/3 <=> 3c^2 = (3/2)d^2 (Gleichverteilung symmetrisch / nicht-trivial) [B]")
+
+# ============================================================
+# 10. 45-Grad-Lesart (Foot 1994): Winkel zwischen (sqrt m_k) und (1,1,1)
+#     cos^2(phi) = 1/(3Q)  ->  Q = 2/3 <=> phi = 45 Grad
+# ============================================================
+c_test, d_test = 1.0, sqrt2
+a = np.array([c_test + d_test*math.cos(0.4 + 2*math.pi*k/3) for k in range(3)])
+cosphi = a.sum() / (math.sqrt(3) * np.linalg.norm(a))
+phi = math.degrees(math.acos(cosphi))
+assert abs(phi - 45.0) < 1e-10, f"Winkel {phi} != 45"
+print(f"OK 10: Winkel (sqrt m) zu (1,1,1) = {phi:.10f} Grad bei d/c = sqrt(2) [B]")
+
+# ============================================================
+# 11. PDG 2024 (m_tau = 1776.93 +- 0.09 MeV)
+# ============================================================
+m24 = [0.51099895000, 105.6583755, 1776.93]
+Q24 = sum(m24) / (sum(math.sqrt(m) for m in m24))**2
+dc24 = math.sqrt(6*(Q24 - 1/3))
+dQ24_xi = (Q24 - 2/3) / xi
+ddc24_xi = (dc24 - sqrt2) / xi
+assert abs(dQ24_xi) < 0.05, "PDG 2024: |Q - 2/3| > 0.05 xi"
+print(f"OK 11: PDG 2024: Q - 2/3 = {dQ24_xi:+.3f}*xi, d/c - sqrt2 = {ddc24_xi:+.3f}*xi [K]")
+
+# ============================================================
 # Zusammenfassung
 # ============================================================
-print("\n=== Dok. 353 Prüfskript: alle 8 Assertions bestanden ===")
+print("\n=== Dok. 353 Prüfskript: alle 11 Assertions bestanden ===")
 print(f"  xi = {xi:.6e}")
 print(f"  sqrt(2) = {sqrt2:.10f}")
-print(f"  d/c (Geometrie) = sqrt(2) [B]")
+print(f"  d/c = sqrt(2) aus Geometrie: offen [S] (Zuordnung bzw. Gleichverteilung unbegruendet)")
 print(f"  d/c (PDG) = {dc_pdg:.8f}, Abw. {delta_pdg_xi:+.3f}*xi [K]")
 print(f"  d/c (FFGFT bare) = {dc_bare:.8f}, Abw. {delta_bare_xi:+.1f}*xi [K]")
-print(f"  Q (PDG) = {Q_pdg:.8f}, Abw. {(Q_pdg-2/3)/xi:+.3f}*xi [K]")
+print(f"  Q (PDG 2022) = {Q_pdg:.8f}, Abw. {(Q_pdg-2/3)/xi:+.3f}*xi [K]")
+print(f"  Q (PDG 2024) = {Q24:.8f}, Abw. {dQ24_xi:+.3f}*xi [K]")
