@@ -295,7 +295,7 @@
 | 357 | Status markers | [PDF](2/pdf/357_SM_Teilchen_GF27_Zusatz_En.pdf) |
 | 358 | Harmonics and Algebraic Structure — Why the Same Mathematics — and What It Yields | [PDF](2/pdf/358_Harmonik_Algebra_En.pdf) |
 | 359 | AI-Based Pattern Recognition — and Algebraic Limits of Frequency Analysis — What Is Learnable — and What Is Not | [PDF](2/pdf/359_KI_Grenzen_Frequenzanalyse_En.pdf) |
-| 360 | Galois-Informed HRV Analysis — Implementation and Negative Validation | [PDF](2/pdf/360_HRV_Galois_Experiment_En.pdf) |
+| 360 | Galois-Informed HRV Analysis — Implementation and Exploratory Assessment | [PDF](2/pdf/360_HRV_Galois_Experiment_En.pdf) |
 | 361 | The Kagome Lattice and FFGFT: — Four Structural Parallels | [PDF](2/pdf/361_Kagome_FFGFT_Vergleich_En.pdf) |
 | 362 | The BAW Ising Machine as a Resonance Computer — Vadde et al. (2026) in the light of Docs. 173, 328 and 343 | [PDF](2/pdf/362_BAW_Ising_FFGFT_En.pdf) |
 | 363 | Hodge Theory on T4/Z3 within FFGFT — Frobenius, Sector Pairing and Algebraic Cycles — a Known Special Case and Its Galois Structure | [PDF](2/pdf/363_Hodge_T4Z3_En.pdf) |

@@ -37,12 +37,12 @@ Galois-informierte KI-Architektur leisten könnte.
 \begin{enumerate}
 \item Satz~A \BM: Die Standard-HRV-Frequenzbänder (Task Force 1996) haben
   Bandgrenzen ausschließlich mit 5-Limit-Primfaktoren $\{2,3,5\}$ und
-  liegen damit im Galois-Raster von Dok.~358 Satz~B. Aktuelle KI-Modelle
-  behandeln diese Grenzen als freie Parameter --- die Algebra erzwingt sie.
+  liegen damit im Galois-Raster von Dok.~358 Satz~B. Sie sind mit dem
+  Raster verträglich, aber nicht durch es festgelegt: Gerundete
+  Dezimalwerte liegen fast immer im 5-Limit (Dok.~360).
 \item Satz~B \BM: Die Auflösungsgrenze $100\xi\approx1{,}33\,\%$ (Dok.~343)
-  erscheint empirisch in KI-HRV-Analysen als Schwelle, unterhalb derer
-  Modelle nicht mehr generalisieren. Die Modelle lernen die Grenze
-  implizit; sie wissen nicht warum sie dort liegt.
+  hat die Farey-Höhe $Q_c\approx11{,}1$. Eine Klassifikation mit dieser
+  Toleranz verlangt eine Frequenzauflösung $\Delta f/f\le100\xi$.
 \item Satz~C \BM: Gruppenäquivariante Netze (G-CNNs) für kontinuierliche
   Gruppen (E(3), SO(3)) reduzieren Parameteranzahl und verbessern
   Generalisierung nachweislich. Für endliche Galois-Gruppen GF$(3^k)$
@@ -83,9 +83,8 @@ vollständig. Das ist die Lücke, die dieses Dokument identifiziert.
 
 \subsection*{HRV-Analyse mit KI}
 
-Multi-resolution HRV-Analyse mit Machine Learning zeigt, dass verschiedene
-Auflösungsstufen qualitativ verschiedene Muster liefern und Modelle auf der
-falschen Skala zu Overfitting führen \LM\,\cite{Gupta2024}. Aktuelle
+Multi-resolution-HRV-Analyse mit Machine Learning zeigt, dass verschiedene
+Auflösungsstufen unterschiedliche Merkmale liefern \LM\,\cite{Gupta2024}. Aktuelle
 KI-HRV-Systeme verwenden die Task-Force-Bänder VLF/LF/HF als feste
 Eingabegröße, ohne zu wissen, warum diese Grenzen dort liegen
 \LM\,\cite{Villanueva2026}.
@@ -116,13 +115,15 @@ $f_\text{HF}/f_\text{LF} = 8/3$ liegen ebenfalls im 5-Limit.
 \textbf{Konsequenz für KI:} Aktuelle HRV-KI-Modelle verwenden diese
 Bandgrenzen als freie Hyperparameter, die aus Daten gelernt oder manuell
 gesetzt werden \LM\,\cite{Villanueva2026}. Ein Galois-informiertes Netz
-würde sie als erzwungen behandeln: kein Lernaufwand für eine Entscheidung,
-die die Algebra bereits getroffen hat. Das entspricht der Idee des
-``inductive bias'' aus der Lerntheorie --- nur algebraisch begründet statt
-empirisch gewählt \LM\,\cite{ILCRBlog2023}.
+könnte sie als feste Konstanten übernehmen. Das ist eine Setzung, keine
+algebraische Notwendigkeit: 8 von 9 Zahlen mit einer gültigen Ziffer und
+ein Drittel aller zweistelligen Dezimalwerte liegen im 5-Limit, und in
+rad/s sind die Grenzen irrational (Dok.~360). Als ``inductive bias'' im
+Sinne der Lerntheorie \LM\,\cite{ILCRBlog2023} ist die Übernahme
+zulässig, aber nicht algebraisch begründet.
 
 % ============================================================
-\section{Satz B: Die Auflösungsgrenze erscheint empirisch}
+\section{Satz B: Auflösungsgrenze und Farey-Höhe}
 % ============================================================
 
 \begin{quote}
@@ -131,25 +132,15 @@ empirisch gewählt \LM\,\cite{ILCRBlog2023}.
 $Q_c = \pi/\sqrt{6\cdot100\xi} \approx 11{,}1$.
 Frequenzverhältnisse mit Nennern $>Q_c$ sind im Galois-Raster nicht
 trennbar. Die HRV-Bandgrenzen haben Nenner 5, 20, 25 --- alle im
-trennbaren Bereich. Unterhalb der Bandbreite einzelner Bänder
-($\Delta f/f \lesssim 1\,\%$) ist die Galois-Klassifikation nicht
-mehr anwendbar.
+trennbaren Bereich. Eine Klassifikation mit der Toleranz $100\xi$ ist
+nur sinnvoll, wenn die Frequenzauflösung $\Delta f/f\le100\xi$ erfüllt.
 \end{quote}
 
-\textbf{Empirische Entsprechung:} Gupta et al.\ \LM\,\cite{Gupta2024}
-zeigen, dass Multi-resolution-HRV-KI bei Auflösungen besser als $\sim1\,\%$
-der Bandbreite nicht mehr generalisiert und auf Messrauschen overfittet.
-Das Modell lernt die Grenze implizit --- weil die Daten sie enthalten.
-
-\textbf{Was das bedeutet:} KI-Modelle die mit höherer Frequenzauflösung
-trainiert werden lernen $K_\text{frak}$-Effekte (Einbettungsfehler,
-Dok.~333) als vermeintliches Signal. Das ist kein Modellierungsfehler ---
-es ist eine physikalische Grenze. Die Algebra sagt das vorher; KI stellt
-es im Training fest.
-
-\textbf{Praktische Folgerung \KM:} Die optimale Frequenzauflösung für
-HRV-KI-Systeme ist $\Delta f / f \geq 100\xi \approx 1{,}3\,\%$.
-Feinere Auflösung ist verschwendete Kapazität.
+\textbf{Praktische Folgerung \KM:} Mit $\Delta f=1/T_w$ für die
+Fensterlänge $T_w$ (bei Welch die Segmentlänge) folgt $T_w\ge1/(100\xi\,f)$,
+also 12{,}5~min bei 0{,}10~Hz und 15~min bei 0{,}083~Hz (Dok.~360).
+Kürzere Fenster können Rasterelemente nicht unterscheiden. Ob die
+Schwelle in KI-HRV-Analysen empirisch auftritt, ist nicht belegt \SM.
 
 % ============================================================
 \section{Satz C: Was gruppenäquivariante Netze leisten --- und wo die Lücke ist}
@@ -247,8 +238,8 @@ Die Frobenius-Wirkung $x\mapsto x^3$ ist die natürliche Symmetrie
 Vor der Galois-Projektion: ein Tiefpassfilter mit Grenzfrequenz
 $\Delta f/f = 100\xi \approx 1{,}33\,\%$. Alles unterhalb dieser Schwelle
 wird als Einbettungsrauschen behandelt und nicht klassifiziert.
-Das entspricht der Empfehlung aus Gupta et al.\ \cite{Gupta2024} ---
-ist dort aber empirisch; hier ist es algebraisch begründet.
+Die Schwelle ist eine Setzung der FFGFT; eine empirische Entsprechung in
+HRV-Daten ist nicht belegt (Dok.~360).
 
 \subsection*{Stabilitätsbewertung: Arnold-Zungenbreite}
 
@@ -266,7 +257,7 @@ aus dem Netz gelernt, sondern aus der Algebra berechnet.
 & Standard-KI & Galois-informiert \\
 \midrule
 Zulässigkeitskriterium & gelernt (unvollständig) & erzwungen (vollständig) \\
-Auflösungsgrenze & empirisch gefunden & algebraisch gesetzt \\
+Auflösungsgrenze & nicht vorgesehen & algebraisch gesetzt \\
 Stabilitätsvorhersage & nur für gesehene Fälle & für alle Fälle (Arnold-Zunge) \\
 Parameteranzahl & $|G|^2 = 144$ & $|G| = 12$ \\
 Interpretierbarkeit & beschränkt & vollständig \\
@@ -281,20 +272,23 @@ Interpretierbarkeit & beschränkt & vollständig \\
 Für die Herzratenvariabilitätsanalyse ergeben sich konkrete Konsequenzen:
 
 \begin{enumerate}
-\item \textbf{Bandgrenzen als erzwungene Konstanten:} VLF/LF/HF-Grenzen
-  werden nicht aus Daten gelernt (Satz~A). Der Suchraum des Netzes
-  reduziert sich entsprechend.
-\item \textbf{Optimale Auflösung:} $\Delta f/f \geq 1{,}3\,\%$ als
-  algebraisch begründeter Cutoff (Satz~B). Das entspricht $\sim0{,}002$\,Hz
-  im LF-Band --- praktisch erreichbar mit Standard-RR-Intervall-Messung.
+\item \textbf{Bandgrenzen als feste Konstanten:} VLF/LF/HF-Grenzen
+  werden nicht aus Daten gelernt (Satz~A); sie sind mit dem Raster
+  verträglich, aber eine Setzung. Der Suchraum des Netzes reduziert sich
+  entsprechend.
+\item \textbf{Erforderliche Auflösung:} $\Delta f/f \le 1{,}33\,\%$
+  (Satz~B), also $\approx0{,}0013$\,Hz bei 0{,}10~Hz und eine
+  Fensterlänge von mindestens 12{,}5~min.
 \item \textbf{Neue Biomarker:} Statt LF/HF-Ratio (ein einzelner Zahlenwert)
   könnte ein Galois-informiertes Netz den \emph{Orbit-Typ} des dominanten
   Frequenzverhältnisses ausgeben --- ein algebraischer Biomarker, der
   angibt, in welcher Galois-Schicht ($k=3,4,5,6$) das Herz aktuell
   schwingt. Das ist neu und hat keine Entsprechung in der Literatur \SM.
-\item \textbf{Stabilitätsvorhersage:} Ob ein aktuelles HRV-Muster
-  robust ist (breite Arnold-Zunge) oder fragil (schmale Zunge) --- direkt
-  aus der Algebra, nicht aus historischen Daten.
+\item \textbf{Stabilitätsvorhersage \SM:} Ob ein aktuelles HRV-Muster
+  robust ist (breite Arnold-Zunge) oder fragil (schmale Zunge). Die
+  Prämisse, dass HRV-Frequenzverhältnisse auf dem Raster einrasten, ist
+  ungeprüft; die Daten in Dok.~360 stützen sie nicht, ein prospektiver
+  Test ist dort beschrieben.
 \end{enumerate}
 
 % ============================================================
@@ -307,7 +301,8 @@ Für die Herzratenvariabilitätsanalyse ergeben sich konkrete Konsequenzen:
 \item Die Architekturskizze in §5 ist spekulativ \SM\ --- sie skizziert
   eine Richtung, kein fertiges System.
 \item Der algebraische Orbit-Biomarker in §6 ist eine Hypothese; seine
-  physiologische Bedeutung ist offen.
+  physiologische Bedeutung ist offen. Die explorative Prüfung an HRV-Daten
+  (Dok.~360) ergab einen Negativbefund.
 \item Die PAC-Nicht-Lernbarkeit von Satz~D gilt für das universelle
   Zulässigkeitskriterium, nicht für spezifische Instanzen davon ---
   ein Netz kann lernen, dass $4/3$ stabil ist.
@@ -322,8 +317,8 @@ Für die Herzratenvariabilitätsanalyse ergeben sich konkrete Konsequenzen:
 \toprule
 Satz & Aussage & Status \\
 \midrule
-A & HRV-Bandgrenzen im 5-Limit-Raster: algebraisch erzwungen & \BM \\
-B & Auflösungsgrenze $100\xi\approx1{,}3\,\%$ erscheint empirisch in KI & \BM/\LM \\
+A & HRV-Bandgrenzen im 5-Limit-Raster: verträglich, nicht festgelegt & \BM \\
+B & Auflösungsgrenze $100\xi\approx1{,}33\,\%$, $Q_c\approx11{,}1$; Klassifikation verlangt $\Delta f/f\le100\xi$ & \BM \\
 C & G-CNNs für GF$(3^k)$: Parameterreduktion 12x; Architektur fehlt & \BM/\SM \\
 D & Zulässigkeitskriterium nicht PAC-lernbar aus endlichen Daten & \BM \\
 Arch. & Galois-informiertes Netz: Skizze & \SM \\
@@ -339,17 +334,18 @@ Arch. & Galois-informiertes Netz: Skizze & \SM \\
   \emph{Physics-Informed Neural Networks and Extensions.}
   arXiv:2408.16806.
 \item[\cite{Finzi2022}]
-  Finzi, M. (2022).
+  Finzi, M. (2023).
   \emph{Understanding and Incorporating Mathematical Inductive Biases
-  in Deep Learning.} PhD Thesis, NYU.
+  in Neural Networks.} PhD Thesis, NYU.
   \url{https://cs.nyu.edu/media/publications/Marc_Finzi_Thesis__12_.pdf}
 \item[\cite{Gupta2024}]
-  Gupta, K.\ et al.\ (2024).
-  Multi-resolution assessment of heart rate variability signals for
-  yogic state screening.
-  \emph{Applied Soft Computing}, DOI: 10.1016/j.asoc.2024.111794.
+  Gupta, K., Sinha, G.\,R., Bhat, R., Saoji, A.\,A., \& Manjunath, N.\,K.\ (2024).
+  Multi-resolution assessment of heart rate variability signals during
+  yogic and normal breathing using machine learning modules.
+  \emph{Applied Soft Computing}, 164, 112020.
+  DOI: 10.1016/j.asoc.2024.112020.
 \item[\cite{Villanueva2026}]
-  Villanueva, C.\ et al.\ (2026).
+  Zimatore, G.\ et al.\ (2026).
   HRV in Stress Monitoring by AI: A Scoping Review.
   \emph{MDPI Applied Sciences}, 16(1):23.
   \url{https://www.mdpi.com/2076-3417/16/1/23}

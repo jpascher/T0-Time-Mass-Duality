@@ -1,6 +1,6 @@
 % 360_HRV_Galois_Experiment_De_ch.tex
 % Johann Pascher, 8. September 2026
-% Galois-informierte HRV-Analyse: Implementierung und Negativ-Validierung
+% Galois-informierte HRV-Analyse: Implementierung und explorative Bewertung
 \providecommand{\BM}{\textbf{[B]}}
 \providecommand{\KM}{\textbf{[K]}}
 \providecommand{\SM}{\textbf{[S]}}
@@ -9,7 +9,7 @@
 
 \phantomsection
 \addcontentsline{toc}{chapter}{%
-  Galois-informierte HRV-Analyse --- Implementierung und Negativ-Validierung}
+  Galois-informierte HRV-Analyse --- Implementierung und explorative Bewertung}
 
 \section*{Statuszeichen}
 \begin{center}
@@ -23,34 +23,41 @@
 
 \section*{Abstract}
 
-Dok.~358 und 359 liefern die algebraische Begründung für einen
-Galois-informierten Ansatz in der HRV-Frequenzanalyse. Dieses
-Dokument implementiert den Ansatz als Python-Modul und validiert
-ihn an zwei öffentlichen EKG-Datensätzen. Das Ergebnis ist eine
-\emph{Negativ-Validierung} mit klarem strukturellen Grund.
+Dok.~358 und 359 formulieren eine algebraische Hypothese für die
+HRV-Frequenzanalyse: Frequenzverhältnisse gekoppelter physiologischer
+Oszillatoren sollen auf einem Galois-Raster liegen, mit der
+Strukturtoleranz $100\xi\approx1{,}33\,\%$. Dieses Dokument setzt den
+Ansatz als Python-Modul um und bewertet ihn explorativ an zwei
+öffentlichen EKG-Datensätzen und an eigenen Polar-H10-Aufnahmen. Das
+Ergebnis ist ein Negativbefund: Die vorliegenden Daten stützen die
+Hypothese nicht, und sie können sie auch nicht prüfen, weil LF/HF ein
+Leistungs- und kein Frequenzverhältnis ist.
 
 \textbf{Ergebnisse:}
 \begin{enumerate}
-\item \textbf{Modul} \KM: \texttt{galois\_hrv\_preprocess.py} —
-  vollständige Pipeline: Galois-Projektion, Auflösungsfilter
-  $100\xi\approx1{,}33\,\%$, HRV-Bandgrenzen als Konstanten,
-  Orbit-Typ-Klassifikation, Arnold-Zungenbreite.
-\item \textbf{BIDMC-01} \LM: ICU-Patient, 88~J., 8~min PPG-EKG,
-  Pimentel et al.\ 2017. Ergebnis: 0/3 Verhältnisse 5-Limit,
-  LF/VLF nicht auflösbar (zu kurz). Struktureller Grund: Aufnahme
-  zu kurz für VLF, DFA $\alpha\approx0{,}5$ (weißes Rauschen,
-  fraktale Regulation verloren).
-\item \textbf{Fantasia} \LM: 5 junge + 5 alte Gesunde, je $\approx120$~min
-  Ruhe, spontane Atmung, Gold et al.\ 2002. Ergebnis: LF-Peak-CV
-  11--33\,\% $\gg$ 1{,}33\,\%, 5-Limit LF/HF 4/10 (40\,\%),
-  kein Gruppenunterschied jung/alt.
-\item \textbf{Struktureller Grund} \BM: Bei spontaner Atmung ist
-  $\text{HF} = \text{Atemfrequenz}$ (variabel). LF/HF ist das
-  Verhältnis zweier unabhängiger Regelkreise und kein festes
-  Galois-Verhältnis.
-\item \textbf{Nächster Schritt} \SM: Kontrollierte Atmung 6/min
-  (Resonanzfrequenz-Protokoll, Lehrer \& Gevirtz 2014) mit
-  Polar H10 Brustgurt.
+\item \textbf{Modul} \KM: \texttt{galois\_hrv\_preprocess.py} ---
+  Galois-Projektion, HRV-Bandgrenzen, Orbit-Tiefe, Komplexitätsmaß
+  $2/(p+q)$.
+\item \textbf{Nullmodell} \KM: Im Raster bis Nenner 60 liegt jeder Wert
+  zwischen 1 und 4 innerhalb von 1{,}33\,\% eines Rasterelements;
+  innerhalb von 0{,}06\,\% liegen 39\,\% zufälliger Werte. Nahe
+  Gittertreffer sind daher für sich kein Beleg.
+\item \textbf{BIDMC-01} \LM: Intensivpatient, 88~J., 8~min. Kein
+  Verhältnis erfüllt das 5-Limit-Kriterium; der Datensatz ist für die
+  Frage ungeeignet.
+\item \textbf{Fantasia} \LM: 5 junge und 5 alte Gesunde, je
+  $\approx120$~min, spontane Atmung. LF-Peak-CV 11--33\,\%; 5-Limit-LF/HF
+  4/10 bei einer Nullrate von 21\,\% (Binomialtest $p=0{,}14$).
+\item \textbf{Polar H10} \KM: Mit validierter Schlagerkennung liegt der
+  dominante Spektralpeak bei geführter Atmung (4--6/min) innerhalb einer
+  Frequenzstufe auf der Atemfrequenz, der HF-Peak ist ihre zweite
+  Harmonische. Gittertreffer von LF/HF treten nur mit Zufallshäufigkeit auf.
+\item \textbf{Struktureller Grund} \BM: Bei spontaner Atmung ist der
+  HF-Peak die Atemfrequenz und LF/HF das Verhältnis zweier unabhängiger
+  Regelkreise; bei geführter Atmung unter 9/min liegt die Atmung selbst
+  im LF-Band.
+\item \textbf{Nächster Schritt} \SM: prospektiver Test der
+  Frequenzkopplung bei geführter Atmung (Abschnitt~\ref{sec:360next}).
 \end{enumerate}
 
 % ============================================================
@@ -60,49 +67,109 @@ ihn an zwei öffentlichen EKG-Datensätzen. Das Ergebnis ist eine
 \texttt{galois\_hrv\_preprocess.py} implementiert (Dok.~359 §5):
 
 \begin{description}
-\item[Galois-Raster] 901 rationale Verhältnisse $p/q$ mit Primfaktoren
-  $\subseteq\{2,3,5,7,11,13\}$ bis Nenner 60.
-\item[Auflösungsfilter] $\Delta f/f \geq 100\xi \approx 1{,}33\,\%$
-  (Farey-$Q_c\approx11$, Dok.~343).
+\item[Galois-Raster] 901 rationale Verhältnisse $p/q\le4$ mit Primfaktoren
+  $\subseteq\{2,3,5,7,11,13\}$ bis Nenner 60. Die Primzahlmenge ist
+  $\{3\}\cup\{p : p\mid 3^k-1,\ k\le6\}$; eine Primzahl $p\neq3$ gehört zur
+  Tiefe $k$, wenn $k$ ein Vielfaches von $\mathrm{ord}_p(3)$ ist.
+\item[Toleranz] $100\xi = 1/75 \approx 1{,}33\,\%$ mit Farey-Höhe
+  $Q_c=\pi/\sqrt{6\cdot100\xi}\approx11{,}1$ (Dok.~343): Bei diesem Nenner
+  ist der mittlere Farey-Abstand gleich der doppelten Toleranz. Ein Raster
+  bis Nenner 60 ist dichter als die Toleranz und trennt nicht.
 \item[HRV-Bandgrenzen] VLF: $[0,\,\tfrac{1}{25}]$~Hz, LF: $[\tfrac{1}{25},\,\tfrac{3}{20}]$~Hz,
-  HF: $[\tfrac{3}{20},\,\tfrac{2}{5}]$~Hz --- 5-Limit-Konstanten \BM\ (Dok.~359 Satz~A).
-\item[Galois-Projektion] LF/HF $\mapsto$ nächstes $p/q$ im Raster.
-\item[Orbit-Typ] Galois-Tiefe $k=\mathrm{ord}_p(3)$ der Primfaktoren
-  (Dok.~343, 358).
-\item[Stabilität] Arnold-Zungenbreite $\approx 2/(p+q)$ (Dok.~328).
+  HF: $[\tfrac{3}{20},\,\tfrac{2}{5}]$~Hz. Die Primfaktoren liegen in
+  $\{2,3,5\}$ \BM; die Grenzen sind damit mit dem 5-Limit-Raster verträglich,
+  aber nicht durch es festgelegt (Abschnitt~\ref{sec:360baender}).
+\item[Galois-Projektion] Verhältnis $\mapsto$ nächstes $p/q$ im Raster,
+  Abstand $d=|r/(p/q)-1|$.
+\item[Orbit-Tiefe] $k=\max\,\mathrm{ord}_p(3)$ über die Primfaktoren
+  $p\notin\{2,3\}$ (Dok.~343, 358).
+\item[Komplexitätsmaß] $2/(p+q)$ ordnet Verhältnisse nach ihrer
+  Einfachheit (Dok.~328). Es ist keine berechnete Arnold-Zungenbreite;
+  dazu wäre die Kopplungsstärke eines konkreten Oszillatormodells nötig.
 \item[Pipeline] \texttt{hrv\_galois\_pipeline(rr\_ms)} --- ein Funktionsaufruf.
 \end{description}
 
+\textbf{Auflösungsbedingung.} Eine Klassifikation mit der Toleranz
+$\delta=100\xi$ ist nur sinnvoll, wenn die Frequenzauflösung
+$\Delta f/f\le\delta$ erfüllt. Mit $\Delta f=1/T_w$ für die Fensterlänge
+$T_w$ (bei Welch die Segmentlänge, nicht die Aufnahmedauer) folgt
+$T_w\ge1/(\delta f)$: 12{,}5~min bei 0{,}10~Hz, 15~min bei 0{,}083~Hz \BM.
+Davon zu unterscheiden sind der Mindestabstand zweier trennbarer Peaks
+(etwa $2/T_w$ beim Hann-Fenster) und die Genauigkeit der Lage eines
+einzelnen Peaks, die durch Interpolation feiner als $\Delta f$ werden kann.
+
+\textbf{Frequenz- und Leistungsverhältnisse.} Die Hypothese betrifft
+Frequenzverhältnisse gekoppelter Oszillatoren. LF/HF ist ein Verhältnis
+integrierter Bandleistungen; es gibt keinen Grund, es auf dem Raster zu
+erwarten. Die Projektion von LF/HF dient im Folgenden nur dazu, das
+Verhalten des Nullmodells zu zeigen.
+
 % ============================================================
-\section{Negativ-Validierung I: BIDMC-01}
+\section{Bandgrenzen und Nullmodell}\label{sec:360baender}
+% ============================================================
+
+\textbf{Bandgrenzen} \KM. Die drei Task-Force-Grenzen haben Primfaktoren in
+$\{2,3,5\}$ in Hz, mHz, Schlägen pro Minute ($2{,}4=12/5$, 9, 24) und als
+Perioden (25~s, $20/3$~s, $5/2$~s), weil die Umrechnungsfaktoren 60 und 1000
+nur diese Primzahlen enthalten. In rad/s sind sie irrational und nicht
+klassifizierbar. Die Eigenschaft ist auch nicht spezifisch: 8 von 9 Zahlen
+mit einer gültigen Ziffer und ein Drittel aller zweistelligen Dezimalwerte
+in $(0,1)$ sind 5-Limit. Gerundete Konventionen landen damit von selbst im
+Raster; die Bandgrenzen sind verträglich, aber nicht algebraisch festgelegt.
+Frequenzverhältnisse sind dagegen dimensionslos und einheitenunabhängig.
+
+\textbf{Nullmodell} \KM. Wahrscheinlichkeit, dass ein log-gleichverteilter
+Wert in $[1,4]$ innerhalb der Toleranz $\tau$ eines Rasterelements liegt
+(200\,000 Ziehungen):
+
+\begin{center}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+$\tau$ & Raster bis Nenner 60 (901) & Raster bis Nenner 11 (133) \\
+\midrule
+1{,}33\,\% & 100{,}0\,\% & 90{,}5\,\% \\
+0{,}14\,\% & 73{,}9\,\% & 18{,}5\,\% \\
+0{,}06\,\% & 39{,}5\,\% & 7{,}9\,\% \\
+0{,}02\,\% & 14{,}5\,\% & 2{,}6\,\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Mit dem Raster bis Nenner 60 kann das Kriterium \glqq innerhalb 1{,}33\,\%\grqq{} nichts
+unterscheiden. Auch das Raster bis zur Farey-Höhe 11 deckt bei 1{,}33\,\%
+noch 91\,\% ab.
+
+% ============================================================
+\section{Negativbefund I: BIDMC-01}
 % ============================================================
 
 \textbf{Datensatz:} BIDMC PPG and Respiration Dataset v1.0.0,
-Record 01 \LM\,\cite{Pimentel2017}.
-88~J., m., MICU, 8~min, 125~Hz PPG+Respiration.
+Record 01 \LM\,[Pim18].
+88~J., m., MICU, 8~min, 125~Hz PPG, EKG und Respiration.
 
 \textbf{Ergebnis:} 0/3 Frequenzverhältnisse erfüllen das 5-Limit-Kriterium
-(Welch und Lomb-Scargle). VLF nicht auflösbar (Aufnahmedauer 8~min $<$ 15~min
-Minimum für VLF). DFA $\alpha_1=0{,}50$, $\alpha_2=0{,}45$ --- weißes Rauschen;
-bei Gesunden $\approx1{,}0$.
+(Welch und Lomb-Scargle). VLF ist in 8~min nicht auflösbar. DFA
+$\alpha_1=0{,}50$, $\alpha_2=0{,}45$ --- weißes Rauschen; bei Gesunden
+$\approx1{,}0$.
 
 \textbf{Warum:}
 \begin{enumerate}
-\item Zu kurz für VLF ($<15$~min).
-\item ICU-Patient: fraktale Regulation weitgehend verloren.
-\item HF-Peak = gemessene Atemfrequenz (0{,}328~Hz = RESP-Kanal 0{,}336~Hz).
-\item Messunsicherheit Welch vs.\ Lomb-Scargle: $\pm2\,\%$ $>$ FFGFT-Grenze
-  1{,}33\,\%.
+\item Zu kurz für VLF.
+\item Intensivpatient: fraktale Regulation weitgehend verloren.
+\item HF-Peak = gemessene Atemfrequenz (0{,}328~Hz gegenüber 0{,}336~Hz im
+  RESP-Kanal).
+\item Messunsicherheit Welch gegenüber Lomb-Scargle $\pm2\,\%$, größer als
+  die Toleranz 1{,}33\,\%.
 \end{enumerate}
 
 % ============================================================
-\section{Negativ-Validierung II: Fantasia}
+\section{Negativbefund II: Fantasia}
 % ============================================================
 
 \textbf{Datensatz:} PhysioNet Fantasia Database v1.0.0
-\LM\,\cite{Gold2002}. 5 jung (f1y01--05, 21--34~J.) + 5 alt
+\LM\,[Iye96]. 5 jung (f1y01--05, 21--34~J.) + 5 alt
 (f2o01--05, 68--85~J.), je $\approx120$~min Ruhe, 250~Hz EKG,
-spontane Atmung. Annotationsdateien (.ecg), CC-BY 4.0.
+spontane Atmung. Referenz-Schlagannotationen (.ecg), CC-BY 4.0.
 
 \textbf{Methodik:} wfdb-Annotationen, Welch 10-min-Fenster,
 Zero-Padding $\times4$, parabolische Peak-Interpolation,
@@ -111,7 +178,7 @@ LF-Stabilität über 6 $\times$ 5-min-Segmente.
 \begin{center}
 \begin{tabular}{@{}lrrrrrrrl@{}}
 \toprule
-Rec & $n_\text{RR}$ & LF~Hz & CV\,\% & LF/HF & $p/q$ & $k$ & 5-Lim & Arnold \\
+Rec & $n_\text{RR}$ & LF~Hz & CV\,\% & LF/HF & $p/q$ & $k$ & 5-Lim & $2/(p+q)$ \\
 \midrule
 f1y01 & 8707 & 0{,}109 & 11{,}5 & 0{,}438 & $7/16$ & 6 & N & 0{,}087 \\
 f1y02 & 6919 & 0{,}085 & 33{,}0 & 0{,}867 & $13/15$ & 4 & N & 0{,}071 \\
@@ -129,131 +196,165 @@ f2o05 & 8334 & 0{,}049 & 11{,}4 & 1{,}873 & $15/8$ & 4 & J & 0{,}087 \\
 \end{center}
 
 \textbf{Statistische Tests (Mann-Whitney~U):} Alle Gruppenunterschiede
-jung vs.\ alt n.s.\ ($p>0{,}40$).
+jung gegenüber alt n.s.\ ($p>0{,}40$).
 
 \textbf{Befunde:}
 \begin{itemize}
 \item LF-Peak-Stabilität: 0/10 Records stabil ($\text{CV}>1{,}33\,\%$).
-\item 5-Limit LF/HF: 4/10 (40\,\%) --- nicht signifikant über
-  Zufallserwartung ($\approx30\text{--}40\,\%$).
-\item Kein Gruppenunterschied jung/alt (auch bei $n=5$ nicht ausreichend).
+\item 5-Limit-LF/HF (nächstes Rasterelement hat Primfaktoren in $\{2,3,5\}$):
+  4/10. Die Nullrate für dieses Kriterium ist 21\,\%; einseitiger
+  Binomialtest $p=0{,}14$, also nicht über Zufall.
+\item Kein Gruppenunterschied jung/alt ($n=5$ je Gruppe).
 \end{itemize}
+
+% ============================================================
+\section{Polar H10: Aufnahmen und Auswertung}
+% ============================================================
+
+\textbf{Gerät und Protokoll:} Polar H10 EKG-Brustgurt, Firmware 4.2.0,
+JSONL-Export über Polar Sensor Recording (Android), Autor als einziger
+Proband (75~J.), 10.~September 2026. Eine Spontanaufnahme liegend
+(21{,}9~min, im Gerät berechnete RR-Intervalle), sechs Aufnahmen sitzend
+mit Metronom, je 5{,}0--6{,}0~min, 130~Hz EKG. Jeder Klick markiert einen
+Wechsel der Atemphase; 4, 8, 10 und 12 Klicks/min entsprechen 2, 4, 5 und
+6 Atemzügen/min (0{,}033 bis 0{,}100~Hz). Die beiden als 4/min
+bezeichneten Dateien sind byte-identisch; es gibt eine Aufnahme mit
+4/min. Die Atmung wurde nicht mit einem eigenen Sensor gemessen.
+
+\textbf{Auswertung} \KM: R-Zacken mit NeuroKit2 \LM\,[Mak21],
+Artefaktkriterium $|\text{RR}/\text{Median}-1|>0{,}30$; markierte
+Intervalle werden entfernt, die übrigen Schläge bleiben auf ihrer echten
+Zeitmarke. Kubische Interpolation auf 4~Hz, lineare Trendbereinigung,
+Hann-Periodogramm über die ganze Aufnahme ($\Delta f=1/T\approx0{,}003$~Hz),
+Bandleistungen durch Trapezintegration über LF $[0{,}04,\,0{,}15)$ und
+HF $[0{,}15,\,0{,}40)$~Hz.
+
+\textbf{Schlagerkennung und Zeitachse.} Der einfache Energie-Detektor in
+\texttt{polar\_h10\_atemfrequenz\_scan.py} (fester Schwellwert beim
+90.~Perzentil) fand je Aufnahme 216--285 Schläge, der validierte Detektor
+396--443. In jeder Aufnahme mit Atemvorgabe fehlten damit 35--47\,\% der
+Schläge. Werden die verbleibenden Intervalle aneinandergehängt, schrumpft
+die Zeitachse auf 49--61\,\% der Aufnahmedauer, und alle Frequenzen
+verschieben sich um den Faktor 1{,}6--2{,}0 nach oben. Die Tabelle beruht
+auf der validierten Erkennung mit erhaltener Zeitachse.
+
+\begin{center}
+\small
+\begin{tabular}{@{}lrrrrrrrl@{}}
+\toprule
+Bedingung & $f_R$~Hz & $T$~min & Schläge & RMSSD~ms & LF-Peak & HF-Peak & LF/HF & nächstes $p/q$ \\
+\midrule
+Spontan, liegend & --- & 21{,}9 & 1517~RR & 19{,}0 & 0{,}074 & 0{,}225 & 1{,}65 & $33/20$ (0{,}09\,\%) \\
+2/min, Aufn.\,1 & 0{,}033 & 5{,}4 & 431 & 34{,}2 & 0{,}067 & 0{,}200 & 7{,}44 & --- \\
+2/min, Aufn.\,2 & 0{,}033 & 5{,}1 & 411 & 49{,}6 & 0{,}067 & 0{,}167 & 4{,}24 & --- \\
+4/min & 0{,}067 & 5{,}3 & 396 & 67{,}0 & 0{,}067 & 0{,}358 & 4{,}61 & --- \\
+5/min, Aufn.\,1 & 0{,}083 & 5{,}6 & 431 & 64{,}6 & 0{,}083 & 0{,}167 & 3{,}28 & $105/32$ (0{,}006\,\%) \\
+5/min, Aufn.\,2 & 0{,}083 & 5{,}1 & 400 & 68{,}5 & 0{,}083 & 0{,}167 & 2{,}47 & $121/49$ (0{,}05\,\%) \\
+6/min & 0{,}100 & 6{,}0 & 443 & 60{,}9 & 0{,}100 & 0{,}201 & 4{,}20 & --- \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent{\small Frequenzen in Hz. ---: LF/HF über 4 (außerhalb des Rasters)
+oder mehr als 1{,}33\,\% vom nächsten Element entfernt. Artefakte: je 0--1.}
+
+\textbf{Befund 1 --- Peak auf der Atemfrequenz} \KM: Bei 4, 5 und 6/min
+liegt der dominante Peak innerhalb einer Frequenzstufe auf der
+Metronomfrequenz. Die Atmung liegt damit im LF-Band: Der LF-Peak
+\emph{ist} der Atempeak. Wo die zweite Harmonische über 0{,}15~Hz liegt
+(5 und 6/min), ist sie der HF-Peak.
+
+\textbf{Befund 2 --- Resonanzatmung} \KM: RMSSD liegt bei 4--6/min bei
+61--69~ms, bei 2/min bei 34--50~ms. Das entspricht der bekannten
+Verstärkung der HRV durch langsame Atmung nahe der Barorezeptor-Resonanz
+\LM\,[Leh14, Sev22]. Die Spontanaufnahme ist liegend
+entstanden und mit den sitzenden Aufnahmen nicht direkt vergleichbar.
+
+\textbf{Befund 3 --- 2/min} \SM: Der dominante Peak liegt bei 0{,}067~Hz,
+dem Doppelten der vorgesehenen Atemfrequenz, mit einer kleineren
+Komponente bei 0{,}033~Hz. Ohne eigenes Atemsignal ist nicht zu
+entscheiden, ob das die zweite Harmonische sehr langsamer Atmung ist oder
+Atmung mit 4/min wegen der Klick-Konvention.
+
+\textbf{Befund 4 --- Gittertreffer im Zufallsbereich} \KM: Die beiden
+Aufnahmen bei 5/min liegen nahe an zwei \emph{verschiedenen}
+Rasterelementen ($105/32$ und $121/49$), obwohl die Bedingung dieselbe
+ist; ihr LF/HF unterscheidet sich um 28\,\%. In 17 gleitenden
+300-s-Fenstern der Spontanaufnahme schwankt LF/HF zwischen 0{,}89 und
+7{,}43 (CV 78\,\%); von den 13 Fenstern im Rasterbereich $[1,4]$ liegen 6
+innerhalb 0{,}06\,\% eines Elements, bei einer Nullrate von 39\,\%
+(Binomialtest $p=0{,}78$). Die Streuung der Schätzung ist um mehr als drei
+Größenordnungen größer als die Abstände zum Raster.
+
+\textbf{Spontanaufnahme} \KM: mittlere Herzfrequenz 69~/min, RMSSD
+19{,}0~ms, SDNN 48{,}9~ms. Ein einzelner verpasster Schlag (1741~ms,
+doppelter Median) hebt RMSSD ohne Artefaktbehandlung auf 36{,}3~ms. Der
+LF-Peak schwankt über die 300-s-Fenster zwischen 0{,}040 und 0{,}085~Hz
+(CV 22\,\%), weit über 1{,}33\,\%. LF/HF beträgt 1{,}65 mit einem Fenster
+über die ganze Aufnahme und 2{,}21 mit 300-s-Segmenten; schon eine
+Einstellung des Schätzers ändert den Wert um ein Drittel.
+
+\textbf{Methodische Lehren:}
+\begin{enumerate}
+\item Schlagerkennung gegen die erwartete Schlagzahl
+  (Herzfrequenz $\times$ Dauer) und einen validierten Detektor prüfen.
+\item Zeitachse erhalten: verworfene Intervalle entfernen, die übrigen
+  Schläge auf ihrer Zeitmarke lassen, nie aneinanderhängen.
+\item Ein einzelnes Artefakt kann RMSSD dominieren; Artefaktbehandlung ist
+  bei jeder Aufnahmedauer angebracht.
+\item Unter 9 Atemzügen/min liegt die Atmung im LF-Band; LF/HF hat dann
+  keine Deutung als sympathovagale Balance.
+\item $n=1$ und 5--6~min Aufnahmen erlauben keine statistischen Schlüsse;
+  alle Polar-Befunde sind explorativ.
+\end{enumerate}
 
 % ============================================================
 \section{Struktureller Grund und Konsequenz}
 % ============================================================
 
 \begin{quote}
-\textbf{Befund.} \BM\ Bei spontaner Atmung ist HF = Atemfrequenz
-(variabel 0{,}15--0{,}40~Hz). LF/HF ist das Verhältnis zweier
-unabhängiger physiologischer Regelkreise (Barorezeptor~/ Atmung)
-und konvergiert nicht gegen ein festes Galois-Verhältnis.
-Der Galois-Test ist bei spontaner Atmung strukturell nicht prüfbar.
+\textbf{Befund.} \BM\ Bei spontaner Atmung ist der HF-Peak die
+Atemfrequenz (variabel 0{,}15--0{,}40~Hz). LF/HF ist das Verhältnis
+zweier unabhängiger physiologischer Regelkreise (Barorezeptor~/ Atmung)
+und konvergiert nicht gegen ein festes Verhältnis. Bei geführter Atmung
+gibt das Metronom die Frequenz vor; Peak und Harmonische stehen dann in
+trivialen ganzzahligen Verhältnissen. In beiden Fällen ist LF/HF kein
+Prüfgegenstand der Galois-Hypothese.
 \end{quote}
 
-\textbf{Nächster Schritt \SM:} Kontrollierte Atmung bei 6~Zügen/min
-(0{,}10~Hz = LF-Resonanzfrequenz). Dann fallen HF und LF zusammen;
-das System kann einrasten (Arnold-Zunge breit) oder nicht.
-Das ist der Lehrer-\&-Gevirtz-Effekt \LM\,\cite{Lehrer2014},
-physiologisch gut belegt.
+% ============================================================
+\section{Nächster Schritt: prospektiver Test}\label{sec:360next}
+% ============================================================
 
-\textbf{Empfohlenes Setup:}
+Die Hypothese sagt etwas über Frequenzkopplung aus. Prüfbar ist das,
+wenn die Atemfrequenz gezielt relativ zur individuellen
+Barorezeptor-Resonanz $f_\text{res}$ gesetzt wird \SM:
+
 \begin{itemize}
-\item Polar H10 Brustgurt (1~ms RR-Auflösung, $\approx90$~€).
-\item 5~min Eingewöhnung, 10~min bei 6/min Metronom.
-\item Export via Elite HRV oder Kubios HRV (CSV).
-\item Analyse mit \texttt{galois\_hrv\_preprocess.py}.
+\item Resonanzbestimmung: geführte Atmung 4{,}5--7/min in Schritten von
+  0{,}5/min, je 2~min \LM\,[Leh14].
+\item Vier Blöcke zu 21~min (Auflösungsbedingung bei der niedrigsten
+  Atemfrequenz von etwa 0{,}062~Hz) bei $\rho=f_R/f_\text{res}\in\{2/3,\,3/2\}$
+  (Raster) und $\{0{,}618,\,1{,}618\}$ (goldener Schnitt), nach Atemrate
+  paarweise abgestimmt, in zufälliger Reihenfolge.
+\item Primärer Endpunkt: $n{:}m$-Phasensynchronisationsindex
+  \LM\,[Tas98] zwischen Atemphase (Atemgurt) und HRV-Komponente bei
+  $f_\text{res}$; Kontrast Raster minus goldener Schnitt, gepaarter
+  zweiseitiger $t$-Test.
+\item Fallzahl: $d_z=0{,}6$, Power 0{,}80 $\Rightarrow n=24$; mit
+  20\,\% Ausfall 30 Teilnehmende.
+\item Falsifikation: Ist die Kopplung bei Rasterverhältnissen nicht
+  stärker als beim goldenen Schnitt, hat das Komplexitätsmaß $2/(p+q)$ in
+  der HRV keine Grundlage.
 \end{itemize}
 
-% ============================================================
-% ============================================================
+Ein positives Ergebnis stützt die Prämisse, unterscheidet aber noch nicht
+die Primzahlmenge und die Farey-Höhe der FFGFT von allgemeinem
+Mode-Locking gekoppelter Oszillatoren; dafür dienen sekundäre Endpunkte
+(gemessenes Frequenzverhältnis gegen das Raster bis Nenner 11,
+Peak-Stabilität gegen 1{,}33\,\%).
 
 % ============================================================
-\section{Atemfrequenz-Scan: Ergebnisse nach Artefakt-Korrektur (10. September 2026)}
-% ============================================================
-
-\textbf{Protokoll:} Polar H10 EKG-Brustgurt, 130~Hz, sitzend, je ~5--6~min,
-Metronom-Klick = Wechsel (4~bpm $\to$ 2/min; 8~bpm $\to$ 4/min;
-10~bpm $\to$ 5/min; 12~bpm $\to$ 6/min).
-R-Peak-Detektion mit Artefakt-Filterung (Median $\pm30\,\%$).
-
-\begin{center}
-\begin{tabular}{@{}lrrrr@{}}
-\toprule
-Bedingung & Atem/min & LF~Hz & RMSSD~ms & Artefakte \\
-\midrule
-Spontan (liegend) & 12{,}6 & 0{,}073 & 33{,}6 & 0 \\
-4/min & 4{,}0 & 0{,}105 & 33{,}6 & 0 \\
-2/min Aufn.\,1 & 2{,}0 & 0{,}071 & 27{,}7 & 2 \\
-2/min Aufn.\,2 & 2{,}0 & 0{,}075 & 30{,}5 & 0 \\
-5/min Aufn.\,1 & 5{,}1 & 0{,}144 & 29{,}5 & 2 \\
-\textbf{5/min Aufn.\,2} & \textbf{5{,}0} & \textbf{0{,}132} & \textbf{39{,}9} & \textbf{0} \\
-6/min & 6{,}0 & 0{,}040 & 36{,}1 & 0 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\textbf{Befund 1 --- Kein RMSSD-Resonanzeffekt:}
-Nach Artefakt-Bereinigung liegt RMSSD bei allen Bedingungen
-zwischen 27--40~ms --- kein signifikanter Unterschied.
-Ohne Artefakt-Filterung erscheint bei 5/min ein scheinbares
-RMSSD-Maximum (67{,}2~ms); es ist ein R-Peak-Detektionsartefakt
-(2 missed beats durch Amplitudenmodulation des EKG bei langsamer
-Atmung, $|\Delta\text{RR}|_\text{max}=662$~ms).
-
-\textbf{Befund 2 --- LF-Peak wandert mit Atemfrequenz:}
-LF-Peak verschiebt sich mit der Atemfrequenz (0{,}040--0{,}144~Hz),
-zeigt aber keine stabile Resonanz im klassischen Sinne ($n=1$).
-Bei 2/min liegt der LF-Peak nahe dem Spontanwert (0{,}073~Hz) ---
-die Barorezeptor-Eigenfrequenz dominiert bei sehr langsamer Atmung.
-
-\textbf{Galois:} LF/HF trifft das Raster bei 5/min ($88/35$, 0{,}02~\%),
-6/min ($39/35$, 0{,}06~\%) und Spontan ($56/45$, 0{,}14~\%) --- alle $k=6$.
-Kein LF=Atem-Zusammenfall bei keiner Bedingung.
-
-\textbf{Methodische Lehren:} Artefakt-Filterung ist bei kontrollierter
-Atmung zwingend. Kurze Aufnahmen ($n=1$) erlauben keine statistischen
-Schlüsse --- alle Befunde sind explorativ.
-
-\section{Validierung III: Polar H10 Selbsttest (10. September 2026)}
-% ============================================================
-
-\textbf{Gerät:} Polar H10 EKG-Brustgurt, Firmware 4.2.0, JSONL-Export
-via Polar Sensor Recording (Android). Spontane Atmung, liegend,
-21{,}9~min, 1517~RR-Intervalle.
-
-\begin{center}
-\begin{tabular}{@{}lrl@{}}
-\toprule
-Kennwert & Wert & Einordnung \\
-\midrule
-HF & 69{,}2~bpm & Normal Ruhe \\
-RMSSD & 36{,}3~ms & Gut für 75~J.\ (Fantasia alt: 20--35~ms) \\
-SDNN & 53{,}8~ms & Normal \\
-Atemfrequenz & 12{,}6/min & Spontan \\
-LF-Peak & 0{,}073~Hz & Unter Norm ($\approx$0{,}10~Hz) \\
-LF/HF & 1{,}2427 & $\to$ Galois $56/45$, Distanz 0{,}14~\% \\
-LF-CV & 10{,}55~\% & $\gg$ 1{,}33~\% (instabil) \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\textbf{Befund:} Bestätigt die Fantasia-Negativ-Validierung. LF-CV
-10{,}55~\% liegt im Bereich der Fantasia-Probanden (11--33~\%).
-LF/HF liegt im Galois-Raster (Distanz 0{,}14~\%), aber mit Orbit-Tiefe
-$k=6$ (Primzahl~7, GF$(729)$, R115) und geringer Arnold-Stabilität (0{,}020).
-
-\textbf{Positiver Befund:} RMSSD 36{,}3~ms ist für 75~J.\ sehr gut ---
-deutlich über dem Mittel der Fantasia-Gruppe ``alt'' (20--35~ms).
-Datenqualität des Polar H10: einwandfrei.
-
-\textbf{Hinweis zur individuellen Resonanzfrequenz:} LF-Peak bei 0{,}073~Hz
-(unter Norm 0{,}10~Hz) deutet darauf hin, dass die individuelle
-Resonanzfrequenz möglicherweise bei 4--5/min liegt, nicht bei 6/min.
-Das individuelle Protokoll (schrittweise Frequenzen 4--8/min testen)
-würde dies klären --- Lehrer \& Gevirtz (2014) beschreiben die
-Ermittlungsprozedur.
-
 \section{Zusammenfassung}
 % ============================================================
 
@@ -263,13 +364,13 @@ Ermittlungsprozedur.
 Ergebnis & Aussage & Status \\
 \midrule
 Modul & \texttt{galois\_hrv\_preprocess.py} funktioniert & \KM \\
-BIDMC-01 & Negativ: zu kurz, ICU, kein Galois-Signal & \LM \\
-Fantasia & Negativ: spontane Atmung, LF-CV 11--33\,\% & \LM \\
-H10 Selbsttest & Negativ: LF-CV 10{,}55\,\%, bestätigt Fantasia & \KM \\
-Atem-Scan & Kein RMSSD-Resonanzeffekt nach Artefakt-Korrektur & \KM \\
-Galois & LF/HF bei 5/min: $88/35$ (0{,}02\,\%), $k=6$ & \KM \\
-Grund & HF = Atmung; LF wandert; kein LF=Atem-Zusammenfall & \BM \\
-Nächstes & Längere Aufnahmen ($\geq15$~min), $n>5$ & \SM \\
+Bandgrenzen & 5-Limit-verträglich, nicht festgelegt & \BM \\
+Nullmodell & Nahe Gittertreffer von LF/HF sind kein Beleg & \KM \\
+BIDMC-01 & Negativ: zu kurz, Intensivpatient & \LM \\
+Fantasia & Negativ: spontane Atmung, LF-CV 11--33\,\%, 4/10 im Zufallsbereich & \LM \\
+Polar H10 & Peak auf der Atemfrequenz, HF = Harmonische, Treffer zufällig & \KM \\
+Grund & LF/HF ist Leistungsverhältnis; Atmung bestimmt die Peaks & \BM \\
+Nächstes & Prospektiver Kopplungstest, $n=30$, Blöcke zu 21~min & \SM \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -277,12 +378,24 @@ Nächstes & Längere Aufnahmen ($\geq15$~min), $n>5$ & \SM \\
 \section*{Literatur}
 
 \begin{description}[leftmargin=2em,labelwidth=1.8em]
-\item[{[Pim17]}] Pimentel et al.\ (2017). BIDMC PPG and Respiration Dataset.
-  PhysioNet. \url{https://physionet.org/content/bidmc/1.0.0/}
-\item[{[Gol02]}] Gold et al.\ (2002). Fantasia Database. PhysioNet.
-  \url{https://physionet.org/content/fantasia/1.0.0/}
-\item[{[Leh14]}] Lehrer \& Gevirtz (2014). Heart rate variability biofeedback.
-  \emph{Front.\ Psychol.}\ 5:756.
+\item[{[Pim18]}] Pimentel, M., Johnson, A., Charlton, P., \& Clifton, D.\ (2018).
+  BIDMC PPG and Respiration Dataset (v1.0.0). PhysioNet.
+  \url{https://doi.org/10.13026/C2208R}
+\item[{[Iye96]}] Iyengar, N., Peng, C.\,K., Morin, R., Goldberger, A.\,L., \&
+  Lipsitz, L.\,A.\ (1996). Age-related alterations in the fractal scaling of
+  cardiac interbeat interval dynamics. \emph{Am.\ J.\ Physiol.\ Regul.\ Integr.\
+  Comp.\ Physiol.}\ 271(4), R1078--R1084. Fantasia Database, PhysioNet,
+  \url{https://doi.org/10.13026/C2RG61}
+\item[{[Leh14]}] Lehrer, P.\,M., \& Gevirtz, R.\ (2014). Heart rate variability
+  biofeedback: How and why does it work? \emph{Front.\ Psychol.}\ 5, 756.
+\item[{[Sev22]}] Sevoz-Couche, C., \& Laborde, S.\ (2022). Heart rate
+  variability and slow-paced breathing: When coherence meets resonance.
+  \emph{Neurosci.\ Biobehav.\ Rev.}\ 135, 104576.
+\item[{[Mak21]}] Makowski, D.\ et al.\ (2021). NeuroKit2: A Python toolbox for
+  neurophysiological signal processing. \emph{Behav.\ Res.\ Methods} 53,
+  1689--1696.
+\item[{[Tas98]}] Tass, P.\ et al.\ (1998). Detection of $n{:}m$ phase locking
+  from noisy data. \emph{Phys.\ Rev.\ Lett.}\ 81, 3291--3294.
 \item[{[TF96]}] Task Force ESC/NASPE (1996). Heart rate variability.
   \emph{Eur.\ Heart J.}\ 17, 354--381.
 \end{description}
@@ -295,7 +408,10 @@ Nächstes & Längere Aufnahmen ($\geq15$~min), $n>5$ & \SM \\
 \texttt{orbit\_experiment\_synthetic.py},
 \texttt{01\_rpeaks\_bidmc01.py},
 \texttt{02\_welch\_5limit.py},
-\texttt{03\_lombscargle\_dfa.py}.
+\texttt{03\_lombscargle\_dfa.py},
+\texttt{pruef\_galois\_nullmodell.py}.
+Polar-Auswertung, Nullmodell und alle Zahlen der Abschnitte~2 und~5:
+\texttt{SWT\_Revision/pruef\_swt\_revision.py} (25/25 Assertions).
 Fantasia-Daten: f1y01--05, f2o01--05 (.ecg/.hea, CC-BY~4.0).
 
 \section*{Vermerk zur Verwendung von KI-Assistenz}

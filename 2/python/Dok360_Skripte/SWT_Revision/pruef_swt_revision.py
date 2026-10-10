@@ -160,6 +160,16 @@ OUT["R5_sliding"].update({"n_in_1_4": n, "hits_in_1_4_0.06": k, "rate_in_1_4": k
     "ci95": [float(ci.low), float(ci.high)], "binom_p_vs_null": float(stats.binomtest(k, n, OUT["R1"]["cov_G60"]["0.06%"]).pvalue)})
 check("R5c Gleitfenster in [1,4]: Trefferquote mit Nullrate vereinbar (p>0.05)", OUT["R5_sliding"]["binom_p_vs_null"] > 0.05)
 
+# ---------------- R7 Spontanaufnahme: SDNN, LF-Peak-Stabilität (Dok. 360) ----------------
+sdnn = float(np.std(rr, ddof=1)); lfpk = []
+for s0 in np.arange(tb[0], tb[-1]-win, step):
+    m = (tg>=s0)&(tg<s0+win); f,p = signal.welch(rg[m], fs=4, window="hann", nperseg=m.sum(), nfft=16384, detrend="linear")
+    lfpk.append(pk(f,p,.04,.15))
+lfpk = np.array(lfpk)
+OUT["R7_spont"] = {"sdnn": sdnn, "lfpk_mean": float(lfpk.mean()), "lfpk_cv": float(lfpk.std(ddof=1)/lfpk.mean()),
+                   "lfpk_min": float(lfpk.min()), "lfpk_max": float(lfpk.max())}
+check("R7a Spontan: LF-Peak-CV über 300-s-Fenster >> 1.33%", OUT["R7_spont"]["lfpk_cv"] > 10*RES)
+
 # ---------------- R6 Fallzahl ----------------
 def n_paired(dz, alpha=0.05, power=0.80):
     for n in range(3, 500):

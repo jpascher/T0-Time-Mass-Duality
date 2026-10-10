@@ -37,12 +37,12 @@ Galois-informed AI architecture could achieve.
 \begin{enumerate}
 \item Theorem~A \BM: The standard HRV frequency bands (Task Force 1996)
   have band limits with exclusively 5-limit prime factors $\{2,3,5\}$ and
-  thus lie in the Galois grid of Doc.~358 Theorem~B. Current AI models
-  treat these limits as free parameters --- the algebra enforces them.
+  thus lie in the Galois grid of Doc.~358 Theorem~B. They are compatible
+  with the grid, but not determined by it: rounded decimal values almost
+  always lie in the 5-limit (Doc.~360).
 \item Theorem~B \BM: The resolution limit $100\xi\approx1.33\,\%$ (Doc.~343)
-  appears empirically in AI-based HRV analyses as a threshold below which
-  models no longer generalise. The models learn the limit implicitly;
-  they do not know why it lies there.
+  has the Farey height $Q_c\approx11.1$. A classification with this
+  tolerance requires a frequency resolution $\Delta f/f\le100\xi$.
 \item Theorem~C \BM: Group-equivariant networks (G-CNNs) for continuous
   groups (E(3), SO(3)) demonstrably reduce the number of parameters and
   improve generalisation. For finite Galois groups GF$(3^k)$ this
@@ -84,8 +84,7 @@ entirely missing. This is the gap that this document identifies.
 \subsection*{HRV analysis with AI}
 
 Multi-resolution HRV analysis with machine learning shows that different
-resolution levels yield qualitatively different patterns and that models
-at the wrong scale lead to overfitting \LM\,\cite{Gupta2024}. Current
+resolution levels yield different features \LM\,\cite{Gupta2024}. Current
 AI-based HRV systems use the Task Force bands VLF/LF/HF as a fixed
 input quantity, without knowing why these limits lie where they do
 \LM\,\cite{Villanueva2026}.
@@ -116,13 +115,15 @@ $f_\text{HF}/f_\text{LF} = 8/3$ likewise lie in the 5-limit.
 \textbf{Consequence for AI:} Current HRV AI models use these
 band limits as free hyperparameters, learned from data or set
 manually \LM\,\cite{Villanueva2026}. A Galois-informed network
-would treat them as enforced: no learning effort for a decision
-that the algebra has already made. This corresponds to the idea of
-``inductive bias'' in learning theory --- only algebraically grounded
-instead of empirically chosen \LM\,\cite{ILCRBlog2023}.
+could adopt them as fixed constants. This is a setting, not an
+algebraic necessity: 8 of the 9 numbers with one significant digit and a
+third of all two-decimal values lie in the 5-limit, and in rad/s the
+limits are irrational (Doc.~360). As an ``inductive bias'' in the sense
+of learning theory \LM\,\cite{ILCRBlog2023} the adoption is admissible,
+but not algebraically grounded.
 
 % ============================================================
-\section{Theorem B: The resolution limit appears empirically}
+\section{Theorem B: Resolution limit and Farey height}
 % ============================================================
 
 \begin{quote}
@@ -131,25 +132,16 @@ instead of empirically chosen \LM\,\cite{ILCRBlog2023}.
 $Q_c = \pi/\sqrt{6\cdot100\xi} \approx 11.1$.
 Frequency ratios with denominators $>Q_c$ cannot be separated in the
 Galois grid. The HRV band limits have denominators 5, 20, 25 --- all in
-the separable range. Below the bandwidth of individual bands
-($\Delta f/f \lesssim 1\,\%$) the Galois classification is no
-longer applicable.
+the separable range. A classification with the tolerance $100\xi$ is
+meaningful only if the frequency resolution satisfies $\Delta f/f\le100\xi$.
 \end{quote}
 
-\textbf{Empirical counterpart:} Gupta et al.\ \LM\,\cite{Gupta2024}
-show that multi-resolution HRV AI no longer generalises at resolutions
-finer than $\sim1\,\%$ of the bandwidth and overfits to measurement noise.
-The model learns the limit implicitly --- because the data contain it.
-
-\textbf{What this means:} AI models trained with higher frequency
-resolution learn $K_\text{frak}$ effects (embedding errors,
-Doc.~333) as supposed signal. This is not a modelling error ---
-it is a physical limit. The algebra predicts it; AI discovers
-it in training.
-
-\textbf{Practical consequence \KM:} The optimal frequency resolution for
-HRV AI systems is $\Delta f / f \geq 100\xi \approx 1.3\,\%$.
-Finer resolution is wasted capacity.
+\textbf{Practical consequence \KM:} With $\Delta f=1/T_w$ for the window
+length $T_w$ (in Welch's method the segment length) this gives
+$T_w\ge1/(100\xi\,f)$, i.e.\ 12.5~min at 0.10~Hz and 15~min at
+0.083~Hz (Doc.~360). Shorter windows cannot distinguish grid elements.
+Whether the threshold appears empirically in AI-based HRV analyses is not
+established \SM.
 
 % ============================================================
 \section{Theorem C: What group-equivariant networks achieve --- and where the gap is}
@@ -247,8 +239,8 @@ The Frobenius action $x\mapsto x^3$ is the natural symmetry
 Before the Galois projection: a low-pass filter with cutoff
 $\Delta f/f = 100\xi \approx 1.33\,\%$. Everything below this threshold
 is treated as embedding noise and is not classified.
-This corresponds to the recommendation of Gupta et al.\ \cite{Gupta2024} ---
-which there is empirical; here it is algebraically grounded.
+The threshold is a setting of FFGFT; an empirical counterpart in HRV data
+is not established (Doc.~360).
 
 \subsection*{Stability assessment: Arnold tongue width}
 
@@ -266,7 +258,7 @@ learned by the network, but computed from the algebra.
 & Standard AI & Galois-informed \\
 \midrule
 Admissibility criterion & learned (incomplete) & enforced (complete) \\
-Resolution limit & found empirically & set algebraically \\
+Resolution limit & not provided & set algebraically \\
 Stability prediction & only for cases seen & for all cases (Arnold tongue) \\
 Number of parameters & $|G|^2 = 144$ & $|G| = 12$ \\
 Interpretability & limited & complete \\
@@ -281,20 +273,21 @@ Interpretability & limited & complete \\
 For heart rate variability analysis, concrete consequences follow:
 
 \begin{enumerate}
-\item \textbf{Band limits as enforced constants:} VLF/LF/HF limits
-  are not learned from data (Theorem~A). The search space of the network
-  shrinks accordingly.
-\item \textbf{Optimal resolution:} $\Delta f/f \geq 1.3\,\%$ as an
-  algebraically grounded cutoff (Theorem~B). This corresponds to $\sim0.002$\,Hz
-  in the LF band --- practically attainable with standard RR-interval measurement.
+\item \textbf{Band limits as fixed constants:} VLF/LF/HF limits
+  are not learned from data (Theorem~A); they are compatible with the grid,
+  but a setting. The search space of the network shrinks accordingly.
+\item \textbf{Required resolution:} $\Delta f/f \le 1.33\,\%$
+  (Theorem~B), i.e.\ $\approx0.0013$\,Hz at 0.10~Hz and a window length of
+  at least 12.5~min.
 \item \textbf{New biomarkers:} Instead of the LF/HF ratio (a single number),
   a Galois-informed network could output the \emph{orbit type} of the dominant
   frequency ratio --- an algebraic biomarker that
   indicates in which Galois layer ($k=3,4,5,6$) the heart is currently
   oscillating. This is new and has no counterpart in the literature \SM.
-\item \textbf{Stability prediction:} Whether a current HRV pattern
-  is robust (wide Arnold tongue) or fragile (narrow tongue) --- directly
-  from the algebra, not from historical data.
+\item \textbf{Stability prediction \SM:} Whether a current HRV pattern
+  is robust (wide Arnold tongue) or fragile (narrow tongue). The premise
+  that HRV frequency ratios lock onto the grid is untested; the data in
+  Doc.~360 do not support it, and a prospective test is described there.
 \end{enumerate}
 
 % ============================================================
@@ -307,7 +300,8 @@ For heart rate variability analysis, concrete consequences follow:
 \item The architecture sketch in §5 is speculative \SM\ --- it outlines
   a direction, not a finished system.
 \item The algebraic orbit biomarker in §6 is a hypothesis; its
-  physiological significance is open.
+  physiological significance is open. The exploratory test on HRV data
+  (Doc.~360) gave a negative result.
 \item The PAC non-learnability of Theorem~D applies to the universal
   admissibility criterion, not to specific instances of it ---
   a network can learn that $4/3$ is stable.
@@ -322,8 +316,8 @@ For heart rate variability analysis, concrete consequences follow:
 \toprule
 Theorem & Statement & Status \\
 \midrule
-A & HRV band limits in the 5-limit grid: algebraically enforced & \BM \\
-B & Resolution limit $100\xi\approx1.3\,\%$ appears empirically in AI & \BM/\LM \\
+A & HRV band limits in the 5-limit grid: compatible, not determined & \BM \\
+B & Resolution limit $100\xi\approx1.33\,\%$, $Q_c\approx11.1$; classification requires $\Delta f/f\le100\xi$ & \BM \\
 C & G-CNNs for GF$(3^k)$: parameter reduction 12x; architecture missing & \BM/\SM \\
 D & Admissibility criterion not PAC-learnable from finite data & \BM \\
 Arch. & Galois-informed network: sketch & \SM \\
@@ -339,17 +333,18 @@ Arch. & Galois-informed network: sketch & \SM \\
   \emph{Physics-Informed Neural Networks and Extensions.}
   arXiv:2408.16806.
 \item[\cite{Finzi2022}]
-  Finzi, M. (2022).
+  Finzi, M. (2023).
   \emph{Understanding and Incorporating Mathematical Inductive Biases
-  in Deep Learning.} PhD Thesis, NYU.
+  in Neural Networks.} PhD Thesis, NYU.
   \url{https://cs.nyu.edu/media/publications/Marc_Finzi_Thesis__12_.pdf}
 \item[\cite{Gupta2024}]
-  Gupta, K.\ et al.\ (2024).
-  Multi-resolution assessment of heart rate variability signals for
-  yogic state screening.
-  \emph{Applied Soft Computing}, DOI: 10.1016/j.asoc.2024.111794.
+  Gupta, K., Sinha, G.\,R., Bhat, R., Saoji, A.\,A., \& Manjunath, N.\,K.\ (2024).
+  Multi-resolution assessment of heart rate variability signals during
+  yogic and normal breathing using machine learning modules.
+  \emph{Applied Soft Computing}, 164, 112020.
+  DOI: 10.1016/j.asoc.2024.112020.
 \item[\cite{Villanueva2026}]
-  Villanueva, C.\ et al.\ (2026).
+  Zimatore, G.\ et al.\ (2026).
   HRV in Stress Monitoring by AI: A Scoping Review.
   \emph{MDPI Applied Sciences}, 16(1):23.
   \url{https://www.mdpi.com/2076-3417/16/1/23}

@@ -297,7 +297,7 @@
 | 357 | Standardmodell-Quantenzahlen aus GF(27)^* — Belegstatus — Dok. 346 / 347 / 348 / 349 / 353 (Übersicht Dok. 356) | [PDF](2/pdf/357_SM_Teilchen_GF27_Zusatz_De.pdf) |
 | 358 | Harmonik und algebraische Struktur — Warum dieselbe Mathematik — und was das bringt | [PDF](2/pdf/358_Harmonik_Algebra_De.pdf) |
 | 359 | KI-basierte Mustererkennung — und algebraische Grenzen der Frequenzanalyse — Was lernbar ist — und was nicht | [PDF](2/pdf/359_KI_Grenzen_Frequenzanalyse_De.pdf) |
-| 360 | Galois-informierte HRV-Analyse — Implementierung und Negativ-Validierung | [PDF](2/pdf/360_HRV_Galois_Experiment_De.pdf) |
+| 360 | Galois-informierte HRV-Analyse — Implementierung und explorative Bewertung | [PDF](2/pdf/360_HRV_Galois_Experiment_De.pdf) |
 | 361 | Kagome-Gitter und FFGFT: — Vier strukturelle Parallelen | [PDF](2/pdf/361_Kagome_FFGFT_Vergleich_De.pdf) |
 | 362 | Die BAW-Ising-Maschine als Resonanzrechner — Vadde et al. (2026) im Licht von Dok. 173, 328 und 343 | [PDF](2/pdf/362_BAW_Ising_FFGFT_De.pdf) |
 | 363 | Hodge-Theorie auf T4/Z3 im Rahmen der FFGFT — Frobenius, Sektorpaarung und algebraische Zykel — ein bekannter Spezialfall und seine Galois-Struktur | [PDF](2/pdf/363_Hodge_T4Z3_De.pdf) |
