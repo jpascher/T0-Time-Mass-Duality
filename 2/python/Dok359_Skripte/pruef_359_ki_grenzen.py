@@ -110,12 +110,9 @@ check("C3 Parameterreduktion Z_12-equivariant: 12x weniger Parameter",
       N_free // N_equiv == 12, f"{N_free}/{N_equiv} = {N_free//N_equiv}")
 
 # ---------------------------------------------------------------
-# Satz D: PAC-Nicht-Lernbarkeit universeller algebraischer Eigenschaften
+# Satz D: Lernbarkeit des Zulässigkeitskriteriums hängt an der Hypothesenklasse
 # ---------------------------------------------------------------
-# D1: Satz B aus Dok. 358 gilt für unendlich viele mögliche Verhältnisse
-#     → nicht aus endlichem Trainingsset induzierbar (Satz von Gold 1967)
-# Wir zeigen: für jeden endlichen Trainingsset S mit |S|=n gibt es
-# unendlich viele Verhältnisse p/q mit Primfaktoren ≤ 13, die nicht in S sind
+# Raster: gekürzte Brüche p/q mit p,q ≤ 100; zulässig = Primfaktoren in {2,3,5,7,11,13}
 def rationals_in_grid(max_num, max_den, grid):
     """Rationale Zahlen p/q mit Primfaktoren in grid."""
     result = []
@@ -135,6 +132,40 @@ n_train = 100
 coverage = n_train / len(grid_rationals_small)
 check("D2 100 Trainingsbeispiele decken < 10% des Galois-Rasters (p/q ≤ 100/100) ab",
       coverage < 0.10, f"{coverage:.2%}")
+
+# D3: Größe des Rasters (alle gekürzten Brüche p,q ≤ 100)
+from math import log, ceil
+import random
+domain = [(p, q) for p in range(1, 101) for q in range(1, 101) if gcd(p, q) == 1]
+N_dom = len(domain)
+check("D3 Raster p,q ≤ 100: 6087 gekürzte Brüche, davon 1453 zulässig",
+      N_dom == 6087 and len(grid_rationals_small) == 1453, f"{N_dom} / {len(grid_rationals_small)}")
+
+# D4: PAC-Schranke ohne Strukturannahme (|H| = 2^N_dom), eps = delta = 5 %
+eps = delta = 0.05
+m_free = ceil((N_dom * log(2) + log(1 / delta)) / eps)
+check("D4 ohne Strukturannahme: PAC-Schranke rund 84 000 markierte Beispiele",
+      84000 <= m_free <= 85000, f"m = {m_free}")
+
+# D5: PAC-Schranke mit Primfaktor-Struktur (P ⊆ Primzahlen ≤ 100, |H| = 2^25)
+primes100 = [n for n in range(2, 101) if prime_factors(n) == {n}]
+m_struct = ceil((len(primes100) * log(2) + log(1 / delta)) / eps)
+check("D5 mit Primfaktor-Struktur: 25 Primzahlen, Schranke ≤ 407 Beispiele",
+      len(primes100) == 25 and m_struct == 407, f"m = {m_struct}")
+
+# D6: Lernen nur aus positiven Beispielen (kleinste erklärende Primzahlmenge)
+S_true = {2, 3, 5, 7, 11, 13}
+adm = [(x.numerator, x.denominator) for x in grid_rationals_small]
+rng = random.Random(1)
+def recovered(n):
+    P = set()
+    for p, q in rng.sample(adm, n):
+        P |= prime_factors(p) | prime_factors(q)
+    return P == S_true
+r10 = sum(recovered(10) for _ in range(1000)) / 1000
+r30 = sum(recovered(30) for _ in range(1000)) / 1000
+check("D6 positive Beispiele: {2,…,13} nach 10 Beispielen ≥ 90 %, nach 30 in allen 1000 Läufen",
+      r10 >= 0.90 and r30 == 1.0, f"10: {r10:.1%}, 30: {r30:.1%}")
 
 print(f"\n{ok}/{tot} Assertions bestanden")
 raise SystemExit(0 if ok == tot else 1)

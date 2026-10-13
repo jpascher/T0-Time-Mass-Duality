@@ -1,0 +1,457 @@
+% 393_Rauschgrenze_Lernende_Systeme_De_ch.tex
+% Johann Pascher, 13. Okt. 2026
+% Rauschgrenze und lernende Systeme: Fragen und Antworten
+
+\providecommand{\BM}{\textbf{[B]}}
+\providecommand{\KM}{\textbf{[K]}}
+\providecommand{\SM}{\textbf{[S]}}
+\providecommand{\XM}{\textbf{[X]}}
+\providecommand{\QM}{\textbf{[Q]}}
+
+\chapter*{Rauschgrenze und lernende Systeme}
+\addcontentsline{toc}{chapter}{Rauschgrenze und lernende Systeme}
+
+\begin{abstract}
+Der Korpus kennt eine Rauschgrenze: Ab einer bestimmten Messtoleranz sind harmonische Zusammenhänge
+nicht mehr von Zufall zu unterscheiden (Dok.~343, Satz G$'$). Dieses Dokument geht in Frage und
+Antwort der Frage nach, ob neuronale Netze und Sprachmodelle an dieselbe Grenze stoßen, warum sie
+trotzdem fast immer lesbare Sätze bilden, warum Sprache Fehler verzeiht und Zahlen nicht, und welche
+Rolle Wahrscheinlichkeit und die Gewichte eines Netzes dabei spielen. Ein Nulltest mit vollständiger
+symbolischer Suche über rund 23 Millionen Ausdrücke zeigt, dass die dimensionslosen Messgrößen der
+Grundform allein keine harmonische Struktur über Zufallsniveau tragen, und dass selbst eine echte
+Regel wie die Balmer-Serie aus wenigen Beispielen nur mit der passenden, engen Vorgabe sichtbar wird.
+Der gemeinsame Kern aller Antworten: Diskrete Struktur ist fehlertolerant, die Rauschgrenze sitzt
+am Übergang vom Diskreten zum Kontinuum, und Struktur, die die Daten nicht hergeben, muss vorgegeben
+und dann geprüft werden.
+\end{abstract}
+
+% ============================================================
+\section*{Statusmarkierungen}
+% ============================================================
+\begin{center}
+\begin{tabular}{@{}lp{11cm}@{}}
+\textbf{[B]} & Algebraisch oder informationstheoretisch bewiesen. \\[2pt]
+\textbf{[K]} & Numerisch bestätigt (Prüfskript). \\[2pt]
+\textbf{[S]} & Setzung, offen oder Einordnung ohne eigene Rechnung. \\[2pt]
+\textbf{[X]} & Durch die Rechnung ausgeschlossen. \\[2pt]
+\textbf{[Q]} & Aus der Literatur übernommen, mit Quelle. \\
+\end{tabular}
+\end{center}
+
+\noindent Das Dokument ist als Folge von Fragen und Antworten aufgebaut. Die Fragen sind in der
+Reihenfolge belassen, in der sie sich auseinander ergeben; jede Antwort steht für sich. Abschnitt~13
+fasst den gemeinsamen Kern in einem Bild zusammen.
+
+% ============================================================
+\section{Die Rauschgrenze im Korpus}
+% ============================================================
+
+\textbf{Frage.} Was ist mit der Rauschgrenze gemeint?
+
+\textbf{Antwort.} Ein gemessenes Verhältnis ist nur bis auf eine Toleranz $\varepsilon$ bekannt. Je
+größer der zugelassene Nenner, desto dichter liegen die Brüche; ab der Farey-Höhe
+\[
+  Q_c=\frac{\pi}{\sqrt{6\,\varepsilon}}
+\]
+liegen im Toleranzfenster so viele Brüche, dass ein echtes Verhältnis nicht mehr von einem zufälligen
+zu trennen ist (Dok.~343, Satz G$'$). Bei $\varepsilon=1{,}05\,\%$, der Größe der fraktalen Korrektur,
+ist $Q_c\approx12{,}5$; bei $\varepsilon=100\,\xi\approx1{,}33\,\%$ ist $Q_c\approx11{,}1$ (Dok.~359,
+Satz~B) \KM. Harmonische Zusammenhänge mit kleinen Nennern bleiben sichtbar, feinere gehen im Rauschen
+unter. Die Grenze ist eine Eigenschaft der Daten, nicht des Verfahrens: Was im Signal nicht enthalten
+ist, holt keine Analyse zurück, weder eine Fourier-Analyse noch eine Autokorrelation \BM.
+
+% ============================================================
+\section{Stoßen neuronale Netze und Sprachmodelle an dieselbe Grenze?}
+% ============================================================
+
+\textbf{Frage.} Müssten neuronale Netze und Sprachmodelle bei der Mustererkennung nicht ebenfalls an
+diese Grenze stoßen?
+
+\textbf{Antwort.} Ja. Ein Netz ist ein Verfahren wie jedes andere; es kann die Grenze erreichen, aber
+nicht überschreiten. Jenseits der Grenze erkennt es nicht mehr, sondern passt sich an das Rauschen an
+und hält zufällige Nähe für Struktur; in der Lerntheorie heißt das Überanpassung. Hinzu kommt eine
+bekannte Eigenschaft solcher Netze: Sie lernen grobe, niederfrequente Strukturen zuerst und feine
+spät \QM\,\cite{Rahaman2019}. Feine Strukturen sind aber gerade die, die dem Rauschen am nächsten
+liegen.
+
+Sprachmodelle sind in einer ungünstigeren Lage. Sie lernen aus Text, nicht aus Messsignalen, und haben
+keine eigene Messauflösung. Bei Zahlenverhältnissen neigen sie zu Falschtreffern: Bei genügend vielen
+Kombinationen findet sich fast immer eine \enquote{harmonische} Erklärung (Look-elsewhere-Effekt).
+Deshalb werden im Korpus Prüfskripte als Nulltests angelegt: Liefert eine Zufallsauswahl dasselbe
+Ergebnis, wird es nicht gewertet. Das gilt für jeden Vorschlag eines Sprachmodells.
+
+Besser als die Rohdaten werden Netze nur durch eingebautes Vorwissen. Dok.~359 Satz~D zeigt das an
+einem Beispiel: Ob das Zulässigkeitskriterium \enquote{Primfaktoren nur aus $\{2,3,5,7,11,13\}$}
+lernbar ist, entscheidet die Hypothesenklasse. Ohne Strukturannahme verlangt die Lernschranke rund
+84\,000 markierte Beispiele, mit der Strukturannahme \enquote{Primfaktoren aus einer festen Menge}
+höchstens 407; aus positiven Beispielen allein wird die richtige Primzahlmenge dann schon nach 30
+Beispielen sicher erkannt \KM\,\cite{ShalevShwartz2014}.
+
+% ============================================================
+\section{Warum bilden Sprachmodelle trotzdem lesbare Sätze?}
+% ============================================================
+
+\textbf{Frage.} Wenn das so ist, warum erzeugen Sprachmodelle kaum je unlesbare Sätze?
+
+\textbf{Antwort.} Weil Grammatik und Satzbau das sind, was in den Trainingsdaten am dichtesten
+vorkommt. Es sind Billionen Wörter, dieselben Regeln wiederholen sich in Millionen verschiedener
+Sätze, es gibt kein Messrauschen, und die Architektur ist auf Abfolgen von Wörtern zugeschnitten. Das
+ist genau der günstige Fall aus Dok.~359 Satz~D: passende Vorgabe und reichlich Beispiele.
+
+Schwach werden die Modelle dort, wo das Muster selten oder exakt ist: genaue Zahlen, Rechenwege,
+seltene Fakten, Literaturangaben. Dort erzeugen sie Plausibles, und der Satz bleibt dabei flüssig.
+Lesbarkeit ist das dichte Muster, Richtigkeit oft das dünne. Ein gut geschriebener Satz eines
+Sprachmodells sagt deshalb nichts über die Richtigkeit seines Inhalts.
+
+% ============================================================
+\section{Müssten harmonische Muster nicht so dicht sein wie Grammatik?}
+% ============================================================
+
+\textbf{Frage.} Wenn die FFGFT zutrifft, durchziehen harmonische Verhältnisse die ganze Natur. Müssten
+sie dann nicht ebenso dicht vorkommen wie Grammatik?
+
+\textbf{Antwort.} Dicht im Vorkommen ja, dicht in der Vielfalt nein. Für das Lernen einer Regel zählt
+die Zahl \emph{verschiedener} Beispiele, nicht die Zahl der Wiederholungen. Das Elektron kommt
+unvorstellbar oft vor, liefert aber jedes Mal dasselbe Massenverhältnis. Die Grundstruktur der FFGFT
+steckt in wenigen Zahlen: einigen Massenverhältnissen, Kopplungen und Mischungswinkeln, zusammen ein
+paar Dutzend. Aus so wenigen Werten kann kein Verfahren eine Regel von Zufall trennen.
+
+Wo harmonische Muster tatsächlich in großer Vielfalt vorkommen, wurden sie auch gefunden: in
+Atomspektren mit Tausenden Linien nach einem ganzzahligen Bauprinzip, in Kristallgittern, in
+Bahnresonanzen und Musikinstrumenten. Balmer fand die Regel der Wasserstofflinien 1885 aus vier
+Linien von Hand \QM\,\cite{Balmer1885}; symbolische Regression hat bekannte Formeln der Physik aus
+Daten wiedergefunden \QM\,\cite{Udrescu2020}.
+
+Ein zweiter Grund kommt aus dem Korpus selbst. Die gemessenen Verhältnisse sind nach FFGFT keine
+exakten Brüche: Die Grundform ist exakt, der Messwert trägt den Einbettungsfehler (Dok.~333, Dok.~358
+Satz~A), und die PDG-Werte enthalten modellabhängige Anteile (Dok.~351). Ein Lernverfahren, das nur
+Messwerte sieht, lernt die verschobene Form, nicht die Regel darunter. In der Sprache gibt es diese
+Schicht nicht.
+
+% ============================================================
+\section{Der Nulltest}
+\label{sec:nulltest}
+% ============================================================
+
+\textbf{Frage.} Lässt sich prüfen, wie viel Struktur die Messwerte selbst tragen und wie viel die
+Vorgabe beiträgt?
+
+\textbf{Antwort.} Ja, mit einer symbolischen Regression in ihrer exakten Form, der vollständigen
+Suche über eine Ausdrucks-Grammatik. Durchsucht werden alle Ausdrücke
+\[
+  x=c\cdot d^{1/k}\cdot\xi^{m/n}\cdot\pi^{s},
+\]
+mit teilerfremdem Bruch $c=p/q$, $p,q\le200$, Wurzeln $d^{1/k}$ mit $d\le30$ und $k\in\{2,3\}$,
+$\xi=1/7500$ mit $n\in\{1,2,3,6\}$ und $|m/n|\le4{,}5$, sowie $s\in\{-1,0,1\}$. Die Primfaktoren von
+$p$, $q$ und $d$ stammen aus einer gewählten Primzahlmenge. Mit $\{2,3,5,7,11,13\}$ sind das
+23\,084\,325 Ausdrücke; getrennt wird nur über die Brüche $p/q$ gesucht (3109 Ausdrücke). Jeder
+Ausdruck erhält eine Komplexität in Bit, die mit Zähler, Nenner, Wurzel und Exponent wächst. Der
+$p$-Wert ist der Anteil zufälliger Zahlen (log-gleichverteilt, eine Dekade um den Messwert), die die
+Grammatik bei gleicher oder geringerer Komplexität ebenso genau trifft. Treffer, die genauer sind als
+die Messunsicherheit, zählen nur bis zu dieser.
+
+\textbf{Mit Vorgabe.} Die Formeln der Grundform aus Dok.~387 sind fest; verglichen wird mit allen
+gleich komplexen Ausdrücken derselben Grammatik:
+
+\begin{center}
+\small
+\begin{tabular}{@{}lllr@{}}
+\toprule
+\textbf{Größe} & \textbf{Formel} & \textbf{Abweichung} & \textbf{$p$} \\
+\midrule
+$v/E_P$ & $\xi^4/(5\pi)$ & $-0{,}23\,\%$ & $0{,}02$ \\
+$M_W/M_Z$ & $\sqrt{7/9}$ & $+0{,}06\,\%$ & $0{,}09$ \\
+$\lambda_{\mathrm{CKM}}$ & $\xi^{1/6}$ & $+0{,}45\,\%$ & $0{,}11$ \\
+$m_h/M_Z$ & $11/8$ & $+0{,}15\,\%$ & $0{,}42$ \\
+$m_\mu/m_e$, $m_\tau/m_\mu$, $\Delta m^2$-Verhältnis, $\sin^2\theta_{13}$, $m_t/M_Z$ &  & $0{,}1$--$1{,}5\,\%$ & $1{,}0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Zusammengefasst nach Fisher ergibt das $p=0{,}41$ \KM. Bei $0{,}5$ bis $1\,\%$ Abweichung
+trifft die Grammatik jede Zahl; die Leptonformeln haben dort numerisch keine Beweiskraft. Am
+auffälligsten ist $v/E_P$. Für $\alpha^{-1}=3700/27$ (Dok.~338) gilt: Die Abweichung von $7{,}6$\,ppm
+erreicht ein Bruch mit Nenner bis 27 auch bei einer Zufallszahl in etwa der Hälfte der Fälle
+($p\approx0{,}47$) \KM.
+
+\textbf{Ohne Vorgabe.} Die blinde Suche über dieselben neun Größen bleibt für jede Primzahlmenge auf
+Zufallsniveau: für $\{2,3,5,7,11,13\}$, für die Kontrollmengen $\{2,3,5,7,17,19\}$ und
+$\{2,3,5,13,17,23\}$, für $\{2,3,5,7\}$ und ebenso für reine Zufallszahlen \KM.
+
+\textbf{Positivkontrolle.} Die Balmer-Linien des Wasserstoffs haben die exakten Verhältnisse
+$27/20$, $28/25$ und $200/189$; die Luftwellenlängen treffen sie auf $10^{-5}$ \QM\,\cite{NIST}. Mit
+der engen Grammatik der Brüche wird diese Regel schon aus drei Verhältnissen gefunden (zusammen
+$p=0{,}002$), mit der vollen Grammatik nicht ($p=0{,}47$) \KM. Die 23 Millionen Ausdrücke liegen so
+dicht, dass auch Zufallszahlen ebenso gut getroffen werden.
+
+\textbf{Was daraus folgt.} Selbst eine wahre Regel ist aus wenigen Beispielen nur mit der richtigen,
+engen Vorgabe sichtbar. Die numerische Nähe trägt die FFGFT nicht; das muss die Ableitungskette tun:
+Geometrie, Galois-Struktur, Formel. Das entspricht der Lesart von Dok.~384 und Dok.~387, nach der die
+Verhältnisse der Grundform die Struktur prüfen. Widerlegt ist durch den Test nichts; er misst nur,
+was die Zahlen allein hergeben.
+
+\textbf{Grenzen des Tests.} Das Bit-Maß der Komplexität ist eine Wahl; ein anderes Maß verschiebt die
+einzelnen $p$-Werte \SM. Es sind nur neun Größen. Die Formeln sind in Kenntnis der Messwerte
+entstanden; der Vergleich mit gleich komplexen Alternativen ist deshalb der faire Maßstab, nicht der
+rohe Treffer. Die Leptonreste von $0{,}5$ bis $1\,\%$ gelten im Korpus als echte Struktur
+($K_{\mathrm{frak}}$, Dok.~352); der Test kann sie nur als Fehltreffer werten.
+
+% ============================================================
+\section{Sprache ändert sich laufend, und trotzdem funktioniert es}
+% ============================================================
+
+\textbf{Frage.} Sprache ändert sich dauernd, es entstehen neue Wortbildungen, Grammatik variiert in
+Dialekten. Warum funktioniert es trotzdem?
+
+\textbf{Antwort.} Gerade die Veränderlichkeit bestätigt das Bild. Sprache arbeitet mit großer
+Toleranz und liefert zugleich sehr viele Beispiele.
+
+Zur Toleranz: Ein Satz bleibt verständlich, wenn ein Wort falsch geschrieben, ein Dialektwort
+eingesetzt oder die Satzstellung verdreht ist. Gedruckte Sprache ist stark redundant
+\QM\,\cite{Shannon1951}. Die Genauigkeit, die Sprache braucht, ist grob; in der Sprache des Korpus:
+großes $\varepsilon$, damit kleines $Q_c$. Sprache lebt in dem Bereich, in dem Strukturen noch
+trennbar sind.
+
+Zu den Beispielen: Neue Wortbildungen und Dialekte sind keine Einzelfälle, sondern selbst Muster mit
+vielen Belegen. Ein Dialekt hat Millionen Sprecher und unzählige Sätze; neue Wörter folgen alten
+Bauregeln, \enquote{googeln} wird konjugiert wie \enquote{segeln}. Ein Lernverfahren lernt deshalb
+keine einzelne starre Grammatik, sondern eine Verteilung von Varianten, und jede Variante ist dicht
+belegt. Unter den Dialekten liegt eine gemeinsame tiefere Struktur, wie bei Balmer: viele Linien,
+eine Regel. Wo es nicht funktioniert, passt es ebenfalls: Bei einem kleinen Dialekt mit wenig Text,
+einem seltenen Fachwort oder einem ganz neuen Ausdruck werden Sprachmodelle unsicher.
+
+Die Musik zeigt beide Seiten. Die harmonische Grammatik aus Oktave, Quinte und Terz, also aus den
+Primzahlen 2, 3 und 5, ist universell erkennbar und hat viele \enquote{Dialekte}: reine Stimmung,
+gleichstufig, mitteltönig, Volksmusik-Stimmungen. Sie funktioniert, weil das Ohr Abweichungen in der
+Größe eines Kommas toleriert. Das ist die Aussage von Dok.~342 und Dok.~343: Bis $k\approx3$ sind die
+Galois-Strukturen bei dieser Toleranz trennbar, darüber nicht mehr \BM. Die Harmonik der kleinen
+Primzahlen ist in der Natur so dicht und robust wie Grammatik. Die feinen Verhältnisse der
+Teilchenmassen, bei denen es auf Zehntelprozent ankommt, liegen jenseits dieser Grenze; dort muss die
+Struktur aus der Ableitung kommen.
+
+% ============================================================
+\section{Warum verzeiht Sprache Fehler und Zahlen nicht?}
+% ============================================================
+
+\textbf{Frage.} Warum lässt Sprache diese Toleranz zu, Mathematik und Zahlen aber nicht?
+
+\textbf{Antwort.} Wegen der Redundanz. Nachrichtentechnisch gesprochen ist Sprache ein
+fehlerkorrigierender Code, eine Zahl eine uncodierte Übertragung.
+
+Die meisten zufälligen Buchstabenfolgen sind keine Wörter. Wird ein Buchstabe falsch, entsteht meist
+ein ungültiges Wort, und der Empfänger korrigiert zum nächsten gültigen; Satzbau und Zusammenhang
+prüfen zusätzlich. Das entspricht einem Code mit großem Hamming-Abstand: Fehler werden erkannt und
+korrigiert. Viele Formen führen außerdem zur selben Bedeutung, und am Ziel zählt nur die Bedeutung.
+
+Bei einer Zahl ist der Abstand null. Jede Ziffernfolge ist eine gültige Zahl; aus $137{,}036$ wird
+bei einem Ziffernfehler $137{,}037$, keine fehlerhafte, sondern eine andere, genauso gültige Zahl.
+Nichts zeigt den Fehler an, nichts korrigiert ihn. Mathematik verkettet außerdem: Ein Fehler geht in
+jeden folgenden Schritt ein und wird oft verstärkt, während sich Fehler in einem Satz nicht
+aufsummieren.
+
+Beim Zählen ist Mathematik dagegen tolerant. Ganze Zahlen, Gruppenordnungen und Wicklungszahlen
+verhalten sich wie Wörter: Zwischen 3 und 4 gibt es keine gültige Gruppenordnung, und $3{,}01$ wird
+sofort als ungültig erkannt. Im Korpus steht das als \enquote{Zustand gegen Prozess}: Zählen ist
+exakt, ein Bit ist eine Wicklungszahl (Dok.~343, Dok.~247). Die algebraisch bewiesenen Aussagen der
+FFGFT, also $\mathbb Z_3$, $GF(27)$, Orbits und Fixpunkte, sind deshalb so fehlertolerant wie
+Sprache. Die Intoleranz entsteht an einer einzigen Stelle: beim Übergang vom Diskreten zum
+Kontinuum, wenn ein ganzzahliges Verhältnis mit einem Messwert auf der reellen Achse verglichen wird.
+Dort ist jeder Nachbarwert gültig, und es gibt keinen Abstand, der das Rauschen abfängt.
+
+% ============================================================
+\section{Schöpfen KI-Modelle aus einem fertigen Rahmenwerk?}
+% ============================================================
+
+\textbf{Frage.} KI-Modelle haben letztlich ein fertiges Rahmenwerk, aus dem sie schöpfen; es muss
+nicht alles neu nach Mustern durchsucht werden. Wie verträgt sich das mit der Rauschgrenze?
+
+\textbf{Antwort.} Nach dem Training ist ein Modell tatsächlich ein fertiges Rahmenwerk; beim Antworten
+wird nichts mehr durchsucht, das Gelernte wird angewendet. Die Gewichte sind die eingefrorene
+Vorgabe, im Sinn von Dok.~359 Satz~D die Hypothesenklasse.
+
+Dieses Rahmenwerk ist aber selbst aus Daten gelernt. Es ist eine verdichtete Form der Trainingstexte
+und enthält nur, was dort dicht vorkam. Wo die Texte dünn waren, hat es Lücken, und das Modell füllt
+sie mit Plausiblem; daher kommen erfundene Literaturangaben. Es ist außerdem statistisch und nicht
+exakt, für Sprache gebaut und für exakte Zahlen unzuverlässig. Moderne Systeme rufen deshalb für den
+exakten Teil ein Werkzeug auf: Das statistische Rahmenwerk entscheidet, was zu rechnen ist, das
+Werkzeug rechnet. Bei der Arbeit am Korpus ist das die Arbeitsteilung zwischen Formulierung und
+Prüfskript.
+
+Auch die FFGFT ist ein fertiges Rahmenwerk: $\xi$, $T^4/\mathbb Z_3$, die Galois-Struktur. Es ist
+aber nicht aus Daten gelernt, sondern gesetzt und abgeleitet. Das gelernte Rahmenwerk ist breit und
+tolerant, aber ohne Garantie für Exaktheit; das gesetzte ist exakt und diskret, muss sich aber am
+Messwert bewähren, genau an der Stelle, wo Diskretes auf Kontinuum trifft. Ein Lernverfahren kann
+die FFGFT-Struktur nach dem Nulltest nicht selbst finden; es kann sie aber als Rahmen eingebaut
+bekommen, wie es die Architekturskizze von Dok.~359 vorschlägt \SM.
+
+% ============================================================
+\section{Woher kommen die Regeln eines KI-Assistenten?}
+% ============================================================
+
+\textbf{Frage.} Ein KI-Assistent arbeitet mit vielen vorgegebenen Regeln. Sind diese gelernt oder
+direkt eingegeben?
+
+\textbf{Antwort.} Beides, in drei Schichten.
+
+Die erste Schicht ist gelernt und macht den größten Teil aus. Zuerst entsteht beim Training an sehr
+vielen Texten das statistische Rahmenwerk. Danach wird in einem zweiten Training das Verhalten
+geformt, mit Bewertungen durch Menschen und mit schriftlich formulierten Grundsätzen wie Ehrlichkeit,
+Schadensvermeidung und dem Eingeständnis von Unsicherheit. Auch diese Grundsätze stecken danach in den
+Gewichten und werden nicht bei jeder Antwort nachgelesen.
+
+Die zweite Schicht wird bei jedem Gespräch neu mitgegeben: Anweisungen des Produkts, etwa wie
+Werkzeuge benutzt werden und was nur nach Rückfrage geschehen darf, sowie gespeicherte Vorgaben des
+Nutzers. Diese Schicht ist am leichtesten zu ändern; sie gilt sofort, ohne neues Training. Die dritte
+Schicht ist der laufende Zusammenhang: alles, was im Gespräch steht und was gelesen wurde.
+
+Die Schichten können sich widersprechen. Bei der Arbeit an diesem Korpus verlangte ein automatischer
+Prüfschritt nach jeder Antwort, Änderungen selbst in das öffentliche Repositorium zu übertragen,
+während die gespeicherte Vorgabe des Autors genau das untersagt; die ausdrückliche Vorgabe wurde
+befolgt. Zum Thema dieses Dokuments passt die Aufteilung: Die erste Schicht ist das gelernte,
+tolerante Rahmenwerk, die zweite und dritte sind gesetzte Regeln, die Prüfskripte das exakte
+Werkzeug, das beides kontrolliert.
+
+% ============================================================
+\section{Wie entsteht nach einer Fehlermeldung der nächste Schritt?}
+% ============================================================
+
+\textbf{Frage.} Zwischen einer Fehlermeldung eines Skripts und der Entscheidung, was als Nächstes am
+sinnvollsten ist, müssen doch viele Schichten liegen.
+
+\textbf{Antwort.} Ja, aber anders, als man vermuten würde: Es gibt keinen eigenen Entscheidungsbaustein,
+sondern Schichten im Netz und eine einfache Schleife außen herum.
+
+Die Schleife: Der Assistent schreibt einen Werkzeugaufruf. Das umgebende Programm führt ihn aus und
+hängt das Ergebnis, auch eine Fehlermeldung, an den Gesprächstext an. Dann wird das Ganze neu gelesen
+und der nächste Schritt geschrieben. Ein Plan existiert nur als Text in diesem Zusammenhang.
+
+Die Schichten: Das Netz selbst hat Dutzende bis über hundert hintereinanderliegende Schichten, von
+denen jede den ganzen bisherigen Text weiterverarbeitet. Aus Fehlermeldung, Ziel, gelesenen Dateien
+und bisherigen Versuchen entsteht so der nächste Schritt. Dass er sinnvoll ist, ist trainiert: Im
+zweiten Training wurden solche Abläufe an vielen Aufgaben geübt, und Abläufe, die zum Ziel führten,
+wurden verstärkt.
+
+Zwei Beispiele aus dem Neusatz der Buchreihe: Eine Meldung \enquote{Improper alphabetic constant}
+beim Setzen eines Kapiteltitels mit $\varphi$ ist ein dicht belegtes Muster; die Ursache, Mathematik
+in den PDF-Lesezeichen, wird sofort erkannt. Ein Band, der ohne Fehlermeldung nur 18 statt über 300
+Seiten ergab, verlangte dagegen einen Schluss: Die Eingabe endete zu früh, vermutlich durch ein
+\verb|\end{document}| in einem Kapitel, was eine Suche bestätigte. Wo die Muster dünn sind, wird
+probiert, und es braucht mehrere Anläufe. Deshalb gilt für den Assistenten dasselbe wie für die
+FFGFT: ausprobieren, exakt prüfen, mit Prüfskripten nachmessen, statt dem eigenen Eindruck zu trauen.
+
+% ============================================================
+\section{Zufall und Wahrscheinlichkeit}
+% ============================================================
+
+\textbf{Frage.} Spielt bei Zufall und Wahrscheinlichkeiten die Rauschgrenze nicht ebenfalls eine
+Rolle?
+
+\textbf{Antwort.} Ja, sogar ganz direkt: Die Wahrscheinlichkeitsrechnung ist die Mathematik der
+Rauschgrenze. Dabei sind zwei Arten von Wahrscheinlichkeit zu unterscheiden.
+
+Wahrscheinlichkeit als Nichtwissen: Ein Messwert schwankt. Mittelt man $N$ unabhängige Messungen,
+sinkt das Rauschen wie $1/\sqrt N$; die hundertfache Zahl von Messungen senkt es auf ein Zehntel \BM.
+Deshalb ist $m_\mu/m_e$ auf $10^{-8}$ bekannt, obwohl jede einzelne Messung gröber ist. Das gilt nur
+für zufällige Fehler; systematische Anteile wie die Modellannahmen der PDG-Werte (Dok.~351) mitteln
+sich nicht weg. Auch der $p$-Wert des Nulltests gehört hierher: Er ist die Rauschgrenze in
+Wahrscheinlichkeit ausgedrückt.
+
+In Sprachmodellen ist Wahrscheinlichkeit die Ausgabe selbst. Bei jedem Wort wird eine Verteilung über
+alle möglichen nächsten Wörter berechnet und eines ausgewählt. Wo die Trainingsdaten dicht waren, ist
+die Verteilung scharf und die Antwort stabil; wo sie dünn waren, ist sie flach, und die Auswahl
+entscheidet beinahe der Zufall. Eine flache Verteilung ist die Rauschgrenze des Modells, und von
+außen ist sie nicht zu sehen, weil der Satz trotzdem flüssig klingt.
+
+Wahrscheinlichkeit als Struktur: In der Quantenmechanik sind Wahrscheinlichkeiten exakte Zahlen. Nach
+Dok.~367 sind die Koide-Phase $\theta$ und die ikosaedrische Übergangswahrscheinlichkeit $p_0$
+derselbe Quotient $2/3^2=2/9$, zwei Lesarten einer Born-Regel-Struktur. Eine solche Wahrscheinlichkeit
+ist so diskret wie eine Gruppenordnung. Rauschen kommt erst bei der Messung hinzu: Eine Häufigkeit
+aus $N$ Ereignissen streut um $2/9$ mit etwa $\sqrt{p(1-p)/N}$; um $2/9$ auf drei Standardabweichungen
+vom Nachbarbruch $1/5$ zu trennen, braucht es rund 3200 Ereignisse \KM. In diesem Sinn führt
+Dok.~230 auch die Bell-Korrelationen: real, aber geometrisch strukturiert. Wahrscheinlichkeit kommt
+damit zweimal vor: als Gegenstand der Theorie, exakt, und als Werkzeug, um zu beurteilen, ob das
+Exakte im Rauschen noch erkennbar ist.
+
+% ============================================================
+\section{Fließt die Rauschgrenze in die Gewichte ein?}
+% ============================================================
+
+\textbf{Frage.} Wie ist das mit den Gewichten eines Netzes: Fließen dort die Rauschgrenzen ein?
+
+\textbf{Antwort.} Ja, auf zwei Wegen, und die Gewichte sind selbst ein Beispiel für das Prinzip.
+
+Beim Lernen werden die Gewichte in vielen kleinen Schritten angepasst, jeder nach einem kleinen Stapel
+von Beispielen und deshalb verrauscht. Was oft vorkommt, schiebt die Gewichte immer wieder in dieselbe
+Richtung und setzt sich durch; das Rauschen mittelt sich mit $1/\sqrt N$ weg. Was selten vorkommt,
+geht im Rauschen der Schritte unter. Dazu kommen gezielt eingebaute Bremsen: Gewichte werden klein
+gehalten, und das Training wird rechtzeitig beendet. Damit wird bewusst eine Rauschgrenze gesetzt:
+Feinstruktur, die nicht oft genug belegt ist, soll nicht gelernt werden, weil sie meist Rauschen ist.
+
+Beim Speichern ist jedes einzelne Gewicht erstaunlich ungenau. Mit 16 Bit sind es etwa $2{,}4$ bis
+$3{,}3$ Dezimalstellen \KM, und oft wird nachträglich auf 8 oder 4 Bit gekürzt, ohne dass das Modell
+merklich schlechter wird. Das geht nur, weil das Wissen nicht in einzelnen Gewichten steckt, sondern
+verteilt in sehr vielen zugleich. Das Netz ist damit selbst ein redundanter, fehlertoleranter Code,
+wie die Sprache. Gute Trainingslösungen haben genau diese Eigenschaft: Eine kleine Verschiebung der
+Gewichte ändert das Ergebnis kaum \QM\,\cite{Hochreiter1997}. Die Kehrseite ist dieselbe wie bei der
+Sprache: Exakte Rechnungen, die an jeder Stelle volle Genauigkeit verlangen, gelingen im Inneren
+schlecht.
+
+% ============================================================
+\section{Der gemeinsame Kern in einem Bild}
+% ============================================================
+
+Alle Antworten laufen auf dieselbe Struktur hinaus. Auf der diskreten Seite stehen Zählen, Wörter,
+Gruppenordnungen, Wicklungszahlen und Born-Gewichte; dort gibt es Abstände zwischen den gültigen
+Werten, und Rauschen, das kleiner ist als dieser Abstand, wird abgefangen. Auf der kontinuierlichen
+Seite stehen Messwerte und die Gewichte eines Netzes; dort ist jeder Nachbarwert gültig.
+
+\begin{center}
+\begin{tikzpicture}[
+  box/.style={draw, rounded corners, align=center, minimum width=5.2cm, minimum height=1.6cm, font=\small},
+  arr/.style={-{Stealth[length=3mm]}, thick}]
+\node[box] (D) at (0,0) {\textbf{Diskret}\\Zählen, Wörter, Gruppenordnungen,\\Wicklungszahlen, Born-Gewicht $2/9$\\\emph{Abstand fängt Rauschen ab}};
+\node[box] (K) at (8,0) {\textbf{Kontinuum}\\Messwerte, Gewichte eines Netzes\\[2pt]\emph{jeder Nachbarwert gültig}};
+\draw[arr] (D.north east) to[bend left=18] node[above, font=\small, align=center]{Messung: Struktur wird abgebildet\\\textbf{hier sitzt die Rauschgrenze}} (K.north west);
+\draw[arr] (K.south west) to[bend left=18] node[below, font=\small, align=center]{Ausgabe eines Netzes: Wort wird gewählt\\Rauschen unter dem Abstand wird abgeschnitten} (D.south east);
+\end{tikzpicture}
+\end{center}
+
+\noindent Ein Netz rechnet im Inneren kontinuierlich und gibt diskrete Wörter aus; beim Schritt vom
+Kontinuum zum Diskreten wird das Rauschen abgeschnitten, solange es kleiner ist als der Abstand
+zwischen zwei Wörtern. Bei der Messung läuft es umgekehrt: Eine exakte, diskrete Struktur wird auf das
+Kontinuum abgebildet, und dort fängt kein Abstand das Rauschen ab. Daraus folgen die drei Kernsätze
+dieses Dokuments:
+
+\begin{enumerate}
+\item Diskrete Struktur ist fehlertolerant; die Rauschgrenze sitzt am Übergang vom Diskreten zum
+  Kontinuum \BM.
+\item Struktur, die in den Daten dicht und vielfältig belegt ist, wird gelernt; Struktur aus wenigen
+  exakten Werten wird aus Daten nicht gefunden, auch von einem Netz nicht \KM.
+\item Solche Struktur muss vorgegeben und dann geprüft werden: Setzung, Ableitung, Vergleich mit dem
+  Messwert, Nulltest. Diesen Weg geht die FFGFT \SM.
+\end{enumerate}
+
+\vspace{1em}
+\noindent\textit{Prüfskripte:} \texttt{2/python/Dok393\_Skripte/} ---
+\texttt{pruef\_393a\_nulltest\_grammatik.py} (8/8, Ergebnisprotokoll
+\texttt{pruef\_393a\_ergebnis.txt}), \texttt{pruef\_393b\_zahlen.py} (11/11); zusammen
+\texttt{run\_all\_393.sh}, 19/19.
+
+\section*{Werkzeug und Methode}
+\addcontentsline{toc}{section}{Werkzeug und Methode}
+
+Claude (Anthropic) wurde als Werkzeug eingesetzt für: Ausformulieren der Antworten nach den Fragen des
+Autors, Schreiben und Ausführen der Prüfskripte und Ausarbeiten der \LaTeX-Quellen. Die Abschnitte
+über die Arbeitsweise von KI-Assistenten beschreiben die allgemeine Funktionsweise solcher Systeme; sie
+beruhen nicht auf einer Einsicht in die eigenen Gewichte. Jede Zahl im Text ist durch eine Prüfung in
+den genannten Skripten abgesichert; Literaturangaben sind als \QM\ markiert.
+
+\begin{thebibliography}{99}
+\bibitem{Balmer1885} J.~J.~Balmer, \textit{Notiz über die Spectrallinien des Wasserstoffs}, Annalen der Physik \textbf{261} (1885) 80--87.
+\bibitem{Shannon1951} C.~E.~Shannon, \textit{Prediction and entropy of printed English}, Bell System Technical Journal \textbf{30} (1951) 50--64.
+\bibitem{Hochreiter1997} S.~Hochreiter, J.~Schmidhuber, \textit{Flat minima}, Neural Computation \textbf{9} (1997) 1--42.
+\bibitem{Rahaman2019} N.~Rahaman u.\,a., \textit{On the spectral bias of neural networks}, Proceedings of the 36th International Conference on Machine Learning, PMLR \textbf{97} (2019) 5301--5310.
+\bibitem{Udrescu2020} S.-M.~Udrescu, M.~Tegmark, \textit{AI Feynman: A physics-inspired method for symbolic regression}, Science Advances \textbf{6} (2020) eaay2631.
+\bibitem{ShalevShwartz2014} S.~Shalev-Shwartz, S.~Ben-David, \textit{Understanding Machine Learning: From Theory to Algorithms}, Cambridge University Press (2014).
+\bibitem{NIST} A.~Kramida, Yu.~Ralchenko, J.~Reader, NIST ASD Team, \textit{NIST Atomic Spectra Database}, National Institute of Standards and Technology, Gaithersburg (Wasserstofflinien H$\alpha$--H$\delta$, Luftwellenlängen).
+\end{thebibliography}

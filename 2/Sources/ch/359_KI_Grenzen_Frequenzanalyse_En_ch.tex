@@ -47,16 +47,20 @@ Galois-informed AI architecture could achieve.
   groups (E(3), SO(3)) demonstrably reduce the number of parameters and
   improve generalisation. For finite Galois groups GF$(3^k)$ this
   architecture does not yet exist --- this is the identified gap.
-\item Theorem~D \BM: The admissibility criterion of Doc.~358 Theorem~B is
-  not PAC-learnable from finite training data. 100 training examples
-  cover $<7\,\%$ of the Galois grid.
+\item Theorem~D \BM: Whether the admissibility criterion of Doc.~358
+  Theorem~B is learnable is decided by the hypothesis class, not by the
+  amount of data. Without a structural assumption the PAC bound requires
+  about 84\,000 labelled examples; with the structural assumption
+  \enquote{prime factors from a fixed set} at most 407 suffice, and from
+  positive examples alone the prime set $\{2,3,5,7,11,13\}$ is reliably
+  recovered after 30 examples.
 \item Architecture sketch \SM: A Galois-informed neural network
   uses GF$(3^k)$ orbits as a hard constraint in the input layer.
   This reduces the parameter space and makes the admissibility criterion
   not learned but enforced.
 \end{enumerate}
 
-Verification script: \texttt{pruef\_359\_ki\_grenzen.py} (14/14).
+Verification script: \texttt{pruef\_359\_ki\_grenzen.py} (18/18).
 
 % ============================================================
 \section{Starting point: what AI does today}
@@ -177,33 +181,62 @@ symmetries, not as continuous transformations.
 \textbf{Architecture sketch \SM:} (Section~\ref{sec:arch})
 
 % ============================================================
-\section{Theorem D: The admissibility criterion is not PAC-learnable}
+\section{Theorem D: Learnability depends on the hypothesis class}
 % ============================================================
 
 \begin{quote}
-\textbf{Theorem D.} \BM\ The admissibility criterion of Doc.~358 Theorem~B
-(prime factors of fundamental frequency ratios only in
-$\{2,3,5,7,11,13\}$) is not PAC-learnable from finite
-training data.
+\textbf{Theorem D.} \BM\ On the bounded grid of reduced fractions $p/q$
+with $p,q\le100$, the admissibility criterion of Doc.~358 Theorem~B
+(prime factors only in $\{2,3,5,7,11,13\}$) is learnable. How many
+examples this requires is decided by the hypothesis class, that is, by
+the prior knowledge a learning system brings with it, and not by the
+amount of data alone.
 \end{quote}
 
-\emph{Justification.} The grid $\{p/q : p,q \leq 100, \text{prime factors}
-\subseteq \{2,3,5,7,11,13\}\}$ contains 1453 distinct rational numbers
-(verification script D1). A training set of 100 examples covers $<7\,\%$
-of it (verification script D2). By Gold's theorem (1967, language
-identification) and its generalisation to PAC learning, a universal
-property over an infinite algebraic structure cannot be inferred from
-finite positive examples alone \LM\,\cite{Gold1967}.
+\emph{Justification.} The grid comprises 6087 reduced fractions, of which
+1453 are admissible (verification scripts D1, D3). One hundred examples
+cover less than $7\,\%$ of the admissible ratios (D2). For a finite
+hypothesis class $\mathcal H$ in the realisable case,
+$m\ge\bigl(\ln|\mathcal H|+\ln(1/\delta)\bigr)/\varepsilon$ labelled
+examples suffice to reach an error below $\varepsilon$ with probability
+$1-\delta$ \LM\,\cite{ShalevShwartz2014}. With
+$\varepsilon=\delta=5\,\%$ this gives two very different cases.
 
-\textbf{What this means:} AI can learn that $4/3$ and $16/5$
-frequently occur as stable ratios in training data. It cannot
-learn that $17/11$ must in principle never occur --- for that it
-would need infinitely many negative examples or the theorem as an
-explicit prior.
+Without a structural assumption, i.e.\ when any subset of the 6087
+fractions may be the criterion, $|\mathcal H|=2^{6087}$ and the VC
+dimension equals 6087. The bound requires about 84\,000 labelled
+examples (D4), and from positive examples alone the criterion cannot be
+obtained at all, because every unseen ratio could equally well be
+admissible. This is the situation of a generic network without built-in
+prior knowledge.
 
-\textbf{Consequence:} The admissibility criterion must be built into
-the architecture as a hard constraint, not as soft regularisation.
-Pointwise regularisation ($\ell_1$, $\ell_2$) cannot enforce algebraic
+With the structural assumption \enquote{admissible are exactly the
+fractions whose prime factors lie in a fixed set $P$}, where $P$ is a
+subset of the 25 primes up to 100, one has $|\mathcal H|=2^{25}$, and at
+most 407 examples suffice (D5). In this class even a procedure that sees
+only positive examples learns: it takes as $P$ the smallest prime set
+that explains all examples seen. For randomly drawn admissible ratios it
+recovers $\{2,3,5,7,11,13\}$ after 10 examples in $94.6\,\%$ and after
+30 examples in all of 1000 runs (D6). Such a system excludes $17/11$
+without ever having seen a negative example, because the 17 occurs in no
+example.
+
+Gold's theorem \LM\,\cite{Gold1967} concerns identification of a
+language in the limit from infinite sequences of positive examples; it
+applies only when the hypothesis class is unbounded and yields no
+non-learnability for the bounded grid.
+
+\textbf{What this means:} The knowledge that only the primes up to 13
+occur does not reside in the amount of training data but in the form of
+the hypotheses. A network lacking this form needs more than two orders
+of magnitude more labelled examples, and with measurement noise above
+the resolution limit of Theorem~B it does not recover the missing
+information at all.
+
+\textbf{Consequence:} The admissibility criterion belongs in the
+architecture as a structural constraint, not as subsequent
+regularisation. Pointwise regularisation ($\ell_1$, $\ell_2$) favours
+small weights but no prime set, and therefore enforces no algebraic
 inadmissibility.
 
 % ============================================================
@@ -302,9 +335,9 @@ For heart rate variability analysis, concrete consequences follow:
 \item The algebraic orbit biomarker in §6 is a hypothesis; its
   physiological significance is open. The exploratory test on HRV data
   (Doc.~360) gave a negative result.
-\item The PAC non-learnability of Theorem~D applies to the universal
-  admissibility criterion, not to specific instances of it ---
-  a network can learn that $4/3$ is stable.
+\item Theorem~D compares sample bounds on the bounded grid
+  $p,q\le100$; over an unbounded grid with arbitrarily large primes the
+  hypothesis class is infinite and the statements must be re-examined.
 \end{itemize}
 
 % ============================================================
@@ -319,7 +352,7 @@ Theorem & Statement & Status \\
 A & HRV band limits in the 5-limit grid: compatible, not determined & \BM \\
 B & Resolution limit $100\xi\approx1.33\,\%$, $Q_c\approx11.1$; classification requires $\Delta f/f\le100\xi$ & \BM \\
 C & G-CNNs for GF$(3^k)$: parameter reduction 12x; architecture missing & \BM/\SM \\
-D & Admissibility criterion not PAC-learnable from finite data & \BM \\
+D & Learnability of the admissibility criterion: $\sim$84\,000 examples without structural assumption, $\le$407 with prime-factor structure & \BM \\
 Arch. & Galois-informed network: sketch & \SM \\
 \bottomrule
 \end{tabular}
@@ -358,6 +391,10 @@ Arch. & Galois-informed network: sketch & \SM \\
   Gold, E.\,M. (1967).
   Language identification in the limit.
   \emph{Information and Control}, 10(5), 447--474.
+\item[\cite{ShalevShwartz2014}]
+  Shalev-Shwartz, S., \& Ben-David, S. (2014).
+  \emph{Understanding Machine Learning: From Theory to Algorithms.}
+  Cambridge University Press.
 \item[\cite{ILCRBlog2023}]
   ICLR Blog (2023).
   How does the inductive bias influence the generalization capability
@@ -374,8 +411,9 @@ Arch. & Galois-informed network: sketch & \SM \\
 \section*{Verification scripts}
 
 \texttt{2/python/Dok359\_Skripte/pruef\_359\_ki\_grenzen.py} ---
-14 assertions: A1--A5 (HRV grid), B1--B4 (resolution), C1--C3
-(group equivariance), D1--D2 (PAC coverage).
+18 assertions: A1--A5 (HRV grid), B1--B4 (resolution), C1--C3
+(group equivariance), D1--D6 (grid, coverage, PAC bounds, learning from
+positive examples).
 
 \section*{Note on the use of AI assistance}
 

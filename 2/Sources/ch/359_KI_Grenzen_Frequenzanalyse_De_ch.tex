@@ -47,16 +47,20 @@ Galois-informierte KI-Architektur leisten könnte.
   Gruppen (E(3), SO(3)) reduzieren Parameteranzahl und verbessern
   Generalisierung nachweislich. Für endliche Galois-Gruppen GF$(3^k)$
   existiert diese Architektur noch nicht --- das ist die identifizierte Lücke.
-\item Satz~D \BM: Das Zulässigkeitskriterium aus Dok.~358 Satz~B ist
-  aus endlichen Trainingsdaten nicht PAC-lernbar. 100 Trainingsbeispiele
-  decken $<7\,\%$ des Galois-Rasters ab.
+\item Satz~D \BM: Ob das Zulässigkeitskriterium aus Dok.~358 Satz~B
+  lernbar ist, entscheidet die Hypothesenklasse, nicht die Datenmenge.
+  Ohne Strukturannahme verlangt die PAC-Schranke rund 84\,000 markierte
+  Beispiele; mit der Strukturannahme \enquote{Primfaktoren aus einer
+  festen Menge} genügen höchstens 407, und aus positiven Beispielen allein
+  wird die Primzahlmenge $\{2,3,5,7,11,13\}$ schon nach 30 Beispielen
+  sicher erkannt.
 \item Architekturskizze \SM: Ein Galois-informiertes neuronales Netz
   verwendet GF$(3^k)$-Orbits als hard constraint in der Eingangsschicht.
   Das reduziert den Parameterraum und macht das Zulässigkeitskriterium
   nicht lernbar, sondern erzwungen.
 \end{enumerate}
 
-Prüfskript: \texttt{pruef\_359\_ki\_grenzen.py} (14/14).
+Prüfskript: \texttt{pruef\_359\_ki\_grenzen.py} (18/18).
 
 % ============================================================
 \section{Ausgangslage: was KI heute tut}
@@ -176,34 +180,63 @@ eingebaut werden, nicht als kontinuierliche Transformationen.
 \textbf{Architekturskizze \SM:} (Abschnitt~\ref{sec:arch})
 
 % ============================================================
-\section{Satz D: Das Zulässigkeitskriterium ist nicht PAC-lernbar}
+\section{Satz D: Lernbarkeit hängt an der Hypothesenklasse}
 % ============================================================
 
 \begin{quote}
-\textbf{Satz D.} \BM\ Das Zulässigkeitskriterium aus Dok.~358 Satz~B
-(Primfaktoren fundamentaler Frequenzverhältnisse nur in
-$\{2,3,5,7,11,13\}$) ist aus endlichen Trainingsdaten nicht
-PAC-lernbar.
+\textbf{Satz D.} \BM\ Auf dem beschränkten Raster der gekürzten Brüche
+$p/q$ mit $p,q\le100$ ist das Zulässigkeitskriterium aus Dok.~358 Satz~B
+(Primfaktoren nur in $\{2,3,5,7,11,13\}$) lernbar. Wie viele Beispiele
+dafür nötig sind, entscheidet die Hypothesenklasse, also das Vorwissen,
+das ein lernendes System mitbringt, und nicht die Datenmenge allein.
 \end{quote}
 
-\emph{Begründung.} Das Raster $\{p/q : p,q \leq 100, \text{Primfaktoren}
-\subseteq \{2,3,5,7,11,13\}\}$ enthält 1453 verschiedene rationale Zahlen
-(Prüfskript D1). Ein Trainingsset mit 100 Beispielen deckt $<7\,\%$ ab
-(Prüfskript D2). Nach dem Satz von Gold (1967, sprachliche Induktion)
-und seiner Verallgemeinerung auf PAC-Lernen ist eine universelle
-Eigenschaft über eine unendliche algebraische Struktur aus endlichen
-positiven Beispielen allein nicht induzierbar \LM\,\cite{Gold1967}.
+\emph{Begründung.} Das Raster umfasst 6087 gekürzte Brüche, davon sind
+1453 zulässig (Prüfskripte D1, D3). Hundert Beispiele decken weniger als
+$7\,\%$ der zulässigen Verhältnisse ab (D2). Für eine endliche
+Hypothesenklasse $\mathcal H$ genügen im realisierbaren Fall
+$m\ge\bigl(\ln|\mathcal H|+\ln(1/\delta)\bigr)/\varepsilon$ markierte
+Beispiele, um mit Wahrscheinlichkeit $1-\delta$ einen Fehler unter
+$\varepsilon$ zu erreichen \LM\,\cite{ShalevShwartz2014}. Mit
+$\varepsilon=\delta=5\,\%$ ergibt das zwei sehr verschiedene Fälle.
 
-\textbf{Was das heißt:} KI kann lernen, dass $4/3$ und $16/5$ in
-Trainingsdaten häufig als stabile Verhältnisse vorkommen. Sie kann
-nicht lernen, dass $17/11$ grundsätzlich nicht vorkommen darf --- dazu
-bräuchte sie unendlich viele Negativbeispiele oder den Satz als
-expliziten Prior.
+Ohne Strukturannahme, wenn also jede Teilmenge der 6087 Brüche als
+Kriterium in Frage kommt, ist $|\mathcal H|=2^{6087}$ und die
+VC-Dimension gleich 6087. Die Schranke verlangt rund 84\,000 markierte
+Beispiele (D4), und aus positiven Beispielen allein ist das Kriterium
+nicht zu gewinnen, weil jedes ungesehene Verhältnis ebenso gut zulässig
+sein könnte. Das ist die Lage eines generischen Netzes ohne
+eingebautes Vorwissen.
 
-\textbf{Konsequenz:} Das Zulässigkeitskriterium muss als hard constraint
-in die Architektur eingebaut werden, nicht als soft regularisation.
-Punkt-Regularisierung ($\ell_1$, $\ell_2$) kann keine algebraische
-Unzulässigkeit erzwingen.
+Mit der Strukturannahme \enquote{zulässig sind genau die Brüche, deren
+Primfaktoren in einer festen Menge $P$ liegen}, wobei $P$ eine Teilmenge
+der 25 Primzahlen bis 100 ist, gilt $|\mathcal H|=2^{25}$, und es
+genügen höchstens 407 Beispiele (D5). In dieser Klasse lernt sogar ein
+Verfahren, das nur positive Beispiele sieht: Es nimmt als $P$ die
+kleinste Primzahlmenge, die alle gesehenen Beispiele erklärt. Bei
+zufällig gezogenen zulässigen Verhältnissen erkennt es
+$\{2,3,5,7,11,13\}$ nach 10 Beispielen in $94{,}6\,\%$ und nach
+30 Beispielen in allen von 1000 Durchläufen (D6). Ein solches System
+schließt $17/11$ aus, ohne je ein Negativbeispiel gesehen zu haben, weil
+die 17 in keinem Beispiel auftritt.
+
+Der Satz von Gold \LM\,\cite{Gold1967} betrifft die Identifikation einer
+Sprache im Grenzwert aus unendlichen Folgen positiver Beispiele; er
+greift erst, wenn die Hypothesenklasse unbeschränkt ist, und trägt für
+das beschränkte Raster keine Nicht-Lernbarkeit.
+
+\textbf{Was das heißt:} Das Wissen, dass nur die Primzahlen bis 13
+vorkommen, steckt nicht in der Menge der Trainingsdaten, sondern in der
+Form der Hypothesen. Ein Netz, dem diese Form fehlt, braucht um mehr als
+zwei Größenordnungen mehr markierte Beispiele, und mit Messrauschen
+oberhalb der Auflösungsgrenze aus Satz~B gewinnt es die fehlende
+Information gar nicht.
+
+\textbf{Konsequenz:} Das Zulässigkeitskriterium gehört als Strukturvorgabe
+in die Architektur, nicht als nachträgliche Regularisierung.
+Punkt-Regularisierung ($\ell_1$, $\ell_2$) bevorzugt kleine Gewichte,
+aber keine Primfaktormenge, und erzwingt deshalb keine algebraische
+Unzulässigkeit.
 
 % ============================================================
 \section{Architekturskizze: Galois-informiertes neuronales Netz}
@@ -303,9 +336,10 @@ Für die Herzratenvariabilitätsanalyse ergeben sich konkrete Konsequenzen:
 \item Der algebraische Orbit-Biomarker in §6 ist eine Hypothese; seine
   physiologische Bedeutung ist offen. Die explorative Prüfung an HRV-Daten
   (Dok.~360) ergab einen Negativbefund.
-\item Die PAC-Nicht-Lernbarkeit von Satz~D gilt für das universelle
-  Zulässigkeitskriterium, nicht für spezifische Instanzen davon ---
-  ein Netz kann lernen, dass $4/3$ stabil ist.
+\item Satz~D vergleicht Stichprobenschranken auf dem beschränkten
+  Raster $p,q\le100$; über einem unbeschränkten Raster mit beliebig
+  großen Primzahlen ist die Hypothesenklasse unendlich, und die Aussagen
+  sind neu zu prüfen.
 \end{itemize}
 
 % ============================================================
@@ -320,7 +354,7 @@ Satz & Aussage & Status \\
 A & HRV-Bandgrenzen im 5-Limit-Raster: verträglich, nicht festgelegt & \BM \\
 B & Auflösungsgrenze $100\xi\approx1{,}33\,\%$, $Q_c\approx11{,}1$; Klassifikation verlangt $\Delta f/f\le100\xi$ & \BM \\
 C & G-CNNs für GF$(3^k)$: Parameterreduktion 12x; Architektur fehlt & \BM/\SM \\
-D & Zulässigkeitskriterium nicht PAC-lernbar aus endlichen Daten & \BM \\
+D & Lernbarkeit des Zulässigkeitskriteriums: ohne Strukturannahme $\sim$84\,000, mit Primfaktor-Struktur $\le$407 Beispiele & \BM \\
 Arch. & Galois-informiertes Netz: Skizze & \SM \\
 \bottomrule
 \end{tabular}
@@ -359,6 +393,10 @@ Arch. & Galois-informiertes Netz: Skizze & \SM \\
   Gold, E.\,M. (1967).
   Language identification in the limit.
   \emph{Information and Control}, 10(5), 447--474.
+\item[\cite{ShalevShwartz2014}]
+  Shalev-Shwartz, S., \& Ben-David, S. (2014).
+  \emph{Understanding Machine Learning: From Theory to Algorithms.}
+  Cambridge University Press.
 \item[\cite{ILCRBlog2023}]
   ICLR Blog (2023).
   How does the inductive bias influence the generalization capability
@@ -375,8 +413,9 @@ Arch. & Galois-informiertes Netz: Skizze & \SM \\
 \section*{Prüfskripte}
 
 \texttt{2/python/Dok359\_Skripte/pruef\_359\_ki\_grenzen.py} ---
-14 Assertions: A1--A5 (HRV-Raster), B1--B4 (Auflösung), C1--C3
-(Gruppenäquivarianz), D1--D2 (PAC-Abdeckung).
+18 Assertions: A1--A5 (HRV-Raster), B1--B4 (Auflösung), C1--C3
+(Gruppenäquivarianz), D1--D6 (Raster, Abdeckung, PAC-Schranken,
+Lernen aus positiven Beispielen).
 
 \section*{Vermerk zur Verwendung von KI-Assistenz}
 

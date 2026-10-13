@@ -1413,3 +1413,19 @@ Kernergebnis: Reine Massenvariation ist eine konforme Skalierung des flachen Rau
 
 **Prüfskript:** 2/python/Dok392_Skripte/run_all_392.sh — 81/81 PASS (392a Schwachfeld 14/14, 392b Mitführung 11/11, 392c Gravitationswellen 8/8, 392d Kosmos 9/9, 392e Massenlesart 11/11, 392f Lichtgrenze und Feldkonstanten 16/16, 392g Abstände 8/8, 392h DESI-AP 4/4)
 **Register:** R152 (Dok. 389, Gleichwertigkeit der Darstellungen eingegrenzt), R153 (Dok. 312, 267, 308, vierter Diskriminator und Entfernungsgesetz).
+
+---
+
+## 13. Oktober 2026 — Dok. 393: Rauschgrenze und lernende Systeme
+
+### Dok. 393 — Fragen und Antworten zu Mustererkennung, Sprache und Zahlen (De 13 / En 12 Seiten)
+
+Anlass: die Frage, ob neuronale Netze und Sprachmodelle an dieselbe Rauschgrenze stoßen wie die Frequenzanalyse im Korpus (Dok. 343, Satz G′; $Q_c=\pi/\sqrt{6\varepsilon}$, 12,5 bei 1,05 %, 11,1 bei $100\xi$ **[K]**). Das Dokument ist als Folge von zwölf Fragen und Antworten aufgebaut und schließt mit einem Bild des gemeinsamen Kerns.
+
+Kernaussage: Die Rauschgrenze ist eine Eigenschaft der Daten, kein Verfahren überschreitet sie, auch kein Netz **[B]**. Sprachmodelle bilden lesbare Sätze, weil Grammatik dicht und vielfältig belegt ist; exakte Zahlen und seltene Fakten sind dünn belegt. Harmonische Muster sind in der Natur dicht im Vorkommen, aber nicht in der Vielfalt: Die Grundstruktur der FFGFT steckt in wenigen Zahlen. Sprache verzeiht Fehler, weil sie ein redundanter Code ist; eine Zahl hat keinen Abstand zum Nachbarwert. Zählen, Gruppenordnungen und Wicklungszahlen sind dagegen so fehlertolerant wie Sprache; die Rauschgrenze sitzt am Übergang vom Diskreten zum Kontinuum **[B]**. Weitere Antworten behandeln das gelernte Rahmenwerk eines Modells gegenüber dem gesetzten der FFGFT, die Schichten der Regeln eines KI-Assistenten, die Entscheidung nach einer Fehlermeldung, zwei Arten von Wahrscheinlichkeit (Nichtwissen und Born-Struktur, $2/9$ aus Dok. 367; Trennung von $1/5$ auf 3σ ab rund 3200 Ereignissen **[K]**) und die Rauschgrenze in den Gewichten eines Netzes.
+
+Nulltest: vollständige symbolische Suche über $c\cdot d^{1/k}\cdot\xi^{m/n}\cdot\pi^s$ (23 084 325 Ausdrücke) und über Brüche allein (3109). Mit den Formeln aus Dok. 387 als Vorgabe gegen gleich komplexe Alternativen: zusammen $p=0{,}41$; auffälligste Einzelwerte $v/E_P$ ($p=0{,}02$), $M_W/M_Z$ (0,09), $\lambda_{\mathrm{CKM}}$ (0,11); Leptonverhältnisse bei 0,5–1 % ohne numerische Beweiskraft; $\alpha^{-1}=3700/27$ mit 7,6 ppm erreicht ein Bruch mit Nenner ≤ 27 auch bei Zufallszahlen in etwa der Hälfte der Fälle **[K]**. Blinde Suche ohne Vorgabe für alle Primzahlmengen auf Zufallsniveau **[K]**. Positivkontrolle Balmer-Linien: mit Brüchen gefunden ($p=0{,}002$), mit voller Grammatik nicht ($p=0{,}47$) **[K]**. Folgerung: Die numerische Nähe trägt die FFGFT nicht, das muss die Ableitungskette tun; Struktur aus wenigen exakten Werten muss vorgegeben und geprüft werden **[S]**. Grenzen: Bit-Maß der Komplexität ist eine Wahl, nur neun Größen, Leptonreste ($K_{\mathrm{frak}}$) werden als Fehltreffer gewertet.
+
+**Prüfskript:** 2/python/Dok393_Skripte/run_all_393.sh — 19/19 PASS (393a Nulltest 8/8 mit Ergebnisprotokoll pruef_393a_ergebnis.txt, 393b Zahlen 11/11)
+**Register:** kein Eintrag.
+
