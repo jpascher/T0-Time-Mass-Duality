@@ -139,12 +139,12 @@ d2 = ((1+chain['tau']/100)/(1+chain['mu']/100)-1)/xi
 check("Verhältnisse der Kettenreste = Leiterreste (E_P und 5 pi kürzen sich)",
       abs(d1-R1) < 1e-6 and abs(d2-R2alt) < 1e-6, f"{d1:.2f}, {d2:.2f} xi")
 
-print("\n6. Die 54-Welt: m_e m_mu = 54 u^2")
+print("\n6. Die 54-Welt: m_e m_mu = 54 E_u^2")
 me_u = math.sqrt(54/k1); mmu_u = k1*me_u; mtau_u = k2*mmu_u
-check("Massen in u (Koide): 0,511038 / 105,6674 / 1777,12", abs(me_u-0.511038) < 2e-6 and abs(mmu_u-105.6674) < 1e-3 and abs(mtau_u-1777.12) < 0.01,
+check("Massen in E_u (Koide): 0,511038 / 105,6674 / 1777,12", abs(me_u-0.511038) < 2e-6 and abs(mmu_u-105.6674) < 1e-3 and abs(mtau_u-1777.12) < 0.01,
       f"{me_u:.6f}, {mmu_u:.4f}, {mtau_u:.3f}")
 ue, um, ut = me/me_u, mmu/mmu_u, mtau/mtau_u
-check("alle drei Leptonen ergeben u = 0,99992 MeV auf etwa 1e-5", max(ue, um, ut) - min(ue, um, ut) < 4e-5 and abs(ue-0.99992) < 1e-5,
+check("alle drei Leptonen ergeben E_u = 0,99992 MeV auf etwa 1e-5", max(ue, um, ut) - min(ue, um, ut) < 4e-5 and abs(ue-0.99992) < 1e-5,
       f"{ue:.6f}, {um:.6f}, {ut:.6f}")
 K54 = 54*xi*ainv
 check("alpha^-1 = K/(54 xi) verlangt K = 0,986659, n = 100,06", abs(K54-0.986659) < 1e-6 and abs(nof(K54)-100.056) < 0.002, f"n = {nof(K54):.3f}")
