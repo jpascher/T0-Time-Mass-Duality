@@ -49,6 +49,29 @@ check("Kandidat zweiter Ordnung 1 - eps - eps^2: n = 101,33, verfehlt alpha um 1
 rel_unc = math.sqrt((0.15e-9)**2 + (0.3e-9)**2 + (2.2e-8)**2)
 check("Messunsicherheit von K_alpha (< 3e-8) ist klein gegen den Rest 1,7e-4", rel_unc < 3e-8 and 1.68e-4/rel_unc > 1000)
 
+print("\n2b. Richtung und Sitz des Restes")
+P = me*mmu
+bare = 1/(xi*P); pred = K_rule/(xi*P)
+check("ohne Korrektur alpha^-1 = 138,911 (+1,37 %)", abs(bare-138.911) < 0.001 and abs(bare/ainv-1-0.01368) < 1e-4, f"{bare:.4f}")
+check("mit Regel alpha^-1 = 137,059: Vorhersage zu groß (+168 ppm)", abs(pred-137.0591) < 1e-3 and pred > ainv, f"{pred:.4f}")
+check("Regel liefert 98,8 % der verlangten Korrektur", abs((1-K_rule)/(1-K_a) - 0.9877) < 0.0005, f"{(1-K_rule)/(1-K_a):.4f}")
+check("Faktor umgekehrt (alpha = xi me mmu K): +2,7 % (ausgeschlossen)", abs(1/(K_rule*xi*P)/ainv-1-0.0274) < 0.001)
+for nm, a in (("g-2 2023", 137.035999166), ("Cs 2018", 137.035999046), ("Rb 2020", 137.035999206)):
+    check(f"Messung {nm}: Abstand zur Regel bleibt 168,4 ppm", abs((pred/a-1)*1e6 - 168.4) < 0.1)
+check("Streuung Cs-Rb 1,2 ppb, rund 1e5-mal kleiner als der Rest",
+      abs((137.035999206-137.035999046)/ainv*1e9 - 1.17) < 0.05 and 1.68e-4/1.17e-9 > 1e5)
+g = K_rule/(xi*54)
+check("Galois: m_e m_mu = 54 mit Regel gibt 3700/27 exakt", abs(g - 3700/27) < 1e-10, f"{g:.5f}")
+check("3700/27 liegt 7,6 ppm neben der Messung", abs((g/ainv-1)*1e6 - 7.6) < 0.1)
+check("m_e m_mu = 53,9913 MeV^2 liegt 1,21 xi (161 ppm) unter 54", abs((P/54-1)/xi + 1.206) < 0.002, f"{(P/54-1)*1e6:.1f} ppm")
+check("Zerlegung: 168,4 ppm = Produkt gegen 54 und Galois-Rest", abs(((54/P)*(g/ainv)-1)*1e6 - 168.4) < 0.1)
+check("in der Energieeinheit gelesen: 84 ppm", abs(((pred/ainv)**0.5-1)*1e6 - 84.2) < 0.1)
+xs = [xi]
+for _ in range(2): xs.append(xs[-1]*(1-100*xs[-1]))
+check("Nichtschließung vorwärts: Schritt 1 gibt n = 98,67 (falsche Richtung)", abs(100*xs[1]/xi - 98.667) < 0.001)
+check("stetige Spirale vorwärts ln(76/75) = multiplikative Form (n = 99,34)", abs(math.log(76/75)/xi - nof(K_mult)) < 0.01)
+check("ein Schritt zurück (K = 73/74): n = 101,35, überschießt um 0,11 xi", abs(nof(73/74)-101.351) < 0.001 and abs(nof(73/74)-nof(K_a)-0.105) < 0.01)
+
 print("\n3. Algebraische Folgen und angepasste Größen")
 r = {"e": 4/3, "mu": 16/5, "tau": 25/9}
 p = {"e": 1.5, "mu": 1.0, "tau": 2/3}
