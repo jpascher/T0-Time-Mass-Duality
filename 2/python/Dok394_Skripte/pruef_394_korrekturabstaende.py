@@ -150,6 +150,20 @@ K54 = 54*xi*ainv
 check("alpha^-1 = K/(54 xi) verlangt K = 0,986659, n = 100,06", abs(K54-0.986659) < 1e-6 and abs(nof(K54)-100.056) < 0.002, f"n = {nof(K54):.3f}")
 check("additive Form 0,06 xi daneben, multiplikative 0,71 xi", abs(nof(K54)-100) < 0.06 and abs(nof(K54)-nof(K_mult) - 0.713) < 0.005)
 check("Regel und 54 zugleich: 3700/27, 7,6 ppm daneben (beide exakt ausgeschlossen)", abs(((74/75)/(54*xi)/ainv-1)*1e6 - 7.6) < 0.1)
+check("54 exakt: K = 9 alpha^-1/1250 = 0,986659194", abs(9*ainv/1250 - 0.986659194) < 1e-9 and abs(9*ainv/1250 - K54) < 1e-15)
+check("Abstand zu 74/75: 7,6 ppm, Rest 0,056 xi", abs((K54/K_rule-1)*1e6 + 7.57) < 0.01 and abs((K_rule-K54)/xi - 0.056) < 0.001)
+check("zweite Ordnung (100 xi)^2 = 1,33 xi, 24-mal größer als der Rest", abs(eps**2/xi - 4/3) < 1e-9 and (eps**2/xi)/((K_rule-K54)/xi) > 23)
+check("1/18 verfehlt n um rund 430 sigma (nicht übernommen)", abs((nof(K54)-100-1/18)/(54*xi*0.000000021/xi) - 431) < 2)
+check("74/75 exakt verlangt Produkt 54,0004 E_u^2", abs(54*(K_rule/K54) - 54.00041) < 1e-5)
+d54 = 1-K54
+check("offene Bahn: rho = 1/d = 74,958, 0,042 Schritte nach innen", abs(1/d54-74.958) < 0.001 and abs(75-1/d54-0.042) < 0.001, f"{1/d54:.4f}")
+check("nach 75 Umläufen Vorlauf 0,00056 Umläufe = 0,20 Grad, Zusatzdrehung nach rund 1800 Zyklen",
+      abs((75*d54-1)*360-0.2018) < 0.001 and abs(1/(75*d54-1)-1784) < 2)
+xr = [xi]
+for _ in range(80): xr.append(xr[-1]*(1-100*xr[-1]))
+check("nach außen: 75 laufende Schritte ergeben nur 0,69 Umläufe (Bahn bleibt zurück)", abs(sum(100*v for v in xr[:75]) - 0.694) < 0.001)
+check("ein ganzer Schritt nach innen (rho = 74): Defekt +1,35 %, das 24-Fache des Restes", abs(((1/74)/eps-1)*100 - 1.351) < 0.001 and abs((1/74-eps)/(d54-eps) - 24.1) < 0.2)
+check("Rest = 3,15 d^3; Faktor pi verfehlt um rund 170 sigma", abs((d54-eps)/eps**3 - 3.152) < 0.002 and abs((d54-eps-math.pi*eps**3)/(54*xi*0.000000021) - 170) < 5)
 EPc = me_u/(4/(15*math.pi)*xi**5.5)*ue
 check("E_P und G aus der Kette unverändert: +1,34 % und -2,62 %", abs((EPc/EP-1)*100 - 1.335) < 0.01 and abs(((EP/EPc)**2-1)*100 + 2.62) < 0.02)
 
