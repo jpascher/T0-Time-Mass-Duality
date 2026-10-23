@@ -164,6 +164,8 @@ for _ in range(80): xr.append(xr[-1]*(1-100*xr[-1]))
 check("nach außen: 75 laufende Schritte ergeben nur 0,69 Umläufe (Bahn bleibt zurück)", abs(sum(100*v for v in xr[:75]) - 0.694) < 0.001)
 check("ein ganzer Schritt nach innen (rho = 74): Defekt +1,35 %, das 24-Fache des Restes", abs(((1/74)/eps-1)*100 - 1.351) < 0.001 and abs((1/74-eps)/(d54-eps) - 24.1) < 0.2)
 check("Rest = 3,15 d^3; Faktor pi verfehlt um rund 170 sigma", abs((d54-eps)/eps**3 - 3.152) < 0.002 and abs((d54-eps-math.pi*eps**3)/(54*xi*0.000000021) - 170) < 5)
+check("54 in MeV: 7385 sigma; 54 und 74/75 zugleich: rund 49 000 sigma in alpha",
+      abs((54-P)/(P*math.hypot(0.00000000016/me, 0.0000023/mmu)) - 7385) < 5 and abs(((74/75)/(54*xi)/ainv-1)/(0.000000021/ainv) - 49400) < 100)
 EPc = me_u/(4/(15*math.pi)*xi**5.5)*ue
 check("E_P und G aus der Kette unverändert: +1,34 % und -2,62 %", abs((EPc/EP-1)*100 - 1.335) < 0.01 and abs(((EP/EPc)**2-1)*100 + 2.62) < 0.02)
 
