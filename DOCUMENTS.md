@@ -1,6 +1,6 @@
 # FFGFT — Document list
 
-303 numbered documents (English versions), generated automatically on 2026-09-29 from the PDFs in `2/pdf/` and `2/ipi/` with `2/python/Werkzeuge/erzeuge_dokumentenliste.py`. Corrections to individual documents are kept in the register, Doc. 190.
+318 numbered documents (English versions), generated automatically on 2026-10-23 from the PDFs in `2/pdf/` and `2/ipi/` with `2/python/Werkzeuge/erzeuge_dokumentenliste.py`. Corrections to individual documents are kept in the register, Doc. 190.
 
 | Doc. | Title | PDF |
 |---|---|---|
@@ -13,7 +13,7 @@
 | 002 | T0 Theory: A Unified Physics from a Single Number Summary of the Document Collection | [PDF](2/pdf/002_reise_En.pdf) |
 | 003 | T0-Theory: Fundamental Principles The Geometric Foundations of Physics Document 003 of the T0 Series | [PDF](2/pdf/003_T0_Grundlagen_v1_En.pdf) |
 | 004 | T0-Model: Complete Document Analysis | [PDF](2/pdf/004_T0_Modell_Uebersicht_En.pdf) |
-| 005 | T0-Theory: Final Fractal Mass Formulas (November 2025, <3% ) | [PDF](2/pdf/005_T0_tm-erweiterung-x6_En.pdf) |
+| 005 | T0-Theory: Fractal Mass Formulas (November 2025, <3% ) | [PDF](2/pdf/005_T0_tm-erweiterung-x6_En.pdf) |
 | 006 | T0-Model: Complete Parameter-Free Particle Mass Calculation Direct Geometric Method vs. Extended Yukawa Method With Complete Neutrino Quantum Number Analysis an | [PDF](2/pdf/006_T0_Teilchenmassen_En.pdf) |
 | 007 | T0-Theory: Neutrinos The Photon Analogy, Geometric Oscillations, and Koide Extension Document 5 of the T0 Series | [PDF](2/pdf/007_T0_Neutrinos_En.pdf) |
 | 008 | T0-Theory: and e | [PDF](2/pdf/008_T0_xi-und-e_En.pdf) |
@@ -26,12 +26,13 @@
 | 015 | Natural Unit Systems | [PDF](2/pdf/015_NatEinheitenSystematik_En.pdf) |
 | 016 | T0 Theory: Calculation of Particle Masses and Physical Constants | [PDF](2/pdf/016_T0_Vollstaendige_Berchnungen_En.pdf) |
 | 018 | Anomalous Magnetic Moments in FFGFT Theory Geometric Derivation from Time-Mass Duality — Purely Geometric Formulas and Precise Ratio Predictions | [PDF](2/pdf/018_T0_Anomale-g2-10_En.pdf) |
+| 018 | Anomalous Magnetic Moments in FFGFT Theory Geometric Derivation from Time-Mass Duality — Purely Geometric Formulas and Precise Ratio Predictions — Revision 12 | [PDF](2/pdf/018_T0_Anomale-g2-12_En.pdf) |
 | 019 | T0-Theory: The T0-Time-Mass Duality | [PDF](2/pdf/019_T0_lagrndian_En.pdf) |
 | 020 | T0 Quantum Field Theory: Complete Extension QFT, Quantum Mechanics and Quantum Computers in the T0-Framework From fundamental equations to technological applica | [PDF](2/pdf/020_T0_QM-QFT-RT_En.pdf) |
 | 021 | T0-QAT: -Aware Quantization-Aware Training | [PDF](2/pdf/021_T0_QAT_En.pdf) |
 | 022 | T0 Quantum Field Theory: ML-Derived Extensions | [PDF](2/pdf/022_T0-QFT-ML_Addendum_En.pdf) |
 | 023 | T0 Theory: Extension to Bell Tests | [PDF](2/pdf/023_Bell_En.pdf) |
-| 023a | T0 Theory Perspective on the Video | [PDF](2/pdf/023a_Bell-video_En.pdf) |
+| 023a | T0 Theory: Bell Tests – Part 2 Extended Analysis: Philosophical Tensions and Experimental Frameworks Non-locality, Realism, and the T0 Resolution | [PDF](2/pdf/023a_Bell-Teil2_En.pdf) |
 | 023b | Response and Analysis of the T0 Theory Framework in the Context of Bell's Inequalities | [PDF](2/pdf/023b_Bell-video_En.pdf) |
 | 024 | T0-Theory: Network Representation and Dimensional Analysis | [PDF](2/pdf/024_T0_netze_En.pdf) |
 | 025 | T0-Theory: Cosmology | [PDF](2/pdf/025_T0_Kosmologie_En.pdf) |
@@ -59,7 +60,7 @@
 | 050 | Dirac Equation in T0 Theory: Introduction and Overview Clifford Algebra, Spin Topology, and Geometric Integration | [PDF](2/pdf/050_diracVereinfacht_En.pdf) |
 | 051 | Dirac Equation in T0 Theory: Geometric Integration with Time-Mass Duality Fractal Spacetime and Dynamic Mass | [PDF](2/pdf/051_dirac_En.pdf) |
 | 052 | Elimination of Mass as a Dimensional Placeholder in the T0 Model: Towards Truly Parameter-Free Physics | [PDF](2/pdf/052_EliminationOfMass_En.pdf) |
-| 053 | Pure Energy T0 Theory: The Ratio-Based Formulation From Parameter Physics to Scale Relationships Building on Simplified Dirac and Universal Lagrangian Foundation | [PDF](2/pdf/053_Elimination_Of_Mass_Dirac_Lag_En.pdf) |
+| 053 | Pure Energy T0 Theory: The Ratio-Based Formulation From Parameter Physics to Scale Relationships Building on Simplified Dirac and Universal Lagrangian Foundatio | [PDF](2/pdf/053_Elimination_Of_Mass_Dirac_Lag_En.pdf) |
 | 055 | Dynamic Mass of Photons and Its Implications for Nonlocality | [PDF](2/pdf/055_DynMassePhotonenNichtlokal_En.pdf) |
 | 056 | Universal Derivation of All Physical Constants from the Fine-Structure Constant and Planck Length | [PDF](2/pdf/056_universale-ableitung_En.pdf) |
 | 057 | The Relational Number System | [PDF](2/pdf/057_RelokativesZahlensystem_En.pdf) |
@@ -120,7 +121,7 @@
 | 150 | Compatibility Analysis of T0 Dimension Formulations Unification of 4D Torsion Crystal and Fractal Dimension Documents 149, 018, and 145 Compared | [PDF](2/pdf/150_kompatiblitaet_En.pdf) |
 | 152 | Ontological Reality and Narrative Structure of T0 Theory From Fundamental Structure to Observable Physics Hierarchical Levels of Physical Reality | [PDF](2/pdf/152_ontologische-ord_En.pdf) |
 | 153 | Ontological Hierarchy of Energy Reduction The Levels of Fundamental Reality in Natural Units From Time-Mass Duality to Universal Energy Field | [PDF](2/pdf/153_energie-reduktion-on_En.pdf) |
-| 154 | Why the Brain Folding Metaphor Fits Perfectly The Universe as a Folded Brain Self-Similarity, Surface Maximization, and Information | [PDF](2/pdf/154_Cortex_En.pdf) |
+| 154 | Why the Brain Folding Metaphor Fits The Universe as a Folded Brain Self-Similarity, Surface Maximization, and Information | [PDF](2/pdf/154_Cortex_En.pdf) |
 | 155 | DNA Double Helix and Chromosome Compaction Astonishing Parallels to T0-Torus Geometry From Molecular Winding to Highest Information Density | [PDF](2/pdf/155_DNA_En.pdf) |
 | 156 | What IS the Universe? The Fundamental Ontology of T0 Theory Energy as Sole Reality — Time and Mass as Emergent Duality | [PDF](2/pdf/156_was-ist-universum_En.pdf) |
 | 157 | T0 Theory: Why Is Time Directed? — The Arrow of Time as a Geometric Consequence of Spacetime Structure | [PDF](2/pdf/157_Zeitpfeil_En.pdf) |
@@ -134,7 +135,7 @@
 | 164 | T0 Theory and 't Hooft's Cellular Automaton Interpretation: — Deterministic Quantum Mechanics from Two Directions — Where Both Agree, Where T0 Goes Deeper, — an | [PDF](2/pdf/164_T0_tHooft_CAI_En.pdf) |
 | 165 | T0 Theory: The Hubble Constant as a Pure -Ratio — H_0 / m_e c^2 = (/2) ^10 — Cosmological and Particle Scale from One Parameter | [PDF](2/pdf/165_T0_H0_Verhaeltnis_En.pdf) |
 | 166 | T0 Theory: The Casimir Scale as Cosmic Link — Casimir Effect, CMB and Hubble Constant in a -Power Ladder | [PDF](2/pdf/166_T0_Casimir_H0_En.pdf) |
-| 167 | LiNbO3 Material Properties on the Power Ladder: — Phase Matching in PPLN as a Geometrically Forced Condition — Why the CIM Substrate is Not an Empirical Coincid | [PDF](2/pdf/167_T0_LiNbO3_xi_Geometry_En.pdf) |
+| 167 | LiNbO3 Material Properties on the Power Ladder: — Phase Matching in PPLN: — Testing a Geometric Assignment | [PDF](2/pdf/167_T0_LiNbO3_xi_Geometry_En.pdf) |
 | 168 | The Periodic Table as -Geometry: — Radial Mass Ladder and Angular Shell Structure — from a Common Origin | [PDF](2/pdf/168_T0_Periodensystem_xi_En.pdf) |
 | 169 | Follow-up Investigations to Doc. 168: — Angular Corrections Binding Energies Heavy Elements | [PDF](2/pdf/169_T0_Nachfolge_En.pdf) |
 | 170 | Discrete Complexity Thresholds in T0 Theory — A Universal Organisational Principle | [PDF](2/pdf/170_bewustsein_En.pdf) |
@@ -288,7 +289,7 @@
 | 350 | Black Holes and Time-Mass Duality: — Covariance of G, Evaporation Sequence, and the Neutrino as Final State | [PDF](2/pdf/350_Schwarze_Loecher_Dualitaet_En.pdf) |
 | 351 | Model Dependence of PDG Comparison Values: — How Empirical Values Arise, Where Theory and Irrational Factors Enter, and What This Means for FFGFT Residuals | [PDF](2/pdf/351_PDG_Modellabhaengigkeit_En.pdf) |
 | 352 | Lepton Residuals: Lepton Ladder, Galois and Koide Compared — How Empirical Values Arise, Where Theory and Irrational Factors Enter, and What This Means for FFGF | [PDF](2/pdf/352_Leptonreste_En.pdf) |
-| 353 | Koide Amplitude d/c = 2 from T^4/Z_3 Geometry — Derivation from the Z_3 Equal-Distribution Condition and the Galois Coupling Matrix (Doc. 348) | [PDF](2/pdf/353_Koide_Amplitude_En.pdf) |
+| 353 | Koide Amplitude d/c = 2 and the T^4/Z_3 Geometry — Z_3 Equal-Distribution Condition, Galois Coupling Matrix (Doc. 348) and the Open Assignment to the Amplitude | [PDF](2/pdf/353_Koide_Amplitude_En.pdf) |
 | 354 | H^0 and T m=1: Twelve Insights into Higgs Geometry — The Higgs Mechanism as Projection of T^4/Z_3 Topology | [PDF](2/pdf/354_Higgs_TM_Dualitaet_En.pdf) |
 | 355 | SSB SU(2)_L U(1)_Y U(1)_EM from T^4/Z_3 Geometry — Spontaneous Symmetry Breaking as Topological Consequence | [PDF](2/pdf/355_SSB_Torus_En.pdf) |
 | 356 | Standard Model Particles from GF(27)^* — All Quantum Numbers Algebraically Forced (Docs. 346 / 347 / 348 / 349) | [PDF](2/pdf/356_SM_Teilchen_GF27_En.pdf) |
@@ -307,6 +308,8 @@
 | 369 | Four Routes to the Lepton Masses — An Inventory | [PDF](2/pdf/369_Vier_Wege_Leptonmassen_En.pdf) |
 | 370 | Why the Icosahedron — Three, Five, and Non-Commutation | [PDF](2/pdf/370_Warum_Ikosaeder_En.pdf) |
 | 371 | The Factor 4/3 — Sphere Volume, Casimir Operators, Electromagnetic Mass, the Triple (3,4,5) and | [PDF](2/pdf/371_Faktor_Vier_Drittel_En.pdf) |
+| 372 | The Matrix-Element Principle and Its Reach — What follows from / v_0/R_5/v_1/^2 = 2/9 beyond the lepton masses | [PDF](2/pdf/372_Matrixelement_Mechanismus_En.pdf) |
+| 373 | The Yukawa Mechanism as a Consequence of T m=1 — Mass-proportional coupling as a derivation, not an assumption | [PDF](2/pdf/373_Yukawa_Wicklungszahlen_En.pdf) |
 | 374 | Common Anchor — Bridge Equations to Observer Patch Holography and the Electroweak Scale as Meeting Point | [PDF](2/pdf/374_Gemeinsamer_Anker_OPH_En.pdf) |
 | 375 | The Hierarchy v/E_P — Two Derivations Compared: FFGFT and Observer Patch Holography | [PDF](2/pdf/375_Hierarchie_vEP_Vergleich_En.pdf) |
 | 376 | The Coefficient 8 and the Status of Issue 740 — A derived coefficient on the OPH side and the withdrawal of a statement in Doc. 374 | [PDF](2/pdf/376_Koeffizient_8pi_740_En.pdf) |
@@ -315,5 +318,16 @@
 | 379 | The Acoustic Plenum and the Photon — Lien (2026) in the light of Docs. 267, 290, 340, A265 and R128 | [PDF](2/pdf/379_Lien_Plenum_Photon_En.pdf) |
 | 380 | Why D_4 — Specificity of the carrier against matched comparison lattices (R95) | [PDF](2/pdf/380_D4_Spezifitaet_En.pdf) |
 | 381 | The Running Recursion Summed Exactly — Telescoping product, second order and one-loop reading for Docs. 295 and 333 | [PDF](2/pdf/381_Rekursion_Summation_En.pdf) |
-| 382 | Muon g−2: Status 2025 — Fermilab final result, White Paper 2025 and assessment of the FFGFT statements | [PDF](2/pdf/382_Myon_g2_Stand2025_En.pdf) |
-| 383 | Masses and Planck scale without v — one chain, one anchor | [PDF](2/pdf/383_Ein_Anker_ohne_v_En.pdf) |
+| 382 | Muon g-2: Status 2025 — Fermilab final result, White Paper 2025 and assessment of the FFGFT statements | [PDF](2/pdf/382_Myon_g2_Stand2025_En.pdf) |
+| 383 | Masses and Planck Scale without v — One chain, one anchor | [PDF](2/pdf/383_Ein_Anker_ohne_v_En.pdf) |
+| 384 | FFGFT in Brief — Foundations, results and status after the calculation review | [PDF](2/pdf/384_FFGFT_Kurzfassung_En.pdf) |
+| 385 | The Higgs–vacuum route to — Origin, formulas and status of a consistency check | [PDF](2/pdf/385_Higgs_Vakuum_Weg_En.pdf) |
+| 386 | Where hides — Charge unit, two spheres and as an area | [PDF](2/pdf/386_Alpha_Geometrie_En.pdf) |
+| 387 | The deviations at a glance — Ratios, SI translation and correction quantities | [PDF](2/pdf/387_Abweichungen_En.pdf) |
+| 388 | The CMB temperature in the basic form — The eV relation, the ratio to the electron mass and the H_0 forms | [PDF](2/pdf/388_CMB_Grundform_En.pdf) |
+| 389 | Parabolic Flight, Inertia and the Representations of Gravitation — Free fall, counter-path, light and horizon in the time-mass duality | [PDF](2/pdf/389_Parabelflug_Darstellungen_En.pdf) |
+| 390 | Loose Puzzle Pieces — Kaluza-Klein and other established building blocks of the time-mass duality | [PDF](2/pdf/390_Puzzleteile_Etabliert_En.pdf) |
+| 391 | Loose Puzzle Pieces II: Cosmology — Redshift, scales and the boundary of the cosmic sector | [PDF](2/pdf/391_Puzzleteile_Kosmologie_En.pdf) |
+| 392 | Where the Representations of Gravitation Part Ways — Mass reading, Weyl part and the limits of equivalence | [PDF](2/pdf/392_Darstellungen_Trennung_En.pdf) |
+| 393 | The Noise Limit and Learning Systems — Questions and Answers on Pattern Recognition, Language and Numbers | [PDF](2/pdf/393_Rauschgrenze_Lernende_Systeme_En.pdf) |
+| 394 | How Far Apart the Fractal Corrections Lie — One Scale for All Corrections and What Remains After Removing Consequences, Fits and the Ladder Residual | [PDF](2/pdf/394_Korrekturabstaende_En.pdf) |

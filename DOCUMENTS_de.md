@@ -1,6 +1,6 @@
 # FFGFT — Dokumentenliste
 
-304 nummerierte Dokumente (deutsche Fassungen), automatisch erzeugt am 2026-09-29 aus den PDFs in `2/pdf/` und `2/ipi/` mit `2/python/Werkzeuge/erzeuge_dokumentenliste.py`. Korrekturen zu einzelnen Dokumenten stehen im Register Dok. 190.
+319 nummerierte Dokumente (deutsche Fassungen), automatisch erzeugt am 2026-10-23 aus den PDFs in `2/pdf/` und `2/ipi/` mit `2/python/Werkzeuge/erzeuge_dokumentenliste.py`. Korrekturen zu einzelnen Dokumenten stehen im Register Dok. 190.
 
 | Dok. | Titel | PDF |
 |---|---|---|
@@ -13,7 +13,7 @@
 | 002 | Meine Reise | [PDF](2/pdf/002_reise_De.pdf) |
 | 003 | T0-Theorie: Fundamentale Prinzipien | [PDF](2/pdf/003_T0_Grundlagen_v1_De.pdf) |
 | 004 | T0-Modell: Vollständige Dokumentenanalyse | [PDF](2/pdf/004_T0_Modell_Uebersicht_De.pdf) |
-| 005 | T0-Theorie: Finale Fraktale Massenformeln (November 2025 | [PDF](2/pdf/005_T0_tm-erweiterung-x6_De.pdf) |
+| 005 | T0-Theorie: Fraktale Massenformeln (November 2025 | [PDF](2/pdf/005_T0_tm-erweiterung-x6_De.pdf) |
 | 006 | T0-Modell: Vollständige parameterfreie Teilchenmassenberechnung Direkte geometrische Methode vs. erweiterte Yukawa-Methode Mit vollständiger Neutrino-Quantenzah | [PDF](2/pdf/006_T0_Teilchenmassen_De.pdf) |
 | 007 | T0-Theorie: Neutrinos | [PDF](2/pdf/007_T0_Neutrinos_De.pdf) |
 | 008 | T0-Theorie: und e | [PDF](2/pdf/008_T0_xi-und-e_De.pdf) |
@@ -26,13 +26,13 @@
 | 015 | Natürliche Einheitensysteme | [PDF](2/pdf/015_NatEinheitenSystematik_De.pdf) |
 | 016 | Abstract | [PDF](2/pdf/016_T0_Vollstaendige_Berchnungen_De.pdf) |
 | 018 | Anomale magnetische Momente in der FFGFT-Theorie | [PDF](2/pdf/018_T0_Anomale-g2-10_De.pdf) |
+| 018 | Anomale magnetische Momente in der FFGFT-Theorie — Revision 12 | [PDF](2/pdf/018_T0_Anomale-g2-12_De.pdf) |
 | 019 | T0-Theorie: Lagrangian-Formulierung | [PDF](2/pdf/019_T0_lagrndian_De.pdf) |
 | 020 | T0 Quantenfeldtheorie: Vollständige Erweiterung | [PDF](2/pdf/020_T0_QM-QFT-RT_De.pdf) |
 | 021 | T0-QAT: -Aware Quantization-Aware Training | [PDF](2/pdf/021_T0_QAT_De.pdf) |
 | 022 | T0 Quantenfeldtheorie: ML-abgeleitete Erweiterungen | [PDF](2/pdf/022_T0-QFT-ML_Addendum_De.pdf) |
 | 023 | T0-Theorie: Erweiterung auf Bell-Tests | [PDF](2/pdf/023_Bell_De.pdf) |
 | 023a | T0-Theorie: Bell-Tests – Teil 2 | [PDF](2/pdf/023a_Bell-Teil2_De.pdf) |
-| 023a | Antwort aus Sicht der T0-Theorie zum Video | [PDF](2/pdf/023a_Bell-video_De.pdf) |
 | 023b | Antwort und Analyse zum T0-Theorie-Framework im Kontext der Bellschen Ungleichungen | [PDF](2/pdf/023b_Bell-video_De.pdf) |
 | 024 | T0-Theorie: Netzwerkdarstellung und Dimensionsanalyse | [PDF](2/pdf/024_T0_netze_De.pdf) |
 | 025 | T0-Theorie: Kosmologie | [PDF](2/pdf/025_T0_Kosmologie_De.pdf) |
@@ -56,7 +56,7 @@
 | 044 | Feinstrukturkonstante: Einheitenkonventionen | [PDF](2/pdf/044_Feinstrukturkonstante_De.pdf) |
 | 046 | Abstract | [PDF](2/pdf/046_Teilchenmassen_De.pdf) |
 | 047 | T0-Modell: Einheitliche Neutrino-Formel-Struktur | [PDF](2/pdf/047_neutrino-Formel_De.pdf) |
-| 049 | Einfacher Lagrangian: Von Standardmodell-Komplexität zu einem einfachen T0-Lagrangian | [PDF](2/pdf/049_LagrandianVergleich_De.pdf) |
+| 049 | Einfacher Lagrangian | [PDF](2/pdf/049_LagrandianVergleich_De.pdf) |
 | 050 | Dirac-Gleichung in der T0-Theorie | [PDF](2/pdf/050_diracVereinfacht_De.pdf) |
 | 051 | Dirac-Gleichung in der T0-Theorie | [PDF](2/pdf/051_dirac_De.pdf) |
 | 052 | Elimination der Masse als dimensionaler Platzhalter | [PDF](2/pdf/052_EliminationOfMass_De.pdf) |
@@ -122,7 +122,7 @@
 | 150 | Kompatibilitätsanalyse der T0-Dimensions-formulierungen | [PDF](2/pdf/150_kompatiblitaet_De.pdf) |
 | 152 | Ontologische Realität und narrative Einordnung der T0-Theorie | [PDF](2/pdf/152_ontologische-ord_De.pdf) |
 | 153 | Ontologische Hierarchie der Energie-Reduktion | [PDF](2/pdf/153_energie-reduktion-on_De.pdf) |
-| 154 | Warum die Gehirnwindungs-Metapher perfekt passt | [PDF](2/pdf/154_Cortex_De.pdf) |
+| 154 | Warum die Gehirnwindungs-Metapher passt | [PDF](2/pdf/154_Cortex_De.pdf) |
 | 155 | DNA-Doppelhelix und Chromosomen-Kompaktierung | [PDF](2/pdf/155_DNA_De.pdf) |
 | 156 | Was IST das Universum? | [PDF](2/pdf/156_was-ist-universum_De.pdf) |
 | 157 | T0-Theorie: Warum ist die Zeit gerichtet? — Der Zeitpfeil als geometrische Konsequenz der Raumzeitstruktur | [PDF](2/pdf/157_Zeitpfeil_De.pdf) |
@@ -136,7 +136,7 @@
 | 164 | T0-Theorie und 't Hoofts Zellularautomat-Interpretation: — Deterministische Quantenmechanik aus zwei Richtungen — Wo beide übereinstimmen, wo T0 tiefer geht, —  | [PDF](2/pdf/164_T0_tHooft_CAI_De.pdf) |
 | 165 | T0-Theorie: Die Hubble-Konstante als reines -Verhältnis — H_0 / m_e c^2 = (/2) ^10 — Kosmologische und Teilchenskala aus einem Parameter | [PDF](2/pdf/165_T0_H0_Verhaeltnis_De.pdf) |
 | 166 | T0-Theorie: Die Casimir-Skala als kosmisches Bindeglied — Casimir-Effekt, CMB und Hubble-Konstante in einer -Potenzleiter | [PDF](2/pdf/166_T0_Casimir_H0_De.pdf) |
-| 167 | LiNbO3-Materialeigenschaften auf der -Potenzleiter: — Phasenanpassung in PPLN als geometrisch erzwungene Bedingung — Warum das CIM-Substrat kein empirischer Zuf | [PDF](2/pdf/167_T0_LiNbO3_xi_Geometrie_De.pdf) |
+| 167 | LiNbO3-Materialeigenschaften auf der -Potenzleiter: — Phasenanpassung in PPLN: — Prüfung einer geometrischen Zuordnung | [PDF](2/pdf/167_T0_LiNbO3_xi_Geometrie_De.pdf) |
 | 168 | Das Periodensystem als -Geometrie: — Radiale Massenleiter und angulare Schalenstruktur — aus einem gemeinsamen Ursprung | [PDF](2/pdf/168_T0_Periodensystem_xi_De.pdf) |
 | 169 | Nachfolgeuntersuchungen zu Dok. 168: — Angulare Korrekturen Bindungsenergien Schwere Elemente | [PDF](2/pdf/169_T0_Nachfolge_De.pdf) |
 | 170 | Diskrete Komplexitätsschwellen in der T0-Theorie — Ein universelles Organisationsprinzip | [PDF](2/pdf/170_bewustsein_De.pdf) |
@@ -290,7 +290,7 @@
 | 350 | Schwarze Löcher und Zeit-Masse-Dualität: — Kovarianz von G, Verdampfungssequenz und das Neutrino als Endzustand | [PDF](2/pdf/350_Schwarze_Loecher_Dualitaet_De.pdf) |
 | 351 | Modellabhängigkeit der PDG-Vergleichswerte: — Wie empirische Messwerte entstehen, wo Theorie und irrationale Faktoren eingehen, und was das für FFGFT-Residuen b | [PDF](2/pdf/351_PDG_Modellabhaengigkeit_De.pdf) |
 | 352 | Leptonreste: Leptonleiter, Galois und Koide im Vergleich — Wie empirische Messwerte entstehen, wo Theorie und irrationale Faktoren eingehen, und was das für FFG | [PDF](2/pdf/352_Leptonreste_De.pdf) |
-| 353 | Koide-Amplitude d/c = 2 aus der T^4/Z_3-Geometrie — Herleitung aus der Z_3-Gleichverteilungsbedingung und der Galois-Kopplungsmatrix (Dok. 348) | [PDF](2/pdf/353_Koide_Amplitude_De.pdf) |
+| 353 | Koide-Amplitude d/c = 2 und die T^4/Z_3-Geometrie — Z_3-Gleichverteilungsbedingung, Galois-Kopplungsmatrix (Dok. 348) und die offene Zuordnung zur Amplitude | [PDF](2/pdf/353_Koide_Amplitude_De.pdf) |
 | 354 | H^0 und T m=1: Neun Erkenntnisse zur Higgs-Geometrie — Der Higgs-Mechanismus als Projektion der T^4/Z_3-Topologie | [PDF](2/pdf/354_Higgs_TM_Dualitaet_De.pdf) |
 | 355 | SSB SU(2)_L U(1)_Y U(1)_EM aus T^4/Z_3-Geometrie — Spontane Symmetriebrechung als topologische Konsequenz | [PDF](2/pdf/355_SSB_Torus_De.pdf) |
 | 356 | Standardmodell-Teilchen aus GF(27)^* — Alle Quantenzahlen algebraisch erzwungen (Dok. 346 / 347 / 348 / 349) | [PDF](2/pdf/356_SM_Teilchen_GF27_De.pdf) |
@@ -309,6 +309,8 @@
 | 369 | Vier Wege zu den Leptonmassen — Bestandsaufnahme | [PDF](2/pdf/369_Vier_Wege_Leptonmassen_De.pdf) |
 | 370 | Warum das Ikosaeder — Drei, Fünf und das Nicht-Kommutieren | [PDF](2/pdf/370_Warum_Ikosaeder_De.pdf) |
 | 371 | Der Faktor 4/3 — Kugelvolumen, Casimir-Operatoren, elektromagnetische Masse, das Tripel (3,4,5) und | [PDF](2/pdf/371_Faktor_Vier_Drittel_De.pdf) |
+| 372 | Das Matrixelement-Prinzip und seine Reichweite — Was aus / v_0/R_5/v_1/^2 = 2/9 über die Leptonmassen hinaus folgt | [PDF](2/pdf/372_Matrixelement_Mechanismus_De.pdf) |
+| 373 | Der Yukawa-Mechanismus als Konsequenz von T m=1 — Massenproportionale Kopplung als Ableitung, nicht als Annahme | [PDF](2/pdf/373_Yukawa_Wicklungszahlen_De.pdf) |
 | 374 | Gemeinsamer Anker — Brückengleichungen zu Observer Patch Holography und die elektroschwache Skala als Treffpunkt | [PDF](2/pdf/374_Gemeinsamer_Anker_OPH_De.pdf) |
 | 375 | Die Hierarchie v/E_P — Zwei Herleitungen im Vergleich: FFGFT und Observer Patch Holography | [PDF](2/pdf/375_Hierarchie_vEP_Vergleich_De.pdf) |
 | 376 | Der Koeffizient 8 und der Status von Issue 740 — Ein abgeleiteter Koeffizient auf OPH-Seite und die Rücknahme einer Aussage aus Dok. 374 | [PDF](2/pdf/376_Koeffizient_8pi_740_De.pdf) |
@@ -317,5 +319,16 @@
 | 379 | Das akustische Plenum und das Photon — Lien (2026) im Licht von Dok. 267, 290, 340, A265 und R128 | [PDF](2/pdf/379_Lien_Plenum_Photon_De.pdf) |
 | 380 | Warum D_4 — Spezifität des Trägers gegen angepasste Vergleichsgitter (R95) | [PDF](2/pdf/380_D4_Spezifitaet_De.pdf) |
 | 381 | Die laufende Rekursion exakt aufsummiert — Teleskopprodukt, zweite Ordnung und Ein-Schleifen-Lesart zu Dok. 295 und 333 | [PDF](2/pdf/381_Rekursion_Summation_De.pdf) |
-| 382 | Myon g−2: Stand 2025 — Fermilab-Endergebnis, White Paper 2025 und Einordnung der FFGFT-Aussagen | [PDF](2/pdf/382_Myon_g2_Stand2025_De.pdf) |
-| 383 | Massen und Planck-Skala ohne v — eine Kette, ein Anker | [PDF](2/pdf/383_Ein_Anker_ohne_v_De.pdf) |
+| 382 | Myon g-2: Stand 2025 — Fermilab-Endergebnis, White Paper 2025 und Einordnung der FFGFT-Aussagen | [PDF](2/pdf/382_Myon_g2_Stand2025_De.pdf) |
+| 383 | Massen und Planck-Skala ohne v — Eine Kette, ein Anker | [PDF](2/pdf/383_Ein_Anker_ohne_v_De.pdf) |
+| 384 | FFGFT in Kurzfassung — Grundlagen, Ergebnisse und Status nach der Rechenprüfung | [PDF](2/pdf/384_FFGFT_Kurzfassung_De.pdf) |
+| 385 | Der Higgs-Vakuum-Weg zu — Herkunft, Formeln und Status einer Konsistenzprüfung | [PDF](2/pdf/385_Higgs_Vakuum_Weg_De.pdf) |
+| 386 | Wo steckt — Ladungseinheit, zwei Kugeln und als Fläche | [PDF](2/pdf/386_Alpha_Geometrie_De.pdf) |
+| 387 | Die Abweichungen im Überblick — Verhältnisse, SI-Übersetzung und Korrekturgrößen | [PDF](2/pdf/387_Abweichungen_De.pdf) |
+| 388 | Die CMB-Temperatur in der Grundform — eV-Relation, Verhältnis zur Elektronenmasse und die H_0-Formen | [PDF](2/pdf/388_CMB_Grundform_De.pdf) |
+| 389 | Parabelflug, Trägheit und die Darstellungen der Gravitation — Freier Fall, Gegenbahn, Licht und Horizont in der Zeit-Masse-Dualität | [PDF](2/pdf/389_Parabelflug_Darstellungen_De.pdf) |
+| 390 | Lose Puzzleteile — Kaluza-Klein und andere etablierte Bausteine der Zeit-Masse-Dualität | [PDF](2/pdf/390_Puzzleteile_Etabliert_De.pdf) |
+| 391 | Lose Puzzleteile II: Kosmologie — Rotverschiebung, Skalen und die Grenze des kosmischen Sektors | [PDF](2/pdf/391_Puzzleteile_Kosmologie_De.pdf) |
+| 392 | Wo die Darstellungen der Gravitation sich trennen — Massenlesart, Weyl-Anteil und die Grenzen der Gleichwertigkeit | [PDF](2/pdf/392_Darstellungen_Trennung_De.pdf) |
+| 393 | Rauschgrenze und lernende Systeme — Fragen und Antworten zu Mustererkennung, Sprache und Zahlen | [PDF](2/pdf/393_Rauschgrenze_Lernende_Systeme_De.pdf) |
+| 394 | Wie weit die fraktalen Korrekturen auseinanderliegen — Ein Maßstab für alle Korrekturen und was nach Abzug von Folgen, Anpassungen und Leiterrest bleibt | [PDF](2/pdf/394_Korrekturabstaende_De.pdf) |

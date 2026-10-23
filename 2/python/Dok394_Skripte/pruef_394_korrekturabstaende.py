@@ -1,0 +1,104 @@
+"""
+pruef_394_korrekturabstaende.py -- Dok. 394: Wie weit die fraktalen Korrekturen voneinander abweichen.
+Johann Pascher, ORCID 0009-0000-6518-4064, 23. Oktober 2026
+
+Jede im Korpus vorkommende Korrektur wird als n in K = 1 - n*xi geschrieben und mit der Regel
+n = 100 (K_frak = 74/75, Dok. 133/300/384) verglichen. Danach wird nach Herkunft sortiert.
+Reines Python, keine Zusatzpakete.
+"""
+import math
+
+ok = n = 0
+def check(name, cond, info=""):
+    global ok, n
+    n += 1; ok += bool(cond)
+    print(f"  [{'OK ' if cond else 'FAIL'}] {name}" + (f"  ({info})" if info else ""))
+
+xi = 4/30000
+eps = 100*xi                                   # = 1/75
+me, mmu = 0.51099895069, 105.6583755          # MeV, CODATA 2022
+mtau, dmtau = 1776.93, 0.09                    # MeV, PDG (pdgLive, Ausgabe 2026)
+mtau_alt = 1776.86                             # im Korpus bisher verwendet
+ainv = 137.035999177                           # CODATA 2022
+hbar, c, MeV = 1.054571817e-34, 299792458.0, 1.602176634e-13
+G_codata = 6.67430e-11
+EP = math.sqrt(hbar*c**5/G_codata)/MeV
+nof = lambda K: (1-K)/xi
+
+print("1. Die Regel und ihre Form")
+K_rule = 1-eps
+check("K_frak = 1 - 100 xi = 74/75 exakt", abs(K_rule - 74/75) < 1e-15, f"{K_rule:.6f}")
+K_mult = (1-xi)**100
+check("multiplikative Form (1-xi)^100: n = 99,34", abs(nof(K_mult) - 99.34) < 0.01, f"n = {nof(K_mult):.3f}")
+check("Abstand der Formen 8,8e-5", abs((K_mult-K_rule) - 8.8e-5) < 0.1e-5, f"{K_mult-K_rule:.2e}")
+
+print("\n2. Der einzige echte Test der SI-Übersetzung: alpha")
+K_a = xi*me*mmu*ainv
+check("von alpha verlangt: K = xi me mmu / alpha = 0,98650", abs(K_a - 0.98650) < 1e-5, f"{K_a:.6f}")
+check("n = 101,25 (Abstand zur Regel +1,25 xi)", abs(nof(K_a) - 101.25) < 0.01, f"n = {nof(K_a):.3f}")
+check("relativ zu 74/75: -168 ppm", abs((K_a/K_rule-1)*1e6 + 168) < 1, f"{(K_a/K_rule-1)*1e6:.1f} ppm")
+check("additive Form liegt näher als multiplikative (1,25 xi gegen 1,91 xi)",
+      abs(nof(K_a)-100) < abs(nof(K_a)-nof(K_mult)), f"{nof(K_a)-100:.2f} / {nof(K_a)-nof(K_mult):.2f}")
+E0n = math.sqrt(me*mmu)
+K_MeV = (E0n*math.sqrt(xi*ainv))**2
+check("1-MeV-Bezug (Dok. 386) ist dieselbe Zahl wie K aus alpha (identisch umgeformt)",
+      abs(K_MeV - K_a) < 1e-12, f"{K_MeV:.6f}")
+K_2 = 1-eps-eps**2
+check("Kandidat zweiter Ordnung 1 - eps - eps^2: n = 101,33, verfehlt alpha um 12 ppm (nicht übernommen)",
+      abs(nof(K_2)-101.333) < 0.001 and abs((K_2/K_a-1)*1e6 + 11.9) < 0.3, f"{(K_2/K_a-1)*1e6:.1f} ppm")
+rel_unc = math.sqrt((0.15e-9)**2 + (0.3e-9)**2 + (2.2e-8)**2)
+check("Messunsicherheit von K_alpha (< 3e-8) ist klein gegen den Rest 1,7e-4", rel_unc < 3e-8 and 1.68e-4/rel_unc > 1000)
+
+print("\n3. Algebraische Folgen und angepasste Größen")
+r = {"e": 4/3, "mu": 16/5, "tau": 25/9}
+p = {"e": 1.5, "mu": 1.0, "tau": 2/3}
+mexp = {"e": me, "mu": mmu, "tau": mtau_alt}
+chain = {l: (r[l]/(5*math.pi)*xi**(p[l]+4)*EP/mexp[l]-1)*100 for l in r}
+check("Kette m_i = r_i xi^(p_i+4) E_P/(5 pi): e -1,32 %, mu -0,80 %, tau +0,23 % (Dok. 383)",
+      abs(chain['e']+1.318) < 0.01 and abs(chain['mu']+0.803) < 0.01 and abs(chain['tau']-0.226) < 0.01,
+      ", ".join(f"{l} {v:+.3f} %" for l, v in chain.items()))
+EPa = me/(4/(15*math.pi)*xi**5.5)
+Ga = hbar*c**5/(EPa*MeV)**2
+check("G-Rest aus Anker m_e ist algebraisch das Doppelte des E_P-Restes (G ~ E_P^-2)",
+      abs(Ga/G_codata - (EP/EPa)**2) < 1e-12, f"E_P {(EPa/EP-1)*100:+.2f} %, G {(Ga/G_codata-1)*100:+.2f} %")
+check("Elektronrest der Kette -1,32 % entspricht -99 xi (Nähe zu 100 xi hängt am angepassten Faktor 10)",
+      abs(chain['e']/100/xi + 98.9) < 0.3, f"{chain['e']/100/xi:.1f} xi")
+C_chain = Ga/(xi**2/(4*me)*0.986)
+check("C_conv aus der Kette 7,58e-3 gegen Korpuswert 7,783e-3: Unterschied 2,6 % (angepasst, R141)",
+      abs(C_chain-7.58e-3) < 0.01e-3 and abs(7.783e-3/C_chain-1-0.0268) < 0.002, f"{C_chain:.4e}")
+check("G-Formel: 0,986 statt 74/75 macht 0,068 %", abs((K_rule/0.986-1)*100 - 0.068) < 0.001, f"{(K_rule/0.986-1)*100:.3f} %")
+
+print("\n4. Andere Größen unter demselben Namen")
+check("144/125 = r_mu/r_tau exakt (Leiterkoeffizient, R140)", abs(r['mu']/r['tau'] - 144/125) < 1e-15)
+check("144/125 liegt auf der anderen Seite von 1: n = -1140", abs(nof(144/125)+1140) < 1e-6)
+check("e^(-xi) (Dok. 037): n = 1, ein xi-Schritt, nicht der 100er-Schritt", abs(nof(math.exp(-xi))-1) < 0.001)
+
+print("\n5. Leptonreste: Abstand der Leiter zur Koide-Form")
+lad1, lad2 = 12/5*xi**-0.5, 125/144*xi**(-1/3)
+check("Leiter m_mu/m_e = (r_mu/r_e) xi^(-1/2) = 12/5 xi^(-1/2)", abs(lad1 - r['mu']/r['e']*xi**-0.5) < 1e-9, f"{lad1:.4f}")
+R1 = (lad1/(mmu/me)-1)/xi
+R2 = (lad2/(mtau/mmu)-1)/xi; s2 = dmtau/mtau/xi
+R2alt = (lad2/(mtau_alt/mmu)-1)/xi
+check("Rest Leiter gegen Messung m_mu/m_e: +39,10 xi", abs(R1-39.10) < 0.01, f"{R1:.3f}")
+check("Rest Leiter gegen Messung m_tau/m_mu: +77,56 +- 0,38 xi (PDG 2026)", abs(R2-77.56) < 0.02, f"{R2:.2f} +- {s2:.2f}")
+check("mit dem bisherigen Korpuswert m_tau = 1776,86: +77,86 xi", abs(R2alt-77.86) < 0.02)
+th = 2/9
+sq = sorted((1+math.sqrt(2)*math.cos(th+2*math.pi*k/3))**2 for k in range(3))
+k1, k2 = sq[1]/sq[0], sq[2]/sq[1]
+kp1, kp2 = (k1/(mmu/me)-1)/xi, (k2/(mtau/mmu)-1)/xi
+check("Koide (theta = 2/9, d/c = sqrt 2) gegen Messung: m_mu/m_e 0,07 xi", abs(kp1-0.07) < 0.01, f"{kp1:.3f}")
+check("Koide gegen Messung: m_tau/m_mu 0,16 +- 0,38 xi (innerhalb der Messunsicherheit)", abs(kp2) < s2, f"{kp2:.3f}")
+L1, L2 = (lad1/k1-1)/xi, (lad2/k2-1)/xi
+check("Leiter gegen Koide (ohne Messwert): 39,02 xi und 77,40 xi", abs(L1-39.02) < 0.01 and abs(L2-77.40) < 0.01, f"{L1:.3f}, {L2:.3f}")
+check("Leptonreste = Leiter gegen Koide bis auf 0,2 xi", abs(R1-L1) < 0.2 and abs(R2-L2) < 0.2)
+q = L2/L1
+check("Verhältnis der Reste 1,984, nicht 2 (rein mathematisch, Abstand 0,8 %)", abs(q-1.9836) < 0.0005 and abs(q-2) > 0.01, f"{q:.4f}")
+check("gemessenes Verhältnis 1,984 +- 0,010 stimmt mit dem Koide-Wert überein", abs(R2/R1 - q) < s2/R1, f"{R2/R1:.4f} +- {s2/R1:.4f}")
+d1 = ((1+chain['mu']/100)/(1+chain['e']/100)-1)/xi
+d2 = ((1+chain['tau']/100)/(1+chain['mu']/100)-1)/xi
+check("Verhältnisse der Kettenreste = Leiterreste (E_P und 5 pi kürzen sich)",
+      abs(d1-R1) < 1e-6 and abs(d2-R2alt) < 1e-6, f"{d1:.2f}, {d2:.2f} xi")
+
+print("\n" + "="*70)
+print(f"ERGEBNIS: {ok}/{n} Prüfungen bestanden")
+assert ok == n

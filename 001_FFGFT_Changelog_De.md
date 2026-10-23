@@ -1429,3 +1429,15 @@ Nulltest: vollständige symbolische Suche über $c\cdot d^{1/k}\cdot\xi^{m/n}\cd
 **Prüfskript:** 2/python/Dok393_Skripte/run_all_393.sh — 19/19 PASS (393a Nulltest 8/8 mit Ergebnisprotokoll pruef_393a_ergebnis.txt, 393b Zahlen 11/11)
 **Register:** kein Eintrag.
 
+---
+
+## 23. Oktober 2026 — Dok. 394: Wie weit die fraktalen Korrekturen auseinanderliegen
+
+### Dok. 394 — Ein Maßstab für alle Korrekturen und was nach Abzug von Folgen, Anpassungen und Leiterrest bleibt (De 7 / En 7 Seiten)
+
+Anlass: die Frage, ob die fraktale Korrektur als einheitliche Rekursion durch den ganzen Korpus geht, wie es die Lesart verlangt, dass der Messende selbst innerhalb der Rekursion steht (R154). Das Dokument schreibt jede im Korpus vorkommende Korrektur als $n$ in $K=1-n\xi$ und vergleicht sie mit der Regel $n=100$ ($K_{\mathrm{frak}}=74/75$, Dok. 133, 300, 384).
+
+Kernergebnis: Nach Herkunft sortiert bleibt eine Regel mit einem Test. Der Rest bei $G$ in der Ein-Anker-Kette ist algebraisch das Doppelte des $E_P$-Restes **[B]**, die $G$-Formel trifft CODATA nur über das angepasste $C_{\mathrm{conv}}$ (R141) **[K]**, der Elektronrest der Kette ($-99\xi$) hängt am angepassten Faktor 10 in $v/E_P$ **[S]**, der 1-MeV-Bezug ist dieselbe Zahl wie der von $\alpha$ verlangte Faktor **[B]**, $144/125=r_\mu/r_\tau$ ist ein Leiterkoeffizient (R140) **[B]**. Die Generationsunterschiede der Leptonreste ($+39{,}10\xi$ bei $m_\mu/m_e$, $+77{,}56\pm0{,}38\xi$ bei $m_\tau/m_\mu$) sind der Abstand der Leiter zur Koide-Form mit $\theta=2/9$, $d/c=\sqrt2$: Leiter gegen Koide ohne Messwert $39{,}02\xi$ und $77{,}40\xi$, Koide gegen Messung $0{,}07\xi$ und $0{,}16\pm0{,}38\xi$ **[K]**. Die Leptonreste sind damit Näherungsfehler der Leiter, keine Rekursion der Messung; das bestätigt Lesart B (R121). Das Verhältnis der beiden Reste ist $1{,}984$, nicht 2; ein ganzzahliges Schrittgesetz der Generationen ist ausgeschlossen **[X]**. Als unabhängiger Test der Regel bleibt allein $\alpha$: $K_\alpha=\xi m_em_\mu\alpha^{-1}=0{,}986501$, $n=101{,}25$, also $1{,}25\xi$ (168 ppm) neben der Regel bei einer Messunsicherheit unter $3\times10^{-8}$ **[K]**; die additive Form liegt näher als die multiplikative, trennt sie aber nicht; ein Glied zweiter Ordnung verfehlt um 12 ppm und wird nicht übernommen **[S]**. Folgerung: Die einheitliche Regel ist nicht widerlegt, aber bisher nur einmal geprüft; eine zweite Prüfung braucht eine Größe ohne angepassten Faktor, etwa $\tau_\mu$ (R112) **[S]**. Tau-Masse neu nach PDG (pdgLive 2026) 1776,93 ± 0,09 MeV; der bisherige Korpuswert 1776,86 MeV ist mitgeführt.
+
+**Prüfskript:** 2/python/Dok394_Skripte/pruef_394_korrekturabstaende.py — 29/29 PASS
+**Register:** R155 (R154 eingegrenzt; einheitliche Regel bisher nur an $\alpha$ prüfbar).
