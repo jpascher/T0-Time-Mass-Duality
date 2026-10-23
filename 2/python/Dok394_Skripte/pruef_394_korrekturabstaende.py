@@ -65,6 +65,23 @@ check("Galois: m_e m_mu = 54 mit Regel gibt 3700/27 exakt", abs(g - 3700/27) < 1
 check("3700/27 liegt 7,6 ppm neben der Messung", abs((g/ainv-1)*1e6 - 7.6) < 0.1)
 check("m_e m_mu = 53,9913 MeV^2 liegt 1,21 xi (161 ppm) unter 54", abs((P/54-1)/xi + 1.206) < 0.002, f"{(P/54-1)*1e6:.1f} ppm")
 check("Zerlegung: 168,4 ppm = Produkt gegen 54 und Galois-Rest", abs(((54/P)*(g/ainv)-1)*1e6 - 168.4) < 0.1)
+def _ipp(m):
+    for q in range(2, m+1):
+        if m % q == 0:
+            while m % q == 0: m //= q
+            return m == 1
+    return False
+_qs = [q for q in range(2, 82) if _ipp(q)]
+_ord = (set(_qs) | {q-1 for q in _qs}) - {1}
+_hits = {a*b for a in _ord for b in _ord if 40 <= a*b <= 70}
+check("24 von 31 ganzen Zahlen in [40, 70] sind Produkte zweier Galois-Ordnungen (54 darunter)", len(_hits) == 24 and 54 in _hits)
+check("Zufallswahrscheinlichkeit, 161 ppm neben einer ganzen Zahl zu liegen: 1,7 %", abs(2*161e-6*54 - 0.0174) < 0.0002)
+Ry = 13.605693122990
+check("m_e in MeV über die Rydberg-Energie: 2 Ry/alpha^2 = 0,51099895 MeV (Dok. 386)", abs(2*Ry/ainv**-2/1e6 - me) < 1e-9)
+check("K_alpha über den Rydberg-Weg: xi (m_mu/m_e) (2 Ry/MeV)^2 alpha^-5 = 0,986501", abs(xi*(mmu/me)*(2*Ry*1e-6)**2*ainv**5 - K_a) < 1e-8)
+u = (P/54)**0.5
+check("genau 54 nur in einer Einheit 0,99992 MeV (80 ppm unter dem MeV)", abs(u - 0.999920) < 2e-6 and abs((1-u)*1e6 - 80.4) < 0.5, f"{u:.6f} MeV")
+check("gemessenes Produkt ist in MeV nicht 54: Abstand rund 7000 sigma", (54-P)/(P*2.2e-8) > 7000)
 check("in der Energieeinheit gelesen: 84 ppm", abs(((pred/ainv)**0.5-1)*1e6 - 84.2) < 0.1)
 xs = [xi]
 for _ in range(2): xs.append(xs[-1]*(1-100*xs[-1]))
@@ -121,6 +138,20 @@ d1 = ((1+chain['mu']/100)/(1+chain['e']/100)-1)/xi
 d2 = ((1+chain['tau']/100)/(1+chain['mu']/100)-1)/xi
 check("Verhältnisse der Kettenreste = Leiterreste (E_P und 5 pi kürzen sich)",
       abs(d1-R1) < 1e-6 and abs(d2-R2alt) < 1e-6, f"{d1:.2f}, {d2:.2f} xi")
+
+print("\n6. Die 54-Welt: m_e m_mu = 54 u^2")
+me_u = math.sqrt(54/k1); mmu_u = k1*me_u; mtau_u = k2*mmu_u
+check("Massen in u (Koide): 0,511038 / 105,6674 / 1777,12", abs(me_u-0.511038) < 2e-6 and abs(mmu_u-105.6674) < 1e-3 and abs(mtau_u-1777.12) < 0.01,
+      f"{me_u:.6f}, {mmu_u:.4f}, {mtau_u:.3f}")
+ue, um, ut = me/me_u, mmu/mmu_u, mtau/mtau_u
+check("alle drei Leptonen ergeben u = 0,99992 MeV auf etwa 1e-5", max(ue, um, ut) - min(ue, um, ut) < 4e-5 and abs(ue-0.99992) < 1e-5,
+      f"{ue:.6f}, {um:.6f}, {ut:.6f}")
+K54 = 54*xi*ainv
+check("alpha^-1 = K/(54 xi) verlangt K = 0,986659, n = 100,06", abs(K54-0.986659) < 1e-6 and abs(nof(K54)-100.056) < 0.002, f"n = {nof(K54):.3f}")
+check("additive Form 0,06 xi daneben, multiplikative 0,71 xi", abs(nof(K54)-100) < 0.06 and abs(nof(K54)-nof(K_mult) - 0.713) < 0.005)
+check("Regel und 54 zugleich: 3700/27, 7,6 ppm daneben (beide exakt ausgeschlossen)", abs(((74/75)/(54*xi)/ainv-1)*1e6 - 7.6) < 0.1)
+EPc = me_u/(4/(15*math.pi)*xi**5.5)*ue
+check("E_P und G aus der Kette unverändert: +1,34 % und -2,62 %", abs((EPc/EP-1)*100 - 1.335) < 0.01 and abs(((EP/EPc)**2-1)*100 + 2.62) < 0.02)
 
 print("\n" + "="*70)
 print(f"ERGEBNIS: {ok}/{n} Prüfungen bestanden")
