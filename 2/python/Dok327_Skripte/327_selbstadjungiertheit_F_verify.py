@@ -37,6 +37,12 @@ auf geladenen Paaren (= 2|Im φ_k|), Hermitizitaet auf P0 und Re F̂ = (F̂+F̂�
 = Kosinus-Form; die fruehere "Gegenprobe" entfaellt (gepaart und ungepaart
 gleich gross). [5] auf Re F̂ bezogen, [7] auf F̂ selbst. [9] Kommentar: ξ ist im
 Modell eingesetzt, Ausgabe "existiert, trunkierungsstabil" (vgl. Dok. 327).
+
+Aktualisiert am 24.10.2026: veraltete Kommentare in [4] korrigiert (F_kov
+war als "selbstadjungiert per Konstruktion aus Z3-Paarung" und als "exakt
+der Z3-gemittelte Operator" beschrieben -- beides falsch). Neu zwei
+Gegenkontrollen: F_kov != P0·F̂·P0 und F̂ auf ganzem Raum nicht hermitesch.
+Rechnung und Statuszuordnung unveraendert.
 """
 
 import numpy as np
@@ -129,26 +135,28 @@ chk(norm_F <= r.sum() + 1e-12,
     f"||F̂|| = {norm_F:.6f} <= Σr_n = {r.sum():.6f} (beschraenkt => D(F̂)=H)")
 
 # ============================================================
-# [4] Reellitaet aus Z3-Paarung; Gegenprobe
+# [4] Z3-Paarung: Normalitaet [B], Hermitizitaet auf P0 [B], Re F̂ als [S]
 # ============================================================
 print("\n[4] Z3-Paarung => F̂ normal; F̂ = F̂† auf P0; Re F̂ = Kosinus-Form")
-# Mit Z3-Symmetrie sind die Bloecke paarweise konjugiert: Spektrum von F
-# als OPERATOR auf dem Z3-symmetrischen Raum: phi_k und conj(phi_k) treten
-# als Paar auf. Selbstadjungiert ist F auf dem REELLEN Sektor: der
-# physikalische Operator ist F_sym = P_pair† F P_pair in der gepaarten Basis.
-# Direkt: pruefe F̂_phys = F auf dem Raum der Z3-invarianten Kombinationen.
-# Konstruktion: Paarbasis e± = (e_k ± e_{-k})/sqrt2 macht 2x2-Bloecke
-# [[phi,0],[0,conj(phi)]] -> unitaer aequivalent zu [[Re phi, i Im phi],...]
-# Der SELBSTADJUNGIERTE Anteil: Re-Diagonale. Ehrlicher Test:
-# Bedingung des Satzes: F=F† <=> alle phi_k reell. Z3-liefert Paare;
-# Reellitaet der EINZELNEN phi_k verlangt theta in {0,pi} ODER
-# Paar-Summation INNERHALB eines Blocks. Modell B: U_n mischt (k,-k):
+# Status (vgl. Dok. 327, Satz 3 und Statustabelle):
+#  - F̂ ist blockdiagonal mit Skalaren φ_k, also normal [B].
+#  - F̂ = F̂† genau dann, wenn alle φ_k reell sind. Auf den Nullsektoren
+#    (q = 0, θ ∈ {0, π}) ist das erfuellt: F̂ ist auf P0 hermitesch [B].
+#  - Auf geladenen Bloecken ist φ_k komplex; F̂ ist dort NICHT hermitesch,
+#    ||F̂-F̂†|| = 2|Im φ_k| != 0. Die Z3-Paarung allein liefert dort
+#    keine Selbstadjungiertheit von F̂.
+#  - F_kov = Re F̂ = (F̂+F̂†)/2 (Kosinus-Form) ist ein ANDERER Operator.
+#    Er ist selbstadjungiert, weil er als Realteil gebildet wird -- nicht,
+#    weil er aus F̂ oder aus der Paarung folgt. Ihn auf dem ganzen Raum als
+#    physikalischen Operator zu nehmen, ist eine Setzung [S]; die R82-Luecke
+#    bleibt dort offen.
+#  - Auf P0 stimmen F̂ und F_kov ueberein; dort ist kein Ersatz noetig.
+#    F_kov ist NICHT die Projektion P0·F̂·P0 (diese verschwindet auf den
+#    geladenen Bloecken, F_kov nicht).
 def build_F_paired():
-    """U_n wirkt als reelle Drehung im (k,-k)-Paar: e^{iθ}⊕e^{-iθ} in
-    Paarbasis -> [[cosθ, -sinθ],[sinθ, cosθ]]... symmetrisiert:
-    U_n^sym = (U_n + U_n†)/... — wir bauen direkt den Z3-kovarianten
-    Operator: F_kov = Σ r_n C_n L_n mit C_n = (U_n + U_n†)/2 auf Paaren,
-    C_n = cos-Drehung: selbstadjungiert per Konstruktion aus Z3-Paarung."""
+    """Kosinus-Form F_kov = Σ r_n C_n L_n mit C_n = (U_n + U_n†)/2, d. h.
+    blockweise cos θ_{n,k}. Selbstadjungiert per Bildung als Realteil;
+    als Ersatz fuer F̂ auf dem ganzen Raum eine Setzung [S]."""
     F = np.zeros((D, D), dtype=complex)
     for n in range(1, N+1):
         C = np.zeros((D, D), dtype=complex)
@@ -157,10 +165,19 @@ def build_F_paired():
             C[blk, blk] = np.cos(theta[n, k]) * np.eye(dims[k])
         F += r[n-1] * C @ L[n]
     return F
-# Kern des Satzes: die Z3-Paarung (theta_k = -theta_{-k}) macht die
-# PAARSUMME reell: e^{iθ} + e^{-iθ} = 2cosθ. Der Z3-gemittelte Operator
-# (Projektion auf den symmetrischen Sektor) ist damit exakt F_kov:
+# Die Paarung θ_{n,-k} = -θ_{n,k} macht nur die PAARSUMME reell
+# (e^{iθ} + e^{-iθ} = 2cosθ), nicht die einzelnen φ_k. F_kov ist der
+# Realteil von F̂ (Pruefung (d)), keine Folgerung aus F̂ -- Setzung [S]:
 F_kov = build_F_paired()
+# Gegenkontrolle: F_kov ist nicht die P0-Restriktion von F̂
+P0_chk = np.zeros((D, D))
+for k in range(N):
+    if q[k] == 0:
+        P0_chk[starts[k]:starts[k+1], starts[k]:starts[k+1]] = np.eye(dims[k])
+chk(not np.allclose(F_kov, P0_chk @ F @ P0_chk),
+    "F_kov != P0·F̂·P0 (Kosinus-Form ist keine Projektion von F̂, sondern Setzung)")
+chk(not np.allclose(F, F.T.conj()),
+    "F̂ auf ganzem Raum nicht hermitesch (erwartet; s.a. nur auf P0 [B])")
 # (a) F̂ selbst (mit Z3-Paarung) ist normal, aber auf geladenen Paaren nicht hermitesch
 chk(np.allclose(F @ F.T.conj(), F.T.conj() @ F),
     "F̂ normal: F̂F̂† = F̂†F̂ (blockdiagonal mit Skalaren, Satz 3)")
