@@ -1450,7 +1450,7 @@ Neuer Abschnitt „Die 54-Welt“: Legt man die Energieeinheit so fest, dass $m_
 
 ## 24. Oktober 2026 — Dok. 395: Die Messkette als Kanal
 
-### Dok. 395 — Was die Nachrichtentechnik über Rekursion, Reste und Zahlentreffer lehrt (De 11 / En 11 Seiten)
+### Dok. 395 — Was die Nachrichtentechnik über Rekursion, Reste und Zahlentreffer lehrt (De 12 / En 11 Seiten)
 
 Anlass: die Frage aus Dok. 394, wie sich systematisch prüfen lässt, ob Rekursionen Teil der Messwerte sind. Die Nachrichtentechnik bekämpft Echos nicht, sondern misst sie mit Pilotsymbolen und nutzt sie (RAKE, OFDM, Maximum Ratio Combining), regeneriert diskrete Signale an jedem Knoten und bleibt dabei an die Shannon-Grenze gebunden **[Q]**. Das Dokument überträgt diese vier Verfahren auf die Messkette der FFGFT.
 
