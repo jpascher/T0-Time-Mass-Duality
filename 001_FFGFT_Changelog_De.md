@@ -1460,5 +1460,7 @@ Abschnitt „Was sich lösen lässt“: Einen zweiten Piloten im SI-Sektor gibt 
 
 Abschnitt „Folgen für Quantenrechner“: Die Pulskalibrierung wirkt als Pilot; ein für alle Gatter gemeinsamer Faktor wie die $\pi$-Gatter-Abweichung $100\xi$ wird vollständig aufgenommen und ist prinzipiell nicht messbar **[B]**; sichtbar wäre nur ein modenabhängiger Anteil, in Analogie zur Leptonschranke etwa $1{,}2\times10^{-4}$ **[S]**, rund 250- bis 300-mal kleiner als die heutige Lücke zur Tsirelson-Grenze **[K]**. Die deterministische Lesart wird gestützt: offene Bahn als deterministische Quelle scheinbaren Zufalls (Viertelumdrehung nach rund 450, volle nach rund 1800 Schließungszyklen) **[S]**, Regeneration diskreter Ausgänge, gleiche Shannon-Grenze für Einzelablauf und Mittelung; Bell-Verletzung unberührt.
 
-**Prüfskript:** 2/python/Dok395_Skripte/pruef_395_messkette_kanal.py — 37/37 PASS
-**Register:** R156 (R155 geschlossen: kein zweiter SI-Pilot; τ_μ prüft $v/m_\mu$, nicht $K$), R157 (R142 präzisiert: gemeinsamer Gatterfaktor prinzipiell nicht messbar).
+Präzisierung der offenen Punkte: $74/75$ ist als Rotationszahl geometrisch gegeben (Dok. 300, 381); offen sind die Herkunft der Zahl 100, gleichbedeutend mit dem Exponenten 36 in $K^{-36}=16/\pi^2=1/\Delta(\mathrm{D}_4)$ (trifft $74/75$ auf 2,8 ppm, Dok. 315, P35), und der kleine Rest gegen $\alpha$ **[K]/[S]**.
+
+**Prüfskript:** 2/python/Dok395_Skripte/pruef_395_messkette_kanal.py — 40/40 PASS
+**Register:** R156 (R155 geschlossen: kein zweiter SI-Pilot; τ_μ prüft $v/m_\mu$, nicht $K$), R157 (R142 präzisiert: gemeinsamer Gatterfaktor prinzipiell nicht messbar), R158 (R139 eingegrenzt: drei bedingte Zeugen für die additive Form; Dok. 189 präzisiert).

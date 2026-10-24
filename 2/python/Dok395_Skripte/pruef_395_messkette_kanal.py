@@ -153,6 +153,12 @@ check("Dekohärenz rund 250- bis 300-mal größer als ein Restsignal S*1,2e-4", 
 adv = 75*(1-54*xi*ainv) - 1
 check("offene Bahn: Viertelumdrehung nach rund 450, volle nach rund 1800 Schließungszyklen", abs(0.25/adv-446) < 3 and abs(1/adv-1784) < 3)
 
+print("\n10. Zahl 100 und D4-Packungsdichte (Dok. 315)")
+KD = (math.pi**2/16)**(1/36)
+check("K = (pi^2/16)^(1/36) = 1 - 99,98 xi, 2,8 ppm neben 74/75", abs((1-KD)/xi - 99.979) < 0.001 and abs((KD/K_rule-1)*1e6 - 2.77) < 0.01)
+check("16/pi^2 ist der Kehrwert der D4-Packungsdichte pi^2/16", abs(1/(math.pi**2/16) - 16/math.pi**2) < 1e-15)
+check("39 xi aus dem Skalenabstand ln(1e17) reicht nicht für 100 xi", abs(math.log(1e17) - 39.14) < 0.01 and math.log(1e17) < 50)
+
 print("\n" + "="*70)
 print(f"ERGEBNIS: {ok}/{n} Prüfungen bestanden")
 assert ok == n
