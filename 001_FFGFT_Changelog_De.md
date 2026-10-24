@@ -1450,7 +1450,7 @@ Neuer Abschnitt „Die 54-Welt“: Legt man die Energieeinheit so fest, dass $m_
 
 ## 24. Oktober 2026 — Dok. 395: Die Messkette als Kanal
 
-### Dok. 395 — Was die Nachrichtentechnik über Rekursion, Reste und Zahlentreffer lehrt (De 11 / En 10 Seiten)
+### Dok. 395 — Was die Nachrichtentechnik über Rekursion, Reste und Zahlentreffer lehrt (De 11 / En 11 Seiten)
 
 Anlass: die Frage aus Dok. 394, wie sich systematisch prüfen lässt, ob Rekursionen Teil der Messwerte sind. Die Nachrichtentechnik bekämpft Echos nicht, sondern misst sie mit Pilotsymbolen und nutzt sie (RAKE, OFDM, Maximum Ratio Combining), regeneriert diskrete Signale an jedem Knoten und bleibt dabei an die Shannon-Grenze gebunden **[Q]**. Das Dokument überträgt diese vier Verfahren auf die Messkette der FFGFT.
 
@@ -1458,5 +1458,7 @@ Kanalschätzung mit Pilot: Mit der Koide-Form ($\theta=2/9$, $d/c=\sqrt2$) als P
 
 Abschnitt „Was sich lösen lässt“: Einen zweiten Piloten im SI-Sektor gibt es nicht — die einzige Beziehung des Korpus mit einer SI-Einheit ist $\alpha_{\mathrm{SI}}=\xi(E_0/1\,\mathrm{MeV})^2$, alle übrigen Aussagen sind Verhältnisse; $K$ und die MeV-Verankerung sind ein Freiheitsgrad, den $\alpha$ festlegt **[B]**. Die Myon-Lebensdauer prüft nur $v/m_\mu$: Leiter ohne $K$ +43ξ, mit $K$ +145ξ, also ohne $K$ 3,4-mal näher; der Rest ist das Muster Leiter gegen Koide **[K]**. Die Schranke für den Modenfaktor braucht die Koide-Amplitude kaum: Mit nur $\theta=2/9$ (A110) bleibt Tau–Myon ≤ 0,91ξ, nur die Elektron-Myon-Schranke braucht $\sqrt2$ **[K]**. Dok. 394 ist an den Stellen zu τ_μ und zur Prüfbarkeit der 54-Welt direkt präzisiert.
 
-**Prüfskript:** 2/python/Dok395_Skripte/pruef_395_messkette_kanal.py — 32/32 PASS
-**Register:** R156 (R155 geschlossen: kein zweiter SI-Pilot; τ_μ prüft $v/m_\mu$, nicht $K$).
+Abschnitt „Folgen für Quantenrechner“: Die Pulskalibrierung wirkt als Pilot; ein für alle Gatter gemeinsamer Faktor wie die $\pi$-Gatter-Abweichung $100\xi$ wird vollständig aufgenommen und ist prinzipiell nicht messbar **[B]**; sichtbar wäre nur ein modenabhängiger Anteil, in Analogie zur Leptonschranke etwa $1{,}2\times10^{-4}$ **[S]**, rund 250- bis 300-mal kleiner als die heutige Lücke zur Tsirelson-Grenze **[K]**. Die deterministische Lesart wird gestützt: offene Bahn als deterministische Quelle scheinbaren Zufalls (Viertelumdrehung nach rund 450, volle nach rund 1800 Schließungszyklen) **[S]**, Regeneration diskreter Ausgänge, gleiche Shannon-Grenze für Einzelablauf und Mittelung; Bell-Verletzung unberührt.
+
+**Prüfskript:** 2/python/Dok395_Skripte/pruef_395_messkette_kanal.py — 37/37 PASS
+**Register:** R156 (R155 geschlossen: kein zweiter SI-Pilot; τ_μ prüft $v/m_\mu$, nicht $K$), R157 (R142 präzisiert: gemeinsamer Gatterfaktor prinzipiell nicht messbar).

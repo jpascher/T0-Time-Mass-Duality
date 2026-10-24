@@ -140,6 +140,19 @@ bt, ut = bound(va); ba, ua = bound(vt)
 check("nur theta = 2/9 exakt: gebundene Kombination fast nur Tau-Myon, <= 0,91 xi", abs(ut[1]) > 0.99 and abs(bt-0.91) < 0.01, f"{bt:.3f}")
 check("nur d/c = sqrt 2 exakt: <= 0,92 xi", abs(ua[1]) > 0.99 and abs(ba-0.92) < 0.01, f"{ba:.3f}")
 
+print("\n9. Folgen für Quantenrechner")
+cal = lambda k: (math.pi*k) * (math.pi/(math.pi*k))      # Kalibrierung stellt den Puls auf pi
+check("gemeinsamer Gatterfaktor K wird von der Kalibrierung vollständig aufgenommen", abs(cal(K_rule)-math.pi) < 1e-15 and abs(cal(0.9)-math.pi) < 1e-15)
+mode = 0.92*xi
+check("modenabhängiger Anteil höchstens rund 1 xi = 1,2e-4", abs(mode-1.23e-4) < 0.01e-4)
+S_t = 2*math.sqrt(2)
+gk, gp = 2*math.sqrt(2)-2.7396, 2*math.sqrt(2)-2.7244
+check("Lücke zu 2 sqrt 2: 0,088 (kingston) und 0,104 (gepoolt)", abs(gk-0.0888) < 0.001 and abs(gp-0.1040) < 0.001)
+check("Dekohärenz rund 250- bis 300-mal größer als ein Restsignal S*1,2e-4", 245 < gk/(S_t*mode) < 260 and 290 < gp/(S_t*mode) < 305,
+      f"{gk/(S_t*mode):.0f}, {gp/(S_t*mode):.0f}")
+adv = 75*(1-54*xi*ainv) - 1
+check("offene Bahn: Viertelumdrehung nach rund 450, volle nach rund 1800 Schließungszyklen", abs(0.25/adv-446) < 3 and abs(1/adv-1784) < 3)
+
 print("\n" + "="*70)
 print(f"ERGEBNIS: {ok}/{n} Prüfungen bestanden")
 assert ok == n
