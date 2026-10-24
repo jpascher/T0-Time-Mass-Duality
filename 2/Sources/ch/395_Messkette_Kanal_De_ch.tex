@@ -1,0 +1,329 @@
+% 395_Messkette_Kanal_De_ch.tex
+% Johann Pascher, 24. Okt. 2026
+% Die Messkette als Kanal
+
+\providecommand{\BM}{\textbf{[B]}}
+\providecommand{\KM}{\textbf{[K]}}
+\providecommand{\SM}{\textbf{[S]}}
+\providecommand{\XM}{\textbf{[X]}}
+\providecommand{\QM}{\textbf{[Q]}}
+
+\chapter*{Die Messkette als Kanal}
+\addcontentsline{toc}{chapter}{Die Messkette als Kanal}
+
+\begin{abstract}
+Die Nachrichtentechnik bekämpft Echos nicht mehr, sondern misst sie und nutzt sie: Bekannte
+Pilotsymbole verraten den Kanal, eine passende Basis macht ihn diagonal, Regeneration verhindert,
+dass sich Rauschen aufsummiert, und die Shannon-Grenze sagt, wie viel Information ein verrauschter
+Kanal höchstens liefert. Dieses Dokument überträgt die vier Verfahren auf die Frage, ob Rekursionen
+Teil der Messwerte sind (Dok.~394). Ergebnisse: Im Verhältnissektor ist der Kanal flach; mit der
+Koide-Form als Pilot weichen die Leptonverhältnisse um weniger als $1\,\xi$ ab. Ein modenabhängiger
+Kanalfaktor ist damit auf höchstens rund $1\,\%$ des Korrekturschritts $100\,\xi$ beschränkt. Im
+SI-Sektor gibt es genau einen Piloten, $\alpha$, und mehr kann es in einer verhältnisbasierten
+Theorie nicht geben: Die einzige Beziehung mit einer SI-Einheit ist $\alpha_{\text{SI}}=\xi\,(E_0/1\,\text{MeV})^2$,
+$K$ und die MeV-Verankerung sind derselbe Freiheitsgrad. Die Myon-Lebensdauer prüft nicht $K$, sondern
+das dimensionslose Verhältnis $v/m_\mu$; die Schranke für den Modenfaktor braucht nur den hergeleiteten
+Winkel $2/9$. Diskrete Strukturen mit kleinem Nenner überstehen die Messkette, die SI-Korrektur von
+$1{,}33\,\%$ lässt nur Nenner bis etwa~$11$ eindeutig. Als Maßstab gegen Zahlenmystik zählt ein
+Treffer nur, wenn die Messung mehr Information liefert, als die Formel enthält; die Koide-Parameter
+$2/9$ und $\sqrt2$ bestehen das deutlich, ebenso $\alpha^{-1}=3700/27$, wenn man es nach seinen
+Bestandteilen $7500\cdot(74/75)/54$ rechnet und nicht als frei gesuchten Bruch.
+\end{abstract}
+
+% ============================================================
+\section*{Statusmarkierungen}
+% ============================================================
+\begin{center}
+\begin{tabular}{@{}lp{11cm}@{}}
+\textbf{[B]} & Algebraisch bewiesen (Umformung ohne Zusatzannahme). \\[2pt]
+\textbf{[K]} & Numerisch bestätigt (Prüfskript). \\[2pt]
+\textbf{[S]} & Setzung, offen oder Einordnung ohne eigene Rechnung. \\[2pt]
+\textbf{[X]} & Durch die Rechnung ausgeschlossen. \\[2pt]
+\textbf{[Q]} & Aus der Literatur übernommen, mit Quelle. \\
+\end{tabular}
+\end{center}
+Messwerte: $m_e$, $m_\mu$ und $\alpha$ nach CODATA 2022 \QM, $m_\tau=1776{,}93\pm0{,}09$\,MeV nach PDG
+(pdgLive, Ausgabe 2026) \QM.
+
+% ============================================================
+\section{Anlass}
+% ============================================================
+
+Die Grundform der FFGFT rechnet mit Verhältnissen; eine fraktale Korrektur tritt erst bei der
+Übersetzung in SI-Einheiten auf. Dahinter steht die Lesart, dass der Messende selbst innerhalb der
+Skalen-Rekursion steht und die Rekursion deshalb Teil jedes Messwerts ist. Dok.~394 hat gezeigt, dass
+diese Lesart bisher an genau einer Größe geprüft ist, an $\alpha$, und dass die übrigen Reste andere
+Herkunft haben. Offen blieb, wie man die Frage systematisch prüft.
+
+Die Nachrichtentechnik steht seit Jahrzehnten vor derselben Lage: Ein Signal läuft durch einen Kanal,
+der es verändert, und der Empfänger steht am Ende dieses Kanals, nicht außerhalb. Wie sie damit
+umgeht, liefert vier übertragbare Verfahren. Zwei sind methodisch direkt nutzbar, die Kanalschätzung
+mit Pilot und die Shannon-Bilanz; zwei sind Strukturhinweise, die Eigenbasis und die Regeneration.
+
+% ============================================================
+\section{Wie die Nachrichtentechnik mit Echos umgeht}
+% ============================================================
+
+Ein Funkkanal liefert neben dem direkten Signal verzögerte Kopien, die Echos. Früher galten sie als
+Störung; heute werden sie gemessen und als zusätzliche Signalenergie genutzt \QM. Der
+\emph{RAKE-Empfänger} (CDMA, UMTS) greift die verzögerten Kopien mit mehreren \enquote{Fingern} einzeln
+ab, gleicht ihre Laufzeiten an und addiert sie gewichtet \cite{PriceGreen1958}. \emph{OFDM} (WLAN, LTE,
+5G, DVB-T) verteilt das Signal auf viele langsame Unterträger; ein Schutzintervall, das länger ist als
+die Echolaufzeiten, macht aus der Faltung mit den Echos eine einfache Phasen- und Amplitudendrehung je
+Unterträger \cite{WeinsteinEbert1971}. \emph{Maximum Ratio Combining} und MIMO verwerten mehrere
+Ausbreitungswege als parallele Kanäle \cite{Brennan1959}.
+
+Möglich macht das die \emph{Kanalschätzung}: Der Sender schickt Pilotsymbole mit, deren Wert der
+Empfänger exakt kennt; aus dem, was ankommt, bestimmt er den Kanal und rechnet ihn heraus. Ein
+zweiter Grundsatz ist die \emph{Regeneration}: Jeder Zwischenverstärker entscheidet neu zwischen 0
+und~1, deshalb sammelt sich das Rauschen nicht über die Strecke an. Was keines der Verfahren
+umgeht, ist die \emph{Shannon-Grenze} $C=B\log_2(1+S/N)$ \cite{Shannon1948}. Echos zu nutzen erhöht das
+wirksame Verhältnis $S/N$, und moderne Fehlerkorrektur kommt bis auf Bruchteile eines Dezibels an die
+Grenze heran \cite{Berrou1993,Arikan2009}, aber nie darüber. Die Echos verschwinden also nicht; sie
+werden gemessen, als Teil des Systems modelliert und verwertet, und die Schranke bleibt stehen.
+
+% ============================================================
+\section{Kanalschätzung mit Pilot}
+% ============================================================
+
+\subsection{Verfahren und Bedingung}
+
+Übertragen heißt das: Die Messkette ist der Kanal $H$, der den Wert der Grundform $y_{\text{th}}$ in den
+Messwert $y_{\text{mess}}=H\,y_{\text{th}}$ überführt. Ein Pilot ist eine Größe, deren Wert in der
+Grundform algebraisch exakt feststeht. Aus ihm folgt $H$. Mit diesem $H$ rechnet man die übrigen
+Größen zurück. Erklärt ein gemeinsames $H$ mehrere Reste, liegt eine einheitliche Rekursion vor;
+braucht jede Größe ihr eigenes $H$, gibt es keine, und man weiß es dann sicher. Die Bedingung dafür
+ist streng: Der Pilot muss unabhängig exakt sein. Enthält er selbst einen Modellfehler, schluckt die
+Kanalschätzung diesen Fehler, und die Rechnung wird zirkulär.
+
+\subsection{Verhältnissektor: Der Kanal ist flach}
+
+Als Pilot im Verhältnissektor dient die Koide-Form mit $\theta=2/9$ und $d/c=\sqrt2$ (Dok.~353, 367),
+\begin{equation}
+  \sqrt{m_k}\;\propto\;1+\sqrt2\,\cos\!\Bigl(\tfrac29+\tfrac{2\pi k}{3}\Bigr).
+\end{equation}
+Sie legt die Verhältnisse $m_\mu/m_e$ und $m_\tau/m_\mu$ ohne Messwert fest. Der Kanalfaktor ist
+dann
+\begin{equation}
+  H_{\mu e}-1=-0{,}074\,\xi,\qquad H_{\tau\mu}-1=-0{,}16\pm0{,}38\,\xi
+\end{equation}
+\KM, beim Myon-Elektron-Verhältnis bei einer Messunsicherheit von nur $2\times10^{-8}$. Beide Faktoren
+liegen unter $1\,\xi$, mehr als hundertmal unter dem SI-Korrekturschritt $100\,\xi$. Im
+Verhältnissektor ist der Kanal also flach: Eine Rekursion der Messkette ist dort nicht sichtbar. Das
+ist zu erwarten, denn ein gemeinsamer Faktor kürzt sich in Verhältnissen heraus (A040, Dok.~070).
+
+\subsection{Pilot mit Modellfehler: die Leiter}
+
+Nimmt man statt der Koide-Form die Leptonleiter $m_i\propto r_i\,\xi^{p_i}$ als Pilot, liegt sie um
+$39{,}10\,\xi$ und $77{,}56\,\xi$ über den gemessenen Verhältnissen \KM; jede Generation verlangt dann
+ihren eigenen Kanalfaktor. Das ist aber kein Kanal. Leiter und Koide-Form unterscheiden sich ohne
+jeden Messwert um $39{,}02\,\xi$ und $77{,}40\,\xi$ (Dok.~394) \KM: Der scheinbare Kanal ist der
+Modellfehler des Piloten. Genau davor warnt die Bedingung aus Abschnitt~3.1. Die fallenden Reste
+$\varepsilon_i$ aus Dok.~352 sind damit in der Sprache der Kanalschätzung das Ergebnis eines
+ungenauen Piloten.
+
+\subsection{SI-Sektor: ein Pilot, kein Prüfwert}
+
+Im SI-Sektor ist $\alpha$ der einzige Pilot ohne angepassten Faktor. Er schätzt den Kanal sehr genau:
+$K=\xi\,m_em_\mu\,\alpha^{-1}=0{,}986501$, also $n=101{,}25$ in $K=1-n\,\xi$, mit einer Unsicherheit
+unter $3\times10^{-8}$ \KM; legt man die Energieeinheit über $m_em_\mu=54$ fest, sind es $n=100{,}056$
+(Dok.~394) \KM. Ob dasselbe $K$ auch andere SI-Größen trägt, lässt sich nicht prüfen, denn ein zweiter
+Pilot fehlt: $E_P$ und $G$ hängen am angepassten Faktor~10 in $v/E_P$ (Dok.~149, 383), $v$ ist eine
+Festlegung des Standardmodells (R112). Die Kanalschätzung ist damit möglich, ihre Prüfung nicht. Dass es
+einen zweiten SI-Piloten in der FFGFT gar nicht geben kann, zeigt Abschnitt~7.
+
+% ============================================================
+\section{Eigenbasis: ein Kanalfaktor je Mode}
+% ============================================================
+
+OFDM wechselt in eine Basis, in der der Kanal diagonal wird; aus der Faltung mit Echos wird ein
+einfacher Faktor je Unterträger. Die FFGFT hat eine solche Basis bereits: die Moden auf $T^4$ mit ihrer
+modengebundenen Zeitskala $\tilde T=1/m$. Eine Messrekursion wäre dort ein eigener Faktor $\kappa_i$ je
+Mode, und das ließe generationsabhängige Korrekturen erwarten \SM.
+
+Der Pilot aus Abschnitt~3.2 begrenzt diese Möglichkeit. Ein Unterschied der Kanalfaktoren zweier Moden
+erscheint unmittelbar im Verhältnis ihrer Massen. Gilt die Koide-Form exakt, folgt
+\begin{equation}
+  |\kappa_\mu-\kappa_e|\le0{,}074\,\xi,\qquad |\kappa_\tau-\kappa_\mu|\le0{,}92\,\xi\ (2\sigma)
+\end{equation}
+\KM. Ein modenabhängiger Anteil der Messrekursion ist damit auf höchstens rund $1\,\%$ des
+Korrekturschritts $100\,\xi$ beschränkt. Die SI-Korrektur muss für die drei geladenen Leptonen
+praktisch gemeinsam sein; das stützt die einheitliche Regel. Die generationsabhängigen Reste der Leiter
+brauchen diese Basis nicht, sie sind der Abstand zur Koide-Form (Abschnitt~3.3). Die Schranke gilt
+unter der Annahme, dass die Koide-Form exakt ist; ist sie es nicht, begrenzt die Rechnung nur die Summe
+aus Koide-Rest und Modenfaktor \SM. Abschnitt~7 zeigt, dass der Hauptteil der Schranke schon mit dem
+hergeleiteten Winkel $2/9$ allein gilt.
+
+Auch die Koide-Form selbst lässt sich frei an die Messwerte anpassen. Mit beiden Parametern frei folgen
+$\theta=0{,}2222248\pm0{,}0000063$ und $d/c=1{,}4142089\pm0{,}000011$, also $2/9$ und $\sqrt2$ jeweils
+innerhalb einer Standardabweichung, wobei die Unsicherheit allein von der Tau-Masse stammt \KM.
+
+% ============================================================
+\section{Regeneration: Diskretes übersteht die Messkette}
+% ============================================================
+
+Digitale Übertragung schlägt das Rauschen, weil an jedem Knoten neu entschieden wird. Das deckt sich
+mit Dok.~343: Die Diskretheit der FFGFT ist topologisch, sie steckt in Wicklungszahlen und
+ganzzahligen Strukturen, nicht in der Dynamik. Übertragen heißt das: Exakte rationale Verhältnisse
+und ganze Zahlen lassen sich aus einem verrauschten Messwert wiedergewinnen, solange die Toleranz
+kleiner ist als der Abstand zum nächsten Konkurrenten. Die Grenze dafür ist die Farey-Höhe aus
+Dok.~343,
+\begin{equation}
+  Q_c=\frac{\pi}{\sqrt{6\,\varepsilon}} ,
+\end{equation}
+bis zu der Brüche bei relativer Toleranz $\varepsilon$ eindeutig bleiben:
+
+\begin{center}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+\textbf{Toleranz} & \textbf{$\varepsilon$} & \textbf{$Q_c$}\\
+\midrule
+SI-Korrektur $100\,\xi$ & $1{,}33\,\%$ & $11{,}1$\\
+$m_\tau/m_\mu$ & $5{,}1\times10^{-5}$ & $180$\\
+$m_\mu/m_e$ & $2{,}2\times10^{-8}$ & $8700$\\
+$\alpha$ & $1{,}5\times10^{-10}$ & $1{,}0\times10^{5}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\KM\ Daraus folgt eine klare Regel für die Darstellung. Wird ein Verhältnis durch die SI-Korrektur
+von $1{,}33\,\%$ geführt, bleiben nur Nenner bis etwa~$11$ eindeutig; die Nenner der Grundform $9$,
+$5$ und $8$ überstehen das, die $75$ der Rotationszahl nicht. In der Grundform selbst, ohne Korrektur,
+sind die Verhältnisse dagegen so genau gemessen, dass auch große Nenner wiedergewinnbar wären.
+Fortlaufende Korrekturen sammeln Fehler; exakte Verhältnisse bleiben erhalten. Das stützt die Vorgabe,
+die Theorie von der verhältnisbasierten Grundform her aufzuziehen und Korrekturen erst am Ende
+anzubringen \SM.
+
+% ============================================================
+\section{Shannon-Bilanz gegen Zahlenmystik}
+% ============================================================
+
+Eine Messung mit relativer Genauigkeit $\delta$ liefert über eine Konstante, deren Wert vorab nur
+auf eine Dekade bekannt ist, rund
+\begin{equation}
+  I=\log_2\frac{\ln 10}{2\,\delta}\ \text{Bit}.
+\end{equation}
+Eine Formel enthält selbst Information; Dok.~393 misst sie als Komplexität $C$ in Bit, die mit Zähler,
+Nenner, Wurzel und Exponent wächst. Enthält der Raum der möglichen Formeln mehr Bit als die Messung,
+trifft zwangsläufig irgendeine Kombination. Daraus folgt ein formales Kriterium: Ein Treffer zählt nur,
+wenn der Überschuss $I-C$ deutlich positiv ist. Als $\delta$ gilt die Abweichung vom Messwert, höchstens
+aber die Messunsicherheit.
+
+\begin{center}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{Treffer} & \textbf{$I$} & \textbf{$C$} & \textbf{$I-C$}\\
+\midrule
+$\alpha^{-1}=7400/54$ ($=3700/27$) & $17{,}2$ & $5{,}8$ & $+11{,}5$\\
+\quad als frei gesuchter Bruch $3700/27$ & $17{,}2$ & $16{,}6$ & $+0{,}6$\\
+$v/E_P=\xi^4/(5\pi)$ & $9{,}0$ & $6{,}3$ & $+2{,}6$\\
+$M_W/M_Z=\sqrt{7/9}$ & $10{,}8$ & $5{,}4$ & $+5{,}4$\\
+$m_em_\mu$ nahe der ganzen Zahl $54$ & $5{,}8$ & $0$ & $+5{,}8$\\
+Koide $\theta=2/9$ & $15{,}3$ & $4{,}2$ & $+11{,}1$\\
+Koide $d/c=\sqrt2$ & $17{,}2$ & $2{,}0$ & $+15{,}2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\KM\ Bei $3700/27$ entscheidet, wie man die Formel zählt. Als frei gesuchter Bruch enthält er fast so
+viel Information, wie die Abweichung von $7{,}6$\,ppm hergibt, und zählt nicht; so rechnet der
+Nulltest aus Dok.~393 ($p\approx0{,}47$). Im Korpus ist $3700/27$ aber nur die Kürzung von
+$7500\cdot(74/75)/54$: $7500=1/\xi$ und $74/75$ stammen aus der Grundform, neu ist allein die ganze
+Zahl $54$. So gerechnet bleiben über $11$\,Bit Überschuss; unmittelbar geschätzt liegt
+$7400/\alpha^{-1}$ mit einer Wahrscheinlichkeit von rund $8\times10^{-4}$ so nahe an einer ganzen Zahl
+(Dok.~394) \KM. Voraussetzung ist, dass $74/75$ unabhängig von $\alpha$ feststand (Dok.~133, 300). Die Nähe des
+Massenprodukts zu $54$ liefert knapp $6$\,Bit, entsprechend einer Zufallswahrscheinlichkeit von rund
+$1{,}7\,\%$ (Dok.~394). Weit vorne stehen die beiden Koide-Parameter mit $11$ und $15$\,Bit Überschuss;
+sie sind die stärkste numerische Struktur des Leptonsektors. Dabei ist zu beachten, dass $d/c=\sqrt2$
+gleichbedeutend mit der seit 1982 bekannten Koide-Beziehung $Q=2/3$ ist \cite{Koide1982}; der Überschuss
+belegt die Struktur der Daten, nicht schon ihre Herleitung aus der FFGFT. Diese steht für $\theta=2/9$
+in Dok.~A110 und für die Amplitude in Dok.~353 und 367 (R150).
+
+Das Kriterium ist grob. Es zählt nicht, wie viele Formeln gleicher Komplexität es gibt, und es hängt
+vom gewählten Bit-Maß ab \SM. Für einzelne Treffer ersetzt es deshalb nicht den Nulltest aus
+Dok.~393, aber es zeigt auf einen Blick, wo sich eine genauere Prüfung lohnt und wo nicht.
+
+% ============================================================
+\section{Was sich lösen lässt}
+% ============================================================
+
+\subsection{Den zweiten Piloten im SI-Sektor gibt es nicht}
+
+Die einzige Beziehung des Korpus, in der eine SI-Einheit ausdrücklich steht, ist
+$\alpha_{\text{SI}}=\xi\,(E_0/1\,\text{MeV})^2$ (Dok.~010, 011, 014, 137, 313, 365, 384, 386). Alle anderen
+Aussagen der FFGFT sind reine Zahlen, Verhältnisse zweier Größen gleicher Dimension; in ihnen kürzt sich
+ein gemeinsamer Faktor heraus (A040) \BM. Mit $\hbar=c=1$ bleibt eine einzige Dimension, die Energie, und
+damit eine einzige Einheit. Der SI-Sektor hat also genau einen Freiheitsgrad: den Faktor, der die Grundform
+an das MeV bindet. $K$ und die MeV-Verankerung sind dieselbe Zahl, und die eine Messung $\alpha$ legt sie
+fest. Einen zweiten Piloten, der diese Zahl prüfen könnte, kann es in einer verhältnisbasierten Theorie
+nicht geben \BM. Die Zuordnung aus Dok.~386, nach der die Korrektur auf der Seite der Einheit sitzt, ist
+damit keine bloße Setzung mehr, sondern folgt aus der Struktur; offen bleibt nur, ob der Wert $74/75$
+geometrisch begründet ist, und das prüft $\alpha$ \SM.
+
+Auch die Myon-Lebensdauer ist kein SI-Pilot. Mit $G_F=1/(\sqrt2\,v^2)$ gilt
+\begin{equation}
+  \frac{\Gamma_\mu}{m_\mu}=\frac{1}{384\,\pi^3}\Bigl(\frac{m_\mu}{v}\Bigr)^4
+\end{equation}
+bis auf Strahlungskorrekturen \QM; $\tau_\mu$ prüft also nur das dimensionslose Verhältnis $v/m_\mu$. Die
+Leiter gibt dafür $5/(16\,\xi)=2343{,}75$, gemessen sind $2330{,}34$: ein Rest von $+43\,\xi$ ohne $K$
+und $+145\,\xi$ mit $K$ \KM. Ohne $K$ liegt die Leiter $3{,}4$-mal näher, wie es die Regel verlangt, nach
+der $K$ in Verhältnissen keinen Platz hat. Der Rest selbst ist der bekannte Fehler der Leiter: auf $v$
+bezogen $+82\,\xi$ beim Elektron, $+43\,\xi$ beim Myon und $-34\,\xi$ beim Tau, mit den Abständen
+$39$ und $77\,\xi$ der Leiter zur Koide-Form \KM. $\tau_\mu$ prüft damit die Normierung der Leiter auf
+$v$, nicht den Faktor $K$.
+
+\subsection{Die Schranke braucht die Koide-Amplitude kaum}
+
+Die Schranke aus Abschnitt~4 setzte beide Koide-Parameter als exakt voraus. Hergeleitet ist im Korpus
+der Winkel $\theta=2/9$ (Dok.~A110); die Begründung der Amplitude $d/c=\sqrt2$ ist offen (R150). Lässt man
+die Amplitude frei, schluckt sie einen Teil der Reste, und es bleibt nur eine Kombination der
+Modenfaktoren gebunden. Die Amplitude verschiebt aber fast nur das Verhältnis Myon zu Elektron
+($\partial\ln(m_\mu/m_e)/\partial a=32{,}6$ gegen $1{,}8$ beim Verhältnis Tau zu Myon) \KM. Die gebundene
+Kombination ist deshalb fast genau der Unterschied zwischen Tau und Myon:
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{exakt angenommen} & \textbf{Tau--Myon} & \textbf{Myon--Elektron}\\
+\midrule
+$\theta=2/9$ und $d/c=\sqrt2$ & $\le0{,}92\,\xi$ & $\le0{,}074\,\xi$\\
+nur $\theta=2/9$ & $\le0{,}91\,\xi$ & nicht gebunden\\
+nur $d/c=\sqrt2$ & $\le0{,}92\,\xi$ & nicht gebunden\\
+keiner & nicht gebunden & nicht gebunden\\
+\bottomrule
+\end{tabular}
+\end{center}
+\KM\ Die Kernaussage, dass ein modenabhängiger Anteil der Messrekursion höchstens rund $1\,\%$ des
+Korrekturschritts $100\,\xi$ beträgt, hängt also nur am hergeleiteten Winkel $2/9$. Nur die feinere
+Schranke zwischen Myon und Elektron braucht zusätzlich die Amplitude. Sind beide Parameter frei, gibt es
+keine Schranke: Zwei Parameter passen zwei Verhältnisse immer exakt an.
+
+% ============================================================
+\section{Folgerung}
+% ============================================================
+
+Die Nachrichtentechnik bekämpft die Rekursion des Kanals nicht, sie misst sie mit Piloten und rechnet
+sie heraus; die Shannon-Grenze bleibt dabei bestehen. Übertragen auf die FFGFT ergibt das ein klares
+Bild. Im Verhältnissektor ist der Kanal flach: Mit der Koide-Form als Pilot bleibt kein Rest über
+$1\,\xi$, und ein modenabhängiger Anteil der Messrekursion ist auf rund $1\,\%$ des Korrekturschritts
+begrenzt. Die generationsabhängigen Reste der Leiter sind der Fehler eines ungenauen Piloten, kein
+Kanal. Im SI-Sektor gibt es mit $\alpha$ genau einen Piloten, und einen zweiten kann es nicht geben: Die
+einzige Beziehung mit einer SI-Einheit legt den einen Freiheitsgrad fest, in dem $K$ und die
+MeV-Verankerung zusammenfallen. Die Myon-Lebensdauer prüft die Normierung der Leiter auf $v$, nicht $K$. Diskrete Strukturen mit kleinem Nenner überstehen die Messkette; deshalb gehört die Darstellung in
+die Grundform. Und ein Zahlentreffer zählt nur, wenn die Messung mehr Information liefert, als die
+Formel enthält.
+
+Offen bleiben, ob der Wert $74/75$ geometrisch begründet ist, den $\alpha$ prüft (R135), und die
+Herleitung der Koide-Amplitude (R150); von ihr hängt nur noch die feinere Schranke zwischen Myon und
+Elektron ab \SM.
+
+\medskip
+\noindent\textbf{Prüfskript:} \path{2/python/Dok395_Skripte/pruef_395_messkette_kanal.py}
+
+\begin{thebibliography}{99}
+\bibitem{Shannon1948} C.~E.~Shannon, \textit{A mathematical theory of communication}, Bell System Technical Journal \textbf{27} (1948) 379--423, 623--656.
+\bibitem{PriceGreen1958} R.~Price, P.~E.~Green, \textit{A communication technique for multipath channels}, Proceedings of the IRE \textbf{46} (1958) 555--570.
+\bibitem{Brennan1959} D.~G.~Brennan, \textit{Linear diversity combining techniques}, Proceedings of the IRE \textbf{47} (1959) 1075--1102.
+\bibitem{WeinsteinEbert1971} S.~B.~Weinstein, P.~M.~Ebert, \textit{Data transmission by frequency-division multiplexing using the discrete Fourier transform}, IEEE Transactions on Communication Technology \textbf{19} (1971) 628--634.
+\bibitem{Berrou1993} C.~Berrou, A.~Glavieux, P.~Thitimajshima, \textit{Near Shannon limit error-correcting coding and decoding: Turbo-codes}, Proceedings of ICC '93, Geneva (1993) 1064--1070.
+\bibitem{Arikan2009} E.~Arıkan, \textit{Channel polarization}, IEEE Transactions on Information Theory \textbf{55} (2009) 3051--3073.
+\bibitem{Koide1982} Y.~Koide, Lettere al Nuovo Cimento \textbf{34} (1982) 201; Physics Letters B \textbf{120} (1983) 161.
+\end{thebibliography}

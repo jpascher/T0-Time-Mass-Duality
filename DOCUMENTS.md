@@ -1,6 +1,6 @@
 # FFGFT — Document list
 
-318 numbered documents (English versions), generated automatically on 2026-10-23 from the PDFs in `2/pdf/` and `2/ipi/` with `2/python/Werkzeuge/erzeuge_dokumentenliste.py`. Corrections to individual documents are kept in the register, Doc. 190.
+319 numbered documents (English versions), generated automatically on 2026-10-24 from the PDFs in `2/pdf/` and `2/ipi/` with `2/python/Werkzeuge/erzeuge_dokumentenliste.py`. Corrections to individual documents are kept in the register, Doc. 190.
 
 | Doc. | Title | PDF |
 |---|---|---|
@@ -331,3 +331,4 @@
 | 392 | Where the Representations of Gravitation Part Ways — Mass reading, Weyl part and the limits of equivalence | [PDF](2/pdf/392_Darstellungen_Trennung_En.pdf) |
 | 393 | The Noise Limit and Learning Systems — Questions and Answers on Pattern Recognition, Language and Numbers | [PDF](2/pdf/393_Rauschgrenze_Lernende_Systeme_En.pdf) |
 | 394 | How Far Apart the Fractal Corrections Lie — One Scale for All Corrections and What Remains After Removing Consequences, Fits and the Ladder Residual | [PDF](2/pdf/394_Korrekturabstaende_En.pdf) |
+| 395 | The Measurement Chain as a Channel — What Communications Engineering Teaches About Recursion, Residuals and Numerical Hits | [PDF](2/pdf/395_Messkette_Kanal_En.pdf) |

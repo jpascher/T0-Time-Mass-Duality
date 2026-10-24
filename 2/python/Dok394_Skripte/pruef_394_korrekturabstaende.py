@@ -76,6 +76,11 @@ _ord = (set(_qs) | {q-1 for q in _qs}) - {1}
 _hits = {a*b for a in _ord for b in _ord if 40 <= a*b <= 70}
 check("24 von 31 ganzen Zahlen in [40, 70] sind Produkte zweier Galois-Ordnungen (54 darunter)", len(_hits) == 24 and 54 in _hits)
 check("Zufallswahrscheinlichkeit, 161 ppm neben einer ganzen Zahl zu liegen: 1,7 %", abs(2*161e-6*54 - 0.0174) < 0.0002)
+X74 = 7400/ainv
+check("3700/27 = 74/75 * 7500/54 = 7400/54 exakt", abs(3700/27 - (74/75)*7500/54) < 1e-12 and abs(7400/54 - 3700/27) < 1e-12)
+check("7400/alpha^-1 = 54,0004: 7,6 ppm neben 54, Zufall rund 8e-4", abs((X74/54-1)*1e6 - 7.57) < 0.01 and abs(2*abs(X74-54) - 8.18e-4) < 0.02e-4)
+check("zusammen mit der Nähe des Produkts (1,7 %): rund 1,4e-5", abs(2*abs(X74-54)*2*abs(P-54) - 1.42e-5) < 0.02e-5)
+check("Reste gleich auf 7,6 ppm: K-Rest -168 ppm, Produkt-Rest -161 ppm", abs((K_a/K_rule-1)*1e6 + 168.3) < 0.1 and abs((P/54-1)*1e6 + 160.8) < 0.1)
 Ry = 13.605693122990
 check("m_e in MeV über die Rydberg-Energie: 2 Ry/alpha^2 = 0,51099895 MeV (Dok. 386)", abs(2*Ry/ainv**-2/1e6 - me) < 1e-9)
 check("K_alpha über den Rydberg-Weg: xi (m_mu/m_e) (2 Ry/MeV)^2 alpha^-5 = 0,986501", abs(xi*(mmu/me)*(2*Ry*1e-6)**2*ainv**5 - K_a) < 1e-8)
