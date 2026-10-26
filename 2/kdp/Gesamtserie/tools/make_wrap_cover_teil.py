@@ -71,7 +71,7 @@ PARTS_DE = {
    'Die Galois-Brücke schließt den Band: Frobenius-Automorphismus und Sektorpaarung sind strukturgleich; über <b>GF(27)*</b> folgen Massenverhältnisse, Neutrino-Hierarchie und die Zeta-Funktion des T⁴/ℤ₃-Torus.']),
  8: dict(sub='Standardmodell aus GF(27),<br>Leptonmassen und Schnittstellen',
   head='Vom endlichen Körper zum Standardmodell.',
-  paras=['Band 8 umfasst die Dokumente 344 bis 389 und schließt die Sammlung auf dem Stand Oktober 2026 ab. Aus <b>GF(27)*</b> folgen Ladungsquantisierung, die Gell-Mann-Nishijima-Relation, die Generationenstruktur und die SU(2)<sub>L</sub>-Chiralität.',
+  paras=['Band 8 umfasst die Dokumente 344 bis 395 und schließt die Sammlung auf dem Stand Oktober 2026 ab. Aus <b>GF(27)*</b> folgen Ladungsquantisierung, die Gell-Mann-Nishijima-Relation, die Generationenstruktur und die SU(2)<sub>L</sub>-Chiralität.',
    'Die Leptonmassen werden aus mehreren Richtungen erschlossen: Koide-Amplitude d/c = √2, θ = p₀ = 2/9 als zwei Lesarten eines Quotienten, Ikosaeder, Matrixelement-Prinzip und der Yukawa-Mechanismus als Folge von <b>T̃·m = 1</b>.',
    'Harmonik und Algebra erweisen sich als dieselbe Mathematik; die Schnittstellen zu anderen Rahmen sind vollständig dokumentiert. Für den Überblick: Dok. 384 (Kurzfassung), für offene Abweichungen Dok. 387.']),
 }
@@ -109,7 +109,7 @@ PARTS_EN = {
    'The Galois bridge closes the volume: the Frobenius automorphism and the sector pairing are structurally identical; via <b>GF(27)*</b> follow mass ratios, the neutrino hierarchy and the zeta function of the T⁴/ℤ₃ torus.']),
  8: dict(sub='The Standard Model from GF(27),<br>Lepton Masses and Interfaces',
   head='From the finite field to the Standard Model.',
-  paras=['Volume 8 covers Docs. 344 to 389 and brings the collection up to its October 2026 state. From <b>GF(27)*</b> follow charge quantisation, the Gell-Mann–Nishijima relation, the generation structure and SU(2)<sub>L</sub> chirality.',
+  paras=['Volume 8 covers Docs. 344 to 395 and brings the collection up to its October 2026 state. From <b>GF(27)*</b> follow charge quantisation, the Gell-Mann–Nishijima relation, the generation structure and SU(2)<sub>L</sub> chirality.',
    'The lepton masses are approached from several directions: the Koide amplitude d/c = √2, θ = p₀ = 2/9 as two readings of one quotient, the icosahedron, the matrix-element principle and the Yukawa mechanism as a consequence of <b>T̃·m = 1</b>.',
    'Harmonics and algebra turn out to be the same mathematics; the interfaces with other frameworks are fully documented. For an overview: Doc. 384 (summary); for remaining deviations: Doc. 387.']),
 }
