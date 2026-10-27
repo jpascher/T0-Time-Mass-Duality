@@ -77,5 +77,15 @@ check("K_alpha liegt 1,7e-4 neben 74/75; K kürzt sich in m_mu/m_e heraus", abs(
 print("\n5. Bezug zu Dok. 385")
 check("4 pi in e^2 = 4 pi alpha ist dasselbe 4 pi wie in 64 pi^4 = 16 pi^3 4 pi (Dok. 385)", abs(64 * pi**4 / (16 * pi**3) - 4 * pi) < 1e-12)
 
+print("\n6. Zwei Ebenen: Normierung und Skalenverhältnis")
+check("Normierung: mit h statt hbar 2 alpha = 1/68,5; ohne 4 pi 4 pi alpha = 1/10,9", abs(1/(2*a) - 68.52) < 0.01 and abs(1/(4*pi*a) - 10.905) < 0.001)
+check("Skalenverhältnis: Bindungsenergie H / m_e c^2 = alpha^2/2 = 2,66e-5", abs(a*a/2 - 2.6626e-5) < 1e-9)
+h_ = 6.62607015e-34; eps0 = 8.8541878188e-12; mu0 = 1.25663706127e-6
+Z0 = math.sqrt(mu0/eps0); RK = h_/e**2
+check("Z0/R_K = 2 alpha (zwei Widerstände)", abs(Z0/RK/(2*a) - 1) < 1e-9, f"{Z0/RK:.8e}")
+check("eps0 = e^2/(2 alpha h c) (SI seit 2019)", abs(e**2/(2*a*h_*c)/eps0 - 1) < 1e-9)
+check("Umdefinition skaliert beide Widerstände gleich: Verhältnis bleibt", abs((Z0*a)/(RK*a) - Z0/RK) < 1e-15)
+check("alpha^-1 = 3700/27, 7,6 ppm neben dem Messwert (Dok. 338, 394)", abs((3700/27)*a - 1 - 7.57e-6) < 0.1e-6, f"{((3700/27)*a-1)*1e6:.2f} ppm")
+
 print(f"\nErgebnis: {ok}/{n} OK")
 raise SystemExit(0 if ok == n else 1)
