@@ -1464,3 +1464,17 @@ Präzisierung der offenen Punkte: $74/75$ ist als Rotationszahl geometrisch gege
 
 **Prüfskript:** 2/python/Dok395_Skripte/pruef_395_messkette_kanal.py — 40/40 PASS
 **Register:** R156 (R155 geschlossen: kein zweiter SI-Pilot; τ_μ prüft $v/m_\mu$, nicht $K$), R157 (R142 präzisiert: gemeinsamer Gatterfaktor prinzipiell nicht messbar), R158 (R139 eingegrenzt: drei bedingte Zeugen für die additive Form; Dok. 189 präzisiert).
+
+---
+
+## 28. Oktober 2026 — Dok. 396: Vorab-Festlegung zum LZ-Ereignis bei 248 keV
+
+### Dok. 396 — Was die FFGFT für den Xenon-Detektor erwartet und was sie widerlegen würde (De/En, je 8 Seiten)
+
+Anlass: Die LZ-Kollaboration hat im September 2026 ein einzelnes Ereignis veröffentlicht, das wie ein Kernrückstoß eines schweren Teilchens aussieht, mit $248\pm23\pm23$ keV bei einem erwarteten Untergrund von $0{,}0106$ Ereignissen, global $2{,}6\,\sigma$, lokal bis $3{,}4\,\sigma$, nach Angabe der Kollaboration nicht blind **[Q]**. Zufallswahrscheinlichkeiten, Untergrund-Poisson-Wert, Phase der Jahresmodulation und die elastische Mindestmasse von etwa 75 GeV sind nachgerechnet **[K]**.
+
+In der FFGFT ist Dunkle Materie kein Stoff, sondern das Regime unterhalb $a_0$ (Dok. 308); belegt für DDO 154 **[K]**, für Spiralgalaxien und den Bullet Cluster offen **[S]**. Das Dokument legt vor Auswertung weiterer Daten fest: keine Häufung solcher Ereignisse, keine Jahresmodulation mit Maximum Anfang Juni, keine unabhängige Bestätigung in einem zweiten Detektor **[S]**. Eine bestätigte Häufung mit Junimaximum oder eine unabhängige Bestätigung mit mindestens $5\,\sigma$ widerlegt die Lesart. Der Ausweg, ein solches Teilchen könne existieren, ohne die Rotationskurven zu tragen, wird ausdrücklich nicht in Anspruch genommen.
+
+**Prüfskript:** 2/python/Dok396_Skripte/pruef_396_lz_vorabfestlegung.py — 11/11 PASS
+**Register:** kein Eintrag.
+

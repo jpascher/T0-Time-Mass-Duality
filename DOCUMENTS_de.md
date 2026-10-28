@@ -1,6 +1,6 @@
 # FFGFT — Dokumentenliste
 
-320 nummerierte Dokumente (deutsche Fassungen), automatisch erzeugt am 2026-10-24 aus den PDFs in `2/pdf/` und `2/ipi/` mit `2/python/Werkzeuge/erzeuge_dokumentenliste.py`. Korrekturen zu einzelnen Dokumenten stehen im Register Dok. 190.
+321 nummerierte Dokumente (deutsche Fassungen), automatisch erzeugt am 2026-10-28 aus den PDFs in `2/pdf/` und `2/ipi/` mit `2/python/Werkzeuge/erzeuge_dokumentenliste.py`. Korrekturen zu einzelnen Dokumenten stehen im Register Dok. 190.
 
 | Dok. | Titel | PDF |
 |---|---|---|
@@ -333,3 +333,4 @@
 | 393 | Rauschgrenze und lernende Systeme — Fragen und Antworten zu Mustererkennung, Sprache und Zahlen | [PDF](2/pdf/393_Rauschgrenze_Lernende_Systeme_De.pdf) |
 | 394 | Wie weit die fraktalen Korrekturen auseinanderliegen — Ein Maßstab für alle Korrekturen und was nach Abzug von Folgen, Anpassungen und Leiterrest bleibt | [PDF](2/pdf/394_Korrekturabstaende_De.pdf) |
 | 395 | Die Messkette als Kanal — Was die Nachrichtentechnik über Rekursion, Reste und Zahlentreffer lehrt | [PDF](2/pdf/395_Messkette_Kanal_De.pdf) |
+| 396 | Vorab-Festlegung zum LZ-Ereignis bei 248 keV — Was die FFGFT für den Xenon-Detektor erwartet und was sie widerlegen würde | [PDF](2/pdf/396_LZ_Vorabfestlegung_De.pdf) |
