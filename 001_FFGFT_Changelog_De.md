@@ -1478,3 +1478,32 @@ In der FFGFT ist Dunkle Materie kein Stoff, sondern das Regime unterhalb $a_0$ (
 **Prüfskript:** 2/python/Dok396_Skripte/pruef_396_lz_vorabfestlegung.py — 11/11 PASS
 **Register:** kein Eintrag.
 
+---
+
+## 18. November 2026 — Dok. 397: Bell-Verletzung durch Synchronisation
+
+### Dok. 397 — Was die Pilotwellen-Tröpfchen für die deterministische Lesart der FFGFT zeigen und was nicht (De/En, je 10 Seiten)
+
+Anlass: López, Valani, Li und Bush (arXiv:2608.21915, August 2026) zeigen in einem reduzierten Lorenz-ähnlichen Modell zweier über ihr Wellenfeld gekoppelter Tröpfchen CHSH-Verletzungen, statisch mit $\langle S\rangle\approx3{,}15$ und in einem dynamischen Test mit abgeschalteter Kopplung bis $S\approx2{,}85$; Papatryfonos et al. (arXiv:2208.08940) fanden statisch $2{,}49$. Die Autoren begründen die Verletzung mit wellenvermittelter Synchronisation und mit der Abhängigkeit der Welle von den Messeinstellungen **[Q]**; das Dokument zitiert die Arbeiten wörtlich.
+
+Nachgerechnet: Beide Werte des reduzierten Modells liegen über der Tsirelson-Grenze, $3{,}15$ um rund 214 Standardfehler, $2{,}85$ um $0{,}76\,\%$; ein messabhängiges deterministisches Modell erreicht $S=4$ **[K]**. Messabhängigkeit erklärt also, warum die Bell-Grenze fällt, nicht, warum die Natur bei $2\sqrt2$ aufhört. Der dynamische Test schließt Signale nach dem Abschalten aus, nicht die Abhängigkeit der verborgenen Größen von den Einstellungen **[S]**.
+
+Einordnung: Die kontextuelle Festlegung des Ausgangs in Dok. 230 ($A=\operatorname{sgn}(z-\lambda)$, $\lambda$ in der Wechselwirkung mit der Messanordnung festgelegt) entspricht der Messabhängigkeit der Tröpfchen **[S]**. Die Born-Quotienten aus Dok. 230 ergeben $E=-\cos(a-b)$ mit Maximum genau $2\sqrt2$ **[K]**; das lokale sgn-Modell mit gemeinsamem $\lambda$ ergibt nur den Sägezahn mit $S\le2$ **[K]**. Dynamische Synchronisation scheidet als FFGFT-Mechanismus aus, weil $K_{\mathrm{eff}}=2\pi\xi$ rund 6000-fach unter der Tröpfchenkopplung liegt (Dok. 328) **[X]**; die Bell-Verbindung bleibt topologisch auf $T^4$. Offen: die Kosinusform aus der topologischen Verbindung selbst, ohne Rückgriff auf den Hilbertraum **[S]**. Erwartung: kein Schwingen der Korrelation mit der Wartezeit (Dok. 334) **[S]**.
+
+**Prüfskript:** 2/python/Dok397_Skripte/pruef_397_bell_synchronisation.py — 18/18 PASS
+**Register:** kein Eintrag.
+
+---
+
+## 18. November 2026 — Dok. 398: $|\psi|^2$ als Energiedichte und der Einwand der Selbstwechselwirkung
+
+### Dok. 398 — Schrödingers Ladungswolke, Gaos Argument und die Lesart der FFGFT (De/En, je 9 Seiten)
+
+Anlass: Die FFGFT liest $|\psi|^2$ als Energiedichte (Dok. 020, 129, 230). Vorläufer ist Schrödingers Ladungsdichte $-e|\psi|^2$ von 1926; die geschützte Messung (Aharonov, Anandan, Vaidman 1993) liefert $|\psi|^2$ am Einzelsystem **[Q]**. Gaos Einwand (arXiv:1108.1187): eine reale Dichte verlangt gravitative und elektrostatische Selbstwechselwirkung, die nicht beobachtet ist; er schließt auf eine effektive Dichte aus zufälliger, unstetiger Bewegung **[Q]**, wörtlich zitiert.
+
+Nachgerechnet: Stärkemaße $(4\alpha)^2=8{,}5\times10^{-4}$ und $(4Gm_e^2/\hbar c)^2=4{,}9\times10^{-89}$; Coulomb-Selbstenergie $J_{1s}=5/8$ Hartree $=17{,}0$ eV, $J_{2s}=77/512$ Hartree, 1S–2S verschoben um 12,9 eV bei einem Übergang von 10,2 eV, gemessen auf etwa $4\times10^{-15}$ **[K]**. Eine selbstabstoßende Ladungswolke im Ortsraum ist ausgeschlossen **[X]**; die gravitative Selbstenergie des Elektrons liegt bei $4\times10^{-42}$ eV **[K]**.
+
+Antwort der FFGFT: Der Einwand setzt eine Dichte als Kontinuum von Teilen im Ortsraum und jeden Teil als Quelle für die anderen voraus. Die FFGFT-Dichte ist die Energiedichte der inneren Konfiguration einer Mode, $r^2=4|\alpha|^2|\beta|^2$ auf der Achse (Dok. 230) **[B]**; eine Mode ist eine Quelle mit einer Zeitskala (Dok. 334), das Feld folgt der realisierten Lage (Dok. 020) **[S]**. In der Feldtheorie entspricht das dem normalgeordneten Term ${:}\hat\rho\hat\rho{:}$, der im Einteilchensektor verschwindet, für jede Überlagerung; exakte Gitterrechnung im Fock-Raum **[B]**/**[K]**. Offen: die Eigenschaft „eine Mode, eine Quelle“ aus der Struktur des Trägers und der Vielteilchenfall im Konfigurationsraum **[S]**. Prüfstein: keine Schrödinger-Newton-Selbstgravitation in den optomechanischen Vorschlägen (Yang et al. 2013, Großardt et al. 2016); ein gemessener Effekt widerspräche der Lesart **[S]**.
+
+**Prüfskript:** 2/python/Dok398_Skripte/pruef_398_dichte_selbstwechselwirkung.py — 18/18 PASS
+**Register:** kein Eintrag.
