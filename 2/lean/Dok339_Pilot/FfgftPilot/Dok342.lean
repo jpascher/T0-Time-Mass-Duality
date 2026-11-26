@@ -105,17 +105,38 @@ theorem Zerlegungen :
      [2, 5, 7, 11, 13].all prim) = true := by
   decide +kernel
 
+/-- Brücke von der Listenprüfung zur beschränkten Allaussage. -/
+theorem ball_aus_liste (n : Nat) (P : Nat → Prop) [DecidablePred P]
+    (h : (List.range n).all (fun q => decide (P q)) = true) :
+    ∀ q, q < n → P q :=
+  fun q hq => of_decide_eq_true (List.all_eq_true.mp h q (List.mem_range.mpr hq))
+
+/-- Eintrittsbedingungen: ord_q(3) = k für eine Primzahl q zieht q = p nach sich. -/
+def E3 (q : Nat) : Prop :=
+  27 % q = 1 → prim q = true → 3 % q ≠ 1 → 9 % q ≠ 1 → q = 13
+def E4 (q : Nat) : Prop :=
+  81 % q = 1 → prim q = true → 3 % q ≠ 1 → 9 % q ≠ 1 → 27 % q ≠ 1 → q = 5
+def E5 (q : Nat) : Prop :=
+  243 % q = 1 → prim q = true → 3 % q ≠ 1 → 9 % q ≠ 1 → 27 % q ≠ 1 →
+    81 % q ≠ 1 → q = 11
+def E6 (q : Nat) : Prop :=
+  729 % q = 1 → prim q = true → 3 % q ≠ 1 → 9 % q ≠ 1 → 27 % q ≠ 1 →
+    81 % q ≠ 1 → 243 % q ≠ 1 → q = 7
+
+instance : DecidablePred E3 := fun q => by unfold E3; infer_instance
+instance : DecidablePred E4 := fun q => by unfold E4; infer_instance
+instance : DecidablePred E5 := fun q => by unfold E5; infer_instance
+instance : DecidablePred E6 := fun q => by unfold E6; infer_instance
+
 /-- Endliche Kernaussagen: für q ≤ 3ᵏ ist die einzige Primzahl mit
-    ord_q(3) = k genau 13, 5, 11 bzw. 7. -/
+    ord_q(3) = k genau 13, 5, 11 bzw. 7 (vollständige Durchrechnung). -/
 theorem Eintritt_endlich :
-    (∀ q, q < 28 → 27 % q = 1 → prim q = true → 3 % q ≠ 1 → 9 % q ≠ 1 → q = 13) ∧
-    (∀ q, q < 82 → 81 % q = 1 → prim q = true → 3 % q ≠ 1 → 9 % q ≠ 1 →
-        27 % q ≠ 1 → q = 5) ∧
-    (∀ q, q < 244 → 243 % q = 1 → prim q = true → 3 % q ≠ 1 → 9 % q ≠ 1 →
-        27 % q ≠ 1 → 81 % q ≠ 1 → q = 11) ∧
-    (∀ q, q < 730 → 729 % q = 1 → prim q = true → 3 % q ≠ 1 → 9 % q ≠ 1 →
-        27 % q ≠ 1 → 81 % q ≠ 1 → 243 % q ≠ 1 → q = 7) := by
-  decide +kernel
+    (∀ q, q < 28 → E3 q) ∧ (∀ q, q < 82 → E4 q) ∧
+    (∀ q, q < 244 → E5 q) ∧ (∀ q, q < 730 → E6 q) :=
+  ⟨ball_aus_liste 28 E3 (by decide +kernel),
+   ball_aus_liste 82 E4 (by decide +kernel),
+   ball_aus_liste 244 E5 (by decide +kernel),
+   ball_aus_liste 730 E6 (by decide +kernel)⟩
 
 /-- Hilfssatz: ist N % q = 1 mit N ≥ 2, so ist q ≤ N (sonst wäre N % q = N). -/
 theorem schranke (N q : Nat) (hN : 2 ≤ N) (h : N % q = 1) : q < N + 1 := by
