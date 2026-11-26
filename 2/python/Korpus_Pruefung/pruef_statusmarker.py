@@ -22,7 +22,7 @@ import os
 import re
 import sys
 
-ERLAUBT = ["K", "B", "S", "SETZUNG", "Q", "E", "X"]
+ERLAUBT = ["K", "B", "S", "SETZUNG", "Q", "E", "X", "L"]
 LEGENDE_INPUT = "000_Statusmarker_Legende"
 
 # Gleitumgebungs-Optionen und Einheiten, die wie Marker aussehen, aber keine sind
@@ -41,6 +41,7 @@ REGELN = {
         "Q": ([("literatur", "quelle", "extern"),], ("fraglich",)),
         "E": ([("etabliert",),], ()),
         "X": ([("widerleg", "ausgeschlossen", "nicht tragfähig"),], ()),
+        "L": ([("lean",), ("bewiesen", "beweis")], ()),
     },
     "En": {
         "K": ([("derived", "derivable", "from $\\xi", "from \\xi", "ξ"),
@@ -51,6 +52,7 @@ REGELN = {
         "Q": ([("literature", "source", "external"),], ("questionable",)),
         "E": ([("established",),], ()),
         "X": ([("refuted", "excluded", "not viable", "ruled out"),], ()),
+        "L": ([("lean",), ("proved", "proof")], ()),
     },
 }
 
@@ -72,12 +74,12 @@ KERNAUSSAGEN = [
 ZULAESSIG = {"xi = 4/30000": {"K", "SETZUNG"}}
 AUSSCHLUSS = {"xi = 4/30000": r"[Ff]aktoris|[Ff]actori"}
 
-MARKER_RE = re.compile(r"\[(K|B|S|SETZUNG|Q|E|X)\]")
+MARKER_RE = re.compile(r"\[(K|B|S|SETZUNG|Q|E|X|L)\]")
 FETT_RE = re.compile(r"\\textbf\{\[([^\]\n]{1,25})\]\}|\$\[([^\]\n$]{1,25})\]\$")
 MAKRO_RE = re.compile(r"\\(?:provide|new|renew)command\{?\\(\w+)\}?(?:\[\d\])?\{[^{}]*?\[([^\]\n]{1,25})\]")
 # Legendenzeile: Zeile beginnt mit dem Marker (ggf. nach \\item), danach Definition
 LEGENDZEILE_RE = re.compile(
-    r"^\s*(?:\\item\s*)?(?:\$)?\\textbf\{\[(K|B|S|SETZUNG|Q|E|X)\]\}\$?\s*(?:&|=|:|—|--|\\quad)\s*(.{4,160})")
+    r"^\s*(?:\\item\s*)?(?:\$)?\\textbf\{\[(K|B|S|SETZUNG|Q|E|X|L)\]\}\$?\s*(?:&|=|:|—|--|\\quad)\s*(.{4,160})")
 
 
 def dokname(pfad):
@@ -102,8 +104,8 @@ def pruefe(sprache, detail):
         rein = "\n".join(zeilen)
         # als Statusmarker benutzt: fett gesetzt oder über ein Marker-Makro
         # (nicht $[E]$ o. ä. als Dimensionsklammer)
-        benutzt = set(re.findall(r"\\textbf\{[^{}]*\[(K|B|S|SETZUNG|Q|E|X)\]", rein)) | \
-            set(re.findall(r"command\{?\\\w+\}?\{\\textbf\{\[(K|B|S|SETZUNG|Q|E|X)\]", rein))
+        benutzt = set(re.findall(r"\\textbf\{[^{}]*\[(K|B|S|SETZUNG|Q|E|X|L)\]", rein)) | \
+            set(re.findall(r"command\{?\\\w+\}?\{\\textbf\{\[(K|B|S|SETZUNG|Q|E|X|L)\]", rein))
         # A: unbekannte Marker
         for nr, z in enumerate(zeilen, 1):
             for m in FETT_RE.finditer(z):
