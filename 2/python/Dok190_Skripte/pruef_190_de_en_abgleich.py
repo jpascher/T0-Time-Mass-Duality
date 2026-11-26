@@ -8,7 +8,7 @@ Exit-Code 0 = beide Fassungen synchron, 1 = Abweichungen gefunden.
 Geprüft wird je Eintrag:
   1. gleiche Eintragsmenge (K<n> in De entspricht C<n> in En)
   2. gleiche Dokumentnummern in der Verweisspalte
-  3. gleiche Statusmarker ([K] [B] [S] [X] [Q] [E] [SETZUNG])
+  3. gleiche Statusmarker ([K] [B] [S] [X] [Q] [E] [SETZUNG] [L])
   4. keine Kürzung mit \\ldots am Eintragsende auf nur einer Seite
      (Kurzform mit \\ldots ist gewollt, Ausführung im Archiv — sie muss
      aber in De und En gleich gesetzt sein)
@@ -23,7 +23,7 @@ CH = ROOT / "2" / "Sources" / "ch"
 DE = CH / "190_T0_Korrekturen_De_ch.tex"
 EN = CH / "190_T0_Korrekturen_En_ch.tex"
 ROW = re.compile(r'^([KCPR]\d+[a-z]?)\s*&(.*?)(?=^[KCPR]\d+[a-z]?\s*&|\Z)', re.M | re.S)
-MARK = re.compile(r'\[(K|B|S|X|Q|E|SETZUNG)\]')
+MARK = re.compile(r'\[(K|B|S|X|Q|E|SETZUNG|L)\]')
 
 def load(path):
     s = path.read_text(encoding="utf-8")
