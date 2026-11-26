@@ -1,0 +1,7 @@
+# Lean-Prüfungen zum FFGFT-Korpus
+
+Dieses Verzeichnis enthält formale Beweise im Beweisassistenten Lean 4. Sie ergänzen die Python-Prüfskripte: Ein Python-Skript zeigt, dass eine Rechnung das erwartete Ergebnis liefert, ein Lean-Beweis wird dagegen nur akzeptiert, wenn der Lean-Prüfkern jeden Schritt selbst nachvollzogen hat. Bei Aussagen über endliche Strukturen wie GF(27) bedeutet das eine vollständige, im Kern verifizierte Durchrechnung aller Fälle.
+
+Der erste Pilot `Dok339_Pilot` sichert die algebraische Grundlage von Dok. 339 ab. Das Python-Skript `pruef_339_frobenius.py` rechnet mit den Exponenten in ℤ₂₆ und setzt dabei voraus, dass GF(27)* zyklisch ist. Der Lean-Pilot baut den Körper GF(27) = GF(3)[x]/(x³+2x+1) selbst auf und beweist darin, dass das Modell ein Körper ist, dass x die Ordnung 26 hat und GF(27)* damit zyklisch ist (ℤ₂₆ ≅ ℤ₂ × ℤ₁₃), dass genau +1 und −1 unter dem Frobenius x ↦ x³ fest bleiben (Fixkörper GF(3)) und dass die übrigen 24 Einheiten in genau acht Dreier-Orbits zerfallen. Diese Aussagen tragen in Dok. 339 den Status [B]; die physikalische Zuordnung (Fixpunkte = massiver Sektor, Dreier-Orbits = Gluonen) ist nicht Gegenstand des Beweises und behält ihren Status.
+
+Der Pilot braucht keine Mathlib-Bibliothek und wird bei jedem Push, der dieses Verzeichnis betrifft, von der GitHub-Action `.github/workflows/lean.yml` geprüft. Das Ergebnis steht im Reiter „Actions" des Repositorys: ein grüner Haken heißt, alle Sätze sind bewiesen. Lokal ist nichts zu installieren.
