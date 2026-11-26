@@ -1,6 +1,6 @@
-# Release Notes — v1.4.7 (26 November 2026)
+# Release Notes — v1.5.0 (26 November 2026)
 
-**DOI:** assigned on Zenodo publication — supersedes v1.4.6
+**DOI:** assigned on Zenodo publication — supersedes v1.4.6 (v1.4.7 to v1.4.9 were created on GitHub only; their archiving on Zenodo failed, the content is the same)
 Running corrections: **[2/pdf/190_T0_Korrekturen_En.pdf](2/pdf/190_T0_Korrekturen_En.pdf)**
 Changelog (German): **[001_FFGFT_Changelog_De.md](001_FFGFT_Changelog_De.md)**
 Summary of the corpus: **[2/pdf/384_FFGFT_Kurzfassung_En.pdf](2/pdf/384_FFGFT_Kurzfassung_En.pdf)** (also as [HTML](2/html/384_FFGFT_Kurzfassung_En.html))
@@ -17,7 +17,7 @@ translation into SI needs a measured value as an anchor.
 
 ## Overview
 
-v1.4.7 brings formal proofs into the corpus. The algebraic cores of Docs. 339, 340, 342
+v1.5.0 brings formal proofs into the corpus. The algebraic cores of Docs. 339, 340, 342
 and 343 are now additionally proved in the proof assistant Lean 4; the Lean kernel has
 checked every step, and a GitHub Action re-checks the proofs on every change. A new
 status marker, **[L]**, records this. The formal check also produced a clarification of

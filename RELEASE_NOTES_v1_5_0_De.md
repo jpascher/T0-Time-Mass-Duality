@@ -1,6 +1,6 @@
-# Release Notes — v1.4.7 (26. November 2026)
+# Release Notes — v1.5.0 (26. November 2026)
 
-**DOI:** wird bei der Zenodo-Veröffentlichung vergeben — ersetzt v1.4.6
+**DOI:** wird bei der Zenodo-Veröffentlichung vergeben — ersetzt v1.4.6 (v1.4.7 bis v1.4.9 wurden nur auf GitHub angelegt; ihre Archivierung auf Zenodo ist gescheitert, der Inhalt ist derselbe)
 Laufende Korrekturen: **[2/pdf/190_T0_Korrekturen_De.pdf](2/pdf/190_T0_Korrekturen_De.pdf)**
 Änderungsprotokoll: **[001_FFGFT_Changelog_De.md](001_FFGFT_Changelog_De.md)**
 Kurzfassung des Korpus: **[2/pdf/384_FFGFT_Kurzfassung_De.pdf](2/pdf/384_FFGFT_Kurzfassung_De.pdf)** (auch als [HTML](2/html/384_FFGFT_Kurzfassung_De.html))
@@ -17,7 +17,7 @@ Masse sind invers gekoppelt. Erst die Übersetzung in SI braucht einen Messwert 
 
 ## Überblick
 
-v1.4.7 führt formale Beweise in den Korpus ein. Die algebraischen Kerne von Dok. 339,
+v1.5.0 führt formale Beweise in den Korpus ein. Die algebraischen Kerne von Dok. 339,
 340, 342 und 343 sind jetzt zusätzlich im Beweisassistenten Lean 4 bewiesen; der
 Lean-Prüfkern hat jeden Schritt nachvollzogen, und eine GitHub-Action prüft die Beweise
 bei jeder Änderung neu. Dafür gibt es den neuen Statusmarker **[L]**. Die formale
