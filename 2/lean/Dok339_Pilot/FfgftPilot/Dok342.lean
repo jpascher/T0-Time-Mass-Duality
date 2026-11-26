@@ -125,11 +125,15 @@ def E6 (q : Nat) : Prop :=
 
 instance : DecidablePred E3 := fun q => by unfold E3; infer_instance
 instance : DecidablePred E4 := fun q => by unfold E4; infer_instance
+set_option synthInstance.maxSize 2048 in
 instance : DecidablePred E5 := fun q => by unfold E5; infer_instance
+set_option synthInstance.maxSize 2048 in
+set_option synthInstance.maxHeartbeats 400000 in
 instance : DecidablePred E6 := fun q => by unfold E6; infer_instance
 
 /-- Endliche Kernaussagen: für q ≤ 3ᵏ ist die einzige Primzahl mit
     ord_q(3) = k genau 13, 5, 11 bzw. 7 (vollständige Durchrechnung). -/
+set_option maxRecDepth 20000 in
 theorem Eintritt_endlich :
     (∀ q, q < 28 → E3 q) ∧ (∀ q, q < 82 → E4 q) ∧
     (∀ q, q < 244 → E5 q) ∧ (∀ q, q < 730 → E6 q) :=
