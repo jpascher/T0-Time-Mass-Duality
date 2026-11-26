@@ -1,6 +1,6 @@
 /-
   Dok. 340 (Orbit-Algebra in ℤ₁₃) und Dok. 343, Satz D‴
-  (Majorana-/Dirac-Schicht) — Lean-Prüfung
+  (Majorana- und Dirac-Schicht) — Lean-Prüfung
 
   Baut auf `FfgftPilot.GF27` (Körpermodell GF(27)) und `FfgftPilot.Dok342`
   (Polynome f₁–f₄, Minimalpolynome) auf.
